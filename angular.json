@@ -1,0 +1,71 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "pupakit": {
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "projectType": "library",
+      "root": "projects/pupakit",
+      "sourceRoot": "./src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "./tsconfig.lib.json",
+            "project": "./ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "coverage": true,
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["tsconfig.lib.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "exclude": ["**/node_modules/**"],
+            "typeCheck": true
+          },
+          "configurations": {
+            "inspection": {
+              "fix": false,
+              "format": "stylish",
+              "force": false,
+              "silent": false
+            },
+            "debugging": {
+              "fix": true,
+              "format": "prose",
+              "force": true,
+              "silent": true
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "pupakit"
+}

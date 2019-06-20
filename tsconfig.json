@@ -1,0 +1,34 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "lib": ["dom", "es2018", "esnext"],
+    "locale": "en",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "newLine": "lf",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist/out-tsc",
+    "paths": {
+      "@pupakit/*": ["./src/lib/*"]
+    },
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ],
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "types": ["jest", "node"],
+    "typeRoots": ["node_modules/@types"]
+  },
+  "exclude": ["node_modules"]
+}

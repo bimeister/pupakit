@@ -1,0 +1,17 @@
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!/node_modules/zlib
+*.launch
+*.sublime-workspace
+.c9/
+.classpath
+.project
+.settings/
+.vscode
+.vscode/*
+/.idea/
+/dist/
+/node_modules/*
+/coverage/
