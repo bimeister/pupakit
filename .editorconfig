@@ -1,0 +1,19 @@
+root = true
+
+[*]
+  charset = utf-8
+  curly_bracket_next_line = true
+  end_of_line = lf
+  indent_brace_style = K&R
+  indent_size = 2
+  indent_style = space
+  insert_final_newline = true
+  max_line_length = 120
+  quote_type = single
+  spaces_around_brackets = inside
+  spaces_around_operator = true
+  trim_trailing_whitespace = true
+
+[*.md]
+  max_line_length = off
+  trim_trailing_whitespace = false
