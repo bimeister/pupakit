@@ -10,7 +10,7 @@
         }
       },
       "projectType": "library",
-      "root": "projects/pupakit",
+      "root": "./",
       "sourceRoot": "./src",
       "prefix": "pupa",
       "architect": {
@@ -45,7 +45,156 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["tsconfig.lib.json", "tsconfig.spec.json", "e2e/tsconfig.json"],
+            "tsConfig": ["tsconfig.lib.json", "tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"],
+            "typeCheck": true
+          },
+          "configurations": {
+            "inspection": {
+              "fix": false,
+              "format": "stylish",
+              "force": false,
+              "silent": false
+            },
+            "debugging": {
+              "fix": true,
+              "format": "prose",
+              "force": true,
+              "silent": true
+            }
+          }
+        }
+      }
+    },
+    "demo": {
+      "root": "./demo",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "demo",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "./demo/docs",
+            "index": "demo/index.html",
+            "main": "demo/main.ts",
+            "polyfills": "demo/polyfills.ts",
+            "tsConfig": "./tsconfig.app.json",
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": ["src/styles/styles.scss"],
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/styles/"]
+            },
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/production.environment.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
+            "development": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/development.environment.ts"
+                }
+              ],
+              "optimization": false,
+              "outputHashing": "none",
+              "sourceMap": true,
+              "extractCss": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": false,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demo:build:production",
+              "open": true,
+              "aot": true,
+              "progress": true,
+              "watch": false,
+              "host": "0.0.0.0",
+              "port": 4200,
+              "disableHostCheck": true
+            },
+            "development": {
+              "browserTarget": "demo:build:development",
+              "open": true,
+              "aot": true,
+              "progress": true,
+              "watch": true,
+              "disableHostCheck": true
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "options": {
+            "coverage": true,
+            "passWithNoTests": true
+          },
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
             "exclude": ["**/node_modules/**"],
             "typeCheck": true
           },

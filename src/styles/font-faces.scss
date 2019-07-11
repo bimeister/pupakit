@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'effra';
+  src: url('/assets/fonts/Effra-web/effra_bold-webfont.woff2') format('woff2'),
+    url('/assets/fonts/Effra-web/effra_bold-webfont.woff') format('woff'),
+    url('/assets/fonts/Effra-web/effra_bold-webfont.svg#effrabold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'effra';
+  src: url('/assets/fonts/Effra-web/effra_medium-webfont.woff2') format('woff2'),
+    url('/assets/fonts/Effra-web/effra_medium-webfont.woff') format('woff'),
+    url('/assets/fonts/Effra-web/effra_medium-webfont.svg#efframedium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'effra';
+  src: url('/assets/fonts/Effra-web/effra_regular-webfont.woff2') format('woff2'),
+    url('/assets/fonts/Effra-web/effra_regular-webfont.woff') format('woff'),
+    url('/assets/fonts/Effra-web/effra_regular-webfont.svg#effraregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}

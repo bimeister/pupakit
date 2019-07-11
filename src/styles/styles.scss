@@ -1,0 +1,57 @@
+@import 'variables';
+@import 'font-faces';
+
+html {
+  font-size: $font-size_root;
+  font-family: 'effra', sans-serif;
+  color: $color_grey-text;
+}
+
+body {
+  padding: $padding_body;
+  margin: $margin_body;
+}
+
+h1 {
+  font-size: $font-size_h1;
+  line-height: $line-height_h1;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h2 {
+  font-size: $font-size_h2;
+  line-height: $line-height_h2;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h3 {
+  font-size: $font-size_h3;
+  line-height: $line-height_h3;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h4 {
+  font-size: $font-size_h4;
+  line-height: $line-height_h4;
+  font-weight: normal;
+  font-style: normal;
+}
+
+h4 {
+  font-size: $font-size_h5;
+  line-height: $line-height_h5;
+  font-weight: normal;
+  font-style: normal;
+}
+
+span,
+p,
+td {
+  font-size: $font-size_base-text;
+  line-height: $line-height_base-text;
+  font-weight: normal;
+  font-style: normal;
+}

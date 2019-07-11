@@ -1,18 +1,23 @@
 {
-  "name": "pupakit",
+  "name": "@meistersoft/pupakit",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "ng": "ng",
-    "build": "ng build",
+    "build": "ng build && npm run build:scss && npm run build:css",
+    "build:scss": "scss-bundle --config scss-bundle.config.json",
+    "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
     "lint": "npm run lint:inspect",
     "lint:inspect": "ng lint --configuration=inspection",
     "lint:debug": "ng lint --configuration=debugging",
-    "e2e": "ng e2e",
+    "start": "npm run start:demo",
+    "start:demo": "ng serve --project=demo --open",
     "prettify": "prettier --write ./**/*.{html,css,scss,json,js,ts} && npm run lint:debug"
+  },
+  "dependencies": {
+    "zone.js": "~0.9.1"
   },
   "peerDependencies": {
     "@angular/animations": "~8.0.1",
@@ -23,12 +28,12 @@
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
     "rxjs": "~6.4.0",
-    "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "tslib": "^1.9.0"
   },
   "devDependencies": {
     "@angular-builders/jest": "^8.0.3",
     "@angular-devkit/build-angular": "~0.800.0",
+    "@angular-devkit/build-ng-packagr": "^0.800.3",
     "@angular/animations": "~8.0.1",
     "@angular/cli": "~8.0.3",
     "@angular/common": "^8.0.1",
@@ -39,17 +44,20 @@
     "@angular/language-service": "~8.0.1",
     "@angular/platform-browser": "~8.0.1",
     "@angular/platform-browser-dynamic": "~8.0.1",
+    "@angular/router": "^8.0.2",
     "@types/jest": "^24.0.15",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
     "jest": "^24.8.0",
+    "ng-packagr": "^5.3.0",
     "prettier": "^1.18.2",
-    "protractor": "~5.4.0",
     "rxjs": "~6.4.0",
+    "sass": "^1.21.0",
+    "scss-bundle": "^2.5.1",
     "ts-node": "~7.0.0",
+    "tsickle": "^0.35.0",
     "tslib": "^1.9.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.4.3",
-    "zone.js": "~0.9.1"
+    "typescript": "~3.4.3"
   }
 }

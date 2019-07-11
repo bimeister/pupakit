@@ -1,0 +1,74 @@
+@font-face {
+  font-family: "effra";
+  src: url("/assets/fonts/Effra-web/effra_bold-webfont.woff2") format("woff2"), url("/assets/fonts/Effra-web/effra_bold-webfont.woff") format("woff"), url("/assets/fonts/Effra-web/effra_bold-webfont.svg#effrabold") format("svg");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "effra";
+  src: url("/assets/fonts/Effra-web/effra_medium-webfont.woff2") format("woff2"), url("/assets/fonts/Effra-web/effra_medium-webfont.woff") format("woff"), url("/assets/fonts/Effra-web/effra_medium-webfont.svg#efframedium") format("svg");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "effra";
+  src: url("/assets/fonts/Effra-web/effra_regular-webfont.woff2") format("woff2"), url("/assets/fonts/Effra-web/effra_regular-webfont.woff") format("woff"), url("/assets/fonts/Effra-web/effra_regular-webfont.svg#effraregular") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  font-size: 16px;
+  font-family: "effra", sans-serif;
+  color: #202020;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 2.25rem;
+  font-weight: bold;
+  font-style: normal;
+}
+
+h2 {
+  font-size: 1.5rem;
+  line-height: 1.625rem;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h3 {
+  font-size: 1.3125rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+  font-style: normal;
+}
+
+h4 {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+  font-weight: normal;
+  font-style: normal;
+}
+
+h4 {
+  font-size: 0.875rem;
+  line-height: 1rem;
+  font-weight: normal;
+  font-style: normal;
+}
+
+span,
+p,
+td {
+  font-size: 0.875rem;
+  line-height: 1.125rem;
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*# sourceMappingURL=styles.css.map */

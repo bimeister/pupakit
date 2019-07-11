@@ -8,6 +8,8 @@
     "types": [],
     "lib": ["dom", "es2018"]
   },
+  "include": ["src"],
+
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
