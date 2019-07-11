@@ -1,0 +1,23 @@
+@import 'variables';
+
+@mixin input() {
+  border-radius: 0.5rem;
+  border: 1px solid $grey-20;
+  color: $base_text;
+  -webkit-text-fill-color: $base_text;
+  background-color: #fff;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: $grey-40;
+    -webkit-text-fill-color: $grey-40;
+  }
+  &[readonly] {
+    color: $grey-40;
+    -webkit-text-fill-color: $grey-40;
+  }
+}

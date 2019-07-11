@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { PupakitComponent } from './pupakit.component';
+
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
-  declarations: [PupakitComponent],
-  imports: [],
-  exports: [PupakitComponent]
+  imports: [SharedModule]
 })
 export class PupakitModule {}

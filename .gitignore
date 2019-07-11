@@ -12,6 +12,5 @@
 .vscode
 .vscode/*
 /.idea/
-/dist/
 /node_modules/*
 /coverage/

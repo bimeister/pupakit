@@ -15,9 +15,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "./dist/out-tsc",
-    "paths": {
-      "@pupakit/*": ["./src/lib/*"]
-    },
+    "paths": {},
     "plugins": [
       {
         "name": "@angular/language-service"

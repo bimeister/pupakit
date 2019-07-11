@@ -4,8 +4,6 @@
     "exclude": ["node_modules"]
   },
   "rules": {
-    "directive-selector": [true, "attribute", "pupa", "camelCase"],
-    "component-selector": [true, "element", "pupa", "kebab-case"],
     "array-type": [true, "array"],
     "arrow-return-shorthand": true,
     "ban-comma-operator": true,
@@ -14,12 +12,14 @@
     "class-name": true,
     "comment-format": [true, "check-space"],
     "component-class-suffix": true,
+    "component-selector": [true, "element", "pupa", "kebab-case"],
     "curly": true,
     "cyclomatic-complexity": true,
     "deprecation": {
       "severity": "error"
     },
     "directive-class-suffix": true,
+    "directive-selector": [true, "attribute", "pupa", "camelCase"],
     "encoding": true,
     "eofline": true,
     "forin": true,
