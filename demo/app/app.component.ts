@@ -8,4 +8,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public title: string = 'Pupa kit';
+
+  public log(...data: unknown[]): void {
+    // tslint:disable-next-line: no-console
+    console.log(...data);
+  }
 }

@@ -1,4 +1,9 @@
-<button class="button" [ngClass]="getResultClassList('button_')">
+<button
+  class="button"
+  [ngClass]="getResultClassList('button_')"
+  [attr.disabled]="disabled ? true : null"
+  (click)="processClickEvent($event)"
+>
   <span class="button__text">
     <ng-content></ng-content>
   </span>
