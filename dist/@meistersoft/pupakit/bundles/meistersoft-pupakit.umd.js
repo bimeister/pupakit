@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms'), require('src/lib/helpers/is-null-or-undefined.helper')) :
-    typeof define === 'function' && define.amd ? define('@meistersoft/pupakit', ['exports', '@angular/core', '@angular/common', '@angular/forms', 'src/lib/helpers/is-null-or-undefined.helper'], factory) :
-    (global = global || self, factory((global.meistersoft = global.meistersoft || {}, global.meistersoft.pupakit = {}), global.ng.core, global.ng.common, global.ng.forms, global.isNullOrUndefined_helper));
-}(this, function (exports, core, common, forms, isNullOrUndefined_helper) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/common'), require('@angular/forms')) :
+    typeof define === 'function' && define.amd ? define('@meistersoft/pupakit', ['exports', '@angular/core', '@angular/common', '@angular/forms'], factory) :
+    (global = global || self, factory((global.meistersoft = global.meistersoft || {}, global.meistersoft.pupakit = {}), global.ng.core, global.ng.common, global.ng.forms));
+}(this, function (exports, core, common, forms) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -55,11 +55,15 @@
         return InputComponent;
     }());
 
+    var isNullOrUndefined = (function (entity) {
+        return entity === null || entity === undefined;
+    });
+
     var IsNullOrUndefinedPipe = (function () {
         function IsNullOrUndefinedPipe() {
         }
         IsNullOrUndefinedPipe.prototype.transform = function (entity) {
-            return isNullOrUndefined_helper.isNullOrUndefined(entity);
+            return isNullOrUndefined(entity);
         };
         IsNullOrUndefinedPipe.decorators = [
             { type: core.Pipe, args: [{
