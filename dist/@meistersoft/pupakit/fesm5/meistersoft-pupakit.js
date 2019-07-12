@@ -2,7 +2,6 @@ import { __spread } from 'tslib';
 import { Component, Pipe, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
 
 var InputComponent = (function () {
     function InputComponent() {
@@ -16,6 +15,10 @@ var InputComponent = (function () {
     ];
     return InputComponent;
 }());
+
+var isNullOrUndefined = (function (entity) {
+    return entity === null || entity === undefined;
+});
 
 var IsNullOrUndefinedPipe = (function () {
     function IsNullOrUndefinedPipe() {

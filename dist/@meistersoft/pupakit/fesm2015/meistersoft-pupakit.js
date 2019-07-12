@@ -1,7 +1,6 @@
 import { Component, Pipe, NgModule, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
 
 class InputComponent {
 }
@@ -12,6 +11,10 @@ InputComponent.decorators = [
                 styles: [""]
             }] }
 ];
+
+const isNullOrUndefined = ((entity) => {
+    return entity === null || entity === undefined;
+});
 
 class IsNullOrUndefinedPipe {
     transform(entity) {
