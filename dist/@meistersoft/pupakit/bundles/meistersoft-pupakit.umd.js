@@ -88,7 +88,6 @@
     var LayoutComponent = (function () {
         function LayoutComponent() {
         }
-        LayoutComponent.prototype.ngOnInit = function () { };
         LayoutComponent.decorators = [
             { type: core.Component, args: [{
                         selector: 'pupa-layout',
@@ -96,7 +95,6 @@
                         styles: [":host{width:100%}"]
                     }] }
         ];
-        LayoutComponent.ctorParameters = function () { return []; };
         return LayoutComponent;
     }());
 

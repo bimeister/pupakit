@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build && npm run build:scss && npm run build:css",
-    "build:scss": "scss-bundle --config scss-bundle.config.json",
+    "build:scss": "scss-bundle --config scss-bundle.config.json && npx copy ./src/styles/variables.scss ./dist/@meistersoft/pupakit && npx copy ./src/styles/mixins.scss ./dist/@meistersoft/pupakit",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
@@ -48,6 +48,7 @@
     "@types/jest": "^24.0.15",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.0",
+    "copy": "^0.3.2",
     "jest": "^24.8.0",
     "ng-packagr": "^5.3.0",
     "prettier": "^1.18.2",
