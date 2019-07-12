@@ -8,9 +8,11 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build && npm run build:scss && npm run build:css",
-    "build:scss": "scss-bundle --config scss-bundle.config.json && npx copy ./src/styles/variables.scss ./dist/@meistersoft/pupakit && npx copy ./src/styles/mixins.scss ./dist/@meistersoft/pupakit",
+    "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:variables && npm run copy:mixins",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
+    "copy:mixins": "npx copy ./src/styles/mixins.scss ./dist/@meistersoft/pupakit",
+    "copy:variables": "npx copy ./src/styles/variables.scss ./dist/@meistersoft/pupakit",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
