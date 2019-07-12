@@ -20,7 +20,7 @@
     "lint:inspect": "ng lint --configuration=inspection",
     "lint:debug": "ng lint --configuration=debugging",
     "start": "npm run start:demo",
-    "start:demo": "ng serve --project=demo --open",
+    "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "prettify": "prettier --write ./**/*.{html,css,scss,json,js,ts} && npm run lint:debug"
   },
   "dependencies": {

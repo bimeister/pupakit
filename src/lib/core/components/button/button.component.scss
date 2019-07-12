@@ -7,7 +7,7 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  transition: background cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s;
+  transition: all ease 0.3s;
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 
@@ -55,7 +55,7 @@
 
 @mixin button-color($background-color, $color, $border-color: none) {
   @if $border-color == 'none' {
-    border: none;
+    border: 0.0625rem solid #{$background-color};
   } @else {
     border: 0.0625rem solid #{$border-color};
   }
@@ -71,16 +71,26 @@
   @include button-color($color_main-blue, $color_white);
   &:hover {
     @include button-color($color_active-blue, $color_white);
+    box-shadow: $box-shadow_hover;
   }
 }
 .button_solid.button_negative {
   @include button-color($color_error, $color_white);
+  &:hover {
+    box-shadow: $box-shadow_hover;
+  }
 }
 .button_solid.button_positive {
   @include button-color($color_success, $color_white);
+  &:hover {
+    box-shadow: $box-shadow_hover;
+  }
 }
 .button_solid.button_alert {
   @include button-color($color_alert, $color_white);
+  &:hover {
+    box-shadow: $box-shadow_hover;
+  }
 }
 
 .button_outlined.button_normal {
@@ -91,14 +101,41 @@
 }
 .button_outlined.button_negative {
   @include button-color($color_white, $color_grey-text, $color_error);
+  &:hover {
+    @include button-color($color_error, $color_white);
+  }
 }
 .button_outlined.button_positive {
   @include button-color($color_white, $color_grey-text, $color_success);
+  &:hover {
+    @include button-color($color_success, $color_white);
+  }
 }
 .button_outlined.button_alert {
   @include button-color($color_white, $color_grey-text, $color_alert);
+  &:hover {
+    @include button-color($color_alert, $color_white);
+  }
 }
 
 .button_link {
   @include button-color($color_white, $color_main-blue);
+  &:hover {
+    @include button-color($color_white, $color_active-blue);
+  }
+}
+
+// style + disabled
+.button_solid:disabled,
+.button_solid:disabled:hover {
+  @include button-color($color_grey-ivory, $color_white);
+  box-shadow: unset;
+  cursor: not-allowed;
+}
+
+.button_outlined:disabled,
+.button_outlined:disabled:hover {
+  @include button-color($color_white, $color_grey-ivory, $color_grey-ivory);
+  box-shadow: unset;
+  cursor: not-allowed;
 }
