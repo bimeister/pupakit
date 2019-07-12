@@ -85,6 +85,30 @@
         return SharedModule;
     }());
 
+    var ButtonComponent = (function () {
+        function ButtonComponent() {
+            this.type = 'solid';
+            this.size = 'medium';
+            this.color = 'normal';
+        }
+        ButtonComponent.prototype.getResultClassList = function (prefix) {
+            return [this.type, this.size, this.color].map((function (innerProperty) { return "" + prefix + innerProperty; }));
+        };
+        ButtonComponent.decorators = [
+            { type: core.Component, args: [{
+                        selector: 'pupa-button',
+                        template: "<button class=\"button\" [ngClass]=\"getResultClassList('button_')\">\n  <span class=\"button__text\">\n    <ng-content></ng-content>\n  </span>\n</button>\n",
+                        styles: [".button{box-sizing:border-box;font-family:effra;cursor:pointer;padding:0;display:inline-flex;flex-direction:row;align-items:center;justify-content:space-evenly;flex-wrap:nowrap}.button_large{min-width:7rem;height:2.5rem;border-radius:1rem;padding:.625rem .8125rem}.button_large .button__text{font-size:1rem;font-weight:500;line-height:1}.button_medium{min-width:7rem;height:2rem;border-radius:.875rem;padding:.375rem 1rem}.button_medium .button__text{font-size:1rem;font-weight:500;line-height:1}.button_small{min-width:4rem;height:1.5rem;border-radius:.5rem;padding:.1875rem .625rem}.button_small .button__text{font-size:.875rem;font-weight:400;line-height:1.14}.button_solid.button_normal{border:none;background:#0a0d65}.button_solid.button_normal .button__text{color:#fff}.button_solid.button_negative{border:none;background:red}.button_solid.button_negative .button__text{color:#fff}.button_solid.button_positive{border:none;background:#00c902}.button_solid.button_positive .button__text{color:#fff}.button_solid.button_alert{border:none;background:#ffc009}.button_solid.button_alert .button__text{color:#fff}.button_outlined.button_normal{border:.0625rem solid #0a0d65;background:#fff}.button_outlined.button_normal .button__text{color:#0a0d65}.button_outlined.button_negative{border:.0625rem solid red;background:#fff}.button_outlined.button_negative .button__text{color:#202020}.button_outlined.button_positive{border:.0625rem solid #00c902;background:#fff}.button_outlined.button_positive .button__text{color:#202020}.button_outlined.button_alert{border:.0625rem solid #ffc009;background:#fff}.button_outlined.button_alert .button__text{color:#202020}.button_link{border:none;background:#fff}.button_link .button__text{color:#0a0d65}"]
+                    }] }
+        ];
+        ButtonComponent.propDecorators = {
+            type: [{ type: core.Input }],
+            size: [{ type: core.Input }],
+            color: [{ type: core.Input }]
+        };
+        return ButtonComponent;
+    }());
+
     var LayoutComponent = (function () {
         function LayoutComponent() {
         }
@@ -98,7 +122,7 @@
         return LayoutComponent;
     }());
 
-    var CORE_COMPONENTS = [LayoutComponent];
+    var CORE_COMPONENTS = [LayoutComponent, ButtonComponent];
     var PupakitCore = (function () {
         function PupakitCore() {
         }
@@ -117,6 +141,7 @@
     exports.ɵb = InputComponent;
     exports.ɵc = IsNullOrUndefinedPipe;
     exports.ɵd = LayoutComponent;
+    exports.ɵe = ButtonComponent;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

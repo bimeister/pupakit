@@ -1,52 +1,4 @@
-import { __spread } from 'tslib';
-import { Component, Pipe, NgModule, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
-
-var InputComponent = (function () {
-    function InputComponent() {
-    }
-    InputComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'pupa-input',
-                    template: "input-works\n",
-                    styles: [""]
-                }] }
-    ];
-    return InputComponent;
-}());
-
-var IsNullOrUndefinedPipe = (function () {
-    function IsNullOrUndefinedPipe() {
-    }
-    IsNullOrUndefinedPipe.prototype.transform = function (entity) {
-        return isNullOrUndefined(entity);
-    };
-    IsNullOrUndefinedPipe.decorators = [
-        { type: Pipe, args: [{
-                    name: 'isNullOrUndefined'
-                },] }
-    ];
-    return IsNullOrUndefinedPipe;
-}());
-
-var SHARED_COMPONENTS = [InputComponent];
-var SHARED_PIPES = [IsNullOrUndefinedPipe];
-var SHARED_MODULES = [CommonModule, FormsModule];
-var SharedModule = (function () {
-    function SharedModule() {
-    }
-    SharedModule.decorators = [
-        { type: NgModule, args: [{
-                    declarations: __spread(SHARED_COMPONENTS, SHARED_PIPES),
-                    imports: __spread(SHARED_MODULES),
-                    exports: __spread(SHARED_MODULES, SHARED_COMPONENTS, SHARED_PIPES)
-                },] }
-    ];
-    return SharedModule;
-}());
-
+import { Component, Input } from '@angular/core';
 var ButtonComponent = (function () {
     function ButtonComponent() {
         this.type = 'solid';
@@ -70,33 +22,10 @@ var ButtonComponent = (function () {
     };
     return ButtonComponent;
 }());
-
-var LayoutComponent = (function () {
-    function LayoutComponent() {
-    }
-    LayoutComponent.decorators = [
-        { type: Component, args: [{
-                    selector: 'pupa-layout',
-                    template: "<ng-content></ng-content>\n",
-                    styles: [":host{width:100%}"]
-                }] }
-    ];
-    return LayoutComponent;
-}());
-
-var CORE_COMPONENTS = [LayoutComponent, ButtonComponent];
-var PupakitCore = (function () {
-    function PupakitCore() {
-    }
-    PupakitCore.decorators = [
-        { type: NgModule, args: [{
-                    imports: [SharedModule],
-                    declarations: __spread(CORE_COMPONENTS),
-                    exports: __spread([SharedModule], CORE_COMPONENTS)
-                },] }
-    ];
-    return PupakitCore;
-}());
-
-export { PupakitCore, SharedModule as ɵa, InputComponent as ɵb, IsNullOrUndefinedPipe as ɵc, LayoutComponent as ɵd, ButtonComponent as ɵe };
-//# sourceMappingURL=meistersoft-pupakit.js.map
+export { ButtonComponent };
+if (false) {
+    ButtonComponent.prototype.type;
+    ButtonComponent.prototype.size;
+    ButtonComponent.prototype.color;
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnV0dG9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BtZWlzdGVyc29mdC9wdXBha2l0LyIsInNvdXJjZXMiOlsibGliL2NvcmUvY29tcG9uZW50cy9idXR0b24vYnV0dG9uLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUtqRDtJQUFBO1FBTWtCLFNBQUksR0FBZSxPQUFPLENBQUM7UUFDM0IsU0FBSSxHQUFlLFFBQVEsQ0FBQztRQUM1QixVQUFLLEdBQWdCLFFBQVEsQ0FBQztJQUtoRCxDQUFDO0lBSFEsNENBQWtCLEdBQXpCLFVBQTBCLE1BQWM7UUFDdEMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxFQUFDLFVBQUMsYUFBcUIsSUFBSyxPQUFBLEtBQUcsTUFBTSxHQUFHLGFBQWUsRUFBM0IsQ0FBMkIsRUFBQyxDQUFDO0lBQ3hHLENBQUM7O2dCQVpGLFNBQVMsU0FBQztvQkFDVCxRQUFRLEVBQUUsYUFBYTtvQkFDdkIseUtBQXNDOztpQkFFdkM7Ozt1QkFFRSxLQUFLO3VCQUNMLEtBQUs7d0JBQ0wsS0FBSzs7SUFLUixzQkFBQztDQUFBLEFBYkQsSUFhQztTQVJZLGVBQWU7O0lBQzFCLCtCQUEyQztJQUMzQywrQkFBNEM7SUFDNUMsZ0NBQThDIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ29tcG9uZW50LCBJbnB1dCB9IGZyb20gJ0Bhbmd1bGFyL2NvcmUnO1xuXG5leHBvcnQgdHlwZSBCdXR0b25UeXBlID0gJ3NvbGlkJyB8ICdvdXRsaW5lZCcgfCAnbGluayc7XG5leHBvcnQgdHlwZSBCdXR0b25TaXplID0gJ2xhcmdlJyB8ICdtZWRpdW0nIHwgJ3NtYWxsJztcbmV4cG9ydCB0eXBlIEJ1dHRvbkNvbG9yID0gJ25vcm1hbCcgfCAnbmVnYXRpdmUnIHwgJ3Bvc2l0aXZlJyB8ICdhbGVydCc7XG5AQ29tcG9uZW50KHtcbiAgc2VsZWN0b3I6ICdwdXBhLWJ1dHRvbicsXG4gIHRlbXBsYXRlVXJsOiAnLi9idXR0b24uY29tcG9uZW50Lmh0bWwnLFxuICBzdHlsZVVybHM6IFsnLi9idXR0b24uY29tcG9uZW50LnNjc3MnXVxufSlcbmV4cG9ydCBjbGFzcyBCdXR0b25Db21wb25lbnQge1xuICBASW5wdXQoKSBwdWJsaWMgdHlwZTogQnV0dG9uVHlwZSA9ICdzb2xpZCc7XG4gIEBJbnB1dCgpIHB1YmxpYyBzaXplOiBCdXR0b25TaXplID0gJ21lZGl1bSc7XG4gIEBJbnB1dCgpIHB1YmxpYyBjb2xvcjogQnV0dG9uQ29sb3IgPSAnbm9ybWFsJztcblxuICBwdWJsaWMgZ2V0UmVzdWx0Q2xhc3NMaXN0KHByZWZpeDogc3RyaW5nKTogc3RyaW5nW10ge1xuICAgIHJldHVybiBbdGhpcy50eXBlLCB0aGlzLnNpemUsIHRoaXMuY29sb3JdLm1hcCgoaW5uZXJQcm9wZXJ0eTogc3RyaW5nKSA9PiBgJHtwcmVmaXh9JHtpbm5lclByb3BlcnR5fWApO1xuICB9XG59XG4iXX0=

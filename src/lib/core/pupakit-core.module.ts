@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
+import { ButtonComponent } from './components/button/button.component';
 import { LayoutComponent } from './components/layout/layout.component';
 
-const CORE_COMPONENTS: any[] = [LayoutComponent];
+const CORE_COMPONENTS: any[] = [LayoutComponent, ButtonComponent];
 
 @NgModule({
   imports: [SharedModule],

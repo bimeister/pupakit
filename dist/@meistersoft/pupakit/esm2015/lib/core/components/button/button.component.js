@@ -1,43 +1,5 @@
-import { Component, Pipe, NgModule, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
-
-class InputComponent {
-}
-InputComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pupa-input',
-                template: "input-works\n",
-                styles: [""]
-            }] }
-];
-
-class IsNullOrUndefinedPipe {
-    transform(entity) {
-        return isNullOrUndefined(entity);
-    }
-}
-IsNullOrUndefinedPipe.decorators = [
-    { type: Pipe, args: [{
-                name: 'isNullOrUndefined'
-            },] }
-];
-
-const SHARED_COMPONENTS = [InputComponent];
-const SHARED_PIPES = [IsNullOrUndefinedPipe];
-const SHARED_MODULES = [CommonModule, FormsModule];
-class SharedModule {
-}
-SharedModule.decorators = [
-    { type: NgModule, args: [{
-                declarations: [...SHARED_COMPONENTS, ...SHARED_PIPES],
-                imports: [...SHARED_MODULES],
-                exports: [...SHARED_MODULES, ...SHARED_COMPONENTS, ...SHARED_PIPES]
-            },] }
-];
-
-class ButtonComponent {
+import { Component, Input } from '@angular/core';
+export class ButtonComponent {
     constructor() {
         this.type = 'solid';
         this.size = 'medium';
@@ -59,27 +21,9 @@ ButtonComponent.propDecorators = {
     size: [{ type: Input }],
     color: [{ type: Input }]
 };
-
-class LayoutComponent {
+if (false) {
+    ButtonComponent.prototype.type;
+    ButtonComponent.prototype.size;
+    ButtonComponent.prototype.color;
 }
-LayoutComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'pupa-layout',
-                template: "<ng-content></ng-content>\n",
-                styles: [":host{width:100%}"]
-            }] }
-];
-
-const CORE_COMPONENTS = [LayoutComponent, ButtonComponent];
-class PupakitCore {
-}
-PupakitCore.decorators = [
-    { type: NgModule, args: [{
-                imports: [SharedModule],
-                declarations: [...CORE_COMPONENTS],
-                exports: [SharedModule, ...CORE_COMPONENTS]
-            },] }
-];
-
-export { PupakitCore, SharedModule as ɵa, InputComponent as ɵb, IsNullOrUndefinedPipe as ɵc, LayoutComponent as ɵd, ButtonComponent as ɵe };
-//# sourceMappingURL=meistersoft-pupakit.js.map
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnV0dG9uLmNvbXBvbmVudC5qcyIsInNvdXJjZVJvb3QiOiJuZzovL0BtZWlzdGVyc29mdC9wdXBha2l0LyIsInNvdXJjZXMiOlsibGliL2NvcmUvY29tcG9uZW50cy9idXR0b24vYnV0dG9uLmNvbXBvbmVudC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLEVBQUUsU0FBUyxFQUFFLEtBQUssRUFBRSxNQUFNLGVBQWUsQ0FBQztBQVVqRCxNQUFNLE9BQU8sZUFBZTtJQUw1QjtRQU1rQixTQUFJLEdBQWUsT0FBTyxDQUFDO1FBQzNCLFNBQUksR0FBZSxRQUFRLENBQUM7UUFDNUIsVUFBSyxHQUFnQixRQUFRLENBQUM7SUFLaEQsQ0FBQztJQUhRLGtCQUFrQixDQUFDLE1BQWM7UUFDdEMsT0FBTyxDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLElBQUksRUFBRSxJQUFJLENBQUMsS0FBSyxDQUFDLENBQUMsR0FBRyxFQUFDLENBQUMsYUFBcUIsRUFBRSxFQUFFLENBQUMsR0FBRyxNQUFNLEdBQUcsYUFBYSxFQUFFLEVBQUMsQ0FBQztJQUN4RyxDQUFDOzs7WUFaRixTQUFTLFNBQUM7Z0JBQ1QsUUFBUSxFQUFFLGFBQWE7Z0JBQ3ZCLHlLQUFzQzs7YUFFdkM7OzttQkFFRSxLQUFLO21CQUNMLEtBQUs7b0JBQ0wsS0FBSzs7O0lBRk4sK0JBQTJDO0lBQzNDLCtCQUE0QztJQUM1QyxnQ0FBOEMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBDb21wb25lbnQsIElucHV0IH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5cbmV4cG9ydCB0eXBlIEJ1dHRvblR5cGUgPSAnc29saWQnIHwgJ291dGxpbmVkJyB8ICdsaW5rJztcbmV4cG9ydCB0eXBlIEJ1dHRvblNpemUgPSAnbGFyZ2UnIHwgJ21lZGl1bScgfCAnc21hbGwnO1xuZXhwb3J0IHR5cGUgQnV0dG9uQ29sb3IgPSAnbm9ybWFsJyB8ICduZWdhdGl2ZScgfCAncG9zaXRpdmUnIHwgJ2FsZXJ0JztcbkBDb21wb25lbnQoe1xuICBzZWxlY3RvcjogJ3B1cGEtYnV0dG9uJyxcbiAgdGVtcGxhdGVVcmw6ICcuL2J1dHRvbi5jb21wb25lbnQuaHRtbCcsXG4gIHN0eWxlVXJsczogWycuL2J1dHRvbi5jb21wb25lbnQuc2NzcyddXG59KVxuZXhwb3J0IGNsYXNzIEJ1dHRvbkNvbXBvbmVudCB7XG4gIEBJbnB1dCgpIHB1YmxpYyB0eXBlOiBCdXR0b25UeXBlID0gJ3NvbGlkJztcbiAgQElucHV0KCkgcHVibGljIHNpemU6IEJ1dHRvblNpemUgPSAnbWVkaXVtJztcbiAgQElucHV0KCkgcHVibGljIGNvbG9yOiBCdXR0b25Db2xvciA9ICdub3JtYWwnO1xuXG4gIHB1YmxpYyBnZXRSZXN1bHRDbGFzc0xpc3QocHJlZml4OiBzdHJpbmcpOiBzdHJpbmdbXSB7XG4gICAgcmV0dXJuIFt0aGlzLnR5cGUsIHRoaXMuc2l6ZSwgdGhpcy5jb2xvcl0ubWFwKChpbm5lclByb3BlcnR5OiBzdHJpbmcpID0+IGAke3ByZWZpeH0ke2lubmVyUHJvcGVydHl9YCk7XG4gIH1cbn1cbiJdfQ==
