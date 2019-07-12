@@ -6,7 +6,13 @@
   font-family: 'effra';
   cursor: pointer;
   padding: 0;
+  outline: none;
+  transition: background cubic-bezier(0.165, 0.84, 0.44, 1) 0.3s;
   @include inline-flex-container(row, center, space-evenly, nowrap);
+}
+
+.button__text {
+  user-select: none;
 }
 
 // size
@@ -63,6 +69,9 @@
 // style + color
 .button_solid.button_normal {
   @include button-color($color_main-blue, $color_white);
+  &:hover {
+    @include button-color($color_active-blue, $color_white);
+  }
 }
 .button_solid.button_negative {
   @include button-color($color_error, $color_white);
@@ -76,6 +85,9 @@
 
 .button_outlined.button_normal {
   @include button-color($color_white, $color_main-blue, $color_main-blue);
+  &:hover {
+    @include button-color($color_white, $color_active-blue, $color_active-blue);
+  }
 }
 .button_outlined.button_negative {
   @include button-color($color_white, $color_grey-text, $color_error);
