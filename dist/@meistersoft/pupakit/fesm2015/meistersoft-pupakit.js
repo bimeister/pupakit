@@ -38,8 +38,6 @@ SharedModule.decorators = [
 ];
 
 class LayoutComponent {
-    constructor() { }
-    ngOnInit() { }
 }
 LayoutComponent.decorators = [
     { type: Component, args: [{
@@ -48,7 +46,6 @@ LayoutComponent.decorators = [
                 styles: [":host{width:100%}"]
             }] }
 ];
-LayoutComponent.ctorParameters = () => [];
 
 const CORE_COMPONENTS = [LayoutComponent];
 class PupakitCore {

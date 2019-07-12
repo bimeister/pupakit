@@ -50,7 +50,6 @@ var SharedModule = (function () {
 var LayoutComponent = (function () {
     function LayoutComponent() {
     }
-    LayoutComponent.prototype.ngOnInit = function () { };
     LayoutComponent.decorators = [
         { type: Component, args: [{
                     selector: 'pupa-layout',
@@ -58,7 +57,6 @@ var LayoutComponent = (function () {
                     styles: [":host{width:100%}"]
                 }] }
     ];
-    LayoutComponent.ctorParameters = function () { return []; };
     return LayoutComponent;
 }());
 
