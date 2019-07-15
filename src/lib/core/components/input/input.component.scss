@@ -80,8 +80,6 @@
 .icon {
   position: absolute;
   right: rems(0.5);
-  font-size: rems(1);
-  height: rems(1);
-  width: rems(1);
   color: $color_success;
+  @include icon(rems(1));
 }

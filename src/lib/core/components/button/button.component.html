@@ -5,6 +5,9 @@
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event)"
 >
+  <div class="button__icon" *ngIf="icon && icon.length !== 0">
+    <ion-icon [attr.name]="icon"></ion-icon>
+  </div>
   <span class="button__text">
     <ng-content></ng-content>
   </span>

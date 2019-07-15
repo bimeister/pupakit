@@ -12,7 +12,8 @@
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 
-.button__text {
+.button__text,
+.button__icon {
   user-select: none;
 }
 
@@ -23,6 +24,9 @@
   border-radius: rems(1);
   padding: rems(0.625) rems(0.8125);
 
+  .button__icon {
+    @include icon(rems(1));
+  }
   .button__text {
     font-size: rems(1);
     font-weight: 500;
@@ -35,6 +39,9 @@
   border-radius: rems(0.875);
   padding: rems(0.375) rems(1);
 
+  .button__icon {
+    @include icon(rems(1));
+  }
   .button__text {
     font-size: rems(1);
     font-weight: 500;
@@ -47,6 +54,9 @@
   border-radius: rems(0.5);
   padding: rems(0.1875) rems(0.625);
 
+  .button__icon {
+    @include icon($font-size_base-text);
+  }
   .button__text {
     font-size: $font-size_base-text;
     font-weight: normal;
@@ -62,7 +72,8 @@
   }
   background: $background-color;
 
-  .button__text {
+  .button__text,
+  .button__icon {
     color: $color;
   }
 }
