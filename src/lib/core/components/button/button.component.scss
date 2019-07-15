@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'mixins';
+@import 'functions';
 
 .button {
   box-sizing: border-box;
@@ -7,7 +8,7 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  transition: $transition_common;
+  @include transition(#{'background, border, box-shadow'});
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 

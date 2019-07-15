@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
@@ -10,6 +10,7 @@ const CORE_COMPONENTS: any[] = [LayoutComponent, ButtonComponent, InputComponent
 @NgModule({
   imports: [SharedModule],
   declarations: [...CORE_COMPONENTS],
-  exports: [SharedModule, ...CORE_COMPONENTS]
+  exports: [SharedModule, ...CORE_COMPONENTS],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PupakitCore {}

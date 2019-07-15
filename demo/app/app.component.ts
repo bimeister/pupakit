@@ -16,6 +16,7 @@ interface ComponentPropertyValues {
 })
 export class AppComponent implements OnInit, OnDestroy {
   public title: string = 'Pupa kit';
+  // tslint:disable-next-line: no-unbound-method
   public sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
 
   public buttonCombos: any[] = combos({
