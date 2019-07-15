@@ -8,11 +8,12 @@
   "scripts": {
     "ng": "ng",
     "build": "ng build && npm run build:scss && npm run build:css",
-    "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:variables && npm run copy:mixins",
+    "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:variables && npm run copy:mixins && npm run copy:functions",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
     "copy:mixins": "npx copy ./src/styles/mixins.scss ./dist/@meistersoft/pupakit",
     "copy:variables": "npx copy ./src/styles/variables.scss ./dist/@meistersoft/pupakit",
+    "copy:functions": "npx copy ./src/styles/functions.scss ./dist/@meistersoft/pupakit",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
@@ -35,6 +36,7 @@
     "@angular/platform-browser": "~8.1.1",
     "@angular/platform-browser-dynamic": "~8.1.1",
     "rxjs": "~6.5.2",
+    "ionicons": "^4.6.1",
     "tslib": "^1.9.0"
   },
   "devDependencies": {
@@ -67,6 +69,7 @@
     "tslib": "^1.9.0",
     "tslint": "~5.18.0",
     "typescript": "^3.4.5",
+    "ionicons": "^4.6.1",
     "combos": "^0.2.0"
   }
 }

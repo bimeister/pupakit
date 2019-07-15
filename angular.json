@@ -85,12 +85,16 @@
             "main": "demo/main.ts",
             "polyfills": "demo/polyfills.ts",
             "tsConfig": "./tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              { "glob": "**/*", "input": "./node_modules/ionicons/dist/ionicons", "output": "/ionicons" }
+            ],
             "styles": ["src/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles/"]
             },
-            "scripts": [],
+            "scripts": ["./node_modules/ionicons/dist/ionicons.js"],
             "es5BrowserSupport": true
           },
           "configurations": {

@@ -1,11 +1,13 @@
 @import 'mixins';
 @import 'variables';
+@import 'functions';
 
 :host {
   box-sizing: border-box;
   cursor: text;
   padding: 0;
   outline: none;
+  position: relative;
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 
@@ -14,13 +16,14 @@
   box-sizing: border-box;
   border-radius: rems(0.5);
   background: $color_white;
-  padding: rems(0.5) rems(0.625);
   outline: none;
-  transition: $transition_common;
+  @include transition(#{'background, border'});
   color: $color_grey-text;
   border: rems(0.0625) solid $color_grey-ivory;
 
   &::placeholder {
+    position: absolute;
+    left: 0;
     color: $color_grey-light;
   }
 
@@ -45,6 +48,13 @@
   border: rems(0.0625) solid $color_grey-apple;
 }
 
+.input_medium.input_valid {
+  padding: rems(0.5) rems(1.75) rems(0.5) rems(0.625);
+}
+.input_small.input_valid {
+  padding: rems(0.25) rems(1.75) rems(0.25) rems(0.5);
+}
+
 .input_invalid,
 .input:focus.input_invalid {
   border: rems(0.0625) solid $color_error;
@@ -53,6 +63,7 @@
 // size
 .input_medium {
   height: rems(2);
+  width: rems(14.48125);
   font-size: rems(1);
   line-height: 1;
   padding: rems(0.5) rems(0.75);
@@ -60,7 +71,17 @@
 
 .input_small {
   height: rems(1.5);
+  width: rems(8.3125);
   font-size: $font-size_base-text;
   line-height: 1.14;
   padding: rems(0.25) rems(0.5);
+}
+
+.icon {
+  position: absolute;
+  right: rems(0.5);
+  font-size: rems(1);
+  height: rems(1);
+  width: rems(1);
+  color: $color_success;
 }
