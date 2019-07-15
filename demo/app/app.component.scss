@@ -1,3 +1,5 @@
+@import 'functions';
+
 pupa-layout {
   display: flex;
   flex-direction: column;
@@ -9,8 +11,8 @@ pupa-layout {
   }
 }
 
-.inline {
-  padding: 1rem;
+.group {
+  padding: rems(1);
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
@@ -20,6 +22,6 @@ pupa-layout {
   width: 100%;
 
   & > * {
-    margin: 0.25rem 0.5rem;
+    margin: rems(0.25) rems(0.5);
   }
 }

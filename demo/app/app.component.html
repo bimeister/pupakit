@@ -1,26 +1,17 @@
 <pupa-layout>
-  <ng-container [ngTemplateOutlet]="inputs"></ng-container>
-  <ng-container [ngTemplateOutlet]="buttons"></ng-container>
-</pupa-layout>
-
-<ng-template #inputs>
-  <div class="inline">
+  <div class="group">
     <pupa-input
-      *ngFor="let combo of getCombos(inputPropertyValues)"
+      *ngFor="let combo of inputCombos"
       [placeholder]="combo.placeholder"
       [size]="combo.size"
-      [value]="combo.value"
-      [valid]="combo.valid"
-      (valueChange)="log($event)"
+      [disabled]="combo.disabled"
+      [formControl]="sampleFormControl"
+      [valid]="sampleFormControl.valid"
     ></pupa-input>
   </div>
-</ng-template>
-
-<ng-template #buttons>
-  <div class="inline">
+  <div class="group">
     <pupa-button
-      *ngFor="let combo of getCombos(buttonPropertyValues)"
-      (onclick)="log('clicked')"
+      *ngFor="let combo of buttonCombos"
       [type]="combo.type"
       [size]="combo.size"
       [color]="combo.color"
@@ -29,4 +20,4 @@
       Sample button
     </pupa-button>
   </div>
-</ng-template>
+</pupa-layout>

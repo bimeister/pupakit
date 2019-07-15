@@ -1,3 +1,5 @@
+@import 'functions';
+
 // colors
 $color_main-blue: #0a0d65;
 $color_active-blue: #161ba6;
@@ -14,21 +16,20 @@ $color_white: #ffffff;
 // font-size
 $font-size_root: 16px; // 1 rem (1 px = 0,0625 rem) - do not use!
 
-$font-size_common: 1rem; // 16 px
-$font-size_base-text: 0.875rem; // 14 px
-$font-size_h1: 2rem; // 32 px
-$font-size_h2: 1.5rem; // 24 px
-$font-size_h3: 1.3125rem; // 21 px
-$font-size_h4: 1.125rem; // 18 px
-$font-size_h5: 0.875rem; // 14 px
+$font-size_base-text: rems(0.875); // 14 px
+$font-size_h1: rems(2); // 32 px
+$font-size_h2: rems(1.5); // 24 px
+$font-size_h3: rems(1.3125); // 21 px
+$font-size_h4: rems(1.125); // 18 px
+$font-size_h5: rems(0.875); // 14 px
 
 // line-height
-$line-height_base-text: 1.125rem; // 18 px
-$line-height_h1: 2.25rem; // 36 px
-$line-height_h2: 1.625rem; // 26 px
-$line-height_h3: 1.75rem; // 28 px
-$line-height_h4: 1.75rem; // 28 px
-$line-height_h5: 1rem; // 16 px
+$line-height_base-text: rems(1.125); // 18 px
+$line-height_h1: rems(2.25); // 36 px
+$line-height_h2: rems(1.625); // 26 px
+$line-height_h3: rems(1.75); // 28 px
+$line-height_h4: rems(1.75); // 28 px
+$line-height_h5: rems(1); // 16 px
 
 // padding
 $padding_body: 0;
@@ -37,7 +38,7 @@ $padding_body: 0;
 $margin_body: 0;
 
 // box-shadow
-$box-shadow_hover: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+$box-shadow_hover: 0 rems(0.5) rems(1) 0 rgba(0, 0, 0, 0.2);
 
 // transition
 $transition_common: all ease 0.3s;

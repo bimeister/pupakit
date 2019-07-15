@@ -12,24 +12,24 @@
 .input {
   font-family: 'effra';
   box-sizing: border-box;
-  border-radius: 0.5rem;
+  border-radius: rems(0.5);
   background: $color_white;
-  padding: 0.5rem 0.625rem;
+  padding: rems(0.5) rems(0.625);
   outline: none;
   transition: $transition_common;
   color: $color_grey-text;
-  border: 0.0625rem solid $color_grey-ivory;
+  border: rems(0.0625) solid $color_grey-ivory;
 
   &::placeholder {
     color: $color_grey-light;
   }
 
   &:focus {
-    border: 0.0625rem solid $color_active-blue;
+    border: rems(0.0625) solid $color_active-blue;
   }
 
   &:disabled {
-    border: 0.0625rem solid $color_grey-apple;
+    border: rems(0.0625) solid $color_grey-apple;
     color: $color_grey-apple;
     cursor: not-allowed;
     user-select: none;
@@ -42,25 +42,25 @@
 
 // state
 .input[value=''] {
-  border: 0.0625rem solid $color_grey-apple;
+  border: rems(0.0625) solid $color_grey-apple;
 }
 
 .input_invalid,
 .input:focus.input_invalid {
-  border: 0.0625rem solid $color_error;
+  border: rems(0.0625) solid $color_error;
 }
 
 // size
 .input_medium {
-  height: 2rem;
-  font-size: $font-size_common;
+  height: rems(2);
+  font-size: rems(1);
   line-height: 1;
-  padding: 0.5rem 0.75rem;
+  padding: rems(0.5) rems(0.75);
 }
 
 .input_small {
-  height: 1.5rem;
+  height: rems(1.5);
   font-size: $font-size_base-text;
   line-height: 1.14;
-  padding: 0.25rem 0.5rem;
+  padding: rems(0.25) rems(0.5);
 }
