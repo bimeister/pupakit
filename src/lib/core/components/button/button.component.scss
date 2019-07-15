@@ -7,7 +7,7 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  transition: all ease 0.3s;
+  transition: $transition_common;
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 
@@ -23,7 +23,7 @@
   padding: 0.625rem 0.8125rem;
 
   .button__text {
-    font-size: 1rem;
+    font-size: $font-size_common;
     font-weight: 500;
     line-height: 1;
   }
@@ -35,7 +35,7 @@
   padding: 0.375rem 1rem;
 
   .button__text {
-    font-size: 1rem;
+    font-size: $font-size_common;
     font-weight: 500;
     line-height: 1;
   }
@@ -47,7 +47,7 @@
   padding: 0.1875rem 0.625rem;
 
   .button__text {
-    font-size: 0.875rem;
+    font-size: $font-size_base-text;
     font-weight: normal;
     line-height: 1.14;
   }
@@ -69,6 +69,7 @@
 // style + color
 .button_solid.button_normal {
   @include button-color($color_main-blue, $color_white);
+  &:focus,
   &:hover {
     @include button-color($color_active-blue, $color_white);
     box-shadow: $box-shadow_hover;
@@ -76,18 +77,21 @@
 }
 .button_solid.button_negative {
   @include button-color($color_error, $color_white);
+  &:focus,
   &:hover {
     box-shadow: $box-shadow_hover;
   }
 }
 .button_solid.button_positive {
   @include button-color($color_success, $color_white);
+  &:focus,
   &:hover {
     box-shadow: $box-shadow_hover;
   }
 }
 .button_solid.button_alert {
   @include button-color($color_alert, $color_white);
+  &:focus,
   &:hover {
     box-shadow: $box-shadow_hover;
   }
@@ -95,24 +99,28 @@
 
 .button_outlined.button_normal {
   @include button-color($color_white, $color_main-blue, $color_main-blue);
+  &:focus,
   &:hover {
     @include button-color($color_white, $color_active-blue, $color_active-blue);
   }
 }
 .button_outlined.button_negative {
   @include button-color($color_white, $color_grey-text, $color_error);
+  &:focus,
   &:hover {
     @include button-color($color_error, $color_white);
   }
 }
 .button_outlined.button_positive {
   @include button-color($color_white, $color_grey-text, $color_success);
+  &:focus,
   &:hover {
     @include button-color($color_success, $color_white);
   }
 }
 .button_outlined.button_alert {
   @include button-color($color_white, $color_grey-text, $color_alert);
+  &:focus,
   &:hover {
     @include button-color($color_alert, $color_white);
   }
@@ -120,6 +128,7 @@
 
 .button_link {
   @include button-color($color_white, $color_main-blue);
+  &:focus,
   &:hover {
     @include button-color($color_white, $color_active-blue);
   }

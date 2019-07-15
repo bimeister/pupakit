@@ -12,7 +12,9 @@ $color_grey-apple: #d2d2d2;
 $color_white: #ffffff;
 
 // font-size
-$font-size_root: 16px; // 1 rem (1 px = 0,0625 rem)
+$font-size_root: 16px; // 1 rem (1 px = 0,0625 rem) - do not use!
+
+$font-size_common: 1rem; // 16 px
 $font-size_base-text: 0.875rem; // 14 px
 $font-size_h1: 2rem; // 32 px
 $font-size_h2: 1.5rem; // 24 px
@@ -36,3 +38,6 @@ $margin_body: 0;
 
 // box-shadow
 $box-shadow_hover: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.2);
+
+// transition
+$transition_common: all ease 0.3s;

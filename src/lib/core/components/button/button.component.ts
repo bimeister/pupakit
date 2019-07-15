@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 export type ButtonType = 'solid' | 'outlined' | 'link';
 export type ButtonSize = 'large' | 'medium' | 'small';
@@ -6,7 +6,8 @@ export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
 @Component({
   selector: 'pupa-button',
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss']
+  styleUrls: ['./button.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
   @Input() public type: ButtonType = 'solid';

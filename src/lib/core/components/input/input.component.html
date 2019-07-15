@@ -1,0 +1,9 @@
+<input
+  #inputElement
+  class="input"
+  [value]="value"
+  [placeholder]="placeholder"
+  [ngClass]="getResultClassList('input_')"
+  [attr.disabled]="disabled ? true : null"
+  (input)="updateValue(inputElement.value)"
+/>

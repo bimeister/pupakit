@@ -1,0 +1,66 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  box-sizing: border-box;
+  cursor: text;
+  padding: 0;
+  outline: none;
+  @include inline-flex-container(row, center, space-evenly, nowrap);
+}
+
+.input {
+  font-family: 'effra';
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  background: $color_white;
+  padding: 0.5rem 0.625rem;
+  outline: none;
+  transition: $transition_common;
+  color: $color_grey-text;
+  border: 0.0625rem solid $color_grey-ivory;
+
+  &::placeholder {
+    color: $color_grey-light;
+  }
+
+  &:focus {
+    border: 0.0625rem solid $color_active-blue;
+  }
+
+  &:disabled {
+    border: 0.0625rem solid $color_grey-apple;
+    color: $color_grey-apple;
+    cursor: not-allowed;
+    user-select: none;
+
+    &::selection {
+      background: transparent;
+    }
+  }
+}
+
+// state
+.input[value=''] {
+  border: 0.0625rem solid $color_grey-apple;
+}
+
+.input_invalid,
+.input:focus.input_invalid {
+  border: 0.0625rem solid $color_error;
+}
+
+// size
+.input_medium {
+  height: 2rem;
+  font-size: $font-size_common;
+  line-height: 1;
+  padding: 0.5rem 0.75rem;
+}
+
+.input_small {
+  height: 1.5rem;
+  font-size: $font-size_base-text;
+  line-height: 1.14;
+  padding: 0.25rem 0.5rem;
+}
