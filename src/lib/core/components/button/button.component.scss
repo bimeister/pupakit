@@ -108,21 +108,21 @@
   @include button-color($color_white, $color_grey-text, $color_error);
   &:focus,
   &:hover {
-    @include button-color($color_error, $color_white);
+    @include button-color(rgba($color_error, $opacity_hovered-button), $color_grey-text, $color_error);
   }
 }
 .button_outlined.button_positive {
   @include button-color($color_white, $color_grey-text, $color_success);
   &:focus,
   &:hover {
-    @include button-color($color_success, $color_white);
+    @include button-color(rgba($color_success, $opacity_hovered-button), $color_grey-text, $color_success);
   }
 }
 .button_outlined.button_alert {
   @include button-color($color_white, $color_grey-text, $color_alert);
   &:focus,
   &:hover {
-    @include button-color($color_alert, $color_white);
+    @include button-color(rgba($color_alert, $opacity_hovered-button), $color_grey-text, $color_alert);
   }
 }
 
