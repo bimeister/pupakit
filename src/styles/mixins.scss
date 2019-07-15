@@ -25,3 +25,9 @@
   transition-timing-function: $transition-timing-function;
   transition-property: $transition-property;
 }
+
+@mixin icon($size: $font-size_root) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+}

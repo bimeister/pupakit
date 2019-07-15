@@ -22,7 +22,8 @@ export class AppComponent implements OnInit, OnDestroy {
     type: ['solid', 'outlined', 'link'],
     color: ['normal', 'negative', 'positive', 'alert'],
     size: ['large', 'medium', 'small'],
-    disabled: [false, true]
+    disabled: [false, true],
+    icon: ['', 'checkmark-circle']
   });
 
   public inputCombos: any[] = combos({
