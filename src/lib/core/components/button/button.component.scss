@@ -12,9 +12,21 @@
   @include inline-flex-container(row, center, space-evenly, nowrap);
 }
 
-.button__text,
+.button__text {
+  user-select: none;
+  order: 0;
+}
+
 .button__icon {
   user-select: none;
+  &_left {
+    order: -1;
+    padding: 0 rems(0.5) 0 0;
+  }
+  &_right {
+    order: 1;
+    padding: 0 0 0 rems(0.5);
+  }
 }
 
 // size
@@ -22,45 +34,47 @@
   min-width: rems(7);
   height: rems(2.5);
   border-radius: rems(1);
-  padding: rems(0.625) rems(0.8125);
-
-  .button__icon {
-    @include icon(rems(1));
-  }
+  padding: rems(0.625) rems(1);
   .button__text {
     font-size: rems(1);
     font-weight: 500;
     line-height: 1;
   }
+  .button__icon {
+    font-size: rems(1);
+    height: rems(1);
+  }
 }
+
 .button_medium {
   min-width: rems(7);
   height: rems(2);
   border-radius: rems(0.875);
-  padding: rems(0.375) rems(1);
-
-  .button__icon {
-    @include icon(rems(1));
-  }
+  padding: rems(0.375) rems(0.5);
   .button__text {
     font-size: rems(1);
     font-weight: 500;
     line-height: 1;
   }
+  .button__icon {
+    font-size: rems(1);
+    height: rems(1);
+  }
 }
+
 .button_small {
   min-width: rems(4);
   height: rems(1.5);
   border-radius: rems(0.5);
   padding: rems(0.1875) rems(0.625);
-
-  .button__icon {
-    @include icon($font-size_base-text);
-  }
   .button__text {
     font-size: $font-size_base-text;
     font-weight: normal;
     line-height: 1.14;
+  }
+  .button__icon {
+    font-size: $font-size_base-text;
+    height: $font-size_base-text;
   }
 }
 
@@ -71,9 +85,8 @@
     border: rems(0.0625) solid #{$border-color};
   }
   background: $background-color;
-
-  .button__text,
-  .button__icon {
+  .button__icon,
+  .button__text {
     color: $color;
   }
 }
