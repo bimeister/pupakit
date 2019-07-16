@@ -23,7 +23,17 @@ export class AppComponent implements OnInit, OnDestroy {
     color: ['normal', 'negative', 'positive', 'alert'],
     size: ['large', 'medium', 'small'],
     disabled: [false, true],
-    icon: ['', 'checkmark-circle']
+    icon: [
+      null,
+      {
+        name: 'checkmark-circle',
+        position: 'left'
+      },
+      {
+        name: 'add-circle',
+        position: 'right'
+      }
+    ]
   });
 
   public inputCombos: any[] = combos({
