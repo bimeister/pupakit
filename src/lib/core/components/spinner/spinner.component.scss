@@ -1,0 +1,24 @@
+@import 'mixins';
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+:host {
+  @include flex-container(column, center, center, nowrap);
+}
+
+.spinner {
+  overflow: hidden;
+  color: inherit;
+  @include inline-flex-container(row, center, center, nowrap);
+}
+
+.spinner__icon {
+  color: inherit;
+  animation: rotate 2s infinite linear;
+}

@@ -8,8 +8,14 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  @include transition(#{'background, border, box-shadow'});
+  @include transition(#{'background, border, box-shadow, padding'});
   @include inline-flex-container(row, center, space-evenly, nowrap);
+
+  &_with-loader {
+    .button__icon.button__icon_right {
+      display: none;
+    }
+  }
 }
 
 .button__text {
@@ -29,6 +35,14 @@
   }
 }
 
+.button__loader {
+  &_disabled {
+    width: 0 !important;
+    overflow: hidden;
+  }
+  margin: 0 0 0 rems(0.5);
+}
+
 // size
 .button_large {
   min-width: rems(7);
@@ -44,6 +58,12 @@
     font-size: rems(1);
     height: rems(1);
   }
+  .button__loader {
+    width: rems(1);
+  }
+}
+.button_large.button_with-loader {
+  padding: rems(0.625) rems(0.5);
 }
 
 .button_medium {
@@ -59,6 +79,9 @@
   .button__icon {
     font-size: rems(1);
     height: rems(1);
+  }
+  .button__loader {
+    width: rems(1);
   }
 }
 
@@ -76,6 +99,9 @@
     font-size: $font-size_base-text;
     height: $font-size_base-text;
   }
+  .button__loader {
+    width: $font-size_base-text;
+  }
 }
 
 @mixin button-color($background-color, $color, $border-color: none) {
@@ -86,7 +112,8 @@
   }
   background: $background-color;
   .button__icon,
-  .button__text {
+  .button__text,
+  .button__loader {
     color: $color;
   }
 }

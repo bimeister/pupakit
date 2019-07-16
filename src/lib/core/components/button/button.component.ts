@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
+import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
+
 export type ButtonType = 'solid' | 'outlined' | 'link';
 export type ButtonSize = 'large' | 'medium' | 'small';
 export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
@@ -36,6 +38,8 @@ export class ButtonComponent {
   }
 
   public getResultClassList(prefix: string): string[] {
-    return [this.type, this.size, this.color].map((innerProperty: string) => `${prefix}${innerProperty}`);
+    return [this.type, this.size, this.color, this.loader ? 'with-loader' : null]
+      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
+      .map((innerProperty: string) => `${prefix}${innerProperty}`);
   }
 }

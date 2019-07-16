@@ -2,11 +2,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
-import { Subscription } from 'rxjs';
-
-interface ComponentPropertyValues {
-  [propertyName: string]: unknown[];
-}
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +13,7 @@ interface ComponentPropertyValues {
 export class AppComponent implements OnInit, OnDestroy {
   public title: string = 'Pupa kit';
   public sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
+  public isLoaderVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public buttonCombos: any[] = combos({
     type: ['solid', 'outlined', 'link'],
@@ -54,8 +51,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.subscription.add(this.sampleFormControl.valueChanges.subscribe(console.log));
   }
 
-  public getCombos(propertyValues: ComponentPropertyValues): any[] {
-    return combos(propertyValues);
+  public showLoader(): void {
+    if (this.isLoaderVisible$.value) {
+      return;
+    }
+    this.isLoaderVisible$.next(true);
+    setTimeout(() => {
+      this.isLoaderVisible$.next(false);
+    }, 3000);
   }
 
   public ngOnDestroy(): void {
