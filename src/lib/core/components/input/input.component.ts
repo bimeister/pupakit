@@ -19,6 +19,7 @@ export type InputValid = true | false | null;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements ControlValueAccessor {
+  @Input() public type: string = 'text';
   @Input() public size: InputSize = 'medium';
   @Input() public valid: InputValid = null;
   @Input() public disabled: boolean = false;

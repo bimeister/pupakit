@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 export type ButtonType = 'solid' | 'outlined' | 'link';
 export type ButtonSize = 'large' | 'medium' | 'small';
@@ -10,6 +10,8 @@ export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
+  @ViewChild('buttonElement', { static: true }) public buttonElement: ElementRef<HTMLButtonElement>;
+
   @Input() public type: ButtonType = 'solid';
   @Input() public size: ButtonSize = 'medium';
   @Input() public color: ButtonColor = 'normal';
@@ -18,6 +20,7 @@ export class ButtonComponent {
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   public processClickEvent(event: MouseEvent): void {
+    this.buttonElement.nativeElement.blur();
     if (this.disabled) {
       return;
     }

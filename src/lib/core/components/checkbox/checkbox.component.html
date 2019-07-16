@@ -1,0 +1,6 @@
+<div class="checkbox" (click)="changeValue(!value)" [ngClass]="getResultClassList()">
+  <div class="checkbox__marker" [class.checkbox__marker_indeterminate]="value === null" [ngSwitch]="value">
+    <ion-icon *ngSwitchCase="true" name="ios-checkmark"></ion-icon>
+    <ion-icon *ngSwitchCase="null" name="ios-square"></ion-icon>
+  </div>
+</div>
