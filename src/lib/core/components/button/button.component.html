@@ -11,4 +11,7 @@
   <span class="button__text">
     <ng-content></ng-content>
   </span>
+  <div class="button__loader" [class.button__loader_disabled]="!loader">
+    <pupa-spinner></pupa-spinner>
+  </div>
 </button>
