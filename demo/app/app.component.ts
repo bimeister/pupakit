@@ -1,3 +1,4 @@
+// tslint:disable
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
@@ -8,7 +9,6 @@ interface ComponentPropertyValues {
 }
 
 @Component({
-  // tslint:disable-next-line: component-selector
   selector: 'app-root',
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html',
@@ -16,7 +16,6 @@ interface ComponentPropertyValues {
 })
 export class AppComponent implements OnInit, OnDestroy {
   public title: string = 'Pupa kit';
-  // tslint:disable-next-line: no-unbound-method
   public sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
 
   public buttonCombos: any[] = combos({
@@ -29,13 +28,18 @@ export class AppComponent implements OnInit, OnDestroy {
   public inputCombos: any[] = combos({
     size: ['medium', 'small'],
     placeholder: ['placeholder'],
+    disabled: [false, true],
+    type: ['text', 'password']
+  });
+
+  public checkboxCombos: any[] = combos({
+    value: [true, null, false],
     disabled: [false, true]
   });
 
   private readonly subscription: Subscription = new Subscription();
 
   public ngOnInit(): void {
-    // tslint:disable-next-line: no-console  no-unbound-method
     this.subscription.add(this.sampleFormControl.valueChanges.subscribe(console.log));
   }
 
@@ -48,7 +52,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   public log(...data: unknown[]): void {
-    // tslint:disable-next-line: no-console
     console.log(...data);
   }
 }

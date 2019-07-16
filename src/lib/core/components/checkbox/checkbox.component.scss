@@ -1,0 +1,39 @@
+@import 'mixins';
+@import 'variables';
+@import 'functions';
+
+.checkbox {
+  width: rems(1);
+  height: rems(1);
+  border: rems(0.0625) solid $color_grey-ivory;
+  background: $color_white;
+  cursor: pointer;
+  overflow: hidden;
+  border-radius: rems(0.25);
+  @include transition(#{background, border});
+  @include flex-container(row, center, center, nowrap);
+  &_with-marker {
+    background: $color_active-blue;
+    border: rems(0.0625) solid $color_active-blue;
+  }
+  &_disabled {
+    cursor: not-allowed;
+    border: rems(0.0625) solid $color_grey-apple;
+  }
+}
+
+.checkbox.checkbox_with-marker.checkbox_disabled {
+  background: $color_grey-apple;
+}
+
+.checkbox__marker {
+  font-size: rems(1.75);
+  height: rems(1.75);
+  user-select: none;
+  color: $color_white;
+
+  &_indeterminate {
+    font-size: rems(0.85);
+    height: rems(0.85);
+  }
+}

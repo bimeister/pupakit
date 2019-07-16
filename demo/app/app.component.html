@@ -1,5 +1,14 @@
 <pupa-layout>
   <div class="group">
+    <pupa-checkbox
+      *ngFor="let combo of checkboxCombos"
+      [value]="combo.value"
+      [disabled]="combo.disabled"
+      (valueChange)="log($event)"
+      title="value: {{ combo.value }}; disabled: {{ combo.disabled }}"
+    ></pupa-checkbox>
+  </div>
+  <div class="group">
     <pupa-input
       *ngFor="let combo of inputCombos"
       [placeholder]="combo.placeholder"
@@ -7,6 +16,8 @@
       [disabled]="combo.disabled"
       [formControl]="sampleFormControl"
       [valid]="sampleFormControl.valid"
+      [type]="combo.type"
+      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}"
     ></pupa-input>
   </div>
   <div class="group">
@@ -16,6 +27,7 @@
       [size]="combo.size"
       [color]="combo.color"
       [disabled]="combo.disabled"
+      title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
     >
       Sample button
     </pupa-button>
