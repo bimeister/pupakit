@@ -2,14 +2,18 @@
 @import 'variables';
 @import 'functions';
 
+:host {
+  @include flex-container(row, center, flex-start, nowrap);
+}
+
 .checkbox {
   width: rems(1);
   height: rems(1);
   border: rems(0.0625) solid $color_grey-ivory;
   background: $color_white;
   cursor: pointer;
-  overflow: hidden;
   border-radius: rems(0.25);
+  overflow: hidden;
   @include transition(#{background, border});
   @include flex-container(row, center, center, nowrap);
   &_with-marker {
@@ -35,5 +39,24 @@
   &_indeterminate {
     font-size: rems(0.85);
     height: rems(0.85);
+  }
+}
+
+.checkbox-label {
+  font-size: rems(1);
+  line-height: 1;
+  font-family: 'effra';
+  color: $color_grey-text;
+  font-weight: normal;
+  font-style: normal;
+  box-sizing: border-box;
+  user-select: none;
+  cursor: pointer;
+  &_filled {
+    padding: 0 0 0 rems(0.5);
+  }
+  &_disabled {
+    cursor: not-allowed;
+    color: $color_grey-apple;
   }
 }

@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
@@ -18,6 +27,7 @@ export type CheckboxValue = true | false | null;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckboxComponent implements ControlValueAccessor {
+  @ViewChild('labelElement', { static: true }) public labelElement: ElementRef<HTMLDivElement>;
   @Input() public disabled: boolean = false;
   @Input()
   public get value(): CheckboxValue {
@@ -28,7 +38,12 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   @Output() public valueChange: EventEmitter<CheckboxValue> = new EventEmitter<CheckboxValue>();
+
   private valueData: CheckboxValue = false;
+
+  public isLabelEmpty(): boolean {
+    return this.labelElement.nativeElement.innerText.trim().length === 0;
+  }
 
   public registerOnChange(fn: VoidFunction): void {
     this.onChange = fn;

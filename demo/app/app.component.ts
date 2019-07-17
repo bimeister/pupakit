@@ -42,7 +42,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public checkboxCombos: any[] = combos({
     value: [true, null, false],
-    disabled: [false, true]
+    disabled: [false, true],
+    label: ['', 'sample-text']
   });
 
   private readonly subscription: Subscription = new Subscription();
