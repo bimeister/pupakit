@@ -4,3 +4,12 @@
     <ion-icon *ngSwitchCase="null" name="ios-square"></ion-icon>
   </div>
 </div>
+<div
+  class="checkbox-label"
+  #labelElement
+  [class.checkbox-label_filled]="!isLabelEmpty()"
+  [class.checkbox-label_disabled]="disabled"
+  (click)="changeValue(!value)"
+>
+  <ng-content></ng-content>
+</div>
