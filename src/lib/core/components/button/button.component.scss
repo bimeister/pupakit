@@ -38,6 +38,7 @@
 .button__loader {
   &_disabled {
     width: 0 !important;
+    margin: 0 !important;
     overflow: hidden;
   }
   margin: 0 0 0 rems(0.5);
@@ -55,16 +56,15 @@
     line-height: 1;
   }
   .button__icon {
-    font-size: rems(1);
-    height: rems(1);
+    @include icon-size(rems(1));
   }
   .button__loader {
-    width: rems(1);
+    @include icon-size(rems(1));
   }
 }
-.button_large.button_with-loader {
-  padding: rems(0.625) rems(0.5);
-}
+// .button_large.button_with-loader {
+//   padding: rems(0.625) rems(0.5);
+// }
 
 .button_medium {
   min-width: rems(7);
@@ -77,11 +77,10 @@
     line-height: 1;
   }
   .button__icon {
-    font-size: rems(1);
-    height: rems(1);
+    @include icon-size(rems(1));
   }
   .button__loader {
-    width: rems(1);
+    @include icon-size(rems(1));
   }
 }
 
@@ -96,11 +95,10 @@
     line-height: 1.14;
   }
   .button__icon {
-    font-size: $font-size_base-text;
-    height: $font-size_base-text;
+    @include icon-size($font-size_base-text);
   }
   .button__loader {
-    width: $font-size_base-text;
+    @include icon-size($font-size_base-text);
   }
 }
 
