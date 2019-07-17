@@ -41,7 +41,8 @@ export class AppComponent implements OnInit, OnDestroy {
   });
 
   public checkboxCombos: any[] = combos({
-    value: [true, 'indeterminate', false],
+    value: [true],
+    indeterminate: [true, false],
     disabled: [false, true],
     label: ['', 'sample-text']
   });

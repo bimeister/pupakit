@@ -1,7 +1,7 @@
 <div class="checkbox" (click)="changeValue()" [ngClass]="resultClassList">
-  <div class="checkbox__marker" [class.checkbox__marker_indeterminate]="value === 'indeterminate'" [ngSwitch]="value">
-    <ion-icon *ngSwitchCase="true" name="ios-checkmark"></ion-icon>
-    <ion-icon *ngSwitchCase="'indeterminate'" name="ios-square"></ion-icon>
+  <div class="checkbox__marker" [class.checkbox__marker_indeterminate]="indeterminate">
+    <ion-icon *ngIf="!indeterminate && value" name="ios-checkmark"></ion-icon>
+    <ion-icon *ngIf="indeterminate" name="ios-square"></ion-icon>
   </div>
 </div>
 <label
