@@ -29,17 +29,17 @@ export class ButtonComponent {
 
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
+  public get resultClassList(): string[] {
+    return [this.type, this.size, this.color, this.loader ? 'with-loader' : null]
+      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
+      .map((innerProperty: string) => `button_${innerProperty}`);
+  }
+
   public processClickEvent(event: MouseEvent): void {
     this.buttonElement.nativeElement.blur();
     if (this.disabled) {
       return;
     }
     this.onclick.emit(event);
-  }
-
-  public getResultClassList(prefix: string): string[] {
-    return [this.type, this.size, this.color, this.loader ? 'with-loader' : null]
-      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
-      .map((innerProperty: string) => `${prefix}${innerProperty}`);
   }
 }

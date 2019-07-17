@@ -32,3 +32,15 @@
   width: $size;
   line-height: 1;
 }
+
+@mixin pupa-label {
+  box-sizing: border-box;
+  padding: rems(0.25);
+  font-family: 'effra';
+  color: $color_grey-text;
+  font-size: rems(1);
+  line-height: 1.13;
+  font-weight: normal;
+  font-style: normal;
+  box-sizing: border-box;
+}
