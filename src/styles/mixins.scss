@@ -35,7 +35,7 @@
 
 @mixin pupa-label {
   box-sizing: border-box;
-  padding: rems(0.25);
+  padding: 0 0 rems(0.25);
   font-family: 'effra';
   color: $color_grey-text;
   font-size: rems(1);
