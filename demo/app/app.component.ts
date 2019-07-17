@@ -47,6 +47,10 @@ export class AppComponent implements OnInit, OnDestroy {
     label: ['', 'sample-text']
   });
 
+  public spinnerCombos: any[] = combos({
+    size: ['32px', '16px', '14px']
+  });
+
   private readonly subscription: Subscription = new Subscription();
 
   public ngOnInit(): void {

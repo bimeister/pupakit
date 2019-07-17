@@ -13,6 +13,7 @@
 }
 
 .spinner {
+  all: unset;
   overflow: hidden;
   color: inherit;
   @include inline-flex-container(row, center, center, nowrap);
