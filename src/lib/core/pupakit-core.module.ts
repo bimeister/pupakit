@@ -5,17 +5,9 @@ import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { InputComponent } from './components/input/input.component';
 import { LabelComponent } from './components/label/label.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
-const CORE_COMPONENTS: any[] = [
-  LayoutComponent,
-  ButtonComponent,
-  InputComponent,
-  CheckboxComponent,
-  SpinnerComponent,
-  LabelComponent
-];
+const CORE_COMPONENTS: any[] = [ButtonComponent, InputComponent, CheckboxComponent, SpinnerComponent, LabelComponent];
 
 @NgModule({
   imports: [SharedModule],

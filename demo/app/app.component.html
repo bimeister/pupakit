@@ -1,42 +1,40 @@
-<pupa-layout>
-  <div class="group">
-    <pupa-checkbox
-      *ngFor="let combo of checkboxCombos"
-      [value]="combo.value"
-      [disabled]="combo.disabled"
-      (valueChange)="log($event)"
-      title="value: {{ combo.value }}; disabled: {{ combo.disabled }}"
-    >
-      {{ combo.label }}
-    </pupa-checkbox>
-  </div>
-  <div class="group">
-    <div class="column" *ngFor="let combo of inputCombos">
-      <pupa-label>Sample label</pupa-label>
-      <pupa-input
-        [placeholder]="combo.placeholder"
-        [size]="combo.size"
-        [disabled]="combo.disabled"
-        [formControl]="sampleFormControl"
-        [valid]="sampleFormControl.valid"
-        [type]="combo.type"
-        title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}"
-      ></pupa-input>
-    </div>
-  </div>
-  <div class="group">
-    <pupa-button
-      *ngFor="let combo of buttonCombos"
-      [type]="combo.type"
+<div class="group">
+  <pupa-checkbox
+    *ngFor="let combo of checkboxCombos"
+    [value]="combo.value"
+    [disabled]="combo.disabled"
+    (valueChange)="log($event)"
+    title="value: {{ combo.value }}; disabled: {{ combo.disabled }}"
+  >
+    {{ combo.label }}
+  </pupa-checkbox>
+</div>
+<div class="group">
+  <div class="column" *ngFor="let combo of inputCombos">
+    <pupa-label>Sample label</pupa-label>
+    <pupa-input
+      [placeholder]="combo.placeholder"
       [size]="combo.size"
-      [icon]="combo.icon"
-      [color]="combo.color"
       [disabled]="combo.disabled"
-      [loader]="isLoaderVisible$ | async"
-      title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
-      (onclick)="showLoader()"
-    >
-      Sample button
-    </pupa-button>
+      [formControl]="sampleFormControl"
+      [valid]="sampleFormControl.valid"
+      [type]="combo.type"
+      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}"
+    ></pupa-input>
   </div>
-</pupa-layout>
+</div>
+<div class="group">
+  <pupa-button
+    *ngFor="let combo of buttonCombos"
+    [type]="combo.type"
+    [size]="combo.size"
+    [icon]="combo.icon"
+    [color]="combo.color"
+    [disabled]="combo.disabled"
+    [loader]="isLoaderVisible$ | async"
+    title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
+    (onclick)="showLoader()"
+  >
+    Sample button
+  </pupa-button>
+</div>
