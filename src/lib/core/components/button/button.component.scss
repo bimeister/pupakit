@@ -11,7 +11,7 @@
   @include transition(#{'background, border, box-shadow, padding'});
   @include inline-flex-container(row, center, space-evenly, nowrap);
 
-  &_with-loader {
+  &_with-loader:not(:disabled) {
     .button__icon.button__icon_right {
       display: none;
     }
