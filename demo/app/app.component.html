@@ -3,8 +3,9 @@
     *ngFor="let combo of checkboxCombos"
     [value]="combo.value"
     [disabled]="combo.disabled"
+    [indeterminate]="combo.indeterminate"
     (valueChange)="log($event)"
-    title="value: {{ combo.value }}; disabled: {{ combo.disabled }}"
+    title="value: {{ combo.value }}; disabled: {{ combo.disabled }}; indeterminate: {{ combo.indeterminate }}"
   >
     {{ combo.label }}
   </pupa-checkbox>

@@ -12,7 +12,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export type CheckboxValue = boolean | 'indeterminate';
 @Component({
   selector: 'pupa-checkbox',
   templateUrl: './checkbox.component.html',
@@ -29,19 +28,20 @@ export type CheckboxValue = boolean | 'indeterminate';
 export class CheckboxComponent implements ControlValueAccessor {
   @ViewChild('labelElement', { static: true }) public labelElement: ElementRef<HTMLDivElement>;
   @Input() public disabled: boolean = false;
+  @Input() public indeterminate: boolean = false;
   @Input()
-  public get value(): CheckboxValue {
+  public get value(): boolean {
     return this.valueData;
   }
-  public set value(newValue: CheckboxValue) {
+  public set value(newValue: boolean) {
     this.updateValue(newValue);
   }
 
-  @Output() public valueChange: EventEmitter<CheckboxValue> = new EventEmitter<CheckboxValue>();
+  @Output() public valueChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public get resultClassList(): string[] {
     const disabledStateClass: string = this.disabled ? 'checkbox_disabled' : null;
-    const hasMarkerClass: string = this.value || this.value === null ? 'checkbox_with-marker' : null;
+    const hasMarkerClass: string = this.value || this.indeterminate ? 'checkbox_with-marker' : null;
     return [disabledStateClass, hasMarkerClass].filter((innerClassName: string) => !isNullOrUndefined(innerClassName));
   }
 
@@ -49,7 +49,7 @@ export class CheckboxComponent implements ControlValueAccessor {
     return this.labelElement.nativeElement.innerText.trim().length === 0;
   }
 
-  private valueData: CheckboxValue = false;
+  private valueData: boolean = false;
 
   public registerOnChange(fn: VoidFunction): void {
     this.onChange = fn;
@@ -61,10 +61,6 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   public writeValue(outerValue: unknown): void {
     switch (String(outerValue).toLowerCase()) {
-      case 'indeterminate': {
-        this.valueData = true;
-        return;
-      }
       case 'true': {
         this.valueData = true;
         return;
@@ -80,10 +76,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     if (this.disabled) {
       return;
     }
+    this.indeterminate = false;
     this.updateValue(!this.value);
   }
 
-  public updateValue(innerValue: CheckboxValue): void {
+  public updateValue(innerValue: boolean): void {
     this.valueData = innerValue;
     this.onChange(innerValue);
     this.onTouched();
