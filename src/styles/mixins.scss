@@ -25,3 +25,10 @@
   transition-timing-function: $transition-timing-function;
   transition-property: $transition-property;
 }
+
+@mixin icon-size($size: $font-size_root) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: 1;
+}

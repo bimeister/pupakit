@@ -11,7 +11,10 @@
   <span class="button__text">
     <ng-content></ng-content>
   </span>
-  <div class="button__loader" [class.button__loader_disabled]="!loader">
-    <pupa-spinner></pupa-spinner>
-  </div>
+  <!-- temp ↓ -->
+  <ng-container *ngIf="!(icon | isNullOrUndefined) && icon.position === 'right'">
+    <div class="button__loader" [class.button__loader_disabled]="!loader">
+      <pupa-spinner></pupa-spinner>
+    </div>
+  </ng-container>
 </button>
