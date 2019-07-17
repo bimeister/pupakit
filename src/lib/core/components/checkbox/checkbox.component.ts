@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export type CheckboxValue = true | false | null;
+export type CheckboxValue = boolean | 'indeterminate';
 @Component({
   selector: 'pupa-checkbox',
   templateUrl: './checkbox.component.html',
@@ -39,11 +39,17 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   @Output() public valueChange: EventEmitter<CheckboxValue> = new EventEmitter<CheckboxValue>();
 
-  private valueData: CheckboxValue = false;
+  public get resultClassList(): string[] {
+    const disabledStateClass: string = this.disabled ? 'checkbox_disabled' : null;
+    const hasMarkerClass: string = this.value || this.value === null ? 'checkbox_with-marker' : null;
+    return [disabledStateClass, hasMarkerClass].filter((innerClassName: string) => !isNullOrUndefined(innerClassName));
+  }
 
-  public isLabelEmpty(): boolean {
+  public get isLabelEmpty(): boolean {
     return this.labelElement.nativeElement.innerText.trim().length === 0;
   }
+
+  private valueData: CheckboxValue = false;
 
   public registerOnChange(fn: VoidFunction): void {
     this.onChange = fn;
@@ -54,15 +60,13 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   public writeValue(outerValue: unknown): void {
-    switch (outerValue) {
-      case 'true':
-      case true: {
+    switch (String(outerValue).toLowerCase()) {
+      case 'indeterminate': {
         this.valueData = true;
         return;
       }
-      case 'null':
-      case null: {
-        this.valueData = null;
+      case 'true': {
+        this.valueData = true;
         return;
       }
       default: {
@@ -72,11 +76,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     }
   }
 
-  public changeValue(innerValue: CheckboxValue): void {
+  public changeValue(): void {
     if (this.disabled) {
       return;
     }
-    this.updateValue(innerValue);
+    this.updateValue(!this.value);
   }
 
   public updateValue(innerValue: CheckboxValue): void {
@@ -94,10 +98,4 @@ export class CheckboxComponent implements ControlValueAccessor {
   public onTouched: VoidFunction = () => {
     return;
   };
-
-  public getResultClassList(): string[] {
-    const disabledStateClass: string = this.disabled ? 'checkbox_disabled' : null;
-    const hasMarkerClass: string = this.value || this.value === null ? 'checkbox_with-marker' : null;
-    return [disabledStateClass, hasMarkerClass].filter((innerClassName: string) => !isNullOrUndefined(innerClassName));
-  }
 }

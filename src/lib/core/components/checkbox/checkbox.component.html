@@ -1,15 +1,15 @@
-<div class="checkbox" (click)="changeValue(!value)" [ngClass]="getResultClassList()">
-  <div class="checkbox__marker" [class.checkbox__marker_indeterminate]="value === null" [ngSwitch]="value">
+<div class="checkbox" (click)="changeValue()" [ngClass]="resultClassList">
+  <div class="checkbox__marker" [class.checkbox__marker_indeterminate]="value === 'indeterminate'" [ngSwitch]="value">
     <ion-icon *ngSwitchCase="true" name="ios-checkmark"></ion-icon>
-    <ion-icon *ngSwitchCase="null" name="ios-square"></ion-icon>
+    <ion-icon *ngSwitchCase="'indeterminate'" name="ios-square"></ion-icon>
   </div>
 </div>
-<div
+<label
   class="checkbox-label"
   #labelElement
-  [class.checkbox-label_filled]="!isLabelEmpty()"
+  [class.checkbox-label_filled]="!isLabelEmpty"
   [class.checkbox-label_disabled]="disabled"
-  (click)="changeValue(!value)"
+  (click)="changeValue()"
 >
   <ng-content></ng-content>
-</div>
+</label>

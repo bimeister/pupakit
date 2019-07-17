@@ -1,2 +1,7 @@
 @import 'variables';
 @import 'font-faces';
+@import 'mixins';
+
+label {
+  @include pupa-label;
+}

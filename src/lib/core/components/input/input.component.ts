@@ -34,6 +34,12 @@ export class InputComponent implements ControlValueAccessor {
 
   @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
 
+  public get resultClassList(): string[] {
+    return [this.size, this.getValidationStateClass()]
+      .filter((innerClassName: string) => !isNullOrUndefined(innerClassName))
+      .map((innerProperty: string) => `input_${innerProperty}`);
+  }
+
   private valueData: string = '';
 
   public registerOnChange(fn: VoidFunction): void {
@@ -53,12 +59,6 @@ export class InputComponent implements ControlValueAccessor {
     this.onChange(innerValue);
     this.onTouched();
     this.valueChange.emit(this.value);
-  }
-
-  public getResultClassList(prefix: string): string[] {
-    return [this.size, this.getValidationStateClass()]
-      .filter((innerClassName: string) => !isNullOrUndefined(innerClassName))
-      .map((innerProperty: string) => `${prefix}${innerProperty}`);
   }
 
   private getValidationStateClass(): string {
