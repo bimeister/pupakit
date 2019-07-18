@@ -7,12 +7,13 @@
   },
   "scripts": {
     "ng": "ng",
-    "build": "ng build && npm run build:scss && npm run build:css && npm run copy:assets",
+    "build": "ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
     "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:styles",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
     "copy:assets": "npx copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets",
     "copy:styles": "npx copy ./src/styles/**/*.* ./dist/@meistersoft/pupakit/styles",
+    "replace-imports": "npx replace-in-file \"\/'\/assets\/\/g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
@@ -56,10 +57,13 @@
     "@types/jest": "^24.0.15",
     "@types/node": "~12.6.2",
     "codelyzer": "^5.0.0",
+    "combos": "^0.2.0",
     "copy": "^0.3.2",
+    "ionicons": "^4.6.1",
     "jest": "^24.8.0",
     "ng-packagr": "^5.3.0",
     "prettier": "^1.18.2",
+    "replace-in-file": "^4.1.1",
     "rxjs": "~6.5.2",
     "sass": "^1.22.4",
     "scss-bundle": "^2.5.1",
@@ -67,8 +71,6 @@
     "tsickle": "^0.35.0",
     "tslib": "^1.9.0",
     "tslint": "~5.18.0",
-    "typescript": "^3.4.5",
-    "ionicons": "^4.6.1",
-    "combos": "^0.2.0"
+    "typescript": "^3.4.5"
   }
 }

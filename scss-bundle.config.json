@@ -1,4 +1,5 @@
 {
   "entry": "./src/styles/styles.scss",
-  "dest": "dist/@meistersoft/pupakit/styles.scss"
+  "dest": "dist/@meistersoft/pupakit/styles.scss",
+  "includePaths": true
 }
