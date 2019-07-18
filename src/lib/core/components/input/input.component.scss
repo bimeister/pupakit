@@ -12,7 +12,7 @@
 }
 
 .input {
-  font-family: 'effra';
+  @include regular();
   box-sizing: border-box;
   border-radius: rems(0.5);
   background: $color_white;

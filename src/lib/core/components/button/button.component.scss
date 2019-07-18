@@ -4,7 +4,7 @@
 
 .button {
   box-sizing: border-box;
-  font-family: 'effra';
+  @include regular();
   cursor: pointer;
   padding: 0;
   outline: none;
@@ -52,7 +52,7 @@
   padding: rems(0.625) rems(1);
   .button__text {
     font-size: rems(1);
-    font-weight: 500;
+    @include medium();
     line-height: 1;
   }
   .button__icon {
@@ -73,7 +73,7 @@
   padding: rems(0.375) rems(0.5);
   .button__text {
     font-size: rems(1);
-    font-weight: 500;
+    @include medium();
     line-height: 1;
   }
   .button__icon {
@@ -91,7 +91,7 @@
   padding: rems(0.1875) rems(0.625);
   .button__text {
     font-size: $font-size_base-text;
-    font-weight: normal;
+    @include regular();
     line-height: 1.14;
   }
   .button__icon {

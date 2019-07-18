@@ -1,5 +1,17 @@
 @import 'variables';
 
+@mixin regular() {
+  font-family: 'effraregular', sans-serif;
+}
+
+@mixin medium() {
+  font-family: 'efframedium', sans-serif;
+}
+
+@mixin bold() {
+  font-family: 'effrabold', sans-serif;
+}
+
 @mixin flex-container($flex-direction: row, $align-items: normal, $justify-content: normal, $flex-wrap: nowrap) {
   display: flex;
   flex-direction: $flex-direction;
@@ -36,11 +48,10 @@
 @mixin pupa-label {
   box-sizing: border-box;
   padding: 0 0 rems(0.25);
-  font-family: 'effra';
+  @include regular();
   color: $color_grey-text;
   font-size: rems(1);
   line-height: 1.13;
   font-weight: normal;
   font-style: normal;
-  box-sizing: border-box;
 }

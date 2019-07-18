@@ -45,9 +45,8 @@
 .checkbox-label {
   font-size: rems(1);
   line-height: 1;
-  font-family: 'effra';
   color: $color_grey-text;
-  font-weight: normal;
+  @include regular();
   font-style: normal;
   box-sizing: border-box;
   user-select: none;
