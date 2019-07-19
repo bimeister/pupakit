@@ -24,24 +24,26 @@
 }
 
 .button__icon {
+  box-sizing: border-box;
   user-select: none;
   &_left {
     order: -1;
-    padding: 0 rems(0.5) 0 0;
+    margin: 0 rems(0.5) 0 0;
   }
   &_right {
     order: 1;
-    padding: 0 0 0 rems(0.5);
+    margin: 0 0 0 rems(0.5);
   }
 }
 
 .button__loader {
+  box-sizing: border-box;
+  margin: 0 0 0 rems(0.5);
   &_disabled {
     width: 0 !important;
     margin: 0 !important;
     overflow: hidden;
   }
-  margin: 0 0 0 rems(0.5);
 }
 
 // size

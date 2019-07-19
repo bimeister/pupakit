@@ -48,7 +48,7 @@ export class AppComponent implements OnInit, OnDestroy {
   });
 
   public spinnerCombos: any[] = combos({
-    size: ['32px', '16px', '14px']
+    size: ['32px', '16px']
   });
 
   private readonly subscription: Subscription = new Subscription();

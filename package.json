@@ -13,7 +13,7 @@
     "build:dev": "ng build --watch",
     "copy:assets": "npx copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets",
     "copy:styles": "npx copy ./src/styles/**/*.* ./dist/@meistersoft/pupakit/styles",
-    "replace-imports": "npx replace-in-file \"\/'\/assets\/\/g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex",
+    "replace-imports": "npx replace-in-file \"/'/assets//g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
