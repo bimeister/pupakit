@@ -1,0 +1,23 @@
+:host {
+  display: block;
+  padding: 1rem;
+}
+
+
+.group {
+  padding: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  & > * {
+    padding: 1rem;
+    flex: 0 0 50%;
+    box-sizing: border-box;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}

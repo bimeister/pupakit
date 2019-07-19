@@ -1,49 +1,49 @@
 /* You can add global styles to this file, and also import other style files */
-@import './../../dist/@meistersoft/pupakit/styles.scss';
+@import '~src/styles/styles';
 
 html {
   font-size: $font-size_root;
-  font-family: 'effra', sans-serif;
+  @include regular();
   color: $color_grey-text;
 }
 
 body {
   padding: $padding_body;
-  margin: $margin_body;
+  margin: 0;
 }
 
 h1 {
   font-size: $font-size_h1;
   line-height: $line-height_h1;
-  font-weight: bold;
+  @include bold();
   font-style: normal;
 }
 
 h2 {
   font-size: $font-size_h2;
   line-height: $line-height_h2;
-  font-weight: 500;
+  @include medium();
   font-style: normal;
 }
 
 h3 {
   font-size: $font-size_h3;
   line-height: $line-height_h3;
-  font-weight: 500;
+  @include medium();
   font-style: normal;
 }
 
 h4 {
   font-size: $font-size_h4;
   line-height: $line-height_h4;
-  font-weight: normal;
+  @include regular();
   font-style: normal;
 }
 
 h4 {
   font-size: $font-size_h5;
   line-height: $line-height_h5;
-  font-weight: normal;
+  @include regular();
   font-style: normal;
 }
 
@@ -52,6 +52,6 @@ p,
 td {
   font-size: $font-size_base-text;
   line-height: $line-height_base-text;
-  font-weight: normal;
+  @include regular();
   font-style: normal;
 }

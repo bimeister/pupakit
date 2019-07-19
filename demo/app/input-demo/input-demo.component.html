@@ -1,0 +1,18 @@
+
+<h1>
+  Input
+</h1>
+<div class="group">
+  <div class="column" *ngFor="let combo of combos">
+    <label>Sample label</label>
+    <pupa-input
+      [placeholder]="combo.placeholder"
+      [size]="combo.size"
+      [disabled]="combo.disabled"
+      [formControl]="sampleFormControl"
+      [valid]="sampleFormControl.valid"
+      [type]="combo.type"
+      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}, type: {{combo.type}}"
+    ></pupa-input>
+  </div>
+</div>

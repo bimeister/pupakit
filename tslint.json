@@ -12,14 +12,14 @@
     "class-name": true,
     "comment-format": [true, "check-space"],
     "component-class-suffix": true,
-    "component-selector": [true, "element", "pupa", "kebab-case"],
+    "component-selector": [true, "element", ["pupa", "demo"], "kebab-case"],
     "curly": true,
     "cyclomatic-complexity": true,
     "deprecation": {
       "severity": "error"
     },
     "directive-class-suffix": true,
-    "directive-selector": [true, "attribute", "pupa", "camelCase"],
+    "directive-selector": [true, "attribute", ["pupa", "demo"], "camelCase"],
     "encoding": true,
     "eofline": true,
     "forin": true,
