@@ -1,10 +1,8 @@
-@import 'functions';
+@import './../../src/styles/functions';
+@import './../../src/styles/mixins';
 
 :host {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
+  @include flex-container(row, flex-end, flex-start, wrap);
 
   & > *:nth-child(odd) {
     background: #f0f0f0;
@@ -19,7 +17,7 @@
   align-items: flex-end;
   justify-content: flex-start;
   flex-wrap: wrap;
-  width: 100%;
+  width: calc(100% - rems(1));
 
   & > * {
     margin: rems(0.25) rems(0.5);
