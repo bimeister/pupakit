@@ -24,22 +24,6 @@
     cursor: not-allowed;
     border: rems(0.0625) solid $color_grey-apple;
   }
-  &_indeterminate {
-    background: $color_white;
-
-    .checkbox__marker {
-      font-size: rems(1.1);
-      height: rems(1.1);
-      color: $color_active-blue;
-    }
-  }
-}
-
-.checkbox.checkbox_with-marker.checkbox_disabled.checkbox_indeterminate {
-  background: $color_white;
-  .checkbox__marker {
-    color: $color_grey-apple;
-  }
 }
 
 .checkbox.checkbox_with-marker.checkbox_disabled {
@@ -51,6 +35,11 @@
   height: rems(1.75);
   user-select: none;
   color: $color_white;
+
+  &_indeterminate {
+    font-size: rems(0.85);
+    height: rems(0.85);
+  }
 }
 
 .checkbox-label {
