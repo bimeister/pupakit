@@ -1,10 +1,10 @@
-<div class="group">
+<pupa-tile class="group">
   <pupa-loader></pupa-loader>
-</div>
-<div class="group">
+</pupa-tile>
+<pupa-tile class="group">
   <pupa-spinner *ngFor="let combo of spinnerCombos" [size]="combo.size"></pupa-spinner>
-</div>
-<div class="group">
+</pupa-tile>
+<pupa-tile class="group">
   <pupa-checkbox
     *ngFor="let combo of checkboxCombos"
     [value]="combo.value"
@@ -15,8 +15,8 @@
   >
     {{ combo.label }}
   </pupa-checkbox>
-</div>
-<div class="group">
+</pupa-tile>
+<pupa-tile class="group">
   <div class="column" *ngFor="let combo of inputCombos">
     <label>Sample label</label>
     <pupa-input
@@ -37,8 +37,8 @@
       error text
     </pupa-control-text>
   </div>
-</div>
-<div class="group">
+</pupa-tile>
+<pupa-tile class="group">
   <pupa-button
     *ngFor="let combo of buttonCombos"
     [type]="combo.type"
@@ -52,4 +52,4 @@
   >
     Sample button
   </pupa-button>
-</div>
+</pupa-tile>
