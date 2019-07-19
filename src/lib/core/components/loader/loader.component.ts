@@ -96,8 +96,7 @@ export class LoaderComponent implements AfterViewInit {
       this.isTopRectangleVisible$.next(ElementState.dissapeared);
       this.isBottomRectangleVisible$.next(ElementState.dissapeared);
     }, delay);
-    const repeatDelay: number = 2000;
-    this.startAnimation(repeatDelay);
+    this.startAnimation(2000);
   }
 
   private startAnimation(delay: number = 0): void {
