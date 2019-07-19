@@ -8,9 +8,8 @@ describe('ControlTextComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ControlTextComponent ]
-    })
-    .compileComponents();
+      declarations: [ControlTextComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {
