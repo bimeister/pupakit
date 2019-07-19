@@ -1,55 +1,11 @@
-<pupa-tile class="group">
-  <pupa-loader></pupa-loader>
-</pupa-tile>
-<pupa-tile class="group">
-  <pupa-spinner *ngFor="let combo of spinnerCombos" [size]="combo.size"></pupa-spinner>
-</pupa-tile>
-<pupa-tile class="group">
-  <pupa-checkbox
-    *ngFor="let combo of checkboxCombos"
-    [value]="combo.value"
-    [disabled]="combo.disabled"
-    [indeterminate]="combo.indeterminate"
-    (valueChange)="log($event)"
-    title="value: {{ combo.value }}; disabled: {{ combo.disabled }}; indeterminate: {{ combo.indeterminate }}"
-  >
-    {{ combo.label }}
-  </pupa-checkbox>
-</pupa-tile>
-<pupa-tile class="group">
-  <div class="column" *ngFor="let combo of inputCombos">
-    <label>Sample label</label>
-    <pupa-input
-      [placeholder]="combo.placeholder"
-      [size]="combo.size"
-      [disabled]="combo.disabled"
-      [formControl]="sampleFormControl"
-      [valid]="sampleFormControl.valid"
-      [type]="combo.type"
-      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}, type: {{
-        combo.type
-      }}"
-    ></pupa-input>
-    <pupa-control-text *ngIf="sampleFormControl.valid && !combo.disabled">
-      helper text
-    </pupa-control-text>
-    <pupa-control-text *ngIf="!sampleFormControl.valid && !combo.disabled" [isError]="true">
-      error text
-    </pupa-control-text>
-  </div>
-</pupa-tile>
-<pupa-tile class="group">
-  <pupa-button
-    *ngFor="let combo of buttonCombos"
-    [type]="combo.type"
-    [size]="combo.size"
-    [icon]="combo.icon"
-    [color]="combo.color"
-    [disabled]="combo.disabled"
-    [loader]="isLoaderVisible$ | async"
-    title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
-    (onclick)="showLoader()"
-  >
-    Sample button
-  </pupa-button>
-</pupa-tile>
+<aside class="index">
+  <a routerLink="/loader" class="index-item">Loader</a>
+  <a routerLink="/checkbox" class="index-item">Checkbox</a>
+  <a routerLink="/input" class="index-item">Input</a>
+  <a routerLink="/button" class="index-item">Button</a>
+</aside>
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+

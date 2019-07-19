@@ -68,7 +68,7 @@
     },
     "demo": {
       "root": "./demo",
-      "sourceRoot": "src",
+      "sourceRoot": "./demo",
       "projectType": "application",
       "prefix": "demo",
       "schematics": {
@@ -86,11 +86,12 @@
             "polyfills": "demo/polyfills.ts",
             "tsConfig": "./tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              { "glob": "**/*", "input": "./node_modules/ionicons/dist/ionicons", "output": "/ionicons" }
+              "./demo/favicon.ico",
+              "./demo/assets",
+              { "glob": "**/*", "input": "./node_modules/ionicons/dist/ionicons", "output": "/ionicons" },
+              { "glob": "**/*", "input": "./src/assets", "output": "/assets" }
             ],
-            "styles": ["src/styles/styles.scss"],
+            "styles": ["demo/styles/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles/"]
             },
