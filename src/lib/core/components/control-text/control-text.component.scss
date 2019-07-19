@@ -1,0 +1,18 @@
+@import 'functions';
+@import 'mixins';
+@import 'variables';
+
+.control-text {
+  height: auto;
+  min-height: rems(1.125);
+  font-size: rems(0.75);
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+  color: $color_grey-light;
+  @include regular;
+
+  &_error {
+    color: $color_error;
+  }
+}
