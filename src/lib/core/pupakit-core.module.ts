@@ -7,7 +7,6 @@ import { ControlTextComponent } from './components/control-text/control-text.com
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { TileComponent } from './components/tile/tile.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -15,8 +14,7 @@ const CORE_COMPONENTS: any[] = [
   CheckboxComponent,
   SpinnerComponent,
   ControlTextComponent,
-  LoaderComponent,
-  TileComponent
+  LoaderComponent
 ];
 
 @NgModule({
