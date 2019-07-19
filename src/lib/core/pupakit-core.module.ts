@@ -3,17 +3,10 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
-import { ControlTextComponent } from './components/control-text/control-text.component';
 import { InputComponent } from './components/input/input.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 
-const CORE_COMPONENTS: any[] = [
-  ButtonComponent,
-  InputComponent,
-  CheckboxComponent,
-  SpinnerComponent,
-  ControlTextComponent
-];
+const CORE_COMPONENTS: any[] = [ButtonComponent, InputComponent, CheckboxComponent, SpinnerComponent];
 
 @NgModule({
   imports: [SharedModule],
