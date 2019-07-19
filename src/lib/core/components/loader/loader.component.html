@@ -4,14 +4,26 @@
     [@lineAppeared]="isLeftLineVisible$ | async"
     (@lineAppeared.start)="switchRectangleState($event, isBottomRectangleVisible$, 400)"
   >
-    <img src="/assets/img/loader-line.svg" height="100%" width="100%" />
+    <svg height="100%" viewBox="0 0 2 79" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m63.4050633 96.2101507v79.6096743"
+        style="stroke:#ff602b;stroke-width:.9;fill:none;stroke-dasharray:3 2;stroke-linecap:round;stroke-linejoin:round"
+        transform="translate(-62 -96)"
+      />
+    </svg>
   </div>
   <div
     class="loader__line loader__line_center"
     [@lineAppeared]="isCenterLineVisible$ | async"
     (@lineAppeared.done)="switchLineState($event, isRightLineVisible$)"
   >
-    <img src="/assets/img/loader-line.svg" height="100%" width="100%" />
+    <svg height="100%" viewBox="0 0 2 79" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m63.4050633 96.2101507v79.6096743"
+        style="stroke:#ff602b;stroke-width:.9;fill:none;stroke-dasharray:3 2;stroke-linecap:round;stroke-linejoin:round"
+        transform="translate(-62 -96)"
+      />
+    </svg>
   </div>
   <div
     class="loader__line loader__line_right"
@@ -19,16 +31,36 @@
     (@lineAppeared.start)="switchLineState($event, isLeftLineVisible$, 350)"
     (@lineAppeared.done)="switchRectangleState($event, isTopRectangleVisible$)"
   >
-    <img src="/assets/img/loader-line.svg" height="100%" width="100%" />
+    <svg height="100%" viewBox="0 0 2 79" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m63.4050633 96.2101507v79.6096743"
+        style="stroke:#ff602b;stroke-width:.9;fill:none;stroke-dasharray:3 2;stroke-linecap:round;stroke-linejoin:round"
+        transform="translate(-62 -96)"
+      />
+    </svg>
   </div>
   <div class="loader__rectangle loader__rectangle_top" [@rectangleAppeared]="isTopRectangleVisible$ | async">
-    <img src="/assets/img/loader-rectangle.svg" height="100" width="100%" />
+    <svg height="100%" viewBox="0 0 125 65" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m18.64727 18.1512875 65.2351888 22.40698 22.4069802 65.2351885-67.5355463-20.1066223z"
+        fill="#141658"
+        fill-rule="evenodd"
+        transform="matrix(.70710678 -.70710678 .70710678 .70710678 -25.524527 31.323084)"
+      />
+    </svg>
   </div>
   <div
     class="loader__rectangle loader__rectangle_bottom"
     [@rectangleAppeared]="isBottomRectangleVisible$ | async"
     (@rectangleAppeared.done)="hideAllElements($event, 1000)"
   >
-    <img src="/assets/img/loader-rectangle.svg" height="100%" width="100%" />
+    <svg height="100%" viewBox="0 0 125 65" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="m18.64727 18.1512875 65.2351888 22.40698 22.4069802 65.2351885-67.5355463-20.1066223z"
+        fill="#141658"
+        fill-rule="evenodd"
+        transform="matrix(.70710678 -.70710678 .70710678 .70710678 -25.524527 31.323084)"
+      />
+    </svg>
   </div>
 </div>
