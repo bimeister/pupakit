@@ -8,7 +8,6 @@ import combos from 'combos';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CheckboxDemoComponent {
-
   public readonly combos: any[] = combos({
     value: [true],
     indeterminate: [true, false],

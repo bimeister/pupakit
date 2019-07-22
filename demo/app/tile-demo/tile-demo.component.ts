@@ -6,5 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './tile-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TileDemoComponent {
-}
+export class TileDemoComponent {}
