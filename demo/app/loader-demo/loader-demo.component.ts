@@ -8,7 +8,7 @@ import combos from 'combos';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoaderDemoComponent {
-  public combos: any[] = combos({
+  public readonly combos: any[] = combos({
     size: ['32px', '16px', '14px']
   });
 }

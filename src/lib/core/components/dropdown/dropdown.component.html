@@ -1,0 +1,31 @@
+<div class="pupa-dropdown"
+     [class.pupa-dropdown_open]="open"
+     [style.top.px]="topPx"
+     [style.left.px]="leftPx"
+     [style.width.px]="widthPx"
+     #dropdown>
+  <div class="pupa-dropdown__item"
+       *ngFor="let item of items"
+       (click)="onSelect(item)"
+  >
+    <div class="pupa-dropdown__item-block">
+      <ion-icon class="pupa-dropdown__icon pupa-dropdown__icon_left"
+                *ngIf="item.iconLeft"
+                [name]="item.iconLeft.name"
+                [src]="item.iconLeft.src"
+                [style.color]="item.iconLeft.color"
+      ></ion-icon>
+
+      {{item.caption}}
+    </div>
+
+    <ion-icon class="pupa-dropdown__icon pupa-dropdown__icon_right"
+              *ngIf="item.iconRight"
+              [name]="item.iconRight.name"
+              [src]="item.iconRight.src"
+              [style.color]="item.iconRight.color"
+    ></ion-icon>
+
+  </div>
+</div>
+

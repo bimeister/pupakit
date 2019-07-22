@@ -5,3 +5,44 @@
 label {
   @include pupa-label;
 }
+
+.pupa-dropdown {
+  @include dropdown();
+
+  position: fixed;
+  z-index: 500;
+  min-width: 100px;
+}
+
+
+.pupa-dropdown__item {
+  cursor: pointer;
+  padding: 0 8px;
+  min-height: 24px;
+  flex: 1 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include regular();
+
+  &:hover {
+    color: white;
+    -webkit-text-fill-color: white;
+    background: $color_active-blue;
+  }
+}
+
+.pupa-dropdown__item-block {
+  display: flex;
+  align-items: center;
+}
+
+.pupa-dropdown__icon {
+  &_left {
+    margin-right: 8px;
+  }
+  &_right {
+    margin-left: 8px;
+    flex: 0 0 24px
+  }
+}
