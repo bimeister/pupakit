@@ -12,43 +12,6 @@
   @include transition(#{border, box-shadow});
   @include flex-container(column, flex-start, flex-start, nowrap);
 
-  &_columns-1 {
-    width: rems(6);
-  }
-  &_columns-2 {
-    width: rems(13);
-  }
-  &_columns-3 {
-    width: rems(20);
-  }
-  &_columns-4 {
-    width: rems(27);
-  }
-  &_columns-5 {
-    width: rems(34);
-  }
-  &_columns-6 {
-    width: rems(41);
-  }
-  &_columns-7 {
-    width: rems(48);
-  }
-  &_columns-8 {
-    width: rems(55);
-  }
-  &_columns-9 {
-    width: rems(62);
-  }
-  &_columns-10 {
-    width: rems(69);
-  }
-  &_columns-11 {
-    width: rems(76);
-  }
-  &_columns-12 {
-    width: rems(83);
-  }
-
   &:hover {
     border: rems(0.0625) solid $color_white;
     box-shadow: $box-shadow_hover;
