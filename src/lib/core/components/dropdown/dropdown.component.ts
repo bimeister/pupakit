@@ -8,6 +8,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  Output,
   ViewChild
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -41,7 +42,7 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
   @Input() public items: DropdownItem<T>[];
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
-  @Input() public select: EventEmitter<T> = new EventEmitter<T>();
+  @Output() public select: EventEmitter<T> = new EventEmitter<T>();
 
   public topPx: number = 0;
   public leftPx: number = 0;
