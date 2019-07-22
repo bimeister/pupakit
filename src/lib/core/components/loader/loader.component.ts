@@ -26,7 +26,7 @@ export enum ElementState {
           transform: 'scale(1)'
         })
       ),
-      transition('false => true', animate('0.5s ease-out')),
+      transition('false => true', animate('0.4s ease-out')),
       transition('true => false', animate('0.5s cubic-bezier(0.5, 1, 1, 1.2)'))
     ]),
     trigger('rectangleAppeared', [
