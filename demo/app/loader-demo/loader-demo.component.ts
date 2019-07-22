@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import combos from 'combos';
 
 @Component({
   selector: 'demo-loader',
@@ -7,8 +6,4 @@ import combos from 'combos';
   templateUrl: './loader-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoaderDemoComponent {
-  public readonly combos: any[] = combos({
-    size: ['32px', '16px', '14px']
-  });
-}
+export class LoaderDemoComponent {}
