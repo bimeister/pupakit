@@ -10,10 +10,10 @@ import { Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent implements OnDestroy {
-  private subscription: Subscription = new Subscription();
-  public sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
+  private readonly subscription: Subscription = new Subscription();
+  public readonly sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
 
-  public combos: any[] = combos({
+  public readonly combos: any[] = combos({
     size: ['medium', 'small'],
     placeholder: ['placeholder'],
     disabled: [false, true],
@@ -21,7 +21,9 @@ export class InputDemoComponent implements OnDestroy {
   });
 
   constructor() {
+    /* tslint:disable */
     this.subscription.add(this.sampleFormControl.valueChanges.subscribe(console.log));
+    /* tslint:enable */
   }
 
   public ngOnDestroy(): void {

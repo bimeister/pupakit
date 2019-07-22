@@ -24,4 +24,9 @@ main {
 .index-item {
   display: block;
   padding: rems(0.5);
+  text-transform: capitalize;
+
+  &.active {
+    background: rgba($color_grey-ivory, 0.1);
+  }
 }

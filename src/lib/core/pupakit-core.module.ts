@@ -8,6 +8,7 @@ import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TileComponent } from './components/tile/tile.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -16,7 +17,8 @@ const CORE_COMPONENTS: any[] = [
   SpinnerComponent,
   TileComponent,
   ControlTextComponent,
-  LoaderComponent
+  LoaderComponent,
+  DropdownComponent
 ];
 
 @NgModule({

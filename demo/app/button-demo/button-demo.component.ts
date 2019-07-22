@@ -10,9 +10,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ButtonDemoComponent {
 
-  public isLoaderVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isLoaderVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public combos: any[] = combos({
+  public readonly combos: any[] = combos({
     type: ['solid', 'outlined', 'link'],
     color: ['normal', 'negative', 'positive', 'alert'],
     size: ['large', 'medium', 'small'],

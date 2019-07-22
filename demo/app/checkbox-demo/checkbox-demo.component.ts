@@ -9,14 +9,16 @@ import combos from 'combos';
 })
 export class CheckboxDemoComponent {
 
-  public combos: any[] = combos({
+  public readonly combos: any[] = combos({
     value: [true],
     indeterminate: [true, false],
     disabled: [false, true],
     label: ['', 'sample-text']
   });
 
+  /* tslint:disable */
   public log(v: any): void {
     console.log(v);
   }
+  /* tslint:enable */
 }

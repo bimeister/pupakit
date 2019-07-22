@@ -1,0 +1,10 @@
+<textarea class="placeholder" (mousedown)="onMousedown()"></textarea>
+<div class="container">
+  <div class="trigger" #trigger>click me</div>
+  <div class="trigger trigger_big" #triggerBig>click me</div>
+
+  <pupa-dropdown [anchor]="trigger" [items]="items" [positionChange$]="positionChange$"></pupa-dropdown>
+  <pupa-dropdown [anchor]="triggerBig" [items]="items" [positionChange$]="positionChange$"></pupa-dropdown>
+
+  <textarea class="placeholder" #placeholder (mousedown)="onMousedown()"></textarea>
+</div>
