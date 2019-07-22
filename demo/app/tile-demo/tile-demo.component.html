@@ -1,1 +1,6 @@
-<pupa-tile class="group"></pupa-tile>
+<h1>
+  Tile
+</h1>
+<div class="group">
+  <pupa-tile *ngFor="let combo of combos" [columns]="combo.columns"></pupa-tile>
+</div>
