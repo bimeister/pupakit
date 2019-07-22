@@ -10,6 +10,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
+import { TileDemoComponent } from './tile-demo/tile-demo.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
     CheckboxDemoComponent,
     ButtonDemoComponent,
     DropdownDemoComponent,
+    TileDemoComponent
   ],
   imports: [BrowserModule, FormsModule, ReactiveFormsModule, PupakitCore, RouterModule.forRoot(
     [
@@ -43,6 +45,10 @@ import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
       {
         path: 'dropdown',
         component: DropdownDemoComponent
+      },
+      {
+        path: 'tile',
+        component: TileDemoComponent,
       },
       {
         path: '',

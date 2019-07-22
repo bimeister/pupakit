@@ -16,7 +16,7 @@ import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper'
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
-  private sub: Subscription = new Subscription();
+  private readonly sub: Subscription = new Subscription();
   @ViewChild('dropdown', {static: true}) public dropdownRef: ElementRef<HTMLDivElement>;
   public get dropdown(): HTMLDivElement {
     return this.dropdownRef.nativeElement;
@@ -29,12 +29,12 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
   public topPx: number = 0;
   public leftPx: number = 0;
   public widthPx: number = 0;
-  private offsetTopPx: number = 4;
+  private readonly offsetTopPx: number = 4;
 
   public open: boolean = false;
 
   constructor(
-    private cDRef: ChangeDetectorRef
+    private readonly cDRef: ChangeDetectorRef
   ) {
   }
 
@@ -66,7 +66,7 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   @HostListener('window:scroll')
-  public checkPosition: () => void  = (): void => {
+  public readonly checkPosition: () => void  = (): void => {
     if (!this.anchor || !this.dropdown) {
       return;
     }

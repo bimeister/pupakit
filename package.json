@@ -7,7 +7,7 @@
   },
   "scripts": {
     "ng": "ng",
-    "build": "ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
+    "build": "npm run lint && ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
     "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:styles",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
