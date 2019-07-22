@@ -12,7 +12,6 @@ import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 
-
 @NgModule({
   bootstrap: [AppComponent],
   declarations: [
@@ -24,8 +23,12 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     DropdownDemoComponent,
     TileDemoComponent
   ],
-  imports: [BrowserModule, FormsModule, ReactiveFormsModule, PupakitCore, RouterModule.forRoot(
-    [
+  imports: [
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
+    PupakitCore,
+    RouterModule.forRoot([
       {
         path: 'loader',
         component: LoaderDemoComponent
@@ -48,14 +51,14 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
       },
       {
         path: 'tile',
-        component: TileDemoComponent,
+        component: TileDemoComponent
       },
       {
         path: '',
         component: AppComponent
       }
-    ]
-  )],
+    ])
+  ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

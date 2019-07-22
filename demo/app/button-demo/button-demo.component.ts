@@ -9,7 +9,6 @@ import { BehaviorSubject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonDemoComponent {
-
   public readonly isLoaderVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly combos: any[] = combos({
@@ -40,5 +39,4 @@ export class ButtonDemoComponent {
       this.isLoaderVisible$.next(false);
     }, delay);
   }
-
 }

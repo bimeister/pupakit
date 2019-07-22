@@ -1,8 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component, HostListener
-} from '@angular/core';
-import { DropdownItem } from '../../../src/lib/interfaces/dropdown-item';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
+import { DropdownItem } from '../../../src/lib/core/components/dropdown/dropdown.component';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -17,10 +14,9 @@ export class DropdownDemoComponent {
   private detect: boolean = false;
 
   public open: boolean = false;
-  public lorems: string [] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
   Beatae cum cupiditate eos ex facilis, fuga fugiat modi natus nisi obcaecati possimus reprehenderit.
   Animi deleniti illo modi officia rem sapiente! Sint!`.split(' ');
-
 
   public icons: string[] = ['airplane', 'add', 'arrow-forward'];
 

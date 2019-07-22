@@ -1,4 +1,3 @@
-
 <h1>
   Input
 </h1>
@@ -12,7 +11,9 @@
       [formControl]="sampleFormControl"
       [valid]="sampleFormControl.valid"
       [type]="combo.type"
-      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}, type: {{combo.type}}"
+      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}, type: {{
+        combo.type
+      }}"
     ></pupa-input>
     <pupa-control-text *ngIf="sampleFormControl.valid && !combo.disabled">
       helper text

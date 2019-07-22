@@ -14,7 +14,6 @@ label {
   min-width: 100px;
 }
 
-
 .pupa-dropdown__item {
   cursor: pointer;
   padding: 0 8px;
@@ -43,6 +42,6 @@ label {
   }
   &_right {
     margin-left: 8px;
-    flex: 0 0 24px
+    flex: 0 0 24px;
   }
 }

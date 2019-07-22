@@ -2,12 +2,29 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Component, ElementRef, EventEmitter, HostListener,
-  Input, OnDestroy, ViewChild
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  ViewChild
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { DropdownItem } from '../../../interfaces/dropdown-item';
 import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
+
+export interface IconData {
+  name?: string;
+  src?: string;
+  color?: string;
+}
+
+export interface DropdownItem<T> {
+  caption: string;
+  iconLeft?: IconData;
+  iconRight?: IconData;
+  data: T;
+}
 
 @Component({
   selector: 'pupa-dropdown',
@@ -17,7 +34,7 @@ import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper'
 })
 export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
   private readonly sub: Subscription = new Subscription();
-  @ViewChild('dropdown', {static: true}) public dropdownRef: ElementRef<HTMLDivElement>;
+  @ViewChild('dropdown', { static: true }) public dropdownRef: ElementRef<HTMLDivElement>;
   public get dropdown(): HTMLDivElement {
     return this.dropdownRef.nativeElement;
   }
@@ -33,10 +50,7 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
 
   public open: boolean = false;
 
-  constructor(
-    private readonly cDRef: ChangeDetectorRef
-  ) {
-  }
+  constructor(private readonly cDRef: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
     if (!this.anchor) {
@@ -66,15 +80,16 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
 
   @HostListener('window:resize')
   @HostListener('window:scroll')
-  public readonly checkPosition: () => void  = (): void => {
+  public readonly checkPosition: () => void = (): void => {
     if (!this.anchor || !this.dropdown) {
       return;
     }
     const box: ClientRect = this.anchor.getBoundingClientRect();
     const dropDownBottom: number = box.top + box.height + this.offsetTopPx + this.dropdown.clientHeight;
-    this.topPx = dropDownBottom < window.innerHeight
-      ? this.topPx = box.top + box.height + this.offsetTopPx
-      : this.topPx = box.top + box.height - this.dropdown.clientHeight;
+    this.topPx =
+      dropDownBottom < window.innerHeight
+        ? (this.topPx = box.top + box.height + this.offsetTopPx)
+        : (this.topPx = box.top + box.height - this.dropdown.clientHeight);
 
     this.leftPx = box.left;
     this.widthPx = box.width;
@@ -86,8 +101,8 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
     if (!this.anchor || !this.dropdownRef.nativeElement) {
       return;
     }
-    const clickedInside: boolean = this.anchor.contains(event.target as Node)
-      || this.dropdownRef.nativeElement.contains(event.target as Node);
+    const clickedInside: boolean =
+      this.anchor.contains(event.target as Node) || this.dropdownRef.nativeElement.contains(event.target as Node);
     if (!clickedInside) {
       this.toggle(false);
     }
@@ -97,5 +112,4 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
     this.select.emit(item.data);
     this.toggle(false);
   }
-
 }
