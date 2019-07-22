@@ -1,15 +1,17 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
-import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
-import { InputDemoComponent } from './input-demo/input-demo.component';
-import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
-import { ButtonDemoComponent } from './button-demo/button-demo.component';
-import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
+
 import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
+import { AppComponent } from './app.component';
+import { ButtonDemoComponent } from './button-demo/button-demo.component';
+import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
+import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
+import { InputDemoComponent } from './input-demo/input-demo.component';
+import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 
 @NgModule({
@@ -21,14 +23,20 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     CheckboxDemoComponent,
     ButtonDemoComponent,
     DropdownDemoComponent,
-    TileDemoComponent
+    TileDemoComponent,
+    SpinnerDemoComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     PupakitCore,
     RouterModule.forRoot([
+      {
+        path: 'spinner',
+        component: SpinnerDemoComponent
+      },
       {
         path: 'loader',
         component: LoaderDemoComponent
