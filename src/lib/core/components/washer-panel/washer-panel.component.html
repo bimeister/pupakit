@@ -1,0 +1,44 @@
+<div
+  class="washer-panel"
+  #containerElement
+  [@isPanelExpanded]="isPanelExpanded$ | async"
+  [style.marginBottom.px]="(marginBottom$ | async) - remSizePx * 5"
+>
+  <div
+    (mouseenter)="setPanelExpansionState('true')"
+    (mouseleave)="setPanelExpansionState('false')"
+    class="washer-panel__disk washer-panel__disk_external"
+    [style.width.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
+    [style.height.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
+  ></div>
+  <div
+    (mouseenter)="setPanelExpansionState('true')"
+    (mouseleave)="setPanelExpansionState('false')"
+    class="washer-panel__disk washer-panel__disk_middle"
+    [style.width.px]="(middleDiskRadiusPx$ | async) * 2"
+    [style.height.px]="(middleDiskRadiusPx$ | async) * 2"
+    #middleDiskElement
+  >
+    <div
+      *ngFor="let button of buttons$ | async; index as index; trackBy: trackByActionName"
+      class="washer-panel__button-container"
+      [class.washer-panel__button-container_visible]="!((rotations$ | async)[index] | isNullOrUndefined)"
+      [style.transform]="'rotate(' + (rotations$ | async)[index] + 'rad)'"
+    >
+      <pupa-icon-button color="dark" size="medium">
+        <ion-icon
+          [style.transform]="'rotate(-' + (rotations$ | async)[index] + 'rad)'"
+          [name]="button.icon"
+          class="washer-panel__button"
+        ></ion-icon>
+      </pupa-icon-button>
+    </div>
+  </div>
+  <div
+    (mouseenter)="setPanelExpansionState('true')"
+    (mouseleave)="setPanelExpansionState('false')"
+    class="washer-panel__disk washer-panel__disk_internal"
+    [style.width.px]="(middleDiskRadiusPx$ | async) * 2 - remSizePx * 5"
+    [style.height.px]="(middleDiskRadiusPx$ | async) * 2 - remSizePx * 5"
+  ></div>
+</div>

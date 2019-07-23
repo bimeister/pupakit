@@ -8,18 +8,19 @@ import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
+import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
+import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
-import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
-import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
-import { RatingDemoComponent } from './rating-demo/rating-demo.component';
-import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
+import { TileDemoComponent } from './tile-demo/tile-demo.component';
+import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -39,6 +40,8 @@ import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.
     DroppableDemoComponent,
     RatingDemoComponent,
     DaySelectorDemoComponent
+    WasherPanelDemoComponent,
+    IconButtonDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +110,11 @@ import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.
       {
         path: 'day-selector',
         component: DaySelectorDemoComponent
+      },
+      { path: 'washer-panel', component: WasherPanelDemoComponent },
+      {
+        path: '',
+        component: AppComponent
       }
     ])
   ],
