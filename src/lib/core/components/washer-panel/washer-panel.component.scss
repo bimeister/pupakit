@@ -1,0 +1,89 @@
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+
+:host {
+  z-index: 2000;
+}
+
+// .washer-container {
+//   overflow: visible;
+//   position: relative;
+//   height: 1px;
+//   @include transition(#{margin, height, width}, 0.32s);
+//   @include flex-container(column, center, center, nowrap);
+// }
+
+.washer-panel {
+  // width: rems(58);
+  // height: rems(58);
+  position: relative;
+  margin-bottom: 0;
+  margin-top: rems(3);
+  @include transition(#{margin, height, width}, 0.32s);
+  @include flex-container(column, center, flex-start, nowrap);
+}
+
+.washer-panel__disk {
+  position: absolute;
+  background: $color_main-blue;
+  border-radius: 50%;
+  @include transition(#{margin, height, width}, 0.32s);
+
+  &_external {
+    // opacity: 0;
+    margin: 0;
+    background: $color_active-blue;
+    z-index: 2001;
+    min-height: rems(25);
+    min-width: rems(25);
+  }
+
+  &_middle {
+    margin: rems(2.5) 0 0 0;
+    background: $color_main-blue;
+    z-index: 2002;
+    min-height: rems(20);
+    min-width: rems(20);
+    @include flex-container(column, center, center, nowrap);
+  }
+
+  &_internal {
+    margin: rems(5) 0 0 0;
+    background: $color_main-dark;
+    z-index: 2003;
+    min-height: rems(15);
+    min-width: rems(15);
+  }
+}
+
+.washer-panel__button-container {
+  padding: 0 0 0 rems(0.075);
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  color: $color_white;
+  opacity: 0;
+  @include transition(#{transform, opacity});
+
+  &_visible {
+    opacity: 1;
+  }
+
+  &:first-child {
+    background: red;
+  }
+
+  &:last-child {
+    background: red;
+  }
+
+  @include flex-container(row, center, space-between, nowrap);
+}
+
+.washer-panel__button {
+  @include transition(#{transform});
+
+  display: block;
+  position: absolute;
+}
