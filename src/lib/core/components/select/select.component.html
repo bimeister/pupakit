@@ -1,0 +1,32 @@
+<div class="pupa-select" [class.disabled]="disabled" #anchor>
+  <div class="selected-value">
+    <ion-icon
+      class="pupa-dropdown__icon pupa-dropdown__icon_left"
+      *ngIf="selectedItem?.iconLeft"
+      [name]="selectedItem.iconLeft.name"
+      [src]="selectedItem.iconLeft.src"
+      [style.color]="selectedItem.iconLeft.color"
+    ></ion-icon>
+
+    {{ selectedItem.caption }}
+
+    <ion-icon
+      class="pupa-dropdown__icon pupa-dropdown__icon_right"
+      *ngIf="selectedItem?.iconRight"
+      [name]="selectedItem.iconRight.name"
+      [src]="selectedItem.iconRight.src"
+      [style.color]="selectedItem.iconRight.color"
+    ></ion-icon>
+  </div>
+  <div class="arrow">
+    <ion-icon name="ios-arrow-down"></ion-icon>
+  </div>
+</div>
+
+<pupa-dropdown
+  [anchor]="anchor"
+  [items]="items"
+  (select)="writeValue($event)"
+  [positionChange$]="positionChange$"
+  *ngIf="!disabled"
+></pupa-dropdown>

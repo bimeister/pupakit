@@ -1,0 +1,49 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  display: block;
+}
+
+.pupa-select {
+  display: flex;
+  height: rems(2);
+  border-radius: rems(0.5);
+  border: 1px solid $color_grey-ivory;
+  background-color: white;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 rems(2) 0 12px;
+  cursor: pointer;
+  position: relative;
+
+  &.disabled {
+    cursor: default;
+    filter: grayscale(1);
+    opacity: 0.8;
+  }
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: rems(2);
+  width: rems(2);
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.selected-value {
+  display: flex;
+  align-items: center;
+}
+
+.pupa-dropdown__icon {
+  flex: auto;
+}
+
+.pupa-dropdown {
+  position: fixed;
+}

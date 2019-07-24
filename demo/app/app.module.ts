@@ -13,6 +13,7 @@ import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
+import { SelectDemoComponent } from './select-demo/select-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -24,7 +25,8 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     ButtonDemoComponent,
     DropdownDemoComponent,
     TileDemoComponent,
-    SpinnerDemoComponent
+    SpinnerDemoComponent,
+    SelectDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +62,10 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
       {
         path: 'tile',
         component: TileDemoComponent
+      },
+      {
+        path: 'select',
+        component: SelectDemoComponent
       },
       {
         path: '',
