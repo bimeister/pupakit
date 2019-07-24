@@ -10,10 +10,10 @@
   height: rems(2);
   border-radius: rems(0.5);
   border: 1px solid $color_grey-ivory;
-  background-color: white;
+  background-color: $color_white;
   align-items: center;
   justify-content: space-between;
-  padding: 0 rems(2) 0 12px;
+  padding: 0 rems(2) 0 rems(0.75);
   cursor: pointer;
   position: relative;
 
