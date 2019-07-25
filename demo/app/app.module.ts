@@ -38,6 +38,11 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     PupakitCore,
     RouterModule.forRoot([
       {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: '/loader'
+      },
+      {
         path: 'spinner',
         component: SpinnerDemoComponent
       },
@@ -72,10 +77,6 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
       {
         path: 'select',
         component: SelectDemoComponent
-      },
-      {
-        path: '',
-        component: AppComponent
       }
     ])
   ],
