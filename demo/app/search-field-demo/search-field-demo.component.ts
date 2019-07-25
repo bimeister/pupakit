@@ -12,4 +12,8 @@ export class SearchFieldDemoComponent {
     kind: ['solid', 'outlined'],
     expandable: [true, false]
   });
+
+  public log(...data: unknown[]): void {
+    console.log(...data);
+  }
 }
