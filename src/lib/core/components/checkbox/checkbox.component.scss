@@ -9,7 +9,7 @@
 .checkbox {
   width: rems(1);
   height: rems(1);
-  border: rems(0.0625) solid $color_grey-ivory;
+  border: 1px solid $color_grey-ivory;
   background: $color_white;
   cursor: pointer;
   border-radius: rems(0.25);
@@ -18,11 +18,11 @@
   @include flex-container(row, center, center, nowrap);
   &_with-marker {
     background: $color_active-blue;
-    border: rems(0.0625) solid $color_active-blue;
+    border: 1px solid $color_active-blue;
   }
   &_disabled {
     cursor: not-allowed;
-    border: rems(0.0625) solid $color_grey-apple;
+    border: 1px solid $color_grey-apple;
   }
   &_indeterminate {
     background: $color_white;

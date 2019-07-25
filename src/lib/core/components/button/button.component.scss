@@ -104,9 +104,9 @@
 
 @mixin button-color($background-color, $color, $border-color: none) {
   @if $border-color == 'none' {
-    border: rems(0.0625) solid #{$background-color};
+    border: 1px solid #{$background-color};
   } @else {
-    border: rems(0.0625) solid #{$border-color};
+    border: 1px solid #{$border-color};
   }
   background: $background-color;
   .button__icon,

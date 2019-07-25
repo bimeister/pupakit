@@ -53,7 +53,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 
 .search-field.search-field_outlined {
   .search-field__switcher {
-    border: rems(0.0625) solid transparent;
+    border: 1px solid transparent;
 
     .search-field__switcher-icon {
       background: $color_white;
@@ -61,7 +61,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   }
   .search-field__control {
     background: $color_white;
-    border: rems(0.0625) solid $color_grey-apple;
+    border: 1px solid $color_grey-apple;
   }
 }
 
