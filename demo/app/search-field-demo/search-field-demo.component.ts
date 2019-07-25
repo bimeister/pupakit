@@ -14,6 +14,7 @@ export class SearchFieldDemoComponent {
   });
 
   public log(...data: unknown[]): void {
+    // tslint:disable-next-line: no-console
     console.log(...data);
   }
 }

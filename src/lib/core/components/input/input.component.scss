@@ -19,7 +19,7 @@
   outline: none;
   @include transition(#{'background, border'});
   color: $color_grey-text;
-  border: rems(0.0625) solid $color_grey-ivory;
+  border: 1px solid $color_grey-ivory;
 
   &::placeholder {
     position: absolute;
@@ -28,11 +28,11 @@
   }
 
   &:focus {
-    border: rems(0.0625) solid $color_active-blue;
+    border: 1px solid $color_active-blue;
   }
 
   &:disabled {
-    border: rems(0.0625) solid $color_grey-apple;
+    border: 1px solid $color_grey-apple;
     color: $color_grey-apple;
     cursor: not-allowed;
     user-select: none;
@@ -45,7 +45,7 @@
 
 // state
 .input[value=''] {
-  border: rems(0.0625) solid $color_grey-apple;
+  border: 1px solid $color_grey-apple;
 }
 
 .input_medium {
@@ -57,7 +57,7 @@
 
 .input_invalid,
 .input:focus.input_invalid {
-  border: rems(0.0625) solid $color_error;
+  border: 1px solid $color_error;
 }
 
 // size

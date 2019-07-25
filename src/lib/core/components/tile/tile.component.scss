@@ -7,13 +7,13 @@
   box-sizing: border-box;
   border-radius: rems(0.5);
   background: $color_white;
-  border: rems(0.0625) solid $color_grey-apple;
+  border: 1px solid $color_grey-apple;
   padding: rems(1);
   @include transition(#{border, box-shadow});
   @include flex-container(column, flex-start, flex-start, nowrap);
 
   &:hover {
-    border: rems(0.0625) solid $color_white;
+    border: 1px solid $color_white;
     box-shadow: $box-shadow_hover;
   }
 }
