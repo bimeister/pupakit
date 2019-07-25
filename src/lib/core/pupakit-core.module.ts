@@ -4,12 +4,13 @@ import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
+import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TileComponent } from './components/tile/tile.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
-import { SelectComponent } from './components/select/select.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -20,7 +21,8 @@ const CORE_COMPONENTS: any[] = [
   ControlTextComponent,
   LoaderComponent,
   DropdownComponent,
-  SelectComponent
+  SelectComponent,
+  IconButtonComponent
 ];
 
 @NgModule({
