@@ -9,7 +9,7 @@
   display: flex;
   height: rems(2);
   border-radius: rems(0.5);
-  border: 1px solid $color_grey-ivory;
+  border: rems(0.0625) solid $color_grey-ivory;
   background-color: $color_white;
   align-items: center;
   justify-content: space-between;

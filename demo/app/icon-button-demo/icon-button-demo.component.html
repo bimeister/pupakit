@@ -1,0 +1,14 @@
+<h1>
+  Icon button
+</h1>
+<div class="group">
+  <pupa-icon-button
+    *ngFor="let combo of combos"
+    [color]="combo.color"
+    [active]="combo.active"
+    [disabled]="combo.disabled"
+    [size]="combo.size"
+  >
+    <ion-icon name="close-circle"></ion-icon>
+  </pupa-icon-button>
+</div>
