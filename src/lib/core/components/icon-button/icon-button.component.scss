@@ -1,0 +1,71 @@
+@import 'mixins';
+@import 'variables';
+@import 'functions';
+
+.button {
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  width: rems(1.5);
+  height: rems(1.5);
+  font-size: rems(0.75);
+  border: none;
+  border-radius: 50%;
+  @include regular();
+  @include transition(#{'background, color'});
+  @include inline-flex-container(row, center, space-evenly, nowrap);
+
+  &_small {
+    width: rems(1.5);
+    height: rems(1.5);
+    font-size: rems(0.75);
+  }
+
+  &_medium {
+    width: rems(2.25);
+    height: rems(2.25);
+    font-size: rems(1.25);
+  }
+
+  &_large {
+    width: rems(4);
+    height: rems(4);
+    font-size: rems(2.375);
+  }
+
+  &_light {
+    background: $color_white;
+    color: $color_main-blue;
+  }
+
+  &_dark {
+    background: $color_main-blue;
+    color: $color_white;
+  }
+
+  &_active {
+    color: $color_white;
+  }
+
+  &:hover:not(:disabled) {
+    background: $color_active-blue;
+    color: $color_white;
+  }
+}
+
+.button_light.button_active {
+  background: $color_main-blue;
+}
+.button_dark.button_active {
+  background: $color_active-blue;
+}
+
+.button_light:disabled {
+  color: rgba($color_main-blue, 0.3);
+  background: $color_white;
+}
+.button_dark:disabled {
+  color: rgba($color_light-blue, 0.3);
+  background: $color_main-blue;
+}
