@@ -30,6 +30,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
   }
   @Input() public disabled: boolean = false;
   @Input() public positionChange$: Observable<void>;
+  @Input() public id: string;
   @Output() public input: EventEmitter<T> = new EventEmitter<T>();
 
   public get value(): T {

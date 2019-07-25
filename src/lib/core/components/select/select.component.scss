@@ -38,6 +38,8 @@
 .selected-value {
   display: flex;
   align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .pupa-dropdown__icon {
