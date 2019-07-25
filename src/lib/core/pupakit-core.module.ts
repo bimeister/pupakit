@@ -8,6 +8,7 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TileComponent } from './components/tile/tile.component';
@@ -22,7 +23,8 @@ const CORE_COMPONENTS: any[] = [
   LoaderComponent,
   DropdownComponent,
   SelectComponent,
-  IconButtonComponent
+  IconButtonComponent,
+  SearchFieldComponent
 ];
 
 @NgModule({

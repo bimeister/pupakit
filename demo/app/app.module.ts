@@ -12,6 +12,7 @@ import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
@@ -28,7 +29,8 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     TileDemoComponent,
     SpinnerDemoComponent,
     SelectDemoComponent,
-    IconButtonDemoComponent
+    IconButtonDemoComponent,
+    SearchFieldDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,10 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
       {
         path: 'input',
         component: InputDemoComponent
+      },
+      {
+        path: 'search-field',
+        component: SearchFieldDemoComponent
       },
       {
         path: 'dropdown',

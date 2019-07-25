@@ -1,0 +1,23 @@
+<h1>
+  SearchField
+</h1>
+<div class="group">
+  <ng-container *ngFor="let combo of combos">
+    <pupa-search-field
+      *ngIf="!combo.expandable"
+      class="search-field"
+      placeholder="Введите название"
+      [expandable]="combo.expandable"
+      [kind]="combo.kind"
+    ></pupa-search-field>
+
+    <div class="expansion-container" *ngIf="combo.expandable">
+      <pupa-search-field
+        class="search-field"
+        placeholder="Введите название"
+        [expandable]="combo.expandable"
+        [kind]="combo.kind"
+      ></pupa-search-field>
+    </div>
+  </ng-container>
+</div>
