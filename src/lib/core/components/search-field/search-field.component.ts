@@ -1,5 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  ViewChild
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 
@@ -37,6 +46,14 @@ export class SearchFieldComponent {
   @Input() public placeholder: string = '';
   @Input() public expandable: boolean = false;
   @Input() public kind: SearchFieldKind = 'solid';
+  @Input()
+  public get value(): string {
+    return this.isValueEmpty ? '' : this.inputValueControl.value;
+  }
+  public set value(newValue: string) {
+    this.inputValueControl.setValue(newValue);
+  }
+  @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
   @HostBinding('class.pupa-search-field_expandable')
   public get isExoandable(): boolean {
     return this.expandable;

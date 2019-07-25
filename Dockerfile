@@ -20,6 +20,7 @@ ARG PUSH
 RUN npm cache clean --force
 RUN npm ci
 RUN npm run lint:inspect
+RUN npm run prettier:check
 RUN npm run build
 RUN apt update && \
   apt install -y jq && \
