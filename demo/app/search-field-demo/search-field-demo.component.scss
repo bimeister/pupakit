@@ -1,0 +1,17 @@
+@import './../../../src/styles/mixins.scss';
+@import './../../../src/styles/functions.scss';
+
+.group {
+  @include flex-container(row, center, flex-end, nowrap);
+
+  & > * {
+    margin: rems(0.5);
+  }
+}
+
+.expansion-container {
+  position: relative;
+  width: 300px;
+  background: grey;
+  height: rems(2);
+}

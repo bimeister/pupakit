@@ -1,0 +1,121 @@
+@import 'mixins';
+@import 'variables';
+
+$width_switcher: rems(2.8125);
+$padding-side_swither-icon: $width_switcher - $font-size_base-text;
+
+:host {
+  z-index: 2000;
+  width: auto;
+  overflow: hidden;
+
+  &_expandable {
+    width: $width_switcher;
+    overflow: visible;
+  }
+}
+
+.search-field {
+  z-index: 2001;
+  height: rems(2);
+  width: rems(16);
+  position: relative;
+  @include flex-container(row, center, space-between, nowrap);
+
+  &:not(.search-field_expandable).search-field_empty:hover {
+    .search-field__switcher {
+      color: $color_active-blue;
+    }
+    .search-field__control {
+      cursor: pointer;
+
+      &:focus {
+        cursor: text;
+      }
+      &::placeholder {
+        color: $color_grey-ivory;
+      }
+    }
+  }
+}
+
+.search-field.search-field_expandable {
+  width: 100%;
+  top: 0;
+  right: 0;
+  position: absolute;
+
+  .search-field__control {
+    width: $width_switcher;
+    padding: rems(0.5);
+  }
+}
+
+.search-field.search-field_outlined {
+  .search-field__switcher {
+    border: rems(0.0625) solid transparent;
+
+    .search-field__switcher-icon {
+      background: $color_white;
+    }
+  }
+  .search-field__control {
+    background: $color_white;
+    border: rems(0.0625) solid $color_grey-apple;
+  }
+}
+
+.search-field__switcher {
+  z-index: 2003;
+  order: 2;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  width: $width_switcher;
+  height: rems(2);
+  border-radius: rems(1.375);
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: $font-size_base-text;
+  color: $color_grey-ivory;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @include transition(color);
+  @include flex-container(column, center, center, nowrap);
+
+  &:hover {
+    color: $color_active-blue;
+  }
+
+  .search-field__switcher-icon {
+    box-sizing: content-box;
+    padding: 0 calc((#{$width_switcher} - #{$font-size_base-text}) / 3);
+    background: $color_light-blue;
+  }
+}
+
+.search-field__control {
+  z-index: 2002;
+  order: 1;
+  height: rems(2);
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: rems(1.375);
+  background: $color_light-blue;
+  border: none;
+  outline: none;
+  font-size: $font-size_base-text;
+  padding: rems(0.5) $width_switcher rems(0.5) rems(0.75);
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  &::placeholder {
+    color: $color_grey-light;
+    user-select: none;
+    @include transition(color);
+  }
+}
