@@ -12,6 +12,7 @@ export class IconButtonDemoComponent {
     color: ['dark', 'light'],
     active: [true, false],
     disabled: [true, false],
-    size: ['small', 'medium', 'large']
+    size: ['small', 'medium', 'large'],
+    isFloat: [true, false]
   });
 }

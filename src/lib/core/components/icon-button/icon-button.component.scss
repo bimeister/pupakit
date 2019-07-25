@@ -48,6 +48,10 @@
     color: $color_white;
   }
 
+  &_float {
+    box-shadow: 0 rems(0.75) rems(2) 0 rgba($color_black, 0.15);
+  }
+
   &:hover:not(:disabled) {
     background: $color_active-blue;
     color: $color_white;

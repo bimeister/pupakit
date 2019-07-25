@@ -2,6 +2,7 @@
   #buttonElement
   class="button"
   [ngClass]="resultClassList"
+  [class.button_float]="isFloat"
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event)"
 >
