@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Ou
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export type ButtonType = 'solid' | 'outlined' | 'link';
+export type ButtonStyle = 'solid' | 'outlined' | 'link';
+export type ButtonType = 'submit' | 'button';
 export type ButtonSize = 'large' | 'medium' | 'small';
 export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
 export type ButtonIconPosition = 'left' | 'right';
@@ -19,8 +20,8 @@ export interface ButtonIcon {
 })
 export class ButtonComponent {
   @ViewChild('buttonElement', { static: true }) public buttonElement: ElementRef<HTMLButtonElement>;
-
-  @Input() public type: ButtonType = 'solid';
+  @Input() public type: ButtonType = 'submit';
+  @Input() public style: ButtonStyle = 'solid';
   @Input() public size: ButtonSize = 'medium';
   @Input() public color: ButtonColor = 'normal';
   @Input() public disabled: boolean = false;
@@ -30,7 +31,7 @@ export class ButtonComponent {
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   public get resultClassList(): string[] {
-    return [this.type, this.size, this.color, this.loader ? 'with-loader' : null]
+    return [this.style, this.size, this.color, this.loader ? 'with-loader' : null]
       .filter((innerClass: string) => !isNullOrUndefined(innerClass))
       .map((innerProperty: string) => `button_${innerProperty}`);
   }

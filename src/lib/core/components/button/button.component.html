@@ -2,6 +2,7 @@
   #buttonElement
   class="button"
   [ngClass]="resultClassList"
+  [type]="type"
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event)"
 >
