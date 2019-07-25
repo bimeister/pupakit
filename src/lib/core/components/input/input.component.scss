@@ -19,7 +19,7 @@
   outline: none;
   @include transition(#{'background, border'});
   color: $color_grey-text;
-  border: 1px solid $color_grey-ivory;
+  border: rems(0.0625) solid $color_grey-ivory;
 
   &::placeholder {
     position: absolute;
@@ -45,7 +45,7 @@
 
 // state
 .input[value=''] {
-  border: 1px solid $color_grey-apple;
+  border: rems(0.0625) solid $color_grey-apple;
 }
 
 .input_medium {
@@ -57,7 +57,7 @@
 
 .input_invalid,
 .input:focus.input_invalid {
-  border: 1px solid $color_error;
+  border: rems(0.0625) solid $color_error;
 }
 
 // size

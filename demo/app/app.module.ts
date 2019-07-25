@@ -9,11 +9,12 @@ import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
+import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
-import { SelectDemoComponent } from './select-demo/select-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -26,7 +27,8 @@ import { SelectDemoComponent } from './select-demo/select-demo.component';
     DropdownDemoComponent,
     TileDemoComponent,
     SpinnerDemoComponent,
-    SelectDemoComponent
+    SelectDemoComponent,
+    IconButtonDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,10 @@ import { SelectDemoComponent } from './select-demo/select-demo.component';
       {
         path: 'button',
         component: ButtonDemoComponent
+      },
+      {
+        path: 'icon-button',
+        component: IconButtonDemoComponent
       },
       {
         path: 'checkbox',
