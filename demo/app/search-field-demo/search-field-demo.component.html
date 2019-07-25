@@ -9,6 +9,7 @@
       placeholder="Введите название"
       [expandable]="combo.expandable"
       [kind]="combo.kind"
+      (valueChange)="log($event)"
     ></pupa-search-field>
 
     <div class="expansion-container" *ngIf="combo.expandable">
@@ -17,6 +18,7 @@
         placeholder="Введите название"
         [expandable]="combo.expandable"
         [kind]="combo.kind"
+        (valueChange)="log($event)"
       ></pupa-search-field>
     </div>
   </ng-container>

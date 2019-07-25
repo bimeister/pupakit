@@ -6,11 +6,13 @@ import {
   EventEmitter,
   HostBinding,
   Input,
+  OnDestroy,
+  OnInit,
   Output,
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { remSizePx } from './../../../constants/rem-size-px.const';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
@@ -38,7 +40,7 @@ export type SearchFieldKind = 'solid' | 'outlined';
     ])
   ]
 })
-export class SearchFieldComponent {
+export class SearchFieldComponent implements OnInit, OnDestroy {
   @ViewChild('inputElement', { static: true }) public inputElement: ElementRef<HTMLInputElement>;
   public controlExpansionState$: BehaviorSubject<ControlState> = new BehaviorSubject<ControlState>(
     ControlState.collapsed
@@ -69,6 +71,18 @@ export class SearchFieldComponent {
 
   public get isValueEmpty(): boolean {
     return isNullOrUndefined(this.inputValueControl.value) || String(this.inputValueControl.value).length === 0;
+  }
+
+  private readonly subscription: Subscription = new Subscription();
+
+  public ngOnInit(): void {
+    this.subscription.add(
+      this.inputValueControl.valueChanges.subscribe((value: string) => this.valueChange.emit(value))
+    );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public switchState(event: Event): void {
