@@ -4,10 +4,14 @@
   [type]="type"
   [value]="value"
   [placeholder]="placeholder"
-  [ngClass]="resultClassList"
+  [class.input_valid]="touched && valid"
+  [class.input_invaid]="touched && !valid"
+  [id]="id"
+  [name]="name"
   [attr.disabled]="disabled ? true : null"
+  [readOnly]="readonly"
   (input)="updateValue(inputElement.value)"
 />
-<div class="icon" *ngIf="valid && !disabled">
+<div class="icon" *ngIf="showValidateIcon && valid && !disabled">
   <ion-icon name="ios-checkmark-circle"></ion-icon>
 </div>
