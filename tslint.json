@@ -81,7 +81,6 @@
     "no-unnecessary-type-assertion": true,
     "no-unused-expression": false,
     "no-unused-imports": false,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "no-var-requires": true,
     "object-literal-key-quotes": false,

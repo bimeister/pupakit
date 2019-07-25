@@ -15,21 +15,24 @@ export class SelectDemoComponent {
 
   public icons: string[] = ['airplane', 'add', 'arrow-forward'];
 
-  public items: DropdownItem<string>[] = [{
-    caption: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf',
-    data: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf',
-  }, ...this.lorems.map((lorem: string, index: number) => ({
-    caption: lorem,
-    data: lorem,
-    iconLeft: {
-      name: this.icons[index % this.icons.length],
-      color: getRandomColor()
+  public items: DropdownItem<string>[] = [
+    {
+      caption: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf',
+      data: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf'
     },
-    iconRight: {
-      name: this.icons[(index + 1) % this.icons.length],
-      color: getRandomColor()
-    }
-  }))];
+    ...this.lorems.map((lorem: string, index: number) => ({
+      caption: lorem,
+      data: lorem,
+      iconLeft: {
+        name: this.icons[index % this.icons.length],
+        color: getRandomColor()
+      },
+      iconRight: {
+        name: this.icons[(index + 1) % this.icons.length],
+        color: getRandomColor()
+      }
+    }))
+  ];
 
   public form: FormGroup = new FormGroup({
     select: new FormControl()

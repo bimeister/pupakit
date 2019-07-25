@@ -7,6 +7,8 @@
   },
   "scripts": {
     "ng": "ng",
+    "start": "npm run start:demo",
+    "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "build": "npm run lint && ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
     "build:scss": "scss-bundle --config scss-bundle.config.json && npm run copy:styles",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
@@ -14,15 +16,16 @@
     "copy:assets": "npx copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets",
     "copy:styles": "npx copy ./src/styles/**/*.* ./dist/@meistersoft/pupakit/styles",
     "replace-imports": "npx replace-in-file \"/'/assets//g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex",
-    "test": "npm run test:debug",
-    "test:debug": "ng test --configuration=debugging",
-    "test:ci": "ng test --configuration=ci",
     "lint": "npm run lint:inspect",
     "lint:inspect": "ng lint --configuration=inspection",
     "lint:debug": "ng lint --configuration=debugging",
-    "start": "npm run start:demo",
-    "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
-    "prettify": "prettier --write ./**/*.{html,css,scss,json,js,ts} && npm run lint:debug"
+    "lint:prettier": "npm run prettier:check",
+    "prettier:format": "npx prettier --loglevel log --config ./.prettierrc --ignore-path ./.prettierignore --write \"./**/*.{html,css,scss,json,js,ts}\"",
+    "prettier:check": "npx prettier --config ./.prettierrc --ignore-path ./.prettierignore --check \"./**/*.{html,css,scss,json,js,ts}\"",
+    "prettify": "npm run prettier:format && npm run lint:debug",
+    "test": "npm run test:debug",
+    "test:debug": "ng test --configuration=debugging",
+    "test:ci": "ng test --configuration=ci"
   },
   "dependencies": {
     "zone.js": "~0.9.1"
