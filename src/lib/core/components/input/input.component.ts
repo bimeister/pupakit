@@ -1,10 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
-
 export type InputSize = 'medium' | 'small';
-export type InputValid = true | false | null;
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -19,11 +16,15 @@ export type InputValid = true | false | null;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements ControlValueAccessor {
+  @Input() public showValidateIcon: boolean = false;
   @Input() public type: string = 'text';
   @Input() public size: InputSize = 'medium';
-  @Input() public valid: InputValid = null;
+  @Input() public valid: boolean = null;
   @Input() public disabled: boolean = false;
+  @Input() public readonly: boolean = false;
   @Input() public placeholder: string = '';
+  @Input() public id: string;
+  @Input() public name: string;
   @Input()
   public get value(): string {
     return this.valueData;
@@ -34,11 +35,7 @@ export class InputComponent implements ControlValueAccessor {
 
   @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-  public get resultClassList(): string[] {
-    return [this.size, this.getValidationStateClass()]
-      .filter((innerClassName: string) => !isNullOrUndefined(innerClassName))
-      .map((innerProperty: string) => `input_${innerProperty}`);
-  }
+  public touched: boolean = false;
 
   private valueData: string = '';
 
@@ -47,7 +44,10 @@ export class InputComponent implements ControlValueAccessor {
   }
 
   public registerOnTouched(fn: VoidFunction): void {
-    this.onTouched = fn;
+    this.onTouched = (): void => {
+      fn();
+      this.touched = true;
+    };
   }
 
   public writeValue(outerValue: unknown): void {
@@ -61,21 +61,7 @@ export class InputComponent implements ControlValueAccessor {
     this.valueChange.emit(this.value);
   }
 
-  private getValidationStateClass(): string {
-    switch (this.valid) {
-      case true: {
-        return 'valid';
-      }
-      case false: {
-        return 'invalid';
-      }
-      default:
-        return null;
-    }
-  }
-
-  public onChange: CallableFunction = (innerValue: string) => {
-    innerValue;
+  public onChange: CallableFunction = (_innerValue: string) => {
     return;
   };
 
