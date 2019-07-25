@@ -2,6 +2,12 @@
 @import 'mixins';
 @import 'functions';
 
+:host, .button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .button {
   box-sizing: border-box;
   @include regular();
@@ -64,9 +70,6 @@
     @include icon-size(rems(1));
   }
 }
-// .button_large.button_with-loader {
-//   padding: rems(0.625) rems(0.5);
-// }
 
 .button_medium {
   min-width: rems(7);
