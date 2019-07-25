@@ -1,12 +1,17 @@
 <div class="container">
-  <textarea class="placeholder" (mousedown)="onMousedown()"></textarea>
+  <textarea class="placeholder"></textarea>
   <form [formGroup]="form">
-    <pupa-select formControlName="select" [items]="items" [positionChange$]="positionChange$"></pupa-select>
+    <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
     <pupa-select
+      class="mb"
       formControlName="select"
       [items]="items"
-      [positionChange$]="positionChange$"
       [disabled]="true"
     ></pupa-select>
+
+
+  <div class="small-container mb">
+    <pupa-select formControlName="select" [items]="items"></pupa-select>
+  </div>
   </form>
 </div>

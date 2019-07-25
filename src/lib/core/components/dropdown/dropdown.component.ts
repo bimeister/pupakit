@@ -44,6 +44,8 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
   @Input() public positionChange$: Observable<void>;
   @Output() public select: EventEmitter<T> = new EventEmitter<T>();
 
+  private isMouseDown: boolean;
+
   public topPx: number = 0;
   public leftPx: number = 0;
   public widthPx: number = 0;
@@ -78,6 +80,24 @@ export class DropdownComponent<T> implements AfterViewInit, OnDestroy {
     this.open = isNullOrUndefined(value) ? !this.open : value;
     this.cDRef.markForCheck();
   };
+
+  @HostListener('window:mousedown')
+  public onMouseDown(): void {
+    this.isMouseDown = true;
+  }
+
+  @HostListener('window:mouseup')
+  public onMouseUp(): void {
+    this.isMouseDown = false;
+  }
+
+  @HostListener('window:mousemove')
+  public onMouseMove(): void {
+    if (!this.isMouseDown) {
+      return;
+    }
+    this.checkPosition();
+  }
 
   @HostListener('window:resize')
   @HostListener('window:scroll')
