@@ -2,13 +2,6 @@
 @import 'mixins';
 @import 'functions';
 
-:host,
-.button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
 .button {
   appearance: none;
   box-sizing: border-box;
