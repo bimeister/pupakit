@@ -4,23 +4,13 @@
 
 :host {
   z-index: 2000;
+  height: 0;
 }
 
-// .washer-container {
-//   overflow: visible;
-//   position: relative;
-//   height: 1px;
-//   @include transition(#{margin, height, width}, 0.32s);
-//   @include flex-container(column, center, center, nowrap);
-// }
-
 .washer-panel {
-  // width: rems(58);
-  // height: rems(58);
   position: relative;
   margin-bottom: 0;
-  margin-top: rems(3);
-  @include transition(#{margin, height, width}, 0.32s);
+  @include transition(#{bottom, height, width}, 0.32s);
   @include flex-container(column, center, flex-start, nowrap);
 }
 
@@ -28,32 +18,26 @@
   position: absolute;
   background: $color_main-blue;
   border-radius: 50%;
-  @include transition(#{margin, height, width}, 0.32s);
+  @include transition(#{bottom, height, width}, 0.32s);
+  @include flex-container(row, center, center, nowrap);
 
   &_external {
-    // opacity: 0;
     margin: 0;
     background: $color_active-blue;
     z-index: 2001;
-    min-height: rems(25);
-    min-width: rems(25);
   }
 
   &_middle {
     margin: rems(2.5) 0 0 0;
     background: $color_main-blue;
     z-index: 2002;
-    min-height: rems(20);
-    min-width: rems(20);
-    @include flex-container(column, center, center, nowrap);
   }
 
   &_internal {
     margin: rems(5) 0 0 0;
     background: $color_main-dark;
     z-index: 2003;
-    min-height: rems(15);
-    min-width: rems(15);
+    align-items: flex-start;
   }
 }
 
@@ -65,20 +49,11 @@
   color: $color_white;
   opacity: 0;
   @include transition(#{transform, opacity});
+  @include flex-container(row, center, space-between, nowrap);
 
   &_visible {
     opacity: 1;
   }
-
-  &:first-child {
-    background: red;
-  }
-
-  &:last-child {
-    background: red;
-  }
-
-  @include flex-container(row, center, space-between, nowrap);
 }
 
 .washer-panel__button {
@@ -86,4 +61,115 @@
 
   display: block;
   position: absolute;
+}
+
+.range-arc {
+  position: absolute;
+  display: block;
+  border: rems(0.75) solid transparent;
+  border-radius: 50%;
+  top: rems(1);
+  border-top-color: $color_main-blue;
+}
+
+.range-pointer {
+  padding: 0 rems(0.075);
+  position: absolute;
+  width: 100%;
+  box-sizing: border-box;
+  @include flex-container(row, center, space-between, nowrap);
+  @include transition(transform);
+
+  & .range-pointer__edge {
+    &::before {
+      z-index: 1005;
+      position: absolute;
+      content: '';
+      width: rems(1);
+      height: rems(1);
+      box-sizing: border-box;
+      border-radius: 50%;
+      box-shadow: rems(0.5) rems(0.5) 0 0 $color_active-blue;
+
+      left: -10%;
+      top: -25%;
+      transform: rotate(45deg);
+    }
+    &::after {
+      width: rems(1);
+      height: rems(1);
+      box-sizing: border-box;
+      z-index: 1004;
+      position: absolute;
+      content: '';
+      left: -10%;
+      top: 140%;
+      background: $color_active-blue;
+      transform: rotate(90deg);
+    }
+  }
+
+  &:last-child .range-pointer__edge {
+    &::before {
+      left: unset;
+      right: -25%;
+      top: -10%;
+      transform: rotate(-130deg);
+    }
+    &::after {
+      left: -10%;
+      top: -140%;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.range-pointer__marker {
+  width: rems(1.25);
+  height: rems(1.25);
+  border-radius: 50%;
+  margin: 0 rems(0.75);
+  box-sizing: content-box;
+  background: $color_white;
+}
+
+.range-pointer__edge {
+  position: relative;
+  width: rems(0.75);
+  height: rems(0.75);
+  border-radius: 50%;
+  margin: 0 rems(1);
+  box-sizing: border-box;
+  z-index: 1006;
+}
+
+.central-button {
+  position: fixed;
+  bottom: 0;
+  padding: 0;
+  margin: rems(0.5) 0;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: rems(2);
+  text-align: center;
+  color: $color_grey-light;
+  cursor: pointer;
+  @include transition(color);
+
+  &:hover {
+    color: $color_white;
+  }
+}
+
+.central-value {
+  position: fixed;
+  user-select: none;
+  bottom: 0;
+  padding: 0;
+  margin: rems(0.5) 0;
+  font-size: rems(2);
+  text-align: center;
+  color: $color_grey-light;
+  @include medium();
 }

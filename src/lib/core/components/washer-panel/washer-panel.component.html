@@ -1,23 +1,72 @@
 <div
   class="washer-panel"
-  #containerElement
-  [@isPanelExpanded]="isPanelExpanded$ | async"
-  [style.marginBottom.px]="(marginBottom$ | async) - remSizePx * 5"
+  [style.width.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
+  [style.height.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
 >
   <div
     (mouseenter)="setPanelExpansionState('true')"
     (mouseleave)="setPanelExpansionState('false')"
+    (wheel)="processRangeEditByWheel($event)"
     class="washer-panel__disk washer-panel__disk_external"
     [style.width.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
     [style.height.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
-  ></div>
+    [style.bottom.px]="(marginBottom$ | async) + remSizePx * 7.5"
+    [@isExternalPanelExpanded]="isAdditionalPanelVisible$ | async"
+  >
+    <ng-container *ngIf="(activeButton$ | async)?.rangeOnClick">
+      <div
+        [style.width.px]="(middleDiskRadiusPx$ | async) * 2"
+        [style.height.px]="(middleDiskRadiusPx$ | async) * 2"
+        class="range-arc"
+        [@appearanceAnimation2]
+        #arcElement
+      ></div>
+
+      <div class="range-pointer" [style.transform]="'rotate(' + (rangeMinRotation$ | async) + 'rad)'">
+        <div class="range-pointer__edge" [@appearanceAnimation2]></div>
+      </div>
+      <div
+        (mousedown)="startGrabbing($event)"
+        class="range-pointer"
+        [style.transform]="'rotate(' + (rangeMarkerRotation$ | async) + 'rad)'"
+        #pointerElement
+      >
+        <div class="range-pointer__marker"></div>
+      </div>
+      <div class="range-pointer" [style.transform]="'rotate(' + (rangeMaxRotation$ | async) + 'rad)'">
+        <div class="range-pointer__edge" [@appearanceAnimation2]></div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="hasChildren(activeButton$ | async)">
+      <div
+        *ngFor="let button of additionalPanelButtons$ | async; index as index; trackBy: trackByActionName"
+        class="washer-panel__button-container"
+        [class.washer-panel__button-container_visible]="!((rotations$ | async)[index] | isNullOrUndefined)"
+        [style.transform]="'rotate(' + (additionalPanelButtonsRotations$ | async)[index] + 'rad)'"
+      >
+        <pupa-icon-button
+          [@appearanceAnimation]
+          [active]="button?.actionName === (activeButton$ | async)?.actionName"
+          color="dark"
+          size="medium"
+          (onclick)="processButtonClick($event, button)"
+        >
+          <ion-icon
+            [style.transform]="'rotate(-' + (additionalPanelButtonsRotations$ | async)[index] + 'rad)'"
+            [name]="button.icon"
+            class="washer-panel__button"
+          ></ion-icon>
+        </pupa-icon-button>
+      </div>
+    </ng-container>
+  </div>
   <div
     (mouseenter)="setPanelExpansionState('true')"
     (mouseleave)="setPanelExpansionState('false')"
     class="washer-panel__disk washer-panel__disk_middle"
     [style.width.px]="(middleDiskRadiusPx$ | async) * 2"
     [style.height.px]="(middleDiskRadiusPx$ | async) * 2"
-    #middleDiskElement
+    [style.bottom.px]="(marginBottom$ | async) + remSizePx * 10"
   >
     <div
       *ngFor="let button of buttons$ | async; index as index; trackBy: trackByActionName"
@@ -25,7 +74,12 @@
       [class.washer-panel__button-container_visible]="!((rotations$ | async)[index] | isNullOrUndefined)"
       [style.transform]="'rotate(' + (rotations$ | async)[index] + 'rad)'"
     >
-      <pupa-icon-button color="dark" size="medium">
+      <pupa-icon-button
+        [active]="button?.actionName === (activeButton$ | async)?.actionName"
+        color="dark"
+        size="medium"
+        (onclick)="processButtonClick($event, button)"
+      >
         <ion-icon
           [style.transform]="'rotate(-' + (rotations$ | async)[index] + 'rad)'"
           [name]="button.icon"
@@ -40,5 +94,17 @@
     class="washer-panel__disk washer-panel__disk_internal"
     [style.width.px]="(middleDiskRadiusPx$ | async) * 2 - remSizePx * 5"
     [style.height.px]="(middleDiskRadiusPx$ | async) * 2 - remSizePx * 5"
-  ></div>
+    [style.bottom.px]="(marginBottom$ | async) + remSizePx * 12.5"
+  >
+    <ng-container *ngIf="!(isCentralValueVisible$ | async)">
+      <button class="central-button" (click)="processButtonClick($event)" [@appearanceAnimation]>
+        <ion-icon [name]="centralButton.icon"></ion-icon>
+      </button>
+    </ng-container>
+    <ng-container *ngIf="isCentralValueVisible$ | async">
+      <div class="central-value" [@appearanceAnimation]>
+        {{ range$ | async }}
+      </div>
+    </ng-container>
+  </div>
 </div>
