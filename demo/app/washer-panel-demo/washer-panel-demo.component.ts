@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WasherButton } from 'dist/@meistersoft/pupakit/lib/core/components/washer-panel/washer-panel.component';
+import { WasherButton, WasherButtonRoot } from 'src/lib/core/components/washer-panel/washer-panel.component';
 
 @Component({
   selector: 'demo-washer-panel-demo',
@@ -7,22 +7,48 @@ import { WasherButton } from 'dist/@meistersoft/pupakit/lib/core/components/wash
   styleUrls: ['./washer-panel-demo.component.scss']
 })
 export class WasherPanelDemoComponent {
-  public buttons: WasherButton[] = [
-    { actionName: '', icon: 'move', isAlwaysVisible: true },
-    { actionName: '', icon: 'move', isAlwaysVisible: true },
-    { actionName: '', icon: 'move', isAlwaysVisible: false },
-    { actionName: '', icon: 'move', isAlwaysVisible: true }
+  public centralButton: WasherButton = {
+    actionName: 'home',
+    icon: 'home'
+  };
+  public buttons: WasherButtonRoot[] = [
+    {
+      actionName: `${Math.random()}`,
+      icon: 'move',
+      isAlwaysVisible: true,
+      rangeOnClick: false,
+      children: [
+        {
+          actionName: `${Math.random()}`,
+          icon: 'close'
+        },
+        {
+          actionName: `${Math.random()}`,
+          icon: 'close'
+        }
+      ]
+    },
+    { actionName: `${Math.random()}`, icon: 'move', isAlwaysVisible: true, rangeOnClick: false },
+    { actionName: `${Math.random()}`, icon: 'move', isAlwaysVisible: false, rangeOnClick: false },
+    { actionName: `${Math.random()}`, icon: 'move', isAlwaysVisible: true, rangeOnClick: true }
   ];
 
-  private readonly sampleArrayItem: WasherButton = { actionName: '', icon: 'move', isAlwaysVisible: true };
+  private readonly sampleArrayItem: WasherButtonRoot = {
+    actionName: `${Math.random()}`,
+    icon: 'move',
+    isAlwaysVisible: true,
+    rangeOnClick: false
+  };
 
   public onAddClick(): void {
     this.buttons = [
       ...this.buttons,
       {
         ...this.sampleArrayItem,
-        // tslint:disable-next-line: no-magic-numbers
-        isAlwaysVisible: Math.random() > 0.5
+        // tslint:disable: no-magic-numbers
+        isAlwaysVisible: Math.random() > 0.5,
+        rangeOnClick: Math.random() > 0.7
+        // tslint:enable: no-magic-numbers
       }
     ];
   }
