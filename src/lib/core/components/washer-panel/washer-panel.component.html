@@ -99,7 +99,7 @@
   >
     <ng-container *ngIf="!(isCentralValueVisible$ | async)">
       <button class="central-button" (click)="processButtonClick($event)" [@buttonsAppearanceAnimation]>
-        <ion-icon [name]="centralButton.icon"></ion-icon>
+        <ion-icon [name]="centralButton?.icon"></ion-icon>
       </button>
     </ng-container>
     <ng-container *ngIf="isCentralValueVisible$ | async">
