@@ -111,5 +111,4 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
       this.toggle(false);
     }
   }
-
 }

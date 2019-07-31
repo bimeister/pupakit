@@ -22,7 +22,7 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingComponent  {
+export class RatingComponent {
   private _numberOfStars: number = 5;
   @Input() public set numberOfStars(v: number) {
     this._numberOfStars = v;
@@ -87,5 +87,4 @@ export class RatingComponent  {
     }
     this.value = value;
   }
-
 }

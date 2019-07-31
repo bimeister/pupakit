@@ -1,11 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 import { DroppableComponent } from '../droppable/droppable.component';
 
 export interface IconData {
@@ -28,7 +21,6 @@ export interface DropdownItem<T> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent<T> extends DroppableComponent {
-
   @Input() public items: DropdownItem<T>[];
 
   @Output() public select: EventEmitter<T> = new EventEmitter<T>();

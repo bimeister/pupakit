@@ -7,7 +7,7 @@
 
 .pupa-star {
   display: block;
-  font-size: 48px;
+  font-size: rems(3);
   color: $color_active-blue;
 
   &.clickable {
