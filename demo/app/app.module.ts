@@ -18,6 +18,7 @@ import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
+import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -34,7 +35,8 @@ import { DroppableDemoComponent } from './droppable-demo/droppable-demo.componen
     IconButtonDemoComponent,
     SearchFieldDemoComponent,
     SwitcherDemoComponent,
-    DroppableDemoComponent
+    DroppableDemoComponent,
+    RatingDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,10 @@ import { DroppableDemoComponent } from './droppable-demo/droppable-demo.componen
       {
         path: 'droppable',
         component: DroppableDemoComponent
+      },
+      {
+        path: 'rating',
+        component: RatingDemoComponent
       }
     ])
   ],
