@@ -6,5 +6,4 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   templateUrl: './droppable-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DroppableDemoComponent {
-}
+export class DroppableDemoComponent {}

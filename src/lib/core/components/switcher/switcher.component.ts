@@ -70,6 +70,4 @@ export class SwitcherComponent implements ControlValueAccessor {
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
-
-
 }

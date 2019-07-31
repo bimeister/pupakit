@@ -3,14 +3,13 @@
 </h1>
 <div class="group">
   <div class="flex" *ngFor="let props of combos; let index = index">
-    <pupa-switcher [(ngModel)]="value"
-                   [disabled]="props.disabled"
-                   [indifferent]="props.indifferent"
-                   [id]="'' + index"
+    <pupa-switcher
+      [(ngModel)]="value"
+      [disabled]="props.disabled"
+      [indifferent]="props.indifferent"
+      [id]="'' + index"
     ></pupa-switcher>
-    <label [for]="'' + index">
-      value: {{value}}
-    </label>
+    <label [for]="'' + index"> value: {{ value }} </label>
   </div>
 </div>
 
@@ -18,8 +17,7 @@
 
 <div class="group">
   <form class="flex" [formGroup]="form">
-    <pupa-switcher formControlName="switcher" [id]="'formControl'"
-    ></pupa-switcher>
-    <label for="formControl">value: {{form.get('switcher').value}}</label>
+    <pupa-switcher formControlName="switcher" [id]="'formControl'"></pupa-switcher>
+    <label for="formControl">value: {{ form.get('switcher').value }}</label>
   </form>
 </div>
