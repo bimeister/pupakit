@@ -596,8 +596,4 @@ export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
     return arcLengthPx / this.angleRad;
   }
   // tslint:enable: no-magic-numbers
-
-  public log(...data: unknown[]): void {
-    console.log(...data);
-  }
 }
