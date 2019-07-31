@@ -1,0 +1,27 @@
+@import 'variables';
+
+:host {
+  display: flex;
+}
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:not(:last-child) {
+    margin-right: rems(0.4);
+  }
+  background: $color_light-blue;
+  cursor: pointer;
+  font-size: 14px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+  color: $color_text;
+  height: 1.5em;
+  padding: 0 1em;
+  border-radius: rems(0.5);
+
+  &.selected {
+    background: $color_active-blue;
+    color: $color_white;
+  }
+}

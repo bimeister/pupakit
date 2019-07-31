@@ -15,6 +15,7 @@ import { TileComponent } from './components/tile/tile.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { DaySelectorComponent } from './components/day-selector/day-selector.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -30,7 +31,8 @@ const CORE_COMPONENTS: any[] = [
   SearchFieldComponent,
   SwitcherComponent,
   DroppableComponent,
-  RatingComponent
+  RatingComponent,
+  DaySelectorComponent
 ];
 
 @NgModule({

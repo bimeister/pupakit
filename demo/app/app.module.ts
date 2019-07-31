@@ -19,6 +19,7 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
+import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -36,7 +37,8 @@ import { RatingDemoComponent } from './rating-demo/rating-demo.component';
     SearchFieldDemoComponent,
     SwitcherDemoComponent,
     DroppableDemoComponent,
-    RatingDemoComponent
+    RatingDemoComponent,
+    DaySelectorDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -101,6 +103,10 @@ import { RatingDemoComponent } from './rating-demo/rating-demo.component';
       {
         path: 'rating',
         component: RatingDemoComponent
+      },
+      {
+        path: 'day-selector',
+        component: DaySelectorDemoComponent
       }
     ])
   ],
