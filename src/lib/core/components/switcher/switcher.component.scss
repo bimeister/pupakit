@@ -1,0 +1,54 @@
+@import 'variables';
+
+:host {
+  display: inline-flex;
+}
+
+.toggle {
+  position: relative;
+  box-sizing: content-box;
+  padding: 1px;
+  background: #797979;
+  height: rems(1);
+  border-radius: calc(0.5rem + 1px);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.toggle__marker {
+  margin: 0 rems(1) 0 0;
+  background: #ffffff;
+  width: rems(1);
+  height: rems(1);
+  border-radius: 50%;
+  transition: all 0.15s;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
+}
+
+.toggle_active {
+  background: $color_success;
+}
+
+.toggle_disabled {
+  opacity: 0.5;
+  filter: grayscale(0.5);
+}
+
+.toggle_active .toggle__marker {
+  margin: 0 0 0 rems(1);
+}
+
+.toggle_indifferent {
+  background: $color_active-blue;
+}
+
+input {
+  position: fixed;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
