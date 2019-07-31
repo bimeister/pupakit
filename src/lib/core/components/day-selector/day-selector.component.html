@@ -1,5 +1,8 @@
-<div class="day"
-     *ngFor="let day of allDays; let index = index"
-     [class.selected]="valueMap[index]"
-     (click)="onClick(index)"
->{{WeekdaysShort[day]}}</div>
+<div
+  class="day"
+  *ngFor="let day of allDays; let index = index"
+  [class.selected]="valueMap[index]"
+  (click)="onClick(index)"
+>
+  {{ WeekdaysShort[day] }}
+</div>

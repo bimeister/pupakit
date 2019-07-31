@@ -2,12 +2,8 @@
   Day selector
 </h1>
 <div>
-  <div>
-    value list: {{daysSelected | json}}
-  </div>
-  <div>
-    value map: {{daysSelectedMap | json}}
-  </div>
+  <div>value list: {{ daysSelected | json }}</div>
+  <div>value map: {{ daysSelectedMap | json }}</div>
   <pupa-day-selector [(ngModel)]="daysSelected"></pupa-day-selector>
 </div>
 
@@ -15,8 +11,6 @@
   Form Control
 </h2>
 <form [formGroup]="form">
-  <div>
-    value: {{form.get('days').value | json}}
-  </div>
+  <div>value: {{ form.get('days').value | json }}</div>
   <pupa-day-selector formControlName="days"></pupa-day-selector>
 </form>

@@ -9,7 +9,6 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-
 export enum Weekdays {
   Monday,
   Tuesday,
@@ -42,11 +41,13 @@ export enum WeekdaysFull {
 
 const DAYS_NUMBER: number = 7;
 
-export interface DaysMap { [day: number]: boolean; }
+export interface DaysMap {
+  [day: number]: boolean;
+}
 
 export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): DaysMap => {
   const acc: DaysMap = {};
-  return days.reduce((a, value): DaysMap => ({...a, [value]: true}), acc);
+  return days.reduce((a, value): DaysMap => ({ ...a, [value]: true }), acc);
 };
 
 @Component({
@@ -82,14 +83,12 @@ export class DaySelectorComponent {
     }
   }
 
-  public valueMap: {[day: number]: boolean} = {};
+  public valueMap: { [day: number]: boolean } = {};
 
   public onChange: (v: number[]) => void;
   public onTouched: () => void;
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {
-  }
-
+  constructor(private readonly cdRef: ChangeDetectorRef) {}
 
   public writeValue(value: number[]): void {
     if ((value as any) instanceof Event) {
@@ -120,6 +119,5 @@ export class DaySelectorComponent {
     } else {
       this.value = [...this.value, value];
     }
-
   }
 }
