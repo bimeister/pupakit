@@ -27,8 +27,8 @@ export class RatingComponent  {
   @Input() public set numberOfStars(v: number) {
     this._numberOfStars = v;
     this.initStars();
-  };
-  public stars: any[]
+  }
+  public stars: any[];
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<number> = new EventEmitter<number>();
   private _value: number = 0;
@@ -44,6 +44,9 @@ export class RatingComponent  {
     }
   }
 
+  public onChange: (v: number) => void;
+  public onTouched: () => void;
+
   constructor(private readonly cdRef: ChangeDetectorRef) {
     this.initStars();
   }
@@ -51,9 +54,6 @@ export class RatingComponent  {
   private initStars(): void {
     this.stars = new Array(this._numberOfStars).fill(null);
   }
-
-  public onChange: (v: number) => void;
-  public onTouched: () => void;
 
   public writeValue(value: number): void {
     if ((value as any) instanceof Event) {
