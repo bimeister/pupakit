@@ -23,8 +23,12 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent  {
-  @Input() public numberOfStars: number = 5;
-  public stars: any[] = new Array(this.numberOfStars).fill(null);
+  private _numberOfStars: number = 5;
+  @Input() public set numberOfStars(v: number) {
+    this._numberOfStars = v;
+    this.initStars();
+  };
+  public stars: any[]
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<number> = new EventEmitter<number>();
   private _value: number = 0;
@@ -40,7 +44,13 @@ export class RatingComponent  {
     }
   }
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {}
+  constructor(private readonly cdRef: ChangeDetectorRef) {
+    this.initStars();
+  }
+
+  private initStars(): void {
+    this.stars = new Array(this._numberOfStars).fill(null);
+  }
 
   public onChange: (v: number) => void;
   public onTouched: () => void;
