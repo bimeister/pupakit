@@ -18,6 +18,7 @@ export class IconButtonComponent {
   @Input() public active: boolean = false;
   @Input() public size: InputButtonSize = 'small';
   @Input() public isFloat: boolean = false;
+  @Input() public fixed: boolean = false;
 
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 

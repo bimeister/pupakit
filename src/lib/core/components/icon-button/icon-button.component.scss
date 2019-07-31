@@ -56,6 +56,12 @@
     background: $color_active-blue;
     color: $color_white;
   }
+
+  &_fixed {
+    position: fixed;
+    bottom: rems(2);
+    right: rems(2);
+  }
 }
 
 .button_light.button_active {
@@ -73,3 +79,4 @@
   color: rgba($color_light-blue, 0.3);
   background: $color_main-blue;
 }
+
