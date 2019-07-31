@@ -152,6 +152,7 @@ export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
   @Input() public range: number = 50;
   @Input() public centralButton: WasherButton = null;
   @Output() public action: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public rangeChange: EventEmitter<number> = new EventEmitter<number>();
 
   public isPanelExpanded$: BehaviorSubject<PanelExpansionState> = new BehaviorSubject<PanelExpansionState>(
     PanelExpansionState.dissapeared
@@ -273,14 +274,19 @@ export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   public processButtonClick(event: MouseEvent, clickedButton?: WasherButtonRoot): void {
     event.stopPropagation();
-    if (isNullOrUndefined(clickedButton)) {
+    const isCentralButton: boolean = isNullOrUndefined(clickedButton);
+    const buttonHasChildren: boolean = !isCentralButton && this.hasChildren(clickedButton);
+    const buttonOpensRange: boolean = !isCentralButton && clickedButton.rangeOnClick;
+    if (isCentralButton) {
       const centralButton: WasherButton = this.centralButton;
       this.activeButton$.next(null);
       this.action.emit(centralButton.actionName);
       this.isAdditionalPanelVisible$.next(PanelExpansionState.dissapeared);
       return;
     }
-    this.action.emit(clickedButton.actionName);
+    if (!buttonHasChildren && !buttonOpensRange) {
+      this.action.emit(clickedButton.actionName);
+    }
     this.activeButton$.next(clickedButton);
     this.isAdditionalPanelVisible$.next(
       clickedButton.rangeOnClick || this.hasChildren(clickedButton)
@@ -519,7 +525,8 @@ export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
         rangeValueByMouseCoords$.subscribe((innerPercentage: number) => {
           this.range$.next(innerPercentage);
         })
-      );
+      )
+      .add(this.range$.subscribe((innerValue: number) => this.rangeChange.emit(innerValue)));
   }
 
   private updateDataOnActiveButtonChange(): void {
