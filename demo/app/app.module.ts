@@ -17,6 +17,7 @@ import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
+import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -32,7 +33,8 @@ import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
     SelectDemoComponent,
     IconButtonDemoComponent,
     SearchFieldDemoComponent,
-    SwitcherDemoComponent
+    SwitcherDemoComponent,
+    DroppableDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +91,10 @@ import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
       {
         path: 'switcher',
         component: SwitcherDemoComponent
+      },
+      {
+        path: 'droppable',
+        component: DroppableDemoComponent
       }
     ])
   ],

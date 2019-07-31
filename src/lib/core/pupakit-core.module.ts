@@ -13,6 +13,7 @@ import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TileComponent } from './components/tile/tile.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
+import { DroppableComponent } from './components/droppable/droppable.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -26,7 +27,8 @@ const CORE_COMPONENTS: any[] = [
   SelectComponent,
   IconButtonComponent,
   SearchFieldComponent,
-  SwitcherComponent
+  SwitcherComponent,
+  DroppableComponent
 ];
 
 @NgModule({
