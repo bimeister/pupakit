@@ -39,7 +39,7 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
     SwitcherDemoComponent,
     DroppableDemoComponent,
     RatingDemoComponent,
-    DaySelectorDemoComponent
+    DaySelectorDemoComponent,
     WasherPanelDemoComponent,
     IconButtonDemoComponent
   ],
