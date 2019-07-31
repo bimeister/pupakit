@@ -42,9 +42,11 @@ export enum WeekdaysFull {
 
 const DAYS_NUMBER: number = 7;
 
-// tslint:disable-next-line:typedef
-export const daysArrayToMap = (days: number[]): {[day: number]: boolean} => {
-  return days.reduce((acc, value) => ({...acc, [value]: true}), {});
+export interface DaysMap { [day: number]: boolean; }
+
+export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): DaysMap => {
+  const acc: DaysMap = {};
+  return days.reduce((a, value): DaysMap => ({...a, [value]: true}), acc);
 };
 
 @Component({

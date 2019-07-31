@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { daysArrayToMap, Weekdays } from '../../../src/lib/core/components/day-selector/day-selector.component';
+import {
+  daysArrayToMap,
+  DaysMap,
+  Weekdays
+} from '../../../src/lib/core/components/day-selector/day-selector.component';
 import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
@@ -11,7 +15,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class DaySelectorDemoComponent {
   public days: any = Weekdays;
   public daysSelected: number[] = [];
-  public get daysSelectedMap(): any {
+  public get daysSelectedMap(): DaysMap {
     return daysArrayToMap(this.daysSelected);
   }
 
