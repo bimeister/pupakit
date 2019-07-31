@@ -12,6 +12,7 @@ import { SearchFieldComponent } from './components/search-field/search-field.com
 import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { TileComponent } from './components/tile/tile.component';
+import { SwitcherComponent } from './components/switcher/switcher.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -24,7 +25,8 @@ const CORE_COMPONENTS: any[] = [
   DropdownComponent,
   SelectComponent,
   IconButtonComponent,
-  SearchFieldComponent
+  SearchFieldComponent,
+  SwitcherComponent
 ];
 
 @NgModule({

@@ -16,6 +16,7 @@ import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.
 import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
+import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -30,7 +31,8 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
     SpinnerDemoComponent,
     SelectDemoComponent,
     IconButtonDemoComponent,
-    SearchFieldDemoComponent
+    SearchFieldDemoComponent,
+    SwitcherDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -83,6 +85,10 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
       {
         path: 'select',
         component: SelectDemoComponent
+      },
+      {
+        path: 'switcher',
+        component: SwitcherDemoComponent
       }
     ])
   ],
