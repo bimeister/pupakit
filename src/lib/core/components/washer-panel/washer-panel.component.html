@@ -2,6 +2,8 @@
   class="washer-panel"
   [style.width.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
   [style.height.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
+  [@washerAppearanceAnimation]
+  (@washerAppearanceAnimation.done)="log($event)"
 >
   <div
     (mouseenter)="setPanelExpansionState('true')"
@@ -18,23 +20,23 @@
         [style.width.px]="(middleDiskRadiusPx$ | async) * 2"
         [style.height.px]="(middleDiskRadiusPx$ | async) * 2"
         class="range-arc"
-        [@appearanceAnimation2]
+        [@arcAppearanceAnimation]
         #arcElement
       ></div>
 
       <div class="range-pointer" [style.transform]="'rotate(' + (rangeMinRotation$ | async) + 'rad)'">
-        <div class="range-pointer__edge" [@appearanceAnimation2]></div>
+        <div class="range-pointer__edge" [@arcAppearanceAnimation]></div>
       </div>
       <div
         (mousedown)="startGrabbing($event)"
-        class="range-pointer"
+        class="range-pointer range-pointer_with-marker"
         [style.transform]="'rotate(' + (rangeMarkerRotation$ | async) + 'rad)'"
         #pointerElement
       >
         <div class="range-pointer__marker"></div>
       </div>
-      <div class="range-pointer" [style.transform]="'rotate(' + (rangeMaxRotation$ | async) + 'rad)'">
-        <div class="range-pointer__edge" [@appearanceAnimation2]></div>
+      <div class="range-pointer " [style.transform]="'rotate(' + (rangeMaxRotation$ | async) + 'rad)'">
+        <div class="range-pointer__edge" [@arcAppearanceAnimation]></div>
       </div>
     </ng-container>
     <ng-container *ngIf="hasChildren(activeButton$ | async)">
@@ -45,7 +47,7 @@
         [style.transform]="'rotate(' + (additionalPanelButtonsRotations$ | async)[index] + 'rad)'"
       >
         <pupa-icon-button
-          [@appearanceAnimation]
+          [@buttonsAppearanceAnimation]
           [active]="button?.actionName === (activeButton$ | async)?.actionName"
           color="dark"
           size="medium"
@@ -97,12 +99,12 @@
     [style.bottom.px]="(marginBottom$ | async) + remSizePx * 12.5"
   >
     <ng-container *ngIf="!(isCentralValueVisible$ | async)">
-      <button class="central-button" (click)="processButtonClick($event)" [@appearanceAnimation]>
+      <button class="central-button" (click)="processButtonClick($event)" [@buttonsAppearanceAnimation]>
         <ion-icon [name]="centralButton.icon"></ion-icon>
       </button>
     </ng-container>
     <ng-container *ngIf="isCentralValueVisible$ | async">
-      <div class="central-value" [@appearanceAnimation]>
+      <div class="central-value" [@buttonsAppearanceAnimation]>
         {{ range$ | async }}
       </div>
     </ng-container>

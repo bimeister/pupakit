@@ -10,6 +10,8 @@
 .washer-panel {
   position: relative;
   margin-bottom: 0;
+  height: 0;
+  width: 0;
   @include transition(#{bottom, height, width}, 0.32s);
   @include flex-container(column, center, flex-start, nowrap);
 }
@@ -80,6 +82,10 @@
   @include flex-container(row, center, space-between, nowrap);
   @include transition(transform);
 
+  &_with-marker {
+    z-index: 100;
+  }
+
   & .range-pointer__edge {
     &::before {
       z-index: 1005;
@@ -131,6 +137,7 @@
   margin: 0 rems(0.75);
   box-sizing: content-box;
   background: $color_white;
+  z-index: 1010;
 }
 
 .range-pointer__edge {

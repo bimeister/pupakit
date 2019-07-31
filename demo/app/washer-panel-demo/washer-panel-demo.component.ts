@@ -47,7 +47,9 @@ export class WasherPanelDemoComponent {
         ...this.sampleArrayItem,
         // tslint:disable: no-magic-numbers
         isAlwaysVisible: Math.random() > 0.5,
-        rangeOnClick: Math.random() > 0.7
+        rangeOnClick: Math.random() > 0.7,
+        actionName: `${Math.random()}`
+
         // tslint:enable: no-magic-numbers
       }
     ];
