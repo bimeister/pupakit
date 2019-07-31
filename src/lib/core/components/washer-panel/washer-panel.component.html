@@ -3,7 +3,6 @@
   [style.width.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
   [style.height.px]="(middleDiskRadiusPx$ | async) * 2 + remSizePx * 5"
   [@washerAppearanceAnimation]
-  (@washerAppearanceAnimation.done)="log($event)"
 >
   <div
     (mouseenter)="setPanelExpansionState('true')"
