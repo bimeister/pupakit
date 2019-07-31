@@ -57,6 +57,7 @@ export enum PanelExpansionState {
   dissapeared = 'false',
   appeared = 'true'
 }
+// tslint:disable: no-magic-numbers
 @Component({
   selector: 'pupa-washer-panel',
   templateUrl: './washer-panel.component.html',
@@ -79,7 +80,7 @@ export enum PanelExpansionState {
       transition(`${PanelExpansionState.dissapeared} => ${PanelExpansionState.appeared}`, animate('0.25s ease')),
       transition(`${PanelExpansionState.appeared} => ${PanelExpansionState.dissapeared}`, animate('0.25s ease-in'))
     ]),
-    trigger('appearanceAnimation', [
+    trigger('buttonsAppearanceAnimation', [
       transition(':enter', [
         animate(
           '0.32s ease',
@@ -111,7 +112,7 @@ export enum PanelExpansionState {
         )
       ])
     ]),
-    trigger('appearanceAnimation2', [
+    trigger('arcAppearanceAnimation', [
       transition(':enter', [
         animate(
           '0.2s ease',
@@ -142,11 +143,34 @@ export enum PanelExpansionState {
           ])
         )
       ])
+    ]),
+    trigger('washerAppearanceAnimation', [
+      transition(':enter', [
+        animate(
+          '1s ease',
+          keyframes([
+            style({
+              padding: `${100 * remSizePx}px 0 0 0`
+            }),
+            style({})
+          ])
+        )
+      ]),
+      transition(':leave', [
+        animate(
+          '0.32s ease',
+          keyframes([
+            style({}),
+            style({
+              padding: `${100 * remSizePx}px 0 0 0`
+            })
+          ])
+        )
+      ])
     ])
   ]
 })
 export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
-  // tslint:disable: no-magic-numbers
   @ViewChild('arcElement', { static: false }) public arcElement: ElementRef<HTMLDivElement>;
   @Input() public buttons: WasherButtonRoot[] = [];
   @Input() public range: number = 50;
@@ -572,4 +596,8 @@ export class WasherPanelComponent implements OnInit, OnChanges, OnDestroy {
     return arcLengthPx / this.angleRad;
   }
   // tslint:enable: no-magic-numbers
+
+  public log(...data: unknown[]): void {
+    console.log(...data);
+  }
 }
