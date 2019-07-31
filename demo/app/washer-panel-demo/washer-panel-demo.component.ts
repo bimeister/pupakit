@@ -56,4 +56,9 @@ export class WasherPanelDemoComponent {
   public onRemoveClick(): void {
     this.buttons = [...this.buttons.slice(1, this.buttons.length)];
   }
+
+  public log(...data: unknown[]): void {
+    // tslint:disable-next-line: no-console
+    console.log(...data);
+  }
 }
