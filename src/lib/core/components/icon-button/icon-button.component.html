@@ -3,6 +3,7 @@
   class="button"
   [ngClass]="resultClassList"
   [class.button_float]="isFloat"
+  [class.button_fixed]="fixed"
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event)"
 >
