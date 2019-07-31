@@ -1,0 +1,21 @@
+@import 'variables';
+
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.pupa-star {
+  display: block;
+  font-size: 48px;
+  color: $color_active-blue;
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.disabled {
+    filter: grayscale(0.1);
+    opacity: 0.85;
+  }
+}

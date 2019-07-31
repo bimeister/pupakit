@@ -62,7 +62,7 @@ export class SwitcherComponent implements ControlValueAccessor {
 
   public registerOnChange(fn: (v: boolean) => void): void {
     this.onChange = (v: boolean): void => {
-      this.change.emit();
+      this.change.emit(v);
       fn(v);
     };
   }

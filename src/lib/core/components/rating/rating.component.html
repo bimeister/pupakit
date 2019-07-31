@@ -1,0 +1,8 @@
+<div class="pupa-star"
+     *ngFor="let star of stars; let index = index"
+     [class.clickable]="!disabled"
+     [class.disabled]="disabled"
+     (click)="onClick(index + 1)"
+>
+  <ion-icon [name]="index <= value - 1 ? 'star' : 'star-outline'"></ion-icon>
+</div>
