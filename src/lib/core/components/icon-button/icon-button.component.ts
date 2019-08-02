@@ -20,6 +20,7 @@ export class IconButtonComponent {
   @Input() public size: InputButtonSize = 'small';
   @Input() public isFloat: boolean = false;
   @Input() public fixed: boolean = false;
+
   @Input() public type: ButtonType = 'submit';
 
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
