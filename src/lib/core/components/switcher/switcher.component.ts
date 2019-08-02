@@ -27,6 +27,7 @@ export class SwitcherComponent implements ControlValueAccessor {
   @Input() public id: string;
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   private _value: boolean = false;
   get value(): boolean {
     return this._value;
