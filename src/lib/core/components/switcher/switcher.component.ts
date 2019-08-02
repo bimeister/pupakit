@@ -42,8 +42,10 @@ export class SwitcherComponent implements ControlValueAccessor {
 
   constructor(private readonly cdRef: ChangeDetectorRef) {}
 
-  public onChange: (v: boolean) => void = (v: boolean) => { this.change.emit(v); };
-  public onTouched: () => void  = () => undefined;
+  public onChange: (v: boolean) => void = (v: boolean) => {
+    this.change.emit(v);
+  };
+  public onTouched: () => void = () => undefined;
 
   public writeValue(value: boolean): void {
     if ((value as any) instanceof Event) {
