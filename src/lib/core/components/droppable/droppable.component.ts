@@ -12,6 +12,8 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 
+export type DroppableHorizontalPosition = 'left' | 'right';
+
 @Component({
   selector: 'pupa-droppable',
   templateUrl: './droppable.component.html',
@@ -26,7 +28,7 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
   }
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
-
+  @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
   private isMouseDown: boolean;
 
   public topPx: number = 0;
@@ -90,12 +92,21 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
     }
     const box: ClientRect = this.anchor.getBoundingClientRect();
     const dropDownBottom: number = box.top + box.height + this.offsetTopPx + this.dropdown.clientHeight;
+    const ddWidth: number = this.dropdown.clientWidth;
     this.topPx =
       dropDownBottom < window.innerHeight
         ? (this.topPx = box.top + box.height + this.offsetTopPx)
         : (this.topPx = box.top + box.height - this.dropdown.clientHeight);
 
-    this.leftPx = box.left;
+    switch (this.horizontalPosition) {
+      case 'right':
+        this.leftPx = box.left + box.width - ddWidth;
+        break;
+      case 'left':
+      default:
+        this.leftPx = box.left;
+    }
+
     this.widthPx = box.width;
     this.cDRef.markForCheck();
   };

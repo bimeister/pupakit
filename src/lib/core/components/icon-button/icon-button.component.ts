@@ -25,6 +25,10 @@ export class IconButtonComponent {
 
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
+  public get nativeElement(): HTMLElement {
+    return this.elementRef.nativeElement;
+  }
+
   public get resultClassList(): string[] {
     return [this.color, this.size, this.active ? 'active' : null]
       .filter((innerClass: string) => !isNullOrUndefined(innerClass))
@@ -38,4 +42,6 @@ export class IconButtonComponent {
     }
     this.onclick.emit(event);
   }
+
+  constructor(private readonly elementRef: ElementRef) {}
 }
