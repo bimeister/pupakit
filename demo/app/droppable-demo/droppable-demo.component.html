@@ -5,4 +5,8 @@
   <pupa-droppable [anchor]="triggerBig">
     <textarea class="placeholder" [textContent]="'тут может быть что угодно'"></textarea>
   </pupa-droppable>
+  <pupa-icon-button #triggerSmall><ion-icon name="more"></ion-icon></pupa-icon-button>
+  <pupa-droppable [horizontalPosition]="'right'" [anchor]="triggerSmall.nativeElement">
+    <textarea class="placeholder" [textContent]="'тут может быть что угодно'"></textarea>
+  </pupa-droppable>
 </div>
