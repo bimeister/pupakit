@@ -85,8 +85,8 @@ export class DaySelectorComponent {
 
   public valueMap: { [day: number]: boolean } = {};
 
-  public onChange: (v: number[]) => void;
-  public onTouched: () => void;
+  public onChange: (v: number[]) => void = (_): void => null;
+  public onTouched: () => void = (): void => null;
 
   constructor(private readonly cdRef: ChangeDetectorRef) {}
 
