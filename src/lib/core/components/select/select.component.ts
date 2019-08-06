@@ -68,8 +68,11 @@ export class SelectComponent<T> implements ControlValueAccessor {
       this.input.emit(item.data);
     }
   }
-  public registerOnChange(fn: any): void {
-    this.onChange = fn;
+  public registerOnChange(fn: (v: T) => void): void {
+    this.onChange = (v: T): void => {
+      this.input.emit(v);
+      fn(v);
+    };
   }
   public registerOnTouched(fn: any): void {
     this.onTouched = fn;
