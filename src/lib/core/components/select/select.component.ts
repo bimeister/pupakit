@@ -21,8 +21,10 @@ export class SelectComponent<T> implements ControlValueAccessor {
   private _items: DropdownItem<T>[];
   @Input() public set items(v: DropdownItem<T>[]) {
     this._items = v;
-    if (!this.selectedItem && v && v.length > 0) {
+    if (!this.value && v && v.length > 0) {
       this.writeValue(v[0].data);
+    } else {
+      this.writeValue(this.value);
     }
   }
   public get items(): DropdownItem<T>[] {
@@ -32,19 +34,14 @@ export class SelectComponent<T> implements ControlValueAccessor {
   @Input() public positionChange$: Observable<void>;
   @Input() public id: string;
   @Output() public input: EventEmitter<T> = new EventEmitter<T>();
+  private _value: T;
   @Input() public set value(v: T) {
-    if (!this.items) {
-      return;
-    }
-    const item: DropdownItem<T> = this.items.find(i => isEqual(i.data, v));
-    if (!item) {
-      return;
-    }
-    this.selectedItem = item;
+    this._value = v;
+    this.writeValue(v);
   }
 
   public get value(): T {
-    return this.selectedItem.data;
+    return this._value;
   }
 
   public selectedItem: DropdownItem<T>;
