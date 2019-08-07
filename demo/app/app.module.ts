@@ -8,6 +8,9 @@ import { PupakitCore } from '../../src/lib/core/pupakit-core.module';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
+import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
+import { ChipDemoComponent } from './chip-demo/chip-demo.component';
+import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
@@ -41,7 +44,10 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
     RatingDemoComponent,
     DaySelectorDemoComponent,
     WasherPanelDemoComponent,
-    IconButtonDemoComponent
+    IconButtonDemoComponent,
+    ChipDemoComponent,
+    ChipButtonDemoComponent,
+    ChipSelectDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -66,6 +72,18 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
       {
         path: 'button',
         component: ButtonDemoComponent
+      },
+      {
+        path: 'chip',
+        component: ChipDemoComponent
+      },
+      {
+        path: 'chip-button',
+        component: ChipButtonDemoComponent
+      },
+      {
+        path: 'chip-select',
+        component: ChipSelectDemoComponent
       },
       {
         path: 'icon-button',

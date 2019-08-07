@@ -29,3 +29,10 @@
     margin-right: rems(1);
   }
 }
+
+.chip-wrap {
+  line-height: rems(1.7);
+  & pupa-chip {
+    margin-right: rems(0.2);
+  }
+}

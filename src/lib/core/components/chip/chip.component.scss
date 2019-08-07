@@ -1,0 +1,30 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  height: rems(1.5);
+  display: inline-flex;
+  flex-direction: row;
+  vertical-align: top;
+}
+
+.chip {
+  appearance: none;
+  box-sizing: border-box;
+  user-select: none;
+  outline: none;
+  height: rems(1.5);
+  color: $color_main-blue;
+  background-color: $color_light-blue;
+  white-space: nowrap;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: rems(1);
+  padding: 0 rems(0.4);
+  &:focus,
+  &:hover {
+    color: $color_active-blue;
+  }
+}

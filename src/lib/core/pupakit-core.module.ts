@@ -3,6 +3,9 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
+import { ChipButtonComponent } from './components/chip-button/chip-button.component';
+import { ChipSelectComponent } from './components/chip-select/chip-select.component';
+import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -35,7 +38,10 @@ const CORE_COMPONENTS: any[] = [
   RatingComponent,
   DaySelectorComponent,
   WasherPanelComponent,
-  IconButtonComponent
+  IconButtonComponent,
+  ChipComponent,
+  ChipButtonComponent,
+  ChipSelectComponent
 ];
 
 @NgModule({
