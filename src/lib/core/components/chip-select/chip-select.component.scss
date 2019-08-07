@@ -1,0 +1,80 @@
+@import 'variables';
+@import 'mixins';
+
+.chip-select {
+  line-height: rems(1.8);
+  display: block;
+}
+
+pupa-chip {
+  margin-right: rems(0.3);
+}
+
+.chip-select_chip-remove {
+  appearance: none;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 rems(-0.1) 0 rems(0.2);
+  outline: none;
+  height: rems(1);
+  width: 1;
+  opacity: 1;
+  display: flex;
+  border-radius: 50%;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  color: $color_grey-ivory;
+  &:focus,
+  &:hover {
+    color: $color_active-blue;
+  }
+}
+
+.chip-select_chip-add-button{
+  display: inline-block;
+  margin: 0 rems(0.2) 0 rems(0.3);
+}
+
+.chip-select_chip-icon {
+  display: inline-flex;
+  height: rems(1);
+  width: rems(1);
+  margin-right: rems(0.2);
+}
+
+.chip-select_droppable-item {
+  display: flex;
+  line-height: rems(1);
+  padding: rems(0.3) rems(0.3);
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  white-space: nowrap;
+  &:hover {
+    background-color: $color_grey-apple;
+  }
+}
+
+.chip-select_droppable-icon {
+  min-width: rems(1);
+  color: $color_cadet-blue;
+  margin-right: rems(0.3);
+}
+
+.chip-select_droppable-text {
+  display: block;
+  align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+pupa-droppable.invisible {
+  display: none;
+}

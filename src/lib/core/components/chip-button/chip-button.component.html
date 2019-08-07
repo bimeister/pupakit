@@ -1,0 +1,10 @@
+<pupa-chip>
+  <button
+    #chipButtonElement
+    class="chip-button"
+    [attr.disabled]="disabled ? true : null"
+    (click)="processClickEvent($event)"
+  >
+    <ng-content></ng-content>
+  </button>
+</pupa-chip>
