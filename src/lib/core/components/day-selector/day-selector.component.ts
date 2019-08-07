@@ -10,36 +10,34 @@ import {
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export enum Weekdays {
+  Sunday,
   Monday,
   Tuesday,
   Wednesday,
   Thursday,
   Friday,
-  Saturday,
-  Sunday
+  Saturday
 }
 
 export enum WeekdaysShort {
+  Вс,
   Пн,
   Вт,
   Ср,
   Чт,
   Пт,
-  Сб,
-  Вс
+  Сб
 }
 
 export enum WeekdaysFull {
+  Воскресенье,
   Понедельник,
   Вторник,
   Среда,
   Четверг,
   Пятница,
-  Суббота,
-  Воскресенье
+  Суббота
 }
-
-const DAYS_NUMBER: number = 7;
 
 export interface DaysMap {
   [day: number]: boolean;
@@ -65,11 +63,13 @@ export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): Day
 })
 export class DaySelectorComponent {
   public WeekdaysShort: any = WeekdaysShort;
+  public WeekdaysFull: any = WeekdaysFull;
   public Weekdays: any = Weekdays;
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<number[]> = new EventEmitter<number[]>();
   private _value: number[] = [];
-  public allDays: number[] = new Array(DAYS_NUMBER).fill(null).map((_, index) => index);
+  // tslint:disable-next-line:no-magic-numbers
+  public allDays: number[] = [1, 2, 3, 4, 5, 6, 0];
   get value(): number[] {
     return this._value;
   }
