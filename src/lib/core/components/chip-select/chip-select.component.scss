@@ -10,7 +10,7 @@ pupa-chip {
   margin-right: rems(0.3);
 }
 
-.chip-select_chip-remove {
+.chip-select__chip-remove {
   appearance: none;
   box-sizing: border-box;
   border: 0;
@@ -35,19 +35,19 @@ pupa-chip {
   }
 }
 
-.chip-select_chip-add-button{
+.chip-select__chip-add-button{
   display: inline-block;
   margin: 0 rems(0.2) 0 rems(0.3);
 }
 
-.chip-select_chip-icon {
+.chip-select__chip-icon {
   display: inline-flex;
   height: rems(1);
   width: rems(1);
   margin-right: rems(0.2);
 }
 
-.chip-select_droppable-item {
+.chip-select__droppable-item {
   display: flex;
   line-height: rems(1);
   padding: rems(0.3) rems(0.3);
@@ -60,13 +60,13 @@ pupa-chip {
   }
 }
 
-.chip-select_droppable-icon {
+.chip-select__droppable-icon {
   min-width: rems(1);
   color: $color_cadet-blue;
   margin-right: rems(0.3);
 }
 
-.chip-select_droppable-text {
+.chip-select__droppable-text {
   display: block;
   align-items: center;
   flex-direction: row;
