@@ -1,8 +1,9 @@
 <div
   class="day"
   *ngFor="let day of allDays; let index = index"
-  [class.selected]="valueMap[index]"
-  (click)="onClick(index)"
+  [class.selected]="valueMap[day]"
+  (click)="onClick(day)"
+  [title]="WeekdaysFull[day]"
 >
   {{ WeekdaysShort[day] }}
 </div>
