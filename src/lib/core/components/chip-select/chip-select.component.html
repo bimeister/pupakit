@@ -4,20 +4,20 @@
     (mouseenter)="updateExpandedButtonIndex(index)"
     (mouseleave)="updateExpandedButtonIndex(null)"
   >
-    <div class="chip-select_chip-icon">
+    <div class="chip-select__chip-icon">
       <ion-icon [name]="selectItem.icon"></ion-icon>
     </div>
     {{ selectItem.value }}
     <button
       [@isHovered]="buttonAnimationState(expandedButtonIndex$ | async, index)"
-      class="chip-select_chip-remove"
+      class="chip-select__chip-remove"
       (click)="removeItem($event, selectItem)"
     >
       <ion-icon name="trash"></ion-icon>
     </button>
   </pupa-chip>
   <pupa-chip-button [disabled]="visibleItems?.length === 0" #addChips>
-    <div class="chip-select_chip-add-button">Добавить</div>
+    <div class="chip-select__chip-add-button">Добавить</div>
     <ion-icon name="add"></ion-icon>
   </pupa-chip-button>
   <pupa-droppable
@@ -25,9 +25,9 @@
     [ngClass]="visibleItems?.length === 0 ? 'invisible' : ''"
   >
     <ng-container *ngFor="let item of visibleItems">
-      <div class="chip-select_droppable-item" (click)="clickDroppableItem($event, item)">
-        <ion-icon class="chip-select_droppable-icon" [name]="item.icon"></ion-icon>
-        <div class="chip-select_droppable-text">{{ item.value }}</div>
+      <div class="chip-select__droppable-item" (click)="clickDroppableItem($event, item)">
+        <ion-icon class="chip-select__droppable-icon" [name]="item.icon"></ion-icon>
+        <div class="chip-select__droppable-text">{{ item.value }}</div>
       </div>
     </ng-container>
   </pupa-droppable>
