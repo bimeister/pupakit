@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+
 import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 
 export type DroppableHorizontalPosition = 'left' | 'right';
@@ -29,7 +30,6 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
   @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
-  private isMouseDown: boolean;
 
   public topPx: number = 0;
   public leftPx: number = 0;
@@ -64,21 +64,12 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
   public toggle: (value?: boolean) => void = (value?: boolean): void => {
     this.open = isNullOrUndefined(value) ? !this.open : value;
     this.cDRef.markForCheck();
+    this.checkPosition();
   };
-
-  @HostListener('window:mousedown')
-  public onMouseDown(): void {
-    this.isMouseDown = true;
-  }
-
-  @HostListener('window:mouseup')
-  public onMouseUp(): void {
-    this.isMouseDown = false;
-  }
 
   @HostListener('window:mousemove')
   public onMouseMove(): void {
-    if (!this.isMouseDown) {
+    if (!this.open) {
       return;
     }
     this.checkPosition();
