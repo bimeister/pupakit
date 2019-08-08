@@ -62,13 +62,19 @@ export class ChipSelectComponent {
 
   @Input() public items: ChipItem[] = [];
 
-  @Output() public addItem: EventEmitter<ChipItem[]> = new EventEmitter<ChipItem[]>(null);
+  @Output() public deleteItem: EventEmitter<ChipItem> = new EventEmitter<ChipItem>(null);
+
+  @Output() public addItem: EventEmitter<ChipItem> = new EventEmitter<ChipItem>(null);
+
+  @Output() public allItems: EventEmitter<ChipItem[]> = new EventEmitter<ChipItem[]>(null);
 
   private readonly _selectItems: Set<ChipItem> = new Set<ChipItem>([]);
 
   public removeItem(event: MouseEvent, item: ChipItem): void {
     event.stopPropagation();
     this._selectItems.delete(item);
+    this.deleteItem.emit(item);
+    this.allItems.emit(this.selectItems);
     this.cDRef.markForCheck();
     this.refreshDroppable();
   }
@@ -89,7 +95,8 @@ export class ChipSelectComponent {
     }
     this._selectItems.add(item);
     this.cDRef.markForCheck();
-    this.addItem.emit(this.selectItems);
+    this.addItem.emit(item);
+    this.allItems.emit(this.selectItems);
     this.refreshDroppable();
   }
 
