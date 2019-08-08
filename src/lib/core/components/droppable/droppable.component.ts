@@ -30,10 +30,10 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
   @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
+  @Input() public maxWidth: number = null;
 
   public topPx: number = 0;
   public leftPx: number = 0;
-  public widthPx: number = 0;
   private readonly offsetTopPx: number = 4;
 
   public open: boolean = false;
@@ -97,8 +97,11 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
       default:
         this.leftPx = box.left;
     }
-
-    this.widthPx = box.width;
+    if (this.maxWidth) {
+      this.dropdown.style.maxWidth = `${this.maxWidth}px`;
+    } else {
+      this.dropdown.style.width = `${box.width}px`;
+    }
     this.cDRef.markForCheck();
   };
 
