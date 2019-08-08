@@ -7,6 +7,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
+  Renderer2,
   ViewChild
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -38,7 +39,7 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
 
   public open: boolean = false;
 
-  constructor(protected readonly cDRef: ChangeDetectorRef) {}
+  constructor(protected readonly cDRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {}
 
   public ngAfterViewInit(): void {
     if (!this.anchor) {
@@ -98,9 +99,9 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
         this.leftPx = box.left;
     }
     if (this.maxWidth) {
-      this.dropdown.style.maxWidth = `${this.maxWidth}px`;
+      this.renderer.setStyle(this.dropdown, 'maxWidth', `${this.maxWidth}px`);
     } else {
-      this.dropdown.style.width = `${box.width}px`;
+      this.renderer.setStyle(this.dropdown, 'width', `${box.width}px`);
     }
     this.cDRef.markForCheck();
   };
