@@ -51,6 +51,7 @@ export class ChipSelectComponent {
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
   @Input()
   public set selectItems(items: ChipItem[]) {
+    this._selectItems.clear();
     items.forEach(item => {
       this._selectItems.add(item);
     });
