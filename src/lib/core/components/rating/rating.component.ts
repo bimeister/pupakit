@@ -44,8 +44,8 @@ export class RatingComponent {
     }
   }
 
-  public onChange: (v: number) => void;
-  public onTouched: () => void;
+  public onChange: (v: number) => void = (v: number) => { this.change.emit(v); };
+  public onTouched: () => void = () => null;
 
   constructor(private readonly cdRef: ChangeDetectorRef) {
     this.initStars();

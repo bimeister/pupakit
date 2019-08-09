@@ -38,9 +38,14 @@ export class SelectDemoComponent {
     select: new FormControl()
   });
 
+  public form2: FormGroup = new FormGroup({
+    select: new FormControl('Lorem')
+  });
+
   constructor() {
     /* tslint:disable */
     this.form.valueChanges.subscribe(console.log);
+    this.form2.valueChanges.subscribe(console.log);
     /* tslint:enable */
   }
 }
