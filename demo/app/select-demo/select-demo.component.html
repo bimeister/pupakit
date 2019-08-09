@@ -12,4 +12,8 @@
       <pupa-select [value]="'Lorem'" [items]="items"></pupa-select>
     </div>
   </form>
+
+  <form [formGroup]="form2">
+    <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
+  </form>
 </div>
