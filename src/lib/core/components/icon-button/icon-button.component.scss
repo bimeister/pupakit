@@ -2,7 +2,12 @@
 @import 'variables';
 @import 'functions';
 
+:host {
+  appearance: none;
+}
+
 .button {
+  appearance: none;
   box-sizing: border-box;
   cursor: pointer;
   padding: 0;

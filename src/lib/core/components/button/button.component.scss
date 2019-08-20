@@ -2,6 +2,10 @@
 @import 'mixins';
 @import 'functions';
 
+:host {
+  appearance: none;
+}
+
 .button {
   appearance: none;
   box-sizing: border-box;
