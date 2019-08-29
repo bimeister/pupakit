@@ -34,5 +34,8 @@
   line-height: rems(1.7);
   & pupa-chip {
     margin-right: rems(0.2);
+    & span {
+      margin: 0 rems(0.4);
+    }
   }
 }

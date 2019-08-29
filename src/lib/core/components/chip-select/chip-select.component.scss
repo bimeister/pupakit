@@ -6,8 +6,13 @@
   display: block;
 }
 
-pupa-chip {
+pupa-chip, pupa-chip-button {
   margin-right: rems(0.3);
+}
+
+pupa-chip span {
+  display: inline-block;
+  margin-right: rems(0.6);
 }
 
 .chip-select__chip-remove {
@@ -17,10 +22,10 @@ pupa-chip {
   background: transparent;
   cursor: pointer;
   padding: 0;
-  margin: 0 rems(-0.1) 0 rems(0.2);
+  margin: 0 rems(0.2) 0 0;
   outline: none;
   height: rems(1);
-  width: 1;
+  width: rems(1);
   opacity: 1;
   display: flex;
   border-radius: 50%;
@@ -31,7 +36,7 @@ pupa-chip {
   color: $color_grey-ivory;
   &:focus,
   &:hover {
-    color: $color_active-blue;
+    color: $color_white;
   }
 }
 
@@ -44,7 +49,8 @@ pupa-chip {
   display: inline-flex;
   height: rems(1);
   width: rems(1);
-  margin-right: rems(0.2);
+  overflow: hidden;
+  margin: 0 rems(0.2) 0 rems(0.4);
 }
 
 .chip-select__droppable-item {
