@@ -25,7 +25,7 @@
   padding: 0;
 }
 
-:host:not(.disable){
+:host:not(.disable) {
   & .chip {
     &:focus,
     &:hover {
