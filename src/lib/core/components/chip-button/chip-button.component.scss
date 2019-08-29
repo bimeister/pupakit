@@ -27,7 +27,7 @@
   justify-content: space-evenly;
   flex-direction: row;
   &:focus,
-  &:hover:not([disabled]) {
+  &:hover:not(:disabled) {
     background: $color_active-blue;
   }
   &:disabled {
