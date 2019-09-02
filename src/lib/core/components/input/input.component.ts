@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output,
+  Renderer2,
+  ViewChild
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'medium' | 'small';
@@ -15,7 +26,8 @@ export type InputSize = 'medium' | 'small';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements ControlValueAccessor {
+export class InputComponent implements ControlValueAccessor, AfterViewInit {
+  @ViewChild('inputElement', { static: true }) public inputElement: ElementRef<HTMLInputElement>;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: string = 'text';
   @Input() public size: InputSize = 'medium';
@@ -25,6 +37,7 @@ export class InputComponent implements ControlValueAccessor {
   @Input() public placeholder: string = '';
   @Input() public id: string;
   @Input() public name: string;
+  @Input() public width: string;
   @Input()
   public get value(): string {
     return this.valueData;
@@ -38,6 +51,14 @@ export class InputComponent implements ControlValueAccessor {
   public touched: boolean = false;
 
   private valueData: string = '';
+
+  constructor(protected readonly renderer: Renderer2) {}
+
+  public ngAfterViewInit(): void {
+    if (this.width) {
+      this.renderer.setStyle(this.inputElement.nativeElement, 'width', `${this.width}`);
+    }
+  }
 
   public registerOnChange(fn: VoidFunction): void {
     this.onChange = fn;

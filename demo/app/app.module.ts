@@ -23,6 +23,7 @@ import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 
 @NgModule({
@@ -47,7 +48,8 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
     IconButtonDemoComponent,
     ChipDemoComponent,
     ChipButtonDemoComponent,
-    ChipSelectDemoComponent
+    ChipSelectDemoComponent,
+    TreeDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +86,10 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
       {
         path: 'chip-select',
         component: ChipSelectDemoComponent
+      },
+      {
+        path: 'tree',
+        component: TreeDemoComponent
       },
       {
         path: 'icon-button',

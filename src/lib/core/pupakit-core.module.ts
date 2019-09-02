@@ -19,6 +19,8 @@ import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { TileComponent } from './components/tile/tile.component';
+import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
+import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
 
 const CORE_COMPONENTS: any[] = [
@@ -41,7 +43,9 @@ const CORE_COMPONENTS: any[] = [
   IconButtonComponent,
   ChipComponent,
   ChipButtonComponent,
-  ChipSelectComponent
+  ChipSelectComponent,
+  TreeComponent,
+  TreeNodeComponent
 ];
 
 @NgModule({
