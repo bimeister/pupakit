@@ -1,0 +1,22 @@
+<div class="item-node">
+  <div *ngIf="item?.enable" class="item-node__button" [title]="item.value" (click)="clickItem($event)">
+    <div class="item-node__button-wrapper">
+      <div class="item-node__button-icon">
+        <ion-icon [name]="item.icon"></ion-icon>
+      </div>
+      <div class="item-node__button-text-wrap" [ngClass]="item?.children.length > 0 ? 'children' : ''">
+        <div class="item-node__button-text">
+          {{ item.value }}
+        </div>
+      </div>
+      <div *ngIf="item?.children.length > 0" class="item-node__button-children" (click)="openChildren($event)">
+        <ion-icon [name]="item?.opened ? 'arrow-dropup' : 'arrow-dropdown'"></ion-icon>
+      </div>
+    </div>
+  </div>
+  <ng-container *ngIf="item?.opened">
+    <div *ngFor="let child of item?.children" class="item-node-children">
+      <pupa-tree-node *ngIf="item?.enable" [item]="child"></pupa-tree-node>
+    </div>
+  </ng-container>
+</div>
