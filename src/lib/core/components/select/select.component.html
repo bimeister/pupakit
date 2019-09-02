@@ -1,5 +1,8 @@
 <div class="pupa-select" [class.disabled]="disabled" #anchor [id]="id">
-  <div class="selected-value" [title]="selectedItem?.caption?.length > 20 ? selectedItem ? selectedItem.caption : '' : ''">
+  <div
+    class="selected-value"
+    [title]="selectedItem?.caption?.length > 20 ? (selectedItem ? selectedItem.caption : '') : ''"
+  >
     <ion-icon
       class="pupa-dropdown__icon pupa-dropdown__icon_left"
       *ngIf="selectedItem?.iconLeft"
