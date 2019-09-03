@@ -9,6 +9,7 @@ export interface TreeItemNode {
   parent: TreeItemNode;
   opened: boolean;
   active: boolean;
+  changeDetector: ChangeDetectorRef;
 }
 
 @Component({
@@ -57,6 +58,9 @@ export class TreeComponent {
     if (text === '') {
       this.itemsCollection.forEach(item => {
         item.enable = true;
+        if (item.changeDetector) {
+          item.changeDetector.markForCheck();
+        }
       });
       return;
     }
@@ -65,10 +69,16 @@ export class TreeComponent {
     );
     this.itemsCollection.forEach(item => {
       item.enable = false;
+      if (item.changeDetector) {
+        item.changeDetector.markForCheck();
+      }
     });
     search.forEach(item => {
       item.enable = true;
       item.opened = true;
+      if (item.changeDetector) {
+        item.changeDetector.markForCheck();
+      }
       this.openParent(item);
     });
     this.changeDetector.markForCheck();
@@ -77,6 +87,9 @@ export class TreeComponent {
   private checkedActive(): void {
     this.itemsCollection.forEach(item => {
       item.active = true;
+      if (item.changeDetector) {
+        item.changeDetector.markForCheck();
+      }
     });
     this.itemsCollection.forEach(item => {
       if (!item.active) {
@@ -84,6 +97,9 @@ export class TreeComponent {
       }
       if (this.notActiveKeys.find(key => key === item.key)) {
         item.active = false;
+        if (item.changeDetector) {
+          item.changeDetector.markForCheck();
+        }
         if (item.children && item.children.length > 0) {
           this.checkedActiveItem(item.children);
         }
@@ -97,6 +113,9 @@ export class TreeComponent {
       .filter(item => item.active)
       .forEach(item => {
         item.active = false;
+        if (item.changeDetector) {
+          item.changeDetector.markForCheck();
+        }
         if (item.children && item.children.length > 0) {
           this.checkedActiveItem(item.children);
         }
@@ -107,6 +126,9 @@ export class TreeComponent {
     if (item.parent !== null) {
       item.parent.enable = true;
       item.parent.opened = true;
+      if (item.changeDetector) {
+        item.changeDetector.markForCheck();
+      }
       this.openParent(item.parent);
     }
   }
@@ -129,7 +151,8 @@ export class TreeComponent {
         children: [],
         parent,
         opened: false,
-        active: true
+        active: true,
+        changeDetector: null
       };
       if (parent !== null) {
         parent.children.push(itemNode);
