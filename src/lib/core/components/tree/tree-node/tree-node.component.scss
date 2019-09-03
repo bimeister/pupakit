@@ -17,7 +17,7 @@
   padding: 0.3rem 0;
   &.disable {
     color: $color_grey-ivory;
-    & .item-node__button-icon{
+    & .item-node__button-icon {
       color: $color_grey-ivory;
     }
   }
@@ -57,12 +57,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 3px;
-  &:hover{
+  &:hover {
     background-color: $color_grey-apple;
   }
 }
 
-.item-node__button-text-wrap.children  {
+.item-node__button-text-wrap.children {
   max-width: calc(100% - 2.6rem);
 }
 
