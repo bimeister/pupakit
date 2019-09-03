@@ -15,6 +15,12 @@
   width: 100%;
   cursor: pointer;
   padding: 0.3rem 0;
+  &.disable {
+    color: $color_grey-ivory;
+    & .item-node__button-icon{
+      color: $color_grey-ivory;
+    }
+  }
 }
 
 .item-node__button-wrapper {
@@ -29,6 +35,7 @@
   min-width: rems(1);
   margin-right: 0.3rem;
   align-items: center;
+  color: $color_cadet-blue;
 }
 
 .item-node__button-text-wrap {

@@ -1,5 +1,11 @@
 <div class="item-node">
-  <div *ngIf="item?.enable" class="item-node__button" [title]="item.value" (click)="clickItem($event)">
+  <div
+    *ngIf="item?.enable"
+    class="item-node__button"
+    [ngClass]="!item?.active ? 'disable' : ''"
+    [title]="item.value"
+    (click)="clickItem($event)"
+  >
     <div class="item-node__button-wrapper">
       <div class="item-node__button-icon">
         <ion-icon [name]="item.icon"></ion-icon>

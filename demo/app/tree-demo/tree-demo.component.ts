@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TreeItem, TreeItemNode } from 'src/lib/core/components/tree/tree.component';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
 @Component({
   selector: 'demo-tree',
@@ -8,7 +7,7 @@ import { TreeItem, TreeItemNode } from 'src/lib/core/components/tree/tree.compon
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeDemoComponent {
-  public items: TreeItem[] = [
+  public items: any[] = [
     {
       key: '1',
       value: '1 Пункт',
@@ -85,7 +84,14 @@ export class TreeDemoComponent {
     }
   ];
 
-  public clickItem(item: TreeItemNode): void {
-    console.warn(item);
+  public notActiveKeys: string[] = [];
+
+  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+
+  public clickItem(key: string): void {
+    this.notActiveKeys.push(key);
+    this.notActiveKeys = [...this.notActiveKeys];
+    this.changeDetector.markForCheck();
+    console.log(`key: ${key}`);
   }
 }
