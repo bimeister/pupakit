@@ -55,7 +55,6 @@ export class ChipSelectComponent {
   public set items(items: ChipItem[]) {
     this._items = items;
     this.checkedAllItems(this._items);
-    this.changeDetector.markForCheck();
   }
 
   public get items(): ChipItem[] {
@@ -71,7 +70,6 @@ export class ChipSelectComponent {
       this._selectItems.add(item);
     });
     this.notActiveKeys = selectId;
-    this.changeDetector.markForCheck();
   }
 
   public get selectItems(): ChipItem[] {
@@ -116,8 +114,7 @@ export class ChipSelectComponent {
       return;
     }
     this._selectItems.add(item);
-    this.notActiveKeys.push(key);
-    this.notActiveKeys = [...this.notActiveKeys];
+    this.notActiveKeys = [...this.notActiveKeys, key];
     this.changeDetector.markForCheck();
   }
 
