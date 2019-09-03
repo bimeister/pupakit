@@ -92,6 +92,7 @@ export class TreeDemoComponent {
     this.notActiveKeys.push(key);
     this.notActiveKeys = [...this.notActiveKeys];
     this.changeDetector.markForCheck();
+    // tslint:disable-next-line: no-console
     console.log(`key: ${key}`);
   }
 }
