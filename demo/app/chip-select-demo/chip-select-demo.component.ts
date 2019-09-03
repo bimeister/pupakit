@@ -59,7 +59,24 @@ export class ChipSelectDemoComponent {
     {
       key: 'key_3',
       value: 'Item 3',
-      icon: 'man'
+      icon: 'man',
+      children: [
+        {
+          key: 'key_3_11',
+          value: 'Item 11',
+          icon: 'person-add'
+        },
+        {
+          key: 'key_3_22',
+          value: 'Item 222',
+          icon: 'person-add'
+        },
+        {
+          key: 'key_3_33',
+          value: 'Item 333',
+          icon: 'person-add'
+        }
+      ]
     },
     {
       key: 'key_3_1',

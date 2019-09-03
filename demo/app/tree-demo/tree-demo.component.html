@@ -3,6 +3,15 @@
 </h1>
 <div class="group">
   <div style="width: 300px; flex: inherit; background-color: #979797; padding: 1rem;">
-    <pupa-tree [items]="items" (selectTreeItemNode)="clickItem($event)" searchText="Поиск в дереве..."></pupa-tree>
+    <div>
+      <div>Не активные пункты с ключами:</div>
+      <span *ngFor="let key of notActiveKeys">{{ key }}, </span>
+    </div>
+    <pupa-tree
+      [items]="items"
+      (selectItemKey)="clickItem($event)"
+      [notActiveKeys]="notActiveKeys"
+      searchText="Поиск в дереве..."
+    ></pupa-tree>
   </div>
 </div>

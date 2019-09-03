@@ -1,5 +1,5 @@
 <div class="chip-select">
-  <pupa-chip-button [disabled]="visibleItems?.length === 0" #addChips>
+  <pupa-chip-button #addChips>
     <div class="chip-select__chip-add-button">Добавить</div>
     <ion-icon name="add"></ion-icon>
   </pupa-chip-button>
@@ -21,16 +21,12 @@
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
-  <pupa-droppable
-    [anchor]="addChips.chipButtonElement.nativeElement"
-    [ngClass]="visibleItems?.length === 0 ? 'invisible' : ''"
-    [maxWidth]="200"
-  >
-    <ng-container *ngFor="let item of visibleItems">
-      <div class="chip-select__droppable-item" (click)="clickDroppableItem($event, item)" [title]="item.value">
-        <ion-icon class="chip-select__droppable-icon" [name]="item.icon"></ion-icon>
-        <div class="chip-select__droppable-text">{{ item.value }}</div>
-      </div>
-    </ng-container>
+  <pupa-droppable [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="200">
+    <pupa-tree
+      [items]="items"
+      (selectItemKey)="clickDroppableItem($event)"
+      [notActiveKeys]="notActiveKeys"
+      searchText="Поиск..."
+    ></pupa-tree>
   </pupa-droppable>
 </div>

@@ -1,12 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
 
-export interface TreeItem {
-  key: string;
-  value: string;
-  icon: string;
-  children: TreeItem[];
-}
-
 export interface TreeItemNode {
   enable: boolean;
   key: string;
@@ -15,6 +8,7 @@ export interface TreeItemNode {
   children: TreeItemNode[];
   parent: TreeItemNode;
   opened: boolean;
+  active: boolean;
 }
 
 @Component({
@@ -25,25 +19,37 @@ export interface TreeItemNode {
 })
 export class TreeComponent {
   @Input()
-  public set items(items: TreeItem[]) {
+  public set items(items: any[]) {
     this._items = items;
     this.setTreeItemNodes();
   }
 
-  public get items(): TreeItem[] {
+  @Input()
+  public set notActiveKeys(keys: string[]) {
+    this._notActiveKeys = keys;
+    this.checkedActive();
+  }
+
+  public get notActiveKeys(): string[] {
+    return this._notActiveKeys;
+  }
+
+  public get items(): any[] {
     return this._items;
   }
 
   @Input() public searchText: string = 'Поиск...';
 
   @Output()
-  public selectTreeItemNode: EventEmitter<TreeItemNode> = new EventEmitter<TreeItemNode>();
+  public selectItemKey: EventEmitter<string> = new EventEmitter<string>();
 
   public itemsNode: TreeItemNode[] = [];
 
+  public _notActiveKeys: string[] = [];
+
   private readonly itemsCollection: Set<TreeItemNode> = new Set<TreeItemNode>();
 
-  private _items: TreeItem[] = [];
+  private _items: any[] = [];
 
   constructor(private readonly changeDetector: ChangeDetectorRef) {}
 
@@ -68,6 +74,35 @@ export class TreeComponent {
     this.changeDetector.markForCheck();
   }
 
+  private checkedActive(): void {
+    this.itemsCollection.forEach(item => {
+      item.active = true;
+    });
+    this.itemsCollection.forEach(item => {
+      if (!item.active) {
+        return;
+      }
+      if (this.notActiveKeys.find(key => key === item.key)) {
+        item.active = false;
+        if (item.children && item.children.length > 0) {
+          this.checkedActiveItem(item.children);
+        }
+      }
+    });
+    this.changeDetector.markForCheck();
+  }
+
+  private checkedActiveItem(items: TreeItemNode[]): void {
+    items
+      .filter(item => item.active)
+      .forEach(item => {
+        item.active = false;
+        if (item.children && item.children.length > 0) {
+          this.checkedActiveItem(item.children);
+        }
+      });
+  }
+
   private openParent(item: TreeItemNode): void {
     if (item.parent !== null) {
       item.parent.enable = true;
@@ -81,8 +116,11 @@ export class TreeComponent {
     this.setTreeItemNode(this._items);
   }
 
-  private setTreeItemNode(items: TreeItem[], parent: TreeItemNode = null): void {
+  private setTreeItemNode(items: any[], parent: TreeItemNode = null): void {
     items.forEach(item => {
+      if (!item.key || !item.value || !item.icon) {
+        return;
+      }
       const itemNode: TreeItemNode = {
         enable: true,
         key: item.key,
@@ -90,7 +128,8 @@ export class TreeComponent {
         icon: item.icon,
         children: [],
         parent,
-        opened: false
+        opened: false,
+        active: true
       };
       if (parent !== null) {
         parent.children.push(itemNode);
@@ -98,7 +137,7 @@ export class TreeComponent {
         this.itemsNode.push(itemNode);
       }
       this.itemsCollection.add(itemNode);
-      if (item.children.length > 0) {
+      if (item.children && item.children.length > 0) {
         this.setTreeItemNode(item.children, itemNode);
       }
     });

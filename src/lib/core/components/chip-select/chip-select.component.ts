@@ -17,6 +17,7 @@ export interface ChipItem {
   key: string;
   value: string;
   icon: string;
+  children?: ChipItem[];
 }
 
 @Component({
@@ -47,38 +48,60 @@ export interface ChipItem {
 })
 export class ChipSelectComponent {
   public expandedButtonIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-  constructor(protected readonly cDRef: ChangeDetectorRef) {}
+
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
+
+  @Input()
+  public set items(items: ChipItem[]) {
+    this._items = items;
+    this.checkedAllItems(this._items);
+    this.changeDetector.markForCheck();
+  }
+
+  public get items(): ChipItem[] {
+    return this._items;
+  }
+
   @Input()
   public set selectItems(items: ChipItem[]) {
     this._selectItems.clear();
+    const selectId: string[] = [];
     items.forEach(item => {
+      selectId.push(item.key);
       this._selectItems.add(item);
     });
-    this.cDRef.markForCheck();
+    this.notActiveKeys = selectId;
+    this.changeDetector.markForCheck();
   }
 
   public get selectItems(): ChipItem[] {
-    return Array.from(this._selectItems);
+    return Array.from(this._selectItems.values());
   }
 
-  @Input() public items: ChipItem[] = [];
+  public notActiveKeys: string[] = [];
+
+  private _items: ChipItem[] = [];
+
+  private readonly _selectItems: Set<ChipItem> = new Set<ChipItem>([]);
+
+  private readonly _allItems: Set<ChipItem> = new Set<ChipItem>([]);
 
   @Output() public removedItem: EventEmitter<ChipItem> = new EventEmitter<ChipItem>(null);
 
   @Output() public addedItem: EventEmitter<ChipItem> = new EventEmitter<ChipItem>(null);
 
-  private readonly _selectItems: Set<ChipItem> = new Set<ChipItem>([]);
+  constructor(protected readonly changeDetector: ChangeDetectorRef) {}
 
   public removeItem(event: MouseEvent, item: ChipItem): void {
     event.stopPropagation();
     this._selectItems.delete(item);
     this.removedItem.emit(item);
-    this.cDRef.markForCheck();
+    this.notActiveKeys = this.notActiveKeys.filter(activeItem => activeItem !== item.key);
+    this.changeDetector.markForCheck();
     this.refreshDroppable();
   }
 
-  public get visibleItems(): ChipItem[] {
+  public get activeItems(): ChipItem[] {
     const keysCollection: Set<string> = new Set<string>(Array.from(this._selectItems).map(item => item.key));
     const result: ChipItem[] = this.items.filter(item => !keysCollection.has(item.key));
     if (result.length === 0) {
@@ -87,19 +110,15 @@ export class ChipSelectComponent {
     return result;
   }
 
-  public clickDroppableItem(event: MouseEvent, item: ChipItem): void {
-    event.stopPropagation();
-    if (this.isObject(item.key)) {
+  public clickDroppableItem(key: string): void {
+    const item: ChipItem = Array.from(this._allItems).find(allItem => allItem.key === key);
+    if (!item) {
       return;
     }
     this._selectItems.add(item);
-    this.cDRef.markForCheck();
-    this.addedItem.emit(item);
-    this.refreshDroppable();
-  }
-
-  public isObject(key: string): boolean {
-    return Array.from(this._selectItems).find(item => item.key === key) !== undefined;
+    this.notActiveKeys.push(key);
+    this.notActiveKeys = [...this.notActiveKeys];
+    this.changeDetector.markForCheck();
   }
 
   public buttonAnimationState(expandedButtonIndex: number, buttonIndex: number): string {
@@ -114,5 +133,16 @@ export class ChipSelectComponent {
     setTimeout(() => {
       this.droppable.checkPosition();
     }, 0);
+  }
+
+  private checkedAllItems(items: ChipItem[]): void {
+    items.forEach(item => {
+      if (Array.from(this._allItems.values()).find(allitem => allitem.key === item.key) === undefined) {
+        this._allItems.add(item);
+      }
+      if (item.children && item.children.length > 0) {
+        this.checkedAllItems(item.children);
+      }
+    });
   }
 }
