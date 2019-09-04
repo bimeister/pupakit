@@ -109,4 +109,14 @@ export class ChipSelectDemoComponent {
       icon: 'add'
     }
   ];
+
+  public addedItem(item: ChipItem): void {
+    // tslint:disable-next-line: no-console
+    console.log(item);
+  }
+
+  public removedItem(item: ChipItem): void {
+    // tslint:disable-next-line: no-console
+    console.log(item);
+  }
 }
