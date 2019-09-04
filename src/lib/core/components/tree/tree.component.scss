@@ -2,8 +2,8 @@
 
 :host {
   display: block;
-  box-sizing: content-box;
-  width: calc(100% - 1rem);
+  box-sizing: border-box;
+  width: 100%;
   background-color: #ffffff;
   padding: 0.5rem;
   text-align: left;
