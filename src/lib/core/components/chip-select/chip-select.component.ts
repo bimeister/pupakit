@@ -114,6 +114,7 @@ export class ChipSelectComponent {
       return;
     }
     this._selectItems.add(item);
+    this.addedItem.emit(item);
     this.notActiveKeys = [...this.notActiveKeys, key];
     this.changeDetector.markForCheck();
   }

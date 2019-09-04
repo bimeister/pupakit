@@ -2,6 +2,16 @@
   Chip select
 </h1>
 <div class="group">
-  <pupa-chip-select [selectItems]="selectItems" [items]="items"></pupa-chip-select>
-  <pupa-chip-select [selectItems]="[]" [items]="items"></pupa-chip-select>
+  <pupa-chip-select
+    [selectItems]="selectItems"
+    [items]="items"
+    (removedItem)="removedItem($event)"
+    (addedItem)="addedItem($event)"
+  ></pupa-chip-select>
+  <pupa-chip-select
+    [selectItems]="[]"
+    [items]="items"
+    (removedItem)="removedItem($event)"
+    (addedItem)="addedItem($event)"
+  ></pupa-chip-select>
 </div>
