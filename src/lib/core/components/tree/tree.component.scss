@@ -1,10 +1,12 @@
 @import 'functions';
 
 :host {
-  width: calc(100% - 1rem);
   display: block;
+  box-sizing: content-box;
+  width: calc(100% - 1rem);
   background-color: #ffffff;
   padding: 0.5rem;
+  text-align: left;
 }
 
 .tree {
