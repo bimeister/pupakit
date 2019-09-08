@@ -5,6 +5,7 @@ export interface TreeItemNode {
   key: string;
   value: string;
   icon: string;
+  clickable: boolean;
   children: TreeItemNode[];
   parent: TreeItemNode;
   opened: boolean;
@@ -148,6 +149,7 @@ export class TreeComponent {
         key: item.key,
         value: item.value,
         icon: item.icon,
+        clickable: item.clickable === false ? false : true,
         children: [],
         parent,
         opened: false,
