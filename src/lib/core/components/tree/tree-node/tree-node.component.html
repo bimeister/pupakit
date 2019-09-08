@@ -2,7 +2,7 @@
   <div
     *ngIf="item?.enable"
     class="item-node__button"
-    [ngClass]="!item?.active ? 'disable' : ''"
+    [ngClass]="!item?.active || !item?.clickable ? 'disable' : ''"
     [title]="item.value"
     (click)="clickItem($event)"
   >

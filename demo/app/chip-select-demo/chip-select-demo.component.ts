@@ -60,6 +60,7 @@ export class ChipSelectDemoComponent {
       key: 'key_3',
       value: 'Item 3',
       icon: 'man',
+      clickable: false,
       children: [
         {
           key: 'key_3_11',

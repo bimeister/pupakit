@@ -25,7 +25,11 @@ export class TreeNodeComponent {
 
   public clickItem(event: MouseEvent): void {
     event.stopPropagation();
-    if (this.treeComponent.notActiveKeys.find(key => key === this.item.key) || !this.item.active) {
+    if (
+      !this.item.clickable ||
+      this.treeComponent.notActiveKeys.find(key => key === this.item.key) ||
+      !this.item.active
+    ) {
       return;
     }
     this.treeComponent.selectItemKey.emit(this.item.key);
