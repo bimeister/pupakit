@@ -22,7 +22,7 @@
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
-  <pupa-droppable [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="200">
+  <pupa-droppable [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="maxWidth">
     <pupa-tree
       [items]="items"
       (selectItemKey)="clickDroppableItem($event)"
