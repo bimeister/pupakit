@@ -53,6 +53,9 @@ export class ChipSelectComponent {
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
 
   @Input()
+  public onlyOne: boolean = false;
+
+  @Input()
   public set items(items: ChipItem[]) {
     this._items = items;
     this.checkedAllItems(this._items);
@@ -66,6 +69,9 @@ export class ChipSelectComponent {
   public set selectItems(items: ChipItem[]) {
     this._selectItems.clear();
     const selectId: string[] = [];
+    if (this.onlyOne && items.length > 0) {
+      items = [items[0]];
+    }
     items.forEach(item => {
       selectId.push(item.key);
       this._selectItems.add(item);
@@ -76,6 +82,9 @@ export class ChipSelectComponent {
   public get selectItems(): ChipItem[] {
     return Array.from(this._selectItems.values());
   }
+
+  @Input()
+  public maxWidth: number = 200;
 
   public notActiveKeys: string[] = [];
 
@@ -114,7 +123,11 @@ export class ChipSelectComponent {
     if (!item) {
       return;
     }
-    this._selectItems.add(item);
+    if (this.onlyOne) {
+      this.selectItems = [item];
+    } else {
+      this._selectItems.add(item);
+    }
     this.addedItem.emit(item);
     this.notActiveKeys = [...this.notActiveKeys, key];
     this.changeDetector.markForCheck();
