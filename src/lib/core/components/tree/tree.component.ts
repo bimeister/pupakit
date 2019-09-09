@@ -137,6 +137,7 @@ export class TreeComponent {
   private setTreeItemNodes(): void {
     this.itemsCollection.clear();
     this.setTreeItemNode(this._items);
+    this.changeDetector.detectChanges();
   }
 
   private setTreeItemNode(items: any[], parent: TreeItemNode = null): void {
