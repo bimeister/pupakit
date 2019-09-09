@@ -24,6 +24,7 @@
   </pupa-chip>
   <pupa-droppable [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="maxWidth">
     <pupa-tree
+      *ngIf="items.length > 0; else loader"
       [items]="items"
       (selectItemKey)="clickDroppableItem($event)"
       [notActiveKeys]="notActiveKeys"
@@ -31,3 +32,9 @@
     ></pupa-tree>
   </pupa-droppable>
 </div>
+
+<ng-template #loader>
+  <div class="spinner-container">
+    <pupa-spinner [size]="'30px'"></pupa-spinner>
+  </div>
+</ng-template>

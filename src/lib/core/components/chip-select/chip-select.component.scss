@@ -81,3 +81,12 @@ pupa-chip span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.spinner-container {
+  margin: rems(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100% - 100px);
+}
+

@@ -57,8 +57,14 @@ export class ChipSelectComponent {
 
   @Input()
   public set items(items: ChipItem[]) {
-    this._items = items;
-    this.checkedAllItems(this._items);
+    this._items = [];
+    this._allItems.clear();
+    this.changeDetector.markForCheck();
+    setTimeout(() => {
+      this._items = items;
+      this.checkedAllItems(this._items);
+      this.changeDetector.markForCheck();
+    }, 0);
   }
 
   public get items(): ChipItem[] {
