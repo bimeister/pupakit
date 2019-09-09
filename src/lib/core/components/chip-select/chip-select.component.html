@@ -1,5 +1,5 @@
 <div class="chip-select">
-  <pupa-chip-button #addChips>
+  <pupa-chip-button #addChips [disabled]="readonly">
     <div class="chip-select__chip-add-button">Добавить</div>
     <ion-icon name="add"></ion-icon>
   </pupa-chip-button>
@@ -10,6 +10,7 @@
   >
     <div class="chip-select__chip-icon">
       <button
+        *ngIf="!readonly"
         [@isHovered]="buttonAnimationState(expandedButtonIndex$ | async, index)"
         class="chip-select__chip-remove"
         (click)="removeItem($event, selectItem)"
@@ -22,7 +23,7 @@
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
-  <pupa-droppable [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="maxWidth">
+  <pupa-droppable *ngIf="!readonly" [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="maxWidth">
     <pupa-tree
       *ngIf="items.length > 0; else loader"
       [items]="items"
