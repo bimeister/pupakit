@@ -53,7 +53,7 @@ export class ChipSelectComponent {
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
 
   @Input()
-  public onlyOne: boolean = false;
+  public selectOne: boolean = false;
 
   @Input()
   public set items(items: ChipItem[]) {
@@ -75,7 +75,7 @@ export class ChipSelectComponent {
   public set selectItems(items: ChipItem[]) {
     this._selectItems.clear();
     const selectId: string[] = [];
-    if (this.onlyOne && items.length > 0) {
+    if (this.selectOne && items.length > 0) {
       items = [items[0]];
     }
     items.forEach(item => {
@@ -129,7 +129,7 @@ export class ChipSelectComponent {
     if (!item) {
       return;
     }
-    if (this.onlyOne) {
+    if (this.selectOne) {
       this.selectItems = [item];
     } else {
       this._selectItems.add(item);
