@@ -53,6 +53,9 @@ export class ChipSelectComponent {
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
 
   @Input()
+  public readonly: boolean = false;
+
+  @Input()
   public selectOne: boolean = false;
 
   @Input()
@@ -108,6 +111,9 @@ export class ChipSelectComponent {
 
   public removeItem(event: MouseEvent, item: ChipItem): void {
     event.stopPropagation();
+    if (this.readonly) {
+      return;
+    }
     this._selectItems.delete(item);
     this.removedItem.emit(item);
     this.notActiveKeys = this.notActiveKeys.filter(activeItem => activeItem !== item.key);
@@ -125,6 +131,9 @@ export class ChipSelectComponent {
   }
 
   public clickDroppableItem(key: string): void {
+    if (this.readonly) {
+      return;
+    }
     const item: ChipItem = Array.from(this._allItems).find(allItem => allItem.key === key);
     if (!item) {
       return;
