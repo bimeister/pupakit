@@ -5,7 +5,7 @@ $width_switcher: rems(2.8125);
 $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 
 :host {
-  z-index: 2000;
+  z-index: 1000;
   width: auto;
   overflow: hidden;
 
@@ -16,7 +16,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 }
 
 .search-field {
-  z-index: 2001;
+  z-index: 1001;
   height: rems(2);
   width: rems(16);
   position: relative;
