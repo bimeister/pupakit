@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 import { remSizePx } from './../../../constants/rem-size-px.const';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
@@ -55,6 +55,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
   public set value(newValue: string) {
     this.inputValueControl.setValue(newValue);
   }
+  @Input() public clearValue: Subject<void> = new Subject<void>();
   @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
   @HostBinding('class.pupa-search-field_expandable')
   public get isExoandable(): boolean {
@@ -76,9 +77,9 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public ngOnInit(): void {
-    this.subscription.add(
-      this.inputValueControl.valueChanges.subscribe((value: string) => this.valueChange.emit(value))
-    );
+    this.subscription
+      .add(this.inputValueControl.valueChanges.subscribe((value: string) => this.valueChange.emit(value)))
+      .add(this.clearValue.subscribe(() => (this.value = '')));
   }
 
   public ngOnDestroy(): void {
