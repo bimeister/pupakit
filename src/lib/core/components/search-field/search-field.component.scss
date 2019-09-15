@@ -18,13 +18,18 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 .search-field {
   z-index: 1001;
   height: rems(2);
-  width: rems(16);
+  width: $width_switcher;
   position: relative;
   @include transition(width);
   @include flex-container(row, center, space-between, nowrap);
 
   &_expanded {
     width: 100%;
+    overflow: visible;
+  }
+
+  &:not(.search-field_expandable) {
+    width: rems(16);
   }
 
   &:not(.search-field_expandable).search-field_empty:hover {
@@ -48,6 +53,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   top: 0;
   right: 0;
   position: absolute;
+  overflow: hidden;
 
   .search-field__control {
     width: $width_switcher;
