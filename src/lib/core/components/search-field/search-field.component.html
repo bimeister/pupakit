@@ -1,6 +1,7 @@
 <div
   class="search-field"
   [class.search-field_expandable]="expandable"
+  [class.search-field_expanded]="(controlExpansionState$ | async) === 'true'"
   [class.search-field_empty]="isValueEmpty"
   [class.search-field_outlined]="kind === 'outlined'"
 >
