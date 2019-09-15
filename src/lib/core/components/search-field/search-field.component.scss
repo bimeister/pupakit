@@ -20,7 +20,12 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   height: rems(2);
   width: rems(16);
   position: relative;
+  @include transition(width);
   @include flex-container(row, center, space-between, nowrap);
+
+  &_expanded {
+    width: 100%;
+  }
 
   &:not(.search-field_expandable).search-field_empty:hover {
     .search-field__switcher {
@@ -40,7 +45,6 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 }
 
 .search-field.search-field_expandable {
-  width: 100%;
   top: 0;
   right: 0;
   position: absolute;
