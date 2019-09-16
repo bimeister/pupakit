@@ -1,0 +1,20 @@
+<button (click)="visibleModal$.next('small')">
+  Show small modal
+</button>
+
+<button (click)="visibleModal$.next('medium')">
+  Show medium modal
+</button>
+
+<button (click)="visibleModal$.next('large')">
+  Show large modal
+</button>
+
+<pupa-modal
+  *ngIf="!(visibleModal$ | async | isNullOrUndefined)"
+  (closed)="visibleModal$.next(null)"
+  [size]="visibleModal$ | async"
+  [title]="(visibleModal$ | async) + ' modal'"
+>
+  <demo-modal-demo-content></demo-modal-demo-content>
+</pupa-modal>

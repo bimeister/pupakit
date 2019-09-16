@@ -17,6 +17,8 @@ import { DroppableDemoComponent } from './droppable-demo/droppable-demo.componen
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
+import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
@@ -49,7 +51,9 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
     ChipDemoComponent,
     ChipButtonDemoComponent,
     ChipSelectDemoComponent,
-    TreeDemoComponent
+    TreeDemoComponent,
+    ModalDemoComponent,
+    ModalDemoContentComponent
   ],
   imports: [
     BrowserModule,
@@ -136,6 +140,7 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
         component: DaySelectorDemoComponent
       },
       { path: 'washer-panel', component: WasherPanelDemoComponent },
+      { path: 'modal', component: ModalDemoComponent },
       {
         path: '',
         component: AppComponent
