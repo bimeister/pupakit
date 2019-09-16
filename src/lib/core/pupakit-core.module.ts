@@ -13,6 +13,7 @@ import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { ModalComponent } from './components/modal/modal.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { SelectComponent } from './components/select/select.component';
@@ -45,7 +46,8 @@ const CORE_COMPONENTS: any[] = [
   ChipButtonComponent,
   ChipSelectComponent,
   TreeComponent,
-  TreeNodeComponent
+  TreeNodeComponent,
+  ModalComponent
 ];
 
 @NgModule({

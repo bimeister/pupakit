@@ -1,0 +1,98 @@
+@import 'mixins';
+@import 'functions';
+
+:host {
+  display: contents;
+}
+
+.modal {
+  top: 0;
+  left: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  @include flex-container(column, center, center, nowrap);
+
+  &_large {
+    .modal__content {
+      width: rems(70);
+    }
+  }
+  &_medium {
+    .modal__content {
+      width: rems(50);
+    }
+  }
+  &_small {
+    .modal__content {
+      width: rems(25);
+    }
+  }
+}
+
+.modal__overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: $color_dark-overlay;
+  z-index: 4000;
+  opacity: 0;
+}
+
+.modal__content {
+  padding: rems(1);
+  background: $color_white;
+  max-height: 80vh;
+  max-width: 80vw;
+  border-radius: rems(0.75);
+  box-sizing: border-box;
+  z-index: 4001;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.modal-header {
+  all: unset;
+  width: 100%;
+  margin: 0 0 rems(0.625) 0;
+  @include flex-container(row, center, space-between, nowrap);
+}
+
+.modal-data {
+  width: 100%;
+  position: relative;
+  @include flex-container(column, flex-start, flex-start, nowrap);
+}
+
+.close-button {
+  appearance: none;
+  outline: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  user-select: none;
+  cursor: pointer;
+  height: rems(2);
+  width: rems(2);
+  font-size: rems(1);
+  line-height: 1;
+  color: $color_grey-ivory;
+  @include transition;
+  @include flex-container(row, center, center, nowrap);
+
+  &:hover {
+    color: $color_grey-text;
+  }
+}
+
+.modal-title {
+  font-size: $font-size_root;
+  line-height: $line-height_base-text;
+  color: $color_grey-text;
+  padding: 0;
+  margin: 0;
+  @include regular;
+}

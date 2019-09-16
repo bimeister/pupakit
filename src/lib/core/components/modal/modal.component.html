@@ -1,0 +1,22 @@
+<div class="modal" [ngClass]="'modal_' + size">
+  <div
+    [@overlayAppeared]="overlayAnimationState$ | async"
+    class="modal__overlay"
+    (click)="processOverlayClick($event)"
+  ></div>
+  <div class="modal__content">
+    <header class="modal-header">
+      <h4 class="modal-title">
+        {{ title }}
+      </h4>
+
+      <button *ngIf="closeButton" class="close-button" (click)="processCloseButtonClick($event)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </header>
+
+    <section class="modal-data">
+      <ng-content></ng-content>
+    </section>
+  </div>
+</div>
