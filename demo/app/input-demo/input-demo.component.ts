@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import combos from 'combos';
 import { FormControl, Validators } from '@angular/forms';
+import combos from 'combos';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -17,7 +17,7 @@ export class InputDemoComponent implements OnDestroy {
     size: ['medium', 'small'],
     placeholder: ['placeholder'],
     disabled: [false, true],
-    type: ['text', 'password'],
+    type: ['text', 'password', 'date'],
     showValidateIcon: [false, true]
   });
 
