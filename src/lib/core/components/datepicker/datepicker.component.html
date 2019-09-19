@@ -1,19 +1,38 @@
 <div class="datepicker">
   <div class="datepicker__header">
-    <button class="arrow-button">
+    <button class="arrow-button" (click)="switchToPreviousMonth($event)">
       <ion-icon name="ios-arrow-back"></ion-icon>
     </button>
     <span class="month">
-      Month
+      {{ primaryRangeStartDate$ | async | date: 'MMMM yyy' }}
     </span>
-    <button class="arrow-button">
+    <button class="arrow-button" (click)="switchToNextMonth($event)">
       <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
   </div>
 
   <div class="datepicker__week-days">
-    <span *ngFor="let dayName of weekDayNames">
+    <span class="week-day" *ngFor="let dayName of weekDayNames">
       {{ dayName }}
     </span>
+  </div>
+
+  <div class="datepicker__dates">
+    <button
+      class="date date_previous-month"
+      [class.date_selected]="isSameDate(date, selectedDate$ | async)"
+      *ngFor="let date of primaryRangeLeftOffsetDates$ | async"
+      (click)="selectDate(date, $event)"
+    >
+      {{ date | date: 'd' }}
+    </button>
+    <button
+      class="date"
+      [class.date_selected]="isSameDate(date, selectedDate$ | async)"
+      *ngFor="let date of primaryRangeDates$ | async"
+      (click)="selectDate(date, $event)"
+    >
+      {{ date | date: 'd' }}
+    </button>
   </div>
 </div>
