@@ -41,6 +41,17 @@
       background: transparent;
     }
   }
+
+  &[type='date'] {
+    &::-webkit-calendar-picker-indicator,
+    &::-webkit-input-placeholder,
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      appearance: none;
+      display: none;
+      margin: 0;
+    }
+  }
 }
 
 // state

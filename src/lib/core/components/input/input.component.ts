@@ -13,6 +13,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 export type InputSize = 'medium' | 'small';
+export type InputType = 'password' | 'text' | 'date';
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -29,7 +30,7 @@ export type InputSize = 'medium' | 'small';
 export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('inputElement', { static: true }) public inputElement: ElementRef<HTMLInputElement>;
   @Input() public showValidateIcon: boolean = false;
-  @Input() public type: string = 'text';
+  @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
   @Input() public valid: boolean = null;
   @Input() public disabled: boolean = false;
@@ -53,6 +54,10 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   private valueData: string = '';
 
   constructor(protected readonly renderer: Renderer2) {}
+
+  public get isDateInput(): boolean {
+    return this.type.toLowerCase() === 'date';
+  }
 
   public ngAfterViewInit(): void {
     if (this.width) {
