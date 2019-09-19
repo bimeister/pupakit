@@ -1,0 +1,19 @@
+<div class="datepicker">
+  <div class="datepicker__header">
+    <button class="arrow-button">
+      <ion-icon name="ios-arrow-back"></ion-icon>
+    </button>
+    <span class="month">
+      Month
+    </span>
+    <button class="arrow-button">
+      <ion-icon name="ios-arrow-forward"></ion-icon>
+    </button>
+  </div>
+
+  <div class="datepicker__week-days">
+    <span *ngFor="let dayName of weekDayNames">
+      {{ dayName }}
+    </span>
+  </div>
+</div>

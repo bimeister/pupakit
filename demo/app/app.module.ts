@@ -11,6 +11,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
+import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
@@ -53,7 +54,8 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
     ChipSelectDemoComponent,
     TreeDemoComponent,
     ModalDemoComponent,
-    ModalDemoContentComponent
+    ModalDemoContentComponent,
+    DatepickerDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -138,6 +140,10 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
       {
         path: 'day-selector',
         component: DaySelectorDemoComponent
+      },
+      {
+        path: 'datepicker',
+        component: DatepickerDemoComponent
       },
       { path: 'washer-panel', component: WasherPanelDemoComponent },
       { path: 'modal', component: ModalDemoComponent },
