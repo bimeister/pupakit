@@ -1,0 +1,27 @@
+@import 'mixins';
+@import 'functions';
+
+:host {
+  display: contents;
+}
+
+.datepicker {
+  width: rems(14.1875);
+  height: rems(15.25);
+  box-shadow: $box-shadow_hover;
+  background: $color_white;
+  @include flex-container(column, stretch, stretch, nowrap);
+}
+
+.datepicker__header {
+  height: rems(2.5);
+  width: 100%;
+  @include flex-container(row, center, space-between, nowrap);
+}
+
+.datepicker__week-days {
+    height: rems(1.5625);
+  width: 100%;
+  background: $color_blue-grey;
+  @include flex-container(row, center, space-evenly, nowrap);
+}

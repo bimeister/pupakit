@@ -108,6 +108,7 @@
       "parameter",
       "property-declaration",
       "variable-declaration",
+      "variable-declaration-ignore-function",
       "member-variable-declaration",
       "object-destructuring",
       "array-destructuring"

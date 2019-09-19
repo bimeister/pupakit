@@ -7,6 +7,7 @@ import { ChipButtonComponent } from './components/chip-button/chip-button.compon
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
+import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
@@ -47,7 +48,8 @@ const CORE_COMPONENTS: any[] = [
   ChipSelectComponent,
   TreeComponent,
   TreeNodeComponent,
-  ModalComponent
+  ModalComponent,
+  DatepickerComponent
 ];
 
 @NgModule({
