@@ -4,7 +4,7 @@
       <ion-icon name="ios-arrow-back"></ion-icon>
     </button>
     <span class="month">
-      {{ primaryRangeStartDate$ | async | date: 'MMMM yyy' }}
+      {{ primarySectionStartDate$ | async | date: 'MMMM yyy' }}
     </span>
     <button class="arrow-button" (click)="switchToNextMonth($event)">
       <ion-icon name="ios-arrow-forward"></ion-icon>
@@ -18,21 +18,41 @@
   </div>
 
   <div class="datepicker__dates">
-    <button
-      class="date date_previous-month"
-      [class.date_selected]="isSameDate(date, selectedDate$ | async)"
-      *ngFor="let date of primaryRangeLeftOffsetDates$ | async"
-      (click)="selectDate(date, $event)"
-    >
-      {{ date | date: 'd' }}
-    </button>
-    <button
-      class="date"
-      [class.date_selected]="isSameDate(date, selectedDate$ | async)"
-      *ngFor="let date of primaryRangeDates$ | async"
-      (click)="selectDate(date, $event)"
-    >
-      {{ date | date: 'd' }}
-    </button>
+    <ng-container
+      [ngTemplateOutlet]="dateButton"
+      [ngTemplateOutletContext]="{
+        dateOrigin: primarySectionLeftOffsetDates$ | async,
+        isPreviousMonth: true
+      }"
+    ></ng-container>
+
+    <ng-container
+      [ngTemplateOutlet]="dateButton"
+      [ngTemplateOutletContext]="{
+        dateOrigin: primarySectionDates$ | async,
+        isPreviousMonth: false
+      }"
+    ></ng-container>
   </div>
 </div>
+
+<ng-template #dateButton let-dateOrigin="dateOrigin" let-isPreviousMonth="isPreviousMonth">
+  <button
+    class="date"
+    [ngClass]="{
+      'date_previous-month': isPreviousMonth,
+      date_hovered: isSameDate(date, hoveredDate$ | async),
+      'date_in-range':
+        !isDateSelectionMode &&
+        (dateIsInDateRange(date, selectedRange$ | async) || dateIsInDateRange(date, hoveredRange$ | async)),
+      date_selected: isDateSelectionMode
+        ? isSameDate(date, selectedDate$ | async)
+        : dateIsInDateArray(date, selectedRange$ | async)
+    }"
+    *ngFor="let date of dateOrigin"
+    (mouseover)="processDateHover(date, $event)"
+    (click)="processDateSelection(date, $event)"
+  >
+    {{ date | date: 'd' }}
+  </button>
+</ng-template>
