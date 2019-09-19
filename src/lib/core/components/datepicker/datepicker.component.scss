@@ -1,13 +1,19 @@
 @import 'mixins';
 @import 'functions';
 
+$padding_days-area: 0 rems(0.875);
+$margin_days-line: 0 0 rems(.5) 0;
+$width_days-line-item: calc(100% / 7);
+$font-size_days-line-item: rems(0.75);
+$font-weight_days-line-item: 600;
+$height_date: rems(1.3125);
+
 :host {
   display: contents;
 }
 
 .datepicker {
   width: rems(14.1875);
-  height: rems(15.25);
   box-shadow: $box-shadow_hover;
   background: $color_white;
   @include flex-container(column, stretch, stretch, nowrap);
@@ -16,12 +22,89 @@
 .datepicker__header {
   height: rems(2.5);
   width: 100%;
+  box-sizing: border-box;
+  padding: $padding_days-area;
   @include flex-container(row, center, space-between, nowrap);
 }
 
 .datepicker__week-days {
-    height: rems(1.5625);
+  height: rems(1.5625);
   width: 100%;
+  padding: $padding_days-area;
+  margin: $margin_days-line;
+  box-sizing: border-box;
   background: $color_blue-grey;
-  @include flex-container(row, center, space-evenly, nowrap);
+  @include flex-container(row, center, space-between, nowrap);
+}
+
+.datepicker__dates {
+  width: 100%;
+  padding: $padding_days-area;
+  box-sizing: border-box;
+  @include flex-container(row, flex-start, flex-start, wrap);
+}
+
+.month {
+  font-size: $font-size_base-text;
+  color: $color_main-blue;
+    line-height: 1.43;
+      font-weight: 750;
+  font-style: normal;
+  font-stretch: normal;
+  user-select: none;
+  @include regular;
+}
+
+.week-day {
+  color: $color_grey-ivory;
+  width: $width_days-line-item;
+  font-size: $font-size_days-line-item;
+  font-weight: $font-weight_days-line-item;
+  user-select: none;
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+}
+
+.date {
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: $height_date;
+  height: $height_date;
+  margin: 0 calc((#{$width_days-line-item} - #{$height_date}) / 2) rems(.5);
+  padding: 0;
+  font-size: $font-size_days-line-item;
+  color: $color_grey-text;
+  line-height: rems(1);
+  font-weight: $font-weight_days-line-item;
+  user-select: none;
+  border-radius: rems(.25);
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+
+  &_previous-month {
+    color: #999999;
+  }
+
+  &_selected {
+    color: $color_white;
+    background: $color_active-blue;
+  }
+}
+
+.arrow-button {
+  height: rems(1.25);
+  background: none;
+  outline: none;
+  border: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  font-weight: $font-weight_days-line-item;
+  font-size: rems(1);
+  color: $color_grey-apple;
+  cursor: pointer;
+  @include regular;
 }
