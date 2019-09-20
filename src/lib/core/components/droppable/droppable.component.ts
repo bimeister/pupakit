@@ -32,12 +32,11 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
   @Input() public positionChange$: Observable<void>;
   @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
   @Input() public maxWidth: number = null;
+  @Input() public open: boolean = false;
 
   public topPx: number = 0;
   public leftPx: number = 0;
   private readonly offsetTopPx: number = 4;
-
-  public open: boolean = false;
 
   constructor(protected readonly cDRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {}
 
