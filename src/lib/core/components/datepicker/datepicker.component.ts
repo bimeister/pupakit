@@ -16,6 +16,7 @@ import { dateClearTime } from './../../../helpers/date-clear-time.helper';
 import { getDaysInMonth } from './../../../helpers/get-days-in-month.helper';
 import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
 import { getRangeStartDate } from './../../../helpers/get-range-start-date.helper';
+import { isDate } from './../../../helpers/is-date.helper';
 
 export type DatepickerSelectionMode = 'date' | 'range';
 export enum DayOfWeek {
@@ -39,8 +40,24 @@ export class DatepickerComponent implements OnDestroy {
 
   @Input() public selectionMode: DatepickerSelectionMode = 'range';
   @Input() public set selectedDate(newValue: Date) {
+    if (!isDate(newValue)) {
+      return;
+    }
     this.selectedDate$.next(dateClearTime(newValue));
     this.baseDate$.next(dateClearTime(newValue));
+  }
+  @Input() public set selectedRange(newValue: Date[]) {
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    const sanitizedRange: Date[] = newValue
+      .filter((rangeDate: Date) => isDate(rangeDate))
+      .map((rangeDate: Date) => dateClearTime(rangeDate));
+    if (Object.is(sanitizedRange.length, 0)) {
+      return;
+    }
+    this.selectedRange$.next(sanitizedRange);
+    this.baseDate$.next(sanitizedRange[0]);
   }
 
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
@@ -140,7 +157,11 @@ export class DatepickerComponent implements OnDestroy {
             filter((selectedRangeDates: Date[]) => {
               const validDatesCount: number = 2;
               return Array.isArray(selectedRangeDates) && Object.is(selectedRangeDates.length, validDatesCount);
-            })
+            }),
+            distinctUntilChanged(
+              (previousValue: Date[], currentValue: Date[]) =>
+                JSON.stringify(previousValue) === JSON.stringify(currentValue)
+            )
           )
           .subscribe((selectedRange: [Date, Date]) => this.range.emit(selectedRange))
       );
@@ -148,8 +169,6 @@ export class DatepickerComponent implements OnDestroy {
 
   @HostListener('window:click')
   public processWindowClick(): void {
-    this.selectedDate$.next(null);
-    this.selectedRange$.next([]);
     this.hoveredDate$.next(null);
   }
 

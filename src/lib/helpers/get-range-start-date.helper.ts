@@ -1,6 +1,6 @@
 import { isNullOrUndefined } from './is-null-or-undefined.helper';
 
-export const getRangeStartDate = (range: Date[]): Date => {
+export function getRangeStartDate(range: Date[]): Date {
   if (!Array.isArray(range)) {
     return undefined;
   }
@@ -15,4 +15,4 @@ export const getRangeStartDate = (range: Date[]): Date => {
     }
   );
   return range[rangeStartDateIndex];
-};
+}

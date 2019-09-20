@@ -13,6 +13,7 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getRangeEndDate } from 'src/lib/helpers/get-range-end-date.helper';
 import { getRangeStartDate } from 'src/lib/helpers/get-range-start-date.helper';
+import { isDate } from 'src/lib/helpers/is-date.helper';
 
 export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
@@ -106,7 +107,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   };
 
   public readonly isDate = (value: unknown): boolean => {
-    return !Number.isNaN(Date.parse(String(value)));
+    return isDate(value);
   };
 
   public readonly getRangeStart = (value: unknown): Date => {

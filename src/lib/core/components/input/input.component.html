@@ -52,8 +52,18 @@
       [anchor]="dateInputElement"
       maxWidth="unset"
     >
-      <pupa-datepicker *ngSwitchCase="true" selectionMode="date" (date)="updateValue($event)"></pupa-datepicker>
-      <pupa-datepicker *ngSwitchDefault selectionMode="range" (range)="updateValue($event)"></pupa-datepicker>
+      <pupa-datepicker
+        *ngSwitchCase="true"
+        selectionMode="date"
+        (date)="updateValue($event)"
+        [selectedDate]="value"
+      ></pupa-datepicker>
+      <pupa-datepicker
+        *ngSwitchDefault
+        selectionMode="range"
+        (range)="updateValue($event)"
+        [selectedRange]="value"
+      ></pupa-datepicker>
     </pupa-droppable>
   </div>
 </ng-container>
