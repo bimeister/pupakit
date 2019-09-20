@@ -14,6 +14,8 @@ import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
 import { dayInMs } from './../../../constants/day-in-ms.const';
 import { dateClearTime } from './../../../helpers/date-clear-time.helper';
 import { getDaysInMonth } from './../../../helpers/get-days-in-month.helper';
+import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
+import { getRangeStartDate } from './../../../helpers/get-range-start-date.helper';
 
 export type DatepickerSelectionMode = 'date' | 'range';
 export enum DayOfWeek {
@@ -38,6 +40,7 @@ export class DatepickerComponent implements OnDestroy {
   @Input() public selectionMode: DatepickerSelectionMode = 'range';
   @Input() public set selectedDate(newValue: Date) {
     this.selectedDate$.next(dateClearTime(newValue));
+    this.baseDate$.next(dateClearTime(newValue));
   }
 
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
@@ -228,19 +231,10 @@ export class DatepickerComponent implements OnDestroy {
     if (rangeIsInvalid) {
       return false;
     }
-    const rangeStartDateIndex: number = dateRange.findIndex(
-      (rangeItem: Date, rangeItemIndex: number, rangeItemOrigin: [Date, Date]) => {
-        const nextItem: Date = rangeItemOrigin[rangeItemIndex + 1];
-        const previousItem: Date = rangeItemOrigin[rangeItemIndex - 1];
-        if (isNullOrUndefined(previousItem)) {
-          return rangeItem.valueOf() < nextItem.valueOf();
-        }
-        return rangeItem.valueOf() < previousItem.valueOf();
-      }
-    );
-    const rangeEndDateIndex: number = Object.is(rangeStartDateIndex, 0) ? 1 : 0;
-    const rangeStartDateMs: number = dateRange[rangeStartDateIndex].valueOf();
-    const rangeEndDateMs: number = dateRange[rangeEndDateIndex].valueOf();
+    const rangeStartDate: Date = getRangeStartDate(dateRange);
+    const rangeEndDate: Date = getRangeEndDate(dateRange);
+    const rangeStartDateMs: number = rangeStartDate.valueOf();
+    const rangeEndDateMs: number = rangeEndDate.valueOf();
     const dateToTestMs: number = date.valueOf();
     return rangeStartDateMs < dateToTestMs && rangeEndDateMs > dateToTestMs;
   };

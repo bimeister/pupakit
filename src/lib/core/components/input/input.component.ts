@@ -11,9 +11,11 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getRangeEndDate } from 'src/lib/helpers/get-range-end-date.helper';
+import { getRangeStartDate } from 'src/lib/helpers/get-range-start-date.helper';
 
 export type InputSize = 'medium' | 'small';
-export type InputType = 'password' | 'text' | 'date';
+export type InputType = 'password' | 'text' | 'date' | 'date-range';
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -28,7 +30,7 @@ export type InputType = 'password' | 'text' | 'date';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputComponent implements ControlValueAccessor, AfterViewInit {
-  @ViewChild('inputElement', { static: true }) public inputElement: ElementRef<HTMLInputElement>;
+  @ViewChild('inputElement', { static: false }) public inputElement: ElementRef<HTMLInputElement>;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
@@ -40,29 +42,36 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public name: string;
   @Input() public width: string;
   @Input()
-  public get value(): string {
+  public get value(): unknown {
     return this.valueData;
   }
-  public set value(newValue: string) {
+  public set value(newValue: unknown) {
     this.updateValue(newValue);
   }
 
-  @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
 
   public touched: boolean = false;
 
-  private valueData: string = '';
+  public isDatePickerVisible: boolean = false;
+
+  private valueData: unknown = null;
 
   constructor(protected readonly renderer: Renderer2) {}
 
   public get isDateInput(): boolean {
-    return this.type.toLowerCase() === 'date';
+    return this.type.toLowerCase() === 'date' || this.type.toLowerCase() === 'date-range';
   }
 
   public ngAfterViewInit(): void {
     if (this.width) {
       this.renderer.setStyle(this.inputElement.nativeElement, 'width', `${this.width}`);
     }
+  }
+
+  public showDatePicker(event: MouseEvent): void {
+    event.stopPropagation();
+    this.isDatePickerVisible = true;
   }
 
   public registerOnChange(fn: VoidFunction): void {
@@ -80,7 +89,8 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
     this.valueData = String(outerValue);
   }
 
-  public updateValue(innerValue: string): void {
+  public updateValue(innerValue: unknown): void {
+    this.isDatePickerVisible = false;
     this.valueData = innerValue;
     this.onChange(innerValue);
     this.onTouched();
@@ -93,5 +103,23 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
 
   public onTouched: VoidFunction = () => {
     return;
+  };
+
+  public readonly isDate = (value: unknown): boolean => {
+    return !Number.isNaN(Date.parse(String(value)));
+  };
+
+  public readonly getRangeStart = (value: unknown): Date => {
+    if (!Array.isArray(value)) {
+      return null;
+    }
+    return getRangeStartDate(value);
+  };
+
+  public readonly getRangeEnd = (value: unknown): Date => {
+    if (!Array.isArray(value)) {
+      return null;
+    }
+    return getRangeEndDate(value);
   };
 }

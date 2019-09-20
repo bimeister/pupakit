@@ -1,21 +1,81 @@
-<input
-  #inputElement
-  class="input"
-  [type]="type"
-  [value]="value"
-  [placeholder]="placeholder"
-  [ngClass]="{
-    input_valid: touched && valid,
-    input_invalid: touched && !valid,
-    input_medium: size === 'medium',
-    input_small: size === 'small'
-  }"
-  [id]="id"
-  [name]="name"
-  [attr.disabled]="disabled ? true : null"
-  [readOnly]="readonly"
-  (input)="updateValue(inputElement.value)"
-/>
-<div class="icon" *ngIf="showValidateIcon && valid && !disabled">
-  <ion-icon name="ios-checkmark-circle"></ion-icon>
-</div>
+<ng-container *ngIf="!isDateInput">
+  <input
+    #inputElement
+    class="input"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [ngClass]="{
+      input_valid: touched && valid,
+      input_invalid: touched && !valid,
+      input_medium: size === 'medium',
+      input_small: size === 'small'
+    }"
+    [id]="id"
+    [name]="name"
+    [attr.disabled]="disabled ? true : null"
+    [readOnly]="readonly"
+    (input)="updateValue(inputElement.value)"
+  />
+  <div class="icon" *ngIf="showValidateIcon && valid && !disabled">
+    <ion-icon name="ios-checkmark-circle"></ion-icon>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="isDateInput">
+  <div
+    class="input"
+    (click)="showDatePicker($event)"
+    #dateInputElement
+    [ngClass]="{
+      input_valid: touched && valid,
+      input_invalid: touched && !valid,
+      input_medium: size === 'medium',
+      input_small: size === 'small'
+    }"
+  >
+    <span *ngIf="type === 'date'" class="input__text">
+      {{ isDate(value) ? (value | date: 'dd.MM.yyyy') : null }}
+    </span>
+    <span *ngIf="type === 'date-range'" class="input__text input__text_range">
+      {{ isDate(getRangeStart(value)) ? (getRangeStart(value) | date: 'dd.MM.yyyy') : null }}
+      –
+      {{ isDate(getRangeEnd(value)) ? (getRangeEnd(value) | date: 'dd.MM.yyyy') : null }}
+    </span>
+    <div class="icon icon_calendar">
+      <ion-icon name="ios-calendar"></ion-icon>
+    </div>
+
+    <pupa-droppable
+      [ngSwitch]="type === 'date'"
+      [open]="isDatePickerVisible"
+      [anchor]="dateInputElement"
+      maxWidth="unset"
+    >
+      <pupa-datepicker *ngSwitchCase="true" selectionMode="date" (date)="updateValue($event)"></pupa-datepicker>
+      <pupa-datepicker *ngSwitchDefault selectionMode="range" (range)="updateValue($event)"></pupa-datepicker>
+    </pupa-droppable>
+  </div>
+
+  <!-- <input
+    #inputElement
+    class="input"
+    [type]="type"
+    [value]="value"
+    [placeholder]="placeholder"
+    [ngClass]="{
+      input_valid: touched && valid,
+      input_invalid: touched && !valid,
+      input_medium: size === 'medium',
+      input_small: size === 'small'
+    }"
+    [id]="id"
+    [name]="name"
+    [attr.disabled]="disabled ? true : null"
+    [readOnly]="readonly"
+    (input)="updateValue(inputElement.value)"
+  />
+  <div class="icon" *ngIf="showValidateIcon && valid && !disabled">
+    <ion-icon name="ios-checkmark-circle"></ion-icon>
+  </div> -->
+</ng-container>

@@ -1,14 +1,14 @@
 @import 'variables';
 
-@mixin regular() {
+@mixin regular {
   font-family: 'effraregular', sans-serif;
 }
 
-@mixin medium() {
+@mixin medium {
   font-family: 'efframedium', sans-serif;
 }
 
-@mixin bold() {
+@mixin bold {
   font-family: 'effrabold', sans-serif;
 }
 
@@ -56,7 +56,7 @@
   font-style: normal;
 }
 
-@mixin dropdown() {
+@mixin dropdown {
   position: absolute;
   top: rems(0.25);
   left: 0;
@@ -73,10 +73,17 @@
   opacity: 0;
   pointer-events: none;
   transform: translateY(-#{rems(1.875)});
+
   &_open {
     opacity: 1;
     pointer-events: all;
     transition: opacity 0.15s, transform 0.15s;
     transform: translateY(0);
   }
+}
+
+@mixin ellipsis-text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

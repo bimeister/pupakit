@@ -12,14 +12,15 @@
 }
 
 .input {
-  @include regular();
   box-sizing: border-box;
   border-radius: rems(0.5);
   background: $color_white;
   outline: none;
-  @include transition(#{'background, border'});
   color: $color_grey-text;
   border: 1px solid $color_grey-ivory;
+  @include regular();
+  @include transition(#{'background, border'});
+  @include inline-flex-container(row, center, space-between, nowrap);
 
   &::placeholder {
     position: absolute;
@@ -88,6 +89,11 @@
   padding: rems(0.25) rems(0.5);
 }
 
+.input__text {
+  max-width: calc(100% - #{rems(1)});
+  @include ellipsis-text-overflow;
+}
+
 .icon {
   position: absolute;
   right: rems(0.5);
@@ -95,4 +101,8 @@
   font-size: rems(1);
   height: rems(1);
   pointer-events: none;
+
+  &_calendar {
+    color: inherit;
+  }
 }
