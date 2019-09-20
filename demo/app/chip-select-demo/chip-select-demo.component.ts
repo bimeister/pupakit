@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ChipItem } from 'src/lib/core/components/chip-select/chip-select.component';
+
+import { ChipItem } from './../../../src/lib/core/components/chip-select/chip-select.component';
 
 @Component({
   selector: 'demo-chip-select',
