@@ -56,26 +56,4 @@
       <pupa-datepicker *ngSwitchDefault selectionMode="range" (range)="updateValue($event)"></pupa-datepicker>
     </pupa-droppable>
   </div>
-
-  <!-- <input
-    #inputElement
-    class="input"
-    [type]="type"
-    [value]="value"
-    [placeholder]="placeholder"
-    [ngClass]="{
-      input_valid: touched && valid,
-      input_invalid: touched && !valid,
-      input_medium: size === 'medium',
-      input_small: size === 'small'
-    }"
-    [id]="id"
-    [name]="name"
-    [attr.disabled]="disabled ? true : null"
-    [readOnly]="readonly"
-    (input)="updateValue(inputElement.value)"
-  />
-  <div class="icon" *ngIf="showValidateIcon && valid && !disabled">
-    <ion-icon name="ios-checkmark-circle"></ion-icon>
-  </div> -->
 </ng-container>
