@@ -1,4 +1,7 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localeRuExtra from '@angular/common/locales/extra/ru';
+import localeRu from '@angular/common/locales/ru';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +31,8 @@ import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
+
+registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -153,7 +158,7 @@ import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.
       }
     ])
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
