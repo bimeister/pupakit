@@ -112,6 +112,10 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   };
 
   public readonly getRangeStart = (value: unknown): Date => {
+    const parsedValue: Date[] = JSON.parse(JSON.stringify(value));
+    if (Array.isArray(parsedValue)) {
+      return getRangeStartDate(parsedValue);
+    }
     if (!Array.isArray(value)) {
       return null;
     }
@@ -119,6 +123,10 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   };
 
   public readonly getRangeEnd = (value: unknown): Date => {
+    const parsedValue: Date[] = JSON.parse(JSON.stringify(value));
+    if (Array.isArray(parsedValue)) {
+      return getRangeEndDate(parsedValue);
+    }
     if (!Array.isArray(value)) {
       return null;
     }
