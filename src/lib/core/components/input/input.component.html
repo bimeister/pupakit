@@ -28,6 +28,7 @@
     (click)="showDatePicker($event)"
     #dateInputElement
     [ngClass]="{
+      input_range: type === 'date-range',
       input_valid: touched && valid,
       input_invalid: touched && !valid,
       input_medium: size === 'medium',
@@ -51,6 +52,7 @@
       [open]="isDatePickerVisible"
       [anchor]="dateInputElement"
       maxWidth="unset"
+      class="droppable"
     >
       <pupa-datepicker
         *ngSwitchCase="true"
