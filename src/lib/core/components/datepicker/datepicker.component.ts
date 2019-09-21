@@ -44,8 +44,10 @@ export class DatepickerComponent implements OnDestroy {
     if (!isDate(newValue)) {
       return;
     }
-    this.selectedDate$.next(dateClearTime(newValue));
-    this.baseDate$.next(dateClearTime(newValue));
+    const sanitizedDate: Date = new Date(Date.parse(String(newValue)));
+    console.log(sanitizedDate);
+    this.selectedDate$.next(dateClearTime(sanitizedDate));
+    this.baseDate$.next(dateClearTime(sanitizedDate));
   }
   @Input() public set selectedRange(newValue: Date[]) {
     if (!Array.isArray(newValue)) {
@@ -96,7 +98,9 @@ export class DatepickerComponent implements OnDestroy {
 
   public readonly primarySectionStartDate$: Observable<Date> = this.baseDate$.pipe(
     distinctUntilChanged(),
+    filter((baseDate: Date) => isDate(baseDate)),
     map((baseDate: Date) => {
+      console.log(baseDate);
       const baseMonthDay: number = baseDate.getDate();
       const baseDateMs: number = baseDate.valueOf();
       return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;

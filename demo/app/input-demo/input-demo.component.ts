@@ -3,6 +3,8 @@ import { FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
 import { Subscription } from 'rxjs';
 
+// const _3daysMs: number = 8.64 * Math.pow(10, 7) * 3;
+
 @Component({
   selector: 'demo-input',
   styleUrls: ['../demo.scss'],
@@ -11,7 +13,7 @@ import { Subscription } from 'rxjs';
 })
 export class InputDemoComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
-  public readonly sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
+  public readonly sampleFormControl: FormControl = new FormControl(new Date(), Validators.required);
 
   public readonly combos: any[] = combos({
     size: ['medium', 'small'],
