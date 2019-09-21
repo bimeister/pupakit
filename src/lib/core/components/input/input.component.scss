@@ -106,3 +106,15 @@
     color: inherit;
   }
 }
+
+.input.input_range.input_small {
+  height: rems(1.5);
+  width: rems(11.25);
+  font-size: $font-size_base-text;
+  line-height: 1.14;
+  padding: rems(0.25) rems(0.5);
+}
+
+.droppable {
+  overflow-y: visible;
+}

@@ -45,15 +45,18 @@ export class DatepickerComponent implements OnDestroy {
       return;
     }
     const sanitizedDate: Date = new Date(Date.parse(String(newValue)));
-    console.log(sanitizedDate);
     this.selectedDate$.next(dateClearTime(sanitizedDate));
     this.baseDate$.next(dateClearTime(sanitizedDate));
   }
   @Input() public set selectedRange(newValue: Date[]) {
-    if (!Array.isArray(newValue)) {
+    const parsedArray: Date[] = String(newValue)
+      .split(',')
+      .map((arrayItem: string) => new Date(Date.parse(arrayItem)))
+      .filter((rangeDate: Date) => isDate(rangeDate));
+    if (!Array.isArray(parsedArray)) {
       return;
     }
-    const sanitizedRange: Date[] = newValue
+    const sanitizedRange: Date[] = parsedArray
       .filter((rangeDate: Date) => isDate(rangeDate))
       .map((rangeDate: Date) => dateClearTime(rangeDate));
     if (Object.is(sanitizedRange.length, 0)) {
@@ -100,7 +103,6 @@ export class DatepickerComponent implements OnDestroy {
     distinctUntilChanged(),
     filter((baseDate: Date) => isDate(baseDate)),
     map((baseDate: Date) => {
-      console.log(baseDate);
       const baseMonthDay: number = baseDate.getDate();
       const baseDateMs: number = baseDate.valueOf();
       return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
@@ -249,7 +251,9 @@ export class DatepickerComponent implements OnDestroy {
     if (isNullOrUndefined(date) || !Array.isArray(dateRange) || Object.is(dateRange.length, 0)) {
       return false;
     }
-    const uniqueRangeItemsMs: Set<number> = new Set<number>(dateRange.map((rangeItem: Date) => rangeItem.valueOf()));
+    const uniqueRangeItemsMs: Set<number> = new Set<number>(
+      dateRange.filter((rangeItem: Date) => !isNullOrUndefined(rangeItem)).map((rangeItem: Date) => rangeItem.valueOf())
+    );
     const validRangeSize: number = 2;
     const rangeIsInvalid: boolean = !Object.is(uniqueRangeItemsMs.size, validRangeSize);
     if (rangeIsInvalid) {
