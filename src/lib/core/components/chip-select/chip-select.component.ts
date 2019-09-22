@@ -118,7 +118,6 @@ export class ChipSelectComponent {
     this.removedItem.emit(item);
     this.notActiveKeys = this.notActiveKeys.filter(activeItem => activeItem !== item.key);
     this.changeDetector.markForCheck();
-    this.refreshDroppable();
   }
 
   public get activeItems(): ChipItem[] {
@@ -154,15 +153,6 @@ export class ChipSelectComponent {
 
   public updateExpandedButtonIndex(index: number): void {
     this.expandedButtonIndex$.next(index);
-  }
-
-  private refreshDroppable(): void {
-    setTimeout(() => {
-      if (!this.droppable) {
-        return;
-      }
-      this.droppable.checkPosition();
-    }, 0);
   }
 
   private checkedAllItems(items: ChipItem[]): void {
