@@ -13,6 +13,7 @@ $height_date: rems(1.3125);
 }
 
 .datepicker {
+  all: unset;
   width: rems(14.1875);
   box-shadow: $box-shadow_hover;
   background: $color_white;
@@ -45,6 +46,7 @@ $height_date: rems(1.3125);
 }
 
 .month {
+  all: unset;
   font-size: $font-size_base-text;
   color: $color_main-blue;
   line-height: 1.43;
@@ -56,6 +58,7 @@ $height_date: rems(1.3125);
 }
 
 .week-day {
+  all: unset;
   color: $color_grey-ivory;
   width: $width_days-line-item;
   font-size: $font-size_days-line-item;
@@ -66,6 +69,7 @@ $height_date: rems(1.3125);
 }
 
 .date {
+  all: unset;
   position: relative;
   appearance: none;
   outline: none;
@@ -148,6 +152,7 @@ $height_date: rems(1.3125);
 }
 
 .arrow-button {
+  all: unset;
   height: rems(1.25);
   background: none;
   outline: none;
