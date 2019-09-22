@@ -158,6 +158,9 @@ export class ChipSelectComponent {
 
   private refreshDroppable(): void {
     setTimeout(() => {
+      if (!this.droppable) {
+        return;
+      }
       this.droppable.checkPosition();
     }, 0);
   }
