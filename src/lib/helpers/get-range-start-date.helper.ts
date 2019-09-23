@@ -14,5 +14,8 @@ export function getRangeStartDate(range: Date[]): Date {
       return rangeItem.valueOf() < previousItem.valueOf();
     }
   );
+  if (Object.is(rangeStartDateIndex, -1)) {
+    return range[0];
+  }
   return range[rangeStartDateIndex];
 }
