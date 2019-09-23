@@ -87,3 +87,19 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+@mixin scrollbar {
+  ::-webkit-scrollbar {
+    width: rems(0.25);
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: rems(0.25);
+    background: $color_light-blue;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: rems(0.25);
+    background: $color_active-blue;
+  }
+}

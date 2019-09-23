@@ -16,6 +16,9 @@
 main {
   margin-left: 200px;
   width: calc(100% - 200px);
+  height: 100vh;
+  overflow: auto;
+  @include scrollbar;
 }
 
 .index-item {
@@ -27,3 +30,5 @@ main {
     background: rgba($color_grey-ivory, 0.1);
   }
 }
+
+@include scrollbar;
