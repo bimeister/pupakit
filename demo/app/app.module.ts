@@ -24,6 +24,7 @@ import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
+import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
@@ -60,7 +61,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TreeDemoComponent,
     ModalDemoComponent,
     ModalDemoContentComponent,
-    DatepickerDemoComponent
+    DatepickerDemoComponent,
+    ScrollbarDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -151,6 +153,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
         component: DatepickerDemoComponent
       },
       { path: 'washer-panel', component: WasherPanelDemoComponent },
+      { path: 'scrollbar', component: ScrollbarDemoComponent },
       { path: 'modal', component: ModalDemoComponent },
       {
         path: '',
