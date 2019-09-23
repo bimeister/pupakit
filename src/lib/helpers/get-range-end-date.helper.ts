@@ -14,5 +14,8 @@ export function getRangeEndDate(range: Date[]): Date {
       return rangeItem.valueOf() > previousItem.valueOf();
     }
   );
+  if (Object.is(rangeEndDateIndex, -1)) {
+    return range[0];
+  }
   return range[rangeEndDateIndex];
 }
