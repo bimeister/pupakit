@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output
+} from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 export interface TreeItemNode {
   enable: boolean;
@@ -19,25 +28,23 @@ export interface TreeItemNode {
   styleUrls: ['./tree.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeComponent {
+export class TreeComponent implements OnDestroy {
   @Input()
   public set items(items: any[]) {
-    this._items = items;
-    this.setTreeItemNodes();
+    this.items$.next(items);
+  }
+
+  public get items(): any[] {
+    return this.items$.value;
   }
 
   @Input()
   public set notActiveKeys(keys: string[]) {
-    this._notActiveKeys = keys;
-    this.checkedActive();
+    this.notActiveKeys$.next(keys);
   }
 
   public get notActiveKeys(): string[] {
-    return this._notActiveKeys;
-  }
-
-  public get items(): any[] {
-    return this._items;
+    return this.notActiveKeys$.value;
   }
 
   @Input() public searchText: string = 'Поиск...';
@@ -47,13 +54,31 @@ export class TreeComponent {
 
   public itemsNode: TreeItemNode[] = [];
 
-  public _notActiveKeys: string[] = [];
+  public notActiveKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   private readonly itemsCollection: Set<TreeItemNode> = new Set<TreeItemNode>();
 
-  private _items: any[] = [];
+  private readonly items$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
-  constructor(private readonly changeDetector: ChangeDetectorRef) {}
+  private readonly subscription: Subscription = new Subscription();
+
+  constructor(private readonly changeDetector: ChangeDetectorRef) {
+    this.subscription
+      .add(
+        this.items$.subscribe(() => {
+          this.setTreeItemNodes();
+        })
+      )
+      .add(
+        this.notActiveKeys$.subscribe(() => {
+          this.checkedActive();
+        })
+      );
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   public valueChange(text: string): void {
     if (text === '') {
@@ -136,8 +161,8 @@ export class TreeComponent {
 
   private setTreeItemNodes(): void {
     this.itemsCollection.clear();
-    this.setTreeItemNode(this._items);
-    this.changeDetector.detectChanges();
+    this.itemsNode = [];
+    this.setTreeItemNode(this.items);
   }
 
   private setTreeItemNode(items: any[], parent: TreeItemNode = null): void {
