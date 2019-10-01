@@ -1,4 +1,6 @@
-<section class="datagrid">
-  <header class="datagrid__header"></header>
-  <ng-content></ng-content>
-</section>
+<ag-grid-angular
+  class="datagrid ag-theme-balham"
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [domLayout]="domLayout"
+></ag-grid-angular>

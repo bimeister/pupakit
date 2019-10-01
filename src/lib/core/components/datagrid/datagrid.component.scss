@@ -1,18 +1,15 @@
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+
 :host {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  overflow: hidden;
   position: relative;
 }
 
 .datagrid {
-  all: unset;
   width: 100%;
-  display: grid;
-}
-
-.datagrid__header {
-  all: unset;
-
+  height: 100%;
 }

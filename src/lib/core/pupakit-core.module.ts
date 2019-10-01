@@ -1,4 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { AgGridModule } from 'ag-grid-angular';
 
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
@@ -57,7 +58,7 @@ const CORE_COMPONENTS: any[] = [
 ];
 
 @NgModule({
-  imports: [SharedModule],
+  imports: [SharedModule, AgGridModule.withComponents([])],
   declarations: [...CORE_COMPONENTS],
   exports: [SharedModule, ...CORE_COMPONENTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
