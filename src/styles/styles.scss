@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'font-faces';
 @import 'mixins';
+@import 'grid-styles';
 
 label {
   @include pupa-label;
