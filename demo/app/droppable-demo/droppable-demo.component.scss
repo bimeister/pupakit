@@ -35,7 +35,7 @@
   background: rgba(grey, 0.1);
 }
 
-:host /deep/ {
+:host {
   .pupa-dropdown__icon_left {
     color: $color_success;
   }

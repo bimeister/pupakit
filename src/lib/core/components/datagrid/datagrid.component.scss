@@ -1,0 +1,18 @@
+:host {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: hidden;
+  position: relative;
+}
+
+.datagrid {
+  all: unset;
+  width: 100%;
+  display: grid;
+}
+
+.datagrid__header {
+  all: unset;
+
+}
