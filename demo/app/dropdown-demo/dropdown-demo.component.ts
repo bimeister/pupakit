@@ -1,12 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
-import { DropdownItem } from '../../../src/lib/core/components/dropdown/dropdown.component';
+import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
+
+import { DropdownItem } from '../../../src/lib/core/components/dropdown/dropdown.component';
 
 @Component({
   selector: 'demo-dropdown',
   styleUrls: ['../demo.scss', './dropdown-demo.component.scss'],
   templateUrl: './dropdown-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None
 })
 export class DropdownDemoComponent {
   public positionChange$: Subject<void> = new Subject<void>();
