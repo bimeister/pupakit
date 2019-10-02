@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ColumnDefs, RowData } from 'src/lib/core/components/datagrid/datagrid.component';
+import { ColDef } from 'ag-grid-community';
 
 @Component({
   selector: 'demo-datagrid-demo',
@@ -8,13 +8,13 @@ import { ColumnDefs, RowData } from 'src/lib/core/components/datagrid/datagrid.c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatagridDemoComponent {
-  public readonly columnDefs: ColumnDefs[] = [
+  public readonly columnDefs: ColDef[] = [
     { headerName: 'Make', field: 'make' },
     { headerName: 'Model', field: 'model' },
     { headerName: 'Price', field: 'price' }
   ];
 
-  public rowData: RowData[] = [
+  public rowData: any[] = [
     { make: 'Toyota', model: 'Celica', price: 35000 },
     { make: 'Ford', model: 'Mondeo', price: 32000 },
     { make: 'Porsche', model: 'Boxter', price: 72000 },
