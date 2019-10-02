@@ -1,2 +1,73 @@
-@import 'ag-grid-community/dist/styles/ag-grid.css';
-@import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+@import 'functions';
+@import 'variables';
+@import 'mixins';
+
+// default theme variables reset
+$header-height: 48px; // rems(3)
+$header-background-color: $color_white;
+$row-height: 40px; // rems(2.5)
+$row-border-width: 1px 0 1px 0;
+$hover-color: $color_light-blue;
+$border-color: $color_light-blue;
+$font-family: 'effraregular', sans-serif;
+$font-size: 14px; // rems(0.875)
+$font-weight: normal;
+$foreground-color: $color_grey-text;
+$odd-row-background-color: transparent;
+$header-cell-moving-background-color: $color_light-blue;
+
+@import 'ag-grid-community/src/styles/ag-grid.scss';
+@import 'ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
+
+// additional customization
+@mixin ionic-icon-font {
+  font-family: 'ionicons';
+  font-weight: normal;
+}
+
+.datagrid .ag-root-wrapper {
+  .ag-root {
+    @include scrollbar;
+  }
+
+  .ag-header {
+    color: $color_main-dark;
+    font-weight: normal;
+  }
+
+  .ag-row {
+    border-top: 1px solid $color_light-blue;
+  }
+
+  .ag-cell-label-container {
+    height: 100%;
+  }
+
+  .ag-icon-desc,
+  .ag-icon-asc,
+  .ag-icon-none {
+    color: $color_grey-apple;
+    font-size: rems(1);
+    line-height: 1;
+    @include ionic-icon-font;
+
+    &::before {
+      content: '\f280';
+      padding: 0 1px 0 0;
+
+    }
+    &::after {
+      content: '\f286';
+    }
+  }
+  .ag-icon-desc::before,
+  .ag-icon-asc::after {
+    color: $color_active-blue;
+  }
+
+  .ag-header-cell-sorted-desc,
+  .ag-header-cell-sorted-asc {
+    color: $color_active-blue;
+  }
+
+}
