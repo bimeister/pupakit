@@ -6,6 +6,7 @@
     (click)="selectTab(tab.name, $event)"
   >
     <ion-icon
+      *ngIf="!(tab?.iconName || tab?.iconSrc | isNullOrUndefined)"
       class="icon"
       [name]="tab.iconName"
       [src]="(tab.iconName | isNullOrUndefined) ? tab.iconSrc : null"
