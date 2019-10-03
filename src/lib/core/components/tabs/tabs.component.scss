@@ -1,0 +1,66 @@
+@import 'functions';
+@import 'mixins';
+
+:host {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+}
+
+.tabs {
+  all: unset;
+  width: 100%;
+  height: rems(1.75);
+  margin: 0 0 rems(0.25) 0;
+  @include flex-container(row, flex-start, flex-start, nowrap);
+}
+.tabs__item {
+  all: unset;
+  height: 100%;
+  margin: 0 rems(1) 0 0;
+  position: relative;
+  padding: 0 rems(0.25);
+  cursor: pointer;
+  color: $color_main-dark;
+  user-select: none;
+  @include flex-container(row, center, center, nowrap);
+
+  &_selected {
+    color: $color_active-blue;
+  }
+}
+
+.icon {
+  font-size: rems(0.85);
+}
+.title {
+  font-size: rems(1.125);
+  font-weight: 500;
+}
+.icon ~ .title {
+  margin: 0 0 0 rems(0.25);
+}
+
+.rail {
+  position: absolute;
+  width: 100%;
+  height: rems(0.25);
+  background: $color_light-blue;
+}
+.rail__highlighter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: rems(0.25);
+  background: $color_active-blue;
+  border-radius: rems(0.75);
+  pointer-events: none;
+  @include transition();
+
+  &_invisible {
+    left: -100vw;
+    width: 0;
+  }
+}
