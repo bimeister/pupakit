@@ -54,7 +54,6 @@ $header-cell-moving-background-color: $color_light-blue;
     &::before {
       content: '\f280';
       padding: 0 1px 0 0;
-
     }
     &::after {
       content: '\f286';
@@ -69,5 +68,4 @@ $header-cell-moving-background-color: $color_light-blue;
   .ag-header-cell-sorted-asc {
     color: $color_active-blue;
   }
-
 }

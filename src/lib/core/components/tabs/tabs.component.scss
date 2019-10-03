@@ -45,6 +45,7 @@
 .rail {
   position: absolute;
   width: 100%;
+  overflow: hidden;
   height: rems(0.25);
   background: $color_light-blue;
 }

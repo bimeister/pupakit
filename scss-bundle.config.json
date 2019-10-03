@@ -1,5 +1,7 @@
 {
-  "entry": "./src/styles/styles.scss",
-  "dest": "dist/@meistersoft/pupakit/styles.scss",
-  "includePaths": true
+  "bundlerOptions": {
+    "entryFile": "./src/styles/styles.scss",
+    "outFile": "dist/@meistersoft/pupakit/styles.scss",
+    "includePaths": ["./", "./node_modules"]
+  }
 }
