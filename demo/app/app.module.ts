@@ -29,6 +29,7 @@ import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.
 import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
+import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
@@ -62,7 +63,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ModalDemoComponent,
     ModalDemoContentComponent,
     DatepickerDemoComponent,
-    ScrollbarDemoComponent
+    ScrollbarDemoComponent,
+    TabsDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -155,6 +157,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'washer-panel', component: WasherPanelDemoComponent },
       { path: 'scrollbar', component: ScrollbarDemoComponent },
       { path: 'modal', component: ModalDemoComponent },
+      { path: 'tabs', component: TabsDemoComponent },
       {
         path: '',
         component: AppComponent

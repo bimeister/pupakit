@@ -1,0 +1,25 @@
+<div #tabsElement class="tabs">
+  <button
+    *ngFor="let tab of tabs"
+    [class.tabs__item_selected]="(selectedTabName$ | async) === tab.name"
+    class="tabs__item"
+    (click)="selectTab(tab.name, $event)"
+  >
+    <ion-icon
+      class="icon"
+      [name]="tab.iconName"
+      [src]="(tab.iconName | isNullOrUndefined) ? tab.iconSrc : null"
+    ></ion-icon>
+    <div class="title">
+      {{ tab.name }}
+    </div>
+  </button>
+</div>
+
+<div class="rail">
+  <div
+    #highlighterElement
+    [class.rail__highlighter_invisible]="selectedTabName$ | async | isNullOrUndefined"
+    class="rail__highlighter"
+  ></div>
+</div>
