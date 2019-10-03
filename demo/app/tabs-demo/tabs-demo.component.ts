@@ -11,11 +11,13 @@ export class TabsDemoComponent {
   public tabs: Tab[] = [
     {
       name: 'Ad/Ldap',
-      iconName: 'ios-albums'
+      iconName: 'ios-albums',
+      route: '/tabs#ad-ldap'
     },
     {
       name: 'Управление ролями',
-      iconName: 'ios-hammer'
+      iconName: 'ios-hammer',
+      route: '/tabs#roles'
     }
   ];
 }

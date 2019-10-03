@@ -3,7 +3,7 @@
     *ngFor="let tab of tabs"
     [class.tabs__item_selected]="(selectedTabName$ | async) === tab.name"
     class="tabs__item"
-    (click)="selectTab(tab.name, $event)"
+    (click)="selectTab(tab, $event)"
   >
     <ion-icon
       *ngIf="!(tab?.iconName || tab?.iconSrc | isNullOrUndefined)"

@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -8,13 +9,17 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+
+import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
 export interface Tab {
   name: string;
   iconName?: string;
   iconSrc?: string;
+  route?: string;
 }
 
 @Component({
@@ -23,7 +28,7 @@ export interface Tab {
   styleUrls: ['./tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TabsComponent {
+export class TabsComponent implements AfterViewInit {
   @ViewChild('highlighterElement', { static: true }) public readonly highlighterElementRef: ElementRef<HTMLDivElement>;
   @ViewChild('tabsElement', { static: true }) public readonly tabsElementRef: ElementRef<HTMLDivElement>;
 
@@ -39,14 +44,27 @@ export class TabsComponent {
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly renderer: Renderer2) {
+  constructor(private readonly renderer: Renderer2, private readonly router: Router) {
     this.appendHighligterToSelectedTab();
   }
 
-  public selectTab(tabName: string, clickEvent: MouseEvent): void {
-    clickEvent.stopPropagation();
-    this.selectedTabName$.next(tabName);
-    this.selectedTabNameChange.emit(tabName);
+  public ngAfterViewInit(): void {
+    if (!isNullOrUndefined(this.selectedTabName)) {
+      return;
+    }
+    this.selectTab(this.tabs[0]);
+  }
+
+  public selectTab(tab: Tab, clickEvent?: MouseEvent): void {
+    if (!isNullOrUndefined(clickEvent)) {
+      clickEvent.stopPropagation();
+    }
+    this.selectedTabName$.next(tab.name);
+    this.selectedTabNameChange.emit(tab.name);
+    if (isNullOrUndefined(tab.route)) {
+      return;
+    }
+    this.router.navigateByUrl(tab.route);
   }
 
   private appendHighligterToSelectedTab(): void {
@@ -54,7 +72,8 @@ export class TabsComponent {
       distinctUntilChanged(),
       map((tabName: string) => this.tabs.map((tab: Tab) => tab.name).indexOf(tabName)),
       filter((tabIndex: number) => !Object.is(tabIndex, -1)),
-      map((tabIndex: number) => this.tabsElementRef.nativeElement.children.item(tabIndex))
+      map((tabIndex: number) => this.tabsElementRef.nativeElement.children.item(tabIndex)),
+      filter((selectedTab: Element) => !isNullOrUndefined(selectedTab))
     );
     this.subscription.add(
       selectedTabElement$.subscribe((selectedTabElement: Element) => {
