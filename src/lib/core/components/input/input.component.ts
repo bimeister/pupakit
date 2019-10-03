@@ -43,6 +43,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public id: string;
   @Input() public name: string;
   @Input() public width: string;
+  @Input() public autocomplete: boolean = true;
   @Input()
   public get value(): unknown {
     return this.valueData;

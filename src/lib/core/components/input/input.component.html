@@ -16,6 +16,7 @@
     [attr.disabled]="disabled ? true : null"
     [readOnly]="readonly"
     (input)="updateValue(inputElement.value)"
+    [autocomplete]="autocomplete ? 'on' : 'off'"
   />
   <div class="icon" *ngIf="showValidateIcon && valid && !disabled">
     <ion-icon name="ios-checkmark-circle"></ion-icon>
