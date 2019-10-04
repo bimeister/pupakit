@@ -72,7 +72,6 @@ export class ButtonComponent {
       this.timeRepeat = this.timeOut;
       this.onclick.emit(event);
       this.newRepeatClick(event);
-      console.log('1');
     }, this.timeRepeat);
   }
 }
