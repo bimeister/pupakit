@@ -46,6 +46,7 @@ export class TabsComponent implements AfterViewInit {
 
   constructor(private readonly renderer: Renderer2, private readonly router: Router) {
     this.appendHighligterToSelectedTab();
+    this.emitNewTabNameOnChange();
   }
 
   public ngAfterViewInit(): void {
@@ -60,7 +61,6 @@ export class TabsComponent implements AfterViewInit {
       clickEvent.stopPropagation();
     }
     this.selectedTabName$.next(tab.name);
-    this.selectedTabNameChange.emit(tab.name);
     if (isNullOrUndefined(tab.route)) {
       return;
     }
@@ -86,6 +86,14 @@ export class TabsComponent implements AfterViewInit {
         this.renderer.setStyle(highlighter, 'left', `${selectedTabLeftOffsetPx - tabsContainerLeftOffsetPx}px`);
         this.renderer.setStyle(highlighter, 'width', `${selectedTabWidthPx}px`);
       })
+    );
+  }
+
+  private emitNewTabNameOnChange(): void {
+    this.subscription.add(
+      this.selectedTabName$
+        .pipe(distinctUntilChanged())
+        .subscribe((tabName: string) => this.selectedTabNameChange.emit(tabName))
     );
   }
 }
