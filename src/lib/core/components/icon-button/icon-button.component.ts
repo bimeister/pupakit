@@ -12,17 +12,6 @@ export type InputButtonSize = 'small' | 'medium' | 'large';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconButtonComponent {
-  public get nativeElement(): HTMLElement {
-    return this.elementRef.nativeElement;
-  }
-
-  public get resultClassList(): string[] {
-    return [this.color, this.size, this.active ? 'active' : null]
-      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
-      .map((innerProperty: string) => `button_${innerProperty}`);
-  }
-
-  constructor(private readonly elementRef: ElementRef) {}
   @ViewChild('buttonElement', { static: true }) public buttonElement: ElementRef<HTMLButtonElement>;
 
   @Input() public color: InputButtonColor = 'light';
@@ -41,6 +30,18 @@ export class IconButtonComponent {
   private timeRepeat: number;
   private readonly firstTimeOut: number = 800;
   private readonly timeOut: number = 100;
+
+  constructor(private readonly elementRef: ElementRef) {}
+
+  public get nativeElement(): HTMLElement {
+    return this.elementRef.nativeElement;
+  }
+
+  public get resultClassList(): string[] {
+    return [this.color, this.size, this.active ? 'active' : null]
+      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
+      .map((innerProperty: string) => `button_${innerProperty}`);
+  }
 
   public processClickEvent(event: MouseEvent): void {
     this.buttonElement.nativeElement.blur();
