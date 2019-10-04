@@ -18,6 +18,7 @@ import { isDate } from './../../../helpers/is-date.helper';
 
 export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
+export type TextAlignType = 'left' | 'center' | 'right' | 'end' | 'start' | 'inherit';
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -44,6 +45,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public name: string;
   @Input() public width: string;
   @Input() public autocomplete: boolean = true;
+  @Input() public textAlign: TextAlignType = null;
   @Input()
   public get value(): unknown {
     return this.valueData;
@@ -69,6 +71,9 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   public ngAfterViewInit(): void {
     if (this.width) {
       this.renderer.setStyle(this.inputElement.nativeElement, 'width', `${this.width}`);
+    }
+    if (this.textAlign) {
+      this.renderer.setStyle(this.inputElement.nativeElement, 'text-align', `${this.textAlign}`);
     }
   }
 
