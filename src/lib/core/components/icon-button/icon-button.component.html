@@ -7,6 +7,8 @@
   [attr.disabled]="disabled ? true : null"
   [type]="type"
   (click)="processClickEvent($event)"
+  (mousedown)="processMouseDownEvent($event)"
+  (mouseup)="processMouseUpEvent($event)"
 >
   <ng-content></ng-content>
 </button>
