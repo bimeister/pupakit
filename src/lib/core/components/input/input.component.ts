@@ -18,7 +18,7 @@ import { isDate } from './../../../helpers/is-date.helper';
 
 export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
-export type TextAlignType = 'left' | 'center' | 'right' | 'end' | 'start' | 'inherit';
+export type InputTextAlign = 'left' | 'center' | 'right' | 'inherit';
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -45,7 +45,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public name: string;
   @Input() public width: string;
   @Input() public autocomplete: boolean = true;
-  @Input() public textAlign: TextAlignType = null;
+  @Input() public textAlign: InputTextAlign = 'left';
   @Input()
   public get value(): unknown {
     return this.valueData;
