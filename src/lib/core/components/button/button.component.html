@@ -5,6 +5,8 @@
   [type]="type"
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event)"
+  (mousedown)="processMouseDownEvent($event)"
+  (mouseup)="processMouseUpEvent($event)"
 >
   <div class="button__icon" [ngClass]="'button__icon_' + icon.position" *ngIf="icon">
     <ion-icon [attr.name]="icon.name"></ion-icon>
