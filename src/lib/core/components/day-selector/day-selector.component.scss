@@ -13,8 +13,8 @@
   }
   background: $color_light-blue;
   cursor: pointer;
-  font-size: 14px;
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.05);
+  font-size: rems(0.875);
+  box-shadow: 0 rems(0.125) rems(0.125) 0 rgba(0, 0, 0, 0.05);
   color: $color_text;
   height: 1.5em;
   padding: 0 1em;
