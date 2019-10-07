@@ -90,6 +90,7 @@
 
 @mixin scrollbar {
   ::-webkit-scrollbar {
+    height: rems(0.25);
     width: rems(0.25);
   }
 
