@@ -25,8 +25,17 @@ $header-cell-moving-background-color: $color_light-blue;
   font-weight: normal;
 }
 
-.datagrid .ag-root-wrapper {
+.pupagrid {
+  .datagrid {
+    border: none;
+  }
+
+  .ag-center-cols-container {
+    width: 100%;
+  }
+
   .ag-root {
+    border: none;
     @include scrollbar;
   }
 
@@ -35,12 +44,35 @@ $header-cell-moving-background-color: $color_light-blue;
     font-weight: normal;
   }
 
+  .ag-header-container {
+    width: 100%;
+  }
+
+  .ag-header-cell-text {
+    color: $color_main-dark;
+    font-size: $font-size_base-text;
+    font-weight: normal;
+  }
+
   .ag-row {
     border-top: 1px solid $color_light-blue;
   }
 
+  .ag-row-selected {
+    background: $color_light-blue;
+  }
+
+  .ag-center-cols-container {
+    min-width: 100%;
+  }
+
   .ag-cell-label-container {
     height: 100%;
+  }
+
+  .ag-cell,
+  .ag-cell-focus {
+    border: none !important;
   }
 
   .ag-icon-desc,

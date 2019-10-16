@@ -14,7 +14,7 @@ export class DatagridDemoComponent {
     { headerName: 'Price', field: 'price' }
   ];
 
-  public rowData: any[] = [
+  public readonly rowData: any[] = [
     { make: 'Toyota', model: 'Celica', price: 35000 },
     { make: 'Ford', model: 'Mondeo', price: 32000 },
     { make: 'Porsche', model: 'Boxter', price: 72000 },

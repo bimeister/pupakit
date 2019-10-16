@@ -1,8 +1,9 @@
 <ag-grid-angular
-  class="datagrid ag-theme-balham"
+  class="pupagrid ag-theme-balham"
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [domLayout]="domLayout"
   [gridOptions]="gridOptions"
+  (rowClicked)="handleEvent('rowClicked', $event)"
   (gridReady)="onGridReady($event)"
 ></ag-grid-angular>

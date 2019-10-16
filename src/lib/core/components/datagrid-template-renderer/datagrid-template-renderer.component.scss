@@ -1,0 +1,7 @@
+@import 'mixins';
+
+:host {
+  width: auto;
+  height: 100%;
+  @include flex-container(row, center, flex-start, nowrap);
+}
