@@ -42,22 +42,22 @@
 }
 
 .modal__content {
-  padding: rems(1);
   background: $color_white;
+  border-radius: rems(0.75);
+  box-sizing: border-box;
+  z-index: 4001;
+  min-height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal__scroll-container {
   max-height: 80vh;
   max-width: 80vw;
   border-radius: rems(0.75);
   box-sizing: border-box;
-  z-index: 4001;
   overflow-x: hidden;
   overflow-y: auto;
-}
-
-.modal-header {
-  all: unset;
-  width: 100%;
-  margin: 0 0 rems(0.625) 0;
-  @include flex-container(row, center, space-between, nowrap);
 }
 
 .modal-data {
@@ -82,17 +82,11 @@
   color: $color_grey-ivory;
   @include transition;
   @include flex-container(row, center, center, nowrap);
+  position: absolute;
+  top: rems(0.5);
+  right: rems(0.5);
 
   &:hover {
     color: $color_grey-text;
   }
-}
-
-.modal-title {
-  font-size: $font-size_root;
-  line-height: $line-height_base-text;
-  color: $color_grey-text;
-  padding: 0;
-  margin: 0;
-  @include regular;
 }
