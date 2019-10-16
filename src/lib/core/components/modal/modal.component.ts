@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export type ModalSize = 'large' | 'medium' | 'small';
 
-export enum ElementState {
+export enum ModalState {
   Appeared = 'Appeared',
   Dissapeared = 'Dissapeared',
   Void = 'Void'
@@ -28,19 +28,19 @@ export enum ElementState {
   animations: [
     trigger('overlayAppeared', [
       state(
-        ElementState.Void,
+        ModalState.Void,
         style({
           opacity: '0'
         })
       ),
       state(
-        ElementState.Dissapeared,
+        ModalState.Dissapeared,
         style({
           opacity: '0'
         })
       ),
       state(
-        ElementState.Appeared,
+        ModalState.Appeared,
         style({
           opacity: '1'
         })
@@ -57,8 +57,8 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   @Output() public readonly closed: EventEmitter<void> = new EventEmitter<void>();
 
-  public readonly overlayAnimationState$: BehaviorSubject<ElementState> = new BehaviorSubject<ElementState>(
-    ElementState.Appeared
+  public readonly overlayAnimationState$: BehaviorSubject<ModalState> = new BehaviorSubject<ModalState>(
+    ModalState.Appeared
   );
 
   constructor(private readonly renderer: Renderer2) {}
