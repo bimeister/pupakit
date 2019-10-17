@@ -15,10 +15,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
 import { getRangeStartDate } from './../../../helpers/get-range-start-date.helper';
 import { isDate } from './../../../helpers/is-date.helper';
+import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 
 export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
 export type InputTextAlign = 'left' | 'center' | 'right' | 'inherit';
+type ValueType = string | Date | null;
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
@@ -47,11 +49,22 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public autocomplete: boolean = true;
   @Input() public textAlign: InputTextAlign = 'left';
   @Input()
-  public get value(): unknown {
+  public get value(): ValueType {
     return this.valueData;
   }
-  public set value(newValue: unknown) {
+  public set value(newValue: ValueType) {
     this.updateValue(newValue);
+  }
+  public get stringValue(): string  {
+    if (isNullOrUndefined(this.value)) {
+      return '';
+    }
+    if (typeof this.value === 'string') {
+      return this.value;
+    }
+    if (this.value instanceof Date) {
+      return this.value.toISOString();
+    }
   }
 
   @Output() public valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
@@ -60,7 +73,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
 
   public isDatePickerVisible: boolean = false;
 
-  private valueData: unknown = null;
+  private valueData: ValueType = null;
 
   constructor(protected readonly renderer: Renderer2) {}
 
@@ -97,7 +110,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
     this.valueData = String(outerValue);
   }
 
-  public updateValue(innerValue: unknown): void {
+  public updateValue(innerValue: ValueType): void {
     this.isDatePickerVisible = false;
     this.valueData = innerValue;
     this.onChange(innerValue);
