@@ -55,7 +55,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   public set value(newValue: ValueType) {
     this.updateValue(newValue);
   }
-  public get stringValue(): string  {
+  public get stringValue(): string {
     if (isNullOrUndefined(this.value)) {
       return '';
     }
