@@ -21,6 +21,7 @@ export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
 export type InputTextAlign = 'left' | 'center' | 'right' | 'inherit';
 type ValueType = string | Date | null;
+
 @Component({
   selector: 'pupa-input',
   templateUrl: './input.component.html',
