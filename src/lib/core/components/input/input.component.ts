@@ -67,7 +67,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
     }
   }
 
-  @Output() public valueChange: EventEmitter<unknown> = new EventEmitter<unknown>();
+  @Output() public valueChange: EventEmitter<ValueType> = new EventEmitter<ValueType>();
 
   public touched: boolean = false;
 
