@@ -12,10 +12,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
 import { getRangeStartDate } from './../../../helpers/get-range-start-date.helper';
 import { isDate } from './../../../helpers/is-date.helper';
-import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 
 export type InputSize = 'medium' | 'small';
 export type InputType = 'password' | 'text' | 'date' | 'date-range';
@@ -83,6 +83,9 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
+    if (isNullOrUndefined(this.inputElement)) {
+      return;
+    }
     if (this.width) {
       this.renderer.setStyle(this.inputElement.nativeElement, 'width', `${this.width}`);
     }
