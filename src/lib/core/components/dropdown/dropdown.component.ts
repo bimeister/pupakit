@@ -53,6 +53,9 @@ export class DropdownComponent<T> extends DroppableComponent {
   }
 
   public getCaption(item: T): string {
+    if (isNullOrUndefined(item)) {
+      return null;
+    }
     if (isNullOrUndefined(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
       return item['caption'];
     }
