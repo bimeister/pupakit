@@ -1,16 +1,18 @@
-<div class="modal" [ngClass]="'modal_' + size">
-  <div
-    [@overlayAppeared]="overlayAnimationState$ | async"
-    class="modal__overlay"
-    (click)="processOverlayClick($event)"
-  ></div>
+<ng-container *ngIf="isOpen">
+  <div class="modal" [ngClass]="'modal_' + size">
+    <div
+      [@overlayAppeared]="overlayAnimationState$ | async"
+      class="modal__overlay"
+      (click)="processOverlayClick($event)"
+    ></div>
 
-  <div class="modal__content">
-    <button *ngIf="closeButton" class="close-button" (click)="processCloseButtonClick($event)">
-      <ion-icon name="close"></ion-icon>
-    </button>
-    <div class="modal__scroll-container">
-      <ng-content></ng-content>
+    <div class="modal__content" [@overlayAppeared]="overlayAnimationState$ | async">
+      <button *ngIf="closeButton" class="close-button" (click)="processCloseButtonClick($event)">
+        <ion-icon name="close"></ion-icon>
+      </button>
+      <div class="modal__scroll-container">
+        <ng-content></ng-content>
+      </div>
     </div>
   </div>
-</div>
+</ng-container>
