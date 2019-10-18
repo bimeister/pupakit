@@ -17,5 +17,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class DrawerComponent {
   @Input() public isVisible: boolean = false;
+
+  /**
+   * @description content wrapper CSS styles property
+   * @example contentWidth = '300px'
+   */
   @Input() public contentWidth: string = 'fit-content';
 }
