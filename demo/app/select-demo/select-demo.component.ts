@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DropdownItem } from '../../../src/lib/core/components/dropdown/dropdown.component';
 import { FormControl, FormGroup } from '@angular/forms';
+
+import { DropdownItem } from '../../../src/lib/core/components/dropdown/dropdown.component';
 
 @Component({
   selector: 'demo-select',
@@ -32,6 +33,17 @@ export class SelectDemoComponent {
         color: getRandomColor()
       }
     }))
+  ];
+
+  public itemsWithoutCaption: any[] = [
+    { children: [], childrenCount: 0, description: '', name: 'sample 1', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 2', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 3', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 4', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 5', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 6', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 7', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '', name: 'sample 8', id: null, roles: [] }
   ];
 
   public form: FormGroup = new FormGroup({

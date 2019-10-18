@@ -3,6 +3,14 @@
   <textarea class="placeholder"></textarea>
   <form [formGroup]="form">
     <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
+
+    <pupa-select
+      class="mb"
+      formControlName="select"
+      [items]="itemsWithoutCaption"
+      captionPropertyPath="name"
+    ></pupa-select>
+
     <pupa-select class="mb" formControlName="select" [items]="items" [disabled]="true"></pupa-select>
 
     <div class="small-container mb">
