@@ -1,7 +1,7 @@
 <div class="pupa-select" [class.disabled]="disabled" #anchor [id]="id">
   <div
     class="selected-value"
-    [title]="selectedItem?.caption?.length > 20 ? (selectedItem ? selectedItem.caption : '') : ''"
+    [title]="getCaption(selectedItem)?.length > 20 ? (selectedItem ? getCaption(selectedItem) : '') : ''"
   >
     <ion-icon
       class="pupa-dropdown__icon pupa-dropdown__icon_left"
@@ -11,7 +11,7 @@
       [style.color]="selectedItem.iconLeft.color"
     ></ion-icon>
 
-    {{ selectedItem?.caption }}
+    {{ getCaption(selectedItem) }}
 
     <ion-icon
       class="pupa-dropdown__icon pupa-dropdown__icon_right"
@@ -31,5 +31,6 @@
   [items]="items"
   (select)="writeValue($event)"
   [positionChange$]="positionChange$"
+  [captionPropertyPath]="captionPropertyPath"
   *ngIf="!disabled"
 ></pupa-dropdown>

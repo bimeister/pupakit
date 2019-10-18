@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DropdownItem } from '../dropdown/dropdown.component';
 import { cloneDeep, isEqual } from 'lodash';
 import { Observable } from 'rxjs';
+
+import { DropdownItem } from '../dropdown/dropdown.component';
+import { getPropertyValueByPath } from './../../../helpers/get-property-value-by-path.helper';
+import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-select',
@@ -19,6 +22,10 @@ import { Observable } from 'rxjs';
 })
 export class SelectComponent<T> implements ControlValueAccessor {
   private _items: DropdownItem<T>[];
+  private _value: T;
+
+  public selectedItem: DropdownItem<T>;
+
   @Input() public set items(v: DropdownItem<T>[]) {
     this._items = v;
     if (!this.value && v && v.length > 0) {
@@ -30,33 +37,44 @@ export class SelectComponent<T> implements ControlValueAccessor {
   public get items(): DropdownItem<T>[] {
     return this._items;
   }
+
   @Input() public disabled: boolean = false;
+
   @Input() public positionChange$: Observable<void>;
+
   @Input() public id: string;
+
+  /**
+   * @description path to visible captionProperty
+   * @example captionPropertyPath = 'data.name' // { data: { name: 123 } }
+   * @example captionPropertyPath = 'name' // { name: 123 }
+   */
+  @Input() public captionPropertyPath: string = null;
+
   @Output() public input: EventEmitter<T> = new EventEmitter<T>();
-  private _value: T;
+
   @Input() public set value(v: T) {
     this._value = v;
     this.writeValue(v);
   }
-
   public get value(): T {
     return this._value;
   }
-
-  public selectedItem: DropdownItem<T>;
-
-  public onChange: (v: T) => void = (v: T) => {
-    this.input.emit(v);
-  };
-  public onTouched: () => void = () => null;
 
   public writeValue(value: T): void {
     if (!this.items) {
       return;
     }
     const prevValue: DropdownItem<T> = cloneDeep(this.selectedItem);
-    const item: DropdownItem<T> = this.items.find((i: DropdownItem<T>) => i.data === value);
+    const item: DropdownItem<T> = this.items.find((i: DropdownItem<T> | T) => {
+      if (isNullOrUndefined(this.captionPropertyPath)) {
+        return (i as DropdownItem<T>).data === value;
+      }
+      if (!isNullOrUndefined(this.captionPropertyPath)) {
+        return this.getCaption(i as T) === this.getCaption(value);
+      }
+      return false;
+    });
     if (!item) {
       return;
     }
@@ -65,16 +83,37 @@ export class SelectComponent<T> implements ControlValueAccessor {
       this.onChange(value);
     }
   }
+
   public registerOnChange(fn: (v: T) => void): void {
     this.onChange = (v: T): void => {
       this.input.emit(v);
       fn(v);
     };
   }
+
   public registerOnTouched(fn: any): void {
     this.onTouched = fn;
   }
+
   public setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
+
+  public getCaption(item: T): string {
+    if (isNullOrUndefined(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
+      return item['caption'];
+    }
+    if (!isNullOrUndefined(this.captionPropertyPath)) {
+      const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyPath);
+
+      return String(extractedCaption);
+    }
+    return null;
+  }
+
+  public onChange: (v: T) => void = (v: T) => {
+    this.input.emit(v);
+  };
+
+  public onTouched: () => void = () => null;
 }
