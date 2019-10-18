@@ -1,5 +1,9 @@
-<section class="drawer" [@drawerExpanded]="isVisible">
-  <div class="drawer__content" [style.width]="contentWidth">
-    <ng-content *ngIf="isVisible"></ng-content>
+<section class="drawer" [@drawerExpanded]="isVisible" (@drawerExpanded.done)="processAnimationEnd($event)">
+  <div class="drawer__content" [style.width]="contentWidth" *ngIf="isContentRendered">
+    <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
 </section>
+
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>

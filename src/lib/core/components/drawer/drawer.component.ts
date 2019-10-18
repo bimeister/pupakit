@@ -1,5 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-drawer',
@@ -15,7 +17,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
     ])
   ]
 })
-export class DrawerComponent {
+export class DrawerComponent implements OnChanges {
   @Input() public isVisible: boolean = false;
 
   /**
@@ -23,4 +25,21 @@ export class DrawerComponent {
    * @example contentWidth = '300px'
    */
   @Input() public contentWidth: string = 'fit-content';
+
+  public isContentRendered: boolean = false;
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    const drawerBecameVisible: boolean =
+      !isNullOrUndefined(changes.isVisible) && changes.isVisible.currentValue === true;
+    if (drawerBecameVisible) {
+      this.isContentRendered = true;
+    }
+  }
+
+  public processAnimationEnd(event: AnimationEvent): void {
+    const isCollapseAnimationDone: boolean = String(event.toState) === 'false';
+    if (isCollapseAnimationDone) {
+      this.isContentRendered = false;
+    }
+  }
 }
