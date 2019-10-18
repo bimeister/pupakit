@@ -1,5 +1,5 @@
 <section class="drawer" [@drawerExpanded]="isVisible">
   <div class="drawer__content" [style.width]="contentWidth">
-    <ng-content></ng-content>
+    <ng-content *ngIf="isVisible"></ng-content>
   </div>
 </section>
