@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -90,8 +90,11 @@ export class ModalComponent implements OnInit, OnDestroy {
     this.overlayAnimationState$.next(ModalState.Dissapeared);
   }
 
-  public onAnimationDone(_: AnimationEvent): void {
-    if (this.overlayAnimationState$.value === ModalState.Dissapeared) {
+  public onAnimationDone(event: AnimationEvent): void {
+    if (
+      event.fromState === ModalState.Appeared &&
+      (event.toState === ModalState.Dissapeared || event.toState === ModalState.Void)
+    ) {
       this.isOpen = false;
     }
   }
