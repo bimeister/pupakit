@@ -1,0 +1,22 @@
+@import 'functions';
+@import 'variables';
+
+.drawer {
+  all: unset;
+  height: 100vh;
+  width: fit-content;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: $color_white;
+  box-shadow: $box-shadow_hover;
+  overflow: hidden;
+}
+
+.drawer__content {
+  padding: 0 rems(1.25) rems(1);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
