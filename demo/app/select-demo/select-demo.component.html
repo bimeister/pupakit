@@ -11,6 +11,13 @@
       captionPropertyPath="name"
     ></pupa-select>
 
+    <pupa-select
+      class="mb"
+      formControlName="select"
+      [items]="itemsWithoutCaptionNested"
+      [captionPropertyPath]="'data.name'"
+    ></pupa-select>
+
     <pupa-select class="mb" formControlName="select" [items]="items" [disabled]="true"></pupa-select>
 
     <div class="small-container mb">

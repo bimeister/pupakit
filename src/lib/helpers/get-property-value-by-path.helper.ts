@@ -13,14 +13,6 @@ export const getPropertyValueByPath = (source: unknown, path: string): unknown =
   return pathKeys.reduce((extractedData: any, _, currentIndex: number) => {
     const currentPath: string = pathKeys[currentIndex];
     const currentPathData: any = extractedData[currentPath];
-    const isTargetValue: boolean = Object.is(currentIndex, pathKeys.length - 1);
-
-    if (isTargetValue) {
-      return currentPathData;
-    }
-
-    if (isNullOrUndefined(currentPathData)) {
-      return currentPathData;
-    }
+    return currentPathData;
   }, source);
 };

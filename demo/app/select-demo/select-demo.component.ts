@@ -46,6 +46,39 @@ export class SelectDemoComponent {
     { children: [], childrenCount: 0, description: '', name: 'sample 8', id: null, roles: [] }
   ];
 
+  public itemsWithoutCaptionNested: any[] = [
+    {
+      data: {
+        children: [],
+        childrenCount: 0,
+        description: '',
+        name: 'sample 1',
+        id: null,
+        roles: []
+      }
+    },
+    {
+      data: {
+        children: [],
+        childrenCount: 0,
+        description: '',
+        name: 'sample 2',
+        id: null,
+        roles: []
+      }
+    },
+    {
+      data: {
+        children: [],
+        childrenCount: 0,
+        description: '',
+        name: 'sample 3',
+        id: null,
+        roles: []
+      }
+    }
+  ];
+
   public form: FormGroup = new FormGroup({
     select: new FormControl()
   });
