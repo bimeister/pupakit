@@ -2,6 +2,7 @@
   <div class="modal" [ngClass]="'modal_' + size">
     <div
       [@overlayAppeared]="overlayAnimationState$ | async"
+      (@overlayAppeared.done)="onAnimationDone($event)"
       class="modal__overlay"
       (click)="processOverlayClick($event)"
     ></div>
