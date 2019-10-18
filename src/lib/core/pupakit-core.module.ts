@@ -12,6 +12,7 @@ import { DatagridTemplateRendererComponent } from './components/datagrid-templat
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
@@ -56,7 +57,8 @@ const CORE_COMPONENTS: any[] = [
   DatepickerComponent,
   TabsComponent,
   DatagridComponent,
-  DatagridTemplateRendererComponent
+  DatagridTemplateRendererComponent,
+  DrawerComponent
 ];
 
 @NgModule({

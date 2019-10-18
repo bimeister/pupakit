@@ -17,6 +17,7 @@ import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.com
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
+import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
@@ -66,7 +67,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DatepickerDemoComponent,
     ScrollbarDemoComponent,
     TabsDemoComponent,
-    DatagridDemoComponent
+    DatagridDemoComponent,
+    DrawerDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -161,6 +163,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'modal', component: ModalDemoComponent },
       { path: 'tabs', component: TabsDemoComponent },
       { path: 'datagrid', component: DatagridDemoComponent },
+      { path: 'drawer', component: DrawerDemoComponent },
       {
         path: '',
         component: AppComponent
