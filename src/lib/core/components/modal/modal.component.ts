@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   HostListener,
@@ -20,9 +19,6 @@ export enum ModalState {
   Dissapeared = 'Dissapeared',
   Void = 'Void'
 }
-
-const ANIMATION_TIME_S: number = 0.32;
-const MS_IN_S: number = 1000;
 
 @Component({
   selector: 'pupa-modal',
@@ -49,7 +45,7 @@ const MS_IN_S: number = 1000;
           opacity: '1'
         })
       ),
-      transition('* => *', animate(`${ANIMATION_TIME_S}s cubic-bezier(0.2, 1, 1, 1)`))
+      transition('* => *', animate(`0.32s cubic-bezier(0.2, 1, 1, 1)`))
     ])
   ]
 })
@@ -59,8 +55,8 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() public size: ModalSize = 'medium';
   @Input() public title: string = null;
 
-  @Input() public set open(v: boolean) {
-    if (v) {
+  @Input() public set open(value: boolean) {
+    if (value) {
       this.openModal();
     } else {
       this.closeModal();
@@ -75,7 +71,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     ModalState.Appeared
   );
 
-  constructor(private readonly renderer: Renderer2, private readonly cd: ChangeDetectorRef) {}
+  constructor(private readonly renderer: Renderer2) {}
 
   @HostListener('window:keydown', ['$event'])
   public processWindowKeypress(event: KeyboardEvent): void {
@@ -92,10 +88,12 @@ export class ModalComponent implements OnInit, OnDestroy {
 
   private closeModal(): void {
     this.overlayAnimationState$.next(ModalState.Dissapeared);
-    setTimeout(() => {
+  }
+
+  public onAnimationDone(_: AnimationEvent): void {
+    if (this.overlayAnimationState$.value === ModalState.Dissapeared) {
       this.isOpen = false;
-      this.cd.markForCheck();
-    }, ANIMATION_TIME_S * MS_IN_S);
+    }
   }
 
   public ngOnInit(): void {
