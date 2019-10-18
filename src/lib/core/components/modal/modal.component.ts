@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   HostListener,
@@ -19,6 +20,9 @@ export enum ModalState {
   Dissapeared = 'Dissapeared',
   Void = 'Void'
 }
+
+const ANIMATION_TIME_S: number = 0.32;
+const MS_IN_S: number = 1000;
 
 @Component({
   selector: 'pupa-modal',
@@ -45,7 +49,7 @@ export enum ModalState {
           opacity: '1'
         })
       ),
-      transition('* => *', animate('0.32s cubic-bezier(0.2, 1, 1, 1)'))
+      transition('* => *', animate(`${ANIMATION_TIME_S}s cubic-bezier(0.2, 1, 1, 1)`))
     ])
   ]
 })
@@ -55,20 +59,43 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() public size: ModalSize = 'medium';
   @Input() public title: string = null;
 
-  @Output() public readonly closed: EventEmitter<void> = new EventEmitter<void>();
+  @Input() public set open(v: boolean) {
+    if (v) {
+      this.openModal();
+    } else {
+      this.closeModal();
+    }
+  }
+
+  public isOpen: boolean = false; // Только для шаблона
+
+  @Output() public readonly close: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly overlayAnimationState$: BehaviorSubject<ModalState> = new BehaviorSubject<ModalState>(
     ModalState.Appeared
   );
 
-  constructor(private readonly renderer: Renderer2) {}
+  constructor(private readonly renderer: Renderer2, private readonly cd: ChangeDetectorRef) {}
 
   @HostListener('window:keydown', ['$event'])
   public processWindowKeypress(event: KeyboardEvent): void {
     const isEscPressed: boolean = event.key.toLowerCase() === 'escape';
     if (isEscPressed) {
-      this.closed.emit();
+      this.close.emit();
     }
+  }
+
+  private openModal(): void {
+    this.isOpen = true;
+    requestAnimationFrame(() => this.overlayAnimationState$.next(ModalState.Appeared));
+  }
+
+  private closeModal(): void {
+    this.overlayAnimationState$.next(ModalState.Dissapeared);
+    setTimeout(() => {
+      this.isOpen = false;
+      this.cd.markForCheck();
+    }, ANIMATION_TIME_S * MS_IN_S);
   }
 
   public ngOnInit(): void {
@@ -84,12 +111,12 @@ export class ModalComponent implements OnInit, OnDestroy {
     if (!this.clickableOverlay) {
       return;
     }
-    this.closed.emit();
+    this.close.emit();
   }
 
   public processCloseButtonClick(event: MouseEvent): void {
     event.stopPropagation();
-    this.closed.emit();
+    this.close.emit();
   }
 
   private disableScrolling(): void {
