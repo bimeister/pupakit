@@ -1,3 +1,10 @@
-<div class="pupa-dropdown" [class.pupa-dropdown_open]="open" [style.top.px]="topPx" [style.left.px]="leftPx" #dropdown>
+<div
+  class="pupa-dropdown"
+  *ngIf="open"
+  [class.pupa-dropdown_open]="shown"
+  [style.top.px]="topPx"
+  [style.left.px]="leftPx"
+  #dropdown
+>
   <ng-content></ng-content>
 </div>

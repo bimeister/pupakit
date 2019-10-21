@@ -3,6 +3,7 @@
 </h1>
 <div class="group">
   <pupa-chip-select
+    *ngFor="let i of arr"
     [selectItems]="selectItems"
     [items]="items"
     (removedItem)="removedItem($event)"

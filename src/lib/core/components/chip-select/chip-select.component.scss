@@ -16,7 +16,8 @@ pupa-chip span {
   margin-right: rems(0.6);
 }
 
-.chip-select__chip-remove {
+.chip-select__chip-icon {
+  position: absolute;
   appearance: none;
   box-sizing: border-box;
   border: 0;
@@ -27,7 +28,6 @@ pupa-chip span {
   outline: none;
   height: rems(1);
   width: rems(1);
-  opacity: 1;
   display: flex;
   border-radius: 50%;
   white-space: nowrap;
@@ -35,10 +35,34 @@ pupa-chip span {
   justify-content: space-evenly;
   flex-direction: row;
   color: $color_grey-ivory;
+  z-index: 299;
+  left: 0;
+
+  transition: left 0.25s;
+
   &:focus,
   &:hover {
     color: $color_white;
   }
+}
+
+.chip-select__chip-icon_remove {
+  z-index: 300;
+  left: -20px;
+}
+
+pupa-chip:hover .chip-select__chip-icon:not(.chip-select__chip-icon_remove) {
+  opacity: 0;
+  left: 20px;
+}
+
+pupa-chip:hover .chip-select__chip-icon_remove {
+  opacity: 1;
+  left: 0;
+}
+
+.chip-select__chip-icon_remove {
+  opacity: 0;
 }
 
 .chip-select__chip-add-button {
@@ -46,12 +70,13 @@ pupa-chip span {
   margin: 0 rems(0.2) 0 rems(0.3);
 }
 
-.chip-select__chip-icon {
+.chip-select__chip-icon-container {
   display: inline-flex;
   height: rems(1);
   width: rems(1);
   overflow: hidden;
   margin: 0 rems(0.2) 0 rems(0.4);
+  position: relative;
 }
 
 .chip-select__droppable-item {
