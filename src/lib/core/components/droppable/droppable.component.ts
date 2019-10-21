@@ -24,15 +24,27 @@ export type DroppableHorizontalPosition = 'left' | 'right';
 })
 export class DroppableComponent implements AfterViewInit, OnDestroy {
   private readonly sub: Subscription = new Subscription();
-  @ViewChild('dropdown', { static: true }) public dropdownRef: ElementRef<HTMLDivElement>;
-  public get dropdown(): HTMLDivElement {
-    return this.dropdownRef.nativeElement;
+  @ViewChild('dropdown', { static: false }) public dropdownRef: ElementRef<HTMLDivElement>;
+  public get dropdown(): HTMLDivElement | null {
+    return this.dropdownRef && this.dropdownRef.nativeElement ? this.dropdownRef.nativeElement : null;
   }
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
   @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
   @Input() public maxWidth: number = null;
-  @Input() public open: boolean = false;
+  private _open: boolean = false;
+  public shown: boolean = false;
+  @Input() public set open(value: boolean) {
+    this._open = value;
+    requestAnimationFrame(() => {
+      this.shown = value;
+      this.checkPosition();
+      this.cDRef.markForCheck();
+    });
+  }
+  public get open(): boolean {
+    return this._open;
+  }
 
   public topPx: number = 0;
   public leftPx: number = 0;
@@ -107,7 +119,7 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('document:click', ['$event'])
   public clickOutsideCheck(event: MouseEvent): void {
-    if (!this.anchor || !this.dropdownRef.nativeElement) {
+    if (!this.anchor || !this.dropdownRef || !this.dropdownRef.nativeElement) {
       return;
     }
     const clickedInside: boolean =

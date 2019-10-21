@@ -1,9 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { DroppableComponent } from '../droppable/droppable.component';
-import { remSizePx } from './../../../constants/rem-size-px.const';
 
 export interface ChipItem {
   key: string;
@@ -17,31 +15,9 @@ export interface ChipItem {
   selector: 'pupa-chip-select',
   templateUrl: './chip-select.component.html',
   styleUrls: ['./chip-select.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('isHovered', [
-      state(
-        'true',
-        style({
-          width: `${remSizePx * 1}px`,
-          opacity: '1'
-        })
-      ),
-      state(
-        'false',
-        style({
-          width: `0`,
-          opacity: '0'
-        })
-      ),
-      transition(`true => false`, animate('0.25s ease')),
-      transition(`false => true`, animate('0.25s ease-in'))
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipSelectComponent implements OnDestroy {
-  public expandedButtonIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-
   @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
 
   @Input()
@@ -120,16 +96,6 @@ export class ChipSelectComponent implements OnDestroy {
     this.notActiveKeys = this.notActiveKeys.filter(activeItem => activeItem !== item.key);
   }
 
-  public get activeItems(): ChipItem[] {
-    const selectItems: Set<ChipItem> = this.selectItems$.value;
-    const keysCollection: Set<string> = new Set<string>(Array.from(selectItems).map(item => item.key));
-    const result: ChipItem[] = this.items.filter(item => !keysCollection.has(item.key));
-    if (result.length === 0) {
-      this.droppable.open = false;
-    }
-    return result;
-  }
-
   public clickDroppableItem(key: string): void {
     if (this.readonly) {
       return;
@@ -147,14 +113,6 @@ export class ChipSelectComponent implements OnDestroy {
     }
     this.addedItem.emit(item);
     this.notActiveKeys = [...this.notActiveKeys, key];
-  }
-
-  public buttonAnimationState(expandedButtonIndex: number, buttonIndex: number): string {
-    return Object.is(expandedButtonIndex, buttonIndex) ? 'true' : 'false';
-  }
-
-  public updateExpandedButtonIndex(index: number): void {
-    this.expandedButtonIndex$.next(index);
   }
 
   private checkedAllItems(items: ChipItem[]): void {

@@ -2,6 +2,8 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { ChipItem } from './../../../src/lib/core/components/chip-select/chip-select.component';
 
+const SELECTORS_TO_SHOW: number = 99;
+
 @Component({
   selector: 'demo-chip-select',
   styleUrls: ['../demo.scss'],
@@ -9,6 +11,7 @@ import { ChipItem } from './../../../src/lib/core/components/chip-select/chip-se
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipSelectDemoComponent {
+  public arr: any[] = new Array(SELECTORS_TO_SHOW).fill(null);
   public selectItems: ChipItem[] = [
     {
       key: 'key_1',
