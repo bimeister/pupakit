@@ -48,12 +48,12 @@ pupa-chip span {
 
 .chip-select__chip-icon_remove {
   z-index: 300;
-  left: -20px;
+  left: rems(-2.5);
 }
 
 pupa-chip:hover .chip-select__chip-icon:not(.chip-select__chip-icon_remove) {
   opacity: 0;
-  left: 20px;
+  left: rems(2.5);
 }
 
 pupa-chip:hover .chip-select__chip-icon_remove {
