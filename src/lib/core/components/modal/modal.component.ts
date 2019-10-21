@@ -53,7 +53,6 @@ export class ModalComponent implements OnInit, OnDestroy {
   @Input() public clickableOverlay: boolean = true;
   @Input() public closeButton: boolean = true;
   @Input() public size: ModalSize = 'medium';
-  @Input() public title: string = null;
 
   @Input() public set open(value: boolean) {
     if (value) {
