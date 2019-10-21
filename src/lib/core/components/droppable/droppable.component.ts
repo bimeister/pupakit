@@ -109,11 +109,13 @@ export class DroppableComponent implements AfterViewInit, OnDestroy {
       default:
         this.leftPx = box.left;
     }
+
     if (this.maxWidth) {
       this.renderer.setStyle(this.dropdown, 'maxWidth', `${this.maxWidth}px`);
     } else {
       this.renderer.setStyle(this.dropdown, 'width', `${box.width}px`);
     }
+
     this.cDRef.markForCheck();
   };
 
