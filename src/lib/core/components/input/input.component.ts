@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -76,7 +77,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
 
   private valueData: ValueType = null;
 
-  constructor(protected readonly renderer: Renderer2) {}
+  constructor(protected readonly renderer: Renderer2, private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public get isDateInput(): boolean {
     return this.type.toLowerCase() === 'date' || this.type.toLowerCase() === 'date-range';
@@ -111,7 +112,15 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   public writeValue(outerValue: unknown): void {
-    this.valueData = String(outerValue);
+    const isDateInput: boolean = this.type === 'date' || this.type === 'date-range';
+    if (isNullOrUndefined(outerValue)) {
+      this.valueData = null;
+    } else if (isDate(outerValue) && isDateInput) {
+      this.valueData = new Date(String(outerValue));
+    } else {
+      this.valueData = String(outerValue);
+    }
+    this.changeDetectorRef.detectChanges();
   }
 
   public updateValue(innerValue: ValueType): void {
