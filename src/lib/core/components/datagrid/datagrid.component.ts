@@ -7,13 +7,14 @@ import {
   Input,
   OnChanges,
   Output,
+  SimpleChange,
   SimpleChanges
 } from '@angular/core';
-import { ColDef, GridApi, GridOptions, GridReadyEvent } from 'ag-grid-community';
+import { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams } from 'ag-grid-community';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export { ColDef, GridApi, GridOptions, GridReadyEvent };
+export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams };
 
 @Component({
   selector: 'pupa-datagrid',
@@ -26,7 +27,17 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
 
   @Input() public columnDefs: ColDef[];
 
+  /**
+   * @description standard row display; classic scrolling model;
+   */
   @Input() public rowData: unknown[];
+
+  /**
+   * @description paged row display; infinite scrolling model;
+   */
+  @Input() public rowDataSource: IDatasource;
+
+  @Input() public visibleColIds: string[] = [];
 
   @Input() public gridOptions: GridOptions = {
     rowSelection: 'single',
@@ -42,23 +53,20 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
 
   private gridApi: GridApi;
 
+  private get isGridReady(): boolean {
+    return !isNullOrUndefined(this.gridApi);
+  }
+
   @HostListener('window:resize')
   public processWindowResizeEvent(): void {
     this.makeColumnsFitGridWidth();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    if (isNullOrUndefined(changes.columnDefs)) {
-      return;
-    }
-    const columnDefsUpdated: boolean =
-      (!isNullOrUndefined(changes.columnDefs.currentValue) && isNullOrUndefined(changes.columnDefs.previousValue)) ||
-      (isNullOrUndefined(changes.columnDefs.currentValue) && !isNullOrUndefined(changes.columnDefs.previousValue)) ||
-      JSON.stringify(changes.columnDefs.currentValue) !== JSON.stringify(changes.columnDefs.previousValue);
-    if (!columnDefsUpdated) {
-      return;
-    }
-    this.makeColumnsFitGridWidth();
+    this.processColumnDefsChanges(changes);
+    this.processVisibleColIdsChanges(changes);
+    this.processRowDataChanges(changes);
+    this.processRowDataSourceChanges(changes);
   }
 
   public ngAfterContentChecked(): void {
@@ -84,4 +92,78 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
     }
     this.sizeColumnsToFit ? this.gridApi.sizeColumnsToFit() : this.gridApi.doLayout();
   }
+
+  private processRowDataSourceChanges(changes: SimpleChanges): void {
+    if (isNullOrUndefined(changes) || !this.isValueChanged(changes.rowDataSource)) {
+      return;
+    }
+    if (!Array.isArray(changes.rowData)) {
+      return;
+    }
+    if (!this.isGridReady) {
+      this.gridOptions.rowModelType = 'infinite';
+      this.gridOptions.datasource = changes.rowDataSource.currentValue;
+      return;
+    }
+    this.gridOptions.api.setDatasource(changes.rowData.currentValue);
+  }
+
+  private processRowDataChanges(changes: SimpleChanges): void {
+    if (isNullOrUndefined(changes) || !this.isValueChanged(changes.rowData)) {
+      return;
+    }
+    if (!Array.isArray(changes.rowData)) {
+      return;
+    }
+    if (!this.isGridReady) {
+      this.gridOptions.rowModelType = 'clientSide';
+      this.gridOptions.rowData = changes.rowData.currentValue;
+      return;
+    }
+    this.gridOptions.api.setRowData(changes.rowData.currentValue);
+  }
+
+  private processColumnDefsChanges(changes: SimpleChanges): void {
+    if (isNullOrUndefined(changes) || !this.isValueChanged(changes.columnDefs)) {
+      return;
+    }
+    this.makeColumnsFitGridWidth();
+  }
+
+  private processVisibleColIdsChanges(changes: SimpleChanges): void {
+    if (
+      isNullOrUndefined(changes) ||
+      !this.isValueChanged(changes.visibleColIds) ||
+      isNullOrUndefined(this.columnDefs)
+    ) {
+      return;
+    }
+    const visibleColumnIds: string[] = changes.visibleColIds.currentValue;
+    const invisibleColumnIds: string[] = this.columnDefs
+      .filter((columnDef: ColDef) => !visibleColumnIds.includes(columnDef.colId))
+      .map((columnDef: ColDef) => columnDef.colId);
+
+    this.gridOptions.columnApi.setColumnsVisible(visibleColumnIds, true);
+    this.gridOptions.columnApi.setColumnsVisible(invisibleColumnIds, false);
+  }
+
+  private readonly isValueChanged = (change: SimpleChange): boolean => {
+    if (isNullOrUndefined(change)) {
+      return false;
+    }
+    const valueBecameDefined: boolean =
+      isNullOrUndefined(change.previousValue) && !isNullOrUndefined(change.currentValue);
+    const valueBecameUndefined: boolean =
+      !isNullOrUndefined(change.previousValue) && isNullOrUndefined(change.currentValue);
+    if (valueBecameDefined || valueBecameUndefined) {
+      return true;
+    }
+    const valueIsArray: boolean = Array.isArray(change);
+    const arrayLengthChanged: boolean =
+      valueIsArray && !Object.is((change.currentValue as unknown[]).length, (change.previousValue as unknown[]).length);
+    if (arrayLengthChanged) {
+      return true;
+    }
+    return JSON.stringify(change.currentValue) !== JSON.stringify(change.previousValue);
+  };
 }

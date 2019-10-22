@@ -1,0 +1,14 @@
+@import 'mixins';
+@import 'variables';
+
+.controls {
+  box-sizing: border-box;
+  padding: rems(0.75);
+  background: $color_white;
+  box-shadow: $box-shadow_hover;
+  @include flex-container(column, stretch, flex-start, nowrap);
+}
+
+.controls__item ~ .controls__item {
+  padding: rems(0.625) 0 0 0;
+}
