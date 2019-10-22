@@ -8,6 +8,7 @@ import { ChipButtonComponent } from './components/chip-button/chip-button.compon
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
+import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
 import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
@@ -58,7 +59,8 @@ const CORE_COMPONENTS: any[] = [
   TabsComponent,
   DatagridComponent,
   DatagridTemplateRendererComponent,
-  DrawerComponent
+  DrawerComponent,
+  DatagridColumnSettingsComponent
 ];
 
 @NgModule({
