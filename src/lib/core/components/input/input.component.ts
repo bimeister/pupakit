@@ -6,6 +6,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostBinding,
   Input,
   Output,
   Renderer2,
@@ -38,6 +39,9 @@ type ValueType = string | Date | null;
 })
 export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('inputElement', { static: false }) public inputElement: ElementRef<HTMLInputElement>;
+  @HostBinding('class.input_fluid')
+  @Input()
+  public isFluid: boolean = false;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
