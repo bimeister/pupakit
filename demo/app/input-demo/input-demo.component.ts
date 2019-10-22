@@ -18,7 +18,8 @@ export class InputDemoComponent implements OnDestroy {
     placeholder: ['placeholder'],
     disabled: [false, true],
     type: ['text', 'password', 'date', 'date-range'],
-    showValidateIcon: [false, true]
+    showValidateIcon: [false, true],
+    isFluid: [false, true]
   });
 
   constructor() {
