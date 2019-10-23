@@ -4,7 +4,7 @@ import { ButtonType } from '../button/button.component';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
 export type InputButtonColor = 'dark' | 'light';
-export type InputButtonSize = 'small' | 'medium' | 'large';
+export type InputButtonSize = 'small' | 'small-to-medium' | 'medium' | 'large';
 @Component({
   selector: 'pupa-icon-button',
   templateUrl: './icon-button.component.html',
