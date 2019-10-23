@@ -9,9 +9,7 @@
       input_valid: touched && valid,
       input_invalid: touched && !valid,
       input_medium: size === 'medium',
-      input_small: size === 'small',
-      input_fixed: !isFluid,
-      input_fluid: isFluid
+      input_small: size === 'small'
     }"
     [id]="id"
     [name]="name"
@@ -35,9 +33,7 @@
       input_valid: touched && valid,
       input_invalid: touched && !valid,
       input_medium: size === 'medium',
-      input_small: size === 'small',
-      input_fixed: !isFluid,
-      input_fluid: isFluid
+      input_small: size === 'small'
     }"
   >
     <span *ngIf="type === 'date'" class="input__text">

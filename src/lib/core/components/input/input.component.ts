@@ -6,10 +6,8 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
-  HostBinding,
   Input,
   Output,
-  Renderer2,
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -39,9 +37,6 @@ type ValueType = string | Date | null;
 })
 export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @ViewChild('inputElement', { static: false }) public inputElement: ElementRef<HTMLInputElement>;
-  @HostBinding('class.input_fluid')
-  @Input()
-  public isFluid: boolean = false;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
@@ -51,8 +46,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   @Input() public placeholder: string = '';
   @Input() public id: string;
   @Input() public name: string;
-  @Input() public width: string;
-  @Input() public autocomplete: boolean = true;
+  @Input() public autocomplete: boolean = false;
   @Input() public textAlign: InputTextAlign = 'left';
   @Input()
   public get value(): ValueType {
@@ -81,7 +75,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
 
   private valueData: ValueType = null;
 
-  constructor(protected readonly renderer: Renderer2, private readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public get isDateInput(): boolean {
     return this.type.toLowerCase() === 'date' || this.type.toLowerCase() === 'date-range';
@@ -90,12 +84,6 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   public ngAfterViewInit(): void {
     if (isNullOrUndefined(this.inputElement)) {
       return;
-    }
-    if (this.width) {
-      this.renderer.setStyle(this.inputElement.nativeElement, 'width', `${this.width}`);
-    }
-    if (this.textAlign) {
-      this.renderer.setStyle(this.inputElement.nativeElement, 'text-align', `${this.textAlign}`);
     }
   }
 
