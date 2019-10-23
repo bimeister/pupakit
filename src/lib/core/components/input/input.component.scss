@@ -8,7 +8,11 @@
   padding: 0;
   outline: none;
   position: relative;
-  @include inline-flex-container(row, center, nowrap);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .input {
@@ -20,7 +24,8 @@
   border: 1px solid $color_grey-ivory;
   @include regular();
   @include transition(#{'background, border'});
-  @include inline-flex-container(row, center, space-between, nowrap);
+  @include flex-container(row, center, space-between, nowrap);
+  width: 100%;
 
   &::placeholder {
     position: absolute;
@@ -85,23 +90,6 @@
   font-size: $font-size_base-text;
   line-height: 1.14;
   padding: rems(0.25) rems(0.5);
-}
-
-// width
-:host(.input_fixed),
-.input_fixed {
-  &.input_medium {
-    width: rems(14.48125);
-  }
-  &.input_small {
-    width: rems(8.3125);
-  }
-}
-
-:host(.input_fluid),
-.input_fluid {
-  display: flex;
-  width: 100%;
 }
 
 .input__text {

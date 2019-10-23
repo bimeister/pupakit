@@ -46,3 +46,14 @@ label {
     flex: 0 0 rems(2);
   }
 }
+
+.input_container,
+.input_container_medium {
+  display: block;
+  width: rems(14.48125);
+}
+
+.input_container_small {
+  display: block;
+  width: rems(8.3125);
+}
