@@ -27,6 +27,12 @@
     font-size: rems(0.75);
   }
 
+  &_small-to-medium {
+    width: rems(2);
+    height: rems(2);
+    font-size: rems(1);
+  }
+
   &_medium {
     width: rems(2.25);
     height: rems(2.25);
