@@ -12,22 +12,27 @@ import { Subscription } from 'rxjs';
 export class InputDemoComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
   public readonly sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
+  public value: unknown = null;
 
   public readonly combos: any[] = combos({
     size: ['medium', 'small'],
     placeholder: ['placeholder'],
     disabled: [false, true],
-    type: ['text', 'password', 'date', 'date-range'],
+    type: ['text', 'number', 'password', 'date', 'date-range'],
     showValidateIcon: [false, true]
   });
 
   constructor() {
     /* tslint:disable */
-    this.subscription.add(this.sampleFormControl.valueChanges.subscribe(console.log));
+    this.subscription.add(this.sampleFormControl.valueChanges.subscribe((value: unknown) => console.log(value)));
     /* tslint:enable */
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public setValue(newValue: unknown): void {
+    this.value = newValue;
   }
 }

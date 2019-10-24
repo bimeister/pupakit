@@ -132,6 +132,12 @@ $height_date: rems(1.3125);
     color: $color_white;
     background: $color_active-blue;
     z-index: 3;
+
+    &::before {
+      left: 0;
+      width: 100%;
+      border-radius: rems(0.25);
+    }
   }
 }
 
