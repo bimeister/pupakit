@@ -27,6 +27,12 @@
   @include flex-container(row, center, space-between, nowrap);
   width: 100%;
 
+  &[type='number']::-webkit-inner-spin-button,
+  &[type='number']::-webkit-outer-spin-button {
+    appearance: none;
+    margin: 0;
+  }
+
   &::placeholder {
     position: absolute;
     left: 0;

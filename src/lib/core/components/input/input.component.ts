@@ -18,9 +18,9 @@ import { getRangeStartDate } from './../../../helpers/get-range-start-date.helpe
 import { isDate } from './../../../helpers/is-date.helper';
 
 export type InputSize = 'medium' | 'small';
-export type InputType = 'password' | 'text' | 'date' | 'date-range';
+export type InputType = 'password' | 'text' | 'date' | 'date-range' | 'number';
 export type InputTextAlign = 'left' | 'center' | 'right' | 'inherit';
-type ValueType = string | Date | null;
+type ValueType = string | Date | null | number;
 
 @Component({
   selector: 'pupa-input',
@@ -104,14 +104,7 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
   }
 
   public writeValue(outerValue: unknown): void {
-    const isDateInput: boolean = this.type === 'date' || this.type === 'date-range';
-    if (isNullOrUndefined(outerValue)) {
-      this.valueData = null;
-    } else if (isDate(outerValue) && isDateInput) {
-      this.valueData = new Date(String(outerValue));
-    } else {
-      this.valueData = String(outerValue);
-    }
+    this.valueData = this.getSanitizedValue(outerValue, this.type);
     this.changeDetectorRef.detectChanges();
   }
 
@@ -155,5 +148,28 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
       return null;
     }
     return getRangeEndDate(value);
+  };
+
+  private readonly getSanitizedValue: (value: unknown, type: InputType) => ValueType = (
+    value: unknown,
+    type: InputType
+  ): ValueType => {
+    if (isNullOrUndefined(value)) {
+      return null;
+    }
+
+    const isDateInput: boolean = type === 'date' || type === 'date-range';
+    if (isDateInput && isDate(value)) {
+      return new Date(String(value));
+    }
+
+    const isNumberInput: boolean = type === 'number';
+    const decimalBase: number = 10;
+    const parsedNumber: number = Number.parseInt(String(value), decimalBase);
+    if (isNumberInput && !Number.isNaN(parsedNumber)) {
+      return parsedNumber;
+    }
+
+    return String(value);
   };
 }

@@ -1,6 +1,14 @@
 <h1>
   Input
 </h1>
+<button (click)="sampleFormControl.setValue('sample')">
+  FormControl.setValue('sample')
+</button>
+
+<button (click)="setValue('sample')">
+  FormControl.value = 'sample'
+</button>
+
 <div class="group">
   <div class="column" *ngFor="let combo of combos">
     <label>Sample label</label>
