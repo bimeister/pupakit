@@ -4,6 +4,7 @@
   [columnDefs]="columnDefs"
   [domLayout]="domLayout"
   [gridOptions]="gridOptions"
+  [getRowNodeId]="rowTrackByFn"
   (rowClicked)="handleEvent('rowClicked', $event)"
   (gridReady)="onGridReady($event)"
 ></ag-grid-angular>

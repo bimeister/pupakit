@@ -10,11 +10,19 @@ import {
   SimpleChange,
   SimpleChanges
 } from '@angular/core';
-import { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams } from 'ag-grid-community';
+import {
+  ColDef,
+  GetRowNodeIdFunc,
+  GridApi,
+  GridOptions,
+  GridReadyEvent,
+  IDatasource,
+  IGetRowsParams
+} from 'ag-grid-community';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams };
+export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
 
 @Component({
   selector: 'pupa-datagrid',
@@ -23,6 +31,10 @@ export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsPara
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatagridComponent implements OnChanges, AfterContentChecked {
+  private gridApi: GridApi;
+
+  @Output() public rowClicked: EventEmitter<unknown> = new EventEmitter<unknown>();
+
   @Input() public sizeColumnsToFit: boolean = false;
 
   @Input() public columnDefs: ColDef[];
@@ -41,6 +53,7 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
 
   @Input() public gridOptions: GridOptions = {
     rowSelection: 'single',
+    deltaRowDataMode: true,
     defaultColDef: {
       sortable: true,
       unSortIcon: true
@@ -49,9 +62,9 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
 
   @Input() public domLayout: 'normal' | 'autoHeight' = 'autoHeight';
 
-  @Output() public rowClicked: EventEmitter<unknown> = new EventEmitter<unknown>();
-
-  private gridApi: GridApi;
+  @Input() public rowTrackByFn: GetRowNodeIdFunc = <T>(data: T): string => {
+    return data.hasOwnProperty('id') ? data['id'] : String(data);
+  };
 
   private get isGridReady(): boolean {
     return !isNullOrUndefined(this.gridApi);
