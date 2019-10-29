@@ -10,7 +10,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
@@ -35,7 +35,7 @@ type ValueType = string | Date | null | number;
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements ControlValueAccessor, AfterViewInit {
+export class InputComponent implements ControlValueAccessor, Validator, AfterViewInit {
   @ViewChild('inputElement', { static: false }) public inputElement: ElementRef<HTMLInputElement>;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
@@ -114,6 +114,13 @@ export class InputComponent implements ControlValueAccessor, AfterViewInit {
     this.onChange(innerValue);
     this.onTouched();
     this.valueChange.emit(this.value);
+  }
+
+  public validate(control: AbstractControl): ValidationErrors | null {
+    if (!isNullOrUndefined(this.valid)) {
+      return this.valid ? null : { manualError: true };
+    }
+    return control.errors;
   }
 
   public onChange: CallableFunction = (_innerValue: string) => {
