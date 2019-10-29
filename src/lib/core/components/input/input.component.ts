@@ -41,7 +41,16 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
   @Input() public valid: boolean = null;
-  @Input() public disabled: boolean = false;
+  @Input()
+  public set disabled(newValue: boolean) {
+    if (isNullOrUndefined(newValue)) {
+      return;
+    }
+    this.disabledState = newValue;
+  }
+  public get disabled(): boolean {
+    return this.disabledState;
+  }
   @Input() public readonly: boolean = false;
   @Input() public placeholder: string = '';
   @Input() public id: string;
@@ -74,6 +83,7 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
   public isDatePickerVisible: boolean = false;
 
   private valueData: ValueType = null;
+  private disabledState: boolean = false;
 
   constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
@@ -120,7 +130,21 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
     if (!isNullOrUndefined(this.valid)) {
       return this.valid ? null : { manualError: true };
     }
+    if (
+      isNullOrUndefined(control) ||
+      isNullOrUndefined(control.errors) ||
+      control.pristine ||
+      control.untouched ||
+      control.disabled
+    ) {
+      return null;
+    }
     return control.errors;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
   }
 
   public onChange: CallableFunction = (_innerValue: string) => {
