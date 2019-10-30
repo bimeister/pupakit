@@ -6,8 +6,8 @@
     [value]="value"
     [placeholder]="placeholder"
     [ngClass]="{
-      input_valid: touched && valid,
-      input_invalid: touched && !valid,
+      input_valid: touched && valid && !disabled,
+      input_invalid: touched && !valid && !disabled,
       input_medium: size === 'medium',
       input_small: size === 'small'
     }"
