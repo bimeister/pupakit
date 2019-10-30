@@ -1,16 +1,15 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
+  Optional,
   Output,
   ViewChild
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
 
 import { isNullOrUndefined } from '../../../helpers/is-null-or-undefined.helper';
 import { getRangeEndDate } from './../../../helpers/get-range-end-date.helper';
@@ -26,30 +25,33 @@ type ValueType = string | Date | null | number;
   selector: 'pupa-input',
   templateUrl: './input.component.html',
   styleUrls: ['./input.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputComponent),
-      multi: true
-    }
-  ],
+  providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputComponent implements ControlValueAccessor, Validator, AfterViewInit {
+export class InputComponent implements ControlValueAccessor, Validator {
   @ViewChild('inputElement', { static: false }) public inputElement: ElementRef<HTMLInputElement>;
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
-  @Input() public valid: boolean = null;
+  @Input()
+  public set valid(newValue: boolean) {
+    this.validValue = newValue;
+  }
+  public get valid(): boolean {
+    if (isNullOrUndefined(this.formControl)) {
+      return this.validValue;
+    }
+    return this.formControl.valid;
+  }
   @Input()
   public set disabled(newValue: boolean) {
-    if (isNullOrUndefined(newValue)) {
-      return;
-    }
-    this.disabledState = newValue;
+    this.disabledValue = newValue;
   }
   public get disabled(): boolean {
-    return this.disabledState;
+    if (isNullOrUndefined(this.formControl)) {
+      return this.disabledValue;
+    }
+    return this.formControl.disabled;
   }
   @Input() public readonly: boolean = false;
   @Input() public placeholder: string = '';
@@ -78,22 +80,35 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
 
   @Output() public valueChange: EventEmitter<ValueType> = new EventEmitter<ValueType>();
 
-  public touched: boolean = false;
+  public set touched(newValue: boolean) {
+    this.touchedValue = newValue;
+  }
+
+  public get touched(): boolean {
+    if (isNullOrUndefined(this.formControl)) {
+      return this.touchedValue;
+    }
+    return this.formControl.touched;
+  }
 
   public isDatePickerVisible: boolean = false;
-
-  private valueData: ValueType = null;
-  private disabledState: boolean = false;
-
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public get isDateInput(): boolean {
     return this.type.toLowerCase() === 'date' || this.type.toLowerCase() === 'date-range';
   }
 
-  public ngAfterViewInit(): void {
-    if (isNullOrUndefined(this.inputElement)) {
-      return;
+  private valueData: ValueType = null;
+  private touchedValue: boolean = false;
+  private disabledValue: boolean = false;
+  private validValue: boolean = false;
+
+  public get formControl(): AbstractControl {
+    return !isNullOrUndefined(this.ngControl) ? this.ngControl.control : null;
+  }
+
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef, @Optional() public readonly ngControl: NgControl) {
+    if (!isNullOrUndefined(ngControl)) {
+      ngControl.valueAccessor = this;
     }
   }
 
@@ -109,7 +124,7 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
   public registerOnTouched(fn: VoidFunction): void {
     this.onTouched = (): void => {
       fn();
-      this.touched = true;
+      this.touchedValue = true;
     };
   }
 
@@ -126,7 +141,7 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
     this.valueChange.emit(this.value);
   }
 
-  public validate(control: AbstractControl): ValidationErrors | null {
+  public validate(control: AbstractControl | NgControl): ValidationErrors | null {
     if (!isNullOrUndefined(this.valid)) {
       return this.valid ? null : { manualError: true };
     }
@@ -143,7 +158,7 @@ export class InputComponent implements ControlValueAccessor, Validator, AfterVie
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    this.disabled = isDisabled;
+    this.disabledValue = isDisabled;
     this.changeDetectorRef.markForCheck();
   }
 
