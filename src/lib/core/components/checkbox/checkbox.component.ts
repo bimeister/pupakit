@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -51,6 +52,8 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   private valueData: boolean = false;
 
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
+
   public registerOnChange(fn: VoidFunction): void {
     this.onChange = fn;
   }
@@ -63,13 +66,13 @@ export class CheckboxComponent implements ControlValueAccessor {
     switch (String(outerValue).toLowerCase()) {
       case 'true': {
         this.valueData = true;
-        return;
+        break;
       }
       default: {
         this.valueData = false;
-        return;
       }
     }
+    this.changeDetectorRef.detectChanges();
   }
 
   public changeValue(): void {
