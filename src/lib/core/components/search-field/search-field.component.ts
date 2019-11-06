@@ -84,7 +84,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
       .add(
         this.collapsedField.subscribe(() => {
           this.clearValue.next();
-          this.collapsed();
+          this.collapse();
         })
       );
   }
@@ -97,7 +97,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     switch (this.expandable) {
       case true: {
-        this.collapsed();
+        this.collapse();
         return;
       }
       case false: {
@@ -115,7 +115,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     }
   }
 
-  private collapsed(): void {
+  private collapse(): void {
     const currentValue: ControlState = this.controlExpansionState$.getValue();
     if (currentValue === ControlState.expanded) {
       this.inputElement.nativeElement.blur();
