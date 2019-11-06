@@ -6,11 +6,17 @@
   height: rems(2.25);
   display: block;
   position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .tabs {
   all: unset;
-  width: 100%;
+  width: fit-content;
   height: rems(1.75);
   margin: 0 0 rems(0.25) 0;
   @include flex-container(row, flex-start, flex-start, nowrap);
@@ -43,8 +49,8 @@
 }
 
 .rail {
+  width: 100vw;
   position: absolute;
-  width: 100%;
   overflow: hidden;
   height: rems(0.25);
   background: $color_light-blue;
@@ -64,4 +70,9 @@
     left: -100vw;
     width: 0;
   }
+}
+
+.title {
+  overflow: hidden;
+  white-space: nowrap;
 }
