@@ -4,6 +4,7 @@ import {
   Component,
   ElementRef,
   EventEmitter,
+  HostListener,
   Input,
   Output,
   Renderer2,
@@ -11,7 +12,7 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
@@ -42,6 +43,13 @@ export class TabsComponent implements AfterViewInit {
 
   public readonly selectedTabName$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
+  private readonly selectedTabElement$: Observable<Element> = this.selectedTabName$.pipe(
+    map((tabName: string) => this.tabs.map((tab: Tab) => tab.name).indexOf(tabName)),
+    filter((tabIndex: number) => !Object.is(tabIndex, -1)),
+    map((tabIndex: number) => this.tabsElementRef.nativeElement.children.item(tabIndex)),
+    filter((selectedTab: Element) => !isNullOrUndefined(selectedTab))
+  );
+
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly renderer: Renderer2, private readonly router: Router) {
@@ -49,8 +57,15 @@ export class TabsComponent implements AfterViewInit {
     this.emitNewTabNameOnChange();
   }
 
+  @HostListener('window:resize')
+  public processResizeEvent(): void {
+    this.selectedTabElement$
+      .pipe(take(1))
+      .subscribe((selectedTabElement: Element) => this.highlightTabElement(selectedTabElement));
+  }
+
   public ngAfterViewInit(): void {
-    if (!isNullOrUndefined(this.selectedTabName)) {
+    if (!isNullOrUndefined(this.selectedTabName) || Object.is(this.tabs.length, 0)) {
       return;
     }
     this.selectTab(this.tabs[0]);
@@ -68,24 +83,9 @@ export class TabsComponent implements AfterViewInit {
   }
 
   private appendHighligterToSelectedTab(): void {
-    const selectedTabElement$: Observable<Element> = this.selectedTabName$.pipe(
-      distinctUntilChanged(),
-      map((tabName: string) => this.tabs.map((tab: Tab) => tab.name).indexOf(tabName)),
-      filter((tabIndex: number) => !Object.is(tabIndex, -1)),
-      map((tabIndex: number) => this.tabsElementRef.nativeElement.children.item(tabIndex)),
-      filter((selectedTab: Element) => !isNullOrUndefined(selectedTab))
-    );
+    const selectedTabElement$: Observable<Element> = this.selectedTabElement$;
     this.subscription.add(
-      selectedTabElement$.subscribe((selectedTabElement: Element) => {
-        const highlighter: HTMLDivElement = this.highlighterElementRef.nativeElement;
-        const selectedTabClientRect: DOMRect | ClientRect = selectedTabElement.getBoundingClientRect();
-
-        const selectedTabLeftOffsetPx: number = selectedTabClientRect.left;
-        const selectedTabWidthPx: number = selectedTabClientRect.width;
-        const tabsContainerLeftOffsetPx: number = this.tabsElementRef.nativeElement.getBoundingClientRect().left;
-        this.renderer.setStyle(highlighter, 'left', `${selectedTabLeftOffsetPx - tabsContainerLeftOffsetPx}px`);
-        this.renderer.setStyle(highlighter, 'width', `${selectedTabWidthPx}px`);
-      })
+      selectedTabElement$.subscribe((selectedTabElement: Element) => this.highlightTabElement(selectedTabElement))
     );
   }
 
@@ -95,5 +95,16 @@ export class TabsComponent implements AfterViewInit {
         .pipe(distinctUntilChanged())
         .subscribe((tabName: string) => this.selectedTabNameChange.emit(tabName))
     );
+  }
+
+  private highlightTabElement(selectedTabElement: Element): void {
+    const highlighter: HTMLDivElement = this.highlighterElementRef.nativeElement;
+    const selectedTabClientRect: DOMRect | ClientRect = selectedTabElement.getBoundingClientRect();
+
+    const selectedTabLeftOffsetPx: number = selectedTabClientRect.left;
+    const selectedTabWidthPx: number = selectedTabClientRect.width;
+    const tabsContainerLeftOffsetPx: number = this.tabsElementRef.nativeElement.getBoundingClientRect().left;
+    this.renderer.setStyle(highlighter, 'left', `${selectedTabLeftOffsetPx - tabsContainerLeftOffsetPx}px`);
+    this.renderer.setStyle(highlighter, 'width', `${selectedTabWidthPx}px`);
   }
 }
