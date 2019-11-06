@@ -56,6 +56,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     this.inputValueControl.setValue(newValue);
   }
   @Input() public clearValue: Subject<void> = new Subject<void>();
+  @Input() public collapsedField: Subject<void> = new Subject<void>();
   @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
   @HostBinding('class.pupa-search-field_expandable')
   public get isExoandable(): boolean {
@@ -79,7 +80,13 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
   public ngOnInit(): void {
     this.subscription
       .add(this.inputValueControl.valueChanges.subscribe((value: string) => this.valueChange.emit(value)))
-      .add(this.clearValue.subscribe(() => (this.value = '')));
+      .add(this.clearValue.subscribe(() => (this.value = '')))
+      .add(
+        this.collapsedField.subscribe(() => {
+          this.clearValue.next();
+          this.collapsed();
+        })
+      );
   }
 
   public ngOnDestroy(): void {
@@ -90,15 +97,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
     event.stopPropagation();
     switch (this.expandable) {
       case true: {
-        const currentValue: ControlState = this.controlExpansionState$.getValue();
-        if (currentValue === ControlState.expanded) {
-          this.inputElement.nativeElement.blur();
-          this.controlExpansionState$.next(ControlState.collapsed);
-          this.inputValueControl.reset();
-          return;
-        }
-        this.controlExpansionState$.next(ControlState.expanded);
-        this.inputElement.nativeElement.focus();
+        this.collapsed();
         return;
       }
       case false: {
@@ -114,5 +113,17 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
         return;
       }
     }
+  }
+
+  private collapsed(): void {
+    const currentValue: ControlState = this.controlExpansionState$.getValue();
+    if (currentValue === ControlState.expanded) {
+      this.inputElement.nativeElement.blur();
+      this.controlExpansionState$.next(ControlState.collapsed);
+      this.inputValueControl.reset();
+      return;
+    }
+    this.controlExpansionState$.next(ControlState.expanded);
+    this.inputElement.nativeElement.focus();
   }
 }
