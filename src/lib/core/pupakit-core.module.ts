@@ -30,6 +30,7 @@ import { TileComponent } from './components/tile/tile.component';
 import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -60,7 +61,8 @@ const CORE_COMPONENTS: any[] = [
   DatagridComponent,
   DatagridTemplateRendererComponent,
   DrawerComponent,
-  DatagridColumnSettingsComponent
+  DatagridColumnSettingsComponent,
+  TextareaComponent
 ];
 
 @NgModule({

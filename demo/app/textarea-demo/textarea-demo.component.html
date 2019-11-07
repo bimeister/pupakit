@@ -1,0 +1,15 @@
+<section class="combo" *ngFor="let combo of combos; let index = index">
+  <div>resize: {{ combo.resize }}</div>
+  <div>placeholder: {{ combo.placeholder }}</div>
+  <div>disabled: {{ combo.disabled }}</div>
+  <div>required: {{ combo.required }}</div>
+  <div>maxLength: {{ combo.maxLength }}</div>
+  <div>value:{{ formArray.get([index]).value }}</div>
+  <pupa-textarea
+    [resize]="combo.resize"
+    [placeholder]="combo.placeholder"
+    [disabled]="combo.disabled"
+    [formControl]="formArray.get([index])"
+    [maxLength]="combo.maxLength"
+  ></pupa-textarea>
+</section>
