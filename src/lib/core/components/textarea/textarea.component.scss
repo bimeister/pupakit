@@ -15,6 +15,8 @@
   width: 100%;
 }
 
+$height_textarea-min: calc(#{rems(2.5)} + 2px);
+
 .textarea {
   box-sizing: border-box;
   border-radius: rems(0.5);
@@ -29,8 +31,7 @@
   font-size: rems(0.875);
   line-height: rems(1);
   padding: rems(0.25);
-  // 2px это бордер, чтобы на двух строчках и минимальной высоте не появлялся скроллбар
-  min-height: calc(#{rems(2.5)} + 2px);
+  min-height: $height_textarea-min;
 
   &::placeholder {
     color: $color_grey-light;

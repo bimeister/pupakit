@@ -95,7 +95,8 @@ export class TextareaComponent implements ControlValueAccessor, Validator {
     };
   }
 
-  public writeValue(): void {
+  public writeValue(outerValue: string): void {
+    this.valueData = outerValue;
     this.changeDetectorRef.detectChanges();
   }
 
