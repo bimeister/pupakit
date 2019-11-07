@@ -1,0 +1,16 @@
+<textarea
+  class="textarea"
+  [value]="value"
+  [placeholder]="placeholder"
+  [ngClass]="{
+    input_valid: touched && valid && !disabled,
+    input_invalid: touched && !valid && !disabled
+  }"
+  [style.resize]="resize"
+  [id]="id"
+  [name]="name"
+  [attr.disabled]="disabled ? true : null"
+  (input)="updateValue($event.target.value)"
+  autocomplete="off"
+></textarea>
+<div class="count" *ngIf="maxLength">{{ value.length }}/{{ maxLength }}</div>
