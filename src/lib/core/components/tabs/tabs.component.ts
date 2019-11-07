@@ -11,8 +11,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription, timer } from 'rxjs';
+import { distinctUntilChanged, filter, map, mapTo, take } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
@@ -34,6 +34,8 @@ export class TabsComponent implements AfterViewInit {
   @ViewChild('tabsElement', { static: true }) public readonly tabsElementRef: ElementRef<HTMLDivElement>;
 
   @Input() public tabs: Tab[] = [];
+
+  @Input() public autoSelectFirst: boolean = false;
 
   @Input() public set selectedTabName(tabName: string) {
     this.selectedTabName$.next(tabName);
@@ -59,16 +61,25 @@ export class TabsComponent implements AfterViewInit {
 
   @HostListener('window:resize')
   public processResizeEvent(): void {
-    this.selectedTabElement$
-      .pipe(take(1))
-      .subscribe((selectedTabElement: Element) => this.highlightTabElement(selectedTabElement));
+    this.rerenderHighlighterStyles();
   }
 
   public ngAfterViewInit(): void {
-    if (!isNullOrUndefined(this.selectedTabName) || Object.is(this.tabs.length, 0)) {
-      return;
-    }
-    this.selectTab(this.tabs[0]);
+    this.selectedTabName$
+      .pipe(
+        take(1),
+        filter(
+          (selectedTabName: string) =>
+            this.autoSelectFirst && isNullOrUndefined(selectedTabName) && !Object.is(this.tabs.length, 0)
+        ),
+        mapTo(this.tabs[0])
+      )
+      .subscribe((tabToSelect: Tab) => this.selectTab(tabToSelect));
+
+    const rerenderDelayMs: number = 500;
+    timer(rerenderDelayMs)
+      .pipe(take(1))
+      .subscribe(() => this.rerenderHighlighterStyles());
   }
 
   public selectTab(tab: Tab, clickEvent?: MouseEvent): void {
@@ -80,6 +91,12 @@ export class TabsComponent implements AfterViewInit {
       return;
     }
     this.router.navigateByUrl(tab.route);
+  }
+
+  private rerenderHighlighterStyles(): void {
+    this.selectedTabElement$
+      .pipe(take(1))
+      .subscribe((selectedTabElement: Element) => this.highlightTabElement(selectedTabElement));
   }
 
   private appendHighligterToSelectedTab(): void {
