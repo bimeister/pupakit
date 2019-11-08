@@ -1,7 +1,8 @@
-<div #tabsElement class="tabs">
+<div #tabsElement class="tabs" *ngIf="tabs$ | async as tabs">
   <button
-    *ngFor="let tab of tabs"
-    [class.tabs__item_selected]="(selectedTabName$ | async) === tab.name"
+    #tabElement
+    *ngFor="let tab of tabs; let tabIndex = index"
+    [class.tabs__item_selected]="(selectedTabIndex$ | async) === tabIndex"
     class="tabs__item"
     (click)="selectTab(tab, $event)"
   >
