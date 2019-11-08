@@ -4,6 +4,7 @@
 :host {
   width: 100%;
   height: rems(2.25);
+  min-height: rems(2.25);
   display: block;
   position: relative;
   overflow-x: auto;
@@ -21,6 +22,7 @@
   margin: 0 0 rems(0.25) 0;
   @include flex-container(row, flex-start, flex-start, nowrap);
 }
+
 .tabs__item {
   all: unset;
   height: 100%;
@@ -39,6 +41,7 @@
 
 .icon {
   font-size: rems(0.85);
+  min-width: rems(0.85);
 }
 .title {
   font-size: rems(1.125);

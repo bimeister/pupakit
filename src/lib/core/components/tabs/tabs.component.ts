@@ -3,18 +3,16 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
   Input,
   OnDestroy,
-  Output,
   QueryList,
   Renderer2,
   ViewChild,
   ViewChildren
 } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
-import { BehaviorSubject, combineLatest, fromEvent, Observable, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, Subscription } from 'rxjs';
+import { delay, filter, first, map } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
@@ -32,7 +30,6 @@ export interface Tab {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsComponent implements OnDestroy, AfterViewInit {
-  private readonly sub: Subscription = new Subscription();
   @ViewChild('highlighterElement', { static: true }) public readonly highlighterElementRef: ElementRef<HTMLDivElement>;
   @ViewChild('tabsElement', { static: false }) public readonly tabsElementRef: ElementRef<HTMLDivElement>;
   @ViewChildren('tabElement') public readonly tabElements: QueryList<ElementRef<HTMLButtonElement>>;
@@ -42,79 +39,70 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     this.tabs$.next(value);
   }
 
-  @Input() public set selectedTabName(tabName: string) {
-    this.selectedTabName$.next(tabName);
-  }
+  private readonly initialUrl$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-  @Output() public selectedTabNameChange: EventEmitter<string> = new EventEmitter<string>();
-
-  public activeUrl$: Observable<string> = this.router.events.pipe(
-    filter((event: RouterEvent) => event instanceof NavigationEnd),
-    map((event: NavigationEnd) => event.urlAfterRedirects)
+  public readonly activeUrl$: Observable<string> = merge(
+    this.initialUrl$,
+    this.router.events.pipe(
+      filter((event: RouterEvent) => event instanceof NavigationEnd),
+      map((event: NavigationEnd) => event.urlAfterRedirects)
+    )
   );
 
-  public selectedTabIndex$: Observable<number> = combineLatest([this.tabs$, this.activeUrl$]).pipe(
+  public readonly selectedTabIndex$: Observable<number> = combineLatest([this.tabs$, this.activeUrl$]).pipe(
     map(([tabs, url]: [Tab[], string]) => {
-      return tabs.findIndex((tab: Tab) => tab.route === url);
+      const regex: RegExp = new RegExp(`^${url}`);
+      return tabs.findIndex((tab: Tab) => regex.test(tab.route));
     })
   );
 
-  public readonly selectedTabName$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-
-  private readonly selectedTabElement$: Observable<HTMLElement> = this.selectedTabIndex$.pipe(
+  public readonly selectedTabElement$: Observable<HTMLElement> = this.selectedTabIndex$.pipe(
     delay(0),
     map(
       (tabIndex: number): HTMLElement => {
         const elementRef: ElementRef<HTMLButtonElement> = this.tabElements.toArray()[tabIndex];
         return elementRef ? elementRef.nativeElement : null;
       }
-    ),
-    filter((selectedTab: HTMLElement) => !isNullOrUndefined(selectedTab))
+    )
   );
+
+  private readonly resize$: Observable<unknown> = merge(fromEvent(window, 'resize'), this.initialUrl$);
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly renderer: Renderer2, private readonly router: Router) {
-    this.appendHighligterToSelectedTab();
-    this.emitNewTabNameOnChange();
-  }
+  constructor(private readonly renderer: Renderer2, private readonly router: Router) {}
 
   public ngAfterViewInit(): void {
-    this.sub.add(
-      combineLatest([this.selectedTabElement$, fromEvent(window, 'resize')]).subscribe(
-        ([selectedTabElement, _]: [Element, Event]) => this.highlightTabElement(selectedTabElement)
+    this.subscription.add(
+      combineLatest([this.selectedTabElement$, this.resize$]).subscribe(([selectedTabElement, _]: [Element, unknown]) =>
+        this.highlightTabElement(selectedTabElement)
       )
     );
+    this.initialUrl$.next(this.router.url);
   }
 
   public selectTab(tab: Tab, clickEvent?: MouseEvent): void {
     if (!isNullOrUndefined(clickEvent)) {
       clickEvent.stopPropagation();
     }
-    this.selectedTabName$.next(tab.name);
-    if (isNullOrUndefined(tab.route)) {
-      return;
-    }
-    this.router.navigateByUrl(tab.route);
-  }
-
-  private appendHighligterToSelectedTab(): void {
-    const selectedTabElement$: Observable<Element> = this.selectedTabElement$;
-    this.subscription.add(
-      selectedTabElement$.subscribe((selectedTabElement: Element) => this.highlightTabElement(selectedTabElement))
-    );
-  }
-
-  private emitNewTabNameOnChange(): void {
-    this.subscription.add(
-      this.selectedTabName$
-        .pipe(distinctUntilChanged())
-        .subscribe((tabName: string) => this.selectedTabNameChange.emit(tabName))
-    );
+    this.tabs$
+      .pipe(
+        filter((tabs: Tab[]) => !isNullOrUndefined(tabs)),
+        first()
+      )
+      .subscribe((tabs: Tab[]) => {
+        if (tabs.some((tabInner: Tab) => tab.route === tabInner.route)) {
+          this.router.navigateByUrl(tab.route);
+        }
+      });
   }
 
   private highlightTabElement(selectedTabElement: Element): void {
-    if (!this.tabsElementRef) {
+    if (
+      isNullOrUndefined(this.tabsElementRef) ||
+      isNullOrUndefined(this.highlighterElementRef) ||
+      isNullOrUndefined(selectedTabElement)
+    ) {
       return;
     }
     const highlighter: HTMLDivElement = this.highlighterElementRef.nativeElement;
@@ -128,6 +116,6 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
   }
 
   public ngOnDestroy(): void {
-    this.sub.unsubscribe();
+    this.subscription.unsubscribe();
   }
 }
