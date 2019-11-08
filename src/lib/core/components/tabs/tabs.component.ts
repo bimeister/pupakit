@@ -87,13 +87,12 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     }
     this.tabs$
       .pipe(
+        first(),
         filter((tabs: Tab[]) => !isNullOrUndefined(tabs)),
-        first()
+        filter((tabs: Tab[]) => tabs.some((tabInner: Tab) => tab.route === tabInner.route))
       )
-      .subscribe((tabs: Tab[]) => {
-        if (tabs.some((tabInner: Tab) => tab.route === tabInner.route)) {
-          this.router.navigateByUrl(tab.route);
-        }
+      .subscribe(() => {
+        this.router.navigateByUrl(tab.route);
       });
   }
 
