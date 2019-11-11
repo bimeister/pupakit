@@ -1,5 +1,10 @@
 <section class="drawer" [@drawerExpanded]="isVisible" (@drawerExpanded.done)="processAnimationEnd($event)">
-  <div class="drawer__content" [style.width]="contentWidth" *ngIf="destroyContentOnClose ? isContentRendered : true">
+  <div
+    class="drawer__content"
+    [class.drawer__content_hidden]="!isContentVisible"
+    [style.width]="contentWidth"
+    *ngIf="isContentRendered"
+  >
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
 </section>

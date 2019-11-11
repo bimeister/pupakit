@@ -27,7 +27,16 @@ export class DrawerComponent implements OnChanges {
    */
   @Input() public contentWidth: string = 'fit-content';
 
-  public isContentRendered: boolean = false;
+  public get isContentRendered(): boolean {
+    return this.destroyContentOnClose ? this.shouldRenderContent : true;
+  }
+
+  public get isContentVisible(): boolean {
+    return !this.shouldHideContent;
+  }
+
+  private shouldRenderContent: boolean = false;
+  private shouldHideContent: boolean = true;
 
   public ngOnChanges(changes: SimpleChanges): void {
     this.processIsVisibleValueChange(changes.isVisible);
@@ -36,14 +45,16 @@ export class DrawerComponent implements OnChanges {
   public processAnimationEnd(event: AnimationEvent): void {
     const isCollapseAnimationDone: boolean = String(event.toState) === 'false';
     if (isCollapseAnimationDone) {
-      this.isContentRendered = false;
+      this.shouldRenderContent = false;
+      this.shouldHideContent = true;
     }
   }
 
   private processIsVisibleValueChange(change: SimpleChange): void {
     const drawerBecameVisible: boolean = !isNullOrUndefined(change) && change.currentValue === true;
     if (drawerBecameVisible) {
-      this.isContentRendered = true;
+      this.shouldRenderContent = true;
+      this.shouldHideContent = false;
     }
   }
 }

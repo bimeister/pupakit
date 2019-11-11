@@ -2,8 +2,11 @@
   <pupa-button (onclick)="isDrawerVisible = !isDrawerVisible">
     {{ isDrawerVisible ? 'Hide drawer' : 'Show drawer' }}
   </pupa-button>
+  <pupa-button (onclick)="destroyContentOnClose = !destroyContentOnClose">
+    {{ destroyContentOnClose ? 'destroy content' : 'keep content' }}
+  </pupa-button>
 
-  <pupa-drawer [isVisible]="isDrawerVisible" contentWidth="363px">
+  <pupa-drawer [isVisible]="isDrawerVisible" [destroyContentOnClose]="destroyContentOnClose" contentWidth="363px">
     <div class="drawer-content">
       <div class="text">
         <h3 class="title">
