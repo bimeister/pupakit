@@ -12,12 +12,12 @@ export class TabsDemoComponent {
     {
       name: 'Ad/Ldap',
       iconName: 'ios-albums',
-      route: '/tabs#ad-ldap'
+      route: '/tabs?tab=1'
     },
     {
       name: 'Управление ролями',
       iconName: 'ios-hammer',
-      route: '/tabs#roles'
+      route: '/tabs?tab=2'
     }
   ];
 }
