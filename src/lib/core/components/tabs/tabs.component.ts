@@ -52,7 +52,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
   public readonly selectedTabIndex$: Observable<number> = combineLatest([this.tabs$, this.activeUrl$]).pipe(
     map(([tabs, url]: [Tab[], string]) => {
       const regex: RegExp = new RegExp(`^${url}`);
-      return tabs.findIndex((tab: Tab) => regex.test(tab.route));
+      return tabs.findIndex((tab: Tab) => regex.test(tab.route) || tab.route === url);
     })
   );
 
