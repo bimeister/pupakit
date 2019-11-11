@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class DrawerDemoComponent {
   public isDrawerVisible: boolean = false;
+  public destroyContentOnClose: boolean = true;
 }
