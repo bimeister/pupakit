@@ -1,6 +1,6 @@
 <div #tabsElement class="tabs" *ngIf="tabs$ | async as tabs">
   <button
-    #tabElement
+    #tabsItemElement
     *ngFor="let tab of tabs; let tabIndex = index"
     [class.tabs__item_selected]="(selectedTabIndex$ | async) === tabIndex"
     class="tabs__item"
@@ -21,7 +21,7 @@
 <div class="rail">
   <div
     #highlighterElement
-    [class.rail__highlighter_invisible]="selectedTabElement$ | async | isNullOrUndefined"
+    [class.rail__highlighter_invisible]="(selectedTabIndex$ | async) === -1"
     class="rail__highlighter"
   ></div>
 </div>

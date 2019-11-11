@@ -10,6 +10,11 @@ import { Tab } from 'src/lib/core/components/tabs/tabs.component';
 export class TabsDemoComponent {
   public tabs: Tab[] = [
     {
+      name: 'Пользователи',
+      iconName: 'ios-hammer',
+      route: '/tabs?users=user1'
+    },
+    {
       name: 'Ad/Ldap',
       iconName: 'ios-albums',
       route: '/tabs?tab=1'

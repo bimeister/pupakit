@@ -44,17 +44,19 @@ export class DrawerComponent implements OnChanges {
 
   public processAnimationEnd(event: AnimationEvent): void {
     const isCollapseAnimationDone: boolean = String(event.toState) === 'false';
-    if (isCollapseAnimationDone) {
-      this.shouldRenderContent = false;
-      this.shouldHideContent = true;
+    if (!isCollapseAnimationDone) {
+      return;
     }
+    this.shouldRenderContent = false;
+    this.shouldHideContent = true;
   }
 
   private processIsVisibleValueChange(change: SimpleChange): void {
     const drawerBecameVisible: boolean = !isNullOrUndefined(change) && change.currentValue === true;
-    if (drawerBecameVisible) {
-      this.shouldRenderContent = true;
-      this.shouldHideContent = false;
+    if (!drawerBecameVisible) {
+      return;
     }
+    this.shouldRenderContent = true;
+    this.shouldHideContent = false;
   }
 }
