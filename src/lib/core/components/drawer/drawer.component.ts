@@ -1,5 +1,5 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
@@ -19,6 +19,7 @@ import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helpe
 })
 export class DrawerComponent implements OnChanges {
   @Input() public isVisible: boolean = false;
+  @Input() public destroyContentOnClose: boolean = true;
 
   /**
    * @description content wrapper CSS styles property
@@ -29,17 +30,20 @@ export class DrawerComponent implements OnChanges {
   public isContentRendered: boolean = false;
 
   public ngOnChanges(changes: SimpleChanges): void {
-    const drawerBecameVisible: boolean =
-      !isNullOrUndefined(changes.isVisible) && changes.isVisible.currentValue === true;
-    if (drawerBecameVisible) {
-      this.isContentRendered = true;
-    }
+    this.processIsVisibleValueChange(changes.isVisible);
   }
 
   public processAnimationEnd(event: AnimationEvent): void {
     const isCollapseAnimationDone: boolean = String(event.toState) === 'false';
     if (isCollapseAnimationDone) {
       this.isContentRendered = false;
+    }
+  }
+
+  private processIsVisibleValueChange(change: SimpleChange): void {
+    const drawerBecameVisible: boolean = !isNullOrUndefined(change) && change.currentValue === true;
+    if (drawerBecameVisible) {
+      this.isContentRendered = true;
     }
   }
 }
