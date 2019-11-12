@@ -1,0 +1,27 @@
+<div class="pupa-dropdown__item" (click)="onSelect()">
+  <div class="pupa-dropdown__item-block">
+    <ion-icon
+      class="pupa-dropdown__icon pupa-dropdown__icon_left"
+      *ngIf="item.iconLeft"
+      [name]="item.iconLeft.name"
+      [src]="item.iconLeft.src"
+      [style.color]="item.iconLeft.color"
+    ></ion-icon>
+    {{ getCaption() }}
+  </div>
+  <ion-icon
+    class="pupa-dropdown__icon pupa-dropdown__icon_right"
+    *ngIf="item.iconRight"
+    [name]="item.iconRight.name"
+    [src]="item.iconRight.src"
+    [style.color]="item.iconRight.color"
+  ></ion-icon>
+</div>
+<div *ngIf="item.children && item.children.length > 0" class="pupa-dropdown__children">
+  <pupa-dropdown-item
+    *ngFor="let item of item.children"
+    [item]="item"
+    [captionPropertyPath]="captionPropertyPath"
+    (select)="emitSelect($event)"
+  ></pupa-dropdown-item>
+</div>

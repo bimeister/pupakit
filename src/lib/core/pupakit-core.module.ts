@@ -14,6 +14,7 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { DropdownItemComponent } from './components/dropdown/dropdown-item/dropdown-item.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
@@ -26,11 +27,11 @@ import { SelectComponent } from './components/select/select.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { SwitcherComponent } from './components/switcher/switcher.component';
 import { TabsComponent } from './components/tabs/tabs.component';
+import { TextareaComponent } from './components/textarea/textarea.component';
 import { TileComponent } from './components/tile/tile.component';
 import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
-import { TextareaComponent } from './components/textarea/textarea.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -62,7 +63,8 @@ const CORE_COMPONENTS: any[] = [
   DatagridTemplateRendererComponent,
   DrawerComponent,
   DatagridColumnSettingsComponent,
-  TextareaComponent
+  TextareaComponent,
+  DropdownItemComponent
 ];
 
 @NgModule({
