@@ -24,6 +24,16 @@ export class SelectDemoComponent {
     ...this.lorems.map((lorem: string, index: number) => ({
       caption: lorem,
       data: lorem,
+      children: [
+        {
+          caption: `${lorem}-${index}`,
+          data: `${lorem}-${index}`,
+          iconLeft: {
+            name: this.icons[index % this.icons.length],
+            color: getRandomColor()
+          }
+        }
+      ],
       iconLeft: {
         name: this.icons[index % this.icons.length],
         color: getRandomColor()
@@ -36,7 +46,30 @@ export class SelectDemoComponent {
   ];
 
   public itemsWithoutCaption: any[] = [
-    { children: [], childrenCount: 0, description: '', name: 'sample 1', id: null, roles: [] },
+    {
+      children: [
+        {
+          children: [
+            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 1', id: null, roles: [] },
+            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 2', id: null, roles: [] },
+            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 3', id: null, roles: [] }
+          ],
+          childrenCount: 3,
+          description: '',
+          name: 'sample 1 1',
+          id: null,
+          roles: []
+        },
+        { children: [], childrenCount: 0, description: '', name: 'sample 1 2', id: null, roles: [] },
+        { children: [], childrenCount: 0, description: '', name: 'sample 1 3', id: null, roles: [] },
+        { children: [], childrenCount: 0, description: '', name: 'sample 1 4', id: null, roles: [] }
+      ],
+      childrenCount: 4,
+      description: '',
+      name: 'sample 1',
+      id: null,
+      roles: []
+    },
     { children: [], childrenCount: 0, description: '', name: 'sample 2', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 3', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 4', id: null, roles: [] },

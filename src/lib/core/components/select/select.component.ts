@@ -22,14 +22,17 @@ import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helpe
 })
 export class SelectComponent<T> implements ControlValueAccessor {
   private _items: DropdownItem<T>[];
-  private _value: T;
+  private _value: DropdownItem<T>;
 
   public selectedItem: DropdownItem<T>;
 
+  public itemsCollection: Set<DropdownItem<T>> = new Set<DropdownItem<T>>([]);
+
   @Input() public set items(v: DropdownItem<T>[]) {
     this._items = v;
+    this.updateCollection();
     if (!this.value && v && v.length > 0) {
-      this.writeValue(v[0].data);
+      this.writeValue(v[0]);
     } else {
       this.writeValue(this.value);
     }
@@ -51,27 +54,27 @@ export class SelectComponent<T> implements ControlValueAccessor {
    */
   @Input() public captionPropertyPath: string = null;
 
-  @Output() public input: EventEmitter<T> = new EventEmitter<T>();
+  @Output() public input: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
 
-  @Input() public set value(v: T) {
+  @Input() public set value(v: DropdownItem<T>) {
     this._value = v;
     this.writeValue(v);
   }
-  public get value(): T {
+  public get value(): DropdownItem<T> {
     return this._value;
   }
 
-  public writeValue(value: T): void {
+  public writeValue(value: DropdownItem<T>): void {
     if (!this.items) {
       return;
     }
     const prevValue: DropdownItem<T> = cloneDeep(this.selectedItem);
-    const item: DropdownItem<T> = this.items.find((i: DropdownItem<T> | T) => {
+    const item: DropdownItem<T> = Array.from(this.itemsCollection.values()).find((dropDoownItem: DropdownItem<T>) => {
       if (isNullOrUndefined(this.captionPropertyPath)) {
-        return (i as DropdownItem<T>).data === value;
+        return dropDoownItem === value;
       }
       if (!isNullOrUndefined(this.captionPropertyPath)) {
-        return this.getCaption(i as T) === this.getCaption(value);
+        return this.getCaption(dropDoownItem) === this.getCaption(value);
       }
       return false;
     });
@@ -84,8 +87,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
   }
 
-  public registerOnChange(fn: (v: T) => void): void {
-    this.onChange = (v: T): void => {
+  public registerOnChange(fn: (v: DropdownItem<T>) => void): void {
+    this.onChange = (v: DropdownItem<T>): void => {
       this.input.emit(v);
       fn(v);
     };
@@ -99,7 +102,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  public getCaption(item: T): string {
+  public getCaption(item: DropdownItem<T>): string {
     if (isNullOrUndefined(item)) {
       return null;
     }
@@ -108,15 +111,30 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
     if (!isNullOrUndefined(this.captionPropertyPath)) {
       const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyPath);
-
       return String(extractedCaption);
     }
     return null;
   }
 
-  public onChange: (v: T) => void = (v: T) => {
+  public onChange: (v: DropdownItem<T>) => void = (v: DropdownItem<T>): void => {
     this.input.emit(v);
   };
 
   public onTouched: () => void = () => null;
+
+  private updateCollection(): void {
+    this.itemsCollection.clear();
+    this._items.forEach((item: DropdownItem<T>) => {
+      this.parseItem(item);
+    });
+  }
+
+  private parseItem(item: DropdownItem<T>): void {
+    this.itemsCollection.add(item);
+    if (item.children) {
+      item.children.forEach((child: DropdownItem<T>) => {
+        this.parseItem(child);
+      });
+    }
+  }
 }

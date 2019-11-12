@@ -8,8 +8,6 @@ import {
   Renderer2
 } from '@angular/core';
 
-import { getPropertyValueByPath } from './../../../helpers/get-property-value-by-path.helper';
-import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { DroppableComponent } from './../droppable/droppable.component';
 
 export interface IconData {
@@ -22,6 +20,7 @@ export interface DropdownItem<T> {
   caption: string;
   iconLeft?: IconData;
   iconRight?: IconData;
+  children?: DropdownItem<T>[];
   data: T;
 }
 
@@ -32,7 +31,7 @@ export interface DropdownItem<T> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent<T> extends DroppableComponent {
-  @Input() public items: DropdownItem<T>[] | T[];
+  @Input() public items: DropdownItem<T>[];
 
   /**
    * @description path to visible captionProperty
@@ -41,28 +40,14 @@ export class DropdownComponent<T> extends DroppableComponent {
    */
   @Input() public captionPropertyPath: string = null;
 
-  @Output() public select: EventEmitter<T> = new EventEmitter<T>();
+  @Output() public select: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
 
   constructor(protected readonly cDRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {
     super(cDRef, renderer);
   }
 
-  public onSelect(item: DropdownItem<T> | T): void {
-    this.select.emit(isNullOrUndefined(this.captionPropertyPath) ? (item as DropdownItem<T>).data : (item as T));
+  public emitSelect(data: DropdownItem<T>): void {
+    this.select.emit(data);
     this.toggle(false);
-  }
-
-  public getCaption(item: T): string {
-    if (isNullOrUndefined(item)) {
-      return null;
-    }
-    if (isNullOrUndefined(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
-      return item['caption'];
-    }
-    if (!isNullOrUndefined(this.captionPropertyPath)) {
-      const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyPath);
-      return String(extractedCaption);
-    }
-    return null;
   }
 }
