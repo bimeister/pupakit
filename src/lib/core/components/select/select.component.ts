@@ -79,7 +79,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
         return dropDoownItem === value;
       }
       if (!isNullOrUndefined(this.captionPropertyKey)) {
-        return this.getCaption(dropDoownItem) === this.getCaption(value);
+        return this.getCaption(dropDoownItem, true) === this.getCaption(value, true);
       }
       return false;
     });
@@ -107,15 +107,17 @@ export class SelectComponent<T> implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  public getCaption(item: DropdownItem<T>): string {
+  public getCaption(item: DropdownItem<T>, key: boolean = false): string {
+    const captionKey: string = key ? this.captionPropertyKey : this.captionPropertyValue;
+
     if (isNullOrUndefined(item)) {
       return null;
     }
-    if (isNullOrUndefined(this.captionPropertyKey) && item.hasOwnProperty('caption')) {
+    if (isNullOrUndefined(captionKey) && item.hasOwnProperty('caption')) {
       return item['caption'];
     }
-    if (!isNullOrUndefined(this.captionPropertyKey)) {
-      const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyKey);
+    if (!isNullOrUndefined(captionKey)) {
+      const extractedCaption: unknown = getPropertyValueByPath(item, captionKey);
       return String(extractedCaption);
     }
     return null;
