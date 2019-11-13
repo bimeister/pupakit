@@ -10,7 +10,7 @@ import {
   ViewChild,
   ViewChildren
 } from '@angular/core';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { NavigationEnd, Router, RouterEvent, UrlTree } from '@angular/router';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
@@ -21,6 +21,7 @@ export interface Tab {
   iconName?: string;
   iconSrc?: string;
   route?: string;
+  urlTree?: UrlTree;
 }
 
 @Component({
@@ -45,7 +46,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
 
   private readonly sortedTabsRoutes$: Observable<string[]> = this.tabs$.pipe(
     map((tabs: Tab[]) => this.sortTabsByRouteLengthDescendingly(tabs)),
-    map((tabs: Tab[]) => tabs.map((tab: Tab) => tab.route.toLowerCase())),
+    map((tabs: Tab[]) => tabs.map((tab: Tab) => (tab && tab.route ? tab.route.toLowerCase() : ''))),
     distinctUntilKeyChanged('length')
   );
 
@@ -83,7 +84,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
         switchMap((selectedTabRoute: string) =>
           this.tabs$.pipe(
             map((tabs: Tab[]) => {
-              return tabs.findIndex((tab: Tab) => tab.route.toLowerCase() === selectedTabRoute);
+              return tabs.findIndex((tab: Tab) => tab && tab.route && tab.route.toLowerCase() === selectedTabRoute);
             })
           )
         )
@@ -175,6 +176,9 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
   private readonly sortTabsByRouteLengthDescendingly = (tabs: Tab[]): Tab[] => {
     if (!Array.isArray(tabs) || Object.is(tabs.length, 0)) {
       return [];
+    }
+    if (tabs.some((tab: Tab) => isNullOrUndefined(tab.route))) {
+      return tabs;
     }
     return [...tabs]
       .sort((tab1: Tab, tab2: Tab): -1 | 0 | 1 => {

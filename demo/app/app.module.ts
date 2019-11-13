@@ -36,6 +36,7 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
+import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -70,7 +71,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TabsDemoComponent,
     DatagridDemoComponent,
     DrawerDemoComponent,
-    TextareaDemoComponent
+    TextareaDemoComponent,
+    TabsDrawerDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -167,6 +169,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'datagrid', component: DatagridDemoComponent },
       { path: 'drawer', component: DrawerDemoComponent },
       { path: 'textarea', component: TextareaDemoComponent },
+      { path: 'tabs-drawer', component: TabsDrawerDemoComponent },
       {
         path: '',
         component: AppComponent
