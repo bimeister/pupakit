@@ -48,11 +48,16 @@ export class SelectComponent<T> implements ControlValueAccessor {
   @Input() public id: string;
 
   /**
+   * @description path to key options
+   */
+  @Input() public captionPropertyKey: string = null;
+
+  /**
    * @description path to visible captionProperty
    * @example captionPropertyPath = 'data.name' // { data: { name: 123 } }
    * @example captionPropertyPath = 'name' // { name: 123 }
    */
-  @Input() public captionPropertyPath: string = null;
+  @Input() public captionPropertyValue: string = null;
 
   @Output() public input: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
 
@@ -70,10 +75,10 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
     const prevValue: DropdownItem<T> = cloneDeep(this.selectedItem);
     const item: DropdownItem<T> = Array.from(this.itemsCollection.values()).find((dropDoownItem: DropdownItem<T>) => {
-      if (isNullOrUndefined(this.captionPropertyPath)) {
+      if (isNullOrUndefined(this.captionPropertyKey)) {
         return dropDoownItem === value;
       }
-      if (!isNullOrUndefined(this.captionPropertyPath)) {
+      if (!isNullOrUndefined(this.captionPropertyKey)) {
         return this.getCaption(dropDoownItem) === this.getCaption(value);
       }
       return false;
@@ -106,11 +111,11 @@ export class SelectComponent<T> implements ControlValueAccessor {
     if (isNullOrUndefined(item)) {
       return null;
     }
-    if (isNullOrUndefined(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
+    if (isNullOrUndefined(this.captionPropertyKey) && item.hasOwnProperty('caption')) {
       return item['caption'];
     }
-    if (!isNullOrUndefined(this.captionPropertyPath)) {
-      const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyPath);
+    if (!isNullOrUndefined(this.captionPropertyKey)) {
+      const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyKey);
       return String(extractedCaption);
     }
     return null;
