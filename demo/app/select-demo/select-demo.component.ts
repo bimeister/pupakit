@@ -50,27 +50,27 @@ export class SelectDemoComponent {
       children: [
         {
           children: [
-            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 1', id: null, roles: [] },
-            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 2', id: null, roles: [] },
-            { children: [], childrenCount: 0, description: '', name: 'sample 1 1 3', id: null, roles: [] }
+            { children: [], childrenCount: 0, description: '1', name: 'sample 1 1 1', id: null, roles: [] },
+            { children: [], childrenCount: 0, description: '2', name: 'sample 1 1 2', id: null, roles: [] },
+            { children: [], childrenCount: 0, description: '3', name: 'sample 1 1 3', id: null, roles: [] }
           ],
           childrenCount: 3,
-          description: '',
+          description: '4',
           name: 'sample 1 1',
           id: null,
           roles: []
         },
-        { children: [], childrenCount: 0, description: '', name: 'sample 1 2', id: null, roles: [] },
-        { children: [], childrenCount: 0, description: '', name: 'sample 1 3', id: null, roles: [] },
-        { children: [], childrenCount: 0, description: '', name: 'sample 1 4', id: null, roles: [] }
+        { children: [], childrenCount: 0, description: '5', name: 'sample 1 2', id: null, roles: [] },
+        { children: [], childrenCount: 0, description: '6', name: 'sample 1 3', id: null, roles: [] },
+        { children: [], childrenCount: 0, description: '7', name: 'sample 1 4', id: null, roles: [] }
       ],
       childrenCount: 4,
-      description: '',
+      description: '8',
       name: 'sample 1',
       id: null,
       roles: []
     },
-    { children: [], childrenCount: 0, description: '', name: 'sample 2', id: null, roles: [] },
+    { children: [], childrenCount: 0, description: '9', name: 'sample 2', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 3', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 4', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 5', id: null, roles: [] },
