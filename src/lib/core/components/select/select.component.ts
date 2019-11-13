@@ -59,7 +59,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
    */
   @Input() public captionPropertyValue: string = null;
 
-  @Output() public input: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
+  @Output() public input: EventEmitter<DropdownItem<T> | T> = new EventEmitter<DropdownItem<T> | T>();
 
   @Input() public set value(v: DropdownItem<T>) {
     this._value = v;
@@ -92,10 +92,11 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
   }
 
-  public registerOnChange(fn: (v: DropdownItem<T>) => void): void {
-    this.onChange = (v: DropdownItem<T>): void => {
-      this.input.emit(v);
-      fn(v);
+  public registerOnChange(fn: (v: DropdownItem<T> | T) => void): void {
+    this.onChange = (v: DropdownItem<T> | T): void => {
+      const value: DropdownItem<T> | T = (v as DropdownItem<T>).data ? (v as DropdownItem<T>).data : v;
+      this.input.emit(value);
+      fn(value);
     };
   }
 
@@ -123,8 +124,9 @@ export class SelectComponent<T> implements ControlValueAccessor {
     return null;
   }
 
-  public onChange: (v: DropdownItem<T>) => void = (v: DropdownItem<T>): void => {
-    this.input.emit(v);
+  public onChange: (v: DropdownItem<T> | T) => void = (v: DropdownItem<T> | T): void => {
+    const value: DropdownItem<T> | T = (v as DropdownItem<T>).data ? (v as DropdownItem<T>).data : v;
+    this.input.emit(value);
   };
 
   public onTouched: () => void = () => null;
