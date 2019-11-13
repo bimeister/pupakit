@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
-import { Tab } from 'src/lib/core/components/tabs/tabs.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Tab } from 'src/lib/core/components/tabs/tabs.component';
 
 @Component({
   selector: 'demo-tabs-demo',
@@ -20,12 +20,14 @@ export class TabsDrawerDemoComponent implements OnDestroy {
     {
       name: 'Ad/Ldap',
       iconName: 'ios-albums',
-      urlTree: this.router.createUrlTree(['/tabs-drawer'], { queryParams: { tabs: '1' } })
+      route: '/tabs-drawer',
+      queryParams: { tabs: '1' }
     },
     {
       name: 'Управление ролями',
       iconName: 'ios-hammer',
-      urlTree: this.router.createUrlTree(['/tabs-drawer'], { queryParams: { tabs: '2' } })
+      route: '/tabs-drawer',
+      queryParams: { tabs: '2' }
     }
   ];
   constructor(

@@ -12,7 +12,8 @@ export class TabsDemoComponent {
     {
       name: 'Пользователи',
       iconName: 'ios-hammer',
-      route: '/tabs?users=user1'
+      route: '/tabs?users=user1',
+      removeExistingQueryParams: true
     },
     {
       name: 'Ad/Ldap',

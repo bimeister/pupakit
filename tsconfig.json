@@ -1,13 +1,14 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "declaration": false,
     "downlevelIteration": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "lib": ["dom", "es2017", "es2018", "es2019", "es2020", "esnext"],
     "importHelpers": true,
-    "lib": ["dom", "es2018", "esnext"],
     "locale": "en",
     "module": "esnext",
     "moduleResolution": "node",
@@ -15,7 +16,6 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "outDir": "./dist/out-tsc",
-    "paths": {},
     "plugins": [
       {
         "name": "@angular/language-service"
@@ -24,8 +24,8 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "target": "es2015",
-    "types": ["jest", "node"],
+    "target": "es2017",
+    "types": ["node"],
     "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules"]

@@ -1,7 +1,7 @@
 <button (click)="toggleDrawer()">toggle drawer</button>
 
-<pupa-drawer [isVisible]="drawerOpen">
-  <pupa-tabs [tabs]="tabs"></pupa-tabs>
+<pupa-drawer [isVisible]="drawerOpen" [destroyContentOnClose]="false">
+  <pupa-tabs [tabs]="tabs" [refreshSubject$]="drawerOpen$"></pupa-tabs>
   <div class="content">
     <div class="placeholder"></div>
   </div>
