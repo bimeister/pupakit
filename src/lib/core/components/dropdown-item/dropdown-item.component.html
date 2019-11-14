@@ -2,22 +2,22 @@
   <div class="pupa-dropdown__item-block">
     <ion-icon
       class="pupa-dropdown__icon pupa-dropdown__icon_left"
-      *ngIf="item.iconLeft"
-      [name]="item.iconLeft.name"
-      [src]="item.iconLeft.src"
-      [style.color]="item.iconLeft.color"
+      *ngIf="itemData.iconLeft"
+      [name]="itemData.iconLeft.name"
+      [src]="itemData.iconLeft.src"
+      [style.color]="itemData.iconLeft.color"
     ></ion-icon>
-    {{ getCaption() }}
+    {{ getCaption }}
   </div>
   <ion-icon
     class="pupa-dropdown__icon pupa-dropdown__icon_right"
-    *ngIf="item.iconRight"
-    [name]="item.iconRight.name"
-    [src]="item.iconRight.src"
-    [style.color]="item.iconRight.color"
+    *ngIf="itemData.iconRight"
+    [name]="itemData.iconRight.name"
+    [src]="itemData.iconRight.src"
+    [style.color]="itemData.iconRight.color"
   ></ion-icon>
 </div>
-<div *ngIf="item.children && item.children.length > 0" class="pupa-dropdown__children">
+<div *ngIf="itemData.children && itemData.children.length > 0" class="pupa-dropdown__children">
   <pupa-dropdown-item
     *ngFor="let item of item.children"
     [item]="item"

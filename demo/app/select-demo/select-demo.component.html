@@ -8,16 +8,14 @@
       class="mb"
       formControlName="select"
       [items]="itemsWithoutCaption"
-      captionPropertyKey="name"
-      captionPropertyValue="description"
+      captionPropertyPath="name"
     ></pupa-select>
 
     <pupa-select
       class="mb"
       formControlName="select"
       [items]="itemsWithoutCaptionNested"
-      [captionPropertyKey]="'data.name'"
-      [captionPropertyValue]="'data.name'"
+      [captionPropertyPath]="'data.name'"
     ></pupa-select>
 
     <pupa-select class="mb" formControlName="select" [items]="items" [disabled]="true"></pupa-select>
