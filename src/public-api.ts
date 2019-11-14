@@ -27,8 +27,6 @@ export { DatepickerComponent } from './lib/core/components/datepicker/datepicker
 export { TabsComponent } from './lib/core/components/tabs/tabs.component';
 export { DatagridComponent } from './lib/core/components/datagrid/datagrid.component';
 export { TextareaComponent } from './lib/core/components/textarea/textarea.component';
-export {
-  DatagridTemplateRendererComponent
-} from './lib/core/components/datagrid-template-renderer/datagrid-template-renderer.component';
+export { DatagridTemplateRendererComponent } from './lib/core/components/datagrid-template-renderer/datagrid-template-renderer.component';
 
 export { PupakitCore } from './lib/core/pupakit-core.module';
