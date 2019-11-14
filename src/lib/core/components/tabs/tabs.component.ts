@@ -33,8 +33,6 @@ type Primitive = string | number | boolean | symbol;
 
 type ObjectEntry<K = Primitive, V = any> = [K, V];
 
-const MAX_ANIMATION_TIME: number = 1000;
-
 enum ObjectEntryData {
   Key,
   Value
@@ -192,7 +190,6 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     this.subscription.add(
       this.selectedTabElement$.subscribe((element: Element) => {
         this.highlightTabElement(element);
-        setTimeout(() => this.highlightTabElement(element), MAX_ANIMATION_TIME);
       })
     );
   }
