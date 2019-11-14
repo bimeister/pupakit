@@ -22,7 +22,6 @@
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 import 'zone.js/dist/zone-evergreen';
 
-
 /**
  * Web Animations `@angular/platform-browser/animations`
  * Only required if AnimationBuilder is used within the application and using IE/Edge or Safari.
