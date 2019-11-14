@@ -65,7 +65,6 @@ export class SelectComponent<T> implements ControlValueAccessor {
   }
 
   public writeValue(value: T): void {
-    console.log(value);
     if (!this.items) {
       return;
     }
@@ -126,6 +125,9 @@ export class SelectComponent<T> implements ControlValueAccessor {
 
   private updateCollection(): void {
     this.itemsCollection.clear();
+    if (isNullOrUndefined(this._items)) {
+      return;
+    }
     this._items.forEach((item: DropdownItem<T>) => {
       this.parseItem(item);
     });
