@@ -11,21 +11,29 @@ import { DropdownItem } from '../dropdown/dropdown.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownItemComponent<T> {
-  @Input() public item: DropdownItem<T>;
+  @Input() public item: DropdownItem<T> | T;
 
   @Input() public captionPropertyPath: string = null;
 
-  @Output() public select: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
+  @Output() public select: EventEmitter<T> = new EventEmitter<T>();
 
   public onSelect(): void {
     this.emitSelect(this.item);
   }
 
-  public emitSelect(data: DropdownItem<T>): void {
-    this.select.emit(data);
+  public emitSelect(item: DropdownItem<T> | T): void {
+    this.select.emit(
+      isNullOrUndefined(this.captionPropertyPath) && (item as DropdownItem<T>).data
+        ? (item as DropdownItem<T>).data
+        : (item as T)
+    );
   }
 
-  public getCaption(): string {
+  public get itemData(): DropdownItem<T> {
+    return this.item as DropdownItem<T>;
+  }
+
+  public get getCaption(): string {
     if (isNullOrUndefined(this.item)) {
       return null;
     }

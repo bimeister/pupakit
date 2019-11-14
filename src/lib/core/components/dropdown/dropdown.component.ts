@@ -31,7 +31,7 @@ export interface DropdownItem<T> {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownComponent<T> extends DroppableComponent {
-  @Input() public items: DropdownItem<T>[];
+  @Input() public items: DropdownItem<T>[] | T[];
 
   /**
    * @description path to visible captionProperty
@@ -40,14 +40,14 @@ export class DropdownComponent<T> extends DroppableComponent {
    */
   @Input() public captionPropertyPath: string = null;
 
-  @Output() public select: EventEmitter<DropdownItem<T>> = new EventEmitter<DropdownItem<T>>();
+  @Output() public select: EventEmitter<T> = new EventEmitter<T>();
 
   constructor(protected readonly cDRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {
     super(cDRef, renderer);
   }
 
-  public emitSelect(data: DropdownItem<T>): void {
-    this.select.emit(data);
+  public emitSelect(item: T): void {
+    this.select.emit(item);
     this.toggle(false);
   }
 }
