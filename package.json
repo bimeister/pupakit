@@ -28,8 +28,8 @@
     "test:ci": "ng test --configuration=ci"
   },
   "dependencies": {
-    "ag-grid-angular": "^22.0.0",
-    "ag-grid-community": "^22.0.0",
+    "ag-grid-angular": "~21.0.0",
+    "ag-grid-community": "~21.0.0",
     "zone.js": "~0.10.2"
   },
   "peerDependencies": {
