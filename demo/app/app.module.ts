@@ -37,6 +37,7 @@ import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
+import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -72,7 +73,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DatagridDemoComponent,
     DrawerDemoComponent,
     TextareaDemoComponent,
-    TabsDrawerDemoComponent
+    TabsDrawerDemoComponent,
+    RadioButtonDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -170,6 +172,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'drawer', component: DrawerDemoComponent },
       { path: 'textarea', component: TextareaDemoComponent },
       { path: 'tabs-drawer', component: TabsDrawerDemoComponent },
+      { path: 'radio', component: RadioButtonDemoComponent },
       {
         path: '',
         component: AppComponent

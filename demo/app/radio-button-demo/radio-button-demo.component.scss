@@ -1,0 +1,18 @@
+@import 'variables';
+@import 'mixins';
+@import 'functions';
+
+.radio-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.radio-group {
+  &:not(:last-child) {
+    margin-right: rems(1.5);
+  }
+
+  display: flex;
+  align-items: center;
+}

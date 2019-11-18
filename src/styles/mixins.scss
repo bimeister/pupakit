@@ -45,9 +45,13 @@
   line-height: 1;
 }
 
-@mixin pupa-label {
+@mixin pupa-label($horizontal: false) {
   box-sizing: border-box;
-  padding: 0 0 rems(0.25);
+  @if $horizontal {
+    padding: 0 0;
+  } @else {
+    padding: 0 0 rems(0.25);
+  }
   @include regular();
   color: $color_grey-text;
   font-size: rems(1);
