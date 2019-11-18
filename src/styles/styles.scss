@@ -2,9 +2,14 @@
 @import 'font-faces';
 @import 'mixins';
 @import 'grid-styles';
+@import 'radio';
 
 label {
   @include pupa-label;
+}
+
+label.horizontal {
+  @include pupa-label(true);
 }
 
 .pupa-dropdown {

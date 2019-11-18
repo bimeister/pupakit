@@ -1,0 +1,34 @@
+<h1>
+  Radio-buttons
+</h1>
+<form class="group" [formGroup]="form">
+  <div class="form-row">
+    <h3>Имя (с форм контролом)</h3>
+    <div class="radio-container">
+      <div class="radio-group">
+        <!--        Чтобы корректно отображалось выделение, в директиву нужно передать то же, что и в value-->
+        <input formControlName="name" type="radio" value="Alice" name="name" id="Alice" pupaRadioButton="Alice" />
+        <label for="Alice" class="horizontal">Alice</label>
+      </div>
+      <div class="radio-group">
+        <input formControlName="name" type="radio" value="Bob" name="name" id="Bob" pupaRadioButton="Bob" />
+        <label for="Bob" class="horizontal">Bob</label>
+      </div>
+    </div>
+  </div>
+</form>
+<form class="group">
+  <div class="form-row">
+    <h3>Имя (без форм контрола)</h3>
+    <div class="radio-container">
+      <div class="radio-group">
+        <input type="radio" value="Alice" name="name" id="Alice1" pupaRadioButton />
+        <label for="Alice1" class="horizontal">Alice</label>
+      </div>
+      <div class="radio-group">
+        <input type="radio" value="Bob" name="name" id="Bob1" pupaRadioButton />
+        <label for="Bob1" class="horizontal">Bob</label>
+      </div>
+    </div>
+  </div>
+</form>
