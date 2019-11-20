@@ -11,4 +11,20 @@ export class RadioButtonDemoComponent {
   public form: FormGroup = new FormGroup({
     name: new FormControl('Alice')
   });
+  private valueData: string;
+  public set value(v: string) {
+    /* tslint:disable */
+    // console.log('value change', v);
+    /* tslint:enable */
+    this.valueData = v;
+  }
+  public get value(): string {
+    return this.valueData;
+  }
+
+  constructor() {
+    /* tslint:disable */
+    // this.form.valueChanges.subscribe(formValue => console.log(formValue));
+    /* tslint:enable */
+  }
 }

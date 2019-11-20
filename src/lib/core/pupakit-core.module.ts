@@ -32,7 +32,8 @@ import { TileComponent } from './components/tile/tile.component';
 import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
-import { RadioButtonDirective } from './directives/radio-button.directive';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 
 const CORE_COMPONENTS: any[] = [
   ButtonComponent,
@@ -65,15 +66,15 @@ const CORE_COMPONENTS: any[] = [
   DrawerComponent,
   DatagridColumnSettingsComponent,
   TextareaComponent,
-  DropdownItemComponent
+  DropdownItemComponent,
+  RadioButtonComponent,
+  RadioGroupComponent
 ];
-
-const DIRECTIVES: any[] = [RadioButtonDirective];
 
 @NgModule({
   imports: [SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
-  declarations: [...CORE_COMPONENTS, ...DIRECTIVES],
-  exports: [SharedModule, ...CORE_COMPONENTS, ...DIRECTIVES],
+  declarations: [...CORE_COMPONENTS],
+  exports: [SharedModule, ...CORE_COMPONENTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PupakitCore {}
