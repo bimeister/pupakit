@@ -2,33 +2,34 @@
   Radio-buttons
 </h1>
 <form class="group" [formGroup]="form">
-  <div class="form-row">
+  <pupa-radio-group class="form-row" formControlName="name">
     <h3>Имя (с форм контролом)</h3>
     <div class="radio-container">
       <div class="radio-group">
-        <!--        Чтобы корректно отображалось выделение, в директиву нужно передать то же, что и в value-->
-        <input formControlName="name" type="radio" value="Alice" name="name" id="Alice" pupaRadioButton="Alice" />
+        <pupa-radio-button [value]="'Alice'" [name]="'name'" [id]="'Alice'"></pupa-radio-button>
         <label for="Alice" class="horizontal">Alice</label>
       </div>
       <div class="radio-group">
-        <input formControlName="name" type="radio" value="Bob" name="name" id="Bob" pupaRadioButton="Bob" />
+        <pupa-radio-button [value]="'Bob'" [name]="'name'" [id]="'Bob'"></pupa-radio-button>
         <label for="Bob" class="horizontal">Bob</label>
       </div>
     </div>
-  </div>
+    <div>{{ form.value | json }}</div>
+  </pupa-radio-group>
 </form>
 <form class="group">
-  <div class="form-row">
+  <pupa-radio-group class="form-row" [(ngModel)]="value" [name]="'name'">
     <h3>Имя (без форм контрола)</h3>
     <div class="radio-container">
       <div class="radio-group">
-        <input type="radio" value="Alice" name="name" id="Alice1" pupaRadioButton />
+        <pupa-radio-button [value]="'Alice'" [name]="'name'" [id]="'Alice1'"></pupa-radio-button>
         <label for="Alice1" class="horizontal">Alice</label>
       </div>
       <div class="radio-group">
-        <input type="radio" value="Bob" name="name" id="Bob1" pupaRadioButton />
+        <pupa-radio-button [value]="'Bob'" [name]="'name'" [id]="'Bob1'"></pupa-radio-button>
         <label for="Bob1" class="horizontal">Bob</label>
       </div>
     </div>
-  </div>
+    <div>{{ value }}</div>
+  </pupa-radio-group>
 </form>

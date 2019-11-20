@@ -1,0 +1,11 @@
+<input
+  (change)="checked = $event.target.checked; onChange(checked)"
+  [name]="name"
+  [id]="id"
+  type="radio"
+  class="pupa-radio"
+  [checked]="checked"
+/>
+<label [for]="id" class="pupa-radio__circle horizontal"
+  ><span class="pupa-radio__dot" [class.pupa-radio__dot_checked]="checked"></span
+></label>
