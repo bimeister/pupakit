@@ -2,7 +2,6 @@
   "name": "@meistersoft/pupakit",
   "version": "0.1.0",
   "license": "LicenseRef-LICENSE",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "http://bitbucket.meistersoft.ru/scm/com/pupakit.git"
