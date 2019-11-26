@@ -2,7 +2,7 @@
 @import 'variables';
 
 .tile {
-  width: auto;
+  width: 100%;
   height: auto;
   box-sizing: border-box;
   border-radius: rems(0.5);
@@ -12,8 +12,10 @@
   @include transition(#{border, box-shadow});
   @include flex-container(column, flex-start, flex-start, nowrap);
 
-  &:hover {
-    border: 1px solid $color_white;
-    box-shadow: $box-shadow_hover;
+  &_shadow-on-hover {
+    &:hover {
+      border: 1px solid $color_white;
+      box-shadow: $box-shadow_hover;
+    }
   }
 }
