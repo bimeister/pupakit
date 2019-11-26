@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 
 @Component({
   selector: 'pupa-tile',
@@ -6,4 +6,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrls: ['./tile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TileComponent {}
+export class TileComponent {
+  @Input() public shadowOnHover: boolean = true;
+}
