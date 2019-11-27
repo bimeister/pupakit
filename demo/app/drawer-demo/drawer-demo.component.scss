@@ -1,5 +1,11 @@
 @import 'mixins';
 
+.placeholder {
+  width: 100px;
+  height: 200vh;
+  background: $color_active-blue;
+}
+
 .wrapper {
   width: 100%;
   height: 100vh;
