@@ -1,3 +1,7 @@
 @function rems($rems) {
   @return #{$rems * 16}px;
 }
+
+@function px($px) {
+  @return #{$px}px;
+}
