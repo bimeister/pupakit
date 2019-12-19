@@ -19,8 +19,12 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
+import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
+import { OverlayComponent } from './components/overlay/overlay.component';
+import { RadioButtonComponent } from './components/radio-button/radio-button.component';
+import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { SearchFieldComponent } from './components/search-field/search-field.component';
 import { SelectComponent } from './components/select/select.component';
@@ -32,10 +36,10 @@ import { TileComponent } from './components/tile/tile.component';
 import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
-import { RadioButtonComponent } from './components/radio-button/radio-button.component';
-import { RadioGroupComponent } from './components/radio-group/radio-group.component';
+import { LayoutService } from './services/layout.service';
 
 const CORE_COMPONENTS: any[] = [
+  LayoutComponent,
   ButtonComponent,
   InputComponent,
   CheckboxComponent,
@@ -68,13 +72,17 @@ const CORE_COMPONENTS: any[] = [
   TextareaComponent,
   DropdownItemComponent,
   RadioButtonComponent,
-  RadioGroupComponent
+  RadioGroupComponent,
+  OverlayComponent
 ];
+
+const CORE_SERVICES: any[] = [LayoutService];
 
 @NgModule({
   imports: [SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
   declarations: [...CORE_COMPONENTS],
   exports: [SharedModule, ...CORE_COMPONENTS],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [...CORE_SERVICES]
 })
 export class PupakitCore {}
