@@ -1,4 +1,9 @@
-<section class="drawer" [@drawerExpanded]="isVisible" (@drawerExpanded.done)="processAnimationEnd($event)">
+<section
+  class="drawer"
+  [ngClass]="'drawer_' + float"
+  [@drawerExpanded]="isVisible"
+  (@drawerExpanded.done)="processAnimationEnd($event)"
+>
   <div
     class="drawer__content"
     [class.drawer__content_hidden]="!isContentVisible"

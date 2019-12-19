@@ -3,15 +3,22 @@
 
 .drawer {
   all: unset;
-  height: 100vh;
-  width: fit-content;
   position: fixed;
+  width: fit-content;
+  height: 100vh;
   top: 0;
-  right: 0;
   background: $color_white;
   box-shadow: $box-shadow_hover;
   overflow: hidden;
   z-index: 4501;
+
+  &_right {
+    right: 0;
+  }
+
+  &_left {
+    left: 0;
+  }
 }
 
 .drawer__content {
@@ -20,6 +27,7 @@
   overflow-x: hidden;
   overflow-y: auto;
   box-sizing: border-box;
+  position: relative;
 
   &_hidden {
     display: none;

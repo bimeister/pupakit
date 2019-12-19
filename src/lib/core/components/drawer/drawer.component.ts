@@ -1,7 +1,20 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChange,
+  SimpleChanges
+} from '@angular/core';
 
+import { LayoutService } from '../../services/layout.service';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
+
+export type DrawerFloat = 'left' | 'right';
 
 @Component({
   selector: 'pupa-drawer',
@@ -18,8 +31,15 @@ import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helpe
   ]
 })
 export class DrawerComponent implements OnChanges {
+  private shouldRenderContent: boolean = false;
+  private shouldHideContent: boolean = true;
+
   @Input() public isVisible: boolean = false;
+  @Input() public float: DrawerFloat = 'right';
   @Input() public destroyContentOnClose: boolean = true;
+  @Input() public withOverlay: boolean = false;
+  @Input() public closeByEsc: boolean = true;
+  @Output() public readonly close: EventEmitter<void> = new EventEmitter<void>();
 
   /**
    * @description content wrapper CSS styles property
@@ -35,11 +55,23 @@ export class DrawerComponent implements OnChanges {
     return !this.shouldHideContent;
   }
 
-  private shouldRenderContent: boolean = false;
-  private shouldHideContent: boolean = true;
+  constructor(private readonly layoutService: LayoutService) {}
+
+  @HostListener('window:keydown', ['$event'])
+  public processKeyPressEvent(event: KeyboardEvent): void {
+    if (!this.closeByEsc || isNullOrUndefined(event) || isNullOrUndefined(event.key)) {
+      return;
+    }
+    const isEscPressed: boolean = event.key.toLowerCase() === 'escape';
+    if (!isEscPressed) {
+      return;
+    }
+    this.closeDrawer();
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     this.processIsVisibleValueChange(changes.isVisible);
+    this.processwithOverlayValueChange(changes.withOverlay);
   }
 
   public processAnimationEnd(event: AnimationEvent): void {
@@ -52,11 +84,39 @@ export class DrawerComponent implements OnChanges {
   }
 
   private processIsVisibleValueChange(change: SimpleChange): void {
-    const drawerBecameVisible: boolean = !isNullOrUndefined(change) && change.currentValue === true;
-    if (!drawerBecameVisible) {
+    if (isNullOrUndefined(change) || change.currentValue === change.previousValue) {
       return;
     }
+    const drawerBecameVisible: boolean = change.currentValue === true;
+    drawerBecameVisible ? this.openDrawer() : this.closeDrawer();
+  }
+
+  private processwithOverlayValueChange(change: SimpleChange): void {
+    if (isNullOrUndefined(change) || !this.isVisible) {
+      return;
+    }
+    const overlayIsVisible: boolean = change.currentValue === true;
+    overlayIsVisible ? this.showOverlay() : this.hideOverlay();
+  }
+
+  private openDrawer(): void {
     this.shouldRenderContent = true;
     this.shouldHideContent = false;
+    if (this.withOverlay) {
+      this.showOverlay();
+    }
+  }
+
+  private closeDrawer(): void {
+    this.hideOverlay();
+    this.close.emit();
+  }
+
+  private showOverlay(): void {
+    this.layoutService.setOverlayMode('enabled').setScrollingMode('disabled');
+  }
+
+  private hideOverlay(): void {
+    this.layoutService.setOverlayMode('disabled').setScrollingMode('enabled');
   }
 }

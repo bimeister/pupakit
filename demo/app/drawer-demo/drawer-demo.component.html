@@ -6,8 +6,21 @@
   <pupa-button (onclick)="destroyContentOnClose = !destroyContentOnClose">
     {{ destroyContentOnClose ? 'destroy content' : 'keep content' }}
   </pupa-button>
+  <pupa-button (onclick)="withOverlay = !withOverlay">
+    {{ withOverlay ? 'with overlay' : 'without overlay' }}
+  </pupa-button>
+  <pupa-button (onclick)="floatRight = !floatRight">
+    {{ floatRight ? 'float right' : 'float left' }}
+  </pupa-button>
 
-  <pupa-drawer [isVisible]="isDrawerVisible" [destroyContentOnClose]="destroyContentOnClose" contentWidth="363px">
+  <pupa-drawer
+    [withOverlay]="withOverlay"
+    [float]="floatRight ? 'right' : 'left'"
+    [isVisible]="isDrawerVisible"
+    [destroyContentOnClose]="destroyContentOnClose"
+    (close)="isDrawerVisible = false"
+    contentWidth="363px"
+  >
     <div class="drawer-content">
       <div class="text">
         <h3 class="title">
