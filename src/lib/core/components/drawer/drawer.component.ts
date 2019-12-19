@@ -11,7 +11,6 @@ import {
   SimpleChanges
 } from '@angular/core';
 
-import { LayoutService } from '../../services/layout.service';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
 export type DrawerFloat = 'left' | 'right';
@@ -31,6 +30,7 @@ export type DrawerFloat = 'left' | 'right';
   ]
 })
 export class DrawerComponent implements OnChanges {
+  private shouldShowOverlay: boolean = false;
   private shouldRenderContent: boolean = false;
   private shouldHideContent: boolean = true;
 
@@ -55,7 +55,9 @@ export class DrawerComponent implements OnChanges {
     return !this.shouldHideContent;
   }
 
-  constructor(private readonly layoutService: LayoutService) {}
+  public get isOverlayVisible(): boolean {
+    return this.withOverlay ? this.shouldShowOverlay : false;
+  }
 
   @HostListener('window:keydown', ['$event'])
   public processKeyPressEvent(event: KeyboardEvent): void {
@@ -113,10 +115,10 @@ export class DrawerComponent implements OnChanges {
   }
 
   private showOverlay(): void {
-    this.layoutService.setOverlayMode('enabled').setScrollingMode('disabled');
+    this.shouldShowOverlay = true;
   }
 
   private hideOverlay(): void {
-    this.layoutService.setOverlayMode('disabled').setScrollingMode('enabled');
+    this.shouldShowOverlay = false;
   }
 }

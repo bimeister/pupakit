@@ -8,8 +8,12 @@ import { ChipButtonComponent } from './components/chip-button/chip-button.compon
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
-import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
-import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
+import {
+  DatagridColumnSettingsComponent
+} from './components/datagrid-column-settings/datagrid-column-settings.component';
+import {
+  DatagridTemplateRendererComponent
+} from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
@@ -19,7 +23,6 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
@@ -36,10 +39,8 @@ import { TileComponent } from './components/tile/tile.component';
 import { TreeNodeComponent } from './components/tree/tree-node/tree-node.component';
 import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
-import { LayoutService } from './services/layout.service';
 
 const CORE_COMPONENTS: any[] = [
-  LayoutComponent,
   ButtonComponent,
   InputComponent,
   CheckboxComponent,
@@ -76,13 +77,10 @@ const CORE_COMPONENTS: any[] = [
   OverlayComponent
 ];
 
-const CORE_SERVICES: any[] = [LayoutService];
-
 @NgModule({
   imports: [SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
   declarations: [...CORE_COMPONENTS],
   exports: [SharedModule, ...CORE_COMPONENTS],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [...CORE_SERVICES]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PupakitCore {}
