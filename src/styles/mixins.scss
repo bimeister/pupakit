@@ -92,19 +92,30 @@
   white-space: nowrap;
 }
 
-@mixin scrollbar {
+@mixin scrollbar($small: false) {
   ::-webkit-scrollbar {
-    height: rems(0.25);
-    width: rems(0.25);
+    height: rems(0.5);
+    width: rems(0.5);
+  }
+  @if $small {
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-thumb {
+      background-clip: padding-box;
+      border: rems(0.125) solid transparent;
+      border-radius: rems(0.25);
+    }
+  } @else {
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-thumb {
+      border-radius: rems(0.25);
+    }
   }
 
   ::-webkit-scrollbar-track {
-    border-radius: rems(0.25);
-    background: $color_light-blue;
+    background-color: $color_light-blue;
   }
 
   ::-webkit-scrollbar-thumb {
-    border-radius: rems(0.25);
-    background: $color_active-blue;
+    background-color: $color_active-blue;
   }
 }
