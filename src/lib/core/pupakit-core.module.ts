@@ -8,15 +8,12 @@ import { ChipButtonComponent } from './components/chip-button/chip-button.compon
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
-import {
-  DatagridColumnSettingsComponent
-} from './components/datagrid-column-settings/datagrid-column-settings.component';
-import {
-  DatagridTemplateRendererComponent
-} from './components/datagrid-template-renderer/datagrid-template-renderer.component';
+import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
+import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
+import { DrawerDraggerComponent } from './components/drawer-dragger/drawer-dragger.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 import { DropdownItemComponent } from './components/dropdown-item/dropdown-item.component';
 import { DropdownComponent } from './components/dropdown/dropdown.component';
@@ -41,6 +38,7 @@ import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
 
 const CORE_COMPONENTS: any[] = [
+  DrawerDraggerComponent,
   ButtonComponent,
   InputComponent,
   CheckboxComponent,
