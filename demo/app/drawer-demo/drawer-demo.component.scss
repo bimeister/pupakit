@@ -19,5 +19,10 @@
 .drawer-content {
   height: 100%;
   width: 100%;
-  @include flex-container(column, flex-start, space-between, nowrap);
+  @include flex-container(column, flex-start, flex-start, nowrap);
+}
+
+.dragger {
+  position: absolute;
+  right: 0;
 }

@@ -5,17 +5,20 @@
   (@drawerExpanded.done)="processAnimationEnd($event)"
 >
   <div
+    #drawerContentElement
     class="drawer__content"
     [class.drawer__content_hidden]="!isContentVisible"
-    [style.width]="contentWidth"
+    [style.width]="getContentAreaWidth(modifiedContentWidthPx$ | async)"
+    [style.max-width]="maxContentWidth"
+    [style.min-width]="minContentWidth"
     *ngIf="isContentRendered"
   >
     <ng-container *ngTemplateOutlet="content"></ng-container>
   </div>
 </section>
 
+<pupa-overlay [isVisible]="isOverlayVisible"></pupa-overlay>
+
 <ng-template #content>
   <ng-content></ng-content>
 </ng-template>
-
-<pupa-overlay [isVisible]="isOverlayVisible"></pupa-overlay>

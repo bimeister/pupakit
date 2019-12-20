@@ -1,0 +1,31 @@
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+
+.drawer-dragger {
+  height: 100vh;
+  pointer-events: none;
+  width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+
+  &__button {
+    all: unset;
+    cursor: col-resize;
+    appearance: none;
+    color: $color_main-blue;
+    pointer-events: all;
+    font-size: rems(1.5);
+    width: rems(1.5);
+
+    @include transition(color);
+
+    &:hover {
+      color: $color_active-blue;
+    }
+  }
+}
