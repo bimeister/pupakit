@@ -54,7 +54,7 @@ export class DrawerComponent implements OnChanges {
   @Input() public minContentWidth: string = '0';
   @Input() public float: DrawerFloat = 'right';
   @Input() public isVisible: boolean = false;
-  @Input() public destroyContentOnClose: boolean = false;
+  @Input() public destroyContentOnClose: boolean = true;
   @Input() public withOverlay: boolean = false;
   @Input() public closeByEsc: boolean = true;
   @Input() public closeByOverlayClick: boolean = true;
