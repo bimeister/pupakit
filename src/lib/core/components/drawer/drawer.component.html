@@ -8,6 +8,7 @@
     #drawerContentElement
     class="drawer__content"
     [class.drawer__content_hidden]="!isContentVisible"
+    [class.drawer__content_no-padding]="!withPadding"
     [style.width]="getContentAreaWidth(modifiedContentWidthPx$ | async)"
     [style.max-width]="maxContentWidth"
     [style.min-width]="minContentWidth"
