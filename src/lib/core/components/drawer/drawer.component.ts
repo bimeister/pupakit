@@ -57,6 +57,7 @@ export class DrawerComponent implements OnChanges {
   @Input() public destroyContentOnClose: boolean = false;
   @Input() public withOverlay: boolean = false;
   @Input() public closeByEsc: boolean = true;
+  @Input() public closeByOverlayClick: boolean = true;
 
   @Output() public readonly close: EventEmitter<void> = new EventEmitter<void>();
 
@@ -103,6 +104,14 @@ export class DrawerComponent implements OnChanges {
       return this.contentWidth;
     }
     return `${modifiedWidthPx}px`;
+  }
+
+  public processOverlayClick(event: MouseEvent): void {
+    event.stopPropagation();
+    if (!this.closeByOverlayClick) {
+      return;
+    }
+    this.closeDrawer();
   }
 
   private processIsVisibleValueChange(change: SimpleChange): void {
