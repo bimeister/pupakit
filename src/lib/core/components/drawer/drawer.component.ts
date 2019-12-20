@@ -144,6 +144,9 @@ export class DrawerComponent implements OnChanges {
   }
 
   private subscribeOnDraggerMoveIfDraggerIsDefined(): void {
+    if (isNullOrUndefined(this.draggerComponent)) {
+      return;
+    }
     this.draggerComponent.mouseOffsetFromElementPx$
       .pipe(
         takeUntil(this.draggerComponent.destroy$),
