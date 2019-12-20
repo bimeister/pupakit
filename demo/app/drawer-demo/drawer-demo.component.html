@@ -1,17 +1,14 @@
 <div class="wrapper">
   <div class="placeholder"></div>
   <pupa-button (onclick)="isDrawerVisible = !isDrawerVisible">
-    {{ isDrawerVisible ? 'Hide drawer' : 'Show drawer' }}
+    {{ isDrawerVisible ? 'Hide' : 'Show' }} drawer
   </pupa-button>
   <pupa-button (onclick)="destroyContentOnClose = !destroyContentOnClose">
-    {{ destroyContentOnClose ? 'destroy content' : 'keep content' }}
+    {{ destroyContentOnClose ? 'destroy' : 'keep' }}content
   </pupa-button>
-  <pupa-button (onclick)="withOverlay = !withOverlay">
-    {{ withOverlay ? 'with overlay' : 'without overlay' }}
-  </pupa-button>
-  <pupa-button (onclick)="floatRight = !floatRight">
-    {{ floatRight ? 'float right' : 'float left' }}
-  </pupa-button>
+  <pupa-button (onclick)="withOverlay = !withOverlay"> {{ withOverlay ? 'with' : 'without' }} overlay </pupa-button>
+  <pupa-button (onclick)="floatRight = !floatRight"> float {{ floatRight ? 'right' : 'left' }} </pupa-button>
+  <pupa-button (onclick)="withDragger = !withDragger"> {{ withDragger ? 'with' : 'without' }} dragger </pupa-button>
 
   <pupa-drawer
     [withOverlay]="withOverlay"
@@ -49,7 +46,7 @@
       <pupa-button kind="solid" size="large" (onclick)="isDrawerVisible = false">
         Закрыть
       </pupa-button>
-      <pupa-drawer-dragger class="dragger"></pupa-drawer-dragger>
+      <pupa-drawer-dragger *ngIf="withDragger" class="dragger"></pupa-drawer-dragger>
     </div>
   </pupa-drawer>
 </div>

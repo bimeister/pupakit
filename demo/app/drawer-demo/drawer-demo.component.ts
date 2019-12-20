@@ -11,4 +11,5 @@ export class DrawerDemoComponent {
   public destroyContentOnClose: boolean = true;
   public withOverlay: boolean = true;
   public floatRight: boolean = true;
+  public withDragger: boolean = true;
 }
