@@ -17,7 +17,7 @@
   </div>
 </section>
 
-<pupa-overlay [isVisible]="isOverlayVisible"></pupa-overlay>
+<pupa-overlay [isVisible]="isOverlayVisible" (click)="processOverlayClick($event)"></pupa-overlay>
 
 <ng-template #content>
   <ng-content></ng-content>
