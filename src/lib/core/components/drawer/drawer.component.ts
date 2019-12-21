@@ -1,5 +1,6 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import {
+  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -8,12 +9,13 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   Output,
   SimpleChange,
   SimpleChanges,
   ViewChild
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
@@ -35,7 +37,9 @@ export type DrawerFloat = 'left' | 'right';
     ])
   ]
 })
-export class DrawerComponent implements OnChanges {
+export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
+  private draggerMoveSubscription: Subscription = new Subscription();
+
   public readonly modifiedContentWidthPx$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   private shouldShowOverlay: boolean = false;
@@ -91,6 +95,18 @@ export class DrawerComponent implements OnChanges {
     this.processwithOverlayValueChange(changes.withOverlay);
   }
 
+  public ngAfterContentInit(): void {
+    this.draggerMoveSubscription.unsubscribe();
+    this.draggerMoveSubscription = this.subscribeOnDraggerMoveIfDraggerIsDefined();
+  }
+
+  public ngOnDestroy(): void {
+    if (this.draggerMoveSubscription.closed) {
+      return;
+    }
+    this.draggerMoveSubscription.unsubscribe();
+  }
+
   public processAnimationEnd(event: AnimationEvent): void {
     const isCollapseAnimationDone: boolean = String(event.toState) === 'false';
     if (!isCollapseAnimationDone) {
@@ -137,7 +153,6 @@ export class DrawerComponent implements OnChanges {
     if (this.withOverlay) {
       this.showOverlay();
     }
-    this.subscribeOnDraggerMoveIfDraggerIsDefined();
   }
 
   private closeDrawer(): void {
@@ -153,20 +168,24 @@ export class DrawerComponent implements OnChanges {
     this.shouldShowOverlay = false;
   }
 
-  private subscribeOnDraggerMoveIfDraggerIsDefined(): void {
+  private subscribeOnDraggerMoveIfDraggerIsDefined(): Subscription {
     if (isNullOrUndefined(this.draggerComponent)) {
-      return;
+      return new Subscription();
     }
-    this.draggerComponent.mouseOffsetFromElementPx$
+
+    return this.draggerComponent.mouseOffsetFromElementPx$
       .pipe(
         takeUntil(this.draggerComponent.destroy$),
         filter(
           () => !isNullOrUndefined(this.drawerContentRef) && !isNullOrUndefined(this.drawerContentRef.nativeElement)
         )
       )
-      .subscribe((diffXPx: number) => {
+      .subscribe((horizontalMouseOffsetFromElementPx: number) => {
         const currentWidthPx: number = this.drawerContentRef.nativeElement.getBoundingClientRect().width;
-        const modifiedWidthPx: number = this.float === 'right' ? currentWidthPx - diffXPx : currentWidthPx + diffXPx;
+        const modifiedWidthPx: number =
+          this.float === 'right'
+            ? currentWidthPx - horizontalMouseOffsetFromElementPx
+            : currentWidthPx + horizontalMouseOffsetFromElementPx;
         this.modifiedContentWidthPx$.next(modifiedWidthPx);
       });
   }
