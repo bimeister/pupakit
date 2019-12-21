@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnDestroy, Renderer2 } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  Renderer2
+} from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -11,6 +19,8 @@ import { VOID } from './../../../constants/void.const';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DrawerDraggerComponent implements OnDestroy {
+  @Input() public isVisible: boolean = true;
+
   private readonly isDragging$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly mouseOffsetFromElementPx$: Readonly<BehaviorSubject<number>> = new BehaviorSubject<number>(0);
