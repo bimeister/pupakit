@@ -21,6 +21,7 @@
     pointer-events: all;
     font-size: rems(1.5);
     width: rems(1.5);
+    z-index: 10000;
 
     @include transition(color);
 
