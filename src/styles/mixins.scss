@@ -94,13 +94,15 @@
 
 @mixin scrollbar {
   ::-webkit-scrollbar {
-    height: rems(0.5);
-    width: rems(0.5);
+    height: rems(1);
+    width: rems(1);
   }
 
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-thumb {
-    border-radius: rems(0.25);
+    background-clip: padding-box;
+    border: rems(0.25) solid transparent;
+    border-radius: rems(0.5);
   }
 
   ::-webkit-scrollbar-track {
