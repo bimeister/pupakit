@@ -6,6 +6,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipButtonComponent } from './components/chip-button/chip-button.component';
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
+import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-item.component';
+import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
 import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
@@ -72,7 +74,9 @@ const CORE_COMPONENTS: any[] = [
   DropdownItemComponent,
   RadioButtonComponent,
   RadioGroupComponent,
-  OverlayComponent
+  OverlayComponent,
+  ChipTabsComponent,
+  ChipTabsItemComponent
 ];
 
 @NgModule({

@@ -14,6 +14,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
+import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
@@ -25,6 +26,7 @@ import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
+import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
@@ -32,12 +34,11 @@ import { SelectDemoComponent } from './select-demo/select-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
+import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
+import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
-import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
-import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
-import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -74,7 +75,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DrawerDemoComponent,
     TextareaDemoComponent,
     TabsDrawerDemoComponent,
-    RadioButtonDemoComponent
+    RadioButtonDemoComponent,
+    ChipTabsDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +113,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'chip-select',
         component: ChipSelectDemoComponent
+      },
+      {
+        path: 'chip-tabs',
+        component: ChipTabsDemoComponent
       },
       {
         path: 'tree',
