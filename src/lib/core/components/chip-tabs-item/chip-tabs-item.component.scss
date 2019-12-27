@@ -1,0 +1,27 @@
+@import 'variables';
+@import 'functions';
+@import 'mixins';
+
+.chip-tabs-item {
+  box-sizing: border-box;
+  height: rems(2);
+  min-width: rems(4);
+  border-radius: rems(0.75);
+  padding: 0 rems(0.5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: $color_main-dark;
+  user-select: none;
+  cursor: pointer;
+
+  @include transition(#{background, color});
+
+  &_active,
+  &:hover {
+    background: $color_active-blue;
+    color: $color_white;
+  }
+}
