@@ -4,6 +4,7 @@
   [class.pupa-dropdown_open]="shown"
   [style.top.px]="topPx"
   [style.left.px]="leftPx"
+  (wheel)="$event.stopPropagation()"
   #dropdown
 >
   <ng-content></ng-content>

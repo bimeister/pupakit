@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { mapTo } from 'rxjs/operators';
 
 import { DroppableComponent } from '../droppable/droppable.component';
+import { VOID } from './../../../constants/void.const';
 
 export interface ChipItem {
   key: string;
@@ -36,8 +38,8 @@ export class ChipSelectComponent implements OnDestroy {
   }
 
   public items$: BehaviorSubject<ChipItem[]> = new BehaviorSubject<ChipItem[]>([]);
-
   public selectItems$: BehaviorSubject<Set<ChipItem>> = new BehaviorSubject<Set<ChipItem>>(new Set());
+  public positionChange$: Observable<void> = this.selectItems$.pipe(mapTo(VOID));
 
   @Input()
   public set selectItems(items: ChipItem[]) {
