@@ -18,7 +18,12 @@
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
-  <pupa-droppable *ngIf="!readonly" [anchor]="addChips.chipButtonElement.nativeElement" [maxWidth]="maxWidth">
+  <pupa-droppable
+    *ngIf="!readonly"
+    [anchor]="addChips.chipButtonElement.nativeElement"
+    [maxWidth]="maxWidth"
+    [positionChange$]="positionChange$"
+  >
     <pupa-tree
       *ngIf="items.length > 0; else loader"
       [items]="items"

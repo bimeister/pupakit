@@ -6,7 +6,7 @@ const SELECTORS_TO_SHOW: number = 99;
 
 @Component({
   selector: 'demo-chip-select',
-  styleUrls: ['../demo.scss'],
+  styleUrls: ['chip-select-demo.component.scss', '../demo.scss'],
   templateUrl: './chip-select-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
