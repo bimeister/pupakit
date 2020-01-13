@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Ou
 import { ButtonType } from '../button/button.component';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 
-export type InputButtonColor = 'dark' | 'light';
+export type InputButtonColor = 'dark' | 'light' | 'light-blue';
 export type InputButtonSize = 'small' | 'small-to-medium' | 'medium' | 'large';
 @Component({
   selector: 'pupa-icon-button',
