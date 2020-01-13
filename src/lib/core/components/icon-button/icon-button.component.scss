@@ -50,6 +50,11 @@
     color: $color_main-blue;
   }
 
+  &_light-blue {
+    background: $color_light-blue;
+    color: $color_main-blue;
+  }
+
   &_dark {
     background: $color_main-blue;
     color: $color_white;
@@ -75,14 +80,16 @@
   }
 }
 
-.button_light.button_active {
+.button_light.button_active,
+.button_light-blue.button_active {
   background: $color_main-blue;
 }
 .button_dark.button_active {
   background: $color_active-blue;
 }
 
-.button_light:disabled {
+.button_light:disabled,
+.button_light-blue:disabled {
   color: rgba($color_main-blue, 0.3);
   background: $color_white;
 }

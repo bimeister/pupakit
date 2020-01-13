@@ -9,7 +9,7 @@ import combos from 'combos';
 })
 export class IconButtonDemoComponent {
   public readonly combos: any[] = combos({
-    color: ['dark', 'light'],
+    color: ['dark', 'light', 'light-blue'],
     active: [true, false],
     disabled: [true, false],
     size: ['small', 'small-to-medium', 'medium', 'large'],
