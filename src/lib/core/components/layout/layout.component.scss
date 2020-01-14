@@ -5,7 +5,7 @@
 }
 
 .layout-wrapper {
-  all: unset;
+  block-size: border-box;
   display: block;
   position: fixed;
   top: 0;

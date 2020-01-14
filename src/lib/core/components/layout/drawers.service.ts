@@ -1,5 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 export type DrawerFloat = 'left' | 'right';
@@ -10,17 +10,14 @@ export interface LayoutDrawerConfiguration {
   float?: DrawerFloat;
   zIndex?: number;
   closeButton?: boolean;
+  canPadding?: boolean;
+  destroyContentOnClose?: boolean;
   data?: Record<string, any>;
 }
 
-export interface ComponentDrawerData {
+export interface ComponentDrawerData extends LayoutDrawerConfiguration {
   id: string;
   componentType: any;
-  enableOverlay?: boolean;
-  clickableOverlay?: boolean;
-  float?: DrawerFloat;
-  zIndex?: number;
-  closeButton?: boolean;
   injector?: Injector;
 }
 
@@ -32,6 +29,10 @@ export class DrawersService {
     Map<string, ComponentDrawerData>
   >(new Map<string, ComponentDrawerData>());
 
+  public readonly closeDrawerById$: Subject<string> = new Subject<string>();
+
+  public readonly openDrawerById$: Subject<string> = new Subject<string>();
+
   private index: number = 0;
 
   private readonly defaultConfiguration: LayoutDrawerConfiguration = {
@@ -40,6 +41,8 @@ export class DrawersService {
     float: 'right',
     zIndex: 0,
     closeButton: false,
+    canPadding: true,
+    destroyContentOnClose: true,
     data: null
   };
 
@@ -72,6 +75,14 @@ export class DrawersService {
   }
 
   public closeDrawerById(drawerId: string): void {
+    this.closeDrawerById$.next(drawerId);
+  }
+
+  public openDrawerById(drawerId: string): void {
+    this.openDrawerById$.next(drawerId);
+  }
+
+  public destroyDrawerById(drawerId: string): void {
     this.componentDrawersData$.pipe(take(1)).subscribe((collection: Map<string, ComponentDrawerData>) => {
       collection.delete(drawerId);
       this.componentDrawersData$.next(collection);

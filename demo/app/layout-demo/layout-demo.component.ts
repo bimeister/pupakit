@@ -14,6 +14,8 @@ import { LoaderDemoComponent } from '../loader-demo/loader-demo.component';
 export class LayoutDemoComponent {
   private readonly step: number = 0.25;
 
+  private drawerId: string = null;
+
   constructor(
     private readonly drawersService: DrawersService,
     private readonly alertsService: AlertsService,
@@ -38,6 +40,27 @@ export class LayoutDemoComponent {
       float
     };
     this.drawersService.create(LoaderDemoComponent, configuration).subscribe();
+  }
+
+  public openDrawerNotDestroy(mode: boolean): void {
+    if (this.drawerId === null && mode) {
+      const configuration: LayoutDrawerConfiguration = {
+        enableOverlay: false,
+        clickableOverlay: false,
+        destroyContentOnClose: false,
+        closeButton: true
+      };
+      this.drawersService.create(LoaderDemoComponent, configuration).subscribe((drawerId: string) => {
+        this.drawerId = drawerId;
+      });
+      return;
+    }
+    if (!mode) {
+      this.drawersService.closeDrawerById(this.drawerId);
+      return;
+    }
+    this.drawersService.openDrawerById(this.drawerId);
+    return;
   }
 
   public openModalWindow(index: number = 0): void {

@@ -4,5 +4,7 @@
   [@drawerExpanded]="isVisible"
   (@drawerExpanded.done)="processAnimationEnd($event)"
 >
-  <ng-content></ng-content>
+  <div class="wrapper" [class.padding]="canPadding">
+    <ng-content></ng-content>
+  </div>
 </section>

@@ -15,12 +15,19 @@
   overflow: hidden;
   pointer-events: auto;
   box-shadow: $box-shadow_hover;
-  max-width: 100%;
-  max-height: 100%;
   &_right {
     right: 0;
   }
   &_left {
     left: 0;
+  }
+  & .wrapper {
+    display: block;
+    width: fit-content;
+    height: 100%;
+    overflow: hidden;
+    &.padding {
+      padding: 0 rems(1);
+    }
   }
 }
