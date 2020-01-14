@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { isNullOrUndefined } from 'src/lib/helpers/is-null-or-undefined.helper';
 
 import { ComponentDrawerData, DrawersService } from '../drawers.service';
+import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-layout-drawer',
