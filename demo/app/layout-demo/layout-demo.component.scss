@@ -1,0 +1,19 @@
+@import 'variables';
+
+.wrapper {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+h3 {
+  text-align: center;
+}
+
+.link {
+  display: block;
+  cursor: pointer;
+  text-decoration: underline;
+  margin-top: rems(1);
+  text-align: center;
+}

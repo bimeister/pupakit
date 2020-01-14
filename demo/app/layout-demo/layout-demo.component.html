@@ -1,0 +1,38 @@
+<h1>
+  Layout
+</h1>
+<pupa-layout>
+  <div class="wrapper">
+    <div>
+      <p>
+        Теперь становится очевидно, что сложившаяся структура организации в значительной степени обусловливает создание
+        форм воздействия. Теперь становится очевидно, что постоянный количественный рост и сфера нашей активности
+        требует определения и уточнения идей по выходу из сложившейся ситуации. Тем не менее стоит отметить так же, что
+        постоянный количественный рост и сфера нашей активности позволяет выполнить важные задания по разработке
+        позиций, занимаемых участниками в отношении поставленных задач. Не следует, однако, забывать, что новая модель
+        организационной деятельности ни коим образом не противоречит нашей теории, а скорее наоборот, способствует
+        улучшению направлений прогрессивного развития.
+      </p>
+    </div>
+    <h3>Drawers</h3>
+    <div class="link" (click)="openDrawer('left')">Open drawer left</div>
+    <div class="link" (click)="openDrawer('right')">Open drawer right</div>
+    <div class="link" (click)="openDrawerAndOverlay('left')">Open drawer and overlay left</div>
+    <div class="link" (click)="openDrawerAndOverlay('right')">Open drawer and overlay right</div>
+    <h3>Modal window</h3>
+    <div class="link" (click)="openModalWindow(0)">Open modal window default</div>
+    <div class="link" (click)="openModalWindow(1)">Open modal window + title</div>
+    <div class="link" (click)="openModalWindow(2)">Open modal window + closeButton</div>
+    <div class="link" (click)="openModalWindow(3)">Open modal window + title + closeButton</div>
+    <div class="link" (click)="openModalWindow(4)">Open modal window default - padding</div>
+    <div class="link" (click)="openModalWindow(5)">Open modal window + title + closeButton - padding</div>
+    <div class="link" (click)="openModalWindow(6)">Open modal window default - overlay + move + closeButton</div>
+    <div class="link" (click)="openModalWindow(7)">Open modal window small default - overlay + move + closeButton</div>
+    <div class="link" (click)="openModalWindow(8)">Open modal window large default - overlay + move + closeButton</div>
+    <h3>Alerts</h3>
+    <div class="link" (click)="addAlert()">Add alert</div>
+    <h3>Context menu</h3>
+    <div class="link">Click right mouse button</div>
+    <a class="link" href="/">Exit</a>
+  </div>
+</pupa-layout>

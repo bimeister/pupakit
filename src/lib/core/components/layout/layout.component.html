@@ -1,0 +1,24 @@
+<div class="layout-wrapper content">
+  <ng-content></ng-content>
+</div>
+<div class="layout-wrapper drawers">
+  <pupa-layout-drawer
+    *ngFor="let drawer of componentDrawersList$ | async; trackBy: trackByDrawerId"
+    [componentDrawerData]="drawer"
+  ></pupa-layout-drawer>
+</div>
+<div class="layout-wrapper modal-windows">
+  <pupa-layout-modal-window
+    *ngFor="let modalWindowData of modalWindowList$ | async; trackBy: trackByModalWindowId"
+    [modalWindowData]="modalWindowData"
+  ></pupa-layout-modal-window>
+</div>
+<div class="layout-wrapper alerts">
+  <div class="alerts-wrapper">
+    <pupa-layout-alert
+      *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId"
+      [alert]="alert"
+    ></pupa-layout-alert>
+  </div>
+</div>
+<div class="layout-wrapper context-menus"></div>

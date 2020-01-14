@@ -4,17 +4,20 @@
   display: contents;
 }
 
-.overlay {
+.layout-drawer {
   display: block;
   position: absolute;
+  pointer-events: none;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   z-index: 0;
-  background: $color_dark-overlay;
-  pointer-events: auto;
-  &.clickable {
-    cursor: pointer;
-  }
+}
+
+.close-button {
+  position: absolute;
+  z-index: 9000;
+  top: rems(0.5);
+  right: rems(0.5);
 }

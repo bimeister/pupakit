@@ -1,0 +1,68 @@
+@import 'variables';
+
+:host {
+  display: contents;
+}
+
+.alert {
+  display: flex;
+  position: relative;
+  pointer-events: auto;
+  border: 1px solid $color_alert-info;
+  border-radius: rems(0.3);
+  margin-bottom: rems(0.5);
+  color: $color_alert-text;
+  width: fit-content;
+  overflow: hidden;
+  & .background {
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    background-color: $color_alert-info;
+  }
+  & .alert-content {
+    display: flex;
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    padding: rems(0.3) rems(0.5);
+    & .text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    & .close-button {
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      width: rems(1.2);
+      height: rems(1.2);
+      margin-left: rems(0.3);
+      & .icon {
+        width: rems(1);
+        height: rems(1);
+      }
+    }
+  }
+  &.success {
+    border: 1px solid $color_alert-success;
+    & .background {
+      background-color: $color_alert-success;
+    }
+  }
+  &.warning {
+    border: 1px solid $color_alert-warning;
+    & .background {
+      background-color: $color_alert-warning;
+    }
+  }
+  &.danger {
+    border: 1px solid $color_alert-danger;
+    & .background {
+      background-color: $color_alert-danger;
+    }
+  }
+}
