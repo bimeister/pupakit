@@ -1,0 +1,110 @@
+@import 'variables';
+
+:host {
+  display: contents;
+}
+
+.layout-modal-window {
+  display: block;
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.modal-wrapper {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.modal-window {
+  display: flex;
+  max-height: 90%;
+  flex-direction: column;
+  overflow: hidden;
+  pointer-events: auto;
+  background-color: $color_white;
+  border-radius: rems(0.9);
+  box-shadow: $box-shadow_hover;
+  box-sizing: border-box;
+  &.large {
+    width: rems(70);
+    min-width: rems(70);
+    max-width: rems(70);
+  }
+  &.medium {
+    width: rems(50);
+    min-width: rems(50);
+    max-width: rems(50);
+  }
+  &.small {
+    width: rems(25);
+    min-width: rems(25);
+    max-width: rems(25);
+  }
+  & .title-block {
+    display: flex;
+    position: relative;
+    width: calc(100% - #{rems(2)});
+    height: rems(1.8);
+    min-height: rems(1.8);
+    max-height: rems(1.8);
+    align-items: center;
+    align-content: space-between;
+    padding: rems(1);
+    & .move-block {
+      cursor: move;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: rems(2);
+      z-index: 10;
+    }
+    & .title {
+      display: block;
+      flex: auto;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: rems(1.5);
+      &.margin {
+        margin-right: rems(2);
+      }
+    }
+    & .close {
+      display: block;
+      position: absolute;
+      width: rems(1.8);
+      height: rems(1.8);
+      z-index: 20;
+      top: rems(1);
+      right: rems(1);
+    }
+  }
+  & .content-block {
+    display: flex;
+    flex: auto;
+    min-height: rems(3);
+    overflow: hidden;
+    overflow-y: auto;
+    &.title-padding {
+      margin: 0 rems(1) rems(1) rems(1);
+    }
+    &.all-padding {
+      margin: rems(1);
+    }
+  }
+}

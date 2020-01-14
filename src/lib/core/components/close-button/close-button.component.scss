@@ -1,0 +1,30 @@
+@import 'variables';
+
+:host {
+  display: block;
+  width: rems(1.8);
+  height: rems(1.8);
+}
+
+.close-button {
+  display: flex;
+  border: 1px solid $color_cadet-blue;
+  border-radius: rems(0.3);
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  width: rems(1.8);
+  height: rems(1.8);
+  outline: none;
+  margin: 0;
+  padding: 0;
+  background-color: $color_white;
+  &:hover {
+    background-color: $color_light-blue;
+  }
+  & .icon {
+    width: rems(1.2);
+    height: rems(1.2);
+    color: $color_cadet-blue;
+  }
+}

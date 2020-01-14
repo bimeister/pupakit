@@ -1,1 +1,1 @@
-<div class="overlay" *ngIf="isVisible"></div>
+<div class="overlay" [@showOverlay]="isVisible" [class.clickable]="clickable" (click)="clickOverlay($event)"></div>

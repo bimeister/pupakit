@@ -9,6 +9,7 @@ import { ChipSelectComponent } from './components/chip-select/chip-select.compon
 import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-item.component';
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 import { ChipComponent } from './components/chip/chip.component';
+import { CloseButtonComponent } from './components/close-button/close-button.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
 import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
 import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
@@ -22,6 +23,10 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
+import { LayoutAlertComponent } from './components/layout/layout-alert/layout-alert.component';
+import { LayoutDrawerComponent } from './components/layout/layout-drawer/layout-drawer.component';
+import { LayoutModalWindowComponent } from './components/layout/layout-modal-window/layout-modal-window.component';
+import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
@@ -76,7 +81,12 @@ const CORE_COMPONENTS: any[] = [
   RadioGroupComponent,
   OverlayComponent,
   ChipTabsComponent,
-  ChipTabsItemComponent
+  ChipTabsItemComponent,
+  LayoutComponent,
+  LayoutDrawerComponent,
+  CloseButtonComponent,
+  LayoutAlertComponent,
+  LayoutModalWindowComponent
 ];
 
 @NgModule({

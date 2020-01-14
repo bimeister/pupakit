@@ -23,6 +23,7 @@ import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
+import { LayoutDemoComponent } from './layout-demo/layout-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
@@ -76,7 +77,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TextareaDemoComponent,
     TabsDrawerDemoComponent,
     RadioButtonDemoComponent,
-    ChipTabsDemoComponent
+    ChipTabsDemoComponent,
+    LayoutDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -179,6 +181,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'textarea', component: TextareaDemoComponent },
       { path: 'tabs-drawer', component: TabsDrawerDemoComponent },
       { path: 'radio', component: RadioButtonDemoComponent },
+      { path: 'layout', component: LayoutDemoComponent },
       {
         path: '',
         component: AppComponent

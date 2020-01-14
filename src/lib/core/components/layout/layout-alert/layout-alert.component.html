@@ -1,0 +1,11 @@
+<div class="alert" [ngClass]="alert.type" [@openAlert]="isVisible" (@openAlert.done)="processAnimationEnd($event)">
+  <div class="background"></div>
+  <div class="alert-content">
+    <div class="text">
+      {{ alert.text }}
+    </div>
+    <div *ngIf="alert.needClosed" class="close-button" (click)="close($event)">
+      <ion-icon class="icon" name="close"></ion-icon>
+    </div>
+  </div>
+</div>
