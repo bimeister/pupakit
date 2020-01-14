@@ -24,6 +24,9 @@ export class DrawerComponent {
   @Input()
   public float: DrawerFloat = 'right';
 
+  @Input()
+  public canPadding: boolean = true;
+
   @Output()
   public animationDone: EventEmitter<boolean> = new EventEmitter<boolean>();
 

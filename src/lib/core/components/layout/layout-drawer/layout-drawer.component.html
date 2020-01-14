@@ -5,7 +5,12 @@
     (onclick)="processOverlayClick()"
     [isVisible]="drawerExpanded"
   ></pupa-overlay>
-  <pupa-drawer [isVisible]="drawerExpanded" [float]="componentDrawerData.float" (animationDone)="animationDone($event)">
+  <pupa-drawer
+    [isVisible]="drawerExpanded"
+    [canPadding]="componentDrawerData.canPadding"
+    [float]="componentDrawerData.float"
+    (animationDone)="animationDone($event)"
+  >
     <pupa-close-button
       *ngIf="componentDrawerData.closeButton"
       class="close-button"
