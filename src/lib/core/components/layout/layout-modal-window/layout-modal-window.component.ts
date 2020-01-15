@@ -51,9 +51,9 @@ export class LayoutModalWindowComponent implements AfterViewInit {
   @ViewChild('modalWindowWrapper', { static: true })
   public modalWindowWrapper: ElementRef<HTMLDivElement>;
 
-  public windowOpen: string = 'false';
+  public isOpened: boolean = false;
 
-  private start: boolean = true;
+  private isStarted: boolean = true;
 
   private readonly deltaPosition: MouseDeltaPosition = {
     pageX: 0,
@@ -74,7 +74,7 @@ export class LayoutModalWindowComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.windowOpen = 'true';
+    this.isOpened = true;
     this.changeDetector.detectChanges();
   }
 
@@ -102,13 +102,13 @@ export class LayoutModalWindowComponent implements AfterViewInit {
   }
 
   public closeWindow(): void {
-    this.start = false;
-    this.windowOpen = 'false';
+    this.isStarted = false;
+    this.isOpened = false;
     this.changeDetector.detectChanges();
   }
 
   public animationDone(animationDone: boolean): void {
-    if (!animationDone || this.start) {
+    if (!animationDone || this.isStarted) {
       return;
     }
     this.modalWindowService.closeModalWindowById(this.modalWindowData.id);
@@ -144,20 +144,8 @@ export class LayoutModalWindowComponent implements AfterViewInit {
     if (window.getSelection) {
       window.getSelection().removeAllRanges();
     }
-    let newPageX: number = event.pageX;
-    let newPageY: number = event.pageY;
-    if (newPageX < this.deltaPosition.minX) {
-      newPageX = this.deltaPosition.minX;
-    }
-    if (newPageX > this.deltaPosition.maxX) {
-      newPageX = this.deltaPosition.maxX;
-    }
-    if (newPageY < this.deltaPosition.minY) {
-      newPageY = this.deltaPosition.minY;
-    }
-    if (newPageY > this.deltaPosition.maxY) {
-      newPageY = this.deltaPosition.maxY;
-    }
+    const newPageX: number = this.getNewPositionX(event.pageX, this.deltaPosition.minX, this.deltaPosition.maxX);
+    const newPageY: number = this.getNewPositionX(event.pageY, this.deltaPosition.minY, this.deltaPosition.maxY);
     const deltaX: number = newPageX - this.deltaPosition.pageX;
     const deltaY: number = newPageY - this.deltaPosition.pageY;
     this.deltaPosition.pageX = newPageX;
@@ -175,5 +163,9 @@ export class LayoutModalWindowComponent implements AfterViewInit {
     event.stopPropagation();
     this.document.removeEventListener('mousemove', this.onMouseMove, true);
     this.document.removeEventListener('mouseup', this.onMouseUp, true);
+  };
+
+  private readonly getNewPositionX = (position: number, min: number, max: number): number => {
+    return position < min ? min : position > max ? max : position;
   };
 }

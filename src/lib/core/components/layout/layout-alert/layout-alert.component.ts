@@ -22,14 +22,14 @@ export class LayoutAlertComponent implements AfterContentInit {
   @Input()
   public readonly alert: Alert;
 
-  public isVisible: string = 'false';
+  public isVisible: boolean = false;
 
   private readonly lifetime: number = 3000;
 
   constructor(private readonly alertsService: AlertsService, private readonly changeDetector: ChangeDetectorRef) {}
 
   public ngAfterContentInit(): void {
-    this.isVisible = 'true';
+    this.isVisible = true;
     this.changeDetector.detectChanges();
     if (!isNullOrUndefined(this.alert.needClosed) && this.alert.needClosed) {
       return;
@@ -45,7 +45,7 @@ export class LayoutAlertComponent implements AfterContentInit {
   }
 
   public closeAlert(): void {
-    this.isVisible = 'false';
+    this.isVisible = false;
     this.changeDetector.detectChanges();
   }
 

@@ -3,20 +3,20 @@
     *ngIf="modalWindowData.enableOverlay"
     [clickable]="modalWindowData.clickableOverlay"
     (onclick)="processOverlayClick()"
-    [isVisible]="windowOpen"
+    [isVisible]="isOpened"
   ></pupa-overlay>
   <div class="modal-wrapper">
     <div
       #modalWindowBlock
       class="modal-window"
       [ngClass]="modalWindowData.size"
-      [@openWindow]="windowOpen"
+      [@openWindow]="isOpened | ToString"
       (@openWindow.done)="processAnimationEnd($event)"
     >
       <div *ngIf="needTitleBlock" class="title-block">
         <div *ngIf="modalWindowData.canMove" class="move-block" (mousedown)="moveInitialization($event)"></div>
         <div *ngIf="modalWindowData.title" class="title" [class.margin]="modalWindowData.closeButton">
-          {{ modalWindowData.title }} zfgsdfgsdfg sdfgsdfg sdfgsdfg sdfgsdfg sdfgsdfgsdfg sdfgsdfg sdfgsdfg
+          {{ modalWindowData.title }}
         </div>
         <pupa-close-button
           *ngIf="modalWindowData.closeButton"

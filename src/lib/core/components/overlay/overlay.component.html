@@ -1,1 +1,6 @@
-<div class="overlay" [@showOverlay]="isVisible" [class.clickable]="clickable" (click)="clickOverlay($event)"></div>
+<div
+  class="overlay"
+  [@showOverlay]="isVisible | ToString"
+  [class.clickable]="clickable"
+  (click)="clickOverlay($event)"
+></div>

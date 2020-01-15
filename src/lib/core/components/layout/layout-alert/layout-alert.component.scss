@@ -1,5 +1,12 @@
 @import 'variables';
 
+// colors alerts
+$color_alert-info: #b4dff8;
+$color_alert-success: #b4f8d8;
+$color_alert-warning: #f8ecb4;
+$color_alert-danger: #f8b5b4;
+$color_alert-text: #575757;
+
 :host {
   display: contents;
 }

@@ -1,4 +1,9 @@
-<div class="alert" [ngClass]="alert.type" [@openAlert]="isVisible" (@openAlert.done)="processAnimationEnd($event)">
+<div
+  class="alert"
+  [ngClass]="alert.type"
+  [@openAlert]="isVisible | ToString"
+  (@openAlert.done)="processAnimationEnd($event)"
+>
   <div class="background"></div>
   <div class="alert-content">
     <div class="text">

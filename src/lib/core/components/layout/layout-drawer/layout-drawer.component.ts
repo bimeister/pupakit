@@ -1,6 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
 
 import { ComponentDrawerData, DrawersService } from '../drawers.service';
 import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
@@ -15,38 +14,30 @@ export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
   @Input()
   public readonly componentDrawerData: ComponentDrawerData;
 
-  public drawerExpanded: string = 'false';
+  public drawerExpanded: boolean = false;
 
-  private start: boolean = true;
+  private isStarted: boolean = true;
 
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly drawersService: DrawersService, private readonly changeDetector: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
-    this.drawerExpanded = 'true';
+    this.drawerExpanded = true;
     this.changeDetector.detectChanges();
     if (!this.componentDrawerData.destroyContentOnClose) {
       this.subscription
         .add(
-          this.drawersService.closeDrawerById$
-            .pipe(
-              filter((drawerId: string) => drawerId === this.componentDrawerData.id && this.drawerExpanded === 'true')
-            )
-            .subscribe(() => {
-              this.drawerExpanded = 'false';
-              this.changeDetector.detectChanges();
-            })
+          this.drawersService.isOpen(this.componentDrawerData.id, this.drawerExpanded).subscribe(() => {
+            this.drawerExpanded = true;
+            this.changeDetector.detectChanges();
+          })
         )
         .add(
-          this.drawersService.openDrawerById$
-            .pipe(
-              filter((drawerId: string) => drawerId === this.componentDrawerData.id && this.drawerExpanded === 'false')
-            )
-            .subscribe(() => {
-              this.drawerExpanded = 'true';
-              this.changeDetector.detectChanges();
-            })
+          this.drawersService.isClosed(this.componentDrawerData.id, this.drawerExpanded).subscribe(() => {
+            this.drawerExpanded = false;
+            this.changeDetector.detectChanges();
+          })
         );
     }
   }
@@ -63,13 +54,13 @@ export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
   }
 
   public closeDrawer(): void {
-    this.start = false;
-    this.drawerExpanded = 'false';
+    this.isStarted = false;
+    this.drawerExpanded = false;
     this.changeDetector.detectChanges();
   }
 
   public animationDone(animationDone: boolean): void {
-    if (!animationDone || this.start || !this.componentDrawerData.destroyContentOnClose) {
+    if (!animationDone || this.isStarted || !this.componentDrawerData.destroyContentOnClose) {
       return;
     }
     this.drawersService.destroyDrawerById(this.componentDrawerData.id);
