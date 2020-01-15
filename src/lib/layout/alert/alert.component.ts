@@ -1,8 +1,8 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { Alert, AlertsService } from '../alerts.service';
 import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
+import { Alert, AlertsService } from './../services/alerts.service';
 
 @Component({
   selector: 'pupa-alert',

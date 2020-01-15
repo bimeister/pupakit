@@ -12,8 +12,8 @@ import {
   ViewChild
 } from '@angular/core';
 
-import { ModalWindowData, ModalWindowService } from '../modal-window.service';
 import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
+import { ModalWindowData, ModalWindowService } from './../services/modal-window.service';
 
 interface MouseDeltaPosition {
   pageX: number;

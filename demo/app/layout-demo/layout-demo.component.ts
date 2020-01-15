@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Alert, AlertsService, AlertType } from 'src/lib/layout/alerts.service';
-import { DrawersService, LayoutDrawerConfiguration } from 'src/lib/layout/drawers.service';
-import { ModalWindowConfiguration, ModalWindowService } from 'src/lib/layout/modal-window.service';
+import { Alert, AlertsService, AlertType } from 'src/lib/layout/services/alerts.service';
+import { DrawersService, LayoutDrawerConfiguration } from 'src/lib/layout/services/drawers.service';
+import { ModalWindowConfiguration, ModalWindowService } from 'src/lib/layout/services/modal-window.service';
 
 import { LoaderDemoComponent } from '../loader-demo/loader-demo.component';
 

@@ -2,7 +2,7 @@ import { animate, AnimationEvent, state, style, transition, trigger } from '@ang
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ComponentDrawerData, DrawersService } from '../drawers.service';
+import { ComponentDrawerData, DrawersService } from '../services/drawers.service';
 import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
 
 @Component({
