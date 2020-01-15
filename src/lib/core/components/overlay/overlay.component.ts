@@ -17,7 +17,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class OverlayComponent {
   @Input()
-  public isVisible: string = 'false';
+  public isVisible: boolean = false;
 
   @Input()
   public clickable: boolean = false;

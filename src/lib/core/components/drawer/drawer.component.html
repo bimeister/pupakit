@@ -1,10 +1,10 @@
 <section
   class="drawer"
   [ngClass]="'drawer_' + float"
-  [@drawerExpanded]="isVisible"
+  [@drawerExpanded]="isVisible | ToString"
   (@drawerExpanded.done)="processAnimationEnd($event)"
 >
-  <div class="wrapper" [class.padding]="canPadding">
+  <div class="wrapper" [class.padding]="withPadding">
     <ng-content></ng-content>
   </div>
 </section>

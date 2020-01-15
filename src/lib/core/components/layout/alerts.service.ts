@@ -28,9 +28,9 @@ export class AlertsService {
         const id: string = this.createNewId();
         const copyAlert: Alert = {
           ...alert,
-          id: this.createNewId()
+          id
         };
-        alertCollection.set(copyAlert.id, copyAlert);
+        alertCollection.set(id, copyAlert);
         this.alerts$.next(alertCollection);
         return id;
       })

@@ -1,7 +1,7 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DrawerFloat } from '../layout/drawers.service';
+export type DrawerFloat = 'left' | 'right';
 
 @Component({
   selector: 'pupa-drawer',
@@ -19,13 +19,13 @@ import { DrawerFloat } from '../layout/drawers.service';
 })
 export class DrawerComponent {
   @Input()
-  public isVisible: string = 'false';
+  public isVisible: boolean = false;
 
   @Input()
   public float: DrawerFloat = 'right';
 
   @Input()
-  public canPadding: boolean = true;
+  public withPadding: boolean = true;
 
   @Output()
   public animationDone: EventEmitter<boolean> = new EventEmitter<boolean>();

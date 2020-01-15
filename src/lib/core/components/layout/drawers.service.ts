@@ -1,8 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { filter, map, mapTo, take } from 'rxjs/operators';
+import { VOID } from 'src/lib/constants/void.const';
 
-export type DrawerFloat = 'left' | 'right';
+import { DrawerFloat } from '../drawer/drawer.component';
 
 export interface LayoutDrawerConfiguration {
   enableOverlay?: boolean;
@@ -10,7 +11,7 @@ export interface LayoutDrawerConfiguration {
   float?: DrawerFloat;
   zIndex?: number;
   closeButton?: boolean;
-  canPadding?: boolean;
+  withPadding?: boolean;
   destroyContentOnClose?: boolean;
   data?: Record<string, any>;
 }
@@ -29,9 +30,9 @@ export class DrawersService {
     Map<string, ComponentDrawerData>
   >(new Map<string, ComponentDrawerData>());
 
-  public readonly closeDrawerById$: Subject<string> = new Subject<string>();
+  private readonly closeDrawerById$: Subject<string> = new Subject<string>();
 
-  public readonly openDrawerById$: Subject<string> = new Subject<string>();
+  private readonly openDrawerById$: Subject<string> = new Subject<string>();
 
   private index: number = 0;
 
@@ -41,12 +42,26 @@ export class DrawersService {
     float: 'right',
     zIndex: 0,
     closeButton: false,
-    canPadding: true,
+    withPadding: true,
     destroyContentOnClose: true,
     data: null
   };
 
   constructor(private readonly injector: Injector) {}
+
+  public isOpen(componentDrawerId: string, isExpanded: boolean): Observable<void> {
+    return this.openDrawerById$.pipe(
+      filter((drawerId: string) => drawerId === componentDrawerId && isExpanded),
+      mapTo(VOID)
+    );
+  }
+
+  public isClosed(componentDrawerId: string, isExpanded: boolean): Observable<void> {
+    return this.closeDrawerById$.pipe(
+      filter((drawerId: string) => drawerId === componentDrawerId && isExpanded),
+      mapTo(VOID)
+    );
+  }
 
   public create(componentType: any, configuration?: LayoutDrawerConfiguration): Observable<string> {
     return this.componentDrawersData$.pipe(
