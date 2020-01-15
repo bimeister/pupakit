@@ -2,12 +2,12 @@ import { animate, AnimationEvent, state, style, transition, trigger } from '@ang
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
 import { Alert, AlertsService } from '../alerts.service';
-import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
+import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
 
 @Component({
-  selector: 'pupa-layout-alert',
-  templateUrl: './layout-alert.component.html',
-  styleUrls: ['./layout-alert.component.scss'],
+  selector: 'pupa-alert',
+  templateUrl: './alert.component.html',
+  styleUrls: ['./alert.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('openAlert', [
@@ -18,7 +18,7 @@ import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.he
     ])
   ]
 })
-export class LayoutAlertComponent implements AfterContentInit {
+export class AlertComponent implements AfterContentInit {
   @Input()
   public readonly alert: Alert;
 

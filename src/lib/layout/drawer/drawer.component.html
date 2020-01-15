@@ -1,0 +1,25 @@
+<div class="layout-drawer" [id]="componentDrawerData.id" [style.zIndex]="componentDrawerData.zIndex">
+  <pupa-overlay
+    *ngIf="componentDrawerData.enableOverlay"
+    [clickable]="componentDrawerData.clickableOverlay"
+    (onclick)="processOverlayClick()"
+    [isVisible]="isVisible"
+  ></pupa-overlay>
+  <section
+    class="drawer"
+    [ngClass]="'drawer_' + componentDrawerData.float"
+    [@drawerExpanded]="isVisible | ToString"
+    (@drawerExpanded.done)="processAnimationEnd($event)"
+  >
+    <div class="wrapper" [class.padding]="componentDrawerData.withPadding">
+      <pupa-close-button
+        *ngIf="componentDrawerData.closeButton"
+        class="close-button"
+        (onclick)="closeDrawer()"
+      ></pupa-close-button>
+      <ng-container
+        *ngComponentOutlet="componentDrawerData.componentType; injector: componentDrawerData.injector"
+      ></ng-container>
+    </div>
+  </section>
+</div>

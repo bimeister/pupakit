@@ -1,33 +1,39 @@
+@import 'functions';
 @import 'variables';
 
-:host {
-  display: contents;
-}
-
 .drawer {
-  display: block;
-  position: absolute;
-  z-index: 10;
+  all: unset;
+  position: fixed;
   width: fit-content;
+  height: 100vh;
   top: 0;
-  bottom: 0;
   background: $color_white;
-  overflow: hidden;
-  pointer-events: auto;
   box-shadow: $box-shadow_hover;
+  overflow: hidden;
+  z-index: 4501;
+
   &_right {
     right: 0;
   }
+
   &_left {
     left: 0;
   }
-  & .wrapper {
-    display: block;
-    width: fit-content;
-    height: 100%;
-    overflow: hidden;
-    &.padding {
-      padding: 0 rems(1);
-    }
+}
+
+.drawer__content {
+  padding: 0 rems(1.25) rems(1);
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  box-sizing: border-box;
+  position: relative;
+
+  &_hidden {
+    display: none;
+  }
+
+  &_no-padding {
+    padding: 0;
   }
 }
