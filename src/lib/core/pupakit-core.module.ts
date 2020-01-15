@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 
+import { LayoutModule } from '../layout/layout.module';
 import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
@@ -9,10 +10,13 @@ import { ChipSelectComponent } from './components/chip-select/chip-select.compon
 import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-item.component';
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 import { ChipComponent } from './components/chip/chip.component';
-import { CloseButtonComponent } from './components/close-button/close-button.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
-import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
-import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
+import {
+  DatagridColumnSettingsComponent
+} from './components/datagrid-column-settings/datagrid-column-settings.component';
+import {
+  DatagridTemplateRendererComponent
+} from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
@@ -23,13 +27,9 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
-import { LayoutAlertComponent } from './components/layout/layout-alert/layout-alert.component';
-import { LayoutDrawerComponent } from './components/layout/layout-drawer/layout-drawer.component';
-import { LayoutModalWindowComponent } from './components/layout/layout-modal-window/layout-modal-window.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
-import { OverlayComponent } from './components/overlay/overlay.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
 import { RatingComponent } from './components/rating/rating.component';
@@ -79,18 +79,13 @@ const CORE_COMPONENTS: any[] = [
   DropdownItemComponent,
   RadioButtonComponent,
   RadioGroupComponent,
-  OverlayComponent,
   ChipTabsComponent,
   ChipTabsItemComponent,
-  LayoutComponent,
-  LayoutDrawerComponent,
-  CloseButtonComponent,
-  LayoutAlertComponent,
-  LayoutModalWindowComponent
+  LayoutComponent
 ];
 
 @NgModule({
-  imports: [SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
+  imports: [LayoutModule, SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
   declarations: [...CORE_COMPONENTS],
   exports: [SharedModule, ...CORE_COMPONENTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

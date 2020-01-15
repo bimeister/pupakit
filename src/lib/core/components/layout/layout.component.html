@@ -2,23 +2,20 @@
   <ng-content></ng-content>
 </div>
 <div class="layout-wrapper drawers">
-  <pupa-layout-drawer
+  <pupa-drawer-pane
     *ngFor="let drawer of componentDrawersList$ | async; trackBy: trackByDrawerId"
     [componentDrawerData]="drawer"
-  ></pupa-layout-drawer>
+  ></pupa-drawer-pane>
 </div>
 <div class="layout-wrapper modal-windows">
-  <pupa-layout-modal-window
+  <pupa-modal-window
     *ngFor="let modalWindowData of modalWindowList$ | async; trackBy: trackByModalWindowId"
     [modalWindowData]="modalWindowData"
-  ></pupa-layout-modal-window>
+  ></pupa-modal-window>
 </div>
 <div class="layout-wrapper alerts">
   <div class="alerts-wrapper">
-    <pupa-layout-alert
-      *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId"
-      [alert]="alert"
-    ></pupa-layout-alert>
+    <pupa-alert *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId" [alert]="alert"></pupa-alert>
   </div>
 </div>
 <div class="layout-wrapper context-menus"></div>

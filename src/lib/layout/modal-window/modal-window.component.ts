@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 
 import { ModalWindowData, ModalWindowService } from '../modal-window.service';
-import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
+import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
 
 interface MouseDeltaPosition {
   pageX: number;
@@ -28,9 +28,9 @@ interface MouseDeltaPosition {
 
 /** @dynamic */
 @Component({
-  selector: 'pupa-layout-modal-window',
-  templateUrl: './layout-modal-window.component.html',
-  styleUrls: ['./layout-modal-window.component.scss'],
+  selector: 'pupa-modal-window',
+  templateUrl: './modal-window.component.html',
+  styleUrls: ['./modal-window.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('openWindow', [
@@ -41,7 +41,7 @@ interface MouseDeltaPosition {
     ])
   ]
 })
-export class LayoutModalWindowComponent implements AfterViewInit {
+export class ModalWindowComponent implements AfterViewInit {
   @Input()
   public readonly modalWindowData: ModalWindowData;
 

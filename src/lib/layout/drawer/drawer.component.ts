@@ -1,20 +1,29 @@
+import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ComponentDrawerData, DrawersService } from '../drawers.service';
-import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
+import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
 
 @Component({
-  selector: 'pupa-layout-drawer',
-  templateUrl: './layout-drawer.component.html',
-  styleUrls: ['./layout-drawer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  selector: 'pupa-drawer-pane',
+  templateUrl: './drawer.component.html',
+  styleUrls: ['./drawer.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('drawerExpanded', [
+      state('false', style({ width: `0` })),
+      state('true', style({ width: `*` })),
+      transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
+      transition('true => false', animate('0.2s ease-in-out'))
+    ])
+  ]
 })
-export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
+export class DrawerComponent implements AfterViewInit, OnDestroy {
   @Input()
   public readonly componentDrawerData: ComponentDrawerData;
 
-  public drawerExpanded: boolean = false;
+  public isVisible: boolean = false;
 
   private isStarted: boolean = true;
 
@@ -23,19 +32,19 @@ export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly drawersService: DrawersService, private readonly changeDetector: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
-    this.drawerExpanded = true;
+    this.isVisible = true;
     this.changeDetector.detectChanges();
     if (!this.componentDrawerData.destroyContentOnClose) {
       this.subscription
         .add(
-          this.drawersService.isOpen(this.componentDrawerData.id, this.drawerExpanded).subscribe(() => {
-            this.drawerExpanded = true;
+          this.drawersService.isOpen(this.componentDrawerData.id, this.isVisible).subscribe(() => {
+            this.isVisible = true;
             this.changeDetector.detectChanges();
           })
         )
         .add(
-          this.drawersService.isClosed(this.componentDrawerData.id, this.drawerExpanded).subscribe(() => {
-            this.drawerExpanded = false;
+          this.drawersService.isClosed(this.componentDrawerData.id, this.isVisible).subscribe(() => {
+            this.isVisible = false;
             this.changeDetector.detectChanges();
           })
         );
@@ -55,7 +64,7 @@ export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
 
   public closeDrawer(): void {
     this.isStarted = false;
-    this.drawerExpanded = false;
+    this.isVisible = false;
     this.changeDetector.detectChanges();
   }
 
@@ -64,5 +73,13 @@ export class LayoutDrawerComponent implements AfterViewInit, OnDestroy {
       return;
     }
     this.drawersService.destroyDrawerById(this.componentDrawerData.id);
+  }
+
+  public processAnimationEnd(event: AnimationEvent): void {
+    const animationDone: boolean = String(event.toState) === 'false';
+    if (!animationDone) {
+      return;
+    }
+    this.animationDone(animationDone);
   }
 }

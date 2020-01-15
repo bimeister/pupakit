@@ -2,9 +2,9 @@ import { ChangeDetectionStrategy, Component, OnDestroy, TrackByFunction } from '
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Alert, AlertsService } from './alerts.service';
-import { ComponentDrawerData, DrawersService } from './drawers.service';
-import { ModalWindowData, ModalWindowService } from './modal-window.service';
+import { Alert, AlertsService } from '../../../layout/alerts.service';
+import { ComponentDrawerData, DrawersService } from '../../../layout/drawers.service';
+import { ModalWindowData, ModalWindowService } from '../../../layout/modal-window.service';
 
 @Component({
   selector: 'pupa-layout',
