@@ -27,7 +27,6 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
-import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
@@ -80,14 +79,13 @@ const CORE_COMPONENTS: any[] = [
   RadioButtonComponent,
   RadioGroupComponent,
   ChipTabsComponent,
-  ChipTabsItemComponent,
-  LayoutComponent
+  ChipTabsItemComponent
 ];
 
 @NgModule({
-  imports: [LayoutModule, SharedModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
+  imports: [SharedModule, LayoutModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
   declarations: [...CORE_COMPONENTS],
-  exports: [SharedModule, ...CORE_COMPONENTS],
+  exports: [SharedModule, LayoutModule, ...CORE_COMPONENTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class PupakitCore {}

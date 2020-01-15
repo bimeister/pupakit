@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, mapTo, take } from 'rxjs/operators';
-import { VOID } from 'src/lib/constants/void.const';
 
-import { DrawerFloat } from '../core/components/drawer/drawer.component';
+import { VOID } from '../../constants/void.const';
+import { DrawerFloat } from '../../core/components/drawer/drawer.component';
 
 export interface LayoutDrawerConfiguration {
   enableOverlay?: boolean;
