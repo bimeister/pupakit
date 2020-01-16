@@ -72,7 +72,7 @@ export class DrawersService {
         const injector: Injector = Injector.create({
           providers: [
             { provide: 'drawerId', useValue: id },
-            { provide: 'data', useValue: configuration.data }
+            { provide: 'data', useValue: newConfiguration.data }
           ],
           parent: this.injector
         });
