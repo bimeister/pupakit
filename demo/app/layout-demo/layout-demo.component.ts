@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
 import { Alert, AlertsService, AlertType } from 'src/lib/layout/services/alerts.service';
 import { DrawersService, LayoutDrawerConfiguration } from 'src/lib/layout/services/drawers.service';
 import { ModalWindowConfiguration, ModalWindowService } from 'src/lib/layout/services/modal-window.service';
@@ -19,38 +19,48 @@ export class LayoutDemoComponent {
   constructor(
     private readonly drawersService: DrawersService,
     private readonly alertsService: AlertsService,
-    private readonly modalWindowService: ModalWindowService
+    private readonly modalWindowService: ModalWindowService,
+    private readonly componentFactoryResolver: ComponentFactoryResolver
   ) {}
 
   public openDrawer(float: 'left' | 'right'): void {
+    const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
+      LoaderDemoComponent
+    );
     const configuration: LayoutDrawerConfiguration = {
       enableOverlay: false,
       clickableOverlay: true,
       float,
       closeButton: true
     };
-    this.drawersService.create(LoaderDemoComponent, configuration).subscribe();
+    this.drawersService.create(componentFactory, configuration).subscribe();
   }
 
   public openDrawerAndOverlay(float: 'left' | 'right'): void {
+    const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
+      LoaderDemoComponent
+    );
     const configuration: LayoutDrawerConfiguration = {
       enableOverlay: true,
       clickableOverlay: true,
       zIndex: 100,
       float
     };
-    this.drawersService.create(LoaderDemoComponent, configuration).subscribe();
+    this.drawersService.create(componentFactory, configuration).subscribe();
   }
 
   public openDrawerNotDestroy(mode: boolean): void {
     if (this.drawerId === null && mode) {
+      const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
+        LoaderDemoComponent
+      );
       const configuration: LayoutDrawerConfiguration = {
         enableOverlay: false,
         clickableOverlay: false,
         destroyContentOnClose: false,
         closeButton: true
       };
-      this.drawersService.create(LoaderDemoComponent, configuration).subscribe((drawerId: string) => {
+      this.drawersService.create(componentFactory, configuration).subscribe((drawerId: string) => {
         this.drawerId = drawerId;
       });
       return;
@@ -75,7 +85,10 @@ export class LayoutDemoComponent {
       { size: 'large', enableOverlay: false, closeButton: true, canMove: true },
       { size: 'small', enableOverlay: false, closeButton: true, canMove: true }
     ];
-    this.modalWindowService.create(LoaderDemoComponent, configCollection[index]).subscribe();
+    const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
+      LoaderDemoComponent
+    );
+    this.modalWindowService.create(componentFactory, configCollection[index]).subscribe();
   }
 
   public addAlert(): void {

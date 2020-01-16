@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -20,7 +20,7 @@ export interface ModalWindowConfiguration {
 
 export interface ModalWindowData extends ModalWindowConfiguration {
   id: string;
-  componentType: any;
+  componentFactory: ComponentFactory<any>;
   injector?: Injector;
 }
 
@@ -50,7 +50,7 @@ export class ModalWindowService {
 
   constructor(private readonly injector: Injector) {}
 
-  public create(componentType: any, configuration?: ModalWindowConfiguration): Observable<string> {
+  public create(componentFactory: ComponentFactory<any>, configuration?: ModalWindowConfiguration): Observable<string> {
     return this.modalWindowsData$.pipe(
       take(1),
       map((collection: Map<string, ModalWindowData>) => {
@@ -66,7 +66,7 @@ export class ModalWindowService {
         const drawerData: ModalWindowData = {
           ...newConfiguration,
           id,
-          componentType,
+          componentFactory,
           injector
         };
         collection.set(drawerData.id, drawerData);

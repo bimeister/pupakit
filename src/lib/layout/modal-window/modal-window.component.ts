@@ -9,7 +9,8 @@ import {
   Inject,
   Input,
   Renderer2,
-  ViewChild
+  ViewChild,
+  ViewContainerRef
 } from '@angular/core';
 
 import { isNullOrUndefined } from './../../helpers/is-null-or-undefined.helper';
@@ -51,6 +52,9 @@ export class ModalWindowComponent implements AfterViewInit {
   @ViewChild('modalWindowWrapper', { static: true })
   public modalWindowWrapper: ElementRef<HTMLDivElement>;
 
+  @ViewChild('container', { read: ViewContainerRef, static: true })
+  public readonly container: ViewContainerRef;
+
   public isOpened: boolean = false;
 
   private isStarted: boolean = true;
@@ -74,6 +78,7 @@ export class ModalWindowComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
+    this.container.createComponent(this.modalWindowData.componentFactory, 0, this.modalWindowData.injector);
     this.isOpened = true;
     this.changeDetector.detectChanges();
   }
