@@ -25,9 +25,7 @@
         ></pupa-close-button>
       </div>
       <div class="content-block" [class.margin]="modalWindowData.canPadding" [ngClass]="isPadding">
-        <ng-container
-          *ngComponentOutlet="modalWindowData.componentType; injector: modalWindowData.injector"
-        ></ng-container>
+        <ng-container #container></ng-container>
       </div>
     </div>
   </div>

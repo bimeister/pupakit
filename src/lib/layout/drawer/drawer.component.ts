@@ -1,5 +1,14 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnDestroy,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 
 import { ComponentDrawerData, DrawersService } from '../services/drawers.service';
@@ -23,6 +32,9 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
   @Input()
   public readonly componentDrawerData: ComponentDrawerData;
 
+  @ViewChild('container', { read: ViewContainerRef, static: true })
+  public readonly container: ViewContainerRef;
+
   public isVisible: boolean = false;
 
   private isStarted: boolean = true;
@@ -32,6 +44,7 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
   constructor(private readonly drawersService: DrawersService, private readonly changeDetector: ChangeDetectorRef) {}
 
   public ngAfterViewInit(): void {
+    this.container.createComponent(this.componentDrawerData.componentFactory, 0, this.componentDrawerData.injector);
     this.isVisible = true;
     this.changeDetector.detectChanges();
     if (!this.componentDrawerData.destroyContentOnClose) {

@@ -44,6 +44,9 @@
     width: fit-content;
     height: 100%;
     overflow: hidden;
+    &:empty {
+      display: none;
+    }
     &.padding {
       padding: 0 rems(1);
     }

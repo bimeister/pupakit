@@ -1,4 +1,4 @@
-import { Injectable, Injector } from '@angular/core';
+import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, mapTo, take } from 'rxjs/operators';
 
@@ -18,7 +18,7 @@ export interface LayoutDrawerConfiguration {
 
 export interface ComponentDrawerData extends LayoutDrawerConfiguration {
   id: string;
-  componentType: any;
+  componentFactory: ComponentFactory<any>;
   injector?: Injector;
 }
 
@@ -63,7 +63,10 @@ export class DrawersService {
     );
   }
 
-  public create(componentType: any, configuration?: LayoutDrawerConfiguration): Observable<string> {
+  public create(
+    componentFactory: ComponentFactory<any>,
+    configuration?: LayoutDrawerConfiguration
+  ): Observable<string> {
     return this.componentDrawersData$.pipe(
       take(1),
       map((collection: Map<string, ComponentDrawerData>) => {
@@ -79,7 +82,7 @@ export class DrawersService {
         const drawerData: ComponentDrawerData = {
           ...newConfiguration,
           id,
-          componentType,
+          componentFactory,
           injector
         };
         collection.set(drawerData.id, drawerData);
