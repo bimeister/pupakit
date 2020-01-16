@@ -30,3 +30,5 @@ export { TextareaComponent } from './lib/core/components/textarea/textarea.compo
 export { DatagridTemplateRendererComponent } from './lib/core/components/datagrid-template-renderer/datagrid-template-renderer.component';
 
 export { PupakitCore } from './lib/core/pupakit-core.module';
+
+export * from './lib/layout/services';

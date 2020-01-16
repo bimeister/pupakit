@@ -59,7 +59,7 @@ export class ModalWindowService {
         const injector: Injector = Injector.create({
           providers: [
             { provide: 'modalWindowId', useValue: id },
-            { provide: 'data', useValue: configuration.data }
+            { provide: 'data', useValue: newConfiguration.data }
           ],
           parent: this.injector
         });
