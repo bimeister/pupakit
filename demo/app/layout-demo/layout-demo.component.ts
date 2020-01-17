@@ -16,6 +16,8 @@ export class LayoutDemoComponent {
 
   private drawerId: string = null;
 
+  private readonly drawerIdLists: string[] = [];
+
   constructor(
     private readonly drawersService: DrawersService,
     private readonly alertsService: AlertsService,
@@ -33,7 +35,15 @@ export class LayoutDemoComponent {
       float,
       closeButton: true
     };
-    this.drawersService.create(componentFactory, configuration).subscribe();
+    this.drawersService.create(componentFactory, configuration).subscribe((id: string) => this.drawerIdLists.push(id));
+  }
+
+  public closeLastDrawer(): void {
+    if (Object.is(this.drawerIdLists.length, 0)) {
+      return;
+    }
+    const id: string = this.drawerIdLists.pop();
+    this.drawersService.closeDrawerById(id);
   }
 
   public openDrawerAndOverlay(float: 'left' | 'right'): void {
