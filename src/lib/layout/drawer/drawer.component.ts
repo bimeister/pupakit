@@ -47,21 +47,19 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
     this.container.createComponent(this.componentDrawerData.componentFactory, 0, this.componentDrawerData.injector);
     this.isVisible = true;
     this.changeDetector.detectChanges();
-    if (!this.componentDrawerData.destroyContentOnClose) {
-      this.subscription
-        .add(
-          this.drawersService.isOpen(this.componentDrawerData.id, this.isVisible).subscribe(() => {
-            this.isVisible = true;
-            this.changeDetector.detectChanges();
-          })
-        )
-        .add(
-          this.drawersService.isClosed(this.componentDrawerData.id, this.isVisible).subscribe(() => {
-            this.isVisible = false;
-            this.changeDetector.detectChanges();
-          })
-        );
-    }
+    this.subscription
+      .add(
+        this.drawersService.isOpen(this.componentDrawerData.id, this.isVisible).subscribe(() => {
+          this.isVisible = true;
+          this.changeDetector.detectChanges();
+        })
+      )
+      .add(
+        this.drawersService.isClosed(this.componentDrawerData.id, this.isVisible).subscribe(() => {
+          this.isVisible = false;
+          this.changeDetector.detectChanges();
+        })
+      );
   }
 
   public ngOnDestroy(): void {
