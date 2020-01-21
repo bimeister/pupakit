@@ -37,8 +37,6 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
 
   public isVisible: boolean = false;
 
-  private isStarted: boolean = true;
-
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly drawersService: DrawersService, private readonly changeDetector: ChangeDetectorRef) {}
@@ -74,13 +72,12 @@ export class DrawerComponent implements AfterViewInit, OnDestroy {
   }
 
   public closeDrawer(): void {
-    this.isStarted = false;
     this.isVisible = false;
     this.changeDetector.detectChanges();
   }
 
   public animationDone(animationDone: boolean): void {
-    if (!animationDone || this.isStarted || !this.componentDrawerData.destroyContentOnClose) {
+    if (!animationDone || !this.componentDrawerData.destroyContentOnClose) {
       return;
     }
     this.drawersService.destroyDrawerById(this.componentDrawerData.id);
