@@ -59,28 +59,37 @@ export class LayoutDemoComponent {
     this.drawersService.create(componentFactory, configuration).subscribe();
   }
 
-  public openDrawerNotDestroy(mode: boolean): void {
-    if (this.drawerId === null && mode) {
-      const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
-        LoaderDemoComponent
-      );
-      const configuration: LayoutDrawerConfiguration = {
-        enableOverlay: false,
-        clickableOverlay: false,
-        destroyContentOnClose: false,
-        closeButton: true
-      };
-      this.drawersService.create(componentFactory, configuration).subscribe((drawerId: string) => {
-        this.drawerId = drawerId;
-      });
+  public openDrawerNotDestroy(mode: number): void {
+    if (mode === 1) {
+      if (this.drawerId === null) {
+        const componentFactory: ComponentFactory<any> = this.componentFactoryResolver.resolveComponentFactory(
+          LoaderDemoComponent
+        );
+        const configuration: LayoutDrawerConfiguration = {
+          enableOverlay: false,
+          clickableOverlay: false,
+          destroyContentOnClose: false,
+          closeButton: true
+        };
+        this.drawersService.create(componentFactory, configuration).subscribe((drawerId: string) => {
+          this.drawerId = drawerId;
+        });
+        return;
+      }
+      this.drawersService.openDrawerById(this.drawerId);
       return;
     }
-    if (!mode) {
+    // tslint:disable-next-line: no-magic-numbers
+    if (mode === 2) {
       this.drawersService.closeDrawerById(this.drawerId);
       return;
     }
-    this.drawersService.openDrawerById(this.drawerId);
-    return;
+    // tslint:disable-next-line: no-magic-numbers
+    if (mode === 3) {
+      this.drawersService.destroyDrawerById(this.drawerId);
+      this.drawerId = null;
+      return;
+    }
   }
 
   public openModalWindow(index: number = 0): void {

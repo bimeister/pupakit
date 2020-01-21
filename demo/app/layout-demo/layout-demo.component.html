@@ -20,8 +20,9 @@
     <div class="link" (click)="closeLastDrawer()">Close last drawer</div>
     <div class="link" (click)="openDrawerAndOverlay('left')">Open drawer and overlay left</div>
     <div class="link" (click)="openDrawerAndOverlay('right')">Open drawer and overlay right</div>
-    <div class="link" (click)="openDrawerNotDestroy(true)">Open drawer not destroy: open</div>
-    <div class="link" (click)="openDrawerNotDestroy(false)">Open drawer not destroy: close</div>
+    <div class="link" (click)="openDrawerNotDestroy(1)">Open drawer not destroy: open</div>
+    <div class="link" (click)="openDrawerNotDestroy(2)">Open drawer not destroy: close</div>
+    <div class="link" (click)="openDrawerNotDestroy(3)">Open drawer not destroy: destroy</div>
     <h3>Modal window</h3>
     <div class="link" (click)="openModalWindow(0)">Open modal window default</div>
     <div class="link" (click)="openModalWindow(1)">Open modal window + title</div>
