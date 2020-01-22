@@ -1,0 +1,46 @@
+.x-publish_job_steps: &publish_job_steps
+  stage: publish
+  when: manual
+  before_script:
+    - docker --version
+    - docker-compose --version
+    - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY
+    - docker-compose --file docker-compose.yml pull pupakit
+  script:
+    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} up --exit-code-from pupakit
+  after_script:
+    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} down
+
+variables:
+  GIT_STRATEGY: clone
+  GIT_CHECKOUT: 'true'
+  GIT_SUBMODULE_STRATEGY: normal
+  IMAGE_TAG: ${DOCKER_REGISTRY}/pupakit/builder:${CI_COMMIT_SHORT_SHA}
+
+stages:
+  - build
+  - publish
+
+build:pupakit:
+  stage: build
+  before_script:
+    - docker --version
+    - docker-compose --version
+  script:
+    - docker-compose --file docker-compose.yml build pupakit
+    - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY
+    - docker-compose --file docker-compose.yml push pupakit
+
+next:
+  <<: *publish_job_steps
+  variables:
+    PUBLISH: 'true'
+    PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
+    PKG_TAG: 'next'
+
+stable:
+  <<: *publish_job_steps
+  variables:
+    PUBLISH: 'true'
+    PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
+    PKG_TAG: 'stable'

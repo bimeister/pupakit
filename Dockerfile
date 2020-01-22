@@ -1,31 +1,16 @@
-FROM node:12-slim as build-frontend
+FROM node:12-slim as build-pupakit
+RUN apt update && apt-get install jq -y
 
-# common npm repo
-RUN npm set registry "http://npm.meistersoft.ru:4873/"
+ARG NODE_OPTIONS=--max_old_space_size=2048
 
-# preinstall npm packages for using docker сache on build
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p /build && cp -a /tmp/node_modules /build
+WORKDIR /docker/build-pupakit
 
-# building app
-WORKDIR /build
-COPY . .
-ARG PKG_VERSION
-ARG REPOSITORY_URL
-ARG REPOSITORY_LOGIN
-ARG REPOSITORY_PASSWORD
-ARG REPOSITORY_EMAIL
-ARG PUSH
-RUN npm cache clean --force
+COPY package-lock.json package.json .npmrc /docker/build-pupakit/
 RUN npm ci
-RUN npm run lint:inspect
-RUN npm run prettier:check
-RUN npm run build
-RUN apt update && \
-  apt install -y jq && \
-  bash change_build_version.sh
-RUN npm install -g npm-cli-login && \
-  npm set registry http://npm.meistersoft.ru:4873 && \
-  npm-cli-login -u ${REPOSITORY_LOGIN} -p ${REPOSITORY_PASSWORD} -e ${REPOSITORY_EMAIL} -r ${REPOSITORY_URL} && \
-  bash npm_push.sh
+
+COPY . /docker/build-pupakit
+RUN npm run lint:inspect \
+ && npm run prettier:check \
+ && npm run build
+
+CMD ./scripts/publish.sh
