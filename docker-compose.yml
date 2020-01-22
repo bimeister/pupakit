@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  pupakit:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    image: '${IMAGE_TAG}'
+    restart: unless-stopped
+    environment:
+      - PKG_VERSION
+      - PKG_TAG
+      - PUBLISH
+      - NPM_REPOSITORY_LOGIN
+      - NPM_REPOSITORY_PASSWORD
+      - NPM_REPOSITORY_EMAIL
+      - NPM_REPOSITORY_URL
