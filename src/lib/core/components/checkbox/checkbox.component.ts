@@ -75,6 +75,11 @@ export class CheckboxComponent implements ControlValueAccessor {
     this.changeDetectorRef.detectChanges();
   }
 
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.detectChanges();
+  }
+
   public changeValue(): void {
     if (this.disabled) {
       return;
