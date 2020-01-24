@@ -13,4 +13,4 @@ RUN npm run lint:inspect \
  && npm run prettier:check \
  && npm run build
 
-CMD ./scripts/publish.sh && echo "container passed" || echo "container failed"
+ENTRYPOINT ["scripts/publish.sh"]
