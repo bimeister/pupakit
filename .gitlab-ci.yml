@@ -4,11 +4,9 @@
   before_script:
     - docker --version
     - docker-compose --version
-    - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY
     - docker-compose --file docker-compose.yml pull pupakit
   script:
-    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} up --exit-code-from pupakit && echo "job
-      passed" || echo "job failed"
+    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} up --exit-code-from pupakit
   after_script:
     - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} down
 

@@ -2,11 +2,10 @@ version: '3.4'
 
 services:
   pupakit:
+    image: '${IMAGE_TAG}'
     build:
       context: ./
       dockerfile: Dockerfile
-    image: '${IMAGE_TAG}'
-    restart: unless-stopped
     environment:
       - PKG_VERSION
       - PKG_TAG
