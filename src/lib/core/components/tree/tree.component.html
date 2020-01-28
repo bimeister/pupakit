@@ -1,0 +1,17 @@
+<cdk-virtual-scroll-viewport itemSize="48" style="height: 100%">
+  <ng-container *cdkVirtualFor="let item of dataOrigin"></ng-container>
+
+  <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl">
+    <cdk-tree-node *cdkTreeNodeDef="let node" class="example-tree-node" cdkTreeNodeToggle cdkTreeNodePadding>
+      <button disabled></button>
+      {{ node?.name }}
+    </cdk-tree-node>
+
+    <cdk-tree-node *cdkTreeNodeDef="let node; when: hasChild" class="example-tree-node" cdkTreeNodePadding>
+      <button cdkTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
+        {{ treeControl.isExpanded(node) ? '1' : '2' }}
+      </button>
+      {{ node?.name }}
+    </cdk-tree-node>
+  </cdk-tree>
+</cdk-virtual-scroll-viewport>

@@ -14,6 +14,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
+import { ChipSelectTreeDemoComponent } from './chip-select-tree-demo/chip-select-tree-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
@@ -66,7 +67,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ChipDemoComponent,
     ChipButtonDemoComponent,
     ChipSelectDemoComponent,
-    TreeDemoComponent,
+    ChipSelectTreeDemoComponent,
     ModalDemoComponent,
     ModalDemoContentComponent,
     DatepickerDemoComponent,
@@ -78,7 +79,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TabsDrawerDemoComponent,
     RadioButtonDemoComponent,
     ChipTabsDemoComponent,
-    LayoutDemoComponent
+    LayoutDemoComponent,
+    TreeDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -95,6 +97,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'spinner',
         component: SpinnerDemoComponent
+      },
+      {
+        path: 'chip-select-tree',
+        component: ChipSelectTreeDemoComponent
       },
       {
         path: 'loader',

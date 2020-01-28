@@ -1,3 +1,5 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CdkTreeModule } from '@angular/cdk/tree';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 
@@ -13,8 +15,12 @@ import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-ite
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
-import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
-import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
+import {
+  DatagridColumnSettingsComponent
+} from './components/datagrid-column-settings/datagrid-column-settings.component';
+import {
+  DatagridTemplateRendererComponent
+} from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';
@@ -37,6 +43,7 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 import { TileComponent } from './components/tile/tile.component';
+import { TreeComponent } from './components/tree/tree.component';
 import { WasherPanelComponent } from './components/washer-panel/washer-panel.component';
 
 const CORE_COMPONENTS: any[] = [
@@ -75,11 +82,18 @@ const CORE_COMPONENTS: any[] = [
   RadioButtonComponent,
   RadioGroupComponent,
   ChipTabsComponent,
-  ChipTabsItemComponent
+  ChipTabsItemComponent,
+  TreeComponent
 ];
 
 @NgModule({
-  imports: [SharedModule, LayoutModule, AgGridModule.withComponents([DatagridTemplateRendererComponent])],
+  imports: [
+    SharedModule,
+    LayoutModule,
+    AgGridModule.withComponents([DatagridTemplateRendererComponent]),
+    ScrollingModule,
+    CdkTreeModule
+  ],
   declarations: [...CORE_COMPONENTS],
   exports: [SharedModule, LayoutModule, ...CORE_COMPONENTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
