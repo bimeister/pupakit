@@ -21,7 +21,7 @@ export { ChipComponent } from './lib/core/components/chip/chip.component';
 export { ChipButtonComponent } from './lib/core/components/chip-button/chip-button.component';
 export { ChipSelectComponent } from './lib/core/components/chip-select/chip-select.component';
 export { ChipSelectTreeComponent } from './lib/core/components/chip-select-tree/chip-select-tree.component';
-export { TreeNodeComponent } from './lib/core/components/chip-select-tree/tree-node/tree-node.component';
+export { ChipSelectTreeNodeComponent } from './lib/core/components/chip-select-tree-node/chip-select-tree-node.component';
 export { ModalComponent } from './lib/core/components/modal/modal.component';
 export { DatepickerComponent } from './lib/core/components/datepicker/datepicker.component';
 export { TabsComponent } from './lib/core/components/tabs/tabs.component';
