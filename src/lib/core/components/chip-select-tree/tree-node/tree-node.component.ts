@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { TreeComponent, TreeItemNode } from '../tree.component';
+import { ChipSelectTreeComponent, TreeItemNode } from '../chip-select-tree.component';
 
 @Component({
   selector: 'pupa-tree-node',
@@ -21,7 +21,10 @@ export class TreeNodeComponent {
 
   private _item: TreeItemNode = null;
 
-  constructor(private readonly treeComponent: TreeComponent, private readonly changeDetector: ChangeDetectorRef) {}
+  constructor(
+    private readonly treeComponent: ChipSelectTreeComponent,
+    private readonly changeDetector: ChangeDetectorRef
+  ) {}
 
   public clickItem(event: MouseEvent): void {
     event.stopPropagation();

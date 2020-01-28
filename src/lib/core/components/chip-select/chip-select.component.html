@@ -24,13 +24,13 @@
     [maxWidth]="maxWidth"
     [positionChange$]="positionChange$"
   >
-    <pupa-tree
+    <pupa-chip-select-tree
       *ngIf="items.length > 0; else loader"
       [items]="items"
       (selectItemKey)="clickDroppableItem($event)"
       [notActiveKeys]="notActiveKeys"
       searchText="Поиск..."
-    ></pupa-tree>
+    ></pupa-chip-select-tree>
   </pupa-droppable>
 </div>
 

@@ -7,11 +7,11 @@
       <div>Не активные пункты с ключами:</div>
       <span *ngFor="let key of notActiveKeys">{{ key }}, </span>
     </div>
-    <pupa-tree
+    <pupa-chip-select-tree
       [items]="items"
       (selectItemKey)="clickItem($event)"
       [notActiveKeys]="notActiveKeys"
       searchText="Поиск в дереве..."
-    ></pupa-tree>
+    ></pupa-chip-select-tree>
   </div>
 </div>
