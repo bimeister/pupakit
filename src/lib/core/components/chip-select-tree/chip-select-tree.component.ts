@@ -23,12 +23,12 @@ export interface TreeItemNode {
 }
 
 @Component({
-  selector: 'pupa-tree',
-  templateUrl: './tree.component.html',
-  styleUrls: ['./tree.component.scss'],
+  selector: 'pupa-chip-select-tree',
+  templateUrl: './chip-select-tree.component.html',
+  styleUrls: ['./chip-select-tree.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeComponent implements OnDestroy {
+export class ChipSelectTreeComponent implements OnDestroy {
   @Input()
   public set items(items: any[]) {
     this.items$.next(items);

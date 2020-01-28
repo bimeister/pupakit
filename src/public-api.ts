@@ -20,8 +20,8 @@ export { WasherPanelComponent } from './lib/core/components/washer-panel/washer-
 export { ChipComponent } from './lib/core/components/chip/chip.component';
 export { ChipButtonComponent } from './lib/core/components/chip-button/chip-button.component';
 export { ChipSelectComponent } from './lib/core/components/chip-select/chip-select.component';
-export { TreeComponent } from './lib/core/components/tree/tree.component';
-export { TreeNodeComponent } from './lib/core/components/tree/tree-node/tree-node.component';
+export { ChipSelectTreeComponent } from './lib/core/components/chip-select-tree/chip-select-tree.component';
+export { TreeNodeComponent } from './lib/core/components/chip-select-tree/tree-node/tree-node.component';
 export { ModalComponent } from './lib/core/components/modal/modal.component';
 export { DatepickerComponent } from './lib/core/components/datepicker/datepicker.component';
 export { TabsComponent } from './lib/core/components/tabs/tabs.component';
