@@ -32,4 +32,5 @@ export * from './switcher';
 export * from './tabs';
 export * from './textarea';
 export * from './tile';
+export * from './tree';
 export * from './washer-panel';

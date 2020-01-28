@@ -30,9 +30,11 @@
     "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect"
   },
   "dependencies": {
-    "zone.js": "~0.9.1",
+    "@angular/cdk": "^8.2.3",
+    "@angular/material": "^8.2.3",
     "ag-grid-angular": "~21.0.0",
-    "ag-grid-community": "~21.0.0"
+    "ag-grid-community": "~21.0.0",
+    "zone.js": "~0.9.1"
   },
   "peerDependencies": {
     "tslib": "^1.9.3",
@@ -54,7 +56,7 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "~8.2.0",
-    "@angular-devkit/build-angular": "~0.803.0",
+    "@angular-devkit/build-angular": "^0.803.23",
     "@angular-devkit/build-ng-packagr": "~0.803.0",
     "@angular/animations": "~8.2.0",
     "@angular/cli": "~8.2.0",
