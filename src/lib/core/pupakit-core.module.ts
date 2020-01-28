@@ -13,12 +13,8 @@ import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-ite
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 import { ChipComponent } from './components/chip/chip.component';
 import { ControlTextComponent } from './components/control-text/control-text.component';
-import {
-  DatagridColumnSettingsComponent
-} from './components/datagrid-column-settings/datagrid-column-settings.component';
-import {
-  DatagridTemplateRendererComponent
-} from './components/datagrid-template-renderer/datagrid-template-renderer.component';
+import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
+import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
 import { DatepickerComponent } from './components/datepicker/datepicker.component';
 import { DaySelectorComponent } from './components/day-selector/day-selector.component';

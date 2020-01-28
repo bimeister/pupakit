@@ -26,7 +26,8 @@
     "prettify": "npm run prettier:format && npm run lint:debug",
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
-    "test:ci": "ng test --configuration=ci"
+    "test:ci": "ng test --configuration=ci",
+    "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect"
   },
   "dependencies": {
     "zone.js": "~0.9.1",
