@@ -6,8 +6,8 @@ import { SharedModule } from '../shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
 import { CheckboxComponent } from './components/checkbox/checkbox.component';
 import { ChipButtonComponent } from './components/chip-button/chip-button.component';
+import { ChipSelectTreeNodeComponent } from './components/chip-select-tree-node/chip-select-tree-node.component';
 import { ChipSelectTreeComponent } from './components/chip-select-tree/chip-select-tree.component';
-import { TreeNodeComponent } from './components/chip-select-tree/tree-node/tree-node.component';
 import { ChipSelectComponent } from './components/chip-select/chip-select.component';
 import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-item.component';
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
@@ -66,7 +66,7 @@ const CORE_COMPONENTS: any[] = [
   ChipButtonComponent,
   ChipSelectComponent,
   ChipSelectTreeComponent,
-  TreeNodeComponent,
+  ChipSelectTreeNodeComponent,
   ModalComponent,
   DatepickerComponent,
   TabsComponent,

@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { ChipSelectTreeComponent, TreeItemNode } from '../chip-select-tree.component';
+import { ChipSelectTreeComponent, TreeItemNode } from '../chip-select-tree/chip-select-tree.component';
 
 @Component({
-  selector: 'pupa-tree-node',
-  templateUrl: './tree-node.component.html',
-  styleUrls: ['./tree-node.component.scss'],
+  selector: 'pupa-chip-select-tree-node',
+  templateUrl: './chip-select-tree-node.component.html',
+  styleUrls: ['./chip-select-tree-node.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeNodeComponent {
+export class ChipSelectTreeNodeComponent {
   @Input()
   public set item(item: TreeItemNode) {
     this._item = item;
