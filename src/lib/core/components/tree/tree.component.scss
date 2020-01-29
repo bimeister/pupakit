@@ -1,5 +1,60 @@
-.example-tree-node {
+@import 'functions';
+@import 'variables';
+
+.viewport {
+  height: 100%;
+}
+
+.tree-node-row {
+  all: unset;
+  display: block;
+  height: rems(1.75);
+}
+
+.tree-node {
+  all: unset;
   display: flex;
-  height: 48px;
+  flex-direction: row;
   align-items: center;
+  justify-content: flex-start;
+  height: rems(1.75);
+  background: $color_white;
+  border-radius: rems(0.875);
+  border-width: 0;
+  box-sizing: border-box;
+  color: $color_main-dark;
+  font-size: rems(0.75);
+  cursor: pointer;
+
+  &__expansion-button {
+    all: unset;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    width: rems(1.75);
+    height: rems(1.75);
+    user-select: none;
+
+    & > button:disabled {
+      opacity: 0;
+    }
+  }
+
+  &:hover {
+    background: $color_light-blue;
+  }
+}
+
+.default {
+  &-expansion-button {
+    all: unset;
+    box-sizing: border-box;
+    appearance: none;
+    display: flex;
+    flex-direction: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
 }

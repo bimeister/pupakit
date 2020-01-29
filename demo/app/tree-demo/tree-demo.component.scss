@@ -1,0 +1,12 @@
+.tree-controls {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background: rgba($color: #ffffff, $alpha: 0.5);
+  padding: 6px;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: space-between;
+}

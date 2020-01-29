@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { data } from 'src/lib/core/components/tree/data';
-import { TreeItem } from 'src/lib/core/components/tree/tree.component';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { filter, map, startWith, withLatestFrom } from 'rxjs/operators';
+import { NestedTreeConfiguration } from 'src/lib/core/components/tree/classes/nested-tree-configuration.class';
+
+import { TreeConfiguration, TreeItem } from '../../../src/lib/core/components/tree/classes';
+import { isNullOrUndefined } from './../../../src/lib/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'demo-tree-demo',
@@ -9,5 +14,46 @@ import { TreeItem } from 'src/lib/core/components/tree/tree.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeDemoComponent {
-  public readonly source: TreeItem[] = data;
+  public readonly depthControl: FormControl = new FormControl(1);
+  // tslint:disable-next-line: no-magic-numbers
+  public readonly sizeControl: FormControl = new FormControl(10);
+
+  private readonly aggregatedRow$: Observable<TreeItem> = this.depthControl.valueChanges.pipe(
+    startWith(this.depthControl.value),
+    // tslint:disable-next-line: no-magic-numbers
+    map((controlValue: string) => Number.parseInt(controlValue, 10)),
+    filter((depth: number) => depth > 0),
+    map((depth: number) =>
+      new Array(depth)
+        .fill(null)
+        .map((_, index: number) => new TreeItem(`level (${index + 1})`, []))
+        .reduce(
+          (previousValue: TreeItem, currentValue: TreeItem) =>
+            isNullOrUndefined(previousValue)
+              ? currentValue
+              : {
+                  ...currentValue,
+                  children: [previousValue]
+                },
+          null
+        )
+    )
+  );
+
+  private readonly allResultRows$: Observable<TreeItem[]> = this.sizeControl.valueChanges.pipe(
+    startWith(this.sizeControl.value),
+    // tslint:disable-next-line: no-magic-numbers
+    map((controlValue: string) => Number.parseInt(controlValue, 10)),
+    filter((depth: number) => depth > 0),
+    withLatestFrom(this.aggregatedRow$),
+    map(([size, aggregatedRow]: [number, TreeItem]) =>
+      new Array(size)
+        .fill(aggregatedRow)
+        .map((rowRootItem: TreeItem, index: number) => ({ ...rowRootItem, name: `${index + 1} – ${rowRootItem.name}` }))
+    )
+  );
+
+  private readonly source$: Observable<TreeItem[]> = this.allResultRows$;
+
+  public readonly treeConfiguration: TreeConfiguration = new NestedTreeConfiguration(this.source$);
 }
