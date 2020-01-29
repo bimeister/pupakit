@@ -1,4 +1,3 @@
-import { MatTreeFlattener } from '@angular/material/tree';
 import { Observable, of } from 'rxjs';
 
 import { FlatDataSource } from './flat-data-source.class';
@@ -7,16 +6,13 @@ import { TreeConfiguration } from './tree-configuration.class';
 import { TreeItem } from './tree-item.class';
 
 export class NestedTreeConfiguration extends TreeConfiguration {
-  private readonly treeFlattener: MatTreeFlattener<TreeItem, FlatTreeItem> = new MatTreeFlattener(
-    NestedTreeConfiguration.toFlatConverter,
-    NestedTreeConfiguration.getLevel,
-    NestedTreeConfiguration.isExpandable,
-    NestedTreeConfiguration.getChildren
-  );
-
   public dataSource: FlatDataSource<TreeItem, FlatTreeItem> = new FlatDataSource<TreeItem, FlatTreeItem>(
     this.treeControl,
-    this.treeFlattener,
+    NestedTreeConfiguration.isExpandable,
+    NestedTreeConfiguration.getLevel,
+    NestedTreeConfiguration.toFlatConverter,
+    NestedTreeConfiguration.getChildren,
+    false,
     []
   );
 

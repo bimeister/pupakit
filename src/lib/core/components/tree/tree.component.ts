@@ -13,7 +13,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem, TreeConfiguration, TreeItem } from './classes';
@@ -33,7 +33,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly configuration$: BehaviorSubject<TreeConfiguration> = new BehaviorSubject<TreeConfiguration>(null);
   private readonly notNilConfiguration$: Observable<TreeConfiguration> = this.configuration$.pipe(
     filter(configuration => !isNullOrUndefined(configuration)),
-    tap(console.log),
     shareReplay(1)
   );
 
