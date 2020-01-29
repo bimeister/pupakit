@@ -1,11 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { filter, map, startWith, withLatestFrom } from 'rxjs/operators';
-import { NestedTreeConfiguration } from 'src/lib/core/components/tree/classes/nested-tree-configuration.class';
 
-import { TreeConfiguration, TreeItem } from '../../../src/lib/core/components/tree/classes';
+import {
+  FlatTreeConfiguration,
+  FlatTreeItem,
+  NestedTreeConfiguration,
+  TreeConfiguration,
+  TreeItem
+} from '../../../src/lib/core/components/tree/classes';
 import { isNullOrUndefined } from './../../../src/lib/helpers/is-null-or-undefined.helper';
+import { flatSource } from './flat-source.const';
 
 @Component({
   selector: 'demo-tree-demo',
@@ -14,6 +20,8 @@ import { isNullOrUndefined } from './../../../src/lib/helpers/is-null-or-undefin
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeDemoComponent {
+  public isFlatTreeUsed: boolean = false;
+
   public readonly depthControl: FormControl = new FormControl(1);
   // tslint:disable-next-line: no-magic-numbers
   public readonly sizeControl: FormControl = new FormControl(10);
@@ -53,7 +61,10 @@ export class TreeDemoComponent {
     )
   );
 
-  private readonly source$: Observable<TreeItem[]> = this.allResultRows$;
+  private readonly nestedSource$: Observable<TreeItem[]> = this.allResultRows$;
 
-  public readonly treeConfiguration: TreeConfiguration = new NestedTreeConfiguration(this.source$);
+  private readonly flatSource$: Observable<FlatTreeItem[]> = of(flatSource);
+
+  public readonly treeConfiguration: TreeConfiguration = new NestedTreeConfiguration(this.nestedSource$);
+  public readonly flatTreeConfiguration: TreeConfiguration = new FlatTreeConfiguration(this.flatSource$);
 }

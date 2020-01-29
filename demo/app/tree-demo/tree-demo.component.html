@@ -5,11 +5,19 @@
 
     <label>Количество элементов</label>
     <pupa-input [size]="'small'" [formControl]="sizeControl" [type]="'number'"></pupa-input>
+
+    <pupa-button [size]="'small'" (onclick)="isFlatTreeUsed = !isFlatTreeUsed">
+      Плоский источник данных {{ isFlatTreeUsed ? 'ON' : 'OFF' }}
+    </pupa-button>
   </div>
 
   <div class="tree-controls__counter">Всего элементов: {{ depthControl.value * sizeControl.value }}</div>
 </div>
 
-<div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'">
+<div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'" *ngIf="!isFlatTreeUsed">
   <pupa-tree [configuration]="treeConfiguration"></pupa-tree>
+</div>
+
+<div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'" *ngIf="isFlatTreeUsed">
+  <pupa-tree [configuration]="flatTreeConfiguration"></pupa-tree>
 </div>
