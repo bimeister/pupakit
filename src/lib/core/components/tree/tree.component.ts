@@ -89,7 +89,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         const expandedTreeItems: FlatTreeItem[] = this.configuration.getExpandedFlatTreeItems();
         const someNodesAreExpanded: boolean = !Object.is(expandedTreeItems.length, 0);
         if (someNodesAreExpanded) {
-          return;
+          // return;
         }
         this.configuration.setSourceData(origin.slice(range.start, range.end));
       });
