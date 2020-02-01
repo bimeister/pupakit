@@ -16,7 +16,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem, TreeConfiguration, TreeItem } from './classes';
@@ -100,15 +100,15 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   private subscribeOnDataExtractionOnScrolling(): void {
     const viewPortRerenderingSubscription: Subscription = this.viewPort.renderedRangeStream
-      .pipe(withLatestFrom(this.dataOrigin$), skipUntil(this.notNilConfiguration$.pipe(take(1))))
-      .subscribe(([range, origin]: [ListRange, TreeItem[]]) => {
+      .pipe(skipUntil(this.notNilConfiguration$.pipe(take(1))))
+      .subscribe((range: ListRange) => {
         const expandedTreeItems: FlatTreeItem[] = this.configuration.getExpandedFlatTreeItems();
         const someNodesAreExpanded: boolean = !Object.is(expandedTreeItems.length, 0);
 
         if (someNodesAreExpanded) {
           // return;
         }
-        this.configuration.setSourceData(origin.slice(range.start, range.end));
+        this.configuration.updateVisibleRange(range);
       });
     this.subscription.add(viewPortRerenderingSubscription);
   }
