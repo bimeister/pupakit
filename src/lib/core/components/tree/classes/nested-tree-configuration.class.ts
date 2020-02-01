@@ -1,12 +1,13 @@
+import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { FlatDataSource } from './flat-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
+import { NestedTreeDataSource } from './nested-tree-data-source.class';
 import { TreeConfiguration } from './tree-configuration.class';
 import { TreeItem } from './tree-item.class';
 
 export class NestedTreeConfiguration extends TreeConfiguration {
-  public dataSource: FlatDataSource<TreeItem, FlatTreeItem> = new FlatDataSource<TreeItem, FlatTreeItem>(
+  public dataSource: NestedTreeDataSource<TreeItem, FlatTreeItem> = new NestedTreeDataSource<TreeItem, FlatTreeItem>(
     this.treeControl,
     NestedTreeConfiguration.isExpandable,
     NestedTreeConfiguration.getLevel,
@@ -16,8 +17,12 @@ export class NestedTreeConfiguration extends TreeConfiguration {
     []
   );
 
-  constructor(protected readonly dataOrigin: Observable<TreeItem[]>) {
-    super(dataOrigin);
+  constructor(
+    public readonly dataOrigin$: Observable<TreeItem[]>,
+    public readonly nodeTemplate: TemplateRef<any> = null,
+    public readonly trackBy: TrackByFunction<FlatTreeItem> = null
+  ) {
+    super(dataOrigin$, nodeTemplate, trackBy);
   }
 
   public setSourceData(data: TreeItem[]): void {
@@ -25,7 +30,7 @@ export class NestedTreeConfiguration extends TreeConfiguration {
   }
 
   public getSourceData(): Observable<TreeItem[]> {
-    return this.dataOrigin;
+    return this.dataOrigin$;
   }
 
   private static toFlatConverter(node: TreeItem, level: number): FlatTreeItem {

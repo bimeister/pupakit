@@ -5,15 +5,18 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  HostListener,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem, TreeConfiguration, TreeItem } from './classes';
@@ -28,29 +31,39 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   @ViewChild('viewPort', { static: false }) private readonly viewPort: CdkVirtualScrollViewport;
+  @ViewChild('defaultNodeTemplate', { static: true }) private readonly defaultNodeTemplate: TemplateRef<any>;
 
   @Input() public readonly configuration: TreeConfiguration;
   private readonly configuration$: BehaviorSubject<TreeConfiguration> = new BehaviorSubject<TreeConfiguration>(null);
-  private readonly notNilConfiguration$: Observable<TreeConfiguration> = this.configuration$.pipe(
+  public readonly notNilConfiguration$: Observable<TreeConfiguration> = this.configuration$.pipe(
     filter(configuration => !isNullOrUndefined(configuration)),
     shareReplay(1)
   );
 
-  public readonly dataSource$: Observable<DataSource<FlatTreeItem>> = this.notNilConfiguration$.pipe(
-    map((configuration: TreeConfiguration) => configuration.dataSource)
+  public readonly nodeTemplate$: Observable<TemplateRef<any>> = this.configuration$.pipe(
+    map((configuration: TreeConfiguration) => configuration.nodeTemplate),
+    map((customNodeTemplate: TemplateRef<any>) =>
+      isNullOrUndefined(customNodeTemplate) ? this.defaultNodeTemplate : customNodeTemplate
+    )
   );
+
+  public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>> = this.configuration$.pipe(
+    map((configuration: TreeConfiguration) => configuration.trackBy)
+  );
+
+  public readonly dataSource$: Observable<DataSource<FlatTreeItem>> = this.notNilConfiguration$
+    .pipe(map((configuration: TreeConfiguration) => configuration.dataSource))
+    // tslint:disable-next-line: no-console
+    .pipe(tap(data => console.log('dataSource', data)));
   public readonly treeControl$: Observable<FlatTreeControl<FlatTreeItem>> = this.notNilConfiguration$.pipe(
     map((configuration: TreeConfiguration) => configuration.treeControl)
   );
-  public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]> = this.notNilConfiguration$.pipe(
-    switchMap((configuration: TreeConfiguration) => configuration.getSourceData())
-  );
-
-  @HostListener('click')
-  public processTreeClick(): void {
+  public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]> = this.notNilConfiguration$
+    .pipe(switchMap((configuration: TreeConfiguration) => configuration.dataOrigin$))
     // tslint:disable-next-line: no-console
-    console.log(this.configuration.dataSource['flattenedData'].value);
-  }
+    .pipe(tap(data => console.log('dataOrigin', data)));
+
+  @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (
@@ -62,6 +75,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       return;
     }
 
+    // tslint:disable-next-line: no-console
+    console.log('configurationChanged');
     this.handleTreeConfiguration(this.configuration);
   }
 
@@ -72,6 +87,10 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public processExpansion(node: FlatTreeItem): void {
+    this.expandedNode.emit(node);
   }
 
   private handleTreeConfiguration(configuration: TreeConfiguration): void {
@@ -88,6 +107,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       .subscribe(([range, origin]: [ListRange, TreeItem[]]) => {
         const expandedTreeItems: FlatTreeItem[] = this.configuration.getExpandedFlatTreeItems();
         const someNodesAreExpanded: boolean = !Object.is(expandedTreeItems.length, 0);
+
         if (someNodesAreExpanded) {
           // return;
         }
