@@ -1,4 +1,4 @@
-import { DataSource } from '@angular/cdk/collections';
+import { DataSource, ListRange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -20,12 +20,11 @@ export abstract class TreeConfiguration {
     public readonly trackBy: TrackByFunction<FlatTreeItem>
   ) {}
 
-  public abstract setSourceData(data: TreeItem[] | FlatTreeItem[]): void;
-  public abstract getSourceData(): Observable<TreeItem[]> | Observable<FlatTreeItem[]>;
-
   public getExpandedFlatTreeItems(): FlatTreeItem[] {
     return this.treeControl.expansionModel.selected;
   }
+
+  public abstract updateVisibleRange(range: ListRange): void;
 
   protected static getLevel(node: FlatTreeItem): number {
     return node.level;

@@ -16,7 +16,7 @@
     "curly": true,
     "cyclomatic-complexity": true,
     "deprecation": {
-      "severity": "error"
+      "severity": "warning"
     },
     "directive-class-suffix": true,
     "directive-selector": [true, "attribute", ["pupa", "demo"], "camelCase"],

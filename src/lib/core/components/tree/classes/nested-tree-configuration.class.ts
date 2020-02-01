@@ -1,3 +1,4 @@
+import { ListRange } from '@angular/cdk/collections';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
@@ -26,16 +27,18 @@ export class NestedTreeConfiguration extends TreeConfiguration {
     super(dataOrigin$, nodeTemplate, trackBy);
   }
 
-  public setSourceData(data: TreeItem[]): void {
-    this.dataSource.setData(data);
-  }
-
-  public getSourceData(): Observable<TreeItem[]> {
-    return this.dataOrigin$;
+  /** @deprecated unready */
+  public updateVisibleRange(_range: ListRange): void {
+    return;
   }
 
   private static toFlatConverter(node: TreeItem, level: number): FlatTreeItem {
-    return new FlatTreeItem(Array.isArray(node.children) && !Object.is(node.children.length, 0), node.name, level);
+    return new FlatTreeItem(
+      Array.isArray(node.children) && !Object.is(node.children.length, 0),
+      node.name,
+      level,
+      node.id
+    );
   }
 
   private static getChildren(node: TreeItem): Observable<TreeItem[]> {
