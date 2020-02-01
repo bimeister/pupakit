@@ -10,7 +10,7 @@
       class="tree-node-row"
     >
       <div class="tree-node">
-        <div class="tree-node__expansion-button" (click)="processExpansion(node)" cdkTreeNodeToggle>
+        <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
           <ng-container
             [ngTemplateOutlet]="defaultExpansionButtonTemplate"
             [ngTemplateOutletContext]="{
@@ -37,7 +37,7 @@
       class="tree-node-row"
     >
       <div class="tree-node">
-        <div class="tree-node__expansion-button" (click)="processExpansion(node)" cdkTreeNodeToggle>
+        <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
           <ng-container
             [ngTemplateOutlet]="defaultExpansionButtonTemplate"
             [ngTemplateOutletContext]="{

@@ -7,7 +7,11 @@ import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeConfiguration } from './tree-configuration.class';
 
 export class FlatTreeConfiguration extends TreeConfiguration {
-  public readonly dataSource: FlatTreeDataSource = new FlatTreeDataSource(this.dataOrigin$, this.treeControl);
+  public readonly dataSource: FlatTreeDataSource = new FlatTreeDataSource(
+    this.dataOrigin$,
+    this.expandedItemsIds$,
+    this.treeControl
+  );
 
   constructor(
     public readonly dataOrigin$: Observable<FlatTreeItem[]>,
