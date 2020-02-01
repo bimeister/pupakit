@@ -16,7 +16,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem, TreeConfiguration, TreeItem } from './classes';
@@ -50,18 +50,15 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>> = this.configuration$.pipe(
     map((configuration: TreeConfiguration) => configuration.trackBy)
   );
-
-  public readonly dataSource$: Observable<DataSource<FlatTreeItem>> = this.notNilConfiguration$
-    .pipe(map((configuration: TreeConfiguration) => configuration.dataSource))
-    // tslint:disable-next-line: no-console
-    .pipe(tap(data => console.log('dataSource', data)));
+  public readonly dataSource$: Observable<DataSource<FlatTreeItem>> = this.notNilConfiguration$.pipe(
+    map((configuration: TreeConfiguration) => configuration.dataSource)
+  );
   public readonly treeControl$: Observable<FlatTreeControl<FlatTreeItem>> = this.notNilConfiguration$.pipe(
     map((configuration: TreeConfiguration) => configuration.treeControl)
   );
-  public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]> = this.notNilConfiguration$
-    .pipe(switchMap((configuration: TreeConfiguration) => configuration.dataOrigin$))
-    // tslint:disable-next-line: no-console
-    .pipe(tap(data => console.log('dataOrigin', data)));
+  public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]> = this.notNilConfiguration$.pipe(
+    switchMap((configuration: TreeConfiguration) => configuration.dataOrigin$)
+  );
 
   @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
 

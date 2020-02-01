@@ -6,6 +6,7 @@ import { NestedTreeDataSource } from './nested-tree-data-source.class';
 import { TreeConfiguration } from './tree-configuration.class';
 import { TreeItem } from './tree-item.class';
 
+/** @deprecated unstable */
 export class NestedTreeConfiguration extends TreeConfiguration {
   public dataSource: NestedTreeDataSource<TreeItem, FlatTreeItem> = new NestedTreeDataSource<TreeItem, FlatTreeItem>(
     this.treeControl,

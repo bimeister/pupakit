@@ -3,6 +3,7 @@ import { FlatTreeControl, TreeControl } from '@angular/cdk/tree';
 import { BehaviorSubject, merge, Observable } from 'rxjs';
 import { map, mapTo, take, tap, withLatestFrom } from 'rxjs/operators';
 
+/** @deprecated unstable */
 export class NestedTreeDataSource<T, F> extends DataSource<F> {
   public readonly flattenedData: BehaviorSubject<F[]> = new BehaviorSubject<F[]>([]);
   public readonly expandedData: BehaviorSubject<F[]> = new BehaviorSubject<F[]>([]);
