@@ -22,8 +22,6 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
         const expandedItemsIds: string[] = this.treeControl.expansionModel.selected.map(
           (item: FlatTreeItem) => item.id
         );
-        // tslint:disable-next-line: no-console
-        console.log(expandedItemsIds);
         return FlatTreeDataSource.filterCollapsedNodes(source, expandedItemsIds);
       }),
       withLatestFrom(this.activeRange$),
@@ -44,27 +42,41 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     if (!Array.isArray(source) || Object.is(source.length, 0)) {
       return [];
     }
-    const sourceSections: FlatTreeItem[][] = FlatTreeDataSource.splitSourceByLeaves(source);
-    const notCollapsedSections: FlatTreeItem[][] = sourceSections.map((section: FlatTreeItem[]) => {
-      const sectionIsEmpty: boolean = Object.is(section.length, 0);
-      if (sectionIsEmpty) {
-        return [];
-      }
+    if (Object.is(source.length, 1)) {
+      return source;
+    }
 
-      const sectionFirstItem: FlatTreeItem = section[0];
-      const sectionFirstItemIsExpanded: boolean =
-        sectionFirstItem.isExpandable && expandedItemsIds.includes(sectionFirstItem.id);
-      // tslint:disable-next-line: no-console
-      console.log(sectionFirstItemIsExpanded, section);
-      return sectionFirstItemIsExpanded ? section : [sectionFirstItem];
-    });
+    const sourceSections: FlatTreeItem[][] = FlatTreeDataSource.splitSourceByLeaves(source);
+    const noEmbeddedArrays: boolean = !sourceSections.some((section: FlatTreeItem[]) => Array.isArray(section));
+    if (noEmbeddedArrays) {
+      return source;
+    }
+
+    const notCollapsedSections: FlatTreeItem[][] = sourceSections
+      .map((section: FlatTreeItem[]) => {
+        const sectionIsEmpty: boolean = Object.is(section.length, 0);
+        if (sectionIsEmpty) {
+          return [];
+        }
+
+        const sectionContainsOnlyOneElement: boolean = Object.is(section.length, 1);
+        if (sectionContainsOnlyOneElement) {
+          return section;
+        }
+
+        const sectionHasNoExpandableItems: boolean = !section.some((item: FlatTreeItem) => item.isExpandable);
+        if (sectionHasNoExpandableItems) {
+          return section;
+        }
+
+        return FlatTreeDataSource.removeInvisibleSectionPart(section, expandedItemsIds);
+      })
+      .filter((section: FlatTreeItem[]) => Array.isArray(section));
+
     return notCollapsedSections.flat();
   }
 
   private static splitSourceByLeaves(source: FlatTreeItem[]): FlatTreeItem[][] {
-    // tslint:disable-next-line: no-console
-    console.log('input', source);
-
     if (!Array.isArray(source) || Object.is(source.length, 0)) {
       return [];
     }
@@ -72,29 +84,56 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       return [source];
     }
 
-    const leaveStartIndexes: Set<number> = new Set<number>();
+    const leafStartIndexes: Set<number> = new Set<number>();
     source.forEach((item: FlatTreeItem, index: number, array: FlatTreeItem[]) => {
       const isFirstItem: boolean = Object.is(index, 0);
       if (isFirstItem) {
-        leaveStartIndexes.add(index);
+        leafStartIndexes.add(index);
         return;
       }
 
       const previousItem: FlatTreeItem = array[index - 1];
       const isAnotherLeaf: boolean = Object.is(item.level, previousItem.level);
       if (isAnotherLeaf) {
-        leaveStartIndexes.add(index);
+        leafStartIndexes.add(index);
         return;
       }
     });
-    const result: FlatTreeItem[][] = Array.from(leaveStartIndexes.values())
+    const result: FlatTreeItem[][] = Array.from(leafStartIndexes.values())
       .map((leaveStartIndex: number, index: number, array: number[]) => {
         const leaveEndIndex: number = array[index + 1];
         return [leaveStartIndex, leaveEndIndex];
       })
       .map(([leaveStartIndex, leaveEndIndex]: [number, number]) => source.slice(leaveStartIndex, leaveEndIndex));
-    // tslint:disable-next-line: no-console
-    console.log('leaf', result);
+
     return result;
+  }
+
+  private static removeInvisibleSectionPart(section: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
+    const sectionIsEmpty: boolean = Object.is(section.length, 0);
+    if (sectionIsEmpty) {
+      return [];
+    }
+
+    const sectionContainsOnlyOneElement: boolean = Object.is(section.length, 1);
+    if (sectionContainsOnlyOneElement) {
+      return section;
+    }
+
+    const indexOfCollapsedElement: number = section.findIndex(
+      (item: FlatTreeItem) => !item.isExpandable || (item.isExpandable && !expandedItemsIds.includes(item.id))
+    );
+
+    const collapsedElementIsNotFound: boolean = Object.is(indexOfCollapsedElement, -1);
+    if (collapsedElementIsNotFound) {
+      return section;
+    }
+
+    const collapsedElementIsLastInSection: boolean = Object.is(indexOfCollapsedElement, section.length - 1);
+    if (collapsedElementIsLastInSection) {
+      return section;
+    }
+
+    return section.slice(0, indexOfCollapsedElement + 1);
   }
 }
