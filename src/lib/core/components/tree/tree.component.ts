@@ -16,7 +16,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem, TreeConfiguration, TreeItem } from './classes';
@@ -62,6 +62,10 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
 
+  constructor() {
+    this.subscription.add(this.emitExpandedItemOnAction());
+  }
+
   public ngOnChanges(changes: SimpleChanges): void {
     if (
       isNullOrUndefined(changes) ||
@@ -72,8 +76,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       return;
     }
 
-    // tslint:disable-next-line: no-console
-    console.log('configurationChanged');
     this.handleTreeConfiguration(this.configuration);
   }
 
@@ -86,8 +88,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public processExpansion(node: FlatTreeItem): void {
-    this.expandedNode.emit(node);
+  public toggleExpansion(node: FlatTreeItem): void {
+    this.notNilConfiguration$
+      .pipe(
+        switchMap((configuration: TreeConfiguration) => configuration.expandedItemsIds$),
+        map((expandedItemsIds: string[]) => expandedItemsIds.includes(node.id)),
+        withLatestFrom(this.notNilConfiguration$),
+        take(1)
+      )
+      .subscribe(([isExpanded, configuration]: [boolean, TreeConfiguration]) =>
+        isExpanded ? configuration.markAsCollapsed(node) : configuration.markAsExpanded(node)
+      );
   }
 
   private handleTreeConfiguration(configuration: TreeConfiguration): void {
@@ -111,6 +122,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         this.configuration.updateVisibleRange(range);
       });
     this.subscription.add(viewPortRerenderingSubscription);
+  }
+
+  private emitExpandedItemOnAction(): Subscription {
+    return this.configuration$
+      .pipe(
+        filter((configuration: TreeConfiguration) => !isNullOrUndefined(configuration)),
+        switchMap((configuration: TreeConfiguration) =>
+          configuration.itemToExpand$.pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
+        )
+      )
+      .subscribe(item => this.expandedNode.emit(item));
   }
 
   public readonly hasChild = (_: number, node: FlatTreeItem): boolean => !isNullOrUndefined(node) && node.isExpandable;
