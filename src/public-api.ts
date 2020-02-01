@@ -32,3 +32,4 @@ export { DatagridTemplateRendererComponent } from './lib/core/components/datagri
 export { PupakitCore } from './lib/core/pupakit-core.module';
 
 export * from './lib/layout/services';
+export * from './lib/core/components/tree/classes';

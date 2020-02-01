@@ -1,37 +1,28 @@
-import { Observable, of } from 'rxjs';
+import { DataSource } from '@angular/cdk/collections';
+import { TemplateRef, TrackByFunction } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { FlatDataSource } from './flat-data-source.class';
+import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeConfiguration } from './tree-configuration.class';
 
 export class FlatTreeConfiguration extends TreeConfiguration {
-  public dataSource: FlatDataSource<FlatTreeItem, FlatTreeItem> = new FlatDataSource<FlatTreeItem, FlatTreeItem>(
-    this.treeControl,
-    FlatTreeConfiguration.isExpandable,
-    FlatTreeConfiguration.getLevel,
-    FlatTreeConfiguration.toFlatConverter,
-    FlatTreeConfiguration.getChildren,
-    true,
-    []
-  );
+  public readonly dataSource: DataSource<FlatTreeItem> = new FlatTreeDataSource(this.dataOrigin$);
 
-  constructor(protected readonly dataOrigin: Observable<FlatTreeItem[]>) {
-    super(dataOrigin);
+  constructor(
+    public readonly dataOrigin$: Observable<FlatTreeItem[]>,
+    public readonly nodeTemplate: TemplateRef<any> = null,
+    public readonly trackBy: TrackByFunction<FlatTreeItem> = null
+  ) {
+    super(dataOrigin$, nodeTemplate, trackBy);
   }
 
-  public setSourceData(data: FlatTreeItem[]): void {
-    this.dataSource.setData(data);
+  public setSourceData(_data: FlatTreeItem[]): void {
+    return;
+    // this.dataSource.setData(data);
   }
 
   public getSourceData(): Observable<FlatTreeItem[]> {
-    return this.dataOrigin;
-  }
-
-  private static toFlatConverter(node: FlatTreeItem, _: number): FlatTreeItem {
-    return node;
-  }
-
-  private static getChildren(_: FlatTreeItem): Observable<FlatTreeItem[]> {
-    return of([]);
+    return this.dataOrigin$;
   }
 }

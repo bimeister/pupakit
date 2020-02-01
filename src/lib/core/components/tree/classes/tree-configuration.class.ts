@@ -1,5 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
+import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -13,7 +14,11 @@ export abstract class TreeConfiguration {
 
   public abstract dataSource: DataSource<FlatTreeItem>;
 
-  constructor(protected readonly dataOrigin: Observable<TreeItem[]> | Observable<FlatTreeItem[]>) {}
+  constructor(
+    public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]>,
+    public readonly nodeTemplate: TemplateRef<any>,
+    public readonly trackBy: TrackByFunction<FlatTreeItem>
+  ) {}
 
   public abstract setSourceData(data: TreeItem[] | FlatTreeItem[]): void;
   public abstract getSourceData(): Observable<TreeItem[]> | Observable<FlatTreeItem[]>;
