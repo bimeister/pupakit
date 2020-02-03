@@ -1,16 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import { filter, map, startWith, withLatestFrom } from 'rxjs/operators';
 
-import {
-  FlatTreeConfiguration,
-  FlatTreeItem,
-  NestedTreeConfiguration,
-  TreeConfiguration,
-  TreeItem
-} from '../../../src/lib/core/components/tree/classes';
-import { isNullOrUndefined } from './../../../src/lib/helpers/is-null-or-undefined.helper';
+import { FlatTreeItem, FlatTreeManipulator, TreeManipulator } from '../../../src/lib/core/components/tree/classes';
 import { flatSource } from './flat-source.const';
 
 @Component({
@@ -26,45 +18,7 @@ export class TreeDemoComponent {
   // tslint:disable-next-line: no-magic-numbers
   public readonly sizeControl: FormControl = new FormControl(10);
 
-  private readonly aggregatedRow$: Observable<TreeItem> = this.depthControl.valueChanges.pipe(
-    startWith(this.depthControl.value),
-    // tslint:disable-next-line: no-magic-numbers
-    map((controlValue: string) => Number.parseInt(controlValue, 10)),
-    filter((depth: number) => depth > 0),
-    map((depth: number) =>
-      new Array(depth)
-        .fill(null)
-        .map((_, index: number) => new TreeItem(`level (${index + 1})`, []))
-        .reduce(
-          (previousValue: TreeItem, currentValue: TreeItem) =>
-            isNullOrUndefined(previousValue)
-              ? currentValue
-              : {
-                  ...currentValue,
-                  children: [previousValue]
-                },
-          null
-        )
-    )
-  );
-
-  private readonly allResultRows$: Observable<TreeItem[]> = this.sizeControl.valueChanges.pipe(
-    startWith(this.sizeControl.value),
-    // tslint:disable-next-line: no-magic-numbers
-    map((controlValue: string) => Number.parseInt(controlValue, 10)),
-    filter((depth: number) => depth > 0),
-    withLatestFrom(this.aggregatedRow$),
-    map(([size, aggregatedRow]: [number, TreeItem]) =>
-      new Array(size)
-        .fill(aggregatedRow)
-        .map((rowRootItem: TreeItem, index: number) => ({ ...rowRootItem, name: `${index + 1} – ${rowRootItem.name}` }))
-    )
-  );
-
-  private readonly nestedSource$: Observable<TreeItem[]> = this.allResultRows$;
-
   private readonly flatSource$: Observable<FlatTreeItem[]> = of(flatSource);
 
-  public readonly treeConfiguration: TreeConfiguration = new NestedTreeConfiguration(this.nestedSource$);
-  public readonly flatTreeConfiguration: TreeConfiguration = new FlatTreeConfiguration(this.flatSource$);
+  public readonly flatTreeConfiguration: TreeManipulator = new FlatTreeManipulator(this.flatSource$, of([]), of(null));
 }

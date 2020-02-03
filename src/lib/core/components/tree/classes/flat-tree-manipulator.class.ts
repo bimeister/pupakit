@@ -4,17 +4,19 @@ import { Observable } from 'rxjs';
 
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
-import { TreeConfiguration } from './tree-configuration.class';
+import { TreeManipulator } from './tree-manipulator.class';
 
-export class FlatTreeConfiguration extends TreeConfiguration {
+export class FlatTreeManipulator extends TreeManipulator {
   public readonly dataSource: FlatTreeDataSource = new FlatTreeDataSource(this.dataOrigin$, this.expandedItemsIds$);
 
   constructor(
     public readonly dataOrigin$: Observable<FlatTreeItem[]>,
+    public readonly selectedNodesIds$: Observable<string[]>,
+    public readonly nodeToScrollToId$: Observable<string>,
     public readonly nodeTemplate: TemplateRef<any> = null,
     public readonly trackBy: TrackByFunction<FlatTreeItem> = null
   ) {
-    super(dataOrigin$, nodeTemplate, trackBy);
+    super(dataOrigin$, selectedNodesIds$, nodeToScrollToId$, nodeTemplate, trackBy);
   }
 
   public updateVisibleRange(range: ListRange): void {

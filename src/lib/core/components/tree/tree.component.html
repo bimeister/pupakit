@@ -1,7 +1,12 @@
-<cdk-virtual-scroll-viewport *ngIf="notNilConfiguration$ | async" itemSize="28" class="viewport" #viewPort>
+<cdk-virtual-scroll-viewport *ngIf="notNilManipulator$ | async" itemSize="28" class="viewport" #viewPort>
   <ng-container *cdkVirtualFor="let item of dataOrigin$"></ng-container>
 
-  <cdk-tree [dataSource]="dataSource$ | async" [treeControl]="treeControl$ | async" [trackBy]="trackBy$ | async">
+  <cdk-tree
+    (contextmenu)="$event.preventDefault()"
+    [dataSource]="dataSource$ | async"
+    [treeControl]="treeControl$ | async"
+    [trackBy]="trackBy$ | async"
+  >
     <cdk-tree-node
       *cdkTreeNodeDef="let node; when: hasNoChild"
       [cdkTreeNodeToggleRecursive]="true"
@@ -9,7 +14,7 @@
       cdkTreeNodePadding
       class="tree-node-row"
     >
-      <div class="tree-node">
+      <div class="tree-node" [class.tree-node_selected]="nodeIsSelected(node) | async">
         <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
           <ng-container
             [ngTemplateOutlet]="defaultExpansionButtonTemplate"
@@ -36,7 +41,7 @@
       cdkTreeNodePadding
       class="tree-node-row"
     >
-      <div class="tree-node">
+      <div class="tree-node" [class.tree-node_selected]="nodeIsSelected(node) | async">
         <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
           <ng-container
             [ngTemplateOutlet]="defaultExpansionButtonTemplate"
