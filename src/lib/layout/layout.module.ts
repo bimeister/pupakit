@@ -5,6 +5,7 @@ import { AlertComponent } from './alert/alert.component';
 import { CloseButtonComponent } from './close-button/close-button.component';
 import { DrawerComponent } from './drawer/drawer.component';
 import { LayoutComponent } from './layout.component';
+import { LoaderComponent } from './loader/loader.component';
 import { ModalWindowComponent } from './modal-window/modal-window.component';
 import { OverlayComponent } from './overlay/overlay.component';
 
@@ -16,9 +17,10 @@ import { OverlayComponent } from './overlay/overlay.component';
     OverlayComponent,
     DrawerComponent,
     AlertComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    LoaderComponent
   ],
-  exports: [LayoutComponent],
+  exports: [LayoutComponent, LoaderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class LayoutModule {}

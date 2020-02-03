@@ -7,7 +7,6 @@ export { CheckboxComponent } from './lib/core/components/checkbox/checkbox.compo
 export { SpinnerComponent } from './lib/core/components/spinner/spinner.component';
 export { TileComponent } from './lib/core/components/tile/tile.component';
 export { ControlTextComponent } from './lib/core/components/control-text/control-text.component';
-export { LoaderComponent } from './lib/core/components/loader/loader.component';
 export { DropdownComponent } from './lib/core/components/dropdown/dropdown.component';
 export { SelectComponent } from './lib/core/components/select/select.component';
 export { IconButtonComponent } from './lib/core/components/icon-button/icon-button.component';

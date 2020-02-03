@@ -4,6 +4,7 @@ import { map } from 'rxjs/operators';
 
 import { Alert, AlertsService } from './services/alerts.service';
 import { ComponentDrawerData, DrawersService } from './services/drawers.service';
+import { LoaderService } from './services/loader.service';
 import { ModalWindowData, ModalWindowService } from './services/modal-window.service';
 
 @Component({
@@ -27,9 +28,12 @@ export class LayoutComponent implements OnDestroy {
     map((collection: Map<string, Alert>) => Array.from(collection.values()))
   );
 
+  public readonly isLoaderVisible$: Observable<boolean> = this.loaderService.isLoaderVisible$;
+
   private readonly subscription: Subscription = new Subscription();
 
   constructor(
+    private readonly loaderService: LoaderService,
     private readonly drawersService: DrawersService,
     private readonly alertsService: AlertsService,
     private readonly modalWindowService: ModalWindowService
