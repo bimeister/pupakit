@@ -52,20 +52,14 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   public readonly dataSource$: Observable<FlatTreeDataSource> = this.notNilManipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.dataSource)
   );
-  public readonly dataSourceRenderingElementsIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.dataSource),
-    switchMap((dataSource: FlatTreeDataSource) => dataSource.data$),
-    map((renderedData: FlatTreeItem[]) => renderedData.map((item: FlatTreeItem) => item.id))
-  );
   public readonly treeControl$: Observable<FlatTreeControl<FlatTreeItem>> = this.notNilManipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.treeControl)
   );
   public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.dataOrigin$)
   );
-  private readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
-    tap((selectedNodesIds: string[]) => console.warn('selectedNodesIds', selectedNodesIds))
+  public readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
+    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$)
   );
   private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$)
@@ -99,17 +93,14 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public nodeIsSelected(node: FlatTreeItem): Observable<boolean> {
-    return this.selectedNodesIds$.pipe(
-      filter(() => !isNullOrUndefined(node)),
-      filter((selectedNodesIds: string[]) => Array.isArray(selectedNodesIds)),
-      map((selectedNodesIds: string[]) => selectedNodesIds.includes(node.id))
-    );
+  public nodeIsSelected(node: FlatTreeItem, selectedNodesIds: string[]): boolean {
+    return selectedNodesIds.includes(node.id);
   }
 
   public toggleExpansion(node: FlatTreeItem): void {
     this.notNilManipulator$
       .pipe(
+        filter(() => !isNullOrUndefined(node)),
         switchMap((manipulator: TreeManipulator) => manipulator.expandedItemsIds$),
         map((expandedItemsIds: string[]) => expandedItemsIds.includes(node.id)),
         withLatestFrom(this.notNilManipulator$),
@@ -131,27 +122,30 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private subscribeOnDataExtractionOnScrolling(): void {
     const viewPortRerenderingSubscription: Subscription = this.viewPort.renderedRangeStream
       .pipe(skipUntil(this.notNilManipulator$.pipe(take(1))))
-      .subscribe((range: ListRange) => {
-        this.manipulator.updateVisibleRange(range);
-      });
+      .subscribe((range: ListRange) => this.manipulator.updateVisibleRange(range));
     this.subscription.add(viewPortRerenderingSubscription);
   }
 
   private scrollToTargetOnTargetChange(): Subscription {
     return this.scrollByRoute$
       .pipe(
-        filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute)),
+        filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute) && !Object.is(scrollByRoute.length, 0)),
         withLatestFrom(this.notNilManipulator$),
         tap(([route, manipulator]: [string[], TreeManipulator]) =>
           route.slice(0, route.length - 1).forEach((itemId: string) => manipulator.markIdAsExpanded(itemId))
         ),
         map(([route, _]: [string[], TreeManipulator]) => route[route.length - 1]),
-        withLatestFrom(this.dataSourceRenderingElementsIds$),
-        map(([targetElementId, renderedItemsIds]: [string, string[]]) => renderedItemsIds.indexOf(targetElementId)),
+        withLatestFrom(
+          this.dataOrigin$.pipe(
+            take(1),
+            map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
+          )
+        ),
+        map(([targetElementId, elementsIds]: [string, string[]]) => elementsIds.indexOf(targetElementId)),
         filter((targetElementIndex: number) => targetElementIndex >= 0),
         tap((elementToScrollToIndex: number) => console.warn('elementToScrollToIndex', elementToScrollToIndex))
       )
-      .subscribe((targetElementIndex: number) => this.viewPort.scrollToIndex(targetElementIndex, 'smooth'));
+      .subscribe((targetElementIndex: number) => this.viewPort.scrollToIndex(targetElementIndex));
   }
 
   private emitExpandedItemOnAction(): Subscription {
