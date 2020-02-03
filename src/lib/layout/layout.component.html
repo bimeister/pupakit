@@ -1,6 +1,9 @@
 <div class="layout-wrapper content">
   <ng-content></ng-content>
 </div>
+<div class="layout-wrapper loader" *ngIf="isLoaderVisible$ | async">
+  <pupa-loader></pupa-loader>
+</div>
 <div class="layout-wrapper drawers">
   <pupa-drawer-pane
     *ngFor="let drawer of componentDrawersList$ | async; trackBy: trackByDrawerId"

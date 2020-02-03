@@ -27,7 +27,6 @@ import { DropdownComponent } from './components/dropdown/dropdown.component';
 import { DroppableComponent } from './components/droppable/droppable.component';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 import { InputComponent } from './components/input/input.component';
-import { LoaderComponent } from './components/loader/loader.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RadioButtonComponent } from './components/radio-button/radio-button.component';
 import { RadioGroupComponent } from './components/radio-group/radio-group.component';
@@ -50,7 +49,6 @@ const CORE_COMPONENTS: any[] = [
   SpinnerComponent,
   TileComponent,
   ControlTextComponent,
-  LoaderComponent,
   DropdownComponent,
   SelectComponent,
   IconButtonComponent,

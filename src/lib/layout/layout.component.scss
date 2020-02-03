@@ -29,14 +29,21 @@
     background-color: $color_white;
     z-index: 0;
   }
-  &.drawers {
+  &.loader {
     z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $color_white;
   }
-  &.modal-windows {
+  &.drawers {
     z-index: 20;
   }
-  &.alerts {
+  &.modal-windows {
     z-index: 30;
+  }
+  &.alerts {
+    z-index: 40;
     & .alerts-wrapper {
       display: flex;
       position: absolute;
@@ -49,6 +56,6 @@
     }
   }
   &.context-menus {
-    z-index: 40;
+    z-index: 50;
   }
 }
