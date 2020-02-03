@@ -121,14 +121,11 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
         // tslint:disable-next-line: no-console
         console.log('after', visibleTreeItems);
         return visibleTreeItems;
-        return FlatTreeDataSource.filterCollapsedNodes(source, expandedItemsIds);
       }),
       withLatestFrom(this.activeRange$),
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
       )
-      // // tslint:disable-next-line: no-console
-      // tap(data => console.log('result', data))
     );
   }
 
@@ -146,118 +143,5 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   private static isHidden(item: FlatTreeItem): item is FlatTreeItem & { __isHidden: boolean } {
     return item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
-  }
-
-  private static filterCollapsedNodes(source: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
-    if (!Array.isArray(source) || Object.is(source.length, 0)) {
-      return [];
-    }
-    if (Object.is(source.length, 1)) {
-      return source;
-    }
-
-    const sourceSections: FlatTreeItem[][] = FlatTreeDataSource.splitSourceByLeaves(source);
-    // tslint:disable-next-line: no-console
-    console.log('sourceLeaves', sourceSections);
-    const noEmbeddedArrays: boolean = !sourceSections.some((section: FlatTreeItem[]) => Array.isArray(section));
-    if (noEmbeddedArrays) {
-      return source;
-    }
-
-    return this.getSectionsWithoutInvisibleItems(sourceSections, expandedItemsIds).flat();
-  }
-
-  private static getSectionsWithoutInvisibleItems(
-    sections: FlatTreeItem[][],
-    expandedItemsIds: string[]
-  ): FlatTreeItem[][] {
-    if (!Array.isArray(sections) || Object.is(sections.length, 0)) {
-      return [];
-    }
-
-    return sections
-      .map((section: FlatTreeItem[]) => {
-        const sectionIsEmpty: boolean = Object.is(section.length, 0);
-        if (sectionIsEmpty) {
-          return [];
-        }
-
-        const sectionContainsOnlyOneElement: boolean = Object.is(section.length, 1);
-        if (sectionContainsOnlyOneElement) {
-          return section;
-        }
-
-        const sectionHasNoExpandableItems: boolean = !section.some((item: FlatTreeItem) => item.isExpandable);
-        if (sectionHasNoExpandableItems) {
-          return section;
-        }
-
-        return FlatTreeDataSource.removeInvisibleSectionPart(section, expandedItemsIds);
-      })
-      .filter((section: FlatTreeItem[]) => Array.isArray(section));
-  }
-
-  private static splitSourceByLeaves(source: FlatTreeItem[]): FlatTreeItem[][] {
-    if (!Array.isArray(source) || Object.is(source.length, 0)) {
-      return [];
-    }
-    if (Object.is(source.length, 1)) {
-      return [source];
-    }
-
-    const leafStartIndexes: Set<number> = new Set<number>();
-    source.forEach((item: FlatTreeItem, index: number, array: FlatTreeItem[]) => {
-      const isFirstItem: boolean = Object.is(index, 0);
-      if (isFirstItem) {
-        leafStartIndexes.add(index);
-        return;
-      }
-
-      const previousItem: FlatTreeItem = array[index - 1];
-      const isAnotherLeaf: boolean = Object.is(item.level, previousItem.level);
-      if (isAnotherLeaf) {
-        leafStartIndexes.add(index);
-        return;
-      }
-    });
-    const result: FlatTreeItem[][] = Array.from(leafStartIndexes.values())
-      .map((leaveStartIndex: number, index: number, array: number[]) => {
-        const leaveEndIndex: number = array[index + 1];
-        return [leaveStartIndex, leaveEndIndex];
-      })
-      .map(([leaveStartIndex, leaveEndIndex]: [number, number]) => source.slice(leaveStartIndex, leaveEndIndex));
-
-    return result;
-  }
-
-  private static removeInvisibleSectionPart(section: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
-    const sectionIsEmpty: boolean = Object.is(section.length, 0);
-    if (sectionIsEmpty) {
-      return [];
-    }
-
-    const sectionContainsOnlyOneElement: boolean = Object.is(section.length, 1);
-    if (sectionContainsOnlyOneElement) {
-      return section;
-    }
-
-    const indexOfCollapsedElement: number = section.findIndex(
-      (item: FlatTreeItem) => !item.isExpandable || (item.isExpandable && !expandedItemsIds.includes(item.id))
-    );
-
-    const collapsedElementIsNotFound: boolean = Object.is(indexOfCollapsedElement, -1);
-    if (collapsedElementIsNotFound) {
-      return section;
-    }
-
-    const collapsedElementIsLastInSection: boolean = Object.is(indexOfCollapsedElement, section.length - 1);
-    if (collapsedElementIsLastInSection) {
-      return section;
-    }
-
-    return section;
-    // // tslint:disable-next-line: no-console
-    // console.log('section before cleanup', section);
-    // return section.slice(0, indexOfCollapsedElement + 1);
   }
 }
