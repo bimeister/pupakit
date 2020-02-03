@@ -15,8 +15,18 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import {
+  debounceTime,
+  filter,
+  map,
+  shareReplay,
+  skipUntil,
+  switchMap,
+  take,
+  tap,
+  withLatestFrom
+} from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource, FlatTreeItem, TreeManipulator } from './classes';
@@ -61,6 +71,10 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   public readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$)
   );
+  public filteredSource$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
+    switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$),
+    tap(() => this.refreshViewPort())
+  );
   private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$)
   );
@@ -94,7 +108,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   public nodeIsSelected(node: FlatTreeItem, selectedNodesIds: string[]): boolean {
-    return selectedNodesIds.includes(node.id);
+    return !isNullOrUndefined(node) && Array.isArray(selectedNodesIds) && selectedNodesIds.includes(node.id);
   }
 
   public toggleExpansion(node: FlatTreeItem): void {
@@ -106,9 +120,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         withLatestFrom(this.notNilManipulator$),
         take(1)
       )
-      .subscribe(([isExpanded, manipulator]: [boolean, TreeManipulator]) =>
-        isExpanded ? manipulator.markAsCollapsed(node) : manipulator.markAsExpanded(node)
-      );
+      .subscribe(([isExpanded, manipulator]: [boolean, TreeManipulator]) => {
+        isExpanded ? manipulator.markAsCollapsed(node) : manipulator.markAsExpanded(node);
+        this.refreshViewPort();
+      });
+  }
+
+  public getRenderingAreaSkeleton(filteredSource: FlatTreeItem[], nonFilteredSource: FlatTreeItem[]): FlatTreeItem[] {
+    if (Array.isArray(filteredSource) && !Object.is(filteredSource.length, 0)) {
+      return filteredSource;
+    }
+    return nonFilteredSource;
   }
 
   private handleTreeManipulator(manipulator: TreeManipulator): void {
@@ -116,6 +138,9 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private refreshViewPort(): void {
+    if (isNullOrUndefined(this.viewPort)) {
+      return;
+    }
     this.viewPort.checkViewportSize();
   }
 
@@ -127,25 +152,43 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private scrollToTargetOnTargetChange(): Subscription {
-    return this.scrollByRoute$
+    const targetIndex$: Observable<number> = this.scrollByRoute$.pipe(
+      filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute) && !Object.is(scrollByRoute.length, 0)),
+      withLatestFrom(this.notNilManipulator$),
+      tap(([route, manipulator]: [string[], TreeManipulator]) =>
+        route.slice(0, route.length - 1).forEach((itemId: string) => manipulator.markIdAsExpanded(itemId))
+      ),
+      map(([route, _]: [string[], TreeManipulator]) => route[route.length - 1]),
+      withLatestFrom(this.dataOrigin$),
+      map(([targetObjectId, source]: [string, FlatTreeItem[]]) =>
+        source.findIndex((item: FlatTreeItem) => item.id === targetObjectId)
+      ),
+      filter((targetIndex: number) => targetIndex >= 0)
+    );
+
+    return combineLatest([
+      this.scrollByRoute$,
+      targetIndex$,
+      this.notNilManipulator$.pipe(switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$))
+    ])
       .pipe(
-        filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute) && !Object.is(scrollByRoute.length, 0)),
-        withLatestFrom(this.notNilManipulator$),
-        tap(([route, manipulator]: [string[], TreeManipulator]) =>
-          route.slice(0, route.length - 1).forEach((itemId: string) => manipulator.markIdAsExpanded(itemId))
-        ),
-        map(([route, _]: [string[], TreeManipulator]) => route[route.length - 1]),
-        withLatestFrom(
-          this.dataOrigin$.pipe(
-            take(1),
-            map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
-          )
-        ),
-        map(([targetElementId, elementsIds]: [string, string[]]) => elementsIds.indexOf(targetElementId)),
-        filter((targetElementIndex: number) => targetElementIndex >= 0),
-        tap((elementToScrollToIndex: number) => console.warn('elementToScrollToIndex', elementToScrollToIndex))
+        filter(([route, targetIndex, filteredData]: [string[], number, FlatTreeItem[]]) => {
+          return (
+            Array.isArray(route) &&
+            Array.isArray(filteredData) &&
+            !isNullOrUndefined(targetIndex) &&
+            !isNullOrUndefined(filteredData[targetIndex]) &&
+            filteredData[targetIndex].id === route[route.length - 1]
+          );
+        }),
+        // tslint:disable-next-line: no-magic-numbers
+        debounceTime(200),
+        map(([_route, targetIndex, _filteredData]: [string[], number, FlatTreeItem[]]) => targetIndex)
       )
-      .subscribe((targetElementIndex: number) => this.viewPort.scrollToIndex(targetElementIndex));
+      .subscribe(targetIndex => {
+        this.viewPort.scrollToIndex(targetIndex, 'smooth');
+        this.refreshViewPort();
+      });
   }
 
   private emitExpandedItemOnAction(): Subscription {
