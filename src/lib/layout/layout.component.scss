@@ -34,7 +34,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: $color_white;
+
+    &.filled {
+      background: $color_white;
+    }
   }
   &.drawers {
     z-index: 20;

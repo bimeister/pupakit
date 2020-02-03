@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+
+export type LoaderType = 'transparent' | 'filled';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoaderService {
   private readonly loaderVisibilityState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly loaderTypeState$: BehaviorSubject<LoaderType> = new BehaviorSubject<LoaderType>(null);
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderVisibilityState$;
+  public readonly loaderType$: Observable<LoaderType> = this.loaderTypeState$;
 
-  public setLoaderVisibilityState(value: boolean): void {
+  public setLoaderState(value: boolean, type: LoaderType = 'transparent'): void {
     this.loaderVisibilityState$.next(value);
+    this.loaderTypeState$.next(value ? type : null);
   }
 
-  public showLoader(): void {
-    this.setLoaderVisibilityState(true);
+  public showLoader(type: LoaderType = 'transparent'): void {
+    this.setLoaderState(true, type);
   }
 
   public hideLoader(): void {
-    this.setLoaderVisibilityState(false);
-  }
-
-  public toggle(): void {
-    this.isLoaderVisible$.pipe(take(1)).subscribe((isVisible: boolean) => this.setLoaderVisibilityState(!isVisible));
+    this.setLoaderState(false);
   }
 }
