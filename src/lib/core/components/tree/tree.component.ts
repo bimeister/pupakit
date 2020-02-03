@@ -1,4 +1,4 @@
-import { DataSource, ListRange } from '@angular/cdk/collections';
+import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
@@ -16,10 +16,10 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, shareReplay, skipUntil, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
-import { FlatTreeItem, TreeManipulator } from './classes';
+import { FlatTreeDataSource, FlatTreeItem, TreeManipulator } from './classes';
 
 @Component({
   selector: 'pupa-tree',
@@ -49,8 +49,13 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>> = this.manipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.trackBy)
   );
-  public readonly dataSource$: Observable<DataSource<FlatTreeItem>> = this.notNilManipulator$.pipe(
+  public readonly dataSource$: Observable<FlatTreeDataSource> = this.notNilManipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.dataSource)
+  );
+  public readonly dataSourceRenderingElementsIds$: Observable<string[]> = this.notNilManipulator$.pipe(
+    map((manipulator: TreeManipulator) => manipulator.dataSource),
+    switchMap((dataSource: FlatTreeDataSource) => dataSource.data$),
+    map((renderedData: FlatTreeItem[]) => renderedData.map((item: FlatTreeItem) => item.id))
   );
   public readonly treeControl$: Observable<FlatTreeControl<FlatTreeItem>> = this.notNilManipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.treeControl)
@@ -59,13 +64,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.dataOrigin$)
   );
   private readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$)
+    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
+    tap((selectedNodesIds: string[]) => console.warn('selectedNodesIds', selectedNodesIds))
+  );
+  private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
+    switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$)
   );
 
   @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
 
   constructor() {
-    this.subscription.add(this.emitExpandedItemOnAction());
+    this.subscription.add(this.emitExpandedItemOnAction()).add(this.scrollToTargetOnTargetChange());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -126,6 +135,23 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         this.manipulator.updateVisibleRange(range);
       });
     this.subscription.add(viewPortRerenderingSubscription);
+  }
+
+  private scrollToTargetOnTargetChange(): Subscription {
+    return this.scrollByRoute$
+      .pipe(
+        filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute)),
+        withLatestFrom(this.notNilManipulator$),
+        tap(([route, manipulator]: [string[], TreeManipulator]) =>
+          route.slice(0, route.length - 1).forEach((itemId: string) => manipulator.markIdAsExpanded(itemId))
+        ),
+        map(([route, _]: [string[], TreeManipulator]) => route[route.length - 1]),
+        withLatestFrom(this.dataSourceRenderingElementsIds$),
+        map(([targetElementId, renderedItemsIds]: [string, string[]]) => renderedItemsIds.indexOf(targetElementId)),
+        filter((targetElementIndex: number) => targetElementIndex >= 0),
+        tap((elementToScrollToIndex: number) => console.warn('elementToScrollToIndex', elementToScrollToIndex))
+      )
+      .subscribe((targetElementIndex: number) => this.viewPort.scrollToIndex(targetElementIndex, 'smooth'));
   }
 
   private emitExpandedItemOnAction(): Subscription {

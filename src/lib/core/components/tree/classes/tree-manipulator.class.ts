@@ -1,9 +1,10 @@
-import { DataSource, ListRange } from '@angular/cdk/collections';
+import { ListRange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 
 export abstract class TreeManipulator {
@@ -15,12 +16,12 @@ export abstract class TreeManipulator {
     TreeManipulator.isExpandable
   );
 
-  public abstract dataSource: DataSource<FlatTreeItem>;
+  public abstract dataSource: FlatTreeDataSource;
 
   constructor(
     public readonly dataOrigin$: Observable<FlatTreeItem[]>,
     public readonly selectedNodesIds$: Observable<string[]>,
-    public readonly nodeToScrollToId$: Observable<string>,
+    public readonly scrollByRoute$: Observable<string[]>,
     public readonly nodeTemplate: TemplateRef<any>,
     public readonly trackBy: TrackByFunction<FlatTreeItem>
   ) {}
@@ -42,10 +43,14 @@ export abstract class TreeManipulator {
 
   public markAsExpanded(node: FlatTreeItem): void {
     this.itemToExpand$.next(node);
+    this.markIdAsExpanded(node.id);
+  }
+
+  public markIdAsExpanded(nodeId: string): void {
     this.expandedItemsIds$
       .pipe(
         take(1),
-        map((expandedItemsIds: string[]) => [...expandedItemsIds, node.id]),
+        map((expandedItemsIds: string[]) => [...expandedItemsIds, nodeId]),
         map((updatedExpandedItemsIds: string[]) => new Set<string>(updatedExpandedItemsIds)),
         map((updatedExpandedItemsIdsSet: Set<string>) => Array.from(updatedExpandedItemsIdsSet.values()))
       )

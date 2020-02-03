@@ -41,7 +41,8 @@
     }
   }
 
-  &:hover {
+  &:hover,
+  &_selected {
     background: $color_light-blue;
   }
 }
