@@ -1,6 +1,6 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { map, switchMapTo, withLatestFrom } from 'rxjs/operators';
+import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -11,18 +11,6 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   private readonly activeRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   private readonly disconnect$: Subject<void> = new Subject<void>();
   private readonly lastCollapsedItemIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-
-  public readonly data$: Observable<FlatTreeItem[]> = this.activeRange$.pipe(
-    switchMapTo(combineLatest([this.sortedData$, this.expandedItemsIds$])),
-    withLatestFrom(this.lastCollapsedItemIndex$),
-    map(([[source, expandedItemsIds], previouslySavedLastCollapsedItemIndex]: [[FlatTreeItem[], string[]], number]) =>
-      FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds, previouslySavedLastCollapsedItemIndex)
-    ),
-    withLatestFrom(this.activeRange$),
-    map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
-      isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
-    )
-  );
 
   constructor(
     private readonly sortedData$: Observable<FlatTreeItem[]>,
@@ -36,7 +24,25 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   }
 
   public connect(): Observable<FlatTreeItem[]> {
-    return this.data$;
+    return combineLatest([
+      this.activeRange$.pipe(
+        filter((range: ListRange) => !isNullOrUndefined(range) && range.start >= 0 && range.end >= 0)
+      ),
+      this.sortedData$,
+      this.expandedItemsIds$
+    ]).pipe(
+      withLatestFrom(this.lastCollapsedItemIndex$.pipe(take(1))),
+      map(
+        ([[_, source, expandedItemsIds], previouslySavedLastCollapsedItemIndex]: [
+          [ListRange, FlatTreeItem[], string[]],
+          number
+        ]) => FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds, previouslySavedLastCollapsedItemIndex)
+      ),
+      withLatestFrom(this.activeRange$.pipe(take(1))),
+      map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
+        isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
+      )
+    );
   }
 
   public disconnect(): void {
