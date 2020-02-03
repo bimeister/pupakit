@@ -5,21 +5,22 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { FlatTreeItem } from './flat-tree-item.class';
-import { TreeItem } from './tree-item.class';
 
-export abstract class TreeConfiguration {
+export abstract class TreeManipulator {
   public readonly itemToExpand$: BehaviorSubject<FlatTreeItem> = new BehaviorSubject<FlatTreeItem>(null);
   public readonly expandedItemsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
-    TreeConfiguration.getLevel,
-    TreeConfiguration.isExpandable
+    TreeManipulator.getLevel,
+    TreeManipulator.isExpandable
   );
 
   public abstract dataSource: DataSource<FlatTreeItem>;
 
   constructor(
-    public readonly dataOrigin$: Observable<TreeItem[]> | Observable<FlatTreeItem[]>,
+    public readonly dataOrigin$: Observable<FlatTreeItem[]>,
+    public readonly selectedNodesIds$: Observable<string[]>,
+    public readonly nodeToScrollToId$: Observable<string>,
     public readonly nodeTemplate: TemplateRef<any>,
     public readonly trackBy: TrackByFunction<FlatTreeItem>
   ) {}

@@ -1,4 +1,4 @@
-<div class="tree-controls" #controls>
+<!-- <div class="tree-controls" #controls>
   <div class="tree-controls__inputs">
     <label>Вложенность</label>
     <pupa-input [size]="'small'" [formControl]="depthControl" [type]="'number'"></pupa-input>
@@ -12,12 +12,12 @@
   </div>
 
   <div class="tree-controls__counter">Всего элементов: {{ depthControl.value * sizeControl.value }}</div>
-</div>
+</div> -->
 
-<div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'" *ngIf="!isFlatTreeUsed">
+<!-- <div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'" *ngIf="!isFlatTreeUsed">
   <pupa-tree [configuration]="treeConfiguration"></pupa-tree>
-</div>
+</div> -->
 
-<div [style.height]="'calc(100% - ' + controls.offsetHeight + 'px)'" *ngIf="isFlatTreeUsed">
+<div [style.height]="'calc(100% - ' + 0 + 'px)'">
   <pupa-tree [configuration]="flatTreeConfiguration"></pupa-tree>
 </div>
