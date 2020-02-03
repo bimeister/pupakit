@@ -1,6 +1,6 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -11,6 +11,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   private readonly activeRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   private readonly disconnect$: Subject<void> = new Subject<void>();
   private readonly lastCollapsedItemIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
+  public readonly currentSlice$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
+  public readonly filteredData$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
 
   constructor(
     private readonly sortedData$: Observable<FlatTreeItem[]>,
@@ -33,15 +36,19 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     ]).pipe(
       withLatestFrom(this.lastCollapsedItemIndex$.pipe(take(1))),
       map(
-        ([[_, source, expandedItemsIds], previouslySavedLastCollapsedItemIndex]: [
+        ([[range, source, expandedItemsIds], previouslySavedLastCollapsedItemIndex]: [
           [ListRange, FlatTreeItem[], string[]],
           number
-        ]) => FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds, previouslySavedLastCollapsedItemIndex)
+        ]) => [
+          FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds, previouslySavedLastCollapsedItemIndex),
+          range
+        ]
       ),
-      withLatestFrom(this.activeRange$.pipe(take(1))),
+      tap(([filteredData, _]: [FlatTreeItem[], ListRange]) => this.filteredData$.next(filteredData)),
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
-      )
+      ),
+      tap((currentSlice: FlatTreeItem[]) => this.currentSlice$.next(currentSlice))
     );
   }
 
