@@ -1,7 +1,7 @@
 <div class="layout-wrapper content">
   <ng-content></ng-content>
 </div>
-<div class="layout-wrapper loader" *ngIf="isLoaderVisible$ | async">
+<div class="layout-wrapper loader" [ngClass]="loaderType$ | async" *ngIf="isLoaderVisible$ | async">
   <pupa-loader></pupa-loader>
 </div>
 <div class="layout-wrapper drawers">
