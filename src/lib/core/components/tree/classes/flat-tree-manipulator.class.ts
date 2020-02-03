@@ -12,11 +12,11 @@ export class FlatTreeManipulator extends TreeManipulator {
   constructor(
     public readonly dataOrigin$: Observable<FlatTreeItem[]>,
     public readonly selectedNodesIds$: Observable<string[]>,
-    public readonly nodeToScrollToId$: Observable<string>,
+    public readonly scrollByRoute$: Observable<string[]>,
     public readonly nodeTemplate: TemplateRef<any> = null,
     public readonly trackBy: TrackByFunction<FlatTreeItem> = null
   ) {
-    super(dataOrigin$, selectedNodesIds$, nodeToScrollToId$, nodeTemplate, trackBy);
+    super(dataOrigin$, selectedNodesIds$, scrollByRoute$, nodeTemplate, trackBy);
   }
 
   public updateVisibleRange(range: ListRange): void {
