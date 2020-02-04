@@ -2,7 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, shareReplay, take } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
@@ -17,9 +17,9 @@ export interface TreeManipulatorConfiguration {
 }
 
 export abstract class TreeManipulator {
-  public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$;
-  public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$;
-  public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$;
+  public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$.pipe(shareReplay(1));
+  public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$.pipe(shareReplay(1));
+  public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$.pipe(shareReplay(1));
   public readonly nodeTemplate: TemplateRef<any> = this.configuration.nodeTemplate;
   public readonly trackBy: TrackByFunction<FlatTreeItem> = this.configuration.trackBy;
 
