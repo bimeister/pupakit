@@ -176,10 +176,11 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       switchMap((filteredSourceItemsIds: string[]) =>
         parentIsExpanded$.pipe(
           filter((parentIsExpanded: boolean) => parentIsExpanded),
-          mapTo(filteredSourceItemsIds)
+          mapTo(filteredSourceItemsIds),
+          take(1)
         )
       ),
-      withLatestFrom(targetItemId$),
+      withLatestFrom(targetItemId$.pipe(take(1))),
       map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
       filter((targetItemIndex: number) => targetItemIndex >= 0)
     );
