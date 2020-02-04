@@ -16,7 +16,17 @@ import {
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, mapTo, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  shareReplay,
+  skipUntil,
+  switchMap,
+  take,
+  tap,
+  withLatestFrom
+} from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource, FlatTreeItem, TreeManipulator } from './classes';
@@ -75,8 +85,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor() {
     this.subscription
       .add(this.emitExpandedItemOnAction())
-      .add(this.scrollToTargetOnTargetChange())
-      .add(this.markTargetItemParentsAsExpanded());
+      .add(this.markTargetItemParentsAsExpanded())
+      .add(this.scrollToTargetOnTargetChange());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -147,43 +157,24 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private scrollToTargetOnTargetChange(): Subscription {
     const targetItemId$: Observable<string> = this.scrollByRoute$.pipe(
       filter((route: string[]) => Array.isArray(route)),
-      map((route: string[]) => route[route.length - 1])
+      map((route: string[]) => (Object.is(route.length, 1) ? route[0] : route[route.length - 1])),
+      distinctUntilChanged()
     );
 
-    const expandedItemsIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-      switchMap((manipulator: TreeManipulator) => manipulator.expandedItemsIds$),
-      filter((expandedItemsIds: string[]) => Array.isArray(expandedItemsIds))
-    );
-
-    const itemParentId$: Observable<string | null> = this.scrollByRoute$.pipe(
-      filter((route: string[]) => Array.isArray(route)),
-      map((route: string[]) => (Object.is(route.length, 1) ? null : route[route.length - 1]))
-    );
-
-    const parentIsExpanded$: Observable<boolean> = expandedItemsIds$.pipe(
-      withLatestFrom(itemParentId$),
-      map(([expandedItemsIds, itemParentId]: [string[], string | null]) =>
-        isNullOrUndefined(itemParentId) ? true : expandedItemsIds.includes(itemParentId)
-      )
-    );
-
-    const filteredSourceItemsIds$: Observable<string[]> = this.filteredSource$.pipe(
+    const renderedItemsIds$: Observable<string[]> = combineLatest([this.filteredSource$, this.dataOrigin$]).pipe(
+      map(([filteredSource, dataOrigin]: [FlatTreeItem[], FlatTreeItem[]]) =>
+        this.getRenderingAreaSkeleton(filteredSource, dataOrigin)
+      ),
       filter((items: FlatTreeItem[]) => Array.isArray(items) && !Object.is(items.length, 0)),
       map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
     );
 
-    const targetItemIndex$: Observable<number> = combineLatest([expandedItemsIds$, filteredSourceItemsIds$]).pipe(
-      map(([_, filteredSourceItemsIds]: [string[], string[]]) => filteredSourceItemsIds),
-      switchMap((filteredSourceItemsIds: string[]) =>
-        parentIsExpanded$.pipe(
-          filter((parentIsExpanded: boolean) => parentIsExpanded),
-          mapTo(filteredSourceItemsIds),
-          take(1)
-        )
-      ),
-      withLatestFrom(targetItemId$.pipe(take(1))),
+    const targetItemIndex$: Observable<number> = combineLatest([this.scrollByRoute$, renderedItemsIds$]).pipe(
+      map(([_, renderedItemsIds]: [string[], string[]]) => renderedItemsIds),
+      withLatestFrom(targetItemId$),
       map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
-      filter((targetItemIndex: number) => targetItemIndex >= 0)
+      filter((targetItemIndex: number) => targetItemIndex >= 0),
+      distinctUntilChanged()
     );
 
     return targetItemIndex$.subscribe((index: number) => {
@@ -206,12 +197,15 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private markTargetItemParentsAsExpanded(): Subscription {
     return this.scrollByRoute$
       .pipe(
-        filter((route: string[]) => Array.isArray(route) && !Object.is(route.length, 0)),
+        filter((route: string[]) => Array.isArray(route) && route.length > 1),
         map((route: string[]) => route.slice(0, route.length - 1)),
         withLatestFrom(this.notNilManipulator$)
       )
       .subscribe(([parentIds, manipulator]: [string[], TreeManipulator]) =>
-        parentIds.forEach((id: string) => manipulator.markIdAsExpanded(id))
+        parentIds.forEach((id: string) => {
+          manipulator.markIdAsExpanded(id);
+          this.refreshViewPort();
+        })
       );
   }
 
