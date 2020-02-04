@@ -1,6 +1,4 @@
-import { FlatTreeItem } from './../../../src/lib/core/components/tree/classes';
-
-export const flatSource: FlatTreeItem[] = [
+export const flatSource: any[] = [
   {
     isExpandable: true,
     name: '1 – level (12)',

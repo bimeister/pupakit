@@ -147,7 +147,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private scrollToTargetOnTargetChange(): Subscription {
     const targetItemId$: Observable<string> = this.scrollByRoute$.pipe(
       filter((route: string[]) => Array.isArray(route)),
-      map((route: string[]) => route[route.length - 1])
+      map((route: string[]) => (Object.is(route.length, 1) ? route[0] : route[route.length - 1]))
     );
 
     const expandedItemsIds$: Observable<string[]> = this.notNilManipulator$.pipe(
@@ -167,21 +167,25 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       )
     );
 
-    const filteredSourceItemsIds$: Observable<string[]> = this.filteredSource$.pipe(
+    const renderedItemsIds$: Observable<string[]> = combineLatest([this.filteredSource$, this.dataOrigin$]).pipe(
+      map(([filteredSource, dataOrigin]: [FlatTreeItem[], FlatTreeItem[]]) =>
+        this.getRenderingAreaSkeleton(filteredSource, dataOrigin)
+      ),
       filter((items: FlatTreeItem[]) => Array.isArray(items) && !Object.is(items.length, 0)),
       map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
     );
 
-    const targetItemIndex$: Observable<number> = combineLatest([expandedItemsIds$, filteredSourceItemsIds$]).pipe(
-      map(([_, filteredSourceItemsIds]: [string[], string[]]) => filteredSourceItemsIds),
-      switchMap((filteredSourceItemsIds: string[]) =>
+    const targetItemIndex$: Observable<number> = renderedItemsIds$.pipe(
+      switchMap((renderedItemsIds: string[]) =>
         parentIsExpanded$.pipe(
           filter((parentIsExpanded: boolean) => parentIsExpanded),
-          mapTo(filteredSourceItemsIds),
+          mapTo(renderedItemsIds),
           take(1)
         )
       ),
-      withLatestFrom(targetItemId$.pipe(take(1))),
+      withLatestFrom(targetItemId$),
+      // tslint:disable-next-line: no-console
+      tap(([sourceItemsIds, targetItemId]: [string[], string]) => console.log(sourceItemsIds, targetItemId)),
       map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
       filter((targetItemIndex: number) => targetItemIndex >= 0)
     );

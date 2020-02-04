@@ -20,5 +20,11 @@ export class TreeDemoComponent {
 
   private readonly flatSource$: Observable<FlatTreeItem[]> = of(flatSource);
 
-  public readonly flatTreeConfiguration: TreeManipulator = new FlatTreeManipulator(this.flatSource$, of([]), of(null));
+  public readonly flatTreeConfiguration: TreeManipulator = new FlatTreeManipulator({
+    dataOrigin$: this.flatSource$,
+    scrollByRoute$: of([]),
+    selectedNodesIds$: of(null),
+    nodeTemplate: null,
+    trackBy: null
+  });
 }
