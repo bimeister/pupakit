@@ -1,6 +1,6 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, take, tap, withLatestFrom } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -10,7 +10,6 @@ type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHid
 export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   private readonly activeRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   private readonly disconnect$: Subject<void> = new Subject<void>();
-  private readonly lastCollapsedItemIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly currentSlice$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
   public readonly filteredData$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
@@ -34,16 +33,10 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       this.sortedData$,
       this.expandedItemsIds$
     ]).pipe(
-      withLatestFrom(this.lastCollapsedItemIndex$.pipe(take(1))),
-      map(
-        ([[range, source, expandedItemsIds], previouslySavedLastCollapsedItemIndex]: [
-          [ListRange, FlatTreeItem[], string[]],
-          number
-        ]) => [
-          FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds, previouslySavedLastCollapsedItemIndex),
-          range
-        ]
-      ),
+      map(([range, source, expandedItemsIds]: [ListRange, FlatTreeItem[], string[]]) => [
+        FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds),
+        range
+      ]),
       tap(([filteredData, _]: [FlatTreeItem[], ListRange]) => this.filteredData$.next(filteredData)),
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
@@ -78,12 +71,10 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     currentItem: FlatTreeItemWithMarkers,
     currentItemIndex: number,
     currentResult: FlatTreeItemWithMarkers[],
-    expandedItemsIds: string[],
-    lastCollapsedItemIndex: number
+    expandedItemsIds: string[]
   ): {
     previousItem: FlatTreeItemWithMarkers;
     currentResult: FlatTreeItemWithMarkers[];
-    lastCollapsedItemIndex: number;
   } {
     const currentItemIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(currentItem, expandedItemsIds);
 
@@ -92,8 +83,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       const itemToInsert: FlatTreeItemWithMarkers = { ...currentItem, __isCollapsed: currentItemIsCollapsed };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex: currentItemIsCollapsed ? currentItemIndex : lastCollapsedItemIndex
+        currentResult: [...currentResult, itemToInsert]
       };
     }
 
@@ -108,16 +98,14 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex
+        currentResult: [...currentResult, itemToInsert]
       };
     }
     if (previousItemIsParent && !parentIsHidden && !parentIsCollapsed) {
       const itemToInsert: FlatTreeItemWithMarkers = { ...currentItem, __isCollapsed: currentItemIsCollapsed };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex: currentItemIsCollapsed ? currentItemIndex : lastCollapsedItemIndex
+        currentResult: [...currentResult, itemToInsert]
       };
     }
 
@@ -131,47 +119,44 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex: currentItemIsCollapsed ? currentItemIndex : lastCollapsedItemIndex
+        currentResult: [...currentResult, itemToInsert]
       };
     }
 
-    const noElementsWereCollapsed: boolean = isNullOrUndefined(lastCollapsedItemIndex);
-    const lastCollapsedItem: FlatTreeItem = currentResult[lastCollapsedItemIndex];
-    const lastCollapsedItemIsParent: boolean =
-      FlatTreeDataSource.isExpandable(lastCollapsedItem) &&
-      FlatTreeDataSource.isCollapsed(lastCollapsedItem, expandedItemsIds) &&
-      Object.is(lastCollapsedItem.level + 1, currentItem.level);
-    if (noElementsWereCollapsed || !lastCollapsedItemIsParent) {
-      const itemToInsert: FlatTreeItemWithMarkers = {
-        ...currentItem,
-        __isCollapsed: currentItemIsCollapsed
-      };
-      return {
-        previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex: currentItemIsCollapsed ? currentItemIndex : lastCollapsedItemIndex
-      };
-    }
-    if (lastCollapsedItemIsParent) {
+    const farParentItem: FlatTreeItem = currentResult
+      .slice(0, currentItemIndex)
+      .reverse()
+      .find(
+        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItem.level)
+      );
+    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
+    const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
+    if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
         __isHidden: true
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert],
-        lastCollapsedItemIndex
+        currentResult: [...currentResult, itemToInsert]
       };
     }
+    const unProcessedItem: FlatTreeItemWithMarkers = {
+      ...currentItem,
+      __isCollapsed: FlatTreeDataSource.isCollapsed(currentItem, expandedItemsIds)
+    };
+    return {
+      previousItem: unProcessedItem,
+      currentResult: [...currentResult, unProcessedItem]
+    };
   }
 
   private static processNonExpandableItem(
     previousItem: FlatTreeItemWithMarkers,
     currentItem: FlatTreeItemWithMarkers,
+    currentItemIndex: number,
     currentResult: FlatTreeItemWithMarkers[],
-    expandedItemsIds: string[],
-    lastCollapsedItemIndex: number
+    expandedItemsIds: string[]
   ): {
     previousItem: FlatTreeItemWithMarkers;
     currentResult: FlatTreeItemWithMarkers[];
@@ -218,19 +203,15 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
     }
 
-    const noElementsWereCollapsed: boolean = isNullOrUndefined(lastCollapsedItemIndex);
-    const lastCollapsedItem: FlatTreeItem = currentResult[lastCollapsedItemIndex];
-    const lastCollapsedItemIsParent: boolean =
-      FlatTreeDataSource.isExpandable(lastCollapsedItem) &&
-      FlatTreeDataSource.isCollapsed(lastCollapsedItem, expandedItemsIds) &&
-      Object.is(lastCollapsedItem.level + 1, currentItem.level);
-    if (noElementsWereCollapsed || !lastCollapsedItemIsParent) {
-      return {
-        previousItem: currentItem,
-        currentResult: [...currentResult, currentItem]
-      };
-    }
-    if (lastCollapsedItemIsParent) {
+    const farParentItem: FlatTreeItem = currentResult
+      .slice(0, currentItemIndex)
+      .reverse()
+      .find(
+        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItem.level)
+      );
+    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
+    const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
+    if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
         __isHidden: true
@@ -240,54 +221,36 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
         currentResult: [...currentResult, itemToInsert]
       };
     }
+    return {
+      previousItem: currentItem,
+      currentResult: [...currentResult, currentItem]
+    };
   }
 
-  private static filterNotHiddenItems(
-    source: FlatTreeItem[],
-    expandedItemsIds: string[],
-    previouslySavedLastCollapsedItemIndex: number
-  ): FlatTreeItem[] {
+  private static filterNotHiddenItems(source: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
     const visibleTreeItems: FlatTreeItem[] = source
       .filter((item: FlatTreeItem) => !isNullOrUndefined(item))
       .reduce(
         (
-          [previousItem, result, lastCollapsedItemIndex]: [FlatTreeItemWithMarkers, FlatTreeItemWithMarkers[], number],
+          [previousItem, result]: [FlatTreeItemWithMarkers, FlatTreeItemWithMarkers[]],
           item: FlatTreeItem,
           index: number
-        ): [FlatTreeItemWithMarkers, FlatTreeItemWithMarkers[], number] => {
+        ): [FlatTreeItemWithMarkers, FlatTreeItemWithMarkers[]] => {
           if (FlatTreeDataSource.isExpandable(item)) {
             const expandableItemData: {
               previousItem: FlatTreeItemWithMarkers;
               currentResult: FlatTreeItemWithMarkers[];
-              lastCollapsedItemIndex: number;
-            } = FlatTreeDataSource.processExpandableItem(
-              previousItem,
-              item,
-              index,
-              result,
-              expandedItemsIds,
-              lastCollapsedItemIndex
-            );
-            return [
-              expandableItemData.previousItem,
-              expandableItemData.currentResult,
-              expandableItemData.lastCollapsedItemIndex
-            ];
+            } = FlatTreeDataSource.processExpandableItem(previousItem, item, index, result, expandedItemsIds);
+            return [expandableItemData.previousItem, expandableItemData.currentResult];
           }
 
           const nonExpandableItemData: {
             previousItem: FlatTreeItemWithMarkers;
             currentResult: FlatTreeItemWithMarkers[];
-          } = FlatTreeDataSource.processNonExpandableItem(
-            previousItem,
-            item,
-            result,
-            expandedItemsIds,
-            lastCollapsedItemIndex
-          );
-          return [nonExpandableItemData.previousItem, nonExpandableItemData.currentResult, lastCollapsedItemIndex];
+          } = FlatTreeDataSource.processNonExpandableItem(previousItem, item, index, result, expandedItemsIds);
+          return [nonExpandableItemData.previousItem, nonExpandableItemData.currentResult];
         },
-        [null, [], previouslySavedLastCollapsedItemIndex]
+        [null, []]
       )
       .filter((turplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[] | number) => Array.isArray(turplePart))
       .flat()
