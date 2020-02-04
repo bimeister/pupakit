@@ -169,7 +169,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
     );
 
-    const targetItemIndex$: Observable<number> = combineLatest([this.scrollByRoute$, renderedItemsIds$]).pipe(
+    const targetItemIndex$: Observable<number> = this.scrollByRoute$.pipe(
+      withLatestFrom(renderedItemsIds$),
       map(([_, renderedItemsIds]: [string[], string[]]) => renderedItemsIds),
       withLatestFrom(targetItemId$),
       map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
