@@ -4,6 +4,7 @@ import { TemplateRef, TrackByFunction } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
+import { isNullOrUndefined } from './../../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 
@@ -39,9 +40,13 @@ export abstract class TreeManipulator {
   }
 
   public markAsCollapsed(node: FlatTreeItem): void {
+    if (isNullOrUndefined(node)) {
+      return;
+    }
     this.expandedItemsIds$
       .pipe(
         take(1),
+        map((expandedItemsIds: string[]) => (Array.isArray(expandedItemsIds) ? expandedItemsIds : [])),
         map((expandedItemsIds: string[]) => expandedItemsIds.filter((itemId: string) => itemId !== node.id)),
         map((updatedExpandedItemsIds: string[]) => new Set<string>(updatedExpandedItemsIds)),
         map((updatedExpandedItemsIdsSet: Set<string>) => Array.from(updatedExpandedItemsIdsSet.values()))
@@ -50,6 +55,9 @@ export abstract class TreeManipulator {
   }
 
   public markAsExpanded(node: FlatTreeItem): void {
+    if (isNullOrUndefined(node)) {
+      return;
+    }
     this.itemToExpand$.next(node);
     this.markIdAsExpanded(node.id);
   }
@@ -58,6 +66,7 @@ export abstract class TreeManipulator {
     this.expandedItemsIds$
       .pipe(
         take(1),
+        map((expandedItemsIds: string[]) => (Array.isArray(expandedItemsIds) ? expandedItemsIds : [])),
         map((expandedItemsIds: string[]) => [...expandedItemsIds, nodeId]),
         map((updatedExpandedItemsIds: string[]) => new Set<string>(updatedExpandedItemsIds)),
         map((updatedExpandedItemsIdsSet: Set<string>) => Array.from(updatedExpandedItemsIdsSet.values()))
