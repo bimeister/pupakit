@@ -7,7 +7,21 @@ import { map, take } from 'rxjs/operators';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 
+export interface TreeManipulatorConfiguration {
+  readonly dataOrigin$: Observable<FlatTreeItem[]>;
+  readonly selectedNodesIds$: Observable<string[]>;
+  readonly scrollByRoute$: Observable<string[]>;
+  readonly nodeTemplate: TemplateRef<any>;
+  readonly trackBy: TrackByFunction<FlatTreeItem>;
+}
+
 export abstract class TreeManipulator {
+  public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$;
+  public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$;
+  public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$;
+  public readonly nodeTemplate: TemplateRef<any> = this.configuration.nodeTemplate;
+  public readonly trackBy: TrackByFunction<FlatTreeItem> = this.configuration.trackBy;
+
   public readonly itemToExpand$: BehaviorSubject<FlatTreeItem> = new BehaviorSubject<FlatTreeItem>(null);
   public readonly expandedItemsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
@@ -18,13 +32,7 @@ export abstract class TreeManipulator {
 
   public abstract dataSource: FlatTreeDataSource;
 
-  constructor(
-    public readonly dataOrigin$: Observable<FlatTreeItem[]>,
-    public readonly selectedNodesIds$: Observable<string[]>,
-    public readonly scrollByRoute$: Observable<string[]>,
-    public readonly nodeTemplate: TemplateRef<any>,
-    public readonly trackBy: TrackByFunction<FlatTreeItem>
-  ) {}
+  constructor(protected readonly configuration: TreeManipulatorConfiguration) {}
 
   public getExpandedFlatTreeItems(): FlatTreeItem[] {
     return this.treeControl.expansionModel.selected;
