@@ -15,18 +15,8 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import {
-  debounceTime,
-  filter,
-  map,
-  shareReplay,
-  skipUntil,
-  switchMap,
-  take,
-  tap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, map, mapTo, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource, FlatTreeItem, TreeManipulator } from './classes';
@@ -44,6 +34,9 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('defaultNodeTemplate', { static: true }) private readonly defaultNodeTemplate: TemplateRef<any>;
 
   @Input() public readonly manipulator: TreeManipulator;
+
+  @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
+
   private readonly manipulator$: BehaviorSubject<TreeManipulator> = new BehaviorSubject<TreeManipulator>(null);
   public readonly notNilManipulator$: Observable<TreeManipulator> = this.manipulator$.pipe(
     filter(manipulator => !isNullOrUndefined(manipulator)),
@@ -79,10 +72,11 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$)
   );
 
-  @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
-
   constructor() {
-    this.subscription.add(this.emitExpandedItemOnAction()).add(this.scrollToTargetOnTargetChange());
+    this.subscription
+      .add(this.emitExpandedItemOnAction())
+      .add(this.scrollToTargetOnTargetChange())
+      .add(this.markTargetItemParentsAsExpanded());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -94,7 +88,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     ) {
       return;
     }
-
     this.handleTreeManipulator(this.manipulator);
   }
 
@@ -152,43 +145,49 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private scrollToTargetOnTargetChange(): Subscription {
-    const targetIndex$: Observable<number> = this.scrollByRoute$.pipe(
-      filter((scrollByRoute: string[]) => Array.isArray(scrollByRoute) && !Object.is(scrollByRoute.length, 0)),
-      withLatestFrom(this.notNilManipulator$),
-      tap(([route, manipulator]: [string[], TreeManipulator]) =>
-        route.slice(0, route.length - 1).forEach((itemId: string) => manipulator.markIdAsExpanded(itemId))
-      ),
-      map(([route, _]: [string[], TreeManipulator]) => route[route.length - 1]),
-      withLatestFrom(this.dataOrigin$),
-      map(([targetObjectId, source]: [string, FlatTreeItem[]]) =>
-        source.findIndex((item: FlatTreeItem) => item.id === targetObjectId)
-      ),
-      filter((targetIndex: number) => targetIndex >= 0)
+    const targetItemId$: Observable<string> = this.scrollByRoute$.pipe(
+      filter((route: string[]) => Array.isArray(route)),
+      map((route: string[]) => route[route.length - 1])
     );
 
-    return combineLatest([
-      this.scrollByRoute$,
-      targetIndex$,
-      this.notNilManipulator$.pipe(switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$))
-    ])
-      .pipe(
-        filter(([route, targetIndex, filteredData]: [string[], number, FlatTreeItem[]]) => {
-          return (
-            Array.isArray(route) &&
-            Array.isArray(filteredData) &&
-            !isNullOrUndefined(targetIndex) &&
-            !isNullOrUndefined(filteredData[targetIndex]) &&
-            filteredData[targetIndex].id === route[route.length - 1]
-          );
-        }),
-        // tslint:disable-next-line: no-magic-numbers
-        debounceTime(200),
-        map(([_route, targetIndex, _filteredData]: [string[], number, FlatTreeItem[]]) => targetIndex)
+    const expandedItemsIds$: Observable<string[]> = this.notNilManipulator$.pipe(
+      switchMap((manipulator: TreeManipulator) => manipulator.expandedItemsIds$),
+      filter((expandedItemsIds: string[]) => Array.isArray(expandedItemsIds))
+    );
+
+    const itemParentId$: Observable<string | null> = this.scrollByRoute$.pipe(
+      filter((route: string[]) => Array.isArray(route)),
+      map((route: string[]) => (Object.is(route.length, 1) ? null : route[route.length - 1]))
+    );
+
+    const parentIsExpanded$: Observable<boolean> = expandedItemsIds$.pipe(
+      withLatestFrom(itemParentId$),
+      map(([expandedItemsIds, itemParentId]: [string[], string | null]) =>
+        isNullOrUndefined(itemParentId) ? true : expandedItemsIds.includes(itemParentId)
       )
-      .subscribe(targetIndex => {
-        this.viewPort.scrollToIndex(targetIndex, 'smooth');
-        this.refreshViewPort();
-      });
+    );
+
+    const filteredSourceItemsIds$: Observable<string[]> = this.filteredSource$.pipe(
+      filter((items: FlatTreeItem[]) => Array.isArray(items) && !Object.is(items.length, 0)),
+      map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
+    );
+
+    const targetItemIndex$: Observable<number> = filteredSourceItemsIds$.pipe(
+      switchMap((filteredSourceItemsIds: string[]) =>
+        parentIsExpanded$.pipe(
+          filter((parentIsExpanded: boolean) => parentIsExpanded),
+          mapTo(filteredSourceItemsIds)
+        )
+      ),
+      withLatestFrom(targetItemId$),
+      map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
+      filter((targetItemIndex: number) => targetItemIndex >= 0)
+    );
+
+    return targetItemIndex$.subscribe((index: number) => {
+      this.viewPort.scrollToIndex(index, 'smooth');
+      this.refreshViewPort();
+    });
   }
 
   private emitExpandedItemOnAction(): Subscription {
@@ -200,6 +199,18 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         )
       )
       .subscribe(item => this.expandedNode.emit(item));
+  }
+
+  private markTargetItemParentsAsExpanded(): Subscription {
+    return this.scrollByRoute$
+      .pipe(
+        filter((route: string[]) => Array.isArray(route) && !Object.is(route.length, 0)),
+        map((route: string[]) => route.slice(0, route.length - 1)),
+        withLatestFrom(this.notNilManipulator$)
+      )
+      .subscribe(([parentIds, manipulator]: [string[], TreeManipulator]) =>
+        parentIds.forEach((id: string) => manipulator.markIdAsExpanded(id))
+      );
   }
 
   public readonly hasChild = (_: number, node: FlatTreeItem): boolean => !isNullOrUndefined(node) && node.isExpandable;
