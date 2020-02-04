@@ -15,7 +15,7 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, shareReplay, skipUntil, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
@@ -172,7 +172,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
     );
 
-    const targetItemIndex$: Observable<number> = filteredSourceItemsIds$.pipe(
+    const targetItemIndex$: Observable<number> = combineLatest([expandedItemsIds$, filteredSourceItemsIds$]).pipe(
+      map(([_, filteredSourceItemsIds]: [string[], string[]]) => filteredSourceItemsIds),
       switchMap((filteredSourceItemsIds: string[]) =>
         parentIsExpanded$.pipe(
           filter((parentIsExpanded: boolean) => parentIsExpanded),
