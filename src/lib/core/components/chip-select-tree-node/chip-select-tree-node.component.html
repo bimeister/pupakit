@@ -22,7 +22,7 @@
   </div>
   <ng-container *ngIf="item?.opened">
     <div *ngFor="let child of item?.children" class="item-node-children">
-      <pupa-tree-node *ngIf="item?.enable" [item]="child"></pupa-tree-node>
+      <pupa-chip-select-tree-node *ngIf="item?.enable" [item]="child"></pupa-chip-select-tree-node>
     </div>
   </ng-container>
 </div>
