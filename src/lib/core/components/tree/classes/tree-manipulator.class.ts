@@ -17,6 +17,7 @@ export interface TreeManipulatorConfiguration {
 }
 
 export abstract class TreeManipulator {
+  public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$.pipe(shareReplay(1));
   public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$.pipe(shareReplay(1));
   public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$.pipe(shareReplay(1));
@@ -74,7 +75,9 @@ export abstract class TreeManipulator {
       .subscribe((expandedItemsIds: string[]) => this.expandedItemsIds$.next(expandedItemsIds));
   }
 
-  public abstract updateVisibleRange(range: ListRange): void;
+  public updateVisibleRange(range: ListRange): void {
+    this.listRange$.next(range);
+  }
 
   protected static getLevel(node: FlatTreeItem): number {
     return node.level;

@@ -20,14 +20,17 @@ import {
   distinctUntilChanged,
   filter,
   map,
+  mapTo,
   shareReplay,
   skipUntil,
   switchMap,
+  switchMapTo,
   take,
   tap,
   withLatestFrom
 } from 'rxjs/operators';
 
+import { VOID } from './../../../constants/void.const';
 import { isNullOrUndefined } from './../../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource, FlatTreeItem, TreeManipulator } from './classes';
 
@@ -79,7 +82,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     tap(() => this.refreshViewPort())
   );
   private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$)
+    switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$),
+    filter((route: string[]) => Array.isArray(route)),
+    distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
+      isNullOrUndefined(currentRoute);
+      if (isNullOrUndefined(currentRoute)) {
+        return true;
+      }
+      const previousParent: string = previousRoute[previousRoute.length - 1];
+      const currentParent: string = currentRoute[currentRoute.length - 1];
+      return previousParent === currentParent;
+    })
   );
 
   constructor() {
@@ -155,12 +168,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private scrollToTargetOnTargetChange(): Subscription {
-    const targetItemId$: Observable<string> = this.scrollByRoute$.pipe(
-      filter((route: string[]) => Array.isArray(route)),
-      map((route: string[]) => (Object.is(route.length, 1) ? route[0] : route[route.length - 1])),
-      distinctUntilChanged()
-    );
-
     const renderedItemsIds$: Observable<string[]> = combineLatest([this.filteredSource$, this.dataOrigin$]).pipe(
       map(([filteredSource, dataOrigin]: [FlatTreeItem[], FlatTreeItem[]]) =>
         this.getRenderingAreaSkeleton(filteredSource, dataOrigin)
@@ -169,18 +176,35 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       map((items: FlatTreeItem[]) => items.map((item: FlatTreeItem) => item.id))
     );
 
-    const targetItemIndex$: Observable<number> = this.scrollByRoute$.pipe(
-      withLatestFrom(renderedItemsIds$),
-      map(([_, renderedItemsIds]: [string[], string[]]) => renderedItemsIds),
-      withLatestFrom(targetItemId$),
-      map(([sourceItemsIds, targetItemId]: [string[], string]) => sourceItemsIds.indexOf(targetItemId)),
-      filter((targetItemIndex: number) => targetItemIndex >= 0),
-      distinctUntilChanged()
+    const triggerTargetItemRefresh$: Observable<void> = combineLatest([
+      this.scrollByRoute$,
+      this.filteredSource$.pipe(filter((renderedItems: FlatTreeItem[]) => !Object.is(renderedItems.length, 0)))
+    ]).pipe(
+      tap(() => this.refreshViewPort()),
+      mapTo(VOID)
     );
 
-    return targetItemIndex$.subscribe((index: number) => {
-      this.viewPort.scrollToIndex(index, 'smooth');
-      this.refreshViewPort();
+    const targetIndexes$: Observable<number[]> = triggerTargetItemRefresh$.pipe(
+      switchMapTo(renderedItemsIds$),
+      withLatestFrom(this.scrollByRoute$),
+      map(([sourceItemsIds, route]: [string[], string[]]) => route.map((id: string) => sourceItemsIds.indexOf(id))),
+      filter((indexes: number[]) => indexes.every((index: number) => index >= 0)),
+      distinctUntilChanged((previousIndexes: number[], currentIndexes: number[]) => {
+        isNullOrUndefined(currentIndexes);
+        if (isNullOrUndefined(currentIndexes)) {
+          return true;
+        }
+        const previousTarget: number = previousIndexes[previousIndexes.length - 1];
+        const currentTarget: number = currentIndexes[currentIndexes.length - 1];
+        return Object.is(previousTarget, currentTarget);
+      })
+    );
+
+    return targetIndexes$.subscribe((indexes: number[]) => {
+      indexes.forEach((index: number) => {
+        this.viewPort.scrollToIndex(index, 'smooth');
+        this.refreshViewPort();
+      });
     });
   }
 
@@ -198,7 +222,16 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private markTargetItemParentsAsExpanded(): Subscription {
     return this.scrollByRoute$
       .pipe(
-        filter((route: string[]) => Array.isArray(route) && route.length > 1),
+        filter((route: string[]) => route.length > 1),
+        distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
+          isNullOrUndefined(currentRoute);
+          if (isNullOrUndefined(currentRoute)) {
+            return true;
+          }
+          const previousParent: string = previousRoute[previousRoute.length - 1];
+          const currentParent: string = currentRoute[currentRoute.length - 1];
+          return previousParent === currentParent;
+        }),
         map((route: string[]) => route.slice(0, route.length - 1)),
         withLatestFrom(this.notNilManipulator$)
       )
