@@ -8,7 +8,6 @@ import { FlatTreeItem } from './flat-tree-item.class';
 type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHidden?: boolean };
 
 export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
-  private readonly activeRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   private readonly disconnect$: Subject<void> = new Subject<void>();
 
   public readonly currentSlice$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
@@ -16,13 +15,10 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   constructor(
     private readonly sortedData$: Observable<FlatTreeItem[]>,
-    private readonly expandedItemsIds$: Observable<string[]>
+    private readonly expandedItemsIds$: Observable<string[]>,
+    private readonly activeRange$: Observable<ListRange>
   ) {
     super();
-  }
-
-  public setRange(range: ListRange): void {
-    this.activeRange$.next(range);
   }
 
   public connect(): Observable<FlatTreeItem[]> {
