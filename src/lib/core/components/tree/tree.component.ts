@@ -222,7 +222,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       .pipe(
         filter((route: string[]) => route.length > 1),
         distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
-          isNullOrUndefined(currentRoute);
           if (isNullOrUndefined(currentRoute)) {
             return true;
           }
