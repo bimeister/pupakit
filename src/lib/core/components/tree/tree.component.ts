@@ -85,7 +85,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$),
     filter((route: string[]) => Array.isArray(route)),
     distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
-      isNullOrUndefined(currentRoute);
       if (isNullOrUndefined(currentRoute)) {
         return true;
       }
