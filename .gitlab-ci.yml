@@ -1,8 +1,6 @@
 .x-publish_job_steps: &publish_job_steps
   stage: publish
   when: manual
-  only:
-    - master
   before_script:
     - docker --version
     - docker-compose --version
@@ -41,6 +39,8 @@ next:
 
 stable:
   <<: *publish_job_steps
+  only:
+    - master
   variables:
     PUBLISH: 'true'
     PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
