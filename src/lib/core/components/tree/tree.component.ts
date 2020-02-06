@@ -189,7 +189,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       map(([sourceItemsIds, route]: [string[], string[]]) => route.map((id: string) => sourceItemsIds.indexOf(id))),
       filter((indexes: number[]) => indexes.every((index: number) => index >= 0)),
       distinctUntilChanged((previousIndexes: number[], currentIndexes: number[]) => {
-        isNullOrUndefined(currentIndexes);
         if (isNullOrUndefined(currentIndexes)) {
           return true;
         }
