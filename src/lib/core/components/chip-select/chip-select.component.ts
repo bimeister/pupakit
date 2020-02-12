@@ -121,8 +121,11 @@ export class ChipSelectComponent implements OnDestroy {
   }
 
   private checkedAllItems(items: ChipItem[]): void {
+    if (!Array.isArray(items) || Object.is(items.length, 0)) {
+      return;
+    }
     items.forEach(item => {
-      if (Array.from(this._allItems.values()).find(allitem => allitem.key === item.key) === undefined) {
+      if (!Array.from(this._allItems.values()).some(allitem => allitem.key === item.key)) {
         this._allItems.add(item);
       }
       if (item.children && item.children.length > 0) {
