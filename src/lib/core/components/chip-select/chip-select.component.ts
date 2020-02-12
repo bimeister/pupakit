@@ -43,6 +43,9 @@ export class ChipSelectComponent implements OnDestroy {
 
   @Input()
   public set selectItems(items: ChipItem[]) {
+    if (!Array.isArray(items)) {
+      return;
+    }
     const selectItems: Set<ChipItem> = new Set<ChipItem>();
     const selectId: string[] = [];
     if (this.selectOne && items.length > 0) {
