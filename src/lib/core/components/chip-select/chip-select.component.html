@@ -25,7 +25,7 @@
     [positionChange$]="positionChange$"
   >
     <pupa-chip-select-tree
-      *ngIf="items.length > 0; else loader"
+      *ngIf="items?.length > 0; else loader"
       [items]="items"
       (selectItemKey)="clickDroppableItem($event)"
       [notActiveKeys]="notActiveKeys"
