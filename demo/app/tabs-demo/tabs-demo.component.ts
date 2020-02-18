@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Tab } from 'src/lib/core/components/tabs/tabs.component';
+import { Tab } from 'src/lib/tabs/components/tabs/tabs.component';
 
 @Component({
   selector: 'demo-tabs-demo',

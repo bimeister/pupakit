@@ -1,34 +1,65 @@
-/*
- * Public API Surface of pupakit
- */
-export { ButtonComponent } from './lib/core/components/button/button.component';
-export { InputComponent } from './lib/core/components/input/input.component';
-export { CheckboxComponent } from './lib/core/components/checkbox/checkbox.component';
-export { SpinnerComponent } from './lib/core/components/spinner/spinner.component';
-export { TileComponent } from './lib/core/components/tile/tile.component';
-export { ControlTextComponent } from './lib/core/components/control-text/control-text.component';
-export { DropdownComponent } from './lib/core/components/dropdown/dropdown.component';
-export { SelectComponent } from './lib/core/components/select/select.component';
-export { IconButtonComponent } from './lib/core/components/icon-button/icon-button.component';
-export { SearchFieldComponent } from './lib/core/components/search-field/search-field.component';
-export { SwitcherComponent } from './lib/core/components/switcher/switcher.component';
-export { DroppableComponent } from './lib/core/components/droppable/droppable.component';
-export { RatingComponent } from './lib/core/components/rating/rating.component';
-export { DaySelectorComponent } from './lib/core/components/day-selector/day-selector.component';
-export { WasherPanelComponent } from './lib/core/components/washer-panel/washer-panel.component';
-export { ChipComponent } from './lib/core/components/chip/chip.component';
-export { ChipButtonComponent } from './lib/core/components/chip-button/chip-button.component';
-export { ChipSelectComponent } from './lib/core/components/chip-select/chip-select.component';
-export { ChipSelectTreeComponent } from './lib/core/components/chip-select-tree/chip-select-tree.component';
-export { ChipSelectTreeNodeComponent } from './lib/core/components/chip-select-tree-node/chip-select-tree-node.component';
-export { ModalComponent } from './lib/core/components/modal/modal.component';
-export { DatepickerComponent } from './lib/core/components/datepicker/datepicker.component';
-export { TabsComponent } from './lib/core/components/tabs/tabs.component';
-export { DatagridComponent } from './lib/core/components/datagrid/datagrid.component';
-export { TextareaComponent } from './lib/core/components/textarea/textarea.component';
-export { DatagridTemplateRendererComponent } from './lib/core/components/datagrid-template-renderer/datagrid-template-renderer.component';
+import * as Internal from './internal';
+import {
+  ButtonModule as PupaButton,
+  CheckboxModule as PupaCheckbox,
+  ChipButtonModule as PupaChipButton,
+  ChipModule as PupaChip,
+  ChipSelectModule as PupaChipSelect,
+  ChipTabsModule as PupaChipTabs,
+  ControlTextModule as PupaControlText,
+  DatagridModule as PupaDatagrid,
+  DatepickerModule as PupaDatepicker,
+  DaySelectorModule as PupaDaySelector,
+  DrawerModule as PupaDrawer,
+  DropdownModule as PupaDropdown,
+  DroppableModule as PupaDroppable,
+  IconButtonModule as PupaIconButton,
+  InputModule as PupaInput,
+  LayoutModule as PupaLayout,
+  ModalModule as PupaModal,
+  RadioButtonModule as PupaRadioButton,
+  RadioGroupModule as PupaRadioGroup,
+  RatingModule as PupaRating,
+  SearchFieldModule as PupaSearchField,
+  SelectModule as PupaSelect,
+  SpinnerModule as PupaSpinner,
+  SwitcherModule as PupaSwitcher,
+  TabsModule as PupaTabs,
+  TextareaModule as PupaTextarea,
+  TileModule as PupaTile,
+  TreeModule as PupaTree,
+  WasherModule as PupaWasher
+} from './lib';
 
-export { PupakitCore } from './lib/core/pupakit-core.module';
-
-export * from './lib/layout/services';
-export * from './lib/core/components/tree/classes';
+export {
+  Internal,
+  PupaButton,
+  PupaCheckbox,
+  PupaChip,
+  PupaChipButton,
+  PupaChipSelect,
+  PupaChipTabs,
+  PupaControlText,
+  PupaDatagrid,
+  PupaDatepicker,
+  PupaDaySelector,
+  PupaDrawer,
+  PupaDropdown,
+  PupaDroppable,
+  PupaIconButton,
+  PupaInput,
+  PupaLayout,
+  PupaModal,
+  PupaRadioButton,
+  PupaRadioGroup,
+  PupaRating,
+  PupaSearchField,
+  PupaSelect,
+  PupaSpinner,
+  PupaSwitcher,
+  PupaTabs,
+  PupaTextarea,
+  PupaTile,
+  PupaTree,
+  PupaWasher
+};

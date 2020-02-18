@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormArray, FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
-import { Subscription } from 'rxjs';
-import { TextareaResize } from '../../../src/lib/core/components/textarea/textarea.component';
 import { compact } from 'lodash';
+import { Subscription } from 'rxjs';
+
+import { TextareaResize } from '../../../src/lib/textarea/components/textarea/textarea.component';
 
 interface TextareaCombo {
   resize: TextareaResize;
