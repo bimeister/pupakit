@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+
 import {
   daysArrayToMap,
   DaysMap,
   Weekdays
-} from '../../../src/lib/core/components/day-selector/day-selector.component';
-import { FormControl, FormGroup } from '@angular/forms';
+} from '../../../src/lib/day-selector/components/day-selector/day-selector.component';
 
 @Component({
   selector: 'demo-spinner-demo',

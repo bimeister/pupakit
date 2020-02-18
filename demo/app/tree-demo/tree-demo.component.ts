@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { FlatTreeItem } from 'src/lib/tree/classes/flat-tree-item.class';
+import { FlatTreeManipulator } from 'src/lib/tree/classes/flat-tree-manipulator.class';
+import { TreeManipulator } from 'src/lib/tree/classes/tree-manipulator.class';
 
-import { FlatTreeItem, FlatTreeManipulator, TreeManipulator } from '../../../src/lib/core/components/tree/classes';
 import { flatSource } from './flat-source.const';
 
 @Component({
