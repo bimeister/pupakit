@@ -1,9 +1,10 @@
 import { ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
-import { Alert, AlertsService, AlertType } from 'src/lib/layout/services/alerts.service';
-import { DrawersService, LayoutDrawerConfiguration } from 'src/lib/layout/services/drawers.service';
-import { ModalWindowConfiguration, ModalWindowService } from 'src/lib/layout/services/modal-window.service';
+import { AlertsService } from 'src/lib/layout/services/alerts.service';
+import { DrawersService } from 'src/lib/layout/services/drawers.service';
+import { ModalWindowService } from 'src/lib/layout/services/modal-window.service';
 
 import { LoaderDemoComponent } from '../loader-demo/loader-demo.component';
+import { Alert, AlertType, LayoutDrawerConfiguration, ModalWindowConfiguration } from './../../../src/internal';
 
 @Component({
   selector: 'demo-overlay',

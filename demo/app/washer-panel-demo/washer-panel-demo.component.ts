@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { WasherButton, WasherButtonRoot } from '../../../src/lib/washer/components/washer/washer.component';
+import { WasherButton, WasherButtonRoot } from './../../../src/internal';
 
 @Component({
   selector: 'demo-washer-panel-demo',

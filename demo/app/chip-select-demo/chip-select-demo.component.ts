@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { ChipItem } from '../../../src/lib/chip-select/components/chip-select/chip-select.component';
+import { ChipItem } from './../../../src/internal';
 
 const SELECTORS_TO_SHOW: number = 99;
 

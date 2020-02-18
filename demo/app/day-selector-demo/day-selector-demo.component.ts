@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { daysArrayToMap } from 'src/lib';
 
-import {
-  daysArrayToMap,
-  DaysMap,
-  Weekdays
-} from '../../../src/lib/day-selector/components/day-selector/day-selector.component';
+import { DaysMap, Weekdays } from './../../../src/internal';
 
 @Component({
   selector: 'demo-spinner-demo',
@@ -14,7 +11,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DaySelectorDemoComponent {
-  public days: any = Weekdays;
+  public days: typeof Weekdays = Weekdays;
   public daysSelected: number[] = [];
   public get daysSelectedMap(): DaysMap {
     return daysArrayToMap(this.daysSelected);

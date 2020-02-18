@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Tab } from 'src/lib/tabs/components/tabs/tabs.component';
+
+import { Tab } from './../../../src/internal';
 
 @Component({
   selector: 'demo-tabs-demo',

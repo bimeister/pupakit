@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { Subject } from 'rxjs';
 
-import { DropdownItem } from '../../../src/lib/dropdown/components/dropdown/dropdown.component';
+import { DropdownItem } from './../../../src/internal';
 
 @Component({
   selector: 'demo-dropdown',
