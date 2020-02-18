@@ -2,25 +2,7 @@ import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, mapTo, take } from 'rxjs/operators';
 
-import { VOID } from '../../../internal/constants/void.const';
-import { DrawerFloat } from '../../drawer/components/drawer/drawer.component';
-
-export interface LayoutDrawerConfiguration {
-  enableOverlay?: boolean;
-  clickableOverlay?: boolean;
-  float?: DrawerFloat;
-  zIndex?: number;
-  closeButton?: boolean;
-  withPadding?: boolean;
-  destroyContentOnClose?: boolean;
-  data?: Record<string, any>;
-}
-
-export interface ComponentDrawerData extends LayoutDrawerConfiguration {
-  id: string;
-  componentFactory: ComponentFactory<any>;
-  injector?: Injector;
-}
+import { ComponentDrawerData, LayoutDrawerConfiguration, VOID } from '../../../internal';
 
 @Injectable({
   providedIn: 'root'

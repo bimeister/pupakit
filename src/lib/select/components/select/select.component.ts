@@ -3,8 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cloneDeep, isEqual } from 'lodash';
 import { Observable } from 'rxjs';
 
-import { getPropertyValueByPath, isNullOrUndefined } from '../../../../internal';
-import { DropdownItem } from '../../../dropdown/components/dropdown/dropdown.component';
+import { DropdownItem, getPropertyValueByPath, isNullOrUndefined } from '../../../../internal';
 
 @Component({
   selector: 'pupa-select',

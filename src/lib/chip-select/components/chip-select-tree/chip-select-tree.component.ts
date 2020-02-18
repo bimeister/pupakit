@@ -9,18 +9,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-export interface TreeItemNode {
-  enable: boolean;
-  key: string;
-  value: string;
-  icon: string;
-  clickable: boolean;
-  children: TreeItemNode[];
-  parent: TreeItemNode;
-  opened: boolean;
-  active: boolean;
-  changeDetector: ChangeDetectorRef;
-}
+import { TreeItemNode } from './../../../../internal';
 
 @Component({
   selector: 'pupa-chip-select-tree',

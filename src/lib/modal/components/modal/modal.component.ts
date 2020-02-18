@@ -12,13 +12,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export type ModalSize = 'large' | 'medium' | 'small';
-
-export enum ModalState {
-  Appeared = 'Appeared',
-  Dissapeared = 'Dissapeared',
-  Void = 'Void'
-}
+import { ModalSize, ModalState } from './../../../../internal';
 
 @Component({
   selector: 'pupa-modal',

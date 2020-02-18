@@ -9,15 +9,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-import { DroppableHorizontalPosition } from '../../../droppable/components/droppable/droppable.component';
-
-export interface DatagridColumnSetting {
-  isVisible: boolean;
-  isAvailable: boolean;
-  headerName: string;
-  colId: string;
-}
+import { DatagridColumnSetting, DroppableHorizontalPosition, isNullOrUndefined } from '../../../../internal';
 
 @Component({
   selector: 'pupa-datagrid-column-settings',

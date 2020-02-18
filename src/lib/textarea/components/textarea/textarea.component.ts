@@ -9,9 +9,7 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-
-export type TextareaResize = 'both' | 'horizontal' | 'vertical' | 'none';
+import { isNullOrUndefined, TextareaResize } from '../../../../internal';
 
 @Component({
   selector: 'pupa-textarea',

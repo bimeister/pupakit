@@ -2,7 +2,7 @@ import { DataSource, ListRange } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../internal/helpers';
+import { isNullOrUndefined } from '../../helpers';
 import { FlatTreeItem } from './flat-tree-item.class';
 
 type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHidden?: boolean };

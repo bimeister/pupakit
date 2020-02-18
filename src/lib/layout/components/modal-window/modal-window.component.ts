@@ -13,8 +13,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-import { ModalWindowData, ModalWindowService } from '../../services/modal-window.service';
+import { isNullOrUndefined, ModalWindowData } from '../../../../internal';
+import { ModalWindowService } from '../../services/modal-window.service';
 
 interface MouseDeltaPosition {
   pageX: number;

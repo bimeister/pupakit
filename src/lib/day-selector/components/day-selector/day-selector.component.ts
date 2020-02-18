@@ -9,39 +9,7 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-export enum Weekdays {
-  Sunday,
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday
-}
-
-export enum WeekdaysShort {
-  Вс,
-  Пн,
-  Вт,
-  Ср,
-  Чт,
-  Пт,
-  Сб
-}
-
-export enum WeekdaysFull {
-  Воскресенье,
-  Понедельник,
-  Вторник,
-  Среда,
-  Четверг,
-  Пятница,
-  Суббота
-}
-
-export interface DaysMap {
-  [day: number]: boolean;
-}
+import { DaysMap, Weekdays, WeekdaysFull, WeekdaysShort } from './../../../../internal';
 
 export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): DaysMap => {
   const acc: DaysMap = {};
@@ -62,9 +30,9 @@ export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): Day
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DaySelectorComponent {
-  public WeekdaysShort: any = WeekdaysShort;
-  public WeekdaysFull: any = WeekdaysFull;
-  public Weekdays: any = Weekdays;
+  public WeekdaysShort: typeof WeekdaysShort = WeekdaysShort;
+  public WeekdaysFull: typeof WeekdaysFull = WeekdaysFull;
+  public Weekdays: typeof Weekdays = Weekdays;
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<number[]> = new EventEmitter<number[]>();
   private _value: number[] = [];

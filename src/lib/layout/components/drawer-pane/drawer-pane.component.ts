@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-import { ComponentDrawerData, DrawersService } from '../../services/drawers.service';
+import { ComponentDrawerData, isNullOrUndefined } from '../../../../internal';
+import { DrawersService } from '../../services/drawers.service';
 
 @Component({
   selector: 'pupa-drawer-pane',
