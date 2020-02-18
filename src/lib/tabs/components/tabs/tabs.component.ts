@@ -14,16 +14,7 @@ import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-
-export interface Tab {
-  name: string;
-  route: string;
-  iconName?: string;
-  iconSrc?: string;
-  queryParams?: Params;
-  removeExistingQueryParams?: boolean;
-}
+import { isNullOrUndefined, Tab } from '../../../../internal';
 
 interface TabWithUrl extends Tab {
   url: string;

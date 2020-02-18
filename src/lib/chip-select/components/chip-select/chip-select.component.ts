@@ -2,16 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Out
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
+import { ChipItem, VOID } from '../../../../internal';
 import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
-
-export interface ChipItem {
-  key: string;
-  value: string;
-  icon: string;
-  clickable?: boolean;
-  children?: ChipItem[];
-}
 
 @Component({
   selector: 'pupa-chip-select',

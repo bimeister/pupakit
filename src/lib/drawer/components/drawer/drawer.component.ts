@@ -18,10 +18,8 @@ import {
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-import { DrawerDraggerComponent } from './../drawer-dragger/drawer-dragger.component';
-
-export type DrawerFloat = 'left' | 'right';
+import { DrawerFloat, isNullOrUndefined } from '../../../../internal';
+import { DrawerDraggerComponent } from './../drawer-dragger';
 
 @Component({
   selector: 'pupa-drawer',

@@ -10,7 +10,7 @@ import {
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
+import { VOID } from '../../../../internal';
 
 @Component({
   selector: 'pupa-drawer-dragger',

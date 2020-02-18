@@ -9,20 +9,7 @@ import {
 } from '@angular/core';
 
 import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
-
-export interface IconData {
-  name?: string;
-  src?: string;
-  color?: string;
-}
-
-export interface DropdownItem<T> {
-  caption: string;
-  iconLeft?: IconData;
-  iconRight?: IconData;
-  children?: DropdownItem<T>[];
-  data: T;
-}
+import { DropdownItem } from './../../../../internal';
 
 @Component({
   selector: 'pupa-dropdown',

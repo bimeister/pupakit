@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { ChipSelectTreeComponent, TreeItemNode } from '../chip-select-tree/chip-select-tree.component';
+import { ChipSelectTreeComponent } from '../chip-select-tree/chip-select-tree.component';
+import { TreeItemNode } from './../../../../internal';
 
 @Component({
   selector: 'pupa-chip-select-tree-node',

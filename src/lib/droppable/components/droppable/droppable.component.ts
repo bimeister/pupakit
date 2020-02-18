@@ -12,12 +12,9 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { EventUnlistener } from '../../../../internal/declarations';
-import { isNullOrUndefined } from '../../../../internal/helpers';
+import { DroppableHorizontalPosition, EventUnlistener, isNullOrUndefined } from '../../../../internal';
 
 const OFFSET_TOP_PX: number = 4;
-
-export type DroppableHorizontalPosition = 'left' | 'right';
 
 @Component({
   selector: 'pupa-droppable',

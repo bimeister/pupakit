@@ -20,7 +20,7 @@ import {
   IGetRowsParams
 } from 'ag-grid-community';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { isNullOrUndefined } from '../../../../internal';
 
 export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
-import { AngularComponent } from './../../internal/declarations';
+import { AngularComponent } from './../../internal';
 import { IconButtonComponent } from './components';
 
 const COMPONENTS: AngularComponent[] = [IconButtonComponent];

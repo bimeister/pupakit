@@ -14,15 +14,7 @@ import {
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
-import { remSizePx } from '../../../../internal/constants/rem-size-px.const';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-
-export enum ControlState {
-  expanded = 'true',
-  collapsed = 'false'
-}
-
-export type SearchFieldKind = 'solid' | 'outlined';
+import { ControlState, isNullOrUndefined, remSizePx, SearchFieldKind } from '../../../../internal';
 
 @Component({
   selector: 'pupa-search-field',

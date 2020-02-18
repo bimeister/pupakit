@@ -2,14 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-export type AlertType = 'info' | 'warning' | 'success' | 'danger';
-
-export interface Alert {
-  type: AlertType;
-  text: string;
-  id: string;
-  needClosed?: boolean;
-}
+import { Alert } from './../../../internal';
 
 @Injectable({
   providedIn: 'root'

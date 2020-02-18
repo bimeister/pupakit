@@ -14,8 +14,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { isNullOrUndefined, VOID } from '../../../../internal';
 import { ChipTabsComponent } from './../chip-tabs/chip-tabs.component';
 
 @Component({

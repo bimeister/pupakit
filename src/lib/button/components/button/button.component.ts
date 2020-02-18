@@ -1,16 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
-
-export type ButtonKind = 'solid' | 'outlined' | 'link';
-export type ButtonType = 'submit' | 'button';
-export type ButtonSize = 'large' | 'medium' | 'small';
-export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
-export type ButtonIconPosition = 'left' | 'right';
-export interface ButtonIcon {
-  name: string;
-  position: 'left' | 'right';
-}
+import { ButtonColor, ButtonIcon, ButtonKind, ButtonSize, ButtonType, isNullOrUndefined } from '../../../../internal';
 
 @Component({
   selector: 'pupa-button',

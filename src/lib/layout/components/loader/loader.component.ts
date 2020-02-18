@@ -2,11 +2,7 @@ import { animate, AnimationEvent, state, style, transition, trigger } from '@ang
 import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-export enum ElementState {
-  initial = 'void',
-  dissapeared = 'false',
-  appeared = 'true'
-}
+import { ElementState } from './../../../../internal';
 
 @Component({
   selector: 'pupa-loader',

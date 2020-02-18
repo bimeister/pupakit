@@ -17,46 +17,15 @@ import {
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, throttle } from 'rxjs/operators';
 
-import { remSizePx } from '../../../../internal/constants/rem-size-px.const';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import {
+  ExternalDiskContent,
+  isNullOrUndefined,
+  PanelExpansionState,
+  remSizePx,
+  WasherButton,
+  WasherButtonRoot
+} from '../../../../internal';
 
-export interface WasherButtonRoot extends WasherButton {
-  /**
-   * @description when true, shows range control on click
-   */
-  rangeOnClick: boolean;
-
-  /**
-   * @description button is visible on washer unhovered state when true
-   */
-  isAlwaysVisible: boolean;
-
-  /**
-   * @description array of child buttons to be visible on external disk
-   */
-  children?: WasherButton[];
-}
-
-export interface WasherButton {
-  /**
-   * @description Ionicons icon name
-   */
-  icon: string;
-
-  /**
-   * @description action name to emit on click
-   */
-  actionName: string;
-}
-export enum ExternalDiskContent {
-  buttons,
-  range
-}
-export enum PanelExpansionState {
-  initial = 'void',
-  dissapeared = 'false',
-  appeared = 'true'
-}
 // tslint:disable: no-magic-numbers
 @Component({
   selector: 'pupa-washer-panel',

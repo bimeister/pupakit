@@ -11,14 +11,16 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
 
-import { getRangeEndDate } from '../../../../internal/helpers/get-range-end-date.helper';
-import { getRangeStartDate } from '../../../../internal/helpers/get-range-start-date.helper';
-import { isDate } from '../../../../internal/helpers/is-date.helper';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import {
+  getRangeEndDate,
+  getRangeStartDate,
+  InputSize,
+  InputTextAlign,
+  InputType,
+  isDate,
+  isNullOrUndefined
+} from '../../../../internal';
 
-export type InputSize = 'medium' | 'small';
-export type InputType = 'password' | 'text' | 'date' | 'date-range' | 'number';
-export type InputTextAlign = 'left' | 'center' | 'right' | 'inherit';
 type ValueType = string | Date | null | number;
 
 @Component({

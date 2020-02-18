@@ -2,27 +2,7 @@ import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-export type ModalWindowSize = 'large' | 'medium' | 'small';
-
-export interface ModalWindowConfiguration {
-  icon?: string;
-  colorIcon?: string;
-  title?: string;
-  size?: ModalWindowSize;
-  enableOverlay?: boolean;
-  clickableOverlay?: boolean;
-  zIndex?: number;
-  closeButton?: boolean;
-  data?: Record<string, any>;
-  canMove?: boolean;
-  canPadding?: boolean;
-}
-
-export interface ModalWindowData extends ModalWindowConfiguration {
-  id: string;
-  componentFactory: ComponentFactory<any>;
-  injector?: Injector;
-}
+import { ModalWindowConfiguration, ModalWindowData } from './../../../internal';
 
 @Injectable({
   providedIn: 'root'
