@@ -4,7 +4,7 @@ import combos from 'combos';
 import { compact } from 'lodash';
 import { Subscription } from 'rxjs';
 
-import { TextareaResize } from '../../../src/lib/textarea/components/textarea/textarea.component';
+import { TextareaResize } from './../../../src/internal';
 
 interface TextareaCombo {
   resize: TextareaResize;
