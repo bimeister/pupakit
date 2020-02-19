@@ -4,9 +4,7 @@ import { filter, map, mapTo, take } from 'rxjs/operators';
 
 import { VOID } from '../../../internal/constants/void.const';
 import { ComponentDrawerData } from '../../../internal/declarations/interfaces/component-drawer-data.interface';
-import {
-  LayoutDrawerConfiguration
-} from '../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
+import { LayoutDrawerConfiguration } from '../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
 
 @Injectable({
   providedIn: 'root'
