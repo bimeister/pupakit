@@ -1,7 +1,7 @@
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { FlatTreeItem } from './../classes';
+import { FlatTreeItem } from '../classes/flat-tree-item.class';
 
 export interface TreeManipulatorConfiguration {
   readonly dataOrigin$: Observable<FlatTreeItem[]>;

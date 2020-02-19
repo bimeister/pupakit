@@ -7,37 +7,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import {
-  PupaButton,
-  PupaCheckbox,
-  PupaChip,
-  PupaChipButton,
-  PupaChipSelect,
-  PupaChipTabs,
-  PupaControlText,
-  PupaDatagrid,
-  PupaDatepicker,
-  PupaDaySelector,
-  PupaDrawer,
-  PupaDropdown,
-  PupaDroppable,
-  PupaIconButton,
-  PupaInput,
-  PupaLayout,
-  PupaModal,
-  PupaRadioButton,
-  PupaRadioGroup,
-  PupaRating,
-  PupaSearchField,
-  PupaSelect,
-  PupaSpinner,
-  PupaSwitcher,
-  PupaTabs,
-  PupaTextarea,
-  PupaTile,
-  PupaTree,
-  PupaWasher
-} from './../../src/public-api';
+import { ComponentsModule } from './../../src/public-api';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
@@ -73,38 +43,6 @@ import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
-
-const PUPAKIT_IMPORTS: any[] = [
-  PupaButton,
-  PupaCheckbox,
-  PupaChip,
-  PupaChipButton,
-  PupaChipSelect,
-  PupaChipTabs,
-  PupaControlText,
-  PupaDatagrid,
-  PupaDatepicker,
-  PupaDaySelector,
-  PupaDrawer,
-  PupaDropdown,
-  PupaDroppable,
-  PupaIconButton,
-  PupaInput,
-  PupaLayout,
-  PupaModal,
-  PupaRadioButton,
-  PupaRadioGroup,
-  PupaRating,
-  PupaSearchField,
-  PupaSelect,
-  PupaSpinner,
-  PupaSwitcher,
-  PupaTabs,
-  PupaTextarea,
-  PupaTile,
-  PupaTree,
-  PupaWasher
-];
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -149,7 +87,7 @@ const PUPAKIT_IMPORTS: any[] = [
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ...PUPAKIT_IMPORTS,
+    ComponentsModule,
     RouterModule.forRoot([
       {
         path: '',

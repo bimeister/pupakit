@@ -1,4 +1,4 @@
-import { ModalWindowSize } from './../types';
+import { ModalWindowSize } from '../types/modal-window-size.type';
 
 export interface ModalWindowConfiguration {
   icon?: string;
