@@ -27,7 +27,9 @@
     "test": "npm run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "ng test --configuration=ci",
-    "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect"
+    "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect",
+    "barrel:components": "barrelsby --config=\"./barrelsby.json\" --path=\"./src/components\"",
+    "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --path=\"./src/internal\""
   },
   "dependencies": {
     "@angular/cdk": "^8.2.3",
