@@ -1,8 +1,7 @@
 {
   "delete": true,
-  "exportDefault": false,
+  "exclude": "(index\\.ts)$",
   "location": "all",
-  "local": true,
   "name": "api.ts",
   "structure": "flat",
   "singleQuotes": true
