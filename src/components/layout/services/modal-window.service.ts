@@ -2,9 +2,7 @@ import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
-import {
-  ModalWindowConfiguration
-} from '../../../internal/declarations/interfaces/modal-window-configuration.interface';
+import { ModalWindowConfiguration } from '../../../internal/declarations/interfaces/modal-window-configuration.interface';
 import { ModalWindowData } from '../../../internal/declarations/interfaces/modal-window-data.interface';
 
 @Injectable({
