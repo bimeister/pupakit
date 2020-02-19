@@ -1,4 +1,4 @@
-import { TreeManipulatorConfiguration } from './../interfaces';
+import { TreeManipulatorConfiguration } from '../interfaces/tree-manipulator-configuration.interface';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { TreeManipulator } from './tree-manipulator.class';
 

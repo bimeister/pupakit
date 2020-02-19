@@ -1,4 +1,4 @@
-import { DrawerFloat } from './../types';
+import { DrawerFloat } from '../types/drawer-float.type';
 
 export interface LayoutDrawerConfiguration {
   enableOverlay?: boolean;

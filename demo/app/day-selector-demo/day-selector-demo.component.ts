@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { daysArrayToMap } from 'src/lib';
+import { daysArrayToMap } from 'src';
 
 import { DaysMap, Weekdays } from './../../../src/internal';
 

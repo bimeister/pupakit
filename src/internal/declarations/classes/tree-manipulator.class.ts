@@ -4,8 +4,8 @@ import { TemplateRef, TrackByFunction } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take } from 'rxjs/operators';
 
-import { TreeManipulatorConfiguration } from '../interfaces';
-import { isNullOrUndefined } from './../../helpers';
+import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
+import { TreeManipulatorConfiguration } from '../interfaces/tree-manipulator-configuration.interface';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 
