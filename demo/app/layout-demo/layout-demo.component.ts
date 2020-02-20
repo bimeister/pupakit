@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryResolver } from '@angular/core';
-import { AlertsService, DrawersService, ModalWindowService } from 'src/components/layout';
 
+import { AlertsService, DrawersService, ModalWindowService } from '../../../src/components';
 import { LoaderDemoComponent } from '../loader-demo/loader-demo.component';
 import { Alert, AlertType, LayoutDrawerConfiguration, ModalWindowConfiguration } from './../../../src/internal';
 
