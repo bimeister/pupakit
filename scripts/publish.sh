@@ -3,7 +3,7 @@
 set -e
 set -u
 
-TARGET_VERSION="0.1.0-${PKG_VERSION}";
+TARGET_VERSION="0.2.0-${PKG_VERSION}";
 PUPAKIT_DIR=dist/@meistersoft/pupakit
 PACKAGE_JSON=${PUPAKIT_DIR}/package.json
 TEMP_JSON=${PUPAKIT_DIR}/temp.json
