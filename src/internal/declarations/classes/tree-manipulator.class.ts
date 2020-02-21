@@ -15,6 +15,7 @@ export abstract class TreeManipulator {
   public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$.pipe(shareReplay(1));
   public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$.pipe(shareReplay(1));
   public readonly nodeTemplate: TemplateRef<any> = this.configuration.nodeTemplate;
+  public readonly elementTemplate: TemplateRef<any> = this.configuration.elementTemplate;
   public readonly trackBy: TrackByFunction<FlatTreeItem> = this.configuration.trackBy;
 
   public readonly itemToExpand$: BehaviorSubject<FlatTreeItem> = new BehaviorSubject<FlatTreeItem>(null);

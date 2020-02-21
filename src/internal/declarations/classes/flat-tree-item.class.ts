@@ -4,6 +4,7 @@ export class FlatTreeItem {
     public name: string,
     public level: number,
     public id: string,
-    public originalData: any = null
+    public originalData: any = null,
+    public isElement: boolean = false
   ) {}
 }
