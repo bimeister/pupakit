@@ -8,5 +8,6 @@ export interface TreeManipulatorConfiguration {
   readonly selectedNodesIds$: Observable<string[]>;
   readonly scrollByRoute$: Observable<string[]>;
   readonly nodeTemplate: TemplateRef<any>;
+  readonly elementTemplate: TemplateRef<any>;
   readonly trackBy: TrackByFunction<FlatTreeItem>;
 }

@@ -46,7 +46,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   @ViewChild('viewPort', { static: false }) private readonly viewPort: CdkVirtualScrollViewport;
-  @ViewChild('defaultNodeTemplate', { static: true }) private readonly defaultNodeTemplate: TemplateRef<any>;
+  @ViewChild('defaultTemplate', { static: true }) private readonly defaultTemplate: TemplateRef<any>;
 
   @Input() public readonly manipulator: TreeManipulator;
 
@@ -61,7 +61,13 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   public readonly nodeTemplate$: Observable<TemplateRef<any>> = this.manipulator$.pipe(
     map((manipulator: TreeManipulator) => manipulator.nodeTemplate),
     map((customNodeTemplate: TemplateRef<any>) =>
-      isNullOrUndefined(customNodeTemplate) ? this.defaultNodeTemplate : customNodeTemplate
+      isNullOrUndefined(customNodeTemplate) ? this.defaultTemplate : customNodeTemplate
+    )
+  );
+  public readonly elementTemplate$: Observable<TemplateRef<any>> = this.manipulator$.pipe(
+    map((manipulator: TreeManipulator) => manipulator.elementTemplate),
+    map((customElementTemplate: TemplateRef<any>) =>
+      isNullOrUndefined(customElementTemplate) ? this.defaultTemplate : customElementTemplate
     )
   );
   public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>> = this.manipulator$.pipe(
@@ -77,7 +83,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.dataOrigin$)
   );
   public readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$)
+    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
+    map((selectedNodesIds: string[]) => (Array.isArray(selectedNodesIds) ? selectedNodesIds : []))
   );
   public filteredSource$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$),
@@ -85,7 +92,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   );
   private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$),
-    filter((route: string[]) => Array.isArray(route)),
+    map((route: string[]) => (Array.isArray(route) ? route : [])),
     distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
       if (isNullOrUndefined(currentRoute)) {
         return true;
@@ -242,7 +249,10 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       );
   }
 
-  public readonly hasChild = (_: number, node: FlatTreeItem): boolean => !isNullOrUndefined(node) && node.isExpandable;
+  public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
+    !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
   public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>
-    !isNullOrUndefined(node) && !node.isExpandable;
+    !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
+  public readonly isElement = (_: number, element: FlatTreeItem): boolean =>
+    !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
 }
