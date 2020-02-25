@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Out
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { mapTo } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
-import { ChipItem } from '../../../../internal/declarations/interfaces/chip-item.interface';
+import { VOID } from '../../../../../internal/constants/void.const';
+import { ChipItem } from '../../../../../internal/declarations/interfaces/chip-item.interface';
 import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
 
 @Component({

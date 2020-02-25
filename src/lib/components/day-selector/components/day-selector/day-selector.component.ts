@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
-import { WeekdaysFull } from '../../../../internal/declarations/enums/week-days-full.enum';
-import { WeekdaysShort } from '../../../../internal/declarations/enums/week-days-short.enum';
-import { Weekdays } from '../../../../internal/declarations/enums/week-days.enum';
-import { DaysMap } from '../../../../internal/declarations/interfaces/days-map.interface';
+import { WeekdaysFull } from '../../../../../internal/declarations/enums/week-days-full.enum';
+import { WeekdaysShort } from '../../../../../internal/declarations/enums/week-days-short.enum';
+import { Weekdays } from '../../../../../internal/declarations/enums/week-days.enum';
+import { DaysMap } from '../../../../../internal/declarations/interfaces/days-map.interface';
 
 export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): DaysMap => {
   const acc: DaysMap = {};

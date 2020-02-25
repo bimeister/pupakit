@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 
-import { ComponentDrawerData } from '../../../../internal/declarations/interfaces/component-drawer-data.interface';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { ComponentDrawerData } from '../../../../../internal/declarations/interfaces/component-drawer-data.interface';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DrawersService } from '../../services/drawers.service';
 
 @Component({

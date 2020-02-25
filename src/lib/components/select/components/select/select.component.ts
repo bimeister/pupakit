@@ -3,9 +3,9 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { cloneDeep, isEqual } from 'lodash';
 import { Observable } from 'rxjs';
 
-import { DropdownItem } from '../../../../internal/declarations/interfaces/dropdown-item.interface';
-import { getPropertyValueByPath } from '../../../../internal/helpers/get-property-value-by-path.helper';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
+import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-select',

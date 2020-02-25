@@ -12,8 +12,8 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { ModalState } from '../../../../internal/declarations/enums/modal-state.enum';
-import { ModalSize } from '../../../../internal/declarations/types/modal-size.type';
+import { ModalState } from '../../../../../internal/declarations/enums/modal-state.enum';
+import { ModalSize } from '../../../../../internal/declarations/types/modal-size.type';
 
 @Component({
   selector: 'pupa-modal',

@@ -13,8 +13,8 @@ import {
   ViewContainerRef
 } from '@angular/core';
 
-import { ModalWindowData } from '../../../../internal/declarations/interfaces/modal-window-data.interface';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { ModalWindowData } from '../../../../../internal/declarations/interfaces/modal-window-data.interface';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { ModalWindowService } from '../../services/modal-window.service';
 
 interface MouseDeltaPosition {

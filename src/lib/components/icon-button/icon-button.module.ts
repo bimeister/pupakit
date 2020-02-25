@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { SharedModule } from './../../internal/shared/shared.module';
+import { SharedModule } from './../../../internal/shared/shared.module';
 import { IconButtonComponent } from './components/icon-button/icon-button.component';
 
 @NgModule({

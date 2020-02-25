@@ -12,9 +12,11 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { DroppableHorizontalPosition } from '../../../../internal/declarations/types/droppable-horizontal-position.type';
-import { EventUnlistener } from '../../../../internal/declarations/types/event-unlistener.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import {
+  DroppableHorizontalPosition
+} from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
+import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 const OFFSET_TOP_PX: number = 4;
 

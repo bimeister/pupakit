@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { DropdownItem } from '../../../../internal/declarations/interfaces/dropdown-item.interface';
-import { getPropertyValueByPath } from '../../../../internal/helpers/get-property-value-by-path.helper';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
+import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-dropdown-item',
