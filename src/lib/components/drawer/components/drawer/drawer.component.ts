@@ -18,8 +18,8 @@ import {
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { DrawerFloat } from '../../../../internal/declarations/types/drawer-float.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { DrawerFloat } from '../../../../../internal/declarations/types/drawer-float.type';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DrawerDraggerComponent } from '../drawer-dragger/drawer-dragger.component';
 
 @Component({

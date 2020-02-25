@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { SharedModule } from './../../internal/shared/shared.module';
+import { SharedModule } from './../../../internal/shared/shared.module';
 import { DrawerDraggerComponent } from './components/drawer-dragger/drawer-dragger.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
 

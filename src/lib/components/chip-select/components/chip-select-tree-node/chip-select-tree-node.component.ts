@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { TreeItemNode } from '../../../../internal/declarations/interfaces/tree-item-node.interface';
+import { TreeItemNode } from '../../../../../internal/declarations/interfaces/tree-item-node.interface';
 import { ChipSelectTreeComponent } from '../chip-select-tree/chip-select-tree.component';
 
 @Component({

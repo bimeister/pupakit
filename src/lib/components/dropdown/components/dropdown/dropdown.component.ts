@@ -8,7 +8,7 @@ import {
   Renderer2
 } from '@angular/core';
 
-import { DropdownItem } from '../../../../internal/declarations/interfaces/dropdown-item.interface';
+import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
 import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
 
 @Component({

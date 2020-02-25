@@ -17,12 +17,12 @@ import {
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, throttle } from 'rxjs/operators';
 
-import { remSizePx } from '../../../../internal/constants/rem-size-px.const';
-import { ExternalDiskContent } from '../../../../internal/declarations/enums/external-disk-content.enum';
-import { PanelExpansionState } from '../../../../internal/declarations/enums/panel-expansion-state.enum';
-import { WasherButtonRoot } from '../../../../internal/declarations/interfaces/washer-button-root.interface';
-import { WasherButton } from '../../../../internal/declarations/interfaces/washer-button.interface';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
+import { ExternalDiskContent } from '../../../../../internal/declarations/enums/external-disk-content.enum';
+import { PanelExpansionState } from '../../../../../internal/declarations/enums/panel-expansion-state.enum';
+import { WasherButtonRoot } from '../../../../../internal/declarations/interfaces/washer-button-root.interface';
+import { WasherButton } from '../../../../../internal/declarations/interfaces/washer-button.interface';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 // tslint:disable: no-magic-numbers
 @Component({

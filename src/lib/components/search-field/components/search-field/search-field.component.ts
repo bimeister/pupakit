@@ -14,10 +14,10 @@ import {
 import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
-import { remSizePx } from '../../../../internal/constants/rem-size-px.const';
-import { ControlState } from '../../../../internal/declarations/enums/control-state.enum';
-import { SearchFieldKind } from '../../../../internal/declarations/types/search-field-kind.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
+import { ControlState } from '../../../../../internal/declarations/enums/control-state.enum';
+import { SearchFieldKind } from '../../../../../internal/declarations/types/search-field-kind.type';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-search-field',

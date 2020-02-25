@@ -2,10 +2,10 @@ import { ChangeDetectionStrategy, Component, OnDestroy, TrackByFunction } from '
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Alert } from '../../../../internal/declarations/interfaces/alert.interface';
-import { ComponentDrawerData } from '../../../../internal/declarations/interfaces/component-drawer-data.interface';
-import { ModalWindowData } from '../../../../internal/declarations/interfaces/modal-window-data.interface';
-import { LoaderType } from '../../../../internal/declarations/types/loader-type.type';
+import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
+import { ComponentDrawerData } from '../../../../../internal/declarations/interfaces/component-drawer-data.interface';
+import { ModalWindowData } from '../../../../../internal/declarations/interfaces/modal-window-data.interface';
+import { LoaderType } from '../../../../../internal/declarations/types/loader-type.type';
 import { AlertsService } from '../../services/alerts.service';
 import { DrawersService } from '../../services/drawers.service';
 import { LoaderService } from '../../services/loader.service';

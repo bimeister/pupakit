@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
-import { TreeItemNode } from '../../../../internal/declarations/interfaces/tree-item-node.interface';
+import { TreeItemNode } from '../../../../../internal/declarations/interfaces/tree-item-node.interface';
 
 @Component({
   selector: 'pupa-chip-select-tree',

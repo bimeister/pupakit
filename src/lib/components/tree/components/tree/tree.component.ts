@@ -30,11 +30,11 @@ import {
   withLatestFrom
 } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
-import { FlatTreeDataSource } from '../../../../internal/declarations/classes/flat-tree-data-source.class';
-import { FlatTreeItem } from '../../../../internal/declarations/classes/flat-tree-item.class';
-import { TreeManipulator } from '../../../../internal/declarations/classes/tree-manipulator.class';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { VOID } from '../../../../../internal/constants/void.const';
+import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
+import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
+import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-tree',

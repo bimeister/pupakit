@@ -14,8 +14,8 @@ import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
-import { Tab } from '../../../../internal/declarations/interfaces/tab.interface';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { Tab } from '../../../../../internal/declarations/interfaces/tab.interface';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 interface TabWithUrl extends Tab {
   url: string;

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { VOID } from '../../../../internal/constants/void.const';
+import { VOID } from '../../../../../internal/constants/void.const';
 
 @Component({
   selector: 'pupa-chip-tabs',

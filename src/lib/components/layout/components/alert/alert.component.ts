@@ -1,8 +1,8 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 
-import { Alert } from '../../../../internal/declarations/interfaces/alert.interface';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { AlertsService } from '../../services/alerts.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { DropdownModule } from '../dropdown/dropdown.module';
-import { SharedModule } from './../../internal/shared/shared.module';
+import { SharedModule } from './../../../internal/shared/shared.module';
 import { SelectComponent } from './components/select/select.component';
 
 @NgModule({

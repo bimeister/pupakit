@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { SharedModule } from './../../internal/shared/shared.module';
+import { SharedModule } from './../../../internal/shared/shared.module';
 import { ChipTabsItemComponent } from './components/chip-tabs-item/chip-tabs-item.component';
 import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 

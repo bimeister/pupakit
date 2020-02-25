@@ -11,13 +11,13 @@ import {
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
 
-import { InputSize } from '../../../../internal/declarations/types/input-size.type';
-import { InputTextAlign } from '../../../../internal/declarations/types/input-text-align.type';
-import { InputType } from '../../../../internal/declarations/types/input-type.type';
-import { getRangeEndDate } from '../../../../internal/helpers/get-range-end-date.helper';
-import { getRangeStartDate } from '../../../../internal/helpers/get-range-start-date.helper';
-import { isDate } from '../../../../internal/helpers/is-date.helper';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { InputSize } from '../../../../../internal/declarations/types/input-size.type';
+import { InputTextAlign } from '../../../../../internal/declarations/types/input-text-align.type';
+import { InputType } from '../../../../../internal/declarations/types/input-type.type';
+import { getRangeEndDate } from '../../../../../internal/helpers/get-range-end-date.helper';
+import { getRangeStartDate } from '../../../../../internal/helpers/get-range-start-date.helper';
+import { isDate } from '../../../../../internal/helpers/is-date.helper';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 type ValueType = string | Date | null | number;
 

@@ -1,6 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { SharedModule } from '../../internal/shared/shared.module';
+import { SharedModule } from '../../../internal/shared/shared.module';
 import { AlertComponent } from './components/alert/alert.component';
 import { CloseButtonComponent } from './components/close-button/close-button.component';
 import { DrawerPaneComponent } from './components/drawer-pane/drawer-pane.component';
