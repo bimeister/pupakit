@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
+import { SharedModule } from '../internal/shared/shared.module';
 import { ButtonModule } from './components/button/button.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipButtonModule } from './components/chip-button/chip-button.module';
@@ -29,7 +30,6 @@ import { TextareaModule } from './components/textarea/textarea.module';
 import { TileModule } from './components/tile/tile.module';
 import { TreeModule } from './components/tree/tree.module';
 import { WasherModule } from './components/washer/washer.module';
-import { SharedModule } from './internal/shared/shared.module';
 
 const EXPORTS: any[] = [
   ButtonModule,
