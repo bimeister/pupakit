@@ -27,6 +27,7 @@ export class TreeDemoComponent {
     scrollByRoute$: of([]),
     selectedNodesIds$: of(null),
     nodeTemplate: null,
-    trackBy: null
+    trackBy: null,
+    elementTemplate: null
   });
 }
