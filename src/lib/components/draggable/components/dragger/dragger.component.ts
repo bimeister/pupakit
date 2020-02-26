@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Renderer2 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -33,7 +34,11 @@ export class DraggerComponent {
     return nativeElement.getBoundingClientRect();
   }
 
-  constructor(private readonly renderer: Renderer2, private readonly elementRef: ElementRef<HTMLElement>) {}
+  constructor(
+    private readonly renderer: Renderer2,
+    private readonly elementRef: ElementRef<HTMLElement>,
+    @Inject(DOCUMENT) private readonly document: Document
+  ) {}
 
   @HostListener('mousedown', ['$event'])
   public processMouseDown(event: MouseEvent): void {
@@ -63,7 +68,11 @@ export class DraggerComponent {
 
   private createNewListener(): void {
     const unlisten: VoidFunction = this.renderer.listen('document', 'mousemove', (event: MouseEvent) => {
-      this.elementTargetPositon$.next([event.pageX, event.pageY]);
+      const { height, width }: ClientRect = this.document.body.getBoundingClientRect();
+      const sanitizedPositionXPx: number = DraggerComponent.getSanitizedValue(event.pageX, 0, width);
+      const sanitizedPositionYPx: number = DraggerComponent.getSanitizedValue(event.pageY, 0, height);
+
+      this.elementTargetPositon$.next([sanitizedPositionXPx, sanitizedPositionYPx]);
     });
 
     this.eventUnlistener$.next(unlisten);
@@ -86,5 +95,15 @@ export class DraggerComponent {
 
   private static notRendered(elementRef: ElementRef<HTMLElement>): boolean {
     return isNullOrUndefined(elementRef) || isNullOrUndefined(elementRef.nativeElement);
+  }
+
+  private static getSanitizedValue(value: number, min: number, max: number): number {
+    if (isNullOrUndefined(value) || typeof value !== 'number' || value < min) {
+      return min;
+    }
+    if (value > max) {
+      return max;
+    }
+    return value;
   }
 }
