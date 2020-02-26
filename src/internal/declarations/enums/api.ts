@@ -4,6 +4,7 @@
 
 export * from './control-state.enum';
 export * from './day-of-week.enum';
+export * from './direction.enum';
 export * from './element-state.enum';
 export * from './external-disk-content.enum';
 export * from './modal-state.enum';

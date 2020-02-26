@@ -9,12 +9,8 @@ import {
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import {
-  DatagridColumnSetting
-} from '../../../../../internal/declarations/interfaces/datagrid-column-setting.interface';
-import {
-  DroppableHorizontalPosition
-} from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
+import { DatagridColumnSetting } from '../../../../../internal/declarations/interfaces/datagrid-column-setting.interface';
+import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({

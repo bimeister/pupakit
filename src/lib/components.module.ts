@@ -11,6 +11,7 @@ import { ControlTextModule } from './components/control-text/control-text.module
 import { DatagridModule } from './components/datagrid/datagrid.module';
 import { DatepickerModule } from './components/datepicker/datepicker.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
+import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
@@ -42,6 +43,7 @@ const EXPORTS: any[] = [
   DatagridModule,
   DatepickerModule,
   DaySelectorModule,
+  DraggableModule,
   DrawerModule,
   DropdownModule,
   DroppableModule,

@@ -29,7 +29,7 @@
     "test:ci": "ng test --configuration=ci",
     "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect",
     "barrel": "npm run barrel:components && npm run barrel:internal",
-    "barrel:components": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/components\"",
+    "barrel:components": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/lib/components\"",
     "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\""
   },
   "dependencies": {

@@ -12,6 +12,7 @@ export * from './control-text/api';
 export * from './datagrid/api';
 export * from './datepicker/api';
 export * from './day-selector/api';
+export * from './draggable/api';
 export * from './drawer/api';
 export * from './dropdown/api';
 export * from './droppable/api';
