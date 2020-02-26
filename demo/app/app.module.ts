@@ -19,6 +19,7 @@ import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
+import { DraggableDemoComponent } from './draggable-demo/draggable-demo.component';
 import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
@@ -80,7 +81,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     RadioButtonDemoComponent,
     ChipTabsDemoComponent,
     LayoutDemoComponent,
-    TreeDemoComponent
+    TreeDemoComponent,
+    DraggableDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -173,6 +175,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'day-selector',
         component: DaySelectorDemoComponent
+      },
+      {
+        path: 'draggable',
+        component: DraggableDemoComponent
       },
       {
         path: 'datepicker',
