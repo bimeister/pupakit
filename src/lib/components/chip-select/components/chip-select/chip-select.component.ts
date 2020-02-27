@@ -4,7 +4,7 @@ import { mapTo } from 'rxjs/operators';
 
 import { VOID } from '../../../../../internal/constants/void.const';
 import { ChipItem } from '../../../../../internal/declarations/interfaces/chip-item.interface';
-import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
+import { DroppableLegacyComponent } from '../../../droppable/components/droppable-legacy/droppable-legacy.component';
 
 @Component({
   selector: 'pupa-chip-select',
@@ -13,7 +13,7 @@ import { DroppableComponent } from '../../../droppable/components/droppable/drop
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipSelectComponent implements OnDestroy {
-  @ViewChild(DroppableComponent, { static: true }) public droppable: DroppableComponent;
+  @ViewChild(DroppableLegacyComponent, { static: true }) public droppable: DroppableLegacyComponent;
 
   @Input()
   public readonly: boolean = false;

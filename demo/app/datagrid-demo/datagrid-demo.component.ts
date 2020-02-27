@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, TemplateRef, ViewChild } from '@angular/core';
 import { ColDef } from 'ag-grid-community';
+
+import { DatagridTemplateRendererComponent } from '../../../src/public-api';
 
 @Component({
   selector: 'demo-datagrid-demo',
@@ -7,12 +9,10 @@ import { ColDef } from 'ag-grid-community';
   styleUrls: ['./datagrid-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatagridDemoComponent {
-  public readonly columnDefs: ColDef[] = [
-    { headerName: 'Make', field: 'make' },
-    { headerName: 'Model', field: 'model' },
-    { headerName: 'Price', field: 'price' }
-  ];
+export class DatagridDemoComponent implements AfterViewInit {
+  @ViewChild('customCell', { static: false }) public customCellRef: TemplateRef<HTMLElement>;
+
+  public columnDefs: ColDef[];
 
   public readonly rowData: any[] = [
     { make: 'Toyota', model: 'Celica', price: 35000 },
@@ -112,4 +112,19 @@ export class DatagridDemoComponent {
     { make: 'Ford', model: 'Mondeo', price: 32000 },
     { make: 'Porsche', model: 'Boxter', price: 72000 }
   ];
+
+  public ngAfterViewInit(): void {
+    this.columnDefs = [
+      { headerName: 'Make', field: 'make' },
+      {
+        headerName: 'Model',
+        field: 'model',
+        cellRendererFramework: DatagridTemplateRendererComponent,
+        cellRendererParams: {
+          templateRef: this.customCellRef
+        }
+      },
+      { headerName: 'Price', field: 'price' }
+    ];
+  }
 }

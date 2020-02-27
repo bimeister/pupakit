@@ -9,6 +9,7 @@ export * from './component-drawer-data.interface';
 export * from './datagrid-column-setting.interface';
 export * from './days-map.interface';
 export * from './dropdown-item.interface';
+export * from './droppable-config.interface';
 export * from './icon-data.interface';
 export * from './layout-drawer-configuration.interface';
 export * from './modal-window-configuration.interface';

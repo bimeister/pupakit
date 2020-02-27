@@ -48,7 +48,7 @@
       <ion-icon name="ios-calendar"></ion-icon>
     </div>
 
-    <pupa-droppable
+    <pupa-droppable-legacy
       [ngSwitch]="type === 'date'"
       [open]="isDatePickerVisible"
       [anchor]="dateInputElement"
@@ -67,6 +67,6 @@
         (range)="updateValue($event)"
         [selectedRange]="value"
       ></pupa-datepicker>
-    </pupa-droppable>
+    </pupa-droppable-legacy>
   </div>
 </ng-container>

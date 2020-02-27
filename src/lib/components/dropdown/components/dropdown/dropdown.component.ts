@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
-import { DroppableComponent } from '../../../droppable/components/droppable/droppable.component';
+import { DroppableLegacyComponent } from '../../../droppable/components/droppable-legacy/droppable-legacy.component';
 
 @Component({
   selector: 'pupa-dropdown',
@@ -17,7 +17,7 @@ import { DroppableComponent } from '../../../droppable/components/droppable/drop
   templateUrl: './dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownComponent<T> extends DroppableComponent {
+export class DropdownComponent<T> extends DroppableLegacyComponent {
   @Input() public items: DropdownItem<T>[] | T[];
 
   /**

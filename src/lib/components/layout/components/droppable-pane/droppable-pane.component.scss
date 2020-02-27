@@ -1,0 +1,23 @@
+@import 'variables';
+
+.droppable-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: rems(0.25) 0;
+  border-radius: rems(0.25);
+  max-width: px(500);
+  max-height: rems(17.5);
+  overflow: auto;
+  box-shadow: $box-shadow_hover;
+  background: $color_white;
+  transition: none;
+  pointer-events: all;
+
+  &_open {
+    opacity: 1;
+    pointer-events: all;
+    transition: opacity 0.15s, transform 0.15s;
+    transform: translateY(0);
+  }
+}
