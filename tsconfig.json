@@ -28,5 +28,8 @@
     "types": ["node"],
     "typeRoots": ["node_modules/@types"]
   },
+  "angularCompilerOptions": {
+    "enableIvy": false
+  },
   "exclude": ["node_modules"]
 }
