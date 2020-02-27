@@ -29,6 +29,7 @@ import { LayoutDemoComponent } from './layout-demo/layout-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
+import { MultiselectionListDemoComponent } from './multiselection-list-demo/multiselection-list-demo.component';
 import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
@@ -82,7 +83,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ChipTabsDemoComponent,
     LayoutDemoComponent,
     TreeDemoComponent,
-    DraggableDemoComponent
+    DraggableDemoComponent,
+    MultiselectionListDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -194,6 +196,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'tabs-drawer', component: TabsDrawerDemoComponent },
       { path: 'radio', component: RadioButtonDemoComponent },
       { path: 'layout', component: LayoutDemoComponent },
+      { path: 'multiselection-list', component: MultiselectionListDemoComponent },
       {
         path: '',
         component: AppComponent

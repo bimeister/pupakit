@@ -21,7 +21,7 @@
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
 
-  <pupa-droppable
+  <pupa-droppable-legacy
     *ngIf="!readonly"
     [anchor]="addChips.chipButtonElement.nativeElement"
     [maxWidth]="maxWidth"
@@ -34,7 +34,7 @@
       [notActiveKeys]="notActiveKeys"
       searchText="Поиск..."
     ></pupa-chip-select-tree>
-  </pupa-droppable>
+  </pupa-droppable-legacy>
 </div>
 
 <ng-template #loader>

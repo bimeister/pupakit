@@ -2,7 +2,7 @@
   <pupa-icon-button (onclick)="showDropdown($event)" color="dark" size="small">
     <ion-icon name="settings"></ion-icon>
   </pupa-icon-button>
-  <pupa-droppable
+  <pupa-droppable-legacy
     [open]="isDropdownVisible$ | async"
     [anchor]="settingsBoxWrapper"
     [horizontalPosition]="dropdownPosition"
@@ -19,5 +19,5 @@
         {{ setting.headerName }}
       </pupa-checkbox>
     </div>
-  </pupa-droppable>
+  </pupa-droppable-legacy>
 </div>

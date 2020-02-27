@@ -1,4 +1,10 @@
 @import '~src/styles/variables';
+
+.wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
 .container {
   // max-height: 500px;
   overflow: auto;
