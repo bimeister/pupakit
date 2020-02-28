@@ -4,7 +4,8 @@ import {
   Component,
   ContentChild,
   ElementRef,
-  HostBinding
+  HostBinding,
+  Renderer2
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, shareReplay, switchMap, withLatestFrom } from 'rxjs/operators';
@@ -51,7 +52,8 @@ export class DraggableComponent {
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly renderer: Renderer2
   ) {
     this.subscritption.add(this.moveDraggableElementIfDraggerPositionDoesntMatchTarget());
   }
@@ -74,6 +76,9 @@ export class DraggableComponent {
 
         this.leftOffsetPx = targetXPx - clickRelativeXPx;
         this.topOffsetPx = targetYPx - clickRelativeYPx;
+
+        this.renderer.setStyle(this.elementRef.nativeElement, 'right', 'unset');
+        this.renderer.setStyle(this.elementRef.nativeElement, 'bottom', 'unset');
 
         this.changeDetectorRef.markForCheck();
       });
