@@ -67,15 +67,32 @@ export class DraggerComponent {
   }
 
   private createNewListener(): void {
-    const unlisten: VoidFunction = this.renderer.listen('document', 'mousemove', (event: MouseEvent) => {
-      const { height, width }: ClientRect = this.document.body.getBoundingClientRect();
-      const sanitizedPositionXPx: number = DraggerComponent.getSanitizedValue(event.pageX, 0, width);
-      const sanitizedPositionYPx: number = DraggerComponent.getSanitizedValue(event.pageY, 0, height);
+    const unlisten: VoidFunction = this.renderer.listen('document', 'mousemove', (event: MouseEvent) =>
+      this.updateTargetPosition(event)
+    );
+
+    this.eventUnlistener$.next(unlisten);
+  }
+
+  private updateTargetPosition(event: MouseEvent): void {
+    this.elementRelativeClickPosition$.pipe(take(1)).subscribe(([clickOffsetXPx, clickOffsetYPx]: [number, number]) => {
+      const mouseXPx: number = event.pageX;
+      const mouseYPx: number = event.pageY;
+
+      const bodyClientRect: ClientRect = this.document.body.getBoundingClientRect();
+      const draggerClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
+
+      const maxXPx: number = bodyClientRect.width - draggerClientRect.width + clickOffsetXPx;
+      const maxYPx: number = bodyClientRect.height - draggerClientRect.height + clickOffsetYPx;
+
+      const minXPx: number = clickOffsetXPx;
+      const minYPx: number = clickOffsetYPx;
+
+      const sanitizedPositionXPx: number = DraggerComponent.getSanitizedValue(mouseXPx, minXPx, maxXPx);
+      const sanitizedPositionYPx: number = DraggerComponent.getSanitizedValue(mouseYPx, minYPx, maxYPx);
 
       this.elementTargetPositon$.next([sanitizedPositionXPx, sanitizedPositionYPx]);
     });
-
-    this.eventUnlistener$.next(unlisten);
   }
 
   private setRelativeClickPosition(event: MouseEvent): void {
@@ -94,7 +111,7 @@ export class DraggerComponent {
   }
 
   private static notRendered(elementRef: ElementRef<HTMLElement>): boolean {
-    return isNullOrUndefined(elementRef) || isNullOrUndefined(elementRef.nativeElement);
+    return isNullOrUndefined(elementRef?.nativeElement);
   }
 
   private static getSanitizedValue(value: number, min: number, max: number): number {
