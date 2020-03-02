@@ -1,5 +1,4 @@
 import {
-  AfterContentChecked,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -30,12 +29,15 @@ export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsPara
   styleUrls: ['./datagrid.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatagridComponent implements OnChanges, AfterContentChecked {
+export class DatagridComponent implements OnChanges {
   private gridApi: GridApi;
 
   @Output() public rowClicked: EventEmitter<unknown> = new EventEmitter<unknown>();
 
   @Input() public sizeColumnsToFit: boolean = false;
+  @Input() public rowsAutoheight: boolean = false;
+
+  @Input() public theme: 'default' | 'boxed' = 'default';
 
   @Input() public columnDefs: ColDef[];
 
@@ -66,13 +68,17 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
     return data.hasOwnProperty('id') ? data['id'] : String(data);
   };
 
+  public get themeClass(): string {
+    return `pupagrid-theme-${this.theme}`;
+  }
+
   private get isGridReady(): boolean {
     return !isNullOrUndefined(this.gridApi);
   }
 
   @HostListener('window:resize')
   public processWindowResizeEvent(): void {
-    this.makeColumnsFitGridWidth();
+    this.normalizeGrid();
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -80,10 +86,6 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
     this.processVisibleColIdsChanges(changes);
     this.processRowDataChanges(changes);
     this.processRowDataSourceChanges(changes);
-  }
-
-  public ngAfterContentChecked(): void {
-    this.makeColumnsFitGridWidth();
   }
 
   public handleEvent(emitter: string, data: unknown): void {
@@ -96,7 +98,11 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
 
   public onGridReady(gridReadyEvent: GridReadyEvent): void {
     this.gridApi = gridReadyEvent.api;
+  }
+
+  public normalizeGrid(): void {
     this.makeColumnsFitGridWidth();
+    this.normalizeRowHeights();
   }
 
   private makeColumnsFitGridWidth(): void {
@@ -104,6 +110,13 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
       return;
     }
     this.sizeColumnsToFit ? this.gridApi.sizeColumnsToFit() : this.gridApi.doLayout();
+  }
+
+  private normalizeRowHeights(): void {
+    if (isNullOrUndefined(this.gridApi) || !this.rowsAutoheight) {
+      return;
+    }
+    this.gridApi.resetRowHeights();
   }
 
   private processRowDataSourceChanges(changes: SimpleChanges): void {
@@ -140,7 +153,7 @@ export class DatagridComponent implements OnChanges, AfterContentChecked {
     if (isNullOrUndefined(changes) || !this.isValueChanged(changes.columnDefs)) {
       return;
     }
-    this.makeColumnsFitGridWidth();
+    this.normalizeGrid();
   }
 
   private processVisibleColIdsChanges(changes: SimpleChanges): void {

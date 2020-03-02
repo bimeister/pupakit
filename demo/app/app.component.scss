@@ -11,6 +11,7 @@
   width: 200px;
   overflow: auto;
   border-right: 1px solid $color_grey-ivory;
+  box-sizing: border-box;
 }
 
 main {

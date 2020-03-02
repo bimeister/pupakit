@@ -1,4 +1,4 @@
-<pupa-datagrid [columnDefs]="columnDefs" [rowData]="rowData" domLayout="normal"></pupa-datagrid>
+<pupa-datagrid [columnDefs]="columnDefs" [rowData]="rowData" theme="boxed" domLayout="normal"></pupa-datagrid>
 
 <ng-template #customCell let-row>
   <pupa-droppable>
@@ -6,10 +6,10 @@
       🎄
     </pupa-droppable-trigger>
     <pupa-droppable-content>
-      {{ row.make }}<br />
-      {{ row.make }}<br />
-      {{ row.make }}<br />
-      {{ row.make }}<br />
+      {{ row.model }}<br />
+      {{ row.model }}<br />
+      {{ row.model }}<br />
+      {{ row.model }}<br />
     </pupa-droppable-content>
   </pupa-droppable>
 </ng-template>

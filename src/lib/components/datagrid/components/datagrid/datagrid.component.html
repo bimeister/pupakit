@@ -1,5 +1,6 @@
 <ag-grid-angular
   class="pupagrid ag-theme-balham"
+  [ngClass]="themeClass"
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [domLayout]="domLayout"
@@ -7,4 +8,6 @@
   [getRowNodeId]="rowTrackByFn"
   (rowClicked)="handleEvent('rowClicked', $event)"
   (gridReady)="onGridReady($event)"
+  (rowDataUpdated)="normalizeGrid()"
+  (firstDataRendered)="normalizeGrid()"
 ></ag-grid-angular>
