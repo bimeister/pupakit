@@ -1,23 +1,22 @@
-<div #settingsBoxWrapper>
-  <pupa-icon-button (onclick)="showDropdown($event)" color="dark" size="small">
-    <ion-icon name="settings"></ion-icon>
-  </pupa-icon-button>
-  <pupa-droppable-legacy
-    [open]="isDropdownVisible$ | async"
-    [anchor]="settingsBoxWrapper"
-    [horizontalPosition]="dropdownPosition"
-    maxWidth="unset"
-  >
-    <div class="controls">
-      <pupa-checkbox
-        *ngFor="let setting of settings; trackBy: trackByColId"
-        class="controls__item"
-        [value]="setting.isVisible"
-        [disabled]="!setting.isAvailable"
-        (valueChange)="updateSettingsState(setting, $event)"
-      >
-        {{ setting.headerName }}
-      </pupa-checkbox>
-    </div>
-  </pupa-droppable-legacy>
+<div>
+  <pupa-droppable [closeOnContentClick]="false">
+    <pupa-droppable-trigger>
+      <pupa-icon-button color="dark" size="small">
+        <ion-icon name="settings"></ion-icon>
+      </pupa-icon-button>
+    </pupa-droppable-trigger>
+    <pupa-droppable-content>
+      <div class="controls">
+        <pupa-checkbox
+          *ngFor="let setting of settings; trackBy: trackByColId"
+          class="controls__item"
+          [value]="setting.isVisible"
+          [disabled]="!setting.isAvailable"
+          (valueChange)="updateSettingsState(setting, $event)"
+        >
+          {{ setting.headerName }}
+        </pupa-checkbox>
+      </div>
+    </pupa-droppable-content>
+  </pupa-droppable>
 </div>

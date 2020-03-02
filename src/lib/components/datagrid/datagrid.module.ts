@@ -3,6 +3,7 @@ import { AgGridModule } from 'ag-grid-angular';
 
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ChipSelectModule } from '../chip-select/chip-select.module';
+import { DroppableModule } from '../droppable/droppable.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
@@ -16,6 +17,7 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
     CheckboxModule,
     ChipSelectModule,
     IconButtonModule,
+    DroppableModule,
     AgGridModule.withComponents([DatagridTemplateRendererComponent])
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -26,26 +26,23 @@ $header-cell-moving-background-color: $color_light-blue;
 }
 
 .pupagrid {
-  .datagrid {
-    border: none;
-  }
-
-  .ag-center-cols-container {
-    width: 100%;
-  }
-
   .ag-root {
     border: none;
     @include scrollbar;
   }
 
+  .ag-header-container {
+    width: 100%;
+  }
+
+  .ag-center-cols-container {
+    width: 100%;
+    min-width: 100%;
+  }
+
   .ag-header {
     color: $color_main-dark;
     font-weight: normal;
-  }
-
-  .ag-header-container {
-    width: 100%;
   }
 
   .ag-header-cell-text {
@@ -54,25 +51,12 @@ $header-cell-moving-background-color: $color_light-blue;
     font-weight: normal;
   }
 
-  .ag-row {
-    border-top: 1px solid $color_light-blue;
-  }
-
-  .ag-row-selected {
-    background: $color_light-blue;
-  }
-
-  .ag-center-cols-container {
-    min-width: 100%;
+  .ag-cell {
+    font-weight: normal;
   }
 
   .ag-cell-label-container {
     height: 100%;
-  }
-
-  .ag-cell,
-  .ag-cell-focus {
-    border: none !important;
   }
 
   .ag-icon-desc,
@@ -99,5 +83,80 @@ $header-cell-moving-background-color: $color_light-blue;
   .ag-header-cell-sorted-desc,
   .ag-header-cell-sorted-asc {
     color: $color_active-blue;
+  }
+
+  .ag-cell,
+  .ag-cell-focus {
+    border: none !important;
+  }
+
+  &.pupagrid-theme-default {
+    .datagrid {
+      border: none;
+    }
+
+    .ag-row {
+      border-top: px(1) solid $color_light-blue;
+    }
+
+    .ag-row-selected {
+      background: $color_light-blue;
+    }
+  }
+
+  &.pupagrid-theme-boxed {
+    box-sizing: border-box;
+    padding: 0 px(2);
+
+    .datagrid {
+      border: none;
+    }
+
+    .ag-header {
+      padding: px(12) px(10);
+      border-bottom: 0;
+    }
+
+    .ag-header-row {
+      height: 100% !important;
+      display: flex;
+      align-items: center;
+    }
+
+    .ag-pinned-left-header,
+    .ag-pinned-right-header {
+      position: relative;
+    }
+
+    .ag-header-cell {
+      padding: 0;
+      height: auto;
+    }
+
+    .ag-header-cell-text {
+      color: $color_grey-light;
+      padding-right: px(3);
+    }
+
+    .ag-row {
+      border-radius: rems(0.5);
+      border-bottom: px(2) solid $color_white;
+      box-sizing: border-box;
+      background: $color_white;
+    }
+
+    .ag-row-focus,
+    .ag-row-hover {
+      background: $color_light-blue;
+    }
+
+    .ag-cell {
+      padding: px(5) px(9);
+      box-sizing: border-box;
+      overflow: hidden;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
   }
 }

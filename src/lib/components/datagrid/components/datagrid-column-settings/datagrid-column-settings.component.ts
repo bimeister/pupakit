@@ -1,16 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-  TrackByFunction
-} from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TrackByFunction } from '@angular/core';
 
 import { DatagridColumnSetting } from '../../../../../internal/declarations/interfaces/datagrid-column-setting.interface';
-import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
@@ -21,23 +11,10 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
 })
 export class DatagridColumnSettingsComponent {
   @Input() public settings: DatagridColumnSetting[] = [];
-  @Input() public dropdownPosition: DroppableHorizontalPosition = 'right';
 
   @Output() public readonly settingsChange: EventEmitter<DatagridColumnSetting[]> = new EventEmitter<
     DatagridColumnSetting[]
   >();
-
-  public readonly isDropdownVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  @HostListener('window:click')
-  public processMouseClick(): void {
-    this.isDropdownVisible$.next(false);
-  }
-
-  public showDropdown(event: MouseEvent): void {
-    event.stopPropagation();
-    this.isDropdownVisible$.next(true);
-  }
 
   public updateSettingsState(setting: DatagridColumnSetting, isVisible: boolean): void {
     if (isNullOrUndefined(setting) || isNullOrUndefined(isVisible)) {
