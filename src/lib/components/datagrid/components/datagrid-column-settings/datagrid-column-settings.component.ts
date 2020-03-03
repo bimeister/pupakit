@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, TrackByFunction } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TrackByFunction } from '@angular/core';
+import { ICellRendererAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams } from 'ag-grid-community';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
+import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridColumnSetting } from '../../../../../internal/declarations/interfaces/datagrid-column-setting.interface';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
@@ -9,12 +14,20 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   styleUrls: ['./datagrid-column-settings.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatagridColumnSettingsComponent {
-  @Input() public settings: DatagridColumnSetting[] = [];
+export class DatagridColumnSettingsComponent<rowDataT> implements ICellRendererAngularComp {
+  public settings$: Observable<DatagridColumnSetting[]>;
 
-  @Output() public readonly settingsChange: EventEmitter<DatagridColumnSetting[]> = new EventEmitter<
-    DatagridColumnSetting[]
-  >();
+  private manipulator: DatagridManipulator<rowDataT>;
+
+  public refresh(params: ICellRendererParams): boolean {
+    this.manipulator = params['manipulator'];
+    this.settings$ = this.manipulator.columnSettings$;
+    return true;
+  }
+
+  public agInit(params: ICellRendererParams): void {
+    this.refresh(params);
+  }
 
   public updateSettingsState(setting: DatagridColumnSetting, isVisible: boolean): void {
     if (isNullOrUndefined(setting) || isNullOrUndefined(isVisible)) {
@@ -24,8 +37,8 @@ export class DatagridColumnSettingsComponent {
     if (!isValueChanged) {
       return;
     }
-    setting.isVisible = isVisible;
-    this.settingsChange.emit(this.settings);
+
+    this.updateColumnSetting(setting.colId, isVisible);
   }
 
   public readonly trackByColId: TrackByFunction<DatagridColumnSetting> = (
@@ -34,4 +47,19 @@ export class DatagridColumnSettingsComponent {
   ): string => {
     return item.colId;
   };
+
+  private updateColumnSetting(colId: string, isVisible: boolean): void {
+    this.settings$.pipe(take(1)).subscribe((settings: DatagridColumnSetting[]) => {
+      const updatedSettings: DatagridColumnSetting[] = settings.map((currentSetting: DatagridColumnSetting) => {
+        if (currentSetting.colId === colId) {
+          return {
+            ...currentSetting,
+            isVisible
+          };
+        }
+        return currentSetting;
+      });
+      this.manipulator.updateColumnSettingsAndSetColumnsVisibility(updatedSettings);
+    });
+  }
 }

@@ -18,7 +18,7 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
     ChipSelectModule,
     IconButtonModule,
     DroppableModule,
-    AgGridModule.withComponents([DatagridTemplateRendererComponent])
+    AgGridModule.withComponents([DatagridTemplateRendererComponent, DatagridColumnSettingsComponent])
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [DatagridComponent, DatagridColumnSettingsComponent, DatagridTemplateRendererComponent]

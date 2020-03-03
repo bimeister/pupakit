@@ -146,8 +146,15 @@ $header-cell-moving-background-color: $color_light-blue;
     }
 
     .ag-row-focus,
-    .ag-row-hover {
+    .ag-row-hover,
+    .ag-row-selected {
       background: $color_light-blue;
+    }
+
+    .ag-row-selected {
+      &.ag-row-hover {
+        background: $color_cadet-blue-light;
+      }
     }
 
     .ag-cell {

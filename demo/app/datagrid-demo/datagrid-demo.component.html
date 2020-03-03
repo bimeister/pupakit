@@ -1,9 +1,20 @@
-<pupa-datagrid [columnDefs]="columnDefs" [rowData]="rowData" theme="boxed" domLayout="normal"></pupa-datagrid>
+<pupa-button class="button" (click)="scrollToIndex(32)">
+  Scroll to index 32
+</pupa-button>
+
+<pupa-datagrid class="grid" [manipulator]="manipulator"> </pupa-datagrid>
 
 <ng-template #customCell let-row>
   <pupa-droppable>
     <pupa-droppable-trigger>
-      🎄
+      <ng-container *ngIf="row.make === 'Porsche'">
+        🎄 {{ row.model }} <br />
+        🎄 {{ row.model }} <br />
+        🎄 {{ row.model }} <br />
+        🎄 {{ row.model }} <br />
+        🎄 {{ row.model }} <br />
+      </ng-container>
+      <ng-container *ngIf="row.make !== 'Porsche'"> 🎄 {{ row.model }} </ng-container>
     </pupa-droppable-trigger>
     <pupa-droppable-content>
       {{ row.model }}<br />
@@ -12,4 +23,10 @@
       {{ row.model }}<br />
     </pupa-droppable-content>
   </pupa-droppable>
+</ng-template>
+
+<ng-template #userActionsCell let-row>
+  <pupa-icon-button color="light" size="small" class="delete-user-button">
+    <ion-icon name="trash"></ion-icon>
+  </pupa-icon-button>
 </ng-template>

@@ -8,7 +8,7 @@
     <pupa-droppable-content>
       <div class="controls">
         <pupa-checkbox
-          *ngFor="let setting of settings; trackBy: trackByColId"
+          *ngFor="let setting of settings$ | async; trackBy: trackByColId"
           class="controls__item"
           [value]="setting.isVisible"
           [disabled]="!setting.isAvailable"
