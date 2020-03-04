@@ -24,3 +24,4 @@ export * from './modal-window-size.type';
 export * from './position.type';
 export * from './search-field-kind.type';
 export * from './textarea-resize.type';
+export * from './uuid.type';

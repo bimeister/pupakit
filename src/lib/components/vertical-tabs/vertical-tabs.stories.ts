@@ -1,11 +1,10 @@
 import { storiesOf } from '@storybook/angular';
 
-import { VerticalTabsItemComponent } from './components/vertical-tabs-item/vertical-tabs-item.component';
-import { VerticalTabsComponent } from './components/vertical-tabs/vertical-tabs.component';
+import { VerticalTabsModule } from './vertical-tabs.module';
 
 storiesOf('Vertical Tabs', module).add('default', () => ({
   moduleMetadata: {
-    declarations: [VerticalTabsComponent, VerticalTabsItemComponent]
+    imports: [VerticalTabsModule]
   },
   template: `
     <pupa-vertical-tabs>

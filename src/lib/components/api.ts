@@ -32,4 +32,5 @@ export * from './tabs/api';
 export * from './textarea/api';
 export * from './tile/api';
 export * from './tree/api';
+export * from './vertical-tabs/api';
 export * from './washer/api';
