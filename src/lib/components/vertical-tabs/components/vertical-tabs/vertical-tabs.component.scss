@@ -1,0 +1,16 @@
+@import './../../../../../styles/functions.scss';
+@import './../../../../../styles/variables.scss';
+
+.vertical-tabs {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  overflow: hidden auto;
+
+  & > * ~ * {
+    margin: rems(0.5) 0 0 0;
+  }
+}

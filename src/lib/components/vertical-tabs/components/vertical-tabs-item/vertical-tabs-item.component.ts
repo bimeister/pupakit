@@ -1,4 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { v4 as uuid } from 'uuid';
+
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 
 @Component({
   selector: 'pupa-vertical-tabs-item',
@@ -7,4 +11,22 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalTabsItemComponent {}
+export class VerticalTabsItemComponent {
+  public readonly clicked$: Subject<VerticalTabsItemComponent> = new Subject<VerticalTabsItemComponent>();
+  public readonly isSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly id: Uuid = uuid();
+
+  @HostListener('click')
+  public processTabClick(): void {
+    this.clicked$.next(this);
+  }
+
+  public deselect(): void {
+    this.isSelected$.next(false);
+  }
+
+  public select(): void {
+    this.isSelected$.next(true);
+  }
+}
