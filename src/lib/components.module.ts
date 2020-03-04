@@ -31,6 +31,7 @@ import { TabsModule } from './components/tabs/tabs.module';
 import { TextareaModule } from './components/textarea/textarea.module';
 import { TileModule } from './components/tile/tile.module';
 import { TreeModule } from './components/tree/tree.module';
+import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { WasherModule } from './components/washer/washer.module';
 
 const EXPORTS: any[] = [
@@ -64,7 +65,8 @@ const EXPORTS: any[] = [
   TileModule,
   TreeModule,
   WasherModule,
-  MultiselectionListModule
+  MultiselectionListModule,
+  VerticalTabsModule
 ];
 
 @NgModule({

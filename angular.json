@@ -1,226 +1,281 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
-  "newProjectRoot": "projects",
-  "projects": {
-    "pupakit": {
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "projectType": "library",
-      "root": "./",
-      "sourceRoot": "./src",
-      "prefix": "pupa",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "./tsconfig.lib.json",
-            "project": "./ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "coverage": true,
-            "passWithNoTests": true
-          },
-          "configurations": {
-            "ci": {
-              "bail": true,
-              "cache": false,
-              "ci": true,
-              "watch": false
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "defaultProject": "pupakit",
+    "newProjectRoot": "projects",
+    "projects": {
+        "demo": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "configurations": {
+                        "development": {
+                            "aot": true,
+                            "budgets": [
+                                {
+                                    "maximumError": "5mb",
+                                    "maximumWarning": "2mb",
+                                    "type": "initial"
+                                }
+                            ],
+                            "buildOptimizer": true,
+                            "extractCss": false,
+                            "extractLicenses": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/development.environment.ts"
+                                }
+                            ],
+                            "namedChunks": false,
+                            "optimization": false,
+                            "outputHashing": "none",
+                            "sourceMap": true,
+                            "vendorChunk": false
+                        },
+                        "production": {
+                            "aot": true,
+                            "budgets": [
+                                {
+                                    "maximumError": "5mb",
+                                    "maximumWarning": "2mb",
+                                    "type": "initial"
+                                }
+                            ],
+                            "buildOptimizer": true,
+                            "extractCss": true,
+                            "extractLicenses": true,
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/production.environment.ts"
+                                }
+                            ],
+                            "namedChunks": false,
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "vendorChunk": false
+                        }
+                    },
+                    "options": {
+                        "assets": [
+                            "./demo/assets",
+                            "./demo/favicon.ico",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/ionicons/dist/ionicons",
+                                "output": "/ionicons"
+                            },
+                            {
+                                "glob": "**/*",
+                                "input": "./src/assets",
+                                "output": "/assets"
+                            }
+                        ],
+                        "es5BrowserSupport": true,
+                        "index": "demo/index.html",
+                        "main": "demo/main.ts",
+                        "outputPath": "./demo/docs",
+                        "polyfills": "demo/polyfills.ts",
+                        "scripts": [
+                            "./node_modules/ionicons/dist/ionicons.js"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/styles/"
+                            ]
+                        },
+                        "styles": [
+                            "demo/styles/styles.scss"
+                        ],
+                        "tsConfig": "./tsconfig.app.json"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "configurations": {
+                        "debugging": {
+                            "fix": true,
+                            "force": true,
+                            "format": "prose",
+                            "silent": true
+                        },
+                        "inspection": {
+                            "fix": false,
+                            "force": false,
+                            "format": "stylish",
+                            "silent": false
+                        }
+                    },
+                    "options": {
+                        "exclude": [
+                            "**/node_modules/**"
+                        ],
+                        "tsConfig": [
+                            "tsconfig.app.json",
+                            "tsconfig.spec.json"
+                        ],
+                        "typeCheck": true
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "configurations": {
+                        "development": {
+                            "aot": true,
+                            "browserTarget": "demo:build:development",
+                            "disableHostCheck": true,
+                            "open": true,
+                            "progress": true,
+                            "watch": true
+                        },
+                        "production": {
+                            "aot": true,
+                            "browserTarget": "demo:build:production",
+                            "disableHostCheck": true,
+                            "host": "0.0.0.0",
+                            "open": true,
+                            "port": 4200,
+                            "progress": true,
+                            "watch": false
+                        }
+                    },
+                    "options": {
+                        "browserTarget": "demo:build",
+                        "sourceMap": true
+                    }
+                },
+                "test": {
+                    "builder": "@angular-builders/jest:run",
+                    "configurations": {
+                        "ci": {
+                            "bail": true,
+                            "cache": false,
+                            "ci": true,
+                            "watch": false
+                        },
+                        "debugging": {
+                            "bail": false,
+                            "cache": true,
+                            "ci": false,
+                            "watch": true
+                        }
+                    },
+                    "options": {
+                        "coverage": true,
+                        "passWithNoTests": true
+                    }
+                }
             },
-            "debugging": {
-              "bail": false,
-              "cache": true,
-              "ci": false,
-              "watch": true
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["tsconfig.lib.json", "tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"],
-            "typeCheck": true
-          },
-          "configurations": {
-            "inspection": {
-              "fix": false,
-              "format": "stylish",
-              "force": false,
-              "silent": false
+            "prefix": "demo",
+            "projectType": "application",
+            "root": "./demo",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
             },
-            "debugging": {
-              "fix": true,
-              "format": "prose",
-              "force": true,
-              "silent": true
-            }
-          }
+            "sourceRoot": "./demo"
+        },
+        "pupakit": {
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-ng-packagr:build",
+                    "options": {
+                        "project": "./ng-package.json",
+                        "tsConfig": "./tsconfig.lib.json"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "configurations": {
+                        "debugging": {
+                            "fix": true,
+                            "force": true,
+                            "format": "prose",
+                            "silent": true
+                        },
+                        "inspection": {
+                            "fix": false,
+                            "force": false,
+                            "format": "stylish",
+                            "silent": false
+                        }
+                    },
+                    "options": {
+                        "exclude": [
+                            "**/node_modules/**"
+                        ],
+                        "tsConfig": [
+                            "tsconfig.lib.json",
+                            "tsconfig.spec.json"
+                        ],
+                        "typeCheck": true
+                    }
+                },
+                "test": {
+                    "builder": "@angular-builders/jest:run",
+                    "configurations": {
+                        "ci": {
+                            "bail": true,
+                            "cache": false,
+                            "ci": true,
+                            "watch": false
+                        },
+                        "debugging": {
+                            "bail": false,
+                            "cache": true,
+                            "ci": false,
+                            "watch": true
+                        }
+                    },
+                    "options": {
+                        "coverage": true,
+                        "passWithNoTests": true
+                    }
+                }
+            },
+            "prefix": "pupa",
+            "projectType": "library",
+            "root": "./",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "changeDetection": "OnPush",
+                    "export": false,
+                    "flat": false,
+                    "inlineStyle": false,
+                    "inlineTemplate": false,
+                    "skipImport": false,
+                    "spec": false,
+                    "style": "scss",
+                    "viewEncapsulation": "Emulated"
+                },
+                "@schematics/angular:directive": {
+                    "export": true,
+                    "flat": true,
+                    "skipImport": false,
+                    "spec": true
+                },
+                "@schematics/angular:module": {
+                    "commonModule": false,
+                    "flat": false,
+                    "routing": false,
+                    "routingScope": "Child",
+                    "spec": false
+                },
+                "@schematics/angular:pipe": {
+                    "export": true,
+                    "flat": true,
+                    "skipImport": false,
+                    "spec": true
+                },
+                "@schematics/angular:service": {
+                    "flat": true,
+                    "spec": false
+                }
+            },
+            "sourceRoot": "./src"
         }
-      }
     },
-    "demo": {
-      "root": "./demo",
-      "sourceRoot": "./demo",
-      "projectType": "application",
-      "prefix": "demo",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "options": {
-            "outputPath": "./demo/docs",
-            "index": "demo/index.html",
-            "main": "demo/main.ts",
-            "polyfills": "demo/polyfills.ts",
-            "tsConfig": "./tsconfig.app.json",
-            "assets": [
-              "./demo/favicon.ico",
-              "./demo/assets",
-              { "glob": "**/*", "input": "./node_modules/ionicons/dist/ionicons", "output": "/ionicons" },
-              { "glob": "**/*", "input": "./src/assets", "output": "/assets" }
-            ],
-            "styles": ["demo/styles/styles.scss"],
-            "stylePreprocessorOptions": {
-              "includePaths": ["src/styles/"]
-            },
-            "scripts": ["./node_modules/ionicons/dist/ionicons.js"],
-            "es5BrowserSupport": true
-          },
-          "configurations": {
-            "production": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/production.environment.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            },
-            "development": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/development.environment.ts"
-                }
-              ],
-              "optimization": false,
-              "outputHashing": "none",
-              "sourceMap": true,
-              "extractCss": false,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": false,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "options": {
-            "browserTarget": "demo:build",
-            "sourceMap": true
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "demo:build:production",
-              "open": true,
-              "aot": true,
-              "progress": true,
-              "watch": false,
-              "host": "0.0.0.0",
-              "port": 4200,
-              "disableHostCheck": true
-            },
-            "development": {
-              "browserTarget": "demo:build:development",
-              "open": true,
-              "aot": true,
-              "progress": true,
-              "watch": true,
-              "disableHostCheck": true
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "options": {
-            "coverage": true,
-            "passWithNoTests": true
-          },
-          "configurations": {
-            "ci": {
-              "bail": true,
-              "cache": false,
-              "ci": true,
-              "watch": false
-            },
-            "debugging": {
-              "bail": false,
-              "cache": true,
-              "ci": false,
-              "watch": true
-            }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**"],
-            "typeCheck": true
-          },
-          "configurations": {
-            "inspection": {
-              "fix": false,
-              "format": "stylish",
-              "force": false,
-              "silent": false
-            },
-            "debugging": {
-              "fix": true,
-              "format": "prose",
-              "force": true,
-              "silent": true
-            }
-          }
-        }
-      }
-    }
-  },
-  "defaultProject": "pupakit"
+    "version": 1
 }
