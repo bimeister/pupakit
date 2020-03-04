@@ -28,6 +28,7 @@ export { TextareaModule } from './lib/components/textarea/textarea.module';
 export { TileModule } from './lib/components/tile/tile.module';
 export { TreeModule } from './lib/components/tree/tree.module';
 export { WasherModule } from './lib/components/washer/washer.module';
+export { VerticalTabsModule } from './lib/components/vertical-tabs/vertical-tabs.module';
 export { SharedModule } from './internal/shared/shared.module';
 export * from './lib/components';
 export * from './internal';

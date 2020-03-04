@@ -10,6 +10,7 @@
     "ng": "ng",
     "start": "npm run start:demo",
     "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
+    "start:storybook": "start-storybook",
     "build": "npm run barrel && npm run lint && ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
     "build:scss": "npx scss-bundle --project scss-bundle.config.json && npm run copy:styles",
     "build:css": "npx sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
@@ -30,13 +31,13 @@
     "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect",
     "barrel": "npm run barrel:components && npm run barrel:internal",
     "barrel:components": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/lib/components\"",
-    "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\"",
-    "storybook": "start-storybook"
+    "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\""
   },
   "dependencies": {
     "@angular/cdk": "^8.2.3",
     "ag-grid-angular": "^22.1.1",
     "ag-grid-community": "^22.1.1",
+    "uuid": "^7.0.2",
     "zone.js": "~0.10.2"
   },
   "peerDependencies": {
@@ -59,11 +60,10 @@
     "@angular/router": "~9.0.3",
     "@babel/core": "^7.8.6",
     "@storybook/addon-actions": "^5.3.14",
-    "@storybook/addon-links": "^5.3.14",
-    "@storybook/addon-notes": "^5.3.14",
     "@storybook/angular": "^5.3.14",
     "@types/jest": "^24.0.23",
     "@types/node": "~12.12.7",
+    "@types/uuid": "^7.0.0",
     "babel-loader": "^8.0.6",
     "barrelsby": "^2.2.0",
     "codelyzer": "^5.2.0",
