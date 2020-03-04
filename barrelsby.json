@@ -1,6 +1,6 @@
 {
   "delete": true,
-  "exclude": "(index\\.ts)$",
+  "exclude": "(((index)|(.*\\.stories))\\.ts)$",
   "location": "all",
   "name": "api.ts",
   "structure": "flat",
