@@ -30,7 +30,8 @@
     "autofix": "(npm run prettify & npm run lint:debug) && npm run lint:inspect",
     "barrel": "npm run barrel:components && npm run barrel:internal",
     "barrel:components": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/lib/components\"",
-    "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\""
+    "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\"",
+    "storybook": "start-storybook"
   },
   "dependencies": {
     "@angular/cdk": "^8.2.3",
@@ -39,9 +40,7 @@
     "zone.js": "~0.10.2"
   },
   "peerDependencies": {
-    "tslib": "^1.9.3",
-    "lodash": "^4.17.14",
-    "@angular-builders/jest": "^8.0.0"
+    "lodash": "^4.17.14"
   },
   "devDependencies": {
     "@angular-builders/jest": "^8.0.0",
@@ -58,8 +57,14 @@
     "@angular/platform-browser": "~9.0.3",
     "@angular/platform-browser-dynamic": "~9.0.3",
     "@angular/router": "~9.0.3",
+    "@babel/core": "^7.8.6",
+    "@storybook/addon-actions": "^5.3.14",
+    "@storybook/addon-links": "^5.3.14",
+    "@storybook/addon-notes": "^5.3.14",
+    "@storybook/angular": "^5.3.14",
     "@types/jest": "^24.0.23",
     "@types/node": "~12.12.7",
+    "babel-loader": "^8.0.6",
     "barrelsby": "^2.2.0",
     "codelyzer": "^5.2.0",
     "combos": "^0.2.0",
