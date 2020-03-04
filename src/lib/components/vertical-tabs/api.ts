@@ -3,5 +3,4 @@
  */
 
 export * from './vertical-tabs.module';
-export * from './vertical-tabs.stories';
 export * from './components/api';
