@@ -1,6 +1,6 @@
-@import 'variables';
-@import 'functions';
-@import 'mixins';
+@import './../../../../../styles/functions.scss';
+@import './../../../../../styles/variables.scss';
+@import './../../../../../styles/mixins.scss';
 
 .chip-tabs {
   width: 100%;

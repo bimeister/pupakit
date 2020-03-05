@@ -19,7 +19,6 @@ import {
   pluck,
   shareReplay,
   switchMap,
-  switchMapTo,
   take,
   tap,
   withLatestFrom
@@ -76,6 +75,17 @@ export class VerticalTabsComponent implements AfterContentChecked, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public selectTabByIndex(tabIndex: number): void {
+    this.tabs$
+      .pipe(
+        take(1),
+        filter((tabs: VerticalTabsItemComponent[]) => Array.isArray(tabs)),
+        pluck(tabIndex),
+        filter((targetTab: VerticalTabsItemComponent) => !isNullOrUndefined(targetTab))
+      )
+      .subscribe((firstTab: VerticalTabsItemComponent) => this.selectTab(firstTab));
+  }
+
   private updateTabsClickTriggers(): void {
     const tabs: VerticalTabsItemComponent[] = this.tabsList.toArray();
     this.tabs$.next(tabs);
@@ -86,20 +96,9 @@ export class VerticalTabsComponent implements AfterContentChecked, OnDestroy {
       .pipe(
         filter(() => !this.isAutoSelectionDisabled),
         take(1),
-        filter((isClicked: boolean) => !isClicked),
-        switchMapTo(
-          this.tabs$.pipe(
-            take(1),
-            map((tabs: VerticalTabsItemComponent[]) =>
-              tabs.filter((tab: VerticalTabsItemComponent) => !tab.isAutoSelectionDisabled)
-            ),
-            filter((tabs: VerticalTabsItemComponent[]) => Array.isArray(tabs)),
-            pluck(0),
-            filter((firstTab: VerticalTabsItemComponent) => !isNullOrUndefined(firstTab))
-          )
-        )
+        filter((isClicked: boolean) => !isClicked)
       )
-      .subscribe((firstTab: VerticalTabsItemComponent) => this.selectTab(firstTab));
+      .subscribe(() => this.selectTabByIndex(0));
   }
 
   private updateItemSelectionOnClick(): Subscription {
