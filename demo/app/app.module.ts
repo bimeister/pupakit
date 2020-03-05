@@ -15,7 +15,6 @@ import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.com
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
 import { ChipSelectTreeDemoComponent } from './chip-select-tree-demo/chip-select-tree-demo.component';
-import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
@@ -80,7 +79,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TextareaDemoComponent,
     TabsDrawerDemoComponent,
     RadioButtonDemoComponent,
-    ChipTabsDemoComponent,
     LayoutDemoComponent,
     TreeDemoComponent,
     DraggableDemoComponent,
@@ -125,10 +123,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'chip-select',
         component: ChipSelectDemoComponent
-      },
-      {
-        path: 'chip-tabs',
-        component: ChipTabsDemoComponent
       },
       {
         path: 'tree',
