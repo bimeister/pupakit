@@ -9,8 +9,4 @@
   align-items: stretch;
   justify-content: flex-start;
   overflow: hidden auto;
-
-  & > * ~ * {
-    margin: rems(0.5) 0 0 0;
-  }
 }

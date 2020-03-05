@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
@@ -12,6 +12,8 @@ import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalTabsItemComponent {
+  @Input() public isAutoSelectionDisabled: boolean = false;
+
   public readonly clicked$: Subject<VerticalTabsItemComponent> = new Subject<VerticalTabsItemComponent>();
   public readonly isSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

@@ -4,6 +4,7 @@ import {
   Component,
   ContentChildren,
   EventEmitter,
+  Input,
   OnDestroy,
   Output,
   QueryList,
@@ -36,6 +37,8 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalTabsComponent implements AfterContentChecked, OnDestroy {
+  @Input() public isAutoSelectionDisabled: boolean = false;
+
   @ContentChildren(VerticalTabsItemComponent) private readonly tabsList: QueryList<VerticalTabsItemComponent>;
 
   @Output() public readonly selectedTabIndex: EventEmitter<number> = new EventEmitter<number>();
@@ -81,11 +84,16 @@ export class VerticalTabsComponent implements AfterContentChecked, OnDestroy {
   private selectFirstIfNoneIsSelected(): void {
     this.tabIsClicked$
       .pipe(
+        filter(() => !this.isAutoSelectionDisabled),
         take(1),
         filter((isClicked: boolean) => !isClicked),
         switchMapTo(
           this.tabs$.pipe(
             take(1),
+            map((tabs: VerticalTabsItemComponent[]) =>
+              tabs.filter((tab: VerticalTabsItemComponent) => !tab.isAutoSelectionDisabled)
+            ),
+            filter((tabs: VerticalTabsItemComponent[]) => Array.isArray(tabs)),
             pluck(0),
             filter((firstTab: VerticalTabsItemComponent) => !isNullOrUndefined(firstTab))
           )
