@@ -182,10 +182,10 @@
 }
 
 .button_link {
-  @include button-color($color_white, $color_main-blue);
+  @include button-color(transparent, $color_main-blue);
   &:focus,
   &:hover {
-    @include button-color($color_white, $color_active-blue);
+    @include button-color(transparent, $color_active-blue);
   }
 }
 
