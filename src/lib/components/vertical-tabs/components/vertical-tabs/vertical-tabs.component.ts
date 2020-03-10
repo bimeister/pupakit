@@ -11,5 +11,8 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalTabsComponent extends TabsContainer<VerticalTabsItemComponent> {
-  @ContentChildren(VerticalTabsItemComponent) protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
+  @ContentChildren(VerticalTabsItemComponent, {
+    descendants: false
+  })
+  protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
 }

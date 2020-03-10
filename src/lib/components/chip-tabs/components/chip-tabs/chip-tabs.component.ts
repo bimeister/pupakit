@@ -10,5 +10,8 @@ import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.componen
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipTabsComponent extends TabsContainer<ChipTabsItemComponent> {
-  @ContentChildren(ChipTabsItemComponent) protected readonly tabsList: QueryList<ChipTabsItemComponent>;
+  @ContentChildren(ChipTabsItemComponent, {
+    descendants: false
+  })
+  protected readonly tabsList: QueryList<ChipTabsItemComponent>;
 }

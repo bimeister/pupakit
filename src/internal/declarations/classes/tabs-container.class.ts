@@ -19,6 +19,7 @@ import { TabsContainerItem } from './tabs-container-item.class';
 
 export abstract class TabsContainer<T extends TabsContainerItem> implements AfterContentChecked, OnDestroy {
   @Input() public isAutoSelectionDisabled: boolean = false;
+  @Input() public isMultiSelectionEnabled: boolean = false;
 
   protected abstract readonly tabsList: QueryList<T>;
 
@@ -27,7 +28,7 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
   private readonly subscription: Subscription = new Subscription();
 
   private readonly tabs$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-  private readonly clickedTab$: Observable<T> = this.tabs$.pipe(
+  private readonly lastClickedTab$: Observable<T> = this.tabs$.pipe(
     switchMap((tabs: T[]) => {
       const tabsTriggers$: Observable<T>[] = tabs.map((tab: T) => tab.clicked$);
       return merge(...tabsTriggers$);
@@ -35,10 +36,10 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
     shareReplay(1)
   );
 
-  private readonly tabIsClicked$: Observable<boolean> = merge(of(false), this.clickedTab$.pipe(mapTo(true))).pipe(
-    distinctUntilChanged(),
-    shareReplay(1)
-  );
+  private readonly someTabWasSelected$: Observable<boolean> = merge(
+    of(false),
+    this.lastClickedTab$.pipe(mapTo(true))
+  ).pipe(distinctUntilChanged(), shareReplay(1));
 
   constructor() {
     this.updateItemSelectionOnClick();
@@ -61,7 +62,27 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
         pluck(tabIndex),
         filter((targetTab: T) => !isNullOrUndefined(targetTab))
       )
-      .subscribe((firstTab: T) => this.selectTab(firstTab));
+      .subscribe((targetTab: T) => this.selectTab(targetTab));
+  }
+
+  public deselectTabByIndex(tabIndex: number): void {
+    this.tabs$
+      .pipe(
+        take(1),
+        filter((tabs: T[]) => Array.isArray(tabs)),
+        pluck(tabIndex),
+        filter((targetTab: T) => !isNullOrUndefined(targetTab))
+      )
+      .subscribe((targetTab: T) => targetTab.deselect());
+  }
+
+  public deselectAllTabs(): void {
+    this.tabs$
+      .pipe(
+        take(1),
+        filter((tabs: T[]) => Array.isArray(tabs))
+      )
+      .subscribe((tabs: T[]) => tabs.forEach((tab: T) => tab.deselect()));
   }
 
   private updateTabsClickTriggers(): void {
@@ -70,25 +91,30 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
   }
 
   private selectFirstIfNoneIsSelected(): void {
-    this.tabIsClicked$
+    this.someTabWasSelected$
       .pipe(
-        filter(() => !this.isAutoSelectionDisabled),
         take(1),
-        filter((isClicked: boolean) => !isClicked)
+        filter(() => !this.isAutoSelectionDisabled),
+        filter((wasSelected: boolean) => !wasSelected)
       )
       .subscribe(() => this.selectTabByIndex(0));
   }
 
   private updateItemSelectionOnClick(): Subscription {
-    return this.clickedTab$
+    return this.lastClickedTab$
       .pipe(
         filter((clickedTab: T) => !isNullOrUndefined(clickedTab)),
         tap((clickedTab: T) => this.selectTab(clickedTab)),
         withLatestFrom(this.tabs$),
-        map(([clickedTab, tabs]: [T, T[]]) => tabs.filter((tab: T) => tab.id !== clickedTab.id))
+        map(([clickedTab, tabs]: [T, T[]]) => {
+          if (this.isMultiSelectionEnabled) {
+            return [];
+          }
+          return tabs.filter((tab: T) => tab.id !== clickedTab.id);
+        })
       )
-      .subscribe((notClickedTabs: T[]) => {
-        notClickedTabs.forEach((tab: T) => tab.deselect());
+      .subscribe((tabsToDeselect: T[]) => {
+        tabsToDeselect.forEach((tab: T) => tab.deselect());
       });
   }
 
