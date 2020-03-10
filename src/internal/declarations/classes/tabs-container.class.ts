@@ -8,6 +8,7 @@ import {
   pluck,
   shareReplay,
   switchMap,
+  switchMapTo,
   take,
   tap,
   withLatestFrom
@@ -62,7 +63,9 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
         pluck(tabIndex),
         filter((targetTab: T) => !isNullOrUndefined(targetTab))
       )
-      .subscribe((targetTab: T) => this.selectTab(targetTab));
+      .subscribe((targetTab: T) => {
+        this.selectTab(targetTab);
+      });
   }
 
   public deselectTabByIndex(tabIndex: number): void {
@@ -73,7 +76,9 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
         pluck(tabIndex),
         filter((targetTab: T) => !isNullOrUndefined(targetTab))
       )
-      .subscribe((targetTab: T) => targetTab.deselect());
+      .subscribe((targetTab: T) => {
+        targetTab.deselect();
+      });
   }
 
   public deselectAllTabs(): void {
@@ -82,7 +87,9 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
         take(1),
         filter((tabs: T[]) => Array.isArray(tabs))
       )
-      .subscribe((tabs: T[]) => tabs.forEach((tab: T) => tab.deselect()));
+      .subscribe((tabs: T[]) => {
+        tabs.forEach((tab: T) => tab.deselect());
+      });
   }
 
   private updateTabsClickTriggers(): void {
@@ -95,9 +102,17 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
       .pipe(
         take(1),
         filter(() => !this.isAutoSelectionDisabled),
-        filter((wasSelected: boolean) => !wasSelected)
+        filter((wasSelected: boolean) => !wasSelected),
+        switchMapTo(this.tabs$.pipe(take(1))),
+        map((tabs: T[]) => tabs.filter((tab: T) => !tab.isAutoSelectionDisabled)),
+        pluck(0),
+        filter((targetTab: T) => !isNullOrUndefined(targetTab)),
+        withLatestFrom(this.tabs$.pipe(take(1))),
+        map(([targetTab, tabs]: [T, T[]]) => tabs.indexOf(targetTab))
       )
-      .subscribe(() => this.selectTabByIndex(0));
+      .subscribe((targetTabIndex: number) => {
+        this.selectTabByIndex(targetTabIndex);
+      });
   }
 
   private updateItemSelectionOnClick(): Subscription {
@@ -128,8 +143,11 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
       .pipe(
         take(1),
         map((tabs: T[]) => tabs.map((tab: T) => tab.id)),
-        map((tabIds: Uuid[]) => tabIds.indexOf(tabId))
+        map((tabIds: Uuid[]) => tabIds.indexOf(tabId)),
+        distinctUntilChanged()
       )
-      .subscribe((index: number) => this.selectedTabIndex.emit(index));
+      .subscribe((index: number) => {
+        this.selectedTabIndex.emit(index);
+      });
   }
 }
