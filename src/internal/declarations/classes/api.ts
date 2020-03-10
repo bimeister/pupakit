@@ -7,4 +7,6 @@ export * from './datagrid-manipulator.class';
 export * from './flat-tree-data-source.class';
 export * from './flat-tree-item.class';
 export * from './flat-tree-manipulator.class';
+export * from './tabs-container-item.class';
+export * from './tabs-container.class';
 export * from './tree-manipulator.class';
