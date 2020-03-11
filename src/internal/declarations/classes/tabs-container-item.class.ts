@@ -1,5 +1,6 @@
 import { HostListener, Input } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { v4 as uuid } from 'uuid';
 
 import { Uuid } from '../types/uuid.type';
@@ -23,5 +24,11 @@ export abstract class TabsContainerItem {
 
   public select(): void {
     this.isSelected$.next(true);
+  }
+
+  public toggleSelection(): void {
+    this.isSelected$.pipe(take(1)).subscribe((isSelected: boolean) => {
+      isSelected ? this.deselect() : this.select();
+    });
   }
 }
