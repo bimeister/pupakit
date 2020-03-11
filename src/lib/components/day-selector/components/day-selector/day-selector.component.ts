@@ -84,11 +84,6 @@ export class DaySelectorComponent {
     if (this.disabled) {
       return;
     }
-    // tslint:disable-next-line:prefer-conditional-expression
-    if (this.value.includes(value)) {
-      this.value = this.value.filter(v => v !== value);
-    } else {
-      this.value = [...this.value, value];
-    }
+    this.value = this.value.includes(value) ? this.value.filter(v => v !== value) : [...this.value, value];
   }
 }
