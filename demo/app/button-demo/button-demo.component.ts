@@ -13,7 +13,7 @@ export class ButtonDemoComponent {
 
   public readonly combos: any[] = combos({
     type: ['solid', 'outlined', 'link'],
-    color: ['normal', 'negative', 'positive', 'alert'],
+    color: ['normal', 'normal-light', 'negative', 'positive', 'alert'],
     size: ['large', 'medium', 'small'],
     disabled: [false, true],
     icon: [
