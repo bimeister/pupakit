@@ -16,4 +16,8 @@
   &_selected {
     background: $color_light-blue;
   }
+
+  &_hidden {
+    display: none;
+  }
 }

@@ -102,7 +102,7 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
         pluck(tabIndex),
         filter((targetTab: T) => !isNullOrUndefined(targetTab))
       )
-      .subscribe((targetTab: T) => targetTab.select());
+      .subscribe((targetTab: T) => targetTab.processTabClick());
   }
 
   private updateTabsClickTriggers(): void {
