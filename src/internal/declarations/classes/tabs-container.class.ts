@@ -30,6 +30,7 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
   protected abstract readonly tabsList: QueryList<T>;
 
   @Output() public readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Output() public readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -37,7 +38,11 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
 
   private readonly lastClickedTab$: Observable<T> = this.tabs$.pipe(
     switchMap((tabs: T[]) => {
-      return merge(...tabs.map((tab: T) => tab.clicked$));
+      return merge(
+        ...tabs.map((tab: T, tabIndex: number) =>
+          tab.clicked$.pipe(tap(() => this.latestClickedTabIndex.emit(tabIndex)))
+        )
+      );
     }),
     shareReplay(1)
   );
