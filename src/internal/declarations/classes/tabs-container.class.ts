@@ -94,6 +94,17 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
     this.subscription.unsubscribe();
   }
 
+  public selectTabByIndex(tabIndex: number): void {
+    this.tabs$
+      .pipe(
+        take(1),
+        filter((tabs: T[]) => Array.isArray(tabs)),
+        pluck(tabIndex),
+        filter((targetTab: T) => !isNullOrUndefined(targetTab))
+      )
+      .subscribe((targetTab: T) => targetTab.select());
+  }
+
   private updateTabsClickTriggers(): void {
     const tabs: T[] = this.tabsList.toArray();
     this.tabs$.next(tabs);
