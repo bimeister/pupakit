@@ -1,1 +1,1 @@
-export type ButtonColor = 'normal' | 'negative' | 'positive' | 'alert';
+export type ButtonColor = 'normal' | 'normal-light' | 'negative' | 'positive' | 'alert';

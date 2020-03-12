@@ -130,6 +130,14 @@
     box-shadow: $box-shadow_hover;
   }
 }
+.button_solid.button_normal-light {
+  @include button-color($color_pale-blue, $color_main-blue);
+  &:focus,
+  &:hover {
+    @include button-color($color_active-blue, $color_white);
+    box-shadow: $box-shadow_hover;
+  }
+}
 .button_solid.button_negative {
   @include button-color($color_error, $color_white);
   &:focus,
@@ -157,6 +165,14 @@
   &:focus,
   &:hover {
     @include button-color($color_white, $color_active-blue, $color_active-blue);
+  }
+}
+.button_outlined.button_normal-light {
+  @include button-color($color_white, $color_pale-blue, $color_pale-blue);
+  &:focus,
+  &:hover {
+    @include button-color($color_pale-blue, $color_active-blue);
+    box-shadow: $box-shadow_hover;
   }
 }
 .button_outlined.button_negative {
