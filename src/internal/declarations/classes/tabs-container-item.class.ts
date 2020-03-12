@@ -7,6 +7,7 @@ import { Uuid } from '../types/uuid.type';
 
 export abstract class TabsContainerItem {
   @Input() public isAutoSelectionDisabled: boolean = false;
+  @Input() public isVisible: boolean = true;
 
   public readonly clicked$: Subject<this> = new Subject<this>();
   public readonly isSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
