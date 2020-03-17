@@ -14,7 +14,7 @@ variables:
   GIT_STRATEGY: clone
   GIT_CHECKOUT: 'true'
   GIT_SUBMODULE_STRATEGY: normal
-  IMAGE_TAG: ${DOCKER_REGISTRY}/pupakit/builder:${CI_COMMIT_SHORT_SHA}
+  IMAGE_TAG: ${DOCKER_REGISTRY}/common/pupakit/builder:${CI_COMMIT_SHORT_SHA}
 
 stages:
   - build
