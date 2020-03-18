@@ -78,6 +78,10 @@ export class ChipSelectComponent implements OnDestroy {
     );
   }
 
+  public get isEmpty(): boolean {
+    return !Array.isArray(this.items) || Object.is(this.items.length, 0);
+  }
+
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
