@@ -39,11 +39,6 @@ pupa-chip span {
   left: 0;
 
   transition: left 0.25s;
-
-  &:focus,
-  &:hover {
-    color: $color_white;
-  }
 }
 
 .chip-select__chip-icon_remove {
@@ -112,4 +107,9 @@ pupa-chip:hover .chip-select__chip-icon_remove {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.empty {
+  display: block;
+  margin: px(5) px(10);
 }

@@ -27,18 +27,17 @@
     [maxWidth]="maxWidth"
     [positionChange$]="positionChange$"
   >
-    <pupa-chip-select-tree
-      *ngIf="items?.length > 0; else loader"
-      [items]="items"
-      (selectItemKey)="clickDroppableItem($event)"
-      [notActiveKeys]="notActiveKeys"
-      searchText="Поиск..."
-    ></pupa-chip-select-tree>
+    <div *ngIf="isEmpty; else treeItems" class="empty">
+      Список пуст
+    </div>
   </pupa-droppable-legacy>
 </div>
 
-<ng-template #loader>
-  <div class="spinner-container">
-    <pupa-spinner size="30px"></pupa-spinner>
-  </div>
+<ng-template #treeItems>
+  <pupa-chip-select-tree
+    [items]="items"
+    (selectItemKey)="clickDroppableItem($event)"
+    [notActiveKeys]="notActiveKeys"
+    searchText="Поиск..."
+  ></pupa-chip-select-tree>
 </ng-template>
