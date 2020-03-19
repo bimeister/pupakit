@@ -18,20 +18,20 @@
 
 .washer-panel__disk {
   position: absolute;
-  background: $color_main-blue;
+  background: $color_main;
   border-radius: 50%;
   @include transition(#{bottom, height, width}, 0.32s);
   @include flex-container(row, center, center, nowrap);
 
   &_external {
     margin: 0;
-    background: $color_active-blue;
+    background: $color_active;
     z-index: 2001;
   }
 
   &_middle {
     margin: rems(2.5) 0 0 0;
-    background: $color_main-blue;
+    background: $color_main;
     z-index: 2002;
   }
 
@@ -71,7 +71,7 @@
   border: rems(0.75) solid transparent;
   border-radius: 50%;
   top: rems(1);
-  border-top-color: $color_main-blue;
+  border-top-color: $color_main;
 }
 
 .range-pointer {
@@ -95,7 +95,7 @@
       height: rems(1);
       box-sizing: border-box;
       border-radius: 50%;
-      box-shadow: rems(0.5) rems(0.5) 0 0 $color_active-blue;
+      box-shadow: rems(0.5) rems(0.5) 0 0 $color_active;
 
       left: -10%;
       top: -25%;
@@ -110,7 +110,7 @@
       content: '';
       left: -10%;
       top: 140%;
-      background: $color_active-blue;
+      background: $color_active;
       transform: rotate(90deg);
     }
   }

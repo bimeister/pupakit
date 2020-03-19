@@ -4,7 +4,7 @@
 html {
   font-size: $font-size_root;
   @include regular();
-  color: $color_grey-text;
+  color: $color_text;
 }
 
 body {

@@ -1,24 +1,27 @@
 @import 'functions';
 
 // colors
-$color_main-blue: #0a0d65;
-$color_main-dark: #0c0d35;
-$color_active-blue: #161ba6;
-$color_light-blue: #eef6ff;
-$color_pale-blue: #d9eafe;
+$color_main: #004560;
+$color_main-dark: #04222e; // Нет в дизайн-системе
+$color_active: #009eff;
+$color_light: #eaf7ff;
 $color_success: #00c902;
 $color_alert: #ffc009;
 $color_error: #ff0000;
-$color_grey-text: #202020;
-$color_text: $color_grey-text;
+$color_text: #002c3e;
+
 $color_grey-light: #797979;
 $color_grey-ivory: #a6a6a6;
 $color_grey-apple: #d2d2d2;
-$color_white: #ffffff;
-$color_black: #000000;
-$color_cadet-blue: #9fb7d3;
-$color_cadet-blue-light: #e0eaf5;
-$color_dark-overlay: rgba(0, 0, 0, 0.82);
+
+$color_white: #ffffff; // Нет в дизайн-системе
+$color_black: #000000; // Нет в дизайн-системе
+
+$color_pale-blue: #d9eafe; // Нет в дизайн-системе
+$color_cadet-blue: #9fb7d3; // Нет в дизайн-системе
+$color_cadet-blue-light: #e0eaf5; // Нет в дизайн-системе
+
+$color_dark-overlay: rgba(0, 0, 0, 0.82); // Нет в дизайн-системе
 
 // font-size
 $font-size_root: 16px; // 1 rem (1 px = 0,0625 rem) - do not use!

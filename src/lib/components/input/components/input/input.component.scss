@@ -20,7 +20,7 @@
   border-radius: rems(0.5);
   background: $color_white;
   outline: none;
-  color: $color_grey-text;
+  color: $color_text;
   border: 1px solid $color_grey-ivory;
   @include regular();
   @include transition(#{'background, border'});
@@ -40,7 +40,7 @@
   }
 
   &:focus {
-    border: 1px solid $color_active-blue;
+    border: 1px solid $color_active;
   }
 
   &:disabled {

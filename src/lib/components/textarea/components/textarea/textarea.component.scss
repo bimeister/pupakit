@@ -22,7 +22,7 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
   border-radius: rems(0.5);
   background: $color_white;
   outline: none;
-  color: $color_grey-text;
+  color: $color_text;
   border: 1px solid $color_grey-ivory;
   @include regular();
   @include transition(#{'background, border'});
@@ -38,7 +38,7 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
   }
 
   &:focus {
-    border: 1px solid $color_active-blue;
+    border: 1px solid $color_active;
   }
 
   &:disabled {

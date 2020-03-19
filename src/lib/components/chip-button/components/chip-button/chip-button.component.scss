@@ -13,7 +13,7 @@
   appearance: none;
   box-sizing: border-box;
   border: 0;
-  background: $color_main-blue;
+  background: $color_main;
   color: $color_white;
   cursor: pointer;
   padding: 0 rems(0.4);
@@ -28,7 +28,7 @@
   flex-direction: row;
   &:focus,
   &:hover:not(:disabled) {
-    background: $color_active-blue;
+    background: $color_active;
   }
   &:disabled {
     background: $color_grey-ivory;

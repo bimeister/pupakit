@@ -17,8 +17,8 @@
   @include transition(#{background, border});
   @include flex-container(row, center, center, nowrap);
   &_with-marker {
-    background: $color_active-blue;
-    border: 1px solid $color_active-blue;
+    background: $color_active;
+    border: 1px solid $color_active;
   }
   &_disabled {
     cursor: not-allowed;
@@ -30,7 +30,7 @@
     .checkbox__marker {
       font-size: rems(1.1);
       height: rems(1.1);
-      color: $color_active-blue;
+      color: $color_active;
     }
   }
 }
@@ -56,7 +56,7 @@
 .checkbox-label {
   font-size: rems(1);
   line-height: 1;
-  color: $color_grey-text;
+  color: $color_text;
   @include regular();
   font-style: normal;
   box-sizing: border-box;

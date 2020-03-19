@@ -7,14 +7,14 @@ $header-height: 48px; // rems(3)
 $header-background-color: $color_white;
 $row-height: 40px; // rems(2.5)
 $row-border-width: 1px 0 1px 0;
-$hover-color: $color_light-blue;
-$border-color: $color_light-blue;
+$hover-color: $color_light;
+$border-color: $color_light;
 $font-family: 'effraregular', sans-serif;
 $font-size: 14px; // rems(0.875)
 $font-weight: normal;
-$foreground-color: $color_grey-text;
+$foreground-color: $color_text;
 $odd-row-background-color: transparent;
-$header-cell-moving-background-color: $color_light-blue;
+$header-cell-moving-background-color: $color_light;
 
 @import 'ag-grid-community/src/styles/ag-grid.scss';
 @import 'ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
@@ -77,12 +77,12 @@ $header-cell-moving-background-color: $color_light-blue;
   }
   .ag-icon-desc::before,
   .ag-icon-asc::after {
-    color: $color_active-blue;
+    color: $color_active;
   }
 
   .ag-header-cell-sorted-desc,
   .ag-header-cell-sorted-asc {
-    color: $color_active-blue;
+    color: $color_active;
   }
 
   .ag-cell,
@@ -96,11 +96,11 @@ $header-cell-moving-background-color: $color_light-blue;
     }
 
     .ag-row {
-      border-top: px(1) solid $color_light-blue;
+      border-top: px(1) solid $color_light;
     }
 
     .ag-row-selected {
-      background: $color_light-blue;
+      background: $color_light;
     }
   }
 
@@ -148,7 +148,7 @@ $header-cell-moving-background-color: $color_light-blue;
     .ag-row-focus,
     .ag-row-hover,
     .ag-row-selected {
-      background: $color_light-blue;
+      background: $color_light;
     }
 
     .ag-row-selected {

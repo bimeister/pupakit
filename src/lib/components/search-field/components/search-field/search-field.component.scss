@@ -34,7 +34,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 
   &:not(.search-field_expandable).search-field_empty:hover {
     .search-field__switcher {
-      color: $color_active-blue;
+      color: $color_active;
     }
     .search-field__control {
       cursor: pointer;
@@ -97,13 +97,13 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   @include flex-container(column, center, center, nowrap);
 
   &:hover {
-    color: $color_active-blue;
+    color: $color_active;
   }
 
   .search-field__switcher-icon {
     box-sizing: content-box;
     padding: 0 calc((#{$width_switcher} - #{$font-size_base-text}) / 3);
-    background: $color_light-blue;
+    background: $color_light;
   }
 }
 
@@ -114,7 +114,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   width: 100%;
   box-sizing: border-box;
   border-radius: rems(1.375);
-  background: $color_light-blue;
+  background: $color_light;
   border: none;
   outline: none;
   font-size: $font-size_base-text;
