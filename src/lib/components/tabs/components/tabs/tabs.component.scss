@@ -35,7 +35,7 @@
   @include flex-container(row, center, center, nowrap);
 
   &_selected {
-    color: $color_active-blue;
+    color: $color_active;
   }
 }
 
@@ -56,7 +56,7 @@
   position: absolute;
   overflow: hidden;
   height: rems(0.25);
-  background: $color_light-blue;
+  background: $color_light;
 }
 .rail__highlighter {
   position: absolute;
@@ -64,7 +64,7 @@
   left: 0;
   width: 100%;
   height: rems(0.25);
-  background: $color_active-blue;
+  background: $color_active;
   border-radius: rems(0.75);
   pointer-events: none;
   @include transition();

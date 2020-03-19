@@ -123,18 +123,18 @@
 
 // style + color
 .button_solid.button_normal {
-  @include button-color($color_main-blue, $color_white);
+  @include button-color($color_main, $color_white);
   &:focus,
   &:hover {
-    @include button-color($color_active-blue, $color_white);
+    @include button-color($color_active, $color_white);
     box-shadow: $box-shadow_hover;
   }
 }
 .button_solid.button_normal-light {
-  @include button-color($color_pale-blue, $color_main-blue);
+  @include button-color($color_pale-blue, $color_main);
   &:focus,
   &:hover {
-    @include button-color($color_active-blue, $color_white);
+    @include button-color($color_active, $color_white);
     box-shadow: $box-shadow_hover;
   }
 }
@@ -161,47 +161,47 @@
 }
 
 .button_outlined.button_normal {
-  @include button-color($color_white, $color_main-blue, $color_main-blue);
+  @include button-color($color_white, $color_main, $color_main);
   &:focus,
   &:hover {
-    @include button-color($color_white, $color_active-blue, $color_active-blue);
+    @include button-color($color_white, $color_active, $color_active);
   }
 }
 .button_outlined.button_normal-light {
   @include button-color($color_white, $color_pale-blue, $color_pale-blue);
   &:focus,
   &:hover {
-    @include button-color($color_pale-blue, $color_active-blue);
+    @include button-color($color_pale-blue, $color_active);
     box-shadow: $box-shadow_hover;
   }
 }
 .button_outlined.button_negative {
-  @include button-color($color_white, $color_grey-text, $color_error);
+  @include button-color($color_white, $color_text, $color_error);
   &:focus,
   &:hover {
-    @include button-color(rgba($color_error, $opacity_hovered-button), $color_grey-text, $color_error);
+    @include button-color(rgba($color_error, $opacity_hovered-button), $color_text, $color_error);
   }
 }
 .button_outlined.button_positive {
-  @include button-color($color_white, $color_grey-text, $color_success);
+  @include button-color($color_white, $color_text, $color_success);
   &:focus,
   &:hover {
-    @include button-color(rgba($color_success, $opacity_hovered-button), $color_grey-text, $color_success);
+    @include button-color(rgba($color_success, $opacity_hovered-button), $color_text, $color_success);
   }
 }
 .button_outlined.button_alert {
-  @include button-color($color_white, $color_grey-text, $color_alert);
+  @include button-color($color_white, $color_text, $color_alert);
   &:focus,
   &:hover {
-    @include button-color(rgba($color_alert, $opacity_hovered-button), $color_grey-text, $color_alert);
+    @include button-color(rgba($color_alert, $opacity_hovered-button), $color_text, $color_alert);
   }
 }
 
 .button_link {
-  @include button-color(transparent, $color_main-blue);
+  @include button-color(transparent, $color_main);
   &:focus,
   &:hover {
-    @include button-color(transparent, $color_active-blue);
+    @include button-color(transparent, $color_active);
   }
 }
 

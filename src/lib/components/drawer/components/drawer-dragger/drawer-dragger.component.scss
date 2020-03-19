@@ -17,7 +17,7 @@
     all: unset;
     cursor: col-resize;
     appearance: none;
-    color: $color_main-blue;
+    color: $color_main;
     pointer-events: all;
     font-size: rems(1.5);
     width: rems(1.5);
@@ -26,7 +26,7 @@
     @include transition(color);
 
     &:hover {
-      color: $color_active-blue;
+      color: $color_active;
     }
   }
 }

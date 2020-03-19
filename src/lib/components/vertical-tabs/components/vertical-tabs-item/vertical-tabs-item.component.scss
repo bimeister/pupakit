@@ -6,7 +6,7 @@
   width: 100%;
   box-sizing: border-box;
   display: block;
-  border: 1px solid $color_light-blue;
+  border: 1px solid $color_light;
   background: $color_white;
   border-radius: rems(0.75);
   padding: rems(1) rems(0.75);
@@ -14,7 +14,7 @@
   cursor: pointer;
 
   &_selected {
-    background: $color_light-blue;
+    background: $color_light;
   }
 
   &_hidden {

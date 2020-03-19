@@ -34,7 +34,7 @@ $height_date: rems(1.3125);
   padding: $padding_days-area;
   margin: $margin_days-line;
   box-sizing: border-box;
-  background: $color_light-blue;
+  background: $color_light;
   @include flex-container(row, center, space-between, nowrap);
 }
 
@@ -48,7 +48,7 @@ $height_date: rems(1.3125);
 .month {
   all: unset;
   font-size: $font-size_base-text;
-  color: $color_main-blue;
+  color: $color_main;
   line-height: 1.43;
   font-weight: 750;
   font-style: normal;
@@ -81,7 +81,7 @@ $height_date: rems(1.3125);
   margin: 0 calc((#{$width_days-line-item} - #{$height_date}) / 2) rems(0.5);
   padding: 0;
   font-size: $font-size_days-line-item;
-  color: $color_grey-text;
+  color: $color_text;
   line-height: rems(1);
   font-weight: $font-weight_days-line-item;
   user-select: none;
@@ -96,7 +96,7 @@ $height_date: rems(1.3125);
 
   &_hovered {
     border-radius: rems(0.25);
-    background: $color_light-blue;
+    background: $color_light;
 
     &::before {
       top: 0;
@@ -113,7 +113,7 @@ $height_date: rems(1.3125);
   }
 
   &_in-range {
-    background: $color_light-blue;
+    background: $color_light;
 
     &::before {
       top: 0;
@@ -130,7 +130,7 @@ $height_date: rems(1.3125);
 
   &_selected {
     color: $color_white;
-    background: $color_active-blue;
+    background: $color_active;
     z-index: 3;
 
     &::before {

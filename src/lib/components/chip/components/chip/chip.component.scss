@@ -14,8 +14,8 @@
   user-select: none;
   outline: none;
   height: rems(1.5);
-  color: $color_main-blue;
-  background-color: $color_light-blue;
+  color: $color_main;
+  background-color: $color_light;
   white-space: nowrap;
   display: inline-flex;
   flex-direction: row;
@@ -30,7 +30,7 @@
     &:focus,
     &:hover {
       color: $color_white;
-      background: $color_active-blue;
+      background: $color_active;
     }
   }
 }

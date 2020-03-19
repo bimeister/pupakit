@@ -11,7 +11,7 @@
   &:not(:last-child) {
     margin-right: rems(0.4);
   }
-  background: $color_light-blue;
+  background: $color_light;
   cursor: pointer;
   font-size: rems(0.875);
   box-shadow: 0 rems(0.125) rems(0.125) 0 rgba(0, 0, 0, 0.05);
@@ -21,7 +21,7 @@
   border-radius: rems(0.5);
 
   &.selected {
-    background: $color_active-blue;
+    background: $color_active;
     color: $color_white;
   }
 }

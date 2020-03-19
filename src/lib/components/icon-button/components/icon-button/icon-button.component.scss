@@ -47,16 +47,16 @@
 
   &_light {
     background: $color_white;
-    color: $color_main-blue;
+    color: $color_main;
   }
 
   &_light-blue {
-    background: $color_light-blue;
-    color: $color_main-blue;
+    background: $color_light;
+    color: $color_main;
   }
 
   &_dark {
-    background: $color_main-blue;
+    background: $color_main;
     color: $color_white;
   }
 
@@ -69,7 +69,7 @@
   }
 
   &:hover:not(:disabled) {
-    background: $color_active-blue;
+    background: $color_active;
     color: $color_white;
   }
 
@@ -82,18 +82,18 @@
 
 .button_light.button_active,
 .button_light-blue.button_active {
-  background: $color_main-blue;
+  background: $color_main;
 }
 .button_dark.button_active {
-  background: $color_active-blue;
+  background: $color_active;
 }
 
 .button_light:disabled,
 .button_light-blue:disabled {
-  color: rgba($color_main-blue, 0.3);
+  color: rgba($color_main, 0.3);
   background: $color_white;
 }
 .button_dark:disabled {
-  color: rgba($color_light-blue, 0.3);
-  background: $color_main-blue;
+  color: rgba($color_light, 0.3);
+  background: $color_main;
 }
