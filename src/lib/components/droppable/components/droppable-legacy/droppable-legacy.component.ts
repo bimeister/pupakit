@@ -52,6 +52,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
   private anchorOnClickHandlerUnlistener: EventUnlistener;
   private _open: boolean = false;
+  private isMouseTargetWheel: boolean = false;
   private anchorClientRect: ClientRect;
   private dropdownClientRect: ClientRect;
 
@@ -88,10 +89,20 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
     this.checkPosition();
   }
 
+  @HostListener('wheel')
+  public targetWheelEvent(): void {
+    this.isMouseTargetWheel = true;
+  }
+
   @HostListener('window:resize')
   @HostListener('window:wheel')
   public close(): void {
     if (!this.open) {
+      return;
+    }
+
+    if (this.isMouseTargetWheel) {
+      this.isMouseTargetWheel = false;
       return;
     }
     this.toggle(false);
