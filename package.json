@@ -16,7 +16,7 @@
     "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "start:storybook": "start-storybook",
     "build": "npm run barrel && npm run lint && ng build && npm run build:scss && npm run build:css && npm run copy:assets && npm run replace-imports",
-    "build:scss": "npx scss-bundle --project scss-bundle.config.json && npm run copy:styles",
+    "build:scss": "npx scss-bundle --config scss-bundle.config.json && npm run copy:styles",
     "build:css": "npx sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
     "copy:assets": "npx copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets",
