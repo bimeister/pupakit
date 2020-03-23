@@ -23,11 +23,11 @@ export class DatagridManipulatorConfiguration<rowDataT> implements DatagridManip
     }
   };
 
-  public rowTrackByFn: GetRowNodeIdFunc = (data: rowDataT): string => {
-    return data.hasOwnProperty('id') ? data['id'] : String(data);
-  };
-
   constructor(config: Partial<DatagridManipulatorConfigurationData>) {
     Object.assign(this, config);
   }
+
+  public rowTrackByFn: GetRowNodeIdFunc = (data: rowDataT): string => {
+    return data.hasOwnProperty('id') ? data['id'] : String(data);
+  };
 }

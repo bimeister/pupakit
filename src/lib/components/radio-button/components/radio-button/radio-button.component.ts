@@ -27,14 +27,6 @@ type ChangeFn<T> = (value: T) => void;
   providers: [ACCESSOR]
 })
 export class RadioButtonComponent<T> implements ControlValueAccessor {
-  @Input() public name: string;
-  @Input() public id: string;
-  @Input() public value: T;
-  @Output() public change: EventEmitter<boolean> = new EventEmitter<boolean>();
-
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
-
-  private checkedData: boolean = false;
   @Input()
   public set checked(value: boolean) {
     const change: boolean = this.checked !== value;
@@ -47,6 +39,14 @@ export class RadioButtonComponent<T> implements ControlValueAccessor {
   public get checked(): boolean {
     return this.checkedData;
   }
+  @Input() public name: string;
+  @Input() public id: string;
+  @Input() public value: T;
+  @Output() public change: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  private checkedData: boolean = false;
+
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
   public onChange: ChangeFn<boolean> = (_: boolean): void => null;
   public onTouched: VoidFn = (): void => null;
 

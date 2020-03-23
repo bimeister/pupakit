@@ -30,6 +30,8 @@ export class DroppablePaneComponent implements OnDestroy {
   @ViewChild('content', { static: false }) public contentRef: ElementRef<HTMLElement>;
   @ViewChild('clickEventContainer', { static: false }) public clickEventContainerRef: ElementRef<HTMLElement>;
 
+  private static readonly offset: number = 4;
+
   constructor(private readonly droppableService: DroppableService, private readonly renderer: Renderer2) {
     this.subscription.add(this.handleIsOpenedChanges());
   }
@@ -115,8 +117,6 @@ export class DroppablePaneComponent implements OnDestroy {
     this.eventUnlisteners.forEach((unlistener: EventUnlistener) => unlistener());
     this.eventUnlisteners.clear();
   }
-
-  private static readonly offset: number = 4;
 
   private static rightScreenSideOverflow(triggerClientRect: ClientRect, contentClientRect: ClientRect): boolean {
     return triggerClientRect.left + contentClientRect.width > window.innerWidth;

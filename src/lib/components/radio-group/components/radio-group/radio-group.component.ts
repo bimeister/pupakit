@@ -31,6 +31,8 @@ export class RadioGroupComponent<T> implements OnInit, AfterContentInit, Control
   private readonly radioButtons: QueryList<RadioButtonComponent<T>>;
   private readonly selectedRadioValue: BehaviorSubject<T> = new BehaviorSubject<T>(null);
 
+  private static uniqueIndex: number = 0;
+
   public onChange: ChangeFn<T> = (_: T): void => null;
   public onTouched: VoidFn = (): void => null;
 
@@ -46,6 +48,18 @@ export class RadioGroupComponent<T> implements OnInit, AfterContentInit, Control
     });
 
     this.initializeRadioGroup();
+  }
+
+  public registerOnChange(fn: ChangeFn<T>): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: VoidFn): void {
+    this.onTouched = fn;
+  }
+
+  public writeValue(value: T): void {
+    this.selectedRadioValue.next(value);
   }
 
   private initializeRadioGroup(): void {
@@ -67,18 +81,4 @@ export class RadioGroupComponent<T> implements OnInit, AfterContentInit, Control
       this.writeValue(this.radioButtons.first.value);
     }
   }
-
-  public registerOnChange(fn: ChangeFn<T>): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: VoidFn): void {
-    this.onTouched = fn;
-  }
-
-  public writeValue(value: T): void {
-    this.selectedRadioValue.next(value);
-  }
-
-  private static uniqueIndex: number = 0;
 }

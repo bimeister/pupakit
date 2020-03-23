@@ -24,10 +24,10 @@ interface TabMarker {
 }
 
 export abstract class TabsContainer<T extends TabsContainerItem> implements AfterContentChecked, OnDestroy {
-  @Input() public isAutoSelectionDisabled: boolean = false;
-  @Input() public isMultiSelectionEnabled: boolean = false;
 
   protected abstract readonly tabsList: QueryList<T>;
+  @Input() public isAutoSelectionDisabled: boolean = false;
+  @Input() public isMultiSelectionEnabled: boolean = false;
 
   @Output() public readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Output() public readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormArray, FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
+// tslint:disable-next-line: import-blacklist
 import { compact } from 'lodash';
 import { Subscription } from 'rxjs';
 

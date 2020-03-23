@@ -33,14 +33,6 @@ export const daysArrayToMap: (days: number[]) => DaysMap = (days: number[]): Day
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DaySelectorComponent {
-  public WeekdaysShort: typeof WeekdaysShort = WeekdaysShort;
-  public WeekdaysFull: typeof WeekdaysFull = WeekdaysFull;
-  public Weekdays: typeof Weekdays = Weekdays;
-  @Input() public disabled: boolean;
-  @Output() public change: EventEmitter<number[]> = new EventEmitter<number[]>();
-  private _value: number[] = [];
-  // tslint:disable-next-line:no-magic-numbers
-  public allDays: number[] = [1, 2, 3, 4, 5, 6, 0];
   get value(): number[] {
     return this._value;
   }
@@ -53,13 +45,21 @@ export class DaySelectorComponent {
       this.change.emit(v);
     }
   }
+  public WeekdaysShort: typeof WeekdaysShort = WeekdaysShort;
+  public WeekdaysFull: typeof WeekdaysFull = WeekdaysFull;
+  public Weekdays: typeof Weekdays = Weekdays;
+  @Input() public disabled: boolean;
+  @Output() public change: EventEmitter<number[]> = new EventEmitter<number[]>();
+  private _value: number[] = [];
+  // tslint:disable-next-line:no-magic-numbers
+  public allDays: number[] = [1, 2, 3, 4, 5, 6, 0];
 
   public valueMap: { [day: number]: boolean } = {};
 
+  constructor(private readonly cdRef: ChangeDetectorRef) {}
+
   public onChange: (v: number[]) => void = (_): void => null;
   public onTouched: () => void = (): void => null;
-
-  constructor(private readonly cdRef: ChangeDetectorRef) {}
 
   public writeValue(value: number[]): void {
     if ((value as any) instanceof Event) {

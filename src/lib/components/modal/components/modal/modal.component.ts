@@ -45,9 +45,6 @@ import { ModalSize } from '../../../../../internal/declarations/types/modal-size
   ]
 })
 export class ModalComponent implements OnInit, OnDestroy {
-  @Input() public clickableOverlay: boolean = true;
-  @Input() public closeButton: boolean = true;
-  @Input() public size: ModalSize = 'medium';
 
   @Input() public set open(value: boolean) {
     if (value) {
@@ -56,6 +53,9 @@ export class ModalComponent implements OnInit, OnDestroy {
       this.closeModal();
     }
   }
+  @Input() public clickableOverlay: boolean = true;
+  @Input() public closeButton: boolean = true;
+  @Input() public size: ModalSize = 'medium';
 
   public isOpen: boolean = false; // Только для шаблона
 
@@ -73,15 +73,6 @@ export class ModalComponent implements OnInit, OnDestroy {
     if (isEscPressed) {
       this.close.emit();
     }
-  }
-
-  private openModal(): void {
-    this.isOpen = true;
-    requestAnimationFrame(() => this.overlayAnimationState$.next(ModalState.Appeared));
-  }
-
-  private closeModal(): void {
-    this.overlayAnimationState$.next(ModalState.Dissapeared);
   }
 
   public onAnimationDone(event: AnimationEvent): void {
@@ -112,6 +103,15 @@ export class ModalComponent implements OnInit, OnDestroy {
   public processCloseButtonClick(event: MouseEvent): void {
     event.stopPropagation();
     this.close.emit();
+  }
+
+  private openModal(): void {
+    this.isOpen = true;
+    requestAnimationFrame(() => this.overlayAnimationState$.next(ModalState.Appeared));
+  }
+
+  private closeModal(): void {
+    this.overlayAnimationState$.next(ModalState.Dissapeared);
   }
 
   private disableScrolling(): void {
