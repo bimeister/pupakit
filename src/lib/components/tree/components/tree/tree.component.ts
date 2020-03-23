@@ -46,6 +46,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   @ViewChild('viewPort', { static: false }) private readonly viewPort: CdkVirtualScrollViewport;
+  @ViewChild('skeletonViewPort', { static: false }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
   @ViewChild('defaultTemplate', { static: true }) private readonly defaultTemplate: TemplateRef<any>;
 
   @Input() public readonly manipulator: TreeManipulator;
@@ -157,6 +158,11 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     return nonFilteredSource;
   }
 
+  public processScrolledIndexChange(scrolledIndex: number): void {
+    // tslint:disable-next-line: no-console
+    console.log(scrolledIndex);
+  }
+
   public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
     !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
   public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>
@@ -173,6 +179,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       return;
     }
     this.viewPort.checkViewportSize();
+    this.skeletonViewPort.checkViewportSize();
   }
 
   private subscribeOnDataExtractionOnScrolling(): void {
@@ -217,6 +224,7 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     return targetIndexes$.subscribe((indexes: number[]) => {
       indexes.forEach((index: number) => {
         this.viewPort.scrollToIndex(index, 'smooth');
+        this.skeletonViewPort.scrollToIndex(index, 'smooth');
         this.refreshViewPort();
       });
     });
