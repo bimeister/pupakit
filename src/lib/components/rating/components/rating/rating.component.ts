@@ -23,15 +23,10 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RatingComponent {
-  private _numberOfStars: number = 5;
   @Input() public set numberOfStars(v: number) {
     this._numberOfStars = v;
     this.initStars();
   }
-  public stars: any[];
-  @Input() public disabled: boolean;
-  @Output() public change: EventEmitter<number> = new EventEmitter<number>();
-  private _value: number = 0;
   get value(): number {
     return this._value;
   }
@@ -43,19 +38,20 @@ export class RatingComponent {
       this.change.emit(v);
     }
   }
-
-  public onChange: (v: number) => void = (v: number) => {
-    this.change.emit(v);
-  };
-  public onTouched: () => void = () => null;
+  private _numberOfStars: number = 5;
+  public stars: any[];
+  @Input() public disabled: boolean;
+  @Output() public change: EventEmitter<number> = new EventEmitter<number>();
+  private _value: number = 0;
 
   constructor(private readonly cdRef: ChangeDetectorRef) {
     this.initStars();
   }
 
-  private initStars(): void {
-    this.stars = new Array(this._numberOfStars).fill(null);
-  }
+  public onChange: (v: number) => void = (v: number) => {
+    this.change.emit(v);
+  };
+  public onTouched: () => void = () => null;
 
   public writeValue(value: number): void {
     if ((value as any) instanceof Event) {
@@ -88,5 +84,9 @@ export class RatingComponent {
       return;
     }
     this.value = value;
+  }
+
+  private initStars(): void {
+    this.stars = new Array(this._numberOfStars).fill(null);
   }
 }

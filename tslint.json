@@ -16,14 +16,14 @@
     "curly": true,
     "cyclomatic-complexity": true,
     "deprecation": {
-      "severity": "warning"
+      "severity": "warn"
     },
     "directive-class-suffix": true,
     "directive-selector": [true, "attribute", ["pupa", "demo"], "camelCase"],
     "encoding": true,
     "eofline": true,
     "forin": true,
-    "import-blacklist": [true, "rxjs/Rx"],
+    "import-blacklist": [true, "rxjs/Rx", ["@angular/compiler/.*"], ["lodash.*"]],
     "import-spacing": true,
     "indent": [true, "spaces"],
     "interface-name": [true, "never-prefix"],
@@ -41,7 +41,20 @@
     "member-ordering": [
       true,
       {
-        "order": ["instance-field", "instance-method", "static-field", "static-method"]
+        "order": [
+          "protected-instance-field",
+          "instance-field",
+          "protected-static-field",
+          "public-static-field",
+          "private-static-field",
+          "constructor",
+          "protected-instance-method",
+          "public-instance-method",
+          "private-instance-method",
+          "protected-static-method",
+          "public-static-method",
+          "private-static-method"
+        ]
       }
     ],
     "no-angle-bracket-type-assertion": true,
@@ -49,7 +62,7 @@
     "no-bitwise": true,
     "no-boolean-literal-compare": true,
     "no-conditional-assignment": true,
-    "no-console": [true, "debug", "info", "log", "time", "timeEnd", "trace"],
+    "no-console": [true, "log", "debug", "info", "time", "timeEnd", "trace", "error"],
     "no-construct": true,
     "no-debugger": true,
     "no-default-export": true,
@@ -76,7 +89,6 @@
     "no-string-throw": true,
     "no-switch-case-fall-through": true,
     "no-trailing-whitespace": true,
-    "no-unbound-method": false,
     "no-unnecessary-initializer": true,
     "no-unnecessary-type-assertion": true,
     "no-unused-expression": false,

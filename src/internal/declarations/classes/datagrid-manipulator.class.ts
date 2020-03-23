@@ -10,10 +10,6 @@ import { DatagridColumnSetting } from '../interfaces/datagrid-column-setting.int
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
 
 export class DatagridManipulator<rowDataT> {
-  private readonly subscription: Subscription = new Subscription();
-  private gridApi: GridApi;
-
-  public columnSettings$: BehaviorSubject<DatagridColumnSetting[]> = new BehaviorSubject<DatagridColumnSetting[]>([]);
 
   private get columnApi(): ColumnApi {
     return this.config.gridOptions?.columnApi;
@@ -26,6 +22,22 @@ export class DatagridManipulator<rowDataT> {
   public get config(): DatagridManipulatorConfiguration<rowDataT> {
     return this.configuration;
   }
+  private readonly subscription: Subscription = new Subscription();
+  private gridApi: GridApi;
+
+  public columnSettings$: BehaviorSubject<DatagridColumnSetting[]> = new BehaviorSubject<DatagridColumnSetting[]>([]);
+
+  private static readonly actionsColId: string = '_actions';
+
+  private static readonly actionsColumn: DatagridColDef = {
+    headerName: '',
+    sortable: false,
+    colId: DatagridManipulator.actionsColId,
+    width: 48,
+    pinned: 'right',
+    suppressMovable: true,
+    isAvailableInSettings: false
+  };
 
   constructor(
     private readonly configuration: DatagridManipulatorConfiguration<rowDataT>,
@@ -149,18 +161,6 @@ export class DatagridManipulator<rowDataT> {
 
     return actionsColumn;
   }
-
-  private static readonly actionsColId: string = '_actions';
-
-  private static readonly actionsColumn: DatagridColDef = {
-    headerName: '',
-    sortable: false,
-    colId: DatagridManipulator.actionsColId,
-    width: 48,
-    pinned: 'right',
-    suppressMovable: true,
-    isAvailableInSettings: false
-  };
 
   private static getVisibleColumnsIds(settings: DatagridColumnSetting[]): string[] {
     const visibleColIds: string[] = settings.reduce(
