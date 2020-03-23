@@ -69,10 +69,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     const wholeUrl: string = window.location.href;
     const host: string = window.location.host;
     const protocol: string = `${window.location.protocol}//`;
-    return wholeUrl
-      .replace(host, '')
-      .replace(protocol, '')
-      .toLowerCase();
+    return wholeUrl.replace(host, '').replace(protocol, '').toLowerCase();
   }
 
   private readonly routerNavigationEnded$: Observable<void> = this.router.events.pipe(

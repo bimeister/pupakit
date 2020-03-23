@@ -76,7 +76,7 @@
     "ionicons": "^4.6.3",
     "jest": "^24.9.0",
     "ng-packagr": "^9.0.3",
-    "prettier": "^1.19.1",
+    "prettier": "^2.0.1",
     "replace-in-file": "^4.2.0",
     "rxjs": "~6.5.3",
     "sass": "^1.26.3",
