@@ -40,7 +40,6 @@ import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
 import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
-import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
@@ -80,7 +79,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TabsDrawerDemoComponent,
     RadioButtonDemoComponent,
     LayoutDemoComponent,
-    TreeDemoComponent,
     DraggableDemoComponent,
     MultiselectionListDemoComponent
   ],
@@ -123,10 +121,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'chip-select',
         component: ChipSelectDemoComponent
-      },
-      {
-        path: 'tree',
-        component: TreeDemoComponent
       },
       {
         path: 'icon-button',
