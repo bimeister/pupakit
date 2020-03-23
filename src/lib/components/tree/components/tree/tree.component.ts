@@ -157,6 +157,13 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     return nonFilteredSource;
   }
 
+  public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
+    !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
+  public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>
+    !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
+  public readonly isElement = (_: number, element: FlatTreeItem): boolean =>
+    !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
+
   private handleTreeManipulator(manipulator: TreeManipulator): void {
     this.manipulator$.next(manipulator);
   }
@@ -248,11 +255,4 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
         })
       );
   }
-
-  public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
-    !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
-  public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>
-    !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
-  public readonly isElement = (_: number, element: FlatTreeItem): boolean =>
-    !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
 }
