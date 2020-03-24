@@ -26,6 +26,7 @@ export * from './radio-group/api';
 export * from './rating/api';
 export * from './search-field/api';
 export * from './select/api';
+export * from './skeleton/api';
 export * from './spinner/api';
 export * from './switcher/api';
 export * from './tabs/api';

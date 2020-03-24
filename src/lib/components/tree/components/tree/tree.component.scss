@@ -33,13 +33,6 @@
   display: block;
   height: rems(1.75);
   background: $color_white;
-
-  &_skeleton {
-    border-top: rems(1.75 / 4) solid $color_white;
-    border-bottom: rems(1.75 / 4) solid $color_white;
-    height: rems(1.75 / 2);
-    background: $color_light;
-  }
 }
 
 .tree-node {

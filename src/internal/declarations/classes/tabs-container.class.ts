@@ -24,7 +24,6 @@ interface TabMarker {
 }
 
 export abstract class TabsContainer<T extends TabsContainerItem> implements AfterContentChecked, OnDestroy {
-
   protected abstract readonly tabsList: QueryList<T>;
   @Input() public isAutoSelectionDisabled: boolean = false;
   @Input() public isMultiSelectionEnabled: boolean = false;

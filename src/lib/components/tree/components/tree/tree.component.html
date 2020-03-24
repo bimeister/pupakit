@@ -1,11 +1,5 @@
 <section class="tree">
-  <cdk-virtual-scroll-viewport
-    *ngIf="notNilManipulator$ | async"
-    itemSize="28"
-    class="viewport"
-    #viewPort
-    (scrolledIndexChange)="processScrolledIndexChange($event)"
-  >
+  <cdk-virtual-scroll-viewport *ngIf="notNilManipulator$ | async" itemSize="28" class="viewport" #viewPort>
     <ng-container *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)">
     </ng-container>
 
@@ -108,7 +102,11 @@
     class="viewport viewport_skeleton"
   >
     <ng-container *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)">
-      <div class="tree-node-row tree-node-row_skeleton"></div>
+      <pupa-skeleton>
+        <pupa-skeleton-group>
+          <pupa-skeleton-line></pupa-skeleton-line>
+        </pupa-skeleton-group>
+      </pupa-skeleton>
     </ng-container>
   </cdk-virtual-scroll-viewport>
 </section>
