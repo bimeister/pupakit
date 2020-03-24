@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  HostBinding,
   Input,
   OnChanges,
   OnDestroy,
@@ -20,7 +21,7 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
 @Component({
   selector: 'pupa-skeleton-line',
   templateUrl: './skeleton-line.component.html',
-  styleUrls: ['./../../skeleton.styles.scss'],
+  styleUrls: ['./skeleton-line.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -32,6 +33,8 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   @Input('width.vw') public widthVw: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
   // tslint:enable: no-input-rename
+
+  @HostBinding('style.width') public widthStyle: SafeStyle;
 
   public readonly width$: BehaviorSubject<SafeStyle | null> = new BehaviorSubject<SafeStyle | null>(null);
 
@@ -45,7 +48,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   public ngOnInit(): void {
     this.isDestroyed = false;
-    this.subscription.add(this.detectChangesOnWidthChanges());
+    this.subscription.add(this.detectChangesOnWidthChanges()).add(this.updateHostWidthOnWidthChanges());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -111,6 +114,12 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   private detectChangesOnWidthChanges(): Subscription {
     return this.width$.pipe(distinctUntilChanged()).subscribe(() => {
       this.detectChanges();
+    });
+  }
+
+  private updateHostWidthOnWidthChanges(): Subscription {
+    return this.width$.pipe(distinctUntilChanged()).subscribe((widthStyle: SafeStyle) => {
+      this.widthStyle = widthStyle;
     });
   }
 

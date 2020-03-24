@@ -1,11 +1,6 @@
 @import './../../../styles/functions.scss';
 @import './../../../styles/variables.scss';
 
-:host {
-  display: block;
-  width: 100%;
-}
-
 .skeleton {
   display: flex;
   flex-direction: column;
@@ -28,8 +23,4 @@
     height: px(12);
     border-radius: px(2);
   }
-}
-
-pupa-skeleton-line ~ pupa-skeleton-line {
-  margin: 0 0 0 px(8);
 }

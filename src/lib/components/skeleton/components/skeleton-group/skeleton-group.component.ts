@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulatio
 @Component({
   selector: 'pupa-skeleton-group',
   templateUrl: './skeleton-group.component.html',
-  styleUrls: ['./../../skeleton.styles.scss'],
+  styleUrls: ['./skeleton-group.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
