@@ -10,7 +10,6 @@ import { DatagridColumnSetting } from '../interfaces/datagrid-column-setting.int
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
 
 export class DatagridManipulator<rowDataT> {
-
   private get columnApi(): ColumnApi {
     return this.config.gridOptions?.columnApi;
   }

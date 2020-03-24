@@ -45,7 +45,6 @@ import { ModalSize } from '../../../../../internal/declarations/types/modal-size
   ]
 })
 export class ModalComponent implements OnInit, OnDestroy {
-
   @Input() public set open(value: boolean) {
     if (value) {
       this.openModal();

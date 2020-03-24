@@ -158,11 +158,6 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     return nonFilteredSource;
   }
 
-  public processScrolledIndexChange(scrolledIndex: number): void {
-    // tslint:disable-next-line: no-console
-    console.log(scrolledIndex);
-  }
-
   public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
     !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
   public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>

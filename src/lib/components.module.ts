@@ -25,6 +25,7 @@ import { RadioGroupModule } from './components/radio-group/radio-group.module';
 import { RatingModule } from './components/rating/rating.module';
 import { SearchFieldModule } from './components/search-field/search-field.module';
 import { SelectModule } from './components/select/select.module';
+import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { SwitcherModule } from './components/switcher/switcher.module';
 import { TabsModule } from './components/tabs/tabs.module';
@@ -66,7 +67,8 @@ const EXPORTS: any[] = [
   TreeModule,
   WasherModule,
   MultiselectionListModule,
-  VerticalTabsModule
+  VerticalTabsModule,
+  SkeletonModule
 ];
 
 @NgModule({
