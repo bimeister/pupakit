@@ -80,7 +80,7 @@ export class ChipSelectTreeComponent implements OnDestroy {
       return;
     }
     const search: Set<TreeItemNode> = new Set<TreeItemNode>(
-      Array.from(this.itemsCollection).filter(item => item.value.includes(text))
+      Array.from(this.itemsCollection).filter(item => item.value.toLowerCase().includes(text.toLowerCase()))
     );
     this.itemsCollection.forEach(item => {
       item.enable = false;
