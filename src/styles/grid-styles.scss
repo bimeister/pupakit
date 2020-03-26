@@ -54,6 +54,7 @@ $header-cell-moving-background-color: $color_light;
   }
 
   .ag-header {
+    background-color: $color_white;
     color: $color_main-dark;
     font-weight: normal;
   }
@@ -126,8 +127,18 @@ $header-cell-moving-background-color: $color_light;
     }
 
     .ag-header {
-      padding: px(12) px(10);
+      background-color: $color_white;
+      padding: 0 px(10);
       border-bottom: 0;
+    }
+
+    .ag-pinned-right-header {
+      border: none;
+    }
+
+    .ag-header-cell::after,
+    .ag-header-group-cell::after {
+      border: none;
     }
 
     .ag-header-row {
@@ -153,6 +164,7 @@ $header-cell-moving-background-color: $color_light;
 
     .ag-row {
       border-radius: rems(0.5);
+      border: none;
       border-bottom: px(2) solid $color_white;
       box-sizing: border-box;
       background: $color_white;
