@@ -66,4 +66,8 @@
     pointer-events: none;
     z-index: 60;
   }
+  &.tooltip {
+    pointer-events: none;
+    z-index: 70;
+  }
 }

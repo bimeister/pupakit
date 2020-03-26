@@ -5,6 +5,7 @@ import { AlertComponent } from './components/alert/alert.component';
 import { CloseButtonComponent } from './components/close-button/close-button.component';
 import { DrawerPaneComponent } from './components/drawer-pane/drawer-pane.component';
 import { DroppablePaneComponent } from './components/droppable-pane/droppable-pane.component';
+import { TooltipPaneComponent } from './components/tooltip-pane/tooltip-pane.component';
 import { LayoutComponent } from './components/layout/layout.component';
 import { LoaderComponent } from './components/loader/loader.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
@@ -20,7 +21,8 @@ import { OverlayComponent } from './components/overlay/overlay.component';
     LoaderComponent,
     ModalWindowComponent,
     OverlayComponent,
-    DroppablePaneComponent
+    DroppablePaneComponent,
+    TooltipPaneComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [LayoutComponent, LoaderComponent]

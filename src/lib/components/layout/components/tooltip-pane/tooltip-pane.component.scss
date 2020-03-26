@@ -1,0 +1,109 @@
+@import 'variables';
+
+.root {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: $box-shadow_hover;
+  transition: none;
+  pointer-events: all;
+
+  &:before {
+    position: absolute;
+    content: ' ';
+    width: 0;
+    height: 0;
+    bottom: px(-7);
+    left: 50%;
+    top: auto;
+    right: auto;
+    transform: translateX(-50%);
+    border-left-color: transparent;
+    border-left-width: px(7);
+    border-left-style: solid;
+    border-right-color: transparent;
+    border-right-width: px(7);
+    border-right-style: solid;
+    border-top-color: $color_main;
+    border-top-width: px(7);
+    border-top-style: solid;
+    opacity: 0.9;
+  }
+
+  &:after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: px(20);
+    bottom: px(-20);
+    left: 0;
+    top: auto;
+    right: auto;
+    opacity: 0;
+  }
+
+  &_top:before {
+    bottom: auto;
+    right: auto;
+    top: px(-7);
+    left: 50%;
+    transform: translateX(-50%) rotate(-180deg);
+  }
+
+  &_top:after {
+    width: 100%;
+    height: px(20);
+    top: px(-20);
+    left: 0;
+    bottom: auto;
+    right: auto;
+  }
+
+  &_right:before {
+    bottom: auto;
+    top: 50%;
+    left: auto;
+    right: px(-10);
+    transform: translateY(-50%) rotate(-90deg);
+  }
+
+  &_right:after {
+    width: px(20);
+    height: 100%;
+    top: 0;
+    right: px(-20);
+    left: auto;
+    bottom: auto;
+  }
+
+  &_left:before {
+    bottom: auto;
+    top: 50%;
+    right: auto;
+    left: px(-10);
+    transform: translateY(-50%) rotate(90deg);
+  }
+
+  &_left:after {
+    width: px(20);
+    height: 100%;
+    top: 0;
+    left: px(-20);
+    right: auto;
+    bottom: auto;
+  }
+}
+
+.content {
+  max-width: px(290);
+  max-height: px(70);
+  overflow: auto;
+  padding: px(12);
+  box-sizing: border-box;
+  border-radius: rems(0.25);
+  max-width: px(290);
+  max-height: px(70);
+  background: rgba($color_main, 0.9);
+  color: $color_grey-apple;
+  pointer-events: all;
+}

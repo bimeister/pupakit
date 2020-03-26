@@ -41,6 +41,7 @@ import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.com
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
+import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -80,7 +81,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     RadioButtonDemoComponent,
     LayoutDemoComponent,
     DraggableDemoComponent,
-    MultiselectionListDemoComponent
+    MultiselectionListDemoComponent,
+    TooltipDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -185,6 +187,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'radio', component: RadioButtonDemoComponent },
       { path: 'layout', component: LayoutDemoComponent },
       { path: 'multiselection-list', component: MultiselectionListDemoComponent },
+      { path: 'tooltip', component: TooltipDemoComponent },
       {
         path: '',
         component: AppComponent
