@@ -33,9 +33,12 @@
   display: block;
   height: rems(1.75);
   background: $color_white;
+  padding-bottom: px(1);
 }
 
 .tree-node {
+  $tree_node: &;
+
   all: unset;
   position: relative;
   display: flex;
@@ -69,6 +72,16 @@
   &:hover,
   &_selected {
     background: $color_light;
+  }
+
+  &_highlited {
+    background: $color_main;
+    color: $color_white;
+
+    &:hover,
+    &#{$tree_node}_selected {
+      background: $color_text;
+    }
   }
 }
 

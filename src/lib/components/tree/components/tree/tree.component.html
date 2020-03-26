@@ -16,7 +16,7 @@
         cdkTreeNodePadding
         class="tree-node-row"
       >
-        <div class="tree-node" [class.tree-node_selected]="nodeIsSelected(node, selectedNodesIds$ | async)">
+        <div class="tree-node" [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)">
           <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
             <ng-container
               [ngTemplateOutlet]="defaultExpansionButtonTemplate"
@@ -44,7 +44,7 @@
         cdkTreeNodePadding
         class="tree-node-row"
       >
-        <div class="tree-node" [class.tree-node_selected]="nodeIsSelected(node, selectedNodesIds$ | async)">
+        <div class="tree-node" [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)">
           <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
             <ng-container
               [ngTemplateOutlet]="defaultExpansionButtonTemplate"
@@ -72,7 +72,11 @@
         cdkTreeNodePadding
         class="tree-node-row"
       >
-        <div class="tree-node" [class.tree-node_selected]="nodeIsSelected(node, selectedNodesIds$ | async)">
+        <div
+          class="tree-node"
+          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
+          [class.tree-node_highlited]="idsIncludesNodeId(highlitedNodesIds$ | async, node)"
+        >
           <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
             <ng-container
               [ngTemplateOutlet]="defaultExpansionButtonTemplate"
