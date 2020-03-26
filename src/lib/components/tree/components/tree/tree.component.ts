@@ -87,6 +87,10 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
     map((selectedNodesIds: string[]) => (Array.isArray(selectedNodesIds) ? selectedNodesIds : []))
   );
+  public readonly highlitedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
+    switchMap((manipulator: TreeManipulator) => manipulator.highlitedNodesIds$),
+    map((highlitedNodesIds: string[]) => (Array.isArray(highlitedNodesIds) ? highlitedNodesIds : []))
+  );
   public filteredSource$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
     switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$),
     tap(() => this.refreshViewPort())
@@ -132,8 +136,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public nodeIsSelected(node: FlatTreeItem, selectedNodesIds: string[]): boolean {
-    return !isNullOrUndefined(node) && Array.isArray(selectedNodesIds) && selectedNodesIds.includes(node.id);
+  public idsIncludesNodeId(ids: string[], node: FlatTreeItem): boolean {
+    return !isNullOrUndefined(node) && Array.isArray(ids) && ids.includes(node.id);
   }
 
   public toggleExpansion(node: FlatTreeItem): void {
