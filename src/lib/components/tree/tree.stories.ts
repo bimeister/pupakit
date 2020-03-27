@@ -9,7 +9,7 @@ import { TreeModule } from './tree.module';
 
 const leafElementsCount: number = 100;
 const flatTreeConfiguration: FlatTreeManipulator = new FlatTreeManipulator({
-  highlitedNodesIds$: of(),
+  highlitedNodesIds$: of([]),
   dataOrigin$: of(
     [
       new FlatTreeItem(true, 'Wolves', 0, null),

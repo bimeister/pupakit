@@ -1,8 +1,8 @@
-@import 'functions';
+@import './functions.scss';
 
-// colors
+/* colors */
 $color_main: #004560;
-$color_main-dark: #04222e; // Нет в дизайн-системе
+$color_main-dark: #04222e; /* Нет в дизайн-системе */
 $color_active: #009eff;
 $color_light: #eaf7ff;
 $color_success: #00c902;
@@ -14,47 +14,47 @@ $color_grey-light: #797979;
 $color_grey-ivory: #a6a6a6;
 $color_grey-apple: #d2d2d2;
 
-$color_white: #ffffff; // Нет в дизайн-системе
-$color_black: #000000; // Нет в дизайн-системе
+$color_white: #ffffff; /* Нет в дизайн-системе */
+$color_black: #000000; /* Нет в дизайн-системе */
 
-$color_pale-blue: #d9eafe; // Нет в дизайн-системе
-$color_cadet-blue: #9fb7d3; // Нет в дизайн-системе
-$color_cadet-blue-light: #e0eaf5; // Нет в дизайн-системе
+$color_pale-blue: #d9eafe; /* Нет в дизайн-системе */
+$color_cadet-blue: #9fb7d3; /* Нет в дизайн-системе */
+$color_cadet-blue-light: #e0eaf5; /* Нет в дизайн-системе */
 
-$color_dark-overlay: rgba(0, 0, 0, 0.82); // Нет в дизайн-системе
+$color_dark-overlay: rgba(0, 0, 0, 0.82); /* Нет в дизайн-системе */
 
-// font-size
-$font-size_root: 16px; // 1 rem (1 px = 0,0625 rem) - do not use!
+/* font-size */
+$font-size_root: 16px; /* 1 rem (1 px = 0,0625 rem) - do not use! */
 
-$font-size_base-text: rems(0.875); // 14 px
-$font-size_h1: rems(2); // 32 px
-$font-size_h2: rems(1.5); // 24 px
-$font-size_h3: rems(1.3125); // 21 px
-$font-size_h4: rems(1.125); // 18 px
-$font-size_h5: rems(0.875); // 14 px
+$font-size_base-text: rems(0.875); /* 14 px */
+$font-size_h1: rems(2); /* 32 px */
+$font-size_h2: rems(1.5); /* 24 px */
+$font-size_h3: rems(1.3125); /* 21 px */
+$font-size_h4: rems(1.125); /* 18 px */
+$font-size_h5: rems(0.875); /* 14 px */
 
-// line-height
-$line-height_base-text: rems(1.125); // 18 px
-$line-height_h1: rems(2.25); // 36 px
-$line-height_h2: rems(1.625); // 26 px
-$line-height_h3: rems(1.75); // 28 px
-$line-height_h4: rems(1.75); // 28 px
-$line-height_h5: rems(1); // 16 px
+/* line-height */
+$line-height_base-text: rems(1.125); /* 18 px */
+$line-height_h1: rems(2.25); /* 36 px */
+$line-height_h2: rems(1.625); /* 26 px */
+$line-height_h3: rems(1.75); /* 28 px */
+$line-height_h4: rems(1.75); /* 28 px */
+$line-height_h5: rems(1); /* 16 px */
 
-// padding
+/* padding */
 $padding_body: 0;
 
-// margin
+/* margin */
 $margin_body: 0;
 
-// box-shadow
+/* box-shadow */
 $box-shadow_hover: 0 rems(0.5) rems(1) 0 rgba(0, 0, 0, 0.2);
 
-// transition-duration
+/* transition-duration */
 $transition-duration_common: 0.3s;
 
-// transition-timing-function
+/* transition-timing-function */
 $transition-timing-function_common: ease;
 
-// opacity
+/* opacity */
 $opacity_hovered-button: 0.1;

@@ -1,6 +1,6 @@
-@import 'functions';
-@import 'variables';
-@import 'mixins';
+@import './functions.scss';
+@import './variables.scss';
+@import './mixins.scss';
 
 $ag-border-color: null;
 $ag-row-height: null;
@@ -15,15 +15,15 @@ $ag-header-background-color: null;
 $ag-header-cell-moving-background-color: null;
 $ag-odd-row-background-color: null;
 
-// default theme variables reset
-$header-height: 48px; // rems(3)
+/* default theme variables reset */
+$header-height: 48px; /* rems(3) */
 $header-background-color: $color_white;
-$row-height: 40px; // rems(2.5)
+$row-height: 40px; /* rems(2.5) */
 $row-border-width: 1px 0 1px 0;
 $hover-color: $color_light;
 $border-color: $color_light;
 $font-family: 'effraregular', sans-serif;
-$font-size: 14px; // rems(0.875)
+$font-size: 14px; /* rems(0.875) */
 $font-weight: normal;
 $foreground-color: $color_text;
 $odd-row-background-color: transparent;
@@ -32,7 +32,7 @@ $header-cell-moving-background-color: $color_light;
 @import 'ag-grid-community/src/styles/ag-grid.scss';
 @import 'ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
 
-// additional customization
+/* additional customization */
 @mixin ionic-icon-font {
   font-family: 'ionicons';
   font-weight: normal;
