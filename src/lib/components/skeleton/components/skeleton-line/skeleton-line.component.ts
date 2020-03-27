@@ -8,15 +8,15 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
+import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
 
 @Component({
   selector: 'pupa-skeleton-line',
@@ -25,7 +25,11 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, WidthUnitBinding {
+  private readonly unitWidthStyleChangesProcessor: UnitWidthStyleChangesProcessor = new UnitWidthStyleChangesProcessor(
+    this.domSanitizer
+  );
+
   @Input() public width: string | null = null;
   // tslint:disable: no-input-rename
   @Input('width.%') public widthPercents: number | null = null;
@@ -36,7 +40,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   @HostBinding('style.width') public widthStyle: SafeStyle;
 
-  public readonly width$: BehaviorSubject<SafeStyle | null> = new BehaviorSubject<SafeStyle | null>(null);
+  public readonly width$: Observable<SafeStyle> = this.unitWidthStyleChangesProcessor.safeStyle$;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -52,11 +56,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
-    this.processWidthChanges(changes?.width);
-    this.processWidthPercentChanges(changes.widthPercents);
-    this.processWidthPxChanges(changes.widthPx);
-    this.processWidthVwChanges(changes.widthVw);
-    this.processWidthRemChanges(changes.widthRem);
+    this.unitWidthStyleChangesProcessor.process(changes);
   }
 
   public ngAfterViewInit(): void {
@@ -66,49 +66,6 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   public ngOnDestroy(): void {
     this.isDestroyed = true;
     this.subscription.unsubscribe();
-  }
-
-  private processWidthChanges(change: SimpleChange): void {
-    if (isNullOrUndefined(change?.currentValue)) {
-      return;
-    }
-    this.updateWidth(`${change?.currentValue}`);
-  }
-
-  private processWidthPercentChanges(change: SimpleChange): void {
-    if (isNullOrUndefined(change?.currentValue)) {
-      return;
-    }
-    this.updateWidth(`${change?.currentValue}%`);
-  }
-
-  private processWidthPxChanges(change: SimpleChange): void {
-    if (isNullOrUndefined(change?.currentValue)) {
-      return;
-    }
-    this.updateWidth(`${change?.currentValue}px`);
-  }
-
-  private processWidthVwChanges(change: SimpleChange): void {
-    if (isNullOrUndefined(change?.currentValue)) {
-      return;
-    }
-    this.updateWidth(`${change?.currentValue}vw`);
-  }
-
-  private processWidthRemChanges(change: SimpleChange): void {
-    if (isNullOrUndefined(change?.currentValue)) {
-      return;
-    }
-    this.updateWidth(`${change?.currentValue}rem`);
-  }
-
-  private updateWidth(widthStyle: string): void {
-    const safeStyle: SafeStyle = this.domSanitizer.bypassSecurityTrustStyle(widthStyle);
-    if (isNullOrUndefined(safeStyle)) {
-      return;
-    }
-    this.width$.next(safeStyle);
   }
 
   private detectChangesOnWidthChanges(): Subscription {

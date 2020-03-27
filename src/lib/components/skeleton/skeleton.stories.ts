@@ -7,16 +7,6 @@ storiesOf('Skeleton', module).add('default', () => ({
     imports: [SkeletonModule]
   },
   template: `
-  <style>
-    .demo-wrapper {
-      width: 200px;
-    }
-    pupa-skeleton,
-    pupa-skeleton-group {
-      width: 100%;
-    }
-  </style>
-  <div class="demo-wrapper">
     <pupa-skeleton>
       <pupa-skeleton-group>
         <pupa-skeleton-line [width.px]="12"></pupa-skeleton-line>
@@ -38,6 +28,5 @@ storiesOf('Skeleton', module).add('default', () => ({
         <pupa-skeleton-line [width.px]="124"></pupa-skeleton-line>
       </pupa-skeleton-group>
     </pupa-skeleton>
-  </div>
   `
 }));
