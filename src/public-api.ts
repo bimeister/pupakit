@@ -27,6 +27,7 @@ export { TabsModule } from './lib/components/tabs/tabs.module';
 export { TextareaModule } from './lib/components/textarea/textarea.module';
 export { TileModule } from './lib/components/tile/tile.module';
 export { TooltipModule } from './lib/components/tooltip/tooltip.module';
+export { DropdownMenuModule } from './lib/components/dropdown-menu/dropdown-menu.module';
 export { TreeModule } from './lib/components/tree/tree.module';
 export { WasherModule } from './lib/components/washer/washer.module';
 export { VerticalTabsModule } from './lib/components/vertical-tabs/vertical-tabs.module';
