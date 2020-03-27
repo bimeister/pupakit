@@ -37,6 +37,7 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { WasherModule } from './components/washer/washer.module';
+import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -69,6 +70,7 @@ const EXPORTS: any[] = [
   TextareaModule,
   TileModule,
   TooltipModule,
+  DropdownMenuModule,
   TreeModule,
   WasherModule,
   MultiselectionListModule,

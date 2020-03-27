@@ -1,0 +1,11 @@
+@import 'mixins';
+
+.content-wrapper {
+  position: relative;
+
+  .content {
+    @include dropdown;
+
+    user-select: none;
+  }
+}
