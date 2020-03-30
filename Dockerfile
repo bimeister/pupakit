@@ -3,8 +3,8 @@ RUN apt update && apt-get install jq -y
 
 WORKDIR /docker/build-pupakit
 
-COPY package-lock.json package.json .npmrc /docker/build-pupakit/
-RUN npm ci
+COPY yarn.lock package.json .npmrc /docker/build-pupakit/
+RUN yarn install --frozen-lockfile
 
 COPY . /docker/build-pupakit
 RUN npm run lint:inspect \
