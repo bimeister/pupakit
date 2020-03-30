@@ -1,7 +1,8 @@
 import { ComponentFactory, Injectable, Injector } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { filter, map, mapTo, take } from 'rxjs/operators';
 
+import { VOID } from '../../../../internal';
 import { ModalWindowConfiguration } from '../../../../internal/declarations/interfaces/modal-window-configuration.interface';
 import { ModalWindowData } from '../../../../internal/declarations/interfaces/modal-window-data.interface';
 
@@ -29,7 +30,17 @@ export class ModalWindowService {
     canPadding: true
   };
 
+  private readonly close$: Subject<string> = new Subject<string>();
+
   constructor(private readonly injector: Injector) {}
+
+  public close(windowId: string): Observable<void> {
+    return this.close$.pipe(
+      filter((modalWindowId: string) => modalWindowId === windowId),
+      take(1),
+      mapTo(VOID)
+    );
+  }
 
   public create(componentFactory: ComponentFactory<any>, configuration?: ModalWindowConfiguration): Observable<string> {
     return this.modalWindowsData$.pipe(
@@ -61,6 +72,7 @@ export class ModalWindowService {
     this.modalWindowsData$.pipe(take(1)).subscribe((collection: Map<string, ModalWindowData>) => {
       collection.delete(modalWindowId);
       this.modalWindowsData$.next(collection);
+      this.close$.next(modalWindowId);
     });
   }
 
