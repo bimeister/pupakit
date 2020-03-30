@@ -11,4 +11,5 @@ export interface TreeManipulatorConfiguration {
   readonly nodeTemplate: TemplateRef<any>;
   readonly elementTemplate: TemplateRef<any>;
   readonly trackBy: TrackByFunction<FlatTreeItem>;
+  readonly scrollAnimationEnabled?: boolean;
 }

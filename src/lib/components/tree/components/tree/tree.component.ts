@@ -21,6 +21,7 @@ import {
   filter,
   map,
   mapTo,
+  pluck,
   shareReplay,
   skipUntil,
   switchMap,
@@ -34,8 +35,10 @@ import { VOID } from '../../../../../internal/constants/void.const';
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
+import { TreeManipulatorConfiguration } from '../../../../../internal/declarations/interfaces/tree-manipulator-configuration.interface';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
+/** @deprecated needs refactoring */
 @Component({
   selector: 'pupa-tree',
   templateUrl: './tree.component.html',
@@ -106,6 +109,11 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       const currentParent: string = currentRoute[currentRoute.length - 1];
       return previousParent === currentParent;
     })
+  );
+
+  private readonly scrollAnimationIsEnabled$: Observable<boolean> = this.notNilManipulator$.pipe(
+    pluck<TreeManipulatorConfiguration, boolean | undefined>('scrollAnimationIsEnabled'),
+    map((isEnabled: boolean | undefined) => Boolean(isEnabled))
   );
 
   constructor() {
@@ -220,13 +228,16 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
       })
     );
 
-    return targetIndexes$.subscribe((indexes: number[]) => {
-      indexes.forEach((index: number) => {
-        this.viewPort.scrollToIndex(index, 'smooth');
-        this.skeletonViewPort.scrollToIndex(index, 'smooth');
-        this.refreshViewPort();
+    return targetIndexes$
+      .pipe(withLatestFrom(this.scrollAnimationIsEnabled$))
+      .subscribe(([indexes, scrollAnimationIsEnabled]: [number[], boolean]) => {
+        indexes.forEach((index: number) => {
+          this.viewPort.scrollToIndex(index, scrollAnimationIsEnabled ? 'smooth' : 'auto');
+          this.skeletonViewPort.scrollToIndex(index, scrollAnimationIsEnabled ? 'smooth' : 'auto');
+
+          this.refreshViewPort();
+        });
       });
-    });
   }
 
   private emitExpandedItemOnAction(): Subscription {

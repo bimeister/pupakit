@@ -7,3 +7,4 @@ export * from './drawers.service';
 export * from './droppable.service';
 export * from './loader.service';
 export * from './modal-window.service';
+export * from './tooltip.service';

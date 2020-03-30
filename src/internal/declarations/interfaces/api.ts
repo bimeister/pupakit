@@ -17,6 +17,7 @@ export * from './layout-drawer-configuration.interface';
 export * from './modal-window-configuration.interface';
 export * from './modal-window-data.interface';
 export * from './tab.interface';
+export * from './tooltip-config.interface';
 export * from './tree-item-node.interface';
 export * from './tree-manipulator-configuration.interface';
 export * from './washer-button-root.interface';
