@@ -17,6 +17,7 @@ export * from './draggable-list/api';
 export * from './drawer/api';
 export * from './dropdown/api';
 export * from './droppable/api';
+export * from './expansible/api';
 export * from './icon-button/api';
 export * from './input/api';
 export * from './layout/api';

@@ -8,7 +8,7 @@ import {
   Renderer2
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, shareReplay, switchMap, withLatestFrom } from 'rxjs/operators';
+import { distinctUntilChanged, filter, shareReplay, switchMap } from 'rxjs/operators';
 
 import { Position } from '../../../../../internal/declarations/types/position.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
@@ -22,7 +22,7 @@ import { DraggerComponent } from '../dragger/dragger.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DraggableComponent {
-  private readonly subscritption: Subscription = new Subscription();
+  private readonly subscription: Subscription = new Subscription();
 
   @ContentChild(DraggerComponent, { static: false })
   public set draggerComponent(component: DraggerComponent) {
@@ -40,13 +40,8 @@ export class DraggableComponent {
     shareReplay(1)
   );
 
-  private readonly draggerTargetPosition$: Observable<Position> = this.sanitizedDragger$.pipe(
-    switchMap((component: DraggerComponent) => component.elementTargetPositon$),
-    filter((position: Position) => Array.isArray(position))
-  );
-
-  private readonly draggerRelativeClickPosition$: Observable<Position> = this.sanitizedDragger$.pipe(
-    switchMap((component: DraggerComponent) => component.elementRelativeClickPosition$),
+  private readonly draggerPositionMoveDelta$: Observable<Position> = this.sanitizedDragger$.pipe(
+    switchMap((component: DraggerComponent) => component.positionMoveDelta$),
     filter((position: Position) => Array.isArray(position))
   );
 
@@ -55,32 +50,21 @@ export class DraggableComponent {
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly renderer: Renderer2
   ) {
-    this.subscritption.add(this.moveDraggableElementIfDraggerPositionDoesntMatchTarget());
+    this.subscription.add(this.moveDraggableElementIfDraggerPositionDoesntMatchTarget());
   }
 
   private moveDraggableElementIfDraggerPositionDoesntMatchTarget(): Subscription {
-    return this.draggerTargetPosition$
-      .pipe(
-        distinctUntilChanged(
-          (currentPosition: Position, targetPositon: Position) =>
-            Array.isArray(currentPosition) &&
-            Array.isArray(targetPositon) &&
-            currentPosition.join() === targetPositon.join()
-        ),
-        filter(() => !isNullOrUndefined(this.elementRef) && !isNullOrUndefined(this.elementRef.nativeElement)),
-        withLatestFrom(this.draggerRelativeClickPosition$, this.sanitizedDragger$)
-      )
-      .subscribe(([targetPositon, relativeClickPosition, _dragger]: [Position, Position, DraggerComponent]) => {
-        const [targetXPx, targetYPx]: Position = targetPositon;
-        const [clickRelativeXPx, clickRelativeYPx]: Position = relativeClickPosition;
+    return this.draggerPositionMoveDelta$.subscribe((positionMoveDelta: Position) => {
+      const containerClientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+      const [deltaXPx, deltaYPx]: Position = positionMoveDelta;
+      this.leftOffsetPx = containerClientRect.x + deltaXPx;
+      this.topOffsetPx = containerClientRect.y + deltaYPx;
 
-        this.leftOffsetPx = targetXPx - clickRelativeXPx;
-        this.topOffsetPx = targetYPx - clickRelativeYPx;
+      this.renderer.setStyle(this.elementRef.nativeElement, 'position', 'fixed');
+      this.renderer.setStyle(this.elementRef.nativeElement, 'right', 'unset');
+      this.renderer.setStyle(this.elementRef.nativeElement, 'bottom', 'unset');
 
-        this.renderer.setStyle(this.elementRef.nativeElement, 'right', 'unset');
-        this.renderer.setStyle(this.elementRef.nativeElement, 'bottom', 'unset');
-
-        this.changeDetectorRef.markForCheck();
-      });
+      this.changeDetectorRef.markForCheck();
+    });
   }
 }

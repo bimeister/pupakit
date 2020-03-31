@@ -16,6 +16,7 @@ import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
+import { ExpansibleModule } from './components/expansible/expansible.module';
 import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { InputModule } from './components/input/input.module';
 import { LayoutModule } from './components/layout/layout.module';
@@ -38,6 +39,7 @@ import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.mod
 import { WasherModule } from './components/washer/washer.module';
 
 const EXPORTS: any[] = [
+  ExpansibleModule,
   ButtonModule,
   CheckboxModule,
   ChipButtonModule,

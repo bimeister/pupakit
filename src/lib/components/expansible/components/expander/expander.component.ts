@@ -1,15 +1,23 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   HostBinding,
+  Inject,
   Input,
   OnChanges,
+  Renderer2,
   SimpleChange,
   SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { v4 as uuid } from 'uuid';
 
+import { PositionController } from '../../../../../internal/declarations/classes/position-controller.class';
 import { ExpanderBehavior } from '../../../../../internal/declarations/types/expander-behavior.type';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderBehavior, string>([
@@ -33,9 +41,22 @@ const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderB
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ExpanderComponent implements OnChanges {
+export class ExpanderComponent extends PositionController implements OnChanges {
   @Input() public behavior: ExpanderBehavior;
+
   @HostBinding('style.cursor') public cursorName: string;
+
+  public readonly behavior$: BehaviorSubject<ExpanderBehavior> = new BehaviorSubject<ExpanderBehavior>(null);
+
+  public readonly id: Uuid = uuid();
+
+  constructor(
+    protected readonly renderer: Renderer2,
+    protected readonly elementRef: ElementRef<HTMLElement>,
+    @Inject(DOCUMENT) protected readonly document: Document
+  ) {
+    super(renderer, elementRef, document);
+  }
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (isNullOrUndefined(changes)) {
@@ -48,10 +69,12 @@ export class ExpanderComponent implements OnChanges {
     if (isNullOrUndefined(change)) {
       return;
     }
-    const targetCursorName: string = CURSOR_BY_BEHAVIOR_NAME.get(change?.currentValue);
+    const behavior: ExpanderBehavior = change?.currentValue;
+    const targetCursorName: string = CURSOR_BY_BEHAVIOR_NAME.get(behavior);
     if (isNullOrUndefined(targetCursorName)) {
       return;
     }
+    this.behavior$.next(behavior);
     this.cursorName = targetCursorName;
   }
 }

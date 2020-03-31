@@ -13,6 +13,7 @@ export * from './datepicker-selection-mode.type';
 export * from './drawer-float.type';
 export * from './droppable-horizontal-position.type';
 export * from './event-unlistener.type';
+export * from './expander-behavior.type';
 export * from './icon-button-color.type';
 export * from './icon-button-size.type';
 export * from './input-size.type';

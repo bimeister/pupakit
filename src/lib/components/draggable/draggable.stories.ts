@@ -18,6 +18,7 @@ storiesOf('Behavior', module).add('Draggable', () => ({
       user-select: none;
       cursor: move;
     }
+
   </style>
 
   <pupa-draggable>
