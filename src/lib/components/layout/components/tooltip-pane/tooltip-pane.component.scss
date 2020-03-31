@@ -100,9 +100,10 @@
   overflow: auto;
   padding: px(12);
   box-sizing: border-box;
-  border-radius: rems(0.25);
-  max-width: px(290);
-  max-height: px(70);
+  border-radius: px(8);
+  min-width: px(290);
+  max-width: px(350);
+  max-height: px(100);
   background: rgba($color_main, 0.9);
   color: $color_grey-apple;
   pointer-events: all;
