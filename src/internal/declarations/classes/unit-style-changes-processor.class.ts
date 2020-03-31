@@ -5,7 +5,7 @@ import { ReplaySubject } from 'rxjs';
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 
 export abstract class UnitStyleChangesProcessor<T> {
-  public readonly safeStyle$: ReplaySubject<SafeStyle> = new ReplaySubject<SafeStyle>();
+  public readonly safeStyle$: ReplaySubject<SafeStyle> = new ReplaySubject<SafeStyle>(1);
 
   constructor(protected readonly domSanitizer: DomSanitizer) {}
 
