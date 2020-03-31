@@ -19,6 +19,7 @@ import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DraggableDemoComponent } from './draggable-demo/draggable-demo.component';
+import { DraggableListDemoComponent } from './draggable-list-demo/draggable-demo.component';
 import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
@@ -40,8 +41,8 @@ import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
 import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
-import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
+import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -82,7 +83,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     LayoutDemoComponent,
     DraggableDemoComponent,
     MultiselectionListDemoComponent,
-    TooltipDemoComponent
+    TooltipDemoComponent,
+    DraggableListDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -188,6 +190,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'layout', component: LayoutDemoComponent },
       { path: 'multiselection-list', component: MultiselectionListDemoComponent },
       { path: 'tooltip', component: TooltipDemoComponent },
+      { path: 'draggable-list', component: DraggableListDemoComponent },
       {
         path: '',
         component: AppComponent
