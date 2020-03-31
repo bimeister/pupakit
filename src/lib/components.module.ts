@@ -11,6 +11,7 @@ import { ControlTextModule } from './components/control-text/control-text.module
 import { DatagridModule } from './components/datagrid/datagrid.module';
 import { DatepickerModule } from './components/datepicker/datepicker.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
+import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
@@ -70,7 +71,8 @@ const EXPORTS: any[] = [
   WasherModule,
   MultiselectionListModule,
   VerticalTabsModule,
-  SkeletonModule
+  SkeletonModule,
+  DraggableListModule
 ];
 
 @NgModule({

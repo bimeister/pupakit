@@ -1,0 +1,48 @@
+@import './../../../../../styles/variables.scss';
+
+:host {
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &.is-drag-over {
+    z-index: 2;
+  }
+
+  &.clone {
+    position: fixed;
+    z-index: 3;
+    border-radius: px(8);
+    width: fit-content;
+    box-shadow: $box-shadow_hover;
+  }
+}
+
+.placeholder {
+  position: absolute;
+  height: px(2);
+  width: 99%;
+  background: $color_main;
+  pointer-events: none;
+  border-radius: px(2);
+
+  &--top {
+    top: px(-1);
+  }
+
+  &--bottom {
+    bottom: px(-1);
+  }
+}
+
+.dragover-zone {
+  width: 100%;
+
+  &.is-dragging {
+    opacity: 0;
+  }
+}

@@ -42,6 +42,7 @@ const flatTreeConfiguration: FlatTreeManipulator = new FlatTreeManipulator({
     ].map((item: FlatTreeItem) => ({ ...item, id: uuid() }))
   ),
   selectedNodesIds$: of([]),
+  highlitedNodesIds$: of([]),
   scrollByRoute$: of([]),
   nodeTemplate: null,
   elementTemplate: null,
