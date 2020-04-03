@@ -13,7 +13,9 @@ export abstract class TreeManipulator {
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$.pipe(shareReplay(1));
   public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$.pipe(shareReplay(1));
-  public readonly highlitedNodesIds$: Observable<string[]> = this.configuration.highlitedNodesIds$.pipe(shareReplay(1));
+  public readonly highlightedNodesIds$: Observable<string[]> = this.configuration.highlightedNodesIds$.pipe(
+    shareReplay(1)
+  );
   public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$.pipe(shareReplay(1));
   public readonly nodeTemplate: TemplateRef<any> = this.configuration.nodeTemplate;
   public readonly elementTemplate: TemplateRef<any> = this.configuration.elementTemplate;

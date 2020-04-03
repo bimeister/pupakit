@@ -90,8 +90,8 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
     map((selectedNodesIds: string[]) => (Array.isArray(selectedNodesIds) ? selectedNodesIds : []))
   );
-  public readonly highlitedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.highlitedNodesIds$),
+  public readonly highlightedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
+    switchMap((manipulator: TreeManipulator) => manipulator.highlightedNodesIds$),
     map((highlitedNodesIds: string[]) => (Array.isArray(highlitedNodesIds) ? highlitedNodesIds : []))
   );
   public filteredSource$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
