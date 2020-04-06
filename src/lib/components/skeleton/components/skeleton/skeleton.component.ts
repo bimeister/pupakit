@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 
-import { isNullOrUndefined } from '../../../../../internal';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-skeleton',
