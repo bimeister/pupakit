@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Host,
   HostBinding,
   Input,
   OnChanges,
@@ -12,11 +13,13 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { Optional } from 'ag-grid-community';
 import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
+import { SkeletonComponent } from '../skeleton/skeleton.component';
 
 @Component({
   selector: 'pupa-skeleton-line',
@@ -46,13 +49,22 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   private isDestroyed: boolean = true;
 
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef, private readonly domSanitizer: DomSanitizer) {
+  public readonly isActive$: Observable<boolean> = this.skeletonComponent.isActive$;
+
+  constructor(
+    @Optional() @Host() private readonly skeletonComponent: SkeletonComponent,
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly domSanitizer: DomSanitizer
+  ) {
     this.changeDetectorRef.detach();
   }
 
   public ngOnInit(): void {
     this.isDestroyed = false;
-    this.subscription.add(this.detectChangesOnWidthChanges()).add(this.updateHostWidthOnWidthChanges());
+    this.subscription
+      .add(this.detectChangesOnWidthChanges())
+      .add(this.detectChangesOnIsActiveValueChanges())
+      .add(this.updateHostWidthOnWidthChanges());
   }
 
   public ngOnChanges(changes: SimpleChanges): void {
@@ -70,6 +82,12 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   private detectChangesOnWidthChanges(): Subscription {
     return this.width$.pipe(distinctUntilChanged()).subscribe(() => {
+      this.detectChanges();
+    });
+  }
+
+  private detectChangesOnIsActiveValueChanges(): Subscription {
+    return this.isActive$.pipe(distinctUntilChanged()).subscribe(() => {
       this.detectChanges();
     });
   }

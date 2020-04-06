@@ -22,5 +22,9 @@
     width: 100%;
     height: px(12);
     border-radius: px(2);
+
+    &_active {
+      background: rgba($color_main, 10);
+    }
   }
 }
