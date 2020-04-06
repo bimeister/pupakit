@@ -24,7 +24,8 @@
     border-radius: px(2);
 
     &_active {
-      background: rgba($color_main, 10);
+      background: $color_main;
+      opacity: 0.1;
     }
   }
 }
