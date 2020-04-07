@@ -46,7 +46,7 @@ export class DropdownMenuComponent implements AfterContentInit {
     this.content.setVisibleState(this.isContentVisible);
     this.content.onItemClick$.subscribe(this.handleItemClick.bind(this));
 
-    this.content.isLeftSided = this.contentSide === 'left' ? true : false;
+    this.content.isLeftSided = this.contentSide === 'left';
   }
 
   public setContentVisible(visible: boolean): void {
