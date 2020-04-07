@@ -1,5 +1,5 @@
 <div #content class="content-wrapper">
-  <div class="content" [class.content_open]="contentVisible$ | async">
+  <div class="content" [class.content_open]="contentVisible$ | async" [class.content_side_left]="isLeftSided">
     <ng-content></ng-content>
   </div>
 </div>

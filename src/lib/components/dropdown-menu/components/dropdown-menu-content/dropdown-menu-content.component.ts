@@ -12,6 +12,8 @@ import { switchMap } from 'rxjs/operators';
 export class DropdownMenuContentComponent implements AfterContentInit {
   public readonly contentVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+  public isLeftSided: boolean = false;
+
   @ContentChildren(DropdownMenuItemComponent)
   private readonly items: QueryList<DropdownMenuItemComponent> = new QueryList();
   private readonly items$: BehaviorSubject<DropdownMenuItemComponent[]> = new BehaviorSubject([]);
