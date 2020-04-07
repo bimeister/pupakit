@@ -113,13 +113,13 @@
     itemSize="28"
     class="viewport viewport_skeleton"
   >
-    <ng-container *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)">
-      <pupa-skeleton>
-        <pupa-skeleton-group>
-          <pupa-skeleton-line></pupa-skeleton-line>
-        </pupa-skeleton-group>
-      </pupa-skeleton>
-    </ng-container>
+    <pupa-skeleton>
+      <pupa-skeleton-group
+        *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)"
+      >
+        <pupa-skeleton-line></pupa-skeleton-line>
+      </pupa-skeleton-group>
+    </pupa-skeleton>
   </cdk-virtual-scroll-viewport>
 </section>
 
