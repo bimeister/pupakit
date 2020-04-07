@@ -1,10 +1,16 @@
 @import 'mixins';
 
 .content-wrapper {
-  position: relative;
+  position: absolute;
 
   .content {
     @include dropdown;
+
+    position: relative;
+
+    &_side_left {
+      left: -100%;
+    }
 
     user-select: none;
   }

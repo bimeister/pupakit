@@ -4,12 +4,14 @@ import {
   HostListener,
   ElementRef,
   ChangeDetectionStrategy,
-  ContentChild
+  ContentChild,
+  Input
 } from '@angular/core';
 import { DropdownMenuTriggerComponent } from '../dropdown-menu-trigger/dropdown-menu-trigger.component';
 import { DropdownMenuContentComponent } from '../dropdown-menu-content/dropdown-menu-content.component';
 import { DropdownMenuItemComponent } from '../dropdown-menu-item/dropdown-menu-item.component';
 import { Subject } from 'rxjs';
+import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
 
 @Component({
   selector: 'pupa-dropdown-menu',
@@ -18,6 +20,9 @@ import { Subject } from 'rxjs';
 })
 export class DropdownMenuComponent implements AfterContentInit {
   public readonly onItemClicked$: Subject<DropdownMenuItemComponent> = new Subject<DropdownMenuItemComponent>();
+
+  @Input()
+  public contentSide: DroppableHorizontalPosition = 'right';
 
   @ContentChild(DropdownMenuTriggerComponent)
   private readonly trigger: DropdownMenuTriggerComponent;
@@ -40,6 +45,8 @@ export class DropdownMenuComponent implements AfterContentInit {
 
     this.content.setVisibleState(this.isContentVisible);
     this.content.onItemClick$.subscribe(this.handleItemClick.bind(this));
+
+    this.content.isLeftSided = this.contentSide === 'left' ? true : false;
   }
 
   public setContentVisible(visible: boolean): void {
