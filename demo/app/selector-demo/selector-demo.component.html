@@ -1,4 +1,21 @@
 <h1>Selector demo</h1>
+<h2>
+  <button (click)="writeTestValue()">Set test value</button>
+  <button (click)="selectRandom()">Select random</button>
+  <button (click)="disableForm()">Switch disable form</button>
+  <button (click)="clearAll()">Clear all</button>
+  <button (click)="validate()">Validate !</button>
+</h2>
 <div>
-  <pupa-selector></pupa-selector>
+  <br />
+  <span>with form; ngFor</span>
+  <pupa-selector
+    [useClearSelectionButton]="true"
+    [clearSelectionButtonSide]="'begin'"
+    [formControl]="sampleFormControl"
+  >
+    <pupa-selector-item *ngFor="let day of daysOfWeek; let i = index" [value]="i"
+      >{{ day }}; {{ i }}</pupa-selector-item
+    >
+  </pupa-selector>
 </div>
