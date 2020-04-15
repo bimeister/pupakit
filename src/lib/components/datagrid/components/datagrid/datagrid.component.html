@@ -7,6 +7,7 @@
   [gridOptions]="manipulator.config.gridOptions"
   [getRowNodeId]="manipulator.config.rowTrackByFn"
   (rowClicked)="handleEvent('rowClicked', $event)"
+  (bodyScroll)="gridBodyScrolled($event)"
   (gridReady)="onGridReady($event)"
   (rowDataUpdated)="manipulator.normalizeGrid()"
   (firstDataRendered)="manipulator.normalizeGrid()"

@@ -48,6 +48,22 @@ $header-cell-moving-background-color: $color_light;
     width: 100%;
   }
 
+  .ag-pinned-left-cols-container,
+  .ag-pinned-left-header {
+    transition: box-shadow 160ms ease-in;
+    box-shadow: none;
+    border: unset;
+    z-index: 1;
+  }
+
+  .ag-shadow-overlay {
+    box-shadow: 0 px(10) px(24) 0 rgba(0, 0, 0, 0.1);
+  }
+
+  .ag-pinned-left-header .ag-header-cell:last-of-type::after {
+    display: none;
+  }
+
   .ag-center-cols-container {
     width: 100%;
     min-width: 100%;
