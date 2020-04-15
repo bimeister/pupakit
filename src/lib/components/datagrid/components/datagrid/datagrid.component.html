@@ -1,6 +1,7 @@
 <ag-grid-angular
   class="pupagrid ag-theme-balham"
   [ngClass]="themeClass"
+  [suppressDragLeaveHidesColumns]="true"
   [rowData]="manipulator.config.initialRowData"
   [columnDefs]="manipulator.config.initialColumnDefs"
   [domLayout]="manipulator.config.domLayout"
