@@ -44,6 +44,7 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
+import { SelectorDemoComponent } from './selector-demo/selector-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -86,7 +87,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     MultiselectionListDemoComponent,
     TooltipDemoComponent,
     DraggableListDemoComponent,
-    DropdownMenuDemoComponent
+    DropdownMenuDemoComponent,
+    SelectorDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -194,6 +196,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'tooltip', component: TooltipDemoComponent },
       { path: 'draggable-list', component: DraggableListDemoComponent },
       { path: 'dropdown-menu', component: DropdownMenuDemoComponent },
+      { path: 'selector', component: SelectorDemoComponent },
       {
         path: '',
         component: AppComponent

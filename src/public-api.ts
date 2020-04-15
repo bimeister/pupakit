@@ -21,6 +21,7 @@ export { RadioGroupModule } from './lib/components/radio-group/radio-group.modul
 export { RatingModule } from './lib/components/rating/rating.module';
 export { SearchFieldModule } from './lib/components/search-field/search-field.module';
 export { SelectModule } from './lib/components/select/select.module';
+export { SelectorModule } from './lib/components/selector/selector.module';
 export { SpinnerModule } from './lib/components/spinner/spinner.module';
 export { SwitcherModule } from './lib/components/switcher/switcher.module';
 export { TabsModule } from './lib/components/tabs/tabs.module';
