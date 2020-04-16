@@ -1,0 +1,58 @@
+@use 'sass:map';
+@import './../../functions';
+@import './../functions';
+
+@import './variables';
+
+$colors: (
+  'main': $color_main,
+  'main-dark': $color_main-dark,
+  'active': $color_active,
+  'light': $color_light,
+  'success': $color_success,
+  'alert': $color_alert,
+  'error': $color_error,
+  'text': $color_text,
+  'grey-light': $color_grey-light,
+  'grey-ivory': $color_grey-ivory,
+  'grey-apple': $color_grey-apple,
+  'white': $color_white,
+  'black': $color_black,
+  'pale-blue': $color_pale-blue,
+  'cadet-blue': $color_cadet-blue,
+  'cadet-blue-light': $color_cadet-blue-light,
+  'dark-overlay': $color_dark-overlay
+);
+
+$font-size: (
+  'font-size_root': $font-size_root,
+  'font-size_base-text': $font-size_base-text,
+  'font-size_h1': $font-size_h1,
+  'font-size_h2': $font-size_h2,
+  'font-size_h3': $font-size_h3,
+  'font-size_h4': $font-size_h4,
+  'font-size_h5': $font-size_h5
+);
+
+$line-height: (
+  'line-height_base-text': $line-height_base-text,
+  'line-height_h1': $line-height_h1,
+  'line-height_h2': $line-height_h2,
+  'line-height_h3': $line-height_h3,
+  'line-height_h4': $line-height_h4,
+  'line-height_h5': $line-height_h5
+);
+
+$variables: (
+  'border-radius_controls-large': rems(1),
+  'border-radius_controls-medium': rems(0.875),
+  'border-radius_controls-small': rems(0.5),
+  'padding_body': $padding_body,
+  'margin_body': $margin_body,
+  'box-shadow_hover': $box-shadow_hover,
+  'transition-duration_common': $transition-duration_common,
+  'transition-timing-function_common': $transition-timing-function_common,
+  'opacity_hovered-button': $opacity_hovered-button
+);
+
+@include generate-css-variables($colors, merge-variables-maps($font-size, $line-height, $variables));

@@ -1,5 +1,6 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
+
 @import 'functions';
 
 :host {
@@ -18,10 +19,10 @@
 .input {
   box-sizing: border-box;
   border-radius: rems(0.5);
-  background: $color_white;
+  background: color(white);
   outline: none;
-  color: $color_text;
-  border: 1px solid $color_grey-ivory;
+  color: color(text);
+  border: 1px solid color(grey-ivory);
   @include regular();
   @include transition(#{'background, border'});
   @include flex-container(row, center, space-between, nowrap);
@@ -36,16 +37,16 @@
   &::placeholder {
     position: absolute;
     left: 0;
-    color: $color_grey-light;
+    color: color(grey-light);
   }
 
   &:focus {
-    border: 1px solid $color_active;
+    border: 1px solid color(active);
   }
 
   &:disabled {
-    border: 1px solid $color_grey-apple;
-    color: $color_grey-apple;
+    border: 1px solid color(grey-apple);
+    color: color(grey-apple);
     cursor: not-allowed;
     user-select: none;
 
@@ -68,7 +69,7 @@
 
 // state
 .input[value=''] {
-  border: 1px solid $color_grey-apple;
+  border: 1px solid color(grey-apple);
 }
 
 .input_medium {
@@ -80,7 +81,7 @@
 
 .input_invalid,
 .input:focus.input_invalid {
-  border: 1px solid $color_error;
+  border: 1px solid color(error);
 }
 
 // size
@@ -93,7 +94,7 @@
 
 .input_small {
   height: rems(1.5);
-  font-size: $font-size_base-text;
+  font-size: variable(font-size_base-text);
   line-height: 1.14;
   padding: rems(0.25) rems(0.5);
 }
@@ -106,7 +107,7 @@
 .icon {
   position: absolute;
   right: rems(0.5);
-  color: $color_success;
+  color: color(success);
   font-size: rems(1);
   height: rems(1);
   pointer-events: none;
@@ -119,7 +120,7 @@
 .input.input_range.input_fixed.input_small {
   height: rems(1.5);
   width: rems(11.25);
-  font-size: $font-size_base-text;
+  font-size: variable(font-size_base-text);
   line-height: 1.14;
   padding: rems(0.25) rems(0.5);
 }

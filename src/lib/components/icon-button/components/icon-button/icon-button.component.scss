@@ -1,5 +1,5 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
 @import 'functions';
 
 :host {
@@ -46,36 +46,36 @@
   }
 
   &_light {
-    background: $color_white;
-    color: $color_main;
+    background: color(white);
+    color: color(main);
   }
 
   &_light-blue {
-    background: $color_light;
-    color: $color_main;
+    background: color(light);
+    color: color(main);
   }
 
   &_dark {
-    background: $color_main;
-    color: $color_white;
+    background: color(main);
+    color: color(white);
   }
 
   &_active {
-    color: $color_white;
+    color: color(white);
   }
 
   &_transparent {
     background: transparent;
-    color: $color_main;
+    color: color(main);
   }
 
   &_float {
-    box-shadow: 0 rems(0.75) rems(2) 0 rgba($color_black, 0.15);
+    box-shadow: 0 rems(0.75) rems(2) 0 rgba(color(black-rgb), 0.15);
   }
 
   &:hover:not(:disabled) {
-    background: $color_active;
-    color: $color_white;
+    background: color(active);
+    color: color(white);
   }
 
   &_fixed {
@@ -87,18 +87,18 @@
 
 .button_light.button_active,
 .button_light-blue.button_active {
-  background: $color_main;
+  background: color(main);
 }
 .button_dark.button_active {
-  background: $color_active;
+  background: color(active);
 }
 
 .button_light:disabled,
 .button_light-blue:disabled {
-  color: rgba($color_main, 0.3);
-  background: $color_white;
+  color: rgba(color(main-rgb), 0.3);
+  background: color(white);
 }
 .button_dark:disabled {
-  color: rgba($color_light, 0.3);
-  background: $color_main;
+  color: rgba(color(light-rgb), 0.3);
+  background: color(main);
 }

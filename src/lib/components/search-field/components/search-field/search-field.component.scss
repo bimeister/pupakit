@@ -1,8 +1,9 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
+@import 'functions';
 
 $width_switcher: rems(2.8125);
-$padding-side_swither-icon: $width_switcher - $font-size_base-text;
+$padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text));
 
 :host {
   z-index: 555;
@@ -34,7 +35,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
 
   &:not(.search-field_expandable).search-field_empty:hover {
     .search-field__switcher {
-      color: $color_active;
+      color: color(active);
     }
     .search-field__control {
       cursor: pointer;
@@ -43,7 +44,7 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
         cursor: text;
       }
       &::placeholder {
-        color: $color_grey-ivory;
+        color: color(grey-ivory);
       }
     }
   }
@@ -66,12 +67,12 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
     border: 1px solid transparent;
 
     .search-field__switcher-icon {
-      background: $color_white;
+      background: color(white);
     }
   }
   .search-field__control {
-    background: $color_white;
-    border: 1px solid $color_grey-apple;
+    background: color(white);
+    border: 1px solid color(grey-apple);
   }
 }
 
@@ -88,8 +89,8 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   border: none;
   outline: none;
   cursor: pointer;
-  font-size: $font-size_base-text;
-  color: $color_grey-ivory;
+  font-size: variable(font-size_base-text);
+  color: color(grey-ivory);
   position: absolute;
   top: 0;
   right: 0;
@@ -97,13 +98,13 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   @include flex-container(column, center, center, nowrap);
 
   &:hover {
-    color: $color_active;
+    color: color(active);
   }
 
   .search-field__switcher-icon {
     box-sizing: content-box;
-    padding: 0 calc((#{$width_switcher} - #{$font-size_base-text}) / 3);
-    background: $color_light;
+    padding: 0 calc((#{$width_switcher} - #{variable(font-size_base-text)}) / 3);
+    background: color(light);
   }
 }
 
@@ -114,17 +115,17 @@ $padding-side_swither-icon: $width_switcher - $font-size_base-text;
   width: 100%;
   box-sizing: border-box;
   border-radius: rems(1.375);
-  background: $color_light;
+  background: color(light);
   border: none;
   outline: none;
-  font-size: $font-size_base-text;
+  font-size: variable(font-size_base-text);
   padding: rems(0.5) $width_switcher rems(0.5) rems(0.75);
   position: absolute;
   top: 0;
   right: 0;
 
   &::placeholder {
-    color: $color_grey-light;
+    color: color(grey-light);
     user-select: none;
     @include transition(color);
   }

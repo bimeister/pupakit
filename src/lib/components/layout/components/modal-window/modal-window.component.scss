@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'themes/functions';
+@import 'functions';
 
 :host {
   display: contents;
@@ -34,9 +35,9 @@
   flex-direction: column;
   overflow: hidden;
   pointer-events: auto;
-  background-color: $color_white;
+  background-color: color(white);
   border-radius: rems(0.9);
-  box-shadow: $box-shadow_hover;
+  box-shadow: variable(box-shadow_hover);
   box-sizing: border-box;
   &.large {
     width: rems(70);

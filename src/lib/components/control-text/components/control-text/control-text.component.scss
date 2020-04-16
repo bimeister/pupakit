@@ -1,6 +1,6 @@
+@import 'themes/functions';
 @import 'functions';
 @import 'mixins';
-@import 'variables';
 
 .control-text {
   height: auto;
@@ -9,10 +9,10 @@
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  color: $color_grey-light;
+  color: color(grey-light);
   @include regular;
 
   &_error {
-    color: $color_error;
+    color: color(error);
   }
 }

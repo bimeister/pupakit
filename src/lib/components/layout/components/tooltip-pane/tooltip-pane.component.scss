@@ -1,10 +1,11 @@
-@import 'variables';
+@import 'themes/functions';
+@import 'functions';
 
 .root {
   position: absolute;
   top: 0;
   left: 0;
-  box-shadow: $box-shadow_hover;
+  box-shadow: variable(box-shadow_hover);
   transition: none;
   pointer-events: all;
 
@@ -24,7 +25,7 @@
     border-right-color: transparent;
     border-right-width: px(7);
     border-right-style: solid;
-    border-top-color: $color_main;
+    border-top-color: color(main);
     border-top-width: px(7);
     border-top-style: solid;
     opacity: 0.9;
@@ -104,7 +105,7 @@
   min-width: px(290);
   max-width: px(350);
   max-height: px(100);
-  background: rgba($color_main, 0.9);
-  color: $color_grey-apple;
+  background: rgba(color(main-rgb), 0.9);
+  color: color(grey-apple);
   pointer-events: all;
 }

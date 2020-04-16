@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'themes/functions';
 
 :host {
   display: contents;
@@ -12,7 +12,7 @@
   bottom: 0;
   left: 0;
   z-index: 0;
-  background: $color_dark-overlay;
+  background: color(dark-overlay);
   pointer-events: auto;
   &.clickable {
     cursor: pointer;

@@ -1,48 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+@import '~src/styles/themes/functions';
 @import '~src/styles/styles';
+@import '~src/styles/themes/coal-theme/pupa-coal-theme.scss';
 
 html {
-  font-size: $font-size_root;
+  font-size: variable(font-size_root);
   @include regular();
-  color: $color_text;
+  color: color(text);
 }
 
 body {
-  padding: $padding_body;
+  padding: variable(padding_body);
   margin: 0;
 }
 
 h1 {
-  font-size: $font-size_h1;
-  line-height: $line-height_h1;
+  font-size: variable(font-size_h1);
+  line-height: variable(line-height_h1);
   @include bold();
   font-style: normal;
 }
 
 h2 {
-  font-size: $font-size_h2;
-  line-height: $line-height_h2;
+  font-size: variable(font-size_h2);
+  line-height: variable(line-height_h2);
   @include medium();
   font-style: normal;
 }
 
 h3 {
-  font-size: $font-size_h3;
-  line-height: $line-height_h3;
+  font-size: variable(font-size_h3);
+  line-height: variable(line-height_h3);
   @include medium();
   font-style: normal;
 }
 
 h4 {
-  font-size: $font-size_h4;
-  line-height: $line-height_h4;
+  font-size: variable(font-size_h4);
+  line-height: variable(line-height_h4);
   @include regular();
   font-style: normal;
 }
 
 h4 {
-  font-size: $font-size_h5;
-  line-height: $line-height_h5;
+  font-size: variable(font-size_h5);
+  line-height: variable(line-height_h5);
   @include regular();
   font-style: normal;
 }
@@ -50,8 +52,8 @@ h4 {
 span,
 p,
 td {
-  font-size: $font-size_base-text;
-  line-height: $line-height_base-text;
+  font-size: variable(font-size_base-text);
+  line-height: variable(line-height_base-text);
   @include regular();
   font-style: normal;
 }

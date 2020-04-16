@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'themes/functions';
+@import 'functions';
 @import 'mixins';
 
 :host {
@@ -13,8 +14,8 @@
   appearance: none;
   box-sizing: border-box;
   border: 0;
-  background: $color_main;
-  color: $color_white;
+  background: color(main);
+  color: color(white);
   cursor: pointer;
   padding: 0 rems(0.4);
   margin: 0;
@@ -28,9 +29,9 @@
   flex-direction: row;
   &:focus,
   &:hover:not(:disabled) {
-    background: $color_active;
+    background: color(active);
   }
   &:disabled {
-    background: $color_grey-ivory;
+    background: color(grey-ivory);
   }
 }

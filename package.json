@@ -20,7 +20,7 @@
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
     "copy:assets": "copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets",
-    "copy:styles": "copy ./src/styles/**/*.* ./dist/@meistersoft/pupakit/styles",
+    "copy:styles": "copy ./src/styles/**/**/**/*.* ./dist/@meistersoft/pupakit/styles",
     "replace-imports": "replace-in-file \"/'/assets//g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex",
     "lint": "yarn run lint:inspect",
     "lint:inspect": "ng lint --configuration=inspection",

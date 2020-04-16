@@ -1,3 +1,4 @@
+@import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
@@ -15,8 +16,8 @@ $height_date: rems(1.3125);
 .datepicker {
   all: unset;
   width: rems(14.1875);
-  box-shadow: $box-shadow_hover;
-  background: $color_white;
+  box-shadow: variable(box-shadow_hover);
+  background: color(white);
   @include flex-container(column, stretch, stretch, nowrap);
 }
 
@@ -34,7 +35,7 @@ $height_date: rems(1.3125);
   padding: $padding_days-area;
   margin: $margin_days-line;
   box-sizing: border-box;
-  background: $color_light;
+  background: color(light);
   @include flex-container(row, center, space-between, nowrap);
 }
 
@@ -47,8 +48,8 @@ $height_date: rems(1.3125);
 
 .month {
   all: unset;
-  font-size: $font-size_base-text;
-  color: $color_main;
+  font-size: variable(font-size_base-text);
+  color: color(main);
   line-height: 1.43;
   font-weight: 750;
   font-style: normal;
@@ -59,7 +60,7 @@ $height_date: rems(1.3125);
 
 .week-day {
   all: unset;
-  color: $color_grey-ivory;
+  color: color(grey-ivory);
   width: $width_days-line-item;
   font-size: $font-size_days-line-item;
   font-weight: $font-weight_days-line-item;
@@ -81,7 +82,7 @@ $height_date: rems(1.3125);
   margin: 0 calc((#{$width_days-line-item} - #{$height_date}) / 2) rems(0.5);
   padding: 0;
   font-size: $font-size_days-line-item;
-  color: $color_text;
+  color: color(text);
   line-height: rems(1);
   font-weight: $font-weight_days-line-item;
   user-select: none;
@@ -91,12 +92,12 @@ $height_date: rems(1.3125);
   @include flex-container(column, center, center, nowrap);
 
   &_previous-month {
-    color: $color_grey-light;
+    color: color(grey-light);
   }
 
   &_hovered {
     border-radius: rems(0.25);
-    background: $color_light;
+    background: color(light);
 
     &::before {
       top: 0;
@@ -113,7 +114,7 @@ $height_date: rems(1.3125);
   }
 
   &_in-range {
-    background: $color_light;
+    background: color(light);
 
     &::before {
       top: 0;
@@ -129,8 +130,8 @@ $height_date: rems(1.3125);
   }
 
   &_selected {
-    color: $color_white;
-    background: $color_active;
+    color: color(white);
+    background: color(active);
     z-index: 3;
 
     &::before {
@@ -168,7 +169,7 @@ $height_date: rems(1.3125);
   padding: 0;
   font-weight: $font-weight_days-line-item;
   font-size: rems(1);
-  color: $color_grey-apple;
+  color: color(grey-apple);
   cursor: pointer;
   @include regular;
 }

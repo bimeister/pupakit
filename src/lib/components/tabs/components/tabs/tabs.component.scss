@@ -1,3 +1,4 @@
+@import 'themes/functions';
 @import 'functions';
 @import 'mixins';
 
@@ -30,12 +31,12 @@
   position: relative;
   padding: 0 rems(0.25);
   cursor: pointer;
-  color: $color_main-dark;
+  color: color(main-dark);
   user-select: none;
   @include flex-container(row, center, center, nowrap);
 
   &_selected {
-    color: $color_active;
+    color: color(active);
   }
 }
 
@@ -56,7 +57,7 @@
   position: absolute;
   overflow: hidden;
   height: rems(0.25);
-  background: $color_light;
+  background: color(light);
 }
 .rail__highlighter {
   position: absolute;
@@ -64,7 +65,7 @@
   left: 0;
   width: 100%;
   height: rems(0.25);
-  background: $color_active;
+  background: color(active);
   border-radius: rems(0.75);
   pointer-events: none;
   @include transition();

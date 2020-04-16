@@ -1,5 +1,5 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
 @import 'functions';
 
 :host {
@@ -20,10 +20,10 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
 .textarea {
   box-sizing: border-box;
   border-radius: rems(0.5);
-  background: $color_white;
+  background: color(white);
   outline: none;
-  color: $color_text;
-  border: 1px solid $color_grey-ivory;
+  color: color(text);
+  border: 1px solid color(grey-ivory);
   @include regular();
   @include transition(#{'background, border'});
   @include flex-container(row, center, space-between, nowrap);
@@ -34,16 +34,16 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
   min-height: $height_textarea-min;
 
   &::placeholder {
-    color: $color_grey-light;
+    color: color(grey-light);
   }
 
   &:focus {
-    border: 1px solid $color_active;
+    border: 1px solid color(active);
   }
 
   &:disabled {
-    border: 1px solid $color_grey-apple;
-    color: $color_grey-apple;
+    border: 1px solid color(grey-apple);
+    color: color(grey-apple);
     cursor: not-allowed;
     user-select: none;
 
@@ -57,14 +57,14 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
 
 .input_invalid,
 .input:focus.input_invalid {
-  border: 1px solid $color_error;
+  border: 1px solid color(error);
 }
 
 .count {
   position: absolute;
   right: rems(0.25);
   bottom: 0;
-  color: $color_grey-light;
+  color: color(grey-light);
   font-size: rems(0.875);
   line-height: rems(1);
 }

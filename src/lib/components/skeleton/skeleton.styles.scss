@@ -1,5 +1,5 @@
+@import './../../../styles/themes/functions';
 @import './../../../styles/functions.scss';
-@import './../../../styles/variables.scss';
 
 .skeleton {
   display: flex;
@@ -18,13 +18,13 @@
   }
 
   &__line {
-    background: $color_light;
+    background: color(light);
     width: 100%;
     height: px(12);
     border-radius: px(2);
 
     &_active {
-      background: $color_main;
+      background: color(main);
       opacity: 0.1;
     }
   }

@@ -1,9 +1,10 @@
+@import 'themes/functions';
 @import 'mixins';
 
 .placeholder {
   width: 100px;
   height: 200vh;
-  background: $color_active;
+  background: color(active);
 }
 
 .wrapper {
