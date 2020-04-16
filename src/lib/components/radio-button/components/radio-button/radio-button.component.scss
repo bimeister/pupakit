@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
@@ -16,7 +16,7 @@
   width: rems(1);
   box-sizing: border-box;
   border-radius: rems(0.5);
-  border: 1px solid $color_grey-ivory;
+  border: 1px solid color(grey-ivory);
   cursor: pointer;
   margin-right: rems(0.25);
   display: flex;
@@ -28,7 +28,7 @@
   width: rems(0.625);
   height: rems(0.625);
   border-radius: rems(0.5);
-  background: $color_active;
+  background: color(active);
   opacity: 0;
   &_checked {
     opacity: 1;

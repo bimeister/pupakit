@@ -1,5 +1,4 @@
-@import 'functions';
-@import '~src/styles/variables';
+@import '~src/styles/themes/functions';
 @import '~src/styles/mixins';
 @import '~src/styles/functions';
 
@@ -10,7 +9,7 @@
   top: 0;
   width: 200px;
   overflow: auto;
-  border-right: 1px solid $color_grey-ivory;
+  border-right: 1px solid color(grey-ivory);
   box-sizing: border-box;
 }
 
@@ -28,7 +27,7 @@ main {
   text-transform: capitalize;
 
   &.active {
-    background: rgba($color_grey-ivory, 0.1);
+    background: rgba(color(grey-ivory-rgb), 0.1);
   }
 }
 

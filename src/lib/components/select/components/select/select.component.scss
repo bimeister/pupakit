@@ -1,5 +1,6 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
+@import 'functions';
 
 :host {
   display: block;
@@ -9,8 +10,8 @@
   display: flex;
   height: rems(2);
   border-radius: rems(0.5);
-  border: 1px solid $color_grey-ivory;
-  background-color: $color_white;
+  border: 1px solid color(grey-ivory);
+  background-color: color(white);
   align-items: center;
   justify-content: space-between;
   padding: 0 rems(2) 0 rems(0.75);

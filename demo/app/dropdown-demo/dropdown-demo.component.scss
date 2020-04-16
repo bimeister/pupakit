@@ -1,4 +1,4 @@
-@import '~src/styles/variables';
+@import '~src/styles/themes/functions';
 .container {
   // max-height: 500px;
   overflow: auto;
@@ -37,10 +37,10 @@
 
 :host {
   .pupa-dropdown__icon_left {
-    color: $color_success;
+    color: color(success);
   }
 
   .pupa-dropdown__icon_right {
-    color: $color_error;
+    color: color(error);
   }
 }

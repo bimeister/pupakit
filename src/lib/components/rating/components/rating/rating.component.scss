@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'functions';
 
 :host {
   display: flex;
@@ -8,7 +8,7 @@
 .pupa-star {
   display: block;
   font-size: rems(3);
-  color: $color_active;
+  color: color(active);
 
   &.clickable {
     cursor: pointer;

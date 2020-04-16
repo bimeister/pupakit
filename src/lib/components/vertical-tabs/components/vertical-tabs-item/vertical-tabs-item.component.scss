@@ -1,20 +1,20 @@
+@import './../../../../../styles/themes/functions';
 @import './../../../../../styles/functions.scss';
-@import './../../../../../styles/variables.scss';
 
 .vertical-tabs__item {
   height: auto;
   width: 100%;
   box-sizing: border-box;
   display: block;
-  border: 1px solid $color_light;
-  background: $color_white;
+  border: 1px solid color(light);
+  background: color(white);
   border-radius: rems(0.75);
   padding: rems(1) rems(0.75);
   margin: 0 0 rems(0.5) 0;
   cursor: pointer;
 
   &_selected {
-    background: $color_light;
+    background: color(light);
   }
 
   &_hidden {

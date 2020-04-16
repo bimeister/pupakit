@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'themes/functions';
 
 :host {
   padding: 40px;
@@ -13,11 +13,11 @@
 .selection-item {
   display: block;
   padding: 10px;
-  background: $color_light;
+  background: color(light);
   margin-bottom: 10px;
   width: 200px;
 
   &.selected {
-    background: $color_cadet-blue;
+    background: color(cadet-blue);
   }
 }

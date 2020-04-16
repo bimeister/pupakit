@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'themes/functions';
+@import 'functions';
 
 :host {
   display: flex;
@@ -11,17 +12,17 @@
   &:not(:last-child) {
     margin-right: rems(0.4);
   }
-  background: $color_light;
+  background: color(light);
   cursor: pointer;
   font-size: rems(0.875);
   box-shadow: 0 rems(0.125) rems(0.125) 0 rgba(0, 0, 0, 0.05);
-  color: $color_text;
+  color: color(text);
   height: 1.5em;
   padding: 0 1em;
   border-radius: rems(0.5);
 
   &.selected {
-    background: $color_active;
-    color: $color_white;
+    background: color(active);
+    color: color(white);
   }
 }

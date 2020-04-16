@@ -1,5 +1,5 @@
+@import './../../../../../styles/themes/functions';
 @import './../../../../../styles/functions.scss';
-@import './../../../../../styles/variables.scss';
 
 :host {
   width: 100%;
@@ -32,7 +32,7 @@
   all: unset;
   display: block;
   height: rems(1.75);
-  background: $color_white;
+  background: color(white);
   padding-bottom: px(1);
 }
 
@@ -46,11 +46,11 @@
   align-items: center;
   justify-content: flex-start;
   height: rems(1.75);
-  background: $color_white;
+  background: color(white);
   border-radius: rems(0.875);
   border-width: 0;
   box-sizing: border-box;
-  color: $color_main-dark;
+  color: color(main-dark);
   font-size: rems(0.75);
   cursor: pointer;
 
@@ -71,16 +71,16 @@
 
   &:hover,
   &_selected {
-    background: $color_light;
+    background: color(light);
   }
 
   &_highlighted {
-    background: $color_main;
-    color: $color_white;
+    background: color(main);
+    color: color(white);
 
     &:hover,
     &#{$tree_node}_selected {
-      background: $color_text;
+      background: color(text);
     }
   }
 }

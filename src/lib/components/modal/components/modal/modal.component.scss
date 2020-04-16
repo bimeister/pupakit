@@ -1,3 +1,4 @@
+@import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
@@ -36,13 +37,13 @@
   position: absolute;
   top: 0;
   left: 0;
-  background: $color_dark-overlay;
+  background: color(dark-overlay);
   z-index: 4000;
   opacity: 0;
 }
 
 .modal__content {
-  background: $color_white;
+  background: color(white);
   border-radius: rems(0.75);
   box-sizing: border-box;
   z-index: 4001;
@@ -79,7 +80,7 @@
   width: rems(2);
   font-size: rems(1);
   line-height: 1;
-  color: $color_grey-ivory;
+  color: color(grey-ivory);
   @include transition;
   @include flex-container(row, center, center, nowrap);
   position: absolute;
@@ -87,6 +88,6 @@
   right: rems(0.5);
 
   &:hover {
-    color: $color_text;
+    color: color(text);
   }
 }

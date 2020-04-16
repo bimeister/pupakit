@@ -1,5 +1,5 @@
+@import 'themes/functions';
 @import 'functions';
-@import 'variables';
 @import 'mixins';
 
 :host {
@@ -18,26 +18,26 @@
 
 .washer-panel__disk {
   position: absolute;
-  background: $color_main;
+  background: color(main);
   border-radius: 50%;
   @include transition(#{bottom, height, width}, 0.32s);
   @include flex-container(row, center, center, nowrap);
 
   &_external {
     margin: 0;
-    background: $color_active;
+    background: color(active);
     z-index: 2001;
   }
 
   &_middle {
     margin: rems(2.5) 0 0 0;
-    background: $color_main;
+    background: color(main);
     z-index: 2002;
   }
 
   &_internal {
     margin: rems(5) 0 0 0;
-    background: $color_main-dark;
+    background: color(main-dark);
     z-index: 2003;
     align-items: flex-start;
   }
@@ -48,7 +48,7 @@
   position: absolute;
   width: 100%;
   box-sizing: border-box;
-  color: $color_white;
+  color: color(white);
   opacity: 0;
   @include transition(#{transform, opacity});
   @include flex-container(row, center, space-between, nowrap);
@@ -71,7 +71,7 @@
   border: rems(0.75) solid transparent;
   border-radius: 50%;
   top: rems(1);
-  border-top-color: $color_main;
+  border-top-color: color(main);
 }
 
 .range-pointer {
@@ -95,7 +95,7 @@
       height: rems(1);
       box-sizing: border-box;
       border-radius: 50%;
-      box-shadow: rems(0.5) rems(0.5) 0 0 $color_active;
+      box-shadow: rems(0.5) rems(0.5) 0 0 color(active);
 
       left: -10%;
       top: -25%;
@@ -110,7 +110,7 @@
       content: '';
       left: -10%;
       top: 140%;
-      background: $color_active;
+      background: color(active);
       transform: rotate(90deg);
     }
   }
@@ -136,7 +136,7 @@
   border-radius: 50%;
   margin: 0 rems(0.75);
   box-sizing: content-box;
-  background: $color_white;
+  background: color(white);
   z-index: 1010;
 }
 
@@ -160,12 +160,12 @@
   outline: none;
   font-size: rems(2);
   text-align: center;
-  color: $color_grey-light;
+  color: color(grey-light);
   cursor: pointer;
   @include transition(color);
 
   &:hover {
-    color: $color_white;
+    color: color(white);
   }
 }
 
@@ -177,6 +177,6 @@
   margin: rems(0.5) 0;
   font-size: rems(2);
   text-align: center;
-  color: $color_grey-light;
+  color: color(grey-light);
   @include medium();
 }

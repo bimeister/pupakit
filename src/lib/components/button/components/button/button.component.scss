@@ -1,4 +1,4 @@
-@import 'variables';
+@import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
@@ -56,7 +56,7 @@
 .button_large {
   min-width: rems(7);
   height: rems(2.5);
-  border-radius: rems(1);
+  border-radius: variable(border-radius_controls-large);
   padding: rems(0.625) rems(1);
   .button__text {
     font-size: rems(1);
@@ -74,7 +74,7 @@
 .button_medium {
   min-width: rems(7);
   height: rems(2);
-  border-radius: rems(0.875);
+  border-radius: variable(border-radius_controls-medium);
   padding: rems(0.375) rems(0.5);
   .button__text {
     font-size: rems(1);
@@ -92,18 +92,18 @@
 .button_small {
   min-width: rems(4);
   height: rems(1.5);
-  border-radius: rems(0.5);
+  border-radius: variable(border-radius_controls-small);
   padding: rems(0.1875) rems(0.625);
   .button__text {
-    font-size: $font-size_base-text;
+    font-size: variable(font-size_base-text);
     @include regular();
     line-height: 1.14;
   }
   .button__icon {
-    @include icon-size($font-size_base-text);
+    @include icon-size(variable(font-size_base-text));
   }
   .button__loader {
-    @include icon-size($font-size_base-text);
+    @include icon-size(variable(font-size_base-text));
   }
 }
 
@@ -123,99 +123,99 @@
 
 // style + color
 .button_solid.button_normal {
-  @include button-color($color_main, $color_white);
+  @include button-color(color(main), color(white));
   &:focus,
   &:hover {
-    @include button-color($color_active, $color_white);
-    box-shadow: $box-shadow_hover;
+    @include button-color(color(active), color(white));
+    box-shadow: variable(box-shadow_hover);
   }
 }
 .button_solid.button_normal-light {
-  @include button-color($color_pale-blue, $color_main);
+  @include button-color(color(pale-blue), color(main));
   &:focus,
   &:hover {
-    @include button-color($color_active, $color_white);
-    box-shadow: $box-shadow_hover;
+    @include button-color(color(active), color(white));
+    box-shadow: variable(box-shadow_hover);
   }
 }
 .button_solid.button_negative {
-  @include button-color($color_error, $color_white);
+  @include button-color(color(error), color(white));
   &:focus,
   &:hover {
-    box-shadow: $box-shadow_hover;
+    box-shadow: variable(box-shadow_hover);
   }
 }
 .button_solid.button_positive {
-  @include button-color($color_success, $color_white);
+  @include button-color(color(success), color(white));
   &:focus,
   &:hover {
-    box-shadow: $box-shadow_hover;
+    box-shadow: variable(box-shadow_hover);
   }
 }
 .button_solid.button_alert {
-  @include button-color($color_alert, $color_white);
+  @include button-color(color(alert), color(white));
   &:focus,
   &:hover {
-    box-shadow: $box-shadow_hover;
+    box-shadow: variable(box-shadow_hover);
   }
 }
 
 .button_outlined.button_normal {
-  @include button-color($color_white, $color_main, $color_main);
+  @include button-color(color(white), color(main), color(main));
   &:focus,
   &:hover {
-    @include button-color($color_white, $color_active, $color_active);
+    @include button-color(color(white), color(active), color(active));
   }
 }
 .button_outlined.button_normal-light {
-  @include button-color($color_white, $color_pale-blue, $color_pale-blue);
+  @include button-color(color(white), color(pale-blue), color(pale-blue));
   &:focus,
   &:hover {
-    @include button-color($color_pale-blue, $color_active);
-    box-shadow: $box-shadow_hover;
+    @include button-color(color(pale-blue), color(active));
+    box-shadow: variable(box-shadow_hover);
   }
 }
 .button_outlined.button_negative {
-  @include button-color($color_white, $color_text, $color_error);
+  @include button-color(color(white), color(text), color(error));
   &:focus,
   &:hover {
-    @include button-color(rgba($color_error, $opacity_hovered-button), $color_text, $color_error);
+    @include button-color(rgba(color(error-rgb), variable(opacity_hovered-button)), color(text), color(error));
   }
 }
 .button_outlined.button_positive {
-  @include button-color($color_white, $color_text, $color_success);
+  @include button-color(color(white), color(text), color(success));
   &:focus,
   &:hover {
-    @include button-color(rgba($color_success, $opacity_hovered-button), $color_text, $color_success);
+    @include button-color(rgba(color(success-rgb), variable(opacity_hovered-button)), color(text), color(success));
   }
 }
 .button_outlined.button_alert {
-  @include button-color($color_white, $color_text, $color_alert);
+  @include button-color(color(white), color(text), color(alert));
   &:focus,
   &:hover {
-    @include button-color(rgba($color_alert, $opacity_hovered-button), $color_text, $color_alert);
+    @include button-color(rgba(color(alert-rgb), variable(opacity_hovered-button)), color(text), color(alert));
   }
 }
 
 .button_link {
-  @include button-color(transparent, $color_main);
+  @include button-color(transparent, color(main));
   &:focus,
   &:hover {
-    @include button-color(transparent, $color_active);
+    @include button-color(transparent, color(active));
   }
 }
 
 // style + disabled
 .button_solid:disabled,
 .button_solid:disabled:hover {
-  @include button-color($color_grey-ivory, $color_white);
+  @include button-color(color(grey-ivory), color(white));
   box-shadow: unset;
   cursor: not-allowed;
 }
 
 .button_outlined:disabled,
 .button_outlined:disabled:hover {
-  @include button-color($color_white, $color_grey-ivory, $color_grey-ivory);
+  @include button-color(color(white), color(grey-ivory), color(grey-ivory));
   box-shadow: unset;
   cursor: not-allowed;
 }

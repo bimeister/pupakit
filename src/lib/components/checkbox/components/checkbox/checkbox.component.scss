@@ -1,5 +1,5 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
 @import 'functions';
 
 :host {
@@ -9,54 +9,54 @@
 .checkbox {
   width: rems(1);
   height: rems(1);
-  border: 1px solid $color_grey-ivory;
-  background: $color_white;
+  border: 1px solid color(grey-ivory);
+  background: color(white);
   cursor: pointer;
   border-radius: rems(0.25);
   overflow: hidden;
   @include transition(#{background, border});
   @include flex-container(row, center, center, nowrap);
   &_with-marker {
-    background: $color_active;
-    border: 1px solid $color_active;
+    background: color(active);
+    border: 1px solid color(active);
   }
   &_disabled {
     cursor: not-allowed;
-    border: 1px solid $color_grey-apple;
+    border: 1px solid color(grey-apple);
   }
   &_indeterminate {
-    background: $color_white;
+    background: color(white);
 
     .checkbox__marker {
       font-size: rems(1.1);
       height: rems(1.1);
-      color: $color_active;
+      color: color(active);
     }
   }
 }
 
 .checkbox.checkbox_with-marker.checkbox_disabled.checkbox_indeterminate {
-  background: $color_white;
+  background: color(white);
   .checkbox__marker {
-    color: $color_grey-apple;
+    color: color(grey-apple);
   }
 }
 
 .checkbox.checkbox_with-marker.checkbox_disabled {
-  background: $color_grey-apple;
+  background: color(grey-apple);
 }
 
 .checkbox__marker {
   font-size: rems(1.75);
   height: rems(1.75);
   user-select: none;
-  color: $color_white;
+  color: color(white);
 }
 
 .checkbox-label {
   font-size: rems(1);
   line-height: 1;
-  color: $color_text;
+  color: color(text);
   @include regular();
   font-style: normal;
   box-sizing: border-box;
@@ -67,6 +67,6 @@
   }
   &_disabled {
     cursor: not-allowed;
-    color: $color_grey-apple;
+    color: color(grey-apple);
   }
 }

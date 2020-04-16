@@ -1,21 +1,22 @@
+@import 'themes/functions';
 @import 'mixins';
-@import 'variables';
+@import 'functions';
 
 .tile {
   width: 100%;
   height: auto;
   box-sizing: border-box;
   border-radius: rems(0.5);
-  background: $color_white;
-  border: 1px solid $color_grey-apple;
+  background: color(white);
+  border: 1px solid color(grey-apple);
   padding: rems(1);
   @include transition(#{border, box-shadow});
   @include flex-container(column, flex-start, flex-start, nowrap);
 
   &_shadow-on-hover {
     &:hover {
-      border: 1px solid $color_white;
-      box-shadow: $box-shadow_hover;
+      border: 1px solid color(white);
+      box-shadow: variable(box-shadow_hover);
     }
   }
 }

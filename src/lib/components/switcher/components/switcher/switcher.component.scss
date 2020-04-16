@@ -1,4 +1,5 @@
-@import 'variables';
+@import 'themes/functions';
+@import 'functions';
 
 :host {
   display: inline-flex;
@@ -8,7 +9,7 @@
   position: relative;
   box-sizing: content-box;
   padding: 1px;
-  background: $color_grey-light;
+  background: color(grey-light);
   height: rems(1);
   border-radius: calc(0.5rem + 1px);
   display: flex;
@@ -21,7 +22,7 @@
 
 .toggle__marker {
   margin: 0 rems(1) 0 0;
-  background: $color_white;
+  background: color(white);
   width: rems(1);
   height: rems(1);
   border-radius: 50%;
@@ -30,7 +31,7 @@
 }
 
 .toggle_active {
-  background: $color_success;
+  background: color(success);
 }
 
 .toggle_disabled {
@@ -43,7 +44,7 @@
 }
 
 .toggle_indifferent {
-  background: $color_active;
+  background: color(active);
 }
 
 input {

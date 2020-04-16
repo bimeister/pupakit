@@ -1,5 +1,5 @@
+@import './../../../../../styles/themes/functions';
 @import './../../../../../styles/functions.scss';
-@import './../../../../../styles/variables.scss';
 @import './../../../../../styles/mixins.scss';
 
 .chip-tabs-item {
@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: center;
   background: transparent;
-  color: $color_main-dark;
+  color: color(main-dark);
   user-select: none;
   cursor: pointer;
 
@@ -21,8 +21,8 @@
 
   &_active,
   &:hover {
-    background: $color_active;
-    color: $color_white;
+    background: color(active);
+    color: color(white);
   }
 
   &_hidden {

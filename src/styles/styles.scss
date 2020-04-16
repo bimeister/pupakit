@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import './functions.scss';
 @import './font-faces.scss';
 @import './mixins.scss';
 @import './grid-styles.scss';
@@ -32,7 +32,7 @@ label.horizontal {
   &:hover {
     color: white;
     -webkit-text-fill-color: white;
-    background: $color_active;
+    background: color(active);
   }
 }
 
