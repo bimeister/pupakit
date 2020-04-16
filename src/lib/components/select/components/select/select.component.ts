@@ -79,9 +79,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
       }
       return false;
     });
-    if (!item) {
-      return;
-    }
+
     this.selectedItem = item;
     if (!isEqual(prevValue, item)) {
       this.onChange(value);

@@ -35,7 +35,6 @@ export class DatepickerComponent implements OnDestroy {
       return;
     }
     const sanitizedDate: Date = new Date(Date.parse(String(newValue)));
-    this.selectedDate$.next(dateClearTime(sanitizedDate));
     this.baseDate$.next(dateClearTime(sanitizedDate));
   }
   @Input() public set selectedRange(newValue: Date[]) {
@@ -52,7 +51,6 @@ export class DatepickerComponent implements OnDestroy {
     if (Object.is(sanitizedRange.length, 0)) {
       return;
     }
-    this.selectedRange$.next(sanitizedRange);
     this.baseDate$.next(sanitizedRange[0]);
   }
 
