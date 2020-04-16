@@ -19,7 +19,8 @@ import { getRangeStartDate } from '../../../../../internal/helpers/get-range-sta
 import { isDate } from '../../../../../internal/helpers/is-date.helper';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
-type ValueType = string | Date | null | number;
+type DateRange = [Date, Date];
+type ValueType = string | Date | null | number | DateRange;
 
 @Component({
   selector: 'pupa-input',
@@ -129,8 +130,10 @@ export class InputComponent implements ControlValueAccessor, Validator {
   }
 
   public writeValue(outerValue: unknown): void {
-    this.valueData = this.getSanitizedValue(outerValue, this.type);
-    this.changeDetectorRef.detectChanges();
+    queueMicrotask(() => {
+      this.valueData = this.getSanitizedValue(outerValue, this.type);
+      this.changeDetectorRef.markForCheck();
+    });
   }
 
   public updateValue(innerValue: ValueType): void {
@@ -204,9 +207,14 @@ export class InputComponent implements ControlValueAccessor, Validator {
       return null;
     }
 
-    const isDateInput: boolean = type === 'date' || type === 'date-range';
+    const isDateInput: boolean = type === 'date';
     if (isDateInput && isDate(value)) {
       return new Date(String(value));
+    }
+
+    const isDateRangeInput: boolean = type === 'date-range';
+    if (isDateRangeInput) {
+      return [new Date(String(value[0])), new Date(String(value[1]))];
     }
 
     const isNumberInput: boolean = type === 'number';
