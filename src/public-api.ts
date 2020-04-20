@@ -50,5 +50,6 @@ export {
   DatagridDomLayouts,
   DatagridManipulatorConfiguration,
   DatagridManipulator,
-  DatagridThemes
+  DatagridThemes,
+  ButtonColor
 } from './internal/api';
