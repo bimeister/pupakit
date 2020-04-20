@@ -34,4 +34,21 @@ export { WasherModule } from './lib/components/washer/washer.module';
 export { VerticalTabsModule } from './lib/components/vertical-tabs/vertical-tabs.module';
 export { SharedModule } from './internal/shared/shared.module';
 export * from './lib/components';
-export * from './internal';
+export {
+  DropdownItem,
+  FlatTreeItem,
+  ChipItem,
+  IconData,
+  Alert,
+  Tab,
+  DraggableListChangeIndexEvent,
+  LayoutDrawerConfiguration,
+  FlatTreeManipulator,
+  TreeManipulator,
+  ModalWindowConfiguration,
+  DatagridColDef,
+  DatagridDomLayouts,
+  DatagridManipulatorConfiguration,
+  DatagridManipulator,
+  DatagridThemes
+} from './internal/api';
