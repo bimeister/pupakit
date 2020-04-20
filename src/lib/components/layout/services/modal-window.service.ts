@@ -2,9 +2,9 @@ import { ComponentFactory, Injectable, Injector } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, mapTo, take } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal';
 import { ModalWindowConfiguration } from '../../../../internal/declarations/interfaces/modal-window-configuration.interface';
 import { ModalWindowData } from '../../../../internal/declarations/interfaces/modal-window-data.interface';
+import { VOID } from '../../../../internal/constants/void.const';
 
 @Injectable({
   providedIn: 'root'
