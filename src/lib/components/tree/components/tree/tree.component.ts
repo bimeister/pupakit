@@ -10,34 +10,35 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  SimpleChanges,
   TemplateRef,
   TrackByFunction,
-  ViewChild
+  ViewChild,
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  mapTo,
-  pluck,
-  shareReplay,
-  skipUntil,
-  switchMap,
-  switchMapTo,
-  take,
-  tap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, mapTo, switchMapTo, tap, withLatestFrom } from 'rxjs/operators';
 
 import { VOID } from '../../../../../internal/constants/void.const';
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
-import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
-import { TreeManipulatorConfiguration } from '../../../../../internal/declarations/interfaces/tree-manipulator-configuration.interface';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { FlatTreeManipulator } from '../../../../../internal/declarations/classes/flat-tree-manipulator.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
+type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
+
+const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (_index: number, item: FlatTreeItem): string => {
+  return item?.id;
+};
+const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean => {
+  return !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
+};
+const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
+  !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
+const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean =>
+  !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
 /** @deprecated needs refactoring */
 @Component({
   selector: 'pupa-tree',
@@ -45,98 +46,74 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   styleUrls: ['./tree.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class TreeComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  public readonly hasChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
+  public readonly hasNoChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
+  public readonly isElement: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_IS_ELEMENT;
+
   private readonly subscription: Subscription = new Subscription();
 
   @ViewChild('viewPort', { static: false }) private readonly viewPort: CdkVirtualScrollViewport;
   @ViewChild('skeletonViewPort', { static: false }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
   @ViewChild('defaultTemplate', { static: true }) private readonly defaultTemplate: TemplateRef<any>;
 
-  @Input() public readonly manipulator: TreeManipulator;
+  @Input() public readonly dataOrigin: FlatTreeItem[];
+  @Input() public readonly nodeTemplate?: TemplateRef<any>;
+  @Input() public readonly elementTemplate?: TemplateRef<any>;
+  @Input() public readonly trackBy?: TrackByFunction<FlatTreeItem>;
+  @Input() public readonly selectedNodesIds?: string[];
+  @Input() public readonly highlightedNodesIds?: string[];
+  @Input() public readonly scrollByRoute?: string[];
+  @Input() public readonly scrollAnimationIsEnabled?: boolean;
 
   @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter<FlatTreeItem>();
 
-  private readonly manipulator$: BehaviorSubject<TreeManipulator> = new BehaviorSubject<TreeManipulator>(null);
-  public readonly notNilManipulator$: Observable<TreeManipulator> = this.manipulator$.pipe(
-    filter(manipulator => !isNullOrUndefined(manipulator)),
-    shareReplay(1)
+  public readonly nodeTemplate$: BehaviorSubject<TemplateRef<any>> = new BehaviorSubject(this.defaultTemplate);
+  public readonly elementTemplate$: BehaviorSubject<TemplateRef<any>> = new BehaviorSubject(this.defaultTemplate);
+  public readonly trackBy$: BehaviorSubject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(
+    DEFAULT_TRACK_BY_FUNCTION
   );
+  public readonly dataOrigin$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject([]);
+  public readonly selectedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public readonly highlightedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public readonly scrollByRoute$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public readonly scrollAnimationIsEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly nodeTemplate$: Observable<TemplateRef<any>> = this.manipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.nodeTemplate),
-    map((customNodeTemplate: TemplateRef<any>) =>
-      isNullOrUndefined(customNodeTemplate) ? this.defaultTemplate : customNodeTemplate
-    )
-  );
-  public readonly elementTemplate$: Observable<TemplateRef<any>> = this.manipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.elementTemplate),
-    map((customElementTemplate: TemplateRef<any>) =>
-      isNullOrUndefined(customElementTemplate) ? this.defaultTemplate : customElementTemplate
-    )
-  );
-  public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>> = this.manipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.trackBy)
-  );
-  public readonly dataSource$: Observable<FlatTreeDataSource> = this.notNilManipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.dataSource)
-  );
-  public readonly treeControl$: Observable<FlatTreeControl<FlatTreeItem>> = this.notNilManipulator$.pipe(
-    map((manipulator: TreeManipulator) => manipulator.treeControl)
-  );
-  public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.dataOrigin$)
-  );
-  public readonly selectedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.selectedNodesIds$),
-    map((selectedNodesIds: string[]) => (Array.isArray(selectedNodesIds) ? selectedNodesIds : []))
-  );
-  public readonly highlightedNodesIds$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.highlightedNodesIds$),
-    map((highlitedNodesIds: string[]) => (Array.isArray(highlitedNodesIds) ? highlitedNodesIds : []))
-  );
-  public filteredSource$: Observable<FlatTreeItem[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.dataSource.filteredData$),
-    tap(() => this.refreshViewPort())
-  );
-  private readonly scrollByRoute$: Observable<string[]> = this.notNilManipulator$.pipe(
-    switchMap((manipulator: TreeManipulator) => manipulator.scrollByRoute$),
-    map((route: string[]) => (Array.isArray(route) ? route : [])),
-    distinctUntilChanged((previousRoute: string[], currentRoute: string[]) => {
-      if (isNullOrUndefined(currentRoute)) {
-        return true;
-      }
-      const previousParent: string = previousRoute[previousRoute.length - 1];
-      const currentParent: string = currentRoute[currentRoute.length - 1];
-      return previousParent === currentParent;
-    })
-  );
+  private readonly manipulator: FlatTreeManipulator = new FlatTreeManipulator({
+    dataOrigin$: this.dataOrigin$,
+    scrollByRoute$: this.scrollByRoute$,
+    selectedNodesIds$: this.selectedNodesIds$
+  });
 
-  private readonly scrollAnimationIsEnabled$: Observable<boolean> = this.notNilManipulator$.pipe(
-    pluck<TreeManipulatorConfiguration, boolean | undefined>('scrollAnimationIsEnabled'),
-    map((isEnabled: boolean | undefined) => Boolean(isEnabled))
-  );
+  public readonly treeControl: FlatTreeControl<FlatTreeItem> = this.manipulator.treeControl;
+  public readonly dataSource: FlatTreeDataSource = this.manipulator.dataSource;
+  public readonly filteredSource$: Observable<FlatTreeItem[]> = this.dataSource.filteredData$;
 
-  constructor() {
+  constructor(public readonly changeDetectorRef: ChangeDetectorRef) {}
+
+  public ngOnInit(): void {
     this.subscription
       .add(this.emitExpandedItemOnAction())
       .add(this.markTargetItemParentsAsExpanded())
       .add(this.scrollToTargetOnTargetChange());
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
-    if (
-      isNullOrUndefined(changes) ||
-      isNullOrUndefined(changes.manipulator) ||
-      isNullOrUndefined(changes.manipulator.currentValue) ||
-      !changes.manipulator.isFirstChange()
-    ) {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (isNullOrUndefined(changes)) {
       return;
     }
-    this.handleTreeManipulator(this.manipulator);
+    this.processNodeTemplateValueChange(changes?.nodeTemplate);
+    this.processElementTemplateValueChange(changes?.elementTemplate);
+    this.processTrackByValueChange(changes?.trackBy);
+    this.processDataOriginValueChange(changes?.dataOrigin);
+    this.processSelectedNodesIdsValueChange(changes?.selectedNodesIds);
+    this.processHighlightedNodesIdsValueChange(changes?.highlightedNodesIds);
+    this.processScrollByRouteValueChanges(changes?.scrollByRoute);
+    this.processScrollAnimationIsEnabledValueChanges(changes?.scrollAnimationIsEnabled);
   }
 
   public ngAfterViewInit(): void {
-    this.subscribeOnDataExtractionOnScrolling();
+    this.subscription.add(this.updateRangeOnDataExtraction());
     this.refreshViewPort();
   }
 
@@ -149,18 +126,11 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   public toggleExpansion(node: FlatTreeItem): void {
-    this.notNilManipulator$
-      .pipe(
-        filter(() => !isNullOrUndefined(node)),
-        switchMap((manipulator: TreeManipulator) => manipulator.expandedItemsIds$),
-        map((expandedItemsIds: string[]) => expandedItemsIds.includes(node.id)),
-        withLatestFrom(this.notNilManipulator$),
-        take(1)
-      )
-      .subscribe(([isExpanded, manipulator]: [boolean, TreeManipulator]) => {
-        isExpanded ? manipulator.markAsCollapsed(node) : manipulator.markAsExpanded(node);
-        this.refreshViewPort();
-      });
+    if (isNullOrUndefined(node?.id)) {
+      return;
+    }
+    this.manipulator.toggleExpansion(node);
+    this.refreshViewPort();
   }
 
   public getRenderingAreaSkeleton(filteredSource: FlatTreeItem[], nonFilteredSource: FlatTreeItem[]): FlatTreeItem[] {
@@ -170,30 +140,74 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     return nonFilteredSource;
   }
 
-  public readonly hasChild = (_: number, node: FlatTreeItem): boolean =>
-    !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
-  public readonly hasNoChild = (_: number, node: FlatTreeItem): boolean =>
-    !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
-  public readonly isElement = (_: number, element: FlatTreeItem): boolean =>
-    !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
-
-  private handleTreeManipulator(manipulator: TreeManipulator): void {
-    this.manipulator$.next(manipulator);
-  }
-
-  private refreshViewPort(): void {
-    if (isNullOrUndefined(this.viewPort)) {
+  private processNodeTemplateValueChange(change: ComponentChange<this, TemplateRef<any>>): void {
+    const newValue: TemplateRef<any> | undefined = change?.currentValue;
+    if (isNullOrUndefined(newValue)) {
       return;
     }
-    this.viewPort.checkViewportSize();
-    this.skeletonViewPort.checkViewportSize();
+    this.nodeTemplate$.next(newValue);
   }
 
-  private subscribeOnDataExtractionOnScrolling(): void {
-    const viewPortRerenderingSubscription: Subscription = this.viewPort.renderedRangeStream
-      .pipe(skipUntil(this.notNilManipulator$.pipe(take(1))))
-      .subscribe((range: ListRange) => this.manipulator.updateVisibleRange(range));
-    this.subscription.add(viewPortRerenderingSubscription);
+  private processElementTemplateValueChange(change: ComponentChange<this, TemplateRef<any>>): void {
+    const newValue: TemplateRef<any> | undefined = change?.currentValue;
+    if (isNullOrUndefined(newValue)) {
+      return;
+    }
+    this.elementTemplate$.next(newValue);
+  }
+
+  private processTrackByValueChange(change: ComponentChange<this, TrackByFunction<FlatTreeItem>>): void {
+    const newValue: TrackByFunction<FlatTreeItem> | undefined = change?.currentValue;
+    if (isNullOrUndefined(newValue)) {
+      return;
+    }
+    this.trackBy$.next(newValue);
+  }
+
+  private processDataOriginValueChange(change: ComponentChange<this, FlatTreeItem[]>): void {
+    const newValue: FlatTreeItem[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.dataOrigin$.next(newValue);
+  }
+
+  private processSelectedNodesIdsValueChange(change: ComponentChange<this, string[]>): void {
+    const newValue: string[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.selectedNodesIds$.next(newValue);
+  }
+
+  private processHighlightedNodesIdsValueChange(change: ComponentChange<this, string[]>): void {
+    const newValue: string[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.highlightedNodesIds$.next(newValue);
+  }
+
+  private processScrollByRouteValueChanges(change: ComponentChange<this, string[]>): void {
+    const newValue: string[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.scrollByRoute$.next(newValue);
+  }
+
+  private processScrollAnimationIsEnabledValueChanges(change: ComponentChange<this, boolean>): void {
+    const newValue: boolean | undefined = change?.currentValue;
+    if (isNullOrUndefined(newValue)) {
+      return;
+    }
+    this.scrollAnimationIsEnabled$.next(newValue);
+  }
+
+  private updateRangeOnDataExtraction(): Subscription {
+    return this.viewPort.renderedRangeStream.subscribe((range: ListRange) =>
+      this.manipulator.updateVisibleRange(range)
+    );
   }
 
   private scrollToTargetOnTargetChange(): Subscription {
@@ -229,11 +243,17 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
     );
 
     return targetIndexes$
-      .pipe(withLatestFrom(this.scrollAnimationIsEnabled$))
-      .subscribe(([indexes, scrollAnimationIsEnabled]: [number[], boolean]) => {
+      .pipe(
+        withLatestFrom(
+          this.scrollAnimationIsEnabled$.pipe(
+            map((scrollAnimationIsEnabled: boolean) => (scrollAnimationIsEnabled ? 'smooth' : 'auto'))
+          )
+        )
+      )
+      .subscribe(([indexes, scrollAnimationBehavior]: [number[], ScrollBehavior]) => {
         indexes.forEach((index: number) => {
-          this.viewPort.scrollToIndex(index, scrollAnimationIsEnabled ? 'smooth' : 'auto');
-          this.skeletonViewPort.scrollToIndex(index, scrollAnimationIsEnabled ? 'smooth' : 'auto');
+          this.viewPort.scrollToIndex(index, scrollAnimationBehavior);
+          this.skeletonViewPort.scrollToIndex(index, scrollAnimationBehavior);
 
           this.refreshViewPort();
         });
@@ -241,14 +261,9 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   private emitExpandedItemOnAction(): Subscription {
-    return this.manipulator$
-      .pipe(
-        filter((manipulator: TreeManipulator) => !isNullOrUndefined(manipulator)),
-        switchMap((manipulator: TreeManipulator) =>
-          manipulator.itemToExpand$.pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
-        )
-      )
-      .subscribe(item => this.expandedNode.emit(item));
+    return this.manipulator.itemToExpand$
+      .pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
+      .subscribe((item: FlatTreeItem) => this.expandedNode.emit(item));
   }
 
   private markTargetItemParentsAsExpanded(): Subscription {
@@ -263,14 +278,21 @@ export class TreeComponent implements OnChanges, AfterViewInit, OnDestroy {
           const currentParent: string = currentRoute[currentRoute.length - 1];
           return previousParent === currentParent;
         }),
-        map((route: string[]) => route.slice(0, route.length - 1)),
-        withLatestFrom(this.notNilManipulator$)
+        map((route: string[]) => route.slice(0, route.length - 1))
       )
-      .subscribe(([parentIds, manipulator]: [string[], TreeManipulator]) =>
+      .subscribe((parentIds: string[]) =>
         parentIds.forEach((id: string) => {
-          manipulator.markIdAsExpanded(id);
+          this.manipulator.markIdAsExpanded(id);
           this.refreshViewPort();
         })
       );
+  }
+
+  private refreshViewPort(): void {
+    if (isNullOrUndefined(this.viewPort)) {
+      return;
+    }
+    this.viewPort.checkViewportSize();
+    this.skeletonViewPort.checkViewportSize();
   }
 }
