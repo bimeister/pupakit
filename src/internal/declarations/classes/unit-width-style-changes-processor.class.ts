@@ -3,12 +3,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { WidthUnitChanges } from '../interfaces/width-unit-changes.interface';
 import { UnitStyleChangesProcessor } from './unit-style-changes-processor.class';
 
-export class UnitWidthStyleChangesProcessor extends UnitStyleChangesProcessor<WidthUnitChanges> {
+export class UnitWidthStyleChangesProcessor<C> extends UnitStyleChangesProcessor<C> {
   constructor(protected readonly domSanitizer: DomSanitizer) {
     super(domSanitizer);
   }
 
-  public process(changes: WidthUnitChanges): void {
+  public process(changes: WidthUnitChanges<C>): void {
     this.processStyleChanges(changes?.width);
     this.processPercentChanges(changes.widthPercents);
     this.processPxChanges(changes.widthPx);
