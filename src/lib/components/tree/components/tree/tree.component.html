@@ -1,6 +1,6 @@
 <section class="tree">
   <cdk-virtual-scroll-viewport itemSize="28" class="viewport" #viewPort>
-    <ng-container *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)">
+    <ng-container *cdkVirtualFor="let item of getRenderingAreaItems(filteredSource$ | async, dataOrigin$ | async)">
     </ng-container>
 
     <cdk-tree
@@ -110,7 +110,7 @@
   <cdk-virtual-scroll-viewport #skeletonViewPort itemSize="28" class="viewport viewport_skeleton">
     <pupa-skeleton>
       <pupa-skeleton-group
-        *cdkVirtualFor="let item of getRenderingAreaSkeleton(filteredSource$ | async, dataOrigin$ | async)"
+        *cdkVirtualFor="let item of getRenderingAreaItems(filteredSource$ | async, dataOrigin$ | async)"
       >
         <pupa-skeleton-line></pupa-skeleton-line>
       </pupa-skeleton-group>
