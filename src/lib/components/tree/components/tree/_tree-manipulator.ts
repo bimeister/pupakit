@@ -2,10 +2,12 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, switchMap, take, withLatestFrom, debounceTime } from 'rxjs/operators';
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+
+const TARGET_NODE_TO_SCROLL_TO_DEBOUNCE_TIME_MS: number = 500;
 
 export class NewTreeManipulator {
   private readonly subscription: Subscription = new Subscription();
@@ -27,6 +29,19 @@ export class NewTreeManipulator {
   );
 
   private readonly scrollByRoute$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  public readonly indexToScrollBy$: Observable<number> = this.scrollByRoute$.pipe(
+    filter(
+      (routeToScrollBy: string[]) => Array.isArray(routeToScrollBy) && !NewTreeManipulator.isEmptyArray(routeToScrollBy)
+    ),
+    debounceTime(TARGET_NODE_TO_SCROLL_TO_DEBOUNCE_TIME_MS),
+    map((routeToScrollBy: string[]) => routeToScrollBy[routeToScrollBy.length - 1]),
+    switchMap((targetNodeId: string) =>
+      this.dataOrigin$.pipe(
+        map((nodes: FlatTreeItem[]) => nodes.map((node: FlatTreeItem) => node?.id)),
+        map((nodesIds: string[]) => nodesIds.indexOf(targetNodeId))
+      )
+    )
+  );
 
   constructor(
     private readonly dataOrigin$: Observable<FlatTreeItem[]>,
