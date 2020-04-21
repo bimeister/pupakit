@@ -11,7 +11,6 @@ import {
   OnInit,
   Output,
   Predicate,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';
@@ -23,6 +22,7 @@ import { PanelExpansionState } from '../../../../../internal/declarations/enums/
 import { WasherButtonRoot } from '../../../../../internal/declarations/interfaces/washer-button-root.interface';
 import { WasherButton } from '../../../../../internal/declarations/interfaces/washer-button.interface';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 // tslint:disable: no-magic-numbers
 @Component({
@@ -213,7 +213,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
     this.updateDataOnActiveButtonChange();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     if (!Array.isArray(changes.buttons.currentValue) || changes.buttons.currentValue.length === 0) {
       this.allButtons$.next([]);
     }

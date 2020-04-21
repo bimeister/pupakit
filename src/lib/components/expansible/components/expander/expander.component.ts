@@ -8,8 +8,6 @@ import {
   Input,
   OnChanges,
   Renderer2,
-  SimpleChange,
-  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
@@ -19,6 +17,8 @@ import { PositionController } from '../../../../../internal/declarations/classes
 import { ExpanderBehavior } from '../../../../../internal/declarations/types/expander-behavior.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 
 const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderBehavior, string>([
   ['top', 'n-resize'],
@@ -58,14 +58,14 @@ export class ExpanderComponent extends PositionController implements OnChanges {
     super(renderer, elementRef, document);
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     if (isNullOrUndefined(changes)) {
       return;
     }
     this.processBehaviorChanges(changes?.behavior);
   }
 
-  private processBehaviorChanges(change: SimpleChange): void {
+  private processBehaviorChanges(change: ComponentChange<this, ExpanderBehavior>): void {
     if (isNullOrUndefined(change)) {
       return;
     }

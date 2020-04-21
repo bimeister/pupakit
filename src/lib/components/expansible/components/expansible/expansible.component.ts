@@ -11,7 +11,6 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -34,6 +33,7 @@ import { ExpanderBehavior } from '../../../../../internal/declarations/types/exp
 import { Position } from '../../../../../internal/declarations/types/position.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { ExpanderComponent } from '../expander/expander.component';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 /** @dynamic */
 @Component({
@@ -122,7 +122,7 @@ export class ExpansibleComponent
       .add(this.updateHostPositionOnPositionControllerMissmatchTargetPosition());
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     this.heightChangesProcessor.process(changes);
     this.widthChangesProcessor.process(changes);
   }
