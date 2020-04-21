@@ -10,7 +10,6 @@ import {
   OnDestroy,
   OnInit,
   Optional,
-  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
@@ -20,6 +19,7 @@ import { distinctUntilChanged } from 'rxjs/operators';
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 @Component({
   selector: 'pupa-skeleton-line',
@@ -67,7 +67,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
       .add(this.updateHostWidthOnWidthChanges());
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     this.unitWidthStyleChangesProcessor.process(changes);
   }
 

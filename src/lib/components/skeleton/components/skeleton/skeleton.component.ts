@@ -4,13 +4,13 @@ import {
   Component,
   Input,
   OnChanges,
-  SimpleChange,
-  SimpleChanges,
   ViewEncapsulation
 } from '@angular/core';
 import { ReplaySubject } from 'rxjs';
 
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 
 @Component({
   selector: 'pupa-skeleton',
@@ -28,14 +28,14 @@ export class SkeletonComponent implements OnChanges {
     this.changeDetectorRef.detach();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     if (isNullOrUndefined(changes)) {
       return;
     }
     this.processIsActivePropertyChange(changes?.isActive);
   }
 
-  private processIsActivePropertyChange(change: SimpleChange): void {
+  private processIsActivePropertyChange(change: ComponentChange<this, boolean>): void {
     if (isNullOrUndefined(change?.currentValue)) {
       return;
     }

@@ -11,8 +11,6 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  SimpleChange,
-  SimpleChanges,
   ViewChild
 } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -21,6 +19,8 @@ import { filter, takeUntil } from 'rxjs/operators';
 import { DrawerFloat } from '../../../../../internal/declarations/types/drawer-float.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DrawerDraggerComponent } from '../drawer-dragger/drawer-dragger.component';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 
 @Component({
   selector: 'pupa-drawer',
@@ -89,7 +89,7 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
     this.closeDrawer();
   }
 
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsVisibleValueChange(changes.isVisible);
     this.processwithOverlayValueChange(changes.withOverlay);
   }
@@ -130,19 +130,19 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
     this.closeDrawer();
   }
 
-  private processIsVisibleValueChange(change: SimpleChange): void {
+  private processIsVisibleValueChange(change: ComponentChange<this, boolean>): void {
     if (isNullOrUndefined(change) || change.currentValue === change.previousValue) {
       return;
     }
-    const drawerBecameVisible: boolean = change.currentValue === true;
+    const drawerBecameVisible: boolean = change.currentValue;
     drawerBecameVisible ? this.openDrawer() : this.closeDrawer();
   }
 
-  private processwithOverlayValueChange(change: SimpleChange): void {
+  private processwithOverlayValueChange(change: ComponentChange<this, boolean>): void {
     if (isNullOrUndefined(change) || !this.isVisible) {
       return;
     }
-    const overlayIsVisible: boolean = change.currentValue === true;
+    const overlayIsVisible: boolean = change.currentValue;
     overlayIsVisible ? this.showOverlay() : this.hideOverlay();
   }
 
