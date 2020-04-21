@@ -22,7 +22,7 @@ import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { NewTreeManipulator } from './_tree-manipulator';
+import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
 
 type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
 
@@ -38,7 +38,7 @@ const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: F
   !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
 
 const NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS: number = 500;
-
+const TREE_ITEM_SIZE_PX: number = 28;
 @Component({
   selector: 'pupa-tree',
   templateUrl: './tree.component.html',
@@ -49,6 +49,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly hasChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
   public readonly hasNoChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
   public readonly isElement: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_IS_ELEMENT;
+  public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -80,11 +81,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
   private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
 
-  private readonly manipulator: NewTreeManipulator = new NewTreeManipulator(
+  private readonly manipulator: TreeManipulator = new TreeManipulator(
     this.dataOrigin$,
-    this.selectedNodesIds$,
     this.viewPortReference$,
-    this.skeletonViewPortReference$
+    this.skeletonViewPortReference$,
+    this.treeItemSizePx
   );
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = this.manipulator.treeControl;
@@ -135,13 +136,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       return;
     }
     this.manipulator.toggleExpansion(node);
-  }
-
-  public getRenderingAreaItems(filteredSource: FlatTreeItem[], nonFilteredSource: FlatTreeItem[]): FlatTreeItem[] {
-    if (Array.isArray(filteredSource) && !Object.is(filteredSource.length, 0)) {
-      return filteredSource;
-    }
-    return nonFilteredSource;
   }
 
   private processNodeTemplateValueChange(change: ComponentChange<this, TemplateRef<any>>): void {

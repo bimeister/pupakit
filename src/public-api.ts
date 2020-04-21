@@ -43,8 +43,6 @@ export {
   Tab,
   DraggableListChangeIndexEvent,
   LayoutDrawerConfiguration,
-  FlatTreeManipulator,
-  TreeManipulator,
   ModalWindowConfiguration,
   DatagridColDef,
   DatagridDomLayouts,

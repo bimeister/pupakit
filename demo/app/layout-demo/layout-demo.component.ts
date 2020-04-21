@@ -2,7 +2,10 @@ import { ChangeDetectionStrategy, Component, ComponentFactory, ComponentFactoryR
 
 import { AlertsService, DrawersService, ModalWindowService } from '../../../src/lib/components';
 import { LoaderDemoComponent } from '../loader-demo/loader-demo.component';
-import { Alert, AlertType, LayoutDrawerConfiguration, ModalWindowConfiguration } from './../../../src/internal';
+import { LayoutDrawerConfiguration } from '../../../src/internal/declarations/interfaces/layout-drawer-configuration.interface';
+import { ModalWindowConfiguration } from '../../../src/internal/declarations/interfaces/modal-window-configuration.interface';
+import { AlertType } from '../../../src/internal/declarations/types/alert.type';
+import { Alert } from '../../../src/internal/declarations/interfaces/alert.interface';
 
 @Component({
   selector: 'demo-overlay',
