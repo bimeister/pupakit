@@ -16,7 +16,7 @@ export class DatagridTemplateRendererComponent implements ICellRendererAngularCo
 
   public refresh(params: ICellRendererParams): boolean {
     this.templateContext = {
-      $implicit: params.data,
+      $implicit: params.value,
       params
     };
     return true;
