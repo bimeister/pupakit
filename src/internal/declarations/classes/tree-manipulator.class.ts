@@ -1,6 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { TemplateRef, TrackByFunction } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take } from 'rxjs/operators';
 
@@ -13,13 +12,8 @@ export abstract class TreeManipulator {
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
   public readonly dataOrigin$: Observable<FlatTreeItem[]> = this.configuration.dataOrigin$.pipe(shareReplay(1));
   public readonly selectedNodesIds$: Observable<string[]> = this.configuration.selectedNodesIds$.pipe(shareReplay(1));
-  public readonly highlightedNodesIds$: Observable<string[]> = this.configuration.highlightedNodesIds$.pipe(
-    shareReplay(1)
-  );
+
   public readonly scrollByRoute$: Observable<string[]> = this.configuration.scrollByRoute$.pipe(shareReplay(1));
-  public readonly nodeTemplate: TemplateRef<any> = this.configuration.nodeTemplate;
-  public readonly elementTemplate: TemplateRef<any> = this.configuration.elementTemplate;
-  public readonly trackBy: TrackByFunction<FlatTreeItem> = this.configuration.trackBy;
 
   public readonly itemToExpand$: BehaviorSubject<FlatTreeItem> = new BehaviorSubject<FlatTreeItem>(null);
   public readonly expandedItemsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
@@ -58,6 +52,20 @@ export abstract class TreeManipulator {
     }
     this.itemToExpand$.next(node);
     this.markIdAsExpanded(node.id);
+  }
+
+  public toggleExpansion(node: FlatTreeItem): void {
+    if (isNullOrUndefined(node?.id)) {
+      return;
+    }
+    this.expandedItemsIds$
+      .pipe(
+        take(1),
+        map((expandedItemsIds: string[]) => expandedItemsIds.includes(node.id))
+      )
+      .subscribe((nodeIsExpanded: boolean) => {
+        nodeIsExpanded ? this.markAsCollapsed(node) : this.markAsExpanded(node);
+      });
   }
 
   public markIdAsExpanded(nodeId: string): void {
