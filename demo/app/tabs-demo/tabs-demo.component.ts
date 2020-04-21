@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-
-import { Tab } from './../../../src/internal';
+import { Tab } from '../../../src/internal/declarations/interfaces/tab.interface';
 
 @Component({
   selector: 'demo-tabs-demo',

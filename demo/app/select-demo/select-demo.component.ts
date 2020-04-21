@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-
-import { DropdownItem } from './../../../src/internal';
+import { DropdownItem } from '../../../src/internal/declarations/interfaces/dropdown-item.interface';
 
 @Component({
   selector: 'demo-select',

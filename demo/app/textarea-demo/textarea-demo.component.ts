@@ -4,8 +4,7 @@ import combos from 'combos';
 // tslint:disable-next-line: import-blacklist
 import { compact } from 'lodash';
 import { Subscription } from 'rxjs';
-
-import { TextareaResize } from './../../../src/internal';
+import { TextareaResize } from '../../../src/internal/declarations/types/textarea-resize.type';
 
 interface TextareaCombo {
   resize: TextareaResize;
