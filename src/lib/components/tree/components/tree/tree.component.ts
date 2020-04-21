@@ -16,7 +16,7 @@ import {
   AfterContentInit
 } from '@angular/core';
 import { BehaviorSubject, Observable, Subscription, ReplaySubject } from 'rxjs';
-import { filter, debounceTime } from 'rxjs/operators';
+import { filter, debounceTime, withLatestFrom, map } from 'rxjs/operators';
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -36,6 +36,8 @@ const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: numbe
   !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
 const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean =>
   !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
+
+const NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS: number = 500;
 
 @Component({
   selector: 'pupa-tree',
@@ -89,10 +91,13 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly dataSource: FlatTreeDataSource = this.manipulator.dataSource;
   public readonly filteredSource$: Observable<FlatTreeItem[]> = this.dataSource.filteredData$;
 
-  constructor(public readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnInit(): void {
-    this.subscription.add(this.emitExpandedItemOnNodeExpansion()).add(this.detectChangesOnNodeExpansion());
+    this.subscription
+      .add(this.emitExpandedItemOnNodeExpansion())
+      .add(this.detectChangesOnNodeExpansion())
+      .add(this.scrollByIndexOnEmit());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -211,7 +216,27 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private detectChangesOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
-      .pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item), debounceTime(500)))
+      .pipe(
+        filter(
+          (item: FlatTreeItem) => !isNullOrUndefined(item),
+          debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS)
+        )
+      )
       .subscribe(() => this.changeDetectorRef.markForCheck());
+  }
+
+  private scrollByIndexOnEmit(): Subscription {
+    return this.manipulator.indexToScrollBy$
+      .pipe(
+        withLatestFrom(
+          this.scrollAnimationIsEnabled$.pipe(
+            map((scrollAnimationIsEnabled: boolean) => (scrollAnimationIsEnabled ? 'smooth' : 'auto'))
+          )
+        )
+      )
+      .subscribe(([targetIndex, scrollBehavior]: [number, ScrollBehavior]) => {
+        this.viewPort.scrollToIndex(targetIndex, scrollBehavior);
+        this.skeletonViewPort.scrollToIndex(targetIndex, scrollBehavior);
+      });
   }
 }
