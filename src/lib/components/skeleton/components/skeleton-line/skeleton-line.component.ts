@@ -29,9 +29,9 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, WidthUnitBinding {
-  private readonly unitWidthStyleChangesProcessor: UnitWidthStyleChangesProcessor = new UnitWidthStyleChangesProcessor(
-    this.domSanitizer
-  );
+  private readonly unitWidthStyleChangesProcessor: UnitWidthStyleChangesProcessor<
+    this
+  > = new UnitWidthStyleChangesProcessor(this.domSanitizer);
 
   @Input() public width: string | null = null;
   // tslint:disable: no-input-rename

@@ -1,10 +1,10 @@
-import { SimpleChange } from '@angular/core';
+import { ComponentChange } from './component-change.interface';
 
-export interface WidthUnitChanges {
-  width?: SimpleChange;
-  widthPx?: SimpleChange;
-  widthVw?: SimpleChange;
-  widthVh?: SimpleChange;
-  widthRem?: SimpleChange;
-  widthPercents?: SimpleChange;
+export interface WidthUnitChanges<C = any> {
+  width?: ComponentChange<C>;
+  widthPx?: ComponentChange<C>;
+  widthVw?: ComponentChange<C>;
+  widthVh?: ComponentChange<C>;
+  widthRem?: ComponentChange<C>;
+  widthPercents?: ComponentChange<C>;
 }

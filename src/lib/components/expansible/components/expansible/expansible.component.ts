@@ -45,10 +45,10 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 })
 export class ExpansibleComponent
   implements OnInit, OnChanges, AfterContentInit, OnDestroy, WidthUnitBinding, HeightUnitBinding {
-  private readonly widthChangesProcessor: UnitWidthStyleChangesProcessor = new UnitWidthStyleChangesProcessor(
+  private readonly widthChangesProcessor: UnitWidthStyleChangesProcessor<this> = new UnitWidthStyleChangesProcessor(
     this.domSanitizer
   );
-  private readonly heightChangesProcessor: UnitHeightStyleChangesProcessor = new UnitHeightStyleChangesProcessor(
+  private readonly heightChangesProcessor: UnitHeightStyleChangesProcessor<this> = new UnitHeightStyleChangesProcessor(
     this.domSanitizer
   );
 
