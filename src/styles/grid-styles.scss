@@ -120,6 +120,12 @@ $header-cell-moving-background-color: color(light);
     border: none !important;
   }
 
+  .ag-horizontal-left-spacer,
+  .ag-horizontal-right-spacer {
+    overflow: hidden;
+    border: 0;
+  }
+
   &.pupagrid-theme-default {
     .datagrid {
       border: none;
@@ -205,6 +211,23 @@ $header-cell-moving-background-color: color(light);
       line-height: 1;
       display: flex;
       align-items: center;
+    }
+  }
+
+  &.pupagrid-theme-borderless {
+    @extend .pupagrid-theme-default;
+
+    .ag-header, .ag-row {
+      border-top: 0;
+      border-bottom: calc(1px) solid var(--color_light);
+    }
+
+    .ag-header-cell::after {
+      display: none;
+    }
+
+    .ag-pinned-right-header {
+      border: 0;
     }
   }
 }
