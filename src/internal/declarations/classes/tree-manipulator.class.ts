@@ -39,7 +39,9 @@ export class TreeManipulator {
     switchMap((targetNodeId: string) =>
       this.dataSource.filteredData$.pipe(
         map((nodes: FlatTreeItem[]) => nodes.map((node: FlatTreeItem) => node?.id)),
-        map((nodesIds: string[]) => nodesIds.indexOf(targetNodeId))
+        map((nodesIds: string[]) => nodesIds.indexOf(targetNodeId)),
+        filter((targetIndex: number) => !Object.is(targetIndex, -1)),
+        take(1)
       )
     )
   );
