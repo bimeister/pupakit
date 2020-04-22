@@ -222,7 +222,7 @@ $header-cell-moving-background-color: color(light);
     .ag-header,
     .ag-row {
       border-top: 0;
-      border-bottom: calc(1px) solid var(--color_light);
+      border-bottom: calc(1px) solid color(light);
     }
 
     .ag-header-cell::after {
