@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
-import { ICellRendererAngularComp } from 'ag-grid-angular';
-import { ICellRendererParams } from 'ag-grid-community';
+import { ICellRendererAngularComp, IHeaderAngularComp } from 'ag-grid-angular';
+import { ICellRendererParams, IHeaderParams } from 'ag-grid-community';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 export { ICellRendererParams };
+
+type Params = ICellRendererParams | IHeaderParams;
 
 @Component({
   selector: 'pupa-datagrid-template-renderer',
@@ -10,20 +13,29 @@ export { ICellRendererParams };
   styleUrls: ['./datagrid-template-renderer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatagridTemplateRendererComponent implements ICellRendererAngularComp {
+export class DatagridTemplateRendererComponent implements ICellRendererAngularComp, IHeaderAngularComp {
   public template: TemplateRef<HTMLElement>;
-  public templateContext: { $implicit: unknown; params: ICellRendererParams };
+  public templateContext: { $implicit: unknown; params: Params };
 
-  public refresh(params: ICellRendererParams): boolean {
+  public refresh(params: Params): boolean {
+    const implicitData: unknown = DatagridTemplateRendererComponent.isHeaderParams(params)
+      ? params.displayName
+      : params.value;
+
     this.templateContext = {
-      $implicit: params.value,
+      $implicit: implicitData,
       params
     };
+
     return true;
   }
 
-  public agInit(params: ICellRendererParams): void {
+  public agInit(params: Params): void {
     this.template = params['templateRef'];
     this.refresh(params);
+  }
+
+  private static isHeaderParams(params: any): params is IHeaderParams {
+    return !isNullOrUndefined(params.enableSorting);
   }
 }
