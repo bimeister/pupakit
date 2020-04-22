@@ -113,6 +113,10 @@ export class DatagridManipulator<rowDataT> {
     this.normalizeRowHeights();
   }
 
+  public resetRowHeights(): void {
+    this.gridApi.resetRowHeights();
+  }
+
   private makeColumnsFitGridWidth(): void {
     if (!this.isGridReady) {
       return;
