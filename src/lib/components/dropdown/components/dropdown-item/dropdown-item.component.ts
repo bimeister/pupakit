@@ -22,11 +22,7 @@ export class DropdownItemComponent<T> {
   }
 
   public emitSelect(item: DropdownItem<T> | T): void {
-    this.select.emit(
-      isNullOrUndefined(this.captionPropertyPath) && (item as DropdownItem<T>).data
-        ? (item as DropdownItem<T>).data
-        : (item as T)
-    );
+    this.select.emit(isNullOrUndefined(this.captionPropertyPath) ? (item as DropdownItem<T>).data : (item as T));
   }
 
   public get itemData(): DropdownItem<T> {
