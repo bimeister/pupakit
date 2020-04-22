@@ -101,10 +101,12 @@ $header-cell-moving-background-color: color(light);
       content: '\f280';
       padding: 0 1px 0 0;
     }
+
     &::after {
       content: '\f286';
     }
   }
+
   .ag-icon-desc::before,
   .ag-icon-asc::after {
     color: color(active);
@@ -217,7 +219,8 @@ $header-cell-moving-background-color: color(light);
   &.pupagrid-theme-borderless {
     @extend .pupagrid-theme-default;
 
-    .ag-header, .ag-row {
+    .ag-header,
+    .ag-row {
       border-top: 0;
       border-bottom: calc(1px) solid var(--color_light);
     }
