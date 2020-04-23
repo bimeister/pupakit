@@ -38,10 +38,10 @@ export class TreeManipulator {
     map((routeToScrollBy: string[]) => routeToScrollBy[routeToScrollBy.length - 1]),
     switchMap((targetNodeId: string) =>
       this.dataSource.filteredData$.pipe(
+        take(1),
         map((nodes: FlatTreeItem[]) => nodes.map((node: FlatTreeItem) => node?.id)),
         map((nodesIds: string[]) => nodesIds.indexOf(targetNodeId)),
-        filter((targetIndex: number) => !Object.is(targetIndex, -1)),
-        take(1)
+        filter((targetIndex: number) => !Object.is(targetIndex, -1))
       )
     )
   );
