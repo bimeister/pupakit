@@ -1,11 +1,13 @@
 <h1>Tooltip</h1>
 <div class="wrapper">
-  <pupa-tooltip [closeOnContentClick]="false">
-    <pupa-tooltip-trigger style="background-color: aqua;">
-      🎈
-    </pupa-tooltip-trigger>
-    <pupa-tooltip-content>
-      This is Tooltip Content 🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈
-    </pupa-tooltip-content>
-  </pupa-tooltip>
+  <div *ngFor="let item of [1, 2, 3, 4, 5]">
+    <pupa-tooltip [closeOnContentClick]="false" #tooltip>
+      <pupa-tooltip-trigger class="hoverState">
+        <pupa-icon-button color="transparent" [active]="tooltip.isActive$ | async">
+          <ion-icon class="icon" name="ios-checkmark-circle"></ion-icon>
+        </pupa-icon-button>
+      </pupa-tooltip-trigger>
+      <pupa-tooltip-content> This is Tooltip Content {{ item }}🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈 </pupa-tooltip-content>
+    </pupa-tooltip>
+  </div>
 </div>
