@@ -17,6 +17,7 @@ import {
 } from '../../../../../internal/declarations/interfaces/tooltip-config.interface';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { TooltipService } from '../../services/tooltip.service';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 const HALF_DIVIDER: number = 2;
 const MINIMAL_TIME_SHOWING_MS: number = 100;
@@ -51,7 +52,6 @@ export class TooltipPaneComponent implements OnDestroy {
 
   @ViewChild('root', { static: false }) public contentRef: ElementRef<HTMLElement>;
   @ViewChild('clickEventContainer', { static: false }) public clickEventContainerRef: ElementRef<HTMLElement>;
-  // public static hostElement: this,;
 
   constructor(
     private readonly hostElement: ElementRef<HTMLElement>,
@@ -84,7 +84,11 @@ export class TooltipPaneComponent implements OnDestroy {
 
   private listenEventsAndSetPosition(): void {
     this.tooltipContent$.pipe(take(1)).subscribe((tooltipContent: TooltipConfig) => {
-      window.requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (isNullOrUndefined(this.contentRef) || isNullOrUndefined(this.clickEventContainerRef)) {
+          return;
+        }
+
         this.eventUnlisteners
           .add(this.listenContentMouseMove())
           .add(this.listenTriggerMouseMove(tooltipContent.triggerRef))

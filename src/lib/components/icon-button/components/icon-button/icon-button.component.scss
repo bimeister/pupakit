@@ -67,6 +67,11 @@
   &_transparent {
     background: transparent;
     color: color(main);
+
+    &.button_active {
+      background-color: color(active);
+      color: color(white);
+    }
   }
 
   &_float {
