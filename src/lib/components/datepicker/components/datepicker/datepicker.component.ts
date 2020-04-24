@@ -153,6 +153,10 @@ export class DatepickerComponent implements OnDestroy {
               const validDatesCount: number = 2;
               return Array.isArray(selectedRangeDates) && Object.is(selectedRangeDates.length, validDatesCount);
             }),
+            map((range: [Date, Date]) => {
+              const sortFunction = (a: Date, b: Date) => a.valueOf() - b.valueOf();
+              return [...range].sort(sortFunction);
+            }),
             distinctUntilChanged(
               (previousValue: Date[], currentValue: Date[]) =>
                 JSON.stringify(previousValue) === JSON.stringify(currentValue)
