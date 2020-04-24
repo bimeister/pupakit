@@ -1,5 +1,5 @@
 import { TemplateRef } from '@angular/core';
-import { ColDef, ColumnApi, GridApi, IDatasource } from 'ag-grid-community';
+import { ColDef, ColumnApi, GridApi, IDatasource, ValueGetterParams } from 'ag-grid-community';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { DatagridColumnSettingsComponent } from '../../../lib/components/datagrid/components/datagrid-column-settings/datagrid-column-settings.component';
@@ -27,16 +27,6 @@ export class DatagridManipulator<rowDataT> {
   public columnSettings$: BehaviorSubject<DatagridColumnSetting[]> = new BehaviorSubject<DatagridColumnSetting[]>([]);
 
   private static readonly actionsColId: string = '_actions';
-
-  private static readonly actionsColumn: DatagridColDef = {
-    headerName: '',
-    sortable: false,
-    colId: DatagridManipulator.actionsColId,
-    width: 48,
-    pinned: 'right',
-    suppressMovable: true,
-    isAvailableInSettings: false
-  };
 
   constructor(
     private readonly configuration: DatagridManipulatorConfiguration<rowDataT>,
@@ -146,7 +136,7 @@ export class DatagridManipulator<rowDataT> {
   }
 
   private getActionsColumn(userActionsCellRef: TemplateRef<HTMLElement> = null): DatagridColDef {
-    const actionsColumn: DatagridColDef = DatagridManipulator.actionsColumn;
+    const actionsColumn: DatagridColDef = DatagridManipulator.generateActionsColumnDefinition();
 
     if (this.config.showColumnSettings) {
       actionsColumn.headerComponentFramework = DatagridColumnSettingsComponent;
@@ -163,6 +153,23 @@ export class DatagridManipulator<rowDataT> {
     }
 
     return actionsColumn;
+  }
+
+  private static actionsColumnValueGetter(params: ValueGetterParams): any {
+    return params.data;
+  }
+
+  private static generateActionsColumnDefinition(): DatagridColDef {
+    return {
+      headerName: '',
+      sortable: false,
+      colId: DatagridManipulator.actionsColId,
+      width: 48,
+      pinned: 'right',
+      suppressMovable: true,
+      isAvailableInSettings: false,
+      valueGetter: DatagridManipulator.actionsColumnValueGetter
+    };
   }
 
   private static getVisibleColumnsIds(settings: DatagridColumnSetting[]): string[] {
