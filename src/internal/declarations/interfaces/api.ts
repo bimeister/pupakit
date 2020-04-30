@@ -16,6 +16,7 @@ export * from './days-map.interface';
 export * from './draggable-list-change-index-event.interface';
 export * from './dropdown-item.interface';
 export * from './droppable-config.interface';
+export * from './grid-row-event';
 export * from './height-unit-binding.interface';
 export * from './height-unit-changes.interface';
 export * from './icon-data.interface';
