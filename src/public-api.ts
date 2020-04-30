@@ -49,5 +49,6 @@ export {
   DatagridManipulatorConfiguration,
   DatagridManipulator,
   DatagridThemes,
-  ButtonColor
+  ButtonColor,
+  GridRowEvent
 } from './internal/api';
