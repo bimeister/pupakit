@@ -94,7 +94,7 @@ export class DatagridComponent<rowDataT> {
       this.gridElement.nativeElement.querySelector('.ag-pinned-left-cols-container')
     ];
 
-    /** {@link https://github.com/ag-grid/ag-grid/issues/2911|AgGrid issue} /*
+    /** {@link https://github.com/ag-grid/ag-grid/issues/2911|AgGrid issue} */
     if (this.manipulator.config.sizeColumnsToFit) {
       const centerViewport: Element = this.gridElement.nativeElement.querySelector('.ag-center-cols-viewport');
       this.renderer.setStyle(centerViewport, 'overflow-x', 'hidden');
