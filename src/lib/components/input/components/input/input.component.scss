@@ -99,9 +99,24 @@
   padding: rems(0.25) rems(0.5);
 }
 
+.input_large {
+  height: rems(2.5);
+  font-size: px(24);
+  line-height: 1.08;
+  padding: rems(0.5) rems(0.75);
+}
+
 .input__text {
   max-width: calc(100% - #{rems(1)});
   @include ellipsis-text-overflow;
+}
+
+.input_transparent {
+  border: none;
+  background-color: transparent;
+  &:focus {
+    border: none;
+  }
 }
 
 .icon {

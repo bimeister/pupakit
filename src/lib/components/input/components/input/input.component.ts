@@ -34,6 +34,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
   @Input() public showValidateIcon: boolean = false;
   @Input() public type: InputType = 'text';
   @Input() public size: InputSize = 'medium';
+  @Input() public transparent: boolean = false;
   @Input()
   public set valid(newValue: boolean) {
     this.validValue = newValue;
