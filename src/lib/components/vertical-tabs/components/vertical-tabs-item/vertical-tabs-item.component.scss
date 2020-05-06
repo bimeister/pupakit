@@ -13,11 +13,21 @@
   margin: 0 0 rems(0.5) 0;
   cursor: pointer;
 
-  &_selected {
-    background: color(light);
-  }
-
   &_hidden {
     display: none;
+  }
+
+  &_angular {
+    border-radius: unset;
+    margin: unset;
+    border: unset;
+
+    &:hover {
+      background: color(light);
+    }
+  }
+
+  &_selected {
+    background: color(light);
   }
 }

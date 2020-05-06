@@ -26,3 +26,4 @@ export * from './position.type';
 export * from './search-field-kind.type';
 export * from './textarea-resize.type';
 export * from './uuid.type';
+export * from './vertical-tabs-kind.type';

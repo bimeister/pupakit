@@ -2,6 +2,7 @@
   class="vertical-tabs__item"
   [class.vertical-tabs__item_selected]="isSelected$ | async"
   [class.vertical-tabs__item_hidden]="!isVisible"
+  [class.vertical-tabs__item_angular]="kind === 'angular'"
 >
   <ng-content></ng-content>
 </div>
