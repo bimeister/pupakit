@@ -1,1 +1,6 @@
-<div class="skeleton__line" [class.skeleton__line_active]="isActive$ | async" [style.width]="width$ | async"></div>
+<div
+  class="skeleton__line"
+  [class.skeleton__line_active]="isActive$ | async"
+  [class.skeleton__line_has-margin-left]="hasMarginLeft"
+  [style.width]="width$ | async"
+></div>

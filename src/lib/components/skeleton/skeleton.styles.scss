@@ -9,7 +9,8 @@
   width: 100%;
 
   &__group {
-    padding: px(8) 0;
+    padding: px(6) 0;
+    padding-bottom: 0;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -26,6 +27,10 @@
     &_active {
       background: color(main);
       opacity: 0.1;
+    }
+
+    &_has-margin-left {
+      margin: 0 0 0 px(8);
     }
   }
 }
