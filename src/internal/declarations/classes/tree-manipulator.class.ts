@@ -2,7 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, withLatestFrom, debounceTime } from 'rxjs/operators';
+import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
@@ -58,7 +58,8 @@ export class TreeManipulator {
     this.setInitialVisibleRange();
     this.subscription
       .add(this.addParentNodesToExpandedOnScrollByRouteEmits())
-      .add(this.refreshViewPortOnExpindedItemsIdsChange());
+      .add(this.refreshViewPortOnExpindedItemsIdsChange())
+      .add(this.restoreExpansionForRecreatedElements());
   }
 
   public destroy(): void {
@@ -188,6 +189,18 @@ export class TreeManipulator {
       )
       .subscribe((range: ListRange) => {
         this.updateVisibleRange(range);
+      });
+  }
+
+  private restoreExpansionForRecreatedElements(): Subscription {
+    return this.dataSource.currentSlice$
+      .pipe(withLatestFrom(this.expandedItemsIds$))
+      .subscribe(([treeItems, expandedIds]) => {
+        treeItems
+          .filter(item => expandedIds.includes(item.id))
+          .forEach(item => {
+            this.treeControl.expand(item);
+          });
       });
   }
 

@@ -13,6 +13,7 @@
   position: relative;
   height: 100%;
   width: auto;
+  user-select: none;
 }
 
 .viewport {
@@ -95,5 +96,18 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+  }
+}
+
+.draggable {
+  position: absolute;
+  pointer-events: none;
+  box-shadow: variable(box-shadow_hover);
+}
+
+.prevent-drop {
+  opacity: 0.3;
+  &:hover {
+    background: unset;
   }
 }
