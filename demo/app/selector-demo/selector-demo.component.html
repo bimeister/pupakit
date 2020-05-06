@@ -14,8 +14,6 @@
     [clearSelectionButtonSide]="'begin'"
     [formControl]="sampleFormControl"
   >
-    <pupa-selector-item *ngFor="let day of daysOfWeek; let i = index" [value]="i"
-      >{{ day }}; {{ i }}</pupa-selector-item
-    >
+    <pupa-selector-item *ngFor="let day of daysOfWeek; let i = index" [value]="i">{{ day }}</pupa-selector-item>
   </pupa-selector>
 </div>
