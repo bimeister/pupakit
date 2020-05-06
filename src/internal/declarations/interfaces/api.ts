@@ -14,6 +14,7 @@ export * from './datagrid-column-setting.interface';
 export * from './datagrid-manipulator-configuration-data.interface';
 export * from './days-map.interface';
 export * from './draggable-list-change-index-event.interface';
+export * from './drop-event.interface';
 export * from './dropdown-item.interface';
 export * from './droppable-config.interface';
 export * from './grid-row-event';

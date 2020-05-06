@@ -46,9 +46,11 @@
         [cdkTreeNodePaddingIndent]="10"
         cdkTreeNodePadding
         class="tree-node-row"
+        (mousedown)="mouseDown(node, $event)"
       >
         <div
           class="tree-node"
+          [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
         >
@@ -78,9 +80,13 @@
         [cdkTreeNodePaddingIndent]="10"
         cdkTreeNodePadding
         class="tree-node-row"
+        (mousedown)="mouseDown(node, $event)"
+        (mouseenter)="mouseEnter(node)"
+        (mouseleave)="mouseLeave()"
       >
         <div
           class="tree-node"
+          [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
         >
@@ -113,14 +119,32 @@
       </pupa-skeleton-group>
     </pupa-skeleton>
   </cdk-virtual-scroll-viewport>
-</section>
 
-<ng-template #defaultTemplate let-node="node">
-  {{ node?.name }}
-</ng-template>
+  <div *ngIf="draggingHasStarted" class="draggable tree-node" #draggable>
+    <div class="tree-node__expansion-button">
+      <ng-container
+        [ngTemplateOutlet]="defaultExpansionButtonTemplate"
+        [ngTemplateOutletContext]="{
+          node: draggableNode,
+          hasChild: draggableNode.isExpandable,
+          isElement: draggableNode.isElement
+        }"
+      ></ng-container>
+    </div>
+
+    <ng-container
+      [ngTemplateOutlet]="nodeTemplate$ | async"
+      [ngTemplateOutletContext]="{ node: draggableNode }"
+    ></ng-container>
+  </div>
+</section>
 
 <ng-template #defaultExpansionButtonTemplate let-node="node" let-hasChild="hasChild">
   <button class="default-expansion-button" [disabled]="!hasChild">
     <ion-icon [name]="treeControl.isExpanded(node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></ion-icon>
   </button>
+</ng-template>
+
+<ng-template #defaultTemplate let-node="node">
+  {{ node?.name }}
 </ng-template>
