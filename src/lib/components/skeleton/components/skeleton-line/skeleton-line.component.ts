@@ -40,6 +40,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   @Input('width.vw') public widthVw: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
   // tslint:enable: no-input-rename
+  @Input() public hasMarginLeft: boolean = true;
 
   @HostBinding('style.width') public widthStyle: SafeStyle;
 
