@@ -54,6 +54,7 @@
   color: color(main-dark);
   font-size: rems(0.75);
   cursor: pointer;
+  white-space: nowrap;
 
   &__expansion-button {
     all: unset;
