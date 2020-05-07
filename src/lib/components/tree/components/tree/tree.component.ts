@@ -2,7 +2,6 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
   AfterContentInit,
-  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -30,7 +29,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, debounceTime, filter, map, observeOn, withLatestFrom } from 'rxjs/operators';
+import { debounce, debounceTime, filter, observeOn } from 'rxjs/operators';
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -67,7 +66,7 @@ const TREE_ITEM_SIZE_PX: number = 28;
   styleUrls: ['./tree.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy, AfterViewInit {
+export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy {
   public readonly hasChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
   public readonly hasNoChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
   public readonly isElement: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_IS_ELEMENT;
@@ -77,30 +76,25 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   @ViewChild('viewPort', { static: true }) private readonly viewPort: CdkVirtualScrollViewport;
   @ViewChild('skeletonViewPort', { static: true }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
-  @ViewChild('defaultTemplate', { static: true }) private readonly defaultTemplate: TemplateRef<any>;
 
   @Input() public readonly dataOrigin: FlatTreeItem[];
   @Input() public readonly nodeTemplate?: TemplateRef<any>;
-  @Input() public readonly elementTemplate?: TemplateRef<any>;
   @Input() public readonly trackBy?: TrackByFunction<FlatTreeItem>;
   @Input() public readonly selectedNodesIds?: string[];
   @Input() public readonly highlightedNodesIds?: string[];
   @Input() public readonly scrollByRoute?: string[];
-  @Input() public readonly scrollAnimationIsEnabled?: boolean;
+  @Input() public readonly scrollBehaviour: ScrollBehavior = 'smooth';
   @Input() public readonly hasDragAndDrop: boolean = false;
 
   @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
   @Output() private readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
 
-  public readonly nodeTemplate$: BehaviorSubject<TemplateRef<any>> = new BehaviorSubject(this.defaultTemplate);
-  public readonly elementTemplate$: BehaviorSubject<TemplateRef<any>> = new BehaviorSubject(this.defaultTemplate);
   public readonly trackBy$: BehaviorSubject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(
     DEFAULT_TRACK_BY_FUNCTION
   );
   public readonly dataOrigin$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject([]);
   public readonly selectedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly highlightedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
-  private readonly scrollAnimationIsEnabled$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
   private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
@@ -150,18 +144,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     if (isNullOrUndefined(changes)) {
       return;
     }
-    this.processNodeTemplateValueChange(changes?.nodeTemplate);
-    this.processElementTemplateValueChange(changes?.elementTemplate);
     this.processTrackByValueChange(changes?.trackBy);
     this.processDataOriginValueChange(changes?.dataOrigin);
     this.processSelectedNodesIdsValueChange(changes?.selectedNodesIds);
     this.processHighlightedNodesIdsValueChange(changes?.highlightedNodesIds);
     this.processScrollByRouteValueChanges(changes?.scrollByRoute);
-    this.processScrollAnimationIsEnabledValueChanges(changes?.scrollAnimationIsEnabled);
-  }
-
-  public ngAfterViewInit(): void {
-    this.nodeTemplate$.next(this.defaultTemplate);
   }
 
   public ngAfterContentInit(): void {
@@ -223,10 +210,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   @HostListener('window:mouseup')
   public mouseUp(): void {
-    this.dropped.emit({
-      draggedElement: this.draggableNode,
-      droppedElement: this.dropNode
-    });
+    if (this.draggingHasStarted && !isNullOrUndefined(this.dropNode)) {
+      this.dropped.emit({
+        draggedElement: this.draggableNode,
+        droppedElement: this.dropNode
+      });
+    }
 
     this.draggingHasStarted = false;
     this.draggableNode = null;
@@ -322,22 +311,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     }
   }
 
-  private processNodeTemplateValueChange(change: ComponentChange<this, TemplateRef<any>>): void {
-    const newValue: TemplateRef<any> | undefined = change?.currentValue;
-    if (isNullOrUndefined(newValue)) {
-      return;
-    }
-    this.nodeTemplate$.next(newValue);
-  }
-
-  private processElementTemplateValueChange(change: ComponentChange<this, TemplateRef<any>>): void {
-    const newValue: TemplateRef<any> | undefined = change?.currentValue;
-    if (isNullOrUndefined(newValue)) {
-      return;
-    }
-    this.elementTemplate$.next(newValue);
-  }
-
   private processTrackByValueChange(change: ComponentChange<this, TrackByFunction<FlatTreeItem>>): void {
     const newValue: TrackByFunction<FlatTreeItem> | undefined = change?.currentValue;
     if (isNullOrUndefined(newValue)) {
@@ -378,14 +351,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.manipulator.scrollByRoute(newValue);
   }
 
-  private processScrollAnimationIsEnabledValueChanges(change: ComponentChange<this, boolean>): void {
-    const newValue: boolean | undefined = change?.currentValue;
-    if (isNullOrUndefined(newValue)) {
-      return;
-    }
-    this.scrollAnimationIsEnabled$.next(newValue);
-  }
-
   private emitExpandedItemOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
       .pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
@@ -404,18 +369,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   private scrollByIndexOnEmit(): Subscription {
-    return this.manipulator.indexToScrollBy$
-      .pipe(
-        withLatestFrom(
-          this.scrollAnimationIsEnabled$.pipe(
-            map((scrollAnimationIsEnabled: boolean) => (scrollAnimationIsEnabled ? 'smooth' : 'auto'))
-          )
-        )
-      )
-      .subscribe(([targetIndex, scrollBehavior]: [number, ScrollBehavior]) => {
-        this.viewPort.scrollToIndex(targetIndex, scrollBehavior);
-        this.skeletonViewPort.scrollToIndex(targetIndex, scrollBehavior);
-      });
+    return this.manipulator.indexToScrollBy$.subscribe((targetIndex: number) => {
+      this.viewPort.scrollToIndex(targetIndex, this.scrollBehaviour);
+      this.skeletonViewPort.scrollToIndex(targetIndex, this.scrollBehaviour);
+    });
   }
 
   private expandNodeDuringDragging(): Subscription {
@@ -441,7 +398,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         const scrollingSpeed: number = 5;
         const offsetDelta: number = this.scrollDirection === 'up' ? -scrollingSpeed : scrollingSpeed;
         const currentOffset: number = this.viewPort.measureScrollOffset();
-        this.viewPort.scrollToOffset(currentOffset + offsetDelta, this.scrollAnimationIsEnabled ? 'smooth' : 'auto');
+        this.viewPort.scrollToOffset(currentOffset + offsetDelta, this.scrollBehaviour);
       });
   }
 }
