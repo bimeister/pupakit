@@ -32,7 +32,7 @@
           </div>
 
           <ng-container
-            [ngTemplateOutlet]="nodeTemplate$ | async"
+            [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
             [ngTemplateOutletContext]="{
               node: node
             }"
@@ -66,7 +66,7 @@
           </div>
 
           <ng-container
-            [ngTemplateOutlet]="nodeTemplate$ | async"
+            [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
             [ngTemplateOutletContext]="{
               node: node
             }"
@@ -102,7 +102,7 @@
           </div>
 
           <ng-container
-            [ngTemplateOutlet]="nodeTemplate$ | async"
+            [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
             [ngTemplateOutletContext]="{
               node: node
             }"
@@ -133,7 +133,7 @@
     </div>
 
     <ng-container
-      [ngTemplateOutlet]="nodeTemplate$ | async"
+      [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
       [ngTemplateOutletContext]="{ node: draggableNode }"
     ></ng-container>
   </div>
