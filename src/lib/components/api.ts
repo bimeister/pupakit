@@ -35,6 +35,7 @@ export * from './switcher/api';
 export * from './tabs/api';
 export * from './textarea/api';
 export * from './tile/api';
+export * from './time-input/api';
 export * from './tooltip/api';
 export * from './tree/api';
 export * from './vertical-tabs/api';

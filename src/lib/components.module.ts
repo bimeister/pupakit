@@ -38,6 +38,7 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { WasherModule } from './components/washer/washer.module';
+import { TimeInputModule } from './components/time-input/api';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -69,6 +70,7 @@ const EXPORTS: any[] = [
   TabsModule,
   TextareaModule,
   TileModule,
+  TimeInputModule,
   TooltipModule,
   DropdownMenuModule,
   TreeModule,
@@ -84,4 +86,4 @@ const EXPORTS: any[] = [
   exports: [...EXPORTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ComponentsModule {}
+export class ComponentsModule { }
