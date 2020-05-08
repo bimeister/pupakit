@@ -26,6 +26,7 @@ export { SwitcherModule } from './lib/components/switcher/switcher.module';
 export { TabsModule } from './lib/components/tabs/tabs.module';
 export { TextareaModule } from './lib/components/textarea/textarea.module';
 export { TileModule } from './lib/components/tile/tile.module';
+export { TimeInputModule } from './lib/components/time-input/time-input.module';
 export { TooltipModule } from './lib/components/tooltip/tooltip.module';
 export { DropdownMenuModule } from './lib/components/dropdown-menu/dropdown-menu.module';
 export { TreeModule } from './lib/components/tree/tree.module';

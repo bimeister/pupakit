@@ -45,6 +45,7 @@ import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
 import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
 import { SelectorDemoComponent } from './selector-demo/selector-demo.component';
+import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -58,6 +59,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ButtonDemoComponent,
     DropdownDemoComponent,
     TileDemoComponent,
+    TimeInputDemoComponent,
     SpinnerDemoComponent,
     SelectDemoComponent,
     IconButtonDemoComponent,
@@ -155,6 +157,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
         component: TileDemoComponent
       },
       {
+        path: 'time-input',
+        component: TimeInputDemoComponent
+      },
+      {
         path: 'select',
         component: SelectDemoComponent
       },
@@ -206,4 +212,4 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule {}
+export class AppModule { }
