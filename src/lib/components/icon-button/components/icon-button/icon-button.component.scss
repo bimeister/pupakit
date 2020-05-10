@@ -107,3 +107,9 @@
   color: rgba(color(light-rgb), 0.3);
   background: color(main);
 }
+
+.button_disabled-content-opacity:disabled {
+  .button_content-wrapper {
+    opacity: 0.3;
+  }
+}

@@ -21,6 +21,7 @@ export class IconButtonComponent {
   @Input() public isFloat: boolean = false;
   @Input() public fixed: boolean = false;
   @Input() public repeatClick: boolean = false;
+  @Input() public isDisabledContentOpacity: boolean = false;
 
   @Input() public type: ButtonType = 'submit';
 
