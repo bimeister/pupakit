@@ -4,11 +4,14 @@
   [ngClass]="resultClassList"
   [class.button_float]="isFloat"
   [class.button_fixed]="fixed"
+  [class.button_disabled-content-opacity]="isDisabledContentOpacity"
   [attr.disabled]="disabled ? true : null"
   [type]="type"
   (click)="processClickEvent($event)"
   (mousedown)="processMouseDownEvent($event)"
   (mouseup)="processMouseUpEvent($event)"
 >
-  <ng-content></ng-content>
+  <div class="button_content-wrapper">
+    <ng-content></ng-content>
+  </div>
 </button>
