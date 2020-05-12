@@ -3,3 +3,5 @@
  */
 
 export * from './time-input/api';
+export * from './time-input-control/api';
+export * from './time-input-separator/api';

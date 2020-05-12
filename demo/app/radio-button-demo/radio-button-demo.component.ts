@@ -11,7 +11,7 @@ export class RadioButtonDemoComponent {
   public formControl: FormControl = new FormControl(1);
 
   constructor() {
-    this.formControl.disable();
+    // this.formControl.disable();
     // tslint:disable-next-line: no-console
     this.formControl.valueChanges.subscribe(data => console.log(data));
   }
