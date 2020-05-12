@@ -1,0 +1,20 @@
+@import 'functions';
+
+input {
+  width: px(20);
+  border: none;
+  outline: none;
+  padding-top: px(2.5);
+  font-family: inherit;
+  font-size: inherit;
+
+  &::-webkit-inner-spin-button {
+    display: none;
+  }
+
+  &:disabled {
+    background-color: color(grey-apple);
+    color: color(grey-light);
+    pointer-events: none;
+  }
+}

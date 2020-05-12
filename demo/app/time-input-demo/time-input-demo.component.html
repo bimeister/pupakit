@@ -1,3 +1,17 @@
-<p>
-  time-input-demo works!
-</p>
+<h1>Time input</h1>
+<h2>
+  <button (click)="setValue()">set value</button>
+  <button (click)="switchEnabled()">switch enable</button>
+  <button (click)="validate()">validate</button>
+</h2>
+<div>
+  <div>
+    <pupa-time-input *ngFor="let i of [0, 1, 2]" [formControl]="formControl">
+      <pupa-time-input-control [formControl]="hhForm"></pupa-time-input-control>
+      <pupa-time-input-separator>:</pupa-time-input-separator>
+      <pupa-time-input-control [formControl]="mmForm"></pupa-time-input-control>
+      <pupa-time-input-separator>:</pupa-time-input-separator>
+      <pupa-time-input-control [formControl]="ssForm"></pupa-time-input-control>
+    </pupa-time-input>
+  </div>
+</div>

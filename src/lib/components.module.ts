@@ -86,4 +86,4 @@ const EXPORTS: any[] = [
   exports: [...EXPORTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

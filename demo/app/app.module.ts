@@ -212,4 +212,4 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class AppModule { }
+export class AppModule {}
