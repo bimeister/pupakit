@@ -16,6 +16,7 @@ import { DroppableHorizontalPosition } from '../../../../../internal/declaration
 @Component({
   selector: 'pupa-dropdown-menu',
   templateUrl: './dropdown-menu.component.html',
+  styleUrls: ['dropdown-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownMenuComponent implements AfterContentInit {

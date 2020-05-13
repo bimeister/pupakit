@@ -1,6 +1,6 @@
 <ng-container *ngIf="contentVisible$ | async">
   <div #content class="content-wrapper">
-    <div class="content content_open" [class.content_side_left]="isLeftSided">
+    <div class="content content_open">
       <ng-content></ng-content>
     </div>
   </div>

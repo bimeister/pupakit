@@ -1,5 +1,14 @@
 @import 'mixins';
 
+:host {
+  display: flex;
+  flex-direction: row;
+
+  &.left-sided {
+    flex-direction: row-reverse;
+  }
+}
+
 .content-wrapper {
   position: absolute;
 
