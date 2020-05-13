@@ -1,4 +1,11 @@
-import { Component, ContentChildren, QueryList, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ContentChildren,
+  QueryList,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  HostBinding
+} from '@angular/core';
 import { DropdownMenuItemComponent } from '../dropdown-menu-item/dropdown-menu-item.component';
 import { BehaviorSubject, Observable, merge } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
@@ -12,6 +19,7 @@ import { switchMap } from 'rxjs/operators';
 export class DropdownMenuContentComponent implements AfterContentInit {
   public readonly contentVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+  @HostBinding('class.left-sided')
   public isLeftSided: boolean = false;
 
   @ContentChildren(DropdownMenuItemComponent)
