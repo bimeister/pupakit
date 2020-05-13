@@ -115,5 +115,7 @@
 }
 
 .button_content-wrapper {
-  display: contents;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
