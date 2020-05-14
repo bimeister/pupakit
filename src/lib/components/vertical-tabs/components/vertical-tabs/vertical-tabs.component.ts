@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-item.component';
@@ -10,9 +21,14 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalTabsComponent extends TabsContainer<VerticalTabsItemComponent> {
+export class VerticalTabsComponent extends TabsContainer<VerticalTabsItemComponent>
+  implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
   @ContentChildren(VerticalTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
+
+  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {
+    super(changeDetectorRef);
+  }
 }

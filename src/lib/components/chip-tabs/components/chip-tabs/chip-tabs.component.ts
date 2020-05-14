@@ -1,4 +1,14 @@
-import { ChangeDetectionStrategy, Component, ContentChildren, QueryList } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  OnDestroy,
+  OnInit,
+  QueryList
+} from '@angular/core';
 
 import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.component';
@@ -9,9 +19,14 @@ import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.componen
   styleUrls: ['./chip-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsComponent extends TabsContainer<ChipTabsItemComponent> {
+export class ChipTabsComponent extends TabsContainer<ChipTabsItemComponent>
+  implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
   @ContentChildren(ChipTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<ChipTabsItemComponent>;
+
+  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {
+    super(changeDetectorRef);
+  }
 }

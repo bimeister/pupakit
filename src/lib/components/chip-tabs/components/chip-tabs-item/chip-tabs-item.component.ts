@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 
 import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
 
@@ -8,4 +8,8 @@ import { TabsContainerItem } from '../../../../../internal/declarations/classes/
   styleUrls: ['./chip-tabs-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsItemComponent extends TabsContainerItem {}
+export class ChipTabsItemComponent extends TabsContainerItem implements OnInit, OnDestroy {
+  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {
+    super(changeDetectorRef);
+  }
+}
