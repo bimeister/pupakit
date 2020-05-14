@@ -154,10 +154,10 @@
     ora "4.0.3"
     rxjs "6.5.4"
 
-"@angular/animations@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fanimations/-/animations-9.1.2.tgz#01bb52d5a8813701bfacbba99338d88cfc0da9b4"
-  integrity sha512-5UJ8SzCtFj4vZChVsni4K9oa4qE9tQ67bwnP6DKxkLEJKQWWyasYp+2siAi/7zD2ro2XA0qRMYhgQz5Vj6eBoQ==
+"@angular/animations@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fanimations/-/animations-9.1.7.tgz#09bf7c84c234d8b6ecaa101024a3b3e69ab198cd"
+  integrity sha512-1wW8ndGMLDuE2LpTN2RNRz1Dt7JgVBeVmOPMgzoA7g1uuvm+jESTrGG7W3BzLzG0BE2TeXt0fY90o4iU+S2Rmg==
 
 "@angular/cdk@^9.2.3":
   version "9.2.3"
@@ -192,15 +192,15 @@
     universal-analytics "0.4.20"
     uuid "7.0.2"
 
-"@angular/common@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcommon/-/common-9.1.2.tgz#cec9fbfc572bbcf715e994523b04ac48700c1b2c"
-  integrity sha512-MAQW0DGq2NhvJSETLTwuImdzwI+wboG+5Uzgc0L8C/hX7SrEE65Hmz4nIjmGi2CPGLpodfWEcCPlV0R0dHun4A==
+"@angular/common@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcommon/-/common-9.1.7.tgz#79ebbe3c08ced0070314beb10bbccfb8927dfe62"
+  integrity sha512-04ef+J8bnOnjYbdRsm82IdIaaLFZ6QWh4SLtjnYhgCjEe4Stf59g+zRNPMauMFDQYDCp3foPo0djk1CPfEd8AQ==
 
-"@angular/compiler-cli@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcompiler-cli/-/compiler-cli-9.1.2.tgz#2b8de148aadcd58fcd31d0f1ad3b984f412f4c82"
-  integrity sha512-zC/oIuT68vtuiYrgXqWsDNi/0DQ1Ti6J6gMTrXVvZXlEDikEExTAJKrrBV5jo6B0bpUofe/dDcJaKR3Ys3cM3Q==
+"@angular/compiler-cli@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcompiler-cli/-/compiler-cli-9.1.7.tgz#ecd1d47b0368ed21dfcef980b3aaeb37085a3612"
+  integrity sha512-8HT8+UuSohrXlF90eewG2XuhtOEIfJ2UlijnSB10/+ZyroSdTKckoiFSps86nTd/EfrBblqNUMbwjOxIkzac3w==
   dependencies:
     canonical-path "1.0.0"
     chokidar "^3.0.0"
@@ -215,40 +215,40 @@
     sourcemap-codec "^1.4.8"
     yargs "15.3.0"
 
-"@angular/compiler@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcompiler/-/compiler-9.1.2.tgz#52b22120ca3c7d27dccf4239c849158ad64fb435"
-  integrity sha512-82DitvlZA5DoE++qiiJdgx6HE71h96sfLHCjjvYJHApoOcnX+zBZFBrflpbXK9W4YdvydU4Lc1Ql1eleQPeT/g==
+"@angular/compiler@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcompiler/-/compiler-9.1.7.tgz#e094f99f8742994761adeb1fd8090b21d2abff98"
+  integrity sha512-BiHJ3rAd00aJkur7ohnXjqBmz2QkSTAAFWLuBTYuHysxP4zJD54y4uUtsrCUReKL+8dkUv8AcfXBAkCBLvBUYg==
 
-"@angular/core@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcore/-/core-9.1.2.tgz#30970d49dc3b53c0dc68cd75dbc2c96afc7fee62"
-  integrity sha512-nAqRl+5drAnZlBT7AgSo2JJubmPNrGCvhZ83dosPEUqJoLr69/lYipnF/iqKzYn5xo4MM1O27WIhSNDtDjBmzQ==
+"@angular/core@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcore/-/core-9.1.7.tgz#0465c26d9101389602e3ff9e502f83f3655e9fe1"
+  integrity sha512-uJSZ+rdGL47gc3A+Fal1XwJYB4WWpYJrNifvoQ2nOs+X5Qu+j0HN6GXPJb4kixoNzjYCGxmLoirdT3xhNZFcfQ==
 
-"@angular/forms@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fforms/-/forms-9.1.2.tgz#84b7c429fad81c781108fc71d694ae76eab4c808"
-  integrity sha512-/f2WhMiKDo1/RoisTI71Dy4Z4+sAsAuzgIxJEXvgDGSYvzLl9G8erFx4N6be8Cy/xXwErmp3JOwXIAXjzxF8tA==
+"@angular/forms@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fforms/-/forms-9.1.7.tgz#cdefbc7c7093fd37b417975f18b875a798cbd2d9"
+  integrity sha512-/bRs5hSFDUjOrq2vw11HoS25oEu7KYVxPbQiEjeBHJo82yDmSO+1cVukh6ulDi7iv1sJwSzikDtE9+xDx1ocfQ==
 
-"@angular/language-service@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2flanguage-service/-/language-service-9.1.2.tgz#01b6e289c43148378a54a616681f24d9e8b87183"
-  integrity sha512-0BnDIFbIAtFKS/2HDI0efcnW3DSkAAFhUWluBnssvwGzuMHikOKGeamuWM27ki3IzPQKGJ7fGS2fz8A7sMeIYQ==
+"@angular/language-service@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2flanguage-service/-/language-service-9.1.7.tgz#d8d62872b8a7df61e2d0e4f546680f0a5450f6c9"
+  integrity sha512-p4WOZFCn6H5qgII9MbPjSu/AErt0rXpsXlMHC9KJl+JgfPI3YwQuX1dLdt3xTJlxuv8/fY9UbgmPJUqR/txRCg==
 
-"@angular/platform-browser-dynamic@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fplatform-browser-dynamic/-/platform-browser-dynamic-9.1.2.tgz#5587d536184e1c92498d9000475dd8998df1b110"
-  integrity sha512-BWHxy8S71z+NmUQmtR+/Dkohlj3LQIXltOqeVdCSpjV9cultBNN3bE1w0Rjp3BmCRGCIDH7qFlr4U5woHa7ldw==
+"@angular/platform-browser-dynamic@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fplatform-browser-dynamic/-/platform-browser-dynamic-9.1.7.tgz#cf20e8f9ba3512ca906d7f21cf0926f0222a95ad"
+  integrity sha512-DyUDGxp4kF4majcm9COVzu/9wzmgnfj+d6GUEjYkbqSH9QP05LonJ6wHMNxNMN6qMfawdCxDe0TnNDRPmHUj9w==
 
-"@angular/platform-browser@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fplatform-browser/-/platform-browser-9.1.2.tgz#ae52a0a9087e682e62c33722d7d7f81813cf499a"
-  integrity sha512-/3L4DdvnebvaJUurusaq8RJBFfr/SHWG6DMmV1VVpADxe8kjREyN0LdNDSkZgVf/QcUSwNEA6153iwcF92Otew==
+"@angular/platform-browser@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fplatform-browser/-/platform-browser-9.1.7.tgz#47e473660c772f80245bcf872aa7e3df9e875a70"
+  integrity sha512-zwNCnn4Ozax80YrkFcLoQ/7bVR7jPk7+QT++Nf9MmQwsaqa0Ve1IYa6Hg9Y1Kf4wquI9TdxMN17TPKmX8iNIaA==
 
-"@angular/router@~9.1.2":
-  version "9.1.2"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2frouter/-/router-9.1.2.tgz#f23ba191c4407c4bce0b7ea7f7ca5edd47ada010"
-  integrity sha512-csxE4HkuhVR1X932Q3kSDqBoF7Awuq5dsjv0nFk78raiHgG3CNnfMLHt8xD9XtOmR7ZT+D4yh/YmIK6W7J5hbQ==
+"@angular/router@~9.1.7":
+  version "9.1.7"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2frouter/-/router-9.1.7.tgz#ce9af75cec470f69122f2217bd5bdcfac7b74201"
+  integrity sha512-ycrkhkCbfOMCe9PngFjnyk8nH5jt0Kyb2NPtjmaGOtSCuZBZ0kOU0rQGmQnj3d2PiT0Yir59S8eEAf3Fh0iDuw==
 
 "@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
