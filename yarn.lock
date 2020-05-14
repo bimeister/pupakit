@@ -159,10 +159,10 @@
   resolved "http://npm.meistersoft.ru:4873/@angular%2fanimations/-/animations-9.1.2.tgz#01bb52d5a8813701bfacbba99338d88cfc0da9b4"
   integrity sha512-5UJ8SzCtFj4vZChVsni4K9oa4qE9tQ67bwnP6DKxkLEJKQWWyasYp+2siAi/7zD2ro2XA0qRMYhgQz5Vj6eBoQ==
 
-"@angular/cdk@^9.2.1":
-  version "9.2.1"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcdk/-/cdk-9.2.1.tgz#9a590b8d4671fe2fa47648297b5ea372267d238f"
-  integrity sha512-aSG1UNPszkSnpNuDCNd7ZgT29oQ8vqHPmoqjvJI0JkEv3i6uEs5tRuhWl3TK39wDNuwdlq0AY47XTa/0Ppb5RQ==
+"@angular/cdk@^9.2.3":
+  version "9.2.3"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcdk/-/cdk-9.2.3.tgz#e0f7d4eaeca429346e15bd258966fbb5a5f4ed0b"
+  integrity sha512-tQr/yt8GNGsZ/DTT+PMq7XdRmL56hwVCyf8F12JQAawutSLfTfMb+S1lpN7L/0Pb/L5JBuCfG2HmXK7vHo02gw==
   optionalDependencies:
     parse5 "^5.0.0"
 
