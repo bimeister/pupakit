@@ -1,4 +1,12 @@
-import { Attribute, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  Attribute,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
 import { VertiacalTabsKind } from '../../../../../internal/declarations/types/vertical-tabs-kind.type';
@@ -10,8 +18,11 @@ import { VertiacalTabsKind } from '../../../../../internal/declarations/types/ve
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalTabsItemComponent extends TabsContainerItem {
-  constructor(@Attribute('kind') public readonly kind: VertiacalTabsKind = 'rounded') {
-    super();
+export class VerticalTabsItemComponent extends TabsContainerItem implements OnInit, OnDestroy {
+  constructor(
+    @Attribute('kind') public readonly kind: VertiacalTabsKind = 'rounded',
+    protected readonly changeDetectorRef: ChangeDetectorRef
+  ) {
+    super(changeDetectorRef);
   }
 }

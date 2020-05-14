@@ -1,5 +1,15 @@
-import { AfterContentChecked, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
-import { BehaviorSubject, forkJoin, merge, Observable, of, Subscription } from 'rxjs';
+import {
+  AfterContentChecked,
+  AfterContentInit,
+  ChangeDetectorRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  QueryList
+} from '@angular/core';
+import { combineLatest, merge, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -9,7 +19,6 @@ import {
   shareReplay,
   startWith,
   switchMap,
-  switchMapTo,
   take,
   tap,
   withLatestFrom
@@ -23,17 +32,18 @@ interface TabMarker {
   isSelected: boolean;
 }
 
-export abstract class TabsContainer<T extends TabsContainerItem> implements AfterContentChecked, OnDestroy {
+export abstract class TabsContainer<T extends TabsContainerItem>
+  implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
   protected abstract readonly tabsList: QueryList<T>;
-  @Input() public isAutoSelectionDisabled: boolean = false;
+  @Input() public isAutoSelectionEnabled: boolean = false;
   @Input() public isMultiSelectionEnabled: boolean = false;
+
+  private readonly subscription: Subscription = new Subscription();
 
   @Output() public readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Output() public readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
 
-  private readonly subscription: Subscription = new Subscription();
-
-  private readonly tabs$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+  private readonly tabs$: ReplaySubject<T[]> = new ReplaySubject<T[]>(0);
 
   private readonly lastClickedTab$: Observable<T> = this.tabs$.pipe(
     switchMap((tabs: T[]) => {
@@ -48,13 +58,14 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
 
   private readonly selectedTabsIndexes$: Observable<number[]> = this.tabs$.pipe(
     switchMap((tabs: T[]) => {
-      return forkJoin(
-        tabs.map((tab: T, tabIndex: number) =>
-          tab.isSelected$.pipe(
-            take(1),
-            map((isSelected: boolean) => ({ tabIndex, isSelected }))
-          )
-        )
+      return combineLatest(
+        tabs.map((tab: T, tabIndex: number) => {
+          return tab.isSelected$.pipe(
+            map((isSelected: boolean) => {
+              return { tabIndex, isSelected };
+            })
+          );
+        })
       );
     }),
     map((tabsMarkers: TabMarker[]) =>
@@ -66,7 +77,9 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
           return marker.tabIndex;
         })
     ),
-    filter((indexes: number[]) => Array.isArray(indexes) && !Object.is(indexes.length, 0))
+
+    filter((indexes: number[]) => Array.isArray(indexes) && !Object.is(indexes.length, 0)),
+    shareReplay(1)
   );
 
   private readonly selectedTabs$: Observable<T[]> = this.selectedTabsIndexes$.pipe(
@@ -75,18 +88,28 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
     map(([indexes, tabs]: [number[], T[]]) => indexes.map((index: number) => tabs[index]))
   );
 
-  private readonly someTabWasSelected$: Observable<boolean> = merge(
-    of(false),
-    this.selectedTabsIndexes$.pipe(mapTo(true))
-  ).pipe(distinctUntilChanged(), shareReplay(1));
+  private readonly someTabWasSelected$: Observable<boolean> = this.selectedTabsIndexes$.pipe(
+    mapTo(true),
+    startWith(false),
+    distinctUntilChanged(),
+    shareReplay(1)
+  );
 
-  constructor() {
-    this.subscription.add(this.toggleTabSelectionOnClick()).add(this.emitEventOnSelectedTabsIndexesUpdate());
+  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {}
+
+  public ngOnInit(): void {
+    this.subscription
+      .add(this.toggleTabSelectionOnClick())
+      .add(this.emitEventOnSelectedTabsIndexesUpdate())
+      .add(this.detectChangesOnTabsSelection());
+  }
+
+  public ngAfterContentInit(): void {
+    this.subscription.add(this.updateTabsOnTabsListChanges()).add(this.selectFirstTabIfNoneIsSelected());
   }
 
   public ngAfterContentChecked(): void {
-    this.updateTabsClickTriggers();
-    this.selectFirstIfNoneIsSelected();
+    this.tabsList.notifyOnChanges();
   }
 
   public ngOnDestroy(): void {
@@ -104,25 +127,8 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
       .subscribe((targetTab: T) => targetTab.processTabClick());
   }
 
-  private updateTabsClickTriggers(): void {
-    const tabs: T[] = this.tabsList.toArray();
-    this.tabs$.next(tabs);
-  }
-
-  private selectFirstIfNoneIsSelected(): void {
-    this.someTabWasSelected$
-      .pipe(
-        take(1),
-        filter(() => !this.isAutoSelectionDisabled),
-        filter((wasSelected: boolean) => !wasSelected),
-        switchMapTo(this.tabs$.pipe(take(1))),
-        map((tabs: T[]) => tabs.filter((tab: T) => !tab.isAutoSelectionDisabled)),
-        pluck(0),
-        filter((targetTab: T) => !isNullOrUndefined(targetTab))
-      )
-      .subscribe((targetTab: T) => {
-        targetTab.select();
-      });
+  private triggerChangeDetection(): void {
+    this.changeDetectorRef.markForCheck();
   }
 
   private toggleTabSelectionOnClick(): Subscription {
@@ -143,7 +149,56 @@ export abstract class TabsContainer<T extends TabsContainerItem> implements Afte
       });
   }
 
+  private updateTabsOnTabsListChanges(): Subscription {
+    return this.tabsList.changes
+      .pipe(
+        distinctUntilChanged(
+          (previousValue: QueryList<T>, currentValue: QueryList<T>) =>
+            previousValue?.toString() === currentValue?.toString()
+        )
+      )
+      .subscribe((tabsList: QueryList<T>) => {
+        const tabs: T[] = tabsList.toArray();
+        this.tabs$.next(tabs);
+        this.triggerChangeDetection();
+      });
+  }
+
+  private selectFirstTabIfNoneIsSelected(): Subscription {
+    return this.tabsList.changes
+      .pipe(
+        distinctUntilChanged(
+          (previousValue: QueryList<T>, currentValue: QueryList<T>) =>
+            previousValue?.toString() === currentValue?.toString()
+        ),
+        map((queryList: QueryList<T>) => queryList?.toArray()),
+        filter((tabs: T[]) => Array.isArray(tabs)),
+        take(1),
+        filter(() => this.isAutoSelectionEnabled),
+        pluck(0),
+        withLatestFrom(this.someTabWasSelected$)
+      )
+      .subscribe(([tab, someTabWasSelected]: [T, boolean]) => {
+        if (someTabWasSelected) {
+          return;
+        }
+        tab.select();
+      });
+  }
+
   private emitEventOnSelectedTabsIndexesUpdate(): Subscription {
     return this.selectedTabsIndexes$.subscribe((indexes: number[]) => this.selectedTabIndexes.emit(indexes));
+  }
+
+  private detectChangesOnTabsSelection(): Subscription {
+    return this.selectedTabsIndexes$
+      .pipe(
+        switchMap(() => {
+          return timer().pipe(take(1));
+        })
+      )
+      .subscribe(() => {
+        this.triggerChangeDetection();
+      });
   }
 }
