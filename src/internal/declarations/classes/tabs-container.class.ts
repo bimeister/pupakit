@@ -77,7 +77,9 @@ export abstract class TabsContainer<T extends TabsContainerItem>
           return marker.tabIndex;
         })
     ),
-
+    distinctUntilChanged(
+      (previousValue: number[], currentValue: number[]) => previousValue?.join('') === currentValue?.join('')
+    ),
     filter((indexes: number[]) => Array.isArray(indexes) && !Object.is(indexes.length, 0)),
     shareReplay(1)
   );
