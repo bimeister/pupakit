@@ -1,84 +1,96 @@
-import { AfterContentInit, Component, ContentChildren, OnInit, QueryList } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import {
+  AfterViewInit,
+  Attribute,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewEncapsulation
+} from '@angular/core';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { Subscription, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
-import { RadioButtonComponent } from '../../../radio-button/components/radio-button/radio-button.component';
+import { VOID } from '../../../../../internal/constants/void.const';
+import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
-type VoidFn = () => void;
-type ChangeFn<T> = (value: T) => void;
+type OnChangeCallback<T> = (value: T) => void;
+type OnTouchedCallback = VoidFunction;
 
 @Component({
   selector: 'pupa-radio-group',
-  styles: [
-    `
-      :host {
-        display: block;
-      }
-    `
-  ],
-  template: '<ng-content></ng-content>',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: RadioGroupComponent,
-      multi: true
-    }
-  ]
+  templateUrl: './radio-group.component.html',
+  styleUrls: ['./radio-group.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RadioGroupComponent<T> implements OnInit, AfterContentInit, ControlValueAccessor {
-  private currentIndex: number;
-  @ContentChildren(RadioButtonComponent)
-  private readonly radioButtons: QueryList<RadioButtonComponent<T>>;
-  private readonly selectedRadioValue: BehaviorSubject<T> = new BehaviorSubject<T>(null);
+export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+  private readonly subscription: Subscription = new Subscription();
 
-  private static uniqueIndex: number = 0;
+  public readonly internalControl: FormControl = new FormControl();
+  public readonly direction: RadioGroupDirection;
 
-  public onChange: ChangeFn<T> = (_: T): void => null;
-  public onTouched: VoidFn = (): void => null;
+  constructor(
+    @Attribute('direction') direction: RadioGroupDirection = 'column',
+    private readonly ngControl: NgControl,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {
+    if (isNullOrUndefined(ngControl)) {
+      throw new Error('NgControl passed to RadioGroupComponent is undefined');
+    }
+    this.ngControl.valueAccessor = this;
+
+    this.direction = direction;
+  }
 
   public ngOnInit(): void {
-    this.currentIndex = RadioGroupComponent.uniqueIndex++;
+    this.subscription.add(this.triggerCallBackOnChange());
   }
 
-  public ngAfterContentInit(): void {
-    this.selectedRadioValue.subscribe(selectedValue => {
-      this.radioButtons.forEach(item => {
-        item.checked = item.value === selectedValue;
-      });
-    });
-
-    this.initializeRadioGroup();
+  public ngAfterViewInit(): void {
+    this.writeValue(this.ngControl.value);
   }
 
-  public registerOnChange(fn: ChangeFn<T>): void {
-    this.onChange = fn;
-  }
-
-  public registerOnTouched(fn: VoidFn): void {
-    this.onTouched = fn;
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public writeValue(value: T): void {
-    this.selectedRadioValue.next(value);
-  }
-
-  private initializeRadioGroup(): void {
-    let groupHasSelectedButton: boolean = false;
-
-    this.radioButtons.forEach(item => {
-      item.registerOnChange(checked => {
-        if (checked) {
-          this.writeValue(item.value);
-          this.onChange(item.value);
-        }
-      });
-
-      item.name = this.currentIndex.toString();
-      groupHasSelectedButton = groupHasSelectedButton || item.checked;
+    this.internalControl.setValue(value, {
+      emitEvent: true
     });
 
-    if (!groupHasSelectedButton && this.radioButtons.length > 0) {
-      this.writeValue(this.radioButtons.first.value);
+    this.triggerChangeDetector();
+  }
+
+  public registerOnChange(onChange: OnChangeCallback<T>): void {
+    this.onChange = onChange;
+  }
+  public registerOnTouched(onTouched: OnTouchedCallback): void {
+    this.onTouched = onTouched;
+  }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.internalControl.disable();
+      return;
     }
+    this.internalControl.enable();
+  }
+
+  public onTouched: OnTouchedCallback = () => VOID;
+  private onChange: OnChangeCallback<T> = () => VOID;
+
+  private triggerCallBackOnChange(): Subscription {
+    return this.internalControl.valueChanges.pipe().subscribe((value: T) => this.onChange(value));
+  }
+
+  private triggerChangeDetector(): void {
+    timer()
+      .pipe(take(1))
+      .subscribe(() => {
+        this.changeDetectorRef.markForCheck();
+      });
   }
 }

@@ -14,6 +14,7 @@ import { DaySelectorModule } from './components/day-selector/day-selector.module
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerModule } from './components/drawer/drawer.module';
+import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
@@ -22,7 +23,6 @@ import { InputModule } from './components/input/input.module';
 import { LayoutModule } from './components/layout/layout.module';
 import { ModalModule } from './components/modal/modal.module';
 import { MultiselectionListModule } from './components/multiselection-list/multiselection-list.module';
-import { RadioButtonModule } from './components/radio-button/radio-button.module';
 import { RadioGroupModule } from './components/radio-group/radio-group.module';
 import { RatingModule } from './components/rating/rating.module';
 import { SearchFieldModule } from './components/search-field/search-field.module';
@@ -38,7 +38,6 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { WasherModule } from './components/washer/washer.module';
-import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -60,7 +59,6 @@ const EXPORTS: any[] = [
   InputModule,
   LayoutModule,
   ModalModule,
-  RadioButtonModule,
   RadioGroupModule,
   RatingModule,
   SearchFieldModule,

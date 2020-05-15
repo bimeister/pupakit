@@ -16,7 +16,6 @@ export { IconButtonModule } from './lib/components/icon-button/icon-button.modul
 export { InputModule } from './lib/components/input/input.module';
 export { LayoutModule } from './lib/components/layout/layout.module';
 export { ModalModule } from './lib/components/modal/modal.module';
-export { RadioButtonModule } from './lib/components/radio-button/radio-button.module';
 export { RadioGroupModule } from './lib/components/radio-group/radio-group.module';
 export { RatingModule } from './lib/components/rating/rating.module';
 export { SearchFieldModule } from './lib/components/search-field/search-field.module';
