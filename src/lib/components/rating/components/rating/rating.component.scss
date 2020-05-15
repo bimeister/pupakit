@@ -18,4 +18,12 @@
     filter: grayscale(0.1);
     opacity: 0.85;
   }
+
+  &.medium {
+    font-size: rems(2.5);
+  }
+
+  &.small {
+    font-size: rems(2);
+  }
 }
