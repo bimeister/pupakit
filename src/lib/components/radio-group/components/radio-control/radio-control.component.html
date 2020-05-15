@@ -1,0 +1,8 @@
+<section
+  class="radio-control"
+  [class.radio-control_disabled]="isDisabled$ | async"
+  (mouseover)="markAsHovered()"
+  (mouseout)="markAsBlured()"
+>
+  <ng-content></ng-content>
+</section>

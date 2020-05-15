@@ -24,7 +24,6 @@ export * from './input/api';
 export * from './layout/api';
 export * from './modal/api';
 export * from './multiselection-list/api';
-export * from './radio-button/api';
 export * from './radio-group/api';
 export * from './rating/api';
 export * from './search-field/api';
