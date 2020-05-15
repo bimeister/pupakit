@@ -78,7 +78,7 @@ export abstract class TabsContainer<T extends TabsContainerItem>
         })
     ),
     distinctUntilChanged(
-      (previousValue: number[], currentValue: number[]) => previousValue?.join('') === currentValue?.join('')
+      (previousValue: number[], currentValue: number[]) => previousValue?.join(' ') === currentValue?.join(' ')
     ),
     filter((indexes: number[]) => Array.isArray(indexes) && !Object.is(indexes.length, 0)),
     shareReplay(1)
