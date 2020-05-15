@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
+type StarSize = 'large' | 'medium' | 'small';
+
 @Component({
   selector: 'pupa-rating',
   templateUrl: './rating.component.html',
@@ -41,6 +43,7 @@ export class RatingComponent {
   private _numberOfStars: number = 5;
   public stars: any[];
   @Input() public disabled: boolean;
+  @Input() public size: StarSize = 'large';
   @Output() public change: EventEmitter<number> = new EventEmitter<number>();
   private _value: number = 0;
 
