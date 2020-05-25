@@ -64,7 +64,6 @@ export class ButtonComponent {
   public onClickInternalElement(event: Event): void {
     if (this.disabled) {
       event.stopPropagation();
-      return;
     }
   }
 
