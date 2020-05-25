@@ -11,7 +11,8 @@
     [disabled]="combo.disabled"
     [loader]="isLoaderVisible$ | async"
     title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
-    (onclick)="showLoader()"
+    (click)="testDefaultClick($event)"
+    (onclick)="showLoader(); testOnClick($event)"
   >
     Sample button
   </pupa-button>

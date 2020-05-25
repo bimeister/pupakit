@@ -39,4 +39,12 @@ export class ButtonDemoComponent {
       this.isLoaderVisible$.next(false);
     }, delay);
   }
+  public testOnClick(event: Event): void {
+    // tslint:disable-next-line: no-console
+    console.log('demo - on click', event);
+  }
+  public testDefaultClick(event: Event): void {
+    // tslint:disable-next-line: no-console
+    console.log('demo - default click', event);
+  }
 }
