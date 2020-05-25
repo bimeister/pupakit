@@ -61,6 +61,12 @@ export class ButtonComponent {
     }
     clearTimeout(this.timerRepeatClick);
   }
+  public onClickInternalElement(event: Event): void {
+    if (this.disabled) {
+      event.stopPropagation();
+      return;
+    }
+  }
 
   private newRepeatClick(event: MouseEvent): void {
     this.timerRepeatClick = setTimeout(() => {
