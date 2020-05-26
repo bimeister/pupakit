@@ -1,4 +1,12 @@
-import { Component, ElementRef, HostListener, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  TemplateRef,
+  ChangeDetectionStrategy,
+  OnDestroy
+} from '@angular/core';
 import { TooltipService } from '../../../layout/services/tooltip.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -8,8 +16,9 @@ import { filter } from 'rxjs/operators';
   templateUrl: './tooltip.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TooltipComponent {
+export class TooltipComponent implements OnDestroy {
   @Input() public closeOnContentClick: boolean = true;
+  @Input() public disabled: boolean = false;
 
   public triggerRef: ElementRef<HTMLElement>;
   public contentRef: TemplateRef<HTMLElement>;
@@ -20,6 +29,10 @@ export class TooltipComponent {
 
   constructor(private readonly tooltipService: TooltipService) {
     this.subscription.add(this.listenOpenCloseTooltipState());
+  }
+
+  public ngOnDestroy(): void {
+    this.tooltipService.close();
   }
 
   public open(): void {
@@ -33,6 +46,9 @@ export class TooltipComponent {
   @HostListener('click')
   @HostListener('mouseenter')
   public clickOpen(): void {
+    if (this.disabled) {
+      return;
+    }
     this.open();
     this.isActive$.next(true);
   }
