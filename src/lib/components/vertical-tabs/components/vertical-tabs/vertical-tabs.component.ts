@@ -1,12 +1,9 @@
 import {
-  AfterContentChecked,
-  AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ContentChildren,
   OnDestroy,
-  OnInit,
   QueryList,
   ViewEncapsulation
 } from '@angular/core';
@@ -22,13 +19,13 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class VerticalTabsComponent extends TabsContainer<VerticalTabsItemComponent>
-  implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
+  implements AfterViewInit, OnDestroy {
   @ContentChildren(VerticalTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
 
-  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {
-    super(changeDetectorRef);
+  constructor() {
+    super();
   }
 }
