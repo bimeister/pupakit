@@ -38,7 +38,7 @@
     "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\""
   },
   "dependencies": {
-    "@angular/cdk": "^9.2.3",
+    "@angular/cdk": "^9.2.4",
     "ag-grid-angular": "^22.1.1",
     "ag-grid-community": "^22.1.1",
     "uuid": "^8.0.0",
