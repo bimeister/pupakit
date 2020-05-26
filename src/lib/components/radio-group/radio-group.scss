@@ -1,5 +1,5 @@
-@import 'themes/functions';
-@import 'functions';
+@import './../../../styles/functions.scss';
+@import './../../../styles/themes/functions.scss';
 
 .radio-group {
   display: flex;
