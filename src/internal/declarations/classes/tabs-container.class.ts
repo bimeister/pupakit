@@ -1,206 +1,74 @@
-import {
-  AfterContentChecked,
-  AfterContentInit,
-  ChangeDetectorRef,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-  QueryList
-} from '@angular/core';
-import { combineLatest, merge, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  mapTo,
-  pluck,
-  shareReplay,
-  startWith,
-  switchMap,
-  take,
-  tap,
-  withLatestFrom
-} from 'rxjs/operators';
+import { AfterViewInit, EventEmitter, Input, OnDestroy, Output, QueryList } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
-import { TabsContainerItem } from './tabs-container-item.class';
-
-interface TabMarker {
-  tabIndex: number;
-  isSelected: boolean;
-}
-
-export abstract class TabsContainer<T extends TabsContainerItem>
-  implements OnInit, AfterContentInit, AfterContentChecked, OnDestroy {
+export abstract class TabsContainer<T> implements AfterViewInit, OnDestroy {
   protected abstract readonly tabsList: QueryList<T>;
-  @Input() public isAutoSelectionEnabled: boolean = false;
-  @Input() public isMultiSelectionEnabled: boolean = false;
 
   private readonly subscription: Subscription = new Subscription();
+
+  public readonly selectedTabs$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+
+  @Input() public isMultiSelectionEnabled: boolean = false;
 
   @Output() public readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Output() public readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
 
-  private readonly tabs$: ReplaySubject<T[]> = new ReplaySubject<T[]>(0);
-
-  private readonly lastClickedTab$: Observable<T> = this.tabs$.pipe(
-    switchMap((tabs: T[]) => {
-      return merge(
-        ...tabs.map((tab: T, tabIndex: number) =>
-          tab.clicked$.pipe(tap(() => this.latestClickedTabIndex.emit(tabIndex)))
-        )
-      );
-    }),
-    shareReplay(1)
-  );
-
-  private readonly selectedTabsIndexes$: Observable<number[]> = this.tabs$.pipe(
-    switchMap((tabs: T[]) => {
-      return combineLatest(
-        tabs.map((tab: T, tabIndex: number) => {
-          return tab.isSelected$.pipe(
-            map((isSelected: boolean) => {
-              return { tabIndex, isSelected };
-            })
-          );
-        })
-      );
-    }),
-    map((tabsMarkers: TabMarker[]) =>
-      tabsMarkers
-        .filter((marker: TabMarker) => {
-          return marker.isSelected;
-        })
-        .map((marker: TabMarker) => {
-          return marker.tabIndex;
-        })
-    ),
-    distinctUntilChanged(
-      (previousValue: number[], currentValue: number[]) => previousValue?.join(' ') === currentValue?.join(' ')
-    ),
-    filter((indexes: number[]) => Array.isArray(indexes) && !Object.is(indexes.length, 0)),
-    shareReplay(1)
-  );
-
-  private readonly selectedTabs$: Observable<T[]> = this.selectedTabsIndexes$.pipe(
-    startWith([]),
-    withLatestFrom(this.tabs$),
-    map(([indexes, tabs]: [number[], T[]]) => indexes.map((index: number) => tabs[index]))
-  );
-
-  private readonly someTabWasSelected$: Observable<boolean> = this.selectedTabsIndexes$.pipe(
-    mapTo(true),
-    startWith(false),
-    distinctUntilChanged(),
-    shareReplay(1)
-  );
-
-  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {}
-
-  public ngOnInit(): void {
-    this.subscription
-      .add(this.toggleTabSelectionOnClick())
-      .add(this.emitEventOnSelectedTabsIndexesUpdate())
-      .add(this.detectChangesOnTabsSelection());
-  }
-
-  public ngAfterContentInit(): void {
-    this.subscription.add(this.updateTabsOnTabsListChanges()).add(this.selectFirstTabIfNoneIsSelected());
-  }
-
-  public ngAfterContentChecked(): void {
-    this.tabsList.notifyOnChanges();
+  public ngAfterViewInit(): void {
+    this.subscription.add(this.emitSelectedTabIndexesBySelectedTabs());
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  public selectTabByIndex(tabIndex: number): void {
-    this.tabs$
+  public markTabAsClicked(tab: T): void {
+    const tabs: T[] = this.tabsList.toArray();
+    const index: number = tabs.indexOf(tab);
+    this.latestClickedTabIndex.emit(index);
+  }
+
+  public selectTabByIndex(index: number): void {
+    const tabs: T[] = this.tabsList.toArray();
+    this.selectTab(tabs[index]);
+  }
+
+  public selectTab(tabToSelect: T): void {
+    this.selectedTabs$
       .pipe(
         take(1),
-        filter((tabs: T[]) => Array.isArray(tabs)),
-        pluck(tabIndex),
-        filter((targetTab: T) => !isNullOrUndefined(targetTab))
-      )
-      .subscribe((targetTab: T) => targetTab.processTabClick());
-  }
-
-  private triggerChangeDetection(): void {
-    this.changeDetectorRef.markForCheck();
-  }
-
-  private toggleTabSelectionOnClick(): Subscription {
-    return this.lastClickedTab$
-      .pipe(
-        filter((clickedTab: T) => !isNullOrUndefined(clickedTab)),
-        tap((clickedTab: T) => (this.isMultiSelectionEnabled ? clickedTab.toggleSelection() : clickedTab.select())),
-        withLatestFrom(this.selectedTabs$),
-        map(([clickedTab, selectedTabs]: [T, T[]]) => {
+        map((selectedTabs: T[]) => {
           if (this.isMultiSelectionEnabled) {
-            return [];
+            const tabsSet: Set<T> = new Set<T>(selectedTabs);
+            tabsSet.add(tabToSelect);
+            return tabsSet.values();
           }
-          return selectedTabs.filter((tab: T) => tab.id !== clickedTab.id);
+          return [tabToSelect];
         })
       )
-      .subscribe((tabsToDeselect: T[]) => {
-        tabsToDeselect.forEach((tab: T) => tab.deselect());
-      });
+      .subscribe((selectedTabs: IterableIterator<T>) => this.selectedTabs$.next([...selectedTabs]));
   }
 
-  private updateTabsOnTabsListChanges(): Subscription {
-    return this.tabsList.changes
+  public deselectTab(tabToDeselect: T): void {
+    this.selectedTabs$
       .pipe(
-        distinctUntilChanged(
-          (previousValue: QueryList<T>, currentValue: QueryList<T>) =>
-            previousValue?.toString() === currentValue?.toString()
-        )
-      )
-      .subscribe((tabsList: QueryList<T>) => {
-        const tabs: T[] = tabsList.toArray();
-        this.tabs$.next(tabs);
-        this.triggerChangeDetection();
-      });
-  }
-
-  private selectFirstTabIfNoneIsSelected(): Subscription {
-    return this.tabsList.changes
-      .pipe(
-        distinctUntilChanged(
-          (previousValue: QueryList<T>, currentValue: QueryList<T>) =>
-            previousValue?.toString() === currentValue?.toString()
-        ),
-        map((queryList: QueryList<T>) => queryList?.toArray()),
-        filter((tabs: T[]) => Array.isArray(tabs)),
         take(1),
-        filter(() => this.isAutoSelectionEnabled),
-        pluck(0),
-        withLatestFrom(this.someTabWasSelected$)
-      )
-      .subscribe(([tab, someTabWasSelected]: [T, boolean]) => {
-        if (someTabWasSelected) {
-          return;
-        }
-        tab.select();
-      });
-  }
-
-  private emitEventOnSelectedTabsIndexesUpdate(): Subscription {
-    return this.selectedTabsIndexes$.subscribe((indexes: number[]) => this.selectedTabIndexes.emit(indexes));
-  }
-
-  private detectChangesOnTabsSelection(): Subscription {
-    return this.selectedTabsIndexes$
-      .pipe(
-        switchMap(() => {
-          return timer().pipe(take(1));
+        map((selectedTabs: T[]) => {
+          const tabsSet: Set<T> = new Set<T>(selectedTabs);
+          tabsSet.delete(tabToDeselect);
+          return tabsSet.values();
         })
       )
-      .subscribe(() => {
-        this.triggerChangeDetection();
-      });
+      .subscribe((selectedTabs: IterableIterator<T>) => this.selectedTabs$.next([...selectedTabs]));
+  }
+
+  private emitSelectedTabIndexesBySelectedTabs(): Subscription {
+    return this.selectedTabs$.subscribe((selectedTabs: T[]) => {
+      const tabs: T[] = this.tabsList.toArray();
+      const indexByTab: Map<T, number> = new Map<T, number>(tabs.map((tab: T, index: number) => [tab, index]));
+
+      const selectedTabIndexes: number[] = selectedTabs.map((tab: T) => indexByTab.get(tab));
+      this.selectedTabIndexes.emit(selectedTabIndexes);
+    });
   }
 }

@@ -1,42 +1,40 @@
-import { ChangeDetectorRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { v4 as uuid } from 'uuid';
+import { HostListener, Input, OnChanges } from '@angular/core';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 
-import { Uuid } from '../types/uuid.type';
+import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
+import { ComponentChange } from '../interfaces/component-change.interface';
+import { ComponentChanges } from '../interfaces/component-changes.interface';
+import { TabsContainer } from './tabs-container.class';
 
-export abstract class TabsContainerItem implements OnInit, OnDestroy {
-  private readonly subscription: Subscription = new Subscription();
-
-  @Input() public isAutoSelectionDisabled: boolean = false;
+export abstract class TabsContainerItem<T> implements OnChanges {
   @Input() public isVisible: boolean = true;
+  @Input() public isActive: boolean = false;
 
-  public readonly clicked$: Subject<this> = new Subject<this>();
-  public readonly isSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly selectedTabs$: Observable<ThisType<T>[]> = this.tabsContainer.selectedTabs$;
+  public readonly isSelected$: Observable<boolean> = this.selectedTabs$.pipe(
+    map((tabs: ThisType<T>[]) => tabs.includes(this)),
+    distinctUntilChanged()
+  );
 
-  public readonly id: Uuid = uuid();
+  constructor(protected readonly tabsContainer: TabsContainer<ThisType<T>>) {}
 
-  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {}
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processIsActiveValueChanges(changes?.isActive);
+  }
 
   @HostListener('click')
   public processTabClick(): void {
-    this.clicked$.next(this);
-  }
-
-  public ngOnInit(): void {
-    this.subscription.add(this.triggerChangeDetectorOnSelection());
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.toggleSelection();
+    this.tabsContainer.markTabAsClicked(this);
   }
 
   public deselect(): void {
-    this.isSelected$.next(false);
+    this.tabsContainer.deselectTab(this);
   }
 
   public select(): void {
-    this.isSelected$.next(true);
+    this.tabsContainer.selectTab(this);
   }
 
   public toggleSelection(): void {
@@ -45,9 +43,12 @@ export abstract class TabsContainerItem implements OnInit, OnDestroy {
     });
   }
 
-  private triggerChangeDetectorOnSelection(): Subscription {
-    return this.isSelected$.subscribe(() => {
-      this.changeDetectorRef.markForCheck();
-    });
+  private processIsActiveValueChanges(change: ComponentChange<this, boolean>): void {
+    const newState: boolean = change?.currentValue;
+    if (isNullOrUndefined(newState)) {
+      return;
+    }
+
+    newState ? this.select() : this.deselect();
   }
 }
