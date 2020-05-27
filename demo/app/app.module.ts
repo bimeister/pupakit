@@ -22,6 +22,7 @@ import { DraggableDemoComponent } from './draggable-demo/draggable-demo.componen
 import { DraggableListDemoComponent } from './draggable-list-demo/draggable-demo.component';
 import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
+import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
@@ -35,17 +36,17 @@ import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
+import { SelectMultipleDemoComponent } from './select-multiple-demo/select-multiple-demo.component';
+import { SelectorDemoComponent } from './selector-demo/selector-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
 import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
+import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
-import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
-import { SelectorDemoComponent } from './selector-demo/selector-demo.component';
-import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -90,7 +91,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TooltipDemoComponent,
     DraggableListDemoComponent,
     DropdownMenuDemoComponent,
-    SelectorDemoComponent
+    SelectorDemoComponent,
+    SelectMultipleDemoComponent
   ],
   imports: [
     BrowserModule,
@@ -163,6 +165,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'select',
         component: SelectDemoComponent
+      },
+      {
+        path: 'select-multiple',
+        component: SelectMultipleDemoComponent
       },
       {
         path: 'switcher',

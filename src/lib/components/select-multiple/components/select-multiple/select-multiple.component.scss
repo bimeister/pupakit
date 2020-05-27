@@ -1,0 +1,106 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: px(213);
+}
+
+.select-multiple {
+  background-color: color(white);
+  width: 100%;
+  height: px(34);
+  box-sizing: border-box;
+  border-radius: rems(0.5);
+  padding: rems(0.25);
+  border: px(1) solid color(grey-apple);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.placeholder {
+  color: color(grey-ivory);
+}
+
+.selected-options {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin-right: rems(0.25);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.selected-options-other {
+  flex-shrink: 0;
+  background-color: color(white);
+  position: relative;
+}
+
+.other-icon {
+  color: color(grey-ivory);
+  position: absolute;
+  top: 50%;
+  right: px(4);
+  margin-top: px(-8);
+  z-index: 0;
+}
+
+.overflow-selected-options-count {
+  visibility: hidden;
+  position: relative;
+  z-index: 1;
+
+  &.is-visible {
+    visibility: visible;
+  }
+}
+
+.select-multiple-options {
+  display: block;
+  min-width: px(213);
+}
+
+.selected-option {
+  margin-right: px(2);
+}
+
+.select-option {
+  width: 100%;
+  box-sizing: border-box;
+  padding: px(5) px(7) px(5) px(11);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+
+  .select-option__caption {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .select-option__checkmark {
+    flex-shrink: 0;
+    font-size: px(13);
+    color: color(accent);
+    display: none;
+  }
+
+  &.is-selected {
+    .select-option__checkmark {
+      display: block;
+    }
+  }
+
+  &:hover {
+    background-color: color(accent);
+    color: color(white);
+
+    .select-option__checkmark {
+      color: color(white);
+    }
+  }
+}
