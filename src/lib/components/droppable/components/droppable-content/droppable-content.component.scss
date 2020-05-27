@@ -2,9 +2,6 @@
 @import 'functions';
 
 .droppable-content {
-  position: absolute;
-  top: 0;
-  left: 0;
   padding: rems(0.25) 0;
   border-radius: rems(0.25);
   max-width: px(500);
@@ -12,13 +9,4 @@
   overflow: auto;
   box-shadow: variable(box-shadow_hover);
   background: color(white);
-  transition: none;
-  pointer-events: all;
-
-  &_open {
-    opacity: 1;
-    pointer-events: all;
-    transition: opacity 0.15s, transform 0.15s;
-    transform: translateY(0);
-  }
 }

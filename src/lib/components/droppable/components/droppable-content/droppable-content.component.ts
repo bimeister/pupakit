@@ -1,17 +1,20 @@
-import { AfterViewInit, Component, Host, TemplateRef, ViewChild } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { DroppableComponent } from '../droppable/droppable.component';
+import { DroppableContent } from '../../../../../internal/declarations/classes/droppable-content.class';
 
 @Component({
   selector: 'pupa-droppable-content',
-  templateUrl: './droppable-content.component.html'
+  styleUrls: ['./droppable-content.component.scss'],
+  templateUrl: './droppable-content.component.html',
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('openClose', [
+      state('open', style({ transform: 'translateY(0)', opacity: 1 })),
+      state('closed', style({ transform: 'translateY(-10px)', opacity: 0 })),
+      transition('closed => open', [animate('150ms')])
+    ])
+  ]
 })
-export class DroppableContentComponent implements AfterViewInit {
-  @ViewChild('content') public contentRef: TemplateRef<HTMLElement>;
-
-  constructor(@Host() private readonly droppable: DroppableComponent) {}
-
-  public ngAfterViewInit(): void {
-    this.droppable.contentRef = this.contentRef;
-  }
-}
+export class DroppableContentComponent extends DroppableContent {}

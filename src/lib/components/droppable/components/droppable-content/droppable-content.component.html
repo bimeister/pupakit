@@ -1,3 +1,10 @@
-<ng-template #content>
-  <ng-content></ng-content>
+<ng-template cdk-portal>
+  <div
+    class="droppable-content"
+    (mousedown)="mouseDownHandler($event)"
+    (wheel)="mouseWheelHandler($event)"
+    [@openClose]="isOpened ? 'open' : 'closed'"
+  >
+    <ng-content></ng-content>
+  </div>
 </ng-template>
