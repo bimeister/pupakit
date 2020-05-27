@@ -1,0 +1,47 @@
+<pupa-droppable [hasBackdrop]="hasBackdrop">
+  <pupa-droppable-trigger>
+    <div class="select-multiple">
+      <div class="selected-options" #selectedOptions>
+        <ng-container *ngIf="selectedOptions$ | async as selectedOptions">
+          <ng-container [ngSwitch]="selectedOptions.length > 0">
+            <ng-container *ngSwitchCase="true">
+              <pupa-chip-button class="selected-option" *ngFor="let selectedOption of selectedOptions">
+                {{ selectedOption.caption }}
+                <ion-icon (click)="toggleValue(selectedOption.value); $event.stopPropagation()" name="close"></ion-icon>
+              </pupa-chip-button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="false">
+              <span class="placeholder">Выберите</span>
+            </ng-container>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <div class="selected-options-other">
+        <ion-icon class="other-icon" name="arrow-dropdown"></ion-icon>
+        <pupa-chip-button class="overflow-selected-options-count" [class.is-visible]="overflowSelectedOptionsCount > 0">
+          +{{ overflowSelectedOptionsCount }}
+        </pupa-chip-button>
+      </div>
+    </div>
+  </pupa-droppable-trigger>
+
+  <pupa-droppable-content>
+    <pupa-multiselection-list class="select-multiple-options" [formControl]="multiselectionListControl">
+      <div class="select-option" (click)="selectAll()" [class.is-selected]="allSelected$ | async">
+        <span class="select-option__caption">Выбрать все</span>
+        <ion-icon class="select-option__checkmark" name="checkmark-circle"></ion-icon>
+      </div>
+      <pupa-multiselection-list-item
+        class="select-option"
+        [class.is-selected]="isSelected(option.value) | async"
+        [value]="option.value"
+        *ngFor="let option of options"
+      >
+        <span class="select-option__caption">{{ option.caption }}</span>
+        <ion-icon class="select-option__checkmark" name="checkmark-circle"></ion-icon>
+      </pupa-multiselection-list-item>
+    </pupa-multiselection-list>
+  </pupa-droppable-content>
+</pupa-droppable>

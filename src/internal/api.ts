@@ -6,4 +6,5 @@ export * from './constants/api';
 export * from './declarations/api';
 export * from './helpers/api';
 export * from './pipes/api';
+export * from './rxjs-operators/api';
 export * from './shared/api';
