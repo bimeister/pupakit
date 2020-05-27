@@ -4,6 +4,7 @@
 
 export * from './datagrid-manipulator-configuration.class';
 export * from './datagrid-manipulator.class';
+export * from './droppable-content.class';
 export * from './flat-tree-data-source.class';
 export * from './flat-tree-item.class';
 export * from './position-controller.class';

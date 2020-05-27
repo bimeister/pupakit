@@ -5,4 +5,5 @@
 export * from './droppable/api';
 export * from './droppable-content/api';
 export * from './droppable-legacy/api';
+export * from './droppable-native-content/api';
 export * from './droppable-trigger/api';

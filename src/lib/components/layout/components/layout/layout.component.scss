@@ -20,8 +20,7 @@
   &.drawers,
   &.modal-windows,
   &.alerts,
-  &.context-menus,
-  &.droppable {
+  &.context-menus {
     pointer-events: none;
     &:empty {
       display: none;
@@ -62,10 +61,6 @@
   }
   &.context-menus {
     z-index: 50;
-  }
-  &.droppable {
-    pointer-events: none;
-    z-index: 60;
   }
   &.tooltip {
     pointer-events: none;
