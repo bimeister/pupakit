@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@angular/cdk": "^9.2.4",
-    "ag-grid-angular": "^22.1.1",
-    "ag-grid-community": "^22.1.1",
+    "ag-grid-angular": "^23.1.1",
+    "ag-grid-community": "^23.1.1",
     "uuid": "^8.0.0",
     "zone.js": "~0.10.2"
   },
