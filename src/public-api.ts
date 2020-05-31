@@ -37,6 +37,7 @@ export * from './lib/components';
 export {
   DropdownItem,
   FlatTreeItem,
+  DropEventInterface,
   ChipItem,
   IconData,
   Alert,

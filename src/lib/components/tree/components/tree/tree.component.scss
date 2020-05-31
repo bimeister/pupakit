@@ -85,6 +85,13 @@
       background: color(text);
     }
   }
+
+  &_is-disabled-expandable {
+    pointer-events: none;
+    & > button:disabled {
+      opacity: 0.5;
+    }
+  }
 }
 
 .default {
