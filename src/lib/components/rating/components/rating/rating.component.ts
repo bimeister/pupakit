@@ -47,7 +47,7 @@ export class RatingComponent {
   @Output() public change: EventEmitter<number> = new EventEmitter<number>();
   private _value: number = 0;
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {
     this.initStars();
   }
 
@@ -60,8 +60,13 @@ export class RatingComponent {
     if ((value as any) instanceof Event) {
       return;
     }
-    this.cdRef.markForCheck();
+    this.changeDetectorRef.markForCheck();
     this._value = value;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
   }
 
   public setRating(v: number): void {
