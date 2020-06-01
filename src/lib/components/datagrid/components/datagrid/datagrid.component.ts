@@ -44,6 +44,9 @@ export class DatagridComponent<rowDataT> {
   @Input()
   public suppressHorizontalScroll: boolean = false;
 
+  @Input()
+  public suppressRowDrag: boolean = false;
+
   @ViewChild(AgGridAngular, { static: true, read: ElementRef })
   private readonly gridElement: ElementRef<HTMLElement>;
 

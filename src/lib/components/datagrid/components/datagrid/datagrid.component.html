@@ -8,6 +8,7 @@
   [gridOptions]="manipulator.config.gridOptions"
   [getRowNodeId]="manipulator.config.rowTrackByFn"
   [suppressHorizontalScroll]="suppressHorizontalScroll"
+  [suppressRowDrag]="suppressRowDrag"
   (rowClicked)="handleEvent('rowClicked', $event)"
   (bodyScroll)="gridBodyScrolled($event)"
   (gridReady)="onGridReady($event)"

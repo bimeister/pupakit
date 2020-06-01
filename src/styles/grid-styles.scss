@@ -44,6 +44,10 @@ $header-cell-moving-background-color: color(light);
     @include scrollbar;
   }
 
+  .ag-root-wrapper {
+    border: none;
+  }
+
   .ag-header-container {
     width: 100%;
   }
@@ -87,6 +91,10 @@ $header-cell-moving-background-color: color(light);
 
   .ag-cell-label-container {
     height: 100%;
+  }
+
+  .ag-cell-wrapper {
+    align-items: unset;
   }
 
   .ag-icon-desc,
