@@ -1,17 +1,18 @@
 import {
-  Component,
   AfterContentInit,
-  HostListener,
-  ElementRef,
   ChangeDetectionStrategy,
+  Component,
   ContentChild,
+  ElementRef,
+  HostListener,
   Input
 } from '@angular/core';
-import { DropdownMenuTriggerComponent } from '../dropdown-menu-trigger/dropdown-menu-trigger.component';
+import { Subject } from 'rxjs';
+
+import { DroppableLegacyHorizontalPosition } from '../../../../../internal/declarations/types/droppable-legacy-horizontal-position.type';
 import { DropdownMenuContentComponent } from '../dropdown-menu-content/dropdown-menu-content.component';
 import { DropdownMenuItemComponent } from '../dropdown-menu-item/dropdown-menu-item.component';
-import { Subject } from 'rxjs';
-import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
+import { DropdownMenuTriggerComponent } from '../dropdown-menu-trigger/dropdown-menu-trigger.component';
 
 @Component({
   selector: 'pupa-dropdown-menu',
@@ -23,7 +24,7 @@ export class DropdownMenuComponent implements AfterContentInit {
   public readonly onItemClicked$: Subject<DropdownMenuItemComponent> = new Subject<DropdownMenuItemComponent>();
 
   @Input()
-  public contentSide: DroppableHorizontalPosition = 'right';
+  public contentSide: DroppableLegacyHorizontalPosition = 'right';
 
   @ContentChild(DropdownMenuTriggerComponent)
   private readonly trigger: DropdownMenuTriggerComponent;

@@ -5,6 +5,7 @@ import { cloneDeep, isEqual } from 'lodash';
 import { Observable } from 'rxjs';
 
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
+import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
 import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
@@ -28,6 +29,9 @@ export class SelectComponent<T> implements ControlValueAccessor {
   public selectedItem: DropdownItem<T> | T;
 
   public itemsCollection: Set<DropdownItem<T> | T> = new Set<DropdownItem<T> | T>([]);
+
+  @Input() public hasBackdrop: boolean = false;
+  @Input() public dropdownWidthType: DroppableWidth = 'by-trigger';
 
   @Input() public set items(v: DropdownItem<T>[]) {
     this._items = v;

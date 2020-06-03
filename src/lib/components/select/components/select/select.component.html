@@ -1,36 +1,40 @@
-<div class="pupa-select" [class.disabled]="disabled" #anchor [id]="id">
-  <div
-    class="selected-value"
-    [title]="getCaption(selectedItem)?.length > 20 ? (selectedItem ? getCaption(selectedItem) : '') : ''"
-  >
-    <ion-icon
-      class="pupa-dropdown__icon pupa-dropdown__icon_left"
-      *ngIf="selectedItem?.iconLeft"
-      [name]="selectedItem.iconLeft.name"
-      [src]="selectedItem.iconLeft.src"
-      [style.color]="selectedItem.iconLeft.color"
-    ></ion-icon>
+<pupa-droppable #droppable [hasBackdrop]="hasBackdrop" [offsetYPx]="4" [widthType]="dropdownWidthType">
+  <pupa-droppable-trigger>
+    <div class="pupa-select" [class.disabled]="disabled" [id]="id">
+      <div
+        class="selected-value"
+        [title]="getCaption(selectedItem)?.length > 20 ? (selectedItem ? getCaption(selectedItem) : '') : ''"
+      >
+        <ion-icon
+          class="pupa-dropdown__icon pupa-dropdown__icon_left"
+          *ngIf="selectedItem?.iconLeft"
+          [name]="selectedItem.iconLeft.name"
+          [src]="selectedItem.iconLeft.src"
+          [style.color]="selectedItem.iconLeft.color"
+        ></ion-icon>
 
-    {{ getCaption(selectedItem) }}
+        {{ getCaption(selectedItem) }}
 
-    <ion-icon
-      class="pupa-dropdown__icon pupa-dropdown__icon_right"
-      *ngIf="selectedItem?.iconRight"
-      [name]="selectedItem.iconRight.name"
-      [src]="selectedItem.iconRight.src"
-      [style.color]="selectedItem.iconRight.color"
-    ></ion-icon>
-  </div>
-  <div class="arrow">
-    <ion-icon name="ios-arrow-down" *ngIf="!disabled"></ion-icon>
-  </div>
-</div>
+        <ion-icon
+          class="pupa-dropdown__icon pupa-dropdown__icon_right"
+          *ngIf="selectedItem?.iconRight"
+          [name]="selectedItem.iconRight.name"
+          [src]="selectedItem.iconRight.src"
+          [style.color]="selectedItem.iconRight.color"
+        ></ion-icon>
+      </div>
+      <div class="arrow">
+        <ion-icon name="ios-arrow-down" *ngIf="!disabled"></ion-icon>
+      </div>
+    </div>
+  </pupa-droppable-trigger>
 
-<pupa-dropdown
-  [anchor]="anchor"
-  [items]="items"
-  (select)="writeValue($event)"
-  [positionChange$]="positionChange$"
-  [captionPropertyPath]="captionPropertyPath"
-  *ngIf="!disabled"
-></pupa-dropdown>
+  <pupa-droppable-content>
+    <pupa-dropdown
+      [items]="items"
+      (select)="writeValue($event); droppable.close()"
+      [captionPropertyPath]="captionPropertyPath"
+      *ngIf="!disabled"
+    ></pupa-dropdown>
+  </pupa-droppable-content>
+</pupa-droppable>

@@ -1,1 +1,1 @@
-export type DroppableHorizontalPosition = 'left' | 'right';
+export type DroppableHorizontalPosition = 'start' | 'end';

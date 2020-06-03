@@ -9,4 +9,13 @@
   overflow: auto;
   box-shadow: variable(box-shadow_hover);
   background: color(white);
+  overflow-x: hidden;
+
+  &.width-by-trigger {
+    max-width: none;
+  }
+
+  &.width-fit-content {
+    width: fit-content;
+  }
 }

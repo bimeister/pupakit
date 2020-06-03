@@ -1,9 +1,21 @@
 <h1>Dropdown</h1>
 <textarea class="placeholder" (mousedown)="onMousedown()"></textarea>
 <div class="container">
-  <div class="trigger" #trigger>click me</div>
-  <div class="trigger trigger_big" #triggerBig>click me</div>
+  <pupa-droppable>
+    <pupa-droppable-trigger>
+      <div class="trigger">click me</div>
+    </pupa-droppable-trigger>
+    <pupa-droppable-content>
+      <pupa-dropdown [items]="items"></pupa-dropdown>
+    </pupa-droppable-content>
+  </pupa-droppable>
 
-  <pupa-dropdown [anchor]="trigger" [items]="items" [positionChange$]="positionChange$"></pupa-dropdown>
-  <pupa-dropdown [anchor]="triggerBig" [items]="items" [positionChange$]="positionChange$"></pupa-dropdown>
+  <pupa-droppable>
+    <pupa-droppable-trigger>
+      <div class="trigger trigger_big">click me</div>
+    </pupa-droppable-trigger>
+    <pupa-droppable-content>
+      <pupa-dropdown [items]="items"></pupa-dropdown>
+    </pupa-droppable-content>
+  </pupa-droppable>
 </div>

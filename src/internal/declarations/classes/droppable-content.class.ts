@@ -10,14 +10,14 @@ export abstract class DroppableContent implements AfterViewInit {
     return this.droppable.isOpened;
   }
 
-  constructor(@Host() private readonly droppable: DroppableComponent) {}
+  constructor(@Host() protected readonly droppable: DroppableComponent) {}
 
   public ngAfterViewInit(): void {
     this.droppable.contentRef = this.contentRef;
   }
 
   public mouseDownHandler(event: MouseEvent): void {
-    if (this.droppable.closeOnContentClick) {
+    if (!this.droppable.closeOnContentClick) {
       event.stopPropagation();
     }
   }
