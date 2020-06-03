@@ -5,6 +5,9 @@ import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
 import { VOID } from '../../../../../internal/constants/void.const';
+import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
+import { DroppableVerticalPosition } from '../../../../../internal/declarations/types/droppable-vertical-position.type';
+import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
@@ -12,12 +15,13 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   templateUrl: './droppable.component.html'
 })
 export class DroppableComponent implements OnDestroy {
-  @Input() public closeOnContentClick: boolean = true;
-  @Input() public horyzontalPosition: 'start' | 'end' = 'start';
-  @Input() public verticalPosition: 'top' | 'bottom' = 'bottom';
+  @Input() public closeOnContentClick: boolean = false;
+  @Input() public horizontalPosition: DroppableHorizontalPosition = 'start';
+  @Input() public verticalPosition: DroppableVerticalPosition = 'bottom';
   @Input() public offsetYPx: number = 10;
   @Input() public viewportMarginPx: number = 15;
   @Input() public hasBackdrop: boolean = false;
+  @Input() public widthType: DroppableWidth = 'fit-content';
 
   public triggerRef: ElementRef<HTMLElement>;
   public contentRef: CdkPortal;
@@ -87,7 +91,7 @@ export class DroppableComponent implements OnDestroy {
       .withViewportMargin(this.viewportMarginPx)
       .withPositions([
         {
-          originX: this.horyzontalPosition,
+          originX: this.horizontalPosition,
           originY: this.verticalPosition,
           overlayX: 'start',
           overlayY: 'top',

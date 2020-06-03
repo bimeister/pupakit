@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 
-import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
+import { DroppableLegacyHorizontalPosition } from '../../../../../internal/declarations/types/droppable-legacy-horizontal-position.type';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
@@ -32,7 +32,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
 
   @Input() public anchor: HTMLElement;
   @Input() public positionChange$: Observable<void>;
-  @Input() public horizontalPosition: DroppableHorizontalPosition = 'left';
+  @Input() public horizontalPosition: DroppableLegacyHorizontalPosition = 'left';
   @Input() public maxWidth: number = null;
   @Input() public set open(value: boolean) {
     this._open = value;

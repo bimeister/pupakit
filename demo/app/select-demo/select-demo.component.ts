@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+
 import { DropdownItem } from '../../../src/internal/declarations/interfaces/dropdown-item.interface';
 
 @Component({
@@ -17,8 +18,8 @@ export class SelectDemoComponent {
 
   public items: DropdownItem<string>[] = [
     {
-      caption: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf',
-      data: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf'
+      caption: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf sdfsdfsdf ssdfsdfsdfsdfsdfsd',
+      data: 'Jsdjfjsdfjsjdfjsdfjsd dsnfsdjfdsjfjdsjf dsfhdsfjdshfjdsf sdfsidfsdjfkdsjf sdfsdfsdf ssdfsdfsdfsdfsdfsd'
     },
     ...this.lorems.map((lorem: string, index: number) => ({
       caption: lorem,

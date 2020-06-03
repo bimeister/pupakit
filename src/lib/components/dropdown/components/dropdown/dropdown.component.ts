@@ -1,15 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  Renderer2
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
-import { DroppableLegacyComponent } from '../../../droppable/components/droppable-legacy/droppable-legacy.component';
 
 @Component({
   selector: 'pupa-dropdown',
@@ -17,7 +8,7 @@ import { DroppableLegacyComponent } from '../../../droppable/components/droppabl
   templateUrl: './dropdown.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DropdownComponent<T> extends DroppableLegacyComponent {
+export class DropdownComponent<T> {
   @Input() public items: DropdownItem<T>[] | T[];
 
   /**
@@ -29,12 +20,7 @@ export class DropdownComponent<T> extends DroppableLegacyComponent {
 
   @Output() public select: EventEmitter<T> = new EventEmitter<T>();
 
-  constructor(protected readonly cDRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {
-    super(cDRef, renderer);
-  }
-
   public emitSelect(item: T): void {
     this.select.emit(item);
-    this.toggle(false);
   }
 }
