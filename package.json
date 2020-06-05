@@ -6,10 +6,6 @@
     "type": "git",
     "url": "https://git.meistersoft.ru/common/pupakit.git"
   },
-  "engines": {
-    "node": ">=13.0.0",
-    "npm": ">=6.14.0"
-  },
   "scripts": {
     "ng": "ng",
     "start": "yarn run start:demo",
