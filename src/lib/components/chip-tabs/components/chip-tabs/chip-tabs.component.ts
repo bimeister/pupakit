@@ -1,11 +1,4 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ContentChildren,
-  OnDestroy,
-  QueryList
-} from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, OnDestroy, QueryList } from '@angular/core';
 
 import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.component';
@@ -16,13 +9,9 @@ import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.componen
   styleUrls: ['./chip-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsComponent extends TabsContainer<ChipTabsItemComponent> implements AfterViewInit, OnDestroy {
+export class ChipTabsComponent extends TabsContainer implements AfterViewInit, OnDestroy {
   @ContentChildren(ChipTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<ChipTabsItemComponent>;
-
-  constructor() {
-    super();
-  }
 }

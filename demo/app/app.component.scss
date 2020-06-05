@@ -1,6 +1,6 @@
-@import '~src/styles/themes/functions';
-@import '~src/styles/mixins';
-@import '~src/styles/functions';
+@import './../../src/styles/themes/functions.scss';
+@import './../../src/styles/mixins.scss';
+@import './../../src/styles/functions.scss';
 
 .index {
   position: fixed;
