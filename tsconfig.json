@@ -30,7 +30,7 @@
     "importsNotUsedAsValues": "preserve"
   },
   "angularCompilerOptions": {
-    "enableIvy": false
+    "enableIvy": true
   },
   "exclude": ["node_modules"]
 }

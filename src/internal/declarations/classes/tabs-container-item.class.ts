@@ -17,7 +17,7 @@ export abstract class TabsContainerItem<T> implements OnChanges {
     distinctUntilChanged()
   );
 
-  constructor(protected readonly tabsContainer: TabsContainer<ThisType<T>>) {}
+  constructor(protected readonly tabsContainer: TabsContainer) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsActiveValueChanges(changes?.isActive);
