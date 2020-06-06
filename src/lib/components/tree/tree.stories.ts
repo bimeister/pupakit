@@ -38,15 +38,7 @@ storiesOf('Tree', module).add('default', () => ({
     imports: [TreeModule]
   },
   template: `
-  <style>
-    pupa-tree {
-      width: 100%;
-      height: 100%;
-      padding: 8px 0 0 8px;
-      box-sizing: border-box;
-      display: block;
-    }
-  </style>
+
   <pupa-tree [dataOrigin]="dataOrigin"></pupa-tree>
   `,
   props: {

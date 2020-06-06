@@ -231,12 +231,28 @@
   resolved "http://npm.meistersoft.ru:4873/@angular%2frouter/-/router-9.1.9.tgz#5d79d72cb62ea1c04ea70238846653ecf9c4a73c"
   integrity sha512-4u+CWMPB4hCkAsFCEzC94YEWT0wVozqGkc/Dortt2hFaqvZpIegg6iJVZlDxuyDjzFYBPnnbTDdgiTTA8ckfuA==
 
-"@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5", "@babel/code-frame@^7.8.3":
+"@babel/code-frame@7.8.3", "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fcode-frame/-/code-frame-7.8.3.tgz#33e25903d7481181534e12ec0a25f16b6fcf419e"
   integrity sha512-a9gxpmdXtZEInkCSHUJDLHZVBgb1QS0jhss4cPP93EW7s+uC5bikET2twEF3KV+7rDblJcmNvTR7VJejqd2C2g==
   dependencies:
     "@babel/highlight" "^7.8.3"
+
+"@babel/code-frame@^7.10.1", "@babel/code-frame@^7.5.5":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fcode-frame/-/code-frame-7.10.1.tgz#d5481c5095daa1c57e16e54c6f9198443afb49ff"
+  integrity sha512-IGhtTmpjGbYzcEDOw7DcQtbQSXcG9ftmAXtWTu9V936vDye4xjjekktFAtgZsWpzTj/X01jocB46mTywm/4SZw==
+  dependencies:
+    "@babel/highlight" "^7.10.1"
+
+"@babel/compat-data@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fcompat-data/-/compat-data-7.10.1.tgz#b1085ffe72cd17bf2c0ee790fc09f9626011b2db"
+  integrity sha512-CHvCj7So7iCkGKPRFUfryXIkU2gSBw7VSZFYLsqVhrS47269VK2Hfi9S/YcublPMW8k1u2bQBlbDruoQEm4fgw==
+  dependencies:
+    browserslist "^4.12.0"
+    invariant "^2.2.4"
+    semver "^5.5.0"
 
 "@babel/compat-data@^7.9.0", "@babel/compat-data@^7.9.6":
   version "7.9.6"
@@ -301,6 +317,16 @@
     lodash "^4.17.13"
     source-map "^0.5.0"
 
+"@babel/generator@^7.10.1":
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fgenerator/-/generator-7.10.2.tgz#0fa5b5b2389db8bfdfcc3492b551ee20f5dd69a9"
+  integrity sha512-AxfBNHNu99DTMvlUPlt1h2+Hn7knPpH5ayJ8OqDWSeLld+Fi2AYBTC/IejWDM9Edcii4UzZRCsbUt0WlSDsDsA==
+  dependencies:
+    "@babel/types" "^7.10.2"
+    jsesc "^2.5.1"
+    lodash "^4.17.13"
+    source-map "^0.5.0"
+
 "@babel/generator@^7.9.0", "@babel/generator@^7.9.6":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fgenerator/-/generator-7.9.6.tgz#5408c82ac5de98cda0d77d8124e99fa1f2170a43"
@@ -311,12 +337,27 @@
     lodash "^4.17.13"
     source-map "^0.5.0"
 
+"@babel/helper-annotate-as-pure@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-annotate-as-pure/-/helper-annotate-as-pure-7.10.1.tgz#f6d08acc6f70bbd59b436262553fb2e259a1a268"
+  integrity sha512-ewp3rvJEwLaHgyWGe4wQssC2vjks3E80WiUe2BpMb0KhreTjMROCbxXcEovTrbeGVdQct5VjQfrv9EgC+xMzCw==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-annotate-as-pure@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-annotate-as-pure/-/helper-annotate-as-pure-7.8.3.tgz#60bc0bc657f63a0924ff9a4b4a0b24a13cf4deee"
   integrity sha512-6o+mJrZBxOoEX77Ezv9zwW7WV8DdluouRKNY/IR5u/YTMuKHgugHOzYWlYvYLpLA9nPsQCAAASpCIbjI9Mv+Uw==
   dependencies:
     "@babel/types" "^7.8.3"
+
+"@babel/helper-builder-binary-assignment-operator-visitor@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-builder-binary-assignment-operator-visitor/-/helper-builder-binary-assignment-operator-visitor-7.10.1.tgz#0ec7d9be8174934532661f87783eb18d72290059"
+  integrity sha512-cQpVq48EkYxUU0xozpGCLla3wlkdRRqLWu1ksFMXA9CM5KQmyyRpSEsYXbao7JUkOw/tAaYKCaYyZq6HOFYtyw==
+  dependencies:
+    "@babel/helper-explode-assignable-expression" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
 "@babel/helper-builder-binary-assignment-operator-visitor@^7.8.3":
   version "7.8.3"
@@ -326,24 +367,35 @@
     "@babel/helper-explode-assignable-expression" "^7.8.3"
     "@babel/types" "^7.8.3"
 
-"@babel/helper-builder-react-jsx-experimental@^7.9.0":
-  version "7.9.5"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-builder-react-jsx-experimental/-/helper-builder-react-jsx-experimental-7.9.5.tgz#0b4b3e04e6123f03b404ca4dfd6528fe6bb92fe3"
-  integrity sha512-HAagjAC93tk748jcXpZ7oYRZH485RCq/+yEv9SIWezHRPv9moZArTnkUNciUNzvwHUABmiWKlcxJvMcu59UwTg==
+"@babel/helper-builder-react-jsx-experimental@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-builder-react-jsx-experimental/-/helper-builder-react-jsx-experimental-7.10.1.tgz#9a7d58ad184d3ac3bafb1a452cec2bad7e4a0bc8"
+  integrity sha512-irQJ8kpQUV3JasXPSFQ+LCCtJSc5ceZrPFVj6TElR6XCHssi3jV8ch3odIrNtjJFRZZVbrOEfJMI79TPU/h1pQ==
   dependencies:
-    "@babel/helper-annotate-as-pure" "^7.8.3"
-    "@babel/helper-module-imports" "^7.8.3"
-    "@babel/types" "^7.9.5"
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-module-imports" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
-"@babel/helper-builder-react-jsx@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-builder-react-jsx/-/helper-builder-react-jsx-7.9.0.tgz#16bf391990b57732700a3278d4d9a81231ea8d32"
-  integrity sha512-weiIo4gaoGgnhff54GQ3P5wsUQmnSwpkvU0r6ZHq6TzoSzKy4JxHEgnxNytaKbov2a9z/CVNyzliuCOUPEX3Jw==
+"@babel/helper-builder-react-jsx@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-builder-react-jsx/-/helper-builder-react-jsx-7.10.1.tgz#a327f0cf983af5554701b1215de54a019f09b532"
+  integrity sha512-KXzzpyWhXgzjXIlJU1ZjIXzUPdej1suE6vzqgImZ/cpAsR/CC8gUcX4EWRmDfWz/cs6HOCPMBIJ3nKoXt3BFuw==
   dependencies:
-    "@babel/helper-annotate-as-pure" "^7.8.3"
-    "@babel/types" "^7.9.0"
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
-"@babel/helper-compilation-targets@^7.8.7", "@babel/helper-compilation-targets@^7.9.6":
+"@babel/helper-compilation-targets@^7.10.2":
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-compilation-targets/-/helper-compilation-targets-7.10.2.tgz#a17d9723b6e2c750299d2a14d4637c76936d8285"
+  integrity sha512-hYgOhF4To2UTB4LTaZepN/4Pl9LD4gfbJx8A34mqoluT8TLbof1mhUlYuNWTEebONa8+UlCC4X0TEXu7AOUyGA==
+  dependencies:
+    "@babel/compat-data" "^7.10.1"
+    browserslist "^4.12.0"
+    invariant "^2.2.4"
+    levenary "^1.1.1"
+    semver "^5.5.0"
+
+"@babel/helper-compilation-targets@^7.8.7":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-compilation-targets/-/helper-compilation-targets-7.9.6.tgz#1e05b7ccc9d38d2f8b40b458b380a04dcfadd38a"
   integrity sha512-x2Nvu0igO0ejXzx09B/1fGBxY9NXQlBW2kZsSxCJft+KHN8t9XWzIvFxtPHnBOAXpVsdxZKZFbRUC8TsNKajMw==
@@ -354,17 +406,26 @@
     levenary "^1.1.1"
     semver "^5.5.0"
 
-"@babel/helper-create-class-features-plugin@^7.8.3", "@babel/helper-create-class-features-plugin@^7.9.6":
-  version "7.9.6"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-create-class-features-plugin/-/helper-create-class-features-plugin-7.9.6.tgz#965c8b0a9f051801fd9d3b372ca0ccf200a90897"
-  integrity sha512-6N9IeuyHvMBRyjNYOMJHrhwtu4WJMrYf8hVbEHD3pbbbmNOk1kmXSQs7bA4dYDUaIx4ZEzdnvo6NwC3WHd/Qow==
+"@babel/helper-create-class-features-plugin@^7.10.1":
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-create-class-features-plugin/-/helper-create-class-features-plugin-7.10.2.tgz#7474295770f217dbcf288bf7572eb213db46ee67"
+  integrity sha512-5C/QhkGFh1vqcziq1vAL6SI9ymzUp8BCYjFpvYVhWP4DlATIb3u5q3iUd35mvlyGs8fO7hckkW7i0tmH+5+bvQ==
   dependencies:
-    "@babel/helper-function-name" "^7.9.5"
-    "@babel/helper-member-expression-to-functions" "^7.8.3"
-    "@babel/helper-optimise-call-expression" "^7.8.3"
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/helper-replace-supers" "^7.9.6"
-    "@babel/helper-split-export-declaration" "^7.8.3"
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/helper-member-expression-to-functions" "^7.10.1"
+    "@babel/helper-optimise-call-expression" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-replace-supers" "^7.10.1"
+    "@babel/helper-split-export-declaration" "^7.10.1"
+
+"@babel/helper-create-regexp-features-plugin@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-create-regexp-features-plugin/-/helper-create-regexp-features-plugin-7.10.1.tgz#1b8feeab1594cbcfbf3ab5a3bbcabac0468efdbd"
+  integrity sha512-Rx4rHS0pVuJn5pJOqaqcZR4XSgeF9G/pO/79t+4r7380tXFJdzImFnxMU19f83wjSrmKHq6myrM10pFHTGzkUA==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-regex" "^7.10.1"
+    regexpu-core "^4.7.0"
 
 "@babel/helper-create-regexp-features-plugin@^7.8.3", "@babel/helper-create-regexp-features-plugin@^7.8.8":
   version "7.8.8"
@@ -375,6 +436,15 @@
     "@babel/helper-regex" "^7.8.3"
     regexpu-core "^4.7.0"
 
+"@babel/helper-define-map@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-define-map/-/helper-define-map-7.10.1.tgz#5e69ee8308648470dd7900d159c044c10285221d"
+  integrity sha512-+5odWpX+OnvkD0Zmq7panrMuAGQBu6aPUgvMzuMGo4R+jUOvealEj2hiqI6WhxgKrTpFoFj0+VdsuA8KDxHBDg==
+  dependencies:
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/types" "^7.10.1"
+    lodash "^4.17.13"
+
 "@babel/helper-define-map@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-define-map/-/helper-define-map-7.8.3.tgz#a0655cad5451c3760b726eba875f1cd8faa02c15"
@@ -384,6 +454,14 @@
     "@babel/types" "^7.8.3"
     lodash "^4.17.13"
 
+"@babel/helper-explode-assignable-expression@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-explode-assignable-expression/-/helper-explode-assignable-expression-7.10.1.tgz#e9d76305ee1162ca467357ae25df94f179af2b7e"
+  integrity sha512-vcUJ3cDjLjvkKzt6rHrl767FeE7pMEYfPanq5L16GRtrXIoznc0HykNW2aEYkcnP76P0isoqJ34dDMFZwzEpJg==
+  dependencies:
+    "@babel/traverse" "^7.10.1"
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-explode-assignable-expression@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-explode-assignable-expression/-/helper-explode-assignable-expression-7.8.3.tgz#a728dc5b4e89e30fc2dfc7d04fa28a930653f982"
@@ -391,6 +469,15 @@
   dependencies:
     "@babel/traverse" "^7.8.3"
     "@babel/types" "^7.8.3"
+
+"@babel/helper-function-name@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-function-name/-/helper-function-name-7.10.1.tgz#92bd63829bfc9215aca9d9defa85f56b539454f4"
+  integrity sha512-fcpumwhs3YyZ/ttd5Rz0xn0TpIwVkN7X0V38B9TWNfVF42KEkhkAAuPCQ3oXmtTRtiPJrmZ0TrfS0GKF0eMaRQ==
+  dependencies:
+    "@babel/helper-get-function-arity" "^7.10.1"
+    "@babel/template" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
 "@babel/helper-function-name@^7.8.3", "@babel/helper-function-name@^7.9.5":
   version "7.9.5"
@@ -401,6 +488,13 @@
     "@babel/template" "^7.8.3"
     "@babel/types" "^7.9.5"
 
+"@babel/helper-get-function-arity@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-get-function-arity/-/helper-get-function-arity-7.10.1.tgz#7303390a81ba7cb59613895a192b93850e373f7d"
+  integrity sha512-F5qdXkYGOQUb0hpRaPoetF9AnsXknKjWMZ+wmsIRsp5ge5sFh4c3h1eH2pRTTuy9KKAA2+TTYomGXAtEL2fQEw==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-get-function-arity@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-get-function-arity/-/helper-get-function-arity-7.8.3.tgz#b894b947bd004381ce63ea1db9f08547e920abd5"
@@ -408,12 +502,26 @@
   dependencies:
     "@babel/types" "^7.8.3"
 
+"@babel/helper-hoist-variables@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-hoist-variables/-/helper-hoist-variables-7.10.1.tgz#7e77c82e5dcae1ebf123174c385aaadbf787d077"
+  integrity sha512-vLm5srkU8rI6X3+aQ1rQJyfjvCBLXP8cAGeuw04zeAM2ItKb1e7pmVmLyHb4sDaAYnLL13RHOZPLEtcGZ5xvjg==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-hoist-variables@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-hoist-variables/-/helper-hoist-variables-7.8.3.tgz#1dbe9b6b55d78c9b4183fc8cdc6e30ceb83b7134"
   integrity sha512-ky1JLOjcDUtSc+xkt0xhYff7Z6ILTAHKmZLHPxAhOP0Nd77O+3nCsd6uSVYur6nJnCI029CrNbYlc0LoPfAPQg==
   dependencies:
     "@babel/types" "^7.8.3"
+
+"@babel/helper-member-expression-to-functions@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-member-expression-to-functions/-/helper-member-expression-to-functions-7.10.1.tgz#432967fd7e12a4afef66c4687d4ca22bc0456f15"
+  integrity sha512-u7XLXeM2n50gb6PWJ9hoO5oO7JFPaZtrh35t8RqKLT1jFKj9IWeD1zrcrYp1q1qiZTdEarfDWfTIP8nGsu0h5g==
+  dependencies:
+    "@babel/types" "^7.10.1"
 
 "@babel/helper-member-expression-to-functions@^7.8.3":
   version "7.8.3"
@@ -429,6 +537,26 @@
   dependencies:
     "@babel/types" "^7.8.3"
 
+"@babel/helper-module-imports@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-module-imports/-/helper-module-imports-7.10.1.tgz#dd331bd45bccc566ce77004e9d05fe17add13876"
+  integrity sha512-SFxgwYmZ3HZPyZwJRiVNLRHWuW2OgE5k2nrVs6D9Iv4PPnXVffuEHy83Sfx/l4SqF+5kyJXjAyUmrG7tNm+qVg==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
+"@babel/helper-module-transforms@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-module-transforms/-/helper-module-transforms-7.10.1.tgz#24e2f08ee6832c60b157bb0936c86bef7210c622"
+  integrity sha512-RLHRCAzyJe7Q7sF4oy2cB+kRnU4wDZY/H2xJFGof+M+SJEGhZsb+GFj5j1AD8NiSaVBJ+Pf0/WObiXu/zxWpFg==
+  dependencies:
+    "@babel/helper-module-imports" "^7.10.1"
+    "@babel/helper-replace-supers" "^7.10.1"
+    "@babel/helper-simple-access" "^7.10.1"
+    "@babel/helper-split-export-declaration" "^7.10.1"
+    "@babel/template" "^7.10.1"
+    "@babel/types" "^7.10.1"
+    lodash "^4.17.13"
+
 "@babel/helper-module-transforms@^7.9.0":
   version "7.9.0"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-module-transforms/-/helper-module-transforms-7.9.0.tgz#43b34dfe15961918707d247327431388e9fe96e5"
@@ -442,6 +570,13 @@
     "@babel/types" "^7.9.0"
     lodash "^4.17.13"
 
+"@babel/helper-optimise-call-expression@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-optimise-call-expression/-/helper-optimise-call-expression-7.10.1.tgz#b4a1f2561870ce1247ceddb02a3860fa96d72543"
+  integrity sha512-a0DjNS1prnBsoKx83dP2falChcs7p3i8VMzdrSbfLhuQra/2ENC4sbri34dz/rWmDADsmF1q5GbfaXydh0Jbjg==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-optimise-call-expression@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-optimise-call-expression/-/helper-optimise-call-expression-7.8.3.tgz#7ed071813d09c75298ef4f208956006b6111ecb9"
@@ -454,12 +589,35 @@
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-plugin-utils/-/helper-plugin-utils-7.8.3.tgz#9ea293be19babc0f52ff8ca88b34c3611b208670"
   integrity sha512-j+fq49Xds2smCUNYmEHF9kGNkhbet6yVIBp4e6oeQpH1RUs/Ir06xUKzDjDkGcaaokPiTNs2JBWHjaE4csUkZQ==
 
+"@babel/helper-plugin-utils@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-plugin-utils/-/helper-plugin-utils-7.10.1.tgz#ec5a5cf0eec925b66c60580328b122c01230a127"
+  integrity sha512-fvoGeXt0bJc7VMWZGCAEBEMo/HAjW2mP8apF5eXK0wSqwLAVHAISCWRoLMBMUs2kqeaG77jltVqu4Hn8Egl3nA==
+
+"@babel/helper-regex@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-regex/-/helper-regex-7.10.1.tgz#021cf1a7ba99822f993222a001cc3fec83255b96"
+  integrity sha512-7isHr19RsIJWWLLFn21ubFt223PjQyg1HY7CZEMRr820HttHPpVvrsIN3bUOo44DEfFV4kBXO7Abbn9KTUZV7g==
+  dependencies:
+    lodash "^4.17.13"
+
 "@babel/helper-regex@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-regex/-/helper-regex-7.8.3.tgz#139772607d51b93f23effe72105b319d2a4c6965"
   integrity sha512-BWt0QtYv/cg/NecOAZMdcn/waj/5P26DR4mVLXfFtDokSR6fyuG0Pj+e2FqtSME+MqED1khnSMulkmGl8qWiUQ==
   dependencies:
     lodash "^4.17.13"
+
+"@babel/helper-remap-async-to-generator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-remap-async-to-generator/-/helper-remap-async-to-generator-7.10.1.tgz#bad6aaa4ff39ce8d4b82ccaae0bfe0f7dbb5f432"
+  integrity sha512-RfX1P8HqsfgmJ6CwaXGKMAqbYdlleqglvVtht0HGPMSsy2V6MqLlOJVF/0Qyb/m2ZCi2z3q3+s6Pv7R/dQuZ6A==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-wrap-function" "^7.10.1"
+    "@babel/template" "^7.10.1"
+    "@babel/traverse" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
 "@babel/helper-remap-async-to-generator@^7.8.3":
   version "7.8.3"
@@ -472,7 +630,17 @@
     "@babel/traverse" "^7.8.3"
     "@babel/types" "^7.8.3"
 
-"@babel/helper-replace-supers@^7.8.3", "@babel/helper-replace-supers@^7.8.6", "@babel/helper-replace-supers@^7.9.6":
+"@babel/helper-replace-supers@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-replace-supers/-/helper-replace-supers-7.10.1.tgz#ec6859d20c5d8087f6a2dc4e014db7228975f13d"
+  integrity sha512-SOwJzEfpuQwInzzQJGjGaiG578UYmyi2Xw668klPWV5n07B73S0a9btjLk/52Mlcxa+5AdIYqws1KyXRfMoB7A==
+  dependencies:
+    "@babel/helper-member-expression-to-functions" "^7.10.1"
+    "@babel/helper-optimise-call-expression" "^7.10.1"
+    "@babel/traverse" "^7.10.1"
+    "@babel/types" "^7.10.1"
+
+"@babel/helper-replace-supers@^7.8.3", "@babel/helper-replace-supers@^7.8.6":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-replace-supers/-/helper-replace-supers-7.9.6.tgz#03149d7e6a5586ab6764996cd31d6981a17e1444"
   integrity sha512-qX+chbxkbArLyCImk3bWV+jB5gTNU/rsze+JlcF6Nf8tVTigPJSI1o1oBow/9Resa1yehUO9lIipsmu9oG4RzA==
@@ -482,6 +650,14 @@
     "@babel/traverse" "^7.9.6"
     "@babel/types" "^7.9.6"
 
+"@babel/helper-simple-access@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-simple-access/-/helper-simple-access-7.10.1.tgz#08fb7e22ace9eb8326f7e3920a1c2052f13d851e"
+  integrity sha512-VSWpWzRzn9VtgMJBIWTZ+GP107kZdQ4YplJlCmIrjoLVSi/0upixezHCDG8kpPVTBJpKfxTH01wDhh+jS2zKbw==
+  dependencies:
+    "@babel/template" "^7.10.1"
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-simple-access@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-simple-access/-/helper-simple-access-7.8.3.tgz#7f8109928b4dab4654076986af575231deb639ae"
@@ -490,6 +666,13 @@
     "@babel/template" "^7.8.3"
     "@babel/types" "^7.8.3"
 
+"@babel/helper-split-export-declaration@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-split-export-declaration/-/helper-split-export-declaration-7.10.1.tgz#c6f4be1cbc15e3a868e4c64a17d5d31d754da35f"
+  integrity sha512-UQ1LVBPrYdbchNhLwj6fetj46BcFwfS4NllJo/1aJsT+1dLTEnXJL0qHqtY7gPzF8S2fXBJamf1biAXV3X077g==
+  dependencies:
+    "@babel/types" "^7.10.1"
+
 "@babel/helper-split-export-declaration@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-split-export-declaration/-/helper-split-export-declaration-7.8.3.tgz#31a9f30070f91368a7182cf05f831781065fc7a9"
@@ -497,10 +680,25 @@
   dependencies:
     "@babel/types" "^7.8.3"
 
+"@babel/helper-validator-identifier@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.10.1.tgz#5770b0c1a826c4f53f5ede5e153163e0318e94b5"
+  integrity sha512-5vW/JXLALhczRCWP0PnFDMCJAchlBvM7f4uk/jXritBnIa6E1KmqmtrS3yn1LAnxFBypQ3eneLuXjsnfQsgILw==
+
 "@babel/helper-validator-identifier@^7.9.0", "@babel/helper-validator-identifier@^7.9.5":
   version "7.9.5"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-validator-identifier/-/helper-validator-identifier-7.9.5.tgz#90977a8e6fbf6b431a7dc31752eee233bf052d80"
   integrity sha512-/8arLKUFq882w4tWGj9JYzRpAlZgiWUJ+dtteNTDqrRBz9Iguck9Rn3ykuBDoUwh2TO4tSAJlrxDUOXWklJe4g==
+
+"@babel/helper-wrap-function@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhelper-wrap-function/-/helper-wrap-function-7.10.1.tgz#956d1310d6696257a7afd47e4c42dfda5dfcedc9"
+  integrity sha512-C0MzRGteVDn+H32/ZgbAv5r56f2o1fZSA/rj/TYo8JEJNHg+9BdSmKBUND0shxWRztWhjlT2cvHYuynpPsVJwQ==
+  dependencies:
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/template" "^7.10.1"
+    "@babel/traverse" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
 "@babel/helper-wrap-function@^7.8.3":
   version "7.8.3"
@@ -521,6 +719,15 @@
     "@babel/traverse" "^7.9.6"
     "@babel/types" "^7.9.6"
 
+"@babel/highlight@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fhighlight/-/highlight-7.10.1.tgz#841d098ba613ba1a427a2b383d79e35552c38ae0"
+  integrity sha512-8rMof+gVP8mxYZApLF/JgNDAkdKa+aJt3ZYxF8z6+j/hpeXL7iMsKCPHa2jNMHu/qqBwzQF4OHNoYi8dMA/rYg==
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.10.1"
+    chalk "^2.0.0"
+    js-tokens "^4.0.0"
+
 "@babel/highlight@^7.8.3":
   version "7.9.0"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fhighlight/-/highlight-7.9.0.tgz#4e9b45ccb82b79607271b2979ad82c7b68163079"
@@ -535,6 +742,20 @@
   resolved "http://npm.meistersoft.ru:4873/@babel%2fparser/-/parser-7.9.6.tgz#3b1bbb30dabe600cd72db58720998376ff653bc7"
   integrity sha512-AoeIEJn8vt+d/6+PXDRPaksYhnlbMIiejioBZvvMQsOjW/JYK6k/0dKnvvP3EhK5GfMBWDPtrxRtegWdAcdq9Q==
 
+"@babel/parser@^7.10.1":
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fparser/-/parser-7.10.2.tgz#871807f10442b92ff97e4783b9b54f6a0ca812d0"
+  integrity sha512-PApSXlNMJyB4JiGVhCOlzKIif+TKFTvu0aQAhnTvfP/z3vVSN6ZypH5bfUNwFXXjRQtUEBNFd2PtmCmG2Py3qQ==
+
+"@babel/plugin-proposal-async-generator-functions@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.10.1.tgz#6911af5ba2e615c4ff3c497fe2f47b35bf6d7e55"
+  integrity sha512-vzZE12ZTdB336POZjmpblWfNNRpMSua45EYnRigE2XsZxcXcIyly2ixnTJasJE4Zq3U7t2d8rRF7XRUuzHxbOw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-remap-async-to-generator" "^7.10.1"
+    "@babel/plugin-syntax-async-generators" "^7.8.0"
+
 "@babel/plugin-proposal-async-generator-functions@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-async-generator-functions/-/plugin-proposal-async-generator-functions-7.8.3.tgz#bad329c670b382589721b27540c7d288601c6e6f"
@@ -544,13 +765,21 @@
     "@babel/helper-remap-async-to-generator" "^7.8.3"
     "@babel/plugin-syntax-async-generators" "^7.8.0"
 
-"@babel/plugin-proposal-class-properties@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-class-properties/-/plugin-proposal-class-properties-7.8.3.tgz#5e06654af5cd04b608915aada9b2a6788004464e"
-  integrity sha512-EqFhbo7IosdgPgZggHaNObkmO1kNUe3slaKu54d5OWvy+p9QIKOzK1GAEpAIsZtWVtPXUHSMcT4smvDrCfY4AA==
+"@babel/plugin-proposal-class-properties@^7.10.1", "@babel/plugin-proposal-class-properties@^7.8.3":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-class-properties/-/plugin-proposal-class-properties-7.10.1.tgz#046bc7f6550bb08d9bd1d4f060f5f5a4f1087e01"
+  integrity sha512-sqdGWgoXlnOdgMXU+9MbhzwFRgxVLeiGBqTrnuS7LC2IBU31wSsESbTUreT2O418obpfPdGUR2GbEufZF1bpqw==
   dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.8.3"
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-create-class-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-proposal-dynamic-import@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-dynamic-import/-/plugin-proposal-dynamic-import-7.10.1.tgz#e36979dc1dc3b73f6d6816fc4951da2363488ef0"
+  integrity sha512-Cpc2yUVHTEGPlmiQzXj026kqwjEQAD9I4ZC16uzdbgWgitg/UHKHLffKNCQZ5+y8jpIZPJcKcwsr2HwPh+w3XA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-dynamic-import" "^7.8.0"
 
 "@babel/plugin-proposal-dynamic-import@^7.8.3":
   version "7.8.3"
@@ -561,12 +790,20 @@
     "@babel/plugin-syntax-dynamic-import" "^7.8.0"
 
 "@babel/plugin-proposal-export-default-from@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-export-default-from/-/plugin-proposal-export-default-from-7.8.3.tgz#4cb7c2fdeaed490b60d9bfd3dc8a20f81f9c2e7c"
-  integrity sha512-PYtv2S2OdCdp7GSPDg5ndGZFm9DmWFvuLoS5nBxZCgOBggluLnhTScspJxng96alHQzPyrrHxvC9/w4bFuspeA==
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-export-default-from/-/plugin-proposal-export-default-from-7.10.1.tgz#59ea2a4f09dbb0358c73dab27def3d21a27bd370"
+  integrity sha512-Xfc1CfHapIkwZ/+AI+j4Ha3g233ol0EEdy6SmnUuQQiZX78SfQXHd8tmntc5zqCkwPnIHoiZa6l6p0OAvxYXHw==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-export-default-from" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-export-default-from" "^7.10.1"
+
+"@babel/plugin-proposal-json-strings@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-json-strings/-/plugin-proposal-json-strings-7.10.1.tgz#b1e691ee24c651b5a5e32213222b2379734aff09"
+  integrity sha512-m8r5BmV+ZLpWPtMY2mOKN7wre6HIO4gfIiV+eOmsnZABNenrt/kzYBwrh+KOfgumSWpnlGs5F70J8afYMSJMBg==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-json-strings" "^7.8.0"
 
 "@babel/plugin-proposal-json-strings@^7.8.3":
   version "7.8.3"
@@ -576,6 +813,14 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-json-strings" "^7.8.0"
 
+"@babel/plugin-proposal-nullish-coalescing-operator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.10.1.tgz#02dca21673842ff2fe763ac253777f235e9bbf78"
+  integrity sha512-56cI/uHYgL2C8HVuHOuvVowihhX0sxb3nnfVRzUeVHTWmRHTZrKuAh/OBIMggGU/S1g/1D2CRCXqP+3u7vX7iA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-nullish-coalescing-operator" "^7.8.0"
+
 "@babel/plugin-proposal-nullish-coalescing-operator@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-nullish-coalescing-operator/-/plugin-proposal-nullish-coalescing-operator-7.8.3.tgz#e4572253fdeed65cddeecfdab3f928afeb2fd5d2"
@@ -583,6 +828,14 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-nullish-coalescing-operator" "^7.8.0"
+
+"@babel/plugin-proposal-numeric-separator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-numeric-separator/-/plugin-proposal-numeric-separator-7.10.1.tgz#a9a38bc34f78bdfd981e791c27c6fdcec478c123"
+  integrity sha512-jjfym4N9HtCiNfyyLAVD8WqPYeHUrw4ihxuAynWj6zzp2gf9Ey2f7ImhFm6ikB3CLf5Z/zmcJDri6B4+9j9RsA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-numeric-separator" "^7.10.1"
 
 "@babel/plugin-proposal-numeric-separator@^7.8.3":
   version "7.8.3"
@@ -592,7 +845,16 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-numeric-separator" "^7.8.3"
 
-"@babel/plugin-proposal-object-rest-spread@^7.9.0", "@babel/plugin-proposal-object-rest-spread@^7.9.6":
+"@babel/plugin-proposal-object-rest-spread@^7.10.1", "@babel/plugin-proposal-object-rest-spread@^7.9.6":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.10.1.tgz#cba44908ac9f142650b4a65b8aa06bf3478d5fb6"
+  integrity sha512-Z+Qri55KiQkHh7Fc4BW6o+QBuTagbOp9txE+4U1i79u9oWlf2npkiDx+Rf3iK3lbcHBuNy9UOkwuR5wOMH3LIQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-object-rest-spread" "^7.8.0"
+    "@babel/plugin-transform-parameters" "^7.10.1"
+
+"@babel/plugin-proposal-object-rest-spread@^7.9.0":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-object-rest-spread/-/plugin-proposal-object-rest-spread-7.9.6.tgz#7a093586fcb18b08266eb1a7177da671ac575b63"
   integrity sha512-Ga6/fhGqA9Hj+y6whNpPv8psyaK5xzrQwSPsGPloVkvmH+PqW1ixdnfJ9uIO06OjQNYol3PMnfmJ8vfZtkzF+A==
@@ -600,6 +862,14 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.0"
     "@babel/plugin-transform-parameters" "^7.9.5"
+
+"@babel/plugin-proposal-optional-catch-binding@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-optional-catch-binding/-/plugin-proposal-optional-catch-binding-7.10.1.tgz#c9f86d99305f9fa531b568ff5ab8c964b8b223d2"
+  integrity sha512-VqExgeE62YBqI3ogkGoOJp1R6u12DFZjqwJhqtKc2o5m1YTUuUWnos7bZQFBhwkxIFpWYJ7uB75U7VAPPiKETA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-optional-catch-binding" "^7.8.0"
 
 "@babel/plugin-proposal-optional-catch-binding@^7.8.3":
   version "7.8.3"
@@ -609,6 +879,14 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-optional-catch-binding" "^7.8.0"
 
+"@babel/plugin-proposal-optional-chaining@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.10.1.tgz#15f5d6d22708629451a91be28f8facc55b0e818c"
+  integrity sha512-dqQj475q8+/avvok72CF3AOSV/SGEcH29zT5hhohqqvvZ2+boQoOr7iGldBG5YXTO2qgCgc2B3WvVLUdbeMlGA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-optional-chaining" "^7.8.0"
+
 "@babel/plugin-proposal-optional-chaining@^7.9.0":
   version "7.9.0"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-optional-chaining/-/plugin-proposal-optional-chaining-7.9.0.tgz#31db16b154c39d6b8a645292472b98394c292a58"
@@ -616,6 +894,22 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/plugin-syntax-optional-chaining" "^7.8.0"
+
+"@babel/plugin-proposal-private-methods@^7.10.1", "@babel/plugin-proposal-private-methods@^7.8.3":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-private-methods/-/plugin-proposal-private-methods-7.10.1.tgz#ed85e8058ab0fe309c3f448e5e1b73ca89cdb598"
+  integrity sha512-RZecFFJjDiQ2z6maFprLgrdnm0OzoC23Mx89xf1CcEsxmHuzuXOdniEuI+S3v7vjQG4F5sa6YtUp+19sZuSxHg==
+  dependencies:
+    "@babel/helper-create-class-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-proposal-unicode-property-regex@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-proposal-unicode-property-regex/-/plugin-proposal-unicode-property-regex-7.10.1.tgz#dc04feb25e2dd70c12b05d680190e138fa2c0c6f"
+  integrity sha512-JjfngYRvwmPwmnbRZyNiPFI8zxCZb8euzbCG/LxyKdeTb59tVciKo9GK9bi6JYKInk1H11Dq9j/zRqIH4KigfQ==
+  dependencies:
+    "@babel/helper-create-regexp-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-proposal-unicode-property-regex@^7.4.4", "@babel/plugin-proposal-unicode-property-regex@^7.8.3":
   version "7.8.8"
@@ -639,6 +933,13 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
+"@babel/plugin-syntax-class-properties@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-class-properties/-/plugin-syntax-class-properties-7.10.1.tgz#d5bc0645913df5b17ad7eda0fa2308330bde34c5"
+  integrity sha512-Gf2Yx/iRs1JREDtVZ56OrjjgFHCaldpTnuy9BHla10qyVT3YkIIGEtoDWhyop0ksu1GvNjHIoYRBqm3zoR1jyQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-syntax-class-properties@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-class-properties/-/plugin-syntax-class-properties-7.8.3.tgz#6cb933a8872c8d359bfde69bbeaae5162fd1e8f7"
@@ -653,12 +954,12 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/plugin-syntax-export-default-from@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-export-default-from/-/plugin-syntax-export-default-from-7.8.3.tgz#f1e55ce850091442af4ba9c2550106035b29d678"
-  integrity sha512-a1qnnsr73KLNIQcQlcQ4ZHxqqfBKM6iNQZW2OMTyxNbA2WC7SHWHtGVpFzWtQAuS2pspkWVzdEBXXx8Ik0Za4w==
+"@babel/plugin-syntax-export-default-from@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-export-default-from/-/plugin-syntax-export-default-from-7.10.1.tgz#634f58f36b5d6320d80f75441fdc61e1c05c33b0"
+  integrity sha512-+rcL4S/mN1Ss4zhSCbxzv1Wsf12eauvgTjWi0krXEeX1zd6qSxYnJoniE5Ssr5w2WPt61oUCJyXIFQIqO/29zw==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-syntax-json-strings@^7.8.0", "@babel/plugin-syntax-json-strings@^7.8.3":
   version "7.8.3"
@@ -667,12 +968,12 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
-"@babel/plugin-syntax-jsx@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-jsx/-/plugin-syntax-jsx-7.8.3.tgz#521b06c83c40480f1e58b4fd33b92eceb1d6ea94"
-  integrity sha512-WxdW9xyLgBdefoo0Ynn3MRSkhe5tFVxxKNVdnZSh318WrG2e2jH+E9wd/++JsqcLJZPfz87njQJ8j2Upjm0M0A==
+"@babel/plugin-syntax-jsx@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-jsx/-/plugin-syntax-jsx-7.10.1.tgz#0ae371134a42b91d5418feb3c8c8d43e1565d2da"
+  integrity sha512-+OxyOArpVFXQeXKLO9o+r2I4dIoVoy6+Uu0vKELrlweDM3QJADZj+Z+5ERansZqIZBcLj42vHnDI8Rz9BnRIuQ==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-syntax-logical-assignment-operators@^7.8.3":
   version "7.8.3"
@@ -687,6 +988,13 @@
   integrity sha512-aSff4zPII1u2QD7y+F8oDsz19ew4IGEJg9SVW+bqwpwtfFleiQDMdzA/R+UlWDzfnHFCxxleFT0PMIrR36XLNQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
+
+"@babel/plugin-syntax-numeric-separator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-numeric-separator/-/plugin-syntax-numeric-separator-7.10.1.tgz#25761ee7410bc8cf97327ba741ee94e4a61b7d99"
+  integrity sha512-uTd0OsHrpe3tH5gRPTxG8Voh99/WCU78vIm5NMRYPAqC8lR4vajt6KkCAknCHrx24vkPdd/05yfdGSB4EIY2mg==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-syntax-numeric-separator@^7.8.0", "@babel/plugin-syntax-numeric-separator@^7.8.3":
   version "7.8.3"
@@ -716,6 +1024,13 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.0"
 
+"@babel/plugin-syntax-top-level-await@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-top-level-await/-/plugin-syntax-top-level-await-7.10.1.tgz#8b8733f8c57397b3eaa47ddba8841586dcaef362"
+  integrity sha512-hgA5RYkmZm8FTFT3yu2N9Bx7yVVOKYT6yEdXXo6j2JTm0wNxgqaGeQVaSHRjhfnQbX91DtjFB6McRFSlcJH3xQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-syntax-top-level-await@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-top-level-await/-/plugin-syntax-top-level-await-7.8.3.tgz#3acdece695e6b13aaf57fc291d1a800950c71391"
@@ -723,12 +1038,19 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-syntax-typescript@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-typescript/-/plugin-syntax-typescript-7.8.3.tgz#c1f659dda97711a569cef75275f7e15dcaa6cabc"
-  integrity sha512-GO1MQ/SGGGoiEXY0e0bSpHimJvxqB7lktLLIq2pv8xG7WZ8IMEle74jIe1FhprHBWjwjZtXHkycDLZXIWM5Wfg==
+"@babel/plugin-syntax-typescript@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-syntax-typescript/-/plugin-syntax-typescript-7.10.1.tgz#5e82bc27bb4202b93b949b029e699db536733810"
+  integrity sha512-X/d8glkrAtra7CaQGMiGs/OGa6XgUzqPcBXCIGFCpCqnfGlT0Wfbzo/B89xHhnInTaItPK8LALblVXcUOEh95Q==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-transform-arrow-functions@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-arrow-functions/-/plugin-transform-arrow-functions-7.10.1.tgz#cb5ee3a36f0863c06ead0b409b4cc43a889b295b"
+  integrity sha512-6AZHgFJKP3DJX0eCNJj01RpytUa3SOGawIxweHkNX2L6PYikOZmoh5B0d7hIHaIgveMjX990IAa/xK7jRTN8OA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-arrow-functions@^7.8.3":
   version "7.8.3"
@@ -736,6 +1058,15 @@
   integrity sha512-0MRF+KC8EqH4dbuITCWwPSzsyO3HIWWlm30v8BbbpOrS1B++isGxPnnuq/IZvOX5J2D/p7DQalQm+/2PnlKGxg==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-async-to-generator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-async-to-generator/-/plugin-transform-async-to-generator-7.10.1.tgz#e5153eb1a3e028f79194ed8a7a4bf55f862b2062"
+  integrity sha512-XCgYjJ8TY2slj6SReBUyamJn3k2JLUIiiR5b6t1mNCMSvv7yx+jJpaewakikp0uWFQSF7ChPPoe3dHmXLpISkg==
+  dependencies:
+    "@babel/helper-module-imports" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-remap-async-to-generator" "^7.10.1"
 
 "@babel/plugin-transform-async-to-generator@^7.8.3":
   version "7.8.3"
@@ -746,12 +1077,27 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/helper-remap-async-to-generator" "^7.8.3"
 
+"@babel/plugin-transform-block-scoped-functions@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-block-scoped-functions/-/plugin-transform-block-scoped-functions-7.10.1.tgz#146856e756d54b20fff14b819456b3e01820b85d"
+  integrity sha512-B7K15Xp8lv0sOJrdVAoukKlxP9N59HS48V1J3U/JGj+Ad+MHq+am6xJVs85AgXrQn4LV8vaYFOB+pr/yIuzW8Q==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-block-scoped-functions@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-block-scoped-functions/-/plugin-transform-block-scoped-functions-7.8.3.tgz#437eec5b799b5852072084b3ae5ef66e8349e8a3"
   integrity sha512-vo4F2OewqjbB1+yaJ7k2EJFHlTP3jR634Z9Cj9itpqNjuLXvhlVxgnjsHsdRgASR8xYDrx6onw4vW5H6We0Jmg==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-block-scoping@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-block-scoping/-/plugin-transform-block-scoping-7.10.1.tgz#47092d89ca345811451cd0dc5d91605982705d5e"
+  integrity sha512-8bpWG6TtF5akdhIm/uWTyjHqENpy13Fx8chg7pFH875aNLwX8JxIxqm08gmAT+Whe6AOmaTeLPe7dpLbXt+xUw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    lodash "^4.17.13"
 
 "@babel/plugin-transform-block-scoping@^7.8.3":
   version "7.8.3"
@@ -761,7 +1107,21 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     lodash "^4.17.13"
 
-"@babel/plugin-transform-classes@^7.9.0", "@babel/plugin-transform-classes@^7.9.5":
+"@babel/plugin-transform-classes@^7.10.1", "@babel/plugin-transform-classes@^7.9.5":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-classes/-/plugin-transform-classes-7.10.1.tgz#6e11dd6c4dfae70f540480a4702477ed766d733f"
+  integrity sha512-P9V0YIh+ln/B3RStPoXpEQ/CoAxQIhRSUn7aXqQ+FZJ2u8+oCtjIXR3+X0vsSD8zv+mb56K7wZW1XiDTDGiDRQ==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-define-map" "^7.10.1"
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/helper-optimise-call-expression" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-replace-supers" "^7.10.1"
+    "@babel/helper-split-export-declaration" "^7.10.1"
+    globals "^11.1.0"
+
+"@babel/plugin-transform-classes@^7.9.0":
   version "7.9.5"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-classes/-/plugin-transform-classes-7.9.5.tgz#800597ddb8aefc2c293ed27459c1fcc935a26c2c"
   integrity sha512-x2kZoIuLC//O5iA7PEvecB105o7TLzZo8ofBVhP79N+DO3jaX+KYfww9TQcfBEZD0nikNyYcGB1IKtRq36rdmg==
@@ -775,6 +1135,13 @@
     "@babel/helper-split-export-declaration" "^7.8.3"
     globals "^11.1.0"
 
+"@babel/plugin-transform-computed-properties@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-computed-properties/-/plugin-transform-computed-properties-7.10.1.tgz#59aa399064429d64dce5cf76ef9b90b7245ebd07"
+  integrity sha512-mqSrGjp3IefMsXIenBfGcPXxJxweQe2hEIwMQvjtiDQ9b1IBvDUjkAtV/HMXX47/vXf14qDNedXsIiNd1FmkaQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-computed-properties@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-computed-properties/-/plugin-transform-computed-properties-7.8.3.tgz#96d0d28b7f7ce4eb5b120bb2e0e943343c86f81b"
@@ -782,12 +1149,27 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-transform-destructuring@^7.8.3", "@babel/plugin-transform-destructuring@^7.9.5":
+"@babel/plugin-transform-destructuring@^7.10.1", "@babel/plugin-transform-destructuring@^7.9.5":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-destructuring/-/plugin-transform-destructuring-7.10.1.tgz#abd58e51337815ca3a22a336b85f62b998e71907"
+  integrity sha512-V/nUc4yGWG71OhaTH705pU8ZSdM6c1KmmLP8ys59oOYbT7RpMYAR3MsVOt6OHL0WzG7BlTU076va9fjJyYzJMA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-transform-destructuring@^7.8.3":
   version "7.9.5"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-destructuring/-/plugin-transform-destructuring-7.9.5.tgz#72c97cf5f38604aea3abf3b935b0e17b1db76a50"
   integrity sha512-j3OEsGel8nHL/iusv/mRd5fYZ3DrOxWC82x0ogmdN/vHfAP4MYw+AFKYanzWlktNwikKvlzUV//afBW5FTp17Q==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-dotall-regex@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-dotall-regex/-/plugin-transform-dotall-regex-7.10.1.tgz#920b9fec2d78bb57ebb64a644d5c2ba67cc104ee"
+  integrity sha512-19VIMsD1dp02RvduFUmfzj8uknaO3uiHHF0s3E1OHnVsNj8oge8EQ5RzHRbJjGSetRnkEuBYO7TG1M5kKjGLOA==
+  dependencies:
+    "@babel/helper-create-regexp-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-dotall-regex@^7.4.4", "@babel/plugin-transform-dotall-regex@^7.8.3":
   version "7.8.3"
@@ -797,12 +1179,27 @@
     "@babel/helper-create-regexp-features-plugin" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-duplicate-keys@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-duplicate-keys/-/plugin-transform-duplicate-keys-7.10.1.tgz#c900a793beb096bc9d4d0a9d0cde19518ffc83b9"
+  integrity sha512-wIEpkX4QvX8Mo9W6XF3EdGttrIPZWozHfEaDTU0WJD/TDnXMvdDh30mzUl/9qWhnf7naicYartcEfUghTCSNpA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-duplicate-keys@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-duplicate-keys/-/plugin-transform-duplicate-keys-7.8.3.tgz#8d12df309aa537f272899c565ea1768e286e21f1"
   integrity sha512-s8dHiBUbcbSgipS4SMFuWGqCvyge5V2ZeAWzR6INTVC3Ltjig/Vw1G2Gztv0vU/hRG9X8IvKvYdoksnUfgXOEQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-exponentiation-operator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-exponentiation-operator/-/plugin-transform-exponentiation-operator-7.10.1.tgz#279c3116756a60dd6e6f5e488ba7957db9c59eb3"
+  integrity sha512-lr/przdAbpEA2BUzRvjXdEDLrArGRRPwbaF9rvayuHRvdQ7lUTTkZnhZrJ4LE2jvgMRFF4f0YuPQ20vhiPYxtA==
+  dependencies:
+    "@babel/helper-builder-binary-assignment-operator-visitor" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-exponentiation-operator@^7.8.3":
   version "7.8.3"
@@ -812,12 +1209,27 @@
     "@babel/helper-builder-binary-assignment-operator-visitor" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-for-of@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-for-of/-/plugin-transform-for-of-7.10.1.tgz#ff01119784eb0ee32258e8646157ba2501fcfda5"
+  integrity sha512-US8KCuxfQcn0LwSCMWMma8M2R5mAjJGsmoCBVwlMygvmDUMkTCykc84IqN1M7t+agSfOmLYTInLCHJM+RUoz+w==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-for-of@^7.9.0":
   version "7.9.0"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-for-of/-/plugin-transform-for-of-7.9.0.tgz#0f260e27d3e29cd1bb3128da5e76c761aa6c108e"
   integrity sha512-lTAnWOpMwOXpyDx06N+ywmF3jNbafZEqZ96CGYabxHrxNX8l5ny7dt4bK/rGwAh9utyP2b2Hv7PlZh1AAS54FQ==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-function-name@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-function-name/-/plugin-transform-function-name-7.10.1.tgz#4ed46fd6e1d8fde2a2ec7b03c66d853d2c92427d"
+  integrity sha512-//bsKsKFBJfGd65qSNNh1exBy5Y9gD9ZN+DvrJ8f7HXr4avE5POW6zB7Rj6VnqHV33+0vXWUwJT0wSHubiAQkw==
+  dependencies:
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-function-name@^7.8.3":
   version "7.8.3"
@@ -827,12 +1239,26 @@
     "@babel/helper-function-name" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-literals@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-literals/-/plugin-transform-literals-7.10.1.tgz#5794f8da82846b22e4e6631ea1658bce708eb46a"
+  integrity sha512-qi0+5qgevz1NHLZroObRm5A+8JJtibb7vdcPQF1KQE12+Y/xxl8coJ+TpPW9iRq+Mhw/NKLjm+5SHtAHCC7lAw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-literals@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-literals/-/plugin-transform-literals-7.8.3.tgz#aef239823d91994ec7b68e55193525d76dbd5dc1"
   integrity sha512-3Tqf8JJ/qB7TeldGl+TT55+uQei9JfYaregDcEAyBZ7akutriFrt6C/wLYIer6OYhleVQvH/ntEhjE/xMmy10A==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-member-expression-literals@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-member-expression-literals/-/plugin-transform-member-expression-literals-7.10.1.tgz#90347cba31bca6f394b3f7bd95d2bbfd9fce2f39"
+  integrity sha512-UmaWhDokOFT2GcgU6MkHC11i0NQcL63iqeufXWfRy6pUOGYeCGEKhvfFO6Vz70UfYJYHwveg62GS83Rvpxn+NA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-member-expression-literals@^7.8.3":
   version "7.8.3"
@@ -841,7 +1267,16 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-transform-modules-amd@^7.9.0", "@babel/plugin-transform-modules-amd@^7.9.6":
+"@babel/plugin-transform-modules-amd@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-amd/-/plugin-transform-modules-amd-7.10.1.tgz#65950e8e05797ebd2fe532b96e19fc5482a1d52a"
+  integrity sha512-31+hnWSFRI4/ACFr1qkboBbrTxoBIzj7qA69qlq8HY8p7+YCzkCT6/TvQ1a4B0z27VeWtAeJd6pr5G04dc1iHw==
+  dependencies:
+    "@babel/helper-module-transforms" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    babel-plugin-dynamic-import-node "^2.3.3"
+
+"@babel/plugin-transform-modules-amd@^7.9.0":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-amd/-/plugin-transform-modules-amd-7.9.6.tgz#8539ec42c153d12ea3836e0e3ac30d5aae7b258e"
   integrity sha512-zoT0kgC3EixAyIAU+9vfaUVKTv9IxBDSabgHoUCBP6FqEJ+iNiN7ip7NBKcYqbfUDfuC2mFCbM7vbu4qJgOnDw==
@@ -850,7 +1285,17 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     babel-plugin-dynamic-import-node "^2.3.3"
 
-"@babel/plugin-transform-modules-commonjs@^7.9.0", "@babel/plugin-transform-modules-commonjs@^7.9.6":
+"@babel/plugin-transform-modules-commonjs@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.10.1.tgz#d5ff4b4413ed97ffded99961056e1fb980fb9301"
+  integrity sha512-AQG4fc3KOah0vdITwt7Gi6hD9BtQP/8bhem7OjbaMoRNCH5Djx42O2vYMfau7QnAzQCa+RJnhJBmFFMGpQEzrg==
+  dependencies:
+    "@babel/helper-module-transforms" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-simple-access" "^7.10.1"
+    babel-plugin-dynamic-import-node "^2.3.3"
+
+"@babel/plugin-transform-modules-commonjs@^7.9.0":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-commonjs/-/plugin-transform-modules-commonjs-7.9.6.tgz#64b7474a4279ee588cacd1906695ca721687c277"
   integrity sha512-7H25fSlLcn+iYimmsNe3uK1at79IE6SKW9q0/QeEHTMC9MdOZ+4bA+T1VFB5fgOqBWoqlifXRzYD0JPdmIrgSQ==
@@ -860,7 +1305,17 @@
     "@babel/helper-simple-access" "^7.8.3"
     babel-plugin-dynamic-import-node "^2.3.3"
 
-"@babel/plugin-transform-modules-systemjs@^7.9.0", "@babel/plugin-transform-modules-systemjs@^7.9.6":
+"@babel/plugin-transform-modules-systemjs@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-systemjs/-/plugin-transform-modules-systemjs-7.10.1.tgz#9962e4b0ac6aaf2e20431ada3d8ec72082cbffb6"
+  integrity sha512-ewNKcj1TQZDL3YnO85qh9zo1YF1CHgmSTlRQgHqe63oTrMI85cthKtZjAiZSsSNjPQ5NCaYo5QkbYqEw1ZBgZA==
+  dependencies:
+    "@babel/helper-hoist-variables" "^7.10.1"
+    "@babel/helper-module-transforms" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    babel-plugin-dynamic-import-node "^2.3.3"
+
+"@babel/plugin-transform-modules-systemjs@^7.9.0":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-systemjs/-/plugin-transform-modules-systemjs-7.9.6.tgz#207f1461c78a231d5337a92140e52422510d81a4"
   integrity sha512-NW5XQuW3N2tTHim8e1b7qGy7s0kZ2OH3m5octc49K1SdAKGxYxeIx7hiIz05kS1R2R+hOWcsr1eYwcGhrdHsrg==
@@ -869,6 +1324,14 @@
     "@babel/helper-module-transforms" "^7.9.0"
     "@babel/helper-plugin-utils" "^7.8.3"
     babel-plugin-dynamic-import-node "^2.3.3"
+
+"@babel/plugin-transform-modules-umd@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-modules-umd/-/plugin-transform-modules-umd-7.10.1.tgz#ea080911ffc6eb21840a5197a39ede4ee67b1595"
+  integrity sha512-EIuiRNMd6GB6ulcYlETnYYfgv4AxqrswghmBRQbWLHZxN4s7mupxzglnHqk9ZiUpDI4eRWewedJJNj67PWOXKA==
+  dependencies:
+    "@babel/helper-module-transforms" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-modules-umd@^7.9.0":
   version "7.9.0"
@@ -885,12 +1348,27 @@
   dependencies:
     "@babel/helper-create-regexp-features-plugin" "^7.8.3"
 
+"@babel/plugin-transform-new-target@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-new-target/-/plugin-transform-new-target-7.10.1.tgz#6ee41a5e648da7632e22b6fb54012e87f612f324"
+  integrity sha512-MBlzPc1nJvbmO9rPr1fQwXOM2iGut+JC92ku6PbiJMMK7SnQc1rytgpopveE3Evn47gzvGYeCdgfCDbZo0ecUw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-new-target@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-new-target/-/plugin-transform-new-target-7.8.3.tgz#60cc2ae66d85c95ab540eb34babb6434d4c70c43"
   integrity sha512-QuSGysibQpyxexRyui2vca+Cmbljo8bcRckgzYV4kRIsHpVeyeC3JDO63pY+xFZ6bWOBn7pfKZTqV4o/ix9sFw==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-object-super@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-object-super/-/plugin-transform-object-super-7.10.1.tgz#2e3016b0adbf262983bf0d5121d676a5ed9c4fde"
+  integrity sha512-WnnStUDN5GL+wGQrJylrnnVlFhFmeArINIR9gjhSeYyvroGhBrSAXYg/RHsnfzmsa+onJrTJrEClPzgNmmQ4Gw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-replace-supers" "^7.10.1"
 
 "@babel/plugin-transform-object-super@^7.8.3":
   version "7.8.3"
@@ -900,6 +1378,14 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/helper-replace-supers" "^7.8.3"
 
+"@babel/plugin-transform-parameters@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-parameters/-/plugin-transform-parameters-7.10.1.tgz#b25938a3c5fae0354144a720b07b32766f683ddd"
+  integrity sha512-tJ1T0n6g4dXMsL45YsSzzSDZCxiHXAQp/qHrucOq5gEHncTA3xDxnd5+sZcoQp+N1ZbieAaB8r/VUCG0gqseOg==
+  dependencies:
+    "@babel/helper-get-function-arity" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-parameters@^7.8.7", "@babel/plugin-transform-parameters@^7.9.5":
   version "7.9.5"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-parameters/-/plugin-transform-parameters-7.9.5.tgz#173b265746f5e15b2afe527eeda65b73623a0795"
@@ -907,6 +1393,13 @@
   dependencies:
     "@babel/helper-get-function-arity" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-property-literals@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-property-literals/-/plugin-transform-property-literals-7.10.1.tgz#cffc7315219230ed81dc53e4625bf86815b6050d"
+  integrity sha512-Kr6+mgag8auNrgEpbfIWzdXYOvqDHZOF0+Bx2xh4H2EDNwcbRb9lY6nkZg8oSjsX+DH9Ebxm9hOqtKW+gRDeNA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-property-literals@^7.8.3":
   version "7.8.3"
@@ -916,53 +1409,68 @@
     "@babel/helper-plugin-utils" "^7.8.3"
 
 "@babel/plugin-transform-react-constant-elements@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.9.0.tgz#a75abc936a3819edec42d3386d9f1c93f28d9d9e"
-  integrity sha512-wXMXsToAUOxJuBBEHajqKLFWcCkOSLshTI2ChCFFj1zDd7od4IOxiwLCOObNUvOpkxLpjIuaIdBMmNt6ocCPAw==
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-constant-elements/-/plugin-transform-react-constant-elements-7.10.1.tgz#c7f117a54657cba3f9d32012e050fc89982df9e1"
+  integrity sha512-V4os6bkWt/jbrzfyVcZn2ZpuHZkvj3vyBU0U/dtS8SZuMS7Rfx5oknTrtfyXJ2/QZk8gX7Yls5Z921ItNpE30Q==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
-"@babel/plugin-transform-react-display-name@^7.8.3":
-  version "7.8.3"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-display-name/-/plugin-transform-react-display-name-7.8.3.tgz#70ded987c91609f78353dd76d2fb2a0bb991e8e5"
-  integrity sha512-3Jy/PCw8Fe6uBKtEgz3M82ljt+lTg+xJaM4og+eyu83qLT87ZUSckn0wy7r31jflURWLO83TW6Ylf7lyXj3m5A==
+"@babel/plugin-transform-react-display-name@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-display-name/-/plugin-transform-react-display-name-7.10.1.tgz#e6a33f6d48dfb213dda5e007d0c7ff82b6a3d8ef"
+  integrity sha512-rBjKcVwjk26H3VX8pavMxGf33LNlbocMHdSeldIEswtQ/hrjyTG8fKKILW1cSkODyRovckN/uZlGb2+sAV9JUQ==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
-"@babel/plugin-transform-react-jsx-development@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.9.0.tgz#3c2a130727caf00c2a293f0aed24520825dbf754"
-  integrity sha512-tK8hWKrQncVvrhvtOiPpKrQjfNX3DtkNLSX4ObuGcpS9p0QrGetKmlySIGR07y48Zft8WVgPakqd/bk46JrMSw==
+"@babel/plugin-transform-react-jsx-development@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-development/-/plugin-transform-react-jsx-development-7.10.1.tgz#1ac6300d8b28ef381ee48e6fec430cc38047b7f3"
+  integrity sha512-XwDy/FFoCfw9wGFtdn5Z+dHh6HXKHkC6DwKNWpN74VWinUagZfDcEJc3Y8Dn5B3WMVnAllX8Kviaw7MtC5Epwg==
   dependencies:
-    "@babel/helper-builder-react-jsx-experimental" "^7.9.0"
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-jsx" "^7.8.3"
+    "@babel/helper-builder-react-jsx-experimental" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-jsx" "^7.10.1"
 
-"@babel/plugin-transform-react-jsx-self@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.9.0.tgz#f4f26a325820205239bb915bad8e06fcadabb49b"
-  integrity sha512-K2ObbWPKT7KUTAoyjCsFilOkEgMvFG+y0FqOl6Lezd0/13kMkkjHskVsZvblRPj1PHA44PrToaZANrryppzTvQ==
+"@babel/plugin-transform-react-jsx-self@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-self/-/plugin-transform-react-jsx-self-7.10.1.tgz#22143e14388d72eb88649606bb9e46f421bc3821"
+  integrity sha512-4p+RBw9d1qV4S749J42ZooeQaBomFPrSxa9JONLHJ1TxCBo3TzJ79vtmG2S2erUT8PDDrPdw4ZbXGr2/1+dILA==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-jsx" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-jsx" "^7.10.1"
 
-"@babel/plugin-transform-react-jsx-source@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.9.0.tgz#89ef93025240dd5d17d3122294a093e5e0183de0"
-  integrity sha512-K6m3LlSnTSfRkM6FcRk8saNEeaeyG5k7AVkBU2bZK3+1zdkSED3qNdsWrUgQBeTVD2Tp3VMmerxVO2yM5iITmw==
+"@babel/plugin-transform-react-jsx-source@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx-source/-/plugin-transform-react-jsx-source-7.10.1.tgz#30db3d4ee3cdebbb26a82a9703673714777a4273"
+  integrity sha512-neAbaKkoiL+LXYbGDvh6PjPG+YeA67OsZlE78u50xbWh2L1/C81uHiNP5d1fw+uqUIoiNdCC8ZB+G4Zh3hShJA==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-jsx" "^7.8.3"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-jsx" "^7.10.1"
 
-"@babel/plugin-transform-react-jsx@^7.9.4":
-  version "7.9.4"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx/-/plugin-transform-react-jsx-7.9.4.tgz#86f576c8540bd06d0e95e0b61ea76d55f6cbd03f"
-  integrity sha512-Mjqf3pZBNLt854CK0C/kRuXAnE6H/bo7xYojP+WGtX8glDGSibcwnsWwhwoSuRg0+EBnxPC1ouVnuetUIlPSAw==
+"@babel/plugin-transform-react-jsx@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-jsx/-/plugin-transform-react-jsx-7.10.1.tgz#91f544248ba131486decb5d9806da6a6e19a2896"
+  integrity sha512-MBVworWiSRBap3Vs39eHt+6pJuLUAaK4oxGc8g+wY+vuSJvLiEQjW1LSTqKb8OUPtDvHCkdPhk7d6sjC19xyFw==
   dependencies:
-    "@babel/helper-builder-react-jsx" "^7.9.0"
-    "@babel/helper-builder-react-jsx-experimental" "^7.9.0"
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-jsx" "^7.8.3"
+    "@babel/helper-builder-react-jsx" "^7.10.1"
+    "@babel/helper-builder-react-jsx-experimental" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-jsx" "^7.10.1"
+
+"@babel/plugin-transform-react-pure-annotations@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-react-pure-annotations/-/plugin-transform-react-pure-annotations-7.10.1.tgz#f5e7c755d3e7614d4c926e144f501648a5277b70"
+  integrity sha512-mfhoiai083AkeewsBHUpaS/FM1dmUENHBMpS/tugSJ7VXqXO5dCN1Gkint2YvM1Cdv1uhmAKt1ZOuAjceKmlLA==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-transform-regenerator@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-regenerator/-/plugin-transform-regenerator-7.10.1.tgz#10e175cbe7bdb63cc9b39f9b3f823c5c7c5c5490"
+  integrity sha512-B3+Y2prScgJ2Bh/2l9LJxKbb8C8kRfsG4AdPT+n7ixBHIxJaIG8bi8tgjxUMege1+WqSJ+7gu1YeoMVO3gPWzw==
+  dependencies:
+    regenerator-transform "^0.14.2"
 
 "@babel/plugin-transform-regenerator@^7.8.7":
   version "7.8.7"
@@ -971,12 +1479,26 @@
   dependencies:
     regenerator-transform "^0.14.2"
 
+"@babel/plugin-transform-reserved-words@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-reserved-words/-/plugin-transform-reserved-words-7.10.1.tgz#0fc1027312b4d1c3276a57890c8ae3bcc0b64a86"
+  integrity sha512-qN1OMoE2nuqSPmpTqEM7OvJ1FkMEV+BjVeZZm9V9mq/x1JLKQ4pcv8riZJMNN3u2AUGl0ouOMjRr2siecvHqUQ==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-reserved-words@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-reserved-words/-/plugin-transform-reserved-words-7.8.3.tgz#9a0635ac4e665d29b162837dd3cc50745dfdf1f5"
   integrity sha512-mwMxcycN3omKFDjDQUl+8zyMsBfjRFr0Zn/64I41pmjv4NJuqcYlEtezwYtw9TFd9WR1vN5kiM+O0gMZzO6L0A==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-shorthand-properties@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-shorthand-properties/-/plugin-transform-shorthand-properties-7.10.1.tgz#e8b54f238a1ccbae482c4dce946180ae7b3143f3"
+  integrity sha512-AR0E/lZMfLstScFwztApGeyTHJ5u3JUKMjneqRItWeEqDdHWZwAOKycvQNCasCK/3r5YXsuNG25funcJDu7Y2g==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-shorthand-properties@^7.8.3":
   version "7.8.3"
@@ -985,12 +1507,27 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-spread@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-spread/-/plugin-transform-spread-7.10.1.tgz#0c6d618a0c4461a274418460a28c9ccf5239a7c8"
+  integrity sha512-8wTPym6edIrClW8FI2IoaePB91ETOtg36dOkj3bYcNe7aDMN2FXEoUa+WrmPc4xa1u2PQK46fUX2aCb+zo9rfw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-spread@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-spread/-/plugin-transform-spread-7.8.3.tgz#9c8ffe8170fdfb88b114ecb920b82fb6e95fe5e8"
   integrity sha512-CkuTU9mbmAoFOI1tklFWYYbzX5qCIZVXPVy0jpXgGwkplCndQAa58s2jr66fTeQnA64bDox0HL4U56CFYoyC7g==
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
+
+"@babel/plugin-transform-sticky-regex@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-sticky-regex/-/plugin-transform-sticky-regex-7.10.1.tgz#90fc89b7526228bed9842cff3588270a7a393b00"
+  integrity sha512-j17ojftKjrL7ufX8ajKvwRilwqTok4q+BjkknmQw9VNHnItTyMP5anPFzxFJdCQs7clLcWpCV3ma+6qZWLnGMA==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/helper-regex" "^7.10.1"
 
 "@babel/plugin-transform-sticky-regex@^7.8.3":
   version "7.8.3"
@@ -1000,6 +1537,14 @@
     "@babel/helper-plugin-utils" "^7.8.3"
     "@babel/helper-regex" "^7.8.3"
 
+"@babel/plugin-transform-template-literals@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-template-literals/-/plugin-transform-template-literals-7.10.1.tgz#914c7b7f4752c570ea00553b4284dad8070e8628"
+  integrity sha512-t7B/3MQf5M1T9hPCRG28DNGZUuxAuDqLYS03rJrIk2prj/UV7Z6FOneijhQhnv/Xa039vidXeVbvjK2SK5f7Gg==
+  dependencies:
+    "@babel/helper-annotate-as-pure" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-template-literals@^7.8.3":
   version "7.8.3"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-template-literals/-/plugin-transform-template-literals-7.8.3.tgz#7bfa4732b455ea6a43130adc0ba767ec0e402a80"
@@ -1008,6 +1553,13 @@
     "@babel/helper-annotate-as-pure" "^7.8.3"
     "@babel/helper-plugin-utils" "^7.8.3"
 
+"@babel/plugin-transform-typeof-symbol@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-typeof-symbol/-/plugin-transform-typeof-symbol-7.10.1.tgz#60c0239b69965d166b80a84de7315c1bc7e0bb0e"
+  integrity sha512-qX8KZcmbvA23zDi+lk9s6hC1FM7jgLHYIjuLgULgc8QtYnmB3tAVIYkNoKRQ75qWBeyzcoMoK8ZQmogGtC/w0g==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
 "@babel/plugin-transform-typeof-symbol@^7.8.4":
   version "7.8.4"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-typeof-symbol/-/plugin-transform-typeof-symbol-7.8.4.tgz#ede4062315ce0aaf8a657a920858f1a2f35fc412"
@@ -1015,14 +1567,29 @@
   dependencies:
     "@babel/helper-plugin-utils" "^7.8.3"
 
-"@babel/plugin-transform-typescript@^7.9.0":
-  version "7.9.6"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-typescript/-/plugin-transform-typescript-7.9.6.tgz#2248971416a506fc78278fc0c0ea3179224af1e9"
-  integrity sha512-8OvsRdvpt3Iesf2qsAn+YdlwAJD7zJ+vhFZmDCa4b8dTp7MmHtKk5FF2mCsGxjZwuwsy/yIIay/nLmxST1ctVQ==
+"@babel/plugin-transform-typescript@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-typescript/-/plugin-transform-typescript-7.10.1.tgz#2c54daea231f602468686d9faa76f182a94507a6"
+  integrity sha512-v+QWKlmCnsaimLeqq9vyCsVRMViZG1k2SZTlcZvB+TqyH570Zsij8nvVUZzOASCRiQFUxkLrn9Wg/kH0zgy5OQ==
   dependencies:
-    "@babel/helper-create-class-features-plugin" "^7.9.6"
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-syntax-typescript" "^7.8.3"
+    "@babel/helper-create-class-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-syntax-typescript" "^7.10.1"
+
+"@babel/plugin-transform-unicode-escapes@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-unicode-escapes/-/plugin-transform-unicode-escapes-7.10.1.tgz#add0f8483dab60570d9e03cecef6c023aa8c9940"
+  integrity sha512-zZ0Poh/yy1d4jeDWpx/mNwbKJVwUYJX73q+gyh4bwtG0/iUlzdEu0sLMda8yuDFS6LBQlT/ST1SJAR6zYwXWgw==
+  dependencies:
+    "@babel/helper-plugin-utils" "^7.10.1"
+
+"@babel/plugin-transform-unicode-regex@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fplugin-transform-unicode-regex/-/plugin-transform-unicode-regex-7.10.1.tgz#6b58f2aea7b68df37ac5025d9c88752443a6b43f"
+  integrity sha512-Y/2a2W299k0VIUdbqYm9X2qS6fE0CUBhhiPpimK6byy7OJ/kORLlIX+J6UrjgNu5awvs62k+6RSslxhcvVw2Tw==
+  dependencies:
+    "@babel/helper-create-regexp-features-plugin" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
 
 "@babel/plugin-transform-unicode-regex@^7.8.3":
   version "7.8.3"
@@ -1099,66 +1666,70 @@
     semver "^5.5.0"
 
 "@babel/preset-env@^7.9.6":
-  version "7.9.6"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-env/-/preset-env-7.9.6.tgz#df063b276c6455ec6fcfc6e53aacc38da9b0aea6"
-  integrity sha512-0gQJ9RTzO0heXOhzftog+a/WyOuqMrAIugVYxMYf83gh1CQaQDjMtsOpqOwXyDL/5JcWsrCm8l4ju8QC97O7EQ==
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-env/-/preset-env-7.10.2.tgz#715930f2cf8573b0928005ee562bed52fb65fdfb"
+  integrity sha512-MjqhX0RZaEgK/KueRzh+3yPSk30oqDKJ5HP5tqTSB1e2gzGS3PLy7K0BIpnp78+0anFuSwOeuCf1zZO7RzRvEA==
   dependencies:
-    "@babel/compat-data" "^7.9.6"
-    "@babel/helper-compilation-targets" "^7.9.6"
-    "@babel/helper-module-imports" "^7.8.3"
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-proposal-async-generator-functions" "^7.8.3"
-    "@babel/plugin-proposal-dynamic-import" "^7.8.3"
-    "@babel/plugin-proposal-json-strings" "^7.8.3"
-    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.8.3"
-    "@babel/plugin-proposal-numeric-separator" "^7.8.3"
-    "@babel/plugin-proposal-object-rest-spread" "^7.9.6"
-    "@babel/plugin-proposal-optional-catch-binding" "^7.8.3"
-    "@babel/plugin-proposal-optional-chaining" "^7.9.0"
-    "@babel/plugin-proposal-unicode-property-regex" "^7.8.3"
+    "@babel/compat-data" "^7.10.1"
+    "@babel/helper-compilation-targets" "^7.10.2"
+    "@babel/helper-module-imports" "^7.10.1"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-proposal-async-generator-functions" "^7.10.1"
+    "@babel/plugin-proposal-class-properties" "^7.10.1"
+    "@babel/plugin-proposal-dynamic-import" "^7.10.1"
+    "@babel/plugin-proposal-json-strings" "^7.10.1"
+    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.10.1"
+    "@babel/plugin-proposal-numeric-separator" "^7.10.1"
+    "@babel/plugin-proposal-object-rest-spread" "^7.10.1"
+    "@babel/plugin-proposal-optional-catch-binding" "^7.10.1"
+    "@babel/plugin-proposal-optional-chaining" "^7.10.1"
+    "@babel/plugin-proposal-private-methods" "^7.10.1"
+    "@babel/plugin-proposal-unicode-property-regex" "^7.10.1"
     "@babel/plugin-syntax-async-generators" "^7.8.0"
+    "@babel/plugin-syntax-class-properties" "^7.10.1"
     "@babel/plugin-syntax-dynamic-import" "^7.8.0"
     "@babel/plugin-syntax-json-strings" "^7.8.0"
     "@babel/plugin-syntax-nullish-coalescing-operator" "^7.8.0"
-    "@babel/plugin-syntax-numeric-separator" "^7.8.0"
+    "@babel/plugin-syntax-numeric-separator" "^7.10.1"
     "@babel/plugin-syntax-object-rest-spread" "^7.8.0"
     "@babel/plugin-syntax-optional-catch-binding" "^7.8.0"
     "@babel/plugin-syntax-optional-chaining" "^7.8.0"
-    "@babel/plugin-syntax-top-level-await" "^7.8.3"
-    "@babel/plugin-transform-arrow-functions" "^7.8.3"
-    "@babel/plugin-transform-async-to-generator" "^7.8.3"
-    "@babel/plugin-transform-block-scoped-functions" "^7.8.3"
-    "@babel/plugin-transform-block-scoping" "^7.8.3"
-    "@babel/plugin-transform-classes" "^7.9.5"
-    "@babel/plugin-transform-computed-properties" "^7.8.3"
-    "@babel/plugin-transform-destructuring" "^7.9.5"
-    "@babel/plugin-transform-dotall-regex" "^7.8.3"
-    "@babel/plugin-transform-duplicate-keys" "^7.8.3"
-    "@babel/plugin-transform-exponentiation-operator" "^7.8.3"
-    "@babel/plugin-transform-for-of" "^7.9.0"
-    "@babel/plugin-transform-function-name" "^7.8.3"
-    "@babel/plugin-transform-literals" "^7.8.3"
-    "@babel/plugin-transform-member-expression-literals" "^7.8.3"
-    "@babel/plugin-transform-modules-amd" "^7.9.6"
-    "@babel/plugin-transform-modules-commonjs" "^7.9.6"
-    "@babel/plugin-transform-modules-systemjs" "^7.9.6"
-    "@babel/plugin-transform-modules-umd" "^7.9.0"
+    "@babel/plugin-syntax-top-level-await" "^7.10.1"
+    "@babel/plugin-transform-arrow-functions" "^7.10.1"
+    "@babel/plugin-transform-async-to-generator" "^7.10.1"
+    "@babel/plugin-transform-block-scoped-functions" "^7.10.1"
+    "@babel/plugin-transform-block-scoping" "^7.10.1"
+    "@babel/plugin-transform-classes" "^7.10.1"
+    "@babel/plugin-transform-computed-properties" "^7.10.1"
+    "@babel/plugin-transform-destructuring" "^7.10.1"
+    "@babel/plugin-transform-dotall-regex" "^7.10.1"
+    "@babel/plugin-transform-duplicate-keys" "^7.10.1"
+    "@babel/plugin-transform-exponentiation-operator" "^7.10.1"
+    "@babel/plugin-transform-for-of" "^7.10.1"
+    "@babel/plugin-transform-function-name" "^7.10.1"
+    "@babel/plugin-transform-literals" "^7.10.1"
+    "@babel/plugin-transform-member-expression-literals" "^7.10.1"
+    "@babel/plugin-transform-modules-amd" "^7.10.1"
+    "@babel/plugin-transform-modules-commonjs" "^7.10.1"
+    "@babel/plugin-transform-modules-systemjs" "^7.10.1"
+    "@babel/plugin-transform-modules-umd" "^7.10.1"
     "@babel/plugin-transform-named-capturing-groups-regex" "^7.8.3"
-    "@babel/plugin-transform-new-target" "^7.8.3"
-    "@babel/plugin-transform-object-super" "^7.8.3"
-    "@babel/plugin-transform-parameters" "^7.9.5"
-    "@babel/plugin-transform-property-literals" "^7.8.3"
-    "@babel/plugin-transform-regenerator" "^7.8.7"
-    "@babel/plugin-transform-reserved-words" "^7.8.3"
-    "@babel/plugin-transform-shorthand-properties" "^7.8.3"
-    "@babel/plugin-transform-spread" "^7.8.3"
-    "@babel/plugin-transform-sticky-regex" "^7.8.3"
-    "@babel/plugin-transform-template-literals" "^7.8.3"
-    "@babel/plugin-transform-typeof-symbol" "^7.8.4"
-    "@babel/plugin-transform-unicode-regex" "^7.8.3"
+    "@babel/plugin-transform-new-target" "^7.10.1"
+    "@babel/plugin-transform-object-super" "^7.10.1"
+    "@babel/plugin-transform-parameters" "^7.10.1"
+    "@babel/plugin-transform-property-literals" "^7.10.1"
+    "@babel/plugin-transform-regenerator" "^7.10.1"
+    "@babel/plugin-transform-reserved-words" "^7.10.1"
+    "@babel/plugin-transform-shorthand-properties" "^7.10.1"
+    "@babel/plugin-transform-spread" "^7.10.1"
+    "@babel/plugin-transform-sticky-regex" "^7.10.1"
+    "@babel/plugin-transform-template-literals" "^7.10.1"
+    "@babel/plugin-transform-typeof-symbol" "^7.10.1"
+    "@babel/plugin-transform-unicode-escapes" "^7.10.1"
+    "@babel/plugin-transform-unicode-regex" "^7.10.1"
     "@babel/preset-modules" "^0.1.3"
-    "@babel/types" "^7.9.6"
-    browserslist "^4.11.1"
+    "@babel/types" "^7.10.2"
+    browserslist "^4.12.0"
     core-js-compat "^3.6.2"
     invariant "^2.2.2"
     levenary "^1.1.1"
@@ -1176,29 +1747,30 @@
     esutils "^2.0.2"
 
 "@babel/preset-react@^7.8.3":
-  version "7.9.4"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-react/-/preset-react-7.9.4.tgz#c6c97693ac65b6b9c0b4f25b948a8f665463014d"
-  integrity sha512-AxylVB3FXeOTQXNXyiuAQJSvss62FEotbX2Pzx3K/7c+MKJMdSg6Ose6QYllkdCFA8EInCJVw7M/o5QbLuA4ZQ==
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-react/-/preset-react-7.10.1.tgz#e2ab8ae9a363ec307b936589f07ed753192de041"
+  integrity sha512-Rw0SxQ7VKhObmFjD/cUcKhPTtzpeviEFX1E6PgP+cYOhQ98icNqtINNFANlsdbQHrmeWnqdxA4Tmnl1jy5tp3Q==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-transform-react-display-name" "^7.8.3"
-    "@babel/plugin-transform-react-jsx" "^7.9.4"
-    "@babel/plugin-transform-react-jsx-development" "^7.9.0"
-    "@babel/plugin-transform-react-jsx-self" "^7.9.0"
-    "@babel/plugin-transform-react-jsx-source" "^7.9.0"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-transform-react-display-name" "^7.10.1"
+    "@babel/plugin-transform-react-jsx" "^7.10.1"
+    "@babel/plugin-transform-react-jsx-development" "^7.10.1"
+    "@babel/plugin-transform-react-jsx-self" "^7.10.1"
+    "@babel/plugin-transform-react-jsx-source" "^7.10.1"
+    "@babel/plugin-transform-react-pure-annotations" "^7.10.1"
 
 "@babel/preset-typescript@^7.9.0":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-typescript/-/preset-typescript-7.9.0.tgz#87705a72b1f0d59df21c179f7c3d2ef4b16ce192"
-  integrity sha512-S4cueFnGrIbvYJgwsVFKdvOmpiL0XGw9MFW9D0vgRys5g36PBhZRL8NX8Gr2akz8XRtzq6HuDXPD/1nniagNUg==
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fpreset-typescript/-/preset-typescript-7.10.1.tgz#a8d8d9035f55b7d99a2461a0bdc506582914d07e"
+  integrity sha512-m6GV3y1ShiqxnyQj10600ZVOFrSSAa8HQ3qIUk2r+gcGtHTIRw0dJnFLt1WNXpKjtVw7yw1DAPU/6ma2ZvgJuA==
   dependencies:
-    "@babel/helper-plugin-utils" "^7.8.3"
-    "@babel/plugin-transform-typescript" "^7.9.0"
+    "@babel/helper-plugin-utils" "^7.10.1"
+    "@babel/plugin-transform-typescript" "^7.10.1"
 
 "@babel/register@^7.8.3":
-  version "7.9.0"
-  resolved "http://npm.meistersoft.ru:4873/@babel%2fregister/-/register-7.9.0.tgz#02464ede57548bddbb5e9f705d263b7c3f43d48b"
-  integrity sha512-Tv8Zyi2J2VRR8g7pC5gTeIN8Ihultbmk0ocyNz8H2nEZbmhp1N6q0A1UGsQbDvGP/sNinQKUHf3SqXwqjtFv4Q==
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2fregister/-/register-7.10.1.tgz#b6567c5cb5049f44bbf8c35d6ff68ca3c43238ed"
+  integrity sha512-sl96+kB3IA2B9EzpwwBmYadOT14vw3KaXOknGDbJaZCOj52GDA4Tivudq9doCJcB+bEIKCEARZYwRgBBsCGXyg==
   dependencies:
     find-cache-dir "^2.0.0"
     lodash "^4.17.13"
@@ -1206,7 +1778,7 @@
     pirates "^4.0.0"
     source-map-support "^0.5.16"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.4.4", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.2":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.5.0", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.3", "@babel/runtime@^7.7.2", "@babel/runtime@^7.8.4", "@babel/runtime@^7.9.2":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2fruntime/-/runtime-7.9.6.tgz#a9102eb5cadedf3f31d08a9ecf294af7827ea29f"
   integrity sha512-64AF1xY3OAkFHqOb9s4jpgk1Mm5vDZ4L3acHvAml+53nO1XbXLuDodsVpO4OIUsmemlUHMxNdYMNJmsvOwLrvQ==
@@ -1221,6 +1793,15 @@
     "@babel/code-frame" "^7.8.3"
     "@babel/parser" "^7.8.6"
     "@babel/types" "^7.8.6"
+
+"@babel/template@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2ftemplate/-/template-7.10.1.tgz#e167154a94cb5f14b28dc58f5356d2162f539811"
+  integrity sha512-OQDg6SqvFSsc9A0ej6SKINWrpJiNonRIniYondK2ViKhB06i3c0s+76XUft71iqBEe9S1OKsHwPAjfHnuvnCig==
+  dependencies:
+    "@babel/code-frame" "^7.10.1"
+    "@babel/parser" "^7.10.1"
+    "@babel/types" "^7.10.1"
 
 "@babel/traverse@^7.1.0", "@babel/traverse@^7.8.3", "@babel/traverse@^7.9.0", "@babel/traverse@^7.9.6":
   version "7.9.6"
@@ -1237,12 +1818,36 @@
     globals "^11.1.0"
     lodash "^4.17.13"
 
+"@babel/traverse@^7.10.1":
+  version "7.10.1"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2ftraverse/-/traverse-7.10.1.tgz#bbcef3031e4152a6c0b50147f4958df54ca0dd27"
+  integrity sha512-C/cTuXeKt85K+p08jN6vMDz8vSV0vZcI0wmQ36o6mjbuo++kPMdpOYw23W2XH04dbRt9/nMEfA4W3eR21CD+TQ==
+  dependencies:
+    "@babel/code-frame" "^7.10.1"
+    "@babel/generator" "^7.10.1"
+    "@babel/helper-function-name" "^7.10.1"
+    "@babel/helper-split-export-declaration" "^7.10.1"
+    "@babel/parser" "^7.10.1"
+    "@babel/types" "^7.10.1"
+    debug "^4.1.0"
+    globals "^11.1.0"
+    lodash "^4.17.13"
+
 "@babel/types@^7.0.0", "@babel/types@^7.3.0", "@babel/types@^7.3.3", "@babel/types@^7.4.4", "@babel/types@^7.8.3", "@babel/types@^7.8.6", "@babel/types@^7.9.0", "@babel/types@^7.9.5", "@babel/types@^7.9.6":
   version "7.9.6"
   resolved "http://npm.meistersoft.ru:4873/@babel%2ftypes/-/types-7.9.6.tgz#2c5502b427251e9de1bd2dff95add646d95cc9f7"
   integrity sha512-qxXzvBO//jO9ZnoasKF1uJzHd2+M6Q2ZPIVfnFps8JJvXy0ZBbwbNOmE6SGIY5XOY6d1Bo5lb9d9RJ8nv3WSeA==
   dependencies:
     "@babel/helper-validator-identifier" "^7.9.5"
+    lodash "^4.17.13"
+    to-fast-properties "^2.0.0"
+
+"@babel/types@^7.10.1", "@babel/types@^7.10.2":
+  version "7.10.2"
+  resolved "http://npm.meistersoft.ru:4873/@babel%2ftypes/-/types-7.10.2.tgz#30283be31cad0dbf6fb00bd40641ca0ea675172d"
+  integrity sha512-AD3AwWBSz0AWF0AkCN9VPiWrvldXq+/e3cHa4J89vo4ymjz1XwrBFFVZmkJTsQIPNk+ZVomPSXUJqq8yyjZsng==
+  dependencies:
+    "@babel/helper-validator-identifier" "^7.10.1"
     lodash "^4.17.13"
     to-fast-properties "^2.0.0"
 
@@ -1259,7 +1864,7 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
+"@emotion/cache@^10.0.27":
   version "10.0.29"
   resolved "http://npm.meistersoft.ru:4873/@emotion%2fcache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
   integrity sha512-fU2VtSVlHiF27empSbxi1O2JFdNWZO+2NFHfwO0pxgTep6Xa3uGb+3pVKfLww2l/IBGLNEZl5Xf/++A4wAYDYQ==
@@ -1269,7 +1874,7 @@
     "@emotion/utils" "0.11.3"
     "@emotion/weak-memoize" "0.2.5"
 
-"@emotion/core@^10.0.20", "@emotion/core@^10.0.9":
+"@emotion/core@^10.0.20":
   version "10.0.28"
   resolved "http://npm.meistersoft.ru:4873/@emotion%2fcore/-/core-10.0.28.tgz#bb65af7262a234593a9e952c041d0f1c9b9bef3d"
   integrity sha512-pH8UueKYO5jgg0Iq+AmCLxBsvuGtvlmiDCOuv8fGNYn3cowFpLN98L8zO56U0H1PjDIyAlXymgL3Wu7u7v6hbA==
@@ -1281,7 +1886,7 @@
     "@emotion/sheet" "0.9.4"
     "@emotion/utils" "0.11.3"
 
-"@emotion/css@^10.0.27", "@emotion/css@^10.0.9":
+"@emotion/css@^10.0.27":
   version "10.0.27"
   resolved "http://npm.meistersoft.ru:4873/@emotion%2fcss/-/css-10.0.27.tgz#3a7458198fbbebb53b01b2b87f64e5e21241e14c"
   integrity sha512-6wZjsvYeBhyZQYNrGoR5yPMYbMBNEnanDrqmsqS1mzDm1cOTu12shvl2j4QHNS36UaTE0USIJawCH9C8oW34Zw==
@@ -1584,6 +2189,13 @@
   resolved "http://npm.meistersoft.ru:4873/@nodelib%2ffs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
+"@npmcli/move-file@^1.0.1":
+  version "1.0.1"
+  resolved "http://npm.meistersoft.ru:4873/@npmcli%2fmove-file/-/move-file-1.0.1.tgz#de103070dac0f48ce49cf6693c23af59c0f70464"
+  integrity sha512-Uv6h1sT+0DrblvIrolFtbvM1FgWm+/sy4B3pvLp67Zys+thcukzS5ekn7HsZFGpWP4Q3fYJCljbWQE/XivMRLw==
+  dependencies:
+    mkdirp "^1.0.4"
+
 "@reach/router@^1.2.1", "@reach/router@^1.3.3":
   version "1.3.3"
   resolved "http://npm.meistersoft.ru:4873/@reach%2frouter/-/router-1.3.3.tgz#58162860dce6c9449d49be86b0561b5ef46d80db"
@@ -1702,29 +2314,29 @@
     global "^4.3.2"
     util-deprecate "^1.0.2"
 
-"@storybook/addons@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2faddons/-/addons-6.0.0-beta.14.tgz#7f200afda457530dfc881411cdbe5ec1634ef995"
-  integrity sha512-IOBX4ZkqZiCK9VjEDXdgUBXMJUBfFTFP38qAXm+Hwq+X3lRHUAz7cfz00LYDSuZidrzjV3v8Y06A1gp16x69Sg==
+"@storybook/addons@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2faddons/-/addons-6.0.0-beta.22.tgz#625e30a213992cc07f3aee51c3f19adeef2cab82"
+  integrity sha512-CIQhs9hZLR8ReGXL0SH+fExbll7SrPsVlyhLMF+myQfiL3SHLhrRXh5Y/lbMcEE39MRYJc3V+0rGxgaoB8bNug==
   dependencies:
-    "@storybook/api" "6.0.0-beta.14"
-    "@storybook/channels" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
-    "@storybook/router" "6.0.0-beta.14"
-    "@storybook/theming" "6.0.0-beta.14"
+    "@storybook/api" "6.0.0-beta.22"
+    "@storybook/channels" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
+    "@storybook/router" "6.0.0-beta.22"
+    "@storybook/theming" "6.0.0-beta.22"
     core-js "^3.0.1"
     global "^4.3.2"
     regenerator-runtime "^0.13.3"
 
-"@storybook/angular@next":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fangular/-/angular-6.0.0-beta.14.tgz#285b15e884f049bd3556fe6c32f696d1b2c33d94"
-  integrity sha512-aoJyK9lWi7I55o9/y7fARBN4TvLUp0G3WRkFoM2NR2YK0jHnstM4mJ1K6rl6qOtudzYr9k9pB0K7nVfXn1xCWQ==
+"@storybook/angular@^6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fangular/-/angular-6.0.0-beta.22.tgz#800a481c5979949009136580bea17e2eb471a0d8"
+  integrity sha512-jBSqqQnlCy6NxiNfiKhJLXraTEH0BFMpakYXneAUxPk2JUaiYATsosKVqWPibjnLGJ3GT+Weq1tHEOYSy06tvQ==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.14"
-    "@storybook/core" "6.0.0-beta.14"
-    "@storybook/node-logger" "6.0.0-beta.14"
+    "@storybook/addons" "6.0.0-beta.22"
+    "@storybook/core" "6.0.0-beta.22"
+    "@storybook/node-logger" "6.0.0-beta.22"
     "@types/webpack-env" "^1.15.2"
     autoprefixer "^9.7.6"
     core-js "^3.0.1"
@@ -1766,18 +2378,19 @@
     telejson "^3.2.0"
     util-deprecate "^1.0.2"
 
-"@storybook/api@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fapi/-/api-6.0.0-beta.14.tgz#ad5c76310756fea069b9ff0c85a35d674a91b1f8"
-  integrity sha512-lyXv2octrhDXB9PLvwHdkn0aM8c/nwSlDHQg0qC52qbMd+YPydzfuoJrD3CbhlGVRMbEUbcdnurJEeH7KKp30g==
+"@storybook/api@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fapi/-/api-6.0.0-beta.22.tgz#cde8d76f88aaa756d308c18be0d1cc602b5bb006"
+  integrity sha512-o+Cplxr3UgtCnoNNoJdO//TOO8+vgg8cbO2zvqScC6zOtcIRiVOhnomQFqlrY2ZjCxLVZQuWGT/NInQbzSi/wg==
   dependencies:
     "@reach/router" "^1.3.3"
-    "@storybook/channels" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
+    "@storybook/channels" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
     "@storybook/csf" "0.0.1"
-    "@storybook/router" "6.0.0-beta.14"
-    "@storybook/theming" "6.0.0-beta.14"
+    "@storybook/router" "6.0.0-beta.22"
+    "@storybook/semver" "^7.3.2"
+    "@storybook/theming" "6.0.0-beta.22"
     "@types/reach__router" "^1.3.5"
     core-js "^3.0.1"
     fast-deep-equal "^3.1.1"
@@ -1786,7 +2399,6 @@
     memoizerific "^1.11.3"
     react "^16.8.3"
     regenerator-runtime "^0.13.3"
-    semver "^7.3.2"
     store2 "^2.7.1"
     telejson "^4.0.0"
     ts-dedent "^1.1.1"
@@ -1803,14 +2415,14 @@
     global "^4.3.2"
     telejson "^3.2.0"
 
-"@storybook/channel-postmessage@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fchannel-postmessage/-/channel-postmessage-6.0.0-beta.14.tgz#fe5eb1d760ab4284fa9c98638df37d8736534948"
-  integrity sha512-mH0oPER0dL7I8aBycqxO4tUj1uE4yatzFQ7lSZKzAmjPTbnE3R58wHwt2cg+p7bE6U4I4e8GGLUJW278u21rMQ==
+"@storybook/channel-postmessage@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fchannel-postmessage/-/channel-postmessage-6.0.0-beta.22.tgz#bb4733059d2bc5da6af26d37d063cf872d87a883"
+  integrity sha512-wSPFevhNvUB27dy5JJmapfguaZtZBxtL61UIibWKgn9oUYfc3ARFukrrEpi7ULLy/3aRK9E2uMS8uU/qIjLyCQ==
   dependencies:
-    "@storybook/channels" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
+    "@storybook/channels" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
     core-js "^3.0.1"
     global "^4.3.2"
     telejson "^4.0.0"
@@ -1822,10 +2434,10 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/channels@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fchannels/-/channels-6.0.0-beta.14.tgz#e687ef428685bb0e3f7394c1eb9d70fe10ddabf3"
-  integrity sha512-Yyz9g3l8xjoUhAYwCoXzDxx6mW8WxQ294KJV1Q8ujC76qiN29H4WLDIQrVMaTxb6sG9KIUoNi5KNLwGBcHzbpQ==
+"@storybook/channels@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fchannels/-/channels-6.0.0-beta.22.tgz#147f6a6db071ba818ea4cf925ca5bcac97278dcf"
+  integrity sha512-C3c5XaAalsEr1sMGpujCO7v7AVNFcBIK/Wu3ytQ9kEzYgsGHIoHP+U+ngl3W2FERQFfNZWpXVjKlaNMrYqTbiw==
   dependencies:
     core-js "^3.0.1"
     ts-dedent "^1.1.1"
@@ -1854,16 +2466,16 @@
     ts-dedent "^1.1.0"
     util-deprecate "^1.0.2"
 
-"@storybook/client-api@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fclient-api/-/client-api-6.0.0-beta.14.tgz#15a0f3c85feb1169f025cce557a2f97d57d4a5c8"
-  integrity sha512-IFF7n91FKLBf52n7kFstA6ciDA0/R32gnC5YT8LATQnYRZgyiyXXYvRToKXat4tGV/lqxNhcY/TKSjCmbNyrOw==
+"@storybook/client-api@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fclient-api/-/client-api-6.0.0-beta.22.tgz#f45fdfcd9f7150480585e4403bd022c57b2e21f7"
+  integrity sha512-C+AQ7QKkgKl+MXduUGMbT78VmJSoY3Ds+FY5UqYFDoV7LAtwOWVlqCcOjzNs9cpL0yDZc+d0hBV8NQ74lXPo1w==
   dependencies:
-    "@storybook/addons" "6.0.0-beta.14"
-    "@storybook/channel-postmessage" "6.0.0-beta.14"
-    "@storybook/channels" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
+    "@storybook/addons" "6.0.0-beta.22"
+    "@storybook/channel-postmessage" "6.0.0-beta.22"
+    "@storybook/channels" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
     "@storybook/csf" "0.0.1"
     "@types/webpack-env" "^1.15.2"
     core-js "^3.0.1"
@@ -1883,12 +2495,14 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/client-logger@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fclient-logger/-/client-logger-6.0.0-beta.14.tgz#702eff6f1212eefefb665b849b61a4ecd7fa176a"
-  integrity sha512-PweF3CrXU1KyrnWBRTBKwDydHG4T32JTUAjlvzC1ys08mjIWxtx90ZMlcyIZhNXwTh1ShhtPcqeg9/jxQ6QexQ==
+"@storybook/client-logger@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fclient-logger/-/client-logger-6.0.0-beta.22.tgz#038ceb35298b3fa9549b085248ed2e5efad0a56c"
+  integrity sha512-mNHJxQWdqHoo+JPnm4bUtDvkojWuAYNdoBen7Wipg98d0GiY2yDW21biW5dz1WFze57/8XNn9GsbjzS3YmkZLA==
   dependencies:
     core-js "^3.0.1"
+    global "^4.3.2"
+    loglevel "^1.6.7"
 
 "@storybook/components@5.3.19":
   version "5.3.19"
@@ -1917,18 +2531,17 @@
     simplebar-react "^1.0.0-alpha.6"
     ts-dedent "^1.1.0"
 
-"@storybook/components@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcomponents/-/components-6.0.0-beta.14.tgz#8850ed3589838a2399a6ab0e7f7e9f634f36bd1b"
-  integrity sha512-5TlHP1wiDY1kpy4vaCcxm5ONch/1Fuvm/LfYQhaC8KG0UYNWnvpU/HBJWynMz1YLW4wks9cScCpSIZ8RDVi10A==
+"@storybook/components@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcomponents/-/components-6.0.0-beta.22.tgz#cf6e4624d1bfac373ff179a0f683da9903ab7343"
+  integrity sha512-1GGe3w/NDXTF3Upmhih3pwGheipaJymNftZgT8Vj/yHXbBimDj23PSYHbhimZXFjmgPdlVm1P3/4J7glhC9Z+w==
   dependencies:
-    "@storybook/client-logger" "6.0.0-beta.14"
+    "@storybook/client-logger" "6.0.0-beta.22"
     "@storybook/csf" "0.0.1"
-    "@storybook/theming" "6.0.0-beta.14"
+    "@storybook/theming" "6.0.0-beta.22"
     "@types/overlayscrollbars" "^1.9.0"
     "@types/react-color" "^3.0.1"
     "@types/react-syntax-highlighter" "11.0.4"
-    "@types/react-textarea-autosize" "^4.3.3"
     core-js "^3.0.1"
     fast-deep-equal "^3.1.1"
     global "^4.3.2"
@@ -1944,9 +2557,8 @@
     react-dom "^16.8.3"
     react-helmet-async "^1.0.2"
     react-popper-tooltip "^2.11.0"
-    react-select "^3.0.8"
-    react-syntax-highlighter "^11.0.2"
-    react-textarea-autosize "^7.1.0"
+    react-syntax-highlighter "^12.2.1"
+    react-textarea-autosize "^8.0.1"
     ts-dedent "^1.1.1"
 
 "@storybook/core-events@5.3.19":
@@ -1956,21 +2568,24 @@
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/core-events@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcore-events/-/core-events-6.0.0-beta.14.tgz#af48492c2c461f8ad27ab69910f4d2022506ef89"
-  integrity sha512-Hihku+R73qWBhu7ba7mUcnurtbk8EOE2dTfRb0qxOvIsDOTB2J1sYGyimtqTmHYOT2SEyT3nTp0EWRvziPQ9cw==
+"@storybook/core-events@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcore-events/-/core-events-6.0.0-beta.22.tgz#9dc6df102490e5a3793b4f73b6b07cc2d8b03cb9"
+  integrity sha512-msSN0H8k49VaYa34be9m7GP+LKYQjPZYAkRYie5yJJD/NWuH4TLJvmTogjo8jrygzJYKTLb9DtlkAIfgiFRt2Q==
   dependencies:
     core-js "^3.0.1"
 
-"@storybook/core@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcore/-/core-6.0.0-beta.14.tgz#5a7803c1f55b844a5ae62854a117c6b53f4728c9"
-  integrity sha512-jfNwYkPpWuLa1FxAvJoZtth2YMi+HRG714KhU98VNtu1G+tOdAXwNaqqttiPjgudlBm8QrWC/TR0+LydwW4E4Q==
+"@storybook/core@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fcore/-/core-6.0.0-beta.22.tgz#1d21cad04940984f9a2c9a4b53e76ef9fff398ef"
+  integrity sha512-7u8AjA3aJgL9cV4htYHkdoEuwFlCgQdVC61vSHgCU1gPwIDB83XSELi3Jb3YBfFDhikmtlzDBh/2QRxEAPGg8Q==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.8.3"
     "@babel/plugin-proposal-export-default-from" "^7.8.3"
+    "@babel/plugin-proposal-nullish-coalescing-operator" "^7.10.1"
     "@babel/plugin-proposal-object-rest-spread" "^7.9.6"
+    "@babel/plugin-proposal-optional-chaining" "^7.10.1"
+    "@babel/plugin-proposal-private-methods" "^7.8.3"
     "@babel/plugin-syntax-dynamic-import" "^7.8.3"
     "@babel/plugin-transform-arrow-functions" "^7.8.3"
     "@babel/plugin-transform-block-scoping" "^7.8.3"
@@ -1986,17 +2601,20 @@
     "@babel/preset-react" "^7.8.3"
     "@babel/preset-typescript" "^7.9.0"
     "@babel/register" "^7.8.3"
-    "@storybook/addons" "6.0.0-beta.14"
-    "@storybook/api" "6.0.0-beta.14"
-    "@storybook/channel-postmessage" "6.0.0-beta.14"
-    "@storybook/client-api" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
+    "@storybook/addons" "6.0.0-beta.22"
+    "@storybook/api" "6.0.0-beta.22"
+    "@storybook/channel-postmessage" "6.0.0-beta.22"
+    "@storybook/client-api" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
     "@storybook/csf" "0.0.1"
-    "@storybook/node-logger" "6.0.0-beta.14"
-    "@storybook/router" "6.0.0-beta.14"
-    "@storybook/theming" "6.0.0-beta.14"
-    "@storybook/ui" "6.0.0-beta.14"
+    "@storybook/node-logger" "6.0.0-beta.22"
+    "@storybook/router" "6.0.0-beta.22"
+    "@storybook/semver" "^7.3.2"
+    "@storybook/theming" "6.0.0-beta.22"
+    "@storybook/ui" "6.0.0-beta.22"
+    "@types/glob-base" "^0.3.0"
+    "@types/micromatch" "^4.0.1"
     "@types/node-fetch" "^2.5.4"
     airbnb-js-shims "^2.2.1"
     ansi-to-html "^0.6.11"
@@ -2034,7 +2652,7 @@
     ip "^1.1.5"
     json5 "^2.1.1"
     lazy-universal-dotenv "^3.0.1"
-    nanomatch "^1.2.13"
+    micromatch "^4.0.2"
     node-fetch "^2.6.0"
     pkg-dir "^4.2.0"
     pnp-webpack-plugin "1.6.4"
@@ -2047,7 +2665,6 @@
     regenerator-runtime "^0.13.3"
     resolve "^1.17.0"
     resolve-from "^5.0.0"
-    semver "^7.3.2"
     serve-favicon "^2.5.0"
     shelljs "^0.8.3"
     stable "^0.1.8"
@@ -2069,10 +2686,10 @@
   dependencies:
     lodash "^4.17.15"
 
-"@storybook/node-logger@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fnode-logger/-/node-logger-6.0.0-beta.14.tgz#025480807698c1fd486f2204d590c687b72181e9"
-  integrity sha512-5WTi/9eJWgaB3GfhDNuYHukcKbyfeUfydUzXWoxAFsBOIJpu/WTeTX1gO9MFmFGFMq61uozyUlWe8ZwZrciTHw==
+"@storybook/node-logger@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fnode-logger/-/node-logger-6.0.0-beta.22.tgz#841ff2fbc5d9bab12125d4c681dd748b492b10ea"
+  integrity sha512-Fl1w062qMeljO6lDpUmEPsxnQFllf+XKfXkvOY2kwhKwTYi1HCR4m8UuEOix8qLpL6vLh7uhWrEja7blqyD8cA==
   dependencies:
     "@types/npmlog" "^4.1.2"
     chalk "^4.0.0"
@@ -2095,10 +2712,10 @@
     qs "^6.6.0"
     util-deprecate "^1.0.2"
 
-"@storybook/router@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2frouter/-/router-6.0.0-beta.14.tgz#8f9ea33178216d73ccb59fec5e5aceb4a0092a0d"
-  integrity sha512-cyHldrYQrdyUwO7sawLaJzHCmSwHbcCBNbIIHsXKrdXlMmRTuY3iaFBPBsppWQS6YweIfYaZ2wGk1483n4onng==
+"@storybook/router@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2frouter/-/router-6.0.0-beta.22.tgz#d6fbfa39beff6b247125414a4742d7143cb8a882"
+  integrity sha512-EF/N2VfHmkqzZVnbFgiBsA2QuIStFn2J7BQM2/Li5zk2V0zEw6IyY9Z1AuJtJ/OL5F8r0YNSrfsSWh62HMCY+g==
   dependencies:
     "@reach/router" "^1.3.3"
     "@storybook/csf" "0.0.1"
@@ -2108,6 +2725,14 @@
     lodash "^4.17.15"
     memoizerific "^1.11.3"
     qs "^6.6.0"
+
+"@storybook/semver@^7.3.2":
+  version "7.3.2"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fsemver/-/semver-7.3.2.tgz#f3b9c44a1c9a0b933c04e66d0048fcf2fa10dac0"
+  integrity sha512-SWeszlsiPsMI0Ps0jVNtH64cI5c0UF3f7KgjVKJoNP30crQ6wUSddY2hsdeczZXEKVJGEn50Q60flcGsQGIcrg==
+  dependencies:
+    core-js "^3.6.5"
+    find-up "^4.1.0"
 
 "@storybook/theming@5.3.19":
   version "5.3.19"
@@ -2127,15 +2752,15 @@
     resolve-from "^5.0.0"
     ts-dedent "^1.1.0"
 
-"@storybook/theming@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2ftheming/-/theming-6.0.0-beta.14.tgz#0a79fe22db38b4eb2744a8be885fa9bdfe5e7c93"
-  integrity sha512-S2UDxC81fmQE2aunze/IcBM/P6qomuWgZUNg/38PI7Y4EiDmxmm60XNoNjqIe+jeuLxDunY4phWPs0tu2aC75w==
+"@storybook/theming@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2ftheming/-/theming-6.0.0-beta.22.tgz#477b78fa62c4a93ceda8d9e107c4748d6ef18fe7"
+  integrity sha512-hgT0kqkq51yH1mvONM0nxEBCjflCqK/LKChax1fqM6BbHt16laasAMPICE1JZWw1ZZ0DtgjgJuogYJjCeTvX8w==
   dependencies:
     "@emotion/core" "^10.0.20"
     "@emotion/is-prop-valid" "^0.8.6"
     "@emotion/styled" "^10.0.17"
-    "@storybook/client-logger" "6.0.0-beta.14"
+    "@storybook/client-logger" "6.0.0-beta.22"
     core-js "^3.0.1"
     deep-object-diff "^1.1.0"
     emotion-theming "^10.0.19"
@@ -2145,20 +2770,21 @@
     resolve-from "^5.0.0"
     ts-dedent "^1.1.1"
 
-"@storybook/ui@6.0.0-beta.14":
-  version "6.0.0-beta.14"
-  resolved "http://npm.meistersoft.ru:4873/@storybook%2fui/-/ui-6.0.0-beta.14.tgz#a5648b561480aee6b904a186c7edf4e909cdbba3"
-  integrity sha512-Ot8FRIkb7mmkDg9x46gOyJfhNUIpPLmrkpj6/BMozZ4dHHt0GuAmZVeOtAGe6OLLqUWktmwKoQYcwXyDVkmh3g==
+"@storybook/ui@6.0.0-beta.22":
+  version "6.0.0-beta.22"
+  resolved "http://npm.meistersoft.ru:4873/@storybook%2fui/-/ui-6.0.0-beta.22.tgz#489daba2b460373ff320fe1334a9b4f81de8f470"
+  integrity sha512-oiNzr6xTvpWBRx1F/4mBn42Owy3FQLRzPNiU/DkxHzIn6nG2mBI0AdUL1xf7M5gIXppkSrWYeT+FdP9VvSttPg==
   dependencies:
     "@emotion/core" "^10.0.20"
-    "@storybook/addons" "6.0.0-beta.14"
-    "@storybook/api" "6.0.0-beta.14"
-    "@storybook/channels" "6.0.0-beta.14"
-    "@storybook/client-logger" "6.0.0-beta.14"
-    "@storybook/components" "6.0.0-beta.14"
-    "@storybook/core-events" "6.0.0-beta.14"
-    "@storybook/router" "6.0.0-beta.14"
-    "@storybook/theming" "6.0.0-beta.14"
+    "@storybook/addons" "6.0.0-beta.22"
+    "@storybook/api" "6.0.0-beta.22"
+    "@storybook/channels" "6.0.0-beta.22"
+    "@storybook/client-logger" "6.0.0-beta.22"
+    "@storybook/components" "6.0.0-beta.22"
+    "@storybook/core-events" "6.0.0-beta.22"
+    "@storybook/router" "6.0.0-beta.22"
+    "@storybook/semver" "^7.3.2"
+    "@storybook/theming" "6.0.0-beta.22"
     "@types/markdown-to-jsx" "^6.11.0"
     "@types/rfdc" "^1.1.0"
     copy-to-clipboard "^3.0.8"
@@ -2182,7 +2808,6 @@
     regenerator-runtime "^0.13.3"
     resolve-from "^5.0.0"
     rfdc "^1.1.4"
-    semver "^7.3.2"
     store2 "^2.7.1"
     telejson "^4.0.0"
 
@@ -2236,6 +2861,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/braces@*":
+  version "3.0.0"
+  resolved "http://npm.meistersoft.ru:4873/@types%2fbraces/-/braces-3.0.0.tgz#7da1c0d44ff1c7eb660a36ec078ea61ba7eb42cb"
+  integrity sha512-TbH79tcyi9FHwbyboOKeRachRq63mSuWYXOflsNO9ZyE5ClQ/JaozNKl+aWUq87qPNsXasXxi2AbgfwIJ+8GQw==
+
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "http://npm.meistersoft.ru:4873/@types%2fcolor-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -2263,7 +2893,20 @@
   dependencies:
     "@types/node" "*"
 
-"@types/glob@*", "@types/glob@^7.1.1":
+"@types/glob-base@^0.3.0":
+  version "0.3.0"
+  resolved "http://npm.meistersoft.ru:4873/@types%2fglob-base/-/glob-base-0.3.0.tgz#a581d688347e10e50dd7c17d6f2880a10354319d"
+  integrity sha1-pYHWiDR+EOUN18F9byiAoQNUMZ0=
+
+"@types/glob@*":
+  version "7.1.2"
+  resolved "http://npm.meistersoft.ru:4873/@types%2fglob/-/glob-7.1.2.tgz#06ca26521353a545d94a0adc74f38a59d232c987"
+  integrity sha512-VgNIkxK+j7Nz5P7jvUZlRvhuPSmsEfS03b0alKcq5V/STUKAa3Plemsn5mrQUO7am6OErJ4rhGEGJbACclrtRA==
+  dependencies:
+    "@types/minimatch" "*"
+    "@types/node" "*"
+
+"@types/glob@^7.1.1":
   version "7.1.1"
   resolved "http://npm.meistersoft.ru:4873/@types%2fglob/-/glob-7.1.1.tgz#aa59a1c6e3fbc421e07ccd31a944c30eba521575"
   integrity sha512-1Bh06cbWJUHMC97acuD6UMG29nMt0Aqz1vF3guLfG+kHHJhy3AyohZFFxYk2f7Q1SQIrNwvncxAE0N/9s70F2w==
@@ -2345,6 +2988,13 @@
   integrity sha512-OFFHQ3LK+g8lSfwdqjXBbrGFdgH/MYXhzIYSOJ5xapT++eEhRx7wOfY3xxtktVtQyQtsB7Wljs7IDGgKfurm2A==
   dependencies:
     "@types/react" "*"
+
+"@types/micromatch@^4.0.1":
+  version "4.0.1"
+  resolved "http://npm.meistersoft.ru:4873/@types%2fmicromatch/-/micromatch-4.0.1.tgz#9381449dd659fc3823fd2a4190ceacc985083bc7"
+  integrity sha512-my6fLBvpY70KattTNzYOK6KU1oR1+UCz9ug/JbcF5UrEmeCt9P7DV2t7L8+t18mMPINqGQCE4O8PLOPbI84gxw==
+  dependencies:
+    "@types/braces" "*"
 
 "@types/minimatch@*":
   version "3.0.3"
@@ -4086,11 +4736,12 @@ cacache@^13.0.1:
     ssri "^7.0.0"
     unique-filename "^1.1.1"
 
-cacache@^15.0.3:
-  version "15.0.3"
-  resolved "http://npm.meistersoft.ru:4873/cacache/-/cacache-15.0.3.tgz#2225c2d1dd8e872339950d6a39c051e0e9334392"
-  integrity sha512-bc3jKYjqv7k4pWh7I/ixIjfcjPul4V4jme/WbjvwGS5LzoPL/GzXr4C5EgPNLO/QEZl9Oi61iGitYEdwcrwLCQ==
+cacache@^15.0.4:
+  version "15.0.4"
+  resolved "http://npm.meistersoft.ru:4873/cacache/-/cacache-15.0.4.tgz#b2c23cf4ac4f5ead004fb15a0efb0a20340741f1"
+  integrity sha512-YlnKQqTbD/6iyoJvEY3KJftjrdBYroCbxxYXzhOzsFLWlp6KX4BOlEf4mTx0cMUfVaTS3ENL2QtDWeRYoGLkkw==
   dependencies:
+    "@npmcli/move-file" "^1.0.1"
     chownr "^2.0.0"
     fs-minipass "^2.0.0"
     glob "^7.1.4"
@@ -4101,7 +4752,6 @@ cacache@^15.0.3:
     minipass-flush "^1.0.5"
     minipass-pipeline "^1.2.2"
     mkdirp "^1.0.3"
-    move-file "^2.0.0"
     p-map "^4.0.0"
     promise-inflight "^1.0.1"
     rimraf "^3.0.2"
@@ -4194,10 +4844,15 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001020, caniuse-lite@^1.0.30001032, caniuse-lite@^1.0.30001035, caniuse-lite@^1.0.30001043, caniuse-lite@^1.0.30001061:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001020, caniuse-lite@^1.0.30001032, caniuse-lite@^1.0.30001043, caniuse-lite@^1.0.30001061:
   version "1.0.30001066"
   resolved "http://npm.meistersoft.ru:4873/caniuse-lite/-/caniuse-lite-1.0.30001066.tgz#0a8a58a10108f2b9bf38e7b65c237b12fd9c5f04"
   integrity sha512-Gfj/WAastBtfxLws0RCh2sDbTK/8rJuSeZMecrSkNGYxPcv7EzblmDGfWQCFEQcSqYE2BRgQiJh8HOD07N5hIw==
+
+caniuse-lite@^1.0.30001035:
+  version "1.0.30001078"
+  resolved "http://npm.meistersoft.ru:4873/caniuse-lite/-/caniuse-lite-1.0.30001078.tgz#e1b6e2ae327b6a1ec11f65ec7a0dde1e7093074c"
+  integrity sha512-sF12qXe9VMm32IEf/+NDvmTpwJaaU7N1igpiH2FdI4DyABJSsOqG3ZAcFvszLkoLoo1y6VJLMYivukUAxaMASw==
 
 canonical-path@1.0.0:
   version "1.0.0"
@@ -4773,7 +5428,7 @@ core-js@3.6.4:
   resolved "http://npm.meistersoft.ru:4873/core-js/-/core-js-3.6.4.tgz#440a83536b458114b9cb2ac1580ba377dc470647"
   integrity sha512-4paDGScNgZP2IXXilaffL9X7968RuvwlkK3xWtZRVqgd8SYNiVKRJvkFd1aqqEuPfN7E68ZHEp9hDj6lHj4Hyw==
 
-core-js@^3.0.1, core-js@^3.0.4:
+core-js@^3.0.1, core-js@^3.0.4, core-js@^3.6.5:
   version "3.6.5"
   resolved "http://npm.meistersoft.ru:4873/core-js/-/core-js-3.6.5.tgz#7395dc273af37fb2e50e9bd3d9fe841285231d1a"
   integrity sha512-vZVEEwZoIsI+vPEuoF9Iqf5H7/M3eeQqWlQnYa8FSKKePuYTf5MWnxb5SDAzCa60b3JBRS5g9b+Dq7b1y/RCrA==
@@ -5126,7 +5781,7 @@ cssstyle@^2.0.0:
   dependencies:
     cssom "~0.3.6"
 
-csstype@^2.2.0, csstype@^2.5.7, csstype@^2.6.7:
+csstype@^2.2.0, csstype@^2.5.7:
   version "2.6.10"
   resolved "http://npm.meistersoft.ru:4873/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
   integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
@@ -5439,14 +6094,6 @@ dom-converter@^0.2:
   dependencies:
     utila "~0.4"
 
-dom-helpers@^5.0.1:
-  version "5.1.4"
-  resolved "http://npm.meistersoft.ru:4873/dom-helpers/-/dom-helpers-5.1.4.tgz#4609680ab5c79a45f2531441f1949b79d6587f4b"
-  integrity sha512-TjMyeVUvNEnOnhzs6uAn9Ya47GmMo3qq7m+Lr/3ON0Rs5kHvb8I+SQYjLUSYn7qhEm0QjW0yrBkvz9yOrwwz1A==
-  dependencies:
-    "@babel/runtime" "^7.8.7"
-    csstype "^2.6.7"
-
 dom-serializer@0:
   version "0.2.2"
   resolved "http://npm.meistersoft.ru:4873/dom-serializer/-/dom-serializer-0.2.2.tgz#1afb81f533717175d478655debc5e332d9f9bb51"
@@ -5589,7 +6236,12 @@ ejs@^3.1.2:
   dependencies:
     jake "^10.6.1"
 
-electron-to-chromium@^1.3.378, electron-to-chromium@^1.3.413:
+electron-to-chromium@^1.3.378:
+  version "1.3.462"
+  resolved "http://npm.meistersoft.ru:4873/electron-to-chromium/-/electron-to-chromium-1.3.462.tgz#82087404c20ed664963ececab23337ac7a150e21"
+  integrity sha512-HST/xWLOeA0LGUhxBqvcPDDUGHjB6rn99VBgPWmaHv+zqwXgOaZO5RnRcd5owjRE7nh+z1c0SwcK8qP8o7sofg==
+
+electron-to-chromium@^1.3.413:
   version "1.3.452"
   resolved "http://npm.meistersoft.ru:4873/electron-to-chromium/-/electron-to-chromium-1.3.452.tgz#ef6877702722471aa044a2429336cd450629934d"
   integrity sha512-IdbjgCEqDvcU/1kUQa6C49I2NZOY3SBmU9Eus7mdFdJJBqn0Lg1Epfi/T4nqVcxTNBEGhcjwMhY1EysMBsXZrw==
@@ -6309,9 +6961,9 @@ fork-ts-checker-webpack-plugin@3.1.1:
     worker-rpc "^0.1.0"
 
 fork-ts-checker-webpack-plugin@^4.0.3, fork-ts-checker-webpack-plugin@^4.1.4:
-  version "4.1.5"
-  resolved "http://npm.meistersoft.ru:4873/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-4.1.5.tgz#780d52c65183742d8c885fff42a9ec9ea7006672"
-  integrity sha512-nuD4IDqoOfkEIlS6shhjLGaLBDSNyVJulAlr5lFbPe0saGqlsTo+/HmhtIrs/cNLFtmaudL10byivhxr+Qhh4w==
+  version "4.1.6"
+  resolved "http://npm.meistersoft.ru:4873/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-4.1.6.tgz#5055c703febcf37fa06405d400c122b905167fc5"
+  integrity sha512-DUxuQaKoqfNne8iikd14SAkh5uw4+8vNifp6gmA73yYNS6ywLIWSLD/n/mBzHQRpW3J7rbATEakmiA8JvkTyZw==
   dependencies:
     "@babel/code-frame" "^7.5.5"
     chalk "^2.4.1"
@@ -6885,6 +7537,11 @@ highlight.js@~9.13.0:
   version "9.13.1"
   resolved "http://npm.meistersoft.ru:4873/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
   integrity sha512-Sc28JNQNDzaH6PORtRLMvif9RSn1mYuOoX3omVjnb0+HbpPygU2ALBI0R/wsiqCb4/fcp07Gdo8g+fhtFrQl6A==
+
+highlight.js@~9.15.0, highlight.js@~9.15.1:
+  version "9.15.10"
+  resolved "http://npm.meistersoft.ru:4873/highlight.js/-/highlight.js-9.15.10.tgz#7b18ed75c90348c045eef9ed08ca1319a2219ad2"
+  integrity sha512-RoV7OkQm0T3os3Dd2VHLNMoaoDVx77Wygln3n9l5YV172XonWG6rgQD3XnF/BuFFZw9A0TJgmMSO8FEWQgvcXw==
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
@@ -7900,9 +8557,9 @@ iterate-value@^1.0.0:
     iterate-iterator "^1.0.1"
 
 jake@^10.6.1:
-  version "10.7.1"
-  resolved "http://npm.meistersoft.ru:4873/jake/-/jake-10.7.1.tgz#b8d13e2cf472be150cd5b0081399e22923f4bf2e"
-  integrity sha512-FUkLZXms1LSTQop5EJBdXVzbM0q6yYWMM4vo/TiLQeHJ4UMJVO8DBTZFiAgMBJctin9q92xnr2vdH7Wrpn7tTQ==
+  version "10.8.1"
+  resolved "http://npm.meistersoft.ru:4873/jake/-/jake-10.8.1.tgz#0f6f5ef13ebe014104527fb4b1b24f44cd1f04d6"
+  integrity sha512-eSp5h9S7UFzKdQERTyF+KuPLjDZa1Tbw8gCVUn98n4PbIkLEDGe4zl7vF4Qge9kQj06HcymnksPk8jznPZeKsA==
   dependencies:
     async "0.9.x"
     chalk "^2.4.2"
@@ -8698,7 +9355,7 @@ loglevel-plugin-prefix@^0.8.4:
   resolved "http://npm.meistersoft.ru:4873/loglevel-plugin-prefix/-/loglevel-plugin-prefix-0.8.4.tgz#2fe0e05f1a820317d98d8c123e634c1bd84ff644"
   integrity sha512-WpG9CcFAOjz/FtNht+QJeGpvVl/cdR6P0z6OcXSkr8wFJOsV2GRj2j10JLfjuA4aYkcKCNIEqRGCyTife9R8/g==
 
-loglevel@^1.6.6, loglevel@^1.6.8:
+loglevel@^1.6.6, loglevel@^1.6.7, loglevel@^1.6.8:
   version "1.6.8"
   resolved "http://npm.meistersoft.ru:4873/loglevel/-/loglevel-1.6.8.tgz#8a25fb75d092230ecd4457270d80b54e28011171"
   integrity sha512-bsU7+gc9AJ2SqpzxwU3+1fedl8zAntbtC5XYlt3s2j1hJcn2PsXSmgN8TaLG/J1/2mod4+cE/3vNL70/c1RNCA==
@@ -8733,6 +9390,14 @@ lowercase-keys@^2.0.0:
   version "2.0.0"
   resolved "http://npm.meistersoft.ru:4873/lowercase-keys/-/lowercase-keys-2.0.0.tgz#2603e78b7b4b0006cbca2fbcc8a3202558ac9479"
   integrity sha512-tqNXrS78oMOE73NMxK4EMLQsQowWf8jKooH9g7xPavRT706R6bkQJ6DY2Te7QukaZsulxa30wQ7bk0pm4XiHmA==
+
+lowlight@1.12.1:
+  version "1.12.1"
+  resolved "http://npm.meistersoft.ru:4873/lowlight/-/lowlight-1.12.1.tgz#014acf8dd73a370e02ff1cc61debcde3bb1681eb"
+  integrity sha512-OqaVxMGIESnawn+TU/QMV5BJLbUghUfjDWPAtFqDYDmDtr4FnB+op8xM+pR7nKlauHNUHXGt0VgWatFB8voS5w==
+  dependencies:
+    fault "^1.0.2"
+    highlight.js "~9.15.0"
 
 lowlight@~1.11.0:
   version "1.11.0"
@@ -8873,11 +9538,6 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "http://npm.meistersoft.ru:4873/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha1-hxDXrwqmJvj/+hzgAWhUUmMlV0g=
-
-memoize-one@^5.0.0:
-  version "5.1.1"
-  resolved "http://npm.meistersoft.ru:4873/memoize-one/-/memoize-one-5.1.1.tgz#047b6e3199b508eaec03504de71229b8eb1d75c0"
-  integrity sha512-HKeeBpWvqiVJD57ZUAsJNm71eHTykffzcLZVYWiVfQeI1rJtuEaS7hQiEpWfVVk18donPwJEcFKIkCmPJNOhHA==
 
 memoizerific@^1.11.3:
   version "1.11.3"
@@ -9122,7 +9782,7 @@ mkdirp@0.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@^0.5.3, mkdirp@~0.5.1, mkdirp@~
   dependencies:
     minimist "^1.2.5"
 
-mkdirp@^1.0.3:
+mkdirp@^1.0.3, mkdirp@^1.0.4:
   version "1.0.4"
   resolved "http://npm.meistersoft.ru:4873/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
@@ -9138,13 +9798,6 @@ move-concurrently@^1.0.1:
     mkdirp "^0.5.1"
     rimraf "^2.5.4"
     run-queue "^1.0.3"
-
-move-file@^2.0.0:
-  version "2.0.0"
-  resolved "http://npm.meistersoft.ru:4873/move-file/-/move-file-2.0.0.tgz#83ffa309b5d7f69d518b28e1333e2ffadf331e3e"
-  integrity sha512-cdkdhNCgbP5dvS4tlGxZbD+nloio9GIimP57EjqFhwLcMjnU+XJKAZzlmg/TN/AK1LuNAdTSvm3CPPP4Xkv0iQ==
-  dependencies:
-    path-exists "^4.0.0"
 
 ms@2.0.0:
   version "2.0.0"
@@ -9184,7 +9837,7 @@ nan@^2.12.1:
   resolved "http://npm.meistersoft.ru:4873/nan/-/nan-2.14.1.tgz#d7be34dfa3105b91494c3147089315eff8874b01"
   integrity sha512-isWHgVjnFjh2x2yuJ/tj3JbwoHu3UC2dX5G/88Cm24yB6YopVgxvBObDY7n5xW6ExmFhJpSEQqFPvq9zaXc8Jw==
 
-nanomatch@^1.2.13, nanomatch@^1.2.9:
+nanomatch@^1.2.9:
   version "1.2.13"
   resolved "http://npm.meistersoft.ru:4873/nanomatch/-/nanomatch-1.2.13.tgz#b87a8aa4fc0de8fe6be88895b38983ff265bd119"
   integrity sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA==
@@ -9330,7 +9983,12 @@ node-notifier@^6.0.0:
     shellwords "^0.1.1"
     which "^1.3.1"
 
-node-releases@^1.1.52, node-releases@^1.1.53:
+node-releases@^1.1.52:
+  version "1.1.58"
+  resolved "http://npm.meistersoft.ru:4873/node-releases/-/node-releases-1.1.58.tgz#8ee20eef30fa60e52755fcc0942def5a734fe935"
+  integrity sha512-NxBudgVKiRh/2aPWMgPR7bPTX0VPmGx5QBwCtdHitnqFE5/O8DeBXuIMH1nwNnw/aMo6AjOrpsHzfY3UbUJ7yg==
+
+node-releases@^1.1.53:
   version "1.1.56"
   resolved "http://npm.meistersoft.ru:4873/node-releases/-/node-releases-1.1.56.tgz#bc054a417d316e3adac90eafb7e1932802f28705"
   integrity sha512-EVo605FhWLygH8a64TjgpjyHYOihkxECwX1bHHr8tETJKWEiWS2YJjPbvsX2jFjnjTNEgBCmk9mLjKG1Mf11cw==
@@ -10134,10 +10792,17 @@ pnp-webpack-plugin@1.6.4:
   dependencies:
     ts-pnp "^1.1.6"
 
-polished@^3.3.1, polished@^3.4.4:
+polished@^3.3.1:
   version "3.6.3"
   resolved "http://npm.meistersoft.ru:4873/polished/-/polished-3.6.3.tgz#68f4fe7ffad46530733029b939dd12978200cb59"
   integrity sha512-QJ0q0b6gX1+0OJtPMfgVJxV0vg5XTa4im+Rca989dAtmsd/fEky3X+0A+V+OUXq1nyiDGplJwqD853dTS0gkPg==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
+
+polished@^3.4.4:
+  version "3.6.4"
+  resolved "http://npm.meistersoft.ru:4873/polished/-/polished-3.6.4.tgz#cec6bc0fbffc5d6ce5799c85bcc1bca5e63f1dee"
+  integrity sha512-21moJXCm/7EvjeKQz5w89QDDKNPCoimc83CqwZZGJluFdMXsFlMQl9lPA/OMRkoceZ19kU0anKlMgZmY7LJSJw==
   dependencies:
     "@babel/runtime" "^7.9.2"
 
@@ -10657,7 +11322,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.4"
 
-prop-types@^15.5.10, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "http://npm.meistersoft.ru:4873/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -10805,7 +11470,7 @@ ramda@^0.21.0:
   resolved "http://npm.meistersoft.ru:4873/ramda/-/ramda-0.21.0.tgz#a001abedb3ff61077d4ff1d577d44de77e8d0a35"
   integrity sha1-oAGr7bP/YQd9T/HVd9RN536NCjU=
 
-randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5:
+randombytes@^2.0.0, randombytes@^2.0.1, randombytes@^2.0.5, randombytes@^2.1.0:
   version "2.1.0"
   resolved "http://npm.meistersoft.ru:4873/randombytes/-/randombytes-2.1.0.tgz#df6f84372f0270dc65cdf6291349ab7a473d4f2a"
   integrity sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==
@@ -10968,13 +11633,6 @@ react-hotkeys@2.0.0:
   dependencies:
     prop-types "^15.6.1"
 
-react-input-autosize@^2.2.2:
-  version "2.2.2"
-  resolved "http://npm.meistersoft.ru:4873/react-input-autosize/-/react-input-autosize-2.2.2.tgz#fcaa7020568ec206bc04be36f4eb68e647c4d8c2"
-  integrity sha512-jQJgYCA3S0j+cuOwzuCd1OjmBmnZLdqQdiLKRYrsMMzbjUrVDS5RvJUDwJqA7sKuksDuzFtm6hZGKFu7Mjk5aw==
-  dependencies:
-    prop-types "^15.5.8"
-
 react-inspector@^4.0.0:
   version "4.0.1"
   resolved "http://npm.meistersoft.ru:4873/react-inspector/-/react-inspector-4.0.1.tgz#0f888f78ff7daccbc7be5d452b20c96dc6d5fbb8"
@@ -11015,20 +11673,6 @@ react-popper@^1.3.7:
     typed-styles "^0.0.7"
     warning "^4.0.2"
 
-react-select@^3.0.8:
-  version "3.1.0"
-  resolved "http://npm.meistersoft.ru:4873/react-select/-/react-select-3.1.0.tgz#ab098720b2e9fe275047c993f0d0caf5ded17c27"
-  integrity sha512-wBFVblBH1iuCBprtpyGtd1dGMadsG36W5/t2Aj8OE6WbByDg5jIFyT7X5gT+l0qmT5TqWhxX+VsKJvCEl2uL9g==
-  dependencies:
-    "@babel/runtime" "^7.4.4"
-    "@emotion/cache" "^10.0.9"
-    "@emotion/core" "^10.0.9"
-    "@emotion/css" "^10.0.9"
-    memoize-one "^5.0.0"
-    prop-types "^15.6.0"
-    react-input-autosize "^2.2.2"
-    react-transition-group "^4.3.0"
-
 react-sizeme@^2.6.7:
   version "2.6.12"
   resolved "http://npm.meistersoft.ru:4873/react-sizeme/-/react-sizeme-2.6.12.tgz#ed207be5476f4a85bf364e92042520499455453e"
@@ -11050,6 +11694,17 @@ react-syntax-highlighter@^11.0.2:
     prismjs "^1.8.4"
     refractor "^2.4.1"
 
+react-syntax-highlighter@^12.2.1:
+  version "12.2.1"
+  resolved "http://npm.meistersoft.ru:4873/react-syntax-highlighter/-/react-syntax-highlighter-12.2.1.tgz#14d78352da1c1c3f93c6698b70ec7c706b83493e"
+  integrity sha512-CTsp0ZWijwKRYFg9xhkWD4DSpQqE4vb2NKVMdPAkomnILSmsNBHE0n5GuI5zB+PU3ySVvXvdt9jo+ViD9XibCA==
+  dependencies:
+    "@babel/runtime" "^7.3.1"
+    highlight.js "~9.15.1"
+    lowlight "1.12.1"
+    prismjs "^1.8.4"
+    refractor "^2.4.1"
+
 react-textarea-autosize@^7.1.0:
   version "7.1.2"
   resolved "http://npm.meistersoft.ru:4873/react-textarea-autosize/-/react-textarea-autosize-7.1.2.tgz#70fdb333ef86bcca72717e25e623e90c336e2cda"
@@ -11058,15 +11713,14 @@ react-textarea-autosize@^7.1.0:
     "@babel/runtime" "^7.1.2"
     prop-types "^15.6.0"
 
-react-transition-group@^4.3.0:
-  version "4.4.1"
-  resolved "http://npm.meistersoft.ru:4873/react-transition-group/-/react-transition-group-4.4.1.tgz#63868f9325a38ea5ee9535d828327f85773345c9"
-  integrity sha512-Djqr7OQ2aPUiYurhPalTrVy9ddmFCCzwhqQmtN+J3+3DzLO209Fdr70QrN8Z3DsglWql6iY1lDWAfpFiBtuKGw==
+react-textarea-autosize@^8.0.1:
+  version "8.0.1"
+  resolved "http://npm.meistersoft.ru:4873/react-textarea-autosize/-/react-textarea-autosize-8.0.1.tgz#fce0dbf6a59b7b9d892c6af40b6be06a29f62c49"
+  integrity sha512-Qs7Lm17F0CIsWeDaUcHPpP22etVQHkayOcMgOXTfVasVToS6G+IL+5a7ECZtbDR2qTgTRIXjYcLmuZUuTX4tNA==
   dependencies:
-    "@babel/runtime" "^7.5.5"
-    dom-helpers "^5.0.1"
-    loose-envify "^1.4.0"
-    prop-types "^15.6.2"
+    "@babel/runtime" "^7.8.4"
+    use-composed-ref "^1.0.0"
+    use-latest "^1.0.0"
 
 react@^16.13.1, react@^16.8.3:
   version "16.13.1"
@@ -11766,7 +12420,7 @@ semver@7.1.3:
   resolved "http://npm.meistersoft.ru:4873/semver/-/semver-7.1.3.tgz#e4345ce73071c53f336445cfc19efb1c311df2a6"
   integrity sha512-ekM0zfiA9SCBlsKa2X1hxyxiI4L3B6EbVJkkdgQXnSEEaHlGdvyodMruTiulSRWMMB4NeIuYNMC9rTKTz97GxA==
 
-semver@^7.0.0, semver@^7.1.1, semver@^7.3.2:
+semver@^7.0.0, semver@^7.1.1:
   version "7.3.2"
   resolved "http://npm.meistersoft.ru:4873/semver/-/semver-7.3.2.tgz#604962b052b81ed0786aae84389ffba70ffd3938"
   integrity sha512-OrOb32TeeambH6UrhtShmF7CRDqhL6/5XpPNp2DuRH6+9QLw/orhp72j87v8Qa1ScDkvrrBNpZcDejAirJmfXQ==
@@ -11795,10 +12449,12 @@ serialize-javascript@^2.1.2:
   resolved "http://npm.meistersoft.ru:4873/serialize-javascript/-/serialize-javascript-2.1.2.tgz#ecec53b0e0317bdc95ef76ab7074b7384785fa61"
   integrity sha512-rs9OggEUF0V4jUSecXazOYsLfu7OGK2qIn3c7IPBiffz32XniEp/TX9Xmc9LQfK2nQ2QKHvZ2oygKUGU0lG4jQ==
 
-serialize-javascript@^3.0.0:
-  version "3.0.0"
-  resolved "http://npm.meistersoft.ru:4873/serialize-javascript/-/serialize-javascript-3.0.0.tgz#492e489a2d77b7b804ad391a5f5d97870952548e"
-  integrity sha512-skZcHYw2vEX4bw90nAr2iTTsz6x2SrHEnfxgKYmZlvJYBEZrvbKtobJWlQ20zczKb3bsHHXXTYt48zBA7ni9cw==
+serialize-javascript@^3.1.0:
+  version "3.1.0"
+  resolved "http://npm.meistersoft.ru:4873/serialize-javascript/-/serialize-javascript-3.1.0.tgz#8bf3a9170712664ef2561b44b691eafe399214ea"
+  integrity sha512-JIJT1DGiWmIKhzRsG91aS6Ze4sFUrYbltlkg2onR5OrnNM02Kl/hnY/T4FN2omvyeBbQmMJv+K4cPOpGzOTFBg==
+  dependencies:
+    randombytes "^2.1.0"
 
 serve-favicon@^2.5.0:
   version "2.5.0"
@@ -12739,16 +13395,16 @@ terser-webpack-plugin@^1.4.3:
     worker-farm "^1.7.0"
 
 terser-webpack-plugin@^3.0.0:
-  version "3.0.1"
-  resolved "http://npm.meistersoft.ru:4873/terser-webpack-plugin/-/terser-webpack-plugin-3.0.1.tgz#31928c9330a582fb5ec6f90805337289b85cb8fe"
-  integrity sha512-eFDtq8qPUEa9hXcUzTwKXTnugIVtlqc1Z/ZVhG8LmRT3lgRY13+pQTnFLY2N7ATB6TKCHuW/IGjoAnZz9wOIqw==
+  version "3.0.3"
+  resolved "http://npm.meistersoft.ru:4873/terser-webpack-plugin/-/terser-webpack-plugin-3.0.3.tgz#23bda2687b197f878a743373b9411d917adc2e45"
+  integrity sha512-bZFnotuIKq5Rqzrs+qIwFzGdKdffV9epG5vDSEbYzvKAhPeR5RbbrQysfPgbIIMhNAQtZD2hGwBfSKUXjXZZZw==
   dependencies:
-    cacache "^15.0.3"
+    cacache "^15.0.4"
     find-cache-dir "^3.3.1"
     jest-worker "^26.0.0"
     p-limit "^2.3.0"
     schema-utils "^2.6.6"
-    serialize-javascript "^3.0.0"
+    serialize-javascript "^3.1.0"
     source-map "^0.6.1"
     terser "^4.6.13"
     webpack-sources "^1.4.3"
@@ -12951,6 +13607,11 @@ ts-dedent@^1.1.0, ts-dedent@^1.1.1:
   version "1.1.1"
   resolved "http://npm.meistersoft.ru:4873/ts-dedent/-/ts-dedent-1.1.1.tgz#68fad040d7dbd53a90f545b450702340e17d18f3"
   integrity sha512-UGTRZu1evMw4uTPyYF66/KFd22XiU+jMaIuHrkIHQ2GivAXVlLV0v/vHrpOuTRf9BmpNHi/SO7Vd0rLu0y57jg==
+
+ts-essentials@^2.0.3:
+  version "2.0.12"
+  resolved "http://npm.meistersoft.ru:4873/ts-essentials/-/ts-essentials-2.0.12.tgz#c9303f3d74f75fa7528c3d49b80e089ab09d8745"
+  integrity sha512-3IVX4nI6B5cc31/GFFE+i8ey/N2eA0CZDbo6n0yrz0zDX8ZJ8djmU1p+XRz7G3is0F3bB3pu2pAroFdAWQKU3w==
 
 ts-jest@^25.0.0:
   version "25.5.1"
@@ -13317,6 +13978,18 @@ use-callback-ref@^1.2.1:
   version "1.2.3"
   resolved "http://npm.meistersoft.ru:4873/use-callback-ref/-/use-callback-ref-1.2.3.tgz#9f939dfb5740807bbf9dd79cdd4e99d27e827756"
   integrity sha512-DPBPh1i2adCZoIArRlTuKRy7yue7QogtEnfv0AKrWsY+GA+4EKe37zhRDouNnyWMoNQFYZZRF+2dLHsWE4YvJA==
+
+use-composed-ref@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.meistersoft.ru:4873/use-composed-ref/-/use-composed-ref-1.0.0.tgz#bb13e8f4a0b873632cde4940abeb88b92d03023a"
+  integrity sha512-RVqY3NFNjZa0xrmK3bIMWNmQ01QjKPDc7DeWR3xa/N8aliVppuutOE5bZzPkQfvL+5NRWMMp0DJ99Trd974FIw==
+  dependencies:
+    ts-essentials "^2.0.3"
+
+use-latest@^1.0.0:
+  version "1.0.0"
+  resolved "http://npm.meistersoft.ru:4873/use-latest/-/use-latest-1.0.0.tgz#c86d2e4893b15f27def69da574a47136d107facb"
+  integrity sha512-CxmFi75KTXeTIBlZq3LhJ4Hz98pCaRKZHCpnbiaEHIr5QnuHvH8lKYoluPBt/ik7j/hFVPB8K3WqF6mQvLyQTg==
 
 use-sidecar@^1.0.1:
   version "1.0.2"

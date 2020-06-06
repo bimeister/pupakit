@@ -8,32 +8,18 @@ storiesOf('Behavior', module).add('Expansible', () => ({
   },
   template: `
 <style>
-  pupa-expansible {
-    position: fixed;
-    display: block;
-  }
-
-  pupa-expander {
-    display: block;
-    user-select: none;
-  }
-
-  .container {
-    width: 100vw;
-    height: 100vh;
-  }
-
   .placeholder {
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    min-width: 100px;
+    min-height: 100px;
     background: cyan;
     position: absolute;
     z-index: -1;
   }
 </style>
-<div class="container" style="display: flex; flex-direction: row; align-items: center; justify-content: center; width: 100vw; height: 100vh;">
   <pupa-expansible [width.px]="400" [height.px]="300">
     <pupa-expander [behavior]="'top'">
       ⬆
@@ -68,6 +54,5 @@ storiesOf('Behavior', module).add('Expansible', () => ({
 
     <div style="width: 100%; height: 100%; background: cyan;"></div>
   </pupa-expansible>
-</div>
   `
 }));
