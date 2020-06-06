@@ -1,4 +1,11 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, OnDestroy, QueryList } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  OnDestroy,
+  QueryList
+} from '@angular/core';
 
 import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.component';

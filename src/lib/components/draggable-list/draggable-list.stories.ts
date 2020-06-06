@@ -30,19 +30,6 @@ storiesOf('Draggable List', module).add('default', () => ({
     imports: [DraggableListModule]
   },
   template: `
-    <style>
-    pupa-draggable-list-item {
-      display: block;
-      position: relative;
-      z-index: 1;
-      box-sizing: border-box;
-    }
-
-    pupa-draggable-list {
-      user-select: none;
-    }
-    </style>
-
     <pupa-draggable-list>
       <pupa-draggable-list-item
         *ngFor="let item of list; let i = index"

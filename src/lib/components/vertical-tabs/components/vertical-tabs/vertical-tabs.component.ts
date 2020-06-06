@@ -1,4 +1,12 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ContentChildren, OnDestroy, QueryList, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChildren,
+  OnDestroy,
+  QueryList,
+  ViewEncapsulation
+} from '@angular/core';
 
 import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-item.component';
