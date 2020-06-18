@@ -1,8 +1,8 @@
 import { Attribute, ChangeDetectionStrategy, Component, Host, ViewEncapsulation } from '@angular/core';
 
 import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
-import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
 import { VertiacalTabsKind } from '../../../../../internal/declarations/types/vertical-tabs-kind.type';
+import { VerticalTabsComponent } from '../vertical-tabs/vertical-tabs.component';
 
 @Component({
   selector: 'pupa-vertical-tabs-item',
@@ -14,7 +14,7 @@ import { VertiacalTabsKind } from '../../../../../internal/declarations/types/ve
 export class VerticalTabsItemComponent extends TabsContainerItem<VerticalTabsItemComponent> {
   constructor(
     @Attribute('kind') public readonly kind: VertiacalTabsKind = 'rounded',
-    @Host() protected readonly tabsContainer: TabsContainer
+    @Host() protected readonly tabsContainer: VerticalTabsComponent
   ) {
     super(tabsContainer);
   }

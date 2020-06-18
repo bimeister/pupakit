@@ -48,5 +48,9 @@
 }
 
 .pupa-dropdown {
+  @include dropdown();
+
   position: fixed;
+  z-index: 1000;
+  min-width: rems(6.25);
 }
