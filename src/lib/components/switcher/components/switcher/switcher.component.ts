@@ -41,7 +41,7 @@ export class SwitcherComponent implements ControlValueAccessor {
     }
   }
 
-  constructor(private readonly cdRef: ChangeDetectorRef) {}
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public onChange: (v: boolean) => void = (v: boolean) => {
     this.change.emit(v);
@@ -52,7 +52,7 @@ export class SwitcherComponent implements ControlValueAccessor {
     if ((value as any) instanceof Event) {
       return;
     }
-    this.cdRef.markForCheck();
+    this.changeDetectorRef.markForCheck();
     this._value = value;
   }
 
@@ -72,5 +72,10 @@ export class SwitcherComponent implements ControlValueAccessor {
 
   public registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+    this.changeDetectorRef.markForCheck();
   }
 }
