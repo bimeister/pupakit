@@ -1,8 +1,17 @@
 <div class="chip-select">
-  <pupa-chip-button #addChips [disabled]="readonly">
-    <div class="chip-select__chip-add-button">Добавить</div>
-    <ion-icon name="add"></ion-icon>
-  </pupa-chip-button>
+  <pupa-droppable *ngIf="!readonly">
+    <pupa-droppable-trigger>
+      <pupa-chip-button #addChips [disabled]="readonly">
+        <div class="chip-select__chip-add-button">Добавить</div>
+        <ion-icon name="add"></ion-icon>
+      </pupa-chip-button>
+    </pupa-droppable-trigger>
+    <pupa-droppable-content>
+      <div *ngIf="isEmpty; else treeItems" class="empty">
+        Список пуст
+      </div>
+    </pupa-droppable-content>
+  </pupa-droppable>
 
   <pupa-chip *ngFor="let selectItem of selectItems; index as index">
     <div class="chip-select__chip-icon-container">
@@ -20,17 +29,6 @@
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>
-
-  <pupa-droppable-legacy
-    *ngIf="!readonly"
-    [anchor]="addChips.chipButtonElement.nativeElement"
-    [maxWidth]="maxWidth"
-    [positionChange$]="positionChange$"
-  >
-    <div *ngIf="isEmpty; else treeItems" class="empty">
-      Список пуст
-    </div>
-  </pupa-droppable-legacy>
 </div>
 
 <ng-template #treeItems>
