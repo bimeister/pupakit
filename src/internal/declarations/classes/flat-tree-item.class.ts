@@ -1,4 +1,4 @@
-import { FlatTreeItem as FlatTreeItemInterface } from './../interfaces/flat-tree-item.interface';
+import { FlatTreeItemInterface } from './../interfaces/flat-tree-item.interface';
 
 /**
  * todo: maybe drop one property – isExpandable or isElement

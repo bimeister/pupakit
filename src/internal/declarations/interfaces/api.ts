@@ -3,6 +3,7 @@
  */
 
 export * from './alert.interface';
+export * from './base-tree-item.interface';
 export * from './button-icon.interface';
 export * from './chip-item.interface';
 export * from './component-change.interface';
@@ -17,6 +18,7 @@ export * from './draggable-list-change-index-event.interface';
 export * from './drop-event.interface';
 export * from './dropdown-item.interface';
 export * from './droppable-config.interface';
+export * from './flat-tree-item.interface';
 export * from './grid-row-event';
 export * from './height-unit-binding.interface';
 export * from './height-unit-changes.interface';
@@ -28,6 +30,9 @@ export * from './select-option.interface';
 export * from './tab.interface';
 export * from './tooltip-config.interface';
 export * from './tree-item-node.interface';
+export * from './tree-item.interface';
+export * from './tree-manipulator-flat-data-origin.interface';
+export * from './tree-manipulator-hierarchical-data-origin.interface';
 export * from './washer-button-root.interface';
 export * from './washer-button.interface';
 export * from './width-unit-binding.interface';

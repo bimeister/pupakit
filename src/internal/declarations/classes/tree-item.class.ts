@@ -1,4 +1,4 @@
-import { TreeItem as TreeItemInterface } from './../interfaces/tree-item.interface';
+import { TreeItemInterface } from './../interfaces/tree-item.interface';
 
 export class TreeItem<T = any> implements TreeItemInterface<T> {
   constructor(
