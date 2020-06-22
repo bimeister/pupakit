@@ -20,19 +20,26 @@ interface TreeRoot {
   elements: TreeItem[];
 }
 
-export class HierarchicalTree extends FlatTreeDataSource {
+export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   constructor(
     nodes$: Observable<TreeItem[]>,
     elements$: Observable<TreeItem[]>,
     expandedItemsIds$: Observable<string[]>,
-    activeRange$: Observable<ListRange>
+    activeRange$: Observable<ListRange>,
+    hideRoot: boolean
   ) {
-    super(HierarchicalTree.getSortedData(nodes$, elements$), expandedItemsIds$, activeRange$);
+    super(
+      HierarchicalTreeDataSource.getSortedData(nodes$, elements$, hideRoot),
+      expandedItemsIds$,
+      activeRange$,
+      false
+    );
   }
 
   private static getSortedData(
     nodes$: Observable<TreeItem[]>,
-    elements$: Observable<TreeItem[]>
+    elements$: Observable<TreeItem[]>,
+    hideRoot: boolean
   ): Observable<FlatTreeItem[]> {
     const nodesCopy$: Observable<TreeItem[]> = nodes$.pipe(
       map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem })))
@@ -57,7 +64,9 @@ export class HierarchicalTree extends FlatTreeDataSource {
       map((elementsByParentId: Map<string, TreeItem[]>) => {
         const rootParentIds: string[] = [null, undefined];
         const rootElements: TreeItem[] = rootParentIds
-          .map((parentId: string) => elementsByParentId.get(parentId))
+          .map((parentId: string) => {
+            return elementsByParentId.has(parentId) ? elementsByParentId.get(parentId) : [];
+          })
           .flat(1);
         return rootElements;
       })
@@ -83,6 +92,9 @@ export class HierarchicalTree extends FlatTreeDataSource {
             const existingNodes: NodeWithElements[] = resultMap.has(parentId) ? resultMap.get(parentId) : [];
             resultMap.set(parentId, [...existingNodes, nodeWithChildElements]);
           });
+
+        elementsByParentId.clear();
+
         return resultMap;
       })
     );
@@ -95,9 +107,12 @@ export class HierarchicalTree extends FlatTreeDataSource {
           NodeWithElements | NodeWithChildren
         >(nodesWithElements.map((node: NodeWithElements) => [node.id, node]));
         nodesWithElements.forEach((node: NodeWithElements) => {
-          const childNodes: NodeWithElements[] = nodesWithElementsByParentId
-            .get(node.id)
-            .map((childNode: NodeWithElements) => nodeWithChildrenById.get(childNode.id));
+          const childNodes: NodeWithElements[] = nodesWithElementsByParentId.has(node.id)
+            ? nodesWithElementsByParentId.get(node.id).map((childNode: NodeWithElements) => {
+                const childNodeId: string = childNode.id;
+                return nodeWithChildrenById.get(childNodeId);
+              })
+            : [];
 
           Object.defineProperty(node, 'childNodes', {
             value: childNodes,
@@ -107,10 +122,16 @@ export class HierarchicalTree extends FlatTreeDataSource {
           });
         });
 
+        nodeWithChildrenById.clear();
+
         const nodesWithChildren: NodeWithChildren[] = nodesWithElements.map(
           (node: NodeWithElements | NodeWithChildren): NodeWithChildren => {
-            const childNodes: NodeWithElements[] = HierarchicalTree.isNodeWithChildNodes(node) ? node.childNodes : [];
-            const childElements: TreeItem[] = HierarchicalTree.isNodeWithChildElements(node) ? node.childElements : [];
+            const childNodes: NodeWithElements[] = HierarchicalTreeDataSource.isNodeWithChildNodes(node)
+              ? node.childNodes
+              : [];
+            const childElements: TreeItem[] = HierarchicalTreeDataSource.isNodeWithChildElements(node)
+              ? node.childElements
+              : [];
 
             return {
               ...node,
@@ -142,12 +163,26 @@ export class HierarchicalTree extends FlatTreeDataSource {
       map((treeRoot: TreeRoot) => {
         const { nodes, elements }: TreeRoot = treeRoot;
 
-        const flatTreeElements: FlatTreeItem[] = HierarchicalTree.childElementsToFlatTreeItems(elements);
+        const flatTreeElements: FlatTreeItem[] = HierarchicalTreeDataSource.childElementsToFlatTreeItems(elements);
         const flatTreeNodesWithElements: FlatTreeItem[] = nodes
-          .map((node: NodeWithChildren) => HierarchicalTree.nodeWithChildrenToFlatTreeItems(node))
+          .map((node: NodeWithChildren) => HierarchicalTreeDataSource.nodeWithChildrenToFlatTreeItems(node))
           .flat(1);
 
-        return [...flatTreeNodesWithElements, ...flatTreeElements];
+        return [...flatTreeNodesWithElements, ...flatTreeElements].filter(
+          (flatTreeItem: FlatTreeItem) => !isNullOrUndefined(flatTreeItem)
+        );
+      }),
+
+      map((resultTreeDataSource: FlatTreeItem[]) => {
+        if (!hideRoot) {
+          return resultTreeDataSource;
+        }
+        return resultTreeDataSource
+          .filter((treeItem: FlatTreeItem) => treeItem.level !== 0)
+          .map((treeItem: FlatTreeItem) => {
+            const currentLevel: number = treeItem.level;
+            return { ...treeItem, level: currentLevel - 1 };
+          });
       })
     );
   }
@@ -162,26 +197,31 @@ export class HierarchicalTree extends FlatTreeDataSource {
 
   private static nodeWithChildrenToFlatTreeItems(
     nodeWithChildren: NodeWithChildren,
-    parentItemLevel: number = 0
+    parentItemLevel: number | null = null
   ): FlatTreeItem[] {
-    const currentLevel: number = parentItemLevel + 1;
+    const currentLevel: number = isNullOrUndefined(parentItemLevel) ? 0 : parentItemLevel + 1;
     const { isExpandable, name, id, originalData, isElement }: NodeWithChildren = nodeWithChildren;
     const node: FlatTreeItem = new FlatTreeItem(isExpandable, name, currentLevel, id, originalData, isElement);
-    const childElements: FlatTreeItem[] = HierarchicalTree.childElementsToFlatTreeItems(
+    const childElements: FlatTreeItem[] = HierarchicalTreeDataSource.childElementsToFlatTreeItems(
       nodeWithChildren.childElements,
       currentLevel
     );
     const childNodes: FlatTreeItem[] = nodeWithChildren.childNodes
-      .map((childNode: NodeWithChildren) => HierarchicalTree.nodeWithChildrenToFlatTreeItems(childNode, currentLevel))
+      .map((childNode: NodeWithChildren) =>
+        HierarchicalTreeDataSource.nodeWithChildrenToFlatTreeItems(childNode, currentLevel)
+      )
       .flat(1);
 
     return [node, ...childNodes, ...childElements];
   }
 
-  private static childElementsToFlatTreeItems(childElements: TreeItem[], parentItemLevel: number = 0): FlatTreeItem[] {
+  private static childElementsToFlatTreeItems(
+    childElements: TreeItem[],
+    parentItemLevel: number | null = null
+  ): FlatTreeItem[] {
     return childElements.map((childElement: TreeItem) => {
       const { isExpandable, name, id, originalData, isElement }: TreeItem = childElement;
-      const currentLevel: number = parentItemLevel + 1;
+      const currentLevel: number = isNullOrUndefined(parentItemLevel) ? 0 : parentItemLevel + 1;
       return new FlatTreeItem(isExpandable, name, currentLevel, id, originalData, isElement);
     });
   }

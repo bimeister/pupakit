@@ -14,9 +14,10 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   public readonly filteredData$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
 
   constructor(
-    private readonly sortedData$: Observable<FlatTreeItem[]>,
+    public readonly sortedData$: Observable<FlatTreeItem[]>,
     private readonly expandedItemsIds$: Observable<string[]>,
-    private readonly activeRange$: Observable<ListRange>
+    private readonly activeRange$: Observable<ListRange>,
+    private readonly hideRoot: boolean
   ) {
     super();
   }
@@ -26,7 +27,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       this.activeRange$.pipe(
         filter((range: ListRange) => !isNullOrUndefined(range) && range.start >= 0 && range.end >= 0)
       ),
-      this.sortedData$,
+      this.sortedData$.pipe(
+        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
+      ),
       this.expandedItemsIds$
     ]).pipe(
       map(([range, source, expandedItemsIds]: [ListRange, FlatTreeItem[], string[]]) => [
@@ -37,6 +40,12 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
       ),
+      map((currentSlice: FlatTreeItem[]) => {
+        if (!this.hideRoot) {
+          return currentSlice;
+        }
+        return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
+      }),
       tap((currentSlice: FlatTreeItem[]) => this.currentSlice$.next(currentSlice))
     );
   }
@@ -59,7 +68,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   }
 
   private static isHidden(item: FlatTreeItem): item is FlatTreeItem & { __isHidden: boolean } {
-    return item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
+    return !isNullOrUndefined(item) && item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
   }
 
   private static processExpandableItem(

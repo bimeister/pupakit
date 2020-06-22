@@ -1,12 +1,16 @@
 import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
+import { ElementRef } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { FlatTreeItem } from './flat-tree-item.class';
-import { FlatTreeDataSource } from './flat-tree-data-source.class';
+
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
-import { ElementRef } from '@angular/core';
+import { TreeType } from '../enums/tree-type.enum';
+import { TreeManipulatorDataOrigin } from '../types/tree-manipulator-data-origin.type';
+import { FlatTreeDataSource } from './flat-tree-data-source.class';
+import { FlatTreeItem } from './flat-tree-item.class';
+import { HierarchicalTreeDataSource } from './hierarchical-tree-data-source.class';
 
 const TARGET_NODE_TO_SCROLL_TO_DEBOUNCE_TIME_MS: number = 500;
 
@@ -23,11 +27,23 @@ export class TreeManipulator {
     TreeManipulator.isExpandable
   );
 
-  public readonly dataSource: FlatTreeDataSource = new FlatTreeDataSource(
-    this.dataOrigin$,
-    this.expandedItemsIds$,
-    this.listRange$
-  );
+  public readonly dataSource: FlatTreeDataSource =
+    this.dataOrigin.type === TreeType.Flat
+      ? new FlatTreeDataSource(
+          this.dataOrigin.flatDataOrigin,
+          this.expandedItemsIds$,
+          this.listRange$,
+          this.dataOrigin.hideRoot
+        )
+      : new HierarchicalTreeDataSource(
+          this.dataOrigin.treeNodesOrigin,
+          this.dataOrigin.treeElementsOrigin,
+          this.expandedItemsIds$,
+          this.listRange$,
+          this.dataOrigin.hideRoot
+        );
+
+  public readonly rawData$: Observable<FlatTreeItem[]> = this.dataSource.sortedData$;
 
   private readonly scrollByRoute$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly indexToScrollBy$: Observable<number> = this.scrollByRoute$.pipe(
@@ -47,7 +63,7 @@ export class TreeManipulator {
   );
 
   constructor(
-    private readonly dataOrigin$: Observable<FlatTreeItem[]>,
+    private readonly dataOrigin: TreeManipulatorDataOrigin,
     private readonly viewPortReference$: Observable<CdkVirtualScrollViewport>,
     private readonly skeletonViewPortReference$: Observable<CdkVirtualScrollViewport>,
     private readonly viewPortItemHeightPx: number
@@ -133,7 +149,7 @@ export class TreeManipulator {
   }
 
   private setInitialVisibleRange(): void {
-    this.dataOrigin$
+    this.rawData$
       .pipe(
         filter((nodes: FlatTreeItem[]) => Array.isArray(nodes) && !TreeManipulator.isEmptyArray(nodes)),
         take(1),

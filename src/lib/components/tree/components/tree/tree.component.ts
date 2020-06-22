@@ -2,6 +2,7 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
   AfterContentInit,
+  Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -29,21 +30,27 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, debounceTime, filter, observeOn } from 'rxjs/operators';
+import { debounce, debounceTime, filter, observeOn, take } from 'rxjs/operators';
+
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
+import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
+import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
-import { clamp } from '../../../../../internal/helpers/clamp.helper';
-import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
+import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
+import { TreeManipulatorDataOrigin } from '../../../../../internal/declarations/types/tree-manipulator-data-origin.type';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
+import { clamp } from '../../../../../internal/helpers/clamp.helper';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 interface Position {
   top: number;
   left: number;
 }
+
+type HideRoot = 'true' | 'false';
 
 type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
 
@@ -55,9 +62,9 @@ const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, 
 };
 const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
   !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
-const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean =>
-  !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
-
+const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
+  return !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
+};
 const NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS: number = 500;
 const TREE_ITEM_SIZE_PX: number = 28;
 @Component({
@@ -77,7 +84,24 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @ViewChild('viewPort', { static: true }) private readonly viewPort: CdkVirtualScrollViewport;
   @ViewChild('skeletonViewPort', { static: true }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
 
-  @Input() public readonly dataOrigin: FlatTreeItem[];
+  /**
+   * @description
+   * Already flatten tree data source.
+   */
+  @Input() public readonly flatDataOrigin: FlatTreeItem[] = [];
+
+  /**
+   * @description
+   * Flatten tree nodes (folders) to be combined with treeElementsOrigin.
+   */
+  @Input() public readonly treeNodesOrigin: TreeItemInterface[] = [];
+
+  /**
+   * @description
+   * Flatten tree elements (folder items) to be combined with treeNodesOrigin.
+   */
+  @Input() public readonly treeElementsOrigin: TreeItemInterface[] = [];
+
   @Input() public readonly nodeTemplate?: TemplateRef<any>;
   @Input() public readonly trackBy?: TrackByFunction<FlatTreeItem>;
   @Input() public readonly selectedNodesIds?: string[];
@@ -92,35 +116,41 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly trackBy$: BehaviorSubject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(
     DEFAULT_TRACK_BY_FUNCTION
   );
-  public readonly dataOrigin$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject([]);
+  public readonly flatDataOrigin$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject([]);
+  public readonly treeNodesOrigin$: BehaviorSubject<TreeItemInterface[]> = new BehaviorSubject([]);
+  public readonly treeElementsOrigin$: BehaviorSubject<TreeItemInterface[]> = new BehaviorSubject([]);
   public readonly selectedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly highlightedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
   private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
 
-  private readonly manipulator: TreeManipulator = new TreeManipulator(
-    this.dataOrigin$,
-    this.viewPortReference$,
-    this.skeletonViewPortReference$,
-    this.treeItemSizePx
-  );
+  private readonly manipulatorDataOrigin: TreeManipulatorDataOrigin;
+  private readonly manipulator: TreeManipulator;
 
-  public readonly treeControl: FlatTreeControl<FlatTreeItem> = this.manipulator.treeControl;
-  public readonly dataSource: FlatTreeDataSource = this.manipulator.dataSource;
-  public readonly filteredSource$: Observable<FlatTreeItem[]> = this.dataSource.filteredData$;
+  public readonly treeControl: FlatTreeControl<FlatTreeItem>;
+  public readonly dataSource: FlatTreeDataSource;
+  public readonly filteredSource$: Observable<FlatTreeItem[]>;
 
   public readonly expandNodeWithDelay$: Subject<FlatTreeItem | null> = new Subject<FlatTreeItem | null>();
+
   private scrollDirection: null | 'up' | 'down' = null;
 
   @ViewChild('draggable')
   private readonly draggableElement: ElementRef<HTMLElement>;
 
   public draggingHasStarted: boolean = false;
+
+  /** @deprecated mutable object */
   public draggableNode: FlatTreeItem | null;
+
+  /** @deprecated mutable object */
   private dropNode: FlatTreeItem | null;
 
+  /** @deprecated mutable object */
   private mouseDownPosition: Position | null = null;
+
+  /** @deprecated mutable object */
   private draggableElementBoundingBox: DOMRect | null = null;
 
   private draggableExpandableDescendands: Uuid[] = [];
@@ -128,8 +158,49 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly renderer: Renderer2,
-    private readonly host: ElementRef<HTMLElement>
-  ) {}
+    private readonly host: ElementRef<HTMLElement>,
+    @Attribute('type') private readonly type: TreeType,
+    @Attribute('hideRoot') private readonly hideRoot: HideRoot = 'false'
+  ) {
+    const rootNodesShouldBeHidden: boolean = this.hideRoot === 'true';
+
+    switch (this.type) {
+      case TreeType.Flat: {
+        const dataOrigin: TreeManipulatorDataOrigin = {
+          type: this.type,
+          flatDataOrigin: this.flatDataOrigin$,
+          hideRoot: rootNodesShouldBeHidden
+        };
+        this.manipulatorDataOrigin = dataOrigin;
+        break;
+      }
+      case TreeType.Hierarchical: {
+        const dataOrigin: TreeManipulatorDataOrigin = {
+          type: this.type,
+          treeElementsOrigin: this.treeElementsOrigin$,
+          treeNodesOrigin: this.treeNodesOrigin$,
+          hideRoot: rootNodesShouldBeHidden
+        };
+        this.manipulatorDataOrigin = dataOrigin;
+        break;
+      }
+
+      default: {
+        throw new Error('Specified type is not a valid type of pupa-tree.');
+      }
+    }
+
+    this.manipulator = new TreeManipulator(
+      this.manipulatorDataOrigin,
+      this.viewPortReference$,
+      this.skeletonViewPortReference$,
+      this.treeItemSizePx
+    );
+
+    this.treeControl = this.manipulator.treeControl;
+    this.dataSource = this.manipulator.dataSource;
+    this.filteredSource$ = this.manipulator.dataSource.filteredData$;
+  }
 
   public ngOnInit(): void {
     this.subscription
@@ -145,7 +216,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       return;
     }
     this.processTrackByValueChange(changes?.trackBy);
-    this.processDataOriginValueChange(changes?.dataOrigin);
+    this.processFlatDataOriginValueChange(changes?.flatDataOrigin);
+    this.processTreeNodesDataOriginValueChange(changes?.treeNodesOrigin);
+    this.processTreeElementsDataOriginValueChange(changes?.treeElementsOrigin);
     this.processSelectedNodesIdsValueChange(changes?.selectedNodesIds);
     this.processHighlightedNodesIdsValueChange(changes?.highlightedNodesIds);
     this.processScrollByRouteValueChanges(changes?.scrollByRoute);
@@ -184,8 +257,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       left: event.screenX,
       top: event.screenY
     };
-
-    this.draggableElementBoundingBox = (event.target as HTMLElement).getBoundingClientRect();
+    if (event.target instanceof HTMLElement) {
+      this.draggableElementBoundingBox = event.target.getBoundingClientRect();
+    }
   }
 
   @HostListener('window:mousemove', ['$event'])
@@ -259,32 +333,36 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   private setupWidthForDraggableElement(): void {
-    setTimeout(() => {
-      this.renderer.setStyle(
-        this.draggableElement.nativeElement,
-        'width',
-        `${this.draggableElementBoundingBox.width}px`
-      );
-    });
+    timer(0)
+      .pipe(take(1))
+      .subscribe(() => {
+        this.renderer.setStyle(
+          this.draggableElement.nativeElement,
+          'width',
+          `${this.draggableElementBoundingBox.width}px`
+        );
+      });
   }
 
   private setupDraggableExpandableDescendands(): void {
-    const targetLevel: number = this.draggableNode.level;
+    this.manipulator.rawData$.pipe(take(1)).subscribe((treeItems: FlatTreeItem[]) => {
+      const targetLevel: number = this.draggableNode.level;
 
-    let currentIndex: number = this.dataOrigin.findIndex(dataPoint => dataPoint.id === this.draggableNode.id) + 1;
-    const endOfListNotReached = (): boolean => this.dataOrigin.length !== currentIndex;
-    const targetLevelNotReached = (): boolean => this.dataOrigin[currentIndex].level !== targetLevel;
-    const result: Uuid[] = [this.draggableNode.id];
+      let currentIndex: number = treeItems.findIndex(dataPoint => dataPoint.id === this.draggableNode.id) + 1;
+      const endOfListNotReached = (): boolean => treeItems.length !== currentIndex;
+      const targetLevelNotReached = (): boolean => treeItems[currentIndex].level !== targetLevel;
+      const result: Uuid[] = [this.draggableNode.id];
 
-    while (endOfListNotReached() && targetLevelNotReached()) {
-      const currentNode: FlatTreeItem = this.dataOrigin[currentIndex];
-      if (currentNode.isExpandable) {
-        result.push(currentNode.id);
+      while (endOfListNotReached() && targetLevelNotReached()) {
+        const currentNode: FlatTreeItem = treeItems[currentIndex];
+        if (currentNode.isExpandable) {
+          result.push(currentNode.id);
+        }
+        currentIndex++;
       }
-      currentIndex++;
-    }
 
-    this.draggableExpandableDescendands = result;
+      this.draggableExpandableDescendands = result;
+    });
   }
 
   private updateDraggablePosition(screenX: number, screenY: number): void {
@@ -319,12 +397,28 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.trackBy$.next(newValue);
   }
 
-  private processDataOriginValueChange(change: ComponentChange<this, FlatTreeItem[]>): void {
+  private processFlatDataOriginValueChange(change: ComponentChange<this, FlatTreeItem[]>): void {
     const newValue: FlatTreeItem[] | undefined = change?.currentValue;
     if (!Array.isArray(newValue)) {
       return;
     }
-    this.dataOrigin$.next(newValue);
+    this.flatDataOrigin$.next(newValue);
+  }
+
+  private processTreeNodesDataOriginValueChange(change: ComponentChange<this, TreeItemInterface[]>): void {
+    const newValue: TreeItemInterface[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.treeNodesOrigin$.next(newValue);
+  }
+
+  private processTreeElementsDataOriginValueChange(change: ComponentChange<this, TreeItemInterface[]>): void {
+    const newValue: TreeItemInterface[] | undefined = change?.currentValue;
+    if (!Array.isArray(newValue)) {
+      return;
+    }
+    this.treeElementsOrigin$.next(newValue);
   }
 
   private processSelectedNodesIdsValueChange(change: ComponentChange<this, string[]>): void {
