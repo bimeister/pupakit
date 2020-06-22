@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  Output
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 // tslint:disable-next-line: import-blacklist
 import { cloneDeep, isEqual } from 'lodash';
@@ -68,6 +76,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
   public get value(): T {
     return this._value;
   }
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public writeValue(value: T): void {
     if (!this.items) {
@@ -85,6 +94,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
     });
 
     this.selectedItem = item;
+    this.changeDetectorRef.markForCheck();
     if (!isEqual(prevValue, item)) {
       this.onChange(value);
     }
