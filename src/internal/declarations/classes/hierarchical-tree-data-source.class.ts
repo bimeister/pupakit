@@ -2,9 +2,9 @@ import { ListRange } from '@angular/cdk/collections';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/api';
-import { FlatTreeItem } from './api';
+import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
+import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeItem } from './tree-item.class';
 
 interface NodeWithElements extends TreeItem {

@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { daysArrayToMap } from '../../../src/lib/components';
 import { Weekdays } from '../../../src/internal/declarations/enums/week-days.enum';
 import { DaysMap } from '../../../src/internal/declarations/interfaces/days-map.interface';
+import { daysArrayToMap } from '../../../src/lib/components/day-selector/components/day-selector/day-selector.component';
 
 @Component({
   selector: 'demo-spinner-demo',

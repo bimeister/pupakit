@@ -54,20 +54,20 @@
       [ngSwitch]="type === 'date'"
       [open]="isDatePickerVisible"
       [anchor]="dateInputElement"
-      maxWidth="unset"
+      [maxWidth]="null"
       class="droppable"
     >
       <pupa-datepicker
         *ngSwitchCase="true"
         selectionMode="date"
         (date)="updateValue($event)"
-        [selectedDate]="value"
+        [selectedDate]="$any(value)"
       ></pupa-datepicker>
       <pupa-datepicker
         *ngSwitchDefault
         selectionMode="range"
         (range)="updateValue($event)"
-        [selectedRange]="value"
+        [selectedRange]="$any(value)"
       ></pupa-datepicker>
     </pupa-droppable-legacy>
   </div>

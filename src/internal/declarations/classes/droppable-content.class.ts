@@ -1,8 +1,9 @@
 import { CdkPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Host, ViewChild } from '@angular/core';
+import { AfterViewInit, Injectable, ViewChild } from '@angular/core';
 
 import { DroppableComponent } from '../../../lib/components/droppable/components/droppable/droppable.component';
 
+@Injectable()
 export abstract class DroppableContent implements AfterViewInit {
   @ViewChild(CdkPortal) public contentRef: CdkPortal;
 
@@ -10,7 +11,7 @@ export abstract class DroppableContent implements AfterViewInit {
     return this.droppable.isOpened;
   }
 
-  constructor(@Host() protected readonly droppable: DroppableComponent) {}
+  constructor(protected readonly droppable: DroppableComponent) {}
 
   public ngAfterViewInit(): void {
     this.droppable.contentRef = this.contentRef;

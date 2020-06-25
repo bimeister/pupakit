@@ -1,6 +1,6 @@
 <div class="pupa-dropdown">
   <pupa-dropdown-item
-    *ngFor="let item of items"
+    *ngFor="let item of $any(items)"
     [item]="item"
     [captionPropertyPath]="captionPropertyPath"
     (select)="emitSelect($event)"

@@ -1,4 +1,4 @@
-import { HostListener, Input, OnChanges } from '@angular/core';
+import { HostListener, Injectable, Input, OnChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 
@@ -7,6 +7,7 @@ import { ComponentChange } from '../interfaces/component-change.interface';
 import { ComponentChanges } from '../interfaces/component-changes.interface';
 import { TabsContainer } from './tabs-container.class';
 
+@Injectable()
 export abstract class TabsContainerItem<T> implements OnChanges {
   @Input() public isVisible: boolean = true;
   @Input() public isActive: boolean = false;
@@ -17,7 +18,7 @@ export abstract class TabsContainerItem<T> implements OnChanges {
     distinctUntilChanged()
   );
 
-  constructor(protected readonly tabsContainer: TabsContainer) {}
+  constructor(protected readonly tabsContainer: TabsContainer<TabsContainerItem<any>>) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsActiveValueChanges(changes?.isActive);
