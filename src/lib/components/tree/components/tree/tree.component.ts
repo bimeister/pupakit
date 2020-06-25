@@ -54,8 +54,12 @@ type HideRoot = 'true' | 'false';
 
 type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
 
-const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (_index: number, item: FlatTreeItem): string => {
-  return item?.id;
+const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number, item: FlatTreeItem): string => {
+  if (isNullOrUndefined(item)) {
+    return `${index}__null_null_null_null`;
+  }
+  const { id, isExpandable, level, name }: FlatTreeItem = item;
+  return `${index}__${id}_${isExpandable}_${level}_${name}`;
 };
 const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean => {
   return !isNullOrUndefined(node) && node.isExpandable && !node.isElement;

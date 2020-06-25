@@ -1,6 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
 import { combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from '../../helpers/api';
 import { FlatTreeItem } from './api';
@@ -42,10 +42,12 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     hideRoot: boolean
   ): Observable<FlatTreeItem[]> {
     const nodesCopy$: Observable<TreeItem[]> = nodes$.pipe(
-      map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem })))
+      map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem }))),
+      shareReplay(1)
     );
     const elementsCopy$: Observable<TreeItem[]> = elements$.pipe(
-      map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem })))
+      map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem }))),
+      shareReplay(1)
     );
 
     const elementsByParentId$: Observable<Map<string, TreeItem[]>> = elementsCopy$.pipe(
@@ -93,8 +95,6 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
             resultMap.set(parentId, [...existingNodes, nodeWithChildElements]);
           });
 
-        elementsByParentId.clear();
-
         return resultMap;
       })
     );
@@ -121,8 +121,6 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
             writable: true
           });
         });
-
-        nodeWithChildrenById.clear();
 
         const nodesWithChildren: NodeWithChildren[] = nodesWithElements.map(
           (node: NodeWithElements | NodeWithChildren): NodeWithChildren => {

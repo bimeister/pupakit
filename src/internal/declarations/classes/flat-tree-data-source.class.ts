@@ -62,6 +62,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     item: FlatTreeItem,
     expandedItemsIds: string[]
   ): item is FlatTreeItem & { __isCollapsed: boolean } {
+    if (isNullOrUndefined(item)) {
+      return false;
+    }
     const itemIsCollapsedManualy: boolean = item.hasOwnProperty('__isCollapsed') && Boolean(item['__isCollapsed']);
     const itemIsNotExpanded: boolean = !expandedItemsIds.includes(item.id);
     return FlatTreeDataSource.isExpandable(item) && (itemIsCollapsedManualy || itemIsNotExpanded);
