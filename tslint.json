@@ -1,7 +1,7 @@
 {
   "defaultSeverity": "error",
   "linterOptions": {
-    "exclude": ["node_modules", "demo"]
+    "exclude": ["node_modules", "demo", "src/**/api.ts", "src/public-api.ts"]
   },
   "rules": {
     "array-type": [true, "array"],
@@ -23,7 +23,7 @@
     "encoding": true,
     "eofline": true,
     "forin": true,
-    "import-blacklist": [true, "rxjs/Rx", ["@angular/compiler/.*"], ["lodash.*"]],
+    "import-blacklist": [true, "rxjs/Rx", ["@angular/compiler/.*"], ["lodash.*"], ["^.*/api$"]],
     "import-spacing": true,
     "indent": [true, "spaces"],
     "interface-name": [true, "never-prefix"],

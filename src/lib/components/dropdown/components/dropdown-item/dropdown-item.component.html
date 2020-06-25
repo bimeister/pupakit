@@ -19,7 +19,7 @@
 </div>
 <div *ngIf="itemData.children && itemData.children.length > 0" class="pupa-dropdown__children">
   <pupa-dropdown-item
-    *ngFor="let item of item.children"
+    *ngFor="let item of $any(item).children"
     [item]="item"
     [captionPropertyPath]="captionPropertyPath"
     (select)="emitSelect($event)"

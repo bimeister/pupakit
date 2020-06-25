@@ -1,8 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, ViewEncapsulation } from '@angular/core';
 
 import { DroppableContent } from '../../../../../internal/declarations/classes/droppable-content.class';
 import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
+import { DroppableComponent } from '../droppable/droppable.component';
 
 @Component({
   selector: 'pupa-droppable-content',
@@ -20,7 +21,7 @@ import { DroppableWidth } from '../../../../../internal/declarations/types/dropp
 })
 export class DroppableContentComponent extends DroppableContent {
   public get widthType(): DroppableWidth {
-    return this.droppable.widthType;
+    return this.droppableComponent.widthType;
   }
 
   public get widthClassName(): string {
@@ -28,6 +29,10 @@ export class DroppableContentComponent extends DroppableContent {
   }
 
   public get triggerWidtxPx(): number {
-    return this.droppable.triggerRef.nativeElement.getBoundingClientRect().width;
+    return this.droppableComponent.triggerRef.nativeElement.getBoundingClientRect().width;
+  }
+
+  constructor(@Host() protected readonly droppableComponent: DroppableComponent) {
+    super(droppableComponent);
   }
 }

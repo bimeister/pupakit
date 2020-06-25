@@ -10,7 +10,7 @@
   [id]="id"
   [name]="name"
   [attr.disabled]="disabled ? true : null"
-  (input)="updateValue($event.target.value)"
+  (input)="updateValue($any($event.target).value)"
   autocomplete="off"
 ></textarea>
 <div class="count" *ngIf="maxLength">{{ value.length }}/{{ maxLength }}</div>

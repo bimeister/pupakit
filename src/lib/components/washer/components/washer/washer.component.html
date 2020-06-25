@@ -50,7 +50,7 @@
           [active]="button?.actionName === (activeButton$ | async)?.actionName"
           color="dark"
           size="medium"
-          (onclick)="processButtonClick($event, button)"
+          (onclick)="processButtonClick($event, $any(button))"
         >
           <ion-icon
             [style.transform]="'rotate(-' + (additionalPanelButtonsRotations$ | async)[index] + 'rad)'"
@@ -79,7 +79,7 @@
         [active]="button?.actionName === (activeButton$ | async)?.actionName"
         color="dark"
         size="medium"
-        (onclick)="processButtonClick($event, button)"
+        (onclick)="processButtonClick($event, $any(button))"
       >
         <ion-icon
           [style.transform]="'rotate(-' + (rotations$ | async)[index] + 'rad)'"

@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, shareReplay, startWith } from 'rxjs/operators';
 
-import { RadioGroupComponent } from '../radio-group/api';
+import { RadioGroupComponent } from '../radio-group/radio-group.component';
 
 /** @dynamic */
 @Component({

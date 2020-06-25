@@ -3,24 +3,26 @@
     <div class="pupa-select" [class.disabled]="disabled" [id]="id">
       <div
         class="selected-value"
-        [title]="getCaption(selectedItem)?.length > 20 ? (selectedItem ? getCaption(selectedItem) : '') : ''"
+        [title]="
+          getCaption($any(selectedItem))?.length > 20 ? (selectedItem ? getCaption($any(selectedItem)) : '') : ''
+        "
       >
         <ion-icon
           class="pupa-dropdown__icon pupa-dropdown__icon_left"
-          *ngIf="selectedItem?.iconLeft"
-          [name]="selectedItem.iconLeft.name"
-          [src]="selectedItem.iconLeft.src"
-          [style.color]="selectedItem.iconLeft.color"
+          *ngIf="$any(selectedItem)?.iconLeft"
+          [name]="$any(selectedItem).iconLeft.name"
+          [src]="$any(selectedItem).iconLeft.src"
+          [style.color]="$any(selectedItem).iconLeft.color"
         ></ion-icon>
 
-        {{ getCaption(selectedItem) }}
+        {{ getCaption($any(selectedItem)) }}
 
         <ion-icon
           class="pupa-dropdown__icon pupa-dropdown__icon_right"
-          *ngIf="selectedItem?.iconRight"
-          [name]="selectedItem.iconRight.name"
-          [src]="selectedItem.iconRight.src"
-          [style.color]="selectedItem.iconRight.color"
+          *ngIf="$any(selectedItem)?.iconRight"
+          [name]="$any(selectedItem).iconRight.name"
+          [src]="$any(selectedItem).iconRight.src"
+          [style.color]="$any(selectedItem).iconRight.color"
         ></ion-icon>
       </div>
       <div class="arrow">

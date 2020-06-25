@@ -17,7 +17,7 @@
                   "type": "initial"
                 }
               ],
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "extractCss": false,
               "extractLicenses": false,
               "fileReplacements": [
@@ -41,7 +41,7 @@
                   "type": "initial"
                 }
               ],
-              "buildOptimizer": true,
+              "buildOptimizer": false,
               "extractCss": true,
               "extractLicenses": true,
               "fileReplacements": [
@@ -51,7 +51,7 @@
                 }
               ],
               "namedChunks": false,
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
               "vendorChunk": false
@@ -72,7 +72,6 @@
                 "output": "/assets"
               }
             ],
-            "es5BrowserSupport": true,
             "index": "demo/index.html",
             "main": "demo/main.ts",
             "outputPath": "./demo/docs",
@@ -230,7 +229,7 @@
           "inlineStyle": false,
           "inlineTemplate": false,
           "skipImport": false,
-          "spec": false,
+          "skipTests": true,
           "style": "scss",
           "viewEncapsulation": "Emulated"
         },
@@ -238,24 +237,24 @@
           "export": true,
           "flat": true,
           "skipImport": false,
-          "spec": true
+          "skipTests": false
         },
         "@schematics/angular:module": {
           "commonModule": false,
           "flat": false,
           "routing": false,
           "routingScope": "Child",
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
           "export": true,
           "flat": true,
           "skipImport": false,
-          "spec": true
+          "skipTests": false
         },
         "@schematics/angular:service": {
           "flat": true,
-          "spec": false
+          "skipTests": true
         }
       },
       "sourceRoot": "./src"

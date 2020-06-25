@@ -1,10 +1,11 @@
-import { ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { ElementRef, HostListener, Injectable, Renderer2 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { Position } from '../types/position.type';
 
+@Injectable()
 export abstract class PositionController {
   public readonly activeControllerRef$: BehaviorSubject<this | null> = new BehaviorSubject<this | null>(null);
 

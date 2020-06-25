@@ -2,7 +2,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { ChipButtonModule } from '../chip-button/chip-button.module';
-import { DroppableModule } from '../droppable/api';
+import { DroppableModule } from '../droppable/droppable.module';
 import { MultiselectionListModule } from '../multiselection-list/multiselection-list.module';
 import { SelectMultipleComponent } from './components/select-multiple/select-multiple.component';
 

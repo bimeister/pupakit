@@ -35,7 +35,7 @@ import { SwitcherModule } from './components/switcher/switcher.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { TextareaModule } from './components/textarea/textarea.module';
 import { TileModule } from './components/tile/tile.module';
-import { TimeInputModule } from './components/time-input/api';
+import { TimeInputModule } from './components/time-input/time-input.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
