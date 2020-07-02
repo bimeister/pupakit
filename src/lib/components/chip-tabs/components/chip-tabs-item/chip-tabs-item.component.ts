@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Host } from '@angular/core';
 
 import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
-import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
+import { ChipTabsComponent } from '../chip-tabs/chip-tabs.component';
 
 @Component({
   selector: 'pupa-chip-tabs-item',
@@ -10,7 +10,7 @@ import { TabsContainer } from '../../../../../internal/declarations/classes/tabs
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipTabsItemComponent extends TabsContainerItem<ThisType<ChipTabsItemComponent>> {
-  constructor(@Host() protected readonly tabsContainer: TabsContainer<ChipTabsItemComponent>) {
+  constructor(@Host() protected readonly tabsContainer: ChipTabsComponent) {
     super(tabsContainer);
   }
 }

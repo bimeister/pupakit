@@ -7,7 +7,6 @@
     "url": "https://git.meistersoft.ru/common/pupakit.git"
   },
   "scripts": {
-    "postinstall": "ngcc",
     "ng": "ng",
     "start": "yarn run start:demo",
     "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
@@ -35,10 +34,9 @@
     "barrel:internal": "barrelsby --config=\"./barrelsby.json\" --directory=\"./src/internal\""
   },
   "dependencies": {
-    "@angular/cdk": "^10.0.0",
+    "@angular/cdk": "^9.2.4",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
-    "tslib": "^2.0.0",
     "uuid": "^8.0.0",
     "zone.js": "~0.10.2"
   },
@@ -47,19 +45,19 @@
   },
   "devDependencies": {
     "@angular-builders/jest": "^9.0.1",
-    "@angular-devkit/build-angular": "^0.1000.0",
-    "@angular-devkit/build-ng-packagr": "~0.1000.0",
-    "@angular/animations": "~10.0.0",
-    "@angular/cli": "~10.0.0",
-    "@angular/common": "~10.0.0",
-    "@angular/compiler": "~10.0.0",
-    "@angular/compiler-cli": "~10.0.0",
-    "@angular/core": "~10.0.0",
-    "@angular/forms": "~10.0.0",
-    "@angular/language-service": "~10.0.0",
-    "@angular/platform-browser": "~10.0.0",
-    "@angular/platform-browser-dynamic": "~10.0.0",
-    "@angular/router": "~10.0.0",
+    "@angular-devkit/build-angular": "^0.901.7",
+    "@angular-devkit/build-ng-packagr": "~0.901.7",
+    "@angular/animations": "~9.1.9",
+    "@angular/cli": "~9.1.7",
+    "@angular/common": "~9.1.9",
+    "@angular/compiler": "~9.1.9",
+    "@angular/compiler-cli": "~9.1.9",
+    "@angular/core": "~9.1.9",
+    "@angular/forms": "~9.1.9",
+    "@angular/language-service": "~9.1.9",
+    "@angular/platform-browser": "~9.1.9",
+    "@angular/platform-browser-dynamic": "~9.1.9",
+    "@angular/router": "~9.1.9",
     "@babel/core": "^7.8.7",
     "@storybook/addon-actions": "^5.3.14",
     "@storybook/angular": "^6.0.0-beta.22",
@@ -74,7 +72,7 @@
     "css-loader": "^3.4.2",
     "ionicons": "^4.6.3",
     "jest": "^25.0.1",
-    "ng-packagr": "^10.0.0",
+    "ng-packagr": "^9.0.3",
     "prettier": "^2.0.4",
     "replace-in-file": "^6.0.0",
     "rxjs": "~6.5.5",
@@ -82,7 +80,8 @@
     "scss-bundle": "^3.0.1",
     "ts-node": "~8.10.1",
     "tsickle": "^0.38.1",
-    "tslint": "~6.1.0",
-    "typescript": "3.9.5"
+    "tslib": "^1.11.1",
+    "tslint": "6.1.2",
+    "typescript": "<3.9.0"
   }
 }

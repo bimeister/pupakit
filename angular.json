@@ -17,7 +17,7 @@
                   "type": "initial"
                 }
               ],
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "extractCss": false,
               "extractLicenses": false,
               "fileReplacements": [
@@ -41,7 +41,7 @@
                   "type": "initial"
                 }
               ],
-              "buildOptimizer": false,
+              "buildOptimizer": true,
               "extractCss": true,
               "extractLicenses": true,
               "fileReplacements": [
@@ -51,7 +51,7 @@
                 }
               ],
               "namedChunks": false,
-              "optimization": false,
+              "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
               "vendorChunk": false
@@ -72,6 +72,7 @@
                 "output": "/assets"
               }
             ],
+            "es5BrowserSupport": true,
             "index": "demo/index.html",
             "main": "demo/main.ts",
             "outputPath": "./demo/docs",
@@ -229,7 +230,7 @@
           "inlineStyle": false,
           "inlineTemplate": false,
           "skipImport": false,
-          "skipTests": true,
+          "spec": false,
           "style": "scss",
           "viewEncapsulation": "Emulated"
         },
@@ -237,24 +238,24 @@
           "export": true,
           "flat": true,
           "skipImport": false,
-          "skipTests": false
+          "spec": true
         },
         "@schematics/angular:module": {
           "commonModule": false,
           "flat": false,
           "routing": false,
           "routingScope": "Child",
-          "skipTests": true
+          "spec": false
         },
         "@schematics/angular:pipe": {
           "export": true,
           "flat": true,
           "skipImport": false,
-          "skipTests": false
+          "spec": true
         },
         "@schematics/angular:service": {
           "flat": true,
-          "skipTests": true
+          "spec": false
         }
       },
       "sourceRoot": "./src"

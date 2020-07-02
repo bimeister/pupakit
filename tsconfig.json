@@ -1,17 +1,36 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "././tsconfig.app.json"
-    },
-    {
-      "path": "././tsconfig.lib.json"
-    }
-  ]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "./",
+    "declaration": false,
+    "downlevelIteration": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "lib": ["dom", "es2017", "es2018", "es2019", "es2020", "esnext"],
+    "importHelpers": true,
+    "locale": "en",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "newLine": "lf",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "outDir": "./dist/out-tsc",
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ],
+    "pretty": true,
+    "removeComments": true,
+    "sourceMap": true,
+    "target": "es2017",
+    "types": ["node"],
+    "typeRoots": ["node_modules/@types"],
+    "importsNotUsedAsValues": "preserve"
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
+  "exclude": ["node_modules"]
 }
