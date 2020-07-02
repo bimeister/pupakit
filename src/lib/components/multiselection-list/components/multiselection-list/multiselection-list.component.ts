@@ -1,11 +1,11 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
   forwardRef,
   Input,
   OnDestroy,
-  OnInit,
   Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -27,7 +27,7 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MultiselectionListComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class MultiselectionListComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly selectedValues$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set<string>());
   private readonly subscription: Subscription = new Subscription();
@@ -43,7 +43,7 @@ export class MultiselectionListComponent implements OnInit, OnDestroy, ControlVa
   private onChange: (selectedValues: string[]) => void;
   private onTouched: () => void;
 
-  public ngOnInit(): void {
+  public ngAfterViewInit(): void {
     this.subscription.add(this.handleSelectedValuesChanges());
   }
 

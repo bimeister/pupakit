@@ -77,6 +77,7 @@ export class SelectMultipleComponent implements AfterViewChecked, ControlValueAc
 
   public writeValue(selectedValues: string[]): void {
     this.multiselectionListControl.setValue(selectedValues);
+    requestAnimationFrame(() => this.changeDetectorRef.markForCheck());
   }
 
   public registerOnChange(fn: (selectedValues: string[]) => void): void {
