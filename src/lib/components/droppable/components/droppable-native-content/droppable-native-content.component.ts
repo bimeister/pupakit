@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Host, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 import { DroppableContent } from '../../../../../internal/declarations/classes/droppable-content.class';
-import { DroppableComponent } from '../droppable/droppable.component';
 
 @Component({
   selector: 'pupa-droppable-native-content',
@@ -9,8 +8,4 @@ import { DroppableComponent } from '../droppable/droppable.component';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DroppableNativeContentComponent extends DroppableContent {
-  constructor(@Host() protected readonly droppableComponent: DroppableComponent) {
-    super(droppableComponent);
-  }
-}
+export class DroppableNativeContentComponent extends DroppableContent {}
