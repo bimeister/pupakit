@@ -9,7 +9,7 @@ import { ChipTabsComponent } from '../chip-tabs/chip-tabs.component';
   styleUrls: ['./chip-tabs-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsItemComponent extends TabsContainerItem<ThisType<ChipTabsItemComponent>> {
+export class ChipTabsItemComponent extends TabsContainerItem<ChipTabsItemComponent> {
   constructor(@Host() protected readonly tabsContainer: ChipTabsComponent) {
     super(tabsContainer);
   }

@@ -16,7 +16,7 @@ import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.componen
   styleUrls: ['./chip-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsComponent extends TabsContainer<ChipTabsItemComponent> implements AfterViewInit, OnDestroy {
+export class ChipTabsComponent extends TabsContainer<unknown> implements AfterViewInit, OnDestroy {
   @ContentChildren(ChipTabsItemComponent, {
     descendants: false
   })

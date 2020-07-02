@@ -18,8 +18,7 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalTabsComponent extends TabsContainer<VerticalTabsItemComponent>
-  implements AfterViewInit, OnDestroy {
+export class VerticalTabsComponent extends TabsContainer<unknown> implements AfterViewInit, OnDestroy {
   @ContentChildren(VerticalTabsItemComponent, {
     descendants: false
   })
