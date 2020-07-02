@@ -2,7 +2,7 @@
   <div
     class="droppable-content"
     [ngClass]="widthClassName"
-    [style.width.px]="widthType === 'fit-content' ? 'fit-content' : triggerWidtxPx"
+    [style.width.px]="widthType === 'fit-content' ? 'fit-content' : triggerWidthPx"
     (mousedown)="mouseDownHandler($event)"
     (wheel)="mouseWheelHandler($event)"
     [@openClose]="isOpened ? 'open' : 'closed'"
