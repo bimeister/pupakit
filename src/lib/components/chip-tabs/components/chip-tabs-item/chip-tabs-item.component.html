@@ -1,7 +1,3 @@
-<div
-  class="chip-tabs-item"
-  [class.chip-tabs-item_active]="isSelected$ | async"
-  [class.chip-tabs-item_hidden]="!isVisible"
->
+<div class="chip-tabs-item" [class.chip-tabs-item_active]="isSelected" [class.chip-tabs-item_hidden]="!isVisible">
   <ng-content></ng-content>
 </div>

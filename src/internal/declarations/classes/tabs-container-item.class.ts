@@ -1,46 +1,55 @@
-import { HostListener, Input, OnChanges } from '@angular/core';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, map, take } from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectorRef, HostListener, Input, OnChanges } from '@angular/core';
+import { Subject } from 'rxjs';
+import { v4 as guidGenerate } from 'uuid';
 
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { ComponentChange } from '../interfaces/component-change.interface';
 import { ComponentChanges } from '../interfaces/component-changes.interface';
-import { TabsContainer } from './tabs-container.class';
+import { Uuid } from '../types/uuid.type';
 
-export abstract class TabsContainerItem<T> implements OnChanges {
+export abstract class TabsContainerItem implements OnChanges, AfterViewInit {
+  public readonly id: Uuid = guidGenerate();
+
   @Input() public isVisible: boolean = true;
   @Input() public isActive: boolean = false;
 
-  private readonly selectedTabs$: Observable<ThisType<T>[]> = this.tabsContainer.selectedTabs$;
-  public readonly isSelected$: Observable<boolean> = this.selectedTabs$.pipe(
-    map((tabs: ThisType<T>[]) => tabs.includes(this)),
-    distinctUntilChanged()
-  );
+  public readonly onClick$: Subject<Uuid> = new Subject<Uuid>();
+  public readonly onSelect$: Subject<Uuid> = new Subject<Uuid>();
+  public readonly onDeselect$: Subject<Uuid> = new Subject<Uuid>();
 
-  constructor(protected readonly tabsContainer: TabsContainer<unknown>) {}
+  public isSelected: boolean = false;
+
+  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {}
+
+  @HostListener('click')
+  public processTabClick(): void {
+    this.toggleSelection();
+    this.onClick$.next(this.id);
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsActiveValueChanges(changes?.isActive);
   }
 
-  @HostListener('click')
-  public processTabClick(): void {
-    this.toggleSelection();
-    this.tabsContainer.markTabAsClicked(this);
+  public ngAfterViewInit(): void {
+    this.updateSelectionState(this.isActive);
   }
 
   public deselect(): void {
-    this.tabsContainer.deselectTab(this);
+    this.onDeselect$.next(this.id);
   }
 
   public select(): void {
-    this.tabsContainer.selectTab(this);
+    this.onSelect$.next(this.id);
   }
 
   public toggleSelection(): void {
-    this.isSelected$.pipe(take(1)).subscribe((isSelected: boolean) => {
-      isSelected ? this.deselect() : this.select();
-    });
+    const newState: boolean = !this.isSelected;
+    this.updateSelectionState(newState);
+  }
+
+  public triggerChangeDetector(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   private processIsActiveValueChanges(change: ComponentChange<this, boolean>): void {
@@ -49,6 +58,11 @@ export abstract class TabsContainerItem<T> implements OnChanges {
       return;
     }
 
-    newState ? this.select() : this.deselect();
+    this.updateSelectionState(newState);
+  }
+
+  private updateSelectionState(targetState: boolean): void {
+    targetState ? this.select() : this.deselect();
+    this.triggerChangeDetector();
   }
 }

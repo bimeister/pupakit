@@ -1,14 +1,18 @@
-<pupa-chip-tabs class="tabs-container__tabs">
-  <pupa-chip-tabs-item class="tabs-container__tab" [routerLink]="'#0'" [isActive]="true">
+<pupa-chip-tabs
+  class="tabs-container__tabs"
+  (latestClickedTabIndex)="logLatestClickedTabIndex($event)"
+  (selectedTabIndexes)="logSelectedTabsIndexes($event)"
+>
+  <pupa-chip-tabs-item class="tabs-container__tab" [isActive]="true">
     Свойства
   </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab" [routerLink]="'#1'">
+  <pupa-chip-tabs-item class="tabs-container__tab">
     Интерфейсы
   </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab" [routerLink]="'#2'">
+  <pupa-chip-tabs-item class="tabs-container__tab">
     Классы
   </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab" [routerLink]="'#3'">
+  <pupa-chip-tabs-item class="tabs-container__tab">
     Структуры
   </pupa-chip-tabs-item>
 </pupa-chip-tabs>
