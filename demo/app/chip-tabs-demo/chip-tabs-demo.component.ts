@@ -7,4 +7,14 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsDemoComponent {}
+export class ChipTabsDemoComponent {
+  public logLatestClickedTabIndex(index: number): void {
+    // tslint:disable-next-line: no-console
+    console.log(index);
+  }
+
+  public logSelectedTabsIndexes(indexes: number[]): void {
+    // tslint:disable-next-line: no-console
+    console.log(indexes);
+  }
+}

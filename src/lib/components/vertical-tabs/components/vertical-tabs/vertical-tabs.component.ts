@@ -3,7 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  EventEmitter,
+  Input,
   OnDestroy,
+  Output,
   QueryList,
   ViewEncapsulation
 } from '@angular/core';
@@ -18,9 +21,18 @@ import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-i
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class VerticalTabsComponent extends TabsContainer<unknown> implements AfterViewInit, OnDestroy {
+export class VerticalTabsComponent extends TabsContainer implements AfterViewInit, OnDestroy {
+  @Input() protected isMultiSelectionEnabled: boolean = false;
+
+  @Output() protected readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Output() protected readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
+
   @ContentChildren(VerticalTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
+
+  constructor() {
+    super();
+  }
 }

@@ -3,7 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChildren,
+  EventEmitter,
+  Input,
   OnDestroy,
+  Output,
   QueryList
 } from '@angular/core';
 
@@ -16,9 +19,18 @@ import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.componen
   styleUrls: ['./chip-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ChipTabsComponent extends TabsContainer<unknown> implements AfterViewInit, OnDestroy {
+export class ChipTabsComponent extends TabsContainer implements AfterViewInit, OnDestroy {
+  @Input() protected isMultiSelectionEnabled: boolean = false;
+
+  @Output() protected readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
+  @Output() protected readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
+
   @ContentChildren(ChipTabsItemComponent, {
     descendants: false
   })
   protected readonly tabsList: QueryList<ChipTabsItemComponent>;
+
+  constructor() {
+    super();
+  }
 }
