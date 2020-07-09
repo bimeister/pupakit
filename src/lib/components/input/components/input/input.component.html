@@ -18,6 +18,8 @@
     [attr.disabled]="disabled ? true : null"
     [readOnly]="readonly"
     (input)="updateValue(inputElement.value)"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
     [autocomplete]="autocomplete ? 'on' : 'off'"
   />
   <div class="icon" *ngIf="showValidateIcon && valid && !disabled">

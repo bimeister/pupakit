@@ -11,6 +11,8 @@
   [name]="name"
   [attr.disabled]="disabled ? true : null"
   (input)="updateValue($any($event.target).value)"
+  (focus)="emitFocusEvent($event)"
+  (blur)="emitBlurEvent($event)"
   autocomplete="off"
 ></textarea>
 <div class="count" *ngIf="maxLength">{{ value.length }}/{{ maxLength }}</div>
