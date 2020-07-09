@@ -82,6 +82,9 @@ export class InputComponent implements ControlValueAccessor, Validator {
 
   @Output() public valueChange: EventEmitter<ValueType> = new EventEmitter<ValueType>();
 
+  @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
   public set touched(newValue: boolean) {
     this.touchedValue = newValue;
   }
@@ -164,6 +167,14 @@ export class InputComponent implements ControlValueAccessor, Validator {
   public setDisabledState(isDisabled: boolean): void {
     this.disabledValue = isDisabled;
     this.changeDetectorRef.markForCheck();
+  }
+
+  public emitFocusEvent(focusEvent: FocusEvent): void {
+    this.focus.emit(focusEvent);
+  }
+
+  public emitBlurEvent(blurEvent: FocusEvent): void {
+    this.blur.emit(blurEvent);
   }
 
   public onChange: CallableFunction = (_innerValue: string) => {
