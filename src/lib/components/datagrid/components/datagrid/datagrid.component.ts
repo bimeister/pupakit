@@ -9,6 +9,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
 import {
   BodyScrollEvent,
   ColDef,
@@ -21,8 +22,8 @@ import {
 } from 'ag-grid-community';
 
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
+import { DatagridThemes } from '../../../../../internal/declarations/enums/datagrid-themes.enum';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { AgGridAngular } from 'ag-grid-angular';
 
 export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
 
@@ -34,7 +35,10 @@ export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsPara
 })
 export class DatagridComponent<rowDataT> {
   public get themeClass(): string {
-    return `pupagrid-theme-${this.manipulator.config.theme}`;
+    if (this.manipulator.config.theme === DatagridThemes.None) {
+      return '';
+    }
+    return `pupagrid ag-theme-balham pupagrid-theme-${this.manipulator.config.theme}`;
   }
 
   @Output() public rowClicked: EventEmitter<unknown> = new EventEmitter<unknown>();
