@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
+import { ChipColor } from '../../../../../internal/declarations/types/chip-color.type';
+
 @Component({
   selector: 'pupa-chip-button',
   templateUrl: './chip-button.component.html',
@@ -9,6 +11,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Ou
 export class ChipButtonComponent {
   @ViewChild('chipButtonElement', { static: true }) public chipButtonElement: ElementRef<HTMLButtonElement>;
   @Input() public disabled: boolean = false;
+  @Input() public color: ChipColor = 'normal';
 
   @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 

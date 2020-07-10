@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
+import { ChipModule } from '../chip/chip.module';
 import { InputModule } from '../input/input.module';
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { ChipButtonModule } from './../chip-button/chip-button.module';
@@ -10,7 +11,7 @@ import { ChipSelectComponent } from './components/chip-select/chip-select.compon
 
 @NgModule({
   declarations: [ChipSelectComponent, ChipSelectTreeComponent, ChipSelectTreeNodeComponent],
-  imports: [SharedModule, DroppableModule, ChipButtonModule, InputModule],
+  imports: [SharedModule, DroppableModule, ChipButtonModule, ChipModule, InputModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [ChipSelectComponent, ChipSelectTreeComponent]
 })
