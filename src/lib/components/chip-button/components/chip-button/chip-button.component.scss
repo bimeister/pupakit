@@ -14,8 +14,6 @@
   appearance: none;
   box-sizing: border-box;
   border: 0;
-  background: color(accent);
-  color: color(white);
   cursor: pointer;
   padding: 0 rems(0.4);
   margin: 0;
@@ -27,10 +25,9 @@
   align-items: center;
   justify-content: space-evenly;
   flex-direction: row;
-  &:focus,
-  &:hover:not(:disabled) {
-    background: color(active);
-  }
+  color: inherit;
+  background: inherit;
+
   &:disabled {
     background: color(grey-ivory);
   }

@@ -1,7 +1,7 @@
 <div class="chip-select">
   <pupa-droppable *ngIf="!readonly">
     <pupa-droppable-trigger>
-      <pupa-chip-button #addChips [disabled]="readonly">
+      <pupa-chip-button #addChips [disabled]="readonly" [color]="'dark'">
         <div class="chip-select__chip-add-button">Добавить</div>
         <ion-icon name="add"></ion-icon>
       </pupa-chip-button>
@@ -13,7 +13,7 @@
     </pupa-droppable-content>
   </pupa-droppable>
 
-  <pupa-chip *ngFor="let selectItem of selectItems; index as index">
+  <pupa-chip *ngFor="let selectItem of selectItems; index as index" [color]="'normal-light'">
     <div class="chip-select__chip-icon-container">
       <button
         *ngIf="!readonly"

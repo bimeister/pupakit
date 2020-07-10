@@ -9,6 +9,7 @@ export * from './button-icon-position.type';
 export * from './button-kind.type';
 export * from './button-size.type';
 export * from './button-type.type';
+export * from './chip-color.type';
 export * from './datepicker-selection-mode.type';
 export * from './drawer-float.type';
 export * from './droppable-horizontal-position.type';

@@ -24,14 +24,56 @@
   justify-content: space-evenly;
   border-radius: rems(1);
   padding: 0;
+  @include transition(#{'background, box-shadow'});
+
+  &_dark {
+    background-color: color(accent);
+    color: color(white);
+  }
+
+  &_normal {
+    background-color: color(light);
+    color: color(main);
+  }
+
+  &_normal-light {
+    background-color: color(pale-blue);
+    color: color(main);
+  }
+
+  &_negative {
+    background-color: color(error);
+    color: color(white);
+  }
+
+  &_positive {
+    background-color: color(success);
+    color: color(white);
+  }
+
+  &_alert {
+    background-color: color(alert);
+    color: color(white);
+  }
 }
 
 :host:not(.disable) {
-  & .chip {
+  & .chip,
+  .chip.chip_normal,
+  .chip.chip_normal-light {
     &:focus,
     &:hover {
       color: color(white);
       background: color(active);
+    }
+  }
+
+  .chip.chip_negative,
+  .chip.chip_positive,
+  .chip.chip_alert {
+    &:focus,
+    &:hover {
+      box-shadow: variable(box-shadow_hover);
     }
   }
 }
