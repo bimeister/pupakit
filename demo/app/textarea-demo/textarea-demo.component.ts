@@ -4,6 +4,7 @@ import combos from 'combos';
 // tslint:disable-next-line: import-blacklist
 import { compact } from 'lodash';
 import { Subscription } from 'rxjs';
+
 import { TextareaResize } from '../../../src/internal/declarations/types/textarea-resize.type';
 
 interface TextareaCombo {
@@ -11,6 +12,7 @@ interface TextareaCombo {
   placeholder: string;
   disabled: boolean;
   required: boolean;
+  autosize: boolean;
   maxLength: number;
 }
 
@@ -32,6 +34,7 @@ export class TextareaDemoComponent implements OnDestroy {
     placeholder: ['Placeholder text', ''],
     disabled: [false, true],
     required: [false, true],
+    autosize: [false, true],
     maxLength: [0, MAX_LENGTH_EXAMPLE]
   });
 

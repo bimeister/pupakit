@@ -18,7 +18,6 @@
 $height_textarea-min: calc(#{rems(2.5)} + 2px);
 
 .textarea {
-  box-sizing: border-box;
   border-radius: rems(0.5);
   background: color(white);
   outline: none;
@@ -30,7 +29,7 @@ $height_textarea-min: calc(#{rems(2.5)} + 2px);
   width: 100%;
   font-size: rems(0.875);
   line-height: rems(1);
-  padding: rems(0.25);
+  padding: px(2);
   min-height: $height_textarea-min;
 
   &::placeholder {
