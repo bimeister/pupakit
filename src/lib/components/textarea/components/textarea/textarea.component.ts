@@ -1,11 +1,14 @@
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   Optional,
-  Output
+  Output,
+  ViewChild
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
 
@@ -19,7 +22,10 @@ import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-un
   providers: [],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextareaComponent implements ControlValueAccessor, Validator {
+export class TextareaComponent implements ControlValueAccessor, Validator, AfterViewInit {
+  @ViewChild(CdkTextareaAutosize) public readonly autosizeDirective: CdkTextareaAutosize;
+
+  @Input() public autosize: boolean = false;
   @Input() public resize: TextareaResize = 'horizontal';
   @Input() public maxLength: number | null = null;
   @Input()
@@ -84,6 +90,10 @@ export class TextareaComponent implements ControlValueAccessor, Validator {
     if (!isNullOrUndefined(ngControl)) {
       ngControl.valueAccessor = this;
     }
+  }
+
+  public ngAfterViewInit(): void {
+    this.autosizeDirective.enabled = this.autosize;
   }
 
   public registerOnChange(fn: VoidFunction): void {
