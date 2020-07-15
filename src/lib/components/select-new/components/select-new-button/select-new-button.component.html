@@ -1,0 +1,15 @@
+<button
+  class="select-button"
+  [class.select-button_active]="isExpanded$ | async"
+  (click)="processButtonClick()"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+>
+  <div class="select-button__text">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="select-button__icon">
+    <ion-icon [@iconRotation]="(isExpanded$ | async) ? 'rotated' : 'void'" name="arrow-dropleft"></ion-icon>
+  </div>
+</button>

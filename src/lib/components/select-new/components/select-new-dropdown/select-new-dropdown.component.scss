@@ -1,0 +1,17 @@
+@import './../../../../../styles/themes/functions';
+@import './../../../../../styles/functions.scss';
+@import './../../select-new.styles.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.select-dropdown {
+  width: $width_select;
+  border-radius: px(4);
+  background: color('white');
+  box-shadow: 0 px(6) px(32) 0 rgba(0, 0, 0, 0.1);
+  margin: px(4) 0 0 0;
+  overflow: hidden;
+}
