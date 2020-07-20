@@ -26,6 +26,8 @@ export * from './input-type.type';
 export * from './loader-type.type';
 export * from './modal-size.type';
 export * from './modal-window-size.type';
+export * from './on-change-callback.type';
+export * from './on-touched-callback.type';
 export * from './position.type';
 export * from './radio-group-direction.type';
 export * from './search-field-kind.type';

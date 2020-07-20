@@ -65,4 +65,16 @@
       </pupa-select-new-items-container>
     </pupa-select-new-dropdown>
   </pupa-select-new>
+
+  <pupa-select-new [isMultiSelectionEnabled]="true">
+    <pupa-select-new-button>
+      123
+    </pupa-select-new-button>
+
+    <pupa-select-new-dropdown>
+      <pupa-select-new-search placeholder="Поиск..." (query)="log($event)"></pupa-select-new-search>
+
+      <pupa-select-new-tree type="flat" [flatDataOrigin]="treeDataOrigin"></pupa-select-new-tree>
+    </pupa-select-new-dropdown>
+  </pupa-select-new>
 </div>

@@ -1,0 +1,27 @@
+@import './../../../../../styles/themes/functions';
+@import './../../../../../styles/functions.scss';
+@import './../../select-new.styles.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.tree-container {
+  width: 100%;
+  height: px(300);
+  max-height: px(300);
+  box-sizing: border-box;
+}
+
+.tree-item-custom-template {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  pointer-events: all;
+}

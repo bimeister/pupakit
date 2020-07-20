@@ -1,7 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { v4 } from 'uuid';
 
+import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 import { DropdownItem } from '../../../src/internal/declarations/interfaces/dropdown-item.interface';
+
+const leafElementsCount: number = 1000;
 
 @Component({
   selector: 'demo-select',
@@ -11,6 +15,34 @@ import { DropdownItem } from '../../../src/internal/declarations/interfaces/drop
 })
 export class SelectDemoComponent {
   public readonly formControl: FormControl = new FormControl({ value: null, disabled: true });
+
+  public readonly treeDataOrigin: FlatTreeItem[] = [
+    new FlatTreeItem(true, 'Wolves', 0, null, null, false),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `🐺 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Cars', 0, null, null, false),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `🚗 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Burgers', 0, null, null, false),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `🍔 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Faces', 0, null, null, false),
+    new FlatTreeItem(true, 'Happy', 1, null, null, false),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `😀 ${index + 1}`, 2, null, null, true)),
+    new FlatTreeItem(true, 'Sad', 1, null, null, false),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `😥 ${index + 1}`, 2, null, null, true)),
+    new FlatTreeItem(false, '🐵', 1, null, null, true),
+    new FlatTreeItem(false, '🙊', 1, null, null, true),
+    new FlatTreeItem(false, '🙉', 1, null, null, true),
+    new FlatTreeItem(false, '🙈', 1, null, null, true)
+  ].map((item: FlatTreeItem) => ({ ...item, id: v4() }));
 
   public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
   Beatae cum cupiditate eos ex facilis, fuga fugiat modi natus nisi obcaecati possimus reprehenderit.
