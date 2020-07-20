@@ -48,6 +48,7 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
+import { LogPipe } from './log.pipe';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -94,7 +95,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DropdownMenuDemoComponent,
     SelectorDemoComponent,
     SelectMultipleDemoComponent,
-    ChipTabsDemoComponent
+    ChipTabsDemoComponent,
+    LogPipe
   ],
   imports: [
     BrowserModule,
@@ -222,6 +224,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ])
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [LogPipe]
 })
 export class AppModule {}

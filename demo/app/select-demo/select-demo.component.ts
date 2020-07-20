@@ -10,6 +10,8 @@ import { DropdownItem } from '../../../src/internal/declarations/interfaces/drop
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectDemoComponent {
+  public readonly formControl: FormControl = new FormControl({ value: null, disabled: true });
+
   public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
   Beatae cum cupiditate eos ex facilis, fuga fugiat modi natus nisi obcaecati possimus reprehenderit.
   Animi deleniti illo modi officia rem sapiente! Sint!`.split(' ');
@@ -125,6 +127,11 @@ export class SelectDemoComponent {
     this.form.valueChanges.subscribe(console.log);
     this.form2.valueChanges.subscribe(console.log);
     /* tslint:enable */
+  }
+
+  public log(...data: any[]): void {
+    // tslint:disable-next-line: no-console
+    console.log(...data);
   }
 }
 

@@ -32,27 +32,37 @@
     <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
   </form>
 
-  <pupa-select-new>
+  <pupa-select-new [formControl]="formControl">
     <pupa-select-new-button>
       123
     </pupa-select-new-button>
 
-    <pupa-select-new-items-container> </pupa-select-new-items-container>
+    <pupa-select-new-dropdown>
+      <!-- <pupa-select-new-search></pupa-select-new-search> -->
+
+      <pupa-select-new-items-container>
+        <pupa-select-new-item [value]="1">1</pupa-select-new-item>
+        <pupa-select-new-item [value]="2">2</pupa-select-new-item>
+        <pupa-select-new-item [value]="3">3</pupa-select-new-item>
+      </pupa-select-new-items-container>
+    </pupa-select-new-dropdown>
   </pupa-select-new>
 
-  <pupa-select-new>
+  <pupa-select-new [isMultiSelectionEnabled]="true">
     <pupa-select-new-button>
       123
     </pupa-select-new-button>
 
-    <pupa-select-new-items-container> </pupa-select-new-items-container>
-  </pupa-select-new>
+    <pupa-select-new-dropdown>
+      <pupa-select-new-search placeholder="Поиск..." (query)="log($event)"></pupa-select-new-search>
 
-  <pupa-select-new>
-    <pupa-select-new-button>
-      123
-    </pupa-select-new-button>
-
-    <pupa-select-new-items-container> </pupa-select-new-items-container>
+      <pupa-select-new-items-container>
+        <pupa-select-new-item [value]="1">
+          1 fdskj flkjdslk jl jlk jlk jslk jl jlk jsdlk jlkj lj lksj lksjd lkjfdlk kjsdlk jslk j
+        </pupa-select-new-item>
+        <pupa-select-new-item [value]="2">2</pupa-select-new-item>
+        <pupa-select-new-item [value]="3">3</pupa-select-new-item>
+      </pupa-select-new-items-container>
+    </pupa-select-new-dropdown>
   </pupa-select-new>
 </div>

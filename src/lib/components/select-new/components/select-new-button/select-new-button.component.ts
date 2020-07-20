@@ -19,12 +19,13 @@ import { SelectNewStateService } from '../../services/select-new-state.service';
     ])
   ]
 })
-export class SelectNewButtonComponent implements OnInit {
+export class SelectNewButtonComponent<T> implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) private readonly overlayOrigin: CdkOverlayOrigin;
 
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
+  public readonly isDisabled$: Observable<boolean> = this.selectNewStateService.isDisabled$;
 
-  constructor(private readonly selectNewStateService: SelectNewStateService) {}
+  constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
   public ngOnInit(): void {
     this.defineButtonElement();

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'pupa-select-new-items-container',
@@ -7,4 +7,9 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectNewItemsContainerComponent {}
+export class SelectNewItemsContainerComponent {
+  @HostListener('click', ['$event'])
+  public processClick(event: Event): void {
+    event.stopPropagation();
+  }
+}

@@ -1,1 +1,8 @@
-<p>select-new-item works!</p>
+<div
+  class="item"
+  [class.item_picked]="isPicked$ | async"
+  [class.item_disabled]="isDisabled$ | async"
+  (click)="processClick()"
+>
+  <ng-content></ng-content>
+</div>

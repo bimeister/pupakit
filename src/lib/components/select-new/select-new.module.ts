@@ -16,10 +16,11 @@ const EXPORTS: any[] = [
   SelectNewItemComponent,
   SelectNewItemsContainerComponent,
   SelectNewTreeComponent,
-  SelectNewButtonComponent
+  SelectNewButtonComponent,
+  SelectNewDropdownComponent
 ];
 
-const DECLARATIONS: any[] = [...EXPORTS, SelectNewDropdownComponent];
+const DECLARATIONS: any[] = [...EXPORTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],

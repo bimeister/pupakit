@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 
 @Component({
   selector: 'pupa-select-new-search',
@@ -8,5 +16,15 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectNewSearchComponent {
+  @Input() public placeholder: string = '';
+  @Output() public readonly query: EventEmitter<string> = new EventEmitter<string>(true);
 
+  @HostListener('click', ['$event'])
+  public processClick(event: Event): void {
+    event.stopPropagation();
+  }
+
+  public processInput(query: string): void {
+    this.query.emit(query);
+  }
 }
