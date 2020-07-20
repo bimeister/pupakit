@@ -19,11 +19,11 @@ const ANIMATION_DURATION_MS: number = 150;
     trigger('dropdownExpanded', [
       state('void', style({ height: 0 })),
       state('expanded', style({ height: '*' })),
-      transition('* => *', [animate(`${ANIMATION_DURATION_MS}ms ease-in`)])
+      transition('* => *', [animate(`${ANIMATION_DURATION_MS}ms ease`)])
     ])
   ]
 })
-export class SelectNewDropdownComponent {
+export class SelectNewDropdownComponent<T> {
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
   public readonly isVisible$: Observable<boolean> = this.isExpanded$.pipe(
     switchMap((isExpanded: boolean) =>
@@ -36,5 +36,5 @@ export class SelectNewDropdownComponent {
     filter((origin: CdkOverlayOrigin) => !isNullOrUndefined(origin))
   );
 
-  constructor(private readonly selectNewStateService: SelectNewStateService) {}
+  constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 }

@@ -36,6 +36,11 @@ $width_icon: rems(1);
     color: color('grey-ivory');
   }
 
+  &_disabled {
+    border-color: color('grey-apple') !important;
+    color: color('grey-apple') !important;
+  }
+
   &__text {
     padding: 0 px(6) 0 0;
 
@@ -44,6 +49,8 @@ $width_icon: rems(1);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+
+    font-size: rems(1);
   }
 
   &__icon {

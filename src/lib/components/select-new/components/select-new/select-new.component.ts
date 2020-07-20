@@ -1,6 +1,20 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  Optional,
+  ViewEncapsulation
+} from '@angular/core';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
-import { isNullOrUndefined } from '../../../../../internal/api';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
+import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
+import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 @Component({
@@ -11,20 +25,62 @@ import { SelectNewStateService } from '../../services/select-new-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SelectNewStateService]
 })
-export class SelectNewComponent {
+export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
+  @Input() public isMultiSelectionEnabled: boolean = false;
+
   constructor(
-    private readonly selectNewStateService: SelectNewStateService,
-    private readonly elementRef: ElementRef<HTMLElement>
-  ) {}
+    private readonly selectNewStateService: SelectNewStateService<T>,
+    private readonly elementRef: ElementRef<HTMLElement>,
+    @Optional() ngControl: NgControl
+  ) {
+    if (isNullOrUndefined(ngControl)) {
+      return;
+    }
+    ngControl.valueAccessor = this;
+  }
 
   @HostListener('window:click', ['$event'])
   public processClick(event: MouseEvent): void {
     const target: EventTarget = event.target;
     const currentElement: Element = this.elementRef.nativeElement;
 
-    if (!SelectNewComponent.targetExistsInCurrentElementChildren(target, currentElement)) {
-      this.selectNewStateService.collapse();
+    if (SelectNewComponent.targetExistsInCurrentElementChildren(target, currentElement)) {
+      return;
     }
+    this.selectNewStateService.collapse();
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (isNullOrUndefined(changes)) {
+      return;
+    }
+    this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
+  }
+
+  public writeValue(newValue: T[]): void {
+    this.selectNewStateService.setValue(newValue);
+  }
+
+  public registerOnChange(onChange: OnChangeCallback<T[]>): void {
+    this.selectNewStateService.defineOnChangeCallback(onChange);
+  }
+
+  public registerOnTouched(onTouched: OnTouchedCallback): void {
+    this.selectNewStateService.defineOnTouchedCallback(onTouched);
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    this.selectNewStateService.setDisabledState(isDisabled);
+  }
+
+  private processIsMultiSelectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
+    const updatedState: boolean | undefined = change?.currentValue;
+
+    if (isNullOrUndefined(updatedState)) {
+      return;
+    }
+
+    this.selectNewStateService.setMultiSelectionState(Boolean(updatedState));
   }
 
   private static targetExistsInCurrentElementChildren(target: EventTarget, currentElement: Element): boolean {

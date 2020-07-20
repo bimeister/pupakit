@@ -1,4 +1,15 @@
+@import './../../../../../styles/themes/functions';
+@import './../../../../../styles/functions.scss';
+@import './../../select-new.styles.scss';
+
 :host {
   display: block;
   width: 100%;
+}
+
+.items-container {
+  padding: px(8) 0;
+  width: 100%;
+  height: auto;
+  max-height: px(300);
 }
