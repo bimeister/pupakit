@@ -114,7 +114,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @Input() public readonly scrollBehaviour: ScrollBehavior = 'smooth';
   @Input() public readonly hasDragAndDrop: boolean = false;
 
-  @Output() private readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
+  @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
   @Output() private readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
 
   public readonly trackBy$: BehaviorSubject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(

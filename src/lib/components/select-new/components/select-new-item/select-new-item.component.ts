@@ -43,7 +43,7 @@ export class SelectNewItemComponent<T> implements OnChanges {
         map(([value, _]: [T, boolean]) => value)
       )
       .subscribe((value: T) => {
-        this.selectNewStateService.processClick(value);
+        this.selectNewStateService.processSelection(value);
       });
   }
 

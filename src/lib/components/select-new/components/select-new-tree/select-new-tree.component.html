@@ -1,1 +1,37 @@
-<p>select-new-tree works!</p>
+<section class="tree-container" [ngSwitch]="type" (click)="processClick($event)">
+  <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
+  <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
+</section>
+
+<ng-template #flatTree>
+  <pupa-tree
+    *ngIf="!(type | isNullOrUndefined)"
+    [flatDataOrigin]="flatDataOrigin"
+    [nodeTemplate]="nodeTemplate"
+    [trackBy]="trackBy"
+    [selectedNodesIds]="selectedNodesIds$ | async"
+    [highlightedNodesIds]="highlightedNodesIds$ | async"
+    type="flat"
+    (expandedNode)="processNodeExpansion($event)"
+  ></pupa-tree>
+</ng-template>
+
+<ng-template #hierarchicalTree>
+  <pupa-tree
+    *ngIf="!(type | isNullOrUndefined)"
+    [treeNodesOrigin]="treeNodesOrigin"
+    [treeElementsOrigin]="treeElementsOrigin"
+    [nodeTemplate]="nodeTemplate"
+    [trackBy]="trackBy"
+    [selectedNodesIds]="selectedNodesIds$ | async"
+    [highlightedNodesIds]="highlightedNodesIds$ | async"
+    type="hierarchical"
+    (expandedNode)="processNodeExpansion($event)"
+  ></pupa-tree>
+</ng-template>
+
+<ng-template #nodeTemplate let-node="node">
+  <div class="tree-item-custom-template" (click)="processNodeClick(node)">
+    {{ node?.name }}
+  </div>
+</ng-template>

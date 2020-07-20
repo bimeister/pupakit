@@ -2,6 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { TreeModule } from '../tree/tree.module';
 import { SelectNewButtonComponent } from './components/select-new-button/select-new-button.component';
 import { SelectNewDropdownComponent } from './components/select-new-dropdown/select-new-dropdown.component';
 import { SelectNewItemComponent } from './components/select-new-item/select-new-item.component';
@@ -24,7 +25,7 @@ const DECLARATIONS: any[] = [...EXPORTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [SharedModule, OverlayModule],
+  imports: [SharedModule, OverlayModule, TreeModule],
   exports: [...EXPORTS],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

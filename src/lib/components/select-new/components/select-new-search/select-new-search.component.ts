@@ -17,7 +17,7 @@ import {
 })
 export class SelectNewSearchComponent {
   @Input() public placeholder: string = '';
-  @Output() public readonly query: EventEmitter<string> = new EventEmitter<string>(true);
+  @Output() public readonly query: EventEmitter<string> = new EventEmitter<string>();
 
   @HostListener('click', ['$event'])
   public processClick(event: Event): void {

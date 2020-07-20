@@ -23,10 +23,10 @@ export class SelectNewStateService<T> {
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<
+  private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<
     OnChangeCallback<T[]>
   >(null);
-  public readonly onTouchedCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<OnTouchedCallback>(
+  private readonly onTouchedCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<OnTouchedCallback>(
     null
   );
 
@@ -64,7 +64,7 @@ export class SelectNewStateService<T> {
     this.isDisabled$.next(isDisabled);
   }
 
-  public processClick(value: T): void {
+  public processSelection(value: T): void {
     this.isMultiSelectionEnabled$
       .pipe(
         take(1),
