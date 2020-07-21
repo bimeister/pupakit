@@ -14,7 +14,7 @@ const leafElementsCount: number = 1000;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectDemoComponent {
-  public readonly formControl: FormControl = new FormControl({ value: null, disabled: true });
+  public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
 
   public readonly treeDataOrigin: FlatTreeItem[] = [
     new FlatTreeItem(true, 'Wolves', 0, null, null, false),
@@ -158,6 +158,7 @@ export class SelectDemoComponent {
     /* tslint:disable */
     this.form.valueChanges.subscribe(console.log);
     this.form2.valueChanges.subscribe(console.log);
+    this.formControl.valueChanges.subscribe(console.log);
     /* tslint:enable */
   }
 
