@@ -5,7 +5,7 @@ import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
+import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
 
 @Injectable({
   providedIn: 'any'
@@ -23,8 +23,8 @@ export class SelectNewStateService<T> {
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<
-    OnChangeCallback<T[]>
+  private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<SelectOuterValue<T>>> = new BehaviorSubject<
+    OnChangeCallback<SelectOuterValue<T>>
   >(null);
   private readonly onTouchedCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<OnTouchedCallback>(
     null
@@ -99,7 +99,7 @@ export class SelectNewStateService<T> {
       .subscribe(
         ([updatedValue, onChangeCallback, onTouchedCallback, isMultiSelectionEnabled]: [
           Set<string>,
-          OnChangeCallback<T[]>,
+          OnChangeCallback<SelectOuterValue<T>>,
           OnTouchedCallback,
           boolean
         ]) => {
@@ -107,7 +107,7 @@ export class SelectNewStateService<T> {
 
           if (typeof onChangeCallback === 'function') {
             const parsedValue: T[] = SelectNewStateService.getParsedValue<T>(updatedValue);
-            onChangeCallback(parsedValue);
+            onChangeCallback(isMultiSelectionEnabled ? parsedValue : parsedValue[0]);
           }
 
           if (typeof onTouchedCallback === 'function') {
@@ -130,10 +130,9 @@ export class SelectNewStateService<T> {
     );
   }
 
-  public setValue(value: T[]): void {
-    const serializedValue: string[] = isNullOrUndefined(value)
-      ? []
-      : value.map((valueItem: T) => JSON.stringify(valueItem));
+  public setValue(value: SelectOuterValue<T>): void {
+    const sanitizedValue: T[] = Array.isArray(value) ? value : [value];
+    const serializedValue: string[] = sanitizedValue.map((valueItem: T) => JSON.stringify(valueItem));
     const serializedSet: Set<string> = new Set<string>(serializedValue);
     this.currentSerializedValue$.next(serializedSet);
   }

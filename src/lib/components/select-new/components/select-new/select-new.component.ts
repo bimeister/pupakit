@@ -14,6 +14,7 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
+import { SelectOuterValue } from '../../../../../internal/declarations/types/select-outer-value.type';
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
@@ -57,11 +58,11 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
   }
 
-  public writeValue(newValue: T[]): void {
+  public writeValue(newValue: SelectOuterValue<T>): void {
     this.selectNewStateService.setValue(newValue);
   }
 
-  public registerOnChange(onChange: OnChangeCallback<T[]>): void {
+  public registerOnChange(onChange: OnChangeCallback<SelectOuterValue<T>>): void {
     this.selectNewStateService.defineOnChangeCallback(onChange);
   }
 
