@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { SelectNewStateService } from '../../services/select-new-state.service';
@@ -21,6 +21,7 @@ import { SelectNewStateService } from '../../services/select-new-state.service';
 })
 export class SelectNewButtonComponent<T> implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) private readonly overlayOrigin: CdkOverlayOrigin;
+  @ViewChild('button', { static: true }) private readonly button: ElementRef<HTMLButtonElement>;
 
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
   public readonly isDisabled$: Observable<boolean> = this.selectNewStateService.isDisabled$;
@@ -28,14 +29,14 @@ export class SelectNewButtonComponent<T> implements OnInit {
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
   public ngOnInit(): void {
-    this.defineButtonElement();
+    this.defineDropdownTrigger();
   }
 
   public processButtonClick(): void {
     this.selectNewStateService.toggleExpansion();
   }
 
-  private defineButtonElement(): void {
-    this.selectNewStateService.defineOverlayOrigin(this.overlayOrigin);
+  private defineDropdownTrigger(): void {
+    this.selectNewStateService.defineDropdownTrigger(this.overlayOrigin, this.button.nativeElement);
   }
 }

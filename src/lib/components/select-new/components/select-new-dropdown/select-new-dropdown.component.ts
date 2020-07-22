@@ -1,8 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
@@ -37,5 +37,15 @@ export class SelectNewDropdownComponent<T> {
     filter((origin: CdkOverlayOrigin) => !isNullOrUndefined(origin))
   );
 
+  public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
+    filter((isExpanded: boolean) => isExpanded),
+    switchMap(() => this.selectNewStateService.dropDownTriggerButtonWidthPx$)
+  );
+
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
+
+  @HostListener('window:resize')
+  public processWindowResizeEvent(): void {
+    this.selectNewStateService.collapse();
+  }
 }

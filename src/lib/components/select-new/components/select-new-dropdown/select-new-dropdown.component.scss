@@ -1,6 +1,5 @@
 @import './../../../../../styles/themes/functions';
 @import './../../../../../styles/functions.scss';
-@import './../../select-new.styles.scss';
 
 :host {
   display: block;
@@ -8,7 +7,7 @@
 }
 
 .select-dropdown {
-  width: $width_select;
+  width: 100%;
   border-radius: px(4);
   background: color('white');
   box-shadow: 0 px(6) px(32) 0 rgba(0, 0, 0, 0.1);
