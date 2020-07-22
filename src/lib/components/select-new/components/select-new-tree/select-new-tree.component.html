@@ -11,6 +11,7 @@
     [trackBy]="trackBy"
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
+    [hideRoot]="hideRoot"
     type="flat"
     (expandedNode)="processNodeExpansion($event)"
   ></pupa-tree>
@@ -25,6 +26,7 @@
     [trackBy]="trackBy"
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
+    [hideRoot]="hideRoot"
     type="hierarchical"
     (expandedNode)="processNodeExpansion($event)"
   ></pupa-tree>

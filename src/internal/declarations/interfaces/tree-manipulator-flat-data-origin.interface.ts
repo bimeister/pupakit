@@ -6,5 +6,5 @@ import { FlatTreeItemInterface } from './flat-tree-item.interface';
 export interface TreeManipulatorFlatDataOrigin {
   readonly type: TreeType.Flat;
   readonly flatDataOrigin: Observable<FlatTreeItemInterface[]>;
-  readonly hideRoot: boolean;
+  readonly hideRoot: Observable<boolean>;
 }

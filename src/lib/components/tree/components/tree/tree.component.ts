@@ -50,8 +50,6 @@ interface Position {
   left: number;
 }
 
-type HideRoot = 'true' | 'false';
-
 type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
 
 const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number, item: FlatTreeItem): string => {
@@ -113,6 +111,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @Input() public readonly scrollByRoute?: string[];
   @Input() public readonly scrollBehaviour: ScrollBehavior = 'smooth';
   @Input() public readonly hasDragAndDrop: boolean = false;
+  @Input() public readonly hideRoot: boolean = false;
 
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
   @Output() private readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
@@ -125,6 +124,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly treeElementsOrigin$: BehaviorSubject<TreeItemInterface[]> = new BehaviorSubject([]);
   public readonly selectedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly highlightedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  public readonly hideRoot$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
   private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
@@ -163,17 +163,14 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly renderer: Renderer2,
     private readonly host: ElementRef<HTMLElement>,
-    @Attribute('type') private readonly type: TreeType,
-    @Attribute('hideRoot') private readonly hideRoot: HideRoot = 'false'
+    @Attribute('type') private readonly type: TreeType
   ) {
-    const rootNodesShouldBeHidden: boolean = this.hideRoot === 'true';
-
     switch (this.type) {
       case TreeType.Flat: {
         const dataOrigin: TreeManipulatorDataOrigin = {
           type: this.type,
           flatDataOrigin: this.flatDataOrigin$,
-          hideRoot: rootNodesShouldBeHidden
+          hideRoot: this.hideRoot$
         };
         this.manipulatorDataOrigin = dataOrigin;
         break;
@@ -183,7 +180,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
           type: this.type,
           treeElementsOrigin: this.treeElementsOrigin$,
           treeNodesOrigin: this.treeNodesOrigin$,
-          hideRoot: rootNodesShouldBeHidden
+          hideRoot: this.hideRoot$
         };
         this.manipulatorDataOrigin = dataOrigin;
         break;
@@ -226,6 +223,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.processSelectedNodesIdsValueChange(changes?.selectedNodesIds);
     this.processHighlightedNodesIdsValueChange(changes?.highlightedNodesIds);
     this.processScrollByRouteValueChanges(changes?.scrollByRoute);
+    this.processHideRootValueChanges(changes?.hideRoot);
   }
 
   public ngAfterContentInit(): void {
@@ -447,6 +445,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       return;
     }
     this.manipulator.scrollByRoute(newValue);
+  }
+
+  private processHideRootValueChanges(change: ComponentChange<this, boolean>): void {
+    const newValue: boolean | undefined = change?.currentValue;
+    this.hideRoot$.next(Boolean(newValue));
   }
 
   private emitExpandedItemOnNodeExpansion(): Subscription {

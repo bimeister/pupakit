@@ -1,6 +1,6 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -17,7 +17,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     public readonly sortedData$: Observable<FlatTreeItem[]>,
     private readonly expandedItemsIds$: Observable<string[]>,
     private readonly activeRange$: Observable<ListRange>,
-    private readonly hideRoot: boolean
+    private readonly hideRoot$: Observable<boolean>
   ) {
     super();
   }
@@ -40,8 +40,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
       ),
-      map((currentSlice: FlatTreeItem[]) => {
-        if (!this.hideRoot) {
+      withLatestFrom(this.hideRoot$),
+      map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
+        if (!hideRoot) {
           return currentSlice;
         }
         return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
