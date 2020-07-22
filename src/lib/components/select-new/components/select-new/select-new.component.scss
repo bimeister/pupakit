@@ -1,7 +1,9 @@
-@import './../../select-new.styles.scss';
+@import './../../../../../styles/themes/functions';
+@import './../../../../../styles/functions.scss';
 
 :host {
   display: block;
+  width: 100%;
 }
 
 .select {
@@ -9,5 +11,5 @@
   flex-direction: column;
   align-items: flex-start;
 
-  width: $width_select;
+  width: 100%;
 }

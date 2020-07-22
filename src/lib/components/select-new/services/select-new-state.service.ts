@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
+import { isNullOrUndefined } from '../../../../internal/api';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
@@ -33,6 +34,22 @@ export class SelectNewStateService<T> {
   public readonly dropDownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin> = new BehaviorSubject<CdkOverlayOrigin>(
     null
   );
+  private readonly dropDownTriggerButton$: BehaviorSubject<HTMLButtonElement> = new BehaviorSubject<HTMLButtonElement>(
+    null
+  );
+  public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.dropDownTriggerButton$.pipe(
+    map((button: HTMLButtonElement | null) => {
+      if (isNullOrUndefined(button)) {
+        return undefined;
+      }
+
+      const { width }: ClientRect = button?.getBoundingClientRect();
+      return width;
+    }),
+    map((width: number | undefined) => {
+      return isNullOrUndefined(width) ? 0 : width;
+    })
+  );
 
   public collapse(): void {
     this.isExpanded$.next(false);
@@ -44,8 +61,9 @@ export class SelectNewStateService<T> {
     });
   }
 
-  public defineOverlayOrigin(overlayOrigin: CdkOverlayOrigin): void {
+  public defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void {
     this.dropDownOverlayOrigin$.next(overlayOrigin);
+    this.dropDownTriggerButton$.next(buttonElement);
   }
 
   public defineOnChangeCallback(onChange: OnChangeCallback<T[]>): void {
