@@ -1,9 +1,9 @@
 <ng-template
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="dropDownOverlayOrigin$ | async"
-  [cdkConnectedOverlayOpen]="isVisible$ | async"
+  [cdkConnectedOverlayOpen]="isExpanded$ | async"
 >
-  <section class="select-dropdown" [@dropdownExpanded]="(isExpanded$ | async) ? 'expanded' : 'void'">
+  <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
     <ng-content></ng-content>
   </section>
 </ng-template>
