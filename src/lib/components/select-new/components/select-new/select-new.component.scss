@@ -1,5 +1,9 @@
 @import './../../select-new.styles.scss';
 
+:host {
+  display: block;
+}
+
 .select {
   display: flex;
   flex-direction: column;
