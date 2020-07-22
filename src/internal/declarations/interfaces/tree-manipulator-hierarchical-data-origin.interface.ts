@@ -7,5 +7,5 @@ export interface TreeManipulatorHierarchicalDataOrigin {
   readonly type: TreeType.Hierarchical;
   readonly treeNodesOrigin: Observable<TreeItemInterface[]>;
   readonly treeElementsOrigin: Observable<TreeItemInterface[]>;
-  readonly hideRoot: boolean;
+  readonly hideRoot: Observable<boolean>;
 }

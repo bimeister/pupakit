@@ -3,10 +3,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../internal/api';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
+import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Injectable({
   providedIn: 'any'

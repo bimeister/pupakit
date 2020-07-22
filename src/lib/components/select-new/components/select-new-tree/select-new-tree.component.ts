@@ -48,6 +48,8 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
    */
   @Input() public readonly treeElementsOrigin: TreeItemInterface[] = [];
 
+  @Input() public hideRoot: boolean = false;
+
   public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
   public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
 
