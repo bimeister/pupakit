@@ -175,6 +175,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         this.manipulatorDataOrigin = dataOrigin;
         break;
       }
+
       case TreeType.Hierarchical: {
         const dataOrigin: TreeManipulatorDataOrigin = {
           type: this.type,
@@ -449,7 +450,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private processHideRootValueChanges(change: ComponentChange<this, boolean>): void {
     const newValue: boolean | undefined = change?.currentValue;
-    this.hideRoot$.next(Boolean(newValue));
+    if (isNullOrUndefined(newValue)) {
+      return;
+    }
+    this.hideRoot$.next(newValue);
   }
 
   private emitExpandedItemOnNodeExpansion(): Subscription {

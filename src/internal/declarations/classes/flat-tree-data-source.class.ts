@@ -28,7 +28,14 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
         filter((range: ListRange) => !isNullOrUndefined(range) && range.start >= 0 && range.end >= 0)
       ),
       this.sortedData$.pipe(
-        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
+        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNullOrUndefined(item))),
+        withLatestFrom(this.hideRoot$),
+        map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
+          if (hideRoot) {
+            return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
+          }
+          return currentSlice;
+        })
       ),
       this.expandedItemsIds$
     ]).pipe(
@@ -40,14 +47,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
         isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
       ),
-      withLatestFrom(this.hideRoot$),
-      map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
-        if (!hideRoot) {
-          return currentSlice;
-        }
-        return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
-      }),
-      tap((currentSlice: FlatTreeItem[]) => this.currentSlice$.next(currentSlice))
+      tap((resultSlice: FlatTreeItem[]) => {
+        this.currentSlice$.next(resultSlice);
+      })
     );
   }
 
@@ -170,7 +172,8 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     previousItem: FlatTreeItemWithMarkers;
     currentResult: FlatTreeItemWithMarkers[];
   } {
-    const currentItemIsRoot: boolean = Object.is(currentItem.level, 0);
+    const currentItemLevel: number = Number(currentItem?.level);
+    const currentItemIsRoot: boolean = Object.is(currentItemLevel, 0);
     if (currentItemIsRoot) {
       return {
         previousItem: currentItem,
@@ -178,8 +181,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
     }
 
+    const previousItemLevel: number = Number(previousItem?.level);
     const previousItemIsParent: boolean =
-      FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItem.level + 1, currentItem.level);
+      FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItemLevel + 1, currentItemLevel);
     const parentIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
     const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemsIds);
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
@@ -199,7 +203,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
     }
 
-    const previousItemIsSibling: boolean = Object.is(previousItem.level, currentItem.level);
+    const previousItemIsSibling: boolean = Object.is(previousItemLevel, currentItemLevel);
     const siblingIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
     if (previousItemIsSibling) {
       const itemToInsert: FlatTreeItemWithMarkers = {
@@ -216,7 +220,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       .slice(0, currentItemIndex)
       .reverse()
       .find(
-        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItem.level)
+        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItemLevel)
       );
     const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
     const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
@@ -261,7 +265,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
         },
         [null, []]
       )
-      .filter((turplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[] | number) => Array.isArray(turplePart))
+      .filter((tuplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[] | number) => Array.isArray(tuplePart))
       .flat()
       .filter((item: FlatTreeItem) => !isNullOrUndefined(item) && !FlatTreeDataSource.isHidden(item));
     return visibleTreeItems;

@@ -1,5 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
 import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
@@ -28,18 +28,12 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     activeRange$: Observable<ListRange>,
     hideRoot$: Observable<boolean>
   ) {
-    super(
-      HierarchicalTreeDataSource.getSortedData(nodes$, elements$, hideRoot$),
-      expandedItemsIds$,
-      activeRange$,
-      of(false)
-    );
+    super(HierarchicalTreeDataSource.getSortedData(nodes$, elements$), expandedItemsIds$, activeRange$, hideRoot$);
   }
 
   private static getSortedData(
     nodes$: Observable<TreeItem[]>,
-    elements$: Observable<TreeItem[]>,
-    hideRoot$: Observable<boolean>
+    elements$: Observable<TreeItem[]>
   ): Observable<FlatTreeItem[]> {
     const nodesCopy$: Observable<TreeItem[]> = nodes$.pipe(
       map((treeItems: TreeItem[]) => treeItems.map((treeItem: TreeItem) => ({ ...treeItem }))),
@@ -169,18 +163,6 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
         return [...flatTreeNodesWithElements, ...flatTreeElements].filter(
           (flatTreeItem: FlatTreeItem) => !isNullOrUndefined(flatTreeItem)
         );
-      }),
-      withLatestFrom(hideRoot$),
-      map(([resultTreeDataSource, hideRoot]: [FlatTreeItem[], boolean]) => {
-        if (!hideRoot) {
-          return resultTreeDataSource;
-        }
-        return resultTreeDataSource
-          .filter((treeItem: FlatTreeItem) => treeItem.level !== 0)
-          .map((treeItem: FlatTreeItem) => {
-            const currentLevel: number = treeItem.level;
-            return { ...treeItem, level: currentLevel - 1 };
-          });
       })
     );
   }
