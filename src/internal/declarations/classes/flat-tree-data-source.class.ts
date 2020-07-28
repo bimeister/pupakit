@@ -88,8 +88,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     currentResult: FlatTreeItemWithMarkers[];
   } {
     const currentItemIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(currentItem, expandedItemsIds);
-
-    const currentItemIsRoot: boolean = Object.is(currentItem.level, 0);
+    const currentItemLevel: number = Number(currentItem?.level);
+    const previousItemLevel: number = Number(previousItem?.level);
+    const currentItemIsRoot: boolean = Object.is(currentItemLevel, 0);
     if (currentItemIsRoot) {
       const itemToInsert: FlatTreeItemWithMarkers = { ...currentItem, __isCollapsed: currentItemIsCollapsed };
       return {
@@ -99,7 +100,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     }
 
     const previousItemIsParent: boolean =
-      FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItem.level + 1, currentItem.level);
+      FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItemLevel + 1, currentItemLevel);
     const parentIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
     const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemsIds);
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
@@ -120,7 +121,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       };
     }
 
-    const previousItemIsSibling: boolean = Object.is(previousItem.level, currentItem.level);
+    const previousItemIsSibling: boolean = Object.is(previousItemLevel, currentItemLevel);
     const siblingIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
     if (previousItemIsSibling) {
       const itemToInsert: FlatTreeItemWithMarkers = {
@@ -138,7 +139,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       .slice(0, currentItemIndex)
       .reverse()
       .find(
-        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItem.level)
+        (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItemLevel)
       );
     const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
     const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
