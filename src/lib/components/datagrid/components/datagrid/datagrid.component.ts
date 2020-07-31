@@ -9,6 +9,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   BodyScrollEvent,
@@ -23,7 +24,6 @@ import {
 
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridThemes } from '../../../../../internal/declarations/enums/datagrid-themes.enum';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
 
@@ -83,7 +83,7 @@ export class DatagridComponent<rowDataT> {
 
   public handleEvent(emitter: string, data: unknown): void {
     const eventEmitter: EventEmitter<unknown> = this[emitter];
-    if (isNullOrUndefined(eventEmitter)) {
+    if (isNil(eventEmitter)) {
       return;
     }
     eventEmitter.emit(data);
@@ -92,7 +92,7 @@ export class DatagridComponent<rowDataT> {
   public onGridReady(gridReadyEvent: GridReadyEvent): void {
     this.manipulator.gridReady(gridReadyEvent.api);
 
-    if (isNullOrUndefined(this.gridElement.nativeElement)) {
+    if (isNil(this.gridElement.nativeElement)) {
       return;
     }
 

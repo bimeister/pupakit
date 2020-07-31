@@ -1,8 +1,8 @@
 import { ListRange } from '@angular/cdk/collections';
+import { isNil } from '@meistersoft/utilities';
 import { combineLatest, Observable } from 'rxjs';
 import { map, shareReplay, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeItem } from './tree-item.class';
@@ -137,7 +137,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       }),
       map((nodesWithChildren: NodeWithChildren[]) => {
         const rootNodes: NodeWithChildren[] = nodesWithChildren.filter((node: NodeWithChildren) =>
-          isNullOrUndefined(node.parentId)
+          isNil(node.parentId)
         );
         return rootNodes;
       }),
@@ -161,7 +161,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
           .flat(1);
 
         return [...flatTreeNodesWithElements, ...flatTreeElements].filter(
-          (flatTreeItem: FlatTreeItem) => !isNullOrUndefined(flatTreeItem)
+          (flatTreeItem: FlatTreeItem) => !isNil(flatTreeItem)
         );
       })
     );
@@ -179,7 +179,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     nodeWithChildren: NodeWithChildren,
     parentItemLevel: number | null = null
   ): FlatTreeItem[] {
-    const currentLevel: number = isNullOrUndefined(parentItemLevel) ? 0 : parentItemLevel + 1;
+    const currentLevel: number = isNil(parentItemLevel) ? 0 : parentItemLevel + 1;
     const { isExpandable, name, id, originalData, isElement }: NodeWithChildren = nodeWithChildren;
     const node: FlatTreeItem = new FlatTreeItem(isExpandable, name, currentLevel, id, originalData, isElement);
     const childElements: FlatTreeItem[] = HierarchicalTreeDataSource.childElementsToFlatTreeItems(
@@ -201,7 +201,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   ): FlatTreeItem[] {
     return childElements.map((childElement: TreeItem) => {
       const { isExpandable, name, id, originalData, isElement }: TreeItem = childElement;
-      const currentLevel: number = isNullOrUndefined(parentItemLevel) ? 0 : parentItemLevel + 1;
+      const currentLevel: number = isNil(parentItemLevel) ? 0 : parentItemLevel + 1;
       return new FlatTreeItem(isExpandable, name, currentLevel, id, originalData, isElement);
     });
   }

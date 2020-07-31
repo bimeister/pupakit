@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 
 import { ButtonType } from '../../../../../internal/declarations/types/button-type.type';
 import { InputButtonColor } from '../../../../../internal/declarations/types/icon-button-color.type';
 import { InputButtonSize } from '../../../../../internal/declarations/types/icon-button-size.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-icon-button',
@@ -40,7 +40,7 @@ export class IconButtonComponent {
 
   public get resultClassList(): string[] {
     return [this.color, this.size, this.active ? 'active' : null]
-      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
+      .filter((innerClass: string) => !isNil(innerClass))
       .map((innerProperty: string) => `button_${innerProperty}`);
   }
 

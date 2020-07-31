@@ -9,10 +9,9 @@ import {
   Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
-
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-multiselection-list',
@@ -33,7 +32,7 @@ export class MultiselectionListComponent implements AfterViewInit, OnDestroy, Co
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public set value(value: string[]) {
-    if (isNullOrUndefined(value)) {
+    if (isNil(value)) {
       return;
     }
     this.selectedValues$.next(new Set<string>(value));

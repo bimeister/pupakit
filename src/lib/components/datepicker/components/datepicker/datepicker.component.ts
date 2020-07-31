@@ -7,6 +7,7 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, skipWhile, take } from 'rxjs/operators';
 
@@ -18,7 +19,6 @@ import { getDaysInMonth } from '../../../../../internal/helpers/get-days-in-mont
 import { getRangeEndDate } from '../../../../../internal/helpers/get-range-end-date.helper';
 import { getRangeStartDate } from '../../../../../internal/helpers/get-range-start-date.helper';
 import { isDate } from '../../../../../internal/helpers/is-date.helper';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-datepicker',
@@ -140,7 +140,7 @@ export class DatepickerComponent implements OnDestroy {
         this.selectedDate$
           .pipe(
             skipWhile(() => !this.isDateSelectionMode),
-            filter((selectedDate: Date) => !isNullOrUndefined(selectedDate)),
+            filter((selectedDate: Date) => !isNil(selectedDate)),
             distinctUntilChanged(this.isSameDate)
           )
           .subscribe((selectedDate: Date) => this.date.emit(selectedDate))
@@ -233,18 +233,18 @@ export class DatepickerComponent implements OnDestroy {
   }
 
   public readonly isSameDate = (dateA: Date, dateB: Date): boolean => {
-    if (isNullOrUndefined(dateA) || isNullOrUndefined(dateB)) {
+    if (isNil(dateA) || isNil(dateB)) {
       return false;
     }
     return Object.is(dateA.valueOf(), dateB.valueOf());
   };
 
   public readonly dateIsInDateRange = (date: Date, dateRange: Date[]): boolean => {
-    if (isNullOrUndefined(date) || !Array.isArray(dateRange) || Object.is(dateRange.length, 0)) {
+    if (isNil(date) || !Array.isArray(dateRange) || Object.is(dateRange.length, 0)) {
       return false;
     }
     const uniqueRangeItemsMs: Set<number> = new Set<number>(
-      dateRange.filter((rangeItem: Date) => !isNullOrUndefined(rangeItem)).map((rangeItem: Date) => rangeItem.valueOf())
+      dateRange.filter((rangeItem: Date) => !isNil(rangeItem)).map((rangeItem: Date) => rangeItem.valueOf())
     );
     const validRangeSize: number = 2;
     const rangeIsInvalid: boolean = !Object.is(uniqueRangeItemsMs.size, validRangeSize);
@@ -260,7 +260,7 @@ export class DatepickerComponent implements OnDestroy {
   };
 
   public readonly dateIsInDateArray = (date: Date, dateArray: Date[]): boolean => {
-    if (isNullOrUndefined(date) || !Array.isArray(dateArray) || Object.is(dateArray.length, 0)) {
+    if (isNil(date) || !Array.isArray(dateArray) || Object.is(dateArray.length, 0)) {
       return false;
     }
     return dateArray.some((dateFromRange: Date) => this.isSameDate(dateFromRange, date));

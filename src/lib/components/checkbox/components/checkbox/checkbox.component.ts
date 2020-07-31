@@ -10,8 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
+import { isNil } from '@meistersoft/utilities';
 
 @Component({
   selector: 'pupa-checkbox',
@@ -43,7 +42,7 @@ export class CheckboxComponent implements ControlValueAccessor {
   public get resultClassList(): string[] {
     const disabledStateClass: string = this.disabled ? 'checkbox_disabled' : null;
     const hasMarkerClass: string = this.value || this.indeterminate ? 'checkbox_with-marker' : null;
-    return [disabledStateClass, hasMarkerClass].filter((innerClassName: string) => !isNullOrUndefined(innerClassName));
+    return [disabledStateClass, hasMarkerClass].filter((innerClassName: string) => !isNil(innerClassName));
   }
 
   public get isLabelEmpty(): boolean {

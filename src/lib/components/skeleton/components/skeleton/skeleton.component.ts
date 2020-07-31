@@ -6,11 +6,11 @@ import {
   OnChanges,
   ViewEncapsulation
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { ReplaySubject } from 'rxjs';
 
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 @Component({
   selector: 'pupa-skeleton',
@@ -29,14 +29,14 @@ export class SkeletonComponent implements OnChanges {
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNullOrUndefined(changes)) {
+    if (isNil(changes)) {
       return;
     }
     this.processIsActivePropertyChange(changes?.isActive);
   }
 
   private processIsActivePropertyChange(change: ComponentChange<this, boolean>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.isActive$.next(change.currentValue);

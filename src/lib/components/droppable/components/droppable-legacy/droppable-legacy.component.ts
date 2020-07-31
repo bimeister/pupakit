@@ -10,11 +10,11 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Observable, Subscription } from 'rxjs';
 
 import { DroppableLegacyHorizontalPosition } from '../../../../../internal/declarations/types/droppable-legacy-horizontal-position.type';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 const OFFSET_TOP_PX: number = 4;
 
@@ -59,7 +59,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   constructor(protected readonly changeDetectorRef: ChangeDetectorRef, protected readonly renderer: Renderer2) {}
 
   public ngAfterViewInit(): void {
-    if (isNullOrUndefined(this.anchor)) {
+    if (isNil(this.anchor)) {
       return;
     }
 
@@ -72,7 +72,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   }
 
   public ngOnDestroy(): void {
-    if (isNullOrUndefined(this.anchor)) {
+    if (isNil(this.anchor)) {
       return;
     }
     this.anchorOnClickHandlerUnlistener();
@@ -84,7 +84,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   };
 
   public toggle(value?: boolean): void {
-    this.open = isNullOrUndefined(value) ? !this.open : value;
+    this.open = isNil(value) ? !this.open : value;
     this.changeDetectorRef.markForCheck();
     this.checkPosition();
   }
@@ -110,7 +110,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('document:mouseup', ['$event'])
   public clickOutsideCheck(event: MouseEvent): void {
-    if (isNullOrUndefined(this.anchor) || isNullOrUndefined(this.dropdown)) {
+    if (isNil(this.anchor) || isNil(this.dropdown)) {
       return;
     }
 

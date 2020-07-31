@@ -1,4 +1,4 @@
-import { isNullOrUndefined } from './is-null-or-undefined.helper';
+import { isNil } from '@meistersoft/utilities';
 
 export function getRangeStartDate(range: Date[]): Date {
   if (!Array.isArray(range)) {
@@ -8,7 +8,7 @@ export function getRangeStartDate(range: Date[]): Date {
     (rangeItem: Date, rangeItemIndex: number, rangeItemOrigin: [Date, Date]) => {
       const nextItem: Date = rangeItemOrigin[rangeItemIndex + 1];
       const previousItem: Date = rangeItemOrigin[rangeItemIndex - 1];
-      if (isNullOrUndefined(previousItem)) {
+      if (isNil(previousItem)) {
         return rangeItem.valueOf() < nextItem.valueOf();
       }
       return rangeItem.valueOf() < previousItem.valueOf();

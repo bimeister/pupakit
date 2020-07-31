@@ -11,11 +11,11 @@ import {
   ViewChildren
 } from '@angular/core';
 import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
 import { Tab } from '../../../../../internal/declarations/interfaces/tab.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 interface TabWithUrl extends Tab {
   url: string;
@@ -50,7 +50,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
       return;
     }
     const tabsWithUrl: TabWithUrl[] = newValue
-      .filter((tab: Tab) => !isNullOrUndefined(tab))
+      .filter((tab: Tab) => !isNil(tab))
       .map((tab: Tab) => this.getTabWithUrl(tab));
     this.tabs$.next(tabsWithUrl);
   }
@@ -91,7 +91,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
           const targetTabIndexSorted: number = this.getSelectedTabIndex(currentUrlWithParams, sortedTabUrls);
           return sortedTabUrls[targetTabIndexSorted];
         }),
-        filter((tabUrl: string) => !isNullOrUndefined(tabUrl)),
+        filter((tabUrl: string) => !isNil(tabUrl)),
         switchMap((selectedTabUrl: string) =>
           this.tabs$.pipe(
             map((tabs: TabWithUrl[]) => {
@@ -106,7 +106,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
 
   private readonly selectedTabElement$: Observable<HTMLElement> = this.selectedTabIndex$.pipe(
     map((tabIndex: number) => this.tabsItemsRef.toArray()[tabIndex]),
-    filter((selectedTabElement: ElementRef<HTMLElement>) => !isNullOrUndefined(selectedTabElement)),
+    filter((selectedTabElement: ElementRef<HTMLElement>) => !isNil(selectedTabElement)),
     map((selectedTabElement: ElementRef<HTMLElement>) => selectedTabElement.nativeElement)
   );
 
@@ -127,7 +127,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
   }
 
   public selectTab(clickedTab: TabWithUrl, clickEvent?: MouseEvent): void {
-    if (!isNullOrUndefined(clickEvent)) {
+    if (!isNil(clickEvent)) {
       clickEvent.stopPropagation();
     }
     this.tabs$
@@ -144,14 +144,14 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
         }
 
         this.router.navigate([clickedTab.route], {
-          queryParams: isNullOrUndefined(clickedTab.queryParams) ? {} : clickedTab.queryParams,
+          queryParams: isNil(clickedTab.queryParams) ? {} : clickedTab.queryParams,
           queryParamsHandling: 'merge'
         });
       });
   }
 
   private subscribeOnRefreshEvent(): void {
-    if (isNullOrUndefined(this.refreshSubject$)) {
+    if (isNil(this.refreshSubject$)) {
       return;
     }
 
@@ -162,7 +162,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     this.selectedTabElement$
       .pipe(
         take(1),
-        filter((element: Element) => !isNullOrUndefined(element))
+        filter((element: Element) => !isNil(element))
       )
       .subscribe((element: Element) => this.highlightTabElement(element));
   }
@@ -191,11 +191,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
   }
 
   private highlightTabElement(selectedTabElement: Element): void {
-    if (
-      isNullOrUndefined(this.tabsElementRef) ||
-      isNullOrUndefined(this.highlighterElementRef) ||
-      isNullOrUndefined(selectedTabElement)
-    ) {
+    if (isNil(this.tabsElementRef) || isNil(this.highlighterElementRef) || isNil(selectedTabElement)) {
       return;
     }
     const highlighter: HTMLDivElement = this.highlighterElementRef.nativeElement;
@@ -212,7 +208,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     const paramsFromRoute: Params = this.getParamsFromRouteString(tab.route);
     const routeWithoutParams: string = this.getUrlStringWithoutParams(tab.route).toLowerCase();
 
-    if (isNullOrUndefined(tab.queryParams) && isNullOrUndefined(paramsFromRoute)) {
+    if (isNil(tab.queryParams) && isNil(paramsFromRoute)) {
       return { ...tab, route: routeWithoutParams, url: routeWithoutParams, queryParams: {} };
     }
     const queryParamsEntries: ObjectEntry<string, string>[] = this.getSortedQueryParamsEntries({

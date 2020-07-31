@@ -9,13 +9,13 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../../internal/declarations/types/select-outer-value.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
     private readonly elementRef: ElementRef<HTMLElement>,
     @Optional() ngControl: NgControl
   ) {
-    if (isNullOrUndefined(ngControl)) {
+    if (isNil(ngControl)) {
       return;
     }
     ngControl.valueAccessor = this;
@@ -52,7 +52,7 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNullOrUndefined(changes)) {
+    if (isNil(changes)) {
       return;
     }
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
@@ -77,7 +77,7 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
   private processIsMultiSelectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
     const updatedState: boolean | undefined = change?.currentValue;
 
-    if (isNullOrUndefined(updatedState)) {
+    if (isNil(updatedState)) {
       return;
     }
 
@@ -93,7 +93,7 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
   }
 
   private static allElementChildren(currentElement: Element, extractedChildren: Element[] = []): Element[] {
-    if (isNullOrUndefined(currentElement)) {
+    if (isNil(currentElement)) {
       return extractedChildren;
     }
 

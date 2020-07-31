@@ -7,11 +7,11 @@ import {
   HostBinding,
   Renderer2
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, shareReplay, switchMap } from 'rxjs/operators';
 
 import { Position } from '../../../../../internal/declarations/types/position.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DraggerComponent } from '../dragger/dragger.component';
 
 /** @dynamic */
@@ -35,7 +35,7 @@ export class DraggableComponent {
   private readonly registeredDragger$: BehaviorSubject<DraggerComponent> = new BehaviorSubject<DraggerComponent>(null);
 
   private readonly sanitizedDragger$: Observable<DraggerComponent> = this.registeredDragger$.pipe(
-    filter((component: DraggerComponent) => !isNullOrUndefined(component)),
+    filter((component: DraggerComponent) => !isNil(component)),
     distinctUntilChanged(),
     shareReplay(1)
   );

@@ -12,12 +12,12 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { ControlState } from '../../../../../internal/declarations/enums/control-state.enum';
 import { SearchFieldKind } from '../../../../../internal/declarations/types/search-field-kind.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-search-field',
@@ -67,7 +67,7 @@ export class SearchFieldComponent implements OnInit, OnDestroy {
   }
 
   public get isValueEmpty(): boolean {
-    return isNullOrUndefined(this.inputValueControl.value) || String(this.inputValueControl.value).length === 0;
+    return isNil(this.inputValueControl.value) || String(this.inputValueControl.value).length === 0;
   }
 
   private readonly subscription: Subscription = new Subscription();

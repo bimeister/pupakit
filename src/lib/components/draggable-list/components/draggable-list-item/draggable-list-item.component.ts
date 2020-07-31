@@ -13,13 +13,13 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { CurrentDraggableListItem } from '../../../../../internal/declarations/interfaces/current-draggable-list-item.interface';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { Position } from '../../../../../internal/declarations/types/position.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DraggableListService } from '../../services/draggable-list.service';
 
 /** @dynamic */
@@ -133,7 +133,7 @@ export class DraggableListItemComponent implements AfterViewInit, OnDestroy {
       .pipe(
         filter(
           ([_, __, currentDraggableListItem]: [HTMLElement, Position, CurrentDraggableListItem]) =>
-            !isNullOrUndefined(currentDraggableListItem)
+            !isNil(currentDraggableListItem)
         )
       )
       .subscribe(([_, position, currentDraggableListItem]: [HTMLElement, Position, CurrentDraggableListItem]) => {
@@ -156,7 +156,7 @@ export class DraggableListItemComponent implements AfterViewInit, OnDestroy {
 
   private handleCLearPlaceholdersAction(): Subscription {
     return this.draggableListService.clearPlaceholdersAction$
-      .pipe(filter((callerId: string) => callerId !== this.id || isNullOrUndefined(callerId)))
+      .pipe(filter((callerId: string) => callerId !== this.id || isNil(callerId)))
       .subscribe(() => this.clearPlaceholders());
   }
 
@@ -189,7 +189,7 @@ export class DraggableListItemComponent implements AfterViewInit, OnDestroy {
   }
 
   private static unlisten(unlistener: EventUnlistener): void {
-    if (!isNullOrUndefined(unlistener)) {
+    if (!isNil(unlistener)) {
       unlistener();
       unlistener = null;
     }

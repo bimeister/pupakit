@@ -13,16 +13,16 @@ import {
   Predicate,
   ViewChild
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, throttle } from 'rxjs/operators';
 
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { ExternalDiskContent } from '../../../../../internal/declarations/enums/external-disk-content.enum';
 import { PanelExpansionState } from '../../../../../internal/declarations/enums/panel-expansion-state.enum';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { WasherButtonRoot } from '../../../../../internal/declarations/interfaces/washer-button-root.interface';
 import { WasherButton } from '../../../../../internal/declarations/interfaces/washer-button.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 // tslint:disable: no-magic-numbers
 @Component({
@@ -219,10 +219,10 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
     }
     this.allButtons$.next(changes.buttons.currentValue);
 
-    if (isNullOrUndefined(changes.range)) {
+    if (isNil(changes.range)) {
       return;
     }
-    if (!isNullOrUndefined(changes.range) && isNullOrUndefined(changes.range.currentValue)) {
+    if (!isNil(changes.range) && isNil(changes.range.currentValue)) {
       this.range$.next(0);
     }
     this.range$.next(changes.range.currentValue);
@@ -241,7 +241,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
     wheelEvent.stopPropagation();
     wheelEvent.preventDefault();
     const activeButton: WasherButtonRoot = this.activeButton$.getValue();
-    if (isNullOrUndefined(activeButton) || !activeButton.rangeOnClick) {
+    if (isNil(activeButton) || !activeButton.rangeOnClick) {
       return;
     }
     const deltaIsPositive: boolean = wheelEvent.deltaY > 0;
@@ -265,7 +265,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
 
   public processButtonClick(event: MouseEvent, clickedButton?: WasherButtonRoot): void {
     event.stopPropagation();
-    const isCentralButton: boolean = isNullOrUndefined(clickedButton);
+    const isCentralButton: boolean = isNil(clickedButton);
     const buttonHasChildren: boolean = !isCentralButton && this.hasChildren(clickedButton);
     const buttonOpensRange: boolean = !isCentralButton && clickedButton.rangeOnClick;
     if (isCentralButton) {
@@ -292,7 +292,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   public hasChildren: Predicate<WasherButtonRoot> = (button: WasherButtonRoot): boolean => {
-    return !isNullOrUndefined(button) && Array.isArray(button.children) && button.children.length !== 0;
+    return !isNil(button) && Array.isArray(button.children) && button.children.length !== 0;
   };
 
   private updateButtonsAlwaysVisibleOnButtonsArrayChange(): void {
@@ -423,7 +423,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
         }
         return innerData[Data.trigger] ? innerData[Data.rotation] : null;
       }),
-      filter((innerValue: number) => !isNullOrUndefined(innerValue))
+      filter((innerValue: number) => !isNil(innerValue))
     );
     const isCentralValueVisible$: Observable<boolean> = combineLatest([
       this.activeButton$,
@@ -434,7 +434,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
           button,
           trigger
         }
-        const activeButtonIsCentral: boolean = isNullOrUndefined(innerData[Data.button]);
+        const activeButtonIsCentral: boolean = isNil(innerData[Data.button]);
         const isPanelExpanded: boolean = innerData[Data.trigger] === PanelExpansionState.appeared;
         return isPanelExpanded && !activeButtonIsCentral && innerData[Data.button].rangeOnClick;
       })
@@ -480,7 +480,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
         }
         return innerData[Data.trigger] ? innerData[Data.coordX] : undefined;
       }),
-      filter((innerValue: number) => !isNullOrUndefined(innerValue)),
+      filter((innerValue: number) => !isNil(innerValue)),
       map((mouseOffsetX: number) => {
         const elementOffsetX: number = this.arcElement.nativeElement.getBoundingClientRect().left;
         const mouseOffsetXfromElement: number = mouseOffsetX - elementOffsetX;
@@ -523,7 +523,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
   private updateDataOnActiveButtonChange(): void {
     const activeButtonChildren$: Observable<WasherButton[]> = this.activeButton$.pipe(
       map((innerValue: WasherButtonRoot) =>
-        !isNullOrUndefined(innerValue) && this.hasChildren(innerValue) ? innerValue.children : []
+        !isNil(innerValue) && this.hasChildren(innerValue) ? innerValue.children : []
       )
     );
     const activeButtonChildrenRotations$: Observable<number[]> = activeButtonChildren$.pipe(

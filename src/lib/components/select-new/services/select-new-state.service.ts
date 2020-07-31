@@ -1,12 +1,12 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Injectable({
   providedIn: 'any'
@@ -39,7 +39,7 @@ export class SelectNewStateService<T> {
   );
   public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.dropDownTriggerButton$.pipe(
     map((button: HTMLButtonElement | null) => {
-      if (isNullOrUndefined(button)) {
+      if (isNil(button)) {
         return undefined;
       }
 
@@ -47,7 +47,7 @@ export class SelectNewStateService<T> {
       return width;
     }),
     map((width: number | undefined) => {
-      return isNullOrUndefined(width) ? 0 : width;
+      return isNil(width) ? 0 : width;
     })
   );
 

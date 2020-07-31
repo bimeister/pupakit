@@ -10,6 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 
 import { InputSize } from '../../../../../internal/declarations/types/input-size.type';
 import { InputTextAlign } from '../../../../../internal/declarations/types/input-text-align.type';
@@ -17,7 +18,6 @@ import { InputType } from '../../../../../internal/declarations/types/input-type
 import { getRangeEndDate } from '../../../../../internal/helpers/get-range-end-date.helper';
 import { getRangeStartDate } from '../../../../../internal/helpers/get-range-start-date.helper';
 import { isDate } from '../../../../../internal/helpers/is-date.helper';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 type DateRange = [Date, Date];
 type ValueType = string | Date | null | number | DateRange;
@@ -40,7 +40,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
     this.validValue = newValue;
   }
   public get valid(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.validValue;
     }
     return this.formControl.valid;
@@ -50,7 +50,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
     this.disabledValue = newValue;
   }
   public get disabled(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.disabledValue;
     }
     return this.formControl.disabled;
@@ -69,7 +69,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
     this.updateValue(newValue);
   }
   public get stringValue(): string {
-    if (isNullOrUndefined(this.value)) {
+    if (isNil(this.value)) {
       return '';
     }
     if (typeof this.value === 'string') {
@@ -90,7 +90,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
   }
 
   public get touched(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.touchedValue;
     }
     return this.formControl.touched;
@@ -108,11 +108,11 @@ export class InputComponent implements ControlValueAccessor, Validator {
   private validValue: boolean = false;
 
   public get formControl(): AbstractControl {
-    return !isNullOrUndefined(this.ngControl) ? this.ngControl.control : null;
+    return !isNil(this.ngControl) ? this.ngControl.control : null;
   }
 
   constructor(private readonly changeDetectorRef: ChangeDetectorRef, @Optional() public readonly ngControl: NgControl) {
-    if (!isNullOrUndefined(ngControl)) {
+    if (!isNil(ngControl)) {
       ngControl.valueAccessor = this;
     }
   }
@@ -149,16 +149,10 @@ export class InputComponent implements ControlValueAccessor, Validator {
   }
 
   public validate(control: AbstractControl | NgControl): ValidationErrors | null {
-    if (!isNullOrUndefined(this.valid)) {
+    if (!isNil(this.valid)) {
       return this.valid ? null : { manualError: true };
     }
-    if (
-      isNullOrUndefined(control) ||
-      isNullOrUndefined(control.errors) ||
-      control.pristine ||
-      control.untouched ||
-      control.disabled
-    ) {
+    if (isNil(control) || isNil(control.errors) || control.pristine || control.untouched || control.disabled) {
       return null;
     }
     return control.errors;
@@ -215,7 +209,7 @@ export class InputComponent implements ControlValueAccessor, Validator {
     value: unknown,
     type: InputType
   ): ValueType => {
-    if (isNullOrUndefined(value)) {
+    if (isNil(value)) {
       return null;
     }
 

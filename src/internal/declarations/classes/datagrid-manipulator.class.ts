@@ -1,10 +1,10 @@
 import { TemplateRef } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { ColDef, ColumnApi, GridApi, IDatasource, ValueGetterParams } from 'ag-grid-community';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { DatagridColumnSettingsComponent } from '../../../lib/components/datagrid/components/datagrid-column-settings/datagrid-column-settings.component';
 import { DatagridTemplateRendererComponent } from '../../../lib/components/datagrid/components/datagrid-template-renderer/datagrid-template-renderer.component';
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { DatagridColDef } from '../interfaces/datagrid-col-def.interface';
 import { DatagridColumnSetting } from '../interfaces/datagrid-column-setting.interface';
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
@@ -15,7 +15,7 @@ export class DatagridManipulator<rowDataT> {
   }
 
   private get isGridReady(): boolean {
-    return !isNullOrUndefined(this.gridApi);
+    return !isNil(this.gridApi);
   }
 
   public get config(): DatagridManipulatorConfiguration<rowDataT> {
@@ -35,7 +35,7 @@ export class DatagridManipulator<rowDataT> {
 
   public gridReady(gridApi: GridApi): void {
     this.gridApi = gridApi;
-    if (!isNullOrUndefined(this.gridReadyCallback)) {
+    if (!isNil(this.gridReadyCallback)) {
       this.gridReadyCallback();
     }
   }
@@ -54,7 +54,7 @@ export class DatagridManipulator<rowDataT> {
 
   public setColDefs(colDefs: DatagridColDef[], userActionsCellRef: TemplateRef<HTMLElement> = null): void {
     this.setColumnSettings(colDefs);
-    if (this.config.showColumnSettings || !isNullOrUndefined(userActionsCellRef)) {
+    if (this.config.showColumnSettings || !isNil(userActionsCellRef)) {
       colDefs.push(this.getActionsColumn(userActionsCellRef));
     }
     if (!this.isGridReady) {
@@ -145,7 +145,7 @@ export class DatagridManipulator<rowDataT> {
       };
     }
 
-    if (!isNullOrUndefined(userActionsCellRef)) {
+    if (!isNil(userActionsCellRef)) {
       actionsColumn.cellRendererFramework = DatagridTemplateRendererComponent;
       actionsColumn.cellRendererParams = {
         templateRef: userActionsCellRef

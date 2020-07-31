@@ -1,10 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
@@ -33,9 +33,7 @@ export class SelectNewDropdownComponent<T> {
 
   public readonly dropDownOverlayOrigin$: Observable<
     CdkOverlayOrigin
-  > = this.selectNewStateService.dropDownOverlayOrigin$.pipe(
-    filter((origin: CdkOverlayOrigin) => !isNullOrUndefined(origin))
-  );
+  > = this.selectNewStateService.dropDownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
 
   public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
     filter((isExpanded: boolean) => isExpanded),

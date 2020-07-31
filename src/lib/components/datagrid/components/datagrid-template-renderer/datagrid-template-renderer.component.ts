@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { ICellRendererAngularComp, IHeaderAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams, IHeaderParams } from 'ag-grid-community';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 export { ICellRendererParams };
 
@@ -36,6 +36,6 @@ export class DatagridTemplateRendererComponent implements ICellRendererAngularCo
   }
 
   private static isHeaderParams(params: any): params is IHeaderParams {
-    return !isNullOrUndefined(params.enableSorting);
+    return !isNil(params.enableSorting);
   }
 }

@@ -8,6 +8,7 @@ import {
   Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 // tslint:disable-next-line: import-blacklist
 import { cloneDeep, isEqual } from 'lodash';
 import { Observable } from 'rxjs';
@@ -15,7 +16,6 @@ import { Observable } from 'rxjs';
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
 import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
 import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-select',
@@ -84,10 +84,10 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
     const prevValue: DropdownItem<T> | T = cloneDeep(this.selectedItem);
     const item: DropdownItem<T> | T = Array.from(this.itemsCollection.values()).find((i: DropdownItem<T> | T) => {
-      if (isNullOrUndefined(this.captionPropertyPath)) {
+      if (isNil(this.captionPropertyPath)) {
         return (i as DropdownItem<T>).data === value;
       }
-      if (!isNullOrUndefined(this.captionPropertyPath)) {
+      if (!isNil(this.captionPropertyPath)) {
         return this.getCaption(i as T) === this.getCaption(value);
       }
       return false;
@@ -116,13 +116,13 @@ export class SelectComponent<T> implements ControlValueAccessor {
   }
 
   public getCaption(item: T): string {
-    if (isNullOrUndefined(item)) {
+    if (isNil(item)) {
       return null;
     }
-    if (isNullOrUndefined(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
+    if (isNil(this.captionPropertyPath) && item.hasOwnProperty('caption')) {
       return item['caption'];
     }
-    if (!isNullOrUndefined(this.captionPropertyPath)) {
+    if (!isNil(this.captionPropertyPath)) {
       const extractedCaption: unknown = getPropertyValueByPath(item, this.captionPropertyPath);
 
       return String(extractedCaption);
@@ -138,7 +138,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
 
   private updateCollection(): void {
     this.itemsCollection.clear();
-    if (isNullOrUndefined(this._items)) {
+    if (isNil(this._items)) {
       return;
     }
     this._items.forEach((item: DropdownItem<T>) => {

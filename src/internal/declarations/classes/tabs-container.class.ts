@@ -1,8 +1,8 @@
 import { AfterViewInit, EventEmitter, Injectable, OnDestroy, QueryList } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { merge, ReplaySubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { Uuid } from '../types/uuid.type';
 import { TabsContainerItem } from './tabs-container-item.class';
 
@@ -50,7 +50,7 @@ export abstract class TabsContainer implements AfterViewInit, OnDestroy {
   }
 
   public selectTab(tabToSelect: TabsContainerItem): void {
-    if (isNullOrUndefined(tabToSelect)) {
+    if (isNil(tabToSelect)) {
       return;
     }
 
@@ -58,7 +58,7 @@ export abstract class TabsContainer implements AfterViewInit, OnDestroy {
   }
 
   public deselectTab(tabToDeselect: TabsContainerItem): void {
-    if (isNullOrUndefined(tabToDeselect)) {
+    if (isNil(tabToDeselect)) {
       return;
     }
 

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, TrackByFunction } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { ICellRendererAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams } from 'ag-grid-community';
 import { Observable } from 'rxjs';
@@ -6,7 +7,6 @@ import { take } from 'rxjs/operators';
 
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridColumnSetting } from '../../../../../internal/declarations/interfaces/datagrid-column-setting.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-datagrid-column-settings',
@@ -30,7 +30,7 @@ export class DatagridColumnSettingsComponent<rowDataT> implements ICellRendererA
   }
 
   public updateSettingsState(setting: DatagridColumnSetting, isVisible: boolean): void {
-    if (isNullOrUndefined(setting) || isNullOrUndefined(isVisible)) {
+    if (isNil(setting) || isNil(isVisible)) {
       return;
     }
     const isValueChanged: boolean = setting.isVisible !== isVisible;

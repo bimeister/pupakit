@@ -10,15 +10,15 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { v4 as uuid } from 'uuid';
 
 import { PositionController } from '../../../../../internal/declarations/classes/position-controller.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ExpanderBehavior } from '../../../../../internal/declarations/types/expander-behavior.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 
 const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderBehavior, string>([
   ['top', 'n-resize'],
@@ -59,19 +59,19 @@ export class ExpanderComponent extends PositionController implements OnChanges {
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNullOrUndefined(changes)) {
+    if (isNil(changes)) {
       return;
     }
     this.processBehaviorChanges(changes?.behavior);
   }
 
   private processBehaviorChanges(change: ComponentChange<this, ExpanderBehavior>): void {
-    if (isNullOrUndefined(change)) {
+    if (isNil(change)) {
       return;
     }
     const behavior: ExpanderBehavior = change?.currentValue;
     const targetCursorName: string = CURSOR_BY_BEHAVIOR_NAME.get(behavior);
-    if (isNullOrUndefined(targetCursorName)) {
+    if (isNil(targetCursorName)) {
       return;
     }
     this.behavior$.next(behavior);
