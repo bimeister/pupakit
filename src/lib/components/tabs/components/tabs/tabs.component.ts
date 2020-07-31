@@ -8,10 +8,10 @@ import {
   QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren
+  ViewChildren,
 } from '@angular/core';
 import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 
@@ -91,7 +91,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
           const targetTabIndexSorted: number = this.getSelectedTabIndex(currentUrlWithParams, sortedTabUrls);
           return sortedTabUrls[targetTabIndexSorted];
         }),
-        filter((tabUrl: string) => !isNil(tabUrl)),
+        filterNotNil(),
         switchMap((selectedTabUrl: string) =>
           this.tabs$.pipe(
             map((tabs: TabWithUrl[]) => {
@@ -106,7 +106,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
 
   private readonly selectedTabElement$: Observable<HTMLElement> = this.selectedTabIndex$.pipe(
     map((tabIndex: number) => this.tabsItemsRef.toArray()[tabIndex]),
-    filter((selectedTabElement: ElementRef<HTMLElement>) => !isNil(selectedTabElement)),
+    filterNotNil(),
     map((selectedTabElement: ElementRef<HTMLElement>) => selectedTabElement.nativeElement)
   );
 
@@ -160,10 +160,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
 
   private refreshHighlightedElement(): void {
     this.selectedTabElement$
-      .pipe(
-        take(1),
-        filter((element: Element) => !isNil(element))
-      )
+      .pipe(take(1), filterNotNil())
       .subscribe((element: Element) => this.highlightTabElement(element));
   }
 

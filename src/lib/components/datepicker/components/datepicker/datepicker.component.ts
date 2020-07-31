@@ -1,13 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  OnDestroy,
-  Output
-} from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, skipWhile, take } from 'rxjs/operators';
 
@@ -140,7 +132,7 @@ export class DatepickerComponent implements OnDestroy {
         this.selectedDate$
           .pipe(
             skipWhile(() => !this.isDateSelectionMode),
-            filter((selectedDate: Date) => !isNil(selectedDate)),
+            filterNotNil(),
             distinctUntilChanged(this.isSameDate)
           )
           .subscribe((selectedDate: Date) => this.date.emit(selectedDate))

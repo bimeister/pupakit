@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@angular/cdk": "^9.2.4",
-    "@meistersoft/utilities": "^0.1.0-e95c9e72",
+    "@meistersoft/utilities": "^0.1.0-9e2ee508",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
     "uuid": "^8.0.0",

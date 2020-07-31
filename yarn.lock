@@ -1627,17 +1627,17 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.6.4"
 
-"@meistersoft/utilities@^0.1.0-e95c9e72":
-  version "0.1.0-e95c9e72"
-  resolved "http://npm.meistersoft.ru:4873/@meistersoft%2futilities/-/utilities-0.1.0-e95c9e72.tgz#0ba02e618a7813e67037a69eec69312623c82abf"
-  integrity sha512-S+GAvv8aphxfvO78+axzj4vtjKRylCbh2oCQDqVCeYDJK86+CfL5m6/mGM61ZOFKFDW/dr1NQk/w+eE85bssNw==
+"@meistersoft/utilities@^0.1.0-9e2ee508":
+  version "0.1.0-9e2ee508"
+  resolved "http://npm.meistersoft.ru:4873/@meistersoft%2futilities/-/utilities-0.1.0-9e2ee508.tgz#6d1aeec2256522d51328b70db4e6734042ba7273"
+  integrity sha512-jdxRPwHaRyVeZBBplQ9GsYPqoxnudp4FVQrwBMPyaGLkSAONiG3CKHBuN9TiXGezufZjh8hGFNVM/zIA+4KynQ==
   dependencies:
     snake-case "^3.0.3"
     uuid "^8.3.0"
   optionalDependencies:
     "@angular/core" ">9.0.0"
     "@ngxs/store" "^3.6.2"
-    rxjs "^6.6.0"
+    rxjs "~6.5.5"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"

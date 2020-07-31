@@ -2,7 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ElementRef } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
@@ -200,7 +200,7 @@ export class TreeManipulator {
   private updateRangeOnDataExtraction(): Subscription {
     return this.viewPortReference$
       .pipe(
-        filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)),
+        filterNotNil(),
         switchMap((viewPort: CdkVirtualScrollViewport) => viewPort.renderedRangeStream)
       )
       .subscribe((range: ListRange) => {

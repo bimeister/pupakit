@@ -1,7 +1,7 @@
 import { ElementRef, HostListener, Injectable, Renderer2 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { Position } from '../types/position.type';
 
@@ -34,12 +34,7 @@ export abstract class PositionController {
   }
 
   private cancelPreviousListener(): void {
-    this.eventUnListener$
-      .pipe(
-        take(1),
-        filter((unListen: VoidFunction) => !isNil(unListen))
-      )
-      .subscribe((unListen: VoidFunction) => unListen());
+    this.eventUnListener$.pipe(take(1), filterNotNil()).subscribe((unListen: VoidFunction) => unListen());
   }
 
   private clearCachedPosition(): void {

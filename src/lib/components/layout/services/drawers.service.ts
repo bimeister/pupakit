@@ -1,10 +1,12 @@
 import { ComponentFactory, Injectable, Injector } from '@angular/core';
+import { mapToVoid } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, map, mapTo, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
-import { VOID } from '../../../../internal/constants/void.const';
 import { ComponentDrawerData } from '../../../../internal/declarations/interfaces/component-drawer-data.interface';
-import { LayoutDrawerConfiguration } from '../../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
+import {
+  LayoutDrawerConfiguration,
+} from '../../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -36,14 +38,14 @@ export class DrawersService {
   public isOpen(componentDrawerId: string, isExpanded: boolean): Observable<void> {
     return this.openDrawerById$.pipe(
       filter((drawerId: string) => drawerId === componentDrawerId && isExpanded),
-      mapTo(VOID)
+      mapToVoid()
     );
   }
 
   public isClosed(componentDrawerId: string, isExpanded: boolean): Observable<void> {
     return this.closeDrawerById$.pipe(
       filter((drawerId: string) => drawerId === componentDrawerId && isExpanded),
-      mapTo(VOID)
+      mapToVoid()
     );
   }
 

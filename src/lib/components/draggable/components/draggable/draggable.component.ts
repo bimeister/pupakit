@@ -5,9 +5,9 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, shareReplay, switchMap } from 'rxjs/operators';
 
@@ -35,7 +35,7 @@ export class DraggableComponent {
   private readonly registeredDragger$: BehaviorSubject<DraggerComponent> = new BehaviorSubject<DraggerComponent>(null);
 
   private readonly sanitizedDragger$: Observable<DraggerComponent> = this.registeredDragger$.pipe(
-    filter((component: DraggerComponent) => !isNil(component)),
+    filterNotNil(),
     distinctUntilChanged(),
     shareReplay(1)
   );

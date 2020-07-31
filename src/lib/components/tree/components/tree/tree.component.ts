@@ -17,9 +17,9 @@ import {
   Renderer2,
   TemplateRef,
   TrackByFunction,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import {
   animationFrameScheduler,
   BehaviorSubject,
@@ -29,7 +29,7 @@ import {
   ReplaySubject,
   Subject,
   Subscription,
-  timer
+  timer,
 } from 'rxjs';
 import { debounce, debounceTime, filter, observeOn, take } from 'rxjs/operators';
 
@@ -464,9 +464,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private detectChangesOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
-      .pipe(
-        filter((item: FlatTreeItem) => !isNil(item), debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS))
-      )
+      .pipe(filterNotNil(), debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS))
       .subscribe(() => this.changeDetectorRef.markForCheck());
   }
 
@@ -492,10 +490,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private scrollViewportDuringDragging(): Subscription {
     return interval(0)
-      .pipe(
-        observeOn(animationFrameScheduler),
-        filter(() => !isNil(this.scrollDirection))
-      )
+      .pipe(observeOn(animationFrameScheduler), filterNotNil())
       .subscribe(() => {
         const scrollingSpeed: number = 5;
         const offsetDelta: number = this.scrollDirection === 'up' ? -scrollingSpeed : scrollingSpeed;
