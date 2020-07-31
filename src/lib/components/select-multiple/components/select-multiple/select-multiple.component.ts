@@ -7,7 +7,7 @@ import {
   forwardRef,
   Input,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { distinctUntilSerializedChanged, filterNotNil } from '@meistersoft/utilities';
@@ -15,9 +15,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay, startWith } from 'rxjs/operators';
 
 import { SelectOption } from '../../../../../internal/declarations/interfaces/select-option.interface';
-import {
-  MultiselectionListComponent,
-} from '../../../multiselection-list/components/multiselection-list/multiselection-list.component';
+import { MultiselectionListComponent } from '../../../multiselection-list/components/multiselection-list/multiselection-list.component';
 
 const SELECTED_OPTION_CHIP_MARGIN_RIGHT_PX: number = 2;
 

@@ -5,7 +5,7 @@ import {
   ContentChild,
   ElementRef,
   HostBinding,
-  Renderer2,
+  Renderer2
 } from '@angular/core';
 import { filterNotNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';

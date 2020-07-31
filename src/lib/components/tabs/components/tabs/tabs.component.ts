@@ -8,7 +8,7 @@ import {
   QueryList,
   Renderer2,
   ViewChild,
-  ViewChildren,
+  ViewChildren
 } from '@angular/core';
 import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
 import { filterNotNil, isNil } from '@meistersoft/utilities';

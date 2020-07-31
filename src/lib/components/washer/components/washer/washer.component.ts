@@ -11,7 +11,7 @@ import {
   OnInit,
   Output,
   Predicate,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';

@@ -17,7 +17,7 @@ import {
   Renderer2,
   TemplateRef,
   TrackByFunction,
-  ViewChild,
+  ViewChild
 } from '@angular/core';
 import { filterNotNil, isNil } from '@meistersoft/utilities';
 import {
@@ -29,7 +29,7 @@ import {
   ReplaySubject,
   Subject,
   Subscription,
-  timer,
+  timer
 } from 'rxjs';
 import { debounce, debounceTime, filter, observeOn, take } from 'rxjs/operators';
 
