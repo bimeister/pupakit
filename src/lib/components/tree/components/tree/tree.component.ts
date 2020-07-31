@@ -19,6 +19,7 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import {
   animationFrameScheduler,
   BehaviorSubject,
@@ -43,7 +44,6 @@ import { TreeItemInterface } from '../../../../../internal/declarations/interfac
 import { TreeManipulatorDataOrigin } from '../../../../../internal/declarations/types/tree-manipulator-data-origin.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { clamp } from '../../../../../internal/helpers/clamp.helper';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 interface Position {
   top: number;
@@ -53,19 +53,19 @@ interface Position {
 type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
 
 const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number, item: FlatTreeItem): string => {
-  if (isNullOrUndefined(item)) {
+  if (isNil(item)) {
     return `${index}__null_null_null_null`;
   }
   const { id, isExpandable, level, name }: FlatTreeItem = item;
   return `${index}__${id}_${isExpandable}_${level}_${name}`;
 };
 const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean => {
-  return !isNullOrUndefined(node) && node.isExpandable && !node.isElement;
+  return !isNil(node) && node.isExpandable && !node.isElement;
 };
 const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
-  !isNullOrUndefined(node) && !node.isExpandable && !node.isElement;
+  !isNil(node) && !node.isExpandable && !node.isElement;
 const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
-  return !isNullOrUndefined(element) && !element.isExpandable && element.isElement;
+  return !isNil(element) && !element.isExpandable && element.isElement;
 };
 const NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS: number = 500;
 const TREE_ITEM_SIZE_PX: number = 28;
@@ -214,7 +214,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNullOrUndefined(changes)) {
+    if (isNil(changes)) {
       return;
     }
     this.processTrackByValueChange(changes?.trackBy);
@@ -240,11 +240,11 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   public idsIncludesNodeId(ids: string[], node: FlatTreeItem): boolean {
-    return !isNullOrUndefined(node) && Array.isArray(ids) && ids.includes(node.id);
+    return !isNil(node) && Array.isArray(ids) && ids.includes(node.id);
   }
 
   public toggleExpansion(node: FlatTreeItem): void {
-    if (isNullOrUndefined(node?.id)) {
+    if (isNil(node?.id)) {
       return;
     }
     this.manipulator.toggleExpansion(node);
@@ -267,7 +267,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   @HostListener('window:mousemove', ['$event'])
   public mouseMove({ screenX, screenY }: MouseEvent): void {
-    if (isNullOrUndefined(this.mouseDownPosition)) {
+    if (isNil(this.mouseDownPosition)) {
       return;
     }
 
@@ -287,7 +287,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   @HostListener('window:mouseup')
   public mouseUp(): void {
-    if (this.draggingHasStarted && !isNullOrUndefined(this.dropNode)) {
+    if (this.draggingHasStarted && !isNil(this.dropNode)) {
       this.dropped.emit({
         draggedElement: this.draggableNode,
         droppedElement: this.dropNode
@@ -386,7 +386,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
     this.scrollDirection = isTopBorderReached ? 'up' : isBottomBorderReached ? 'down' : null;
 
-    if (!isNullOrUndefined(this.draggableElement)) {
+    if (!isNil(this.draggableElement)) {
       this.renderer.setStyle(this.draggableElement.nativeElement, 'left', `${draggableElementPosition.left}px`);
       this.renderer.setStyle(this.draggableElement.nativeElement, 'top', `${draggableElementPosition.top}px`);
     }
@@ -394,7 +394,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private processTrackByValueChange(change: ComponentChange<this, TrackByFunction<FlatTreeItem>>): void {
     const newValue: TrackByFunction<FlatTreeItem> | undefined = change?.currentValue;
-    if (isNullOrUndefined(newValue)) {
+    if (isNil(newValue)) {
       return;
     }
     this.trackBy$.next(newValue);
@@ -450,7 +450,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private processHideRootValueChanges(change: ComponentChange<this, boolean>): void {
     const newValue: boolean | undefined = change?.currentValue;
-    if (isNullOrUndefined(newValue)) {
+    if (isNil(newValue)) {
       return;
     }
     this.hideRoot$.next(newValue);
@@ -458,17 +458,14 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private emitExpandedItemOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
-      .pipe(filter((item: FlatTreeItem) => !isNullOrUndefined(item)))
+      .pipe(filter((item: FlatTreeItem) => !isNil(item)))
       .subscribe((item: FlatTreeItem) => this.expandedNode.emit(item));
   }
 
   private detectChangesOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
       .pipe(
-        filter(
-          (item: FlatTreeItem) => !isNullOrUndefined(item),
-          debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS)
-        )
+        filter((item: FlatTreeItem) => !isNil(item), debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS))
       )
       .subscribe(() => this.changeDetectorRef.markForCheck());
   }
@@ -484,7 +481,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     const expandDelay: number = 1000;
     return this.expandNodeWithDelay$
       .pipe(
-        debounce(node => (isNullOrUndefined(node) ? NEVER : timer(expandDelay))),
+        debounce(node => (isNil(node) ? NEVER : timer(expandDelay))),
         filter(nodeToExpand => !this.treeControl.isExpanded(nodeToExpand))
       )
       .subscribe((nodeToExpand: FlatTreeItem) => {
@@ -497,7 +494,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     return interval(0)
       .pipe(
         observeOn(animationFrameScheduler),
-        filter(() => !isNullOrUndefined(this.scrollDirection))
+        filter(() => !isNil(this.scrollDirection))
       )
       .subscribe(() => {
         const scrollingSpeed: number = 5;

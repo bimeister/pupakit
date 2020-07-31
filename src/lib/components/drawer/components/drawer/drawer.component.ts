@@ -13,14 +13,14 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { DrawerFloat } from '../../../../../internal/declarations/types/drawer-float.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { DrawerDraggerComponent } from '../drawer-dragger/drawer-dragger.component';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { DrawerFloat } from '../../../../../internal/declarations/types/drawer-float.type';
+import { DrawerDraggerComponent } from '../drawer-dragger/drawer-dragger.component';
 
 @Component({
   selector: 'pupa-drawer',
@@ -79,7 +79,7 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
 
   @HostListener('window:keydown', ['$event'])
   public processKeyPressEvent(event: KeyboardEvent): void {
-    if (!this.closeByEsc || isNullOrUndefined(event) || isNullOrUndefined(event.key)) {
+    if (!this.closeByEsc || isNil(event) || isNil(event.key)) {
       return;
     }
     const isEscPressed: boolean = event.key.toLowerCase() === 'escape';
@@ -116,7 +116,7 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   public getContentAreaWidth(modifiedWidthPx: number): string {
-    if (isNullOrUndefined(modifiedWidthPx)) {
+    if (isNil(modifiedWidthPx)) {
       return this.contentWidth;
     }
     return `${modifiedWidthPx}px`;
@@ -131,7 +131,7 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private processIsVisibleValueChange(change: ComponentChange<this, boolean>): void {
-    if (isNullOrUndefined(change) || change.currentValue === change.previousValue) {
+    if (isNil(change) || change.currentValue === change.previousValue) {
       return;
     }
     const drawerBecameVisible: boolean = change.currentValue;
@@ -139,7 +139,7 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private processwithOverlayValueChange(change: ComponentChange<this, boolean>): void {
-    if (isNullOrUndefined(change) || !this.isVisible) {
+    if (isNil(change) || !this.isVisible) {
       return;
     }
     const overlayIsVisible: boolean = change.currentValue;
@@ -168,16 +168,14 @@ export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
   }
 
   private subscribeOnDraggerMoveIfDraggerIsDefined(): Subscription {
-    if (isNullOrUndefined(this.draggerComponent)) {
+    if (isNil(this.draggerComponent)) {
       return new Subscription();
     }
 
     return this.draggerComponent.mouseOffsetFromElementPx$
       .pipe(
         takeUntil(this.draggerComponent.destroy$),
-        filter(
-          () => !isNullOrUndefined(this.drawerContentRef) && !isNullOrUndefined(this.drawerContentRef.nativeElement)
-        )
+        filter(() => !isNil(this.drawerContentRef) && !isNil(this.drawerContentRef.nativeElement))
       )
       .subscribe((horizontalMouseOffsetFromElementPx: number) => {
         const currentWidthPx: number = this.drawerContentRef.nativeElement.getBoundingClientRect().width;

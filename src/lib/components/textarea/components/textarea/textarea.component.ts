@@ -11,9 +11,9 @@ import {
   ViewChild
 } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 
 import { TextareaResize } from '../../../../../internal/declarations/types/textarea-resize.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-textarea',
@@ -33,7 +33,7 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
     this.validValue = newValue;
   }
   public get valid(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.validValue;
     }
     return this.formControl.valid;
@@ -43,7 +43,7 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
     this.disabledValue = newValue;
   }
   public get disabled(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.disabledValue;
     }
     return this.formControl.disabled;
@@ -56,7 +56,7 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
     this.updateValue(newValue);
   }
   public get value(): string {
-    if (isNullOrUndefined(this.valueData)) {
+    if (isNil(this.valueData)) {
       return '';
     }
     return this.valueData;
@@ -72,7 +72,7 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
   }
 
   public get touched(): boolean {
-    if (isNullOrUndefined(this.formControl)) {
+    if (isNil(this.formControl)) {
       return this.touchedValue;
     }
     return this.formControl.touched;
@@ -83,11 +83,11 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
   private validValue: boolean = false;
 
   public get formControl(): AbstractControl {
-    return !isNullOrUndefined(this.ngControl) ? this.ngControl.control : null;
+    return !isNil(this.ngControl) ? this.ngControl.control : null;
   }
 
   constructor(private readonly changeDetectorRef: ChangeDetectorRef, @Optional() public readonly ngControl: NgControl) {
-    if (!isNullOrUndefined(ngControl)) {
+    if (!isNil(ngControl)) {
       ngControl.valueAccessor = this;
     }
   }
@@ -121,16 +121,10 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
   }
 
   public validate(control: AbstractControl | NgControl): ValidationErrors | null {
-    if (!isNullOrUndefined(this.valid)) {
+    if (!isNil(this.valid)) {
       return this.valid ? null : { manualError: true };
     }
-    if (
-      isNullOrUndefined(control) ||
-      isNullOrUndefined(control.errors) ||
-      control.pristine ||
-      control.untouched ||
-      control.disabled
-    ) {
+    if (isNil(control) || isNil(control.errors) || control.pristine || control.untouched || control.disabled) {
       return null;
     }
     return control.errors;

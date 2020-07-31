@@ -1,8 +1,8 @@
 import { ElementRef, HostListener, Injectable, Renderer2 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { Position } from '../types/position.type';
 
 @Injectable()
@@ -37,7 +37,7 @@ export abstract class PositionController {
     this.eventUnListener$
       .pipe(
         take(1),
-        filter((unListen: VoidFunction) => !isNullOrUndefined(unListen))
+        filter((unListen: VoidFunction) => !isNil(unListen))
       )
       .subscribe((unListen: VoidFunction) => unListen());
   }

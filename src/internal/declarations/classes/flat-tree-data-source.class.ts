@@ -1,8 +1,8 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { FlatTreeItem } from './flat-tree-item.class';
 
 type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHidden?: boolean };
@@ -24,11 +24,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   public connect(): Observable<FlatTreeItem[]> {
     return combineLatest([
-      this.activeRange$.pipe(
-        filter((range: ListRange) => !isNullOrUndefined(range) && range.start >= 0 && range.end >= 0)
-      ),
+      this.activeRange$.pipe(filter((range: ListRange) => !isNil(range) && range.start >= 0 && range.end >= 0)),
       this.sortedData$.pipe(
-        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNullOrUndefined(item))),
+        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNil(item))),
         withLatestFrom(this.hideRoot$),
         map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
           if (hideRoot) {
@@ -45,7 +43,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       ]),
       tap(([filteredData, _]: [FlatTreeItem[], ListRange]) => this.filteredData$.next(filteredData)),
       map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
-        isNullOrUndefined(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
+        isNil(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
       ),
       tap((resultSlice: FlatTreeItem[]) => {
         this.currentSlice$.next(resultSlice);
@@ -58,14 +56,14 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   }
 
   private static isExpandable(item: FlatTreeItem): item is FlatTreeItem & { isExpandable: true } {
-    return !isNullOrUndefined(item) && item.isExpandable;
+    return !isNil(item) && item.isExpandable;
   }
 
   private static isCollapsed(
     item: FlatTreeItem,
     expandedItemsIds: string[]
   ): item is FlatTreeItem & { __isCollapsed: boolean } {
-    if (isNullOrUndefined(item)) {
+    if (isNil(item)) {
       return false;
     }
     const itemIsCollapsedManualy: boolean = item.hasOwnProperty('__isCollapsed') && Boolean(item['__isCollapsed']);
@@ -74,7 +72,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
   }
 
   private static isHidden(item: FlatTreeItem): item is FlatTreeItem & { __isHidden: boolean } {
-    return !isNullOrUndefined(item) && item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
+    return !isNil(item) && item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
   }
 
   private static processExpandableItem(
@@ -243,7 +241,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   private static filterNotHiddenItems(source: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
     const visibleTreeItems: FlatTreeItem[] = source
-      .filter((item: FlatTreeItem) => !isNullOrUndefined(item))
+      .filter((item: FlatTreeItem) => !isNil(item))
       .reduce(
         (
           [previousItem, result]: [FlatTreeItemWithMarkers, FlatTreeItemWithMarkers[]],
@@ -268,7 +266,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       )
       .filter((tuplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[] | number) => Array.isArray(tuplePart))
       .flat()
-      .filter((item: FlatTreeItem) => !isNullOrUndefined(item) && !FlatTreeDataSource.isHidden(item));
+      .filter((item: FlatTreeItem) => !isNil(item) && !FlatTreeDataSource.isHidden(item));
     return visibleTreeItems;
   }
 }

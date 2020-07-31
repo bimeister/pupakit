@@ -1,12 +1,12 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy, Renderer2, RendererStyleFlags2 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { CurrentDraggableListItem } from '../../../../internal/declarations/interfaces/current-draggable-list-item.interface';
 import { DraggableListChangeIndexEvent } from '../../../../internal/declarations/interfaces/draggable-list-change-index-event.interface';
 import { Position } from '../../../../internal/declarations/types/position.type';
-import { isNullOrUndefined } from '../../../../internal/helpers/is-null-or-undefined.helper';
 
 const DRAGGABLE_CLONE_OFFSET_PX: number = 10;
 
@@ -26,7 +26,7 @@ export class DraggableListService implements OnDestroy {
   public readonly availableIndexes: Set<number> = new Set<number>();
 
   public readonly isDragging$: Observable<boolean> = this.currentDraggableListItem$.pipe(
-    map((currentDraggableListItem: CurrentDraggableListItem) => !isNullOrUndefined(currentDraggableListItem))
+    map((currentDraggableListItem: CurrentDraggableListItem) => !isNil(currentDraggableListItem))
   );
 
   public readonly clonePosition$: BehaviorSubject<Position> = new BehaviorSubject<Position>(null);
@@ -38,7 +38,7 @@ export class DraggableListService implements OnDestroy {
   ]).pipe(
     filter(
       ([currentDraggableListItemClone, clonePosition]: [HTMLElement, Position, CurrentDraggableListItem]) =>
-        !isNullOrUndefined(currentDraggableListItemClone) && !isNullOrUndefined(clonePosition)
+        !isNil(currentDraggableListItemClone) && !isNil(clonePosition)
     )
   );
 
@@ -63,17 +63,14 @@ export class DraggableListService implements OnDestroy {
   public drop(): void {
     forkJoin([this.currentDraggableListItem$.pipe(take(1)), this.currentDraggableListItemNewIndex$.pipe(take(1))])
       .pipe(
-        filter(
-          ([currentDraggableListItem, _]: [CurrentDraggableListItem, number]) =>
-            !isNullOrUndefined(currentDraggableListItem)
-        )
+        filter(([currentDraggableListItem, _]: [CurrentDraggableListItem, number]) => !isNil(currentDraggableListItem))
       )
       .subscribe(([currentDraggableListItem, newIndex]: [CurrentDraggableListItem, number]) => {
         this.clearCurrentDraggableListItemData();
         this.clearPlaceholders();
         this.setCursorStyle('default');
 
-        if (isNullOrUndefined(newIndex)) {
+        if (isNil(newIndex)) {
           return;
         }
         this.changeIndexEvent$.next({

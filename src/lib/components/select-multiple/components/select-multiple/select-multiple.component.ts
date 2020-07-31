@@ -10,12 +10,11 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { distinctUntilSerializedChanged, isNil } from '@meistersoft/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, shareReplay, startWith } from 'rxjs/operators';
 
 import { SelectOption } from '../../../../../internal/declarations/interfaces/select-option.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { distinctUntilSerializedChanged } from '../../../../../internal/rxjs-operators/distinct-until-serialized-changed.operator';
 import { MultiselectionListComponent } from '../../../multiselection-list/components/multiselection-list/multiselection-list.component';
 
 const SELECTED_OPTION_CHIP_MARGIN_RIGHT_PX: number = 2;
@@ -104,7 +103,7 @@ export class SelectMultipleComponent implements AfterViewChecked, ControlValueAc
   private handleMultiselectionListControlValueChanges(): Subscription {
     return this.multiselectionListControl.valueChanges
       .pipe(
-        filter(() => !isNullOrUndefined(this.onChange)),
+        filter(() => !isNil(this.onChange)),
         distinctUntilSerializedChanged()
       )
       .subscribe((value: string[]) => this.onChange(value));

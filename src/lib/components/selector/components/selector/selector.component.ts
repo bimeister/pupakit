@@ -10,10 +10,10 @@ import {
   QueryList
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectorItemComponent } from '../selector-item/selector-item.component';
 
 @Component({
@@ -55,7 +55,7 @@ export class SelectorComponent<T> implements AfterContentInit, OnInit, OnDestroy
   private selectedItemsSubscription: Subscription;
 
   constructor(private readonly changeDetector: ChangeDetectorRef, @Optional() readonly ngControl: NgControl) {
-    if (!isNullOrUndefined(ngControl)) {
+    if (!isNil(ngControl)) {
       ngControl.valueAccessor = this;
     }
   }
@@ -102,7 +102,7 @@ export class SelectorComponent<T> implements AfterContentInit, OnInit, OnDestroy
   }
 
   private onSelectedItemsUpdate(items: SelectorItemComponent<T>[]): void {
-    if (!isNullOrUndefined(this.onFormChange)) {
+    if (!isNil(this.onFormChange)) {
       this.onFormChange(items.map(item => item.value));
     }
 
@@ -112,7 +112,7 @@ export class SelectorComponent<T> implements AfterContentInit, OnInit, OnDestroy
     if (this.touchesCount >= 1 && !this.isTouched) {
       this.isTouched = true;
     }
-    if (!isNullOrUndefined(this.onFormTouch) && this.isTouched) {
+    if (!isNil(this.onFormTouch) && this.isTouched) {
       this.onFormTouch();
     }
   }

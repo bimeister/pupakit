@@ -1,7 +1,7 @@
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { isNil } from '@meistersoft/utilities';
 import { ReplaySubject } from 'rxjs';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { ComponentChange } from '../interfaces/component-change.interface';
 import { ComponentChanges } from '../interfaces/component-changes.interface';
 
@@ -11,42 +11,42 @@ export abstract class UnitStyleChangesProcessor<C> {
   constructor(protected readonly domSanitizer: DomSanitizer) {}
 
   protected processStyleChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}`);
   }
 
   protected processPercentChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}%`);
   }
 
   protected processPxChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}px`);
   }
 
   protected processVwChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}vw`);
   }
 
   protected processVhChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}vh`);
   }
 
   protected processRemChanges(change: ComponentChange<C>): void {
-    if (isNullOrUndefined(change?.currentValue)) {
+    if (isNil(change?.currentValue)) {
       return;
     }
     this.updateSafeStyle(`${change?.currentValue}rem`);
@@ -56,7 +56,7 @@ export abstract class UnitStyleChangesProcessor<C> {
 
   private updateSafeStyle(unsafeStyle: string): void {
     const safeStyle: SafeStyle = this.domSanitizer.bypassSecurityTrustStyle(unsafeStyle);
-    if (isNullOrUndefined(safeStyle)) {
+    if (isNil(safeStyle)) {
       return;
     }
     this.safeStyle$.next(safeStyle);

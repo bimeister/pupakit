@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
 import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-dropdown-item',
@@ -22,7 +22,7 @@ export class DropdownItemComponent<T> {
   }
 
   public emitSelect(item: DropdownItem<T> | T): void {
-    this.select.emit(isNullOrUndefined(this.captionPropertyPath) ? (item as DropdownItem<T>).data : (item as T));
+    this.select.emit(isNil(this.captionPropertyPath) ? (item as DropdownItem<T>).data : (item as T));
   }
 
   public get itemData(): DropdownItem<T> {
@@ -30,13 +30,13 @@ export class DropdownItemComponent<T> {
   }
 
   public get getCaption(): string {
-    if (isNullOrUndefined(this.item)) {
+    if (isNil(this.item)) {
       return null;
     }
-    if (isNullOrUndefined(this.captionPropertyPath) && this.item.hasOwnProperty('caption')) {
+    if (isNil(this.captionPropertyPath) && this.item.hasOwnProperty('caption')) {
       return this.item['caption'];
     }
-    if (!isNullOrUndefined(this.captionPropertyPath)) {
+    if (!isNil(this.captionPropertyPath)) {
       const extractedCaption: unknown = getPropertyValueByPath(this.item, this.captionPropertyPath);
       return String(extractedCaption);
     }

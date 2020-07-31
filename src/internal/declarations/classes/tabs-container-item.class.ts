@@ -1,8 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, HostListener, Input, OnChanges } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Subject } from 'rxjs';
 import { v4 as guidGenerate } from 'uuid';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { ComponentChange } from '../interfaces/component-change.interface';
 import { ComponentChanges } from '../interfaces/component-changes.interface';
 import { Uuid } from '../types/uuid.type';
@@ -54,7 +54,7 @@ export abstract class TabsContainerItem implements OnChanges, AfterViewInit {
 
   private processIsActiveValueChanges(change: ComponentChange<this, boolean>): void {
     const newState: boolean = change?.currentValue;
-    if (isNullOrUndefined(newState)) {
+    if (isNil(newState)) {
       return;
     }
 

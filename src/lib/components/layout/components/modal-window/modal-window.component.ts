@@ -12,9 +12,9 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 
 import { ModalWindowData } from '../../../../../internal/declarations/interfaces/modal-window-data.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { ModalWindowService } from '../../services/modal-window.service';
 
 interface MouseDeltaPosition {
@@ -85,9 +85,7 @@ export class ModalWindowComponent implements AfterViewInit {
   }
 
   public get needTitleBlock(): boolean {
-    return (
-      !isNullOrUndefined(this.modalWindowData.title) || this.modalWindowData.canMove || this.modalWindowData.closeButton
-    );
+    return !isNil(this.modalWindowData.title) || this.modalWindowData.canMove || this.modalWindowData.closeButton;
   }
 
   public get isPadding(): string {
@@ -101,7 +99,7 @@ export class ModalWindowComponent implements AfterViewInit {
   }
 
   public processOverlayClick(): void {
-    if (isNullOrUndefined(this.modalWindowData.clickableOverlay) || !this.modalWindowData.clickableOverlay) {
+    if (isNil(this.modalWindowData.clickableOverlay) || !this.modalWindowData.clickableOverlay) {
       return;
     }
     this.closeWindow();

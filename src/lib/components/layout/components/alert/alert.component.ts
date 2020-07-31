@@ -1,8 +1,8 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 
 import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { AlertsService } from '../../services/alerts.service';
 
 @Component({
@@ -32,7 +32,7 @@ export class AlertComponent implements AfterContentInit {
   public ngAfterContentInit(): void {
     this.isVisible = true;
     this.changeDetector.detectChanges();
-    if (!isNullOrUndefined(this.alert.needClosed) && this.alert.needClosed) {
+    if (!isNil(this.alert.needClosed) && this.alert.needClosed) {
       return;
     }
     setTimeout(() => {

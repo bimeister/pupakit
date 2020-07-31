@@ -9,12 +9,12 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 import { Subscription, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
 
 import { VOID } from '../../../../../internal/constants/void.const';
 import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 type OnChangeCallback<T> = (value: T) => void;
 type OnTouchedCallback = VoidFunction;
@@ -37,7 +37,7 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, Aft
     private readonly ngControl: NgControl,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {
-    if (isNullOrUndefined(ngControl)) {
+    if (isNil(ngControl)) {
       throw new Error('NgControl passed to RadioGroupComponent is undefined');
     }
     this.ngControl.valueAccessor = this;

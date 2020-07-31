@@ -8,11 +8,11 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Subscription } from 'rxjs';
 import { filter, pairwise } from 'rxjs/operators';
 
 import { DraggableListChangeIndexEvent } from '../../../../../internal/declarations/interfaces/draggable-list-change-index-event.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DraggableListService } from '../../services/draggable-list.service';
 
 @Component({
@@ -45,13 +45,10 @@ export class DraggableListComponent implements OnDestroy {
     return this.draggableListService.currentDraggableListItemClone$
       .pipe(
         pairwise(),
-        filter(
-          ([oldElement, newElement]: [HTMLElement, HTMLElement]) =>
-            !isNullOrUndefined(oldElement) || !isNullOrUndefined(newElement)
-        )
+        filter(([oldElement, newElement]: [HTMLElement, HTMLElement]) => !isNil(oldElement) || !isNil(newElement))
       )
       .subscribe(([oldElement, newElement]: [HTMLElement, HTMLElement]) => {
-        if (isNullOrUndefined(newElement)) {
+        if (isNil(newElement)) {
           this.renderer.removeChild(this.draggableList.nativeElement, oldElement);
           return;
         }

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class SelectNewItemComponent<T> implements OnChanges {
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNullOrUndefined(changes)) {
+    if (isNil(changes)) {
       return;
     }
     this.processValueChange(changes?.value);

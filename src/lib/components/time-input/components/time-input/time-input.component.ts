@@ -1,9 +1,10 @@
-import { Component, ChangeDetectionStrategy, AfterViewInit, OnDestroy, Optional } from '@angular/core';
-import { ControlValueAccessor, FormArray, NgControl, AbstractControl } from '@angular/forms';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
-import { VOID } from '../../../../../internal/constants/void.const';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, Optional } from '@angular/core';
+import { AbstractControl, ControlValueAccessor, FormArray, NgControl } from '@angular/forms';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
-import { distinctUntilChanged, map, filter } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+
+import { VOID } from '../../../../../internal/constants/void.const';
 
 type OnChangeCallback = (value: number[]) => void;
 type OnTouchedCallback = VoidFunction;
@@ -63,7 +64,7 @@ export class TimeInputComponent implements AfterViewInit, OnDestroy, ControlValu
       });
   }
   private updateValidation(): Subscription {
-    if (isNullOrUndefined(this.ngControl)) {
+    if (isNil(this.ngControl)) {
       return new Subscription();
     }
 

@@ -14,6 +14,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -27,13 +28,12 @@ import {
 
 import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { HeightUnitBinding } from '../../../../../internal/declarations/interfaces/height-unit-binding.interface';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
 import { ExpanderBehavior } from '../../../../../internal/declarations/types/expander-behavior.type';
 import { Position } from '../../../../../internal/declarations/types/position.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { ExpanderComponent } from '../expander/expander.component';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 /** @dynamic */
 @Component({
@@ -85,14 +85,14 @@ export class ExpansibleComponent
     ),
     filter(
       (activeExpanderRef: ExpanderComponent | null): activeExpanderRef is NonNullable<ExpanderComponent> =>
-        !isNullOrUndefined(activeExpanderRef)
+        !isNil(activeExpanderRef)
     ),
     distinctUntilKeyChanged('id')
   );
 
   private readonly someExpanderIsActive$: Observable<boolean> = this.lastActiveExpander$.pipe(
     switchMap((lastActiveExpander: ExpanderComponent) => lastActiveExpander.activeControllerRef$),
-    map((activeControllerRef: ExpanderComponent | null) => !isNullOrUndefined(activeControllerRef))
+    map((activeControllerRef: ExpanderComponent | null) => !isNil(activeControllerRef))
   );
 
   private readonly activeExpander$: Observable<ExpanderComponent | null> = this.someExpanderIsActive$.pipe(
@@ -157,13 +157,12 @@ export class ExpansibleComponent
   private updateHostPositionOnPositionControllerMissmatchTargetPosition(): Subscription {
     return this.activeExpander$
       .pipe(
-        filter((activeExpander: ExpanderComponent) => !isNullOrUndefined(activeExpander)),
+        filter((activeExpander: ExpanderComponent) => !isNil(activeExpander)),
         switchMap(({ behavior$, positionMoveDelta$ }: ExpanderComponent) =>
           positionMoveDelta$.pipe(withLatestFrom(behavior$))
         ),
         filter(
-          ([positionMove, behavior]: [Position, ExpanderBehavior]) =>
-            Array.isArray(positionMove) && !isNullOrUndefined(behavior)
+          ([positionMove, behavior]: [Position, ExpanderBehavior]) => Array.isArray(positionMove) && !isNil(behavior)
         )
       )
       .subscribe(([[deltaXPx, deltaYPx], behavior]: [Position, ExpanderBehavior]) => {

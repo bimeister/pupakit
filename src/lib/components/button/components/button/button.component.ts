@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 
 import { ButtonIcon } from '../../../../../internal/declarations/interfaces/button-icon.interface';
 import { ButtonColor } from '../../../../../internal/declarations/types/button-color.type';
 import { ButtonKind } from '../../../../../internal/declarations/types/button-kind.type';
 import { ButtonSize } from '../../../../../internal/declarations/types/button-size.type';
 import { ButtonType } from '../../../../../internal/declarations/types/button-type.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-button',
@@ -33,7 +33,7 @@ export class ButtonComponent {
 
   public get resultClassList(): string[] {
     return [this.kind, this.size, this.color, this.loader ? 'with-loader' : null]
-      .filter((innerClass: string) => !isNullOrUndefined(innerClass))
+      .filter((innerClass: string) => !isNil(innerClass))
       .map((innerProperty: string) => `button_${innerProperty}`);
   }
 

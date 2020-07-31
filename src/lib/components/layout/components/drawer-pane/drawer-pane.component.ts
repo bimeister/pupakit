@@ -9,10 +9,10 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Subscription } from 'rxjs';
 
 import { ComponentDrawerData } from '../../../../../internal/declarations/interfaces/component-drawer-data.interface';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 import { DrawersService } from '../../services/drawers.service';
 
 @Component({
@@ -66,7 +66,7 @@ export class DrawerPaneComponent implements AfterViewInit, OnDestroy {
   }
 
   public processOverlayClick(): void {
-    if (isNullOrUndefined(this.componentDrawerData.clickableOverlay) || !this.componentDrawerData.clickableOverlay) {
+    if (isNil(this.componentDrawerData.clickableOverlay) || !this.componentDrawerData.clickableOverlay) {
       return;
     }
     this.closeDrawer();

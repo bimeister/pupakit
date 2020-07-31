@@ -1,6 +1,7 @@
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { CdkPortal } from '@angular/cdk/portal';
 import { Component, ElementRef, HostListener, Input, OnDestroy, ViewRef } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
@@ -8,7 +9,6 @@ import { VOID } from '../../../../../internal/constants/void.const';
 import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
 import { DroppableVerticalPosition } from '../../../../../internal/declarations/types/droppable-vertical-position.type';
 import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
-import { isNullOrUndefined } from '../../../../../internal/helpers/is-null-or-undefined.helper';
 
 @Component({
   selector: 'pupa-droppable',
@@ -41,7 +41,7 @@ export class DroppableComponent implements OnDestroy {
 
   @HostListener('click')
   public open(): void {
-    if (isNullOrUndefined(this.triggerRef) || isNullOrUndefined(this.contentRef)) {
+    if (isNil(this.triggerRef) || isNil(this.contentRef)) {
       return;
     }
 
@@ -70,7 +70,7 @@ export class DroppableComponent implements OnDestroy {
   }
 
   public close(): void {
-    if (isNullOrUndefined(this.overlayRef) || isNullOrUndefined(this.viewRef)) {
+    if (isNil(this.overlayRef) || isNil(this.viewRef)) {
       return;
     }
 

@@ -1,8 +1,9 @@
+import { isNil } from '@meistersoft/utilities';
+
 import { isDate } from './is-date.helper';
-import { isNullOrUndefined } from './is-null-or-undefined.helper';
 
 export function dateClearTime(date: Date): Date {
-  if (isNullOrUndefined(date) || isDate(date)) {
+  if (isNil(date) || isDate(date)) {
     return date;
   }
   const sanitizedDate: Date = date;

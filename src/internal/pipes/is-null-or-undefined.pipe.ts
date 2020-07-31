@@ -1,12 +1,11 @@
 import { Pipe, PipeTransform } from '@angular/core';
-
-import { isNullOrUndefined } from '../helpers/is-null-or-undefined.helper';
+import { isNil } from '@meistersoft/utilities';
 
 @Pipe({
   name: 'isNullOrUndefined'
 })
 export class IsNullOrUndefinedPipe implements PipeTransform {
   public transform(entity: unknown): boolean {
-    return isNullOrUndefined(entity);
+    return isNil(entity);
   }
 }

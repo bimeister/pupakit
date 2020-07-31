@@ -1,7 +1,7 @@
-import { isNullOrUndefined } from './is-null-or-undefined.helper';
+import { isNil } from '@meistersoft/utilities';
 
 export const getPropertyValueByPath = (source: unknown, path: string): unknown => {
-  if (isNullOrUndefined(source) || isNullOrUndefined(path)) {
+  if (isNil(source) || isNil(path)) {
     return null;
   }
 

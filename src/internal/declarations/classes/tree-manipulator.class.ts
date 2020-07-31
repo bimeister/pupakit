@@ -2,10 +2,10 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ElementRef } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
-import { isNullOrUndefined } from '../../helpers/is-null-or-undefined.helper';
 import { TreeType } from '../enums/tree-type.enum';
 import { TreeManipulatorDataOrigin } from '../types/tree-manipulator-data-origin.type';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
@@ -88,7 +88,7 @@ export class TreeManipulator {
 
   public toggleExpansion(node: FlatTreeItem): void {
     const nodeId: string = node?.id;
-    if (isNullOrUndefined(nodeId)) {
+    if (isNil(nodeId)) {
       return;
     }
     this.expandedItemsIds$
@@ -138,8 +138,8 @@ export class TreeManipulator {
 
   private refreshViewPort(): void {
     combineLatest([
-      this.viewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNullOrUndefined(viewPort))),
-      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNullOrUndefined(viewPort)))
+      this.viewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort))),
+      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)))
     ])
       .pipe(take(1))
       .subscribe(([viewPort, skeletonViewPort]: [CdkVirtualScrollViewport, CdkVirtualScrollViewport]) => {
@@ -200,7 +200,7 @@ export class TreeManipulator {
   private updateRangeOnDataExtraction(): Subscription {
     return this.viewPortReference$
       .pipe(
-        filter((viewPort: CdkVirtualScrollViewport) => !isNullOrUndefined(viewPort)),
+        filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)),
         switchMap((viewPort: CdkVirtualScrollViewport) => viewPort.renderedRangeStream)
       )
       .subscribe((range: ListRange) => {
