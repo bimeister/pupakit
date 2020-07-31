@@ -11,7 +11,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { filterNotNil, isNil } from '@meistersoft/utilities';
@@ -23,15 +23,11 @@ import {
   map,
   shareReplay,
   switchMap,
-  withLatestFrom,
+  withLatestFrom
 } from 'rxjs/operators';
 
-import {
-  UnitHeightStyleChangesProcessor,
-} from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
-import {
-  UnitWidthStyleChangesProcessor,
-} from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
+import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
+import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { HeightUnitBinding } from '../../../../../internal/declarations/interfaces/height-unit-binding.interface';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';

@@ -4,9 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 
 import { ComponentDrawerData } from '../../../../internal/declarations/interfaces/component-drawer-data.interface';
-import {
-  LayoutDrawerConfiguration,
-} from '../../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
+import { LayoutDrawerConfiguration } from '../../../../internal/declarations/interfaces/layout-drawer-configuration.interface';
 
 @Injectable({
   providedIn: 'root'

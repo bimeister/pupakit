@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnDestroy, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnDestroy,
+  Output
+} from '@angular/core';
 import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, skipWhile, take } from 'rxjs/operators';
