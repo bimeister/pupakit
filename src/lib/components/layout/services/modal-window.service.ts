@@ -1,10 +1,10 @@
 import { ComponentFactory, Injectable, Injector } from '@angular/core';
+import { mapToVoid } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { filter, map, mapTo, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 
 import { ModalWindowConfiguration } from '../../../../internal/declarations/interfaces/modal-window-configuration.interface';
 import { ModalWindowData } from '../../../../internal/declarations/interfaces/modal-window-data.interface';
-import { VOID } from '../../../../internal/constants/void.const';
 
 @Injectable({
   providedIn: 'root'
@@ -38,7 +38,7 @@ export class ModalWindowService {
     return this.close$.pipe(
       filter((modalWindowId: string) => modalWindowId === windowId),
       take(1),
-      mapTo(VOID)
+      mapToVoid()
     );
   }
 

@@ -11,10 +11,10 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -23,11 +23,15 @@ import {
   map,
   shareReplay,
   switchMap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
 
-import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
-import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
+import {
+  UnitHeightStyleChangesProcessor,
+} from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
+import {
+  UnitWidthStyleChangesProcessor,
+} from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { HeightUnitBinding } from '../../../../../internal/declarations/interfaces/height-unit-binding.interface';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
@@ -157,7 +161,7 @@ export class ExpansibleComponent
   private updateHostPositionOnPositionControllerMissmatchTargetPosition(): Subscription {
     return this.activeExpander$
       .pipe(
-        filter((activeExpander: ExpanderComponent) => !isNil(activeExpander)),
+        filterNotNil(),
         switchMap(({ behavior$, positionMoveDelta$ }: ExpanderComponent) =>
           positionMoveDelta$.pipe(withLatestFrom(behavior$))
         ),

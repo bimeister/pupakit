@@ -11,9 +11,9 @@ import {
   OnInit,
   Output,
   Predicate,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, interval, Observable, of, Subscription, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, throttle } from 'rxjs/operators';
 
@@ -423,7 +423,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
         }
         return innerData[Data.trigger] ? innerData[Data.rotation] : null;
       }),
-      filter((innerValue: number) => !isNil(innerValue))
+      filterNotNil()
     );
     const isCentralValueVisible$: Observable<boolean> = combineLatest([
       this.activeButton$,
@@ -480,7 +480,7 @@ export class WasherComponent implements OnInit, OnChanges, OnDestroy {
         }
         return innerData[Data.trigger] ? innerData[Data.coordX] : undefined;
       }),
-      filter((innerValue: number) => !isNil(innerValue)),
+      filterNotNil(),
       map((mouseOffsetX: number) => {
         const elementOffsetX: number = this.arcElement.nativeElement.getBoundingClientRect().left;
         const mouseOffsetXfromElement: number = mouseOffsetX - elementOffsetX;
