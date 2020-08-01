@@ -31,7 +31,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, debounceTime, filter, observeOn, take } from 'rxjs/operators';
+import { debounce, filter, observeOn, take } from 'rxjs/operators';
 
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -67,7 +67,6 @@ const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: numbe
 const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
   return !isNil(element) && !element.isExpandable && element.isElement;
 };
-const NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS: number = 500;
 const TREE_ITEM_SIZE_PX: number = 28;
 @Component({
   selector: 'pupa-tree',
@@ -458,14 +457,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private emitExpandedItemOnNodeExpansion(): Subscription {
     return this.manipulator.itemToExpand$
-      .pipe(filter((item: FlatTreeItem) => !isNil(item)))
+      .pipe(filterNotNil())
       .subscribe((item: FlatTreeItem) => this.expandedNode.emit(item));
   }
 
   private detectChangesOnNodeExpansion(): Subscription {
-    return this.manipulator.itemToExpand$
-      .pipe(filterNotNil(), debounceTime(NODE_EXPANSION_CHANGE_DETECTION_DEBOUNCE_TIME_MS))
-      .subscribe(() => this.changeDetectorRef.markForCheck());
+    return this.manipulator.itemToExpand$.pipe(filterNotNil()).subscribe(() => this.changeDetectorRef.markForCheck());
   }
 
   private scrollByIndexOnEmit(): Subscription {
@@ -490,7 +487,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private scrollViewportDuringDragging(): Subscription {
     return interval(0)
-      .pipe(observeOn(animationFrameScheduler), filterNotNil())
+      .pipe(
+        observeOn(animationFrameScheduler),
+        filter(() => !isNil(this.scrollDirection))
+      )
       .subscribe(() => {
         const scrollingSpeed: number = 5;
         const offsetDelta: number = this.scrollDirection === 'up' ? -scrollingSpeed : scrollingSpeed;
