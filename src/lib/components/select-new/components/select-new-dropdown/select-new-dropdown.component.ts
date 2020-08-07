@@ -1,13 +1,13 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
+const CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN: number = 100;
 
 @Component({
   selector: 'pupa-select-new-dropdown',
@@ -39,6 +39,12 @@ export class SelectNewDropdownComponent<T> {
     filter((isExpanded: boolean) => isExpanded),
     switchMap(() => this.selectNewStateService.dropDownTriggerButtonWidthPx$)
   );
+
+  public readonly overlayPositions: ConnectionPositionPair[] = [
+    new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
+    new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
+  ];
+  public readonly overlayViewportMargin: number = CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN;
 
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
