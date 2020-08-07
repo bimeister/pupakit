@@ -3,6 +3,9 @@
   [cdkConnectedOverlayOrigin]="dropDownOverlayOrigin$ | async"
   [cdkConnectedOverlayOpen]="isExpanded$ | async"
   [cdkConnectedOverlayWidth]="dropDownTriggerButtonWidthPx$ | async"
+  [cdkConnectedOverlayPositions]="overlayPositions"
+  [cdkConnectedOverlayFlexibleDimensions]="true"
+  [cdkConnectedOverlayViewportMargin]="overlayViewportMargin"
 >
   <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
     <ng-content></ng-content>
