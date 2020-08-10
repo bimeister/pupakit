@@ -49,7 +49,9 @@ export class SelectNewDropdownComponent<T> {
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
   @HostListener('window:resize')
-  public processWindowResizeEvent(): void {
+  @HostListener('window:wheel')
+  @HostListener('window:touchstart')
+  public processWindowEventsForClose(): void {
     this.selectNewStateService.collapse();
   }
 }
