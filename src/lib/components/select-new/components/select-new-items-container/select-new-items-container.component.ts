@@ -11,7 +11,7 @@ export class SelectNewItemsContainerComponent {
   @HostListener('click', ['$event'])
   @HostListener('wheel', ['$event'])
   @HostListener('touchstart', ['$event'])
-  public processClick(event: Event): void {
+  public stopPropagation(event: Event): void {
     event.stopPropagation();
   }
 }
