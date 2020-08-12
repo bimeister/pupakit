@@ -32,6 +32,7 @@ export { DropdownMenuModule } from './lib/components/dropdown-menu/dropdown-menu
 export { TreeModule } from './lib/components/tree/tree.module';
 export { WasherModule } from './lib/components/washer/washer.module';
 export { VerticalTabsModule } from './lib/components/vertical-tabs/vertical-tabs.module';
+
 export * from './lib/components/api';
 export {
   DropdownItem,
@@ -51,5 +52,7 @@ export {
   DatagridManipulator,
   DatagridThemes,
   ButtonColor,
-  GridRowEvent
+  GridRowEvent,
+  GridState,
+  SortModel
 } from './internal/api';
