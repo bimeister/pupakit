@@ -1,4 +1,4 @@
-FROM node:13-slim as build-pupakit
+FROM node:14-slim as build-pupakit
 RUN apt update && apt-get install jq -y
 
 WORKDIR /docker/build-pupakit
