@@ -1,5 +1,5 @@
+import { getUuid } from '@meistersoft/utilities';
 import { storiesOf } from '@storybook/angular';
-import { v4 as uuid } from 'uuid';
 
 import { FlatTreeItem } from '../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeModule } from './tree.module';
@@ -31,7 +31,7 @@ const dataOrigin: FlatTreeItem[] = [
   new FlatTreeItem(false, '🙊', 1, null),
   new FlatTreeItem(false, '🙉', 1, null),
   new FlatTreeItem(false, '🙈', 1, null)
-].map((item: FlatTreeItem) => ({ ...item, id: uuid() }));
+].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
 
 storiesOf('Tree', module).add('default', () => ({
   moduleMetadata: {
