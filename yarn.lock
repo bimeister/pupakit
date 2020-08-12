@@ -164,10 +164,12 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/cdk@^9.2.4":
-  version "9.2.4"
-  resolved "http://npm.meistersoft.ru:4873/@angular%2fcdk/-/cdk-9.2.4.tgz#8413958bd275e4c34be3b96f56444671dd30ba93"
-  integrity sha512-iw2+qHMXHYVC6K/fttHeNHIieSKiTEodVutZoOEcBu9rmRTGbLB26V/CRsfIRmA1RBk+uFYWc6UQZnMC3RdnJQ==
+"@angular/cdk@^10.1.3":
+  version "10.1.3"
+  resolved "http://npm.meistersoft.ru:4873/@angular%2fcdk/-/cdk-10.1.3.tgz#4a8d7dcdbe344b4d7e8e0ed5c25c19b78313b494"
+  integrity sha512-xMV1M41mfuaQod4rtAG/duYiWffGIC2C87E1YuyHTh8SEcHopGVRQd2C8PWH+iwinPbes7AjU1uzCEvmOYikrA==
+  dependencies:
+    tslib "^2.0.0"
   optionalDependencies:
     parse5 "^5.0.0"
 
