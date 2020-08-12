@@ -8,6 +8,7 @@ import { DatagridTemplateRendererComponent } from '../../../lib/components/datag
 import { DatagridColDef } from '../interfaces/datagrid-col-def.interface';
 import { DatagridColumnSetting } from '../interfaces/datagrid-column-setting.interface';
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
+import { GridState } from '../interfaces/grid-state.interface';
 
 export class DatagridManipulator<rowDataT> {
   private get columnApi(): ColumnApi {
@@ -21,6 +22,7 @@ export class DatagridManipulator<rowDataT> {
   public get config(): DatagridManipulatorConfiguration<rowDataT> {
     return this.configuration;
   }
+
   private readonly subscription: Subscription = new Subscription();
   private gridApi: GridApi;
 
@@ -105,6 +107,18 @@ export class DatagridManipulator<rowDataT> {
 
   public resetRowHeights(): void {
     this.gridApi.resetRowHeights();
+  }
+
+  public getGridState(): GridState {
+    return {
+      columnState: this.columnApi.getColumnState(),
+      sortModel: this.gridApi.getSortModel()
+    };
+  }
+
+  public setGridState(gridState: GridState): void {
+    this.columnApi.setColumnState(gridState.columnState);
+    this.gridApi.setSortModel(gridState.sortModel);
   }
 
   private makeColumnsFitGridWidth(): void {
