@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { v4 } from 'uuid';
+import { getUuid } from '@meistersoft/utilities';
 
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 import { DropdownItem } from '../../../src/internal/declarations/interfaces/dropdown-item.interface';
@@ -42,7 +42,7 @@ export class SelectDemoComponent {
     new FlatTreeItem(false, '🙊', 1, null, null, true),
     new FlatTreeItem(false, '🙉', 1, null, null, true),
     new FlatTreeItem(false, '🙈', 1, null, null, true)
-  ].map((item: FlatTreeItem) => ({ ...item, id: v4() }));
+  ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
 
   public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
   Beatae cum cupiditate eos ex facilis, fuga fugiat modi natus nisi obcaecati possimus reprehenderit.

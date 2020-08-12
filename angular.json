@@ -76,17 +76,11 @@
             "main": "demo/main.ts",
             "outputPath": "./demo/docs",
             "polyfills": "demo/polyfills.ts",
-            "scripts": [
-              "./node_modules/ionicons/dist/ionicons.js"
-            ],
+            "scripts": ["./node_modules/ionicons/dist/ionicons.js"],
             "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/styles/"
-              ]
+              "includePaths": ["src/styles/"]
             },
-            "styles": [
-              "demo/styles/styles.scss"
-            ],
+            "styles": ["demo/styles/styles.scss"],
             "tsConfig": "./tsconfig.app.json"
           }
         },

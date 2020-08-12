@@ -10,9 +10,8 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { getUuid, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
-import { v4 as uuid } from 'uuid';
 
 import { PositionController } from '../../../../../internal/declarations/classes/position-controller.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -48,7 +47,7 @@ export class ExpanderComponent extends PositionController implements OnChanges {
 
   public readonly behavior$: BehaviorSubject<ExpanderBehavior> = new BehaviorSubject<ExpanderBehavior>(null);
 
-  public readonly id: Uuid = uuid();
+  public readonly id: Uuid = getUuid();
 
   constructor(
     protected readonly renderer: Renderer2,
