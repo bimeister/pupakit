@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, HostListener, Input, OnChanges } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, HostListener, Input, OnChanges, Directive } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { Subject } from 'rxjs';
 import { v4 as guidGenerate } from 'uuid';
@@ -7,6 +7,7 @@ import { ComponentChange } from '../interfaces/component-change.interface';
 import { ComponentChanges } from '../interfaces/component-changes.interface';
 import { Uuid } from '../types/uuid.type';
 
+@Directive()
 export abstract class TabsContainerItem implements OnChanges, AfterViewInit {
   public readonly id: Uuid = guidGenerate();
 

@@ -72,16 +72,21 @@
                 "output": "/assets"
               }
             ],
-            "es5BrowserSupport": true,
             "index": "demo/index.html",
             "main": "demo/main.ts",
             "outputPath": "./demo/docs",
             "polyfills": "demo/polyfills.ts",
-            "scripts": ["./node_modules/ionicons/dist/ionicons.js"],
+            "scripts": [
+              "./node_modules/ionicons/dist/ionicons.js"
+            ],
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles/"]
+              "includePaths": [
+                "src/styles/"
+              ]
             },
-            "styles": ["demo/styles/styles.scss"],
+            "styles": [
+              "demo/styles/styles.scss"
+            ],
             "tsConfig": "./tsconfig.app.json"
           }
         },
@@ -230,7 +235,7 @@
           "inlineStyle": false,
           "inlineTemplate": false,
           "skipImport": false,
-          "spec": false,
+          "skipTests": true,
           "style": "scss",
           "viewEncapsulation": "Emulated"
         },
@@ -238,24 +243,24 @@
           "export": true,
           "flat": true,
           "skipImport": false,
-          "spec": true
+          "skipTests": false
         },
         "@schematics/angular:module": {
           "commonModule": false,
           "flat": false,
           "routing": false,
           "routingScope": "Child",
-          "spec": false
+          "skipTests": true
         },
         "@schematics/angular:pipe": {
           "export": true,
           "flat": true,
           "skipImport": false,
-          "spec": true
+          "skipTests": false
         },
         "@schematics/angular:service": {
           "flat": true,
-          "spec": false
+          "skipTests": true
         }
       },
       "sourceRoot": "./src"
