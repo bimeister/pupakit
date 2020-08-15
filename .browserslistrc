@@ -4,4 +4,4 @@ Edge 79
 Firefox >= 74
 Safari >= 13
 iOS >= 13
-Opera <= 68
+Opera >=65 and not Opera 69

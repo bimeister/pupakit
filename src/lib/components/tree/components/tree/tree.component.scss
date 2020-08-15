@@ -59,7 +59,7 @@
   &__expansion-button {
     all: unset;
     display: flex;
-    flex-direction: center;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: rems(1.75);
@@ -100,7 +100,7 @@
     box-sizing: border-box;
     appearance: none;
     display: flex;
-    flex-direction: center;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     cursor: pointer;
