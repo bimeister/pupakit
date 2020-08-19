@@ -1,4 +1,4 @@
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -31,13 +31,14 @@ export class SelectNewStateService<T> {
     null
   );
 
-  public readonly dropDownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin> = new BehaviorSubject<CdkOverlayOrigin>(
+  public readonly dropdownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin> = new BehaviorSubject<CdkOverlayOrigin>(
     null
   );
-  private readonly dropDownTriggerButton$: BehaviorSubject<HTMLButtonElement> = new BehaviorSubject<HTMLButtonElement>(
+  private readonly dropdownTriggerButton$: BehaviorSubject<HTMLButtonElement> = new BehaviorSubject<HTMLButtonElement>(
     null
   );
-  public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.dropDownTriggerButton$.pipe(
+  public readonly dropdownOverlayRef$: BehaviorSubject<OverlayRef> = new BehaviorSubject<OverlayRef>(null);
+  public readonly dropdownTriggerButtonWidthPx$: Observable<number> = this.dropdownTriggerButton$.pipe(
     map((button: HTMLButtonElement | null) => {
       if (isNil(button)) {
         return undefined;
@@ -62,8 +63,12 @@ export class SelectNewStateService<T> {
   }
 
   public defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void {
-    this.dropDownOverlayOrigin$.next(overlayOrigin);
-    this.dropDownTriggerButton$.next(buttonElement);
+    this.dropdownOverlayOrigin$.next(overlayOrigin);
+    this.dropdownTriggerButton$.next(buttonElement);
+  }
+
+  public defineDropdownOverlayRef(overlayRef: OverlayRef): void {
+    this.dropdownOverlayRef$.next(overlayRef);
   }
 
   public defineOnChangeCallback(onChange: OnChangeCallback<T[]>): void {

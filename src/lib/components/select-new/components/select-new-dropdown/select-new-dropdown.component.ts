@@ -1,9 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CdkOverlayOrigin, ConnectionPositionPair } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-import { Observable } from 'rxjs';
+import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { filterTruthy, isNil } from '@meistersoft/utilities';
+import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
@@ -24,7 +25,11 @@ const CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN: number = 100;
     ])
   ]
 })
-export class SelectNewDropdownComponent<T> {
+export class SelectNewDropdownComponent<T> implements OnInit, OnDestroy {
+  private readonly subscription: Subscription = new Subscription();
+
+  @ViewChild(CdkConnectedOverlay) private readonly cdkConnectedOverlay: CdkConnectedOverlay;
+
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
   public readonly animationState$: Observable<string> = this.isExpanded$.pipe(
     distinctUntilChanged(),
@@ -33,11 +38,11 @@ export class SelectNewDropdownComponent<T> {
 
   public readonly dropDownOverlayOrigin$: Observable<
     CdkOverlayOrigin
-  > = this.selectNewStateService.dropDownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
+  > = this.selectNewStateService.dropdownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
 
   public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
     filter((isExpanded: boolean) => isExpanded),
-    switchMap(() => this.selectNewStateService.dropDownTriggerButtonWidthPx$)
+    switchMap(() => this.selectNewStateService.dropdownTriggerButtonWidthPx$)
   );
 
   public readonly overlayPositions: ConnectionPositionPair[] = [
@@ -48,10 +53,22 @@ export class SelectNewDropdownComponent<T> {
 
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
-  @HostListener('window:resize')
-  @HostListener('window:wheel')
-  @HostListener('window:touchstart')
-  public processWindowEventsForClose(): void {
-    this.selectNewStateService.collapse();
+  public ngOnInit(): void {
+    this.subscription.add(this.handleOverlayRefOnOpen());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private handleOverlayRefOnOpen(): Subscription {
+    return this.isExpanded$
+      .pipe(
+        filterTruthy(),
+        map(() => this.cdkConnectedOverlay.overlayRef)
+      )
+      .subscribe((overlayRef: OverlayRef) => {
+        this.selectNewStateService.defineDropdownOverlayRef(overlayRef);
+      });
   }
 }
