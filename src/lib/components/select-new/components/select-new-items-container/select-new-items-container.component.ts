@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } f
 })
 export class SelectNewItemsContainerComponent {
   @HostListener('click', ['$event'])
-  @HostListener('wheel', ['$event'])
   @HostListener('touchstart', ['$event'])
   public stopPropagation(event: Event): void {
     event.stopPropagation();

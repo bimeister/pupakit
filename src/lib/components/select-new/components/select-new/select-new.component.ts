@@ -1,3 +1,4 @@
+import { OverlayRef } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,7 +10,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil } from '@meistersoft/utilities';
+import { getElementAllNestedChildren, isNil } from '@meistersoft/utilities';
+import { map, take } from 'rxjs/operators';
 
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -40,15 +42,42 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
     ngControl.valueAccessor = this;
   }
 
+  @HostListener('window:resize', ['$event'])
+  @HostListener('window:touchstart', ['$event'])
   @HostListener('window:click', ['$event'])
-  public processClick(event: MouseEvent): void {
-    const target: EventTarget = event.target;
-    const currentElement: Element = this.elementRef.nativeElement;
+  @HostListener('window:wheel', ['$event'])
+  public closeOnOuterEvents(event: Event): void {
+    const eventTarget: EventTarget = event.target;
 
-    if (SelectNewComponent.targetExistsInCurrentElementChildren(target, currentElement)) {
+    if (!(eventTarget instanceof Element)) {
+      this.selectNewStateService.collapse();
       return;
     }
-    this.selectNewStateService.collapse();
+
+    this.selectNewStateService.dropdownOverlayRef$
+      .pipe(
+        take(1),
+        map((overlayRef: OverlayRef | null | undefined) => {
+          return isNil(overlayRef) ? null : overlayRef.overlayElement;
+        })
+      )
+      .subscribe((overlayElement: Element | null) => {
+        const currentComponentElement: Element = this.elementRef.nativeElement;
+        const currentComponentElementChildren: Element[] = getElementAllNestedChildren(currentComponentElement);
+
+        const dropdownElementChildren: Element[] = isNil(overlayElement)
+          ? []
+          : getElementAllNestedChildren(overlayElement);
+
+        const dropdownElements: Element[] = [...currentComponentElementChildren, ...dropdownElementChildren];
+        const isInnerEvent: boolean = dropdownElements.includes(eventTarget);
+
+        if (isInnerEvent) {
+          return;
+        }
+
+        this.selectNewStateService.collapse();
+      });
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -82,26 +111,5 @@ export class SelectNewComponent<T> implements OnChanges, ControlValueAccessor {
     }
 
     this.selectNewStateService.setMultiSelectionState(Boolean(updatedState));
-  }
-
-  private static targetExistsInCurrentElementChildren(target: EventTarget, currentElement: Element): boolean {
-    if (target instanceof Element) {
-      return SelectNewComponent.allElementChildren(currentElement).includes(target);
-    }
-
-    return false;
-  }
-
-  private static allElementChildren(currentElement: Element, extractedChildren: Element[] = []): Element[] {
-    if (isNil(currentElement)) {
-      return extractedChildren;
-    }
-
-    const currentLevelChildren: Element[] = Array.from(currentElement.children);
-    const nestedLevelsChildren: Element[] = currentLevelChildren
-      .map((element: Element) => SelectNewComponent.allElementChildren(element, currentLevelChildren))
-      .flat(1);
-
-    return [...extractedChildren, ...nestedLevelsChildren];
   }
 }
