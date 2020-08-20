@@ -22,11 +22,12 @@ type TreePropertiesTransfer = Pick<
   'flatDataOrigin' | 'treeNodesOrigin' | 'treeElementsOrigin' | 'trackBy' | 'expandedNode'
 >;
 
+/** @deprecated remove ViewEncapsulation.None when tree styling is available */
 @Component({
   selector: 'pupa-select-new-tree',
   templateUrl: './select-new-tree.component.html',
   styleUrls: ['./select-new-tree.component.scss'],
-  encapsulation: ViewEncapsulation.Emulated,
+  encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectNewTreeComponent implements TreePropertiesTransfer {

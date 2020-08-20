@@ -112,6 +112,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @Input() public readonly hasDragAndDrop: boolean = false;
   @Input() public readonly hideRoot: boolean = false;
 
+  @Input() public readonly nodesWithoutPadding: boolean = false;
+
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
   @Output() private readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
 
