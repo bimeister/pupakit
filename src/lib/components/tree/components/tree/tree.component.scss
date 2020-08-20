@@ -57,7 +57,8 @@
   white-space: nowrap;
 
   &__expansion-button {
-    all: unset;
+    border: none;
+    background: none;
     display: flex;
     flex-direction: column;
     align-items: center;

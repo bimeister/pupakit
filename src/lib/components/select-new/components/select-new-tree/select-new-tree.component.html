@@ -1,4 +1,4 @@
-<section class="tree-container" [ngSwitch]="type" (click)="processClick($event)">
+<section class="select-tree-container" [ngSwitch]="type" (click)="processClick($event)">
   <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
   <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
 </section>
@@ -12,7 +12,9 @@
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
     [hideRoot]="hideRoot"
+    [nodesWithoutPadding]="true"
     type="flat"
+    class="tree"
     (expandedNode)="processNodeExpansion($event)"
   ></pupa-tree>
 </ng-template>
@@ -27,13 +29,15 @@
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
     [hideRoot]="hideRoot"
+    [nodesWithoutPadding]="true"
     type="hierarchical"
+    class="tree"
     (expandedNode)="processNodeExpansion($event)"
   ></pupa-tree>
 </ng-template>
 
 <ng-template #nodeTemplate let-node="node">
-  <div class="tree-item-custom-template" (click)="processNodeClick(node)">
+  <div class="select-tree-item-custom-template" (click)="processNodeClick(node)">
     {{ node?.name }}
   </div>
 </ng-template>

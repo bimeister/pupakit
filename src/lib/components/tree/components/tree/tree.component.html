@@ -11,7 +11,7 @@
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: isElement"
         [cdkTreeNodeToggleRecursive]="true"
-        [cdkTreeNodePaddingIndent]="10"
+        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
@@ -47,7 +47,7 @@
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasNoChild"
         [cdkTreeNodeToggleRecursive]="true"
-        [cdkTreeNodePaddingIndent]="10"
+        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
@@ -86,7 +86,7 @@
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasChild"
         [cdkTreeNodeToggleRecursive]="true"
-        [cdkTreeNodePaddingIndent]="10"
+        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
