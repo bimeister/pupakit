@@ -8,7 +8,6 @@ import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
-const CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN: number = 100;
 
 @Component({
   selector: 'pupa-select-new-dropdown',
@@ -18,8 +17,8 @@ const CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN: number = 100;
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('dropdownExpanded', [
-      state('void', style({ height: 0, margin: '0', transform: 'translateY(-8px)' })),
-      state('expanded', style({ height: '*', margin: '4px 0', transform: 'translateY(0)' })),
+      state('void', style({ margin: '0', transform: 'translateY(-8px)', opacity: 0 })),
+      state('expanded', style({ margin: '4px 0', transform: 'translateY(0)', opacity: 1 })),
       transition('void => expanded', [animate(`${ANIMATION_DURATION_MS}ms ease`)]),
       transition('expanded => void', [animate(`${ANIMATION_DURATION_MS}ms ease`)])
     ])
@@ -49,7 +48,6 @@ export class SelectNewDropdownComponent<T> implements OnInit, OnDestroy {
     new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
     new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
   ];
-  public readonly overlayViewportMargin: number = CDK_CONNECTED_OVERLAY_VIEWPORT_MARGIN;
 
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 

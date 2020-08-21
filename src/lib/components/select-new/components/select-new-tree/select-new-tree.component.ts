@@ -9,7 +9,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { Observable } from 'rxjs';
-
+import { map, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
 import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
@@ -72,7 +72,14 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
     if (!isElement) {
       return;
     }
-    this.selectNewStateService.processSelection(id);
+    this.selectedNodesIds$
+      .pipe(
+        take(1),
+        map((selectedNodeIds: Uuid[]) => selectedNodeIds.length === 1 && selectedNodeIds[0] === id)
+      )
+      .subscribe((isAlreadyNodeIdExist: boolean) =>
+        isAlreadyNodeIdExist ? this.selectNewStateService.collapse() : this.selectNewStateService.processSelection(id)
+      );
   }
 
   public processClick(event: Event): void {
