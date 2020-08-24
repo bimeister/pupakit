@@ -1,8 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { filterTruthy, isNil } from '@meistersoft/utilities';
-import { Observable, Subscription } from 'rxjs';
+import { filterTruthy, isNil, filterNotNil } from '@meistersoft/utilities';
+import { Observable, Subscription, BehaviorSubject, combineLatest } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
 import { SelectNewStateService } from '../../services/select-new-state.service';
@@ -49,6 +49,8 @@ export class SelectNewDropdownComponent<T> implements OnInit, OnDestroy {
     new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
   ];
 
+  public readonly isOverlayAttached$: BehaviorSubject<boolean> = new BehaviorSubject(null);
+
   constructor(private readonly selectNewStateService: SelectNewStateService<T>) {}
 
   public ngOnInit(): void {
@@ -59,9 +61,18 @@ export class SelectNewDropdownComponent<T> implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public handleAttachOverlay(): void {
+    this.isOverlayAttached$.next(true);
+  }
+
+  public handleDetachOverlay(): void {
+    this.isOverlayAttached$.next(false);
+  }
+
   private handleOverlayRefOnOpen(): Subscription {
-    return this.isExpanded$
+    return combineLatest([this.isExpanded$, this.isOverlayAttached$.pipe(filterNotNil())])
       .pipe(
+        map(([isExpanded, isOverlayAttached]: boolean[]) => isExpanded && isOverlayAttached),
         filterTruthy(),
         map(() => this.cdkConnectedOverlay.overlayRef)
       )
