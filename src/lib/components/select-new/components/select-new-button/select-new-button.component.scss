@@ -9,8 +9,6 @@ $width_icon: rems(1);
 }
 
 .select-button {
-  all: unset;
-
   box-sizing: border-box;
 
   width: 100%;
@@ -46,6 +44,11 @@ $width_icon: rems(1);
     padding: 0 px(6) 0 0;
 
     width: calc(100% - #{$width_icon});
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
 
     overflow: hidden;
     text-overflow: ellipsis;
