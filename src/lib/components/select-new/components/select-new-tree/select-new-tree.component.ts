@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
 import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
@@ -31,6 +32,8 @@ type TreePropertiesTransfer = Pick<
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectNewTreeComponent implements TreePropertiesTransfer {
+  public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
+
   /**
    * @description
    * Already flatten tree data source.
