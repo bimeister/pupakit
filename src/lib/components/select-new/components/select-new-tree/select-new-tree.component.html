@@ -1,4 +1,4 @@
-<section class="select-tree-container" [ngSwitch]="type" (click)="processClick($event)">
+<section class="select-tree-container" *ngIf="isExpanded$ | async" [ngSwitch]="type" (click)="processClick($event)">
   <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
   <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
 </section>
