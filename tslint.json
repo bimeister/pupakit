@@ -6,6 +6,7 @@
   "rules": {
     "array-type": [true, "array"],
     "arrow-return-shorthand": true,
+    "ban": [true, "tapLog"],
     "ban-comma-operator": true,
     "ban-types": [true, ["Object"], ["Promise"]],
     "callable-types": true,
