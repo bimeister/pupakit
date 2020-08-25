@@ -41,7 +41,10 @@ export class SelectDemoComponent {
     new FlatTreeItem(false, '🐵', 1, null, null, true),
     new FlatTreeItem(false, '🙊', 1, null, null, true),
     new FlatTreeItem(false, '🙉', 1, null, null, true),
-    new FlatTreeItem(false, '🙈', 1, null, null, true)
+    new FlatTreeItem(false, '🙈', 1, null, null, true),
+    ...new Array(leafElementsCount)
+      .fill(null)
+      .map((_, index: number) => new FlatTreeItem(false, `🛸 ${index + 1}`, 0, null, null, true))
   ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
 
   public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
