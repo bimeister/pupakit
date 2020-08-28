@@ -8,7 +8,7 @@ import {
   TrackByFunction,
   ViewEncapsulation
 } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -23,6 +23,10 @@ type TreePropertiesTransfer = Pick<
   'flatDataOrigin' | 'treeNodesOrigin' | 'treeElementsOrigin' | 'trackBy' | 'expandedNode'
 >;
 
+const MAX_SELECT_TREE_HEIGHT_PX: number = 300;
+const TREE_ITEM_SIZE_PX: number = 30;
+const EMPTY_SPACE_PX: number = 12;
+
 /** @deprecated remove ViewEncapsulation.None when tree styling is available */
 @Component({
   selector: 'pupa-select-new-tree',
@@ -33,6 +37,8 @@ type TreePropertiesTransfer = Pick<
 })
 export class SelectNewTreeComponent implements TreePropertiesTransfer {
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
+
+  public readonly adaptiveTreeHeight$: BehaviorSubject<number> = new BehaviorSubject(MAX_SELECT_TREE_HEIGHT_PX);
 
   /**
    * @description
@@ -87,5 +93,13 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
 
   public processClick(event: Event): void {
     event.stopPropagation();
+  }
+
+  public handleCountOfVisibleElementsChanges(count: number): void {
+    const maxAvaliableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
+    const adaptiveTreeHeight: number =
+      count < maxAvaliableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
+
+    this.adaptiveTreeHeight$.next(adaptiveTreeHeight);
   }
 }
