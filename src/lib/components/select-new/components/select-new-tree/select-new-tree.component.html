@@ -1,7 +1,14 @@
-<section class="select-tree-container" *ngIf="isExpanded$ | async" [ngSwitch]="type" (click)="processClick($event)">
-  <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
-  <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
-</section>
+<ng-container *ngIf="isExpanded$ | async">
+  <section
+    class="select-tree-container"
+    [style.height.px]="adaptiveTreeHeight$ | async"
+    [ngSwitch]="type"
+    (click)="processClick($event)"
+  >
+    <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
+    <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
+  </section>
+</ng-container>
 
 <ng-template #flatTree>
   <pupa-tree
@@ -16,6 +23,7 @@
     type="flat"
     class="tree"
     (expandedNode)="processNodeExpansion($event)"
+    (visibleElementsCountChanged)="handleCountOfVisibleElementsChanges($event)"
   ></pupa-tree>
 </ng-template>
 
@@ -33,6 +41,7 @@
     type="hierarchical"
     class="tree"
     (expandedNode)="processNodeExpansion($event)"
+    (visibleElementsCountChanged)="handleCountOfVisibleElementsChanges($event)"
   ></pupa-tree>
 </ng-template>
 

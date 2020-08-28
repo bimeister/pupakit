@@ -31,7 +31,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, filter, observeOn, take } from 'rxjs/operators';
+import { debounce, filter, observeOn, take, map, distinctUntilChanged } from 'rxjs/operators';
 
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -116,6 +116,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
   @Output() private readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
+
+  @Output() private readonly visibleElementsCountChanged: EventEmitter<number> = new EventEmitter();
 
   public readonly trackBy$: BehaviorSubject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(
     DEFAULT_TRACK_BY_FUNCTION
@@ -211,7 +213,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       .add(this.detectChangesOnNodeExpansion())
       .add(this.scrollByIndexOnEmit())
       .add(this.scrollViewportDuringDragging())
-      .add(this.expandNodeDuringDragging());
+      .add(this.expandNodeDuringDragging())
+      .add(this.handleCountOfVisibleElementsChanges());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -485,6 +488,15 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         this.treeControl.expand(nodeToExpand);
         this.manipulator.toggleExpansion(nodeToExpand);
       });
+  }
+
+  private handleCountOfVisibleElementsChanges(): Subscription {
+    return this.filteredSource$
+      .pipe(
+        map((filteredSource: FlatTreeItem[]) => (isNil(filteredSource) ? 0 : filteredSource.length)),
+        distinctUntilChanged()
+      )
+      .subscribe(countOfVisibleElements => this.visibleElementsCountChanged.emit(countOfVisibleElements));
   }
 
   private scrollViewportDuringDragging(): Subscription {
