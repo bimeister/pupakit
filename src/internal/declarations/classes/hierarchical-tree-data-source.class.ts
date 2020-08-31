@@ -24,11 +24,11 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   constructor(
     nodes$: Observable<TreeItem[]>,
     elements$: Observable<TreeItem[]>,
-    expandedItemsIds$: Observable<string[]>,
+    expandedItemIds$: Observable<Set<string>>,
     activeRange$: Observable<ListRange>,
     hideRoot$: Observable<boolean>
   ) {
-    super(HierarchicalTreeDataSource.getSortedData(nodes$, elements$), expandedItemsIds$, activeRange$, hideRoot$);
+    super(HierarchicalTreeDataSource.getSortedData(nodes$, elements$), expandedItemIds$, activeRange$, hideRoot$);
   }
 
   private static getSortedData(
