@@ -31,7 +31,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, filter, observeOn, take, map, distinctUntilChanged } from 'rxjs/operators';
+import { debounce, distinctUntilChanged, filter, map, observeOn, take } from 'rxjs/operators';
 
 import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -138,6 +138,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly treeControl: FlatTreeControl<FlatTreeItem>;
   public readonly dataSource: FlatTreeDataSource;
   public readonly filteredSource$: Observable<FlatTreeItem[]>;
+  public readonly flatTreeItems$: Observable<FlatTreeItem[]>;
 
   public readonly expandNodeWithDelay$: Subject<FlatTreeItem | null> = new Subject<FlatTreeItem | null>();
 
@@ -205,6 +206,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.treeControl = this.manipulator.treeControl;
     this.dataSource = this.manipulator.dataSource;
     this.filteredSource$ = this.manipulator.dataSource.filteredData$;
+    this.flatTreeItems$ = this.dataSource.sortedData$;
   }
 
   public ngOnInit(): void {
