@@ -20,7 +20,7 @@ export class TreeManipulator {
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
 
   public readonly itemToExpand$: BehaviorSubject<FlatTreeItem> = new BehaviorSubject(null);
-  public readonly expandedItemsIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  public readonly expandedItemIds$: BehaviorSubject<Set<string>> = new BehaviorSubject(new Set());
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
     TreeManipulator.getLevel,
@@ -31,14 +31,14 @@ export class TreeManipulator {
     this.dataOrigin.type === TreeType.Flat
       ? new FlatTreeDataSource(
           this.dataOrigin.flatDataOrigin,
-          this.expandedItemsIds$,
+          this.expandedItemIds$,
           this.listRange$,
           this.dataOrigin.hideRoot
         )
       : new HierarchicalTreeDataSource(
           this.dataOrigin.treeNodesOrigin,
           this.dataOrigin.treeElementsOrigin,
-          this.expandedItemsIds$,
+          this.expandedItemIds$,
           this.listRange$,
           this.dataOrigin.hideRoot
         );
@@ -91,45 +91,54 @@ export class TreeManipulator {
     if (isNil(nodeId)) {
       return;
     }
-    this.expandedItemsIds$
+    this.expandedItemIds$
       .pipe(
         take(1),
-        map((expandedItemsIds: string[]) => [expandedItemsIds.includes(nodeId), expandedItemsIds])
+        map((expandedItemIds: Set<string>) => [expandedItemIds.has(nodeId), expandedItemIds])
       )
-      .subscribe(([nodeIsExpanded, expandedItemsIds]: [boolean, string[]]) => {
+      .subscribe(([nodeIsExpanded, expandedItemIds]: [boolean, Set<string>]) => {
         if (nodeIsExpanded) {
-          this.markAsCollapsed(expandedItemsIds, nodeId);
+          this.markAsCollapsed(expandedItemIds, nodeId);
           return;
         }
         this.itemToExpand$.next(node);
-        this.markAsExpanded(expandedItemsIds, nodeId);
+        this.markAsExpanded(expandedItemIds, nodeId);
       });
   }
 
-  private markAsCollapsed(expandedItemsIds: string[], ...nodesToCollapseIds: string[]): void {
+  public expand(...nodes: FlatTreeItem[]): void {
+    const uniqueNodesToExpandIdsSet: Set<string> = new Set<string>();
+    for (const expandedNode of nodes) {
+      this.itemToExpand$.next(expandedNode);
+      uniqueNodesToExpandIdsSet.add(expandedNode.id);
+    }
+    this.expandedItemIds$.pipe(take(1)).subscribe((expandedItemIds: Set<string>) => {
+      this.markAsExpanded(expandedItemIds, ...Array.from(uniqueNodesToExpandIdsSet.keys()));
+    });
+  }
+
+  private markAsCollapsed(expandedItemIds: Set<string>, ...nodesToCollapseIds: string[]): void {
     if (!Array.isArray(nodesToCollapseIds) || TreeManipulator.isEmptyArray(nodesToCollapseIds)) {
       return;
     }
 
-    const expandedItemsIdsSet: Set<string> = new Set(expandedItemsIds);
+    const updatedExpandedItemsIds: Set<string> = new Set(expandedItemIds);
     nodesToCollapseIds.forEach((nodeId: string) => {
-      expandedItemsIdsSet.delete(nodeId);
+      updatedExpandedItemsIds.delete(nodeId);
     });
-    const updatedExpandedItemsIds: string[] = Array.from(expandedItemsIdsSet);
-    this.expandedItemsIds$.next(updatedExpandedItemsIds);
+    this.expandedItemIds$.next(updatedExpandedItemsIds);
   }
 
-  private markAsExpanded(expandedItemsIds: string[], ...nodesToExpandIds: string[]): void {
+  private markAsExpanded(expandedItemIds: Set<string>, ...nodesToExpandIds: string[]): void {
     if (!Array.isArray(nodesToExpandIds) || TreeManipulator.isEmptyArray(nodesToExpandIds)) {
       return;
     }
 
-    const expandedItemsIdsSet: Set<string> = new Set(expandedItemsIds);
+    const updatedExpandedItemsIds: Set<string> = new Set(expandedItemIds);
     nodesToExpandIds.forEach((nodeId: string) => {
-      expandedItemsIdsSet.add(nodeId);
+      updatedExpandedItemsIds.add(nodeId);
     });
-    const updatedExpandedItemsIds: string[] = Array.from(expandedItemsIdsSet);
-    this.expandedItemsIds$.next(updatedExpandedItemsIds);
+    this.expandedItemIds$.next(updatedExpandedItemsIds);
   }
 
   private updateVisibleRange(range: ListRange): void {
@@ -179,7 +188,7 @@ export class TreeManipulator {
   }
 
   private refreshViewPortOnExpindedItemsIdsChange(): Subscription {
-    return this.expandedItemsIds$.subscribe(() => this.refreshViewPort());
+    return this.expandedItemIds$.subscribe(() => this.refreshViewPort());
   }
 
   private addParentNodesToExpandedOnScrollByRouteEmits(): Subscription {
@@ -190,10 +199,10 @@ export class TreeManipulator {
             Array.isArray(routeToScrollBy) && !TreeManipulator.isEmptyArray(routeToScrollBy)
         ),
         map((routeToScrollBy: string[]) => routeToScrollBy.slice(0, routeToScrollBy.length - 1)),
-        withLatestFrom(this.expandedItemsIds$)
+        withLatestFrom(this.expandedItemIds$)
       )
-      .subscribe(([parentNodesIds, expandedItemsIds]: [string[], string[]]) => {
-        this.markAsExpanded(expandedItemsIds, ...parentNodesIds);
+      .subscribe(([parentNodesIds, expandedItemIds]: [string[], Set<string>]) => {
+        this.markAsExpanded(expandedItemIds, ...parentNodesIds);
       });
   }
 
@@ -210,10 +219,10 @@ export class TreeManipulator {
 
   private restoreExpansionForRecreatedElements(): Subscription {
     return this.dataSource.currentSlice$
-      .pipe(withLatestFrom(this.expandedItemsIds$))
+      .pipe(withLatestFrom(this.expandedItemIds$))
       .subscribe(([treeItems, expandedIds]) => {
         treeItems
-          .filter(item => expandedIds.includes(item.id))
+          .filter(item => expandedIds.has(item.id))
           .forEach(item => {
             this.treeControl.expand(item);
           });

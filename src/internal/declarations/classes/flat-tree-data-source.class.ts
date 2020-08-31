@@ -15,7 +15,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   constructor(
     public readonly sortedData$: Observable<FlatTreeItem[]>,
-    private readonly expandedItemsIds$: Observable<string[]>,
+    private readonly expandedItemIds$: Observable<Set<string>>,
     private readonly activeRange$: Observable<ListRange>,
     private readonly hideRoot$: Observable<boolean>
   ) {
@@ -35,10 +35,10 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
           return currentSlice;
         })
       ),
-      this.expandedItemsIds$
+      this.expandedItemIds$
     ]).pipe(
-      map(([range, source, expandedItemsIds]: [ListRange, FlatTreeItem[], string[]]) => [
-        FlatTreeDataSource.filterNotHiddenItems(source, expandedItemsIds),
+      map(([range, source, expandedItemIds]: [ListRange, FlatTreeItem[], Set<string>]) => [
+        FlatTreeDataSource.filterNotHiddenItems(source, expandedItemIds),
         range
       ]),
       tap(([filteredData, _]: [FlatTreeItem[], ListRange]) => this.filteredData$.next(filteredData)),
@@ -61,13 +61,13 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
 
   private static isCollapsed(
     item: FlatTreeItem,
-    expandedItemsIds: string[]
+    expandedItemIds: Set<string>
   ): item is FlatTreeItem & { __isCollapsed: boolean } {
     if (isNil(item)) {
       return false;
     }
     const itemIsCollapsedManualy: boolean = item.hasOwnProperty('__isCollapsed') && Boolean(item['__isCollapsed']);
-    const itemIsNotExpanded: boolean = !expandedItemsIds.includes(item.id);
+    const itemIsNotExpanded: boolean = !expandedItemIds.has(item.id);
     return FlatTreeDataSource.isExpandable(item) && (itemIsCollapsedManualy || itemIsNotExpanded);
   }
 
@@ -80,12 +80,12 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     currentItem: FlatTreeItemWithMarkers,
     currentItemIndex: number,
     currentResult: FlatTreeItemWithMarkers[],
-    expandedItemsIds: string[]
+    expandedItemIds: Set<string>
   ): {
     previousItem: FlatTreeItemWithMarkers;
     currentResult: FlatTreeItemWithMarkers[];
   } {
-    const currentItemIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(currentItem, expandedItemsIds);
+    const currentItemIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(currentItem, expandedItemIds);
     const currentItemLevel: number = Number(currentItem?.level);
     const previousItemLevel: number = Number(previousItem?.level);
     const currentItemIsRoot: boolean = Object.is(currentItemLevel, 0);
@@ -100,7 +100,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     const previousItemIsParent: boolean =
       FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItemLevel + 1, currentItemLevel);
     const parentIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
-    const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemsIds);
+    const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemIds);
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
@@ -139,7 +139,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       .find(
         (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItemLevel)
       );
-    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
+    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemIds);
     const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
     if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
@@ -153,7 +153,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     }
     const unProcessedItem: FlatTreeItemWithMarkers = {
       ...currentItem,
-      __isCollapsed: FlatTreeDataSource.isCollapsed(currentItem, expandedItemsIds)
+      __isCollapsed: FlatTreeDataSource.isCollapsed(currentItem, expandedItemIds)
     };
     return {
       previousItem: unProcessedItem,
@@ -166,7 +166,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     currentItem: FlatTreeItemWithMarkers,
     currentItemIndex: number,
     currentResult: FlatTreeItemWithMarkers[],
-    expandedItemsIds: string[]
+    expandedItemIds: Set<string>
   ): {
     previousItem: FlatTreeItemWithMarkers;
     currentResult: FlatTreeItemWithMarkers[];
@@ -184,7 +184,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     const previousItemIsParent: boolean =
       FlatTreeDataSource.isExpandable(previousItem) && Object.is(previousItemLevel + 1, currentItemLevel);
     const parentIsHidden: boolean = FlatTreeDataSource.isHidden(previousItem);
-    const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemsIds);
+    const parentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(previousItem, expandedItemIds);
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
@@ -221,7 +221,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
       .find(
         (item: FlatTreeItem) => FlatTreeDataSource.isExpandable(item) && Object.is(item.level + 1, currentItemLevel)
       );
-    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemsIds);
+    const farParentIsCollapsed: boolean = FlatTreeDataSource.isCollapsed(farParentItem, expandedItemIds);
     const farParentIsHidden: boolean = FlatTreeDataSource.isHidden(farParentItem);
     if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
@@ -239,7 +239,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
     };
   }
 
-  private static filterNotHiddenItems(source: FlatTreeItem[], expandedItemsIds: string[]): FlatTreeItem[] {
+  private static filterNotHiddenItems(source: FlatTreeItem[], expandedItemIds: Set<string>): FlatTreeItem[] {
     const visibleTreeItems: FlatTreeItem[] = source
       .filter((item: FlatTreeItem) => !isNil(item))
       .reduce(
@@ -252,14 +252,14 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
             const expandableItemData: {
               previousItem: FlatTreeItemWithMarkers;
               currentResult: FlatTreeItemWithMarkers[];
-            } = FlatTreeDataSource.processExpandableItem(previousItem, item, index, result, expandedItemsIds);
+            } = FlatTreeDataSource.processExpandableItem(previousItem, item, index, result, expandedItemIds);
             return [expandableItemData.previousItem, expandableItemData.currentResult];
           }
 
           const nonExpandableItemData: {
             previousItem: FlatTreeItemWithMarkers;
             currentResult: FlatTreeItemWithMarkers[];
-          } = FlatTreeDataSource.processNonExpandableItem(previousItem, item, index, result, expandedItemsIds);
+          } = FlatTreeDataSource.processNonExpandableItem(previousItem, item, index, result, expandedItemIds);
           return [nonExpandableItemData.previousItem, nonExpandableItemData.currentResult];
         },
         [null, []]

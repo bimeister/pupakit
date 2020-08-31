@@ -254,6 +254,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.manipulator.toggleExpansion(node);
   }
 
+  public expand(...nodes: FlatTreeItem[]): void {
+    this.manipulator.expand(...nodes);
+  }
+
   public mouseDown(treeNode: FlatTreeItem, event: MouseEvent): void {
     if (!this.hasDragAndDrop) {
       return;
