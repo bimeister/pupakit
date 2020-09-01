@@ -8,6 +8,11 @@ export function getRangeStartDate(range: Date[]): Date {
     (rangeItem: Date, rangeItemIndex: number, rangeItemOrigin: [Date, Date]) => {
       const nextItem: Date = rangeItemOrigin[rangeItemIndex + 1];
       const previousItem: Date = rangeItemOrigin[rangeItemIndex - 1];
+
+      if (isNil(rangeItem)) {
+        return false;
+      }
+
       if (isNil(previousItem)) {
         return rangeItem.valueOf() < nextItem.valueOf();
       }
