@@ -1,6 +1,15 @@
 import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { CdkPortal } from '@angular/cdk/portal';
-import { Component, ElementRef, HostListener, Input, OnDestroy, ViewRef } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  ViewEncapsulation,
+  ViewRef
+} from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -12,7 +21,10 @@ import { DroppableWidth } from '../../../../../internal/declarations/types/dropp
 
 @Component({
   selector: 'pupa-droppable',
-  templateUrl: './droppable.component.html'
+  styleUrls: ['./droppable.component.scss'],
+  templateUrl: './droppable.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class DroppableComponent implements OnDestroy {
   @Input() public closeOnContentClick: boolean = false;
