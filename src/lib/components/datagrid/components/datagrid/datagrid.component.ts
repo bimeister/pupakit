@@ -58,7 +58,7 @@ export class DatagridComponent<rowDataT> {
   private isShadowOverlayApplied: boolean = false;
   private static readonly shadowOverlayClassName: string = 'ag-shadow-overlay';
 
-  public constructor(private readonly renderer: Renderer2) {}
+  constructor(private readonly renderer: Renderer2) {}
 
   @HostListener('window:resize')
   public processWindowResizeEvent(): void {

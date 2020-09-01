@@ -24,7 +24,7 @@ export class DatagridManipulator<rowDataT> {
   }
 
   private readonly subscription: Subscription = new Subscription();
-  private gridApi: GridApi;
+  public gridApi: GridApi;
 
   public columnSettings$: BehaviorSubject<DatagridColumnSetting[]> = new BehaviorSubject<DatagridColumnSetting[]>([]);
 
