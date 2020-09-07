@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -10,14 +9,7 @@ import { SelectNewStateService } from '../../services/select-new-state.service';
   templateUrl: './select-new-button.component.html',
   styleUrls: ['./select-new-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('iconRotation', [
-      state('void', style({ transform: 'rotate(0)' })),
-      state('rotated', style({ transform: 'rotate(-90deg)' })),
-      transition('* => *', [animate('150ms')])
-    ])
-  ]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectNewButtonComponent<T> implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) private readonly overlayOrigin: CdkOverlayOrigin;

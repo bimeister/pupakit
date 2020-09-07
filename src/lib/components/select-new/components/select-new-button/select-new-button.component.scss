@@ -22,17 +22,19 @@ $width_icon: rems(1);
   cursor: pointer;
 
   border-radius: px(8);
-  border: px(1) solid color('grey-apple');
+  border: px(1) solid color('grey-ivory');
 
   background: color('white');
-  color: color('grey-apple');
+  color: color('text');
 
   padding: px(6) px(12);
 
-  &_active,
   &:hover {
-    border-color: color('grey-ivory');
-    color: color('grey-ivory');
+    border-color: color('grey-light');
+  }
+
+  &_active {
+    border-color: color('active') !important;
   }
 
   &_disabled {
