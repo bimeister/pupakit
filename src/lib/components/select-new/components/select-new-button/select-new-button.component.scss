@@ -40,6 +40,7 @@ $width_icon: rems(1);
   &_disabled {
     border-color: color('grey-apple') !important;
     color: color('grey-apple') !important;
+    pointer-events: none;
   }
 
   &__text {

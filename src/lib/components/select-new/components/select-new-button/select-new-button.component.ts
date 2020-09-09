@@ -1,6 +1,8 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { filterFalsy } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
@@ -25,7 +27,7 @@ export class SelectNewButtonComponent<T> implements OnInit {
   }
 
   public processButtonClick(): void {
-    this.selectNewStateService.toggleExpansion();
+    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectNewStateService.toggleExpansion());
   }
 
   private defineDropdownTrigger(): void {
