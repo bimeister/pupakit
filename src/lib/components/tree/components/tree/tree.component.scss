@@ -74,7 +74,8 @@
 
   &:hover,
   &_selected {
-    background: color(light);
+    background: color(main);
+    color: color(white);
   }
 
   &_highlighted {
