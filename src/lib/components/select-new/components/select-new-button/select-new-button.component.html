@@ -3,6 +3,7 @@
   class="select-button"
   [class.select-button_active]="isExpanded$ | async"
   [class.select-button_disabled]="isDisabled$ | async"
+  [class.select-button_transparent]="transparent"
   (click)="processButtonClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"

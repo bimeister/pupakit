@@ -43,6 +43,14 @@ $width_icon: rems(1);
     pointer-events: none;
   }
 
+  &_transparent {
+    border-color: transparent;
+    background-color: transparent;
+    &:hover {
+      border-color: transparent;
+    }
+  }
+
   &__text {
     padding: 0 px(6) 0 0;
 

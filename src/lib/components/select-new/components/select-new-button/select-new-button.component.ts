@@ -1,9 +1,16 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, ElementRef, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import { filterFalsy } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import { SelectNewStateService } from '../../services/select-new-state.service';
 
 @Component({
@@ -16,6 +23,8 @@ import { SelectNewStateService } from '../../services/select-new-state.service';
 export class SelectNewButtonComponent<T> implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) private readonly overlayOrigin: CdkOverlayOrigin;
   @ViewChild('button', { static: true }) private readonly button: ElementRef<HTMLButtonElement>;
+
+  @Input() public transparent: boolean = false;
 
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
   public readonly isDisabled$: Observable<boolean> = this.selectNewStateService.isDisabled$;
