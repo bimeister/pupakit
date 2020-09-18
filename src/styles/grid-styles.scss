@@ -224,6 +224,7 @@ $header-cell-moving-background-color: color(light);
     }
   }
 
+  &.pupagrid-theme-borderless-even-colored,
   &.pupagrid-theme-borderless {
     @extend .pupagrid-theme-default;
 
@@ -239,6 +240,18 @@ $header-cell-moving-background-color: color(light);
 
     .ag-pinned-right-header {
       border: 0;
+    }
+  }
+
+  &.pupagrid-theme-borderless-even-colored {
+    .ag-row-even {
+      background: color(light);
+    }
+
+    .ag-row-focus,
+    .ag-row-hover,
+    .ag-row-selected {
+      background: color(cadet-blue-light);
     }
   }
 }
