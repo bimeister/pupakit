@@ -8,7 +8,7 @@ import {
   TrackByFunction,
   ViewEncapsulation
 } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -59,6 +59,7 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
   @Input() public readonly treeElementsOrigin: TreeItemInterface[] = [];
 
   @Input() public hideRoot: boolean = false;
+  @Input() public isLoading: boolean = false;
 
   public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
   public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;

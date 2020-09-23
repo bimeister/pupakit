@@ -1,0 +1,4 @@
+<pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
+<div class="container">
+  <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" [isLoading]="isLoading$ | async"></pupa-tree>
+</div>

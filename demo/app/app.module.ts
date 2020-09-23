@@ -29,6 +29,7 @@ import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.com
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LayoutDemoComponent } from './layout-demo/layout-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
+import { LogPipe } from './log.pipe';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { MultiselectionListDemoComponent } from './multiselection-list-demo/multiselection-list-demo.component';
@@ -47,8 +48,8 @@ import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
+import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
-import { LogPipe } from './log.pipe';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -96,6 +97,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     SelectorDemoComponent,
     SelectMultipleDemoComponent,
     ChipTabsDemoComponent,
+    TreeDemoComponent,
     LogPipe
   ],
   imports: [
@@ -169,6 +171,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'time-input',
         component: TimeInputDemoComponent
+      },
+      {
+        path: 'tree',
+        component: TreeDemoComponent
       },
       {
         path: 'select',

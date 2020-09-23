@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { getUuid } from '@meistersoft/utilities';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 import { DropdownItem } from '../../../src/internal/declarations/interfaces/dropdown-item.interface';
@@ -15,6 +17,7 @@ const leafElementsCount: number = 1000;
 })
 export class SelectDemoComponent {
   public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
+  public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public readonly treeDataOrigin: FlatTreeItem[] = [
     new FlatTreeItem(true, 'Wolves', 0, null, null, false),
@@ -160,6 +163,12 @@ export class SelectDemoComponent {
     this.form2.valueChanges.subscribe(console.log);
     this.formControl.valueChanges.subscribe(console.log);
     /* tslint:enable */
+  }
+
+  public toggleLoader(): void {
+    this.isLoading$.pipe(take(1)).subscribe((isLoading: boolean) => {
+      this.isLoading$.next(!isLoading);
+    });
   }
 
   public log(...data: any[]): void {
