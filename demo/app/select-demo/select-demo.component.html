@@ -73,8 +73,12 @@
 
     <pupa-select-new-dropdown>
       <pupa-select-new-search placeholder="Поиск..." (query)="log($event)"></pupa-select-new-search>
-
-      <pupa-select-new-tree type="flat" [flatDataOrigin]="treeDataOrigin"></pupa-select-new-tree>
+      <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
+      <pupa-select-new-tree
+        type="flat"
+        [flatDataOrigin]="treeDataOrigin"
+        [isLoading]="isLoading$ | async"
+      ></pupa-select-new-tree>
     </pupa-select-new-dropdown>
   </pupa-select-new>
 </div>

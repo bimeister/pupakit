@@ -111,6 +111,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @Input() public readonly scrollBehaviour: ScrollBehavior = 'smooth';
   @Input() public readonly hasDragAndDrop: boolean = false;
   @Input() public readonly hideRoot: boolean = false;
+  @Input() public readonly isLoading: boolean = false;
 
   @Input() public readonly nodesWithoutPadding: boolean = false;
 
@@ -128,6 +129,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly selectedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly highlightedNodesIds$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly hideRoot$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
   private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
@@ -231,6 +233,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.processHighlightedNodesIdsValueChange(changes?.highlightedNodesIds);
     this.processScrollByRouteValueChanges(changes?.scrollByRoute);
     this.processHideRootValueChanges(changes?.hideRoot);
+    this.processIsLoadingValueChanges(changes?.isLoading);
   }
 
   public ngAfterContentInit(): void {
@@ -464,6 +467,14 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       return;
     }
     this.hideRoot$.next(newValue);
+  }
+
+  private processIsLoadingValueChanges(change: ComponentChange<this, boolean>): void {
+    const newValue: boolean | undefined = change?.currentValue;
+    if (isNil(newValue)) {
+      return;
+    }
+    this.isLoading$.next(newValue);
   }
 
   private emitExpandedItemOnNodeExpansion(): Subscription {

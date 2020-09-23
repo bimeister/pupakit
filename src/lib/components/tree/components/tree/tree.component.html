@@ -1,4 +1,8 @@
 <section class="tree">
+  <div class="tree__loader" *ngIf="isLoading$ | async">
+    <pupa-spinner size="40px"></pupa-spinner>
+  </div>
+
   <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" #viewPort>
     <ng-container *cdkVirtualFor="let item of filteredSource$ | async"> </ng-container>
 
