@@ -33,13 +33,13 @@ import {
 } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, observeOn, take } from 'rxjs/operators';
 
-import { FlatTreeDataSource } from '../../../../../internal/declarations/classes/flat-tree-data-source.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
 import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
+import { TreeDataSource } from '../../../../../internal/declarations/interfaces/tree-data-source.interface';
 import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
 import { TreeManipulatorDataOrigin } from '../../../../../internal/declarations/types/tree-manipulator-data-origin.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
@@ -138,7 +138,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   private readonly manipulator: TreeManipulator;
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem>;
-  public readonly dataSource: FlatTreeDataSource;
+  public readonly dataSource: TreeDataSource;
   public readonly filteredSource$: Observable<FlatTreeItem[]>;
   public readonly flatTreeItems$: Observable<FlatTreeItem[]>;
 
@@ -187,6 +187,15 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
           type: this.type,
           treeElementsOrigin: this.treeElementsOrigin$,
           treeNodesOrigin: this.treeNodesOrigin$,
+          hideRoot: this.hideRoot$
+        };
+        this.manipulatorDataOrigin = dataOrigin;
+        break;
+      }
+
+      case TreeType.Custom: {
+        const dataOrigin: TreeManipulatorDataOrigin = {
+          type: this.type,
           hideRoot: this.hideRoot$
         };
         this.manipulatorDataOrigin = dataOrigin;
@@ -246,6 +255,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
     this.manipulator.destroy();
+  }
+
+  public viewPortInitialize(): void {
+    this.viewPortReference$.next(this.viewPort);
+    this.skeletonViewPortReference$.next(this.skeletonViewPort);
+    this.manipulator.initialize();
   }
 
   public idsIncludesNodeId(ids: string[], node: FlatTreeItem): boolean {

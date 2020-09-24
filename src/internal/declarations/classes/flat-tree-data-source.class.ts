@@ -3,21 +3,22 @@ import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
 
+import { TreeDataSource } from '../interfaces/tree-data-source.interface';
 import { FlatTreeItem } from './flat-tree-item.class';
 
 type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHidden?: boolean };
 
-export class FlatTreeDataSource extends DataSource<FlatTreeItem> {
-  private readonly disconnect$: Subject<void> = new Subject<void>();
+export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements TreeDataSource {
+  public readonly disconnect$: Subject<void> = new Subject<void>();
 
   public readonly currentSlice$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
   public readonly filteredData$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
 
   constructor(
     public readonly sortedData$: Observable<FlatTreeItem[]>,
-    private readonly expandedItemIds$: Observable<Set<string>>,
-    private readonly activeRange$: Observable<ListRange>,
-    private readonly hideRoot$: Observable<boolean>
+    public readonly expandedItemIds$: Observable<Set<string>>,
+    public readonly activeRange$: Observable<ListRange>,
+    public readonly hideRoot$: Observable<boolean>
   ) {
     super();
   }

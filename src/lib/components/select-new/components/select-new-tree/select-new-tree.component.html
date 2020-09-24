@@ -5,8 +5,9 @@
     [ngSwitch]="type"
     (click)="processClick($event)"
   >
-    <ng-container *ngSwitchCase="'flat'" [ngTemplateOutlet]="flatTree"> </ng-container>
-    <ng-container *ngSwitchCase="'hierarchical'" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
+    <ng-container *ngSwitchCase="treeType.Flat" [ngTemplateOutlet]="flatTree"> </ng-container>
+    <ng-container *ngSwitchCase="treeType.Hierarchical" [ngTemplateOutlet]="hierarchicalTree"> </ng-container>
+    <ng-container *ngSwitchCase="treeType.Custom" [ngTemplateOutlet]="customTree"> </ng-container>
   </section>
 </ng-container>
 
@@ -41,6 +42,24 @@
     [nodesWithoutPadding]="true"
     [isLoading]="isLoading"
     type="hierarchical"
+    class="tree"
+    (expandedNode)="processNodeExpansion($event)"
+    (visibleElementsCountChanged)="handleCountOfVisibleElementsChanges($event)"
+  ></pupa-tree>
+</ng-template>
+
+<ng-template #customTree>
+  <pupa-tree
+    #customPupaTreeComponent
+    *ngIf="!(type | isNullOrUndefined)"
+    [nodeTemplate]="nodeTemplate"
+    [trackBy]="trackBy"
+    [selectedNodesIds]="selectedNodesIds$ | async"
+    [highlightedNodesIds]="highlightedNodesIds$ | async"
+    [hideRoot]="hideRoot"
+    [nodesWithoutPadding]="true"
+    [isLoading]="isLoading"
+    type="custom"
     class="tree"
     (expandedNode)="processNodeExpansion($event)"
     (visibleElementsCountChanged)="handleCountOfVisibleElementsChanges($event)"

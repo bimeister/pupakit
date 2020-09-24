@@ -7,7 +7,9 @@ import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { TreeType } from '../enums/tree-type.enum';
+import { TreeDataSource } from '../interfaces/tree-data-source.interface';
 import { TreeManipulatorDataOrigin } from '../types/tree-manipulator-data-origin.type';
+import { CustomTreeDataSource } from './custom-data-source.class';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { HierarchicalTreeDataSource } from './hierarchical-tree-data-source.class';
@@ -27,23 +29,9 @@ export class TreeManipulator {
     TreeManipulator.isExpandable
   );
 
-  public readonly dataSource: FlatTreeDataSource =
-    this.dataOrigin.type === TreeType.Flat
-      ? new FlatTreeDataSource(
-          this.dataOrigin.flatDataOrigin,
-          this.expandedItemIds$,
-          this.listRange$,
-          this.dataOrigin.hideRoot
-        )
-      : new HierarchicalTreeDataSource(
-          this.dataOrigin.treeNodesOrigin,
-          this.dataOrigin.treeElementsOrigin,
-          this.expandedItemIds$,
-          this.listRange$,
-          this.dataOrigin.hideRoot
-        );
+  public readonly dataSource: TreeDataSource;
 
-  public readonly rawData$: Observable<FlatTreeItem[]> = this.dataSource.sortedData$;
+  public readonly rawData$: Observable<FlatTreeItem[]>;
 
   private readonly scrollByRoute$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly indexToScrollBy$: Observable<number> = this.scrollByRoute$.pipe(
@@ -67,7 +55,41 @@ export class TreeManipulator {
     private readonly viewPortReference$: Observable<CdkVirtualScrollViewport>,
     private readonly skeletonViewPortReference$: Observable<CdkVirtualScrollViewport>,
     private readonly viewPortItemHeightPx: number
-  ) {}
+  ) {
+    switch (this.dataOrigin.type) {
+      case TreeType.Flat: {
+        this.dataSource = new FlatTreeDataSource(
+          this.dataOrigin.flatDataOrigin,
+          this.expandedItemIds$,
+          this.listRange$,
+          this.dataOrigin.hideRoot
+        );
+        break;
+      }
+
+      case TreeType.Hierarchical: {
+        this.dataSource = new HierarchicalTreeDataSource(
+          this.dataOrigin.treeNodesOrigin,
+          this.dataOrigin.treeElementsOrigin,
+          this.expandedItemIds$,
+          this.listRange$,
+          this.dataOrigin.hideRoot
+        );
+        break;
+      }
+
+      case TreeType.Custom: {
+        this.dataSource = new CustomTreeDataSource(this.expandedItemIds$, this.listRange$, this.dataOrigin.hideRoot);
+        break;
+      }
+
+      default: {
+        return;
+      }
+    }
+
+    this.rawData$ = this.dataSource.sortedData$;
+  }
 
   public initialize(): void {
     this.refreshViewPort();
