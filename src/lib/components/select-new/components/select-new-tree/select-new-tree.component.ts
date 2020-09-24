@@ -6,6 +6,7 @@ import {
   Input,
   Output,
   TrackByFunction,
+  ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -36,6 +37,8 @@ const EMPTY_SPACE_PX: number = 12;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectNewTreeComponent implements TreePropertiesTransfer {
+  @ViewChild('customPupaTreeComponent') public readonly customPupaTreeComponent: TreeComponent;
+
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
 
   public readonly adaptiveTreeHeight$: BehaviorSubject<number> = new BehaviorSubject(MAX_SELECT_TREE_HEIGHT_PX);
@@ -63,6 +66,8 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
 
   public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
   public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
+
+  public readonly treeType: typeof TreeType = TreeType;
 
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
 
@@ -97,9 +102,9 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
   }
 
   public handleCountOfVisibleElementsChanges(count: number): void {
-    const maxAvaliableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
+    const maxAvailableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
     const adaptiveTreeHeight: number =
-      count < maxAvaliableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
+      count < maxAvailableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
 
     this.adaptiveTreeHeight$.next(adaptiveTreeHeight);
   }
