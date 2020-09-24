@@ -21,8 +21,7 @@ export class CustomTreeDataSource implements TreeDataSource {
   public connect(): Observable<FlatTreeItem[]> {
     return combineLatest([this.filteredData$, this.activeRange$]).pipe(
       filter(
-        ([filteredData, activeRange]: [FlatTreeItem[], ListRange]) =>
-          !isNil(filteredData) && Array.isArray(filteredData) && !isNil(activeRange)
+        ([filteredData, activeRange]: [FlatTreeItem[], ListRange]) => Array.isArray(filteredData) && !isNil(activeRange)
       ),
       map(([filteredData, activeRange]: [FlatTreeItem[], ListRange]) => {
         const { start, end }: ListRange = activeRange;
