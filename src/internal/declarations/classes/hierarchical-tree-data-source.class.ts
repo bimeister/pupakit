@@ -1,7 +1,7 @@
 import { ListRange } from '@angular/cdk/collections';
 import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { asyncScheduler, combineLatest, forkJoin, Observable, of, timer } from 'rxjs';
-import { map, observeOn, subscribeOn, switchMap, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, map, observeOn, subscribeOn, switchMap, withLatestFrom } from 'rxjs/operators';
 
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -20,6 +20,8 @@ interface TreeRoot {
   elements: TreeItem[];
 }
 
+const DEBOUNCE_TIME_MS: number = 500;
+
 export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   constructor(
     nodes$: Observable<TreeItem[]>,
@@ -28,7 +30,15 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     activeRange$: Observable<ListRange>,
     hideRoot$: Observable<boolean>
   ) {
-    super(HierarchicalTreeDataSource.getSortedData(nodes$, elements$), expandedItemIds$, activeRange$, hideRoot$);
+    super(
+      HierarchicalTreeDataSource.getSortedData(
+        nodes$.pipe(debounceTime(DEBOUNCE_TIME_MS)),
+        elements$.pipe(debounceTime(DEBOUNCE_TIME_MS))
+      ),
+      expandedItemIds$,
+      activeRange$,
+      hideRoot$
+    );
   }
 
   private static getSortedData(
