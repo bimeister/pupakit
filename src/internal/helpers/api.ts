@@ -3,6 +3,7 @@
  */
 
 export * from './clamp.helper';
+export * from './construct-worker-from-function.helper';
 export * from './date-clear-time.helper';
 export * from './get-days-in-month.helper';
 export * from './get-property-value-by-path.helper';

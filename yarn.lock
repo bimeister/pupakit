@@ -1743,10 +1743,10 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.6.4"
 
-"@meistersoft/utilities@^0.1.0-e4f2db47":
-  version "0.1.0-e4f2db47"
-  resolved "http://npm.meistersoft.ru:4873/@meistersoft%2futilities/-/utilities-0.1.0-e4f2db47.tgz#638023fbdea314c378c98895a5246afda598fcf2"
-  integrity sha512-Mg62xf0+j6zkgDlzbVElPtFy5Ce3poFfCuAf/uSjyQ8klIn7Os3VlaAwaNRYxQbXbmFVY9FQ7e4l4+FlgBZaLQ==
+"@meistersoft/utilities@^0.1.0-163e637d":
+  version "0.1.0-163e637d"
+  resolved "http://npm.meistersoft.ru:4873/@meistersoft%2futilities/-/utilities-0.1.0-163e637d.tgz#0df399e90a9603a0c33c0ce0b4a942308af83e95"
+  integrity sha512-YkxOqE4x+NYsvnMOU6NFPidrTpA7k63qy53JUD8dTNtZcGCstJ/iqSm2kCgJVOyKhL5HH/AU7QvObhwVCP8tdg==
   dependencies:
     snake-case "^3.0.3"
     uuid "^8.3.0"

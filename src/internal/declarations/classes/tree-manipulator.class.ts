@@ -3,8 +3,8 @@ import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ElementRef } from '@angular/core';
 import { filterNotNil, isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { debounceTime, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
+import { debounceTime, filter, map, observeOn, subscribeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { TreeType } from '../enums/tree-type.enum';
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';
@@ -17,6 +17,8 @@ import { HierarchicalTreeDataSource } from './hierarchical-tree-data-source.clas
 const TARGET_NODE_TO_SCROLL_TO_DEBOUNCE_TIME_MS: number = 500;
 
 export class TreeManipulator {
+  public readonly processingIsActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private readonly subscription: Subscription = new Subscription();
 
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
@@ -62,7 +64,8 @@ export class TreeManipulator {
           this.dataOrigin.flatDataOrigin,
           this.expandedItemIds$,
           this.listRange$,
-          this.dataOrigin.hideRoot
+          this.dataOrigin.hideRoot,
+          this.processingIsActive$
         );
         break;
       }
@@ -73,7 +76,8 @@ export class TreeManipulator {
           this.dataOrigin.treeElementsOrigin,
           this.expandedItemIds$,
           this.listRange$,
-          this.dataOrigin.hideRoot
+          this.dataOrigin.hideRoot,
+          this.processingIsActive$
         );
         break;
       }
@@ -128,14 +132,39 @@ export class TreeManipulator {
       });
   }
 
-  public expand(...nodes: FlatTreeItem[]): void {
-    const uniqueNodesToExpandIdsSet: Set<string> = new Set<string>();
-    for (const expandedNode of nodes) {
-      this.itemToExpand$.next(expandedNode);
-      uniqueNodesToExpandIdsSet.add(expandedNode.id);
-    }
+  public expandByIds(nodesIds: string[]): void {
+    timer(0, asyncScheduler)
+      .pipe(
+        observeOn(asyncScheduler),
+        subscribeOn(asyncScheduler),
+        switchMap(() => this.expandedItemIds$),
+        take(1)
+      )
+      .subscribe((expandedItemIds: Set<string>) => {
+        const updatedSet: Set<string> = new Set<string>(...expandedItemIds, ...nodesIds);
+        this.expandedItemIds$.next(updatedSet);
+      });
+  }
+
+  public expand(nodes: FlatTreeItem[], emitEvent: boolean = true): void {
+    const uniqueNodesToExpandIdsSet: Set<string> = new Set<string>(nodes.map((node: FlatTreeItem) => node.id));
+
     this.expandedItemIds$.pipe(take(1)).subscribe((expandedItemIds: Set<string>) => {
       this.markAsExpanded(expandedItemIds, ...Array.from(uniqueNodesToExpandIdsSet.keys()));
+    });
+
+    nodes.forEach((node: FlatTreeItem) => {
+      timer(0, asyncScheduler)
+        .pipe(observeOn(asyncScheduler), subscribeOn(asyncScheduler), take(1))
+        .subscribe(() => {
+          this.treeControl.expand(node);
+
+          if (!emitEvent) {
+            return;
+          }
+
+          this.itemToExpand$.next(node);
+        });
     });
   }
 

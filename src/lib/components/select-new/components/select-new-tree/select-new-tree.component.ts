@@ -38,6 +38,8 @@ const EMPTY_SPACE_PX: number = 12;
 })
 export class SelectNewTreeComponent implements TreePropertiesTransfer {
   @ViewChild('customPupaTreeComponent') public readonly customPupaTreeComponent: TreeComponent;
+  @ViewChild('hierarchicalTreeComponent') public readonly hierarchicalTreeComponent: TreeComponent;
+  @ViewChild('flatTreeComponent') public readonly flatTreeComponent: TreeComponent;
 
   public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
 

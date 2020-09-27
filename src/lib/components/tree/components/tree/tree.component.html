@@ -154,7 +154,7 @@
 
 <ng-template #defaultExpansionButtonTemplate let-node="node" let-hasChild="hasChild">
   <button class="default-expansion-button" [disabled]="!hasChild">
-    <ion-icon [name]="treeControl.isExpanded(node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></ion-icon>
+    <ion-icon [name]="isExpanded(expandedItemIds$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></ion-icon>
   </button>
 </ng-template>
 
