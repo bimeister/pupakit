@@ -13,6 +13,7 @@
 
 <ng-template #flatTree>
   <pupa-tree
+    #flatTreeComponent
     *ngIf="!(type | isNullOrUndefined)"
     [flatDataOrigin]="flatDataOrigin"
     [nodeTemplate]="nodeTemplate"
@@ -31,6 +32,7 @@
 
 <ng-template #hierarchicalTree>
   <pupa-tree
+    #hierarchicalTreeComponent
     *ngIf="!(type | isNullOrUndefined)"
     [treeNodesOrigin]="treeNodesOrigin"
     [treeElementsOrigin]="treeElementsOrigin"

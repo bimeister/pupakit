@@ -15,6 +15,7 @@
     "start:demo": "ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "start:storybook": "start-storybook",
     "build": "yarn run barrel && yarn run lint && ng build && yarn run build:scss && yarn run build:css && yarn run copy:assets && yarn run replace-imports",
+    "build:workers": " tsc --project tsconfig.worker.json",
     "build:scss": "scss-bundle --config scss-bundle.config.json && yarn run copy:styles",
     "build:css": "sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css",
     "build:dev": "ng build --watch",
@@ -38,7 +39,7 @@
   },
   "dependencies": {
     "@angular/cdk": "^10.1.3",
-    "@meistersoft/utilities": "^0.1.0-e4f2db47",
+    "@meistersoft/utilities": "^0.1.0-163e637d",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
     "rxjs": "^6.6.0",

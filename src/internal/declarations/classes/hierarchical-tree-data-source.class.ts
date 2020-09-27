@@ -1,7 +1,7 @@
 import { ListRange } from '@angular/cdk/collections';
 import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
-import { asyncScheduler, combineLatest, forkJoin, Observable, of, timer } from 'rxjs';
-import { debounceTime, map, observeOn, subscribeOn, switchMap, withLatestFrom } from 'rxjs/operators';
+import { asyncScheduler, BehaviorSubject, combineLatest, forkJoin, Observable, of, timer } from 'rxjs';
+import { map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -20,36 +20,36 @@ interface TreeRoot {
   elements: TreeItem[];
 }
 
-const DEBOUNCE_TIME_MS: number = 500;
-
 export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   constructor(
     nodes$: Observable<TreeItem[]>,
     elements$: Observable<TreeItem[]>,
     expandedItemIds$: Observable<Set<string>>,
     activeRange$: Observable<ListRange>,
-    hideRoot$: Observable<boolean>
+    hideRoot$: Observable<boolean>,
+    processingIsActive$: BehaviorSubject<boolean>
   ) {
     super(
-      HierarchicalTreeDataSource.getSortedData(
-        nodes$.pipe(debounceTime(DEBOUNCE_TIME_MS)),
-        elements$.pipe(debounceTime(DEBOUNCE_TIME_MS))
-      ),
+      HierarchicalTreeDataSource.getSortedData(nodes$, elements$, processingIsActive$),
       expandedItemIds$,
       activeRange$,
-      hideRoot$
+      hideRoot$,
+      processingIsActive$
     );
   }
 
   private static getSortedData(
     nodes$: Observable<TreeItem[]>,
-    elements$: Observable<TreeItem[]>
+    elements$: Observable<TreeItem[]>,
+    processingIsActive$: BehaviorSubject<boolean>
   ): Observable<FlatTreeItem[]> {
     const nodesCopy$: Observable<TreeItem[]> = nodes$.pipe(
+      tap(() => processingIsActive$.next(true)),
       switchMap((nodes: TreeItem[]) => HierarchicalTreeDataSource.getClonedArrayItems(nodes)),
       shareReplayWithRefCount()
     );
     const elementsCopy$: Observable<TreeItem[]> = elements$.pipe(
+      tap(() => processingIsActive$.next(true)),
       switchMap((nodes: TreeItem[]) => HierarchicalTreeDataSource.getClonedArrayItems(nodes)),
       shareReplayWithRefCount()
     );
@@ -71,7 +71,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       rootElements$
     );
 
-    return HierarchicalTreeDataSource.getFlatTree(treeRoot$);
+    return HierarchicalTreeDataSource.getFlatTree(treeRoot$).pipe(tap(() => processingIsActive$.next(false)));
   }
 
   private static getFlatTree(treeRoot$: Observable<TreeRoot>): Observable<FlatTreeItem[]> {

@@ -1,7 +1,7 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
-import { isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
+import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subject, timer } from 'rxjs';
+import { filter, map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';
 import { FlatTreeItem } from './flat-tree-item.class';
@@ -14,41 +14,60 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
   public readonly currentSlice$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
   public readonly filteredData$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
 
+  private readonly treeDataWithProcessedRoot$: Observable<FlatTreeItem[]> = this.sortedData$.pipe(
+    observeOn(asyncScheduler),
+    subscribeOn(asyncScheduler),
+    map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNil(item))),
+    withLatestFrom(this.hideRoot$),
+    map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
+      if (hideRoot) {
+        return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
+      }
+      return currentSlice;
+    }),
+    shareReplayWithRefCount()
+  );
+
+  private readonly sanitizedActiveRange$: Observable<ListRange> = this.activeRange$.pipe(
+    filter((range: ListRange) => !isNil(range) && range.start >= 0 && range.end >= 0),
+    shareReplayWithRefCount()
+  );
+
+  private readonly treeDataWithoutHiddenItems$: Observable<FlatTreeItem[]> = combineLatest([
+    this.treeDataWithProcessedRoot$,
+    this.expandedItemIds$
+  ]).pipe(
+    observeOn(asyncScheduler),
+    subscribeOn(asyncScheduler),
+    tap(() => this.processingIsActive$.next(true)),
+    switchMap(([allItems, expandedNodesIds]: [FlatTreeItem[], Set<string>]) => {
+      return FlatTreeDataSource.getNotHiddenItems(allItems, expandedNodesIds);
+    }),
+    tap((filteredData: FlatTreeItem[]) => this.filteredData$.next(filteredData)),
+    tap(() => this.processingIsActive$.next(false)),
+    shareReplayWithRefCount()
+  );
+
   constructor(
     public readonly sortedData$: Observable<FlatTreeItem[]>,
     public readonly expandedItemIds$: Observable<Set<string>>,
     public readonly activeRange$: Observable<ListRange>,
-    public readonly hideRoot$: Observable<boolean>
+    public readonly hideRoot$: Observable<boolean>,
+    public readonly processingIsActive$: BehaviorSubject<boolean>
   ) {
     super();
   }
 
   public connect(): Observable<FlatTreeItem[]> {
-    return combineLatest([
-      this.activeRange$.pipe(filter((range: ListRange) => !isNil(range) && range.start >= 0 && range.end >= 0)),
-      this.sortedData$.pipe(
-        map((items: FlatTreeItem[]) => items.filter((item: FlatTreeItem) => !isNil(item))),
-        withLatestFrom(this.hideRoot$),
-        map(([currentSlice, hideRoot]: [FlatTreeItem[], boolean]) => {
-          if (hideRoot) {
-            return currentSlice.filter((sliceItem: FlatTreeItem) => sliceItem.level !== 0);
-          }
-          return currentSlice;
-        })
-      ),
-      this.expandedItemIds$
-    ]).pipe(
-      map(([range, source, expandedItemIds]: [ListRange, FlatTreeItem[], Set<string>]) => [
-        FlatTreeDataSource.filterNotHiddenItems(source, expandedItemIds),
-        range
-      ]),
-      tap(([filteredData, _]: [FlatTreeItem[], ListRange]) => this.filteredData$.next(filteredData)),
-      map(([visibleSourceSection, range]: [FlatTreeItem[], ListRange]) =>
-        isNil(range) ? visibleSourceSection : visibleSourceSection.slice(range.start, range.end)
-      ),
-      tap((resultSlice: FlatTreeItem[]) => {
-        this.currentSlice$.next(resultSlice);
-      })
+    return combineLatest([this.sanitizedActiveRange$, this.treeDataWithoutHiddenItems$]).pipe(
+      observeOn(asyncScheduler),
+      subscribeOn(asyncScheduler),
+      map(([range, treeDataWithoutHiddenItems]: [ListRange, FlatTreeItem[]]) => {
+        const { start, end }: ListRange = range;
+        return treeDataWithoutHiddenItems.slice(start, end);
+      }),
+      shareReplayWithRefCount(),
+      tap((resultSlice: FlatTreeItem[]) => this.currentSlice$.next(resultSlice))
     );
   }
 
@@ -74,6 +93,19 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
 
   private static isHidden(item: FlatTreeItem): item is FlatTreeItem & { __isHidden: boolean } {
     return !isNil(item) && item.hasOwnProperty('__isHidden') && Boolean(item['__isHidden']);
+  }
+
+  private static getNotHiddenItems(
+    allItems: FlatTreeItem[],
+    expandedNodesIds: Set<string>
+  ): Observable<FlatTreeItem[]> {
+    return timer(0, asyncScheduler).pipe(
+      observeOn(asyncScheduler),
+      subscribeOn(asyncScheduler),
+      map(() => {
+        return FlatTreeDataSource.filterNotHiddenItems(allItems, expandedNodesIds);
+      })
+    );
   }
 
   private static processExpandableItem(
@@ -265,8 +297,8 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
         },
         [null, []]
       )
-      .filter((tuplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[] | number) => Array.isArray(tuplePart))
-      .flat()
+      .filter((tuplePart: FlatTreeItemWithMarkers | FlatTreeItemWithMarkers[]) => Array.isArray(tuplePart))
+      .flat(1)
       .filter((item: FlatTreeItem) => !isNil(item) && !FlatTreeDataSource.isHidden(item));
     return visibleTreeItems;
   }

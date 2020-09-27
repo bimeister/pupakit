@@ -19,9 +19,10 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import {
   animationFrameScheduler,
+  asyncScheduler,
   BehaviorSubject,
   interval,
   NEVER,
@@ -31,7 +32,16 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, distinctUntilChanged, filter, map, observeOn, take } from 'rxjs/operators';
+import {
+  debounce,
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  observeOn,
+  subscribeOn,
+  take
+} from 'rxjs/operators';
 
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
@@ -112,6 +122,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   @Input() public readonly hasDragAndDrop: boolean = false;
   @Input() public readonly hideRoot: boolean = false;
   @Input() public readonly isLoading: boolean = false;
+  @Input() public readonly showLoaderOnInternalProcessings: boolean = true;
 
   @Input() public readonly nodesWithoutPadding: boolean = false;
 
@@ -136,6 +147,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private readonly manipulatorDataOrigin: TreeManipulatorDataOrigin;
   private readonly manipulator: TreeManipulator;
+
+  public readonly expandedItemIds$: Observable<Set<string>>;
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem>;
   public readonly dataSource: TreeDataSource;
@@ -214,6 +227,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       this.treeItemSizePx
     );
 
+    this.expandedItemIds$ = this.manipulator.expandedItemIds$.pipe(shareReplayWithRefCount());
     this.treeControl = this.manipulator.treeControl;
     this.dataSource = this.manipulator.dataSource;
     this.filteredSource$ = this.manipulator.dataSource.filteredData$;
@@ -227,7 +241,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       .add(this.scrollByIndexOnEmit())
       .add(this.scrollViewportDuringDragging())
       .add(this.expandNodeDuringDragging())
-      .add(this.handleCountOfVisibleElementsChanges());
+      .add(this.handleCountOfVisibleElementsChanges())
+      .add(this.showLoaderOnActiveProcessing());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -275,7 +290,30 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   public expand(...nodes: FlatTreeItem[]): void {
-    this.manipulator.expand(...nodes);
+    const expandableNodes: FlatTreeItem[] = nodes.filter((node: FlatTreeItem) => node.isExpandable && !node.isElement);
+
+    timer(0, asyncScheduler)
+      .pipe(observeOn(asyncScheduler), subscribeOn(asyncScheduler))
+      .subscribe(() => {
+        this.manipulator.expand(expandableNodes, false);
+      });
+  }
+
+  public expandAllNodes(): void {
+    this.flatTreeItems$
+      .pipe(
+        take(1),
+        observeOn(asyncScheduler),
+        subscribeOn(asyncScheduler),
+        map((flatTreeItems: FlatTreeItem[]) => flatTreeItems.filter((treeItem: FlatTreeItem) => treeItem.isExpandable))
+      )
+      .subscribe((flatTreeNodes: FlatTreeItem[]) => {
+        flatTreeNodes.forEach((node: FlatTreeItem) => this.treeControl.expand(node));
+      });
+  }
+
+  public isExpanded(expandedItemsIds: Set<string>, node: FlatTreeItem): boolean {
+    return expandedItemsIds.has(node.id);
   }
 
   public mouseDown(treeNode: FlatTreeItem, event: MouseEvent): void {
@@ -499,7 +537,9 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   private detectChangesOnNodeExpansion(): Subscription {
-    return this.manipulator.itemToExpand$.pipe(filterNotNil()).subscribe(() => this.changeDetectorRef.markForCheck());
+    return this.manipulator.expandedItemIds$
+      .pipe(filterNotNil())
+      .subscribe(() => this.changeDetectorRef.markForCheck());
   }
 
   private scrollByIndexOnEmit(): Subscription {
@@ -525,6 +565,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   private handleCountOfVisibleElementsChanges(): Subscription {
     return this.filteredSource$
       .pipe(
+        debounceTime(200),
         map((filteredSource: FlatTreeItem[]) => (isNil(filteredSource) ? 0 : filteredSource.length)),
         distinctUntilChanged()
       )
@@ -543,5 +584,20 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         const currentOffset: number = this.viewPort.measureScrollOffset();
         this.viewPort.scrollToOffset(currentOffset + offsetDelta, this.scrollBehaviour);
       });
+  }
+
+  private showLoaderOnActiveProcessing(): Subscription {
+    return this.manipulator.processingIsActive$
+      .pipe(
+        debounce((isActive: boolean) => {
+          if (isActive) {
+            return timer(500);
+          }
+
+          return timer(0);
+        }),
+        distinctUntilChanged()
+      )
+      .subscribe((processingIsActive: boolean) => this.isLoading$.next(processingIsActive));
   }
 }
