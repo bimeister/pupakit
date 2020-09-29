@@ -32,17 +32,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import {
-  debounce,
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  observeOn,
-  subscribeOn,
-  take
-} from 'rxjs/operators';
-
+import { debounce, distinctUntilChanged, filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeManipulator } from '../../../../../internal/declarations/classes/tree-manipulator.class';
 import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
@@ -565,7 +555,6 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   private handleCountOfVisibleElementsChanges(): Subscription {
     return this.filteredSource$
       .pipe(
-        debounceTime(200),
         map((filteredSource: FlatTreeItem[]) => (isNil(filteredSource) ? 0 : filteredSource.length)),
         distinctUntilChanged()
       )
