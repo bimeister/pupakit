@@ -9,8 +9,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { asyncScheduler, BehaviorSubject, Observable, timer } from 'rxjs';
+import { delay, map, observeOn, subscribeOn, take, tap } from 'rxjs/operators';
 
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
@@ -104,10 +104,36 @@ export class SelectNewTreeComponent implements TreePropertiesTransfer {
   }
 
   public handleCountOfVisibleElementsChanges(count: number): void {
-    const maxAvailableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
-    const adaptiveTreeHeight: number =
-      count < maxAvailableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
-
-    this.adaptiveTreeHeight$.next(adaptiveTreeHeight);
+    timer(0, asyncScheduler)
+      .pipe(
+        observeOn(asyncScheduler),
+        subscribeOn(asyncScheduler),
+        map(() => {
+          const maxAvailableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
+          return count < maxAvailableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
+        }),
+        take(1),
+        tap((adaptiveTreeHeight: number) => this.adaptiveTreeHeight$.next(adaptiveTreeHeight)),
+        delay(100)
+      )
+      .subscribe(() => {
+        switch (this.type) {
+          case TreeType.Flat: {
+            this.flatTreeComponent.refreshViewPort();
+            break;
+          }
+          case TreeType.Hierarchical: {
+            this.hierarchicalTreeComponent.refreshViewPort();
+            break;
+          }
+          case TreeType.Custom: {
+            this.customPupaTreeComponent.refreshViewPort();
+            break;
+          }
+          default: {
+            return;
+          }
+        }
+      });
   }
 }

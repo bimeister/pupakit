@@ -168,6 +168,18 @@ export class TreeManipulator {
     });
   }
 
+  public refreshViewPort(): void {
+    combineLatest([
+      this.viewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort))),
+      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)))
+    ])
+      .pipe(take(1))
+      .subscribe(([viewPort, skeletonViewPort]: [CdkVirtualScrollViewport, CdkVirtualScrollViewport]) => {
+        viewPort.checkViewportSize();
+        skeletonViewPort.checkViewportSize();
+      });
+  }
+
   private markAsCollapsed(expandedItemIds: Set<string>, ...nodesToCollapseIds: string[]): void {
     if (!Array.isArray(nodesToCollapseIds) || TreeManipulator.isEmptyArray(nodesToCollapseIds)) {
       return;
@@ -194,18 +206,6 @@ export class TreeManipulator {
 
   private updateVisibleRange(range: ListRange): void {
     this.listRange$.next(range);
-  }
-
-  private refreshViewPort(): void {
-    combineLatest([
-      this.viewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort))),
-      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)))
-    ])
-      .pipe(take(1))
-      .subscribe(([viewPort, skeletonViewPort]: [CdkVirtualScrollViewport, CdkVirtualScrollViewport]) => {
-        viewPort.checkViewportSize();
-        skeletonViewPort.checkViewportSize();
-      });
   }
 
   private setInitialVisibleRange(): void {
