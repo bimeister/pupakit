@@ -268,6 +268,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.manipulator.initialize();
   }
 
+  public refreshViewPort(): void {
+    this.manipulator.refreshViewPort();
+  }
+
   public idsIncludesNodeId(ids: string[], node: FlatTreeItem): boolean {
     return !isNil(node) && Array.isArray(ids) && ids.includes(node.id);
   }
