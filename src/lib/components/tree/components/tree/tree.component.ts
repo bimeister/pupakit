@@ -144,6 +144,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   public readonly dataSource: TreeDataSource;
   public readonly filteredSource$: Observable<FlatTreeItem[]>;
   public readonly flatTreeItems$: Observable<FlatTreeItem[]>;
+  public readonly processingIsActive$: BehaviorSubject<boolean>;
 
   public readonly expandNodeWithDelay$: Subject<FlatTreeItem | null> = new Subject<FlatTreeItem | null>();
 
@@ -222,6 +223,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.dataSource = this.manipulator.dataSource;
     this.filteredSource$ = this.manipulator.dataSource.filteredData$;
     this.flatTreeItems$ = this.dataSource.sortedData$;
+    this.processingIsActive$ = this.manipulator.processingIsActive$;
   }
 
   public ngOnInit(): void {
@@ -580,7 +582,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   private showLoaderOnActiveProcessing(): Subscription {
-    return this.manipulator.processingIsActive$
+    return this.processingIsActive$
       .pipe(
         debounce((isActive: boolean) => {
           if (isActive) {
