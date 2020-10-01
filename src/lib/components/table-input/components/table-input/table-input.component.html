@@ -8,5 +8,18 @@
     [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
     (input)="updateValue(inputElement.value)"
   />
-  <ion-icon class="table-input-container__icon" *ngIf="isValid$ | async" name="md-create"></ion-icon>
+  <ion-icon
+    class="table-input-container__icon"
+    *ngIf="isValid$ | async; else errorTemplate"
+    [name]="hoverIconName$ | async"
+  ></ion-icon>
 </div>
+
+<ng-template #errorTemplate>
+  <ion-icon
+    class="table-input-container__icon-error"
+    *ngIf="!(isDisabled$ | async)"
+    [name]="errorIconName$ | async"
+    [title]="errorTitle$ | async"
+  ></ion-icon>
+</ng-template>

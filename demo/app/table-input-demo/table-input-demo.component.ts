@@ -17,4 +17,5 @@ export class TableInputDemoComponent {
   public readonly disabledValueTableInputControl: FormControl = new FormControl({ value: '33 кВт', disabled: true });
 
   public readonly validatorTableInputControl: FormControl = new FormControl('1', [Validators.maxLength(2)]);
+  public readonly validator2TableInputControl: FormControl = new FormControl('1', [Validators.maxLength(2)]);
 }
