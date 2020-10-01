@@ -14,6 +14,7 @@ export { DropdownModule } from './lib/components/dropdown/dropdown.module';
 export { DroppableModule } from './lib/components/droppable/droppable.module';
 export { IconButtonModule } from './lib/components/icon-button/icon-button.module';
 export { InputModule } from './lib/components/input/input.module';
+export { TableInputModule } from './lib/components/table-input/table-input.module';
 export { LayoutModule } from './lib/components/layout/layout.module';
 export { ModalModule } from './lib/components/modal/modal.module';
 export { RadioGroupModule } from './lib/components/radio-group/radio-group.module';

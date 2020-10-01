@@ -33,6 +33,7 @@ import { SelectorModule } from './components/selector/selector.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { SwitcherModule } from './components/switcher/switcher.module';
+import { TableInputModule } from './components/table-input/table-input.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { TextareaModule } from './components/textarea/textarea.module';
 import { TileModule } from './components/tile/tile.module';
@@ -60,6 +61,7 @@ const EXPORTS: any[] = [
   DroppableModule,
   IconButtonModule,
   InputModule,
+  TableInputModule,
   LayoutModule,
   ModalModule,
   RadioGroupModule,

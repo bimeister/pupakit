@@ -42,6 +42,7 @@ import { SelectMultipleDemoComponent } from './select-multiple-demo/select-multi
 import { SelectorDemoComponent } from './selector-demo/selector-demo.component';
 import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
+import { TableInputDemoComponent } from './table-input-demo/table-input-demo.component';
 import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
 import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
@@ -59,6 +60,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     AppComponent,
     LoaderDemoComponent,
     InputDemoComponent,
+    TableInputDemoComponent,
     CheckboxDemoComponent,
     ButtonDemoComponent,
     DropdownDemoComponent,
@@ -155,6 +157,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       {
         path: 'input',
         component: InputDemoComponent
+      },
+      {
+        path: 'table-input',
+        component: TableInputDemoComponent
       },
       {
         path: 'search-field',

@@ -1,0 +1,114 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+
+  &:focus {
+    background-color: color(light);
+  }
+}
+
+.table-input-container {
+  box-sizing: border-box;
+  outline: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+  width: 100%;
+
+  background-color: transparent;
+  outline: none;
+  color: color(text);
+  border-radius: rems(0.5);
+  border: 1px solid transparent;
+  overflow-y: hidden;
+
+  &__input {
+    width: 100%;
+
+    box-sizing: border-box;
+    padding: 0 rems(2) 0 rems(0.5);
+
+    background-color: transparent;
+    border: 1px solid color(grey-apple);
+    border-radius: rems(0.5);
+    color: color(text);
+    outline: none;
+    height: rems(2);
+    font-size: rems(1);
+    line-height: 1;
+
+    @include regular();
+    @include transition(#{'background, border, color'});
+    @include flex-container(row, center, space-between, nowrap);
+
+    &::placeholder {
+      position: absolute;
+      left: 0;
+      color: color(grey-light);
+      @include transition(#{'color'});
+    }
+
+    &:not([disabled]):hover {
+      background-color: color(light);
+      color: color(main);
+
+      + .table-input-container__icon {
+        opacity: 1;
+      }
+
+      &::placeholder {
+        color: color(main);
+      }
+    }
+
+    &:not([disabled]):focus {
+      background-color: color(light);
+      color: color(main);
+
+      + .table-input-container__icon {
+        opacity: 0;
+      }
+
+      &::placeholder {
+        color: color(main);
+      }
+    }
+
+    &:disabled {
+      color: color(grey-ivory);
+      cursor: not-allowed;
+      user-select: none;
+      border: none;
+
+      &::placeholder {
+        color: color(grey-ivory);
+      }
+
+      &::selection {
+        background: transparent;
+      }
+    }
+
+    &.invalid:not([disabled]) {
+      border-color: color(error);
+    }
+  }
+
+  &__icon {
+    position: absolute;
+    right: rems(0.5);
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    color: color(main);
+
+    @include transition(#{'opacity'});
+  }
+}

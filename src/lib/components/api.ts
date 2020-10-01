@@ -34,6 +34,7 @@ export * from './selector/api';
 export * from './skeleton/api';
 export * from './spinner/api';
 export * from './switcher/api';
+export * from './table-input/api';
 export * from './tabs/api';
 export * from './textarea/api';
 export * from './tile/api';
