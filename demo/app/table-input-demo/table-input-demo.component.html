@@ -52,6 +52,19 @@
       <pupa-table-input
         class="table-input-container__input"
         [formControl]="validatorTableInputControl"
+        [errorTitle]="'Неправильное значение'"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">validator errors: max-length 2 with different icons</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="validator2TableInputControl"
+        [errorTitle]="'Неправильное значение'"
+        [hoverIconName]="'md-beer'"
+        [errorIconName]="'md-bonfire'"
         placeholder="Введите значение"
       ></pupa-table-input>
     </div>

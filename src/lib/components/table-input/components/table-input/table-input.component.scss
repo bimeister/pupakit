@@ -24,7 +24,6 @@
 
   background-color: transparent;
   outline: none;
-  color: color(text);
   border-radius: rems(0.5);
   border: 1px solid transparent;
   overflow-y: hidden;
@@ -38,7 +37,7 @@
     background-color: transparent;
     border: 1px solid color(grey-apple);
     border-radius: rems(0.5);
-    color: color(text);
+    color: #464646; // solve this
     outline: none;
     height: rems(2);
     font-size: rems(1);
@@ -56,7 +55,6 @@
     }
 
     &:not([disabled]):hover {
-      background-color: color(light);
       color: color(main);
 
       + .table-input-container__icon {
@@ -70,6 +68,7 @@
 
     &:not([disabled]):focus {
       background-color: color(light);
+      border-color: color(active);
       color: color(main);
 
       + .table-input-container__icon {
@@ -108,7 +107,17 @@
     transform: translateY(-50%);
     opacity: 0;
     color: color(main);
+    font-size: rems(1);
 
     @include transition(#{'opacity'});
+  }
+
+  &__icon-error {
+    position: absolute;
+    right: rems(0.5);
+    top: 50%;
+    transform: translateY(-50%);
+    color: color(error);
+    font-size: rems(1);
   }
 }
