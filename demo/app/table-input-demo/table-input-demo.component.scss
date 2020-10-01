@@ -1,0 +1,31 @@
+@import 'mixins';
+@import 'themes/functions';
+
+.table-input-container {
+  &.another-theme {
+    background-color: color(light);
+  }
+
+  &__row {
+    display: flex;
+    margin-bottom: rems(1);
+    width: 100%;
+    align-items: center;
+  }
+
+  &__label {
+    width: 20%;
+  }
+
+  &__input {
+    flex: 1;
+  }
+}
+
+.switcher {
+  display: flex;
+
+  &__label {
+    margin-left: rems(1);
+  }
+}

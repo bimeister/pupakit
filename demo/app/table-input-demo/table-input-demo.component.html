@@ -1,0 +1,59 @@
+<h1>
+  Table Input
+</h1>
+
+<div class="group">
+  <div class="switcher">
+    <pupa-switcher [formControl]="switcherThemeControl" [id]="'formControl'"></pupa-switcher>
+    <label class="switcher__label" for="formControl">Switch Background</label>
+  </div>
+</div>
+
+<div class="group table-input-container" [class.another-theme]="switcherThemeControl.value">
+  <div class="column">
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">empty</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="emptyTableInputControl"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">with value</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="valueTableInputControl"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">disabled empty</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="disabledEmptyTableInputControl"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">disabled with value</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="disabledValueTableInputControl"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+
+    <div class="table-input-container__row">
+      <div class="table-input-container__label">validator errors: max-length 2</div>
+      <pupa-table-input
+        class="table-input-container__input"
+        [formControl]="validatorTableInputControl"
+        placeholder="Введите значение"
+      ></pupa-table-input>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div class="table-input-container">
+  <input
+    #inputElement
+    class="table-input-container__input"
+    [placeholder]="placeholder"
+    [value]="value$ | async"
+    [attr.disabled]="isDisabled$ | async"
+    [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
+    (input)="updateValue(inputElement.value)"
+  />
+  <ion-icon class="table-input-container__icon" *ngIf="isValid$ | async" name="md-create"></ion-icon>
+</div>
