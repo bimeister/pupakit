@@ -2,137 +2,122 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
+  HostBinding,
   Input,
+  OnChanges,
   Optional,
   Output,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import { AbstractControl, ControlValueAccessor, NgControl, ValidationErrors, Validator } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { isNil } from '@meistersoft/utilities';
-
+import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UnitMinHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-min-height-style-changes-processor.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { MinHeightUnitBinding } from '../../../../../internal/declarations/interfaces/min-height-unit-binding.interface';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
+import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
 import { TextareaResize } from '../../../../../internal/declarations/types/textarea-resize.type';
+import { TextareaStateService } from '../../services/textarea-state.service';
 
 @Component({
   selector: 'pupa-textarea',
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
-  providers: [],
+  providers: [TextareaStateService],
+  encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TextareaComponent implements ControlValueAccessor, Validator, AfterViewInit {
-  @ViewChild(CdkTextareaAutosize) public readonly autosizeDirective: CdkTextareaAutosize;
+export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlValueAccessor, MinHeightUnitBinding {
+  @Input() public readonly placeholder: string = '';
 
-  @Input() public autosize: boolean = false;
-  @Input() public resize: TextareaResize = 'horizontal';
-  @Input() public maxLength: number | null = null;
-  @Input()
-  public set valid(newValue: boolean) {
-    this.validValue = newValue;
-  }
-  public get valid(): boolean {
-    if (isNil(this.formControl)) {
-      return this.validValue;
-    }
-    return this.formControl.valid;
-  }
-  @Input()
-  public set disabled(newValue: boolean) {
-    this.disabledValue = newValue;
-  }
-  public get disabled(): boolean {
-    if (isNil(this.formControl)) {
-      return this.disabledValue;
-    }
-    return this.formControl.disabled;
-  }
-  @Input() public placeholder: string = '';
-  @Input() public id: string;
-  @Input() public name: string;
-  private valueData: string = '';
-  @Input() public set value(newValue: string) {
-    this.updateValue(newValue);
-  }
-  public get value(): string {
-    if (isNil(this.valueData)) {
-      return '';
-    }
-    return this.valueData;
-  }
+  @Input() public readonly resize: TextareaResize = 'both';
+  public readonly resizeMode$: BehaviorSubject<string> = new BehaviorSubject('both');
 
-  @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
+  @ViewChild(CdkTextareaAutosize) public readonly cdkAutosizeDirective: CdkTextareaAutosize;
+  @Input() public readonly autosize: boolean = false;
+  public readonly autosizeIsEnabled$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+
+  @Input() public readonly maxLength: Nullable<number> = null;
+  public readonly maxLength$: BehaviorSubject<Nullable<number>> = new BehaviorSubject(null);
+
+  private readonly unitMinHeightStyleChangesProcessor: UnitMinHeightStyleChangesProcessor<
+    this
+  > = new UnitMinHeightStyleChangesProcessor(this.domSanitizer);
+
+  @Input() public readonly minHeight: Nullable<string> = null;
+  // tslint:disable: no-input-rename
+  @Input('minHeight.%') public readonly minHeightPercents: Nullable<number> = null;
+  @Input('minHeight.px') public readonly minHeightPx: Nullable<number> = null;
+  @Input('minHeight.vw') public readonly minHeightVw: Nullable<number> = null;
+  @Input('minHeight.rem') public readonly minHeightRem: Nullable<number> = null;
+  // tslint:enable: no-input-rename
+
+  @HostBinding('style.minHeight') public minHeightStyle: SafeStyle;
+
+  public readonly minHeight$: Observable<SafeStyle> = this.unitMinHeightStyleChangesProcessor.safeStyle$;
 
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
-  public set touched(newValue: boolean) {
-    this.touchedValue = newValue;
-  }
+  public readonly value$: BehaviorSubject<string> = this.textareaStateService.currentValue$;
+  public readonly valueLength$: Observable<number> = this.textareaStateService.currentValueLength$;
+  public readonly isDisabled$: BehaviorSubject<boolean> = this.textareaStateService.isDisabled$;
+  public readonly isValid$: Observable<boolean> = this.textareaStateService.isValid$;
+  public readonly isTouched$: Observable<boolean> = this.textareaStateService.isTouched$;
 
-  public get touched(): boolean {
-    if (isNil(this.formControl)) {
-      return this.touchedValue;
+  constructor(
+    @Optional() ngControl: NgControl,
+    private readonly textareaStateService: TextareaStateService<T>,
+    private readonly domSanitizer: DomSanitizer
+  ) {
+    if (isNil(ngControl)) {
+      return;
     }
-    return this.formControl.touched;
-  }
+    ngControl.valueAccessor = this;
 
-  private touchedValue: boolean = false;
-  private disabledValue: boolean = false;
-  private validValue: boolean = false;
-
-  public get formControl(): AbstractControl {
-    return !isNil(this.ngControl) ? this.ngControl.control : null;
-  }
-
-  constructor(private readonly changeDetectorRef: ChangeDetectorRef, @Optional() public readonly ngControl: NgControl) {
-    if (!isNil(ngControl)) {
-      ngControl.valueAccessor = this;
-    }
+    this.textareaStateService.setControlRef(ngControl);
   }
 
   public ngAfterViewInit(): void {
-    this.autosizeDirective.enabled = this.autosize;
+    this.cdkAutosizeDirective.enabled = this.autosize;
   }
 
-  public registerOnChange(fn: VoidFunction): void {
-    this.onChange = fn;
-  }
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.unitMinHeightStyleChangesProcessor.process(changes);
 
-  public registerOnTouched(fn: VoidFunction): void {
-    this.onTouched = (): void => {
-      fn();
-      this.touchedValue = true;
-    };
-  }
-
-  public writeValue(outerValue: string): void {
-    this.valueData = outerValue;
-    this.changeDetectorRef.detectChanges();
-  }
-
-  public updateValue(innerValue: string): void {
-    this.valueData = innerValue;
-    this.onChange(innerValue);
-    this.onTouched();
-    this.valueChange.emit(this.value);
-    this.changeDetectorRef.markForCheck();
-  }
-
-  public validate(control: AbstractControl | NgControl): ValidationErrors | null {
-    if (!isNil(this.valid)) {
-      return this.valid ? null : { manualError: true };
+    if (isNil(changes)) {
+      return;
     }
-    if (isNil(control) || isNil(control.errors) || control.pristine || control.untouched || control.disabled) {
-      return null;
-    }
-    return control.errors;
+    this.processResizeModeChange(changes?.resize);
+    this.processAutosizeChange(changes?.autosize);
+    this.processMaxLengthChange(changes?.maxLength);
+  }
+
+  public updateValue(value: T): void {
+    this.textareaStateService.updateValue(value);
+  }
+
+  public writeValue(newValue: T): void {
+    this.textareaStateService.setValue(newValue);
+  }
+
+  public registerOnChange(onChange: OnChangeCallback<T>): void {
+    this.textareaStateService.defineOnChangeCallback(onChange);
+  }
+
+  public registerOnTouched(onTouched: OnTouchedCallback): void {
+    this.textareaStateService.defineOnTouchedCallback(onTouched);
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    this.disabledValue = isDisabled;
-    this.changeDetectorRef.markForCheck();
+    this.textareaStateService.setDisabledState(isDisabled);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -143,11 +128,37 @@ export class TextareaComponent implements ControlValueAccessor, Validator, After
     this.blur.emit(blurEvent);
   }
 
-  public onChange: CallableFunction = (_innerValue: string) => {
-    return;
-  };
+  public resizeTextareaToFitContent(): void {
+    this.cdkAutosizeDirective.resizeToFitContent();
+  }
 
-  public onTouched: VoidFunction = () => {
-    return;
-  };
+  public resetTextareaToOriginalSize(): void {
+    this.cdkAutosizeDirective.reset();
+  }
+
+  private processResizeModeChange(change: ComponentChange<this, TextareaResize>): void {
+    const updatedValue: TextareaResize | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.resizeMode$.next(updatedValue);
+  }
+
+  private processAutosizeChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue) || isNil(this.cdkAutosizeDirective)) {
+      return;
+    }
+
+    this.cdkAutosizeDirective.enabled = updatedValue;
+    this.autosizeIsEnabled$.next(updatedValue);
+  }
+
+  private processMaxLengthChange(change: ComponentChange<this, Nullable<number>>): void {
+    const updatedValue: Nullable<number> = change?.currentValue;
+    this.maxLength$.next(updatedValue);
+  }
 }

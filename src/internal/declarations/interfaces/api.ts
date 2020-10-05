@@ -25,6 +25,8 @@ export * from './height-unit-binding.interface';
 export * from './height-unit-changes.interface';
 export * from './icon-data.interface';
 export * from './layout-drawer-configuration.interface';
+export * from './min-height-unit-binding.interface';
+export * from './min-height-unit-changes.interface';
 export * from './modal-window-configuration.interface';
 export * from './modal-window-data.interface';
 export * from './select-option.interface';

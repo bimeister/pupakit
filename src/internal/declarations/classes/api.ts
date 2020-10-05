@@ -11,5 +11,6 @@ export * from './hierarchical-tree-data-source.class';
 export * from './tree-item.class';
 export * from './tree-manipulator.class';
 export * from './unit-height-style-changes-processor.class';
+export * from './unit-min-height-style-changes-processor.class';
 export * from './unit-width-style-changes-processor.class';
 export * from './abstract/api';
