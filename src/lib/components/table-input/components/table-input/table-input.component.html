@@ -7,6 +7,8 @@
     [attr.disabled]="isDisabled$ | async"
     [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
     (input)="updateValue(inputElement.value)"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
   />
   <ion-icon
     class="table-input-container__icon"

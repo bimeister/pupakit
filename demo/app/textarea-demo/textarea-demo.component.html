@@ -1,3 +1,27 @@
+<section class="group">
+  <div class="column">
+    <h3>Use min-height input</h3>
+    <pupa-textarea
+      [placeholder]="'Placeholder'"
+      [autosize]="false"
+      [formControl]="minHeightFormControl"
+      [minHeight.px]="300"
+      [maxLength]="128"
+    ></pupa-textarea>
+  </div>
+
+  <div class="column">
+    <h3>Use min-height input with autosize</h3>
+    <pupa-textarea
+      [placeholder]="'Placeholder'"
+      [autosize]="true"
+      [formControl]="minHeightWithAutosizeFormControl"
+      [minHeight.px]="300"
+      [maxLength]="128"
+    ></pupa-textarea>
+  </div>
+</section>
+
 <section class="combo" *ngFor="let combo of combos; let index = index">
   <div>resize: {{ combo.resize }}</div>
   <div>placeholder: {{ combo.placeholder }}</div>
@@ -7,9 +31,8 @@
   <div>maxLength: {{ combo.maxLength }}</div>
   <div>value:{{ formArray.get([index]).value }}</div>
   <pupa-textarea
-    [resize]="combo.resize"
+    [resizeMode]="combo.resize"
     [placeholder]="combo.placeholder"
-    [disabled]="combo.disabled"
     [autosize]="combo.autosize"
     [formControl]="formArray.get([index])"
     [maxLength]="combo.maxLength"

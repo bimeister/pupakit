@@ -1,19 +1,19 @@
-<textarea
-  cdkTextareaAutosize
-  class="textarea"
-  [value]="value"
-  [placeholder]="placeholder"
-  [ngClass]="{
-    input_valid: touched && valid && !disabled,
-    input_invalid: touched && !valid && !disabled
-  }"
-  [style.resize]="resize"
-  [id]="id"
-  [name]="name"
-  [attr.disabled]="disabled ? true : null"
-  (input)="updateValue($any($event.target).value)"
-  (focus)="emitFocusEvent($event)"
-  (blur)="emitBlurEvent($event)"
-  autocomplete="off"
-></textarea>
-<div class="count" *ngIf="maxLength">{{ value.length }}/{{ maxLength }}</div>
+<div class="textarea-container">
+  <textarea
+    #textareaElement
+    cdkTextareaAutosize
+    class="textarea-container__textarea"
+    [placeholder]="placeholder"
+    [value]="value$ | async"
+    [attr.disabled]="isDisabled$ | async"
+    [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
+    (input)="updateValue(textareaElement.value)"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
+    autocomplete="off"
+    [style.resize]="resizeMode$ | async"
+    [style.minHeight]="minHeight$ | async"
+  >
+  </textarea>
+  <div class="textarea-container__count" *ngIf="maxLength$ | async">{{ valueLength$ | async }}/{{ maxLength }}</div>
+</div>

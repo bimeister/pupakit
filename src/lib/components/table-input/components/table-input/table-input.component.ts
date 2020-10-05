@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Optional,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -27,6 +36,9 @@ export class TableInputComponent<T> implements OnChanges, ControlValueAccessor {
 
   @Input() public readonly errorIconName: string = 'md-alert';
   public readonly errorIconName$: BehaviorSubject<string> = new BehaviorSubject('md-alert');
+
+  @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   public readonly value$: BehaviorSubject<string> = this.tableInputStateService.currentValue$;
   public readonly isDisabled$: BehaviorSubject<boolean> = this.tableInputStateService.isDisabled$;
@@ -69,6 +81,14 @@ export class TableInputComponent<T> implements OnChanges, ControlValueAccessor {
 
   public setDisabledState(isDisabled: boolean): void {
     this.tableInputStateService.setDisabledState(isDisabled);
+  }
+
+  public emitFocusEvent(focusEvent: FocusEvent): void {
+    this.focus.emit(focusEvent);
+  }
+
+  public emitBlurEvent(blurEvent: FocusEvent): void {
+    this.blur.emit(blurEvent);
   }
 
   private processErrorTitleChange(change: ComponentChange<this, string>): void {
