@@ -7,6 +7,7 @@ import { SelectOuterValue } from '../types/select-outer-value.type';
 
 export interface SelectStateService<T> {
   readonly currentValue$: Observable<T[]>;
+
   readonly isDisabled$: BehaviorSubject<boolean>;
   readonly isExpanded$: BehaviorSubject<boolean>;
 

@@ -1,0 +1,36 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.item {
+  box-sizing: border-box;
+  height: px(24);
+  width: calc(100% - #{px(4)});
+  margin: 0 px(2);
+  cursor: pointer;
+  background: color('white');
+  color: color('grey-text');
+  border-radius: px(4);
+  padding: 0 px(8);
+  user-select: none;
+  font-size: rems(1);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &_picked,
+  &:hover {
+    background: color('active');
+    color: color('white');
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}

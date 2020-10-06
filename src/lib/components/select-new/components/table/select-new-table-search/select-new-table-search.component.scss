@@ -1,0 +1,39 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+
+:host {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.search-field {
+  box-sizing: border-box;
+  outline: none;
+  width: calc(100% - #{px(16)});
+  height: px(24);
+  margin: 0 px(8) px(8) px(8);
+  border: px(1) solid color('grey-apple');
+  border-radius: px(8);
+  background: color('white');
+  padding: px(2) px(20) px(2) px(12);
+  font-size: rems(1);
+
+  &::placeholder {
+    color: color('grey-ivory');
+  }
+}
+
+.clear-button {
+  position: absolute;
+  top: px(4);
+  right: px(12);
+  color: color('main');
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: px(16);
+
+  &:hover {
+    opacity: 1;
+  }
+}

@@ -7,5 +7,5 @@ export * from './select-new-table-button/api';
 export * from './select-new-table-dropdown/api';
 export * from './select-new-table-item/api';
 export * from './select-new-table-items-container/api';
-export * from './select-new-table-items-search/api';
-export * from './select-new-table-items-tree/api';
+export * from './select-new-table-search/api';
+export * from './select-new-table-tree/api';

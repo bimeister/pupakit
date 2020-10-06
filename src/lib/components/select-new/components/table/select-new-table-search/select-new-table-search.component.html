@@ -1,0 +1,2 @@
+<input class="search-field" [placeholder]="placeholder" #input [formControl]="control" />
+<ion-icon *ngIf="(query$ | async) !== ''" (click)="resetQuery()" name="close-circle" class="clear-button"></ion-icon>

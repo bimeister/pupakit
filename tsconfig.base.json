@@ -10,7 +10,7 @@
     "lib": ["dom", "es2017", "es2018", "es2019", "es2020", "esnext"],
     "importHelpers": true,
     "locale": "en",
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "node",
     "newLine": "lf",
     "noUnusedLocals": true,
@@ -24,7 +24,7 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "target": "ESNext",
+    "target": "es2017",
     "types": ["node"],
     "typeRoots": ["node_modules/@types"],
     "importsNotUsedAsValues": "preserve"
