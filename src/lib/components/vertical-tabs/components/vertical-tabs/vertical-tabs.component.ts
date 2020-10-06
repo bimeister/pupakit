@@ -11,7 +11,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 
-import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
+import { TabsContainer } from '../../../../../internal/declarations/classes/abstract/tabs-container.abstract';
 import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-item.component';
 
 @Component({

@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ElementRef, Inject, Renderer2 } from '@angular/core';
 
-import { PositionController } from '../../../../../internal/declarations/classes/position-controller.class';
+import { PositionController } from '../../../../../internal/declarations/classes/abstract/position-controller.abstract';
 
 /** @dynamic */
 @Component({

@@ -10,7 +10,7 @@ import {
   QueryList
 } from '@angular/core';
 
-import { TabsContainer } from '../../../../../internal/declarations/classes/tabs-container.class';
+import { TabsContainer } from '../../../../../internal/declarations/classes/abstract/tabs-container.abstract';
 import { ChipTabsItemComponent } from '../chip-tabs-item/chip-tabs-item.component';
 
 @Component({

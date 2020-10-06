@@ -3,7 +3,7 @@ import { filterNotNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { Position } from '../types/position.type';
+import { Position } from '../../types/position.type';
 
 @Injectable()
 export abstract class PositionController {

@@ -2,8 +2,8 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { isNil } from '@meistersoft/utilities';
 import { ReplaySubject } from 'rxjs';
 
-import { ComponentChange } from '../interfaces/component-change.interface';
-import { ComponentChanges } from '../interfaces/component-changes.interface';
+import { ComponentChange } from '../../interfaces/component-change.interface';
+import { ComponentChanges } from '../../interfaces/component-changes.interface';
 
 export abstract class UnitStyleChangesProcessor<C> {
   public readonly safeStyle$: ReplaySubject<SafeStyle> = new ReplaySubject<SafeStyle>(1);

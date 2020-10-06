@@ -1,6 +1,6 @@
 import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
 
-import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
+import { TabsContainerItem } from '../../../../../internal/declarations/classes/abstract/tabs-container-item.abstract';
 import { VertiacalTabsKind } from '../../../../../internal/declarations/types/vertical-tabs-kind.type';
 
 @Component({

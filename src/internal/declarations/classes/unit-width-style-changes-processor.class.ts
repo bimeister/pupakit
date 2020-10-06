@@ -1,7 +1,7 @@
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { WidthUnitChanges } from '../interfaces/width-unit-changes.interface';
-import { UnitStyleChangesProcessor } from './unit-style-changes-processor.class';
+import { UnitStyleChangesProcessor } from './abstract/unit-style-changes-processor.abstract';
 
 export class UnitWidthStyleChangesProcessor<C> extends UnitStyleChangesProcessor<C> {
   constructor(protected readonly domSanitizer: DomSanitizer) {

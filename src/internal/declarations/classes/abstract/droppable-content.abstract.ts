@@ -1,7 +1,7 @@
 import { CdkPortal } from '@angular/cdk/portal';
-import { AfterViewInit, Host, ViewChild, Directive } from '@angular/core';
+import { AfterViewInit, Directive, Host, ViewChild } from '@angular/core';
 
-import { DroppableComponent } from '../../../lib/components/droppable/components/droppable/droppable.component';
+import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
 
 @Directive()
 export abstract class DroppableContent implements AfterViewInit {

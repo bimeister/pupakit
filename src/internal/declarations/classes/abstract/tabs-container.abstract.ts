@@ -3,8 +3,8 @@ import { isNil } from '@meistersoft/utilities';
 import { merge, ReplaySubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
-import { Uuid } from '../types/uuid.type';
-import { TabsContainerItem } from './tabs-container-item.class';
+import { Uuid } from '../../types/uuid.type';
+import { TabsContainerItem } from './tabs-container-item.abstract';
 
 @Injectable()
 export abstract class TabsContainer implements AfterViewInit, OnDestroy {
