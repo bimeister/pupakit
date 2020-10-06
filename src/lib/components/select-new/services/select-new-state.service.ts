@@ -4,6 +4,7 @@ import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
+import { SelectStateService } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
@@ -11,7 +12,7 @@ import { SelectOuterValue } from '../../../../internal/declarations/types/select
 @Injectable({
   providedIn: 'any'
 })
-export class SelectNewStateService<T> {
+export class SelectNewStateService<T> implements SelectStateService<T> {
   private readonly currentSerializedValue$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(
     new Set<string>()
   );

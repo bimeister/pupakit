@@ -17,15 +17,14 @@ import { TreeComponent } from '../../../../tree/components/tree/tree.component';
 import { SelectNewStateService } from '../../../services/select-new-state.service';
 import { SelectTreeBase } from './../../../../../../internal/declarations/classes/abstract/select-tree-base.abstract';
 
-/** @deprecated remove ViewEncapsulation.None when tree styling is available */
 @Component({
-  selector: 'pupa-select-new-tree',
-  templateUrl: './select-new-tree.component.html',
-  styleUrls: ['./select-new-tree.component.scss'],
-  encapsulation: ViewEncapsulation.None,
+  selector: 'pupa-select-new-table-items-tree',
+  templateUrl: './select-new-table-items-tree.component.html',
+  styleUrls: ['./select-new-table-items-tree.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectNewTreeComponent extends SelectTreeBase {
+export class SelectNewTableItemsTreeComponent extends SelectTreeBase {
   @ViewChild('customPupaTreeComponent') public readonly customPupaTreeComponent: TreeComponent;
   @ViewChild('hierarchicalTreeComponent') public readonly hierarchicalTreeComponent: TreeComponent;
   @ViewChild('flatTreeComponent') public readonly flatTreeComponent: TreeComponent;

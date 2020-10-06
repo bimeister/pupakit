@@ -35,7 +35,6 @@ export * from './skeleton/api';
 export * from './spinner/api';
 export * from './switcher/api';
 export * from './table-input/api';
-export * from './table-select/api';
 export * from './tabs/api';
 export * from './textarea/api';
 export * from './tile/api';

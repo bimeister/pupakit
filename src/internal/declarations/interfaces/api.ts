@@ -28,6 +28,7 @@ export * from './layout-drawer-configuration.interface';
 export * from './modal-window-configuration.interface';
 export * from './modal-window-data.interface';
 export * from './select-option.interface';
+export * from './select-state-service.interface';
 export * from './sort-model.interface';
 export * from './tab.interface';
 export * from './tooltip-config.interface';

@@ -57,5 +57,12 @@ export {
   ButtonColor,
   GridRowEvent,
   GridState,
-  SortModel
+  SortModel,
+  SelectBase,
+  SelectItemBase,
+  SelectTreeBase,
+  SelectSearchBase,
+  SelectButtonBase,
+  SelectDropdownBase,
+  SelectItemsContainerBase
 } from './internal/api';
