@@ -3,9 +3,9 @@ import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { SelectNewStateService } from '../../services/select-new-state.service';
+import { ComponentChange } from '../../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../../internal/declarations/interfaces/component-changes.interface';
+import { SelectNewStateService } from '../../../services/select-new-state.service';
 
 @Component({
   selector: 'pupa-select-new-item',

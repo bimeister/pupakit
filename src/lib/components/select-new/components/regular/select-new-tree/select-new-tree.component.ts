@@ -12,12 +12,12 @@ import {
 import { asyncScheduler, BehaviorSubject, Observable, timer } from 'rxjs';
 import { delay, map, observeOn, subscribeOn, take, tap } from 'rxjs/operators';
 
-import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
-import { TreeType } from '../../../../../internal/declarations/enums/tree-type.enum';
-import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
-import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
-import { TreeComponent } from '../../../tree/components/tree/tree.component';
-import { SelectNewStateService } from '../../services/select-new-state.service';
+import { FlatTreeItem } from '../../../../../../internal/declarations/classes/flat-tree-item.class';
+import { TreeType } from '../../../../../../internal/declarations/enums/tree-type.enum';
+import { TreeItemInterface } from '../../../../../../internal/declarations/interfaces/tree-item.interface';
+import { Uuid } from '../../../../../../internal/declarations/types/uuid.type';
+import { TreeComponent } from '../../../../tree/components/tree/tree.component';
+import { SelectNewStateService } from '../../../services/select-new-state.service';
 
 type TreePropertiesTransfer = Pick<
   TreeComponent,

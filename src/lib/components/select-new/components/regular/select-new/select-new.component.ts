@@ -13,12 +13,12 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { getElementAllNestedChildren, isNil } from '@meistersoft/utilities';
 import { map, take } from 'rxjs/operators';
 
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
-import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
-import { SelectOuterValue } from '../../../../../internal/declarations/types/select-outer-value.type';
-import { SelectNewStateService } from '../../services/select-new-state.service';
+import { ComponentChange } from '../../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../../internal/declarations/interfaces/component-changes.interface';
+import { OnChangeCallback } from '../../../../../../internal/declarations/types/on-change-callback.type';
+import { OnTouchedCallback } from '../../../../../../internal/declarations/types/on-touched-callback.type';
+import { SelectOuterValue } from '../../../../../../internal/declarations/types/select-outer-value.type';
+import { SelectNewStateService } from '../../../services/select-new-state.service';
 
 @Component({
   selector: 'pupa-select-new',

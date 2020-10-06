@@ -1,11 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { filterTruthy, isNil, filterNotNil } from '@meistersoft/utilities';
-import { Observable, Subscription, BehaviorSubject, combineLatest } from 'rxjs';
+import { filterNotNil, filterTruthy, isNil } from '@meistersoft/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 
-import { SelectNewStateService } from '../../services/select-new-state.service';
+import { SelectNewStateService } from '../../../services/select-new-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
 

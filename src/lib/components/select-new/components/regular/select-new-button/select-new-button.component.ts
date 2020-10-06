@@ -11,7 +11,8 @@ import {
 import { filterFalsy } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { SelectNewStateService } from '../../services/select-new-state.service';
+
+import { SelectNewStateService } from '../../../services/select-new-state.service';
 
 @Component({
   selector: 'pupa-select-new-button',
