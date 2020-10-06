@@ -1,0 +1,15 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.select {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 100%;
+}

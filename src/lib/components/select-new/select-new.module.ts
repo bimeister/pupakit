@@ -14,8 +14,8 @@ import { SelectNewTableButtonComponent } from './components/table/select-new-tab
 import { SelectNewTableDropdownComponent } from './components/table/select-new-table-dropdown/select-new-table-dropdown.component';
 import { SelectNewTableItemComponent } from './components/table/select-new-table-item/select-new-table-item.component';
 import { SelectNewTableItemsContainerComponent } from './components/table/select-new-table-items-container/select-new-table-items-container.component';
-import { SelectNewTableItemsSearchComponent } from './components/table/select-new-table-items-search/select-new-table-items-search.component';
-import { SelectNewTableItemsTreeComponent } from './components/table/select-new-table-items-tree/select-new-table-items-tree.component';
+import { SelectNewTableSearchComponent } from './components/table/select-new-table-search/select-new-table-search.component';
+import { SelectNewTableTreeComponent } from './components/table/select-new-table-tree/select-new-table-tree.component';
 import { SelectNewTableComponent } from './components/table/select-new-table/select-new-table.component';
 
 const COMPONENTS: any[] = [
@@ -31,8 +31,8 @@ const COMPONENTS: any[] = [
   SelectNewTableDropdownComponent,
   SelectNewTableItemComponent,
   SelectNewTableItemsContainerComponent,
-  SelectNewTableItemsSearchComponent,
-  SelectNewTableItemsTreeComponent
+  SelectNewTableSearchComponent,
+  SelectNewTableTreeComponent
 ];
 
 @NgModule({

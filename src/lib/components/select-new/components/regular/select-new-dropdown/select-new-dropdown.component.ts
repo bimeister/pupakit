@@ -3,9 +3,7 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { SelectNewStateService } from '../../../services/select-new-state.service';
-import {
-  SelectDropdownBase,
-} from './../../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
+import { SelectDropdownBase } from './../../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
 
 const ANIMATION_DURATION_MS: number = 150;
 

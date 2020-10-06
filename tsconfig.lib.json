@@ -3,8 +3,8 @@
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "declaration": true,
-    "inlineSources": false,
-    "module": "ESNext"
+    "inlineSources": true,
+    "module": "es2015"
   },
   "include": ["src"],
 
@@ -14,8 +14,7 @@
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true,
-    "enableResourceInlining": true,
-    "enableIvy": true
+    "enableResourceInlining": true
   },
   "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.stories.ts"]
 }

@@ -1,1 +1,19 @@
-<p>select-new-table-button works!</p>
+<button
+  type="button"
+  class="select-button"
+  [class.select-button_active]="isExpanded$ | async"
+  [class.select-button_disabled]="isDisabled$ | async"
+  [class.select-button_transparent]="transparent"
+  (click)="processButtonClick()"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+  #button
+>
+  <div class="select-button__text">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="select-button__icon">
+    <ion-icon name="ios-arrow-down"></ion-icon>
+  </div>
+</button>
