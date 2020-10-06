@@ -3,3 +3,4 @@
  */
 
 export * from './regular/api';
+export * from './table/api';

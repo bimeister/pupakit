@@ -4,13 +4,13 @@ import { SelectNewStateService } from '../../../services/select-new-state.servic
 import { SelectItemBase } from './../../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
 
 @Component({
-  selector: 'pupa-select-new-item',
-  templateUrl: './select-new-item.component.html',
-  styleUrls: ['./select-new-item.component.scss'],
+  selector: 'pupa-select-new-table-item',
+  templateUrl: './select-new-table-item.component.html',
+  styleUrls: ['./select-new-table-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectNewItemComponent<T> extends SelectItemBase<T> {
+export class SelectNewTableItemComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;
 
   constructor(selectNewStateService: SelectNewStateService<T>) {

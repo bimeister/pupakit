@@ -4,23 +4,24 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnChanges,
   Optional,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { ControlValueAccessor, NgControl } from '@angular/forms';
 
+import { SelectBase } from '../../../../../../internal/declarations/classes/abstract/select-base.abstract';
 import { SelectNewStateService } from '../../../services/select-new-state.service';
-import { SelectBase } from './../../../../../../internal/declarations/classes/abstract/select-base.abstract';
 
 @Component({
-  selector: 'pupa-select-new',
-  templateUrl: './select-new.component.html',
-  styleUrls: ['./select-new.component.scss'],
+  selector: 'pupa-select-new-table',
+  templateUrl: './select-new-table.component.html',
+  styleUrls: ['./select-new-table.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SelectNewStateService]
 })
-export class SelectNewComponent<T> extends SelectBase<T> {
+export class SelectNewTableComponent<T> extends SelectBase<T> implements OnChanges, ControlValueAccessor {
   @Input() public isMultiSelectionEnabled: boolean = false;
 
   constructor(

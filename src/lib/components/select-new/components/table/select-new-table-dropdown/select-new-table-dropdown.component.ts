@@ -3,16 +3,14 @@ import { CdkConnectedOverlay } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { SelectNewStateService } from '../../../services/select-new-state.service';
-import {
-  SelectDropdownBase,
-} from './../../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
+import { SelectDropdownBase } from './../../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
 
 const ANIMATION_DURATION_MS: number = 150;
 
 @Component({
-  selector: 'pupa-select-new-dropdown',
-  templateUrl: './select-new-dropdown.component.html',
-  styleUrls: ['./select-new-dropdown.component.scss'],
+  selector: 'pupa-select-new-table-dropdown',
+  templateUrl: './select-new-table-dropdown.component.html',
+  styleUrls: ['./select-new-table-dropdown.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
@@ -24,7 +22,7 @@ const ANIMATION_DURATION_MS: number = 150;
     ])
   ]
 })
-export class SelectNewDropdownComponent<T> extends SelectDropdownBase<T> {
+export class SelectNewTableDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;
 
   constructor(selectNewStateService: SelectNewStateService<T>) {
