@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 
-import { TabsContainerItem } from '../../../../../internal/declarations/classes/tabs-container-item.class';
+import { TabsContainerItem } from '../../../../../internal/declarations/classes/abstract/tabs-container-item.abstract';
 
 @Component({
   selector: 'pupa-chip-tabs-item',

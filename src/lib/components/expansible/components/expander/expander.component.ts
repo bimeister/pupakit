@@ -13,7 +13,7 @@ import {
 import { getUuid, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 
-import { PositionController } from '../../../../../internal/declarations/classes/position-controller.class';
+import { PositionController } from '../../../../../internal/declarations/classes/abstract/position-controller.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ExpanderBehavior } from '../../../../../internal/declarations/types/expander-behavior.type';

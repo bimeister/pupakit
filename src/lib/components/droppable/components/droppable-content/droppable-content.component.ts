@@ -1,7 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { DroppableContent } from '../../../../../internal/declarations/classes/droppable-content.class';
+import { DroppableContent } from '../../../../../internal/declarations/classes/abstract/droppable-content.abstract';
 import { DroppableWidth } from '../../../../../internal/declarations/types/droppable-width.type';
 
 @Component({

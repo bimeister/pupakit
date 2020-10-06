@@ -2,9 +2,9 @@ import { AfterViewInit, ChangeDetectorRef, Directive, HostListener, Input, OnCha
 import { getUuid, isNil } from '@meistersoft/utilities';
 import { Subject } from 'rxjs';
 
-import { ComponentChange } from '../interfaces/component-change.interface';
-import { ComponentChanges } from '../interfaces/component-changes.interface';
-import { Uuid } from '../types/uuid.type';
+import { ComponentChange } from '../../interfaces/component-change.interface';
+import { ComponentChanges } from '../../interfaces/component-changes.interface';
+import { Uuid } from '../../types/uuid.type';
 
 @Directive()
 export abstract class TabsContainerItem implements OnChanges, AfterViewInit {

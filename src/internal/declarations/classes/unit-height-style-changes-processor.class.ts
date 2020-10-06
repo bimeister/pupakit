@@ -1,7 +1,7 @@
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { HeightUnitChanges } from '../interfaces/height-unit-changes.interface';
-import { UnitStyleChangesProcessor } from './unit-style-changes-processor.class';
+import { UnitStyleChangesProcessor } from './abstract/unit-style-changes-processor.abstract';
 
 export class UnitHeightStyleChangesProcessor<C> extends UnitStyleChangesProcessor<C> {
   constructor(protected readonly domSanitizer: DomSanitizer) {
