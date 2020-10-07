@@ -5,11 +5,13 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'demo-input',
-  styleUrls: ['../demo.scss'],
+  styleUrls: ['../demo.scss', 'input-demo.component.scss'],
   templateUrl: './input-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent implements OnDestroy {
+  public readonly switcherThemeControl: FormControl = new FormControl(false);
+
   private readonly subscription: Subscription = new Subscription();
   public readonly sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
   public value: unknown = null;

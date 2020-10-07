@@ -1,17 +1,18 @@
 <h1>
   Input
 </h1>
-<button (click)="sampleFormControl.setValue('sample')">
-  FormControl.setValue('sample')
-</button>
-
-<button (click)="setValue('sample')">
-  FormControl.value = 'sample'
-</button>
 
 <div class="group">
-  <h2>Без контрола</h2>
-  <pupa-input></pupa-input>
+  <div class="switcher">
+    <pupa-switcher [formControl]="switcherThemeControl" [id]="'formControl'"></pupa-switcher>
+    <label class="switcher__label" for="formControl">Switch Background</label>
+  </div>
+</div>
+
+<div class="group inputs-container" [class.another-theme]="switcherThemeControl.value">
+  <div class="column">
+    <pupa-input-text size="small" placeholder="placeholder"></pupa-input-text>
+  </div>
 </div>
 
 <div class="group">
