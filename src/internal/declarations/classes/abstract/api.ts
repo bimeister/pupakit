@@ -3,6 +3,8 @@
  */
 
 export * from './droppable-content.abstract';
+export * from './input-base-control-value-accessor.abstract';
+export * from './input-base.abstract';
 export * from './position-controller.abstract';
 export * from './select-base.abstract';
 export * from './select-button-base.abstract';

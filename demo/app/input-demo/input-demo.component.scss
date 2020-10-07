@@ -1,0 +1,16 @@
+@import 'mixins';
+@import 'themes/functions';
+
+.inputs-container {
+  &.another-theme {
+    background-color: color(light);
+  }
+}
+
+.switcher {
+  display: flex;
+
+  &__label {
+    margin-left: rems(1);
+  }
+}
