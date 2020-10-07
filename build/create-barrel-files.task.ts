@@ -1,6 +1,5 @@
+import { executeCommandWithLogging } from '@meistersoft/utilities';
 import { parallel, TaskFunction } from 'gulp';
-
-import { executeCommandWithLogging } from './shared';
 
 export function createBarrelFilesTask(): TaskFunction {
   return parallel(createForComponents(), createForInternal());
