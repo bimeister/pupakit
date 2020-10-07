@@ -20,7 +20,6 @@ export { ModalModule } from './lib/components/modal/modal.module';
 export { RadioGroupModule } from './lib/components/radio-group/radio-group.module';
 export { RatingModule } from './lib/components/rating/rating.module';
 export { SearchFieldModule } from './lib/components/search-field/search-field.module';
-export { SelectModule } from './lib/components/select/select.module';
 export { SelectorModule } from './lib/components/selector/selector.module';
 export { SpinnerModule } from './lib/components/spinner/spinner.module';
 export { SwitcherModule } from './lib/components/switcher/switcher.module';

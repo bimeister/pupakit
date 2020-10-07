@@ -1,36 +1,6 @@
 <h1>Select</h1>
 <div class="container">
   <textarea class="placeholder"></textarea>
-  <form [formGroup]="form">
-    <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
-
-    <pupa-select
-      class="mb"
-      formControlName="select"
-      [items]="itemsWithoutCaption"
-      captionPropertyPath="name"
-    ></pupa-select>
-
-    <pupa-select
-      class="mb"
-      formControlName="select"
-      [items]="itemsWithoutCaptionNested"
-      [captionPropertyPath]="'data.name'"
-    ></pupa-select>
-
-    <pupa-select class="mb" formControlName="select" [items]="items" [disabled]="true"></pupa-select>
-
-    <div class="small-container mb">
-      <pupa-select formControlName="select" [items]="items" dropdownWidthType="fit-content"></pupa-select>
-    </div>
-    <div class="small-container mb">
-      <pupa-select [value]="'Lorem'" [items]="items" dropdownWidthType="fit-content"></pupa-select>
-    </div>
-  </form>
-
-  <form [formGroup]="form2">
-    <pupa-select class="mb" formControlName="select" [items]="items"></pupa-select>
-  </form>
 
   <pupa-select-new [formControl]="formControl">
     <pupa-select-new-button>
