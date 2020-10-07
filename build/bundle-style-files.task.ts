@@ -1,6 +1,5 @@
+import { executeCommandWithLogging } from '@meistersoft/utilities';
 import { series, TaskFunction } from 'gulp';
-
-import { executeCommandWithLogging } from './shared';
 
 export function bundleStyleFilesTask(): TaskFunction {
   return series(bundleScssFiles(), copyStylesToDistFolder(), processScssFiles());

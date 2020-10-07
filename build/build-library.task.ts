@@ -1,6 +1,5 @@
+import { executeCommandWithLogging } from '@meistersoft/utilities';
 import { TaskFunction } from 'gulp';
-
-import { executeCommandWithLogging } from './shared';
 
 export function buildLibraryTask(): TaskFunction {
   const command: string = 'ng build';

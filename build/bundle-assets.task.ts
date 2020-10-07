@@ -1,6 +1,5 @@
+import { executeCommandWithLogging } from '@meistersoft/utilities';
 import { TaskFunction } from 'gulp';
-
-import { executeCommandWithLogging } from './shared';
 
 export function bundleAssetsTask(): TaskFunction {
   const command: string = 'copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets';
