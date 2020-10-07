@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
+import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 
 @Component({
   selector: 'pupa-input-password',
@@ -8,4 +10,9 @@ import { InputBase } from '../../../../../internal/declarations/classes/abstract
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputPasswordComponent<T> extends InputBase<T> {}
+export class InputPasswordComponent extends InputBase<ValueType> {
+  public setValue(value: ValueType): void {
+    const serializedValue: string = isNil(value) ? '' : String(value);
+    this.value$.next(serializedValue);
+  }
+}

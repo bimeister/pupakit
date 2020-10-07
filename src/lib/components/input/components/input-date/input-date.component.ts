@@ -4,13 +4,13 @@ import { InputBase } from '../../../../../internal/declarations/classes/abstract
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 
 @Component({
-  selector: 'pupa-input-text',
-  templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss'],
+  selector: 'pupa-input-date',
+  templateUrl: './input-date.component.html',
+  styleUrls: ['./input-date.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputTextComponent extends InputBase<ValueType> {
+export class InputDateComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);

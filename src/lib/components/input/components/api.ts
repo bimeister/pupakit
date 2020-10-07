@@ -3,5 +3,8 @@
  */
 
 export * from './input/api';
+export * from './input-date/api';
+export * from './input-date-range/api';
+export * from './input-number/api';
 export * from './input-password/api';
 export * from './input-text/api';

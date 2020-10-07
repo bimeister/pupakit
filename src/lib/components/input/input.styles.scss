@@ -64,6 +64,11 @@
     }
   }
 
+  &__text {
+    max-width: calc(100% - #{rems(1)});
+    @include ellipsis-text-overflow;
+  }
+
   &__medium {
     height: rems(2);
     font-size: rems(1);
@@ -88,5 +93,38 @@
 
   &__invalid:not([disabled]) {
     border-color: color(error);
+    &:focus {
+      border-color: color(error);
+    }
+  }
+
+  &__transparent {
+    border: none;
+    background-color: transparent;
+    &:focus {
+      border: none;
+    }
+
+    &.input__invalid {
+      border: 1px solid color(error);
+    }
+  }
+}
+
+.dropdown-trigger {
+  width: 100%;
+  display: block;
+}
+
+.icon {
+  position: absolute;
+  right: rems(0.5);
+  color: color(success);
+  font-size: rems(1);
+  height: rems(1);
+  pointer-events: none;
+
+  &__calendar {
+    color: inherit;
   }
 }

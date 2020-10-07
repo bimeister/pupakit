@@ -1,0 +1,31 @@
+<div class="base-input-container">
+  <pupa-droppable>
+    <pupa-droppable-trigger class="dropdown-trigger">
+      <div
+        class="input"
+        [attr.disabled]="(isDisabled$ | async) ? true : null"
+        [ngClass]="{
+          input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
+          input__medium: size === 'medium',
+          input__small: size === 'small',
+          input__large: size === 'large',
+          input__transparent: transparent
+        }"
+      >
+        <span class="input__text">
+          {{ isDate(value$ | async) ? (value$ | async | date: 'dd.MM.yyyy') : null }}
+        </span>
+        <div class="icon icon__calendar">
+          <ion-icon name="ios-calendar"></ion-icon>
+        </div>
+      </div>
+    </pupa-droppable-trigger>
+    <pupa-droppable-native-content>
+      <pupa-datepicker
+        selectionMode="date"
+        (date)="updateValue($event)"
+        [selectedDate]="value$ | async"
+      ></pupa-datepicker>
+    </pupa-droppable-native-content>
+  </pupa-droppable>
+</div>

@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
+import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
@@ -39,6 +40,10 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
 
   public emitBlurEvent(blurEvent: FocusEvent): void {
     this.blur.emit(blurEvent);
+  }
+
+  public isDate(value: unknown): boolean {
+    return isDate(value);
   }
 
   private processSizeChange(change: ComponentChange<this, InputSize>): void {
