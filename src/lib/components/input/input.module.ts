@@ -8,10 +8,8 @@ import { InputDateComponent } from './components/input-date/input-date.component
 import { InputNumberComponent } from './components/input-number/input-number.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
-import { InputComponent } from './components/input/input.component';
 
 const EXPORTS: any[] = [
-  InputComponent,
   InputTextComponent,
   InputPasswordComponent,
   InputDateComponent,
