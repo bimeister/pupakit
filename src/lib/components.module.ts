@@ -28,7 +28,6 @@ import { RatingModule } from './components/rating/rating.module';
 import { SearchFieldModule } from './components/search-field/search-field.module';
 import { SelectMultipleModule } from './components/select-multiple/select-multiple.module';
 import { SelectNewModule } from './components/select-new/select-new.module';
-import { SelectModule } from './components/select/select.module';
 import { SelectorModule } from './components/selector/selector.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
@@ -67,7 +66,6 @@ const EXPORTS: any[] = [
   RadioGroupModule,
   RatingModule,
   SearchFieldModule,
-  SelectModule,
   SelectMultipleModule,
   SelectorModule,
   SpinnerModule,
