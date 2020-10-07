@@ -18,7 +18,7 @@ const MAX_LENGTH_EXAMPLE: number = 128;
 
 @Component({
   selector: 'demo-textarea',
-  styleUrls: ['../demo.scss', './textarea-demo.scss'],
+  styleUrls: ['../demo.scss', './textarea-demo.component.scss'],
   templateUrl: './textarea-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

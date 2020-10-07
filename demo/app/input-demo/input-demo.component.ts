@@ -1,7 +1,20 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormArray, FormControl, Validators } from '@angular/forms';
 import combos from 'combos';
-import { Subscription } from 'rxjs';
+// tslint:disable-next-line: import-blacklist
+import { compact } from 'lodash';
+import { InputSize } from '../../../src/internal/declarations/types/input-size.type';
+
+interface InputCombo {
+  size: InputSize;
+  placeholder: string;
+  disabled: boolean;
+  required: boolean;
+  transparent: boolean;
+  validationOnLength: boolean;
+}
+
+const MAX_LENGTH_EXAMPLE: number = 3;
 
 @Component({
   selector: 'demo-input',
@@ -9,32 +22,73 @@ import { Subscription } from 'rxjs';
   templateUrl: './input-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputDemoComponent implements OnDestroy {
+export class InputDemoComponent {
   public readonly switcherThemeControl: FormControl = new FormControl(false);
 
-  private readonly subscription: Subscription = new Subscription();
-  public readonly sampleFormControl: FormControl = new FormControl('formControl', Validators.required);
-  public value: unknown = null;
-
-  public readonly combos: any[] = combos({
-    size: ['medium', 'small'],
+  public readonly combos: InputCombo[] = combos({
+    size: ['medium', 'small', 'large'],
     placeholder: ['placeholder'],
     disabled: [false, true],
-    type: ['text', 'number', 'password', 'date', 'date-range'],
-    showValidateIcon: [false, true]
+    required: [false, true],
+    transparent: [false, true],
+    validationOnLength: [false, true]
   });
 
-  constructor() {
-    /* tslint:disable */
-    this.subscription.add(this.sampleFormControl.valueChanges.subscribe((value: unknown) => console.log(value)));
-    /* tslint:enable */
-  }
+  public readonly inputTextFormArray: FormArray = new FormArray(
+    this.combos.map(
+      (combo: InputCombo) =>
+        new FormControl(
+          {
+            value: '',
+            disabled: combo.disabled
+          },
+          compact([
+            combo.required ? Validators.required : null,
+            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
+          ])
+        )
+    )
+  );
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  public readonly inputPasswordFormArray: FormArray = new FormArray(
+    this.combos.map(
+      (combo: InputCombo) =>
+        new FormControl(
+          {
+            value: '',
+            disabled: combo.disabled
+          },
+          compact([
+            combo.required ? Validators.required : null,
+            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
+          ])
+        )
+    )
+  );
 
-  public setValue(newValue: unknown): void {
-    this.value = newValue;
-  }
+  public readonly inputDateFormArray: FormArray = new FormArray([
+    new FormControl(new Date('11-01-2012')),
+    new FormControl(new Date('11-01-2012'))
+  ]);
+
+  public readonly inputDateRangeFormArray: FormArray = new FormArray([
+    new FormControl([new Date('11-01-2012'), new Date('01-03-2012')]),
+    new FormControl([new Date('11-01-2012'), new Date('01-03-2012')])
+  ]);
+
+  public readonly inputNumberFormArray: FormArray = new FormArray(
+    this.combos.map(
+      (combo: InputCombo) =>
+        new FormControl(
+          {
+            value: '',
+            disabled: combo.disabled
+          },
+          compact([
+            combo.required ? Validators.required : null,
+            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
+          ])
+        )
+    )
+  );
 }

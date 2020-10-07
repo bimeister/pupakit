@@ -2,19 +2,19 @@ import { Directive, Optional } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
-import { BehaviorSubject, Observable, of, combineLatest } from 'rxjs';
-import { switchMap, startWith, map, distinctUntilChanged, take } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { distinctUntilChanged, map, startWith, switchMap, take } from 'rxjs/operators';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 
 @Directive()
 export abstract class InputBaseControlValueAccessor<T> implements ControlValueAccessor {
-  public readonly currentValue$: BehaviorSubject<string> = new BehaviorSubject('');
+  protected readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
+  public readonly value$: BehaviorSubject<T> = new BehaviorSubject(null);
 
   public readonly isDisabled$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
 
-  private readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
       isNil(control)
@@ -43,6 +43,8 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
     this.setControlRef(ngControl);
   }
+
+  protected abstract setValue(value: T): void;
 
   public updateValue(updatedValue: T): void {
     this.setValue(updatedValue);
@@ -80,11 +82,6 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   private processSetDisabledState(isDisabled: boolean): void {
     const nextDisabledValue: Nullable<boolean> = isDisabled ? true : null;
     this.isDisabled$.next(nextDisabledValue);
-  }
-
-  private setValue(value: T): void {
-    const serializedValue: string = isNil(value) ? '' : String(value);
-    this.currentValue$.next(serializedValue);
   }
 
   private setControlRef(control: NgControl): void {

@@ -1,0 +1,20 @@
+<div class="base-input-container">
+  <input
+    class="input"
+    #inputElement
+    type="number"
+    [placeholder]="placeholder"
+    [attr.disabled]="(isDisabled$ | async) ? true : null"
+    [ngClass]="{
+      input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
+      input__medium: size === 'medium',
+      input__small: size === 'small',
+      input__large: size === 'large',
+      input__transparent: transparent
+    }"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
+    (input)="updateValue(inputElement.value)"
+    [autocomplete]="autocomplete ? 'on' : 'off'"
+  />
+</div>

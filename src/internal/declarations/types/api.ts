@@ -23,6 +23,7 @@ export * from './icon-button-size.type';
 export * from './input-size.type';
 export * from './input-text-align.type';
 export * from './input-type.type';
+export * from './input-value.type';
 export * from './loader-type.type';
 export * from './modal-size.type';
 export * from './modal-window-size.type';

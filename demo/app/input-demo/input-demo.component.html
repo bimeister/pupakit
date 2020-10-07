@@ -9,32 +9,121 @@
   </div>
 </div>
 
-<div class="group inputs-container" [class.another-theme]="switcherThemeControl.value">
-  <div class="column">
-    <pupa-input-text size="small" placeholder="placeholder"></pupa-input-text>
+<div class="inputs-container" [class.another-theme]="switcherThemeControl.value">
+  <h2>Input Text</h2>
+  <div class="inputs-container__row" *ngFor="let combo of combos; let index = index">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-text
+        [size]="combo.size"
+        [placeholder]="combo.placeholder"
+        [formControl]="inputTextFormArray.get([index])"
+        [transparent]="combo.transparent"
+      ></pupa-input-text>
+    </div>
+    <div class="column">
+      <div>size: {{ combo.size }}</div>
+      <div>disabled: {{ combo.disabled }}</div>
+      <div>required: {{ combo.required }}</div>
+      <div>transparent: {{ combo.transparent }}</div>
+      <div>validationOnLength: {{ combo.validationOnLength }}</div>
+      <div>value:{{ inputTextFormArray.get([index]).value }}</div>
+    </div>
   </div>
-</div>
 
-<div class="group">
-  <div class="column" *ngFor="let combo of combos">
-    <label>Sample label</label>
-    <pupa-input
-      [placeholder]="combo.placeholder"
-      [size]="combo.size"
-      [disabled]="combo.disabled"
-      [formControl]="sampleFormControl"
-      [valid]="sampleFormControl.valid"
-      [type]="combo.type"
-      [showValidateIcon]="combo.showValidateIcon"
-      title="size: {{ combo.size }}; disabled: {{ combo.disabled }};  valid: {{ sampleFormControl.valid }}, type: {{
-        combo.type
-      }}"
-    ></pupa-input>
-    <pupa-control-text *ngIf="sampleFormControl.valid && !combo.disabled">
-      helper text
-    </pupa-control-text>
-    <pupa-control-text *ngIf="!sampleFormControl.valid && !combo.disabled" [isError]="true">
-      error text
-    </pupa-control-text>
+  <h2>Input Password</h2>
+  <div class="inputs-container__row" *ngFor="let combo of combos; let index = index">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-password
+        [size]="combo.size"
+        [placeholder]="combo.placeholder"
+        [formControl]="inputPasswordFormArray.get([index])"
+        [transparent]="combo.transparent"
+      ></pupa-input-password>
+    </div>
+    <div class="column">
+      <div>size: {{ combo.size }}</div>
+      <div>disabled: {{ combo.disabled }}</div>
+      <div>required: {{ combo.required }}</div>
+      <div>transparent: {{ combo.transparent }}</div>
+      <div>validationOnLength: {{ combo.validationOnLength }}</div>
+      <div>value:{{ inputPasswordFormArray.get([index]).value }}</div>
+    </div>
+  </div>
+
+  <h2>Input Date</h2>
+  <div class="inputs-container__row">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-date [size]="'medium'" [formControl]="inputDateFormArray.get([0])"></pupa-input-date>
+    </div>
+    <div class="column">
+      <div>size: medium</div>
+      <div>value:{{ inputDateFormArray.get([0]).value }}</div>
+    </div>
+  </div>
+  <div class="inputs-container__row">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-date
+        [size]="'medium'"
+        [formControl]="inputDateFormArray.get([1])"
+        [transparent]="true"
+      ></pupa-input-date>
+    </div>
+    <div class="column">
+      <div>size: medium</div>
+      <div>transparent: true</div>
+      <div>value:{{ inputDateFormArray.get([1]).value }}</div>
+    </div>
+  </div>
+
+  <h2>Input Date Range</h2>
+  <div class="inputs-container__row">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-date-range [size]="'medium'" [formControl]="inputDateRangeFormArray.get([0])"></pupa-input-date-range>
+    </div>
+    <div class="column">
+      <div>size: medium</div>
+      <div>value:{{ inputDateRangeFormArray.get([0]).value }}</div>
+    </div>
+  </div>
+  <div class="inputs-container__row">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-date-range
+        [size]="'medium'"
+        [formControl]="inputDateRangeFormArray.get([1])"
+        [transparent]="true"
+      ></pupa-input-date-range>
+    </div>
+    <div class="column">
+      <div>size: medium</div>
+      <div>transparent: true</div>
+      <div>value:{{ inputDateRangeFormArray.get([1]).value }}</div>
+    </div>
+  </div>
+
+  <h2>Input Number</h2>
+  <div class="inputs-container__row" *ngFor="let combo of combos; let index = index">
+    <div class="column">
+      <label>Sample label</label>
+      <pupa-input-number
+        [size]="combo.size"
+        [placeholder]="combo.placeholder"
+        [formControl]="inputNumberFormArray.get([index])"
+        [transparent]="combo.transparent"
+      ></pupa-input-number>
+    </div>
+    <div class="column">
+      <div>size: {{ combo.size }}</div>
+      <div>disabled: {{ combo.disabled }}</div>
+      <div>required: {{ combo.required }}</div>
+      <div>transparent: {{ combo.transparent }}</div>
+      <div>validationOnLength: {{ combo.validationOnLength }}</div>
+      <div>value:{{ inputNumberFormArray.get([index]).value }}</div>
+    </div>
   </div>
 </div>
