@@ -16,5 +16,6 @@
     (blur)="emitBlurEvent($event)"
     (input)="updateValue(inputElement.value)"
     [autocomplete]="autocomplete ? 'on' : 'off'"
+    [value]="value$ | async"
   />
 </div>

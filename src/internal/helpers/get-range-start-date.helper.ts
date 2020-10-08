@@ -19,9 +19,6 @@ export function getRangeStartDate(range: Date[]): Date {
       return rangeItem.valueOf() < previousItem.valueOf();
     }
   );
-
-  // console.log('>>>', range, Object.is(rangeStartDateIndex, -1), range[rangeStartDateIndex], rangeStartDateIndex);
-
   if (Object.is(rangeStartDateIndex, -1)) {
     return range[0];
   }
