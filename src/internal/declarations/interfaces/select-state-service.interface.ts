@@ -24,6 +24,7 @@ export interface SelectStateService<T> {
   defineOnTouchedCallback(onTouched: OnTouchedCallback): void;
 
   setMultiSelectionState(isEnabled: boolean): void;
+  setUnselectionState(isEnabled: boolean): void;
   setDisabledState(isDisabled: boolean): void;
 
   processSelection(value: T): void;
