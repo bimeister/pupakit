@@ -16,5 +16,6 @@
     (focus)="emitFocusEvent($event)"
     (blur)="emitBlurEvent($event)"
     [autocomplete]="autocomplete ? 'on' : 'off'"
+    [value]="value$ | async"
   />
 </div>
