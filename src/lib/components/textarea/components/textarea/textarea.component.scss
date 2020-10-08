@@ -58,6 +58,9 @@ $height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
 
     &.invalid:not([disabled]) {
       border-color: color(error);
+      &:focus {
+        border-color: color(error);
+      }
     }
   }
 
