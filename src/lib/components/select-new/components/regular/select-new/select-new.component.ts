@@ -22,6 +22,7 @@ import { SelectBase } from './../../../../../../internal/declarations/classes/ab
 })
 export class SelectNewComponent<T> extends SelectBase<T> {
   @Input() public isMultiSelectionEnabled: boolean = false;
+  @Input() public isUnselectionEnabled: boolean = false;
 
   constructor(
     selectNewStateService: SelectNewStateService<T>,

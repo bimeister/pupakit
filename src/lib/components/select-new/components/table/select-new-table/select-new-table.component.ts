@@ -23,6 +23,7 @@ import { SelectNewStateService } from '../../../services/select-new-state.servic
 })
 export class SelectNewTableComponent<T> extends SelectBase<T> implements OnChanges, ControlValueAccessor {
   @Input() public isMultiSelectionEnabled: boolean = false;
+  @Input() public isUnselectionEnabled: boolean = false;
 
   constructor(
     selectNewStateService: SelectNewStateService<T>,

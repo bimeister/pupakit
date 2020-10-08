@@ -14,6 +14,7 @@ import { SelectOuterValue } from '../../types/select-outer-value.type';
 @Directive()
 export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
   public abstract isMultiSelectionEnabled: boolean;
+  public abstract isUnselectionEnabled: boolean;
 
   constructor(
     private readonly selectNewStateService: SelectStateService<T>,
@@ -67,6 +68,7 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
       return;
     }
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
+    this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
   }
 
   public writeValue(newValue: SelectOuterValue<T>): void {
@@ -93,5 +95,15 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
     }
 
     this.selectNewStateService.setMultiSelectionState(Boolean(updatedState));
+  }
+
+  private processIsUnselectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
+    const updatedState: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedState)) {
+      return;
+    }
+
+    this.selectNewStateService.setUnselectionState(Boolean(updatedState));
   }
 }

@@ -1,7 +1,7 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
 
 import { SelectStateService } from '../../../../internal/declarations/interfaces/select-state-service.interface';
@@ -22,6 +22,7 @@ export class SelectNewStateService<T> implements SelectStateService<T> {
   );
 
   private readonly isMultiSelectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly isUnselectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -84,40 +85,48 @@ export class SelectNewStateService<T> implements SelectStateService<T> {
     this.isMultiSelectionEnabled$.next(isEnabled);
   }
 
+  public setUnselectionState(isEnabled: boolean): void {
+    this.isUnselectionEnabled$.next(isEnabled);
+  }
+
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabled$.next(isDisabled);
   }
 
   public processSelection(value: T): void {
-    this.isMultiSelectionEnabled$
+    combineLatest([this.isMultiSelectionEnabled$, this.isUnselectionEnabled$, this.currentSerializedValue$])
       .pipe(
         take(1),
-        withLatestFrom(this.currentSerializedValue$),
-        map(([isMultiSelectionEnabled, currentSerializedValue]: [boolean, Set<string>]) => {
-          const upcomingSerializedValue: string = JSON.stringify(value);
+        map(
+          ([isMultiSelectionEnabled, isUnselectionEnabled, currentSerializedValue]: [
+            boolean,
+            boolean,
+            Set<string>
+          ]) => {
+            const upcomingSerializedValue: string = JSON.stringify(value);
 
-          const upcomingValueAlreadyExists: boolean = currentSerializedValue.has(upcomingSerializedValue);
+            const upcomingValueAlreadyExists: boolean = currentSerializedValue.has(upcomingSerializedValue);
 
-          const currentSerializedValueItems: string[] = Array.from(currentSerializedValue.values());
+            const currentSerializedValueItems: string[] = Array.from(currentSerializedValue.values());
 
-          if (isMultiSelectionEnabled && upcomingValueAlreadyExists) {
-            const updatedItems: string[] = currentSerializedValueItems.filter(
-              (valueItem: string) => valueItem !== upcomingSerializedValue
-            );
-            return new Set<string>(updatedItems);
+            if (isMultiSelectionEnabled && upcomingValueAlreadyExists) {
+              const updatedItems: string[] = currentSerializedValueItems.filter(
+                (valueItem: string) => valueItem !== upcomingSerializedValue
+              );
+              return new Set<string>(updatedItems);
+            }
+
+            if (isMultiSelectionEnabled && !upcomingValueAlreadyExists) {
+              const updatedItems: string[] = [...currentSerializedValueItems, upcomingSerializedValue];
+              return new Set<string>(updatedItems);
+            }
+
+            if (!isMultiSelectionEnabled && !upcomingValueAlreadyExists) {
+              return new Set<string>([upcomingSerializedValue]);
+            }
+            return isUnselectionEnabled ? new Set<string>() : new Set<string>(currentSerializedValue);
           }
-
-          if (isMultiSelectionEnabled && !upcomingValueAlreadyExists) {
-            const updatedItems: string[] = [...currentSerializedValueItems, upcomingSerializedValue];
-            return new Set<string>(updatedItems);
-          }
-
-          if (!isMultiSelectionEnabled && !upcomingValueAlreadyExists) {
-            return new Set<string>([upcomingSerializedValue]);
-          }
-
-          return new Set<string>();
-        }),
+        ),
         withLatestFrom(this.onChangeCallback$, this.onTouchedCallback$, this.isMultiSelectionEnabled$)
       )
       .subscribe(
