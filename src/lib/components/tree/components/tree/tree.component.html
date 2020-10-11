@@ -24,6 +24,7 @@
       >
         <div
           class="tree-node"
+          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
           [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
@@ -60,6 +61,7 @@
       >
         <div
           class="tree-node"
+          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
         >
@@ -99,6 +101,7 @@
       >
         <div
           class="tree-node"
+          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
           [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
