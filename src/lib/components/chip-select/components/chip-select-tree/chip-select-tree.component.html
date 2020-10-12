@@ -1,6 +1,11 @@
 <div class="tree">
   <div class="tree__search">
-    <pupa-input (valueChange)="valueChange($any($event))" [placeholder]="searchText" width="100%"></pupa-input>
+    <pupa-input-text
+      size="small"
+      [formControl]="searchFormControl"
+      [placeholder]="searchText"
+      width="100%"
+    ></pupa-input-text>
   </div>
   <div class="tree__items">
     <pupa-chip-select-tree-node *ngFor="let item of itemsNode" [item]="item"></pupa-chip-select-tree-node>

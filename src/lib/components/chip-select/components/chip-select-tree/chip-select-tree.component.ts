@@ -7,6 +7,7 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { TreeItemNode } from '../../../../../internal/declarations/interfaces/tree-item-node.interface';
@@ -45,6 +46,8 @@ export class ChipSelectTreeComponent implements OnDestroy {
 
   public notActiveKeys$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
+  public readonly searchFormControl: FormControl = new FormControl('');
+
   private readonly itemsCollection: Set<TreeItemNode> = new Set<TreeItemNode>();
 
   private readonly items$: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
@@ -62,41 +65,44 @@ export class ChipSelectTreeComponent implements OnDestroy {
         this.notActiveKeys$.subscribe(() => {
           this.checkedActive();
         })
-      );
+      )
+      .add(this.processSearchFormControlChanges());
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  public valueChange(text: string): void {
-    if (text === '') {
+  private processSearchFormControlChanges(): Subscription {
+    return this.searchFormControl.valueChanges.subscribe((text: string) => {
+      if (text === '') {
+        this.itemsCollection.forEach(item => {
+          item.enable = true;
+          if (item.changeDetector) {
+            item.changeDetector.markForCheck();
+          }
+        });
+        return;
+      }
+      const search: Set<TreeItemNode> = new Set<TreeItemNode>(
+        Array.from(this.itemsCollection).filter(item => item.value.toLowerCase().includes(text.toLowerCase()))
+      );
       this.itemsCollection.forEach(item => {
-        item.enable = true;
+        item.enable = false;
         if (item.changeDetector) {
           item.changeDetector.markForCheck();
         }
       });
-      return;
-    }
-    const search: Set<TreeItemNode> = new Set<TreeItemNode>(
-      Array.from(this.itemsCollection).filter(item => item.value.toLowerCase().includes(text.toLowerCase()))
-    );
-    this.itemsCollection.forEach(item => {
-      item.enable = false;
-      if (item.changeDetector) {
-        item.changeDetector.markForCheck();
-      }
+      search.forEach(item => {
+        item.enable = true;
+        item.opened = true;
+        if (item.changeDetector) {
+          item.changeDetector.markForCheck();
+        }
+        this.openParent(item);
+      });
+      this.changeDetector.markForCheck();
     });
-    search.forEach(item => {
-      item.enable = true;
-      item.opened = true;
-      if (item.changeDetector) {
-        item.changeDetector.markForCheck();
-      }
-      this.openParent(item);
-    });
-    this.changeDetector.markForCheck();
   }
 
   private checkedActive(): void {
