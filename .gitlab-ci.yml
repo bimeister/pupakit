@@ -17,16 +17,6 @@ build:library:
   script:
     - scripts/build.sh pupakit_build
 
-build:demo:
-  needs: []
-  stage: build
-  interruptible: true
-  allow_failure: false
-  variables:
-    CI: 'true'
-  script:
-    - scripts/build.sh pupakit_build-demo
-
 check:lint:
   needs: []
   stage: check
@@ -81,7 +71,9 @@ pages:
   script:
     - scripts/build.sh pupakit_build-demo
     - scripts/cp-from-image.sh "${DEFAULT_LABELS};service=pupakit_build-demo" dist/demo public
-  when: manual
+  when: always
+  only:
+    - master
   artifacts:
     when: always
     paths:
