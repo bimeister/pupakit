@@ -1,0 +1,3 @@
+[submodule "scripts"]
+	path = scripts
+	url = ../../common/scripts.git

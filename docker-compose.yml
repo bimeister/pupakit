@@ -30,6 +30,8 @@ services:
       dockerfile: ./build/docker/build-demo.dockerfile
       labels:
         meistersoft.build.pipeline: ${CI_PIPELINE_IID}
-        meistersoft.git.commit: ${GIT_COMMIT}
-        meistersoft.git.branch: ${BRANCH_NAME}
+        meistersoft.git.commit: ${CI_COMMIT_SHA}
+        meistersoft.git.branch: ${CI_COMMIT_BRANCH}
         service: pupakit_build-demo
+    environment:
+      - CI_PAGES_URL

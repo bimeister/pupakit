@@ -10,4 +10,4 @@ RUN yarn install --frozen-lockfile --ignore-scripts \
 # Generate docs html representation
 WORKDIR /pupakit
 COPY . .
-RUN yarn run build:demo
+RUN yarn run ng build --project=demo --base-href ${CI_PAGES_URL}
