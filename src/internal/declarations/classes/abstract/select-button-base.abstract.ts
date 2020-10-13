@@ -13,20 +13,20 @@ export abstract class SelectButtonBase<T> implements OnInit {
 
   public abstract transparent: boolean;
 
-  public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
-  public readonly isDisabled$: Observable<boolean> = this.selectNewStateService.isDisabled$;
+  public readonly isExpanded$: Observable<boolean> = this.selectStateService.isExpanded$;
+  public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;
 
-  constructor(private readonly selectNewStateService: SelectStateService<T>) {}
+  constructor(private readonly selectStateService: SelectStateService<T>) {}
 
   public ngOnInit(): void {
     this.defineDropdownTrigger();
   }
 
   public processButtonClick(): void {
-    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectNewStateService.toggleExpansion());
+    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectStateService.toggleExpansion());
   }
 
   private defineDropdownTrigger(): void {
-    this.selectNewStateService.defineDropdownTrigger(this.overlayOrigin, this.button.nativeElement);
+    this.selectStateService.defineDropdownTrigger(this.overlayOrigin, this.button.nativeElement);
   }
 }

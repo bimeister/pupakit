@@ -12,7 +12,7 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
 
   private readonly subscription: Subscription = new Subscription();
 
-  public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
+  public readonly isExpanded$: Observable<boolean> = this.selectStateService.isExpanded$;
   public readonly animationState$: Observable<string> = this.isExpanded$.pipe(
     distinctUntilChanged(),
     map((isExpanded: boolean) => (isExpanded ? 'expanded' : 'void'))
@@ -20,11 +20,11 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
 
   public readonly dropDownOverlayOrigin$: Observable<
     CdkOverlayOrigin
-  > = this.selectNewStateService.dropdownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
+  > = this.selectStateService.dropdownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
 
   public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
     filter((isExpanded: boolean) => isExpanded),
-    switchMap(() => this.selectNewStateService.dropdownTriggerButtonWidthPx$)
+    switchMap(() => this.selectStateService.dropdownTriggerButtonWidthPx$)
   );
 
   public readonly overlayPositions: ConnectionPositionPair[] = [
@@ -34,7 +34,7 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
 
   public readonly isOverlayAttached$: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
-  constructor(private readonly selectNewStateService: SelectStateService<T>) {}
+  constructor(private readonly selectStateService: SelectStateService<T>) {}
 
   public ngOnInit(): void {
     this.subscription.add(this.handleOverlayRefOnOpen());
@@ -60,7 +60,7 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
         map(() => this.cdkConnectedOverlay.overlayRef)
       )
       .subscribe((overlayRef: OverlayRef) => {
-        this.selectNewStateService.defineDropdownOverlayRef(overlayRef);
+        this.selectStateService.defineDropdownOverlayRef(overlayRef);
       });
   }
 }

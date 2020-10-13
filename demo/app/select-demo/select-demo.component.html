@@ -2,53 +2,53 @@
 <div class="container">
   <textarea class="placeholder"></textarea>
 
-  <pupa-select-new [formControl]="formControl">
-    <pupa-select-new-button>
+  <pupa-select [formControl]="formControl">
+    <pupa-select-button>
       123
-    </pupa-select-new-button>
+    </pupa-select-button>
 
-    <pupa-select-new-dropdown>
-      <!-- <pupa-select-new-search></pupa-select-new-search> -->
+    <pupa-select-dropdown>
+      <!-- <pupa-select-search></pupa-select-search> -->
 
-      <pupa-select-new-items-container>
-        <pupa-select-new-item [value]="1">1</pupa-select-new-item>
-        <pupa-select-new-item [value]="2">2</pupa-select-new-item>
-        <pupa-select-new-item [value]="3">3</pupa-select-new-item>
-      </pupa-select-new-items-container>
-    </pupa-select-new-dropdown>
-  </pupa-select-new>
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
 
-  <pupa-select-new [isMultiSelectionEnabled]="true" [formControl]="formControl">
-    <pupa-select-new-button>
+  <pupa-select [isMultiSelectionEnabled]="true" [formControl]="formControl">
+    <pupa-select-button>
       123
-    </pupa-select-new-button>
+    </pupa-select-button>
 
-    <pupa-select-new-dropdown>
-      <pupa-select-new-search placeholder="Поиск..." (query)="log($event)"></pupa-select-new-search>
+    <pupa-select-dropdown>
+      <pupa-select-search placeholder="Поиск..." (query)="log($event)"></pupa-select-search>
 
-      <pupa-select-new-items-container>
-        <pupa-select-new-item [value]="1">
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">
           1 fdskj flkjdslk jl jlk jlk jslk jl jlk jsdlk jlkj lj lksj lksjd lkjfdlk kjsdlk jslk j
-        </pupa-select-new-item>
-        <pupa-select-new-item [value]="2">2</pupa-select-new-item>
-        <pupa-select-new-item [value]="3">3</pupa-select-new-item>
-      </pupa-select-new-items-container>
-    </pupa-select-new-dropdown>
-  </pupa-select-new>
+        </pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
 
-  <pupa-select-new [isMultiSelectionEnabled]="true">
-    <pupa-select-new-button>
+  <pupa-select [isMultiSelectionEnabled]="true">
+    <pupa-select-button>
       123
-    </pupa-select-new-button>
+    </pupa-select-button>
 
-    <pupa-select-new-dropdown>
-      <pupa-select-new-search placeholder="Поиск..." (query)="log($event)"></pupa-select-new-search>
+    <pupa-select-dropdown>
+      <pupa-select-search placeholder="Поиск..." (query)="log($event)"></pupa-select-search>
       <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
-      <pupa-select-new-tree
+      <pupa-select-tree
         type="flat"
         [flatDataOrigin]="treeDataOrigin"
         [isLoading]="isLoading$ | async"
-      ></pupa-select-new-tree>
-    </pupa-select-new-dropdown>
-  </pupa-select-new>
+      ></pupa-select-tree>
+    </pupa-select-dropdown>
+  </pupa-select>
 </div>
