@@ -1,47 +1,88 @@
-.x-publish_job_steps: &publish_job_steps
-  stage: publish
-  when: manual
-  before_script:
-    - docker --version
-    - docker-compose --version
-    - docker-compose --file docker-compose.yml pull pupakit
-  script:
-    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} up --exit-code-from pupakit
-  after_script:
-    - docker-compose --file docker-compose.yml --project-name ${CI_JOB_ID} down
-
-variables:
-  GIT_STRATEGY: clone
-  GIT_CHECKOUT: 'true'
-  GIT_SUBMODULE_STRATEGY: normal
-  IMAGE_TAG: ${DOCKER_REGISTRY}/common/pupakit/builder:${CI_COMMIT_SHORT_SHA}
+include:
+  - local: .gitlab/templates/common.template.yml
+  - local: .gitlab/templates/deploy-base.template.yml
 
 stages:
   - build
-  - publish
+  - check
+  - deploy
 
-build:pupakit:
+build:library:
+  needs: []
   stage: build
-  before_script:
-    - docker --version
-    - docker-compose --version
+  interruptible: true
+  allow_failure: false
+  variables:
+    CI: 'true'
   script:
-    - docker-compose --file docker-compose.yml build pupakit
-    - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY
-    - docker-compose --file docker-compose.yml push pupakit
+    - scripts/build.sh pupakit_build
 
-next:
-  <<: *publish_job_steps
+build:demo:
+  needs: []
+  stage: build
+  interruptible: true
+  allow_failure: false
+  variables:
+    CI: 'true'
+  script:
+    - scripts/build.sh pupakit_build-demo
+
+check:lint:
+  needs: []
+  stage: check
+  interruptible: true
+  allow_failure: false
+  variables:
+    CI: ''
+  script:
+    - scripts/build.sh pupakit_lint
+
+check:test:
+  needs: []
+  stage: check
+  interruptible: true
+  allow_failure: false
+  variables:
+    CI: ''
+  script:
+    - scripts/build.sh pupakit_test
+
+deploy:next:
+  extends: .deploy-base
+  stage: deploy
+  interruptible: false
+  allow_failure: true
+  when: manual
   variables:
     PUBLISH: 'true'
     PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
     PKG_TAG: 'next'
 
-stable:
-  <<: *publish_job_steps
+deploy:stable:
+  extends: .deploy-base
+  stage: deploy
+  interruptible: false
+  allow_failure: true
+  when: manual
   only:
     - master
   variables:
     PUBLISH: 'true'
     PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
     PKG_TAG: 'stable'
+
+pages:
+  needs: []
+  stage: deploy
+  interruptible: true
+  allow_failure: true
+  variables:
+    CI: 'true'
+  script:
+    - scripts/build.sh pupakit_build-demo
+    - scripts/cp-from-image.sh "${DEFAULT_LABELS};service=pupakit_build-demo" dist/demo public
+  when: manual
+  artifacts:
+    when: always
+    paths:
+      - public
