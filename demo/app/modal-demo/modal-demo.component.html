@@ -1,14 +1,8 @@
-<button (click)="smallOpen = !smallOpen">
-  Show small modal
-</button>
+<button (click)="smallOpen = !smallOpen">Show small modal</button>
 
-<button (click)="mediumOpen = !mediumOpen">
-  Show medium modal
-</button>
+<button (click)="mediumOpen = !mediumOpen">Show medium modal</button>
 
-<button (click)="bigOpen = !bigOpen">
-  Show large modal
-</button>
+<button (click)="bigOpen = !bigOpen">Show large modal</button>
 
 <pupa-modal [open]="smallOpen" (close)="smallOpen = !smallOpen" size="small" title="Small modal">
   <demo-modal-demo-content></demo-modal-demo-content>
