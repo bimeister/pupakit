@@ -24,7 +24,7 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
   public abstract readonly hierarchicalTreeComponent: TreeComponent;
   public abstract readonly flatTreeComponent: TreeComponent;
 
-  public readonly isExpanded$: Observable<boolean> = this.selectNewStateService.isExpanded$;
+  public readonly isExpanded$: Observable<boolean> = this.selectStateService.isExpanded$;
 
   public readonly adaptiveTreeHeight$: BehaviorSubject<number> = new BehaviorSubject(MAX_SELECT_TREE_HEIGHT_PX);
 
@@ -49,14 +49,14 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
   public abstract hideRoot: boolean;
   public abstract isLoading: boolean;
 
-  public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
-  public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectNewStateService.currentValue$;
+  public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectStateService.currentValue$;
+  public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectStateService.currentValue$;
 
   public readonly treeType: typeof TreeType = TreeType;
 
   public abstract readonly expandedNode: EventEmitter<FlatTreeItem>;
 
-  constructor(public readonly type: TreeType, private readonly selectNewStateService: SelectStateService<Uuid>) {}
+  constructor(public readonly type: TreeType, private readonly selectStateService: SelectStateService<Uuid>) {}
 
   public readonly trackBy: TrackByFunction<FlatTreeItem> = (index: number, item: FlatTreeItem) => `${index} ${item.id}`;
 
@@ -75,7 +75,7 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
         map((selectedNodeIds: Uuid[]) => selectedNodeIds.length === 1 && selectedNodeIds[0] === id)
       )
       .subscribe((isAlreadyNodeIdExist: boolean) =>
-        isAlreadyNodeIdExist ? this.selectNewStateService.collapse() : this.selectNewStateService.processSelection(id)
+        isAlreadyNodeIdExist ? this.selectStateService.collapse() : this.selectStateService.processSelection(id)
       );
   }
 

@@ -28,7 +28,7 @@ export * from './radio-group/api';
 export * from './rating/api';
 export * from './search-field/api';
 export * from './select-multiple/api';
-export * from './select-new/api';
+export * from './select/api';
 export * from './selector/api';
 export * from './skeleton/api';
 export * from './spinner/api';

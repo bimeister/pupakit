@@ -17,7 +17,7 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
   public abstract isUnselectionEnabled: boolean;
 
   constructor(
-    private readonly selectNewStateService: SelectStateService<T>,
+    private readonly selectStateService: SelectStateService<T>,
     private readonly elementRef: ElementRef<HTMLElement>,
     ngControl: NgControl
   ) {
@@ -31,11 +31,11 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
     const eventTarget: EventTarget = event.target;
 
     if (!(eventTarget instanceof Element)) {
-      this.selectNewStateService.collapse();
+      this.selectStateService.collapse();
       return;
     }
 
-    this.selectNewStateService.dropdownOverlayRef$
+    this.selectStateService.dropdownOverlayRef$
       .pipe(
         take(1),
         map((overlayRef: OverlayRef | null | undefined) => {
@@ -57,7 +57,7 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
           return;
         }
 
-        this.selectNewStateService.collapse();
+        this.selectStateService.collapse();
       });
   }
 
@@ -72,19 +72,19 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
   }
 
   public writeValue(newValue: SelectOuterValue<T>): void {
-    this.selectNewStateService.setValue(newValue);
+    this.selectStateService.setValue(newValue);
   }
 
   public registerOnChange(onChange: OnChangeCallback<SelectOuterValue<T>>): void {
-    this.selectNewStateService.defineOnChangeCallback(onChange);
+    this.selectStateService.defineOnChangeCallback(onChange);
   }
 
   public registerOnTouched(onTouched: OnTouchedCallback): void {
-    this.selectNewStateService.defineOnTouchedCallback(onTouched);
+    this.selectStateService.defineOnTouchedCallback(onTouched);
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    this.selectNewStateService.setDisabledState(isDisabled);
+    this.selectStateService.setDisabledState(isDisabled);
   }
 
   private processIsMultiSelectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
@@ -94,7 +94,7 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
       return;
     }
 
-    this.selectNewStateService.setMultiSelectionState(Boolean(updatedState));
+    this.selectStateService.setMultiSelectionState(Boolean(updatedState));
   }
 
   private processIsUnselectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
@@ -104,6 +104,6 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
       return;
     }
 
-    this.selectNewStateService.setUnselectionState(Boolean(updatedState));
+    this.selectStateService.setUnselectionState(Boolean(updatedState));
   }
 }

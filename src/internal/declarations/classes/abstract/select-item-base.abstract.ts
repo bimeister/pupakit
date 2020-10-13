@@ -14,13 +14,13 @@ export abstract class SelectItemBase<T> implements OnChanges {
   private readonly value$: BehaviorSubject<T> = new BehaviorSubject<T>(null);
 
   public readonly isPicked$: Observable<boolean> = this.value$.pipe(
-    switchMap((value: T) => this.selectNewStateService.isPicked(value)),
+    switchMap((value: T) => this.selectStateService.isPicked(value)),
     distinctUntilChanged()
   );
 
-  public readonly isDisabled$: Observable<boolean> = this.selectNewStateService.isDisabled$;
+  public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;
 
-  constructor(private readonly selectNewStateService: SelectStateService<T>) {}
+  constructor(private readonly selectStateService: SelectStateService<T>) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     if (isNil(changes)) {
@@ -38,7 +38,7 @@ export abstract class SelectItemBase<T> implements OnChanges {
         map(([value, _]: [T, boolean]) => value)
       )
       .subscribe((value: T) => {
-        this.selectNewStateService.processSelection(value);
+        this.selectStateService.processSelection(value);
       });
   }
 
