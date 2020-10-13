@@ -1,4 +1,5 @@
 /.*/
+!/.gitlab/
 !/.vscode/
 !/.storybook/
 /coverage/

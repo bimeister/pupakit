@@ -1,11 +1,10 @@
 version: '3.4'
 
 services:
-  pupakit:
-    image: '${IMAGE_TAG}'
+  pupakit_build:
     build:
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: ./build/docker/build.dockerfile
     environment:
       - PKG_VERSION
       - PKG_TAG
@@ -14,3 +13,23 @@ services:
       - NPM_REPOSITORY_PASSWORD
       - NPM_REPOSITORY_EMAIL
       - NPM_REPOSITORY_URL
+
+  pupakit_lint:
+    build:
+      context: ./
+      dockerfile: ./build/docker/lint.dockerfile
+
+  pupakit_test:
+    build:
+      context: ./
+      dockerfile: ./build/docker/test.dockerfile
+
+  pupakit_build-demo:
+    build:
+      context: ./
+      dockerfile: ./build/docker/build-demo.dockerfile
+      labels:
+        meistersoft.build.pipeline: ${CI_PIPELINE_IID}
+        meistersoft.git.commit: ${GIT_COMMIT}
+        meistersoft.git.branch: ${BRANCH_NAME}
+        service: pupakit_build-demo

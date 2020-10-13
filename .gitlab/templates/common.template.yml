@@ -1,0 +1,10 @@
+variables:
+  GIT_SUBMODULE_STRATEGY: normal
+  CI: ''
+  BUILD_EFFECTIVE_YML_FILE: docker-compose.yml
+  DEFAULT_LABELS: meistersoft.build.pipeline=${CI_PIPELINE_IID};meistersoft.git.commit=${GIT_COMMIT};meistersoft.git.branch=${BRANCH_NAME}
+
+before_script:
+  - docker --version
+  - docker-compose --version
+  - docker login --username $DOCKER_REGISTRY_USER --password $DOCKER_REGISTRY_PASS $DOCKER_REGISTRY

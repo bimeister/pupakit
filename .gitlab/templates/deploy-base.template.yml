@@ -1,0 +1,7 @@
+.deploy-base:
+  before_script:
+    - docker-compose --file docker-compose.yml pull pupakit_build
+  script:
+    - docker-compose --file docker-compose.yml run pupakit_build
+  after_script:
+    - docker-compose --file docker-compose.yml down --rmi "all"

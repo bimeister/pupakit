@@ -18,6 +18,7 @@
     "start:storybook": "start-storybook",
     "build": "gulp build",
     "build:dev": "ng build --watch",
+    "build:demo": "ng build --project=demo",
     "lint": "yarn run lint:inspect",
     "lint:inspect": "ng lint --configuration=inspection",
     "lint:debug": "ng lint --configuration=debugging",
