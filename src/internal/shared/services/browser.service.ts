@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNil } from 'lodash';
+import { isNil } from '@meistersoft/utilities';
 
 @Injectable({ providedIn: 'root' })
 export class BrowserService {
