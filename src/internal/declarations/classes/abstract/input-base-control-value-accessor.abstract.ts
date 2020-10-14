@@ -4,6 +4,7 @@ import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap, take } from 'rxjs/operators';
+import { BrowserService } from '../../../shared/services/browser.service';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 
@@ -35,7 +36,10 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
     null
   );
 
-  constructor(@Optional() ngControl: NgControl) {
+  constructor(
+      protected readonly browserService: BrowserService,
+      @Optional() ngControl: NgControl
+  ) {
     if (isNil(ngControl)) {
       return;
     }
