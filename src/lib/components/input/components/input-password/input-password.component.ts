@@ -12,7 +12,7 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
 
-  public offValue: string = this.browserService.isChrome ? 'new-password' : 'off';
+  public readonly offValue: string = this.browserService.isChrome ? 'new-password' : 'off';
 
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
