@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
-import { ComponentChanges } from '../../../../../internal/api';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 
@@ -13,16 +12,10 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
 
-  public readonly off: string = this.browserService.isChrome ? 'new-password' : 'off';
-
-  public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processAutocompleteChange(changes?.autocomplete);
-  }
+  public offValue: string = this.browserService.isChrome ? 'new-password' : 'off';
 
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
   }
-
-  private processAutocompleteChange
 }
