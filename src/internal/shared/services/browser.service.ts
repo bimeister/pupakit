@@ -3,9 +3,9 @@ import { isNil } from '@meistersoft/utilities';
 
 @Injectable({ providedIn: 'root' })
 export class BrowserService {
-    public readonly userAgent: string = window.navigator.userAgent.toLowerCase();
+  public readonly userAgent: string = window.navigator.userAgent.toLowerCase();
 
-    public get isChrome(): boolean {
-        return !Object.is(this.userAgent.indexOf('chrome'), -1) && !isNil(window['chrome']);
-    }
+  public get isChrome(): boolean {
+    return !Object.is(this.userAgent.indexOf('chrome'), -1) && !isNil(window['chrome']);
+  }
 }

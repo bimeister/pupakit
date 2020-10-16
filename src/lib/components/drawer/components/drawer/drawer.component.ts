@@ -36,6 +36,7 @@ import { DrawerDraggerComponent } from '../drawer-dragger/drawer-dragger.compone
     ])
   ]
 })
+/** @deprecated legacy */
 export class DrawerComponent implements OnChanges, AfterContentInit, OnDestroy {
   private draggerMoveSubscription: Subscription = new Subscription();
 

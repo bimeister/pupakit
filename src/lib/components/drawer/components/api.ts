@@ -3,4 +3,6 @@
  */
 
 export * from './drawer/api';
+export * from './drawer-container/api';
 export * from './drawer-dragger/api';
+export * from './drawer-layout/api';

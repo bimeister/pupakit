@@ -1,1 +1,10 @@
-<div class="sample-content">sample content</div>
+<pupa-modal-dragger class="dragger" [targetElementRef]="elementRef" [modalRef]="modalRef"></pupa-modal-dragger>
+<pupa-modal-layout
+  [title]="'Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo'"
+  [isCloseButtonVisible]="true"
+  (closeButtonClicked)="close()"
+>
+  <div class="sample-content">sample content</div>
+  <div class="placeholder"></div>
+  🎳
+</pupa-modal-layout>

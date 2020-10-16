@@ -4,18 +4,6 @@
 <div class="layout-wrapper loader" [ngClass]="loaderType$ | async" *ngIf="isLoaderVisible$ | async">
   <pupa-loader></pupa-loader>
 </div>
-<div class="layout-wrapper drawers">
-  <pupa-drawer-pane
-    *ngFor="let drawer of componentDrawersList$ | async; trackBy: trackByDrawerId"
-    [componentDrawerData]="drawer"
-  ></pupa-drawer-pane>
-</div>
-<div class="layout-wrapper modal-windows">
-  <pupa-modal-window
-    *ngFor="let modalWindowData of modalWindowList$ | async; trackBy: trackByModalWindowId"
-    [modalWindowData]="modalWindowData"
-  ></pupa-modal-window>
-</div>
 <div class="layout-wrapper alerts">
   <div class="alerts-wrapper">
     <pupa-alert *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId" [alert]="alert"></pupa-alert>

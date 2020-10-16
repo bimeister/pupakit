@@ -17,8 +17,6 @@
   padding: 0;
   margin: 0;
   border: none;
-  &.drawers,
-  &.modal-windows,
   &.alerts,
   &.context-menus {
     pointer-events: none;
@@ -39,12 +37,6 @@
     &.filled {
       background: color(white);
     }
-  }
-  &.drawers {
-    z-index: 20;
-  }
-  &.modal-windows {
-    z-index: 30;
   }
   &.alerts {
     z-index: 40;

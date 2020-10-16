@@ -13,7 +13,6 @@ type PasswordAutocompleteOffValue = 'off' | 'new-password';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
-
   public readonly offValue: PasswordAutocompleteOffValue = this.browserService.isChrome ? 'new-password' : 'off';
 
   public setValue(value: ValueType): void {

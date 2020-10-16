@@ -1,0 +1,18 @@
+<div class="modal-layout">
+  <div class="modal-layout__header" *ngIf="isHeaderVisible">
+    <div class="modal-layout__header__title" *ngIf="isTitleVisible">
+      {{ title }}
+    </div>
+
+    <pupa-icon-button
+      class="modal-layout__header__button"
+      *ngIf="isCloseButtonVisible"
+      (click)="processCloseButtonClick()"
+    >
+      <ion-icon name="close"></ion-icon>
+    </pupa-icon-button>
+  </div>
+  <div class="modal-layout__content">
+    <ng-content></ng-content>
+  </div>
+</div>
