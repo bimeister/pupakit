@@ -63,7 +63,8 @@ export {
   SelectSearchBase,
   SelectButtonBase,
   SelectDropdownBase,
-  SelectItemsContainerBase
+  SelectItemsContainerBase,
+  IconDefinition
 } from './internal/api';
 
 export * from './internal/constants/icons/api';
