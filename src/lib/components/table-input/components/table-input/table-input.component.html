@@ -10,18 +10,18 @@
     (focus)="emitFocusEvent($event)"
     (blur)="emitBlurEvent($event)"
   />
-  <ion-icon
+  <pupa-icon
     class="table-input-container__icon"
     *ngIf="isValid$ | async; else errorTemplate"
     [name]="hoverIconName$ | async"
-  ></ion-icon>
+  ></pupa-icon>
 </div>
 
 <ng-template #errorTemplate>
-  <ion-icon
+  <pupa-icon
     class="table-input-container__icon-error"
     *ngIf="!(isDisabled$ | async)"
     [name]="errorIconName$ | async"
     [title]="errorTitle$ | async"
-  ></ion-icon>
+  ></pupa-icon>
 </ng-template>

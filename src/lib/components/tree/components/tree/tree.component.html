@@ -14,6 +14,7 @@
     >
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: isElement"
+        cdkTreeNodeToggle
         [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
@@ -51,6 +52,7 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasNoChild"
+        cdkTreeNodeToggle
         [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
@@ -91,6 +93,7 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasChild"
+        cdkTreeNodeToggle
         [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
@@ -157,7 +160,7 @@
 
 <ng-template #defaultExpansionButtonTemplate let-node="node" let-hasChild="hasChild">
   <button class="default-expansion-button" [disabled]="!hasChild">
-    <ion-icon [name]="isExpanded(expandedItemIds$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></ion-icon>
+    <pupa-icon [name]="isExpanded(expandedItemIds$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></pupa-icon>
   </button>
 </ng-template>
 

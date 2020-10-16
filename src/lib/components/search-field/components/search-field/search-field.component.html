@@ -6,7 +6,7 @@
   [class.search-field_outlined]="kind === 'outlined'"
 >
   <button class="search-field__switcher" (click)="switchState($event)">
-    <ion-icon class="search-field__switcher-icon" [name]="buttonIconName"></ion-icon>
+    <pupa-icon class="search-field__switcher-icon" [name]="buttonIconName"></pupa-icon>
   </button>
   <input
     [@.disabled]="!expandable"

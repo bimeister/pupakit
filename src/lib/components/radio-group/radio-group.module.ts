@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { RadioControlLabelComponent } from './components/radio-control-label/radio-control-label.component';
@@ -9,7 +9,6 @@ import { RadioGroupComponent } from './components/radio-group/radio-group.compon
 @NgModule({
   declarations: [RadioGroupComponent, RadioControlComponent, RadioControlLabelComponent, RadioControlMarkerComponent],
   imports: [SharedModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [RadioGroupComponent, RadioControlComponent, RadioControlLabelComponent, RadioControlMarkerComponent]
 })
 export class RadioGroupModule {}
