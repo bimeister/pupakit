@@ -24,6 +24,7 @@ export * from './grid-state.interface';
 export * from './height-unit-binding.interface';
 export * from './height-unit-changes.interface';
 export * from './icon-data.interface';
+export * from './icon-definition.interface';
 export * from './layout-drawer-configuration.interface';
 export * from './min-height-unit-binding.interface';
 export * from './min-height-unit-changes.interface';

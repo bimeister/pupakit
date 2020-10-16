@@ -7,7 +7,10 @@
             <ng-container *ngSwitchCase="true">
               <pupa-chip-button class="selected-option" *ngFor="let selectedOption of selectedOptions">
                 {{ selectedOption.caption }}
-                <ion-icon (click)="toggleValue(selectedOption.value); $event.stopPropagation()" name="close"></ion-icon>
+                <pupa-icon
+                  (click)="toggleValue(selectedOption.value); $event.stopPropagation()"
+                  name="close"
+                ></pupa-icon>
               </pupa-chip-button>
             </ng-container>
 
@@ -19,7 +22,7 @@
       </div>
 
       <div class="selected-options-other">
-        <ion-icon class="other-icon" name="arrow-dropdown"></ion-icon>
+        <pupa-icon class="other-icon" name="arrow-dropdown"></pupa-icon>
         <pupa-chip-button class="overflow-selected-options-count" [class.is-visible]="overflowSelectedOptionsCount > 0">
           +{{ overflowSelectedOptionsCount }}
         </pupa-chip-button>
@@ -31,7 +34,7 @@
     <pupa-multiselection-list class="select-multiple-options" [formControl]="multiselectionListControl">
       <div class="select-option" (click)="selectAll()" [class.is-selected]="allSelected$ | async">
         <span class="select-option__caption">Выбрать все</span>
-        <ion-icon class="select-option__checkmark" name="checkmark-circle"></ion-icon>
+        <pupa-icon class="select-option__checkmark" name="checkmark-circle"></pupa-icon>
       </div>
       <pupa-multiselection-list-item
         class="select-option"
@@ -40,7 +43,7 @@
         *ngFor="let option of options"
       >
         <span class="select-option__caption">{{ option.caption }}</span>
-        <ion-icon class="select-option__checkmark" name="checkmark-circle"></ion-icon>
+        <pupa-icon class="select-option__checkmark" name="checkmark-circle"></pupa-icon>
       </pupa-multiselection-list-item>
     </pupa-multiselection-list>
   </pupa-droppable-content>
