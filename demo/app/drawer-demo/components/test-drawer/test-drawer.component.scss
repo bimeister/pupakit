@@ -1,0 +1,13 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: px(500);
+  height: 100%;
+}
+
+.placeholder {
+  height: px(2000);
+  background-color: color(black);
+}

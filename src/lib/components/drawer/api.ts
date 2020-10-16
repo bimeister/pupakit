@@ -4,3 +4,4 @@
 
 export * from './drawer.module';
 export * from './components/api';
+export * from './services/api';

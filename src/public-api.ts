@@ -46,8 +46,6 @@ export {
   Alert,
   Tab,
   DraggableListChangeIndexEvent,
-  LayoutDrawerConfiguration,
-  ModalWindowConfiguration,
   DatagridColDef,
   DatagridDomLayouts,
   DatagridManipulatorConfiguration,
@@ -63,5 +61,12 @@ export {
   SelectSearchBase,
   SelectButtonBase,
   SelectDropdownBase,
-  SelectItemsContainerBase
+  SelectItemsContainerBase,
+  DrawerRef,
+  OpenedDrawer,
+  DrawerConfig,
+  ModalRef,
+  OpenedModal,
+  ModalConfig,
+  Position
 } from './internal/api';

@@ -21,6 +21,7 @@ import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.compo
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DraggableDemoComponent } from './draggable-demo/draggable-demo.component';
 import { DraggableListDemoComponent } from './draggable-list-demo/draggable-demo.component';
+import { TestDrawerComponent } from './drawer-demo/components/test-drawer/test-drawer.component';
 import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
@@ -100,7 +101,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     SelectMultipleDemoComponent,
     ChipTabsDemoComponent,
     TreeDemoComponent,
-    LogPipe
+    LogPipe,
+    TestDrawerComponent
   ],
   imports: [
     BrowserModule,
