@@ -3,7 +3,7 @@
     <pupa-droppable-trigger>
       <pupa-chip-button #addChips [disabled]="readonly" [color]="'dark'">
         <div class="chip-select__chip-add-button">Добавить</div>
-        <pupa-icon name="add"></pupa-icon>
+        <ion-icon name="add"></ion-icon>
       </pupa-chip-button>
     </pupa-droppable-trigger>
     <pupa-droppable-content>
@@ -20,10 +20,10 @@
         title="Удалить"
         type="button"
       >
-        <pupa-icon name="trash"></pupa-icon>
+        <ion-icon name="trash"></ion-icon>
       </button>
 
-      <pupa-icon class="chip-select__chip-icon" *ngIf="selectItem?.icon" [name]="selectItem.icon"></pupa-icon>
+      <ion-icon class="chip-select__chip-icon" *ngIf="selectItem?.icon" [name]="selectItem.icon"></ion-icon>
     </div>
     <span>{{ selectItem.value }}</span>
   </pupa-chip>

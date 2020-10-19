@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 
 import { CheckboxModule } from '../checkbox/checkbox.module';
@@ -9,8 +9,6 @@ import { SharedModule } from './../../../internal/shared/shared.module';
 import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
 import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
-import { IconModule } from '../icon/icon.module';
-import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-icon.const';
 
 @NgModule({
   declarations: [DatagridComponent, DatagridColumnSettingsComponent, DatagridTemplateRendererComponent],
@@ -20,9 +18,9 @@ import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-ic
     ChipSelectModule,
     IconButtonModule,
     DroppableModule,
-    IconModule.forFeature([mdSettingsIcon]),
     AgGridModule.withComponents([DatagridTemplateRendererComponent, DatagridColumnSettingsComponent])
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [DatagridComponent, DatagridColumnSettingsComponent, DatagridTemplateRendererComponent]
 })
 export class DatagridModule {}

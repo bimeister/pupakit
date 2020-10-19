@@ -9,7 +9,7 @@
   (mouseup)="processMouseUpEvent($event)"
 >
   <div class="button__icon" [ngClass]="'button__icon_' + icon.position" *ngIf="icon">
-    <pupa-icon [name]="icon.name" (click)="onClickInternalElement($event)"></pupa-icon>
+    <ion-icon [attr.name]="icon.name" (click)="onClickInternalElement($event)"></ion-icon>
   </div>
   <span class="button__text" (click)="onClickInternalElement($event)">
     <ng-content></ng-content>

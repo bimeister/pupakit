@@ -19,7 +19,6 @@ export * from './dropdown/api';
 export * from './dropdown-menu/api';
 export * from './droppable/api';
 export * from './expansible/api';
-export * from './icon/api';
 export * from './icon-button/api';
 export * from './input/api';
 export * from './layout/api';

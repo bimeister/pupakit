@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import * as Combos from 'combos';
 import { FormControl, FormGroup } from '@angular/forms';
-
 @Component({
   selector: 'demo-switcher',
   styleUrls: ['../demo.scss'],

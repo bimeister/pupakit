@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.component';
 import { DropdownMenuTriggerComponent } from './components/dropdown-menu-trigger/dropdown-menu-trigger.component';
@@ -13,6 +13,7 @@ import { DropdownMenuContentComponent } from './components/dropdown-menu-content
     DropdownMenuItemComponent
   ],
   imports: [SharedModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     DropdownMenuComponent,
     DropdownMenuTriggerComponent,

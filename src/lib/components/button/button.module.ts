@@ -1,13 +1,12 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { ButtonComponent } from './components/button/button.component';
-import { IconModule } from '../icon/icon.module';
-import { SpinnerModule } from '../spinner/spinner.module';
 
 @NgModule({
   declarations: [ButtonComponent],
-  imports: [SharedModule, SpinnerModule, IconModule.forFeature()],
+  imports: [SharedModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [ButtonComponent]
 })
 export class ButtonModule {}
