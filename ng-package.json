@@ -3,7 +3,7 @@
   "dest": "./dist/@meistersoft/pupakit",
   "lib": {
     "entryFile": "src/public-api.ts",
-    "styleIncludePaths": ["src/styles"]
+    "styleIncludePaths": ["src/styles", "node_modules/ionicons/dist/css"]
   },
   "whitelistedNonPeerDependencies": ["."]
 }

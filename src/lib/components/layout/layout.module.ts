@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { AlertComponent } from './components/alert/alert.component';
@@ -9,11 +9,9 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { ModalWindowComponent } from './components/modal-window/modal-window.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { TooltipPaneComponent } from './components/tooltip-pane/tooltip-pane.component';
-import { IconModule } from '../icon/icon.module';
-import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 
 @NgModule({
-  imports: [SharedModule, IconModule.forFeature([mdCloseIcon])],
+  imports: [SharedModule],
   declarations: [
     AlertComponent,
     CloseButtonComponent,
@@ -24,6 +22,7 @@ import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.con
     OverlayComponent,
     TooltipPaneComponent
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [LayoutComponent, LoaderComponent]
 })
 export class LayoutModule {}

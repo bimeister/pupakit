@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { TabsComponent } from './components/tabs/tabs.component';
-import { IconModule } from '../icon/icon.module';
 
 @NgModule({
   declarations: [TabsComponent],
-  imports: [SharedModule, IconModule.forFeature()],
+  imports: [SharedModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [TabsComponent]
 })
 export class TabsModule {}

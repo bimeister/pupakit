@@ -7853,6 +7853,11 @@ invert-kv@^1.0.0:
   resolved "http://npm.meistersoft.ru:4873/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
   integrity sha1-EEqOSqym09jNFXqO+L+rLXo//bY=
 
+ionicons@^4.6.3:
+  version "4.6.3"
+  resolved "http://npm.meistersoft.ru:4873/ionicons/-/ionicons-4.6.3.tgz#e4f3a3e9b66761eb8c0db27798cc1a8ce97777d2"
+  integrity sha512-cgP+VIr2cTJpMfFyVHTerq6n2jeoiGboVoe3GlaAo5zoSBDAEXORwUZhv6m+lCyxlsHCS3nqPUE+MKyZU71t8Q==
+
 ip-regex@^2.1.0:
   version "2.1.0"
   resolved "http://npm.meistersoft.ru:4873/ip-regex/-/ip-regex-2.1.0.tgz#fa78bf5d2e6913c911ce9f819ee5146bb6d844e9"

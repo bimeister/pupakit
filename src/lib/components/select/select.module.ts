@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { TreeModule } from '../tree/tree.module';
@@ -17,10 +17,6 @@ import { SelectTableItemsContainerComponent } from './components/table/select-ta
 import { SelectTableSearchComponent } from './components/table/select-table-search/select-table-search.component';
 import { SelectTableTreeComponent } from './components/table/select-table-tree/select-table-tree.component';
 import { SelectTableComponent } from './components/table/select-table/select-table.component';
-import { IconModule } from '../icon/icon.module';
-import { mdArrowDropdownIcon } from '../../../internal/constants/icons/md-arrow-dropdown-icon.const';
-import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-circle-icon.const';
-import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
 
 const COMPONENTS: any[] = [
   SelectComponent,
@@ -41,12 +37,8 @@ const COMPONENTS: any[] = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [
-    SharedModule,
-    OverlayModule,
-    TreeModule,
-    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon])
-  ],
-  exports: [...COMPONENTS]
+  imports: [SharedModule, OverlayModule, TreeModule],
+  exports: [...COMPONENTS],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SelectModule {}

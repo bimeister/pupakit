@@ -52,11 +52,11 @@
           size="medium"
           (onclick)="processButtonClick($event, $any(button))"
         >
-          <pupa-icon
+          <ion-icon
             [style.transform]="'rotate(-' + (additionalPanelButtonsRotations$ | async)[index] + 'rad)'"
             [name]="button.icon"
             class="washer-panel__button"
-          ></pupa-icon>
+          ></ion-icon>
         </pupa-icon-button>
       </div>
     </ng-container>
@@ -81,11 +81,11 @@
         size="medium"
         (onclick)="processButtonClick($event, $any(button))"
       >
-        <pupa-icon
+        <ion-icon
           [style.transform]="'rotate(-' + (rotations$ | async)[index] + 'rad)'"
           [name]="button.icon"
           class="washer-panel__button"
-        ></pupa-icon>
+        ></ion-icon>
       </pupa-icon-button>
     </div>
   </div>
@@ -99,7 +99,7 @@
   >
     <ng-container *ngIf="!(isCentralValueVisible$ | async)">
       <button class="central-button" (click)="processButtonClick($event)" [@buttonsAppearanceAnimation]>
-        <pupa-icon [name]="centralButton?.icon"></pupa-icon>
+        <ion-icon [name]="centralButton?.icon"></ion-icon>
       </button>
     </ng-container>
     <ng-container *ngIf="isCentralValueVisible$ | async">

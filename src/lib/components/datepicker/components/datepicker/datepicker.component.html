@@ -1,13 +1,13 @@
 <div class="datepicker">
   <div class="datepicker__header">
     <button class="arrow-button" (click)="switchToPreviousMonth($event)">
-      <pupa-icon name="ios-arrow-back"></pupa-icon>
+      <ion-icon name="ios-arrow-back"></ion-icon>
     </button>
     <span class="month">
       {{ primarySectionStartDate$ | async | date: 'LLLL yyy' | titlecase }}
     </span>
     <button class="arrow-button" (click)="switchToNextMonth($event)">
-      <pupa-icon name="ios-arrow-forward"></pupa-icon>
+      <ion-icon name="ios-arrow-forward"></ion-icon>
     </button>
   </div>
 

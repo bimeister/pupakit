@@ -1,6 +1,6 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { DroppableContentComponent } from './components/droppable-content/droppable-content.component';
@@ -18,6 +18,7 @@ import { DroppableComponent } from './components/droppable/droppable.component';
     DroppableNativeContentComponent
   ],
   imports: [SharedModule, OverlayModule, PortalModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     DroppableLegacyComponent,
     DroppableTriggerComponent,

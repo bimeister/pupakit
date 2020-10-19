@@ -20,7 +20,6 @@ export * from './event-unlistener.type';
 export * from './expander-behavior.type';
 export * from './icon-button-color.type';
 export * from './icon-button-size.type';
-export * from './icon-registry.type';
 export * from './input-size.type';
 export * from './input-text-align.type';
 export * from './input-type.type';

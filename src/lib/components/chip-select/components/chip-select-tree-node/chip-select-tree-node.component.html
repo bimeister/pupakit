@@ -8,7 +8,7 @@
   >
     <div class="item-node__button-wrapper">
       <div class="item-node__button-icon">
-        <pupa-icon [name]="item.icon"></pupa-icon>
+        <ion-icon [name]="item.icon"></ion-icon>
       </div>
       <div class="item-node__button-text-wrap" [ngClass]="item?.children.length > 0 ? 'children' : ''">
         <div class="item-node__button-text">
@@ -16,7 +16,7 @@
         </div>
       </div>
       <div *ngIf="item?.children.length > 0" class="item-node__button-children" (click)="openChildren($event)">
-        <pupa-icon [name]="item?.opened ? 'arrow-dropup' : 'arrow-dropdown'"></pupa-icon>
+        <ion-icon [name]="item?.opened ? 'arrow-dropup' : 'arrow-dropdown'"></ion-icon>
       </div>
     </div>
   </div>

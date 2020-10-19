@@ -9,7 +9,7 @@
 
     <div class="modal__content" [@overlayAppeared]="overlayAnimationState$ | async">
       <button *ngIf="closeButton" class="close-button" (click)="processCloseButtonClick($event)">
-        <pupa-icon name="close"></pupa-icon>
+        <ion-icon name="close"></ion-icon>
       </button>
       <div class="modal__scroll-container">
         <ng-content></ng-content>

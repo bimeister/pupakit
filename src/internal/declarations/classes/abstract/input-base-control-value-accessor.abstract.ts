@@ -36,7 +36,10 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
     null
   );
 
-  constructor(protected readonly browserService: BrowserService, @Optional() ngControl: NgControl) {
+  constructor(
+      protected readonly browserService: BrowserService,
+      @Optional() ngControl: NgControl
+  ) {
     if (isNil(ngControl)) {
       return;
     }
