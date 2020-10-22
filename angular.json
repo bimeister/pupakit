@@ -76,7 +76,6 @@
             "main": "demo/main.ts",
             "outputPath": "./dist/demo",
             "polyfills": "demo/polyfills.ts",
-            "scripts": ["./node_modules/ionicons/dist/ionicons.js"],
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles/"]
             },

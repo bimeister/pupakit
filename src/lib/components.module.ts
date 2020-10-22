@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../internal/shared/shared.module';
 import { ButtonModule } from './components/button/button.module';
@@ -87,7 +87,6 @@ const EXPORTS: any[] = [
 
 @NgModule({
   imports: [SharedModule, ...EXPORTS],
-  exports: [...EXPORTS],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  exports: [...EXPORTS]
 })
 export class ComponentsModule {}

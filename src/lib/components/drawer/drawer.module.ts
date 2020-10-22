@@ -8,10 +8,19 @@ import { DrawerContainerComponent } from './components/drawer-container/drawer-c
 import { DrawerDraggerComponent } from './components/drawer-dragger/drawer-dragger.component';
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerComponent } from './components/drawer/drawer.component';
+import { IconModule } from '../icon/icon.module';
+import { mdMoreIcon } from '../../../internal/constants/icons/md-more-icon.const';
+import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 
 @NgModule({
   declarations: [DrawerComponent, DrawerDraggerComponent, DrawerContainerComponent, DrawerLayoutComponent],
-  imports: [SharedModule, IconButtonModule, OverlayModule, PortalModule],
+  imports: [
+    SharedModule,
+    IconButtonModule,
+    OverlayModule,
+    PortalModule,
+    IconModule.forFeature([mdMoreIcon, mdCloseIcon])
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [DrawerComponent, DrawerDraggerComponent, DrawerLayoutComponent, OverlayModule, PortalModule]
 })

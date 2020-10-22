@@ -6,12 +6,12 @@
     class="tabs__item"
     (click)="selectTab(tab, $event)"
   >
-    <ion-icon
+    <pupa-icon
       *ngIf="!(tab?.iconName || tab?.iconSrc | isNullOrUndefined)"
       class="icon"
       [name]="tab.iconName"
       [src]="(tab.iconName | isNullOrUndefined) ? tab.iconSrc : null"
-    ></ion-icon>
+    ></pupa-icon>
     <div class="title">
       {{ tab.name }}
     </div>

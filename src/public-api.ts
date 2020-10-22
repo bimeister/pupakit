@@ -68,5 +68,8 @@ export {
   ModalRef,
   OpenedModal,
   ModalConfig,
-  Position
+  Position,
+  IconDefinition
 } from './internal/api';
+
+export * from './internal/constants/icons/api';
