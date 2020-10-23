@@ -26,6 +26,8 @@ export class DatePickerStateService {
   public readonly selectedDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(null);
   public readonly selectedRange$: BehaviorSubject<Date[]> = new BehaviorSubject<Date[]>([]);
 
+  public baseYear;
+
   public readonly isSelectionModeDate$: Observable<boolean> = this.selectionMode$.pipe(
     map((selectionMode: DatePickerSelectionMode) => selectionMode === 'date'),
     shareReplayWithRefCount()

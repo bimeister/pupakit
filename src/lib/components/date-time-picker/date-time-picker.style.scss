@@ -11,6 +11,12 @@ $font-weight_days-line-item: 600;
 $height_date: rems(1.3125);
 $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
 
+$width_year: calc(100% / 5);
+$height_year: px(24);
+
+$width_month: px(64);
+$height_month: px(24);
+
 .date-picker {
   all: unset;
   width: px(244);
@@ -37,7 +43,7 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
     @include flex-container(row, center, space-between, nowrap);
   }
 
-  &__dates {
+  &__wrapper {
     width: 100%;
     padding: $padding_days-area-container;
     box-sizing: border-box;
@@ -49,7 +55,7 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
   }
 }
 
-.month {
+.title {
   all: unset;
   font-size: variable(font-size_base-text);
   color: color(main);
@@ -58,7 +64,22 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
   font-style: normal;
   font-stretch: normal;
   user-select: none;
+  display: flex;
   @include regular;
+
+  &__month:not(.disable-hover),
+  &__year:not(.disable-hover) {
+    transition: color 0.2s ease;
+    &:hover {
+      color: color(active);
+      cursor: pointer;
+    }
+  }
+
+  &.selected {
+    color: color(active);
+    cursor: default;
+  }
 }
 
 .week-day {
@@ -95,9 +116,10 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
 
   &_previous-month {
     color: color(grey-apple);
+    pointer-events: none;
   }
 
-  &_hovered {
+  &_hovered:not(.date_previous-month) {
     border-radius: rems(0.25);
     background: color(light);
 
@@ -115,7 +137,7 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
     }
   }
 
-  &_in-range {
+  &_in-range:not(.date_previous-month) {
     background: color(light);
 
     &::before {
@@ -131,7 +153,7 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
     }
   }
 
-  &_selected {
+  &_selected:not(.date_previous-month) {
     color: color(white);
     background: color(active);
     z-index: 3;
@@ -157,6 +179,64 @@ $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
     left: -10%;
     width: 160%;
     border-radius: rems(0.25);
+  }
+}
+
+.year {
+  position: relative;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: $width_year;
+  height: $height_year;
+  font-size: $font-size_days-line-item;
+  margin: px(3) 0;
+  color: color(text);
+  line-height: rems(1);
+  font-weight: normal;
+  user-select: none;
+  border-radius: $height_year;
+  z-index: 2;
+  @include transition(#{'background, color'});
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+
+  &.current {
+    background-color: color(light);
+    color: color(text);
+  }
+  &:hover {
+    background-color: color(active);
+    color: color(white);
+  }
+}
+
+.month {
+  position: relative;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: $width_month;
+  height: $height_month;
+  font-size: $font-size_days-line-item;
+  margin: px(3) 0;
+  color: color(text);
+  line-height: rems(1);
+  font-weight: normal;
+  user-select: none;
+  border-radius: $height_month;
+  z-index: 2;
+  @include transition(#{'background, color'});
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+
+  &:hover {
+    background-color: color(active);
+    color: color(white);
   }
 }
 

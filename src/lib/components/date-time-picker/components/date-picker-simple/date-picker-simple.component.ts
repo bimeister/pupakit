@@ -7,9 +7,9 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { filterFalsy, isNil } from '@meistersoft/utilities';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';
 import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -21,6 +21,14 @@ import { sanitizeDate } from '../../../../../internal/helpers/sanitize-date.help
 import { DatePickerStateService } from '../../services/date-picker-state.service';
 
 const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
+const YEARS_IN_SECTION: number = 30;
+const YEARS_START_OFFSET: number = 19;
+
+enum DatePickerPreviewMode {
+  Years,
+  Months,
+  Days
+}
 
 @Component({
   selector: 'pupa-date-picker-simple',
@@ -44,10 +52,23 @@ export class DatePickerSimpleComponent implements OnChanges {
 
   public readonly weekDayNames: string[] = this.datePickerStateService.weekDayNames;
 
+  public readonly datePickerPreviewMode: typeof DatePickerPreviewMode = DatePickerPreviewMode;
+  public readonly datePickerPreviewMode$: BehaviorSubject<DatePickerPreviewMode> = new BehaviorSubject<
+    DatePickerPreviewMode
+  >(DatePickerPreviewMode.Days);
+
   public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
   public readonly selectedRange$: BehaviorSubject<Date[]> = this.datePickerStateService.selectedRange$;
 
   public readonly isSelectionModeDate$: Observable<boolean> = this.datePickerStateService.isSelectionModeDate$;
+  public readonly isDatePickerDoubleModeEnabled$: Observable<boolean> = combineLatest([
+    this.isLeftDoubleDatePicker$,
+    this.isRightDoubleDatePicker$
+  ]).pipe(
+    map(([isLeftDoubleDatePicker, isRightDoubleDatePicker]) =>
+      [isLeftDoubleDatePicker, isRightDoubleDatePicker].includes(true)
+    )
+  );
 
   public readonly hoveredDate$: BehaviorSubject<Date> = this.datePickerStateService.hoveredDate$;
   public readonly hoveredRange$: Observable<Date[]> = this.datePickerStateService.hoveredRange$;
@@ -61,6 +82,11 @@ export class DatePickerSimpleComponent implements OnChanges {
       return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
     }),
     map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
+  );
+
+  public readonly baseYear$: Observable<number> = this.primarySectionStartDate$.pipe(
+    distinctUntilChanged(),
+    map((primarySectionStartDate: Date) => primarySectionStartDate.getFullYear())
   );
 
   public readonly primarySectionEndDate$: Observable<Date> = this.baseDate$.pipe(
@@ -137,6 +163,29 @@ export class DatePickerSimpleComponent implements OnChanges {
     )
   );
 
+  public readonly primarySectionYears$: Observable<number[]> = this.primarySectionStartDate$.pipe(
+    distinctUntilChanged(),
+    map((sectionStartDate: Date) => sectionStartDate.getFullYear()),
+    map((currentYear: number) => {
+      const startYearInSection: number =
+        Math.floor(currentYear / YEARS_IN_SECTION) * YEARS_IN_SECTION - YEARS_START_OFFSET;
+
+      const resultStartYearInSection: number =
+        startYearInSection + YEARS_IN_SECTION > currentYear ? startYearInSection : currentYear;
+
+      return Array(YEARS_IN_SECTION)
+        .fill(0)
+        .map((_year: number, index: number) => resultStartYearInSection + index);
+    })
+  );
+
+  public readonly primarySectionYearsStartYear$: Observable<number> = this.primarySectionYears$.pipe(
+    map((years: number[]) => years[0])
+  );
+  public readonly primarySectionYearsEndYear$: Observable<number> = this.primarySectionYears$.pipe(
+    map((years: number[]) => years[years.length - 1])
+  );
+
   constructor(private readonly datePickerStateService: DatePickerStateService) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -181,6 +230,84 @@ export class DatePickerSimpleComponent implements OnChanges {
         this.baseDate$.next(newBaseDate);
         this.nextMonthClicked.emit();
       });
+  }
+
+  public switchToNextYear(): void {
+    this.baseYear$.pipe(take(1)).subscribe((year: number) => this.switchToYear(year + 1));
+  }
+
+  public switchToPreviousYear(): void {
+    this.baseYear$.pipe(take(1)).subscribe((year: number) => this.switchToYear(year - 1));
+  }
+
+  public switchToYear(year: number): void {
+    this.baseDate$
+      .pipe(
+        take(1),
+        map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setFullYear(year))))
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.datePickerPreviewMode$.next(DatePickerPreviewMode.Months);
+        this.baseDate$.next(newBaseDate);
+      });
+  }
+
+  public switchToMonth(month: number): void {
+    this.baseDate$
+      .pipe(
+        take(1),
+        map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setMonth(month))))
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.datePickerPreviewMode$.next(DatePickerPreviewMode.Days);
+        this.baseDate$.next(newBaseDate);
+      });
+  }
+
+  public switchToPreviousYearsPeriod(): void {
+    this.primarySectionYearsStartYear$
+      .pipe(
+        take(1),
+        switchMap((primarySectionYearsStartYear: number) => {
+          const nextSectionYearsStartYear: number = primarySectionYearsStartYear - YEARS_IN_SECTION;
+
+          return this.baseDate$.pipe(
+            take(1),
+            map((currentBaseDate: Date) =>
+              dateClearTime(new Date(currentBaseDate.setFullYear(nextSectionYearsStartYear)))
+            )
+          );
+        })
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.baseDate$.next(newBaseDate);
+      });
+  }
+
+  public switchToNextYearsPeriod(): void {
+    this.primarySectionYearsStartYear$
+      .pipe(
+        take(1),
+        switchMap((primarySectionYearsStartYear: number) => {
+          const nextSectionYearsStartYear: number = primarySectionYearsStartYear + YEARS_IN_SECTION;
+
+          return this.baseDate$.pipe(
+            take(1),
+            map((currentBaseDate: Date) =>
+              dateClearTime(new Date(currentBaseDate.setFullYear(nextSectionYearsStartYear)))
+            )
+          );
+        })
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.baseDate$.next(newBaseDate);
+      });
+  }
+
+  public switchDatePickerPreviewMode(mode: DatePickerPreviewMode): void {
+    this.isDatePickerDoubleModeEnabled$
+      .pipe(take(1), filterFalsy())
+      .subscribe(() => this.datePickerPreviewMode$.next(mode));
   }
 
   public processDateSelection(date: Date): void {

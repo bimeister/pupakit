@@ -1,0 +1,8 @@
+@import '../../date-time-picker.style.scss';
+
+$max-height_container: px(178);
+
+:host {
+  @include flex-container(row, flex-start, space-between, wrap);
+  height: $max-height_container;
+}
