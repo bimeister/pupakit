@@ -8,6 +8,7 @@ export { ChipModule } from './lib/components/chip/chip.module';
 export { ControlTextModule } from './lib/components/control-text/control-text.module';
 export { DatagridModule } from './lib/components/datagrid/datagrid.module';
 export { DatepickerModule } from './lib/components/datepicker/datepicker.module';
+export { DateTimePickerModule } from './lib/components/date-time-picker/date-time-picker.module';
 export { DaySelectorModule } from './lib/components/day-selector/day-selector.module';
 export { DrawerModule } from './lib/components/drawer/drawer.module';
 export { DropdownModule } from './lib/components/dropdown/dropdown.module';

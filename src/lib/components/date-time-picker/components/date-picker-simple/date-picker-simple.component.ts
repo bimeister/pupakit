@@ -1,0 +1,242 @@
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
+import { isNil } from '@meistersoft/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';
+import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { dateClearTime } from '../../../../../internal/helpers/date-clear-time.helper';
+import { getDaysInMonth } from '../../../../../internal/helpers/get-days-in-month.helper';
+import { isDate } from '../../../../../internal/helpers/is-date.helper';
+import { sanitizeDate } from '../../../../../internal/helpers/sanitize-date.helper';
+import { DatePickerStateService } from '../../services/date-picker-state.service';
+
+const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
+
+@Component({
+  selector: 'pupa-date-picker-simple',
+  templateUrl: './date-picker-simple.component.html',
+  styleUrls: ['./date-picker-simple.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class DatePickerSimpleComponent implements OnChanges {
+  @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
+  public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
+
+  @Input() public readonly isLeftDoubleDatePicker: boolean = false;
+  public readonly isLeftDoubleDatePicker$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public readonly isRightDoubleDatePicker: boolean = false;
+  public readonly isRightDoubleDatePicker$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Output() public readonly nextMonthClicked: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public readonly previousMonthClicked: EventEmitter<void> = new EventEmitter<void>();
+
+  public readonly weekDayNames: string[] = this.datePickerStateService.weekDayNames;
+
+  public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
+  public readonly selectedRange$: BehaviorSubject<Date[]> = this.datePickerStateService.selectedRange$;
+
+  public readonly isSelectionModeDate$: Observable<boolean> = this.datePickerStateService.isSelectionModeDate$;
+
+  public readonly hoveredDate$: BehaviorSubject<Date> = this.datePickerStateService.hoveredDate$;
+  public readonly hoveredRange$: Observable<Date[]> = this.datePickerStateService.hoveredRange$;
+
+  public readonly primarySectionStartDate$: Observable<Date> = this.baseDate$.pipe(
+    distinctUntilChanged(),
+    filter((baseDate: Date) => isDate(baseDate)),
+    map((baseDate: Date) => {
+      const baseMonthDay: number = baseDate.getDate();
+      const baseDateMs: number = baseDate.valueOf();
+      return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
+    }),
+    map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
+  );
+
+  public readonly primarySectionEndDate$: Observable<Date> = this.baseDate$.pipe(
+    distinctUntilChanged(),
+    filter((baseDate: Date) => isDate(baseDate)),
+    map((baseDate: Date) => {
+      const baseMonthDay: number = baseDate.getDate();
+      const baseDateMs: number = baseDate.valueOf();
+      const daysInMonth: number = getDaysInMonth(baseDate);
+
+      return Object.is(baseMonthDay, daysInMonth) ? baseDateMs : baseDateMs + (daysInMonth - baseMonthDay) * dayInMs;
+    }),
+    map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
+  );
+
+  public readonly primarySectionDates$: Observable<Date[]> = this.primarySectionStartDate$.pipe(
+    distinctUntilChanged(),
+    map((sectionStartDate: Date) => {
+      const daysInMonth: number = getDaysInMonth(sectionStartDate);
+      const sectionStartDateMs: number = sectionStartDate.valueOf();
+      return new Array(daysInMonth)
+        .fill(sectionStartDateMs)
+        .map((startDateMs: number, dayInMonth: number) => startDateMs + dayInMonth * dayInMs);
+    }),
+    map((sectionDatesMs: number[]) => sectionDatesMs.map((dateMs: number) => dateClearTime(new Date(dateMs))))
+  );
+
+  public readonly primarySectionLeftOffsetDates$: Observable<Date[]> = this.primarySectionStartDate$.pipe(
+    distinctUntilChanged(),
+    map((sectionStartDate: Date) => {
+      const sectionStartDateMs: number = sectionStartDate.valueOf();
+      const lastDayOfPreviousMonthMs: number = sectionStartDateMs - dayInMs;
+      return dateClearTime(new Date(lastDayOfPreviousMonthMs));
+    }),
+    map((previousMonthLastDate: Date) => {
+      const previousMonthLastDateDayOfWeek: DayOfWeek = previousMonthLastDate.getDay();
+      if (previousMonthLastDateDayOfWeek === DayOfWeek.Sunday) {
+        return [];
+      }
+      const previousMonthLastDateMs: number = previousMonthLastDate.valueOf();
+      const visibleDaysCount: number = previousMonthLastDateDayOfWeek;
+      return new Array(visibleDaysCount)
+        .fill(previousMonthLastDateMs)
+        .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs - multiplier * dayInMs);
+    }),
+    map((previousMonthDatesMs: number[]) => [...previousMonthDatesMs].reverse()),
+    map((reversedPreviousMonthDatesMs: number[]) =>
+      reversedPreviousMonthDatesMs.map((dateMs: number) => dateClearTime(new Date(dateMs)))
+    )
+  );
+
+  public readonly primarySectionRightOffsetDates$: Observable<Date[]> = this.primarySectionEndDate$.pipe(
+    distinctUntilChanged(),
+    map((sectionEndDate: Date) => {
+      const sectionEndDateMs: number = sectionEndDate.valueOf();
+      const firstDayOfNextMonthMs: number = sectionEndDateMs + dayInMs;
+      return dateClearTime(new Date(firstDayOfNextMonthMs));
+    }),
+    map((nextMonthFirstDate: Date) => {
+      const nextMonthFirstDateDayOfWeek: DayOfWeek = nextMonthFirstDate.getDay();
+      if (nextMonthFirstDateDayOfWeek === DayOfWeek.Monday) {
+        return [];
+      }
+      const nextMonthFirstDateMs: number = nextMonthFirstDate.valueOf();
+      const visibleDaysCount: number =
+        nextMonthFirstDateDayOfWeek === DayOfWeek.Sunday ? 1 : 8 - nextMonthFirstDateDayOfWeek;
+
+      return new Array(visibleDaysCount)
+        .fill(nextMonthFirstDateMs)
+        .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs + multiplier * dayInMs);
+    }),
+    map((reversedPreviousMonthDatesMs: number[]) =>
+      reversedPreviousMonthDatesMs.map((dateMs: number) => dateClearTime(new Date(dateMs)))
+    )
+  );
+
+  constructor(private readonly datePickerStateService: DatePickerStateService) {}
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (isNil(changes)) {
+      return;
+    }
+    this.processBaseDateChange(changes?.baseDate);
+    this.processIsLeftDoubleDatePickerChange(changes?.isLeftDoubleDatePicker);
+    this.processIsRightDoubleDatePickerChange(changes?.isRightDoubleDatePicker);
+  }
+
+  public switchToPreviousMonth(): void {
+    this.baseDate$
+      .pipe(
+        take(1),
+        map((currentBaseDate: Date) => {
+          const baseDateMonthDay: number = currentBaseDate.getDate();
+          const currentBaseDateMs: number = currentBaseDate.valueOf();
+          return currentBaseDateMs - baseDateMonthDay * dayInMs;
+        }),
+        map((newBaseDateMs: number) => dateClearTime(new Date(newBaseDateMs)))
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.baseDate$.next(newBaseDate);
+        this.previousMonthClicked.emit();
+      });
+  }
+
+  public switchToNextMonth(): void {
+    this.baseDate$
+      .pipe(
+        take(1),
+        map((currentBaseDate: Date) => {
+          const baseDateMonthDay: number = currentBaseDate.getDate();
+          const currentBaseDateMs: number = currentBaseDate.valueOf();
+          const currentBaseDateMonthDaysCount: number = getDaysInMonth(currentBaseDate);
+          return currentBaseDateMs + (currentBaseDateMonthDaysCount + 1 - baseDateMonthDay) * dayInMs;
+        }),
+        map((newBaseDateMs: number) => dateClearTime(new Date(newBaseDateMs)))
+      )
+      .subscribe((newBaseDate: Date) => {
+        this.baseDate$.next(newBaseDate);
+        this.nextMonthClicked.emit();
+      });
+  }
+
+  public processDateSelection(date: Date): void {
+    this.datePickerStateService.processDateSelection(date);
+  }
+
+  public processDateHover(date: Date): void {
+    this.datePickerStateService.processDateHover(date);
+  }
+
+  public isSameDate(dateA: Date, dateB: Date): boolean {
+    return this.datePickerStateService.isSameDate(dateA, dateB);
+  }
+
+  public dateIsInDateRange(date: Date, dateRange: Date[]): boolean {
+    return this.datePickerStateService.dateIsInDateRange(date, dateRange);
+  }
+
+  public dateIsInDateArray(date: Date, dateArray: Date[]): boolean {
+    return this.datePickerStateService.dateIsInDateArray(date, dateArray);
+  }
+
+  public dateIsRangeStartDate(date: Date, dateRange: Date[]): boolean {
+    return this.datePickerStateService.dateIsRangeStartDate(date, dateRange);
+  }
+
+  public dateIsRangeEndDate(date: Date, dateRange: Date[]): boolean {
+    return this.datePickerStateService.dateIsRangeStartDate(date, dateRange);
+  }
+
+  private processBaseDateChange(change: ComponentChange<this, Date>): void {
+    const updatedValue: Date | undefined = change?.currentValue;
+
+    if (isNil(updatedValue) || !isDate(updatedValue)) {
+      return;
+    }
+    const sanitizedDate: Date = sanitizeDate(updatedValue);
+    const sanitizedDateWithClearedTime: Date = dateClearTime(sanitizedDate);
+    this.baseDate$.next(sanitizedDateWithClearedTime);
+  }
+
+  private processIsLeftDoubleDatePickerChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.isLeftDoubleDatePicker$.next(updatedValue);
+  }
+
+  private processIsRightDoubleDatePickerChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.isRightDoubleDatePicker$.next(updatedValue);
+  }
+}

@@ -10,6 +10,7 @@ export * from './chip-select/api';
 export * from './chip-tabs/api';
 export * from './control-text/api';
 export * from './datagrid/api';
+export * from './date-time-picker/api';
 export * from './datepicker/api';
 export * from './day-selector/api';
 export * from './draggable/api';

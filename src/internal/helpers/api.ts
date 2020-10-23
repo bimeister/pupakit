@@ -10,3 +10,4 @@ export * from './get-property-value-by-path.helper';
 export * from './get-range-end-date.helper';
 export * from './get-range-start-date.helper';
 export * from './is-date.helper';
+export * from './sanitize-date.helper';

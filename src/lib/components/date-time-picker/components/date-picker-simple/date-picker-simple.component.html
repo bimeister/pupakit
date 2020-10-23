@@ -1,0 +1,65 @@
+<div class="date-picker__header">
+  <button class="arrow-button" [class.not-showing]="isRightDoubleDatePicker$ | async" (click)="switchToPreviousMonth()">
+    <ion-icon name="ios-arrow-back"></ion-icon>
+  </button>
+  <span class="month">
+    {{ primarySectionStartDate$ | async | date: 'LLLL yyy' | titlecase }}
+  </span>
+  <button class="arrow-button" [class.not-showing]="isLeftDoubleDatePicker$ | async" (click)="switchToNextMonth()">
+    <ion-icon name="ios-arrow-forward"></ion-icon>
+  </button>
+</div>
+
+<div class="date-picker__week-days">
+  <span class="week-day" *ngFor="let dayName of weekDayNames">
+    {{ dayName }}
+  </span>
+</div>
+
+<div class="date-picker__dates">
+  <ng-container
+    [ngTemplateOutlet]="dateButton"
+    [ngTemplateOutletContext]="{
+      dateOrigin: primarySectionLeftOffsetDates$ | async,
+      isPreviousMonth: true
+    }"
+  ></ng-container>
+
+  <ng-container
+    [ngTemplateOutlet]="dateButton"
+    [ngTemplateOutletContext]="{
+      dateOrigin: primarySectionDates$ | async,
+      isPreviousMonth: false
+    }"
+  ></ng-container>
+
+  <ng-container
+    [ngTemplateOutlet]="dateButton"
+    [ngTemplateOutletContext]="{
+      dateOrigin: primarySectionRightOffsetDates$ | async,
+      isPreviousMonth: true
+    }"
+  ></ng-container>
+</div>
+
+<ng-template #dateButton let-dateOrigin="dateOrigin" let-isPreviousMonth="isPreviousMonth">
+  <button
+    class="date"
+    [ngClass]="{
+      'date_previous-month': isPreviousMonth,
+      date_hovered: isSameDate(date, hoveredDate$ | async),
+      'date_in-range':
+        !(isSelectionModeDate$ | async) &&
+        (dateIsInDateRange(date, selectedRange$ | async) || dateIsInDateRange(date, hoveredRange$ | async)),
+      date_selected:
+        (isSelectionModeDate$ | async)
+          ? isSameDate(date, selectedDate$ | async)
+          : dateIsInDateArray(date, selectedRange$ | async)
+    }"
+    (mouseover)="processDateHover(date)"
+    (click)="processDateSelection(date)"
+    *ngFor="let date of dateOrigin"
+  >
+    {{ date | date: 'd' }}
+  </button>
+</ng-template>

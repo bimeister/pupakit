@@ -1,0 +1,22 @@
+@import '../../date-time-picker.style.scss';
+
+$width_double-calendar: px(488);
+$width_simple-calendar: px(244);
+
+:host {
+  display: contents;
+}
+
+:host {
+  display: contents;
+}
+
+.date-picker {
+  &.double {
+    width: $width_double-calendar;
+  }
+
+  &.simple {
+    width: $width_simple-calendar;
+  }
+}
