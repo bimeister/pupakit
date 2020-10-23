@@ -9,6 +9,7 @@ import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
 import { DatagridModule } from './components/datagrid/datagrid.module';
+import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
 import { DatepickerModule } from './components/datepicker/datepicker.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
@@ -53,6 +54,7 @@ const EXPORTS: any[] = [
   ControlTextModule,
   DatagridModule,
   DatepickerModule,
+  DateTimePickerModule,
   DaySelectorModule,
   DraggableModule,
   DrawerModule,

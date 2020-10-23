@@ -1,0 +1,184 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+$padding_days-area-container: 0 rems(1) rems(0.5) rems(1);
+$padding_days-area: 0 rems(1);
+$margin_days-line: 0 0 rems(0.5) 0;
+$width_days-line-item: calc(100% / 7);
+$font-size_days-line-item: rems(0.75);
+$font-weight_days-line-item: 600;
+$height_date: rems(1.3125);
+$box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
+
+.date-picker {
+  all: unset;
+  width: px(244);
+  box-shadow: $box-shadow;
+  border-radius: rems(0.5);
+  background: color(white);
+  @include flex-container(column, stretch, stretch, nowrap);
+
+  &__header {
+    height: px(36);
+    width: 100%;
+    box-sizing: border-box;
+    padding: $padding_days-area;
+    @include flex-container(row, center, space-between, nowrap);
+  }
+
+  &__week-days {
+    height: rems(1.5625);
+    width: 100%;
+    padding: $padding_days-area;
+    margin: $margin_days-line;
+    box-sizing: border-box;
+    background: color(light);
+    @include flex-container(row, center, space-between, nowrap);
+  }
+
+  &__dates {
+    width: 100%;
+    padding: $padding_days-area-container;
+    box-sizing: border-box;
+    @include flex-container(row, flex-start, flex-start, wrap);
+  }
+
+  &__row {
+    @include flex-container(column, stretch, stretch, nowrap);
+  }
+}
+
+.month {
+  all: unset;
+  font-size: variable(font-size_base-text);
+  color: color(main);
+  line-height: 1.43;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  user-select: none;
+  @include regular;
+}
+
+.week-day {
+  all: unset;
+  color: color(grey-light);
+  width: $width_days-line-item;
+  font-size: $font-size_days-line-item;
+  font-weight: normal;
+  user-select: none;
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+}
+
+.date {
+  position: relative;
+  appearance: none;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: $height_date;
+  height: $height_date;
+  margin: 0 calc((#{$width_days-line-item} - #{$height_date}) / 2) rems(0.5);
+  padding: 0;
+  font-size: $font-size_days-line-item;
+  color: color(text);
+  line-height: rems(1);
+  font-weight: normal;
+  user-select: none;
+  border-radius: rems(0.25);
+  z-index: 2;
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+
+  &_previous-month {
+    color: color(grey-apple);
+  }
+
+  &_hovered {
+    border-radius: rems(0.25);
+    background: color(light);
+
+    &::before {
+      top: 0;
+      left: 0;
+      background: inherit;
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      border-radius: rems(0.25);
+      pointer-events: none;
+    }
+  }
+
+  &_in-range {
+    background: color(light);
+
+    &::before {
+      top: 0;
+      left: -50%;
+      background: inherit;
+      position: absolute;
+      content: '';
+      width: 200%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
+    }
+  }
+
+  &_selected {
+    color: color(white);
+    background: color(active);
+    z-index: 3;
+
+    &::before {
+      left: 0;
+      width: 100%;
+      border-radius: rems(0.25);
+    }
+  }
+}
+
+.date:nth-child(7n).date_in-range {
+  &::before {
+    right: -10%;
+    width: 160%;
+    border-radius: rems(0.25);
+  }
+}
+
+.date:nth-child(7n + 1).date_in-range {
+  &::before {
+    left: -10%;
+    width: 160%;
+    border-radius: rems(0.25);
+  }
+}
+
+.arrow-button {
+  all: unset;
+  height: rems(1.25);
+  background: none;
+  outline: none;
+  border: none;
+  appearance: none;
+  margin: 0;
+  padding: 0;
+  font-weight: $font-weight_days-line-item;
+  font-size: rems(1);
+  color: color(grey-apple);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  @include regular;
+
+  &.not-showing {
+    visibility: hidden;
+    pointer-events: none;
+  }
+}
