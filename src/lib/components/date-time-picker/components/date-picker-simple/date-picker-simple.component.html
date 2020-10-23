@@ -1,22 +1,26 @@
 <div class="date-picker__header">
-  <button class="arrow-button" [class.not-showing]="isRightDoubleDatePicker$ | async" (click)="switchToPreviousMonth()">
-    <ion-icon name="ios-arrow-back"></ion-icon>
-  </button>
-  <span class="month">
-    {{ primarySectionStartDate$ | async | date: 'LLLL yyy' | titlecase }}
-  </span>
-  <button class="arrow-button" [class.not-showing]="isLeftDoubleDatePicker$ | async" (click)="switchToNextMonth()">
-    <ion-icon name="ios-arrow-forward"></ion-icon>
-  </button>
+  <ng-container [ngSwitch]="datePickerPreviewMode$ | async">
+    <ng-container *ngSwitchCase="datePickerPreviewMode.Years" [ngTemplateOutlet]="headerYearsTemplate"></ng-container>
+    <ng-container *ngSwitchCase="datePickerPreviewMode.Months" [ngTemplateOutlet]="headerMonthsTemplate"></ng-container>
+    <ng-container *ngSwitchDefault [ngTemplateOutlet]="headerDatesTemplate"></ng-container>
+  </ng-container>
 </div>
 
-<div class="date-picker__week-days">
+<div class="date-picker__week-days" *ngIf="(datePickerPreviewMode$ | async) === datePickerPreviewMode.Days">
   <span class="week-day" *ngFor="let dayName of weekDayNames">
     {{ dayName }}
   </span>
 </div>
 
-<div class="date-picker__dates">
+<div class="date-picker__wrapper">
+  <ng-container [ngSwitch]="datePickerPreviewMode$ | async">
+    <ng-container *ngSwitchCase="datePickerPreviewMode.Years" [ngTemplateOutlet]="yearsTemplate"></ng-container>
+    <ng-container *ngSwitchCase="datePickerPreviewMode.Months" [ngTemplateOutlet]="monthsTemplate"></ng-container>
+    <ng-container *ngSwitchDefault [ngTemplateOutlet]="datesTemplate"></ng-container>
+  </ng-container>
+</div>
+
+<ng-template #datesTemplate>
   <ng-container
     [ngTemplateOutlet]="dateButton"
     [ngTemplateOutletContext]="{
@@ -40,7 +44,17 @@
       isPreviousMonth: true
     }"
   ></ng-container>
-</div>
+</ng-template>
+
+<ng-template #yearsTemplate>
+  <pupa-date-picker-years
+    [years]="primarySectionYears$ | async"
+    (selectedYear)="switchToYear($event)"
+  ></pupa-date-picker-years>
+</ng-template>
+<ng-template #monthsTemplate>
+  <pupa-date-picker-months (selectedMonth)="switchToMonth($event)"></pupa-date-picker-months>
+</ng-template>
 
 <ng-template #dateButton let-dateOrigin="dateOrigin" let-isPreviousMonth="isPreviousMonth">
   <button
@@ -61,5 +75,63 @@
     *ngFor="let date of dateOrigin"
   >
     {{ date | date: 'd' }}
+  </button>
+</ng-template>
+
+<ng-template #headerDatesTemplate>
+  <button class="arrow-button" [class.not-showing]="isRightDoubleDatePicker$ | async" (click)="switchToPreviousMonth()">
+    <pupa-icon name="ios-arrow-back"></pupa-icon>
+  </button>
+  <span class="title">
+    <div
+      class="title__month"
+      [class.disable-hover]="isDatePickerDoubleModeEnabled$ | async"
+      (click)="switchDatePickerPreviewMode(datePickerPreviewMode.Months)"
+    >
+      {{ primarySectionStartDate$ | async | date: 'LLLL' | titlecase }}
+    </div>
+    &nbsp;&nbsp;
+    <div
+      class="title__year"
+      [class.disable-hover]="isDatePickerDoubleModeEnabled$ | async"
+      (click)="switchDatePickerPreviewMode(datePickerPreviewMode.Years)"
+    >
+      {{ primarySectionStartDate$ | async | date: 'yyy' | titlecase }}
+    </div>
+  </span>
+  <button class="arrow-button" [class.not-showing]="isLeftDoubleDatePicker$ | async" (click)="switchToNextMonth()">
+    <pupa-icon name="ios-arrow-forward"></pupa-icon>
+  </button>
+</ng-template>
+
+<ng-template #headerYearsTemplate>
+  <button class="arrow-button" (click)="switchToPreviousYearsPeriod()">
+    <pupa-icon name="ios-arrow-back"></pupa-icon>
+  </button>
+  <span class="title selected">
+    <div class="title__year">
+      {{ primarySectionYearsStartYear$ | async }}
+    </div>
+    &nbsp;-&nbsp;
+    <div class="title__year">
+      {{ primarySectionYearsEndYear$ | async }}
+    </div>
+  </span>
+  <button class="arrow-button" (click)="switchToNextYearsPeriod()">
+    <pupa-icon name="ios-arrow-forward"></pupa-icon>
+  </button>
+</ng-template>
+
+<ng-template #headerMonthsTemplate>
+  <button class="arrow-button" (click)="switchToPreviousYear()">
+    <pupa-icon name="ios-arrow-back"></pupa-icon>
+  </button>
+  <span class="title selected">
+    <div class="title__year">
+      {{ baseYear$ | async }}
+    </div>
+  </span>
+  <button class="arrow-button" (click)="switchToNextYear()">
+    <pupa-icon name="ios-arrow-forward"></pupa-icon>
   </button>
 </ng-template>
