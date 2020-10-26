@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';
+import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { dateClearTime } from '../../../../../internal/helpers/date-clear-time.helper';
@@ -11,6 +12,7 @@ import { isDate } from '../../../../../internal/helpers/is-date.helper';
 import { sanitizeDate } from '../../../../../internal/helpers/sanitize-date.helper';
 
 const DEFAULT_CURRENT_DATE: Date = dateClearTime(new Date());
+const DAYS_COUNT_IN_STANDARD_GRID: number = 35;
 
 @Component({
   selector: 'pupa-date-picker-double',
@@ -23,13 +25,23 @@ export class DatePickerDoubleComponent implements OnChanges {
   @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE);
 
-  public readonly baseDateNextMont$: Observable<Date> = this.baseDate$.pipe(
+  public readonly baseDateNextMonth$: Observable<Date> = this.baseDate$.pipe(
     map((baseDate: Date) => {
       const currentMonth: number = baseDate.getMonth();
       const nextMonth: number = currentMonth + 1;
       const currentYear: number = baseDate.getFullYear();
       return dateClearTime(new Date(currentYear, nextMonth, 1));
     })
+  );
+
+  public readonly needLeftCalendarAddedWeek$: Observable<boolean> = this.baseDateNextMonth$.pipe(
+    distinctUntilChanged(),
+    switchMap((date: Date) => this.needCalendarAddedWeek(date))
+  );
+
+  public readonly needRightCalendarAddedWeek$: Observable<boolean> = this.baseDate$.pipe(
+    distinctUntilChanged(),
+    switchMap((date: Date) => this.needCalendarAddedWeek(date))
   );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -70,6 +82,27 @@ export class DatePickerDoubleComponent implements OnChanges {
       .subscribe((newBaseDate: Date) => {
         this.baseDate$.next(newBaseDate);
       });
+  }
+
+  public needCalendarAddedWeek(date: Date): Observable<boolean> {
+    return of(date).pipe(
+      filter((baseDate: Date) => isDate(baseDate)),
+      map((baseDate: Date) => {
+        const baseMonthDay: number = baseDate.getDate();
+        const baseDateMs: number = baseDate.valueOf();
+        return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
+      }),
+      map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs))),
+      map((startDate: Date) => {
+        const daysInMonth: number = getDaysInMonth(startDate);
+        const startDateDayOfWeek: DayOfWeek = startDate.getDay();
+        const countOfLeftDays: number = startDateDayOfWeek === DayOfWeek.Sunday ? 6 : startDateDayOfWeek - 1;
+
+        const resultDaysCount: number = countOfLeftDays + daysInMonth;
+
+        return resultDaysCount > DAYS_COUNT_IN_STANDARD_GRID;
+      })
+    );
   }
 
   private processBaseDateChange(change: ComponentChange<this, Date>): void {

@@ -3,3 +3,4 @@
  */
 
 export * from './date-picker-state.service';
+export * from './time-picker-state.service';

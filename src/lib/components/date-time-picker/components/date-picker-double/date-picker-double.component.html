@@ -3,13 +3,15 @@
     <pupa-date-picker-simple
       [baseDate]="baseDate$ | async"
       [isLeftDoubleDatePicker]="true"
+      [needAddedWeek]="this.needLeftCalendarAddedWeek$ | async"
       (previousMonthClicked)="switchToPreviousMonth()"
     ></pupa-date-picker-simple>
   </div>
   <div class="calendar">
     <pupa-date-picker-simple
-      [baseDate]="baseDateNextMont$ | async"
+      [baseDate]="baseDateNextMonth$ | async"
       [isRightDoubleDatePicker]="true"
+      [needAddedWeek]="this.needRightCalendarAddedWeek$ | async"
       (nextMonthClicked)="switchToNextMonth()"
     ></pupa-date-picker-simple>
   </div>

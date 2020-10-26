@@ -19,7 +19,6 @@ $height_month: px(24);
 
 .date-picker {
   all: unset;
-  width: px(244);
   box-shadow: $box-shadow;
   border-radius: rems(0.5);
   background: color(white);
@@ -47,6 +46,7 @@ $height_month: px(24);
     width: 100%;
     padding: $padding_days-area-container;
     box-sizing: border-box;
+    overflow: hidden;
     @include flex-container(row, flex-start, flex-start, wrap);
   }
 

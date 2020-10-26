@@ -1,0 +1,10 @@
+<cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="viewport" #viewPort>
+  <div
+    class="digit"
+    *cdkVirtualFor="let digit of digits$ | async; trackBy: trackByItem; let index = index"
+    (click)="selectDigit(digit, index)"
+    [class.selected]="(selectedDigit$ | async) === digit"
+  >
+    {{ digit | timeFormat }}
+  </div>
+</cdk-virtual-scroll-viewport>
