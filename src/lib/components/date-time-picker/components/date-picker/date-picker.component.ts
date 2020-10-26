@@ -47,6 +47,9 @@ export class DatePickerComponent implements OnDestroy {
   @Input() public readonly previewMode: DatePickerPreviewMode;
   public readonly previewMode$: BehaviorSubject<DatePickerPreviewMode> = this.datePickerStateService.previewMode$;
 
+  @Input() public readonly withSeconds: boolean = false;
+  public readonly withSeconds$: BehaviorSubject<boolean> = this.datePickerStateService.withSeconds$;
+
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();
 
@@ -66,6 +69,7 @@ export class DatePickerComponent implements OnDestroy {
     this.processSelectedDateChange(changes?.selectedDate);
     this.processSelectedRangeChange(changes?.selectedRange);
     this.processPreviewModeChange(changes?.previewMode);
+    this.processWithSecondsChange(changes?.withSeconds);
   }
 
   public ngOnDestroy(): void {
@@ -104,6 +108,16 @@ export class DatePickerComponent implements OnDestroy {
     }
 
     this.previewMode$.next(updatedValue);
+  }
+
+  private processWithSecondsChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.withSeconds$.next(updatedValue);
   }
 
   private processSelectedDateChange(change: ComponentChange<this, Date>): void {

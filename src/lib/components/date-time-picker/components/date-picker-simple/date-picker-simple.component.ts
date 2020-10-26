@@ -24,7 +24,9 @@ const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
 const YEARS_IN_SECTION: number = 30;
 const YEARS_START_OFFSET: number = 19;
 
-enum DatePickerPreviewMode {
+const MIN_DAYS_MONTH: number = 28;
+
+enum DatePickerState {
   Years,
   Months,
   Days
@@ -47,15 +49,18 @@ export class DatePickerSimpleComponent implements OnChanges {
   @Input() public readonly isRightDoubleDatePicker: boolean = false;
   public readonly isRightDoubleDatePicker$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public readonly needAddedWeek: boolean = false;
+  public readonly needAddedWeek$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   @Output() public readonly nextMonthClicked: EventEmitter<void> = new EventEmitter<void>();
   @Output() public readonly previousMonthClicked: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly weekDayNames: string[] = this.datePickerStateService.weekDayNames;
 
-  public readonly datePickerPreviewMode: typeof DatePickerPreviewMode = DatePickerPreviewMode;
-  public readonly datePickerPreviewMode$: BehaviorSubject<DatePickerPreviewMode> = new BehaviorSubject<
-    DatePickerPreviewMode
-  >(DatePickerPreviewMode.Days);
+  public readonly datePickerPreviewMode: typeof DatePickerState = DatePickerState;
+  public readonly datePickerPreviewMode$: BehaviorSubject<DatePickerState> = new BehaviorSubject<DatePickerState>(
+    DatePickerState.Days
+  );
 
   public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
   public readonly selectedRange$: BehaviorSubject<Date[]> = this.datePickerStateService.selectedRange$;
@@ -138,28 +143,43 @@ export class DatePickerSimpleComponent implements OnChanges {
     )
   );
 
-  public readonly primarySectionRightOffsetDates$: Observable<Date[]> = this.primarySectionEndDate$.pipe(
-    distinctUntilChanged(),
-    map((sectionEndDate: Date) => {
-      const sectionEndDateMs: number = sectionEndDate.valueOf();
-      const firstDayOfNextMonthMs: number = sectionEndDateMs + dayInMs;
-      return dateClearTime(new Date(firstDayOfNextMonthMs));
-    }),
-    map((nextMonthFirstDate: Date) => {
-      const nextMonthFirstDateDayOfWeek: DayOfWeek = nextMonthFirstDate.getDay();
-      if (nextMonthFirstDateDayOfWeek === DayOfWeek.Monday) {
-        return [];
-      }
-      const nextMonthFirstDateMs: number = nextMonthFirstDate.valueOf();
-      const visibleDaysCount: number =
-        nextMonthFirstDateDayOfWeek === DayOfWeek.Sunday ? 1 : 8 - nextMonthFirstDateDayOfWeek;
+  public readonly primarySectionRightOffsetDates$: Observable<Date[]> = this.needAddedWeek$.pipe(
+    switchMap((needAddedWeek: boolean) =>
+      this.primarySectionEndDate$.pipe(
+        distinctUntilChanged(),
+        map((sectionEndDate: Date) => {
+          const sectionEndDateMs: number = sectionEndDate.valueOf();
+          const firstDayOfNextMonthMs: number = sectionEndDateMs + dayInMs;
+          return [sectionEndDate, dateClearTime(new Date(firstDayOfNextMonthMs))];
+        }),
+        map(([currentSectionEndDate, nextMonthFirstDate]: [Date, Date]) => {
+          const nextMonthFirstDateDayOfWeek: DayOfWeek = nextMonthFirstDate.getDay();
+          const nextMonthFirstDateMs: number = nextMonthFirstDate.valueOf();
 
-      return new Array(visibleDaysCount)
-        .fill(nextMonthFirstDateMs)
-        .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs + multiplier * dayInMs);
-    }),
-    map((reversedPreviousMonthDatesMs: number[]) =>
-      reversedPreviousMonthDatesMs.map((dateMs: number) => dateClearTime(new Date(dateMs)))
+          const currentDaysInMonth: number = getDaysInMonth(currentSectionEndDate);
+
+          if (currentDaysInMonth === MIN_DAYS_MONTH && !needAddedWeek) {
+            return new Array(7)
+              .fill(nextMonthFirstDateMs)
+              .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs + multiplier * dayInMs);
+          }
+
+          if (nextMonthFirstDateDayOfWeek === DayOfWeek.Monday) {
+            return [];
+          }
+          const visibleDaysCount: number =
+            nextMonthFirstDateDayOfWeek === DayOfWeek.Sunday ? 1 : 8 - nextMonthFirstDateDayOfWeek;
+
+          const resultDaysCount: number = needAddedWeek ? visibleDaysCount + 7 : visibleDaysCount;
+
+          return new Array(resultDaysCount)
+            .fill(nextMonthFirstDateMs)
+            .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs + multiplier * dayInMs);
+        }),
+        map((reversedPreviousMonthDatesMs: number[]) =>
+          reversedPreviousMonthDatesMs.map((dateMs: number) => dateClearTime(new Date(dateMs)))
+        )
+      )
     )
   );
 
@@ -195,6 +215,7 @@ export class DatePickerSimpleComponent implements OnChanges {
     this.processBaseDateChange(changes?.baseDate);
     this.processIsLeftDoubleDatePickerChange(changes?.isLeftDoubleDatePicker);
     this.processIsRightDoubleDatePickerChange(changes?.isRightDoubleDatePicker);
+    this.processNeedAddedWeekChange(changes?.needAddedWeek);
   }
 
   public switchToPreviousMonth(): void {
@@ -247,7 +268,7 @@ export class DatePickerSimpleComponent implements OnChanges {
         map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setFullYear(year))))
       )
       .subscribe((newBaseDate: Date) => {
-        this.datePickerPreviewMode$.next(DatePickerPreviewMode.Months);
+        this.datePickerPreviewMode$.next(DatePickerState.Months);
         this.baseDate$.next(newBaseDate);
       });
   }
@@ -259,7 +280,7 @@ export class DatePickerSimpleComponent implements OnChanges {
         map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setMonth(month))))
       )
       .subscribe((newBaseDate: Date) => {
-        this.datePickerPreviewMode$.next(DatePickerPreviewMode.Days);
+        this.datePickerPreviewMode$.next(DatePickerState.Days);
         this.baseDate$.next(newBaseDate);
       });
   }
@@ -304,7 +325,7 @@ export class DatePickerSimpleComponent implements OnChanges {
       });
   }
 
-  public switchDatePickerPreviewMode(mode: DatePickerPreviewMode): void {
+  public switchDatePickerPreviewMode(mode: DatePickerState): void {
     this.isDatePickerDoubleModeEnabled$
       .pipe(take(1), filterFalsy())
       .subscribe(() => this.datePickerPreviewMode$.next(mode));
@@ -365,5 +386,14 @@ export class DatePickerSimpleComponent implements OnChanges {
       return;
     }
     this.isRightDoubleDatePicker$.next(updatedValue);
+  }
+
+  private processNeedAddedWeekChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.needAddedWeek$.next(updatedValue);
   }
 }

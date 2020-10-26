@@ -1,6 +1,8 @@
-@import '../../date-time-picker.style.scss';
+@import '../../date-picker.style.scss';
 
 $width_double-calendar: px(488);
+$width_simple-time-seconds-calendar: px(355);
+$width_simple-time-calendar: px(319);
 $width_simple-calendar: px(244);
 
 :host {
@@ -18,5 +20,13 @@ $width_simple-calendar: px(244);
 
   &.simple {
     width: $width_simple-calendar;
+  }
+
+  &.simple-time {
+    width: $width_simple-time-calendar;
+
+    &.with-seconds {
+      width: $width_simple-time-seconds-calendar;
+    }
   }
 }

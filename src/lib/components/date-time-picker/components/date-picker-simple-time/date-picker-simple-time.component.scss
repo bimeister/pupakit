@@ -1,0 +1,24 @@
+@import '../../date-picker.style.scss';
+
+$width_time-seconds: px(110);
+$width_time: px(74);
+
+.container {
+  display: flex;
+}
+
+.calendar {
+  flex: 1;
+  border-right: px(1) solid color(light);
+}
+
+.time {
+  height: inherit;
+  width: $width_time;
+  display: flex;
+  justify-content: center;
+
+  &.seconds {
+    width: $width_time-seconds;
+  }
+}

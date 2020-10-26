@@ -1,1 +1,1 @@
-export type DatePickerPreviewMode = 'simple' | 'double';
+export type DatePickerPreviewMode = 'simple' | 'double' | 'simple-time';

@@ -1,11 +1,18 @@
 <ng-container [ngSwitch]="previewMode$ | async">
   <ng-container *ngSwitchCase="'double'" [ngTemplateOutlet]="doubleCalendar"></ng-container>
+  <ng-container *ngSwitchCase="'simple-time'" [ngTemplateOutlet]="simpleTimeCalendar"></ng-container>
   <ng-container *ngSwitchDefault [ngTemplateOutlet]="simpleCalendar"></ng-container>
 </ng-container>
 
 <ng-template #doubleCalendar>
   <div class="date-picker double">
     <pupa-date-picker-double></pupa-date-picker-double>
+  </div>
+</ng-template>
+
+<ng-template #simpleTimeCalendar>
+  <div class="date-picker simple-time" [class.with-seconds]="withSeconds$ | async">
+    <pupa-date-picker-simple-time></pupa-date-picker-simple-time>
   </div>
 </ng-template>
 

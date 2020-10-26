@@ -1,0 +1,87 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+$font-size__digit: px(14);
+$max-height__container: px(235);
+$box-shadow: 0 rems(0.5) px(24) 0 rgba(0, 0, 0, 0.1);
+$height_gradient: px(38);
+$linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
+
+.time-picker {
+  display: flex;
+  height: $max-height__container;
+  box-shadow: $box-shadow;
+  border-radius: rems(0.5);
+  background: color(white);
+
+  &__wrapper {
+    display: flex;
+    position: relative;
+    height: 100%;
+  }
+
+  &__digits {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    width: rems(2);
+    position: relative;
+
+    &:not(:first-child)::after {
+      position: absolute;
+      content: '';
+      left: 0;
+      top: 50%;
+      transform: translate(0, -50%);
+      height: calc(100% - #{rems(1)});
+      width: px(1);
+      z-index: 2;
+      background-color: color(light);
+    }
+  }
+
+  &__gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: $height_gradient;
+    background: $linear-gradient;
+    pointer-events: none;
+    z-index: 2;
+  }
+}
+
+.digit {
+  font-size: $font-size__digit;
+  line-height: rems(1);
+  color: color(text);
+  font-weight: normal;
+  padding: rems(0.5) rems(0.5) rems(0.25) rems(0.5);
+  cursor: pointer;
+  @include transition(#{'color'});
+
+  &:last-child {
+    padding-bottom: rems(1);
+  }
+
+  &:hover {
+    color: color(active);
+  }
+
+  &.selected {
+    color: color(active);
+  }
+}
+
+.viewport {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+
+  &::-webkit-scrollbar {
+    width: 0;
+  }
+}

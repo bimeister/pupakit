@@ -1,10 +1,16 @@
 <pupa-datepicker></pupa-datepicker>
 <div class="group">
   <div class="column">
-    <h3>New Date + Time Pickers</h3>
+    <h3>New Date Picker</h3>
     <h5>Simple</h5>
     <pupa-date-picker [previewMode]="'simple'"></pupa-date-picker>
+    <h5>Simple With Time And Seconds</h5>
+    <pupa-date-picker [previewMode]="'simple-time'" [withSeconds]="true"></pupa-date-picker>
+    <h5>Simple With Time Without Seconds</h5>
+    <pupa-date-picker [previewMode]="'simple-time'"></pupa-date-picker>
     <h5>Double</h5>
     <pupa-date-picker [previewMode]="'double'"></pupa-date-picker>
+    <h3>New Time Picker</h3>
+    <pupa-time-picker [withSeconds]="true"></pupa-time-picker>
   </div>
 </div>
