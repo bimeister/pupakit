@@ -9,11 +9,12 @@ import {
 } from '@angular/core';
 import { filterFalsy, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';
 import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { DatePickerPreviewMode } from '../../../../../internal/declarations/types/date-picker-preview-mode.type';
 import { dateClearTime } from '../../../../../internal/helpers/date-clear-time.helper';
 import { getDaysInMonth } from '../../../../../internal/helpers/get-days-in-month.helper';
 import { isDate } from '../../../../../internal/helpers/is-date.helper';
@@ -61,6 +62,8 @@ export class DatePickerSimpleComponent implements OnChanges {
   public readonly datePickerPreviewMode$: BehaviorSubject<DatePickerState> = new BehaviorSubject<DatePickerState>(
     DatePickerState.Days
   );
+
+  public readonly previewMode$: BehaviorSubject<DatePickerPreviewMode> = this.datePickerStateService.previewMode$;
 
   public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
   public readonly selectedRange$: BehaviorSubject<Date[]> = this.datePickerStateService.selectedRange$;
@@ -152,23 +155,23 @@ export class DatePickerSimpleComponent implements OnChanges {
           const firstDayOfNextMonthMs: number = sectionEndDateMs + dayInMs;
           return [sectionEndDate, dateClearTime(new Date(firstDayOfNextMonthMs))];
         }),
-        map(([currentSectionEndDate, nextMonthFirstDate]: [Date, Date]) => {
+        withLatestFrom(this.previewMode$),
+        map(([[currentSectionEndDate, nextMonthFirstDate], previewMode]: [[Date, Date], DatePickerPreviewMode]) => {
           const nextMonthFirstDateDayOfWeek: DayOfWeek = nextMonthFirstDate.getDay();
           const nextMonthFirstDateMs: number = nextMonthFirstDate.valueOf();
 
           const currentDaysInMonth: number = getDaysInMonth(currentSectionEndDate);
+          const currentMonthIsSmall: boolean = currentDaysInMonth === MIN_DAYS_MONTH;
+          const currentMonthPreviewModeIsDouble: boolean = previewMode === 'double';
+          const nextMonthFirstDateDayIsMonday: boolean = nextMonthFirstDateDayOfWeek === DayOfWeek.Monday;
+          const nextMonthFirstDateDayIsSunday: boolean = nextMonthFirstDateDayOfWeek === DayOfWeek.Sunday;
 
-          if (currentDaysInMonth === MIN_DAYS_MONTH && !needAddedWeek) {
-            return new Array(7)
-              .fill(nextMonthFirstDateMs)
-              .map((lastMonthDateMs: number, multiplier: number) => lastMonthDateMs + multiplier * dayInMs);
-          }
+          const currentMonthIsSmallAndInDouble: boolean = currentMonthIsSmall && currentMonthPreviewModeIsDouble;
 
-          if (nextMonthFirstDateDayOfWeek === DayOfWeek.Monday) {
+          if (nextMonthFirstDateDayIsMonday && !currentMonthIsSmallAndInDouble) {
             return [];
           }
-          const visibleDaysCount: number =
-            nextMonthFirstDateDayOfWeek === DayOfWeek.Sunday ? 1 : 8 - nextMonthFirstDateDayOfWeek;
+          const visibleDaysCount: number = nextMonthFirstDateDayIsSunday ? 1 : 8 - nextMonthFirstDateDayOfWeek;
 
           const resultDaysCount: number = needAddedWeek ? visibleDaysCount + 7 : visibleDaysCount;
 
