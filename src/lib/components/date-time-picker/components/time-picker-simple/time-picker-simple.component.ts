@@ -19,6 +19,15 @@ export class TimePickerSimpleComponent {
   @Input() public readonly withGradient: boolean = false;
   public readonly withGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public readonly chosenHours: number = null;
+  public readonly chosenHours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
+  @Input() public readonly chosenMinutes: number = null;
+  public readonly chosenMinutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
+  @Input() public readonly chosenSeconds: number = null;
+  public readonly chosenSeconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
   public readonly hours: number[] = this.timePickerStateService.hours;
   public readonly minutes: number[] = this.timePickerStateService.minutes;
   public readonly seconds: number[] = this.timePickerStateService.seconds;
@@ -37,6 +46,10 @@ export class TimePickerSimpleComponent {
     }
     this.processWithSecondsChange(changes?.withSeconds);
     this.processWithGradientChange(changes?.withGradient);
+
+    this.processChosenHoursChange(changes?.chosenHours);
+    this.processChosenMinutesChange(changes?.chosenMinutes);
+    this.processChosenSecondsChange(changes?.chosenSeconds);
   }
 
   public selectHours(hour: number): void {
@@ -67,5 +80,32 @@ export class TimePickerSimpleComponent {
       return;
     }
     this.withGradient$.next(updatedValue);
+  }
+
+  private processChosenHoursChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.chosenHours$.next(updatedValue);
+  }
+
+  private processChosenMinutesChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.chosenMinutes$.next(updatedValue);
+  }
+
+  private processChosenSecondsChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.chosenSeconds$.next(updatedValue);
   }
 }

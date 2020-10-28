@@ -35,10 +35,12 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
+    this.isFocused$.next(true);
     this.focus.emit(focusEvent);
   }
 
   public emitBlurEvent(blurEvent: FocusEvent): void {
+    this.isFocused$.next(false);
     this.blur.emit(blurEvent);
   }
 

@@ -1,0 +1,63 @@
+<div class="base-input-container" [class.fixed-size]="isFixedSize$ | async">
+  <pupa-droppable #droppable>
+    <pupa-droppable-trigger class="dropdown-trigger">
+      <div class="time-input-container__placeholder">
+        <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
+        <span class="right">{{ placeholderPreviewRight$ | async }}</span>
+      </div>
+      <input
+        class="input"
+        #inputElement
+        type="text"
+        placeholder=""
+        [mask]="'hh:m0'"
+        maxlength="5"
+        [attr.disabled]="(isDisabled$ | async) ? true : null"
+        [ngClass]="{
+          input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
+          input__medium: size === 'medium',
+          input__small: size === 'small',
+          input__large: size === 'large',
+          input__transparent: transparent,
+          input__focused: isFocused$ | async
+        }"
+        (input)="updateValue(inputElement.value)"
+        (focus)="emitFocusEvent($event)"
+        (blur)="emitBlurEvent($event)"
+        [autocomplete]="autocomplete ? 'on' : 'off'"
+        [value]="value$ | async"
+      />
+      <div
+        class="time-input-container__icon"
+        *ngIf="!(isDisabled$ | async)"
+        (mouseenter)="handleIconHover(true)"
+        (mouseleave)="handleIconHover(false)"
+        (click)="clearInputValue()"
+      >
+        <ng-container *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async); else staticIconsTemplate">
+          <pupa-icon name="md-close-circle"></pupa-icon>
+        </ng-container>
+      </div>
+    </pupa-droppable-trigger>
+    <pupa-droppable-native-content>
+      <pupa-time-picker
+        (click)="emitFocusEvent($event)"
+        [hours]="hours$ | async"
+        [minutes]="minutes$ | async"
+        *ngIf="droppable.isOpened"
+        (selectedHours)="selectHours($event)"
+        (selectedMinutes)="selectMinutes($event)"
+      ></pupa-time-picker>
+    </pupa-droppable-native-content>
+  </pupa-droppable>
+</div>
+
+<ng-template #staticIconsTemplate>
+  <ng-container *ngIf="isValid$ | async; else errorIconTemplate">
+    <pupa-icon name="md-time"></pupa-icon>
+  </ng-container>
+</ng-template>
+
+<ng-template #errorIconTemplate>
+  <pupa-icon *ngIf="!(isDisabled$ | async)" name="md-alert"></pupa-icon>
+</ng-template>

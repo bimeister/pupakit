@@ -85,7 +85,7 @@ export class DatePickerComponent implements OnDestroy {
 
   @HostListener('window:mousemove')
   @HostListener('window:click')
-  @HostListener('touchstart', ['$event'])
+  @HostListener('window:touchstart', ['$event'])
   public processWindowClick(): void {
     this.hoveredDate$.next(null);
   }

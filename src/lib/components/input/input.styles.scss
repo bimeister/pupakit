@@ -2,6 +2,9 @@
 @import 'mixins';
 @import 'functions';
 
+$width_time-seconds: px(108);
+$width_time: px(74);
+
 .base-input-container {
   box-sizing: border-box;
   outline: none;
@@ -108,6 +111,10 @@
     &.input__invalid {
       border: 1px solid color(error);
     }
+  }
+
+  &__focused:not([disabled]) {
+    border-color: color(active);
   }
 }
 

@@ -14,9 +14,9 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
-import { switchMap, withLatestFrom } from 'rxjs/operators';
+import { debounceTime, filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { TimePickerStateService } from '../../services/time-picker-state.service';
@@ -31,6 +31,8 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
 export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, AfterContentInit {
   @Input() public readonly digits: number[] = [];
   public readonly digits$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+
+  @Input() public readonly chosenDigit: number = null;
 
   public readonly itemSizePx: number = this.timePickerStateService.itemSizePx;
 
@@ -53,7 +55,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
   }
 
   public ngOnInit(): void {
-    this.subscription.add(this.handleViewPortScrolledIndexChanges());
+    this.subscription.add(this.handleViewPortScrolledIndexChanges()).add(this.handleChosenDigitChanges());
   }
 
   public ngAfterContentInit(): void {
@@ -65,6 +67,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
       return;
     }
     this.processDigitsChange(changes?.digits);
+    this.processChosenDigitChange(changes?.chosenDigit);
   }
 
   public ngOnDestroy(): void {
@@ -92,8 +95,32 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
     this.viewPort.scrollToIndex(updatedValue.length);
   }
 
+  private processChosenDigitChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.selectedDigit$.next(updatedValue);
+  }
+
+  private handleChosenDigitChanges(): Subscription {
+    return this.selectedDigit$
+      .pipe(
+        filterNotNil(),
+        filter((digit: number) => digit > 0),
+        debounceTime(300)
+      )
+      .subscribe((selectedIndex: number) => {
+        const digitsSize: number = this.digits.length;
+        const resultScrolledIndex: number = selectedIndex > digitsSize / 2 ? selectedIndex : digitsSize + selectedIndex;
+        this.viewPort.scrollToIndex(resultScrolledIndex, 'smooth');
+      });
+  }
+
   private handleViewPortScrolledIndexChanges(): Subscription {
-    return this.viewPortReference$
+    return this.selectedDigit$
+      .pipe(switchMap(() => this.viewPortReference$))
       .pipe(
         switchMap((viewPort: CdkVirtualScrollViewport) => viewPort.scrolledIndexChange),
         withLatestFrom(this.scrolledIndex$)
@@ -101,6 +128,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
       .subscribe(([scrolledIndex, prevScrolledIndex]: [number, number]) => {
         const scrollDown: boolean = prevScrolledIndex <= scrolledIndex;
         const scrollDiff: number = Math.abs(scrolledIndex - prevScrolledIndex);
+
         this.scrolledIndex$.next(scrolledIndex);
 
         const viewPortSize: number = this.viewPort.getViewportSize();
