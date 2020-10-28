@@ -1,3 +1,11 @@
 <div class="time-picker">
-  <pupa-time-picker-simple></pupa-time-picker-simple>
+  <pupa-time-picker-simple
+    [withSeconds]="withSeconds$ | async"
+    [chosenHours]="hours$ | async"
+    [chosenMinutes]="minutes$ | async"
+    [chosenSeconds]="seconds$ | async"
+    (selectedHours)="selectHours($event)"
+    (selectedMinutes)="selectMinutes($event)"
+    (selectedSeconds)="selectSeconds($event)"
+  ></pupa-time-picker-simple>
 </div>

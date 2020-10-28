@@ -37,6 +37,7 @@
     "@meistersoft/utilities": "^0.1.0-92a40a29",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
+    "ngx-mask": "^10.0.4",
     "rxjs": "^6.6.0",
     "tslib": "^2.0.1",
     "zone.js": "^0.10.3"

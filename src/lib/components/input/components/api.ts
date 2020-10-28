@@ -7,3 +7,4 @@ export * from './input-date-range/api';
 export * from './input-number/api';
 export * from './input-password/api';
 export * from './input-text/api';
+export * from './input-time/api';
