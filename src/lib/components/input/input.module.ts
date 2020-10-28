@@ -15,6 +15,7 @@ import { InputTimeComponent } from './components/input-time/input-time.component
 import { NgxMaskModule } from 'ngx-mask';
 import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-circle-icon.const';
 import { mdAlertIcon } from '../../../internal/constants/icons/md-alert-icon.const';
+import { InputTimeSecondsComponent } from './components/input-time-seconds/input-time-seconds.component';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -22,7 +23,8 @@ const EXPORTS: any[] = [
   InputDateComponent,
   InputDateRangeComponent,
   InputNumberComponent,
-  InputTimeComponent
+  InputTimeComponent,
+  InputTimeSecondsComponent
 ];
 
 const DECLARATIONS: any[] = [...EXPORTS];

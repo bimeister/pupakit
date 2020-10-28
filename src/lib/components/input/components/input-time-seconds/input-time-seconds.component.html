@@ -1,4 +1,4 @@
-<div class="base-input-container" [class.fixed-size]="isFixedSize$ | async">
+<div class="base-input-container time-seconds" [class.fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
       <div class="time-input-container__placeholder">
@@ -10,8 +10,8 @@
         #inputElement
         type="text"
         placeholder=""
-        [mask]="'hh:m0'"
-        [maxLength]="maxLengthInputValue"
+        [mask]="'hh:mm:s0'"
+        maxlength="8"
         [attr.disabled]="(isDisabled$ | async) ? true : null"
         [ngClass]="{
           input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
@@ -44,9 +44,12 @@
         (click)="emitFocusEvent($event)"
         [hours]="hours$ | async"
         [minutes]="minutes$ | async"
+        [seconds]="seconds$ | async"
+        [withSeconds]="true"
         *ngIf="droppable.isOpened"
         (selectedHours)="selectHours($event)"
         (selectedMinutes)="selectMinutes($event)"
+        (selectedSeconds)="selectSeconds($event)"
       ></pupa-time-picker>
     </pupa-droppable-native-content>
   </pupa-droppable>

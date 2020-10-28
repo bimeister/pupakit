@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
-import { isEmpty } from '@meistersoft/utilities';
+import { isNil } from '@meistersoft/utilities';
 import { TimeFormatPipe } from '../../../../internal/pipes/time-format.pipe';
+
+interface ParsedTimeData {
+  hours: string;
+  minutes: string;
+  seconds: string;
+}
 
 @Injectable({ providedIn: 'any' })
 export class InputTimeStateService {
@@ -8,33 +14,39 @@ export class InputTimeStateService {
 
   public getUpdatedValueStringAfterSelectHours(hours: number, inputCurrentValue: string): string {
     const parsedHours: string = this.timeFormatPipe.transform(hours);
+    const { minutes, seconds }: Partial<ParsedTimeData> = this.getParsedTimeData(inputCurrentValue);
 
-    if (isEmpty(inputCurrentValue) || inputCurrentValue.length < 3) {
-      return `${parsedHours}`;
-    }
-
-    if (inputCurrentValue.length === 3) {
-      return `${parsedHours}:`;
-    }
-
-    return `${parsedHours}${inputCurrentValue.slice(2)}`;
+    return `${parsedHours}:${minutes}:${seconds}`;
   }
 
   public getUpdatedValueStringAfterSelectMinutes(minutes: number, inputCurrentValue: string): string {
     const parsedMinutes: string = this.timeFormatPipe.transform(minutes);
+    const { hours, seconds }: Partial<ParsedTimeData> = this.getParsedTimeData(inputCurrentValue);
 
-    if (isEmpty(inputCurrentValue)) {
-      return `00:${parsedMinutes}`;
-    }
+    return `${hours}:${parsedMinutes}:${seconds}`;
+  }
 
-    if (inputCurrentValue.length === 1) {
-      return `${inputCurrentValue}0:${parsedMinutes}`;
-    }
+  public getUpdatedValueStringAfterSelectSeconds(seconds: number, inputCurrentValue: string): string {
+    const parsedSeconds: string = this.timeFormatPipe.transform(seconds);
+    const { hours, minutes }: Partial<ParsedTimeData> = this.getParsedTimeData(inputCurrentValue);
 
-    if (inputCurrentValue.length === 2) {
-      return `${inputCurrentValue}:${parsedMinutes}`;
-    }
+    return `${hours}:${minutes}:${parsedSeconds}`;
+  }
 
-    return `${inputCurrentValue.slice(0, 2)}:${parsedMinutes}`;
+  private getParsedTimeData(inputValue: string): Partial<ParsedTimeData> {
+    const defaultArray: string[] = ['00', '00', '00'];
+    const defaultTimeParts: string[] = defaultArray;
+    const allowedTimePartsLength: number = defaultTimeParts.length;
+
+    const convertedDefaultTimeParts: string = defaultTimeParts.join(':');
+
+    const serializedValue: string = isNil(inputValue) ? convertedDefaultTimeParts : inputValue;
+    const parsedTimeParts: string[] = serializedValue
+      .split(':')
+      .map((timePart: string) => this.timeFormatPipe.transform(Number(timePart)));
+
+    const timeParts: string[] = [...parsedTimeParts, ...defaultTimeParts].slice(0, allowedTimePartsLength);
+
+    return { hours: timeParts[0], minutes: timeParts[1], seconds: timeParts[2] };
   }
 }
