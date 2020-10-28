@@ -7,6 +7,7 @@ $max-height__container: px(235);
 $box-shadow: 0 rems(0.5) px(24) 0 rgba(0, 0, 0, 0.1);
 $height_gradient: px(38);
 $width_time-picker: px(80);
+$width_time-picker-seconds: px(112);
 $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
 
 .time-picker {
@@ -16,6 +17,10 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   border-radius: rems(0.5);
   background: color(white);
   width: $width_time-picker;
+
+  &.with-seconds {
+    width: $width_time-picker-seconds;
+  }
 
   &__wrapper {
     display: flex;

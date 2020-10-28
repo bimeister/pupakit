@@ -12,23 +12,21 @@ import { InputTimeStateService } from '../../services/input-time-state.service';
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
+const MAX_SECONDS: number = 59;
 
-const PLACEHOLDER: string = '00:00';
-const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
+const PLACEHOLDER: string = '00:00:00';
 
 @Component({
-  selector: 'pupa-input-time',
-  templateUrl: './input-time.component.html',
-  styleUrls: ['./input-time.component.scss'],
+  selector: 'pupa-input-time-seconds',
+  templateUrl: './input-time-seconds.component.html',
+  styleUrls: ['./input-time-seconds.component.scss'],
   providers: [TimeFormatPipe, InputTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputTimeComponent extends InputBase<ValueType> {
+export class InputTimeSecondsComponent extends InputBase<ValueType> {
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
-  public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
 
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -49,9 +47,15 @@ export class InputTimeComponent extends InputBase<ValueType> {
   );
 
   public readonly minutes$: Observable<number> = this.value$.pipe(
-    map((value: string) => (!isEmpty(value) && value.length === 5 ? Number(value.slice(3)) : -1)),
+    map((value: string) => (!isEmpty(value) && value.length >= 5 ? Number(value.slice(3, 5)) : -1)),
     filterNotNil(),
     filter((minutes: number) => minutes <= MAX_MINUTES)
+  );
+
+  public readonly seconds$: Observable<number> = this.value$.pipe(
+    map((value: string) => (!isEmpty(value) && value.length === 8 ? Number(value.slice(6)) : -1)),
+    filterNotNil(),
+    filter((minutes: number) => minutes <= MAX_SECONDS)
   );
 
   constructor(
@@ -82,14 +86,21 @@ export class InputTimeComponent extends InputBase<ValueType> {
   public selectHours(hours: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
       const parsedHours: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectHours(hours, value);
-      this.updateValue(parsedHours.slice(0, MAX_LENGTH_INPUT_VALUE));
+      this.updateValue(parsedHours);
     });
   }
 
   public selectMinutes(minutes: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
       const parsedMinutes: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectMinutes(minutes, value);
-      this.updateValue(parsedMinutes.slice(0, MAX_LENGTH_INPUT_VALUE));
+      this.updateValue(parsedMinutes);
+    });
+  }
+
+  public selectSeconds(seconds: number): void {
+    this.value$.pipe(take(1)).subscribe((value: string) => {
+      const parsedSeconds: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectSeconds(seconds, value);
+      this.updateValue(parsedSeconds);
     });
   }
 
