@@ -37,6 +37,9 @@ import { TextareaStateService } from '../../services/textarea-state.service';
 export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlValueAccessor, MinHeightUnitBinding {
   @Input() public readonly placeholder: string = '';
 
+  @Input() public readonly maxRows: number;
+  public readonly maxRows$: BehaviorSubject<Nullable<number>> = new BehaviorSubject(null);
+
   @Input() public readonly resize: TextareaResize = 'both';
   public readonly resizeMode$: BehaviorSubject<string> = new BehaviorSubject('both');
 
@@ -87,6 +90,7 @@ export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlVa
 
   public ngAfterViewInit(): void {
     this.cdkAutosizeDirective.enabled = this.autosize;
+    this.cdkAutosizeDirective.maxRows = this.maxRows;
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -98,6 +102,7 @@ export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlVa
     this.processResizeModeChange(changes?.resize);
     this.processAutosizeChange(changes?.autosize);
     this.processMaxLengthChange(changes?.maxLength);
+    this.processMaxRowsChange(changes?.maxRows);
   }
 
   public updateValue(value: T): void {
@@ -160,5 +165,16 @@ export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlVa
   private processMaxLengthChange(change: ComponentChange<this, Nullable<number>>): void {
     const updatedValue: Nullable<number> = change?.currentValue;
     this.maxLength$.next(updatedValue);
+  }
+
+  private processMaxRowsChange(change: ComponentChange<this, Nullable<number>>): void {
+    const updatedValue: Nullable<number> = change?.currentValue;
+    
+    if (isNil(this.cdkAutosizeDirective)) {
+      return;
+    }
+
+    this.cdkAutosizeDirective.maxRows = updatedValue;
+    this.maxRows$.next(updatedValue);
   }
 }
