@@ -37,7 +37,7 @@ import { TextareaStateService } from '../../services/textarea-state.service';
 export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlValueAccessor, MinHeightUnitBinding {
   @Input() public readonly placeholder: string = '';
 
-  @Input() public readonly maxRows: number;
+  @Input() public maxRows: number;
   public readonly maxRows$: BehaviorSubject<Nullable<number>> = new BehaviorSubject(null);
 
   @Input() public readonly resize: TextareaResize = 'both';
