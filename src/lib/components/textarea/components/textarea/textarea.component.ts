@@ -169,7 +169,7 @@ export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlVa
 
   private processMaxRowsChange(change: ComponentChange<this, Nullable<number>>): void {
     const updatedValue: Nullable<number> = change?.currentValue;
-    
+
     if (isNil(this.cdkAutosizeDirective)) {
       return;
     }
