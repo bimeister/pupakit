@@ -2,6 +2,7 @@
 
 $width_time-seconds: px(114);
 $width_time: px(82);
+$width_date: px(180);
 
 :host {
   display: block;
@@ -10,12 +11,16 @@ $width_time: px(82);
 }
 
 .base-input-container {
-  &.fixed-size {
+  &.time.fixed-size {
     width: $width_time;
 
     &.time-seconds {
       width: $width_time-seconds;
     }
+  }
+
+  &.date.fixed-size {
+    width: $width_date;
   }
 }
 
@@ -28,13 +33,17 @@ $width_time: px(82);
 
   &__icon {
     position: absolute;
-    right: px(5);
+    right: px(10);
     height: rems(1);
     top: 50%;
     transform: translateY(-50%);
     color: color(active);
 
     @include transition(#{'opacity'});
+
+    &.simple-time {
+      right: px(5);
+    }
   }
 
   &__placeholder {

@@ -6,18 +6,18 @@
 
 <ng-template #doubleCalendar>
   <div class="date-picker double">
-    <pupa-date-picker-double></pupa-date-picker-double>
+    <pupa-date-picker-double [baseDate]="baseDate$ | async"></pupa-date-picker-double>
   </div>
 </ng-template>
 
 <ng-template #simpleTimeCalendar>
   <div class="date-picker simple-time" [class.with-seconds]="withSeconds$ | async">
-    <pupa-date-picker-simple-time></pupa-date-picker-simple-time>
+    <pupa-date-picker-simple-time [baseDate]="baseDate$ | async"></pupa-date-picker-simple-time>
   </div>
 </ng-template>
 
 <ng-template #simpleCalendar>
   <div class="date-picker simple">
-    <pupa-date-picker-simple></pupa-date-picker-simple>
+    <pupa-date-picker-simple [baseDate]="baseDate$ | async"></pupa-date-picker-simple>
   </div>
 </ng-template>

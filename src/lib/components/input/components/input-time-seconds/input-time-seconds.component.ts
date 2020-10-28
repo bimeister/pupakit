@@ -8,7 +8,7 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
-import { InputTimeStateService } from '../../services/input-time-state.service';
+import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
@@ -20,7 +20,7 @@ const PLACEHOLDER: string = '00:00:00';
   selector: 'pupa-input-time-seconds',
   templateUrl: './input-time-seconds.component.html',
   styleUrls: ['./input-time-seconds.component.scss'],
-  providers: [TimeFormatPipe, InputTimeStateService],
+  providers: [TimeFormatPipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -59,7 +59,7 @@ export class InputTimeSecondsComponent extends InputBase<ValueType> {
   );
 
   constructor(
-    private readonly inputTimeStateService: InputTimeStateService,
+    private readonly inputDateTimeStateService: InputDateTimeStateService,
     @Optional() public readonly ngControl: NgControl
   ) {
     super(ngControl);
@@ -85,21 +85,27 @@ export class InputTimeSecondsComponent extends InputBase<ValueType> {
 
   public selectHours(hours: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedHours: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectHours(hours, value);
+      const parsedHours: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectHours(hours, value);
       this.updateValue(parsedHours);
     });
   }
 
   public selectMinutes(minutes: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedMinutes: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectMinutes(minutes, value);
+      const parsedMinutes: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectMinutes(
+        minutes,
+        value
+      );
       this.updateValue(parsedMinutes);
     });
   }
 
   public selectSeconds(seconds: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedSeconds: string = this.inputTimeStateService.getUpdatedValueStringAfterSelectSeconds(seconds, value);
+      const parsedSeconds: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectSeconds(
+        seconds,
+        value
+      );
       this.updateValue(parsedSeconds);
     });
   }

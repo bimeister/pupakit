@@ -32,6 +32,8 @@ export * from './modal-config.interface';
 export * from './modal-container-data.interface';
 export * from './opened-drawer.interface';
 export * from './opened-modal.interface';
+export * from './parsed-date-data.interface';
+export * from './parsed-time-data.interface';
 export * from './select-option.interface';
 export * from './select-state-service.interface';
 export * from './sort-model.interface';

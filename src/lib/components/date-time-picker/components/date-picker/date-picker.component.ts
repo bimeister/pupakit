@@ -123,9 +123,11 @@ export class DatePickerComponent implements OnDestroy {
   private processSelectedDateChange(change: ComponentChange<this, Date>): void {
     const updatedValue: Date | undefined = change?.currentValue;
 
-    if (isNil(updatedValue) || !isDate(updatedValue)) {
+    if (!isDate(updatedValue)) {
+      this.selectedDate$.next(null);
       return;
     }
+
     const sanitizedDate: Date = sanitizeDate(updatedValue);
     const sanitizedDateWithClearedTime: Date = dateClearTime(sanitizedDate);
     this.selectedDate$.next(sanitizedDateWithClearedTime);
@@ -157,7 +159,6 @@ export class DatePickerComponent implements OnDestroy {
     return this.isSelectionModeDate$
       .pipe(
         filterNotNil(),
-        take(1),
         filterTruthy(),
         switchMap(() => this.selectedDate$),
         filterNotNil(),

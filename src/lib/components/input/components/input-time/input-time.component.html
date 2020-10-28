@@ -1,4 +1,4 @@
-<div class="base-input-container" [class.fixed-size]="isFixedSize$ | async">
+<div class="base-input-container time" [class.fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
       <div class="time-input-container__placeholder">
@@ -28,7 +28,7 @@
         [value]="value$ | async"
       />
       <div
-        class="time-input-container__icon"
+        class="time-input-container__icon simple-time"
         *ngIf="!(isDisabled$ | async)"
         (mouseenter)="handleIconHover(true)"
         (mouseleave)="handleIconHover(false)"

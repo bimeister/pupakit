@@ -1,15 +1,11 @@
 import { Injectable } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
+import { ParsedDateData } from '../../../../internal/declarations/interfaces/parsed-date-data.interface';
+import { ParsedTimeData } from '../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { TimeFormatPipe } from '../../../../internal/pipes/time-format.pipe';
 
-interface ParsedTimeData {
-  hours: string;
-  minutes: string;
-  seconds: string;
-}
-
 @Injectable({ providedIn: 'any' })
-export class InputTimeStateService {
+export class InputDateTimeStateService {
   constructor(private readonly timeFormatPipe: TimeFormatPipe) {}
 
   public getUpdatedValueStringAfterSelectHours(hours: number, inputCurrentValue: string): string {
@@ -33,9 +29,22 @@ export class InputTimeStateService {
     return `${hours}:${minutes}:${parsedSeconds}`;
   }
 
-  private getParsedTimeData(inputValue: string): Partial<ParsedTimeData> {
-    const defaultArray: string[] = ['00', '00', '00'];
-    const defaultTimeParts: string[] = defaultArray;
+  public getParsedDateData(inputValue: string): ParsedDateData {
+    const defaultDateParts: string[] = ['00', '00', '0000'];
+    const allowedTimePartsLength: number = defaultDateParts.length;
+
+    const convertedDefaultDateParts: string = defaultDateParts.join('.');
+
+    const serializedValue: string = isNil(inputValue) ? convertedDefaultDateParts : inputValue;
+    const parsedDateParts: string[] = serializedValue.split('.');
+
+    const dateParts: string[] = [...parsedDateParts, ...defaultDateParts].slice(0, allowedTimePartsLength);
+
+    return { day: dateParts[0], month: dateParts[1], year: dateParts[2] };
+  }
+
+  private getParsedTimeData(inputValue: string): ParsedTimeData {
+    const defaultTimeParts: string[] = ['00', '00', '00'];
     const allowedTimePartsLength: number = defaultTimeParts.length;
 
     const convertedDefaultTimeParts: string = defaultTimeParts.join(':');
