@@ -3,6 +3,15 @@
     <pupa-date-picker-simple [baseDate]="baseDate$ | async"></pupa-date-picker-simple>
   </div>
   <div class="time" [class.seconds]="withSeconds$ | async">
-    <pupa-time-picker-simple [withSeconds]="withSeconds$ | async" [withGradient]="true"></pupa-time-picker-simple>
+    <pupa-time-picker-simple
+      [withGradient]="true"
+      [withSeconds]="withSeconds$ | async"
+      [chosenHours]="hours$ | async"
+      [chosenMinutes]="minutes$ | async"
+      [chosenSeconds]="seconds$ | async"
+      (selectedHours)="selectHours($event)"
+      (selectedMinutes)="selectMinutes($event)"
+      (selectedSeconds)="selectSeconds($event)"
+    ></pupa-time-picker-simple>
   </div>
 </div>

@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -22,6 +30,14 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
   @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE);
 
+  public readonly hours$: BehaviorSubject<number> = this.datePickerStateService.hours$;
+  public readonly minutes$: BehaviorSubject<number> = this.datePickerStateService.minutes$;
+  public readonly seconds$: BehaviorSubject<number> = this.datePickerStateService.seconds$;
+
+  @Output() private readonly selectedHours: EventEmitter<number> = new EventEmitter<number>();
+  @Output() private readonly selectedMinutes: EventEmitter<number> = new EventEmitter<number>();
+  @Output() private readonly selectedSeconds: EventEmitter<number> = new EventEmitter<number>();
+
   public readonly withSeconds$: BehaviorSubject<boolean> = this.datePickerStateService.withSeconds$;
 
   public readonly baseDateNextMont$: Observable<Date> = this.baseDate$.pipe(
@@ -40,6 +56,18 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
       return;
     }
     this.processBaseDateChange(changes?.baseDate);
+  }
+
+  public selectHours(hour: number): void {
+    this.selectedHours.emit(hour);
+  }
+
+  public selectMinutes(minute: number): void {
+    this.selectedMinutes.emit(minute);
+  }
+
+  public selectSeconds(second: number): void {
+    this.selectedSeconds.emit(second);
   }
 
   private processBaseDateChange(change: ComponentChange<this, Date>): void {

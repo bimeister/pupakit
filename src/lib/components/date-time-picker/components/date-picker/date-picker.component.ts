@@ -50,8 +50,21 @@ export class DatePickerComponent implements OnDestroy {
   @Input() public readonly withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = this.datePickerStateService.withSeconds$;
 
+  @Input() public readonly hours: number = null;
+  public readonly hours$: BehaviorSubject<number> = this.datePickerStateService.hours$;
+
+  @Input() public readonly minutes: number = null;
+  public readonly minutes$: BehaviorSubject<number> = this.datePickerStateService.minutes$;
+
+  @Input() public readonly seconds: number = null;
+  public readonly seconds$: BehaviorSubject<number> = this.datePickerStateService.seconds$;
+
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();
+
+  @Output() private readonly selectedHours: EventEmitter<number> = new EventEmitter<number>();
+  @Output() private readonly selectedMinutes: EventEmitter<number> = new EventEmitter<number>();
+  @Output() private readonly selectedSeconds: EventEmitter<number> = new EventEmitter<number>();
 
   public readonly isSelectionModeDate$: Observable<boolean> = this.datePickerStateService.isSelectionModeDate$;
   public readonly hoveredDate$: BehaviorSubject<Date> = this.datePickerStateService.hoveredDate$;
@@ -70,6 +83,9 @@ export class DatePickerComponent implements OnDestroy {
     this.processSelectedRangeChange(changes?.selectedRange);
     this.processPreviewModeChange(changes?.previewMode);
     this.processWithSecondsChange(changes?.withSeconds);
+    this.processHoursChange(changes?.hours);
+    this.processMinutesChange(changes?.minutes);
+    this.processSecondsChange(changes?.seconds);
   }
 
   public ngOnDestroy(): void {
@@ -88,6 +104,18 @@ export class DatePickerComponent implements OnDestroy {
   @HostListener('window:touchstart', ['$event'])
   public processWindowClick(): void {
     this.hoveredDate$.next(null);
+  }
+
+  public selectHours(hour: number): void {
+    this.selectedHours.emit(hour);
+  }
+
+  public selectMinutes(minute: number): void {
+    this.selectedMinutes.emit(minute);
+  }
+
+  public selectSeconds(second: number): void {
+    this.selectedSeconds.emit(second);
   }
 
   private processSelectionModeChange(change: ComponentChange<this, DatePickerSelectionMode>): void {
@@ -118,6 +146,33 @@ export class DatePickerComponent implements OnDestroy {
     }
 
     this.withSeconds$.next(updatedValue);
+  }
+
+  private processHoursChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.hours$.next(updatedValue);
+  }
+
+  private processMinutesChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.minutes$.next(updatedValue);
+  }
+
+  private processSecondsChange(change: ComponentChange<this, number>): void {
+    const updatedValue: number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.seconds$.next(updatedValue);
   }
 
   private processSelectedDateChange(change: ComponentChange<this, Date>): void {
