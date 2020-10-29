@@ -16,7 +16,7 @@ import { InputDateTimeStateService } from '../../services/input-date-time-state.
 const DEFAULT_DATE: Date = new Date();
 const DATE_FORMAT: string = 'dd.MM.yyyy';
 
-const PLACEHOLDER_TIME: string = '00:00';
+const PLACEHOLDER_TIME: string = '00:00:00';
 const PLACEHOLDER_DATE: string = '00.00.0000';
 const PLACEHOLDER: string = `${PLACEHOLDER_DATE} ${PLACEHOLDER_TIME}`;
 
@@ -26,16 +26,17 @@ const SIZE_PLACEHOLDER_DATE: number = PLACEHOLDER_DATE.length;
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
+const MAX_SECONDS: number = 59;
 
 @Component({
-  selector: 'pupa-input-date-time',
-  templateUrl: './input-date-time.component.html',
-  styleUrls: ['./input-date-time.component.scss'],
+  selector: 'pupa-input-date-time-seconds',
+  templateUrl: './input-date-time-seconds.component.html',
+  styleUrls: ['./input-date-time-seconds.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputDateTimeComponent extends InputBase<ValueType> {
+export class InputDateTimeSecondsComponent extends InputBase<ValueType> {
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -78,9 +79,18 @@ export class InputDateTimeComponent extends InputBase<ValueType> {
     filterNotNil(),
     map((value: string) => value.slice(SIZE_PLACEHOLDER_DATE)),
     map((value: string) => value.trim()),
-    map((value: string) => (!isEmpty(value) && value.length === 5 ? Number(value.slice(3)) : -1)),
+    map((value: string) => (!isEmpty(value) && value.length >= 5 ? Number(value.slice(3, 5)) : -1)),
     filterNotNil(),
     filter((minutes: number) => minutes <= MAX_MINUTES)
+  );
+
+  public readonly seconds$: Observable<number> = this.value$.pipe(
+    filterNotNil(),
+    map((value: string) => value.slice(SIZE_PLACEHOLDER_DATE)),
+    map((value: string) => value.trim()),
+    map((value: string) => (!isEmpty(value) && value.length === 8 ? Number(value.slice(6)) : -1)),
+    filterNotNil(),
+    filter((minutes: number) => minutes <= MAX_SECONDS)
   );
 
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
@@ -207,6 +217,28 @@ export class InputDateTimeComponent extends InputBase<ValueType> {
       const addedExistingValueInput: string = value.slice(0, SIZE_PLACEHOLDER_DATE);
 
       this.updateValue(`${addedExistingValueInput} ${transformedMinutes}`);
+    });
+  }
+
+  public selectSeconds(seconds: number): void {
+    this.value$.pipe(take(1)).subscribe((value: string) => {
+      const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
+
+      const parsedSeconds: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectSeconds(
+        seconds,
+        valueTime
+      );
+      const transformedSeconds: string = parsedSeconds.slice(0, SIZE_PLACEHOLDER_TIME);
+
+      if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
+        const parsedDefaultDate: string = this.datePipe.transform(DEFAULT_DATE, DATE_FORMAT);
+        this.updateValue(`${parsedDefaultDate} ${transformedSeconds}`);
+        return;
+      }
+
+      const addedExistingValueInput: string = value.slice(0, SIZE_PLACEHOLDER_DATE);
+
+      this.updateValue(`${addedExistingValueInput} ${transformedSeconds}`);
     });
   }
 
