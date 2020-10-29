@@ -12,7 +12,12 @@
 
 <ng-template #simpleTimeCalendar>
   <div class="date-picker simple-time" [class.with-seconds]="withSeconds$ | async">
-    <pupa-date-picker-simple-time [baseDate]="baseDate$ | async"></pupa-date-picker-simple-time>
+    <pupa-date-picker-simple-time
+      [baseDate]="baseDate$ | async"
+      (selectedHours)="selectHours($event)"
+      (selectedMinutes)="selectMinutes($event)"
+      (selectedSeconds)="selectSeconds($event)"
+    ></pupa-date-picker-simple-time>
   </div>
 </ng-template>
 

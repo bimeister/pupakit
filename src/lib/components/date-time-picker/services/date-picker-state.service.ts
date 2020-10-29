@@ -15,6 +15,10 @@ const VALID_RANGE_SIZE: number = 2;
 export class DatePickerStateService {
   public readonly weekDayNames: string[] = WEEK_DAY_NAMES;
 
+  public readonly hours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  public readonly minutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  public readonly seconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
   public readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = new BehaviorSubject<
     DatePickerSelectionMode
   >('range');
