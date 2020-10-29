@@ -17,6 +17,7 @@ import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-ci
 import { mdAlertIcon } from '../../../internal/constants/icons/md-alert-icon.const';
 import { InputTimeSecondsComponent } from './components/input-time-seconds/input-time-seconds.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
+import { InputDateTimeSecondsComponent } from './components/input-date-time-seconds/input-date-time-seconds.component';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -26,7 +27,8 @@ const EXPORTS: any[] = [
   InputNumberComponent,
   InputTimeComponent,
   InputTimeSecondsComponent,
-  InputDateTimeComponent
+  InputDateTimeComponent,
+  InputDateTimeSecondsComponent
 ];
 
 const DECLARATIONS: any[] = [...EXPORTS];

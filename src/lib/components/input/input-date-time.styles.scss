@@ -3,6 +3,7 @@
 $width_time-seconds: px(114);
 $width_time: px(82);
 $width_date: px(180);
+$width_date-seconds: px(200);
 
 :host {
   display: block;
@@ -21,6 +22,10 @@ $width_date: px(180);
 
   &.date.fixed-size {
     width: $width_date;
+
+    &.time-seconds {
+      width: $width_date-seconds;
+    }
   }
 }
 
