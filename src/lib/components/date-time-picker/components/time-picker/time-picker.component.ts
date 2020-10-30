@@ -40,9 +40,6 @@ export class TimePickerComponent implements OnChanges {
   @Output() private readonly selectedSeconds: EventEmitter<number> = new EventEmitter<number>();
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processWithSecondsChange(changes?.withSeconds);
     this.processHoursChange(changes?.hours);
     this.processMinutesChange(changes?.minutes);

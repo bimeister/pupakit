@@ -11,6 +11,11 @@ export class TimeFormatPipe implements PipeTransform {
     }
 
     const incomingNumber: number = parseInt(entity?.toString(), 10);
-    return incomingNumber < 10 ? `0${incomingNumber}` : `${incomingNumber}`;
+
+    if (isNaN(incomingNumber)) {
+      return incomingNumber.toString();
+    }
+
+    return incomingNumber.toString().padStart(2, '0');
   }
 }

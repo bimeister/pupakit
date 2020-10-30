@@ -25,9 +25,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processSizeChange(changes?.size);
     this.processTransparentChange(changes?.transparent);
     this.processPlaceholderChange(changes?.placeholder);

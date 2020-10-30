@@ -7,6 +7,7 @@ import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { InputDateTimeStateService } from '../../../../lib/components/input/services/input-date-time-state.service';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
 import { TimeFormatPipe } from '../../../pipes/time-format.pipe';
+import { BrowserService } from '../../../shared/services/browser.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { ParsedDateData } from '../../interfaces/parsed-date-data.interface';
@@ -26,6 +27,18 @@ const SIZE_PLACEHOLDER_DATE: number = PLACEHOLDER_DATE.length;
 const PLACEHOLDER_TIME: string = '00:00:00';
 const SIZE_PLACEHOLDER_TIME: number = PLACEHOLDER_TIME.length;
 
+const MONTH_START_VALUE: number = 0;
+const MONTH_END_VALUE: number = 11;
+
+const HOUR_START_POSITION: number = 0;
+const HOUR_END_POSITION: number = 2;
+
+const MINUTES_START_POSITION: number = 3;
+const MINUTES_END_POSITION: number = 5;
+
+const SECONDS_START_POSITION: number = 6;
+const SECONDS_END_POSITION: number = 8;
+
 @Directive()
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @Input() public readonly isFixedSize: boolean = true;
@@ -35,19 +48,29 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
 
   public readonly hours$: Observable<number> = this.value$.pipe(
-    map((value: string) => (!isEmpty(value) && value.length >= 2 ? Number(value.slice(0, 2)) : -1)),
+    map((value: string) =>
+      !isEmpty(value) && value.length >= HOUR_END_POSITION
+        ? Number(value.slice(HOUR_START_POSITION, HOUR_END_POSITION))
+        : -1
+    ),
     filterNotNil(),
     filter((hours: number) => hours <= MAX_HOURS)
   );
 
   public readonly minutes$: Observable<number> = this.value$.pipe(
-    map((value: string) => (!isEmpty(value) && value.length >= 5 ? Number(value.slice(3, 5)) : -1)),
+    map((value: string) =>
+      !isEmpty(value) && value.length >= MINUTES_END_POSITION
+        ? Number(value.slice(MINUTES_START_POSITION, MINUTES_END_POSITION))
+        : -1
+    ),
     filterNotNil(),
     filter((minutes: number) => minutes <= MAX_MINUTES)
   );
 
   public readonly seconds$: Observable<number> = this.value$.pipe(
-    map((value: string) => (!isEmpty(value) && value.length === 8 ? Number(value.slice(6)) : -1)),
+    map((value: string) =>
+      !isEmpty(value) && value.length === SECONDS_END_POSITION ? Number(value.slice(SECONDS_START_POSITION)) : -1
+    ),
     filterNotNil(),
     filter((minutes: number) => minutes <= MAX_SECONDS)
   );
@@ -63,10 +86,11 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   constructor(
     public readonly inputDateTimeStateService: InputDateTimeStateService,
     private readonly timeFormatPipe: TimeFormatPipe,
+    browserService: BrowserService,
     public readonly datePipe: DatePipe,
-    @Optional() public readonly ngControl: NgControl
+    @Optional() ngControl: NgControl
   ) {
-    super(ngControl);
+    super(browserService, ngControl);
   }
 
   @HostListener('window:click')
@@ -206,7 +230,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     const convertedMonth: number = Number(month) - 1;
     const convertedDay: number = Number(day);
 
-    if (convertedMonth > 11 || convertedMonth < 0) {
+    if (convertedMonth > MONTH_END_VALUE || convertedMonth < MONTH_START_VALUE) {
       return null;
     }
 
@@ -222,9 +246,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processIsFixedSizeChange(changes?.isFixedSize);
   }
 

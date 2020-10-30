@@ -11,7 +11,7 @@
         #inputElement
         type="text"
         placeholder=""
-        [mask]="'hh:mm:s0'"
+        [mask]="'00:00:00'"
         [maxLength]="maxLengthInputValue"
         [attr.disabled]="(isDisabled$ | async) ? true : null"
         [ngClass]="{

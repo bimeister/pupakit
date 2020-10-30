@@ -27,7 +27,7 @@ const DEFAULT_CURRENT_DATE: Date = dateClearTime(new Date());
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerSimpleTimeComponent implements OnChanges {
-  @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE;
+  @Input() public baseDate: Date = DEFAULT_CURRENT_DATE;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE);
 
   public readonly hours$: BehaviorSubject<number> = this.datePickerStateService.hours$;
@@ -52,9 +52,6 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
   constructor(private readonly datePickerStateService: DatePickerStateService) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processBaseDateChange(changes?.baseDate);
   }
 

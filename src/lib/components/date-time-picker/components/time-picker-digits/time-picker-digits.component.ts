@@ -63,9 +63,6 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processDigitsChange(changes?.digits);
     this.processChosenDigitChange(changes?.chosenDigit);
   }
@@ -118,6 +115,13 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
       });
   }
 
+  /**
+   * @description
+   * Infinite loop scrolling function using virtual-scroll. Initially, the base array consists
+   * of two default arrays. The selected item is the middle one. If we scroll down,
+   * add array. As soon as the first array went out of visible area, then we remove it.
+   * When we scroll up, the logic is similar.
+   */
   private handleViewPortScrolledIndexChanges(): Subscription {
     return this.selectedDigit$
       .pipe(switchMap(() => this.viewPortReference$))
@@ -126,7 +130,6 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
         withLatestFrom(this.scrolledIndex$)
       )
       .subscribe(([scrolledIndex, prevScrolledIndex]: [number, number]) => {
-        const scrollDown: boolean = prevScrolledIndex <= scrolledIndex;
         const scrollDiff: number = Math.abs(scrolledIndex - prevScrolledIndex);
 
         this.scrolledIndex$.next(scrolledIndex);
@@ -140,12 +143,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
 
         const digitsBaseSize: number = total * 2;
 
-        if (scrolledIndex === 0 && scrollDown) {
-          this.viewPort.scrollToOffset(scrollingOffset);
-          return;
-        }
-
-        if (scrolledIndex === 0 && !scrollDown) {
+        if (scrolledIndex === 0) {
           this.viewPort.scrollToOffset(scrollingOffset);
           return;
         }
@@ -156,10 +154,10 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
           return;
         }
 
-        if (
-          scrolledIndex === digitsBaseSize ||
-          (scrolledIndex > digitsBaseSize && scrolledIndex - digitsBaseSize <= scrollDiff)
-        ) {
+        const scrolledIndexInScrolledArea: boolean =
+          scrolledIndex > digitsBaseSize && scrolledIndex - digitsBaseSize <= scrollDiff;
+
+        if (scrolledIndex === digitsBaseSize || scrolledIndexInScrolledArea) {
           this.digits$.next([...this.digits, ...this.digits]);
           this.viewPort.scrollToIndex(total);
           return;

@@ -18,8 +18,8 @@ type PasswordAutocompleteOffValue = 'off' | 'new-password';
 export class InputPasswordComponent extends InputBase<ValueType> {
   public readonly offValue: PasswordAutocompleteOffValue = this.browserService.isChrome ? 'new-password' : 'off';
 
-  constructor(private readonly browserService: BrowserService, @Optional() public readonly ngControl: NgControl) {
-    super(ngControl);
+  constructor(protected readonly browserService: BrowserService, @Optional() ngControl: NgControl) {
+    super(browserService, ngControl);
   }
 
   public setValue(value: ValueType): void {

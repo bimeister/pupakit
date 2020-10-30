@@ -87,7 +87,7 @@ export class DatePickerSimpleComponent implements OnChanges {
     map((baseDate: Date) => {
       const baseMonthDay: number = baseDate.getDate();
       const baseDateMs: number = baseDate.valueOf();
-      return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
+      return baseDateMs - (baseMonthDay - 1) * dayInMs;
     }),
     map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
   );
@@ -151,7 +151,7 @@ export class DatePickerSimpleComponent implements OnChanges {
       this.primarySectionEndDate$.pipe(
         distinctUntilChanged(),
         map((sectionEndDate: Date) => {
-          const currentSectionDate: Date = sectionEndDate;
+          const currentSectionDate: Date = new Date(sectionEndDate);
           const month: number = currentSectionDate.getMonth() + 1;
           currentSectionDate.setDate(1);
           currentSectionDate.setMonth(month);
@@ -215,9 +215,6 @@ export class DatePickerSimpleComponent implements OnChanges {
   constructor(private readonly datePickerStateService: DatePickerStateService) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processBaseDateChange(changes?.baseDate);
     this.processIsLeftDoubleDatePickerChange(changes?.isLeftDoubleDatePicker);
     this.processIsRightDoubleDatePickerChange(changes?.isRightDoubleDatePicker);

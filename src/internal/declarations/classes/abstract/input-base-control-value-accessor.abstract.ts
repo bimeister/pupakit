@@ -39,7 +39,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(protected readonly browserService: BrowserService, @Optional() private readonly ngControl: NgControl) {
+  constructor(protected readonly browserService: BrowserService, @Optional() protected readonly ngControl: NgControl) {
     if (isNil(ngControl)) {
       return;
     }
