@@ -49,6 +49,10 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   protected abstract setValue(value: T): void;
 
+  protected handleChangedValue(onChangeCallback: OnChangeCallback<any>, value: T): void {
+    onChangeCallback(value);
+  }
+
   public ngOnInit(): void {
     this.subscription.add(this.processNgControlStatusChangesForHandleIsTouched());
   }
@@ -65,7 +69,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
       .pipe(take(1))
       .subscribe(([onChangeCallback, onTouchedCallback]: [OnChangeCallback<T>, OnTouchedCallback]) => {
         if (typeof onChangeCallback === 'function') {
-          onChangeCallback(updatedValue);
+          this.handleChangedValue(onChangeCallback, updatedValue);
         }
 
         if (typeof onTouchedCallback === 'function') {

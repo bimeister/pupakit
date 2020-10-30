@@ -13,37 +13,34 @@ import { getDaysInMonth } from '../../../../../internal/helpers/get-days-in-mont
 import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
 
-const DEFAULT_DATE: Date = new Date();
-const DATE_FORMAT: string = 'dd.MM.yyyy';
-
-const PLACEHOLDER_TIME: string = '00:00';
 const PLACEHOLDER_DATE: string = '00.00.0000';
-const PLACEHOLDER: string = `${PLACEHOLDER_DATE} ${PLACEHOLDER_TIME}`;
-
+const PLACEHOLDER: string = `${PLACEHOLDER_DATE} - ${PLACEHOLDER_DATE}`;
 const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
-const SIZE_PLACEHOLDER_TIME: number = PLACEHOLDER_TIME.length;
+
 const SIZE_PLACEHOLDER_DATE: number = PLACEHOLDER_DATE.length;
 
-const MAX_HOURS: number = 23;
-const MAX_MINUTES: number = 59;
+const DATE_FORMAT: string = 'dd.MM.yyyy';
 
 @Component({
-  selector: 'pupa-input-date-time',
-  templateUrl: './input-date-time.component.html',
-  styleUrls: ['./input-date-time.component.scss'],
+  selector: 'pupa-input-date-range-double',
+  templateUrl: './input-date-range-double.component.html',
+  styleUrls: ['./input-date-range-double.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InputDateTimeComponent extends InputBase<ValueType> {
+export class InputDateRangeDoubleComponent extends InputBase<ValueType> {
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public readonly date$: Observable<Date> = this.value$.pipe(
+  public readonly dateRangeFirst$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
-    filter((value: string) => value.length >= SIZE_PLACEHOLDER_DATE),
-    map((value: string) => value.slice(0, SIZE_PLACEHOLDER_DATE)),
-    map((value: string) => {
+    map((inputValue: string) => {
+      if (inputValue.length <= SIZE_PLACEHOLDER_DATE) {
+        return null;
+      }
+      const value: string = inputValue.slice(0, SIZE_PLACEHOLDER_DATE);
+
       const { day, month, year }: ParsedDateData = this.inputDateTimeStateService.getParsedDateData(value);
       const convertedYear: number = Number(year);
       const convertedMonth: number = Number(month) - 1;
@@ -65,23 +62,37 @@ export class InputDateTimeComponent extends InputBase<ValueType> {
     })
   );
 
-  public readonly hours$: Observable<number> = this.value$.pipe(
+  public readonly dateRangeSecond$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
-    map((value: string) => value.slice(SIZE_PLACEHOLDER_DATE)),
     map((value: string) => value.trim()),
-    map((value: string) => (!isEmpty(value) && value.length >= 2 ? Number(value.slice(0, 2)) : -1)),
-    filterNotNil(),
-    filter((hours: number) => hours <= MAX_HOURS)
+    map((inputValue: string) => {
+      if (inputValue.length < MAX_LENGTH_INPUT_VALUE) {
+        return null;
+      }
+      const value: string = inputValue.slice(-SIZE_PLACEHOLDER_DATE);
+
+      const { day, month, year }: ParsedDateData = this.inputDateTimeStateService.getParsedDateData(value);
+      const convertedYear: number = Number(year);
+      const convertedMonth: number = Number(month) - 1;
+      const convertedDay: number = Number(day);
+
+      if (convertedMonth > 11 || convertedMonth < 0) {
+        return null;
+      }
+
+      const testDate: Date = new Date(convertedYear, convertedMonth, 1);
+      const daysInMonth: number = getDaysInMonth(testDate);
+
+      if (convertedDay > daysInMonth) {
+        return null;
+      }
+
+      const date: Date = new Date(convertedYear, convertedMonth, convertedDay);
+      return date;
+    })
   );
 
-  public readonly minutes$: Observable<number> = this.value$.pipe(
-    filterNotNil(),
-    map((value: string) => value.slice(SIZE_PLACEHOLDER_DATE)),
-    map((value: string) => value.trim()),
-    map((value: string) => (!isEmpty(value) && value.length === 5 ? Number(value.slice(3)) : -1)),
-    filterNotNil(),
-    filter((minutes: number) => minutes <= MAX_MINUTES)
-  );
+  public readonly range$: Observable<[Date, Date]> = combineLatest([this.dateRangeFirst$, this.dateRangeSecond$]);
 
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
 
@@ -99,7 +110,6 @@ export class InputDateTimeComponent extends InputBase<ValueType> {
 
   constructor(
     private readonly inputDateTimeStateService: InputDateTimeStateService,
-    private readonly timeFormatPipe: TimeFormatPipe,
     private readonly datePipe: DatePipe,
     @Optional() public readonly ngControl: NgControl
   ) {
@@ -124,74 +134,28 @@ export class InputDateTimeComponent extends InputBase<ValueType> {
     this.emitFocusEvent(focusEvent);
   }
 
-  public selectDate(selectedDate: Date): void {
-    this.value$.pipe(take(1)).subscribe((value: string) => {
-      const day: number = selectedDate.getDate();
-      const month: number = selectedDate.getMonth() + 1;
-      const year: number = selectedDate.getFullYear();
-
-      const parsedDay: string = this.timeFormatPipe.transform(day);
-      const parsedMonth: string = this.timeFormatPipe.transform(month);
-
-      const dateInputString: string = `${parsedDay}.${parsedMonth}.${year}`;
-
-      const addedExistingValueInput: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE);
-
-      this.updateValue(`${dateInputString}${addedExistingValueInput}`);
-    });
-  }
-
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
   }
 
+  public selectRange(range: [Date, Date]): void {
+    const firstDate: Date = range[0];
+    const secondDate: Date = range[1];
+
+    const convertedFirstDate: string = this.datePipe.transform(firstDate, DATE_FORMAT);
+    const convertedSecondDate: string = this.datePipe.transform(secondDate, DATE_FORMAT);
+
+    const isRangeCorrect: boolean = firstDate <= secondDate;
+    const updatedValue: string = isRangeCorrect
+      ? `${convertedFirstDate} - ${convertedSecondDate}`
+      : `${convertedSecondDate} - ${convertedFirstDate}`;
+
+    this.updateValue(updatedValue);
+  }
+
   public handleIconHover(isHovered: boolean): void {
     this.isIconHovered$.next(isHovered);
-  }
-
-  public selectHours(hours: number): void {
-    this.value$.pipe(take(1)).subscribe((value: string) => {
-      const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
-
-      const parsedHours: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectHours(
-        hours,
-        valueTime
-      );
-      const transformedHours: string = parsedHours.slice(0, SIZE_PLACEHOLDER_TIME);
-
-      if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
-        const parsedDefaultDate: string = this.datePipe.transform(DEFAULT_DATE, DATE_FORMAT);
-        this.updateValue(`${parsedDefaultDate} ${transformedHours}`);
-        return;
-      }
-
-      const addedExistingValueInput: string = value.slice(0, SIZE_PLACEHOLDER_DATE);
-
-      this.updateValue(`${addedExistingValueInput} ${transformedHours}`);
-    });
-  }
-
-  public selectMinutes(minutes: number): void {
-    this.value$.pipe(take(1)).subscribe((value: string) => {
-      const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
-
-      const parsedMinutes: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectMinutes(
-        minutes,
-        valueTime
-      );
-      const transformedMinutes: string = parsedMinutes.slice(0, SIZE_PLACEHOLDER_TIME);
-
-      if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
-        const parsedDefaultDate: string = this.datePipe.transform(DEFAULT_DATE, DATE_FORMAT);
-        this.updateValue(`${parsedDefaultDate} ${transformedMinutes}`);
-        return;
-      }
-
-      const addedExistingValueInput: string = value.slice(0, SIZE_PLACEHOLDER_DATE);
-
-      this.updateValue(`${addedExistingValueInput} ${transformedMinutes}`);
-    });
   }
 
   public clearInputValue(): void {

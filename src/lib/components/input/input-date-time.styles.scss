@@ -5,6 +5,8 @@ $width_time: px(82);
 $width_date: px(180);
 $width_date-seconds: px(200);
 
+$width_date-range: px(220);
+
 :host {
   display: block;
   box-sizing: border-box;
@@ -27,6 +29,10 @@ $width_date-seconds: px(200);
       width: $width_date-seconds;
     }
   }
+
+  &.date-range.fixed-size {
+    width: $width_date-range;
+  }
 }
 
 .input {
@@ -42,12 +48,20 @@ $width_date-seconds: px(200);
     height: rems(1);
     top: 50%;
     transform: translateY(-50%);
-    color: color(active);
+    color: color(main);
 
-    @include transition(#{'opacity'});
+    @include transition(#{'opacity, color'});
 
     &.simple-time {
       right: px(5);
+    }
+
+    &.focused {
+      color: color(active);
+    }
+
+    &:hover {
+      color: color(active);
     }
   }
 
@@ -72,11 +86,13 @@ $width_date-seconds: px(200);
       color: transparent;
       font-size: rems(1);
       line-height: 1;
+      white-space: break-spaces;
     }
 
     .right {
       font-size: rems(1);
       line-height: 1;
+      white-space: break-spaces;
     }
   }
 }

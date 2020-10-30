@@ -2,11 +2,8 @@
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
       <div class="time-input-container__placeholder">
-        <span class="left"> {{ placeholderPreviewLeft$ | async }} </span>
-        <span class="right">
-          <span class="integrated-space" *ngIf="dateIsFilled$ | async">&nbsp;</span>
-          {{ placeholderPreviewRight$ | async }}
-        </span>
+        <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
+        <span class="right">{{ placeholderPreviewRight$ | async }}</span>
       </div>
       <input
         class="input"
@@ -21,7 +18,7 @@
           input__small: size === 'small',
           input__large: size === 'large',
           input__transparent: transparent,
-          input__focused: isFocused$ | async
+          input__focused: (isFocused$ | async) || droppable.isOpened
         }"
         (input)="updateValue(inputElement.value)"
         (focus)="emitFocusEvent($event)"
@@ -31,6 +28,7 @@
       />
       <div
         class="time-input-container__icon"
+        [class.focused]="(isFocused$ | async) || droppable.isOpened"
         *ngIf="!(isDisabled$ | async)"
         (mouseenter)="handleIconHover(true)"
         (mouseleave)="handleIconHover(false)"

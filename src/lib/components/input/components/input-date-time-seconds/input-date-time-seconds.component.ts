@@ -95,10 +95,6 @@ export class InputDateTimeSecondsComponent extends InputBase<ValueType> {
 
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
 
-  public readonly dateIsFilled$: Observable<boolean> = this.value$.pipe(
-    map((value: string) => (isNil(value) ? false : value.trim().length === SIZE_PLACEHOLDER_DATE))
-  );
-
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
@@ -108,19 +104,7 @@ export class InputDateTimeSecondsComponent extends InputBase<ValueType> {
   );
 
   public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
-    map((value: string) => {
-      if (isEmpty(value)) {
-        return PLACEHOLDER;
-      }
-
-      const valueTrimmed: string = value.trim();
-      const valueTrimmedLength: number = valueTrimmed.length;
-      if (valueTrimmedLength === SIZE_PLACEHOLDER_DATE) {
-        return `${PLACEHOLDER.slice(valueTrimmedLength + 1)}`;
-      }
-
-      return `${PLACEHOLDER.slice(value.length)}`;
-    })
+    map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
   );
 
   constructor(
