@@ -11,7 +11,7 @@
         type="text"
         placeholder=""
         [mask]="'hh:mm:s0'"
-        maxlength="8"
+        [maxLength]="maxLengthInputValue"
         [attr.disabled]="(isDisabled$ | async) ? true : null"
         [ngClass]="{
           input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),

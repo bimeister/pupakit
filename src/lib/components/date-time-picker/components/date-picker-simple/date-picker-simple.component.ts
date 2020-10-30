@@ -151,9 +151,12 @@ export class DatePickerSimpleComponent implements OnChanges {
       this.primarySectionEndDate$.pipe(
         distinctUntilChanged(),
         map((sectionEndDate: Date) => {
-          const sectionEndDateMs: number = sectionEndDate.valueOf();
-          const firstDayOfNextMonthMs: number = sectionEndDateMs + dayInMs;
-          return [sectionEndDate, dateClearTime(new Date(firstDayOfNextMonthMs))];
+          const currentSectionDate: Date = sectionEndDate;
+          const month: number = currentSectionDate.getMonth() + 1;
+          currentSectionDate.setDate(1);
+          currentSectionDate.setMonth(month);
+
+          return [sectionEndDate, dateClearTime(new Date(currentSectionDate))];
         }),
         withLatestFrom(this.previewMode$),
         map(([[currentSectionEndDate, nextMonthFirstDate], previewMode]: [[Date, Date], DatePickerPreviewMode]) => {
@@ -226,11 +229,12 @@ export class DatePickerSimpleComponent implements OnChanges {
       .pipe(
         take(1),
         map((currentBaseDate: Date) => {
-          const baseDateMonthDay: number = currentBaseDate.getDate();
-          const currentBaseDateMs: number = currentBaseDate.valueOf();
-          return currentBaseDateMs - baseDateMonthDay * dayInMs;
+          const month: number = currentBaseDate.getMonth() - 1;
+          currentBaseDate.setDate(1);
+          currentBaseDate.setMonth(month);
+          return currentBaseDate;
         }),
-        map((newBaseDateMs: number) => dateClearTime(new Date(newBaseDateMs)))
+        map((newBaseDateMs: Date) => dateClearTime(new Date(newBaseDateMs)))
       )
       .subscribe((newBaseDate: Date) => {
         this.baseDate$.next(newBaseDate);
@@ -243,12 +247,12 @@ export class DatePickerSimpleComponent implements OnChanges {
       .pipe(
         take(1),
         map((currentBaseDate: Date) => {
-          const baseDateMonthDay: number = currentBaseDate.getDate();
-          const currentBaseDateMs: number = currentBaseDate.valueOf();
-          const currentBaseDateMonthDaysCount: number = getDaysInMonth(currentBaseDate);
-          return currentBaseDateMs + (currentBaseDateMonthDaysCount + 1 - baseDateMonthDay) * dayInMs;
+          const month: number = currentBaseDate.getMonth() + 1;
+          currentBaseDate.setMonth(month);
+          currentBaseDate.setDate(1);
+          return currentBaseDate;
         }),
-        map((newBaseDateMs: number) => dateClearTime(new Date(newBaseDateMs)))
+        map((newBaseDateMs: Date) => dateClearTime(new Date(newBaseDateMs)))
       )
       .subscribe((newBaseDate: Date) => {
         this.baseDate$.next(newBaseDate);
