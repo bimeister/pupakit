@@ -43,7 +43,7 @@ export class InputDateTimeStateService {
     return { day: dateParts[0], month: dateParts[1], year: dateParts[2] };
   }
 
-  private getParsedTimeData(inputValue: string): ParsedTimeData {
+  public getParsedTimeData(inputValue: string): ParsedTimeData {
     const defaultTimeParts: string[] = ['00', '00', '00'];
     const allowedTimePartsLength: number = defaultTimeParts.length;
 

@@ -5,6 +5,7 @@
         <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
         <span class="right">{{ placeholderPreviewRight$ | async }}</span>
       </div>
+      <!-- NOTE: ngModel is incorrect: use other mask instead -->
       <input
         class="input"
         #inputElement
@@ -26,6 +27,7 @@
         (blur)="emitBlurEvent($event)"
         [autocomplete]="autocomplete ? 'on' : 'off'"
         [value]="value$ | async"
+        [ngModel]="value$ | async"
       />
       <div
         class="time-input-container__icon simple-time"

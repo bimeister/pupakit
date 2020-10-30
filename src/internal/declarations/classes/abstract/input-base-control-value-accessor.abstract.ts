@@ -51,6 +51,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   protected handleChangedValue(onChangeCallback: OnChangeCallback<any>, value: T): void {
     onChangeCallback(value);
+    this.setValue(value);
   }
 
   public ngOnInit(): void {
@@ -62,7 +63,6 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   }
 
   public updateValue(updatedValue: T): void {
-    this.setValue(updatedValue);
     this.isTouched$.next(true);
 
     combineLatest([this.onChangeCallback$, this.onTouchedCallback$])

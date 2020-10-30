@@ -20,7 +20,7 @@ import { getRangeEndDate } from '../../../../../internal/helpers/get-range-end-d
 import { getRangeStartDate } from '../../../../../internal/helpers/get-range-start-date.helper';
 import { isDate } from '../../../../../internal/helpers/is-date.helper';
 
-/** @deprecated needs refactoring */
+/** @deprecated needs delete */
 @Component({
   selector: 'pupa-datepicker',
   templateUrl: './datepicker.component.html',
