@@ -12,22 +12,22 @@
 
     <h3>New Time Picker</h3>
     <h5>Simple Input</h5>
-    <pupa-input-time></pupa-input-time>
+    <pupa-input-time [formControl]="timeFormControl"></pupa-input-time>
     <h5>Simple Input With Seconds</h5>
-    <pupa-input-time-seconds></pupa-input-time-seconds>
+    <pupa-input-time-seconds [formControl]="timeSecondsFormControl"></pupa-input-time-seconds>
     <h5>Simple With Time And Seconds</h5>
     <pupa-time-picker [withSeconds]="true"></pupa-time-picker>
     <h3>New Date Picker</h3>
     <h5>Simple</h5>
-    <pupa-input-date></pupa-input-date>
+    <pupa-input-date [formControl]="dateFormControl"></pupa-input-date>
     <h5>Simple With Time</h5>
-    <pupa-input-date-time></pupa-input-date-time>
+    <pupa-input-date-time [formControl]="dateTimeFormControl"></pupa-input-date-time>
     <h5>Simple With Time And Seconds</h5>
-    <pupa-input-date-time-seconds></pupa-input-date-time-seconds>
+    <pupa-input-date-time-seconds [formControl]="dateTimeSecondsFormControl"></pupa-input-date-time-seconds>
     <h5>Simple Range</h5>
-    <pupa-input-date-range-new></pupa-input-date-range-new>
+    <pupa-input-date-range-new [formControl]="rangeFormControl"></pupa-input-date-range-new>
     <h5>Simple Range Double</h5>
-    <pupa-input-date-range-double></pupa-input-date-range-double>
+    <pupa-input-date-range-double [formControl]="rangeDoubleFormControl"></pupa-input-date-range-double>
     <h5>Simple Preview</h5>
     <pupa-date-picker [previewMode]="'simple'"></pupa-date-picker>
     <h5>Simple With Time And Seconds</h5>

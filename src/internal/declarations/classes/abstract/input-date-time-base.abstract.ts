@@ -61,9 +61,9 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   );
 
   constructor(
-    private readonly inputDateTimeStateService: InputDateTimeStateService,
+    public readonly inputDateTimeStateService: InputDateTimeStateService,
     private readonly timeFormatPipe: TimeFormatPipe,
-    private readonly datePipe: DatePipe,
+    public readonly datePipe: DatePipe,
     @Optional() public readonly ngControl: NgControl
   ) {
     super(ngControl);

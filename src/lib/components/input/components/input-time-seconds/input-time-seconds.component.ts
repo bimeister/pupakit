@@ -4,12 +4,16 @@ import { isEmpty, isNil } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
+import { ParsedTimeData } from '../../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
 
 const PLACEHOLDER: string = '00:00:00';
 const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
+
+const DATE_FORMAT: string = 'HH:mm:ss';
 
 @Component({
   selector: 'pupa-input-time-seconds',
@@ -33,5 +37,38 @@ export class InputTimeSecondsComponent extends InputDateTimeBase {
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue.slice(0, MAX_LENGTH_INPUT_VALUE));
+  }
+
+  public writeValue(newValue: ValueType): void {
+    const serializedValue: string = String(newValue);
+    const parsedValue: string = this.datePipe.transform(serializedValue, DATE_FORMAT);
+
+    this.setValue(parsedValue);
+  }
+
+  public handleChangedValue(onChangeCallback: OnChangeCallback<any>, value: ValueType): void {
+    const serializedValue: string = String(value);
+
+    if (isEmpty(serializedValue)) {
+      onChangeCallback(new Date(undefined));
+      this.setValue('');
+      return;
+    }
+
+    const { hours, minutes, seconds }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(
+      serializedValue
+    );
+    const parsedHours: number = Number(hours);
+    const parsedMinutes: number = Number(minutes);
+    const parsedSeconds: number = Number(seconds);
+
+    const date: Date = new Date();
+
+    date.setHours(parsedHours);
+    date.setMinutes(parsedMinutes);
+    date.setSeconds(parsedSeconds);
+
+    onChangeCallback(date);
+    this.setValue(serializedValue);
   }
 }

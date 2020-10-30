@@ -17,7 +17,7 @@ import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.com
 import { ChipSelectTreeDemoComponent } from './chip-select-tree-demo/chip-select-tree-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
-import { DatepickerDemoComponent } from './datepicker-demo/datepicker-demo.component';
+import { DateTimePickerDemoComponent } from './date-time-picker-demo/date-time-picker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
 import { DraggableDemoComponent } from './draggable-demo/draggable-demo.component';
 import { DraggableListDemoComponent } from './draggable-list-demo/draggable-demo.component';
@@ -97,7 +97,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ChipSelectTreeDemoComponent,
     ModalDemoComponent,
     ModalDemoContentComponent,
-    DatepickerDemoComponent,
+    DateTimePickerDemoComponent,
     ScrollbarDemoComponent,
     TabsDemoComponent,
     DatagridDemoComponent,
@@ -244,8 +244,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
         component: DraggableDemoComponent
       },
       {
-        path: 'datepicker',
-        component: DatepickerDemoComponent
+        path: 'date-time-picker',
+        component: DateTimePickerDemoComponent
       },
       { path: 'washer-panel', component: WasherPanelDemoComponent },
       { path: 'scrollbar', component: ScrollbarDemoComponent },
