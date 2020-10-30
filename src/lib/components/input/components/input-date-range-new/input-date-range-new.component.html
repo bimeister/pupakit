@@ -1,4 +1,4 @@
-<div class="base-input-container date" [class.fixed-size]="isFixedSize$ | async">
+<div class="base-input-container date-range" [class.fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
       <div class="time-input-container__placeholder">
@@ -10,7 +10,7 @@
         #inputElement
         type="text"
         placeholder=""
-        [mask]="'00.00.0000 00:00'"
+        [mask]="'00.00.0000 - 00.00.0000'"
         [maxLength]="maxLengthInputValue"
         [attr.disabled]="(isDisabled$ | async) ? true : null"
         [ngClass]="{
@@ -43,15 +43,11 @@
     <pupa-droppable-native-content>
       <pupa-date-picker
         *ngIf="droppable.isOpened"
-        [selectedDate]="date$ | async"
-        [selectionMode]="'date'"
-        [hours]="hours$ | async"
-        [minutes]="minutes$ | async"
-        (selectedHours)="selectHours($event)"
-        (selectedMinutes)="selectMinutes($event)"
+        [selectedRange]="range$ | async"
+        [selectionMode]="'range'"
         (click)="handleFocusEvent($event)"
-        (date)="selectDate($event)"
-        [previewMode]="'simple-time'"
+        (range)="selectRange($event)"
+        [previewMode]="'simple'"
       ></pupa-date-picker>
     </pupa-droppable-native-content>
   </pupa-droppable>

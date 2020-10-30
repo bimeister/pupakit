@@ -18,6 +18,8 @@ import { mdAlertIcon } from '../../../internal/constants/icons/md-alert-icon.con
 import { InputTimeSecondsComponent } from './components/input-time-seconds/input-time-seconds.component';
 import { InputDateTimeComponent } from './components/input-date-time/input-date-time.component';
 import { InputDateTimeSecondsComponent } from './components/input-date-time-seconds/input-date-time-seconds.component';
+import { InputDateRangeNewComponent } from './components/input-date-range-new/input-date-range-new.component';
+import { InputDateRangeDoubleComponent } from './components/input-date-range-double/input-date-range-double.component';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -28,7 +30,9 @@ const EXPORTS: any[] = [
   InputTimeComponent,
   InputTimeSecondsComponent,
   InputDateTimeComponent,
-  InputDateTimeSecondsComponent
+  InputDateTimeSecondsComponent,
+  InputDateRangeNewComponent,
+  InputDateRangeDoubleComponent
 ];
 
 const DECLARATIONS: any[] = [...EXPORTS];

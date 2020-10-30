@@ -71,6 +71,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   padding: rems(0.5) rems(0.5) rems(0.25) rems(0.5);
   cursor: pointer;
   @include transition(#{'color'});
+  user-select: none;
 
   &:last-child {
     padding-bottom: rems(1);
