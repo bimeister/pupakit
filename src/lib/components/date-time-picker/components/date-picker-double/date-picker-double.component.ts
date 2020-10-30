@@ -22,7 +22,7 @@ const DAYS_COUNT_IN_STANDARD_GRID: number = 35;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DatePickerDoubleComponent implements OnChanges {
-  @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE;
+  @Input() public baseDate: Date = DEFAULT_CURRENT_DATE;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE);
 
   public readonly baseDateNextMonth$: Observable<Date> = this.baseDate$.pipe(
@@ -45,9 +45,6 @@ export class DatePickerDoubleComponent implements OnChanges {
   );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processBaseDateChange(changes?.baseDate);
   }
 
@@ -88,9 +85,9 @@ export class DatePickerDoubleComponent implements OnChanges {
     return of(date).pipe(
       filter((baseDate: Date) => isDate(baseDate)),
       map((baseDate: Date) => {
-        const baseMonthDay: number = baseDate.getDate();
-        const baseDateMs: number = baseDate.valueOf();
-        return Object.is(baseMonthDay, 1) ? baseDateMs : baseDateMs - (baseMonthDay - 1) * dayInMs;
+        const currentDate: Date = baseDate;
+        currentDate.setDate(1);
+        return currentDate.valueOf();
       }),
       map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs))),
       map((startDate: Date) => {

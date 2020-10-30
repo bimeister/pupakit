@@ -34,7 +34,7 @@ const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
 export class DatePickerComponent implements OnDestroy {
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
 
-  @Input() public readonly selectionMode: DatePickerSelectionMode = 'range';
+  @Input() public selectionMode: DatePickerSelectionMode = 'range';
   private readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = this.datePickerStateService
     .selectionMode$;
 
@@ -75,9 +75,6 @@ export class DatePickerComponent implements OnDestroy {
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processSelectionModeChange(changes?.selectionMode);
     this.processSelectedDateChange(changes?.selectedDate);
     this.processSelectedRangeChange(changes?.selectedRange);

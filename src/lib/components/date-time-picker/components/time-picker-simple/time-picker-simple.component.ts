@@ -41,9 +41,6 @@ export class TimePickerSimpleComponent {
   constructor(private readonly timePickerStateService: TimePickerStateService) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processWithSecondsChange(changes?.withSeconds);
     this.processWithGradientChange(changes?.withGradient);
 

@@ -35,9 +35,6 @@ export class DatePickerYearsComponent implements OnChanges {
   @Output() private readonly selectedYear: EventEmitter<number> = new EventEmitter<number>();
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processYearsChange(changes?.years);
   }
 

@@ -1,6 +1,6 @@
 /.*/
 !/.gitlab/
-!/.vscode/
+/.vscode/
 !/.storybook/
 /coverage/
 /dist/
