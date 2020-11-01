@@ -1,0 +1,10 @@
+@import 'functions';
+
+.virtual-scroll-viewport {
+  height: px(270);
+  box-sizing: border-box;
+}
+
+.droppable-container {
+  min-width: px(400);
+}

@@ -12,6 +12,7 @@ export * from './external-disk-content.enum';
 export * from './modal-state.enum';
 export * from './panel-expansion-state.enum';
 export * from './tree-type.enum';
+export * from './uploading-status.enum';
 export * from './week-days-full.enum';
 export * from './week-days-short.enum';
 export * from './week-days.enum';

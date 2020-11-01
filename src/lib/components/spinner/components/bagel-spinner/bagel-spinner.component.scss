@@ -1,0 +1,28 @@
+:host {
+  display: flex;
+  width: fit-content;
+  height: auto;
+}
+
+.bagel-spinner {
+  all: unset;
+  color: inherit;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__icon {
+    color: inherit;
+    animation: rotate 2s infinite linear;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}

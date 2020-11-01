@@ -1,0 +1,22 @@
+<ng-container [ngSwitch]="status$ | async">
+  <ng-container *ngSwitchCase="uploadingStatus.Pending">
+    <pupa-bagel-spinner class="bagel-spinner" size="18px"></pupa-bagel-spinner>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="uploadingStatus.Uploading">
+    <pupa-progress-bar
+      class="progress-bar"
+      [sizePx]="16"
+      [strokeWidthPx]="4"
+      [percentage]="percentage$ | async"
+    ></pupa-progress-bar>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="uploadingStatus.Error">
+    <pupa-icon class="error-icon" name="alert"></pupa-icon>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="uploadingStatus.Success">
+    <pupa-icon class="success-icon" name="checkmark-circle"></pupa-icon>
+  </ng-container>
+</ng-container>

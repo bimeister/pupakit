@@ -1,0 +1,10 @@
+<button
+  type="button"
+  class="select-button"
+  [class.select-button_active]="isActive"
+  [class.select-button_disabled]="isDisable"
+>
+  <div class="select-button__text">
+    <ng-content></ng-content>
+  </div>
+</button>

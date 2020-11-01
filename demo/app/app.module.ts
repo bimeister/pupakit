@@ -7,7 +7,21 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
-import { ComponentsModule, IconModule } from './../../src/public-api';
+import { iosCheckmarkIcon } from '../../src/internal/constants/icons/ios-checkmark-icon.const';
+import { mdAddIcon } from '../../src/internal/constants/icons/md-add-icon.const';
+import { mdCheckmarkCircleIcon } from '../../src/internal/constants/icons/md-checkmark-circle-icon.const';
+import { mdCloseCircleIcon } from '../../src/internal/constants/icons/md-close-circle-icon.const';
+import { mdCloseIcon } from '../../src/internal/constants/icons/md-close-icon.const';
+import { mdHelpCircleIcon } from '../../src/internal/constants/icons/md-help-circle-icon.const';
+import { mdHomeIcon } from '../../src/internal/constants/icons/md-home-icon.const';
+import { mdManIcon } from '../../src/internal/constants/icons/md-man-icon.const';
+import { mdMoreIcon } from '../../src/internal/constants/icons/md-more-icon.const';
+import { mdMoveIcon } from '../../src/internal/constants/icons/md-move-icon.const';
+import { mdPersonAddIcon } from '../../src/internal/constants/icons/md-person-add-icon.const';
+import { mdPizzaIcon } from '../../src/internal/constants/icons/md-pizza-icon.const';
+import { mdSaveIcon } from '../../src/internal/constants/icons/md-save-icon.const';
+import { mdTrashIcon } from '../../src/internal/constants/icons/md-trash-icon.const';
+import { ComponentsModule, IconModule, mdDocumentIcon, mdRefreshCircleIcon } from './../../src/public-api';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
@@ -51,21 +65,8 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
 import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
-import { mdCloseCircleIcon } from '../../src/internal/constants/icons/md-close-circle-icon.const';
-import { mdHelpCircleIcon } from '../../src/internal/constants/icons/md-help-circle-icon.const';
-import { mdTrashIcon } from '../../src/internal/constants/icons/md-trash-icon.const';
-import { mdMoreIcon } from '../../src/internal/constants/icons/md-more-icon.const';
-import { mdSaveIcon } from '../../src/internal/constants/icons/md-save-icon.const';
-import { iosCheckmarkIcon } from '../../src/internal/constants/icons/ios-checkmark-icon.const';
-import { mdCheckmarkCircleIcon } from '../../src/internal/constants/icons/md-checkmark-circle-icon.const';
-import { mdPizzaIcon } from '../../src/internal/constants/icons/md-pizza-icon.const';
-import { mdPersonAddIcon } from '../../src/internal/constants/icons/md-person-add-icon.const';
-import { mdManIcon } from '../../src/internal/constants/icons/md-man-icon.const';
-import { mdAddIcon } from '../../src/internal/constants/icons/md-add-icon.const';
-import { mdMoveIcon } from '../../src/internal/constants/icons/md-move-icon.const';
-import { mdHomeIcon } from '../../src/internal/constants/icons/md-home-icon.const';
-import { mdCloseIcon } from '../../src/internal/constants/icons/md-close-icon.const';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -116,7 +117,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ChipTabsDemoComponent,
     TreeDemoComponent,
     LogPipe,
-    TestDrawerComponent
+    TestDrawerComponent,
+    UploadsDemoComponent
   ],
   imports: [
     IconModule.forRoot([
@@ -134,7 +136,9 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       mdAddIcon,
       mdMoveIcon,
       mdHomeIcon,
-      mdCloseIcon
+      mdCloseIcon,
+      mdDocumentIcon,
+      mdRefreshCircleIcon
     ]),
     BrowserModule,
     FormsModule,
@@ -262,6 +266,10 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       { path: 'draggable-list', component: DraggableListDemoComponent },
       { path: 'dropdown-menu', component: DropdownMenuDemoComponent },
       { path: 'selector', component: SelectorDemoComponent },
+      {
+        path: 'uploads',
+        component: UploadsDemoComponent
+      },
       {
         path: '',
         component: AppComponent
