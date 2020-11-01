@@ -24,6 +24,7 @@ import { InputModule } from './components/input/input.module';
 import { LayoutModule } from './components/layout/layout.module';
 import { ModalModule } from './components/modal/modal.module';
 import { MultiselectionListModule } from './components/multiselection-list/multiselection-list.module';
+import { ProgressBarModule } from './components/progress-bar/progress-bar.module';
 import { RadioGroupModule } from './components/radio-group/radio-group.module';
 import { RatingModule } from './components/rating/rating.module';
 import { SearchFieldModule } from './components/search-field/search-field.module';
@@ -40,6 +41,7 @@ import { TileModule } from './components/tile/tile.module';
 import { TimeInputModule } from './components/time-input/time-input.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeModule } from './components/tree/tree.module';
+import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { WasherModule } from './components/washer/washer.module';
 
@@ -84,7 +86,9 @@ const EXPORTS: any[] = [
   VerticalTabsModule,
   SkeletonModule,
   DraggableListModule,
-  SelectModule
+  SelectModule,
+  ProgressBarModule,
+  UploadsModule
 ];
 
 @NgModule({

@@ -1,0 +1,22 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: px(18);
+  font-size: px(18);
+}
+
+.success-icon {
+  color: color(success);
+}
+
+.error-icon {
+  color: color(error);
+}
+
+.bagel-spinner {
+  color: color(light);
+}

@@ -70,7 +70,8 @@ export {
   OpenedModal,
   ModalConfig,
   Position,
-  IconDefinition
+  IconDefinition,
+  UploadingStatus
 } from './internal/api';
 
 export * from './internal/constants/icons/api';

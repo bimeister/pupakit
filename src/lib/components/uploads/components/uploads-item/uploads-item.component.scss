@@ -1,0 +1,48 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  margin-bottom: px(6);
+}
+
+.uploads-item {
+  display: grid;
+  grid-template-columns: px(18) 1fr px(92) px(36);
+  grid-template-rows: px(18);
+  grid-gap: px(6);
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    color: color(cadet-blue);
+  }
+
+  &__name {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: color(main);
+    line-height: px(18);
+  }
+
+  &__size {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: color(grey-light);
+  }
+
+  &__status {
+    display: flex;
+    align-items: center;
+  }
+
+  &:hover {
+    .uploads-item__icon,
+    .uploads-item__name,
+    .uploads-item__size {
+      color: color(active);
+    }
+  }
+}

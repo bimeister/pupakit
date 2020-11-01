@@ -1,0 +1,45 @@
+<div class="droppable-container">
+  <cdk-virtual-scroll-viewport [itemSize]="24" class="virtual-scroll-viewport">
+    <pupa-uploads-item *cdkVirtualFor="let fileAttachment of fileAttachments">
+      <div pupa-uploads-item-name>
+        {{ fileAttachment.name }}
+      </div>
+
+      <div pupa-uploads-item-size>{{ fileAttachment.size }} кб</div>
+      <pupa-uploads-item-status
+        pupa-uploads-item-status
+        [status]="fileAttachment.status"
+        [percentage]="fileAttachment.percentage"
+      ></pupa-uploads-item-status>
+    </pupa-uploads-item>
+  </cdk-virtual-scroll-viewport>
+</div>
+
+<pupa-button (click)="add()">Добавить</pupa-button>
+
+<pupa-droppable #droppable>
+  <pupa-droppable-trigger>
+    <pupa-uploads-button>
+      123234
+      <pupa-uploads-item-status [percentage]="80" [status]="'error'"></pupa-uploads-item-status>
+    </pupa-uploads-button>
+  </pupa-droppable-trigger>
+  <pupa-droppable-content>
+    <div *ngIf="droppable.isOpened" class="droppable-container">
+      <cdk-virtual-scroll-viewport [itemSize]="24" class="virtual-scroll-viewport">
+        <pupa-uploads-item *cdkVirtualFor="let fileAttachment of fileAttachments">
+          <div pupa-uploads-item-name>
+            {{ fileAttachment.name }}
+          </div>
+
+          <div pupa-uploads-item-size>{{ fileAttachment.size }} кб</div>
+          <pupa-uploads-item-status
+            pupa-uploads-item-status
+            [status]="fileAttachment.status"
+            [percentage]="fileAttachment.percentage"
+          ></pupa-uploads-item-status>
+        </pupa-uploads-item>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </pupa-droppable-content>
+</pupa-droppable>
