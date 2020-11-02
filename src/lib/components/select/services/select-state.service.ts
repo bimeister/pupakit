@@ -1,8 +1,10 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { Injectable } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, shareReplay, take, withLatestFrom } from 'rxjs/operators';
+import { NgControl } from '@angular/forms';
+import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
+import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { distinctUntilChanged, map, shareReplay, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
@@ -25,6 +27,20 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
   private readonly isUnselectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
+  public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
+  public readonly isValid$: Observable<boolean> = this.control$.pipe(
+    switchMap((control: NgControl) =>
+      isNil(control)
+        ? of(true)
+        : control.statusChanges.pipe(
+            startWith(control.status),
+            map((status: string) => status === 'VALID')
+          )
+    ),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
 
   private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<SelectOuterValue<T>>> = new BehaviorSubject<
     OnChangeCallback<SelectOuterValue<T>>
@@ -53,6 +69,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
       return isNil(width) ? 0 : width;
     })
   );
+
+  public setControlRef(control: NgControl): void {
+    this.control$.next(control);
+  }
 
   public collapse(): void {
     this.isExpanded$.next(false);
@@ -137,6 +157,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
           boolean
         ]) => {
           this.currentSerializedValue$.next(updatedValue);
+          this.isTouched$.next(true);
 
           if (typeof onChangeCallback === 'function') {
             const parsedValue: T[] = SelectStateService.getParsedValue<T>(updatedValue);
@@ -168,6 +189,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
     const serializedValue: string[] = sanitizedValue.map((valueItem: T) => JSON.stringify(valueItem));
     const serializedSet: Set<string> = new Set<string>(serializedValue);
     this.currentSerializedValue$.next(serializedSet);
+
+    if (!isEmpty(value)) {
+      this.isTouched$.next(true);
+    }
   }
 
   private static getParsedValue<V>(serializedSet: Set<string>): V[] {

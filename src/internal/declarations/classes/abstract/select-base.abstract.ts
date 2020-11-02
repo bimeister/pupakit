@@ -25,6 +25,8 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
       return;
     }
     ngControl.valueAccessor = this;
+
+    this.selectStateService.setControlRef(ngControl);
   }
 
   protected processCloseEvent(event: Event): void {
