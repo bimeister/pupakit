@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 import { getUuid } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -16,6 +16,9 @@ const leafElementsCount: number = 1000;
 })
 export class SelectDemoComponent {
   public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
+  public readonly invalidFormControl: FormControl = new FormControl({ value: 1, disabled: false }, [
+    Validators.requiredTrue
+  ]);
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public readonly treeDataOrigin: FlatTreeItem[] = [

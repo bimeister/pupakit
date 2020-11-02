@@ -16,6 +16,9 @@ export abstract class SelectButtonBase<T> implements OnInit {
   public readonly isExpanded$: Observable<boolean> = this.selectStateService.isExpanded$;
   public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;
 
+  public readonly isTouched$: Observable<boolean> = this.selectStateService.isTouched$;
+  public readonly isValid$: Observable<boolean> = this.selectStateService.isValid$;
+
   constructor(private readonly selectStateService: SelectStateService<T>) {}
 
   public ngOnInit(): void {

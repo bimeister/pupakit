@@ -1,4 +1,6 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
+import { NgControl } from '@angular/forms';
+import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 import { OnChangeCallback } from '../types/on-change-callback.type';
@@ -14,6 +16,12 @@ export interface SelectStateService<T> {
   readonly dropdownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin>;
   readonly dropdownOverlayRef$: BehaviorSubject<OverlayRef>;
   readonly dropdownTriggerButtonWidthPx$: Observable<number>;
+
+  readonly control$: BehaviorSubject<Nullable<NgControl>>;
+  readonly isTouched$: BehaviorSubject<Nullable<boolean>>;
+  readonly isValid$: Observable<boolean>;
+
+  setControlRef(control: NgControl): void;
 
   collapse(): void;
   toggleExpansion(): void;

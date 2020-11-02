@@ -45,4 +45,16 @@
       ></pupa-select-tree>
     </pupa-select-dropdown>
   </pupa-select>
+
+  <pupa-select [formControl]="invalidFormControl">
+    <pupa-select-button> Invalid Select </pupa-select-button>
+
+    <pupa-select-dropdown>
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
 </div>

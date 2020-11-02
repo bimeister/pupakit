@@ -51,6 +51,10 @@ $width_icon: rems(1);
     }
   }
 
+  &_invalid:not([select-button_disabled]) {
+    border-color: color(error) !important;
+  }
+
   &__text {
     padding: 0 px(6) 0 0;
 
