@@ -68,6 +68,12 @@ export class InputDateComponent extends InputDateTimeBase {
       return;
     }
 
+    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const date: Date = this.getParsedDate(serializedValue);
 
     onChangeCallback(date);

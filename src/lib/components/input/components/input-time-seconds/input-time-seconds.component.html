@@ -61,11 +61,11 @@
 </div>
 
 <ng-template #staticIconsTemplate>
-  <ng-container *ngIf="isValid$ | async; else errorIconTemplate">
-    <pupa-icon name="md-time"></pupa-icon>
+  <ng-container *ngIf="(isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async); else defaultTemplate">
+    <pupa-icon class="error-icon" name="md-alert"></pupa-icon>
   </ng-container>
 </ng-template>
 
-<ng-template #errorIconTemplate>
-  <pupa-icon *ngIf="!(isDisabled$ | async)" name="md-alert"></pupa-icon>
+<ng-template #defaultTemplate>
+  <pupa-icon *ngIf="!(isDisabled$ | async)" name="ios-calendar"></pupa-icon>
 </ng-template>

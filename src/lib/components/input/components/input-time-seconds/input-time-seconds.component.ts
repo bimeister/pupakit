@@ -60,6 +60,12 @@ export class InputTimeSecondsComponent extends InputDateTimeBase {
       return;
     }
 
+    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const { hours, minutes, seconds }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(
       serializedValue
     );
