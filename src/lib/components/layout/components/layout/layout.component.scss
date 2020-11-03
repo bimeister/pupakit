@@ -39,7 +39,8 @@
     }
   }
   &.alerts {
-    z-index: 40;
+    /* @deprecated */
+    z-index: 1010;
     & .alerts-wrapper {
       display: flex;
       position: absolute;
@@ -56,6 +57,7 @@
   }
   &.tooltip {
     pointer-events: none;
-    z-index: 70;
+    /* @deprecated */
+    z-index: 1020;
   }
 }
