@@ -95,6 +95,12 @@ export class InputDateTimeSecondsComponent extends InputDateTimeBase {
       return;
     }
 
+    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const datePart: string = serializedValue.slice(0, SIZE_PLACEHOLDER_DATE);
     const timePart: string = serializedValue.slice(SIZE_PLACEHOLDER_DATE).trim();
 

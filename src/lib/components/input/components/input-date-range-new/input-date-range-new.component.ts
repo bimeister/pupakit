@@ -98,6 +98,12 @@ export class InputDateRangeNewComponent extends InputDateTimeBase {
       return;
     }
 
+    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const datePartFirst: string = serializedValue.slice(0, SIZE_PLACEHOLDER_DATE);
     const datePartSecond: string = serializedValue.slice(SIZE_PLACEHOLDER_DATE + 2).trim();
 
