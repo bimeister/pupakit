@@ -199,6 +199,10 @@ $height_month: px(24);
   user-select: none;
   border-radius: $height_year;
   z-index: 2;
+  min-width: auto;
+  outline-offset: unset;
+  padding: 0;
+
   @include transition(#{'background, color'});
   @include regular;
   @include flex-container(column, center, center, nowrap);
