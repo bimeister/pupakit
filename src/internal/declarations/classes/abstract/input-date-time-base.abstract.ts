@@ -44,6 +44,9 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
+  @Input() public readonly isTableMode: boolean = false;
+  public readonly isTableMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
 
@@ -247,6 +250,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsFixedSizeChange(changes?.isFixedSize);
+    this.processIsTableChange(changes?.isTableMode);
   }
 
   public setValue(value: ValueType): void {
@@ -280,5 +284,15 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     }
 
     this.isFixedSize$.next(updatedValue);
+  }
+
+  private processIsTableChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isTableMode$.next(updatedValue);
   }
 }

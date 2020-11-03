@@ -37,10 +37,18 @@ $width_date-range: px(220);
 
 .input {
   background-color: transparent;
+  z-index: 2;
 }
 
 .time-input-container {
   position: relative;
+
+  background-color: color(white);
+  border-radius: rems(0.5);
+
+  &.table {
+    background-color: transparent;
+  }
 
   &__icon {
     position: absolute;
@@ -73,12 +81,13 @@ $width_date-range: px(220);
     bottom: 0;
     padding-left: rems(0.5);
     border: px(1) solid transparent;
-    z-index: -1;
+    z-index: 0;
     line-height: 1;
     font-size: rems(1);
     padding: rems(0.5);
     color: color(grey-light);
     display: flex;
+    pointer-events: none;
 
     padding-left: rems(0.75);
 

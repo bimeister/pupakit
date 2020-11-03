@@ -104,7 +104,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   }
 
   private processNgControlStatusChangesForHandleIsTouched(): Subscription {
-    return this.ngControl.statusChanges
+    return this.ngControl?.statusChanges
       .pipe(
         startWith(this.ngControl.touched),
         map(() => this.ngControl.touched),

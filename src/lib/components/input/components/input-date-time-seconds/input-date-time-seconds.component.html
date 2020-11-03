@@ -1,44 +1,46 @@
 <div class="base-input-container date time-seconds" [class.fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
-      <div class="time-input-container__placeholder">
-        <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
-        <span class="right">{{ placeholderPreviewRight$ | async }}</span>
-      </div>
-      <!-- NOTE: ngModel is incorrect: use other mask instead -->
-      <input
-        class="input"
-        #inputElement
-        type="text"
-        placeholder=""
-        [mask]="'00.00.0000 00:00:00'"
-        [attr.disabled]="(isDisabled$ | async) ? true : null"
-        [ngClass]="{
-          input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
-          input__medium: size === 'medium',
-          input__small: size === 'small',
-          input__large: size === 'large',
-          input__transparent: transparent,
-          input__focused: (isFocused$ | async) || droppable.isOpened
-        }"
-        (input)="updateValue(inputElement.value)"
-        (focus)="emitFocusEvent($event)"
-        (blur)="emitBlurEvent($event)"
-        [autocomplete]="autocomplete ? 'on' : 'off'"
-        [value]="value$ | async"
-        [ngModel]="value$ | async"
-      />
-      <div
-        class="time-input-container__icon"
-        [class.focused]="(isFocused$ | async) || droppable.isOpened"
-        *ngIf="!(isDisabled$ | async)"
-        (mouseenter)="handleIconHover(true)"
-        (mouseleave)="handleIconHover(false)"
-        (click)="clearInputValue()"
-      >
-        <ng-container *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async); else staticIconsTemplate">
-          <pupa-icon name="md-close-circle"></pupa-icon>
-        </ng-container>
+      <div class="time-input-container" [class.table]="isTableMode$ | async">
+        <div class="time-input-container__placeholder">
+          <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
+          <span class="right">{{ placeholderPreviewRight$ | async }}</span>
+        </div>
+        <!-- NOTE: ngModel is incorrect: use other mask instead -->
+        <input
+          class="input"
+          #inputElement
+          type="text"
+          placeholder=""
+          [mask]="'00.00.0000 00:00:00'"
+          [attr.disabled]="(isDisabled$ | async) ? true : null"
+          [ngClass]="{
+            input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
+            input__medium: size === 'medium',
+            input__small: size === 'small',
+            input__large: size === 'large',
+            input__transparent: transparent,
+            input__focused: (isFocused$ | async) || droppable.isOpened
+          }"
+          (input)="updateValue(inputElement.value)"
+          (focus)="emitFocusEvent($event)"
+          (blur)="emitBlurEvent($event)"
+          [autocomplete]="autocomplete ? 'on' : 'off'"
+          [value]="value$ | async"
+          [ngModel]="value$ | async"
+        />
+        <div
+          class="time-input-container__icon"
+          [class.focused]="(isFocused$ | async) || droppable.isOpened"
+          *ngIf="!(isDisabled$ | async)"
+          (mouseenter)="handleIconHover(true)"
+          (mouseleave)="handleIconHover(false)"
+          (click)="clearInputValue()"
+        >
+          <ng-container *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async); else staticIconsTemplate">
+            <pupa-icon name="md-close-circle"></pupa-icon>
+          </ng-container>
+        </div>
       </div>
     </pupa-droppable-trigger>
     <pupa-droppable-native-content>

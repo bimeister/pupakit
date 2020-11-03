@@ -69,6 +69,7 @@ export class InputDateRangeNewComponent extends InputDateTimeBase {
 
   public writeValue(newValue: any): void {
     if (isEmpty(newValue)) {
+      this.setValue('');
       return;
     }
 

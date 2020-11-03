@@ -65,6 +65,11 @@ export class InputDateTimeComponent extends InputDateTimeBase {
   }
 
   public writeValue(newValue: ValueType): void {
+    if (isNil(newValue)) {
+      this.setValue('');
+      return;
+    }
+
     const serializedValue: string = String(newValue);
     const parsedValue: string = this.datePipe.transform(serializedValue, DATE_FORMAT);
 
