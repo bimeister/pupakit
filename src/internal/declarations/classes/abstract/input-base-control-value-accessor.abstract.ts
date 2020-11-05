@@ -1,9 +1,9 @@
 import { Directive, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { isNil, shareReplayWithRefCount, filterNotNil } from '@meistersoft/utilities';
 import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
-import { distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
+import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { BrowserService } from '../../../shared/services/browser.service';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
@@ -104,11 +104,17 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   }
 
   private processNgControlStatusChangesForHandleIsTouched(): Subscription {
-    return this.ngControl?.statusChanges
+    return this.control$
       .pipe(
-        startWith(this.ngControl.touched),
-        map(() => this.ngControl.touched),
-        tap((isTouched: boolean) => this.isTouched$.next(isTouched))
+        filterNotNil(),
+        switchMap((control: NgControl) =>
+          control.statusChanges.pipe(
+            delay(0),
+            startWith(this.ngControl.touched),
+            map(() => this.ngControl.touched),
+            tap((isTouched: boolean) => this.isTouched$.next(isTouched))
+          )
+        )
       )
       .subscribe();
   }

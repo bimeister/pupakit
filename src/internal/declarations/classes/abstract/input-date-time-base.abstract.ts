@@ -39,6 +39,8 @@ const MINUTES_END_POSITION: number = 5;
 const SECONDS_START_POSITION: number = 6;
 const SECONDS_END_POSITION: number = 8;
 
+const DEFAULT_ERROR_MESSAGE: string = 'Недопустимое значение';
+
 @Directive()
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @Input() public readonly isFixedSize: boolean = true;
@@ -46,6 +48,9 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
 
   @Input() public readonly isTableMode: boolean = false;
   public readonly isTableMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public errorTitle: string = DEFAULT_ERROR_MESSAGE;
+  public readonly errorTitle$: BehaviorSubject<string> = new BehaviorSubject(DEFAULT_ERROR_MESSAGE);
 
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
@@ -251,6 +256,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsFixedSizeChange(changes?.isFixedSize);
     this.processIsTableChange(changes?.isTableMode);
+    this.processErrorTitleChange(changes?.errorTitle);
   }
 
   public setValue(value: ValueType): void {
@@ -268,10 +274,13 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public clearInputValue(): void {
-    combineLatest([this.isIconHovered$, this.valueIsNotEmpty$])
+    combineLatest([this.isIconHovered$, this.valueIsNotEmpty$, this.isValid$])
       .pipe(
         take(1),
-        filter(([isIconHovered, valueIsNotEmpty]: [boolean, boolean]) => isIconHovered && valueIsNotEmpty)
+        filter(
+          ([isIconHovered, valueIsNotEmpty, isValid]: [boolean, boolean, boolean]) =>
+            isIconHovered && valueIsNotEmpty && isValid
+        )
       )
       .subscribe(() => this.updateValue(''));
   }
@@ -294,5 +303,15 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     }
 
     this.isTableMode$.next(updatedValue);
+  }
+
+  private processErrorTitleChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.errorTitle$.next(updatedValue);
   }
 }

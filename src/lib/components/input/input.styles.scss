@@ -94,6 +94,10 @@ $width_time: px(74);
     @include medium();
   }
 
+  &__focused:not([disabled]) {
+    border-color: color(active);
+  }
+
   &__invalid:not([disabled]) {
     border-color: color(error);
     &:focus {
@@ -111,10 +115,6 @@ $width_time: px(74);
     &.input__invalid {
       border: 1px solid color(error);
     }
-  }
-
-  &__focused:not([disabled]) {
-    border-color: color(active);
   }
 }
 
