@@ -1,7 +1,11 @@
 <div class="base-input-container date" [class.fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
     <pupa-droppable-trigger class="dropdown-trigger">
-      <div class="time-input-container" [class.table]="isTableMode$ | async">
+      <div
+        class="time-input-container"
+        [class.table-mode]="isTableMode$ | async"
+        (click)="handleContainerClick($event)"
+      >
         <div class="time-input-container__placeholder">
           <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
           <span class="right">{{ placeholderPreviewRight$ | async }}</span>
@@ -33,7 +37,7 @@
         <div
           class="time-input-container__icon"
           [class.focused]="(isFocused$ | async) || droppable.isOpened"
-          *ngIf="!(isDisabled$ | async)"
+          [class.disabled]="isDisabled$ | async"
           (mouseenter)="handleIconHover(true)"
           (mouseleave)="handleIconHover(false)"
           (click)="clearInputValue()"
@@ -64,11 +68,13 @@
 </div>
 
 <ng-template #staticIconsTemplate>
-  <ng-container *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async); else defaultTemplate">
+  <ng-container
+    *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async) && !(isDisabled$ | async); else defaultTemplate"
+  >
     <pupa-icon name="md-close-circle"></pupa-icon>
   </ng-container>
 </ng-template>
 
 <ng-template #defaultTemplate>
-  <pupa-icon *ngIf="!(isDisabled$ | async)" name="ios-calendar"></pupa-icon>
+  <pupa-icon name="ios-calendar"></pupa-icon>
 </ng-template>

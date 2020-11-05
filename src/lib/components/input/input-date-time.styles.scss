@@ -46,7 +46,7 @@ $width_date-range: px(220);
   background-color: color(white);
   border-radius: rems(0.5);
 
-  &.table {
+  &.table-mode {
     background-color: transparent;
   }
 
@@ -58,6 +58,10 @@ $width_date-range: px(220);
     transform: translateY(-50%);
     color: color(main);
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     @include transition(#{'opacity, color'});
 
     &.simple-time {
@@ -68,8 +72,12 @@ $width_date-range: px(220);
       color: color(active);
     }
 
-    &:hover {
+    &:hover:not(.disabled) {
       color: color(active);
+    }
+
+    &.disabled {
+      color: color(grey-apple);
     }
   }
 
@@ -102,6 +110,10 @@ $width_date-range: px(220);
       font-size: rems(1);
       line-height: 1;
       white-space: break-spaces;
+    }
+
+    &.disabled {
+      color: color(grey-apple);
     }
   }
 }
