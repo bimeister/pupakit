@@ -61,7 +61,7 @@ $width_icon: rems(1);
     }
   }
 
-  &_invalid:not([select-button_disabled]) {
+  &_invalid:not(.select-button_disabled) {
     border-color: color(error) !important;
   }
 
