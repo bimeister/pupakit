@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Directive, HostListener, Input, OnChanges, Optional } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { filterNotNil, isEmpty, isNil } from '@meistersoft/utilities';
+import { filterNotNil, filterTruthy, isEmpty, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { InputDateTimeStateService } from '../../../../lib/components/input/services/input-date-time-state.service';
@@ -105,6 +105,17 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @HostListener('window:touchstart')
   public processWindowClick(): void {
     this.isFocused$.next(false);
+  }
+
+  @HostListener('window:mousemove')
+  @HostListener('window:touchstart')
+  @HostListener('window:touchmove')
+  public processWindowMouseMove(): void {
+    this.isIconHovered$.next(false);
+  }
+
+  public handleContainerClick(event: Event): void {
+    this.isDisabled$.pipe(take(1), filterTruthy()).subscribe(() => event.stopPropagation());
   }
 
   public selectHours(hours: number): void {
