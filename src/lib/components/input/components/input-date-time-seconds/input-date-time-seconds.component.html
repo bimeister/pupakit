@@ -39,6 +39,7 @@
           [class.disabled]="isDisabled$ | async"
           (mouseenter)="handleIconHover(true)"
           (mouseleave)="handleIconHover(false)"
+          (mousemove)="$event.stopPropagation()"
           (click)="clearInputValue()"
         >
           <ng-container
