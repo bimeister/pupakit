@@ -71,6 +71,7 @@ export {
   ModalConfig,
   Position,
   IconDefinition,
+  SelectOption,
   UploadingStatus
 } from './internal/api';
 
