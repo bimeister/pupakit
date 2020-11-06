@@ -4,11 +4,11 @@
 
 $padding_days-area-container: 0 rems(1) rems(0.5) rems(1);
 $padding_days-area: 0 rems(1);
-$margin_days-line: 0 0 rems(0.5) 0;
+$margin_days-line: 0 0 px(6) 0;
 $width_days-line-item: calc(100% / 7);
 $font-size_days-line-item: rems(0.75);
 $font-weight_days-line-item: 600;
-$height_date: rems(1.3125);
+$height_date: px(24);
 $box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
 
 $width_year: calc(100% / 5);
@@ -93,92 +93,141 @@ $height_month: px(24);
   @include flex-container(column, center, center, nowrap);
 }
 
+.date-wrapper {
+  position: relative;
+  cursor: pointer;
+  background-color: transparent;
+
+  width: $width_days-line-item;
+  height: $height_date;
+
+  margin-bottom: px(6);
+
+  padding: 0;
+
+  user-select: none;
+  @include regular;
+  @include flex-container(column, center, center, nowrap);
+
+  &__range {
+    background-color: color(light);
+  }
+
+  &:nth-child(7n) {
+    border-top-right-radius: $height_date;
+    border-bottom-right-radius: $height_date;
+
+    .date__range-start {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &:nth-child(7n + 1) {
+    border-top-left-radius: $height_date;
+    border-bottom-left-radius: $height_date;
+
+    .date__range-end {
+      &::before {
+        display: none;
+      }
+    }
+  }
+
+  &__first {
+    &.date-wrapper__range {
+      border-bottom-left-radius: $height_date;
+      border-top-left-radius: $height_date;
+    }
+  }
+
+  &__last {
+    &.date-wrapper__range {
+      border-bottom-right-radius: $height_date;
+      border-top-right-radius: $height_date;
+    }
+  }
+
+  &__disabled {
+    pointer-events: none;
+    .date__range-start,
+    .date__range-end {
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
 .date {
   position: relative;
-  appearance: none;
-  outline: none;
-  cursor: pointer;
-  border: none;
-  background: none;
+
   width: $height_date;
   height: $height_date;
-  margin: 0 calc((#{$width_days-line-item} - #{$height_date}) / 2) rems(0.5);
-  padding: 0;
+
+  @include flex-container(column, center, center, nowrap);
+
+  &__range-start {
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+      background-color: color(light);
+      border-bottom-left-radius: $height_date;
+      border-top-left-radius: $height_date;
+      z-index: 0;
+    }
+  }
+
+  &__range-end {
+    &::before {
+      position: absolute;
+      content: '';
+      top: 0;
+      right: 0;
+      width: 200%;
+      height: 100%;
+      background-color: color(light);
+      border-bottom-right-radius: $height_date;
+      border-top-right-radius: $height_date;
+      z-index: 0;
+    }
+  }
+}
+
+.date-inner {
   font-size: $font-size_days-line-item;
   color: color(text);
   line-height: rems(1);
   font-weight: normal;
-  user-select: none;
-  border-radius: rems(0.25);
-  z-index: 2;
-  @include regular;
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  @include transition(#{'color, background-color'});
+
   @include flex-container(column, center, center, nowrap);
 
-  &_previous-month {
+  z-index: 2;
+
+  &__selected {
+    background-color: color(active);
+    color: color(white);
+  }
+
+  &__disabled {
     color: color(grey-apple);
     pointer-events: none;
   }
 
-  &_hovered:not(.date_previous-month) {
-    border-radius: rems(0.25);
-    background: color(light);
-
-    &::before {
-      top: 0;
-      left: 0;
-      background: inherit;
-      position: absolute;
-      content: '';
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      border-radius: rems(0.25);
-      pointer-events: none;
-    }
-  }
-
-  &_in-range:not(.date_previous-month) {
-    background: color(light);
-
-    &::before {
-      top: 0;
-      left: -50%;
-      background: inherit;
-      position: absolute;
-      content: '';
-      width: 200%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-    }
-  }
-
-  &_selected:not(.date_previous-month) {
-    color: color(white);
-    background: color(active);
-    z-index: 3;
-
-    &::before {
-      left: 0;
-      width: 100%;
-      border-radius: rems(0.25);
-    }
-  }
-}
-
-.date:nth-child(7n).date_in-range {
-  &::before {
-    right: -10%;
-    width: 160%;
-    border-radius: rems(0.25);
-  }
-}
-
-.date:nth-child(7n + 1).date_in-range {
-  &::before {
-    left: -10%;
-    width: 160%;
-    border-radius: rems(0.25);
+  &:hover:not(.date-inner__selected) {
+    background-color: color(light);
+    color: color(text);
   }
 }
 

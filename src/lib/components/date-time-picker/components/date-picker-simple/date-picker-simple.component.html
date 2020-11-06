@@ -18,7 +18,7 @@
       [ngTemplateOutlet]="dateButton"
       [ngTemplateOutletContext]="{
         dateOrigin: primarySectionLeftOffsetDates$ | async,
-        isPreviousMonth: true
+        disabled: true
       }"
     ></ng-container>
 
@@ -26,7 +26,7 @@
       [ngTemplateOutlet]="dateButton"
       [ngTemplateOutletContext]="{
         dateOrigin: primarySectionDates$ | async,
-        isPreviousMonth: false
+        disabled: false
       }"
     ></ng-container>
 
@@ -34,7 +34,7 @@
       [ngTemplateOutlet]="dateButton"
       [ngTemplateOutletContext]="{
         dateOrigin: primarySectionRightOffsetDates$ | async,
-        isPreviousMonth: true
+        disabled: true
       }"
     ></ng-container>
   </div>
@@ -57,26 +57,39 @@
   </div>
 </ng-template>
 
-<ng-template #dateButton let-dateOrigin="dateOrigin" let-isPreviousMonth="isPreviousMonth">
-  <button
-    class="date"
-    [ngClass]="{
-      'date_previous-month': isPreviousMonth,
-      date_hovered: isSameDate(date, hoveredDate$ | async),
-      'date_in-range':
-        !(isSelectionModeDate$ | async) &&
-        (dateIsInDateRange(date, selectedRange$ | async) || dateIsInDateRange(date, hoveredRange$ | async)),
-      date_selected:
-        (isSelectionModeDate$ | async)
-          ? isSameDate(date, selectedDate$ | async)
-          : dateIsInDateArray(date, selectedRange$ | async)
-    }"
-    (mouseover)="processDateHover(date)"
-    (click)="processDateSelection(date)"
-    *ngFor="let date of dateOrigin"
+<ng-template #dateButton let-dateOrigin="dateOrigin" let-disabled="disabled">
+  <div
+    class="date-wrapper"
+    *ngFor="let date of dateOrigin; index as index; last as last; first as first"
+    [class.date-wrapper__disabled]="disabled"
+    [class.date-wrapper__range]="
+      !disabled &&
+      !(isSelectionModeDate$ | async) &&
+      (dateIsInDateRange(date, selectedRange$ | async) || dateIsInDateRange(date, hoveredRange$ | async))
+    "
+    [class.date-wrapper__first]="!disabled && first"
+    [class.date-wrapper__last]="!disabled && last"
   >
-    {{ date | date: 'd' }}
-  </button>
+    <div
+      class="date"
+      [class.date__range-start]="dateIsRangeStartDate(date, hoveredRange$ | async)"
+      [class.date__range-end]="dateIsRangeEndDate(date, hoveredRange$ | async)"
+      (mouseover)="processDateHover(date)"
+      (click)="processDateSelection(date)"
+    >
+      <div
+        class="date-inner"
+        [class.date-inner__selected]="
+          (isSelectionModeDate$ | async)
+            ? isSameDate(date, selectedDate$ | async)
+            : dateIsInDateArray(date, selectedRange$ | async)
+        "
+        [class.date-inner__disabled]="disabled"
+      >
+        {{ date | date: 'd' }}
+      </div>
+    </div>
+  </div>
 </ng-template>
 
 <ng-template #headerDatesTemplate>

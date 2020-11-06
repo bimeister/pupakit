@@ -360,7 +360,7 @@ export class DatePickerSimpleComponent implements OnChanges {
   }
 
   public dateIsRangeEndDate(date: Date, dateRange: Date[]): boolean {
-    return this.datePickerStateService.dateIsRangeStartDate(date, dateRange);
+    return this.datePickerStateService.dateIsRangeEndDate(date, dateRange);
   }
 
   private processBaseDateChange(change: ComponentChange<this, Date>): void {
