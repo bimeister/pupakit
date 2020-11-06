@@ -120,12 +120,26 @@ export class DatePickerStateService {
     if (isNil(date) || !Array.isArray(dateRange) || Object.is(dateRange.length, 0)) {
       return false;
     }
+    const uniqueRangeItemsMs: Set<number> = new Set<number>(
+      dateRange.filter((rangeItem: Date) => !isNil(rangeItem)).map((rangeItem: Date) => rangeItem.valueOf())
+    );
+    const rangeIsInvalid: boolean = !Object.is(uniqueRangeItemsMs.size, VALID_RANGE_SIZE);
+    if (rangeIsInvalid) {
+      return false;
+    }
     const rangeStartDate: Date = getRangeStartDate(dateRange);
     return this.isSameDate(rangeStartDate, date);
   }
 
   public dateIsRangeEndDate(date: Date, dateRange: Date[]): boolean {
     if (isNil(date) || !Array.isArray(dateRange) || Object.is(dateRange.length, 0)) {
+      return false;
+    }
+    const uniqueRangeItemsMs: Set<number> = new Set<number>(
+      dateRange.filter((rangeItem: Date) => !isNil(rangeItem)).map((rangeItem: Date) => rangeItem.valueOf())
+    );
+    const rangeIsInvalid: boolean = !Object.is(uniqueRangeItemsMs.size, VALID_RANGE_SIZE);
+    if (rangeIsInvalid) {
       return false;
     }
     const rangeEndDate: Date = getRangeEndDate(dateRange);
