@@ -1,9 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { Directive, HostListener, Input, OnChanges, Optional } from '@angular/core';
+import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
 import { InputDateTimeStateService } from '../../../../lib/components/input/services/input-date-time-state.service';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
 import { TimeFormatPipe } from '../../../pipes/time-format.pipe';
@@ -43,6 +44,8 @@ const DEFAULT_ERROR_MESSAGE: string = 'Недопустимое значение
 
 @Directive()
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
+  @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
+
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -115,7 +118,20 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public handleContainerClick(event: Event): void {
-    this.isDisabled$.pipe(take(1), filterTruthy()).subscribe(() => event.stopPropagation());
+    this.isDisabled$
+      .pipe(
+        take(1),
+        map((isDisabled: boolean) => isDisabled || this.droppableComponent.isOpened),
+        filterTruthy()
+      )
+      .subscribe(() => event.stopPropagation());
+  }
+
+  public handleContainerStartEvents(event: Event): void {
+    if (!this.droppableComponent.isOpened) {
+      return;
+    }
+    event.stopPropagation();
   }
 
   public selectHours(hours: number): void {

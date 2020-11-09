@@ -55,7 +55,7 @@ export class InputTimeSecondsComponent extends InputDateTimeBase {
     const serializedValue: string = String(value);
 
     if (isEmpty(serializedValue)) {
-      onChangeCallback(new Date(undefined));
+      onChangeCallback(null);
       this.setValue('');
       return;
     }

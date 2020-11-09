@@ -5,6 +5,7 @@
         class="time-input-container"
         [class.table-mode]="isTableMode$ | async"
         (click)="handleContainerClick($event)"
+        (mousedown)="handleContainerStartEvents($event)"
       >
         <div class="time-input-container__placeholder" [class.disabled]="isDisabled$ | async">
           <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
