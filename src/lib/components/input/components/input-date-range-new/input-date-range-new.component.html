@@ -57,6 +57,8 @@
         *ngIf="droppable.isOpened"
         [selectedRange]="range$ | async"
         [selectionMode]="'range'"
+        [isBackDating]="isBackDating$ | async"
+        [availableEndDate]="availableEndDate$ | async"
         (click)="handleFocusEvent($event)"
         (range)="selectRange($event)"
         [previewMode]="'simple'"

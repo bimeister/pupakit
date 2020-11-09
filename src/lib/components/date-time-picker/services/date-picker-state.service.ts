@@ -6,18 +6,25 @@ import { DatePickerPreviewMode } from '../../../../internal/declarations/types/d
 import { DatePickerSelectionMode } from '../../../../internal/declarations/types/date-picker-selection-mode.type';
 import { getRangeEndDate } from '../../../../internal/helpers/get-range-end-date.helper';
 import { getRangeStartDate } from '../../../../internal/helpers/get-range-start-date.helper';
+import { dateClearTime } from '../../../../internal/helpers/date-clear-time.helper';
 
 const WEEK_DAY_NAMES: string[] = ['ПН', 'ВТ', 'СР', 'ЧТ', 'ПТ', 'СБ', 'ВС'];
 const INVALID_RANGE_SIZE: number = 2;
 const VALID_RANGE_SIZE: number = 2;
 
+const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
+
 @Injectable({ providedIn: 'any' })
 export class DatePickerStateService {
   public readonly weekDayNames: string[] = WEEK_DAY_NAMES;
+  public readonly currentDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
 
   public readonly hours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   public readonly minutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   public readonly seconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+
+  public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
   public readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = new BehaviorSubject<
     DatePickerSelectionMode
@@ -144,5 +151,9 @@ export class DatePickerStateService {
     }
     const rangeEndDate: Date = getRangeEndDate(dateRange);
     return this.isSameDate(rangeEndDate, date);
+  }
+
+  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date | number): boolean {
+    return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
   }
 }

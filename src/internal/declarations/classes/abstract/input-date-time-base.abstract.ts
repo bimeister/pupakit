@@ -3,7 +3,7 @@ import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '
 import { NgControl } from '@angular/forms';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
 import { InputDateTimeStateService } from '../../../../lib/components/input/services/input-date-time-state.service';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
@@ -14,8 +14,10 @@ import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { ParsedDateData } from '../../interfaces/parsed-date-data.interface';
 import { ValueType } from '../../types/input-value.type';
 import { InputBase } from './input-base.abstract';
+import { dateClearTime } from '../../../helpers/date-clear-time.helper';
 
 const DEFAULT_DATE: Date = new Date();
+const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(DEFAULT_DATE);
 const DATE_FORMAT: string = 'dd.MM.yyyy';
 
 const MAX_HOURS: number = 23;
@@ -55,6 +57,12 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public errorTitle: string = DEFAULT_ERROR_MESSAGE;
   public readonly errorTitle$: BehaviorSubject<string> = new BehaviorSubject(DEFAULT_ERROR_MESSAGE);
 
+  @Input() public readonly isBackDating: boolean = true;
+  public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+  @Input() public readonly availableEndDate: Date | number = Infinity;
+  public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
+
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
 
@@ -91,7 +99,13 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     distinctUntilChanged(),
     filter((value: string) => value.length >= SIZE_PLACEHOLDER_DATE),
     map((value: string) => value.slice(0, SIZE_PLACEHOLDER_DATE)),
-    map((value: string) => this.getParsedDate(value))
+    map((value: string) => this.getParsedDate(value)),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    filter(
+      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+    ),
+    map(([date, _]: [Date, [boolean, Date]]) => date)
   );
 
   constructor(
@@ -284,6 +298,8 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.processIsFixedSizeChange(changes?.isFixedSize);
     this.processIsTableChange(changes?.isTableMode);
     this.processErrorTitleChange(changes?.errorTitle);
+    this.processIsBackDatingChange(changes?.isBackDating);
+    this.processAvailableEndDateChange(changes?.availableEndDate);
   }
 
   public setValue(value: ValueType): void {
@@ -310,6 +326,10 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
         )
       )
       .subscribe(() => this.updateValue(''));
+  }
+
+  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date): boolean {
+    return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
   }
 
   private processIsFixedSizeChange(change: ComponentChange<this, boolean>): void {
@@ -340,5 +360,23 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     }
 
     this.errorTitle$.next(updatedValue);
+  }
+
+  private processIsBackDatingChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.isBackDating$.next(updatedValue);
+  }
+
+  private processAvailableEndDateChange(change: ComponentChange<this, Date | number>): void {
+    const updatedValue: Date | number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.availableEndDate$.next(updatedValue);
   }
 }

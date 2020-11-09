@@ -2,7 +2,7 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { filterNotNil, isEmpty, isNil } from '@meistersoft/utilities';
 import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom, filter } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
@@ -34,7 +34,13 @@ export class InputDateRangeNewComponent extends InputDateTimeBase {
       }
       const value: string = inputValue.slice(0, SIZE_PLACEHOLDER_DATE);
       return this.getParsedDate(value);
-    })
+    }),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    filter(
+      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+    ),
+    map(([date, _]: [Date, [boolean, Date]]) => date)
   );
 
   public readonly dateRangeSecond$: Observable<Date> = this.value$.pipe(
@@ -47,7 +53,13 @@ export class InputDateRangeNewComponent extends InputDateTimeBase {
       const value: string = inputValue.slice(-SIZE_PLACEHOLDER_DATE);
 
       return this.getParsedDate(value);
-    })
+    }),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    filter(
+      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+    ),
+    map(([date, _]: [Date, [boolean, Date]]) => date)
   );
 
   public readonly range$: Observable<[Date, Date]> = combineLatest([this.dateRangeFirst$, this.dateRangeSecond$]);

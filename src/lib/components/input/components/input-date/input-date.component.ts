@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { filterNotNil, isEmpty, isNil } from '@meistersoft/utilities';
-import { Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, map, withLatestFrom } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
@@ -29,7 +29,13 @@ export class InputDateComponent extends InputDateTimeBase {
     distinctUntilChanged(),
     map((value: string) => {
       return this.getParsedDate(value);
-    })
+    }),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    filter(
+      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+    ),
+    map(([date, _]: [Date, [boolean, Date]]) => date)
   );
 
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;

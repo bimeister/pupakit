@@ -10,6 +10,15 @@
   <div class="column">
     <h2>New Design</h2>
 
+    <div class="switcher">
+      <pupa-switcher [formControl]="useIsBackDatingControl" [id]="'formControl'"></pupa-switcher>
+      <label class="switcher__label" for="formControl">use back dating</label>
+    </div>
+    <div class="switcher">
+      <pupa-switcher [formControl]="useAvailableEndDateControl" [id]="'formControl'"></pupa-switcher>
+      <label class="switcher__label" for="formControl">use available end date</label>
+    </div>
+
     <h3>New Time Picker</h3>
     <h5>Simple Input</h5>
     <pupa-input-time [formControl]="timeFormControl"></pupa-input-time>
@@ -19,15 +28,35 @@
     <pupa-time-picker [withSeconds]="true"></pupa-time-picker>
     <h3>New Date Picker</h3>
     <h5>Simple</h5>
-    <pupa-input-date [formControl]="dateFormControl"></pupa-input-date>
+    <pupa-input-date
+      [formControl]="dateFormControl"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-input-date>
     <h5>Simple With Time</h5>
-    <pupa-input-date-time [formControl]="dateTimeFormControl"></pupa-input-date-time>
+    <pupa-input-date-time
+      [formControl]="dateTimeFormControl"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-input-date-time>
     <h5>Simple With Time And Seconds</h5>
-    <pupa-input-date-time-seconds [formControl]="dateTimeSecondsFormControl"></pupa-input-date-time-seconds>
+    <pupa-input-date-time-seconds
+      [formControl]="dateTimeSecondsFormControl"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-input-date-time-seconds>
     <h5>Simple Range</h5>
-    <pupa-input-date-range-new [formControl]="rangeFormControl"></pupa-input-date-range-new>
+    <pupa-input-date-range-new
+      [formControl]="rangeFormControl"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-input-date-range-new>
     <h5>Simple Range Double</h5>
-    <pupa-input-date-range-double [formControl]="rangeDoubleFormControl"></pupa-input-date-range-double>
+    <pupa-input-date-range-double
+      [formControl]="rangeDoubleFormControl"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-input-date-range-double>
     <h5>Simple Preview</h5>
     <pupa-date-picker [previewMode]="'simple'"></pupa-date-picker>
     <h5>Simple With Time And Seconds</h5>
@@ -36,5 +65,19 @@
     <pupa-date-picker [previewMode]="'simple-time'"></pupa-date-picker>
     <h5>Double</h5>
     <pupa-date-picker [previewMode]="'double'"></pupa-date-picker>
+    <h5>Validation</h5>
+    <p>Back Dating is not available</p>
+    <pupa-date-picker [previewMode]="'simple'" [isBackDating]="useIsBackDatingControl.value"></pupa-date-picker>
+    <p>Available End Date (5 days after current)</p>
+    <pupa-date-picker
+      [previewMode]="'simple'"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-date-picker>
+    <p>Back Dating is not available and Available End Date</p>
+    <pupa-date-picker
+      [previewMode]="'simple'"
+      [isBackDating]="useIsBackDatingControl.value"
+      [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+    ></pupa-date-picker>
   </div>
 </div>
