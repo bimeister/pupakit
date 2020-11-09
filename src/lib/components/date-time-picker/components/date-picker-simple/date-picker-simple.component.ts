@@ -81,6 +81,9 @@ export class DatePickerSimpleComponent implements OnChanges {
   public readonly hoveredDate$: BehaviorSubject<Date> = this.datePickerStateService.hoveredDate$;
   public readonly hoveredRange$: Observable<Date[]> = this.datePickerStateService.hoveredRange$;
 
+  public readonly isBackDating$: BehaviorSubject<boolean> = this.datePickerStateService.isBackDating$;
+  public readonly availableEndDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableEndDate$;
+
   public readonly primarySectionStartDate$: Observable<Date> = this.baseDate$.pipe(
     distinctUntilChanged(),
     filter((baseDate: Date) => isDate(baseDate)),
@@ -361,6 +364,10 @@ export class DatePickerSimpleComponent implements OnChanges {
 
   public dateIsRangeEndDate(date: Date, dateRange: Date[]): boolean {
     return this.datePickerStateService.dateIsRangeEndDate(date, dateRange);
+  }
+
+  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date | number): boolean {
+    return this.datePickerStateService.dateIsNotAvailable(date, isBackDating, availableEndDate);
   }
 
   private processBaseDateChange(change: ComponentChange<this, Date>): void {

@@ -57,6 +57,8 @@
         *ngIf="droppable.isOpened"
         [selectedDate]="date$ | async"
         [selectionMode]="'date'"
+        [isBackDating]="isBackDating$ | async"
+        [availableEndDate]="availableEndDate$ | async"
         [hours]="hours$ | async"
         [minutes]="minutes$ | async"
         (selectedHours)="selectDateTimeHours($event)"

@@ -59,6 +59,12 @@ export class DatePickerComponent implements OnDestroy {
   @Input() public readonly seconds: number = null;
   public readonly seconds$: BehaviorSubject<number> = this.datePickerStateService.seconds$;
 
+  @Input() public readonly isBackDating: boolean = true;
+  public readonly isBackDating$: BehaviorSubject<boolean> = this.datePickerStateService.isBackDating$;
+
+  @Input() public readonly availableEndDate: Date | number = Infinity;
+  public readonly availableEndDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableEndDate$;
+
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();
 
@@ -83,6 +89,8 @@ export class DatePickerComponent implements OnDestroy {
     this.processHoursChange(changes?.hours);
     this.processMinutesChange(changes?.minutes);
     this.processSecondsChange(changes?.seconds);
+    this.processIsBackDatingChange(changes?.isBackDating);
+    this.processAvailableEndDateChange(changes?.availableEndDate);
   }
 
   public ngOnDestroy(): void {
@@ -170,6 +178,24 @@ export class DatePickerComponent implements OnDestroy {
       return;
     }
     this.seconds$.next(updatedValue);
+  }
+
+  private processIsBackDatingChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.isBackDating$.next(updatedValue);
+  }
+
+  private processAvailableEndDateChange(change: ComponentChange<this, Date | number>): void {
+    const updatedValue: Date | number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.availableEndDate$.next(updatedValue);
   }
 
   private processSelectedDateChange(change: ComponentChange<this, Date>): void {
