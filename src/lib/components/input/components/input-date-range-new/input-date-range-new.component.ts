@@ -122,6 +122,12 @@ export class InputDateRangeNewComponent extends InputDateTimeBase {
     const dateFirst: Date = this.getParsedDate(datePartFirst);
     const dateSecond: Date = this.getParsedDate(datePartSecond);
 
+    if (isNil(dateFirst) || isNil(dateSecond)) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const range: [Date, Date] = dateFirst < dateSecond ? [dateFirst, dateSecond] : [dateSecond, dateFirst];
 
     onChangeCallback(range);

@@ -106,10 +106,26 @@ export class InputDateTimeSecondsComponent extends InputDateTimeBase {
 
     const date: Date = this.getParsedDate(datePart);
 
+    if (isNil(date)) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
+
     const { hours, minutes, seconds }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(timePart);
     const parsedHours: number = Number(hours);
     const parsedMinutes: number = Number(minutes);
     const parsedSeconds: number = Number(seconds);
+
+    const isCorrectHours: boolean = parsedHours >= 0 && parsedHours <= MAX_HOURS;
+    const isCorrectMinutes: boolean = parsedMinutes >= 0 && parsedMinutes <= MAX_MINUTES;
+    const isCorrectSeconds: boolean = parsedSeconds >= 0 && parsedSeconds <= MAX_SECONDS;
+
+    if (!isCorrectHours || !isCorrectMinutes || !isCorrectSeconds) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
 
     date.setHours(parsedHours);
     date.setMinutes(parsedMinutes);

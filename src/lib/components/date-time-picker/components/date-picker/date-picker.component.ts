@@ -215,6 +215,12 @@ export class DatePickerComponent implements OnDestroy {
   private processSelectedRangeChange(change: ComponentChange<this, Date[]>): void {
     const updatedValue: Date[] | undefined = change?.currentValue;
 
+    const isNullValues: boolean = updatedValue?.every((value: Date) => isNil(value));
+    if (isNullValues) {
+      this.selectedRange$.next([]);
+      return;
+    }
+
     const parsedArray: Date[] = String(updatedValue)
       .split(',')
       .map((arrayItem: string) => new Date(Date.parse(arrayItem)))
@@ -222,6 +228,7 @@ export class DatePickerComponent implements OnDestroy {
     if (!Array.isArray(parsedArray)) {
       return;
     }
+
     const sanitizedRange: Date[] = parsedArray
       .filter((rangeDate: Date) => isDate(rangeDate))
       .map((rangeDate: Date) => dateClearTime(rangeDate));

@@ -97,7 +97,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   public readonly date$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
     distinctUntilChanged(),
-    filter((value: string) => value.length >= SIZE_PLACEHOLDER_DATE),
+    filter((value: string) => isEmpty(value) || value.length >= SIZE_PLACEHOLDER_DATE),
     map((value: string) => value.slice(0, SIZE_PLACEHOLDER_DATE)),
     map((value: string) => this.getParsedDate(value)),
     withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
