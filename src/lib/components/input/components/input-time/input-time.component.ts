@@ -15,6 +15,9 @@ const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
 
 const DATE_FORMAT: string = 'HH:mm';
 
+const MAX_HOURS: number = 23;
+const MAX_MINUTES: number = 59;
+
 @Component({
   selector: 'pupa-input-time',
   templateUrl: './input-time.component.html',
@@ -69,6 +72,15 @@ export class InputTimeComponent extends InputDateTimeBase {
     const { hours, minutes }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(serializedValue);
     const parsedHours: number = Number(hours);
     const parsedMinutes: number = Number(minutes);
+
+    const isCorrectHours: boolean = parsedHours >= 0 && parsedHours <= MAX_HOURS;
+    const isCorrectMinutes: boolean = parsedMinutes >= 0 && parsedMinutes <= MAX_MINUTES;
+
+    if (!isCorrectHours || !isCorrectMinutes) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
 
     const date: Date = new Date();
 

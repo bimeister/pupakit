@@ -25,7 +25,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
 export class InputDateComponent extends InputDateTimeBase {
   public readonly date$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
-    filter((value: string) => value.length === MAX_LENGTH_INPUT_VALUE),
+    filter((value: string) => isEmpty(value) || value.length === MAX_LENGTH_INPUT_VALUE),
     distinctUntilChanged(),
     map((value: string) => {
       return this.getParsedDate(value);
@@ -81,6 +81,11 @@ export class InputDateComponent extends InputDateTimeBase {
     }
 
     const date: Date = this.getParsedDate(serializedValue);
+    if (isNil(date)) {
+      onChangeCallback(new Date(undefined));
+      this.setValue(serializedValue);
+      return;
+    }
 
     onChangeCallback(date);
     this.setValue(serializedValue);
