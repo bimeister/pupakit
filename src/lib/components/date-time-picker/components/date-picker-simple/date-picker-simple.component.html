@@ -74,8 +74,12 @@
   >
     <div
       class="date"
-      [class.date__range-start]="dateIsRangeStartDate(date, hoveredRange$ | async)"
-      [class.date__range-end]="dateIsRangeEndDate(date, hoveredRange$ | async)"
+      [class.date__range-start]="
+        dateIsRangeStartDate(date, hoveredRange$ | async) || dateIsRangeStartDate(date, selectedRange$ | async)
+      "
+      [class.date__range-end]="
+        dateIsRangeEndDate(date, hoveredRange$ | async) || dateIsRangeEndDate(date, selectedRange$ | async)
+      "
       (mouseover)="processDateHover(date)"
       (click)="processDateSelection(date)"
     >
