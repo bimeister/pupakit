@@ -156,4 +156,12 @@ export class DatePickerStateService {
   public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date | number): boolean {
     return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
   }
+
+  public isDateStartInHoveredAndSelectedRange(date: Date, hoveredRange: Date[], selectedRange: Date[]): boolean {
+    return this.dateIsRangeStartDate(date, hoveredRange) || this.dateIsRangeStartDate(date, selectedRange);
+  }
+
+  public isDateEndInHoveredAndSelectedRange(date: Date, hoveredRange: Date[], selectedRange: Date[]): boolean {
+    return this.dateIsRangeEndDate(date, hoveredRange) || this.dateIsRangeEndDate(date, selectedRange);
+  }
 }
