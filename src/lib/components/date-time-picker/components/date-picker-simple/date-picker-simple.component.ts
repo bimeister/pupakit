@@ -370,6 +370,14 @@ export class DatePickerSimpleComponent implements OnChanges {
     return this.datePickerStateService.dateIsNotAvailable(date, isBackDating, availableEndDate);
   }
 
+  public isDateStartInHoveredAndSelectedRange(date: Date, hoveredRange: Date[], selectedRange: Date[]): boolean {
+    return this.datePickerStateService.isDateStartInHoveredAndSelectedRange(date, hoveredRange, selectedRange);
+  }
+
+  public isDateEndInHoveredAndSelectedRange(date: Date, hoveredRange: Date[], selectedRange: Date[]): boolean {
+    return this.datePickerStateService.isDateEndInHoveredAndSelectedRange(date, hoveredRange, selectedRange);
+  }
+
   private processBaseDateChange(change: ComponentChange<this, Date>): void {
     const updatedValue: Date | undefined = change?.currentValue;
 
