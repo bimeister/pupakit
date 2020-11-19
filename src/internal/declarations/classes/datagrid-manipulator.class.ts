@@ -92,7 +92,8 @@ export class DatagridManipulator<rowDataT> {
 
     const visibleColIds: string[] = DatagridManipulator.getVisibleColumnsIds(settings);
 
-    const invisibleColIds: string[] = this.config.gridOptions.columnDefs
+    const invisibleColIds: string[] = this.columnApi
+      .getColumnState()
       .filter((columnDef: ColDef) => !visibleColIds.includes(columnDef.colId))
       .map((columnDef: ColDef) => columnDef.colId);
 

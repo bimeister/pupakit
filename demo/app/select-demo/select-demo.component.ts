@@ -3,7 +3,6 @@ import { FormControl, Validators } from '@angular/forms';
 import { getUuid } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 
 const leafElementsCount: number = 1000;
@@ -15,6 +14,8 @@ const leafElementsCount: number = 1000;
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectDemoComponent {
+  public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });
+
   public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
   public readonly invalidFormControl: FormControl = new FormControl({ value: 1, disabled: false }, [
     Validators.requiredTrue
@@ -125,6 +126,7 @@ export class SelectDemoComponent {
   constructor() {
     /* tslint:disable */
     this.formControl.valueChanges.subscribe(console.log);
+    this.chipsFormControl.valueChanges.subscribe(console.log);
     /* tslint:enable */
   }
 
@@ -137,5 +139,10 @@ export class SelectDemoComponent {
   public log(...data: any[]): void {
     // tslint:disable-next-line: no-console
     console.log(...data);
+  }
+
+  public onClose(itemForClose: string): void {
+    const selected: string[] = this.chipsFormControl.value.filter((item: string) => item !== itemForClose);
+    this.chipsFormControl.setValue(selected);
   }
 }

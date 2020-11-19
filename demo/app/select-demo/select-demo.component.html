@@ -2,6 +2,24 @@
 <div class="container">
   <textarea class="placeholder"></textarea>
 
+  <pupa-select [isMultiSelectionEnabled]="true" [formControl]="chipsFormControl">
+    <pupa-select-button>
+      <pupa-select-button-item *ngFor="let chip of chipsFormControl.value" (closeClick)="onClose(chip)">{{
+        chip
+      }}</pupa-select-button-item>
+    </pupa-select-button>
+
+    <pupa-select-dropdown>
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          >aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</pupa-select-item
+        >
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
   <pupa-select [formControl]="formControl">
     <pupa-select-button> 123 </pupa-select-button>
 
