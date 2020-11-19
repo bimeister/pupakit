@@ -1,0 +1,8 @@
+<section class="select-button-item">
+  <pupa-chip-button>
+    <ng-content></ng-content>
+    <ng-container *ngIf="withClose">
+      <pupa-icon (click)="onCloseClick($event)" name="close"></pupa-icon>
+    </ng-container>
+  </pupa-chip-button>
+</section>

@@ -21,6 +21,9 @@ import { IconModule } from '../icon/icon.module';
 import { mdArrowDropdownIcon } from '../../../internal/constants/icons/md-arrow-dropdown-icon.const';
 import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-circle-icon.const';
 import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
+import { SelectButtonItemComponent } from './components/regular/select-button-item/select-button-item.component';
+import { ChipButtonModule } from '../chip-button/chip-button.module';
+import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 
 const COMPONENTS: any[] = [
   SelectComponent,
@@ -36,7 +39,8 @@ const COMPONENTS: any[] = [
   SelectTableItemComponent,
   SelectTableItemsContainerComponent,
   SelectTableSearchComponent,
-  SelectTableTreeComponent
+  SelectTableTreeComponent,
+  SelectButtonItemComponent
 ];
 
 @NgModule({
@@ -45,7 +49,8 @@ const COMPONENTS: any[] = [
     SharedModule,
     OverlayModule,
     TreeModule,
-    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon])
+    ChipButtonModule,
+    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon])
   ],
   exports: [...COMPONENTS]
 })
