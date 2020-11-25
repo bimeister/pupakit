@@ -3,7 +3,6 @@ import { Directive, ElementRef, OnInit } from '@angular/core';
 import { filterFalsy } from '@meistersoft/utilities';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 
 @Directive()

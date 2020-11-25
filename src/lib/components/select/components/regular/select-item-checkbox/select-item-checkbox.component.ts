@@ -1,15 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { SelectItemBase } from '../../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
 import { SelectStateService } from '../../../services/select-state.service';
-import { SelectItemBase } from './../../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
 
 @Component({
-  selector: 'pupa-select-table-item',
-  templateUrl: './select-table-item.component.html',
-  styleUrls: ['./select-table-item.component.scss'],
+  selector: 'pupa-select-item-checkbox',
+  templateUrl: './select-item-checkbox.component.html',
+  styleUrls: ['./select-item-checkbox.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTableItemComponent<T> extends SelectItemBase<T> {
+export class SelectItemCheckboxComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;
   @Input() public isDisabled: boolean = false;
 

@@ -9,8 +9,6 @@ export * from './chip-item.interface';
 export * from './component-change.interface';
 export * from './component-changes.interface';
 export * from './current-draggable-list-item.interface';
-export * from './datagrid-col-def.interface';
-export * from './datagrid-column-setting.interface';
 export * from './datagrid-manipulator-configuration-data.interface';
 export * from './days-map.interface';
 export * from './draggable-list-change-index-event.interface';

@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
-
+import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-icon.const';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ChipSelectModule } from '../chip-select/chip-select.module';
 import { DroppableModule } from '../droppable/droppable.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
+import { IconModule } from '../icon/icon.module';
 import { SharedModule } from './../../../internal/shared/shared.module';
-import { DatagridColumnSettingsComponent } from './components/datagrid-column-settings/datagrid-column-settings.component';
 import { DatagridTemplateRendererComponent } from './components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { DatagridComponent } from './components/datagrid/datagrid.component';
-import { IconModule } from '../icon/icon.module';
-import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-icon.const';
 
 @NgModule({
-  declarations: [DatagridComponent, DatagridColumnSettingsComponent, DatagridTemplateRendererComponent],
+  declarations: [DatagridComponent, DatagridTemplateRendererComponent],
   imports: [
     SharedModule,
     CheckboxModule,
@@ -21,8 +19,8 @@ import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-ic
     IconButtonModule,
     DroppableModule,
     IconModule.forFeature([mdSettingsIcon]),
-    AgGridModule.withComponents([DatagridTemplateRendererComponent, DatagridColumnSettingsComponent])
+    AgGridModule.withComponents([DatagridTemplateRendererComponent])
   ],
-  exports: [DatagridComponent, DatagridColumnSettingsComponent, DatagridTemplateRendererComponent]
+  exports: [DatagridComponent, DatagridTemplateRendererComponent]
 })
 export class DatagridModule {}

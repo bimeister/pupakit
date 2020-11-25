@@ -11,3 +11,12 @@
 .mb {
   margin-bottom: 1rem;
 }
+
+.horizontal {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cell {
+  width: 50px;
+}

@@ -3,7 +3,6 @@ import { Directive, OnDestroy, OnInit } from '@angular/core';
 import { filterNotNil, filterTruthy, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 
 @Directive()
@@ -29,7 +28,9 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
 
   public readonly overlayPositions: ConnectionPositionPair[] = [
     new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
-    new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' })
+    new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
+    new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
+    new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' })
   ];
 
   public readonly isOverlayAttached$: BehaviorSubject<boolean> = new BehaviorSubject(null);
