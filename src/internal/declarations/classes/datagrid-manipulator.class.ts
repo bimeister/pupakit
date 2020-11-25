@@ -1,104 +1,67 @@
-import { TemplateRef } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-import { ColDef, ColumnApi, GridApi, IDatasource, ValueGetterParams } from 'ag-grid-community';
-import { BehaviorSubject, Subscription } from 'rxjs';
-
-import { DatagridColumnSettingsComponent } from '../../../lib/components/datagrid/components/datagrid-column-settings/datagrid-column-settings.component';
-import { DatagridTemplateRendererComponent } from '../../../lib/components/datagrid/components/datagrid-template-renderer/datagrid-template-renderer.component';
-import { DatagridColDef } from '../interfaces/datagrid-col-def.interface';
-import { DatagridColumnSetting } from '../interfaces/datagrid-column-setting.interface';
-import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
+import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
+import { AgGridEvent, ColDef, ColumnApi, GridApi, GridReadyEvent, IDatasource } from 'ag-grid-community';
+import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscriber } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 import { GridState } from '../interfaces/grid-state.interface';
+import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
 
 export class DatagridManipulator<rowDataT> {
-  private get columnApi(): ColumnApi {
-    return this.config.gridOptions?.columnApi;
-  }
-
-  private get isGridReady(): boolean {
-    return !isNil(this.gridApi);
-  }
-
   public get config(): DatagridManipulatorConfiguration<rowDataT> {
     return this.configuration;
   }
 
-  private readonly subscription: Subscription = new Subscription();
-  public gridApi: GridApi;
+  public columnApi$: BehaviorSubject<Nullable<ColumnApi>> = new BehaviorSubject<Nullable<ColumnApi>>(null);
+  public gridApi$: BehaviorSubject<Nullable<GridApi>> = new BehaviorSubject<Nullable<GridApi>>(null);
 
-  public columnSettings$: BehaviorSubject<DatagridColumnSetting[]> = new BehaviorSubject<DatagridColumnSetting[]>([]);
+  public readonly onGridReady$: ReplaySubject<GridReadyEvent> = new ReplaySubject<GridReadyEvent>(1);
 
-  private static readonly actionsColId: string = '_actions';
+  constructor(private readonly configuration: DatagridManipulatorConfiguration<rowDataT>) {}
 
-  constructor(
-    private readonly configuration: DatagridManipulatorConfiguration<rowDataT>,
-    private readonly gridReadyCallback?: () => void
-  ) {}
-
-  public gridReady(gridApi: GridApi): void {
-    this.gridApi = gridApi;
-    if (!isNil(this.gridReadyCallback)) {
-      this.gridReadyCallback();
-    }
-  }
-
-  public destroy(): void {
-    this.subscription.unsubscribe();
+  public gridReady(gridReadyEvent: GridReadyEvent): void {
+    this.onGridReady$.next(gridReadyEvent);
+    this.onGridReady$.complete();
+    this.gridApi$.next(gridReadyEvent.api);
+    this.columnApi$.next(gridReadyEvent.columnApi);
   }
 
   public selectRow(index: number): void {
-    if (!this.isGridReady) {
-      return;
-    }
-    this.gridApi.ensureIndexVisible(index, 'top');
-    this.gridApi.selectIndex(index, false, true);
+    this.gridApi$.pipe(take(1), filterNotNil()).subscribe((gridApi: GridApi) => {
+      gridApi.ensureIndexVisible(index, 'top');
+      gridApi.selectIndex(index, false, true);
+    });
   }
 
-  public setColDefs(colDefs: DatagridColDef[], userActionsCellRef: TemplateRef<HTMLElement> = null): void {
-    this.setColumnSettings(colDefs);
-    if (this.config.showColumnSettings || !isNil(userActionsCellRef)) {
-      colDefs.push(this.getActionsColumn(userActionsCellRef));
-    }
-    if (!this.isGridReady) {
-      this.config.initialColumnDefs = colDefs;
-      return;
-    }
-    this.gridApi.setColumnDefs(colDefs);
+  public setColDefs(colDefs: ColDef[]): void {
+    this.gridApi$.pipe(take(1)).subscribe((gridApi: GridApi) => {
+      if (isNil(gridApi)) {
+        this.config.initialColumnDefs = colDefs;
+        return;
+      }
+      gridApi.setColumnDefs(colDefs);
+    });
   }
 
   public setRowData(rowData: rowDataT[]): void {
-    if (!this.isGridReady) {
-      this.config.gridOptions.rowModelType = 'clientSide';
-      this.config.initialRowData = rowData;
-      return;
-    }
-    this.gridApi.setRowData(rowData);
+    this.gridApi$.pipe(take(1)).subscribe((gridApi: GridApi) => {
+      if (isNil(gridApi)) {
+        this.config.gridOptions.rowModelType = 'clientSide';
+        this.config.initialRowData = rowData;
+        return;
+      }
+      gridApi.setRowData(rowData);
+    });
   }
 
   public setRowDataSource(rowDataSource: IDatasource): void {
-    if (!this.isGridReady) {
-      this.config.gridOptions.rowModelType = 'infinite';
-      this.config.gridOptions.datasource = rowDataSource;
-      return;
-    }
-    this.gridApi.setDatasource(rowDataSource);
-  }
-
-  public updateColumnSettingsAndSetColumnsVisibility(settings: DatagridColumnSetting[]): void {
-    if (!this.isGridReady) {
-      return;
-    }
-    this.columnSettings$.next(settings);
-
-    const visibleColIds: string[] = DatagridManipulator.getVisibleColumnsIds(settings);
-
-    const invisibleColIds: string[] = this.columnApi
-      .getColumnState()
-      .filter((columnDef: ColDef) => !visibleColIds.includes(columnDef.colId))
-      .map((columnDef: ColDef) => columnDef.colId);
-
-    this.columnApi.setColumnsVisible(visibleColIds, true);
-    this.columnApi.setColumnsVisible(invisibleColIds, false);
+    this.gridApi$.pipe(take(1)).subscribe((gridApi: GridApi) => {
+      if (isNil(gridApi)) {
+        this.config.gridOptions.rowModelType = 'infinite';
+        this.config.gridOptions.datasource = rowDataSource;
+        return;
+      }
+      gridApi.setDatasource(rowDataSource);
+    });
   }
 
   public normalizeGrid(): void {
@@ -107,96 +70,70 @@ export class DatagridManipulator<rowDataT> {
   }
 
   public resetRowHeights(): void {
-    this.gridApi.resetRowHeights();
+    this.gridApi$.pipe(take(1), filterNotNil()).subscribe((gridApi: GridApi) => {
+      gridApi.resetRowHeights();
+    });
   }
 
-  public getGridState(): GridState {
-    return {
-      columnState: this.columnApi.getColumnState(),
-      sortModel: this.gridApi.getSortModel()
-    };
+  public getGridState(): Observable<GridState> {
+    return combineLatest([this.gridApi$.pipe(filterNotNil()), this.columnApi$.pipe(filterNotNil())]).pipe(
+      take(1),
+      map(([gridApi, columnApi]: [GridApi, ColumnApi]) => {
+        return {
+          columnState: columnApi.getColumnState(),
+          sortModel: gridApi.getSortModel()
+        };
+      })
+    );
   }
 
   public setGridState(gridState: GridState): void {
-    this.columnApi.setColumnState(gridState.columnState);
-    this.gridApi.setSortModel(gridState.sortModel);
+    combineLatest([this.gridApi$.pipe(filterNotNil()), this.columnApi$.pipe(filterNotNil())])
+      .pipe(take(1))
+      .subscribe(([gridApi, columnApi]: [GridApi, ColumnApi]) => {
+        columnApi.setColumnState(gridState.columnState);
+        gridApi.setSortModel(gridState.sortModel);
+      });
+  }
+
+  public getEventObservable<EventDataT extends AgGridEvent>(eventType: string): Observable<EventDataT> {
+    return new Observable<EventDataT>((subscriber: Subscriber<EventDataT>) => {
+      const listener: Function = (event: EventDataT) => subscriber.next(event);
+      this.addEventListener(eventType, listener);
+
+      return {
+        unsubscribe: () => this.removeEventListener(eventType, listener)
+      };
+    });
+  }
+
+  private addEventListener(eventType: string, listener: Function): void {
+    this.gridApi$.pipe(filterNotNil()).subscribe((gridApi: GridApi) => {
+      gridApi.addEventListener(eventType, listener);
+    });
+  }
+
+  private removeEventListener(eventType: string, listener: Function): void {
+    this.gridApi$.pipe(filterNotNil()).subscribe((gridApi: GridApi) => {
+      gridApi.removeEventListener(eventType, listener);
+    });
   }
 
   private makeColumnsFitGridWidth(): void {
-    if (!this.isGridReady) {
-      return;
-    }
-    this.config.sizeColumnsToFit ? this.gridApi.sizeColumnsToFit() : this.gridApi.doLayout();
+    this.gridApi$.pipe(take(1), filterNotNil()).subscribe((gridApi: GridApi) => {
+      this.config.sizeColumnsToFit ? gridApi.sizeColumnsToFit() : gridApi.doLayout();
+    });
   }
 
   private normalizeRowHeights(): void {
-    if (!this.isGridReady || !this.config.rowsAutoheight) {
-      return;
-    }
-    this.gridApi.resetRowHeights();
-  }
-
-  private setColumnSettings(colDefs: DatagridColDef[]): void {
-    if (!this.config.showColumnSettings) {
-      return;
-    }
-    this.columnSettings$.next(
-      colDefs.map((colDef: DatagridColDef) => ({
-        colId: colDef.colId,
-        headerName: colDef.headerName,
-        isVisible: !colDef.hide,
-        isAvailable: colDef.isAvailableInSettings
-      }))
-    );
-  }
-
-  private getActionsColumn(userActionsCellRef: TemplateRef<HTMLElement> = null): DatagridColDef {
-    const actionsColumn: DatagridColDef = DatagridManipulator.generateActionsColumnDefinition();
-
-    if (this.config.showColumnSettings) {
-      actionsColumn.headerComponentFramework = DatagridColumnSettingsComponent;
-      actionsColumn.headerComponentParams = {
-        manipulator: this
-      };
-    }
-
-    if (!isNil(userActionsCellRef)) {
-      actionsColumn.cellRendererFramework = DatagridTemplateRendererComponent;
-      actionsColumn.cellRendererParams = {
-        templateRef: userActionsCellRef
-      };
-    }
-
-    return actionsColumn;
-  }
-
-  private static actionsColumnValueGetter(params: ValueGetterParams): any {
-    return params.data;
-  }
-
-  private static generateActionsColumnDefinition(): DatagridColDef {
-    return {
-      headerName: '',
-      sortable: false,
-      colId: DatagridManipulator.actionsColId,
-      width: 48,
-      pinned: 'right',
-      suppressMovable: true,
-      isAvailableInSettings: false,
-      valueGetter: DatagridManipulator.actionsColumnValueGetter
-    };
-  }
-
-  private static getVisibleColumnsIds(settings: DatagridColumnSetting[]): string[] {
-    const visibleColIds: string[] = settings.reduce(
-      (colIds: string[], currentSetting: DatagridColumnSetting) => {
-        if (currentSetting.isVisible) {
-          colIds.push(currentSetting.colId);
-        }
-        return colIds;
-      },
-      [DatagridManipulator.actionsColId]
-    );
-    return visibleColIds;
+    this.gridApi$
+      .pipe(
+        take(1),
+        filterNotNil(),
+        filter(() => this.config.rowsAutoheight)
+      )
+      .subscribe((gridApi: GridApi) => {
+        gridApi.resetRowHeights();
+      });
   }
 }

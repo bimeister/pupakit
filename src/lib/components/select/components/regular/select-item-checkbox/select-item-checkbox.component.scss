@@ -1,0 +1,23 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.item {
+  box-sizing: border-box;
+  height: px(24);
+  width: 100%;
+  cursor: pointer;
+  background: color('white');
+  color: color('grey-text');
+  padding: 0 px(8);
+  user-select: none;
+  font-size: rems(1);
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

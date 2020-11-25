@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-
 import { SelectStateService } from '../../../services/select-state.service';
 import { SelectItemBase } from './../../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
 
@@ -12,6 +11,7 @@ import { SelectItemBase } from './../../../../../../internal/declarations/classe
 })
 export class SelectItemComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;
+  @Input() public isDisabled: boolean = false;
 
   constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);

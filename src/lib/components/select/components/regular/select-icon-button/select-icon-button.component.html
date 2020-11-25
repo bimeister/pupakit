@@ -1,0 +1,15 @@
+<div
+  class="select-icon-button"
+  [class.select-button_active]="isExpanded$ | async"
+  [class.select-button_disabled]="isDisabled$ | async"
+  [class.select-button_transparent]="transparent"
+  [class.select-button_invalid]="(isTouched$ | async) && !(isValid$ | async)"
+  (click)="processButtonClick()"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+  #button
+>
+  <pupa-icon-button>
+    <ng-content></ng-content>
+  </pupa-icon-button>
+</div>

@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SelectStateService } from '../../../services/select-state.service';
 import { SelectDropdownBase } from './../../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
 
@@ -24,6 +23,7 @@ const ANIMATION_DURATION_MS: number = 150;
 })
 export class SelectDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;
+  @Input() public fitContent: boolean = false;
 
   constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);

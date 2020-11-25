@@ -75,4 +75,23 @@
       </pupa-select-items-container>
     </pupa-select-dropdown>
   </pupa-select>
+
+  <div class="horizontal">
+    <textarea></textarea>
+    <div class="cell">
+      <pupa-select [isMultiSelectionEnabled]="true">
+        <pupa-select-icon-button>
+          <pupa-icon name="settings"></pupa-icon>
+        </pupa-select-icon-button>
+
+        <pupa-select-dropdown [fitContent]="true">
+          <pupa-select-items-container>
+            <pupa-select-item-checkbox [value]="1">1 Какой-то текст </pupa-select-item-checkbox>
+            <pupa-select-item-checkbox [value]="2" [isDisabled]="true">2</pupa-select-item-checkbox>
+            <pupa-select-item-checkbox [value]="3">3</pupa-select-item-checkbox>
+          </pupa-select-items-container>
+        </pupa-select-dropdown>
+      </pupa-select>
+    </div>
+  </div>
 </div>

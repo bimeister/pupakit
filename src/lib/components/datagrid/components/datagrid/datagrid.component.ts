@@ -21,7 +21,6 @@ import {
   IDatasource,
   IGetRowsParams
 } from 'ag-grid-community';
-
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridThemes } from '../../../../../internal/declarations/enums/datagrid-themes.enum';
 
@@ -90,7 +89,7 @@ export class DatagridComponent<rowDataT> {
   }
 
   public onGridReady(gridReadyEvent: GridReadyEvent): void {
-    this.manipulator.gridReady(gridReadyEvent.api);
+    this.manipulator.gridReady(gridReadyEvent);
 
     if (isNil(this.gridElement.nativeElement)) {
       return;

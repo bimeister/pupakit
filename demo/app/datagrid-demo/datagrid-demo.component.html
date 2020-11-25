@@ -1,4 +1,7 @@
-<pupa-button class="button" (click)="scrollToIndex(32)"> Scroll to index 32 </pupa-button>
+<div class="actions">
+  <pupa-button class="button" (click)="scrollToIndex(32)"> Scroll to index 32 </pupa-button>
+  <pupa-button class="button" (click)="toggleColumnSettings()"> Toggle Column Settings </pupa-button>
+</div>
 
 <pupa-datagrid class="grid" [manipulator]="manipulator"> </pupa-datagrid>
 
@@ -27,4 +30,27 @@
   <pupa-icon-button color="light" size="small" class="delete-user-button">
     <pupa-icon name="trash"></pupa-icon>
   </pupa-icon-button>
+</ng-template>
+
+<ng-template #columnSettingsCell let-row>
+  <pupa-select
+    *ngIf="isColumnSettingsVisible$ | async"
+    [formControl]="columnSettingsFormControl"
+    [isMultiSelectionEnabled]="true"
+  >
+    <pupa-select-icon-button>
+      <pupa-icon name="settings"></pupa-icon>
+    </pupa-select-icon-button>
+    <pupa-select-dropdown [fitContent]="true">
+      <pupa-select-items-container>
+        <pupa-select-item-checkbox
+          *ngFor="let column of columns$ | async"
+          [value]="column.colId"
+          [isDisabled]="!column.isAvailable"
+        >
+          {{ column.name }}
+        </pupa-select-item-checkbox>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
 </ng-template>
