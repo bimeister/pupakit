@@ -51,6 +51,8 @@ export class SelectTreeComponent extends SelectTreeBase {
   @Input() public hideRoot: boolean = false;
   @Input() public isLoading: boolean = false;
 
+  @Input() public isNodeSelectionEnabled: boolean = false;
+
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
 
   constructor(@Attribute('type') type: TreeType, selectStateService: SelectStateService<Uuid>) {
