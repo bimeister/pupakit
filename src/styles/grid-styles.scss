@@ -30,7 +30,7 @@ $odd-row-background-color: transparent;
 $header-cell-moving-background-color: color(light);
 
 @import 'ag-grid-community/src/styles/ag-grid.scss';
-@import 'ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham';
+@import 'ag-grid-community/src/styles/ag-theme-balham/sass/legacy/ag-theme-balham-v22-compat';
 
 /* additional customization */
 @mixin ionic-icon-font {

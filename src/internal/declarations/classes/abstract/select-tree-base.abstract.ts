@@ -1,6 +1,6 @@
-import { Directive, EventEmitter, TrackByFunction } from '@angular/core';
+import { Directive, EventEmitter, TrackByFunction, OnChanges } from '@angular/core';
 import { asyncScheduler, BehaviorSubject, Observable, timer } from 'rxjs';
-import { delay, map, observeOn, subscribeOn, take, tap } from 'rxjs/operators';
+import { delay, map, observeOn, subscribeOn, take, tap, filter, switchMap } from 'rxjs/operators';
 
 import { TreeType } from '../../enums/tree-type.enum';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
@@ -8,6 +8,9 @@ import { TreeItemInterface } from '../../interfaces/tree-item.interface';
 import { Uuid } from '../../types/uuid.type';
 import { FlatTreeItem } from '../flat-tree-item.class';
 import { TreeComponent } from './../../../../lib/components/tree/components/tree/tree.component';
+import { isNil } from '@meistersoft/utilities';
+import { ComponentChange } from '../../interfaces/component-change.interface';
+import { ComponentChanges } from '../../interfaces/component-changes.interface';
 
 type TreePropertiesTransfer = Pick<
   TreeComponent,
@@ -19,7 +22,7 @@ const TREE_ITEM_SIZE_PX: number = 30;
 const EMPTY_SPACE_PX: number = 12;
 
 @Directive()
-export abstract class SelectTreeBase implements TreePropertiesTransfer {
+export abstract class SelectTreeBase implements TreePropertiesTransfer, OnChanges {
   public abstract readonly customPupaTreeComponent: TreeComponent;
   public abstract readonly hierarchicalTreeComponent: TreeComponent;
   public abstract readonly flatTreeComponent: TreeComponent;
@@ -49,6 +52,9 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
   public abstract hideRoot: boolean;
   public abstract isLoading: boolean;
 
+  public abstract isNodeSelectionEnabled: boolean;
+  public readonly isNodeSelectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly selectedNodesIds$: Observable<Uuid[]> = this.selectStateService.currentValue$;
   public readonly highlightedNodesIds$: Observable<Uuid[]> = this.selectStateService.currentValue$;
 
@@ -60,17 +66,27 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
 
   public readonly trackBy: TrackByFunction<FlatTreeItem> = (index: number, item: FlatTreeItem) => `${index} ${item.id}`;
 
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (isNil(changes)) {
+      return;
+    }
+    this.processIsNodeSelectionEnabled(changes?.isNodeSelectionEnabled);
+  }
+
   public processNodeExpansion(item: FlatTreeItem): void {
     this.expandedNode.emit(item);
   }
 
   public processNodeClick(item: FlatTreeItem): void {
-    const { isElement, id }: FlatTreeItem = item;
-    if (!isElement) {
-      return;
-    }
-    this.selectedNodesIds$
+    const { id, isElement }: FlatTreeItem = item;
+
+    this.isNodeSelectionEnabled$
       .pipe(
+        filter(
+          (isNodeSelectionEnabled: boolean) =>
+            (isElement && !isNodeSelectionEnabled) || (!isElement && isNodeSelectionEnabled)
+        ),
+        switchMap(() => this.selectedNodesIds$),
         take(1),
         map((selectedNodeIds: Uuid[]) => selectedNodeIds.length === 1 && selectedNodeIds[0] === id)
       )
@@ -115,5 +131,15 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer {
           }
         }
       });
+  }
+
+  private processIsNodeSelectionEnabled(change: ComponentChange<this, boolean>): void {
+    const updatedState: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedState)) {
+      return;
+    }
+
+    this.isNodeSelectionEnabled$.next(Boolean(updatedState));
   }
 }
