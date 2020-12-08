@@ -1,4 +1,4 @@
-import { Directive, OnChanges } from '@angular/core';
+import { Directive, OnChanges, HostListener } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
@@ -13,6 +13,8 @@ export abstract class SelectItemBase<T> implements OnChanges {
 
   private readonly value$: BehaviorSubject<T> = new BehaviorSubject<T>(null);
 
+  public readonly isHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly isPicked$: Observable<boolean> = this.value$.pipe(
     switchMap((value: T) => this.selectStateService.isPicked(value)),
     distinctUntilChanged()
@@ -26,6 +28,16 @@ export abstract class SelectItemBase<T> implements OnChanges {
   ]).pipe(map(([isSelfDisabled, isDisabled]: [boolean, boolean]) => isSelfDisabled || isDisabled));
 
   constructor(private readonly selectStateService: SelectStateService<T>) {}
+
+  @HostListener('mouseover')
+  public processMouseOver(): void {
+    this.isHovered$.next(true);
+  }
+
+  @HostListener('mouseleave')
+  public processMouseLeave(): void {
+    this.isHovered$.next(false);
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     if (isNil(changes)) {

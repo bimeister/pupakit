@@ -1,11 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { getUuid } from '@meistersoft/utilities';
-import { BehaviorSubject } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { getUuid, isNil } from '@meistersoft/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take, startWith, map } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 
 const leafElementsCount: number = 1000;
+
+interface SelectOption {
+  value: number;
+  caption: string;
+}
 
 @Component({
   selector: 'demo-select',
@@ -15,6 +20,20 @@ const leafElementsCount: number = 1000;
 })
 export class SelectDemoComponent {
   public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });
+
+  public readonly control: FormControl = new FormControl({ value: null, disabled: false });
+  public readonly options: SelectOption[] = [
+    { value: 1, caption: 'Отчет 1' },
+    { value: 2, caption: 'Отчет 2' },
+    { value: 3, caption: 'Отчет 3' },
+    { value: 4, caption: 'Отчет 4' },
+    { value: 5, caption: 'Отчет 5' }
+  ];
+  public readonly selectedValuePreview$: Observable<string> = this.control.valueChanges.pipe(
+    startWith(this.control.value),
+    map((controlValue: number) => this.options.find((option: SelectOption) => option.value === controlValue)),
+    map((selectedOption: SelectOption) => (isNil(selectedOption) ? '' : selectedOption.caption))
+  );
 
   public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
   public readonly invalidFormControl: FormControl = new FormControl({ value: 1, disabled: false }, [

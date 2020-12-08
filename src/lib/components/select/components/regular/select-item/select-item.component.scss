@@ -1,5 +1,5 @@
-@import './../../../../../../styles/themes/functions.scss';
-@import './../../../../../../styles/functions.scss';
+@import 'themes/functions';
+@import 'functions';
 
 :host {
   display: block;
@@ -13,13 +13,16 @@
   cursor: pointer;
   background: color('white');
   color: color('grey-text');
-  padding: 0 px(8);
+  padding: rems(0.25) rems(0.5);
   user-select: none;
   font-size: rems(1);
+  display: flex;
+  align-items: center;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  border-radius: rems(0.25);
 
   &_picked,
   &:hover {

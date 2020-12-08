@@ -1,4 +1,34 @@
 <h1>Select</h1>
+
+<div class="group">
+  <div class="column">
+    <pupa-select [isMultiSelectionEnabled]="false" [formControl]="control">
+      <pupa-select-button-input
+        [placeholder]="'Введите название отчета'"
+        [selectedValuePreview]="selectedValuePreview$ | async"
+        (query)="log($event)"
+      >
+        <pupa-icon-button [size]="'small'" [color]="'light-blue'" class="content-icon">
+          <pupa-icon name="md-lock"></pupa-icon>
+        </pupa-icon-button>
+      </pupa-select-button-input>
+
+      <pupa-select-dropdown>
+        <pupa-select-items-container>
+          <ng-container *ngFor="let option of options">
+            <pupa-select-item [value]="option.value" #item>
+              <div class="name-container" [class.hovered]="(item.isHovered$ | async) || (item.isPicked$ | async)">
+                <pupa-icon class="name-container__icon" name="md-lock"></pupa-icon>
+                <div class="name-container__name">{{ option.caption }}</div>
+              </div>
+            </pupa-select-item>
+          </ng-container>
+        </pupa-select-items-container>
+      </pupa-select-dropdown>
+    </pupa-select>
+  </div>
+</div>
+
 <div class="container">
   <textarea class="placeholder"></textarea>
 

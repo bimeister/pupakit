@@ -4,6 +4,7 @@
 
 export * from './select/api';
 export * from './select-button/api';
+export * from './select-button-input/api';
 export * from './select-button-item/api';
 export * from './select-dropdown/api';
 export * from './select-icon-button/api';

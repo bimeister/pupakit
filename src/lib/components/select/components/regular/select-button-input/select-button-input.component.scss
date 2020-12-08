@@ -1,5 +1,6 @@
-@import './../../../../../../styles/themes/functions.scss';
-@import './../../../../../../styles/functions.scss';
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
 
 $width_icon: rems(1);
 
@@ -24,10 +25,10 @@ $width_icon: rems(1);
   border-radius: px(8);
   border: px(1) solid color('grey-ivory');
 
-  background: color('white');
+  background-color: color('white');
   color: color('text');
 
-  padding: px(6) px(12);
+  padding: px(6) px(10) px(6) px(8);
 
   &:hover {
     border-color: color('grey-light');
@@ -35,6 +36,7 @@ $width_icon: rems(1);
 
   &_active {
     border-color: color('active') !important;
+    background-color: color('light') !important;
   }
 
   &_disabled {
@@ -88,6 +90,47 @@ $width_icon: rems(1);
 
     &.expanded {
       transform: rotate(180deg);
+    }
+  }
+
+  &__close-button {
+    padding-left: rems(0.4);
+  }
+
+  &__input-container {
+    width: 100%;
+    height: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  &__input {
+    width: 100%;
+    flex: 1;
+
+    box-sizing: border-box;
+
+    background-color: transparent;
+    color: color(text);
+    border: none;
+    padding: 0;
+    outline: none;
+    font-size: rems(1);
+    line-height: 1;
+
+    position: relative;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    @include regular();
+
+    &::placeholder {
+      position: absolute;
+      left: 0;
+      color: color(grey-light);
+      @include transition(#{'color'});
     }
   }
 }
