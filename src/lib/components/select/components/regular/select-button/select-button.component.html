@@ -14,7 +14,7 @@
     <ng-content></ng-content>
   </div>
 
-  <div class="select-button__icon">
-    <pupa-icon name="arrow-dropdown"></pupa-icon>
+  <div class="select-button__icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
+    <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
 </button>

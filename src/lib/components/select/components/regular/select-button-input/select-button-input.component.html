@@ -1,0 +1,32 @@
+<div
+  class="select-button"
+  [class.select-button_active]="isExpanded$ | async"
+  [class.select-button_disabled]="isDisabled$ | async"
+  [class.select-button_transparent]="transparent"
+  [class.select-button_invalid]="(isTouched$ | async) && !(isValid$ | async)"
+  (click)="processButtonInputClick()"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+  #button
+>
+  <div class="select-button__input-container">
+    <div class="select-button__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
+      <ng-content></ng-content>
+    </div>
+    <input type="text" class="select-button__input" [placeholder]="placeholder" #inputElement [formControl]="control" />
+    <pupa-icon-button
+      class="select-button__close-button"
+      [size]="'small'"
+      [color]="'light-blue'"
+      (click)="resetQuery($event)"
+      [title]="'Очистить'"
+      *ngIf="!(selectedValuePreviewIsEmpty$ | async) && !(isExpanded$ | async)"
+    >
+      <pupa-icon name="close"></pupa-icon>
+    </pupa-icon-button>
+  </div>
+
+  <div class="select-button__icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
+    <pupa-icon name="ios-arrow-down"></pupa-icon>
+  </div>
+</div>

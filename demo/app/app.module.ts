@@ -21,7 +21,7 @@ import { mdPersonAddIcon } from '../../src/internal/constants/icons/md-person-ad
 import { mdPizzaIcon } from '../../src/internal/constants/icons/md-pizza-icon.const';
 import { mdSaveIcon } from '../../src/internal/constants/icons/md-save-icon.const';
 import { mdTrashIcon } from '../../src/internal/constants/icons/md-trash-icon.const';
-import { ComponentsModule, IconModule, mdDocumentIcon, mdRefreshCircleIcon } from './../../src/public-api';
+import { ComponentsModule, IconModule, mdDocumentIcon, mdRefreshCircleIcon, mdLockIcon } from './../../src/public-api';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
@@ -126,6 +126,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
       mdHelpCircleIcon,
       mdTrashIcon,
       mdMoreIcon,
+      mdLockIcon,
       mdCloseCircleIcon,
       mdSaveIcon,
       iosCheckmarkIcon,

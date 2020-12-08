@@ -24,6 +24,7 @@ export interface SelectStateService<T> {
   setControlRef(control: NgControl): void;
 
   collapse(): void;
+  open(): void;
   toggleExpansion(): void;
 
   defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void;

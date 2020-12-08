@@ -17,7 +17,7 @@
 
     cdk-tree-node.tree-node-row {
       .tree-node {
-        border-radius: 0;
+        border-radius: rems(0.25);
 
         &:hover,
         &_selected {

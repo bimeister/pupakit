@@ -10,6 +10,7 @@ import { ChipButtonModule } from '../chip-button/chip-button.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
 import { TreeModule } from '../tree/tree.module';
+import { SelectButtonInputComponent } from './components/regular/select-button-input/select-button-input.component';
 import { SelectButtonItemComponent } from './components/regular/select-button-item/select-button-item.component';
 import { SelectButtonComponent } from './components/regular/select-button/select-button.component';
 import { SelectDropdownComponent } from './components/regular/select-dropdown/select-dropdown.component';
@@ -49,7 +50,8 @@ const COMPONENTS: any[] = [
   SelectTableTreeComponent,
   SelectButtonItemComponent,
   SelectTabsComponent,
-  SelectTabsItemComponent
+  SelectTabsItemComponent,
+  SelectButtonInputComponent
 ];
 
 @NgModule({
@@ -61,7 +63,7 @@ const COMPONENTS: any[] = [
     ChipButtonModule,
     CheckboxModule,
     IconButtonModule,
-    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon])
+    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon])
   ],
   exports: [...COMPONENTS]
 })

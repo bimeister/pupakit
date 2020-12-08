@@ -1,11 +1,19 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
-import { Injectable } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { distinctUntilChanged, map, shareReplay, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
-
+import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  shareReplay,
+  startWith,
+  switchMap,
+  take,
+  withLatestFrom
+} from 'rxjs/operators';
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
@@ -14,7 +22,7 @@ import { SelectOuterValue } from '../../../../internal/declarations/types/select
 @Injectable({
   providedIn: 'any'
 })
-export class SelectStateService<T> implements SelectStateServiceInterface<T> {
+export class SelectStateService<T> implements SelectStateServiceInterface<T>, OnDestroy {
   private readonly currentSerializedValue$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(
     new Set<string>()
   );
@@ -22,6 +30,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
     map((serializedSet: Set<string>) => SelectStateService.getParsedValue<T>(serializedSet)),
     shareReplay({ bufferSize: 1, refCount: true })
   );
+
+  private readonly subscription: Subscription = new Subscription();
 
   private readonly isMultiSelectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly isUnselectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -70,12 +80,20 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
     })
   );
 
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   public setControlRef(control: NgControl): void {
     this.control$.next(control);
   }
 
   public collapse(): void {
     this.isExpanded$.next(false);
+  }
+
+  public open(): void {
+    this.isExpanded$.next(true);
   }
 
   public toggleExpansion(): void {
@@ -193,6 +211,14 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T> {
     if (!isEmpty(value)) {
       this.isTouched$.next(true);
     }
+  }
+
+  public processFocusInputContainer(inputElement: ElementRef<HTMLInputElement>): Subscription {
+    return this.isExpanded$
+      .pipe(filter(() => !isNil(inputElement)))
+      .subscribe((isExpanded: boolean) =>
+        isExpanded ? inputElement.nativeElement.focus() : inputElement.nativeElement.blur()
+      );
   }
 
   private static getParsedValue<V>(serializedSet: Set<string>): V[] {
