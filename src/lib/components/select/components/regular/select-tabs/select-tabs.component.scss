@@ -1,0 +1,19 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+@import './../../../../../../styles/themes/blue-theme/variables';
+@import './../../../../../../styles/mixins.scss';
+
+:host {
+  display: block;
+  max-width: 100%;
+}
+
+.select-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  border-radius: rems(0.5);
+  background: color(light);
+  width: fit-content;
+  max-width: 100%;
+}
