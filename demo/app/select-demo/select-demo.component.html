@@ -24,6 +24,24 @@
     <pupa-select-button> 123 </pupa-select-button>
 
     <pupa-select-dropdown>
+      <pupa-select-tabs (selectChange)="processTabsSelect($event)" [initialSelect]="1">
+        <pupa-select-tabs-item *ngFor="let item of tabItems" [value]="item.value">{{
+          item.caption
+        }}</pupa-select-tabs-item>
+      </pupa-select-tabs>
+
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <pupa-select [formControl]="formControl">
+    <pupa-select-button> 123 </pupa-select-button>
+
+    <pupa-select-dropdown>
       <!-- <pupa-select-search></pupa-select-search> -->
 
       <pupa-select-items-container>

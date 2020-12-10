@@ -1,0 +1,22 @@
+@import './../../../../../../styles/themes/functions.scss';
+@import './../../../../../../styles/functions.scss';
+@import './../../../../../../styles/themes/blue-theme/variables';
+@import './../../../../../../styles/mixins.scss';
+
+$padding_side: px(10);
+
+:host {
+  display: block;
+}
+
+.select-tabs-item {
+  border-radius: rems(0.5);
+  padding: rems(0.25) $padding_side rems(0.25) $padding_side;
+  cursor: pointer;
+  @include ellipsis-text-overflow;
+
+  &_picked {
+    color: color(white);
+    background: color(active);
+  }
+}

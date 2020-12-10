@@ -90,6 +90,11 @@ export class SelectDemoComponent {
     { children: [], childrenCount: 0, description: '', name: 'sample 8', id: null, roles: [] }
   ];
 
+  public tabItems: any[] = new Array(10).fill(null).map((_value: null, index: number) => ({
+    value: index,
+    caption: `Значение ${index}`
+  }));
+
   public itemsWithoutCaptionNested: any[] = [
     {
       data: {
@@ -134,6 +139,11 @@ export class SelectDemoComponent {
     this.isLoading$.pipe(take(1)).subscribe((isLoading: boolean) => {
       this.isLoading$.next(!isLoading);
     });
+  }
+
+  public processTabsSelect(event: any): void {
+    // tslint:disable-next-line: no-console
+    console.log(event);
   }
 
   public log(...data: any[]): void {

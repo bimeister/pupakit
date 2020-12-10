@@ -18,6 +18,8 @@ import { SelectItemCheckboxComponent } from './components/regular/select-item-ch
 import { SelectItemComponent } from './components/regular/select-item/select-item.component';
 import { SelectItemsContainerComponent } from './components/regular/select-items-container/select-items-container.component';
 import { SelectSearchComponent } from './components/regular/select-search/select-search.component';
+import { SelectTabsItemComponent } from './components/regular/select-tabs-item/select-tabs-item.component';
+import { SelectTabsComponent } from './components/regular/select-tabs/select-tabs.component';
 import { SelectTreeComponent } from './components/regular/select-tree/select-tree.component';
 import { SelectComponent } from './components/regular/select/select.component';
 import { SelectTableButtonComponent } from './components/table/select-table-button/select-table-button.component';
@@ -45,7 +47,9 @@ const COMPONENTS: any[] = [
   SelectTableItemsContainerComponent,
   SelectTableSearchComponent,
   SelectTableTreeComponent,
-  SelectButtonItemComponent
+  SelectButtonItemComponent,
+  SelectTabsComponent,
+  SelectTabsItemComponent
 ];
 
 @NgModule({
