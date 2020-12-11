@@ -92,6 +92,11 @@ export class InputDateRangeDoubleComponent extends InputDateTimeBase {
     const dateFirst: Date = newValue[0];
     const dateSecond: Date = newValue[1];
 
+    if (isNil(dateFirst) || isNil(dateSecond)) {
+      this.setValue('');
+      return;
+    }
+
     const serializedValueDateFirst: string = String(dateFirst);
     const serializedValueDateSecond: string = String(dateSecond);
 

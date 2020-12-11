@@ -223,6 +223,7 @@ $height_month: px(24);
   &__disabled {
     color: color(grey-apple);
     pointer-events: none;
+    background-color: transparent;
   }
 
   &:hover:not(.date-inner__selected) {
