@@ -3,3 +3,4 @@
  */
 
 export * from './select-state.service';
+export * from './select-tabs-state.service';
