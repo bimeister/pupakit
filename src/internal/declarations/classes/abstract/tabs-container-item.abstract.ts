@@ -58,7 +58,9 @@ export abstract class TabsContainerItem implements OnChanges, AfterViewInit {
       return;
     }
 
-    this.updateSelectionState(newState);
+    queueMicrotask(() => {
+      this.updateSelectionState(newState);
+    });
   }
 
   private updateSelectionState(targetState: boolean): void {

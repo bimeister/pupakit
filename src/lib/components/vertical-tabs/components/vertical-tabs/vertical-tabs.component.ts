@@ -27,9 +27,7 @@ export class VerticalTabsComponent extends TabsContainer implements AfterViewIni
   @Output() protected readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
   @Output() protected readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
 
-  @ContentChildren(VerticalTabsItemComponent, {
-    descendants: false
-  })
+  @ContentChildren(VerticalTabsItemComponent, { descendants: true })
   protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
 
   constructor() {
