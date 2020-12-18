@@ -1,5 +1,5 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Directive, ElementRef, OnChanges } from '@angular/core';
+import { Directive, ElementRef, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { getElementAllNestedChildren, isNil } from '@meistersoft/utilities';
 import { map, take } from 'rxjs/operators';
@@ -10,11 +10,17 @@ import { SelectStateService } from '../../interfaces/select-state-service.interf
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 import { SelectOuterValue } from '../../types/select-outer-value.type';
+import { Subscription } from 'rxjs';
 
 @Directive()
-export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
+export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValueAccessor {
   public abstract isMultiSelectionEnabled: boolean;
   public abstract isUnselectionEnabled: boolean;
+
+  @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
+
+  private readonly subscription: Subscription = new Subscription();
 
   constructor(
     private readonly selectStateService: SelectStateService<T>,
@@ -27,6 +33,8 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
     ngControl.valueAccessor = this;
 
     this.selectStateService.setControlRef(ngControl);
+
+    this.subscription.add(this.handleIsExpandedChangesToEmitFocusEvents());
   }
 
   protected processCloseEvent(event: Event): void {
@@ -73,6 +81,10 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
   }
 
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   public writeValue(newValue: SelectOuterValue<T>): void {
     this.selectStateService.setValue(newValue);
   }
@@ -107,5 +119,11 @@ export abstract class SelectBase<T> implements OnChanges, ControlValueAccessor {
     }
 
     this.selectStateService.setUnselectionState(Boolean(updatedState));
+  }
+
+  private handleIsExpandedChangesToEmitFocusEvents(): Subscription {
+    return this.selectStateService.isExpanded$.subscribe((isExpanded: boolean) =>
+      isExpanded ? this.focus.emit() : this.blur.emit()
+    );
   }
 }
