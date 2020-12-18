@@ -8,7 +8,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-
 import { SelectStateService } from '../../../services/select-state.service';
 import { SelectBase } from './../../../../../../internal/declarations/classes/abstract/select-base.abstract';
 
