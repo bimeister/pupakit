@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import combos from 'combos';
+import { RadioOption } from '../example-viewer/radio-option';
 
 @Component({
   selector: 'demo-search-field-demo',
@@ -8,13 +8,14 @@ import combos from 'combos';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SearchFieldDemoComponent {
-  public readonly combos: any[] = combos({
-    kind: ['solid', 'outlined'],
-    expandable: [true, false]
-  });
-
-  public log(...data: unknown[]): void {
-    // tslint:disable-next-line: no-console
-    console.log(...data);
-  }
+  public readonly kindOptions: RadioOption[] = [
+    {
+      caption: 'Solid',
+      value: 'solid'
+    },
+    {
+      caption: 'Outlined',
+      value: 'outlined'
+    }
+  ];
 }

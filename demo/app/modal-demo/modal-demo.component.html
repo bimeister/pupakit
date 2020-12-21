@@ -1,1 +1,14 @@
-<pupa-button (click)="openModal()"> Open new modal </pupa-button>
+<h1>Modal window</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-button (click)="openModal()"> Open modal window </pupa-button>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties [formGroup]="formGroup">
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox formControlName="hasBackdrop">Has backdrop</demo-props-checkbox>
+    <demo-props-checkbox formControlName="isBackdropTransparent">Backdrop transparent</demo-props-checkbox>
+    <demo-props-checkbox formControlName="closeOnBackdropClick">Close on backdrop click</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

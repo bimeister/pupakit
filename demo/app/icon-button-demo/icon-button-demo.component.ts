@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import combos from 'combos';
+import { RadioOption } from '../example-viewer/radio-option';
 
 @Component({
   selector: 'demo-icon-button-demo',
@@ -8,11 +8,41 @@ import combos from 'combos';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IconButtonDemoComponent {
-  public readonly combos: any[] = combos({
-    color: ['dark', 'light', 'light-blue', 'transparent'],
-    active: [true, false],
-    disabled: [true, false],
-    size: ['small', 'small-to-medium', 'medium', 'large'],
-    isFloat: [true, false]
-  });
+  public readonly sizeOptions: RadioOption[] = [
+    {
+      caption: 'Large',
+      value: 'large'
+    },
+    {
+      caption: 'Medium',
+      value: 'medium'
+    },
+    {
+      caption: 'Small to medium',
+      value: 'small-to-medium'
+    },
+    {
+      caption: 'Small',
+      value: 'small'
+    }
+  ];
+
+  public readonly colorOptions: RadioOption[] = [
+    {
+      caption: 'Dark',
+      value: 'dark'
+    },
+    {
+      caption: 'Light',
+      value: 'light'
+    },
+    {
+      caption: 'Light blue',
+      value: 'light-blue'
+    },
+    {
+      caption: 'Transparent',
+      value: 'transparent'
+    }
+  ];
 }

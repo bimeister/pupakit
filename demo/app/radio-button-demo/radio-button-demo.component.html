@@ -1,12 +1,27 @@
-<h1>Radio-buttons</h1>
-<pupa-radio-group [formControl]="formControl">
-  <pupa-radio-control [value]="1">
-    <pupa-radio-control-marker></pupa-radio-control-marker>
-    <pupa-radio-control-label> Label 1 </pupa-radio-control-label>
-  </pupa-radio-control>
+<h1>Radio buttons</h1>
 
-  <pupa-radio-control [value]="2">
-    <pupa-radio-control-marker></pupa-radio-control-marker>
-    <pupa-radio-control-label> Label 2 </pupa-radio-control-label>
-  </pupa-radio-control>
-</pupa-radio-group>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-radio-group [formControl]="formControl">
+      <pupa-radio-control [value]="1">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>Option 1</pupa-radio-control-label>
+      </pupa-radio-control>
+
+      <pupa-radio-control [value]="2">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>Option 2</pupa-radio-control-label>
+      </pupa-radio-control>
+
+      <pupa-radio-control [value]="3">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>Option 3</pupa-radio-control-label>
+      </pupa-radio-control>
+    </pupa-radio-group>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-form-control-disabled [control]="formControl">Disabled</demo-props-form-control-disabled>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

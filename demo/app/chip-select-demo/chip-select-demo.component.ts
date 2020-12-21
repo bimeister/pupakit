@@ -1,16 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChipItem } from '../../../src/internal/declarations/interfaces/chip-item.interface';
 
-const SELECTORS_TO_SHOW: number = 99;
-
 @Component({
   selector: 'demo-chip-select',
-  styleUrls: ['chip-select-demo.component.scss', '../demo.scss'],
+  styleUrls: ['chip-select-demo.component.scss'],
   templateUrl: './chip-select-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChipSelectDemoComponent {
-  public arr: any[] = new Array(SELECTORS_TO_SHOW).fill(null);
   public selectItems: ChipItem[] = [
     {
       key: 'key_1',
@@ -26,29 +23,10 @@ export class ChipSelectDemoComponent {
       key: 'key_3',
       value: 'Item 3',
       icon: 'man'
-    },
-    {
-      key: 'key_3_1',
-      value: 'Item 3.1',
-      icon: 'add'
-    },
-    {
-      key: 'key_3_2',
-      value: 'Item 3.2',
-      icon: 'add'
-    },
-    {
-      key: 'key_3_3',
-      value: 'Item 3.3',
-      icon: 'add'
-    },
-    {
-      key: 'key_4',
-      value: 'Item 4',
-      icon: 'add'
     }
   ];
-  public items: ChipItem[] = [
+
+  public readonly items: ChipItem[] = [
     {
       key: 'key_1',
       value: 'Item 1 Item 1 Item 1 Item 1',
@@ -114,13 +92,7 @@ export class ChipSelectDemoComponent {
     }
   ];
 
-  public addedItem(item: ChipItem): void {
-    // tslint:disable-next-line: no-console
-    console.log(item);
-  }
-
-  public removedItem(item: ChipItem): void {
-    // tslint:disable-next-line: no-console
-    console.log(item);
+  public resetSelectedItems(): void {
+    this.selectItems = [];
   }
 }

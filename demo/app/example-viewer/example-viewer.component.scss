@@ -1,0 +1,11 @@
+:host {
+  display: flex;
+  flex-flow: row nowrap;
+  overflow: hidden;
+
+  width: 100%;
+  min-height: 400px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: #fafafa;
+  border-radius: 8px;
+}

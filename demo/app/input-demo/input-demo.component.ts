@@ -1,94 +1,48 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormControl, Validators } from '@angular/forms';
-import combos from 'combos';
-// tslint:disable-next-line: import-blacklist
-import { compact } from 'lodash';
-import { InputSize } from '../../../src/internal/declarations/types/input-size.type';
-
-interface InputCombo {
-  size: InputSize;
-  placeholder: string;
-  disabled: boolean;
-  required: boolean;
-  transparent: boolean;
-  validationOnLength: boolean;
-}
-
-const MAX_LENGTH_EXAMPLE: number = 3;
+import { RadioOption } from '../example-viewer/radio-option';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 
 @Component({
   selector: 'demo-input',
-  styleUrls: ['../demo.scss', 'input-demo.component.scss'],
+  styleUrls: ['input-demo.component.scss'],
   templateUrl: './input-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent {
-  public readonly switcherThemeControl: FormControl = new FormControl(false);
+  public readonly placeholder: string = 'Введите данные';
 
-  public readonly combos: InputCombo[] = combos({
-    size: ['medium', 'small', 'large'],
-    placeholder: ['placeholder'],
-    disabled: [false, true],
-    required: [false, true],
-    transparent: [false, true],
-    validationOnLength: [false, true]
-  });
+  public readonly typeOptions: RadioOption[] = [
+    {
+      caption: 'Text',
+      value: 'text'
+    },
+    {
+      caption: 'Password',
+      value: 'password'
+    },
+    {
+      caption: 'Number',
+      value: 'number'
+    }
+  ];
 
-  public readonly inputTextFormArray: FormArray = new FormArray(
-    this.combos.map(
-      (combo: InputCombo) =>
-        new FormControl(
-          {
-            value: '',
-            disabled: combo.disabled
-          },
-          compact([
-            combo.required ? Validators.required : null,
-            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
-          ])
-        )
-    )
-  );
+  public readonly sizeOptions: RadioOption[] = [
+    {
+      caption: 'Large',
+      value: 'large'
+    },
+    {
+      caption: 'Medium',
+      value: 'medium',
+      isDefault: true
+    },
+    {
+      caption: 'Small',
+      value: 'small'
+    }
+  ];
 
-  public readonly inputPasswordFormArray: FormArray = new FormArray(
-    this.combos.map(
-      (combo: InputCombo) =>
-        new FormControl(
-          {
-            value: '',
-            disabled: combo.disabled
-          },
-          compact([
-            combo.required ? Validators.required : null,
-            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
-          ])
-        )
-    )
-  );
+  public readonly validators: ValidatorFn[] = [Validators.required, Validators.maxLength(15)];
 
-  public readonly inputDateFormArray: FormArray = new FormArray([
-    new FormControl(new Date('11-01-2012')),
-    new FormControl(new Date('11-01-2012'))
-  ]);
-
-  public readonly inputDateRangeFormArray: FormArray = new FormArray([
-    new FormControl([new Date('11-01-2012'), new Date('01-03-2012')]),
-    new FormControl([new Date('11-01-2012'), new Date('01-03-2012')])
-  ]);
-
-  public readonly inputNumberFormArray: FormArray = new FormArray(
-    this.combos.map(
-      (combo: InputCombo) =>
-        new FormControl(
-          {
-            value: '',
-            disabled: combo.disabled
-          },
-          compact([
-            combo.required ? Validators.required : null,
-            combo.validationOnLength ? Validators.maxLength(MAX_LENGTH_EXAMPLE) : null
-          ])
-        )
-    )
-  );
+  public readonly formControl: FormControl = new FormControl('');
 }

@@ -2,33 +2,54 @@
 @import './../../src/styles/mixins.scss';
 @import './../../src/styles/functions.scss';
 
-.index {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  top: 0;
-  width: 200px;
-  overflow: auto;
-  border-right: 1px solid color(grey-ivory);
-  box-sizing: border-box;
-}
+@include scrollbar();
 
-main {
-  margin-left: 200px;
-  width: calc(100% - 200px);
+.layout-wrapper {
   height: 100vh;
-  overflow: auto;
-  @include scrollbar;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-.index-item {
-  display: block;
-  padding: rems(0.5);
-  text-transform: capitalize;
+.navigation {
+  width: 300px;
+  color: #616161;
+  box-shadow: 5px 0 19px 0 #d3d3d35e;
+  overflow: auto;
 
-  &.active {
-    background: rgba(color(grey-ivory-rgb), 0.1);
+  .subheader {
+    font-weight: 300;
+    color: #212121bf;
+    margin-bottom: 8px;
+    padding-left: 24px;
+    font-size: 1.125rem;
+    line-height: 1.5;
+  }
+
+  .navigation-item {
+    color: inherit;
+    font-size: 0.875rem;
+    letter-spacing: 0.033em;
+    display: block;
+    padding: 12px 48px 12px 32px;
+    line-height: 1.333;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    &.active,
+    &:hover {
+      color: #212121;
+      background: #f5f5f5;
+    }
   }
 }
 
-@include scrollbar;
+.content-wrapper {
+  flex: 1;
+  padding: 0 32px;
+  overflow: auto;
+}
+
+.content {
+  min-width: 700px;
+  max-width: 1000px;
+}

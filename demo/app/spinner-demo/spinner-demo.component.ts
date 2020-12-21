@@ -1,14 +1,25 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import combos from 'combos';
+import { RadioOption } from '../example-viewer/radio-option';
 
 @Component({
   selector: 'demo-spinner-demo',
-  styleUrls: ['../demo.scss'],
   templateUrl: './spinner-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpinnerDemoComponent {
-  public readonly combos: any[] = combos({
-    size: ['32px', '16px', '14px']
-  });
+  public readonly size: string = '32px';
+  public readonly typeOptions: RadioOption[] = [
+    {
+      caption: 'Simple',
+      value: 'simple'
+    },
+    {
+      caption: 'Bagel',
+      value: 'bagel'
+    },
+    {
+      caption: 'Scene loader',
+      value: 'loader'
+    }
+  ];
 }

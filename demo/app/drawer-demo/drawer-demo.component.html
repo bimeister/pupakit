@@ -1,50 +1,17 @@
-<pupa-button (click)="openDrawer()"> Open new drawer </pupa-button>
+<h1>Drawer</h1>
 
-<div class="wrapper">
-  <div class="placeholder"></div>
-  <pupa-button (onclick)="isDrawerVisible = !isDrawerVisible">
-    {{ isDrawerVisible ? 'Hide' : 'Show' }} drawer
-  </pupa-button>
-  <pupa-button (onclick)="destroyContentOnClose = !destroyContentOnClose">
-    {{ destroyContentOnClose ? 'destroy' : 'keep' }}content
-  </pupa-button>
-  <pupa-button (onclick)="withOverlay = !withOverlay"> {{ withOverlay ? 'with' : 'without' }} overlay </pupa-button>
-  <pupa-button (onclick)="floatRight = !floatRight"> float {{ floatRight ? 'right' : 'left' }} </pupa-button>
-  <pupa-button (onclick)="withDragger = !withDragger"> {{ withDragger ? 'with' : 'without' }} dragger </pupa-button>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-button (click)="openDrawer()"> Open drawer </pupa-button>
+  </demo-example-viewer-content>
 
-  <pupa-drawer
-    [withOverlay]="withOverlay"
-    [float]="floatRight ? 'right' : 'left'"
-    [isVisible]="isDrawerVisible"
-    [destroyContentOnClose]="destroyContentOnClose"
-    (close)="isDrawerVisible = false"
-    contentWidth="363px"
-  >
-    <div class="drawer-content">
-      <div class="text">
-        <h3 class="title">Пример текста</h3>
-        <p>
-          Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem
-          aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-          Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni
-          dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor
-          sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore
-          magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-          suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in
-          ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas
-          nulla pariatur? At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium
-          voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non
-          provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et
-          harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi
-          optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est,
-          omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe
-          eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a
-          sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus
-          asperiores repellat.
-        </p>
-      </div>
-      <pupa-button kind="solid" size="large" (onclick)="isDrawerVisible = false"> Закрыть </pupa-button>
-      <pupa-drawer-dragger *ngIf="withDragger" class="dragger"></pupa-drawer-dragger>
-    </div>
-  </pupa-drawer>
-</div>
+  <demo-example-viewer-properties [formGroup]="formGroup">
+    <demo-props-group-label>Float</demo-props-group-label>
+    <demo-props-radio-select formControlName="float" [options]="floatOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox formControlName="hasBackdrop">Has backdrop</demo-props-checkbox>
+    <demo-props-checkbox formControlName="isBackdropTransparent">Backdrop transparent</demo-props-checkbox>
+    <demo-props-checkbox formControlName="closeOnBackdropClick">Close on backdrop click</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

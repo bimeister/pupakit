@@ -1,19 +1,12 @@
 <h1>Chip</h1>
-<div class="group">
-  <div class="chip-wrap">
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip><span>Sample chip</span></pupa-chip>
-    <pupa-chip class="disable"><span>Sample chip</span></pupa-chip>
-  </div>
-  <div class="chip-wrap">
-    <pupa-chip>
-      <span> Sample chip text, text, text, text, text, text, text, text, text, text, text, text, text, text </span>
-    </pupa-chip>
-  </div>
-</div>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-chip [color]="color | async">Sample chip</pupa-chip>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Color</demo-props-group-label>
+    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

@@ -1,5 +1,9 @@
 @import 'functions';
 
+:host {
+  display: block;
+}
+
 .combo {
   margin-bottom: rems(1);
 }

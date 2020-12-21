@@ -45,4 +45,3 @@ export * from './tooltip/api';
 export * from './tree/api';
 export * from './uploads/api';
 export * from './vertical-tabs/api';
-export * from './washer/api';

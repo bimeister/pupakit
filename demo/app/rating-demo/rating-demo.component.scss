@@ -1,11 +1,3 @@
-@import './../demo.scss';
-@import './../../../src/styles/mixins.scss';
-
-.group {
-  @include inline-flex-container(row, flex-start, flex-start, wrap);
-
-  & > * {
-    flex: unset;
-    padding: rems(1) rems(1) 0 0;
-  }
+:host {
+  display: block;
 }

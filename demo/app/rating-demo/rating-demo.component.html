@@ -1,12 +1,12 @@
 <h1>Rating</h1>
-<div>
-  <div>value: {{ rating }}</div>
-  <pupa-rating [(ngModel)]="rating"></pupa-rating>
-  <pupa-rating [(ngModel)]="rating" [disabled]="true"></pupa-rating>
-</div>
 
-<h2>Form-control</h2>
-<form [formGroup]="form">
-  <div>value: {{ form.get('rating').value }}</div>
-  <pupa-rating [numberOfStars]="10" formControlName="rating"></pupa-rating>
-</form>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-rating [value]="3" [disabled]="disabled | async"></pupa-rating>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

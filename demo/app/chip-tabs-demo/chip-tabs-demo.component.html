@@ -1,10 +1,12 @@
-<pupa-chip-tabs
-  class="tabs-container__tabs"
-  (latestClickedTabIndex)="logLatestClickedTabIndex($event)"
-  (selectedTabIndexes)="logSelectedTabsIndexes($event)"
->
-  <pupa-chip-tabs-item class="tabs-container__tab" [isActive]="true"> Свойства </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab"> Интерфейсы </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab"> Классы </pupa-chip-tabs-item>
-  <pupa-chip-tabs-item class="tabs-container__tab"> Структуры </pupa-chip-tabs-item>
-</pupa-chip-tabs>
+<h1>Chip tabs</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-chip-tabs>
+      <pupa-chip-tabs-item [isActive]="true">Свойства</pupa-chip-tabs-item>
+      <pupa-chip-tabs-item>Интерфейсы</pupa-chip-tabs-item>
+      <pupa-chip-tabs-item>Классы</pupa-chip-tabs-item>
+      <pupa-chip-tabs-item>Структуры</pupa-chip-tabs-item>
+    </pupa-chip-tabs>
+  </demo-example-viewer-content>
+</demo-example-viewer>

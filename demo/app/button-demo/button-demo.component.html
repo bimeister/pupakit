@@ -1,17 +1,34 @@
 <h1>Button</h1>
-<div class="group">
-  <pupa-button
-    *ngFor="let combo of combos"
-    [type]="combo.type"
-    [size]="combo.size"
-    [icon]="combo.icon"
-    [color]="combo.color"
-    [disabled]="combo.disabled"
-    [loader]="isLoaderVisible$ | async"
-    title="type: {{ combo.type }}; size: {{ combo.size }};  color: {{ combo.color }}; disabled: {{ combo.disabled }}"
-    (click)="testDefaultClick($event)"
-    (onclick)="showLoader(); testOnClick($event)"
-  >
-    Sample button
-  </pupa-button>
-</div>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-button
+      [kind]="kind | async"
+      [color]="color | async"
+      [size]="size | async"
+      [icon]="icon | async"
+      [loader]="loading | async"
+      [disabled]="disabled | async"
+    >
+      Sample button
+    </pupa-button>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Size</demo-props-group-label>
+    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Kind</demo-props-group-label>
+    <demo-props-radio-select #kind [options]="kindOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Color</demo-props-group-label>
+    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Icon</demo-props-group-label>
+    <demo-props-radio-select #icon [options]="iconOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox #loading>Loading</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

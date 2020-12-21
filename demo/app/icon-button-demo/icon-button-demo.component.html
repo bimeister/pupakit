@@ -1,21 +1,32 @@
 <h1>Icon button</h1>
-<div class="group">
-  <pupa-icon-button
-    *ngFor="let combo of combos"
-    [color]="combo.color"
-    [active]="combo.active"
-    [disabled]="combo.disabled"
-    [size]="combo.size"
-    [isFloat]="combo.isFloat"
-    title="color: {{ combo.color }}; active: {{ combo.active }}; disabled: {{ combo.disabled }}; size: {{
-      combo.size
-    }}; isFloat: {{ combo.isFloat }}"
-  >
-    <pupa-icon name="close-circle"></pupa-icon>
-  </pupa-icon-button>
-</div>
 
-<div class="placeholder"></div>
-<pupa-icon-button [size]="'large'" [color]="'dark'" [fixed]="true" [title]="'fixed button'">
-  <pupa-icon name="save"></pupa-icon>
-</pupa-icon-button>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-icon-button
+      [color]="color | async"
+      [size]="size | async"
+      [disabled]="disabled | async"
+      [active]="active | async"
+      [isFloat]="isFloat | async"
+      [fixed]="fixed | async"
+      [isDisabledContentOpacity]="isDisabledContentOpacity | async"
+    >
+      <pupa-icon name="add-circle"></pupa-icon>
+    </pupa-icon-button>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Size</demo-props-group-label>
+    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Color</demo-props-group-label>
+    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #active>Active</demo-props-checkbox>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox #isFloat>Floating</demo-props-checkbox>
+    <demo-props-checkbox #fixed>Fixed</demo-props-checkbox>
+    <demo-props-checkbox #isDisabledContentOpacity>Disabled content opacity</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

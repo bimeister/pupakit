@@ -1,13 +1,15 @@
 <h1>Checkbox</h1>
-<div class="group">
-  <pupa-checkbox
-    *ngFor="let combo of combos"
-    [value]="combo.value"
-    [disabled]="combo.disabled"
-    [indeterminate]="combo.indeterminate"
-    (valueChange)="log($event)"
-    title="value: {{ combo.value }}; disabled: {{ combo.disabled }}; indeterminate: {{ combo.indeterminate }}"
-  >
-    {{ combo.label }}
-  </pupa-checkbox>
-</div>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-checkbox [value]="true" [disabled]="disabled | async" [indeterminate]="indeterminate | async">
+      Sample text
+    </pupa-checkbox>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #indeterminate>Indeterminate</demo-props-checkbox>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

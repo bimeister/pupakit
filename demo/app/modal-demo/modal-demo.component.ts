@@ -6,6 +6,7 @@ import { ModalsService } from '../../../src/lib/components/modal/services/modals
 import { MODAL_DATA_TOKEN } from '../../declarations/tokens/modal-data.token';
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoLocalService } from './services/modal-demo-local.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'demo-modal-demo',
@@ -15,13 +16,17 @@ import { ModalDemoLocalService } from './services/modal-demo-local.service';
   providers: [ModalDemoLocalService]
 })
 export class ModalDemoComponent {
+  public readonly formGroup: FormGroup = new FormGroup({
+    hasBackdrop: new FormControl(true),
+    closeOnBackdropClick: new FormControl(true),
+    isBackdropTransparent: new FormControl(false)
+  });
+
   constructor(private readonly modalsService: ModalsService, private readonly injector: Injector) {}
 
   public openModal(): void {
     const openedModal: OpenedModal<string> = this.modalsService.open(ModalDemoContentComponent, {
-      hasBackdrop: true,
-      closeOnBackdropClick: false,
-      isBackdropTransparent: false,
+      ...this.formGroup.value,
       injector: this.injector,
       viewportMarginPx: 10,
       providers: [
