@@ -1,21 +1,13 @@
 <h1>Switcher</h1>
-<div class="group">
-  <div class="flex" *ngFor="let props of combos; let index = index">
-    <pupa-switcher
-      [(ngModel)]="value"
-      [disabled]="props.disabled"
-      [indifferent]="props.indifferent"
-      [id]="'' + index"
-    ></pupa-switcher>
-    <label [for]="'' + index"> value: {{ value }} </label>
-  </div>
-</div>
 
-<h2>Form Control</h2>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-switcher [disabled]="disabled | async" [indifferent]="indifferent | async"></pupa-switcher>
+  </demo-example-viewer-content>
 
-<div class="group">
-  <form class="flex" [formGroup]="form">
-    <pupa-switcher formControlName="switcher" [id]="'formControl'"></pupa-switcher>
-    <label for="formControl">value: {{ form.get('switcher').value }}</label>
-  </form>
-</div>
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #indifferent>Indifferent</demo-props-checkbox>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

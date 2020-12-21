@@ -1,24 +1,29 @@
-<h1>SearchField</h1>
-<div class="group">
-  <ng-container *ngFor="let combo of combos">
-    <pupa-search-field
-      *ngIf="!combo.expandable"
-      class="search-field"
-      placeholder="Введите название"
-      [expandable]="combo.expandable"
-      [kind]="combo.kind"
-      (valueChange)="log($event)"
-    ></pupa-search-field>
+<h1>Search field</h1>
 
-    <div class="expansion-container" *ngIf="combo.expandable">
-      <button>button</button>
-      <pupa-search-field
-        class="search-field"
-        placeholder="Введите название"
-        [expandable]="combo.expandable"
-        [kind]="combo.kind"
-        (valueChange)="log($event)"
-      ></pupa-search-field>
-    </div>
-  </ng-container>
-</div>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <ng-container [ngSwitch]="expandable | async">
+      <ng-container *ngSwitchCase="true">
+        <div class="search-wrapper">
+          <div class="header-placeholder">
+            <div class="header-placeholder-content"></div>
+          </div>
+
+          <pupa-search-field placeholder="Поиск" [expandable]="true" [kind]="kind | async"></pupa-search-field>
+        </div>
+      </ng-container>
+
+      <ng-container *ngSwitchCase="false">
+        <pupa-search-field placeholder="Поиск" [expandable]="false" [kind]="kind | async"></pupa-search-field>
+      </ng-container>
+    </ng-container>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Kind</demo-props-group-label>
+    <demo-props-radio-select #kind [options]="kindOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #expandable>Expandable</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

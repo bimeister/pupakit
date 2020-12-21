@@ -6,22 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
-
-import { iosCheckmarkIcon } from '../../src/internal/constants/icons/ios-checkmark-icon.const';
-import { mdAddIcon } from '../../src/internal/constants/icons/md-add-icon.const';
-import { mdCheckmarkCircleIcon } from '../../src/internal/constants/icons/md-checkmark-circle-icon.const';
-import { mdCloseCircleIcon } from '../../src/internal/constants/icons/md-close-circle-icon.const';
-import { mdCloseIcon } from '../../src/internal/constants/icons/md-close-icon.const';
-import { mdHelpCircleIcon } from '../../src/internal/constants/icons/md-help-circle-icon.const';
-import { mdHomeIcon } from '../../src/internal/constants/icons/md-home-icon.const';
-import { mdManIcon } from '../../src/internal/constants/icons/md-man-icon.const';
-import { mdMoreIcon } from '../../src/internal/constants/icons/md-more-icon.const';
-import { mdMoveIcon } from '../../src/internal/constants/icons/md-move-icon.const';
-import { mdPersonAddIcon } from '../../src/internal/constants/icons/md-person-add-icon.const';
-import { mdPizzaIcon } from '../../src/internal/constants/icons/md-pizza-icon.const';
-import { mdSaveIcon } from '../../src/internal/constants/icons/md-save-icon.const';
-import { mdTrashIcon } from '../../src/internal/constants/icons/md-trash-icon.const';
-import { ComponentsModule, IconModule, mdDocumentIcon, mdRefreshCircleIcon, mdLockIcon } from './../../src/public-api';
+import { ComponentsModule, IconModule } from './../../src/public-api';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
@@ -66,7 +51,12 @@ import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.compon
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
-import { WasherPanelDemoComponent } from './washer-panel-demo/washer-panel-demo.component';
+import { ColorsComponent } from './colors/colors.component';
+import { demoRoutes } from './routes';
+import { TypographyPageComponent } from './typography-page/typography-page.component';
+import { ExampleViewerModule } from './example-viewer/example-viewer.module';
+import { IconPageComponent } from './icon-page/icon-page.component';
+import { getAllIcons } from '../declarations/functions/get-all-icons.function';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -90,8 +80,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DroppableDemoComponent,
     RatingDemoComponent,
     DaySelectorDemoComponent,
-    WasherPanelDemoComponent,
-    IconButtonDemoComponent,
     ChipDemoComponent,
     ChipButtonDemoComponent,
     ChipSelectDemoComponent,
@@ -118,164 +106,20 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TreeDemoComponent,
     LogPipe,
     TestDrawerComponent,
-    UploadsDemoComponent
+    UploadsDemoComponent,
+    ColorsComponent,
+    TypographyPageComponent,
+    IconPageComponent
   ],
   imports: [
-    IconModule.forRoot([
-      mdCloseCircleIcon,
-      mdHelpCircleIcon,
-      mdTrashIcon,
-      mdMoreIcon,
-      mdLockIcon,
-      mdCloseCircleIcon,
-      mdSaveIcon,
-      iosCheckmarkIcon,
-      mdCheckmarkCircleIcon,
-      mdPizzaIcon,
-      mdPersonAddIcon,
-      mdManIcon,
-      mdAddIcon,
-      mdMoveIcon,
-      mdHomeIcon,
-      mdCloseIcon,
-      mdDocumentIcon,
-      mdRefreshCircleIcon
-    ]),
+    IconModule.forRoot(getAllIcons()),
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: '/loader'
-      },
-      {
-        path: 'spinner',
-        component: SpinnerDemoComponent
-      },
-      {
-        path: 'chip-select-tree',
-        component: ChipSelectTreeDemoComponent
-      },
-      {
-        path: 'loader',
-        component: LoaderDemoComponent
-      },
-      {
-        path: 'button',
-        component: ButtonDemoComponent
-      },
-      {
-        path: 'chip',
-        component: ChipDemoComponent
-      },
-      {
-        path: 'chip-button',
-        component: ChipButtonDemoComponent
-      },
-      {
-        path: 'chip-select',
-        component: ChipSelectDemoComponent
-      },
-      {
-        path: 'chip-tabs',
-        component: ChipTabsDemoComponent
-      },
-      {
-        path: 'icon-button',
-        component: IconButtonDemoComponent
-      },
-      {
-        path: 'checkbox',
-        component: CheckboxDemoComponent
-      },
-      {
-        path: 'input',
-        component: InputDemoComponent
-      },
-      {
-        path: 'table-input',
-        component: TableInputDemoComponent
-      },
-      {
-        path: 'search-field',
-        component: SearchFieldDemoComponent
-      },
-      {
-        path: 'dropdown',
-        component: DropdownDemoComponent
-      },
-      {
-        path: 'tile',
-        component: TileDemoComponent
-      },
-      {
-        path: 'time-input',
-        component: TimeInputDemoComponent
-      },
-      {
-        path: 'tree',
-        component: TreeDemoComponent
-      },
-      {
-        path: 'select',
-        component: SelectDemoComponent
-      },
-      {
-        path: 'select-multiple',
-        component: SelectMultipleDemoComponent
-      },
-      {
-        path: 'switcher',
-        component: SwitcherDemoComponent
-      },
-      {
-        path: 'droppable',
-        component: DroppableDemoComponent
-      },
-      {
-        path: 'rating',
-        component: RatingDemoComponent
-      },
-      {
-        path: 'day-selector',
-        component: DaySelectorDemoComponent
-      },
-      {
-        path: 'draggable',
-        component: DraggableDemoComponent
-      },
-      {
-        path: 'date-time-picker',
-        component: DateTimePickerDemoComponent
-      },
-      { path: 'washer-panel', component: WasherPanelDemoComponent },
-      { path: 'scrollbar', component: ScrollbarDemoComponent },
-      { path: 'modal', component: ModalDemoComponent },
-      { path: 'tabs', component: TabsDemoComponent },
-      { path: 'datagrid', component: DatagridDemoComponent },
-      { path: 'drawer', component: DrawerDemoComponent },
-      { path: 'textarea', component: TextareaDemoComponent },
-      { path: 'tabs-drawer', component: TabsDrawerDemoComponent },
-      { path: 'radio', component: RadioButtonDemoComponent },
-      { path: 'layout', component: LayoutDemoComponent },
-      { path: 'multiselection-list', component: MultiselectionListDemoComponent },
-      { path: 'tooltip', component: TooltipDemoComponent },
-      { path: 'draggable-list', component: DraggableListDemoComponent },
-      { path: 'dropdown-menu', component: DropdownMenuDemoComponent },
-      { path: 'selector', component: SelectorDemoComponent },
-      {
-        path: 'uploads',
-        component: UploadsDemoComponent
-      },
-      {
-        path: '',
-        component: AppComponent
-      }
-    ])
+    RouterModule.forRoot(demoRoutes),
+    ExampleViewerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   exports: [LogPipe]

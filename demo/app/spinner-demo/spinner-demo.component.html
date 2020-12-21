@@ -1,5 +1,22 @@
-<h1>Spinner</h1>
-<div class="group">
-  <pupa-spinner *ngFor="let combo of combos" [size]="combo.size"></pupa-spinner>
-  <pupa-bagel-spinner *ngFor="let combo of combos" [size]="combo.size"></pupa-bagel-spinner>
-</div>
+<h1>Spinner & loader</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <ng-container [ngSwitch]="type | async">
+      <ng-container *ngSwitchCase="'simple'">
+        <pupa-spinner [size]="size"></pupa-spinner>
+      </ng-container>
+      <ng-container *ngSwitchCase="'bagel'">
+        <pupa-bagel-spinner [size]="size"></pupa-bagel-spinner>
+      </ng-container>
+      <ng-container *ngSwitchCase="'loader'">
+        <pupa-loader></pupa-loader>
+      </ng-container>
+    </ng-container>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Type</demo-props-group-label>
+    <demo-props-radio-select #type [options]="typeOptions"></demo-props-radio-select>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

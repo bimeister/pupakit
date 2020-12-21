@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'demo-loader',
@@ -7,9 +6,4 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './rating-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RatingDemoComponent {
-  public rating: number = 3;
-  public readonly form: FormGroup = new FormGroup({
-    rating: new FormControl(this.rating)
-  });
-}
+export class RatingDemoComponent {}

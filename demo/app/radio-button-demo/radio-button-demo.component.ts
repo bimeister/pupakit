@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'demo-button',
-  styleUrls: ['../demo.scss', './radio-button-demo.component.scss'],
+  styleUrls: ['./radio-button-demo.component.scss'],
   templateUrl: './radio-button-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

@@ -1,48 +1,77 @@
 <pupa-layout>
-  <aside class="index">
-    <a routerLink="/button" class="index-item">Button</a>
-    <a routerLink="/checkbox" class="index-item">Checkbox</a>
-    <a routerLink="/chip" class="index-item">Chip</a>
-    <a routerLink="/chip-button" class="index-item">Chip button</a>
-    <a routerLink="/chip-select" class="index-item">Chip select</a>
-    <a routerLink="/chip-select-tree" class="index-item">Chip select tree</a>
-    <a routerLink="/chip-tabs" class="index-item">Chip Tabs</a>
-    <a routerLink="/datagrid" class="index-item">Datagrid</a>
-    <a routerLink="/date-time-picker" class="index-item">Date time pickers</a>
-    <a routerLink="/draggable" class="index-item">Draggable</a>
-    <a routerLink="/day-selector" class="index-item">Day selector</a>
-    <a routerLink="/drawer" class="index-item">Drawer</a>
-    <a routerLink="/dropdown" class="index-item">Dropdown</a>
-    <a routerLink="/dropdown-menu" class="index-item">Dropdown menu</a>
-    <a routerLink="/droppable" class="index-item">Droppable</a>
-    <a routerLink="/icon-button" class="index-item">Icon button</a>
-    <a routerLink="/input" class="index-item">Input</a>
-    <a routerLink="/table-input" class="index-item">Table Input</a>
-    <a routerLink="/layout" class="index-item">Layout</a>
-    <a routerLink="/modal" class="index-item">Modal</a>
-    <a routerLink="/radio" class="index-item">Radio</a>
-    <a routerLink="/rating" class="index-item">Rating</a>
-    <a routerLink="/scrollbar" class="index-item">Scrollbar</a>
-    <a routerLink="/search-field" class="index-item">Search Field</a>
-    <a routerLink="/select" class="index-item">Select</a>
-    <a routerLink="/select-multiple" class="index-item">Select Multiple</a>
-    <a routerLink="/selector" class="index-item">Selector</a>
-    <a routerLink="/spinner" class="index-item">Spinner</a>
-    <a routerLink="/switcher" class="index-item">Switcher</a>
-    <a routerLink="/tabs" class="index-item">Tabs</a>
-    <a routerLink="/tabs-drawer" class="index-item">Tabs in drawer</a>
-    <a routerLink="/tree" class="index-item">Tree</a>
-    <a routerLink="/tooltip" class="index-item">Tooltip</a>
-    <a routerLink="/textarea" class="index-item">Textarea</a>
-    <a routerLink="/tile" class="index-item">Tile</a>
-    <a routerLink="/time-input" class="index-item">Time input</a>
-    <a routerLink="/washer-panel" class="index-item">Washer</a>
-    <a routerLink="/multiselection-list" class="index-item">Multiselection list</a>
-    <a routerLink="/draggable-list" class="index-item">Draggable list</a>
-    <a routerLink="/uploads" class="index-item">Uploads</a>
-  </aside>
+  <div class="layout-wrapper">
+    <nav class="navigation">
+      <ng-container>
+        <h3 class="subheader">General</h3>
+        <a routerLinkActive="active" routerLink="/typography" class="navigation-item">Typography</a>
+        <a routerLinkActive="active" routerLink="/colors" class="navigation-item">Colors</a>
+        <a routerLinkActive="active" routerLink="/icon" class="navigation-item">Icon</a>
+        <a routerLinkActive="active" routerLink="/button" class="navigation-item">Button</a>
+        <a routerLinkActive="active" routerLink="/icon-button" class="navigation-item">Icon button</a>
+      </ng-container>
 
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+      <ng-container>
+        <h3 class="subheader">Data Entry</h3>
+        <a routerLinkActive="active" routerLink="/checkbox" class="navigation-item">Checkbox</a>
+        <a routerLinkActive="active" routerLink="/switcher" class="navigation-item">Switcher</a>
+        <a routerLinkActive="active" routerLink="/date-time-picker" class="navigation-item">[!] Date time pickers</a>
+        <a routerLinkActive="active" routerLink="/input" class="navigation-item">Input</a>
+        <a routerLinkActive="active" routerLink="/table-input" class="navigation-item">Table Input</a>
+        <a routerLinkActive="active" routerLink="/search-field" class="navigation-item">Search Field</a>
+        <a routerLinkActive="active" routerLink="/textarea" class="navigation-item">[!] Textarea</a>
+        <a routerLinkActive="active" routerLink="/radio" class="navigation-item">Radio buttons</a>
+        <a routerLinkActive="active" routerLink="/rating" class="navigation-item">Rating</a>
+        <a routerLinkActive="active" routerLink="/select" class="navigation-item">[!] Select</a>
+        <a routerLinkActive="active" routerLink="/chip-select" class="navigation-item">Chip select</a>
+        <a routerLinkActive="active" routerLink="/selector" class="navigation-item">Selector</a>
+        <a routerLinkActive="active" routerLink="/uploads" class="navigation-item">[!] Uploads</a>
+      </ng-container>
+
+      <ng-container>
+        <h3 class="subheader">Data Display</h3>
+        <a routerLinkActive="active" routerLink="/datagrid" class="navigation-item">Datagrid</a>
+        <a routerLinkActive="active" routerLink="/tree" class="navigation-item">Tree</a>
+        <a routerLinkActive="active" routerLink="/tooltip" class="navigation-item">Tooltip</a>
+        <a routerLinkActive="active" routerLink="/tabs" class="navigation-item">Tabs</a>
+        <a routerLinkActive="active" routerLink="/chip-tabs" class="navigation-item">Chip Tabs</a>
+        <a routerLinkActive="active" routerLink="/chip" class="navigation-item">Chip</a>
+        <a routerLinkActive="active" routerLink="/chip-button" class="navigation-item">Chip button</a>
+      </ng-container>
+
+      <ng-container>
+        <h3 class="subheader">Feedback</h3>
+        <a routerLinkActive="active" routerLink="/drawer" class="navigation-item">Drawer</a>
+        <a routerLinkActive="active" routerLink="/modal" class="navigation-item">Modal</a>
+        <a routerLinkActive="active" routerLink="/spinner" class="navigation-item">Spinner & loader</a>
+      </ng-container>
+
+      <ng-container>
+        <h3 class="subheader">Other</h3>
+        <a routerLinkActive="active" routerLink="/tile" class="navigation-item">Tile</a>
+        <a routerLinkActive="active" routerLink="/draggable" class="navigation-item">[!] Draggable</a>
+        <a routerLinkActive="active" routerLink="/droppable" class="navigation-item">[!] Droppable</a>
+        <a routerLinkActive="active" routerLink="/dropdown" class="navigation-item">[!] Dropdown</a>
+        <a routerLinkActive="active" routerLink="/dropdown-menu" class="navigation-item">[!] Dropdown menu</a>
+      </ng-container>
+
+      <ng-container>
+        <h3 class="subheader">Deprecated, unused, useless</h3>
+        <a routerLinkActive="active" routerLink="/layout" class="navigation-item">Layout</a>
+        <a routerLinkActive="active" routerLink="/draggable-list" class="navigation-item">Draggable list</a>
+        <a routerLinkActive="active" routerLink="/multiselection-list" class="navigation-item">Multiselection list</a>
+        <a routerLinkActive="active" routerLink="/select-multiple" class="navigation-item">Select Multiple</a>
+        <a routerLinkActive="active" routerLink="/day-selector" class="navigation-item">Day selector</a>
+        <a routerLinkActive="active" routerLink="/time-input" class="navigation-item">Time input</a>
+        <a routerLinkActive="active" routerLink="/scrollbar" class="navigation-item">Scrollbar</a>
+        <a routerLinkActive="active" routerLink="/tabs-drawer" class="navigation-item">Tabs in drawer</a>
+        <a routerLinkActive="active" routerLink="/chip-select-tree" class="navigation-item">Chip select tree</a>
+      </ng-container>
+    </nav>
+
+    <main class="content-wrapper">
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
 </pupa-layout>

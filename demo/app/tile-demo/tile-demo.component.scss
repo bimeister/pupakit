@@ -1,11 +1,19 @@
-@import './../demo.scss';
-@import './../../../src/styles/mixins.scss';
+:host {
+  display: block;
+}
 
-.group {
-  @include inline-flex-container(row, flex-start, flex-start, wrap);
+.tile-wrapper {
+  width: 600px;
+  height: 400px;
+}
 
-  & > * {
-    flex: unset;
-    padding: 1rem 1rem 0 0;
-  }
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 400px;
+
+  background: url('https://image.freepik.com/free-vector/isometric-factory_1344-5.jpg') no-repeat center center;
+  background-size: contain;
 }

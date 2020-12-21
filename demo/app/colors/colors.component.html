@@ -1,0 +1,9 @@
+<h1>Colors</h1>
+
+<div class="content">
+  <ng-container *ngFor="let color of colors">
+    <div class="color" [ngStyle]="getBackground(color)" [class.inverted]="isColorLight(color)">
+      {{ color }}
+    </div>
+  </ng-container>
+</div>

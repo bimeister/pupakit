@@ -1,50 +1,84 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import combos from 'combos';
-import { BehaviorSubject } from 'rxjs';
+import { RadioOption } from '../example-viewer/radio-option';
 
 @Component({
   selector: 'demo-button',
-  styleUrls: ['../demo.scss'],
   templateUrl: './button-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonDemoComponent {
-  public readonly isLoaderVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly sizeOptions: RadioOption[] = [
+    {
+      caption: 'Large',
+      value: 'large'
+    },
+    {
+      caption: 'Medium',
+      value: 'medium',
+      isDefault: true
+    },
+    {
+      caption: 'Small',
+      value: 'small'
+    }
+  ];
 
-  public readonly combos: any[] = combos({
-    type: ['solid', 'outlined', 'link'],
-    color: ['normal', 'normal-light', 'negative', 'positive', 'alert'],
-    size: ['large', 'medium', 'small'],
-    disabled: [false, true],
-    icon: [
-      null,
-      {
-        name: 'checkmark-circle',
+  public readonly kindOptions: RadioOption[] = [
+    {
+      caption: 'Solid',
+      value: 'solid'
+    },
+    {
+      caption: 'Outlined',
+      value: 'outlined'
+    },
+    {
+      caption: 'Link',
+      value: 'link'
+    }
+  ];
+
+  public readonly colorOptions: RadioOption[] = [
+    {
+      caption: 'Normal',
+      value: 'normal'
+    },
+    {
+      caption: 'Normal light',
+      value: 'normal-light'
+    },
+    {
+      caption: 'Negative',
+      value: 'negative'
+    },
+    {
+      caption: 'Positive',
+      value: 'positive'
+    },
+    {
+      caption: 'Alert',
+      value: 'alert'
+    }
+  ];
+
+  public readonly iconOptions: RadioOption[] = [
+    {
+      caption: 'Unset',
+      value: null
+    },
+    {
+      caption: 'Left',
+      value: {
+        name: 'add-circle',
         position: 'left'
-      },
-      {
+      }
+    },
+    {
+      caption: 'Right',
+      value: {
         name: 'add-circle',
         position: 'right'
       }
-    ]
-  });
-
-  public showLoader(): void {
-    if (this.isLoaderVisible$.value) {
-      return;
     }
-    const delay: number = 3000;
-    this.isLoaderVisible$.next(true);
-    setTimeout(() => {
-      this.isLoaderVisible$.next(false);
-    }, delay);
-  }
-  public testOnClick(event: Event): void {
-    // tslint:disable-next-line: no-console
-    console.log('demo - on click', event);
-  }
-  public testDefaultClick(event: Event): void {
-    // tslint:disable-next-line: no-console
-    console.log('demo - default click', event);
-  }
+  ];
 }

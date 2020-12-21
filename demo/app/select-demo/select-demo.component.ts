@@ -14,7 +14,7 @@ interface SelectOption {
 
 @Component({
   selector: 'demo-select',
-  styleUrls: ['../demo.scss', './select-demo.component.scss'],
+  styleUrls: ['./select-demo.component.scss'],
   templateUrl: './select-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

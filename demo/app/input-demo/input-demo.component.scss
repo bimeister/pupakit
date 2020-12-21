@@ -1,37 +1,7 @@
-@import 'mixins';
-@import 'themes/functions';
-
-.inputs-container {
-  padding: rems(1);
-  &.another-theme {
-    background-color: color(light);
-  }
-
-  &__row {
-    display: flex;
-
-    .column {
-      width: 50%;
-      margin-bottom: rems(1);
-      &:first-child {
-        margin-right: rems(1);
-      }
-    }
-  }
+:host {
+  display: block;
 }
 
-h2 {
-  position: sticky;
-  top: 0;
-  width: 100%;
-  z-index: 100;
-  background-color: color(white);
-}
-
-.switcher {
-  display: flex;
-
-  &__label {
-    margin-left: rems(1);
-  }
+.control {
+  width: 300px;
 }

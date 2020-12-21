@@ -1,17 +1,22 @@
-@import './../../../src/styles/mixins.scss';
-@import './../../../src/styles/functions.scss';
-
-.group {
-  @include flex-container(row, center, flex-end, nowrap);
-
-  & > * {
-    margin: rems(0.5);
-  }
+:host {
+  display: block;
 }
 
-.expansion-container {
-  position: relative;
+.search-wrapper {
+  height: 32px;
   width: 300px;
-  background: grey;
-  height: rems(2);
+  position: relative;
+
+  .header-placeholder {
+    height: 32px;
+    box-sizing: border-box;
+    padding: 8px 60px 8px 8px;
+  }
+
+  .header-placeholder-content {
+    background: #d3d3d37a;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+  }
 }

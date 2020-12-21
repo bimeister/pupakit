@@ -1,70 +1,23 @@
 <h1>Table Input</h1>
 
-<div class="group">
-  <div class="switcher">
-    <pupa-switcher [formControl]="switcherThemeControl" [id]="'formControl'"></pupa-switcher>
-    <label class="switcher__label" for="formControl">Switch Background</label>
-  </div>
-</div>
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-table-input
+      class="control"
+      [formControl]="formControl"
+      [errorTitle]="'Неправильное значение'"
+      [hoverIconName]="(hasCustomHoverIcon | async) ? 'ios-add-circle' : null"
+      [errorIconName]="(hasCustomErrorIcon | async) ? 'ios-heart' : null"
+      placeholder="Введите значение"
+    ></pupa-table-input>
+  </demo-example-viewer-content>
 
-<div class="group table-input-container" [class.another-theme]="switcherThemeControl.value">
-  <div class="column">
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">empty</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="emptyTableInputControl"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">with value</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="valueTableInputControl"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">disabled empty</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="disabledEmptyTableInputControl"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">disabled with value</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="disabledValueTableInputControl"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">validator errors: max-length 2</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="validatorTableInputControl"
-        [errorTitle]="'Неправильное значение'"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-
-    <div class="table-input-container__row">
-      <div class="table-input-container__label">validator errors: max-length 2 with different icons</div>
-      <pupa-table-input
-        class="table-input-container__input"
-        [formControl]="validator2TableInputControl"
-        [errorTitle]="'Неправильное значение'"
-        [hoverIconName]="'md-beer'"
-        [errorIconName]="'md-bonfire'"
-        placeholder="Введите значение"
-      ></pupa-table-input>
-    </div>
-  </div>
-</div>
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #hasCustomHoverIcon>Custom hover icon</demo-props-checkbox>
+    <demo-props-checkbox #hasCustomErrorIcon>Custom error icon</demo-props-checkbox>
+    <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
+    <demo-props-form-control-validators [control]="formControl" [validators]="validators">
+    </demo-props-form-control-validators>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

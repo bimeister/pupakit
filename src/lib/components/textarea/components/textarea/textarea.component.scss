@@ -71,5 +71,6 @@ $height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
     color: color(grey-light);
     font-size: rems(0.875);
     line-height: rems(1);
+    pointer-events: none;
   }
 }

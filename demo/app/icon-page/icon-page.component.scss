@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.content {
+  margin-top: 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.color {
+  padding: 21px 16px 16px 16px;
+  border-radius: 8px;
+
+  font-weight: 800;
+  font-size: 21px;
+  line-height: 25px;
+
+  color: white;
+}
+
+.icon {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 150px;
+  height: 150px;
+
+  &-preview {
+    color: black;
+    font-size: 32px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 200ms ease-in;
+  }
+
+  &-name {
+    text-align: center;
+    font-size: 14px;
+    line-height: 24px;
+    color: #676767;
+  }
+}

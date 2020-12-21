@@ -72,4 +72,3 @@ export { TimeInputModule } from './lib/components/time-input/time-input.module';
 export { TooltipModule } from './lib/components/tooltip/tooltip.module';
 export { TreeModule } from './lib/components/tree/tree.module';
 export { VerticalTabsModule } from './lib/components/vertical-tabs/vertical-tabs.module';
-export { WasherModule } from './lib/components/washer/washer.module';

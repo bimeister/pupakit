@@ -1,0 +1,10 @@
+<h1>Icon</h1>
+
+<div class="content">
+  <div class="icon" *ngFor="let iconName of iconNames">
+    <div class="icon-preview">
+      <pupa-icon [name]="iconName"></pupa-icon>
+    </div>
+    <div class="icon-name">{{ iconName }}</div>
+  </div>
+</div>
