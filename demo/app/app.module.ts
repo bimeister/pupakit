@@ -6,15 +6,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { getAllIcons } from '../declarations/functions/get-all-icons.function';
 import { ComponentsModule, IconModule } from './../../src/public-api';
 import { AppComponent } from './app.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
-import { ChipSelectDemoComponent } from './chip-select-demo/chip-select-demo.component';
-import { ChipSelectTreeDemoComponent } from './chip-select-tree-demo/chip-select-tree-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
+import { ColorsComponent } from './colors/colors.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DateTimePickerDemoComponent } from './date-time-picker-demo/date-time-picker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
@@ -25,7 +25,9 @@ import { DrawerDemoComponent } from './drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './dropdown-demo/dropdown-demo.component';
 import { DropdownMenuDemoComponent } from './dropdown-menu-demo/dropdown-menu-demo.component';
 import { DroppableDemoComponent } from './droppable-demo/droppable-demo.component';
+import { ExampleViewerModule } from './example-viewer/example-viewer.module';
 import { IconButtonDemoComponent } from './icon-button-demo/icon-button-demo.component';
+import { IconPageComponent } from './icon-page/icon-page.component';
 import { InputDemoComponent } from './input-demo/input-demo.component';
 import { LayoutDemoComponent } from './layout-demo/layout-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
@@ -35,6 +37,7 @@ import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { MultiselectionListDemoComponent } from './multiselection-list-demo/multiselection-list-demo.component';
 import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
+import { demoRoutes } from './routes';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
@@ -50,13 +53,8 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
-import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
-import { ColorsComponent } from './colors/colors.component';
-import { demoRoutes } from './routes';
 import { TypographyPageComponent } from './typography-page/typography-page.component';
-import { ExampleViewerModule } from './example-viewer/example-viewer.module';
-import { IconPageComponent } from './icon-page/icon-page.component';
-import { getAllIcons } from '../declarations/functions/get-all-icons.function';
+import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -82,8 +80,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DaySelectorDemoComponent,
     ChipDemoComponent,
     ChipButtonDemoComponent,
-    ChipSelectDemoComponent,
-    ChipSelectTreeDemoComponent,
     ModalDemoComponent,
     ModalDemoContentComponent,
     DateTimePickerDemoComponent,

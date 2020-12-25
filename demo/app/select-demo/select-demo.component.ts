@@ -169,9 +169,4 @@ export class SelectDemoComponent {
     // tslint:disable-next-line: no-console
     console.log(...data);
   }
-
-  public onClose(itemForClose: string): void {
-    const selected: string[] = this.chipsFormControl.value.filter((item: string) => item !== itemForClose);
-    this.chipsFormControl.setValue(selected);
-  }
 }
