@@ -1,0 +1,12 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+.chips-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}

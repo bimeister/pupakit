@@ -2,7 +2,7 @@
   cdkConnectedOverlay
   [cdkConnectedOverlayOrigin]="dropDownOverlayOrigin$ | async"
   [cdkConnectedOverlayOpen]="isExpanded$ | async"
-  [cdkConnectedOverlayWidth]="fitContent ? 'fit-content' : (dropDownTriggerButtonWidthPx$ | async)"
+  [cdkConnectedOverlayWidth]="width ? width : (dropDownTriggerButtonWidthPx$ | async)"
   [cdkConnectedOverlayPositions]="overlayPositions"
   [cdkConnectedOverlayFlexibleDimensions]="true"
   (attach)="handleAttachOverlay()"
