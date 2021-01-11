@@ -242,10 +242,10 @@
   resolved "http://npm.bimeister.com:4873/@angular%2fcore/-/core-9.0.0.tgz#227dc53e1ac81824f998c6e76000b7efc522641e"
   integrity sha512-6Pxgsrf0qF9iFFqmIcWmjJGkkCaCm6V5QNnxMy2KloO3SDq6QuMVRbN9RtC8Urmo25LP+eZ6ZgYqFYpdD8Hd9w==
 
-"@angular/core@^10.0.0":
-  version "10.0.8"
-  resolved "http://npm.bimeister.com:4873/@angular%2fcore/-/core-10.0.8.tgz#dd8855e9faa3f2ba37268144d15402d346b1be57"
-  integrity sha512-52M1krR/TRZsV9WKPd+r7IPVT8c5Nh+Im1z3/ZY7rG0HmxXsV7YzuTuKV7oyHbWPg0WPJAwyH0+qxBK3kpvc8w==
+"@angular/core@^11.0.0":
+  version "11.0.7"
+  resolved "http://npm.bimeister.com:4873/@angular%2fcore/-/core-11.0.7.tgz#4d81b1a49d3d4aaeb0ef9908695a3cc06707cfd9"
+  integrity sha512-Kj5uRZoK5+xfMTjkP3tw8oIF5hKTnoF9Bwh5m9GUKqg1wHVKOJcT5JBIEMc8qPyiFgALREA01reIzQdGMjX36A==
   dependencies:
     tslib "^2.0.0"
 
@@ -1743,16 +1743,16 @@
     merge-source-map "^1.1.0"
     schema-utils "^2.6.4"
 
-"@meistersoft/utilities@^0.1.0-75c5f08c":
-  version "0.1.0-75c5f08c"
-  resolved "http://npm.bimeister.com:4873/@meistersoft%2futilities/-/utilities-0.1.0-75c5f08c.tgz#9bac8d921914021cd9c2b0b76802abb296732966"
-  integrity sha512-1EIiGPOBUbjfJ50ptT8BAck1oFksiwp4XJmfYxheZlWXOCUTwlnOJzD3dpgMtvEfTcHGjuCSytFuD/+r/L47zg==
+"@meistersoft/utilities@^0.1.0-5f00af26":
+  version "0.1.0-5f00af26"
+  resolved "http://npm.bimeister.com:4873/@meistersoft%2futilities/-/utilities-0.1.0-5f00af26.tgz#3fee8331d28c91fe2f4f2d75d4273abc89b81f0f"
+  integrity sha512-pGMOoXungjOwSmj+jgdlqPWe75FPLp8xAGzbQyFw4cbJr5wKw4aej6RlnTTFxcNtXYO/mUgDZmhTXo5O2tlTUQ==
   dependencies:
     fancy-log "^1.3.3"
     snake-case "^3.0.3"
     uuid "^8.3.0"
   optionalDependencies:
-    "@angular/core" "^10.0.0"
+    "@angular/core" "^11.0.0"
     "@ngxs/store" "^3.6.2"
     rxjs "^6.6.0"
 
