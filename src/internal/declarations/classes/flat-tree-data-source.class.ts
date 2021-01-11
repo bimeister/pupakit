@@ -2,12 +2,12 @@ import { DataSource, ListRange } from '@angular/cdk/collections';
 import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subject, timer } from 'rxjs';
 import { filter, map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';
 import { FlatTreeItem } from './flat-tree-item.class';
 
 type FlatTreeItemWithMarkers = FlatTreeItem & { __isCollapsed?: boolean; __isHidden?: boolean };
 
+/** @dynamic */
 export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements TreeDataSource {
   public readonly disconnect$: Subject<void> = new Subject<void>();
 
