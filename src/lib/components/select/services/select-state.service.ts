@@ -19,6 +19,7 @@ import { OnChangeCallback } from '../../../../internal/declarations/types/on-cha
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
 
+/** @dynamic */
 @Injectable({
   providedIn: 'any'
 })
@@ -222,6 +223,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   }
 
   private static getParsedValue<V>(serializedSet: Set<string>): V[] {
-    return Array.from(serializedSet.values()).map((setValue: string) => JSON.parse(setValue));
+    const parsedValue: V[] = Array.from(serializedSet.values()).map((setValue: string) => JSON.parse(setValue));
+    return parsedValue;
   }
 }

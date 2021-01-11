@@ -12,11 +12,11 @@ import {
   Self
 } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
-
 import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref.class';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { Position } from '../../../../../internal/declarations/types/position.type';
 
+/** @dynamic */
 @Component({
   selector: 'pupa-modal-dragger',
   templateUrl: './modal-dragger.component.html',

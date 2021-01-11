@@ -2,7 +2,6 @@ import { ListRange } from '@angular/cdk/collections';
 import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
 import { asyncScheduler, BehaviorSubject, combineLatest, forkJoin, Observable, of, timer } from 'rxjs';
 import { map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
-
 import { FlatTreeDataSource } from './flat-tree-data-source.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeItem } from './tree-item.class';
@@ -20,6 +19,7 @@ interface TreeRoot {
   elements: TreeItem[];
 }
 
+/** @dynamic */
 export class HierarchicalTreeDataSource extends FlatTreeDataSource {
   constructor(
     nodes$: Observable<TreeItem[]>,

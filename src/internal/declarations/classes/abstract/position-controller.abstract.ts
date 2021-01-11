@@ -2,9 +2,9 @@ import { ElementRef, HostListener, Injectable, Renderer2 } from '@angular/core';
 import { filterNotNil } from '@meistersoft/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import { Position } from '../../types/position.type';
 
+/** @dynamic */
 @Injectable()
 export abstract class PositionController {
   public readonly activeControllerRef$: BehaviorSubject<this | null> = new BehaviorSubject<this | null>(null);
