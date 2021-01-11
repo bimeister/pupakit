@@ -26,9 +26,9 @@ export class DatePickerStateService {
   public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
-  public readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = new BehaviorSubject<
-    DatePickerSelectionMode
-  >('range');
+  public readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = new BehaviorSubject<DatePickerSelectionMode>(
+    'range'
+  );
 
   public readonly previewMode$: BehaviorSubject<DatePickerPreviewMode> = new BehaviorSubject<DatePickerPreviewMode>(
     'simple'

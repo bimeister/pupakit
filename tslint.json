@@ -34,7 +34,7 @@
     "max-line-length": [
       true,
       {
-        "ignore-pattern": "^import |^export {(.*?)}",
+        "ignore-pattern": ".*\\);$|((^import |^export {(.*?)})|(\\.resolveComponentFactory\\($))|(class(.+)extends(.+){$)|(^.*\\($)|(^.*\\;$)",
         "limit": 120
       }
     ],

@@ -54,17 +54,15 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       shareReplayWithRefCount()
     );
 
-    const elementsByParentId$: Observable<Map<
-      string,
-      TreeItem[]
-    >> = HierarchicalTreeDataSource.getElementsByParentIdMap(elementsCopy$);
+    const elementsByParentId$: Observable<
+      Map<string, TreeItem[]>
+    > = HierarchicalTreeDataSource.getElementsByParentIdMap(elementsCopy$);
 
     const rootElements$: Observable<TreeItem[]> = HierarchicalTreeDataSource.getRootElements(elementsByParentId$);
 
-    const nodesWithElementsByParentId$: Observable<Map<
-      string,
-      NodeWithElements[]
-    >> = HierarchicalTreeDataSource.getNodesWithElementsByParentIdMap(nodesCopy$, elementsByParentId$);
+    const nodesWithElementsByParentId$: Observable<
+      Map<string, NodeWithElements[]>
+    > = HierarchicalTreeDataSource.getNodesWithElementsByParentIdMap(nodesCopy$, elementsByParentId$);
 
     const treeRoot$: Observable<TreeRoot> = HierarchicalTreeDataSource.getTreeRoot(
       nodesWithElementsByParentId$,

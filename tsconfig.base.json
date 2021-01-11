@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "es2020",
+    "moduleResolution": "node",
+    "outDir": "./dist/out-tsc",
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ],
+    "target": "es2017",
+    "types": ["node"]
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
+  }
+}
