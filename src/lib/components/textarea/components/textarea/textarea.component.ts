@@ -50,9 +50,9 @@ export class TextareaComponent<T> implements OnChanges, AfterViewInit, ControlVa
   @Input() public readonly maxLength: Nullable<number> = null;
   public readonly maxLength$: BehaviorSubject<Nullable<number>> = new BehaviorSubject(null);
 
-  private readonly unitMinHeightStyleChangesProcessor: UnitMinHeightStyleChangesProcessor<
-    this
-  > = new UnitMinHeightStyleChangesProcessor(this.domSanitizer);
+  private readonly unitMinHeightStyleChangesProcessor: UnitMinHeightStyleChangesProcessor<this> = new UnitMinHeightStyleChangesProcessor(
+    this.domSanitizer
+  );
 
   @Input() public readonly minHeight: Nullable<string> = null;
   // tslint:disable: no-input-rename

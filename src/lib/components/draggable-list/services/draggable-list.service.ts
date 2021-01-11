@@ -3,7 +3,6 @@ import { Inject, Injectable, OnDestroy, Renderer2, RendererStyleFlags2 } from '@
 import { isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-
 import { CurrentDraggableListItem } from '../../../../internal/declarations/interfaces/current-draggable-list-item.interface';
 import { DraggableListChangeIndexEvent } from '../../../../internal/declarations/interfaces/draggable-list-change-index-event.interface';
 import { Position } from '../../../../internal/declarations/types/position.type';
@@ -13,14 +12,12 @@ const DRAGGABLE_CLONE_OFFSET_PX: number = 10;
 /** @dynamic */
 @Injectable()
 export class DraggableListService implements OnDestroy {
-  public readonly changeIndexEvent$: Subject<DraggableListChangeIndexEvent> = new Subject<
-    DraggableListChangeIndexEvent
-  >();
+  public readonly changeIndexEvent$: Subject<DraggableListChangeIndexEvent> = new Subject<DraggableListChangeIndexEvent>();
 
   public readonly currentDraggableListItemClone$: BehaviorSubject<HTMLElement> = new BehaviorSubject<HTMLElement>(null);
-  public readonly currentDraggableListItem$: BehaviorSubject<CurrentDraggableListItem> = new BehaviorSubject<
-    CurrentDraggableListItem
-  >(null);
+  public readonly currentDraggableListItem$: BehaviorSubject<CurrentDraggableListItem> = new BehaviorSubject<CurrentDraggableListItem>(
+    null
+  );
   public readonly currentDraggableListItemNewIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly availableIndexes: Set<number> = new Set<number>();

@@ -11,7 +11,6 @@ import {
 import { isNil } from '@meistersoft/utilities';
 import { Subscription } from 'rxjs';
 import { filter, pairwise } from 'rxjs/operators';
-
 import { DraggableListChangeIndexEvent } from '../../../../../internal/declarations/interfaces/draggable-list-change-index-event.interface';
 import { DraggableListService } from '../../services/draggable-list.service';
 
@@ -24,9 +23,8 @@ import { DraggableListService } from '../../services/draggable-list.service';
   providers: [DraggableListService]
 })
 export class DraggableListComponent implements OnDestroy {
-  @Output() public readonly changeIndex: EventEmitter<DraggableListChangeIndexEvent> = new EventEmitter<
-    DraggableListChangeIndexEvent
-  >();
+  @Output()
+  public readonly changeIndex: EventEmitter<DraggableListChangeIndexEvent> = new EventEmitter<DraggableListChangeIndexEvent>();
   private readonly subscription: Subscription = new Subscription();
 
   constructor(
