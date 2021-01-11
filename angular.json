@@ -18,7 +18,6 @@
                 }
               ],
               "buildOptimizer": true,
-              "extractCss": false,
               "extractLicenses": false,
               "fileReplacements": [
                 {
@@ -42,7 +41,6 @@
                 }
               ],
               "buildOptimizer": true,
-              "extractCss": true,
               "extractLicenses": true,
               "fileReplacements": [
                 {
@@ -167,7 +165,7 @@
     "pupakit": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "project": "./ng-package.json",
             "tsConfig": "./tsconfig.lib.json"
