@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { isEmpty, isNil } from '@meistersoft/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities/common';
 
 @Component({
   selector: 'pupa-modal-layout',

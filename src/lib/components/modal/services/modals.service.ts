@@ -1,7 +1,6 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { Injectable, Injector } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-
+import { isNil } from '@bimeister/utilities/common';
 import { ModalConfigDto } from '../../../../internal/declarations/classes/dto/modal-config.dto';
 import { ModalRef } from '../../../../internal/declarations/classes/modal-ref.class';
 import { Modal } from '../../../../internal/declarations/classes/modal.class';

@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-
+import { isNil } from '@bimeister/utilities/common';
 import { ButtonIcon } from '../../../../../internal/declarations/interfaces/button-icon.interface';
 import { ButtonColor } from '../../../../../internal/declarations/types/button-color.type';
 import { ButtonKind } from '../../../../../internal/declarations/types/button-kind.type';

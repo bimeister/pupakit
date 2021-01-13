@@ -1,8 +1,7 @@
 import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector } from '@angular/core';
-import { getUuid, isNil } from '@meistersoft/utilities';
-
+import { getUuid, isNil } from '@bimeister/utilities/common';
 import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../constants/tokens/modal-container-data.token';
 import { ModalConfig } from '../interfaces/modal-config.interface';

@@ -13,10 +13,9 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-
 import { CurrentDraggableListItem } from '../../../../../internal/declarations/interfaces/current-draggable-list-item.interface';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { Position } from '../../../../../internal/declarations/types/position.type';

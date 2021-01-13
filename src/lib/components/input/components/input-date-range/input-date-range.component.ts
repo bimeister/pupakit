@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { getRangeEndDate } from '../../../../../internal/helpers/get-range-end-date.helper';

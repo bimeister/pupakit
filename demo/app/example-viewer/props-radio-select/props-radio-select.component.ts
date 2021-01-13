@@ -7,12 +7,12 @@ import {
   TrackByFunction,
   ViewEncapsulation
 } from '@angular/core';
-import { guidGenerate, isNil } from '@meistersoft/utilities';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ComponentChanges } from '../../../../src/internal/declarations/interfaces/component-changes.interface';
+import { guidGenerate, isNil } from '@bimeister/utilities/common';
 import { asyncScheduler, Observable, Subject, Subscriber } from 'rxjs';
-import { RadioOption } from '../radio-option';
 import { observeOn, shareReplay, takeUntil } from 'rxjs/operators';
+import { ComponentChanges } from '../../../../src/internal/declarations/interfaces/component-changes.interface';
+import { RadioOption } from '../radio-option';
 
 @Component({
   selector: 'demo-props-radio-select',

@@ -1,4 +1,4 @@
-import { executeCommandWithLogging } from '@meistersoft/utilities';
+import { executeCommandWithLogging } from '@bimeister/utilities/common';
 import { TaskFunction } from 'gulp';
 
 export function buildLibraryTask(): TaskFunction {

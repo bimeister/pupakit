@@ -14,7 +14,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
 import { debounceTime, filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';

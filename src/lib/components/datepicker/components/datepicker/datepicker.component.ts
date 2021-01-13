@@ -7,10 +7,10 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
-import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, skipWhile, take } from 'rxjs/operators';
-
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';
 import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
 import { DatePickerSelectionMode } from '../../../../../internal/declarations/types/date-picker-selection-mode.type';

@@ -11,7 +11,7 @@ import {
   Renderer2,
   Self
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities';
 import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref.class';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
 import { Position } from '../../../../../internal/declarations/types/position.type';

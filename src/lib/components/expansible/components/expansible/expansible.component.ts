@@ -14,7 +14,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
@@ -25,7 +26,6 @@ import {
   switchMap,
   withLatestFrom
 } from 'rxjs/operators';
-
 import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';

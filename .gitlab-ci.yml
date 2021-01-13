@@ -52,14 +52,22 @@ Test:
   script:
     - scripts/build.sh test_service
 
+Code Style:
+  stage: check
+  needs: ['Dependencies']
+  interruptible: true
+  allow_failure: false
+  script:
+    - scripts/build.sh codestyle_service
+
 NPM Package:
   stage: deploy
-  needs: ['Static files', 'Test', 'Lint']
+  needs: ['Static files', 'Test', 'Lint', 'Code Style']
   interruptible: false
   allow_failure: true
-  when: manual
   script:
     - scripts/build.sh deploy_service
+  when: manual
 
 pages:
   stage: deploy

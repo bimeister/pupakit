@@ -8,9 +8,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
+import { isNil } from '@bimeister/utilities/common';
 import { Subscription } from 'rxjs';
-import { isNil } from '@meistersoft/utilities';
+import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
 
 @Component({
   selector: 'demo-props-form-control-disabled',

@@ -8,7 +8,7 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { Subscription } from 'rxjs';
 import { filter, pairwise } from 'rxjs/operators';
 import { DraggableListChangeIndexEvent } from '../../../../../internal/declarations/interfaces/draggable-list-change-index-event.interface';

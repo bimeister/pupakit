@@ -9,10 +9,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { Subscription, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import { VOID } from '../../../../../internal/constants/void.const';
 import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
 

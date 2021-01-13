@@ -1,4 +1,4 @@
-import { executeCommandWithLogging } from '@meistersoft/utilities';
+import { executeCommandWithLogging } from '@bimeister/utilities/common';
 import { series, TaskFunction } from 'gulp';
 
 export function bundleStyleFilesTask(): TaskFunction {
@@ -17,7 +17,7 @@ function bundleScssFiles(): TaskFunction {
 }
 
 function processScssFiles(): TaskFunction {
-  const command: string = 'sass ./dist/@meistersoft/pupakit/styles.scss ./dist/@meistersoft/pupakit/styles.css';
+  const command: string = 'sass ./dist/lib/styles.scss ./dist/lib/styles.css';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
@@ -28,7 +28,7 @@ function processScssFiles(): TaskFunction {
 }
 
 function copyStylesToDistFolder(): TaskFunction {
-  const command: string = 'copy ./src/styles/**/**/**/*.* ./dist/@meistersoft/pupakit/styles';
+  const command: string = 'copy ./src/styles/**/**/**/*.* ./dist/lib/styles';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {

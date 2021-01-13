@@ -12,9 +12,10 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { filterTruthy, isNil, shareReplayWithRefCount, isEmpty } from '@meistersoft/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities/common';
+import { filterTruthy, shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { startWith, take, map } from 'rxjs/operators';
+import { map, startWith, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../../internal/declarations/interfaces/component-changes.interface';
 import { SelectStateService } from '../../../services/select-state.service';

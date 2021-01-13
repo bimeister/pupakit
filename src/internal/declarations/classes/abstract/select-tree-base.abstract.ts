@@ -1,16 +1,15 @@
-import { Directive, EventEmitter, TrackByFunction, OnChanges } from '@angular/core';
+import { Directive, EventEmitter, OnChanges, TrackByFunction } from '@angular/core';
+import { isNil } from '@bimeister/utilities/common';
 import { asyncScheduler, BehaviorSubject, Observable, timer } from 'rxjs';
-import { delay, map, observeOn, subscribeOn, take, tap, filter, switchMap } from 'rxjs/operators';
-
+import { delay, filter, map, observeOn, subscribeOn, switchMap, take, tap } from 'rxjs/operators';
 import { TreeType } from '../../enums/tree-type.enum';
+import { ComponentChange } from '../../interfaces/component-change.interface';
+import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 import { TreeItemInterface } from '../../interfaces/tree-item.interface';
 import { Uuid } from '../../types/uuid.type';
 import { FlatTreeItem } from '../flat-tree-item.class';
 import { TreeComponent } from './../../../../lib/components/tree/components/tree/tree.component';
-import { isNil } from '@meistersoft/utilities';
-import { ComponentChange } from '../../interfaces/component-change.interface';
-import { ComponentChanges } from '../../interfaces/component-changes.interface';
 
 type TreePropertiesTransfer = Pick<
   TreeComponent,

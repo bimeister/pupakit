@@ -19,7 +19,8 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { filterNotNil, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { filterNotNil, shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
 import {
   animationFrameScheduler,
   asyncScheduler,

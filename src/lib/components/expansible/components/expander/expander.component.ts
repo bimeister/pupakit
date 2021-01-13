@@ -10,9 +10,8 @@ import {
   Renderer2,
   ViewEncapsulation
 } from '@angular/core';
-import { getUuid, isNil } from '@meistersoft/utilities';
+import { getUuid, isNil } from '@bimeister/utilities/common';
 import { BehaviorSubject } from 'rxjs';
-
 import { PositionController } from '../../../../../internal/declarations/classes/abstract/position-controller.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';

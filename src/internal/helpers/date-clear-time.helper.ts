@@ -1,5 +1,4 @@
-import { isNil } from '@meistersoft/utilities';
-
+import { isNil } from '@bimeister/utilities/common';
 import { isDate } from './is-date.helper';
 
 export function dateClearTime(date: Date): Date {

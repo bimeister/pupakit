@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { ParsedDateData } from '../../../../internal/declarations/interfaces/parsed-date-data.interface';
 import { ParsedTimeData } from '../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { TimeFormatPipe } from '../../../../internal/pipes/time-format.pipe';

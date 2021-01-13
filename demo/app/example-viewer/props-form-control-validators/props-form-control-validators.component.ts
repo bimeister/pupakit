@@ -7,10 +7,10 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
-import { Subscription } from 'rxjs';
 import { FormControl, ValidatorFn } from '@angular/forms';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { Subscription } from 'rxjs';
+import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
 
 @Component({
   selector: 'demo-props-form-control-validators',

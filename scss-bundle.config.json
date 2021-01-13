@@ -1,7 +1,7 @@
 {
   "bundlerOptions": {
     "entryFile": "./src/styles/styles.scss",
-    "outFile": "dist/@meistersoft/pupakit/styles.scss",
+    "outFile": "dist/lib/styles.scss",
     "includePaths": ["./", "./node_modules"]
   }
 }

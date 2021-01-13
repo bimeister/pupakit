@@ -1,6 +1,6 @@
 {
   "name": "@bimeister/pupakit",
-  "version": "0.2.0",
+  "version": "0.1.0",
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
@@ -11,6 +11,7 @@
   },
   "scripts": {
     "ng": "ng",
+    "build-cli": "build-cli",
     "gulp": "gulp",
     "yarn": "yarn",
     "start": "yarn run start:demo",
