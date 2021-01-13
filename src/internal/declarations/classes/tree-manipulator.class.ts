@@ -2,10 +2,10 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ElementRef } from '@angular/core';
-import { filterNotNil, isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subscription, timer } from 'rxjs';
 import { debounceTime, filter, map, observeOn, subscribeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
-
 import { TreeType } from '../enums/tree-type.enum';
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';
 import { TreeManipulatorDataOrigin } from '../types/tree-manipulator-data-origin.type';

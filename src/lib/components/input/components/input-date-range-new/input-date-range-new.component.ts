@@ -1,8 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { filterNotNil, isEmpty, isNil } from '@meistersoft/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities/common';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom, filter } from 'rxjs/operators';
+import { filter, map, withLatestFrom } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';

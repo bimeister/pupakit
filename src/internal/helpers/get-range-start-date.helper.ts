@@ -1,4 +1,4 @@
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 
 export function getRangeStartDate(range: Date[]): Date {
   if (!Array.isArray(range)) {

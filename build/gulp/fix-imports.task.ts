@@ -1,8 +1,8 @@
-import { executeCommandWithLogging } from '@meistersoft/utilities';
+import { executeCommandWithLogging } from '@bimeister/utilities/common';
 import { TaskFunction } from 'gulp';
 
 export function fixImportsTask(): TaskFunction {
-  const command: string = `replace-in-file \"/'/assets//g\" \"'~@meistersoft/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex`;
+  const command: string = `replace-in-file \"/'/assets//g\" \"'~@bimeister/pupakit/assets/\" ./dist/**/**.* --verbose --isRegex`;
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {

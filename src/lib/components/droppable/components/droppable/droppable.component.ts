@@ -10,10 +10,9 @@ import {
   ViewEncapsulation,
   ViewRef
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
-
 import { VOID } from '../../../../../internal/constants/void.const';
 import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
 import { DroppableVerticalPosition } from '../../../../../internal/declarations/types/droppable-vertical-position.type';

@@ -1,8 +1,7 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-
+import { isNil } from '@bimeister/utilities/common';
 import { DrawerRef } from '../../../../internal/declarations/classes/drawer-ref.class';
 import { Drawer } from '../../../../internal/declarations/classes/drawer.class';
 import { DrawerConfigDto } from '../../../../internal/declarations/classes/dto/drawer-config.dto';

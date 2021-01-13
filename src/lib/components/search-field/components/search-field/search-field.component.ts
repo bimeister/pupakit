@@ -12,9 +12,8 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { ControlState } from '../../../../../internal/declarations/enums/control-state.enum';
 import { SearchFieldKind } from '../../../../../internal/declarations/types/search-field-kind.type';

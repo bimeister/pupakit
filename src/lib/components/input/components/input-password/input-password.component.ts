@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Optional, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { BrowserService } from '../../../../../internal/shared/services/browser.service';

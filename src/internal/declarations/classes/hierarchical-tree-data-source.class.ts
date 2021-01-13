@@ -1,5 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
-import { isEmpty, isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities/common';
+import { shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
 import { asyncScheduler, BehaviorSubject, combineLatest, forkJoin, Observable, of, timer } from 'rxjs';
 import { map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { FlatTreeDataSource } from './flat-tree-data-source.class';

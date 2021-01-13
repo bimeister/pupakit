@@ -1,5 +1,6 @@
 import { DataSource, ListRange } from '@angular/cdk/collections';
-import { isNil, shareReplayWithRefCount } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
+import { shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable, Subject, timer } from 'rxjs';
 import { filter, map, observeOn, subscribeOn, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';

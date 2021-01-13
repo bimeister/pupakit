@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { shareReplayWithRefCount } from '@meistersoft/utilities';
+import { shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
 import { Observable, Subscription } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 

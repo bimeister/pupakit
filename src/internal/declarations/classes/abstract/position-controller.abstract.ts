@@ -1,5 +1,5 @@
 import { ElementRef, HostListener, Injectable, Renderer2 } from '@angular/core';
-import { filterNotNil } from '@meistersoft/utilities';
+import { filterNotNil } from '@bimeister/utilities/rxjs';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { Position } from '../../types/position.type';

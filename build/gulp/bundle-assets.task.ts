@@ -1,8 +1,8 @@
-import { executeCommandWithLogging } from '@meistersoft/utilities';
+import { executeCommandWithLogging } from '@bimeister/utilities/common';
 import { TaskFunction } from 'gulp';
 
 export function bundleAssetsTask(): TaskFunction {
-  const command: string = 'copy ./src/assets/**/*.* ./dist/@meistersoft/pupakit/assets';
+  const command: string = 'copy ./src/assets/**/*.* ./dist/lib/assets';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {

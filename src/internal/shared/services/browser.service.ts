@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 
 @Injectable({ providedIn: 'root' })
 export class BrowserService {

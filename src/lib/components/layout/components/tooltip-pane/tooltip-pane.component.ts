@@ -9,10 +9,9 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { Observable, Subscription, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
-
 import {
   TooltipBubbleDirection,
   TooltipConfig

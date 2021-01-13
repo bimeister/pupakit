@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
-
+import { isNil } from '@bimeister/utilities/common';
 import { DropdownItem } from '../../../../../internal/declarations/interfaces/dropdown-item.interface';
 import { getPropertyValueByPath } from '../../../../../internal/helpers/get-property-value-by-path.helper';
 

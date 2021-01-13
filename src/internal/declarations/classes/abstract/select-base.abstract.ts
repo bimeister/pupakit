@@ -1,16 +1,15 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Directive, ElementRef, OnChanges, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnChanges, OnDestroy, Output } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { getElementAllNestedChildren, isNil } from '@meistersoft/utilities';
+import { getElementAllNestedChildren, isNil } from '@bimeister/utilities/common';
+import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 import { SelectOuterValue } from '../../types/select-outer-value.type';
-import { Subscription } from 'rxjs';
 
 @Directive()
 export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValueAccessor {

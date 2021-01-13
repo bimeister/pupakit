@@ -14,8 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { isNil } from '@meistersoft/utilities';
-import { Nullable } from '@meistersoft/utilities/internal/types/nullable.type';
+import { isNil, Nullable } from '@bimeister/utilities/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { UnitMinHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-min-height-style-changes-processor.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';

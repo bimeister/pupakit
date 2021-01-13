@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { getUuid, isNil } from '@meistersoft/utilities';
+import { getUuid, isNil } from '@bimeister/utilities/common';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take, startWith, map } from 'rxjs/operators';
+import { map, startWith, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 
 const leafElementsCount: number = 1000;

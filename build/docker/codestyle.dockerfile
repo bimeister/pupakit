@@ -1,3 +1,3 @@
 ARG BASE_IMAGE
 FROM "$BASE_IMAGE"
-RUN yarn run lint
+RUN yarn run prettier:check

@@ -10,10 +10,9 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { distinctUntilSerializedChanged, filterNotNil } from '@meistersoft/utilities';
+import { distinctUntilSerializedChanged, filterNotNil } from '@bimeister/utilities/rxjs';
 import { Observable, Subscription } from 'rxjs';
 import { map, shareReplay, startWith } from 'rxjs/operators';
-
 import { SelectOption } from '../../../../../internal/declarations/interfaces/select-option.interface';
 import { MultiselectionListComponent } from '../../../multiselection-list/components/multiselection-list/multiselection-list.component';
 

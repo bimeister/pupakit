@@ -1,8 +1,7 @@
 import { AfterViewInit, EventEmitter, Injectable, OnDestroy, QueryList } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { merge, ReplaySubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-
 import { Uuid } from '../../types/uuid.type';
 import { TabsContainerItem } from './tabs-container-item.abstract';
 

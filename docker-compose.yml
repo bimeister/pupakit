@@ -5,8 +5,6 @@ services:
     build:
       context: ./
       dockerfile: ./build/docker/base.dockerfile
-      args:
-        - NPM_AUTH_TOKEN
     image: ${BASE_IMAGE}
 
   build_service:
@@ -28,6 +26,13 @@ services:
     build:
       context: ./
       dockerfile: ./build/docker/test.dockerfile
+      args:
+        - BASE_IMAGE
+
+  codestyle_service:
+    build:
+      context: ./
+      dockerfile: ./build/docker/codestyle.dockerfile
       args:
         - BASE_IMAGE
 

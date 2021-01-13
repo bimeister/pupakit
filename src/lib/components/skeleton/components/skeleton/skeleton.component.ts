@@ -6,9 +6,8 @@ import {
   OnChanges,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@meistersoft/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { ReplaySubject } from 'rxjs';
-
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
