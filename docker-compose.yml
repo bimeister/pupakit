@@ -1,37 +1,55 @@
 version: '3.4'
 
 services:
-  pupakit_build:
+  base_service:
+    build:
+      context: ./
+      dockerfile: ./build/docker/base.dockerfile
+      args:
+        - NPM_AUTH_TOKEN
+    image: ${BASE_IMAGE}
+
+  build_service:
     build:
       context: ./
       dockerfile: ./build/docker/build.dockerfile
-    environment:
-      - PKG_VERSION
-      - PKG_TAG
-      - PUBLISH
-      - NPM_REPOSITORY_LOGIN
-      - NPM_REPOSITORY_PASSWORD
-      - NPM_REPOSITORY_EMAIL
-      - NPM_REPOSITORY_URL
+      args:
+        - BASE_IMAGE
+    image: ${BUILD_IMAGE}
 
-  pupakit_lint:
+  lint_service:
     build:
       context: ./
       dockerfile: ./build/docker/lint.dockerfile
+      args:
+        - BASE_IMAGE
 
-  pupakit_test:
+  test_service:
     build:
       context: ./
       dockerfile: ./build/docker/test.dockerfile
+      args:
+        - BASE_IMAGE
 
-  pupakit_build-demo:
+  deploy_service:
     build:
       context: ./
-      dockerfile: ./build/docker/build-demo.dockerfile
+      dockerfile: ./build/docker/deploy.dockerfile
+      args:
+        - NPM_AUTH_TOKEN
+        - GIT_COMMIT_HASH
+        - BUILD_IMAGE
+
+  docs_service:
+    build:
+      context: ./
+      dockerfile: ./build/docker/docs.dockerfile
       labels:
         meistersoft.build.pipeline: ${CI_PIPELINE_IID}
-        meistersoft.git.commit: ${CI_COMMIT_SHA}
-        meistersoft.git.branch: ${CI_COMMIT_BRANCH}
-        service: pupakit_build-demo
+        meistersoft.git.commit: ${GIT_COMMIT}
+        meistersoft.git.branch: ${BRANCH_NAME}
+        service: docs_service
+      args:
+        - BASE_IMAGE
     environment:
       - CI_PAGES_URL
