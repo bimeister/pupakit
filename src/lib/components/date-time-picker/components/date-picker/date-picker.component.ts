@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@meistersoft/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DatePickerPreviewMode } from '../../../../../internal/declarations/types/date-picker-preview-mode.type';
@@ -246,8 +246,8 @@ export class DatePickerComponent implements OnDestroy {
         filterNotNil(),
         filterTruthy(),
         switchMap(() => this.selectedDate$),
-        filterNotNil(),
-        distinctUntilChanged(this.datePickerStateService.isSameDate)
+        distinctUntilChanged(this.datePickerStateService.isSameDate),
+        filterNotNil()
       )
       .subscribe((selectedDate: Date) => this.date.emit(selectedDate));
   }
@@ -256,18 +256,17 @@ export class DatePickerComponent implements OnDestroy {
     return this.isSelectionModeDate$
       .pipe(
         filterNotNil(),
-        take(1),
         filterFalsy(),
         switchMap(() => this.selectedRange$),
-        filter(
-          (selectedRangeDates: Date[]) =>
-            Array.isArray(selectedRangeDates) && Object.is(selectedRangeDates.length, VALID_DATES_COUNT)
-        ),
         map((range: [Date, Date]) => {
           const sortFunction = (dateA: Date, dateB: Date) => dateA.valueOf() - dateB.valueOf();
           return [...range].sort(sortFunction);
         }),
-        distinctUntilChanged((previousValue: Date[], currentValue: Date[]) => isEqual(previousValue, currentValue))
+        distinctUntilChanged((previousValue: Date[], currentValue: Date[]) => isEqual(previousValue, currentValue)),
+        filter(
+          (selectedRangeDates: Date[]) =>
+            Array.isArray(selectedRangeDates) && Object.is(selectedRangeDates.length, VALID_DATES_COUNT)
+        )
       )
       .subscribe((selectedRange: [Date, Date]) => this.range.emit(selectedRange));
   }
