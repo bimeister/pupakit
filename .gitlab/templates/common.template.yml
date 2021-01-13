@@ -2,8 +2,11 @@ variables:
   GIT_SUBMODULE_STRATEGY: normal
   CI: ''
   BUILD_EFFECTIVE_YML_FILE: docker-compose.yml
-  CI_PAGES_URL: ${CI_PAGES_URL}
-  DEFAULT_LABELS: meistersoft.build.pipeline=${CI_PIPELINE_IID};meistersoft.git.commit=${CI_COMMIT_SHA};meistersoft.git.branch=${CI_COMMIT_BRANCH}
+  NPM_AUTH_TOKEN: ${CI_JOB_TOKEN}
+  GIT_COMMIT_HASH: ${CI_COMMIT_SHORT_SHA}
+  DEFAULT_LABELS: meistersoft.build.pipeline=${CI_PIPELINE_IID};meistersoft.git.commit=${GIT_COMMIT};meistersoft.git.branch=${BRANCH_NAME}
+  BASE_IMAGE: base-image:${CI_COMMIT_SHORT_SHA}
+  BUILD_IMAGE: build-image:${CI_COMMIT_SHORT_SHA}
 
 before_script:
   - docker --version

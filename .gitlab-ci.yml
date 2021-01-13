@@ -1,76 +1,76 @@
 include:
   - local: .gitlab/templates/common.template.yml
-  - local: .gitlab/templates/deploy-base.template.yml
 
 stages:
+  - preinstall
   - build
   - check
   - deploy
 
-build:library:
+Dependencies:
+  stage: preinstall
   needs: []
+  interruptible: true
+  allow_failure: false
+  script:
+    - scripts/build.sh base_service
+
+Static files:
   stage: build
+  needs: ['Dependencies']
   interruptible: true
   allow_failure: false
-  variables:
-    CI: 'true'
   script:
-    - scripts/build.sh pupakit_build
+    - scripts/build.sh build_service
 
-check:lint:
-  needs: []
-  stage: check
+Docs:
+  stage: build
+  needs: ['Dependencies']
   interruptible: true
   allow_failure: false
-  variables:
-    CI: ''
-  script:
-    - scripts/build.sh pupakit_lint
-
-check:test:
-  needs: []
-  stage: check
-  interruptible: true
-  allow_failure: false
-  variables:
-    CI: ''
-  script:
-    - scripts/build.sh pupakit_test
-
-deploy:next:
-  extends: .deploy-base
-  stage: deploy
-  interruptible: false
-  allow_failure: true
-  when: manual
-  variables:
-    PUBLISH: 'true'
-    PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
-    PKG_TAG: 'next'
-
-deploy:stable:
-  extends: .deploy-base
-  stage: deploy
-  interruptible: false
-  allow_failure: true
-  when: manual
+  when: always
   only:
     - master
   variables:
-    PUBLISH: 'true'
-    PKG_VERSION: ${CI_COMMIT_SHORT_SHA}
-    PKG_TAG: 'stable'
+    CI: 'true'
+  script:
+    - scripts/build.sh docs_service
+
+Lint:
+  stage: check
+  needs: ['Dependencies']
+  interruptible: true
+  allow_failure: false
+  script:
+    - scripts/build.sh lint_service
+
+Test:
+  stage: check
+  needs: ['Dependencies']
+  interruptible: true
+  allow_failure: false
+  script:
+    - scripts/build.sh test_service
+
+NPM Package:
+  stage: deploy
+  needs: ['Static files', 'Test', 'Lint']
+  interruptible: false
+  allow_failure: true
+  when: manual
+  script:
+    - scripts/build.sh deploy_service
 
 pages:
-  needs: []
   stage: deploy
+  needs: ['Docs']
   interruptible: true
   allow_failure: true
   variables:
     CI: 'true'
   script:
-    - scripts/build.sh pupakit_build-demo
-    - scripts/cp-from-image.sh "${DEFAULT_LABELS};service=pupakit_build-demo" dist/demo public
+    - scripts/build.sh docs_service
+    - scripts/cp-from-image.sh "${DEFAULT_LABELS};service=docs_service" docs public
   when: always
   only:
     - master

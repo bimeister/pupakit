@@ -1,0 +1,9 @@
+/.*/
+!/.gitlab/
+/dist/
+/docs/
+/coverage/
+/deploy/
+*.log
+temp*/
+!api.ts
