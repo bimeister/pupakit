@@ -16,6 +16,7 @@
   overflow: hidden;
   @include transition(#{background, border});
   @include flex-container(row, center, center, nowrap);
+  flex-shrink: 0;
   &_with-marker {
     background: color(active);
     border: 1px solid color(active);
@@ -62,6 +63,7 @@
   box-sizing: border-box;
   user-select: none;
   cursor: pointer;
+  @include ellipsis-text-overflow;
   &_filled {
     padding: 0 0 0 rems(0.5);
   }
