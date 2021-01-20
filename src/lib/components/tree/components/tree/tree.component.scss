@@ -70,6 +70,10 @@
   cursor: pointer;
   white-space: nowrap;
 
+  &__no-expansion-button {
+    padding-left: rems(1.75);
+  }
+
   &__expansion-button {
     border: none;
     background: none;
@@ -79,6 +83,7 @@
     justify-content: center;
     width: rems(1.75);
     height: rems(1.75);
+    flex-shrink: 0;
     user-select: none;
 
     & > button:disabled {
