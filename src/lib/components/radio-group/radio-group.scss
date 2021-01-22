@@ -17,7 +17,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: px(12) px(12) px(12) 0;
+  padding: px(5) px(12) px(5) 0;
   cursor: pointer;
 
   &_disabled {
@@ -30,13 +30,14 @@
   position: relative;
   width: px(16);
   height: px(16);
+  box-sizing: border-box;
   background: color('white');
   border-radius: 50%;
-  border: px(1) solid color('grey-apple');
+  border: px(1) solid color('grey-ivory');
 
   &_selected,
   &_hovered {
-    border: px(1) solid color('cadet-blue');
+    border: px(1) solid color('grey-ivory');
   }
 
   &__dot {
@@ -52,7 +53,7 @@
   &_hovered .radio-control-marker__dot {
     width: px(6);
     height: px(6);
-    background: color('cadet-blue');
+    background: color('grey-ivory');
   }
 
   &_selected .radio-control-marker__dot {
@@ -62,8 +63,7 @@
   }
 
   &_disabled {
-    background: color('grey-apple');
-    border: transparent;
+    border-color: color('grey-apple');
 
     .radio-control-marker__dot {
       background: color('grey-apple');
@@ -71,11 +71,10 @@
   }
 
   &_disabled.radio-control-marker_selected {
-    background: color('grey-apple');
-    border: transparent;
+    border-color: color('grey-ivory');
 
     .radio-control-marker__dot {
-      background: color('text');
+      background: color('grey-ivory');
     }
   }
 }
@@ -85,12 +84,11 @@
   color: color('text');
   user-select: none;
 
-  &_selected,
-  &_hovered {
-    color: color('active');
-  }
-
   &_disabled {
     color: color('grey-apple');
+  }
+
+  &_disabled.radio-control-label_selected {
+    color: color('grey-ivory');
   }
 }
