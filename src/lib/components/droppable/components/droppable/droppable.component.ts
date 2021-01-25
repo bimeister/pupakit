@@ -11,7 +11,7 @@ import {
   ViewRef
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/constants/void.const';
 import { DroppableHorizontalPosition } from '../../../../../internal/declarations/types/droppable-horizontal-position.type';
@@ -40,6 +40,7 @@ export class DroppableComponent implements OnDestroy {
   private viewRef: ViewRef;
 
   public isOpened: boolean = false;
+  public readonly isNativeClick$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private readonly overlay: Overlay) {}
 
@@ -55,6 +56,8 @@ export class DroppableComponent implements OnDestroy {
     if (isNil(this.triggerRef) || isNil(this.contentRef)) {
       return;
     }
+
+    this.isNativeClick$.next(true);
 
     this.beforeOpen()
       .pipe(
@@ -73,11 +76,20 @@ export class DroppableComponent implements OnDestroy {
 
   @HostListener('document:wheel')
   @HostListener('document:mousedown')
+  @HostListener('document:click')
   public mouseEventsHandler(): void {
-    if (this.hasBackdrop) {
-      return;
-    }
-    this.close();
+    this.isNativeClick$.pipe(take(1)).subscribe((isNativeClick: boolean) => {
+      if (isNativeClick) {
+        this.isNativeClick$.next(false);
+        return;
+      }
+
+      if (this.hasBackdrop) {
+        return;
+      }
+
+      this.close();
+    });
   }
 
   public close(): void {
