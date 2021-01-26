@@ -2,8 +2,6 @@
 
 <div class="group">
   <div class="column">
-    <h2>New Design</h2>
-
     <div class="switcher">
       <pupa-switcher [formControl]="useIsBackDatingControl" [id]="'formControl'"></pupa-switcher>
       <label class="switcher__label" for="formControl">use back dating</label>
@@ -13,14 +11,14 @@
       <label class="switcher__label" for="formControl">use available end date</label>
     </div>
 
-    <h3>New Time Picker</h3>
+    <h3>Time Picker</h3>
     <h5>Simple Input</h5>
     <pupa-input-time [formControl]="timeFormControl"></pupa-input-time>
     <h5>Simple Input With Seconds</h5>
     <pupa-input-time-seconds [formControl]="timeSecondsFormControl"></pupa-input-time-seconds>
     <h5>Simple With Time And Seconds</h5>
     <pupa-time-picker [withSeconds]="true"></pupa-time-picker>
-    <h3>New Date Picker</h3>
+    <h3>Date Picker</h3>
     <h5>Simple</h5>
     <pupa-input-date
       [formControl]="dateFormControl"
@@ -40,11 +38,11 @@
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
     ></pupa-input-date-time-seconds>
     <h5>Simple Range</h5>
-    <pupa-input-date-range-new
+    <pupa-input-date-range
       [formControl]="rangeFormControl"
       [isBackDating]="useIsBackDatingControl.value"
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
-    ></pupa-input-date-range-new>
+    ></pupa-input-date-range>
     <h5>Simple Range Double</h5>
     <pupa-input-date-range-double
       [formControl]="rangeDoubleFormControl"
