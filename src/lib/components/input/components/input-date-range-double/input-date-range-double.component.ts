@@ -86,7 +86,7 @@ export class InputDateRangeDoubleComponent extends InputDateTimeBase {
     }
 
     if (!Array.isArray(newValue)) {
-      throw new Error('[InputDateRangeNewComponent] value in not array in writeValue');
+      throw new Error('[InputDateRangeDoubleComponent] value in not array in writeValue');
     }
 
     const dateFirst: Date = newValue[0];
