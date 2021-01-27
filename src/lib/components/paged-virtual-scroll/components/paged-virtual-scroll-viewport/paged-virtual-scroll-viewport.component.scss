@@ -1,0 +1,34 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.viewport {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: row;
+
+  &__iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    flex: 1;
+
+    will-change: transform;
+  }
+}

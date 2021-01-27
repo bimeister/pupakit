@@ -36,6 +36,7 @@ import { LogPipe } from './log.pipe';
 import { ModalDemoContentComponent } from './modal-demo/modal-demo-content/modal-demo-content.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { MultiselectionListDemoComponent } from './multiselection-list-demo/multiselection-list-demo.component';
+import { PagedVirtualScrollDemoComponent } from './paged-virtual-scroll-demo/paged-virtual-scroll-demo.component';
 import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { demoRoutes } from './routes';
@@ -85,6 +86,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ModalDemoComponent,
     ModalDemoContentComponent,
     DateTimePickerDemoComponent,
+    PagedVirtualScrollDemoComponent,
     ScrollbarDemoComponent,
     TabsDemoComponent,
     DatagridDemoComponent,
