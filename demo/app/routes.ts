@@ -22,6 +22,7 @@ import { LayoutDemoComponent } from './layout-demo/layout-demo.component';
 import { LoaderDemoComponent } from './loader-demo/loader-demo.component';
 import { ModalDemoComponent } from './modal-demo/modal-demo.component';
 import { MultiselectionListDemoComponent } from './multiselection-list-demo/multiselection-list-demo.component';
+import { PagedVirtualScrollDemoComponent } from './paged-virtual-scroll-demo/paged-virtual-scroll-demo.component';
 import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
@@ -150,6 +151,10 @@ export const demoRoutes: Routes = [
   {
     path: 'date-time-picker',
     component: DateTimePickerDemoComponent
+  },
+  {
+    path: 'paged-virtual-scroll',
+    component: PagedVirtualScrollDemoComponent
   },
   { path: 'scrollbar', component: ScrollbarDemoComponent },
   { path: 'modal', component: ModalDemoComponent },

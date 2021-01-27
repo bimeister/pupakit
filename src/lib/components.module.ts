@@ -23,6 +23,7 @@ import { InputModule } from './components/input/input.module';
 import { LayoutModule } from './components/layout/layout.module';
 import { ModalModule } from './components/modal/modal.module';
 import { MultiselectionListModule } from './components/multiselection-list/multiselection-list.module';
+import { PagedVirtualScrollModule } from './components/paged-virtual-scroll/paged-virtual-scroll.module';
 import { ProgressBarModule } from './components/progress-bar/progress-bar.module';
 import { RadioGroupModule } from './components/radio-group/radio-group.module';
 import { RatingModule } from './components/rating/rating.module';
@@ -85,7 +86,8 @@ const EXPORTS: any[] = [
   ProgressBarModule,
   UploadsModule,
   CounterModule,
-  AvatarModule
+  AvatarModule,
+  PagedVirtualScrollModule
 ];
 
 @NgModule({

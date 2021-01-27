@@ -1,0 +1,32 @@
+@import 'mixins';
+
+$height_container: px(500);
+
+:host {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.container {
+  width: 80%;
+  height: $height_container;
+  border: 4px #000 dashed;
+  overflow: hidden;
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: color(light);
+  font-size: px(24);
+  border-bottom: 1px solid color(main);
+}
