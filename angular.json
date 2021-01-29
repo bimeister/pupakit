@@ -129,27 +129,6 @@
             "browserTarget": "demo:build",
             "sourceMap": true
           }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "configurations": {
-            "ci": {
-              "bail": true,
-              "cache": false,
-              "ci": true,
-              "watch": false
-            },
-            "debugging": {
-              "bail": false,
-              "cache": true,
-              "ci": false,
-              "watch": true
-            }
-          },
-          "options": {
-            "coverage": true,
-            "passWithNoTests": true
-          }
         }
       },
       "prefix": "demo",
@@ -210,7 +189,7 @@
             }
           },
           "options": {
-            "coverage": true,
+            "configPath": "./jest.config.js",
             "passWithNoTests": true
           }
         }

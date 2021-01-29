@@ -1,4 +1,4 @@
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 
 export function getRangeEndDate(range: Date[]): Date {
   if (!Array.isArray(range)) {

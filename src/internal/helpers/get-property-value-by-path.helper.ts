@@ -1,4 +1,4 @@
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 
 export const getPropertyValueByPath = (source: unknown, path: string): unknown => {
   if (isNil(source) || isNil(path)) {

@@ -10,7 +10,7 @@ import {
   QueryList
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { SelectorItemComponent } from '../selector-item/selector-item.component';

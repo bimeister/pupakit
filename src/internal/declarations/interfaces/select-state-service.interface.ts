@@ -1,6 +1,6 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { NgControl } from '@angular/forms';
-import { Nullable } from '@bimeister/utilities/common';
+import { Nullable } from '@bimeister/utilities/commonjs/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OnChangeCallback } from '../types/on-change-callback.type';
 import { OnTouchedCallback } from '../types/on-touched-callback.type';

@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { isEmpty, isNil } from '@bimeister/utilities/common';
-import { filterNotNil } from '@bimeister/utilities/rxjs';
+import { isEmpty, isNil } from '@bimeister/utilities/commonjs/common';
+import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';

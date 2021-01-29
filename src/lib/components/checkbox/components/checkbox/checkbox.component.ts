@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 
 @Component({
   selector: 'pupa-checkbox',

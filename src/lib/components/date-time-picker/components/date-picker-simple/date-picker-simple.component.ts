@@ -7,8 +7,8 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
-import { filterFalsy } from '@bimeister/utilities/rxjs';
+import { isNil } from '@bimeister/utilities/commonjs/common';
+import { filterFalsy } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';

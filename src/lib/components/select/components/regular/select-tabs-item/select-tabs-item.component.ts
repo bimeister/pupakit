@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
-import { isEqual } from '@bimeister/utilities/common';
+import { isEqual } from '@bimeister/utilities/commonjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { SelectTabsService } from '../../../services/select-tabs-state.service';

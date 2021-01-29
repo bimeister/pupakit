@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { BehaviorSubject } from 'rxjs';
 import { UploadingStatus } from '../../../../../internal/declarations/enums/uploading-status.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';

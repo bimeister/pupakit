@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Directive, ElementRef, EventEmitter, OnChanges, OnDestroy, Output } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { getElementAllNestedChildren, isNil } from '@bimeister/utilities/common';
+import { getElementAllNestedChildren, isNil } from '@bimeister/utilities/commonjs/common';
 import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';

@@ -9,7 +9,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { Subscription, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/constants/void.const';

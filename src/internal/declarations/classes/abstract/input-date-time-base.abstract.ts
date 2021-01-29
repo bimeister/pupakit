@@ -1,8 +1,8 @@
 import { DatePipe } from '@angular/common';
 import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isEmpty, isNil } from '@bimeister/utilities/common';
-import { filterNotNil, filterTruthy } from '@bimeister/utilities/rxjs';
+import { isEmpty, isNil } from '@bimeister/utilities/commonjs/common';
+import { filterNotNil, filterTruthy } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';

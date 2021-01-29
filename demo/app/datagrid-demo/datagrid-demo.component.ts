@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { guidGenerate } from '@bimeister/utilities/common';
-import { shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
+import { guidGenerate } from '@bimeister/utilities/commonjs/common';
+import { shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
 import { Column, ColumnApi, FirstDataRenderedEvent } from 'ag-grid-community';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, take, withLatestFrom } from 'rxjs/operators';
