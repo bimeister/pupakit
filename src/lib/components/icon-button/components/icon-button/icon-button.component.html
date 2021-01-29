@@ -11,7 +11,7 @@
   (mousedown)="processMouseDownEvent($event)"
   (mouseup)="processMouseUpEvent($event)"
 >
-  <div class="button_content-wrapper">
+  <div class="button_content-wrapper" (click)="processContentWrapperClickEvent($event)">
     <ng-content></ng-content>
   </div>
 </button>

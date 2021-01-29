@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { isNil } from '@meistersoft/utilities';
-
 import { ButtonType } from '../../../../../internal/declarations/types/button-type.type';
 import { InputButtonColor } from '../../../../../internal/declarations/types/icon-button-color.type';
 import { InputButtonSize } from '../../../../../internal/declarations/types/icon-button-size.type';
@@ -44,9 +43,17 @@ export class IconButtonComponent {
       .map((innerProperty: string) => `button_${innerProperty}`);
   }
 
+  public processContentWrapperClickEvent(event: MouseEvent): void {
+    if (this.disabled) {
+      event.stopPropagation();
+      return;
+    }
+  }
+
   public processClickEvent(event: MouseEvent): void {
     this.buttonElement.nativeElement.blur();
     if (this.disabled) {
+      event.stopPropagation();
       return;
     }
     this.onclick.emit(event);
