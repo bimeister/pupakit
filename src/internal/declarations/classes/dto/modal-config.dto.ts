@@ -1,5 +1,5 @@
 import { Injector, StaticProvider } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { ModalConfig } from '../../interfaces/modal-config.interface';
 import { Position } from '../../types/position.type';
 

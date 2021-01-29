@@ -28,11 +28,6 @@ Docs:
   needs: ['Dependencies']
   interruptible: true
   allow_failure: false
-  when: always
-  only:
-    - master
-  variables:
-    CI: 'true'
   script:
     - scripts/build.sh docs_service
 
@@ -51,6 +46,13 @@ Test:
   allow_failure: false
   script:
     - scripts/build.sh test_service
+    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=test_service" coverage
+      coverage
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - coverage/junit.xml
 
 Code Style:
   stage: check
@@ -74,14 +76,11 @@ pages:
   needs: ['Docs']
   interruptible: true
   allow_failure: true
-  variables:
-    CI: 'true'
   script:
-    - scripts/build.sh docs_service
-    - scripts/cp-from-image.sh "${DEFAULT_LABELS};service=docs_service" docs public
+    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=docs_service" demo public
   when: always
-  only:
-    - master
+  # only:
+  #   - master
   artifacts:
     when: always
     paths:

@@ -1,6 +1,6 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, OnInit } from '@angular/core';
-import { filterFalsy } from '@bimeister/utilities/rxjs';
+import { filterFalsy } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';

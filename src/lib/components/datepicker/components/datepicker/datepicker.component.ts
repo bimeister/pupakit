@@ -7,8 +7,8 @@ import {
   OnDestroy,
   Output
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
-import { filterNotNil } from '@bimeister/utilities/rxjs';
+import { isNil } from '@bimeister/utilities/commonjs/common';
+import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay, skipWhile, take } from 'rxjs/operators';
 import { dayInMs } from '../../../../../internal/constants/day-in-ms.const';

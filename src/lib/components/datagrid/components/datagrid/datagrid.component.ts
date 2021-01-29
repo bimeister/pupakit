@@ -9,7 +9,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
   BodyScrollEvent,

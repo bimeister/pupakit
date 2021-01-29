@@ -12,8 +12,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { isEmpty, isNil } from '@bimeister/utilities/common';
-import { filterTruthy, shareReplayWithRefCount } from '@bimeister/utilities/rxjs';
+import { isEmpty, isNil } from '@bimeister/utilities/commonjs/common';
+import { filterTruthy, shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../../internal/declarations/interfaces/component-change.interface';

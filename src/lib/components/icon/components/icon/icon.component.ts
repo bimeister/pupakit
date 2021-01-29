@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { isNil, Nullable } from '@bimeister/utilities/common';
+import { isNil, Nullable } from '@bimeister/utilities/commonjs/common';
 import { AVAILABLE_ICONS_TOKEN } from '../../../../../internal/constants/tokens/available-icons.token';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { IconRegistry } from '../../../../../internal/declarations/types/icon-registry.type';

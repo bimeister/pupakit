@@ -1,7 +1,7 @@
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
 import { Directive, OnDestroy, OnInit } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
-import { filterNotNil, filterTruthy } from '@bimeister/utilities/rxjs';
+import { isNil } from '@bimeister/utilities/commonjs/common';
+import { filterNotNil, filterTruthy } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';

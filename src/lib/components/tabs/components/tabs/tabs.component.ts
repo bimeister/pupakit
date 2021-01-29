@@ -11,8 +11,8 @@ import {
   ViewChildren
 } from '@angular/core';
 import { NavigationEnd, Params, Router, RouterEvent } from '@angular/router';
-import { isNil } from '@bimeister/utilities/common';
-import { filterNotNil } from '@bimeister/utilities/rxjs';
+import { isNil } from '@bimeister/utilities/commonjs/common';
+import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, startWith, switchMap, take } from 'rxjs/operators';
 import { Tab } from '../../../../../internal/declarations/interfaces/tab.interface';

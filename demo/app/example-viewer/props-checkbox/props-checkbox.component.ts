@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { guidGenerate } from '@bimeister/utilities/common';
+import { guidGenerate } from '@bimeister/utilities/commonjs/common';
 import { asyncScheduler, concat, Observable, of, Subject, Subscriber } from 'rxjs';
 import { observeOn, shareReplay, takeUntil, tap } from 'rxjs/operators';
 

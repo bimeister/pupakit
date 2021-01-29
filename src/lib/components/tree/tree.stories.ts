@@ -1,4 +1,4 @@
-import { getUuid } from '@bimeister/utilities/rxjs';
+import { getUuid } from '@bimeister/utilities/commonjs/common';
 import { storiesOf } from '@storybook/angular';
 import { FlatTreeItem } from '../../../internal/declarations/classes/flat-tree-item.class';
 import { TreeModule } from './tree.module';

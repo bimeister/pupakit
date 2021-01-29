@@ -4,7 +4,7 @@ variables:
   BUILD_EFFECTIVE_YML_FILE: docker-compose.yml
   NPM_AUTH_TOKEN: ${CI_JOB_TOKEN}
   GIT_COMMIT_HASH: ${CI_COMMIT_SHORT_SHA}
-  DEFAULT_LABELS: meistersoft.build.pipeline=${CI_PIPELINE_IID};meistersoft.git.commit=${GIT_COMMIT};meistersoft.git.branch=${BRANCH_NAME}
+  PIPELINE_ID: ${CI_PIPELINE_IID}
   BASE_IMAGE: base-image:${CI_COMMIT_SHORT_SHA}
   BUILD_IMAGE: build-image:${CI_COMMIT_SHORT_SHA}
 

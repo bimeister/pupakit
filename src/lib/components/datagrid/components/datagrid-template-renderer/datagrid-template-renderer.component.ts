@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, TemplateRef } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { ICellRendererAngularComp, IHeaderAngularComp } from 'ag-grid-angular';
 import { ICellRendererParams, IHeaderParams } from 'ag-grid-community';
 

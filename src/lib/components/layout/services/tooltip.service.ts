@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNil } from '@bimeister/utilities/common';
+import { isNil } from '@bimeister/utilities/commonjs/common';
 import { Observable, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TooltipConfig } from '../../../../internal/declarations/interfaces/tooltip-config.interface';
