@@ -1,6 +1,7 @@
 export {
   Alert,
   ButtonColor,
+  ChipItem,
   CustomTreeDataSource,
   DatagridDomLayouts,
   DatagridManipulator,
@@ -40,6 +41,7 @@ export * from './lib/components/api';
 export { ButtonModule } from './lib/components/button/button.module';
 export { CheckboxModule } from './lib/components/checkbox/checkbox.module';
 export { ChipButtonModule } from './lib/components/chip-button/chip-button.module';
+export { ChipSelectModule } from './lib/components/chip-select/chip-select.module';
 export { ChipTabsModule } from './lib/components/chip-tabs/chip-tabs.module';
 export { ChipModule } from './lib/components/chip/chip.module';
 export { ControlTextModule } from './lib/components/control-text/control-text.module';

@@ -1,0 +1,33 @@
+@import 'functions';
+
+:host {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #ffffff;
+  padding: 0.5rem;
+  text-align: left;
+}
+
+.tree {
+  width: 100%;
+  display: block;
+}
+
+.tree__search {
+  width: 100%;
+  margin-bottom: rems(0.5);
+  display: block;
+}
+
+.tree__items {
+  width: 100%;
+  display: block;
+}
+
+pupa-input {
+  width: 100%;
+  & .input_medium {
+    width: 100% !important;
+  }
+}

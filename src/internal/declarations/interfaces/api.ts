@@ -5,6 +5,7 @@
 export * from './alert.interface';
 export * from './base-tree-item.interface';
 export * from './button-icon.interface';
+export * from './chip-item.interface';
 export * from './component-change.interface';
 export * from './component-changes.interface';
 export * from './current-draggable-list-item.interface';

@@ -23,7 +23,7 @@ const ANIMATION_DURATION_MS: number = 150;
 })
 export class SelectDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;
-  @Input() public width: string | null = null;
+  @Input() public fitContent: boolean = false;
 
   constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);

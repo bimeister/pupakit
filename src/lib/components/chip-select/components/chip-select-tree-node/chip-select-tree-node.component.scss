@@ -1,0 +1,74 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.item-node {
+  display: block;
+  width: 100%;
+}
+
+.item-node__button {
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  padding: 0.3rem 0;
+  &.disable {
+    color: color(grey-ivory);
+    & .item-node__button-icon {
+      color: color(grey-ivory);
+    }
+  }
+}
+
+.item-node__button-wrapper {
+  display: flex;
+  align-items: stretch;
+  flex-direction: row;
+}
+
+.item-node__button-icon {
+  display: flex;
+  width: rems(1);
+  min-width: rems(1);
+  margin-right: 0.3rem;
+  align-items: center;
+  color: color(cadet-blue);
+}
+
+.item-node__button-text-wrap {
+  flex: auto;
+  max-width: calc(100% - 1.3rem);
+}
+
+.item-node__button-text {
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item-node__button-children {
+  display: flex;
+  width: 1.3rem;
+  min-width: 1.3rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: rems(0.1875);
+  &:hover {
+    background-color: color(grey-apple);
+  }
+}
+
+.item-node__button-text-wrap.children {
+  max-width: calc(100% - 2.6rem);
+}
+
+.item-node-children {
+  display: block;
+  width: calc(100% - 1rem);
+  margin-left: 1rem;
+}

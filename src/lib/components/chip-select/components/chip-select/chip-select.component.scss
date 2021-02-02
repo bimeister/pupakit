@@ -1,0 +1,116 @@
+@import 'themes/functions';
+@import 'functions';
+@import 'mixins';
+
+.chip-select {
+  line-height: rems(1.8);
+  display: block;
+}
+
+pupa-chip,
+pupa-chip-button {
+  margin-right: rems(0.3);
+}
+
+pupa-chip span {
+  display: inline-block;
+  margin-right: rems(0.6);
+}
+
+.chip-select__chip-icon {
+  position: absolute;
+  appearance: none;
+  box-sizing: border-box;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 rems(0.2) 0 0;
+  outline: none;
+  height: rems(1);
+  width: rems(1);
+  display: flex;
+  border-radius: 50%;
+  white-space: nowrap;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  color: inherit;
+  z-index: 299;
+  left: 0;
+
+  transition: left 0.25s;
+}
+
+.chip-select__chip-icon_remove {
+  z-index: 300;
+  left: rems(-2.5);
+}
+
+pupa-chip:hover .chip-select__chip-icon:not(.chip-select__chip-icon_remove) {
+  opacity: 0;
+  left: rems(2.5);
+}
+
+pupa-chip:hover .chip-select__chip-icon_remove {
+  opacity: 1;
+  left: 0;
+}
+
+.chip-select__chip-icon_remove {
+  opacity: 0;
+}
+
+.chip-select__chip-add-button {
+  display: inline-block;
+  margin: 0 rems(0.2) 0 rems(0.3);
+}
+
+.chip-select__chip-icon-container {
+  display: inline-flex;
+  height: rems(1);
+  width: rems(1);
+  overflow: hidden;
+  margin: 0 rems(0.2) 0 rems(0.4);
+  position: relative;
+}
+
+.chip-select__droppable-item {
+  display: flex;
+  line-height: rems(1);
+  padding: rems(0.3) rems(0.3);
+  align-items: center;
+  flex-direction: row;
+  cursor: pointer;
+  white-space: nowrap;
+  &:hover {
+    background-color: color(grey-apple);
+  }
+}
+
+.chip-select__droppable-icon {
+  min-width: rems(1);
+  color: color(cadet-blue);
+  margin-right: rems(0.3);
+}
+
+.chip-select__droppable-text {
+  display: block;
+  align-items: center;
+  flex-direction: row;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spinner-container {
+  margin: rems(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty {
+  display: block;
+  margin: px(5) px(10);
+}

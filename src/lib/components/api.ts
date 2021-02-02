@@ -6,6 +6,7 @@ export * from './button/api';
 export * from './checkbox/api';
 export * from './chip/api';
 export * from './chip-button/api';
+export * from './chip-select/api';
 export * from './chip-tabs/api';
 export * from './control-text/api';
 export * from './datagrid/api';

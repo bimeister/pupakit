@@ -11,10 +11,8 @@ import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
 import { TreeModule } from '../tree/tree.module';
 import { SelectButtonInputComponent } from './components/regular/select-button-input/select-button-input.component';
+import { SelectButtonItemComponent } from './components/regular/select-button-item/select-button-item.component';
 import { SelectButtonComponent } from './components/regular/select-button/select-button.component';
-import { SelectChipButtonComponent } from './components/regular/select-chip-button/select-chip-button.component';
-import { SelectChipItemComponent } from './components/regular/select-chip-item/select-chip-item.component';
-import { SelectChipsContainerComponent } from './components/regular/select-chips-container/select-chips-container.component';
 import { SelectDropdownComponent } from './components/regular/select-dropdown/select-dropdown.component';
 import { SelectIconButtonComponent } from './components/regular/select-icon-button/select-icon-button.component';
 import { SelectItemCheckboxComponent } from './components/regular/select-item-checkbox/select-item-checkbox.component';
@@ -42,7 +40,6 @@ const COMPONENTS: any[] = [
   SelectTreeComponent,
   SelectButtonComponent,
   SelectIconButtonComponent,
-  SelectChipButtonComponent,
   SelectDropdownComponent,
   SelectTableComponent,
   SelectTableButtonComponent,
@@ -51,11 +48,10 @@ const COMPONENTS: any[] = [
   SelectTableItemsContainerComponent,
   SelectTableSearchComponent,
   SelectTableTreeComponent,
-  SelectChipItemComponent,
+  SelectButtonItemComponent,
   SelectTabsComponent,
   SelectTabsItemComponent,
-  SelectButtonInputComponent,
-  SelectChipsContainerComponent
+  SelectButtonInputComponent
 ];
 
 @NgModule({
