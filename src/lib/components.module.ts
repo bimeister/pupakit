@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
+
 import { SharedModule } from '../internal/shared/shared.module';
 import { ButtonModule } from './components/button/button.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipButtonModule } from './components/chip-button/chip-button.module';
+import { ChipSelectModule } from './components/chip-select/chip-select.module';
 import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
@@ -48,6 +50,7 @@ const EXPORTS: any[] = [
   CheckboxModule,
   ChipButtonModule,
   ChipModule,
+  ChipSelectModule,
   ChipTabsModule,
   ControlTextModule,
   DatagridModule,

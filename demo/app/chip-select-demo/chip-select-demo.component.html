@@ -1,0 +1,19 @@
+<h1>Chip select</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-chip-select
+      [selectItems]="selectItems"
+      [items]="items"
+      [maxWidth]="300"
+      [readonly]="readonly | async"
+      [selectOne]="selectOne | async"
+    ></pupa-chip-select>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #readonly>Readonly</demo-props-checkbox>
+    <demo-props-checkbox (changes)="resetSelectedItems()" #selectOne>Select one</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

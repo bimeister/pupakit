@@ -34,9 +34,9 @@
 
   <pupa-select [isMultiSelectionEnabled]="true" [formControl]="chipsFormControl">
     <pupa-select-button>
-      <pupa-select-chip-item *ngFor="let chip of chipsFormControl.value" [value]="chip">{{
+      <pupa-select-button-item *ngFor="let chip of chipsFormControl.value" (closeClick)="onClose(chip)">{{
         chip
-      }}</pupa-select-chip-item>
+      }}</pupa-select-button-item>
     </pupa-select-button>
 
     <pupa-select-dropdown>
@@ -132,7 +132,7 @@
           <pupa-icon name="settings"></pupa-icon>
         </pupa-select-icon-button>
 
-        <pupa-select-dropdown [width]="'fit-content'">
+        <pupa-select-dropdown [fitContent]="true">
           <pupa-select-items-container>
             <pupa-select-item-checkbox [value]="1">1 Какой-то текст </pupa-select-item-checkbox>
             <pupa-select-item-checkbox [value]="2" [isDisabled]="true">2</pupa-select-item-checkbox>
@@ -142,26 +142,4 @@
       </pupa-select>
     </div>
   </div>
-
-  <pupa-select [isMultiSelectionEnabled]="true" [formControl]="chipsFormControl">
-    <pupa-select-chips-container>
-      <pupa-select-chip-button>
-        asdasdasd
-        <pupa-icon name="add"></pupa-icon>
-      </pupa-select-chip-button>
-      <pupa-select-chip-item *ngFor="let chip of chipsFormControl.value" [value]="chip">
-        {{ chip }}
-      </pupa-select-chip-item>
-    </pupa-select-chips-container>
-
-    <pupa-select-dropdown [width]="'fit-content'">
-      <pupa-select-items-container>
-        <pupa-select-item [value]="1">1</pupa-select-item>
-        <pupa-select-item [value]="2">2</pupa-select-item>
-        <pupa-select-item value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-          >aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</pupa-select-item
-        >
-      </pupa-select-items-container>
-    </pupa-select-dropdown>
-  </pupa-select>
 </div>

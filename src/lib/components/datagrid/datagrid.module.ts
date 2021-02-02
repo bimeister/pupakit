@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { AgGridModule } from 'ag-grid-angular';
 import { mdSettingsIcon } from '../../../internal/constants/icons/md-settings-icon.const';
 import { CheckboxModule } from '../checkbox/checkbox.module';
+import { ChipSelectModule } from '../chip-select/chip-select.module';
 import { DroppableModule } from '../droppable/droppable.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
@@ -14,6 +15,7 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
   imports: [
     SharedModule,
     CheckboxModule,
+    ChipSelectModule,
     IconButtonModule,
     DroppableModule,
     IconModule.forFeature([mdSettingsIcon]),
