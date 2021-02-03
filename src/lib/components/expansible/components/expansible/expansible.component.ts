@@ -14,8 +14,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { isNil } from '@bimeister/utilities/commonjs/common';
-import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
+import { filterNotNil, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,

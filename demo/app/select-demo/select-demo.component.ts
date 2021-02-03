@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { getUuid, isNil } from '@bimeister/utilities/commonjs/common';
+import { getUuid, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';

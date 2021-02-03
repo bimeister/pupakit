@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, Optional } from '@angular/core';
 import { AbstractControl, ControlValueAccessor, FormArray, NgControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/constants/void.const';

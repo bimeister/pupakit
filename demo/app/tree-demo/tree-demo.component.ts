@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { getUuid } from '@bimeister/utilities/commonjs/common';
+import { getUuid } from '@bimeister/utilities';
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
 
 @Component({

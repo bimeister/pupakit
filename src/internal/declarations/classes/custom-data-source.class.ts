@@ -1,6 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
-import { isNil } from '@bimeister/utilities/commonjs/common';
-import { shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
+import { isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { TreeDataSource } from '../interfaces/tree-data-source.interface';

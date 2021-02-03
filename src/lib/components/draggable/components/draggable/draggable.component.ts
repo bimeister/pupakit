@@ -7,7 +7,7 @@ import {
   HostBinding,
   Renderer2
 } from '@angular/core';
-import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
+import { filterNotNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, shareReplay, switchMap } from 'rxjs/operators';
 import { Position } from '../../../../../internal/declarations/types/position.type';

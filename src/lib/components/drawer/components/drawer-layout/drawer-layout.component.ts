@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { isEmpty, isNil } from '@bimeister/utilities/commonjs/common';
+import { isEmpty, isNil } from '@bimeister/utilities';
 
 @Component({
   selector: 'pupa-drawer-layout',

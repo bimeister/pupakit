@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Directive, HostListener, Input, OnChanges } from '@angular/core';
-import { getUuid, isNil } from '@bimeister/utilities/commonjs/common';
+import { getUuid, isNil } from '@bimeister/utilities';
 import { Subject } from 'rxjs';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';

@@ -12,7 +12,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { ControlState } from '../../../../../internal/declarations/enums/control-state.enum';

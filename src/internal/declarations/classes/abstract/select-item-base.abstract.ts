@@ -1,5 +1,5 @@
 import { Directive, HostListener, OnChanges } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';

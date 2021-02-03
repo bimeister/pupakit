@@ -8,8 +8,7 @@ import {
   Output,
   ViewEncapsulation
 } from '@angular/core';
-import { isEqual, isNil } from '@bimeister/utilities/commonjs/common';
-import { filterFalsy, filterNotNil, filterTruthy } from '@bimeister/utilities/commonjs/rxjs';
+import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';

@@ -1,4 +1,4 @@
-import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/common';
+import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
 import { TaskFunction } from 'gulp';
 
 export function bundleAssetsTask(): TaskFunction {

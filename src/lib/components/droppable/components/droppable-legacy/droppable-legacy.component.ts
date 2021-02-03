@@ -10,7 +10,7 @@ import {
   Renderer2,
   ViewChild
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { DroppableLegacyHorizontalPosition } from '../../../../../internal/declarations/types/droppable-legacy-horizontal-position.type';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';

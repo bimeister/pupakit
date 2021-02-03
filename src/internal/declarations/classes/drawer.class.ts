@@ -1,7 +1,7 @@
 import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector } from '@angular/core';
-import { getUuid, isNil } from '@bimeister/utilities/commonjs/common';
+import { getUuid, isNil } from '@bimeister/utilities';
 import { DrawerContainerComponent } from '../../../lib/components/drawer/components/drawer-container/drawer-container.component';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
 import { DrawerConfig } from '../interfaces/drawer-config.interface';

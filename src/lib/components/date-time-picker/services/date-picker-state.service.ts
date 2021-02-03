@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
-import { filterFalsy, filterNotNil, shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
+import { filterFalsy, filterNotNil, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, NEVER, Observable } from 'rxjs';
 import { filter, map, shareReplay, switchMap, take } from 'rxjs/operators';
 import { DatePickerPreviewMode } from '../../../../internal/declarations/types/date-picker-preview-mode.type';
