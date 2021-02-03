@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy, Renderer2, RendererStyleFlags2 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, Observable, Subject, Subscription } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { CurrentDraggableListItem } from '../../../../internal/declarations/interfaces/current-draggable-list-item.interface';

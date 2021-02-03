@@ -1,8 +1,7 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isEmpty, isNil, Nullable } from '@bimeister/utilities/commonjs/common';
-import { shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
+import { isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,

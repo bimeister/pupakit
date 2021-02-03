@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, OnChanges, TrackByFunction } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { asyncScheduler, BehaviorSubject, Observable, timer } from 'rxjs';
 import { delay, filter, map, observeOn, subscribeOn, switchMap, take, tap } from 'rxjs/operators';
 import { TreeType } from '../../enums/tree-type.enum';

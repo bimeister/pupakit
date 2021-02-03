@@ -1,5 +1,4 @@
-import { isNil, Nullable } from '@bimeister/utilities/commonjs/common';
-import { filterNotNil } from '@bimeister/utilities/commonjs/rxjs';
+import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { AgGridEvent, ColDef, ColumnApi, GridApi, GridReadyEvent, IDatasource } from 'ag-grid-community';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscriber } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';

@@ -1,6 +1,6 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterContentInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
 import { AlertsService } from '../../services/alerts.service';
 

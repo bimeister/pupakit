@@ -10,7 +10,7 @@ import {
   ViewEncapsulation,
   ViewRef
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { Observable, of } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/constants/void.const';

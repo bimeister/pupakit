@@ -1,5 +1,5 @@
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { ReplaySubject } from 'rxjs';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';

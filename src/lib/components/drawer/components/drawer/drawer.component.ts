@@ -13,7 +13,7 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';

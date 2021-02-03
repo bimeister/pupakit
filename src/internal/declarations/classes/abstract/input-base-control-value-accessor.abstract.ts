@@ -1,7 +1,6 @@
 import { Directive, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil, Nullable } from '@bimeister/utilities/commonjs/common';
-import { filterNotNil, shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
+import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { BrowserService } from '../../../shared/services/browser.service';

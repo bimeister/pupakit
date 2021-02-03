@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isNil, Nullable } from '@bimeister/utilities/commonjs/common';
-import { shareReplayWithRefCount } from '@bimeister/utilities/commonjs/rxjs';
+import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap, take } from 'rxjs/operators';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';

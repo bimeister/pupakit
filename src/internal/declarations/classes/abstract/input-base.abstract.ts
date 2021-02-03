@@ -1,5 +1,5 @@
 import { Directive, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';

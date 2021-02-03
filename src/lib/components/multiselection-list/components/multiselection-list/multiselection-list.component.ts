@@ -9,7 +9,7 @@ import {
   Output
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 

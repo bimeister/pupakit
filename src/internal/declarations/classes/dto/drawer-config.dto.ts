@@ -1,5 +1,5 @@
 import { Injector, StaticProvider } from '@angular/core';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { DrawerConfig } from '../../interfaces/drawer-config.interface';
 
 export class DrawerConfigDto implements DrawerConfig {

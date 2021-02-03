@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { FormControl, ValidatorFn } from '@angular/forms';
-import { isNil } from '@bimeister/utilities/commonjs/common';
+import { isNil } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
 
