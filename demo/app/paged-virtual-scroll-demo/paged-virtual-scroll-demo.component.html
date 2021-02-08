@@ -2,10 +2,10 @@
 
 <div class="demo-container">
   <div class="container">
-    <pupa-paged-virtual-scroll-viewport>
-      <pupa-paged-virtual-scroll-item *pupaVirtualFor="let block of blocks">
-        <div class="item" [style.height.px]="block.height">{{ block.index }}. height: {{ block.height }}px</div>
-      </pupa-paged-virtual-scroll-item>
+    <pupa-paged-virtual-scroll-viewport [itemSize]="itemSize">
+      <div class="item" [style.height.px]="itemSize" *pupaVirtualFor="let block of blocks; let blockIndex = index">
+        element {{ blockIndex }}
+      </div>
     </pupa-paged-virtual-scroll-viewport>
   </div>
 </div>

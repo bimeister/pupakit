@@ -7,6 +7,8 @@ interface BlockItem {
 
 const BLOCKS_COUNT: number = 100;
 
+const ITEM_SIZE_PX: number = 35;
+
 @Component({
   selector: 'demo-paged-virtual-scroll-demo',
   templateUrl: './paged-virtual-scroll-demo.component.html',
@@ -15,9 +17,7 @@ const BLOCKS_COUNT: number = 100;
   encapsulation: ViewEncapsulation.Emulated
 })
 export class PagedVirtualScrollDemoComponent {
-  public readonly blocks: BlockItem[] = Array(BLOCKS_COUNT)
-    .fill(0)
-    .map((_block: unknown, index: number) => {
-      return { index, height: Math.floor(Math.random() * 40) + 30 };
-    });
+  public readonly itemSize: number = ITEM_SIZE_PX;
+
+  public readonly blocks: BlockItem[] = Array(BLOCKS_COUNT).fill(0);
 }
