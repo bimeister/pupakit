@@ -2,6 +2,8 @@
 @import 'mixins';
 @import 'functions';
 
+@include scrollbar();
+
 .viewport {
   width: 100%;
   height: 100%;
@@ -11,24 +13,10 @@
   display: flex;
   flex-direction: row;
 
-  &__iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
+  overflow: auto;
+}
 
-  &__content {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    flex: 1;
-
-    will-change: transform;
-  }
+.virtual-scroll-viewport {
+  height: 100%;
+  width: 100%;
 }

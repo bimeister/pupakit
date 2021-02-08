@@ -1,11 +1,7 @@
 <div class="viewport">
-  <div
-    class="viewport__content"
-    [style.height.px]="contentHeight$ | async"
-    [ngStyle]="{ transform: 'translateY(' + (contentTranslateY$ | async) + '%)' }"
-  >
-    <ng-content></ng-content>
-  </div>
-  <pupa-paged-virtual-scroll-scroll></pupa-paged-virtual-scroll-scroll>
-  <iframe class="viewport__iframe" frameborder="0" #iframe></iframe>
+  <ng-container *ngIf="itemSize$ | async as size">
+    <cdk-virtual-scroll-viewport [itemSize]="size" class="virtual-scroll-viewport" #cdkViewport>
+      <ng-content></ng-content>
+    </cdk-virtual-scroll-viewport>
+  </ng-container>
 </div>
