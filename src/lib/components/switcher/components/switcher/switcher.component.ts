@@ -23,7 +23,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SwitcherComponent implements ControlValueAccessor {
-  @Input() public indifferent: boolean = false;
   @Input() public id: string;
   @Input() public disabled: boolean;
   @Output() public change: EventEmitter<boolean> = new EventEmitter<boolean>();
