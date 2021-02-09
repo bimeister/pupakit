@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 
-interface BlockItem {
-  index: number;
-  height: number;
-}
-
-const BLOCKS_COUNT: number = 100;
+const ROWS_COUNT: number = 10000;
+const DATA: number[] = Array(ROWS_COUNT).fill(null);
 
 const ITEM_SIZE_PX: number = 35;
+
+const DEFAULT_SLICE: number = 50;
 
 @Component({
   selector: 'demo-paged-virtual-scroll-demo',
@@ -16,8 +16,27 @@ const ITEM_SIZE_PX: number = 35;
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated
 })
-export class PagedVirtualScrollDemoComponent {
+export class PagedVirtualScrollDemoComponent implements OnInit {
   public readonly itemSize: number = ITEM_SIZE_PX;
+  public readonly totalCount: number = ROWS_COUNT;
 
-  public readonly blocks: BlockItem[] = Array(BLOCKS_COUNT).fill(0);
+  public readonly rows$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
+
+  public ngOnInit(): void {
+    this.getFirstSlice();
+  }
+
+  public handleChangeDataSource(): void {
+    this.rows$
+      .pipe(
+        take(1),
+        map((rows: number[]) => rows.length),
+        filter((currentRowsLength: number) => currentRowsLength <= ROWS_COUNT)
+      )
+      .subscribe((currentRowsLength: number) => this.rows$.next(DATA.slice(0, currentRowsLength + DEFAULT_SLICE)));
+  }
+
+  private getFirstSlice(): void {
+    this.rows$.next(DATA.slice(0, DEFAULT_SLICE));
+  }
 }

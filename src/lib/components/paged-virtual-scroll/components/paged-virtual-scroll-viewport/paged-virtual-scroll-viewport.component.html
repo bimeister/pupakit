@@ -1,7 +1,9 @@
 <div class="viewport">
   <ng-container *ngIf="itemSize$ | async as size">
-    <cdk-virtual-scroll-viewport [itemSize]="size" class="virtual-scroll-viewport" #cdkViewport>
+    <cdk-virtual-scroll-viewport class="virtual-scroll-viewport" #cdkViewport [itemSize]="size">
       <ng-content></ng-content>
     </cdk-virtual-scroll-viewport>
   </ng-container>
+
+  <iframe class="viewport__iframe" frameborder="0" #iframe></iframe>
 </div>
