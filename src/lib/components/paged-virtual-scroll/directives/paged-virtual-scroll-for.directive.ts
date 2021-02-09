@@ -37,7 +37,16 @@ import {
   Subject,
   Subscription
 } from 'rxjs';
-import { filter, pairwise, shareReplay, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  pairwise,
+  shareReplay,
+  switchMap,
+  take,
+  withLatestFrom
+} from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
@@ -172,6 +181,8 @@ export class PupaVirtualScrollForDirective<T>
 
   private readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> = this.pagedVirtualScrollStateService
     .viewport$;
+  private readonly calculatedCacheSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.cacheSize$;
+  private readonly currentSliceCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.currentSliceCount$;
 
   /** The currently rendered range of indices. */
   private _renderedRange: ListRange;
@@ -193,7 +204,12 @@ export class PupaVirtualScrollForDirective<T>
     private readonly ngZone: NgZone,
     private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService
   ) {
-    this.subscription.add(this.processDataStreamChanges()).add(this.processViewportRangeSizeChanges());
+    this.subscription
+      .add(this.processDataStreamChanges())
+      .add(this.processViewportRangeSizeChanges())
+      .add(this.changeTemplateCacheSize())
+      .add(this.processViewportResizingForChangeCacheSize());
+
     this.attachViewport();
   }
 
@@ -351,7 +367,7 @@ export class PupaVirtualScrollForDirective<T>
 
   /** Apply changes to the DOM. */
   private applyChanges(changes: IterableChanges<T>): void {
-    this.pupaVirtualForOf$.pipe(filterNotNil()).subscribe((pupaVirtualForOf: PupaVirtualForOfType<T>) => {
+    this.pupaVirtualForOf$.pipe(filterNotNil(), take(1)).subscribe((pupaVirtualForOf: PupaVirtualForOfType<T>) => {
       this.viewRepeater.applyChanges(
         changes,
         this.viewContainerRef,
@@ -422,6 +438,7 @@ export class PupaVirtualScrollForDirective<T>
   private processDataStreamChanges(): Subscription {
     return this.dataStream.subscribe(data => {
       this.data$.next(data);
+      this.currentSliceCount$.next(data.length);
       this.onRenderedDataChange();
     });
   }
@@ -439,6 +456,21 @@ export class PupaVirtualScrollForDirective<T>
         changes ? this.applyChanges(changes) : this.updateContext();
         this.needsUpdate$.next(false);
       });
+  }
+
+  private changeTemplateCacheSize(): Subscription {
+    return this.templateCacheSize$
+      .pipe(filterNotNil(), distinctUntilChanged())
+      .subscribe((templateCacheSize: number) => (this.viewRepeater.viewCacheSize = templateCacheSize));
+  }
+
+  private processViewportResizingForChangeCacheSize(): Subscription {
+    return this.calculatedCacheSize$
+      .pipe(
+        filterNotNil(),
+        map((cacheSize: number) => coerceNumberProperty(cacheSize))
+      )
+      .subscribe((cacheSize: number) => this.templateCacheSize$.next(cacheSize));
   }
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
