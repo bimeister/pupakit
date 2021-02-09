@@ -1,10 +1,4 @@
-<div
-  class="toggle"
-  [class.toggle_active]="value"
-  [class.toggle_disabled]="disabled"
-  [class.toggle_indifferent]="indifferent"
-  (click)="toggle()"
->
+<div class="toggle" [class.toggle_active]="value" [class.toggle_disabled]="disabled" (click)="toggle()">
   <div class="toggle__marker"></div>
 </div>
 <input type="checkbox" [id]="id" [name]="id" (change)="toggle()" [disabled]="disabled" />

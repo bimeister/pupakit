@@ -2,12 +2,11 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-switcher [disabled]="disabled | async" [indifferent]="indifferent | async"></pupa-switcher>
+    <pupa-switcher [disabled]="disabled | async"></pupa-switcher>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #indifferent>Indifferent</demo-props-checkbox>
     <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
