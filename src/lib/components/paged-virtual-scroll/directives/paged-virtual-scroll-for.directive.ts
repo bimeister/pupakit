@@ -27,7 +27,7 @@ import {
   TrackByFunction,
   ViewContainerRef
 } from '@angular/core';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { filterNotNil, isNil, Nullable, tapLog } from '@bimeister/utilities';
 import {
   BehaviorSubject,
   combineLatest,
@@ -37,16 +37,7 @@ import {
   Subject,
   Subscription
 } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  pairwise,
-  shareReplay,
-  switchMap,
-  take,
-  withLatestFrom
-} from 'rxjs/operators';
+import { delayWhen, filter, map, pairwise, shareReplay, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
@@ -126,15 +117,6 @@ export class PupaVirtualScrollForDirective<T>
   >(this.hostTemplate);
 
   /**
-   * The size of the cache used to store templates that are not being used for re-use later.
-   * Setting the cache size to `0` will disable caching. Defaults to 20 templates.
-   */
-  @Input() public templateCacheSize: number = this.viewRepeater.viewCacheSize;
-  private readonly templateCacheSize$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    this.viewRepeater.viewCacheSize
-  );
-
-  /**
    * Whether the rendered data should be updated during the next ngDoCheck cycle.
    * Emit when trackByFunction change to recalculate differ
    * */
@@ -181,7 +163,8 @@ export class PupaVirtualScrollForDirective<T>
 
   private readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> = this.pagedVirtualScrollStateService
     .viewport$;
-  private readonly calculatedCacheSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.cacheSize$;
+  private readonly calculatedCacheSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService
+    .calculatedCacheSize$;
   private readonly currentSliceCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.currentSliceCount$;
 
   /** The currently rendered range of indices. */
@@ -207,8 +190,9 @@ export class PupaVirtualScrollForDirective<T>
     this.subscription
       .add(this.processDataStreamChanges())
       .add(this.processViewportRangeSizeChanges())
-      .add(this.changeTemplateCacheSize())
       .add(this.processViewportResizingForChangeCacheSize());
+
+    this.viewRepeater.viewCacheSize = 45;
 
     this.attachViewport();
   }
@@ -217,7 +201,6 @@ export class PupaVirtualScrollForDirective<T>
     this.processPupaVirtualForOfChange(changes?.pupaVirtualForOf);
     this.processTrackByFunctionChange(changes?.trackByFunction);
     this.processTemplateChange(changes?.template);
-    this.processTemplateCacheSizeChange(changes?.templateCacheSize);
   }
 
   public ngDoCheck(): void {
@@ -324,6 +307,8 @@ export class PupaVirtualScrollForDirective<T>
           const newDiffer: IterableDiffer<T> = this.differs.find(renderedItems).create((index: number, item: T) => {
             return isNil(trackByFunction) ? item : trackByFunction(index, item);
           });
+
+          console.log('*** onRenderedDataChange');
           this.differ$.next(newDiffer);
         }
       );
@@ -367,26 +352,35 @@ export class PupaVirtualScrollForDirective<T>
 
   /** Apply changes to the DOM. */
   private applyChanges(changes: IterableChanges<T>): void {
-    this.pupaVirtualForOf$.pipe(filterNotNil(), take(1)).subscribe((pupaVirtualForOf: PupaVirtualForOfType<T>) => {
-      this.viewRepeater.applyChanges(
-        changes,
-        this.viewContainerRef,
-        (record: IterableChangeRecord<T>, _adjustedPreviousIndex: number | null, currentIndex: number | null) =>
-          this.getEmbeddedViewArgs(record, currentIndex, pupaVirtualForOf),
-        record => record.item
-      );
+    console.log('^^^ applyChanges');
+    this.pupaVirtualForOf$
+      .pipe(
+        filterNotNil(),
+        take(1),
+        delayWhen(() => this.calculatedCacheSize$.pipe(filterNotNil()))
+      )
+      .subscribe((pupaVirtualForOf: PupaVirtualForOfType<T>) => {
+        this.viewRepeater.applyChanges(
+          changes,
+          this.viewContainerRef,
+          (record: IterableChangeRecord<T>, _adjustedPreviousIndex: number | null, currentIndex: number | null) =>
+            this.getEmbeddedViewArgs(record, currentIndex, pupaVirtualForOf),
+          record => record.item
+        );
 
-      // Update $implicit for any items that had an identity change.
-      changes.forEachIdentityChange((record: IterableChangeRecord<T>) => {
-        const view: EmbeddedViewRef<
-          PupaVirtualScrollForOfContext<T>
-        > | null = this.getViewFromViewContainerAsEmbeddedViewRef(record.currentIndex);
-        view.context.$implicit = record.item;
+        console.log('*** applyChanges');
+
+        // Update $implicit for any items that had an identity change.
+        changes.forEachIdentityChange((record: IterableChangeRecord<T>) => {
+          const view: EmbeddedViewRef<
+            PupaVirtualScrollForOfContext<T>
+          > | null = this.getViewFromViewContainerAsEmbeddedViewRef(record.currentIndex);
+          view.context.$implicit = record.item;
+        });
+
+        // Update the context variables on all items.
+        this.updateContext({ needApplyDetectChanges: false });
       });
-
-      // Update the context variables on all items.
-      this.updateContext({ needApplyDetectChanges: false });
-    });
   }
 
   /** Update the computed properties on the `CdkVirtualForOfContext`. */
@@ -420,6 +414,10 @@ export class PupaVirtualScrollForDirective<T>
       },
       index
     };
+  }
+
+  private updateTotalContentSize(): void {
+    this.pagedVirtualScrollStateService.updateTotalContentSize();
   }
 
   private processViewportRangeSizeChanges(): Subscription {
@@ -458,19 +456,14 @@ export class PupaVirtualScrollForDirective<T>
       });
   }
 
-  private changeTemplateCacheSize(): Subscription {
-    return this.templateCacheSize$
-      .pipe(filterNotNil(), distinctUntilChanged())
-      .subscribe((templateCacheSize: number) => (this.viewRepeater.viewCacheSize = templateCacheSize));
-  }
-
   private processViewportResizingForChangeCacheSize(): Subscription {
     return this.calculatedCacheSize$
       .pipe(
         filterNotNil(),
-        map((cacheSize: number) => coerceNumberProperty(cacheSize))
+        map((cacheSize: number) => coerceNumberProperty(cacheSize)),
+        tapLog()
       )
-      .subscribe((cacheSize: number) => this.templateCacheSize$.next(cacheSize));
+      .subscribe((cacheSize: number) => (this.viewRepeater.viewCacheSize = cacheSize));
   }
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
@@ -493,6 +486,8 @@ export class PupaVirtualScrollForDirective<T>
       : Array.from(updatedValue || []);
     const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(serializedDataSourceChanges);
     this.dataSourceChanges$.next(serializedDataSource);
+
+    this.updateTotalContentSize();
   }
 
   private processTrackByFunctionChange(change: ComponentChange<this, TrackByFunction<T> | undefined>): void {
@@ -520,17 +515,6 @@ export class PupaVirtualScrollForDirective<T>
     }
 
     this.template$.next(this.template);
-  }
-
-  private processTemplateCacheSizeChange(change: ComponentChange<this, number>): void {
-    const updatedValue: number | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    const serializedSize: number = coerceNumberProperty(updatedValue);
-    this.templateCacheSize$.next(serializedSize);
   }
 
   /** @deprecated Angular type shit 🤡  */
