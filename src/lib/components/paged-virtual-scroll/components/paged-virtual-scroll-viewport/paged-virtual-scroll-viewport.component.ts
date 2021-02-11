@@ -12,9 +12,9 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { filterNotNil, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, fromEvent, Subject, Subscription } from 'rxjs';
-import { debounceTime, delayWhen, filter, map, startWith, take } from 'rxjs/operators';
+import { isNil } from '@bimeister/utilities';
+import { BehaviorSubject, fromEvent, Subject, Subscription } from 'rxjs';
+import { debounceTime, startWith } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { VirtualScrollViewportComponent } from '../../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
@@ -38,8 +38,6 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   public readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
 
   public readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
-  private readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> = this.pagedVirtualScrollStateService
-    .viewport$;
 
   public readonly needChangeDataSource$: Subject<void> = this.pagedVirtualScrollStateService.needChangeDataSource$;
 
@@ -53,10 +51,7 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   constructor(private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService) {}
 
   public ngOnInit(): void {
-    this.subscription
-      .add(this.handleToTalContentSize())
-      .add(this.handleIframeResizeEvents())
-      .add(this.handleChangeDataSourceEvent());
+    this.subscription.add(this.handleIframeResizeEvents()).add(this.handleChangeDataSourceEvent());
   }
 
   public ngAfterViewInit(): void {
@@ -74,16 +69,6 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   private setViewportComponent(): void {
     this.pagedVirtualScrollStateService.setViewportComponent(this.viewport);
-  }
-
-  private handleToTalContentSize(): Subscription {
-    return combineLatest([this.itemSize$, this.totalCount$])
-      .pipe(
-        filter(([itemSize, totalCount]: [number, number]) => !isNil(itemSize) && !isNil(totalCount)),
-        map(([itemSize, totalCount]: [number, number]) => itemSize * totalCount),
-        delayWhen(() => this.viewport$.pipe(filterNotNil(), take(1)))
-      )
-      .subscribe((size: number) => this.viewport.setTotalContentSize(size));
   }
 
   private handleIframeResizeEvents(): Subscription {

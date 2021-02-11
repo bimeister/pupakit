@@ -1,8 +1,17 @@
 import { ListRange } from '@angular/cdk/collections';
 import { Injectable, OnDestroy } from '@angular/core';
-import { filterNotNil, filterTruthy, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
+import { filterNotNil, filterTruthy, isNil, shareReplayWithRefCount, tapLog } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import {
+  debounceTime,
+  delayWhen,
+  distinctUntilChanged,
+  filter,
+  map,
+  switchMap,
+  take,
+  withLatestFrom
+} from 'rxjs/operators';
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
 
 @Injectable({ providedIn: 'any' })
@@ -21,7 +30,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
 
   public readonly itemSize$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   public readonly totalCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-  public readonly cacheSize$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  public readonly calculatedCacheSize$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly currentSliceCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   public readonly countItemsInViewport$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
@@ -31,6 +40,13 @@ export class PagedVirtualScrollStateService implements OnDestroy {
 
   public readonly needChangeDataSource$: Subject<void> = new Subject<void>();
 
+  public readonly totalContentSize$: Observable<number> = combineLatest([this.itemSize$, this.totalCount$]).pipe(
+    filter(([itemSize, totalCount]: [number, number]) => !isNil(itemSize) && !isNil(totalCount)),
+    map(([itemSize, totalCount]: [number, number]) => itemSize * totalCount),
+    delayWhen(() => this.viewport$.pipe(filterNotNil(), take(1))),
+    debounceTime(0)
+  );
+
   private readonly subscription: Subscription = new Subscription();
 
   constructor() {
@@ -39,6 +55,8 @@ export class PagedVirtualScrollStateService implements OnDestroy {
       .add(this.processScrolledIndexChanges())
       .add(this.processRenderedRangeChanges())
       .add(this.processScrollToLoadData());
+
+    this.setViewportCacheSizeForRenderedRange();
   }
 
   public ngOnDestroy(): void {
@@ -47,6 +65,19 @@ export class PagedVirtualScrollStateService implements OnDestroy {
 
   public setViewportComponent(viewport: VirtualScrollViewportComponent): void {
     this.viewport$.next(viewport);
+  }
+
+  public updateTotalContentSize(): void {
+    this.totalContentSize$
+      .pipe(
+        delayWhen(() => this.viewport$.pipe(filterNotNil(), take(1))),
+        withLatestFrom(this.viewport$),
+        debounceTime(0),
+        take(1)
+      )
+      .subscribe(([size, viewport]: [number, VirtualScrollViewportComponent]) => {
+        viewport.setTotalContentSize(size);
+      });
   }
 
   private calculateItemsCacheSize(): Subscription {
@@ -60,7 +91,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
         })
       )
       .subscribe(([countItemsInViewport, cacheSize]: [number, number]) => {
-        this.cacheSize$.next(cacheSize);
+        this.calculatedCacheSize$.next(cacheSize);
         this.countItemsInViewport$.next(countItemsInViewport);
       });
   }
@@ -100,6 +131,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
           ]) =>
             !isNil(scrolledIndex) && !isNil(renderedRange) && !isNil(countItemsInViewport) && !isNil(currentSliceCount)
         ),
+        tapLog('~~~'),
         map(
           ([scrolledIndex, _renderedRange, countItemsInViewport, currentSliceCount]: [
             number,
@@ -107,12 +139,37 @@ export class PagedVirtualScrollStateService implements OnDestroy {
             number,
             number
           ]) => {
+            console.log('>>>', { scrolledIndex, countItemsInViewport, currentSliceCount });
             return scrolledIndex + countItemsInViewport >= currentSliceCount;
           }
         ),
         distinctUntilChanged(),
         filterTruthy()
       )
-      .subscribe(() => this.needChangeDataSource$.next());
+      .subscribe(() => {
+        this.needChangeDataSource$.next();
+        this.setViewportCacheSizeForRenderedRange();
+      });
+  }
+
+  private setViewportCacheSizeForRenderedRange(): void {
+    this.calculatedCacheSize$
+      .pipe(
+        filterNotNil(),
+
+        map((cacheSize: number) => cacheSize),
+        withLatestFrom(this.renderedRange$, this.viewport$),
+        take(1)
+      )
+      .subscribe(
+        ([cacheSize, { start: currentStart, end: currentEnd }, viewport]: [
+          number,
+          ListRange,
+          VirtualScrollViewportComponent
+        ]) => {
+          currentEnd;
+          viewport.setRenderedRange({ start: currentStart, end: currentStart + cacheSize });
+        }
+      );
   }
 }

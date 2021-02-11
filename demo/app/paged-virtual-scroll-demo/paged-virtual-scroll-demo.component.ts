@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { take, map, filter } from 'rxjs/operators';
 
-const ROWS_COUNT: number = 10000;
+const ROWS_COUNT: number = 1000;
 const DATA: number[] = Array(ROWS_COUNT).fill(null);
 
 const ITEM_SIZE_PX: number = 35;
