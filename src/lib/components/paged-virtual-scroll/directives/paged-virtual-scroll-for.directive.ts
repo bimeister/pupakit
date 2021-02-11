@@ -27,16 +27,8 @@ import {
   TrackByFunction,
   ViewContainerRef
 } from '@angular/core';
-import { filterNotNil, isNil, Nullable, tapLog } from '@bimeister/utilities';
-import {
-  BehaviorSubject,
-  combineLatest,
-  isObservable,
-  Observable,
-  of as observableOf,
-  Subject,
-  Subscription
-} from 'rxjs';
+import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
 import { delayWhen, filter, map, pairwise, shareReplay, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
@@ -167,6 +159,8 @@ export class PupaVirtualScrollForDirective<T>
     .calculatedCacheSize$;
   private readonly currentSliceCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.currentSliceCount$;
 
+  private readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
+
   /** The currently rendered range of indices. */
   private _renderedRange: ListRange;
 
@@ -182,8 +176,6 @@ export class PupaVirtualScrollForDirective<T>
     /** The strategy used to render items in the virtual scroll viewport. */
     @Inject(_VIEW_REPEATER_STRATEGY)
     private readonly viewRepeater: _RecycleViewRepeaterStrategy<T, T, PupaVirtualScrollForOfContext<T>>,
-    // /** The virtual scrolling viewport that these items are being rendered in. */
-    // @SkipSelf() private readonly viewport: CdkVirtualScrollViewport,
     private readonly ngZone: NgZone,
     private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService
   ) {
@@ -308,7 +300,6 @@ export class PupaVirtualScrollForDirective<T>
             return isNil(trackByFunction) ? item : trackByFunction(index, item);
           });
 
-          console.log('*** onRenderedDataChange');
           this.differ$.next(newDiffer);
         }
       );
@@ -352,7 +343,6 @@ export class PupaVirtualScrollForDirective<T>
 
   /** Apply changes to the DOM. */
   private applyChanges(changes: IterableChanges<T>): void {
-    console.log('^^^ applyChanges');
     this.pupaVirtualForOf$
       .pipe(
         filterNotNil(),
@@ -367,8 +357,6 @@ export class PupaVirtualScrollForDirective<T>
             this.getEmbeddedViewArgs(record, currentIndex, pupaVirtualForOf),
           record => record.item
         );
-
-        console.log('*** applyChanges');
 
         // Update $implicit for any items that had an identity change.
         changes.forEachIdentityChange((record: IterableChangeRecord<T>) => {
@@ -416,10 +404,6 @@ export class PupaVirtualScrollForDirective<T>
     };
   }
 
-  private updateTotalContentSize(): void {
-    this.pagedVirtualScrollStateService.updateTotalContentSize();
-  }
-
   private processViewportRangeSizeChanges(): Subscription {
     return this.viewport$
       .pipe(
@@ -434,7 +418,7 @@ export class PupaVirtualScrollForDirective<T>
   }
 
   private processDataStreamChanges(): Subscription {
-    return this.dataStream.subscribe(data => {
+    return this.dataStream.subscribe((data: T[] | ReadonlyArray<T>) => {
       this.data$.next(data);
       this.currentSliceCount$.next(data.length);
       this.onRenderedDataChange();
@@ -460,34 +444,34 @@ export class PupaVirtualScrollForDirective<T>
     return this.calculatedCacheSize$
       .pipe(
         filterNotNil(),
-        map((cacheSize: number) => coerceNumberProperty(cacheSize)),
-        tapLog()
+        map((cacheSize: number) => coerceNumberProperty(cacheSize))
       )
       .subscribe((cacheSize: number) => (this.viewRepeater.viewCacheSize = cacheSize));
   }
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
-    const updatedValue: PupaVirtualForOfType<T> | undefined = change?.currentValue;
+    this.totalCount$.pipe(filterNotNil(), take(1)).subscribe(totalCount => {
+      const updatedValue: PupaVirtualForOfType<T> | undefined = change?.currentValue;
 
-    if (isNil(updatedValue)) {
-      return;
-    }
+      if (isNil(updatedValue)) {
+        return;
+      }
 
-    this.pupaVirtualForOf$.next(updatedValue);
+      this.pupaVirtualForOf$.next(updatedValue);
 
-    if (isDataSource(updatedValue)) {
-      this.dataSourceChanges$.next(updatedValue);
-      return;
-    }
+      if (isDataSource(updatedValue)) {
+        this.dataSourceChanges$.next(updatedValue);
+        return;
+      }
 
-    // If value is an an NgIterable, convert it to an array.
-    const serializedDataSourceChanges: Observable<T[]> | T[] = isObservable(updatedValue)
-      ? updatedValue
-      : Array.from(updatedValue || []);
-    const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(serializedDataSourceChanges);
-    this.dataSourceChanges$.next(serializedDataSource);
+      if (!Array.isArray(updatedValue)) {
+        throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
+      }
 
-    this.updateTotalContentSize();
+      const copiedData: T[] = [...updatedValue, ...Array(totalCount - updatedValue.length).fill(null)] as T[];
+      const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(copiedData);
+      this.dataSourceChanges$.next(serializedDataSource);
+    });
   }
 
   private processTrackByFunctionChange(change: ComponentChange<this, TrackByFunction<T> | undefined>): void {

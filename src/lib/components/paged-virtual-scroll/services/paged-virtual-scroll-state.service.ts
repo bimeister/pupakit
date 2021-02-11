@@ -1,6 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
 import { Injectable, OnDestroy } from '@angular/core';
-import { filterNotNil, filterTruthy, isNil, shareReplayWithRefCount, tapLog } from '@bimeister/utilities';
+import { filterNotNil, filterTruthy, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -44,7 +44,9 @@ export class PagedVirtualScrollStateService implements OnDestroy {
     filter(([itemSize, totalCount]: [number, number]) => !isNil(itemSize) && !isNil(totalCount)),
     map(([itemSize, totalCount]: [number, number]) => itemSize * totalCount),
     delayWhen(() => this.viewport$.pipe(filterNotNil(), take(1))),
-    debounceTime(0)
+    debounceTime(0),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
   );
 
   private readonly subscription: Subscription = new Subscription();
@@ -65,19 +67,6 @@ export class PagedVirtualScrollStateService implements OnDestroy {
 
   public setViewportComponent(viewport: VirtualScrollViewportComponent): void {
     this.viewport$.next(viewport);
-  }
-
-  public updateTotalContentSize(): void {
-    this.totalContentSize$
-      .pipe(
-        delayWhen(() => this.viewport$.pipe(filterNotNil(), take(1))),
-        withLatestFrom(this.viewport$),
-        debounceTime(0),
-        take(1)
-      )
-      .subscribe(([size, viewport]: [number, VirtualScrollViewportComponent]) => {
-        viewport.setTotalContentSize(size);
-      });
   }
 
   private calculateItemsCacheSize(): Subscription {
@@ -131,7 +120,6 @@ export class PagedVirtualScrollStateService implements OnDestroy {
           ]) =>
             !isNil(scrolledIndex) && !isNil(renderedRange) && !isNil(countItemsInViewport) && !isNil(currentSliceCount)
         ),
-        tapLog('~~~'),
         map(
           ([scrolledIndex, _renderedRange, countItemsInViewport, currentSliceCount]: [
             number,
@@ -139,7 +127,6 @@ export class PagedVirtualScrollStateService implements OnDestroy {
             number,
             number
           ]) => {
-            console.log('>>>', { scrolledIndex, countItemsInViewport, currentSliceCount });
             return scrolledIndex + countItemsInViewport >= currentSliceCount;
           }
         ),
