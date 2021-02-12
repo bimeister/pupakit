@@ -7,9 +7,19 @@
       [totalCount]="totalCount"
       (changeDataSource)="handleChangeDataSource()"
     >
-      <div class="item" [style.height.px]="itemSize" *pupaVirtualFor="let row of rows$ | async; let rowIndex = index">
-        element {{ rowIndex }}
-      </div>
+      <ng-container *pupaVirtualFor="let row of rows$ | async; let rowIndex = index">
+        <ng-container *ngIf="row; else emptyRow">
+          <div class="row" [style.height.px]="itemSize">element {{ rowIndex }}</div>
+        </ng-container>
+      </ng-container>
     </pupa-paged-virtual-scroll-viewport>
   </div>
 </div>
+
+<ng-template #emptyRow>
+  <pupa-skeleton class="empty-row" [style.height.px]="itemSize">
+    <pupa-skeleton-group>
+      <pupa-skeleton-line></pupa-skeleton-line>
+    </pupa-skeleton-group>
+  </pupa-skeleton>
+</ng-template>

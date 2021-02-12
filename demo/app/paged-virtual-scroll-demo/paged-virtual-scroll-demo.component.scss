@@ -18,15 +18,21 @@ $height_container: px(500);
 .container {
   width: 80%;
   height: $height_container;
-  border: 4px #000 dashed;
+  border: px(4) #000 dashed;
   overflow: hidden;
 }
 
-.item {
+.row {
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: color(light);
-  font-size: px(24);
-  border-bottom: 1px solid color(main);
+  font-size: px(20);
+  border-bottom: px(1) solid color(main);
+  box-sizing: content-box;
+}
+
+.empty-row {
+  display: flex;
+  align-items: center;
 }

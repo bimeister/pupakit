@@ -121,12 +121,15 @@ export class PagedVirtualScrollStateService implements OnDestroy {
             !isNil(scrolledIndex) && !isNil(renderedRange) && !isNil(countItemsInViewport) && !isNil(currentSliceCount)
         ),
         map(
-          ([scrolledIndex, _renderedRange, countItemsInViewport, currentSliceCount]: [
+          ([scrolledIndex, { start, end }, countItemsInViewport, currentSliceCount]: [
             number,
             ListRange,
             number,
             number
           ]) => {
+            start;
+            end;
+            // console.log('***', { scrolledIndex, start, end, currentSliceCount, countItemsInViewport });
             return scrolledIndex + countItemsInViewport >= currentSliceCount;
           }
         ),
