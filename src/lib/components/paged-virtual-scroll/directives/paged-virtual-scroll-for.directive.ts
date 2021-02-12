@@ -420,7 +420,6 @@ export class PupaVirtualScrollForDirective<T>
   private processDataStreamChanges(): Subscription {
     return this.dataStream.subscribe((data: T[] | ReadonlyArray<T>) => {
       this.data$.next(data);
-      this.currentSliceCount$.next(data.length);
       this.onRenderedDataChange();
     });
   }
@@ -451,26 +450,32 @@ export class PupaVirtualScrollForDirective<T>
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
     this.totalCount$.pipe(filterNotNil(), take(1)).subscribe(totalCount => {
-      const updatedValue: PupaVirtualForOfType<T> | undefined = change?.currentValue;
+      const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
 
-      if (isNil(updatedValue)) {
+      if (isNil(updatedPupaVirtualForData)) {
         return;
       }
 
-      this.pupaVirtualForOf$.next(updatedValue);
+      this.pupaVirtualForOf$.next(updatedPupaVirtualForData);
 
-      if (isDataSource(updatedValue)) {
-        this.dataSourceChanges$.next(updatedValue);
+      if (isDataSource(updatedPupaVirtualForData)) {
+        this.dataSourceChanges$.next(updatedPupaVirtualForData);
         return;
       }
 
-      if (!Array.isArray(updatedValue)) {
+      if (!Array.isArray(updatedPupaVirtualForData)) {
         throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
       }
 
-      const copiedData: T[] = [...updatedValue, ...Array(totalCount - updatedValue.length).fill(null)] as T[];
-      const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(copiedData);
+      const dataLengthDiff: number = totalCount - updatedPupaVirtualForData.length;
+      const emptyAddBlocks: T[] = Array(dataLengthDiff).fill(null);
+
+      const totalData: T[] = [...updatedPupaVirtualForData, ...emptyAddBlocks];
+
+      const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
       this.dataSourceChanges$.next(serializedDataSource);
+
+      this.currentSliceCount$.next(updatedPupaVirtualForData.length);
     });
   }
 
