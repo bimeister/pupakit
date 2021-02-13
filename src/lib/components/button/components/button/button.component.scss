@@ -4,6 +4,7 @@
 
 :host {
   appearance: none;
+  overflow: hidden;
 }
 
 .button {
@@ -16,6 +17,7 @@
   outline: none;
   @include transition(#{'background, border, box-shadow, padding'});
   @include inline-flex-container(row, center, space-evenly, nowrap);
+  width: 100%;
 
   &_with-loader:not(:disabled) {
     .button__icon.button__icon_right {
@@ -27,6 +29,9 @@
 .button__text {
   user-select: none;
   order: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .button__icon {
