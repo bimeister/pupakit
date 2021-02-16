@@ -3,7 +3,6 @@ import {
   ArrayDataSource,
   CollectionViewer,
   DataSource,
-  isDataSource,
   ListRange,
   _RecycleViewRepeaterStrategy,
   _ViewRepeaterItemInsertArgs,
@@ -27,9 +26,9 @@ import {
   TrackByFunction,
   ViewContainerRef
 } from '@angular/core';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
-import { delayWhen, filter, map, pairwise, shareReplay, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { delayWhen, filter, map, pairwise, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
@@ -139,7 +138,7 @@ export class PupaVirtualScrollForDirective<T>
       this.changeDataSource(prevDataSource, currentDataSource)
     ),
     // Replay the last emitted data when someone subscribes.
-    shareReplay(1)
+    shareReplayWithRefCount()
   );
 
   /** The differ used to calculate changes to the data. */
@@ -157,7 +156,6 @@ export class PupaVirtualScrollForDirective<T>
     .viewport$;
   private readonly calculatedCacheSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService
     .calculatedCacheSize$;
-  private readonly currentSliceCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.currentSliceCount$;
 
   private readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
 
@@ -183,8 +181,6 @@ export class PupaVirtualScrollForDirective<T>
       .add(this.processDataStreamChanges())
       .add(this.processViewportRangeSizeChanges())
       .add(this.processViewportResizingForChangeCacheSize());
-
-    this.viewRepeater.viewCacheSize = 45;
 
     this.attachViewport();
   }
@@ -279,13 +275,14 @@ export class PupaVirtualScrollForDirective<T>
       .pipe(
         filterNotNil(),
         filter(() => !isNil(this._renderedRange)),
-        withLatestFrom(this.trackByFunction$, this.differ$)
+        withLatestFrom(this.trackByFunction$, this.differ$, this.pupaVirtualForOf$)
       )
       .subscribe(
-        ([data, trackByFunction, differ]: [
+        ([data, trackByFunction, differ, _pupaVirtualForOf]: [
           T[] | ReadonlyArray<T>,
           TrackByFunction<T> | undefined,
-          IterableDiffer<T> | null
+          IterableDiffer<T> | null,
+          T[]
         ]) => {
           const renderedItems: T[] = data.slice(this._renderedRange.start, this._renderedRange.end);
           this.renderedItems$.next(renderedItems);
@@ -449,19 +446,8 @@ export class PupaVirtualScrollForDirective<T>
   }
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
-    this.totalCount$.pipe(filterNotNil(), take(1)).subscribe(totalCount => {
+    this.totalCount$.pipe(filterNotNil(), take(1)).subscribe((totalCount: number) => {
       const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
-
-      if (isNil(updatedPupaVirtualForData)) {
-        return;
-      }
-
-      this.pupaVirtualForOf$.next(updatedPupaVirtualForData);
-
-      if (isDataSource(updatedPupaVirtualForData)) {
-        this.dataSourceChanges$.next(updatedPupaVirtualForData);
-        return;
-      }
 
       if (!Array.isArray(updatedPupaVirtualForData)) {
         throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
@@ -474,8 +460,7 @@ export class PupaVirtualScrollForDirective<T>
 
       const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
       this.dataSourceChanges$.next(serializedDataSource);
-
-      this.currentSliceCount$.next(updatedPupaVirtualForData.length);
+      this.pupaVirtualForOf$.next(totalData);
     });
   }
 
