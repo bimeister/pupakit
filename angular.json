@@ -179,18 +179,16 @@
               "bail": true,
               "cache": false,
               "ci": true,
-              "watch": false
+              "watch": false,
+              "configPath": "jest.config.ci.js"
             },
             "debugging": {
               "bail": false,
               "cache": true,
               "ci": false,
-              "watch": true
+              "watch": true,
+              "configPath": "jest.config.development.js"
             }
-          },
-          "options": {
-            "configPath": "./jest.config.js",
-            "passWithNoTests": true
           }
         }
       },

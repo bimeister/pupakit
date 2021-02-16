@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { debounceTime, delay, filter, map, switchMap, take } from 'rxjs/operators';
+import { delay, filter, map, switchMap, take } from 'rxjs/operators';
 import { PagedVirtualScrollArguments } from '../../../src/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
 
 type DATA_TYPE = number;
@@ -14,7 +14,6 @@ const ITEM_SIZE_PX: number = 35;
 
 const DEFAULT_REQUEST_DELAY_MS: number = 200;
 const MIN_DEFAULT_REQUEST_DELAY_MS: number = 100;
-const REACT_ON_RANGE_CHANGES_DELAY_MS: number = 500;
 
 @Component({
   selector: 'demo-paged-virtual-scroll-demo',
@@ -46,7 +45,6 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy {
   private processPagedVirtualScrollArgumentsChanges(): Subscription {
     return this.pagedVirtualScrollArguments$
       .pipe(
-        debounceTime(REACT_ON_RANGE_CHANGES_DELAY_MS),
         switchMap((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
           return this.rows$.pipe(
             take(1),
