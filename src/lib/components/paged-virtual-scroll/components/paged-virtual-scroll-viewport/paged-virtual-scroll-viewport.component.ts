@@ -17,6 +17,7 @@ import { BehaviorSubject, fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { PagedVirtualScrollArguments } from '../../../../../internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
 import { VirtualScrollViewportComponent } from '../../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
 import { PagedVirtualScrollStateService } from '../../services/paged-virtual-scroll-state.service';
 
@@ -39,12 +40,14 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   public readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
 
-  public readonly needChangeDataSource$: Subject<void> = this.pagedVirtualScrollStateService.needChangeDataSource$;
+  public readonly needChangeDataSource$: Subject<PagedVirtualScrollArguments> = this.pagedVirtualScrollStateService
+    .needChangeDataSource$;
 
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
   @ViewChild('cdkViewport', { static: false }) private readonly viewport: VirtualScrollViewportComponent;
 
-  @Output() public changeDataSource: EventEmitter<void> = new EventEmitter<void>();
+  @Output()
+  public changeDataSource: EventEmitter<PagedVirtualScrollArguments> = new EventEmitter<PagedVirtualScrollArguments>();
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -81,7 +84,9 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   }
 
   private handleChangeDataSourceEvent(): Subscription {
-    return this.needChangeDataSource$.subscribe(() => this.changeDataSource.emit());
+    return this.needChangeDataSource$.subscribe((pagedVirtualScrollArguments: PagedVirtualScrollArguments) =>
+      this.changeDataSource.emit(pagedVirtualScrollArguments)
+    );
   }
 
   private processItemSizeChange(change: ComponentChange<this, number>): void {
