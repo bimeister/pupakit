@@ -10,7 +10,7 @@
       }
     ],
     "target": "es2017",
-    "types": ["node"]
+    "types": ["jest", "node"]
   },
   "angularCompilerOptions": {
     "enableIvy": true
