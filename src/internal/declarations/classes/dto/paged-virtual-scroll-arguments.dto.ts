@@ -8,11 +8,11 @@ export class PagedVirtualScrollArgumentsDto implements PagedVirtualScrollArgumen
   public removeFrom: number = null;
   public removeTo: number = null;
 
-  public currentFrom: number;
-  public currentTo: number;
+  public currentFrom: number = null;
+  public currentTo: number = null;
 
-  public previousFrom: number;
-  public previousTo: number;
+  public previousFrom: number = null;
+  public previousTo: number = null;
 
   constructor(config: Partial<PagedVirtualScrollArguments>) {
     if (isNil(config)) {

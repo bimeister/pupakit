@@ -32,7 +32,8 @@ export {
   SortModel,
   Tab,
   TreeItem,
-  UploadingStatus
+  UploadingStatus,
+  PagedVirtualScrollArguments
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

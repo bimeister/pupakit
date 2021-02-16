@@ -1,12 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
 import { Injectable, OnDestroy } from '@angular/core';
-import {
-  distinctUntilSerializedChanged,
-  filterNotNil,
-  isNil,
-  Nullable,
-  shareReplayWithRefCount
-} from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, filterNotNil, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject, Subscription } from 'rxjs';
 import {
   debounceTime,
@@ -14,41 +8,17 @@ import {
   distinctUntilChanged,
   filter,
   map,
-  pairwise,
   startWith,
   switchMap,
   take,
   withLatestFrom
 } from 'rxjs/operators';
 import { VOID } from '../../../../internal/constants/void.const';
-import { PagedVirtualScrollArgumentsDto } from '../../../../internal/declarations/classes/dto/paged-virtual-scroll-arguments.dto';
+import { ListRangesIntersectionProducer } from '../../../../internal/declarations/classes/list-ranges-intersection-producer.class';
 import { PagedVirtualScrollArguments } from '../../../../internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
 
-function findIntersectionOfRanges(firstInterval: ListRange, secondInterval: ListRange): ListRange | undefined {
-  if (isNil(firstInterval) || isNil(secondInterval)) {
-    return undefined;
-  }
-
-  const { start: firstIntervalStart, end: firstIntervalEnd }: ListRange = firstInterval;
-  const { start: secondIntervalStart, end: secondIntervalEnd }: ListRange = secondInterval;
-
-  const isNilValuesEntering: boolean =
-    isNil(firstIntervalStart) || isNil(firstIntervalEnd) || isNil(secondIntervalStart) || isNil(secondIntervalEnd);
-  if (isNilValuesEntering) {
-    return undefined;
-  }
-
-  const hasIntersection: boolean = firstIntervalStart <= secondIntervalEnd && secondIntervalStart <= firstIntervalEnd;
-  if (!hasIntersection) {
-    return undefined;
-  }
-
-  const intersectionStart: number = Math.max(firstIntervalStart, secondIntervalStart);
-  const intersectionEnd: number = Math.min(firstIntervalEnd, secondIntervalEnd);
-
-  return { start: intersectionStart, end: intersectionEnd };
-}
+const REACT_ON_RANGE_CHANGES_DELAY_MS: number = 500;
 
 @Injectable({ providedIn: 'any' })
 export class PagedVirtualScrollStateService implements OnDestroy {
@@ -74,6 +44,14 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   public readonly renderedRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
 
   public readonly needChangeDataSource$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
+
+  private readonly previousRangeInPagedVirtualArguments$: Observable<ListRange> = this.needChangeDataSource$.pipe(
+    startWith(VOID),
+    map((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => ({
+      start: pagedVirtualScrollArguments?.currentFrom,
+      end: pagedVirtualScrollArguments?.currentTo
+    }))
+  );
 
   public readonly totalContentSize$: Observable<number> = combineLatest([this.itemSize$, this.totalCount$]).pipe(
     filter(([itemSize, totalCount]: [number, number]) => !isNil(itemSize) && !isNil(totalCount)),
@@ -145,88 +123,16 @@ export class PagedVirtualScrollStateService implements OnDestroy {
         switchMap(() => this.renderedRange$),
         filterNotNil(),
         withLatestFrom(this.countItemsInViewport$, this.totalCount$),
-        map(([range, countItemsInViewport, totalCount]: [ListRange, number, number]) => {
-          // test
-          const { start, end }: ListRange = range;
-
-          const countOfDigits: number = String(countItemsInViewport).length - 1;
-          const roundValue: number = Math.max(countOfDigits * 10, 0);
-
-          const possibleStart: number = start - countItemsInViewport;
-          const currentFrom: number = Math.max(Math.round(possibleStart / roundValue) * roundValue, 0);
-
-          const possibleEnd: number = end + countItemsInViewport;
-          const currentTo: number = Math.min(Math.round(possibleEnd / roundValue) * roundValue, totalCount);
-
-          return { start: currentFrom, end: currentTo };
-        }),
+        map(([range, countItemsInViewport, totalCount]: [ListRange, number, number]) =>
+          ListRangesIntersectionProducer.roundToBoundingDozensByCount(range, countItemsInViewport, totalCount)
+        ),
         distinctUntilSerializedChanged(),
-        startWith(VOID),
-        pairwise(),
-        distinctUntilSerializedChanged(),
-        map(([previousRange, currentRange]: [ListRange, ListRange]) => {
-          // test
-          const serializedCurrentRangeStart: Nullable<number> = currentRange?.start ?? null;
-          const serializedCurrentRangeEnd: Nullable<number> = currentRange?.end ?? null;
-
-          const serializedPreviousRangeStart: Nullable<number> = previousRange?.start ?? null;
-          const serializedPreviousRangeEnd: Nullable<number> = previousRange?.end ?? null;
-
-          const intersectionRange: ListRange = findIntersectionOfRanges(previousRange, currentRange);
-
-          if (isNil(intersectionRange)) {
-            return new PagedVirtualScrollArgumentsDto({
-              currentFrom: serializedCurrentRangeStart,
-              currentTo: serializedCurrentRangeEnd,
-
-              previousFrom: serializedPreviousRangeStart,
-              previousTo: serializedPreviousRangeEnd,
-
-              removeFrom: serializedPreviousRangeStart,
-              removeTo: serializedPreviousRangeEnd,
-
-              getFrom: serializedCurrentRangeStart,
-              getTo: serializedCurrentRangeEnd
-            });
-          }
-
-          const isScrollingDownIntersection: boolean =
-            serializedCurrentRangeStart >= intersectionRange.start &&
-            serializedCurrentRangeStart <= intersectionRange.end;
-          if (isScrollingDownIntersection) {
-            const downPossibleRemoveFrom: number =
-              serializedPreviousRangeStart === intersectionRange.start ? null : serializedPreviousRangeStart;
-            const downPossibleRemoveTo: number = isNil(downPossibleRemoveFrom) ? null : intersectionRange.start;
-
-            return new PagedVirtualScrollArgumentsDto({
-              currentFrom: serializedCurrentRangeStart,
-              currentTo: serializedCurrentRangeEnd,
-
-              previousFrom: serializedPreviousRangeStart,
-              previousTo: serializedPreviousRangeEnd,
-
-              removeFrom: downPossibleRemoveFrom,
-              removeTo: downPossibleRemoveTo,
-
-              getFrom: intersectionRange.end,
-              getTo: serializedCurrentRangeEnd
-            });
-          }
-
-          return new PagedVirtualScrollArgumentsDto({
-            currentFrom: serializedCurrentRangeStart,
-            currentTo: serializedCurrentRangeEnd,
-
-            previousFrom: serializedPreviousRangeStart,
-            previousTo: serializedPreviousRangeEnd,
-
-            removeFrom: serializedCurrentRangeEnd,
-            removeTo: serializedPreviousRangeEnd,
-
-            getFrom: serializedCurrentRangeStart,
-            getTo: intersectionRange.start
-          });
-        }),
+        filterNotNil(),
+        debounceTime(REACT_ON_RANGE_CHANGES_DELAY_MS),
+        withLatestFrom(this.previousRangeInPagedVirtualArguments$),
+        map(([currentRange, previousRange]: [ListRange, ListRange]) =>
+          ListRangesIntersectionProducer.getPagedVirtualScrollArguments(previousRange, currentRange)
+        ),
         distinctUntilSerializedChanged()
       )
       .subscribe((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
