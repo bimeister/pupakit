@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { delay, filter, map, switchMap, take } from 'rxjs/operators';
+import { filterNotNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
+import { delay, map, switchMap, take } from 'rxjs/operators';
 import { PagedVirtualScrollArguments } from '../../../src/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
 
 type DATA_TYPE = number;
@@ -24,7 +25,15 @@ const MIN_DEFAULT_REQUEST_DELAY_MS: number = 100;
 })
 export class PagedVirtualScrollDemoComponent implements OnDestroy {
   public readonly itemSize: number = ITEM_SIZE_PX;
-  public readonly totalCount: number = ROWS_COUNT;
+
+  private readonly data$: Observable<DATA_TYPE[]> = timer(200).pipe(switchMap(() => of(DATA)));
+  public readonly totalCount$: Observable<number> = this.data$.pipe(
+    map((data: DATA_TYPE[]) => (!Array.isArray(data) ? 0 : data.length))
+  );
+
+  public readonly isVisible$: Observable<boolean> = this.totalCount$.pipe(
+    map((tasksTotalCount: number) => tasksTotalCount > 0)
+  );
 
   public readonly rows$: BehaviorSubject<DATA_TYPE[]> = new BehaviorSubject<DATA_TYPE[]>([]);
   private readonly pagedVirtualScrollArguments$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
@@ -46,17 +55,14 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy {
     return this.pagedVirtualScrollArguments$
       .pipe(
         switchMap((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
-          return this.rows$.pipe(
+          return this.data$.pipe(
+            filterNotNil(),
             take(1),
-            filter(
-              (currentRenderedData: DATA_TYPE[]) =>
-                Array.isArray(currentRenderedData) && currentRenderedData.length <= ROWS_COUNT
-            ),
-            map((_currentRenderedData: DATA_TYPE[]) => {
+            map((data: DATA_TYPE[]) => {
               const { currentTo, currentFrom }: PagedVirtualScrollArguments = pagedVirtualScrollArguments;
 
               const emptyRows: DATA_TYPE[] = this.getEmptyRows(currentFrom);
-              const newData: DATA_TYPE[] = DATA.slice(currentFrom, currentTo);
+              const newData: DATA_TYPE[] = data.slice(currentFrom, currentTo);
 
               return [...emptyRows, ...newData];
             }),

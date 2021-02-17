@@ -427,28 +427,58 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
+    it('range [0, 6], count in viewport 5, total 100 -> [0, 10] : ', () => {
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: 0, end: 6 },
+        5,
+        100
+      );
+
+      const expectedResult: ListRange = {
+        start: 0,
+        end: 10
+      };
+      expect(returnedRange).toEqual(expectedResult);
+    });
+
     it('range null, count in viewport 122, total 5000 -> undefined : ', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
       expect(returnedRange).toEqual(undefined);
     });
 
     it('range [1200, null], count in viewport 122, total 5000 -> undefined : ', () => {
-      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: 1200, end: null },
+        122,
+        5000
+      );
       expect(returnedRange).toEqual(undefined);
     });
 
     it('range [null, 1533], count in viewport 122, total 5000 -> undefined : ', () => {
-      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: null, end: 1533 },
+        122,
+        5000
+      );
       expect(returnedRange).toEqual(undefined);
     });
 
     it('range [1200, 1533], count in viewport null, total 5000 -> undefined : ', () => {
-      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: 1200, end: 1533 },
+        null,
+        5000
+      );
       expect(returnedRange).toEqual(undefined);
     });
 
     it('range [1200, 1533], count in viewport 122, total null -> undefined : ', () => {
-      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: 1200, end: 1533 },
+        122,
+        null
+      );
       expect(returnedRange).toEqual(undefined);
     });
   });

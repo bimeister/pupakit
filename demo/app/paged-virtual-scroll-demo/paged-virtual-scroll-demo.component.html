@@ -1,10 +1,10 @@
 <h1>Paged Virtual Scroll Demo</h1>
 
 <div class="demo-container">
-  <div class="container">
+  <div class="container" *ngIf="isVisible$ | async">
     <pupa-paged-virtual-scroll-viewport
       [itemSize]="itemSize"
-      [totalCount]="totalCount"
+      [totalCount]="totalCount$ | async"
       (changeDataSource)="handleChangeDataSource($event)"
     >
       <ng-container *pupaVirtualFor="let row of rows$ | async">

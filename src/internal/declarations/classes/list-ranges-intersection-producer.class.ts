@@ -9,18 +9,20 @@ export class ListRangesIntersectionProducer {
     countItemsInViewport: number,
     totalCount: number
   ): ListRange | undefined {
-    if (isNil(range) || Number.isNaN(countItemsInViewport) || Number.isNaN(totalCount)) {
+    const countItemsInViewportIsIncorrect: boolean = isNil(countItemsInViewport) || Number.isNaN(countItemsInViewport);
+    const totalCountIsIncorrect: boolean = isNil(totalCount) || Number.isNaN(totalCount);
+    if (isNil(range) || countItemsInViewportIsIncorrect || totalCountIsIncorrect) {
       return undefined;
     }
 
     const { start, end }: ListRange = range;
 
-    if (Number.isNaN(start) || Number.isNaN(end)) {
+    if (Number.isNaN(start) || isNil(start) || Number.isNaN(end) || isNil(end)) {
       return undefined;
     }
 
     const numberRankIndex: number = String(countItemsInViewport).length - 1;
-    const roundValue: number = Math.max(numberRankIndex * 10, 0);
+    const roundValue: number = Math.max(numberRankIndex * 10, 10);
 
     const possibleStart: number = start - countItemsInViewport;
     const roundedStart: number = Math.max(Math.round(possibleStart / roundValue) * roundValue, 0);
