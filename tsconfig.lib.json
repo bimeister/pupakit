@@ -1,5 +1,5 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
     "declaration": true,
@@ -17,5 +17,5 @@
     "enableResourceInlining": true,
     "enableIvy": true
   },
-  "exclude": ["src/test.ts", "**/*.spec.ts", "**/*.stories.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.stories.ts"]
 }

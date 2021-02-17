@@ -1,8 +1,8 @@
 {
-  "extends": "./tsconfig.base.json",
+  "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app"
   },
-  "include": ["demo/**/*.ts", "src/**/*.ts"],
-  "exclude": ["demo/**/*.spec.ts", "src/**/*.spec.ts", "src/**/*.stories.ts"]
+  "include": ["demo/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.stories.ts"]
 }

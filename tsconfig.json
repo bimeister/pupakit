@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "declaration": false,
-    "lib": ["dom", "es2017", "es2018", "es2019", "es2020", "esnext"],
+    "lib": ["dom", "esnext"],
     "importHelpers": true,
     "locale": "en",
     "newLine": "lf",
@@ -18,6 +18,25 @@
     "importsNotUsedAsValues": "preserve",
     "pretty": true,
     "removeComments": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "module": "ES2015",
+    "target": "ES2015",
+    "moduleResolution": "Node",
+    "outDir": "./dist/out-tsc",
+    "plugins": [
+      {
+        "name": "@angular/language-service"
+      }
+    ],
+    "types": ["jest", "node"]
+  },
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "plugins": []
+    }
   }
 }
