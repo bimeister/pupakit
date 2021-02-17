@@ -14,8 +14,6 @@
     >
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: isElement"
-        cdkTreeNodeToggle
-        [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
@@ -43,8 +41,6 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasNoChild"
-        cdkTreeNodeToggle
-        [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
@@ -58,11 +54,7 @@
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
         >
-          <div
-            class="tree-node__expansion-button tree-node_is-disabled-expandable"
-            (click)="toggleExpansion(node)"
-            cdkTreeNodeToggle
-          >
+          <div class="tree-node__expansion-button tree-node_is-disabled-expandable">
             <ng-container
               [ngTemplateOutlet]="defaultExpansionButtonTemplate"
               [ngTemplateOutletContext]="{
@@ -84,8 +76,6 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasChild"
-        cdkTreeNodeToggle
-        [cdkTreeNodeToggleRecursive]="true"
         [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
         cdkTreeNodePadding
         class="tree-node-row"
@@ -100,7 +90,7 @@
           [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
           [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
         >
-          <div class="tree-node__expansion-button" (click)="toggleExpansion(node)" cdkTreeNodeToggle>
+          <div class="tree-node__expansion-button" (click)="toggleExpansion(node)">
             <ng-container
               [ngTemplateOutlet]="defaultExpansionButtonTemplate"
               [ngTemplateOutletContext]="{
