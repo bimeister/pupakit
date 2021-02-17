@@ -495,4 +495,11 @@ export class PupaVirtualScrollForDirective<T>
   private getViewFromViewContainerAsEmbeddedViewRef(index: number): EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> {
     return this.viewContainerRef.get(index) as EmbeddedViewRef<PupaVirtualScrollForOfContext<T>>;
   }
+
+  public static ngTemplateContextGuard<T>(
+    _dir: PupaVirtualForOfType<T>,
+    _ctx: any
+  ): _ctx is PupaVirtualScrollForOfContext<T> {
+    return true;
+  }
 }
