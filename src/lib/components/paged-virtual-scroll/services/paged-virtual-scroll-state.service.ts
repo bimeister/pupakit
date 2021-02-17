@@ -43,9 +43,9 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   public readonly scrolledIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly renderedRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
 
-  public readonly needChangeDataSource$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
+  public readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
 
-  private readonly previousRangeInPagedVirtualArguments$: Observable<ListRange> = this.needChangeDataSource$.pipe(
+  private readonly previousRangeInPagedVirtualArguments$: Observable<ListRange> = this.pagedVirtualScrollArgumentsToOutput$.pipe(
     startWith(VOID),
     map((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => ({
       start: pagedVirtualScrollArguments?.currentFrom,
@@ -115,10 +115,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   }
 
   private processRangeChanges(): Subscription {
-    return combineLatest([
-      this.countItemsInViewport$.pipe(filterNotNil(), take(1)),
-      this.totalCount$.pipe(filterNotNil(), take(1))
-    ])
+    return combineLatest([this.countItemsInViewport$.pipe(filterNotNil()), this.totalCount$.pipe(filterNotNil())])
       .pipe(
         switchMap(() => this.renderedRange$),
         filterNotNil(),
@@ -136,7 +133,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
         distinctUntilSerializedChanged()
       )
       .subscribe((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
-        this.needChangeDataSource$.next(pagedVirtualScrollArguments);
+        this.pagedVirtualScrollArgumentsToOutput$.next(pagedVirtualScrollArguments);
       });
   }
 }

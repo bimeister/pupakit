@@ -40,8 +40,8 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   public readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
 
-  public readonly needChangeDataSource$: Subject<PagedVirtualScrollArguments> = this.pagedVirtualScrollStateService
-    .needChangeDataSource$;
+  public readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = this
+    .pagedVirtualScrollStateService.pagedVirtualScrollArgumentsToOutput$;
 
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
   @ViewChild('cdkViewport', { static: false }) private readonly viewport: VirtualScrollViewportComponent;
@@ -84,8 +84,9 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   }
 
   private handleChangeDataSourceEvent(): Subscription {
-    return this.needChangeDataSource$.subscribe((pagedVirtualScrollArguments: PagedVirtualScrollArguments) =>
-      this.changeDataSource.emit(pagedVirtualScrollArguments)
+    return this.pagedVirtualScrollArgumentsToOutput$.subscribe(
+      (pagedVirtualScrollArguments: PagedVirtualScrollArguments) =>
+        this.changeDataSource.emit(pagedVirtualScrollArguments)
     );
   }
 

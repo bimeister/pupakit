@@ -19,8 +19,8 @@ export class ListRangesIntersectionProducer {
       return undefined;
     }
 
-    const countOfDigits: number = String(countItemsInViewport).length - 1;
-    const roundValue: number = Math.max(countOfDigits * 10, 0);
+    const numberRankIndex: number = String(countItemsInViewport).length - 1;
+    const roundValue: number = Math.max(numberRankIndex * 10, 0);
 
     const possibleStart: number = start - countItemsInViewport;
     const roundedStart: number = Math.max(Math.round(possibleStart / roundValue) * roundValue, 0);
