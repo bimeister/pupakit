@@ -6,6 +6,7 @@ import { ChipButtonModule } from './components/chip-button/chip-button.module';
 import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
+import { CounterModule } from './components/counter/counter.module';
 import { DatagridModule } from './components/datagrid/datagrid.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
@@ -81,7 +82,8 @@ const EXPORTS: any[] = [
   DraggableListModule,
   SelectModule,
   ProgressBarModule,
-  UploadsModule
+  UploadsModule,
+  CounterModule
 ];
 
 @NgModule({
