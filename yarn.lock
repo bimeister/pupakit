@@ -1346,6 +1346,15 @@
     "@bimeister/utilities" "^0.1.0-fa599bb9"
     fancy-log "^1.3.3"
 
+"@bimeister/utilities@^0.1.0-e380583a":
+  version "0.1.0-e380583a"
+  resolved "https://git.bimeister.com/api/v4/projects/98/packages/npm/@bimeister/utilities/-/@bimeister/utilities-0.1.0-e380583a.tgz#91d60ff7b1252b087ed5afb401cb667bf1a4182c"
+  integrity sha1-kdYP97ElKwh+1a+0Actme/GkGCw=
+  dependencies:
+    fancy-log "^1.3.3"
+    snake-case "^3.0.3"
+    uuid "^8.3.0"
+
 "@bimeister/utilities@^0.1.0-fa599bb9":
   version "0.1.0-fa599bb9"
   resolved "https://git.bimeister.com/api/v4/projects/98/packages/npm/@bimeister/utilities/-/@bimeister/utilities-0.1.0-fa599bb9.tgz#f50bc4523c55b92424f3263ef53ab9ca9810a4b0"
