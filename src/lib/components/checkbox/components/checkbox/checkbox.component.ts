@@ -10,7 +10,7 @@ import {
   ViewChild
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isNil } from '@bimeister/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities';
 
 @Component({
   selector: 'pupa-checkbox',
@@ -46,7 +46,12 @@ export class CheckboxComponent implements ControlValueAccessor {
   }
 
   public get isLabelEmpty(): boolean {
-    return this.labelElement.nativeElement.innerText.trim().length === 0;
+    const htmlDivElement: HTMLDivElement | undefined = this.labelElement.nativeElement;
+    if (isNil(htmlDivElement)) {
+      return true;
+    }
+
+    return isEmpty(htmlDivElement?.innerText?.trim());
   }
 
   private valueData: boolean = false;
