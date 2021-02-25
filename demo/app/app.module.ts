@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { getAllIcons } from '../declarations/functions/get-all-icons.function';
 import { ComponentsModule, IconModule } from './../../src/public-api';
 import { AppComponent } from './app.component';
+import { AvatarDemoComponent } from './avatar-demo/avatar-demo.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
@@ -62,6 +63,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
   bootstrap: [AppComponent],
   declarations: [
     AppComponent,
+    AvatarDemoComponent,
     LoaderDemoComponent,
     InputDemoComponent,
     TableInputDemoComponent,

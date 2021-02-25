@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../internal/shared/shared.module';
+import { AvatarModule } from './components/avatar/avatar.module';
 import { ButtonModule } from './components/button/button.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipButtonModule } from './components/chip-button/chip-button.module';
@@ -83,7 +84,8 @@ const EXPORTS: any[] = [
   SelectModule,
   ProgressBarModule,
   UploadsModule,
-  CounterModule
+  CounterModule,
+  AvatarModule
 ];
 
 @NgModule({

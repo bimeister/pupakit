@@ -1,0 +1,39 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+$width_avatar: px(16);
+$font-size: px(8);
+
+.avatar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  width: $width_avatar;
+  height: $width_avatar;
+
+  border-radius: 100%;
+  overflow: hidden;
+
+  z-index: 1;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  user-select: none;
+
+  &__initials {
+    color: color(white);
+    font-size: $font-size;
+    line-height: $width_avatar;
+    @include medium();
+
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

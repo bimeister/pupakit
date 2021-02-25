@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AvatarDemoComponent } from './avatar-demo/avatar-demo.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
@@ -42,6 +43,10 @@ import { TypographyPageComponent } from './typography-page/typography-page.compo
 import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
 
 export const demoRoutes: Routes = [
+  {
+    path: 'avatar',
+    component: AvatarDemoComponent
+  },
   {
     path: 'typography',
     component: TypographyPageComponent

@@ -1,0 +1,29 @@
+<h1>Avatar</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-avatar [username]="usernameControl.value" [src]="imageSrcControl.value"></pupa-avatar>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Username</demo-props-group-label>
+    <div class="avatar__row">
+      <pupa-input-text placeholder="Username" [formControl]="usernameControl"></pupa-input-text>
+      <pupa-icon-button class="avatar__icon-button" [color]="'light-blue'" (click)="clearUsernameInput()">
+        <pupa-icon name="close-circle"></pupa-icon>
+      </pupa-icon-button>
+    </div>
+
+    <demo-props-group-label>Image Src</demo-props-group-label>
+    <div class="avatar__row">
+      <pupa-input-text placeholder="Image Src" [formControl]="imageSrcControl"></pupa-input-text>
+      <pupa-icon-button class="avatar__icon-button" [color]="'light-blue'" (click)="clearImageSrcInput()()">
+        <pupa-icon name="close-circle"></pupa-icon>
+      </pupa-icon-button>
+    </div>
+
+    <pupa-button class="avatar__button" [color]="'normal-light'" (click)="setAvatar()"
+      >Set Keanu Reeves Avatar</pupa-button
+    >
+  </demo-example-viewer-properties>
+</demo-example-viewer>
