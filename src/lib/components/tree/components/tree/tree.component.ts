@@ -19,7 +19,7 @@ import {
   TrackByFunction,
   ViewChild
 } from '@angular/core';
-import { filterNotNil, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
+import { filterNotNil, getClampedValue, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import {
   animationFrameScheduler,
   asyncScheduler,
@@ -43,7 +43,6 @@ import { TreeDataSource } from '../../../../../internal/declarations/interfaces/
 import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
 import { TreeManipulatorDataOrigin } from '../../../../../internal/declarations/types/tree-manipulator-data-origin.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
-import { clamp } from '../../../../../internal/helpers/clamp.helper';
 
 interface Position {
   top: number;
@@ -440,7 +439,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       this.host.nativeElement.clientHeight - this.draggableElementBoundingBox.height;
     const draggableElementPosition: Position = {
       left: screenX - this.draggableElementBoundingBox.left - draggableElementPositionShift.left,
-      top: clamp(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY)
+      top: getClampedValue(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY)
     };
 
     const isTopBorderReached: boolean = draggableElementPosition.top <= this.draggableElementBoundingBox.height;

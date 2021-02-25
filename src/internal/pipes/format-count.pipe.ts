@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatCount, isNil } from '@bimeister/utilities';
+import { getAbbreviatedCount, isNil } from '@bimeister/utilities';
 
 @Pipe({
   name: 'formatCount',
@@ -10,6 +10,6 @@ export class FormatCountPipe implements PipeTransform {
     if (isNil(count)) {
       return '';
     }
-    return formatCount(count);
+    return getAbbreviatedCount(count);
   }
 }
