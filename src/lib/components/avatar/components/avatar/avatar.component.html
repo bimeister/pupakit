@@ -1,0 +1,14 @@
+<div
+  class="avatar"
+  [ngStyle]="{ 'background-color': (hslBackgroundColor$ | async), 'background-image': (backgroundImage$ | async) }"
+>
+  <div class="avatar__initials" *ngIf="src$ | async | isNullOrUndefined">
+    <ng-container *ngIf="usernameFirstChar$ | async as usernameFirstChar; else emptyCaseTemplate">
+      {{ usernameFirstChar }}
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #emptyCaseTemplate>
+  <pupa-icon name="md-person"></pupa-icon>
+</ng-template>
