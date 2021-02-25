@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@angular/cdk": "~11.1.0",
-    "@bimeister/utilities": "^0.1.0-e380583a",
+    "@bimeister/utilities": "^0.1.0-639f72fb",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
     "ngx-mask": "^11.0.0",

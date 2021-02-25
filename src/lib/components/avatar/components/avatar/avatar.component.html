@@ -1,6 +1,7 @@
 <div
   class="avatar"
-  [ngStyle]="{ 'background-color': (hslBackgroundColor$ | async), 'background-image': (backgroundImage$ | async) }"
+  [style.background-color]="hslBackgroundColor$ | async"
+  [style.background-image]="backgroundImage$ | async"
 >
   <div class="avatar__initials" *ngIf="src$ | async | isNullOrUndefined">
     <ng-container *ngIf="usernameFirstChar$ | async as usernameFirstChar; else emptyCaseTemplate">

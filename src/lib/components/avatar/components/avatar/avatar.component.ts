@@ -1,11 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { getHslColorFromString, HslColor, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { HslColor } from '../../../../../internal/declarations/interfaces/hsl-color.interface';
-import { convertStringToHslColor } from '../../../../../internal/helpers/convert-string-to-hsl-color.helper';
 
 @Component({
   selector: 'pupa-avatar',
@@ -24,7 +22,7 @@ export class AvatarComponent implements OnChanges {
 
   public readonly hslBackgroundColor$: Observable<string> = this.username$.pipe(
     map((username: Nullable<string>) => {
-      const { h, s, l }: HslColor = convertStringToHslColor(username);
+      const { h, s, l }: HslColor = getHslColorFromString(username);
       return `hsl(${h}, ${s}%, ${l}%)`;
     })
   );
@@ -43,7 +41,7 @@ export class AvatarComponent implements OnChanges {
   private processUsernameChange(change: ComponentChange<this, string>): void {
     const updatedValue: string | undefined = change?.currentValue;
 
-    if (isNil(updatedValue) || typeof updatedValue !== 'string') {
+    if (typeof updatedValue !== 'string') {
       return;
     }
 
