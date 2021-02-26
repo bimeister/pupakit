@@ -1,5 +1,6 @@
 ARG BUILD_IMAGE
 FROM "$BUILD_IMAGE"
+ARG TAG
 ARG GIT_COMMIT_HASH
 ARG NPM_AUTH_TOKEN
 RUN yarn run build-cli prepare-npmrc \
@@ -14,4 +15,4 @@ RUN yarn run build-cli prepare-npmrc \
  && yarn run build-cli prepare-package-json \
       --commit_hash="${GIT_COMMIT_HASH}" \
       --package_json_path="./dist/lib/package.json"
-RUN npm publish ./dist/lib/ --tag="latest" --access="public"
+RUN npm publish ./dist/lib/ --tag="${TAG}" --access="public"
