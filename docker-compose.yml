@@ -48,6 +48,7 @@ services:
         - NPM_AUTH_TOKEN
         - GIT_COMMIT_HASH
         - BUILD_IMAGE
+        - TAG
 
   docs_service:
     build:
