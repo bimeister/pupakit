@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { CountColor } from '../../../../../internal/declarations/types/count-color.type';
 
 @Component({
   selector: 'pupa-counter',
@@ -8,4 +9,6 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class CounterComponent {
   @Input() public count: number;
+
+  @Input() public color: CountColor = 'normal';
 }
