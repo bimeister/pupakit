@@ -14,5 +14,28 @@
   align-items: center;
   justify-content: center;
 
-  background: color(white);
+  &_normal {
+    background-color: color(light);
+    color: color(main);
+  }
+
+  &_light {
+    background-color: color(white);
+    color: color(main-dark);
+  }
+
+  &_negative {
+    background-color: color(error);
+    color: color(white);
+  }
+
+  &_positive {
+    background-color: color(success);
+    color: color(white);
+  }
+
+  &_alert {
+    background-color: color(alert);
+    color: color(white);
+  }
 }
