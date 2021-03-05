@@ -10,8 +10,7 @@ export class ListRangesIntersectionProducer {
     totalCount: number
   ): ListRange | undefined {
     const countItemsInViewportIsIncorrect: boolean = isNil(countItemsInViewport) || Number.isNaN(countItemsInViewport);
-    const totalCountIsIncorrect: boolean = isNil(totalCount) || Number.isNaN(totalCount);
-    if (isNil(range) || countItemsInViewportIsIncorrect || totalCountIsIncorrect) {
+    if (isNil(range) || countItemsInViewportIsIncorrect) {
       return undefined;
     }
 
@@ -28,7 +27,8 @@ export class ListRangesIntersectionProducer {
     const roundedStart: number = Math.max(Math.round(possibleStart / roundValue) * roundValue, 0);
 
     const possibleEnd: number = end + countItemsInViewport;
-    const roundedEnd: number = Math.min(Math.round(possibleEnd / roundValue) * roundValue, totalCount);
+    const serializedTotalCount: number = totalCount ?? start + countItemsInViewport;
+    const roundedEnd: number = Math.min(Math.round(possibleEnd / roundValue) * roundValue, serializedTotalCount);
 
     return { start: roundedStart, end: roundedEnd };
   }

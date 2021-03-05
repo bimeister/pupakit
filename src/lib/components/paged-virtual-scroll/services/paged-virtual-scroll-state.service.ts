@@ -115,7 +115,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   }
 
   private processRangeChanges(): Subscription {
-    return combineLatest([this.countItemsInViewport$.pipe(filterNotNil()), this.totalCount$.pipe(filterNotNil())])
+    return combineLatest([this.countItemsInViewport$.pipe(filterNotNil()), this.totalCount$])
       .pipe(
         switchMap(() => this.renderedRange$),
         filterNotNil(),

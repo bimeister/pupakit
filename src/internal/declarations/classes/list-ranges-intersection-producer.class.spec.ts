@@ -479,7 +479,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         122,
         null
       );
-      expect(returnedRange).toEqual(undefined);
+      expect(returnedRange).toEqual({ start: 1080, end: 1322 });
     });
   });
 });

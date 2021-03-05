@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { filterNotNil } from '@bimeister/utilities';
+import { filterNotNil, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { delay, map, switchMap, take } from 'rxjs/operators';
 import { PagedVirtualScrollArguments } from '../../../src/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
@@ -27,12 +27,10 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy {
   public readonly itemSize: number = ITEM_SIZE_PX;
 
   private readonly data$: Observable<DATA_TYPE[]> = timer(200).pipe(switchMap(() => of(DATA)));
-  public readonly totalCount$: Observable<number> = this.data$.pipe(
-    map((data: DATA_TYPE[]) => (!Array.isArray(data) ? 0 : data.length))
-  );
+  public readonly totalCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly isVisible$: Observable<boolean> = this.totalCount$.pipe(
-    map((tasksTotalCount: number) => tasksTotalCount > 0)
+    map((tasksTotalCount: number) => isNil(tasksTotalCount) || tasksTotalCount > 0)
   );
 
   public readonly rows$: BehaviorSubject<DATA_TYPE[]> = new BehaviorSubject<DATA_TYPE[]>([]);
@@ -72,6 +70,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy {
       )
       .subscribe((dataToRender: DATA_TYPE[]) => {
         this.rows$.next(dataToRender);
+        this.totalCount$.next(DATA.length);
         /** @deprecated need research */
         this.changeDetectorRef.detectChanges();
       });
