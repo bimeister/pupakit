@@ -34,7 +34,7 @@ import { ComponentChanges } from '../../../../internal/declarations/interfaces/c
 import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
 import { PagedVirtualScrollStateService } from '../services/paged-virtual-scroll-state.service';
 
-type PupaVirtualForOfType<T> = Nullable<DataSource<T> | Observable<T[]> | NgIterable<T>>;
+type PupaVirtualForOfType<T> = T[];
 
 interface UpdateContextArguments {
   needApplyDetectChanges: boolean;
@@ -496,10 +496,7 @@ export class PupaVirtualScrollForDirective<T>
     return this.viewContainerRef.get(index) as EmbeddedViewRef<PupaVirtualScrollForOfContext<T>>;
   }
 
-  public static ngTemplateContextGuard<T>(
-    _dir: PupaVirtualForOfType<T>,
-    _ctx: any
-  ): _ctx is PupaVirtualScrollForOfContext<T> {
+  public static ngTemplateContextGuard<T>(_dir: any, _ctx: any): _ctx is PupaVirtualScrollForOfContext<T> {
     return true;
   }
 }
