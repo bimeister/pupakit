@@ -158,6 +158,8 @@ export class PupaVirtualScrollForDirective<T>
     .calculatedCacheSize$;
 
   private readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
+  private readonly countItemsInViewport$: BehaviorSubject<number> = this.pagedVirtualScrollStateService
+    .countItemsInViewport$;
 
   /** The currently rendered range of indices. */
   private _renderedRange: ListRange;
@@ -446,22 +448,34 @@ export class PupaVirtualScrollForDirective<T>
   }
 
   private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
-    this.totalCount$.pipe(filterNotNil(), take(1)).subscribe((totalCount: number) => {
-      const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
+    combineLatest([this.totalCount$, this.countItemsInViewport$.pipe(filterNotNil())])
+      .pipe(take(1))
+      .subscribe(([totalCount, countItemsInViewport]: [Nullable<number>, number]) => {
+        const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
 
-      if (!Array.isArray(updatedPupaVirtualForData)) {
-        throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
-      }
+        if (!Array.isArray(updatedPupaVirtualForData)) {
+          throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
+        }
 
-      const dataLengthDiff: number = totalCount - updatedPupaVirtualForData.length;
-      const emptyAddBlocks: T[] = Array(dataLengthDiff).fill(null);
+        if (isNil(totalCount)) {
+          const emptyAddBlocksEqualCountItemsInViewport: T[] = Array(countItemsInViewport).fill(null);
+          const serializedDataSourceForDisplay: ArrayDataSource<T> = new ArrayDataSource<T>(
+            emptyAddBlocksEqualCountItemsInViewport
+          );
+          this.dataSourceChanges$.next(serializedDataSourceForDisplay);
+          this.pupaVirtualForOf$.next(emptyAddBlocksEqualCountItemsInViewport);
+          return;
+        }
 
-      const totalData: T[] = [...updatedPupaVirtualForData, ...emptyAddBlocks];
+        const dataLengthDiff: number = totalCount - updatedPupaVirtualForData.length;
+        const emptyAddBlocks: T[] = Array(dataLengthDiff).fill(null);
 
-      const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
-      this.dataSourceChanges$.next(serializedDataSource);
-      this.pupaVirtualForOf$.next(totalData);
-    });
+        const totalData: T[] = [...updatedPupaVirtualForData, ...emptyAddBlocks];
+
+        const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
+        this.dataSourceChanges$.next(serializedDataSource);
+        this.pupaVirtualForOf$.next(totalData);
+      });
   }
 
   private processTrackByFunctionChange(change: ComponentChange<this, TrackByFunction<T> | undefined>): void {
