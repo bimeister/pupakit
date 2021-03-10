@@ -4,7 +4,7 @@
     *ngFor="let tab of tabs; let tabIndex = index"
     [class.tabs__item_selected]="(selectedTabIndex$ | async) === tabIndex"
     class="tabs__item"
-    (click)="selectTab(tab, $event)"
+    (click)="selectTab(tab)"
   >
     <pupa-icon
       *ngIf="!(tab?.iconName || tab?.iconSrc | isNullOrUndefined)"
