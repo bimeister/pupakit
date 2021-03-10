@@ -10,6 +10,7 @@ $height_container: px(500);
 
 .demo-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   flex: 1;
@@ -35,4 +36,9 @@ $height_container: px(500);
 .empty-row {
   display: flex;
   align-items: center;
+}
+
+.search-input {
+  margin: rems(1) 0;
+  width: 80%;
 }

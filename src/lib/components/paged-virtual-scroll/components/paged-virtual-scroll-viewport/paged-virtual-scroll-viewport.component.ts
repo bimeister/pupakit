@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
+import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -38,10 +38,13 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   @Input() public totalCount: number;
   public readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
 
-  public readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
+  private readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
 
-  public readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = this
+  private readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = this
     .pagedVirtualScrollStateService.pagedVirtualScrollArgumentsToOutput$;
+
+  public readonly firstSliceCount$: BehaviorSubject<Nullable<number>> = this.pagedVirtualScrollStateService
+    .firstSliceCount$;
 
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
   @ViewChild('cdkViewport', { static: false }) private readonly viewport: VirtualScrollViewportComponent;
@@ -49,12 +52,18 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   @Output()
   public changeDataSource: EventEmitter<PagedVirtualScrollArguments> = new EventEmitter<PagedVirtualScrollArguments>();
 
+  @Output()
+  public firstSliceCount: EventEmitter<number> = new EventEmitter<number>();
+
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService) {}
 
   public ngOnInit(): void {
-    this.subscription.add(this.handleIframeResizeEvents()).add(this.handleChangeDataSourceEvent());
+    this.subscription
+      .add(this.handleIframeResizeEvents())
+      .add(this.handleChangeDataSourceEvent())
+      .add(this.handleChangeCountItemsInViewPort());
   }
 
   public ngAfterViewInit(): void {
@@ -68,6 +77,10 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public refresh(): void {
+    this.pagedVirtualScrollStateService.refresh();
   }
 
   private setViewportComponent(): void {
@@ -90,6 +103,12 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
     );
   }
 
+  private handleChangeCountItemsInViewPort(): Subscription {
+    return this.firstSliceCount$
+      .pipe(filterNotNil())
+      .subscribe((firstSliceCount: number) => this.firstSliceCount.emit(firstSliceCount));
+  }
+
   private processItemSizeChange(change: ComponentChange<this, number>): void {
     const updatedValue: number | undefined = change?.currentValue;
 
@@ -102,11 +121,6 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   private processTotalCountChange(change: ComponentChange<this, number>): void {
     const updatedValue: number | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
     this.totalCount$.next(updatedValue);
   }
 }

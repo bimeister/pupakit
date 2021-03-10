@@ -1,11 +1,15 @@
 <h1>Paged Virtual Scroll Demo</h1>
 
 <div class="demo-container">
-  <div class="container" *ngIf="isVisible$ | async">
+  <pupa-input-text class="search-input" placeholder="search number" [formControl]="searchControl"></pupa-input-text>
+
+  <div class="container">
     <pupa-paged-virtual-scroll-viewport
       [itemSize]="itemSize"
       [totalCount]="totalCount$ | async"
       (changeDataSource)="handleChangeDataSource($event)"
+      (firstSliceCount)="handleChangeFirstSliceCount($event)"
+      #pagedVirtualScrollViewport
     >
       <ng-container *pupaVirtualFor="let row of rows$ | async">
         <ng-container *ngIf="row; else emptyRow">

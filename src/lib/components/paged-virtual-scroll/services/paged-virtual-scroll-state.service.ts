@@ -39,6 +39,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   public readonly calculatedCacheSize$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly countItemsInViewport$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  public readonly firstSliceCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly scrolledIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly renderedRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
@@ -69,7 +70,8 @@ export class PagedVirtualScrollStateService implements OnDestroy {
       .add(this.calculateItemsCacheSize())
       .add(this.processScrolledIndexChanges())
       .add(this.processRenderedRangeChanges())
-      .add(this.processRangeChanges());
+      .add(this.processRangeChanges())
+      .add(this.processCalculateFirstSliceCount());
   }
 
   public ngOnDestroy(): void {
@@ -78,6 +80,21 @@ export class PagedVirtualScrollStateService implements OnDestroy {
 
   public setViewportComponent(viewport: VirtualScrollViewportComponent): void {
     this.viewport$.next(viewport);
+  }
+
+  public refresh(): void {
+    this.renderedRange$.next(null);
+    combineLatest([this.viewport$.pipe(filterNotNil()), this.firstSliceCount$.pipe(filterNotNil())])
+      .pipe(filterNotNil(), take(1))
+      .subscribe(([viewport, firstSliceCount]: [VirtualScrollViewportComponent, number]) => {
+        viewport.scrollToIndex(0);
+
+        const pagedVirtualScrollArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+          null,
+          { start: 0, end: firstSliceCount }
+        );
+        this.pagedVirtualScrollArgumentsToOutput$.next(pagedVirtualScrollArguments);
+      });
   }
 
   private calculateItemsCacheSize(): Subscription {
@@ -115,9 +132,8 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   }
 
   private processRangeChanges(): Subscription {
-    return combineLatest([this.countItemsInViewport$.pipe(filterNotNil()), this.totalCount$])
+    return this.renderedRange$
       .pipe(
-        switchMap(() => this.renderedRange$),
         filterNotNil(),
         withLatestFrom(this.countItemsInViewport$, this.totalCount$),
         map(([range, countItemsInViewport, totalCount]: [ListRange, number, number]) =>
@@ -135,5 +151,19 @@ export class PagedVirtualScrollStateService implements OnDestroy {
       .subscribe((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
         this.pagedVirtualScrollArgumentsToOutput$.next(pagedVirtualScrollArguments);
       });
+  }
+
+  private processCalculateFirstSliceCount(): Subscription {
+    return this.countItemsInViewport$
+      .pipe(
+        filterNotNil(),
+        distinctUntilChanged(),
+        map((countItemsInViewport: number) => {
+          const range: ListRange = { start: 0, end: countItemsInViewport };
+          return ListRangesIntersectionProducer.roundToBoundingDozensByCount(range, countItemsInViewport, undefined);
+        }),
+        filterNotNil()
+      )
+      .subscribe((roundedRange: ListRange) => this.firstSliceCount$.next(roundedRange.end));
   }
 }
