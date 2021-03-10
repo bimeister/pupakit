@@ -182,7 +182,8 @@ export class PupaVirtualScrollForDirective<T>
     this.subscription
       .add(this.processDataStreamChanges())
       .add(this.processViewportRangeSizeChanges())
-      .add(this.processViewportResizingForChangeCacheSize());
+      .add(this.processViewportResizingForChangeCacheSize())
+      .add(this.processIsNilTasksCount());
 
     this.attachViewport();
   }
@@ -447,35 +448,40 @@ export class PupaVirtualScrollForDirective<T>
       .subscribe((cacheSize: number) => (this.viewRepeater.viewCacheSize = cacheSize));
   }
 
-  private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
-    combineLatest([this.totalCount$, this.countItemsInViewport$.pipe(filterNotNil())])
-      .pipe(take(1))
-      .subscribe(([totalCount, countItemsInViewport]: [Nullable<number>, number]) => {
-        const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
-
-        if (!Array.isArray(updatedPupaVirtualForData)) {
-          throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
-        }
-
-        if (isNil(totalCount)) {
-          const emptyAddBlocksEqualCountItemsInViewport: T[] = Array(countItemsInViewport).fill(null);
-          const serializedDataSourceForDisplay: ArrayDataSource<T> = new ArrayDataSource<T>(
-            emptyAddBlocksEqualCountItemsInViewport
-          );
-          this.dataSourceChanges$.next(serializedDataSourceForDisplay);
-          this.pupaVirtualForOf$.next(emptyAddBlocksEqualCountItemsInViewport);
-          return;
-        }
-
-        const dataLengthDiff: number = totalCount - updatedPupaVirtualForData.length;
-        const emptyAddBlocks: T[] = Array(dataLengthDiff).fill(null);
-
-        const totalData: T[] = [...updatedPupaVirtualForData, ...emptyAddBlocks];
-
-        const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
-        this.dataSourceChanges$.next(serializedDataSource);
-        this.pupaVirtualForOf$.next(totalData);
+  private processIsNilTasksCount(): Subscription {
+    return this.totalCount$
+      .pipe(
+        filter((totalCount: number) => isNil(totalCount)),
+        withLatestFrom(this.countItemsInViewport$.pipe(filterNotNil()))
+      )
+      .subscribe(([_totalCount, countItemsInViewport]: [Nullable<number>, number]) => {
+        const emptyAddBlocksEqualCountItemsInViewport: T[] = Array(countItemsInViewport).fill(null);
+        const serializedDataSourceForDisplay: ArrayDataSource<T> = new ArrayDataSource<T>(
+          emptyAddBlocksEqualCountItemsInViewport
+        );
+        this.dataSourceChanges$.next(serializedDataSourceForDisplay);
+        this.pupaVirtualForOf$.next(emptyAddBlocksEqualCountItemsInViewport);
       });
+  }
+
+  private processPupaVirtualForOfChange(change: ComponentChange<this, PupaVirtualForOfType<T>>): void {
+    this.totalCount$.pipe(filterNotNil()).subscribe((totalCount: number) => {
+      const updatedPupaVirtualForData: PupaVirtualForOfType<T> | undefined = change?.currentValue;
+
+      if (!Array.isArray(updatedPupaVirtualForData)) {
+        throw new Error(`[PupaVirtualScrollForDirective] data must be a Array.`);
+      }
+
+      const dataLengthDiff: number = Math.max(totalCount - updatedPupaVirtualForData.length, 0);
+      const emptyAddBlocks: T[] = Array(dataLengthDiff).fill(null);
+
+      const totalData: T[] = [...updatedPupaVirtualForData, ...emptyAddBlocks];
+
+      const serializedDataSource: ArrayDataSource<T> = new ArrayDataSource<T>(totalData);
+      this.dataSourceChanges$.next(serializedDataSource);
+      this.pupaVirtualForOf$.next(totalData);
+      this.updateContext({ needApplyDetectChanges: true });
+    });
   }
 
   private processTrackByFunctionChange(change: ComponentChange<this, TrackByFunction<T> | undefined>): void {
