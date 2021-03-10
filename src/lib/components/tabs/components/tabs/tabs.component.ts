@@ -125,10 +125,7 @@ export class TabsComponent implements OnDestroy, AfterViewInit {
     this.subscription.unsubscribe();
   }
 
-  public selectTab(clickedTab: TabWithUrl, clickEvent?: MouseEvent): void {
-    if (!isNil(clickEvent)) {
-      clickEvent.stopPropagation();
-    }
+  public selectTab(clickedTab: TabWithUrl): void {
     this.tabs$
       .pipe(
         take(1),
