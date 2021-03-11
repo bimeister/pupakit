@@ -9,7 +9,7 @@
   [type]="type"
   (click)="processClickEvent($event)"
   (mousedown)="processMouseDownEvent($event)"
-  (mouseup)="processMouseUpEvent($event)"
+  (mouseup)="processMouseUpEvent()"
 >
   <div class="button_content-wrapper" (click)="processContentWrapperClickEvent($event)">
     <ng-content></ng-content>

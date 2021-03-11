@@ -6,7 +6,7 @@
   [attr.disabled]="disabled ? true : null"
   (click)="processClickEvent($event); onClickInternalElement($event)"
   (mousedown)="processMouseDownEvent($event)"
-  (mouseup)="processMouseUpEvent($event)"
+  (mouseup)="processMouseUpEvent()"
 >
   <div class="button__icon" [ngClass]="'button__icon_' + icon.position" *ngIf="icon">
     <pupa-icon [name]="icon.name" (click)="onClickInternalElement($event)"></pupa-icon>

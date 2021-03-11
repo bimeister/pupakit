@@ -60,7 +60,6 @@ export class IconButtonComponent {
   }
 
   public processMouseDownEvent(event: MouseEvent): void {
-    event.stopPropagation();
     if (!this.repeatClick) {
       return;
     }
@@ -68,8 +67,7 @@ export class IconButtonComponent {
     this.newRepeatClick(event);
   }
 
-  public processMouseUpEvent(event: MouseEvent): void {
-    event.stopPropagation();
+  public processMouseUpEvent(): void {
     if (!this.repeatClick) {
       return;
     }
