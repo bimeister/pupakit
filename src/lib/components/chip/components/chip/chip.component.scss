@@ -3,10 +3,11 @@
 @import 'mixins';
 
 :host {
-  height: rems(1.5);
+  height: newRems(3);
   display: inline-flex;
   flex-direction: row;
   vertical-align: top;
+  width: fit-content;
 }
 
 .chip {
@@ -14,66 +15,54 @@
   box-sizing: border-box;
   user-select: none;
   outline: none;
-  height: rems(1.5);
+  height: newRems(3);
   color: color(main);
   background-color: color(light);
   white-space: nowrap;
+  width: fit-content;
   display: inline-flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  border-radius: rems(1);
-  padding: 0;
+  border-radius: newRems(2);
+  max-width: newRems(25);
   @include transition(#{'background, box-shadow'});
-
-  &_dark {
-    background-color: color(accent);
-    color: color(white);
-  }
-
-  &_normal {
-    background-color: color(light);
-    color: color(main);
-  }
-
-  &_normal-light {
-    background-color: color(pale-blue);
-    color: color(main);
-  }
-
-  &_negative {
-    background-color: color(error);
-    color: color(white);
-  }
-
-  &_positive {
-    background-color: color(success);
-    color: color(white);
-  }
-
-  &_alert {
-    background-color: color(alert);
-    color: color(white);
-  }
 }
 
-:host:not(.disable) {
-  & .chip,
-  .chip.chip_normal,
-  .chip.chip_normal-light {
-    &:focus,
-    &:hover {
-      color: color(white);
-      background: color(active);
+.chip:not(.chip_disabled) {
+  cursor: pointer;
+
+  &.chip_primary {
+    background-color: color(primary);
+    color: color(white);
+    &.chip_hovered {
+      background-color: color(primary-hovered);
+    }
+    &:active {
+      background-color: color(primary-active);
     }
   }
 
-  .chip.chip_negative,
-  .chip.chip_positive,
-  .chip.chip_alert {
-    &:focus,
-    &:hover {
-      box-shadow: variable(box-shadow_hover);
+  &.chip_light {
+    background-color: color(light);
+    color: color(main);
+    &.chip_hovered {
+      background-color: color(light-hovered);
     }
+    &:active {
+      background-color: color(light-active);
+    }
+  }
+}
+.chip.chip_disabled {
+  cursor: not-allowed;
+
+  &.chip_primary {
+    background-color: color(primary-disabled);
+  }
+
+  &.chip_light {
+    background-color: color(light-disabled);
+    color: color(grey-ivory);
   }
 }

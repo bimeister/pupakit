@@ -2,11 +2,34 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-chip [color]="color | async">Sample chip</pupa-chip>
+    <pupa-tooltip [closeOnContentClick]="true" [disabled]="disabled | async">
+      <pupa-tooltip-trigger>
+        <pupa-chip [color]="color | async" [isDisabled]="disabled | async">
+          <div class="chip-content">
+            <div *ngIf="icon | async" class="chip-content__icon-container">
+              <pupa-icon class="chip-content__icon" name="app-pie"></pupa-icon>
+            </div>
+            <pupa-avatar
+              *ngIf="avatar | async"
+              class="chip-content__avatar"
+              userName="Гаев Иван Антонович"
+            ></pupa-avatar>
+            <div class="chip-content__text">Chip</div>
+            <pupa-icon *ngIf="deleteButton | async" class="chip-content__delete-button" name="ios-close"></pupa-icon>
+          </div>
+        </pupa-chip>
+      </pupa-tooltip-trigger>
+      <pupa-tooltip-content> Chip </pupa-tooltip-content>
+    </pupa-tooltip>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Color</demo-props-group-label>
     <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+    <demo-props-group-label>Content</demo-props-group-label>
+    <demo-props-checkbox class="disabled-checkbox" #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox class="icon-checkbox" #icon>With icon</demo-props-checkbox>
+    <demo-props-checkbox class="avatar-checkbox" #avatar>With avatar</demo-props-checkbox>
+    <demo-props-checkbox class="with-delete-button-checkbox" #deleteButton>With delete button</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>

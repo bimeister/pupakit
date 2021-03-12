@@ -1,6 +1,13 @@
 <div *ngFor="let option of options; first as first; trackBy: trackByFn">
   <ng-container *ngIf="generateId() as optionId">
-    <input type="radio" [id]="optionId" [name]="name" [value]="option.value" [formControl]="formControl" />
+    <input
+      type="radio"
+      [id]="optionId"
+      [attr.value]="option.value"
+      [name]="name"
+      [value]="option.value"
+      [formControl]="formControl"
+    />
     <label [for]="optionId">{{ option.caption }}</label>
   </ng-container>
 </div>
