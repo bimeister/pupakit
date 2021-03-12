@@ -9,7 +9,6 @@ $colors: (
   'main-dark': $color_main-dark,
   'accent': $color_main,
   'active': $color_active,
-  'light': $color_light,
   'success': $color_success,
   'alert': $color_alert,
   'error': $color_error,
@@ -22,7 +21,15 @@ $colors: (
   'pale-blue': $color_pale-blue,
   'cadet-blue': $color_cadet-blue,
   'cadet-blue-light': $color_cadet-blue-light,
-  'dark-overlay': $color_dark-overlay
+  'dark-overlay': $color_dark-overlay,
+  'light': $color_light,
+  'light-hovered': $color_light-hovered,
+  'light-active': $color_light-active,
+  'light-disabled': $color_light-disabled,
+  'primary': $color_primary,
+  'primary-hovered': $color_primary-hovered,
+  'primary-active': $color_primary-active,
+  'primary-disabled': $color_primary-disabled
 );
 
 $font-size: (
