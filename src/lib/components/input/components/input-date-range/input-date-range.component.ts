@@ -10,7 +10,7 @@ import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
 
 const PLACEHOLDER_DATE: string = '00.00.0000';
-const PLACEHOLDER: string = `${PLACEHOLDER_DATE} - ${PLACEHOLDER_DATE}`;
+const PLACEHOLDER: string = `${PLACEHOLDER_DATE} – ${PLACEHOLDER_DATE}`;
 const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
 
 const SIZE_PLACEHOLDER_DATE: number = PLACEHOLDER_DATE.length;
