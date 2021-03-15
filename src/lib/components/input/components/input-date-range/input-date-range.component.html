@@ -17,7 +17,8 @@
           #inputElement
           type="text"
           placeholder=""
-          [mask]="'00.00.0000 - 00.00.0000'"
+          [specialCharacters]="['–', '.', ' ']"
+          [mask]="'00.00.0000 – 00.00.0000'"
           [maxLength]="maxLengthInputValue"
           [attr.disabled]="(isDisabled$ | async) ? true : null"
           [ngClass]="{
