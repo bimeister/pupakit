@@ -1,4 +1,6 @@
+import { copyFolderWithFiles } from '@bimeister/utilities';
 import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
+import { info } from 'fancy-log';
 import { series, TaskFunction } from 'gulp';
 
 export function bundleStyleFilesTask(): TaskFunction {
@@ -28,12 +30,15 @@ function processScssFiles(): TaskFunction {
 }
 
 function copyStylesToDistFolder(): TaskFunction {
-  const command: string = 'copy ./src/styles/**/**/**/*.* ./dist/lib/styles';
-
   return (onDone: VoidFunction): void => {
-    executeCommandWithLogging(command, {
-      onDone,
-      printDefaultOutput: false
+    copyFolderWithFiles('./src/styles', './dist/lib/styles', {
+      onCopy: (sourcePath: string, targetPath: string) => {
+        info({
+          sourcePath,
+          targetPath
+        });
+      }
     });
+    onDone();
   };
 }

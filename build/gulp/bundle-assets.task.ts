@@ -1,13 +1,17 @@
-import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
+import { copyFolderWithFiles } from '@bimeister/utilities';
+import { info } from 'fancy-log';
 import { TaskFunction } from 'gulp';
 
 export function bundleAssetsTask(): TaskFunction {
-  const command: string = 'copy ./src/assets/**/*.* ./dist/lib/assets';
-
   return (onDone: VoidFunction): void => {
-    executeCommandWithLogging(command, {
-      onDone,
-      printDefaultOutput: false
+    copyFolderWithFiles('./src/assets', './dist/lib/assets', {
+      onCopy: (sourcePath: string, targetPath: string) => {
+        info({
+          sourcePath,
+          targetPath
+        });
+      }
     });
+    onDone();
   };
 }

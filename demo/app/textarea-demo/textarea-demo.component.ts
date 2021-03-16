@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { isNil } from '@bimeister/utilities';
 import combos from 'combos';
-// tslint:disable-next-line: import-blacklist
-import { compact } from 'lodash';
 import { TextareaResize } from '../../../src/internal/declarations/types/textarea-resize.type';
 
 interface TextareaCombo {
@@ -43,10 +42,10 @@ export class TextareaDemoComponent {
             value: '',
             disabled: combo.disabled
           },
-          compact([
+          [
             combo.required ? Validators.required : null,
             combo.maxLength ? Validators.maxLength(combo.maxLength) : null
-          ])
+          ].filter((value: ValidatorFn | null) => !isNil(value))
         )
     )
   );
