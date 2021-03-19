@@ -31,7 +31,7 @@ import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subject
 import { delayWhen, filter, map, pairwise, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
-import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
+import { VirtualScrollViewportComponent } from '../../../../internal/declarations/types/virtual-scroll-viewport-component.type';
 import { PagedVirtualScrollStateService } from '../services/paged-virtual-scroll-state.service';
 
 type PupaVirtualForOfType<T> = T[];
