@@ -16,7 +16,7 @@ import {
 import { VOID } from '../../../../internal/constants/void.const';
 import { ListRangesIntersectionProducer } from '../../../../internal/declarations/classes/list-ranges-intersection-producer.class';
 import { PagedVirtualScrollArguments } from '../../../../internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
-import { VirtualScrollViewportComponent } from '../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
+import { VirtualScrollViewportComponent } from '../../../../internal/declarations/types/virtual-scroll-viewport-component.type';
 
 const REACT_ON_RANGE_CHANGES_DELAY_MS: number = 500;
 

@@ -3,7 +3,7 @@ import { PagedVirtualScrollArguments } from '../interfaces/paged-virtual-scroll-
 import { ListRangesIntersectionProducer } from './list-ranges-intersection-producer.class';
 
 describe('list-ranges-intersection-producer.class.ts', () => {
-  describe('ListRangesIntersectionProducer.getPagedVirtualScrollArguments', () => {
+  describe('ListRangesIntersectionProducer.getPagedVirtualScrollArguments method:', () => {
     const previousStart: number = Math.floor(Math.random() * (50 - 20)) + 20; // random number from [20, 50)
     const previousEnd: number = Math.floor(Math.random() * (80 - 60)) + 50; // random number from [60, 80)
 
@@ -69,7 +69,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       end: currentRangeEndNotInPreviousRange
     };
 
-    it('current range intersected right: ', () => {
+    it('should return right intersection if current range intersected right', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIntersectedRight
@@ -91,7 +91,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range intersected left: ', () => {
+    it('should return left intersection if current range intersected left', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIntersectedLeft
@@ -113,7 +113,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range intersected right bound: ', () => {
+    it('should return right bound intersection if current range intersected right bound', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIntersectedRightBound
@@ -135,7 +135,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range intersected left bound: ', () => {
+    it('should return left bound intersection if current range intersected left bound', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIntersectedLeftBound
@@ -157,7 +157,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range (right) not intersected previous: ', () => {
+    it('should return right range if current range not intersected previous on the right side', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeNotIntersectedPreviousRight
@@ -179,7 +179,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range (left) not intersected previous: ', () => {
+    it('should return left range if current range not intersected previous on the left side', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeNotIntersectedPreviousLeft
@@ -201,7 +201,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range including previous with equal start points: ', () => {
+    it('should return right intersection (getFrom, getTo) if it is includes previous with equal start points, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIncludingPreviousWithEqualLeftBound
@@ -223,7 +223,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range including previous with equal end points: ', () => {
+    it('should return left intersection (getFrom, getTo) if it is includes previous with equal end points, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIncludingPreviousWithEqualRightBound
@@ -245,7 +245,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('previous range is null: ', () => {
+    it('should return current range for get items if previous range is null, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         null,
         currentRangeThatIntersectedRight
@@ -267,7 +267,8 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('previous range arguments (some) is null: ', () => {
+    // tslint:disable-next-line: max-line-length
+    it('should return current range for get items if some previous range arguments is null, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         { start: null, end: 5 },
         currentRangeThatIntersectedRight
@@ -289,7 +290,8 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('previous range arguments (every) is null: ', () => {
+    // tslint:disable-next-line: max-line-length
+    it('should return current range for get items if every previous range arguments is null, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         { start: null, end: null },
         currentRangeThatIntersectedRight
@@ -311,7 +313,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range includes in previous: ', () => {
+    it('should return current range if current range includes in previous, not get and remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatIncludedInPrevious
@@ -333,7 +335,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    it('current range contains previous: ', () => {
+    it('should return current range (getFrom, getTo) if current range contains previous', () => {
       const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
         previousRange,
         currentRangeThatContainsPrevious
@@ -356,8 +358,8 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
   });
 
-  describe('ListRangesIntersectionProducer.roundToBoundingDozensByCount', () => {
-    it('range [13, 59], count in viewport 17, total 100 -> [0, 80] : ', () => {
+  describe('ListRangesIntersectionProducer.roundToBoundingDozensByCount method:', () => {
+    it('should round range [13, 59] to [0, 80], with count in viewport 17 and total 100', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 13, end: 59 },
         17,
@@ -371,7 +373,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range [22, 59], count in viewport 17, total 100 -> [10, 80] : ', () => {
+    it('should round range range [22, 59], with count in viewport 17 and total 100', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 22, end: 59 },
         17,
@@ -385,7 +387,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range [46, 79], count in viewport 17, total 100 -> [30, 100] : ', () => {
+    it('should round range [46, 79] to [30, 100], with count in viewport 17 and total 100', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 46, end: 79 },
         17,
@@ -399,7 +401,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range [136, 187], count in viewport 26, total 300 -> [110, 210] : ', () => {
+    it('should round range [136, 187] to [110, 210], with count in viewport 26 and total 300', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 136, end: 187 },
         26,
@@ -413,7 +415,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range [1200, 1533], count in viewport 122, total 5000 -> [1080, 1660] : ', () => {
+    it('should round range [1200, 1533] to [1080, 1660], with count in viewport 122 and total 5000', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 1200, end: 1533 },
         122,
@@ -427,7 +429,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range [0, 6], count in viewport 5, total 100 -> [0, 10] : ', () => {
+    it('should round range [0, 6] to [0, 10], with count in viewport 5 and total 100', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 0, end: 6 },
         5,
@@ -441,12 +443,12 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
-    it('range null, count in viewport 122, total 5000 -> undefined : ', () => {
+    it('should return undefined with range is null, with count in viewport 122 and total 5000 -> undefined : ', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
       expect(returnedRange).toEqual(undefined);
     });
 
-    it('range [1200, null], count in viewport 122, total 5000 -> undefined : ', () => {
+    it('should return undefined with range [1200, null], count in viewport 122 and total 5000', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 1200, end: null },
         122,
@@ -455,7 +457,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(undefined);
     });
 
-    it('range [null, 1533], count in viewport 122, total 5000 -> undefined : ', () => {
+    it('should return undefined with range [null, 1533], count in viewport 122 and total 5000', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: null, end: 1533 },
         122,
@@ -464,7 +466,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(undefined);
     });
 
-    it('range [1200, 1533], count in viewport null, total 5000 -> undefined : ', () => {
+    it('should return undefined with range [1200, 1533], count in viewport null and total 5000', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 1200, end: 1533 },
         null,
@@ -473,7 +475,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(undefined);
     });
 
-    it('range [1200, 1533], count in viewport 122, total null -> undefined : ', () => {
+    it('should return undefined with range [1200, 1533], count in viewport 122 and total null', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
         { start: 1200, end: 1533 },
         122,

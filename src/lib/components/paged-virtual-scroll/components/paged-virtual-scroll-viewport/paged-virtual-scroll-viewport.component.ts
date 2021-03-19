@@ -18,7 +18,7 @@ import { debounceTime, startWith } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { PagedVirtualScrollArguments } from '../../../../../internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
-import { VirtualScrollViewportComponent } from '../../../../../internal/declarations/interfaces/virtual-scroll-viewport-component.interface';
+import { VirtualScrollViewportComponent } from '../../../../../internal/declarations/types/virtual-scroll-viewport-component.type';
 import { PagedVirtualScrollStateService } from '../../services/paged-virtual-scroll-state.service';
 
 const DEBOUNCE_TIME_MS: number = 500;

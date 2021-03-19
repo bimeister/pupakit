@@ -19,7 +19,7 @@ $height_container: px(500);
 .container {
   width: 80%;
   height: $height_container;
-  border: px(4) #000 dashed;
+  border: px(4) color(black) dashed;
   overflow: hidden;
 }
 
