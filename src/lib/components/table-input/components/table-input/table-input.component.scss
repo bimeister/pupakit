@@ -48,8 +48,6 @@
     @include flex-container(row, center, space-between, nowrap);
 
     &::placeholder {
-      position: absolute;
-      left: 0;
       color: color(grey-light);
       @include transition(#{'color'});
     }
