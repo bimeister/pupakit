@@ -118,7 +118,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    RouterModule.forRoot(demoRoutes, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(demoRoutes, { relativeLinkResolution: 'legacy', useHash: true }),
     ExampleViewerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
