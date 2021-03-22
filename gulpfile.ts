@@ -1,4 +1,5 @@
 import { parallel, series, task } from 'gulp';
+import { buildDemoStatic } from './build/gulp/build-demo-static.task';
 import { buildIconsTask } from './build/gulp/build-icons.task';
 import { buildLibraryTask } from './build/gulp/build-library.task';
 import { bundleAssetsTask } from './build/gulp/bundle-assets.task';
@@ -19,3 +20,5 @@ task(
 task('create:barrel-files', createBarrelFilesTask());
 
 task('convert-icons-to-code', buildIconsTask());
+
+task('build-demo-static', buildDemoStatic());
