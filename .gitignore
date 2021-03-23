@@ -7,3 +7,4 @@
 /node_modules/
 *.log
 api.ts
+.DS_Store
