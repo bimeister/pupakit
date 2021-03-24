@@ -33,6 +33,7 @@ export {
   SortModel,
   Tab,
   TreeItem,
+  CountColor,
   UploadingStatus
 } from './internal/api';
 export * from './internal/constants/icons/api';
