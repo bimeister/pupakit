@@ -96,7 +96,7 @@ export class PupaVirtualScrollForDirective<T>
    * The `TrackByFunction` to use for tracking changes. The `TrackByFunction` takes the index and
    * the item and produces a value to be used as the item's identity when tracking changes.
    */
-  @Input() public trackByFunction: TrackByFunction<T> | undefined;
+  @Input() public pupaVirtualForTrackByFunction: TrackByFunction<T> | undefined;
   private readonly trackByFunction$: BehaviorSubject<TrackByFunction<T> | undefined> = new BehaviorSubject<
     TrackByFunction<T> | undefined
   >(null);
@@ -190,7 +190,7 @@ export class PupaVirtualScrollForDirective<T>
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processPupaVirtualForOfChange(changes?.pupaVirtualForOf);
-    this.processTrackByFunctionChange(changes?.trackByFunction);
+    this.processTrackByFunctionChange(changes?.pupaVirtualForTrackByFunction);
     this.processTemplateChange(changes?.template);
   }
 
@@ -487,7 +487,11 @@ export class PupaVirtualScrollForDirective<T>
   private processTrackByFunctionChange(change: ComponentChange<this, TrackByFunction<T> | undefined>): void {
     const updatedTrackByFunction: TrackByFunction<T> | undefined = change?.currentValue;
 
-    if (!isNil(updatedTrackByFunction) && typeof updatedTrackByFunction !== 'function') {
+    if (isNil(updatedTrackByFunction)) {
+      return;
+    }
+
+    if (typeof updatedTrackByFunction !== 'function') {
       throw new Error(`[PupaVirtualScrollForDirective] trackBy must be a function.`);
     }
 

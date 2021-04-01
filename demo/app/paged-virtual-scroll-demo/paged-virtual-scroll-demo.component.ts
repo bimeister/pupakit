@@ -4,6 +4,7 @@ import {
   ChangeDetectorRef,
   Component,
   OnDestroy,
+  TrackByFunction,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -60,6 +61,10 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
       .add(this.processPagedVirtualScrollArgumentsChanges())
       .add(this.handleSearchEventsToFillSearchValue());
   }
+
+  public readonly trackByFunction: TrackByFunction<DATA_TYPE> = (_: number, row: DATA_TYPE): number => {
+    return row;
+  };
 
   public ngAfterViewInit(): void {
     this.pagedVirtualScrollViewportRefresh();

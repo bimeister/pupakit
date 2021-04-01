@@ -11,7 +11,7 @@
       (firstSliceCount)="handleChangeFirstSliceCount($event)"
       #pagedVirtualScrollViewport
     >
-      <ng-container *pupaVirtualFor="let row of rows$ | async">
+      <ng-container *pupaVirtualFor="let row of rows$ | async; trackByFunction: trackByFunction">
         <ng-container *ngIf="row; else emptyRow">
           <div class="row" [style.height.px]="itemSize">element {{ row - 1 }}</div>
         </ng-container>
