@@ -132,7 +132,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
   }
 
   private pagedVirtualScrollViewportRefresh(): void {
-    this.pagedVirtualScrollViewport.refresh();
+    this.pagedVirtualScrollViewport.refreshWithScrollToIndex();
     this.resetPaginationVariables();
 
     this.detectChanges();

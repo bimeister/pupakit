@@ -443,6 +443,20 @@ describe('list-ranges-intersection-producer.class.ts', () => {
       expect(returnedRange).toEqual(expectedResult);
     });
 
+    it('should round range [0, 2] to [0, 10], with count in viewport 2 and total undefined', () => {
+      const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+        { start: 0, end: 2 },
+        2,
+        undefined
+      );
+
+      const expectedResult: ListRange = {
+        start: 0,
+        end: 10
+      };
+      expect(returnedRange).toEqual(expectedResult);
+    });
+
     it('should return undefined with range is null, with count in viewport 122 and total 5000 -> undefined : ', () => {
       const returnedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(null, 122, 5000);
       expect(returnedRange).toEqual(undefined);

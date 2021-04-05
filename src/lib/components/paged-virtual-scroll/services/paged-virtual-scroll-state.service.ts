@@ -82,16 +82,33 @@ export class PagedVirtualScrollStateService implements OnDestroy {
     this.viewport$.next(viewport);
   }
 
-  public refresh(): void {
+  public scrollToIndex(index: number, behavior: ScrollBehavior = 'auto'): void {
+    const serializedScrollIndex: number = index ?? 0;
+    this.viewport$
+      .pipe(filterNotNil(), take(1))
+      .subscribe((viewport: VirtualScrollViewportComponent) => viewport.scrollToIndex(serializedScrollIndex, behavior));
+  }
+
+  public refreshWithScrollToIndex(index: number, behavior: ScrollBehavior = 'auto'): void {
     this.renderedRange$.next(null);
     combineLatest([this.viewport$.pipe(filterNotNil()), this.firstSliceCount$.pipe(filterNotNil())])
-      .pipe(filterNotNil(), take(1))
-      .subscribe(([viewport, firstSliceCount]: [VirtualScrollViewportComponent, number]) => {
-        viewport.scrollToIndex(0);
+      .pipe(filterNotNil(), take(1), withLatestFrom(this.totalCount$))
+      .subscribe(([[viewport, firstSliceCount], totalCount]: [[VirtualScrollViewportComponent, number], number]) => {
+        const serializedScrollIndex: number = index ?? 0;
+        viewport.scrollToIndex(serializedScrollIndex, behavior);
+
+        const serializedEnd: number = Math.min(serializedScrollIndex + firstSliceCount, totalCount);
+        const serializedStart: number = Math.max(serializedEnd - firstSliceCount, 0);
+
+        const roundedRange: ListRange = ListRangesIntersectionProducer.roundToBoundingDozensByCount(
+          { start: serializedStart, end: serializedEnd },
+          firstSliceCount,
+          totalCount
+        );
 
         const pagedVirtualScrollArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
           null,
-          { start: 0, end: firstSliceCount }
+          roundedRange
         );
         this.pagedVirtualScrollArgumentsToOutput$.next(pagedVirtualScrollArguments);
       });
