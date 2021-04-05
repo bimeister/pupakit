@@ -79,8 +79,12 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
     this.subscription.unsubscribe();
   }
 
-  public refresh(): void {
-    this.pagedVirtualScrollStateService.refresh();
+  public scrollToIndex(index: number = null, behavior: ScrollBehavior = 'auto'): void {
+    this.pagedVirtualScrollStateService.scrollToIndex(index, behavior);
+  }
+
+  public refreshWithScrollToIndex(index: number = null, behavior: ScrollBehavior = 'auto'): void {
+    this.pagedVirtualScrollStateService.refreshWithScrollToIndex(index, behavior);
   }
 
   private setViewportComponent(): void {

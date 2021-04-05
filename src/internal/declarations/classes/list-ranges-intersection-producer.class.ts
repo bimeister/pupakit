@@ -28,9 +28,11 @@ export class ListRangesIntersectionProducer {
 
     const possibleEnd: number = end + countItemsInViewport;
     const serializedTotalCount: number = totalCount ?? start + countItemsInViewport;
-    const roundedEnd: number = Math.min(Math.round(possibleEnd / roundValue) * roundValue, serializedTotalCount);
 
-    return { start: roundedStart, end: roundedEnd };
+    const roundedEnd: number = Math.min(Math.round(possibleEnd / roundValue) * roundValue, serializedTotalCount);
+    const convertedEnd: number = roundedEnd === 0 ? roundValue : roundedEnd;
+
+    return { start: roundedStart, end: convertedEnd };
   }
 
   public static getPagedVirtualScrollArguments(
