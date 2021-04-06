@@ -1,13 +1,13 @@
-@import './../../../../../styles/themes/functions';
-@import './../../../../../styles/functions.scss';
-@import './../../../../../styles/mixins.scss';
+@import 'themes/functions';
+@import 'functions.scss';
+@import 'mixins.scss';
 
 .chip-tabs-item {
   box-sizing: border-box;
-  height: rems(2);
-  min-width: rems(4);
-  border-radius: rems(0.75);
-  padding: 0 rems(0.5);
+  height: newRems(4);
+  min-width: newRems(8);
+  border-radius: newRems(1.5);
+  padding: 0 newRems(1);
   display: flex;
   flex-direction: row;
   align-items: center;

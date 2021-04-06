@@ -1,0 +1,8 @@
+<div
+  class="tabs-item"
+  #tabItem
+  [class.tabs-item_active]="isActive$ | async"
+  [class.tabs-item_hidden]="!(isVisible$ | async)"
+>
+  <ng-content></ng-content>
+</div>

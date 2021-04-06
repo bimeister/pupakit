@@ -1,5 +1,5 @@
-@import './../../../../../styles/themes/functions';
-@import './../../../../../styles/functions.scss';
+@import 'themes/functions';
+@import 'functions.scss';
 
 .vertical-tabs__item {
   height: auto;
@@ -8,9 +8,9 @@
   display: block;
   border: 1px solid color(light);
   background: color(white);
-  border-radius: rems(0.75);
-  padding: rems(1) rems(0.75);
-  margin: 0 0 rems(0.5) 0;
+  border-radius: newRems(1.5);
+  padding: newRems(2) newRems(1.5);
+  margin: 0 0 newRems(1) 0;
   cursor: pointer;
 
   &_hidden {
@@ -27,7 +27,7 @@
     }
   }
 
-  &_selected {
+  &_active {
     background: color(light);
   }
 }

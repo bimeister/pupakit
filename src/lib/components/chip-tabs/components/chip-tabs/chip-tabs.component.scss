@@ -1,12 +1,12 @@
-@import './../../../../../styles/functions.scss';
-@import './../../../../../styles/functions.scss';
-@import './../../../../../styles/mixins.scss';
+@import 'functions.scss';
+@import 'functions.scss';
+@import 'mixins.scss';
 
 .chip-tabs {
   width: 100%;
-  height: rems(2);
+  height: newRems(4);
   background: color(light);
-  border-radius: rems(0.75);
+  border-radius: newRems(1.5);
   display: flex;
   flex-direction: row;
   align-items: center;

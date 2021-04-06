@@ -1,82 +1,42 @@
-@import 'themes/functions';
-@import 'functions';
-@import 'mixins';
+@import 'functions.scss';
+@import 'functions.scss';
+@import 'mixins.scss';
 
-:host {
+.tabs {
   width: 100%;
-  height: rems(2.25);
-  min-height: rems(2.25);
-  display: block;
+  height: newRems(4.5);
+  min-height: newRems(4.5);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: auto hidden;
   position: relative;
-  overflow-x: auto;
-  overflow-y: hidden;
 
   &::-webkit-scrollbar {
     display: none;
   }
 }
 
-.tabs {
-  all: unset;
-  width: fit-content;
-  height: rems(1.75);
-  margin: 0 0 rems(0.25) 0;
-  @include flex-container(row, flex-start, flex-start, nowrap);
-}
-
-.tabs__item {
-  all: unset;
-  height: 100%;
-  margin: 0 rems(1) 0 0;
-  position: relative;
-  padding: 0 rems(0.25);
-  cursor: pointer;
-  color: color(main-dark);
-  user-select: none;
-  @include flex-container(row, center, center, nowrap);
-
-  &_selected {
-    color: color(active);
-  }
-}
-
-.icon {
-  font-size: rems(0.85);
-  min-width: rems(0.85);
-}
-.title {
-  font-size: rems(1.125);
-  font-weight: 500;
-}
-.icon ~ .title {
-  margin: 0 0 0 rems(0.25);
-}
-
 .rail {
-  width: 100vw;
-  position: absolute;
-  overflow: hidden;
-  height: rems(0.25);
-  background: color(light);
-}
-.rail__highlighter {
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
-  height: rems(0.25);
-  background: color(active);
-  border-radius: rems(0.75);
-  pointer-events: none;
-  @include transition();
-
-  &_invisible {
-    left: -100vw;
-    width: 0;
-  }
-}
-
-.title {
   overflow: hidden;
-  white-space: nowrap;
+  height: newRems(0.5);
+  background: color(light);
+
+  &__highlighter {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: newRems(0.5);
+    background: color(active);
+    border-radius: newRems(1.5);
+    pointer-events: none;
+    will-change: transform;
+    @include transition();
+  }
 }

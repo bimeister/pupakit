@@ -49,7 +49,6 @@ import { SpinnerDemoComponent } from './spinner-demo/spinner-demo.component';
 import { SwitcherDemoComponent } from './switcher-demo/switcher-demo.component';
 import { TableInputDemoComponent } from './table-input-demo/table-input-demo.component';
 import { TabsDemoComponent } from './tabs-demo/tabs-demo.component';
-import { TabsDrawerDemoComponent } from './tabs-drawer-demo/tabs-drawer-demo.component';
 import { TextareaDemoComponent } from './textarea-demo/textarea-demo.component';
 import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
@@ -57,6 +56,7 @@ import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
 import { TypographyPageComponent } from './typography-page/typography-page.component';
 import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
+import { VerticalTabsDemoComponent } from './vertical-tabs-demo/vertical-tabs-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -92,7 +92,6 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DatagridDemoComponent,
     DrawerDemoComponent,
     TextareaDemoComponent,
-    TabsDrawerDemoComponent,
     RadioButtonDemoComponent,
     LayoutDemoComponent,
     DraggableDemoComponent,
@@ -109,7 +108,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     UploadsDemoComponent,
     ColorsComponent,
     TypographyPageComponent,
-    IconPageComponent
+    IconPageComponent,
+    VerticalTabsDemoComponent
   ],
   imports: [
     IconModule.forRoot(getAllIcons()),

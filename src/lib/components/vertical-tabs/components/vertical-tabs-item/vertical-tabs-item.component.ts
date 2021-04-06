@@ -1,7 +1,7 @@
-import { Attribute, ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation } from '@angular/core';
-
+import { Attribute, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TabsContainerItem } from '../../../../../internal/declarations/classes/abstract/tabs-container-item.abstract';
-import { VertiacalTabsKind } from '../../../../../internal/declarations/types/vertical-tabs-kind.type';
+import { VerticalTabsKind } from '../../../../../internal/declarations/types/vertical-tabs-kind.type';
+import { VerticalTabsStateService } from '../../services/vertical-tabs-state.service';
 
 @Component({
   selector: 'pupa-vertical-tabs-item',
@@ -12,9 +12,9 @@ import { VertiacalTabsKind } from '../../../../../internal/declarations/types/ve
 })
 export class VerticalTabsItemComponent extends TabsContainerItem {
   constructor(
-    @Attribute('kind') public readonly kind: VertiacalTabsKind = 'rounded',
-    protected readonly changeDetectorRef: ChangeDetectorRef
+    @Attribute('kind') public readonly kind: VerticalTabsKind = 'rounded',
+    verticalTabsStateService: VerticalTabsStateService
   ) {
-    super(changeDetectorRef);
+    super(verticalTabsStateService);
   }
 }
