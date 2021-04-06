@@ -2,6 +2,16 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-tabs [tabs]="tabs"></pupa-tabs>
+    <pupa-tabs (selectedTabValues)="handleTabSelection($event)">
+      <pupa-tabs-item
+        *ngFor="let tab of tabs"
+        [isActive]="tabIsActive(tab.value, activeValues$ | async)"
+        [value]="tab.value"
+        class="tab"
+      >
+        <pupa-icon class="tab__icon" [name]="tab.iconName"></pupa-icon>
+        <div class="tab__name">{{ tab.name }}</div>
+      </pupa-tabs-item>
+    </pupa-tabs>
   </demo-example-viewer-content>
 </demo-example-viewer>

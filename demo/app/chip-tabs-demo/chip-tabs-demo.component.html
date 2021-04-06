@@ -2,11 +2,22 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-chip-tabs>
-      <pupa-chip-tabs-item [isActive]="true">Свойства</pupa-chip-tabs-item>
-      <pupa-chip-tabs-item>Интерфейсы</pupa-chip-tabs-item>
-      <pupa-chip-tabs-item>Классы</pupa-chip-tabs-item>
-      <pupa-chip-tabs-item>Структуры</pupa-chip-tabs-item>
+    <pupa-chip-tabs
+      (selectedTabValues)="handleTabSelection($event)"
+      [isMultiSelectionEnabled]="isMultiSelectionEnabled | async"
+    >
+      <pupa-chip-tabs-item
+        *ngFor="let tab of tabs"
+        [isActive]="tabIsActive(tab.value, activeValues$ | async)"
+        [value]="tab.value"
+      >
+        {{ tab.name }}
+      </pupa-chip-tabs-item>
     </pupa-chip-tabs>
   </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #isMultiSelectionEnabled>isMultiSelectionEnabled</demo-props-checkbox>
+  </demo-example-viewer-properties>
 </demo-example-viewer>

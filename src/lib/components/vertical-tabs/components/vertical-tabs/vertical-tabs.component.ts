@@ -1,36 +1,17 @@
-import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  Component,
-  ContentChildren,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-  QueryList,
-  ViewEncapsulation
-} from '@angular/core';
-
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TabsContainer } from '../../../../../internal/declarations/classes/abstract/tabs-container.abstract';
-import { VerticalTabsItemComponent } from '../vertical-tabs-item/vertical-tabs-item.component';
+import { VerticalTabsStateService } from '../../services/vertical-tabs-state.service';
 
 @Component({
   selector: 'pupa-vertical-tabs',
   templateUrl: './vertical-tabs.component.html',
   styleUrls: ['./vertical-tabs.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [VerticalTabsStateService]
 })
-export class VerticalTabsComponent extends TabsContainer implements AfterViewInit, OnDestroy {
-  @Input() protected isMultiSelectionEnabled: boolean = false;
-
-  @Output() protected readonly selectedTabIndexes: EventEmitter<number[]> = new EventEmitter<number[]>();
-  @Output() protected readonly latestClickedTabIndex: EventEmitter<number> = new EventEmitter<number>();
-
-  @ContentChildren(VerticalTabsItemComponent, { descendants: true })
-  protected readonly tabsList: QueryList<VerticalTabsItemComponent>;
-
-  constructor() {
-    super();
+export class VerticalTabsComponent extends TabsContainer {
+  constructor(verticalTabsStateService: VerticalTabsStateService) {
+    super(verticalTabsStateService);
   }
 }

@@ -1,27 +1,14 @@
-<div #tabsElement class="tabs" *ngIf="tabs$ | async as tabs">
-  <button
-    #tabsItemElement
-    *ngFor="let tab of tabs; let tabIndex = index"
-    [class.tabs__item_selected]="(selectedTabIndex$ | async) === tabIndex"
-    class="tabs__item"
-    (click)="selectTab(tab)"
-  >
-    <pupa-icon
-      *ngIf="!(tab?.iconName || tab?.iconSrc | isNullOrUndefined)"
-      class="icon"
-      [name]="tab.iconName"
-      [src]="(tab.iconName | isNullOrUndefined) ? tab.iconSrc : null"
-    ></pupa-icon>
-    <div class="title">
-      {{ tab.name }}
-    </div>
-  </button>
+<div class="tabs">
+  <ng-content></ng-content>
+  <ng-container [ngTemplateOutlet]="railTemplate"></ng-container>
 </div>
 
-<div class="rail">
-  <div
-    #highlighterElement
-    [class.rail__highlighter_invisible]="(selectedTabIndex$ | async) === -1"
-    class="rail__highlighter"
-  ></div>
-</div>
+<ng-template #railTemplate>
+  <div class="rail">
+    <div
+      class="rail__highlighter"
+      [style.width.px]="activeTabWidthPx$ | async"
+      [style.transform]="activeTabTranslateX$ | async"
+    ></div>
+  </div>
+</ng-template>

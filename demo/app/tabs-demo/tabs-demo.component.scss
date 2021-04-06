@@ -1,15 +1,19 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
+@import 'themes/functions';
+@import 'functions.scss';
+@import 'mixins.scss';
+
+.tab {
+  &__icon {
+    font-size: newRems(1.7);
+    min-width: newRems(1.7);
+    margin-right: newRems(0.5);
+  }
+  &__name {
+    font-size: newRems(2.25);
+    font-weight: 500;
+  }
 }
 
-.content {
-  height: auto;
-  overflow: auto;
-}
-
-.placeholder {
-  height: 1000px;
+.tab + .tab {
+  margin-left: newRems(2);
 }

@@ -1,69 +1,77 @@
-import { AfterViewInit, ChangeDetectorRef, Directive, HostListener, Input, OnChanges } from '@angular/core';
-import { getUuid, isNil } from '@bimeister/utilities';
-import { Subject } from 'rxjs';
+import { Directive, HostListener, Input, OnChanges, OnInit } from '@angular/core';
+import { filterNotNil, filterTruthy, isNil } from '@bimeister/utilities';
+import { BehaviorSubject } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
-import { Uuid } from '../../types/uuid.type';
+import { TabsStateProducerService } from './tabs-state-producer-service.abstract';
 
 @Directive()
-export abstract class TabsContainerItem implements OnChanges, AfterViewInit {
-  public readonly id: Uuid = getUuid();
-
+export abstract class TabsContainerItem implements OnChanges, OnInit {
   @Input() public isVisible: boolean = true;
+  public readonly isVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   @Input() public isActive: boolean = false;
+  public readonly isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @Input() public value: unknown;
+  public readonly value$: BehaviorSubject<unknown> = new BehaviorSubject<unknown>(null);
 
-  public readonly onClick$: Subject<Uuid> = new Subject<Uuid>();
-  public readonly onSelect$: Subject<Uuid> = new Subject<Uuid>();
-  public readonly onDeselect$: Subject<Uuid> = new Subject<Uuid>();
-
-  public isSelected: boolean = false;
-
-  constructor(protected readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(protected readonly tabsStateService: TabsStateProducerService) {}
 
   @HostListener('click')
   public processTabClick(): void {
-    this.toggleSelection();
-    this.onClick$.next(this.id);
-  }
-
-  public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processIsActiveValueChanges(changes?.isActive);
-  }
-
-  public ngAfterViewInit(): void {
-    this.updateSelectionState(this.isActive);
-  }
-
-  public deselect(): void {
-    this.onDeselect$.next(this.id);
-  }
-
-  public select(): void {
-    this.onSelect$.next(this.id);
-  }
-
-  public toggleSelection(): void {
-    const newState: boolean = !this.isSelected;
-    this.updateSelectionState(newState);
-  }
-
-  public triggerChangeDetector(): void {
-    this.changeDetectorRef.detectChanges();
-  }
-
-  private processIsActiveValueChanges(change: ComponentChange<this, boolean>): void {
-    const newState: boolean = change?.currentValue;
-    if (isNil(newState)) {
-      return;
-    }
-
-    queueMicrotask(() => {
-      this.updateSelectionState(newState);
+    this.value$.pipe(take(1), filterNotNil()).subscribe((value: unknown) => {
+      this.tabsStateService.processTabClick(value);
     });
   }
 
-  private updateSelectionState(targetState: boolean): void {
-    targetState ? this.select() : this.deselect();
-    this.triggerChangeDetector();
+  public ngOnInit(): void {
+    this.setActiveTabStateInSet();
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processIsVisibleValueChanges(changes?.isVisible);
+    this.processIsActiveValueChanges(changes?.isActive);
+    this.processValueChanges(changes?.value);
+  }
+
+  private setActiveTabStateInSet(): void {
+    this.isActive$
+      .pipe(
+        take(1),
+        filterTruthy(),
+        switchMap(() => this.value$),
+        take(1)
+      )
+      .subscribe((value: unknown) => this.tabsStateService.addToActiveTabValueSet(value));
+  }
+
+  private processIsVisibleValueChanges(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isVisible$.next(updatedValue);
+  }
+
+  private processIsActiveValueChanges(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isActive$.next(updatedValue);
+  }
+
+  private processValueChanges(change: ComponentChange<this, unknown>): void {
+    const updatedValue: unknown | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.value$.next(updatedValue);
   }
 }

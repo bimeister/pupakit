@@ -2,8 +2,8 @@
 @import 'mixins';
 @import 'functions';
 
-$width_avatar: px(16);
-$font-size: px(8);
+$width_avatar: newRems(2);
+$font-size: newRems(1);
 
 .avatar {
   display: flex;

@@ -1,0 +1,23 @@
+@import 'themes/functions';
+@import 'functions.scss';
+@import 'mixins.scss';
+
+.tabs-item {
+  height: 100%;
+  position: relative;
+  padding: 0 newRems(0.5);
+  cursor: pointer;
+  color: color(main-dark);
+  user-select: none;
+  @include flex-container(row, center, center, nowrap);
+  @include transition(color);
+
+  &_active,
+  &:hover {
+    color: color(active);
+  }
+
+  &_hidden {
+    display: none;
+  }
+}

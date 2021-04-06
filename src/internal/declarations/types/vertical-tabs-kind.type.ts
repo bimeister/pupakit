@@ -1,1 +1,1 @@
-export type VertiacalTabsKind = 'rounded' | 'angular';
+export type VerticalTabsKind = 'rounded' | 'angular';
