@@ -94,7 +94,7 @@ pages:
   interruptible: true
   allow_failure: true
   script:
-    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=docs_service" demo public
+    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=docs_service" dist/demo public
   when: always
   # only:
   #   - master
