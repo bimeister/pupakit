@@ -20,7 +20,7 @@ export class LayoutDemoComponent {
       id: null,
       text: 'Текст сообщения',
       type: this.randomAlertType(),
-      needClosed: this.randomCloseMode()
+      needToBeClosed: this.randomCloseMode()
     };
     this.alertsService.create(alert).subscribe();
   }

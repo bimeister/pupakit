@@ -31,7 +31,7 @@ export class AlertComponent implements AfterContentInit {
   public ngAfterContentInit(): void {
     this.isVisible = true;
     this.changeDetector.detectChanges();
-    if (!isNil(this.alert.needClosed) && this.alert.needClosed) {
+    if (!isNil(this.alert.needToBeClosed) && this.alert.needToBeClosed) {
       return;
     }
     setTimeout(() => {
