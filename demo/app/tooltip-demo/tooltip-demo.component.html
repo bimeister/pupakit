@@ -1,14 +1,29 @@
 <h1>Tooltip</h1>
 
-<demo-example-viewer>
+<demo-example-viewer class="tooltip-demo">
   <demo-example-viewer-content>
-    <pupa-tooltip [closeOnContentClick]="true" #tooltip>
+    <pupa-tooltip [hideOnTooltipHover]="hideOnTooltipHoverControl.value" [disabled]="disabledControl.value">
       <pupa-tooltip-trigger>
-        <pupa-icon-button color="transparent" size="small-to-medium" [active]="tooltip.isActive$ | async">
+        <pupa-icon-button color="transparent" size="small-to-medium">
           <pupa-icon class="icon" name="ios-checkmark-circle"></pupa-icon>
         </pupa-icon-button>
       </pupa-tooltip-trigger>
-      <pupa-tooltip-content> 🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈🎈 </pupa-tooltip-content>
+      <pupa-tooltip-content>
+        <div [innerHTML]="sanitiazedHtml$ | async"></div>
+      </pupa-tooltip-content>
     </pupa-tooltip>
   </demo-example-viewer-content>
+
+  <demo-example-viewer-properties class="tooltip-demo__viewer-properties">
+    <demo-props-group-label>Properties</demo-props-group-label>
+    <demo-props-checkbox class="tooltip-demo__hide-on-tooltip-hover-checkbox" [formControl]="hideOnTooltipHoverControl"
+      >Hide On Tooltip Hover</demo-props-checkbox
+    >
+    <demo-props-checkbox class="tooltip-demo__disabled-checkbox" [formControl]="disabledControl"
+      >Disabled</demo-props-checkbox
+    >
+
+    <demo-props-group-label>Content</demo-props-group-label>
+    <pupa-textarea [formControl]="contentControl"> </pupa-textarea>
+  </demo-example-viewer-properties>
 </demo-example-viewer>

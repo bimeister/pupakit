@@ -1,0 +1,7 @@
+@import 'src/styles/functions';
+
+.tooltip-demo {
+  &__viewer-properties {
+    min-width: px(400);
+  }
+}

@@ -58,11 +58,6 @@
   &.context-menus {
     z-index: 50;
   }
-  &.tooltip {
-    pointer-events: none;
-    /* @deprecated */
-    z-index: 10010;
-  }
 
   &.iframe {
     z-index: 0;
