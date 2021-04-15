@@ -1,3 +1,23 @@
-<ng-template #content>
-  <ng-content></ng-content>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="dropDownOverlayOrigin$ | async"
+  [cdkConnectedOverlayOpen]="isOpened$ | async"
+  [cdkConnectedOverlayPositions]="overlayPositions"
+  [cdkConnectedOverlayFlexibleDimensions]="true"
+  (positionChange)="processPositionChange($event)"
+>
+  <div class="tooltip" (mouseenter)="processMouseEnterEvent()" (mouseleave)="processMouseLeaveEvent()">
+    <div
+      class="tooltip__animation-container"
+      [@tooltipShow]="atimationState$ | async"
+      [style.transform]="styleTransform$ | async"
+    >
+      <div class="tooltip__content-container">
+        <div class="tooltip__content">
+          <ng-content></ng-content>
+        </div>
+      </div>
+      <div class="tooltip__pointer" [ngClass]="pointerClassName$ | async"></div>
+    </div>
+  </div>
 </ng-template>

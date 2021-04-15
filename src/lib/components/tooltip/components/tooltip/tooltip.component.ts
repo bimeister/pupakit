@@ -1,61 +1,44 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  Input,
-  TemplateRef,
-  ChangeDetectionStrategy,
-  OnDestroy
-} from '@angular/core';
-import { TooltipService } from '../../../layout/services/tooltip.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { TooltipService } from '../../services/tooltip.service';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { isNil } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pupa-tooltip',
   templateUrl: './tooltip.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TooltipService]
 })
-export class TooltipComponent implements OnDestroy {
-  @Input() public closeOnContentClick: boolean = true;
+export class TooltipComponent implements OnChanges {
+  @Input() public hideOnTooltipHover: boolean = true;
   @Input() public disabled: boolean = false;
 
-  public triggerRef: ElementRef<HTMLElement>;
-  public contentRef: TemplateRef<HTMLElement>;
+  public readonly isOpened$: Observable<boolean> = this.tooltipService.isOpened$;
 
-  public readonly isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  constructor(private readonly tooltipService: TooltipService) {}
 
-  private readonly subscription: Subscription = new Subscription();
-
-  constructor(private readonly tooltipService: TooltipService) {
-    this.subscription.add(this.listenOpenCloseTooltipState());
-  }
-
-  public ngOnDestroy(): void {
-    this.tooltipService.close();
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processDisabledChanges(changes.disabled);
+    this.processHideOnTooltipHoverChanges(changes.hideOnTooltipHover);
   }
 
   public open(): void {
-    this.tooltipService.open({
-      triggerRef: this.triggerRef,
-      templateRef: this.contentRef,
-      closeOnContentClick: this.closeOnContentClick
-    });
+    this.tooltipService.setOpenedState(true);
   }
 
-  @HostListener('click')
-  @HostListener('mouseenter')
-  public clickOpen(): void {
-    if (this.disabled) {
+  private processDisabledChanges(change: ComponentChange<this, boolean>): void {
+    if (isNil(change)) {
       return;
     }
-    this.open();
-    this.isActive$.next(true);
+    this.tooltipService.setDisabledState(change.currentValue);
   }
 
-  private listenOpenCloseTooltipState(): Subscription {
-    return this.tooltipService.isOpened$.pipe(filter((isOpened: boolean) => !isOpened)).subscribe(() => {
-      this.isActive$.next(false);
-    });
+  private processHideOnTooltipHoverChanges(change: ComponentChange<this, boolean>): void {
+    if (isNil(change)) {
+      return;
+    }
+    this.tooltipService.setHideOnTooltipHoverState(change.currentValue);
   }
 }
