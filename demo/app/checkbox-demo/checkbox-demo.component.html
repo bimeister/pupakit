@@ -2,9 +2,26 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-checkbox [value]="true" [disabled]="disabled | async" [indeterminate]="indeterminate | async">
-      Sample text
-    </pupa-checkbox>
+    <pupa-checkbox-wrapper>
+      <pupa-checkbox #checkbox [indeterminate]="indeterminate | async" [formControl]="control"> </pupa-checkbox>
+
+      <ng-container *ngIf="isNeedDisplayTooltip(); else content">
+        <pupa-tooltip [closeOnContentClick]="true">
+          <pupa-tooltip-trigger>
+            <div class="content" [class.disabled]="checkbox.disabled$ | async">
+              <div class="content__label">{{ label }}</div>
+              <div class="content__hint">{{ hint }}</div>
+            </div>
+          </pupa-tooltip-trigger>
+          <pupa-tooltip-content>
+            <div class="tooltip-content">
+              <div>{{ label }}</div>
+              <div>{{ hint }}</div>
+            </div>
+          </pupa-tooltip-content>
+        </pupa-tooltip>
+      </ng-container>
+    </pupa-checkbox-wrapper>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
@@ -13,3 +30,10 @@
     <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<ng-template #content>
+  <div class="content" [class.disabled]="checkbox.disabled$ | async">
+    <div class="content__label">{{ label }}</div>
+    <div class="content__hint">{{ hint }}</div>
+  </div>
+</ng-template>

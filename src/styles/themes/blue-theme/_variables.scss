@@ -7,9 +7,10 @@ $color_active: #009eff;
 $color_success: #00c902;
 $color_alert: #ffc009;
 $color_text: #002c3e;
+$color_subdark: #8f9ca4;
 
 $color_grey-light: #797979;
-$color_grey-ivory: #a6a6a6;
+$color_grey-ivory: #8f9ca4;
 $color_grey-apple: #d2d2d2;
 
 $color_white: #ffffff; /* Нет в дизайн-системе */
@@ -35,6 +36,9 @@ $color_light-active: #9bcdeb;
 $color_light-disabled: #f4f4f4;
 
 $color_dark-overlay: rgba(0, 0, 0, 0.82); /* Нет в дизайн-системе */
+
+$color_light-disabled: #f4f4f4;
+$color_primary-disabled: #647e89;
 
 /* font-size */
 $font-size_root: 16px; /* 1 rem (1 px = 0,0625 rem) - do not use! */
