@@ -3,7 +3,13 @@
 <demo-example-viewer>
   <demo-example-viewer-content>
     <pupa-checkbox-wrapper>
-      <pupa-checkbox #checkbox [indeterminate]="indeterminate | async" [formControl]="control"> </pupa-checkbox>
+      <pupa-checkbox
+        class="checkbox-component"
+        #checkbox
+        [indeterminate]="indeterminate | async"
+        [formControl]="control"
+      >
+      </pupa-checkbox>
 
       <ng-container *ngIf="isNeedDisplayTooltip(); else content">
         <pupa-tooltip [closeOnContentClick]="true">
@@ -26,8 +32,8 @@
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #indeterminate>Indeterminate</demo-props-checkbox>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox class="indeterminate-props" #indeterminate>Indeterminate</demo-props-checkbox>
+    <demo-props-checkbox class="disabled-props" #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
 
