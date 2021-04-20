@@ -2,6 +2,10 @@
 @import 'mixins';
 @import 'functions';
 
+.checkbox-component {
+  padding-top: newRems(0.5);
+}
+
 .content {
   display: flex;
   flex-direction: column;
@@ -15,12 +19,11 @@
 
   &__label {
     font-size: newRems(1.75);
-    line-height: newRems(2);
+    line-height: newRems(3);
     color: color(primary);
   }
 
   &__hint {
-    padding-top: newRems(0.5);
     font-size: newRems(1.5);
     line-height: newRems(2);
     color: color(subdark);

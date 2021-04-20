@@ -1,9 +1,9 @@
+import { mapToVoid } from '@bimeister/utilities';
+import { BoundingBox, Browser, ElementHandle, launch, Page, Viewport } from 'puppeteer';
+import { from, Observable } from 'rxjs';
+import { delay, mapTo, switchMap, tap } from 'rxjs/operators';
 import { PuppeteerSetupVariables } from '../../../../../internal/declarations/interfaces/puppeteer-setup-variables.interface';
 import { getPuppeteerSetupVariables } from '../../../../../internal/helpers/get-puppeteer-setup-variables.helper';
-import { BoundingBox, Browser, ElementHandle, launch, Page, Viewport } from 'puppeteer';
-import { from, Observable, of } from 'rxjs';
-import { mapTo, switchMap, tap } from 'rxjs/operators';
-import { mapToVoid } from '@bimeister/utilities';
 
 const {
   timeOutMs: TIME_OUT_MS,
@@ -23,9 +23,9 @@ describe('checkbox.component.ts', () => {
   beforeAll((done: jest.DoneCallback) => {
     from(
       launch({
-        headless: true,
+        headless: false,
         defaultViewport: VIEWPORT,
-        slowMo: SLOW_MO,
+        slowMo: SLOW_MO + 150,
         args: LAUNCH_BROWSER_ARGUMENTS,
         ignoreDefaultArgs: IGNORE_DEFAULT_ARGUMENTS
       })
@@ -66,12 +66,83 @@ describe('checkbox.component.ts', () => {
   );
 
   it(
-    'should display page`s header as switcher',
+    'should display page`s header as checkbox',
     (done: jest.DoneCallback) => {
       from(page.waitForSelector('h1'))
         .pipe(switchMap(() => from(page.evaluate(() => document.querySelector('h1').textContent))))
         .subscribe((result: string) => {
-          expect(result).toEqual('Switcher');
+          expect(result).toEqual('Checkbox');
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should render checkbox component with height and width equal to 16px',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('pupa-checkbox'))
+        .pipe(switchMap((elementHandle: ElementHandle<HTMLElement>) => from(elementHandle.boundingBox())))
+        .subscribe((boundingBox: BoundingBox) => {
+          expect(boundingBox.width).toBe(16);
+          expect(boundingBox.height).toBe(16 + 4);
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should click on checkbox and switch checkbox marker',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('pupa-checkbox'))
+        .pipe(
+          delay(1000),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() =>
+            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_with-marker')))
+          )
+        )
+        .subscribe((isActive: boolean) => {
+          expect(isActive).toBeTruthy();
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should click on label element and switch checkbox marker',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('pupa-tooltip'))
+        .pipe(
+          delay(1000),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() =>
+            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_with-marker')))
+          )
+        )
+        .subscribe((isActive: boolean) => {
+          expect(isActive).toBeFalsy();
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should click on indeterminate option and rerender checkbox marker',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('.indeterminate-props'))
+        .pipe(
+          delay(1000),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() =>
+            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_indeterminate')))
+          )
+        )
+        .subscribe((isActive: boolean) => {
+          expect(isActive).toBeTruthy();
           done();
         });
     },
