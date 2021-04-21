@@ -23,9 +23,9 @@ describe('checkbox.component.ts', () => {
   beforeAll((done: jest.DoneCallback) => {
     from(
       launch({
-        headless: false,
+        headless: true,
         defaultViewport: VIEWPORT,
-        slowMo: SLOW_MO + 150,
+        slowMo: SLOW_MO,
         args: LAUNCH_BROWSER_ARGUMENTS,
         ignoreDefaultArgs: IGNORE_DEFAULT_ARGUMENTS
       })
@@ -79,9 +79,9 @@ describe('checkbox.component.ts', () => {
   );
 
   it(
-    'should render checkbox component with height and width equal to 16px',
+    'should render checkmark component with height and width equal to 16px + 4px and 16px accordingly',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('pupa-checkbox'))
+      from(page.waitForSelector('pupa-checkbox-mark'))
         .pipe(switchMap((elementHandle: ElementHandle<HTMLElement>) => from(elementHandle.boundingBox())))
         .subscribe((boundingBox: BoundingBox) => {
           expect(boundingBox.width).toBe(16);
@@ -95,9 +95,8 @@ describe('checkbox.component.ts', () => {
   it(
     'should click on checkbox and switch checkbox marker',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('pupa-checkbox'))
+      from(page.waitForSelector('pupa-checkbox-mark'))
         .pipe(
-          delay(1000),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() =>
             from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_with-marker')))
@@ -116,7 +115,6 @@ describe('checkbox.component.ts', () => {
     (done: jest.DoneCallback) => {
       from(page.waitForSelector('pupa-tooltip'))
         .pipe(
-          delay(1000),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() =>
             from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_with-marker')))
@@ -133,16 +131,57 @@ describe('checkbox.component.ts', () => {
   it(
     'should click on indeterminate option and rerender checkbox marker',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.indeterminate-props'))
+      from(page.waitForSelector('.indeterminate-props input'))
         .pipe(
-          delay(1000),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          delay(500),
           switchMap(() =>
             from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_indeterminate')))
           )
         )
         .subscribe((isActive: boolean) => {
           expect(isActive).toBeTruthy();
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should click on disabled option and rerender checkbox marker',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('.disabled-props input'))
+        .pipe(
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          delay(500),
+          switchMap(() =>
+            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_disabled')))
+          )
+        )
+        .subscribe((isActive: boolean) => {
+          expect(isActive).toBeTruthy();
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'should click on inversion option and rerender checkbox marker',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('.disabled-props input'))
+        .pipe(
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          delay(500),
+          switchMap(() => page.waitForSelector('.inversion-props input')),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          delay(500),
+          switchMap(() =>
+            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_inversion')))
+          )
+        )
+        .subscribe((isInversion: boolean) => {
+          expect(isInversion).toBeTruthy();
           done();
         });
     },

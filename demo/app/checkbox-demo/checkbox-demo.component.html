@@ -2,44 +2,27 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-checkbox-wrapper>
-      <pupa-checkbox
-        class="checkbox-component"
-        #checkbox
-        [indeterminate]="indeterminate | async"
-        [formControl]="control"
-      >
-      </pupa-checkbox>
-
-      <ng-container *ngIf="isNeedDisplayTooltip(); else content">
-        <pupa-tooltip [closeOnContentClick]="true">
-          <pupa-tooltip-trigger>
-            <div class="content" [class.disabled]="checkbox.disabled$ | async">
-              <div class="content__label">{{ label }}</div>
-              <div class="content__hint">{{ hint }}</div>
-            </div>
-          </pupa-tooltip-trigger>
-          <pupa-tooltip-content>
-            <div class="tooltip-content">
-              <div>{{ label }}</div>
-              <div>{{ hint }}</div>
-            </div>
-          </pupa-tooltip-content>
-        </pupa-tooltip>
-      </ng-container>
-    </pupa-checkbox-wrapper>
+    <pupa-checkbox [indeterminate]="indeterminate | async" [inversion]="inversion | async" [formControl]="control">
+      <pupa-checkbox-mark> </pupa-checkbox-mark>
+      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async" [closeOnContentClick]="true">
+        <pupa-tooltip-trigger>
+          <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
+          <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>
+        </pupa-tooltip-trigger>
+        <pupa-tooltip-content>
+          <div class="tooltip-content">
+            <div>{{ label }}</div>
+            <div>{{ hint }}</div>
+          </div>
+        </pupa-tooltip-content>
+      </pupa-tooltip>
+    </pupa-checkbox>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Other</demo-props-group-label>
     <demo-props-checkbox class="indeterminate-props" #indeterminate>Indeterminate</demo-props-checkbox>
     <demo-props-checkbox class="disabled-props" #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox class="inversion-props" #inversion>Inversion</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
-
-<ng-template #content>
-  <div class="content" [class.disabled]="checkbox.disabled$ | async">
-    <div class="content__label">{{ label }}</div>
-    <div class="content__hint">{{ hint }}</div>
-  </div>
-</ng-template>

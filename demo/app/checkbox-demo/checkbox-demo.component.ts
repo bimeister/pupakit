@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { PropsCheckboxComponent } from '../example-viewer/props-checkbox/props-checkbox.component';
 
 const MAX_LABEL_STRING_LENGTH: number = 21;
@@ -18,6 +18,10 @@ export class CheckboxDemoComponent implements AfterViewInit, OnDestroy {
   public label: string = 'Очень большое название чего-либо';
   public hint: string = 'Очень большое описание чего-либо';
 
+  public readonly isNeedDisableTooltip$: Observable<boolean> = of(
+    MAX_LABEL_STRING_LENGTH > this.label.length || MAX_HINT_STRING_LENGTH > this.hint.length
+  );
+
   @ViewChild('disabled', { static: false }) public readonly disabledCheckBoxComponent: PropsCheckboxComponent;
 
   public ngAfterViewInit(): void {
@@ -26,10 +30,6 @@ export class CheckboxDemoComponent implements AfterViewInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  public isNeedDisplayTooltip(): boolean {
-    return MAX_LABEL_STRING_LENGTH < this.label.length || MAX_HINT_STRING_LENGTH < this.hint.length;
   }
 
   private processControlValueChanges(): Subscription {

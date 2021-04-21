@@ -1,0 +1,88 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+:host {
+  @include flex-container(row, center, flex-start, nowrap);
+}
+
+.checkbox {
+  box-sizing: content-box;
+  @include flex-container(row, center, center, nowrap);
+  width: newRems(1.75);
+  height: newRems(1.75);
+  border: 1px solid color(subdark);
+  background: color(white);
+  cursor: pointer;
+  border-radius: newRems(0.5);
+  overflow: hidden;
+  @include transition(#{background, border});
+  flex-shrink: 0;
+  &_with-marker {
+    background: color(active);
+    border: 1px solid color(active);
+    stroke: color(white);
+  }
+  &_with-label {
+    margin-top: newRems(0.5);
+  }
+  &_disabled {
+    cursor: not-allowed;
+    border: 1px solid color(light-disabled);
+  }
+  &_indeterminate {
+    background: color(white);
+    border: 1px solid color(subdark);
+
+    .checkbox__marker {
+      display: flex;
+      font-size: newRems(1.25);
+      height: newRems(1.25);
+      color: color(active);
+    }
+  }
+  &_inversion {
+    border: 1px solid color(white);
+    background: color(active);
+  }
+}
+
+.checkbox.checkbox_disabled.checkbox_inversion {
+  background: color(white);
+  border: 1px solid color(light-disabled);
+  cursor: not-allowed;
+}
+
+.checkbox_inversion.checkbox_with-marker {
+  background: color(white);
+  stroke: color(active);
+}
+
+.checkbox.checkbox_indeterminate.checkbox_inversion.checkbox_with-marker {
+  background: color(active);
+  .checkbox__marker {
+    color: color(white);
+  }
+}
+
+.checkbox.checkbox_indeterminate.checkbox_disabled.checkbox_with-marker {
+  background: color(white);
+  border: 1px solid color(light-disabled);
+  .checkbox__marker {
+    color: color(light-disabled);
+  }
+}
+
+.checkbox.checkbox_with-marker.checkbox_disabled {
+  background: color(primary-disabled);
+  border: 1px solid color(primary-disabled);
+  stroke: color(white);
+}
+
+.checkbox__marker {
+  display: flex;
+  font-size: newRems(1.125);
+  height: newRems(1.125);
+  user-select: none;
+  color: color(white);
+}
