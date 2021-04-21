@@ -1,0 +1,17 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.checkbox-hint {
+  max-width: newRems(19.75);
+  margin-left: newRems(1);
+  @include ellipsis-text-overflow;
+  font-size: newRems(1.5);
+  line-height: newRems(2);
+  color: color(subdark);
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+}

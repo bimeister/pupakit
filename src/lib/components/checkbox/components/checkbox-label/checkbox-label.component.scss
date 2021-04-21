@@ -1,0 +1,18 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.checkbox-label {
+  max-width: newRems(19.75);
+  @include ellipsis-text-overflow;
+  margin-left: newRems(1);
+  font-size: newRems(1.75);
+  line-height: newRems(3);
+  color: color(main);
+  cursor: pointer;
+}
+
+.disabled {
+  cursor: not-allowed;
+  color: color(primary-disabled);
+}

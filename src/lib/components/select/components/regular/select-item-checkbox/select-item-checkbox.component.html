@@ -1,5 +1,6 @@
 <div class="item" (click)="processClick()">
   <pupa-checkbox [value]="isPicked$ | async" [disabled]="isDisabled$ | async">
+    <pupa-checkbox-mark class="checkmark"></pupa-checkbox-mark>
     <ng-content></ng-content>
   </pupa-checkbox>
 </div>

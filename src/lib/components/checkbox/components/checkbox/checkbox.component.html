@@ -1,11 +1,3 @@
-<div
-  class="checkbox"
-  (click)="changeValue($event)"
-  [ngClass]="resultClassList$ | async"
-  [class.checkbox_indeterminate]="indeterminate$ | async"
->
-  <div class="checkbox__marker">
-    <pupa-icon *ngIf="!(indeterminate$ | async) && value$ | async" name="ios-checkmark"></pupa-icon>
-    <pupa-icon *ngIf="indeterminate$ | async" name="ios-square"></pupa-icon>
-  </div>
+<div class="wrapper" (click)="changeValue()">
+  <ng-content></ng-content>
 </div>

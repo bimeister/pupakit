@@ -2,34 +2,6 @@
 @import 'mixins';
 @import 'functions';
 
-.checkbox-component {
-  padding-top: newRems(0.5);
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  padding: 0 0 0 newRems(1);
-  cursor: pointer;
-
-  & * {
-    max-width: newRems(19.75);
-    @include ellipsis-text-overflow;
-  }
-
-  &__label {
-    font-size: newRems(1.75);
-    line-height: newRems(3);
-    color: color(primary);
-  }
-
-  &__hint {
-    font-size: newRems(1.5);
-    line-height: newRems(2);
-    color: color(subdark);
-  }
-}
-
 .tooltip-content {
   min-width: newRems(20);
   display: flex;
@@ -37,12 +9,4 @@
   font-size: newRems(1.75);
   line-height: newRems(2.25);
   color: color(white);
-}
-
-.disabled {
-  cursor: not-allowed;
-
-  & *:first-child {
-    color: color(primary-disabled);
-  }
 }
