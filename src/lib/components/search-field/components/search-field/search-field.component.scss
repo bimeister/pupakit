@@ -33,7 +33,7 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
     width: rems(16);
   }
 
-  &:not(.search-field_expandable).search-field_empty:hover {
+  &:not(.search-field_expandable):not(.search-field_disabled).search-field_empty:hover {
     .search-field__switcher {
       color: color(active);
     }
@@ -62,7 +62,7 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
   }
 }
 
-.search-field.search-field_outlined {
+.search-field:not(.search-field_disabled).search-field_outlined {
   .search-field__switcher {
     border: 1px solid transparent;
 
@@ -97,14 +97,16 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
   @include transition(color);
   @include flex-container(column, center, center, nowrap);
 
-  &:hover {
-    color: color(active);
-  }
-
   .search-field__switcher-icon {
     box-sizing: content-box;
     padding: 0 calc((#{$width_switcher} - #{variable(font-size_base-text)}) / 3);
     background: color(light);
+  }
+}
+
+.search-field:not(.search-field_disabled) {
+  .search-field__switcher:hover {
+    color: color(active);
   }
 }
 
@@ -128,5 +130,22 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
     color: color(grey-light);
     user-select: none;
     @include transition(color);
+  }
+}
+
+.search-field_disabled {
+  .search-field__switcher {
+    cursor: default;
+    background: color(grey-apple);
+    .search-field__switcher-icon {
+      background: inherit;
+      color: color(grey-light);
+    }
+  }
+  .search-field__control {
+    background: color(grey-apple);
+  }
+  .search-field__control::placeholder {
+    color: color(grey-light);
   }
 }

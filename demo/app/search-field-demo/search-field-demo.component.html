@@ -9,12 +9,19 @@
             <div class="header-placeholder-content"></div>
           </div>
 
-          <pupa-search-field placeholder="Поиск" [expandable]="true" [kind]="kind | async"></pupa-search-field>
+          <pupa-search-field
+            placeholder="Поиск"
+            [expandable]="true"
+            [disabled]="disabled | async"
+            [kind]="kind | async"
+          >
+          </pupa-search-field>
         </div>
       </ng-container>
 
       <ng-container *ngSwitchCase="false">
-        <pupa-search-field placeholder="Поиск" [expandable]="false" [kind]="kind | async"></pupa-search-field>
+        <pupa-search-field placeholder="Поиск" [expandable]="false" [disabled]="disabled | async" [kind]="kind | async">
+        </pupa-search-field>
       </ng-container>
     </ng-container>
   </demo-example-viewer-content>
@@ -25,5 +32,6 @@
 
     <demo-props-group-label>Other</demo-props-group-label>
     <demo-props-checkbox #expandable>Expandable</demo-props-checkbox>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
