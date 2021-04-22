@@ -111,6 +111,10 @@ export class TreeManipulator {
     this.scrollByRoute$.next(route);
   }
 
+  public resetExpandedSet(): void {
+    this.expandedItemIds$.next(new Set());
+  }
+
   public toggleExpansion(node: FlatTreeItem): void {
     const nodeId: string = node?.id;
     if (isNil(nodeId)) {
