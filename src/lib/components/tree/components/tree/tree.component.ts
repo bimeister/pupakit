@@ -284,6 +284,10 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.manipulator.toggleExpansion(node);
   }
 
+  public resetExpandedSet(): void {
+    this.manipulator.resetExpandedSet();
+  }
+
   public expand(...nodes: FlatTreeItem[]): void {
     const expandableNodes: FlatTreeItem[] = nodes.filter((node: FlatTreeItem) => node.isExpandable && !node.isElement);
 
