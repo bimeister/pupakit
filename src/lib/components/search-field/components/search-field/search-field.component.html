@@ -4,11 +4,13 @@
   [class.search-field_expanded]="(controlExpansionState$ | async) === 'true'"
   [class.search-field_empty]="isValueEmpty"
   [class.search-field_outlined]="kind === 'outlined'"
+  [class.search-field_disabled]="disabled$ | async"
 >
   <button class="search-field__switcher" (click)="switchState($event)">
     <pupa-icon class="search-field__switcher-icon" [name]="buttonIconName"></pupa-icon>
   </button>
   <input
+    [disabled]="disabled$ | async"
     [@.disabled]="!expandable"
     [@controlExpanded]="expandable ? (controlExpansionState$ | async) : 'true'"
     [placeholder]="placeholder"
