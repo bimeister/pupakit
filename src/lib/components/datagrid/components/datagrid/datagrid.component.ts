@@ -14,6 +14,7 @@ import { AgGridAngular } from 'ag-grid-angular';
 import {
   BodyScrollEvent,
   ColDef,
+  ColumnApi,
   GetRowNodeIdFunc,
   GridApi,
   GridOptions,
@@ -21,10 +22,11 @@ import {
   IDatasource,
   IGetRowsParams
 } from 'ag-grid-community';
+
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridThemes } from '../../../../../internal/declarations/enums/datagrid-themes.enum';
 
-export { ColDef, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
+export { ColDef, ColumnApi, GridApi, GridOptions, GridReadyEvent, IDatasource, IGetRowsParams, GetRowNodeIdFunc };
 
 @Component({
   selector: 'pupa-datagrid',
