@@ -339,7 +339,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     const dragDistanceSqr: number =
       Math.pow(this.mouseDownPosition.left - screenX, 2) + Math.pow(this.mouseDownPosition.top - screenY, 2);
 
-    const druggingMustBeStarted: boolean = dragDistanceSqr > this.draggableElementBoundingBox.height / 2;
+    const druggingMustBeStarted: boolean = dragDistanceSqr > this.draggableElementBoundingBox?.height / 2;
     if (!this.draggingHasStarted && druggingMustBeStarted) {
       this.startDragging();
       this.draggingHasStarted = true;
@@ -414,12 +414,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private setupDraggableExpandableDescendands(): void {
     this.manipulator.rawData$.pipe(take(1)).subscribe((treeItems: FlatTreeItem[]) => {
-      const targetLevel: number = this.draggableNode.level;
+      const targetLevel: number = this.draggableNode?.level ?? 0;
 
-      let currentIndex: number = treeItems.findIndex(dataPoint => dataPoint.id === this.draggableNode.id) + 1;
+      let currentIndex: number = treeItems.findIndex(dataPoint => dataPoint.id === this.draggableNode?.id) + 1;
       const endOfListNotReached = (): boolean => treeItems.length !== currentIndex;
       const targetLevelNotReached = (): boolean => treeItems[currentIndex].level !== targetLevel;
-      const result: Uuid[] = [this.draggableNode.id];
+      const result: Uuid[] = [this.draggableNode?.id];
 
       while (endOfListNotReached() && targetLevelNotReached()) {
         const currentNode: FlatTreeItem = treeItems[currentIndex];
