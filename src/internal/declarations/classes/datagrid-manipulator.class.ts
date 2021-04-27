@@ -2,6 +2,7 @@ import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { AgGridEvent, ColDef, ColumnApi, GridApi, GridReadyEvent, IDatasource } from 'ag-grid-community';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscriber } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+
 import { GridState } from '../interfaces/grid-state.interface';
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
 
@@ -104,6 +105,13 @@ export class DatagridManipulator<rowDataT> {
         unsubscribe: () => this.removeEventListener(eventType, listener)
       };
     });
+  }
+
+  public setColumnsVisibility(colIds: string[], visible: boolean): void {
+    this.columnApi$
+      .pipe(filterNotNil())
+      .pipe(take(1))
+      .subscribe((columnApi: ColumnApi) => columnApi.setColumnsVisible(colIds, visible));
   }
 
   private addEventListener(eventType: string, listener: Function): void {
