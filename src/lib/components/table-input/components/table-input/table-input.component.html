@@ -20,7 +20,7 @@
 <ng-template #errorTemplate>
   <pupa-icon
     class="table-input-container__icon-error"
-    *ngIf="!(isDisabled$ | async)"
+    *ngIf="!(isDisabled$ | async) && (isTouched$ | async)"
     [name]="errorIconName$ | async"
     [title]="errorTitle$ | async"
   ></pupa-icon>
