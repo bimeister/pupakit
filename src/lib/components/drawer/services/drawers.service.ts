@@ -1,12 +1,13 @@
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
-import { Injectable, Injector } from '@angular/core';
+import { Injectable, Injector, RendererFactory2 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { DrawerRef } from '../../../../internal/declarations/classes/drawer-ref.class';
 import { Drawer } from '../../../../internal/declarations/classes/drawer.class';
 import { DrawerConfigDto } from '../../../../internal/declarations/classes/dto/drawer-config.dto';
 import { DrawerConfig } from '../../../../internal/declarations/interfaces/drawer-config.interface';
 import { OpenedDrawer } from '../../../../internal/declarations/interfaces/opened-drawer.interface';
+import { PortalLayersService } from '../../../../internal/shared/services/portal-layers.service';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,12 @@ export class DrawersService {
     return this.drawerRefs.size;
   }
 
-  constructor(protected readonly overlay: Overlay, protected readonly injector: Injector) {}
+  constructor(
+    protected readonly overlay: Overlay,
+    protected readonly injector: Injector,
+    private readonly rendererFactory: RendererFactory2,
+    private readonly portalLayersService: PortalLayersService
+  ) {}
 
   public open<ComponentT, ReturnDataT = null>(
     component: ComponentType<ComponentT>,
@@ -26,15 +32,26 @@ export class DrawersService {
   ): OpenedDrawer<ReturnDataT> {
     const configDto: DrawerConfigDto = new DrawerConfigDto(config);
 
-    const drawer: Drawer<ComponentT> = new Drawer(component, configDto, this.overlay, this.injector);
+    const drawer: Drawer<ComponentT> = new Drawer(
+      component,
+      configDto,
+      this.overlay,
+      this.injector,
+      this.rendererFactory
+    );
+    this.portalLayersService.register(drawer);
+    this.portalLayersService.moveToTopById(drawer.id);
+
     const drawerRef: DrawerRef<ReturnDataT> = drawer.open();
+    this.drawerRefs.set(drawer.id, drawerRef);
 
-    this.drawerRefs.set(drawer.getId(), drawerRef);
-
-    drawerRef.closed$.subscribe(() => this.drawerRefs.delete(drawer.getId()));
+    drawerRef.closed$.subscribe(() => {
+      this.portalLayersService.removeById(drawer.id);
+      this.drawerRefs.delete(drawer.id);
+    });
 
     return {
-      id: drawer.getId(),
+      id: drawer.id,
       closed$: drawerRef.closed$
     };
   }
