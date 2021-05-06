@@ -40,7 +40,7 @@
   }
   &.alerts {
     /* @deprecated */
-    z-index: 1010;
+    z-index: 10000;
     & .alerts-wrapper {
       display: flex;
       position: absolute;
@@ -58,6 +58,6 @@
   &.tooltip {
     pointer-events: none;
     /* @deprecated */
-    z-index: 1020;
+    z-index: 10010;
   }
 }
