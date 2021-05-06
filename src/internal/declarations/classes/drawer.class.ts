@@ -1,15 +1,17 @@
 import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
-import { Injector } from '@angular/core';
+import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
 import { DrawerContainerComponent } from '../../../lib/components/drawer/components/drawer-container/drawer-container.component';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
 import { DrawerConfig } from '../interfaces/drawer-config.interface';
 import { DrawerContainerData } from '../interfaces/drawer-container-data.interface';
 import { DrawerRef } from './drawer-ref.class';
+import { PortalLayer } from '../interfaces/portal-layer.interface';
 
-export class Drawer<ComponentT> {
-  private readonly id: string;
+export class Drawer<ComponentT> implements PortalLayer {
+  public readonly id: string;
+  private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
 
   private readonly overlayRef: OverlayRef = this.overlay.create({
     positionStrategy: this.getPositionStrategy(),
@@ -18,12 +20,14 @@ export class Drawer<ComponentT> {
   });
 
   private readonly drawerRef: DrawerRef = new DrawerRef(this.overlayRef);
+  private currentZIndex: number = 0;
 
   constructor(
     private readonly component: ComponentType<ComponentT>,
     private readonly config: DrawerConfig,
     private readonly overlay: Overlay,
-    private readonly injector: Injector
+    private readonly injector: Injector,
+    private readonly rendererFactory: RendererFactory2
   ) {
     this.id = getUuid();
     this.handleBackdropClick();
@@ -34,8 +38,16 @@ export class Drawer<ComponentT> {
     return this.drawerRef;
   }
 
-  public getId(): string {
-    return this.id;
+  public getCurrentZIndex(): number {
+    return this.currentZIndex;
+  }
+
+  public moveToZIndex(zIndex: number): void {
+    if (isNil(this.overlayRef.hostElement)) {
+      return;
+    }
+    this.currentZIndex = zIndex;
+    this.renderer.setStyle(this.overlayRef.hostElement, 'z-index', zIndex);
   }
 
   private getComponentPortal(): ComponentPortal<DrawerContainerComponent<unknown>> {
