@@ -30,6 +30,17 @@ export abstract class TabsStateProducerService implements OnDestroy {
 
   public processTabClick(value: unknown): void {
     this.isTabWasClicked$.next(true);
+    this.changeActiveTabValueSetByValue(value);
+  }
+
+  public addToActiveTabValueSet(value: unknown): void {
+    this.activeTabValueSet$.pipe(take(1)).subscribe((activeTabValueSet: Set<unknown>) => {
+      activeTabValueSet.add(value);
+      this.activeTabValueSet$.next(activeTabValueSet);
+    });
+  }
+
+  public changeActiveTabValueSetByValue(value: unknown): void {
     this.isMultiSelectionEnabled$
       .pipe(take(1), withLatestFrom(this.activeTabValueSet$))
       .subscribe(([isMultiSelectionEnabled, activeTabValueSet]: [boolean, Set<unknown>]) => {
@@ -48,13 +59,6 @@ export abstract class TabsStateProducerService implements OnDestroy {
         activeTabValueSet.add(value);
         this.activeTabValueSet$.next(activeTabValueSet);
       });
-  }
-
-  public addToActiveTabValueSet(value: unknown): void {
-    this.activeTabValueSet$.pipe(take(1)).subscribe((activeTabValueSet: Set<unknown>) => {
-      activeTabValueSet.add(value);
-      this.activeTabValueSet$.next(activeTabValueSet);
-    });
   }
 
   private processEmitActiveTabValues(): Subscription {
