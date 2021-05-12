@@ -16,6 +16,7 @@
     <demo-props-group-label>Other</demo-props-group-label>
     <demo-props-checkbox #hasCustomHoverIcon>Custom hover icon</demo-props-checkbox>
     <demo-props-checkbox #hasCustomErrorIcon>Custom error icon</demo-props-checkbox>
+    <demo-props-checkbox #touched (change)="markAsTouched(formControl.touched)">Touched</demo-props-checkbox>
     <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
     <demo-props-form-control-validators [control]="formControl" [validators]="validators">
     </demo-props-form-control-validators>
