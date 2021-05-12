@@ -15,7 +15,7 @@ export class TableInputStateService<T> {
   public readonly isDisabled$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
 
-  private readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
+  public readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
       isNil(control)
@@ -56,6 +56,10 @@ export class TableInputStateService<T> {
 
   public setControlRef(control: NgControl): void {
     this.control$.next(control);
+  }
+
+  public setIsTouched(isTouched: boolean): void {
+    this.isTouched$.next(isTouched);
   }
 
   public updateValue(updatedValue: T): void {

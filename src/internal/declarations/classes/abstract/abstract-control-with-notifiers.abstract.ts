@@ -1,7 +1,6 @@
 import { Directive } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
-import { take } from 'rxjs/operators';
 import { AbstractControlMethodsKey } from '../../enums/abstract-control-methods-key.enum';
 
 @Directive()
@@ -19,18 +18,6 @@ export abstract class AbstractControlWithNotifier {
     Object.keys(AbstractControlMethodsKey).forEach((key: string) => {
       const originFunc: VoidFunction = control[key];
       control[key] = this.emitChangesAndCallOriginalFunction.bind(this, control, originFunc, key);
-    });
-
-    control.valueChanges.pipe(take(1)).subscribe(() => {
-      if (control.touched) {
-        this.propertyChanges$.next(AbstractControlMethodsKey.markAsTouched);
-      }
-      if (control.dirty) {
-        this.propertyChanges$.next(AbstractControlMethodsKey.markAsDirty);
-      }
-      if (control.pending) {
-        this.propertyChanges$.next(AbstractControlMethodsKey.markAsPending);
-      }
     });
   }
 

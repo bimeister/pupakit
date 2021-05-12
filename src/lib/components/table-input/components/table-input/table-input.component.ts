@@ -4,14 +4,16 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
+  OnInit,
   Optional,
   Output,
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities';
+import { filterNotNil, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, startWith, switchMap } from 'rxjs/operators';
 import { AbstractControlWithNotifier } from '../../../../../internal/declarations/classes/abstract/abstract-control-with-notifiers.abstract';
 import { AbstractControlMethodsKey } from '../../../../../internal/declarations/enums/abstract-control-methods-key.enum';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -28,7 +30,9 @@ import { TableInputStateService } from '../../services/table-input-state.service
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TableInputComponent<T> extends AbstractControlWithNotifier implements OnChanges, ControlValueAccessor {
+export class TableInputComponent<T>
+  extends AbstractControlWithNotifier
+  implements OnChanges, OnInit, OnDestroy, ControlValueAccessor {
   @Input() public readonly placeholder: string = '';
 
   @Input() public readonly errorTitle: string = '';
@@ -57,7 +61,11 @@ export class TableInputComponent<T> extends AbstractControlWithNotifier implemen
     }
     ngControl.valueAccessor = this;
     this.tableInputStateService.setControlRef(ngControl);
-    this.subscription.add(this.setTouched());
+  }
+
+  public ngOnInit(): void {
+    this.subscription.add(this.setIsTouchedOnStatusChanges());
+    this.subscription.add(this.setIsTouchedOnMethodsCall());
   }
 
   public ngOnDestroy(): void {
@@ -85,19 +93,6 @@ export class TableInputComponent<T> extends AbstractControlWithNotifier implemen
     this.tableInputStateService.defineOnChangeCallback(onChange);
   }
 
-  public setTouched(): Subscription {
-    const touchedMethodKeyList: AbstractControlMethodsKey[] = [
-      AbstractControlMethodsKey.markAsTouched,
-      AbstractControlMethodsKey.markAsUntouched
-    ];
-    return this.propertyChanges$
-      .pipe(
-        filter((key: AbstractControlMethodsKey) => touchedMethodKeyList.includes(key)),
-        map((key: AbstractControlMethodsKey) => key === AbstractControlMethodsKey.markAsTouched)
-      )
-      .subscribe((touched: boolean) => this.tableInputStateService.isTouched$.next(touched));
-  }
-
   public registerOnTouched(onTouched: OnTouchedCallback): void {
     this.tableInputStateService.defineOnTouchedCallback(onTouched);
   }
@@ -112,6 +107,35 @@ export class TableInputComponent<T> extends AbstractControlWithNotifier implemen
 
   public emitBlurEvent(blurEvent: FocusEvent): void {
     this.blur.emit(blurEvent);
+  }
+
+  private setIsTouchedOnMethodsCall(): Subscription {
+    const touchedMethodKeyList: AbstractControlMethodsKey[] = [
+      AbstractControlMethodsKey.markAsTouched,
+      AbstractControlMethodsKey.markAsUntouched
+    ];
+    return this.propertyChanges$
+      .pipe(
+        filter((key: AbstractControlMethodsKey) => touchedMethodKeyList.includes(key)),
+        map((key: AbstractControlMethodsKey) => key === AbstractControlMethodsKey.markAsTouched)
+      )
+      .subscribe((isTouched: boolean) => {
+        this.tableInputStateService.setIsTouched(isTouched);
+      });
+  }
+
+  private setIsTouchedOnStatusChanges(): Subscription {
+    return this.tableInputStateService.control$
+      .pipe(
+        filterNotNil(),
+        switchMap((control: NgControl) =>
+          control.statusChanges.pipe(
+            startWith(control.touched),
+            map(() => control.touched)
+          )
+        )
+      )
+      .subscribe((isTouched: boolean) => this.tableInputStateService.setIsTouched(isTouched));
   }
 
   private processErrorTitleChange(change: ComponentChange<this, string>): void {

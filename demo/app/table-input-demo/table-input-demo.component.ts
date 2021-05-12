@@ -9,5 +9,13 @@ import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 })
 export class TableInputDemoComponent {
   public readonly formControl: FormControl = new FormControl();
-  public readonly validators: ValidatorFn[] = [Validators.maxLength(2)];
+  public readonly validators: ValidatorFn[] = [Validators.required];
+
+  public markAsTouched(isTouched: boolean): void {
+    if (isTouched) {
+      this.formControl.markAsUntouched();
+      return;
+    }
+    this.formControl.markAsTouched();
+  }
 }
