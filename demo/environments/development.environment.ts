@@ -1,4 +1,4 @@
-import 'zone.js/dist/zone-error';
+import 'zone.js/plugins/zone-error';
 
 import { Environment } from 'demo/declarations';
 
