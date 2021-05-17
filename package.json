@@ -90,6 +90,7 @@
     "zlib": false,
     "path": false,
     "child_process": false,
-    "fancy-log": false
+    "fancy-log": false,
+    "console": false
   }
 }
