@@ -18,7 +18,6 @@
                 }
               ],
               "buildOptimizer": true,
-              "extractLicenses": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -26,9 +25,7 @@
                 }
               ],
               "namedChunks": false,
-              "optimization": false,
               "outputHashing": "none",
-              "sourceMap": true,
               "vendorChunk": false
             },
             "production": {
@@ -78,7 +75,14 @@
               "includePaths": ["src/styles/"]
             },
             "styles": ["demo/styles/styles.scss"],
-            "tsConfig": "./tsconfig.app.json"
+            "tsConfig": "./tsconfig.app.json",
+            "aot": false,
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           }
         },
         "lint": {
