@@ -40,11 +40,11 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   private readonly viewportSize$: BehaviorSubject<ClientRect> = this.pagedVirtualScrollStateService.viewportSize$;
 
-  private readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> =
-    this.pagedVirtualScrollStateService.pagedVirtualScrollArgumentsToOutput$;
+  private readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = this
+    .pagedVirtualScrollStateService.pagedVirtualScrollArgumentsToOutput$;
 
-  public readonly firstSliceCount$: BehaviorSubject<Nullable<number>> =
-    this.pagedVirtualScrollStateService.firstSliceCount$;
+  public readonly firstSliceCount$: BehaviorSubject<Nullable<number>> = this.pagedVirtualScrollStateService
+    .firstSliceCount$;
 
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
   @ViewChild('cdkViewport', { static: false }) private readonly viewport: VirtualScrollViewportComponent;

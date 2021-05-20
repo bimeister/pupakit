@@ -70,8 +70,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     };
 
     it('should return right intersection if current range intersected right', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(previousRange, currentRangeThatIntersectedRight);
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIntersectedRight
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedRight.start,
@@ -90,8 +92,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return left intersection if current range intersected left', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(previousRange, currentRangeThatIntersectedLeft);
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIntersectedLeft
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedLeft.start,
@@ -110,11 +114,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return right bound intersection if current range intersected right bound', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeThatIntersectedRightBound
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIntersectedRightBound
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedRightBound.start,
@@ -133,11 +136,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return left bound intersection if current range intersected left bound', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeThatIntersectedLeftBound
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIntersectedLeftBound
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedLeftBound.start,
@@ -156,11 +158,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return right range if current range not intersected previous on the right side', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeNotIntersectedPreviousRight
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeNotIntersectedPreviousRight
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeNotIntersectedPreviousRight.start,
@@ -179,11 +180,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return left range if current range not intersected previous on the left side', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeNotIntersectedPreviousLeft
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeNotIntersectedPreviousLeft
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeNotIntersectedPreviousLeft.start,
@@ -202,11 +202,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return right intersection (getFrom, getTo) if it is includes previous with equal start points, not remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeThatIncludingPreviousWithEqualLeftBound
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIncludingPreviousWithEqualLeftBound
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIncludingPreviousWithEqualLeftBound.start,
@@ -225,11 +224,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return left intersection (getFrom, getTo) if it is includes previous with equal end points, not remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeThatIncludingPreviousWithEqualRightBound
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIncludingPreviousWithEqualRightBound
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIncludingPreviousWithEqualRightBound.start,
@@ -248,8 +246,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return current range for get items if previous range is null, not remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(null, currentRangeThatIntersectedRight);
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        null,
+        currentRangeThatIntersectedRight
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedRight.start,
@@ -269,11 +269,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
     // tslint:disable-next-line: max-line-length
     it('should return current range for get items if some previous range arguments is null, not remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          { start: null, end: 5 },
-          currentRangeThatIntersectedRight
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        { start: null, end: 5 },
+        currentRangeThatIntersectedRight
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedRight.start,
@@ -293,11 +292,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
     // tslint:disable-next-line: max-line-length
     it('should return current range for get items if every previous range arguments is null, not remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          { start: null, end: null },
-          currentRangeThatIntersectedRight
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        { start: null, end: null },
+        currentRangeThatIntersectedRight
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatIntersectedRight.start,
@@ -316,11 +314,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return current range if current range includes in previous, not get and remove anything', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
-          previousRange,
-          currentRangeThatIncludedInPrevious
-        );
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatIncludedInPrevious
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: previousRange.start,
@@ -339,8 +336,10 @@ describe('list-ranges-intersection-producer.class.ts', () => {
     });
 
     it('should return current range (getFrom, getTo) if current range contains previous', () => {
-      const paginationArguments: PagedVirtualScrollArguments =
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(previousRange, currentRangeThatContainsPrevious);
+      const paginationArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+        previousRange,
+        currentRangeThatContainsPrevious
+      );
 
       const expectedResult: PagedVirtualScrollArguments = {
         currentFrom: currentRangeThatContainsPrevious.start,

@@ -70,8 +70,9 @@ export class InputTimeSecondsComponent extends InputDateTimeBase {
       return;
     }
 
-    const { hours, minutes, seconds }: ParsedTimeData =
-      this.inputDateTimeStateService.getParsedTimeData(serializedValue);
+    const { hours, minutes, seconds }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(
+      serializedValue
+    );
     const parsedHours: number = Number(hours);
     const parsedMinutes: number = Number(minutes);
     const parsedSeconds: number = Number(seconds);

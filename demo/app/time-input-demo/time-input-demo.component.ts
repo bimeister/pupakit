@@ -53,7 +53,9 @@ export class TimeInputDemoComponent {
   private timeValidator(
     hoursRange: TimeRange,
     minuteRange: TimeRange
-  ): (ctrl: AbstractControl) => {
+  ): (
+    ctrl: AbstractControl
+  ) => {
     timeValidation: boolean;
   } {
     return (ctrl: AbstractControl) => {
