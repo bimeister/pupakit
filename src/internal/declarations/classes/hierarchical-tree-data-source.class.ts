@@ -54,15 +54,13 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       shareReplayWithRefCount()
     );
 
-    const elementsByParentId$: Observable<
-      Map<string, TreeItem[]>
-    > = HierarchicalTreeDataSource.getElementsByParentIdMap(elementsCopy$);
+    const elementsByParentId$: Observable<Map<string, TreeItem[]>> =
+      HierarchicalTreeDataSource.getElementsByParentIdMap(elementsCopy$);
 
     const rootElements$: Observable<TreeItem[]> = HierarchicalTreeDataSource.getRootElements(elementsByParentId$);
 
-    const nodesWithElementsByParentId$: Observable<
-      Map<string, NodeWithElements[]>
-    > = HierarchicalTreeDataSource.getNodesWithElementsByParentIdMap(nodesCopy$, elementsByParentId$);
+    const nodesWithElementsByParentId$: Observable<Map<string, NodeWithElements[]>> =
+      HierarchicalTreeDataSource.getNodesWithElementsByParentIdMap(nodesCopy$, elementsByParentId$);
 
     const treeRoot$: Observable<TreeRoot> = HierarchicalTreeDataSource.getTreeRoot(
       nodesWithElementsByParentId$,
@@ -79,9 +77,8 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       switchMap(() => treeRoot$),
       switchMap((treeRoot: TreeRoot) => {
         const { nodes, elements }: TreeRoot = treeRoot;
-        const flatTreeElements$: Observable<FlatTreeItem[]> = HierarchicalTreeDataSource.childElementsToFlatTreeItems(
-          elements
-        );
+        const flatTreeElements$: Observable<FlatTreeItem[]> =
+          HierarchicalTreeDataSource.childElementsToFlatTreeItems(elements);
         const groupedTreeNodesWithElements$: Observable<FlatTreeItem[][]> = isEmpty(nodes)
           ? of([])
           : forkJoin(
@@ -161,22 +158,20 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       observeOn(asyncScheduler),
       subscribeOn(asyncScheduler),
       map(() => {
-        return nodesWithElements.map(
-          (node: NodeWithElements | NodeWithChildren): NodeWithChildren => {
-            const childNodes: NodeWithElements[] = HierarchicalTreeDataSource.isNodeWithChildNodes(node)
-              ? node.childNodes
-              : [];
-            const childElements: TreeItem[] = HierarchicalTreeDataSource.isNodeWithChildElements(node)
-              ? node.childElements
-              : [];
+        return nodesWithElements.map((node: NodeWithElements | NodeWithChildren): NodeWithChildren => {
+          const childNodes: NodeWithElements[] = HierarchicalTreeDataSource.isNodeWithChildNodes(node)
+            ? node.childNodes
+            : [];
+          const childElements: TreeItem[] = HierarchicalTreeDataSource.isNodeWithChildElements(node)
+            ? node.childElements
+            : [];
 
-            return {
-              ...node,
-              childElements,
-              childNodes
-            };
-          }
-        );
+          return {
+            ...node,
+            childElements,
+            childNodes
+          };
+        });
       })
     );
   }
@@ -302,10 +297,9 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
           nodeWithChildren.childElements,
           currentLevel
         );
-        const groupedChildNodes$: Observable<
-          FlatTreeItem[]
-        >[] = nodeWithChildren.childNodes.map((childNode: NodeWithChildren) =>
-          HierarchicalTreeDataSource.nodeWithChildrenToFlatTreeItems(childNode, currentLevel)
+        const groupedChildNodes$: Observable<FlatTreeItem[]>[] = nodeWithChildren.childNodes.map(
+          (childNode: NodeWithChildren) =>
+            HierarchicalTreeDataSource.nodeWithChildrenToFlatTreeItems(childNode, currentLevel)
         );
         const childNodes$: Observable<FlatTreeItem[]> = isEmpty(groupedChildNodes$)
           ? of([])

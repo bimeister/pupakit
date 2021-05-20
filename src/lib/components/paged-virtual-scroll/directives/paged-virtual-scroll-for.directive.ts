@@ -152,14 +152,14 @@ export class PupaVirtualScrollForDirective<T>
   /** The currently rendered items. */
   private readonly renderedItems$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
 
-  private readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> = this.pagedVirtualScrollStateService
-    .viewport$;
-  private readonly calculatedCacheSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService
-    .calculatedCacheSize$;
+  private readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> =
+    this.pagedVirtualScrollStateService.viewport$;
+  private readonly calculatedCacheSize$: BehaviorSubject<number> =
+    this.pagedVirtualScrollStateService.calculatedCacheSize$;
 
   private readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
-  private readonly countItemsInViewport$: BehaviorSubject<number> = this.pagedVirtualScrollStateService
-    .countItemsInViewport$;
+  private readonly countItemsInViewport$: BehaviorSubject<number> =
+    this.pagedVirtualScrollStateService.countItemsInViewport$;
 
   /** The currently rendered range of indices. */
   private _renderedRange: ListRange;
@@ -235,9 +235,8 @@ export class PupaVirtualScrollForDirective<T>
 
     // Find the first node by starting from the beginning and going forwards.
     for (let i: number = 0; i < rangeLen; i++) {
-      const view: EmbeddedViewRef<
-        PupaVirtualScrollForOfContext<T>
-      > | null = this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
+      const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> | null =
+        this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
       if (view && view.rootNodes.length) {
         firstNode = lastNode = view.rootNodes[0];
         break;
@@ -246,9 +245,8 @@ export class PupaVirtualScrollForDirective<T>
 
     // Find the last node by starting from the end and going backwards.
     for (let i: number = rangeLen - 1; i > -1; i--) {
-      const view: EmbeddedViewRef<
-        PupaVirtualScrollForOfContext<T>
-      > | null = this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
+      const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> | null =
+        this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
       if (view && view.rootNodes.length) {
         lastNode = view.rootNodes[view.rootNodes.length - 1];
         break;
@@ -327,9 +325,8 @@ export class PupaVirtualScrollForDirective<T>
       Array(viewContainerLength)
         .fill(undefined)
         .forEach((_item: undefined, indexInViewContainer: number) => {
-          const view: EmbeddedViewRef<
-            PupaVirtualScrollForOfContext<T>
-          > = this.getViewFromViewContainerAsEmbeddedViewRef(indexInViewContainer);
+          const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> =
+            this.getViewFromViewContainerAsEmbeddedViewRef(indexInViewContainer);
           view.context.index = this._renderedRange.start + indexInViewContainer;
           view.context.count = count;
           this.updateComputedContextProperties(view.context);
@@ -360,9 +357,8 @@ export class PupaVirtualScrollForDirective<T>
 
         // Update $implicit for any items that had an identity change.
         changes.forEachIdentityChange((record: IterableChangeRecord<T>) => {
-          const view: EmbeddedViewRef<
-            PupaVirtualScrollForOfContext<T>
-          > | null = this.getViewFromViewContainerAsEmbeddedViewRef(record.currentIndex);
+          const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> | null =
+            this.getViewFromViewContainerAsEmbeddedViewRef(record.currentIndex);
           view.context.$implicit = record.item;
         });
 

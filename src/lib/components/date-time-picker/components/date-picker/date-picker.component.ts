@@ -35,8 +35,8 @@ export class DatePickerComponent implements OnDestroy {
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
 
   @Input() public selectionMode: DatePickerSelectionMode = 'range';
-  private readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> = this.datePickerStateService
-    .selectionMode$;
+  private readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> =
+    this.datePickerStateService.selectionMode$;
 
   @Input() public readonly selectedDate: Date;
   public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
