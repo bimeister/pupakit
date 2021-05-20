@@ -3,8 +3,7 @@ FROM "$BUILD_IMAGE"
 ARG TAG
 ARG GIT_COMMIT_HASH
 ARG NPM_AUTH_TOKEN
-COPY . .
-RUN ls node_modules/@bimeister/utilities -a && yarn run build-cli prepare-npmrc \
+RUN yarn run build-cli prepare-npmrc \
       --npmrc_path="./.npmrc" \
       --auth_token="${NPM_AUTH_TOKEN}" \
       --org_email="info@bimeister.com" \

@@ -1,4 +1,4 @@
-import { isNil } from '@bimeister/utilities';
+import { isNil } from '@bimeister/utilities/commonjs';
 import { info } from 'fancy-log';
 import { readFile, writeFile } from 'fs';
 import { TaskFunction } from 'gulp';
