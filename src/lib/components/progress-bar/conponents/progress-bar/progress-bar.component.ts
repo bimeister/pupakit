@@ -49,21 +49,23 @@ export class ProgressBarComponent implements OnChanges, AfterViewInit, OnDestroy
     this.strokeWidthPx$,
     this.percentage$
   ]).pipe(
-    map(([sizePx, strokeWidthPx, percentage]: [number, number, number]): CalculatedParameters => {
-      const radius: number = sizePx / 2;
-      const innerRadius: number = radius - strokeWidthPx / 2;
-      const strokeDashArray: number = innerRadius * Math.PI * 2;
+    map(
+      ([sizePx, strokeWidthPx, percentage]: [number, number, number]): CalculatedParameters => {
+        const radius: number = sizePx / 2;
+        const innerRadius: number = radius - strokeWidthPx / 2;
+        const strokeDashArray: number = innerRadius * Math.PI * 2;
 
-      const normalizedPercentage: number = percentage / 100;
-      const strokeDashOffset: number = strokeDashArray * (1 - normalizedPercentage);
+        const normalizedPercentage: number = percentage / 100;
+        const strokeDashOffset: number = strokeDashArray * (1 - normalizedPercentage);
 
-      return {
-        radius,
-        innerRadius,
-        strokeDashArray,
-        strokeDashOffset
-      };
-    })
+        return {
+          radius,
+          innerRadius,
+          strokeDashArray,
+          strokeDashOffset
+        };
+      }
+    )
   );
 
   private readonly subscription: Subscription = new Subscription();

@@ -22,8 +22,9 @@ const REACT_ON_RANGE_CHANGES_DELAY_MS: number = 500;
 
 @Injectable({ providedIn: 'any' })
 export class PagedVirtualScrollStateService implements OnDestroy {
-  public readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> =
-    new BehaviorSubject<VirtualScrollViewportComponent>(null);
+  public readonly viewport$: BehaviorSubject<VirtualScrollViewportComponent> = new BehaviorSubject<VirtualScrollViewportComponent>(
+    null
+  );
 
   public readonly viewportSize$: BehaviorSubject<ClientRect> = new BehaviorSubject<ClientRect>(null);
   public readonly viewportSquare$: Observable<number> = this.viewportSize$.pipe(
@@ -43,17 +44,15 @@ export class PagedVirtualScrollStateService implements OnDestroy {
   public readonly scrolledIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly renderedRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>(null);
 
-  public readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> =
-    new Subject<PagedVirtualScrollArguments>();
+  public readonly pagedVirtualScrollArgumentsToOutput$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
 
-  private readonly previousRangeInPagedVirtualArguments$: Observable<ListRange> =
-    this.pagedVirtualScrollArgumentsToOutput$.pipe(
-      startWith(VOID),
-      map((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => ({
-        start: pagedVirtualScrollArguments?.currentFrom,
-        end: pagedVirtualScrollArguments?.currentTo
-      }))
-    );
+  private readonly previousRangeInPagedVirtualArguments$: Observable<ListRange> = this.pagedVirtualScrollArgumentsToOutput$.pipe(
+    startWith(VOID),
+    map((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => ({
+      start: pagedVirtualScrollArguments?.currentFrom,
+      end: pagedVirtualScrollArguments?.currentTo
+    }))
+  );
 
   public readonly totalContentSize$: Observable<number> = combineLatest([this.itemSize$, this.totalCount$]).pipe(
     filter(([itemSize, totalCount]: [number, number]) => !isNil(itemSize) && !isNil(totalCount)),
@@ -107,8 +106,10 @@ export class PagedVirtualScrollStateService implements OnDestroy {
           totalCount
         );
 
-        const pagedVirtualScrollArguments: PagedVirtualScrollArguments =
-          ListRangesIntersectionProducer.getPagedVirtualScrollArguments(null, roundedRange);
+        const pagedVirtualScrollArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
+          null,
+          roundedRange
+        );
         this.pagedVirtualScrollArgumentsToOutput$.next(pagedVirtualScrollArguments);
       });
   }

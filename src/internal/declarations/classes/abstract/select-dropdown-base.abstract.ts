@@ -17,8 +17,9 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
     map((isExpanded: boolean) => (isExpanded ? 'expanded' : 'void'))
   );
 
-  public readonly dropDownOverlayOrigin$: Observable<CdkOverlayOrigin> =
-    this.selectStateService.dropdownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
+  public readonly dropDownOverlayOrigin$: Observable<CdkOverlayOrigin> = this.selectStateService.dropdownOverlayOrigin$.pipe(
+    filter((origin: CdkOverlayOrigin) => !isNil(origin))
+  );
 
   public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
     filter((isExpanded: boolean) => isExpanded),

@@ -52,8 +52,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
   );
 
   public readonly rows$: BehaviorSubject<DATA_TYPE[]> = new BehaviorSubject<DATA_TYPE[]>([]);
-  private readonly pagedVirtualScrollArguments$: Subject<PagedVirtualScrollArguments> =
-    new Subject<PagedVirtualScrollArguments>();
+  private readonly pagedVirtualScrollArguments$: Subject<PagedVirtualScrollArguments> = new Subject<PagedVirtualScrollArguments>();
   private readonly firstSliceCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   private readonly subscription: Subscription = new Subscription();
