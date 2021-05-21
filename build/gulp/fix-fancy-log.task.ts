@@ -7,7 +7,6 @@ import { catchError, switchMap, take } from 'rxjs/operators';
 
 export function fixFancyLogTask(): TaskFunction {
   const fancyLogDirPackageJson: string = './node_modules/fancy-log/package.json';
-  const doneMessage: string = 'fancy-log internal module package.json is rewritten.';
 
   const targetChangedKey: string = 'browser';
   const targetChangedData: object = { console: false };
@@ -27,7 +26,6 @@ export function fixFancyLogTask(): TaskFunction {
             ? fileMap.set(targetChangedKey, { ...browserData, ...targetChangedData })
             : fileMap.set(targetChangedKey, { ...targetChangedData });
 
-          // tslint:disable-next-line: no-inferred-empty-object-type
           const newFileData: object = Array.from(fileMap.entries()).reduce(
             (accumulator: object, [key, value]: [string, unknown]) => {
               return { ...accumulator, [key]: value };
@@ -42,11 +40,12 @@ export function fixFancyLogTask(): TaskFunction {
     }
   );
 
-  const writeFileCallBack: (newFileData: string) => Observable<void> = (newFileData: string) => {
+  const writeFileCallBack: (newFileData: string) => Observable<string> = (newFileData: string) => {
     return new Observable(
-      (subscriber: Subscriber<void>): TeardownLogic => {
+      (subscriber: Subscriber<string>): TeardownLogic => {
+        const doneMessage: string = 'fancy-log internal module package.json is rewritten.';
         writeFile(fancyLogDirPackageJson, newFileData, null, (error: NodeJS.ErrnoException | null) =>
-          isNil(error) ? subscriber.next() : subscriber.error(error)
+          isNil(error) ? subscriber.next(doneMessage) : subscriber.error(error)
         );
       }
     );
@@ -60,7 +59,7 @@ export function fixFancyLogTask(): TaskFunction {
         take(1)
       )
       .subscribe(
-        () => {
+        (doneMessage: string) => {
           info(doneMessage);
           onDone();
         },
