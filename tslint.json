@@ -75,7 +75,6 @@
     "no-empty-interface": true,
     "no-eval": true,
     "no-inferrable-types": false,
-    "no-inferred-empty-object-type": true,
     "no-input-rename": true,
     "no-invalid-template-strings": true,
     "no-non-null-assertion": true,
