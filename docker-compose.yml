@@ -62,3 +62,13 @@ services:
         - BASE_IMAGE
     environment:
       - CI_PAGES_URL
+
+  deploy_pupakit:
+    build:
+      context: ./
+      dockerfile: ./build/docker/html.dockerfile
+      labels:
+        pipeline: ${PIPELINE_ID}
+        commit: ${GIT_COMMIT_HASH}
+        service: deploy_vm_service
+    image: ${DEPLOY_IMAGE}

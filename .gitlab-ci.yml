@@ -102,3 +102,29 @@ pages:
     when: always
     paths:
       - public
+
+deploy_to_dev:
+  stage: deploy
+  variables:
+    CI: $CI
+  when: manual
+  interruptible: true
+  allow_failure: true
+  before_script:
+    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+  script:
+    - scripts/build.sh deploy_pupakit
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST} "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
+
+deploy_to_test:
+  stage: deploy
+  variables:
+    CI: $CI
+  when: manual
+  interruptible: true
+  allow_failure: true
+  before_script:
+    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+  script:
+    - scripts/build.sh deploy_pupakit
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST} "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
