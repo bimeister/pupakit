@@ -60,7 +60,7 @@
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
     "@babel/core": "~7.12.0",
-    "@bimeister/build-cli": "^0.1.0-f91fe1ad",
+    "@bimeister/build-cli": "0.1.0-f91fe1ad",
     "@storybook/addon-actions": "^6.0.4",
     "@storybook/angular": "^6.0.4",
     "@types/jest": "^26.0.9",
