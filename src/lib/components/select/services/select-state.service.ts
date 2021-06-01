@@ -39,6 +39,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
   public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
+  public readonly isPatched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
       isNil(control)
@@ -125,6 +126,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setUnselectionState(isEnabled: boolean): void {
     this.isUnselectionEnabled$.next(isEnabled);
+  }
+
+  public setIsPatchedState(isPatched: boolean): void {
+    this.isPatched$.next(isPatched);
   }
 
   public setDisabledState(isDisabled: boolean): void {

@@ -1,0 +1,147 @@
+<h1>Controls isPatched</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <div class="controls">
+      <ng-container [ngSwitch]="type | async">
+        <ng-container *ngSwitchCase="'inputs'" [ngTemplateOutlet]="inputsTemplate"></ng-container>
+        <ng-container *ngSwitchCase="'selects'" [ngTemplateOutlet]="selectsTemplate"></ng-container>
+      </ng-container>
+    </div>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Type</demo-props-group-label>
+    <demo-props-radio-select #type [options]="typeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Configuration</demo-props-group-label>
+    <demo-props-checkbox #isPatched>Patched</demo-props-checkbox>
+    <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
+  </demo-example-viewer-properties>
+</demo-example-viewer>
+
+<ng-template #inputsTemplate>
+  <span>input table</span>
+  <pupa-table-input
+    class="controls__control"
+    [placeholder]="'input table'"
+    [isPatched]="isPatched | async"
+    [formControl]="formControl"
+  ></pupa-table-input>
+
+  <span>input text</span>
+  <pupa-input-text
+    class="controls__control"
+    [placeholder]="'input text'"
+    [isPatched]="isPatched | async"
+    [formControl]="formControl"
+  ></pupa-input-text>
+
+  <span>input password</span>
+  <pupa-input-password
+    class="controls__control"
+    [placeholder]="'input password'"
+    [isPatched]="isPatched | async"
+    [formControl]="formControl"
+  ></pupa-input-password>
+
+  <span>input number</span>
+  <pupa-input-number
+    class="controls__control"
+    [placeholder]="'input number'"
+    [isPatched]="isPatched | async"
+    [formControl]="formControl"
+  ></pupa-input-number>
+
+  <span>input time</span>
+  <pupa-input-time
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-time>
+
+  <span>input time seconds</span>
+  <pupa-input-time-seconds
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-time-seconds>
+
+  <span>input date</span>
+  <pupa-input-date
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-date>
+
+  <span>input date-time</span>
+  <pupa-input-date-time
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-date-time>
+
+  <span>input date-time-seconds</span>
+  <pupa-input-date-time-seconds
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-date-time-seconds>
+
+  <span>input date-range</span>
+  <pupa-input-date-range
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-date-range>
+
+  <span>input date-range-double</span>
+  <pupa-input-date-range-double
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+  ></pupa-input-date-range-double>
+</ng-template>
+
+<ng-template #selectsTemplate>
+  <span>select table</span>
+  <pupa-select-table class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
+    <pupa-select-table-button> select table </pupa-select-table-button>
+    <pupa-select-table-dropdown>
+      <pupa-select-table-items-container>
+        <pupa-select-table-item [value]="1">1</pupa-select-table-item>
+        <pupa-select-table-item [value]="2">2</pupa-select-table-item>
+        <pupa-select-table-item [value]="3">3</pupa-select-table-item>
+      </pupa-select-table-items-container>
+    </pupa-select-table-dropdown>
+  </pupa-select-table>
+
+  <span>select regular</span>
+  <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
+    <pupa-select-button> select regular </pupa-select-button>
+    <pupa-select-dropdown>
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <span>select-button-input</span>
+  <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
+    <pupa-select-button-input [placeholder]="'select-button-input'">
+      <pupa-icon-button [size]="'small'" [color]="'light-blue'" class="content-icon">
+        <pupa-icon name="md-lock"></pupa-icon>
+      </pupa-icon-button>
+    </pupa-select-button-input>
+
+    <pupa-select-dropdown>
+      <pupa-select-items-container>
+        <pupa-select-item [value]="1">1</pupa-select-item>
+        <pupa-select-item [value]="2">2</pupa-select-item>
+        <pupa-select-item [value]="3">3</pupa-select-item>
+      </pupa-select-items-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+</ng-template>

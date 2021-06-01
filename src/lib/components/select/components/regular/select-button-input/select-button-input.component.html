@@ -3,7 +3,7 @@
   [class.select-button_active]="isExpanded$ | async"
   [class.select-button_disabled]="isDisabled$ | async"
   [class.select-button_transparent]="transparent"
-  [class.select-button_invalid]="(isTouched$ | async) && !(isValid$ | async)"
+  [class.select-button_invalid]="isInvalid$ | async"
   (click)="processButtonInputClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"

@@ -1,7 +1,7 @@
 <div
   class="button-container"
   [class.select-button_disabled]="isDisabled$ | async"
-  [class.select-button_invalid]="(isTouched$ | async) && !(isValid$ | async)"
+  [class.select-button_invalid]="isInvalid$ | async"
   (click)="processButtonClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"

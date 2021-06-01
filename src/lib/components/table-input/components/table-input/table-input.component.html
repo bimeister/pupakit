@@ -5,7 +5,7 @@
     [placeholder]="placeholder"
     [value]="value$ | async"
     [attr.disabled]="isDisabled$ | async"
-    [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
+    [class.invalid]="isInvalid$ | async"
     (input)="updateValue(inputElement.value)"
     (focus)="emitFocusEvent($event)"
     (blur)="emitBlurEvent($event)"

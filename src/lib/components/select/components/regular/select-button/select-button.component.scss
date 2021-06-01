@@ -1,5 +1,6 @@
-@import './../../../../../../styles/themes/functions.scss';
-@import './../../../../../../styles/functions.scss';
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
 
 $width_icon: rems(1);
 
@@ -28,6 +29,8 @@ $width_icon: rems(1);
   color: color('text');
 
   padding: px(6) px(12);
+
+  @include transition(#{'border'});
 
   &:hover {
     border-color: color('grey-light');

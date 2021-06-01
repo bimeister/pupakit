@@ -1,6 +1,7 @@
 import { Directive, EventEmitter, Input, OnChanges, Output } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject } from 'rxjs';
+import { distinctUntilSerializedChanged, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
@@ -21,14 +22,41 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public readonly autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public readonly isPatched: boolean = false;
+  public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+  public readonly isInvalid$: Observable<boolean> = combineLatest([
+    this.isDisabled$,
+    this.isPatched$,
+    this.isValid$,
+    this.isTouched$
+  ]).pipe(
+    distinctUntilSerializedChanged(),
+    map(
+      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
+        (isTouched || isPatched) && !isValid && !isDisabled
+    )
+  );
+
+  protected processIsPatchedChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isPatched$.next(updatedValue);
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processSizeChange(changes?.size);
     this.processTransparentChange(changes?.transparent);
     this.processPlaceholderChange(changes?.placeholder);
     this.processAutocompleteChange(changes?.autocomplete);
+    this.processIsPatchedChange(changes?.isPatched);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
