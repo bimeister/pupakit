@@ -16,6 +16,7 @@ import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.com
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
 import { ColorsComponent } from './colors/colors.component';
+import { ControlsIsPatchedDemoComponent } from './controls-is-patched-demo/controls-is-patched-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DateTimePickerDemoComponent } from './date-time-picker-demo/date-time-picker-demo.component';
 import { DaySelectorDemoComponent } from './day-selector-demo/day-selector-demo.component';
@@ -109,7 +110,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ColorsComponent,
     TypographyPageComponent,
     IconPageComponent,
-    VerticalTabsDemoComponent
+    VerticalTabsDemoComponent,
+    ControlsIsPatchedDemoComponent
   ],
   imports: [
     IconModule.forRoot(getAllIcons()),

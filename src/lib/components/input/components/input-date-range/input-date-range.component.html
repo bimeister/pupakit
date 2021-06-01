@@ -22,7 +22,7 @@
           [maxLength]="maxLengthInputValue"
           [attr.disabled]="(isDisabled$ | async) ? true : null"
           [ngClass]="{
-            input__invalid: (isTouched$ | async) && !(isValid$ | async) && !(isDisabled$ | async),
+            input__invalid: isInvalid$ | async,
             input__medium: size === 'medium',
             input__small: size === 'small',
             input__large: size === 'large',

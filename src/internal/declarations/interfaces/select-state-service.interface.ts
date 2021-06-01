@@ -18,6 +18,7 @@ export interface SelectStateService<T> {
 
   readonly control$: BehaviorSubject<Nullable<NgControl>>;
   readonly isTouched$: BehaviorSubject<Nullable<boolean>>;
+  readonly isPatched$: BehaviorSubject<Nullable<boolean>>;
   readonly isValid$: Observable<boolean>;
 
   setControlRef(control: NgControl): void;
@@ -33,6 +34,7 @@ export interface SelectStateService<T> {
 
   setMultiSelectionState(isEnabled: boolean): void;
   setUnselectionState(isEnabled: boolean): void;
+  setIsPatchedState(isPatched: boolean): void;
   setDisabledState(isDisabled: boolean): void;
 
   processSelection(value: T): void;

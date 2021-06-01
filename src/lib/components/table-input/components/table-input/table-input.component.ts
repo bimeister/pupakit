@@ -11,8 +11,8 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { filterNotNil, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { distinctUntilSerializedChanged, filterNotNil, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { filter, map, startWith, switchMap } from 'rxjs/operators';
 import { AbstractControlWithNotifier } from '../../../../../internal/declarations/classes/abstract/abstract-control-with-notifiers.abstract';
 import { AbstractControlMethodsKey } from '../../../../../internal/declarations/enums/abstract-control-methods-key.enum';
@@ -44,6 +44,9 @@ export class TableInputComponent<T>
   @Input() public readonly errorIconName: string = 'md-alert';
   public readonly errorIconName$: BehaviorSubject<string> = new BehaviorSubject('md-alert');
 
+  @Input() public readonly isPatched: boolean = false;
+  public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
@@ -51,6 +54,19 @@ export class TableInputComponent<T>
   public readonly isDisabled$: BehaviorSubject<boolean> = this.tableInputStateService.isDisabled$;
   public readonly isValid$: Observable<boolean> = this.tableInputStateService.isValid$;
   public readonly isTouched$: Observable<boolean> = this.tableInputStateService.isTouched$;
+
+  public readonly isInvalid$: Observable<boolean> = combineLatest([
+    this.isDisabled$,
+    this.isPatched$,
+    this.isValid$,
+    this.isTouched$
+  ]).pipe(
+    distinctUntilSerializedChanged(),
+    map(
+      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
+        (isTouched || isPatched) && !isValid && !isDisabled
+    )
+  );
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -73,12 +89,10 @@ export class TableInputComponent<T>
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processErrorTitleChange(changes?.errorTitle);
     this.processHoverIconNameChange(changes?.hoverIconName);
     this.processErrorIconNameChange(changes?.errorIconName);
+    this.processIsPatchedChange(changes?.isPatched);
   }
 
   public updateValue(value: T): void {
@@ -166,5 +180,15 @@ export class TableInputComponent<T>
     }
 
     this.errorIconName$.next(updatedValue);
+  }
+
+  private processIsPatchedChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isPatched$.next(updatedValue);
   }
 }

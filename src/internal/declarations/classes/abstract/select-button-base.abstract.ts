@@ -1,8 +1,8 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, OnInit } from '@angular/core';
-import { filterFalsy } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { distinctUntilSerializedChanged, filterFalsy } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, switchMap, take } from 'rxjs/operators';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 
 @Directive()
@@ -16,7 +16,21 @@ export abstract class SelectButtonBase<T> implements OnInit, AfterViewInit {
   public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;
 
   public readonly isTouched$: Observable<boolean> = this.selectStateService.isTouched$;
+  public readonly isPatched$: Observable<boolean> = this.selectStateService.isPatched$;
   public readonly isValid$: Observable<boolean> = this.selectStateService.isValid$;
+
+  public readonly isInvalid$: Observable<boolean> = combineLatest([
+    this.isDisabled$,
+    this.isPatched$,
+    this.isValid$,
+    this.isTouched$
+  ]).pipe(
+    distinctUntilSerializedChanged(),
+    map(
+      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
+        (isTouched || isPatched) && !isValid && !isDisabled
+    )
+  );
 
   public readonly isContentInit$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

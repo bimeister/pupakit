@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
@@ -63,8 +63,24 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
+  @Input() public readonly isPatched: boolean = false;
+  public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
+
+  public readonly isInvalid$: Observable<boolean> = combineLatest([
+    this.isDisabled$,
+    this.isPatched$,
+    this.isValid$,
+    this.isTouched$
+  ]).pipe(
+    distinctUntilSerializedChanged(),
+    map(
+      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
+        (isTouched || isPatched) && !isValid && !isDisabled
+    )
+  );
 
   public readonly hours$: Observable<number> = this.value$.pipe(
     map((value: string) =>
@@ -300,6 +316,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.processErrorTitleChange(changes?.errorTitle);
     this.processIsBackDatingChange(changes?.isBackDating);
     this.processAvailableEndDateChange(changes?.availableEndDate);
+    this.processIsPatchedChange(changes?.isPatched);
   }
 
   public setValue(value: ValueType): void {

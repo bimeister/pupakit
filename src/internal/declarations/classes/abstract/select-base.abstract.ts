@@ -15,6 +15,7 @@ import { SelectOuterValue } from '../../types/select-outer-value.type';
 export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValueAccessor {
   public abstract isMultiSelectionEnabled: boolean;
   public abstract isUnselectionEnabled: boolean;
+  public abstract isPatched: boolean;
 
   @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
   @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
@@ -73,11 +74,9 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract closeOnOuterEvents(event: Event): void;
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
+    this.processIsPatchedValueChange(changes?.isPatched);
   }
 
   public ngOnDestroy(): void {
@@ -118,6 +117,16 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     }
 
     this.selectStateService.setUnselectionState(Boolean(updatedState));
+  }
+
+  private processIsPatchedValueChange(change: ComponentChange<this, boolean>): void {
+    const updatedState: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedState)) {
+      return;
+    }
+
+    this.selectStateService.setIsPatchedState(Boolean(updatedState));
   }
 
   private handleIsExpandedChangesToEmitFocusEvents(): Subscription {

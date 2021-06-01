@@ -24,6 +24,7 @@ import { SelectStateService } from '../../../services/select-state.service';
 export class SelectTableComponent<T> extends SelectBase<T> implements OnChanges, ControlValueAccessor {
   @Input() public isMultiSelectionEnabled: boolean = false;
   @Input() public isUnselectionEnabled: boolean = false;
+  @Input() public isPatched: boolean = false;
 
   constructor(
     selectStateService: SelectStateService<T>,
