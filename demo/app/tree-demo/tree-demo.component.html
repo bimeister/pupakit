@@ -2,7 +2,8 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" [isLoading]="loading | async"> </pupa-tree>
+    <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" hasDragAndDrop="true" [isLoading]="loading | async">
+    </pupa-tree>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
@@ -10,3 +11,5 @@
     <demo-props-checkbox #loading>Loading</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<button (click)="expandAll()">expand all</button>

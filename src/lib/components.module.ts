@@ -40,6 +40,7 @@ import { TextareaModule } from './components/textarea/textarea.module';
 import { TileModule } from './components/tile/tile.module';
 import { TimeInputModule } from './components/time-input/time-input.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
+import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
 import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
@@ -78,6 +79,7 @@ const EXPORTS: any[] = [
   TooltipModule,
   DropdownMenuModule,
   TreeModule,
+  TreeNewModule,
   MultiselectionListModule,
   VerticalTabsModule,
   SkeletonModule,

@@ -55,6 +55,7 @@ export class AppComponent {
     linkItems: [
       { title: 'Datagrid', link: './datagrid' },
       { title: 'Tree', link: './tree' },
+      { title: 'Tree (new)', link: './tree-new' },
       { title: 'Tooltip', link: './tooltip' },
       { title: 'Tabs', link: './tabs' },
       { title: 'Vertical Tabs', link: './vertical-tabs' },
