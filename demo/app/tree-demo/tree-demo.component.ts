@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
 import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tree-item.class';
+import { TreeComponent } from '../../../src/public-api';
 
 @Component({
   selector: 'demo-tree',
@@ -9,6 +10,7 @@ import { FlatTreeItem } from '../../../src/internal/declarations/classes/flat-tr
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TreeDemoComponent {
+  @ViewChild(TreeComponent) public tree: TreeComponent;
   public readonly leafElementsCount: number = 1000;
   public readonly dataOrigin: FlatTreeItem[] = [
     new FlatTreeItem(true, 'Wolves', 0, null),
@@ -37,4 +39,8 @@ export class TreeDemoComponent {
     new FlatTreeItem(false, '🙉', 1, null),
     new FlatTreeItem(false, '🙈', 1, null)
   ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
+
+  public expandAll(): void {
+    this.tree.expandAllNodes();
+  }
 }

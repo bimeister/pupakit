@@ -35,6 +35,9 @@ export {
   TreeItem,
   CountColor,
   UploadingStatus,
+  TreeManipulatorNew,
+  TreeManipulatorBase,
+  TreeManipulatorNewDataOrigin,
   ChipColors
 } from './internal/api';
 export * from './internal/constants/icons/api';

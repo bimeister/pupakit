@@ -40,6 +40,7 @@ import { TileDemoComponent } from './tile-demo/tile-demo.component';
 import { TimeInputDemoComponent } from './time-input-demo/time-input-demo.component';
 import { TooltipDemoComponent } from './tooltip-demo/tooltip-demo.component';
 import { TreeDemoComponent } from './tree-demo/tree-demo.component';
+import { TreeNewDemoComponent } from './tree-new-demo/tree-new-demo.component';
 import { TypographyPageComponent } from './typography-page/typography-page.component';
 import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
 import { VerticalTabsDemoComponent } from './vertical-tabs-demo/vertical-tabs-demo.component';
@@ -120,6 +121,10 @@ export const demoRoutes: Routes = [
   {
     path: 'tree',
     component: TreeDemoComponent
+  },
+  {
+    path: 'tree-new',
+    component: TreeNewDemoComponent
   },
   {
     path: 'select',
