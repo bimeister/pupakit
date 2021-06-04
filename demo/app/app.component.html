@@ -1,74 +1,27 @@
 <pupa-layout>
   <div class="layout-wrapper">
     <nav class="navigation">
-      <ng-container>
-        <h3 class="subheader">General</h3>
-        <a routerLinkActive="active" routerLink="./typography" class="navigation-item">Typography</a>
-        <a routerLinkActive="active" routerLink="./colors" class="navigation-item">Colors</a>
-        <a routerLinkActive="active" routerLink="./icon" class="navigation-item">Icon</a>
-        <a routerLinkActive="active" routerLink="./button" class="navigation-item">Button</a>
-        <a routerLinkActive="active" routerLink="./icon-button" class="navigation-item">Icon button</a>
-        <a routerLinkActive="active" routerLink="./avatar" class="navigation-item">Avatar</a>
-      </ng-container>
+      <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
+        <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
+      </div>
+      <div class="links-container" (scroll)="processItemsScroll($event)">
+        <div class="empty-placeholder" *ngIf="isEmpty$ | async">
+          Not found
+          <div>🤷</div>
+        </div>
 
-      <ng-container>
-        <h3 class="subheader">Data Entry</h3>
-        <a routerLinkActive="active" routerLink="./checkbox" class="navigation-item">Checkbox</a>
-        <a routerLinkActive="active" routerLink="./switcher" class="navigation-item">Switcher</a>
-        <a routerLinkActive="active" routerLink="./date-time-picker" class="navigation-item">[!] Date time pickers</a>
-        <a routerLinkActive="active" routerLink="./input" class="navigation-item">Input</a>
-        <a routerLinkActive="active" routerLink="./table-input" class="navigation-item">Table Input</a>
-        <a routerLinkActive="active" routerLink="./search-field" class="navigation-item">Search Field</a>
-        <a routerLinkActive="active" routerLink="./textarea" class="navigation-item">[!] Textarea</a>
-        <a routerLinkActive="active" routerLink="./radio" class="navigation-item">Radio buttons</a>
-        <a routerLinkActive="active" routerLink="./rating" class="navigation-item">Rating</a>
-        <a routerLinkActive="active" routerLink="./select" class="navigation-item">[!] Select</a>
-        <a routerLinkActive="active" routerLink="./selector" class="navigation-item">Selector</a>
-        <a routerLinkActive="active" routerLink="./uploads" class="navigation-item">[!] Uploads</a>
-      </ng-container>
-
-      <ng-container>
-        <h3 class="subheader">Data Display</h3>
-        <a routerLinkActive="active" routerLink="./datagrid" class="navigation-item">Datagrid</a>
-        <a routerLinkActive="active" routerLink="./tree" class="navigation-item">Tree</a>
-        <a routerLinkActive="active" routerLink="./tooltip" class="navigation-item">Tooltip</a>
-        <a routerLinkActive="active" routerLink="./tabs" class="navigation-item">Tabs</a>
-        <a routerLinkActive="active" routerLink="./vertical-tabs" class="navigation-item">Vertical Tabs</a>
-        <a routerLinkActive="active" routerLink="./chip-tabs" class="navigation-item">Chip Tabs</a>
-        <a routerLinkActive="active" routerLink="./chip" class="navigation-item">Chip</a>
-        <a routerLinkActive="active" routerLink="./chip-button" class="navigation-item">Chip button</a>
-        <a routerLinkActive="active" routerLink="./paged-virtual-scroll" class="navigation-item">
-          Paged Virtual Scroll
-        </a>
-      </ng-container>
-
-      <ng-container>
-        <h3 class="subheader">Feedback</h3>
-        <a routerLinkActive="active" routerLink="./drawer" class="navigation-item">Drawer</a>
-        <a routerLinkActive="active" routerLink="./modal" class="navigation-item">Modal</a>
-        <a routerLinkActive="active" routerLink="./spinner" class="navigation-item">Spinner & loader</a>
-      </ng-container>
-
-      <ng-container>
-        <h3 class="subheader">Other</h3>
-        <a routerLinkActive="active" routerLink="./tile" class="navigation-item">Tile</a>
-        <a routerLinkActive="active" routerLink="./draggable" class="navigation-item">[!] Draggable</a>
-        <a routerLinkActive="active" routerLink="./droppable" class="navigation-item">[!] Droppable</a>
-        <a routerLinkActive="active" routerLink="./dropdown" class="navigation-item">[!] Dropdown</a>
-        <a routerLinkActive="active" routerLink="./dropdown-menu" class="navigation-item">[!] Dropdown menu</a>
-        <a routerLinkActive="active" routerLink="./controls-is-patched" class="navigation-item">Controls isPatched</a>
-      </ng-container>
-
-      <ng-container>
-        <h3 class="subheader">Deprecated, unused, useless</h3>
-        <a routerLinkActive="active" routerLink="./layout" class="navigation-item">Layout</a>
-        <a routerLinkActive="active" routerLink="./draggable-list" class="navigation-item">Draggable list</a>
-        <a routerLinkActive="active" routerLink="./multiselection-list" class="navigation-item">Multiselection list</a>
-        <a routerLinkActive="active" routerLink="./select-multiple" class="navigation-item">Select Multiple</a>
-        <a routerLinkActive="active" routerLink="./day-selector" class="navigation-item">Day selector</a>
-        <a routerLinkActive="active" routerLink="./time-input" class="navigation-item">Time input</a>
-        <a routerLinkActive="active" routerLink="./scrollbar" class="navigation-item">Scrollbar</a>
-      </ng-container>
+        <ng-container *ngFor="let group of filteredLinkGroups$ | async">
+          <h3 class="subheader">{{ group.title }}</h3>
+          <a
+            routerLinkActive="active"
+            *ngFor="let linkItem of group.linkItems"
+            [routerLink]="linkItem.link"
+            class="navigation-item"
+          >
+            {{ linkItem.title }}
+          </a>
+        </ng-container>
+      </div>
     </nav>
 
     <main class="content-wrapper">
