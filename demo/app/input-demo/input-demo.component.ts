@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { RadioOption } from '../example-viewer/radio-option';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { InputBase } from '../../../src/internal/declarations/classes/abstract/input-base.abstract';
 
 @Component({
   selector: 'demo-input',
@@ -9,6 +10,9 @@ import { FormControl, ValidatorFn, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent {
+  @ViewChild('input')
+  private readonly inputRef: InputBase<unknown>;
+
   public readonly placeholder: string = 'Введите данные';
 
   public readonly typeOptions: RadioOption[] = [
@@ -45,4 +49,8 @@ export class InputDemoComponent {
   public readonly validators: ValidatorFn[] = [Validators.required, Validators.maxLength(15)];
 
   public readonly formControl: FormControl = new FormControl('');
+
+  public focus(): void {
+    this.inputRef.focusOnInputElement();
+  }
 }

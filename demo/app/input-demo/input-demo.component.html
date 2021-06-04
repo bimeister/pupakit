@@ -5,6 +5,7 @@
     <ng-container [ngSwitch]="type | async">
       <ng-container *ngSwitchCase="'text'">
         <pupa-input-text
+          #input
           class="control"
           [size]="size | async"
           [placeholder]="placeholder"
@@ -15,6 +16,7 @@
 
       <ng-container *ngSwitchCase="'password'">
         <pupa-input-password
+          #input
           class="control"
           [size]="size | async"
           [placeholder]="placeholder"
@@ -25,6 +27,7 @@
 
       <ng-container *ngSwitchCase="'number'">
         <pupa-input-number
+          #input
           class="control"
           [size]="size | async"
           [placeholder]="placeholder"
@@ -47,5 +50,8 @@
     <demo-props-form-control-validators [control]="formControl" [validators]="validators">
     </demo-props-form-control-validators>
     <demo-props-checkbox #transparent>Transparent</demo-props-checkbox>
+
+    <demo-props-group-label>Actions</demo-props-group-label>
+    <pupa-button (click)="focus()">Focus on input element</pupa-button>
   </demo-example-viewer-properties>
 </demo-example-viewer>

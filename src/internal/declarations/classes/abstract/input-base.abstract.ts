@@ -1,4 +1,4 @@
-import { Directive, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, ElementRef, OnChanges, Output, ViewChild } from '@angular/core';
 import { distinctUntilSerializedChanged, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -10,6 +10,9 @@ import { InputBaseControlValueAccessor } from './input-base-control-value-access
 
 @Directive()
 export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
+  @ViewChild('inputElement')
+  protected readonly inputElementRef: ElementRef<HTMLInputElement>;
+
   @Input() public readonly size: InputSize = 'medium';
   public readonly size$: BehaviorSubject<InputSize> = new BehaviorSubject<InputSize>('medium');
 
@@ -71,6 +74,11 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
 
   public isDate(value: unknown): boolean {
     return isDate(value);
+  }
+
+  public focusOnInputElement(): void {
+    const inputElement: HTMLInputElement = this.inputElementRef.nativeElement;
+    inputElement.focus();
   }
 
   private processSizeChange(change: ComponentChange<this, InputSize>): void {
