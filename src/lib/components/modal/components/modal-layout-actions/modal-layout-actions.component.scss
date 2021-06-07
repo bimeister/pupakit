@@ -1,0 +1,16 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.modal-layout-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: rems(1);
+  box-sizing: border-box;
+  padding: 0 rems(1) 0 rems(1);
+}

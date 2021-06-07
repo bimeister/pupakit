@@ -26,10 +26,6 @@ export class ModalDemoContentComponent {
     this.modalDemoLocalService.logEmoji();
   }
 
-  public close(): void {
-    this.modalRef.close('💪🏻');
-  }
-
   public changeModalPosition(newPosition: Position): void {
     this.modalRef.updatePosition(newPosition);
   }
