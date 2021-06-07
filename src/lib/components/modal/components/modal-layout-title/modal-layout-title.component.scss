@@ -1,0 +1,12 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  flex: auto;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: px(18);
+}

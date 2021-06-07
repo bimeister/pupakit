@@ -17,34 +17,4 @@
   display: flex;
   flex-direction: column;
   padding: rems(1) 0 rems(1) 0;
-
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: rems(1);
-    padding: 0 rems(1) 0 rems(1);
-    flex-shrink: 0;
-
-    &__title {
-      display: block;
-      flex: auto;
-      font-weight: bold;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: px(24);
-    }
-
-    &__button {
-      margin-left: rems(0.5);
-    }
-  }
-
-  &__content {
-    height: 100%;
-    padding: 0 rems(1) 0 rems(1);
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
 }

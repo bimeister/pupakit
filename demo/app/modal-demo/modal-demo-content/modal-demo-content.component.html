@@ -1,10 +1,28 @@
 <pupa-modal-dragger class="dragger" [targetElementRef]="elementRef" [modalRef]="modalRef"></pupa-modal-dragger>
-<pupa-modal-layout
-  [title]="'Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo'"
-  [isCloseButtonVisible]="true"
-  (closeButtonClicked)="close()"
->
-  <div class="sample-content">sample content</div>
-  <div class="placeholder"></div>
-  🎳
+<pupa-modal-layout>
+  <pupa-modal-layout-header>
+    <pupa-modal-layout-title> Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo </pupa-modal-layout-title>
+
+    <pupa-modal-layout-close-button [value]="'🤷'">
+      <pupa-icon-button>
+        <pupa-icon name="close"></pupa-icon>
+      </pupa-icon-button>
+    </pupa-modal-layout-close-button>
+  </pupa-modal-layout-header>
+
+  <pupa-modal-layout-body>
+    <div class="sample-content">sample content</div>
+    <div class="placeholder"></div>
+    🎳
+  </pupa-modal-layout-body>
+
+  <pupa-modal-layout-actions>
+    <pupa-modal-layout-action [value]="null">
+      <pupa-button>Закрыть</pupa-button>
+    </pupa-modal-layout-action>
+
+    <pupa-modal-layout-action [value]="'💪🏻'">
+      <pupa-button>💪🏻</pupa-button>
+    </pupa-modal-layout-action>
+  </pupa-modal-layout-actions>
 </pupa-modal-layout>
