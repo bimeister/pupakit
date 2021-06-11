@@ -34,10 +34,17 @@ export abstract class TabsStateProducerService implements OnDestroy {
   }
 
   public addToActiveTabValueSet(value: unknown): void {
-    this.activeTabValueSet$.pipe(take(1)).subscribe((activeTabValueSet: Set<unknown>) => {
-      activeTabValueSet.add(value);
-      this.activeTabValueSet$.next(activeTabValueSet);
-    });
+    this.isMultiSelectionEnabled$
+      .pipe(take(1), withLatestFrom(this.activeTabValueSet$))
+      .subscribe(([isMultiSelectionEnabled, activeTabValueSet]: [boolean, Set<unknown>]) => {
+        const updatedSet: Set<unknown> = new Set(activeTabValueSet);
+        if (!isMultiSelectionEnabled) {
+          updatedSet.clear();
+        }
+
+        updatedSet.add(value);
+        this.activeTabValueSet$.next(updatedSet);
+      });
   }
 
   public changeActiveTabValueSetByValue(value: unknown): void {
