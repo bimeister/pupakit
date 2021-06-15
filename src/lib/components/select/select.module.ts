@@ -6,9 +6,10 @@ import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-ci
 import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
-import { ChipButtonModule } from '../chip-button/chip-button.module';
+import { ChipModule } from '../chip/chip.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
+import { TooltipModule } from '../tooltip/tooltip.module';
 import { TreeModule } from '../tree/tree.module';
 import { SelectButtonInputComponent } from './components/regular/select-button-input/select-button-input.component';
 import { SelectButtonComponent } from './components/regular/select-button/select-button.component';
@@ -64,7 +65,8 @@ const COMPONENTS: any[] = [
     SharedModule,
     OverlayModule,
     TreeModule,
-    ChipButtonModule,
+    TooltipModule,
+    ChipModule,
     CheckboxModule,
     IconButtonModule,
     IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon])
