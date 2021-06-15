@@ -29,3 +29,43 @@ label.horizontal {
   width: 100%;
   height: 100%;
 }
+
+.chip-content {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  max-width: inherit;
+  &__text {
+    flex-shrink: 1;
+    box-sizing: border-box;
+    padding: 0 newRems(1);
+    width: 100%;
+    max-width: inherit;
+    min-width: 0;
+    @include ellipsis-text-overflow;
+  }
+  &__delete-button {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-right: newRems(1);
+    height: newRems(2.5);
+    width: newRems(2.5);
+  }
+  &__avatar {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-left: newRems(0.5);
+    height: newRems(2);
+    width: newRems(2);
+  }
+  &__icon-container {
+    display: inline-flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-left: newRems(1);
+  }
+  &__icon {
+    height: newRems(1.5);
+    width: newRems(1.5);
+  }
+}

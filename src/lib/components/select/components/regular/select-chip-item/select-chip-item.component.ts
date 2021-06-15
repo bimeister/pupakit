@@ -13,6 +13,7 @@ export class SelectChipItemComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;
   @Input() public isDisabled: boolean = false;
 
+  @Input() public iconName: string;
   @Input() public withClose: boolean = true;
   @Output() public readonly closeClick: EventEmitter<void> = new EventEmitter();
 

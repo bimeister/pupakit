@@ -16,7 +16,7 @@ const {
 const SCREEN_SHOT_PATH: string = `${SCREEN_SHOTS_PATH}/chip.screenshot.png`;
 const VIEWPORT: Viewport = { width: 1920, height: 1080 };
 
-describe('avatar.component.ts', () => {
+describe('chip.component.ts', () => {
   let page: Page;
   let browser: Browser;
 

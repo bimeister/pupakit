@@ -1,8 +1,16 @@
 <section class="select-button-item">
-  <pupa-chip-button>
-    <ng-content></ng-content>
-    <ng-container *ngIf="withClose">
-      <pupa-icon (click)="processClick()" name="close"></pupa-icon>
-    </ng-container>
-  </pupa-chip-button>
+  <pupa-chip>
+    <div class="chip-content">
+      <div *ngIf="!(iconName | isNullOrUndefined)" class="chip-content__icon-container">
+        <pupa-icon class="chip-content__icon" [name]="iconName"></pupa-icon>
+      </div>
+      <div class="chip-content__text"><ng-content></ng-content></div>
+      <pupa-icon
+        *ngIf="withClose"
+        class="chip-content__delete-button"
+        name="close"
+        (click)="processClick()"
+      ></pupa-icon>
+    </div>
+  </pupa-chip>
 </section>
