@@ -1,4 +1,5 @@
 @import 'functions';
+@import 'themes/functions';
 
 // colors alerts
 $color_alert-info: #b4dff8;
@@ -21,6 +22,8 @@ $color_alert-text: #575757;
   color: $color_alert-text;
   width: fit-content;
   overflow: hidden;
+  background-color: color('white');
+
   & .background {
     position: absolute;
     z-index: 0;
