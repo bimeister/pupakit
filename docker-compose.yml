@@ -50,25 +50,28 @@ services:
         - BUILD_IMAGE
         - TAG
 
-  docs_service:
+  pages_service:
     build:
       context: ./
-      dockerfile: ./build/docker/docs.dockerfile
+      dockerfile: ./build/docker/pages.dockerfile
       labels:
         pipeline: ${PIPELINE_ID}
         commit: ${GIT_COMMIT_HASH}
-        service: docs_service
+        service: pages_service
       args:
         - BASE_IMAGE
     environment:
       - CI_PAGES_URL
 
-  deploy_pupakit:
+  stage_deploy_service:
     build:
       context: ./
-      dockerfile: ./build/docker/html.dockerfile
+      dockerfile: ./build/docker/stage-deploy.dockerfile
       labels:
         pipeline: ${PIPELINE_ID}
         commit: ${GIT_COMMIT_HASH}
-        service: deploy_vm_service
+        service: stage_deploy_service
+      args:
+        - BASE_IMAGE
+        - BASE_HREF
     image: ${DEPLOY_IMAGE}
