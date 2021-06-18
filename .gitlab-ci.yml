@@ -23,14 +23,6 @@ Static files:
   script:
     - scripts/build.sh build_service
 
-Docs:
-  stage: build
-  needs: ['Dependencies']
-  interruptible: true
-  allow_failure: false
-  script:
-    - scripts/build.sh docs_service
-
 Lint:
   stage: check
   needs: ['Dependencies']
@@ -90,41 +82,45 @@ NPM (dev):
 
 pages:
   stage: deploy
-  needs: ['Docs']
+  needs: ['Dependencies']
   interruptible: true
-  allow_failure: true
+  allow_failure: false
   script:
-    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=docs_service" dist/demo public
+    - scripts/build.sh pages_service
+    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=pages_service" dist/demo
+      public
   when: always
-  # only:
-  #   - master
   artifacts:
     when: always
     paths:
       - public
 
-deploy_to_dev:
+dev:
   stage: deploy
   variables:
     CI: $CI
+    BASE_HREF: 'pupakit-dev.bimeister.com'
   when: manual
   interruptible: true
   allow_failure: true
   before_script:
     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
   script:
-    - scripts/build.sh deploy_pupakit
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST} "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
+    - scripts/build.sh stage_deploy_service
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+      "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
 
-deploy_to_test:
+test:
   stage: deploy
   variables:
     CI: $CI
+    BASE_HREF: 'pupakit-test.bimeister.com'
   when: manual
   interruptible: true
   allow_failure: true
   before_script:
     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
   script:
-    - scripts/build.sh deploy_pupakit
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST} "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
+    - scripts/build.sh stage_deploy_service
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+      "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
