@@ -85,29 +85,38 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
   public readonly hasNoChild: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
   public readonly isElement: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_IS_ELEMENT;
   private readonly subscription: Subscription = new Subscription();
-  private readonly scrollIndex$: Observable<number>;
 
-  public readonly expandNodeWithDelay$: Observable<Nullable<FlatTreeItem>>;
-  public readonly isLoading$: Observable<boolean>;
-  public readonly treeControl: FlatTreeControl<FlatTreeItem>;
-  public readonly dataSource: TreeDataSource;
-  public readonly data$: Observable<FlatTreeItem[]>;
-  public readonly highlightedNodesIds$: Observable<string[]>;
-  public readonly selectedNodesIds$: Observable<string[]>;
-  public readonly nodeTemplate$: Observable<TemplateRef<unknown>>;
+
+  private readonly dragAndDropControl: TreeDragAndDropControl = this.manipulator.dragAndDropControl;
+  public readonly draggingHasStarted$: Observable<boolean> = this.dragAndDropControl.draggingHasStarted$;
+  public readonly draggableNode$: Observable<FlatTreeItem> = this.dragAndDropControl.draggableNode$;
+  private readonly dropEmit$: Observable<DropEventInterface<FlatTreeItem>> = this.dragAndDropControl.droppedSubject$;
+  private readonly scrollDirection$: Observable<Nullable<'up' | 'down'>> = this.dragAndDropControl.scrollDirection$;
+  public readonly expandNodeWithDelay$: Observable<Nullable<FlatTreeItem>> = this.dragAndDropControl.expandNodeWithDelay$;
+  private readonly expandedItemIds$: Observable<Set<string>> = this.manipulator.expandedItemIds$;
+  public readonly treeControl: FlatTreeControl<FlatTreeItem> = this.manipulator.treeControl;
+  public readonly dataSource: TreeDataSource = this.manipulator.dataSource;
+  public readonly data$: Observable<FlatTreeItem[]> = this.dataSource.filteredData$;
+  private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = this.manipulator.viewPortReference$;
+  private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = this.manipulator.skeletonViewPortReference$;
+  private readonly listRange$: BehaviorSubject<ListRange> = this.manipulator.listRange$;
+  private readonly scrollIndex$: Observable<number> = this.manipulator.scrollIndex$;
   public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
-  public readonly nodesWithoutPadding$: Observable<boolean>;
-  public readonly draggingHasStarted$: Observable<boolean>;
-  public readonly draggableNode$: Observable<FlatTreeItem>;
-  private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport>;
-  private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport>;
-  private readonly scrollBehavior$: Observable<ScrollBehavior>;
-  private readonly hasDragAndDrop$: Observable<boolean>;
-  private readonly expandedItemIds$: Observable<Set<string>>;
-  private readonly dropEmit$: Observable<DropEventInterface<FlatTreeItem>>;
-  private readonly listRange$: BehaviorSubject<ListRange>;
-  private readonly scrollDirection$: Observable<Nullable<'up' | 'down'>>;
-  private readonly dragAndDropControl: TreeDragAndDropControl;
+  public readonly nodeTemplate$: Observable<TemplateRef<unknown>> = this.manipulator.externalNodeTemplate$;
+  public readonly selectedNodesIds$: Observable<string[]> = this.manipulator.externalSelectedNodesIds$;
+  public readonly highlightedNodesIds$: Observable<string[]> = this.manipulator.externalHighlightedNodesIds$;
+  private readonly scrollBehavior$: Observable<ScrollBehavior> = this.manipulator.externalScrollBehavior$;
+  private readonly hasDragAndDrop$: Observable<boolean> = this.manipulator.externalHasDragAndDrop$;
+  public readonly nodesWithoutPadding$: Observable<boolean> = this.manipulator.externalNodesWithoutPadding$;
+  public readonly isLoading$: Observable<boolean> = combineLatest([
+    this.manipulator.isLoading$,
+    this.manipulator.externalIsLoading$,
+    this.manipulator.isScrollByRouteLoading$
+  ]).pipe(
+    map(([isLoading, externalIsLoading, isScrollByRouteLoading]: [boolean, boolean, boolean]) => {
+      return isLoading || externalIsLoading || isScrollByRouteLoading;
+    })
+  );
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -115,40 +124,28 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
     host: ElementRef<HTMLElement>,
     @Inject(TreeManipulatorNew) private readonly manipulator: TreeManipulatorNew
   ) {
-    this.dragAndDropControl = this.manipulator.dragAndDropControl;
     this.dragAndDropControl.setHostAndRenderer(host, renderer);
-    this.draggingHasStarted$ = this.dragAndDropControl.draggingHasStarted$;
-    this.draggableNode$ = this.dragAndDropControl.draggableNode$;
-    this.dropEmit$ = this.dragAndDropControl.droppedSubject$;
-    this.scrollDirection$ = this.dragAndDropControl.scrollDirection$;
-    this.expandNodeWithDelay$ = this.dragAndDropControl.expandNodeWithDelay$;
-
-    this.expandedItemIds$ = this.manipulator.expandedItemIds$;
-
-    this.treeControl = this.manipulator.treeControl;
-    this.dataSource = this.manipulator.dataSource;
-    this.data$ = this.dataSource.filteredData$;
-    this.isLoading$ = combineLatest([
-      this.manipulator.isLoading$,
-      this.manipulator.externalIsLoading$,
-      this.manipulator.isScrollByRouteLoading$
-    ]).pipe(
-      map(([isLoading, externalIsLoading, isScrollByRouteLoading]: [boolean, boolean, boolean]) => {
-        return isLoading || externalIsLoading || isScrollByRouteLoading;
-      })
-    );
-    this.viewPortReference$ = this.manipulator.viewPortReference$;
-    this.skeletonViewPortReference$ = this.manipulator.skeletonViewPortReference$;
-    this.listRange$ = this.manipulator.listRange$;
-    this.scrollIndex$ = this.manipulator.scrollIndex$;
-
-    this.trackBy$ = this.manipulator.externalTrackBy$;
-    this.nodeTemplate$ = this.manipulator.externalNodeTemplate$;
-    this.selectedNodesIds$ = this.manipulator.externalSelectedNodesIds$;
-    this.highlightedNodesIds$ = this.manipulator.externalHighlightedNodesIds$;
-    this.scrollBehavior$ = this.manipulator.externalScrollBehavior$;
-    this.hasDragAndDrop$ = this.manipulator.externalHasDragAndDrop$;
-    this.nodesWithoutPadding$ = this.manipulator.externalNodesWithoutPadding$;
+    // this.draggingHasStarted$ = this.dragAndDropControl.draggingHasStarted$;
+    // this.draggableNode$ = this.dragAndDropControl.draggableNode$;
+    // this.dropEmit$ = this.dragAndDropControl.droppedSubject$;
+    // this.scrollDirection$ = this.dragAndDropControl.scrollDirection$;
+    // this.expandNodeWithDelay$ = this.dragAndDropControl.expandNodeWithDelay$;
+    // this.expandedItemIds$ = this.manipulator.expandedItemIds$;
+    // this.treeControl = this.manipulator.treeControl;
+    // this.dataSource = this.manipulator.dataSource;
+    // this.data$ = this.dataSource.filteredData$;
+    // this.isLoading$
+    // this.viewPortReference$ = this.manipulator.viewPortReference$;
+    // this.skeletonViewPortReference$ = this.manipulator.skeletonViewPortReference$;
+    // this.listRange$ = this.manipulator.listRange$;
+    // this.scrollIndex$ = this.manipulator.scrollIndex$;
+    // this.trackBy$ = this.manipulator.externalTrackBy$;
+    // this.nodeTemplate$ = this.manipulator.externalNodeTemplate$;
+    // this.selectedNodesIds$ = this.manipulator.externalSelectedNodesIds$;
+    // this.highlightedNodesIds$ = this.manipulator.externalHighlightedNodesIds$;
+    // this.scrollBehavior$ = this.manipulator.externalScrollBehavior$;
+    // this.hasDragAndDrop$ = this.manipulator.externalHasDragAndDrop$;
+    // this.nodesWithoutPadding$ = this.manipulator.externalNodesWithoutPadding$;
   }
 
   public ngOnInit(): void {
