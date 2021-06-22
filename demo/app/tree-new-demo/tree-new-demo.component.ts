@@ -93,7 +93,7 @@ export class TreeNewDemoComponent implements OnDestroy {
   }
 
   private fetch(parentId: string): Observable<FlatTreeItem[]> {
-    const children: any = this.data.filter((item: FlatTreeItem) => item.originalData.parentId === parentId);
+    const children: FlatTreeItem[] = this.data.filter((item: FlatTreeItem) => item.originalData.parentId === parentId);
     return this.timeOut.pipe(
       startWith(0),
       switchMap((timeOut: number) => timer(timeOut)),

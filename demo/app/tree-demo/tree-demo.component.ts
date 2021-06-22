@@ -39,8 +39,4 @@ export class TreeDemoComponent {
     new FlatTreeItem(false, '🙉', 1, null),
     new FlatTreeItem(false, '🙈', 1, null)
   ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
-
-  public expandAll(): void {
-    this.tree.expandAllNodes();
-  }
 }

@@ -11,6 +11,9 @@ interface Position {
   left: number;
 }
 
+/**
+ * @deprecated
+ */
 @Injectable()
 export class TreeDragAndDropControl {
   public readonly draggingHasStarted$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
