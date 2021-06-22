@@ -94,7 +94,7 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
   public readonly data$: Observable<FlatTreeItem[]>;
   public readonly highlightedNodesIds$: Observable<string[]>;
   public readonly selectedNodesIds$: Observable<string[]>;
-  public readonly nodeTemplate$: Observable<TemplateRef<any>>;
+  public readonly nodeTemplate$: Observable<TemplateRef<unknown>>;
   public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
   public readonly nodesWithoutPadding$: Observable<boolean>;
   public readonly draggingHasStarted$: Observable<boolean>;
