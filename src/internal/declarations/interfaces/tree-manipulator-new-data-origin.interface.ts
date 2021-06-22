@@ -4,7 +4,7 @@ import { FlatTreeItem } from '../classes/flat-tree-item.class';
 
 export interface TreeManipulatorNewDataOrigin {
   readonly fetchOnCreate?: boolean;
-  readonly nodeTemplate?: Observable<TemplateRef<any>>;
+  readonly nodeTemplate?: Observable<TemplateRef<unknown>>;
   readonly hasDragAndDrop?: Observable<boolean>;
   readonly nodesWithoutPadding?: Observable<boolean>;
   readonly scrollBehavior?: Observable<ScrollBehavior>;

@@ -48,7 +48,7 @@ export abstract class TreeManipulatorBase {
   public readonly dataSource: CustomTreeDataSource;
   public readonly dragAndDropControl: TreeDragAndDropControl;
 
-  public readonly externalNodeTemplate$: Observable<TemplateRef<any>>;
+  public readonly externalNodeTemplate$: Observable<TemplateRef<unknown>>;
   public readonly externalTrackBy$: Observable<TrackByFunction<FlatTreeItem>>;
   public readonly externalNodesWithoutPadding$: Observable<boolean>;
   public readonly externalScrollBehavior$: Observable<ScrollBehavior>;
