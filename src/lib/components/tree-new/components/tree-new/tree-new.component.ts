@@ -48,15 +48,20 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
 import { TreeDataSource } from '../../../../../internal/declarations/interfaces/tree-data-source.interface';
 
-type CdkTreeNodeDefWhen<T> = (index: number, nodeData: T) => boolean;
+type TreeNodeDisplayConditionFunction<T> = (index: number, nodeData: T) => boolean;
 
 const TREE_ITEM_SIZE_PX: number = 28;
-const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean => {
+const NODE_HAS_CHILD_COMPARATOR: TreeNodeDisplayConditionFunction<FlatTreeItem> = (
+  _: number,
+  node: FlatTreeItem
+): boolean => {
   return !isNil(node) && node.isExpandable && !node.isElement;
 };
-const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
-  !isNil(node) && !node.isExpandable && !node.isElement;
-const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
+const NODE_HAS_NO_CHILD_COMPARATOR: TreeNodeDisplayConditionFunction<FlatTreeItem> = (
+  _: number,
+  node: FlatTreeItem
+): boolean => !isNil(node) && !node.isExpandable && !node.isElement;
+const NODE_IS_ELEMENT: TreeNodeDisplayConditionFunction<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
   return !isNil(element) && !element.isExpandable && element.isElement;
 };
 @Component({
@@ -70,13 +75,15 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
   @ViewChild('skeletonViewPort', { static: true }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
   @ViewChild('draggable') private readonly draggableElement: ElementRef<HTMLElement>;
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
-  @Output() public readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter();
-  @Output() public readonly visibleElementsCountChanged: EventEmitter<number> = new EventEmitter();
+  @Output() public readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter<
+    DropEventInterface<FlatTreeItem>
+  >();
+  @Output() public readonly visibleElementsCountChanged: EventEmitter<number> = new EventEmitter<number>();
 
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
-  public readonly hasChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
-  public readonly hasNoChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
-  public readonly isElement: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_IS_ELEMENT;
+  public readonly hasChild: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
+  public readonly hasNoChild: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
+  public readonly isElement: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_IS_ELEMENT;
   private readonly subscription: Subscription = new Subscription();
   private readonly scrollIndex$: Observable<number>;
 

@@ -25,21 +25,25 @@ const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number,
 
 export abstract class TreeManipulatorBase {
   protected readonly data$: Observable<FlatTreeItem[]>;
-  protected readonly fetchChildrenFunction: (parentId: string) => Observable<any[]>;
+  protected readonly fetchChildrenFunction: (parentId: string) => Observable<FlatTreeItem[]>;
   protected readonly hideRoot: Observable<boolean>;
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
     TreeManipulatorBase.getLevel,
     TreeManipulatorBase.isExpandable
   );
-  public readonly expandedItemIds$: BehaviorSubject<Set<string>> = new BehaviorSubject(new Set());
+  public readonly expandedItemIds$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(new Set());
   public readonly scrollIndex$: Observable<number>;
 
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isScrollByRouteLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
-  public readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
-  public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
+  public readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject<CdkVirtualScrollViewport>(
+    1
+  );
+  public readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject<CdkVirtualScrollViewport>(
+    1
+  );
+  public readonly listRange$: BehaviorSubject<Nullable<ListRange>> = new BehaviorSubject<Nullable<ListRange>>(null);
 
   public readonly dataSource: CustomTreeDataSource;
   public readonly dragAndDropControl: TreeDragAndDropControl;
@@ -315,7 +319,7 @@ export abstract class TreeManipulatorBase {
 
   private fetchAndSaveChildren(parentNodeWithIndex: FlatTreeItemWithIndex = null): Observable<FlatTreeItem[]> {
     if (isNil(this.fetchChildrenFunction)) {
-      return of();
+      return of([]);
     }
     this.isLoading$.next(true);
     const isRoot: boolean = isNil(parentNodeWithIndex);
