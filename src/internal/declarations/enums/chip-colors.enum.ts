@@ -1,4 +1,5 @@
 export enum ChipColors {
   Primary = 'primary',
-  Light = 'light'
+  Light = 'light',
+  Error = 'error'
 }
