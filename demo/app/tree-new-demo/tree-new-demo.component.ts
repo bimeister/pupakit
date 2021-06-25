@@ -74,12 +74,11 @@ export class TreeNewDemoComponent implements OnDestroy {
 
   private setNewInjector(): void {
     this.manipulator = new TreeManipulatorNew({
-      hideRoot: of(false),
       fetchChildrenFunction: (parentId: string) => this.fetch(parentId),
-      isLoading: this.loading,
-      scrollByRoute: of([WOLF.id, CAR.id, '1']),
-      selectedNodesIds: of(['1']),
-      hasDragAndDrop: of(true)
+      isLoading$: this.loading,
+      scrollByRoute$: of([WOLF.id, CAR.id, '1']),
+      selectedNodesIds$: of(['1']),
+      hasDragAndDrop$: of(true)
     });
     const componentOutlet: ComponentOutlet = {
       componentClass: TreeNewComponent,

@@ -82,7 +82,7 @@ export class TreeManipulator {
       }
 
       case TreeType.Custom: {
-        this.dataSource = new CustomTreeDataSource(this.expandedItemIds$, this.listRange$, this.dataOrigin.hideRoot);
+        this.dataSource = new CustomTreeDataSource(this.expandedItemIds$, this.listRange$);
         break;
       }
 
