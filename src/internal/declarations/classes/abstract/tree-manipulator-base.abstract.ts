@@ -26,7 +26,6 @@ const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number,
 export abstract class TreeManipulatorBase {
   protected readonly data$: Observable<FlatTreeItem[]>;
   protected readonly fetchChildrenFunction: (parentId: string) => Observable<FlatTreeItem[]>;
-  protected readonly hideRoot: Observable<boolean>;
 
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
     TreeManipulatorBase.getLevel,
@@ -62,19 +61,18 @@ export abstract class TreeManipulatorBase {
 
   constructor(dataOrigin: TreeManipulatorNewDataOrigin) {
     this.fetchChildrenFunction = dataOrigin.fetchChildrenFunction;
-    this.hideRoot = dataOrigin.hideRoot;
-    this.externalScrollByRoute$ = dataOrigin.scrollByRoute;
-    this.externalNodeTemplate$ = dataOrigin.nodeTemplate ?? of(null);
-    this.externalScrollBehavior$ = dataOrigin.scrollBehavior ?? of('smooth');
-    this.externalTrackBy$ = dataOrigin.trackBy ?? of(DEFAULT_TRACK_BY_FUNCTION);
-    this.externalNodesWithoutPadding$ = dataOrigin.nodesWithoutPadding ?? of(false);
-    this.externalHasDragAndDrop$ = dataOrigin.hasDragAndDrop ?? of(false);
-    this.externalSelectedNodesIds$ = dataOrigin.selectedNodesIds ?? of([]);
-    this.externalHighlightedNodesIds$ = dataOrigin.highlightedNodesIds ?? of([]);
-    this.externalScrollByRoute$ = dataOrigin.scrollByRoute ?? of([]);
-    this.externalIsLoading$ = dataOrigin.isLoading ?? of(false);
+    this.externalScrollByRoute$ = dataOrigin.scrollByRoute$;
+    this.externalNodeTemplate$ = dataOrigin.nodeTemplate$ ?? of(null);
+    this.externalScrollBehavior$ = dataOrigin.scrollBehavior$ ?? of('smooth');
+    this.externalTrackBy$ = dataOrigin.trackBy$ ?? of(DEFAULT_TRACK_BY_FUNCTION);
+    this.externalNodesWithoutPadding$ = dataOrigin.nodesWithoutPadding$ ?? of(false);
+    this.externalHasDragAndDrop$ = dataOrigin.hasDragAndDrop$ ?? of(false);
+    this.externalSelectedNodesIds$ = dataOrigin.selectedNodesIds$ ?? of([]);
+    this.externalHighlightedNodesIds$ = dataOrigin.highlightedNodesIds$ ?? of([]);
+    this.externalScrollByRoute$ = dataOrigin.scrollByRoute$ ?? of([]);
+    this.externalIsLoading$ = dataOrigin.isLoading$ ?? of(false);
     this.fetchOnCreate = dataOrigin.fetchOnCreate ?? true;
-    this.dataSource = new CustomTreeDataSource(this.expandedItemIds$, this.listRange$, this.hideRoot);
+    this.dataSource = new CustomTreeDataSource(this.expandedItemIds$, this.listRange$);
     this.data$ = this.dataSource.filteredData$;
     this.scrollIndex$ = this.getScrollIndex();
     this.dragAndDropControl = new TreeDragAndDropControl();

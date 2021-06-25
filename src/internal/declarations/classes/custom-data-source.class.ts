@@ -14,8 +14,7 @@ export class CustomTreeDataSource implements TreeDataSource {
 
   constructor(
     public readonly expandedItemIds$: Observable<Set<string>>,
-    public readonly activeRange$: Observable<ListRange>,
-    public readonly hideRoot$: Observable<boolean>
+    public readonly activeRange$: Observable<ListRange>
   ) {}
 
   public connect(): Observable<FlatTreeItem[]> {

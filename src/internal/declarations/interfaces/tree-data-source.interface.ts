@@ -9,7 +9,6 @@ export interface TreeDataSource {
   readonly sortedData$: Observable<FlatTreeItem[]>;
   readonly expandedItemIds$: Observable<Set<string>>;
   readonly activeRange$: Observable<ListRange>;
-  readonly hideRoot$: Observable<boolean>;
   readonly disconnect$: Subject<void>;
 
   connect(): Observable<FlatTreeItem[]>;
