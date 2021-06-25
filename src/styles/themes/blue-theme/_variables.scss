@@ -6,7 +6,6 @@ $color_main-dark: #04222e; /* Нет в дизайн-системе */
 $color_active: #009eff;
 $color_success: #00c902;
 $color_alert: #ffc009;
-$color_error: #ff0000;
 $color_text: #002c3e;
 
 $color_grey-light: #797979;
@@ -19,6 +18,11 @@ $color_black: #000000; /* Нет в дизайн-системе */
 $color_pale-blue: #d9eafe; /* Нет в дизайн-системе */
 $color_cadet-blue: #9fb7d3; /* Нет в дизайн-системе */
 $color_cadet-blue-light: #e0eaf5; /* Нет в дизайн-системе */
+
+$color_error: #ff0000;
+$color_error-hovered: #de0000;
+$color_error-active: #bd0000;
+$color_error-disabled: #647e89;
 
 $color_primary: $color_active;
 $color_primary-hovered: #01668e;
