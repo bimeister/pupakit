@@ -8,7 +8,7 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { guidGenerate, isNil } from '@bimeister/utilities';
+import { getUuid, isNil } from '@bimeister/utilities';
 import { asyncScheduler, Observable, Subject, Subscriber } from 'rxjs';
 import { observeOn, shareReplay, takeUntil } from 'rxjs/operators';
 import { ComponentChanges } from '../../../../src/internal/declarations/interfaces/component-changes.interface';
@@ -34,7 +34,7 @@ export class PropsRadioSelectComponent
   @Input()
   public options: RadioOption[] = [];
 
-  public readonly name: string = guidGenerate();
+  public readonly name: string = getUuid();
   public readonly formControl: FormControl = new FormControl();
 
   private readonly unsubscribe$: Subject<void> = new Subject<void>();
@@ -65,7 +65,7 @@ export class PropsRadioSelectComponent
   }
 
   public generateId(): string {
-    return guidGenerate();
+    return getUuid();
   }
 
   public trackByFn: TrackByFunction<RadioOption> = (index: number, _item: RadioOption) => index;
