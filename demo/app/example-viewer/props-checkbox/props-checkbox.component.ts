@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { guidGenerate } from '@bimeister/utilities';
 import { asyncScheduler, concat, Observable, of, Subject, Subscriber } from 'rxjs';
 import { observeOn, shareReplay, takeUntil, tap } from 'rxjs/operators';
+import { getUuid } from '@bimeister/utilities';
 
 @Component({
   selector: 'demo-props-checkbox',
@@ -39,7 +39,7 @@ export class PropsCheckboxComponent extends Observable<unknown> implements Contr
       return this.valueChanges$.subscribe(subscriber);
     });
 
-    this.id = guidGenerate();
+    this.id = getUuid();
   }
 
   public ngOnDestroy(): void {

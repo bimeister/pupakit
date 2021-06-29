@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { guidGenerate } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { Uuid } from '../../../src/internal/declarations/types/uuid.type';
+import { getUuid } from '@bimeister/utilities';
 
 export interface MockCheckModel {
   isEnabled: boolean;
@@ -20,7 +20,7 @@ const MOCK_CHECKS: MockCheckModel[] = Array(100)
     timesPassed: Math.round(Math.random() * 10),
     name: `some check ${index + 1}`,
     createdBy: 'admin admin',
-    id: guidGenerate()
+    id: getUuid()
   }));
 
 @Component({
