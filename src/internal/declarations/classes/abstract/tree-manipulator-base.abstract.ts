@@ -109,6 +109,30 @@ export abstract class TreeManipulatorBase {
     this.expandBranchAsync(nodeId).subscribe();
   }
 
+  public expandBranchAsync(nodeId: string): Observable<void> {
+    return this.getNodeById(nodeId).pipe(
+      switchMap((node: FlatTreeItem) => this.getIndexByNode(node).pipe(map((index: number) => ({ ...node, index })))),
+      filter((node: FlatTreeItemWithIndex) => node.index !== -1 && node.isExpandable),
+      switchMap((node: FlatTreeItemWithIndex) =>
+        this.isExpanded(node.id).pipe(map((isExpanded: boolean) => [node, isExpanded]))
+      ),
+      switchMap(([node, isExpanded]: [FlatTreeItemWithIndex, boolean]) => {
+        const getChildren: Observable<FlatTreeItem[]> = isExpanded
+          ? this.fetchChildrenFunction(node.id)
+          : this.fetchAndSaveChildren(node);
+        return getChildren.pipe(map((childrenList: FlatTreeItem[]) => [node, childrenList]));
+      }),
+      switchMap(([node, childrenList]: [FlatTreeItemWithIndex, FlatTreeItem[]]) =>
+        this.expandExistNodeAsync(node).pipe(mapTo(childrenList))
+      ),
+      map((childrenList: FlatTreeItem[]) =>
+        childrenList.map((childNode: FlatTreeItem) => this.expandBranchAsync(childNode.id))
+      ),
+      switchMap((childrenExpandList: Observable<void>[]) => concat(...childrenExpandList)),
+      mapToVoid()
+    );
+  }
+
   public collapse(nodesList: FlatTreeItem[]): void {
     this.expandedItemIds$.pipe(take(1)).subscribe((expandedItemIds: Set<string>) => {
       const expandedNodesList: FlatTreeItem[] = nodesList.filter((node: FlatTreeItem) => expandedItemIds.has(node.id));
@@ -166,30 +190,6 @@ export abstract class TreeManipulatorBase {
               switchMap(() => this.expandListAsync(nonExistNodeIdsList))
             );
       }),
-      mapToVoid()
-    );
-  }
-
-  private expandBranchAsync(nodeId: string): Observable<void> {
-    return this.getNodeById(nodeId).pipe(
-      switchMap((node: FlatTreeItem) => this.getIndexByNode(node).pipe(map((index: number) => ({ ...node, index })))),
-      filter((node: FlatTreeItemWithIndex) => node.index !== -1 && node.isExpandable),
-      switchMap((node: FlatTreeItemWithIndex) =>
-        this.isExpanded(node.id).pipe(map((isExpanded: boolean) => [node, isExpanded]))
-      ),
-      switchMap(([node, isExpanded]: [FlatTreeItemWithIndex, boolean]) => {
-        const getChildren: Observable<FlatTreeItem[]> = isExpanded
-          ? this.fetchChildrenFunction(node.id)
-          : this.fetchAndSaveChildren(node);
-        return getChildren.pipe(map((childrenList: FlatTreeItem[]) => [node, childrenList]));
-      }),
-      switchMap(([node, childrenList]: [FlatTreeItemWithIndex, FlatTreeItem[]]) =>
-        this.expandExistNodeAsync(node).pipe(mapTo(childrenList))
-      ),
-      map((childrenList: FlatTreeItem[]) =>
-        childrenList.map((childNode: FlatTreeItem) => this.expandBranchAsync(childNode.id))
-      ),
-      switchMap((childrenExpandList: Observable<void>[]) => concat(...childrenExpandList)),
       mapToVoid()
     );
   }
