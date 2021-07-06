@@ -81,10 +81,7 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer, OnChange
 
     this.isNodeSelectionEnabled$
       .pipe(
-        filter(
-          (isNodeSelectionEnabled: boolean) =>
-            (isElement && !isNodeSelectionEnabled) || (!isElement && isNodeSelectionEnabled)
-        ),
+        filter((isNodeSelectionEnabled: boolean) => isElement || isNodeSelectionEnabled),
         switchMap(() => this.selectedNodesIds$),
         take(1),
         map((selectedNodeIds: Uuid[]) => selectedNodeIds.length === 1 && selectedNodeIds[0] === id)
