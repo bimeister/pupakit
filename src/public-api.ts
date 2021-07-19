@@ -38,9 +38,7 @@ export {
   TreeManipulatorNew,
   TreeManipulatorBase,
   TreeManipulatorNewDataOrigin,
-  ChipColors,
-  ConnectedPositionX,
-  ConnectedPositionY
+  ChipColors
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

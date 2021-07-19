@@ -1,5 +1,5 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
-import { Injectable, Injector, RendererFactory2 } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { ModalConfigDto } from '../../../../internal/declarations/classes/dto/modal-config.dto';
 import { ModalRef } from '../../../../internal/declarations/classes/modal-ref.class';
@@ -7,7 +7,6 @@ import { Modal } from '../../../../internal/declarations/classes/modal.class';
 import { ModalConfig } from '../../../../internal/declarations/interfaces/modal-config.interface';
 import { OpenedModal } from '../../../../internal/declarations/interfaces/opened-modal.interface';
 import { Position } from '../../../../internal/declarations/types/position.type';
-import { PortalLayersService } from '../../../../internal/shared/services/portal-layers.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,12 +18,7 @@ export class ModalsService {
     return this.modalRefs.size;
   }
 
-  constructor(
-    protected readonly overlay: Overlay,
-    protected readonly injector: Injector,
-    private readonly rendererFactory: RendererFactory2,
-    private readonly portalLayersService: PortalLayersService
-  ) {}
+  constructor(protected readonly overlay: Overlay, protected readonly injector: Injector) {}
 
   public open<ComponentT, ReturnDataT>(
     component: ComponentType<ComponentT>,
@@ -32,19 +26,16 @@ export class ModalsService {
   ): OpenedModal<ReturnDataT> {
     const configDto: ModalConfigDto = new ModalConfigDto(config);
 
-    const modal: Modal<ComponentT> = new Modal(component, configDto, this.overlay, this.injector, this.rendererFactory);
-    this.portalLayersService.register(modal);
-    this.portalLayersService.moveToTopById(modal.id);
+    const modal: Modal<ComponentT> = new Modal(component, configDto, this.overlay, this.injector);
 
     const modalRef: ModalRef<ReturnDataT> = modal.open();
-    this.modalRefs.set(modal.id, modalRef);
+    this.modalRefs.set(modal.getId(), modalRef);
 
-    this.processModalClosed(modal);
-    this.processModalPosisitionUpdated(modal);
-    this.processModalToTopLayerMoved(modal);
+    modalRef.closed$.subscribe(() => this.modalRefs.delete(modal.getId()));
+    modalRef.positionUpdated$.subscribe((position: Position) => modal.updatePosition(position));
 
     return {
-      id: modal.id,
+      id: modal.getId(),
       closed$: modalRef.closed$,
       positionUpdated$: modalRef.positionUpdated$
     };
@@ -62,23 +53,5 @@ export class ModalsService {
 
   public closeAll(): void {
     this.modalRefs.forEach((modalRef: ModalRef<unknown>) => modalRef.close(null));
-  }
-
-  private processModalClosed(modal: Modal<unknown>): void {
-    const modalRef: ModalRef<unknown> = this.modalRefs.get(modal.id);
-    modalRef.closed$.subscribe(() => {
-      this.portalLayersService.removeById(modal.id);
-      this.modalRefs.delete(modal.id);
-    });
-  }
-
-  private processModalPosisitionUpdated(modal: Modal<unknown>): void {
-    const modalRef: ModalRef<unknown> = this.modalRefs.get(modal.id);
-    modalRef.positionUpdated$.subscribe((position: Position) => modal.updatePosition(position));
-  }
-
-  private processModalToTopLayerMoved(modal: Modal<unknown>): void {
-    const modalRef: ModalRef<unknown> = this.modalRefs.get(modal.id);
-    modalRef.toTopLayerMoved$.subscribe(() => this.portalLayersService.moveToTopById(modalRef.modalId));
   }
 }
