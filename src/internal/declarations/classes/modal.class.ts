@@ -1,6 +1,6 @@
 import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
-import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injector } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
 import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../constants/tokens/modal-container-data.token';
@@ -8,11 +8,9 @@ import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ModalContainerData } from '../interfaces/modal-container-data.interface';
 import { Position } from '../types/position.type';
 import { ModalRef } from './modal-ref.class';
-import { PortalLayer } from '../interfaces/portal-layer.interface';
 
-export class Modal<ComponentT> implements PortalLayer {
-  public readonly id: string = getUuid();
-  private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
+export class Modal<ComponentT> {
+  private readonly id: string;
 
   private readonly overlayRef: OverlayRef = this.overlay.create({
     positionStrategy: this.getPositionStrategy(),
@@ -20,34 +18,25 @@ export class Modal<ComponentT> implements PortalLayer {
     backdropClass: this.config.isBackdropTransparent ? 'cdk-overlay-transparent-backdrop' : 'cdk-overlay-dark-backdrop'
   });
 
-  private readonly modalRef: ModalRef = new ModalRef(this.id, this.overlayRef, this.config);
-  private currentZIndex: number = 0;
+  private readonly modalRef: ModalRef = new ModalRef(this.overlayRef);
 
   constructor(
     private readonly component: ComponentType<ComponentT>,
     private readonly config: ModalConfig,
     private readonly overlay: Overlay,
-    private readonly injector: Injector,
-    private readonly rendererFactory: RendererFactory2
+    private readonly injector: Injector
   ) {
+    this.id = getUuid();
     this.handleBackdropClick();
-  }
-
-  public getCurrentZIndex(): number {
-    return this.currentZIndex;
-  }
-
-  public moveToZIndex(zIndex: number): void {
-    if (isNil(this.overlayRef.hostElement)) {
-      return;
-    }
-    this.currentZIndex = zIndex;
-    this.renderer.setStyle(this.overlayRef.hostElement, 'z-index', zIndex);
   }
 
   public open(): ModalRef {
     this.overlayRef.attach(this.getComponentPortal());
     return this.modalRef;
+  }
+
+  public getId(): string {
+    return this.id;
   }
 
   public updatePosition(position: Position): void {
@@ -71,8 +60,8 @@ export class Modal<ComponentT> implements PortalLayer {
         {
           originX: 'start',
           originY: 'top',
-          overlayX: this.config.overlayX ?? 'start',
-          overlayY: this.config.overlayY ?? 'top'
+          overlayX: 'start',
+          overlayY: 'top'
         }
       ]);
   }
