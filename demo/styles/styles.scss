@@ -3,6 +3,8 @@
 @import '~src/styles/styles';
 @import '~src/styles/themes/blue-theme/pupa-blue-theme.scss';
 
+@include scrollbar();
+
 html {
   font-size: variable(font-size_root);
   @include regular();
@@ -12,6 +14,8 @@ html {
 body {
   padding: variable(padding_body);
   margin: 0;
+  overscroll-behavior: none;
+  position: relative;
 }
 
 h1 {

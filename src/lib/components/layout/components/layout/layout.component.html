@@ -1,5 +1,14 @@
 <div class="layout-wrapper content">
-  <ng-content></ng-content>
+  <div class="wrapper">
+    <div class="layout-wrapper grid" *ngIf="isGridVisible$ | async">
+      <div class="grid__column" *ngFor="let column of columns$ | async; trackBy: trackByColumnIndex">
+        <div class="grid__column-digit">
+          {{ column }}
+        </div>
+      </div>
+    </div>
+    <ng-content></ng-content>
+  </div>
 </div>
 <div class="layout-wrapper loader" [ngClass]="loaderType$ | async" *ngIf="isLoaderVisible$ | async">
   <pupa-loader></pupa-loader>
@@ -13,3 +22,4 @@
 <div class="layout-wrapper tooltip">
   <pupa-tooltip-pane></pupa-tooltip-pane>
 </div>
+<iframe class="layout-wrapper iframe" #iframe frameborder="0"></iframe>
