@@ -52,7 +52,8 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
 
   @HostListener('mousedown', ['$event'])
   public processMouseDown(event: MouseEvent): void {
-    event.stopPropagation();
+    event.preventDefault();
+
     this.modalRef.moveToTopLayer();
     const selfClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
     this.dragerToMousePositionDelta = [selfClientRect.left - event.clientX, selfClientRect.top - event.clientY];
