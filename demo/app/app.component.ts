@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { isEmpty, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { GridStateService } from '../../src/lib/components/layout/services/grid-state.service';
 
 interface LinkItem {
   title: string;
@@ -17,9 +19,13 @@ interface LinksGroup {
   selector: 'demo-root',
   styleUrls: ['./app.component.scss'],
   templateUrl: './app.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
+  public readonly isNavigationVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly gridVisibleFormControl: FormControl = new FormControl(false);
+
   private readonly generalGroup: LinksGroup = {
     title: 'General',
     linkItems: [
@@ -142,6 +148,15 @@ export class AppComponent {
 
   public searchFieldContainerAdditionaslClassName$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  private readonly subscription: Subscription = new Subscription();
+  constructor(private readonly gridStateService: GridStateService) {
+    this.subscription.add(this.processGridVisibleStateControlChanges());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
   public setSearchValue(searchValue: string): void {
     this.searchValue$.next(searchValue);
   }
@@ -161,5 +176,17 @@ export class AppComponent {
     }
 
     this.searchFieldContainerAdditionaslClassName$.next('');
+  }
+
+  public showNavigationContainer(): void {
+    this.isNavigationVisible$.next(true);
+  }
+
+  public hideNavigationContainer(): void {
+    this.isNavigationVisible$.next(false);
+  }
+
+  private processGridVisibleStateControlChanges(): Subscription {
+    return this.gridVisibleFormControl.valueChanges.subscribe(() => this.gridStateService.toggleGridVisibleState());
   }
 }

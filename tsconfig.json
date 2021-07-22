@@ -28,7 +28,8 @@
         "name": "@angular/language-service"
       }
     ],
-    "types": ["jest", "node"]
+    "types": ["jest", "node"],
+    "resolveJsonModule": true
   },
   "angularCompilerOptions": {
     "enableIvy": true

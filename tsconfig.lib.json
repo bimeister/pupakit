@@ -5,7 +5,8 @@
     "declaration": true,
     "inlineSources": false,
     "module": "ESNext",
-    "target": "ESNext"
+    "target": "ESNext",
+    "resolveJsonModule": true
   },
   "include": ["src"],
   "angularCompilerOptions": {

@@ -1,22 +1,66 @@
-@import './../../src/styles/themes/functions.scss';
-@import './../../src/styles/mixins.scss';
-@import './../../src/styles/functions.scss';
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
 
 @include scrollbar();
 
 .layout-wrapper {
-  height: 100vh;
   display: flex;
-  flex-flow: row nowrap;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+
+  position: relative;
+  min-height: 100vh;
+
+  @include grid-container();
+}
+
+.menu-burger {
+  display: none;
+
+  cursor: pointer;
+  font-size: px(30);
+
+  @include lt-md() {
+    display: block;
+  }
 }
 
 .navigation {
-  width: 300px;
   color: #616161;
   box-shadow: 5px 0 19px 0 #d3d3d35e;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  background-color: color(white);
+
+  height: 100%;
+  z-index: 10;
+
+  @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xl: 4, $xxl: 6);
+
+  &__close {
+    position: absolute;
+    top: rems(1);
+    right: rems(1);
+    display: block;
+
+    @include gt-md() {
+      display: none;
+    }
+  }
+
+  &.mobile-hide {
+    @include lt-md() {
+      display: none;
+    }
+  }
 
   .search-field-container {
     padding: rems(1);
@@ -78,11 +122,28 @@
 
 .content-wrapper {
   flex: 1;
-  padding: 0 32px;
-  overflow: auto;
+  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xl: 4, $xxl: 6);
 }
 
 .content {
-  min-width: 700px;
-  max-width: 1000px;
+  margin-bottom: rems(1);
+}
+
+.settings {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: rems(1);
+
+  z-index: 10;
+
+  background-color: color(light);
+
+  &__label {
+    margin-right: rems(1);
+  }
 }

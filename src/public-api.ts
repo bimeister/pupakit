@@ -38,6 +38,7 @@ export {
   TreeManipulatorNew,
   TreeManipulatorBase,
   TreeManipulatorNewDataOrigin,
+  UiState,
   ChipColors,
   ConnectedPositionX,
   ConnectedPositionY

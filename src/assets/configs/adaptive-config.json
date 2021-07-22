@@ -1,0 +1,42 @@
+{
+  "breakpoints": {
+    "xs": 320,
+    "sm": 768,
+    "md": 1025,
+    "lg": 1280,
+    "xl": 1920,
+    "xxl": 2560
+  },
+  "columns": {
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 18,
+    "xxl": 22
+  },
+  "gutters": {
+    "xs": 16,
+    "sm": 16,
+    "md": 16,
+    "lg": 16,
+    "xl": 16,
+    "xxl": 16
+  },
+  "offsets": {
+    "xs": 0,
+    "sm": 0,
+    "md": 0,
+    "lg": 0,
+    "xl": 0,
+    "xxl": 0
+  },
+  "queries":  {
+    "xs": "(max-width: 767px)",
+    "sm": "(min-width: 768px) and (max-width: 1024px)",
+    "md": "(min-width: 1025px) and (max-width: 1279px)",
+    "lg": "(min-width: 1280px) and (max-width: 1919px)",
+    "xl": "(min-width: 1920px) and (max-width: 2559px)",
+    "xxl": "(min-width: 2560px)"
+  }
+}

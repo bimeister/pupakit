@@ -1,5 +1,6 @@
 @import 'themes/functions';
 @import './functions.scss';
+@import './adaptive.scss';
 
 @mixin regular {
   font-family: 'effraregular', sans-serif;
@@ -134,5 +135,15 @@
 
   ::-webkit-scrollbar-thumb {
     background-color: color(active);
+  }
+}
+
+@mixin debug() {
+  background-color: rgba(#{color(error-rgb)}, 0.33) !important;
+}
+
+@mixin host-selector($selector) {
+  :host-context(#{$selector}) & {
+    @content;
   }
 }

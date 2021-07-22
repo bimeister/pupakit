@@ -1,0 +1,353 @@
+$xsBreakPoint: 320;
+$xsGutter: 16;
+$xsOffset: 0;
+$xsColumnsCount: 4;
+
+$smBreakPoint: 768;
+$smGutter: 16;
+$smOffset: 0;
+$smColumnsCount: 8;
+
+$mdBreakPoint: 1025;
+$mdGutter: 16;
+$mdOffset: 0;
+$mdColumnsCount: 12;
+
+$lgBreakPoint: 1280;
+$lgGutter: 16;
+$lgOffset: 0;
+$lgColumnsCount: 16;
+
+$xlBreakPoint: 1920;
+$xlGutter: 16;
+$xlOffset: 0;
+$xlColumnsCount: 18;
+
+$xxlBreakPoint: 2560;
+$xxlGutter: 16;
+$xxlOffset: 0;
+$xxlColumnsCount: 22;
+
+@mixin width-between($min-width, $max-height) {
+  $max-height: $max-height - 1;
+  $min-width: $min-width - 1;
+
+  @media (min-width: $min-width * 1px) and (max-width: $max-height * 1px) {
+    @content;
+  }
+}
+
+@mixin height-between($min-height, $max-height) {
+  $max-height: $max-height - 1;
+  $min-height: $min-height - 1;
+
+  @media (min-height: $min-height * 1px) and (max-height: $max-height * 1px) {
+    @content;
+  }
+}
+
+@mixin width-less-than($width) {
+  $width: $width - 1;
+
+  @media (max-width: $width * 1px) {
+    @content;
+  }
+}
+
+@mixin height-less-than($height) {
+  $height: $height - 1;
+
+  @media (max-height: $height * 1px) {
+    @content;
+  }
+}
+
+@mixin width-more-than($width) {
+  $width: $width;
+
+  @media (min-width: $width * 1px) {
+    @content;
+  }
+}
+
+@mixin height-more-than($height) {
+  $height: $height - 1;
+
+  @media (min-height: $height * 1px) {
+    @content;
+  }
+}
+
+@function calc-between-width($width-start, $value-start, $width-end, $value-end) {
+  @return calc(
+    #{$value-start} * 1px + (#{$value-end} - #{$value-start}) * (100vw - #{$width-start} * 1px) / (#{$width-end} - #{$width-start})
+  );
+}
+
+@function calc-between-height($height-start, $value-start, $height-end, $value-end) {
+  @return calc(
+    #{$value-start} * 1px + (#{$value-end} - #{$value-start}) * (100vh - #{$height-start} * 1px) / (#{$height-end} - #{$height-start})
+  );
+}
+
+@mixin width-between-property(
+  $property,
+  $width-start,
+  $value-start,
+  $width-end,
+  $value-end,
+  $is-save-width-before: false,
+  $is-save-width-after: false
+) {
+  #{$property}: $value-start * 1px;
+
+  @include width-between($width-start, $width-end) {
+    #{$property}: calc-between-width($width-start, $value-start, $width-end, $value-end);
+  }
+
+  @if $is-save-width-before {
+    @include width-less-than($width-start) {
+      #{$property}: $value-start * 1px;
+    }
+  }
+
+  @if $is-save-width-after {
+    @include width-more-than($width-end) {
+      #{$property}: $value-end * 1px;
+    }
+  }
+}
+
+@mixin height-between-property(
+  $property,
+  $height-start,
+  $value-start,
+  $height-end,
+  $value-end,
+  $is-save-height-before: false,
+  $is-save-height-after: false
+) {
+  #{$property}: $value-start * 1px;
+
+  @include height-between($height-start, $height-end) {
+    #{$property}: calc-between-height($height-start, $value-start, $height-end, $value-end);
+  }
+
+  @if $is-save-height-before {
+    @include height-less-than($height-start) {
+      #{$property}: $value-start * 1px;
+    }
+  }
+
+  @if $is-save-height-after {
+    @include height-more-than($height-end) {
+      #{$property}: $value-end * 1px;
+    }
+  }
+}
+
+@mixin portrait() {
+  @media (orientation: portrait) {
+    @content;
+  }
+}
+
+@mixin landscape() {
+  @media (orientation: landscape) {
+    @content;
+  }
+}
+
+/** adaptive grid mixins by adaptive-config.json */
+
+// Ширина экрана МЕНЬШЕ, чем указанное значение
+@mixin xs() {
+  @include width-less-than($smBreakPoint - 1) {
+    @content;
+  }
+}
+
+@mixin sm() {
+  @include width-between($smBreakPoint, $mdBreakPoint - 1) {
+    @content;
+  }
+}
+
+@mixin md() {
+  @include width-between($mdBreakPoint, $lgBreakPoint - 1) {
+    @content;
+  }
+}
+
+@mixin lg() {
+  @include width-between($lgBreakPoint, $xlBreakPoint - 1) {
+    @content;
+  }
+}
+
+@mixin xl() {
+  @include width-more-than($xlBreakPoint) {
+    @content;
+  }
+}
+
+@mixin xxl() {
+  @include width-more-than($xxlBreakPoint) {
+    @content;
+  }
+}
+
+// Ширина экрана МЕНЬШЕ, чем указанное значение
+@mixin lt-sm() {
+  @include width-less-than($smBreakPoint) {
+    @content;
+  }
+}
+
+@mixin lt-md() {
+  @include width-less-than($mdBreakPoint) {
+    @content;
+  }
+}
+
+@mixin lt-lg() {
+  @include width-less-than($lgBreakPoint) {
+    @content;
+  }
+}
+
+@mixin lt-xl() {
+  @include width-less-than($xlBreakPoint) {
+    @content;
+  }
+}
+
+@mixin lt-xxl() {
+  @include width-less-than($xxlBreakPoint) {
+    @content;
+  }
+}
+
+// Ширина экрана БОЛЬШЕ, чем указанное значение
+@mixin gt-sm() {
+  @include width-more-than($smBreakPoint) {
+    @content;
+  }
+}
+
+@mixin gt-md() {
+  @include width-more-than($mdBreakPoint) {
+    @content;
+  }
+}
+
+@mixin gt-lg() {
+  @include width-more-than($lgBreakPoint) {
+    @content;
+  }
+}
+
+@mixin gt-xl() {
+  @include width-more-than($xlBreakPoint) {
+    @content;
+  }
+}
+
+@mixin gt-xxl() {
+  @include width-more-than($xxlBreakPoint) {
+    @content;
+  }
+}
+
+// базовый миксин для задания размеров элементу
+@function grid-column($columnsCount, $gutter, $size) {
+  $gutter: $gutter * 1px;
+  $gutters: ($columnsCount - 1) * $gutter;
+
+  @return calc((((100% - #{$gutters}) / #{$columnsCount}) * #{$size}) + #{max(($size - 1) * $gutter, 0)});
+}
+
+// базовый миксин для задания оффсета элементу
+@function grid-column-offset($columnCount, $gutter, $size) {
+  $gutter: $gutter * 1px;
+  $gutters: ($columnCount - 1) * $gutter;
+  $guttersOffset: ($size) * $gutter;
+
+  @return calc((((100% - #{$gutters}) / #{$columnCount}) * #{$size}) + #{$guttersOffset});
+}
+
+// сколько колонок занимает элемент на каждом конкретном брейкпоинте
+@mixin grid-size($xs, $sm, $md, $lg, $xl, $xxl, $property: 'width') {
+  @include xs() {
+    #{$property}: grid-column($xsColumnsCount, $xsGutter, $xs);
+  }
+  @include sm() {
+    #{$property}: grid-column($smColumnsCount, $smGutter, $sm);
+  }
+  @include md() {
+    #{$property}: grid-column($mdColumnsCount, $mdGutter, $md);
+  }
+  @include lg() {
+    #{$property}: grid-column($lgColumnsCount, $lgGutter, $lg);
+  }
+  @include xl() {
+    #{$property}: grid-column($xlColumnsCount, $xlGutter, $xl);
+  }
+  @include xxl() {
+    #{$property}: grid-column($xxlColumnsCount, $xxlGutter, $xxl);
+  }
+}
+
+// сколько колонок отступает элемент на каждом конкретном брейкпоинте
+@mixin grid-offset($xs, $sm, $md, $lg, $xl, $xxl, $property: 'margin-left') {
+  @include xs() {
+    #{$property}: grid-column-offset($xsColumnsCount, $xsGutter, $xs);
+  }
+  @include sm() {
+    #{$property}: grid-column-offset($smColumnsCount, $smGutter, $sm);
+  }
+  @include md() {
+    #{$property}: grid-column-offset($mdColumnsCount, $mdGutter, $md);
+  }
+  @include lg() {
+    #{$property}: grid-column-offset($lgColumnsCount, $lgGutter, $lg);
+  }
+  @include xl() {
+    #{$property}: grid-column-offset($xlColumnsCount, $xlGutter, $xl);
+  }
+  @include xxl() {
+    #{$property}: grid-column-offset($xxlColumnsCount, $xxlGutter, $xxl);
+  }
+}
+
+// контейнер сетки с отступами из параметра "offsets" json-конфига
+@mixin grid-container-offset($property: 'padding-left') {
+  @include xs() {
+    #{$property}: $xsOffset * 1px;
+  }
+  @include sm() {
+    #{$property}: $smOffset * 1px;
+  }
+  @include md() {
+    #{$property}: $mdOffset * 1px;
+  }
+  @include lg() {
+    #{$property}: $lgOffset * 1px;
+  }
+  @include xl() {
+    #{$property}: $xlOffset * 1px;
+  }
+  @include xxl() {
+    #{$property}: $xxlOffset * 1px;
+  }
+}
+
+@mixin grid-container() {
+  display: flex;
+  float: none;
+  width: 100%;
+  margin: 0 auto;
+
+  @include grid-container-offset('padding-right');
+  @include grid-container-offset('padding-left');
+}
