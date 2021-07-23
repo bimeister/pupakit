@@ -4,7 +4,7 @@ import { FlatTreeControl } from '@angular/cdk/tree';
 import { TemplateRef, TrackByFunction } from '@angular/core';
 import { filterNotEmpty, isEmpty, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, concat, Observable, of, ReplaySubject } from 'rxjs';
-import { filter, map, mapTo, skip, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, mapTo, switchMap, take, tap } from 'rxjs/operators';
 import { VOID } from '../../../constants/void.const';
 import { TreeManipulatorNewDataOrigin } from '../../interfaces/tree-manipulator-new-data-origin.interface';
 import { CustomTreeDataSource } from '../custom-data-source.class';
@@ -196,7 +196,7 @@ export abstract class TreeManipulatorBase {
 
   private getScrollIndex(): Observable<number> {
     return this.data$.pipe(
-      skip(1),
+      filterNotEmpty(),
       take(1),
       switchMap(() => this.externalScrollByRoute$),
       filterNotEmpty(),

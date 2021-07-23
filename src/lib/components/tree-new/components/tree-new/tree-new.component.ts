@@ -2,7 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
-  AfterContentInit,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -70,7 +70,7 @@ const NODE_IS_ELEMENT: TreeNodeDisplayConditionFunction<FlatTreeItem> = (_: numb
   styleUrls: ['./tree-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy {
+export class TreeNewComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('viewPort', { static: true }) private readonly viewPort: CdkVirtualScrollViewport;
   @ViewChild('skeletonViewPort', { static: true }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
   @ViewChild('draggable') private readonly draggableElement: ElementRef<HTMLElement>;
@@ -130,7 +130,6 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
 
   public ngOnInit(): void {
     this.subscription.add(this.detectChangesOnNodeExpansion());
-    this.subscription.add(this.scrollByIndexOnEmit());
     this.subscription.add(this.scrollViewportDuringDragging());
     this.subscription.add(this.expandNodeDuringDragging());
     this.subscription.add(this.handleCountOfVisibleElementsChanges());
@@ -144,7 +143,7 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
     }
   }
 
-  public ngAfterContentInit(): void {
+  public ngAfterViewInit(): void {
     this.viewPortReference$.next(this.viewPort);
     this.skeletonViewPortReference$.next(this.skeletonViewPort);
     this.manipulator.refreshViewPort();
@@ -152,6 +151,8 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterContentInit, On
     this.subscription.add(this.refreshViewPortOnExpandedItemsIdsChange());
     this.subscription.add(this.restoreExpansionForRecreatedElements());
     this.subscription.add(this.updateRangeOnDataExtraction());
+    this.subscription.add(this.scrollByIndexOnEmit());
+
     if (this.manipulator.fetchOnCreate) {
       this.manipulator.refreshData();
     }
