@@ -171,7 +171,7 @@ export abstract class TreeManipulatorBase {
       .subscribe((data: FlatTreeItem[]) => this.dataSource.setFilteredData(data));
   }
 
-  private expandListAsync(nodeIdsList: string[]): Observable<void> {
+  public expandListAsync(nodeIdsList: string[]): Observable<void> {
     const nonExistNodeIdsList: string[] = [];
     const existNodesList: FlatTreeItem[] = [];
     return combineLatest(
