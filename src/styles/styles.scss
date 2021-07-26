@@ -78,3 +78,12 @@ label.horizontal {
     width: newRems(1.5);
   }
 }
+
+/*
+  Explore the possibility of excluding the management of external styles
+  Originates from https://bimeister.atlassian.net/browse/BIM-14668
+*/
+.cdk-global-overlay-wrapper,
+.cdk-overlay-connected-position-bounding-box {
+  z-index: 10000;
+}
