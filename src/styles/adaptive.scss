@@ -162,31 +162,31 @@ $xxlColumnsCount: 22;
 
 // Ширина экрана МЕНЬШЕ, чем указанное значение
 @mixin xs() {
-  @include width-less-than($smBreakPoint - 1) {
+  @include width-less-than($smBreakPoint) {
     @content;
   }
 }
 
 @mixin sm() {
-  @include width-between($smBreakPoint, $mdBreakPoint - 1) {
+  @include width-between($smBreakPoint, $mdBreakPoint) {
     @content;
   }
 }
 
 @mixin md() {
-  @include width-between($mdBreakPoint, $lgBreakPoint - 1) {
+  @include width-between($mdBreakPoint, $lgBreakPoint) {
     @content;
   }
 }
 
 @mixin lg() {
-  @include width-between($lgBreakPoint, $xlBreakPoint - 1) {
+  @include width-between($lgBreakPoint, $xlBreakPoint) {
     @content;
   }
 }
 
 @mixin xl() {
-  @include width-more-than($xlBreakPoint) {
+  @include width-between($xlBreakPoint, $xxlBreakPoint) {
     @content;
   }
 }
