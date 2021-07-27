@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HammerModule } from '@angular/platform-browser';
 import { SharedModule } from '../internal/shared/shared.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { ButtonModule } from './components/button/button.module';
@@ -93,7 +94,7 @@ const EXPORTS: any[] = [
 ];
 
 @NgModule({
-  imports: [SharedModule, ...EXPORTS],
+  imports: [SharedModule, HammerModule, ...EXPORTS],
   exports: [...EXPORTS]
 })
 export class ComponentsModule {}
