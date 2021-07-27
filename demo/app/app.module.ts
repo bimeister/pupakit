@@ -3,7 +3,7 @@ import localeRuExtra from '@angular/common/locales/extra/ru';
 import localeRu from '@angular/common/locales/ru';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { getAllIcons } from '../declarations/functions/get-all-icons.function';
@@ -118,6 +118,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
   imports: [
     IconModule.forRoot(getAllIcons()),
     BrowserModule,
+    HammerModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,

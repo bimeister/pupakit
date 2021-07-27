@@ -14,6 +14,10 @@
   min-height: 100vh;
 
   @include grid-container();
+
+  @include lt-md() {
+    padding: 0 rems(1);
+  }
 }
 
 .menu-burger {
@@ -41,7 +45,7 @@
   background-color: color(white);
 
   height: 100%;
-  z-index: 10;
+  z-index: 11;
 
   @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xl: 4, $xxl: 6);
 
