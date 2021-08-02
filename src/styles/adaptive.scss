@@ -1,37 +1,37 @@
 $xsBreakPoint: 320;
 $xsGutter: 16;
-$xsOffset: 0;
+$xsOffset: 16;
 $xsColumnsCount: 4;
 
 $smBreakPoint: 768;
 $smGutter: 16;
-$smOffset: 0;
+$smOffset: 16;
 $smColumnsCount: 8;
 
 $mdBreakPoint: 1025;
 $mdGutter: 16;
-$mdOffset: 0;
+$mdOffset: 24;
 $mdColumnsCount: 12;
 
 $lgBreakPoint: 1280;
 $lgGutter: 16;
-$lgOffset: 0;
-$lgColumnsCount: 16;
+$lgOffset: 24;
+$lgColumnsCount: 12;
 
 $xlgBreakPoint: 1440;
 $xlgGutter: 16;
-$xlgOffset: 0;
-$xlgColumnsCount: 18;
+$xlgOffset: 24;
+$xlgColumnsCount: 12;
 
 $xlBreakPoint: 1920;
 $xlGutter: 16;
-$xlOffset: 0;
-$xlColumnsCount: 18;
+$xlOffset: 24;
+$xlColumnsCount: 16;
 
 $xxlBreakPoint: 2560;
 $xxlGutter: 16;
-$xxlOffset: 0;
-$xxlColumnsCount: 22;
+$xxlOffset: 24;
+$xxlColumnsCount: 16;
 
 @mixin width-between($min-width, $max-height) {
   $max-height: $max-height - 1;
