@@ -94,7 +94,7 @@
   width: 100%;
 
   &__column {
-    @include grid-size($xs: 1, $sm: 1, $md: 1, $lg: 1, $xl: 1, $xxl: 1);
+    @include grid-size($xs: 1, $sm: 1, $md: 1, $lg: 1, $xlg: 1, $xl: 1, $xxl: 1);
     @include debug();
     display: flex;
     align-items: flex-start;
