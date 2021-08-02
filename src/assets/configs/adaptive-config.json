@@ -4,6 +4,7 @@
     "sm": 768,
     "md": 1025,
     "lg": 1280,
+    "xlg": 1440,
     "xl": 1920,
     "xxl": 2560
   },
@@ -12,6 +13,7 @@
     "sm": 8,
     "md": 12,
     "lg": 16,
+    "xlg": 18,
     "xl": 18,
     "xxl": 22
   },
@@ -20,6 +22,7 @@
     "sm": 16,
     "md": 16,
     "lg": 16,
+    "xlg": 16,
     "xl": 16,
     "xxl": 16
   },
@@ -28,6 +31,7 @@
     "sm": 0,
     "md": 0,
     "lg": 0,
+    "xlg": 0,
     "xl": 0,
     "xxl": 0
   },
@@ -35,7 +39,8 @@
     "xs": "(max-width: 767px)",
     "sm": "(min-width: 768px) and (max-width: 1024px)",
     "md": "(min-width: 1025px) and (max-width: 1279px)",
-    "lg": "(min-width: 1280px) and (max-width: 1919px)",
+    "lg": "(min-width: 1280px) and (max-width: 1439px)",
+    "xlg": "(min-width: 1440px) and (max-width: 1919px)",
     "xl": "(min-width: 1920px) and (max-width: 2559px)",
     "xxl": "(min-width: 2560px)"
   }

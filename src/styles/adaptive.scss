@@ -18,6 +18,11 @@ $lgGutter: 16;
 $lgOffset: 0;
 $lgColumnsCount: 16;
 
+$xlgBreakPoint: 1440;
+$xlgGutter: 16;
+$xlgOffset: 0;
+$xlgColumnsCount: 18;
+
 $xlBreakPoint: 1920;
 $xlGutter: 16;
 $xlOffset: 0;
@@ -180,7 +185,13 @@ $xxlColumnsCount: 22;
 }
 
 @mixin lg() {
-  @include width-between($lgBreakPoint, $xlBreakPoint) {
+  @include width-between($lgBreakPoint, $xlgBreakPoint) {
+    @content;
+  }
+}
+
+@mixin xlg() {
+  @include width-between($xlgBreakPoint, $xlBreakPoint) {
     @content;
   }
 }
@@ -216,6 +227,12 @@ $xxlColumnsCount: 22;
   }
 }
 
+@mixin lt-xlg() {
+  @include width-less-than($xlgBreakPoint) {
+    @content;
+  }
+}
+
 @mixin lt-xl() {
   @include width-less-than($xlBreakPoint) {
     @content;
@@ -243,6 +260,12 @@ $xxlColumnsCount: 22;
 
 @mixin gt-lg() {
   @include width-more-than($lgBreakPoint) {
+    @content;
+  }
+}
+
+@mixin gt-xlg() {
+  @include width-more-than($xlgBreakPoint) {
     @content;
   }
 }
@@ -277,7 +300,7 @@ $xxlColumnsCount: 22;
 }
 
 // сколько колонок занимает элемент на каждом конкретном брейкпоинте
-@mixin grid-size($xs, $sm, $md, $lg, $xl, $xxl, $property: 'width') {
+@mixin grid-size($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'width') {
   @include xs() {
     #{$property}: grid-column($xsColumnsCount, $xsGutter, $xs);
   }
@@ -290,6 +313,9 @@ $xxlColumnsCount: 22;
   @include lg() {
     #{$property}: grid-column($lgColumnsCount, $lgGutter, $lg);
   }
+  @include xlg() {
+    #{$property}: grid-column($xlgColumnsCount, $xlgGutter, $xlg);
+  }
   @include xl() {
     #{$property}: grid-column($xlColumnsCount, $xlGutter, $xl);
   }
@@ -299,7 +325,7 @@ $xxlColumnsCount: 22;
 }
 
 // сколько колонок отступает элемент на каждом конкретном брейкпоинте
-@mixin grid-offset($xs, $sm, $md, $lg, $xl, $xxl, $property: 'margin-left') {
+@mixin grid-offset($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'margin-left') {
   @include xs() {
     #{$property}: grid-column-offset($xsColumnsCount, $xsGutter, $xs);
   }
@@ -311,6 +337,9 @@ $xxlColumnsCount: 22;
   }
   @include lg() {
     #{$property}: grid-column-offset($lgColumnsCount, $lgGutter, $lg);
+  }
+  @include xlg() {
+    #{$property}: grid-column-offset($xlgColumnsCount, $xlgGutter, $xlg);
   }
   @include xl() {
     #{$property}: grid-column-offset($xlColumnsCount, $xlGutter, $xl);
@@ -333,6 +362,9 @@ $xxlColumnsCount: 22;
   }
   @include lg() {
     #{$property}: $lgOffset * 1px;
+  }
+  @include xlg() {
+    #{$property}: $xlgOffset * 1px;
   }
   @include xl() {
     #{$property}: $xlOffset * 1px;
