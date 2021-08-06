@@ -1,6 +1,6 @@
 $xsBreakPoint: 320;
-$xsGutter: 16;
-$xsOffset: 16;
+$xsGutter: 8;
+$xsOffset: 12;
 $xsColumnsCount: 4;
 
 $smBreakPoint: 768;
@@ -10,7 +10,7 @@ $smColumnsCount: 8;
 
 $mdBreakPoint: 1025;
 $mdGutter: 16;
-$mdOffset: 24;
+$mdOffset: 16;
 $mdColumnsCount: 12;
 
 $lgBreakPoint: 1280;
@@ -21,7 +21,7 @@ $lgColumnsCount: 12;
 $xlgBreakPoint: 1440;
 $xlgGutter: 16;
 $xlgOffset: 24;
-$xlgColumnsCount: 12;
+$xlgColumnsCount: 16;
 
 $xlBreakPoint: 1920;
 $xlGutter: 16;
@@ -33,18 +33,18 @@ $xxlGutter: 16;
 $xxlOffset: 24;
 $xxlColumnsCount: 16;
 
-@mixin width-between($min-width, $max-height) {
-  $max-height: $max-height - 1;
-  $min-width: $min-width - 1;
+@mixin width-between($min-width, $max-width) {
+  $max-width: $max-width - 1;
+  $min-width: $min-width;
 
-  @media (min-width: $min-width * 1px) and (max-width: $max-height * 1px) {
+  @media (min-width: $min-width * 1px) and (max-width: $max-width * 1px) {
     @content;
   }
 }
 
 @mixin height-between($min-height, $max-height) {
   $max-height: $max-height - 1;
-  $min-height: $min-height - 1;
+  $min-height: $min-height;
 
   @media (min-height: $min-height * 1px) and (max-height: $max-height * 1px) {
     @content;

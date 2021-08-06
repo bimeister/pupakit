@@ -47,6 +47,8 @@ export class ClientUiStateHandlerService implements OnDestroy {
         this.setHtmlClassesByBreakpoint(uiState?.breakpoint ?? null, breakpoint);
 
         this.uiState$.next({ windowHeight, windowWidth, breakpoint, countOfColumns });
+
+        this.setCalculatedVhSize(windowHeight);
       });
   }
 
@@ -70,5 +72,14 @@ export class ClientUiStateHandlerService implements OnDestroy {
       return;
     }
     html.classList.remove(prevBreakpoint);
+  }
+
+  private setCalculatedVhSize(windowHeight: number): void {
+    if (isNil(windowHeight)) {
+      return;
+    }
+
+    const vh: number = windowHeight * 0.01;
+    this.document.documentElement.style.setProperty('--vh', `${vh}px`);
   }
 }
