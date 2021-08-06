@@ -9,3 +9,7 @@
 @function px($px) {
   @return calc(#{$px}px);
 }
+
+@function vh($percent) {
+  @return calc(var(--vh, 1vh) * #{$percent});
+}
