@@ -1,0 +1,46 @@
+@import 'themes/functions';
+@import 'mixins';
+
+:host {
+  display: block;
+}
+
+.body-cell {
+  display: block;
+  background-color: color('base-white-n500');
+  margin-right: 1px;
+  border-bottom: 1px solid color('white');
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  &.row-hovered {
+    background-color: color('base-white-n400');
+  }
+
+  &.row-selected {
+    background-color: color('primary-n100');
+  }
+
+  @include host-selector('.table-body__scrollable-container') {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @include host-selector('.table-body__pinned-right-container') {
+    margin-left: 1px;
+    margin-right: 0;
+  }
+}
+
+.body-cell-placeholder {
+  flex-shrink: 1;
+  width: 100%;
+  display: none;
+
+  @include host-selector('.table-body__scrollable-container') {
+    & {
+      display: block;
+    }
+  }
+}

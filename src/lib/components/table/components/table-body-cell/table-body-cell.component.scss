@@ -1,0 +1,30 @@
+@import 'themes/functions';
+@import 'mixins';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.table-body-cell {
+  box-sizing: border-box;
+  padding: 16px;
+  @include font-size-small;
+  @include font-type-caption;
+  @include ellipsis-text-overflow;
+  color: color('base-n600');
+  line-height: 17px;
+
+  &_clickable {
+    &:hover {
+      border: 1px solid color('base-white-n275');
+      padding: 15px;
+      cursor: pointer;
+
+      @include host-selector('.table-row_selected') {
+        border-color: color('primary-n400');
+      }
+    }
+  }
+}

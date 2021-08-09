@@ -1,0 +1,19 @@
+<pupa-table-header-cell-container
+  *ngFor="let column of columns"
+  class="header-cell"
+  [class.row-hovered]="row.isHovered$ | async"
+  [class.column-hovered]="column.isHovered$ | async"
+  [row]="row"
+  [column]="column"
+  [style.width.px]="column.widthPx$ | async"
+  [attr.data-column-id]="column.definition.id"
+  [attr.data-row-id]="row.id"
+>
+</pupa-table-header-cell-container>
+<div
+  *ngIf="isPlaceholderVisible$ | async"
+  class="header-cell header-cell-placeholder"
+  [class.row-hovered]="row.isHovered$ | async"
+  [attr.data-column-id]="'placeholder'"
+  [attr.data-row-id]="row.id"
+></div>

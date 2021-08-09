@@ -58,7 +58,19 @@ export {
   AlertsService,
   ModalsService,
   LoaderService,
-  GridStateService
+  GridStateService,
+  TableControllerOptions,
+  TableEvents,
+  TableColumnDefenition,
+  TableColumnSizes,
+  TableAdaptiveColumnSizes,
+  TableController,
+  DefaultTableEventHandler,
+  TableDataDisplayCollection,
+  TableDataDisplayCollectionRef,
+  TableColumnRef,
+  TableRowRef,
+  TableBodyRowRef
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

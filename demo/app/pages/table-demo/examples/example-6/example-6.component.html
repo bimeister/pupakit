@@ -1,0 +1,92 @@
+<div class="actions">
+  <pupa-button class="action-button" (click)="addColumnToStart()">Add column to start</pupa-button>
+  <pupa-button class="action-button" (click)="resetColumns()">Reset columns</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-button class="action-button" (click)="changeFirstNameWidth()">Change First Name width</pupa-button>
+  <pupa-button class="action-button" (click)="resetFirstNameWidth()">Reset First Name width</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-button class="action-button" (click)="toggleAgeSorting()">Toggle Age sorting</pupa-button>
+  <pupa-button class="action-button" (click)="resetAgeSorting()">Reset Age sorting</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-button class="action-button" (click)="highlightSecondRow()">Highlight second row</pupa-button>
+  <pupa-button class="action-button" (click)="resetHighlighting()">Reset highlighting</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-button class="action-button" (click)="scrollToIndex50()">Scroll to index 50</pupa-button>
+  <pupa-button class="action-button" (click)="scrollToStart()">Scroll to start</pupa-button>
+</div>
+
+<div class="events">
+  <div>
+    <h3>TableEvents.ColumnWidthChanged:</h3>
+    columnId: {{ (columnWidthChanged$ | async)?.columnId }}, widthPx: {{ (columnWidthChanged$ | async)?.widthPx }}
+  </div>
+
+  <div>
+    <h3>TableEvents.ColumnSortingChanged:</h3>
+    columnId: {{ (columnSortingChanged$ | async)?.columnId }}, sorting: {{ (columnSortingChanged$ | async)?.sorting }}
+  </div>
+
+  <div>
+    <h3>TableEvents.ColumnHover:</h3>
+    columnId: {{ (columnHover$ | async)?.columnId }}
+  </div>
+
+  <div>
+    <h3>TableEvents.RowHover:</h3>
+    rowId: {{ (rowHover$ | async)?.rowId }}
+  </div>
+
+  <div>
+    <h3>TableEvents.CellClick:</h3>
+    columnId: {{ (cellClick$ | async)?.columnId }}, rowId: {{ (cellClick$ | async)?.rowId }}
+  </div>
+
+  <div>
+    <h3>TableEvents.HorizontalScrollBarVisibilityChanged:</h3>
+    isVisible: {{ (horizontalScrollBarVisibilityChanged$ | async)?.isVisible }}
+  </div>
+
+  <div>
+    <h3>TableEvents.VerticalScrollBarVisibilityChanged:</h3>
+    isVisible: {{ (verticalScrollBarVisibilityChanged$ | async)?.isVisible }}
+  </div>
+
+  <div>
+    <h3>TableEvents.HiddenColumnIdsChanged:</h3>
+    leftColumnIds: {{ (hiddenColumnIdsChanged$ | async)?.leftColumnIds | json }}, rightColumnIds:
+    {{ (hiddenColumnIdsChanged$ | async)?.rightColumnIds | json }}
+  </div>
+  table.component.ts
+  <div>
+    <h3>TableEvents.ListRangeChanged:</h3>
+    listRande: {{ (listRangeChanged$ | async)?.listRange | json }}
+  </div>
+</div>
+
+<div class="table">
+  <pupa-table [controller]="controller">
+    <pupa-table-column-template columnType="example">
+      <div *pupaTableBodyCellTemplate="let column = column">
+        {{ column.definition.title }}
+      </div>
+    </pupa-table-column-template>
+
+    <pupa-table-column-template columnType="age">
+      <pupa-table-header-cell *pupaTableHeaderCellTemplate="let column" [column]="column" [sortable]="true">
+        {{ column.definition.title }}
+      </pupa-table-header-cell>
+
+      <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; let column = column" [clickable]="true">
+        {{ row.data[column.definition.modelKey] }}
+      </pupa-table-body-cell>
+    </pupa-table-column-template>
+  </pupa-table>
+</div>

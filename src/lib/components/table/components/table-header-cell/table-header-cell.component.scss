@@ -1,0 +1,87 @@
+@import 'mixins';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.header-cell {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 16px;
+  position: relative;
+  @include font-size-small;
+  @include font-type-caption;
+  background-color: color('base-n0');
+  color: color('base-white-n100');
+  line-height: 17px;
+
+  &:not(.header-cell_resizing):hover {
+    background-color: color('base-white-n400');
+  }
+
+  &_resizable {
+    user-select: none;
+  }
+
+  &_sortable {
+    cursor: pointer;
+  }
+
+  &_sortable-with-icon {
+    padding-right: 36px;
+  }
+}
+
+.header-cell__text {
+  display: inline-block;
+  width: 100%;
+  @include ellipsis-text-overflow;
+}
+
+.header-cell__sort {
+  position: absolute;
+  top: 0;
+  right: 12px;
+  font-size: 16px;
+  width: 16px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.header-cell__resizer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateX(50%);
+  z-index: 2;
+}
+
+.resizer {
+  user-select: none;
+  width: 5px;
+  height: 100%;
+  background-color: color('active');
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  cursor: col-resize;
+
+  &:hover,
+  &_visible {
+    opacity: 1;
+  }
+
+  &__stick {
+    width: 1px;
+    height: 12px;
+    border-radius: 1px;
+    background-color: color('white');
+  }
+}

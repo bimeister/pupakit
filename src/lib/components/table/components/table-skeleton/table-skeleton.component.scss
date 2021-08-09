@@ -1,0 +1,24 @@
+@import 'themes/functions';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.skeleton {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding-left: 16px;
+}
+
+.skeleton__stick {
+  width: 56px;
+  height: 8px;
+  border-radius: 4px;
+  background-color: color('base-white-n400');
+}
