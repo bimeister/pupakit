@@ -1,0 +1,20 @@
+.table {
+  display: block;
+  height: 400px;
+}
+
+.actions {
+  & + & {
+    margin-top: 4px;
+  }
+}
+
+.action-button {
+  & + & {
+    margin-left: 4px;
+  }
+}
+
+.events {
+  margin: 16px 0;
+}

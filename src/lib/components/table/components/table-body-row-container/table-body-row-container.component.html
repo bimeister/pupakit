@@ -1,0 +1,21 @@
+<pupa-table-body-cell-container
+  *ngFor="let column of columns; trackBy: trackByFunction"
+  class="body-cell"
+  [class.row-hovered]="row.isHovered$ | async"
+  [class.row-selected]="row.isSelected$ | async"
+  [class.column-hovered]="column.isHovered$ | async"
+  [row]="row"
+  [column]="column"
+  [style.width.px]="column.widthPx$ | async"
+  [attr.data-column-id]="column.definition.id"
+  [attr.data-row-id]="row.id"
+>
+</pupa-table-body-cell-container>
+<div
+  *ngIf="isPlaceholderVisible$ | async"
+  class="body-cell body-cell-placeholder"
+  [class.row-hovered]="row.isHovered$ | async"
+  [class.row-selected]="row.isSelected$ | async"
+  [attr.data-column-id]="'placeholder'"
+  [attr.data-row-id]="row.id"
+></div>

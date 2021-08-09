@@ -201,6 +201,11 @@ const demoRoutes: Routes = [
       import('./pages/code-demo/code-demo.module').then(module => module.CodeDemoModule)
   },
   {
+    path: 'table',
+    loadChildren: (): Promise<Type<CodeDemoModule>> =>
+      import('./pages/table-demo/table-demo.module').then(module => module.TableDemoModule)
+  },
+  {
     path: '',
     redirectTo: '/typography',
     pathMatch: 'full'

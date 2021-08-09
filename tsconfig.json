@@ -28,7 +28,7 @@
         "name": "@angular/language-service"
       }
     ],
-    "types": ["jest", "node"],
+    "types": ["jest", "node", "hammerjs"],
     "resolveJsonModule": true
   },
   "angularCompilerOptions": {

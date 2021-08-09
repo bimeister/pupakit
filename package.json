@@ -38,6 +38,7 @@
     "@angular/cdk": "~12.0.0",
     "@bimeister/event-bus": "^0.1.0-3949893e",
     "@bimeister/utilities": "^0.1.0-24d2e33e",
+    "@types/hammerjs": "^2.0.40",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
     "ngx-mask": "^11.0.0",

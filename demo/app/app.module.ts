@@ -5,8 +5,6 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { IconModule, ComponentsModule } from '../../src/public-api';
-import { getAllIcons } from '../declarations/functions/get-all-icons.function';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogPipe } from './log.pipe';
@@ -115,13 +113,11 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ControlsIsPatchedDemoComponent
   ],
   imports: [
-    IconModule.forRoot(getAllIcons()),
     BrowserModule,
     HammerModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ComponentsModule,
     DemoSharedModule,
     AppRoutingModule
   ],

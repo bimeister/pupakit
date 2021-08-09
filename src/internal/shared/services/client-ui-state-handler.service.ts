@@ -1,8 +1,8 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
-import { mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, map, mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
 import config from '../../../assets/configs/adaptive-config.json';
 import { UiState } from '../../declarations/interfaces/ui-state.interface';
 
@@ -15,6 +15,11 @@ export class ClientUiStateHandlerService implements OnDestroy {
   >(null);
 
   public readonly uiState$: BehaviorSubject<Nullable<UiState>> = new BehaviorSubject<Nullable<UiState>>(null);
+  public readonly breakpoint$: Observable<string> = this.uiState$.pipe(
+    filterNotNil(),
+    map((uiState: UiState) => uiState.breakpoint),
+    distinctUntilChanged()
+  );
 
   private readonly subscription: Subscription = new Subscription();
   constructor(@Inject(DOCUMENT) readonly document: Document) {

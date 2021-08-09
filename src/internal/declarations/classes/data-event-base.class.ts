@@ -6,7 +6,7 @@ export class DataEventBase<T = unknown> extends BusEventBase<T> {
   public readonly id: string = getUuid();
   public readonly type: Nullable<string> = null;
 
-  constructor(public readonly payload: T, public readonly fromId: Nullable<string> = null) {
+  constructor(public readonly payload: T = null, public readonly fromId: Nullable<string> = null) {
     super();
   }
 }

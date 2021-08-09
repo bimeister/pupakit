@@ -1,0 +1,20 @@
+.table {
+  display: block;
+  height: 400px;
+}
+
+.name-header-cell {
+  background-color: green;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.name-body-cell {
+  background-color: deepskyblue;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

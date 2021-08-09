@@ -28,7 +28,7 @@ import {
   Subscription,
   timer
 } from 'rxjs';
-import { debounce, filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { debounce, filter, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { RangedDataSource } from '../../../../../internal/declarations/classes/ranged-data-source.class';
@@ -103,7 +103,6 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.subscription.add(this.getSubscriptionToSetData());
     this.subscription.add(this.getSubscriptionToSetLoading());
     this.subscription.add(this.getSubscriptionToScrollToIndex());
     this.subscription.add(this.getSubscriptionToSetExpanded());
@@ -243,16 +242,6 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
       });
   }
 
-  private getSubscriptionToSetData(): Subscription {
-    return this.getEvents(DataEvents.SetData)
-      .pipe(
-        switchMap((event: DataEvents.SetData) => {
-          return this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event));
-        })
-      )
-      .subscribe((event: DataEvents.SetData) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
-  }
-
   private getSubscriptionToSetLoading(): Subscription {
     return this.getEvents(DataEvents.SetLoading).subscribe((event: DataEvents.SetLoading) => {
       this.dataDisplayCollection.setIsLoading(event.payload);
@@ -325,8 +314,8 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
       });
   }
 
-  private getSubscriptionForRangeChanges(): void {
-    this.viewPort.renderedRangeStream.subscribe((range: ListRange) => {
+  private getSubscriptionForRangeChanges(): Subscription {
+    return this.viewPort.renderedRangeStream.subscribe((range: ListRange) => {
       this.dataSource.setRange(range);
     });
   }

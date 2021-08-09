@@ -33,7 +33,7 @@ export class TreeNewDemoComponent {
       .subscribe((event: TreeEvents.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));
     this.controller
       .getEvents(DataEvents.Click)
-      .subscribe((event: DataEvents.Click) => this.controller.setSelected(event.payload.id));
+      .subscribe((event: DataEvents.Click<FlatTreeItem>) => this.controller.setSelected(event.payload.id));
     this.controller
       .getEvents(TreeEvents.Collapse)
       .subscribe((event: TreeEvents.Collapse) => this.controller.removeChildren(event.payload));

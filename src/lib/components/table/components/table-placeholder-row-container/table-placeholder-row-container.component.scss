@@ -1,0 +1,40 @@
+@import 'themes/functions';
+@import 'mixins';
+
+:host {
+  display: block;
+}
+
+.table-placeholder-cell {
+  height: 1px;
+  margin-right: 1px;
+  background-color: color('base-n0');
+  flex-shrink: 0;
+
+  @include host-selector('.table-placeholder__scrollable-container') {
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  @include host-selector('.table-placeholder__pinned-right-container') {
+    margin-left: 1px;
+    margin-right: 0;
+  }
+
+  &_full-height {
+    height: 100%;
+  }
+}
+
+.table-placeholder-cell-placeholder {
+  flex-shrink: 1;
+  width: 100%;
+  display: none;
+
+  @include host-selector('.table-placeholder__scrollable-container') {
+    & {
+      display: block;
+    }
+  }
+}

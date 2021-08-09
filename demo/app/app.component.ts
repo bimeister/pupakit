@@ -61,6 +61,7 @@ export class AppComponent implements OnDestroy {
     title: 'Data Display',
     linkItems: [
       { title: 'Datagrid', link: './datagrid' },
+      { title: 'Table', link: './table' },
       { title: 'Tree', link: './tree' },
       { title: 'Tree (new)', link: './tree-new' },
       { title: 'Tooltip', link: './tooltip' },

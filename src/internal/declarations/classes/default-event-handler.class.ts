@@ -1,89 +1,34 @@
 import { Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
-import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
-import { filter, withLatestFrom } from 'rxjs/operators';
+import { filter, mapTo, switchMap } from 'rxjs/operators';
 import { DataDisplayCollection } from './data-display-collection.class';
 import { DataEventBase } from './data-event-base.class';
-import { FlatTreeItem } from './flat-tree-item.class';
-import { QueueEvents } from '../events/queue.events';
 import { DataEvents } from '../events/data.events';
+import { QueueEvents } from '../events/queue.events';
 
-export class DefaultEventHandler {
+export class DefaultEventHandler<T> {
   protected subscription: Subscription = new Subscription();
 
-  constructor(protected readonly eventBus: EventBus, protected readonly dataDisplayCollection: DataDisplayCollection) {
+  constructor(
+    protected readonly eventBus: EventBus,
+    protected readonly dataDisplayCollection: DataDisplayCollection<T>
+  ) {
     this.reconnect();
   }
 
   protected subscribeToEvents(): void {
-    this.subscription.add(this.getSubscriptionForUpdateItem());
-    this.subscription.add(this.getSubscriptionForRemoveItem());
-    this.subscription.add(this.getSubscriptionForScrollTo());
+    this.subscription.add(this.getSubscriptionToSetData());
   }
 
-  protected getSubscriptionForScrollTo(): Subscription {
-    return this.getEvents(DataEvents.ScrollById)
-      .pipe(withLatestFrom(this.dataDisplayCollection.data$))
-      .subscribe(([event, data]: [DataEvents.ScrollById, FlatTreeItem[]]) => {
-        const treeItem: FlatTreeItem = DefaultEventHandler.getTreeItem(event.payload, data);
-        if (isNil(treeItem)) {
-          return this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
-        }
-        const index: number = data.indexOf(treeItem);
-        this.eventBus.dispatch(new DataEvents.ScrollByIndex(index));
-        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
-      });
-  }
-
-  protected getSubscriptionForRemoveItem(): Subscription {
-    return this.getEvents(DataEvents.RemoveItem)
-      .pipe(withLatestFrom(this.dataDisplayCollection.data$))
-      .subscribe(([event, data]: [DataEvents.RemoveItem, FlatTreeItem[]]) => {
-        this.removeItem(event.payload, data);
-        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
-      });
-  }
-
-  protected getSubscriptionForUpdateItem(): Subscription {
-    return this.getEvents(DataEvents.UpdateItem)
-      .pipe(withLatestFrom(this.dataDisplayCollection.data$))
-      .subscribe(([event, data]: [DataEvents.UpdateItem, FlatTreeItem[]]) => {
-        this.updateItem(event.payload, data);
-        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
-      });
-  }
-
-  protected updateItem(updatedItem: FlatTreeItem, data: FlatTreeItem[]): void {
-    const treeItemExists: boolean = DefaultEventHandler.treeItemExists(updatedItem.id, data);
-    if (!treeItemExists) {
-      return;
-    }
-    const updatedData: FlatTreeItem[] = data.map((treeItem: FlatTreeItem) => {
-      if (treeItem.id === updatedItem.id) {
-        return new FlatTreeItem(
-          treeItem.isExpandable,
-          updatedItem.name,
-          treeItem.level,
-          treeItem.id,
-          updatedItem.originalData,
-          treeItem.isElement
-        );
-      }
-      return treeItem;
-    });
-    this.eventBus.dispatch(new DataEvents.SetData(updatedData));
-  }
-
-  protected removeItem(removeItemId: string, data: FlatTreeItem[]): void {
-    const treeItemExists: boolean = DefaultEventHandler.treeItemExists(removeItemId, data);
-    if (!treeItemExists) {
-      return;
-    }
-    const updatedData: FlatTreeItem[] = data.filter((treeItem: FlatTreeItem) => {
-      return treeItem.id !== removeItemId;
-    });
-    this.eventBus.dispatch(new DataEvents.SetData(updatedData));
+  protected getSubscriptionToSetData(): Subscription {
+    return this.getEvents(DataEvents.SetData)
+      .pipe(
+        switchMap((event: DataEvents.SetData<T>) => {
+          return this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event));
+        })
+      )
+      .subscribe((event: DataEvents.SetData<T>) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
   public reconnect(): void {
@@ -96,16 +41,7 @@ export class DefaultEventHandler {
     this.subscription = new Subscription();
   }
 
-  public getEvents<T extends DataEventBase>(eventType: Type<T>): Observable<T> {
-    return this.eventBus.catchEvents().pipe(filter((event: DataEventBase): event is T => event instanceof eventType));
-  }
-
-  protected static treeItemExists(treeItemId: string, data: FlatTreeItem[]): boolean {
-    const treeItem: FlatTreeItem = DefaultEventHandler.getTreeItem(treeItemId, data);
-    return !isNil(treeItem);
-  }
-
-  protected static getTreeItem(treeItemId: string, data: FlatTreeItem[]): FlatTreeItem {
-    return data.find((treeItem: FlatTreeItem) => treeItem.id === treeItemId);
+  public getEvents<E extends DataEventBase>(eventType: Type<E>): Observable<E> {
+    return this.eventBus.catchEvents().pipe(filter((event: DataEventBase): event is E => event instanceof eventType));
   }
 }
