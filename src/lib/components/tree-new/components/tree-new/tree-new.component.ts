@@ -6,258 +6,292 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   ElementRef,
-  EventEmitter,
   HostListener,
-  Inject,
+  Input,
   OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
   Renderer2,
-  TemplateRef,
   TrackByFunction,
+  Type,
   ViewChild
 } from '@angular/core';
-import { filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  combineLatest,
-  interval,
-  NEVER,
-  Observable,
-  ReplaySubject,
-  Subscription,
-  timer
-} from 'rxjs';
-import {
-  debounce,
-  distinctUntilChanged,
-  filter,
-  map,
-  observeOn,
-  switchMap,
-  take,
-  withLatestFrom
-} from 'rxjs/operators';
+import { EventBus } from '@bimeister/event-bus';
+import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@bimeister/utilities';
+import { animationFrameScheduler, BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
+import { filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
+import { DataEvent } from '../../../../../internal/declarations/classes/event/data.event';
+import { QueueEvent } from '../../../../../internal/declarations/classes/event/queue.event';
+import { TreeEvent } from '../../../../../internal/declarations/classes/event/tree.event';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
-import { TreeDragAndDropControl } from '../../../../../internal/declarations/classes/tree-drag-and-drop.class';
-import { TreeManipulatorNew } from '../../../../../internal/declarations/classes/tree-manipulator-new.class';
+import { RangedDataSource } from '../../../../../internal/declarations/classes/ranged-data-source.class';
+import { TreeController } from '../../../../../internal/declarations/classes/tree-controller.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
-import { TreeDataSource } from '../../../../../internal/declarations/interfaces/tree-data-source.interface';
+import { TreeDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/tree-data-display-collection-ref.interface';
+import { TreeItemTemplateDirective } from '../../directives/tree-item-template.directive';
 
-type TreeNodeDisplayConditionFunction<T> = (index: number, nodeData: T) => boolean;
+interface Position {
+  top: number;
+  left: number;
+}
+type ScrollDirection = null | 'up' | 'down';
 
 const TREE_ITEM_SIZE_PX: number = 28;
-const NODE_HAS_CHILD_COMPARATOR: TreeNodeDisplayConditionFunction<FlatTreeItem> = (
-  _: number,
-  node: FlatTreeItem
-): boolean => {
-  return !isNil(node) && node.isExpandable && !node.isElement;
-};
-const NODE_HAS_NO_CHILD_COMPARATOR: TreeNodeDisplayConditionFunction<FlatTreeItem> = (
-  _: number,
-  node: FlatTreeItem
-): boolean => !isNil(node) && !node.isExpandable && !node.isElement;
-const NODE_IS_ELEMENT: TreeNodeDisplayConditionFunction<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
-  return !isNil(element) && !element.isExpandable && element.isElement;
-};
+
+interface DragAndDropMeta {
+  dragTreeItem: FlatTreeItem;
+  dropTreeItem?: FlatTreeItem;
+  dragTreeItemLeft?: number;
+  dragTreeItemTop?: number;
+  dragTreeItemWidth?: number;
+  mouseDownPosition?: Position;
+  scrollDirection?: ScrollDirection;
+  draggableElementBoundingBox?: DOMRect;
+  dragTreeItemIsDisplayed: boolean;
+}
+
 @Component({
   selector: 'pupa-tree-new',
   templateUrl: './tree-new.component.html',
   styleUrls: ['./tree-new.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TreeNewComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  @ViewChild('viewPort', { static: true }) private readonly viewPort: CdkVirtualScrollViewport;
-  @ViewChild('skeletonViewPort', { static: true }) private readonly skeletonViewPort: CdkVirtualScrollViewport;
-  @ViewChild('draggable') private readonly draggableElement: ElementRef<HTMLElement>;
-  @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
-  @Output() public readonly dropped: EventEmitter<DropEventInterface<FlatTreeItem>> = new EventEmitter<
-    DropEventInterface<FlatTreeItem>
-  >();
-  @Output() public readonly visibleElementsCountChanged: EventEmitter<number> = new EventEmitter<number>();
+export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
+  @Input() public controller: TreeController;
+  @ViewChild('skeletonViewPort', { static: true }) public readonly skeletonViewPort: CdkVirtualScrollViewport;
+  @ViewChild('viewPort', { static: true }) public readonly viewPort: CdkVirtualScrollViewport;
+  @ContentChild(TreeItemTemplateDirective) public readonly treeItemTemplate: TreeItemTemplateDirective<T>;
 
+  public dataSource: RangedDataSource;
+  public dataDisplayCollection: TreeDataDisplayCollectionRef;
+  public data$: Observable<FlatTreeItem[]>;
+  public expandedIdsList$: Observable<string[]>;
+  public selectedIdsList$: Observable<string[]>;
+  public isLoading$: Observable<boolean>;
+  public hasDragAndDrop$: Observable<boolean>;
+  public trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
+  private scrollBehavior$: Observable<ScrollBehavior>;
+  private eventBus: EventBus;
+
+  public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
+    TreeNewComponent.getLevel,
+    TreeNewComponent.isExpandable
+  );
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
-  public readonly hasChild: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
-  public readonly hasNoChild: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_HAS_NO_CHILD_COMPARATOR;
-  public readonly isElement: TreeNodeDisplayConditionFunction<FlatTreeItem> = NODE_IS_ELEMENT;
+  public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
+  public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
   private readonly subscription: Subscription = new Subscription();
 
-  private readonly dragAndDropControl: TreeDragAndDropControl = this.manipulator.dragAndDropControl;
-  public readonly draggingHasStarted$: Observable<boolean> = this.dragAndDropControl.draggingHasStarted$;
-  public readonly draggableNode$: Observable<FlatTreeItem> = this.dragAndDropControl.draggableNode$;
-  private readonly dropEmit$: Observable<DropEventInterface<FlatTreeItem>> = this.dragAndDropControl.droppedSubject$;
-  private readonly scrollDirection$: Observable<Nullable<'up' | 'down'>> = this.dragAndDropControl.scrollDirection$;
-  public readonly expandNodeWithDelay$: Observable<Nullable<FlatTreeItem>> = this.dragAndDropControl
-    .expandNodeWithDelay$;
-  private readonly expandedItemIds$: Observable<Set<string>> = this.manipulator.expandedItemIds$;
-  public readonly treeControl: FlatTreeControl<FlatTreeItem> = this.manipulator.treeControl;
-  public readonly dataSource: TreeDataSource = this.manipulator.dataSource;
-  public readonly data$: Observable<FlatTreeItem[]> = this.dataSource.filteredData$;
-  private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = this.manipulator.viewPortReference$;
-  private readonly skeletonViewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = this.manipulator
-    .skeletonViewPortReference$;
-  private readonly listRange$: BehaviorSubject<ListRange> = this.manipulator.listRange$;
-  private readonly scrollIndex$: Observable<number> = this.manipulator.scrollIndex$;
-  public readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
-  public readonly nodeTemplate$: Observable<TemplateRef<unknown>> = this.manipulator.externalNodeTemplate$;
-  public readonly selectedNodesIds$: Observable<string[]> = this.manipulator.externalSelectedNodesIds$;
-  public readonly highlightedNodesIds$: Observable<string[]> = this.manipulator.externalHighlightedNodesIds$;
-  private readonly scrollBehavior$: Observable<ScrollBehavior> = this.manipulator.externalScrollBehavior$;
-  private readonly hasDragAndDrop$: Observable<boolean> = this.manipulator.externalHasDragAndDrop$;
-  public readonly nodesWithoutPadding$: Observable<boolean> = this.manipulator.externalNodesWithoutPadding$;
-  public readonly isLoading$: Observable<boolean> = combineLatest([
-    this.manipulator.isLoading$,
-    this.manipulator.externalIsLoading$,
-    this.manipulator.isScrollByRouteLoading$
-  ]).pipe(
-    map(([isLoading, externalIsLoading, isScrollByRouteLoading]: [boolean, boolean, boolean]) => {
-      return isLoading || externalIsLoading || isScrollByRouteLoading;
-    })
-  );
-
   constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef,
-    renderer: Renderer2,
-    host: ElementRef<HTMLElement>,
-    @Inject(TreeManipulatorNew) private readonly manipulator: TreeManipulatorNew
-  ) {
-    this.dragAndDropControl.setHostAndRenderer(host, renderer);
-  }
+    public readonly renderer: Renderer2,
+    public readonly host: ElementRef<HTMLElement>,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
-  public ngOnInit(): void {
-    this.subscription.add(this.detectChangesOnNodeExpansion());
-    this.subscription.add(this.scrollViewportDuringDragging());
-    this.subscription.add(this.expandNodeDuringDragging());
-    this.subscription.add(this.handleCountOfVisibleElementsChanges());
-    this.subscription.add(this.processHasDragAndDropChanges());
-    this.subscription.add(this.processDroppedEmit());
+  public ngAfterViewInit(): void {
+    this.subscription.add(this.getSubscriptionToSetData());
+    this.subscription.add(this.getSubscriptionToSetLoading());
+    this.subscription.add(this.getSubscriptionToScrollToIndex());
+    this.subscription.add(this.getSubscriptionToSetExpanded());
+    this.subscription.add(this.getSubscriptionToSetSelected());
+    this.subscription.add(this.getSubscriptionForScrollWithDrag());
+    this.subscription.add(this.getSubscriptionForRangeChanges());
+    this.eventBus.dispatch(new QueueEvent.StartQueue());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
-    }
-  }
-
-  public ngAfterViewInit(): void {
-    this.viewPortReference$.next(this.viewPort);
-    this.skeletonViewPortReference$.next(this.skeletonViewPort);
-    this.manipulator.refreshViewPort();
-    this.subscription.add(this.setInitialVisibleRange());
-    this.subscription.add(this.refreshViewPortOnExpandedItemsIdsChange());
-    this.subscription.add(this.restoreExpansionForRecreatedElements());
-    this.subscription.add(this.updateRangeOnDataExtraction());
-    this.subscription.add(this.scrollByIndexOnEmit());
-
-    if (this.manipulator.fetchOnCreate) {
-      this.manipulator.refreshData();
-    }
+    this.setupController(changes?.controller);
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  public idsIncludesNodeId(ids: string[], node: FlatTreeItem): boolean {
-    return !isNil(node) && Array.isArray(ids) && ids.includes(node.id);
+  public isExpanded(expandedIdsList: string[], treeItem: FlatTreeItem): boolean {
+    return !isNil(treeItem) && treeItem.isExpandable && !treeItem.isElement && expandedIdsList.includes(treeItem.id);
   }
 
-  public toggleExpansion(node: FlatTreeItem): void {
-    const nodeId: string = node?.id;
-    if (isNil(nodeId)) {
-      return;
-    }
-    this.expandedItemIds$
-      .pipe(
-        take(1),
-        map((expandedItemIds: Set<string>) => expandedItemIds.has(nodeId))
-      )
-      .subscribe((nodeIsExpanded: boolean) => {
-        if (nodeIsExpanded) {
-          this.manipulator.collapse([node]);
-          return;
-        }
-        this.manipulator.expand([node.id]);
-        this.expandedNode.emit(node);
+  public hasChild(_: number, treeItem: FlatTreeItem): boolean {
+    return !isNil(treeItem) && treeItem.isExpandable && !treeItem.isElement;
+  }
+
+  public hasNoChild(_: number, treeItem: FlatTreeItem): boolean {
+    return !isNil(treeItem) && !treeItem.isExpandable && !treeItem.isElement;
+  }
+
+  public isElement(_: number, treeItem: FlatTreeItem): boolean {
+    return !isNil(treeItem) && !treeItem.isExpandable && treeItem.isElement;
+  }
+
+  public idsIncludesNodeId(idsList: string[], treeItem: FlatTreeItem): boolean {
+    return idsList.includes(treeItem.id);
+  }
+
+  public mouseDown(dragTreeItem: FlatTreeItem, event: MouseEvent): void {
+    this.hasDragAndDrop$.pipe(take(1), filterTruthy()).subscribe(() => {
+      const mouseDownPosition: Position = { left: event?.screenX, top: event?.screenY };
+      const target: EventTarget = event.target;
+      const draggableElementBoundingBox: DOMRect =
+        target instanceof HTMLElement ? target.getBoundingClientRect() : null;
+      const dragTreeItemWidth: number = draggableElementBoundingBox?.width;
+      this.dragAndDropMeta$.next({
+        mouseDownPosition,
+        dragTreeItem,
+        draggableElementBoundingBox,
+        dragTreeItemWidth,
+        dragTreeItemIsDisplayed: false
       });
+    });
   }
 
-  public isExpanded(expandedItemsIds: Set<string>, node: FlatTreeItem): boolean {
-    return expandedItemsIds.has(node?.id);
+  public mouseEnter(treeItem: FlatTreeItem): void {
+    this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
+      this.dragAndDropMeta$.next({ ...dragAndDropMeta, dropTreeItem: treeItem });
+    });
   }
 
-  public canDrop(node: FlatTreeItem): boolean {
-    return this.dragAndDropControl.canDrop(node);
+  public mouseLeave(): void {
+    this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
+      this.dragAndDropMeta$.next({ ...dragAndDropMeta, dropTreeItem: null });
+    });
   }
 
   @HostListener('window:mousemove', ['$event'])
   public mouseMove(event: MouseEvent): void {
-    this.dragAndDropControl.mouseMove(event, this.draggableElement, this.data$);
+    this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
+      this.processDragMoving(dragAndDropMeta, event.screenX, event.screenY);
+    });
   }
 
   @HostListener('window:mouseup')
   public mouseUp(): void {
-    this.dragAndDropControl.mouseUp();
+    this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
+      if (!dragAndDropMeta.dragTreeItemIsDisplayed) {
+        return;
+      }
+      const dropEventData: DropEventInterface<FlatTreeItem> = {
+        draggedElement: dragAndDropMeta.dragTreeItem,
+        droppedElement: dragAndDropMeta.dropTreeItem
+      };
+      this.eventBus.dispatch(new DataEvent.Drop(dropEventData));
+    });
+    this.dragAndDropMeta$.next(null);
   }
 
-  public mouseDown(treeNode: FlatTreeItem, event: MouseEvent): void {
-    this.dragAndDropControl.mouseDown(treeNode, event);
+  public click(treeItem: FlatTreeItem): void {
+    this.eventBus.dispatch(new DataEvent.Click(treeItem));
   }
 
-  public mouseEnter(node: FlatTreeItem): void {
-    this.dragAndDropControl.mouseEnter(node);
+  public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
+    this.isExpanded(expandedIdsList, treeItem) ? this.collapseClick(treeItem) : this.expandClick(treeItem);
   }
 
-  public mouseLeave(): void {
-    this.dragAndDropControl.mouseLeave();
+  private setupController(change: ComponentChange<this, TreeController>): void {
+    const value: Nullable<TreeController> = change?.currentValue;
+    if (isNil(value)) {
+      return;
+    }
+    this.controller = value;
+
+    this.dataDisplayCollection = this.controller.getDataDisplayCollectionRef();
+    this.eventBus = this.controller.eventBus;
+    this.scrollBehavior$ = this.dataDisplayCollection.scrollBehavior$;
+    this.trackBy$ = this.dataDisplayCollection.trackBy$;
+    this.data$ = this.dataDisplayCollection.data$;
+    this.isLoading$ = this.dataDisplayCollection.getIsLoading();
+    this.selectedIdsList$ = this.dataDisplayCollection.selectedIdsList$;
+    this.expandedIdsList$ = this.dataDisplayCollection.expandedIdsList$;
+    this.hasDragAndDrop$ = this.dataDisplayCollection.hasDragAndDrop$;
+
+    this.dataSource = new RangedDataSource(this.data$);
   }
 
-  private scrollByIndexOnEmit(): Subscription {
-    return this.scrollIndex$
-      .pipe(withLatestFrom(this.scrollBehavior$))
-      .subscribe(([targetIndex, scrollBehavior]: [number, ScrollBehavior]) => {
-        this.viewPort.scrollToIndex(targetIndex, scrollBehavior);
-        this.skeletonViewPort.scrollToIndex(targetIndex, scrollBehavior);
-      });
+  private expandClick(treeItem: FlatTreeItem): void {
+    this.eventBus.dispatch(new TreeEvent.Expand(treeItem.id));
   }
 
-  private expandNodeDuringDragging(): Subscription {
-    const expandDelay: number = 1000;
-    return this.expandNodeWithDelay$
+  private collapseClick(treeItem: FlatTreeItem): void {
+    this.eventBus.dispatch(new TreeEvent.Collapse(treeItem.id));
+  }
+
+  private getSubscriptionToSetData(): Subscription {
+    return this.getEvents(DataEvent.SetData)
       .pipe(
-        debounce(node => (isNil(node) ? NEVER : timer(expandDelay))),
-        filter(nodeToExpand => !this.treeControl.isExpanded(nodeToExpand))
+        switchMap((event: DataEvent.SetData) => {
+          return this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event));
+        })
       )
-      .subscribe((nodeToExpand: FlatTreeItem) => {
-        this.treeControl.expand(nodeToExpand);
-        this.toggleExpansion(nodeToExpand);
-      });
+      .subscribe((event: DataEvent.SetData) => this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id)));
   }
 
-  private handleCountOfVisibleElementsChanges(): Subscription {
-    return this.data$
+  private getSubscriptionToSetLoading(): Subscription {
+    return this.getEvents(DataEvent.SetLoading).subscribe((event: DataEvent.SetLoading) => {
+      this.dataDisplayCollection.setIsLoading(event.payload);
+      this.changeDetectorRef.detectChanges();
+      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+    });
+  }
+
+  private getSubscriptionToSetExpanded(): Subscription {
+    return this.getEvents(TreeEvent.SetExpanded).subscribe((event: TreeEvent.SetExpanded) => {
+      this.setExpandedIdsList(event.payload);
+      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+    });
+  }
+
+  private setExpandedIdsList(list: string[]): void {
+    this.dataDisplayCollection.setExpandedIdsList(list);
+    this.data$
       .pipe(
-        map((data: FlatTreeItem[]) => (isNil(data) ? 0 : data.length)),
-        distinctUntilChanged()
+        take(1),
+        map((data: FlatTreeItem[]) => data.filter((treeItem: FlatTreeItem) => list.includes(treeItem.id)))
       )
-      .subscribe(countOfVisibleElements => this.visibleElementsCountChanged.emit(countOfVisibleElements));
+      .subscribe((data: FlatTreeItem[]) => {
+        data.forEach((treeItem: FlatTreeItem) => this.treeControl.expand(treeItem));
+      });
+    this.changeDetectorRef.markForCheck();
   }
 
-  private scrollViewportDuringDragging(): Subscription {
+  private getSubscriptionToSetSelected(): Subscription {
+    return this.getEvents(DataEvent.SetSelected).subscribe((event: DataEvent.SetSelected) => {
+      this.setSelectedIdsList(event.payload);
+      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+    });
+  }
+
+  private setSelectedIdsList(list: string[]): void {
+    this.dataDisplayCollection.setSelectedIdsList(list);
+    this.changeDetectorRef.detectChanges();
+  }
+
+  private getSubscriptionToScrollToIndex(): Subscription {
+    return this.getEvents(DataEvent.ScrollByIndex).subscribe((event: DataEvent.ScrollByIndex) => {
+      this.scrollToIndex(event.payload);
+      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+    });
+  }
+
+  private scrollToIndex(index: number): void {
+    this.scrollBehavior$.pipe(take(1)).subscribe((scrollBehavior: ScrollBehavior) => {
+      this.viewPort.scrollToIndex(index, scrollBehavior);
+      this.skeletonViewPort.scrollToIndex(index, scrollBehavior);
+    });
+  }
+
+  private getSubscriptionForScrollWithDrag(): Subscription {
     return interval(0)
       .pipe(
         observeOn(animationFrameScheduler),
-        withLatestFrom(this.scrollBehavior$, this.scrollDirection$),
-        filter(
-          ([_, _scrollBehavior, scrollDirection]: [number, ScrollBehavior, Nullable<'up' | 'down'>]) =>
-            !isNil(scrollDirection)
-        )
+        switchMap(() => this.dragAndDropMeta$.pipe(take(1))),
+        filterNotNil(),
+        map((dragAndDropMeta: DragAndDropMeta) => dragAndDropMeta.scrollDirection),
+        filterNotNil(),
+        withLatestFrom(this.scrollBehavior$)
       )
-      .subscribe(([_, scrollBehavior, scrollDirection]: [number, ScrollBehavior, Nullable<'up' | 'down'>]) => {
+      .subscribe(([scrollDirection, scrollBehavior]: [ScrollDirection, ScrollBehavior]) => {
         const scrollingSpeed: number = 5;
         const offsetDelta: number = scrollDirection === 'up' ? -scrollingSpeed : scrollingSpeed;
         const currentOffset: number = this.viewPort.measureScrollOffset();
@@ -265,75 +299,42 @@ export class TreeNewComponent implements OnInit, OnChanges, AfterViewInit, OnDes
       });
   }
 
-  private processHasDragAndDropChanges(): Subscription {
-    return this.hasDragAndDrop$.subscribe((hasDragAndDrop: boolean) =>
-      this.dragAndDropControl.setHasDragAndDrop(hasDragAndDrop)
-    );
+  private getSubscriptionForRangeChanges(): void {
+    this.viewPort.renderedRangeStream.subscribe((range: ListRange) => {
+      this.dataSource.setRange(range);
+    });
   }
 
-  private restoreExpansionForRecreatedElements(): Subscription {
-    return this.dataSource.currentSlice$
-      .pipe(withLatestFrom(this.expandedItemIds$))
-      .subscribe(([treeItems, expandedIds]) => {
-        treeItems
-          .filter(item => expandedIds.has(item.id))
-          .forEach(item => {
-            this.treeControl.expand(item);
-          });
-      });
+  private getEvents<E extends DataEventBase>(eventType: Type<E>): Observable<E> {
+    return this.eventBus.catchEvents().pipe(filter((event: DataEventBase): event is E => event instanceof eventType));
   }
 
-  private setInitialVisibleRange(): void {
-    this.data$
-      .pipe(
-        filter((nodes: FlatTreeItem[]) => Array.isArray(nodes) && !isEmpty(nodes)),
-        take(1),
-        withLatestFrom(
-          this.viewPortReference$.pipe(
-            map((viewPort: CdkVirtualScrollViewport) => viewPort.elementRef),
-            map((viewPortNativeElement: ElementRef<HTMLElement>) =>
-              viewPortNativeElement.nativeElement.getBoundingClientRect()
-            ),
-            map((viewPortRect: ClientRect) => viewPortRect.height),
-            map((viewPortHeightPx: number) => Math.ceil(viewPortHeightPx / this.treeItemSizePx)),
-            map((viewPortItemsCountToFit: number) => {
-              const additionItemsToPreRender: number = 10;
-              return viewPortItemsCountToFit + additionItemsToPreRender;
-            })
-          )
-        ),
-        map(([nodes, maxItemsLimit]: [FlatTreeItem[], number]) => ({
-          start: 0,
-          end: nodes.length < maxItemsLimit ? nodes.length : maxItemsLimit
-        }))
-      )
-      .subscribe((range: ListRange) => {
-        this.listRange$.next(range);
-      });
+  private processDragMoving(dragAndDropMeta: DragAndDropMeta, x: number, y: number): void {
+    const draggableElementBoundingBox: DOMRect = dragAndDropMeta.draggableElementBoundingBox;
+    const mouseDownPosition: Position = dragAndDropMeta.mouseDownPosition;
+    const draggableElementPositionShift: Position = {
+      left: mouseDownPosition?.left - draggableElementBoundingBox?.left,
+      top: mouseDownPosition?.top - draggableElementBoundingBox?.top
+    };
+    const bottomBorderPositionY: number = this.host.nativeElement.clientHeight - draggableElementBoundingBox?.height;
+    const newMeta: DragAndDropMeta = {
+      ...dragAndDropMeta,
+      dragTreeItemLeft: x - draggableElementBoundingBox?.left - draggableElementPositionShift.left,
+      dragTreeItemTop: getClampedValue(y - draggableElementPositionShift.top, 0, bottomBorderPositionY)
+    };
+    const isTopBorderReached: boolean = newMeta.dragTreeItemTop <= draggableElementBoundingBox?.height;
+    const isBottomBorderReached: boolean = newMeta.dragTreeItemTop >= bottomBorderPositionY;
+    newMeta.scrollDirection = isTopBorderReached ? 'up' : isBottomBorderReached ? 'down' : null;
+    newMeta.dragTreeItemIsDisplayed = true;
+
+    this.dragAndDropMeta$.next(newMeta);
   }
 
-  private updateRangeOnDataExtraction(): Subscription {
-    return this.listRange$
-      .pipe(
-        filterNotNil(),
-        take(1),
-        switchMap(() => this.viewPortReference$),
-        switchMap((viewPort: CdkVirtualScrollViewport) => viewPort.renderedRangeStream)
-      )
-      .subscribe((range: ListRange) => {
-        this.listRange$.next(range);
-      });
+  private static getLevel(treeItem: FlatTreeItem): number {
+    return treeItem.level;
   }
 
-  private refreshViewPortOnExpandedItemsIdsChange(): Subscription {
-    return this.expandedItemIds$.subscribe(() => this.manipulator.refreshViewPort());
-  }
-
-  private processDroppedEmit(): Subscription {
-    return this.dropEmit$.subscribe((event: DropEventInterface<FlatTreeItem>) => this.dropped.emit(event));
-  }
-
-  private detectChangesOnNodeExpansion(): Subscription {
-    return this.expandedItemIds$.pipe(filterNotNil()).subscribe(() => this.changeDetectorRef.markForCheck());
+  private static isExpandable(treeItem: FlatTreeItem): boolean {
+    return treeItem.isExpandable;
   }
 }

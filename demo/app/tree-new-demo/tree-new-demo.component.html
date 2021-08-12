@@ -2,20 +2,9 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <ng-container
-      *ngIf="componentOutlet$ | async as componentOutlet"
-      [ngComponentOutlet]="componentOutlet.componentClass"
-      [ngComponentOutletInjector]="componentOutlet.injector"
-    >
-    </ng-container>
+    <pupa-tree-new [controller]="controller">
+      <ng-container *pupaTreeItemTemplate="let data"> {{ data.name }} (customTemplate) </ng-container>
+    </pupa-tree-new>
+    <pupa-tree-new [controller]="controller"> </pupa-tree-new>
   </demo-example-viewer-content>
-
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Data length</demo-props-group-label>
-    <demo-props-radio-select #dataLength [options]="dataLengthOptions"></demo-props-radio-select>
-    <demo-props-group-label>Request Timeout</demo-props-group-label>
-    <demo-props-radio-select #timeOut [options]="timeOutOptions"></demo-props-radio-select>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #loading>Loading</demo-props-checkbox>
-  </demo-example-viewer-properties>
 </demo-example-viewer>

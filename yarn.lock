@@ -1341,6 +1341,11 @@
   dependencies:
     fancy-log "^1.3.3"
 
+"@bimeister/event-bus@^0.1.0-3949893e":
+  version "0.1.0-3949893e"
+  resolved "https://git.bimeister.com/api/v4/projects/98/packages/npm/@bimeister/event-bus/-/@bimeister/event-bus-0.1.0-3949893e.tgz#9099f81a0df99112aa636e47559259f0a6c297c2"
+  integrity sha1-kJn4Gg35kRKqY25HVZJZ8KbCl8I=
+
 "@bimeister/utilities@^0.1.0-24d2e33e":
   version "0.1.0-24d2e33e"
   resolved "https://git.bimeister.com/api/v4/projects/98/packages/npm/@bimeister/utilities/-/@bimeister/utilities-0.1.0-24d2e33e.tgz#608d1b9f73175a5c0720ec7b3e864249440c0e49"

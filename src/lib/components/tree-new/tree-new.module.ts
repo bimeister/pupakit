@@ -9,9 +9,10 @@ import { TreeNewComponent } from './components/tree-new/tree-new.component';
 import { IconModule } from '../icon/icon.module';
 import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
 import { iosArrowForwardIcon } from '../../../internal/constants/icons/ios-arrow-forward-icon.const';
+import { TreeItemTemplateDirective } from './directives/tree-item-template.directive';
 
 @NgModule({
-  declarations: [TreeNewComponent],
+  declarations: [TreeNewComponent, TreeItemTemplateDirective],
   imports: [
     SharedModule,
     SkeletonModule,
@@ -21,6 +22,6 @@ import { iosArrowForwardIcon } from '../../../internal/constants/icons/ios-arrow
     IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon])
   ],
   providers: [],
-  exports: [TreeNewComponent]
+  exports: [TreeNewComponent, TreeItemTemplateDirective]
 })
 export class TreeNewModule {}

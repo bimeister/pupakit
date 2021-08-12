@@ -3,8 +3,8 @@
     <pupa-spinner size="40px"></pupa-spinner>
   </div>
 
-  <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" #viewPort>
-    <ng-container *cdkVirtualFor="let item of data$ | async"> </ng-container>
+  <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" (mouseleave)="mouseLeave()" #viewPort>
+    <ng-container *cdkVirtualFor="let treeItem of data$ | async"> </ng-container>
     <cdk-tree
       (contextmenu)="$event.preventDefault()"
       [dataSource]="dataSource"
@@ -13,25 +13,24 @@
     >
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: isElement"
-        [cdkTreeNodePaddingIndent]="(nodesWithoutPadding$ | async) ? 0 : 10"
+        [cdkTreeNodePaddingIndent]="10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
         (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
       >
         <div
           class="tree-node"
-          [style.padding-left.px]="(nodesWithoutPadding$ | async) ? 10 * node.level : 0"
-          [class.prevent-drop]="(draggingHasStarted$ | async) && !canDrop(node)"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
+          [style.padding-left.px]="10 * node.level"
+          [class.prevent-drop]="(draggingHasStarted$ | async) && !node?.isExpandable"
+          [class.tree-node_selected]="idsIncludesNodeId(selectedIdsList$ | async, node)"
+          [class.tree-node_highlighted]="idsIncludesNodeId(selectedIdsList$ | async, node)"
         >
           <div class="tree-node__no-expansion-button">
             <ng-container
-              [ngTemplateOutlet]="(nodeTemplate$ | async) || defaultTemplate"
+              [ngTemplateOutlet]="treeItemTemplate?.templateRef || defaultTemplate"
               [ngTemplateOutletContext]="{
-                node: node
+                $implicit: node
               }"
             ></ng-container>
           </div>
@@ -40,18 +39,17 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasNoChild"
-        [cdkTreeNodePaddingIndent]="(nodesWithoutPadding$ | async) ? 0 : 10"
+        [cdkTreeNodePaddingIndent]="10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
         (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
       >
         <div
           class="tree-node"
-          [style.padding-left.px]="(nodesWithoutPadding$ | async) ? 10 * node.level : 0"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
+          [style.padding-left.px]="10 * node.level"
+          [class.tree-node_selected]="idsIncludesNodeId(selectedIdsList$ | async, node)"
+          [class.tree-node_highlighted]="idsIncludesNodeId(selectedIdsList$ | async, node)"
         >
           <div class="tree-node__expansion-button tree-node_is-disabled-expandable">
             <ng-container
@@ -65,9 +63,9 @@
           </div>
 
           <ng-container
-            [ngTemplateOutlet]="(nodeTemplate$ | async) || defaultTemplate"
+            [ngTemplateOutlet]="treeItemTemplate?.templateRef || defaultTemplate"
             [ngTemplateOutletContext]="{
-              node: node
+              $implicit: node
             }"
           ></ng-container>
         </div>
@@ -75,35 +73,32 @@
 
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: hasChild"
-        [cdkTreeNodePaddingIndent]="(nodesWithoutPadding$ | async) ? 0 : 10"
+        [cdkTreeNodePaddingIndent]="10"
         cdkTreeNodePadding
         class="tree-node-row"
         (mousedown)="mouseDown(node, $event)"
         (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
       >
         <div
           class="tree-node"
-          [style.padding-left.px]="(nodesWithoutPadding$ | async) ? 10 * node.level : 0"
+          [style.padding-left.px]="10 * node.level"
           [class.prevent-drop]="(draggingHasStarted$ | async) && !canDrop(node)"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
+          [class.tree-node_selected]="idsIncludesNodeId(selectedIdsList$ | async, node)"
+          [class.tree-node_highlighted]="idsIncludesNodeId(selectedIdsList$ | async, node)"
         >
-          <div class="tree-node__expansion-button" (click)="toggleExpansion(node)">
-            <ng-container
-              [ngTemplateOutlet]="defaultExpansionButtonTemplate"
-              [ngTemplateOutletContext]="{
-                node: node,
-                hasChild: true,
-                isElement: false
-              }"
-            ></ng-container>
-          </div>
-
           <ng-container
-            [ngTemplateOutlet]="(nodeTemplate$ | async) || defaultTemplate"
+            [ngTemplateOutlet]="clickableExpansionButtonTemplate"
             [ngTemplateOutletContext]="{
-              node: node
+              node: node,
+              hasChild: true,
+              isElement: false,
+              expandedIdsList: expandedIdsList$ | async
+            }"
+          ></ng-container>
+          <ng-container
+            [ngTemplateOutlet]="treeItemTemplate?.templateRef || defaultTemplate"
+            [ngTemplateOutletContext]="{
+              $implicit: node
             }"
           ></ng-container>
         </div>
@@ -119,33 +114,76 @@
     </pupa-skeleton>
   </cdk-virtual-scroll-viewport>
 
-  <div [style.visibility]="(draggingHasStarted$ | async) ? 'visible' : 'hidden'" class="draggable tree-node" #draggable>
-    <ng-container *ngIf="draggableNode$ | async as draggableNode">
-      <div class="tree-node__expansion-button">
-        <ng-container
-          [ngTemplateOutlet]="defaultExpansionButtonTemplate"
-          [ngTemplateOutletContext]="{
-            node: draggableNode,
-            hasChild: draggableNode?.isExpandable,
-            isElement: draggableNode?.isElement
-          }"
-        ></ng-container>
-      </div>
-
-      <ng-container
-        [ngTemplateOutlet]="(nodeTemplate$ | async) || defaultTemplate"
-        [ngTemplateOutletContext]="{ node: draggableNode }"
-      ></ng-container>
-    </ng-container>
-  </div>
+  <ng-container *ngIf="dragAndDropMeta$ | async as dragAndDropMeta">
+    <ng-container
+      [ngTemplateOutlet]="dragTreeItemTemplate"
+      [ngTemplateOutletContext]="{
+        treeItem: dragAndDropMeta.dragTreeItem,
+        top: dragAndDropMeta.dragTreeItemTop,
+        left: dragAndDropMeta.dragTreeItemLeft,
+        width: dragAndDropMeta.dragTreeItemWidth,
+        isVisible: dragAndDropMeta.dragTreeItemIsDisplayed
+      }"
+    ></ng-container>
+  </ng-container>
 </section>
 
 <ng-template #defaultExpansionButtonTemplate let-node="node" let-hasChild="hasChild">
   <button class="default-expansion-button" [disabled]="!hasChild">
-    <pupa-icon [name]="isExpanded(expandedItemIds$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></pupa-icon>
+    <pupa-icon [name]="isExpanded(expandedIdsList$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></pupa-icon>
   </button>
 </ng-template>
 
-<ng-template #defaultTemplate let-node="node">
-  {{ node?.name }}
+<ng-template
+  let-left="left"
+  let-width="width"
+  let-top="top"
+  let-treeItem="treeItem"
+  let-isVisible="isVisible"
+  #dragTreeItemTemplate
+>
+  <div
+    *ngIf="isVisible"
+    class="draggable tree-node"
+    [style.left.px]="left"
+    [style.top.px]="top"
+    [style.width.px]="width"
+  >
+    <div class="tree-node__expansion-button">
+      <ng-container
+        [ngTemplateOutlet]="defaultExpansionButtonTemplate"
+        [ngTemplateOutletContext]="{
+          node: treeItem,
+          hasChild: treeItem?.isExpandable,
+          isElement: treeItem?.isElement
+        }"
+      ></ng-container>
+    </div>
+
+    <ng-container
+      [ngTemplateOutlet]="treeItemTemplate?.templateRef || defaultTemplate"
+      [ngTemplateOutletContext]="{ $implicit: treeItem }"
+    ></ng-container>
+  </div>
 </ng-template>
+
+<ng-template #defaultTemplate let-node>
+  <div (click)="click(node)">
+    {{ node?.name }}
+  </div>
+</ng-template>
+
+<ng-template #clickableExpansionButtonTemplate let-expandedIdsList="expandedIdsList" let-node="node">
+  <div class="tree-node__expansion-button" (click)="toggleExpansion(expandedIdsList, node)">
+    <ng-container
+      [ngTemplateOutlet]="defaultExpansionButtonTemplate"
+      [ngTemplateOutletContext]="{
+        node: node,
+        hasChild: true,
+        isElement: false
+      }"
+    ></ng-container>
+  </div>
+</ng-template>
+
+<ng-content></ng-content>
