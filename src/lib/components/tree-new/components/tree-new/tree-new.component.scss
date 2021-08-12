@@ -12,8 +12,11 @@
 .tree {
   position: relative;
   height: 100%;
+  box-sizing: border-box;
+  padding: newRems(2);
   width: auto;
   user-select: none;
+  background: color(white);
 
   &__loader {
     width: 100%;
