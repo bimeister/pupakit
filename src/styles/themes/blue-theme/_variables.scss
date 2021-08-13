@@ -1,17 +1,41 @@
 @import './../../functions';
 
-/* colors */
-$color_main: #004560;
-$color_main-dark: #04222e; /* Нет в дизайн-системе */
-$color_active: #009eff;
-$color_success: #00c902;
-$color_alert: #ffc009;
-$color_text: #002c3e;
-$color_subdark: #8f9ca4;
+/* new colors */
+$color_white: #ffffff;
+$color_primary-n100: #d8ecff;
+$color_primary-n200: #9dd0ff;
+$color_primary-n300: #6cb8ff;
+$color_primary-n400: #198bf5;
+$color_primary-n500: #0070d8;
+$color_base-n600: #001d29;
+$color_base-dark-n100: #c2c9cc;
+$color_base-dark-n250: #627177;
+$color_base-dark-n275: #425760;
+$color_base-dark-n300: #334a54;
+$color_base-dark-n500: #0f2a36;
+$color_base-white-n250: #b3bcbf;
+$color_base-white-n275: #d6dbdd;
+$color_base-white-n400: #e8ebec;
+$color_base-white-n500: #f5f6f7;
+$color_green-n400: #08d892;
+$color_green-n500: #08b87d;
+$color_yellow-n500: #ffd333;
+$color_red-n400: #ed6439;
+$color_red-n500: #f05625;
+$color_red-n550: #e14c1d;
 
-$color_grey-light: #797979;
-$color_grey-ivory: #a6a6a6;
-$color_grey-apple: #d2d2d2;
+/* old colors */
+$color_main: $color_base-dark-n500;
+$color_main-dark: $color_base-n600; /* Нет в дизайн-системе */
+$color_active: $color_primary-n500;
+$color_success: $color_green-n500;
+$color_alert: $color_yellow-n500;
+$color_text: #002c3e; /* Нет в дизайн-системе */
+$color_subdark: $color_base-white-n250;
+
+$color_grey-light: #797979; /* Нет в дизайн-системе */
+$color_grey-ivory: #a6a6a6; /* Нет в дизайн-системе */
+$color_grey-apple: $color_base-white-n250;
 
 $color_white: #ffffff; /* Нет в дизайн-системе */
 $color_black: #000000; /* Нет в дизайн-системе */
@@ -20,25 +44,22 @@ $color_pale-blue: #d9eafe; /* Нет в дизайн-системе */
 $color_cadet-blue: #9fb7d3; /* Нет в дизайн-системе */
 $color_cadet-blue-light: #e0eaf5; /* Нет в дизайн-системе */
 
-$color_error: #ff0000;
-$color_error-hovered: #de0000;
-$color_error-active: #bd0000;
-$color_error-disabled: #647e89;
+$color_error: $color_red-n500;
+$color_error-hovered: $color_red-n400;
+$color_error-active: $color_red-n550;
+$color_error-disabled: $color_base-dark-n250;
 
-$color_primary: $color_active;
-$color_primary-hovered: #01668e;
-$color_primary-active: #009edc;
-$color_primary-disabled: #647e89;
+$color_primary: $color_primary-n500;
+$color_primary-hovered: $color_base-dark-n275;
+$color_primary-active: $color_base-dark-n300;
+$color_primary-disabled: $color_base-dark-n250;
 
-$color_light: #eaf7ff;
-$color_light-hovered: #b5dcf3;
-$color_light-active: #9bcdeb;
-$color_light-disabled: #f4f4f4;
+$color_light: $color_primary-n100;
+$color_light-hovered: $color_primary-n200;
+$color_light-active: $color_primary-n300;
+$color_light-disabled: $color_base-white-n500;
 
 $color_dark-overlay: rgba(0, 0, 0, 0.82); /* Нет в дизайн-системе */
-
-$color_light-disabled: #f4f4f4;
-$color_primary-disabled: #647e89;
 
 /* font-size */
 $font-size_root: 16px; /* 1 rem (1 px = 0,0625 rem) - do not use! */

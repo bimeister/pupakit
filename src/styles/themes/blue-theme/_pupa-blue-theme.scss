@@ -5,6 +5,30 @@
 @import './variables';
 
 $colors: (
+  /* new colors */
+  'white': $color_white,
+  'primary-n100': $color_primary-n100,
+  'primary-n200': $color_primary-n200,
+  'primary-n300': $color_primary-n300,
+  'primary-n400': $color_primary-n400,
+  'primary-n500': $color_primary-n500,
+  'base-n600': $color_base-n600,
+  'base-dark-n100': $color_base-dark-n100,
+  'base-dark-n250': $color_base-dark-n250,
+  'base-dark-n275': $color_base-dark-n275,
+  'base-dark-n300': $color_base-dark-n300,
+  'base-dark-n500': $color_base-dark-n500,
+  'base-white-n250': $color_base-white-n250,
+  'base-white-n275': $color_base-white-n275,
+  'base-white-n400': $color_base-white-n400,
+  'base-white-n500': $color_base-white-n500,
+  'green-n400': $color_green-n400,
+  'green-n500': $color_green-n500,
+  'yellow-n500': $color_yellow-n500,
+  'red-n400': $color_red-n400,
+  'red-n500': $color_red-n500,
+  'red-n550': $color_red-n550,
+  /* old colors */
   'main': $color_main,
   'main-dark': $color_main-dark,
   'accent': $color_main,
@@ -16,7 +40,6 @@ $colors: (
   'grey-light': $color_grey-light,
   'grey-ivory': $color_grey-ivory,
   'grey-apple': $color_grey-apple,
-  'white': $color_white,
   'black': $color_black,
   'pale-blue': $color_pale-blue,
   'cadet-blue': $color_cadet-blue,
