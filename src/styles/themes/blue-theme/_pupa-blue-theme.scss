@@ -5,7 +5,7 @@
 @import './variables';
 
 $colors: (
-  /* new colors */
+  // new colors
   'white': $color_white,
   'primary-n100': $color_primary-n100,
   'primary-n200': $color_primary-n200,
@@ -28,7 +28,7 @@ $colors: (
   'red-n400': $color_red-n400,
   'red-n500': $color_red-n500,
   'red-n550': $color_red-n550,
-  /* old colors */
+  // old colors
   'main': $color_main,
   'main-dark': $color_main-dark,
   'accent': $color_main,
