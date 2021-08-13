@@ -49,7 +49,7 @@ export class ColorsComponent {
     'yellow-n300',
     'yellow-n400',
     'yellow-n500',
-    'yellow-n550',
+    'yellow-n550'
   ];
 
   public isColorLight(color: string): boolean {
