@@ -9,24 +9,28 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 })
 export class ColorsComponent {
   public readonly colors: string[] = [
-    'main',
-    'main-dark',
-    'accent',
-    'active',
-    'light',
-    'success',
-    'alert',
-    'error',
-    'text',
-    'grey-light',
-    'grey-ivory',
-    'grey-apple',
     'white',
-    'black',
-    'pale-blue',
-    'cadet-blue',
-    'cadet-blue-light',
-    'dark-overlay'
+    'primary-n100',
+    'primary-n200',
+    'primary-n300',
+    'primary-n400',
+    'primary-n500',
+    'base-n600',
+    'base-dark-n100',
+    'base-dark-n250',
+    'base-dark-n275',
+    'base-dark-n300',
+    'base-dark-n500',
+    'base-white-n250',
+    'base-white-n275',
+    'base-white-n400',
+    'base-white-n500',
+    'green-n400',
+    'green-n500',
+    'yellow-n500',
+    'red-n400',
+    'red-n500',
+    'red-n550'
   ];
 
   public isColorLight(color: string): boolean {
