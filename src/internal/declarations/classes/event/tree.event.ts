@@ -7,7 +7,6 @@ interface SetChildrenEventPayload {
   children: FlatTreeItem[];
 }
 
-// tslint:disable: max-classes-per-file
 export namespace TreeEvent {
   export class Collapse extends DataEventBase<string> {}
   export class Expand extends DataEventBase<string> {}

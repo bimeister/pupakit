@@ -2,7 +2,6 @@ import { DropEventInterface } from '../../interfaces/drop-event.interface';
 import { DataEventBase } from '../data-event-base.class';
 import { FlatTreeItem } from '../flat-tree-item.class';
 
-// tslint:disable: max-classes-per-file
 export namespace DataEvent {
   export class Click extends DataEventBase<FlatTreeItem> {}
   export class RemoveItem extends DataEventBase<string> {}

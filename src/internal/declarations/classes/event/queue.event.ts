@@ -13,7 +13,6 @@ class QueueEventBase<T> extends BusEventBase<T> {
   }
 }
 
-// tslint:disable: max-classes-per-file
 export namespace QueueEvent {
   export class AddToQueue extends QueueEventBase<DataEventBase> {}
   export class RemoveFromQueue extends QueueEventBase<string> {}
