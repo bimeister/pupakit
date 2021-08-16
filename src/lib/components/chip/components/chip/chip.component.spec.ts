@@ -171,6 +171,7 @@ describe('chip.component.ts', () => {
       from(page.waitForSelector('.disabled-checkbox input'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          delay(0),
           switchMap(() =>
             from(page.evaluate(() => document.querySelector('.chip').classList.contains('chip_disabled')))
           )
