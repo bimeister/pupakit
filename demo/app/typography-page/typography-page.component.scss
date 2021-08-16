@@ -1,3 +1,71 @@
-:host {
-  display: block;
+@import 'mixins';
+
+.items {
+  display: grid;
+  grid-gap: 4px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.item {
+  &_header {
+    color: color(grey-ivory);
+  }
+}
+
+.delimiter {
+  grid-column: 1 / -1;
+  margin: 12px 0;
+  border-bottom: solid 1px color(grey-ivory);
+}
+
+.caption {
+  @include font-type-caption;
+}
+
+.paragraph {
+  @include font-type-paragraph;
+}
+
+.point {
+  @include font-type-point;
+}
+
+.mark:not(.paragraph) {
+  @include font-size-mark;
+}
+
+.small:not(.paragraph) {
+  @include font-size-small;
+}
+
+.medium:not(.paragraph) {
+  @include font-size-medium;
+}
+
+.large:not(.paragraph) {
+  @include font-size-large;
+}
+
+.header:not(.paragraph) {
+  @include font-size-header;
+}
+
+.mark.paragraph {
+  @include font-size-mark(true);
+}
+
+.small.paragraph {
+  @include font-size-small(true);
+}
+
+.medium.paragraph {
+  @include font-size-medium(true);
+}
+
+.large.paragraph {
+  @include font-size-large(true);
+}
+
+.header.paragraph {
+  @include font-size-header(true);
 }

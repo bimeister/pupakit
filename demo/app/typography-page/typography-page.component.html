@@ -1,15 +1,17 @@
 <h1>Typography</h1>
 
-<h1>Заголовок 1</h1>
-<h2>Заголовок 2</h2>
-<h3>Заголовок 3</h3>
-<h4>Заголовок 4</h4>
-<h5>Заголовок 5</h5>
-<h6>Заголовок 6</h6>
+<div class="items">
+  <h2 class="item item_header" *ngFor="let screenSize of screenSizes">
+    {{ screenSize }}
+  </h2>
 
-<p style="max-width: 600px">
-  Мы делаем наш продукт потому, что хотим сделать лучший инструмент для команд тестирования. Для тестировщиков мы делаем
-  просто и очевидно - мы делаем ясными задачи тестирования и способы решения этих задач, показываем важность
-  тестирования и для чего это нужно. Автотесты - делаем удобный запуск и появление результатов в реальном времени. Для
-  менеджмента мы делаем прозрачно - мы делаем ясными показатели эффективности тестирования и качества продуктов.
-</p>
+  <ng-container *ngFor="let fontSize of fontSizes; let isLast = last">
+    <ng-container *ngFor="let fontType of fontTypes">
+      <div class="item" [class]="[fontType, fontSize]" *ngFor="let screenSize of screenSizes">
+        {{ fontSize }} {{ fontType }}
+      </div>
+    </ng-container>
+
+    <div class="delimiter" *ngIf="!isLast"></div>
+  </ng-container>
+</div>
