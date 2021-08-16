@@ -21,17 +21,17 @@
 /* Font size */
 
 @mixin font-mark($paragraph: false) {
-  font-size: newRems(1.5);
+  font-size: 12px;
   line-height: if($paragraph, 16px, 14px);
 }
 
 @mixin font-small($paragraph: false) {
-  font-size: newRems(1.75);
+  font-size: 14px;
   line-height: if($paragraph, 20px, 16px);
 }
 
 @mixin font-medium($paragraph: false) {
-  font-size: newRems(2);
+  font-size: 16px;
   line-height: if($paragraph, 24px, 20px);
 }
 
