@@ -1,7 +1,7 @@
 <h1>Typography</h1>
 
 <div class="items">
-  <h2 class="column-header" *ngFor="let screenSize of screenSizes">
+  <h2 class="items__column-header" *ngFor="let screenSize of screenSizes">
     {{ screenSize }}
   </h2>
 
@@ -12,6 +12,6 @@
       </div>
     </ng-container>
 
-    <div class="delimiter" *ngIf="!isLast"></div>
+    <div class="items__delimiter" *ngIf="!isLast"></div>
   </ng-container>
 </div>

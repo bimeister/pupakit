@@ -4,16 +4,16 @@
   display: grid;
   grid-gap: 4px;
   grid-template-columns: repeat(3, 1fr);
-}
 
-.column-header {
-  color: color(grey-ivory);
-}
+  &__column-header {
+    color: color(grey-ivory);
+  }
 
-.delimiter {
-  grid-column: 1 / -1;
-  margin: 12px 0;
-  border-bottom: solid 1px color(grey-ivory);
+  &__delimiter {
+    grid-column: 1 / -1;
+    margin: 12px 0;
+    border-bottom: solid 1px color(grey-ivory);
+  }
 }
 
 .caption {
