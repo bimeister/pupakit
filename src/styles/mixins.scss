@@ -4,15 +4,15 @@
 @import './font-mixins.scss';
 
 @mixin regular {
-  font-family: 'effraregular', sans-serif;
+  @include font-type-caption();
 }
 
 @mixin medium {
-  font-family: 'efframedium', sans-serif;
+  @include font-type-point();
 }
 
 @mixin bold {
-  font-family: 'effrabold', sans-serif;
+  @include font-type-point();
 }
 
 @mixin flex-container($flex-direction: row, $align-items: normal, $justify-content: normal, $flex-wrap: nowrap) {
