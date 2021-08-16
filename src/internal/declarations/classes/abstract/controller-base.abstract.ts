@@ -19,7 +19,6 @@ export abstract class ControllerBase<O extends ControllerOptions> {
   public readonly eventBus: EventBus = new EventBus();
 
   constructor(protected readonly options?: Nullable<O>) {
-    this.eventBus = new EventBus();
     this.queue = new Queue(this.eventBus);
     this.dataDisplayCollection = this.getDataDisplayCollection();
     this.handler = this.getHandler();

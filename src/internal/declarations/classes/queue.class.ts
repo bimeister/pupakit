@@ -24,7 +24,7 @@ export class Queue {
   private getSubscriptionForStartEvents(): Subscription {
     return this.getEvents(QueueEvent.StartQueue).subscribe(() => {
       this.started$.next(true);
-      this.next();
+      this.dispatchFromQueue();
     });
   }
 
@@ -42,21 +42,21 @@ export class Queue {
 
   private getSubscriptionForRemoveEvents(): Subscription {
     return this.getEvents(QueueEvent.RemoveFromQueue)
-      .pipe(filter((removeEvent: QueueEvent.RemoveFromQueue) => this.isFirst(removeEvent.payload)))
+      .pipe(filter((removeEvent: QueueEvent.RemoveFromQueue) => this.isFirstEventInQueue(removeEvent.payload)))
       .subscribe(() => {
         this.queue.shift();
-        this.next();
+        this.dispatchFromQueue();
       });
   }
 
-  private isFirst(eventId: string): boolean {
+  private isFirstEventInQueue(eventId: string): boolean {
     if (isEmpty(this.queue)) {
       return false;
     }
     return this.queue[0].id === eventId;
   }
 
-  private next(): void {
+  private dispatchFromQueue(): void {
     if (isEmpty(this.queue)) {
       return;
     }

@@ -55,8 +55,8 @@ export class DefaultEventHandler {
   }
 
   protected updateItem(updatedItem: FlatTreeItem, data: FlatTreeItem[]): void {
-    const treeItemInData: FlatTreeItem = DefaultEventHandler.getTreeItem(updatedItem.id, data);
-    if (isNil(treeItemInData)) {
+    const treeItemExists: boolean = DefaultEventHandler.treeItemExists(updatedItem.id, data);
+    if (!treeItemExists) {
       return;
     }
     const updatedData: FlatTreeItem[] = data.map((treeItem: FlatTreeItem) => {
@@ -76,8 +76,8 @@ export class DefaultEventHandler {
   }
 
   protected removeItem(removeItemId: string, data: FlatTreeItem[]): void {
-    const treeItemInData: FlatTreeItem = DefaultEventHandler.getTreeItem(removeItemId, data);
-    if (isNil(treeItemInData)) {
+    const treeItemExists: boolean = DefaultEventHandler.treeItemExists(removeItemId, data);
+    if (!treeItemExists) {
       return;
     }
     const updatedData: FlatTreeItem[] = data.filter((treeItem: FlatTreeItem) => {
@@ -98,6 +98,11 @@ export class DefaultEventHandler {
 
   public getEvents<T extends DataEventBase>(eventType: Type<T>): Observable<T> {
     return this.eventBus.catchEvents().pipe(filter((event: DataEventBase): event is T => event instanceof eventType));
+  }
+
+  protected static treeItemExists(treeItemId: string, data: FlatTreeItem[]): boolean {
+    const treeItem: FlatTreeItem = DefaultEventHandler.getTreeItem(treeItemId, data);
+    return !isNil(treeItem);
   }
 
   protected static getTreeItem(treeItemId: string, data: FlatTreeItem[]): FlatTreeItem {
