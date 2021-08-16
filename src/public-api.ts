@@ -38,7 +38,22 @@ export {
   ConnectedPositionX,
   UiState,
   ChipColors,
-  ConnectedPositionY
+  ConnectedPositionY,
+  TreeController,
+  DefaultEventHandler,
+  DefaultTreeEventHandler,
+  ControllerBase,
+  Queue,
+  QueueEvent,
+  TreeEvent,
+  DataEvent,
+  RangedDataSource,
+  DataDisplayCollection,
+  DataDisplayCollectionRef,
+  DataEventBase,
+  TreeDataDisplayCollection,
+  TreeDataDisplayCollectionRef,
+  ControllerOptions
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';
