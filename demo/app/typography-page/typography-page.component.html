@@ -7,9 +7,7 @@
 
   <ng-container *ngFor="let fontSize of fontSizes; let isLast = last">
     <ng-container *ngFor="let fontType of fontTypes">
-      <div [class]="[fontType, fontSize]" *ngFor="let screenSize of screenSizes">
-        {{ fontSize }} {{ fontType }}
-      </div>
+      <div [class]="[fontType, fontSize]" *ngFor="let screenSize of screenSizes">{{ fontSize }} {{ fontType }}</div>
     </ng-container>
 
     <div class="items__delimiter" *ngIf="!isLast"></div>
