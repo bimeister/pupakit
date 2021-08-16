@@ -1,6 +1,7 @@
 @import 'themes/functions';
 @import './functions.scss';
 @import './adaptive.scss';
+@import './font-mixins.scss';
 
 @mixin regular {
   font-family: 'effraregular', sans-serif;
