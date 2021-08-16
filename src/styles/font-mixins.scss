@@ -36,45 +36,29 @@
 }
 
 @mixin font-large($paragraph: false) {
-  @include width-between-property(
-      'font-size',
-      $smBreakPoint,
-      16,
-      $mdBreakPoint,
-      20,
-      true,
-      true,
-  );
+  @include width-between-property('font-size', $smBreakPoint, 16, $mdBreakPoint, 20, true, true);
 
   @include width-between-property(
-      'line-height',
-      $smBreakPoint,
-      if($paragraph, 24, 20),
-      $mdBreakPoint,
-      if($paragraph, 28, 24),
-      true,
-      true,
+    'line-height',
+    $smBreakPoint,
+    if($paragraph, 24, 20),
+    $mdBreakPoint,
+    if($paragraph, 28, 24),
+    true,
+    true
   );
 }
 
 @mixin font-header($paragraph: false) {
-  @include width-between-property(
-      'font-size',
-      $smBreakPoint,
-      20,
-      $mdBreakPoint,
-      24,
-      true,
-      true,
-  );
+  @include width-between-property('font-size', $smBreakPoint, 20, $mdBreakPoint, 24, true, true);
 
   @include width-between-property(
-      'line-height',
-      $smBreakPoint,
-      if($paragraph, 28, 24),
-      $mdBreakPoint,
-      if($paragraph, 36, 28),
-      true,
-      true,
+    'line-height',
+    $smBreakPoint,
+    if($paragraph, 28, 24),
+    $mdBreakPoint,
+    if($paragraph, 36, 28),
+    true,
+    true
   );
 }
