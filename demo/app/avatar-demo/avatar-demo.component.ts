@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { RadioOption } from '../example-viewer/radio-option';
 
 const AVATAR_URL: string =
   'https://avatars.mds.yandex.net/get-kinopoisk-post-img/1101693/0e12fdc5deb15a5025894d214340f9aa/960x540';
@@ -14,6 +15,18 @@ const AVATAR_URL: string =
 export class AvatarDemoComponent {
   public readonly usernameControl: FormControl = new FormControl('');
   public readonly imageSrcControl: FormControl = new FormControl('');
+
+  public readonly sizeOptions: RadioOption[] = [
+    {
+      caption: 'Medium',
+      value: 'medium'
+    },
+    {
+      caption: 'Small',
+      value: 'small',
+      isDefault: true
+    }
+  ];
 
   public setAvatar(): void {
     this.imageSrcControl.setValue(AVATAR_URL);

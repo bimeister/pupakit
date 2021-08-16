@@ -2,10 +2,13 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-avatar [username]="usernameControl.value" [src]="imageSrcControl.value"></pupa-avatar>
+    <pupa-avatar [username]="usernameControl.value" [src]="imageSrcControl.value" [size]="size | async"></pupa-avatar>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
+    <demo-props-group-label>Size</demo-props-group-label>
+    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
     <demo-props-group-label>Username</demo-props-group-label>
     <div class="avatar__row">
       <pupa-input-text class="username-input" placeholder="Username" [formControl]="usernameControl"></pupa-input-text>

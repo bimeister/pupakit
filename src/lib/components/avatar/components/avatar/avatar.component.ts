@@ -4,6 +4,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { AvatarSize } from '../../../../../internal/declarations/types/avatar-size.type';
+
+const SATURATION: number = 88;
+const LIGHTNESS: number = 78;
 
 @Component({
   selector: 'pupa-avatar',
@@ -15,14 +19,16 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 export class AvatarComponent implements OnChanges {
   @Input() public username: string;
   private readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
-  public readonly usernameFirstChar$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public src: string;
   public readonly src$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
+  @Input() public size: AvatarSize = 'small';
+  public readonly size$: BehaviorSubject<AvatarSize> = new BehaviorSubject<AvatarSize>('small');
+
   public readonly hslBackgroundColor$: Observable<string> = this.username$.pipe(
     map((username: Nullable<string>) => {
-      const { h, s, l }: HslColor = getHslColorFromString(username);
+      const { h, s, l }: HslColor = getHslColorFromString(username, SATURATION, LIGHTNESS);
       return `hsl(${h}, ${s}%, ${l}%)`;
     })
   );
@@ -36,6 +42,7 @@ export class AvatarComponent implements OnChanges {
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processUsernameChange(changes?.username);
     this.processSrcChange(changes?.src);
+    this.processSizeChange(changes?.size);
   }
 
   private processUsernameChange(change: ComponentChange<this, string>): void {
@@ -45,9 +52,7 @@ export class AvatarComponent implements OnChanges {
       return;
     }
 
-    const firstChar: string = updatedValue.charAt(0).toUpperCase();
     this.username$.next(updatedValue);
-    this.usernameFirstChar$.next(firstChar);
   }
 
   private processSrcChange(change: ComponentChange<this, string>): void {
@@ -59,5 +64,15 @@ export class AvatarComponent implements OnChanges {
 
     const serializedValue: string = isEmpty(updatedValue) ? null : updatedValue;
     this.src$.next(serializedValue);
+  }
+
+  private processSizeChange(change: ComponentChange<this, AvatarSize>): void {
+    const updatedValue: AvatarSize | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.size$.next(updatedValue);
   }
 }

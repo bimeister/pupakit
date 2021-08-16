@@ -11,9 +11,6 @@ $font-size: newRems(1);
   align-items: center;
   justify-content: center;
 
-  width: $width_avatar;
-  height: $width_avatar;
-
   border-radius: 100%;
   overflow: hidden;
 
@@ -25,15 +22,15 @@ $font-size: newRems(1);
 
   user-select: none;
 
-  &__initials {
-    color: color(white);
-    font-size: $font-size;
-    line-height: $width_avatar;
-    @include medium();
+  &__small {
+    width: newRems(2);
+    height: newRems(2);
+    font-size: px(12);
+  }
 
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  &__medium {
+    width: newRems(3);
+    height: newRems(3);
+    font-size: newRems(2);
   }
 }
