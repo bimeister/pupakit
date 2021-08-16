@@ -78,13 +78,35 @@ describe('avatar.component.ts', () => {
   );
 
   it(
-    'avatar components size should be newRems(2) = 16px',
+    'avatar size should 16px when small',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('pupa-avatar'))
-        .pipe(switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox())))
+      from(page.waitForSelector('input[value="small"]'))
+        .pipe(
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
+        )
         .subscribe(({ width, height }: BoundingBox) => {
           expect(width).toEqual(16);
           expect(height).toEqual(16);
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'avatar size should 24px when medium',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('input[value="medium"]'))
+        .pipe(
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
+        )
+        .subscribe(({ width, height }: BoundingBox) => {
+          expect(width).toEqual(24);
+          expect(height).toEqual(24);
           done();
         });
     },
@@ -119,35 +141,6 @@ describe('avatar.component.ts', () => {
         )
         .subscribe((resultBackGroundImage: string) => {
           expect(resultBackGroundImage).toEqual(`url("${BASE_URL_CI}")`);
-          done();
-        });
-    },
-    TIME_OUT_MS
-  );
-
-  it(
-    'should set username and check letter in avatar component, after that clear input',
-    (done: jest.DoneCallback) => {
-      const username: string = 'username';
-
-      from(page.waitForSelector('.username-input'))
-        .pipe(
-          switchMap((elementHandle: ElementHandle<Element>) =>
-            from(elementHandle.click()).pipe(switchMap(() => from(elementHandle.type(username))))
-          ),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
-          switchMap(() => from(page.evaluate(() => document.querySelector('.avatar__initials').textContent.trim()))),
-          tap((resultAvatarInitials: string) => {
-            const expectedResult: string = username.charAt(0).toUpperCase();
-            expect(resultAvatarInitials).toEqual(expectedResult);
-          }),
-          switchMap(() => from(page.waitForSelector('.clear-username'))),
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
-          switchMap(() => from(page.evaluate(() => document.querySelector('.avatar__initials').textContent.trim())))
-        )
-        .subscribe((resultAvatarInitials: string) => {
-          expect(resultAvatarInitials).toEqual('');
           done();
         });
     },

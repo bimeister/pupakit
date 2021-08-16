@@ -8,7 +8,7 @@
 html {
   font-size: variable(font-size_root);
   @include regular();
-  color: color(text);
+  color: color(base-n600);
 }
 
 body {
