@@ -1,0 +1,80 @@
+@import './functions.scss';
+@import './adaptive.scss';
+
+/* Font family */
+
+@mixin font-caption {
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-paragraph {
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-point {
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 500;
+}
+
+/* Font size */
+
+@mixin font-mark($paragraph: false) {
+  font-size: newRems(1.5);
+  line-height: if($paragraph, 16px, 14px);
+}
+
+@mixin font-small($paragraph: false) {
+  font-size: newRems(1.75);
+  line-height: if($paragraph, 20px, 16px);
+}
+
+@mixin font-medium($paragraph: false) {
+  font-size: newRems(2);
+  line-height: if($paragraph, 24px, 20px);
+}
+
+@mixin font-large($paragraph: false) {
+  @include width-between-property(
+      'font-size',
+      $smBreakPoint,
+      16,
+      $mdBreakPoint,
+      20,
+      true,
+      true,
+  );
+
+  @include width-between-property(
+      'line-height',
+      $smBreakPoint,
+      if($paragraph, 24, 20),
+      $mdBreakPoint,
+      if($paragraph, 28, 24),
+      true,
+      true,
+  );
+}
+
+@mixin font-header($paragraph: false) {
+  @include width-between-property(
+      'font-size',
+      $smBreakPoint,
+      20,
+      $mdBreakPoint,
+      24,
+      true,
+      true,
+  );
+
+  @include width-between-property(
+      'line-height',
+      $smBreakPoint,
+      if($paragraph, 28, 24),
+      $mdBreakPoint,
+      if($paragraph, 36, 28),
+      true,
+      true,
+  );
+}
