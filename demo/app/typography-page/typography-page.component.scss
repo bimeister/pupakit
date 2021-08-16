@@ -6,10 +6,8 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
-.item {
-  &_header {
-    color: color(grey-ivory);
-  }
+.column-header {
+  color: color(grey-ivory);
 }
 
 .delimiter {
