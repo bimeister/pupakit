@@ -7,19 +7,19 @@ import { DataDisplayCollectionRef } from '../../interfaces/data-display-collecti
 import { DataDisplayCollection } from '../data-display-collection.class';
 import { DataEventBase } from '../data-event-base.class';
 import { DefaultEventHandler } from '../default-event-handler.class';
-import { DataEvent } from '../event/data.event';
-import { QueueEvent } from '../event/queue.event';
 import { FlatTreeItem } from '../flat-tree-item.class';
-import { Queue } from '../queue.class';
+import { EventsQueue } from '../events-queue.class';
+import { QueueEvents } from '../../events/queue.events';
+import { DataEvents } from '../../events/data.events';
 
 export abstract class ControllerBase<O extends ControllerOptions> {
   protected readonly dataDisplayCollection: DataDisplayCollection;
-  protected readonly queue: Queue;
+  protected readonly queue: EventsQueue;
   protected readonly handler: DefaultEventHandler;
   public readonly eventBus: EventBus = new EventBus();
 
   constructor(protected readonly options?: Nullable<O>) {
-    this.queue = new Queue(this.eventBus);
+    this.queue = new EventsQueue(this.eventBus);
     this.dataDisplayCollection = this.getDataDisplayCollection();
     this.handler = this.getHandler();
     this.setHasDragAndDrop(options?.hasDragAndDrop);
@@ -36,7 +36,7 @@ export abstract class ControllerBase<O extends ControllerOptions> {
   }
 
   protected dispatchInQueue(event: DataEventBase): void {
-    const queueEvent: QueueEvent.AddToQueue = new QueueEvent.AddToQueue(event);
+    const queueEvent: QueueEvents.AddToQueue = new QueueEvents.AddToQueue(event);
     this.eventBus.dispatch(queueEvent);
   }
 
@@ -49,27 +49,27 @@ export abstract class ControllerBase<O extends ControllerOptions> {
   }
 
   public scrollTo(treeItemId: string): void {
-    this.dispatchInQueue(new DataEvent.ScrollById(treeItemId));
+    this.dispatchInQueue(new DataEvents.ScrollById(treeItemId));
   }
 
   public setData(data: FlatTreeItem[]): void {
-    this.dispatchInQueue(new DataEvent.SetData(data));
+    this.dispatchInQueue(new DataEvents.SetData(data));
   }
 
   public removeTreeItem(treeItemId: string): void {
-    this.dispatchInQueue(new DataEvent.RemoveItem(treeItemId));
+    this.dispatchInQueue(new DataEvents.RemoveItem(treeItemId));
   }
 
   public setTreeItem(treeItem: FlatTreeItem): void {
-    this.dispatchInQueue(new DataEvent.UpdateItem(treeItem));
+    this.dispatchInQueue(new DataEvents.UpdateItem(treeItem));
   }
 
   public setSelected(...selectedIds: string[]): void {
-    this.dispatchInQueue(new DataEvent.SetSelected(selectedIds));
+    this.dispatchInQueue(new DataEvents.SetSelected(selectedIds));
   }
 
   public setLoading(isLoading: boolean): void {
-    this.dispatchInQueue(new DataEvent.SetLoading(isLoading));
+    this.dispatchInQueue(new DataEvents.SetLoading(isLoading));
   }
 
   public getEvents<T extends DataEventBase>(eventType: Type<T>): Observable<T> {

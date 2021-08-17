@@ -4,9 +4,9 @@ import { isEmpty } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, withLatestFrom } from 'rxjs/operators';
 import { DataEventBase } from './data-event-base.class';
-import { QueueEvent } from './event/queue.event';
+import { QueueEvents } from '../events/queue.events';
 
-export class Queue {
+export class EventsQueue {
   private readonly queue: DataEventBase[] = [];
   private readonly started$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private readonly subscription: Subscription = new Subscription();
@@ -17,21 +17,33 @@ export class Queue {
     this.subscription.add(this.getSubscriptionForRemoveEvents());
   }
 
+  public removeEventFromQueue(eventId: string): void {
+    const eventIndex: number = this.queue.findIndex((event: DataEventBase) => event.id === eventId);
+    if (eventIndex === -1) {
+      return;
+    }
+    this.queue.splice(eventIndex, 1);
+  }
+
+  public clearQueue(): void {
+    this.queue.splice(0, this.queue.length);
+  }
+
   public getEvents<T extends BusEventBase>(eventType: Type<T>): Observable<T> {
     return this.eventBus.catchEvents().pipe(filter((event: BusEventBase): event is T => event instanceof eventType));
   }
 
   private getSubscriptionForStartEvents(): Subscription {
-    return this.getEvents(QueueEvent.StartQueue).subscribe(() => {
+    return this.getEvents(QueueEvents.StartQueue).subscribe(() => {
       this.started$.next(true);
       this.dispatchFromQueue();
     });
   }
 
   private getSubscriptionForAddEvents(): Subscription {
-    return this.getEvents(QueueEvent.AddToQueue)
+    return this.getEvents(QueueEvents.AddToQueue)
       .pipe(withLatestFrom(this.started$))
-      .subscribe(([addEvent, started]: [QueueEvent.AddToQueue, boolean]) => {
+      .subscribe(([addEvent, started]: [QueueEvents.AddToQueue, boolean]) => {
         const isEmptyQueue: boolean = isEmpty(this.queue);
         this.queue.push(addEvent.payload);
         if (isEmptyQueue && started) {
@@ -41,8 +53,8 @@ export class Queue {
   }
 
   private getSubscriptionForRemoveEvents(): Subscription {
-    return this.getEvents(QueueEvent.RemoveFromQueue)
-      .pipe(filter((removeEvent: QueueEvent.RemoveFromQueue) => this.isFirstEventInQueue(removeEvent.payload)))
+    return this.getEvents(QueueEvents.RemoveFromQueue)
+      .pipe(filter((removeEvent: QueueEvents.RemoveFromQueue) => this.isFirstEventInQueue(removeEvent.payload)))
       .subscribe(() => {
         this.queue.shift();
         this.dispatchFromQueue();
