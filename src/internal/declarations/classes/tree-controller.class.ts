@@ -1,8 +1,8 @@
+import { TreeEvents } from '../events/tree.events';
 import { ControllerOptions } from '../interfaces/controller-options.interface';
 import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-collection-ref.interface';
 import { ControllerBase } from './abstract/controller-base.abstract';
 import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
-import { TreeEvent } from './event/tree.event';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
 
@@ -23,10 +23,10 @@ export class TreeController extends ControllerBase<ControllerOptions> {
   }
 
   public setChildren(treeItemId: string, children: FlatTreeItem[]): void {
-    this.dispatchInQueue(new TreeEvent.SetChildren({ treeItemId, children }));
+    this.dispatchInQueue(new TreeEvents.SetChildren({ treeItemId, children }));
   }
 
   public removeChildren(treeItemId: string): void {
-    this.dispatchInQueue(new TreeEvent.RemoveChildren(treeItemId));
+    this.dispatchInQueue(new TreeEvents.RemoveChildren(treeItemId));
   }
 }

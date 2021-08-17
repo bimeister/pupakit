@@ -1,8 +1,8 @@
-import { DropEventInterface } from '../../interfaces/drop-event.interface';
-import { DataEventBase } from '../data-event-base.class';
-import { FlatTreeItem } from '../flat-tree-item.class';
+import { DropEventInterface } from '../interfaces/drop-event.interface';
+import { DataEventBase } from '../classes/data-event-base.class';
+import { FlatTreeItem } from '../classes/flat-tree-item.class';
 
-export namespace DataEvent {
+export namespace DataEvents {
   export class Click extends DataEventBase<FlatTreeItem> {}
   export class RemoveItem extends DataEventBase<string> {}
   export class UpdateItem extends DataEventBase<FlatTreeItem> {}

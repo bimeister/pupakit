@@ -21,12 +21,12 @@ import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@b
 import { animationFrameScheduler, BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
-import { DataEvent } from '../../../../../internal/declarations/classes/event/data.event';
-import { QueueEvent } from '../../../../../internal/declarations/classes/event/queue.event';
-import { TreeEvent } from '../../../../../internal/declarations/classes/event/tree.event';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { RangedDataSource } from '../../../../../internal/declarations/classes/ranged-data-source.class';
 import { TreeController } from '../../../../../internal/declarations/classes/tree-controller.class';
+import { DataEvents } from '../../../../../internal/declarations/events/data.events';
+import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
+import { TreeEvents } from '../../../../../internal/declarations/events/tree.events';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
@@ -99,7 +99,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
     this.subscription.add(this.getSubscriptionToSetSelected());
     this.subscription.add(this.getSubscriptionForScrollWithDrag());
     this.subscription.add(this.getSubscriptionForRangeChanges());
-    this.eventBus.dispatch(new QueueEvent.StartQueue());
+    this.eventBus.dispatch(new QueueEvents.StartQueue());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -176,13 +176,13 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
         draggedElement: dragAndDropMeta.dragTreeItem,
         droppedElement: dragAndDropMeta.dropTreeItem
       };
-      this.eventBus.dispatch(new DataEvent.Drop(dropEventData));
+      this.eventBus.dispatch(new DataEvents.Drop(dropEventData));
     });
     this.dragAndDropMeta$.next(null);
   }
 
   public click(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new DataEvent.Click(treeItem));
+    this.eventBus.dispatch(new DataEvents.Click(treeItem));
   }
 
   public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
@@ -210,35 +210,35 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private expandClick(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new TreeEvent.Expand(treeItem.id));
+    this.eventBus.dispatch(new TreeEvents.Expand(treeItem.id));
   }
 
   private collapseClick(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new TreeEvent.Collapse(treeItem.id));
+    this.eventBus.dispatch(new TreeEvents.Collapse(treeItem.id));
   }
 
   private getSubscriptionToSetData(): Subscription {
-    return this.getEvents(DataEvent.SetData)
+    return this.getEvents(DataEvents.SetData)
       .pipe(
-        switchMap((event: DataEvent.SetData) => {
+        switchMap((event: DataEvents.SetData) => {
           return this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event));
         })
       )
-      .subscribe((event: DataEvent.SetData) => this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id)));
+      .subscribe((event: DataEvents.SetData) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
   private getSubscriptionToSetLoading(): Subscription {
-    return this.getEvents(DataEvent.SetLoading).subscribe((event: DataEvent.SetLoading) => {
+    return this.getEvents(DataEvents.SetLoading).subscribe((event: DataEvents.SetLoading) => {
       this.dataDisplayCollection.setIsLoading(event.payload);
       this.changeDetectorRef.detectChanges();
-      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+      this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
   }
 
   private getSubscriptionToSetExpanded(): Subscription {
-    return this.getEvents(TreeEvent.SetExpanded).subscribe((event: TreeEvent.SetExpanded) => {
+    return this.getEvents(TreeEvents.SetExpanded).subscribe((event: TreeEvents.SetExpanded) => {
       this.setExpandedIdsList(event.payload);
-      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+      this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
   }
 
@@ -256,9 +256,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private getSubscriptionToSetSelected(): Subscription {
-    return this.getEvents(DataEvent.SetSelected).subscribe((event: DataEvent.SetSelected) => {
+    return this.getEvents(DataEvents.SetSelected).subscribe((event: DataEvents.SetSelected) => {
       this.setSelectedIdsList(event.payload);
-      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+      this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
   }
 
@@ -268,9 +268,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private getSubscriptionToScrollToIndex(): Subscription {
-    return this.getEvents(DataEvent.ScrollByIndex).subscribe((event: DataEvent.ScrollByIndex) => {
+    return this.getEvents(DataEvents.ScrollByIndex).subscribe((event: DataEvents.ScrollByIndex) => {
       this.scrollToIndex(event.payload);
-      this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+      this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
   }
 

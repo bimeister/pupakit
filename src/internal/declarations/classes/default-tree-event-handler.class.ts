@@ -3,11 +3,11 @@ import { isNil } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { withLatestFrom } from 'rxjs/operators';
 import { DefaultEventHandler } from './default-event-handler.class';
-import { DataEvent } from './event/data.event';
-import { QueueEvent } from './event/queue.event';
-import { TreeEvent } from './event/tree.event';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
+import { QueueEvents } from '../events/queue.events';
+import { DataEvents } from '../events/data.events';
+import { TreeEvents } from '../events/tree.events';
 
 export class DefaultTreeEventHandler extends DefaultEventHandler {
   constructor(
@@ -18,11 +18,11 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
   }
 
   protected getSubscriptionForRemoveItem(): Subscription {
-    return this.getEvents(DataEvent.RemoveItem)
+    return this.getEvents(DataEvents.RemoveItem)
       .pipe(withLatestFrom(this.dataDisplayCollection.data$, this.dataDisplayCollection.expandedIdsList$))
-      .subscribe(([event, data, expandedIdsList]: [DataEvent.RemoveItem, FlatTreeItem[], string[]]) => {
+      .subscribe(([event, data, expandedIdsList]: [DataEvents.RemoveItem, FlatTreeItem[], string[]]) => {
         this.removeItemWithChildren(event.payload, data, expandedIdsList);
-        this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
       });
   }
 
@@ -33,20 +33,20 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
   }
 
   private getSubscriptionForSetChildren(): Subscription {
-    return this.getEvents(TreeEvent.SetChildren)
+    return this.getEvents(TreeEvents.SetChildren)
       .pipe(withLatestFrom(this.dataDisplayCollection.data$, this.dataDisplayCollection.expandedIdsList$))
-      .subscribe(([event, data, expandedIdsList]: [TreeEvent.SetChildren, FlatTreeItem[], string[]]) => {
+      .subscribe(([event, data, expandedIdsList]: [TreeEvents.SetChildren, FlatTreeItem[], string[]]) => {
         this.setChildren(event.payload.treeItemId, event.payload.children, data, expandedIdsList);
-        this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
       });
   }
 
   private getSubscriptionForRemoveChildren(): Subscription {
-    return this.getEvents(TreeEvent.RemoveChildren)
+    return this.getEvents(TreeEvents.RemoveChildren)
       .pipe(withLatestFrom(this.dataDisplayCollection.data$, this.dataDisplayCollection.expandedIdsList$))
-      .subscribe(([event, data, expandedIdsList]: [TreeEvent.RemoveChildren, FlatTreeItem[], string[]]) => {
+      .subscribe(([event, data, expandedIdsList]: [TreeEvents.RemoveChildren, FlatTreeItem[], string[]]) => {
         this.removeChildren(event.payload, data, expandedIdsList);
-        this.eventBus.dispatch(new QueueEvent.RemoveFromQueue(event.id));
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
       });
   }
 
@@ -58,7 +58,11 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
   ): void {
     if (isNil(parentId)) {
       const newData: FlatTreeItem[] = children.map(treeItem => ({ ...treeItem, level: 0 }));
-      this.eventBus.dispatch(new DataEvent.SetData(newData));
+      this.eventBus.dispatch(new DataEvents.SetData(newData));
+      return;
+    }
+    const parentIsExpanded: boolean = expandedIdsList.includes(parentId);
+    if (parentIsExpanded) {
       return;
     }
     const parent: FlatTreeItem = DefaultEventHandler.getTreeItem(parentId, data);
@@ -80,8 +84,8 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
       ...data.slice(parentIndex + 1)
     ];
     const newExpandedList: string[] = [...expandedIdsList, parent.id];
-    this.eventBus.dispatch(new DataEvent.SetData(dataWithChildren));
-    this.eventBus.dispatch(new TreeEvent.SetExpanded(newExpandedList));
+    this.eventBus.dispatch(new DataEvents.SetData(dataWithChildren));
+    this.eventBus.dispatch(new TreeEvents.SetExpanded(newExpandedList));
   }
 
   private removeItemWithChildren(removeItemId: string, data: FlatTreeItem[], expanded: string[]): void {
@@ -97,8 +101,8 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
     const dataWithoutRemovedItem: FlatTreeItem[] = dataWithoutChildren.filter((treeItem: FlatTreeItem) => {
       return treeItem.id !== removeItemId;
     });
-    this.eventBus.dispatch(new DataEvent.SetData(dataWithoutRemovedItem));
-    this.eventBus.dispatch(new TreeEvent.SetExpanded(expandedWithoutChildren));
+    this.eventBus.dispatch(new DataEvents.SetData(dataWithoutRemovedItem));
+    this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
   }
 
   private removeChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): void {
@@ -107,8 +111,8 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
       data,
       expanded
     );
-    this.eventBus.dispatch(new DataEvent.SetData(dataWithoutChildren));
-    this.eventBus.dispatch(new TreeEvent.SetExpanded(expandedWithoutChildren));
+    this.eventBus.dispatch(new DataEvents.SetData(dataWithoutChildren));
+    this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
   }
 
   private getRemovedChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): [FlatTreeItem[], string[]] {

@@ -1,6 +1,6 @@
 import { BusEventBase } from '@bimeister/event-bus';
 import { getUuid, Nullable } from '@bimeister/utilities';
-import { DataEventBase } from '../data-event-base.class';
+import { DataEventBase } from '../classes/data-event-base.class';
 
 class QueueEventBase<T> extends BusEventBase<T> {
   public readonly scope: Nullable<string> = null;
@@ -13,7 +13,7 @@ class QueueEventBase<T> extends BusEventBase<T> {
   }
 }
 
-export namespace QueueEvent {
+export namespace QueueEvents {
   export class AddToQueue extends QueueEventBase<DataEventBase> {}
   export class RemoveFromQueue extends QueueEventBase<string> {}
   export class StartQueue extends QueueEventBase<void> {}

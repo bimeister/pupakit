@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
-import { DataEvent } from '../../../src/internal/declarations/classes/event/data.event';
-import { TreeEvent } from '../../../src/internal/declarations/classes/event/tree.event';
-import { TreeController } from '../../../src/internal/declarations/classes/tree-controller.class';
-import { FlatTreeItem } from '../../../src/public-api';
+import { DataEvents, FlatTreeItem, TreeController, TreeEvents } from '../../../src/public-api';
 
 const WOLF: FlatTreeItem = new FlatTreeItem(true, 'Wolves', null, getUuid(), { parentId: null });
 const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: null });
@@ -32,14 +29,14 @@ export class TreeNewDemoComponent {
   constructor(public readonly injector: Injector) {
     this.controller.setData(this.fetch());
     this.controller
-      .getEvents(TreeEvent.Expand)
-      .subscribe((event: TreeEvent.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));
+      .getEvents(TreeEvents.Expand)
+      .subscribe((event: TreeEvents.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));
     this.controller
-      .getEvents(DataEvent.Click)
-      .subscribe((event: DataEvent.Click) => this.controller.setSelected(event.payload.id));
+      .getEvents(DataEvents.Click)
+      .subscribe((event: DataEvents.Click) => this.controller.setSelected(event.payload.id));
     this.controller
-      .getEvents(TreeEvent.Collapse)
-      .subscribe((event: TreeEvent.Collapse) => this.controller.removeChildren(event.payload));
+      .getEvents(TreeEvents.Collapse)
+      .subscribe((event: TreeEvents.Collapse) => this.controller.removeChildren(event.payload));
   }
 
   private fetch(parentId: string = null): FlatTreeItem[] {
