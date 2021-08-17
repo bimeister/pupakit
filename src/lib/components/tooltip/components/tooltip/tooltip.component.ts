@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges, HostListener } from '@angular/core';
 import { TooltipService } from '../../services/tooltip.service';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -24,8 +24,17 @@ export class TooltipComponent implements OnChanges {
     this.processHideOnTooltipHoverChanges(changes.hideOnTooltipHover);
   }
 
+  @HostListener('window:wheel')
+  public processScroll(): void {
+    this.close();
+  }
+
   public open(): void {
     this.tooltipService.setOpenedState(true);
+  }
+
+  public close(): void {
+    this.tooltipService.setOpenedState(false);
   }
 
   private processDisabledChanges(change: ComponentChange<this, boolean>): void {

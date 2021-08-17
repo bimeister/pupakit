@@ -9,7 +9,7 @@
   <div class="tooltip" (mouseenter)="processMouseEnterEvent()" (mouseleave)="processMouseLeaveEvent()">
     <div
       class="tooltip__animation-container"
-      [@tooltipShow]="atimationState$ | async"
+      [@tooltipShow]="animationState$ | async"
       [style.transform]="styleTransform$ | async"
     >
       <div class="tooltip__content-container">
@@ -17,7 +17,6 @@
           <ng-content></ng-content>
         </div>
       </div>
-      <div class="tooltip__pointer" [ngClass]="pointerClassName$ | async"></div>
     </div>
   </div>
 </ng-template>

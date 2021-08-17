@@ -10,9 +10,10 @@ import {
 } from '@angular/core';
 import { TooltipService } from '../../services/tooltip.service';
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { take } from 'rxjs/operators';
+import { take, withLatestFrom } from 'rxjs/operators';
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'pupa-tooltip-trigger',
@@ -23,6 +24,8 @@ import { EventUnlistener } from '../../../../../internal/declarations/types/even
 export class TooltipTriggerComponent implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
   private mouseLeaveEventUnlistener: Nullable<EventUnlistener> = null;
+
+  private readonly isTouchDevice$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly tooltipService: TooltipService,
@@ -35,12 +38,26 @@ export class TooltipTriggerComponent implements OnInit {
     this.unlistenMouseLeaveEvent();
   }
 
+  @HostListener('window:touchstart')
+  @HostListener('window:touchend')
+  @HostListener('window:touchmove')
+  public processTouchEvents(): void {
+    this.isTouchDevice$.next(true);
+  }
+
+  @HostListener('window:mousemove')
+  public processMouseGlobalEvents(): void {
+    this.isTouchDevice$.next(false);
+  }
+
   @HostListener('mouseenter')
   public processMouseEnter(): void {
-    this.tooltipService.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
-      this.tooltipService.processTriggerMouseEnter();
-      this.listenMouseLeaveEvent();
-    });
+    this.tooltipService.isDisabled$
+      .pipe(take(1), filterFalsy(), withLatestFrom(this.isTouchDevice$.pipe(take(1), filterFalsy())))
+      .subscribe(() => {
+        this.tooltipService.processTriggerMouseEnter();
+        this.listenMouseLeaveEvent();
+      });
   }
 
   private registerDropdownTrigger(): void {
