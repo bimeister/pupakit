@@ -3,15 +3,15 @@ import { getUuid } from '@bimeister/utilities';
 import { DataEvents, FlatTreeItem, TreeController, TreeEvents } from '../../../src/public-api';
 
 const WOLF: FlatTreeItem = new FlatTreeItem(true, 'Wolves', null, getUuid(), { parentId: null });
-const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: null });
+const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: WOLF.id });
 const HAPPY: FlatTreeItem = new FlatTreeItem(false, '😀', null, getUuid(), { parentId: null });
 const BURGER: FlatTreeItem = new FlatTreeItem(false, 'Burger', null, getUuid(), { parentId: null }, true);
 
 const DATA: FlatTreeItem[] = [
   WOLF,
-  ...generateChildren(WOLF.id, `${WOLF.name} child`, 10),
+  ...generateChildren(WOLF.id, `${WOLF.name} child`, 3),
   CAR,
-  ...generateChildren(CAR.id, `${CAR.name} child`, 500000),
+  ...generateChildren(CAR.id, `${CAR.name} child`, 3),
   HAPPY,
   BURGER
 ];
@@ -27,7 +27,7 @@ export class TreeNewDemoComponent {
   public readonly controller: TreeController = new TreeController();
 
   constructor(public readonly injector: Injector) {
-    this.controller.setData(this.fetch());
+    this.controller.setChildren(null, this.fetch());
     this.controller
       .getEvents(TreeEvents.Expand)
       .subscribe((event: TreeEvents.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));

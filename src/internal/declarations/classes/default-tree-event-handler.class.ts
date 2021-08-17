@@ -59,6 +59,7 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
     if (isNil(parentId)) {
       const newData: FlatTreeItem[] = children.map(treeItem => ({ ...treeItem, level: 0 }));
       this.eventBus.dispatch(new DataEvents.SetData(newData));
+      this.eventBus.dispatch(new TreeEvents.SetExpanded([]));
       return;
     }
     const parentIsExpanded: boolean = expandedIdsList.includes(parentId);
@@ -70,7 +71,9 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
     if (isNil(parent) || isExpanded) {
       return;
     }
+    const childrenIdsSet: Set<string> = new Set();
     const childrenWithLevel: FlatTreeItem[] = children.map((childItem: FlatTreeItem) => {
+      childrenIdsSet.add(childItem.id);
       return {
         ...childItem,
         level: parent.level + 1
@@ -83,7 +86,10 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
       ...childrenWithLevel,
       ...data.slice(parentIndex + 1)
     ];
-    const newExpandedList: string[] = [...expandedIdsList, parent.id];
+    const noExpandedChildrenList: string[] = expandedIdsList.filter(
+      (expandedTreeItemId: string) => !childrenIdsSet.has(expandedTreeItemId)
+    );
+    const newExpandedList: string[] = [...noExpandedChildrenList, parent.id];
     this.eventBus.dispatch(new DataEvents.SetData(dataWithChildren));
     this.eventBus.dispatch(new TreeEvents.SetExpanded(newExpandedList));
   }
@@ -123,8 +129,8 @@ export class DefaultTreeEventHandler extends DefaultEventHandler {
     const parentIndex: number = data.indexOf(parent);
     const dataBeforeParent: FlatTreeItem[] = parentIndex === 0 ? [] : data.slice(0, parentIndex);
     const dataAfterParent: FlatTreeItem[] = data.slice(parentIndex + 1);
-    const nextNonChildIndex: number = dataAfterParent.findIndex((child: FlatTreeItem) => {
-      return child.level === parent.level;
+    const nextNonChildIndex: number = dataAfterParent.findIndex((dataItem: FlatTreeItem) => {
+      return dataItem.level <= parent.level;
     });
     const isLastParent: boolean = nextNonChildIndex === -1;
     const children: FlatTreeItem[] = dataAfterParent.slice(0, nextNonChildIndex);
