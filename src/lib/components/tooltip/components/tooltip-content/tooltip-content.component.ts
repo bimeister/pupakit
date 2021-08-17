@@ -62,7 +62,7 @@ export class TooltipContentComponent implements OnInit, OnDestroy {
   public readonly positionIsReady$: Observable<boolean> = this.currentOverlayPosition$.pipe(
     map((currentOverlayPosition: Nullable<OverlayConnectionPosition>) => !isNil(currentOverlayPosition))
   );
-  public readonly atimationState$: Observable<'void' | 'show'> = this.positionIsReady$.pipe(
+  public readonly animationState$: Observable<'void' | 'show'> = this.positionIsReady$.pipe(
     map((positionIsReady: boolean) => (positionIsReady ? 'show' : 'void'))
   );
 
@@ -96,14 +96,6 @@ export class TooltipContentComponent implements OnInit, OnDestroy {
 
   public readonly styleTransform$: Observable<string> = zip(this.offsetXPx$, this.offsetYPx$).pipe(
     map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`)
-  );
-
-  public readonly pointerClassName$: Observable<string> = this.currentOverlayPosition$.pipe(
-    filterNotNil(),
-    map(
-      (currentOverlayPosition: OverlayConnectionPosition) =>
-        `pointer_${currentOverlayPosition.overlayX}-${currentOverlayPosition.overlayY}`
-    )
   );
 
   constructor(private readonly tooltipService: TooltipService, private readonly changeDetectorRef: ChangeDetectorRef) {}
