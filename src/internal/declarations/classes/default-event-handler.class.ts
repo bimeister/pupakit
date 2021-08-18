@@ -60,7 +60,7 @@ export class DefaultEventHandler {
       return;
     }
     const updatedData: FlatTreeItem[] = data.map((treeItem: FlatTreeItem) => {
-      if (treeItem.id !== updatedItem.id) {
+      if (treeItem.id === updatedItem.id) {
         return new FlatTreeItem(
           treeItem.isExpandable,
           updatedItem.name,
