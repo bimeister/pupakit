@@ -1,3 +1,4 @@
+import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -6,26 +7,25 @@ import {
   HostListener,
   OnInit,
   Renderer2,
-  ViewChild
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import { TooltipService } from '../../services/tooltip.service';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { take, withLatestFrom } from 'rxjs/operators';
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
+import { filter, take } from 'rxjs/operators';
 import { EventUnlistener } from '../../../../../internal/declarations/types/event-unlistener.type';
-import { BehaviorSubject } from 'rxjs';
+import { isTabletDevice } from '../../../../../internal/helpers/is-tablet-device.helper';
+import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
   selector: 'pupa-tooltip-trigger',
   templateUrl: './tooltip-trigger.component.html',
   styleUrls: ['./tooltip-trigger.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TooltipTriggerComponent implements OnInit {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
   private mouseLeaveEventUnlistener: Nullable<EventUnlistener> = null;
-
-  private readonly isTouchDevice$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly tooltipService: TooltipService,
@@ -38,22 +38,14 @@ export class TooltipTriggerComponent implements OnInit {
     this.unlistenMouseLeaveEvent();
   }
 
-  @HostListener('window:touchstart')
-  @HostListener('window:touchend')
-  @HostListener('window:touchmove')
-  public processTouchEvents(): void {
-    this.isTouchDevice$.next(true);
-  }
-
-  @HostListener('window:mousemove')
-  public processMouseGlobalEvents(): void {
-    this.isTouchDevice$.next(false);
-  }
-
   @HostListener('mouseenter')
   public processMouseEnter(): void {
     this.tooltipService.isDisabled$
-      .pipe(take(1), filterFalsy(), withLatestFrom(this.isTouchDevice$.pipe(take(1), filterFalsy())))
+      .pipe(
+        take(1),
+        filterFalsy(),
+        filter(() => !isTabletDevice())
+      )
       .subscribe(() => {
         this.tooltipService.processTriggerMouseEnter();
         this.listenMouseLeaveEvent();
