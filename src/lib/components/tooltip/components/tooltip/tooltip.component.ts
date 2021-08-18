@@ -1,15 +1,16 @@
-import { Component, Input, ChangeDetectionStrategy, OnChanges, HostListener } from '@angular/core';
-import { TooltipService } from '../../services/tooltip.service';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { TooltipService } from '../../services/tooltip.service';
 
 @Component({
   selector: 'pupa-tooltip',
   templateUrl: './tooltip.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TooltipService]
+  providers: [TooltipService],
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TooltipComponent implements OnChanges {
   @Input() public hideOnTooltipHover: boolean = true;
@@ -22,11 +23,6 @@ export class TooltipComponent implements OnChanges {
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processDisabledChanges(changes.disabled);
     this.processHideOnTooltipHoverChanges(changes.hideOnTooltipHover);
-  }
-
-  @HostListener('window:wheel')
-  public processScroll(): void {
-    this.close();
   }
 
   public open(): void {
