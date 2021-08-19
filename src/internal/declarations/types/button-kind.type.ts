@@ -1,1 +1,1 @@
-export type ButtonKind = 'solid' | 'outlined' | 'link';
+export type ButtonKind = 'primary' | 'secondary' | 'border' | 'subtle' | 'warning' | 'danger';

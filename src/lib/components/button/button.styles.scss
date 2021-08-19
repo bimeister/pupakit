@@ -1,0 +1,129 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+@keyframes MoveUpInitial {
+  to {
+    transform: translate3d(0, -105%, 0);
+  }
+}
+
+@keyframes MoveUpEnd {
+  from {
+    transform: translate3d(0, 100%, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+:host {
+  appearance: none;
+  overflow: hidden;
+  user-select: none;
+}
+
+.button {
+  all: unset;
+  appearance: none;
+  box-sizing: border-box;
+
+  pointer-events: auto;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  position: relative;
+  display: inline-block;
+
+  border-radius: px(1);
+  padding: newRems(1) newRems(1.5);
+  overflow: hidden;
+
+  user-select: none;
+
+  -webkit-tap-highlight-color: transparent;
+
+  &__background {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(1);
+    will-change: transform;
+
+    transition: background-color 0.2s ease, transform 0.1s;
+  }
+
+  &__content {
+    @include font-size-small();
+    @include font-type-caption();
+    user-select: none;
+
+    z-index: 1;
+    overflow: hidden;
+    transform: translate3d(0, 0, 1px);
+    will-change: transform;
+  }
+
+  @include hover() {
+    .button__content > .button__content-inner {
+      animation: MoveUpInitial 0.11s forwards, MoveUpEnd 0.11s forwards 0.11s;
+    }
+  }
+
+  &:active {
+    transition: background-color 0s;
+
+    .button__background {
+      transform: scale(0.95);
+    }
+  }
+}
+
+.button {
+  &__primary {
+    .button__background {
+      background-color: color(primary-n500);
+    }
+
+    @include hover() {
+      .button__background {
+        background-color: color(primary-n400);
+      }
+    }
+
+    .button__content {
+      color: color(base-n0);
+    }
+
+    &:active {
+      .button__background {
+        background-color: color(primary-n550);
+      }
+    }
+  }
+
+  &__secondary {
+    .button__background {
+      background-color: color(base-white-n500);
+    }
+
+    @include hover() {
+      .button__background {
+        background-color: color(base-white-n400);
+      }
+    }
+
+    .button__content {
+      color: color(base-n600);
+    }
+
+    &:active {
+      .button__background {
+        background-color: color(base-white-n300);
+      }
+    }
+  }
+}
