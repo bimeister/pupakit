@@ -25,7 +25,14 @@ export class ButtonComponent {
   @Input() public readonly type: ButtonType = 'submit';
   public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('submit');
 
-  public readonly resultClassList$: Observable<string[]> = combineLatest([this.size$, this.kind$]).pipe(
+  @Input() public readonly disabled: boolean = false;
+  public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly resultClassList$: Observable<string[]> = combineLatest([
+    this.size$,
+    this.kind$,
+    this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
+  ]).pipe(
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
@@ -37,6 +44,7 @@ export class ButtonComponent {
     this.processSizeChange(changes?.size);
     this.processTypeChange(changes?.type);
     this.processKindChange(changes?.kind);
+    this.processDisabledChange(changes?.disabled);
   }
 
   private processSizeChange(change: ComponentChange<this, ButtonSize>): void {
@@ -67,5 +75,15 @@ export class ButtonComponent {
     }
 
     this.kind$.next(updatedValue);
+  }
+
+  private processDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.disabled$.next(updatedValue);
   }
 }

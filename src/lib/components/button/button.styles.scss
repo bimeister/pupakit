@@ -2,13 +2,13 @@
 @import 'mixins';
 @import 'functions';
 
-@keyframes MoveUpInitial {
+@keyframes moveUpInitial {
   to {
     transform: translate3d(0, -105%, 0);
   }
 }
 
-@keyframes MoveUpEnd {
+@keyframes moveUpEnd {
   from {
     transform: translate3d(0, 100%, 0);
   }
@@ -53,7 +53,7 @@
     transform: scale(1);
     will-change: transform;
 
-    transition: background-color 0.2s ease, transform 0.1s;
+    transition: background-color 0.1s ease, transform 0.1s;
   }
 
   &__content {
@@ -65,19 +65,23 @@
     overflow: hidden;
     transform: translate3d(0, 0, 1px);
     will-change: transform;
+
+    background-color: transparent;
   }
 
-  @include hover() {
-    .button__content > .button__content-inner {
-      animation: MoveUpInitial 0.11s forwards, MoveUpEnd 0.11s forwards 0.11s;
+  &:not([disabled]) {
+    @include hover() {
+      .button__content > .button__content-inner {
+        animation: moveUpInitial 0.11s forwards, moveUpEnd 0.11s forwards 0.11s;
+      }
     }
-  }
 
-  &:active {
-    transition: background-color 0s;
+    &:active {
+      transition: background-color 0s;
 
-    .button__background {
-      transform: scale(0.95);
+      .button__background {
+        transform: scale(0.95);
+      }
     }
   }
 }
@@ -88,20 +92,22 @@
       background-color: color(primary-n500);
     }
 
-    @include hover() {
-      .button__background {
-        background-color: color(primary-n400);
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(primary-n400);
+        }
+      }
+
+      &:active {
+        .button__background {
+          background-color: color(primary-n550);
+        }
       }
     }
 
     .button__content {
       color: color(base-n0);
-    }
-
-    &:active {
-      .button__background {
-        background-color: color(primary-n550);
-      }
     }
   }
 
@@ -110,20 +116,160 @@
       background-color: color(base-white-n500);
     }
 
-    @include hover() {
-      .button__background {
-        background-color: color(base-white-n400);
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(base-white-n400);
+        }
+      }
+
+      &:active {
+        .button__background {
+          background-color: color(base-white-n300);
+        }
       }
     }
 
     .button__content {
       color: color(base-n600);
     }
+  }
 
-    &:active {
-      .button__background {
-        background-color: color(base-white-n300);
+  &__danger {
+    .button__background {
+      background-color: color(red-n500);
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(red-n400);
+        }
+      }
+      &:active {
+        .button__background {
+          background-color: color(red-n550);
+        }
       }
     }
+
+    .button__content {
+      color: color(base-n0);
+    }
+  }
+
+  &__warning {
+    .button__background {
+      background-color: color(yellow-n500);
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(yellow-n400);
+        }
+      }
+
+      &:active {
+        .button__background {
+          background-color: color(yellow-n550);
+        }
+      }
+    }
+
+    .button__content {
+      color: color(base-n600);
+    }
+  }
+
+  &__subtle {
+    .button__background {
+      background-color: transparent;
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(base-white-n400);
+        }
+      }
+
+      &:active {
+        .button__background {
+          background-color: color(base-white-n300);
+        }
+      }
+    }
+
+    .button__content {
+      color: color(base-n600);
+    }
+  }
+
+  &__border {
+    .button__background {
+      background-color: transparent;
+      border: px(1) solid color(base-dark-n100);
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(base-white-n400);
+        }
+      }
+
+      &:active {
+        .button__background {
+          background-color: color(base-white-n300);
+        }
+      }
+    }
+
+    .button__content {
+      color: color(base-n600);
+    }
+  }
+
+  &__disabled {
+    cursor: not-allowed;
+
+    .button__background {
+      background-color: color(base-white-n500);
+      border: none;
+    }
+
+    .button__content {
+      color: color(base-white-n250);
+    }
+
+    &.button__subtle {
+      .button__background {
+        background-color: transparent;
+        border: none;
+      }
+    }
+
+    &.button__border {
+      .button__background {
+        background-color: transparent;
+        border: px(1) solid color(base-dark-n100);
+      }
+    }
+  }
+}
+
+.button {
+  &__large {
+    height: newRems(5);
+  }
+
+  &__medium {
+    height: newRems(4);
+  }
+
+  &__small {
+    height: newRems(3);
+    padding: newRems(0.375) newRems(1.25);
   }
 }
