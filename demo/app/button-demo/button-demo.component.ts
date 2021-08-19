@@ -1,10 +1,12 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { RadioOption } from '../example-viewer/radio-option';
 
 @Component({
   selector: 'demo-button',
   templateUrl: './button-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./button-demo.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ButtonDemoComponent {
   public readonly sizeOptions: RadioOption[] = [
@@ -25,39 +27,12 @@ export class ButtonDemoComponent {
 
   public readonly kindOptions: RadioOption[] = [
     {
-      caption: 'Solid',
-      value: 'solid'
+      caption: 'Primary',
+      value: 'primary'
     },
     {
-      caption: 'Outlined',
-      value: 'outlined'
-    },
-    {
-      caption: 'Link',
-      value: 'link'
-    }
-  ];
-
-  public readonly colorOptions: RadioOption[] = [
-    {
-      caption: 'Normal',
-      value: 'normal'
-    },
-    {
-      caption: 'Normal light',
-      value: 'normal-light'
-    },
-    {
-      caption: 'Negative',
-      value: 'negative'
-    },
-    {
-      caption: 'Positive',
-      value: 'positive'
-    },
-    {
-      caption: 'Alert',
-      value: 'alert'
+      caption: 'Secondary',
+      value: 'secondary'
     }
   ];
 

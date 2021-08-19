@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { ButtonIcon } from '../../../../../internal/declarations/interfaces/button-icon.interface';
-import { ButtonColor } from '../../../../../internal/declarations/types/button-color.type';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ButtonKind } from '../../../../../internal/declarations/types/button-kind.type';
 import { ButtonSize } from '../../../../../internal/declarations/types/button-size.type';
 import { ButtonType } from '../../../../../internal/declarations/types/button-type.type';
@@ -10,66 +12,60 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
   selector: 'pupa-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class ButtonComponent {
-  @ViewChild('buttonElement', { static: true }) public buttonElement: ElementRef<HTMLButtonElement>;
-  @Input() public type: ButtonType = 'submit';
-  @Input() public kind: ButtonKind = 'solid';
-  @Input() public size: ButtonSize = 'medium';
-  @Input() public color: ButtonColor = 'normal';
-  @Input() public disabled: boolean = false;
-  @Input() public icon: ButtonIcon = null;
-  @Input() public loader: boolean = false;
-  @Input() public repeatClick: boolean = false;
+  @Input() public readonly size: ButtonSize = 'medium';
+  public readonly size$: BehaviorSubject<ButtonSize> = new BehaviorSubject<ButtonSize>('medium');
 
-  @Output() public onclick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
+  @Input() public readonly kind: ButtonKind = 'primary';
+  public readonly kind$: BehaviorSubject<ButtonKind> = new BehaviorSubject<ButtonKind>('primary');
 
-  private timerRepeatClick: any = null;
-  private timeRepeat: number;
-  private readonly firstTimeOut: number = 800;
-  private readonly timeOut: number = 100;
+  @Input() public readonly type: ButtonType = 'submit';
+  public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('submit');
 
-  public get resultClassList(): string[] {
-    return [this.kind, this.size, this.color, this.loader ? 'with-loader' : null]
-      .filter((innerClass: string) => !isNil(innerClass))
-      .map((innerProperty: string) => `button_${innerProperty}`);
+  public readonly resultClassList$: Observable<string[]> = combineLatest([this.size$, this.kind$]).pipe(
+    map((classes: string[]) =>
+      classes
+        .filter((innerClass: string) => !isNil(innerClass))
+        .map((innerProperty: string) => `button__${innerProperty}`)
+    )
+  );
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processSizeChange(changes?.size);
+    this.processTypeChange(changes?.type);
+    this.processKindChange(changes?.kind);
   }
 
-  public processClickEvent(event: MouseEvent): void {
-    this.buttonElement.nativeElement.blur();
-    if (this.disabled) {
-      event.stopPropagation();
+  private processSizeChange(change: ComponentChange<this, ButtonSize>): void {
+    const updatedValue: ButtonSize | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
       return;
     }
-    this.onclick.emit(event);
+
+    this.size$.next(updatedValue);
   }
 
-  public processMouseDownEvent(event: MouseEvent): void {
-    if (!this.repeatClick) {
+  private processTypeChange(change: ComponentChange<this, ButtonType>): void {
+    const updatedValue: ButtonType | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
       return;
     }
-    this.timeRepeat = this.firstTimeOut;
-    this.newRepeatClick(event);
+
+    this.type$.next(updatedValue);
   }
 
-  public processMouseUpEvent(): void {
-    if (!this.repeatClick) {
+  private processKindChange(change: ComponentChange<this, ButtonKind>): void {
+    const updatedValue: ButtonKind | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
       return;
     }
-    clearTimeout(this.timerRepeatClick);
-  }
-  public onClickInternalElement(event: Event): void {
-    if (this.disabled) {
-      event.stopPropagation();
-    }
-  }
 
-  private newRepeatClick(event: MouseEvent): void {
-    this.timerRepeatClick = setTimeout(() => {
-      this.timeRepeat = this.timeOut;
-      this.onclick.emit(event);
-      this.newRepeatClick(event);
-    }, this.timeRepeat);
+    this.kind$.next(updatedValue);
   }
 }
