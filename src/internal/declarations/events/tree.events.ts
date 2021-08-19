@@ -10,6 +10,7 @@ interface SetChildrenEventPayload {
 export namespace TreeEvents {
   export class Collapse extends DataEventBase<string> {}
   export class Expand extends DataEventBase<string> {}
+  export class ExpandWhileDragging extends DataEventBase<string> {}
   export class RemoveChildren extends DataEventBase<string> {}
   export class SetExpanded extends DataEventBase<string[]> {}
   export class SetChildren extends DataEventBase<SetChildrenEventPayload> {}
