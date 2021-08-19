@@ -1,4 +1,10 @@
-<button #buttonElement class="button" [ngClass]="resultClassList$ | async">
+<button
+  #buttonElement
+  class="button"
+  [ngClass]="resultClassList$ | async"
+  [type]="type"
+  [attr.disabled]="(disabled$ | async) ? true : null"
+>
   <div class="button__background"></div>
 
   <div class="button__content">

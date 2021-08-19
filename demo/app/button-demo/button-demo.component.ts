@@ -33,6 +33,22 @@ export class ButtonDemoComponent {
     {
       caption: 'Secondary',
       value: 'secondary'
+    },
+    {
+      caption: 'Warning',
+      value: 'warning'
+    },
+    {
+      caption: 'Danger',
+      value: 'danger'
+    },
+    {
+      caption: 'Subtle',
+      value: 'subtle'
+    },
+    {
+      caption: 'Border',
+      value: 'border'
     }
   ];
 
