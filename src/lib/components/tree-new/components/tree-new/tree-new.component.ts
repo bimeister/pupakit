@@ -150,6 +150,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   public mouseEnter(treeItem: FlatTreeItem): void {
     this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
       this.dragAndDropMeta$.next({ ...dragAndDropMeta, dropTreeItem: treeItem });
+      if (treeItem.isExpandable && !treeItem.isElement) {
+        this.eventBus.dispatch(new TreeEvents.ExpandWhileDragging(treeItem.id));
+      }
     });
   }
 
