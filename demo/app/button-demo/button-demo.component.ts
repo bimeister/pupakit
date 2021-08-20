@@ -52,24 +52,18 @@ export class ButtonDemoComponent {
     }
   ];
 
-  public readonly iconOptions: RadioOption[] = [
+  public readonly iconPositionOptions: RadioOption[] = [
     {
       caption: 'Unset',
       value: null
     },
     {
       caption: 'Left',
-      value: {
-        name: 'add-circle',
-        position: 'left'
-      }
+      value: 'left'
     },
     {
       caption: 'Right',
-      value: {
-        name: 'add-circle',
-        position: 'right'
-      }
+      value: 'right'
     }
   ];
 }

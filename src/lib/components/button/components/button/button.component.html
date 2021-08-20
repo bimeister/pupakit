@@ -7,9 +7,25 @@
 >
   <div class="button__background"></div>
 
-  <div class="button__content">
+  <div class="button__content" [class.hidden]="loading$ | async">
     <div class="button__content-inner">
+      <pupa-icon
+        class="button__icon left"
+        [name]="icon$ | async"
+        *ngIf="isLeftIconPosition(iconPosition$ | async)"
+      ></pupa-icon>
+
       <ng-content></ng-content>
+
+      <pupa-icon
+        class="button__icon right"
+        [name]="icon$ | async"
+        *ngIf="isRightIconPosition(iconPosition$ | async)"
+      ></pupa-icon>
     </div>
+  </div>
+
+  <div class="button__loading" *ngIf="loading$ | async">
+    <pupa-spinner [size]="'16px'"></pupa-spinner>
   </div>
 </button>
