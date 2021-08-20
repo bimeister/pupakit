@@ -23,6 +23,7 @@
   user-select: none;
 }
 
+/** base styles */
 .button {
   all: unset;
   appearance: none;
@@ -128,6 +129,7 @@
   }
 }
 
+/** white colors */
 .button {
   &__primary {
     .button__background {
@@ -312,7 +314,8 @@
     }
 
     .button__content,
-    .button__loading {
+    .button__loading,
+    .button__icon {
       color: color(base-white-n250);
     }
 
@@ -332,6 +335,93 @@
   }
 }
 
+/** dark colors */
+.button {
+  &__secondary,
+  &__subtle,
+  &__border {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: color(base-dark-n500);
+      }
+
+      &:not([disabled]) {
+        @include hover() {
+          .button__background {
+            background-color: color(base-dark-n400);
+          }
+
+          .button__icon {
+            color: color(base-n0);
+          }
+        }
+
+        &:active {
+          .button__background {
+            background-color: color(base-dark-n300);
+          }
+        }
+      }
+
+      .button__content,
+      .button__loading {
+        color: color(base-n0);
+      }
+
+      .button__icon {
+        color: color(base-dark-n100);
+      }
+    }
+  }
+
+  &__subtle {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: transparent;
+      }
+    }
+  }
+
+  &__border {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: transparent;
+        border: px(1) solid color(base-dark-n400);
+      }
+    }
+  }
+
+  &__disabled {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: color(base-dark-n500);
+        border: none;
+      }
+
+      .button__content,
+      .button__loading,
+      .button__icon {
+        color: color(base-dark-n250);
+      }
+
+      &.button__subtle {
+        .button__background {
+          background-color: transparent;
+          border: none;
+        }
+      }
+
+      &.button__border {
+        .button__background {
+          background-color: transparent;
+          border: px(1) solid color(base-dark-n500);
+        }
+      }
+    }
+  }
+}
+
+/** sizes */
 .button {
   &__large {
     height: newRems(5);
