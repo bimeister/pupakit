@@ -1,8 +1,9 @@
-<h1>Button</h1>
+<h1>Button & Button Icon & Button Round</h1>
 
 <demo-example-viewer>
   <demo-example-viewer-content class="content" [class.dark-theme]="darkMode | async">
     <pupa-button
+      class="content__button"
       [size]="size | async"
       [kind]="kind | async"
       [disabled]="disabled | async"
@@ -12,6 +13,16 @@
     >
       Button Name
     </pupa-button>
+
+    <pupa-button-icon
+      class="content__button"
+      [size]="size | async"
+      [kind]="kind | async"
+      [disabled]="disabled | async"
+      [icon]="'app-notification'"
+      [loading]="loading | async"
+    >
+    </pupa-button-icon>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>

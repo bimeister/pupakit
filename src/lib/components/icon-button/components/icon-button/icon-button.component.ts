@@ -4,6 +4,7 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
 import { InputButtonColor } from '../../../../../internal/declarations/types/icon-button-color.type';
 import { InputButtonSize } from '../../../../../internal/declarations/types/icon-button-size.type';
 
+/** @deprecated use pupa-button-icon */
 @Component({
   selector: 'pupa-icon-button',
   templateUrl: './icon-button.component.html',

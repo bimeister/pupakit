@@ -1,0 +1,18 @@
+@import './../../button.styles.scss';
+
+.button {
+  padding: newRems(1);
+
+  &__large {
+    width: newRems(5);
+  }
+
+  &__medium {
+    width: newRems(4);
+  }
+
+  &__small {
+    padding: newRems(0.5);
+    width: newRems(3);
+  }
+}
