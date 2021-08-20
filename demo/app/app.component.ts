@@ -32,8 +32,7 @@ export class AppComponent implements OnDestroy {
       { title: 'Typography', link: './typography' },
       { title: 'Colors', link: './colors' },
       { title: 'Icon', link: './icon' },
-      { title: 'Button', link: './button' },
-      { title: 'Icon button', link: './icon-button' },
+      { title: 'Button & Button Icon & Button Round', link: './button' },
       { title: 'Avatar', link: './avatar' }
     ]
   };
@@ -43,7 +42,7 @@ export class AppComponent implements OnDestroy {
     linkItems: [
       { title: 'Checkbox', link: './checkbox' },
       { title: 'Switcher', link: './switcher' },
-      { title: '⚠️ Date time pickers', link: './date-time-picker' },
+      { title: 'Date time pickers', link: './date-time-picker' },
       { title: 'Input', link: './input' },
       { title: 'Table Input', link: './table-input' },
       { title: 'Search Field', link: './search-field' },
@@ -96,6 +95,7 @@ export class AppComponent implements OnDestroy {
   private readonly deprecatedGroup: LinksGroup = {
     title: 'Deprecated, unused, useless',
     linkItems: [
+      { title: 'Icon button', link: './icon-button' },
       { title: 'Layout', link: './layout' },
       { title: 'Draggable list', link: './draggable-list' },
       { title: 'Multiselection list', link: './multiselection-list' },
