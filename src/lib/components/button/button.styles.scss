@@ -64,9 +64,12 @@
     z-index: 1;
     overflow: hidden;
     transform: translate3d(0, 0, 1px);
+    white-space: nowrap;
     will-change: transform, opacity;
 
     background-color: transparent;
+
+    display: flex;
 
     &.hidden {
       opacity: 0;
@@ -75,6 +78,7 @@
 
   &__content-inner {
     display: inline-flex;
+    white-space: nowrap;
   }
 
   &:not([disabled]) {
@@ -443,6 +447,17 @@
 
   &__small {
     height: newRems(3);
-    padding: newRems(0.375) newRems(1.25);
+    padding-top: newRems(0.5);
+    padding-bottom: newRems(0.5);
+
+    .button__content {
+      @include font-size-mark();
+
+      line-height: px(17);
+    }
+
+    .button__icon {
+      @include font-size-small();
+    }
   }
 }
