@@ -17,9 +17,18 @@
   overflow: hidden;
   color: inherit;
   @include inline-flex-container(row, center, center, nowrap);
-}
 
-.spinner__icon {
-  color: inherit;
-  animation: rotate 2s infinite linear;
+  &__icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    transform-origin: center;
+
+    stroke-dasharray: px(84);
+    stroke-dashoffset: px(67.5);
+    stroke-width: px(2);
+    animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite rotate;
+
+    color: inherit;
+  }
 }
