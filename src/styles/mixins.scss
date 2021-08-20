@@ -2,6 +2,7 @@
 @import './functions.scss';
 @import './adaptive.scss';
 @import './font-mixins.scss';
+@import './variables.scss';
 
 @mixin regular {
   @include font-type-caption();
@@ -145,6 +146,12 @@
 
 @mixin host-selector($selector) {
   :host-context(#{$selector}) & {
+    @content;
+  }
+}
+
+@mixin host-selector-dark-theme {
+  @include host-selector(#{$darkThemeClass}) {
     @content;
   }
 }
