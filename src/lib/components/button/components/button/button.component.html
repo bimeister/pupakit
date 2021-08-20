@@ -8,21 +8,20 @@
   <div class="button__background" focusable="false"></div>
 
   <div class="button__content" focusable="false" [class.hidden]="loading$ | async">
+    <pupa-icon
+      class="button__icon left"
+      [name]="icon$ | async"
+      *ngIf="isLeftIconPosition(iconPosition$ | async)"
+    ></pupa-icon>
+
     <div class="button__content-inner">
-      <pupa-icon
-        class="button__icon left"
-        [name]="icon$ | async"
-        *ngIf="isLeftIconPosition(iconPosition$ | async)"
-      ></pupa-icon>
-
       <ng-content></ng-content>
-
-      <pupa-icon
-        class="button__icon right"
-        [name]="icon$ | async"
-        *ngIf="isRightIconPosition(iconPosition$ | async)"
-      ></pupa-icon>
     </div>
+    <pupa-icon
+      class="button__icon right"
+      [name]="icon$ | async"
+      *ngIf="isRightIconPosition(iconPosition$ | async)"
+    ></pupa-icon>
   </div>
 
   <div class="button__loading" *ngIf="loading$ | async" focusable="false">
