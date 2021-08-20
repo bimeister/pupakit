@@ -5,9 +5,9 @@
   [type]="type"
   [attr.disabled]="(disabled$ | async) ? true : null"
 >
-  <div class="button__background"></div>
+  <div class="button__background" focusable="false"></div>
 
-  <div class="button__content" [class.hidden]="loading$ | async">
+  <div class="button__content" focusable="false" [class.hidden]="loading$ | async">
     <div class="button__content-inner">
       <pupa-icon
         class="button__icon left"
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="button__loading" *ngIf="loading$ | async">
+  <div class="button__loading" *ngIf="loading$ | async" focusable="false">
     <pupa-spinner [size]="'16px'"></pupa-spinner>
   </div>
 </button>
