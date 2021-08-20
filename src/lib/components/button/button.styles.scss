@@ -124,11 +124,11 @@
     }
   }
 
-  &__with-icon-left {
+  &_with-icon-left {
     padding-left: newRems(1);
   }
 
-  &__with-icon-right {
+  &_with-icon-right {
     padding-right: newRems(1);
   }
 
@@ -147,7 +147,7 @@
 
 /** white colors */
 .button {
-  &__primary {
+  &_primary {
     .button__background {
       background-color: color(primary-n500);
     }
@@ -160,7 +160,7 @@
       }
 
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(primary-n550);
         }
@@ -173,7 +173,7 @@
     }
   }
 
-  &__secondary {
+  &_secondary {
     .button__background {
       background-color: color(base-white-n500);
     }
@@ -190,7 +190,7 @@
       }
 
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(base-white-n300);
         }
@@ -211,7 +211,7 @@
     }
   }
 
-  &__danger {
+  &_danger {
     .button__background {
       background-color: color(red-n500);
     }
@@ -223,7 +223,7 @@
         }
       }
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(red-n550);
         }
@@ -236,7 +236,7 @@
     }
   }
 
-  &__warning {
+  &_warning {
     .button__background {
       background-color: color(yellow-n500);
     }
@@ -249,7 +249,7 @@
       }
 
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(yellow-n550);
         }
@@ -262,7 +262,7 @@
     }
   }
 
-  &__subtle {
+  &_subtle {
     .button__background {
       background-color: transparent;
     }
@@ -279,7 +279,7 @@
       }
 
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(base-white-n300);
         }
@@ -300,16 +300,18 @@
     }
   }
 
-  &__border {
+  &_border {
     .button__background {
       background-color: transparent;
       border: px(1) solid color(base-dark-n100);
+      transition: border-color 0.2s ease;
     }
 
     &:not([disabled]) {
       @include hover() {
         .button__background {
           background-color: color(base-white-n400);
+          border-color: color(base-white-n400);
         }
 
         .button__icon {
@@ -318,7 +320,7 @@
       }
 
       &:active,
-      &.button__active {
+      &.button_active {
         .button__background {
           background-color: color(base-white-n300);
         }
@@ -339,7 +341,7 @@
     }
   }
 
-  &__disabled {
+  &_disabled {
     cursor: not-allowed;
 
     .button__background {
@@ -353,14 +355,14 @@
       color: color(base-white-n250);
     }
 
-    &.button__subtle {
+    &.button_subtle {
       .button__background {
         background-color: transparent;
         border: none;
       }
     }
 
-    &.button__border {
+    &.button_border {
       .button__background {
         background-color: transparent;
         border: px(1) solid color(base-dark-n100);
@@ -371,9 +373,9 @@
 
 /** dark colors */
 .button {
-  &__secondary,
-  &__subtle,
-  &__border {
+  &_secondary,
+  &_subtle,
+  &_border {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: color(base-dark-n500);
@@ -391,7 +393,7 @@
         }
 
         &:active,
-        &.button__active {
+        &.button_active {
           .button__background {
             background-color: color(base-dark-n300);
           }
@@ -413,7 +415,7 @@
     }
   }
 
-  &__subtle {
+  &_subtle {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
@@ -421,7 +423,7 @@
     }
   }
 
-  &__border {
+  &_border {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
@@ -430,7 +432,7 @@
     }
   }
 
-  &__disabled {
+  &_disabled {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: color(base-dark-n500);
@@ -443,14 +445,14 @@
         color: color(base-dark-n250);
       }
 
-      &.button__subtle {
+      &.button_subtle {
         .button__background {
           background-color: transparent;
           border: none;
         }
       }
 
-      &.button__border {
+      &.button_border {
         .button__background {
           background-color: transparent;
           border: px(1) solid color(base-dark-n500);
@@ -462,15 +464,15 @@
 
 /** sizes */
 .button {
-  &__large {
+  &_large {
     height: newRems(5);
   }
 
-  &__medium {
+  &_medium {
     height: newRems(4);
   }
 
-  &__small {
+  &_small {
     height: newRems(3);
     padding-top: newRems(0.5);
     padding-bottom: newRems(0.5);
