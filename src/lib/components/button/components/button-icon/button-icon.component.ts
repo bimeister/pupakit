@@ -31,13 +31,17 @@ export class ButtonIconComponent {
   @Input() public readonly icon: Nullable<string>;
   public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public readonly loading: boolean;
+  @Input() public readonly loading: boolean = false;
   public readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public readonly active: boolean = false;
+  public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.size$,
     this.kind$,
-    this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
+    this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
+    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null)))
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -53,6 +57,7 @@ export class ButtonIconComponent {
     this.processDisabledChange(changes?.disabled);
     this.processIconChange(changes?.icon);
     this.processLoadingChange(changes?.loading);
+    this.processActiveChange(changes?.active);
   }
 
   private processSizeChange(change: ComponentChange<this, ButtonSize>): void {
@@ -113,5 +118,15 @@ export class ButtonIconComponent {
     }
 
     this.loading$.next(updatedValue);
+  }
+
+  private processActiveChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.active$.next(updatedValue);
   }
 }
