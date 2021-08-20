@@ -46,7 +46,7 @@ export class ButtonIconComponent {
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `button__${innerProperty}`)
+        .map((innerProperty: string) => `button_${innerProperty}`)
     )
   );
 

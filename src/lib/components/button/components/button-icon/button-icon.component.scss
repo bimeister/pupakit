@@ -3,15 +3,15 @@
 .button {
   padding: newRems(1);
 
-  &__large {
+  &_large {
     width: newRems(5);
   }
 
-  &__medium {
+  &_medium {
     width: newRems(4);
   }
 
-  &__small {
+  &_small {
     padding: newRems(0.5);
     width: newRems(3);
   }
