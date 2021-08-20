@@ -158,7 +158,8 @@
         }
       }
 
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(primary-n550);
         }
@@ -187,9 +188,14 @@
         }
       }
 
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(base-white-n300);
+        }
+
+        .button__icon {
+          color: color(base-white-n600);
         }
       }
     }
@@ -215,7 +221,8 @@
           background-color: color(red-n400);
         }
       }
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(red-n550);
         }
@@ -240,7 +247,8 @@
         }
       }
 
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(yellow-n550);
         }
@@ -269,9 +277,14 @@
         }
       }
 
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(base-white-n300);
+        }
+
+        .button__icon {
+          color: color(base-white-n600);
         }
       }
     }
@@ -303,9 +316,14 @@
         }
       }
 
-      &:active {
+      &:active,
+      &.button__active {
         .button__background {
           background-color: color(base-white-n300);
+        }
+
+        .button__icon {
+          color: color(base-white-n600);
         }
       }
     }
@@ -371,9 +389,14 @@
           }
         }
 
-        &:active {
+        &:active,
+        &.button__active {
           .button__background {
             background-color: color(base-dark-n300);
+          }
+
+          .button__icon {
+            color: color(base-n0);
           }
         }
       }

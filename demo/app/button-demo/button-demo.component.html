@@ -10,6 +10,7 @@
       [icon]="'app-notification'"
       [iconPosition]="iconPosition | async"
       [loading]="loading | async"
+      [active]="active | async"
     >
       Button Name
     </pupa-button>
@@ -21,6 +22,7 @@
       [disabled]="disabled | async"
       [icon]="'app-notification'"
       [loading]="loading | async"
+      [active]="active | async"
     >
     </pupa-button-icon>
   </demo-example-viewer-content>
@@ -37,6 +39,9 @@
 
     <demo-props-group-label>Icon</demo-props-group-label>
     <demo-props-radio-select #iconPosition [options]="iconPositionOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Force state</demo-props-group-label>
+    <demo-props-checkbox #active>Active</demo-props-checkbox>
 
     <demo-props-group-label>Other</demo-props-group-label>
     <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
