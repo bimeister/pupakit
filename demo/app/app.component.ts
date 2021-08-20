@@ -88,6 +88,7 @@ export class AppComponent implements OnDestroy {
       { title: '⚠️ Droppable', link: './droppable' },
       { title: '⚠️ Dropdown', link: './dropdown' },
       { title: '⚠️ Dropdown menu', link: './dropdown-menu' },
+      { title: 'Layout', link: './layout' },
       { title: 'Controls isPatched', link: './controls-is-patched' }
     ]
   };
@@ -95,8 +96,7 @@ export class AppComponent implements OnDestroy {
   private readonly deprecatedGroup: LinksGroup = {
     title: 'Deprecated, unused, useless',
     linkItems: [
-      { title: 'Icon button', link: './icon-button' },
-      { title: 'Layout', link: './layout' },
+      { title: '⚠️ Icon button', link: './icon-button' },
       { title: 'Draggable list', link: './draggable-list' },
       { title: 'Multiselection list', link: './multiselection-list' },
       { title: 'Select Multiple', link: './select-multiple' },

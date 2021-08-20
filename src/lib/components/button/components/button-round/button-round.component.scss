@@ -1,0 +1,26 @@
+@import './../../button.styles.scss';
+
+.button {
+  padding: newRems(1);
+
+  width: newRems(6);
+  height: newRems(6);
+
+  border-radius: 50%;
+
+  &__background {
+    border-radius: 50%;
+  }
+
+  &:not([disabled]) {
+    &:focus-visible {
+      .button__background {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  &__icon {
+    @include font-size-header();
+  }
+}

@@ -5,8 +5,9 @@ import { ButtonComponent } from './components/button/button.component';
 import { IconModule } from '../icon/icon.module';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { ButtonIconComponent } from './components/button-icon/button-icon.component';
+import { ButtonRoundComponent } from './components/button-round/button-round.component';
 
-const COMPONENTS: Type<unknown>[] = [ButtonComponent, ButtonIconComponent];
+const COMPONENTS: Type<unknown>[] = [ButtonComponent, ButtonIconComponent, ButtonRoundComponent];
 
 const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 const EXPORTS: Type<unknown>[] = [...DECLARATIONS];

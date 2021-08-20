@@ -51,6 +51,7 @@
     bottom: 0;
     transform: scale(1);
     will-change: transform;
+    border-radius: px(1);
 
     transition: background-color 0.1s ease, transform 0.1s;
   }
