@@ -1,6 +1,5 @@
 export {
   Alert,
-  ButtonColor,
   CustomTreeDataSource,
   DatagridDomLayouts,
   DatagridManipulator,
