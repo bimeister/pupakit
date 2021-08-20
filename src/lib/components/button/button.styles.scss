@@ -19,7 +19,6 @@
 
 :host {
   appearance: none;
-  overflow: hidden;
   user-select: none;
 }
 
@@ -38,7 +37,6 @@
 
   border-radius: px(1);
   padding: newRems(1) newRems(1.5);
-  overflow: hidden;
 
   user-select: none;
 
@@ -91,6 +89,18 @@
 
       .button__background {
         transform: scale(0.95);
+      }
+    }
+
+    &:focus-visible {
+      .button__background {
+        top: px(-2);
+        left: px(-2);
+        right: px(-2);
+        bottom: px(-2);
+
+        border: px(2) solid color(primary-n400);
+        border-radius: px(2);
       }
     }
   }
