@@ -1,17 +1,1 @@
 @import 'mixins';
-
-.avatar {
-  &__row {
-    display: flex;
-    align-items: center;
-  }
-
-  &__icon-button {
-    margin-left: rems(0.5);
-  }
-
-  &__button {
-    margin-top: rems(1);
-    display: block;
-  }
-}

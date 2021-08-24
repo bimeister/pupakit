@@ -7,6 +7,7 @@ import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipButtonModule } from './components/chip-button/chip-button.module';
 import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
+import { CodeModule } from './components/code/code.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
 import { CounterModule } from './components/counter/counter.module';
 import { DatagridModule } from './components/datagrid/datagrid.module';
@@ -92,7 +93,8 @@ const EXPORTS: any[] = [
   UploadsModule,
   CounterModule,
   AvatarModule,
-  PagedVirtualScrollModule
+  PagedVirtualScrollModule,
+  CodeModule
 ];
 
 @NgModule({
