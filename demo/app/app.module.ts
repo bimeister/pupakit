@@ -5,9 +5,9 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
 import { getAllIcons } from '../declarations/functions/get-all-icons.function';
 import { ComponentsModule, IconModule } from './../../src/public-api';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AvatarDemoComponent } from './avatar-demo/avatar-demo.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
@@ -40,7 +40,6 @@ import { MultiselectionListDemoComponent } from './multiselection-list-demo/mult
 import { PagedVirtualScrollDemoComponent } from './paged-virtual-scroll-demo/paged-virtual-scroll-demo.component';
 import { RadioButtonDemoComponent } from './radio-button-demo/radio-button-demo.component';
 import { RatingDemoComponent } from './rating-demo/rating-demo.component';
-import { demoRoutes } from './routes';
 import { ScrollbarDemoComponent } from './scrollbar-demo/scrollbar-demo.component';
 import { SearchFieldDemoComponent } from './search-field-demo/search-field-demo.component';
 import { SelectDemoComponent } from './select-demo/select-demo.component';
@@ -123,7 +122,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ReactiveFormsModule,
     BrowserAnimationsModule,
     ComponentsModule,
-    RouterModule.forRoot(demoRoutes, { relativeLinkResolution: 'legacy', useHash: true }),
+    AppRoutingModule,
     ExampleViewerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],

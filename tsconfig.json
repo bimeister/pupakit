@@ -19,7 +19,7 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "module": "ES2015",
+    "module": "ESNext",
     "target": "ES2015",
     "moduleResolution": "Node",
     "outDir": "./dist/out-tsc",
