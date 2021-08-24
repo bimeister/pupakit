@@ -7,7 +7,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
-import { ColorsComponent } from './colors/colors.component';
+import { ColorsDemoComponent } from './colors-demo/colors-demo.component';
 import { ControlsIsPatchedDemoComponent } from './controls-is-patched-demo/controls-is-patched-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
 import { DateTimePickerDemoComponent } from './date-time-picker-demo/date-time-picker-demo.component';
@@ -58,7 +58,7 @@ const demoRoutes: Routes = [
   },
   {
     path: 'colors',
-    component: ColorsComponent
+    component: ColorsDemoComponent
   },
   {
     path: 'icon',

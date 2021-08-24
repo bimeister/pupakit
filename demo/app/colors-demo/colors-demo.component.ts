@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'demo-colors',
-  templateUrl: './colors.component.html',
-  styleUrls: ['./colors.component.scss'],
+  selector: 'demo-colors-demo',
+  templateUrl: './colors-demo.component.html',
+  styleUrls: ['./colors-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ColorsComponent {
+export class ColorsDemoComponent {
   public readonly colors: string[] = [
     'base-n0',
     'base-n600',
