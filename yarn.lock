@@ -7254,10 +7254,20 @@ hex-color-regex@^1.1.0:
   resolved "https://registry.yarnpkg.com/hex-color-regex/-/hex-color-regex-1.1.0.tgz#4c06fccb4602fe2602b3c93df82d7e7dbf1a8a8e"
   integrity sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ==
 
+highlight.js@^10.0.0:
+  version "10.7.3"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.3.tgz#697272e3991356e40c3cac566a74eef681756531"
+  integrity sha512-tzcUFauisWKNHaRkN4Wjl/ZA07gENAjFl3J/c480dprkGTg5EQstgaNFqBfUqCq54kZRIEcreTsAgF/m2quD7A==
+
 highlight.js@^10.1.1, highlight.js@~10.7.0:
   version "10.7.2"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-10.7.2.tgz#89319b861edc66c48854ed1e6da21ea89f847360"
   integrity sha512-oFLl873u4usRM9K63j4ME9u3etNF0PLiJhSQ8rdfuL51Wn3zkD6drf9ZW0dOzjnZI22YYG24z30JcmfCZjMgYg==
+
+highlightjs-line-numbers.js@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/highlightjs-line-numbers.js/-/highlightjs-line-numbers.js-2.8.0.tgz#479ea8cff0c31fadc1578a66fa03e38b801f9ca6"
+  integrity sha512-TEf1gw0c8mb8nan0QwliqS7obT4cpUd9hzsGzsZLweteNnWea/VIqy5/aQqsa5wnz9lnvmtAkS1ZtDTjB/goYQ==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
@@ -9644,6 +9654,15 @@ ng-packagr@^12.0.0:
     rxjs "^6.5.0"
     sass "^1.32.8"
     stylus "^0.54.8"
+
+ngx-highlightjs@^4.1.4:
+  version "4.1.4"
+  resolved "https://registry.yarnpkg.com/ngx-highlightjs/-/ngx-highlightjs-4.1.4.tgz#630a68c080bd5a3651ac64c2b284d6e7174f6ae2"
+  integrity sha512-yh5p8J+mUNHMm5kQM1CAyRdLT2KiW631l/Rky+rkxwT6NZHG80yImWXZt7RG3heTQzd1wDOWMQ8JznF3KeUv5g==
+  dependencies:
+    highlight.js "^10.0.0"
+    highlightjs-line-numbers.js "^2.8.0"
+    tslib "^2.0.0"
 
 ngx-mask@^11.0.0:
   version "11.1.5"

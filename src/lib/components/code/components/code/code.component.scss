@@ -1,0 +1,19 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.container {
+  margin: 0;
+
+  &__code {
+    @include font-size-small();
+    font-family: monospace;
+  }
+}
+
+.hljs:not(:empty) {
+  padding: newRems(3) newRems(4);
+  font-family: monospace;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}

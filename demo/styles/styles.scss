@@ -2,6 +2,8 @@
 @import '~src/styles/themes/functions';
 @import '~src/styles/styles';
 @import '~src/styles/themes/blue-theme/pupa-blue-theme.scss';
+@import '~highlight.js/styles/github.css';
+@import './highlightjs.styles.scss';
 
 @include scrollbar();
 
@@ -53,11 +55,16 @@ h4 {
   font-style: normal;
 }
 
-span,
-p,
-td {
-  font-size: variable(font-size_base-text);
-  line-height: variable(line-height_base-text);
-  @include regular();
-  font-style: normal;
-}
+// span,
+// p,
+// td {
+//   font-size: variable(font-size_base-text);
+//   line-height: variable(line-height_base-text);
+//   @include regular();
+//   font-style: normal;
+// }
+
+// .hljs-string,
+// .hljs-keyword {
+//   font-family: monospace;
+// }

@@ -1,0 +1,86 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.hljs-tag {
+  background: none;
+}
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: color(base-n600);
+  background-color: color(base-white-n500);
+}
+
+.hljs-subst,
+.hljs-title {
+  font-weight: normal;
+}
+
+.hljs-comment,
+.hljs-quote {
+  font-style: italic;
+}
+
+.hljs-meta {
+  color: color(red-n300);
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-literal,
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-type,
+.hljs-selector-id,
+.hljs-selector-class {
+  font-weight: bold;
+}
+
+.hljs-attribute,
+.hljs-number,
+.hljs-regexp,
+.hljs-link {
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-regexp,
+.hljs-link {
+  font-weight: normal;
+}
+
+.hljs-string {
+  font-weight: bold;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-formula {
+  font-style: italic;
+}
+
+.hljs-doctag {
+  text-decoration: underline;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs .hljs-line-numbers {
+  padding: 0;
+}
+
+.hljs-ln-numbers {
+  vertical-align: top;
+  opacity: 0.3;
+  text-align: right;
+  padding-right: 1em !important;
+}
