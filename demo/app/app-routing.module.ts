@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { NgModule, Type } from '@angular/core';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AdaptiveDemoModule } from './adaptive-demo/adaptive-demo.module';
 import { AvatarDemoComponent } from './avatar-demo/avatar-demo.component';
 import { ButtonDemoComponent } from './button-demo/button-demo.component';
 import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
@@ -45,7 +47,7 @@ import { TypographyPageComponent } from './typography-page/typography-page.compo
 import { UploadsDemoComponent } from './uploads-demo/uploads-demo.component';
 import { VerticalTabsDemoComponent } from './vertical-tabs-demo/vertical-tabs-demo.component';
 
-export const demoRoutes: Routes = [
+const demoRoutes: Routes = [
   {
     path: 'avatar',
     component: AvatarDemoComponent
@@ -188,8 +190,31 @@ export const demoRoutes: Routes = [
     component: ControlsIsPatchedDemoComponent
   },
   {
+    path: 'adaptive',
+    pathMatch: 'full',
+    loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
+      import('./adaptive-demo/adaptive-demo.module').then(module => module.AdaptiveDemoModule)
+  },
+  {
     path: '',
     redirectTo: '/typography',
     pathMatch: 'full'
   }
 ];
+
+@NgModule({
+  imports: [
+    RouterModule.forRoot(demoRoutes, {
+      enableTracing: false,
+      onSameUrlNavigation: 'reload',
+      urlUpdateStrategy: 'deferred',
+      preloadingStrategy: PreloadAllModules,
+      initialNavigation: 'enabledNonBlocking',
+      scrollPositionRestoration: 'enabled',
+      relativeLinkResolution: 'legacy',
+      useHash: true
+    })
+  ],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
