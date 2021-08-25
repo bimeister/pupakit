@@ -3,13 +3,14 @@
     <pupa-spinner size="40px"></pupa-spinner>
   </div>
 
-  <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" (mouseleave)="mouseLeave()" #viewPort>
+  <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" #viewPort>
     <ng-container *cdkVirtualFor="let treeItem of data$ | async"> </ng-container>
     <cdk-tree
       (contextmenu)="$event.preventDefault()"
       [dataSource]="dataSource"
       [treeControl]="treeControl"
       [trackBy]="trackBy$ | async"
+      (mouseleave)="mouseLeave()"
     >
       <cdk-tree-node
         *cdkTreeNodeDef="let node; when: isElement"
