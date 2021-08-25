@@ -6,5 +6,6 @@
   font-size: 4rem;
   width: 7rem;
   margin-right: 1rem;
+  transition: color variable(transition-duration_shortest) ease-in-out;
   color: var(--dropdown-item-icon-color);
 }
