@@ -30,6 +30,7 @@ export {
   SelectSearchBase,
   SelectTreeBase,
   SortModel,
+  Theme,
   Tab,
   TreeItem,
   CountColor,
