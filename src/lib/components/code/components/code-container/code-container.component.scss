@@ -1,0 +1,21 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.container {
+  margin: 0;
+
+  padding: newRems(2);
+  border: px(1) solid color(base-dark-n100);
+  border-radius: newRems(2);
+
+  box-shadow: 0 newRems(0.25) newRems(0.3) rgb(0 0 0 / 10%);
+
+  &__preview {
+    padding: newRems(2);
+  }
+}
+
+.tab + .tab {
+  margin-left: newRems(2);
+}

@@ -7,6 +7,7 @@ import { CheckboxDemoComponent } from './checkbox-demo/checkbox-demo.component';
 import { ChipButtonDemoComponent } from './chip-button-demo/chip-button-demo.component';
 import { ChipDemoComponent } from './chip-demo/chip-demo.component';
 import { ChipTabsDemoComponent } from './chip-tabs-demo/chip-tabs-demo.component';
+import { CodeDemoModule } from './code-demo/code-demo.module';
 import { ColorsDemoComponent } from './colors-demo/colors-demo.component';
 import { ControlsIsPatchedDemoComponent } from './controls-is-patched-demo/controls-is-patched-demo.component';
 import { DatagridDemoComponent } from './datagrid-demo/datagrid-demo.component';
@@ -194,6 +195,12 @@ const demoRoutes: Routes = [
     pathMatch: 'full',
     loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
       import('./adaptive-demo/adaptive-demo.module').then(module => module.AdaptiveDemoModule)
+  },
+  {
+    path: 'code',
+    pathMatch: 'full',
+    loadChildren: (): Promise<Type<CodeDemoModule>> =>
+      import('./code-demo/code-demo.module').then(module => module.CodeDemoModule)
   },
   {
     path: '',
