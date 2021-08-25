@@ -1,5 +1,73 @@
-:host {
-  .item {
-    white-space: nowrap;
+@import 'functions';
+@import 'mixins';
+
+.dropdown-item {
+  --dropdown-item-icon-color: #{color(base-white-n200)};
+  --dropdown-item-transform-x: 0;
+  @include font-type-paragraph();
+  @include font-size-mark(true);
+  display: flex;
+  align-items: center;
+  color: color(base-n600);
+  border: solid px(2) transparent;
+  padding: px(6) px(30) px(6) px(18);
+  white-space: nowrap;
+  transition: background-color variable(transition-duration_shortest) ease-in-out;
+  cursor: pointer;
+
+  @include host-selector-dark-theme {
+    --dropdown-item-icon-color: #{color(base-dark-n100)};
+    color: color(base-n0);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: color(primary-n400);
+  }
+
+  &:hover:not(.item-disabled):not(.item-plain) {
+    --dropdown-item-icon-color: #{color(base-n600)};
+    --dropdown-item-transform-x: #{newRems(1)};
+    background-color: color(base-white-n400);
+
+    @include host-selector-dark-theme {
+      --dropdown-item-icon-color: #{color(base-n0)};
+      background-color: color(base-dark-n400);
+    }
+  }
+
+  &.item-active:not(.item-disabled):not(.item-plain),
+  &:active:not(.item-disabled):not(.item-plain) {
+    --dropdown-item-icon-color: #{color(base-n600)};
+    background-color: color(base-white-n300);
+
+    @include host-selector-dark-theme {
+      --dropdown-item-icon-color: #{color(base-n0)};
+      background-color: color(base-dark-n300);
+    }
+  }
+
+  &.item-disabled {
+    --dropdown-item-icon-color: #{color(base-white-n250)};
+    cursor: default;
+    color: color(base-white-n250);
+    pointer-events: none;
+
+    @include host-selector-dark-theme {
+      --dropdown-item-icon-color: #{color(base-dark-n250)};
+      color: color(base-dark-n250);
+    }
+  }
+
+  &.item-plain {
+    cursor: default;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    transition: transform variable(transition-duration_shortest) ease-in-out;
+    transform: translateX(var(--dropdown-item-transform-x));
   }
 }

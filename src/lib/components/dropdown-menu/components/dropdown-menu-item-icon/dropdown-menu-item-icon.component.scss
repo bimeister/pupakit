@@ -1,0 +1,10 @@
+@import 'functions';
+@import 'mixins';
+
+:host {
+  display: flex;
+  font-size: newRems(2);
+  width: newRems(3.5);
+  margin-right: newRems(0.5);
+  color: var(--dropdown-item-icon-color);
+}

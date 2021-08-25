@@ -1,0 +1,5 @@
+@import 'mixins';
+
+.text {
+  @include ellipsis-text-overflow;
+}
