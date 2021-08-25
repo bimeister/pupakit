@@ -52,7 +52,13 @@ export {
   DataEventBase,
   TreeDataDisplayCollection,
   TreeDataDisplayCollectionRef,
-  ControllerOptions
+  ControllerOptions,
+  ClientUiStateHandlerService,
+  DrawersService,
+  AlertsService,
+  ModalsService,
+  LoaderService,
+  GridStateService
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

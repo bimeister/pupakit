@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-
-import { Alert } from '../../../../internal/declarations/interfaces/alert.interface';
+import { Alert } from '../../declarations/interfaces/alert.interface';
 
 @Injectable({
   providedIn: 'root'

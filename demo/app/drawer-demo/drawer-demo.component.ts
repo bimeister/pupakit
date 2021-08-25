@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
-import { DrawersService } from '../../../src/public-api';
 import { TestDrawerComponent } from './components/test-drawer/test-drawer.component';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DRAWER_DATA_TOKEN } from '../../declarations/tokens/drawer-data.token';
 import { RadioOption } from '../example-viewer/radio-option';
+import { DrawersService } from '../../../src/internal/shared/services/drawers.service';
 
 @Component({
   selector: 'demo-drawer-demo',

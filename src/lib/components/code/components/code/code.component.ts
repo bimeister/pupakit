@@ -5,8 +5,8 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 import { Clipboard } from '@angular/cdk/clipboard';
-import { AlertsService } from '../../../layout/services/alerts.service';
 import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
+import { AlertsService } from '../../../../../internal/shared/services/alerts.service';
 
 @Component({
   selector: 'pupa-code',
