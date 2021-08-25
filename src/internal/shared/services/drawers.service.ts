@@ -2,12 +2,12 @@ import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import { Injectable, Injector, RendererFactory2 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { DrawerRef } from '../../../../internal/declarations/classes/drawer-ref.class';
-import { Drawer } from '../../../../internal/declarations/classes/drawer.class';
-import { DrawerConfigDto } from '../../../../internal/declarations/classes/dto/drawer-config.dto';
-import { DrawerConfig } from '../../../../internal/declarations/interfaces/drawer-config.interface';
-import { OpenedDrawer } from '../../../../internal/declarations/interfaces/opened-drawer.interface';
-import { PortalLayersService } from '../../../../internal/shared/services/portal-layers.service';
+import { DrawerRef } from '../../declarations/classes/drawer-ref.class';
+import { Drawer } from '../../declarations/classes/drawer.class';
+import { DrawerConfigDto } from '../../declarations/classes/dto/drawer-config.dto';
+import { DrawerConfig } from '../../declarations/interfaces/drawer-config.interface';
+import { OpenedDrawer } from '../../declarations/interfaces/opened-drawer.interface';
+import { PortalLayersService } from './portal-layers.service';
 
 @Injectable({
   providedIn: 'root'

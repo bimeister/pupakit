@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { isEmpty, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GridStateService } from '../../src/lib/components/layout/services/grid-state.service';
+import { GridStateService } from '../../src/internal/shared/services/grid-state.service';
 
 interface LinkItem {
   title: string;

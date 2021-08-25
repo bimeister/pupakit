@@ -14,10 +14,10 @@ import { map } from 'rxjs/operators';
 import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
 import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
 import { LoaderType } from '../../../../../internal/declarations/types/loader-type.type';
-import { AlertsService } from '../../services/alerts.service';
-import { ClientUiStateHandlerService } from '../../services/client-ui-state-handler.service';
-import { GridStateService } from '../../services/grid-state.service';
-import { LoaderService } from '../../services/loader.service';
+import { AlertsService } from '../../../../../internal/shared/services/alerts.service';
+import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
+import { GridStateService } from '../../../../../internal/shared/services/grid-state.service';
+import { LoaderService } from '../../../../../internal/shared/services/loader.service';
 
 @Component({
   selector: 'pupa-layout',

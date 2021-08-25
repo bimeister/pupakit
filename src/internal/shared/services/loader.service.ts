@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-import { LoaderType } from '../../../../internal/declarations/types/loader-type.type';
+import { LoaderType } from '../../declarations/types/loader-type.type';
 
 @Injectable({
   providedIn: 'root'

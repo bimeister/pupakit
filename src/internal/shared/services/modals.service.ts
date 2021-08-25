@@ -1,13 +1,13 @@
 import { ComponentType, Overlay } from '@angular/cdk/overlay';
 import { Injectable, Injector, RendererFactory2 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { ModalConfigDto } from '../../../../internal/declarations/classes/dto/modal-config.dto';
-import { ModalRef } from '../../../../internal/declarations/classes/modal-ref.class';
-import { Modal } from '../../../../internal/declarations/classes/modal.class';
-import { ModalConfig } from '../../../../internal/declarations/interfaces/modal-config.interface';
-import { OpenedModal } from '../../../../internal/declarations/interfaces/opened-modal.interface';
-import { Position } from '../../../../internal/declarations/types/position.type';
-import { PortalLayersService } from '../../../../internal/shared/services/portal-layers.service';
+import { ModalConfigDto } from '../../declarations/classes/dto/modal-config.dto';
+import { ModalRef } from '../../declarations/classes/modal-ref.class';
+import { Modal } from '../../declarations/classes/modal.class';
+import { ModalConfig } from '../../declarations/interfaces/modal-config.interface';
+import { OpenedModal } from '../../declarations/interfaces/opened-modal.interface';
+import { Position } from '../../declarations/types/position.type';
+import { PortalLayersService } from './portal-layers.service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +40,7 @@ export class ModalsService {
     this.modalRefs.set(modal.id, modalRef);
 
     this.processModalClosed(modal);
-    this.processModalPosisitionUpdated(modal);
+    this.processModalPositionUpdated(modal);
     this.processModalToTopLayerMoved(modal);
 
     return {
@@ -72,7 +72,7 @@ export class ModalsService {
     });
   }
 
-  private processModalPosisitionUpdated(modal: Modal<unknown>): void {
+  private processModalPositionUpdated(modal: Modal<unknown>): void {
     const modalRef: ModalRef<unknown> = this.modalRefs.get(modal.id);
     modalRef.positionUpdated$.subscribe((position: Position) => modal.updatePosition(position));
   }

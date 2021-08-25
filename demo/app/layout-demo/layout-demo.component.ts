@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 import { Alert } from '../../../src/internal/declarations/interfaces/alert.interface';
 import { AlertType } from '../../../src/internal/declarations/types/alert.type';
-import { AlertsService } from '../../../src/lib/components/layout/services/alerts.service';
+import { AlertsService } from '../../../src/internal/shared/services/alerts.service';
 
 @Component({
   selector: 'demo-overlay',

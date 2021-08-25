@@ -3,8 +3,8 @@ import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
 import { mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
-import config from '../../../../assets/configs/adaptive-config.json';
-import { UiState } from '../../../../internal/declarations/interfaces/ui-state.interface';
+import config from '../../../assets/configs/adaptive-config.json';
+import { UiState } from '../../declarations/interfaces/ui-state.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -2,11 +2,11 @@ import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 
 import { OpenedModal } from '../../../src/internal/declarations/interfaces/opened-modal.interface';
 import { Position } from '../../../src/internal/declarations/types/position.type';
-import { ModalsService } from '../../../src/lib/components/modal/services/modals.service';
 import { MODAL_DATA_TOKEN } from '../../declarations/tokens/modal-data.token';
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoLocalService } from './services/modal-demo-local.service';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ModalsService } from '../../../src/internal/shared/services/modals.service';
 
 @Component({
   selector: 'demo-modal-demo',
