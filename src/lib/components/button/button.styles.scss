@@ -479,8 +479,6 @@
 
     .button__content {
       @include font-size-mark();
-
-      line-height: px(17);
     }
 
     .button__icon {

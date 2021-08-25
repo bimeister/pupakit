@@ -1,26 +1,30 @@
 @import 'mixins';
+@import 'variables';
 
-:host {
-  display: flex;
-  flex-direction: row;
+.dropdown-content {
+  display: block;
+  position: relative;
 
-  &.left-sided {
-    flex-direction: row-reverse;
-  }
-}
+  &__menu {
+    padding: newRems(1) 0;
+    margin-top: newRems(0.5);
+    border-radius: px(1);
+    max-height: newRems(36);
+    max-width: newRems(38);
+    box-shadow: variable(box-shadow_dropdown);
+    background-color: rgba(color(white-rgb), 0.8);
+    backdrop-filter: blur(px(40));
+    user-select: none;
+    overflow: auto;
+    border: px(1) solid color(base-white-n400);
 
-.content-wrapper {
-  position: absolute;
-
-  .content {
-    @include dropdown;
-
-    position: relative;
-
-    &_side_left {
-      left: -100%;
+    &:focus {
+      outline: none;
     }
 
-    user-select: none;
+    &#{$darkThemeClass} {
+      border-color: color(base-dark-n400);
+      background-color: rgba(color(base-n600-rgb), 0.94);
+    }
   }
 }

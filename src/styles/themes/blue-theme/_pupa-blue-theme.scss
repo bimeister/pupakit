@@ -105,7 +105,15 @@ $variables: (
   'padding_body': $padding_body,
   'margin_body': $margin_body,
   'box-shadow_hover': $box-shadow_hover,
+  'box-shadow_dropdown': $box-shadow_dropdown,
   'transition-duration_common': $transition-duration_common,
+  'transition-duration_shortest': $transition-duration_shortest,
+  'transition-duration_shorter': $transition-duration_shorter,
+  'transition-duration_short': $transition-duration_short,
+  'transition-duration_standard': $transition-duration_standard,
+  'transition-duration_complex': $transition-duration_complex,
+  'transition-duration_entering_screen': $transition-duration_entering_screen,
+  'transition-duration_leaving_screen': $transition-duration_leaving_screen,
   'transition-timing-function_common': $transition-timing-function_common,
   'opacity_hovered-button': $opacity_hovered-button
 );

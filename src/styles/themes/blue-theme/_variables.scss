@@ -106,9 +106,19 @@ $margin_body: 0;
 
 /* box-shadow */
 $box-shadow_hover: 0 rems(0.5) rems(1) 0 rgba(0, 0, 0, 0.2);
+$box-shadow_dropdown: 0 px(14) newRems(3) rgba(0, 23, 32, 0.08);
 
 /* transition-duration */
 $transition-duration_common: 0.3s;
+
+/* https://next.material-ui.com/customization/transitions/#durations */
+$transition-duration_shortest: 150ms;
+$transition-duration_shorter: 200ms;
+$transition-duration_short: 250ms;
+$transition-duration_standard: 300ms; /* most basic recommended timing */
+$transition-duration_complex: 375ms; /* this is to be used in complex animations */
+$transition-duration_entering_screen: 225ms; /* recommended when something is entering screen */
+$transition-duration_leaving_screen: 195ms; /* recommended when something is leaving screen */
 
 /* transition-timing-function */
 $transition-timing-function_common: ease;

@@ -1,0 +1,11 @@
+@import 'mixins';
+
+.dropdown-separator {
+  display: block;
+  margin: newRems(1) 0;
+  border-bottom: px(1) solid color(base-white-n400);
+
+  @include host-selector-dark-theme {
+    border-color: color(base-dark-n400);
+  }
+}

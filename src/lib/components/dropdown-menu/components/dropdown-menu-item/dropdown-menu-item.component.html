@@ -1,3 +1,11 @@
-<div class="item pupa-dropdown__item">
-  <ng-content></ng-content>
+<div
+  class="dropdown-item"
+  [class.item-active]="active$ | async"
+  [class.item-disabled]="disabled$ | async"
+  [class.item-plain]="plain$ | async"
+  [attr.tabindex]="tabindex$ | async"
+>
+  <div class="dropdown-item__content">
+    <ng-content></ng-content>
+  </div>
 </div>

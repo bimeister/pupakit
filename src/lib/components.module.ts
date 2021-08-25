@@ -38,6 +38,7 @@ import { SwitcherModule } from './components/switcher/switcher.module';
 import { TableInputModule } from './components/table-input/table-input.module';
 import { TabsModule } from './components/tabs/tabs.module';
 import { TextareaModule } from './components/textarea/textarea.module';
+import { ThemeWrapperModule } from './components/theme-wrapper/theme-wrapper.module';
 import { TileModule } from './components/tile/tile.module';
 import { TimeInputModule } from './components/time-input/time-input.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
@@ -75,6 +76,7 @@ const EXPORTS: any[] = [
   SwitcherModule,
   TabsModule,
   TextareaModule,
+  ThemeWrapperModule,
   TileModule,
   TimeInputModule,
   TooltipModule,

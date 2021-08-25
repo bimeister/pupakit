@@ -87,7 +87,7 @@ export class AppComponent implements OnDestroy {
       { title: '⚠️ Draggable', link: './draggable' },
       { title: '⚠️ Droppable', link: './droppable' },
       { title: '⚠️ Dropdown', link: './dropdown' },
-      { title: '⚠️ Dropdown menu', link: './dropdown-menu' },
+      { title: 'Dropdown menu', link: './dropdown-menu' },
       { title: 'Layout', link: './layout' },
       { title: 'Controls isPatched', link: './controls-is-patched' }
     ]

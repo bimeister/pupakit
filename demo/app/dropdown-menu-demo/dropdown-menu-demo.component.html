@@ -1,23 +1,74 @@
 <h1>Dropdown menu</h1>
-<div
-  class="wrapper"
-  style="
-    position: relative;
-    left: 200px;
-    top: 200px;
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-theme-wrapper [theme]="themeControl.value">
+      <pupa-dropdown-menu>
+        <pupa-dropdown-menu-trigger>
+          <span>{{ triggerText.value }}</span>
+        </pupa-dropdown-menu-trigger>
+        <pupa-dropdown-menu-content [horizontalPosition]="horizontalPosition.value">
+          <pupa-dropdown-menu-item>
+            <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
+            Default item
+          </pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-item [active]="true">
+            <pupa-dropdown-menu-item-icon name="add"></pupa-dropdown-menu-item-icon>
+            Active item
+          </pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-item [plain]="true">
+            <pupa-dropdown-menu-item-icon name="md-lock"></pupa-dropdown-menu-item-icon>
+            Plain item
+          </pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-item [disabled]="true">
+            <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+            Disabled item
+          </pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+          <pupa-dropdown-menu-item>
+            <div class="text">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+            </div>
+          </pupa-dropdown-menu-item>
+        </pupa-dropdown-menu-content>
+      </pupa-dropdown-menu>
+    </pupa-theme-wrapper>
+  </demo-example-viewer-content>
 
-    width: 500px;
-    height: 500px;
-  "
->
-  <pupa-dropdown-menu [contentSide]="'left'">
-    <pupa-dropdown-menu-trigger>
-      <div style="border-radius: 100%; background-color: red; width: 20px; height: 20px"></div>
-    </pupa-dropdown-menu-trigger>
-    <pupa-dropdown-menu-content>
-      <pupa-dropdown-menu-item>💁 Delete</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-item>👌 Add</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-item>🎍 Open in new tab</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
-  </pupa-dropdown-menu>
-</div>
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Properties</demo-props-group-label>
+
+    <demo-props-group-label>Theme</demo-props-group-label>
+    <pupa-radio-group [formControl]="themeControl">
+      <pupa-radio-control [value]="theme.Light">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>{{ theme.Light }}</pupa-radio-control-label>
+      </pupa-radio-control>
+
+      <pupa-radio-control [value]="theme.Dark">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>{{ theme.Dark }}</pupa-radio-control-label>
+      </pupa-radio-control>
+    </pupa-radio-group>
+
+    <demo-props-group-label>Trigger text</demo-props-group-label>
+    <pupa-textarea [formControl]="triggerText"></pupa-textarea>
+
+    <demo-props-group-label>Horizontal position</demo-props-group-label>
+    <pupa-radio-group [formControl]="horizontalPosition">
+      <pupa-radio-control [value]="'start'">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>start</pupa-radio-control-label>
+      </pupa-radio-control>
+
+      <pupa-radio-control [value]="'center'">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>center</pupa-radio-control-label>
+      </pupa-radio-control>
+
+      <pupa-radio-control [value]="'end'">
+        <pupa-radio-control-marker></pupa-radio-control-marker>
+        <pupa-radio-control-label>end</pupa-radio-control-label>
+      </pupa-radio-control>
+    </pupa-radio-group>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

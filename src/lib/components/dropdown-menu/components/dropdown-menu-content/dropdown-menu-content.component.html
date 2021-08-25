@@ -1,7 +1,20 @@
-<ng-container *ngIf="contentVisible$ | async">
-  <div #content class="content-wrapper">
-    <div class="content content_open">
+<div class="dropdown-content">
+  <ng-template
+    cdkConnectedOverlay
+    [cdkConnectedOverlayOrigin]="dropdownOverlayOrigin$ | async"
+    [cdkConnectedOverlayOpen]="isOpened$ | async"
+    [cdkConnectedOverlayPositions]="overlayPositions"
+    [cdkConnectedOverlayFlexibleDimensions]="true"
+    (overlayOutsideClick)="onOverlayOutsideClick($event)"
+  >
+    <div
+      class="dropdown-content__menu"
+      [class]="themeClass$ | async"
+      [@dropdownShow]="animationState$ | async"
+      tabindex="-1"
+      pupaAutofocus
+    >
       <ng-content></ng-content>
     </div>
-  </div>
-</ng-container>
+  </ng-template>
+</div>
