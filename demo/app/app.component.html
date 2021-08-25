@@ -5,11 +5,6 @@
     <div class="menu-burger" (tap)="showNavigationContainer()">🍔</div>
 
     <main class="content-wrapper">
-      <div class="content-wrapper__settings settings">
-        <div class="settings__label">toggle grid</div>
-        <pupa-switcher [formControl]="gridVisibleFormControl"></pupa-switcher>
-      </div>
-
       <div class="content">
         <router-outlet></router-outlet>
       </div>
@@ -19,29 +14,35 @@
 
 <ng-template #navigation>
   <nav class="navigation" [class.mobile-hide]="!(isNavigationVisible$ | async)">
-    <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
-      <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
-    </div>
-    <pupa-icon-button class="navigation__close" [color]="'light-blue'" (click)="hideNavigationContainer()">
-      <pupa-icon name="close-circle"></pupa-icon>
-    </pupa-icon-button>
-    <div class="links-container" (scroll)="processItemsScroll($event)">
-      <div class="empty-placeholder" *ngIf="isEmpty$ | async">
-        Not found
-        <div>🤷</div>
+    <div class="navigation__container">
+      <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
+        <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
       </div>
+      <pupa-icon-button class="navigation__close" [color]="'light-blue'" (click)="hideNavigationContainer()">
+        <pupa-icon name="close-circle"></pupa-icon>
+      </pupa-icon-button>
+      <div class="links-container" (scroll)="processItemsScroll($event)">
+        <div class="empty-placeholder" *ngIf="isEmpty$ | async">
+          Not found
+          <div>🤷</div>
+        </div>
 
-      <ng-container *ngFor="let group of filteredLinkGroups$ | async">
-        <h3 class="subheader">{{ group.title }}</h3>
-        <a
-          routerLinkActive="active"
-          *ngFor="let linkItem of group.linkItems"
-          [routerLink]="linkItem.link"
-          class="navigation-item"
-        >
-          {{ linkItem.title }}
-        </a>
-      </ng-container>
+        <ng-container *ngFor="let group of filteredLinkGroups$ | async">
+          <h3 class="subheader">{{ group.title }}</h3>
+          <a
+            routerLinkActive="active"
+            *ngFor="let linkItem of group.linkItems"
+            [routerLink]="linkItem.link"
+            class="navigation-item"
+          >
+            {{ linkItem.title }}
+          </a>
+        </ng-container>
+      </div>
+    </div>
+    <div class="navigation__settings settings">
+      <div class="settings__label">toggle grid</div>
+      <pupa-switcher [formControl]="gridVisibleFormControl"></pupa-switcher>
     </div>
   </nav>
 </ng-template>

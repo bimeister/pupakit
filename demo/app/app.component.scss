@@ -33,7 +33,6 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  overflow-y: auto;
   position: fixed;
   top: 0;
   left: 0;
@@ -44,6 +43,17 @@
   z-index: 11;
 
   @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    overflow-y: auto;
+
+    flex: 1;
+  }
 
   &__close {
     position: absolute;
@@ -130,9 +140,6 @@
 }
 
 .settings {
-  position: sticky;
-  top: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
