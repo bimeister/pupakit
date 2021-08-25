@@ -1,0 +1,9 @@
+@import 'mixins';
+
+.circle {
+  display: block;
+  width: px(200);
+  height: px(200);
+  background-color: color(primary-n500);
+  border-radius: 50%;
+}

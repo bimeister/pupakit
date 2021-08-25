@@ -1,0 +1,22 @@
+<div class="container">
+  <pupa-tabs class="container__tabs" (selectedTabValues)="handleTabSelection($event)">
+    <pupa-tabs-item
+      *ngFor="let tab of tabs$ | async"
+      [isActive]="tabIsActive(tab.value, activeValues$ | async)"
+      [value]="tab.value"
+      class="tab"
+    >
+      <div class="tab__name">{{ tab.name }}</div>
+    </pupa-tabs-item>
+  </pupa-tabs>
+
+  <ng-container *ngIf="activeCode$ | async as code; else previewTemplate">
+    <pupa-code [code]="activeCode$ | async"></pupa-code>
+  </ng-container>
+</div>
+
+<ng-template #previewTemplate>
+  <div class="container__preview">
+    <ng-content></ng-content>
+  </div>
+</ng-template>
