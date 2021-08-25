@@ -7,9 +7,7 @@
 
   padding: newRems(2);
   border: px(1) solid color(base-dark-n100);
-  border-radius: newRems(2);
-
-  box-shadow: 0 newRems(0.25) newRems(0.3) rgb(0 0 0 / 10%);
+  border-radius: px(1);
 
   &__preview {
     padding: newRems(2);

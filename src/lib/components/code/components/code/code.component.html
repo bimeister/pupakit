@@ -1,3 +1,10 @@
-<pre class="container">
-  <code class="container__code" [lineNumbers]="true" [highlight]="code$ | async"></code>
+<pre class="container" *ngIf="code$ | async as code">
+  <code class="container__code" [lineNumbers]="true" [highlight]="code"></code>
+  <pupa-button-icon
+    class="container__copy-button"
+    [kind]="'secondary'"
+    [icon]="'ios-copy'"
+    (click)="copyToClipBoard(code)"
+  >
+  </pupa-button-icon>
 </pre>

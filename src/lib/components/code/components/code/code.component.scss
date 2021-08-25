@@ -4,10 +4,17 @@
 
 .container {
   margin: 0;
+  position: relative;
 
   &__code {
     @include font-size-small();
     font-family: monospace;
+  }
+
+  &__copy-button {
+    position: absolute;
+    top: newRems(4);
+    right: newRems(2);
   }
 }
 
