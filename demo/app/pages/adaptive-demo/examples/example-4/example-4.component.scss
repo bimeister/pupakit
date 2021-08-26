@@ -1,0 +1,37 @@
+@import 'mixins';
+
+.block {
+  display: block;
+  width: px(100);
+  height: px(100);
+  border: px(2) solid transparent;
+  background-color: transparent;
+
+  @include xs() {
+    background-color: color(red-n500);
+  }
+
+  @include sm() {
+    background-color: color(yellow-n500);
+  }
+
+  @include md() {
+    background-color: color(primary-n500);
+  }
+
+  @include lg() {
+    background-color: color(green-n500);
+  }
+
+  @include xlg() {
+    border-color: color(red-n500);
+  }
+
+  @include xl() {
+    border-color: color(yellow-n500);
+  }
+
+  @include xxl() {
+    border-color: color(green-n500);
+  }
+}

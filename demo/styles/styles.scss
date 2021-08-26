@@ -54,17 +54,3 @@ h4 {
   @include regular();
   font-style: normal;
 }
-
-// span,
-// p,
-// td {
-//   font-size: variable(font-size_base-text);
-//   line-height: variable(line-height_base-text);
-//   @include regular();
-//   font-style: normal;
-// }
-
-// .hljs-string,
-// .hljs-keyword {
-//   font-family: monospace;
-// }

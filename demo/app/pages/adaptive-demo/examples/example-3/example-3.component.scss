@@ -1,0 +1,17 @@
+@import 'mixins';
+
+.block {
+  display: block;
+  width: px(100);
+  height: px(100);
+
+  @include landscape() {
+    border-radius: unset;
+    background-color: color(red-n500);
+  }
+
+  @include portrait() {
+    border-radius: 50%;
+    background-color: color(primary-n500);
+  }
+}

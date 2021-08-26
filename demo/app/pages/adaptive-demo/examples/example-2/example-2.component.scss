@@ -1,0 +1,25 @@
+@import 'mixins';
+
+.block {
+  display: block;
+  width: px(100);
+  height: px(100);
+  background-color: color(primary-n500);
+
+  @include width-less-than($width: 900) {
+    border-radius: 50%;
+  }
+
+  @include width-more-than($width: 1500) {
+    width: px(200);
+    height: px(200);
+  }
+
+  @include height-less-than($height: 900) {
+    background-color: color(red-n550);
+  }
+
+  @include height-more-than($height: 1000) {
+    background: linear-gradient(90deg, color(primary-n500) 0%, color(primary-n400) 35%, color(red-n500) 100%);
+  }
+}

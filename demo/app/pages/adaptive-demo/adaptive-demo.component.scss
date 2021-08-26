@@ -1,1 +1,12 @@
 @import 'mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: px(100);
+}
+
+p {
+  margin: 0;
+  margin-bottom: newRems(1);
+}

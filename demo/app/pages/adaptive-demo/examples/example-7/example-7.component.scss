@@ -1,0 +1,13 @@
+@import 'mixins';
+
+.layout {
+  @include grid-container();
+}
+
+.navigation {
+  @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+}
+
+.content {
+  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+}
