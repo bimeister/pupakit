@@ -1,0 +1,12 @@
+@import 'mixins';
+
+.block {
+  display: block;
+  width: px(100);
+  height: px(100);
+  background-color: color(primary-n500);
+
+  @include lt-xlg() {
+    border-radius: 50%;
+  }
+}

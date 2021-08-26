@@ -1,0 +1,11 @@
+@function calc-between-width($width-start, $value-start, $width-end, $value-end) {
+  @return calc(
+    #{$value-start} * 1px + (#{$value-end} - #{$value-start}) * (100vw - #{$width-start} * 1px) / (#{$width-end} - #{$width-start})
+  );
+}
+
+@function calc-between-height($height-start, $value-start, $height-end, $value-end) {
+  @return calc(
+    #{$value-start} * 1px + (#{$value-end} - #{$value-start}) * (100vh - #{$height-start} * 1px) / (#{$height-end} - #{$height-start})
+  );
+}

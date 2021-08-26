@@ -104,8 +104,6 @@ $xxlColumnsCount: 16;
   $is-save-width-before: false,
   $is-save-width-after: false
 ) {
-  #{$property}: $value-start * 1px;
-
   @include width-between($width-start, $width-end) {
     #{$property}: calc-between-width($width-start, $value-start, $width-end, $value-end);
   }
@@ -132,8 +130,6 @@ $xxlColumnsCount: 16;
   $is-save-height-before: false,
   $is-save-height-after: false
 ) {
-  #{$property}: $value-start * 1px;
-
   @include height-between($height-start, $height-end) {
     #{$property}: calc-between-height($height-start, $value-start, $height-end, $value-end);
   }
@@ -246,43 +242,43 @@ $xxlColumnsCount: 16;
 }
 
 // Ширина экрана БОЛЬШЕ, чем указанное значение
-@mixin gt-sm() {
+@mixin gt-xs() {
   @include width-more-than($smBreakPoint) {
     @content;
   }
 }
 
-@mixin gt-md() {
+@mixin gt-sm() {
   @include width-more-than($mdBreakPoint) {
     @content;
   }
 }
 
-@mixin gt-lg() {
+@mixin gt-md() {
   @include width-more-than($lgBreakPoint) {
     @content;
   }
 }
 
-@mixin gt-xlg() {
+@mixin gt-lg() {
   @include width-more-than($xlgBreakPoint) {
     @content;
   }
 }
 
-@mixin gt-xl() {
+@mixin gt-xlg() {
   @include width-more-than($xlBreakPoint) {
     @content;
   }
 }
 
-@mixin gt-xxl() {
+@mixin gt-xl() {
   @include width-more-than($xxlBreakPoint) {
     @content;
   }
 }
 
-// базовый миксин для задания размеров элементу
+// базовая функция для задания размеров элементу
 @function grid-column($columnsCount, $gutter, $size) {
   $gutter: $gutter * 1px;
   $gutters: ($columnsCount - 1) * $gutter;
@@ -290,13 +286,13 @@ $xxlColumnsCount: 16;
   @return calc((((100% - #{$gutters}) / #{$columnsCount}) * #{$size}) + #{max(($size - 1) * $gutter, 0)});
 }
 
-// базовый миксин для задания оффсета элементу
-@function grid-column-offset($columnCount, $gutter, $size) {
+// базовая функция для задания оффсета элементу
+@function grid-column-offset($columnCount, $gutter, $breakpointWidth) {
   $gutter: $gutter * 1px;
   $gutters: ($columnCount - 1) * $gutter;
-  $guttersOffset: ($size) * $gutter;
+  $guttersOffset: ($breakpointWidth) * $gutter;
 
-  @return calc((((100% - #{$gutters}) / #{$columnCount}) * #{$size}) + #{$guttersOffset});
+  @return calc((((100% - #{$gutters}) / #{$columnCount}) * #{$breakpointWidth}) + #{$guttersOffset});
 }
 
 // сколько колонок занимает элемент на каждом конкретном брейкпоинте
@@ -382,4 +378,12 @@ $xxlColumnsCount: 16;
 
   @include grid-container-offset('padding-right');
   @include grid-container-offset('padding-left');
+}
+
+@mixin hover() {
+  @media (hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
 }

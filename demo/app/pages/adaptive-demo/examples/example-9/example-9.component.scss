@@ -1,0 +1,22 @@
+@import 'mixins';
+
+.block1,
+.block2 {
+  display: block;
+  width: px(100);
+  height: px(100);
+  background-color: color(primary-n500);
+  margin-bottom: newRems(1);
+}
+
+.block1 {
+  @include hover() {
+    background-color: color(red-n500);
+  }
+}
+
+.block2 {
+  &:hover {
+    background-color: color(red-n500);
+  }
+}

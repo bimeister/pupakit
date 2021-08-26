@@ -192,13 +192,11 @@ const demoRoutes: Routes = [
   },
   {
     path: 'adaptive',
-    pathMatch: 'full',
     loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
       import('./pages/adaptive-demo/adaptive-demo.module').then(module => module.AdaptiveDemoModule)
   },
   {
     path: 'code',
-    pathMatch: 'full',
     loadChildren: (): Promise<Type<CodeDemoModule>> =>
       import('./pages/code-demo/code-demo.module').then(module => module.CodeDemoModule)
   },
