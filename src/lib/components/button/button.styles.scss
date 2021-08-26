@@ -2,21 +2,6 @@
 @import 'mixins';
 @import 'functions';
 
-@keyframes moveUpInitial {
-  to {
-    transform: translate3d(0, -105%, 0);
-  }
-}
-
-@keyframes moveUpEnd {
-  from {
-    transform: translate3d(0, 100%, 0);
-  }
-  to {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 :host {
   appearance: none;
   user-select: none;
@@ -53,7 +38,7 @@
     will-change: transform;
     border-radius: px(1);
 
-    transition: background-color 0.1s ease, transform 0.1s;
+    transition: background-color 0.2s ease, transform 0.1s;
   }
 
   &__content {
@@ -84,12 +69,6 @@
   }
 
   &:not([disabled]) {
-    @include hover() {
-      .button__content > .button__content-inner {
-        animation: moveUpInitial 0.11s forwards, moveUpEnd 0.11s forwards 0.11s;
-      }
-    }
-
     &:active {
       transition: background-color 0s;
 
@@ -304,7 +283,7 @@
     .button__background {
       background-color: transparent;
       border: px(1) solid color(base-dark-n100);
-      transition: border-color 0.2s ease;
+      transition: background-color 0.2s ease, transform 0.1s, border-color 0.2s ease;
     }
 
     &:not([disabled]) {
