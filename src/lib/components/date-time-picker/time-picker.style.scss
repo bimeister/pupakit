@@ -34,13 +34,13 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
     display: flex;
     flex-direction: column;
     height: inherit;
-    width: rems(2);
+    width: rems(2.125);
     position: relative;
 
     &:not(:first-child)::after {
       position: absolute;
       content: '';
-      left: 0;
+      left: px(-0.5);
       top: 50%;
       transform: translate(0, -50%);
       height: calc(100% - #{rems(1)});
@@ -70,6 +70,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   font-weight: normal;
   padding: rems(0.5) rems(0.5) rems(0.25) rems(0.5);
   cursor: pointer;
+  text-align: center;
   @include transition(#{'color'});
   user-select: none;
 
@@ -90,6 +91,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   height: 100%;
   width: 100%;
   z-index: 1;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 0;
