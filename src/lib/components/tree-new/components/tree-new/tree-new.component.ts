@@ -18,7 +18,16 @@ import {
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
 import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@bimeister/utilities';
-import { animationFrameScheduler, BehaviorSubject, interval, NEVER, Observable, Subject, Subscription, timer } from 'rxjs';
+import {
+  animationFrameScheduler,
+  BehaviorSubject,
+  interval,
+  NEVER,
+  Observable,
+  Subject,
+  Subscription,
+  timer
+} from 'rxjs';
 import { debounce, filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -193,7 +202,6 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
     this.isExpanded(expandedIdsList, treeItem) ? this.collapseClick(treeItem) : this.expandClick(treeItem);
   }
-
 
   private setupController(change: ComponentChange<this, TreeController>): void {
     const value: Nullable<TreeController> = change?.currentValue;
