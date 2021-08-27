@@ -18,8 +18,8 @@ import {
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
 import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@bimeister/utilities';
-import { animationFrameScheduler, BehaviorSubject, interval, Observable, Subscription } from 'rxjs';
-import { filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { animationFrameScheduler, BehaviorSubject, interval, NEVER, Observable, Subject, Subscription, timer } from 'rxjs';
+import { debounce, filter, map, mapTo, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { RangedDataSource } from '../../../../../internal/declarations/classes/ranged-data-source.class';
@@ -40,6 +40,7 @@ interface Position {
 type ScrollDirection = null | 'up' | 'down';
 
 const TREE_ITEM_SIZE_PX: number = 28;
+const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
 
 interface DragAndDropMeta {
   dragTreeItem: FlatTreeItem;
@@ -83,6 +84,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
   public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
+  private readonly expandWithDelay$: Subject<Nullable<FlatTreeItem>> = new Subject<Nullable<FlatTreeItem>>();
   private readonly subscription: Subscription = new Subscription();
 
   constructor(
@@ -99,6 +101,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
     this.subscription.add(this.getSubscriptionToSetSelected());
     this.subscription.add(this.getSubscriptionForScrollWithDrag());
     this.subscription.add(this.getSubscriptionForRangeChanges());
+    this.subscription.add(this.getSubscriptionToExpandWhileDragging());
     this.eventBus.dispatch(new QueueEvents.StartQueue());
   }
 
@@ -150,9 +153,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   public mouseEnter(treeItem: FlatTreeItem): void {
     this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
       this.dragAndDropMeta$.next({ ...dragAndDropMeta, dropTreeItem: treeItem });
-      if (treeItem.isExpandable && !treeItem.isElement) {
-        this.eventBus.dispatch(new TreeEvents.ExpandWhileDragging(treeItem.id));
-      }
+      this.expandWithDelay$.next(treeItem);
     });
   }
 
@@ -181,6 +182,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
       };
       this.eventBus.dispatch(new DataEvents.Drop(dropEventData));
     });
+    this.expandWithDelay$.next(null);
     this.dragAndDropMeta$.next(null);
   }
 
@@ -191,6 +193,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
     this.isExpanded(expandedIdsList, treeItem) ? this.collapseClick(treeItem) : this.expandClick(treeItem);
   }
+
 
   private setupController(change: ComponentChange<this, TreeController>): void {
     const value: Nullable<TreeController> = change?.currentValue;
@@ -218,6 +221,17 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
 
   private collapseClick(treeItem: FlatTreeItem): void {
     this.eventBus.dispatch(new TreeEvents.Collapse(treeItem.id));
+  }
+
+  private getSubscriptionToExpandWhileDragging(): Subscription {
+    return this.expandWithDelay$
+      .pipe(
+        debounce(node => (isNil(node) ? NEVER : timer(EXPAND_WHILE_DRAGGING_DELAY))),
+        filter(treeItem => treeItem.isExpandable && !treeItem.isElement)
+      )
+      .subscribe((treeItem: FlatTreeItem) => {
+        this.eventBus.dispatch(new TreeEvents.ExpandWhileDragging(treeItem.id));
+      });
   }
 
   private getSubscriptionToSetData(): Subscription {
