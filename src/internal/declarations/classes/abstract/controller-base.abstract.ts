@@ -69,7 +69,7 @@ export abstract class ControllerBase<O extends ControllerOptions> {
   }
 
   public setLoading(isLoading: boolean): void {
-    this.dispatchInQueue(new DataEvents.SetLoading(isLoading));
+    this.eventBus.dispatch(new DataEvents.SetLoading(isLoading));
   }
 
   public getEvents<T extends DataEventBase>(eventType: Type<T>): Observable<T> {
