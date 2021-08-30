@@ -8,8 +8,8 @@ export interface DataDisplayCollectionRef {
   readonly data$: Observable<FlatTreeItem[]>;
   readonly selectedIdsList$: Observable<string[]>;
   readonly hasDragAndDrop$: Observable<boolean>;
+  readonly isLoading$: Observable<boolean>;
 
-  getIsLoading(): Observable<boolean>;
   setData(data: FlatTreeItem[]): Observable<FlatTreeItem[]>;
   setSelectedIdsList(value: string[]): void;
   setIsLoading(value: boolean): void;

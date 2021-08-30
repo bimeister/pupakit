@@ -152,6 +152,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
       this.dragAndDropMeta$.next({
         mouseDownPosition,
         dragTreeItem,
+        dropTreeItem: dragTreeItem,
         draggableElementBoundingBox,
         dragTreeItemWidth,
         dragTreeItemIsDisplayed: false
@@ -215,7 +216,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
     this.scrollBehavior$ = this.dataDisplayCollection.scrollBehavior$;
     this.trackBy$ = this.dataDisplayCollection.trackBy$;
     this.data$ = this.dataDisplayCollection.data$;
-    this.isLoading$ = this.dataDisplayCollection.getIsLoading();
+    this.isLoading$ = this.dataDisplayCollection.isLoading$;
     this.selectedIdsList$ = this.dataDisplayCollection.selectedIdsList$;
     this.expandedIdsList$ = this.dataDisplayCollection.expandedIdsList$;
     this.hasDragAndDrop$ = this.dataDisplayCollection.hasDragAndDrop$;
