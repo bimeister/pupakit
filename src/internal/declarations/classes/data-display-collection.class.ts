@@ -1,7 +1,7 @@
 import { TrackByFunction } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, Subject, timer } from 'rxjs';
-import { debounce, take } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { DataDisplayCollectionRef } from '../interfaces/data-display-collection-ref.interface';
 import { FlatTreeItem } from './flat-tree-item.class';
 
@@ -13,10 +13,6 @@ export class DataDisplayCollection implements DataDisplayCollectionRef {
   public readonly trackBy$: Subject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(DataDisplayCollection.trackBy);
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
   public readonly hasDragAndDrop$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-
-  public getIsLoading(): Observable<boolean> {
-    return this.isLoading$.pipe(debounce((isLoading: boolean) => timer(isLoading ? 500 : 0)));
-  }
 
   public setData(data: FlatTreeItem[]): Observable<FlatTreeItem[]> {
     this.data$.next(data);
