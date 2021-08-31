@@ -5,11 +5,12 @@
 :host {
   appearance: none;
   user-select: none;
+
+  pointer-events: none;
 }
 
 /** base styles */
 .button {
-  all: unset;
   appearance: none;
   box-sizing: border-box;
 
@@ -39,6 +40,8 @@
     border-radius: px(1);
 
     transition: background-color 0.2s ease, transform 0.1s;
+
+    pointer-events: none;
   }
 
   &__content {
@@ -58,6 +61,8 @@
     display: flex;
     justify-content: center;
 
+    pointer-events: none;
+
     &.hidden {
       opacity: 0;
     }
@@ -66,6 +71,8 @@
   &__content-inner {
     display: inline-flex;
     white-space: nowrap;
+
+    pointer-events: none;
   }
 
   &:not([disabled]) {
@@ -94,6 +101,8 @@
     @include font-size-medium();
     transition: color 0.2s ease;
 
+    pointer-events: none;
+
     &.left {
       margin-right: newRems(1);
     }
@@ -121,6 +130,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    pointer-events: none;
   }
 }
 
