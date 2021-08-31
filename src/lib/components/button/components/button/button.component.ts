@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ButtonIconPosition } from '../../../../../internal/declarations/types/button-icon-position.type';
@@ -77,6 +77,13 @@ export class ButtonComponent {
     this.processIconPositionChange(changes?.iconPosition);
     this.processLoadingChange(changes?.loading);
     this.processActiveChange(changes?.active);
+  }
+
+  @HostListener('pointerup', ['$event'])
+  public handleTap(event: Event): void {
+    this.disabled$.pipe(take(1), filterTruthy()).subscribe(() => {
+      event.stopPropagation();
+    });
   }
 
   public isLeftIconPosition(iconPosition: Nullable<ButtonIconPosition>): boolean {
