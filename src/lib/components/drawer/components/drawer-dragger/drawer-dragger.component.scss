@@ -19,8 +19,8 @@
     appearance: none;
     color: color(main);
     pointer-events: all;
-    font-size: rems(1.5);
-    width: rems(1.5);
+    font-size: 6rem;
+    width: 6rem;
     z-index: 10000;
 
     @include transition(color);

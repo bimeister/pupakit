@@ -22,13 +22,13 @@ $tooltip_max-text-lines-count: 13;
 
     border-radius: px(1);
     box-sizing: border-box;
-    padding: newRems(0.5) newRems(1);
+    padding: 1rem 2rem;
     color: color('base-n0');
 
     @include font-type-paragraph();
     @include font-size-mark($paragraph: true);
 
-    line-height: newRems(2.25);
+    line-height: 4.5rem;
     max-width: newRems($tooltip_max-width-rems);
     max-height: newRems($tooltip_max-height-rems);
     overflow: auto;

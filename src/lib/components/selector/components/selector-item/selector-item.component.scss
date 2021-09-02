@@ -2,10 +2,10 @@
 @import 'themes/functions';
 
 .item {
-  border-radius: rems(0.5);
+  border-radius: 2rem;
 
-  padding: rems(0.15) rems(0.75);
-  margin: rems(0) rems(0.2);
+  padding: 0.6rem 3rem;
+  margin: 0rem 0.8rem;
 
   background: color(light);
   color: color(text);

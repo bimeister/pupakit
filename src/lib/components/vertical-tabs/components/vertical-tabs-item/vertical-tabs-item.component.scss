@@ -8,9 +8,9 @@
   display: block;
   border: 1px solid color(light);
   background: color(white);
-  border-radius: newRems(1.5);
-  padding: newRems(2) newRems(1.5);
-  margin: 0 0 newRems(1) 0;
+  border-radius: 3rem;
+  padding: 4rem 3rem;
+  margin: 0 0 2rem 0;
   cursor: pointer;
 
   &_hidden {

@@ -13,16 +13,16 @@
   cursor: pointer;
   background: color('white');
   color: color('grey-text');
-  padding: rems(0.25) rems(0.5);
+  padding: 1rem 2rem;
   user-select: none;
-  font-size: rems(1);
+  font-size: 4rem;
   display: flex;
   align-items: center;
 
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  border-radius: rems(0.25);
+  border-radius: 1rem;
 
   &_picked,
   &:hover {

@@ -13,9 +13,9 @@
   cursor: pointer;
   padding: 0;
   outline: none;
-  width: rems(1.5);
-  height: rems(1.5);
-  font-size: rems(0.75);
+  width: 6rem;
+  height: 6rem;
+  font-size: 3rem;
   border: none;
   border-radius: 50%;
   @include regular();
@@ -23,27 +23,27 @@
   @include inline-flex-container(row, center, space-evenly, nowrap);
 
   &_small {
-    width: rems(1.5);
-    height: rems(1.5);
-    font-size: rems(0.75);
+    width: 6rem;
+    height: 6rem;
+    font-size: 3rem;
   }
 
   &_small-to-medium {
-    width: rems(2);
-    height: rems(2);
-    font-size: rems(1);
+    width: 8rem;
+    height: 8rem;
+    font-size: 4rem;
   }
 
   &_medium {
-    width: rems(2.25);
-    height: rems(2.25);
-    font-size: rems(1.25);
+    width: 9rem;
+    height: 9rem;
+    font-size: 5rem;
   }
 
   &_large {
-    width: rems(4);
-    height: rems(4);
-    font-size: rems(2.375);
+    width: 16rem;
+    height: 16rem;
+    font-size: 9.5rem;
   }
 
   &_light {
@@ -76,7 +76,7 @@
   }
 
   &_float {
-    box-shadow: 0 rems(0.75) rems(2) 0 rgba(color(black-rgb), 0.15);
+    box-shadow: 0 3rem 8rem 0 rgba(color(black-rgb), 0.15);
   }
 
   &:hover:not(:disabled) {
@@ -86,8 +86,8 @@
 
   &_fixed {
     position: fixed;
-    bottom: rems(2);
-    right: rems(2);
+    bottom: 8rem;
+    right: 8rem;
   }
 }
 

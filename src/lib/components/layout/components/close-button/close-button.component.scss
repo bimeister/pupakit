@@ -3,19 +3,19 @@
 
 :host {
   display: block;
-  width: rems(1.8);
-  height: rems(1.8);
+  width: 7.2rem;
+  height: 7.2rem;
 }
 
 .close-button {
   display: flex;
   border: 1px solid color(cadet-blue);
-  border-radius: rems(0.3);
+  border-radius: 1.2rem;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  width: rems(1.8);
-  height: rems(1.8);
+  width: 7.2rem;
+  height: 7.2rem;
   outline: none;
   margin: 0;
   padding: 0;
@@ -24,8 +24,8 @@
     background-color: color(light);
   }
   & .icon {
-    width: rems(1.2);
-    height: rems(1.2);
+    width: 4.8rem;
+    height: 4.8rem;
     color: color(cadet-blue);
   }
 }

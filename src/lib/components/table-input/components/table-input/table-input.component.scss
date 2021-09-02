@@ -24,7 +24,7 @@
 
   background-color: transparent;
   outline: none;
-  border-radius: rems(0.5);
+  border-radius: 2rem;
   border: 1px solid transparent;
   overflow-y: hidden;
 
@@ -32,15 +32,15 @@
     width: 100%;
 
     box-sizing: border-box;
-    padding: 0 rems(2) 0 rems(0.5);
+    padding: 0 8rem 0 2rem;
 
     background-color: transparent;
     border: 1px solid color(grey-apple);
-    border-radius: rems(0.5);
+    border-radius: 2rem;
     color: #464646; // solve this
     outline: none;
-    height: rems(2);
-    font-size: rems(1);
+    height: 8rem;
+    font-size: 4rem;
     line-height: 1;
 
     @include regular();
@@ -100,22 +100,22 @@
 
   &__icon {
     position: absolute;
-    right: rems(0.5);
+    right: 2rem;
     top: 50%;
     transform: translateY(-50%);
     opacity: 0;
     color: color(main);
-    font-size: rems(1);
+    font-size: 4rem;
 
     @include transition(#{'opacity'});
   }
 
   &__icon-error {
     position: absolute;
-    right: rems(0.5);
+    right: 2rem;
     top: 50%;
     transform: translateY(-50%);
     color: color(error);
-    font-size: rems(1);
+    font-size: 4rem;
   }
 }

@@ -15,7 +15,7 @@
   color: color('grey-text');
   padding: 0 px(8);
   user-select: none;
-  font-size: rems(1);
+  font-size: 4rem;
 
   overflow: hidden;
   text-overflow: ellipsis;
@@ -23,5 +23,5 @@
 }
 
 .checkmark {
-  padding-top: newRems(0.5);
+  padding-top: 1rem;
 }

@@ -6,11 +6,11 @@
   position: relative;
 
   &__menu {
-    padding: newRems(1) 0;
-    margin-top: newRems(0.5);
+    padding: 2rem 0;
+    margin-top: 1rem;
     border-radius: px(1);
-    max-height: newRems(36);
-    max-width: newRems(38);
+    max-height: 72rem;
+    max-width: 76rem;
     box-shadow: variable(box-shadow_dropdown);
     background-color: rgba(color(white-rgb), 0.8);
     backdrop-filter: blur(px(40));

@@ -2,7 +2,7 @@
 @import 'mixins';
 @import 'functions';
 
-$width_switcher: rems(2.8125);
+$width_switcher: 11.25rem;
 $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text));
 
 :host {
@@ -18,7 +18,7 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
 
 .search-field {
   z-index: 555;
-  height: rems(2);
+  height: 8rem;
   width: $width_switcher;
   position: relative;
   @include transition(width);
@@ -30,7 +30,7 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
   }
 
   &:not(.search-field_expandable) {
-    width: rems(16);
+    width: 64rem;
   }
 
   &:not(.search-field_expandable):not(.search-field_disabled).search-field_empty:hover {
@@ -58,7 +58,7 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
 
   .search-field__control {
     width: $width_switcher;
-    padding: rems(0.5);
+    padding: 2rem;
   }
 }
 
@@ -83,8 +83,8 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
   padding: 0;
   margin: 0;
   width: $width_switcher;
-  height: rems(2);
-  border-radius: rems(1.375);
+  height: 8rem;
+  border-radius: 5.5rem;
   background: transparent;
   border: none;
   outline: none;
@@ -113,15 +113,15 @@ $padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text)
 .search-field__control {
   z-index: 1002;
   order: 1;
-  height: rems(2);
+  height: 8rem;
   width: 100%;
   box-sizing: border-box;
-  border-radius: rems(1.375);
+  border-radius: 5.5rem;
   background: color(light);
   border: none;
   outline: none;
   font-size: variable(font-size_base-text);
-  padding: rems(0.5) $width_switcher rems(0.5) rems(0.75);
+  padding: 2rem $width_switcher 2rem 3rem;
   position: absolute;
   top: 0;
   right: 0;

@@ -10,8 +10,8 @@ $padding_side: px(10);
 }
 
 .select-tabs-item {
-  border-radius: rems(0.5);
-  padding: rems(0.25) $padding_side rems(0.25) $padding_side;
+  border-radius: 2rem;
+  padding: 1rem $padding_side 1rem $padding_side;
   cursor: pointer;
   @include ellipsis-text-overflow;
 

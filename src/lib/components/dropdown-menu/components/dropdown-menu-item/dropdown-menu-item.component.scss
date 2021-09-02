@@ -27,7 +27,7 @@
 
   &:hover:not(.item-disabled):not(.item-plain) {
     --dropdown-item-icon-color: #{color(base-n600)};
-    --dropdown-item-transform-x: #{newRems(1)};
+    --dropdown-item-transform-x: #{2rem};
     background-color: color(base-white-n400);
 
     @include host-selector-dark-theme {

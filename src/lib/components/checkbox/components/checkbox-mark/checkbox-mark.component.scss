@@ -9,12 +9,12 @@
 .checkbox {
   box-sizing: content-box;
   @include flex-container(row, center, center, nowrap);
-  width: newRems(1.75);
-  height: newRems(1.75);
+  width: 3.5rem;
+  height: 3.5rem;
   border: 1px solid color(subdark);
   background: color(white);
   cursor: pointer;
-  border-radius: newRems(0.5);
+  border-radius: 1rem;
   overflow: hidden;
   @include transition(#{background, border});
   flex-shrink: 0;
@@ -24,7 +24,7 @@
     stroke: color(white);
   }
   &_with-label {
-    margin-top: newRems(0.5);
+    margin-top: 1rem;
   }
   &_disabled {
     cursor: not-allowed;
@@ -36,8 +36,8 @@
 
     .checkbox__marker {
       display: flex;
-      font-size: newRems(1.25);
-      height: newRems(1.25);
+      font-size: 2.5rem;
+      height: 2.5rem;
       color: color(active);
     }
   }
@@ -81,8 +81,8 @@
 
 .checkbox__marker {
   display: flex;
-  font-size: newRems(1.125);
-  height: newRems(1.125);
+  font-size: 2.25rem;
+  height: 2.25rem;
   user-select: none;
   color: color(white);
 }

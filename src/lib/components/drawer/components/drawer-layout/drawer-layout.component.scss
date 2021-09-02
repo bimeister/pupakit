@@ -18,9 +18,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: rems(1);
+    margin-bottom: 4rem;
     flex-shrink: 0;
-    padding: rems(1) rems(1) 0 rems(1);
+    padding: 4rem 4rem 0 4rem;
 
     &__title {
       display: block;
@@ -33,13 +33,13 @@
     }
 
     &__button {
-      margin-left: rems(0.5);
+      margin-left: 2rem;
     }
   }
 
   &__content {
     height: 100%;
-    padding: 0 rems(1) 0 rems(1);
+    padding: 0 4rem 0 4rem;
     overflow-x: hidden;
     overflow-y: auto;
   }

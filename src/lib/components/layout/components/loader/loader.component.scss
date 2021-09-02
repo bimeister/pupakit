@@ -2,12 +2,12 @@
 @import 'mixins';
 
 :host {
-  margin: rems(1);
+  margin: 4rem;
   z-index: 9000;
-  padding: 0 rems(0.625);
+  padding: 0 2.5rem;
   box-sizing: border-box;
-  width: rems(9.0625);
-  height: rems(9.0625);
+  width: 36.25rem;
+  height: 36.25rem;
   user-select: none;
   pointer-events: none;
   @include flex-container(row, center, center, nowrap);

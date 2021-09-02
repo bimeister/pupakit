@@ -17,7 +17,7 @@ $width_time: px(74);
 
   background-color: transparent;
   outline: none;
-  border-radius: rems(0.5);
+  border-radius: 2rem;
   border: 1px solid transparent;
   overflow-y: hidden;
 }
@@ -26,15 +26,15 @@ $width_time: px(74);
   width: 100%;
 
   box-sizing: border-box;
-  padding: 0 rems(2) 0 rems(0.5);
+  padding: 0 8rem 0 2rem;
 
   background-color: color(white);
   border: 1px solid color(grey-ivory);
-  border-radius: rems(0.5);
+  border-radius: 2rem;
   color: color(text);
   outline: none;
-  height: rems(2);
-  font-size: rems(1);
+  height: 8rem;
+  font-size: 4rem;
   line-height: 1;
 
   @include regular();
@@ -66,29 +66,29 @@ $width_time: px(74);
   }
 
   &__text {
-    max-width: calc(100% - #{rems(1)});
+    max-width: calc(100% - #{4rem});
     @include ellipsis-text-overflow;
   }
 
   &__medium {
-    height: rems(2);
-    font-size: rems(1);
+    height: 8rem;
+    font-size: 4rem;
     line-height: 1;
-    padding: rems(0.5) rems(0.75);
+    padding: 2rem 3rem;
   }
 
   &__small {
-    height: rems(1.5);
+    height: 6rem;
     font-size: variable(font-size_base-text);
     line-height: 1.14;
-    padding: rems(0.25) rems(0.5);
+    padding: 1rem 2rem;
   }
 
   &__large {
-    height: rems(2.5);
+    height: 10rem;
     font-size: px(24);
     line-height: 1.08;
-    padding: rems(0.5) rems(0.75);
+    padding: 2rem 3rem;
     @include medium();
   }
 
@@ -123,10 +123,10 @@ $width_time: px(74);
 
 .icon {
   position: absolute;
-  right: rems(0.5);
+  right: 2rem;
   color: color(success);
-  font-size: rems(1);
-  height: rems(1);
+  font-size: 4rem;
+  height: 4rem;
   pointer-events: none;
 
   &__calendar {

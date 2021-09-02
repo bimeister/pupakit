@@ -4,7 +4,7 @@
 
 $font-size__digit: px(14);
 $max-height__container: px(235);
-$box-shadow: 0 rems(0.5) px(24) 0 rgba(0, 0, 0, 0.1);
+$box-shadow: 0 2rem px(24) 0 rgba(0, 0, 0, 0.1);
 $height_gradient: px(38);
 $width_time-picker: px(80);
 $width_time-picker-seconds: px(112);
@@ -14,7 +14,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   display: flex;
   height: $max-height__container;
   box-shadow: $box-shadow;
-  border-radius: rems(0.5);
+  border-radius: 2rem;
   background: color(white);
   width: $width_time-picker;
 
@@ -34,7 +34,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
     display: flex;
     flex-direction: column;
     height: inherit;
-    width: rems(2.125);
+    width: 8.5rem;
     position: relative;
 
     &:not(:first-child)::after {
@@ -43,7 +43,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
       left: px(-0.5);
       top: 50%;
       transform: translate(0, -50%);
-      height: calc(100% - #{rems(1)});
+      height: calc(100% - #{4rem});
       width: px(1);
       z-index: 2;
       background-color: color(light);
@@ -65,17 +65,17 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
 
 .digit {
   font-size: $font-size__digit;
-  line-height: rems(1);
+  line-height: 4rem;
   color: color(text);
   font-weight: normal;
-  padding: rems(0.5) rems(0.5) rems(0.25) rems(0.5);
+  padding: 2rem 2rem 1rem 2rem;
   cursor: pointer;
   text-align: center;
   @include transition(#{'color'});
   user-select: none;
 
   &:last-child {
-    padding-bottom: rems(1);
+    padding-bottom: 4rem;
   }
 
   &:hover {

@@ -2,14 +2,14 @@
 @import 'mixins';
 @import 'functions';
 
-$padding_days-area-container: 0 rems(1) rems(0.5) rems(1);
-$padding_days-area: 0 rems(1);
+$padding_days-area-container: 0 4rem 2rem 4rem;
+$padding_days-area: 0 4rem;
 $margin_days-line: 0 0 px(6) 0;
 $width_days-line-item: calc(100% / 7);
-$font-size_days-line-item: rems(0.75);
+$font-size_days-line-item: 3rem;
 $font-weight_days-line-item: 600;
 $height_date: px(24);
-$box-shadow: 0 rems(0.5) rems(2) 0 rgba(0, 0, 0, 0.1);
+$box-shadow: 0 2rem 8rem 0 rgba(0, 0, 0, 0.1);
 
 $width_year: calc(100% / 5);
 $height_year: px(24);
@@ -20,7 +20,7 @@ $height_month: px(24);
 .date-picker {
   all: unset;
   box-shadow: $box-shadow;
-  border-radius: rems(0.5);
+  border-radius: 2rem;
   background: color(white);
   @include flex-container(column, stretch, stretch, nowrap);
 
@@ -33,7 +33,7 @@ $height_month: px(24);
   }
 
   &__week-days {
-    height: rems(1.5625);
+    height: 6.25rem;
     width: 100%;
     padding: $padding_days-area;
     margin: $margin_days-line;
@@ -202,7 +202,7 @@ $height_month: px(24);
 .date-inner {
   font-size: $font-size_days-line-item;
   color: color(text);
-  line-height: rems(1);
+  line-height: 4rem;
   font-weight: normal;
   position: relative;
 
@@ -244,7 +244,7 @@ $height_month: px(24);
   font-size: $font-size_days-line-item;
   margin: px(3) 0;
   color: color(text);
-  line-height: rems(1);
+  line-height: 4rem;
   font-weight: normal;
   user-select: none;
   border-radius: $height_year;
@@ -279,7 +279,7 @@ $height_month: px(24);
   font-size: $font-size_days-line-item;
   margin: px(3) 0;
   color: color(text);
-  line-height: rems(1);
+  line-height: 4rem;
   font-weight: normal;
   user-select: none;
   border-radius: $height_month;
@@ -296,7 +296,7 @@ $height_month: px(24);
 
 .arrow-button {
   all: unset;
-  height: rems(1.25);
+  height: 5rem;
   background: none;
   outline: none;
   border: none;
@@ -304,7 +304,7 @@ $height_month: px(24);
   margin: 0;
   padding: 0;
   font-weight: $font-weight_days-line-item;
-  font-size: rems(1);
+  font-size: 4rem;
   color: color(grey-apple);
   cursor: pointer;
   display: flex;

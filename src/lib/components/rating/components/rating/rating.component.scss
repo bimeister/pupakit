@@ -7,7 +7,7 @@
 
 .pupa-star {
   display: block;
-  font-size: rems(3);
+  font-size: 12rem;
   color: color(active);
 
   &.clickable {
@@ -20,10 +20,10 @@
   }
 
   &.medium {
-    font-size: rems(2.5);
+    font-size: 10rem;
   }
 
   &.small {
-    font-size: rems(2);
+    font-size: 8rem;
   }
 }
