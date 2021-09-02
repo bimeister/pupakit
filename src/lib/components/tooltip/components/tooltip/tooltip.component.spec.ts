@@ -109,7 +109,7 @@ describe('tooltip.component.ts', () => {
   );
 
   it(
-    'tooltip width should be less or equal newRems(63) and height should be less or equal newRems(32) with large text',
+    'tooltip width should be less or equal 126rem and height should be less or equal 64rem with large text',
     (done: jest.DoneCallback) => {
       of(VOID)
         .pipe(
@@ -119,8 +119,8 @@ describe('tooltip.component.ts', () => {
           switchMap((elementHandle: ElementHandle<HTMLElement>) => from(elementHandle.boundingBox()))
         )
         .subscribe((boundingBox: BoundingBox) => {
-          expect(boundingBox.width).toBeLessThanOrEqual(63 * 8);
-          expect(boundingBox.height).toBeLessThanOrEqual(32 * 8);
+          expect(boundingBox.width).toBeLessThanOrEqual(126 * 4);
+          expect(boundingBox.height).toBeLessThanOrEqual(64 * 4);
           done();
         });
     },

@@ -1,11 +1,3 @@
-@function rems($rems) {
-  @return calc(#{$rems * 16}px);
-}
-
-@function newRems($rems) {
-  @return calc(#{$rems * 8}px);
-}
-
 @function px($px) {
   @return calc(#{$px}px);
 }

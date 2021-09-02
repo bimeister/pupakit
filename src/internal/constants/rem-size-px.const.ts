@@ -1,1 +1,1 @@
-export const remSizePx: number = 16;
+export const remSizePx: number = 4;

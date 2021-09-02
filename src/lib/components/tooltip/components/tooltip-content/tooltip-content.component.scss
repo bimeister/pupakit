@@ -3,8 +3,6 @@
 @import 'mixins';
 
 $tooltip_background-color: rgba(color(base-n700-rgb), 0.8);
-$tooltip_max-width-rems: 63;
-$tooltip_max-height-rems: 32;
 $tooltip_max-text-lines-count: 13;
 
 .tooltip {
@@ -29,8 +27,8 @@ $tooltip_max-text-lines-count: 13;
     @include font-size-mark($paragraph: true);
 
     line-height: 4.5rem;
-    max-width: newRems($tooltip_max-width-rems);
-    max-height: newRems($tooltip_max-height-rems);
+    max-width: 126rem;
+    max-height: 64rem;
     overflow: auto;
   }
 

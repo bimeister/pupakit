@@ -29,10 +29,8 @@ import { SearchFieldKind } from '../../../../../internal/declarations/types/sear
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('controlExpanded', [
-      // tslint:disable: no-magic-numbers
-      state('false', style({ width: `${2.8125 * remSizePx}px` })),
+      state('false', style({ width: `${11.25 * remSizePx}px` })),
       state('true', style({ width: `100%` })),
-      // tslint:enable: no-magic-numbers
       transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
       transition('true => false', animate('0.2s ease-in-out'))
     ])
