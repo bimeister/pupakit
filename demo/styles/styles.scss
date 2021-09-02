@@ -8,12 +8,13 @@
 @include scrollbar();
 
 html {
-  font-size: variable(font-size_root);
-  @include regular();
   color: color(base-n600);
+  font-size: 4px;
 }
 
 body {
+  font-size: variable(font-size_root);
+  @include regular();
   padding: variable(padding_body);
   margin: 0;
   overscroll-behavior: none;

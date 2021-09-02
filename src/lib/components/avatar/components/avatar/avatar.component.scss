@@ -2,9 +2,6 @@
 @import 'mixins';
 @import 'functions';
 
-$width_avatar: newRems(2);
-$font-size: newRems(1);
-
 .avatar {
   display: flex;
   flex-direction: row;
@@ -23,14 +20,14 @@ $font-size: newRems(1);
   user-select: none;
 
   &__small {
-    width: newRems(2);
-    height: newRems(2);
+    width: 4rem;
+    height: 4rem;
     font-size: px(12);
   }
 
   &__medium {
-    width: newRems(3);
-    height: newRems(3);
-    font-size: newRems(2);
+    width: 6rem;
+    height: 6rem;
+    font-size: 4rem;
   }
 }
