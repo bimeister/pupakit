@@ -1,8 +1,8 @@
 @import 'mixins';
 
 .block {
-  width: px(100);
-  height: px(100);
+  width: 100px;
+  height: 100px;
   background-color: color(primary-n500);
 
   @include width-between($min-width: 1500, $max-width: 1600) {

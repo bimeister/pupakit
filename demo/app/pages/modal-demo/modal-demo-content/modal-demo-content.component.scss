@@ -3,8 +3,8 @@
 
 :host {
   display: block;
-  width: px(400);
-  height: px(400);
+  width: 400px;
+  height: 400px;
   position: relative;
 }
 
@@ -13,7 +13,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: px(10);
+  height: 10px;
 }
 
 .sample-content {
@@ -22,6 +22,6 @@
 
 .placeholder {
   width: 100%;
-  height: px(800);
+  height: 800px;
   background: color(black);
 }
