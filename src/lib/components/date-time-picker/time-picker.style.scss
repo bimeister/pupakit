@@ -2,12 +2,12 @@
 @import 'mixins';
 @import 'functions';
 
-$font-size__digit: px(14);
-$max-height__container: px(235);
-$box-shadow: 0 2rem px(24) 0 rgba(0, 0, 0, 0.1);
-$height_gradient: px(38);
-$width_time-picker: px(80);
-$width_time-picker-seconds: px(112);
+$font-size__digit: 14px;
+$max-height__container: 235px;
+$box-shadow: 0 2rem 24px 0 rgba(0, 0, 0, 0.1);
+$height_gradient: 38px;
+$width_time-picker: 80px;
+$width_time-picker-seconds: 112px;
 $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
 
 .time-picker {
@@ -44,7 +44,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
       top: 50%;
       transform: translate(0, -50%);
       height: calc(100% - #{4rem});
-      width: px(1);
+      width: 1px;
       z-index: 2;
       background-color: color(light);
     }

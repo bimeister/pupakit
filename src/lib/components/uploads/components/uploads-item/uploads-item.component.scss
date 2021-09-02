@@ -3,14 +3,14 @@
 
 :host {
   display: block;
-  margin-bottom: px(6);
+  margin-bottom: 6px;
 }
 
 .uploads-item {
   display: grid;
-  grid-template-columns: px(18) 1fr px(92) px(36);
-  grid-template-rows: px(18);
-  grid-gap: px(6);
+  grid-template-columns: 18px 1fr 92px 36px;
+  grid-template-rows: 18px;
+  grid-gap: 6px;
 
   &__icon {
     display: flex;
@@ -23,7 +23,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     color: color(main);
-    line-height: px(18);
+    line-height: 18px;
   }
 
   &__size {

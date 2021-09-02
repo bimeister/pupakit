@@ -8,14 +8,14 @@
 
 .item {
   box-sizing: border-box;
-  height: px(24);
-  width: calc(100% - #{px(4)});
-  margin: 0 px(2);
+  height: 24px;
+  width: calc(100% - #{4px});
+  margin: 0 2px;
   cursor: pointer;
   background: color('white');
   color: color('grey-text');
-  border-radius: px(4);
-  padding: 0 px(8);
+  border-radius: 4px;
+  padding: 0 8px;
   user-select: none;
   font-size: 4rem;
 

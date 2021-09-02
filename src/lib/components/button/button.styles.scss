@@ -23,7 +23,7 @@
   position: relative;
   display: inline-block;
 
-  border-radius: px(1);
+  border-radius: 1px;
   padding: 2rem 3rem;
 
   user-select: none;
@@ -39,7 +39,7 @@
     bottom: 0;
     transform: scale(1);
     will-change: transform;
-    border-radius: px(1);
+    border-radius: 1px;
 
     transition: background-color 0.2s ease, transform 0.1s;
 
@@ -49,7 +49,7 @@
   &__content {
     @include font-size-small();
     @include font-type-caption();
-    line-height: px(17);
+    line-height: 17px;
     user-select: none;
 
     z-index: 1;
@@ -93,8 +93,8 @@
         right: px(-2);
         bottom: px(-2);
 
-        border: px(2) solid color(primary-n400);
-        border-radius: px(2);
+        border: 2px solid color(primary-n400);
+        border-radius: 2px;
       }
     }
   }
@@ -295,7 +295,7 @@
   &_border {
     .button__background {
       background-color: transparent;
-      border: px(1) solid color(base-dark-n100);
+      border: 1px solid color(base-dark-n100);
       transition: background-color 0.2s ease, transform 0.1s, border-color 0.2s ease;
     }
 
@@ -357,7 +357,7 @@
     &.button_border {
       .button__background {
         background-color: transparent;
-        border: px(1) solid color(base-dark-n100);
+        border: 1px solid color(base-dark-n100);
       }
     }
   }
@@ -419,7 +419,7 @@
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
-        border: px(1) solid color(base-dark-n400);
+        border: 1px solid color(base-dark-n400);
       }
     }
   }
@@ -447,7 +447,7 @@
       &.button_border {
         .button__background {
           background-color: transparent;
-          border: px(1) solid color(base-dark-n500);
+          border: 1px solid color(base-dark-n500);
         }
       }
     }

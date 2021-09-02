@@ -19,13 +19,13 @@
 
   cursor: pointer;
 
-  border-radius: px(8);
-  border: px(1) solid color('light');
+  border-radius: 8px;
+  border: 1px solid color('light');
 
   background: color('white');
   color: color('main');
 
-  padding: px(6) px(12);
+  padding: 6px 12px;
 
   $this: &;
 
@@ -46,7 +46,7 @@
   }
 
   &__text {
-    padding: 0 px(6) 0 0;
+    padding: 0 6px 0 0;
 
     width: 100%;
 

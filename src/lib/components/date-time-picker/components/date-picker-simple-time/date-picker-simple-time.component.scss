@@ -1,7 +1,7 @@
 @import '../../date-picker.style.scss';
 
-$width_time-seconds: px(110);
-$width_time: px(74);
+$width_time-seconds: 110px;
+$width_time: 74px;
 
 .container {
   display: flex;
@@ -9,7 +9,7 @@ $width_time: px(74);
 
 .calendar {
   flex: 1;
-  border-right: px(1) solid color(light);
+  border-right: 1px solid color(light);
 }
 
 .time {

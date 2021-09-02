@@ -61,7 +61,7 @@ $header-cell-moving-background-color: color(light);
   }
 
   .ag-shadow-overlay {
-    box-shadow: 0 px(10) px(24) 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 24px 0 rgba(0, 0, 0, 0.1);
   }
 
   .ag-pinned-left-header .ag-header-cell:last-of-type::after {
@@ -142,7 +142,7 @@ $header-cell-moving-background-color: color(light);
     }
 
     .ag-row {
-      border-top: px(1) solid color(light);
+      border-top: 1px solid color(light);
     }
 
     .ag-row-selected {
@@ -152,7 +152,7 @@ $header-cell-moving-background-color: color(light);
 
   &.pupagrid-theme-boxed {
     box-sizing: border-box;
-    padding: 0 px(2);
+    padding: 0 2px;
 
     .datagrid {
       border: none;
@@ -160,7 +160,7 @@ $header-cell-moving-background-color: color(light);
 
     .ag-header {
       background-color: color(white);
-      padding: 0 px(10);
+      padding: 0 10px;
       border-bottom: 0;
     }
 
@@ -191,13 +191,13 @@ $header-cell-moving-background-color: color(light);
 
     .ag-header-cell-text {
       color: color(grey-light);
-      padding-right: px(3);
+      padding-right: 3px;
     }
 
     .ag-row {
       border-radius: 2rem;
       border: none;
-      border-bottom: px(2) solid color(white);
+      border-bottom: 2px solid color(white);
       box-sizing: border-box;
       background: color(white);
     }
@@ -215,7 +215,7 @@ $header-cell-moving-background-color: color(light);
     }
 
     .ag-cell {
-      padding: px(5) px(9);
+      padding: 5px 9px;
       box-sizing: border-box;
       overflow: hidden;
       line-height: 1;
