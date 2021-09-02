@@ -47,18 +47,18 @@ $lineHeightHeaderParagraphMobile: 28;
 /* Font size */
 
 @mixin font-size-mark($paragraph: false) {
-  font-size: px($fontSizeMark);
-  line-height: if($paragraph, px($lineHeightMarkParagraph), px($lineHeightMark));
+  font-size: $fontSizeMark * 1px;
+  line-height: if($paragraph, $lineHeightMarkParagraph * 1px, $lineHeightMark * 1px);
 }
 
 @mixin font-size-small($paragraph: false) {
-  font-size: px($fontSizeSmall);
-  line-height: if($paragraph, px($lineHeightSmallParagraph), px($lineHeightSmall));
+  font-size: $fontSizeSmall * 1px;
+  line-height: if($paragraph, $lineHeightSmallParagraph * 1px, $lineHeightSmall * 1px);
 }
 
 @mixin font-size-medium($paragraph: false) {
-  font-size: px($fontSizeMedium);
-  line-height: if($paragraph, px($lineHeightMediumParagraph), px($lineHeightMedium));
+  font-size: $fontSizeMedium * 1px;
+  line-height: if($paragraph, $lineHeightMediumParagraph * 1px, $lineHeightMedium * 1px);
 }
 
 @mixin font-size-large($paragraph: false) {

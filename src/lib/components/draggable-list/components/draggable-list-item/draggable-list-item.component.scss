@@ -32,11 +32,11 @@
   border-radius: 2px;
 
   &--top {
-    top: px(-1);
+    top: -1px;
   }
 
   &--bottom {
-    bottom: px(-1);
+    bottom: -1px;
   }
 }
 

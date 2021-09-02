@@ -88,10 +88,10 @@
 
     &:focus-visible {
       .button__background {
-        top: px(-2);
-        left: px(-2);
-        right: px(-2);
-        bottom: px(-2);
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
 
         border: 2px solid color(primary-n400);
         border-radius: 2px;
