@@ -17,7 +17,7 @@
   &.clone {
     position: fixed;
     z-index: 3;
-    border-radius: px(8);
+    border-radius: 8px;
     width: fit-content;
     box-shadow: variable(box-shadow_hover);
   }
@@ -25,11 +25,11 @@
 
 .placeholder {
   position: absolute;
-  height: px(2);
+  height: 2px;
   width: 99%;
   background: color(main);
   pointer-events: none;
-  border-radius: px(2);
+  border-radius: 2px;
 
   &--top {
     top: px(-1);

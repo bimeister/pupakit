@@ -8,15 +8,15 @@
   &__menu {
     padding: 2rem 0;
     margin-top: 1rem;
-    border-radius: px(1);
+    border-radius: 1px;
     max-height: 72rem;
     max-width: 76rem;
     box-shadow: variable(box-shadow_dropdown);
     background-color: rgba(color(white-rgb), 0.8);
-    backdrop-filter: blur(px(40));
+    backdrop-filter: blur(40px);
     user-select: none;
     overflow: auto;
-    border: px(1) solid color(base-white-n400);
+    border: 1px solid color(base-white-n400);
 
     &:focus {
       outline: none;

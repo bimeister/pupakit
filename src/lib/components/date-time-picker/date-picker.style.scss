@@ -4,18 +4,18 @@
 
 $padding_days-area-container: 0 4rem 2rem 4rem;
 $padding_days-area: 0 4rem;
-$margin_days-line: 0 0 px(6) 0;
+$margin_days-line: 0 0 6px 0;
 $width_days-line-item: calc(100% / 7);
 $font-size_days-line-item: 3rem;
 $font-weight_days-line-item: 600;
-$height_date: px(24);
+$height_date: 24px;
 $box-shadow: 0 2rem 8rem 0 rgba(0, 0, 0, 0.1);
 
 $width_year: calc(100% / 5);
-$height_year: px(24);
+$height_year: 24px;
 
-$width_month: px(64);
-$height_month: px(24);
+$width_month: 64px;
+$height_month: 24px;
 
 .date-picker {
   all: unset;
@@ -25,7 +25,7 @@ $height_month: px(24);
   @include flex-container(column, stretch, stretch, nowrap);
 
   &__header {
-    height: px(36);
+    height: 36px;
     width: 100%;
     box-sizing: border-box;
     padding: $padding_days-area;
@@ -101,7 +101,7 @@ $height_month: px(24);
   width: $width_days-line-item;
   height: $height_date;
 
-  margin-bottom: px(6);
+  margin-bottom: 6px;
 
   padding: 0;
 
@@ -242,7 +242,7 @@ $height_month: px(24);
   width: $width_year;
   height: $height_year;
   font-size: $font-size_days-line-item;
-  margin: px(3) 0;
+  margin: 3px 0;
   color: color(text);
   line-height: 4rem;
   font-weight: normal;
@@ -277,7 +277,7 @@ $height_month: px(24);
   width: $width_month;
   height: $height_month;
   font-size: $font-size_days-line-item;
-  margin: px(3) 0;
+  margin: 3px 0;
   color: color(text);
   line-height: 4rem;
   font-weight: normal;

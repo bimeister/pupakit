@@ -1,6 +1,6 @@
 @import '../../date-picker.style.scss';
 
-$max-height_container: px(178);
+$max-height_container: 178px;
 
 :host {
   @include flex-container(row, flex-start, space-between, wrap);

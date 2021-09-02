@@ -22,13 +22,13 @@ $width_icon: 4rem;
 
   cursor: pointer;
 
-  border-radius: px(8);
-  border: px(1) solid color('grey-ivory');
+  border-radius: 8px;
+  border: 1px solid color('grey-ivory');
 
   background-color: color('white');
   color: color('text');
 
-  padding: px(6) px(10) px(6) px(8);
+  padding: 6px 10px 6px 8px;
 
   &:hover {
     border-color: color('grey-light');
@@ -58,7 +58,7 @@ $width_icon: 4rem;
   }
 
   &__text {
-    padding: 0 px(6) 0 0;
+    padding: 0 6px 0 0;
 
     width: calc(100% - #{$width_icon});
 
@@ -83,7 +83,7 @@ $width_icon: 4rem;
     justify-content: center;
 
     color: inherit;
-    font-size: px(18);
+    font-size: 18px;
     margin-left: 1rem;
     transition: transform 0.2s ease;
     transform-origin: center;

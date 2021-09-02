@@ -17,7 +17,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  padding: px(5) px(12) px(5) 0;
+  padding: 5px 12px 5px 0;
   cursor: pointer;
 
   &_disabled {
@@ -28,16 +28,16 @@
 
 .radio-control-marker {
   position: relative;
-  width: px(16);
-  height: px(16);
+  width: 16px;
+  height: 16px;
   box-sizing: border-box;
   background: color('white');
   border-radius: 50%;
-  border: px(1) solid color('grey-ivory');
+  border: 1px solid color('grey-ivory');
 
   &_selected,
   &_hovered {
-    border: px(1) solid color('grey-ivory');
+    border: 1px solid color('grey-ivory');
   }
 
   &__dot {
@@ -51,14 +51,14 @@
   }
 
   &_hovered .radio-control-marker__dot {
-    width: px(6);
-    height: px(6);
+    width: 6px;
+    height: 6px;
     background: color('grey-ivory');
   }
 
   &_selected .radio-control-marker__dot {
-    width: px(10);
-    height: px(10);
+    width: 10px;
+    height: 10px;
     background: color('active');
   }
 
@@ -80,7 +80,7 @@
 }
 
 .radio-control-label {
-  margin: 0 0 0 px(8);
+  margin: 0 0 0 8px;
   color: color('text');
   user-select: none;
 

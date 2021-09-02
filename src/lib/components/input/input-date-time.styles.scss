@@ -1,11 +1,11 @@
 @import './input.styles.scss';
 
-$width_time-seconds: px(114);
-$width_time: px(82);
-$width_date: px(180);
-$width_date-seconds: px(200);
+$width_time-seconds: 114px;
+$width_time: 82px;
+$width_date: 180px;
+$width_date-seconds: 200px;
 
-$width_date-range: px(222);
+$width_date-range: 222px;
 
 :host {
   display: block;
@@ -52,7 +52,7 @@ $width_date-range: px(222);
 
   &__icon {
     position: absolute;
-    right: px(10);
+    right: 10px;
     height: 4rem;
     top: 50%;
     transform: translateY(-50%);
@@ -65,7 +65,7 @@ $width_date-range: px(222);
     @include transition(#{'opacity, color'});
 
     &.simple-time {
-      right: px(5);
+      right: 5px;
     }
 
     &.focused {
@@ -88,7 +88,7 @@ $width_date-range: px(222);
     right: 0;
     bottom: 0;
     padding-left: 2rem;
-    border: px(1) solid transparent;
+    border: 1px solid transparent;
     z-index: 0;
     line-height: 1;
     font-size: 4rem;
