@@ -1,7 +1,7 @@
 @import 'mixins';
 
 .container {
-  margin-bottom: newRems(2);
+  margin-bottom: 4rem;
 
   &__label {
     color: color(base-dark-n250);
@@ -9,7 +9,7 @@
 }
 
 .text {
-  margin: newRems(1) 0;
+  margin: 2rem 0;
   font-size: px(16);
 }
 

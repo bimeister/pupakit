@@ -57,8 +57,8 @@
 
   &__close {
     position: absolute;
-    top: rems(1);
-    right: rems(1);
+    top: 2rem;
+    right: 2rem;
     display: block;
 
     @include gt-md() {
@@ -73,7 +73,7 @@
   }
 
   .search-field-container {
-    padding: rems(1);
+    padding: 2rem;
     flex-shrink: 0;
     transition: 0.3s;
     display: flex;
@@ -135,7 +135,7 @@
 }
 
 .content {
-  margin-bottom: rems(1);
+  margin-bottom: 2rem;
 }
 
 .settings {
@@ -143,13 +143,13 @@
   justify-content: center;
   align-items: center;
 
-  padding: rems(1);
+  padding: 2rem;
 
   z-index: 10;
 
   background-color: color(light);
 
   &__label {
-    margin-right: rems(1);
+    margin-right: 2rem;
   }
 }

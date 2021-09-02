@@ -26,16 +26,16 @@
   display: flex;
   align-items: center;
   & > * {
-    margin-right: rems(1);
+    margin-right: 2rem;
   }
 }
 
 .chip-wrap {
-  line-height: rems(1.7);
+  line-height: 3.4rem;
   & pupa-chip {
-    margin-right: rems(0.2);
+    margin-right: 0.4rem;
     & span {
-      margin: 0 rems(0.4);
+      margin: 0 0.8rem;
     }
   }
 }
