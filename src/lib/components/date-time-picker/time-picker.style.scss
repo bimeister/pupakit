@@ -40,7 +40,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
     &:not(:first-child)::after {
       position: absolute;
       content: '';
-      left: px(-0.5);
+      left: -0.5px;
       top: 50%;
       transform: translate(0, -50%);
       height: calc(100% - #{4rem});
