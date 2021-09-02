@@ -5,15 +5,15 @@
 .container {
   margin: 0;
 
-  padding: newRems(2);
+  padding: 4rem;
   border: px(1) solid color(base-dark-n100);
   border-radius: px(1);
 
   &__preview {
-    padding: newRems(2);
+    padding: 4rem;
   }
 }
 
 .tab + .tab {
-  margin-left: newRems(2);
+  margin-left: 4rem;
 }

@@ -4,16 +4,16 @@
 
 .tab {
   &__icon {
-    font-size: newRems(1.7);
-    min-width: newRems(1.7);
-    margin-right: newRems(0.5);
+    font-size: 3.4rem;
+    min-width: 3.4rem;
+    margin-right: 1rem;
   }
   &__name {
-    font-size: newRems(2.25);
+    font-size: 4.5rem;
     font-weight: 500;
   }
 }
 
 .tab + .tab {
-  margin-left: newRems(2);
+  margin-left: 4rem;
 }

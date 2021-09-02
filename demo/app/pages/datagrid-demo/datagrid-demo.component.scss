@@ -26,11 +26,11 @@
 .checkbox-label {
   display: flex;
   flex-direction: column;
-  padding: 0 0 0 newRems(1);
+  padding: 0 0 0 2rem;
   cursor: pointer;
-  max-width: newRems(19.75);
+  max-width: 39.5rem;
   @include ellipsis-text-overflow;
-  font-size: newRems(1.75);
-  line-height: newRems(3);
+  font-size: 3.5rem;
+  line-height: 6rem;
   color: color(primary);
 }

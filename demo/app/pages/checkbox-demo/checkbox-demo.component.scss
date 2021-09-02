@@ -3,10 +3,10 @@
 @import 'functions';
 
 .tooltip-content {
-  min-width: newRems(20);
+  min-width: 40rem;
   display: flex;
   flex-direction: column;
-  font-size: newRems(1.75);
-  line-height: newRems(2.25);
+  font-size: 3.5rem;
+  line-height: 4.5rem;
   color: color(white);
 }
