@@ -1,5 +1,3 @@
-declare module '*';
-
 declare module '!!file-loader!*' {
   const result: string;
 
