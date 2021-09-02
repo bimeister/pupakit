@@ -20,7 +20,7 @@
   display: none;
 
   cursor: pointer;
-  font-size: px(30);
+  font-size: 30px;
 
   @include lt-md() {
     display: block;

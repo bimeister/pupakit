@@ -3,8 +3,8 @@
 @import 'mixins.scss';
 
 .container {
-  height: px(700);
-  width: px(320);
+  height: 700px;
+  width: 320px;
 }
 
 .check {
@@ -18,9 +18,9 @@
 
   &__title {
     overflow: hidden;
-    max-width: calc(100% - #{px(24)});
-    margin-bottom: px(8);
-    font-size: px(18);
+    max-width: calc(100% - #{24px});
+    margin-bottom: 8px;
+    font-size: 18px;
     line-height: 1;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -34,10 +34,10 @@
 
   &__metadata {
     &:not(:last-child) {
-      margin: 0 0 px(6) 0;
+      margin: 0 0 6px 0;
     }
     &:first-of-type {
-      margin-top: px(8);
+      margin-top: 8px;
     }
   }
 
@@ -47,7 +47,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-size: px(12);
+    font-size: 12px;
     line-height: 1.33;
     justify-content: flex-start;
   }

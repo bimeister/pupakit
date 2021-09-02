@@ -2,8 +2,8 @@
 
 .block {
   display: block;
-  width: px(100);
-  height: px(100);
+  width: 100px;
+  height: 100px;
   background-color: color(primary-n500);
 
   @include gt-lg() {
