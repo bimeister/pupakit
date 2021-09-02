@@ -25,12 +25,12 @@ label.horizontal {
 .input_container,
 .input_container_medium {
   display: block;
-  width: rems(14.48125);
+  width: 57.925rem;
 }
 
 .input_container_small {
   display: block;
-  width: rems(8.3125);
+  width: 33.25rem;
 }
 
 .icon-inner svg {
@@ -47,7 +47,7 @@ label.horizontal {
   &__text {
     flex-shrink: 1;
     box-sizing: border-box;
-    padding: 0 newRems(1);
+    padding: 0 2rem;
     width: 100%;
     max-width: inherit;
     min-width: 0;
@@ -56,26 +56,26 @@ label.horizontal {
   &__delete-button {
     flex-shrink: 0;
     box-sizing: border-box;
-    padding-right: newRems(1);
-    height: newRems(2.5);
-    width: newRems(2.5);
+    padding-right: 2rem;
+    height: 5rem;
+    width: 5rem;
   }
   &__avatar {
     flex-shrink: 0;
     box-sizing: border-box;
-    padding-left: newRems(0.5);
-    height: newRems(2);
-    width: newRems(2);
+    padding-left: 1rem;
+    height: 4rem;
+    width: 4rem;
   }
   &__icon-container {
     display: inline-flex;
     flex-shrink: 0;
     box-sizing: border-box;
-    padding-left: newRems(1);
+    padding-left: 2rem;
   }
   &__icon {
-    height: newRems(1.5);
-    width: newRems(1.5);
+    height: 3rem;
+    width: 3rem;
   }
 }
 

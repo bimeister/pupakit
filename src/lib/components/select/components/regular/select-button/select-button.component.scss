@@ -2,7 +2,7 @@
 @import 'mixins';
 @import 'functions';
 
-$width_icon: rems(1);
+$width_icon: 4rem;
 
 :host {
   display: block;
@@ -13,7 +13,7 @@ $width_icon: rems(1);
   box-sizing: border-box;
 
   width: 100%;
-  height: rems(2);
+  height: 8rem;
 
   display: flex;
   flex-direction: row;
@@ -72,7 +72,7 @@ $width_icon: rems(1);
     text-overflow: ellipsis;
     white-space: nowrap;
 
-    font-size: rems(1);
+    font-size: 4rem;
   }
 
   &__icon {
@@ -85,7 +85,7 @@ $width_icon: rems(1);
 
     color: inherit;
     font-size: px(18);
-    margin-left: rems(0.25);
+    margin-left: 1rem;
     transition: transform 0.2s ease;
     transform-origin: center;
 

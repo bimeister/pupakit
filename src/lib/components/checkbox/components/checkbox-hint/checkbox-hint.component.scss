@@ -3,11 +3,11 @@
 @import 'functions';
 
 .checkbox-hint {
-  max-width: newRems(19.75);
-  margin-left: newRems(1);
+  max-width: 39.5rem;
+  margin-left: 2rem;
   @include ellipsis-text-overflow;
-  font-size: newRems(1.5);
-  line-height: newRems(2);
+  font-size: 3rem;
+  line-height: 4rem;
   color: color(subdark);
   cursor: pointer;
 }

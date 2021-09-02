@@ -16,14 +16,14 @@ $ag-header-cell-moving-background-color: null;
 $ag-odd-row-background-color: null;
 
 /* default theme variables reset */
-$header-height: 48px; /* rems(3) */
+$header-height: 48px; /* 12rem */
 $header-background-color: color(white);
-$row-height: 40px; /* rems(2.5) */
+$row-height: 40px; /* 10rem */
 $row-border-width: 1px 0 1px 0;
 $hover-color: color(light);
 $border-color: color(light);
 $font-family: 'PT Root UI', sans-serif;
-$font-size: 14px; /* rems(0.875) */
+$font-size: 14px; /* 3.5rem */
 $font-weight: normal;
 $foreground-color: color(text);
 $odd-row-background-color: transparent;
@@ -101,7 +101,7 @@ $header-cell-moving-background-color: color(light);
   .ag-icon-asc,
   .ag-icon-none {
     color: color(grey-apple);
-    font-size: rems(1);
+    font-size: 4rem;
     line-height: 1;
     @include ionic-icon-font;
 
@@ -195,7 +195,7 @@ $header-cell-moving-background-color: color(light);
     }
 
     .ag-row {
-      border-radius: rems(0.5);
+      border-radius: 2rem;
       border: none;
       border-bottom: px(2) solid color(white);
       box-sizing: border-box;

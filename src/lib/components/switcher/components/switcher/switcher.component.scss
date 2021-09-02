@@ -10,7 +10,7 @@
   box-sizing: content-box;
   padding: 1px;
   background: color(grey-light);
-  height: rems(1);
+  height: 4rem;
   border-radius: 9px;
   display: flex;
   flex-direction: row;
@@ -21,10 +21,10 @@
 }
 
 .toggle__marker {
-  margin: 0 rems(1) 0 0;
+  margin: 0 4rem 0 0;
   background: color(white);
-  width: rems(1);
-  height: rems(1);
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   transition: all 0.15s;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.3);
@@ -40,7 +40,7 @@
 }
 
 .toggle_active .toggle__marker {
-  margin: 0 0 0 rems(1);
+  margin: 0 0 0 4rem;
 }
 
 input {

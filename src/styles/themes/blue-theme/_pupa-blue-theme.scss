@@ -99,9 +99,9 @@ $line-height: (
 );
 
 $variables: (
-  'border-radius_controls-large': rems(1),
-  'border-radius_controls-medium': rems(0.875),
-  'border-radius_controls-small': rems(0.5),
+  'border-radius_controls-large': 4rem,
+  'border-radius_controls-medium': 3.5rem,
+  'border-radius_controls-small': 2rem,
   'padding_body': $padding_body,
   'margin_body': $margin_body,
   'box-shadow_hover': $box-shadow_hover,

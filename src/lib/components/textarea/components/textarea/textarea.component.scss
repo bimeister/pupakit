@@ -2,7 +2,7 @@
 @import 'mixins';
 @import 'functions';
 
-$height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
+$height_textarea-min: calc(#{10rem} + #{px(2)});
 
 :host {
   display: block;
@@ -22,7 +22,7 @@ $height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
   width: 100%;
 
   &__textarea {
-    border-radius: rems(0.5);
+    border-radius: 2rem;
     background: color(white);
     outline: none;
     color: color(text);
@@ -31,8 +31,8 @@ $height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
     @include transition(#{'background, border'});
     @include flex-container(row, center, space-between, nowrap);
     width: 100%;
-    font-size: rems(0.875);
-    line-height: rems(1);
+    font-size: 3.5rem;
+    line-height: 4rem;
     padding: px(2);
     min-height: $height_textarea-min;
 
@@ -66,11 +66,11 @@ $height_textarea-min: calc(#{rems(2.5)} + #{px(2)});
 
   &__count {
     position: absolute;
-    right: rems(0.5);
-    bottom: rems(0.5);
+    right: 2rem;
+    bottom: 2rem;
     color: color(grey-light);
-    font-size: rems(0.875);
-    line-height: rems(1);
+    font-size: 3.5rem;
+    line-height: 4rem;
     pointer-events: none;
   }
 }

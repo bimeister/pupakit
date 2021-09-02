@@ -54,11 +54,11 @@
   @if $horizontal {
     padding: 0 0;
   } @else {
-    padding: 0 0 rems(0.25);
+    padding: 0 0 1rem;
   }
   @include regular();
   color: color(text);
-  font-size: rems(1);
+  font-size: 4rem;
   line-height: 1.13;
   font-weight: normal;
   font-style: normal;
@@ -66,11 +66,11 @@
 
 @mixin dropdown {
   position: absolute;
-  top: rems(0.25);
+  top: 1rem;
   left: 0;
-  padding: rems(0.25) 0;
-  border-radius: rems(0.25);
-  max-height: rems(17.5);
+  padding: 1rem 0;
+  border-radius: 1rem;
+  max-height: 70rem;
   overflow: auto;
   box-shadow: variable(box-shadow_hover);
   background: color(white);
@@ -80,7 +80,7 @@
   transition: none;
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-#{rems(1.875)});
+  transform: translateY(-#{7.5rem});
 
   &_open {
     opacity: 1;
@@ -98,15 +98,15 @@
 
 @mixin scrollbar {
   ::-webkit-scrollbar {
-    height: rems(1);
-    width: rems(1);
+    height: 4rem;
+    width: 4rem;
   }
 
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-thumb {
     background-clip: padding-box;
-    border: rems(0.25) solid transparent;
-    border-radius: rems(0.5);
+    border: 1rem solid transparent;
+    border-radius: 2rem;
   }
 
   ::-webkit-scrollbar-track {
@@ -120,15 +120,15 @@
 
 @mixin scrollbar-small {
   ::-webkit-scrollbar {
-    height: rems(0.5);
-    width: rems(0.5);
+    height: 2rem;
+    width: 2rem;
   }
 
   ::-webkit-scrollbar-track,
   ::-webkit-scrollbar-thumb {
     background-clip: padding-box;
-    border: rems(0.125) solid transparent;
-    border-radius: rems(0.25);
+    border: 0.5rem solid transparent;
+    border-radius: 1rem;
   }
 
   ::-webkit-scrollbar-track {

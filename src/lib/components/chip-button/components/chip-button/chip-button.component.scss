@@ -3,11 +3,11 @@
 @import 'mixins';
 
 :host {
-  height: rems(1.5);
+  height: 6rem;
   display: inline-flex;
   flex-direction: row;
   vertical-align: top;
-  line-height: rems(1.5);
+  line-height: 6rem;
 }
 
 .chip-button {
@@ -15,11 +15,11 @@
   box-sizing: border-box;
   border: 0;
   cursor: pointer;
-  padding: 0 rems(0.4);
+  padding: 0 1.6rem;
   margin: 0;
   outline: none;
-  height: rems(1.5);
-  border-radius: rems(1);
+  height: 6rem;
+  border-radius: 4rem;
   white-space: nowrap;
   display: flex;
   align-items: center;

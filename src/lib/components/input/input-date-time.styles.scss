@@ -44,7 +44,7 @@ $width_date-range: px(222);
   position: relative;
 
   background-color: color(white);
-  border-radius: rems(0.5);
+  border-radius: 2rem;
 
   &.table-mode {
     background-color: transparent;
@@ -53,7 +53,7 @@ $width_date-range: px(222);
   &__icon {
     position: absolute;
     right: px(10);
-    height: rems(1);
+    height: 4rem;
     top: 50%;
     transform: translateY(-50%);
     color: color(main);
@@ -87,27 +87,27 @@ $width_date-range: px(222);
     top: 0;
     right: 0;
     bottom: 0;
-    padding-left: rems(0.5);
+    padding-left: 2rem;
     border: px(1) solid transparent;
     z-index: 0;
     line-height: 1;
-    font-size: rems(1);
-    padding: rems(0.5);
+    font-size: 4rem;
+    padding: 2rem;
     color: color(grey-light);
     display: flex;
     pointer-events: none;
 
-    padding-left: rems(0.75);
+    padding-left: 3rem;
 
     .left {
       color: transparent;
-      font-size: rems(1);
+      font-size: 4rem;
       line-height: 1;
       white-space: break-spaces;
     }
 
     .right {
-      font-size: rems(1);
+      font-size: 4rem;
       line-height: 1;
       white-space: break-spaces;
     }

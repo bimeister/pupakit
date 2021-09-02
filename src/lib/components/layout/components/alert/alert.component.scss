@@ -17,8 +17,8 @@ $color_alert-text: #575757;
   position: relative;
   pointer-events: auto;
   border: 1px solid $color_alert-info;
-  border-radius: rems(0.3);
-  margin-bottom: rems(0.5);
+  border-radius: 1.2rem;
+  margin-bottom: 2rem;
   color: $color_alert-text;
   width: fit-content;
   overflow: hidden;
@@ -37,7 +37,7 @@ $color_alert-text: #575757;
     position: relative;
     z-index: 1;
     justify-content: space-between;
-    padding: rems(0.3) rems(0.5);
+    padding: 1.2rem 2rem;
     & .text {
       overflow: hidden;
       text-overflow: ellipsis;
@@ -48,12 +48,12 @@ $color_alert-text: #575757;
       cursor: pointer;
       align-items: center;
       justify-content: center;
-      width: rems(1.2);
-      height: rems(1.2);
-      margin-left: rems(0.3);
+      width: 4.8rem;
+      height: 4.8rem;
+      margin-left: 1.2rem;
       & .icon {
-        width: rems(1);
-        height: rems(1);
+        width: 4rem;
+        height: 4rem;
       }
     }
   }

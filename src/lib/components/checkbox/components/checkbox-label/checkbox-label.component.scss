@@ -4,9 +4,9 @@
 
 .checkbox-label {
   @include ellipsis-text-overflow;
-  margin-left: newRems(1);
-  font-size: newRems(1.75);
-  line-height: newRems(3);
+  margin-left: 2rem;
+  font-size: 3.5rem;
+  line-height: 6rem;
   cursor: pointer;
 }
 

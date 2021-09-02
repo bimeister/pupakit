@@ -24,7 +24,7 @@
   display: inline-block;
 
   border-radius: px(1);
-  padding: newRems(1) newRems(1.5);
+  padding: 2rem 3rem;
 
   user-select: none;
 
@@ -106,20 +106,20 @@
     pointer-events: none;
 
     &.left {
-      margin-right: newRems(1);
+      margin-right: 2rem;
     }
 
     &.right {
-      margin-left: newRems(1);
+      margin-left: 2rem;
     }
   }
 
   &_with-icon-left {
-    padding-left: newRems(1);
+    padding-left: 2rem;
   }
 
   &_with-icon-right {
-    padding-right: newRems(1);
+    padding-right: 2rem;
   }
 
   &__loading {
@@ -457,17 +457,17 @@
 /** sizes */
 .button {
   &_large {
-    height: newRems(5);
+    height: 10rem;
   }
 
   &_medium {
-    height: newRems(4);
+    height: 8rem;
   }
 
   &_small {
-    height: newRems(3);
-    padding-top: newRems(0.5);
-    padding-bottom: newRems(0.5);
+    height: 6rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
 
     .button__content {
       @include font-size-mark();

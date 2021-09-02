@@ -3,7 +3,7 @@
 @import 'mixins';
 
 :host {
-  height: newRems(3);
+  height: 6rem;
   display: inline-flex;
   flex-direction: row;
   vertical-align: top;
@@ -15,7 +15,7 @@
   box-sizing: border-box;
   user-select: none;
   outline: none;
-  height: newRems(3);
+  height: 6rem;
   color: color(main);
   background-color: color(light);
   white-space: nowrap;
@@ -24,8 +24,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
-  border-radius: newRems(2);
-  max-width: newRems(25);
+  border-radius: 4rem;
+  max-width: 50rem;
   @include transition(#{'background, box-shadow'});
 }
 

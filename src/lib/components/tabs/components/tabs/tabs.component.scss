@@ -4,8 +4,8 @@
 
 .tabs {
   width: 100%;
-  height: newRems(4.5);
-  min-height: newRems(4.5);
+  height: 9rem;
+  min-height: 9rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -24,7 +24,7 @@
   bottom: 0;
   left: 0;
   overflow: hidden;
-  height: newRems(0.5);
+  height: 1rem;
   background: color(light);
 
   &__highlighter {
@@ -32,9 +32,9 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: newRems(0.5);
+    height: 1rem;
     background: color(active);
-    border-radius: newRems(1.5);
+    border-radius: 3rem;
     pointer-events: none;
     will-change: transform;
     @include transition();
