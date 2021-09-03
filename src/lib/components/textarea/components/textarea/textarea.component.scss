@@ -2,7 +2,7 @@
 @import 'mixins';
 @import 'functions';
 
-$height_textarea-min: calc(#{10rem} + #{2px});
+$height_textarea-min: calc(10rem + 2px);
 
 :host {
   display: block;
