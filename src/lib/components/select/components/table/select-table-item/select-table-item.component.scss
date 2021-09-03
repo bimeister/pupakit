@@ -9,7 +9,7 @@
 .item {
   box-sizing: border-box;
   height: 24px;
-  width: calc(100% - #{4px});
+  width: calc(100% - 4px);
   margin: 0 2px;
   cursor: pointer;
   background: color('white');

@@ -16,7 +16,7 @@ $tooltip_max-text-lines-count: 13;
 
   &__content-container {
     background-color: $tooltip_background-color;
-    backdrop-filter: blur(#{10px});
+    backdrop-filter: blur(10px);
 
     border-radius: 1px;
     box-sizing: border-box;

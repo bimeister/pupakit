@@ -43,7 +43,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
       left: -0.5px;
       top: 50%;
       transform: translate(0, -50%);
-      height: calc(100% - #{4rem});
+      height: calc(100% - 4rem);
       width: 1px;
       z-index: 2;
       background-color: color(light);
