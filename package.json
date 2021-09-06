@@ -16,11 +16,11 @@
     "gulp": "gulp",
     "yarn": "yarn",
     "start": "yarn run start:demo",
-    "start:demo": "yarn run barrel && ng serve --project=demo --open --host 0.0.0.0 --port 4201",
+    "start:demo": "yarn run create-files && ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "start:storybook": "start-storybook",
     "build": "gulp build",
-    "build:dev": "yarn run barrel && ng build --watch",
-    "build:demo": "yarn run barrel && ng build --project=demo",
+    "build:dev": "yarn run create-files && ng build --watch",
+    "build:demo": "yarn run create-files && ng build --project=demo",
     "build:demo-puppeteer": "gulp build-demo-static",
     "lint": "yarn run lint:inspect",
     "lint:inspect": "ng lint --configuration=inspection",
@@ -33,7 +33,9 @@
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "yarn run build:demo-puppeteer && ng test --configuration=ci",
     "autofix": "(yarn run prettify & yarn run lint:debug) && yarn run lint:inspect",
-    "barrel": "gulp create:barrel-files"
+    "barrel": "gulp create:barrel-files",
+    "create-files": "gulp create:files",
+    "adaptive-variables": "gulp create:adaptive-variables"
   },
   "dependencies": {
     "@angular/cdk": "~12.0.0",
