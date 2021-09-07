@@ -26,6 +26,7 @@ import { DrawerDemoComponent } from './pages/drawer-demo/drawer-demo.component';
 import { DropdownDemoComponent } from './pages/dropdown-demo/dropdown-demo.component';
 import { DropdownMenuDemoComponent } from './pages/dropdown-menu-demo/dropdown-menu-demo.component';
 import { DroppableDemoComponent } from './pages/droppable-demo/droppable-demo.component';
+import { FloatingCardDemoComponent } from './pages/floating-card-demo/floating-card-demo.component';
 import { IconButtonDemoComponent } from './pages/icon-button-demo/icon-button-demo.component';
 import { IconPageComponent } from './pages/icon-page/icon-page.component';
 import { InputDemoComponent } from './pages/input-demo/input-demo.component';
@@ -110,7 +111,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     TypographyPageComponent,
     IconPageComponent,
     VerticalTabsDemoComponent,
-    ControlsIsPatchedDemoComponent
+    ControlsIsPatchedDemoComponent,
+    FloatingCardDemoComponent
   ],
   imports: [
     BrowserModule,

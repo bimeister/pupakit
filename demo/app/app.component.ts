@@ -35,7 +35,8 @@ export class AppComponent implements OnDestroy {
       { title: 'Button & Button Icon & Button Round', link: './button' },
       { title: 'Avatar', link: './avatar' },
       { title: 'Adaptive', link: './adaptive' },
-      { title: 'Code', link: './code' }
+      { title: 'Code', link: './code' },
+      { title: 'Floating Card', link: './floating-card' }
     ]
   };
 

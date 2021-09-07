@@ -1,0 +1,22 @@
+<h1>Floating Card Demo</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content class="content" [class.dark-theme]="darkMode | async">
+    <pupa-floating-card [ratio]="4">
+      <pupa-button class="content__item"> Button With Twice Ratio </pupa-button>
+    </pupa-floating-card>
+    <pupa-floating-card resetType="custom" #floating>
+      <div class="content__div">
+        Div With Default Ratio
+        <pupa-button kind="subtle" (mousemove)="$event.stopPropagation()" (click)="floating.dropTransform()">
+          Reset Floating
+        </pupa-button>
+      </div>
+    </pupa-floating-card>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Theme Mode</demo-props-group-label>
+    <demo-props-checkbox #darkMode>Dark</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

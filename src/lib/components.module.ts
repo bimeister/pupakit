@@ -19,6 +19,7 @@ import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.mod
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
+import { FloatingCardModule } from './components/floating-card/floating-card.module';
 import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { InputModule } from './components/input/input.module';
 import { LayoutModule } from './components/layout/layout.module';
@@ -94,7 +95,8 @@ const EXPORTS: any[] = [
   CounterModule,
   AvatarModule,
   PagedVirtualScrollModule,
-  TableModule
+  TableModule,
+  FloatingCardModule
 ];
 
 @NgModule({
