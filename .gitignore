@@ -1,7 +1,6 @@
 /.*/
 !/.gitlab/
 /.vscode/
-!/.storybook/
 /coverage/
 /dist/
 /node_modules/
