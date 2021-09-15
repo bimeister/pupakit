@@ -1,13 +1,68 @@
+@use "sass:map";
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
-:host {
-  appearance: none;
-  user-select: none;
-
-  pointer-events: none;
+@mixin apply-border($color, $width: 1px) {
+  border: $width solid $color;
 }
+
+@mixin apply-colors($colors) {
+  @include apply-border(map.get($colors, border-color));
+  background-color: map.get($colors, background-color);
+  color: map.get($colors, font-color);
+}
+
+@function get-theme($map, $theme-type) {
+  @return map.get(map.get($map, theme), $theme-type);
+}
+
+$base-tag: (
+  theme: (
+    light: (
+      border-color: color(base-white-n300),
+      background-color: color(base-white-n300),
+      font-color: color(base-n600)
+    ),
+
+    dark: (
+      border-color: color(base-dark-n300),
+      background-color: color(base-dark-n300),
+      font-color: color(base-n0),
+    )
+  )
+);
+
+$disabled-tag: (
+  theme: (
+    light: (
+      border-color: color(base-white-n400),
+      background-color: color(base-white-n400),
+      font-color: color(base-white-n250)
+    ),
+
+    dark: (
+      border-color: color(base-dark-n500),
+      background-color: color(base-dark-n500),
+      font-color: color(base-dark-n250),
+    )
+  )
+);
+
+$clickable-tag: map.deep-merge($base-tag, (
+  theme: (
+    light: (
+      border-color: color(base-white-n275),
+    ),
+    dark: (
+      border-color: color(base-dark-n275),
+    )
+  ),
+  hover: (
+    border-color: color(primary-n400),
+    border-width: 2px
+  )
+));
 
 .tag {
   display: flex;
@@ -22,16 +77,28 @@
 
   min-height: 24px;
   min-width: 35px;
+  width: fit-content;
 
   box-sizing: border-box;
 
   @include font-size-mark();
 
-  background-color: color(base-white-n300);
-  color: color(base-n600);
-
+  @include apply-colors(get-theme($base-tag, light));
   @include host-selector-dark-theme() {
-    background-color: color(base-dark-n500);
-    color: color(base-n0);
+    @include apply-colors(get-theme($base-tag, dark));
+  }
+
+  &_disabled {
+    @include apply-colors(get-theme($disabled-tag, light));
+    @include host-selector-dark-theme() {
+      @include apply-colors(get-theme($disabled-tag, dark));
+    }
+  }
+
+  &_clickable {
+    @include apply-colors(get-theme($clickable-tag, light));
+    @include host-selector-dark-theme() {
+      @include apply-colors(get-theme($clickable-tag, dark));
+    }
   }
 }
