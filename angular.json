@@ -225,8 +225,7 @@
           "commonModule": false,
           "flat": false,
           "routing": false,
-          "routingScope": "Child",
-          "skipTests": true
+          "routingScope": "Child"
         },
         "@schematics/angular:pipe": {
           "export": true,
