@@ -48,6 +48,7 @@ import { TreeModule } from './components/tree/tree.module';
 import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { TableModule } from './components/table/table.module';
+import { TagModule } from './components/tag/tag.module';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -96,7 +97,8 @@ const EXPORTS: any[] = [
   AvatarModule,
   PagedVirtualScrollModule,
   TableModule,
-  FloatingCardModule
+  FloatingCardModule,
+  TagModule
 ];
 
 @NgModule({
