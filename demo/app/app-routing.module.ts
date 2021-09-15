@@ -48,6 +48,7 @@ import { TreeNewDemoComponent } from './pages/tree-new-demo/tree-new-demo.compon
 import { TypographyPageComponent } from './pages/typography-page/typography-page.component';
 import { UploadsDemoComponent } from './pages/uploads-demo/uploads-demo.component';
 import { VerticalTabsDemoComponent } from './pages/vertical-tabs-demo/vertical-tabs-demo.component';
+import { TagDemoComponent } from './pages/tag-demo/tag-demo.component';
 
 const demoRoutes: Routes = [
   {
@@ -209,6 +210,10 @@ const demoRoutes: Routes = [
     path: 'table',
     loadChildren: (): Promise<Type<CodeDemoModule>> =>
       import('./pages/table-demo/table-demo.module').then(module => module.TableDemoModule)
+  },
+  {
+    path: 'tag',
+    component: TagDemoComponent
   },
   {
     path: '',
