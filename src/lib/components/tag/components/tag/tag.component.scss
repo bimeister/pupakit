@@ -8,8 +8,8 @@
 .tag {
   @include base.apply-base-styles();
 
-  min-height: 22px;
-  max-height: 22px;
+  min-height: 24px;
+  max-height: 24px;
 
   @include utils.apply-themes(map.get(config.$base-tag, default));
 

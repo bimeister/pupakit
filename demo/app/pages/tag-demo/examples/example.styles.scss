@@ -1,0 +1,7 @@
+.example-container {
+  display: flex;
+
+  &__item {
+    padding: 0 20px;
+  }
+}

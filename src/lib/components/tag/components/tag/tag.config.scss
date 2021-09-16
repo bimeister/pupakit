@@ -2,9 +2,8 @@
 @import 'themes/functions';
 @import 'functions';
 
-// helper only for config
-@function two-shadows-helper($first-color, $second-color: $first-color) {
-  @return 0 0 0 1px color($first-color), 0 0 0 2px color($second-color);
+@function shadow-helper($color, $width: 1px) {
+  @return inset 0 0 0 $width color($color);
 }
 
 $base-tag: (
@@ -12,12 +11,12 @@ $base-tag: (
     light: (
       background-color: color(base-white-n300),
       font-color: color(base-n600),
-      box-shadow: two-shadows-helper(base-white-n300)
+      box-shadow: shadow-helper(base-white-n300)
     ),
     dark: (
       background-color: color(base-dark-n300),
       font-color: color(base-n0),
-      box-shadow: two-shadows-helper(base-dark-n300)
+      box-shadow: shadow-helper(base-dark-n300)
     )
   )
 );
@@ -27,12 +26,12 @@ $disabled-tag: (
     light: (
       background-color: color(base-white-n400),
       font-color: color(base-white-n250),
-      box-shadow: two-shadows-helper(base-white-n400)
+      box-shadow: shadow-helper(base-white-n400)
     ),
     dark: (
       background-color: color(base-dark-n500),
       font-color: color(base-dark-n250),
-      box-shadow: two-shadows-helper(base-dark-n500)
+      box-shadow: shadow-helper(base-dark-n500)
     )
   )
 );
@@ -42,10 +41,10 @@ $clickable-tag: map.deep-merge(
   (
     default: (
       light: (
-        box-shadow: two-shadows-helper(base-white-n300, base-white-n275)
+        box-shadow: shadow-helper(base-white-n275)
       ),
       dark: (
-        box-shadow: two-shadows-helper(base-dark-n300, base-dark-n275)
+        box-shadow: shadow-helper(base-dark-n275)
       )
     ),
     hover: map.get($base-tag, default)
@@ -60,10 +59,10 @@ $clickable-tag: map.deep-merge(
         map.get($clickable-tag, default),
         (
           light: (
-            box-shadow: two-shadows-helper(primary-n400)
+            box-shadow: shadow-helper(primary-n400, 2px)
           ),
           dark: (
-            box-shadow: two-shadows-helper(primary-n400)
+            box-shadow: shadow-helper(primary-n400, 2px)
           )
         )
       )
