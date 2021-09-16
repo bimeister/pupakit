@@ -1,68 +1,10 @@
 @use "sass:map";
+@use "tag.config" as config;
+@use "tag.utils" as utils;
+
 @import 'themes/functions';
-@import 'mixins';
 @import 'functions';
-
-@mixin apply-border($color, $width: 1px) {
-  border: $width solid $color;
-}
-
-@mixin apply-colors($colors) {
-  @include apply-border(map.get($colors, border-color));
-  background-color: map.get($colors, background-color);
-  color: map.get($colors, font-color);
-}
-
-@function get-theme($map, $theme-type) {
-  @return map.get(map.get($map, theme), $theme-type);
-}
-
-$base-tag: (
-  theme: (
-    light: (
-      border-color: color(base-white-n300),
-      background-color: color(base-white-n300),
-      font-color: color(base-n600)
-    ),
-
-    dark: (
-      border-color: color(base-dark-n300),
-      background-color: color(base-dark-n300),
-      font-color: color(base-n0),
-    )
-  )
-);
-
-$disabled-tag: (
-  theme: (
-    light: (
-      border-color: color(base-white-n400),
-      background-color: color(base-white-n400),
-      font-color: color(base-white-n250)
-    ),
-
-    dark: (
-      border-color: color(base-dark-n500),
-      background-color: color(base-dark-n500),
-      font-color: color(base-dark-n250),
-    )
-  )
-);
-
-$clickable-tag: map.deep-merge($base-tag, (
-  theme: (
-    light: (
-      border-color: color(base-white-n275),
-    ),
-    dark: (
-      border-color: color(base-dark-n275),
-    )
-  ),
-  hover: (
-    border-color: color(primary-n400),
-    border-width: 2px
-  )
-));
+@import 'mixins';
 
 .tag {
   display: flex;
@@ -83,22 +25,27 @@ $clickable-tag: map.deep-merge($base-tag, (
 
   @include font-size-mark();
 
-  @include apply-colors(get-theme($base-tag, light));
-  @include host-selector-dark-theme() {
-    @include apply-colors(get-theme($base-tag, dark));
-  }
+  @include utils.apply-themes(map.get(config.$base-tag, default));
 
-  &_disabled {
-    @include apply-colors(get-theme($disabled-tag, light));
-    @include host-selector-dark-theme() {
-      @include apply-colors(get-theme($disabled-tag, dark));
+  &_clickable {
+    cursor: pointer;
+
+    @include utils.apply-themes(map.get(config.$clickable-tag, default));
+
+    &:hover {
+      @include utils.apply-themes(map.get(config.$clickable-tag, hover));
+    }
+
+    &.tag_active {
+      @include utils.apply-themes(map.get(config.$clickable-tag, active));
     }
   }
 
-  &_clickable {
-    @include apply-colors(get-theme($clickable-tag, light));
-    @include host-selector-dark-theme() {
-      @include apply-colors(get-theme($clickable-tag, dark));
+  &_disabled {
+    @include utils.apply-themes(map.get(config.$disabled-tag, default));
+
+    &:hover {
+      @include utils.apply-themes(map.get(config.$disabled-tag, default));
     }
   }
 }

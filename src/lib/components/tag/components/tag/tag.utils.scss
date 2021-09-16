@@ -1,0 +1,21 @@
+@use "sass:map";
+@import 'themes/functions';
+@import 'functions';
+@import 'mixins';
+
+@mixin apply-border($color, $width: 1px) {
+  border: $width solid $color;
+}
+
+@mixin apply-colors($config) {
+  @include apply-border(map.get($config, border-color), map.get($config, border-width));
+  background-color: map.get($config, background-color);
+  color: map.get($config, font-color);
+}
+
+@mixin apply-themes($themes) {
+  @include apply-colors(map.get($themes, light));
+  @include host-selector-dark-theme() {
+    @include apply-colors(map.get($themes, dark));
+  }
+}
