@@ -5,6 +5,8 @@
 @use "tag.utils" as utils;
 @use "../../tag.base" as base;
 
+@import "mixins";
+
 .tag {
   @include base.apply-base-styles();
 
@@ -18,7 +20,7 @@
 
     @include utils.apply-themes(map.get(config.$clickable-tag, default));
 
-    &:hover {
+    @include hover() {
       @include utils.apply-themes(map.get(config.$clickable-tag, hover));
     }
 
@@ -32,7 +34,7 @@
 
     @include utils.apply-themes(map.get(config.$disabled-tag, default));
 
-    &:hover {
+    @include hover() {
       @include utils.apply-themes(map.get(config.$disabled-tag, default));
     }
   }
