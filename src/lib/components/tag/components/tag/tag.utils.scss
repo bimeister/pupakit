@@ -3,14 +3,10 @@
 @import 'functions';
 @import 'mixins';
 
-@mixin apply-border($color, $width: 1px) {
-  border: $width solid $color;
-}
-
 @mixin apply-colors($config) {
-  @include apply-border(map.get($config, border-color), map.get($config, border-width));
   background-color: map.get($config, background-color);
   color: map.get($config, font-color);
+  box-shadow: map.get($config, box-shadow);
 }
 
 @mixin apply-themes($themes) {
