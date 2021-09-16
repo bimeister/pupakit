@@ -12,8 +12,6 @@
 
   position: relative;
   min-height: 100vh;
-
-  @include grid-container();
 }
 
 .menu-burger {
@@ -131,11 +129,13 @@
 
 .content-wrapper {
   flex: 1;
-  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+  overflow: auto;
+  @include grid-container-offset('padding-left');
+  @include grid-container-offset('padding-right');
 }
 
 .content {
-  margin-bottom: 2rem;
+  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
 }
 
 .settings {
