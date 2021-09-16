@@ -47,8 +47,21 @@ $clickable-tag: map.deep-merge(
         box-shadow: shadow-helper(base-dark-n275)
       )
     ),
-    hover: map.get($base-tag, default)
   )
+);
+
+$clickable-tag: map.deep-merge(
+    $clickable-tag,
+    (
+      hover: map.deep-merge(map.get($clickable-tag, default), (
+        light: (
+          background-color: color(base-white-n275)
+        ),
+        dark: (
+          background-color: color(base-dark-n275)
+        )
+      ))
+    )
 );
 
 $clickable-tag: map.deep-merge(
