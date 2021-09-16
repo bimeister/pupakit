@@ -56,14 +56,6 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
     this.destroyed$.complete();
   }
 
-  public deactivateTagWhenDisabled(): void {
-    this.disabled$.pipe(takeUntil(this.destroyed$)).subscribe(isDisabled => {
-      if (isDisabled) {
-        this.active$.next(false);
-      }
-    });
-  }
-
   public handleClick(): void {
     this.disabled$
       .pipe(
@@ -76,6 +68,14 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
       .subscribe(value => {
         this.active$.next(!value);
       });
+  }
+
+  private deactivateTagWhenDisabled(): void {
+    this.disabled$.pipe(takeUntil(this.destroyed$)).subscribe(isDisabled => {
+      if (isDisabled) {
+        this.active$.next(false);
+      }
+    });
   }
 
   private processDisabledChange(change: ComponentChange<this, boolean>): void {
