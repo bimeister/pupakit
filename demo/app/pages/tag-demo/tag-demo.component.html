@@ -1,4 +1,4 @@
-<h1>Tag & Color Tag</h1>
+<h1>Tag</h1>
 
 <demo-example-viewer class="tag-demo">
   <demo-example-viewer-content class="content" [class.dark-theme]="darkMode | async">
@@ -25,4 +25,17 @@
     <demo-props-group-label>Clickable</demo-props-group-label>
     <demo-props-checkbox #clickable>Clickable</demo-props-checkbox>
   </demo-example-viewer-properties>
+</demo-example-viewer>
+
+<h1>Color Tag</h1>
+
+<demo-example-viewer class="color-tag-demo">
+  <demo-example-viewer-content class="content" [class.dark-theme]="darkMode | async">
+    <div class="tag-demo__wrapper">
+      <pupa-color-tag color='red'>Lupa</pupa-color-tag>
+      <pupa-color-tag color='green'>Pupa</pupa-color-tag>
+      <pupa-color-tag color='primary'>Dupa</pupa-color-tag>
+      <pupa-color-tag color='yellow'>Zupa</pupa-color-tag>
+    </div>
+  </demo-example-viewer-content>
 </demo-example-viewer>

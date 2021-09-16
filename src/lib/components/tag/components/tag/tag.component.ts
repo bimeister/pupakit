@@ -40,7 +40,7 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
     )
   );
 
-  private destroyed$: Subject<void> = new Subject<void>();
+  private readonly destroyed$: Subject<void> = new Subject<void>();
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processDisabledChange(changes?.disabled);

@@ -72,7 +72,7 @@ export class AppComponent implements OnDestroy {
       { title: 'Chip', link: './chip' },
       { title: 'Chip button', link: './chip-button' },
       { title: 'Paged Virtual Scroll', link: './paged-virtual-scroll' },
-      { title: 'Tag', link: './tag' }
+      { title: 'Tag & Color Tag', link: './tag' }
     ]
   };
 

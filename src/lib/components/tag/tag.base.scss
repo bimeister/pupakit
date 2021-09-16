@@ -1,0 +1,27 @@
+@import 'mixins';
+
+@mixin apply-base-styles() {
+  all: unset;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  user-select: none;
+
+  cursor: default;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+
+  margin: 0;
+  padding: 4px 6px;
+  box-sizing: border-box;
+
+  border-radius: 12px;
+
+  min-width: 35px;
+  width: fit-content;
+
+  @include font-size-mark();
+}

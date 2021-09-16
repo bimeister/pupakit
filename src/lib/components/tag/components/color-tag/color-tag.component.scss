@@ -1,0 +1,30 @@
+@use '../../tag.base' as base;
+
+@import 'themes/functions';
+@import 'functions';
+
+$colors: (
+  red: color(red-n500),
+  primary: color(primary-n500),
+  yellow: color(yellow-n500),
+  green: color(green-n500)
+);
+
+@mixin apply-background-color-modifiers($root, $colors) {
+  @each $color-name, $color-value in $colors {
+      #{$root + "_" + $color-name} {
+        background: $color-value;
+      }
+  }
+}
+
+.color-tag {
+  @include base.apply-base-styles();
+
+  min-height: 24px;
+  max-height: 24px;
+
+  color: color(base-n0);
+}
+
+@include apply-background-color-modifiers('.color-tag', $colors);
