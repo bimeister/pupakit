@@ -57,7 +57,6 @@ import { TypographyPageComponent } from './pages/typography-page/typography-page
 import { UploadsDemoComponent } from './pages/uploads-demo/uploads-demo.component';
 import { VerticalTabsDemoComponent } from './pages/vertical-tabs-demo/vertical-tabs-demo.component';
 import { DemoSharedModule } from './shared/shared.module';
-import { TagDemoComponent } from './pages/tag-demo/tag-demo.component';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -113,8 +112,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     IconPageComponent,
     VerticalTabsDemoComponent,
     ControlsIsPatchedDemoComponent,
-    FloatingCardDemoComponent,
-    TagDemoComponent
+    FloatingCardDemoComponent
   ],
   imports: [
     BrowserModule,

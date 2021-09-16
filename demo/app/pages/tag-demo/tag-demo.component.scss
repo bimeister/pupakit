@@ -2,7 +2,11 @@
 @import 'mixins';
 @import 'functions';
 
+$min-height_demo: fit-content;
+
 .tag-demo {
+  min-height: $min-height_demo;
+
   &__wrapper {
     width: 100%;
     display: flex;
@@ -19,4 +23,8 @@
   &.dark-theme {
     background-color: color(base-n600);
   }
+}
+
+.color-tag-demo {
+  min-height: $min-height_demo;
 }

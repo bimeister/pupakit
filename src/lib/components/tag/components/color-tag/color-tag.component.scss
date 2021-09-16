@@ -12,9 +12,9 @@ $colors: (
 
 @mixin apply-background-color-modifiers($root, $colors) {
   @each $color-name, $color-value in $colors {
-      #{$root + "_" + $color-name} {
-        background: $color-value;
-      }
+    #{$root + '_' + $color-name} {
+      background: $color-value;
+    }
   }
 }
 

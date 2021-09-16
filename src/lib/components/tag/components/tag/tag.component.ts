@@ -58,7 +58,7 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
 
   public deactivateTagWhenDisabled(): void {
     this.disabled$.pipe(takeUntil(this.destroyed$)).subscribe(isDisabled => {
-      if (isDisabled === true) {
+      if (isDisabled) {
         this.active$.next(false);
       }
     });
@@ -67,9 +67,9 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
   public handleClick(): void {
     this.disabled$
       .pipe(
-        takeWhile(isDisabled => isDisabled === false),
+        takeWhile(isDisabled => !isDisabled),
         switchMap(() => this.clickable$),
-        takeWhile(isClickable => isClickable === true),
+        takeWhile(isClickable => isClickable),
         switchMap(() => this.active$),
         take(1)
       )
