@@ -1,0 +1,72 @@
+@use "sass:map";
+@import 'themes/functions';
+@import 'functions';
+
+$base-tag: (
+  default: (
+    light: (
+      border-color: color(base-white-n300),
+      border-width: 1px,
+      background-color: color(base-white-n300),
+      font-color: color(base-n600)
+    ),
+    dark: (
+      border-color: color(base-dark-n300),
+      border-width: 1px,
+      background-color: color(base-dark-n300),
+      font-color: color(base-n0)
+    )
+  )
+);
+
+$disabled-tag: (
+  default: (
+    light: (
+      border-color: color(base-white-n400),
+      border-width: 1px,
+      background-color: color(base-white-n400),
+      font-color: color(base-white-n250)
+    ),
+    dark: (
+      border-color: color(base-dark-n500),
+      border-width: 1px,
+      background-color: color(base-dark-n500),
+      font-color: color(base-dark-n250)
+    )
+  )
+);
+
+$clickable-tag: map.deep-merge(
+  $base-tag,
+  (
+    default: (
+      light: (
+        border-color: color(base-white-n275)
+      ),
+      dark: (
+        border-color: color(base-dark-n275)
+      )
+    ),
+    hover: map.get($base-tag, default)
+  )
+);
+
+$clickable-tag: map.deep-merge(
+  $clickable-tag,
+  (
+    active:
+      map.deep-merge(
+        map.get($clickable-tag, default),
+        (
+          light: (
+            border-color: color(primary-n400),
+            border-width: 2px
+          ),
+          dark: (
+            border-color: color(primary-n400),
+            border-width: 2px
+          )
+        )
+      )
+  )
+);
