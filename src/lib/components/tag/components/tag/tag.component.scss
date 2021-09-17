@@ -1,41 +1,141 @@
-@use "sass:map";
-@use "sass:string";
+@use 'sass:map';
+@use 'sass:string';
 
-@use "tag.config" as config;
-@use "tag.utils" as utils;
-@use "../../tag.base" as base;
+@use '../../tag.base' as base;
 
-@import "mixins";
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
 
+// helpers
+@mixin apply-colors($config) {
+  background-color: map.get($config, background-color);
+  color: map.get($config, font-color);
+  box-shadow: map.get($config, box-shadow);
+}
+
+@mixin apply-themes($themes) {
+  @include apply-colors(map.get($themes, light));
+  @include host-selector-dark-theme() {
+    @include apply-colors(map.get($themes, dark));
+  }
+}
+
+@function shadow-helper($color, $width: 1px) {
+  @return inset 0 0 0 $width color($color);
+}
+
+// config
+$base-tag: (
+  default: (
+    light: (
+      background-color: color(base-white-n300),
+      font-color: color(base-n600),
+      box-shadow: shadow-helper(base-white-n300)
+    ),
+    dark: (
+      background-color: color(base-dark-n300),
+      font-color: color(base-n0),
+      box-shadow: shadow-helper(base-dark-n300)
+    )
+  )
+);
+
+$disabled-tag: (
+  default: (
+    light: (
+      background-color: color(base-white-n400),
+      font-color: color(base-white-n250),
+      box-shadow: shadow-helper(base-white-n400)
+    ),
+    dark: (
+      background-color: color(base-dark-n500),
+      font-color: color(base-dark-n250),
+      box-shadow: shadow-helper(base-dark-n500)
+    )
+  )
+);
+
+$clickable-tag: map.deep-merge(
+  $base-tag,
+  (
+    default: (
+      light: (
+        box-shadow: shadow-helper(base-white-n275)
+      ),
+      dark: (
+        box-shadow: shadow-helper(base-dark-n275)
+      )
+    )
+  )
+);
+
+$clickable-tag: map.deep-merge(
+  $clickable-tag,
+  (
+    hover:
+      map.deep-merge(
+        map.get($clickable-tag, default),
+        (
+          light: (
+            background-color: color(base-white-n275)
+          ),
+          dark: (
+            background-color: color(base-dark-n275)
+          )
+        )
+      )
+  )
+);
+
+$clickable-tag: map.deep-merge(
+  $clickable-tag,
+  (
+    active:
+      map.deep-merge(
+        map.get($clickable-tag, default),
+        (
+          light: (
+            box-shadow: shadow-helper(primary-n400, 2px)
+          ),
+          dark: (
+            box-shadow: shadow-helper(primary-n400, 2px)
+          )
+        )
+      )
+  )
+);
+
+// styles
 .tag {
   @include base.apply-base-styles();
 
   min-height: 24px;
   max-height: 24px;
 
-  @include utils.apply-themes(map.get(config.$base-tag, default));
+  @include apply-themes(map.get($base-tag, default));
 
   &_clickable {
     cursor: pointer;
 
-    @include utils.apply-themes(map.get(config.$clickable-tag, default));
+    @include apply-themes(map.get($clickable-tag, default));
 
     @include hover() {
-      @include utils.apply-themes(map.get(config.$clickable-tag, hover));
+      @include apply-themes(map.get($clickable-tag, hover));
     }
 
     &.tag_active {
-      @include utils.apply-themes(map.get(config.$clickable-tag, active));
+      @include apply-themes(map.get($clickable-tag, active));
     }
   }
 
   &_disabled {
     cursor: default;
 
-    @include utils.apply-themes(map.get(config.$disabled-tag, default));
+    @include apply-themes(map.get($disabled-tag, default));
 
     @include hover() {
-      @include utils.apply-themes(map.get(config.$disabled-tag, default));
+      @include apply-themes(map.get($disabled-tag, default));
     }
   }
 }
