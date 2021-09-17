@@ -22,10 +22,10 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TagComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() public readonly disabled: boolean = false;
+  @Input() public disabled: boolean = false;
   private readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly clickable: boolean = false;
+  @Input() public clickable: boolean = false;
   private readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
