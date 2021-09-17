@@ -144,4 +144,8 @@ $clickable-tag: map.deep-merge(
       @include apply-themes(map.get($disabled-tag, default));
     }
   }
+
+  &_with-avatar {
+    padding-left: 6px;
+  }
 }

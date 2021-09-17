@@ -1,3 +1,8 @@
-<div class="tag" [class.tag_clickable]="clickable$ | async" [class.tag_disabled]="disabled$ | async">
+<div
+  class="tag"
+  [class.tag_clickable]="clickable$ | async"
+  [class.tag_disabled]="disabled$ | async"
+  [class.tag_with-avatar]="withAvatar$ | async"
+>
   <ng-content></ng-content>
 </div>
