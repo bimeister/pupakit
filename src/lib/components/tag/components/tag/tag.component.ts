@@ -3,12 +3,10 @@ import {
   ViewEncapsulation,
   ChangeDetectionStrategy,
   Input,
-  OnChanges,
-  OnInit,
-  OnDestroy
+  OnChanges
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { map, switchMap, take, takeUntil, takeWhile } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { isNil } from '@bimeister/utilities';
 
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -21,18 +19,15 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TagComponent implements OnChanges, OnInit, OnDestroy {
+export class TagComponent implements OnChanges {
   @Input() public disabled: boolean = false;
   private readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public clickable: boolean = false;
   private readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.clickable$.pipe(map((isClickable: boolean) => (isClickable ? 'clickable' : null))),
-    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
   ]).pipe(
     map((classes: string[]) =>
@@ -40,42 +35,9 @@ export class TagComponent implements OnChanges, OnInit, OnDestroy {
     )
   );
 
-  private readonly destroyed$: Subject<void> = new Subject<void>();
-
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processDisabledChange(changes?.disabled);
     this.processClickableChange(changes?.clickable);
-  }
-
-  public ngOnInit(): void {
-    this.deactivateTagWhenDisabled();
-  }
-
-  public ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
-  }
-
-  public handleClick(): void {
-    this.disabled$
-      .pipe(
-        takeWhile(isDisabled => !isDisabled),
-        switchMap(() => this.clickable$),
-        takeWhile(isClickable => isClickable),
-        switchMap(() => this.active$),
-        take(1)
-      )
-      .subscribe(value => {
-        this.active$.next(!value);
-      });
-  }
-
-  private deactivateTagWhenDisabled(): void {
-    this.disabled$.pipe(takeUntil(this.destroyed$)).subscribe(isDisabled => {
-      if (isDisabled) {
-        this.active$.next(false);
-      }
-    });
   }
 
   private processDisabledChange(change: ComponentChange<this, boolean>): void {
