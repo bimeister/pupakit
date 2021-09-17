@@ -1,12 +1,5 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  Input,
-  OnChanges
-} from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { isNil } from '@bimeister/utilities';
 
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -25,15 +18,6 @@ export class TagComponent implements OnChanges {
 
   @Input() public clickable: boolean = false;
   private readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  public readonly resultClassList$: Observable<string[]> = combineLatest([
-    this.clickable$.pipe(map((isClickable: boolean) => (isClickable ? 'clickable' : null))),
-    this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
-  ]).pipe(
-    map((classes: string[]) =>
-      classes.filter((innerClass: string) => !isNil(innerClass)).map((innerProperty: string) => `tag_${innerProperty}`)
-    )
-  );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processDisabledChange(changes?.disabled);
