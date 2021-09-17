@@ -10,7 +10,7 @@ import { ColorTagColor } from '../../../../../internal/declarations/types/color-
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorTagComponent {
-  @Input() private readonly color: ColorTagColor = 'primary';
+  @Input() private color: ColorTagColor = 'primary';
 
   public get colorClass(): string {
     return `color-tag_${this.color}`;
