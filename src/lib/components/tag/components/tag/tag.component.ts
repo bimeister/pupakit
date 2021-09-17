@@ -14,10 +14,10 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 })
 export class TagComponent implements OnChanges {
   @Input() public disabled: boolean = false;
-  private readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public clickable: boolean = false;
-  private readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processDisabledChange(changes?.disabled);
