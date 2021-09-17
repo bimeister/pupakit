@@ -8,16 +8,19 @@ import { LoaderType } from '../../declarations/types/loader-type.type';
 export class LoaderService {
   private readonly loaderVisibilityState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly loaderTypeState$: BehaviorSubject<LoaderType> = new BehaviorSubject<LoaderType>(null);
+  private readonly loaderOverlayTopOffsetPxState$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderVisibilityState$;
   public readonly loaderType$: Observable<LoaderType> = this.loaderTypeState$;
+  public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderOverlayTopOffsetPxState$;
 
-  public setLoaderState(value: boolean, type: LoaderType = 'transparent'): void {
+  public setLoaderState(value: boolean, type: LoaderType = 'transparent', overlayTopOffsetPx: number = 0): void {
     this.loaderVisibilityState$.next(value);
     this.loaderTypeState$.next(value ? type : null);
+    this.loaderOverlayTopOffsetPxState$.next(overlayTopOffsetPx);
   }
 
-  public showLoader(type: LoaderType = 'transparent'): void {
-    this.setLoaderState(true, type);
+  public showLoader(type: LoaderType = 'transparent', overlayTopOffsetPx: number = 0): void {
+    this.setLoaderState(true, type, overlayTopOffsetPx);
   }
 
   public hideLoader(): void {

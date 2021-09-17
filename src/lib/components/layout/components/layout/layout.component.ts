@@ -35,6 +35,9 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
 
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderService.isLoaderVisible$;
   public readonly loaderType$: Observable<LoaderType> = this.loaderService.loaderType$;
+  public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderService.loaderOverlayTopOffsetPx$.pipe(
+    filterNotNil()
+  );
 
   public readonly countOfColumns$: Observable<number> = this.clientUiHandlerService.uiState$.pipe(
     filterNotNil(),

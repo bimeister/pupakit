@@ -8,9 +8,10 @@ import { LoaderComponent } from './components/loader/loader.component';
 import { OverlayComponent } from './components/overlay/overlay.component';
 import { IconModule } from '../icon/icon.module';
 import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
+import { SpinnerModule } from '../spinner/spinner.module';
 
 @NgModule({
-  imports: [SharedModule, IconModule.forFeature([mdCloseIcon])],
+  imports: [SharedModule, IconModule.forFeature([mdCloseIcon]), SpinnerModule],
   declarations: [AlertComponent, CloseButtonComponent, LayoutComponent, LoaderComponent, OverlayComponent],
   exports: [LayoutComponent, LoaderComponent]
 })

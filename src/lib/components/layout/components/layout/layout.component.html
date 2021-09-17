@@ -8,11 +8,17 @@
       </div>
     </div>
     <ng-content></ng-content>
+    <div
+      class="layout-wrapper loader"
+      [ngClass]="loaderType$ | async"
+      [style.top.px]="loaderOverlayTopOffsetPx$ | async"
+      *ngIf="isLoaderVisible$ | async"
+    >
+      <pupa-spinner [size]="'48px'"></pupa-spinner>
+    </div>
   </div>
 </div>
-<div class="layout-wrapper loader" [ngClass]="loaderType$ | async" *ngIf="isLoaderVisible$ | async">
-  <pupa-loader></pupa-loader>
-</div>
+
 <div class="layout-wrapper alerts">
   <div class="alerts-wrapper">
     <pupa-alert *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId" [alert]="alert"></pupa-alert>
