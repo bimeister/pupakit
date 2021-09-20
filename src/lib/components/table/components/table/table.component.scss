@@ -66,11 +66,11 @@
   position: absolute;
   top: 0;
   background-color: color('base-white-n300');
-  width: newRems(2);
-  height: newRems(2);
+  width: 4rem;
+  height: 4rem;
   @include font-type-point;
   @include font-size-mark;
-  border-radius: newRems(1);
+  border-radius: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;

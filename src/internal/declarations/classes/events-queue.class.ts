@@ -3,11 +3,10 @@ import { BusEventBase, EventBus } from '@bimeister/event-bus';
 import { isEmpty } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, withLatestFrom } from 'rxjs/operators';
-import { DataEventBase } from './data-event-base.class';
 import { QueueEvents } from '../events/queue.events';
 
 export class EventsQueue {
-  private readonly queue: DataEventBase[] = [];
+  private readonly queue: BusEventBase[] = [];
   private readonly started$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   private readonly subscription: Subscription = new Subscription();
 
@@ -18,7 +17,7 @@ export class EventsQueue {
   }
 
   public removeEventFromQueue(eventId: string): void {
-    const eventIndex: number = this.queue.findIndex((event: DataEventBase) => event.id === eventId);
+    const eventIndex: number = this.queue.findIndex((event: BusEventBase) => event.id === eventId);
     if (eventIndex === -1) {
       return;
     }

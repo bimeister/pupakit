@@ -44,7 +44,6 @@ import { isTableCellHtmlElement } from '../../../../../internal/type-guards/is-t
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { TableEvents } from '../../../../../internal/declarations/events/table.events';
 import { TableColumnSorting } from '../../../../../internal/declarations/enums/table-column-sorting.enum';
-import { DataEvents } from '../../../../../internal/declarations/events/data.events';
 import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
 import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
@@ -370,12 +369,12 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     return this.eventBus$
       .pipe(
         switchMap((eventBus: EventBus) =>
-          eventBus.catchEvents((event: BusEventBase) => event instanceof DataEvents.ScrollViewport)
+          eventBus.catchEvents((event: BusEventBase) => event instanceof TableEvents.ScrollViewportByIndex)
         ),
         withLatestFrom(this.scrollBehavior$)
       )
-      .subscribe(([event, scrollBehavior]: [DataEvents.ScrollViewport, ScrollBehavior]) => {
-        this.cdkVirtualScrollViewportRef.scrollToIndex(event.payload, scrollBehavior);
+      .subscribe(([event, scrollBehavior]: [TableEvents.ScrollViewportByIndex, ScrollBehavior]) => {
+        this.cdkVirtualScrollViewportRef.scrollToIndex(event.index, scrollBehavior);
       });
   }
 
