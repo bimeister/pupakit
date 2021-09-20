@@ -1,5 +1,7 @@
-import { ControllerOptions } from './controller-options.interface';
+import { TrackByFunction } from '@angular/core';
 
-export interface TableControllerOptions<T> extends ControllerOptions<T> {
+export interface TableControllerOptions<T> {
+  scrollBehavior?: ScrollBehavior;
+  trackBy?: TrackByFunction<T>;
   rowHeightPx?: number;
 }

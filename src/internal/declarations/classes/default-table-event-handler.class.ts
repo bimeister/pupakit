@@ -1,25 +1,25 @@
-import { DefaultEventHandler } from './default-event-handler.class';
 import { EventBus } from '@bimeister/event-bus';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
-import { Subscription } from 'rxjs';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map, mapTo, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { QueueEvents } from '../events/queue.events';
 import { TableEvents } from '../events/table.events';
 import { TableColumn } from './table-column.class';
-import { DataEvents } from '../events/data.events';
 import { ListRange } from '@angular/cdk/collections';
+import { Type } from '@angular/core';
 
-export class DefaultTableEventHandler<T> extends DefaultEventHandler<T> {
+export class DefaultTableEventHandler<T> {
+  protected subscription: Subscription = new Subscription();
+
   constructor(
     protected readonly eventBus: EventBus,
     protected readonly dataDisplayCollection: TableDataDisplayCollection<T>
   ) {
-    super(eventBus, dataDisplayCollection);
+    this.reconnect();
   }
 
   protected subscribeToEvents(): void {
-    super.subscribeToEvents();
-
+    this.subscription.add(this.getSubscriptionToSetData());
     this.subscription.add(this.getSubscriptionToSetColumnDefinitions());
     this.subscription.add(this.getSubscriptionToUpdateColumnWidthByDelta());
     this.subscription.add(this.getSubscriptionToSetColumnWidth());
@@ -28,6 +28,16 @@ export class DefaultTableEventHandler<T> extends DefaultEventHandler<T> {
     this.subscription.add(this.getSubscriptionToRefreshDataSlice());
     this.subscription.add(this.getSubscriptionToSetSelected());
     this.subscription.add(this.getSubscriptionToScrollByIndex());
+  }
+
+  protected getSubscriptionToSetData(): Subscription {
+    return this.getEvents(TableEvents.SetData)
+      .pipe(
+        switchMap((event: TableEvents.SetData<T>) => {
+          return this.dataDisplayCollection.setData(event.data).pipe(mapTo(event));
+        })
+      )
+      .subscribe((event: TableEvents.SetData<T>) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
   protected getSubscriptionToSetColumnDefinitions(): Subscription {
@@ -113,26 +123,42 @@ export class DefaultTableEventHandler<T> extends DefaultEventHandler<T> {
   }
 
   protected getSubscriptionToSetSelected(): Subscription {
-    return this.getEvents(DataEvents.SetSelected)
+    return this.getEvents(TableEvents.SetSelected)
       .pipe(
-        map((event: DataEvents.SetSelected) => {
-          this.dataDisplayCollection.selectedIdsList$.next(event.payload);
+        map((event: TableEvents.SetSelected) => {
+          this.dataDisplayCollection.selectedIdsList$.next(event.selectedRowTrackByIds);
           return event;
         })
       )
-      .subscribe((event: DataEvents.SetSelected) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
+      .subscribe((event: TableEvents.SetSelected) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
   protected getSubscriptionToScrollByIndex(): Subscription {
-    return this.getEvents(DataEvents.ScrollByIndex)
+    return this.getEvents(TableEvents.ScrollByIndex)
       .pipe(
-        map((event: DataEvents.ScrollByIndex) => {
-          this.eventBus.dispatch(new DataEvents.ScrollViewport(event.payload));
+        map((event: TableEvents.ScrollByIndex) => {
+          this.eventBus.dispatch(new TableEvents.ScrollViewportByIndex(event.index));
           return event;
         })
       )
-      .subscribe((event: DataEvents.ScrollByIndex) =>
+      .subscribe((event: TableEvents.ScrollByIndex) =>
         this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
       );
+  }
+
+  public reconnect(): void {
+    this.disconnect();
+    this.subscribeToEvents();
+  }
+
+  public disconnect(): void {
+    this.subscription.unsubscribe();
+    this.subscription = new Subscription();
+  }
+
+  public getEvents<E extends TableEvents.TableEventBase>(eventType: Type<E>): Observable<E> {
+    return this.eventBus
+      .catchEvents()
+      .pipe(filter((event: TableEvents.TableEventBase): event is E => event instanceof eventType));
   }
 }

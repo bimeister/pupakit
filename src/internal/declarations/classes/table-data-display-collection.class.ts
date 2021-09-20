@@ -1,9 +1,9 @@
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { DataDisplayCollection } from './data-display-collection.class';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
 import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
 import { EventBus } from '@bimeister/event-bus';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ListRange } from '@angular/cdk/collections';
 import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { TrackByFunction } from '@angular/core';
@@ -19,9 +19,13 @@ interface DistributedColumns {
   rightPinnedColumns: TableColumn[];
 }
 
-export class TableDataDisplayCollection<T>
-  extends DataDisplayCollection<T>
-  implements TableDataDisplayCollectionRef<T> {
+export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
+  public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
+  public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+
+  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject(DataDisplayCollection.trackBy);
+  public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
+
   private readonly columnDefinitions$: BehaviorSubject<TableColumnDefenition[]> = new BehaviorSubject<
     TableColumnDefenition[]
   >([]);
@@ -112,8 +116,15 @@ export class TableDataDisplayCollection<T>
 
   public readonly tableWidthPx$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 
-  constructor(public readonly eventBus: EventBus) {
-    super();
+  constructor(public readonly eventBus: EventBus) {}
+
+  public setData(data: T[]): Observable<T[]> {
+    this.data$.next(data);
+    return this.data$.pipe(take(1));
+  }
+
+  public setSelectedIdsList(value: string[]): void {
+    this.selectedIdsList$.next(value);
   }
 
   public setColumnDefinitions(definitions: TableColumnDefenition[]): void {
@@ -129,5 +140,12 @@ export class TableDataDisplayCollection<T>
       return;
     }
     this.rowHeightPx$.next(value);
+  }
+
+  public static trackBy<T>(index: number, dataItem: T): string {
+    if (isNil(dataItem)) {
+      return `${index}__null`;
+    }
+    return `${index}__${JSON.stringify(dataItem)}`;
   }
 }

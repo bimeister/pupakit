@@ -42,8 +42,6 @@
       true,
       {
         "order": [
-          "protected-instance-field",
-          "instance-field",
           "protected-static-field",
           "public-static-field",
           "private-static-field",
