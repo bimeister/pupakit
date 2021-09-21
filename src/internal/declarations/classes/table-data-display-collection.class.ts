@@ -1,5 +1,4 @@
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { DataDisplayCollection } from './data-display-collection.class';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
 import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
 import { EventBus } from '@bimeister/event-bus';
@@ -23,7 +22,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
-  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject(DataDisplayCollection.trackBy);
+  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject(TableDataDisplayCollection.trackBy);
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
 
   private readonly columnDefinitions$: BehaviorSubject<TableColumnDefenition[]> = new BehaviorSubject<
