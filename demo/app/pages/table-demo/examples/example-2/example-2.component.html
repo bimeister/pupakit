@@ -1,15 +1,10 @@
 <div class="table">
   <pupa-table [controller]="controller">
     <pupa-table-column-template columnType="last-name">
-      <pupa-table-header-cell *pupaTableHeaderCellTemplate="let column" [column]="column" [resizable]="true">
-        {{ column.definition.title }}
-      </pupa-table-header-cell>
-    </pupa-table-column-template>
-
-    <pupa-table-column-template columnType="age">
       <pupa-table-header-cell
         *pupaTableHeaderCellTemplate="let column"
         [column]="column"
+        [resizable]="true"
         [sortable]="true"
         [isSortingNoneAvailable]="false"
       >
