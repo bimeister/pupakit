@@ -34,10 +34,12 @@
     "autofix": "(yarn run prettify & yarn run lint:debug) && yarn run lint:inspect",
     "create-untracked-files": "gulp create:untracked-files"
   },
+  "peerDependencies": {
+    "@bimeister/event-bus": "^0.1.0",
+    "@bimeister/utilities": "^0.1.0"
+  },
   "dependencies": {
     "@angular/cdk": "~12.0.0",
-    "@bimeister/event-bus": "^0.1.0-3949893e",
-    "@bimeister/utilities": "^0.1.0-24d2e33e",
     "@types/hammerjs": "^2.0.40",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",
@@ -61,7 +63,9 @@
     "@angular/platform-browser-dynamic": "~12.0.0",
     "@angular/router": "~12.0.0",
     "@babel/core": "~7.12.0",
-    "@bimeister/build-cli": "0.1.0-b916fe5b",
+    "@bimeister/build-cli": "0.1.0-c869ab81",
+    "@bimeister/event-bus": "0.1.0-40a7dcbb",
+    "@bimeister/utilities": "0.1.0-fe13e1f0",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.0.0",
     "babel-loader": "^8.1.0",

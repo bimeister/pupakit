@@ -1,16 +1,16 @@
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
-import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
-import { EventBus } from '@bimeister/event-bus';
-import { map, take } from 'rxjs/operators';
 import { ListRange } from '@angular/cdk/collections';
-import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { TrackByFunction } from '@angular/core';
-import { TableColumn } from './table-column.class';
-import { TableBodyRowsDataSource } from './table-body-rows-data-source.class';
+import { EventBus } from '@bimeister/event-bus';
+import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { TableColumnPin } from '../enums/table-column-pin.enum';
-import { TableRow } from './table-row.class';
+import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
+import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
 import { TableBodyRow } from './table-body-row.class';
+import { TableBodyRowsDataSource } from './table-body-rows-data-source.class';
+import { TableColumn } from './table-column.class';
+import { TableRow } from './table-row.class';
 
 interface DistributedColumns {
   leftPinnedColumns: TableColumn[];
@@ -22,7 +22,9 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
-  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject(TableDataDisplayCollection.trackBy);
+  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject<TrackByFunction<T>>(
+    TableDataDisplayCollection.trackBy
+  );
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
 
   private readonly columnDefinitions$: BehaviorSubject<TableColumnDefenition[]> = new BehaviorSubject<
@@ -141,10 +143,10 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     this.rowHeightPx$.next(value);
   }
 
-  public static trackBy<T>(index: number, dataItem: T): string {
+  public static readonly trackBy: TrackByFunction<any> = <T>(index: number, dataItem: T): string => {
     if (isNil(dataItem)) {
       return `${index}__null`;
     }
     return `${index}__${JSON.stringify(dataItem)}`;
-  }
+  };
 }
