@@ -10,9 +10,11 @@
     <ng-content></ng-content>
   </span>
 
-  <span class="header-cell__sort" *ngIf="sortable && (isIconVisible$ | async)">
-    <pupa-icon [name]="iconName$ | async"></pupa-icon>
-  </span>
+  <div class="header-cell__sort-wrapper" *ngIf="sortable && (isIconVisible$ | async)">
+    <span class="header-cell__sort">
+      <pupa-icon [name]="iconName$ | async"></pupa-icon>
+    </span>
+  </div>
 
   <div
     class="header-cell__resizer resizer"
