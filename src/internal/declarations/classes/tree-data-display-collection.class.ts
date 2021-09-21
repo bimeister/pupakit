@@ -1,11 +1,18 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-collection-ref.interface';
-import { DataDisplayCollection } from './data-display-collection.class';
 import { FlatTreeItem } from './flat-tree-item.class';
+import { TrackByFunction } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { isNil } from '@bimeister/utilities';
 
-export class TreeDataDisplayCollection
-  extends DataDisplayCollection<FlatTreeItem>
-  implements TreeDataDisplayCollectionRef {
+export class TreeDataDisplayCollection implements TreeDataDisplayCollectionRef {
+  public readonly data$: BehaviorSubject<FlatTreeItem[]> = new BehaviorSubject<FlatTreeItem[]>([]);
+  public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+
+  public readonly trackBy$: Subject<TrackByFunction<FlatTreeItem>> = new BehaviorSubject(
+    TreeDataDisplayCollection.trackBy
+  );
+  public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
   public readonly expandedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly hasDragAndDrop$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -16,5 +23,21 @@ export class TreeDataDisplayCollection
 
   public setIsLoading(value: boolean): void {
     this.isLoading$.next(value);
+  }
+
+  public setData(data: FlatTreeItem[]): Observable<FlatTreeItem[]> {
+    this.data$.next(data);
+    return this.data$.pipe(take(1));
+  }
+
+  public setSelectedIdsList(value: string[]): void {
+    this.selectedIdsList$.next(value);
+  }
+
+  public static trackBy<T>(index: number, dataItem: T): string {
+    if (isNil(dataItem)) {
+      return `${index}__null`;
+    }
+    return `${index}__${JSON.stringify(dataItem)}`;
   }
 }

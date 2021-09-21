@@ -29,11 +29,9 @@ import {
   timer
 } from 'rxjs';
 import { debounce, filter, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { DataEventBase } from '../../../../../internal/declarations/classes/data-event-base.class';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
 import { RangedDataSource } from '../../../../../internal/declarations/classes/ranged-data-source.class';
 import { TreeController } from '../../../../../internal/declarations/classes/tree-controller.class';
-import { DataEvents } from '../../../../../internal/declarations/events/data.events';
 import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
 import { TreeEvents } from '../../../../../internal/declarations/events/tree.events';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -189,14 +187,14 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
         draggedElement: dragAndDropMeta.dragTreeItem,
         droppedElement: dragAndDropMeta.dropTreeItem
       };
-      this.eventBus.dispatch(new DataEvents.Drop(dropEventData));
+      this.eventBus.dispatch(new TreeEvents.Drop(dropEventData));
     });
     this.expandWithDelay$.next(null);
     this.dragAndDropMeta$.next(null);
   }
 
   public click(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new DataEvents.Click(treeItem));
+    this.eventBus.dispatch(new TreeEvents.Click(treeItem));
   }
 
   public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
@@ -243,7 +241,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private getSubscriptionToSetLoading(): Subscription {
-    return this.getEvents(DataEvents.SetLoading).subscribe((event: DataEvents.SetLoading) => {
+    return this.getEvents(TreeEvents.SetLoading).subscribe((event: TreeEvents.SetLoading) => {
       this.dataDisplayCollection.setIsLoading(event.payload);
       this.changeDetectorRef.detectChanges();
       this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
@@ -271,7 +269,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private getSubscriptionToSetSelected(): Subscription {
-    return this.getEvents(DataEvents.SetSelected).subscribe((event: DataEvents.SetSelected) => {
+    return this.getEvents(TreeEvents.SetSelected).subscribe((event: TreeEvents.SetSelected) => {
       this.setSelectedIdsList(event.payload);
       this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
@@ -283,7 +281,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   }
 
   private getSubscriptionToScrollToIndex(): Subscription {
-    return this.getEvents(DataEvents.ScrollByIndex).subscribe((event: DataEvents.ScrollByIndex) => {
+    return this.getEvents(TreeEvents.ScrollByIndex).subscribe((event: TreeEvents.ScrollByIndex) => {
       this.scrollToIndex(event.payload);
       this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
     });
@@ -320,8 +318,10 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
     });
   }
 
-  private getEvents<E extends DataEventBase>(eventType: Type<E>): Observable<E> {
-    return this.eventBus.catchEvents().pipe(filter((event: DataEventBase): event is E => event instanceof eventType));
+  private getEvents<E extends TreeEvents.TreeEventBase>(eventType: Type<E>): Observable<E> {
+    return this.eventBus
+      .catchEvents()
+      .pipe(filter((event: TreeEvents.TreeEventBase): event is E => event instanceof eventType));
   }
 
   private processDragMoving(dragAndDropMeta: DragAndDropMeta, x: number, y: number): void {

@@ -1,28 +1,55 @@
 import { TreeEvents } from '../events/tree.events';
 import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-collection-ref.interface';
-import { ControllerBase } from './abstract/controller-base.abstract';
 import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
-import { DataEvents } from '../events/data.events';
 import { Nullable } from '@bimeister/utilities';
 import { TreeControllerOptions } from '../interfaces/tree-controller-options.interface';
+import { EventBus } from '@bimeister/event-bus';
+import { EventsQueue } from './events-queue.class';
+import { QueueEvents } from '../events/queue.events';
+import { TrackByFunction, Type } from '@angular/core';
+import { Observable } from 'rxjs';
 
-export class TreeController extends ControllerBase<FlatTreeItem, TreeControllerOptions> {
-  protected readonly dataDisplayCollection: TreeDataDisplayCollection;
-  protected readonly handler: DefaultTreeEventHandler;
+export class TreeController {
+  public readonly eventBus: EventBus = new EventBus();
+
+  protected readonly queue: EventsQueue = new EventsQueue(this.eventBus);
+  protected readonly dataDisplayCollection: TreeDataDisplayCollection = new TreeDataDisplayCollection();
+  protected readonly handler: DefaultTreeEventHandler = new DefaultTreeEventHandler(
+    this.eventBus,
+    this.dataDisplayCollection
+  );
 
   constructor(protected readonly options?: Nullable<TreeControllerOptions>) {
-    super();
+    this.setScrollBehavior(options?.scrollBehavior);
+    this.setTrackBy(options?.trackBy);
     this.setHasDragAndDrop(options?.hasDragAndDrop);
   }
 
-  protected getDataDisplayCollection(): TreeDataDisplayCollection {
-    return new TreeDataDisplayCollection();
+  protected dispatchInQueue(event: TreeEvents.TreeEventBase): void {
+    const queueEvent: QueueEvents.AddToQueue = new QueueEvents.AddToQueue(event);
+    this.eventBus.dispatch(queueEvent);
   }
 
-  protected getHandler(): DefaultTreeEventHandler {
-    return new DefaultTreeEventHandler(this.eventBus, this.dataDisplayCollection);
+  public getOptions(): Nullable<TreeControllerOptions> {
+    return this.options;
+  }
+
+  public setData(data: FlatTreeItem[]): void {
+    this.dispatchInQueue(new TreeEvents.SetData(data));
+  }
+
+  public setSelected(...selectedIds: string[]): void {
+    this.dispatchInQueue(new TreeEvents.SetSelected(selectedIds));
+  }
+
+  public setLoading(isLoading: boolean): void {
+    this.eventBus.dispatch(new TreeEvents.SetLoading(isLoading));
+  }
+
+  public getEvents<E extends TreeEvents.TreeEventBase>(eventType: Type<E>): Observable<E> {
+    return this.queue.getEvents(eventType);
   }
 
   public getDataDisplayCollectionRef(): TreeDataDisplayCollectionRef {
@@ -38,15 +65,23 @@ export class TreeController extends ControllerBase<FlatTreeItem, TreeControllerO
   }
 
   public removeTreeItem(treeItemId: string): void {
-    this.dispatchInQueue(new DataEvents.RemoveItem(treeItemId));
+    this.dispatchInQueue(new TreeEvents.RemoveItem(treeItemId));
   }
 
   public setTreeItem(treeItem: FlatTreeItem): void {
-    this.dispatchInQueue(new DataEvents.UpdateItem(treeItem));
+    this.dispatchInQueue(new TreeEvents.UpdateItem(treeItem));
   }
 
   public scrollTo(treeItemId: string): void {
-    this.dispatchInQueue(new DataEvents.ScrollById(treeItemId));
+    this.dispatchInQueue(new TreeEvents.ScrollById(treeItemId));
+  }
+
+  private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {
+    this.dataDisplayCollection.scrollBehavior$.next(scrollBehavior);
+  }
+
+  private setTrackBy(trackBy: TrackByFunction<FlatTreeItem> = TreeDataDisplayCollection.trackBy): void {
+    this.dataDisplayCollection.trackBy$.next(trackBy);
   }
 
   private setHasDragAndDrop(hasDragAndDrop: boolean = false): void {

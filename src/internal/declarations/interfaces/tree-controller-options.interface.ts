@@ -1,6 +1,8 @@
-import { ControllerOptions } from './controller-options.interface';
 import { FlatTreeItem } from '../classes/flat-tree-item.class';
+import { TrackByFunction } from '@angular/core';
 
-export interface TreeControllerOptions extends ControllerOptions<FlatTreeItem> {
+export interface TreeControllerOptions {
+  scrollBehavior?: ScrollBehavior;
+  trackBy?: TrackByFunction<FlatTreeItem>;
   hasDragAndDrop?: boolean;
 }
