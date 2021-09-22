@@ -108,12 +108,6 @@ $clickable-tag: map.deep-merge(
 
 :host {
   outline: none;
-
-  &:focus-within {
-    .tag_clickable:not(.tag_disabled) {
-      @include apply-themes(map.get($clickable-tag, active));
-    }
-  }
 }
 
 // styles
@@ -132,6 +126,10 @@ $clickable-tag: map.deep-merge(
 
     @include hover() {
       @include apply-themes(map.get($clickable-tag, hover));
+    }
+
+    &:focus-visible:not(.tag_disabled) {
+      @include apply-themes(map.get($clickable-tag, active));
     }
   }
 
