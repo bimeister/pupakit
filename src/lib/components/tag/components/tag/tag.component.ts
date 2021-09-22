@@ -10,6 +10,8 @@ import { BehaviorSubject } from 'rxjs';
 
 import { AvatarComponent } from '../../../avatar/components/avatar/avatar.component';
 
+type TabindexAttribute = null | number;
+
 @Component({
   selector: 'pupa-tag',
   templateUrl: './tag.component.html',
@@ -26,13 +28,21 @@ export class TagComponent implements AfterContentInit {
 
   @Input() public tabindex: number = 0;
 
+  get tabindexAttribute(): TabindexAttribute {
+    if (this.clickable) {
+      return this.tabindex;
+    } else {
+      return null;
+    }
+  }
+
   public readonly withAvatar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public ngAfterContentInit(): void {
-    this.processWithAvatar();
+    this.processWithAvatarChange();
   }
 
-  private processWithAvatar(): void {
+  private processWithAvatarChange(): void {
     if (this.avatarComponent !== undefined) {
       this.withAvatar$.next(true);
     }
