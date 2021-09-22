@@ -10,8 +10,6 @@ import { BehaviorSubject } from 'rxjs';
 
 import { AvatarComponent } from '../../../avatar/components/avatar/avatar.component';
 
-type TabindexAttribute = null | number;
-
 @Component({
   selector: 'pupa-tag',
   templateUrl: './tag.component.html',
@@ -28,7 +26,7 @@ export class TagComponent implements AfterContentInit {
 
   @Input() public tabindex: number = 0;
 
-  get tabindexAttribute(): TabindexAttribute {
+  get tabindexAttribute(): null | number {
     if (this.clickable) {
       return this.tabindex;
     } else {
