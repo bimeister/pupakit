@@ -109,7 +109,7 @@ $clickable-tag: map.deep-merge(
 :host {
   outline: none;
 
-  &:focus-visible {
+  &:focus-within {
     .tag_clickable:not(.tag_disabled) {
       @include apply-themes(map.get($clickable-tag, active));
     }

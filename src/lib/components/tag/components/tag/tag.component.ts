@@ -24,6 +24,8 @@ export class TagComponent implements AfterContentInit {
 
   @Input() public clickable: boolean = false;
 
+  @Input() public tabindex: number = 0;
+
   public readonly withAvatar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public ngAfterContentInit(): void {
