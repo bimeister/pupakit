@@ -39,10 +39,8 @@ export class ListRangesIntersectionProducer {
     previousRange: ListRange,
     currentRange: ListRange
   ): PagedVirtualScrollArguments {
-    const possiblePagedVirtualScrollArguments: PagedVirtualScrollArguments = ListRangesIntersectionProducer.calculateIntersection(
-      previousRange,
-      currentRange
-    );
+    const possiblePagedVirtualScrollArguments: PagedVirtualScrollArguments =
+      ListRangesIntersectionProducer.calculateIntersection(previousRange, currentRange);
 
     const { getFrom, getTo, removeFrom, removeTo }: PagedVirtualScrollArguments = possiblePagedVirtualScrollArguments;
 

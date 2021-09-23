@@ -330,10 +330,8 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     return this.columnIdToColumnMap$
       .pipe(
         switchMap((columnIdToColumnMap: Map<string, TableColumn>) => {
-          const columnWidthChangesList: Observable<[string, number]>[] = Array.from(
-            columnIdToColumnMap.values()
-          ).map((column: TableColumn) =>
-            column.widthPx$.pipe(map((widthPx: number) => [column.definition.id, widthPx]))
+          const columnWidthChangesList: Observable<[string, number]>[] = Array.from(columnIdToColumnMap.values()).map(
+            (column: TableColumn) => column.widthPx$.pipe(map((widthPx: number) => [column.definition.id, widthPx]))
           );
 
           return merge(...columnWidthChangesList);
