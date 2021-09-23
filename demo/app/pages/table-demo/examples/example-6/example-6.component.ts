@@ -73,15 +73,21 @@ export class TableExample6Component implements OnDestroy {
     trackBy: (_index: number, rowData: SomeData) => rowData.id
   });
 
-  public readonly columnWidthChanged$: Subject<TableEvents.ColumnWidthChanged> = new Subject<TableEvents.ColumnWidthChanged>();
-  public readonly columnSortingChanged$: Subject<TableEvents.ColumnSortingChanged> = new Subject<TableEvents.ColumnSortingChanged>();
+  public readonly columnWidthChanged$: Subject<TableEvents.ColumnWidthChanged> =
+    new Subject<TableEvents.ColumnWidthChanged>();
+  public readonly columnSortingChanged$: Subject<TableEvents.ColumnSortingChanged> =
+    new Subject<TableEvents.ColumnSortingChanged>();
   public readonly columnHover$: Subject<TableEvents.ColumnHover> = new Subject<TableEvents.ColumnHover>();
   public readonly rowHover$: Subject<TableEvents.RowHover> = new Subject<TableEvents.RowHover>();
   public readonly cellClick$: Subject<TableEvents.CellClick> = new Subject<TableEvents.CellClick>();
-  public readonly horizontalScrollBarVisibilityChanged$: Subject<TableEvents.HorizontalScrollBarVisibilityChanged> = new Subject<TableEvents.HorizontalScrollBarVisibilityChanged>();
-  public readonly verticalScrollBarVisibilityChanged$: Subject<TableEvents.VerticalScrollBarVisibilityChanged> = new Subject<TableEvents.VerticalScrollBarVisibilityChanged>();
-  public readonly hiddenColumnIdsChanged$: Subject<TableEvents.HiddenColumnIdsChanged> = new Subject<TableEvents.HiddenColumnIdsChanged>();
-  public readonly listRangeChanged$: Subject<TableEvents.ListRangeChanged> = new Subject<TableEvents.ListRangeChanged>();
+  public readonly horizontalScrollBarVisibilityChanged$: Subject<TableEvents.HorizontalScrollBarVisibilityChanged> =
+    new Subject<TableEvents.HorizontalScrollBarVisibilityChanged>();
+  public readonly verticalScrollBarVisibilityChanged$: Subject<TableEvents.VerticalScrollBarVisibilityChanged> =
+    new Subject<TableEvents.VerticalScrollBarVisibilityChanged>();
+  public readonly hiddenColumnIdsChanged$: Subject<TableEvents.HiddenColumnIdsChanged> =
+    new Subject<TableEvents.HiddenColumnIdsChanged>();
+  public readonly listRangeChanged$: Subject<TableEvents.ListRangeChanged> =
+    new Subject<TableEvents.ListRangeChanged>();
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);

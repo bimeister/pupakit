@@ -19,7 +19,7 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "module": "ESNext",
+    "module": "ES2020",
     "target": "ES2020",
     "moduleResolution": "Node",
     "outDir": "./dist/out-tsc",

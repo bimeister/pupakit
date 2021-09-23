@@ -8,9 +8,8 @@ import { isTableCellHtmlElement } from '../../../../internal/type-guards/is-tabl
 export class TableColumnsIntersectionService implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
-  private readonly columnIdToIntersectionEntryMap$: BehaviorSubject<
-    Map<string, IntersectionObserverEntry>
-  > = new BehaviorSubject<Map<string, IntersectionObserverEntry>>(new Map<string, IntersectionObserverEntry>());
+  private readonly columnIdToIntersectionEntryMap$: BehaviorSubject<Map<string, IntersectionObserverEntry>> =
+    new BehaviorSubject<Map<string, IntersectionObserverEntry>>(new Map<string, IntersectionObserverEntry>());
 
   private readonly hiddenColumnsCount$: Observable<[string[], string[]]> = this.columnIdToIntersectionEntryMap$.pipe(
     map((columnIdToIntersectionEntryMap: Map<string, IntersectionObserverEntry>) => {

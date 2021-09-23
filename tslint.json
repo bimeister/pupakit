@@ -16,9 +16,6 @@
     "component-selector": [true, "element", ["pupa", "demo"], "kebab-case"],
     "curly": true,
     "cyclomatic-complexity": true,
-    "deprecation": {
-      "severity": "warn"
-    },
     "directive-selector": [true, "attribute", ["pupa", "demo"], "camelCase"],
     "encoding": true,
     "eofline": true,

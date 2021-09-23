@@ -12,12 +12,12 @@ const DRAGGABLE_CLONE_OFFSET_PX: number = 10;
 /** @dynamic */
 @Injectable()
 export class DraggableListService implements OnDestroy {
-  public readonly changeIndexEvent$: Subject<DraggableListChangeIndexEvent> = new Subject<DraggableListChangeIndexEvent>();
+  public readonly changeIndexEvent$: Subject<DraggableListChangeIndexEvent> =
+    new Subject<DraggableListChangeIndexEvent>();
 
   public readonly currentDraggableListItemClone$: BehaviorSubject<HTMLElement> = new BehaviorSubject<HTMLElement>(null);
-  public readonly currentDraggableListItem$: BehaviorSubject<CurrentDraggableListItem> = new BehaviorSubject<CurrentDraggableListItem>(
-    null
-  );
+  public readonly currentDraggableListItem$: BehaviorSubject<CurrentDraggableListItem> =
+    new BehaviorSubject<CurrentDraggableListItem>(null);
   public readonly currentDraggableListItemNewIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly availableIndexes: Set<number> = new Set<number>();
