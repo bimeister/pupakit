@@ -1,199 +1,294 @@
 import { NgModule, Type } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
-import { AvatarDemoComponent } from './pages/avatar-demo/avatar-demo.component';
-import { ButtonDemoComponent } from './pages/button-demo/button-demo.component';
-import { CheckboxDemoComponent } from './pages/checkbox-demo/checkbox-demo.component';
-import { ChipButtonDemoComponent } from './pages/chip-button-demo/chip-button-demo.component';
-import { ChipDemoComponent } from './pages/chip-demo/chip-demo.component';
-import { ChipTabsDemoComponent } from './pages/chip-tabs-demo/chip-tabs-demo.component';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
-import { ColorsDemoComponent } from './pages/colors-demo/colors-demo.component';
-import { ControlsIsPatchedDemoComponent } from './pages/controls-is-patched-demo/controls-is-patched-demo.component';
-import { DatagridDemoComponent } from './pages/datagrid-demo/datagrid-demo.component';
-import { DateTimePickerDemoComponent } from './pages/date-time-picker-demo/date-time-picker-demo.component';
-import { DaySelectorDemoComponent } from './pages/day-selector-demo/day-selector-demo.component';
-import { DraggableDemoComponent } from './pages/draggable-demo/draggable-demo.component';
-import { DraggableListDemoComponent } from './pages/draggable-list-demo/draggable-demo.component';
-import { DrawerDemoComponent } from './pages/drawer-demo/drawer-demo.component';
-import { DropdownDemoComponent } from './pages/dropdown-demo/dropdown-demo.component';
-import { DropdownMenuDemoComponent } from './pages/dropdown-menu-demo/dropdown-menu-demo.component';
-import { DroppableDemoComponent } from './pages/droppable-demo/droppable-demo.component';
-import { FloatingCardDemoComponent } from './pages/floating-card-demo/floating-card-demo.component';
-import { IconButtonDemoComponent } from './pages/icon-button-demo/icon-button-demo.component';
-import { IconPageComponent } from './pages/icon-page/icon-page.component';
-import { InputDemoComponent } from './pages/input-demo/input-demo.component';
-import { LayoutDemoComponent } from './pages/layout-demo/layout-demo.component';
-import { LoaderDemoComponent } from './pages/loader-demo/loader-demo.component';
-import { ModalDemoComponent } from './pages/modal-demo/modal-demo.component';
-import { MultiselectionListDemoComponent } from './pages/multiselection-list-demo/multiselection-list-demo.component';
-import { PagedVirtualScrollDemoComponent } from './pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.component';
-import { RadioButtonDemoComponent } from './pages/radio-button-demo/radio-button-demo.component';
-import { RatingDemoComponent } from './pages/rating-demo/rating-demo.component';
-import { ScrollbarDemoComponent } from './pages/scrollbar-demo/scrollbar-demo.component';
-import { SearchFieldDemoComponent } from './pages/search-field-demo/search-field-demo.component';
-import { SelectDemoComponent } from './pages/select-demo/select-demo.component';
-import { SelectMultipleDemoComponent } from './pages/select-multiple-demo/select-multiple-demo.component';
-import { SelectorDemoComponent } from './pages/selector-demo/selector-demo.component';
-import { SpinnerDemoComponent } from './pages/spinner-demo/spinner-demo.component';
-import { SwitcherDemoComponent } from './pages/switcher-demo/switcher-demo.component';
-import { TableInputDemoComponent } from './pages/table-input-demo/table-input-demo.component';
-import { TabsDemoComponent } from './pages/tabs-demo/tabs-demo.component';
-import { TextareaDemoComponent } from './pages/textarea-demo/textarea-demo.component';
-import { TileDemoComponent } from './pages/tile-demo/tile-demo.component';
-import { TimeInputDemoComponent } from './pages/time-input-demo/time-input-demo.component';
-import { TooltipDemoComponent } from './pages/tooltip-demo/tooltip-demo.component';
-import { TreeDemoComponent } from './pages/tree-demo/tree-demo.component';
-import { TreeNewDemoComponent } from './pages/tree-new-demo/tree-new-demo.component';
-import { TypographyPageComponent } from './pages/typography-page/typography-page.component';
-import { UploadsDemoComponent } from './pages/uploads-demo/uploads-demo.component';
-import { VerticalTabsDemoComponent } from './pages/vertical-tabs-demo/vertical-tabs-demo.component';
+import { TableDemoModule } from './pages/table-demo/table-demo.module';
+import { TagDemoModule } from './pages/tag-demo/tag-demo.module';
+import { AvatarDemoModule } from './pages/avatar-demo/avatar-demo.module';
+import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
+import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
+import { ChipButtonDemoModule } from './pages/chip-button-demo/chip-button-demo.module';
+import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
+import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
+import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
+import { ControlsIsPatchedDemoModule } from './pages/controls-is-patched-demo/controls-is-patched-demo.module';
+import { DatagridDemoModule } from './pages/datagrid-demo/datagrid-demo.module';
+import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
+import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
+import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
+import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
+import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
+import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
+import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
+import { DroppableDemoModule } from './pages/droppable-demo/droppable-demo.module';
+import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
+import { IconButtonDemoModule } from './pages/icon-button-demo/icon-button-demo.module';
+import { IconPageModule } from './pages/icon-page/icon-page.module';
+import { InputDemoModule } from './pages/input-demo/input-demo.module';
+import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
+import { LoaderDemoModule } from './pages/loader-demo/loader-demo.module';
+import { ModalDemoModule } from './pages/modal-demo/modal-demo.module';
+import { MultiselectionListDemoModule } from './pages/multiselection-list-demo/multiselection-list-demo.module';
+import { PagedVirtualScrollDemoModule } from './pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module';
+import { RadioButtonDemoModule } from './pages/radio-button-demo/radio-button-demo.module';
+import { RatingDemoModule } from './pages/rating-demo/rating-demo.module';
+import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.module';
+import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
+import { SelectDemoModule } from './pages/select-demo/select-demo.module';
+import { SelectMultipleDemoModule } from './pages/select-multiple-demo/select-multiple-demo.module';
+import { SelectorDemoModule } from './pages/selector-demo/selector-demo.module';
+import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
+import { SwitcherDemoModule } from './pages/switcher-demo/switcher-demo.module';
+import { TableInputDemoModule } from './pages/table-input-demo/table-input-demo.module';
+import { TabsDemoModule } from './pages/tabs-demo/tabs-demo.module';
+import { TextareaDemoModule } from './pages/textarea-demo/textarea-demo.module';
+import { TileDemoModule } from './pages/tile-demo/tile-demo.module';
+import { TimeInputDemoModule } from './pages/time-input-demo/time-input-demo.module';
+import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
+import { TreeDemoModule } from './pages/tree-demo/tree-demo.module';
+import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
+import { TypographyPageModule } from './pages/typography-page/typography-page.module';
+import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
+import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 
 const demoRoutes: Routes = [
   {
     path: 'avatar',
-    component: AvatarDemoComponent
+    loadChildren: (): Promise<Type<AvatarDemoModule>> =>
+      import('./pages/avatar-demo/avatar-demo.module').then(module => module.AvatarDemoModule)
   },
   {
     path: 'typography',
-    component: TypographyPageComponent
+    loadChildren: (): Promise<Type<TypographyPageModule>> =>
+      import('./pages/typography-page/typography-page.module').then(module => module.TypographyPageModule)
   },
   {
     path: 'colors',
-    component: ColorsDemoComponent
+    loadChildren: (): Promise<Type<ColorsDemoModule>> =>
+      import('./pages/colors-demo/colors-demo.module').then(module => module.ColorsDemoModule)
   },
   {
     path: 'icon',
-    component: IconPageComponent
+    loadChildren: (): Promise<Type<IconPageModule>> =>
+      import('./pages/icon-page/icon-page.module').then(module => module.IconPageModule)
   },
   {
     path: 'spinner',
-    component: SpinnerDemoComponent
+    loadChildren: (): Promise<Type<SpinnerDemoModule>> =>
+      import('./pages/spinner-demo/spinner-demo.module').then(module => module.SpinnerDemoModule)
   },
   {
     path: 'loader',
-    component: LoaderDemoComponent
+    loadChildren: (): Promise<Type<LoaderDemoModule>> =>
+      import('./pages/loader-demo/loader-demo.module').then(module => module.LoaderDemoModule)
   },
   {
     path: 'button',
-    component: ButtonDemoComponent
+    loadChildren: (): Promise<Type<ButtonDemoModule>> =>
+      import('./pages/button-demo/button-demo.module').then(module => module.ButtonDemoModule)
   },
   {
     path: 'chip',
-    component: ChipDemoComponent
+    loadChildren: (): Promise<Type<ChipDemoModule>> =>
+      import('./pages/chip-demo/chip-demo.module').then(module => module.ChipDemoModule)
   },
   {
     path: 'chip-button',
-    component: ChipButtonDemoComponent
+    loadChildren: (): Promise<Type<ChipButtonDemoModule>> =>
+      import('./pages/chip-button-demo/chip-button-demo.module').then(module => module.ChipButtonDemoModule)
   },
   {
     path: 'chip-tabs',
-    component: ChipTabsDemoComponent
+    loadChildren: (): Promise<Type<ChipTabsDemoModule>> =>
+      import('./pages/chip-tabs-demo/chip-tabs-demo.module').then(module => module.ChipTabsDemoModule)
   },
   {
     path: 'icon-button',
-    component: IconButtonDemoComponent
+    loadChildren: (): Promise<Type<IconButtonDemoModule>> =>
+      import('./pages/icon-button-demo/icon-button-demo.module').then(module => module.IconButtonDemoModule)
   },
   {
     path: 'checkbox',
-    component: CheckboxDemoComponent
+    loadChildren: (): Promise<Type<CheckboxDemoModule>> =>
+      import('./pages/checkbox-demo/checkbox-demo.module').then(module => module.CheckboxDemoModule)
   },
   {
     path: 'input',
-    component: InputDemoComponent
+    loadChildren: (): Promise<Type<InputDemoModule>> =>
+      import('./pages/input-demo/input-demo.module').then(module => module.InputDemoModule)
   },
   {
     path: 'table-input',
-    component: TableInputDemoComponent
+    loadChildren: (): Promise<Type<TableInputDemoModule>> =>
+      import('./pages/table-input-demo/table-input-demo.module').then(module => module.TableInputDemoModule)
   },
   {
     path: 'search-field',
-    component: SearchFieldDemoComponent
+    loadChildren: (): Promise<Type<SearchFieldDemoModule>> =>
+      import('./pages/search-field-demo/search-field-demo.module').then(module => module.SearchFieldDemoModule)
   },
   {
     path: 'dropdown',
-    component: DropdownDemoComponent
+    loadChildren: (): Promise<Type<DropdownDemoModule>> =>
+      import('./pages/dropdown-demo/dropdown-demo.module').then(module => module.DropdownDemoModule)
   },
   {
     path: 'tile',
-    component: TileDemoComponent
+    loadChildren: (): Promise<Type<TileDemoModule>> =>
+      import('./pages/tile-demo/tile-demo.module').then(module => module.TileDemoModule)
   },
   {
     path: 'time-input',
-    component: TimeInputDemoComponent
+    loadChildren: (): Promise<Type<TimeInputDemoModule>> =>
+      import('./pages/time-input-demo/time-input-demo.module').then(module => module.TimeInputDemoModule)
   },
   {
     path: 'tree',
-    component: TreeDemoComponent
+    loadChildren: (): Promise<Type<TreeDemoModule>> =>
+      import('./pages/tree-demo/tree-demo.module').then(module => module.TreeDemoModule)
   },
   {
     path: 'tree-new',
-    component: TreeNewDemoComponent
+    loadChildren: (): Promise<Type<TreeNewDemoModule>> =>
+      import('./pages/tree-new-demo/tree-new-demo.module').then(module => module.TreeNewDemoModule)
   },
   {
     path: 'select',
-    component: SelectDemoComponent
+    loadChildren: (): Promise<Type<SelectDemoModule>> =>
+      import('./pages/select-demo/select-demo.module').then(module => module.SelectDemoModule)
   },
   {
     path: 'select-multiple',
-    component: SelectMultipleDemoComponent
+    loadChildren: (): Promise<Type<SelectMultipleDemoModule>> =>
+      import('./pages/select-multiple-demo/select-multiple-demo.module').then(module => module.SelectMultipleDemoModule)
   },
   {
     path: 'switcher',
-    component: SwitcherDemoComponent
+    loadChildren: (): Promise<Type<SwitcherDemoModule>> =>
+      import('./pages/switcher-demo/switcher-demo.module').then(module => module.SwitcherDemoModule)
   },
   {
     path: 'droppable',
-    component: DroppableDemoComponent
+    loadChildren: (): Promise<Type<DroppableDemoModule>> =>
+      import('./pages/droppable-demo/droppable-demo.module').then(module => module.DroppableDemoModule)
   },
   {
     path: 'rating',
-    component: RatingDemoComponent
+    loadChildren: (): Promise<Type<RatingDemoModule>> =>
+      import('./pages/rating-demo/rating-demo.module').then(module => module.RatingDemoModule)
   },
   {
     path: 'day-selector',
-    component: DaySelectorDemoComponent
+    loadChildren: (): Promise<Type<DaySelectorDemoModule>> =>
+      import('./pages/day-selector-demo/day-selector-demo.module').then(module => module.DaySelectorDemoModule)
   },
   {
     path: 'draggable',
-    component: DraggableDemoComponent
+    loadChildren: (): Promise<Type<DraggableDemoModule>> =>
+      import('./pages/draggable-demo/draggable-demo.module').then(module => module.DraggableDemoModule)
   },
   {
     path: 'date-time-picker',
-    component: DateTimePickerDemoComponent
+    loadChildren: (): Promise<Type<DateTimePickerDemoModule>> =>
+      import('./pages/date-time-picker-demo/date-time-picker-demo.module').then(
+        module => module.DateTimePickerDemoModule
+      )
   },
   {
     path: 'paged-virtual-scroll',
-    component: PagedVirtualScrollDemoComponent
+    loadChildren: (): Promise<Type<PagedVirtualScrollDemoModule>> =>
+      import('./pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module').then(
+        module => module.PagedVirtualScrollDemoModule
+      )
   },
-  { path: 'scrollbar', component: ScrollbarDemoComponent },
-  { path: 'modal', component: ModalDemoComponent },
-  { path: 'tabs', component: TabsDemoComponent },
-  { path: 'datagrid', component: DatagridDemoComponent },
-  { path: 'drawer', component: DrawerDemoComponent },
-  { path: 'textarea', component: TextareaDemoComponent },
-  { path: 'radio', component: RadioButtonDemoComponent },
-  { path: 'layout', component: LayoutDemoComponent },
-  { path: 'multiselection-list', component: MultiselectionListDemoComponent },
-  { path: 'tooltip', component: TooltipDemoComponent },
-  { path: 'draggable-list', component: DraggableListDemoComponent },
-  { path: 'dropdown-menu', component: DropdownMenuDemoComponent },
-  { path: 'selector', component: SelectorDemoComponent },
+  {
+    path: 'scrollbar',
+    loadChildren: (): Promise<Type<ScrollbarDemoModule>> =>
+      import('./pages/scrollbar-demo/scrollbar-demo.module').then(module => module.ScrollbarDemoModule)
+  },
+  {
+    path: 'modal',
+    loadChildren: (): Promise<Type<ModalDemoModule>> =>
+      import('./pages/modal-demo/modal-demo.module').then(module => module.ModalDemoModule)
+  },
+  {
+    path: 'tabs',
+    loadChildren: (): Promise<Type<TabsDemoModule>> =>
+      import('./pages/tabs-demo/tabs-demo.module').then(module => module.TabsDemoModule)
+  },
+  {
+    path: 'datagrid',
+    loadChildren: (): Promise<Type<DatagridDemoModule>> =>
+      import('./pages/datagrid-demo/datagrid-demo.module').then(module => module.DatagridDemoModule)
+  },
+  {
+    path: 'drawer',
+    loadChildren: (): Promise<Type<DrawerDemoModule>> =>
+      import('./pages/drawer-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
+  },
+  {
+    path: 'textarea',
+    loadChildren: (): Promise<Type<TextareaDemoModule>> =>
+      import('./pages/textarea-demo/textarea-demo.module').then(module => module.TextareaDemoModule)
+  },
+  {
+    path: 'radio',
+    loadChildren: (): Promise<Type<RadioButtonDemoModule>> =>
+      import('./pages/radio-button-demo/radio-button-demo.module').then(module => module.RadioButtonDemoModule)
+  },
+  {
+    path: 'layout',
+    loadChildren: (): Promise<Type<LayoutDemoModule>> =>
+      import('./pages/layout-demo/layout-demo.module').then(module => module.LayoutDemoModule)
+  },
+  {
+    path: 'multiselection-list',
+    loadChildren: (): Promise<Type<MultiselectionListDemoModule>> =>
+      import('./pages/multiselection-list-demo/multiselection-list-demo.module').then(
+        module => module.MultiselectionListDemoModule
+      )
+  },
+  {
+    path: 'tooltip',
+    loadChildren: (): Promise<Type<TooltipDemoModule>> =>
+      import('./pages/tooltip-demo/tooltip-demo.module').then(module => module.TooltipDemoModule)
+  },
+  {
+    path: 'draggable-list',
+    loadChildren: (): Promise<Type<DraggableListDemoModule>> =>
+      import('./pages/draggable-list-demo/draggable-list-demo.module').then(module => module.DraggableListDemoModule)
+  },
+  {
+    path: 'dropdown-menu',
+    loadChildren: (): Promise<Type<DropdownMenuDemoModule>> =>
+      import('./pages/dropdown-menu-demo/dropdown-menu-demo.module').then(module => module.DropdownMenuDemoModule)
+  },
+  {
+    path: 'selector',
+    loadChildren: (): Promise<Type<SelectorDemoModule>> =>
+      import('./pages/selector-demo/selector-demo.module').then(module => module.SelectorDemoModule)
+  },
   {
     path: 'uploads',
-    component: UploadsDemoComponent
+    loadChildren: (): Promise<Type<UploadsDemoModule>> =>
+      import('./pages/uploads-demo/uploads-demo.module').then(module => module.UploadsDemoModule)
   },
   {
     path: 'vertical-tabs',
-    component: VerticalTabsDemoComponent
+    loadChildren: (): Promise<Type<VerticalTabsDemoModule>> =>
+      import('./pages/vertical-tabs-demo/vertical-tabs-demo.module').then(module => module.VerticalTabsDemoModule)
   },
   {
     path: 'controls-is-patched',
-    component: ControlsIsPatchedDemoComponent
+    loadChildren: (): Promise<Type<ControlsIsPatchedDemoModule>> =>
+      import('./pages/controls-is-patched-demo/controls-is-patched-demo.module').then(
+        module => module.ControlsIsPatchedDemoModule
+      )
   },
   {
     path: 'floating-card',
-    component: FloatingCardDemoComponent
+    loadChildren: (): Promise<Type<FloatingCardDemoModule>> =>
+      import('./pages/floating-card-demo/floating-card-demo.module').then(module => module.FloatingCardDemoModule)
   },
   {
     path: 'adaptive',
@@ -207,12 +302,12 @@ const demoRoutes: Routes = [
   },
   {
     path: 'table',
-    loadChildren: (): Promise<Type<CodeDemoModule>> =>
+    loadChildren: (): Promise<Type<TableDemoModule>> =>
       import('./pages/table-demo/table-demo.module').then(module => module.TableDemoModule)
   },
   {
     path: 'tag',
-    loadChildren: (): Promise<Type<CodeDemoModule>> =>
+    loadChildren: (): Promise<Type<TagDemoModule>> =>
       import('./pages/tag-demo/tag-demo.module').then(module => module.TagDemoModule)
   },
   {
