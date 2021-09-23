@@ -43,7 +43,8 @@ import { ExpanderComponent } from '../expander/expander.component';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ExpansibleComponent
-  implements OnInit, OnChanges, AfterContentInit, OnDestroy, WidthUnitBinding, HeightUnitBinding {
+  implements OnInit, OnChanges, AfterContentInit, OnDestroy, WidthUnitBinding, HeightUnitBinding
+{
   private readonly widthChangesProcessor: UnitWidthStyleChangesProcessor<this> = new UnitWidthStyleChangesProcessor(
     this.domSanitizer
   );

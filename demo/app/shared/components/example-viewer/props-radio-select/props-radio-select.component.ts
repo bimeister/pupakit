@@ -30,7 +30,8 @@ import { RadioOption } from '../radio-option';
 })
 export class PropsRadioSelectComponent
   extends Observable<unknown>
-  implements OnChanges, OnDestroy, ControlValueAccessor {
+  implements OnChanges, OnDestroy, ControlValueAccessor
+{
   @Input()
   public options: RadioOption[] = [];
 
