@@ -90,7 +90,7 @@
     "no-var-requires": true,
     "object-literal-key-quotes": false,
     "object-literal-shorthand": true,
-    "one-line": [true, "check-catch", "check-else", "check-open-brace", "check-whitespace"],
+    "one-line": [true, "check-catch", "check-else", "check-whitespace"],
     "only-arrow-functions": false,
     "prefer-conditional-expression": true,
     "prefer-const": true,

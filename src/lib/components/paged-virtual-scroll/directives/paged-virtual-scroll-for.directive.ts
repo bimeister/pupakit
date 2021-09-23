@@ -85,7 +85,8 @@ function getOffset(orientation: 'horizontal' | 'vertical', direction: 'start' | 
   providers: [{ provide: _VIEW_REPEATER_STRATEGY, useClass: _RecycleViewRepeaterStrategy }]
 })
 export class PupaVirtualScrollForDirective<T>
-  implements CdkVirtualScrollRepeater<T>, CollectionViewer, OnChanges, DoCheck, OnDestroy {
+  implements CdkVirtualScrollRepeater<T>, CollectionViewer, OnChanges, DoCheck, OnDestroy
+{
   /** The DataSource to display. */
   @Input() public pupaVirtualForOf: PupaVirtualForOfType<T>;
   private readonly pupaVirtualForOf$: BehaviorSubject<PupaVirtualForOfType<T>> = new BehaviorSubject<

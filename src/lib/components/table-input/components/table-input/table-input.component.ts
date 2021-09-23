@@ -32,7 +32,8 @@ import { TableInputStateService } from '../../services/table-input-state.service
 })
 export class TableInputComponent<T>
   extends AbstractControlWithNotifier
-  implements OnChanges, OnInit, OnDestroy, ControlValueAccessor {
+  implements OnChanges, OnInit, OnDestroy, ControlValueAccessor
+{
   @Input() public readonly placeholder: string = '';
 
   @Input() public readonly errorTitle: string = '';
