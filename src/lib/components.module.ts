@@ -49,6 +49,7 @@ import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { TableModule } from './components/table/table.module';
 import { TagModule } from './components/tag/tag.module';
+import { ScrollableModule } from './components/scrollable/scrollable.module';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -98,7 +99,8 @@ const EXPORTS: any[] = [
   PagedVirtualScrollModule,
   TableModule,
   FloatingCardModule,
-  TagModule
+  TagModule,
+  ScrollableModule
 ];
 
 @NgModule({

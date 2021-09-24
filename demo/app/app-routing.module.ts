@@ -55,6 +55,7 @@ import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module
 
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -327,6 +328,11 @@ const demoRoutes: Routes = [
         path: 'tag',
         loadChildren: (): Promise<Type<TagDemoModule>> =>
           import('./pages/tag-demo/tag-demo.module').then(module => module.TagDemoModule)
+      },
+      {
+        path: 'scrollable',
+        loadChildren: (): Promise<Type<ScrollableDemoModule>> =>
+          import('./pages/scrollable-demo/scrollable-demo.module').then(module => module.ScrollableDemoModule)
       }
     ]
   },

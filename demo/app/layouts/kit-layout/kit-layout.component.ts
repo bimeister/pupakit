@@ -70,7 +70,8 @@ export class KitLayoutComponent {
       { title: 'Chip', link: './chip' },
       { title: 'Chip button', link: './chip-button' },
       { title: 'Paged Virtual Scroll', link: './paged-virtual-scroll' },
-      { title: 'Tag & Color Tag', link: './tag' }
+      { title: 'Tag & Color Tag', link: './tag' },
+      { title: 'Scrollable', link: './scrollable' }
     ]
   };
 
@@ -105,7 +106,7 @@ export class KitLayoutComponent {
       { title: 'Select Multiple', link: './select-multiple' },
       { title: 'Day selector', link: './day-selector' },
       { title: 'Time input', link: './time-input' },
-      { title: 'Scrollbar', link: './scrollbar' }
+      { title: '⚠️ Scrollbar', link: './scrollbar' }
     ]
   };
 

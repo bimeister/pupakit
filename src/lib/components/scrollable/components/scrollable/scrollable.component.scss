@@ -1,0 +1,155 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'variables';
+
+$width_scrollbar-half: $width_scrollbar / 2;
+
+$width_scrollbar-thumb-large: 4px;
+$width_scrollbar-thumb-small: 3px;
+
+$padding_scrollbar-thumb-container-large: ($width_scrollbar - $width_scrollbar-thumb-large) / 2;
+$padding_scrollbar-thumb-container-small: ($width_scrollbar - $width_scrollbar-thumb-small) / 2;
+
+$color_light: 'base-white-n275';
+$color_dark: 'base-dark-n275';
+
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.pupa-scrollable {
+  width: 100%;
+  height: 100%;
+  max-width: inherit;
+  max-height: inherit;
+  overflow-x: inherit;
+  overflow-y: inherit;
+  position: relative;
+
+  &__content {
+    position: relative;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+    max-width: inherit;
+    max-height: inherit;
+    overflow-x: inherit;
+    overflow-y: inherit;
+
+    @include invisible-scrollbars;
+  }
+}
+
+.pupa-scrollbar {
+  position: absolute;
+  z-index: 2;
+  box-sizing: border-box;
+
+  &__thumb-container {
+    position: absolute;
+  }
+
+  &_vertical {
+    width: $width_scrollbar;
+    height: 100%;
+    right: 0;
+    bottom: 0;
+    display: none;
+
+    &_external {
+      transform: translateX(100%);
+    }
+
+    &_visible {
+      display: block;
+    }
+
+    &_with-horizontal {
+      height: calc(100% - #{$width_scrollbar-half});
+      bottom: $width_scrollbar-half;
+    }
+  }
+
+  &_horizontal {
+    width: 100%;
+    height: $width_scrollbar;
+    right: 0;
+    bottom: 0;
+    display: none;
+
+    &_external {
+      transform: translateY(100%);
+    }
+
+    &_visible {
+      display: block;
+    }
+
+    &_with-vertical {
+      width: calc(100% - #{$width_scrollbar-half});
+      right: $width_scrollbar-half;
+    }
+  }
+}
+
+.thumb-container {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+
+  &:not(.thumb-container_grabbing) {
+    cursor: pointer;
+  }
+
+  &_large {
+    padding: $padding_scrollbar-thumb-container-large;
+
+    .thumb {
+      border-radius: 2.5px;
+    }
+  }
+
+  &_small {
+    padding: $padding_scrollbar-thumb-container-small;
+
+    .thumb {
+      border-radius: 1.5px;
+    }
+  }
+
+  &:not(.thumb-container_grabbing):hover {
+    .thumb {
+      padding: 0.5px;
+      transform: translate(-0.5px, -0.5px);
+      background-color: color($color_light);
+
+      @include host-selector-dark-theme {
+        background-color: color($color_dark);
+      }
+    }
+  }
+}
+
+.thumb {
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(4px);
+  box-sizing: content-box;
+  background-color: rgba(color('#{$color_light}-rgb'), 0.9);
+
+  @include supports-backdrop-blur {
+    background-color: rgba(color('#{$color_light}-rgb'), 0.5);
+  }
+
+  @include host-selector-dark-theme {
+    background-color: rgba(color('#{$color_dark}-rgb'), 0.9);
+
+    @include supports-backdrop-blur {
+      background-color: rgba(color('#{$color_dark}-rgb'), 0.4);
+    }
+  }
+}

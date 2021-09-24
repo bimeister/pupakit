@@ -1,0 +1,7 @@
+<pupa-scrollable class="scrollable-box">
+  <cdk-virtual-scroll-viewport pupaScrollableContent class="virtual-scroll" [itemSize]="25">
+    <div class="virtual-scroll-item" *cdkVirtualFor="let i of virstualScrollItems">
+      {{ i }}
+    </div>
+  </cdk-virtual-scroll-viewport>
+</pupa-scrollable>

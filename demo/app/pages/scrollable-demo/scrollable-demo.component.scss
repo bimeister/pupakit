@@ -1,0 +1,18 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.content {
+  background-color: color(base-n0);
+  color: color(base-n600);
+
+  &.dark-theme {
+    background-color: color(base-n600);
+    color: color(base-n0);
+  }
+}
+
+.scrollable-box {
+  width: 300px;
+  height: 300px;
+}
