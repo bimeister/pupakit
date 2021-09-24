@@ -11,22 +11,13 @@ import {
   TrackByFunction,
   AfterViewInit,
   ElementRef,
-  NgZone,
   Renderer2
 } from '@angular/core';
 import { TableTemplatesService } from '../../services/table-templates.service';
-import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  combineLatest,
-  fromEvent,
-  merge,
-  Observable,
-  Subscription
-} from 'rxjs';
+import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
 import { BusEventBase, EventBus } from '@bimeister/event-bus';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { distinctUntilChanged, map, observeOn, subscribeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { distinctUntilChanged, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
@@ -91,15 +82,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   @ViewChild('headerScollableRowsContainer', { static: true })
   public headerScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
-
-  @ViewChild('decorScollableRowsContainer', { static: true })
-  public decorScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
-
-  @ViewChild('bodyScollableRowsContainer', { static: true })
-  public bodyScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
-
-  @ViewChild('placeholderScollableRowsContainer', { static: true })
-  public placeholderScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @Input() public controller: TableController<T>;
   private readonly controller$: BehaviorSubject<Nullable<TableController<T>>> = new BehaviorSubject<TableController<T>>(
@@ -182,7 +164,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     public readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly tableColumnsIntersectionService: TableColumnsIntersectionService,
     private readonly tableScrollbarsService: TableScrollbarsService,
-    private readonly ngZone: NgZone,
     private readonly renderer: Renderer2
   ) {}
 
@@ -207,16 +188,27 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   public ngAfterViewInit(): void {
     this.subscription.add(this.updateDataTableWidthOnWindowResize());
-    this.subscription.add(this.checkVerticalScrollBarVisibilityOnDataChanges());
-    this.subscription.add(this.checkHorizontalScrollBarVisibilityOnColumnsChangesOrContentResize());
 
     this.startEventsQueue();
-    this.processScollableRowsHorizontalScroll();
     this.registrerHeaderScrollableContainerForIntersectionDetection();
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public processVerticalScrollBarVisibilityChanges(isVisible: boolean): void {
+    this.tableScrollbarsService.isVerticalVisible$.next(isVisible);
+    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
+      eventBus.dispatch(new TableEvents.VerticalScrollBarVisibilityChanged(isVisible));
+    });
+  }
+
+  public processHorizontalScrollBarVisibilityChanges(isVisible: boolean): void {
+    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
+      this.tableScrollbarsService.isHorizontalVisible$.next(isVisible);
+      eventBus.dispatch(new TableEvents.HorizontalScrollBarVisibilityChanged(isVisible));
+    });
   }
 
   public processTableMouseEvent(event: MouseEvent): void {
@@ -379,6 +371,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   private updateDataTableWidthOnWindowResize(): Subscription {
     return this.clientUiStateHandlerService.uiState$
       .pipe(
+        filterNotNil(),
         map((uiState: UiState) => uiState.windowWidth),
         distinctUntilChanged(),
         map(() => this.tableRef.nativeElement.clientWidth),
@@ -389,67 +382,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       });
   }
 
-  private checkVerticalScrollBarVisibilityOnDataChanges(): Subscription {
-    return this.data$
-      .pipe(
-        observeOn(animationFrameScheduler),
-        subscribeOn(animationFrameScheduler),
-        switchMap(() => this.eventBus$.pipe(take(1)))
-      )
-      .subscribe((eventBus: EventBus) => {
-        const cdkVitrualScrollElement: HTMLElement = this.cdkVirtualScrollViewportRef.elementRef.nativeElement;
-        const isVisible: boolean = cdkVitrualScrollElement.clientHeight < cdkVitrualScrollElement.scrollHeight;
-        this.tableScrollbarsService.isVerticalVisible$.next(isVisible);
-        eventBus.dispatch(new TableEvents.VerticalScrollBarVisibilityChanged(isVisible));
-      });
-  }
-
-  private checkHorizontalScrollBarVisibilityOnColumnsChangesOrContentResize(): Subscription {
-    return merge(
-      this.columnIdToColumnMap$,
-      this.clientUiStateHandlerService.uiState$,
-      this.controller.getEvents(TableEvents.ColumnWidthChanged)
-    )
-      .pipe(
-        observeOn(animationFrameScheduler),
-        subscribeOn(animationFrameScheduler),
-        switchMap(() => this.eventBus$.pipe(take(1)))
-      )
-      .subscribe((eventBus: EventBus) => {
-        const scrollableHeaderElement: HTMLElement = this.headerScollableRowsContainerRef.nativeElement;
-        const isVisible: boolean = scrollableHeaderElement.clientWidth < scrollableHeaderElement.scrollWidth;
-        this.tableScrollbarsService.isHorizontalVisible$.next(isVisible);
-        eventBus.dispatch(new TableEvents.HorizontalScrollBarVisibilityChanged(isVisible));
-      });
-  }
-
   private startEventsQueue(): void {
     this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
       eventBus.dispatch(new QueueEvents.StartQueue());
     });
-  }
-
-  private processScollableRowsHorizontalScroll(): void {
-    this.ngZone.runOutsideAngular(() => {
-      this.subscription.add(
-        merge(
-          fromEvent(this.bodyScollableRowsContainerRef.nativeElement, 'scroll'),
-          fromEvent(this.placeholderScollableRowsContainerRef.nativeElement, 'scroll')
-        ).subscribe((event: Event) => this.processBodyScroll(event))
-      );
-    });
-  }
-
-  private processBodyScroll(event: Event): void {
-    const target: EventTarget = event.target;
-    if (!(target instanceof HTMLElement)) {
-      return;
-    }
-    const scrollLeft: number = target.scrollLeft;
-    this.headerScollableRowsContainerRef.nativeElement.scrollLeft = scrollLeft;
-    this.decorScollableRowsContainerRef.nativeElement.scrollLeft = scrollLeft;
-    this.bodyScollableRowsContainerRef.nativeElement.scrollLeft = scrollLeft;
-    this.placeholderScollableRowsContainerRef.nativeElement.scrollLeft = scrollLeft;
   }
 
   private registrerHeaderScrollableContainerForIntersectionDetection(): void {

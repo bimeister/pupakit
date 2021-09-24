@@ -8,6 +8,7 @@ import { DropdownMenuComponent } from './components/dropdown-menu/dropdown-menu.
 import { DropdownMenuTriggerComponent } from './components/dropdown-menu-trigger/dropdown-menu-trigger.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuContentComponent } from './components/dropdown-menu-content/dropdown-menu-content.component';
+import { ScrollableModule } from '../scrollable/scrollable.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { DropdownMenuContentComponent } from './components/dropdown-menu-content
     DropdownMenuItemComponent,
     DropdownMenuItemIconComponent
   ],
-  imports: [SharedModule, IconModule, OverlayModule],
+  imports: [SharedModule, IconModule, OverlayModule, ScrollableModule],
   exports: [
     DropdownMenuComponent,
     DropdownMenuTriggerComponent,

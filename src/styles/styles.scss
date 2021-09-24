@@ -87,3 +87,7 @@ label.horizontal {
 .cdk-overlay-connected-position-bounding-box {
   z-index: 10000;
 }
+
+.invisible-scrollbars {
+  @include invisible-scrollbars;
+}

@@ -17,6 +17,7 @@ import { IconModule } from '../icon/icon.module';
 import { appArrowFullTopIcon } from '../../../internal/constants/icons/app-arrow-full-top-icon.const';
 import { appArrowFullBotIcon } from '../../../internal/constants/icons/app-arrow-full-bot-icon.const';
 import { TableSkeletonComponent } from './components/table-skeleton/table-skeleton.component';
+import { ScrollableModule } from '../scrollable/scrollable.module';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableBodyCellContainerComponent,
@@ -40,6 +41,7 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   SharedModule,
   ScrollingModule,
   SkeletonModule,
+  ScrollableModule,
   IconModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon])
 ];
 
