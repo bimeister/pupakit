@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { default as example2Ts } from '!!raw-loader!./examples/example-2/example-2.component';
-import { default as example2Html } from '!!raw-loader!./examples/example-2/example-2.component.html';
+const BASE_REQUEST_PATH: string = 'code-demo/examples';
 
 @Component({
   selector: 'demo-code-demo',
@@ -12,7 +11,7 @@ import { default as example2Html } from '!!raw-loader!./examples/example-2/examp
 })
 export class CodeDemoComponent {
   public readonly example2Content: Record<string, string> = {
-    HTML: example2Html,
-    TypeScript: example2Ts
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    TypeScript: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`
   };
 }
