@@ -5,7 +5,6 @@ import { bundleAssetsTask } from './build/gulp/bundle-assets.task';
 import { bundleStyleFilesTask } from './build/gulp/bundle-style-files.task';
 import { createBarrelFilesTask } from './build/gulp/create-barrel-files.task';
 import { createUntrackedFilesTask } from './build/gulp/create-untracked-files.task';
-import { fixFancyLogTask } from './build/gulp/fix-fancy-log.task';
 import { fixImportsTask } from './build/gulp/fix-imports.task';
 
 task(
@@ -21,5 +20,3 @@ task(
 task('create:untracked-files', createUntrackedFilesTask());
 
 task('build-demo-static', buildDemoStatic());
-
-task('fix:node_modules', parallel(fixFancyLogTask()));
