@@ -82,7 +82,6 @@
     "ngx-highlightjs": "^5.0.0",
     "prettier": "^2.4.1",
     "puppeteer": "^8.0.0",
-    "raw-loader": "^4.0.2",
     "replace-in-file": "^6.1.0",
     "rxjs": "^6.6.0",
     "sass": "^1.26.10",
