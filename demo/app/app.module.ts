@@ -9,6 +9,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LogPipe } from './log.pipe';
 import { DemoSharedModule } from './shared/shared.module';
+import { KitLayoutModule } from './layouts/kit-layout/kit-layout.module';
+import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -22,7 +24,9 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     ReactiveFormsModule,
     BrowserAnimationsModule,
     DemoSharedModule,
-    AppRoutingModule
+    AppRoutingModule,
+    KitLayoutModule,
+    MainLayoutModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   exports: [LogPipe]
