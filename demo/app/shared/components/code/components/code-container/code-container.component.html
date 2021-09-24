@@ -11,7 +11,7 @@
   </pupa-tabs>
 
   <ng-container *ngIf="activeCode$ | async as code; else previewTemplate">
-    <pupa-code [code]="activeCode$ | async"></pupa-code>
+    <pupa-code [code]="code"></pupa-code>
   </ng-container>
 </div>
 

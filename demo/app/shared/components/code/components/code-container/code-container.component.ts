@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
-import { filterNotEmpty, filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, forkJoin, Observable, of, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
-import { take, withLatestFrom } from 'rxjs/operators';
+import { switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../../../src/internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../../../src/internal/declarations/interfaces/component-changes.interface';
 import { Tab } from '../../../../../../../src/internal/declarations/interfaces/tab.interface';
+import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';
 
 const PREVIEW_TAB_NAME: string = 'Preview';
 
@@ -19,6 +20,10 @@ const PREVIEW_TAB_NAME: string = 'Preview';
 export class CodeContainerComponent implements OnChanges, OnInit {
   @Input() public readonly content: Nullable<Record<string, string>> = null;
   public readonly content$: BehaviorSubject<Nullable<Record<string, string>>> = new BehaviorSubject<
+    Nullable<Record<string, string>>
+  >(null);
+
+  public readonly contentWithCode$: BehaviorSubject<Nullable<Record<string, string>>> = new BehaviorSubject<
     Nullable<Record<string, string>>
   >(null);
 
@@ -43,17 +48,23 @@ export class CodeContainerComponent implements OnChanges, OnInit {
 
   public readonly activeValues$: ReplaySubject<unknown[]> = new ReplaySubject<unknown[]>(1);
 
-  public readonly activeCode$: Observable<Nullable<string>> = this.activeValues$.pipe(
-    filterNotEmpty(),
-    map((activeValues: unknown[]) => activeValues[0]),
-    withLatestFrom(this.content$),
+  public readonly activeCode$: Observable<Nullable<string>> = combineLatest([
+    this.activeValues$.pipe(
+      filterNotEmpty(),
+      map((activeValues: unknown[]) => activeValues[0])
+    ),
+    this.contentWithCode$.pipe(filterNotNil())
+  ]).pipe(
     map(([activeValue, content]: [string, Record<string, string>]) => {
       return activeValue === PREVIEW_TAB_NAME ? null : content[activeValue];
     })
   );
 
+  constructor(private readonly examplesRequestsService: ExamplesRequestsService) {}
+
   public ngOnInit(): void {
     this.calculateActiveTabOnInit();
+    this.processCodeRequests();
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -97,5 +108,34 @@ export class CodeContainerComponent implements OnChanges, OnInit {
     }
 
     this.isPreviewExist$.next(updatedValue);
+  }
+
+  private processCodeRequests(): void {
+    this.content$
+      .pipe(
+        filterNotNil(),
+        switchMap((content: Record<string, string>) => {
+          if (isEmpty(content)) {
+            return of(null);
+          }
+
+          const tabNames: string[] = Object.keys(content);
+
+          return forkJoin(
+            tabNames.map((tabName: string) => this.examplesRequestsService.getExampleRawFile(content[tabName]))
+          ).pipe(
+            take(1),
+            map((codes: string[]) => {
+              const codeEntries: Map<string, string> = new Map(
+                codes.map((code: string, codeIndex: number) => [tabNames[codeIndex], code])
+              );
+              return Object.fromEntries(codeEntries);
+            })
+          );
+        }),
+        filterNotNil(),
+        take(1)
+      )
+      .subscribe((content: Record<string, string>) => this.contentWithCode$.next(content));
   }
 }

@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
-import { default as example1Ts } from '!!raw-loader!./../example-1/example-1.component';
-import { default as example1Html } from '!!raw-loader!./../example-1/example-1.component.html';
-import { default as example1Scss } from '!!raw-loader!./../example-1/example-1.component.scss';
+const BASE_REQUEST_PATH: string = 'code-demo/examples';
 
 @Component({
   selector: 'demo-code-example-2',
@@ -11,11 +9,13 @@ import { default as example1Scss } from '!!raw-loader!./../example-1/example-1.c
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CodeExample2Component {
-  public readonly code: string = example1Ts;
+  public readonly simpleCode: string = '<div>here is simple code!</div>';
+
+  public readonly example1Ts: string = `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`;
 
   public readonly example1Content: Record<string, string> = {
-    HTML: example1Html,
-    TypeScript: example1Ts,
-    SCSS: example1Scss
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    TypeScript: this.example1Ts,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`
   };
 }

@@ -4,7 +4,7 @@
   <demo-example-viewer-content>
     <pupa-checkbox [indeterminate]="indeterminate | async" [inversion]="inversion | async" [formControl]="control">
       <pupa-checkbox-mark> </pupa-checkbox-mark>
-      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async" [closeOnContentClick]="true">
+      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async" [hideOnTooltipHover]="true">
         <pupa-tooltip-trigger>
           <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
           <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>

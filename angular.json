@@ -65,6 +65,11 @@
                 "output": "/ionicons"
               },
               {
+                "glob": "**/examples/**/*",
+                "input": "./demo/app/pages",
+                "output": "/examples"
+              },
+              {
                 "glob": "**/*",
                 "input": "./src/assets",
                 "output": "/assets"
@@ -86,7 +91,7 @@
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true,
-            "allowedCommonJsDependencies": ["combos", "fancy-log"]
+            "allowedCommonJsDependencies": ["combos", "fancy-log", "uuid"]
           }
         },
         "lint": {

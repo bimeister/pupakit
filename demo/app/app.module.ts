@@ -1,4 +1,5 @@
 import { registerLocaleData } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import localeRuExtra from '@angular/common/locales/extra/ru';
 import localeRu from '@angular/common/locales/ru';
 import { LOCALE_ID, NgModule } from '@angular/core';
@@ -26,7 +27,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     DemoSharedModule,
     AppRoutingModule,
     KitLayoutModule,
-    MainLayoutModule
+    MainLayoutModule,
+    HttpClientModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   exports: [LogPipe]
