@@ -11,11 +11,11 @@ const BASE_REQUEST_PATH: string = 'code-demo/examples';
 export class CodeExample2Component {
   public readonly simpleCode: string = '<div>here is simple code!</div>';
 
-  public readonly example1Ts: string = `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`;
+  public readonly example1TsPath: string = `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`;
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
-    TypeScript: this.example1Ts,
+    TypeScript: this.example1TsPath,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`
   };
 }
