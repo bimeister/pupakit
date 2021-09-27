@@ -13,6 +13,9 @@ const {
   ignoreDefaultArguments: IGNORE_DEFAULT_ARGUMENTS,
   baseUrl: BASE_URL
 }: PuppeteerSetupVariables = getPuppeteerSetupVariables();
+
+const BASE_KIT_URL: string = `${BASE_URL}/kit`;
+
 const SCREEN_SHOT_PATH: string = `${SCREEN_SHOTS_PATH}/chip.screenshot.png`;
 const VIEWPORT: Viewport = { width: 1920, height: 1080 };
 
@@ -35,8 +38,8 @@ describe('chip.component.ts', () => {
         switchMap((responseBrowser: Browser) => from(responseBrowser.newPage())),
         tap((responsePage: Page) => (page = responsePage)),
         switchMap((responsePage: Page) => from(responsePage.setViewport(VIEWPORT)).pipe(mapTo(responsePage))),
-        switchMap((responsePage: Page) => from(responsePage.goto(BASE_URL, { waitUntil: 'domcontentloaded' }))),
-        switchMap(() => from(page.goto(`${BASE_URL}/chip`, { waitUntil: 'domcontentloaded' })))
+        switchMap((responsePage: Page) => from(responsePage.goto(BASE_KIT_URL, { waitUntil: 'domcontentloaded' }))),
+        switchMap(() => from(page.goto(`${BASE_KIT_URL}/chip`, { waitUntil: 'domcontentloaded' })))
       )
       .subscribe(() => done());
   });
