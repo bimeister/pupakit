@@ -45,7 +45,7 @@ export class AdaptiveDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-7/example-7.component.scss`
   };
 
-  public readonly example8CalcBetweenScss: string = `${BASE_REQUEST_PATH}/example-8/calc-between.example.scss`;
+  public readonly example8CalcBetweenScssPath: string = `${BASE_REQUEST_PATH}/example-8/calc-between.example.scss`;
   public readonly example8Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-8/example-8.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-8/example-8.component.scss`
