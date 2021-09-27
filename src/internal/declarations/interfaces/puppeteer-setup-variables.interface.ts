@@ -6,4 +6,5 @@ export interface PuppeteerSetupVariables {
   ignoreDefaultArguments: string[];
   baseUrlCI: string;
   baseUrl: string;
+  baseKitUrl: string;
 }
