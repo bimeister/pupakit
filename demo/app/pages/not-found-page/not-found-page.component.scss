@@ -15,19 +15,15 @@
     font-weight: bold;
     animation: glitch 2s steps(100) infinite;
 
-    font-size: 40rem;
-
-    @include gt-xs() {
-      font-size: 50rem;
-    }
-
-    @include gt-sm() {
-      font-size: 60rem;
-    }
-
-    @include gt-md() {
-      font-size: 70rem;
-    }
+    @include width-between-property(
+      $property: 'font-size',
+      $width-start: $xsBreakPoint,
+      $value-start: 40 * 4,
+      $width-end: $mdBreakPoint,
+      $value-end: 70 * 4,
+      $is-save-width-before: false,
+      $is-save-width-after: true
+    );
   }
 
   &__text {
