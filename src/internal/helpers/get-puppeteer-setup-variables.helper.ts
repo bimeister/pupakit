@@ -22,6 +22,6 @@ export function getPuppeteerSetupVariables(): PuppeteerSetupVariables {
     ignoreDefaultArguments: ['--disable-extensions'],
     baseUrlCI: BASE_URL_CI,
     baseUrl: BASE_URL,
-    baseKitUrl: BASE_KIT_URL,
+    baseKitUrl: BASE_KIT_URL
   };
 }
