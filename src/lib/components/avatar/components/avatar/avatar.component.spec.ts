@@ -12,11 +12,8 @@ const {
   launchBrowserArguments: LAUNCH_BROWSER_ARGUMENTS,
   ignoreDefaultArguments: IGNORE_DEFAULT_ARGUMENTS,
   baseUrlCI: BASE_URL_CI,
-  baseUrl: BASE_URL
+  baseKitUrl: BASE_KIT_URL
 }: PuppeteerSetupVariables = getPuppeteerSetupVariables();
-
-const BASE_KIT_URL: string = `${BASE_URL}/kit`;
-
 const SCREEN_SHOT_PATH: string = `${SCREEN_SHOTS_PATH}/avatar.screenshot.png`;
 const VIEWPORT: Viewport = { width: 1920, height: 1080 };
 
