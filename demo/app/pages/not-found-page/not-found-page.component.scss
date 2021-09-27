@@ -1,4 +1,5 @@
 @use 'mixins' as *;
+@use 'sass:list';
 
 .not-found {
   display: flex;
@@ -37,67 +38,66 @@
   }
 }
 
-$r: rgba(255, 0, 0, 1);
-$g: rgba(0, 255, 0, 1);
-$b: rgba(0, 0, 255, 1);
-$px: 0;
-$px2: 0;
+$red-color: rgba(255, 0, 0, 1);
+$green-color: rgba(0, 255, 0, 1);
+$blue-color: rgba(0, 0, 255, 1);
 
-@mixin mini-glitch($c1, $c2, $coeff, $start, $end) {
-  $interval: $end - $start;
-  @for $i from $start through $end {
+$text-shadow-size: 0;
+
+@mixin mini-glitch($first-color, $second-color, $shadow-size-coefficient, $percents) {
+  $from: list.nth($percents, 1);
+  $to: list.nth($percents, 2);
+
+  $interval: ($to - $from) / 2;
+
+  @for $i from $from through $to {
     #{$i * 1%} {
-      @if $i < $start + ($interval/2) {
-        $px: $px + $coeff;
-        $px2: -$px;
-        text-shadow: #{$px}px 0 0 $c1, #{$px2}px 0 0 $c2;
+      @if $i < $from + $interval {
+        $text-shadow-size: $text-shadow-size + $shadow-size-coefficient;
+        text-shadow: #{$text-shadow-size}px 0 0 $first-color, #{-$text-shadow-size}px 0 0 $second-color;
       } @else {
-        $px: $px - 1;
-        $px2: -$px;
-        text-shadow: #{$px}px 0 0 $c1, #{$px2}px 0 0 $c2;
+        $text-shadow-size: $text-shadow-size - 1;
+        text-shadow: #{$text-shadow-size}px 0 0 $first-color, #{-$text-shadow-size}px 0 0 $second-color;
       }
     }
   }
-  $px: 0;
-  $px2: 0;
 }
 
-@mixin big-glitch($c1, $c2, $distance, $start, $end) {
-  @for $i from $start through $end {
+@mixin big-glitch($first-color, $second-color, $shadow-distance, $percents) {
+  $from: list.nth($percents, 1);
+  $to: list.nth($percents, 2);
+
+  @for $i from $from through $to {
     #{$i * 1%} {
-      @if $i == $end {
-        text-shadow: 0 0 0 $c1, 0 0 0 $c2;
+      @if $i == $to {
+        text-shadow: 0 0 0 $first-color, 0 0 0 $second-color;
       } @else {
-        $px: $distance;
-        $px2: -$px;
-        text-shadow: #{$px}px 0 0 $c1, #{$px2}px 0 0 $c2;
+        text-shadow: #{$shadow-distance}px 0 0 $first-color, #{-$shadow-distance}px 0 0 $second-color;
       }
     }
   }
-  $px: 0;
-  $px2: 0;
 }
 
 @keyframes glitch {
-  @include mini-glitch($r, $b, 1, 0, 10);
-  @include mini-glitch($r, $g, 0.5, 11, 20);
-  @include mini-glitch($b, $g, 0.7, 21, 40);
+  @include mini-glitch($red-color, $blue-color, 1, [0, 10]);
+  @include mini-glitch($red-color, $green-color, 0.5, [11, 20]);
+  @include mini-glitch($blue-color, $green-color, 0.7, [21, 40]);
 
-  @include big-glitch($b, $g, 50, 41, 42);
+  @include big-glitch($blue-color, $green-color, 50, [41, 42]);
 
-  @include mini-glitch($r, $g, 0.5, 43, 50);
-  @include mini-glitch($r, $b, 1, 51, 60);
+  @include mini-glitch($red-color, $green-color, 0.5, [43, 50]);
+  @include mini-glitch($red-color, $blue-color, 1, [51, 60]);
 
-  @include big-glitch($r, $g, 30, 61, 62);
+  @include big-glitch($red-color, $green-color, 30, [61, 62]);
 
-  @include mini-glitch($r, $b, 0.5, 63, 70);
+  @include mini-glitch($red-color, $blue-color, 0.5, [63, 70]);
 
-  @include big-glitch($r, $b, 70, 71, 72);
+  @include big-glitch($red-color, $blue-color, 70, [71, 72]);
 
-  @include mini-glitch($r, $b, 1, 73, 80);
-  @include mini-glitch($r, $g, 0.5, 81, 90);
+  @include mini-glitch($red-color, $blue-color, 1, [73, 80]);
+  @include mini-glitch($red-color, $green-color, 0.5, [81, 90]);
 
-  @include big-glitch($g, $b, 60, 91, 92);
+  @include big-glitch($green-color, $blue-color, 60, [91, 92]);
 
-  @include mini-glitch($b, $g, 0.7, 92, 100);
+  @include mini-glitch($blue-color, $green-color, 0.7, [92, 100]);
 }
