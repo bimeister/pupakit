@@ -182,6 +182,8 @@ export class DefaultTreeEventHandler {
   private removeItemWithChildren(removeItemId: string, data: FlatTreeItem[], expanded: string[]): void {
     const treeItemExists: boolean = DefaultTreeEventHandler.treeItemExists(removeItemId, data);
     if (!treeItemExists) {
+      this.eventBus.dispatch(new TreeEvents.SetData(data));
+      this.eventBus.dispatch(new TreeEvents.SetExpanded(expanded));
       return;
     }
     const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
