@@ -2,7 +2,7 @@ import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/ter
 import { TaskFunction } from 'gulp';
 
 export function buildLibraryTask(): TaskFunction {
-  const command: string = 'ng build';
+  const command: string = 'yarn run build:cache';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
