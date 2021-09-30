@@ -1,0 +1,32 @@
+@use 'mixins' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 50px;
+  width: 100vw;
+  z-index: 100000;
+
+  display: flex;
+  align-items: center;
+
+  background-color: color(base-white-n400);
+  color: color(base-dark-n400);
+
+  @include host-selector-dark-theme() {
+    background-color: color(base-n600);
+    color: color(base-white-n400);
+  }
+
+  &__logo {
+    margin-left: 4rem;
+    @include font-type-point();
+    @include font-size-header();
+  }
+
+  &__theme-toggle {
+    margin-left: auto;
+    margin-right: 4rem;
+  }
+}

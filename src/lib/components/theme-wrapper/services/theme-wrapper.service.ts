@@ -6,12 +6,15 @@ import { Theme } from '../../../../internal/declarations/enums/theme.enum';
 
 @Injectable()
 export class ThemeWrapperService {
-  private readonly theme$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.Light);
+  private readonly themeState$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.Light);
+
+  public readonly theme$: Observable<Theme> = this.themeState$.asObservable();
+
   public readonly themeClass$: Observable<string> = this.theme$.pipe(
     map((theme: Theme) => (theme === Theme.Dark ? DARK_THEME_CLASS : ''))
   );
 
   public setTheme(theme: Theme): void {
-    this.theme$.next(theme);
+    this.themeState$.next(theme);
   }
 }
