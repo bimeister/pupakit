@@ -1,0 +1,5 @@
+@use 'mixins' as *;
+
+#{$darkThemeClass} .app__wrapper {
+  background-color: color(base-dark-n400);
+}

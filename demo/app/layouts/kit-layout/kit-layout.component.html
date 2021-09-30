@@ -13,12 +13,13 @@
 </pupa-layout>
 
 <ng-template #navigation>
-  <nav class="navigation" [class.mobile-hide]="!(isNavigationVisible$ | async)">
-    <div class="navigation__container">
+  <nav class='side-nav' [class.mobile-hide]="!(isNavigationVisible$ | async)">
+    <demo-navbar></demo-navbar>
+    <div class="side-nav__container">
       <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
         <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
       </div>
-      <pupa-icon-button class="navigation__close" [color]="'light-blue'" (click)="hideNavigationContainer()">
+      <pupa-icon-button class="side-nav__close" [color]="'light-blue'" (click)="hideNavigationContainer()">
         <pupa-icon name="close-circle"></pupa-icon>
       </pupa-icon-button>
       <div class="links-container" (scroll)="processItemsScroll($event)">
@@ -33,14 +34,14 @@
             routerLinkActive="active"
             *ngFor="let linkItem of group.linkItems"
             [routerLink]="linkItem.link"
-            class="navigation-item"
+            class="side-nav-item"
           >
             {{ linkItem.title }}
           </a>
         </ng-container>
       </div>
     </div>
-    <div class="navigation__settings settings">
+    <div class="side-nav__settings settings">
       <div class="settings__label">toggle grid</div>
       <pupa-switcher [formControl]="gridVisibleFormControl"></pupa-switcher>
     </div>

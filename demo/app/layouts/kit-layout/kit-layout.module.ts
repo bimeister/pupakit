@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
-import { DemoSharedModule } from '../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
+import { DemoSharedModule } from '../../shared/shared.module';
+import { NavigationModule } from '../../pages/components/navigation/navigation.module';
 import { KitLayoutComponent } from './kit-layout.component';
 
 @NgModule({
   declarations: [KitLayoutComponent],
-  imports: [DemoSharedModule, RouterModule]
+  imports: [DemoSharedModule, RouterModule, NavigationModule]
 })
 export class KitLayoutModule {}

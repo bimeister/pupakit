@@ -1,0 +1,18 @@
+@use 'themes/functions' as *;
+@import 'functions';
+@import 'mixins';
+
+.theme-toggle {
+  cursor: pointer;
+  color: color(base-dark-n400);
+  font-size: 7rem;
+
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  user-select: none;
+
+  @include host-selector-dark-theme() {
+    color: color(base-white-n400);
+  }
+}
