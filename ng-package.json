@@ -5,5 +5,5 @@
     "entryFile": "src/public-api.ts",
     "styleIncludePaths": ["src/styles"]
   },
-  "whitelistedNonPeerDependencies": ["."]
+  "allowedNonPeerDependencies": ["."]
 }
