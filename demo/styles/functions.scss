@@ -1,0 +1,13 @@
+@use 'sass:map';
+
+@function get-map-field($map, $fields) {
+  $result: $map;
+
+  @each $field in $fields {
+    @if (type-of($field) != 'map') {
+      $result: map.get($result, $field);
+    }
+  }
+
+  @return $result;
+}

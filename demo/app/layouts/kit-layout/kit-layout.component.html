@@ -1,3 +1,4 @@
+<demo-navbar></demo-navbar>
 <pupa-layout>
   <div class="layout-wrapper">
     <ng-container [ngTemplateOutlet]="navigation"></ng-container>
@@ -13,8 +14,7 @@
 </pupa-layout>
 
 <ng-template #navigation>
-  <nav class='side-nav' [class.mobile-hide]="!(isNavigationVisible$ | async)">
-    <demo-navbar></demo-navbar>
+  <nav class="side-nav" [class.mobile-hide]="!(isNavigationVisible$ | async)">
     <div class="side-nav__container">
       <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
         <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>

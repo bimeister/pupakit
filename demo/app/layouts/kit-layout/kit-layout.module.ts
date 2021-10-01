@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { DemoSharedModule } from '../../shared/shared.module';
-import { NavigationModule } from '../../pages/components/navigation/navigation.module';
+import { NavigationModule } from '../../components/navigation/navigation.module';
 import { KitLayoutComponent } from './kit-layout.component';
 
 @NgModule({

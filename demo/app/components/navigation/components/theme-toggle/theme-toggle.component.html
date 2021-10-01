@@ -1,0 +1,6 @@
+<pupa-icon
+  [@rotateIcon]="animationState$ | async"
+  class="theme-toggle"
+  [name]="iconName$ | async"
+  (click)="toggleDarkMode()"
+></pupa-icon>

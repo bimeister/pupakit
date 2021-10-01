@@ -1,11 +1,13 @@
+@use 'demo/styles/variables' as *;
+@use 'demo/styles/functions' as *;
+
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
 .content {
   background-color: color(base-n0);
-
-  &.dark-theme {
+  @include host-selector-dark-theme() {
     background-color: color(base-n600);
   }
 

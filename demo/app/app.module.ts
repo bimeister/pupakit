@@ -17,7 +17,7 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
 @NgModule({
   bootstrap: [AppComponent],
-  declarations: [AppComponent, LogPipe],g
+  declarations: [AppComponent, LogPipe],
   imports: [
     BrowserModule,
     HammerModule,

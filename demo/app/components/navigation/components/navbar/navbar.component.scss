@@ -1,0 +1,46 @@
+@use 'demo/styles/variables.scss' as *;
+@use 'demo/styles/functions' as *;
+@use 'mixins' as *;
+
+@mixin apply-theme($theme-mode) {
+  background-color: get-map-field($theme-config, [$theme-mode, 'navbar', 'background-color' ]);
+  border-bottom: 1px solid get-map-field($theme-config, [$theme-mode, 'navbar', 'border-color' ]);
+  color: get-map-field($theme-config, [$theme-mode, 'navbar', 'font-color' ]);
+}
+
+.navbar {
+  height: $navbar-height;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+
+  @include apply-theme('light');
+
+  @include host-selector-dark-theme() {
+    @include apply-theme('dark');
+  }
+
+  &__logo {
+    margin-left: 4rem;
+    line-height: 0;
+    img {
+      height: 24px;
+      width: 163.5px;
+    }
+  }
+
+  &__theme-toggle {
+    margin-left: auto;
+    margin-right: 4rem;
+    line-height: 0;
+  }
+}
