@@ -1,4 +1,5 @@
 @import 'themes/functions';
+@import 'demo/styles/variables';
 @import 'mixins';
 @import 'functions';
 
@@ -11,7 +12,8 @@
   box-sizing: border-box;
 
   position: relative;
-  min-height: 100vh;
+  min-height: calc(100vh - #{$navbar-height});
+  margin-top: $navbar-height;
 }
 
 .menu-burger {
@@ -26,6 +28,8 @@
 }
 
 .side-nav {
+  margin-top: $navbar-height;
+
   color: #616161;
   box-shadow: 5px 0 19px 0 #d3d3d35e;
   display: flex;
@@ -37,7 +41,7 @@
 
   background-color: color(white);
 
-  height: 100%;
+  height: calc(100% - #{$navbar-height});
   z-index: 11;
 
   @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);

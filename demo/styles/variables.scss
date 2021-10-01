@@ -1,0 +1,28 @@
+@use 'themes/functions' as *;
+
+$navbar-height: 50px;
+
+$theme-config: (
+  light: (
+    body: (
+      background-color: color(base-n0),
+      font-color: color(base-dark-n400)
+    ),
+    navbar: (
+      background-color: color(base-white-n400),
+      border-color: color(base-white-n300),
+      font-color: color(base-dark-n400)
+    )
+  ),
+  dark: (
+    body: (
+      background-color: color(base-n600),
+      font-color: color(base-white-n400)
+    ),
+    navbar: (
+      background-color: color(base-dark-n500),
+      border-color: color(base-dark-n400),
+      font-color: color(base-white-n400)
+    )
+  )
+);
