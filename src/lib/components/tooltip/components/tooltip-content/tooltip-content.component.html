@@ -1,22 +1,19 @@
-<ng-template
-  cdkConnectedOverlay
-  [cdkConnectedOverlayOrigin]="dropDownOverlayOrigin$ | async"
-  [cdkConnectedOverlayOpen]="isOpened$ | async"
-  [cdkConnectedOverlayPositions]="overlayPositions"
-  [cdkConnectedOverlayFlexibleDimensions]="true"
-  (positionChange)="processPositionChange($event)"
->
-  <div class="tooltip" (mouseenter)="processMouseEnterEvent()" (mouseleave)="processMouseLeaveEvent()">
-    <div
-      class="tooltip__animation-container"
-      [@tooltipShow]="animationState$ | async"
-      [style.transform]="styleTransform$ | async"
-    >
-      <div class="tooltip__content-container">
-        <div class="tooltip__content">
-          <ng-content></ng-content>
-        </div>
+<div class="tooltip" *ngIf="isOpened$ | async" [@tooltipShow]>
+  <div class="tooltip__animation-container" [style.transform]="styleTransform$ | async">
+    <div class="tooltip__content-container">
+      <div class="tooltip__content">
+        <ng-container *ngIf="tooltipContentTemplate$ | async as tooltipContentTemplate; else simpleTooltipContent">
+          <ng-container [ngTemplateOutlet]="tooltipContentTemplate"></ng-container>
+        </ng-container>
       </div>
     </div>
   </div>
+</div>
+
+<ng-template #simpleTooltipContent>
+  <ng-container *ngIf="tooltipContent$ | async as tooltipContent; else emptyTooltipContent">
+    {{ tooltipContent }}
+  </ng-container>
 </ng-template>
+
+<ng-template #emptyTooltipContent> Looks like you forgot to give the tooltip content </ng-template>

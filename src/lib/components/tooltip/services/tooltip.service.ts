@@ -1,15 +1,21 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import {
+  ConnectedOverlayPositionChange,
+  FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ElementRef, Injectable, Injector, OnDestroy, TemplateRef } from '@angular/core';
+import { filterNotNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { TooltipContentComponent } from '../components/tooltip-content/tooltip-content.component';
+import { OVERLAY_POSITIONS } from '../positions';
 
 @Injectable()
 export class TooltipService implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
-
-  public readonly tooltipOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin> = new BehaviorSubject<CdkOverlayOrigin>(
-    null
-  );
 
   private readonly mouseOverTrigger$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly mouseOverContent$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -28,10 +34,40 @@ export class TooltipService implements OnDestroy {
   private readonly isDisabledState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isDisabled$: Observable<boolean> = this.isDisabledState$.pipe(distinctUntilChanged());
 
-  private readonly hideOnTooltipHoverState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  public readonly hideOnTooltipHover$: Observable<boolean> = this.hideOnTooltipHoverState$.pipe(distinctUntilChanged());
+  private readonly tooltipContentState$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(
+    null
+  );
+  public readonly tooltipContent$: Observable<Nullable<string>> = this.tooltipContentState$.pipe(
+    distinctUntilChanged()
+  );
 
-  constructor() {
+  private readonly tooltipContentTemplateState$: BehaviorSubject<Nullable<TemplateRef<unknown>>> = new BehaviorSubject<
+    Nullable<TemplateRef<unknown>>
+  >(null);
+  public readonly tooltipContentTemplate$: Observable<Nullable<TemplateRef<unknown>>> =
+    this.tooltipContentTemplateState$.pipe(distinctUntilChanged());
+
+  private readonly tooltipHideOnHoverState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly tooltipHideOnHoverHover$: Observable<boolean> = this.tooltipHideOnHoverState$.pipe(
+    distinctUntilChanged()
+  );
+
+  private readonly overlayRef$: BehaviorSubject<Nullable<OverlayRef>> = new BehaviorSubject<Nullable<OverlayRef>>(null);
+  private readonly triggerRef$: BehaviorSubject<Nullable<ElementRef<HTMLElement>>> = new BehaviorSubject<
+    Nullable<ElementRef<HTMLElement>>
+  >(null);
+
+  private readonly tooltipPositionStrategy$: BehaviorSubject<Nullable<FlexibleConnectedPositionStrategy>> =
+    new BehaviorSubject<Nullable<FlexibleConnectedPositionStrategy>>(null);
+  public readonly tooltipPosition$: Observable<ConnectedOverlayPositionChange> = this.tooltipPositionStrategy$.pipe(
+    filterNotNil(),
+    switchMap((positionStrategy: FlexibleConnectedPositionStrategy) => {
+      return positionStrategy.positionChanges;
+    }),
+    shareReplayWithRefCount()
+  );
+
+  constructor(private readonly overlay: Overlay) {
     this.processMouseOverTooltipChanges();
   }
 
@@ -39,20 +75,33 @@ export class TooltipService implements OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public registerTooltipOverlayOrigin(tooltipOverlayOrigin: CdkOverlayOrigin): void {
-    this.tooltipOverlayOrigin$.next(tooltipOverlayOrigin);
+  public registerTooltipTriggerRef(triggerRef: ElementRef<HTMLElement>): void {
+    this.triggerRef$.next(triggerRef);
   }
 
   public setOpenedState(isOpened: boolean): void {
-    this.isOpenedState$.next(isOpened);
+    this.isOpenedState$
+      .pipe(
+        take(1),
+        filter((currentOpenedState: boolean) => currentOpenedState !== isOpened)
+      )
+      .subscribe(() => (isOpened ? this.open() : this.close()));
   }
 
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabledState$.next(isDisabled);
   }
 
-  public setHideOnTooltipHoverState(hideOnTooltipHover: boolean): void {
-    this.hideOnTooltipHoverState$.next(hideOnTooltipHover);
+  public setTooltipHideOnHoverState(hideOnTooltipHover: boolean): void {
+    this.tooltipHideOnHoverState$.next(hideOnTooltipHover);
+  }
+
+  public setTooltipContentState(content: string): void {
+    this.tooltipContentState$.next(content);
+  }
+
+  public setTooltipContentTemplateState(template: TemplateRef<unknown>): void {
+    this.tooltipContentTemplateState$.next(template);
   }
 
   public processTriggerMouseEnter(): void {
@@ -75,5 +124,64 @@ export class TooltipService implements OnDestroy {
     return this.mouseOverTooltip$.subscribe((mouseOverTooltip: boolean) => {
       this.setOpenedState(mouseOverTooltip);
     });
+  }
+
+  private createOverlay(): void {
+    this.getPositionStrategy()
+      .pipe(take(1), filterNotNil())
+      .subscribe((positionStrategy: FlexibleConnectedPositionStrategy) => {
+        const overlayConfig: OverlayConfig = new OverlayConfig({
+          positionStrategy
+        });
+        const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
+        this.overlayRef$.next(overlayRef);
+        this.tooltipPositionStrategy$.next(positionStrategy);
+      });
+  }
+
+  private getPositionStrategy(): Observable<FlexibleConnectedPositionStrategy> {
+    return this.triggerRef$.pipe(
+      take(1),
+      filterNotNil(),
+      map((triggerRef: ElementRef<HTMLElement>) => {
+        const positionStrategy: FlexibleConnectedPositionStrategy = this.overlay
+          .position()
+          .flexibleConnectedTo(triggerRef)
+          .withPositions(OVERLAY_POSITIONS)
+          .withViewportMargin(4);
+
+        return positionStrategy;
+      })
+    );
+  }
+
+  private open(): void {
+    this.createOverlay();
+    this.overlayRef$.pipe(filterNotNil(), take(1)).subscribe((overlayRef: OverlayRef) => {
+      overlayRef.attach(this.getComponentPortal());
+      overlayRef.updatePosition();
+
+      this.isOpenedState$.next(true);
+    });
+  }
+
+  private close(): void {
+    this.overlayRef$.pipe(filterNotNil(), take(1)).subscribe((overlayRef: OverlayRef) => {
+      this.isOpenedState$.next(false);
+      overlayRef.dispose();
+      overlayRef.detach();
+    });
+  }
+
+  private getComponentPortal(): ComponentPortal<TooltipContentComponent> {
+    const portalInjector: Injector = Injector.create({
+      providers: [
+        {
+          provide: TooltipService,
+          useValue: this
+        }
+      ]
+    });
+    return new ComponentPortal(TooltipContentComponent, null, portalInjector);
   }
 }
