@@ -2,7 +2,12 @@
   <div class="navbar__logo">
     <img [src]="logo$ | async" alt="" />
   </div>
+
   <div class="navbar__theme-toggle">
     <demo-theme-toggle></demo-theme-toggle>
+  </div>
+
+  <div class="navbar__menu-toggle">
+    <demo-menu-toggle [isOpen]='isNavbarOpen.valueChanges | async' (toggle)='handleToggleNavbar($event)'></demo-menu-toggle>
   </div>
 </nav>
