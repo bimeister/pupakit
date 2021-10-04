@@ -8,6 +8,9 @@
   </div>
 
   <div class="navbar__menu-toggle">
-    <demo-menu-toggle [isOpen]='isNavbarOpen.valueChanges | async' (toggle)='handleToggleNavbar($event)'></demo-menu-toggle>
+    <demo-menu-toggle
+      [isOpen]="isMenuOpen.valueChanges | async"
+      (toggle)="handleToggleNavbar($event)"
+    ></demo-menu-toggle>
   </div>
 </nav>
