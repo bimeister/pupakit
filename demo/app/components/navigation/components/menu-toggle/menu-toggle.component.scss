@@ -1,0 +1,109 @@
+@use 'sass:map';
+
+@import 'functions';
+@import 'mixins';
+
+$menu-toggle-size: 32px;
+$strip-height: 4px;
+$strip-rotation-angle: 45deg;
+$transition-delay: 0.25s;
+
+@mixin apply-background() {
+  background: color(base-dark-n400);
+
+  @include host-selector-dark-theme() {
+    background: color(base-white-n400);
+  }
+}
+
+:host {
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  user-select: none;
+
+  &:focus, &:hover, &:active {
+    .menu-toggle__strips {
+      transition: background 0s $transition-delay;
+    }
+  }
+}
+
+.menu-toggle {
+  @include gt-md() {
+    cursor: pointer;
+  }
+
+  background: transparent;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+
+  padding: 0;
+  width: $menu-toggle_size;
+  height: $menu-toggle_size;
+  box-shadow: none;
+  border: none;
+
+  font-size: 0;
+  text-indent: -9999px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &__strips {
+    $top: calc((#{$menu-toggle-size} - #{$strip-height}) / 2);
+    $pseudo-strips-position-diff: calc(-#{$menu-toggle-size} / 2 + 2 * #{$strip-height});
+
+    display: block;
+    position: absolute;
+    top: $top;
+    left: 0px;
+    right: 0px;
+    height: $strip-height;
+
+    @include apply-background();
+
+    &::before, &::after {
+      position: absolute;
+      display: block;
+      left: 0;
+      width: 100%;
+      height: $strip-height;
+      content: "";
+      transition-duration: $transition-delay, $transition-delay;
+      transition-delay: $transition-delay, 0s;
+
+      @include apply-background();
+    }
+
+    &::before {
+      top: $pseudo-strips-position-diff;
+      transition-property: top, transform;
+    }
+
+    &::after {
+      bottom: $pseudo-strips-position-diff;
+      transition-property: bottom, transform;
+    }
+  }
+
+  .menu-toggle.active &__strips {
+    background: none;
+
+    &::before {
+      top: 0;
+      transform: rotate($strip-rotation-angle);
+    }
+
+    &::after {
+      bottom: 0;
+      transform: rotate(-$strip-rotation-angle);
+    }
+
+    &::before, &::after {
+      transition-delay: 0s, $transition-delay;
+    }
+  }
+}

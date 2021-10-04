@@ -8,6 +8,8 @@
   color: get-map-field($theme-config, [$theme-mode, 'navbar', 'font-color' ]);
 }
 
+$icon-size: 7rem;
+
 .navbar {
   height: $navbar-height;
   width: 100vw;
@@ -40,6 +42,14 @@
 
   &__theme-toggle {
     margin-left: auto;
+    font-size: $icon-size;
+    margin-right: 4rem;
+    line-height: 0;
+  }
+
+  &__menu-toggle {
+    font-size: $icon-size;
+    cursor: pointer;
     margin-right: 4rem;
     line-height: 0;
   }
