@@ -1,27 +1,18 @@
 <h1>Checkbox</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content [class.dark-theme]="darkMode | async">
+  <demo-example-viewer-content>
     <pupa-checkbox [indeterminate]="indeterminate | async" [formControl]="control">
       <pupa-checkbox-mark></pupa-checkbox-mark>
-      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async">
-        <pupa-tooltip-trigger>
-          <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
-          <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>
-        </pupa-tooltip-trigger>
-        <pupa-tooltip-content>
-          <div class="tooltip-content">
-            <div>{{ label }}</div>
-            <div>{{ hint }}</div>
-          </div>
-        </pupa-tooltip-content>
-      </pupa-tooltip>
+      <div [pupaTooltip] [tooltipContentTemplate]="tooltipTemplate" [tooltipDisabled]="isNeedDisableTooltip$ | async">
+        <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
+        <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>
+      </div>
     </pupa-checkbox>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #darkMode>Dark</demo-props-checkbox>
     <demo-props-checkbox class="indeterminate-props" #indeterminate>Indeterminate</demo-props-checkbox>
     <demo-props-checkbox class="disabled-props" #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
@@ -31,3 +22,10 @@
 <pupa-code-container [content]="checkboxExampleCode">
   <demo-checkbox-demo-example></demo-checkbox-demo-example>
 </pupa-code-container>
+
+<ng-template #tooltipTemplate>
+  <div class="tooltip-content">
+    <div>{{ label }}</div>
+    <div>{{ hint }}</div>
+  </div>
+</ng-template>

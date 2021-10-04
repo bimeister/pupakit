@@ -19,7 +19,7 @@ import { BehaviorSubject, forkJoin, fromEvent, Observable, of, Subscription } fr
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 import { isNil } from '@bimeister/utilities';
 import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
-import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outsizde-angular.operator';
+import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
 import { switchMap, throttleTime } from 'rxjs/operators';

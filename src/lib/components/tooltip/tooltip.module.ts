@@ -1,14 +1,18 @@
-import { NgModule } from '@angular/core';
-
-import { TooltipContentComponent } from './components/tooltip-content/tooltip-content.component';
-import { TooltipTriggerComponent } from './components/tooltip-trigger/tooltip-trigger.component';
-import { TooltipComponent } from './components/tooltip/tooltip.component';
 import { OverlayModule } from '@angular/cdk/overlay';
+import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { TooltipContentComponent } from './components/tooltip-content/tooltip-content.component';
+import { PupaTooltipDirective } from './directives/tooltip.directive';
+
+const INTERNAL_COMPONENTS: Type<unknown>[] = [TooltipContentComponent];
+
+const EXTERNAL_DIRECTIVES: Type<unknown>[] = [PupaTooltipDirective];
+
+const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [SharedModule, OverlayModule];
 
 @NgModule({
-  declarations: [TooltipTriggerComponent, TooltipContentComponent, TooltipComponent],
-  imports: [SharedModule, OverlayModule],
-  exports: [TooltipTriggerComponent, TooltipContentComponent, TooltipComponent]
+  declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
+  imports: IMPORTS,
+  exports: [...EXTERNAL_DIRECTIVES]
 })
 export class TooltipModule {}

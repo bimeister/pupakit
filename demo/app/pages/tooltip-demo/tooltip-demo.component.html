@@ -2,16 +2,17 @@
 
 <demo-example-viewer class="tooltip-demo">
   <demo-example-viewer-content>
-    <pupa-tooltip [hideOnTooltipHover]="hideOnTooltipHoverControl.value" [disabled]="disabledControl.value">
-      <pupa-tooltip-trigger>
-        <pupa-icon-button color="transparent" size="small-to-medium">
-          <pupa-icon class="icon" name="ios-checkmark-circle"></pupa-icon>
-        </pupa-icon-button>
-      </pupa-tooltip-trigger>
-      <pupa-tooltip-content>
-        <div [innerHTML]="sanitiazedHtml$ | async"></div>
-      </pupa-tooltip-content>
-    </pupa-tooltip>
+    <pupa-button-icon
+      [pupaTooltip]="'Tooltip simple content here!'"
+      [icon]="'app-notification'"
+      [pupaTooltip]
+      #tooltip="pupaTooltip"
+      [tooltipContentTemplate]="customTooltipTemplate"
+      [tooltipHideOnHover]="hideOnTooltipHoverControl.value"
+      [tooltipDisabled]="disabledControl.value"
+      [active]="tooltip.isOpened$ | async"
+    >
+    </pupa-button-icon>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties class="tooltip-demo__viewer-properties">
@@ -27,3 +28,35 @@
     <pupa-textarea [formControl]="contentControl"> </pupa-textarea>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<h2>Simple usage</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-adaptive-example-1></demo-adaptive-example-1>
+</pupa-code-container>
+
+<h2>Tooltip with custom template</h2>
+<pupa-code-container [content]="example2Content">
+  <demo-adaptive-example-2></demo-adaptive-example-2>
+</pupa-code-container>
+
+<h2>Tooltip with opened state</h2>
+<pupa-code-container [content]="example3Content">
+  <demo-adaptive-example-3></demo-adaptive-example-3>
+</pupa-code-container>
+
+<ng-template #customTooltipTemplate>
+  <div [innerHtml]="getSanitizedHtml()"></div>
+</ng-template>
+
+<h2>Notice</h2>
+<ul>
+  <li>
+    If you submit simple content and a template to the directive at the same time, the display will take precedence over
+    the template.
+  </li>
+  <li>Tooltips are not shown on touch devices.</li>
+  <li>
+    If you don't want to show the tooltip under any conditions, then the directive has an boolean input
+    <code>tooltipDisabled</code>.
+  </li>
+</ul>

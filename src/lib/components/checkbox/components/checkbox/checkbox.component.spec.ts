@@ -113,7 +113,7 @@ describe('checkbox.component.ts', () => {
   it(
     'should click on label element and switch checkbox marker',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('pupa-tooltip'))
+      from(page.waitForSelector('pupa-checkbox-label'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() =>
