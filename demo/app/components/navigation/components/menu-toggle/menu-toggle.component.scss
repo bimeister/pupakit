@@ -22,7 +22,9 @@ $transition-delay: 0.25s;
   pointer-events: auto;
   user-select: none;
 
-  &:focus, &:hover, &:active {
+  &:focus,
+  &:hover,
+  &:active {
     .menu-toggle__strips {
       transition: background 0s $transition-delay;
     }
@@ -65,13 +67,14 @@ $transition-delay: 0.25s;
 
     @include apply-background();
 
-    &::before, &::after {
+    &::before,
+    &::after {
       position: absolute;
       display: block;
       left: 0;
       width: 100%;
       height: $strip-height;
-      content: "";
+      content: '';
       transition-duration: $transition-delay, $transition-delay;
       transition-delay: $transition-delay, 0s;
 
@@ -102,7 +105,8 @@ $transition-delay: 0.25s;
       transform: rotate(-$strip-rotation-angle);
     }
 
-    &::before, &::after {
+    &::before,
+    &::after {
       transition-delay: 0s, $transition-delay;
     }
   }
