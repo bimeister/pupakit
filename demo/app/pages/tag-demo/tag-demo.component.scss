@@ -17,14 +17,6 @@ $min-height_demo: fit-content;
   }
 }
 
-.content {
-  background-color: color(base-n0);
-
-  &.dark-theme {
-    background-color: color(base-n600);
-  }
-}
-
 .color-tag-demo {
   min-height: $min-height_demo;
 }

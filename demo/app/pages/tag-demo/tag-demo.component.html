@@ -1,7 +1,7 @@
 <h1>Tag</h1>
 
 <demo-example-viewer class="tag-demo">
-  <demo-example-viewer-content class="content" [class.dark-theme]="darkModeTag | async">
+  <demo-example-viewer-content class="content">
     <div class="tag-demo__wrapper">
       <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async"> Tag </pupa-tag>
       <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async">
@@ -14,9 +14,6 @@
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
-    <demo-props-group-label>Theme Mode</demo-props-group-label>
-    <demo-props-checkbox #darkModeTag>Dark</demo-props-checkbox>
-
     <demo-props-group-label>Disabled</demo-props-group-label>
     <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
 

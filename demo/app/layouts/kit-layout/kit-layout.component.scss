@@ -1,3 +1,5 @@
+@use 'demo/styles/functions' as *;
+
 @import 'themes/functions';
 @import 'demo/styles/variables';
 @import 'mixins';
@@ -20,15 +22,18 @@
   margin-top: $navbar-height;
 
   color: #616161;
-  box-shadow: 5px 0 19px 0 #d3d3d35e;
+
+  box-shadow: 5px 0 19px 0 color(base-white-n400);
+  @include host-selector-dark-theme() {
+    box-shadow: 5px 0 19px 0 color(base-dark-n400);
+  }
+
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: fixed;
   top: 0;
   left: 0;
-
-  background-color: color(white);
 
   height: calc(100% - #{$navbar-height});
   z-index: 11;
@@ -45,6 +50,14 @@
   overflow: auto;
   @include grid-container-offset('padding-left');
   @include grid-container-offset('padding-right');
+
+  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
+  color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+
+  @include host-selector-dark-theme() {
+    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
+    color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
+  }
 }
 
 .content {

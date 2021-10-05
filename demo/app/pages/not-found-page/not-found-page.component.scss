@@ -1,8 +1,5 @@
 @use 'sass:list';
-<<<<<<< HEAD
 @use 'sass:math';
-@import 'mixins';
-=======
 @use 'sass:map';
 
 @use 'mixins' as *;
@@ -23,7 +20,6 @@
     #{$property}: map.get($dark-theme, $property);
   }
 }
->>>>>>> feature: navbar, logo and theme-toggle
 
 .not-found {
   display: flex;

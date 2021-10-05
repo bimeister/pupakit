@@ -1,3 +1,7 @@
+@use 'demo/styles/functions' as *;
+@use 'demo/styles/variables' as *;
+@use 'mixins' as *;
+
 :host {
   display: flex;
   flex-flow: row nowrap;
@@ -5,7 +9,16 @@
 
   width: 100%;
   min-height: 400px;
+
   border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #fafafa;
+
+  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
+  border: 1px solid color(base-white-n400);
+
+  @include host-selector-dark-theme() {
+    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
+    border: 1px solid color(base-dark-n400);
+  }
+
   border-radius: 8px;
 }

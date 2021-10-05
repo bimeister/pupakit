@@ -1,8 +1,15 @@
+@use 'demo/styles/functions' as *;
+@use 'demo/styles/variables' as *;
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
 .container {
+  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
+  @include host-selector-dark-theme() {
+    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
+  }
+
   margin: 0;
 
   padding: 4rem;
@@ -11,6 +18,9 @@
 
   &__preview {
     padding: 4rem;
+  }
+
+  &__tabs {
   }
 }
 
