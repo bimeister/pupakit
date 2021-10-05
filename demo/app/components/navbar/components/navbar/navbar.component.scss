@@ -10,6 +10,23 @@
 
 $icon-size: 7rem;
 
+$item-margin: 1rem;
+$end-item-margin: 4rem;
+
+@mixin navbar-base-item() {
+  margin-left: $item-margin;
+  margin-right: $item-margin;
+  line-height: 0;
+
+  &.left-end {
+    margin-left: $end-item-margin;
+  }
+
+  &.right-end {
+    margin-right: $end-item-margin;
+  }
+}
+
 .navbar {
   height: $navbar-height;
   width: 100vw;
@@ -31,26 +48,53 @@ $icon-size: 7rem;
     @include apply-theme('dark');
   }
 
-  &__logo {
-    margin-left: 4rem;
-    line-height: 0;
-    img {
-      height: 24px;
-      width: 163.5px;
+  &__logo-wrapper {
+    @include navbar-base-item();
+
+    display: flex;
+    align-items: center;
+
+    @include gt-sm() {
+      margin-left: $end-item-margin;
     }
   }
 
-  &__theme-toggle {
+  &__logo-text {
+    height: 24px;
+    width: 163.5px;
+    margin-left: 2rem;
+
+    @include xs() {
+      display: none;
+    }
+  }
+
+  &__logo-mini {
+    height: 32px;
+    width: 32px;
+  }
+
+  &__spacer {
     margin-left: auto;
+  }
+
+  &__item {
+    @include navbar-base-item();
+  }
+
+  &__icon {
+    @include navbar-base-item();
+
     font-size: $icon-size;
-    margin-right: 4rem;
-    line-height: 0;
   }
 
   &__menu-toggle {
-    font-size: $icon-size;
-    cursor: pointer;
-    margin-right: 4rem;
-    line-height: 0;
+    @include navbar-base-item();
+
+    display: none;
+
+    @include lt-md() {
+      display: block;
+    }
   }
 }

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { MainLayoutComponent } from './main-layout.component';
-import { NavigationModule } from '../../components/navigation/navigation.module';
+import { NavbarModule } from '../../components/navbar/navbar.module';
+import { DemoSharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [MainLayoutComponent],
-  imports: [CommonModule, RouterModule, NavigationModule]
+  imports: [DemoSharedModule, RouterModule, NavbarModule]
 })
 export class MainLayoutModule {}

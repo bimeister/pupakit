@@ -1,0 +1,84 @@
+@use 'mixins' as *;
+
+@include scrollbar();
+
+:host {
+  max-height: 100%;
+}
+
+.sidebar-content {
+  height: 100%;
+
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  &__top-section {
+    flex-shrink: 0;
+    position: relative;
+
+    .search-field-container {
+      padding: 2rem;
+      transition: 0.3s;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.with-shadow {
+        box-shadow: 5px 0 19px 0 #d3d3d35e;
+      }
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 50%;
+    right: 2rem;
+    display: block;
+    transform: translate(0%, -50%);
+  }
+
+  .links-container {
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .empty-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .subheader {
+    font-weight: 300;
+    color: #212121bf;
+    margin-bottom: 8px;
+    padding-left: 24px;
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .side-nav-item {
+    color: inherit;
+    font-size: 14px;
+    display: block;
+    padding: 12px 48px 12px 32px;
+    line-height: 1.333;
+    text-decoration: none;
+    box-sizing: border-box;
+
+    &.active,
+    &:hover {
+      color: #212121;
+      background: #f5f5f5;
+    }
+  }
+}
