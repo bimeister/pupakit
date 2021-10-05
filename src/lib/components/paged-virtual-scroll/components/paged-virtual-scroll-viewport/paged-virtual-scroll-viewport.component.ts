@@ -60,10 +60,9 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   constructor(private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService) {}
 
   public ngOnInit(): void {
-    this.subscription
-      .add(this.handleIframeResizeEvents())
-      .add(this.handleChangeDataSourceEvent())
-      .add(this.handleChangeCountItemsInViewPort());
+    this.subscription.add(this.handleIframeResizeEvents());
+    this.subscription.add(this.handleChangeDataSourceEvent());
+    this.subscription.add(this.handleChangeCountItemsInViewPort());
   }
 
   public ngAfterViewInit(): void {
@@ -85,6 +84,10 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   public refreshWithScrollToIndex(index: number = null, behavior: ScrollBehavior = 'auto'): void {
     this.pagedVirtualScrollStateService.refreshWithScrollToIndex(index, behavior);
+  }
+
+  public updateViewportSize(): void {
+    this.viewport.checkViewportSize();
   }
 
   private setViewportComponent(): void {
