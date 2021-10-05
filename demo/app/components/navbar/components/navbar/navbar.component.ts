@@ -8,9 +8,8 @@ import { filterTruthy } from '@bimeister/utilities';
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 import { DrawersService } from '../../../../../../src/internal/shared/services/drawers.service';
-import { DRAWER_DATA_TOKEN } from '../../../../../declarations/tokens/drawer-data.token';
-import { MenuDrawerComponent } from '../menu-drawer/menu-drawer.component';
 import { OpenedDrawer } from '../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
+import { SidebarContentComponent } from '../../../sidebar/sidebar-content/sidebar-content.component';
 
 @Component({
   selector: 'demo-navbar',
@@ -28,6 +27,7 @@ export class NavbarComponent implements OnDestroy {
 
   private readonly logoDark: SafeResourceUrl;
   private readonly logoLight: SafeResourceUrl;
+  public readonly logoMini: SafeResourceUrl;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -60,6 +60,7 @@ export class NavbarComponent implements OnDestroy {
   ) {
     this.logoLight = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-light.svg');
     this.logoDark = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-dark.svg');
+    this.logoMini = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-mini.svg');
 
     this.subscription.add(this.closeMenuWhenDrawerClosed());
     this.subscription.add(this.openDrawerWhenMenuOpen());
@@ -92,18 +93,12 @@ export class NavbarComponent implements OnDestroy {
   }
 
   private openDrawer(): OpenedDrawer {
-    return this.drawerService.open(MenuDrawerComponent, {
+    return this.drawerService.open(SidebarContentComponent, {
       hasBackdrop: true,
       closeOnBackdropClick: true,
       isBackdropTransparent: false,
-      float: 'right',
-      injector: this.injector,
-      providers: [
-        {
-          provide: DRAWER_DATA_TOKEN,
-          useValue: [1, 2, 3, 4]
-        }
-      ]
+      float: 'left',
+      injector: this.injector
     });
   }
 

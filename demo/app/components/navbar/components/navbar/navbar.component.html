@@ -1,0 +1,23 @@
+<nav class="navbar">
+  <div class="navbar__menu-toggle left-end">
+    <demo-menu-toggle
+      [isOpen]="isMenuOpen.valueChanges | async"
+      (toggle)="handleToggleNavbar($event)"
+    ></demo-menu-toggle>
+  </div>
+
+  <div class="navbar__logo-wrapper">
+    <img [src]="logoMini" alt="" class="navbar__logo-mini" />
+    <img [src]="logo$ | async" alt="" class="navbar__logo-text" />
+  </div>
+
+  <div class="navbar__spacer"></div>
+
+  <div class="navbar__item">
+    <demo-grid-toggle label="toggle grid"></demo-grid-toggle>
+  </div>
+
+  <div class="navbar__icon right-end">
+    <demo-theme-toggle></demo-theme-toggle>
+  </div>
+</nav>

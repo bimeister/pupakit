@@ -3,11 +3,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { MenuToggleComponent } from './components/menu-toggle/menu-toggle.component';
-import { MenuDrawerComponent } from './components/menu-drawer/menu-drawer.component';
+import { GridToggleComponent } from './components/grid-toggle/grid-toggle.component';
 
 @NgModule({
-  declarations: [NavbarComponent, ThemeToggleComponent, MenuToggleComponent, MenuDrawerComponent],
+  declarations: [NavbarComponent, ThemeToggleComponent, MenuToggleComponent, GridToggleComponent],
   exports: [NavbarComponent],
   imports: [DemoSharedModule]
 })
-export class NavigationModule {}
+export class NavbarModule {}

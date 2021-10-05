@@ -1,0 +1,35 @@
+<div class="sidebar-content">
+  <div class="sidebar-content__top-section">
+    <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
+      <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
+    </div>
+
+    <pupa-icon-button
+      *ngIf="isOpenInDrawer"
+      class="sidebar-content__close"
+      [color]="'light-blue'"
+      (click)="closeSidebar()"
+    >
+      <pupa-icon name="close-circle"></pupa-icon>
+    </pupa-icon-button>
+  </div>
+
+  <div class="links-container" (scroll)="processItemsScroll($event)">
+    <div class="empty-placeholder" *ngIf="isEmpty$ | async">
+      Not found
+      <div>🤷</div>
+    </div>
+
+    <ng-container *ngFor="let group of filteredLinkGroups$ | async">
+      <h3 class="subheader">{{ group.title }}</h3>
+      <a
+        routerLinkActive="active"
+        *ngFor="let linkItem of group.linkItems"
+        [routerLink]="linkItem.link"
+        class="side-nav-item"
+      >
+        {{ linkItem.title }}
+      </a>
+    </ng-container>
+  </div>
+</div>
