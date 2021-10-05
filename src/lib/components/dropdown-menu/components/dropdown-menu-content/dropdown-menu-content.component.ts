@@ -1,5 +1,10 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { CdkOverlayOrigin, ConnectionPositionPair, HorizontalConnectionPos } from '@angular/cdk/overlay';
+import {
+  CdkOverlayOrigin,
+  ConnectionPositionPair,
+  HorizontalConnectionPos,
+  VerticalConnectionPos
+} from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -7,6 +12,7 @@ import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapp
 import { DropdownService } from '../../services/dropdown.service';
 
 const ANIMATION_DURATION_MS: number = 150;
+const HORIZONTAL_POS_LIST: HorizontalConnectionPos[] = ['center', 'end', 'start'];
 
 @Component({
   selector: 'pupa-dropdown-menu-content',
@@ -52,14 +58,20 @@ export class DropdownMenuContentComponent implements OnChanges {
       .subscribe(() => this.dropdownService.setOpened(false));
   }
 
-  private setOverlayPositions(): void {
-    // first in array would be used for initial position
-    const sortedByHorizontalPosition: ConnectionPositionPair[] = [
-      new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
-      new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
-      new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' })
-    ].sort(({ overlayX }) => (overlayX === this.horizontalPosition ? -1 : 1));
+  private getConnectionPositionPair(
+    overlayX: HorizontalConnectionPos,
+    overlayY: VerticalConnectionPos
+  ): ConnectionPositionPair {
+    return new ConnectionPositionPair({ originX: overlayX, originY: 'bottom' }, { overlayX, overlayY });
+  }
 
-    this.overlayPositions = sortedByHorizontalPosition;
+  private setOverlayPositions(): void {
+    const sortedHorizontalPosList: HorizontalConnectionPos[] = HORIZONTAL_POS_LIST.sort(
+      (item: HorizontalConnectionPos) => (item === this.horizontalPosition ? -1 : 1)
+    );
+    this.overlayPositions = [
+      ...sortedHorizontalPosList.map((item: HorizontalConnectionPos) => this.getConnectionPositionPair(item, 'top')),
+      ...sortedHorizontalPosList.map((item: HorizontalConnectionPos) => this.getConnectionPositionPair(item, 'bottom'))
+    ];
   }
 }
