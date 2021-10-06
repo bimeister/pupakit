@@ -28,10 +28,6 @@
 
       &.with-shadow {
         box-shadow: 5px 0 19px 0 color(base-white-n500);
-
-        @include host-selector-dark-theme() {
-          box-shadow: 5px 0 19px 0 color(base-dark-n500);
-        }
       }
     }
   }
@@ -71,13 +67,9 @@
     line-height: 1.5;
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
-    @include host-selector-dark-theme() {
-      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-    }
   }
 
   .side-nav-item {
-    //color: inherit;
     font-size: 14px;
     display: block;
     padding: 12px 48px 12px 32px;
@@ -86,15 +78,36 @@
     box-sizing: border-box;
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
-    @include host-selector-dark-theme() {
-      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-    }
 
     &.active,
     &:hover {
       color: color(base-n700);
       background: color(base-white-n500);
-      @include host-selector-dark-theme() {
+    }
+  }
+}
+
+#{$darkThemeClass} {
+  .sidebar-content {
+    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
+
+    &__top-section {
+      .search-field-container {
+        &.with-shadow {
+          box-shadow: 5px 0 19px 0 color(base-dark-n500);
+        }
+      }
+    }
+
+    .subheader {
+      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
+    }
+
+    .side-nav-item {
+      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
+
+      &.active,
+      &:hover {
         color: color(base-n0);
         background: color(base-dark-n500);
       }
