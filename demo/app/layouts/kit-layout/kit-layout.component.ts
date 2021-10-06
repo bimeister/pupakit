@@ -5,5 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './kit-layout.component.html',
   styleUrls: ['./kit-layout.component.scss']
 })
-
 export class KitLayoutComponent {}
