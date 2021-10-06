@@ -161,6 +161,10 @@ export class SidebarContentComponent {
     private readonly themeWrapperService: ThemeWrapperService
   ) {}
 
+  public handleClickLink(): void {
+    this.closeSidebar();
+  }
+
   public closeSidebar(): void {
     if (this.isOpenInDrawer) {
       this.drawerRef.close(666);
