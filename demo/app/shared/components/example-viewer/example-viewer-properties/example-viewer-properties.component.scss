@@ -5,9 +5,11 @@
 :host {
   min-width: 200px;
 
-  color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+  color: get-map-field($theme-config, [ light, body, font-color]);
+  background-color: get-map-field($theme-config, [ light, navbar, background-color]);
   @include host-selector-dark-theme() {
-    color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
+    color: get-map-field($theme-config, [ dark, body, font-color]);
+    background-color: get-map-field($theme-config, [ dark, navbar, background-color]);
   }
 
   border-left: 1px solid rgba(0, 0, 0, 0.12);

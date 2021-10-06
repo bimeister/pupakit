@@ -5,14 +5,14 @@
         <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
       </div>
 
-      <pupa-icon-button
+      <pupa-button-icon
         *ngIf="isOpenInDrawer"
         class="sidebar-content__close"
-        [color]="'light-blue'"
+        icon="app-cross"
+        kind="subtle"
         (click)="closeSidebar()"
       >
-        <pupa-icon name="close-circle"></pupa-icon>
-      </pupa-icon-button>
+      </pupa-button-icon>
     </div>
 
     <div class="links-container" (scroll)="processItemsScroll($event)">
@@ -27,6 +27,7 @@
           routerLinkActive="active"
           *ngFor="let linkItem of group.linkItems"
           [routerLink]="linkItem.link"
+          (click)="handleClickLink()"
           class="side-nav-item"
         >
           {{ linkItem.title }}
