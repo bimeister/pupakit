@@ -4,6 +4,8 @@ import { map } from 'rxjs/operators';
 import { isEmpty, isNil, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
 
 import { DrawerRef } from '../../../../../src/internal/declarations/classes/drawer-ref.class';
+import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
 
 interface LinkItem {
   title: string;
@@ -152,7 +154,12 @@ export class SidebarContentComponent {
 
   public isOpenInDrawer: boolean = !isNil(this.drawerRef);
 
-  constructor(@Inject(DrawerRef) @Optional() private readonly drawerRef: DrawerRef<number>) {}
+  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
+
+  constructor(
+    @Inject(DrawerRef) @Optional() private readonly drawerRef: DrawerRef<number>,
+    private readonly themeWrapperService: ThemeWrapperService
+  ) {}
 
   public closeSidebar(): void {
     if (this.isOpenInDrawer) {
