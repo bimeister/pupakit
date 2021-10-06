@@ -51,12 +51,10 @@ $end-item-margin: 4rem;
   &__logo-wrapper {
     @include navbar-base-item();
 
+    margin-left: $end-item-margin;
+
     display: flex;
     align-items: center;
-
-    @include gt-sm() {
-      margin-left: $end-item-margin;
-    }
   }
 
   &__logo-text {

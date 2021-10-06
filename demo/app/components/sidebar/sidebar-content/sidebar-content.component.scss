@@ -2,14 +2,17 @@
 @use 'demo/styles/functions' as *;
 @use 'mixins' as *;
 
-@include scrollbar();
-
 :host {
   max-height: 100%;
 }
 
 .sidebar-content {
   height: 100%;
+  width: 100%;
+
+  @include lt-md() {
+    width: 100vw;
+  }
 
   display: flex;
   position: relative;
@@ -52,6 +55,8 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    color: get-map-field($theme-config, [ 'light', 'body', font-color]);
   }
 
   .subheader {
@@ -89,6 +94,11 @@
     .subheader {
       color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
     }
+
+    .empty-placeholder {
+      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
+    }
+
 
     .side-nav-item {
       color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
