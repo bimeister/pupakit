@@ -21,14 +21,9 @@
 
     .search-field-container {
       padding: 2rem;
-      transition: 0.3s;
       display: flex;
       justify-content: center;
       align-items: center;
-
-      &.with-shadow {
-        box-shadow: 5px 0 19px 0 color(base-white-n500);
-      }
     }
   }
 
@@ -90,14 +85,6 @@
 #{$darkThemeClass} {
   .sidebar-content {
     background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
-
-    &__top-section {
-      .search-field-container {
-        &.with-shadow {
-          box-shadow: 5px 0 19px 0 color(base-dark-n500);
-        }
-      }
-    }
 
     .subheader {
       color: get-map-field($theme-config, [ 'dark', 'body', font-color]);

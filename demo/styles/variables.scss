@@ -6,6 +6,7 @@ $theme-config: (
   light: (
     body: (
       background-color: color(base-n0),
+      border-color: color(base-white-n300),
       font-color: color(base-dark-n400)
     ),
     navbar: (
@@ -17,6 +18,7 @@ $theme-config: (
   dark: (
     body: (
       background-color: color(base-n600),
+      border-color: color(base-dark-n400),
       font-color: color(base-white-n400)
     ),
     navbar: (
