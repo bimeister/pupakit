@@ -23,9 +23,9 @@
 
   color: #616161;
 
-  box-shadow: 5px 0 19px 0 color(base-white-n400);
+  border-right: 1px solid get-map-field($theme-config, [light, body, border-color]);
   @include host-selector-dark-theme() {
-    box-shadow: 5px 0 19px 0 color(base-dark-n400);
+    border-right: 1px solid get-map-field($theme-config, [dark, body, border-color]);
   }
 
   display: flex;
