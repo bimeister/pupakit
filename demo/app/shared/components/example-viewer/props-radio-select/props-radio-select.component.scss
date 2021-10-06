@@ -1,3 +1,7 @@
+@use 'mixins' as *;
+@use 'demo/styles/functions' as *;
+@use 'demo/styles/variables' as *;
+
 :host {
   display: block;
   user-select: none;
@@ -5,4 +9,11 @@
 
 input {
   margin: 8px;
+}
+
+label {
+  @include host-selector-dark-theme() {
+    color: get-map-field($theme-config, [dark, body, font-color]);
+  }
+  color: get-map-field($theme-config, [light, body, font-color]);
 }

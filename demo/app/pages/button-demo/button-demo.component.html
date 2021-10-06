@@ -1,7 +1,7 @@
 <h1>Button & Button Icon & Button Round</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content class="content" [class.dark-theme]="darkMode | async">
+  <demo-example-viewer-content class="content">
     <pupa-button
       class="content__button"
       [size]="size | async"
@@ -37,9 +37,6 @@
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
-    <demo-props-group-label>Theme Mode</demo-props-group-label>
-    <demo-props-checkbox #darkMode>Dark</demo-props-checkbox>
-
     <demo-props-group-label>Size</demo-props-group-label>
     <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
 
