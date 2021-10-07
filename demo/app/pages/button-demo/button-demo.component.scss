@@ -1,5 +1,5 @@
-@use 'demo/styles/variables' as *;
-@use 'demo/styles/functions' as *;
+@use '../../../styles/demo-variables' as *;
+@use '../../../styles/demo-functions' as *;
 
 @import 'themes/functions';
 @import 'mixins';

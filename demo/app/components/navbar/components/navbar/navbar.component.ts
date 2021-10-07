@@ -36,7 +36,7 @@ export class NavbarComponent implements OnDestroy {
     closed$: of(null)
   };
 
-  public isMenuOpenedControl: FormControl = new FormControl(false);
+  public readonly isMenuOpenedControl: FormControl = new FormControl(false);
 
   private readonly menuOpened$: Observable<void> = this.isMenuOpenedControl.valueChanges.pipe(
     filterTruthy(),

@@ -1,0 +1,61 @@
+@use 'sass:map';
+@use 'sass:list';
+
+/*
+  return value:
+    the nested value in map by array of keys
+
+  why use it:
+    - no duplication
+    - no nested map.get ( like map.get(map.get(...), ...), ...) )
+
+  example:
+    $config: (
+      nested-field-1: (
+        nested-field-2: (
+          nested-field-3: 'very deeply nested value'
+        )
+      )
+    );
+
+    $value: get-map-field($config, [nested-field-1, nested-field-2, nested-field-3]); // 'very deeply nested value'
+*/
+@function get-map-field($map, $field-path) {
+  $result: $map;
+
+  @each $field in $field-path {
+    @if (type-of($field) != 'map') {
+      $result: map.get($result, $field);
+    }
+  }
+
+  @return $result;
+}
+
+/*
+  return value:
+    a list consisting of the $root-list and $to-spread-list expanded in it (like in JS [...arr])
+
+  why use it:
+    - allows you to keep the list flat
+
+  example:
+    $config: (
+      nested-field-1: (
+        nested-field-2: (
+          nested-field-3: 'very deeply nested value'
+        )
+      )
+    );
+
+    $value: get-map-field($config, [nested-field-1, nested-field-2, nested-field-3]); // 'very deeply nested value'
+*/
+@function spread-list($root-list, $to-spread-list) {
+  $combined-list: $root-list;
+
+  @each $value in $to-spread-list {
+    $combined-list: list.append($combined-list, $value);
+  }
+
+  @return $combined-list;
+}
