@@ -2,6 +2,11 @@
 @import 'mixins';
 @import 'functions';
 
+.dark-theme {
+  background-color: color(base-n600);
+  color: white;
+}
+
 .tooltip-content {
   min-width: 40rem;
   display: flex;

@@ -2,11 +2,11 @@
   class="checkbox"
   [ngClass]="resultClassList$ | async"
   [class.checkbox_indeterminate]="indeterminate$ | async"
-  [class.checkbox_inversion]="inversion$ | async"
   [class.checkbox_with-label]="withLabel$ | async"
+  tabIndex="1"
 >
   <div class="checkbox__marker">
-    <pupa-icon *ngIf="!(indeterminate$ | async) && value$ | async" name="ios-checkmark"></pupa-icon>
-    <pupa-icon *ngIf="indeterminate$ | async" name="ios-square"></pupa-icon>
+    <pupa-icon *ngIf="!(indeterminate$ | async) && value$ | async" name="app-checkmark"></pupa-icon>
+    <pupa-icon *ngIf="indeterminate$ | async" name="ios-remove"></pupa-icon>
   </div>
 </div>

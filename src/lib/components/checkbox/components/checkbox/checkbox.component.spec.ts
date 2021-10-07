@@ -166,28 +166,6 @@ describe('checkbox.component.ts', () => {
     TIME_OUT_MS
   );
 
-  it(
-    'should click on inversion option and rerender checkbox marker',
-    (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.disabled-props input'))
-        .pipe(
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          delay(500),
-          switchMap(() => page.waitForSelector('.inversion-props input')),
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          delay(500),
-          switchMap(() =>
-            from(page.evaluate(() => document.querySelector('.checkbox').classList.contains('checkbox_inversion')))
-          )
-        )
-        .subscribe((isInversion: boolean) => {
-          expect(isInversion).toBeTruthy();
-          done();
-        });
-    },
-    TIME_OUT_MS
-  );
-
   afterAll((done: jest.DoneCallback) => {
     from(page.close())
       .pipe(switchMap(() => from(browser.close())))

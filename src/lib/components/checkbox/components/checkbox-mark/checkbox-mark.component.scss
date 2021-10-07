@@ -11,78 +11,123 @@
   @include flex-container(row, center, center, nowrap);
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid color(subdark);
-  background: color(white);
+  border: 1px solid color(base-white-n200);
   cursor: pointer;
-  border-radius: 1rem;
+  border-radius: 1px;
   overflow: hidden;
   @include transition(#{background, border});
   flex-shrink: 0;
-  &_with-marker {
-    background: color(active);
-    border: 1px solid color(active);
-    stroke: color(white);
-  }
-  &_with-label {
-    margin-top: 1rem;
-  }
-  &_disabled {
-    cursor: not-allowed;
-    border: 1px solid color(light-disabled);
-  }
-  &_indeterminate {
-    background: color(white);
-    border: 1px solid color(subdark);
 
-    .checkbox__marker {
-      display: flex;
-      font-size: 2.5rem;
-      height: 2.5rem;
-      color: color(active);
+  @mixin common-styles() {
+    @include hover() {
+      background: rgba(color(primary-n500-rgb), 0.16);
+      border: 1px solid color(primary-n400);
+    }
+
+    &:active {
+      background: rgba(color(primary-n500-rgb), 0.16);
+      border: 1px solid color(primary-n550);
+    }
+
+    &:focus-visible {
+      background: rgba(color(primary-n500-rgb), 0.16);
+      border: 1px solid color(primary-n400);
+      outline: 1px solid color(primary-n400);
+    }
+
+    &_with-marker,
+    &_indeterminate {
+      background: color(primary-n500);
+      border: 1px solid color(primary-n500);
+      stroke: color(base-n0);
+
+      @include hover() {
+        background: color(primary-n400);
+        border: 1px solid color(primary-n400);
+      }
+
+      &:active {
+        background: color(primary-n550);
+        border: 1px solid color(primary-n550);
+      }
+
+      &:focus-visible {
+        background: color(primary-n550);
+        border: 1px solid color(primary-n400);
+        outline: 1px solid color(primary-n400);
+      }
+    }
+    &_with-label {
+      margin-top: 1rem;
+    }
+    &_disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+      border: 1px solid color(base-white-n250);
+
+      .checkbox__marker {
+        color: color(base-white-n250);
+      }
+    }
+    &_indeterminate {
+      .checkbox__marker {
+        display: flex;
+        font-size: 4.5rem;
+        margin-top: -0.4rem;
+        align-self: baseline;
+        height: 2.5rem;
+      }
     }
   }
-  &_inversion {
-    border: 1px solid color(white);
-    background: color(active);
-  }
-}
 
-.checkbox.checkbox_disabled.checkbox_inversion {
-  background: color(white);
-  border: 1px solid color(light-disabled);
-  cursor: not-allowed;
-}
+  @include common-styles();
 
-.checkbox_inversion.checkbox_with-marker {
-  background: color(white);
-  stroke: color(active);
-}
+  @include host-selector-dark-theme() {
+    @include common-styles();
 
-.checkbox.checkbox_indeterminate.checkbox_inversion.checkbox_with-marker {
-  background: color(active);
-  .checkbox__marker {
-    color: color(white);
+    background: transparent;
+
+    &,
+    &_disabled {
+      border: 1px solid color(base-dark-n250);
+      color: color(base-dark-n300);
+    }
   }
 }
 
 .checkbox.checkbox_indeterminate.checkbox_disabled.checkbox_with-marker {
-  background: color(white);
-  border: 1px solid color(light-disabled);
+  background: color(base-white-n300);
+  border: 1px solid color(base-white-n300);
   .checkbox__marker {
-    color: color(light-disabled);
+    color: color(base-white-n250);
+  }
+
+  @include host-selector-dark-theme() {
+    border: 1px solid color(base-dark-n300);
+    background: color(base-dark-n300);
+    .checkbox__marker {
+      color: color(base-dark-n250);
+    }
   }
 }
 
 .checkbox.checkbox_with-marker.checkbox_disabled {
-  background: color(primary-disabled);
-  border: 1px solid color(primary-disabled);
-  stroke: color(white);
+  background: color(base-white-n300);
+  border: 1px solid color(base-white-n300);
+
+  @include host-selector-dark-theme() {
+    border: 1px solid color(base-dark-n300);
+    background: color(base-dark-n300);
+    .checkbox__marker {
+      color: color(base-dark-n250);
+    }
+  }
 }
 
 .checkbox__marker {
   display: flex;
-  font-size: 2.25rem;
-  height: 2.25rem;
+  font-size: 2.5rem;
+  height: 2.5rem;
   user-select: none;
-  color: color(white);
+  color: color(base-n0);
 }

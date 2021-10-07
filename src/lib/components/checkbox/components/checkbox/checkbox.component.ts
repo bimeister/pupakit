@@ -25,13 +25,11 @@ import { CheckboxService } from '../../services/checkbox.service';
 export class CheckboxComponent implements ControlValueAccessor, OnChanges {
   @Input() public disabled: boolean = false;
   @Input() public indeterminate: boolean = false;
-  @Input() public inversion: boolean = false;
   @Input() public value: boolean;
 
   private readonly disabled$: BehaviorSubject<boolean> = this.checkboxService.disabled$;
   private readonly value$: BehaviorSubject<boolean> = this.checkboxService.value$;
   private readonly indeterminate$: BehaviorSubject<boolean> = this.checkboxService.indeterminate$;
-  private readonly inversion$: BehaviorSubject<boolean> = this.checkboxService.inversion$;
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly checkboxService: CheckboxService) {
@@ -42,7 +40,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
     this.handleIndeterminateChanges(changes?.indeterminate);
     this.handleDisabledChanges(changes?.disabled);
     this.handleValueChanges(changes?.value);
-    this.handleInversionChanges(changes?.inversion);
   }
 
   public changeValue(): void {
@@ -114,16 +111,6 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
     }
 
     this.disabled$.next(updatedValue);
-  }
-
-  private handleInversionChanges(change: ComponentChange<this, boolean>): void {
-    const updatedValue: Nullable<boolean> = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.inversion$.next(updatedValue);
   }
 
   private processSetIndeterminate(): Subscription {
