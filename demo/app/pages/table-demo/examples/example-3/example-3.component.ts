@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
 import { Uuid } from '../../../../../../src/internal/declarations/types/uuid.type';
-import { TableColumnDefenition } from '../../../../../../src/internal/declarations/interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
 import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
 import { getUuid } from '@bimeister/utilities';
 
@@ -20,7 +20,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   age: index + 1
 }));
 
-const COLUMNS: TableColumnDefenition[] = [
+const COLUMNS: TableColumnDefinition[] = [
   {
     id: 'first-name',
     modelKey: 'firstName',

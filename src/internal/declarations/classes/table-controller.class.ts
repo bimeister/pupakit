@@ -1,4 +1,4 @@
-import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
 import { DefaultTableEventHandler } from './default-table-event-handler.class';
 import { TableEvents } from '../events/table.events';
@@ -48,7 +48,7 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.SetData(data));
   }
 
-  public setColumnDefinitions(columnDefinitions: TableColumnDefenition[]): void {
+  public setColumnDefinitions(columnDefinitions: TableColumnDefinition[]): void {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
   }
 

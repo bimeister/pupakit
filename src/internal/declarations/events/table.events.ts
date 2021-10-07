@@ -1,4 +1,4 @@
-import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { ListRange } from '@angular/cdk/collections';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { BusEventBase } from '@bimeister/event-bus';
@@ -73,7 +73,7 @@ export namespace TableEvents {
     }
   }
   export class SetColumnDefinitions extends TableEventBase {
-    constructor(public readonly definitions: TableColumnDefenition[]) {
+    constructor(public readonly definitions: TableColumnDefinition[]) {
       super();
     }
   }

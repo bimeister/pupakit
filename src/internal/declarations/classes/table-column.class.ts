@@ -1,4 +1,4 @@
-import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { asapScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { distinctUntilChanged, map, pluck, subscribeOn, switchMap, take } from 'rxjs/operators';
@@ -16,15 +16,15 @@ const UNDEFINED_SIZES: TableColumnSizes = {
 };
 
 export class TableColumn implements TableColumnRef {
-  private definitionSetterState: Nullable<TableColumnDefenition> = null;
-  public set definition(value: TableColumnDefenition) {
+  private definitionSetterState: Nullable<TableColumnDefinition> = null;
+  public set definition(value: TableColumnDefinition) {
     this.definitionSetterState = value;
 
     this.defaultSizes$.next(value.defaultSizes);
     this.adaptiveSizes$.next(value.adaptiveSizes);
   }
 
-  public get definition(): Nullable<TableColumnDefenition> {
+  public get definition(): Nullable<TableColumnDefinition> {
     return this.definitionSetterState;
   }
 
