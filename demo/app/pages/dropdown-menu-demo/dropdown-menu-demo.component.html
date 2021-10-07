@@ -1,12 +1,12 @@
 <h1>Dropdown menu</h1>
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-theme-wrapper [theme]="themeControl.value">
+    <pupa-theme-wrapper [theme]="theme$ | async">
       <pupa-dropdown-menu>
         <pupa-dropdown-menu-trigger>
           <span>{{ triggerText.value }}</span>
         </pupa-dropdown-menu-trigger>
-        <pupa-dropdown-menu-content [horizontalPosition]="horizontalPosition.value">
+        <pupa-dropdown-menu-content [horizontalPosition]="horizontalPosition | async">
           <pupa-dropdown-menu-item>
             <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
             Default item
@@ -60,40 +60,10 @@
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
-    <demo-props-group-label>Properties</demo-props-group-label>
-
-    <demo-props-group-label>Theme</demo-props-group-label>
-    <pupa-radio-group [formControl]="themeControl">
-      <pupa-radio-control [value]="theme.Light">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>{{ theme.Light }}</pupa-radio-control-label>
-      </pupa-radio-control>
-
-      <pupa-radio-control [value]="theme.Dark">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>{{ theme.Dark }}</pupa-radio-control-label>
-      </pupa-radio-control>
-    </pupa-radio-group>
-
     <demo-props-group-label>Trigger text</demo-props-group-label>
     <pupa-textarea [formControl]="triggerText"></pupa-textarea>
 
     <demo-props-group-label>Horizontal position</demo-props-group-label>
-    <pupa-radio-group [formControl]="horizontalPosition">
-      <pupa-radio-control [value]="'start'">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>start</pupa-radio-control-label>
-      </pupa-radio-control>
-
-      <pupa-radio-control [value]="'center'">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>center</pupa-radio-control-label>
-      </pupa-radio-control>
-
-      <pupa-radio-control [value]="'end'">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>end</pupa-radio-control-label>
-      </pupa-radio-control>
-    </pupa-radio-group>
+    <demo-props-radio-select #horizontalPosition [options]="horizontalPositionOptions"></demo-props-radio-select>
   </demo-example-viewer-properties>
 </demo-example-viewer>
