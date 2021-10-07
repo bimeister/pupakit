@@ -1,10 +1,10 @@
 <h1>Checkbox</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-checkbox [indeterminate]="indeterminate | async" [inversion]="inversion | async" [formControl]="control">
-      <pupa-checkbox-mark> </pupa-checkbox-mark>
-      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async" [hideOnTooltipHover]="true">
+  <demo-example-viewer-content [class.dark-theme]="darkMode | async">
+    <pupa-checkbox [indeterminate]="indeterminate | async" [formControl]="control">
+      <pupa-checkbox-mark></pupa-checkbox-mark>
+      <pupa-tooltip [disabled]="isNeedDisableTooltip$ | async">
         <pupa-tooltip-trigger>
           <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
           <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>
@@ -21,8 +21,13 @@
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #darkMode>Dark</demo-props-checkbox>
     <demo-props-checkbox class="indeterminate-props" #indeterminate>Indeterminate</demo-props-checkbox>
     <demo-props-checkbox class="disabled-props" #disabled>Disabled</demo-props-checkbox>
-    <demo-props-checkbox class="inversion-props" #inversion>Inversion</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<h2>Basic usage of Checkbox</h2>
+<pupa-code-container [content]="checkboxExampleCode">
+  <demo-checkbox-demo-example></demo-checkbox-demo-example>
+</pupa-code-container>

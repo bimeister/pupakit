@@ -22,6 +22,12 @@ export class CheckboxDemoComponent implements AfterViewInit, OnDestroy {
     MAX_LABEL_STRING_LENGTH > this.label.length || MAX_HINT_STRING_LENGTH > this.hint.length
   );
 
+  public checkboxExampleCode: {
+    HTML: string;
+  } = {
+    HTML: 'checkbox-demo/examples/checkbox-demo-example/checkbox-demo-example.component.html'
+  };
+
   @ViewChild('disabled', { static: false }) public readonly disabledCheckBoxComponent: PropsCheckboxComponent;
 
   public ngAfterViewInit(): void {

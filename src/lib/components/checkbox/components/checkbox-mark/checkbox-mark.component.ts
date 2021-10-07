@@ -16,7 +16,6 @@ export class CheckboxMarkComponent {
   public readonly value$: BehaviorSubject<boolean> = this.checkboxService.value$;
 
   public readonly indeterminate$: BehaviorSubject<boolean> = this.checkboxService.indeterminate$;
-  public readonly inversion$: BehaviorSubject<boolean> = this.checkboxService.inversion$;
   public readonly withLabel$: BehaviorSubject<boolean> = this.checkboxService.withLabel$;
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
