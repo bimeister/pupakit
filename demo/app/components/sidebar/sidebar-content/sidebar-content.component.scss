@@ -1,5 +1,5 @@
-@use 'demo/styles/variables.scss' as *;
-@use 'demo/styles/functions' as *;
+@use 'demo/styles/demo-variables' as *;
+@use 'demo/styles/demo-functions' as *;
 @use 'mixins' as *;
 
 :host {

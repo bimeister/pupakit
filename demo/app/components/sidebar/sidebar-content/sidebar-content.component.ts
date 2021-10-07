@@ -167,7 +167,7 @@ export class SidebarContentComponent {
 
   public closeSidebar(): void {
     if (this.isOpenInDrawer) {
-      this.drawerRef.close(666);
+      this.drawerRef.close();
     }
   }
 

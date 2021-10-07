@@ -3,23 +3,9 @@
 @use 'sass:map';
 
 @use 'mixins' as *;
-@use 'demo/styles/functions' as *;
-@use 'demo/styles/variables' as *;
-
-@mixin apply-property($property-name, $config-key: $property-name) {
-  #{$property-name}: get-map-field($theme-config, [ 'light', 'body', $config-key]);
-  @include host-selector-dark-theme() {
-    #{$property-name}: get-map-field($theme-config, [ 'dark', 'body', $config-key]);
-  }
-}
-
-@mixin apply-property-depend-on-theme($property) {
-  #{$property}: map.get($light-theme, $property);
-
-  @include host-selector-dark-theme() {
-    #{$property}: map.get($dark-theme, $property);
-  }
-}
+@use 'demo/styles/demo-functions' as *;
+@use 'demo/styles/demo-mixins' as *;
+@use 'demo/styles/demo-variables' as *;
 
 .not-found {
   display: flex;
@@ -29,7 +15,7 @@
   min-height: 100vh;
   text-align: center;
 
-  @include apply-property(background-color);
+  @include apply-theme-dependent-property(background-color, $theme-config, [body, background-color]);
 
   &__error {
     width: 100%;
@@ -38,7 +24,7 @@
     font-weight: bold;
     animation: glitch 2s steps(100) infinite;
 
-    @include apply-property(color, font-color);
+    @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);
 
     @include width-between-property(
       $property: 'font-size',
@@ -52,7 +38,7 @@
   }
 
   &__text {
-    @include apply-property(color, font-color);
+    @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);
 
     margin-top: 0;
     @include font-size-large();
