@@ -1,0 +1,75 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'variables';
+
+$color_light-info: color(primary-n100);
+$color_dark_info: color(primary-n550);
+
+$color_light-note: color(base-dark-n100);
+$color_dark-note: color(base-dark-n300);
+
+$color_light-success: color(green-n100);
+$color_dark-success: color(green-n550);
+
+$color_light-warning: color(yellow-n100);
+$color_dark-warning: color(yellow-n550);
+
+$color_light-error: color(red-n100);
+$color_dark-error: color(red-n550);
+
+@mixin base-info-block($lightColor, $darkColor) {
+  background-color: $lightColor;
+  .icon {
+    color: $darkColor;
+  }
+
+  @include host-selector-dark-theme {
+    background-color: $darkColor;
+    .icon {
+      color: $lightColor;
+    }
+  }
+}
+
+:host {
+  margin-bottom: 2rem;
+}
+
+.info-block {
+  display: flex;
+  border-radius: 1px;
+  padding: 2rem;
+
+  .icon {
+    font-size: 5rem;
+    line-height: 4rem;
+    margin-right: 2rem;
+  }
+
+  &.info {
+    @include base-info-block($color_light-info, $color_dark-info);
+  }
+
+  &.note {
+    @include base-info-block($color_light-note, $color_dark-note);
+  }
+
+  &.success {
+    @include base-info-block($color_light-success, $color_dark-success);
+  }
+
+  &.warning {
+    @include base-info-block($color_light-warning, $color_dark-warning);
+
+    @include host-selector-dark-theme {
+      color: color(base-n600);
+      .icon {
+        color: color(red-n550);
+      }
+    }
+  }
+
+  &.error {
+    @include base-info-block($color_light-error, $color_dark-error);
+  }
+}

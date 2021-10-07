@@ -56,6 +56,7 @@ import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
+import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -333,6 +334,11 @@ const demoRoutes: Routes = [
         path: 'scrollable',
         loadChildren: (): Promise<Type<ScrollableDemoModule>> =>
           import('./pages/scrollable-demo/scrollable-demo.module').then(module => module.ScrollableDemoModule)
+      },
+      {
+        path: 'info-block',
+        loadChildren: (): Promise<Type<InfoBlockDemoModule>> =>
+          import('./pages/info-block-demo/info-block-demo.module').then(module => module.InfoBlockDemoModule)
       }
     ]
   },
