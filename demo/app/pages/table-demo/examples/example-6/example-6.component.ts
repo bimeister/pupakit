@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
 import { Uuid } from '../../../../../../src/internal/declarations/types/uuid.type';
-import { TableColumnDefenition } from '../../../../../../src/internal/declarations/interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
 import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
 import { getUuid, sortByProperty } from '@bimeister/utilities';
 import { TableColumnSorting } from '../../../../../../src/internal/declarations/enums/table-column-sorting.enum';
@@ -23,7 +23,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   age: index + 1
 }));
 
-const COLUMNS: TableColumnDefenition[] = [
+const COLUMNS: TableColumnDefinition[] = [
   {
     id: 'first-name',
     modelKey: 'firstName',
@@ -55,8 +55,8 @@ const COLUMNS: TableColumnDefenition[] = [
   }
 ];
 
-const COLUMNS_MAP: Map<string, TableColumnDefenition> = new Map<string, TableColumnDefenition>(
-  COLUMNS.map((column: TableColumnDefenition) => [column.id, column])
+const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableColumnDefinition>(
+  COLUMNS.map((column: TableColumnDefinition) => [column.id, column])
 );
 
 @Component({
@@ -109,7 +109,7 @@ export class TableExample6Component implements OnDestroy {
   }
 
   public addColumnToStart(): void {
-    const newColumn: TableColumnDefenition = {
+    const newColumn: TableColumnDefinition = {
       id: getUuid(),
       modelKey: null,
       title: 'example',
@@ -172,13 +172,13 @@ export class TableExample6Component implements OnDestroy {
         this.columnSortingChanged$.next(event);
 
         if (event.sorting === TableColumnSorting.Asc) {
-          const column: TableColumnDefenition = COLUMNS_MAP.get(event.columnId);
+          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'ascending'));
           return;
         }
 
         if (event.sorting === TableColumnSorting.Desc) {
-          const column: TableColumnDefenition = COLUMNS_MAP.get(event.columnId);
+          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'descending'));
           return;
         }

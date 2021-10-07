@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { TableColumnDefenition } from './table-column-defenition.interface';
+import { TableColumnDefinition } from './table-column-definition.interface';
 import { Nullable } from '@bimeister/utilities';
 import { TableBodyRowsDataSource } from '../classes/table-body-rows-data-source.class';
 import { TableColumn } from '../classes/table-column.class';
@@ -26,7 +26,7 @@ export interface TableDataDisplayCollectionRef<T> {
 
   setData(value: T[]): Observable<T[]>;
   setSelectedIdsList(value: string[]): void;
-  setColumnDefinitions(value: TableColumnDefenition[]): void;
+  setColumnDefinitions(value: TableColumnDefinition[]): void;
   setTableWidthPx(value: number): void;
   setRowHeightPx(value: number): void;
 }

@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
-import { TableColumnDefenition } from './table-column-defenition.interface';
+import { TableColumnDefinition } from './table-column-definition.interface';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 
 export interface TableColumnRef {
-  readonly definition: TableColumnDefenition;
+  readonly definition: TableColumnDefinition;
   readonly sorting$: Observable<TableColumnSorting>;
   readonly widthPx$: Observable<number>;
   readonly isHovered$: Observable<boolean>;

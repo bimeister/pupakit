@@ -5,7 +5,7 @@ import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { TableColumnPin } from '../enums/table-column-pin.enum';
-import { TableColumnDefenition } from '../interfaces/table-column-defenition.interface';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
 import { TableBodyRow } from './table-body-row.class';
 import { TableBodyRowsDataSource } from './table-body-rows-data-source.class';
@@ -27,8 +27,8 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   );
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
 
-  private readonly columnDefinitions$: BehaviorSubject<TableColumnDefenition[]> = new BehaviorSubject<
-    TableColumnDefenition[]
+  private readonly columnDefinitions$: BehaviorSubject<TableColumnDefinition[]> = new BehaviorSubject<
+    TableColumnDefinition[]
   >([]);
 
   public readonly rowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(50);
@@ -37,7 +37,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   private columnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
   public readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = this.columnDefinitions$.pipe(
-    map((definitions: TableColumnDefenition[]) => {
+    map((definitions: TableColumnDefinition[]) => {
       const newColumnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
 
       for (const definition of definitions) {
@@ -128,7 +128,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     this.selectedIdsList$.next(value);
   }
 
-  public setColumnDefinitions(definitions: TableColumnDefenition[]): void {
+  public setColumnDefinitions(definitions: TableColumnDefinition[]): void {
     this.columnDefinitions$.next(definitions);
   }
 

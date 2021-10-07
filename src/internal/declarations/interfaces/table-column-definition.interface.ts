@@ -2,7 +2,7 @@ import { TableColumnPin } from '../enums/table-column-pin.enum';
 import { TableColumnSizes } from './table-column-sizes.interface';
 import { TableAdaptiveColumnSizes } from './table-adaptive-column-sizes.interface';
 
-export interface TableColumnDefenition {
+export interface TableColumnDefinition {
   id: string;
   modelKey: string;
   title: string;

@@ -55,7 +55,7 @@ export {
   GridStateService,
   TableControllerOptions,
   TableEvents,
-  TableColumnDefenition,
+  TableColumnDefinition,
   TableColumnSizes,
   TableAdaptiveColumnSizes,
   TableController,
