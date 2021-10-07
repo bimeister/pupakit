@@ -1,14 +1,14 @@
 <nav class="navbar">
   <div class="navbar__menu-toggle left-end">
     <demo-menu-toggle
-      [isOpen]="isMenuOpen.valueChanges | async"
+      [isOpen]="isMenuOpenedControl.valueChanges | async"
       (toggle)="handleToggleNavbar($event)"
     ></demo-menu-toggle>
   </div>
 
   <div class="navbar__logo-wrapper">
-    <img [src]="logoMini" alt="" class="navbar__logo-mini" />
-    <img [src]="logo$ | async" alt="" class="navbar__logo-text" />
+    <img [src]="logoIcon" alt="" class="navbar__logo-icon" />
+    <img [src]="logo$ | async" alt="" class="navbar__logo-image" />
   </div>
 
   <div class="navbar__spacer"></div>
