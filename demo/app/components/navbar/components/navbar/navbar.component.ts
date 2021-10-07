@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulat
 import { FormControl } from '@angular/forms';
 import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import { filterTruthy } from '@bimeister/utilities';
+import { filterTruthy, isNil, mapToVoid } from '@bimeister/utilities';
 
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
@@ -27,7 +27,7 @@ export class NavbarComponent implements OnDestroy {
 
   private readonly logoDark: SafeResourceUrl;
   private readonly logoLight: SafeResourceUrl;
-  public readonly logoMini: SafeResourceUrl;
+  public readonly logoIcon: SafeResourceUrl;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -36,16 +36,19 @@ export class NavbarComponent implements OnDestroy {
     closed$: of(null)
   };
 
-  public isMenuOpen: FormControl = new FormControl(false);
+  public isMenuOpenedControl: FormControl = new FormControl(false);
 
-  private readonly menuOpen$: Observable<true> = this.isMenuOpen.valueChanges.pipe(filterTruthy());
+  private readonly menuOpened$: Observable<void> = this.isMenuOpenedControl.valueChanges.pipe(
+    filterTruthy(),
+    mapToVoid()
+  );
 
-  private readonly openedDrawer$: BehaviorSubject<OpenedDrawer> = new BehaviorSubject<OpenedDrawer>(
+  private readonly currentOpenedDrawer$: BehaviorSubject<OpenedDrawer> = new BehaviorSubject<OpenedDrawer>(
     this.openedDrawerInitialValue
   );
 
-  private readonly drawerOpened$: Observable<OpenedDrawer> = this.openedDrawer$.pipe(
-    filter((openDrawer: OpenedDrawer) => typeof openDrawer.id === 'string')
+  private readonly drawerOpened$: Observable<OpenedDrawer> = this.currentOpenedDrawer$.pipe(
+    filter((currentOpenedDrawer: OpenedDrawer) => !isNil(currentOpenedDrawer?.id))
   );
 
   private readonly drawerClosed$: Observable<null> = this.drawerOpened$.pipe(
@@ -60,7 +63,7 @@ export class NavbarComponent implements OnDestroy {
   ) {
     this.logoLight = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-light.svg');
     this.logoDark = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-dark.svg');
-    this.logoMini = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-mini.svg');
+    this.logoIcon = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-icon.svg');
 
     this.subscription.add(this.closeMenuWhenDrawerClosed());
     this.subscription.add(this.openDrawerWhenMenuOpen());
@@ -71,7 +74,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   public handleToggleNavbar(isOpen: boolean): void {
-    this.isMenuOpen.setValue(isOpen);
+    this.isMenuOpenedControl.setValue(isOpen);
 
     if (!isOpen) {
       this.closeDrawer();
@@ -80,15 +83,15 @@ export class NavbarComponent implements OnDestroy {
 
   private closeMenuWhenDrawerClosed(): Subscription {
     return this.drawerClosed$.subscribe(() => {
-      this.openedDrawer$.next({ ...this.openedDrawerInitialValue });
-      this.isMenuOpen.setValue(false);
+      this.currentOpenedDrawer$.next({ ...this.openedDrawerInitialValue });
+      this.isMenuOpenedControl.setValue(false);
     });
   }
 
   private openDrawerWhenMenuOpen(): Subscription {
-    return this.menuOpen$.subscribe(() => {
+    return this.menuOpened$.subscribe(() => {
       const openedDrawer: OpenedDrawer = this.openDrawer();
-      this.openedDrawer$.next(openedDrawer);
+      this.currentOpenedDrawer$.next(openedDrawer);
     });
   }
 
@@ -110,7 +113,7 @@ export class NavbarComponent implements OnDestroy {
       )
       .subscribe((id: string) => {
         this.drawerService.closeById(id);
-        this.openedDrawer$.next({ ...this.openedDrawerInitialValue });
+        this.currentOpenedDrawer$.next({ ...this.openedDrawerInitialValue });
       });
   }
 }

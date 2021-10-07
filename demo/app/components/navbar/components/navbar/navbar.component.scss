@@ -57,9 +57,9 @@ $end-item-margin: 4rem;
     align-items: center;
   }
 
-  &__logo-text {
+  &__logo-image {
     height: 24px;
-    width: 163.5px;
+    width: 164px;
     margin-left: 2rem;
 
     @include xs() {
@@ -67,7 +67,7 @@ $end-item-margin: 4rem;
     }
   }
 
-  &__logo-mini {
+  &__logo-icon {
     height: 32px;
     width: 32px;
   }

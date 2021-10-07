@@ -4,7 +4,7 @@
   @include grid-container();
 }
 
-.side-nav {
+.navigation {
   @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
 }
 
