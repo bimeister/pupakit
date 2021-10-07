@@ -64,7 +64,9 @@ export {
   TableDataDisplayCollectionRef,
   TableColumnRef,
   TableRowRef,
-  TableBodyRowRef
+  TableBodyRowRef,
+  TableColumnPin,
+  TableColumnSorting
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';
