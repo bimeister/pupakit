@@ -72,6 +72,7 @@ export class TooltipService implements OnDestroy {
   }
 
   public ngOnDestroy(): void {
+    this.close();
     this.subscription.unsubscribe();
   }
 
@@ -170,6 +171,7 @@ export class TooltipService implements OnDestroy {
       this.isOpenedState$.next(false);
       overlayRef.dispose();
       overlayRef.detach();
+      this.overlayRef$.next(null);
     });
   }
 
