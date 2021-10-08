@@ -35,7 +35,8 @@ export class SidebarContentComponent {
       { title: 'Avatar', link: './avatar' },
       { title: 'Adaptive', link: './adaptive' },
       { title: 'Code', link: './code' },
-      { title: 'Floating Card', link: './floating-card' }
+      { title: 'Floating Card', link: './floating-card' },
+      { title: 'Info block', link: './info-block' }
     ]
   };
 
