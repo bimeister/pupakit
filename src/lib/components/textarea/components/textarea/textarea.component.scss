@@ -66,11 +66,13 @@ $height_textarea-min: calc(10rem + 2px);
 
   &__count {
     position: absolute;
-    right: 2rem;
+    right: 4rem;
     bottom: 2rem;
-    color: color(grey-light);
-    font-size: 3.5rem;
-    line-height: 4rem;
+    color: color(base-n600);
     pointer-events: none;
+    line-height: 4rem;
+    background-color: rgba(color(base-n0-rgb), 0.84);
+    padding: 1rem;
+    @include font-size-small;
   }
 }
