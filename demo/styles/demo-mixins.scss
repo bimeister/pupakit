@@ -23,3 +23,10 @@
     #{$property-name}: get-map-field($theme-config, spread-list([dark], $path-to-property));
   }
 }
+
+@mixin no-tap-highlight() {
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  user-select: none;
+}
