@@ -3,8 +3,6 @@
 @use 'demo/styles/demo-mixins' as *;
 @use 'demo/styles/demo-variables' as *;
 
-$logo-parallax-size: 256px;
-
 .main-page {
   display: flex;
   justify-content: center;
@@ -47,8 +45,21 @@ $logo-parallax-size: 256px;
     transform-style: preserve-3d;
     will-change: transform;
     position: relative;
-    width: $logo-parallax-size;
-    height: $logo-parallax-size;
+
+    @mixin width-between-parallax-size($property) {
+      @include width-between-property(
+        $property: $property,
+        $width-start: $xsBreakPoint,
+        $value-start: 128,
+        $width-end: $lgBreakPoint,
+        $value-end: 256,
+        $is-save-width-before: false,
+        $is-save-width-after: true
+      );
+    }
+
+    @include width-between-parallax-size('width');
+    @include width-between-parallax-size('height');
 
     &__item {
       border: 5px solid color(primary-n200);
@@ -66,6 +77,14 @@ $logo-parallax-size: 256px;
       @for $i from 1 through 4 {
         &:nth-child(#{$i}) {
           transform: translateZ(calc(#{$i} * 40px));
+
+          @include lt-md() {
+            transform: translateZ(calc(#{$i} * 35px));
+          }
+
+          @include lt-sm() {
+            transform: translateZ(calc(#{$i} * 25px));
+          }
         }
       }
     }
