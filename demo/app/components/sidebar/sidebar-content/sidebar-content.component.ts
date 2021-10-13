@@ -28,86 +28,86 @@ export class SidebarContentComponent {
   private readonly generalGroup: LinksGroup = {
     title: 'General',
     linkItems: [
-      { title: 'Typography', link: './typography' },
-      { title: 'Colors', link: './colors' },
-      { title: 'Icon', link: './icon' },
-      { title: 'Button & Button Icon & Button Round', link: './button' },
-      { title: 'Avatar', link: './avatar' },
-      { title: 'Adaptive', link: './adaptive' },
-      { title: 'Code', link: './code' },
-      { title: 'Floating Card', link: './floating-card' },
-      { title: 'Info block', link: './info-block' }
+      { title: 'Typography', link: '/kit/typography' },
+      { title: 'Colors', link: '/kit/colors' },
+      { title: 'Icon', link: '/kit/icon' },
+      { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
+      { title: 'Avatar', link: '/kit/avatar' },
+      { title: 'Adaptive', link: '/kit/adaptive' },
+      { title: 'Code', link: '/kit/code' },
+      { title: 'Floating Card', link: '/kit/floating-card' },
+      { title: 'Info block', link: '/kit/info-block' }
     ]
   };
 
   private readonly dataEntryGroup: LinksGroup = {
     title: 'Data Entry',
     linkItems: [
-      { title: 'Checkbox', link: './checkbox' },
-      { title: 'Switcher', link: './switcher' },
-      { title: 'Date time pickers', link: './date-time-picker' },
-      { title: 'Input', link: './input' },
-      { title: 'Table Input', link: './table-input' },
-      { title: 'Search Field', link: './search-field' },
-      { title: '⚠️ Textarea', link: './textarea' },
-      { title: 'Radio buttons', link: './radio' },
-      { title: 'Rating', link: './rating' },
-      { title: '⚠️ Select', link: './select' },
-      { title: 'Selector', link: './selector' },
-      { title: '⚠️ Uploads', link: './uploads' }
+      { title: 'Checkbox', link: '/kit/checkbox' },
+      { title: 'Switcher', link: '/kit/switcher' },
+      { title: 'Date time pickers', link: '/kit/date-time-picker' },
+      { title: 'Input', link: '/kit/input' },
+      { title: 'Table Input', link: '/kit/table-input' },
+      { title: 'Search Field', link: '/kit/search-field' },
+      { title: '⚠️ Textarea', link: '/kit/textarea' },
+      { title: 'Radio buttons', link: '/kit/radio' },
+      { title: 'Rating', link: '/kit/rating' },
+      { title: '⚠️ Select', link: '/kit/select' },
+      { title: 'Selector', link: '/kit/selector' },
+      { title: '⚠️ Uploads', link: '/kit/uploads' }
     ]
   };
 
   private readonly dataDisplayGroup: LinksGroup = {
     title: 'Data Display',
     linkItems: [
-      { title: 'Datagrid', link: './datagrid' },
-      { title: 'Table', link: './table' },
-      { title: 'Tree', link: './tree' },
-      { title: 'Tree (new)', link: './tree-new' },
-      { title: 'Tooltip', link: './tooltip' },
-      { title: 'Tabs', link: './tabs' },
-      { title: 'Vertical Tabs', link: './vertical-tabs' },
-      { title: 'Chip Tabs', link: './chip-tabs' },
-      { title: 'Chip', link: './chip' },
-      { title: 'Chip button', link: './chip-button' },
-      { title: 'Paged Virtual Scroll', link: './paged-virtual-scroll' },
-      { title: 'Tag & Color Tag', link: './tag' }
+      { title: 'Datagrid', link: '/kit/datagrid' },
+      { title: 'Table', link: '/kit/table' },
+      { title: 'Tree', link: '/kit/tree' },
+      { title: 'Tree (new)', link: '/kit/tree-new' },
+      { title: 'Tooltip', link: '/kit/tooltip' },
+      { title: 'Tabs', link: '/kit/tabs' },
+      { title: 'Vertical Tabs', link: '/kit/vertical-tabs' },
+      { title: 'Chip Tabs', link: '/kit/chip-tabs' },
+      { title: 'Chip', link: '/kit/chip' },
+      { title: 'Chip button', link: '/kit/chip-button' },
+      { title: 'Paged Virtual Scroll', link: '/kit/paged-virtual-scroll' },
+      { title: 'Tag & Color Tag', link: '/kit/tag' }
     ]
   };
 
   private readonly feedbackGroup: LinksGroup = {
     title: 'Feedback',
     linkItems: [
-      { title: 'Drawer', link: './drawer' },
-      { title: 'Modal', link: './modal' },
-      { title: 'Spinner & loader', link: './spinner' }
+      { title: 'Drawer', link: '/kit/drawer' },
+      { title: 'Modal', link: '/kit/modal' },
+      { title: 'Spinner & loader', link: '/kit/spinner' }
     ]
   };
 
   private readonly otherGroup: LinksGroup = {
     title: 'Other',
     linkItems: [
-      { title: 'Tile', link: './tile' },
-      { title: '⚠️ Draggable', link: './draggable' },
-      { title: '⚠️ Droppable', link: './droppable' },
-      { title: '⚠️ Dropdown', link: './dropdown' },
-      { title: 'Dropdown menu', link: './dropdown-menu' },
+      { title: 'Tile', link: '/kit/tile' },
+      { title: '⚠️ Draggable', link: '/kit/draggable' },
+      { title: '⚠️ Droppable', link: '/kit/droppable' },
+      { title: '⚠️ Dropdown', link: '/kit/dropdown' },
+      { title: 'Dropdown menu', link: '/kit/dropdown-menu' },
       { title: 'Layout', link: './layout' },
-      { title: 'Controls isPatched', link: './controls-is-patched' }
+      { title: 'Controls isPatched', link: '/kit/controls-is-patched' }
     ]
   };
 
   private readonly deprecatedGroup: LinksGroup = {
     title: 'Deprecated, unused, useless',
     linkItems: [
-      { title: '⚠️ Icon button', link: './icon-button' },
-      { title: 'Draggable list', link: './draggable-list' },
-      { title: 'Multiselection list', link: './multiselection-list' },
-      { title: 'Select Multiple', link: './select-multiple' },
-      { title: 'Day selector', link: './day-selector' },
-      { title: 'Time input', link: './time-input' },
-      { title: 'Scrollbar', link: './scrollbar' }
+      { title: '⚠️ Icon button', link: '/kit/icon-button' },
+      { title: 'Draggable list', link: '/kit/draggable-list' },
+      { title: 'Multiselection list', link: '/kit/multiselection-list' },
+      { title: 'Select Multiple', link: '/kit/select-multiple' },
+      { title: 'Day selector', link: '/kit/day-selector' },
+      { title: 'Time input', link: '/kit/time-input' },
+      { title: 'Scrollbar', link: '/kit/scrollbar' }
     ]
   };
 
