@@ -3,9 +3,9 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { isEmpty, isNil, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
 
-import { DrawerRef } from '../../../../../src/internal/declarations/classes/drawer-ref.class';
-import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
+import { DrawerRef } from '../../../../../../src/internal/declarations/classes/drawer-ref.class';
+import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 
 interface LinkItem {
   title: string;

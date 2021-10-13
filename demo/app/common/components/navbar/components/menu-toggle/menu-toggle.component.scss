@@ -1,7 +1,7 @@
 @use 'sass:map';
 
-@import 'functions';
-@import 'mixins';
+@import 'src/styles/functions';
+@import 'src/styles/mixins';
 
 $menu-toggle-size: 28px;
 $strip-height: 3px;

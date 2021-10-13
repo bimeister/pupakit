@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { SidebarContentComponent } from './sidebar-content/sidebar-content.component';
-import { DemoSharedModule } from '../../shared/shared.module';
+import { DemoSharedModule } from '../../../shared/shared.module';
 import { RouterModule } from '@angular/router';
 
 @NgModule({

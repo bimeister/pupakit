@@ -5,10 +5,10 @@ import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { filterTruthy, isNil, mapToVoid } from '@bimeister/utilities';
 
-import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
-import { DrawersService } from '../../../../../../src/internal/shared/services/drawers.service';
-import { OpenedDrawer } from '../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
+import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
+import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
+import { OpenedDrawer } from '../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
 import { SidebarContentComponent } from '../../../sidebar/sidebar-content/sidebar-content.component';
 
 @Component({

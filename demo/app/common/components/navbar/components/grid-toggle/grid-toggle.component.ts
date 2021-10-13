@@ -1,7 +1,7 @@
 import { Component, Input, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { GridStateService } from '../../../../../../src/internal/shared/services/grid-state.service';
+import { GridStateService } from '../../../../../../../src/internal/shared/services/grid-state.service';
 
 @Component({
   selector: 'demo-grid-toggle',

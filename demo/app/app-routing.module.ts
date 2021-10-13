@@ -52,11 +52,11 @@ import { TypographyPageModule } from './pages/typography-page/typography-page.mo
 import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
-
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
 import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
+import { MainPageModule } from './pages/main-page/main-page.module';
 
 const demoRoutes: Routes = [
   {
@@ -341,6 +341,12 @@ const demoRoutes: Routes = [
           import('./pages/info-block-demo/info-block-demo.module').then(module => module.InfoBlockDemoModule)
       }
     ]
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadChildren: (): Promise<Type<MainPageModule>> =>
+      import('./pages/main-page/main-page.module').then(module => module.MainPageModule)
   },
   {
     path: '',

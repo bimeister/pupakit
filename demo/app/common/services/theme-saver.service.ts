@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Theme } from '../../../src/internal/declarations/enums/theme.enum';
+import { Theme } from '../../../../src/internal/declarations/enums/theme.enum';
 import { isNil } from '@bimeister/utilities';
 
 const THEME_MODE_KEY: string = 'theme-mode';
