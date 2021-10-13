@@ -5,8 +5,6 @@
 
 $menu-toggle-size: 28px;
 $strip-height: 3px;
-$strip-rotation-angle: 45deg;
-$transition-delay: 0.25s;
 
 @mixin apply-background() {
   background: color(base-dark-n400);
@@ -21,14 +19,6 @@ $transition-delay: 0.25s;
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
   user-select: none;
-
-  &:focus,
-  &:hover,
-  &:active {
-    .menu-toggle__strips {
-      transition: background 0s $transition-delay;
-    }
-  }
 }
 
 .menu-toggle {
@@ -75,39 +65,16 @@ $transition-delay: 0.25s;
       width: 100%;
       height: $strip-height;
       content: '';
-      transition-duration: $transition-delay, $transition-delay;
-      transition-delay: $transition-delay, 0s;
 
       @include apply-background();
     }
 
     &::before {
       top: $pseudo-strips-position-diff;
-      transition-property: top, transform;
     }
 
     &::after {
       bottom: $pseudo-strips-position-diff;
-      transition-property: bottom, transform;
-    }
-  }
-
-  .menu-toggle.active &__strips {
-    background: none;
-
-    &::before {
-      top: 0;
-      transform: rotate($strip-rotation-angle);
-    }
-
-    &::after {
-      bottom: 0;
-      transform: rotate(-$strip-rotation-angle);
-    }
-
-    &::before,
-    &::after {
-      transition-delay: 0s, $transition-delay;
     }
   }
 }
