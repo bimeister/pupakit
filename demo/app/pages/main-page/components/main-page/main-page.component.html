@@ -1,0 +1,18 @@
+<div class="main-page">
+  <div class="main-page__wrapper">
+    <div class="main-page__block">
+      <img [src]="logo$ | async" class="main-page__logo-title" />
+    </div>
+    <div class="main-page__block">
+      <div class="parallax" #parallax>
+        <img [src]="logoIcon" class="parallax__item" />
+        <img [src]="logoIcon" class="parallax__item" />
+        <img [src]="logoIcon" class="parallax__item" />
+        <img [src]="logoIcon" class="parallax__item" />
+      </div>
+    </div>
+    <div class="main-page__block">
+      <pupa-button size="large" class="not-found__action" routerLink="/kit">Browse Components</pupa-button>
+    </div>
+  </div>
+</div>

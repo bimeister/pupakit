@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 enum IconNames {
   DARK = 'ios-moon',

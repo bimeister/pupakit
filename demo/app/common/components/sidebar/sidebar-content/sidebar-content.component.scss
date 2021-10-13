@@ -1,6 +1,6 @@
-@use 'demo/styles/demo-variables' as *;
-@use 'demo/styles/demo-functions' as *;
-@use 'mixins' as *;
+@use '../../../../../styles/demo-variables' as *;
+@use '../../../../../styles/demo-functions' as *;
+@use 'src/styles/mixins' as *;
 
 :host {
   max-height: 100%;

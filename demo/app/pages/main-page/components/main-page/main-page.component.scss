@@ -1,0 +1,73 @@
+@use 'src/styles/mixins' as *;
+@use 'demo/styles/demo-functions' as *;
+@use 'demo/styles/demo-mixins' as *;
+@use 'demo/styles/demo-variables' as *;
+
+$logo-parallax-size: 256px;
+
+.main-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+
+  @include apply-theme-dependent-property(background-color, $theme-config, [body, background-color]);
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__block {
+    margin: 100px 0px;
+  }
+
+  &__logo-title {
+    height: auto;
+    width: 200px;
+
+    @include width-between-property(
+      $property: 'width',
+      $width-start: $xsBreakPoint,
+      $value-start: 300,
+      $width-end: $xxlBreakPoint,
+      $value-end: 500,
+      $is-save-width-before: false,
+      $is-save-width-after: true
+    );
+  }
+
+  .parallax {
+    perspective: 1000px;
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative;
+    width: $logo-parallax-size;
+    height: $logo-parallax-size;
+
+    &__item {
+      border: 5px solid color(primary-n200);
+      border-radius: 26%;
+
+      box-sizing: border-box;
+      position: absolute;
+      transform-style: preserve-3d;
+      will-change: transform;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+          transform: translateZ(calc(#{$i} * 40px));
+        }
+      }
+    }
+  }
+}

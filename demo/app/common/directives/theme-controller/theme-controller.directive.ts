@@ -1,8 +1,8 @@
 import { Directive, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ThemeSaverService } from '../../services/theme-saver.service';
-import { Theme } from '../../../../src/internal/declarations/enums/theme.enum';
+import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 @Directive({
   selector: '[demoThemeController]'
