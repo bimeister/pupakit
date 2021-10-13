@@ -12,6 +12,7 @@ import { LogPipe } from './log.pipe';
 import { DemoSharedModule } from './shared/shared.module';
 import { KitLayoutModule } from './layouts/kit-layout/kit-layout.module';
 import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
+import { ThemeControllerModule } from './components/theme-controller/theme-controller.module';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 
@@ -28,7 +29,8 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     AppRoutingModule,
     KitLayoutModule,
     MainLayoutModule,
-    HttpClientModule
+    HttpClientModule,
+    ThemeControllerModule
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
   exports: [LogPipe]

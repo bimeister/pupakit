@@ -1,10 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { ThemeSaverService } from '../../theme-saver.service';
 
 enum IconNames {
   DARK = 'ios-moon',
@@ -45,9 +44,7 @@ enum AnimationStates {
     ])
   ]
 })
-export class ThemeToggleComponent implements OnDestroy {
-  private readonly subscription: Subscription = new Subscription();
-
+export class ThemeToggleComponent {
   private readonly isDarkMode$: Observable<boolean> = this.themeWrapperService.theme$.pipe(
     map((theme: Theme) => theme === Theme.Dark)
   );
@@ -60,18 +57,7 @@ export class ThemeToggleComponent implements OnDestroy {
     map((isDarkMode: boolean) => (isDarkMode ? AnimationStates.END : AnimationStates.START))
   );
 
-  constructor(
-    private readonly themeWrapperService: ThemeWrapperService,
-    private readonly themeSaverService: ThemeSaverService
-  ) {
-    this.setSavedTheme();
-
-    this.subscription.add(this.saveThemeWhenItChanged());
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
 
   public toggleDarkMode(): void {
     this.isDarkMode$
@@ -82,15 +68,5 @@ export class ThemeToggleComponent implements OnDestroy {
       .subscribe((theme: Theme) => {
         this.themeWrapperService.setTheme(theme);
       });
-  }
-
-  private setSavedTheme(): void {
-    this.themeWrapperService.setTheme(this.themeSaverService.getTheme());
-  }
-
-  private saveThemeWhenItChanged(): Subscription {
-    return this.themeWrapperService.theme$.subscribe((theme: Theme) => {
-      this.themeSaverService.setTheme(theme);
-    });
   }
 }

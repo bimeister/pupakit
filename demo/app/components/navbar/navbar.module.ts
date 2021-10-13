@@ -4,13 +4,11 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
 import { DemoSharedModule } from '../../shared/shared.module';
 import { MenuToggleComponent } from './components/menu-toggle/menu-toggle.component';
 import { GridToggleComponent } from './components/grid-toggle/grid-toggle.component';
-import { ThemeSaverService } from './theme-saver.service';
 import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [NavbarComponent, ThemeToggleComponent, MenuToggleComponent, GridToggleComponent],
   exports: [NavbarComponent],
-  imports: [DemoSharedModule, RouterModule],
-  providers: [ThemeSaverService]
+  imports: [DemoSharedModule, RouterModule]
 })
 export class NavbarModule {}
