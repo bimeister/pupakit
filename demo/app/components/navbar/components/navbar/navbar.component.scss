@@ -1,5 +1,6 @@
 @use 'demo/styles/demo-variables' as *;
 @use 'demo/styles/demo-functions' as *;
+@use 'demo/styles/demo-mixins' as *;
 @use 'mixins' as *;
 
 @mixin apply-theme($theme-mode) {
@@ -49,6 +50,9 @@ $end-item-margin: 4rem;
   }
 
   &__logo-wrapper {
+    @include no-tap-highlight();
+    cursor: pointer;
+
     @include navbar-base-item();
 
     margin-left: $end-item-margin;
