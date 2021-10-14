@@ -1,10 +1,11 @@
 import { Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Observable, Subject } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { fromEvent, Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { DOCUMENT } from '@angular/common';
+import { subscribeOutsideAngular } from '../../../../../../src/internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 
 @Component({
   selector: 'demo-main-page',
@@ -14,7 +15,7 @@ import { DOCUMENT } from '@angular/common';
 export class MainPageComponent implements OnDestroy {
   @ViewChild('parallax', { read: ElementRef, static: false }) public parallaxElement: ElementRef;
 
-  private readonly destroyed$: Subject<void> = new Subject<void>();
+  private readonly subscription: Subscription = new Subscription();
 
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
     map((themeMode: Theme) => {
@@ -36,25 +37,19 @@ export class MainPageComponent implements OnDestroy {
     this.logoDark = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-dark.svg');
     this.logoIcon = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-icon.svg');
 
-    this.rotateParallaxElementWhenMouseMoved();
+    this.subscription.add(this.rotateParallaxElementWhenMouseMoved());
   }
 
   public ngOnDestroy(): void {
-    this.destroyed$.next();
-    this.destroyed$.complete();
+    this.subscription.unsubscribe();
   }
 
-  private rotateParallaxElementWhenMouseMoved(): void {
-    const onMouseMoveFunction: MainPageComponent['setRotate3dStyleByMouseEvent'] =
-      this.setRotate3dStyleByMouseEvent.bind(this);
-
-    this.ngZone.runOutsideAngular(() => {
-      this.document.addEventListener('mousemove', onMouseMoveFunction);
-    });
-
-    this.destroyed$.pipe(take(1)).subscribe(() => {
-      this.document.removeEventListener('mousemove', onMouseMoveFunction);
-    });
+  private rotateParallaxElementWhenMouseMoved(): Subscription {
+    return fromEvent(this.document, 'mousemove')
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe((mouseEvent: MouseEvent) => {
+        this.setRotate3dStyleByMouseEvent(mouseEvent);
+      });
   }
 
   private setRotate3dStyleByMouseEvent(mouseEvent: MouseEvent): void {
