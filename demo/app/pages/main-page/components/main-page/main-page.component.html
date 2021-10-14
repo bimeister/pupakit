@@ -5,10 +5,7 @@
     </div>
     <div class="main-page__block">
       <div class="parallax" #parallax>
-        <img [src]="logoIcon" class="parallax__item" />
-        <img [src]="logoIcon" class="parallax__item" />
-        <img [src]="logoIcon" class="parallax__item" />
-        <img [src]="logoIcon" class="parallax__item" />
+        <img [src]="logoIcon" *ngFor="let _ of [].constructor(4)" class="parallax__item" />
       </div>
     </div>
     <div class="main-page__block">
