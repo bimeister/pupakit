@@ -57,6 +57,7 @@ import { MainLayoutComponent } from './layouts/main-layout/main-layout.component
 import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
 import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 import { MainPageModule } from './pages/main-page/main-page.module';
+import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -339,6 +340,11 @@ const demoRoutes: Routes = [
         path: 'info-block',
         loadChildren: (): Promise<Type<InfoBlockDemoModule>> =>
           import('./pages/info-block-demo/info-block-demo.module').then(module => module.InfoBlockDemoModule)
+      },
+      {
+        path: 'status',
+        loadChildren: (): Promise<Type<StatusDemoModule>> =>
+          import('./pages/status-demo/status-demo.module').then(module => module.StatusDemoModule)
       }
     ]
   },
