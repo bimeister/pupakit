@@ -1,0 +1,70 @@
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
+
+.status {
+  padding-left: 3rem;
+  position: relative;
+  cursor: default;
+  @include font-size-small();
+  transition: color 0.2s ease;
+
+  text-overflow: inherit;
+  overflow: inherit;
+
+  &__line {
+    position: absolute;
+    left: 0;
+    top: -1px;
+    height: 100%;
+    width: 1rem;
+    content: '';
+    border-radius: 100px;
+    transition: background-color 0.2s ease;
+  }
+
+  &__text {
+    text-overflow: inherit;
+    overflow: inherit;
+  }
+
+  &_primary {
+    color: color(primary-n500);
+
+    .status__line {
+      background-color: color(primary-n500);
+    }
+  }
+
+  &_success {
+    color: color(green-n500);
+
+    .status__line {
+      background-color: color(green-n500);
+    }
+  }
+
+  &_warning {
+    color: color(yellow-n500);
+
+    .status__line {
+      background-color: color(yellow-n500);
+    }
+  }
+
+  &_danger {
+    color: color(red-n500);
+
+    .status__line {
+      background-color: color(red-n500);
+    }
+  }
+
+  &.disabled {
+    color: color(base-dark-n250);
+
+    .status__line {
+      background-color: color(base-dark-n250);
+    }
+  }
+}

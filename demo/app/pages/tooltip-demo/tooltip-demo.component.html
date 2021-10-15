@@ -31,32 +31,33 @@
 
 <h2>Simple usage</h2>
 <pupa-code-container [content]="example1Content">
-  <demo-adaptive-example-1></demo-adaptive-example-1>
+  <demo-tooltip-example-1></demo-tooltip-example-1>
 </pupa-code-container>
 
 <h2>Tooltip with custom template</h2>
 <pupa-code-container [content]="example2Content">
-  <demo-adaptive-example-2></demo-adaptive-example-2>
+  <demo-tooltip-example-2></demo-tooltip-example-2>
 </pupa-code-container>
 
 <h2>Tooltip with opened state</h2>
 <pupa-code-container [content]="example3Content">
-  <demo-adaptive-example-3></demo-adaptive-example-3>
+  <demo-tooltip-example-3></demo-tooltip-example-3>
 </pupa-code-container>
 
 <ng-template #customTooltipTemplate>
   <div [innerHtml]="getSanitizedHtml()"></div>
 </ng-template>
 
-<h2>Notice</h2>
-<ul>
-  <li>
-    If you submit simple content and a template to the directive at the same time, the display will take precedence over
-    the template.
-  </li>
-  <li>Tooltips are not shown on touch devices.</li>
-  <li>
-    If you don't want to show the tooltip under any conditions, then the directive has an boolean input
-    <code>tooltipDisabled</code>.
-  </li>
-</ul>
+<pupa-info-block variant="info" class="tooltip-demo__info-block">
+  <ul>
+    <li>
+      If you submit simple content and a template to the directive at the same time, the display will take precedence
+      over the template.
+    </li>
+    <li>Tooltips are not shown on touch devices.</li>
+    <li>
+      If you don't want to show the tooltip under any conditions, then the directive has an boolean input
+      <code>tooltipDisabled</code>.
+    </li>
+  </ul>
+</pupa-info-block>

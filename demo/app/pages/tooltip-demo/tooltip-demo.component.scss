@@ -1,12 +1,11 @@
 @import 'src/styles/functions';
 
-:host {
-  padding-bottom: 64px;
-  display: block;
-}
-
 .tooltip-demo {
   &__viewer-properties {
     min-width: 400px;
+  }
+
+  &__info-block {
+    margin-top: 20px;
   }
 }

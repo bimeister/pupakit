@@ -1,0 +1,25 @@
+<h1>Status</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content class="content">
+    <pupa-status [color]="color | async" [disabled]="disabled | async">Status</pupa-status>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Color</demo-props-group-label>
+    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>
+
+<h2>Base usage</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-status-example-1></demo-status-example-1>
+</pupa-code-container>
+
+<h2>Extra cases</h2>
+<pupa-code-container [content]="example2Content">
+  <demo-status-example-2></demo-status-example-2>
+</pupa-code-container>

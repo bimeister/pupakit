@@ -1,0 +1,19 @@
+@import 'mixins';
+
+.status-container {
+  display: flex;
+  margin: 4rem 0;
+
+  @include lt-md() {
+    flex-direction: column;
+  }
+}
+
+.status-container__item + .status-container__item {
+  margin-left: 6rem;
+
+  @include lt-md() {
+    margin-top: 6rem;
+    margin-left: initial;
+  }
+}
