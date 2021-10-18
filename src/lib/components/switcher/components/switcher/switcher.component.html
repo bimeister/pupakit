@@ -1,4 +1,14 @@
-<div class="toggle" [class.toggle_active]="value" [class.toggle_disabled]="disabled" (click)="toggle()">
-  <div class="toggle__marker"></div>
+<div
+  class="switcher"
+  [class]="sizeClass"
+  [class.switcher_active]="value$ | async"
+  [class.switcher_disabled]="isDisabled$ | async"
+  [attr.disabled]="(isDisabled$ | async) ? true : null"
+  (click)="changeValue()"
+  [tabindex]="tabindex"
+  (focus)="emitFocusEvent($event)"
+  (blur)="emitBlurEvent($event)"
+  (keydown.enter)="onKeyDown($event)"
+>
+  <div class="switcher__marker"></div>
 </div>
-<input type="checkbox" [id]="id" [name]="id" (change)="toggle()" [disabled]="disabled" />
