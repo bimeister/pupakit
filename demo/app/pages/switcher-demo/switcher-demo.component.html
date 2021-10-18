@@ -2,11 +2,23 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-switcher [disabled]="disabled | async"></pupa-switcher>
+    <pupa-switcher [disabled]="disabled | async" [size]="size | async"></pupa-switcher>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
+    <demo-props-group-label>Size</demo-props-group-label>
+    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
     <demo-props-group-label>Other</demo-props-group-label>
     <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<h2>Usage</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-switcher-example-1></demo-switcher-example-1>
+</pupa-code-container>
+
+<pupa-info-block variant="info" class="switcher-demo__info-block">
+  We don't recommend using control and value at the same time. Using of control is preferable.
+</pupa-info-block>

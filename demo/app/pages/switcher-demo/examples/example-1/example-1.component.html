@@ -1,0 +1,26 @@
+<b>Use form control</b>
+<p>
+  simple control value: {{ simpleControl.value }}
+  <pupa-switcher [formControl]="simpleControl"></pupa-switcher>
+</p>
+
+<p>
+  disabled default control:
+  <pupa-switcher [formControl]="disabledDefaultControl"></pupa-switcher>
+</p>
+
+<p>
+  disabled active control:
+  <pupa-switcher [formControl]="disabledActiveControl"></pupa-switcher>
+</p>
+
+<b>Use value</b>
+<p>
+  value: {{ value$ | async }}
+  <pupa-switcher [value]="value$ | async" (updateValue)="handleUpdateValue($event)"></pupa-switcher>
+</p>
+
+<p>
+  disabled state:
+  <pupa-switcher [disabled]="true" [value]="true"></pupa-switcher>
+</p>
