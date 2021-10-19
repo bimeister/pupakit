@@ -1,1 +1,1 @@
-export type SwitcherSize = 'large' | 'medium' | 'small';
+export type SwitcherSize = 'medium' | 'small';

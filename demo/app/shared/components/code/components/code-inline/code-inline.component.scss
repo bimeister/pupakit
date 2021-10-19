@@ -1,0 +1,21 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.code-inline {
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  background: color(base-white-n300);
+  color: color(base-n600);
+
+  vertical-align: middle;
+
+  padding: 1rem 2rem;
+  @include font-size-small();
+  border-radius: 1rem;
+
+  @include host-selector-dark-theme() {
+    background: color(base-dark-n300);
+    color: color(base-n0);
+  }
+}

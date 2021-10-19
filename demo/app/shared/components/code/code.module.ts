@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { CodeComponent } from './components/code/code.component';
 import { HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CodeContainerComponent } from './components/code-container/code-container.component';
@@ -8,15 +8,19 @@ import { ButtonModule } from '../../../../../src/lib/components/button/button.mo
 import { IconModule } from '../../../../../src/lib/components/icon/icon.module';
 import { iosCopyIcon } from '../../../../../src/internal/constants/icons/ios-copy-icon.const';
 import { CodeFetchComponent } from './components/code-fetch/code-fetch.component';
+import { CodeInlineComponent } from './components/code-inline/code-inline.component';
 
 const HIGHLIGHT_CONFIG: HighlightOptions = {
   fullLibraryLoader: () => import('highlight.js'),
   lineNumbersLoader: () => import('highlightjs-line-numbers.js')
 };
 
+const COMPONENTS: Type<unknown>[] = [CodeComponent, CodeContainerComponent, CodeFetchComponent, CodeInlineComponent];
+const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
+
 @NgModule({
-  declarations: [CodeComponent, CodeContainerComponent, CodeFetchComponent],
-  exports: [CodeComponent, CodeContainerComponent, CodeFetchComponent],
+  declarations: [...DECLARATIONS],
+  exports: [...DECLARATIONS],
   imports: [SharedModule, TabsModule, ButtonModule, IconModule.forFeature([iosCopyIcon]), HighlightModule],
   providers: [
     {
