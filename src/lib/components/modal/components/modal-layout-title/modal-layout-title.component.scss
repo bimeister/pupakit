@@ -1,12 +1,18 @@
 @import 'themes/functions';
 @import 'functions';
+@import 'mixins';
 
 :host {
   display: block;
-  flex: auto;
-  font-weight: bold;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 18px;
+  @include font-type-point;
+  @include font-size-medium;
+
+  color: color(base-n600);
+
+  @include host-selector-dark-theme {
+    color: color(base-n0);
+  }
 }

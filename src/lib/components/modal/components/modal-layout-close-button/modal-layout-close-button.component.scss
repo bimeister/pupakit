@@ -1,8 +1,15 @@
 @import 'themes/functions';
 @import 'functions';
+@import 'mixins';
 
 :host {
   display: block;
-  flex-shrink: 0;
-  margin-left: 2rem;
+  position: absolute;
+  top: 3rem;
+  right: 4rem;
+
+  @include xs() {
+    top: 5rem;
+    right: 5rem;
+  }
 }

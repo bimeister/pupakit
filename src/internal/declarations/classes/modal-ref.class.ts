@@ -5,9 +5,12 @@ import { Position } from '../types/position.type';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
 import { ConnectedPositionX } from '../types/connected-position-x.type';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { ModalContainerComponent } from '../../../public-api';
 
 export class ModalRef<ReturnDataT = null> {
   public readonly closed$: Subject<ReturnDataT> = new Subject<ReturnDataT>();
+  public readonly opened$: Subject<void> = new Subject<void>();
   public readonly positionUpdated$: Subject<Position> = new Subject<Position>();
   public readonly toTopLayerMoved$: Subject<void> = new Subject();
 
@@ -35,6 +38,12 @@ export class ModalRef<ReturnDataT = null> {
 
   public updatePosition(newPosition: Position): void {
     this.positionUpdated$.next(newPosition);
+  }
+
+  public open(componentPortal: ComponentPortal<ModalContainerComponent<unknown>>): void {
+    this.overlayRef.attach(componentPortal);
+    this.opened$.next();
+    this.opened$.complete();
   }
 
   public close(data: ReturnDataT = null): void {

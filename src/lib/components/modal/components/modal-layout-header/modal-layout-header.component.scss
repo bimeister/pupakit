@@ -1,18 +1,40 @@
 @import 'themes/functions';
 @import 'functions';
+@import 'mixins';
 
 :host {
   display: block;
   width: 100%;
-  flex-shrink: 0;
+
+  background-color: color(base-n0);
+
+  @include host-selector-dark-theme {
+    background-color: color(base-n600);
+  }
 }
 
 .modal-layout-header {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-bottom: 4rem;
+  position: relative;
   box-sizing: border-box;
-  padding: 0 4rem 0 4rem;
+  height: 12rem;
+  padding: 3rem 4rem;
+  @include xs() {
+    padding: 3rem 5em;
+  }
+
+  &_with-title {
+    height: 17rem;
+    padding: 6rem 14rem 6rem 10rem;
+
+    border-bottom: 1px solid color(base-white-n400);
+
+    @include host-selector-dark-theme {
+      border-bottom: 1px solid color(base-dark-n400);
+    }
+
+    @include xs() {
+      height: 16rem;
+      padding: 22px 16rem 22px 5rem;
+    }
+  }
 }

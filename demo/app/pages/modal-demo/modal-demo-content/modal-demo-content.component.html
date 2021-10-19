@@ -1,28 +1,28 @@
-<pupa-modal-dragger class="dragger"></pupa-modal-dragger>
-<pupa-modal-layout>
-  <pupa-modal-layout-header>
-    <pupa-modal-layout-title> Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo </pupa-modal-layout-title>
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-modal-dragger class="dragger"></pupa-modal-dragger>
+  <pupa-modal-layout>
+    <pupa-modal-layout-header>
+      <pupa-modal-layout-title> Demo Demo Demo Demo Demo Demo Demo Demo Demo Demo </pupa-modal-layout-title>
 
-    <pupa-modal-layout-close-button [value]="'🤷'">
-      <pupa-icon-button>
-        <pupa-icon name="close"></pupa-icon>
-      </pupa-icon-button>
-    </pupa-modal-layout-close-button>
-  </pupa-modal-layout-header>
+      <pupa-modal-layout-close-button [value]="'🤷'">
+        <pupa-button-icon [kind]="'subtle'" [icon]="'app-cross'" [size]="'small'"> </pupa-button-icon>
+      </pupa-modal-layout-close-button>
+    </pupa-modal-layout-header>
 
-  <pupa-modal-layout-body>
-    <div class="sample-content">sample content</div>
-    <div class="placeholder"></div>
-    🎳
-  </pupa-modal-layout-body>
+    <pupa-modal-layout-body>
+      <div class="sample-content">sample content</div>
+      <div class="placeholder"></div>
+      🎳
+    </pupa-modal-layout-body>
 
-  <pupa-modal-layout-actions>
-    <pupa-modal-layout-action [value]="null">
-      <pupa-button>Закрыть</pupa-button>
-    </pupa-modal-layout-action>
+    <pupa-modal-layout-footer>
+      <pupa-modal-layout-action [value]="null">
+        <pupa-button [kind]="'secondary'">Закрыть</pupa-button>
+      </pupa-modal-layout-action>
 
-    <pupa-modal-layout-action [value]="'💪🏻'">
-      <pupa-button>💪🏻</pupa-button>
-    </pupa-modal-layout-action>
-  </pupa-modal-layout-actions>
-</pupa-modal-layout>
+      <pupa-modal-layout-action [value]="'💪🏻'">
+        <pupa-button>💪🏻</pupa-button>
+      </pupa-modal-layout-action>
+    </pupa-modal-layout-footer>
+  </pupa-modal-layout>
+</pupa-theme-wrapper>

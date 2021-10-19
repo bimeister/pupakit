@@ -88,6 +88,25 @@ label.horizontal {
   z-index: 10000;
 }
 
+.cdk-overlay-dark-backdrop {
+  background-color: rgba(color(base-n600-rgb), 0.94);
+}
+
+.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
+  @include xs() {
+    opacity: 1;
+    background-color: rgba(color(base-n600-rgb), 0.94);
+  }
+}
+
+.cdk-overlay-without-backdrop {
+  display: none;
+  @include xs() {
+    display: block;
+    background-color: rgba(color(base-n600-rgb), 0.94);
+  }
+}
+
 .invisible-scrollbars {
   @include invisible-scrollbars;
 }
