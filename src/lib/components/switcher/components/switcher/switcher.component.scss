@@ -48,7 +48,7 @@
     pointer-events: none;
   }
 
-  &:not([disabled]) {
+  &:not(.switcher_disabled) {
     @include hover() {
       &.switcher_active {
         background-color: color(green-n400);
@@ -84,7 +84,7 @@
       background-color: color(green-n500);
     }
 
-    &:not([disabled]) {
+    &:not(.switcher_disabled) {
       @include hover() {
         background-color: color(base-dark-n275);
 

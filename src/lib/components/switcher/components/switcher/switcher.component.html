@@ -3,7 +3,6 @@
   [class]="sizeClass"
   [class.switcher_active]="value$ | async"
   [class.switcher_disabled]="isDisabled$ | async"
-  [attr.disabled]="(isDisabled$ | async) ? true : null"
   (click)="changeValue()"
   [tabindex]="tabindex"
   (focus)="emitFocusEvent($event)"
