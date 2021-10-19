@@ -1,5 +1,5 @@
 import { appCheckboxMinusIcon } from '../../../internal/constants/icons/app-checkbox-minus-icon.const';
-import { appCheckboxCheckIcon } from '../../../internal/constants/icons/app-checkbox-check-icon';
+import { appExceptionsCheck10Icon } from '../../../internal/constants/icons/app-exceptions-check-10-icon.const';
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../../../internal/shared/shared.module';
@@ -11,7 +11,7 @@ import { CheckboxHintComponent } from './components/checkbox-hint/checkbox-hint.
 
 @NgModule({
   declarations: [CheckboxMarkComponent, CheckboxComponent, CheckboxLabelComponent, CheckboxHintComponent],
-  imports: [SharedModule, IconModule.forFeature([appCheckboxCheckIcon, appCheckboxMinusIcon])],
+  imports: [SharedModule, IconModule.forFeature([appExceptionsCheck10Icon, appCheckboxMinusIcon])],
   exports: [CheckboxMarkComponent, CheckboxComponent, CheckboxLabelComponent, CheckboxHintComponent]
 })
 export class CheckboxModule {}

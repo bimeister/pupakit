@@ -1,0 +1,10 @@
+.wrapper {
+  margin-top: 4rem;
+}
+.indicators {
+  display: flex;
+  padding: 4rem 0;
+  &__item {
+    margin-right: 4rem;
+  }
+}

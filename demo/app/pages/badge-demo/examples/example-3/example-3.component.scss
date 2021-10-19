@@ -1,0 +1,14 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.wrapper {
+  margin-top: 4rem;
+}
+.circle {
+  background-color: color(green-n500);
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+}

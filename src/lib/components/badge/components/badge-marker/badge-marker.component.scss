@@ -1,0 +1,20 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+.badge {
+  position: absolute;
+  left: calc(100% - 2px);
+  @include ellipsis-text-overflow;
+
+  &__small {
+    width: 2rem;
+    height: 2rem;
+    top: -2rem;
+  }
+  &__medium {
+    height: 4rem;
+    max-width: 9rem;
+    top: -4rem;
+  }
+}

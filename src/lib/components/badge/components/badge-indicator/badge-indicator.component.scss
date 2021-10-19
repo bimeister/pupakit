@@ -1,0 +1,59 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+:host {
+  display: flex;
+  width: fit-content;
+  height: auto;
+}
+
+.badge-indicator {
+  width: 2rem;
+  height: 2rem;
+  color: color(base-n0);
+  display: flex;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  &__icon {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+  }
+}
+
+.complete {
+  background-color: color(primary-n500);
+}
+.error {
+  background-color: color(red-n500);
+}
+
+.inner-circle {
+  position: absolute;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: color(primary-n500);
+}
+.outer-circle {
+  position: absolute;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: color(primary-n200);
+  animation: pulse 1.5s infinite alternate ease-in-out;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.7);
+  }
+}

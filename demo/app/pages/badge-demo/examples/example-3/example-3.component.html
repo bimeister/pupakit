@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <div>
+    Small size badge:
+    <pupa-badge>
+      <pupa-badge-marker [size]="'small'">
+        <span class="circle"></span>
+      </pupa-badge-marker>
+      <pupa-badge-content><pupa-avatar></pupa-avatar></pupa-badge-content>
+    </pupa-badge>
+  </div>
+  <div>
+    Medium (default) size badge:
+    <pupa-badge>
+      <pupa-badge-marker [size]="'medium'">
+        <pupa-counter [count]="1" color="active"></pupa-counter>
+      </pupa-badge-marker>
+      <pupa-badge-content><pupa-icon name="app-notification"></pupa-icon></pupa-badge-content>
+    </pupa-badge>
+  </div>
+</div>
