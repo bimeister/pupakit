@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  TemplateRef,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
@@ -52,6 +53,8 @@ export class SelectTreeComponent extends SelectTreeBase {
   @Input() public isLoading: boolean = false;
 
   @Input() public isNodeSelectionEnabled: boolean = false;
+
+  @Input() public readonly nodeTemplate?: TemplateRef<unknown>;
 
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
 
