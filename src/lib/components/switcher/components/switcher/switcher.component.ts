@@ -68,12 +68,12 @@ export class SwitcherComponent implements ControlValueAccessor {
         take(1),
         map((value: boolean) => !value)
       )
-      .subscribe((value: boolean) => {
-        this.value$.next(value);
+      .subscribe((updatedValue: boolean) => {
+        this.value$.next(updatedValue);
         this.onTouched();
-        this.onChange(value);
+        this.onChange(updatedValue);
 
-        this.updateValue.emit(value);
+        this.updateValue.emit(updatedValue);
       });
   }
 
