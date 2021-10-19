@@ -41,8 +41,7 @@ export class TagComponent implements AfterContentInit {
   }
 
   private processWithAvatarChange(): void {
-    if (this.avatarComponent !== undefined) {
-      this.withAvatar$.next(true);
-    }
+    const withAvatar: boolean = this.avatarComponent !== undefined;
+    this.withAvatar$.next(withAvatar);
   }
 }

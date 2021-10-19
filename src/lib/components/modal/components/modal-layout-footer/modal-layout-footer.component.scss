@@ -1,0 +1,34 @@
+@import 'themes/functions';
+@import 'functions';
+@import 'mixins';
+
+:host {
+  display: block;
+  width: 100%;
+
+  border-top: 1px solid color(base-white-n400);
+  color: color(base-white-n100);
+  background-color: color(base-n0);
+
+  @include host-selector-dark-theme {
+    border-top: 1px solid color(base-dark-n400);
+    background-color: color(base-n600);
+    color: color(base-dark-n100);
+  }
+}
+
+.modal-layout-footer {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  padding: 2rem 4rem;
+  @include font-type-paragraph;
+  @include font-size-mark(true);
+
+  &_with-actions {
+    padding: 4rem;
+    @include xs() {
+      padding: 3rem 5rem;
+    }
+  }
+}

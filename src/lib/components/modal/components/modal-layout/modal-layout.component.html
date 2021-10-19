@@ -1,3 +1,7 @@
-<div class="modal-layout">
+<div
+  class="modal-layout"
+  [class.modal-layout_no-footer]="!(withFooter$ | async)"
+  [class.modal-layout_no-title]="!(withTitle$ | async)"
+>
   <ng-content></ng-content>
 </div>

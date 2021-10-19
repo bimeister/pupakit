@@ -15,6 +15,8 @@ export class ModalConfigDto implements ModalConfig {
   public viewportMarginPx: number = 0;
   public injector: Injector = null;
   public providers: StaticProvider[] = [];
+  public width: number | string = 0;
+  public height: number | string = 0;
 
   constructor(config: Partial<ModalConfig>) {
     if (isNil(config)) {

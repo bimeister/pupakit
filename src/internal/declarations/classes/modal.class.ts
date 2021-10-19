@@ -2,22 +2,25 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
+import { distinctUntilChanged, map, switchMapTo, take, takeUntil } from 'rxjs/operators';
 import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../constants/tokens/modal-container-data.token';
+import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ModalContainerData } from '../interfaces/modal-container-data.interface';
+import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { Position } from '../types/position.type';
 import { ModalRef } from './modal-ref.class';
-import { PortalLayer } from '../interfaces/portal-layer.interface';
 
 export class Modal<ComponentT> implements PortalLayer {
   public readonly id: string = getUuid();
   private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
 
   private readonly overlayRef: OverlayRef = this.overlay.create({
-    positionStrategy: this.getPositionStrategy(),
-    hasBackdrop: this.config.hasBackdrop,
-    backdropClass: this.config.isBackdropTransparent ? 'cdk-overlay-transparent-backdrop' : 'cdk-overlay-dark-backdrop'
+    hasBackdrop: true,
+    backdropClass: this.getBackdropClass(),
+    height: this.config.height,
+    width: this.config.width
   });
 
   private readonly modalRef: ModalRef = new ModalRef(this.id, this.overlayRef, this.config);
@@ -28,9 +31,11 @@ export class Modal<ComponentT> implements PortalLayer {
     private readonly config: ModalConfig,
     private readonly overlay: Overlay,
     private readonly injector: Injector,
-    private readonly rendererFactory: RendererFactory2
+    private readonly rendererFactory: RendererFactory2,
+    private readonly clientUiStateHandlerService: ClientUiStateHandlerService
   ) {
     this.handleBackdropClick();
+    this.handleBreakpointSizing();
   }
 
   public getCurrentZIndex(): number {
@@ -46,7 +51,7 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   public open(): ModalRef {
-    this.overlayRef.attach(this.getComponentPortal());
+    this.modalRef.open(this.getComponentPortal());
     return this.modalRef;
   }
 
@@ -91,7 +96,7 @@ export class Modal<ComponentT> implements PortalLayer {
     };
 
     const injectionTokens: WeakMap<object, any> = new WeakMap();
-    injectionTokens.set(MODAL_CONTAINER_DATA_TOKEN, modalContainerData);
+    injectionTokens.set(MODAL_CONTAINER_DATA_TOKEN, modalContainerData).set(OverlayRef, this.overlayRef);
 
     return new PortalInjector(this.injector, injectionTokens);
   }
@@ -129,5 +134,33 @@ export class Modal<ComponentT> implements PortalLayer {
       return;
     }
     this.overlayRef.backdropClick().subscribe(() => this.modalRef.close());
+  }
+
+  private handleBreakpointSizing(): void {
+    this.modalRef.opened$
+      .pipe(
+        take(1),
+        switchMapTo(this.clientUiStateHandlerService.breakpoint$),
+        map((breakpoint: string) => breakpoint === 'xs'),
+        distinctUntilChanged(),
+        takeUntil(this.modalRef.closed$)
+      )
+      .subscribe((isMobileBreakpoint: boolean) => {
+        if (isMobileBreakpoint) {
+          this.overlayRef.updateSize({ height: 'calc(100% - 80px)', width: '100%' });
+          this.overlayRef.updatePositionStrategy(this.overlay.position().global().top('80px'));
+          return;
+        }
+        this.overlayRef.updateSize({ height: this.config.height, width: this.config.width });
+        this.overlayRef.updatePositionStrategy(this.getPositionStrategy());
+      });
+  }
+
+  private getBackdropClass(): string {
+    if (this.config.hasBackdrop) {
+      return this.config.isBackdropTransparent ? 'cdk-overlay-transparent-backdrop' : 'cdk-overlay-dark-backdrop';
+    }
+
+    return 'cdk-overlay-without-backdrop';
   }
 }
