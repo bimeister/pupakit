@@ -17,9 +17,9 @@
   cursor: pointer;
 
   &__marker {
-    background: color(base-n0);
+    background-color: color(base-n0);
     border-radius: 50%;
-    box-shadow: 0px 0px 4px rgba(0, 29, 41, 0.06);
+    box-shadow: 0px 0px 1rem rgba(color(base-n600-rgb) 0.06);
 
     transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common),
       background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -28,7 +28,7 @@
   }
 
   &_active {
-    background: color(green-n500);
+    background-color: color(green-n500);
 
     .switcher__marker {
       transform: translateX(100%);
@@ -37,13 +37,13 @@
 
   &:after {
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: -0.5rem;
+    left: -0.5rem;
+    right: -0.5rem;
+    bottom: -0.5rem;
     content: '';
     border-radius: 25rem;
-    border: 2px solid transparent;
+    border: 0.5rem solid transparent;
 
     pointer-events: none;
   }
@@ -51,7 +51,7 @@
   &:not([disabled]) {
     @include hover() {
       &.switcher_active {
-        background: color(green-n400);
+        background-color: color(green-n400);
       }
       background-color: color(base-white-n275);
     }
@@ -81,7 +81,7 @@
     background-color: color(base-dark-n300);
 
     &_active {
-      background: color(green-n500);
+      background-color: color(green-n500);
     }
 
     &:not([disabled]) {
@@ -89,7 +89,7 @@
         background-color: color(base-dark-n275);
 
         &.switcher_active {
-          background: color(green-n400);
+          background-color: color(green-n400);
         }
       }
     }
