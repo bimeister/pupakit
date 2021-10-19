@@ -73,7 +73,8 @@ export class SidebarContentComponent {
       { title: 'Chip button', link: '/kit/chip-button' },
       { title: 'Paged Virtual Scroll', link: '/kit/paged-virtual-scroll' },
       { title: 'Tag & Color Tag', link: '/kit/tag' },
-      { title: 'Status', link: '/kit/status' }
+      { title: 'Status', link: '/kit/status' },
+      { title: 'Badge', link: '/kit/badge' }
     ]
   };
 

@@ -58,6 +58,7 @@ import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.mo
 import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
+import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -345,6 +346,11 @@ const demoRoutes: Routes = [
         path: 'status',
         loadChildren: (): Promise<Type<StatusDemoModule>> =>
           import('./pages/status-demo/status-demo.module').then(module => module.StatusDemoModule)
+      },
+      {
+        path: 'badge',
+        loadChildren: (): Promise<Type<BadgeDemoModule>> =>
+          import('./pages/badge-demo/badge-demo.module').then(module => module.BadgeDemoModule)
       }
     ]
   },

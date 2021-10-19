@@ -1,1 +1,1 @@
-export type CountColor = 'active' | 'normal' | 'light' | 'negative' | 'positive' | 'alert';
+export type CountColor = 'active' | 'normal' | 'light' | 'negative' | 'positive' | 'neutral' | 'alert';
