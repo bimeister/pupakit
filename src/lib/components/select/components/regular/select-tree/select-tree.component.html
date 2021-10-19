@@ -16,7 +16,7 @@
     #flatTreeComponent
     *ngIf="!(type | isNullOrUndefined)"
     [flatDataOrigin]="flatDataOrigin"
-    [nodeTemplate]="nodeTemplate"
+    [nodeTemplate]="nodeTemplate ?? defaultNodeTemplate"
     [trackBy]="trackBy"
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
@@ -36,7 +36,7 @@
     *ngIf="!(type | isNullOrUndefined)"
     [treeNodesOrigin]="treeNodesOrigin"
     [treeElementsOrigin]="treeElementsOrigin"
-    [nodeTemplate]="nodeTemplate"
+    [nodeTemplate]="nodeTemplate ?? defaultNodeTemplate"
     [trackBy]="trackBy"
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
@@ -54,7 +54,7 @@
   <pupa-tree
     #customPupaTreeComponent
     *ngIf="!(type | isNullOrUndefined)"
-    [nodeTemplate]="nodeTemplate"
+    [nodeTemplate]="nodeTemplate ?? defaultNodeTemplate"
     [trackBy]="trackBy"
     [selectedNodesIds]="selectedNodesIds$ | async"
     [highlightedNodesIds]="highlightedNodesIds$ | async"
@@ -68,7 +68,7 @@
   ></pupa-tree>
 </ng-template>
 
-<ng-template #nodeTemplate let-node="node">
+<ng-template #defaultNodeTemplate let-node="node">
   <div class="select-tree-item-custom-template" (click)="processNodeClick(node)">
     {{ node?.name }}
   </div>

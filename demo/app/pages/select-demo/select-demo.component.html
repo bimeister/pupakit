@@ -112,6 +112,25 @@
     </pupa-select-dropdown>
   </pupa-select>
 
+  <pupa-select [isMultiSelectionEnabled]="true">
+    <pupa-select-button> pupa-select-tree with custom template</pupa-select-button>
+
+    <pupa-select-dropdown>
+      <pupa-select-search placeholder="Поиск..." (query)="log($event)"></pupa-select-search>
+      <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
+      <pupa-select-tree
+        type="flat"
+        [flatDataOrigin]="treeDataOrigin"
+        [isLoading]="isLoading$ | async"
+        [nodeTemplate]="customNodeTemplate"
+      ></pupa-select-tree>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <ng-template #customNodeTemplate let-node="node">
+    <div class="select-tree-item-custom-template">{{ node?.name }} - BOY NEXT DOOR</div>
+  </ng-template>
+
   <pupa-select [formControl]="invalidFormControl">
     <pupa-select-button> Invalid Select </pupa-select-button>
 
