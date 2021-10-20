@@ -1,6 +1,7 @@
-.wrapper {
+.badge-container {
   margin-top: 4rem;
-}
-.mr {
-  margin-right: 6rem;
+
+  &__item {
+    margin-right: 6rem;
+  }
 }

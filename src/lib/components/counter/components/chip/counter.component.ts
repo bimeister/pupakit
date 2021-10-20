@@ -10,5 +10,5 @@ import { CountColor } from '../../../../../internal/declarations/types/count-col
 export class CounterComponent {
   @Input() public count: number;
 
-  @Input() public color: CountColor = 'normal';
+  @Input() public color: CountColor = 'neutral';
 }
