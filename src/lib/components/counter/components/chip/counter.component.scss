@@ -4,7 +4,6 @@
 
 .count {
   box-sizing: border-box;
-  font-size: 3rem;
   height: 4rem;
   border-radius: 2rem;
   padding: 2px 6px;
@@ -15,30 +14,8 @@
   align-items: center;
   justify-content: center;
 
-  &_active {
-    background-color: color(primary-n500);
-    color: color(base-n0);
-  }
-
-  &_normal {
-    background-color: color(primary-n100);
-    color: color(base-dark-n500);
-  }
-
-  &_light {
-    background-color: color(base-n0);
-    color: color(base-n600);
-  }
-
-  &_negative {
-    background-color: color(red-n500);
-    color: color(base-n0);
-  }
-
-  &_positive {
-    background-color: color(green-n500);
-    color: color(base-n0);
-  }
+  @include font-type-point;
+  @include font-size-mark;
 
   &_neutral {
     background-color: color(base-white-n300);
@@ -50,7 +27,17 @@
     }
   }
 
-  &_alert {
+  &_primary {
+    background-color: color(primary-n500);
+    color: color(base-n0);
+  }
+
+  &_danger {
+    background-color: color(red-n500);
+    color: color(base-n0);
+  }
+
+  &_warning {
     background-color: color(yellow-n500);
     color: color(base-n600);
   }
