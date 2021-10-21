@@ -74,7 +74,8 @@ export class SidebarContentComponent {
       { title: 'Paged Virtual Scroll', link: '/kit/paged-virtual-scroll' },
       { title: 'Tag & Color Tag', link: '/kit/tag' },
       { title: 'Status', link: '/kit/status' },
-      { title: 'Badge', link: '/kit/badge' }
+      { title: 'Badge', link: '/kit/badge' },
+      { title: 'Breadcrumbs', link: '/kit/breadcrumbs' }
     ]
   };
 

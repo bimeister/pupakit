@@ -1,0 +1,66 @@
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
+
+$adaptive-property: 'max-width';
+
+.trigger {
+  @include font-type-caption();
+  @include font-size-medium();
+
+  padding: 1.5rem 2rem;
+
+  display: block;
+  border: 0.5rem solid transparent;
+  border-radius: 1px;
+
+  text-decoration: none;
+  color: color(base-white-n100);
+  cursor: pointer;
+  @include ellipsis-text-overflow;
+
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  &:not(.trigger_active) {
+    @include hover() {
+      background-color: color(base-white-n400);
+      color: color(base-n600);
+    }
+  }
+
+  &_active,
+  &:active {
+    background-color: color(base-white-n400);
+    color: color(base-n600);
+  }
+
+  &:focus-visible {
+    border-color: color(primary-n400);
+    outline: none;
+  }
+
+  @include xs() {
+    @include font-size-small();
+  }
+}
+
+// dark styles
+.trigger {
+  @include host-selector-dark-theme() {
+    color: color(base-dark-n100);
+
+    &:not(.trigger_active) {
+      @include hover() {
+        background-color: color(base-dark-n400);
+        color: color(base-n0);
+      }
+    }
+
+    &_active,
+    &:active {
+      color: color(base-n0);
+      background-color: color(base-dark-n400);
+    }
+  }
+}

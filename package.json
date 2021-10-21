@@ -67,7 +67,7 @@
     "@babel/core": "^7.15.5",
     "@bimeister/build-cli": "0.1.0-c869ab81",
     "@bimeister/event-bus": "0.1.0-40a7dcbb",
-    "@bimeister/utilities": "0.1.0-fe13e1f0",
+    "@bimeister/utilities": "0.1.0-eaac619b",
     "@types/jest": "^26.0.9",
     "@types/node": "^14.0.0",
     "babel-loader": "^8.1.0",

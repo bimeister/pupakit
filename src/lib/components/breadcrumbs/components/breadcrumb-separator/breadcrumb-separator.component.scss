@@ -1,0 +1,20 @@
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
+
+.separator {
+  @include font-size-small();
+  transform: translateY(2px);
+
+  cursor: default;
+  color: color(base-white-n200);
+
+  @include xs() {
+    @include font-size-mark();
+    transform: translateY(1px);
+  }
+
+  @include host-selector-dark-theme() {
+    color: color(base-dark-n200);
+  }
+}

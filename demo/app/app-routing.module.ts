@@ -59,6 +59,7 @@ import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.mod
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
+import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -351,6 +352,11 @@ const demoRoutes: Routes = [
         path: 'badge',
         loadChildren: (): Promise<Type<BadgeDemoModule>> =>
           import('./pages/badge-demo/badge-demo.module').then(module => module.BadgeDemoModule)
+      },
+      {
+        path: 'breadcrumbs',
+        loadChildren: (): Promise<Type<BreadcrumbsDemoModule>> =>
+          import('./pages/breadcrumbs-demo/breadcrumbs-demo.module').then(module => module.BreadcrumbsDemoModule)
       }
     ]
   },

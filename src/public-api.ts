@@ -66,7 +66,8 @@ export {
   TableRowRef,
   TableBodyRowRef,
   TableColumnPin,
-  TableColumnSorting
+  TableColumnSorting,
+  Breadcrumb
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

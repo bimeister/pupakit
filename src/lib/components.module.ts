@@ -52,6 +52,7 @@ import { TagModule } from './components/tag/tag.module';
 import { ScrollableModule } from './components/scrollable/scrollable.module';
 import { StatusModule } from './components/status/status.module';
 import { BadgeModule } from './components/badge/badge.module';
+import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 
 const EXPORTS: any[] = [
   ExpansibleModule,
@@ -104,7 +105,8 @@ const EXPORTS: any[] = [
   TagModule,
   ScrollableModule,
   StatusModule,
-  BadgeModule
+  BadgeModule,
+  BreadcrumbsModule
 ];
 
 @NgModule({

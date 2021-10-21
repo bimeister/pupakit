@@ -34,7 +34,6 @@ const ANIMATION: string = `200ms ease-in-out`;
 })
 export class TooltipContentComponent implements OnDestroy {
   private readonly tooltipService: TooltipService;
-  public readonly isOpened$: Observable<boolean>;
   private readonly tooltipHideOnHoverHover$: Observable<boolean>;
   public readonly tooltipContent$: Observable<Nullable<string>>;
   public readonly tooltipContentTemplate$: Observable<Nullable<TemplateRef<unknown>>>;
@@ -59,7 +58,6 @@ export class TooltipContentComponent implements OnDestroy {
     private readonly hostElementRef: ElementRef<HTMLElement>
   ) {
     this.tooltipService = injector.get(TooltipService);
-    this.isOpened$ = this.tooltipService.isOpened$;
     this.tooltipHideOnHoverHover$ = this.tooltipService.tooltipHideOnHoverHover$;
     this.tooltipContent$ = this.tooltipService.tooltipContent$;
     this.tooltipContentTemplate$ = this.tooltipService.tooltipContentTemplate$;

@@ -1,0 +1,73 @@
+<ng-container
+  [ngTemplateOutlet]="mainTemplate"
+  [ngTemplateOutletContext]="{ breadcrumbTemplate: getBreadcrumbTemplate() }"
+></ng-container>
+
+<ng-content></ng-content>
+
+<ng-template #mainTemplate let-breadcrumbTemplate="breadcrumbTemplate">
+  <div class="breadcrumbs breadcrumbs_hidden" [tabindex]="-1" #breadcrumbs>
+    <ng-container *ngFor="let breadcrumb of breadcrumbs$ | async; let isActive = last">
+      <div class="breadcrumbs__breadcrumb-wrapper" #breadcrumb>
+        <pupa-breadcrumb
+          [template]="breadcrumbTemplate"
+          [breadcrumb]="breadcrumb"
+          [active]="isActive"
+        ></pupa-breadcrumb>
+        <pupa-breadcrumb-separator *ngIf="!isActive"></pupa-breadcrumb-separator>
+      </div>
+    </ng-container>
+
+    <div class="breadcrumbs__breadcrumb-wrapper" #unfitBreadcrumbsTrigger>
+      <pupa-breadcrumb-unfit-trigger></pupa-breadcrumb-unfit-trigger>
+      <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
+    </div>
+  </div>
+
+  <div class="breadcrumbs breadcrumbs_visible-layer">
+    <ng-container *ngIf="!(isMobile$ | async)">
+      <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="rootBreadcrumb$ | async as rootBreadcrumb">
+        <pupa-breadcrumb [template]="breadcrumbTemplate" [breadcrumb]="rootBreadcrumb"></pupa-breadcrumb>
+        <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
+      </div>
+    </ng-container>
+
+    <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="!(isContainerFullFitted$ | async)">
+      <pupa-dropdown-menu #dropdownMenu>
+        <pupa-dropdown-menu-trigger>
+          <pupa-breadcrumb-unfit-trigger
+            [active]="dropdownMenu.isOpened$ | async"
+            (click)="handleClickOnUnfitTrigger()"
+          ></pupa-breadcrumb-unfit-trigger>
+        </pupa-dropdown-menu-trigger>
+        <pupa-dropdown-menu-content [horizontalPosition]="'center'">
+          <ng-container *ngFor="let breadcrumb of unfitBreadcrumbs$ | async">
+            <pupa-dropdown-menu-item [tabindex]="-1" [id]="breadcrumb.id" [routerLink]="breadcrumb.routerLink">
+              <ng-container
+                [ngTemplateOutlet]="breadcrumbTemplate"
+                [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
+              ></ng-container>
+            </pupa-dropdown-menu-item>
+          </ng-container>
+        </pupa-dropdown-menu-content>
+      </pupa-dropdown-menu>
+
+      <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
+    </div>
+
+    <ng-container *ngFor="let breadcrumb of fitBreadcrumbs$ | async; let isActive = last">
+      <div class="breadcrumbs__breadcrumb-wrapper">
+        <pupa-breadcrumb
+          [template]="breadcrumbTemplate"
+          [breadcrumb]="breadcrumb"
+          [active]="isActive"
+        ></pupa-breadcrumb>
+        <pupa-breadcrumb-separator *ngIf="!isActive"></pupa-breadcrumb-separator>
+      </div>
+    </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #defaultInnerTemplate let-breadcrumb>
+  {{ breadcrumb.name }}
+</ng-template>
