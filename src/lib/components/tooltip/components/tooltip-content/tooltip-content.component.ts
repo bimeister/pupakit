@@ -54,10 +54,10 @@ export class TooltipContentComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
-    injector: Injector,
+    private readonly injector: Injector,
     private readonly hostElementRef: ElementRef<HTMLElement>
   ) {
-    this.tooltipService = injector.get(TooltipService);
+    this.tooltipService = this.injector.get(TooltipService);
     this.tooltipHideOnHoverHover$ = this.tooltipService.tooltipHideOnHoverHover$;
     this.tooltipContent$ = this.tooltipService.tooltipContent$;
     this.tooltipContentTemplate$ = this.tooltipService.tooltipContentTemplate$;

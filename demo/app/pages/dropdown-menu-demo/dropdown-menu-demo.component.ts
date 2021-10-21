@@ -5,6 +5,8 @@ import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrappe
 import { Observable } from 'rxjs';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
+const BASE_REQUEST_PATH: string = 'dropdown-menu-demo/examples';
+
 @Component({
   selector: 'demo-dropdown-menu',
   styleUrls: ['../demo.scss', './dropdown-menu-demo.component.scss'],
@@ -31,6 +33,10 @@ export class DropdownMenuDemoComponent {
   ];
 
   public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
+
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/demo-dropdown-menu-example-1/demo-dropdown-menu-example-1.component.html`
+  };
 
   constructor(private readonly themeWrapperService: ThemeWrapperService) {}
 }

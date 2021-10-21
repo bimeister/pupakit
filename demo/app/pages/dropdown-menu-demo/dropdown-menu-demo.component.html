@@ -1,69 +1,118 @@
 <h1>Dropdown menu</h1>
+
 <demo-example-viewer>
   <demo-example-viewer-content>
     <pupa-theme-wrapper [theme]="theme$ | async">
-      <pupa-dropdown-menu>
-        <pupa-dropdown-menu-trigger>
-          <span>{{ triggerText.value }}</span>
-        </pupa-dropdown-menu-trigger>
-        <pupa-dropdown-menu-content [horizontalPosition]="horizontalPosition | async">
-          <pupa-dropdown-menu-item>
-            <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
-            Default item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [active]="true">
-            <pupa-dropdown-menu-item-icon name="add"></pupa-dropdown-menu-item-icon>
-            Active item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [plain]="true">
-            <pupa-dropdown-menu-item-icon name="md-lock"></pupa-dropdown-menu-item-icon>
-            Plain item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [disabled]="true">
-            <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
-            Disabled item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu-content>
-      </pupa-dropdown-menu>
+      <div
+        [class.is-open]="dropdown.isOpen$ | async"
+        [pupaDropdownMenu]="dropdownContent1"
+        [dropdownMenuDisabled]="disabled | async"
+        #dropdown="pupaDropdownMenu"
+      >
+        <span>[1] {{ triggerText.value }}</span>
+      </div>
+
+      <pupa-dropdown-menu-content #dropdownContent1 [horizontalPosition]="horizontalPosition | async">
+        <pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
+          Default item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item [active]="true">
+          <pupa-dropdown-menu-item-icon name="add"></pupa-dropdown-menu-item-icon>
+          Active item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item [plain]="true">
+          <pupa-dropdown-menu-item-icon name="md-lock"></pupa-dropdown-menu-item-icon>
+          Plain item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item [disabled]="true">
+          <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+          Disabled item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu-content>
+
+      <br />
+
+      <div
+        [class.is-open]="dropdown.isOpen$ | async"
+        [pupaDropdownMenu]="dropdownContent2"
+        [dropdownMenuDisabled]="disabled | async"
+        #dropdown="pupaDropdownMenu"
+      >
+        <span>[2] {{ triggerText.value }}</span>
+      </div>
+
+      <pupa-dropdown-menu-content #dropdownContent2 [horizontalPosition]="horizontalPosition | async">
+        <pupa-dropdown-menu-item [disabled]="true">
+          <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+          Disabled item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item>
+          <div class="text">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+          </div>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu-content>
     </pupa-theme-wrapper>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Trigger text</demo-props-group-label>
     <pupa-textarea [formControl]="triggerText"></pupa-textarea>
-
     <demo-props-group-label>Horizontal position</demo-props-group-label>
     <demo-props-radio-select #horizontalPosition [options]="horizontalPositionOptions"></demo-props-radio-select>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<h2>Example usage</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-dropdown-menu-example-1></demo-dropdown-menu-example-1>
+</pupa-code-container>

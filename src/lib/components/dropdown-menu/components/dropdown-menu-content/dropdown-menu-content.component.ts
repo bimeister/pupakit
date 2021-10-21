@@ -1,18 +1,27 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
-  CdkOverlayOrigin,
-  ConnectionPositionPair,
-  HorizontalConnectionPos,
-  VerticalConnectionPos
-} from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+  Component,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  Input,
+  ViewChild,
+  TemplateRef,
+  AfterViewInit,
+  Optional,
+  OnChanges
+} from '@angular/core';
+import { HorizontalConnectionPos } from '@angular/cdk/overlay';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { isNil, Nullable } from '@bimeister/utilities';
+import { distinctUntilChanged } from 'rxjs/operators';
+import { DropdownContextService } from '../../services/dropdown-context.service';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
-import { DropdownService } from '../../services/dropdown.service';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 
-const ANIMATION_DURATION_MS: number = 150;
-const HORIZONTAL_POS_LIST: HorizontalConnectionPos[] = ['center', 'end', 'start'];
+type ContentTemplate = Nullable<TemplateRef<unknown>>;
+
+const DEFAULT_POSITION: HorizontalConnectionPos = 'center';
 
 @Component({
   selector: 'pupa-dropdown-menu-content',
@@ -20,58 +29,47 @@ const HORIZONTAL_POS_LIST: HorizontalConnectionPos[] = ['center', 'end', 'start'
   styleUrls: ['./dropdown-menu-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('dropdownShow', [
-      state('void', style({ transform: 'translateY(10px)', opacity: 0 })),
-      state('show', style({ transform: 'translateY(0px)', opacity: 1 })),
-      transition('void => show', [animate(`${ANIMATION_DURATION_MS}ms ease-in`)]),
-      transition('show => void', [animate(`${ANIMATION_DURATION_MS}ms ease-out`)])
-    ])
-  ]
+  providers: [DropdownContextService]
 })
-export class DropdownMenuContentComponent implements OnChanges {
-  @Input() public horizontalPosition: HorizontalConnectionPos = 'center';
-
-  public readonly dropdownOverlayOrigin$: Observable<CdkOverlayOrigin> = this.dropdownService.dropdownOverlayOrigin$;
-  public readonly isOpened$: BehaviorSubject<boolean> = this.dropdownService.isOpened$;
-  public readonly animationState$: Observable<'void' | 'show'> = this.isOpened$.pipe(
-    map((isOpened: boolean) => (isOpened ? 'show' : 'void'))
+export class DropdownMenuContentComponent implements OnChanges, AfterViewInit {
+  @Input() public horizontalPosition: HorizontalConnectionPos = DEFAULT_POSITION;
+  private readonly horizontalPositionState$: BehaviorSubject<HorizontalConnectionPos> = new BehaviorSubject(
+    DEFAULT_POSITION
   );
+  public readonly horizontalPosition$: Observable<HorizontalConnectionPos> = this.horizontalPositionState$.pipe(
+    distinctUntilChanged()
+  );
+
+  public readonly contextId: Uuid = this.dropdownContextService.contextId;
+
   public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ || of('');
-  public overlayPositions: ConnectionPositionPair[];
+
+  @ViewChild('contentTemplate') private readonly dropdownMenuContentTemplate: ContentTemplate;
+  private readonly contentTemplateState$: BehaviorSubject<ContentTemplate> = new BehaviorSubject<ContentTemplate>(null);
+  public readonly contentTemplate$: Observable<ContentTemplate> = this.contentTemplateState$
+    .asObservable()
+    .pipe(distinctUntilChanged());
 
   constructor(
-    private readonly dropdownService: DropdownService,
+    private readonly dropdownContextService: DropdownContextService,
     @Optional() private readonly themeWrapperService?: ThemeWrapperService
   ) {}
 
-  public ngOnChanges(): void {
-    this.setOverlayPositions();
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processHorizontalPositionChange(changes?.horizontalPosition);
   }
 
-  public onOverlayOutsideClick(event: MouseEvent): void {
-    this.dropdownOverlayOrigin$
-      .pipe(
-        take(1),
-        filter(({ elementRef }: CdkOverlayOrigin) => !elementRef.nativeElement.contains(event.target))
-      )
-      .subscribe(() => this.dropdownService.setOpened(false));
+  public ngAfterViewInit(): void {
+    this.contentTemplateState$.next(this.dropdownMenuContentTemplate);
   }
 
-  private getConnectionPositionPair(
-    overlayX: HorizontalConnectionPos,
-    overlayY: VerticalConnectionPos
-  ): ConnectionPositionPair {
-    return new ConnectionPositionPair({ originX: overlayX, originY: 'bottom' }, { overlayX, overlayY });
-  }
+  private processHorizontalPositionChange(change: ComponentChange<this, HorizontalConnectionPos>): void {
+    const newValue: HorizontalConnectionPos | undefined = change?.currentValue;
 
-  private setOverlayPositions(): void {
-    const sortedHorizontalPosList: HorizontalConnectionPos[] = HORIZONTAL_POS_LIST.sort(
-      (item: HorizontalConnectionPos) => (item === this.horizontalPosition ? -1 : 1)
-    );
-    this.overlayPositions = [
-      ...sortedHorizontalPosList.map((item: HorizontalConnectionPos) => this.getConnectionPositionPair(item, 'top')),
-      ...sortedHorizontalPosList.map((item: HorizontalConnectionPos) => this.getConnectionPositionPair(item, 'bottom'))
-    ];
+    if (isNil(newValue)) {
+      return;
+    }
+
+    this.horizontalPositionState$.next(newValue);
   }
 }
