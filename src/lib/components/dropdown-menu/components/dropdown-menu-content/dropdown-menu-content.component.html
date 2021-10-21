@@ -1,22 +1,7 @@
-<div class="dropdown-content">
-  <ng-template
-    cdkConnectedOverlay
-    [cdkConnectedOverlayOrigin]="dropdownOverlayOrigin$ | async"
-    [cdkConnectedOverlayOpen]="isOpened$ | async"
-    [cdkConnectedOverlayPositions]="overlayPositions"
-    [cdkConnectedOverlayFlexibleDimensions]="true"
-    (overlayOutsideClick)="onOverlayOutsideClick($event)"
-  >
-    <pupa-scrollable
-      class="dropdown-content__menu"
-      [class]="themeClass$ | async"
-      [@dropdownShow]="animationState$ | async"
-      tabindex="-1"
-      pupaAutofocus
-    >
-      <div class="dropdown-content__scrollable-content">
-        <ng-content></ng-content>
-      </div>
-    </pupa-scrollable>
-  </ng-template>
-</div>
+<ng-template #contentTemplate>
+  <pupa-scrollable class="dropdown-content__menu" tabindex="-1" pupaAutofocus [class]="themeClass$ | async">
+    <div class="dropdown-content__scrollable-content">
+      <ng-content></ng-content>
+    </div>
+  </pupa-scrollable>
+</ng-template>

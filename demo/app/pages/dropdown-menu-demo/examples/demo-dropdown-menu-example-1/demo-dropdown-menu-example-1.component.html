@@ -1,0 +1,35 @@
+<div class="example-container">
+  <div
+    [class.is-open]="dropdown.isOpen$ | async"
+    [pupaDropdownMenu]="dropdownContent1"
+    [dropdownMenuDisabled]="false"
+    #dropdown="pupaDropdownMenu"
+  >
+    <span>open dropdown with start horizontal position</span>
+  </div>
+
+  <pupa-dropdown-menu-content #dropdownContent1 horizontalPosition="start">
+    <pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
+      Default item
+    </pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-item [active]="true">
+      <pupa-dropdown-menu-item-icon name="add"></pupa-dropdown-menu-item-icon>
+      Active item
+    </pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-item [plain]="true">
+      <pupa-dropdown-menu-item-icon name="md-lock"></pupa-dropdown-menu-item-icon>
+      Plain item
+    </pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-item [disabled]="true">
+      <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+      Disabled item
+    </pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+    <pupa-dropdown-menu-item>
+      <div class="text">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+      </div>
+    </pupa-dropdown-menu-item>
+  </pupa-dropdown-menu-content>
+</div>

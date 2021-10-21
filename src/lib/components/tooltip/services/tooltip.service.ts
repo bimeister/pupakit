@@ -68,7 +68,7 @@ export class TooltipService implements OnDestroy {
   );
 
   constructor(private readonly overlay: Overlay) {
-    this.processMouseOverTooltipChanges();
+    this.subscription.add(this.processMouseOverTooltipChanges());
   }
 
   public ngOnDestroy(): void {

@@ -13,7 +13,9 @@ import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
-import { DropdownService } from '../../services/dropdown.service';
+import { DropdownMenuService } from '../../services/dropdown-menu.service';
+import { DropdownContextService } from '../../services/dropdown-context.service';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 
 @Component({
   selector: 'pupa-dropdown-menu-item',
@@ -41,7 +43,12 @@ export class DropdownMenuItemComponent implements OnChanges {
     map((isAlive: boolean) => (isAlive ? '0' : null))
   );
 
-  constructor(private readonly dropdownService: DropdownService) {}
+  private readonly contextId: Uuid = this.dropdownContextService.contextId;
+
+  constructor(
+    private readonly dropdownContextService: DropdownContextService,
+    private readonly dropdownMenuService: DropdownMenuService
+  ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processActiveChange(changes?.active);
@@ -52,7 +59,7 @@ export class DropdownMenuItemComponent implements OnChanges {
   @HostListener('click')
   public clicked(): void {
     this.isAlive$.pipe(take(1), filterTruthy()).subscribe(() => {
-      this.dropdownService.setOpened(false);
+      this.dropdownMenuService.setDropdownIsOpen(this.contextId, false);
       this.select.emit();
     });
   }
@@ -65,7 +72,7 @@ export class DropdownMenuItemComponent implements OnChanges {
         filter((isAlive: boolean) => isAlive && event.key === 'Enter')
       )
       .subscribe(() => {
-        this.dropdownService.setOpened(false);
+        this.dropdownMenuService.setDropdownIsOpen(this.contextId, false);
         this.select.emit();
       });
   }
