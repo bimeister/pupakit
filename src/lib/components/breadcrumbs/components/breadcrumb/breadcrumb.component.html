@@ -1,0 +1,49 @@
+<ng-container *ngIf="breadcrumb">
+  <ng-container [ngSwitch]="active">
+    <ng-container *ngSwitchCase="true">
+      <ng-container
+        [ngTemplateOutlet]="blockTemplate"
+        [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
+      ></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <ng-container
+        [ngTemplateOutlet]="linkTemplate"
+        [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
+      ></ng-container>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #linkTemplate let-breadcrumb>
+  <a
+    class="breadcrumb"
+    #breadcrumb
+    [tabindex]="0"
+    [id]="breadcrumb.id"
+    [routerLink]="breadcrumb.routerLink"
+    [pupaTooltip]
+    [tooltipContentTemplate]="breadcrumbTemplate"
+    (focus)="handleFocusEvent()"
+    (blur)="handleBlurEvent()"
+    (keydown.enter)="onKeyDown($event)"
+  >
+    <ng-container [ngTemplateOutlet]="breadcrumbTemplate"></ng-container>
+  </a>
+</ng-template>
+
+<ng-template #blockTemplate let-breadcrumb>
+  <div
+    class="breadcrumb breadcrumb_active"
+    [tabindex]="0"
+    [id]="breadcrumb.id"
+    [pupaTooltip]
+    [tooltipContentTemplate]="breadcrumbTemplate"
+  >
+    <ng-container [ngTemplateOutlet]="breadcrumbTemplate"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #breadcrumbTemplate>
+  <ng-container [ngTemplateOutlet]="template" [ngTemplateOutletContext]="{ $implicit: breadcrumb }"></ng-container>
+</ng-template>

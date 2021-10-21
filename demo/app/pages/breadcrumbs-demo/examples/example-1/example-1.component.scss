@@ -1,0 +1,7 @@
+@import 'mixins';
+
+.container {
+  display: flex;
+  border: 2px dashed color(base-white-n250);
+  padding: 2rem;
+}

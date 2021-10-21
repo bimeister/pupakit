@@ -1,0 +1,35 @@
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+
+  width: inherit;
+  height: 9rem;
+
+  &__breadcrumb-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  &_hidden {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &_visible-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}

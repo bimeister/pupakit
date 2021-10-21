@@ -1,6 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
 import config from '../../../assets/configs/adaptive-config.json';
@@ -18,7 +18,68 @@ export class ClientUiStateHandlerService implements OnDestroy {
   public readonly breakpoint$: Observable<string> = this.uiState$.pipe(
     filterNotNil(),
     map((uiState: UiState) => uiState.breakpoint),
-    distinctUntilChanged()
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsXs$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'xs'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsSm$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'sm'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsMd$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'md'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsLg$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'lg'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsXl$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'xl'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsXxl$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => breakpoint === 'xxl'),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsLessThanMd$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => ['xs', 'sm'].includes(breakpoint)),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsLessThanLg$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => ['xs', 'sm', 'md'].includes(breakpoint)),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsLessThanXl$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => ['xs', 'sm', 'md', 'lg'].includes(breakpoint)),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly breakpointIsLessThanXxl$: Observable<boolean> = this.breakpoint$.pipe(
+    map((breakpoint: string) => ['xs', 'sm', 'md', 'lg', 'xl'].includes(breakpoint)),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
   );
 
   private readonly subscription: Subscription = new Subscription();

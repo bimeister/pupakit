@@ -1,0 +1,8 @@
+<div class="container">
+  <pupa-breadcrumbs [breadcrumbs]="breadcrumbs">
+    <div class="breadcrumb" *pupaBreadcrumbTemplate="let breadcrumb">
+      <pupa-spinner class="breadcrumb__spinner" [size]="'16px'"></pupa-spinner>
+      <span class="breadcrumb__name">{{ breadcrumb.name }}</span>
+    </div>
+  </pupa-breadcrumbs>
+</div>

@@ -1,0 +1,11 @@
+<div
+  class="trigger"
+  [tabindex]="0"
+  [class.trigger_active]="active"
+  #trigger
+  (focus)="handleFocusEvent()"
+  (blur)="handleBlurEvent()"
+  (keydown.enter)="onKeyDown($event)"
+>
+  ...
+</div>

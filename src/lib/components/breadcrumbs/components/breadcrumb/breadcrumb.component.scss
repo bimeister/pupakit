@@ -1,0 +1,77 @@
+@import 'mixins';
+@import 'themes/functions';
+@import 'functions';
+
+$adaptive-property: 'max-width';
+
+.breadcrumb {
+  @include font-type-caption();
+  @include font-size-medium();
+
+  padding: 1.5rem 2rem;
+
+  display: block;
+  box-sizing: border-box;
+  border: 0.5rem solid transparent;
+  border-radius: 1px;
+
+  text-decoration: none;
+  color: color(base-white-n100);
+  cursor: pointer;
+  @include ellipsis-text-overflow;
+
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  &:not(.breadcrumb_active) {
+    @include hover() {
+      background-color: color(base-white-n400);
+      color: color(base-n600);
+    }
+  }
+
+  &_active,
+  &:active {
+    color: color(base-n600);
+    cursor: default;
+  }
+
+  &:focus-visible {
+    border-color: color(primary-n400);
+    outline: none;
+  }
+
+  @include xs() {
+    @include font-size-small();
+  }
+
+  @include width-between-property(
+    $property: $adaptive-property,
+    $width-start: $lgBreakPoint,
+    $value-start: 160,
+    $width-end: $lgBreakPoint,
+    $value-end: 220,
+    $is-save-width-before: true,
+    $is-save-width-after: true
+  );
+}
+
+// dark styles
+.breadcrumb {
+  @include host-selector-dark-theme() {
+    color: color(base-dark-n100);
+
+    &:not(.breadcrumb_active) {
+      @include hover() {
+        background-color: color(base-dark-n400);
+        color: color(base-n0);
+      }
+    }
+
+    &_active,
+    &:active {
+      color: color(base-n0);
+      cursor: default;
+    }
+  }
+}
