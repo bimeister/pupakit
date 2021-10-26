@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { DOCUMENT } from '@angular/common';
 
 enum IconNames {
   DARK = 'ios-moon',
@@ -14,6 +15,9 @@ enum AnimationStates {
   START = 'start',
   END = 'end'
 }
+
+const COLOR_BASE_WHITE_N100: string = '#3d5159';
+const COLOR_BASE_DARK_N500: string = '#0f2a36';
 
 @Component({
   selector: 'demo-theme-toggle',
@@ -57,7 +61,13 @@ export class ThemeToggleComponent {
     map((isDarkMode: boolean) => (isDarkMode ? AnimationStates.END : AnimationStates.START))
   );
 
-  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
+  constructor(
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly themeWrapperService: ThemeWrapperService,
+    private readonly renderer: Renderer2
+  ) {
+    this.setInitialBrowserToolbarTheme();
+  }
 
   public toggleDarkMode(): void {
     this.isDarkMode$
@@ -66,7 +76,27 @@ export class ThemeToggleComponent {
         map((isDarkMode: boolean) => (isDarkMode ? Theme.Light : Theme.Dark))
       )
       .subscribe((theme: Theme) => {
+        this.setBrowserToolbarTheme(theme);
         this.themeWrapperService.setTheme(theme);
       });
+  }
+
+  private setInitialBrowserToolbarTheme(): void {
+    this.themeWrapperService.theme$.pipe(take(1)).subscribe((theme: Theme) => this.setBrowserToolbarTheme(theme));
+  }
+
+  private setBrowserToolbarTheme(theme: Theme): void {
+    const themeColor: HTMLMetaElement = this.document.head.querySelector('meta[name=theme-color]');
+
+    switch (theme) {
+      case Theme.Light:
+        this.renderer.setAttribute(themeColor, 'content', COLOR_BASE_WHITE_N100);
+        return;
+      case Theme.Dark:
+        this.renderer.setAttribute(themeColor, 'content', COLOR_BASE_DARK_N500);
+        return;
+      default:
+        return;
+    }
   }
 }
