@@ -80,8 +80,14 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   @ViewChild('cdkVirtualScrollViewport', { static: true })
   public cdkVirtualScrollViewportRef: Nullable<CdkVirtualScrollViewport>;
 
-  @ViewChild('headerScollableRowsContainer', { static: true })
+  @ViewChild('headerScrollableContainer', { static: true })
   public headerScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
+
+  @ViewChild('headerScrollableRowContainer', { read: ElementRef })
+  public headerScollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
+
+  @ViewChild('decorScrollableRowContainer', { read: ElementRef })
+  public decorScollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @Input() public controller: TableController<T>;
   private readonly controller$: BehaviorSubject<Nullable<TableController<T>>> = new BehaviorSubject<TableController<T>>(
@@ -254,6 +260,13 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
       eventBus.dispatch(new TableEvents.CellClick(columnId, rowId));
     });
+  }
+
+  public processBodyScrollLeftChanges(scrollLeft: number): void {
+    const scrollableHeaderCells: HTMLElement = this.headerScollableRowContainerRef?.nativeElement;
+    const scrollableDecorCells: HTMLElement = this.decorScollableRowContainerRef?.nativeElement;
+    this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
+    this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
   }
 
   private processTableControllerChanges(change: ComponentChange<this, TableController<T>>): void {
