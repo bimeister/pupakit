@@ -22,7 +22,7 @@ import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-e
 import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
-import { switchMap, throttleTime } from 'rxjs/operators';
+import { filter, switchMap, tap, throttleTime } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
@@ -45,11 +45,11 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
 
-  @Output() public scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
-  @Output() public scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
+  @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
 
-  @Output() public verticalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Output() public horizontalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public readonly verticalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public readonly horizontalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('content', { static: true }) public contentRef: ElementRef<HTMLElement>;
   @ContentChild(ScrollableContentDirective, { static: true, read: ElementRef })
@@ -71,6 +71,7 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private contentElement: HTMLElement;
+  private ignoreNextContentScrollEvent: boolean = false;
 
   constructor(
     private readonly ngZone: NgZone,
@@ -100,6 +101,7 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   }
 
   public setScrollLeft(scrollLeft: number): void {
+    this.ignoreNextContentScrollEvent = true;
     this.setContentScrollLeft(scrollLeft);
   }
 
@@ -107,11 +109,18 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     const contentElement: HTMLElement = this.contentElement;
 
     return fromEvent(contentElement, 'scroll')
-      .pipe(subscribeOutsideAngular(this.ngZone))
-      .subscribe(() => {
-        this.verticalScrollbar.setContentScrollOffset(contentElement.scrollTop);
-        this.horizontalScrollbar.setContentScrollOffset(contentElement.scrollLeft);
+      .pipe(
+        subscribeOutsideAngular(this.ngZone),
+        tap(() => {
+          this.scrollTopChanged.emit(contentElement.scrollTop);
+          this.scrollLeftChanged.emit(contentElement.scrollLeft);
 
+          this.verticalScrollbar.setContentScrollOffset(contentElement.scrollTop);
+          this.horizontalScrollbar.setContentScrollOffset(contentElement.scrollLeft);
+        }),
+        filter(() => !this.ignoreNextContentScrollEvent)
+      )
+      .subscribe(() => {
         for (const scrollable of this.syncWith) {
           scrollable.setScrollTop(contentElement.scrollTop);
           scrollable.setScrollLeft(contentElement.scrollLeft);
