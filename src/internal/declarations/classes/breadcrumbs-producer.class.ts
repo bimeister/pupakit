@@ -6,6 +6,15 @@ import { BreadcrumbsParts } from '../interfaces/breadcrumbs-parts.interface';
 const UNFIT_BREADCRUMB_DESKTOP_FIRST_INDEX: number = 1;
 const UNFIT_BREADCRUMB_MOBILE_FIRST_INDEX: number = 0;
 
+interface WidthWithIndex {
+  widthPx: number;
+  index: number;
+}
+interface AccumulatedValue {
+  freeSpaceWidthPx: number;
+  fitBreadcrumbsIndexes: number[];
+}
+
 export class BreadcrumbsProducer {
   private readonly breadcrumbs: Breadcrumb[];
   private readonly breadcrumbsContainerWidthPx: number;
@@ -44,14 +53,18 @@ export class BreadcrumbsProducer {
       ? UNFIT_BREADCRUMB_MOBILE_FIRST_INDEX
       : UNFIT_BREADCRUMB_DESKTOP_FIRST_INDEX;
 
-    const parsedUnfitBreadcrumbFirstIndex: number = Math.min(unfitBreadcrumbFirstIndex, this.breadcrumbs.length - 1);
+    const lastBreadcrumbIndex: number = this.breadcrumbs.length - 1;
+    const parsedUnfitBreadcrumbFirstIndex: number = Math.min(unfitBreadcrumbFirstIndex, lastBreadcrumbIndex);
+
     const fitBreadcrumbsIndexes: number[] = BreadcrumbsProducer.getFitBreadcrumbIndexes(
       freeSpaceWidthInitial,
       this.breadcrumbWidthList,
       parsedUnfitBreadcrumbFirstIndex
     );
 
-    const unfitBreadcrumbs: Breadcrumb[] = this.breadcrumbs.slice(unfitBreadcrumbFirstIndex, fitBreadcrumbsIndexes[0]);
+    const firstFitBreadcrumbIndex: number = fitBreadcrumbsIndexes[0];
+    const unfitBreadcrumbs: Breadcrumb[] = this.breadcrumbs.slice(unfitBreadcrumbFirstIndex, firstFitBreadcrumbIndex);
+
     const fitBreadcrumbs: Breadcrumb[] = fitBreadcrumbsIndexes.map(
       (capacityIndex: number) => this.breadcrumbs[capacityIndex]
     );
@@ -64,24 +77,36 @@ export class BreadcrumbsProducer {
   }
 
   private static getFitBreadcrumbIndexes(
-    freeSpace: number,
+    freeSpacePx: number,
     breadcrumbWidthList: number[],
     unfitBreadcrumbFirstIndex: number = 0
   ): number[] {
-    let freeSpaceWidth: number = freeSpace;
-    const fitBreadcrumbsIndexes: number[] = [];
+    const initialReduceData: AccumulatedValue = {
+      freeSpaceWidthPx: freeSpacePx,
+      fitBreadcrumbsIndexes: []
+    };
 
-    for (let i: number = breadcrumbWidthList.length - 1; i >= unfitBreadcrumbFirstIndex; --i) {
-      const breadcrumbWidth: number = breadcrumbWidthList[i];
+    const result: AccumulatedValue = breadcrumbWidthList
+      .map((widthPx: number, index: number) => ({
+        widthPx,
+        index
+      }))
+      .filter(({ index }: WidthWithIndex) => index >= unfitBreadcrumbFirstIndex)
+      .reduceRight((accumulatedValue: AccumulatedValue, currentWidthWithIndex: WidthWithIndex) => {
+        const { freeSpaceWidthPx, fitBreadcrumbsIndexes }: AccumulatedValue = accumulatedValue;
+        const { widthPx, index }: WidthWithIndex = currentWidthWithIndex;
 
-      if (freeSpaceWidth - breadcrumbWidth < 0) {
-        break;
-      }
+        const remainingFreeSpacePx: number = freeSpaceWidthPx - widthPx;
+        if (remainingFreeSpacePx < 0) {
+          return accumulatedValue;
+        }
 
-      freeSpaceWidth -= breadcrumbWidth;
-      fitBreadcrumbsIndexes.push(i);
-    }
+        return {
+          freeSpaceWidthPx: remainingFreeSpacePx,
+          fitBreadcrumbsIndexes: [...fitBreadcrumbsIndexes, index]
+        };
+      }, initialReduceData);
 
-    return fitBreadcrumbsIndexes.reverse();
+    return result.fitBreadcrumbsIndexes.reverse();
   }
 }
