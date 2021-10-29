@@ -1,8 +1,13 @@
 <h1>Colors</h1>
 
-<div class="content">
-  <ng-container *ngFor="let color of colors">
-    <div class="color" [ngStyle]="getBackground(color)" [class.inverted]="isColorLight(color)">
+<div class="colors-demo__list">
+  <ng-container *ngFor="let color of colorsList">
+    <div
+      class="colors-demo__item"
+      [ngStyle]="getBackground(color)"
+      [class.colors-demo__item_inverted]="isColorLight(color)"
+      (click)="copyToClipboard(color)"
+    >
       {{ color }}
     </div>
   </ng-container>
