@@ -1,4 +1,9 @@
+import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { shareReplayWithRefCount } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Alert, AlertsService, ClientUiStateHandlerService } from '../../../../src/public-api';
 
 @Component({
   selector: 'demo-colors-demo',
@@ -8,7 +13,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ColorsDemoComponent {
-  public readonly colors: string[] = [
+  public readonly colorsList: string[] = [
     'base-n0',
     'base-n600',
     'base-dark-n100',
@@ -51,6 +56,16 @@ export class ColorsDemoComponent {
     'yellow-n500',
     'yellow-n550'
   ];
+  public readonly breakpointIsXsOrSm$: Observable<boolean> = this.clientUiHandlerService.breakpoint$.pipe(
+    map((breakpoint: string) => ['xs', 'sm'].includes(breakpoint)),
+    shareReplayWithRefCount()
+  );
+
+  constructor(
+    private readonly cdkClipboard: Clipboard,
+    private readonly alertsService: AlertsService,
+    private readonly clientUiHandlerService: ClientUiStateHandlerService
+  ) {}
 
   public isColorLight(color: string): boolean {
     const bodyStyles: CSSStyleDeclaration = window.getComputedStyle(document.body);
@@ -65,5 +80,20 @@ export class ColorsDemoComponent {
     return {
       background: `var(--color_${color})`
     };
+  }
+
+  public copyToClipboard(color: string): void {
+    this.cdkClipboard.copy(color);
+    this.addSuccessAlert('Скопировано в буфер обмена');
+  }
+
+  private addSuccessAlert(text: string): void {
+    const alert: Alert = {
+      id: null,
+      text,
+      type: 'success',
+      needToBeClosed: false
+    };
+    this.alertsService.create(alert).subscribe();
   }
 }

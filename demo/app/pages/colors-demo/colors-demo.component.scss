@@ -4,24 +4,30 @@
   display: block;
 }
 
-.content {
-  margin-top: 16px;
-  display: grid;
-  grid-gap: 16px;
-  grid-template-columns: repeat(4, 1fr);
-}
-
-.color {
-  padding: 21px 16px 16px 16px;
-  border-radius: 8px;
-
-  font-weight: 800;
-  font-size: 21px;
-  line-height: 25px;
-
-  color: white;
-}
-
-.inverted {
-  color: #353540;
+.colors-demo {
+  &__list {
+    box-sizing: border-box;
+    padding-top: 4rem;
+    gap: 4rem;
+    @include flex-container(row);
+    flex-wrap: wrap;
+  }
+  &__item {
+    box-sizing: border-box;
+    padding: 4rem;
+    border-radius: 2rem;
+    color: color(base-n0);
+    cursor: pointer;
+    box-shadow: 0 0 2rem 1px rgba(color(base-n600-rgb), 0.1);
+    @include grid-size($xs: 4, $sm: 4, $md: 4, $lg: 4, $xlg: 4, $xl: 2, $xxl: 2);
+    @include flex-container(row, center);
+    @include font-type-point;
+    @include font-size-large;
+    &_inverted {
+      color: color(base-n600);
+    }
+  }
+  &__item:hover {
+    transform: scale(1.05);
+  }
 }
