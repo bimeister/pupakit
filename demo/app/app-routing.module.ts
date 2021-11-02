@@ -60,6 +60,7 @@ import { MainPageModule } from './pages/main-page/main-page.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
+import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -105,6 +106,11 @@ const demoRoutes: Routes = [
         path: 'button',
         loadChildren: (): Promise<Type<ButtonDemoModule>> =>
           import('./pages/button-demo/button-demo.module').then(module => module.ButtonDemoModule)
+      },
+      {
+        path: 'button-multi',
+        loadChildren: (): Promise<Type<ButtonMultiDemoModule>> =>
+          import('./pages/button-multi-demo/button-multi-demo.module').then(module => module.ButtonMultiDemoModule)
       },
       {
         path: 'chip',
