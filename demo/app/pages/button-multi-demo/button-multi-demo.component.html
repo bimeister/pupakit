@@ -12,9 +12,15 @@
       [loading]="loading | async"
       [active]="active$ | async"
       [expandActive]="expandActive$ | async"
+      [dropdownMenuContent]="dropdownContent"
     >
       Button Name
     </pupa-button-multi>
+    <pupa-dropdown-menu-content #dropdownContent>
+      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+    </pupa-dropdown-menu-content>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
