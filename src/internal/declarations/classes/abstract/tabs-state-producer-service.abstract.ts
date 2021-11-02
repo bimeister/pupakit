@@ -3,6 +3,9 @@ import { distinctUntilSerializedChanged, filterFalsy, filterTruthy } from '@bime
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { filter, map, skipUntil, take, withLatestFrom } from 'rxjs/operators';
 
+/**
+ * @deprecated
+ */
 @Injectable()
 export abstract class TabsStateProducerService implements OnDestroy {
   protected readonly subscription: Subscription = new Subscription();

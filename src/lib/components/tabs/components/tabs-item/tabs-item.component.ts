@@ -1,17 +1,16 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  OnDestroy,
-  ViewChild,
+  Inject,
+  Input,
+  Optional,
   ViewEncapsulation
 } from '@angular/core';
-import { filterNotNil, filterTruthy } from '@bimeister/utilities';
-import { Subscription } from 'rxjs';
-import { take, withLatestFrom } from 'rxjs/operators';
-import { TabsContainerItem } from '../../../../../internal/declarations/classes/abstract/tabs-container-item.abstract';
+import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
+import { Nullable } from '@bimeister/utilities';
 import { TabsStateService } from '../../services/tabs-state.service';
+import { TABS_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/tabs-container-state-service.token';
 
 @Component({
   selector: 'pupa-tabs-item',
@@ -20,34 +19,21 @@ import { TabsStateService } from '../../services/tabs-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated
 })
-export class TabsItemComponent extends TabsContainerItem implements AfterViewInit, OnDestroy {
-  @ViewChild('tabItem', { static: false }) public tabItemRef: ElementRef<HTMLElement>;
+export class TabsItemComponent extends TabsItemBase<TabsStateService> {
+  @Input() public name: string = '';
+  @Input() public isActive: Nullable<boolean>;
+  @Input() public disabled: Nullable<boolean>;
 
-  private readonly subscription: Subscription = new Subscription();
-  constructor(protected readonly tabsStateService: TabsStateService) {
-    super(tabsStateService);
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    stateService: TabsStateService,
+    @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService
+  ) {
+    super(stateService, fromContainerStateService);
   }
 
-  public ngAfterViewInit(): void {
-    this.setTabItemClientRectInMap();
-    this.subscription.add(this.processActiveValueChanges());
-  }
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  private setTabItemClientRectInMap(): void {
-    this.value$.pipe(take(1)).subscribe((value: unknown) => {
-      const { width, height, top, right, bottom }: ClientRect = this.tabItemRef.nativeElement.getBoundingClientRect();
-      const offsetLeft: number = this.tabItemRef.nativeElement.offsetLeft;
-      this.tabsStateService.setTabItemClientRectInMap(value, { width, height, top, right, bottom, left: offsetLeft });
-    });
-  }
-
-  private processActiveValueChanges(): Subscription {
-    return this.isActive$
-      .pipe(filterNotNil(), filterTruthy(), withLatestFrom(this.value$))
-      .subscribe(([_, value]: [boolean, unknown]) => this.tabsStateService.changeActiveTabValueSetByValue(value));
+  public ngOnInit(): void {
+    super.ngOnInit();
+    this.stateService.registerTabHtmlElement(this.name, this.elementRef.nativeElement);
   }
 }

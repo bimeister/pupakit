@@ -105,6 +105,14 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.setContentScrollLeft(scrollLeft);
   }
 
+  public setScrollTopByDelta(deltaScrollTop: number): void {
+    this.setContentScrollTopByDelta(deltaScrollTop);
+  }
+
+  public setScrollLeftByDelta(deltaScrollLeft: number): void {
+    this.setContentScrollLeftByDelta(deltaScrollLeft);
+  }
+
   private processContentScrollEvent(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
 
@@ -252,7 +260,7 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
   private updateSizesOnAnimationFrame(): Subscription {
     return getAnimationFrameLoop()
-      .pipe(throttleTime(ANIMATION_FRAME_TROTTLE_TIME_MS))
+      .pipe(subscribeOutsideAngular(this.ngZone), throttleTime(ANIMATION_FRAME_TROTTLE_TIME_MS))
       .subscribe(() => {
         this.setScrollBarsSizes();
       });
@@ -297,9 +305,19 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.renderer.setProperty(contentElement, 'scrollTop', scrollTop);
   }
 
+  private setContentScrollTopByDelta(scrollTopDelta: number): void {
+    const contentElement: HTMLElement = this.contentElement;
+    this.renderer.setProperty(contentElement, 'scrollTop', contentElement.scrollTop + scrollTopDelta);
+  }
+
   private setContentScrollLeft(scrollLeft: number): void {
     const contentElement: HTMLElement = this.contentElement;
     this.renderer.setProperty(contentElement, 'scrollLeft', scrollLeft);
+  }
+
+  private setContentScrollLeftByDelta(scrollLeftDelta: number): void {
+    const contentElement: HTMLElement = this.contentElement;
+    this.renderer.setProperty(contentElement, 'scrollLeft', contentElement.scrollLeft + scrollLeftDelta);
   }
 
   private setBodyGrabbingCursor(): void {

@@ -1,17 +1,31 @@
 <h1>Tabs</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-tabs (selectedTabValues)="handleTabSelection($event)">
-      <pupa-tabs-item
-        *ngFor="let tab of tabs"
-        [isActive]="tabIsActive(tab.value, activeValues$ | async)"
-        [value]="tab.value"
-        class="tab"
-      >
-        <pupa-icon class="tab__icon" [name]="tab.iconName"></pupa-icon>
-        <div class="tab__name">{{ tab.name }}</div>
-      </pupa-tabs-item>
-    </pupa-tabs>
-  </demo-example-viewer-content>
-</demo-example-viewer>
+<h2>Basic usage</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-tabs-example-1 *pupaCodeContainerPreviewTemplate></demo-tabs-example-1>
+</pupa-code-container>
+
+<h2>Non destroyable tab content</h2>
+<pupa-code-container [content]="example2Content">
+  <demo-tabs-example-2 *pupaCodeContainerPreviewTemplate></demo-tabs-example-2>
+</pupa-code-container>
+
+<h2>Control by router</h2>
+<pupa-code-container [content]="example3Content">
+  <demo-tabs-example-3 *pupaCodeContainerPreviewTemplate></demo-tabs-example-3>
+</pupa-code-container>
+
+<h2>Without default tab content</h2>
+<pupa-code-container [content]="example4Content">
+  <demo-tabs-example-4 *pupaCodeContainerPreviewTemplate></demo-tabs-example-4>
+</pupa-code-container>
+
+<h2>Disabled tab</h2>
+<pupa-code-container [content]="example5Content">
+  <demo-tabs-example-5 *pupaCodeContainerPreviewTemplate></demo-tabs-example-5>
+</pupa-code-container>
+
+<h2>With separator</h2>
+<pupa-code-container [content]="example6Content">
+  <demo-tabs-example-6 *pupaCodeContainerPreviewTemplate></demo-tabs-example-6>
+</pupa-code-container>

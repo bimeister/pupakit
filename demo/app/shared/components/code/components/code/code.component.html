@@ -1,4 +1,4 @@
-<pre class="container" *ngIf="code$ | async as code">
+<div class="container" *ngIf="code$ | async as code">
   <code class="container__code" [lineNumbers]="true" [highlight]="code"></code>
   <pupa-button-icon
     class="container__copy-button"
@@ -7,4 +7,4 @@
     (click)="copyToClipBoard(code)"
   >
   </pupa-button-icon>
-</pre>
+</div>

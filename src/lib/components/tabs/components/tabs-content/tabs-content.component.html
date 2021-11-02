@@ -1,0 +1,13 @@
+<ng-container *ngIf="destroyable; else tabs" [ngTemplateOutlet]="activeTemplateRef$ | async"></ng-container>
+
+<ng-content></ng-content>
+
+<ng-template #tabs>
+  <div
+    *ngFor="let tabTemplate of nonDestroyableTemplateRefs$ | async; trackBy: tabTrackBy"
+    class="tab"
+    [class.tab_visible]="tabTemplate.isActive"
+  >
+    <ng-container [ngTemplateOutlet]="tabTemplate.templateRef"></ng-container>
+  </div>
+</ng-template>

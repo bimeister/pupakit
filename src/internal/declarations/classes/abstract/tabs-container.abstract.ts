@@ -5,6 +5,9 @@ import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { TabsStateProducerService } from './tabs-state-producer-service.abstract';
 
+/**
+ * @deprecated
+ */
 @Directive()
 export abstract class TabsContainer implements OnChanges, AfterViewInit {
   @Input() public readonly isMultiSelectionEnabled: boolean = false;
