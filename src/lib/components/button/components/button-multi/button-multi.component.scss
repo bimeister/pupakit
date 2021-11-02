@@ -228,6 +228,36 @@
     .main__loading {
       color: color(base-n600);
     }
+    
+    @include host-selector-dark-theme() {
+      .button-multi__divider {
+        background-color: color(base-dark-n300);
+      }
+      .button-multi__background {
+        background-color: color(base-dark-n500);
+      }
+      .main__content,
+      .expand,
+      .main__loading {
+        color: color(base-n0);
+      }
+      &:not([disabled]) {
+        .expand, .main {
+          @include hover() {
+            .button-multi__background {
+              background-color: color(base-dark-n400);
+            }
+          }
+        }
+        .expand, .main {
+          &:active, &_active {
+            .button-multi__background {
+              background-color: color(base-dark-n300);
+            }
+          }
+        }
+      }
+    }
   }
 
   &_danger {
@@ -331,6 +361,43 @@
     .main__loading {
       color: color(base-n600);
     }
+    @include host-selector-dark-theme() {
+      .expand__background {
+        border: 1px solid color(base-dark-n400);
+        border-left: none;
+      }
+      .main__background {
+        border: 1px solid color(base-dark-n400);
+        border-right: none;
+      }
+      .button-multi__divider {
+        background-color: color(base-dark-n300);
+      }
+      .button-multi__background {
+        background-color: transparent;
+      }
+      .main__content,
+      .expand,
+      .main__loading {
+        color: color(base-n0);
+      }
+      &:not([disabled]) {
+        .expand, .main {
+          @include hover() {
+            .button-multi__background {
+              background-color: color(base-dark-n400);
+            }
+          }
+        }
+        .expand, .main {
+          &:active, &_active {
+            .button-multi__background {
+              background-color: color(base-dark-n300);
+            }
+          }
+        }
+      }
+    }
   }
 
   &_disabled {
@@ -349,19 +416,20 @@
     .main__loading {
       color: color(base-white-n250);
     }
-  }
-  @include host-selector-dark-theme() {
-    .button-multi__divider {
-      background-color: color(base-dark-n400);
-    }
-    .button-multi__background {
-      border: none;
-      background-color: color(base-dark-n500);
-    }
-    .main__content,
-    .expand,
-    .main__loading {
-      color: color(base-dark-n250);
+    
+    @include host-selector-dark-theme() {
+      .button-multi__divider {
+        background-color: color(base-dark-n400);
+      }
+      .button-multi__background {
+        border: none;
+        background-color: color(base-dark-n500);
+      }
+      .main__content,
+      .expand,
+      .main__loading {
+        color: color(base-dark-n250);
+      }
     }
   }
 }
