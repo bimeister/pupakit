@@ -2,10 +2,8 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
-import { distinctUntilChanged, map, switchMapTo, take, takeUntil } from 'rxjs/operators';
 import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../constants/tokens/modal-container-data.token';
-import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ModalContainerData } from '../interfaces/modal-container-data.interface';
 import { PortalLayer } from '../interfaces/portal-layer.interface';
@@ -19,8 +17,7 @@ export class Modal<ComponentT> implements PortalLayer {
   private readonly overlayRef: OverlayRef = this.overlay.create({
     hasBackdrop: true,
     backdropClass: this.getBackdropClass(),
-    height: this.config.height,
-    width: this.config.width
+    positionStrategy: this.getPositionStrategy()
   });
 
   private readonly modalRef: ModalRef = new ModalRef(this.id, this.overlayRef, this.config);
@@ -31,11 +28,9 @@ export class Modal<ComponentT> implements PortalLayer {
     private readonly config: ModalConfig,
     private readonly overlay: Overlay,
     private readonly injector: Injector,
-    private readonly rendererFactory: RendererFactory2,
-    private readonly clientUiStateHandlerService: ClientUiStateHandlerService
+    private readonly rendererFactory: RendererFactory2
   ) {
     this.handleBackdropClick();
-    this.handleBreakpointSizing();
   }
 
   public getCurrentZIndex(): number {
@@ -134,26 +129,6 @@ export class Modal<ComponentT> implements PortalLayer {
       return;
     }
     this.overlayRef.backdropClick().subscribe(() => this.modalRef.close());
-  }
-
-  private handleBreakpointSizing(): void {
-    this.modalRef.opened$
-      .pipe(
-        take(1),
-        switchMapTo(this.clientUiStateHandlerService.breakpoint$),
-        map((breakpoint: string) => breakpoint === 'xs'),
-        distinctUntilChanged(),
-        takeUntil(this.modalRef.closed$)
-      )
-      .subscribe((isMobileBreakpoint: boolean) => {
-        if (isMobileBreakpoint) {
-          this.overlayRef.updateSize({ height: 'calc(100% - 80px)', width: '100%' });
-          this.overlayRef.updatePositionStrategy(this.overlay.position().global().top('80px'));
-          return;
-        }
-        this.overlayRef.updateSize({ height: this.config.height, width: this.config.width });
-        this.overlayRef.updatePositionStrategy(this.getPositionStrategy());
-      });
   }
 
   private getBackdropClass(): string {

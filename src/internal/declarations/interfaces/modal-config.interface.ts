@@ -14,6 +14,4 @@ export interface ModalConfig {
   viewportMarginPx: number;
   injector: Injector;
   providers: StaticProvider[];
-  width: number | string;
-  height: number | string;
 }
