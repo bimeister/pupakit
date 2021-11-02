@@ -7,7 +7,6 @@ import { Modal } from '../../declarations/classes/modal.class';
 import { ModalConfig } from '../../declarations/interfaces/modal-config.interface';
 import { OpenedModal } from '../../declarations/interfaces/opened-modal.interface';
 import { Position } from '../../declarations/types/position.type';
-import { ClientUiStateHandlerService } from './client-ui-state-handler.service';
 import { PortalLayersService } from './portal-layers.service';
 
 @Injectable({
@@ -24,8 +23,7 @@ export class ModalsService {
     protected readonly overlay: Overlay,
     protected readonly injector: Injector,
     private readonly rendererFactory: RendererFactory2,
-    private readonly portalLayersService: PortalLayersService,
-    private readonly clientUiStateHandlerService: ClientUiStateHandlerService
+    private readonly portalLayersService: PortalLayersService
   ) {}
 
   public open<ComponentT, ReturnDataT>(
@@ -34,14 +32,7 @@ export class ModalsService {
   ): OpenedModal<ReturnDataT> {
     const configDto: ModalConfigDto = new ModalConfigDto(config);
 
-    const modal: Modal<ComponentT> = new Modal(
-      component,
-      configDto,
-      this.overlay,
-      this.injector,
-      this.rendererFactory,
-      this.clientUiStateHandlerService
-    );
+    const modal: Modal<ComponentT> = new Modal(component, configDto, this.overlay, this.injector, this.rendererFactory);
     this.portalLayersService.register(modal);
     this.portalLayersService.moveToTopById(modal.id);
 

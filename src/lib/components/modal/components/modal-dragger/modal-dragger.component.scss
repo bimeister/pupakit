@@ -1,5 +1,12 @@
+@import 'mixins';
+
 :host {
   display: block;
   cursor: move;
   user-select: none;
+  z-index: 10000;
+
+  @include xs() {
+    display: none;
+  }
 }

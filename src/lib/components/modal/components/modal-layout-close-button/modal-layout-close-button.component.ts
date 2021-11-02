@@ -1,4 +1,5 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Inject, HostListener } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, Input, ViewEncapsulation } from '@angular/core';
+import { Nullable } from '@bimeister/utilities';
 import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref.class';
 
 @Component({
@@ -9,15 +10,12 @@ import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ModalLayoutCloseButtonComponent<ValueT> {
-  @Input() public value: ValueT | 'none' = 'none';
+  @Input() public value: Nullable<ValueT>;
 
   constructor(@Inject(ModalRef) private readonly modalRef: ModalRef<ValueT>) {}
 
   @HostListener('click')
   public processCloseBUttonClick(): void {
-    if (this.value === 'none') {
-      return;
-    }
     this.modalRef.close(this.value);
   }
 }

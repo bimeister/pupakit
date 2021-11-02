@@ -13,6 +13,6 @@ export class ModalDemoExample2HelperComponent {
   constructor(private readonly modalsService: ModalsService) {}
 
   public openModal(): void {
-    this.modalsService.open(ModalDemoExample2Component, { hasBackdrop: false, height: 400, width: 400 });
+    this.modalsService.open(ModalDemoExample2Component, { hasBackdrop: false });
   }
 }

@@ -1,12 +1,11 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Subject } from 'rxjs';
-
-import { Position } from '../types/position.type';
-import { ModalConfig } from '../interfaces/modal-config.interface';
-import { ConnectedPositionY } from '../types/connected-position-y.type';
-import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ModalContainerComponent } from '../../../public-api';
+import { Subject } from 'rxjs';
+import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
+import { ModalConfig } from '../interfaces/modal-config.interface';
+import { ConnectedPositionX } from '../types/connected-position-x.type';
+import { ConnectedPositionY } from '../types/connected-position-y.type';
+import { Position } from '../types/position.type';
 
 export class ModalRef<ReturnDataT = null> {
   public readonly closed$: Subject<ReturnDataT> = new Subject<ReturnDataT>();

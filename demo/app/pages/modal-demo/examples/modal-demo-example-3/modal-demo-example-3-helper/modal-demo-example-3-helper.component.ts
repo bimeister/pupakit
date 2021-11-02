@@ -15,9 +15,7 @@ export class ModalDemoExample3HelperComponent {
   public openModal(): void {
     this.modalsService.open(ModalDemoExample3Component, {
       isBackdropTransparent: true,
-      closeOnBackdropClick: false,
-      height: 400,
-      width: 400
+      closeOnBackdropClick: false
     });
   }
 }

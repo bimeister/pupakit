@@ -13,9 +13,6 @@ export class ModalDemoExample4HelperComponent {
   constructor(private readonly modalsService: ModalsService) {}
 
   public openModal(): void {
-    this.modalsService.open(ModalDemoExample4Component, {
-      height: 400,
-      width: 400
-    });
+    this.modalsService.open(ModalDemoExample4Component);
   }
 }
