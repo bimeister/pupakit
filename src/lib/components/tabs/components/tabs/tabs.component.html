@@ -1,14 +1,21 @@
-<div class="tabs">
-  <ng-content></ng-content>
-  <ng-container [ngTemplateOutlet]="railTemplate"></ng-container>
-</div>
-
-<ng-template #railTemplate>
-  <div class="rail">
+<pupa-scrollable
+  #scrollable
+  (scrollLeftChanged)="processScrollLeft($event)"
+  class="tabs"
+  [invisibleScrollbars]="['horizontal', 'vertical']"
+>
+  <div class="tabs__container" #tabsContainer>
+    <div class="tabs__items">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</pupa-scrollable>
+<div class="tabs__rail-container">
+  <div class="tabs__rail tabs-rail" [style.transform]="railOffsetLeftTransform$ | async">
     <div
-      class="rail__highlighter"
-      [style.width.px]="activeTabWidthPx$ | async"
-      [style.transform]="activeTabTranslateX$ | async"
+      [style.width.px]="railHighlighterWidthPx$ | async"
+      [style.transform]="railHighlighterOffsetLeftTransform$ | async"
+      class="tabs-rail__highlighter"
     ></div>
   </div>
-</ng-template>
+</div>

@@ -17,7 +17,15 @@ export class TableColumnsIntersectionService implements OnDestroy {
       const rightCountIds: string[] = [];
 
       for (const [columnId, entry] of columnIdToIntersectionEntryMap.entries()) {
+        if (isNil(entry)) {
+          continue;
+        }
+
         if (entry.isIntersecting) {
+          continue;
+        }
+
+        if (isNil(entry.rootBounds) || isNil(entry.boundingClientRect.x)) {
           continue;
         }
 

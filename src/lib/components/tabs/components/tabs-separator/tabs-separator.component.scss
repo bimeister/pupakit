@@ -1,0 +1,12 @@
+@import 'themes/functions';
+@import 'mixins';
+
+.separator {
+  width: 100%;
+  height: 1px;
+
+  background-color: color(base-white-n400);
+  @include host-selector-dark-theme {
+    background-color: color(base-dark-n400);
+  }
+}

@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Tab } from '../../../../src/internal/declarations/interfaces/tab.interface';
 
-type TabWithIcon = Tab & { iconName: string };
+const BASE_REQUEST_PATH: string = 'tabs-demo/examples';
 
 @Component({
   selector: 'demo-tabs-demo',
@@ -11,54 +9,34 @@ type TabWithIcon = Tab & { iconName: string };
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TabsDemoComponent {
-  public readonly tabs: TabWithIcon[] = [
-    {
-      value: 'adldap',
-      isActive: false,
-      name: 'AD/LDAP',
-      iconName: 'ios-albums'
-    },
-    {
-      value: 'roles',
-      isActive: false,
-      name: 'Роли',
-      iconName: 'ios-hammer'
-    },
-    {
-      value: 'users',
-      isActive: true,
-      name: 'Пользователи',
-      iconName: 'ios-person'
-    },
-    {
-      value: 'groups',
-      isActive: false,
-      name: 'Группы',
-      iconName: 'ios-people'
-    },
-    {
-      value: 'mail',
-      isActive: false,
-      name: 'Почтовый сервер',
-      iconName: 'ios-mail'
-    },
-    {
-      value: 'logs',
-      isActive: false,
-      name: 'Журнал',
-      iconName: 'ios-journal'
-    }
-  ];
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`
+  };
 
-  public readonly activeValues$: BehaviorSubject<unknown[]> = new BehaviorSubject<unknown[]>(
-    this.tabs.filter(({ isActive }: TabWithIcon) => isActive).map(({ value }: TabWithIcon) => value)
-  );
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`
+  };
 
-  public handleTabSelection(values: unknown[]): void {
-    this.activeValues$.next(values);
-  }
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`
+  };
 
-  public tabIsActive(value: unknown, activeValues: unknown[]): boolean {
-    return activeValues.includes(value);
-  }
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`
+  };
+
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`
+  };
 }

@@ -1,0 +1,16 @@
+<pupa-tabs-container>
+  <div class="tabs">
+    <pupa-tabs>
+      <pupa-tabs-item name="tab1"> Tab 1 </pupa-tabs-item>
+
+      <pupa-tabs-item name="tab2"> Tab 2 </pupa-tabs-item>
+    </pupa-tabs>
+  </div>
+  <pupa-tabs-separator></pupa-tabs-separator>
+
+  <pupa-tabs-content>
+    <div class="tab" *pupaTabsItemContentTemplate="'tab1'">Tab 1 content</div>
+
+    <div class="tab" *pupaTabsItemContentTemplate="'tab2'">Tab 2 content</div>
+  </pupa-tabs-content>
+</pupa-tabs-container>

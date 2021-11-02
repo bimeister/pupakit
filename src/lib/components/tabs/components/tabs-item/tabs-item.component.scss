@@ -1,23 +1,53 @@
 @import 'themes/functions';
-@import 'functions.scss';
-@import 'mixins.scss';
+@import 'mixins';
+
+:host {
+  display: block;
+  margin-right: 20px;
+  outline: none;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
 
 .tabs-item {
-  height: 100%;
-  position: relative;
-  padding: 0 1rem;
+  min-width: 1rem;
+  max-width: 42rem;
+  color: color('base-white-n100');
+  box-sizing: border-box;
+  padding-bottom: 4rem;
   cursor: pointer;
-  color: color(main-dark);
   user-select: none;
-  @include flex-container(row, center, center, nowrap);
-  @include transition(color);
 
-  &_active,
-  &:hover {
-    color: color(active);
+  @include host-selector-dark-theme {
+    color: color('base-dark-n100');
   }
 
-  &_hidden {
-    display: none;
+  &:not(&_disabled) {
+    @include hover {
+      color: color('primary-n400');
+    }
   }
+
+  &_active {
+    color: color('primary-n400');
+
+    @include host-selector-dark-theme {
+      color: color('primary-n400');
+    }
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    color: color('base-white-n250');
+
+    @include host-selector-dark-theme {
+      color: color('base-dark-n250');
+    }
+  }
+
+  @include ellipsis-text-overflow;
+  @include font-type-caption;
+  @include font-size-small;
 }

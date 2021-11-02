@@ -5,25 +5,27 @@
 @import 'functions';
 
 .container {
+  border: 1px solid;
+  padding: 4rem 0;
+  box-sizing: border-box;
+  border-radius: 1px;
+
+  border-color: get-map-field($theme-config, [ 'light', 'body', border-color]);
+  @include host-selector-dark-theme() {
+    border-color: get-map-field($theme-config, [ 'dark', 'body', border-color]);
+  }
+
   background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
   @include host-selector-dark-theme() {
     background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
   }
-
-  margin: 0;
-
-  padding: 4rem;
-  border: 1px solid color(base-dark-n100);
-  border-radius: 1px;
-
-  &__preview {
-    padding: 4rem;
-  }
-
-  &__tabs {
-  }
 }
 
-.tab + .tab {
-  margin-left: 4rem;
+.tabs {
+  padding: 0 4rem;
+}
+
+.tab {
+  margin-top: 4rem;
+  padding: 0 4rem;
 }

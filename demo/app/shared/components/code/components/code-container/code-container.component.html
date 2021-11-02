@@ -1,22 +1,25 @@
-<div class="container">
-  <pupa-tabs class="container__tabs" (selectedTabValues)="handleTabSelection($event)">
-    <pupa-tabs-item
-      *ngFor="let tab of tabs$ | async"
-      [isActive]="tabIsActive(tab.value, activeValues$ | async)"
-      [value]="tab.value"
-      class="tab"
-    >
-      <div class="tab__name">{{ tab.name }}</div>
-    </pupa-tabs-item>
-  </pupa-tabs>
-
-  <ng-container *ngIf="activeCode$ | async as code; else previewTemplate">
-    <pupa-code [code]="code"></pupa-code>
-  </ng-container>
-</div>
-
-<ng-template #previewTemplate>
-  <div class="container__preview">
-    <ng-content></ng-content>
+<pupa-tabs-container class="container">
+  <div class="tabs">
+    <pupa-tabs>
+      <pupa-tabs-item *ngFor="let tab of tabs$ | async" [name]="tab.name">
+        {{ tab.name }}
+      </pupa-tabs-item>
+    </pupa-tabs>
   </div>
+
+  <pupa-tabs-separator></pupa-tabs-separator>
+
+  <pupa-tabs-content [destroyable]="false">
+    <ng-container *ngFor="let tab of tabs$ | async">
+      <div class="tab" *pupaTabsItemContentTemplate="tab.name">
+        <pupa-code *ngIf="tab.code; else example" [code]="tab.code"></pupa-code>
+      </div>
+    </ng-container>
+  </pupa-tabs-content>
+</pupa-tabs-container>
+
+<ng-content></ng-content>
+
+<ng-template #example>
+  <ng-container [ngTemplateOutlet]="previewTemplate?.templateRef"></ng-container>
 </ng-template>

@@ -6,19 +6,18 @@
   display: flex;
   flex-flow: row nowrap;
   overflow: hidden;
+  box-sizing: border-box;
 
   width: 100%;
   min-height: 400px;
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
-
   background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
-  border: 1px solid color(base-white-n400);
+  border: 1px solid get-map-field($theme-config, [ 'light', 'body', border-color]);
 
   @include host-selector-dark-theme() {
     background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
-    border: 1px solid color(base-dark-n400);
+    border: 1px solid get-map-field($theme-config, [ 'dark', 'body', border-color]);
   }
 
-  border-radius: 8px;
+  border-radius: 1px;
 }

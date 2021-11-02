@@ -9,6 +9,7 @@ import { IconModule } from '../../../../../src/lib/components/icon/icon.module';
 import { iosCopyIcon } from '../../../../../src/internal/constants/icons/ios-copy-icon.const';
 import { CodeFetchComponent } from './components/code-fetch/code-fetch.component';
 import { CodeInlineComponent } from './components/code-inline/code-inline.component';
+import { CodeContainerPreviewTemplateDirective } from './directives/code-container-preview-template.directive';
 
 const HIGHLIGHT_CONFIG: HighlightOptions = {
   fullLibraryLoader: () => import('highlight.js'),
@@ -16,7 +17,8 @@ const HIGHLIGHT_CONFIG: HighlightOptions = {
 };
 
 const COMPONENTS: Type<unknown>[] = [CodeComponent, CodeContainerComponent, CodeFetchComponent, CodeInlineComponent];
-const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
+const DIRECTIVES: Type<unknown>[] = [CodeContainerPreviewTemplateDirective];
+const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
 
 @NgModule({
   declarations: [...DECLARATIONS],

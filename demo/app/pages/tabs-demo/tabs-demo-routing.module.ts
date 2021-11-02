@@ -5,7 +5,13 @@ import { TabsDemoComponent } from './tabs-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TabsDemoComponent
+    component: TabsDemoComponent,
+    children: [
+      {
+        path: '**',
+        component: TabsDemoComponent
+      }
+    ]
   }
 ];
 

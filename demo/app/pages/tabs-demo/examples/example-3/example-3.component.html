@@ -1,0 +1,21 @@
+<pupa-tabs-container>
+  <pupa-tabs>
+    <pupa-tabs-item
+      *ngFor="let route of routes"
+      [routerLink]="route.path"
+      [queryParams]="route.queryParams"
+      routerLinkActive
+      #routerLinkActive="routerLinkActive"
+      [isActive]="routerLinkActive.isActive"
+      [name]="route.title"
+    >
+      {{ route.title }}
+    </pupa-tabs-item>
+  </pupa-tabs>
+
+  <pupa-tabs-content>
+    <ng-container *ngFor="let route of routes">
+      <div class="tab" *pupaTabsItemContentTemplate="route.title">For route {{ route.queryParams | json }}</div>
+    </ng-container>
+  </pupa-tabs-content>
+</pupa-tabs-container>
