@@ -32,6 +32,7 @@ export class SidebarContentComponent {
       { title: 'Colors', link: '/kit/colors' },
       { title: 'Icon', link: '/kit/icon' },
       { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
+      { title: 'ButtonMulti', link: '/kit/button-multi' },
       { title: 'Avatar', link: '/kit/avatar' },
       { title: 'Adaptive', link: '/kit/adaptive' },
       { title: 'Code', link: '/kit/code' },

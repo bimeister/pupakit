@@ -1,0 +1,37 @@
+<h1>ButtonMulti</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content class="content">
+    <pupa-button-multi
+      class="content__button"
+      [size]="size | async"
+      [kind]="kind | async"
+      [disabled]="disabled | async"
+      [icon]="'app-notification'"
+      [iconPosition]="iconPosition | async"
+      [loading]="loading | async"
+      [active]="active$ | async"
+      [expandActive]="expandActive$ | async"
+    >
+      Button Name
+    </pupa-button-multi>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Size</demo-props-group-label>
+    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Kind</demo-props-group-label>
+    <demo-props-radio-select #kind [options]="kindOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Icon</demo-props-group-label>
+    <demo-props-radio-select #iconPosition [options]="iconPositionOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Force state</demo-props-group-label>
+    <demo-props-radio-select #activeRadio [options]="activeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Other</demo-props-group-label>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-props-checkbox #loading>Loading</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

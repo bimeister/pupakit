@@ -1,0 +1,31 @@
+<button type="submit" class="button-multi" [attr.disabled]="(disabled$ | async) ? true : null"
+  [ngClass]="resultClassList$ | async">
+  <span class="button-multi__background" focusable="false"></span>
+  <button class="button-multi__main main" [ngClass]="mainClassList$ | async">
+    <span class="button-multi__background main__background" focusable="false"></span>
+    <div class="main__content" focusable="false" [class.main__content_hidden]="loading$ | async">
+      <ng-container *ngIf="icon$ | async">
+        <pupa-icon class="button-multi__icon button-multi__icon_left" [name]="icon$ | async"
+          *ngIf="isLeftIconPosition(iconPosition$ | async)">
+        </pupa-icon>
+      </ng-container>
+
+      <div class="main__content-inner">
+        <ng-content></ng-content>
+      </div>
+      <ng-container *ngIf="icon$ | async">
+        <pupa-icon class="button-multi__icon button-multi__icon_right" [name]="icon$ | async"
+          *ngIf="isRightIconPosition(iconPosition$ | async)">
+        </pupa-icon>
+      </ng-container>
+    </div>
+    <div class="main__loading" *ngIf="loading$ | async" focusable="false">
+      <pupa-spinner [size]="'16px'"></pupa-spinner>
+    </div>
+  </button>
+  <span class="button-multi__divider"></span>
+  <button class="button-multi__expand expand" [ngClass]="expandClassList$ | async">
+    <span class="button-multi__background expand__background" focusable="false"></span>
+    <pupa-icon class="button-multi__icon" [name]="expandIcon$ | async"></pupa-icon>
+  </button>
+</button>

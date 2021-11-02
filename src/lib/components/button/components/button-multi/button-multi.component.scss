@@ -1,0 +1,369 @@
+
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+:host {
+  appearance: none;
+  user-select: none;
+  pointer-events: none;
+}
+
+// reset button default styles
+.button-multi, .main, .expand {
+  all: unset;
+  appearance: none;
+  pointer-events: auto;
+  cursor: pointer;
+  border: none;
+  margin: 0;
+  position: relative;
+  box-sizing: border-box;
+  padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  @include flex-container(row, center, center);
+}
+
+.main {
+  height: 100%;
+  &__loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+  }
+  &__content {
+    @include font-size-small();
+    @include font-type-caption();
+    line-height: 17px;
+    user-select: none;
+    padding: 2rem 3rem;
+    z-index: 1;
+    overflow: hidden;
+    transform: translate3d(0, 0, 1px);
+    white-space: nowrap;
+    will-change: transform, opacity;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+    &_hidden {
+      opacity: 0;
+    }
+  }
+  &__background {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+    transform-origin: center right;
+  }
+}
+
+.expand {
+  height: 100%;
+  padding: 2rem 1rem;
+  &__background {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    transform-origin: center left;
+  }
+}
+
+.button-multi {
+  @include flex-container(row);
+  
+  &_large {
+    height: 10rem;
+  }
+
+  &_medium {
+    height: 8rem;
+  }
+
+  &_small {
+    height: 6rem;
+
+    .button {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .main__content {
+      @include font-size-mark();
+    }
+
+    .button-multi__icon {
+      @include font-size-small();
+    }
+  }
+
+  &__background {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transform: scale(1);
+    will-change: transform;
+    transition: background-color 0.2s ease, transform 0.1s;
+    pointer-events: none;
+  }
+  & > &__background {
+    border-radius: 2px;
+  }
+
+  &__icon {
+    @include font-size-medium();
+    transition: color 0.2s ease;
+    pointer-events: none;
+
+    &_left {
+      margin-right: 2rem;
+    }
+    &_right {
+      margin-left: 2rem;
+    }
+  }
+
+  &:not([disabled]) {
+    &:active, &.button-multi_active, &.button-multi_expand-active {
+      .button-multi__divider {
+        transform: scaleY(.95);
+      }
+      .button-multi__background {
+        transform: scale(.95);
+      }
+    }
+
+    &:focus-visible {
+      & > .button-multi__background {
+        top: -2px;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        border: 2px solid color(primary-n400);
+        border-radius: 2px;
+      }
+      .main, .expand {
+        .button-multi__background {
+          border-radius: 0;
+        }
+      }
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    height: 100%;
+    z-index: 500;
+    transform: scale(1);
+    will-change: transform;
+    transition: background-color 0.2s ease, transform 0.1s;
+  }
+
+  &_primary {
+    .button-multi__divider {
+      background-color: color(primary-n550);
+    }
+    .button-multi__background {
+      background-color: color(primary-n500);
+    }
+
+    &:not([disabled]) {
+      .expand, .main {
+        @include hover() {
+          .button-multi__background {
+            background-color: color(primary-n400);
+          }
+        }
+      }
+      .expand, .main {
+        &:active, &_active {
+          .button-multi__background {
+            background-color: color(primary-n550);
+          }
+        }
+      }
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-n0);
+    }
+  }
+
+  &_secondary {
+    .button-multi__divider {
+      background-color: color(base-white-n300);
+    }
+    .button-multi__background {
+      background-color: color(base-white-n500);
+    }
+
+    &:not([disabled]) {
+      .expand, .main {
+        @include hover() {
+          .button-multi__background {
+            background-color: color(base-white-n400);
+          }
+        }
+      }
+      .expand, .main {
+        &:active, &_active {
+          .button-multi__background {
+            background-color: color(base-white-n300);
+          }
+        }
+      }
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-n600);
+    }
+  }
+
+  &_danger {
+    .button-multi__divider {
+      background-color: color(red-n550);
+    }
+    .button-multi__background {
+      background-color: color(red-n500);
+    }
+
+    &:not([disabled]) {
+      .expand, .main {
+        @include hover() {
+          .button-multi__background {
+            background-color: color(red-n400);
+          }
+        }
+      }
+      .expand, .main {
+        &:active, &_active {
+          .button-multi__background {
+            background-color: color(red-n550);
+          }
+        }
+      }
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-n0);
+    }
+  }
+
+  &_warning {
+    .button-multi__divider {
+      background-color: color(yellow-n550);
+    }
+    .button-multi__background {
+      background-color: color(yellow-n500);
+    }
+
+    &:not([disabled]) {
+      .expand, .main {
+        @include hover() {
+          .button-multi__background {
+            background-color: color(yellow-n400);
+          }
+        }
+      }
+      .expand, .main {
+        &:active, &_active {
+          .button-multi__background {
+            background-color: color(yellow-n550);
+          }
+        }
+      }
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-n600);
+    }
+  }
+
+  &_border {
+    .button-multi__divider {
+      background-color: color(base-white-n400);
+    }
+    &:active, &.button-multi_active, &.button-multi_expand-active {
+      .button-multi__divider {
+        background-color: color(base-white-n300);
+      }
+    }
+    .expand__background {
+      border: 1px solid color(base-white-n400);
+      border-left: none;
+    }
+    .main__background {
+      border: 1px solid color(base-white-n400);
+      border-right: none;
+    }
+
+    &:not([disabled]) {
+      .expand, .main {
+        @include hover() {
+          .button-multi__background {
+            background-color: color(base-white-n400);
+          }
+        }
+      }
+      .expand, .main {
+        &:active, &_active {
+          .button-multi__background {
+            background-color: color(base-white-n300);
+          }
+        }
+      }
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-n600);
+    }
+  }
+
+  &_disabled {
+    .expand, .main, .button-multi__divider {
+      cursor: not-allowed;
+    }
+    .button-multi__divider {
+      background-color: color(base-white-n400);
+    }
+    .button-multi__background {
+      border: none;
+      background-color: color(base-white-n500);
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-white-n250);
+    }
+  }
+  @include host-selector-dark-theme() {
+    .button-multi__divider {
+      background-color: color(base-dark-n400);
+    }
+    .button-multi__background {
+      border: none;
+      background-color: color(base-dark-n500);
+    }
+    .main__content,
+    .expand,
+    .main__loading {
+      color: color(base-dark-n250);
+    }
+  }
+}
+
+
