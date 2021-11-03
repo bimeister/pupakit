@@ -1,0 +1,9 @@
+import { IconDefinition } from '../../declarations/interfaces/icon-definition.interface';
+
+export const appDocPdfIcon: IconDefinition = {
+  name: 'app-doc-pdf',
+  data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M3 3C3 2.44772 3.44772 2 4 2H8.87868C8.91944 2 8.95995 2.00249 9 2.00738V4C9 5.10457 9.89543 6 11 6H12.9926C12.9975 6.04005 13 6.08056 13 6.12132V13C13 13.5523 12.5523 14 12 14H4C3.44772 14 3 13.5523 3 13V3ZM12.2929 5L10 2.70711V4C10 4.55228 10.4477 5 11 5H12.2929ZM4 1C2.89543 1 2 1.89543 2 3V13C2 14.1046 2.89543 15 4 15H12C13.1046 15 14 14.1046 14 13V6.12132C14 5.59089 13.7893 5.08218 13.4142 4.70711L10.2929 1.58579C9.91782 1.21071 9.40911 1 8.87868 1H4ZM5 12V7H5.5H6H7C7.82843 7 8.5 7.67157 8.5 8.5C8.5 9.32843 7.82843 10 7 10H6V12H5ZM6 9H7C7.27614 9 7.5 8.77614 7.5 8.5C7.5 8.22386 7.27614 8 7 8H6V9Z" fill="currentColor"/>
+  </svg>
+`
+};
