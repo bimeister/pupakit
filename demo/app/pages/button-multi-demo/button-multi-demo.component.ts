@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
+const BASE_REQUEST_PATH: string = 'button-multi-demo/examples';
+
 @Component({
   selector: 'demo-button-multi',
   templateUrl: './button-multi-demo.component.html',
@@ -15,6 +17,9 @@ export class ButtonMultiDemoComponent {
   @ViewChild('activeRadio') public readonly activeRadio$: Observable<Nullable<string>>;
   public active$: Observable<boolean>;
   public expandActive$: Observable<boolean>;
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`
+  };
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Large',
