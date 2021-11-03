@@ -1,4 +1,4 @@
-<button
+<div
   type="submit"
   class="button-multi"
   [attr.disabled]="(disabled$ | async) ? true : null"
@@ -37,10 +37,11 @@
   <button
     class="button-multi__expand expand"
     [pupaDropdownMenu]="dropdownMenuContent"
+    [dropdownMenuDisabled]="disabled$ | async"
     #dropdown="pupaDropdownMenu"
     [ngClass]="expandClassList$ | async"
   >
     <span class="button-multi__background expand__background" focusable="false"></span>
-    <pupa-icon class="button-multi__icon" [name]="getIconName$(dropdown.isOpen$) | async"></pupa-icon>
+    <pupa-icon class="button-multi__icon" [name]="getIconName(dropdown.isOpen$) | async"></pupa-icon>
   </button>
-</button>
+</div>

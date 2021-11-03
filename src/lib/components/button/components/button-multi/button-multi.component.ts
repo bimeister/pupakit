@@ -44,7 +44,7 @@ export class ButtonMultiComponent extends ButtonComponent {
     this.processExpandActiveChange(changes?.expandActive);
   }
 
-  public getIconName$(isOpen$: Observable<boolean>): Observable<string> {
+  public getIconName(isOpen$: Observable<boolean>): Observable<string> {
     return isOpen$.pipe(map((isOpen: boolean) => (isOpen ? 'ios-arrow-up' : 'ios-arrow-down')));
   }
 

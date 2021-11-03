@@ -21,13 +21,15 @@ import { ComponentChanges } from '../../../../internal/declarations/interfaces/c
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 
 type ContentComponent = Nullable<DropdownMenuContentComponent>;
+const CURSOR_POINTER: string = 'pointer';
+const CURSOR_NOT_ALLOWED: string = 'not-allowed';
 
 @Directive({
   selector: '[pupaDropdownMenu]',
   exportAs: 'pupaDropdownMenu'
 })
 export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestroy {
-  @HostBinding('style.cursor') public cursorStyle: string = 'pointer';
+  @HostBinding('style.cursor') public cursorStyle: string = CURSOR_POINTER;
 
   @Input() public pupaDropdownMenu: ContentComponent;
   private readonly dropdownMenuContentComponent$: BehaviorSubject<ContentComponent> =
@@ -56,6 +58,7 @@ export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestro
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processIsDisabledChange(changes?.dropdownMenuDisabled);
     this.processPupaDropdownMenuChange(changes?.pupaDropdownMenu);
   }
 
@@ -134,5 +137,16 @@ export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestro
     }
 
     this.dropdownMenuContentComponent$.next(newValue);
+  }
+
+  private processIsDisabledChange(change: ComponentChange<this, boolean>): void {
+    const newValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(newValue) || !newValue) {
+      this.cursorStyle = CURSOR_POINTER;
+      return;
+    }
+
+    this.cursorStyle = CURSOR_NOT_ALLOWED;
   }
 }
