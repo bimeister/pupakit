@@ -1,9 +1,4 @@
-<div
-  type="submit"
-  class="button-multi"
-  [attr.disabled]="(disabled$ | async) ? true : null"
-  [ngClass]="resultClassList$ | async"
->
+<div type="submit" class="button-multi" [ngClass]="resultClassList$ | async">
   <span class="button-multi__background" focusable="false"></span>
   <button class="button-multi__main main" [ngClass]="mainClassList$ | async">
     <span class="button-multi__background main__background" focusable="false"></span>
@@ -42,6 +37,9 @@
     [ngClass]="expandClassList$ | async"
   >
     <span class="button-multi__background expand__background" focusable="false"></span>
-    <pupa-icon class="button-multi__icon" [name]="getIconName(dropdown.isOpen$) | async"></pupa-icon>
+    <pupa-icon
+      class="button-multi__icon"
+      [name]="dropdown.isOpen$ | conditionAsync: 'ios-arrow-up':'ios-arrow-down'"
+    ></pupa-icon>
   </button>
 </div>

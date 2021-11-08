@@ -133,7 +133,7 @@
     }
   }
 
-  &:not([disabled]) {
+  &:not(.button-multi_disabled) {
     &:active,
     &.button-multi_active,
     &.button-multi_expand-active {
@@ -180,7 +180,7 @@
       background-color: color(primary-n500);
     }
 
-    &:not([disabled]) {
+    &:not(.button-multi_disabled) {
       .expand,
       .main {
         @include hover() {
@@ -214,7 +214,7 @@
       background-color: color(base-white-n500);
     }
 
-    &:not([disabled]) {
+    &:not(.button-multi_disabled) {
       .expand,
       .main {
         @include hover() {
@@ -251,7 +251,7 @@
       .main__loading {
         color: color(base-n0);
       }
-      &:not([disabled]) {
+      &:not(.button-multi_disabled) {
         .expand,
         .main {
           @include hover() {
@@ -281,7 +281,7 @@
       background-color: color(red-n500);
     }
 
-    &:not([disabled]) {
+    &:not(.button-multi_disabled) {
       .expand,
       .main {
         @include hover() {
@@ -315,7 +315,7 @@
       background-color: color(yellow-n500);
     }
 
-    &:not([disabled]) {
+    &:not(.button-multi_disabled) {
       .expand,
       .main {
         @include hover() {
@@ -361,7 +361,7 @@
       border-right: none;
     }
 
-    &:not([disabled]) {
+    &:not(.button-multi_disabled) {
       .expand,
       .main {
         @include hover() {
@@ -405,7 +405,7 @@
       .main__loading {
         color: color(base-n0);
       }
-      &:not([disabled]) {
+      &:not(.button-multi_disabled) {
         .expand,
         .main {
           @include hover() {
