@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { getHslColorFromString, HslColor, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -20,11 +20,28 @@ export class AvatarComponent implements OnChanges {
   @Input() public username: string;
   private readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
+  @Input() public text: string;
+  private readonly text$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+
   @Input() public src: string;
   public readonly src$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public size: AvatarSize = 'small';
   public readonly size$: BehaviorSubject<AvatarSize> = new BehaviorSubject<AvatarSize>('small');
+
+  @Input() public withBorder: boolean = false;
+  public readonly withBorder$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly resultClassList$: Observable<string[]> = combineLatest([
+    this.size$,
+    this.withBorder$.pipe(map((withBorder: boolean) => (Boolean(withBorder) ? 'bordered' : null)))
+  ]).pipe(
+    map((classes: string[]) =>
+      classes
+        .filter((innerClass: string) => !isNil(innerClass))
+        .map((innerProperty: string) => `avatar_${innerProperty}`)
+    )
+  );
 
   public readonly hslBackgroundColor$: Observable<string> = this.username$.pipe(
     map((username: Nullable<string>) => {
@@ -43,6 +60,7 @@ export class AvatarComponent implements OnChanges {
     this.processUsernameChange(changes?.username);
     this.processSrcChange(changes?.src);
     this.processSizeChange(changes?.size);
+    this.processWithBorderChange(changes?.withBorder);
   }
 
   private processUsernameChange(change: ComponentChange<this, string>): void {
@@ -51,8 +69,22 @@ export class AvatarComponent implements OnChanges {
     if (typeof updatedValue !== 'string') {
       return;
     }
-
     this.username$.next(updatedValue);
+    this.setAvatarInitials(updatedValue);
+  }
+
+  private setAvatarInitials(name: string): void {
+    const splittedName: string[] = name.split(' ');
+    const firstName: string = splittedName?.[0];
+    const secondName: string = splittedName?.[1];
+    if (isNil(firstName) || isEmpty(firstName)) {
+      return this.text$.next(null);
+    }
+    if (isNil(secondName) || isEmpty(secondName)) {
+      return this.text$.next(firstName[0].toUpperCase());
+    }
+    const text: string = `${firstName[0]}${secondName[0]}`.toUpperCase();
+    this.text$.next(text);
   }
 
   private processSrcChange(change: ComponentChange<this, string>): void {
@@ -74,5 +106,14 @@ export class AvatarComponent implements OnChanges {
     }
 
     this.size$.next(updatedValue);
+  }
+
+  private processWithBorderChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.withBorder$.next(updatedValue);
   }
 }

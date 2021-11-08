@@ -2,12 +2,20 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-avatar [username]="usernameControl.value" [src]="imageSrcControl.value" [size]="size | async"></pupa-avatar>
+    <pupa-avatar
+      [username]="usernameControl.value"
+      [src]="imageSrcControl.value"
+      [size]="size | async"
+      [withBorder]="border | async"
+    ></pupa-avatar>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Size</demo-props-group-label>
     <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Border</demo-props-group-label>
+    <demo-props-radio-select #border [options]="borderOptions"></demo-props-radio-select>
 
     <demo-props-group-label>Username</demo-props-group-label>
     <div class="avatar__row">
@@ -32,3 +40,6 @@
     <pupa-button class="avatar__button" (click)="setAvatar()">Set Keanu Reeves Avatar</pupa-button>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<h2>Сode Example</h2>
+<pupa-code [code]="codeExample"></pupa-code>

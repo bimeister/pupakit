@@ -1,13 +1,18 @@
 <div
   class="avatar"
-  [ngClass]="{
-    avatar__medium: (size$ | async) === 'medium',
-    avatar__small: (size$ | async) === 'small'
-  }"
+  [ngClass]="resultClassList$ | async"
   [style.background-color]="hslBackgroundColor$ | async"
   [style.background-image]="backgroundImage$ | async"
 >
   <ng-container *ngIf="src$ | async | isNullOrUndefined">
-    <pupa-icon name="app-user"></pupa-icon>
+    <ng-container *ngIf="text$ | async | isNullOrUndefined; else nameTemplate">
+      <div class="avatar__icon-container">
+        <pupa-icon class="avatar__icon" name="app-user"></pupa-icon>
+      </div>
+    </ng-container>
   </ng-container>
 </div>
+
+<ng-template #nameTemplate>
+  <div class="avatar__text">{{ text$ | async }}</div>
+</ng-template>
