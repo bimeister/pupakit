@@ -96,9 +96,27 @@ describe('avatar.component.ts', () => {
   );
 
   it(
-    'avatar size should 24px when medium',
+    'avatar size should 20px when medium',
     (done: jest.DoneCallback) => {
       from(page.waitForSelector('input[value="medium"]'))
+        .pipe(
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
+          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
+        )
+        .subscribe(({ width, height }: BoundingBox) => {
+          expect(width).toEqual(20);
+          expect(height).toEqual(20);
+          done();
+        });
+    },
+    TIME_OUT_MS
+  );
+
+  it(
+    'avatar size should 24px when large',
+    (done: jest.DoneCallback) => {
+      from(page.waitForSelector('input[value="large"]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() => from(page.waitForSelector('pupa-avatar'))),
