@@ -1,5 +1,4 @@
 <div type="submit" class="button-multi" [ngClass]="resultClassList$ | async">
-  <span class="button-multi__background" focusable="false"></span>
   <button class="button-multi__main main" [ngClass]="mainClassList$ | async">
     <span class="button-multi__background main__background" focusable="false"></span>
     <div class="main__content" focusable="false" [class.main__content_hidden]="loading$ | async">
@@ -28,7 +27,6 @@
       <pupa-spinner [size]="'16px'"></pupa-spinner>
     </div>
   </button>
-  <span class="button-multi__divider"></span>
   <button
     class="button-multi__expand expand"
     [pupaDropdownMenu]="dropdownMenuContent"

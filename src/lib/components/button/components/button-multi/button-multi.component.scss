@@ -44,7 +44,7 @@
     @include font-type-caption();
     line-height: 17px;
     user-select: none;
-    padding: 2rem 3rem;
+    padding: 2rem;
     z-index: 1;
     overflow: hidden;
     transform: translate3d(0, 0, 1px);
@@ -58,6 +58,16 @@
     &_hidden {
       opacity: 0;
     }
+  }
+  &__content-inner {
+    box-sizing: border-box;
+    padding: 0 1rem;
+  }
+  &__content-inner ~ .button-multi__icon_right {
+    margin-left: 1rem;
+  }
+  .button-multi__icon_left ~ &__content-inner {
+    margin-left: 1rem;
   }
   &__background {
     border-top-left-radius: 2px;
@@ -124,22 +134,12 @@
     @include font-size-medium();
     transition: color 0.2s ease;
     pointer-events: none;
-
-    &_left {
-      margin-right: 2rem;
-    }
-    &_right {
-      margin-left: 2rem;
-    }
   }
 
   &:not(.button-multi_disabled) {
     &:active,
     &.button-multi_active,
     &.button-multi_expand-active {
-      .button-multi__divider {
-        transform: scaleY(0.95);
-      }
       .button-multi__background {
         transform: scale(0.95);
       }
@@ -163,21 +163,12 @@
     }
   }
 
-  &__divider {
-    width: 1px;
-    height: 100%;
-    z-index: 500;
-    transform: scale(1);
-    will-change: transform;
-    transition: background-color 0.2s ease, transform 0.1s;
-  }
-
   &_primary {
-    .button-multi__divider {
-      background-color: color(primary-n550);
-    }
     .button-multi__background {
       background-color: color(primary-n500);
+    }
+    .expand__background {
+      border-left: 1px solid color(primary-n550);
     }
 
     &:not(.button-multi_disabled) {
@@ -207,19 +198,25 @@
   }
 
   &_secondary {
-    .button-multi__divider {
-      background-color: color(base-white-n300);
-    }
     .button-multi__background {
       background-color: color(base-white-n500);
+    }
+    .expand__background {
+      border-left: 1px solid color(base-white-n300);
     }
 
     &:not(.button-multi_disabled) {
       .expand,
       .main {
+        .button-multi__icon {
+          color: color(base-white-n200);
+        }
         @include hover() {
           .button-multi__background {
             background-color: color(base-white-n400);
+          }
+          .button-multi__icon {
+            color: color(base-white-n600);
           }
         }
       }
@@ -229,6 +226,9 @@
         &_active {
           .button-multi__background {
             background-color: color(base-white-n300);
+          }
+          .button-multi__icon {
+            color: color(base-white-n600);
           }
         }
       }
@@ -240,11 +240,11 @@
     }
 
     @include host-selector-dark-theme() {
-      .button-multi__divider {
-        background-color: color(base-dark-n300);
-      }
       .button-multi__background {
         background-color: color(base-dark-n500);
+      }
+      .expand__background {
+        border-left: 1px solid color(base-dark-n300);
       }
       .main__content,
       .expand,
@@ -254,9 +254,15 @@
       &:not(.button-multi_disabled) {
         .expand,
         .main {
+          .button-multi__icon {
+            color: color(base-dark-n100);
+          }
           @include hover() {
             .button-multi__background {
               background-color: color(base-dark-n400);
+            }
+            .button-multi__icon {
+              color: color(base-n0);
             }
           }
         }
@@ -267,6 +273,9 @@
             .button-multi__background {
               background-color: color(base-dark-n300);
             }
+            .button-multi__icon {
+              color: color(base-n0);
+            }
           }
         }
       }
@@ -274,11 +283,11 @@
   }
 
   &_danger {
-    .button-multi__divider {
-      background-color: color(red-n550);
-    }
     .button-multi__background {
       background-color: color(red-n500);
+    }
+    .expand__background {
+      border-left: 1px solid color(red-n550);
     }
 
     &:not(.button-multi_disabled) {
@@ -308,11 +317,11 @@
   }
 
   &_warning {
-    .button-multi__divider {
-      background-color: color(yellow-n550);
-    }
     .button-multi__background {
       background-color: color(yellow-n500);
+    }
+    .expand__background {
+      border-left: 1px solid color(yellow-n550);
     }
 
     &:not(.button-multi_disabled) {
@@ -342,19 +351,11 @@
   }
 
   &_border {
-    .button-multi__divider {
-      background-color: color(base-white-n400);
-    }
-    &:active,
-    &.button-multi_active,
-    &.button-multi_expand-active {
-      .button-multi__divider {
-        background-color: color(base-white-n300);
-      }
+    .button-multi__icon {
+      color: color(base-white-n200);
     }
     .expand__background {
       border: 1px solid color(base-white-n400);
-      border-left: none;
     }
     .main__background {
       border: 1px solid color(base-white-n400);
@@ -368,6 +369,9 @@
           .button-multi__background {
             background-color: color(base-white-n400);
           }
+          .button-multi__icon {
+            color: color(base-n600);
+          }
         }
       }
       .expand,
@@ -376,6 +380,9 @@
         &_active {
           .button-multi__background {
             background-color: color(base-white-n300);
+          }
+          .button-multi__icon {
+            color: color(base-n600);
           }
         }
       }
@@ -388,14 +395,10 @@
     @include host-selector-dark-theme() {
       .expand__background {
         border: 1px solid color(base-dark-n400);
-        border-left: none;
       }
       .main__background {
         border: 1px solid color(base-dark-n400);
         border-right: none;
-      }
-      .button-multi__divider {
-        background-color: color(base-dark-n300);
       }
       .button-multi__background {
         background-color: transparent;
@@ -412,6 +415,9 @@
             .button-multi__background {
               background-color: color(base-dark-n400);
             }
+            .button-multi__icon {
+              color: color(base-n0);
+            }
           }
         }
         .expand,
@@ -421,6 +427,9 @@
             .button-multi__background {
               background-color: color(base-dark-n300);
             }
+            .button-multi__icon {
+              color: color(base-n0);
+            }
           }
         }
       }
@@ -429,16 +438,15 @@
 
   &_disabled {
     .expand,
-    .main,
-    .button-multi__divider {
+    .main {
       cursor: not-allowed;
-    }
-    .button-multi__divider {
-      background-color: color(base-white-n400);
     }
     .button-multi__background {
       border: none;
       background-color: color(base-white-n500);
+    }
+    .expand__background {
+      border-left: 1px solid color(base-white-n400);
     }
     .main__content,
     .expand,
@@ -447,12 +455,12 @@
     }
 
     @include host-selector-dark-theme() {
-      .button-multi__divider {
-        background-color: color(base-dark-n400);
-      }
       .button-multi__background {
         border: none;
         background-color: color(base-dark-n500);
+      }
+      .expand__background {
+        border-left: 1px solid color(base-dark-n400);
       }
       .main__content,
       .expand,
