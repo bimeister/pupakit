@@ -3,6 +3,7 @@ import { isNil } from '@bimeister/utilities';
 import { DrawerConfig } from '../../interfaces/drawer-config.interface';
 
 export class DrawerConfigDto implements DrawerConfig {
+  /** @deprecated soon it will be only 'right' */
   public float: 'left' | 'right' = 'right';
   public hasBackdrop: boolean = true;
   public closeOnBackdropClick: boolean = true;

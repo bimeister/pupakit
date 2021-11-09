@@ -1,0 +1,2 @@
+<pupa-button (click)="openDrawer()"> Open drawer</pupa-button>
+<div *ngIf="drawerCloseMessage$ | async as drawerCloseMessage">close message: {{ drawerCloseMessage }}</div>

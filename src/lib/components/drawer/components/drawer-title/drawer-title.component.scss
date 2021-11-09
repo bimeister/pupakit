@@ -1,0 +1,28 @@
+@import 'themes/functions';
+@import 'mixins';
+
+:host {
+  width: 100%;
+}
+
+.drawer-title {
+  font-size: 5rem;
+  line-height: 6rem;
+
+  padding: 1rem 7rem;
+  margin-bottom: 0rem;
+
+  @include xs() {
+    padding: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  @include font-type-point();
+  color: color(base-n600);
+
+  @include flex-container(row, center, space-between);
+
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+  }
+}

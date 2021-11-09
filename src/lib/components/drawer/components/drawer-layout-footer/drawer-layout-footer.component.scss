@@ -1,0 +1,19 @@
+@use 'src/styles/mixins' as *;
+
+.drawer-layout-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 2rem;
+  padding: 4rem;
+  box-sizing: border-box;
+
+  box-shadow: 0px 1px 0px 0px color(base-white-n400) inset;
+
+  @include host-selector-dark-theme() {
+    box-shadow: 0px 1px 0px 0px color(base-dark-n400) inset;
+  }
+
+  @include xs() {
+    padding: 2rem 5rem;
+  }
+}

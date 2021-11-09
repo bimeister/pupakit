@@ -1,0 +1,53 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-drawer-layout>
+    <pupa-drawer-layout-header>
+      <pupa-drawer-layout-header-row type="top">
+        <pupa-drawer-layout-header-content type="left">
+          <pupa-drawer-close-button visibleOn="mobile"></pupa-drawer-close-button>
+          <pupa-drawer-button-icon icon="ios-expand"></pupa-drawer-button-icon>
+        </pupa-drawer-layout-header-content>
+
+        <pupa-drawer-layout-header-content type="right">
+          <pupa-drawer-button-icon icon="app-time"></pupa-drawer-button-icon>
+          <pupa-drawer-button-icon icon="app-link" pupaTooltip="Копировать ссылку"></pupa-drawer-button-icon>
+          <pupa-drawer-button-icon icon="app-resize" pupaTooltip="На весь экран"></pupa-drawer-button-icon>
+          <pupa-drawer-button-icon icon="app-more"></pupa-drawer-button-icon>
+          <pupa-drawer-close-button visibleOn="desktop"></pupa-drawer-close-button>
+        </pupa-drawer-layout-header-content>
+      </pupa-drawer-layout-header-row>
+
+      <pupa-drawer-layout-header-row>
+        <pupa-drawer-title>
+          Title
+          <pupa-drawer-title-container>
+            <pupa-button>Button</pupa-button>
+          </pupa-drawer-title-container>
+        </pupa-drawer-title>
+      </pupa-drawer-layout-header-row>
+    </pupa-drawer-layout-header>
+
+    <pupa-drawer-layout-body>
+      <pupa-tabs-container>
+        <pupa-tabs>
+          <pupa-tabs-item *ngFor="let tab of tabs" [name]="tab.name">{{ tab.title }}</pupa-tabs-item>
+        </pupa-tabs>
+
+        <pupa-drawer-layout-separator locatedIn="body"></pupa-drawer-layout-separator>
+
+        <pupa-tabs-content>
+          <ng-container *ngFor="let tab of tabs">
+            <div *pupaTabsItemContentTemplate="tab.name">{{ tab.text }}</div>
+          </ng-container>
+        </pupa-tabs-content>
+      </pupa-tabs-container>
+    </pupa-drawer-layout-body>
+    <pupa-drawer-layout-footer>
+      <pupa-drawer-layout-action value="dungeon">
+        <pupa-button kind="secondary">Action</pupa-button>
+      </pupa-drawer-layout-action>
+      <pupa-drawer-layout-action value="boy next door">
+        <pupa-button>Action</pupa-button>
+      </pupa-drawer-layout-action>
+    </pupa-drawer-layout-footer>
+  </pupa-drawer-layout>
+</pupa-theme-wrapper>

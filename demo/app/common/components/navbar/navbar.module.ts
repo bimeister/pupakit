@@ -6,10 +6,18 @@ import { MenuToggleComponent } from './components/menu-toggle/menu-toggle.compon
 import { GridToggleComponent } from './components/grid-toggle/grid-toggle.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { SidebarDrawerContentContainerComponent } from './components/sidebar-drawer-content-container/sidebar-drawer-content-container.component';
+import { SidebarModule } from '../sidebar/sidebar.module';
 
 @NgModule({
-  declarations: [NavbarComponent, ThemeToggleComponent, MenuToggleComponent, GridToggleComponent],
+  declarations: [
+    NavbarComponent,
+    ThemeToggleComponent,
+    MenuToggleComponent,
+    GridToggleComponent,
+    SidebarDrawerContentContainerComponent
+  ],
   exports: [NavbarComponent],
-  imports: [DemoSharedModule, RouterModule, FormsModule]
+  imports: [DemoSharedModule, RouterModule, FormsModule, SidebarModule]
 })
 export class NavbarModule {}

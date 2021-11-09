@@ -1,0 +1,23 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'sass:map';
+
+.drawer-close-button {
+  display: none;
+
+  &_all {
+    display: block;
+  }
+
+  &_mobile {
+    @include xs() {
+      display: block;
+    }
+  }
+
+  &_desktop {
+    @include gt-xs() {
+      display: block;
+    }
+  }
+}
