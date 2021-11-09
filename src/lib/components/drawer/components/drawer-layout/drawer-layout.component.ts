@@ -1,26 +1,35 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { isEmpty, isNil } from '@bimeister/utilities';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Inject,
+  ViewEncapsulation
+} from '@angular/core';
+import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../../../../internal/constants/tokens/drawer-layout-data.token';
+import { DrawerLayoutConfig } from '../../../../../internal/declarations/interfaces/drawer-layout-config.interface';
+import { DrawerLayoutFooterComponent } from '../drawer-layout-footer/drawer-layout-footer.component';
+import { BehaviorSubject } from 'rxjs';
+import { isNil, Nullable } from '@bimeister/utilities';
 
 @Component({
   selector: 'pupa-drawer-layout',
   templateUrl: './drawer-layout.component.html',
-  styleUrls: ['./drawer-layout.component.scss']
+  styleUrls: ['./drawer-layout.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DrawerLayoutComponent {
-  @Output() public readonly closeButtonClicked: EventEmitter<void> = new EventEmitter();
+export class DrawerLayoutComponent implements AfterContentInit {
+  @ContentChild(DrawerLayoutFooterComponent) public footerComponent: Nullable<DrawerLayoutFooterComponent>;
+  public readonly isFooterComponentExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public title: string = '';
-  @Input() public isCloseButtonVisible: boolean = false;
-
-  public get isTitleVisible(): boolean {
-    return !isNil(this.title) && !isEmpty(this.title);
+  public get hasShadow(): boolean {
+    return !this.drawerLayoutConfig.hasBackdrop;
   }
 
-  public get isHeaderVisible(): boolean {
-    return this.isTitleVisible || this.isCloseButtonVisible;
-  }
+  constructor(@Inject(DRAWER_LAYOUT_CONFIG_TOKEN) private readonly drawerLayoutConfig: DrawerLayoutConfig) {}
 
-  public processCloseButtonClick(): void {
-    this.closeButtonClicked.emit();
+  public ngAfterContentInit(): void {
+    this.isFooterComponentExists$.next(isNil(this.footerComponent));
   }
 }

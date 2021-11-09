@@ -5,7 +5,7 @@
   all: unset;
   position: fixed;
   width: fit-content;
-  height: 100vh;
+  height: vh(100);
   top: 0;
   background: color(white);
   box-shadow: variable(box-shadow_hover);

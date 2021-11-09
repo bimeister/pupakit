@@ -1,0 +1,22 @@
+@import 'themes/functions';
+@import 'mixins';
+
+.drawer-separator {
+  height: 1px;
+  box-sizing: border-box;
+
+  &_body {
+    margin-left: -11rem;
+    margin-right: -11rem;
+
+    @include xs() {
+      margin-left: -5rem;
+      margin-right: -5rem;
+    }
+  }
+
+  background-color: color(base-white-n400);
+  @include host-selector-dark-theme {
+    background-color: color(base-dark-n400);
+  }
+}

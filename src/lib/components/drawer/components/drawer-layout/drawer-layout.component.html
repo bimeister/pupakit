@@ -1,18 +1,4 @@
-<div class="drawer-layout">
-  <div class="drawer-layout__header" *ngIf="isHeaderVisible">
-    <div class="drawer-layout__header__title" *ngIf="isTitleVisible">
-      {{ title }}
-    </div>
-
-    <pupa-icon-button
-      class="drawer-layout__header__button"
-      *ngIf="isCloseButtonVisible"
-      (click)="processCloseButtonClick()"
-    >
-      <pupa-icon name="close"></pupa-icon>
-    </pupa-icon-button>
-  </div>
-  <div class="drawer-layout__content">
-    <ng-content></ng-content>
-  </div>
+<div class="drawer-layout" [class.drawer-layout_with-shadow]="hasShadow">
+  <ng-content></ng-content>
+  <div class="drawer-layout__footer-stub" *ngIf="isFooterComponentExists$ | async"></div>
 </div>

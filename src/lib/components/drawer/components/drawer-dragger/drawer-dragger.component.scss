@@ -3,7 +3,7 @@
 @import 'mixins';
 
 .drawer-dragger {
-  height: 100vh;
+  height: vh(100);
   pointer-events: none;
   width: 0;
   display: flex;

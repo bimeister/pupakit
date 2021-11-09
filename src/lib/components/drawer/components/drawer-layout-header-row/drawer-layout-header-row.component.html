@@ -1,0 +1,7 @@
+<div
+  class="drawer-layout-header-row"
+  [class.drawer-layout-header-row_title-container]="isDrawerTitleContains$ | async"
+  [class]="'drawer-layout-header-row_' + (type$ | async)"
+>
+  <ng-content></ng-content>
+</div>

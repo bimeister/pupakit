@@ -44,6 +44,7 @@ label.horizontal {
   width: fit-content;
   align-items: center;
   max-width: inherit;
+
   &__text {
     flex-shrink: 1;
     box-sizing: border-box;
@@ -53,6 +54,7 @@ label.horizontal {
     min-width: 0;
     @include ellipsis-text-overflow;
   }
+
   &__delete-button {
     flex-shrink: 0;
     box-sizing: border-box;
@@ -60,6 +62,7 @@ label.horizontal {
     height: 5rem;
     width: 5rem;
   }
+
   &__avatar {
     flex-shrink: 0;
     box-sizing: border-box;
@@ -67,12 +70,14 @@ label.horizontal {
     height: 4rem;
     width: 4rem;
   }
+
   &__icon-container {
     display: inline-flex;
     flex-shrink: 0;
     box-sizing: border-box;
     padding-left: 2rem;
   }
+
   &__icon {
     height: 3rem;
     width: 3rem;

@@ -1,7 +1,7 @@
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, of, BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { filterTruthy, isNil, mapToVoid } from '@bimeister/utilities';
 
@@ -9,7 +9,7 @@ import { ThemeWrapperService } from '../../../../../../../src/lib/components/the
 import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
 import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
 import { OpenedDrawer } from '../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
-import { SidebarContentComponent } from '../../../sidebar/sidebar-content/sidebar-content.component';
+import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
 
 @Component({
   selector: 'demo-navbar',
@@ -96,8 +96,9 @@ export class NavbarComponent implements OnDestroy {
   }
 
   private openDrawer(): OpenedDrawer {
-    return this.drawerService.open(SidebarContentComponent, {
+    return this.drawerService.open(SidebarDrawerContentContainerComponent, {
       hasBackdrop: true,
+      hasPadding: false,
       closeOnBackdropClick: true,
       isBackdropTransparent: false,
       float: 'left',

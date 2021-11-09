@@ -1,0 +1,13 @@
+:host.right {
+  margin-left: auto;
+}
+
+:host.left {
+  margin-right: auto;
+}
+
+.drawer-layout-header-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
