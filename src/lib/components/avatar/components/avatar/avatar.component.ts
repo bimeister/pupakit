@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { AvatarSize } from '../../../../../internal/declarations/types/avatar-size.type';
+import { getInitials } from '../../../../../internal/functions/get-initials.function';
 
 const SATURATION: number = 88;
 const LIGHTNESS: number = 78;
@@ -18,10 +19,7 @@ const LIGHTNESS: number = 78;
 })
 export class AvatarComponent implements OnChanges {
   @Input() public username: string;
-  private readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
-
-  @Input() public text: string;
-  private readonly text$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+  public readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public src: string;
   public readonly src$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
@@ -49,6 +47,9 @@ export class AvatarComponent implements OnChanges {
       return `hsl(${h}, ${s}%, ${l}%)`;
     })
   );
+  public readonly initials$: Observable<Nullable<string>> = this.username$.pipe(
+    map((username: Nullable<string>) => getInitials(username))
+  );
 
   public readonly backgroundImage$: Observable<string> = this.src$.pipe(
     map((src: Nullable<string>) => {
@@ -69,22 +70,10 @@ export class AvatarComponent implements OnChanges {
     if (typeof updatedValue !== 'string') {
       return;
     }
+    if (isEmpty(updatedValue.trim())) {
+      return this.username$.next(null);
+    }
     this.username$.next(updatedValue);
-    this.setAvatarInitials(updatedValue);
-  }
-
-  private setAvatarInitials(name: string): void {
-    const splittedName: string[] = name.split(' ');
-    const firstName: string = splittedName?.[0];
-    const secondName: string = splittedName?.[1];
-    if (isNil(firstName) || isEmpty(firstName)) {
-      return this.text$.next(null);
-    }
-    if (isNil(secondName) || isEmpty(secondName)) {
-      return this.text$.next(firstName[0].toUpperCase());
-    }
-    const text: string = `${firstName[0]}${secondName[0]}`.toUpperCase();
-    this.text$.next(text);
   }
 
   private processSrcChange(change: ComponentChange<this, string>): void {
