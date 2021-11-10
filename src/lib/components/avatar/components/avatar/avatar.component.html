@@ -5,7 +5,7 @@
   [style.background-image]="backgroundImage$ | async"
 >
   <ng-container *ngIf="src$ | async | isNullOrUndefined">
-    <ng-container *ngIf="text$ | async | isNullOrUndefined; else nameTemplate">
+    <ng-container *ngIf="username$ | async | isNullOrUndefined; else nameTemplate">
       <div class="avatar__icon-container">
         <pupa-icon class="avatar__icon" name="app-user"></pupa-icon>
       </div>
@@ -14,5 +14,5 @@
 </div>
 
 <ng-template #nameTemplate>
-  <div class="avatar__text">{{ text$ | async }}</div>
+  <div class="avatar__text">{{ initials$ | async }}</div>
 </ng-template>
