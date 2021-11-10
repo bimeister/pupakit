@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { InputBase } from '../../../../src/internal/declarations/classes/abstract/input-base.abstract';
+import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
 @Component({
   selector: 'demo-input',
@@ -13,7 +13,7 @@ export class InputDemoComponent {
   @ViewChild('input')
   private readonly inputRef: InputBase<unknown>;
 
-  public readonly placeholder: string = 'Введите данные';
+  public readonly placeholder: string = 'Placeholder';
 
   public readonly typeOptions: RadioOption[] = [
     {

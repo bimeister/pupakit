@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 const DEFAULT_DATE: Date = new Date();
 const DEFAULT_DATE_NEXT_MONTH: Date = new Date();
@@ -20,7 +20,7 @@ export class DateTimePickerDemoComponent {
   public readonly dateFormControl: FormControl = new FormControl(DEFAULT_DATE);
   public readonly dateTimeFormControl: FormControl = new FormControl(DEFAULT_DATE);
   public readonly dateTimeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly timeFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly timeFormControl: FormControl = new FormControl(DEFAULT_DATE, [Validators.required]);
   public readonly timeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
   public readonly rangeFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
   public readonly rangeDoubleFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);

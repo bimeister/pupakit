@@ -42,20 +42,14 @@ const MINUTES_END_POSITION: number = 5;
 const SECONDS_START_POSITION: number = 6;
 const SECONDS_END_POSITION: number = 8;
 
-const DEFAULT_ERROR_MESSAGE: string = 'Недопустимое значение';
-
 @Directive()
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
+  @Input() public readonly withReset: boolean = false;
+
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
-  @Input() public readonly isTableMode: boolean = false;
-  public readonly isTableMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
-  @Input() public errorTitle: string = DEFAULT_ERROR_MESSAGE;
-  public readonly errorTitle$: BehaviorSubject<string> = new BehaviorSubject(DEFAULT_ERROR_MESSAGE);
 
   @Input() public readonly isBackDating: boolean = true;
   public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -312,11 +306,10 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsFixedSizeChange(changes?.isFixedSize);
-    this.processIsTableChange(changes?.isTableMode);
-    this.processErrorTitleChange(changes?.errorTitle);
     this.processIsBackDatingChange(changes?.isBackDating);
     this.processAvailableEndDateChange(changes?.availableEndDate);
     this.processIsPatchedChange(changes?.isPatched);
+    this.processWithResetChange(changes?.withReset);
   }
 
   public setValue(value: ValueType): void {
@@ -331,6 +324,10 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
 
   public handleIconHover(isHovered: boolean): void {
     this.isIconHovered$.next(isHovered);
+  }
+
+  public reset(): void {
+    this.updateValue('');
   }
 
   public clearInputValue(): void {
@@ -357,26 +354,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     }
 
     this.isFixedSize$.next(updatedValue);
-  }
-
-  private processIsTableChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.isTableMode$.next(updatedValue);
-  }
-
-  private processErrorTitleChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.errorTitle$.next(updatedValue);
   }
 
   private processIsBackDatingChange(change: ComponentChange<this, boolean>): void {

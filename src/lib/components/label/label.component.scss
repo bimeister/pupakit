@@ -1,0 +1,66 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
+:host {
+  display: block;
+}
+
+.label {
+  width: inherit;
+  max-width: inherit;
+  @include flex-container(row, center, flex-start);
+  height: 4rem;
+  gap: 1.5rem;
+  &__icon {
+    flex-shrink: 0;
+    color: color(base-white-n200);
+  }
+  &__content {
+    flex-shrink: 1;
+    color: color(base-white-n100);
+    @include font-type-caption();
+    @include font-size-mark();
+    @include ellipsis-text-overflow;
+  }
+  &_disabled {
+    .label__icon,
+    .label__content {
+      color: color(base-white-n250);
+    }
+  }
+  @include host-selector-dark-theme() {
+    &__icon {
+      color: color(base-dark-n100);
+    }
+    &__content {
+      color: color(base-dark-n100);
+    }
+    &_disabled {
+      .label__icon,
+      .label__content {
+        color: color(base-dark-n250);
+      }
+    }
+  }
+  // sizes
+  // &_large {
+  //   height: 8rem;
+  //   .label__content {
+  //     @include font-size-large();
+  //     @include font-type-point();
+  //   }
+  // }
+  // &_medium {
+  //   height: 6rem;
+  //   .label__content {
+  //     @include font-size-medium();
+  //   }
+  // }
+  // &_small {
+  //   height: 4rem;
+  //   .label__content {
+  //     @include font-size-mark();
+  //   }
+  // }
+}

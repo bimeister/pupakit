@@ -37,7 +37,9 @@ export class SidebarContentComponent {
       { title: 'Adaptive', link: '/kit/adaptive' },
       { title: 'Code', link: '/kit/code' },
       { title: 'Floating Card', link: '/kit/floating-card' },
-      { title: 'Info block', link: '/kit/info-block' }
+      { title: 'Info block', link: '/kit/info-block' },
+      { title: 'Input', link: '/kit/input' },
+      { title: 'Label', link: '/kit/label' },
     ]
   };
 
@@ -46,8 +48,6 @@ export class SidebarContentComponent {
     linkItems: [
       { title: 'Checkbox', link: '/kit/checkbox' },
       { title: 'Switcher', link: '/kit/switcher' },
-      { title: 'Date time pickers', link: '/kit/date-time-picker' },
-      { title: 'Input', link: '/kit/input' },
       { title: 'Table Input', link: '/kit/table-input' },
       { title: 'Search Field', link: '/kit/search-field' },
       { title: '⚠️ Textarea', link: '/kit/textarea' },

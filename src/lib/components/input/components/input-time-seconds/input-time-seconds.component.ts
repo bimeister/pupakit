@@ -30,11 +30,7 @@ const MAX_SECONDS: number = 59;
 export class InputTimeSecondsComponent extends InputDateTimeBase {
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
 
-  public readonly placeholderPreviewLeft$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? '' : `${value}`))
-  );
-
-  public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
+  public timeSecondsPlaceholder$: Observable<string> = this.value$.pipe(
     map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
   );
 

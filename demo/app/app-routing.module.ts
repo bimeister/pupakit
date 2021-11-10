@@ -61,6 +61,7 @@ import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
+import { LabelDemoModule } from './pages/label-demo/label-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -141,6 +142,11 @@ const demoRoutes: Routes = [
         path: 'input',
         loadChildren: (): Promise<Type<InputDemoModule>> =>
           import('./pages/input-demo/input-demo.module').then(module => module.InputDemoModule)
+      },
+      {
+        path: 'label',
+        loadChildren: (): Promise<Type<LabelDemoModule>> =>
+          import('./pages/label-demo/label-demo.module').then(module => module.LabelDemoModule)
       },
       {
         path: 'table-input',

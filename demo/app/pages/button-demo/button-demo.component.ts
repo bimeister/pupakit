@@ -49,6 +49,10 @@ export class ButtonDemoComponent {
     {
       caption: 'Border',
       value: 'border'
+    },
+    {
+      caption: 'Subtle-danger',
+      value: 'subtle-danger'
     }
   ];
 

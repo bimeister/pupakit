@@ -1,0 +1,16 @@
+<h1>Input</h1>
+
+<demo-example-viewer>
+  <demo-example-viewer-content>
+    <pupa-label class="label" [disabled]="formControl.disabled" [icon]="(withIcon | async) ? 'app-info': null">
+      {{formControl.value}}</pupa-label>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Text</demo-props-group-label>
+    <pupa-input-text placeholder="Text" [formControl]="formControl"></pupa-input-text>
+    <demo-props-group-label>Flags</demo-props-group-label>
+    <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
+    <demo-props-checkbox #withIcon>With Icon</demo-props-checkbox>
+  </demo-example-viewer-properties>
+</demo-example-viewer>

@@ -1,6 +1,6 @@
 import { Directive, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { BrowserService } from '../../../shared/services/browser.service';
@@ -15,6 +15,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   public readonly isDisabled$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isFocused$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
+  public readonly isFilled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
@@ -63,6 +64,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   public updateValue(updatedValue: T): void {
     this.isTouched$.next(true);
+    this.isFilled$.next(!isEmpty(updatedValue));
 
     combineLatest([this.onChangeCallback$, this.onTouchedCallback$])
       .pipe(take(1))

@@ -2,40 +2,12 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <ng-container [ngSwitch]="type | async">
-      <ng-container *ngSwitchCase="'text'">
-        <pupa-input-text
-          #input
-          class="control"
-          [size]="size | async"
-          [placeholder]="placeholder"
-          [transparent]="transparent | async"
-          [formControl]="formControl"
-        ></pupa-input-text>
-      </ng-container>
+    <div class="form" [class.form_vertical]="vertical | async">
+      <pupa-label [size]="size | async" [icon]="(withIcon | async) ? 'app-info' : null" [disabled]="formControl.disabled">{{type | async}}
+      </pupa-label>
+      <ng-container [ngTemplateOutlet]="controlTemplate"></ng-container>
+    </div>
 
-      <ng-container *ngSwitchCase="'password'">
-        <pupa-input-password
-          #input
-          class="control"
-          [size]="size | async"
-          [placeholder]="placeholder"
-          [transparent]="transparent | async"
-          [formControl]="formControl"
-        ></pupa-input-password>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'number'">
-        <pupa-input-number
-          #input
-          class="control"
-          [size]="size | async"
-          [placeholder]="placeholder"
-          [transparent]="transparent | async"
-          [formControl]="formControl"
-        ></pupa-input-number>
-      </ng-container>
-    </ng-container>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
@@ -49,9 +21,57 @@
     <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
     <demo-props-form-control-validators [control]="formControl" [validators]="validators">
     </demo-props-form-control-validators>
-    <demo-props-checkbox #transparent>Transparent</demo-props-checkbox>
+    <demo-props-checkbox #withReset>With Reset (except password)</demo-props-checkbox>
+
+    <demo-props-group-label>Label</demo-props-group-label>
+    <demo-props-checkbox #vertical>Vertical Form</demo-props-checkbox>
+    <demo-props-checkbox #withIcon>With Icon</demo-props-checkbox>
 
     <demo-props-group-label>Actions</demo-props-group-label>
     <pupa-button (click)="focus()">Focus on input element</pupa-button>
   </demo-example-viewer-properties>
 </demo-example-viewer>
+
+<ng-template #errorTemplate>
+  <li>Поле обязательно для заполнения</li>
+  <li>Максимальная длина - 8 символов</li>
+</ng-template>
+
+<ng-template #controlTemplate>
+  <ng-container [ngSwitch]="type | async">
+    <ng-container *ngSwitchCase="'text'">
+      <pupa-input-text
+        #input
+        class="form__control"
+        [size]="size | async"
+        [placeholder]="placeholder"
+        [formControl]="formControl"
+        [withReset]="withReset | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-text>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'password'">
+      <pupa-input-password
+        #input
+        class="form__control"
+        [size]="size | async"
+        [placeholder]="placeholder"
+        [formControl]="formControl"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-password>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'number'">
+      <pupa-input-number
+        #input
+        class="form__control"
+        [size]="size | async"
+        [placeholder]="placeholder"
+        [formControl]="formControl"
+        [withReset]="withReset | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-number>
+    </ng-container>
+  </ng-container>
+</ng-template>

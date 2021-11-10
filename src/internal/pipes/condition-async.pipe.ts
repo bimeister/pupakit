@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   name: 'conditionAsync',
   pure: false
 })
-export class ConditionAsyncPipe implements PipeTransform, OnDestroy {
+export class ConditionAsyncPipe<T = unknown> implements PipeTransform, OnDestroy {
   private readonly asyncPipe: AsyncPipe;
 
   constructor(injector: Injector) {
@@ -19,15 +19,15 @@ export class ConditionAsyncPipe implements PipeTransform, OnDestroy {
     this.asyncPipe.ngOnDestroy();
   }
 
-  public transform(booleanValue$: Observable<boolean>, trueArgument: string, falseArgument: string): Nullable<string> {
+  public transform(booleanValue$: Observable<boolean>, trueArgument: T, falseArgument: T): Nullable<T> {
     if (isNil(booleanValue$)) {
       return null;
     }
-    const result$: Observable<string> = booleanValue$.pipe(
+    const result$: Observable<T> = booleanValue$.pipe(
       map((booleanValue: unknown) => {
         return Boolean(booleanValue) ? trueArgument : falseArgument;
       })
     );
-    return this.asyncPipe.transform(result$);
+    return this.asyncPipe.transform<T>(result$);
   }
 }

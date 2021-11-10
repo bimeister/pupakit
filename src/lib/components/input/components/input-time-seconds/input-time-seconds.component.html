@@ -16,18 +16,12 @@
           class="input"
           #inputElement
           type="text"
-          placeholder=""
+          [placeholder]="timeSecondsPlaceholder$ | async"
           [mask]="'00:00:00'"
           [maxLength]="maxLengthInputValue"
           [attr.disabled]="(isDisabled$ | async) ? true : null"
-          [ngClass]="{
-            input__invalid: isInvalid$ | async,
-            input__medium: size === 'medium',
-            input__small: size === 'small',
-            input__large: size === 'large',
-            input__transparent: transparent,
-            input__focused: (isFocused$ | async) || droppable.isOpened
-          }"
+          [ngClass]="resultClassList$ | async"
+          [style.paddingRight.px]="rightPadding$ | async"
           (input)="updateValue(inputElement.value)"
           (focus)="emitFocusEvent($event)"
           (blur)="emitBlurEvent($event)"

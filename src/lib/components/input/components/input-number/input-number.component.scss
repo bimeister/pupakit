@@ -1,11 +1,5 @@
 @import './../../input.styles.scss';
 
-:host {
-  display: block;
-  box-sizing: border-box;
-  width: 100%;
-}
-
 .input {
   &[type='number']::-webkit-inner-spin-button,
   &[type='number']::-webkit-outer-spin-button {

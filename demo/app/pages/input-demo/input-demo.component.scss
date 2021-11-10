@@ -1,7 +1,22 @@
+@import 'themes/functions';
+@import 'mixins';
+@import 'functions';
+
 :host {
   display: block;
 }
 
-.control {
-  width: 300px;
+.form {
+  width: 100rem;
+  @include flex-container(row, center, space-between);
+  gap: 2rem;
+  &__control {
+    width: 60rem;
+  }
+  &_vertical {
+    @include flex-container(column, flex-start, space-between);
+    .form__control {
+      width: 100%;
+    }
+  }
 }

@@ -1,29 +1,42 @@
-import { Directive, EventEmitter, Input, ElementRef, OnChanges, Output, ViewChild } from '@angular/core';
-import { distinctUntilSerializedChanged, isNil } from '@bimeister/utilities';
+import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, TemplateRef, ViewChild } from '@angular/core';
+import { distinctUntilSerializedChanged, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, withLatestFrom } from 'rxjs/operators';
 import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
+const SIZES_LIST: [InputSize, number][] = [
+  ['small', 12],
+  ['medium', 16],
+  ['large', 20]
+];
+const BUTTON_WIDTH_PX: number = 24;
+const DEFAULT_ERROR_MESSAGE: string = 'Недопустимое значение';
+
 @Directive()
 export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
   @ViewChild('inputElement')
   protected readonly inputElementRef: ElementRef<HTMLInputElement>;
 
+  @Input() public readonly invalidTooltipHideOnHover: boolean = true;
+  @Input() public readonly invalidTooltipDisabled: boolean = false;
+  @Input() public readonly invalidTooltip: Nullable<string> = DEFAULT_ERROR_MESSAGE;
+  @Input() public readonly invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
+
   @Input() public readonly size: InputSize = 'medium';
   public readonly size$: BehaviorSubject<InputSize> = new BehaviorSubject<InputSize>('medium');
-
-  @Input() public readonly transparent: boolean = false;
-  public readonly transparent$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public readonly placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   @Input() public readonly autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly withReset: boolean = false;
+  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public readonly isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -44,6 +57,29 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     )
   );
 
+  public readonly resultClassList$: Observable<string[]> = combineLatest([
+    this.size$,
+    this.isInvalid$.pipe(map((isInvalid: boolean) => (isInvalid ? 'invalid' : null))),
+    this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
+    this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
+  ]).pipe(
+    map((classes: string[]) =>
+      classes
+        .filter((innerClass: string) => !isNil(innerClass))
+        .map((innerProperty: string) => `input_${innerProperty}`)
+    )
+  );
+
+  public readonly isVisibleReset$: Observable<boolean> = combineLatest([
+    this.withReset$,
+    this.isFilled$,
+    this.isDisabled$
+  ]).pipe(
+    map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled),
+  );
+
+  protected readonly sizeMap: Map<InputSize, number> = new Map(SIZES_LIST);
+
   protected processIsPatchedChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
@@ -54,12 +90,24 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isPatched$.next(updatedValue);
   }
 
+  protected getRightPadding(flagsList: Observable<boolean>[]): Observable<number> {
+    return combineLatest(flagsList).pipe(
+      withLatestFrom(this.size$.pipe(map((inputSize: InputSize) => this.sizeMap.get(inputSize)))),
+      map(([buttonsStatesList, initPadding]: [boolean[], number]) =>
+        buttonsStatesList.reduce(
+          (width: number, state: boolean) => (state ? width + BUTTON_WIDTH_PX : width),
+          initPadding
+        )
+      )
+    );
+  }
+
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processSizeChange(changes?.size);
-    this.processTransparentChange(changes?.transparent);
     this.processPlaceholderChange(changes?.placeholder);
     this.processAutocompleteChange(changes?.autocomplete);
     this.processIsPatchedChange(changes?.isPatched);
+    this.processWithResetChange(changes?.withReset);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -91,16 +139,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.size$.next(updatedValue);
   }
 
-  private processTransparentChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.transparent$.next(updatedValue);
-  }
-
   private processPlaceholderChange(change: ComponentChange<this, string>): void {
     const updatedValue: string | undefined = change?.currentValue;
 
@@ -119,5 +157,14 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.autocomplete$.next(updatedValue);
+  }
+
+  protected processWithResetChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.withReset$.next(updatedValue);
   }
 }

@@ -1,21 +1,38 @@
-<div class="base-input-container">
-  <input
-    class="input"
-    #inputElement
-    type="number"
-    [placeholder]="placeholder"
-    [attr.disabled]="(isDisabled$ | async) ? true : null"
-    [ngClass]="{
-      input__invalid: isInvalid$ | async,
-      input__medium: size === 'medium',
-      input__small: size === 'small',
-      input__large: size === 'large',
-      input__transparent: transparent
-    }"
-    (focus)="emitFocusEvent($event)"
-    (blur)="emitBlurEvent($event)"
-    (input)="updateValue(inputElement.value)"
-    [autocomplete]="autocomplete ? 'on' : 'off'"
-    [value]="value$ | async"
-  />
+<input
+  class="input"
+  [ngClass]="resultClassList$ | async"
+  type="number"
+  #inputElement
+  [placeholder]="placeholder"
+  [style.paddingRight.px]="rightPadding$ | async"
+  [attr.disabled]="(isDisabled$ | async) ? true : null"
+  (input)="updateValue(inputElement.value)"
+  (focus)="emitFocusEvent($event)"
+  (blur)="emitBlurEvent($event)"
+  [autocomplete]="autocomplete ? 'on' : 'off'"
+  [value]="value$ | async"
+/>
+
+<div class="input__icons-list">
+  <pupa-button-icon
+    *ngIf="isVisibleReset$ | async"
+    class="input__icon input__icon-reset"
+    icon="app-cross"
+    size="small"
+    kind="subtle"
+    (click)="reset()"
+  >
+  </pupa-button-icon>
+  <pupa-button-icon
+    *ngIf="isInvalid$ | async"
+    class="input__icon input__icon-invalid"
+    icon="ios-information-circle-outline"
+    kind="subtle-danger"
+    size="small"
+    [pupaTooltip]="invalidTooltip"
+    [tooltipHideOnHover]="invalidTooltipHideOnHover"
+    [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
+    [tooltipContentTemplate]="invalidTooltipContentTemplate"
+  >
+  </pupa-button-icon>
 </div>
