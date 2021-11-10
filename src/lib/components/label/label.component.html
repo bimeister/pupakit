@@ -1,0 +1,8 @@
+<div class="label" [ngClass]="resultClassList$ | async">
+  <ng-container *ngIf="icon$ | async">
+    <pupa-icon class="label__icon" [name]="icon$ | async"></pupa-icon>
+  </ng-container>
+  <div class="label__content">
+    <ng-content></ng-content>
+  </div>
+</div>

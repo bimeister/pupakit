@@ -5,13 +5,14 @@
 :host {
   min-width: 200px;
 
-  color: get-map-field($theme-config, [ light, body, font-color]);
-  background-color: get-map-field($theme-config, [ light, navbar, background-color]);
+  color: color(base-n600);
+  background-color: transparent;
+  border-left: 1px solid color(base-white-n400);
   @include host-selector-dark-theme() {
-    color: get-map-field($theme-config, [ dark, body, font-color]);
-    background-color: get-map-field($theme-config, [ dark, navbar, background-color]);
+    color: color(base-n0);
+    background-color: transparent;
+    border-left: 1px solid color(base-dark-n400);
   }
 
-  border-left: 1px solid rgba(0, 0, 0, 0.12);
   padding: 0 16px 16px 16px;
 }

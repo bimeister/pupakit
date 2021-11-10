@@ -7,11 +7,10 @@
         (click)="handleContainerClick($event)"
         (mousedown)="handleContainerStartEvents($event)"
       >
-        <div class="time-input-container__placeholder">
-          <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
-          <span class="right">{{ placeholderPreviewRight$ | async }}</span>
-        </div>
-        <!-- NOTE: ngModel is incorrect: use other mask instead -->
+      <div class="time-input-container__placeholder">
+        <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
+        <span class="right">{{ placeholderPreviewRight$ | async }}</span>
+      </div>
         <input
           class="input"
           #inputElement
@@ -20,14 +19,8 @@
           [mask]="'00:00'"
           [maxLength]="maxLengthInputValue"
           [attr.disabled]="(isDisabled$ | async) ? true : null"
-          [ngClass]="{
-            input__invalid: isInvalid$ | async,
-            input__medium: size === 'medium',
-            input__small: size === 'small',
-            input__large: size === 'large',
-            input__transparent: transparent,
-            input__focused: (isFocused$ | async) || droppable.isOpened
-          }"
+          [ngClass]="resultClassList$ | async"
+          [style.paddingRight.px]="rightPadding$ | async"
           (input)="updateValue(inputElement.value)"
           (focus)="emitFocusEvent($event)"
           (blur)="emitBlurEvent($event)"
@@ -35,18 +28,29 @@
           [value]="value$ | async"
           [ngModel]="value$ | async"
         />
-        <div
-          class="time-input-container__icon simple-time"
-          [class.focused]="(isFocused$ | async) || droppable.isOpened"
-          [class.disabled]="isDisabled$ | async"
-          (mouseenter)="handleIconHover(true)"
-          (mouseleave)="handleIconHover(false)"
-          (mousemove)="$event.stopPropagation()"
-          (click)="clearInputValue()"
-        >
-          <ng-container *ngIf="!(isValid$ | async) && !(isDisabled$ | async); else staticIconsTemplate">
-            <pupa-icon class="error-icon" name="md-alert" [title]="errorTitle$ | async"></pupa-icon>
-          </ng-container>
+        <div class="input__icons-list">
+          <pupa-button-icon
+            class="input__icon input__icon-calendar"
+            [icon]="isIconHovered$ | conditionAsync: 'app-cross': 'ios-calendar'"
+            size="small"
+            (mouseenter)="handleIconHover(true)"
+            (mouseleave)="handleIconHover(false)"
+            kind="subtle"
+            (click)="reset()"
+          >
+          </pupa-button-icon>
+          <pupa-button-icon
+            *ngIf="isInvalid$ | async"
+            class="input__icon input__icon-invalid"
+            icon="ios-information-circle-outline"
+            kind="subtle-danger"
+            size="small"
+            [pupaTooltip]="invalidTooltip"
+            [tooltipHideOnHover]="invalidTooltipHideOnHover"
+            [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
+            [tooltipContentTemplate]="invalidTooltipContentTemplate"
+          >
+          </pupa-button-icon>
         </div>
       </div>
     </pupa-droppable-trigger>
@@ -62,15 +66,3 @@
     </pupa-droppable-native-content>
   </pupa-droppable>
 </div>
-
-<ng-template #staticIconsTemplate>
-  <ng-container
-    *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async) && !(isDisabled$ | async); else defaultTemplate"
-  >
-    <pupa-icon name="md-close-circle"></pupa-icon>
-  </ng-container>
-</ng-template>
-
-<ng-template #defaultTemplate>
-  <pupa-icon name="ios-calendar"></pupa-icon>
-</ng-template>

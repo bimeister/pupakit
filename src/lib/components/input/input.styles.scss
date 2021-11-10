@@ -1,135 +1,305 @@
+// @import 'themes/functions';
+// @import 'mixins';
+// @import 'functions';
+
+// // $width_time-seconds: 108px;
+// // $width_time: 74px;
+
+// // .base-input-container {
+// //   box-sizing: border-box;
+// //   outline: none;
+// //   position: relative;
+// //   display: flex;
+// //   align-items: center;
+// //   justify-content: flex-start;
+// //   flex-wrap: nowrap;
+// //   width: 100%;
+
+// //   background-color: transparent;
+// //   outline: none;
+// //   border-radius: 2rem;
+// //   border: 1px solid transparent;
+// //   overflow-y: hidden;
+// // }
+
+// // .input {
+// //   width: 100%;
+
+// //   box-sizing: border-box;
+// //   padding: 0 8rem 0 2rem;
+
+// //   background-color: color(white);
+// //   border: 1px solid color(grey-ivory);
+// //   border-radius: 2rem;
+// //   color: color(text);
+// //   outline: none;
+// //   height: 8rem;
+// //   font-size: 4rem;
+// //   line-height: 1;
+
+// //   @include regular();
+// //   @include transition(#{'background, border, color'});
+// //   @include flex-container(row, center, space-between, nowrap);
+
+// //   &::placeholder {
+// //     color: color(grey-light);
+// //     @include transition(#{'color'});
+// //   }
+
+// //   &:not([disabled]):focus {
+// //     border-color: color(active);
+// //   }
+
+// //   &:disabled {
+// //     color: color(grey-apple);
+// //     cursor: not-allowed;
+// //     user-select: none;
+// //     border-color: color(grey-apple);
+
+// //     &::placeholder {
+// //       color: color(grey-apple);
+// //     }
+
+// //     &::selection {
+// //       background: transparent;
+// //     }
+// //   }
+
+// //   &__text {
+// //     max-width: calc(100% - 4rem);
+// //     @include ellipsis-text-overflow;
+// //   }
+
+// //   &__medium {
+// //     height: 8rem;
+// //     font-size: 4rem;
+// //     line-height: 1;
+// //     padding: 2rem 3rem;
+// //   }
+
+// //   &__small {
+// //     height: 6rem;
+// //     font-size: variable(font-size_base-text);
+// //     line-height: 1.14;
+// //     padding: 1rem 2rem;
+// //   }
+
+// //   &__large {
+// //     height: 10rem;
+// //     font-size: 24px;
+// //     line-height: 1.08;
+// //     padding: 2rem 3rem;
+// //     @include medium();
+// //   }
+
+// //   &__focused:not([disabled]) {
+// //     border-color: color(active);
+// //   }
+
+// //   &__invalid:not([disabled]) {
+// //     border-color: color(error);
+// //     &:focus {
+// //       border-color: color(error);
+// //     }
+// //   }
+
+// //   &__transparent {
+// //     border: none;
+// //     background-color: transparent;
+// //     &:focus {
+// //       border: none;
+// //     }
+
+// //     &.input__invalid {
+// //       border: 1px solid color(error);
+// //     }
+// //   }
+// // }
+
+// // .dropdown-trigger {
+// //   width: 100%;
+// //   display: block;
+// // }
+
+// // .icon {
+// //   position: absolute;
+// //   right: 2rem;
+// //   color: color(success);
+// //   font-size: 4rem;
+// //   height: 4rem;
+// //   pointer-events: none;
+
+// //   &__calendar {
+// //     color: inherit;
+// //   }
+// // }
+
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
 
-$width_time-seconds: 108px;
-$width_time: 74px;
-
-.base-input-container {
+:host {
   box-sizing: border-box;
-  outline: none;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  flex-wrap: nowrap;
-  width: 100%;
-
-  background-color: transparent;
-  outline: none;
-  border-radius: 2rem;
-  border: 1px solid transparent;
-  overflow-y: hidden;
+  @include flex-container(row, center, flex-start);
 }
 
 .input {
-  width: 100%;
-
-  box-sizing: border-box;
-  padding: 0 8rem 0 2rem;
-
-  background-color: color(white);
-  border: 1px solid color(grey-ivory);
-  border-radius: 2rem;
-  color: color(text);
+  // block
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
   outline: none;
-  height: 8rem;
-  font-size: 4rem;
-  line-height: 1;
+  width: 100%;
+  border-radius: 1px;
+  box-sizing: border-box;
+  border: 1px solid transparent;
+  color: color(base-n600);
+  caret-color: color(base-n600);
+  &:not(:focus) {
+    background-color: color(base-white-n500);
+  }
 
-  @include regular();
-  @include transition(#{'background, border, color'});
-  @include flex-container(row, center, space-between, nowrap);
-
+  // elements
   &::placeholder {
-    color: color(grey-light);
-    @include transition(#{'color'});
+    opacity: 0;
+    will-change: opacity;
+    color: color(base-n600);
+  }
+  &__icons-list {
+    position: absolute;
+    overflow: hidden;
+    top: 1px;
+    bottom: 1px;
+    box-sizing: border-box;
+    padding-left: 2px;
+    padding-right: 2px;
+    height: calc(100% - 2px);
+    @include flex-container(row, center);
+    width: fit-content;
+    background-color: transparent;
   }
 
-  &:not([disabled]):focus {
-    border-color: color(active);
-  }
-
-  &:disabled {
-    color: color(grey-apple);
-    cursor: not-allowed;
-    user-select: none;
-    border-color: color(grey-apple);
-
+  // sizes
+  &_large {
+    height: 10rem;
+    @include font-size-large();
+    @include font-type-point();
+    padding: 2rem 5rem;
+    ~ .input__icons-list {
+      right: 3rem;
+    }
     &::placeholder {
-      color: color(grey-apple);
+      @include font-type-caption();
+    }
+  }
+  &_medium {
+    height: 8rem;
+    font-size: 3rem;
+    line-height: 4rem;
+    @include font-type-caption();
+    padding: 2rem 4rem;
+    ~ .input__icons-list {
+      right: 2rem;
+    }
+  }
+  &_small {
+    height: 6rem;
+    @include font-type-caption();
+    @include font-size-mark();
+    padding: 2rem 3rem;
+    ~ .input__icons-list {
+      right: 1rem;
+    }
+  }
+
+  // states
+  &:not(.input_disabled) {
+    @include hover() {
+      &:not(:focus) {
+        background-color: color(base-white-n400);
+        &::placeholder {
+          opacity: 1;
+        }
+      }
     }
 
+    &:active {
+      &:not(:focus) {
+        caret-color: transparent;
+        border-color: transparent;
+        background-color: color(base-white-n300);
+        &::placeholder {
+          opacity: 1;
+        }
+      }
+    }
+
+    &:focus {
+      cursor: text;
+      background-color: color(base-n0);
+      &:not(.input_invalid) {
+        border-color: color(base-white-n275);
+      }
+      &::placeholder {
+        opacity: 1;
+      }
+    }
+  }
+
+  &_invalid {
+    border-color: color(red-n400);
+  }
+
+  &_disabled {
+    border-color: transparent;
+    cursor: not-allowed;
+    color: color(base-white-n250);
+    background-color: color(base-white-n500);
     &::selection {
       background: transparent;
     }
-  }
-
-  &__text {
-    max-width: calc(100% - 4rem);
-    @include ellipsis-text-overflow;
-  }
-
-  &__medium {
-    height: 8rem;
-    font-size: 4rem;
-    line-height: 1;
-    padding: 2rem 3rem;
-  }
-
-  &__small {
-    height: 6rem;
-    font-size: variable(font-size_base-text);
-    line-height: 1.14;
-    padding: 1rem 2rem;
-  }
-
-  &__large {
-    height: 10rem;
-    font-size: 24px;
-    line-height: 1.08;
-    padding: 2rem 3rem;
-    @include medium();
-  }
-
-  &__focused:not([disabled]) {
-    border-color: color(active);
-  }
-
-  &__invalid:not([disabled]) {
-    border-color: color(error);
-    &:focus {
-      border-color: color(error);
+    &::placeholder {
+      opacity: 1;
+      color: color(base-white-n250);
     }
   }
 
-  &__transparent {
-    border: none;
-    background-color: transparent;
-    &:focus {
-      border: none;
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+    caret-color: color(base-n0);
+    &:not(:focus) {
+      background-color: color(base-dark-n500);
     }
-
-    &.input__invalid {
-      border: 1px solid color(error);
+    &::placeholder {
+      color: color(base-n0);
     }
-  }
-}
+    &:not(.input_disabled) {
+      @include hover() {
+        &:not(:focus) {
+          background-color: color(base-dark-n400);
+        }
+      }
 
-.dropdown-trigger {
-  width: 100%;
-  display: block;
-}
+      &:active {
+        &:not(:focus) {
+          background-color: color(base-dark-n300);
+        }
+      }
 
-.icon {
-  position: absolute;
-  right: 2rem;
-  color: color(success);
-  font-size: 4rem;
-  height: 4rem;
-  pointer-events: none;
-
-  &__calendar {
-    color: inherit;
+      &:focus {
+        background-color: color(base-dark-n600);
+        &:not(.input_invalid) {
+          border-color: color(base-dark-n275);
+        }
+      }
+    }
+    &_disabled {
+      color: color(base-dark-n250);
+      background-color: color(base-dark-n500);
+      &::placeholder {
+        color: color(base-dark-n250);
+      }
+    }
   }
 }

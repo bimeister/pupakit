@@ -13,16 +13,17 @@
 
     <h3>Time Picker</h3>
     <h5>Simple Input</h5>
-    <pupa-input-time [formControl]="timeFormControl"></pupa-input-time>
+    <pupa-input-time [formControl]="timeFormControl" [withReset]="true"></pupa-input-time>
     <h5>Simple Input With Seconds</h5>
     <pupa-input-time-seconds [formControl]="timeSecondsFormControl"></pupa-input-time-seconds>
-    <h5>Simple With Time And Seconds</h5>
+    <!-- <h5>Simple With Time And Seconds</h5>
     <pupa-time-picker [withSeconds]="true"></pupa-time-picker>
     <h3>Date Picker</h3>
     <h5>Simple</h5>
     <pupa-input-date
       [formControl]="dateFormControl"
       [isBackDating]="useIsBackDatingControl.value"
+      [withReset]="true"
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
     ></pupa-input-date>
     <h5>Simple With Time</h5>
@@ -70,6 +71,6 @@
       [previewMode]="'simple'"
       [isBackDating]="useIsBackDatingControl.value"
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
-    ></pupa-date-picker>
+    ></pupa-date-picker> -->
   </div>
 </div>

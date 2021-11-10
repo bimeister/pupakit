@@ -1,11 +1,11 @@
 @import './input.styles.scss';
 
-$width_time-seconds: 114px;
-$width_time: 82px;
-$width_date: 180px;
-$width_date-seconds: 206px;
+$width_time-seconds: 33rem;
+$width_time: 30rem;
+$width_date: 40rem;
+$width_date-seconds: 50rem;
 
-$width_date-range: 242px;
+$width_date-range: 60rem;
 
 :host {
   display: block;
@@ -38,6 +38,9 @@ $width_date-range: 242px;
 .input {
   background-color: transparent;
   z-index: 2;
+  &__icons-list {
+    z-index: 3;
+  }
 }
 
 .time-input-container {
@@ -45,10 +48,6 @@ $width_date-range: 242px;
 
   background-color: color(white);
   border-radius: 2rem;
-
-  &.table-mode {
-    background-color: transparent;
-  }
 
   &__icon {
     position: absolute;
@@ -88,27 +87,22 @@ $width_date-range: 242px;
     right: 0;
     bottom: 0;
     padding-left: 2rem;
-    border: 1px solid transparent;
-    z-index: 0;
-    line-height: 1;
-    font-size: 4rem;
-    padding: 2rem;
+    @include font-type-caption();
+    z-index: 3;
+    font-size: 3rem;
+    line-height: 4rem;
+    padding: 2rem 4rem;
     color: color(grey-light);
     display: flex;
     pointer-events: none;
 
-    padding-left: 3rem;
 
     .left {
       color: transparent;
-      font-size: 4rem;
-      line-height: 1;
       white-space: break-spaces;
     }
 
     .right {
-      font-size: 4rem;
-      line-height: 1;
       white-space: break-spaces;
     }
 
