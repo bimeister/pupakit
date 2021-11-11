@@ -16,11 +16,11 @@
 
     <!-- header cell template only-->
     <pupa-table-column-template columnType="city">
-      <div *pupaTableHeaderCellTemplate="let column">
+      <ng-container *pupaTableHeaderCellTemplate="let column">
         <pupa-table-header-cell [column]="column">
           {{ column.definition.title }}
         </pupa-table-header-cell>
-      </div>
+      </ng-container>
     </pupa-table-column-template>
 
     <!-- body cell template only-->

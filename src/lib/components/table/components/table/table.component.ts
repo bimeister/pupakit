@@ -1,44 +1,44 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  TemplateRef,
-  Input,
-  OnInit,
-  OnChanges,
-  OnDestroy,
-  ViewChild,
-  TrackByFunction,
-  AfterViewInit,
-  ElementRef,
-  Renderer2
-} from '@angular/core';
-import { TableTemplatesService } from '../../services/table-templates.service';
-import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
-import { BusEventBase, EventBus } from '@bimeister/event-bus';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { distinctUntilChanged, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
-import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
-import { TableBodyCellContext } from '../../../../../internal/declarations/interfaces/table-body-cell-context.interface';
-import { TableController } from '../../../../../internal/declarations/classes/table-controller.class';
-import { TableDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/table-data-display-collection-ref.interface';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+import { BusEventBase, EventBus } from '@bimeister/event-bus';
+import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { TableBodyRow } from '../../../../../internal/declarations/classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../../../../../internal/declarations/classes/table-body-rows-data-source.class';
 import { TableColumn } from '../../../../../internal/declarations/classes/table-column.class';
-import { TableBodyRow } from '../../../../../internal/declarations/classes/table-body-row.class';
+import { TableController } from '../../../../../internal/declarations/classes/table-controller.class';
 import { TableRow } from '../../../../../internal/declarations/classes/table-row.class';
-import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { isTableCellHtmlElement } from '../../../../../internal/type-guards/is-table-cell-html-element.type-guard';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
-import { TableEvents } from '../../../../../internal/declarations/events/table.events';
 import { TableColumnSorting } from '../../../../../internal/declarations/enums/table-column-sorting.enum';
-import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
 import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
-import { TableScrollbarsService } from '../../services/table-scrollbars.service';
+import { TableEvents } from '../../../../../internal/declarations/events/table.events';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { TableBodyCellContext } from '../../../../../internal/declarations/interfaces/table-body-cell-context.interface';
 import { TableCellHtmlElementDataset } from '../../../../../internal/declarations/interfaces/table-cell-html-element-dataset.interface';
+import { TableDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/table-data-display-collection-ref.interface';
+import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
+import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
+import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
+import { isTableCellHtmlElement } from '../../../../../internal/type-guards/is-table-cell-html-element.type-guard';
+import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
+import { TableScrollbarsService } from '../../services/table-scrollbars.service';
+import { TableTemplatesService } from '../../services/table-templates.service';
 
 function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset {
   const targetPath: EventTarget[] = event.composedPath();
@@ -81,26 +81,25 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   public cdkVirtualScrollViewportRef: Nullable<CdkVirtualScrollViewport>;
 
   @ViewChild('headerScrollableContainer', { static: true })
-  public headerScollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
+  public headerScrollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @ViewChild('headerScrollableRowContainer', { read: ElementRef })
-  public headerScollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
+  public headerScrollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @ViewChild('decorScrollableRowContainer', { read: ElementRef })
-  public decorScollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
+  public decorScrollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @Input() public controller: TableController<T>;
   private readonly controller$: BehaviorSubject<Nullable<TableController<T>>> = new BehaviorSubject<TableController<T>>(
     null
   );
-  private readonly availableContoller$: Observable<TableController<T>> = this.controller$.pipe(filterNotNil());
+  private readonly availableController$: Observable<TableController<T>> = this.controller$.pipe(filterNotNil());
 
-  public isVerticalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isVerticalVisible$;
-  public isHorizontalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$;
+  public readonly isVerticalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isVerticalVisible$;
+  public readonly isHorizontalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$;
 
-  private readonly dataDisplayCollection$: Observable<TableDataDisplayCollectionRef<T>> = this.availableContoller$.pipe(
-    map((controller: TableController<T>) => controller.getDataDisplayCollectionRef())
-  );
+  private readonly dataDisplayCollection$: Observable<TableDataDisplayCollectionRef<T>> =
+    this.availableController$.pipe(map((controller: TableController<T>) => controller.getDataDisplayCollectionRef()));
 
   public readonly data$: Observable<T[]> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.data$)
@@ -154,7 +153,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.scrollBehavior$)
   );
 
-  public eventBus$: Observable<EventBus> = this.availableContoller$.pipe(
+  public eventBus$: Observable<EventBus> = this.availableController$.pipe(
     map((controller: TableController<T>) => controller.eventBus)
   );
 
@@ -263,8 +262,8 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   public processBodyScrollLeftChanges(scrollLeft: number): void {
-    const scrollableHeaderCells: HTMLElement = this.headerScollableRowContainerRef?.nativeElement;
-    const scrollableDecorCells: HTMLElement = this.decorScollableRowContainerRef?.nativeElement;
+    const scrollableHeaderCells: HTMLElement = this.headerScrollableRowContainerRef?.nativeElement;
+    const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerRef?.nativeElement;
     this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
     this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
   }
@@ -283,11 +282,11 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
    * Use this method instead of :ng-deep
    */
   private setCdkVirtualScrollContentWrapperWidth(): void {
-    const cdkVitrualScrollElement: HTMLElement = this.cdkVirtualScrollViewportRef.elementRef.nativeElement;
-    if (!(cdkVitrualScrollElement.firstChild instanceof HTMLElement)) {
+    const cdkVirtualScrollElement: HTMLElement = this.cdkVirtualScrollViewportRef.elementRef.nativeElement;
+    if (!(cdkVirtualScrollElement.firstChild instanceof HTMLElement)) {
       return;
     }
-    const cdkVirtualScrollContentWrapperElement: HTMLElement = cdkVitrualScrollElement.firstChild;
+    const cdkVirtualScrollContentWrapperElement: HTMLElement = cdkVirtualScrollElement.firstChild;
     this.renderer.setStyle(cdkVirtualScrollContentWrapperElement, 'width', '100%');
   }
 
@@ -402,7 +401,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   private registrerHeaderScrollableContainerForIntersectionDetection(): void {
-    const headerScrollableRowsContainer: HTMLElement = this.headerScollableRowsContainerRef.nativeElement;
+    const headerScrollableRowsContainer: HTMLElement = this.headerScrollableRowsContainerRef.nativeElement;
     this.tableColumnsIntersectionService.registerScrollArea(headerScrollableRowsContainer);
   }
 }

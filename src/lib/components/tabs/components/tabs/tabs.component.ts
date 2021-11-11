@@ -54,7 +54,7 @@ export class TabsComponent extends TabsBase<TabsStateService> implements OnInit 
 
   public ngOnInit(): void {
     this.stateService.registerHostHtmlElement(this.elementRef.nativeElement);
-    this.stateService.refisterScrollable(this.scrollable);
+    this.stateService.registerScrollable(this.scrollable);
     this.stateService.registerTabsHtmlElement(this.tabsContainerRef.nativeElement);
   }
 

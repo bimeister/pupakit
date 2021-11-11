@@ -58,6 +58,7 @@
   <div class="table__body table-body">
     <pupa-scrollable
       class="table-body__scrollable"
+      [size]="'large'"
       (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
       [position]="'external'"
     >
@@ -117,6 +118,7 @@
           <pupa-scrollable
             class="table-body__scrollable-container"
             #bodyScrollableContainer
+            [size]="'large'"
             [syncWith]="[placeholderScrollableContainer]"
             (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
             [invisibleScrollbars]="['horizontal']"
@@ -163,6 +165,7 @@
     <pupa-scrollable
       #placeholderScrollableContainer
       class="table-bottom-scrollbar__scrollable-container"
+      [size]="'large'"
       [syncWith]="[bodyScrollableContainer]"
       (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
       (horizontalScrollVisibilityChanged)="processHorizontalScrollBarVisibilityChanges($event)"

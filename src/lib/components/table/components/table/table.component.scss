@@ -160,7 +160,13 @@
 
 .table-bottom-scrollbar {
   display: flex;
+  visibility: hidden;
   height: $width_scrollbar;
+
+  &_visible {
+    visibility: initial;
+    border-bottom: 1px solid color('base-white-n400');
+  }
 }
 
 .table-bottom-scrollbar__pinned-left-container {
