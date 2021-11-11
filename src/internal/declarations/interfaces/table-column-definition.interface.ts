@@ -4,8 +4,8 @@ import { TableAdaptiveColumnSizes } from './table-adaptive-column-sizes.interfac
 
 export interface TableColumnDefinition {
   id: string;
-  modelKey: string;
-  title: string;
+  modelKey?: string;
+  title?: string;
   pin?: TableColumnPin;
   type?: string;
   rerenderOnRowOrColumnChanges?: boolean;

@@ -51,7 +51,7 @@ export class TabsStateService extends TabsServiceBase {
     this.hostElement$.next(htmlElement);
   }
 
-  public refisterScrollable(scrollable: ScrollableComponent): void {
+  public registerScrollable(scrollable: ScrollableComponent): void {
     this.scrollable$.next(scrollable);
   }
 

@@ -10,6 +10,8 @@ interface SomeData {
   firstName: string;
   lastName: string;
   age: number;
+  city: string;
+  date: Date;
 }
 
 const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, index: number) => ({
@@ -17,6 +19,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
+  date: new Date(),
   age: index + 1
 }));
 
@@ -28,21 +31,28 @@ const COLUMNS: TableColumnDefinition[] = [
 
     // left side
     pin: TableColumnPin.Left,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 500 }
   },
   {
     id: 'last-name',
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 1000 }
+    defaultSizes: { widthPx: 350 }
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 1000 }
+    defaultSizes: { widthPx: 350 }
+  },
+  {
+    id: 'date',
+    modelKey: 'date',
+    title: 'Date',
+    pin: TableColumnPin.None,
+    defaultSizes: { widthPx: 350 }
   },
   {
     id: 'age-column',
@@ -64,6 +74,8 @@ const COLUMNS: TableColumnDefinition[] = [
 })
 export class TableExample3Component {
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+
+  public readonly columns: TableColumnDefinition[] = COLUMNS;
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);

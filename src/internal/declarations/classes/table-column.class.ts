@@ -1,11 +1,11 @@
-import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
-import { asapScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { asapScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { distinctUntilChanged, map, pluck, subscribeOn, switchMap, take } from 'rxjs/operators';
-import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
-import { TableColumnRef } from '../interfaces/table-column-ref.interface';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { TableAdaptiveColumnSizes } from '../interfaces/table-adaptive-column-sizes.interface';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
+import { TableColumnRef } from '../interfaces/table-column-ref.interface';
+import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
 
 const BREAKPOINTS: string[] = ['xxl', 'xl', 'xlg', 'lg', 'md', 'sm', 'xs'];
 
@@ -45,22 +45,22 @@ export class TableColumn implements TableColumnRef {
     this.adaptiveSizes$
   ]).pipe(
     map(([defaultSizes, adaptiveSizes]: [Nullable<TableColumnSizes>, Nullable<TableAdaptiveColumnSizes>]) => {
-      const saniniazedSizes: TableColumnSizes = isNil(defaultSizes)
+      const sanitizedSizes: TableColumnSizes = isNil(defaultSizes)
         ? UNDEFINED_SIZES
         : { ...UNDEFINED_SIZES, ...defaultSizes };
-      const brakepointToSizesMap: Map<string, TableColumnSizes> = new Map<string, TableColumnSizes>();
+      const breakpointToSizesMap: Map<string, TableColumnSizes> = new Map<string, TableColumnSizes>();
 
       BREAKPOINTS.forEach((breakpoint: string, index: number) => {
-        const largerBreakpoiuntSizes: TableColumnSizes =
-          index === 0 ? saniniazedSizes : brakepointToSizesMap.get(BREAKPOINTS[index - 1]);
-        brakepointToSizesMap.set(
+        const largerBreakpointSizes: TableColumnSizes =
+          index === 0 ? sanitizedSizes : breakpointToSizesMap.get(BREAKPOINTS[index - 1]);
+        breakpointToSizesMap.set(
           breakpoint,
           isNil(adaptiveSizes?.[breakpoint])
-            ? largerBreakpoiuntSizes
+            ? largerBreakpointSizes
             : { ...UNDEFINED_SIZES, ...adaptiveSizes[breakpoint] }
         );
       });
-      return brakepointToSizesMap;
+      return breakpointToSizesMap;
     }),
     shareReplayWithRefCount()
   );

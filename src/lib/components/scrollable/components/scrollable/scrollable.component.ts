@@ -28,7 +28,7 @@ import { ScrollbarType } from '../../../../../internal/declarations/types/scroll
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
 
-const ANIMATION_FRAME_TROTTLE_TIME_MS: number = 1000 / 15;
+const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 
 @Component({
   selector: 'pupa-scrollable',
@@ -260,7 +260,7 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
   private updateSizesOnAnimationFrame(): Subscription {
     return getAnimationFrameLoop()
-      .pipe(subscribeOutsideAngular(this.ngZone), throttleTime(ANIMATION_FRAME_TROTTLE_TIME_MS))
+      .pipe(subscribeOutsideAngular(this.ngZone), throttleTime(ANIMATION_FRAME_THROTTLE_TIME_MS))
       .subscribe(() => {
         this.setScrollBarsSizes();
       });

@@ -9,12 +9,15 @@
 
 .table-body-cell {
   box-sizing: border-box;
-  padding: 16px;
+  padding: 2rem 20px 2rem 4rem;
   @include font-size-small;
   @include font-type-caption;
-  @include ellipsis-text-overflow;
   color: color('base-n600');
   line-height: 17px;
+
+  display: flex;
+  align-items: center;
+  height: inherit;
 
   &_clickable {
     &:hover {
@@ -26,5 +29,14 @@
         border-color: color('primary-n400');
       }
     }
+  }
+
+  &__content {
+    display: block;
+    @include ellipsis-text-overflow;
+  }
+
+  @include xs() {
+    padding: 6px 4rem 6px 3rem;
   }
 }
