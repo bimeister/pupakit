@@ -79,6 +79,13 @@ export class InputDateRangeComponent extends InputDateTimeBase {
     this.value$.next(serializedValue.slice(0, MAX_LENGTH_INPUT_VALUE));
   }
 
+  public reset(): void {
+    if (this.withReset) {
+      this.updateValue('');
+    }
+    this.inputElementRef.nativeElement.focus();
+  }
+
   public writeValue(newValue: any): void {
     if (isEmpty(newValue)) {
       this.setValue('');

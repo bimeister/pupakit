@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { isEmpty, isNil } from '@bimeister/utilities';
-import { combineLatest, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ParsedTimeData } from '../../../../../internal/declarations/interfaces/parsed-time-data.interface';
@@ -29,18 +29,12 @@ const MAX_MINUTES: number = 59;
 export class InputTimeComponent extends InputDateTimeBase {
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
 
-  public readonly rightPadding$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
-
   public readonly placeholderPreviewLeft$: Observable<string> = this.value$.pipe(
     map((value: string) => (isEmpty(value) ? '' : `${value}`))
   );
 
   public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
     map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
-  );
-
-  public timePlaceholder$: Observable<string> = combineLatest([this.placeholderPreviewLeft$, this.placeholderPreviewRight$]).pipe(
-    map(([left, right]: [string, string]) => left + right)
   );
 
   public setValue(value: ValueType): void {

@@ -7,8 +7,8 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { FormControl, ValidatorFn } from '@angular/forms';
-import { isNil } from '@bimeister/utilities';
+import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+import { isEmpty } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.component';
 
@@ -25,7 +25,7 @@ export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDes
   private readonly subscription: Subscription = new Subscription();
 
   @Input()
-  public readonly control: FormControl;
+  public readonly controlsList: FormControl[];
 
   @Input()
   public readonly validators: ValidatorFn[] = [];
@@ -33,17 +33,17 @@ export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDes
   public ngAfterViewInit(): void {
     this.subscription.add(
       this.propsCheckbox.subscribe((attachValidator: boolean) => {
-        if (isNil(this.control)) {
+        if (isEmpty(this.controlsList)) {
           return;
         }
 
         if (attachValidator) {
-          this.control.setValidators(this.validators);
+          this.controlsList.forEach((control: AbstractControl) => control.setValidators(this.validators));
         } else {
-          this.control.clearValidators();
+          this.controlsList.forEach((control: AbstractControl) => control.clearValidators());
         }
 
-        this.control.updateValueAndValidity();
+        this.controlsList.forEach((control: AbstractControl) => control.updateValueAndValidity());
       })
     );
   }

@@ -39,7 +39,8 @@ export class SidebarContentComponent {
       { title: 'Floating Card', link: '/kit/floating-card' },
       { title: 'Info block', link: '/kit/info-block' },
       { title: 'Input', link: '/kit/input' },
-      { title: 'Label', link: '/kit/label' },
+      { title: 'Date time pickers', link: '/kit/date-time-picker' },
+      { title: 'Label', link: '/kit/label' }
     ]
   };
 

@@ -75,7 +75,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isFilled$,
     this.isDisabled$
   ]).pipe(
-    map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled),
+    map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
   );
 
   protected readonly sizeMap: Map<InputSize, number> = new Map(SIZES_LIST);
@@ -100,6 +100,15 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
         )
       )
     );
+  }
+
+  protected processWithResetChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.withReset$.next(updatedValue);
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -157,14 +166,5 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.autocomplete$.next(updatedValue);
-  }
-
-  protected processWithResetChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-    this.withReset$.next(updatedValue);
   }
 }

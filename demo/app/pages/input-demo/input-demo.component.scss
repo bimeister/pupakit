@@ -7,16 +7,22 @@
 }
 
 .form {
-  width: 100rem;
-  @include flex-container(row, center, space-between);
-  gap: 2rem;
+  @include flex-container(column);
   &__control {
     width: 60rem;
-  }
-  &_vertical {
-    @include flex-container(column, flex-start, space-between);
-    .form__control {
-      width: 100%;
+    &-date {
+      width: fit-content;
     }
   }
+  &__control ~ &__control {
+    margin-top: 1rem;
+  }
+  pupa-label {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.hidden {
+  opacity: 0;
 }

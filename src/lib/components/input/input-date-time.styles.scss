@@ -1,8 +1,11 @@
+@use 'sass:map';
+@use 'sass:string';
 @import './input.styles.scss';
 
+$width_time: 29rem;
 $width_time-seconds: 33rem;
-$width_time: 30rem;
-$width_date: 40rem;
+$width_date: 37rem;
+$width_date-time: 45rem;
 $width_date-seconds: 50rem;
 
 $width_date-range: 60rem;
@@ -25,6 +28,9 @@ $width_date-range: 60rem;
   &.date.fixed-size {
     width: $width_date;
 
+    &.time {
+      width: $width_date-time;
+    }
     &.time-seconds {
       width: $width_date-seconds;
     }
@@ -35,88 +41,52 @@ $width_date-range: 60rem;
   }
 }
 
-.input {
-  background-color: transparent;
-  z-index: 2;
-  &__icons-list {
-    z-index: 3;
-  }
-}
-
 .time-input-container {
   position: relative;
 
-  background-color: color(white);
+  background-color: transparent;
   border-radius: 2rem;
 
-  &__icon {
+  &__shape-container {
     position: absolute;
-    right: 10px;
-    height: 4rem;
-    top: 50%;
-    transform: translateY(-50%);
-    color: color(main);
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    @include transition(#{'opacity, color'});
-
-    &.simple-time {
-      right: 5px;
-    }
-
-    &.focused {
-      color: color(active);
-    }
-
-    &:hover:not(.disabled) {
-      color: color(active);
-    }
-
-    &.disabled {
-      color: color(grey-apple);
-    }
-  }
-
-  &__placeholder {
-    position: absolute;
-    left: 0;
+    left: 1px;
     top: 0;
     right: 0;
     bottom: 0;
-    padding-left: 2rem;
     @include font-type-caption();
     z-index: 3;
     font-size: 3rem;
     line-height: 4rem;
     padding: 2rem 4rem;
-    color: color(grey-light);
+    color: color(base-n600);
+    @include host-selector-dark-theme() {
+      color: color(base-n0);
+    }
     display: flex;
     pointer-events: none;
-
-
-    .left {
-      color: transparent;
-      white-space: break-spaces;
-    }
-
-    .right {
-      white-space: break-spaces;
-    }
-
-    &.disabled {
-      color: color(grey-apple);
-    }
   }
-}
 
-.error-icon {
-  color: color(error);
+  &__shape-left {
+    display: inline;
+    color: transparent;
+    white-space: break-spaces;
+  }
+
+  &__shape-right {
+    display: inline;
+    color: inherit;
+    white-space: break-spaces;
+  }
 }
 
 .integrated-space {
   line-height: inherit;
   font-size: inherit;
+}
+
+.input[disabled] ~ .time-input-container__shape-container {
+  color: map.get($light, disabled, placeholder, color);
+  @include host-selector-dark-theme() {
+    color: map.get($dark, disabled, placeholder, color);
+  }
 }

@@ -24,6 +24,7 @@ import { appEyeOnIcon } from '../../../internal/constants/icons/app-eye-on-icon.
 import { appCrossIcon } from '../../../internal/constants/icons/app-cross-icon.const';
 import { appEyeOffIcon } from '../../../internal/constants/icons/app-eye-off-icon.const';
 import { TooltipModule } from '../tooltip/tooltip.module';
+import { iosHelpCircleIcon } from '../../../public-api';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -56,7 +57,8 @@ const DECLARATIONS: any[] = [...EXPORTS];
       iosInformationCircleOutlineIcon,
       appEyeOnIcon,
       appCrossIcon,
-      appEyeOffIcon
+      appEyeOffIcon,
+      iosHelpCircleIcon
     ]),
     NgxMaskModule.forRoot()
   ],
