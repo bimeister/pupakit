@@ -21,7 +21,7 @@ export class DateTimePickerDemoComponent {
   public readonly dateTimeFormControl: FormControl = new FormControl(DEFAULT_DATE);
   public readonly dateTimeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
   public readonly timeFormControl: FormControl = new FormControl(DEFAULT_DATE, [Validators.required]);
-  public readonly timeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly timeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE, [Validators.required]);
   public readonly rangeFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
   public readonly rangeDoubleFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
 

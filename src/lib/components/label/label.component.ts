@@ -25,7 +25,7 @@ export class LabelComponent {
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.size$,
-    this.disabled$.pipe(map((isInvalid: boolean) => (isInvalid ? 'disabled' : null))),
+    this.disabled$.pipe(map((isInvalid: boolean) => (isInvalid ? 'disabled' : null)))
   ]).pipe(
     map((classes: string[]) =>
       classes

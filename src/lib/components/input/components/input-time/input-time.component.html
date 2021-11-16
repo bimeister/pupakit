@@ -3,14 +3,10 @@
     <pupa-droppable-trigger class="dropdown-trigger">
       <div
         class="time-input-container"
-        [class.table-mode]="isTableMode$ | async"
         (click)="handleContainerClick($event)"
         (mousedown)="handleContainerStartEvents($event)"
       >
-      <div class="time-input-container__placeholder">
-        <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
-        <span class="right">{{ placeholderPreviewRight$ | async }}</span>
-      </div>
+        <!-- NOTE: ngModel is incorrect: use other mask instead -->
         <input
           class="input"
           #inputElement
@@ -28,13 +24,17 @@
           [value]="value$ | async"
           [ngModel]="value$ | async"
         />
-        <div class="input__icons-list">
+        <div class="time-input-container__shape-container">
+          <span class="time-input-container__shape-left">{{ placeholderPreviewLeft$ | async }}</span>
+          <span class="time-input-container__shape-right">{{ placeholderPreviewRight$ | async }}</span>
+        </div>
+        <div class="input__icons-list" [ngClass]="size$ | async">
           <pupa-button-icon
             class="input__icon input__icon-calendar"
-            [icon]="isIconHovered$ | conditionAsync: 'app-cross': 'ios-calendar'"
+            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'ios-close-circle-outline':'ios-calendar'"
             size="small"
-            (mouseenter)="handleIconHover(true)"
-            (mouseleave)="handleIconHover(false)"
+            (mouseout)="handleIconHover($event, false)"
+            (mouseover)="handleIconHover($event, true)"
             kind="subtle"
             (click)="reset()"
           >
@@ -49,6 +49,7 @@
             [tooltipHideOnHover]="invalidTooltipHideOnHover"
             [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
             [tooltipContentTemplate]="invalidTooltipContentTemplate"
+            (click)="inputElement.focus()"
           >
           </pupa-button-icon>
         </div>

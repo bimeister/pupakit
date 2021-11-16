@@ -1,7 +1,27 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { InputBase } from '../../../../src/internal/declarations/classes/abstract/input-base.abstract';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
+import { isEmpty, isNil } from '@bimeister/utilities';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+
+const DEFAULT_DATE: Date = new Date();
+const DEFAULT_DATE_NEXT_MONTH: Date = new Date();
+DEFAULT_DATE_NEXT_MONTH.setMonth(DEFAULT_DATE.getMonth() + 1);
+const DATE_PLUS_FIVE_DAYS: Date = new Date();
+DATE_PLUS_FIVE_DAYS.setDate(DATE_PLUS_FIVE_DAYS.getDate() + 5);
+
+const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
+  const value: unknown = control.value;
+  const isObject: boolean = typeof value === 'object';
+  const isNilObject: boolean = isObject && isNil(value);
+  const isEmptyValue: boolean = !Array.isArray(value) && !isObject && isEmpty(value);
+  const isEmptyRange: boolean = Array.isArray(value) && value.every(item => isNil(item));
+  if (isEmptyValue || isEmptyRange || isNilObject) {
+    return { required: true };
+  }
+  return null;
+};
 
 @Component({
   selector: 'demo-input',
@@ -10,9 +30,6 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent {
-  @ViewChild('input')
-  private readonly inputRef: InputBase<unknown>;
-
   public readonly placeholder: string = 'Placeholder';
 
   public readonly typeOptions: RadioOption[] = [
@@ -27,6 +44,34 @@ export class InputDemoComponent {
     {
       caption: 'Number',
       value: 'number'
+    },
+    {
+      caption: 'Time',
+      value: 'time'
+    },
+    {
+      caption: 'Time with seconds',
+      value: 'time-seconds'
+    },
+    {
+      caption: 'Date',
+      value: 'date'
+    },
+    {
+      caption: 'Date + Time',
+      value: 'date-time'
+    },
+    {
+      caption: 'Date + Time with seconds',
+      value: 'date-time-seconds'
+    },
+    {
+      caption: 'Date Range',
+      value: 'date-range'
+    },
+    {
+      caption: 'Date Range Double',
+      value: 'date-range-double'
     }
   ];
 
@@ -46,11 +91,47 @@ export class InputDemoComponent {
     }
   ];
 
-  public readonly validators: ValidatorFn[] = [Validators.required, Validators.maxLength(15)];
+  public readonly validators: ValidatorFn[] = [REQUIRED_VALIDATOR];
 
-  public readonly formControl: FormControl = new FormControl('');
+  public readonly textControl: FormControl = new FormControl('');
+  public readonly passwordControl: FormControl = new FormControl('');
+  public readonly numberControl: FormControl = new FormControl('');
+  public readonly dateFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly dateTimeFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly dateTimeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly timeFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly timeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
+  public readonly rangeFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
+  public readonly rangeDoubleFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
+  public readonly propertyControl: FormControl = new FormControl();
+  public readonly controlsList: FormControl[] = [
+    this.textControl,
+    this.passwordControl,
+    this.numberControl,
+    this.dateFormControl,
+    this.timeFormControl,
+    this.dateTimeFormControl,
+    this.timeSecondsFormControl,
+    this.dateTimeSecondsFormControl,
+    this.rangeFormControl,
+    this.rangeDoubleFormControl
+  ];
+  private readonly isDisabled$: Observable<boolean> = this.propertyControl.statusChanges.pipe(
+    map(() => this.propertyControl.disabled)
+  );
+  private readonly subscription: Subscription = new Subscription();
 
-  public focus(): void {
-    this.inputRef.focusOnInputElement();
+  public ngOnInit(): void {
+    this.subscription.add(this.subscribeToIsDisabled());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private subscribeToIsDisabled(): Subscription {
+    return this.isDisabled$.subscribe((isDisabled: boolean) => {
+      this.controlsList.forEach((control: FormControl) => (isDisabled ? control.disable() : control.enable()));
+    });
   }
 }

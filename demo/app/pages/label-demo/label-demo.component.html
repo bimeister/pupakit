@@ -2,8 +2,9 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-label class="label" [disabled]="formControl.disabled" [icon]="(withIcon | async) ? 'app-info': null">
-      {{formControl.value}}</pupa-label>
+    <pupa-label class="label" [disabled]="formControl.disabled" [icon]="(withIcon | async) ? 'app-info' : null">
+      {{ formControl.value }}</pupa-label
+    >
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>

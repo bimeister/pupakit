@@ -60,7 +60,12 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public readonly rightPadding$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
+    this.isIconHovered$,
+    this.withReset$
+  ]).pipe(map(([isIconHovered, withReset]: [boolean, boolean]) => isIconHovered && withReset));
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
@@ -132,13 +137,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @HostListener('window:touchstart')
   public processWindowClick(): void {
     this.isFocused$.next(false);
-  }
-
-  @HostListener('window:mousemove')
-  @HostListener('window:touchstart')
-  @HostListener('window:touchmove')
-  public processWindowMouseMove(): void {
-    this.isIconHovered$.next(false);
   }
 
   public handleContainerClick(event: Event): void {
@@ -322,12 +320,16 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.emitFocusEvent(focusEvent);
   }
 
-  public handleIconHover(isHovered: boolean): void {
+  public handleIconHover(focusEvent: FocusEvent, isHovered: boolean): void {
+    focusEvent.stopPropagation();
     this.isIconHovered$.next(isHovered);
   }
 
   public reset(): void {
-    this.updateValue('');
+    if (this.withReset) {
+      this.updateValue('');
+    }
+    this.inputElementRef.nativeElement.focus();
   }
 
   public clearInputValue(): void {

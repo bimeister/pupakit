@@ -3,14 +3,9 @@
     <pupa-droppable-trigger class="dropdown-trigger">
       <div
         class="time-input-container"
-        [class.table-mode]="isTableMode$ | async"
         (click)="handleContainerClick($event)"
         (mousedown)="handleContainerStartEvents($event)"
       >
-        <div class="time-input-container__placeholder">
-          <span class="left">{{ placeholderPreviewLeft$ | async }}</span>
-          <span class="right">{{ placeholderPreviewRight$ | async }}</span>
-        </div>
         <!-- NOTE: ngModel is incorrect: use other mask instead -->
         <input
           class="input"
@@ -28,18 +23,34 @@
           [value]="value$ | async"
           [ngModel]="value$ | async"
         />
-        <div
-          class="time-input-container__icon"
-          [class.focused]="(isFocused$ | async) || droppable.isOpened"
-          [class.disabled]="isDisabled$ | async"
-          (mouseenter)="handleIconHover(true)"
-          (mouseleave)="handleIconHover(false)"
-          (mousemove)="$event.stopPropagation()"
-          (click)="clearInputValue()"
-        >
-          <ng-container *ngIf="!(isValid$ | async) && !(isDisabled$ | async); else staticIconsTemplate">
-            <pupa-icon class="error-icon" name="md-alert" [title]="errorTitle$ | async"></pupa-icon>
-          </ng-container>
+        <div class="time-input-container__shape-container">
+          <span class="time-input-container__shape-left">{{ placeholderPreviewLeft$ | async }}</span>
+          <span class="time-input-container__shape-right">{{ placeholderPreviewRight$ | async }}</span>
+        </div>
+        <div class="input__icons-list" [ngClass]="size$ | async">
+          <pupa-button-icon
+            class="input__icon input__icon-calendar"
+            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'ios-close-circle-outline':'ios-calendar'"
+            size="small"
+            (mouseout)="handleIconHover($event, false)"
+            (mouseover)="handleIconHover($event, true)"
+            kind="subtle"
+            (click)="reset()"
+          >
+          </pupa-button-icon>
+          <pupa-button-icon
+            *ngIf="isInvalid$ | async"
+            class="input__icon input__icon-invalid"
+            icon="ios-information-circle-outline"
+            kind="subtle-danger"
+            size="small"
+            [pupaTooltip]="invalidTooltip"
+            [tooltipHideOnHover]="invalidTooltipHideOnHover"
+            [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
+            [tooltipContentTemplate]="invalidTooltipContentTemplate"
+            (click)="inputElement.focus()"
+          >
+          </pupa-button-icon>
         </div>
       </div>
     </pupa-droppable-trigger>
@@ -64,15 +75,3 @@
     </pupa-droppable-native-content>
   </pupa-droppable>
 </div>
-
-<ng-template #staticIconsTemplate>
-  <ng-container
-    *ngIf="(isIconHovered$ | async) && (valueIsNotEmpty$ | async) && !(isDisabled$ | async); else defaultTemplate"
-  >
-    <pupa-icon name="md-close-circle"></pupa-icon>
-  </ng-container>
-</ng-template>
-
-<ng-template #defaultTemplate>
-  <pupa-icon name="ios-calendar"></pupa-icon>
-</ng-template>

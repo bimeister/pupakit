@@ -13,11 +13,19 @@
   [value]="value$ | async"
 />
 
-<div class="input__icons-list">
+<div class="input__icons-list" [ngClass]="size$ | async">
+  <pupa-button-icon
+    *ngIf="icon"
+    class="input__icon input__icon-custom"
+    [icon]="icon$ | async"
+    size="small"
+    kind="subtle"
+  >
+  </pupa-button-icon>
   <pupa-button-icon
     *ngIf="isVisibleReset$ | async"
     class="input__icon input__icon-reset"
-    icon="app-cross"
+    icon="ios-close-circle-outline"
     size="small"
     kind="subtle"
     (click)="reset()"
@@ -33,6 +41,7 @@
     [tooltipHideOnHover]="invalidTooltipHideOnHover"
     [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
     [tooltipContentTemplate]="invalidTooltipContentTemplate"
+    (click)="inputElement.focus()"
   >
   </pupa-button-icon>
 </div>
