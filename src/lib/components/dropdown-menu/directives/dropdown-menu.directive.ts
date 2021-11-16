@@ -1,5 +1,5 @@
+import { HorizontalConnectionPos, Overlay } from '@angular/cdk/overlay';
 import {
-  AfterViewInit,
   Directive,
   ElementRef,
   HostBinding,
@@ -9,16 +9,15 @@ import {
   OnDestroy,
   TemplateRef
 } from '@angular/core';
-import { DropdownMenuService } from '../services/dropdown-menu.service';
-import { DropdownMenuContentComponent } from '../components/dropdown-menu-content/dropdown-menu-content.component';
-import { pluck, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { HorizontalConnectionPos, Overlay } from '@angular/cdk/overlay';
-import { Uuid } from '../../../../internal/declarations/types/uuid.type';
-import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
-import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { pluck, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
+import { Uuid } from '../../../../internal/declarations/types/uuid.type';
+import { DropdownMenuContentComponent } from '../components/dropdown-menu-content/dropdown-menu-content.component';
+import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
+import { DropdownMenuService } from '../services/dropdown-menu.service';
 
 type ContentComponent = Nullable<DropdownMenuContentComponent>;
 const CURSOR_POINTER: string = 'pointer';
@@ -28,7 +27,7 @@ const CURSOR_NOT_ALLOWED: string = 'not-allowed';
   selector: '[pupaDropdownMenu]',
   exportAs: 'pupaDropdownMenu'
 })
-export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestroy {
+export class DropdownMenuDirective implements OnChanges, OnDestroy {
   @HostBinding('style.cursor') public cursorStyle: string = CURSOR_POINTER;
 
   @Input() public pupaDropdownMenu: ContentComponent;
@@ -53,6 +52,7 @@ export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestro
     public readonly triggerRef: ElementRef<HTMLElement>,
     private readonly overlay: Overlay
   ) {
+    this.registerDropdown();
     this.subscription.add(this.setContentTemplateWhenContentComponentChanged());
     this.subscription.add(this.setContentHorizontalPositionWhenContentComponentChanged());
   }
@@ -60,13 +60,6 @@ export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestro
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsDisabledChange(changes?.dropdownMenuDisabled);
     this.processPupaDropdownMenuChange(changes?.pupaDropdownMenu);
-  }
-
-  public ngAfterViewInit(): void {
-    this.contextId$.pipe(take(1)).subscribe((id: Uuid) => {
-      this.dropdownMenuService.registerDropdown(id, new DropdownMenu(this.overlay, id));
-      this.setTriggerRef();
-    });
   }
 
   public ngOnDestroy(): void {
@@ -121,6 +114,13 @@ export class DropdownMenuDirective implements OnChanges, AfterViewInit, OnDestro
       .subscribe(([horizontalPosition, id]: [HorizontalConnectionPos, Uuid]) => {
         this.dropdownMenuService.setDropdownHorizontalPosition(id, horizontalPosition);
       });
+  }
+
+  private registerDropdown(): void {
+    this.contextId$.pipe(take(1)).subscribe((id: Uuid) => {
+      this.dropdownMenuService.registerDropdown(id, new DropdownMenu(this.overlay, id));
+      this.setTriggerRef();
+    });
   }
 
   private setTriggerRef(): void {
