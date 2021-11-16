@@ -13,6 +13,13 @@
   background-size: cover;
   background-repeat: no-repeat;
 
+  &__default {
+    background-color: color(base-white-n275);
+    .avatar__icon {
+      color: color(base-n600);
+    }
+  }
+
   &__icon-container {
     box-sizing: border-box;
     height: 100%;

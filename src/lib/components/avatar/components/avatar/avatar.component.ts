@@ -41,8 +41,13 @@ export class AvatarComponent implements OnChanges {
     )
   );
 
+  public readonly isEmptyUserName$: Observable<boolean> = this.username$.pipe(map(isEmpty));
+
   public readonly hslBackgroundColor$: Observable<string> = this.username$.pipe(
     map((username: Nullable<string>) => {
+      if (isEmpty(username)) {
+        return null;
+      }
       const { h, s, l }: HslColor = getHslColorFromString(username, SATURATION, LIGHTNESS);
       return `hsl(${h}, ${s}%, ${l}%)`;
     })
