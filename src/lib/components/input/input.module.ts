@@ -18,13 +18,11 @@ import { InputTextComponent } from './components/input-text/input-text.component
 import { InputTimeSecondsComponent } from './components/input-time-seconds/input-time-seconds.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
 import { InputDateRangeComponent } from './components/input-date-range/input-date-range.component';
-import { iosInformationCircleOutlineIcon } from '../../../internal/constants/icons/ios-information-circle-outline-icon.const';
 import { ButtonModule } from '../button/button.module';
 import { appEyeOnIcon } from '../../../internal/constants/icons/app-eye-on-icon.const';
-import { appCrossIcon } from '../../../internal/constants/icons/app-cross-icon.const';
 import { appEyeOffIcon } from '../../../internal/constants/icons/app-eye-off-icon.const';
 import { TooltipModule } from '../tooltip/tooltip.module';
-import { iosHelpCircleIcon } from '../../../public-api';
+import { appCrossCircleIcon, iosHelpCircleIcon } from '../../../public-api';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -54,11 +52,10 @@ const DECLARATIONS: any[] = [...EXPORTS];
       mdTimeIcon,
       mdCloseCircleIcon,
       mdAlertIcon,
-      iosInformationCircleOutlineIcon,
       appEyeOnIcon,
-      appCrossIcon,
       appEyeOffIcon,
-      iosHelpCircleIcon
+      iosHelpCircleIcon,
+      appCrossCircleIcon
     ]),
     NgxMaskModule.forRoot()
   ],

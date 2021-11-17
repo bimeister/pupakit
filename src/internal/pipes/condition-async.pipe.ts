@@ -9,9 +9,9 @@ import { map } from 'rxjs/operators';
   pure: false
 })
 export class ConditionAsyncPipe<T = unknown> implements PipeTransform, OnDestroy {
-  private readonly asyncPipe: AsyncPipe;
+  private readonly asyncPipe: AsyncPipe = new AsyncPipe(this.injector.get(ChangeDetectorRef));
 
-  constructor(injector: Injector) {
+  constructor(private readonly injector: Injector) {
     this.asyncPipe = new AsyncPipe(injector.get(ChangeDetectorRef));
   }
 

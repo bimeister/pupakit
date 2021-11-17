@@ -14,7 +14,7 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
   private readonly isEnabled$: Observable<boolean> = this.isDisabled$.pipe(map((isDisabled: boolean) => !isDisabled));
-  public readonly rightPadding$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isEnabled$]);
+  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isEnabled$]);
   public readonly typeIsText$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public togglePassword(): void {

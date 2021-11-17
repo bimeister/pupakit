@@ -14,17 +14,17 @@ const SIZES_LIST: [InputSize, number][] = [
   ['large', 20]
 ];
 const BUTTON_WIDTH_PX: number = 24;
-const DEFAULT_ERROR_MESSAGE: string = 'Недопустимое значение';
+const DEFAULT_ERROR_MESSAGE: string = 'Invalid value';
 
 @Directive()
 export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
   @ViewChild('inputElement')
   protected readonly inputElementRef: ElementRef<HTMLInputElement>;
 
-  @Input() public readonly invalidTooltipHideOnHover: boolean = true;
-  @Input() public readonly invalidTooltipDisabled: boolean = false;
-  @Input() public readonly invalidTooltip: Nullable<string> = DEFAULT_ERROR_MESSAGE;
-  @Input() public readonly invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
+  @Input() public invalidTooltipHideOnHover: boolean = true;
+  @Input() public invalidTooltipDisabled: boolean = false;
+  @Input() public invalidTooltip: Nullable<string> = DEFAULT_ERROR_MESSAGE;
+  @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
   @Input() public readonly size: InputSize = 'medium';
   public readonly size$: BehaviorSubject<InputSize> = new BehaviorSubject<InputSize>('medium');

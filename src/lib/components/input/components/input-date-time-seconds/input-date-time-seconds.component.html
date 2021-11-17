@@ -15,7 +15,7 @@
           [mask]="'00.00.0000 00:00:00'"
           [attr.disabled]="(isDisabled$ | async) ? true : null"
           [ngClass]="resultClassList$ | async"
-          [style.paddingRight.px]="rightPadding$ | async"
+          [style.paddingRight.px]="rightPaddingPx$ | async"
           (input)="updateValue(inputElement.value)"
           (focus)="emitFocusEvent($event)"
           (blur)="emitBlurEvent($event)"
@@ -30,7 +30,7 @@
         <div class="input__icons-list" [ngClass]="size$ | async">
           <pupa-button-icon
             class="input__icon input__icon-calendar"
-            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'ios-close-circle-outline':'ios-calendar'"
+            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'app-cross-circle':'ios-calendar'"
             size="small"
             (mouseout)="handleIconHover($event, false)"
             (mouseover)="handleIconHover($event, true)"

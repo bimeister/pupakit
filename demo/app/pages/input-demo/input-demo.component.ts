@@ -1,23 +1,22 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
-const DEFAULT_DATE: Date = new Date();
-const DEFAULT_DATE_NEXT_MONTH: Date = new Date();
-DEFAULT_DATE_NEXT_MONTH.setMonth(DEFAULT_DATE.getMonth() + 1);
-const DATE_PLUS_FIVE_DAYS: Date = new Date();
-DATE_PLUS_FIVE_DAYS.setDate(DATE_PLUS_FIVE_DAYS.getDate() + 5);
+function getDefaultDateNextMonth(): Date {
+  const date: Date = new Date();
+  date.setMonth(new Date().getMonth() + 1);
+  return date;
+}
 
 const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   const value: unknown = control.value;
   const isObject: boolean = typeof value === 'object';
-  const isNilObject: boolean = isObject && isNil(value);
   const isEmptyValue: boolean = !Array.isArray(value) && !isObject && isEmpty(value);
   const isEmptyRange: boolean = Array.isArray(value) && value.every(item => isNil(item));
-  if (isEmptyValue || isEmptyRange || isNilObject) {
+  if (isEmptyValue || isEmptyRange || isNil(value)) {
     return { required: true };
   }
   return null;
@@ -27,6 +26,7 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   selector: 'demo-input',
   styleUrls: ['input-demo.component.scss'],
   templateUrl: './input-demo.component.html',
+  encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDemoComponent {
@@ -96,13 +96,13 @@ export class InputDemoComponent {
   public readonly textControl: FormControl = new FormControl('');
   public readonly passwordControl: FormControl = new FormControl('');
   public readonly numberControl: FormControl = new FormControl('');
-  public readonly dateFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly dateTimeFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly dateTimeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly timeFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly timeSecondsFormControl: FormControl = new FormControl(DEFAULT_DATE);
-  public readonly rangeFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
-  public readonly rangeDoubleFormControl: FormControl = new FormControl([DEFAULT_DATE, DEFAULT_DATE_NEXT_MONTH]);
+  public readonly dateFormControl: FormControl = new FormControl(new Date());
+  public readonly dateTimeFormControl: FormControl = new FormControl(new Date());
+  public readonly dateTimeSecondsFormControl: FormControl = new FormControl(new Date());
+  public readonly timeFormControl: FormControl = new FormControl(new Date());
+  public readonly timeSecondsFormControl: FormControl = new FormControl(new Date());
+  public readonly rangeFormControl: FormControl = new FormControl([new Date(), getDefaultDateNextMonth()]);
+  public readonly rangeDoubleFormControl: FormControl = new FormControl([new Date(), getDefaultDateNextMonth()]);
   public readonly propertyControl: FormControl = new FormControl();
   public readonly controlsList: FormControl[] = [
     this.textControl,

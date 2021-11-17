@@ -15,13 +15,13 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputNumberComponent extends InputBase<ValueType> {
-  @Input() public readonly withReset: boolean = false;
+  @Input() public withReset: boolean = false;
 
-  @Input() public readonly icon: string = '';
+  @Input() public icon: string = '';
   public readonly icon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public readonly hasCustomIcon$: Observable<boolean> = this.icon$.pipe(map((icon: string) => !isEmpty(icon)));
-  public readonly rightPadding$: Observable<number> = this.getRightPadding([
+  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([
     this.isInvalid$,
     this.isVisibleReset$,
     this.hasCustomIcon$

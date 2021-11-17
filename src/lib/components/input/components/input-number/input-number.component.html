@@ -4,7 +4,7 @@
   type="number"
   #inputElement
   [placeholder]="placeholder"
-  [style.paddingRight.px]="rightPadding$ | async"
+  [style.paddingRight.px]="rightPaddingPx$ | async"
   [attr.disabled]="(isDisabled$ | async) ? true : null"
   (input)="updateValue(inputElement.value)"
   (focus)="emitFocusEvent($event)"
@@ -25,7 +25,7 @@
   <pupa-button-icon
     *ngIf="isVisibleReset$ | async"
     class="input__icon input__icon-reset"
-    icon="ios-close-circle-outline"
+    icon="app-cross-circle"
     size="small"
     kind="subtle"
     (click)="reset()"
