@@ -5,7 +5,6 @@
   &__menu {
     margin: 1rem;
     border-radius: 1px;
-    height: auto;
     max-height: 72rem;
     max-width: 76rem;
     box-shadow: variable(box-shadow_dropdown);
@@ -13,6 +12,7 @@
     backdrop-filter: blur(40px);
     user-select: none;
     overflow: auto;
+    box-sizing: border-box;
     border: 1px solid color(base-white-n400);
 
     &:focus {
