@@ -46,7 +46,7 @@ const SECONDS_END_POSITION: number = 8;
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
-  @Input() public readonly withReset: boolean = false;
+  @Input() public withReset: boolean = true;
 
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -60,7 +60,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly rightPadding$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
+  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
     this.isIconHovered$,

@@ -10,7 +10,7 @@
   @include flex-container(column);
   &__control {
     width: 60rem;
-    &-date {
+    &_date {
       width: fit-content;
     }
   }

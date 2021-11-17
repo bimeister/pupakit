@@ -1,139 +1,3 @@
-// @import 'themes/functions';
-// @import 'mixins';
-// @import 'functions';
-
-// // $width_time-seconds: 108px;
-// // $width_time: 74px;
-
-// // .base-input-container {
-// //   box-sizing: border-box;
-// //   outline: none;
-// //   position: relative;
-// //   display: flex;
-// //   align-items: center;
-// //   justify-content: flex-start;
-// //   flex-wrap: nowrap;
-// //   width: 100%;
-
-// //   background-color: transparent;
-// //   outline: none;
-// //   border-radius: 2rem;
-// //   border: 1px solid transparent;
-// //   overflow-y: hidden;
-// // }
-
-// // .input {
-// //   width: 100%;
-
-// //   box-sizing: border-box;
-// //   padding: 0 8rem 0 2rem;
-
-// //   background-color: color(white);
-// //   border: 1px solid color(grey-ivory);
-// //   border-radius: 2rem;
-// //   color: color(text);
-// //   outline: none;
-// //   height: 8rem;
-// //   font-size: 4rem;
-// //   line-height: 1;
-
-// //   @include regular();
-// //   @include transition(#{'background, border, color'});
-// //   @include flex-container(row, center, space-between, nowrap);
-
-// //   &::placeholder {
-// //     color: color(grey-light);
-// //     @include transition(#{'color'});
-// //   }
-
-// //   &:not([disabled]):focus {
-// //     border-color: color(active);
-// //   }
-
-// //   &:disabled {
-// //     color: color(grey-apple);
-// //     cursor: not-allowed;
-// //     user-select: none;
-// //     border-color: color(grey-apple);
-
-// //     &::placeholder {
-// //       color: color(grey-apple);
-// //     }
-
-// //     &::selection {
-// //       background: transparent;
-// //     }
-// //   }
-
-// //   &__text {
-// //     max-width: calc(100% - 4rem);
-// //     @include ellipsis-text-overflow;
-// //   }
-
-// //   &__medium {
-// //     height: 8rem;
-// //     font-size: 4rem;
-// //     line-height: 1;
-// //     padding: 2rem 3rem;
-// //   }
-
-// //   &__small {
-// //     height: 6rem;
-// //     font-size: variable(font-size_base-text);
-// //     line-height: 1.14;
-// //     padding: 1rem 2rem;
-// //   }
-
-// //   &__large {
-// //     height: 10rem;
-// //     font-size: 24px;
-// //     line-height: 1.08;
-// //     padding: 2rem 3rem;
-// //     @include medium();
-// //   }
-
-// //   &__focused:not([disabled]) {
-// //     border-color: color(active);
-// //   }
-
-// //   &__invalid:not([disabled]) {
-// //     border-color: color(error);
-// //     &:focus {
-// //       border-color: color(error);
-// //     }
-// //   }
-
-// //   &__transparent {
-// //     border: none;
-// //     background-color: transparent;
-// //     &:focus {
-// //       border: none;
-// //     }
-
-// //     &.input__invalid {
-// //       border: 1px solid color(error);
-// //     }
-// //   }
-// // }
-
-// // .dropdown-trigger {
-// //   width: 100%;
-// //   display: block;
-// // }
-
-// // .icon {
-// //   position: absolute;
-// //   right: 2rem;
-// //   color: color(success);
-// //   font-size: 4rem;
-// //   height: 4rem;
-// //   pointer-events: none;
-
-// //   &__calendar {
-// //     color: inherit;
-// //   }
-// // }
-
 @use 'sass:map';
 @use 'sass:string';
 
@@ -194,7 +58,7 @@ $dark: (
     border-color: color(red-n400)
   ),
   focus: (
-    background-color: color(base-dark-n600),
+    background-color: color(base-n600),
     border-color: color(base-dark-n275)
   ),
   active: (
@@ -205,6 +69,7 @@ $dark: (
 :host {
   box-sizing: border-box;
   position: relative;
+  width: 100%;
   @include flex-container(row, center, flex-start);
 }
 
@@ -221,6 +86,11 @@ $dark: (
   color: map.get($light, input, color);
   caret-color: map.get($light, input, caret-color);
   background-color: map.get($light, input, background-color);
+  &:-webkit-autofill {
+    border-color: map.get($light, input, background-color);
+    -webkit-text-fill-color: map.get($light, input, color);
+    -webkit-box-shadow: 0 10rem 0 0 map.get($light, input, background-color) inset;
+  }
 
   &::placeholder {
     opacity: 0;
@@ -235,8 +105,6 @@ $dark: (
     bottom: 1px;
     right: 0;
     box-sizing: border-box;
-    padding-left: 2px;
-    padding-right: 2px;
     height: calc(100% - 2px);
     @include flex-container(row, center);
     width: fit-content;
@@ -296,11 +164,23 @@ $dark: (
 
   &:hover:not(:focus):not([disabled]) {
     background-color: map.get($light, hover, background-color);
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 10rem 0 0 map.get($light, hover, background-color) inset;
+    }
+    &:-webkit-autofill {
+      &:not(.input_invalid) {
+        border-color: map.get($light, hover, background-color);
+      }
+    }
   }
 
   &:active:not(:focus):not([disabled]) {
     border-color: transparent;
     background-color: map.get($light, active, background-color);
+    &:-webkit-autofill {
+      border-color: map.get($light, active, background-color);
+      -webkit-box-shadow: 0 10rem 0 0 map.get($light, active, background-color) inset;
+    }
     &::placeholder {
       opacity: 1;
     }
@@ -313,12 +193,21 @@ $dark: (
     }
     &:not(.input_invalid) {
       border-color: map.get($light, focus, border-color);
+      &:-webkit-autofill {
+        border-color: map.get($light, focus, border-color);
+      }
     }
     background-color: map.get($light, focus, background-color);
+    &:-webkit-autofill {
+      -webkit-box-shadow: 0 10rem 0 0 map.get($light, focus, background-color) inset;
+    }
   }
 
   &_invalid {
     border-color: map.get($light, invalid, border-color);
+    &:-webkit-autofill {
+      border-color: map.get($light, invalid, border-color);
+    }
   }
 
   &[disabled] {
@@ -326,6 +215,11 @@ $dark: (
     cursor: not-allowed;
     color: map.get($light, disabled, color);
     background-color: map.get($light, disabled, background-color);
+    &:-webkit-autofill {
+      -webkit-text-fill-color: map.get($light, disabled, color);
+      -webkit-box-shadow: 0 10rem 0 0 map.get($light, disabled, background-color) inset;
+      border-color: map.get($light, disabled, background-color);
+    }
     &::selection {
       background: transparent;
     }
@@ -342,22 +236,52 @@ $dark: (
     color: map.get($dark, input, color);
     caret-color: map.get($dark, input, caret-color);
     background-color: map.get($dark, input, background-color);
+    &:-webkit-autofill {
+      -webkit-text-fill-color: map.get($dark, input, color);
+      -webkit-box-shadow: 0 10rem 0 0 map.get($dark, input, background-color) inset;
+      border-color: map.get($dark, input, background-color);
+    }
     &::placeholder {
       color: map.get($dark, input, placeholder, color);
     }
     &:hover:not(:focus):not([disabled]) {
       background-color: map.get($dark, hover, background-color);
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, hover, background-color) inset;
+        &:not(.input_invalid) {
+          border-color: map.get($dark, hover, background-color);
+        }
+      }
     }
     &:active:not(:focus):not([disabled]) {
       color: map.get($dark, active, color);
     }
     &:focus {
       background-color: map.get($dark, focus, background-color);
-      border-color: map.get($dark, focus, border-color);
+      &:not(.input_invalid) {
+        border-color: map.get($dark, focus, border-color);
+        &:-webkit-autofill {
+          border-color: map.get($dark, focus, border-color);
+        }
+      }
+      &:-webkit-autofill {
+        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, focus, background-color) inset;
+      }
+    }
+    &_invalid {
+      border-color: map.get($dark, invalid, border-color);
+      &:-webkit-autofill {
+        border-color: map.get($dark, invalid, border-color);
+      }
     }
     &[disabled] {
       color: map.get($dark, disabled, color);
       background-color: map.get($dark, disabled, background-color);
+      &:-webkit-autofill {
+        -webkit-text-fill-color: map.get($dark, disabled, color);
+        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, disabled, background-color) inset;
+        border-color: map.get($dark, disabled, background-color);
+      }
       &::placeholder {
         color: map.get($dark, disabled, placeholder, color);
       }

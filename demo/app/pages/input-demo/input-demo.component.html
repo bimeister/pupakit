@@ -35,7 +35,7 @@
 
     <pupa-label [disabled]="timeFormControl.disabled">pupa-input-time</pupa-label>
     <pupa-input-time
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="timeFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -43,7 +43,7 @@
 
     <pupa-label [disabled]="timeSecondsFormControl.disabled">pupa-input-time-seconds</pupa-label>
     <pupa-input-time-seconds
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="timeSecondsFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -51,7 +51,7 @@
 
     <pupa-label [disabled]="dateFormControl.disabled">pupa-input-date</pupa-label>
     <pupa-input-date
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [withReset]="withReset | async"
       [formControl]="dateFormControl"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -59,7 +59,7 @@
 
     <pupa-label [disabled]="dateTimeFormControl.disabled">pupa-input-date-time</pupa-label>
     <pupa-input-date-time
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="dateTimeFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -67,7 +67,7 @@
 
     <pupa-label [disabled]="dateTimeSecondsFormControl.disabled">pupa-input-date-time-seconds</pupa-label>
     <pupa-input-date-time-seconds
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="dateTimeSecondsFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -75,7 +75,7 @@
 
     <pupa-label [disabled]="rangeFormControl.disabled">pupa-input-date-range</pupa-label>
     <pupa-input-date-range
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="rangeFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -83,7 +83,7 @@
 
     <pupa-label [disabled]="rangeDoubleFormControl.disabled">pupa-input-date-range-double</pupa-label>
     <pupa-input-date-range-double
-      class="form__control form__control-date"
+      class="form__control form__control_date"
       [formControl]="rangeDoubleFormControl"
       [withReset]="withReset | async"
       [invalidTooltipContentTemplate]="errorTemplate"
@@ -95,7 +95,7 @@
     <demo-props-form-control-disabled [control]="propertyControl"></demo-props-form-control-disabled>
     <demo-props-form-control-validators [controlsList]="controlsList" [validators]="validators">
     </demo-props-form-control-validators>
-    <demo-props-checkbox #withIcon>Number with icon</demo-props-checkbox>
+    <demo-props-checkbox #withIcon>With custom icon</demo-props-checkbox>
     <demo-props-checkbox #withReset>With Reset</demo-props-checkbox>
 
     <demo-props-group-label>Size</demo-props-group-label>
