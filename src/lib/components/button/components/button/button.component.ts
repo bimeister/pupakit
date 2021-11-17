@@ -41,6 +41,8 @@ export class ButtonComponent {
   @Input() public readonly active: boolean = false;
   public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public readonly tabIndex: string = '0';
+
   protected readonly iconContainerClass$: Observable<Nullable<string>> = combineLatest([
     this.icon$,
     this.iconPosition$
