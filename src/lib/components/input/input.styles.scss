@@ -5,6 +5,22 @@
 @import 'mixins';
 @import 'functions';
 
+@mixin large {
+  @include font-size-large();
+  @include font-type-point();
+}
+
+@mixin medium {
+  font-size: 3rem;
+  line-height: 4rem;
+  @include font-type-caption();
+}
+
+@mixin small {
+  @include font-type-caption();
+  @include font-size-mark();
+}
+
 $light: (
   input: (
     color: color(base-n600),
@@ -89,6 +105,7 @@ $dark: (
   &:-webkit-autofill {
     border-color: map.get($light, input, background-color);
     -webkit-text-fill-color: map.get($light, input, color);
+    box-shadow: none;
     -webkit-box-shadow: 0 10rem 0 0 map.get($light, input, background-color) inset;
   }
 
@@ -114,12 +131,15 @@ $dark: (
       padding: 0;
     }
     &:not(:empty).large {
+      @include large();
       right: 3rem;
     }
     &:not(:empty).medium {
+      @include medium();
       right: 2rem;
     }
     &:not(:empty).small {
+      @include small();
       right: 1rem;
     }
   }
@@ -135,15 +155,17 @@ $dark: (
     }
   }
 
-  &_filled ~ .input__icons-list .input__icon-reset {
-    opacity: 1;
+  &_filled ~ .input__icons-list {
+    .input__icon-reset,
+    .input__icon-password {
+      opacity: 1;
+    }
   }
 
   &_large {
     height: 10rem;
-    @include font-size-large();
-    @include font-type-point();
     padding: 2rem 5rem;
+    @include large();
     &::placeholder {
       @include font-type-caption();
     }
@@ -154,17 +176,18 @@ $dark: (
     line-height: 4rem;
     @include font-type-caption();
     padding: 2rem 4rem;
+    @include medium();
   }
   &_small {
     height: 6rem;
-    @include font-type-caption();
-    @include font-size-mark();
     padding: 2rem 3rem;
+    @include small();
   }
 
   &:hover:not(:focus):not([disabled]) {
     background-color: map.get($light, hover, background-color);
     &:-webkit-autofill {
+      box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($light, hover, background-color) inset;
     }
     &:-webkit-autofill {
@@ -179,6 +202,7 @@ $dark: (
     background-color: map.get($light, active, background-color);
     &:-webkit-autofill {
       border-color: map.get($light, active, background-color);
+      box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($light, active, background-color) inset;
     }
     &::placeholder {
@@ -199,6 +223,7 @@ $dark: (
     }
     background-color: map.get($light, focus, background-color);
     &:-webkit-autofill {
+      box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($light, focus, background-color) inset;
     }
   }
@@ -217,6 +242,7 @@ $dark: (
     background-color: map.get($light, disabled, background-color);
     &:-webkit-autofill {
       -webkit-text-fill-color: map.get($light, disabled, color);
+      box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($light, disabled, background-color) inset;
       border-color: map.get($light, disabled, background-color);
     }
@@ -238,6 +264,7 @@ $dark: (
     background-color: map.get($dark, input, background-color);
     &:-webkit-autofill {
       -webkit-text-fill-color: map.get($dark, input, color);
+      box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($dark, input, background-color) inset;
       border-color: map.get($dark, input, background-color);
     }
@@ -247,6 +274,7 @@ $dark: (
     &:hover:not(:focus):not([disabled]) {
       background-color: map.get($dark, hover, background-color);
       &:-webkit-autofill {
+        box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($dark, hover, background-color) inset;
         &:not(.input_invalid) {
           border-color: map.get($dark, hover, background-color);
@@ -265,6 +293,7 @@ $dark: (
         }
       }
       &:-webkit-autofill {
+        box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($dark, focus, background-color) inset;
       }
     }
@@ -279,6 +308,7 @@ $dark: (
       background-color: map.get($dark, disabled, background-color);
       &:-webkit-autofill {
         -webkit-text-fill-color: map.get($dark, disabled, color);
+        box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($dark, disabled, background-color) inset;
         border-color: map.get($dark, disabled, background-color);
       }

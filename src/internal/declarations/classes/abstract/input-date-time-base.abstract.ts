@@ -46,7 +46,8 @@ const SECONDS_END_POSITION: number = 8;
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
-  @Input() public withReset: boolean = true;
+  @Input() public withReset: boolean;
+  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -326,9 +327,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public reset(): void {
-    if (this.withReset) {
-      this.updateValue('');
-    }
+    this.withReset$.pipe(take(1)).subscribe(() => this.updateValue(''));
     this.inputElementRef.nativeElement.focus();
   }
 

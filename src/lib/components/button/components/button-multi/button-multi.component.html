@@ -1,5 +1,5 @@
 <div type="submit" class="button-multi" [ngClass]="resultClassList$ | async">
-  <button class="button-multi__main main" [ngClass]="mainClassList$ | async">
+  <button class="button-multi__main main" [tabIndex]="tabIndex" [ngClass]="mainClassList$ | async">
     <span class="button-multi__background main__background" focusable="false"></span>
     <div class="main__content" focusable="false" [class.main__content_hidden]="loading$ | async">
       <ng-container *ngIf="icon$ | async">
@@ -32,6 +32,7 @@
     [pupaDropdownMenu]="dropdownMenuContent"
     [dropdownMenuDisabled]="disabled$ | async"
     #dropdown="pupaDropdownMenu"
+    tabindex="-1"
     [ngClass]="expandClassList$ | async"
   >
     <span class="button-multi__background expand__background" focusable="false"></span>

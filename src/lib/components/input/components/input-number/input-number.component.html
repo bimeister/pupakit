@@ -19,6 +19,7 @@
     class="input__icon input__icon-custom"
     [icon]="icon$ | async"
     size="small"
+    tabIndex="-1"
     kind="subtle"
   >
   </pupa-button-icon>
@@ -27,6 +28,7 @@
     class="input__icon input__icon-reset"
     icon="app-cross-circle"
     size="small"
+    tabIndex="-1"
     kind="subtle"
     (click)="reset()"
   >
@@ -37,6 +39,7 @@
     icon="ios-information-circle-outline"
     kind="subtle-danger"
     size="small"
+    tabIndex="-1"
     [pupaTooltip]="invalidTooltip"
     [tooltipHideOnHover]="invalidTooltipHideOnHover"
     [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"

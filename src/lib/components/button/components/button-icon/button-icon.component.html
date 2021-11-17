@@ -3,6 +3,7 @@
   class="button"
   [ngClass]="resultClassList$ | async"
   [type]="type"
+  [tabIndex]="tabIndex"
   [attr.disabled]="(disabled$ | async) ? true : null"
 >
   <div class="button__background" focusable="false"></div>

@@ -29,6 +29,8 @@ export class ButtonRoundComponent {
   @Input() public readonly active: boolean = false;
   public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public readonly tabIndex: string = '0';
+
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
     this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null)))
