@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -15,20 +16,25 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { BehaviorSubject, forkJoin, fromEvent, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, fromEvent, of, Subscription } from 'rxjs';
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 import { isNil } from '@bimeister/utilities';
 import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
 import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
-import { filter, switchMap, tap, throttleTime } from 'rxjs/operators';
+import { filter, switchMap, take, tap, throttleTime } from 'rxjs/operators';
 import { DOCUMENT } from '@angular/common';
 import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
 
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
+
+const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_visible';
+const VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS: string = 'pupa-scrollbar_vertical_with-horizontal';
+const HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_horizontal_visible';
+const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizontal_with-vertical';
 
 @Component({
   selector: 'pupa-scrollable',
@@ -64,8 +70,8 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   private readonly verticalScrollbar: Scrollbar = new Scrollbar();
   private readonly horizontalScrollbar: Scrollbar = new Scrollbar();
 
-  public readonly hasVerticalScrollbar$: Observable<boolean> = this.verticalScrollVisibilityChanged.asObservable();
-  public readonly hasHorizontalScrollbar$: Observable<boolean> = this.horizontalScrollVisibilityChanged.asObservable();
+  public readonly hasVerticalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly hasHorizontalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isVerticalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -75,7 +81,8 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly ngZone: NgZone,
-    public readonly renderer: Renderer2,
+    private readonly renderer: Renderer2,
+    public readonly changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private readonly document: Document
   ) {}
 
@@ -94,6 +101,15 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public scrollToBottom(): void {
+    const content: HTMLElement = this.contentRef.nativeElement;
+    this.setScrollTop(content.scrollHeight - content.clientHeight);
+  }
+
+  public scrollToTop(): void {
+    this.setScrollTop(0);
   }
 
   public setScrollTop(scrollTop: number): void {
@@ -277,27 +293,39 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     const verticalScrollbar: HTMLElement = this.verticalScrollbarRef.nativeElement;
     const horizontalScrollbar: HTMLElement = this.horizontalScrollbarRef.nativeElement;
 
-    const isVerticalScrollbarVisible: boolean =
-      !this.invisibleScrollbars.includes('vertical') && contentElement.scrollHeight > contentElement.clientHeight;
-    this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible);
+    combineLatest([this.hasVerticalScrollbar$, this.hasHorizontalScrollbar$])
+      .pipe(take(1))
+      .subscribe(([hasVerticalScrollbar, hasHorizontalScrollbar]: [boolean, boolean]) => {
+        const isVerticalScrollbarVisible: boolean =
+          !this.invisibleScrollbars.includes('vertical') && contentElement.scrollHeight > contentElement.clientHeight;
 
-    const isHorizontalScrollbarVisible: boolean =
-      !this.invisibleScrollbars.includes('horizontal') && contentElement.scrollWidth > contentElement.clientWidth;
-    this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible);
+        const isHorizontalScrollbarVisible: boolean =
+          !this.invisibleScrollbars.includes('horizontal') && contentElement.scrollWidth > contentElement.clientWidth;
 
-    requestAnimationFrame(() => {
-      this.verticalScrollbar.setSizes({
-        contentSizePx: contentElement.clientHeight,
-        contentScrollSizePx: contentElement.scrollHeight,
-        scrollbarSizePx: verticalScrollbar.clientHeight
+        if (isVerticalScrollbarVisible !== hasVerticalScrollbar) {
+          this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible);
+          this.hasVerticalScrollbar$.next(isVerticalScrollbarVisible);
+          this.setScrollbarsClassesByVerticalScrollbarVisibility(isVerticalScrollbarVisible);
+        }
+
+        if (isHorizontalScrollbarVisible !== hasHorizontalScrollbar) {
+          this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible);
+          this.hasHorizontalScrollbar$.next(isHorizontalScrollbarVisible);
+          this.setScrollbarsClassesByHorizontalScrollbarVisibility(isHorizontalScrollbarVisible);
+        }
+
+        this.verticalScrollbar.setSizes({
+          contentSizePx: contentElement.clientHeight,
+          contentScrollSizePx: contentElement.scrollHeight,
+          scrollbarSizePx: verticalScrollbar.clientHeight
+        });
+
+        this.horizontalScrollbar.setSizes({
+          contentSizePx: contentElement.clientWidth,
+          contentScrollSizePx: contentElement.scrollWidth,
+          scrollbarSizePx: horizontalScrollbar.clientWidth
+        });
       });
-
-      this.horizontalScrollbar.setSizes({
-        contentSizePx: contentElement.clientWidth,
-        contentScrollSizePx: contentElement.scrollWidth,
-        scrollbarSizePx: horizontalScrollbar.clientWidth
-      });
-    });
   }
 
   private setContentScrollTop(scrollTop: number): void {
@@ -326,5 +354,33 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
   private removeBodyGrabbingCursor(): void {
     this.renderer.setStyle(this.document.body, 'cursor', null);
+  }
+
+  private setScrollbarsClassesByVerticalScrollbarVisibility(isVisible: boolean): void {
+    const verticalScrollbar: HTMLElement = this.verticalScrollbarRef.nativeElement;
+    const horizontalScrollbar: HTMLElement = this.horizontalScrollbarRef.nativeElement;
+
+    if (isVisible) {
+      this.renderer.addClass(verticalScrollbar, VERTICAL_SCROLLBAR_VISIBILITY_CLASS);
+      this.renderer.addClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS);
+      return;
+    }
+
+    this.renderer.removeClass(verticalScrollbar, VERTICAL_SCROLLBAR_VISIBILITY_CLASS);
+    this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS);
+  }
+
+  private setScrollbarsClassesByHorizontalScrollbarVisibility(isVisible: boolean): void {
+    const verticalScrollbar: HTMLElement = this.verticalScrollbarRef.nativeElement;
+    const horizontalScrollbar: HTMLElement = this.horizontalScrollbarRef.nativeElement;
+
+    if (isVisible) {
+      this.renderer.addClass(verticalScrollbar, VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS);
+      this.renderer.addClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
+      return;
+    }
+
+    this.renderer.removeClass(verticalScrollbar, VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS);
+    this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
   }
 }

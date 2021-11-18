@@ -4,7 +4,7 @@ import { map, take } from 'rxjs/operators';
 import { distinctUntilSerializedChanged, isEqual, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 
 export class Scrollbar {
-  private static readonly maxSizePx: number = 48;
+  private static readonly maxSizePx: number = 32;
   private lastSizes: Nullable<ScrollBarSizes> = null;
 
   private readonly sizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);

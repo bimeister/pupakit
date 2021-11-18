@@ -3267,11 +3267,6 @@ combined-stream@^1.0.6, combined-stream@^1.0.8, combined-stream@~1.0.6:
   dependencies:
     delayed-stream "~1.0.0"
 
-combos@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/combos/-/combos-0.2.0.tgz#dc31c5a899b42293d55fe19c064d3e6e207ba4f7"
-  integrity sha1-3DHFqJm0IpPVX+GcBk0+biB7pPc=
-
 commander@^2.11.0, commander@^2.12.1, commander@^2.20.0:
   version "2.20.3"
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.3.tgz#fd485e84c03eb4881c20722ba48035e8531aeb33"

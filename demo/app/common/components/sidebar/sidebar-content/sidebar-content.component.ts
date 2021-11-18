@@ -50,7 +50,7 @@ export class SidebarContentComponent {
       { title: 'Switcher', link: '/kit/switcher' },
       { title: 'Table Input', link: '/kit/table-input' },
       { title: 'Search Field', link: '/kit/search-field' },
-      { title: '⚠️ Textarea', link: '/kit/textarea' },
+      { title: 'Textarea', link: '/kit/textarea' },
       { title: 'Radio buttons', link: '/kit/radio' },
       { title: 'Rating', link: '/kit/rating' },
       { title: '⚠️ Select', link: '/kit/select' },

@@ -70,7 +70,6 @@
     "babel-loader": "^8.1.0",
     "barrelsby": "^2.2.0",
     "codelyzer": "^6.0.0",
-    "combos": "^0.2.0",
     "css-loader": "^5.0.1",
     "gulp": "^4.0.2",
     "hammerjs": "^2.0.8",
