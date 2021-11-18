@@ -1,19 +1,33 @@
-<div class="textarea-container">
-  <textarea
-    #textareaElement
-    cdkTextareaAutosize
-    class="textarea-container__textarea"
-    [placeholder]="placeholder"
-    [value]="value$ | async"
-    [attr.disabled]="isDisabled$ | async"
-    [class.invalid]="!(isValid$ | async) && (isTouched$ | async)"
-    (input)="updateValue(textareaElement.value)"
-    (focus)="emitFocusEvent($event)"
-    (blur)="emitBlurEvent($event)"
-    autocomplete="off"
-    [style.resize]="resizeMode$ | async"
-    [style.minHeight]="minHeight$ | async"
+<div [ngClass]="themeClass$ | async">
+  <label
+    class="textarea"
+    #lineHeightSource
+    [class.textarea_disabled]="isDisabled$ | async"
+    [class.textarea_invalid]="isInvalid$ | async"
+    (mousedown)="processMouseDown($event)"
   >
-  </textarea>
-  <div class="textarea-container__count" *ngIf="maxLength$ | async">{{ valueLength$ | async }}/{{ maxLength }}</div>
+    <pupa-scrollable class="textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
+      <div class="textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
+        <div class="textarea__pseudo-content">
+          <span>{{ value$ | async }}&nbsp;<!-- &nbsp; removes content bouncing --></span>
+        </div>
+        <textarea
+          #textarea
+          class="textarea__control"
+          [value]="value$ | async"
+          [placeholder]="placeholder$ | async"
+          [disabled]="isDisabled$ | async"
+          [autocomplete]="autocomplete ? 'on' : 'off'"
+          (focus)="emitFocusEvent($event)"
+          (blur)="emitBlurEvent($event)"
+          (input)="updateValue(textarea.value)"
+        >
+        </textarea>
+      </div>
+    </pupa-scrollable>
+  </label>
+
+  <div class="counter" [class.counter_invalid]="isInvalid$ | async" *ngIf="maxLength$ | async as maxLength">
+    {{ counterValue$ | async }}
+  </div>
 </div>

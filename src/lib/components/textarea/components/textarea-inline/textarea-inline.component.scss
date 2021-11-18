@@ -1,0 +1,186 @@
+@use './../../textarea.styles' as *;
+
+.textarea-inline {
+  display: block;
+  padding: 8px 16px;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 1px;
+  white-space: nowrap;
+  cursor: text;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+  @include font-size-mark(true);
+  @include font-type-caption();
+  @include ellipsis-text-overflow;
+
+  &_disabled {
+    cursor: not-allowed;
+  }
+
+  &__content {
+    transition: 0.3s;
+
+    &_hidden {
+      opacity: 0;
+    }
+  }
+}
+
+.textarea-inline {
+  background-color: color(base-white-n500);
+  border-color: color(base-white-n500);
+
+  @include dark-theme-class-parent {
+    background-color: color(base-dark-n500);
+    border-color: color(base-dark-n500);
+  }
+}
+
+// control colors
+.textarea-inline {
+  color: color(base-n600);
+
+  @include dark-theme-class-parent {
+    color: color(base-n0);
+  }
+
+  .textarea-inline__placeholder {
+    color: color(base-white-n100);
+
+    @include dark-theme-class-parent {
+      color: color(base-dark-n100);
+    }
+  }
+}
+
+.textarea-inline.textarea-inline_collapsed {
+  &:not(.textarea-inline_disabled) {
+    &:active {
+      background-color: color(base-white-n300);
+
+      @include dark-theme-class-parent {
+        background-color: color(base-dark-n300);
+      }
+    }
+
+    @include hover() {
+      background-color: color(base-white-n400);
+
+      @include dark-theme-class-parent {
+        background-color: color(base-dark-n400);
+      }
+
+      .textarea-inline__placeholder {
+        color: color(base-n600);
+
+        @include dark-theme-class-parent {
+          color: color(base-n0);
+        }
+      }
+    }
+
+    &.textarea-inline_invalid {
+      border-color: color(red-n400);
+
+      @include dark-theme-class-parent {
+        border-color: color(red-n400);
+      }
+    }
+  }
+}
+
+.textarea-inline_disabled {
+  color: color(base-dark-n250);
+  background-color: color(base-white-n500);
+
+  .textarea-inline__placeholder {
+    color: color(base-dark-n250);
+  }
+
+  @include dark-theme-class-parent {
+    color: color(base-white-n275);
+    background-color: color(base-dark-n500);
+
+    .textarea-inline__placeholder {
+      color: color(base-white-n275);
+    }
+  }
+}
+
+.overlay-container {
+  width: 100%;
+  height: 100%;
+  padding-left: 8px;
+  box-sizing: border-box;
+
+  .overlay-textarea {
+    position: relative;
+  }
+
+  .textarea {
+    transition: 0.25s;
+    transform-origin: right center;
+    transform: scaleX(0.5);
+  }
+
+  &_opened {
+    .textarea {
+      transform: scaleX(1);
+    }
+  }
+
+  @include xs() {
+    position: fixed;
+    bottom: 16px;
+    left: 0;
+    height: auto;
+    padding: 0 20px 32px 20px;
+
+    .textarea {
+      transform: none;
+    }
+
+    &_opened {
+      .textarea {
+        transform: none;
+      }
+    }
+  }
+}
+
+.textarea {
+  box-shadow: 0 8px 24px rgba(0, 23, 32, 0.04);
+
+  &__pseudo-content,
+  &__control {
+    padding: 8px 40px 8px 16px;
+  }
+
+  @include xs {
+    width: 100%;
+    position: relative;
+    transform: none;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.counter_overlay {
+  position: absolute;
+  right: 0;
+}
+
+.counter_invisible {
+  visibility: hidden;
+}
+
+.counter_mobile {
+  color: color(base-dark-n100);
+}

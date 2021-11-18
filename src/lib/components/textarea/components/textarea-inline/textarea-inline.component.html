@@ -1,0 +1,86 @@
+<div [ngClass]="themeClass$ | async">
+  <div
+    (click)="open()"
+    (mousedown)="$event.stopPropagation()"
+    class="textarea-inline"
+    [class.textarea-inline_disabled]="isDisabled$ | async"
+    [class.textarea-inline_invalid]="isInvalid$ | async"
+    [class.textarea-inline_collapsed]="!(isOpened$ | async)"
+    #lineHeightSource
+    #trigger
+  >
+    <span class="textarea-inline__content" [class.textarea-inline__content_hidden]="isOpened$ | async">
+      <span *ngIf="isValueEmpty$ | async; else value" class="textarea-inline__placeholder">
+        {{ placeholder$ | async }}
+      </span>
+    </span>
+  </div>
+  <div
+    class="counter"
+    [class.counter_invalid]="isInvalid$ | async"
+    [class.counter_invisible]="isOpened$ | async"
+    *ngIf="maxLength$ | async as maxLength"
+  >
+    {{ counterValue$ | async }}
+  </div>
+</div>
+
+<ng-template #overlayTextarea>
+  <div
+    class="overlay-container"
+    [class.overlay-container_opened]="isOpened$ | async"
+    [ngClass]="themeClass$ | async"
+    (mousedown)="$event.stopPropagation()"
+    (wheel)="$event.stopPropagation()"
+  >
+    <div class="overlay-textarea">
+      <label
+        class="textarea"
+        [class.textarea_disabled]="isDisabled$ | async"
+        [class.textarea_invalid]="isInvalid$ | async"
+        (mousedown)="processMouseDown($event)"
+      >
+        <pupa-scrollable #scrollable class="textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
+          <div class="textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
+            <div class="textarea__pseudo-content">
+              <span>{{ value$ | async }}&nbsp;<!-- &nbsp; removes content bouncing --></span>
+            </div>
+            <textarea
+              #textarea
+              pupaAutofocus
+              class="textarea__control"
+              [value]="value$ | async"
+              [placeholder]="placeholder$ | async"
+              [autocomplete]="autocomplete ? 'on' : 'off'"
+              (focus)="emitFocusEvent($event)"
+              (blur)="emitBlurEvent($event)"
+              (input)="updateValue(textarea.value)"
+            >
+            </textarea>
+          </div>
+        </pupa-scrollable>
+      </label>
+
+      <pupa-button-icon
+        class="close-button"
+        kind="subtle"
+        size="small"
+        icon="app-fit-to-page"
+        (click)="close()"
+      ></pupa-button-icon>
+
+      <div
+        class="counter counter_overlay"
+        [class.counter_mobile]="isMobile$ | async"
+        [class.counter_invalid]="isInvalid$ | async"
+        *ngIf="maxLength$ | async as maxLength"
+      >
+        {{ counterValue$ | async }}
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #value>
+  <span>{{ value$ | async }}</span>
+</ng-template>

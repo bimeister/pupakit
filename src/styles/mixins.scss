@@ -168,6 +168,12 @@
   }
 }
 
+@mixin dark-theme-class-parent {
+  #{$darkThemeClass} & {
+    @content;
+  }
+}
+
 @mixin invisible-scrollbars {
   -ms-overflow-style: none;
   scrollbar-width: none;

@@ -1,52 +1,44 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray, FormControl, ValidatorFn, Validators } from '@angular/forms';
-import { isNil } from '@bimeister/utilities';
-import combos from 'combos';
-import { TextareaResize } from '../../../../src/internal/declarations/types/textarea-resize.type';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-interface TextareaCombo {
-  resize: TextareaResize;
-  placeholder: string;
-  disabled: boolean;
-  required: boolean;
-  autosize: boolean;
-  maxLength: number;
-}
-
-const MAX_LENGTH_EXAMPLE: number = 128;
+const BASE_REQUEST_PATH: string = 'textarea-demo/examples';
 
 @Component({
   selector: 'demo-textarea',
-  styleUrls: ['../demo.scss', './textarea-demo.component.scss'],
+  styleUrls: ['./textarea-demo.component.scss'],
   templateUrl: './textarea-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated
 })
 export class TextareaDemoComponent {
-  public readonly combos: TextareaCombo[] = combos({
-    resize: ['both', 'vertical', 'horizontal', 'none'],
-    placeholder: ['Placeholder text', ''],
-    disabled: [false, true],
-    required: [false, true],
-    autosize: [false, true],
-    maxLength: [0, MAX_LENGTH_EXAMPLE]
-  });
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`
+  };
 
-  public readonly minHeightFormControl: FormControl = new FormControl();
-  public readonly minHeightWithAutosizeFormControl: FormControl = new FormControl();
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`
+  };
 
-  public readonly formArray: FormArray = new FormArray(
-    this.combos.map(
-      (combo: TextareaCombo) =>
-        new FormControl(
-          {
-            value: '',
-            disabled: combo.disabled
-          },
-          [
-            combo.required ? Validators.required : null,
-            combo.maxLength ? Validators.maxLength(combo.maxLength) : null
-          ].filter((value: ValidatorFn | null) => !isNil(value))
-        )
-    )
-  );
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-5/example-5.component.ts`
+  };
+  public formControl: FormControl = new FormControl();
 }

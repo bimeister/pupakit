@@ -1,0 +1,7 @@
+.textarea {
+  max-width: 300px;
+
+  & + & {
+    margin-top: 16px;
+  }
+}
