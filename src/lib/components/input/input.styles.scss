@@ -127,9 +127,6 @@ $dark: (
     width: fit-content;
     background-color: transparent;
     gap: 1px;
-    &:empty {
-      padding: 0;
-    }
     &:not(:empty).large {
       @include large();
       right: 3rem;
@@ -148,6 +145,9 @@ $dark: (
     position: relative;
     opacity: 0;
     will-change: opacity;
+    &:focus,
+    &:active,
+    &:hover,
     &-invalid,
     &-phone-locale,
     &-calendar {
@@ -212,6 +212,11 @@ $dark: (
 
   &:focus:not([disabled]) {
     cursor: text;
+    & ~ .input__icons-list {
+      .input__icon-password {
+        opacity: 1;
+      }
+    }
     &::placeholder {
       opacity: 1;
     }
@@ -321,7 +326,10 @@ $dark: (
 
 // to show icons or placeholder - used their host-hover
 :host:hover {
-  .input__icons-list .input__icon {
+  .input__icons-list .input__icon:not(.input__icon-password) {
+    opacity: 1;
+  }
+  .input:not(.input_filled) ~ .input__icons-list .input__icon-password {
     opacity: 1;
   }
   .input:not(:focus):not([disabled]) {

@@ -19,6 +19,7 @@ export class InputPasswordComponent extends InputBase<ValueType> {
 
   public togglePassword(): void {
     this.typeIsText$.pipe(take(1)).subscribe((typeIsText: boolean) => this.typeIsText$.next(!typeIsText));
+    this.inputElementRef.nativeElement.focus();
   }
 
   public setValue(value: ValueType): void {
