@@ -1,5 +1,6 @@
 @import 'themes/functions';
 @import 'functions';
+@import 'mixins';
 
 :host {
   display: block;
@@ -19,24 +20,32 @@
 
   cursor: pointer;
 
-  border-radius: 8px;
-  border: 1px solid color('grey-apple');
+  border-radius: 1px;
+  border: 1px solid transparent;
 
-  background: color('white');
-  color: color('main');
+  background: color(base-white-n500);
+  color: color(base-n600);
 
   padding: 6px 12px;
+
+  &:hover {
+    background: color(base-white-n400);
+  }
+
+  &:active {
+    background: color(base-white-n300);
+  }
 
   $this: &;
 
   &_active,
   &:hover {
     #{$this}__icon {
-      color: color('main-dark');
+      color: color(base-n600);
       opacity: 1;
     }
 
-    color: color('main-dark');
+    color: color(base-n600);
   }
 
   &_disabled {
@@ -60,5 +69,16 @@
     white-space: nowrap;
 
     font-size: 4rem;
+  }
+
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+    background: color(base-dark-n500);
+    &:hover {
+      background: color(base-dark-n400);
+    }
+    &:active {
+      background: color(base-dark-n300);
+    }
   }
 }
