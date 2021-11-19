@@ -26,7 +26,8 @@ export class TableController<T> {
   );
 
   constructor(options?: TableControllerOptions<T>) {
-    this.setRowHeightPx(options?.rowHeightPx);
+    this.setHeaderRowHeightPx(options?.headerRowHeightPx);
+    this.setBodyRowHeightPx(options?.bodyRowHeightPx);
     this.setScrollBehavior(options?.scrollBehavior);
     this.setTrackBy(options?.trackBy);
   }
@@ -80,8 +81,12 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.ScrollByIndex(index));
   }
 
-  public setRowHeightPx(rowHeightPx?: number): void {
-    this.dataDisplayCollection.setTableWidthPx(rowHeightPx);
+  public setHeaderRowHeightPx(headerRowHeightPx?: number): void {
+    this.dataDisplayCollection.setHeaderRowHeightPx(headerRowHeightPx);
+  }
+
+  public setBodyRowHeightPx(bodyRowHeightPx?: number): void {
+    this.dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx);
   }
 
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {

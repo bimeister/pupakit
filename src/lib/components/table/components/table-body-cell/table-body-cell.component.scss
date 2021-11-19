@@ -22,17 +22,22 @@
   &_clickable {
     &:hover {
       border: 1px solid color('base-white-n275');
-      padding: 15px;
+      padding: 7px 19px 7px 15px;
       cursor: pointer;
 
       @include host-selector('.table-row_selected') {
         border-color: color('primary-n400');
+      }
+
+      @include xs() {
+        padding: 5px 15px 23px 11px;
       }
     }
   }
 
   &__content {
     display: block;
+    width: 100%;
     @include ellipsis-text-overflow;
   }
 

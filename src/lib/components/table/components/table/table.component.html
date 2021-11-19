@@ -13,7 +13,7 @@
         [columns]="pinnedLeftColumns$ | async"
         class="table-row table-row_header"
         [class.table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="rowHeightPx$ | async"
+        [style.height.px]="headerRowHeightPx$ | async"
       ></pupa-table-header-row-container>
 
       <div
@@ -32,7 +32,7 @@
         [columns]="scrollableColumns$ | async"
         class="table-row table-row_header"
         [class.table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="rowHeightPx$ | async"
+        [style.height.px]="headerRowHeightPx$ | async"
       ></pupa-table-header-row-container>
     </div>
 
@@ -50,7 +50,7 @@
         [columns]="pinnedRightColumns$ | async"
         class="table-row table-row_header"
         [class.table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="rowHeightPx$ | async"
+        [style.height.px]="headerRowHeightPx$ | async"
       ></pupa-table-header-row-container>
     </div>
   </div>
@@ -66,7 +66,7 @@
         #cdkVirtualScrollViewport
         pupaScrollableContent
         class="table-body__scroll-viewport"
-        [itemSize]="rowHeightPx$ | async"
+        [itemSize]="bodyRowHeightPx$ | async"
       >
         <ng-container
           *cdkVirtualFor="let row of virtualScrollDataSource$ | async; trackBy: trackBy$ | async"
@@ -109,7 +109,7 @@
               class="table-row"
               [class.table-row_hovered]="row.isHovered$ | async"
               [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="rowHeightPx$ | async"
+              [style.height.px]="bodyRowHeightPx$ | async"
               [row]="row"
               [columns]="pinnedLeftColumns$ | async"
             ></pupa-table-body-row-container>
@@ -128,7 +128,7 @@
               class="table-row"
               [class.table-row_hovered]="row.isHovered$ | async"
               [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="rowHeightPx$ | async"
+              [style.height.px]="bodyRowHeightPx$ | async"
               [row]="row"
               [columns]="scrollableColumns$ | async"
             ></pupa-table-body-row-container>
@@ -140,7 +140,7 @@
               class="table-row"
               [class.table-row_hovered]="row.isHovered$ | async"
               [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="rowHeightPx$ | async"
+              [style.height.px]="bodyRowHeightPx$ | async"
               [row]="row"
               [columns]="pinnedRightColumns$ | async"
             ></pupa-table-body-row-container>
