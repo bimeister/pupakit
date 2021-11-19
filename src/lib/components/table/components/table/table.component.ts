@@ -105,8 +105,11 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.data$)
   );
 
-  public readonly rowHeightPx$: Observable<number> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.rowHeightPx$)
+  public readonly headerRowHeightPx$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.headerRowHeightPx$)
+  );
+  public readonly bodyRowHeightPx$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.bodyRowHeightPx$)
   );
 
   public readonly virtualScrollDataSource$: Observable<TableBodyRowsDataSource<T>> = this.dataDisplayCollection$.pipe(

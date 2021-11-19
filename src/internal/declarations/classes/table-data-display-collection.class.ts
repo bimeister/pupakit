@@ -18,6 +18,8 @@ interface DistributedColumns {
   rightPinnedColumns: TableColumn[];
 }
 
+const DEFAULT_ROW_HEIGHT_PX: number = 50;
+
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
@@ -31,7 +33,8 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     TableColumnDefinition[]
   >([]);
 
-  public readonly rowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(50);
+  public readonly headerRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
+  public readonly bodyRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
 
   public readonly virtualScrollDataSource: TableBodyRowsDataSource<T> = new TableBodyRowsDataSource<T>(this.data$);
 
@@ -136,11 +139,18 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     this.tableWidthPx$.next(value);
   }
 
-  public setRowHeightPx(value?: number): void {
+  public setHeaderRowHeightPx(value?: number): void {
     if (isNil(value)) {
       return;
     }
-    this.rowHeightPx$.next(value);
+    this.headerRowHeightPx$.next(value);
+  }
+
+  public setBodyRowHeightPx(value?: number): void {
+    if (isNil(value)) {
+      return;
+    }
+    this.bodyRowHeightPx$.next(value);
   }
 
   public static readonly trackBy: TrackByFunction<any> = <T>(index: number, dataItem: T): string => {

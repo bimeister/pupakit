@@ -12,7 +12,8 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly scrollBehavior$: Observable<ScrollBehavior>;
   readonly data$: Observable<T[]>;
   readonly selectedIdsList$: Observable<string[]>;
-  readonly rowHeightPx$: Observable<number>;
+  readonly headerRowHeightPx$: Observable<number>;
+  readonly bodyRowHeightPx$: Observable<number>;
   readonly virtualScrollDataSource: TableBodyRowsDataSource<T>;
   readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>>;
   readonly pinnedLeftColumns$: Observable<TableColumn[]>;
@@ -28,5 +29,6 @@ export interface TableDataDisplayCollectionRef<T> {
   setSelectedIdsList(value: string[]): void;
   setColumnDefinitions(value: TableColumnDefinition[]): void;
   setTableWidthPx(value: number): void;
-  setRowHeightPx(value: number): void;
+  setHeaderRowHeightPx(value: number): void;
+  setBodyRowHeightPx(value: number): void;
 }
