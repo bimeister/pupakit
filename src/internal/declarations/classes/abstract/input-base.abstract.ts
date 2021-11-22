@@ -25,19 +25,19 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public invalidTooltip: Nullable<string> = null;
   @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
-  @Input() public readonly size: InputSize = 'medium';
+  @Input() public size: InputSize = 'medium';
   public readonly size$: BehaviorSubject<InputSize> = new BehaviorSubject<InputSize>('medium');
 
-  @Input() public readonly placeholder: string = '';
+  @Input() public placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  @Input() public readonly autocomplete: boolean = false;
+  @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly withReset: boolean = false;
+  @Input() public withReset: boolean = false;
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly isPatched: boolean = false;
+  @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
