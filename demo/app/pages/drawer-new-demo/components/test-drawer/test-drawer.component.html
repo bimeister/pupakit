@@ -1,0 +1,56 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-drawer-layout-new>
+    <pupa-drawer-layout-header-new>
+      <pupa-drawer-layout-header-row-new type="top">
+        <pupa-drawer-layout-header-content-new type="left">
+          <pupa-drawer-close-button-new visibleOn="mobile"></pupa-drawer-close-button-new>
+          <pupa-drawer-button-icon-new icon="ios-expand"></pupa-drawer-button-icon-new>
+        </pupa-drawer-layout-header-content-new>
+
+        <pupa-drawer-layout-header-content-new type="right">
+          <pupa-drawer-button-icon-new icon="app-time"></pupa-drawer-button-icon-new>
+          <pupa-drawer-button-icon-new icon="app-link" pupaTooltip="Копировать ссылку"></pupa-drawer-button-icon-new>
+          <pupa-drawer-button-icon-new icon="app-resize" pupaTooltip="На весь экран"></pupa-drawer-button-icon-new>
+          <pupa-drawer-button-icon-new icon="app-more"></pupa-drawer-button-icon-new>
+          <pupa-drawer-close-button-new visibleOn="desktop"></pupa-drawer-close-button-new>
+        </pupa-drawer-layout-header-content-new>
+      </pupa-drawer-layout-header-row-new>
+
+      <pupa-drawer-layout-header-row-new>
+        <pupa-drawer-title-new>
+          Title
+          <pupa-drawer-title-container-new>
+            <div class="drawer__title-container">
+              <pupa-button>Button</pupa-button>
+              <pupa-button>Button</pupa-button>
+            </div>
+          </pupa-drawer-title-container-new>
+        </pupa-drawer-title-new>
+      </pupa-drawer-layout-header-row-new>
+    </pupa-drawer-layout-header-new>
+
+    <pupa-drawer-layout-body-new>
+      <pupa-tabs-container>
+        <pupa-tabs>
+          <pupa-tabs-item name="tab1"> Tab 1</pupa-tabs-item>
+          <pupa-tabs-item name="tab2"> Tab 2</pupa-tabs-item>
+        </pupa-tabs>
+
+        <pupa-drawer-layout-separator-new locatedIn="body"></pupa-drawer-layout-separator-new>
+
+        <pupa-tabs-content>
+          <div *pupaTabsItemContentTemplate="'tab1'">Tab 1 content</div>
+          <div *pupaTabsItemContentTemplate="'tab2'">Tab 2 content</div>
+        </pupa-tabs-content>
+      </pupa-tabs-container>
+    </pupa-drawer-layout-body-new>
+    <pupa-drawer-layout-footer-new>
+      <pupa-drawer-layout-action-new value="van">
+        <pupa-button kind="secondary">Action</pupa-button>
+      </pupa-drawer-layout-action-new>
+      <pupa-drawer-layout-action-new value="boy next">
+        <pupa-button>Action</pupa-button>
+      </pupa-drawer-layout-action-new>
+    </pupa-drawer-layout-footer-new>
+  </pupa-drawer-layout-new>
+</pupa-theme-wrapper>
