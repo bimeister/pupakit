@@ -12,6 +12,8 @@
   padding: 1rem 7rem;
   margin-bottom: 0rem;
 
+  @include ellipsis-text-overflow;
+
   @include xs() {
     padding: 1rem;
     margin-bottom: 2rem;

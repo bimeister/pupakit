@@ -18,7 +18,7 @@ import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-tim
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
 import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
-import { DrawerDemoModule } from './pages/drawer-new-demo/drawer-demo.module';
+import { DrawerNewDemoModule } from './pages/drawer-new-demo/drawer-new-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { DroppableDemoModule } from './pages/droppable-demo/droppable-demo.module';
@@ -62,6 +62,7 @@ import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
+import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -255,9 +256,14 @@ const demoRoutes: Routes = [
           import('./pages/datagrid-demo/datagrid-demo.module').then(module => module.DatagridDemoModule)
       },
       {
-        path: 'drawer-new',
+        path: 'drawer',
         loadChildren: (): Promise<Type<DrawerDemoModule>> =>
-          import('./pages/drawer-new-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
+          import('./pages/drawer-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
+      },
+      {
+        path: 'drawer-new',
+        loadChildren: (): Promise<Type<DrawerNewDemoModule>> =>
+          import('./pages/drawer-new-demo/drawer-new-demo.module').then(module => module.DrawerNewDemoModule)
       },
       {
         path: 'textarea',

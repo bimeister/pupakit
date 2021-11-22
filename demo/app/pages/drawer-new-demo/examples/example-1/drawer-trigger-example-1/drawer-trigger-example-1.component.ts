@@ -4,6 +4,7 @@ import { DRAWER_DATA_TOKEN } from '../../../../../../declarations/tokens/drawer-
 import { Observable } from 'rxjs';
 import { OpenedDrawer } from '../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
 import { DrawerLayoutExample1Component } from '../drawer-layout-example-1/drawer-layout-example-1.component';
+import { DrawerContainerNewComponent } from '../../../../../../../src/lib/components/drawer-new/components/drawer-container-new/drawer-container-new.component';
 
 @Component({
   selector: 'demo-drawer-trigger-example-1',
@@ -21,6 +22,7 @@ export class DrawerTriggerExample1Component {
       hasBackdrop: true,
       closeOnBackdropClick: true,
       isBackdropTransparent: false,
+      containerComponent: DrawerContainerNewComponent,
       providers: [
         {
           provide: DRAWER_DATA_TOKEN,

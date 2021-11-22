@@ -41,7 +41,7 @@ const animations: { [key in Floats]: AnimationMetadata[] } = {
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DrawerContainerNewComponent<componentT> implements AfterViewInit {
+export class DrawerContainerNewComponent<ComponentT> implements AfterViewInit {
   @ViewChild('drawerContainer', { read: ElementRef }) public drawerContainerElement: ElementRef;
 
   private readonly drawerContainerElement$: Subject<ElementRef> = new Subject<ElementRef>();
@@ -52,12 +52,12 @@ export class DrawerContainerNewComponent<componentT> implements AfterViewInit {
     map((isMobile: boolean) => (isMobile ? 'bottom' : this.componentData.float))
   );
 
-  public get componentPortal(): ComponentPortal<componentT> {
+  public get componentPortal(): ComponentPortal<ComponentT> {
     return this.componentData.contentComponentPortal;
   }
 
   public get hasPadding(): boolean {
-    const { hasPadding = true }: DrawerContainerData<componentT> = this.componentData;
+    const { hasPadding = true }: DrawerContainerData<ComponentT> = this.componentData;
     return hasPadding;
   }
 
@@ -73,7 +73,7 @@ export class DrawerContainerNewComponent<componentT> implements AfterViewInit {
   );
 
   constructor(
-    @Inject(DRAWER_CONTAINER_DATA_TOKEN) private readonly componentData: DrawerContainerData<componentT>,
+    @Inject(DRAWER_CONTAINER_DATA_TOKEN) private readonly componentData: DrawerContainerData<ComponentT>,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly animationBuilder: AnimationBuilder
   ) {

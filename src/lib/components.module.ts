@@ -53,6 +53,7 @@ import { StatusModule } from './components/status/status.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { LabelModule } from './components/label/label.module';
+import { DrawerModule } from './components/drawer/drawer.module';
 
 const EXPORTS: any[] = [
   LabelModule,
@@ -68,6 +69,7 @@ const EXPORTS: any[] = [
   DaySelectorModule,
   DraggableModule,
   DrawerNewModule,
+  DrawerModule,
   DropdownModule,
   DroppableModule,
   IconButtonModule,

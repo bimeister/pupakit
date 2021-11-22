@@ -1,0 +1,27 @@
+import { OverlayModule } from '@angular/cdk/overlay';
+import { PortalModule } from '@angular/cdk/portal';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+import { IconButtonModule } from '../icon-button/icon-button.module';
+import { SharedModule } from './../../../internal/shared/shared.module';
+import { DrawerContainerComponent } from './components/drawer-container/drawer-container.component';
+import { DrawerDraggerComponent } from './components/drawer-dragger/drawer-dragger.component';
+import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
+import { DrawerComponent } from './components/drawer/drawer.component';
+import { IconModule } from '../icon/icon.module';
+import { mdMoreIcon } from '../../../internal/constants/icons/md-more-icon.const';
+import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
+
+@NgModule({
+  declarations: [DrawerComponent, DrawerDraggerComponent, DrawerContainerComponent, DrawerLayoutComponent],
+  imports: [
+    SharedModule,
+    IconButtonModule,
+    OverlayModule,
+    PortalModule,
+    IconModule.forFeature([mdMoreIcon, mdCloseIcon])
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [DrawerComponent, DrawerDraggerComponent, DrawerLayoutComponent, OverlayModule, PortalModule]
+})
+export class DrawerModule {}
