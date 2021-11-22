@@ -26,13 +26,13 @@ export class DrawersService {
     private readonly portalLayersService: PortalLayersService
   ) {}
 
-  public open<ComponentT, ReturnDataT = null>(
-    component: ComponentType<ComponentT>,
-    config: Partial<DrawerConfig> = null
+  public open<ContentComponent, ReturnDataT = null, ContainerComponent = ComponentType<unknown>>(
+    component: ComponentType<ContentComponent>,
+    config: Partial<DrawerConfig<ContainerComponent>> = null
   ): OpenedDrawer<ReturnDataT> {
-    const configDto: DrawerConfigDto = new DrawerConfigDto(config);
+    const configDto: DrawerConfigDto<ContainerComponent> = new DrawerConfigDto(config);
 
-    const drawer: Drawer<ComponentT> = new Drawer(
+    const drawer: Drawer<ContentComponent, ContainerComponent> = new Drawer(
       component,
       configDto,
       this.overlay,

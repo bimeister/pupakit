@@ -5,10 +5,6 @@
 .drawer-close-button {
   display: none;
 
-  &_all {
-    display: block;
-  }
-
   &_mobile {
     @include xs() {
       display: block;
@@ -19,5 +15,9 @@
     @include gt-xs() {
       display: block;
     }
+  }
+
+  &_all {
+    display: block;
   }
 }

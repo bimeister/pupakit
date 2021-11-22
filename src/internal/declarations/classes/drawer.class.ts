@@ -2,7 +2,6 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
-import { DrawerContainerNewComponent } from '../../../lib/components/drawer-new/components/drawer-container-new/drawer-container-new.component';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
 import { DrawerConfig } from '../interfaces/drawer-config.interface';
 import { DrawerContainerData } from '../interfaces/drawer-container-data.interface';
@@ -10,8 +9,9 @@ import { DrawerRef } from './drawer-ref.class';
 import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { DrawerLayoutConfig } from '../interfaces/drawer-layout-config.interface';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
+import { DrawerContainerComponent } from '../../../lib/components/drawer/components/drawer-container/drawer-container.component';
 
-export class Drawer<ComponentT> implements PortalLayer {
+export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer {
   public readonly id: string;
   private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
 
@@ -25,8 +25,8 @@ export class Drawer<ComponentT> implements PortalLayer {
   private currentZIndex: number = 0;
 
   constructor(
-    private readonly component: ComponentType<ComponentT>,
-    private readonly config: DrawerConfig,
+    private readonly component: ComponentType<ContentComponent>,
+    private readonly config: DrawerConfig<ContainerComponent>,
     private readonly overlay: Overlay,
     private readonly injector: Injector,
     private readonly rendererFactory: RendererFactory2
@@ -52,15 +52,19 @@ export class Drawer<ComponentT> implements PortalLayer {
     this.renderer.setStyle(this.overlayRef.hostElement, 'z-index', zIndex);
   }
 
-  private getComponentPortal(): ComponentPortal<DrawerContainerNewComponent<unknown>> {
+  private getComponentPortal(): ComponentPortal<DrawerContainerComponent<unknown> | ContainerComponent> {
     const portalInjector: PortalInjector = this.createDrawerContainerInjector();
-    return new ComponentPortal(DrawerContainerNewComponent, null, portalInjector);
+
+    const containerComponent: ComponentType<DrawerContainerComponent<unknown> | ContainerComponent> =
+      this.config.containerComponent ?? DrawerContainerComponent;
+
+    return new ComponentPortal(containerComponent, null, portalInjector);
   }
 
   private createDrawerContainerInjector(): PortalInjector {
-    const contentComponentPortal: ComponentPortal<ComponentT> = this.createDrawerContentComponentPortal();
+    const contentComponentPortal: ComponentPortal<ContentComponent> = this.createDrawerContentComponentPortal();
 
-    const drawerContainerData: DrawerContainerData<ComponentT> = {
+    const drawerContainerData: DrawerContainerData<ContentComponent> = {
       contentComponentPortal,
       ...this.createDrawerLayoutConfig()
     };
@@ -71,7 +75,7 @@ export class Drawer<ComponentT> implements PortalLayer {
     return new PortalInjector(this.injector, injectionTokens);
   }
 
-  private createDrawerContentComponentPortal(): ComponentPortal<ComponentT> {
+  private createDrawerContentComponentPortal(): ComponentPortal<ContentComponent> {
     const drawerContentInjector: PortalInjector = this.createDrawerContentInjector();
     return new ComponentPortal(this.component, null, drawerContentInjector);
   }

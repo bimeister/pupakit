@@ -1,0 +1,18 @@
+<div class="drawer-layout">
+  <div class="drawer-layout__header" *ngIf="isHeaderVisible">
+    <div class="drawer-layout__header__title" *ngIf="isTitleVisible">
+      {{ title }}
+    </div>
+
+    <pupa-icon-button
+      class="drawer-layout__header__button"
+      *ngIf="isCloseButtonVisible"
+      (click)="processCloseButtonClick()"
+    >
+      <pupa-icon name="close"></pupa-icon>
+    </pupa-icon-button>
+  </div>
+  <div class="drawer-layout__content">
+    <ng-content></ng-content>
+  </div>
+</div>

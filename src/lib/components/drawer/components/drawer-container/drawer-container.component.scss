@@ -1,0 +1,10 @@
+@import 'themes/functions';
+@import 'functions';
+
+.drawer-container {
+  width: fit-content;
+  height: 100%;
+  background: color(white);
+  position: fixed;
+  box-shadow: variable(box-shadow_hover);
+}

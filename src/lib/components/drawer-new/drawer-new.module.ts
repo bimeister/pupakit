@@ -5,9 +5,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { SharedModule } from './../../../internal/shared/shared.module';
 import { DrawerContainerNewComponent } from './components/drawer-container-new/drawer-container-new.component';
-import { DrawerDraggerComponent } from './components/drawer-dragger/drawer-dragger.component';
 import { DrawerLayoutNewComponent } from './components/drawer-layout-new/drawer-layout-new.component';
-import { DrawerComponent } from './components/drawer/drawer.component';
 import { IconModule } from '../icon/icon.module';
 import { mdMoreIcon } from '../../../internal/constants/icons/md-more-icon.const';
 import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
@@ -26,8 +24,6 @@ import { DrawerLayoutActionNewComponent } from './components/drawer-layout-actio
 
 @NgModule({
   declarations: [
-    DrawerComponent,
-    DrawerDraggerComponent,
     DrawerContainerNewComponent,
     DrawerLayoutNewComponent,
     DrawerLayoutHeaderNewComponent,
@@ -52,8 +48,6 @@ import { DrawerLayoutActionNewComponent } from './components/drawer-layout-actio
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
-    DrawerComponent,
-    DrawerDraggerComponent,
     DrawerLayoutNewComponent,
     OverlayModule,
     PortalModule,
