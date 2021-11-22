@@ -18,7 +18,7 @@ import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-tim
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
 import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
-import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
+import { DrawerDemoModule } from './pages/drawer-new-demo/drawer-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { DroppableDemoModule } from './pages/droppable-demo/droppable-demo.module';
@@ -255,9 +255,9 @@ const demoRoutes: Routes = [
           import('./pages/datagrid-demo/datagrid-demo.module').then(module => module.DatagridDemoModule)
       },
       {
-        path: 'drawer',
+        path: 'drawer-new',
         loadChildren: (): Promise<Type<DrawerDemoModule>> =>
-          import('./pages/drawer-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
+          import('./pages/drawer-new-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
       },
       {
         path: 'textarea',
