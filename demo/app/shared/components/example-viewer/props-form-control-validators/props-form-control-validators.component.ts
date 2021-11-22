@@ -25,10 +25,10 @@ export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDes
   private readonly subscription: Subscription = new Subscription();
 
   @Input()
-  public readonly controlsList: FormControl[];
+  public controlsList: FormControl[] = [];
 
   @Input()
-  public readonly validators: ValidatorFn[] = [];
+  public validators: ValidatorFn[] = [];
 
   public ngAfterViewInit(): void {
     this.subscription.add(
