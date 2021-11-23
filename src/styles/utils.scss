@@ -1,0 +1,36 @@
+@use 'sass:map';
+@use 'sass:list';
+
+// @deprecated need to move into functions.scss migration from '@import' to '@use'
+
+/*
+  return value:
+    the nested value in map by array of keys
+
+  why use it:
+    - no duplication
+    - no nested map.get ( like map.get(map.get(...), ...), ...) )
+
+  example:
+    $config: (
+      nested-field-1: (
+        nested-field-2: (
+          nested-field-3: 'very deeply nested value'
+        )
+      )
+    );
+
+    $value: get-map-field($config, [nested-field-1, nested-field-2, nested-field-3]); // 'very deeply nested value'
+*/
+@function get-map-field($map, $field-path) {
+  $result: $map;
+
+  @each $field in $field-path {
+    @if (type-of($result) != 'map') {
+      @error "Field '#{$field}' in path: #{$field-path} does not exist in map:" $map;
+    }
+    $result: map.get($result, $field);
+  }
+
+  @return $result;
+}

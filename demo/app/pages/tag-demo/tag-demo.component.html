@@ -1,14 +1,33 @@
 <h1>Tag</h1>
 
 <demo-example-viewer class="tag-demo">
-  <demo-example-viewer-content class="content">
+  <demo-example-viewer-content class="tag-demo__content">
     <div class="tag-demo__wrapper">
-      <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async"> Tag </pupa-tag>
+      <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async">
+        Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
       <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async">
         <pupa-icon name="app-apps"></pupa-icon> Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button>
       </pupa-tag>
       <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async">
         <pupa-avatar></pupa-avatar> Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button>
+      </pupa-tag>
+    </div>
+    <div class="tag-demo__wrapper">
+      <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async" [size]="'small'">
+        Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async" [size]="'small'">
+        <pupa-icon name="app-apps"></pupa-icon> Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button>
+      </pupa-tag>
+      <pupa-tag [disabled]="disabled | async" [clickable]="clickable | async" [size]="'small'">
+        <pupa-avatar></pupa-avatar> Tag
+        <pupa-pupa-tag-delete-button *ngIf="deleteButton | async"></pupa-pupa-tag-delete-button>
       </pupa-tag>
     </div>
   </demo-example-viewer-content>
@@ -19,20 +38,55 @@
 
     <demo-props-group-label>Clickable</demo-props-group-label>
     <demo-props-checkbox #clickable>Clickable</demo-props-checkbox>
+
+    <demo-props-group-label>With delete button</demo-props-group-label>
+    <demo-props-checkbox #deleteButton>With delete button</demo-props-checkbox>
   </demo-example-viewer-properties>
 </demo-example-viewer>
 
 <h1>Color Tag</h1>
 
-<demo-example-viewer class="color-tag-demo">
-  <demo-example-viewer-content class="content">
+<demo-example-viewer class="tag-demo">
+  <demo-example-viewer-content class="tag-demo__content">
     <div class="tag-demo__wrapper">
-      <pupa-color-tag color="red">Lupa</pupa-color-tag>
-      <pupa-color-tag color="green">Pupa</pupa-color-tag>
-      <pupa-color-tag color="primary">Dupa</pupa-color-tag>
-      <pupa-color-tag color="yellow">Zupa</pupa-color-tag>
+      <pupa-tag color="red" [disabled]="colorDisabled | async" [clickable]="colorClickable | async"
+        >Lupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="green" [disabled]="colorDisabled | async" [clickable]="colorClickable | async"
+        >Pupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="primary" [disabled]="colorDisabled | async" [clickable]="colorClickable | async"
+        >Dupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="yellow" [disabled]="colorDisabled | async" [clickable]="colorClickable | async"
+        >Zupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+    </div>
+    <div class="tag-demo__wrapper">
+      <pupa-tag color="red" [disabled]="colorDisabled | async" [clickable]="colorClickable | async" [size]="'small'"
+        >Lupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="green" [disabled]="colorDisabled | async" [clickable]="colorClickable | async" [size]="'small'"
+        >Pupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="primary" [disabled]="colorDisabled | async" [clickable]="colorClickable | async" [size]="'small'"
+        >Dupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
+      <pupa-tag color="yellow" [disabled]="colorDisabled | async" [clickable]="colorClickable | async" [size]="'small'"
+        >Zupa <pupa-pupa-tag-delete-button *ngIf="colorDeleteButton | async"></pupa-pupa-tag-delete-button
+      ></pupa-tag>
     </div>
   </demo-example-viewer-content>
+  <demo-example-viewer-properties>
+    <demo-props-group-label>Disabled</demo-props-group-label>
+    <demo-props-checkbox #colorDisabled>Disabled</demo-props-checkbox>
+
+    <demo-props-group-label>Clickable</demo-props-group-label>
+    <demo-props-checkbox #colorClickable>Clickable</demo-props-checkbox>
+
+    <demo-props-group-label>With delete button</demo-props-group-label>
+    <demo-props-checkbox #colorDeleteButton>With delete button</demo-props-checkbox>
+  </demo-example-viewer-properties>
 </demo-example-viewer>
 
 <h2>Basic usage of Tag</h2>

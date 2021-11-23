@@ -2,10 +2,8 @@
 @import 'mixins';
 @import 'functions';
 
-$min-height_demo: fit-content;
-
 .tag-demo {
-  min-height: $min-height_demo;
+  min-height: fit-content;
 
   &__wrapper {
     width: 100%;
@@ -15,8 +13,9 @@ $min-height_demo: fit-content;
     align-items: center;
     gap: 30px;
   }
-}
 
-.color-tag-demo {
-  min-height: $min-height_demo;
+  &__content {
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }

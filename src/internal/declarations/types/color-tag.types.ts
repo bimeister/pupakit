@@ -1,1 +1,1 @@
-export type ColorTagColor = 'green' | 'red' | 'yellow' | 'primary';
+export type TagColor = 'green' | 'red' | 'yellow' | 'primary' | 'default';

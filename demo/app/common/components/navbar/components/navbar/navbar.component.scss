@@ -1,7 +1,7 @@
 @use '../../../../../../styles/demo-variables' as *;
-@use '../../../../../../styles/demo-functions' as *;
 @use '../../../../../../styles/demo-mixins' as *;
 @use 'src/styles/mixins' as *;
+@use 'utils' as *;
 
 @mixin apply-theme($theme-mode) {
   background-color: get-map-field($theme-config, [$theme-mode, 'navbar', 'background-color' ]);
