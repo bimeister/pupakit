@@ -89,21 +89,26 @@ export class NavbarComponent implements OnDestroy {
   }
 
   private openDrawerWhenMenuOpen(): Subscription {
-    return this.menuOpened$.subscribe(() => {
-      const openedDrawer: OpenedDrawer = this.openDrawer();
+    return this.menuOpened$.pipe(switchMap(() => this.getOpenedDrawer())).subscribe((openedDrawer: OpenedDrawer) => {
       this.currentOpenedDrawer$.next(openedDrawer);
     });
   }
 
-  private openDrawer(): OpenedDrawer {
-    return this.drawerService.open(SidebarDrawerContentContainerComponent, {
-      hasBackdrop: true,
-      hasPadding: false,
-      closeOnBackdropClick: true,
-      isBackdropTransparent: false,
-      float: 'left',
-      injector: this.injector
-    });
+  private getOpenedDrawer(): Observable<OpenedDrawer> {
+    return this.themeWrapperService.theme$.pipe(
+      take(1),
+      map((theme: Theme) =>
+        this.drawerService.open(SidebarDrawerContentContainerComponent, {
+          hasBackdrop: true,
+          hasPadding: false,
+          closeOnBackdropClick: true,
+          isBackdropTransparent: false,
+          float: 'left',
+          injector: this.injector,
+          theme
+        })
+      )
+    );
   }
 
   private closeDrawer(): void {

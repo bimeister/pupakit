@@ -10,6 +10,8 @@ import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { DrawerLayoutConfig } from '../interfaces/drawer-layout-config.interface';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
 import { DrawerContainerOldComponent } from '../../../lib/components/drawer-old/components/drawer-container-old/drawer-container-old.component';
+import { Theme } from '../enums/theme.enum';
+import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
 
 export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer {
   public readonly id: string;
@@ -18,7 +20,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
   private readonly overlayRef: OverlayRef = this.overlay.create({
     positionStrategy: this.getPositionStrategy(),
     hasBackdrop: this.config.hasBackdrop,
-    backdropClass: this.getBackdropClass()
+    backdropClass: this.getBackdropClasses()
   });
 
   private readonly drawerRef: DrawerRef = new DrawerRef(this.overlayRef);
@@ -123,11 +125,20 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     this.overlayRef.backdropClick().subscribe(() => this.drawerRef.close());
   }
 
-  private getBackdropClass(): string {
-    if (this.config.hasBackdrop) {
-      return this.config.isBackdropTransparent ? 'cdk-overlay-transparent-backdrop' : 'cdk-overlay-dark-backdrop';
+  private getBackdropClasses(): string[] {
+    let classes: string[] = [];
+
+    if (this.config.theme === Theme.Dark) {
+      classes = [...classes, DARK_THEME_CLASS];
     }
 
-    return 'cdk-overlay-without-backdrop';
+    if (this.config.hasBackdrop) {
+      const backdropClass: string = this.config.isBackdropTransparent
+        ? 'cdk-overlay-transparent-backdrop'
+        : 'cdk-overlay-dark-backdrop';
+      return [...classes, backdropClass];
+    }
+
+    return [...classes, 'cdk-overlay-without-backdrop'];
   }
 }

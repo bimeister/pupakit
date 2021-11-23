@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { DrawerRef, Theme, ThemeWrapperService } from '../../../../../../src/public-api';
-import { DRAWER_DATA_TOKEN } from '../../../../../declarations/tokens/drawer-data.token';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Theme, ThemeWrapperService } from '../../../../../../src/public-api';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -9,19 +8,8 @@ import { Observable } from 'rxjs';
   styleUrls: ['./test-drawer.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TestDrawerComponent implements OnInit {
+export class TestDrawerComponent {
   public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
 
-  constructor(
-    @Inject(DrawerRef) private readonly drawerRef: DrawerRef<number>,
-    @Inject(DRAWER_DATA_TOKEN) private readonly data: number,
-    private readonly themeWrapperService: ThemeWrapperService
-  ) {}
-
-  public ngOnInit(): void {
-    // tslint:disable-next-line: no-console
-    console.log(this.drawerRef);
-    // tslint:disable-next-line: no-console
-    console.log(this.data);
-  }
+  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
 }
