@@ -15,8 +15,23 @@
   </div>
 
   <div class="example-container__item">
+    <h5>With text</h5>
+    <pupa-tag class="pupa-tag" [pupaTooltip]="'DupaGupaBupa'">
+      <span class="pupa-tag__content-text">DupaGupaBupa</span>
+    </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
     <h5>With icon</h5>
     <pupa-tag> <pupa-icon name="app-cube"></pupa-icon> Vupa </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>With delete icon</h5>
+    <pupa-tag>
+      <pupa-icon name="app-cube"></pupa-icon> Zupa
+      <pupa-pupa-tag-delete-button></pupa-pupa-tag-delete-button>
+    </pupa-tag>
   </div>
 
   <div class="example-container__item">
@@ -32,5 +47,9 @@
   <div class="example-container__item">
     <h5>Clickable with avatar</h5>
     <pupa-tag [clickable]="true"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
+  </div>
+  <div class="example-container__item example-container__item_small-tag">
+    <h5>Small with avatar</h5>
+    <pupa-tag [size]="'small'"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
   </div>
 </div>

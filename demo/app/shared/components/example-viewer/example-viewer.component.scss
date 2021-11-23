@@ -1,6 +1,6 @@
-@use 'demo/styles/demo-functions' as *;
 @use 'demo/styles/demo-variables' as *;
 @use 'mixins' as *;
+@use 'utils' as *;
 
 :host {
   display: flex;

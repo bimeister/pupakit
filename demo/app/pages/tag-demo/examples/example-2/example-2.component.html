@@ -1,6 +1,4 @@
 <div class="example-container">
-  <pupa-checkbox></pupa-checkbox>
-
   <div class="example-container__item">
     <h5>Primary</h5>
     <pupa-color-tag color="primary">Pupa</pupa-color-tag>
@@ -19,5 +17,61 @@
   <div class="example-container__item">
     <h5>Yellow</h5>
     <pupa-color-tag color="yellow">Yupa</pupa-color-tag>
+  </div>
+</div>
+
+<div class="example-container">
+  <div class="example-container__item">
+    <h5>Clickable</h5>
+    <pupa-tag color="primary" [clickable]="true">Pupa</pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>Disabled</h5>
+    <pupa-tag color="primary" [disabled]="true">Lupa</pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>Clickable and Disabled</h5>
+    <pupa-tag color="primary" [disabled]="true" [clickable]="true">Dupa</pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>With text</h5>
+    <pupa-tag class="pupa-tag" color="primary" [pupaTooltip]="'DupaGupaBupa'">
+      <span class="pupa-tag__content-text">DupaGupaBupa</span>
+    </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>With icon</h5>
+    <pupa-tag color="primary"> <pupa-icon name="app-cube"></pupa-icon> Vupa </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>With delete icon</h5>
+    <pupa-tag color="primary">
+      <pupa-icon name="app-cube"></pupa-icon> Zupa
+      <pupa-pupa-tag-delete-button></pupa-pupa-tag-delete-button>
+    </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>Clickable with icon</h5>
+    <pupa-tag color="primary" [clickable]="true"> <pupa-icon name="app-save"></pupa-icon> Gupa </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>Disabled with icon</h5>
+    <pupa-tag color="primary" [disabled]="true"> <pupa-icon name="app-save"></pupa-icon> Bupa </pupa-tag>
+  </div>
+
+  <div class="example-container__item">
+    <h5>Clickable with avatar</h5>
+    <pupa-tag color="primary" [clickable]="true"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
+  </div>
+  <div class="example-container__item example-container__item_small-tag">
+    <h5>Small with avatar</h5>
+    <pupa-tag color="primary" [size]="'small'"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
   </div>
 </div>

@@ -1,9 +1,10 @@
 <div
-  class="tag"
-  [attr.tabindex]="tabindexAttribute"
+  [attr.tabindex]="tabIndexAttribute"
   [class.tag_clickable]="clickable"
   [class.tag_disabled]="disabled"
   [class.tag_with-avatar]="withAvatar$ | async"
+  class="tag"
+  [class]="[colorClass$ | async, sizeClass$ | async]"
 >
   <ng-content></ng-content>
 </div>
