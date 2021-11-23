@@ -14,5 +14,11 @@
   &_small {
     padding: 1rem;
     width: 6rem;
+    .button__content {
+      .button__icon {
+        height: 3rem;
+        width: 3rem;
+      }
+    }
   }
 }
