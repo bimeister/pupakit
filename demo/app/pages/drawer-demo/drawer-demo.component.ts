@@ -5,6 +5,9 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
 import { DrawersService } from '../../../../src/internal/shared/services/drawers.service';
 import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
 import { DrawerContainerComponent } from '../../../../src/lib/components/drawer/components/drawer-container/drawer-container.component';
+import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { take } from 'rxjs/operators';
+import { Theme } from '../../../../src/internal/declarations/enums/theme.enum';
 
 const BASE_REQUEST_PATH: string = 'drawer-demo/examples';
 
@@ -41,20 +44,27 @@ export class DrawerDemoComponent {
     }
   ];
 
-  constructor(private readonly drawerService: DrawersService, private readonly injector: Injector) {}
+  constructor(
+    private readonly drawerService: DrawersService,
+    private readonly injector: Injector,
+    private readonly themeWrapperService: ThemeWrapperService
+  ) {}
 
   public openDrawer(): void {
-    this.drawerService.open(TestDrawerComponent, {
-      ...this.formGroup.value,
-      injector: this.injector,
-      viewportMarginPx: 10,
-      containerComponent: DrawerContainerComponent,
-      providers: [
-        {
-          provide: DRAWER_DATA_TOKEN,
-          useValue: [1, 2, 3, 4]
-        }
-      ]
+    this.themeWrapperService.theme$.pipe(take(1)).subscribe((theme: Theme) => {
+      this.drawerService.open(TestDrawerComponent, {
+        ...this.formGroup.value,
+        injector: this.injector,
+        viewportMarginPx: 10,
+        containerComponent: DrawerContainerComponent,
+        providers: [
+          {
+            provide: DRAWER_DATA_TOKEN,
+            useValue: [1, 2, 3, 4]
+          }
+        ],
+        theme
+      });
     });
   }
 }

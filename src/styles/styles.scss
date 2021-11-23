@@ -1,5 +1,5 @@
 @import '~@angular/cdk/overlay-prebuilt.css';
-
+@import './overlay.scss';
 @import './functions.scss';
 @import './font-faces.scss';
 @import './mixins.scss';
@@ -81,34 +81,6 @@ label.horizontal {
   &__icon {
     height: 3rem;
     width: 3rem;
-  }
-}
-
-/*
-  Explore the possibility of excluding the management of external styles
-  Originates from https://bimeister.atlassian.net/browse/BIM-14668
-*/
-.cdk-global-overlay-wrapper,
-.cdk-overlay-connected-position-bounding-box {
-  z-index: 10000;
-}
-
-.cdk-overlay-dark-backdrop {
-  background-color: rgba(color(base-n600-rgb), 0.94);
-}
-
-.cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
-  @include xs() {
-    opacity: 1;
-    background-color: rgba(color(base-n600-rgb), 0.94);
-  }
-}
-
-.cdk-overlay-without-backdrop {
-  display: none;
-  @include xs() {
-    display: block;
-    background-color: rgba(color(base-n600-rgb), 0.94);
   }
 }
 
