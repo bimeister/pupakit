@@ -14,7 +14,7 @@ import { DateTimePickerModule } from './components/date-time-picker/date-time-pi
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
-import { DrawerNewModule } from './components/drawer-new/drawer-new.module';
+import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
@@ -52,6 +52,7 @@ import { ScrollableModule } from './components/scrollable/scrollable.module';
 import { StatusModule } from './components/status/status.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
+import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
 import { LabelModule } from './components/label/label.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 
@@ -68,8 +69,8 @@ const EXPORTS: any[] = [
   DateTimePickerModule,
   DaySelectorModule,
   DraggableModule,
-  DrawerNewModule,
   DrawerModule,
+  DrawerOldModule,
   DropdownModule,
   DroppableModule,
   IconButtonModule,

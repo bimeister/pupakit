@@ -1,0 +1,46 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.drawer-layout {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4rem;
+    flex-shrink: 0;
+    padding: 4rem 4rem 0 4rem;
+
+    &__title {
+      display: block;
+      flex: auto;
+      font-weight: bold;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 24px;
+    }
+
+    &__button {
+      margin-left: 2rem;
+    }
+  }
+
+  &__content {
+    height: 100%;
+    padding: 0 4rem 0 4rem;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+}

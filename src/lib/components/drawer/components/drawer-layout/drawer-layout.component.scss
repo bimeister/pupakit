@@ -1,5 +1,9 @@
+@use 'mixins' as *;
+
 @import 'themes/functions';
 @import 'functions';
+
+$layout_border-size: 1px;
 
 :host {
   display: block;
@@ -8,39 +12,46 @@
 }
 
 .drawer-layout {
+  border-radius: 1px;
+
+  color: color(base-n600);
+  background-color: color(base-n0);
+  border: $layout_border-size solid color(base-white-n400);
+
   height: 100%;
-  width: 100%;
+  width: 100vw;
+
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4rem;
-    flex-shrink: 0;
-    padding: 4rem 4rem 0 4rem;
+  @include gt-xs() {
+    width: 100%;
+  }
 
-    &__title {
-      display: block;
-      flex: auto;
-      font-weight: bold;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 24px;
-    }
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+    background-color: color(base-n600);
+    border: $layout_border-size solid color(base-dark-n400);
+  }
 
-    &__button {
-      margin-left: 2rem;
+  &_with-shadow {
+    box-shadow: 0px 4px 24px rgba(color(base-n600-rgb), 0.04);
+
+    @include host-selector-dark-theme() {
+      box-shadow: 0px 4px 24px rgba(color(base-n700-rgb), 0.12);
     }
   }
 
-  &__content {
-    height: 100%;
-    padding: 0 4rem 0 4rem;
-    overflow-x: hidden;
-    overflow-y: auto;
+  @include xs() {
+    border-radius: 1rem 1rem 0px 0px;
+  }
+
+  &__footer-stub {
+    padding-top: 5rem;
+
+    @include xs() {
+      padding-top: 4rem;
+    }
   }
 }

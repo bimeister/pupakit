@@ -9,7 +9,7 @@ import { DrawerRef } from './drawer-ref.class';
 import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { DrawerLayoutConfig } from '../interfaces/drawer-layout-config.interface';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
-import { DrawerContainerComponent } from '../../../lib/components/drawer/components/drawer-container/drawer-container.component';
+import { DrawerContainerOldComponent } from '../../../lib/components/drawer-old/components/drawer-container-old/drawer-container-old.component';
 
 export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer {
   public readonly id: string;
@@ -52,11 +52,11 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     this.renderer.setStyle(this.overlayRef.hostElement, 'z-index', zIndex);
   }
 
-  private getComponentPortal(): ComponentPortal<DrawerContainerComponent<unknown> | ContainerComponent> {
+  private getComponentPortal(): ComponentPortal<DrawerContainerOldComponent<unknown> | ContainerComponent> {
     const portalInjector: PortalInjector = this.createDrawerContainerInjector();
 
-    const containerComponent: ComponentType<DrawerContainerComponent<unknown> | ContainerComponent> =
-      this.config.containerComponent ?? DrawerContainerComponent;
+    const containerComponent: ComponentType<DrawerContainerOldComponent<unknown> | ContainerComponent> =
+      this.config.containerComponent ?? DrawerContainerOldComponent;
 
     return new ComponentPortal(containerComponent, null, portalInjector);
   }
