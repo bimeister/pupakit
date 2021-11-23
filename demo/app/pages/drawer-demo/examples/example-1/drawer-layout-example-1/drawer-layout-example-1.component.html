@@ -20,10 +20,7 @@
         <pupa-drawer-title>
           Title
           <pupa-drawer-title-container>
-            <div class="drawer__title-container">
-              <pupa-button>Button</pupa-button>
-              <pupa-button>Button</pupa-button>
-            </div>
+            <pupa-button>Button</pupa-button>
           </pupa-drawer-title-container>
         </pupa-drawer-title>
       </pupa-drawer-layout-header-row>
@@ -32,23 +29,23 @@
     <pupa-drawer-layout-body>
       <pupa-tabs-container>
         <pupa-tabs>
-          <pupa-tabs-item name="tab1"> Tab 1</pupa-tabs-item>
-          <pupa-tabs-item name="tab2"> Tab 2</pupa-tabs-item>
+          <pupa-tabs-item *ngFor="let tab of tabs" [name]="tab.name">{{ tab.title }}</pupa-tabs-item>
         </pupa-tabs>
 
         <pupa-drawer-layout-separator locatedIn="body"></pupa-drawer-layout-separator>
 
         <pupa-tabs-content>
-          <div *pupaTabsItemContentTemplate="'tab1'">Tab 1 content</div>
-          <div *pupaTabsItemContentTemplate="'tab2'">Tab 2 content</div>
+          <ng-container *ngFor="let tab of tabs">
+            <div *pupaTabsItemContentTemplate="tab.name">{{ tab.text }}</div>
+          </ng-container>
         </pupa-tabs-content>
       </pupa-tabs-container>
     </pupa-drawer-layout-body>
     <pupa-drawer-layout-footer>
-      <pupa-drawer-layout-action value="van">
+      <pupa-drawer-layout-action value="dungeon">
         <pupa-button kind="secondary">Action</pupa-button>
       </pupa-drawer-layout-action>
-      <pupa-drawer-layout-action value="boy next">
+      <pupa-drawer-layout-action value="boy next door">
         <pupa-button>Action</pupa-button>
       </pupa-drawer-layout-action>
     </pupa-drawer-layout-footer>

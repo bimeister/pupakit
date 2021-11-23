@@ -1,10 +1,21 @@
-@import 'themes/functions';
-@import 'functions';
+@use 'mixins' as *;
+
+$drawer_padding: 8px;
 
 .drawer-container {
-  width: fit-content;
-  height: 100%;
-  background: color(white);
+  height: vh(90);
+  width: 100vw;
+  background: transparent;
   position: fixed;
-  box-shadow: variable(box-shadow_hover);
+  box-sizing: border-box;
+
+  @include gt-xs() {
+    width: fit-content;
+    height: 100%;
+
+    &_with-padding {
+      padding: $drawer_padding;
+      max-height: vh(100);
+    }
+  }
 }

@@ -1,0 +1,6 @@
+<div *ngIf="float === 'left'" [@drawerLeftExpanded]="animationState" class="drawer-container">
+  <ng-container [cdkPortalOutlet]="componentPortal"></ng-container>
+</div>
+<div *ngIf="float === 'right'" [@drawerRightExpanded]="animationState" class="drawer-container">
+  <ng-container [cdkPortalOutlet]="componentPortal"></ng-container>
+</div>

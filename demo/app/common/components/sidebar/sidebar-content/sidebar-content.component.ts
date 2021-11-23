@@ -84,8 +84,8 @@ export class SidebarContentComponent {
   private readonly feedbackGroup: LinksGroup = {
     title: 'Feedback',
     linkItems: [
+      { title: 'Drawer (old)', link: '/kit/drawer-old' },
       { title: 'Drawer', link: '/kit/drawer' },
-      { title: 'Drawer (new)', link: '/kit/drawer-new' },
       { title: 'Modal', link: '/kit/modal' },
       { title: 'Spinner & loader', link: '/kit/spinner' }
     ]
