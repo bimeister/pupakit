@@ -45,7 +45,10 @@ $light: (
   ),
   focus: (
     background-color: color(base-n0),
-    border-color: color(base-white-n275)
+    border-color: color(base-white-n275),
+    placeholder: (
+      color: color(base-white-n275)
+    )
   ),
   active: (
     background-color: color(base-white-n300)
@@ -75,7 +78,10 @@ $dark: (
   ),
   focus: (
     background-color: color(base-n600),
-    border-color: color(base-dark-n275)
+    border-color: color(base-dark-n275),
+    placeholder: (
+      color: color(base-dark-n275)
+    )
   ),
   active: (
     background-color: color(base-dark-n300)
@@ -219,6 +225,7 @@ $dark: (
     }
     &::placeholder {
       opacity: 1;
+      color: map.get($light, focus, placeholder, color);
     }
     &:not(.input_invalid) {
       border-color: map.get($light, focus, border-color);
@@ -291,6 +298,9 @@ $dark: (
     }
     &:focus {
       background-color: map.get($dark, focus, background-color);
+      &::placeholder {
+        color: map.get($dark, focus, placeholder, color);
+      }
       &:not(.input_invalid) {
         border-color: map.get($dark, focus, border-color);
         &:-webkit-autofill {
@@ -327,9 +337,6 @@ $dark: (
 // to show icons or placeholder - used their host-hover
 :host:hover {
   .input__icons-list .input__icon:not(.input__icon-password) {
-    opacity: 1;
-  }
-  .input:not(.input_filled) ~ .input__icons-list .input__icon-password {
     opacity: 1;
   }
   .input:not(:focus):not([disabled]) {
