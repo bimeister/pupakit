@@ -7,17 +7,12 @@ import {
   TemplateRef,
   TrackByFunction
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { TabsItemContentTemplateDirective } from '../../../../lib/components/tabs/directives/tabs-item-content-template.directive';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
+import { ContentTemplateNameDirective } from '../../interfaces/content-template-name.interface';
+import { TabTemplateRef } from '../../interfaces/tab-template-ref.interface';
 import { TabsServiceBase } from './tabs-service-base.abstract';
-
-interface TabTempalteRef {
-  templateRef: TemplateRef<unknown>;
-  name: string;
-  isActive: boolean;
-}
 
 @Directive()
 export abstract class TabsContentBase<S extends TabsServiceBase> implements OnChanges, AfterContentInit, OnDestroy {
@@ -26,20 +21,20 @@ export abstract class TabsContentBase<S extends TabsServiceBase> implements OnCh
   public abstract destroyable: boolean;
   protected readonly destroyable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public abstract tabTemplates: QueryList<TabsItemContentTemplateDirective>;
+  public abstract tabTemplates: QueryList<ContentTemplateNameDirective>;
 
   protected readonly activeTabName$: Observable<string> = this.stateService.activeTabName$.pipe(filterNotNil());
 
   public readonly activeTemplateRef$: BehaviorSubject<Nullable<TemplateRef<unknown>>> = new BehaviorSubject<
     Nullable<TemplateRef<unknown>>
   >(null);
-  public readonly nonDestroyableTemplateRefs$: BehaviorSubject<TabTempalteRef[]> = new BehaviorSubject<
-    TabTempalteRef[]
+  public readonly nonDestroyableTemplateRefs$: BehaviorSubject<TabTemplateRef[]> = new BehaviorSubject<
+    TabTemplateRef[]
   >([]);
 
   constructor(protected readonly stateService: S) {}
 
-  public readonly tabTrackBy: TrackByFunction<TabTempalteRef> = (index: number) => index;
+  public readonly tabTrackBy: TrackByFunction<TabTemplateRef> = (index: number) => index;
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processInputDestroyableChanges(changes.destroyable?.currentValue);
@@ -65,18 +60,18 @@ export abstract class TabsContentBase<S extends TabsServiceBase> implements OnCh
     return combineLatest([this.destroyable$, this.activeTabName$]).subscribe(
       ([destroyable, activeTabName]: [boolean, string]) => {
         if (destroyable) {
-          const targetTemplate: TabsItemContentTemplateDirective = this.tabTemplates.find(
-            (template: TabsItemContentTemplateDirective) => template.pupaTabsItemContentTemplate === activeTabName
+          const targetTemplate: ContentTemplateNameDirective = this.tabTemplates.find(
+            (template: ContentTemplateNameDirective) => template.getTemplateName() === activeTabName
           );
           this.activeTemplateRef$.next(targetTemplate.templateRef);
           return;
         }
 
-        const templates: TabTempalteRef[] = this.tabTemplates.map((template: TabsItemContentTemplateDirective) => {
+        const templates: TabTemplateRef[] = this.tabTemplates.map((template: ContentTemplateNameDirective) => {
           return {
             templateRef: template.templateRef,
-            name: template.pupaTabsItemContentTemplate,
-            isActive: template.pupaTabsItemContentTemplate === activeTabName
+            name: template.getTemplateName(),
+            isActive: template.getTemplateName() === activeTabName
           };
         });
 

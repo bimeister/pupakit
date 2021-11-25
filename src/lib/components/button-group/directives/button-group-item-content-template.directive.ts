@@ -2,14 +2,14 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { ContentTemplateNameDirective } from '../../../../internal/declarations/interfaces/content-template-name.interface';
 
 @Directive({
-  selector: '[pupaTabsItemContentTemplate]'
+  selector: '[pupaButtonGroupItemContentTemplate]'
 })
-export class TabsItemContentTemplateDirective implements ContentTemplateNameDirective {
-  @Input() public pupaTabsItemContentTemplate: string = '';
+export class ButtonGroupItemContentTemplateDirective implements ContentTemplateNameDirective {
+  @Input() public pupaButtonGroupItemContentTemplate: string = '';
 
   constructor(public readonly templateRef: TemplateRef<unknown>) {}
 
   public getTemplateName(): string {
-    return this.pupaTabsItemContentTemplate;
+    return this.pupaButtonGroupItemContentTemplate;
   }
 }
