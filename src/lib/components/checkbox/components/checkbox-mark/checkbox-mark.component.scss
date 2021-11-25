@@ -4,13 +4,14 @@
 
 :host {
   @include flex-container(row, center, flex-start, nowrap);
+  padding: 1px;
 }
 
 .checkbox {
   box-sizing: content-box;
   @include flex-container(row, center, center, nowrap);
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
   border: 1px solid color(base-white-n200);
   cursor: pointer;
   border-radius: 1px;
