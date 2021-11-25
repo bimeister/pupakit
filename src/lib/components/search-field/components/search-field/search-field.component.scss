@@ -1,151 +1,271 @@
+@use 'sass:map';
+
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
-
-$width_switcher: 11.25rem;
-$padding-side_swither-icon: calc($width_switcher - variable(font-size_base-text));
+@import 'variables';
 
 :host {
-  z-index: 555;
-  width: auto;
-  overflow: hidden;
-
-  &_expandable {
-    width: $width_switcher;
-    overflow: visible;
-  }
+  display: block;
+  width: 100%;
 }
 
 .search-field {
-  z-index: 555;
-  height: 8rem;
-  width: $width_switcher;
+  box-sizing: border-box;
   position: relative;
-  @include transition(width);
-  @include flex-container(row, center, space-between, nowrap);
+  width: 100%;
 
-  &_expanded {
-    width: 100%;
-    overflow: visible;
-  }
+  @include flex-container(row, center, flex-start);
 
-  &:not(.search-field_expandable) {
-    width: 64rem;
-  }
+  &_collapsible {
+    position: absolute;
+    top: 0;
+    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  &:not(.search-field_expandable):not(.search-field_disabled).search-field_empty:hover {
-    .search-field__switcher {
-      color: color(active);
+    &.to-left {
+      right: 0;
     }
-    .search-field__control {
-      cursor: pointer;
+
+    &.to-right {
+      left: 0;
+    }
+  }
+
+  &_collapsed {
+    width: 8rem;
+  }
+
+  &__input {
+    z-index: 2;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    border-radius: 1px;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    height: 8rem;
+    padding: 2rem 10rem 2rem 11rem;
+    color: map.get($input_light_styles, input, color);
+    caret-color: map.get($input_light_styles, input, caret-color);
+    background-color: map.get($input_light_styles, input, background-color);
+    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
+    @include font-type-caption();
+    @include font-size-medium();
+
+    &_collapsed {
+      padding: 2rem;
+    }
+
+    &:-webkit-autofill {
+      border-color: map.get($input_light_styles, input, background-color);
+      -webkit-text-fill-color: map.get($input_light_styles, input, color);
+      box-shadow: none;
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
+    }
+
+    &::placeholder {
+      color: map.get($input_light_styles, input, placeholder, color);
+    }
+
+    &:not(:focus):not([disabled]) {
+      @include hover() {
+        background-color: map.get($input_light_styles, hover, background-color);
+
+        &:-webkit-autofill {
+          box-shadow: none;
+          -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
+          border-color: map.get($input_light_styles, hover, background-color);
+        }
+      }
+    }
+
+    &:active:not(:focus):not([disabled]) {
+      border-color: transparent;
+      background-color: map.get($input_light_styles, active, background-color);
+
+      &:-webkit-autofill {
+        border-color: map.get($input_light_styles, active, background-color);
+        box-shadow: none;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, active, background-color) inset;
+      }
+    }
+
+    &:focus:not([disabled]) {
+      cursor: text;
+      border-color: map.get($input_light_styles, focus, border-color);
+      background-color: map.get($input_light_styles, focus, background-color);
+
+      &:-webkit-autofill {
+        box-shadow: none;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, focus, background-color) inset;
+        border-color: map.get($input_light_styles, focus, border-color);
+      }
+
+      &::placeholder {
+        color: map.get($input_light_styles, focus, placeholder, color);
+      }
+
+      ~ .search-field__reset {
+        display: block;
+      }
+    }
+
+    &[disabled] {
+      border-color: transparent;
+      cursor: not-allowed;
+      color: map.get($input_light_styles, disabled, color);
+      background-color: map.get($input_light_styles, disabled, background-color);
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: map.get($input_light_styles, disabled, color);
+        box-shadow: none;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, disabled, background-color) inset;
+        border-color: map.get($input_light_styles, disabled, background-color);
+      }
+
+      &::selection {
+        background: transparent;
+      }
+
+      &::placeholder {
+        color: map.get($input_light_styles, disabled, placeholder, color);
+      }
+
+      ~ .search-field__icon {
+        color: map.get($input_light_styles, disabled, color);
+      }
+    }
+
+    &_filled,
+    &_collapsible {
+      ~ .search-field__reset {
+        display: block;
+      }
+    }
+
+    @include host-selector-dark-theme() {
+      color: map.get($input_dark_styles, input, color);
+      caret-color: map.get($input_dark_styles, input, caret-color);
+      background-color: map.get($input_dark_styles, input, background-color);
+
+      &:-webkit-autofill {
+        -webkit-text-fill-color: map.get($input_dark_styles, input, color);
+        box-shadow: none;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, input, background-color) inset;
+        border-color: map.get($input_dark_styles, input, background-color);
+      }
+
+      &::placeholder {
+        color: map.get($input_dark_styles, input, placeholder, color);
+      }
+
+      &:not(:focus):not([disabled]) {
+        @include hover() {
+          background-color: map.get($input_dark_styles, hover, background-color);
+          &:-webkit-autofill {
+            box-shadow: none;
+            -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
+            border-color: map.get($input_dark_styles, hover, background-color);
+          }
+        }
+      }
+
+      &:active:not(:focus):not([disabled]) {
+        color: map.get($input_dark_styles, active, color);
+      }
 
       &:focus {
-        cursor: text;
+        background-color: map.get($input_dark_styles, focus, background-color);
+        &::placeholder {
+          color: map.get($input_dark_styles, focus, placeholder, color);
+        }
+        border-color: map.get($input_dark_styles, focus, border-color);
+
+        &:-webkit-autofill {
+          border-color: map.get($input_dark_styles, focus, border-color);
+          box-shadow: none;
+          -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
+        }
       }
-      &::placeholder {
-        color: color(grey-ivory);
+
+      &[disabled] {
+        color: map.get($input_dark_styles, disabled, color);
+        background-color: map.get($input_dark_styles, disabled, background-color);
+
+        &:-webkit-autofill {
+          -webkit-text-fill-color: map.get($input_dark_styles, disabled, color);
+          box-shadow: none;
+          -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, disabled, background-color) inset;
+          border-color: map.get($input_dark_styles, disabled, background-color);
+        }
+
+        &::placeholder {
+          color: map.get($input_dark_styles, disabled, placeholder, color);
+        }
       }
     }
   }
-}
 
-.search-field.search-field_expandable {
-  top: 0;
-  right: 0;
-  position: absolute;
-  overflow: hidden;
-
-  .search-field__control {
-    width: $width_switcher;
-    padding: 2rem;
-  }
-}
-
-.search-field:not(.search-field_disabled).search-field_outlined {
-  .search-field__switcher {
-    border: 1px solid transparent;
-
-    .search-field__switcher-icon {
-      background: color(white);
+  &__reset {
+    position: absolute;
+    z-index: 3;
+    right: 2rem;
+    display: none;
+    color: map.get($input_light_styles, input, color);
+    @include host-selector-dark-theme() {
+      color: map.get($input_dark_styles, input, color);
     }
   }
-  .search-field__control {
-    background: color(white);
-    border: 1px solid color(grey-apple);
-  }
-}
 
-.search-field__switcher {
-  z-index: 1003;
-  order: 2;
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  width: $width_switcher;
-  height: 8rem;
-  border-radius: 5.5rem;
-  background: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: variable(font-size_base-text);
-  color: color(grey-ivory);
-  position: absolute;
-  top: 0;
-  right: 0;
-  @include transition(color);
-  @include flex-container(column, center, center, nowrap);
+  &__icon {
+    position: absolute;
+    z-index: 4;
+    left: 3rem;
+    pointer-events: none;
+    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  .search-field__switcher-icon {
-    box-sizing: content-box;
-    padding: 0 calc((#{$width_switcher} - #{variable(font-size_base-text)}) / 3);
-    background: color(light);
-  }
-}
+    &_collapsed {
+      cursor: pointer;
+      left: 0;
+      pointer-events: all;
+      padding: 2rem;
+      transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
+      caret-color: map.get($input_light_styles, input, caret-color);
+      background-color: map.get($input_light_styles, input, background-color);
+      @include flex-container(row, center, center);
 
-.search-field:not(.search-field_disabled) {
-  .search-field__switcher:hover {
-    color: color(active);
-  }
-}
+      &:not(.search-field__icon_disabled) {
+        @include hover() {
+          background-color: map.get($input_light_styles, hover, background-color);
+        }
+      }
 
-.search-field__control {
-  z-index: 1002;
-  order: 1;
-  height: 8rem;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 5.5rem;
-  background: color(light);
-  border: none;
-  outline: none;
-  font-size: variable(font-size_base-text);
-  padding: 2rem $width_switcher 2rem 3rem;
-  position: absolute;
-  top: 0;
-  right: 0;
+      @include host-selector-dark-theme() {
+        caret-color: map.get($input_dark_styles, input, caret-color);
+        background-color: map.get($input_dark_styles, input, background-color);
 
-  &::placeholder {
-    color: color(grey-light);
-    user-select: none;
-    @include transition(color);
-  }
-}
-
-.search-field_disabled {
-  .search-field__switcher {
-    cursor: default;
-    background: color(grey-apple);
-    .search-field__switcher-icon {
-      background: inherit;
-      color: color(grey-light);
+        &:not(.search-field__icon_disabled) {
+          @include hover() {
+            background-color: map.get($input_dark_styles, hover, background-color);
+          }
+        }
+      }
     }
-  }
-  .search-field__control {
-    background: color(grey-apple);
-  }
-  .search-field__control::placeholder {
-    color: color(grey-light);
+
+    &_disabled {
+      border-color: transparent;
+      cursor: not-allowed;
+      color: map.get($input_light_styles, disabled, color);
+      background-color: map.get($input_light_styles, disabled, background-color);
+    }
+
+    @include host-selector-dark-theme() {
+      &_disabled {
+        color: map.get($input_dark_styles, disabled, color);
+        background-color: map.get($input_dark_styles, disabled, background-color);
+      }
+    }
   }
 }

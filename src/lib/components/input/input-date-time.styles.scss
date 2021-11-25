@@ -85,8 +85,8 @@ $width_date-range: 60rem;
 }
 
 .input[disabled] ~ .time-input-container__shape-container {
-  color: map.get($light, disabled, placeholder, color);
+  color: map.get($input_light_styles, disabled, placeholder, color);
   @include host-selector-dark-theme() {
-    color: map.get($dark, disabled, placeholder, color);
+    color: map.get($input_dark_styles, disabled, placeholder, color);
   }
 }

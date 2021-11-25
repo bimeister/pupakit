@@ -2,7 +2,7 @@
   <div class="sidebar-content">
     <div class="sidebar-content__top-section">
       <div class="search-field-container" [ngClass]="searchFieldContainerAdditionaslClassName$ | async">
-        <pupa-search-field (valueChange)="setSearchValue($event)" placeholder="Component name"></pupa-search-field>
+        <pupa-search-field [formControl]="searchControl" placeholder="Component name"></pupa-search-field>
       </div>
 
       <pupa-button-icon

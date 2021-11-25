@@ -1,0 +1,5 @@
+<pupa-search-field [formControl]="searchControl" [placeholder]="'Type something...'"> </pupa-search-field>
+
+<ul>
+  <li *ngFor="let item of filteredFruitList$ | async">{{ item }}</li>
+</ul>

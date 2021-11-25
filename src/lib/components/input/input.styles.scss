@@ -4,6 +4,7 @@
 @import 'themes/functions';
 @import 'mixins';
 @import 'functions';
+@import 'variables';
 
 @mixin large {
   @include font-size-large();
@@ -20,73 +21,6 @@
   @include font-type-caption();
   @include font-size-mark();
 }
-
-$light: (
-  input: (
-    color: color(base-n600),
-    caret-color: color(base-n600),
-    background-color: color(base-white-n500),
-    placeholder: (
-      color: color(base-n600)
-    )
-  ),
-  hover: (
-    background-color: color(base-white-n400)
-  ),
-  disabled: (
-    color: color(base-white-n250),
-    background-color: color(base-white-n500),
-    placeholder: (
-      color: color(base-white-n250)
-    )
-  ),
-  invalid: (
-    border-color: color(red-n400)
-  ),
-  focus: (
-    background-color: color(base-n0),
-    border-color: color(base-white-n275),
-    placeholder: (
-      color: color(base-white-n275)
-    )
-  ),
-  active: (
-    background-color: color(base-white-n300)
-  )
-);
-$dark: (
-  input: (
-    color: color(base-n0),
-    caret-color: color(base-n0),
-    background-color: color(base-dark-n500),
-    placeholder: (
-      color: color(base-n0)
-    )
-  ),
-  hover: (
-    background-color: color(base-dark-n400)
-  ),
-  disabled: (
-    color: color(base-dark-n250),
-    background-color: color(base-dark-n500),
-    placeholder: (
-      color: color(base-dark-n250)
-    )
-  ),
-  invalid: (
-    border-color: color(red-n400)
-  ),
-  focus: (
-    background-color: color(base-n600),
-    border-color: color(base-dark-n275),
-    placeholder: (
-      color: color(base-dark-n275)
-    )
-  ),
-  active: (
-    background-color: color(base-dark-n300)
-  )
-);
 
 :host {
   box-sizing: border-box;
@@ -105,20 +39,20 @@ $dark: (
   border-radius: 1px;
   box-sizing: border-box;
   border: 1px solid transparent;
-  color: map.get($light, input, color);
-  caret-color: map.get($light, input, caret-color);
-  background-color: map.get($light, input, background-color);
+  color: map.get($input_light_styles, input, color);
+  caret-color: map.get($input_light_styles, input, caret-color);
+  background-color: map.get($input_light_styles, input, background-color);
   &:-webkit-autofill {
-    border-color: map.get($light, input, background-color);
-    -webkit-text-fill-color: map.get($light, input, color);
+    border-color: map.get($input_light_styles, input, background-color);
+    -webkit-text-fill-color: map.get($input_light_styles, input, color);
     box-shadow: none;
-    -webkit-box-shadow: 0 10rem 0 0 map.get($light, input, background-color) inset;
+    -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
   }
 
   &::placeholder {
     opacity: 0;
     will-change: opacity;
-    color: map.get($light, input, placeholder, color);
+    color: map.get($input_light_styles, input, placeholder, color);
   }
   &__icons-list {
     z-index: 3;
@@ -191,25 +125,25 @@ $dark: (
   }
 
   &:hover:not(:focus):not([disabled]) {
-    background-color: map.get($light, hover, background-color);
+    background-color: map.get($input_light_styles, hover, background-color);
     &:-webkit-autofill {
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($light, hover, background-color) inset;
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
     }
     &:-webkit-autofill {
       &:not(.input_invalid) {
-        border-color: map.get($light, hover, background-color);
+        border-color: map.get($input_light_styles, hover, background-color);
       }
     }
   }
 
   &:active:not(:focus):not([disabled]) {
     border-color: transparent;
-    background-color: map.get($light, active, background-color);
+    background-color: map.get($input_light_styles, active, background-color);
     &:-webkit-autofill {
-      border-color: map.get($light, active, background-color);
+      border-color: map.get($input_light_styles, active, background-color);
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($light, active, background-color) inset;
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, active, background-color) inset;
     }
     &::placeholder {
       opacity: 1;
@@ -225,45 +159,45 @@ $dark: (
     }
     &::placeholder {
       opacity: 1;
-      color: map.get($light, focus, placeholder, color);
+      color: map.get($input_light_styles, focus, placeholder, color);
     }
     &:not(.input_invalid) {
-      border-color: map.get($light, focus, border-color);
+      border-color: map.get($input_light_styles, focus, border-color);
       &:-webkit-autofill {
-        border-color: map.get($light, focus, border-color);
+        border-color: map.get($input_light_styles, focus, border-color);
       }
     }
-    background-color: map.get($light, focus, background-color);
+    background-color: map.get($input_light_styles, focus, background-color);
     &:-webkit-autofill {
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($light, focus, background-color) inset;
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, focus, background-color) inset;
     }
   }
 
   &_invalid {
-    border-color: map.get($light, invalid, border-color);
+    border-color: map.get($input_light_styles, invalid, border-color);
     &:-webkit-autofill {
-      border-color: map.get($light, invalid, border-color);
+      border-color: map.get($input_light_styles, invalid, border-color);
     }
   }
 
   &[disabled] {
     border-color: transparent;
     cursor: not-allowed;
-    color: map.get($light, disabled, color);
-    background-color: map.get($light, disabled, background-color);
+    color: map.get($input_light_styles, disabled, color);
+    background-color: map.get($input_light_styles, disabled, background-color);
     &:-webkit-autofill {
-      -webkit-text-fill-color: map.get($light, disabled, color);
+      -webkit-text-fill-color: map.get($input_light_styles, disabled, color);
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($light, disabled, background-color) inset;
-      border-color: map.get($light, disabled, background-color);
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, disabled, background-color) inset;
+      border-color: map.get($input_light_styles, disabled, background-color);
     }
     &::selection {
       background: transparent;
     }
     &::placeholder {
       opacity: 1;
-      color: map.get($light, disabled, placeholder, color);
+      color: map.get($input_light_styles, disabled, placeholder, color);
     }
     ~ .input__icons-list {
       display: none;
@@ -271,64 +205,64 @@ $dark: (
   }
 
   @include host-selector-dark-theme() {
-    color: map.get($dark, input, color);
-    caret-color: map.get($dark, input, caret-color);
-    background-color: map.get($dark, input, background-color);
+    color: map.get($input_dark_styles, input, color);
+    caret-color: map.get($input_dark_styles, input, caret-color);
+    background-color: map.get($input_dark_styles, input, background-color);
     &:-webkit-autofill {
-      -webkit-text-fill-color: map.get($dark, input, color);
+      -webkit-text-fill-color: map.get($input_dark_styles, input, color);
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($dark, input, background-color) inset;
-      border-color: map.get($dark, input, background-color);
+      -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, input, background-color) inset;
+      border-color: map.get($input_dark_styles, input, background-color);
     }
     &::placeholder {
-      color: map.get($dark, input, placeholder, color);
+      color: map.get($input_dark_styles, input, placeholder, color);
     }
     &:hover:not(:focus):not([disabled]) {
-      background-color: map.get($dark, hover, background-color);
+      background-color: map.get($input_dark_styles, hover, background-color);
       &:-webkit-autofill {
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, hover, background-color) inset;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
         &:not(.input_invalid) {
-          border-color: map.get($dark, hover, background-color);
+          border-color: map.get($input_dark_styles, hover, background-color);
         }
       }
     }
     &:active:not(:focus):not([disabled]) {
-      color: map.get($dark, active, color);
+      color: map.get($input_dark_styles, active, color);
     }
     &:focus {
-      background-color: map.get($dark, focus, background-color);
+      background-color: map.get($input_dark_styles, focus, background-color);
       &::placeholder {
-        color: map.get($dark, focus, placeholder, color);
+        color: map.get($input_dark_styles, focus, placeholder, color);
       }
       &:not(.input_invalid) {
-        border-color: map.get($dark, focus, border-color);
+        border-color: map.get($input_dark_styles, focus, border-color);
         &:-webkit-autofill {
-          border-color: map.get($dark, focus, border-color);
+          border-color: map.get($input_dark_styles, focus, border-color);
         }
       }
       &:-webkit-autofill {
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, focus, background-color) inset;
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
       }
     }
     &_invalid {
-      border-color: map.get($dark, invalid, border-color);
+      border-color: map.get($input_dark_styles, invalid, border-color);
       &:-webkit-autofill {
-        border-color: map.get($dark, invalid, border-color);
+        border-color: map.get($input_dark_styles, invalid, border-color);
       }
     }
     &[disabled] {
-      color: map.get($dark, disabled, color);
-      background-color: map.get($dark, disabled, background-color);
+      color: map.get($input_dark_styles, disabled, color);
+      background-color: map.get($input_dark_styles, disabled, background-color);
       &:-webkit-autofill {
-        -webkit-text-fill-color: map.get($dark, disabled, color);
+        -webkit-text-fill-color: map.get($input_dark_styles, disabled, color);
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($dark, disabled, background-color) inset;
-        border-color: map.get($dark, disabled, background-color);
+        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, disabled, background-color) inset;
+        border-color: map.get($input_dark_styles, disabled, background-color);
       }
       &::placeholder {
-        color: map.get($dark, disabled, placeholder, color);
+        color: map.get($input_dark_styles, disabled, placeholder, color);
       }
     }
   }

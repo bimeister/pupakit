@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation } from '@angular/core';
-import { isEmpty, isNil, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
+import { isEmpty, isNil, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { DrawerRef } from '../../../../../../src/internal/declarations/classes/drawer-ref.class';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { FormControl } from '@angular/forms';
 
 interface LinkItem {
   title: string;
@@ -126,8 +127,10 @@ export class SidebarContentComponent {
     this.deprecatedGroup
   ];
 
-  private readonly searchValue$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
-  public filteredLinkGroups$: Observable<LinksGroup[]> = this.searchValue$.pipe(
+  public readonly searchControl: FormControl = new FormControl('');
+
+  public filteredLinkGroups$: Observable<LinksGroup[]> = this.searchControl.valueChanges.pipe(
+    startWith(''),
     map((searchValue: string) => {
       if (isEmpty(searchValue)) {
         return this.linkGroups;
@@ -176,10 +179,6 @@ export class SidebarContentComponent {
     if (this.isOpenInDrawer) {
       this.drawerRef.close();
     }
-  }
-
-  public setSearchValue(searchValue: string): void {
-    this.searchValue$.next(searchValue);
   }
 
   public processItemsScroll(event: Event): void {
