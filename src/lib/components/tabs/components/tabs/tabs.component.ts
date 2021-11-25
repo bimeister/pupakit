@@ -10,12 +10,12 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
-import { TabsStateService } from '../../services/tabs-state.service';
-import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
-import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
+import { map } from 'rxjs/operators';
 import { TABS_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/tabs-container-state-service.token';
+import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
+import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
+import { TabsStateService } from '../../services/tabs-state.service';
 
 @Component({
   selector: 'pupa-tabs',
@@ -34,14 +34,6 @@ export class TabsComponent extends TabsBase<TabsStateService> implements OnInit 
   private readonly railOffsetLeftPx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly railOffsetLeftTransform$: Observable<string> = this.railOffsetLeftPx$.pipe(
     map((railOffsetLeft: number) => `translateX(${railOffsetLeft}px)`)
-  );
-
-  public readonly railHighlighterOffsetLeftPx$: Observable<number> = this.stateService.railHighlighterOffsetLeftPx$;
-  public readonly railHighlighterOffsetLeftTransform$: Observable<string> = this.railHighlighterOffsetLeftPx$.pipe(
-    map((railHighlighterOffsetLeftPx: number) => `translateX(${railHighlighterOffsetLeftPx}px)`)
-  );
-  public readonly railHighlighterWidthPx$: Observable<number> = this.stateService.railHighlighterWidthPx$.pipe(
-    delay(0)
   );
 
   constructor(

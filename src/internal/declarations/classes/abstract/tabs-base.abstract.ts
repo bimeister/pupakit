@@ -1,7 +1,8 @@
 import { AfterViewChecked, Directive, EventEmitter, OnDestroy } from '@angular/core';
-import { TabsServiceBase } from './tabs-service-base.abstract';
-import { Observable, Subscription } from 'rxjs';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { Observable, Subscription } from 'rxjs';
+import { delay, map } from 'rxjs/operators';
+import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
 export abstract class TabsBase<S extends TabsServiceBase> implements AfterViewChecked, OnDestroy {
@@ -11,6 +12,14 @@ export abstract class TabsBase<S extends TabsServiceBase> implements AfterViewCh
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
   private readonly activeTabName$: Observable<Nullable<string>> = this.stateService.activeTabName$;
+
+  public readonly railHighlighterOffsetLeftTransform$: Observable<string> =
+    this.stateService.railHighlighterOffsetLeftPx$.pipe(
+      map((railHighlighterOffsetLeftPx: number) => `translateX(${railHighlighterOffsetLeftPx}px)`)
+    );
+  public readonly railHighlighterWidthPx$: Observable<number> = this.stateService.railHighlighterWidthPx$.pipe(
+    delay(0)
+  );
 
   constructor(private readonly tabsService: S, private readonly containerService?: S) {
     this.subscription.add(this.processActiveTabNameChanges());

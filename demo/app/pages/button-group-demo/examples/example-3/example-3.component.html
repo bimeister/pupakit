@@ -1,0 +1,39 @@
+<pupa-button-group-container class="pupa-button-group-container">
+  <pupa-button-group>
+    <pupa-button-group-item class="pupa-button-group-item" name="button-1">
+      Button1111111111111
+    </pupa-button-group-item>
+
+    <pupa-button-group-item class="pupa-button-group-item" name="button-2">
+      Button2222222222222
+    </pupa-button-group-item>
+
+    <pupa-button-group-item class="pupa-button-group-item" name="button-3"> Button333333333 </pupa-button-group-item>
+
+    <pupa-button-group-item class="pupa-button-group-item" name="button-4"> Button44444444 </pupa-button-group-item>
+
+    <pupa-button-group-item class="pupa-button-group-item" name="button-5"> Button55555555 </pupa-button-group-item>
+  </pupa-button-group>
+
+  <pupa-button-group-content [destroyable]="false">
+    <div class="button-group-content-item" *pupaButtonGroupItemContentTemplate="'button-1'">
+      Button 1 content <input value="1" />
+    </div>
+
+    <div class="button-group-content-item" *pupaButtonGroupItemContentTemplate="'button-2'">
+      Button 2 content <input value="2" />
+    </div>
+
+    <div class="button-group-content-item" *pupaButtonGroupItemContentTemplate="'button-3'">
+      Button 3 content <input value="3" />
+    </div>
+
+    <div class="button-group-content-item" *pupaButtonGroupItemContentTemplate="'button-4'">
+      Button 4 content <input value="4" />
+    </div>
+
+    <div class="button-group-content-item" *pupaButtonGroupItemContentTemplate="'button-5'">
+      Button 5 content <input value="5" />
+    </div>
+  </pupa-button-group-content>
+</pupa-button-group-container>

@@ -1,16 +1,19 @@
 import { NgModule, Type } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-
+import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
+import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
-import { CodeDemoModule } from './pages/code-demo/code-demo.module';
-import { TableDemoModule } from './pages/table-demo/table-demo.module';
-import { TagDemoModule } from './pages/tag-demo/tag-demo.module';
 import { AvatarDemoModule } from './pages/avatar-demo/avatar-demo.module';
+import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
+import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
 import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
+import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-demo.module';
+import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
 import { ChipButtonDemoModule } from './pages/chip-button-demo/chip-button-demo.module';
 import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
 import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
+import { CodeDemoModule } from './pages/code-demo/code-demo.module';
 import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { ControlsIsPatchedDemoModule } from './pages/controls-is-patched-demo/controls-is-patched-demo.module';
 import { DatagridDemoModule } from './pages/datagrid-demo/datagrid-demo.module';
@@ -18,29 +21,39 @@ import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-tim
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
 import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
+import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
+import { DrawerOldDemoModule } from './pages/drawer-old-demo/drawer-old-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { DroppableDemoModule } from './pages/droppable-demo/droppable-demo.module';
 import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
 import { IconButtonDemoModule } from './pages/icon-button-demo/icon-button-demo.module';
 import { IconPageModule } from './pages/icon-page/icon-page.module';
+import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 import { InputDemoModule } from './pages/input-demo/input-demo.module';
+import { LabelDemoModule } from './pages/label-demo/label-demo.module';
 import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
 import { LoaderDemoModule } from './pages/loader-demo/loader-demo.module';
+import { MainPageModule } from './pages/main-page/main-page.module';
 import { ModalDemoModule } from './pages/modal-demo/modal-demo.module';
 import { MultiselectionListDemoModule } from './pages/multiselection-list-demo/multiselection-list-demo.module';
+import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
 import { PagedVirtualScrollDemoModule } from './pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module';
 import { RadioButtonDemoModule } from './pages/radio-button-demo/radio-button-demo.module';
 import { RatingDemoModule } from './pages/rating-demo/rating-demo.module';
+import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
 import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.module';
 import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
 import { SelectDemoModule } from './pages/select-demo/select-demo.module';
 import { SelectMultipleDemoModule } from './pages/select-multiple-demo/select-multiple-demo.module';
 import { SelectorDemoModule } from './pages/selector-demo/selector-demo.module';
 import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
+import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { SwitcherDemoModule } from './pages/switcher-demo/switcher-demo.module';
+import { TableDemoModule } from './pages/table-demo/table-demo.module';
 import { TableInputDemoModule } from './pages/table-input-demo/table-input-demo.module';
 import { TabsDemoModule } from './pages/tabs-demo/tabs-demo.module';
+import { TagDemoModule } from './pages/tag-demo/tag-demo.module';
 import { TextareaDemoModule } from './pages/textarea-demo/textarea-demo.module';
 import { TileDemoModule } from './pages/tile-demo/tile-demo.module';
 import { TimeInputDemoModule } from './pages/time-input-demo/time-input-demo.module';
@@ -50,19 +63,6 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
-import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
-import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
-import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
-import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
-import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
-import { MainPageModule } from './pages/main-page/main-page.module';
-import { StatusDemoModule } from './pages/status-demo/status-demo.module';
-import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
-import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
-import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
-import { LabelDemoModule } from './pages/label-demo/label-demo.module';
-import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
-import { DrawerOldDemoModule } from './pages/drawer-old-demo/drawer-old-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -375,6 +375,11 @@ const demoRoutes: Routes = [
         path: 'breadcrumbs',
         loadChildren: (): Promise<Type<BreadcrumbsDemoModule>> =>
           import('./pages/breadcrumbs-demo/breadcrumbs-demo.module').then(module => module.BreadcrumbsDemoModule)
+      },
+      {
+        path: 'button-group',
+        loadChildren: (): Promise<Type<ButtonGroupDemoModule>> =>
+          import('./pages/button-group-demo/button-group-demo.module').then(module => module.ButtonGroupDemoModule)
       }
     ]
   },

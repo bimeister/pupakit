@@ -1,0 +1,54 @@
+@import 'themes/functions';
+@import 'mixins';
+
+:host {
+  display: block;
+  outline: none;
+  z-index: 1;
+}
+
+.button-group-item {
+  min-width: 1rem;
+  box-sizing: border-box;
+  padding: 5px 12px;
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  border-radius: 1px;
+
+  color: color('base-white-n100');
+  @include host-selector-dark-theme {
+    color: color('base-dark-n100');
+  }
+
+  &:not(&_disabled):not(&_active) {
+    @include hover {
+      background-color: color('base-white-n400');
+      color: color('base-n600');
+
+      @include host-selector-dark-theme {
+        background-color: color('base-dark-n400');
+        color: color('base-n0');
+      }
+    }
+  }
+
+  &_active {
+    background-color: transparent;
+
+    box-shadow: 0px 2px 8px rgba(color(base-n700), 0.03);
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    color: color('base-white-n250');
+
+    @include host-selector-dark-theme {
+      color: color('base-dark-n250');
+    }
+  }
+
+  @include ellipsis-text-overflow;
+  @include font-type-caption;
+  @include font-size-mark;
+}

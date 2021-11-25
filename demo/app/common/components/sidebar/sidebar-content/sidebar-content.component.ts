@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation } from '@angular/core';
+import { isEmpty, isNil, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { isEmpty, isNil, Nullable, shareReplayWithRefCount, stringFilterPredicate } from '@bimeister/utilities';
-
 import { DrawerRef } from '../../../../../../src/internal/declarations/classes/drawer-ref.class';
-import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 interface LinkItem {
   title: string;
@@ -69,6 +68,7 @@ export class SidebarContentComponent {
       { title: 'Tree (new)', link: '/kit/tree-new' },
       { title: 'Tooltip', link: '/kit/tooltip' },
       { title: 'Tabs', link: '/kit/tabs' },
+      { title: 'Button Group', link: '/kit/button-group' },
       { title: 'Vertical Tabs', link: '/kit/vertical-tabs' },
       { title: 'Chip Tabs', link: '/kit/chip-tabs' },
       { title: 'Chip', link: '/kit/chip' },
