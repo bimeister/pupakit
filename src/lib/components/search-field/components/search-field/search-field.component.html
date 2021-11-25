@@ -1,21 +1,37 @@
 <div
   class="search-field"
-  [class.search-field_expandable]="expandable"
-  [class.search-field_expanded]="(controlExpansionState$ | async) === 'true'"
-  [class.search-field_empty]="isValueEmpty"
-  [class.search-field_outlined]="kind === 'outlined'"
-  [class.search-field_disabled]="disabled$ | async"
+  [ngClass]="collapseDirection$ | async"
+  [class.search-field_collapsible]="isCollapsible$ | async"
+  [class.search-field_collapsed]="!(isShowInput$ | async)"
 >
-  <button class="search-field__switcher" (click)="switchState($event)">
-    <pupa-icon class="search-field__switcher-icon" [name]="buttonIconName"></pupa-icon>
-  </button>
   <input
-    [disabled]="disabled$ | async"
-    [@.disabled]="!expandable"
-    [@controlExpanded]="expandable ? (controlExpansionState$ | async) : 'true'"
-    [placeholder]="placeholder"
-    [formControl]="inputValueControl"
-    class="search-field__control"
+    class="search-field__input"
+    [ngClass]="resultClassList$ | async"
+    type="text"
     #inputElement
+    [placeholder]="placeholder"
+    [attr.disabled]="(isDisabled$ | async) ? true : null"
+    (input)="updateValue(inputElement.value)"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
+    [autocomplete]="autocomplete ? 'on' : 'off'"
+    [value]="value$ | async"
   />
+  <pupa-icon
+    class="search-field__icon"
+    [class.search-field__icon_collapsed]="!(isShowInput$ | async)"
+    [class.search-field__icon_disabled]="isDisabled$ | async"
+    (click)="changeCollapsed()"
+    name="app-search"
+  >
+  </pupa-icon>
+  <pupa-button-icon
+    class="search-field__reset"
+    icon="app-cross-circle"
+    size="small"
+    tabIndex="-1"
+    kind="subtle"
+    (click)="reset()"
+  >
+  </pupa-button-icon>
 </div>

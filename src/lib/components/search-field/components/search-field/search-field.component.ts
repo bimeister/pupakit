@@ -1,150 +1,115 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  Output,
-  ViewChild
-} from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { filterFalsy, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
-import { ControlState } from '../../../../../internal/declarations/enums/control-state.enum';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map, switchMapTo, take, tap } from 'rxjs/operators';
+import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { SearchFieldKind } from '../../../../../internal/declarations/types/search-field-kind.type';
+import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 
+type CollapseDirection = 'to-left' | 'to-right';
+const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
 @Component({
   selector: 'pupa-search-field',
   templateUrl: './search-field.component.html',
   styleUrls: ['./search-field.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('controlExpanded', [
-      state('false', style({ width: `${11.25 * remSizePx}px` })),
-      state('true', style({ width: `100%` })),
-      transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
-      transition('true => false', animate('0.2s ease-in-out'))
-    ])
-  ]
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchFieldComponent implements OnInit, OnDestroy, OnChanges {
-  @ViewChild('inputElement', { static: true }) public inputElement: ElementRef<HTMLInputElement>;
-  public controlExpansionState$: BehaviorSubject<ControlState> = new BehaviorSubject<ControlState>(
-    ControlState.collapsed
+export class SearchFieldComponent extends InputBase<ValueType> {
+  @Input() public placeholder: string = 'Поиск';
+
+  @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
+  public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
+    DEFAULT_COLLAPSE_DIRECTION
   );
-  @Input() public placeholder: string = '';
-  @Input() public expandable: boolean = false;
-  @Input() public disabled: boolean = false;
-  public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  @Input() public kind: SearchFieldKind = 'solid';
-  @Input()
-  public get value(): string {
-    return this.isValueEmpty ? '' : this.inputValueControl.value;
-  }
-  public set value(newValue: string) {
-    this.inputValueControl.setValue(newValue);
-  }
-  @Input() public clearValue: Subject<void> = new Subject<void>();
-  @Input() public collapsedField: Subject<void> = new Subject<void>();
-  @Output() public valueChange: EventEmitter<string> = new EventEmitter<string>();
-  @HostBinding('class.pupa-search-field_expandable')
-  public get isExpandable(): boolean {
-    return this.expandable;
-  }
-  public inputValueControl: FormControl = new FormControl(null);
 
-  public get buttonIconName(): string {
-    if (this.expandable) {
-      return this.controlExpansionState$.getValue() === ControlState.expanded ? 'close' : 'search';
-    }
-    return !this.isValueEmpty ? 'close' : 'search';
-  }
+  @Input() public collapsible: boolean = false;
+  public readonly isCollapsible$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  public get isValueEmpty(): boolean {
-    return isNil(this.inputValueControl.value) || String(this.inputValueControl.value).length === 0;
-  }
+  public readonly isCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
-  private readonly subscription: Subscription = new Subscription();
+  public readonly isShowInput$: Observable<boolean> = combineLatest([this.isCollapsible$, this.isCollapsed$]).pipe(
+    map(([collapsible, collapsed]: [boolean, boolean]) => !(collapsible && collapsed))
+  );
+
+  private readonly searchFieldClassList$: Observable<string[]> = combineLatest([
+    this.isCollapsible$.pipe(map((isCollapsible: boolean) => (isCollapsible ? 'collapsible' : null))),
+    this.isShowInput$.pipe(map((isShowInput: boolean) => (isShowInput ? null : 'collapsed')))
+  ]).pipe(
+    map((classes: string[]) =>
+      classes
+        .filter((innerClass: string) => !isNil(innerClass))
+        .map((innerProperty: string) => `search-field__input_${innerProperty}`)
+    )
+  );
+
+  public readonly resultClassList$: Observable<string[]> = combineLatest([
+    this.resultClassList$,
+    this.searchFieldClassList$
+  ]).pipe(
+    map(([baseClassList, searchFieldClassList]: [string[], string[]]) => {
+      const baseSearchFieldClassList: string[] = baseClassList.map((baseClass: string) => `search-field__${baseClass}`);
+      return [...baseSearchFieldClassList, ...searchFieldClassList];
+    })
+  );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processDisabledChange(changes?.disabled);
+    super.ngOnChanges(changes);
+    this.processCollapsibleChange(changes?.collapsible);
+    this.processCollapseDirectionChange(changes?.collapseDirection);
   }
 
-  public ngOnInit(): void {
-    this.subscription
-      .add(this.inputValueControl.valueChanges.subscribe((value: string) => this.valueChange.emit(value)))
-      .add(this.clearValue.subscribe(() => (this.value = '')))
-      .add(
-        this.collapsedField.subscribe(() => {
-          this.clearValue.next();
-          this.collapse();
+  public setValue(value: ValueType): void {
+    const serializedValue: string = isNil(value) ? '' : String(value);
+    this.value$.next(serializedValue);
+  }
+
+  public reset(): void {
+    this.updateValue('');
+    this.isCollapsible$.subscribe((collapsible: boolean) => {
+      if (collapsible) {
+        this.isCollapsed$.next(true);
+        return;
+      }
+      this.inputElementRef.nativeElement.focus();
+    });
+  }
+
+  public changeCollapsed(): void {
+    this.isDisabled$
+      .pipe(
+        take(1),
+        filterFalsy(),
+        switchMapTo(this.isCollapsed$),
+        take(1),
+        map((collapsed: boolean) => !collapsed),
+        tap((nextCollapsed: boolean) => {
+          if (!nextCollapsed) {
+            this.inputElementRef.nativeElement.focus();
+          }
         })
-      );
-    this.subscription.add(this.toggleFormControlDisabling());
+      )
+      .subscribe((nextCollapsed: boolean) => this.isCollapsed$.next(nextCollapsed));
   }
 
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  private processCollapsibleChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
 
-  public switchState(event: Event): void {
-    event.stopPropagation();
-    switch (this.expandable) {
-      case true: {
-        this.collapse();
-        return;
-      }
-      case false: {
-        if (!this.isValueEmpty) {
-          this.inputValueControl.reset();
-          this.inputElement.nativeElement.blur();
-          return;
-        }
-        this.inputElement.nativeElement.focus();
-        return;
-      }
-      default: {
-        return;
-      }
-    }
-  }
-
-  private toggleFormControlDisabling(): Subscription {
-    return this.disabled$.subscribe((disabled: boolean) =>
-      disabled ? this.inputValueControl.disable() : this.inputValueControl.enable()
-    );
-  }
-
-  private processDisabledChange(change: ComponentChange<this, boolean>): void {
-    const disabled: boolean | undefined = change?.currentValue;
-
-    if (isNil(disabled)) {
+    if (isNil(updatedValue)) {
       return;
     }
 
-    this.disabled$.next(disabled);
+    this.isCollapsible$.next(updatedValue);
   }
 
-  private collapse(): void {
-    this.disabled$.pipe(take(1), filterFalsy()).subscribe(() => {
-      const currentValue: ControlState = this.controlExpansionState$.getValue();
-      if (currentValue === ControlState.expanded) {
-        this.inputElement.nativeElement.blur();
-        this.controlExpansionState$.next(ControlState.collapsed);
-        this.inputValueControl.reset();
-        return;
-      }
-      this.controlExpansionState$.next(ControlState.expanded);
-      this.inputElement.nativeElement.focus();
-    });
+  private processCollapseDirectionChange(change: ComponentChange<this, CollapseDirection>): void {
+    const updatedValue: CollapseDirection | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.collapseDirection$.next(updatedValue);
   }
 }
