@@ -2,7 +2,8 @@
   class="avatar"
   [ngClass]="resultClassList$ | async"
   [style.background-color]="hslBackgroundColor$ | async"
-  [class.avatar__default]="isEmptyUserName$ | async"
+  [class.avatar_default]="isEmptyUserName$ | async"
+  [class.avatar_disabled]="disabled$ | async"
   [style.background-image]="backgroundImage$ | async"
 >
   <ng-container *ngIf="src$ | async | isNullOrUndefined">

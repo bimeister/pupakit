@@ -7,6 +7,7 @@
       [src]="imageSrcControl.value"
       [size]="size | async"
       [withBorder]="border | async"
+      [disabled]="disabled | async"
     ></pupa-avatar>
   </demo-example-viewer-content>
 
@@ -16,6 +17,9 @@
 
     <demo-props-group-label>Border</demo-props-group-label>
     <demo-props-radio-select #border [options]="borderOptions"></demo-props-radio-select>
+
+    <demo-props-group-label>Disabled</demo-props-group-label>
+    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
 
     <demo-props-group-label>Username</demo-props-group-label>
     <div class="avatar__row">
