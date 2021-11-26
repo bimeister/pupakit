@@ -30,6 +30,9 @@ export class AvatarComponent implements OnChanges {
   @Input() public withBorder: boolean = false;
   public readonly withBorder$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public disabled: boolean = false;
+  public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.size$,
     this.withBorder$.pipe(map((withBorder: boolean) => (Boolean(withBorder) ? 'bordered' : null)))
@@ -43,9 +46,9 @@ export class AvatarComponent implements OnChanges {
 
   public readonly isEmptyUserName$: Observable<boolean> = this.username$.pipe(map(isEmpty));
 
-  public readonly hslBackgroundColor$: Observable<string> = this.username$.pipe(
-    map((username: Nullable<string>) => {
-      if (isEmpty(username)) {
+  public readonly hslBackgroundColor$: Observable<string> = combineLatest([this.username$, this.disabled$]).pipe(
+    map(([username, isDisabled]: [Nullable<string>, boolean]) => {
+      if (isEmpty(username) || isDisabled) {
         return null;
       }
       const { h, s, l }: HslColor = getHslColorFromString(username, SATURATION, LIGHTNESS);
@@ -67,6 +70,7 @@ export class AvatarComponent implements OnChanges {
     this.processSrcChange(changes?.src);
     this.processSizeChange(changes?.size);
     this.processWithBorderChange(changes?.withBorder);
+    this.processDisabledChange(changes?.disabled);
   }
 
   private processUsernameChange(change: ComponentChange<this, string>): void {
@@ -109,5 +113,14 @@ export class AvatarComponent implements OnChanges {
       return;
     }
     this.withBorder$.next(updatedValue);
+  }
+
+  private processDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.disabled$.next(updatedValue);
   }
 }
