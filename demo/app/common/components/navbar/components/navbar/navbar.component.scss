@@ -18,14 +18,6 @@ $end-item-margin: 4rem;
   margin-left: $item-margin;
   margin-right: $item-margin;
   line-height: 0;
-
-  &.left-end {
-    margin-left: $end-item-margin;
-  }
-
-  &.right-end {
-    margin-right: $end-item-margin;
-  }
 }
 
 .navbar {
@@ -43,11 +35,24 @@ $end-item-margin: 4rem;
   align-items: center;
   vertical-align: middle;
 
-  @include apply-theme('light');
+  background-color: transparent;
+  background-image: radial-gradient(rgba(color(base-white-n400-rgb), 0) 1px, rgba(color(base-white-n400-rgb), 0.9) 1px);
+  background-size: 1rem 1rem;
+  backdrop-filter: brightness(100%) blur(1rem);
+
+  @include supports-backdrop-blur {
+    background-image: radial-gradient(
+      rgba(color(base-white-n400-rgb), 0) 1px,
+      rgba(color(base-white-n400-rgb), 0.5) 1px
+    );
+  }
 
   @include host-selector-dark-theme() {
-    @include apply-theme('dark');
+    background-image: radial-gradient(rgba(color(base-dark-n500-rgb), 0) 1px, rgba(color(base-dark-n500-rgb), 0.5) 1px);
   }
+
+  @include grid-container-offset('padding-right');
+  @include grid-container-offset('padding-left');
 
   &__logo-wrapper {
     @include no-tap-highlight();
@@ -55,10 +60,14 @@ $end-item-margin: 4rem;
 
     @include navbar-base-item();
 
-    margin-left: $end-item-margin;
-
     display: flex;
     align-items: center;
+
+    margin-left: 0;
+
+    @include lt-md() {
+      margin-left: $end-item-margin;
+    }
   }
 
   &__logo-image {

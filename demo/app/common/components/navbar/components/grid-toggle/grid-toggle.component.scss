@@ -1,7 +1,13 @@
+@import 'mixins';
+
 .grid-toggle {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 1rem;
   line-height: 0;
+
+  @include host-selector-dark-theme() {
+    color: color(base-white-n400);
+  }
 }

@@ -21,6 +21,7 @@
     height: 100%;
     text-transform: uppercase;
     font-weight: bold;
+    line-height: normal;
     animation: glitch 2s steps(100) infinite;
 
     @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);

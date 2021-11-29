@@ -11,6 +11,8 @@
   box-sizing: border-box;
   border-radius: 1px;
 
+  margin: 5rem 0;
+
   border-color: get-map-field($theme-config, [ 'light', 'body', border-color]);
   @include host-selector-dark-theme() {
     border-color: get-map-field($theme-config, [ 'dark', 'body', border-color]);

@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { filterNotEmpty, filterNotNil, isEmpty, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
-import { take, withLatestFrom } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+import { ComponentChange } from '../../../../../../../src/internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../../../src/internal/declarations/interfaces/component-changes.interface';
 import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';
 import { CodeContainerPreviewTemplateDirective } from '../../directives/code-container-preview-template.directive';
 
@@ -33,9 +35,10 @@ export class CodeContainerComponent implements OnInit {
   @Input() public readonly isPreviewExist: boolean = true;
   public readonly isPreviewExist$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public readonly tabs$: Observable<Tab[]> = this.contentWithCode$.pipe(
-    filterNotEmpty(),
-    withLatestFrom(this.isPreviewExist$),
+  public readonly tabs$: Observable<Tab[]> = combineLatest([
+    this.contentWithCode$.pipe(filterNotEmpty()),
+    this.isPreviewExist$
+  ]).pipe(
     map(([contentWithCode, isPreviewExist]: [Record<string, string>, boolean]) => {
       const tabNames: string[] = Object.keys(contentWithCode);
       const names: string[] = isPreviewExist ? [PREVIEW_TAB_NAME, ...tabNames] : tabNames;
@@ -51,6 +54,10 @@ export class CodeContainerComponent implements OnInit {
 
   public ngOnInit(): void {
     this.processCodeRequests();
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processIsPreviewExistChange(changes?.isPreviewExist);
   }
 
   private processCodeRequests(): void {
@@ -73,5 +80,15 @@ export class CodeContainerComponent implements OnInit {
         take(1)
       )
       .subscribe((content: Record<string, string>) => this.contentWithCode$.next(content));
+  }
+
+  private processIsPreviewExistChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isPreviewExist$.next(updatedValue);
   }
 }
