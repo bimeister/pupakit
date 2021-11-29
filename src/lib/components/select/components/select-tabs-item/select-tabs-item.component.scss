@@ -1,0 +1,22 @@
+@import 'themes/functions';
+@import 'functions';
+@import 'themes/blue-theme/variables';
+@import 'mixins';
+
+$padding_side: 10px;
+
+:host {
+  display: block;
+}
+
+.select-tabs-item {
+  border-radius: 2rem;
+  padding: 1rem $padding_side 1rem $padding_side;
+  cursor: pointer;
+  @include ellipsis-text-overflow;
+
+  &_picked {
+    color: color(white);
+    background: color(active);
+  }
+}
