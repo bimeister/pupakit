@@ -13,7 +13,6 @@
 
   position: relative;
   min-height: calc(100vh - #{$navbar-height});
-  margin-top: $navbar-height;
 }
 
 .side-nav {
@@ -60,6 +59,28 @@
 
 .content {
   @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+}
 
+.inside-content {
+  max-width: 1200px;
+  margin: auto;
   margin-bottom: 64px;
+  margin-top: 100px;
+
+  display: flex;
+  flex-direction: column;
+
+  @include width-between-property(
+    $property: 'max-width',
+    $width-start: 1600,
+    $value-start: 1000,
+    $width-end: 1800,
+    $value-end: 1200,
+    $is-save-width-before: true,
+    $is-save-width-after: false
+  );
+
+  @include sm() {
+    max-width: 700px;
+  }
 }

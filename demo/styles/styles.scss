@@ -13,7 +13,8 @@ html {
 }
 
 body {
-  font-size: variable(font-size_root);
+  font-size: 4rem;
+  line-height: 6rem;
   @include regular();
   padding: variable(padding_body);
   margin: 0;
@@ -22,36 +23,65 @@ body {
 }
 
 h1 {
-  font-size: variable(font-size_h1);
-  line-height: variable(line-height_h1);
-  @include bold();
+  font-size: 9rem;
+  line-height: 10rem;
+  font-weight: 700;
   font-style: normal;
+
+  margin-top: 10rem;
+  margin-bottom: 10rem;
 }
 
 h2 {
-  font-size: variable(font-size_h2);
-  line-height: variable(line-height_h2);
-  @include medium();
+  font-size: 7rem;
+  line-height: 8rem;
+  font-weight: 700;
   font-style: normal;
+
+  margin-top: 5rem;
+  margin-bottom: 5rem;
 }
 
 h3 {
-  font-size: variable(font-size_h3);
-  line-height: variable(line-height_h3);
-  @include medium();
+  font-size: 6rem;
+  line-height: 7rem;
+  font-weight: 700;
   font-style: normal;
+
+  margin-top: 5rem;
+  margin-bottom: 4rem;
 }
 
 h4 {
-  font-size: variable(font-size_h4);
-  line-height: variable(line-height_h4);
-  @include regular();
+  font-size: 21px;
+  line-height: 6rem;
+  font-weight: 700;
   font-style: normal;
+
+  margin-top: 5rem;
+  margin-bottom: 4rem;
 }
 
 h4 {
-  font-size: variable(font-size_h5);
-  line-height: variable(line-height_h5);
-  @include regular();
+  font-size: 19px;
+  line-height: 6rem;
+  font-weight: 700;
   font-style: normal;
+
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+h5 {
+  font-size: 18px;
+  line-height: 5rem;
+  font-weight: 700;
+  font-style: normal;
+
+  margin-top: 5rem;
+  margin-bottom: 4rem;
+}
+
+p {
+  margin-top: 2rem;
 }
