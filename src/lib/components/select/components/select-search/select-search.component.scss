@@ -1,0 +1,39 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+
+.search-field {
+  box-sizing: border-box;
+  outline: none;
+  width: calc(100% - 16px);
+  height: 24px;
+  margin: 0 8px 8px 8px;
+  border: 1px solid color('grey-apple');
+  border-radius: 8px;
+  background: color('white');
+  padding: 2px 20px 2px 12px;
+  font-size: 4rem;
+
+  &::placeholder {
+    color: color('grey-ivory');
+  }
+}
+
+.clear-button {
+  position: absolute;
+  top: 4px;
+  right: 12px;
+  color: color('main');
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: 16px;
+
+  &:hover {
+    opacity: 1;
+  }
+}

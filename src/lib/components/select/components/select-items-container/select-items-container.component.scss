@@ -1,0 +1,15 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.items-container {
+  padding: 8px 0;
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  overflow-y: auto;
+}

@@ -1,0 +1,42 @@
+@import 'themes/functions';
+@import 'functions';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.select-tree-container {
+  width: 100%;
+  height: 300px;
+  max-height: 300px;
+  box-sizing: border-box;
+
+  .tree {
+    padding: 0;
+
+    cdk-tree-node.tree-node-row {
+      .tree-node {
+        border-radius: 1rem;
+
+        &:hover,
+        &_selected {
+          color: color(white);
+          background: color(active);
+        }
+      }
+    }
+  }
+}
+
+.select-tree-item-custom-template {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  pointer-events: all;
+}
