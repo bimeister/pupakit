@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { filterFalsy, isNil } from '@bimeister/utilities';
+import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, switchMapTo, take, tap } from 'rxjs/operators';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
+import { CollapseDirection } from '../../../../../internal/declarations/types/collapse-direction.type';
 
-type CollapseDirection = 'to-left' | 'to-right';
 const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
+
 @Component({
   selector: 'pupa-search-field',
   templateUrl: './search-field.component.html',
@@ -16,9 +16,7 @@ const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchFieldComponent extends InputBase<ValueType> {
-  @Input() public placeholder: string = 'Поиск';
-
+export class SearchFieldComponent extends InputBase<Nullable<string>> {
   @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
   public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
     DEFAULT_COLLAPSE_DIRECTION
@@ -27,7 +25,7 @@ export class SearchFieldComponent extends InputBase<ValueType> {
   @Input() public collapsible: boolean = false;
   public readonly isCollapsible$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
-  public readonly isCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  private readonly isCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   public readonly isShowInput$: Observable<boolean> = combineLatest([this.isCollapsible$, this.isCollapsed$]).pipe(
     map(([collapsible, collapsed]: [boolean, boolean]) => !(collapsible && collapsed))
@@ -60,7 +58,7 @@ export class SearchFieldComponent extends InputBase<ValueType> {
     this.processCollapseDirectionChange(changes?.collapseDirection);
   }
 
-  public setValue(value: ValueType): void {
+  public setValue(value: Nullable<string>): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
   }
@@ -94,7 +92,7 @@ export class SearchFieldComponent extends InputBase<ValueType> {
   }
 
   private processCollapsibleChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
+    const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
@@ -104,7 +102,7 @@ export class SearchFieldComponent extends InputBase<ValueType> {
   }
 
   private processCollapseDirectionChange(change: ComponentChange<this, CollapseDirection>): void {
-    const updatedValue: CollapseDirection | undefined = change?.currentValue;
+    const updatedValue: Nullable<CollapseDirection> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;

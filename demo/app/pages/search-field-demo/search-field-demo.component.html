@@ -2,9 +2,9 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <ng-container [ngSwitch]="collapsible | async">
-      <ng-container *ngSwitchCase="true">
-        <div class="search-wrapper">
+    <div class="search-wrapper">
+      <ng-container [ngSwitch]="collapsible | async">
+        <ng-container *ngSwitchCase="true">
           <div class="header-placeholder">
             <div class="header-placeholder-content"></div>
           </div>
@@ -14,27 +14,20 @@
             placeholder="Поиск"
             [collapsible]="true"
             [collapseDirection]="collapseDirection | async"
-            [disabled]="disabled | async"
           >
           </pupa-search-field>
-        </div>
-      </ng-container>
+        </ng-container>
 
-      <ng-container *ngSwitchCase="false">
-        <pupa-search-field
-          [formControl]="formControl"
-          placeholder="Поиск"
-          [collapsible]="false"
-          [disabled]="disabled | async"
-        >
-        </pupa-search-field>
+        <ng-container *ngSwitchCase="false">
+          <pupa-search-field [formControl]="formControl" placeholder="Поиск" [collapsible]="false"> </pupa-search-field>
+        </ng-container>
       </ng-container>
-    </ng-container>
+    </div>
   </demo-example-viewer-content>
 
   <demo-example-viewer-properties>
     <demo-props-group-label>Settings</demo-props-group-label>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-props-form-control-disabled [control]="disabledControl"></demo-props-form-control-disabled>
     <demo-props-checkbox #collapsible>Collapsible</demo-props-checkbox>
     <demo-props-group-label>Collapse direction</demo-props-group-label>
     <demo-props-radio-select #collapseDirection [options]="collapseDirectionOptions"></demo-props-radio-select>
