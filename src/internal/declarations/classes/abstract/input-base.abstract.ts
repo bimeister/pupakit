@@ -40,8 +40,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public disabled: boolean = false;
-
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
@@ -118,7 +116,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processAutocompleteChange(changes?.autocomplete);
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
-    this.processDisabledChange(changes?.disabled);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -168,15 +165,5 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.autocomplete$.next(updatedValue);
-  }
-
-  private processDisabledChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.setDisabledState(updatedValue);
   }
 }

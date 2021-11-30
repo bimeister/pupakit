@@ -46,13 +46,13 @@
     box-sizing: border-box;
     border: 1px solid transparent;
     height: 8rem;
-    padding: 2rem 10rem 2rem 11rem;
+    padding: 2rem 10rem;
     color: map.get($input_light_styles, input, color);
     caret-color: map.get($input_light_styles, input, caret-color);
     background-color: map.get($input_light_styles, input, background-color);
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-    @include font-type-caption();
-    @include font-size-medium();
+    @include font-type-paragraph();
+    @include font-size-mark(true);
 
     &_collapsed {
       padding: 2rem;
@@ -222,15 +222,17 @@
   &__icon {
     position: absolute;
     z-index: 4;
-    left: 3rem;
     pointer-events: none;
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
+    color: map.get($input_light_styles, input, color);
+    padding: 2rem;
+    transform: translateX(2rem);
 
     &_collapsed {
+      transform: translateX(0);
       cursor: pointer;
       left: 0;
       pointer-events: all;
-      padding: 2rem;
       transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
       caret-color: map.get($input_light_styles, input, caret-color);
       background-color: map.get($input_light_styles, input, background-color);
@@ -262,6 +264,8 @@
     }
 
     @include host-selector-dark-theme() {
+      color: map.get($input_dark_styles, input, color);
+
       &_disabled {
         color: map.get($input_dark_styles, disabled, color);
         background-color: map.get($input_dark_styles, disabled, background-color);

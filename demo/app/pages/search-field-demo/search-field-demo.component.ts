@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
 const BASE_REQUEST_PATH: string = 'search-field-demo/examples';
@@ -11,8 +13,14 @@ const BASE_REQUEST_PATH: string = 'search-field-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchFieldDemoComponent {
+export class SearchFieldDemoComponent implements OnInit, OnDestroy {
   public readonly formControl: FormControl = new FormControl('');
+  public readonly disabledControl: FormControl = new FormControl();
+
+  private readonly isDisabled$: Observable<boolean> = this.disabledControl.statusChanges.pipe(
+    map(() => this.disabledControl.disabled)
+  );
+
   public readonly collapseDirectionOptions: RadioOption[] = [
     {
       caption: 'To Left',
@@ -29,4 +37,20 @@ export class SearchFieldDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`
   };
+
+  private readonly subscription: Subscription = new Subscription();
+
+  public ngOnInit(): void {
+    this.subscription.add(this.subscribeToIsDisabled());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private subscribeToIsDisabled(): Subscription {
+    return this.isDisabled$.subscribe((isDisabled: boolean) => {
+      isDisabled ? this.formControl.disable() : this.formControl.enable();
+    });
+  }
 }
