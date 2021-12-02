@@ -5,7 +5,7 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterFalsy, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -30,7 +30,7 @@ const MIN_DAYS_MONTH: number = 28;
 enum DatePickerState {
   Years,
   Months,
-  Days
+  Days,
 }
 
 @Component({
@@ -38,7 +38,7 @@ enum DatePickerState {
   templateUrl: './date-picker-simple.component.html',
   styleUrls: ['./date-picker-simple.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerSimpleComponent implements OnChanges {
   @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
@@ -71,9 +71,9 @@ export class DatePickerSimpleComponent implements OnChanges {
   public readonly isSelectionModeDate$: Observable<boolean> = this.datePickerStateService.isSelectionModeDate$;
   public readonly isDatePickerDoubleModeEnabled$: Observable<boolean> = combineLatest([
     this.isLeftDoubleDatePicker$,
-    this.isRightDoubleDatePicker$
+    this.isRightDoubleDatePicker$,
   ]).pipe(
-    map(([isLeftDoubleDatePicker, isRightDoubleDatePicker]) =>
+    map(([isLeftDoubleDatePicker, isRightDoubleDatePicker]: [boolean, boolean]) =>
       [isLeftDoubleDatePicker, isRightDoubleDatePicker].includes(true)
     )
   );

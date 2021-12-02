@@ -16,11 +16,11 @@ import { CheckboxService } from '../../services/checkbox.service';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => CheckboxComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxComponent implements ControlValueAccessor, OnChanges {
   @Input() public disabled: boolean = false;
@@ -76,11 +76,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
   }
 
   public onChange: CallableFunction = (_innerValue: string) => {
-    return;
+    // not implemented
   };
 
   public onTouched: VoidFunction = () => {
-    return;
+    // not implemented
   };
 
   private handleValueChanges(change: ComponentChange<this, boolean>): void {

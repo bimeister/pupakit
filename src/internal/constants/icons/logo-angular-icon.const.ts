@@ -13,5 +13,5 @@ export const logoAngularIcon: IconDefinition = {
 		l128,280H344z"/>
 </g>
 </svg>
-`
+`,
 };

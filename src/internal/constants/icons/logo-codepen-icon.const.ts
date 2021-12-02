@@ -28,5 +28,5 @@ export const logoCodepenIcon: IconDefinition = {
 	<polygon points="370,276.676 370,237.06 340.41,256.933 	"/>
 </g>
 </svg>
-`
+`,
 };

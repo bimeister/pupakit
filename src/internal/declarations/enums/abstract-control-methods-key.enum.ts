@@ -4,5 +4,5 @@ export enum AbstractControlMethodsKey {
   markAsDirty = 'markAsDirty',
   markAsUntouched = 'markAsUntouched',
   markAllAsTouched = 'markAllAsTouched',
-  markAsPending = 'markAsPending'
+  markAsPending = 'markAsPending',
 }

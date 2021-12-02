@@ -17,5 +17,5 @@ export const iosTennisballIcon: IconDefinition = {
 	<path d="M232,49.3C232,49.3,232,49.3,232,49.3C232,49.3,232,49.3,232,49.3C232,49.3,232,49.3,232,49.3z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -31,7 +31,7 @@ export class DraggableListService implements OnDestroy {
   public readonly draggingAction$: Observable<[HTMLElement, Position, CurrentDraggableListItem]> = combineLatest([
     this.currentDraggableListItemClone$,
     this.clonePosition$,
-    this.currentDraggableListItem$
+    this.currentDraggableListItem$,
   ]).pipe(
     filter(
       ([currentDraggableListItemClone, clonePosition]: [HTMLElement, Position, CurrentDraggableListItem]) =>
@@ -72,7 +72,7 @@ export class DraggableListService implements OnDestroy {
         }
         this.changeIndexEvent$.next({
           id: currentDraggableListItem.id,
-          newIndex
+          newIndex,
         });
       });
   }

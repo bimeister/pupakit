@@ -7,7 +7,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   templateUrl: './select-chip-item.component.html',
   styleUrls: ['./select-chip-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectChipItemComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;

@@ -4,7 +4,7 @@ import { GridStateService } from '../../../../../../../src/internal/shared/servi
 @Component({
   selector: 'demo-grid-toggle',
   templateUrl: './grid-toggle.component.html',
-  styleUrls: ['./grid-toggle.component.scss']
+  styleUrls: ['./grid-toggle.component.scss'],
 })
 export class GridToggleComponent {
   @Input() public label: string = '';

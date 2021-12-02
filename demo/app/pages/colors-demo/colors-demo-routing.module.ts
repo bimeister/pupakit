@@ -5,12 +5,12 @@ import { ColorsDemoComponent } from './colors-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ColorsDemoComponent
-  }
+    component: ColorsDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ColorsDemoRoutingModule {}

@@ -6,7 +6,7 @@ import {
   OnDestroy,
   Output,
   Renderer2,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
@@ -20,7 +20,7 @@ import { DraggableListService } from '../../services/draggable-list.service';
   styleUrls: ['./draggable-list.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DraggableListService]
+  providers: [DraggableListService],
 })
 export class DraggableListComponent implements OnDestroy {
   @Output()

@@ -14,5 +14,5 @@ export const mdCloseIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

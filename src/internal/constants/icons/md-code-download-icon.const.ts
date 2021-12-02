@@ -16,5 +16,5 @@ export const mdCodeDownloadIcon: IconDefinition = {
 		L480,256L351.6,384C351.6,384,321.6,354.1,321.6,354.1z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -1,4 +1,4 @@
 export enum ExternalDiskContent {
   buttons,
-  range
+  range,
 }

@@ -14,5 +14,5 @@ export const mdWineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

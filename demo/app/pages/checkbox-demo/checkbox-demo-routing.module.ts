@@ -5,12 +5,12 @@ import { CheckboxDemoComponent } from './checkbox-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: CheckboxDemoComponent
-  }
+    component: CheckboxDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class CheckboxDemoRoutingModule {}

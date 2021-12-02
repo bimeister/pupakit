@@ -19,7 +19,7 @@ const DAYS_COUNT_IN_STANDARD_GRID: number = 35;
   templateUrl: './date-picker-double.component.html',
   styleUrls: ['./date-picker-double.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerDoubleComponent implements OnChanges {
   @Input() public baseDate: Date = DEFAULT_CURRENT_DATE;

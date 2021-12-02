@@ -5,7 +5,7 @@ import {
   Inject,
   Input,
   QueryList,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/button-group-state-service.token';
 import { TabsContentBase } from '../../../../../internal/declarations/classes/abstract/tabs-content-base.abstract';
@@ -18,7 +18,7 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   templateUrl: './button-group-content.component.html',
   styleUrls: ['./button-group-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonGroupContentComponent extends TabsContentBase<ButtonGroupStateService> {
   @Input() public destroyable: boolean = true;

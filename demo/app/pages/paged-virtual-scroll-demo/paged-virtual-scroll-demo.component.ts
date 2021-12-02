@@ -6,7 +6,7 @@ import {
   OnDestroy,
   TrackByFunction,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
@@ -32,7 +32,7 @@ const SEARCH_DEBOUNCE_TIME_MS: number = 200;
   templateUrl: './paged-virtual-scroll-demo.component.html',
   styleUrls: ['./paged-virtual-scroll-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit {
   @ViewChild('pagedVirtualScrollViewport', { static: false })

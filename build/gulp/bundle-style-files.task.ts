@@ -13,7 +13,7 @@ function bundleScssFiles(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }
@@ -24,7 +24,7 @@ function processScssFiles(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }
@@ -35,9 +35,9 @@ function copyStylesToDistFolder(): TaskFunction {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,
-          targetPath
+          targetPath,
         });
-      }
+      },
     });
     onDone();
   };

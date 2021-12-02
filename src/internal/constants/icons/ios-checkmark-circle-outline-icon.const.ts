@@ -19,5 +19,5 @@ export const iosCheckmarkCircleOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

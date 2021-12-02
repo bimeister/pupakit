@@ -5,6 +5,6 @@ import { ControlsIsPatchedDemoComponent } from './controls-is-patched-demo.compo
 
 @NgModule({
   declarations: [ControlsIsPatchedDemoComponent],
-  imports: [DemoSharedModule, ControlsIsPatchedDemoRoutingModule]
+  imports: [DemoSharedModule, ControlsIsPatchedDemoRoutingModule],
 })
 export class ControlsIsPatchedDemoModule {}

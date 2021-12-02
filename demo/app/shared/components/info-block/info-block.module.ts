@@ -6,6 +6,6 @@ import { InfoBlockComponent } from './components/info-block/info-block.component
 @NgModule({
   declarations: [InfoBlockComponent],
   exports: [InfoBlockComponent],
-  imports: [IconModule, CommonModule]
+  imports: [IconModule, CommonModule],
 })
 export class InfoBlockModule {}

@@ -15,5 +15,5 @@ export const iosQuoteIcon: IconDefinition = {
 		C416,109.3,402.7,96,385,96L385,96z"/>
 </g>
 </svg>
-`
+`,
 };

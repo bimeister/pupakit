@@ -8,7 +8,7 @@ import { take } from 'rxjs/operators';
   templateUrl: './breadcrumb-unfit-trigger.component.html',
   styleUrls: ['./breadcrumb-unfit-trigger.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbUnfitTriggerComponent {
   @Input() public active: boolean = false;

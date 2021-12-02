@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, switchMapTo, take, tap } from 'rxjs/operators';
+import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -14,9 +16,17 @@ const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
   templateUrl: './search-field.component.html',
   styleUrls: ['./search-field.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('controlExpanded', [
+      state('false', style({ width: `${11.25 * remSizePx}px` })),
+      state('true', style({ width: `100%` })),
+      transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
+      transition('true => false', animate('0.2s ease-in-out')),
+    ]),
+  ],
 })
-export class SearchFieldComponent extends InputBase<Nullable<string>> {
+export class SearchFieldComponent extends InputBase<Nullable<string>> implements OnChanges {
   @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
   public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
     DEFAULT_COLLAPSE_DIRECTION
@@ -33,7 +43,7 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> {
 
   private readonly searchFieldClassList$: Observable<string[]> = combineLatest([
     this.isCollapsible$.pipe(map((isCollapsible: boolean) => (isCollapsible ? 'collapsible' : null))),
-    this.isShowInput$.pipe(map((isShowInput: boolean) => (isShowInput ? null : 'collapsed')))
+    this.isShowInput$.pipe(map((isShowInput: boolean) => (isShowInput ? null : 'collapsed'))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -44,7 +54,7 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> {
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.resultClassList$,
-    this.searchFieldClassList$
+    this.searchFieldClassList$,
   ]).pipe(
     map(([baseClassList, searchFieldClassList]: [string[], string[]]) => {
       const baseSearchFieldClassList: string[] = baseClassList.map((baseClass: string) => `search-field__${baseClass}`);

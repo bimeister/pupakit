@@ -10,7 +10,7 @@ import { IconRegistry } from '../../../../../internal/declarations/types/icon-re
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
   public iconHtmlCode: SafeHtml;

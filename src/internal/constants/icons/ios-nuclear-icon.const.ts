@@ -16,5 +16,5 @@ export const iosNuclearIcon: IconDefinition = {
 	<circle cx="256" cy="256" r="56"/>
 </g>
 </svg>
-`
+`,
 };

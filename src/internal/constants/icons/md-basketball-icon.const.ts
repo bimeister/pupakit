@@ -19,5 +19,5 @@ export const mdBasketballIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

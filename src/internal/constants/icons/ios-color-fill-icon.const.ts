@@ -15,5 +15,5 @@ export const iosColorFillIcon: IconDefinition = {
 		c26.5,0,48-21.6,48-48.1C448,393.3,413.6,351.7,403,339.5z"/>
 </g>
 </svg>
-`
+`,
 };

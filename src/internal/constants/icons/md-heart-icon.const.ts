@@ -13,5 +13,5 @@ export const mdHeartIcon: IconDefinition = {
 		c0,79.516-70.719,143.348-177.836,241.694L256,448z"/>
 </g>
 </svg>
-`
+`,
 };

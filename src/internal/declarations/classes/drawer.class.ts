@@ -20,7 +20,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
   private readonly overlayRef: OverlayRef = this.overlay.create({
     positionStrategy: this.getPositionStrategy(),
     hasBackdrop: this.config.hasBackdrop,
-    backdropClass: this.getBackdropClasses()
+    backdropClass: this.getBackdropClasses(),
   });
 
   private readonly drawerRef: DrawerRef = new DrawerRef(this.overlayRef);
@@ -72,7 +72,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
 
     const drawerContainerData: DrawerContainerData<ContentComponent> = {
       contentComponentPortal,
-      ...this.createDrawerLayoutConfig()
+      ...this.createDrawerLayoutConfig(),
     };
 
     const injectionTokens: WeakMap<object, any> = new WeakMap();
@@ -102,7 +102,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
       float: this.config.float,
       hasBackdrop: this.config.hasBackdrop,
       hasPadding: this.config.hasPadding ?? true,
-      isFullscreen: this.config.isFullscreen ?? false
+      isFullscreen: this.config.isFullscreen ?? false,
     };
   }
 
@@ -110,13 +110,13 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     if (isNil(this.config.injector)) {
       return Injector.create({
         providers: this.config.providers,
-        parent: this.injector
+        parent: this.injector,
       });
     }
 
     return Injector.create({
       providers: this.config.providers,
-      parent: this.config.injector
+      parent: this.config.injector,
     });
   }
 

@@ -13,5 +13,5 @@ export const iosBatteryFullIcon: IconDefinition = {
 	<path d="M384,192H76c-6.6,0-12,5.4-12,12v104c0,6.6,5.4,12,12,12h308c6.6,0,12-5.4,12-12V204C396,197.4,390.6,192,384,192z"/>
 </g>
 </svg>
-`
+`,
 };

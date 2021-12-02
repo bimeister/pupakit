@@ -14,17 +14,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
-import { filterNotNil, isNil } from '@bimeister/utilities';
+import { filterNotNil, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, merge, Observable, of, Subscription } from 'rxjs';
-import {
-  distinctUntilChanged,
-  distinctUntilKeyChanged,
-  filter,
-  map,
-  shareReplay,
-  switchMap,
-  withLatestFrom,
-} from 'rxjs/operators';
+import { distinctUntilChanged, distinctUntilKeyChanged, filter, map, switchMap, withLatestFrom } from 'rxjs/operators';
 import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -54,7 +46,7 @@ export class ExpansibleComponent
 
   @Input() public width: string | null = null;
   @Input() public height: string | null = null;
-  // eslint-disable no-input-rename
+  /* eslint-disable @angular-eslint/no-input-rename */
   @Input('width.%') public widthPercents: number | null = null;
   @Input('height.%') public heightPercents: number | null = null;
   @Input('width.px') public widthPx: number | null = null;
@@ -63,7 +55,7 @@ export class ExpansibleComponent
   @Input('height.vh') public heightVh: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
   @Input('height.rem') public heightRem: number | null = null;
-  // eslint-enable no-input-rename
+  /* eslint-enable @angular-eslint/no-input-rename */
 
   public readonly width$: Observable<SafeStyle> = this.widthChangesProcessor.safeStyle$;
   public readonly height$: Observable<SafeStyle> = this.heightChangesProcessor.safeStyle$;
@@ -76,7 +68,7 @@ export class ExpansibleComponent
   private readonly expanders$: BehaviorSubject<ExpanderComponent[]> = new BehaviorSubject<ExpanderComponent[]>([]);
   private readonly sanitizedExpanders$: Observable<ExpanderComponent[]> = this.expanders$.pipe(
     filter((expanders: ExpanderComponent[]) => Array.isArray(expanders) && !Object.is(expanders.length, 0)),
-    shareReplay(1)
+    shareReplayWithRefCount()
   );
 
   private readonly lastActiveExpander$: Observable<ExpanderComponent> = this.sanitizedExpanders$.pipe(

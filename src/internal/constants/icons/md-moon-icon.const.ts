@@ -11,5 +11,5 @@ export const mdMoonIcon: IconDefinition = {
 		c-22.8,9.6-47.9,14.9-74.1,14.9C281,317,195,231,195,125z"/>
 </g>
 </svg>
-`
+`,
 };

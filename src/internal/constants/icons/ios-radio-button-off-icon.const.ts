@@ -14,5 +14,5 @@ export const iosRadioButtonOffIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -12,5 +12,5 @@ export const iosReorderIcon: IconDefinition = {
 	<rect x="80" y="192" width="352" height="16"/>
 </g>
 </svg>
-`
+`,
 };

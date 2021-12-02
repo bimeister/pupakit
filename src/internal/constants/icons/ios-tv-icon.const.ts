@@ -14,5 +14,5 @@ export const iosTvIcon: IconDefinition = {
 	<path d="M370,406H142c-7.7,0-14,6.3-14,14s6.3,14,14,14h228c7.7,0,14-6.3,14-14S377.7,406,370,406z"/>
 </g>
 </svg>
-`
+`,
 };

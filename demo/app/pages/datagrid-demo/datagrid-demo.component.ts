@@ -9,7 +9,7 @@ import {
   DatagridManipulator,
   DatagridManipulatorConfiguration,
   DatagridTemplateRendererComponent,
-  DatagridThemes
+  DatagridThemes,
 } from '../../../../src/public-api';
 
 interface ColumnSetting {
@@ -23,7 +23,7 @@ interface ColumnSetting {
   selector: 'demo-datagrid-demo',
   templateUrl: './datagrid-demo.component.html',
   styleUrls: ['./datagrid-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
   @ViewChild('customCell', { static: false }) public customCellRef: TemplateRef<HTMLElement>;
@@ -129,7 +129,7 @@ export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
     { id: getUuid(), make: 'Porsche', model: 'Boxter', price: 72000 },
     { id: getUuid(), make: 'Toyota', model: 'Celica', price: 35000 },
     { id: getUuid(), make: 'Ford', model: 'Mondeo', price: 32000 },
-    { id: getUuid(), make: 'Porsche', model: 'Boxter', price: 72000 }
+    { id: getUuid(), make: 'Porsche', model: 'Boxter', price: 72000 },
   ].map((item: any, index: number) => {
     item.id = index.toString();
     return item;
@@ -140,7 +140,7 @@ export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
   public config: DatagridManipulatorConfiguration<any> = new DatagridManipulatorConfiguration<any>({
     theme: DatagridThemes.Default,
     domLayout: DatagridDomLayouts.Normal,
-    rowsAutoheight: true
+    rowsAutoheight: true,
   });
   public manipulator: DatagridManipulator<any> = new DatagridManipulator<any>(this.config);
 
@@ -158,7 +158,7 @@ export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
             colId: column.getColId(),
             name: column.getColDef().headerName,
             isVisible: !column.getColDef().hide,
-            isAvailable: true
+            isAvailable: true,
           });
           return columnSettings;
         }, []);
@@ -177,9 +177,9 @@ export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
         field: 'model',
         cellRendererFramework: DatagridTemplateRendererComponent,
         cellRendererParams: {
-          templateRef: this.customCellRef
+          templateRef: this.customCellRef,
         },
-        autoHeight: true
+        autoHeight: true,
       },
       { headerName: 'Price', colId: 'price', field: 'price' },
       {
@@ -190,14 +190,14 @@ export class DatagridDemoComponent implements AfterViewInit, OnDestroy {
         width: 50,
         headerComponentFramework: DatagridTemplateRendererComponent,
         headerComponentParams: {
-          templateRef: this.columnSettingsCellRef
+          templateRef: this.columnSettingsCellRef,
         },
         cellRendererFramework: DatagridTemplateRendererComponent,
         cellRendererParams: {
-          templateRef: this.userActionsCellTemplate
+          templateRef: this.userActionsCellTemplate,
         },
-        autoHeight: true
-      }
+        autoHeight: true,
+      },
     ];
 
     this.manipulator.setColDefs(this.colDefs);

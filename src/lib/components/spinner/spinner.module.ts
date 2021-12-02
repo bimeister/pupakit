@@ -7,6 +7,6 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 @NgModule({
   declarations: [SpinnerComponent, BagelSpinnerComponent],
   imports: [SharedModule],
-  exports: [SpinnerComponent, BagelSpinnerComponent]
+  exports: [SpinnerComponent, BagelSpinnerComponent],
 })
 export class SpinnerModule {}

@@ -19,5 +19,5 @@ export const iosBeerIcon: IconDefinition = {
 		c11,0,20,9,20,20V338z"/>
 </g>
 </svg>
-`
+`,
 };

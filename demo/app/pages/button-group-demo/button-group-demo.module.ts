@@ -11,8 +11,8 @@ import { ButtonGroupExample3Component } from './examples/example-3/example-3.com
     ButtonGroupDemoComponent,
     ButtonGroupExample1Component,
     ButtonGroupExample2Component,
-    ButtonGroupExample3Component
+    ButtonGroupExample3Component,
   ],
-  imports: [DemoSharedModule, ButtonGroupDemoRoutingModule]
+  imports: [DemoSharedModule, ButtonGroupDemoRoutingModule],
 })
 export class ButtonGroupDemoModule {}

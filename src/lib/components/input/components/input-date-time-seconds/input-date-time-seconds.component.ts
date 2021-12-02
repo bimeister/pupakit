@@ -29,7 +29,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy HH:mm:ss';
   styleUrls: ['./input-date-time-seconds.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateTimeSecondsComponent extends InputDateTimeBase {
   public readonly hours$: Observable<number> = this.value$.pipe(

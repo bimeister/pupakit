@@ -11,9 +11,9 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
       state('false', style({ opacity: 0 })),
       state('true', style({ opacity: 1 })),
       transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
-      transition('true => false', animate('0.2s ease-in-out'))
-    ])
-  ]
+      transition('true => false', animate('0.2s ease-in-out')),
+    ]),
+  ],
 })
 export class OverlayComponent {
   @Input()

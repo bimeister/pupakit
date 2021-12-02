@@ -18,5 +18,5 @@ export const mdPaperIcon: IconDefinition = {
 	<path d="M408,352H248c0,0,0,32-8,32c7,0,138.6,0,148.7,0C408,384,408,363,408,352z"/>
 </g>
 </svg>
-`
+`,
 };

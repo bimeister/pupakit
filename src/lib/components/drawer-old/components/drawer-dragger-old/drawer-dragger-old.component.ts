@@ -5,7 +5,7 @@ import {
   HostListener,
   Input,
   OnDestroy,
-  Renderer2
+  Renderer2,
 } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { VOID } from '../../../../../internal/constants/void.const';
   selector: 'pupa-drawer-dragger-old',
   templateUrl: './drawer-dragger-old.component.html',
   styleUrls: ['./drawer-dragger-old.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerDraggerOldComponent implements OnDestroy {
   @Input() public isVisible: boolean = true;

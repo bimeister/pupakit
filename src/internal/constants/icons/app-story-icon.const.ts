@@ -7,5 +7,5 @@ export const appStoryIcon: IconDefinition = {
       <rect x="1" y="5" width="12" height="9" rx="1" fill="currentColor"/>
       <rect x="2.5" y="3" width="9" height="1.5" rx="0.75" fill="currentColor"/>
     </svg>
-  `
+  `,
 };

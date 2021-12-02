@@ -17,8 +17,8 @@ import { TabsExample6Component } from './examples/example-6/example-6.component'
     TabsExample3Component,
     TabsExample4Component,
     TabsExample5Component,
-    TabsExample6Component
+    TabsExample6Component,
   ],
-  imports: [DemoSharedModule, TabsDemoRoutingModule]
+  imports: [DemoSharedModule, TabsDemoRoutingModule],
 })
 export class TabsDemoModule {}

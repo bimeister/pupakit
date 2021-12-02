@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angul
   selector: 'pupa-close-button',
   templateUrl: './close-button.component.html',
   styleUrls: ['./close-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CloseButtonComponent {
   @Output()

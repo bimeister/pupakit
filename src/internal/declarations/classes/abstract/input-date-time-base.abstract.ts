@@ -65,7 +65,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
     this.isIconHovered$,
-    this.withReset$
+    this.withReset$,
   ]).pipe(map(([isIconHovered, withReset]: [boolean, boolean]) => isIconHovered && withReset));
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
 
@@ -73,7 +73,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.isDisabled$,
     this.isPatched$,
     this.isValid$,
-    this.isTouched$
+    this.isTouched$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(

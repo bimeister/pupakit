@@ -10,7 +10,7 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   selector: 'pupa-chip',
   templateUrl: './chip.component.html',
   styleUrls: ['./chip.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipComponent implements OnChanges {
   @Input() public color: ChipColors = ChipColors.Light;

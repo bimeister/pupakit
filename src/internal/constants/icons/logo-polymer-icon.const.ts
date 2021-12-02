@@ -9,5 +9,5 @@ export const logoPolymerIcon: IconDefinition = {
 <path d="M392.3,96h-77.9L160.8,348.6L109.9,256l87.7-160h-77.9L32,256l87.7,160h77.9l153.7-252.6l50.8,92.6l-87.7,160h77.9L480,256
 	L392.3,96z"/>
 </svg>
-`
+`,
 };

@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
   selector: 'demo-label',
   styleUrls: ['label-demo.component.scss'],
   templateUrl: './label-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelDemoComponent {
   public readonly formControl: FormControl = new FormControl('Label Text');

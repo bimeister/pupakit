@@ -5,12 +5,12 @@ import { TreeNewDemoComponent } from './tree-new-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TreeNewDemoComponent
-  }
+    component: TreeNewDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TreeNewDemoRoutingModule {}

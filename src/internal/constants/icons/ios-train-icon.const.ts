@@ -23,5 +23,5 @@ export const iosTrainIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

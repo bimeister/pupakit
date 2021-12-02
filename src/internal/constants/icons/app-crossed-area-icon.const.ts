@@ -15,5 +15,5 @@ export const appCrossedAreaIcon: IconDefinition = {
 	<circle cx="2.01012" cy="19.99" r="1.01012" fill="currentColor" stroke="currentColor"/>
 	</svg>
 
-`
+`,
 };

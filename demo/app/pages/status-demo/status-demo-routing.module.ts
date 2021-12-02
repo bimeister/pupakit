@@ -5,12 +5,12 @@ import { StatusDemoComponent } from './status-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: StatusDemoComponent
-  }
+    component: StatusDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class StatusDemoRoutingModule {}

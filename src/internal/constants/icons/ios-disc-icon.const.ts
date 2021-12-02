@@ -14,5 +14,5 @@ export const iosDiscIcon: IconDefinition = {
 		c0-63,51.1-114,114-114S370,193,370,256C370,319,319,370,256,370z"/>
 </g>
 </svg>
-`
+`,
 };

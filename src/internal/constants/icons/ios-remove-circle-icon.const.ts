@@ -11,5 +11,5 @@ export const iosRemoveCircleIcon: IconDefinition = {
 		c-8.5,0-16-6-16-16s7.2-16,16-16h181c8.8,0,16,7.2,16,16C362.5,264.8,355.3,272,346.5,272z"/>
 </g>
 </svg>
-`
+`,
 };

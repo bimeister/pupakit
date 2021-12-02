@@ -28,7 +28,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy HH:mm';
   styleUrls: ['./input-date-time.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateTimeComponent extends InputDateTimeBase {
   public readonly hours$: Observable<number> = this.value$.pipe(

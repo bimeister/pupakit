@@ -15,5 +15,5 @@ export const iosChatboxesIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -9,5 +9,5 @@ export const mdBodyIcon: IconDefinition = {
 <path d="M256,48c22,0,40,18,40,40s-18,40-40,40s-40-18-40-40S234,48,256,48z M448,192.1H320V464h-42.7V320h-42.7v144H192V192.1H64
 	v-42.7h384V192.1z"/>
 </svg>
-`
+`,
 };

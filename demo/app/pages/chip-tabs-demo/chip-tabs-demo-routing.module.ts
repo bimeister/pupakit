@@ -5,12 +5,12 @@ import { ChipTabsDemoComponent } from './chip-tabs-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ChipTabsDemoComponent
-  }
+    component: ChipTabsDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ChipTabsDemoRoutingModule {}

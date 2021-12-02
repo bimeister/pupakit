@@ -5,7 +5,7 @@ import {
   Input,
   OnDestroy,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { isNil } from '@bimeister/utilities';
@@ -17,7 +17,7 @@ import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.compone
   templateUrl: './props-form-control-disabled.component.html',
   styleUrls: ['./props-form-control-disabled.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropsFormControlDisabledComponent implements AfterViewInit, OnDestroy {
   @ViewChild(PropsCheckboxComponent)

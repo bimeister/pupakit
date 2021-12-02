@@ -8,6 +8,6 @@ import { SidebarModule } from '../../common/components/sidebar/sidebar.module';
 
 @NgModule({
   declarations: [KitLayoutComponent],
-  imports: [DemoSharedModule, RouterModule, NavbarModule, SidebarModule]
+  imports: [DemoSharedModule, RouterModule, NavbarModule, SidebarModule],
 })
 export class KitLayoutModule {}

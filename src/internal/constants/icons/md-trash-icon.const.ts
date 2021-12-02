@@ -12,5 +12,5 @@ export const mdTrashIcon: IconDefinition = {
 		h-80l-26.785-32H202.786L176,96H96v32h320V96z"/>
 </g>
 </svg>
-`
+`,
 };

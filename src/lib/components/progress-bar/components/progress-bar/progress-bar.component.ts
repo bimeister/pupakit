@@ -8,7 +8,7 @@ import {
   OnDestroy,
   Renderer2,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -28,7 +28,7 @@ interface CalculatedParameters {
   templateUrl: './progress-bar.component.html',
   styleUrls: ['./progress-bar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProgressBarComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('progressBar') public readonly progressBarRef: ElementRef<SVGElement>;
@@ -47,7 +47,7 @@ export class ProgressBarComponent implements OnChanges, AfterViewInit, OnDestroy
   private readonly calculatedParameters$: Observable<CalculatedParameters> = combineLatest([
     this.sizePx$,
     this.strokeWidthPx$,
-    this.percentage$
+    this.percentage$,
   ]).pipe(
     map(([sizePx, strokeWidthPx, percentage]: [number, number, number]): CalculatedParameters => {
       const radius: number = sizePx / 2;
@@ -61,7 +61,7 @@ export class ProgressBarComponent implements OnChanges, AfterViewInit, OnDestroy
         radius,
         innerRadius,
         strokeDashArray,
-        strokeDashOffset
+        strokeDashOffset,
       };
     })
   );

@@ -21,5 +21,5 @@ export const mdBicycleIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

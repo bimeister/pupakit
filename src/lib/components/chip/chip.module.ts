@@ -6,6 +6,6 @@ import { ChipComponent } from './components/chip/chip.component';
 @NgModule({
   declarations: [ChipComponent],
   imports: [SharedModule],
-  exports: [ChipComponent]
+  exports: [ChipComponent],
 })
 export class ChipModule {}

@@ -18,5 +18,5 @@ export const iosRocketIcon: IconDefinition = {
 		C180.6,380.1,176.7,378.2,174.5,380.5z"/>
 </g>
 </svg>
-`
+`,
 };

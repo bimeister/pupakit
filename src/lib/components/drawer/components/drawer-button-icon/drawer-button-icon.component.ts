@@ -12,7 +12,7 @@ import { isNil } from '@bimeister/utilities';
   templateUrl: './drawer-button-icon.component.html',
   styleUrls: ['./drawer-button-icon.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerButtonIconComponent implements OnChanges {
   @Input() public icon: string;

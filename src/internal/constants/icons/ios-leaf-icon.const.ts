@@ -13,5 +13,5 @@ export const iosLeafIcon: IconDefinition = {
 		c43.1,35.5,108.9,80,193.3,107.9C372,369.9,367.3,381.5,362.1,386.1z"/>
 </g>
 </svg>
-`
+`,
 };

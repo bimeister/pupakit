@@ -16,5 +16,5 @@ export const logoMarkdownIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

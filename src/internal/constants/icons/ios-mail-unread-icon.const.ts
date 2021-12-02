@@ -19,5 +19,5 @@ export const iosMailUnreadIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

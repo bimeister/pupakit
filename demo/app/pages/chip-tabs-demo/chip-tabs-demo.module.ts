@@ -5,6 +5,6 @@ import { ChipTabsDemoComponent } from './chip-tabs-demo.component';
 
 @NgModule({
   declarations: [ChipTabsDemoComponent],
-  imports: [DemoSharedModule, ChipTabsDemoRoutingModule]
+  imports: [DemoSharedModule, ChipTabsDemoRoutingModule],
 })
 export class ChipTabsDemoModule {}

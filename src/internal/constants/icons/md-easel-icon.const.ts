@@ -16,5 +16,5 @@ export const mdEaselIcon: IconDefinition = {
 	<rect x="232" y="400" width="48" height="32"/>
 </g>
 </svg>
-`
+`,
 };

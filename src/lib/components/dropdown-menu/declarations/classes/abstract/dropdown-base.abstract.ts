@@ -1,11 +1,15 @@
-import { asyncScheduler, BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, observeOn, take, takeWhile, withLatestFrom } from 'rxjs/operators';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { ElementRef, TemplateRef } from '@angular/core';
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { ElementRef, TemplateRef } from '@angular/core';
+import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { asyncScheduler, BehaviorSubject, Observable } from 'rxjs';
+import { distinctUntilChanged, filter, observeOn, take, takeWhile, withLatestFrom } from 'rxjs/operators';
 
 export abstract class DropdownBase<ContainerComponent extends unknown> {
+  protected readonly triggerRef$: BehaviorSubject<Nullable<ElementRef<HTMLElement>>> = new BehaviorSubject<
+    Nullable<ElementRef<HTMLElement>>
+  >(null);
+
   private readonly isOpenState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isOpen$: Observable<boolean> = this.isOpenState$.pipe(distinctUntilChanged());
 
@@ -17,10 +21,6 @@ export abstract class DropdownBase<ContainerComponent extends unknown> {
   );
 
   private readonly overlayRef$: BehaviorSubject<Nullable<OverlayRef>> = new BehaviorSubject<Nullable<OverlayRef>>(null);
-
-  protected readonly triggerRef$: BehaviorSubject<Nullable<ElementRef<HTMLElement>>> = new BehaviorSubject<
-    Nullable<ElementRef<HTMLElement>>
-  >(null);
 
   protected constructor(protected readonly overlay: Overlay) {}
 
@@ -93,7 +93,7 @@ export abstract class DropdownBase<ContainerComponent extends unknown> {
       .pipe(take(1), filterNotNil())
       .subscribe((positionStrategy: FlexibleConnectedPositionStrategy) => {
         const overlayConfig: OverlayConfig = new OverlayConfig({
-          positionStrategy
+          positionStrategy,
         });
         const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
         this.overlayRef$.next(overlayRef);

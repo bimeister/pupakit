@@ -33,9 +33,7 @@ export class DefaultTableEventHandler<T> {
   protected getSubscriptionToSetData(): Subscription {
     return this.getEvents(TableEvents.SetData)
       .pipe(
-        switchMap((event: TableEvents.SetData<T>) => {
-          return this.dataDisplayCollection.setData(event.data).pipe(mapTo(event));
-        })
+        switchMap((event: TableEvents.SetData<T>) => this.dataDisplayCollection.setData(event.data).pipe(mapTo(event)))
       )
       .subscribe((event: TableEvents.SetData<T>) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }

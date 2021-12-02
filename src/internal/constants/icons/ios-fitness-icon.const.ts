@@ -14,5 +14,5 @@ export const iosFitnessIcon: IconDefinition = {
 	<path d="M64,192H52c-11,0-20,9-20,20v88c0,11,9,20,20,20h12c4.4,0,8-3.6,8-8V200C72,195.6,68.4,192,64,192z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -28,5 +28,5 @@ export const logoRedditIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

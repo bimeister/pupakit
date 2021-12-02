@@ -16,5 +16,5 @@ export const iosRoseIcon: IconDefinition = {
 		C218.9,113.8,227.5,105.3,239.7,97z"/>
 </g>
 </svg>
-`
+`,
 };

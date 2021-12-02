@@ -14,5 +14,5 @@ export const iosCalendarIcon: IconDefinition = {
 	<path d="M384,72c0-4.4-3.6-8-8-8h-16c-4.4,0-8,3.6-8,8v24h32V72z"/>
 </g>
 </svg>
-`
+`,
 };

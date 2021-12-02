@@ -10,7 +10,7 @@ export const getPropertyValueByPath = (source: unknown, path: string): unknown =
     return null;
   }
 
-  return pathKeys.reduce((extractedData: any, _, currentIndex: number) => {
+  return pathKeys.reduce((extractedData: any, _: string, currentIndex: number) => {
     const currentPath: string = pathKeys[currentIndex];
     const currentPathData: any = extractedData[currentPath];
     return currentPathData;

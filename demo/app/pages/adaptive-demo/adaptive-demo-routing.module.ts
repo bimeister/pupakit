@@ -5,12 +5,12 @@ import { AdaptiveDemoComponent } from './adaptive-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: AdaptiveDemoComponent
-  }
+    component: AdaptiveDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AdaptiveDemoRoutingModule {}

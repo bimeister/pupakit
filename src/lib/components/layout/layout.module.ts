@@ -13,6 +13,6 @@ import { SpinnerModule } from '../spinner/spinner.module';
 @NgModule({
   imports: [SharedModule, IconModule.forFeature([mdCloseIcon]), SpinnerModule],
   declarations: [AlertComponent, CloseButtonComponent, LayoutComponent, LoaderComponent, OverlayComponent],
-  exports: [LayoutComponent, LoaderComponent]
+  exports: [LayoutComponent, LoaderComponent],
 })
 export class LayoutModule {}

@@ -13,5 +13,5 @@ export const logoWindowsIcon: IconDefinition = {
 	<path d="M216,69.7L32,96v153h184V69.7L216,69.7z"/>
 </g>
 </svg>
-`
+`,
 };

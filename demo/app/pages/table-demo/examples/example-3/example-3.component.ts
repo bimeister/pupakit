@@ -20,7 +20,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
   date: new Date(),
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -31,28 +31,28 @@ const COLUMNS: TableColumnDefinition[] = [
 
     // left side
     pin: TableColumnPin.Left,
-    defaultSizes: { widthPx: 500 }
+    defaultSizes: { widthPx: 500 },
   },
   {
     id: 'last-name',
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 350 }
+    defaultSizes: { widthPx: 350 },
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 350 }
+    defaultSizes: { widthPx: 350 },
   },
   {
     id: 'date',
     modelKey: 'date',
     title: 'Date',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 350 }
+    defaultSizes: { widthPx: 350 },
   },
   {
     id: 'age-column',
@@ -61,8 +61,8 @@ const COLUMNS: TableColumnDefinition[] = [
 
     // right side
     pin: TableColumnPin.Right,
-    defaultSizes: { widthPx: 100 }
-  }
+    defaultSizes: { widthPx: 100 },
+  },
 ];
 
 @Component({
@@ -70,7 +70,7 @@ const COLUMNS: TableColumnDefinition[] = [
   templateUrl: './example-3.component.html',
   styleUrls: ['./example-3.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample3Component {
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();

@@ -5,7 +5,7 @@ import { filterNotNil } from '@bimeister/utilities';
 export class TableBodyRowsDataSource<T> extends DataSource<T> {
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>({
     start: 0,
-    end: 0
+    end: 0,
   });
   private readonly subscription: Subscription = new Subscription();
 

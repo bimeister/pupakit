@@ -5,12 +5,12 @@ import { IconPageComponent } from './icon-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: IconPageComponent
-  }
+    component: IconPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class IconPageRoutingModule {}

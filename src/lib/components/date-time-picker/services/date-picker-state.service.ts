@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { filterFalsy, filterNotNil, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, NEVER, Observable } from 'rxjs';
-import { filter, map, shareReplay, switchMap, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { DatePickerPreviewMode } from '../../../../internal/declarations/types/date-picker-preview-mode.type';
 import { DatePickerSelectionMode } from '../../../../internal/declarations/types/date-picker-selection-mode.type';
 import { dateClearTime } from '../../../../internal/helpers/date-clear-time.helper';
@@ -59,7 +59,7 @@ export class DatePickerStateService {
       const hoveredDate: Date = aggregatedDates[1];
       return [selectedDateFromRange, hoveredDate];
     }),
-    shareReplay(1)
+    shareReplayWithRefCount()
   );
 
   public processDateSelection(date: Date): void {
@@ -76,11 +76,9 @@ export class DatePickerStateService {
           return this.selectedRange$;
         }),
         take(1),
-        map((alreadySelectedDates: Date[]) => {
-          return Object.is(alreadySelectedDates.length, 1)
-            ? [alreadySelectedDates[alreadySelectedDates.length - 1]]
-            : [];
-        })
+        map((alreadySelectedDates: Date[]) =>
+          Object.is(alreadySelectedDates.length, 1) ? [alreadySelectedDates[alreadySelectedDates.length - 1]] : []
+        )
       )
       .subscribe((alreadySelectedDates: Date[]) => this.selectedRange$.next([...alreadySelectedDates, date]));
   }

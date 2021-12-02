@@ -13,5 +13,5 @@ export const iosBriefcaseIcon: IconDefinition = {
 		c0-4.4,3.6-8,8-8h112c4.4,0,8,3.6,8,8V128z"/>
 </g>
 </svg>
-`
+`,
 };

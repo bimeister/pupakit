@@ -7,7 +7,7 @@ import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref
   templateUrl: './modal-layout-close-button.component.html',
   styleUrls: ['./modal-layout-close-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalLayoutCloseButtonComponent<ValueT> {
   @Input() public value: Nullable<ValueT>;

@@ -11,5 +11,5 @@ export const iosInformationCircleIcon: IconDefinition = {
 		V352z M255.9,192.2c-11.3,0-20.5-8.6-20.5-20s9.3-19.9,20.5-19.9c11.4,0,20.7,8.5,20.7,19.9S267.3,192.2,255.9,192.2z"/>
 </g>
 </svg>
-`
+`,
 };

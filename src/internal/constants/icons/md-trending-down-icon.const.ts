@@ -8,5 +8,5 @@ export const mdTrendingDownIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M480,397V262.5l-51.3,51.3l-141.1-141L198,262.5L63.6,128L32,159.6l166,166.3l89.6-89.7l109.3,109.4L345.6,397H480z"/>
 </svg>
-`
+`,
 };

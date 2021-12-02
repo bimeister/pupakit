@@ -10,5 +10,5 @@ export const mdRewindIcon: IconDefinition = {
 	<path d="M249.6,402V110L32,256L249.6,402z M262.4,256L480,402V110L262.4,256z"/>
 </g>
 </svg>
-`
+`,
 };

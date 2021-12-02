@@ -16,5 +16,5 @@ export const mdLaptopIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

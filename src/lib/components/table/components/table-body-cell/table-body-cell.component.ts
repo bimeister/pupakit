@@ -5,7 +5,7 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@a
   templateUrl: './table-body-cell.component.html',
   styleUrls: ['./table-body-cell.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableBodyCellComponent {
   @Input() public clickable: boolean = false;

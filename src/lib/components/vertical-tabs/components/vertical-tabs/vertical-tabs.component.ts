@@ -8,7 +8,7 @@ import { VerticalTabsStateService } from '../../services/vertical-tabs-state.ser
   styleUrls: ['./vertical-tabs.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [VerticalTabsStateService]
+  providers: [VerticalTabsStateService],
 })
 export class VerticalTabsComponent extends TabsContainer {
   constructor(verticalTabsStateService: VerticalTabsStateService) {

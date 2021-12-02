@@ -15,5 +15,5 @@ export const mdWomanIcon: IconDefinition = {
 		C276.2,106.5,292.6,89.8,292.6,69.2z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -7,7 +7,7 @@ import { Nullable } from '@bimeister/utilities';
   templateUrl: './modal-layout-action.component.html',
   styleUrls: ['./modal-layout-action.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalLayoutActionComponent<ValueT> {
   @Input() public value: Nullable<ValueT> | 'none' = 'none';

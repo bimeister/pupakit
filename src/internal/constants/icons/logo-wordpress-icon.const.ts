@@ -22,5 +22,5 @@ export const logoWordpressIcon: IconDefinition = {
 		C448,227.3,441.6,199.9,430.2,175.4z"/>
 </g>
 </svg>
-`
+`,
 };

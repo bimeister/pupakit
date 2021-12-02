@@ -8,6 +8,6 @@ import { BadgeComponent } from './components/badge/badge.component';
 @NgModule({
   declarations: [BadgeComponent, BadgeMarkerComponent, BadgeIndicatorComponent],
   imports: [SharedModule, IconModule],
-  exports: [BadgeComponent, BadgeMarkerComponent, BadgeIndicatorComponent]
+  exports: [BadgeComponent, BadgeMarkerComponent, BadgeIndicatorComponent],
 })
 export class BadgeModule {}

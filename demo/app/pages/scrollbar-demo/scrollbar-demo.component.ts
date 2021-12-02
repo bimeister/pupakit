@@ -4,6 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'demo-scrollbar-demo',
   templateUrl: './scrollbar-demo.component.html',
   styleUrls: ['./scrollbar-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollbarDemoComponent {}

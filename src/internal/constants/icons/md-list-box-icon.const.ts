@@ -12,5 +12,5 @@ export const mdListBoxIcon: IconDefinition = {
 		C448,81.908,430.092,64,408,64z M304,368H144v-48h160V368z M368,280H144v-48h224V280z M368,192H144v-48h224V192z"/>
 </g>
 </svg>
-`
+`,
 };

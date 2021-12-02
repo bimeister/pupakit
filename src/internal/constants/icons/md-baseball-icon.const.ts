@@ -24,5 +24,5 @@ export const mdBaseballIcon: IconDefinition = {
 		s22,106,57.7,143.4c0.7-0.7,1.4-1.3,2-2C111.3,393.8,114.8,390,118.2,386.1z"/>
 </g>
 </svg>
-`
+`,
 };

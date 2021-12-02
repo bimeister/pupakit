@@ -96,11 +96,11 @@ const EXPORTS: any[] = [
   StatusModule,
   BadgeModule,
   BreadcrumbsModule,
-  ButtonGroupModule
+  ButtonGroupModule,
 ];
 
 @NgModule({
   imports: [SharedModule, HammerModule, ...EXPORTS],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class ComponentsModule {}

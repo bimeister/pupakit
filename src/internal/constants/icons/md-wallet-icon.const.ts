@@ -14,5 +14,5 @@ export const mdWalletIcon: IconDefinition = {
 		/>
 </g>
 </svg>
-`
+`,
 };

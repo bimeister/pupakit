@@ -14,5 +14,5 @@ export const logoRssIcon: IconDefinition = {
 	<path d="M64,64v79.9c171,0,303.9,133,303.9,304.1H448C448,236.3,276,64,64,64z"/>
 </g>
 </svg>
-`
+`,
 };

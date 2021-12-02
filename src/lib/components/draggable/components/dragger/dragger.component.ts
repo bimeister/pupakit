@@ -8,7 +8,7 @@ import { PositionController } from '../../../../../internal/declarations/classes
   selector: 'pupa-dragger',
   templateUrl: './dragger.component.html',
   styleUrls: ['./dragger.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraggerComponent extends PositionController {
   constructor(

@@ -13,5 +13,5 @@ export const mdCloseCircleIcon: IconDefinition = {
 		l-74.883-74.881l29.121-29.116L256,226.881l74.881-74.878l29.12,29.116L285.119,256L360.002,330.881z"/>
 </g>
 </svg>
-`
+`,
 };

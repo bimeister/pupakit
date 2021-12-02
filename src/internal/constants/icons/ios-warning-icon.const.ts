@@ -12,5 +12,5 @@ export const iosWarningIcon: IconDefinition = {
 		s8.4-18.4,19.1-18.4s19.1,8.1,19.1,18.4S266.7,402.4,256,402.4z"/>
 </g>
 </svg>
-`
+`,
 };

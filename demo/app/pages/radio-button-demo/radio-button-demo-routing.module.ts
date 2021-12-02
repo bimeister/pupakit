@@ -5,12 +5,12 @@ import { RadioButtonDemoComponent } from './radio-button-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: RadioButtonDemoComponent
-  }
+    component: RadioButtonDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RadioButtonDemoRoutingModule {}

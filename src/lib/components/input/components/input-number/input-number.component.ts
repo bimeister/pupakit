@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,9 +12,9 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
   templateUrl: './input-number.component.html',
   styleUrls: ['./input-number.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputNumberComponent extends InputBase<ValueType> {
+export class InputNumberComponent extends InputBase<ValueType> implements OnChanges {
   @Input() public withReset: boolean = false;
 
   @Input() public icon: string = '';
@@ -24,7 +24,7 @@ export class InputNumberComponent extends InputBase<ValueType> {
   public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([
     this.isInvalid$,
     this.isVisibleReset$,
-    this.hasCustomIcon$
+    this.hasCustomIcon$,
   ]);
 
   public ngOnChanges(changes: ComponentChanges<this>): void {

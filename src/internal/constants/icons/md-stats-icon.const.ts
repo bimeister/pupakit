@@ -13,5 +13,5 @@ export const mdStatsIcon: IconDefinition = {
 	<rect x="368" y="176" width="64" height="272"/>
 </g>
 </svg>
-`
+`,
 };

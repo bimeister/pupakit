@@ -13,5 +13,5 @@ export const mdHeartDislikeIcon: IconDefinition = {
 		c-8.4,0-16.5,0.9-24.3,2.5l253.7,253.1C437.3,270.9,464,228,464,179.1z"/>
 </g>
 </svg>
-`
+`,
 };

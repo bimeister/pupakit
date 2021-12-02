@@ -8,12 +8,12 @@ import { DOCUMENT } from '@angular/common';
 
 enum IconNames {
   DARK = 'ios-moon',
-  LIGHT = 'ios-sunny'
+  LIGHT = 'ios-sunny',
 }
 
 enum AnimationStates {
   START = 'start',
-  END = 'end'
+  END = 'end',
 }
 
 const COLOR_BASE_WHITE_N100: string = '#3d5159';
@@ -32,21 +32,21 @@ const COLOR_BASE_DARK_N500: string = '#0f2a36';
           '0.25s',
           keyframes([
             style({ transform: 'rotate(0deg)', offset: 0 }),
-            style({ transform: 'rotate(180deg)', offset: 1 })
+            style({ transform: 'rotate(180deg)', offset: 1 }),
           ])
-        )
+        ),
       ]),
       transition(`${AnimationStates.END} => ${AnimationStates.START}`, [
         animate(
           '0.25s',
           keyframes([
             style({ transform: 'rotate(360deg)', offset: 0 }),
-            style({ transform: 'rotate(0deg)', offset: 1 })
+            style({ transform: 'rotate(0deg)', offset: 1 }),
           ])
-        )
-      ])
-    ])
-  ]
+        ),
+      ]),
+    ]),
+  ],
 })
 export class ThemeToggleComponent {
   private readonly isDarkMode$: Observable<boolean> = this.themeWrapperService.theme$.pipe(

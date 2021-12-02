@@ -5,6 +5,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   templateUrl: './breadcrumb-separator.component.html',
   styleUrls: ['./breadcrumb-separator.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbSeparatorComponent {}

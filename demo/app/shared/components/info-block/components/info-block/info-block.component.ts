@@ -7,7 +7,7 @@ type InfoBlockType = 'info' | 'note' | 'success' | 'warning' | 'error';
   templateUrl: './info-block.component.html',
   styleUrls: ['./info-block.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InfoBlockComponent {
   @Input() public readonly variant: InfoBlockType = 'info';
@@ -17,6 +17,6 @@ export class InfoBlockComponent {
     ['note', 'ios-paper'],
     ['success', 'ios-checkmark-circle'],
     ['warning', 'ios-warning'],
-    ['error', 'ios-close-circle']
+    ['error', 'ios-close-circle'],
   ]);
 }

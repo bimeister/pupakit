@@ -11,5 +11,5 @@ export const mdArrowDroprightIcon: IconDefinition = {
 	<polygon points="192,128 320,256 192,384 	"/>
 </g>
 </svg>
-`
+`,
 };

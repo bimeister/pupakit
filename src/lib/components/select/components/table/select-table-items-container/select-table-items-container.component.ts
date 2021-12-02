@@ -7,7 +7,7 @@ import { SelectItemsContainerBase } from './../../../../../../internal/declarati
   templateUrl: './select-table-items-container.component.html',
   styleUrls: ['./select-table-items-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTableItemsContainerComponent extends SelectItemsContainerBase {
   @HostListener('click', ['$event'])

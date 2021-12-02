@@ -17,5 +17,5 @@ export const mdListIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

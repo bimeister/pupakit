@@ -6,6 +6,6 @@ import { ScrollableContentDirective } from './directives/scrollable-content.dire
 @NgModule({
   declarations: [ScrollableComponent, ScrollableContentDirective],
   imports: [CommonModule],
-  exports: [ScrollableComponent, ScrollableContentDirective]
+  exports: [ScrollableComponent, ScrollableContentDirective],
 })
 export class ScrollableModule {}

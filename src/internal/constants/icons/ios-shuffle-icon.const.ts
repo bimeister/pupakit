@@ -19,5 +19,5 @@ export const iosShuffleIcon: IconDefinition = {
 		c-1.8,2.2-1.8,5.4,0.1,7.6L279.4,235.4z"/>
 </g>
 </svg>
-`
+`,
 };

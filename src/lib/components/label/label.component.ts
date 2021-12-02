@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -11,9 +11,9 @@ import { LabelSize } from '../../../internal/declarations/types/label-size.type'
   templateUrl: './label.component.html',
   styleUrls: ['./label.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LabelComponent {
+export class LabelComponent implements OnChanges {
   @Input() public readonly size: LabelSize = 'medium';
   public readonly size$: BehaviorSubject<LabelSize> = new BehaviorSubject<LabelSize>('medium');
 
@@ -25,7 +25,7 @@ export class LabelComponent {
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.size$,
-    this.disabled$.pipe(map((isInvalid: boolean) => (isInvalid ? 'disabled' : null)))
+    this.disabled$.pipe(map((isInvalid: boolean) => (isInvalid ? 'disabled' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes

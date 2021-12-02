@@ -55,7 +55,7 @@ export class TreeDragAndDropControl {
       this.draggableNode$.next(treeNode);
       this.mouseDownPosition = {
         left: event.screenX,
-        top: event.screenY
+        top: event.screenY,
       };
       if (event.target instanceof HTMLElement) {
         this.draggableElementBoundingBox = event.target.getBoundingClientRect();
@@ -96,7 +96,7 @@ export class TreeDragAndDropControl {
         if (draggingHasStarted && !isNil(this.dropNode)) {
           this.droppedSubject$.next({
             draggedElement: draggableNode,
-            droppedElement: this.dropNode
+            droppedElement: this.dropNode,
           });
         }
 
@@ -163,7 +163,8 @@ export class TreeDragAndDropControl {
       .subscribe(([treeItems, draggableNode]: [FlatTreeItem[], FlatTreeItem]) => {
         const targetLevel: number = draggableNode?.level ?? 0;
 
-        let currentIndex: number = treeItems.findIndex(dataPoint => dataPoint.id === draggableNode?.id) + 1;
+        let currentIndex: number =
+          treeItems.findIndex((dataPoint: FlatTreeItem) => dataPoint.id === draggableNode?.id) + 1;
         const endOfListNotReached = (): boolean => treeItems.length !== currentIndex;
         const targetLevelNotReached = (): boolean => treeItems[currentIndex].level !== targetLevel;
         const result: Uuid[] = [draggableNode?.id];
@@ -183,14 +184,14 @@ export class TreeDragAndDropControl {
   private updateDraggablePosition(screenX: number, screenY: number, draggableElement: ElementRef<HTMLElement>): void {
     const draggableElementPositionShift: Position = {
       left: this.mouseDownPosition.left - this.draggableElementBoundingBox.left,
-      top: this.mouseDownPosition.top - this.draggableElementBoundingBox.top
+      top: this.mouseDownPosition.top - this.draggableElementBoundingBox.top,
     };
 
     const bottomBorderPositionY: number =
       this.host.nativeElement.clientHeight - this.draggableElementBoundingBox.height;
     const draggableElementPosition: Position = {
       left: screenX - this.draggableElementBoundingBox.left - draggableElementPositionShift.left,
-      top: getClampedValue(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY)
+      top: getClampedValue(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY),
     };
 
     const isTopBorderReached: boolean = draggableElementPosition.top <= this.draggableElementBoundingBox.height;

@@ -6,6 +6,6 @@ import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [SidebarContentComponent],
   imports: [DemoSharedModule, RouterModule],
-  exports: [SidebarContentComponent]
+  exports: [SidebarContentComponent],
 })
 export class SidebarModule {}

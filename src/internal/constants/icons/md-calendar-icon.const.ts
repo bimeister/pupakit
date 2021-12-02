@@ -13,5 +13,5 @@ export const mdCalendarIcon: IconDefinition = {
 		V196h304.01V408z"/>
 </g>
 </svg>
-`
+`,
 };

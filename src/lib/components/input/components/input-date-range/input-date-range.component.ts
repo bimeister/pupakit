@@ -23,7 +23,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
   styleUrls: ['./input-date-range.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateRangeComponent extends InputDateTimeBase {
   public readonly dateRangeFirst$: Observable<Date> = this.value$.pipe(

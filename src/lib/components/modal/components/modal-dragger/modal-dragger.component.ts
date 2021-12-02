@@ -8,7 +8,7 @@ import {
   Inject,
   OnDestroy,
   Renderer2,
-  Self
+  Self,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref.class';
@@ -20,11 +20,11 @@ import { Position } from '../../../../../internal/declarations/types/position.ty
   selector: 'pupa-modal-dragger',
   templateUrl: './modal-dragger.component.html',
   styleUrls: ['./modal-dragger.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
-  private dragerToTargetStartTopPositionDelta: Position = null;
-  private dragerToMousePositionDelta: Position = null;
+  private draggerToTargetStartTopPositionDelta: Position = null;
+  private draggerToMousePositionDelta: Position = null;
   private mouseMoveUnlistener: EventUnlistener = null;
   private mouseUpUnlistener: EventUnlistener = null;
 
@@ -39,9 +39,9 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     const selfClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
     const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
 
-    this.dragerToTargetStartTopPositionDelta = [
+    this.draggerToTargetStartTopPositionDelta = [
       targetClientRect.left - selfClientRect.left,
-      targetClientRect.top - selfClientRect.top
+      targetClientRect.top - selfClientRect.top,
     ];
   }
 
@@ -56,7 +56,7 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
 
     this.modalRef.moveToTopLayer();
     const selfClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
-    this.dragerToMousePositionDelta = [selfClientRect.left - event.clientX, selfClientRect.top - event.clientY];
+    this.draggerToMousePositionDelta = [selfClientRect.left - event.clientX, selfClientRect.top - event.clientY];
 
     this.mouseMoveUnlistener = this.renderer.listen(this.document, 'mousemove', this.processMouseMove.bind(this));
     this.mouseUpUnlistener = this.renderer.listen(this.document, 'mouseup', this.processMouseUp.bind(this));
@@ -67,13 +67,13 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
 
     const newPosition: Position = [
       event.clientX +
-        this.dragerToTargetStartTopPositionDelta[0] +
-        this.dragerToMousePositionDelta[0] +
+        this.draggerToTargetStartTopPositionDelta[0] +
+        this.draggerToMousePositionDelta[0] +
         this.getLeftOffsetByOverlayXPosition(),
       event.clientY +
-        this.dragerToTargetStartTopPositionDelta[1] +
-        this.dragerToMousePositionDelta[1] +
-        this.getTopOffsetByOverlayYPosition()
+        this.draggerToTargetStartTopPositionDelta[1] +
+        this.draggerToMousePositionDelta[1] +
+        this.getTopOffsetByOverlayYPosition(),
     ];
     this.modalRef.updatePosition(newPosition);
   }
@@ -88,13 +88,13 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
 
     switch (this.modalRef.getOverlayXPosition()) {
-      case 'start':
-      default:
-        return 0;
       case 'center':
         return targetClientRect.width / 2;
       case 'end':
         return targetClientRect.width;
+      case 'start':
+      default:
+        return 0;
     }
   }
 
@@ -102,13 +102,13 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
 
     switch (this.modalRef.getOverlayYPosition()) {
-      case 'top':
-      default:
-        return 0;
       case 'center':
         return targetClientRect.height / 2;
       case 'bottom':
         return targetClientRect.height;
+      case 'top':
+      default:
+        return 0;
     }
   }
 

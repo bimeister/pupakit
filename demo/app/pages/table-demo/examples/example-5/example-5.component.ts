@@ -17,7 +17,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -30,8 +30,8 @@ const COLUMNS: TableColumnDefinition[] = [
     adaptiveSizes: {
       lg: { widthPx: 170 },
       md: { widthPx: 140 },
-      sm: { widthPx: 100 }
-    }
+      sm: { widthPx: 100 },
+    },
   },
   {
     id: 'last-name',
@@ -42,8 +42,8 @@ const COLUMNS: TableColumnDefinition[] = [
     adaptiveSizes: {
       lg: { widthPx: 150 },
       md: { widthPx: 100 },
-      sm: { widthPx: 90 }
-    }
+      sm: { widthPx: 90 },
+    },
   },
   {
     id: 'city',
@@ -54,8 +54,8 @@ const COLUMNS: TableColumnDefinition[] = [
     adaptiveSizes: {
       lg: { widthPx: 160 },
       md: { widthPx: 130 },
-      sm: { widthPx: 100 }
-    }
+      sm: { widthPx: 100 },
+    },
   },
   {
     id: 'age-column',
@@ -66,9 +66,9 @@ const COLUMNS: TableColumnDefinition[] = [
     adaptiveSizes: {
       lg: { widthPx: 90 },
       md: { widthPx: 80 },
-      sm: { widthPx: 60 }
-    }
-  }
+      sm: { widthPx: 60 },
+    },
+  },
 ];
 
 @Component({
@@ -76,7 +76,7 @@ const COLUMNS: TableColumnDefinition[] = [
   templateUrl: './example-5.component.html',
   styleUrls: ['./example-5.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample5Component {
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();

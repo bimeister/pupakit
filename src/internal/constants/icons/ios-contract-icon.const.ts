@@ -21,5 +21,5 @@ export const iosContractIcon: IconDefinition = {
 		c-7.7,0-13.9,6.2-13.9,13.9v112.2C279.3,413,285.5,419.2,293.1,419.2z"/>
 </g>
 </svg>
-`
+`,
 };

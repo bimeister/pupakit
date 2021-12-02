@@ -21,5 +21,5 @@ export const mdCloudyNightIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -13,5 +13,5 @@ export const mdColorFillIcon: IconDefinition = {
 		z"/>
 </g>
 </svg>
-`
+`,
 };

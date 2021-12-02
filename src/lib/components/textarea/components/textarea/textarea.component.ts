@@ -6,6 +6,6 @@ import { TextareaBase } from '../../../../../internal/declarations/classes/abstr
   templateUrl: './textarea.component.html',
   styleUrls: ['./textarea.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaComponent extends TextareaBase {}

@@ -18,8 +18,8 @@ import { iosArrowForwardIcon } from '../../../internal/constants/icons/ios-arrow
     SpinnerModule,
     ScrollingModule,
     CdkTreeModule,
-    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon])
+    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
   ],
-  exports: [TreeComponent]
+  exports: [TreeComponent],
 })
 export class TreeModule {}

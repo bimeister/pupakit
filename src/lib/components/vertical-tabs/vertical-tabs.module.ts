@@ -7,6 +7,6 @@ import { VerticalTabsComponent } from './components/vertical-tabs/vertical-tabs.
 @NgModule({
   declarations: [VerticalTabsComponent, VerticalTabsItemComponent],
   imports: [SharedModule],
-  exports: [VerticalTabsComponent, VerticalTabsItemComponent]
+  exports: [VerticalTabsComponent, VerticalTabsItemComponent],
 })
 export class VerticalTabsModule {}

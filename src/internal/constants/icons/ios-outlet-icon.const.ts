@@ -15,5 +15,5 @@ export const iosOutletIcon: IconDefinition = {
 		c2.1,0,3.7,1.7,3.7,3.7v81.6C345.1,254.3,343.5,256,341.4,256z"/>
 </g>
 </svg>
-`
+`,
 };

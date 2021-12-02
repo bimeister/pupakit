@@ -7,7 +7,7 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   templateUrl: './controls-is-patched-demo.component.html',
   styleUrls: ['./controls-is-patched-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlsIsPatchedDemoComponent {
   public readonly formControl: FormControl = new FormControl(null, Validators.required);
@@ -15,11 +15,11 @@ export class ControlsIsPatchedDemoComponent {
   public readonly typeOptions: RadioOption[] = [
     {
       caption: 'Inputs',
-      value: 'inputs'
+      value: 'inputs',
     },
     {
       caption: 'Selects',
-      value: 'selects'
-    }
+      value: 'selects',
+    },
   ];
 }

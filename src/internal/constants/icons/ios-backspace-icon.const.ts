@@ -14,5 +14,5 @@ export const iosBackspaceIcon: IconDefinition = {
 		c6.2-6.2,16.4-6.2,22.6,0c6.2,6.2,6.2,16.4,0,22.6L324.6,256L377.3,308.7z"/>
 </g>
 </svg>
-`
+`,
 };

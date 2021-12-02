@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -23,7 +23,7 @@ import { TabsStateService } from '../../services/tabs-state.service';
   styleUrls: ['./tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [TabsStateService]
+  providers: [TabsStateService],
 })
 export class TabsComponent extends TabsBase<TabsStateService> implements OnInit {
   @ViewChild('tabsContainer', { static: true }) private readonly tabsContainerRef: ElementRef<HTMLElement>;

@@ -9,7 +9,7 @@ const MONTH_COUNT: number = 12;
   templateUrl: './date-picker-months.component.html',
   styleUrls: ['./date-picker-months.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerMonthsComponent {
   public readonly currentMonth: number = DEFAULT_MONTH;

@@ -15,7 +15,7 @@ const COMPONENTS: Type<unknown>[] = [
   TabsContainerComponent,
   TabsContentComponent,
   TabsItemContentTemplateDirective,
-  TabsSeparatorComponent
+  TabsSeparatorComponent,
 ];
 
 const DIRECTIVES: Type<unknown>[] = [
@@ -23,12 +23,12 @@ const DIRECTIVES: Type<unknown>[] = [
   TabsItemComponent,
   TabsContainerComponent,
   TabsContentComponent,
-  TabsItemContentTemplateDirective
+  TabsItemContentTemplateDirective,
 ];
 
 @NgModule({
   declarations: [...COMPONENTS, ...DIRECTIVES],
   imports: [SharedModule, ScrollableModule],
-  exports: [...COMPONENTS, ...DIRECTIVES]
+  exports: [...COMPONENTS, ...DIRECTIVES],
 })
 export class TabsModule {}

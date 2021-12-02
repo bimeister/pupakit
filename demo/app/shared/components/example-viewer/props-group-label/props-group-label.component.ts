@@ -5,6 +5,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   templateUrl: './props-group-label.component.html',
   styleUrls: ['./props-group-label.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropsGroupLabelComponent {}

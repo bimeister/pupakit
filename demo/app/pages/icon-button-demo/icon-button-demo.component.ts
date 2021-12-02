@@ -5,44 +5,44 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   selector: 'demo-icon-button-demo',
   templateUrl: './icon-button-demo.component.html',
   styleUrls: ['./icon-button-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconButtonDemoComponent {
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Large',
-      value: 'large'
+      value: 'large',
     },
     {
       caption: 'Medium',
-      value: 'medium'
+      value: 'medium',
     },
     {
       caption: 'Small to medium',
-      value: 'small-to-medium'
+      value: 'small-to-medium',
     },
     {
       caption: 'Small',
-      value: 'small'
-    }
+      value: 'small',
+    },
   ];
 
   public readonly colorOptions: RadioOption[] = [
     {
       caption: 'Dark',
-      value: 'dark'
+      value: 'dark',
     },
     {
       caption: 'Light',
-      value: 'light'
+      value: 'light',
     },
     {
       caption: 'Light blue',
-      value: 'light-blue'
+      value: 'light-blue',
     },
     {
       caption: 'Transparent',
-      value: 'transparent'
-    }
+      value: 'transparent',
+    },
   ];
 }

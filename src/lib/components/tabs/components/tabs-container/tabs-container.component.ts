@@ -11,8 +11,8 @@ import { TABS_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/cons
   providers: [
     {
       provide: TABS_CONTAINER_STATE_SERVICE_TOKEN,
-      useClass: TabsStateService
-    }
-  ]
+      useClass: TabsStateService,
+    },
+  ],
 })
 export class TabsContainerComponent {}

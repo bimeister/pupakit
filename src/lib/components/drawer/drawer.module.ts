@@ -37,7 +37,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerTitleContainerComponent,
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
-    DrawerExpandButtonComponent
+    DrawerExpandButtonComponent,
   ],
   imports: [
     SharedModule,
@@ -45,7 +45,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     OverlayModule,
     PortalModule,
     IconModule.forFeature([mdMoreIcon, mdCloseIcon]),
-    ButtonModule
+    ButtonModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -63,7 +63,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerTitleContainerComponent,
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
-    DrawerExpandButtonComponent
-  ]
+    DrawerExpandButtonComponent,
+  ],
 })
 export class DrawerModule {}

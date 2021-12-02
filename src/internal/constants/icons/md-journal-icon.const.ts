@@ -11,5 +11,5 @@ export const mdJournalIcon: IconDefinition = {
 	<path d="M384.7,42.7H368v426.7h16.7c23.1,0,42-18.9,42-42V84.7C426.7,61.6,407.8,42.7,384.7,42.7z"/>
 </g>
 </svg>
-`
+`,
 };

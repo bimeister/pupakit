@@ -19,7 +19,7 @@ const createTargetFileContent = (config: GeneratorConfig) =>
   `};\n`;
 
 const kebabToCamelName = (name: string): string => {
-  return name.replace(/([-_][a-z])/gi, nameToProcess => {
+  return name.replace(/([-_][a-z])/gi, (nameToProcess) => {
     return nameToProcess.toUpperCase().replace('-', '').replace('_', '');
   });
 };
@@ -30,7 +30,7 @@ export function buildIconsTask(): TaskFunction {
   return async (onDone: VoidFunction): Promise<void> => {
     const config: Options = {
       ...(await resolveConfig(basePath)),
-      parser: 'typescript'
+      parser: 'typescript',
     };
 
     for (const iconPath of fs.readdirSync(basePath)) {
@@ -43,7 +43,7 @@ export function buildIconsTask(): TaskFunction {
         iconName: sourceIconName,
         iconData: fs.readFileSync(`${basePath}/${iconPath}`, 'utf-8'),
         interfaceName: 'IconDefinition',
-        interfaceImportPath: '../declarations/interfaces/icon-definition.interface'
+        interfaceImportPath: '../declarations/interfaces/icon-definition.interface',
       });
 
       fs.writeFileSync(`src/internal/icons/${kebabCaseName}.const.ts`, format(resultFileContent, config), 'utf-8');

@@ -3,7 +3,7 @@ import { getAbbreviatedCount, isNil } from '@bimeister/utilities';
 
 @Pipe({
   name: 'formatCount',
-  pure: true
+  pure: true,
 })
 export class FormatCountPipe implements PipeTransform {
   public transform(count: number): string {

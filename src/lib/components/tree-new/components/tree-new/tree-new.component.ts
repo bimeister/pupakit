@@ -11,10 +11,11 @@ import {
   HostListener,
   Input,
   OnChanges,
+  OnDestroy,
   Renderer2,
   TrackByFunction,
   Type,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
 import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@bimeister/utilities';
@@ -26,7 +27,7 @@ import {
   Observable,
   Subject,
   Subscription,
-  timer
+  timer,
 } from 'rxjs';
 import { debounce, filter, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -65,9 +66,9 @@ interface DragAndDropMeta {
   selector: 'pupa-tree-new',
   templateUrl: './tree-new.component.html',
   styleUrls: ['./tree-new.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
+export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy {
   @Input() public controller: TreeController;
   @ViewChild('skeletonViewPort', { static: true }) public readonly skeletonViewPort: CdkVirtualScrollViewport;
   @ViewChild('viewPort', { static: true }) public readonly viewPort: CdkVirtualScrollViewport;
@@ -152,7 +153,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
         dropTreeItem: dragTreeItem,
         draggableElementBoundingBox,
         dragTreeItemWidth,
-        dragTreeItemIsDisplayed: false
+        dragTreeItemIsDisplayed: false,
       });
     });
   }
@@ -185,7 +186,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
       }
       const dropEventData: DropEventInterface<FlatTreeItem> = {
         draggedElement: dragAndDropMeta.dragTreeItem,
-        droppedElement: dragAndDropMeta.dropTreeItem
+        droppedElement: dragAndDropMeta.dropTreeItem,
       };
       this.eventBus.dispatch(new TreeEvents.Drop(dropEventData));
     });
@@ -232,8 +233,8 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
   private getSubscriptionToExpandWhileDragging(): Subscription {
     return this.expandWithDelay$
       .pipe(
-        debounce(node => (isNil(node) ? NEVER : timer(EXPAND_WHILE_DRAGGING_DELAY))),
-        filter(treeItem => treeItem.isExpandable && !treeItem.isElement)
+        debounce((node: FlatTreeItem) => (isNil(node) ? NEVER : timer(EXPAND_WHILE_DRAGGING_DELAY))),
+        filter((treeItem: FlatTreeItem) => treeItem.isExpandable && !treeItem.isElement)
       )
       .subscribe((treeItem: FlatTreeItem) => {
         this.eventBus.dispatch(new TreeEvents.ExpandWhileDragging(treeItem.id));
@@ -329,13 +330,13 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges {
     const mouseDownPosition: Position = dragAndDropMeta.mouseDownPosition;
     const draggableElementPositionShift: Position = {
       left: mouseDownPosition?.left - draggableElementBoundingBox?.left,
-      top: mouseDownPosition?.top - draggableElementBoundingBox?.top
+      top: mouseDownPosition?.top - draggableElementBoundingBox?.top,
     };
     const bottomBorderPositionY: number = this.host.nativeElement.clientHeight - draggableElementBoundingBox?.height;
     const newMeta: DragAndDropMeta = {
       ...dragAndDropMeta,
       dragTreeItemLeft: x - draggableElementBoundingBox?.left - draggableElementPositionShift.left,
-      dragTreeItemTop: getClampedValue(y - draggableElementPositionShift.top, 0, bottomBorderPositionY)
+      dragTreeItemTop: getClampedValue(y - draggableElementPositionShift.top, 0, bottomBorderPositionY),
     };
     const isTopBorderReached: boolean = newMeta.dragTreeItemTop <= draggableElementBoundingBox?.height;
     const isBottomBorderReached: boolean = newMeta.dragTreeItemTop >= bottomBorderPositionY;

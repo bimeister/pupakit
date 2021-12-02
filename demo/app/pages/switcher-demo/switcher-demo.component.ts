@@ -8,23 +8,23 @@ const BASE_REQUEST_PATH: string = 'switcher-demo/examples';
   templateUrl: './switcher-demo.component.html',
   styleUrls: ['./switcher-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class SwitcherDemoComponent {
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Medium',
       value: 'medium',
-      isDefault: true
+      isDefault: true,
     },
     {
       caption: 'Small',
-      value: 'small'
-    }
+      value: 'small',
+    },
   ];
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`
+    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
   };
 }

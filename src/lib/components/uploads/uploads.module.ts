@@ -12,6 +12,6 @@ import { UploadsItemComponent } from './components/uploads-item/uploads-item.com
 @NgModule({
   declarations: [UploadsItemComponent, UploadsItemStatusComponent, UploadsButtonComponent],
   imports: [SharedModule, ProgressBarModule, ButtonModule, SpinnerModule, IconModule.forFeature()],
-  exports: [UploadsItemComponent, UploadsItemStatusComponent, UploadsButtonComponent]
+  exports: [UploadsItemComponent, UploadsItemStatusComponent, UploadsButtonComponent],
 })
 export class UploadsModule {}

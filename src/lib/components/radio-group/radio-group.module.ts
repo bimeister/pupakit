@@ -9,6 +9,6 @@ import { RadioGroupComponent } from './components/radio-group/radio-group.compon
 @NgModule({
   declarations: [RadioGroupComponent, RadioControlComponent, RadioControlLabelComponent, RadioControlMarkerComponent],
   imports: [SharedModule],
-  exports: [RadioGroupComponent, RadioControlComponent, RadioControlLabelComponent, RadioControlMarkerComponent]
+  exports: [RadioGroupComponent, RadioControlComponent, RadioControlLabelComponent, RadioControlMarkerComponent],
 })
 export class RadioGroupModule {}

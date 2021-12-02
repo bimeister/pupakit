@@ -15,5 +15,5 @@ export const mdCheckboxIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

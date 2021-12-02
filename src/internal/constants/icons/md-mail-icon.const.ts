@@ -15,5 +15,5 @@ export const mdMailIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

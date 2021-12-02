@@ -5,7 +5,7 @@ import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
 import { Uuid } from '../../../../internal/declarations/types/uuid.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DropdownMenuService extends DropdownServiceBase<DropdownMenu> {
   public setDropdownHorizontalPosition(id: Uuid, position: HorizontalConnectionPos): void {

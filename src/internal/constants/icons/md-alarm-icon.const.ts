@@ -17,5 +17,5 @@ export const mdAlarmIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -15,5 +15,5 @@ export const mdRecordingIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -7,6 +7,6 @@ import { DraggableListComponent } from './components/draggable-list/draggable-li
 @NgModule({
   declarations: [DraggableListComponent, DraggableListItemComponent],
   imports: [SharedModule],
-  exports: [DraggableListComponent, DraggableListItemComponent]
+  exports: [DraggableListComponent, DraggableListItemComponent],
 })
 export class DraggableListModule {}

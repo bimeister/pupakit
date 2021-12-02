@@ -15,5 +15,5 @@ export const logoLinkedinIcon: IconDefinition = {
 		c36.1,0,63.4,23.8,63.4,75.1V384z"/>
 </g>
 </svg>
-`
+`,
 };

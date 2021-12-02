@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   templateUrl: './typography-page.component.html',
   styleUrls: ['./typography-page.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TypographyPageComponent {
   public fontTypes: string[] = ['point', 'caption', 'paragraph'];

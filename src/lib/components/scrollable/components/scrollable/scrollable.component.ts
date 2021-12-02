@@ -14,7 +14,7 @@ import {
   Renderer2,
   RendererStyleFlags2,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject, combineLatest, forkJoin, fromEvent, of, Subscription } from 'rxjs';
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
@@ -41,7 +41,7 @@ const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizon
   templateUrl: './scrollable.component.html',
   styleUrls: ['./scrollable.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollableComponent implements OnInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
@@ -317,13 +317,13 @@ export class ScrollableComponent implements OnInit, OnDestroy {
         this.verticalScrollbar.setSizes({
           contentSizePx: contentElement.clientHeight,
           contentScrollSizePx: contentElement.scrollHeight,
-          scrollbarSizePx: verticalScrollbar.clientHeight
+          scrollbarSizePx: verticalScrollbar.clientHeight,
         });
 
         this.horizontalScrollbar.setSizes({
           contentSizePx: contentElement.clientWidth,
           contentScrollSizePx: contentElement.scrollWidth,
-          scrollbarSizePx: horizontalScrollbar.clientWidth
+          scrollbarSizePx: horizontalScrollbar.clientWidth,
         });
       });
   }

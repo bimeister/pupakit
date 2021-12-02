@@ -11,7 +11,7 @@ import {
   Input,
   OnDestroy,
   Renderer2,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ import { DraggableListService } from '../../services/draggable-list.service';
   templateUrl: './draggable-list-item.component.html',
   styleUrls: ['./draggable-list-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DraggableListItemComponent implements AfterViewInit, OnDestroy {
   @Input() public id: string;
@@ -163,7 +163,7 @@ export class DraggableListItemComponent implements AfterViewInit, OnDestroy {
     this.draggableListService.dragStart({
       id: this.id,
       index: this.index,
-      element: this.draggableListItemRef.nativeElement
+      element: this.draggableListItemRef.nativeElement,
     });
   }
 

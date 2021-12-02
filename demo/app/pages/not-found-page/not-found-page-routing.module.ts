@@ -5,13 +5,13 @@ import { NotFoundPageComponent } from './not-found-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: NotFoundPageComponent
-  }
+    component: NotFoundPageComponent,
+  },
 ];
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class NotFoundPageRoutingModule {}

@@ -5,7 +5,7 @@ import {
   ContentChildren,
   QueryList,
   Inject,
-  Input
+  Input,
 } from '@angular/core';
 import { TabsItemContentTemplateDirective } from '../../directives/tabs-item-content-template.directive';
 import { TabsStateService } from '../../services/tabs-state.service';
@@ -17,7 +17,7 @@ import { TabsContentBase } from '../../../../../internal/declarations/classes/ab
   templateUrl: './tabs-content.component.html',
   styleUrls: ['./tabs-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsContentComponent extends TabsContentBase<TabsStateService> {
   @Input() public destroyable: boolean = true;

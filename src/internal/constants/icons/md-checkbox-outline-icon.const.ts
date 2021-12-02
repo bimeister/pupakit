@@ -15,5 +15,5 @@ export const mdCheckboxOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

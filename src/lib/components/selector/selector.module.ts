@@ -6,6 +6,6 @@ import { SelectorItemComponent } from './components/selector-item/selector-item.
 @NgModule({
   declarations: [SelectorComponent, SelectorItemComponent],
   imports: [SharedModule],
-  exports: [SelectorComponent, SelectorItemComponent]
+  exports: [SelectorComponent, SelectorItemComponent],
 })
 export class SelectorModule {}

@@ -5,7 +5,7 @@ import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum
 import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 @Directive({
-  selector: '[demoThemeController]'
+  selector: '[demoThemeController]',
 })
 export class ThemeControllerDirective implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();

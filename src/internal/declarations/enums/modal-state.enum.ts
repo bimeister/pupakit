@@ -1,5 +1,5 @@
 export enum ModalState {
   Appeared = 'Appeared',
-  Dissapeared = 'Dissapeared',
-  Void = 'Void'
+  Disappeared = 'Disappeared',
+  Void = 'Void',
 }

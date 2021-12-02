@@ -16,5 +16,5 @@ export const mdSunnyIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

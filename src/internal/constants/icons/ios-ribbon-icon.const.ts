@@ -18,5 +18,5 @@ export const iosRibbonIcon: IconDefinition = {
 		C369.7,259.7,366.4,259.3,364.5,261.3z"/>
 </g>
 </svg>
-`
+`,
 };

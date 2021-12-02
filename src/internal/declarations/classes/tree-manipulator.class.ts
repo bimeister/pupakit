@@ -97,10 +97,9 @@ export class TreeManipulator {
   public initialize(): void {
     this.refreshViewPort();
     this.setInitialVisibleRange();
-    this.subscription
-      .add(this.addParentNodesToExpandedOnScrollByRouteEmits())
-      .add(this.refreshViewPortOnExpindedItemsIdsChange())
-      .add(this.restoreExpansionForRecreatedElements());
+    this.subscription.add(this.addParentNodesToExpandedOnScrollByRouteEmits());
+    this.subscription.add(this.refreshViewPortOnExpandedItemsIdsChange());
+    this.subscription.add(this.restoreExpansionForRecreatedElements());
   }
 
   public destroy(): void {
@@ -174,7 +173,7 @@ export class TreeManipulator {
   public refreshViewPort(): void {
     combineLatest([
       this.viewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort))),
-      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort)))
+      this.skeletonViewPortReference$.pipe(filter((viewPort: CdkVirtualScrollViewport) => !isNil(viewPort))),
     ])
       .pipe(take(1))
       .subscribe(([viewPort, skeletonViewPort]: [CdkVirtualScrollViewport, CdkVirtualScrollViewport]) => {
@@ -232,7 +231,7 @@ export class TreeManipulator {
         ),
         map(([nodes, maxItemsLimit]: [FlatTreeItem[], number]) => ({
           start: 0,
-          end: nodes.length < maxItemsLimit ? nodes.length : maxItemsLimit
+          end: nodes.length < maxItemsLimit ? nodes.length : maxItemsLimit,
         }))
       )
       .subscribe((range: ListRange) => {
@@ -241,7 +240,7 @@ export class TreeManipulator {
       });
   }
 
-  private refreshViewPortOnExpindedItemsIdsChange(): Subscription {
+  private refreshViewPortOnExpandedItemsIdsChange(): Subscription {
     return this.expandedItemIds$.subscribe(() => this.refreshViewPort());
   }
 
@@ -274,10 +273,10 @@ export class TreeManipulator {
   private restoreExpansionForRecreatedElements(): Subscription {
     return this.dataSource.currentSlice$
       .pipe(withLatestFrom(this.expandedItemIds$))
-      .subscribe(([treeItems, expandedIds]) => {
+      .subscribe(([treeItems, expandedIds]: [FlatTreeItem[], Set<string>]) => {
         treeItems
-          .filter(item => expandedIds.has(item.id))
-          .forEach(item => {
+          .filter((item: FlatTreeItem) => expandedIds.has(item.id))
+          .forEach((item: FlatTreeItem) => {
             this.treeControl.expand(item);
           });
       });

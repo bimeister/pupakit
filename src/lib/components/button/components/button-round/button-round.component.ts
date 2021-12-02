@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -11,9 +11,9 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
   templateUrl: './button-round.component.html',
   styleUrls: ['./button-round.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonRoundComponent {
+export class ButtonRoundComponent implements OnChanges {
   @Input() public readonly type: ButtonType = 'submit';
   public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('submit');
 
@@ -33,7 +33,7 @@ export class ButtonRoundComponent {
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
-    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null)))
+    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes

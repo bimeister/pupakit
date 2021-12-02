@@ -5,6 +5,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   templateUrl: './select-chips-container.component.html',
   styleUrls: ['./select-chips-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectChipsContainerComponent {}

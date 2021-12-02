@@ -5,12 +5,12 @@ import { LayoutDemoComponent } from './layout-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutDemoComponent
-  }
+    component: LayoutDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class LayoutDemoRoutingModule {}

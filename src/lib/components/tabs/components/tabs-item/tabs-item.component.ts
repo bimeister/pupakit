@@ -4,22 +4,23 @@ import {
   ElementRef,
   Inject,
   Input,
+  OnInit,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
-import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
 import { Nullable } from '@bimeister/utilities';
-import { TabsStateService } from '../../services/tabs-state.service';
 import { TABS_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/tabs-container-state-service.token';
+import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
+import { TabsStateService } from '../../services/tabs-state.service';
 
 @Component({
   selector: 'pupa-tabs-item',
   templateUrl: './tabs-item.component.html',
   styleUrls: ['./tabs-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class TabsItemComponent extends TabsItemBase<TabsStateService> {
+export class TabsItemComponent extends TabsItemBase<TabsStateService> implements OnInit {
   @Input() public name: string = '';
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;

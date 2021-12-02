@@ -17,5 +17,5 @@ export const mdConstructIcon: IconDefinition = {
 		l55.7-55.2C496.5,222.3,496.5,218.7,494.4,216.6z"/>
 </g>
 </svg>
-`
+`,
 };

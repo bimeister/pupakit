@@ -14,5 +14,5 @@ export const mdCloseCircleOutlineIcon: IconDefinition = {
 <polygon points="360,330.9 330.9,360 256,285.1 181.1,360 152,330.9 226.9,256 152,181.1 181.1,152 256,226.9 330.9,152 360,181.1
 	285.1,256 "/>
 </svg>
-`
+`,
 };

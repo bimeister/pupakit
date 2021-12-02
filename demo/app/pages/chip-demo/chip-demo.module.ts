@@ -5,6 +5,6 @@ import { ChipDemoComponent } from './chip-demo.component';
 
 @NgModule({
   declarations: [ChipDemoComponent],
-  imports: [DemoSharedModule, ChipDemoRoutingModule]
+  imports: [DemoSharedModule, ChipDemoRoutingModule],
 })
 export class ChipDemoModule {}

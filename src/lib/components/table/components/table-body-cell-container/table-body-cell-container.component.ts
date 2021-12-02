@@ -7,7 +7,7 @@ import {
   OnChanges,
   ViewContainerRef,
   ViewChild,
-  AfterViewChecked
+  AfterViewChecked,
 } from '@angular/core';
 import { TableTemplatesService } from '../../services/table-templates.service';
 import { isNil, Nullable } from '@bimeister/utilities';
@@ -22,7 +22,7 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
   templateUrl: './table-body-cell-container.component.html',
   styleUrls: ['./table-body-cell-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewChecked {
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) public viewContainerRef?: Nullable<ViewContainerRef>;
@@ -36,7 +36,7 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
   public templateRef: TemplateRef<TableBodyCellContext<T>>;
   public templateContext: TableBodyCellContext<T> = {
     $implicit: null,
-    column: null
+    column: null,
   };
 
   constructor(private readonly tableTemplatesService: TableTemplatesService<T>) {}
@@ -58,7 +58,7 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     this.templateRef = this.tableTemplatesService.getBodyCellTemplateByType(value.definition.type);
     this.templateContext = {
       ...this.templateContext,
-      column: value
+      column: value,
     };
   }
 
@@ -69,7 +69,7 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     }
     this.templateContext = {
       ...this.templateContext,
-      $implicit: value
+      $implicit: value,
     };
   }
 

@@ -17,5 +17,5 @@ export const iosWifiIcon: IconDefinition = {
 		c3.1-3.1,3.2-8,0.2-11.2C300.6,334.1,279.4,324.2,256,324.2z"/>
 </g>
 </svg>
-`
+`,
 };

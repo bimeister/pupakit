@@ -12,5 +12,5 @@ export const mdHelpCircleIcon: IconDefinition = {
 		c46,0,83.2,37.1,83.2,83.1C339.2,266.1,276.8,272,276.8,318z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -16,5 +16,5 @@ export const mdCartIcon: IconDefinition = {
 		C416,396.317,397.281,377.6,374.399,377.6z"/>
 </g>
 </svg>
-`
+`,
 };

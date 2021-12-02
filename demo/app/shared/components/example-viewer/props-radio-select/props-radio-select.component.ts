@@ -5,12 +5,12 @@ import {
   OnChanges,
   OnDestroy,
   TrackByFunction,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { getUuid, isNil } from '@bimeister/utilities';
+import { getUuid, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { asyncScheduler, Observable, Subject, Subscriber } from 'rxjs';
-import { observeOn, shareReplay, takeUntil } from 'rxjs/operators';
+import { observeOn, takeUntil } from 'rxjs/operators';
 import { ComponentChanges } from '../../../../../../src/internal/declarations/interfaces/component-changes.interface';
 import { RadioOption } from '../radio-option';
 
@@ -24,9 +24,9 @@ import { RadioOption } from '../radio-option';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: PropsRadioSelectComponent,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class PropsRadioSelectComponent
   extends Observable<unknown>
@@ -42,13 +42,11 @@ export class PropsRadioSelectComponent
   private readonly valueChanges$: Observable<unknown> = this.formControl.valueChanges.pipe(
     observeOn(asyncScheduler),
     takeUntil(this.unsubscribe$),
-    shareReplay(1)
+    shareReplayWithRefCount()
   );
 
   constructor() {
-    super((subscriber: Subscriber<unknown>) => {
-      return this.valueChanges$.subscribe(subscriber);
-    });
+    super((subscriber: Subscriber<unknown>) => this.valueChanges$.subscribe(subscriber));
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {

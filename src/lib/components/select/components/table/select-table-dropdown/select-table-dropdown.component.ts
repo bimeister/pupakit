@@ -18,9 +18,9 @@ const ANIMATION_DURATION_MS: number = 150;
       state('void', style({ margin: '0', transform: 'translateY(-8px)', opacity: 0 })),
       state('expanded', style({ margin: '4px 0', transform: 'translateY(0)', opacity: 1 })),
       transition('void => expanded', [animate(`${ANIMATION_DURATION_MS}ms ease`)]),
-      transition('expanded => void', [animate(`${ANIMATION_DURATION_MS}ms ease`)])
-    ])
-  ]
+      transition('expanded => void', [animate(`${ANIMATION_DURATION_MS}ms ease`)]),
+    ]),
+  ],
 })
 export class SelectTableDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;

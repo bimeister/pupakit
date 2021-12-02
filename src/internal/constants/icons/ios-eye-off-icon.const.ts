@@ -26,5 +26,5 @@ export const iosEyeOffIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

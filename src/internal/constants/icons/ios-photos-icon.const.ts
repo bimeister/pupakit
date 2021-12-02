@@ -15,5 +15,5 @@ export const iosPhotosIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

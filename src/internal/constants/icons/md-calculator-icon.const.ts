@@ -12,5 +12,5 @@ export const mdCalculatorIcon: IconDefinition = {
 		 M280,240h-48v-48h48V240z M360,416h-48V280h48V416z M360,240h-48v-48h48V240z M360,144H152V96h208V144z"/>
 </g>
 </svg>
-`
+`,
 };

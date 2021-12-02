@@ -7,7 +7,7 @@ import {
   ElementRef,
   TemplateRef,
   ViewContainerRef,
-  HostListener
+  HostListener,
 } from '@angular/core';
 import { TextareaBase } from '../../../../../internal/declarations/classes/abstract/textarea-base.abstract';
 import { ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
@@ -29,7 +29,7 @@ const DELTA_SCROLL_FOR_CLOSE_PX: number = 50;
   templateUrl: './textarea-inline.component.html',
   styleUrls: ['./textarea-inline.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaInlineComponent extends TextareaBase {
   @ViewChild('trigger', { static: true })
@@ -44,7 +44,7 @@ export class TextareaInlineComponent extends TextareaBase {
   public readonly isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly overlayPositions: ConnectionPositionPair[] = [
-    new ConnectionPositionPair({ originX: 'end', originY: 'center' }, { overlayX: 'end', overlayY: 'center' })
+    new ConnectionPositionPair({ originX: 'end', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }),
   ];
 
   public readonly isValueEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => isEmpty(value.trim())));
@@ -127,7 +127,7 @@ export class TextareaInlineComponent extends TextareaBase {
 
     this.currentOverlayRef = this.overlay.create({
       positionStrategy: this.overlay.position().flexibleConnectedTo(trigger).withPositions(this.overlayPositions),
-      width: trigger.clientWidth
+      width: trigger.clientWidth,
     });
     this.currentOverlayRef.attach(portal);
   }
@@ -138,7 +138,7 @@ export class TextareaInlineComponent extends TextareaBase {
     this.currentOverlayRef = this.overlay.create({
       positionStrategy: this.overlay.position().global(),
       width: '100%',
-      hasBackdrop: true
+      hasBackdrop: true,
     });
     this.currentOverlayRef.attach(portal);
   }

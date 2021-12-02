@@ -14,5 +14,5 @@ export const iosCompassIcon: IconDefinition = {
 		C297.1,296.9,296.9,297.1,296.6,297.3z"/>
 </g>
 </svg>
-`
+`,
 };

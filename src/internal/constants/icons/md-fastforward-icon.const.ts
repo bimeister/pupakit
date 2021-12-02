@@ -10,5 +10,5 @@ export const mdFastforwardIcon: IconDefinition = {
 	<path d="M480,256L262.4,110v292L480,256z M32,110v292l217.6-146L32,110z"/>
 </g>
 </svg>
-`
+`,
 };

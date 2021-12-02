@@ -5,7 +5,7 @@ import { DroppableComponent } from '../droppable/droppable.component';
 @Component({
   selector: 'pupa-droppable-trigger',
   templateUrl: './droppable-trigger.component.html',
-  styleUrls: ['./droppable-trigger.component.scss']
+  styleUrls: ['./droppable-trigger.component.scss'],
 })
 export class DroppableTriggerComponent {
   constructor(

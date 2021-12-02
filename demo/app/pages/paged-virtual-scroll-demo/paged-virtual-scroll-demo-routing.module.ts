@@ -5,12 +5,12 @@ import { PagedVirtualScrollDemoComponent } from './paged-virtual-scroll-demo.com
 const routes: Routes = [
   {
     path: '',
-    component: PagedVirtualScrollDemoComponent
-  }
+    component: PagedVirtualScrollDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PagedVirtualScrollDemoRoutingModule {}

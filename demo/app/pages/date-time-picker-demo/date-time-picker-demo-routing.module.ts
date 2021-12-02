@@ -5,12 +5,12 @@ import { DateTimePickerDemoComponent } from './date-time-picker-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DateTimePickerDemoComponent
-  }
+    component: DateTimePickerDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DateTimePickerDemoRoutingModule {}

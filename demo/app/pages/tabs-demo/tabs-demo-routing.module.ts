@@ -9,14 +9,14 @@ const routes: Routes = [
     children: [
       {
         path: '**',
-        component: TabsDemoComponent
-      }
-    ]
-  }
+        component: TabsDemoComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TabsDemoRoutingModule {}

@@ -13,6 +13,6 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [SharedModule,
 @NgModule({
   declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
   imports: IMPORTS,
-  exports: [...EXTERNAL_DIRECTIVES]
+  exports: [...EXTERNAL_DIRECTIVES],
 })
 export class TooltipModule {}

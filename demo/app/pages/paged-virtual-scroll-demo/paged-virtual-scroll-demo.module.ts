@@ -5,6 +5,6 @@ import { PagedVirtualScrollDemoComponent } from './paged-virtual-scroll-demo.com
 
 @NgModule({
   declarations: [PagedVirtualScrollDemoComponent],
-  imports: [DemoSharedModule, PagedVirtualScrollDemoRoutingModule]
+  imports: [DemoSharedModule, PagedVirtualScrollDemoRoutingModule],
 })
 export class PagedVirtualScrollDemoModule {}

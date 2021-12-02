@@ -8,6 +8,6 @@ import { AvatarComponent } from './components/avatar/avatar.component';
   declarations: [AvatarComponent],
   exports: [AvatarComponent],
   imports: [SharedModule, IconModule.forFeature([mdPersonIcon])],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AvatarModule {}

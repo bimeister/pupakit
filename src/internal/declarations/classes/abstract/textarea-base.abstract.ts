@@ -49,9 +49,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
       return maxRows;
     }),
-    map((rowCount: number) => {
-      return this.getHeightPxByRowsCount(rowCount) + TEXTAREA_VERTICAL_PADDINGS_PX;
-    })
+    map((rowCount: number) => this.getHeightPxByRowsCount(rowCount) + TEXTAREA_VERTICAL_PADDINGS_PX)
   );
 
   @Input() public maxLength: Nullable<number> = null;
@@ -64,7 +62,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     this.isDisabled$,
     this.isPatched$,
     this.isValid$,
-    this.isTouched$
+    this.isTouched$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(

@@ -32,12 +32,12 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
     new UnitWidthStyleChangesProcessor(this.domSanitizer);
 
   @Input() public width: string | null = null;
-  // eslint-disable no-input-rename
+  /* eslint-disable @angular-eslint/no-input-rename */
   @Input('width.%') public widthPercents: number | null = null;
   @Input('width.px') public widthPx: number | null = null;
   @Input('width.vw') public widthVw: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
-  // eslint-enable no-input-rename
+  /* eslint-enable @angular-eslint/no-input-rename */
   @Input() public hasMarginLeft: boolean = true;
 
   @HostBinding('style.width') public widthStyle: SafeStyle;

@@ -10,7 +10,7 @@ import { subscribeOutsideAngular } from '../../../../../../src/internal/function
 @Component({
   selector: 'demo-main-page',
   templateUrl: './main-page.component.html',
-  styleUrls: ['./main-page.component.scss']
+  styleUrls: ['./main-page.component.scss'],
 })
 export class MainPageComponent implements OnDestroy {
   @ViewChild('parallax', { read: ElementRef, static: false }) public parallaxElement: ElementRef;

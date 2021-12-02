@@ -19,5 +19,5 @@ export const iosCodeDownloadIcon: IconDefinition = {
 		C331.1,274.7,332.8,271.1,332.8,267.2z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -8,6 +8,6 @@ import { SkeletonComponent } from './components/skeleton/skeleton.component';
 @NgModule({
   imports: [SharedModule],
   declarations: [SkeletonComponent, SkeletonLineComponent, SkeletonGroupComponent],
-  exports: [SkeletonComponent, SkeletonLineComponent, SkeletonGroupComponent]
+  exports: [SkeletonComponent, SkeletonLineComponent, SkeletonGroupComponent],
 })
 export class SkeletonModule {}

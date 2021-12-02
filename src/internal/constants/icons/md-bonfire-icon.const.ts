@@ -28,5 +28,5 @@ export const mdBonfireIcon: IconDefinition = {
 		C316.8,249.7,287.8,278.7,252.1,278.7z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -16,5 +16,5 @@ export const mdFolderIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

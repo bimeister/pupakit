@@ -16,5 +16,5 @@ export const iosTabletPortraitIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

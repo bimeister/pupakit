@@ -17,11 +17,11 @@ export function getPuppeteerSetupVariables(): PuppeteerSetupVariables {
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-dev-shm-usage',
-      '--window-size=1920,1080'
+      '--window-size=1920,1080',
     ],
     ignoreDefaultArguments: ['--disable-extensions'],
     baseUrlCI: BASE_URL_CI,
     baseUrl: BASE_URL,
-    baseKitUrl: BASE_KIT_URL
+    baseKitUrl: BASE_KIT_URL,
   };
 }

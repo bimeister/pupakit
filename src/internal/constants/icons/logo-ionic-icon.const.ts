@@ -18,5 +18,5 @@ export const logoIonicIcon: IconDefinition = {
 		s208-93.3,208-208C464,226,457.7,197,445.3,169.8z"/>
 </g>
 </svg>
-`
+`,
 };

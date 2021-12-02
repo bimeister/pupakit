@@ -6,7 +6,7 @@ import { FlatTreeItem, TreeComponent } from '../../../../src/public-api';
   selector: 'demo-tree',
   styleUrls: ['./tree-demo.component.scss'],
   templateUrl: './tree-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeDemoComponent {
   @ViewChild(TreeComponent) public tree: TreeComponent;
@@ -36,6 +36,6 @@ export class TreeDemoComponent {
     new FlatTreeItem(false, '🐵', 1, null),
     new FlatTreeItem(false, '🙊', 1, null),
     new FlatTreeItem(false, '🙉', 1, null),
-    new FlatTreeItem(false, '🙈', 1, null)
+    new FlatTreeItem(false, '🙈', 1, null),
   ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
 }

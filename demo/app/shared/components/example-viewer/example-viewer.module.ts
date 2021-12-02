@@ -20,7 +20,7 @@ import { RadioGroupModule } from '../../../../../src/lib/components/radio-group/
     PropsCheckboxComponent,
     PropsGroupLabelComponent,
     PropsFormControlDisabledComponent,
-    PropsFormControlValidatorsComponent
+    PropsFormControlValidatorsComponent,
   ],
   imports: [CommonModule, RadioGroupModule, ReactiveFormsModule],
   exports: [
@@ -31,7 +31,7 @@ import { RadioGroupModule } from '../../../../../src/lib/components/radio-group/
     PropsCheckboxComponent,
     PropsGroupLabelComponent,
     PropsFormControlDisabledComponent,
-    PropsFormControlValidatorsComponent
-  ]
+    PropsFormControlValidatorsComponent,
+  ],
 })
 export class ExampleViewerModule {}

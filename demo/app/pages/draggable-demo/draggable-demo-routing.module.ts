@@ -5,12 +5,12 @@ import { DraggableDemoComponent } from './draggable-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DraggableDemoComponent
-  }
+    component: DraggableDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DraggableDemoRoutingModule {}

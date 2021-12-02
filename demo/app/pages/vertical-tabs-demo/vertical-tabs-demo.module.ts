@@ -5,6 +5,6 @@ import { VerticalTabsDemoComponent } from './vertical-tabs-demo.component';
 
 @NgModule({
   declarations: [VerticalTabsDemoComponent],
-  imports: [DemoSharedModule, VerticalTabsDemoRoutingModule]
+  imports: [DemoSharedModule, VerticalTabsDemoRoutingModule],
 })
 export class VerticalTabsDemoModule {}

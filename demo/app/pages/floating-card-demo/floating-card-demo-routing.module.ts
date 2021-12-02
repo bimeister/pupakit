@@ -5,12 +5,12 @@ import { FloatingCardDemoComponent } from './floating-card-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: FloatingCardDemoComponent
-  }
+    component: FloatingCardDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class FloatingCardDemoRoutingModule {}

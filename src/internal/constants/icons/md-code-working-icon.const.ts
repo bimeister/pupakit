@@ -12,5 +12,5 @@ export const mdCodeWorkingIcon: IconDefinition = {
 	<path d="M155.6,276h40v-40h-40V276z M356.4,236h-40v40h40V236z M236,276h40v-40h-40V276z"/>
 </g>
 </svg>
-`
+`,
 };

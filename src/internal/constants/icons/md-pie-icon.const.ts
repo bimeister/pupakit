@@ -12,5 +12,5 @@ export const mdPieIcon: IconDefinition = {
 		C370.5,84.3,331,67.9,288,64.6V288H64.6C67.9,331,84.3,370.5,109.8,402.2z"/>
 </g>
 </svg>
-`
+`,
 };

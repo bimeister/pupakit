@@ -18,7 +18,7 @@ const AVATAR_URL: string =
   templateUrl: './avatar-demo.component.html',
   styleUrls: ['./avatar-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarDemoComponent {
   public readonly usernameControl: FormControl = new FormControl('');
@@ -28,29 +28,29 @@ export class AvatarDemoComponent {
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Large',
-      value: 'large'
+      value: 'large',
     },
     {
       caption: 'Medium',
-      value: 'medium'
+      value: 'medium',
     },
     {
       caption: 'Small',
       value: 'small',
-      isDefault: true
-    }
+      isDefault: true,
+    },
   ];
 
   public readonly borderOptions: RadioOption[] = [
     {
       caption: 'With border',
-      value: true
+      value: true,
     },
     {
       caption: 'No border',
       value: false,
-      isDefault: true
-    }
+      isDefault: true,
+    },
   ];
 
   public setAvatar(): void {

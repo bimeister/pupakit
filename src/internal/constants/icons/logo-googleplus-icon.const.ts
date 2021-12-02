@@ -14,5 +14,5 @@ export const logoGoogleplusIcon: IconDefinition = {
 	<polygon points="512,224 455,224 455,167 414,167 414,224 357,224 357,265 414,265 414,322 455,322 455,265 512,265 	"/>
 </g>
 </svg>
-`
+`,
 };

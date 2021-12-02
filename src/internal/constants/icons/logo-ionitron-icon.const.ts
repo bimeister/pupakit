@@ -29,5 +29,5 @@ export const logoIonitronIcon: IconDefinition = {
 		C165.3,69.6,165.4,69.8,165.5,70z"/>
 </g>
 </svg>
-`
+`,
 };

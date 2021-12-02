@@ -14,5 +14,5 @@ export const iosMicIcon: IconDefinition = {
 		c54.1-6.9,96-53.2,96-109.1v-69C366,198.3,359.7,192,352,192z"/>
 </g>
 </svg>
-`
+`,
 };

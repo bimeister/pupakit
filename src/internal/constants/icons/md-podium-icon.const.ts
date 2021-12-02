@@ -12,5 +12,5 @@ export const mdPodiumIcon: IconDefinition = {
 	<rect x="352" y="288" width="128" height="128"/>
 </g>
 </svg>
-`
+`,
 };

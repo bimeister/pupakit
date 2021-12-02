@@ -17,7 +17,7 @@ export class Modal<ComponentT> implements PortalLayer {
   private readonly overlayRef: OverlayRef = this.overlay.create({
     hasBackdrop: true,
     backdropClass: this.getBackdropClass(),
-    positionStrategy: this.getPositionStrategy()
+    positionStrategy: this.getPositionStrategy(),
   });
 
   private readonly modalRef: ModalRef = new ModalRef(this.id, this.overlayRef, this.config);
@@ -72,8 +72,8 @@ export class Modal<ComponentT> implements PortalLayer {
           originX: 'start',
           originY: 'top',
           overlayX: this.config.overlayX ?? 'start',
-          overlayY: this.config.overlayY ?? 'top'
-        }
+          overlayY: this.config.overlayY ?? 'top',
+        },
       ]);
   }
 
@@ -84,10 +84,10 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   private createModalContainerInjector(): PortalInjector {
-    const contentComponentPortal: ComponentPortal<ComponentT> = this.createModalContentCOmponentPortal();
+    const contentComponentPortal: ComponentPortal<ComponentT> = this.createModalContentComponentPortal();
 
     const modalContainerData: ModalContainerData<ComponentT> = {
-      contentComponentPortal
+      contentComponentPortal,
     };
 
     const injectionTokens: WeakMap<object, any> = new WeakMap();
@@ -96,7 +96,7 @@ export class Modal<ComponentT> implements PortalLayer {
     return new PortalInjector(this.injector, injectionTokens);
   }
 
-  private createModalContentCOmponentPortal(): ComponentPortal<ComponentT> {
+  private createModalContentComponentPortal(): ComponentPortal<ComponentT> {
     const modalContentInjector: PortalInjector = this.createModalContentInjector();
 
     return new ComponentPortal(this.component, null, modalContentInjector);
@@ -114,13 +114,13 @@ export class Modal<ComponentT> implements PortalLayer {
     if (isNil(this.config.injector)) {
       return Injector.create({
         providers: this.config.providers,
-        parent: this.injector
+        parent: this.injector,
       });
     }
 
     return Injector.create({
       providers: this.config.providers,
-      parent: this.config.injector
+      parent: this.config.injector,
     });
   }
 

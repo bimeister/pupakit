@@ -5,7 +5,7 @@ import {
   OnDestroy,
   QueryList,
   TemplateRef,
-  TrackByFunction
+  TrackByFunction,
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -67,13 +67,11 @@ export abstract class TabsContentBase<S extends TabsServiceBase> implements OnCh
           return;
         }
 
-        const templates: TabTemplateRef[] = this.tabTemplates.map((template: ContentTemplateNameDirective) => {
-          return {
-            templateRef: template.templateRef,
-            name: template.getTemplateName(),
-            isActive: template.getTemplateName() === activeTabName
-          };
-        });
+        const templates: TabTemplateRef[] = this.tabTemplates.map((template: ContentTemplateNameDirective) => ({
+          templateRef: template.templateRef,
+          name: template.getTemplateName(),
+          isActive: template.getTemplateName() === activeTabName,
+        }));
 
         this.nonDestroyableTemplateRefs$.next(templates);
       }

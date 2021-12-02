@@ -22,5 +22,5 @@ export const logoFoursquareIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

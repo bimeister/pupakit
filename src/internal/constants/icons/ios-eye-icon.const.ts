@@ -16,5 +16,5 @@ export const iosEyeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

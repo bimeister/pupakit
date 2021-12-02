@@ -16,7 +16,7 @@ const COMPONENTS: Type<unknown>[] = [
   BreadcrumbsComponent,
   BreadcrumbComponent,
   BreadcrumbSeparatorComponent,
-  BreadcrumbUnfitTriggerComponent
+  BreadcrumbUnfitTriggerComponent,
 ];
 const DIRECTIVES: Type<unknown>[] = [PupaBreadcrumbTemplateDirective];
 
@@ -31,8 +31,8 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     IconModule.forFeature([appChevronRightIcon]),
     ButtonModule,
     DropdownMenuModule,
-    TooltipModule
+    TooltipModule,
   ],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class BreadcrumbsModule {}

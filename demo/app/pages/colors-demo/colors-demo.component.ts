@@ -10,7 +10,7 @@ import { Alert, AlertsService, ClientUiStateHandlerService } from '../../../../s
   templateUrl: './colors-demo.component.html',
   styleUrls: ['./colors-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ColorsDemoComponent {
   public readonly colorsList: string[] = [
@@ -54,7 +54,7 @@ export class ColorsDemoComponent {
     'yellow-n300',
     'yellow-n400',
     'yellow-n500',
-    'yellow-n550'
+    'yellow-n550',
   ];
   public readonly breakpointIsXsOrSm$: Observable<boolean> = this.clientUiHandlerService.breakpoint$.pipe(
     map((breakpoint: string) => ['xs', 'sm'].includes(breakpoint)),
@@ -78,7 +78,7 @@ export class ColorsDemoComponent {
 
   public getBackground(color: string): Record<string, string> {
     return {
-      background: `var(--color_${color})`
+      background: `var(--color_${color})`,
     };
   }
 
@@ -92,7 +92,7 @@ export class ColorsDemoComponent {
       id: null,
       text,
       type: 'success',
-      needToBeClosed: false
+      needToBeClosed: false,
     };
     this.alertsService.create(alert).subscribe();
   }

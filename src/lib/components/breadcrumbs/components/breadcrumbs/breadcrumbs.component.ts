@@ -12,7 +12,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewChildren,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable, resizeObservable } from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, of, Subscription } from 'rxjs';
@@ -33,7 +33,7 @@ const CAPACITY_CALCULATING_DEBOUNCE_TIME_MS: number = 200;
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() public breadcrumbs: Breadcrumb[] = [];
@@ -152,7 +152,10 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
     return combineLatest([this.breadcrumbsContainerWidthPx$, this.breadcrumbWidthList$])
       .pipe(
         map(([containerWidth, widthList]: [number, number[]]) => {
-          const sumOfWidths: number = widthList.reduce((partialSum, currentWidth) => partialSum + currentWidth, 0);
+          const sumOfWidths: number = widthList.reduce(
+            (partialSum: number, currentWidth: number) => partialSum + currentWidth,
+            0
+          );
           return sumOfWidths <= containerWidth;
         })
       )
@@ -167,7 +170,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
       this.breadcrumbWidthList$.pipe(filterNotEmpty()),
       this.isMobile$,
       this.unfitBreadcrumbTriggerWidthPx$.pipe(filterNotNil()),
-      this.rootBreadcrumb$
+      this.rootBreadcrumb$,
     ])
       .pipe(
         observeOn(animationFrameScheduler),
@@ -180,7 +183,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
             breadcrumbWidthList,
             isMobile,
             unfitBreadcrumbTriggerWidthPx,
-            rootBreadcrumb
+            rootBreadcrumb,
           ]: [Breadcrumb[], number, boolean, number[], boolean, number, Nullable<Breadcrumb>]) =>
             new BreadcrumbsProducer({
               breadcrumbs,
@@ -189,7 +192,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
               breadcrumbWidthList,
               isMobile,
               unfitBreadcrumbTriggerWidthPx,
-              rootBreadcrumb
+              rootBreadcrumb,
             }).getBreadcrumbsParts()
         )
       )

@@ -21,5 +21,5 @@ export const mdSearchIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

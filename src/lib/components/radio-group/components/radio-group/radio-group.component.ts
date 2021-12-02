@@ -6,7 +6,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { isNil } from '@bimeister/utilities';
@@ -23,7 +23,7 @@ type OnTouchedCallback = VoidFunction;
   templateUrl: './radio-group.component.html',
   styleUrls: ['./radio-group.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
@@ -58,7 +58,7 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, Aft
 
   public writeValue(value: T): void {
     this.internalControl.setValue(value, {
-      emitEvent: true
+      emitEvent: true,
     });
 
     this.triggerChangeDetector();

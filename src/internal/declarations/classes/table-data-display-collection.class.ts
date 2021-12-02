@@ -101,7 +101,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> = combineLatest([
     this.data$,
     this.virtualScrollDataSource.listRange$,
-    this.trackBy$
+    this.trackBy$,
   ]).pipe(
     map(([data, listRange, trackBy]: [T[], ListRange, TrackByFunction<T>]) => {
       const newColumnIdToColumnMap: Map<string, TableBodyRow<T>> = new Map<string, TableBodyRow<T>>();
@@ -153,7 +153,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     this.bodyRowHeightPx$.next(value);
   }
 
-  public static readonly trackBy: TrackByFunction<any> = <T>(index: number, dataItem: T): string => {
+  public static readonly trackBy: TrackByFunction<any> = <U>(index: number, dataItem: U): string => {
     if (isNil(dataItem)) {
       return `${index}__null`;
     }

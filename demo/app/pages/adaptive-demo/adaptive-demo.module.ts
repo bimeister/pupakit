@@ -23,7 +23,7 @@ const EXAMPLES: Type<unknown>[] = [
   AdaptiveExample6Component,
   AdaptiveExample7Component,
   AdaptiveExample8Component,
-  AdaptiveExample9Component
+  AdaptiveExample9Component,
 ];
 const COMPONENTS: Type<unknown>[] = [AdaptiveDemoComponent, ...EXAMPLES];
 
@@ -31,6 +31,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [AdaptiveDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule]
+  imports: [AdaptiveDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule],
 })
 export class AdaptiveDemoModule {}

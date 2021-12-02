@@ -18,5 +18,5 @@ export const iosChatbubblesIcon: IconDefinition = {
 		C326.9,390.1,322.7,391.4,318.5,392.5z"/>
 </g>
 </svg>
-`
+`,
 };

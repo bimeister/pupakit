@@ -8,7 +8,7 @@ import {
   Input,
   OnDestroy,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
@@ -21,12 +21,12 @@ const OFFSET_TOP_PX: number = 4;
   selector: 'pupa-droppable-legacy',
   templateUrl: './droppable-legacy.component.html',
   styleUrls: ['./droppable-legacy.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   @ViewChild('dropdown', { static: false }) public dropdownRef: ElementRef<HTMLDivElement>;
   public get dropdown(): HTMLDivElement | null {
-    return this.dropdownRef && this.dropdownRef.nativeElement ? this.dropdownRef.nativeElement : null;
+    return !isNil(this.dropdownRef) && !isNil(this.dropdownRef.nativeElement) ? this.dropdownRef.nativeElement : null;
   }
 
   @Input() public anchor: HTMLElement;
@@ -64,7 +64,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
 
     this.anchorOnClickHandlerUnlistener = this.renderer.listen(this.anchor, 'click', this.anchorOnClickHandler);
 
-    if (this.positionChange$) {
+    if (!isNil(this.positionChange$)) {
       this.subscription.add(this.positionChange$.subscribe(() => globalThis.requestAnimationFrame(this.checkPosition)));
     }
     this.checkPosition();
@@ -122,7 +122,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   }
 
   public readonly checkPosition = (): void => {
-    if (!this.anchor || !this.dropdown) {
+    if (isNil(this.anchor) || isNil(this.dropdown)) {
       return;
     }
 
@@ -137,7 +137,7 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   };
 
   private setMaxWidth(): void {
-    if (this.maxWidth) {
+    if (!isNil(this.maxWidth)) {
       this.renderer.setStyle(this.dropdown, 'maxWidth', `${this.maxWidth}px`);
       return;
     }
@@ -158,12 +158,12 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
 
     switch (this.horizontalPosition) {
       case 'right':
-        this.leftPx = this.getRightHorisontalPosition();
+        this.leftPx = this.getRightHorizontalPosition();
         break;
       case 'left':
       default:
         this.leftPx =
-          dropDownRight < window.innerWidth ? this.getLeftHorisontalPosition() : this.getRightHorisontalPosition();
+          dropDownRight < window.innerWidth ? this.getLeftHorizontalPosition() : this.getRightHorizontalPosition();
     }
   }
 
@@ -175,11 +175,11 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
     return this.anchorClientRect.top + this.anchorClientRect.height - this.dropdownClientRect.height;
   }
 
-  private getRightHorisontalPosition(): number {
+  private getRightHorizontalPosition(): number {
     return this.anchorClientRect.left + this.anchorClientRect.width - this.dropdown.offsetWidth;
   }
 
-  private getLeftHorisontalPosition(): number {
+  private getLeftHorizontalPosition(): number {
     return this.anchorClientRect.left;
   }
 }

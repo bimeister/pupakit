@@ -4,7 +4,7 @@ import {
   Component,
   ContentChild,
   Inject,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
@@ -17,7 +17,7 @@ import { DrawerLayoutFooterComponent } from '../drawer-layout-footer/drawer-layo
   templateUrl: './drawer-layout.component.html',
   styleUrls: ['./drawer-layout.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutComponent implements AfterContentInit {
   @ContentChild(DrawerLayoutFooterComponent) public footerComponent: Nullable<DrawerLayoutFooterComponent>;

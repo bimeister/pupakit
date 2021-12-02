@@ -3,7 +3,7 @@ import {
   FlexibleConnectedPositionStrategy,
   Overlay,
   OverlayConfig,
-  OverlayRef
+  OverlayRef,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementRef, Injectable, Injector, OnDestroy, TemplateRef } from '@angular/core';
@@ -22,7 +22,7 @@ export class TooltipService implements OnDestroy {
 
   private readonly mouseOverTooltip$: Observable<boolean> = combineLatest([
     this.mouseOverTrigger$.pipe(distinctUntilChanged()),
-    this.mouseOverContent$.pipe(distinctUntilChanged())
+    this.mouseOverContent$.pipe(distinctUntilChanged()),
   ]).pipe(
     debounceTime(0),
     map(([mouseOverTrigger, mouseOverContent]: [boolean, boolean]) => mouseOverTrigger || mouseOverContent)
@@ -61,9 +61,7 @@ export class TooltipService implements OnDestroy {
     new BehaviorSubject<Nullable<FlexibleConnectedPositionStrategy>>(null);
   public readonly tooltipPosition$: Observable<ConnectedOverlayPositionChange> = this.tooltipPositionStrategy$.pipe(
     filterNotNil(),
-    switchMap((positionStrategy: FlexibleConnectedPositionStrategy) => {
-      return positionStrategy.positionChanges;
-    }),
+    switchMap((positionStrategy: FlexibleConnectedPositionStrategy) => positionStrategy.positionChanges),
     shareReplayWithRefCount()
   );
 
@@ -132,7 +130,7 @@ export class TooltipService implements OnDestroy {
       .pipe(take(1), filterNotNil())
       .subscribe((positionStrategy: FlexibleConnectedPositionStrategy) => {
         const overlayConfig: OverlayConfig = new OverlayConfig({
-          positionStrategy
+          positionStrategy,
         });
         const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
         this.overlayRef$.next(overlayRef);
@@ -180,9 +178,9 @@ export class TooltipService implements OnDestroy {
       providers: [
         {
           provide: TooltipService,
-          useValue: this
-        }
-      ]
+          useValue: this,
+        },
+      ],
     });
     return new ComponentPortal(TooltipContentComponent, null, portalInjector);
   }

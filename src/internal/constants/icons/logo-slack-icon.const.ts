@@ -23,5 +23,5 @@ export const logoSlackIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

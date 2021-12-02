@@ -6,6 +6,6 @@ import { CounterComponent } from './components/chip/counter.component';
 @NgModule({
   declarations: [CounterComponent],
   imports: [SharedModule],
-  exports: [CounterComponent]
+  exports: [CounterComponent],
 })
 export class CounterModule {}

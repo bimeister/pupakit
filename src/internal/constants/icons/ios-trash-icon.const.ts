@@ -15,5 +15,5 @@ export const iosTrashIcon: IconDefinition = {
 		C394,100.4,381.6,92,364,92z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -4,7 +4,7 @@ import {
   ChangeDetectionStrategy,
   ContentChild,
   AfterContentInit,
-  Input
+  Input,
 } from '@angular/core';
 import { TableHeaderCellTemplateDirective } from '../../directives/table-header-cell-template.directive';
 import { TableBodyCellTemplateDirective } from '../../directives/table-cell-template.directive';
@@ -15,7 +15,7 @@ import { TableTemplatesService } from '../../services/table-templates.service';
   templateUrl: './table-column-template.component.html',
   styleUrls: ['./table-column-template.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableColumnTemplateComponent<T> implements AfterContentInit {
   @ContentChild(TableHeaderCellTemplateDirective) public tableHeaderCellTemplate: TableHeaderCellTemplateDirective;
@@ -28,7 +28,7 @@ export class TableColumnTemplateComponent<T> implements AfterContentInit {
   public ngAfterContentInit(): void {
     this.tableTemplatesService.registerTemplates(this.columnType, {
       headerCell: this.tableHeaderCellTemplate?.templateRef,
-      bodyCell: this.tableBodyCellTemplate?.templateRef
+      bodyCell: this.tableBodyCellTemplate?.templateRef,
     });
   }
 }

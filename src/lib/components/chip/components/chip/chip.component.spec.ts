@@ -11,7 +11,7 @@ const {
   slowMo: SLOW_MO,
   launchBrowserArguments: LAUNCH_BROWSER_ARGUMENTS,
   ignoreDefaultArguments: IGNORE_DEFAULT_ARGUMENTS,
-  baseKitUrl: BASE_KIT_URL
+  baseKitUrl: BASE_KIT_URL,
 }: PuppeteerSetupVariables = getPuppeteerSetupVariables();
 const SCREEN_SHOT_PATH: string = `${SCREEN_SHOTS_PATH}/chip.screenshot.png`;
 const VIEWPORT: Viewport = { width: 1920, height: 1080 };
@@ -27,7 +27,7 @@ describe('chip.component.ts', () => {
         defaultViewport: VIEWPORT,
         slowMo: SLOW_MO,
         args: LAUNCH_BROWSER_ARGUMENTS,
-        ignoreDefaultArgs: IGNORE_DEFAULT_ARGUMENTS
+        ignoreDefaultArgs: IGNORE_DEFAULT_ARGUMENTS,
       })
     )
       .pipe(

@@ -15,14 +15,14 @@ const BASE_REQUEST_PATH: string = 'drawer-demo/examples';
   selector: 'demo-drawer-demo',
   templateUrl: './drawer-demo.component.html',
   styleUrls: ['./drawer-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerDemoComponent {
   public readonly example1Content: Record<string, string> = {
     'drawer-layout-example-1.component.html': `${BASE_REQUEST_PATH}/example-1/drawer-layout-example-1/drawer-layout-example-1.component.html`,
     'drawer-layout-example-1.component.ts': `${BASE_REQUEST_PATH}/example-1/drawer-layout-example-1/drawer-layout-example-1.component.ts`,
     'drawer-trigger-example-1.component.html': `${BASE_REQUEST_PATH}/example-1/drawer-trigger-example-1/drawer-trigger-example-1.component.html`,
-    'drawer-trigger-example-1.component.ts': `${BASE_REQUEST_PATH}/example-1/drawer-trigger-example-1/drawer-trigger-example-1.component.ts`
+    'drawer-trigger-example-1.component.ts': `${BASE_REQUEST_PATH}/example-1/drawer-trigger-example-1/drawer-trigger-example-1.component.ts`,
   };
 
   public readonly formGroup: FormGroup = new FormGroup({
@@ -31,18 +31,18 @@ export class DrawerDemoComponent {
     isBackdropTransparent: new FormControl(false),
     hasPadding: new FormControl(true),
     float: new FormControl('right'),
-    isFullscreen: new FormControl(false)
+    isFullscreen: new FormControl(false),
   });
 
   public readonly floatOptions: RadioOption[] = [
     {
       caption: 'Right',
-      value: 'right'
+      value: 'right',
     },
     {
       caption: 'Left',
-      value: 'left'
-    }
+      value: 'left',
+    },
   ];
 
   constructor(
@@ -61,10 +61,10 @@ export class DrawerDemoComponent {
         providers: [
           {
             provide: DRAWER_DATA_TOKEN,
-            useValue: [1, 2, 3, 4]
-          }
+            useValue: [1, 2, 3, 4],
+          },
         ],
-        theme
+        theme,
       });
     });
   }

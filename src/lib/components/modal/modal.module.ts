@@ -25,7 +25,7 @@ import { ScrollableModule } from '../scrollable/scrollable.module';
     ModalLayoutFooterComponent,
     ModalLayoutActionComponent,
     ModalLayoutTitleComponent,
-    ModalLayoutCloseButtonComponent
+    ModalLayoutCloseButtonComponent,
   ],
   imports: [SharedModule, IconButtonModule, OverlayModule, PortalModule, ScrollableModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -39,7 +39,7 @@ import { ScrollableModule } from '../scrollable/scrollable.module';
     ModalLayoutCloseButtonComponent,
     ModalDraggerComponent,
     OverlayModule,
-    PortalModule
-  ]
+    PortalModule,
+  ],
 })
 export class ModalModule {}

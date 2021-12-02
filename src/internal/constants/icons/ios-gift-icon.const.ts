@@ -16,5 +16,5 @@ export const iosGiftIcon: IconDefinition = {
 	<path d="M440,218H270v262h146c17.6,0,32-14.4,32-32V226C448,221.6,444.4,218,440,218z"/>
 </g>
 </svg>
-`
+`,
 };

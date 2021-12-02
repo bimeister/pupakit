@@ -11,8 +11,8 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   providers: [
     {
       provide: BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN,
-      useClass: ButtonGroupStateService
-    }
-  ]
+      useClass: ButtonGroupStateService,
+    },
+  ],
 })
 export class ButtonGroupContainerComponent {}

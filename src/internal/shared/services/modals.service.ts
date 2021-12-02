@@ -10,7 +10,7 @@ import { Position } from '../../declarations/types/position.type';
 import { PortalLayersService } from './portal-layers.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ModalsService {
   protected readonly modalRefs: Map<string, ModalRef<unknown>> = new Map();
@@ -46,7 +46,7 @@ export class ModalsService {
     return {
       id: modal.id,
       closed$: modalRef.closed$,
-      positionUpdated$: modalRef.positionUpdated$
+      positionUpdated$: modalRef.positionUpdated$,
     };
   }
 

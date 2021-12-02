@@ -6,7 +6,7 @@ import { BadgeSize } from '../../../../../internal/declarations/types/badge-size
   templateUrl: './badge-marker.component.html',
   styleUrls: ['./badge-marker.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeMarkerComponent {
   @Input() public readonly size: BadgeSize = 'medium';

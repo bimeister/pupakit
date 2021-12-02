@@ -14,5 +14,5 @@ export const iosWaterIcon: IconDefinition = {
 		C366,368.9,321.2,410.7,266,410.7z"/>
 </g>
 </svg>
-`
+`,
 };

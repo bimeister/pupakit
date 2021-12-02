@@ -4,6 +4,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'demo-loader',
   styleUrls: ['./rating-demo.component.scss'],
   templateUrl: './rating-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingDemoComponent {}

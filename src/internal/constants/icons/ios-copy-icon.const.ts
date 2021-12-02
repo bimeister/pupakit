@@ -15,5 +15,5 @@ export const iosCopyIcon: IconDefinition = {
 		C130.4,444,116,429.6,116,412z"/>
 </g>
 </svg>
-`
+`,
 };

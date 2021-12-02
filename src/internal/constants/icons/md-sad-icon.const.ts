@@ -18,5 +18,5 @@ export const mdSadIcon: IconDefinition = {
 		S165.518,235.2,183.2,235.2z"/>
 </g>
 </svg>
-`
+`,
 };

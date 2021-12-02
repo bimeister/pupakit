@@ -17,7 +17,7 @@ import {
   Renderer2,
   TemplateRef,
   TrackByFunction,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { filterNotNil, getClampedValue, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import {
@@ -30,7 +30,7 @@ import {
   ReplaySubject,
   Subject,
   Subscription,
-  timer
+  timer,
 } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -58,20 +58,18 @@ const DEFAULT_TRACK_BY_FUNCTION: TrackByFunction<FlatTreeItem> = (index: number,
   const { id, isExpandable, level, name }: FlatTreeItem = item;
   return `${index}__${id}_${isExpandable}_${level}_${name}`;
 };
-const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean => {
-  return !isNil(node) && node.isExpandable && !node.isElement;
-};
+const NODE_HAS_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
+  !isNil(node) && node.isExpandable && !node.isElement;
 const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, node: FlatTreeItem): boolean =>
   !isNil(node) && !node.isExpandable && !node.isElement;
-const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean => {
-  return !isNil(element) && !element.isExpandable && element.isElement;
-};
+const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean =>
+  !isNil(element) && !element.isExpandable && element.isElement;
 const TREE_ITEM_SIZE_PX: number = 28;
 @Component({
   selector: 'pupa-tree',
   templateUrl: './tree.component.html',
   styleUrls: ['./tree.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDestroy {
   public readonly hasChild: CdkTreeNodeDefWhen<FlatTreeItem> = NODE_HAS_CHILD_COMPARATOR;
@@ -166,7 +164,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   /** @deprecated mutable object */
   private draggableElementBoundingBox: DOMRect | null = null;
 
-  private draggableExpandableDescendands: Uuid[] = [];
+  private draggableExpandableDescendants: Uuid[] = [];
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -179,7 +177,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         const dataOrigin: TreeManipulatorDataOrigin = {
           type: this.type,
           flatDataOrigin: this.flatDataOrigin$,
-          hideRoot: this.hideRoot$
+          hideRoot: this.hideRoot$,
         };
         this.manipulatorDataOrigin = dataOrigin;
         break;
@@ -190,7 +188,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
           type: this.type,
           treeElementsOrigin: this.treeElementsOrigin$,
           treeNodesOrigin: this.treeNodesOrigin$,
-          hideRoot: this.hideRoot$
+          hideRoot: this.hideRoot$,
         };
         this.manipulatorDataOrigin = dataOrigin;
         break;
@@ -199,7 +197,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       case TreeType.Custom: {
         const dataOrigin: TreeManipulatorDataOrigin = {
           type: this.type,
-          hideRoot: this.hideRoot$
+          hideRoot: this.hideRoot$,
         };
         this.manipulatorDataOrigin = dataOrigin;
         break;
@@ -323,7 +321,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.draggableNode = treeNode;
     this.mouseDownPosition = {
       left: event.screenX,
-      top: event.screenY
+      top: event.screenY,
     };
     if (event.target instanceof HTMLElement) {
       this.draggableElementBoundingBox = event.target.getBoundingClientRect();
@@ -355,7 +353,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     if (this.draggingHasStarted && !isNil(this.dropNode)) {
       this.dropped.emit({
         draggedElement: this.draggableNode,
-        droppedElement: this.dropNode
+        droppedElement: this.dropNode,
       });
     }
 
@@ -365,7 +363,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     this.mouseDownPosition = null;
     this.draggableElementBoundingBox = null;
     this.scrollDirection = null;
-    this.draggableExpandableDescendands = [];
+    this.draggableExpandableDescendants = [];
   }
 
   public mouseEnter(node: FlatTreeItem): void {
@@ -383,7 +381,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
   }
 
   public canDrop(node: FlatTreeItem): boolean {
-    return node.isExpandable && !this.draggableExpandableDescendands.includes(node.id);
+    return node.isExpandable && !this.draggableExpandableDescendants.includes(node.id);
   }
 
   public mouseLeave(): void {
@@ -397,7 +395,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   private startDragging(): void {
     this.setupWidthForDraggableElement();
-    this.setupDraggableExpandableDescendands();
+    this.setupDraggableExpandableDescendants();
   }
 
   private setupWidthForDraggableElement(): void {
@@ -412,11 +410,12 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
       });
   }
 
-  private setupDraggableExpandableDescendands(): void {
+  private setupDraggableExpandableDescendants(): void {
     this.manipulator.rawData$.pipe(take(1)).subscribe((treeItems: FlatTreeItem[]) => {
       const targetLevel: number = this.draggableNode?.level ?? 0;
 
-      let currentIndex: number = treeItems.findIndex(dataPoint => dataPoint.id === this.draggableNode?.id) + 1;
+      let currentIndex: number =
+        treeItems.findIndex((dataPoint: FlatTreeItem) => dataPoint.id === this.draggableNode?.id) + 1;
       const endOfListNotReached = (): boolean => treeItems.length !== currentIndex;
       const targetLevelNotReached = (): boolean => treeItems[currentIndex].level !== targetLevel;
       const result: Uuid[] = [this.draggableNode?.id];
@@ -429,21 +428,21 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         currentIndex++;
       }
 
-      this.draggableExpandableDescendands = result;
+      this.draggableExpandableDescendants = result;
     });
   }
 
   private updateDraggablePosition(screenX: number, screenY: number): void {
     const draggableElementPositionShift: Position = {
       left: this.mouseDownPosition.left - this.draggableElementBoundingBox.left,
-      top: this.mouseDownPosition.top - this.draggableElementBoundingBox.top
+      top: this.mouseDownPosition.top - this.draggableElementBoundingBox.top,
     };
 
     const bottomBorderPositionY: number =
       this.host.nativeElement.clientHeight - this.draggableElementBoundingBox.height;
     const draggableElementPosition: Position = {
       left: screenX - this.draggableElementBoundingBox.left - draggableElementPositionShift.left,
-      top: getClampedValue(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY)
+      top: getClampedValue(screenY - draggableElementPositionShift.top, 0, bottomBorderPositionY),
     };
 
     const isTopBorderReached: boolean = draggableElementPosition.top <= this.draggableElementBoundingBox.height;
@@ -552,8 +551,8 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
     const expandDelay: number = 1000;
     return this.expandNodeWithDelay$
       .pipe(
-        debounce(node => (isNil(node) ? NEVER : timer(expandDelay))),
-        filter(nodeToExpand => !this.treeControl.isExpanded(nodeToExpand))
+        debounce((node: FlatTreeItem) => (isNil(node) ? NEVER : timer(expandDelay))),
+        filter((nodeToExpand: FlatTreeItem) => !this.treeControl.isExpanded(nodeToExpand))
       )
       .subscribe((nodeToExpand: FlatTreeItem) => {
         this.treeControl.expand(nodeToExpand);
@@ -567,7 +566,7 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
         map((filteredSource: FlatTreeItem[]) => (isNil(filteredSource) ? 0 : filteredSource.length)),
         distinctUntilChanged()
       )
-      .subscribe(countOfVisibleElements => this.visibleElementsCountChanged.emit(countOfVisibleElements));
+      .subscribe((countOfVisibleElements: number) => this.visibleElementsCountChanged.emit(countOfVisibleElements));
   }
 
   private scrollViewportDuringDragging(): Subscription {

@@ -16,5 +16,5 @@ export const mdLockIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

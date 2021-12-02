@@ -9,6 +9,6 @@ import { mdStarOutlineIcon } from '../../../internal/constants/icons/md-star-out
 @NgModule({
   declarations: [RatingComponent],
   imports: [SharedModule, IconModule.forFeature([mdStarIcon, mdStarOutlineIcon])],
-  exports: [RatingComponent]
+  exports: [RatingComponent],
 })
 export class RatingModule {}

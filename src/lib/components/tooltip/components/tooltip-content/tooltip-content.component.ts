@@ -8,7 +8,7 @@ import {
   Injector,
   OnDestroy,
   TemplateRef,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterFalsy, filterNotNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription, zip } from 'rxjs';
@@ -28,9 +28,9 @@ const ANIMATION: string = `200ms ease-in-out`;
     trigger('tooltipShow', [
       state('void', style({ opacity: 0 })),
       state('enter', style({ opacity: 1 })),
-      transition('* => *', animate(ANIMATION))
-    ])
-  ]
+      transition('* => *', animate(ANIMATION)),
+    ]),
+  ],
 })
 export class TooltipContentComponent implements OnDestroy {
   private readonly tooltipService: TooltipService;

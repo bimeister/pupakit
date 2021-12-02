@@ -28,5 +28,5 @@ export const mdContactsIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

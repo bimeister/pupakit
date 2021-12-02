@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -7,23 +8,22 @@ import {
   OnDestroy,
   Renderer2,
   RendererStyleFlags2,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil, filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
-import { TableColumnRef } from '../../../../../internal/declarations/interfaces/table-column-ref.interface';
 import { TableColumnSorting } from '../../../../../internal/declarations/enums/table-column-sorting.enum';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { TableColumnRef } from '../../../../../internal/declarations/interfaces/table-column-ref.interface';
 
 @Component({
   selector: 'pupa-table-header-cell',
   templateUrl: './table-header-cell.component.html',
   styleUrls: ['./table-header-cell.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeaderCellComponent implements OnChanges, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
@@ -43,12 +43,12 @@ export class TableHeaderCellComponent implements OnChanges, OnDestroy {
   );
 
   public readonly isIconVisible$: Observable<boolean> = this.sorting$.pipe(
-    map((sotrting: TableColumnSorting) => sotrting !== TableColumnSorting.None)
+    map((sorting: TableColumnSorting) => sorting !== TableColumnSorting.None)
   );
 
   public readonly iconName$: Observable<string> = this.sorting$.pipe(
-    map((sotring: TableColumnSorting) =>
-      sotring === TableColumnSorting.Asc ? 'app-arrow-full-bot' : 'app-arrow-full-top'
+    map((sorting: TableColumnSorting) =>
+      sorting === TableColumnSorting.Asc ? 'app-arrow-full-bot' : 'app-arrow-full-top'
     )
   );
 

@@ -10,7 +10,7 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
   templateUrl: './input-password.component.html',
   styleUrls: ['./input-password.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
   private readonly isEnabled$: Observable<boolean> = this.isDisabled$.pipe(map((isDisabled: boolean) => !isDisabled));

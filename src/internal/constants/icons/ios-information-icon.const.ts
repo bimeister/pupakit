@@ -11,5 +11,5 @@ export const iosInformationIcon: IconDefinition = {
 		 M236.8,211.8H275v144.1h-38.2V211.8z"/>
 </g>
 </svg>
-`
+`,
 };

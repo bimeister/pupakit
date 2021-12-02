@@ -18,5 +18,5 @@ export const appAxesIcon: IconDefinition = {
 	</defs>
 	</svg>
 
-`
+`,
 };

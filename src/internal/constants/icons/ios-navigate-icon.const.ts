@@ -11,5 +11,5 @@ export const iosNavigateIcon: IconDefinition = {
 		V256H128.3L352,160L256,384z"/>
 </g>
 </svg>
-`
+`,
 };

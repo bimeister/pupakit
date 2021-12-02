@@ -9,5 +9,5 @@ export const mdSendIcon: IconDefinition = {
 	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <polygon points="48,448 464,256 48,64 48,213.333 346,256 48,298.667 "/>
 </svg>
-`
+`,
 };

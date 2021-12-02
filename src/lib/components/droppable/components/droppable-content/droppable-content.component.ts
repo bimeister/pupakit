@@ -14,9 +14,9 @@ import { DroppableWidth } from '../../../../../internal/declarations/types/dropp
     trigger('openClose', [
       state('open', style({ transform: 'translateY(0)', opacity: 1 })),
       state('closed', style({ transform: 'translateY(-10px)', opacity: 0 })),
-      transition('closed => open', [animate('150ms')])
-    ])
-  ]
+      transition('closed => open', [animate('150ms')]),
+    ]),
+  ],
 })
 export class DroppableContentComponent extends DroppableContent {
   public get widthType(): DroppableWidth {

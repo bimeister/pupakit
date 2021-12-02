@@ -15,7 +15,7 @@ const LIGHTNESS: number = 78;
   templateUrl: './avatar.component.html',
   styleUrls: ['./avatar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent implements OnChanges {
   @Input() public username: string;
@@ -35,7 +35,7 @@ export class AvatarComponent implements OnChanges {
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.size$,
-    this.withBorder$.pipe(map((withBorder: boolean) => (Boolean(withBorder) ? 'bordered' : null)))
+    this.withBorder$.pipe(map((withBorder: boolean) => (Boolean(withBorder) ? 'bordered' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -60,9 +60,7 @@ export class AvatarComponent implements OnChanges {
   );
 
   public readonly backgroundImage$: Observable<string> = this.src$.pipe(
-    map((src: Nullable<string>) => {
-      return `url('${src ?? ''}')`;
-    })
+    map((src: Nullable<string>) => `url('${src ?? ''}')`)
   );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {

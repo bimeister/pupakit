@@ -8,5 +8,5 @@ export const mdCellularIcon: IconDefinition = {
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 <path d="M64,448h384V64L64,448z"/>
 </svg>
-`
+`,
 };

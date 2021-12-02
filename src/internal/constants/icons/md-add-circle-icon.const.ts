@@ -14,5 +14,5 @@ export const mdAddCircleIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

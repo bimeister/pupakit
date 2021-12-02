@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   selector: 'demo-test-drawer',
   templateUrl: './test-drawer.component.html',
   styleUrls: ['./test-drawer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestDrawerComponent {
   public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;

@@ -19,5 +19,5 @@ export const iosRadioButtonOnIcon: IconDefinition = {
 		S392.2,177.2,363.5,148.5z"/>
 </g>
 </svg>
-`
+`,
 };

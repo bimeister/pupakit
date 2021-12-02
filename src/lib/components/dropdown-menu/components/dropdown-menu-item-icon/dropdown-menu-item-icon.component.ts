@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   templateUrl: './dropdown-menu-item-icon.component.html',
   styleUrls: ['./dropdown-menu-item-icon.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuItemIconComponent {
   @Input() public name: string;

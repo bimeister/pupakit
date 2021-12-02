@@ -14,5 +14,5 @@ export const mdRadioButtonOffIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

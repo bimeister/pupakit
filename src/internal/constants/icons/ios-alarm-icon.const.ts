@@ -29,5 +29,5 @@ export const iosAlarmIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -5,6 +5,6 @@ import { SelectorDemoComponent } from './selector-demo.component';
 
 @NgModule({
   declarations: [SelectorDemoComponent],
-  imports: [DemoSharedModule, SelectorDemoRoutingModule]
+  imports: [DemoSharedModule, SelectorDemoRoutingModule],
 })
 export class SelectorDemoModule {}

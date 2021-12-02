@@ -5,6 +5,6 @@ import { ScrollbarDemoComponent } from './scrollbar-demo.component';
 
 @NgModule({
   declarations: [ScrollbarDemoComponent],
-  imports: [DemoSharedModule, ScrollbarDemoRoutingModule]
+  imports: [DemoSharedModule, ScrollbarDemoRoutingModule],
 })
 export class ScrollbarDemoModule {}

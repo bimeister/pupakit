@@ -5,6 +5,6 @@ import { SelectDemoRoutingModule } from './select-demo-routing.module';
 
 @NgModule({
   declarations: [SelectDemoComponent],
-  imports: [DemoSharedModule, SelectDemoRoutingModule]
+  imports: [DemoSharedModule, SelectDemoRoutingModule],
 })
 export class SelectDemoModule {}

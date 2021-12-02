@@ -17,5 +17,5 @@ export const mdCarIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

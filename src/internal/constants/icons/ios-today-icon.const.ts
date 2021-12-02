@@ -14,5 +14,5 @@ export const iosTodayIcon: IconDefinition = {
 	<path d="M142,124h100c7.7,0,14-6.3,14-14s-6.3-14-14-14H142c-7.7,0-14,6.3-14,14S134.3,124,142,124z"/>
 </g>
 </svg>
-`
+`,
 };

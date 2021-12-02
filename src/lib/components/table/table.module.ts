@@ -24,7 +24,7 @@ const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableHeaderCellContainerComponent,
   TableBodyRowContainerComponent,
   TableHeaderRowContainerComponent,
-  TablePlaceholderRowContainerComponent
+  TablePlaceholderRowContainerComponent,
 ];
 
 const EXTERNAL_COMPONENTS: Type<unknown>[] = [
@@ -32,7 +32,7 @@ const EXTERNAL_COMPONENTS: Type<unknown>[] = [
   TableColumnTemplateComponent,
   TableHeaderCellComponent,
   TableBodyCellComponent,
-  TableSkeletonComponent
+  TableSkeletonComponent,
 ];
 
 const EXTERNAL_DIRECTIVES: Type<unknown>[] = [TableHeaderCellTemplateDirective, TableBodyCellTemplateDirective];
@@ -42,12 +42,12 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   ScrollingModule,
   SkeletonModule,
   ScrollableModule,
-  IconModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon])
+  IconModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon]),
 ];
 
 @NgModule({
   declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
   imports: IMPORTS,
-  exports: [...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES]
+  exports: [...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
 })
 export class TableModule {}

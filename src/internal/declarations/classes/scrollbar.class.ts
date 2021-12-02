@@ -1,10 +1,9 @@
-import { ScrollBarSizes } from '../interfaces/scroll-bar-sizes.interface';
+import { distinctUntilSerializedChanged, isEqual, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { distinctUntilSerializedChanged, isEqual, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { ScrollBarSizes } from '../interfaces/scroll-bar-sizes.interface';
 
 export class Scrollbar {
-  private static readonly maxSizePx: number = 32;
   private lastSizes: Nullable<ScrollBarSizes> = null;
 
   private readonly sizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -16,7 +15,7 @@ export class Scrollbar {
   public readonly thumbSizePx$: Observable<number> = combineLatest([
     this.contentSizePx$,
     this.sizePx$,
-    this.contentScrollSizePx$
+    this.contentScrollSizePx$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(([contentSizePx, sizePx, contentScrollSizePx]: [number, number, number]) => {
@@ -31,7 +30,7 @@ export class Scrollbar {
     this.contentScrollSizePx$,
     this.contentSizePx$,
     this.sizePx$,
-    this.thumbSizePx$
+    this.thumbSizePx$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(
@@ -51,6 +50,8 @@ export class Scrollbar {
     ),
     shareReplayWithRefCount()
   );
+
+  private static readonly maxSizePx: number = 32;
 
   public setSizes(sizes: ScrollBarSizes): void {
     if (isEqual(this.lastSizes, sizes)) {

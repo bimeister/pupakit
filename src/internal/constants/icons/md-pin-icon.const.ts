@@ -13,5 +13,5 @@ export const mdPinIcon: IconDefinition = {
 		C313.144,220.156,287.996,244.801,256,244.801z"/>
 </g>
 </svg>
-`
+`,
 };

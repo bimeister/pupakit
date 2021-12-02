@@ -25,5 +25,5 @@ export const iosBicycleIcon: IconDefinition = {
 		S376.8,192,368,192z"/>
 </g>
 </svg>
-`
+`,
 };

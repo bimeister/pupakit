@@ -14,5 +14,5 @@ export const mdShareAltIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -15,5 +15,5 @@ export const iosPowerIcon: IconDefinition = {
 		C238.4,266.2,246.7,274.5,256.9,274.5z"/>
 </g>
 </svg>
-`
+`,
 };

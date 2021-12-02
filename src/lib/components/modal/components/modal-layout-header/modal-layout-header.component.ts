@@ -7,7 +7,7 @@ import { ModalLayoutTitleComponent } from '../modal-layout-title/modal-layout-ti
   templateUrl: './modal-layout-header.component.html',
   styleUrls: ['./modal-layout-header.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalLayoutHeaderComponent implements AfterContentInit {
   @ContentChild(ModalLayoutTitleComponent) private readonly modalLayoutTitleComponent: ModalLayoutTitleComponent;

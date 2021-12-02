@@ -17,7 +17,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -26,29 +26,29 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'firstName',
     title: 'First Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'last-name',
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'age-column',
     modelKey: 'age',
     title: 'Age',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 100 }
-  }
+    defaultSizes: { widthPx: 100 },
+  },
 ];
 
 @Component({
@@ -56,7 +56,7 @@ const COLUMNS: TableColumnDefinition[] = [
   templateUrl: './example-1.component.html',
   styleUrls: ['./example-1.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample1Component {
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();

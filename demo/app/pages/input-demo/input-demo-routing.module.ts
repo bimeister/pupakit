@@ -5,12 +5,12 @@ import { InputDemoComponent } from './input-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: InputDemoComponent
-  }
+    component: InputDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class InputDemoRoutingModule {}

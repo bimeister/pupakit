@@ -4,22 +4,22 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
 @Component({
   selector: 'demo-spinner-demo',
   templateUrl: './spinner-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpinnerDemoComponent {
   public readonly size: string = '32px';
   public readonly typeOptions: RadioOption[] = [
     {
       caption: 'Simple',
-      value: 'simple'
+      value: 'simple',
     },
     {
       caption: 'Bagel',
-      value: 'bagel'
+      value: 'bagel',
     },
     {
       caption: 'Scene loader',
-      value: 'loader'
-    }
+      value: 'loader',
+    },
   ];
 }

@@ -13,5 +13,5 @@ export const iosAddCircleIcon: IconDefinition = {
 		C362.5,264.8,355.3,272,346.5,272z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -18,5 +18,5 @@ export const mdMapIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

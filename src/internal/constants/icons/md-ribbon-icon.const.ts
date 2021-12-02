@@ -19,5 +19,5 @@ export const mdRibbonIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

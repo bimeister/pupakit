@@ -7,7 +7,7 @@ import { ModalLayoutActionComponent } from '../modal-layout-action/modal-layout-
   templateUrl: './modal-layout-footer.component.html',
   styleUrls: ['./modal-layout-footer.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalLayoutFooterComponent implements AfterContentInit {
   @ContentChild(ModalLayoutActionComponent)

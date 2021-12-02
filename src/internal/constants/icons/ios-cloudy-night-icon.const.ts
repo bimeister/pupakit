@@ -17,5 +17,5 @@ export const iosCloudyNightIcon: IconDefinition = {
 		c2-2.8-0.3-6.7-3.8-6.3C468.5,302.8,459.4,305,452.1,305.4z"/>
 </g>
 </svg>
-`
+`,
 };

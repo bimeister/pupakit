@@ -26,5 +26,5 @@ export const logoUsdIcon: IconDefinition = {
 		C347.172,346.042,345.834,352.797,342.902,359.471z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -14,5 +14,5 @@ export const mdWalkIcon: IconDefinition = {
 		L120,144v112h40v-80l40.531-16L120,480h40l56.698-164.271L267,384v96h38V352l-57.031-96l19.745-61.864L288,232z"/>
 </g>
 </svg>
-`
+`,
 };

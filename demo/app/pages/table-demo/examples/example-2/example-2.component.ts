@@ -20,7 +20,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -29,7 +29,7 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'firstName',
     title: 'First Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'last-name',
@@ -41,18 +41,18 @@ const COLUMNS: TableColumnDefinition[] = [
 
       // use min and max sizes,
       minWidthPx: 70,
-      maxWidthPx: 300
+      maxWidthPx: 300,
     },
 
     // use type for template
-    type: 'last-name'
+    type: 'last-name',
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'age',
@@ -62,8 +62,8 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 100 },
 
     // use type for template
-    type: 'age'
-  }
+    type: 'age',
+  },
 ];
 
 const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableColumnDefinition>(
@@ -75,7 +75,7 @@ const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableCol
   templateUrl: './example-2.component.html',
   styleUrls: ['./example-2.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample2Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();

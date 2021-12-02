@@ -14,5 +14,5 @@ export const mdPhoneLandscapeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

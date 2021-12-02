@@ -15,5 +15,5 @@ export const mdImageIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

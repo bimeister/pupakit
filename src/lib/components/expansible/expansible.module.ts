@@ -7,6 +7,6 @@ import { ExpansibleComponent } from './components/expansible/expansible.componen
 @NgModule({
   declarations: [ExpansibleComponent, ExpanderComponent],
   exports: [ExpansibleComponent, ExpanderComponent],
-  imports: [SharedModule]
+  imports: [SharedModule],
 })
 export class ExpansibleModule {}

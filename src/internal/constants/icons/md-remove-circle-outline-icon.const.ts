@@ -15,5 +15,5 @@ export const mdRemoveCircleOutlineIcon: IconDefinition = {
 	<path d="M363,277H149v-42h214V277z"/>
 </g>
 </svg>
-`
+`,
 };

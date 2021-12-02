@@ -16,5 +16,5 @@ export const mdImagesIcon: IconDefinition = {
 	<path d="M384,256c17.6,0,32-14.4,32-32s-14.3-32-32-32c-17.6,0-32,14.3-32,32S366.3,256,384,256z"/>
 </g>
 </svg>
-`
+`,
 };

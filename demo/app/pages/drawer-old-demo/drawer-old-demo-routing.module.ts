@@ -5,12 +5,12 @@ import { DrawerOldDemoComponent } from './drawer-old-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DrawerOldDemoComponent
-  }
+    component: DrawerOldDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DrawerOldDemoRoutingModule {}

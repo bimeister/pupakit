@@ -8,5 +8,5 @@ export const mdDownloadIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M416,199.5h-91.4V64H187.4v135.5H96l160,158.1L416,199.5z M96,402.8V448h320v-45.2H96z"/>
 </svg>
-`
+`,
 };

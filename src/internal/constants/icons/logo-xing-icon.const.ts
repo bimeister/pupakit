@@ -15,5 +15,5 @@ export const logoXingIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

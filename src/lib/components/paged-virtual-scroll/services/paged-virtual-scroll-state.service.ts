@@ -11,7 +11,7 @@ import {
   startWith,
   switchMap,
   take,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
 import { VOID } from '../../../../internal/constants/void.const';
 import { ListRangesIntersectionProducer } from '../../../../internal/declarations/classes/list-ranges-intersection-producer.class';
@@ -51,7 +51,7 @@ export class PagedVirtualScrollStateService implements OnDestroy {
       startWith(VOID),
       map((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => ({
         start: pagedVirtualScrollArguments?.currentFrom,
-        end: pagedVirtualScrollArguments?.currentTo
+        end: pagedVirtualScrollArguments?.currentTo,
       }))
     );
 

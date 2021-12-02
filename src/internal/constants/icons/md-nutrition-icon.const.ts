@@ -13,5 +13,5 @@ export const mdNutritionIcon: IconDefinition = {
 	<polygon points="464,145.1 434.8,96.1 398.2,116.4 429.7,60.5 380.6,32 313.3,159.8 354.6,201.2 	"/>
 </g>
 </svg>
-`
+`,
 };

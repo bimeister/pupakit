@@ -10,5 +10,5 @@ export const mdShirtIcon: IconDefinition = {
 	<path d="M320,64c-11.1,19.1-40.3,32-64,32s-52.9-12.9-64-32L64,96v96l77-16l-13,272h256l-13-272l77,16V96L320,64z"/>
 </g>
 </svg>
-`
+`,
 };

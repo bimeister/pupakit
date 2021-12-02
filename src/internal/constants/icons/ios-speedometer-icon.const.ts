@@ -18,5 +18,5 @@ export const iosSpeedometerIcon: IconDefinition = {
 		z M434,301.9h-36c-7.7,0-14-6.3-14-14s6.3-14,14-14h36c7.7,0,14,6.3,14,14S441.7,301.9,434,301.9z"/>
 </g>
 </svg>
-`
+`,
 };

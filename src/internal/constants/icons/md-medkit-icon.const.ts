@@ -11,5 +11,5 @@ export const mdMedkitIcon: IconDefinition = {
 		c22.4,0,40.4-18,40.4-40.4V144H352z M200,104h112v40H200V104z M336,328h-56v56h-48v-56h-56v-48h56v-56h48v56h56V328z"/>
 </g>
 </svg>
-`
+`,
 };

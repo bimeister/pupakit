@@ -17,7 +17,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -29,7 +29,7 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 200 },
 
     // use type for template
-    type: 'name'
+    type: 'name',
   },
   {
     id: 'last-name',
@@ -39,7 +39,7 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 200 },
 
     // use type for template
-    type: 'name'
+    type: 'name',
   },
   {
     id: 'city',
@@ -49,7 +49,7 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 200 },
 
     // use type for template
-    type: 'city'
+    type: 'city',
   },
   {
     id: 'age-column',
@@ -59,8 +59,8 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 100 },
 
     // use type for template
-    type: 'age'
-  }
+    type: 'age',
+  },
 ];
 
 @Component({
@@ -68,7 +68,7 @@ const COLUMNS: TableColumnDefinition[] = [
   templateUrl: './example-4.component.html',
   styleUrls: ['./example-4.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample4Component {
   public readonly rowType: SomeData;

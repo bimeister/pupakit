@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Pipe({
   name: 'conditionAsync',
-  pure: false
+  pure: false,
 })
 export class ConditionAsyncPipe<T = unknown> implements PipeTransform, OnDestroy {
   private readonly asyncPipe: AsyncPipe = new AsyncPipe(this.injector.get(ChangeDetectorRef));
@@ -24,9 +24,7 @@ export class ConditionAsyncPipe<T = unknown> implements PipeTransform, OnDestroy
       return null;
     }
     const result$: Observable<T> = booleanValue$.pipe(
-      map((booleanValue: unknown) => {
-        return Boolean(booleanValue) ? trueArgument : falseArgument;
-      })
+      map((booleanValue: unknown) => (Boolean(booleanValue) ? trueArgument : falseArgument))
     );
     return this.asyncPipe.transform<T>(result$);
   }

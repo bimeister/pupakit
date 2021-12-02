@@ -16,5 +16,5 @@ export const iosPricetagsIcon: IconDefinition = {
 		V107.7C480,93.7,469.5,82.1,456,80.3z"/>
 </g>
 </svg>
-`
+`,
 };

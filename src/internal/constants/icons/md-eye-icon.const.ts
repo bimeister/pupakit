@@ -14,5 +14,5 @@ export const mdEyeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -12,7 +12,7 @@ const COMPONENTS: Type<unknown>[] = [
   ButtonGroupItemComponent,
   ButtonGroupContainerComponent,
   ButtonGroupContentComponent,
-  ButtonGroupItemContentTemplateDirective
+  ButtonGroupItemContentTemplateDirective,
 ];
 
 const DIRECTIVES: Type<unknown>[] = [
@@ -20,12 +20,12 @@ const DIRECTIVES: Type<unknown>[] = [
   ButtonGroupItemComponent,
   ButtonGroupContainerComponent,
   ButtonGroupContentComponent,
-  ButtonGroupItemContentTemplateDirective
+  ButtonGroupItemContentTemplateDirective,
 ];
 
 @NgModule({
   declarations: [...COMPONENTS, ...DIRECTIVES],
   imports: [SharedModule, ScrollableModule],
-  exports: [...COMPONENTS, ...DIRECTIVES]
+  exports: [...COMPONENTS, ...DIRECTIVES],
 })
 export class ButtonGroupModule {}

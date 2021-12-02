@@ -5,12 +5,12 @@ import { RatingDemoComponent } from './rating-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: RatingDemoComponent
-  }
+    component: RatingDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class RatingDemoRoutingModule {}

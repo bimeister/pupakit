@@ -6,7 +6,7 @@ import {
   ListRange,
   _RecycleViewRepeaterStrategy,
   _ViewRepeaterItemInsertArgs,
-  _VIEW_REPEATER_STRATEGY
+  _VIEW_REPEATER_STRATEGY,
 } from '@angular/cdk/collections';
 import {
   Directive,
@@ -24,7 +24,7 @@ import {
   OnDestroy,
   TemplateRef,
   TrackByFunction,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of as observableOf, Subject, Subscription } from 'rxjs';
@@ -41,7 +41,7 @@ interface UpdateContextArguments {
 }
 
 interface CdkVirtualScrollRepeater<T> {
-  dataStream: Observable<T[] | ReadonlyArray<T>>;
+  dataStream: Observable<T[] | readonly T[]>;
   measureRangeSize(range: ListRange, orientation: 'horizontal' | 'vertical'): number;
 }
 
@@ -68,7 +68,7 @@ interface PupaVirtualScrollForOfContext<T> {
 /** Helper to extract the offset of a DOM Node in a certain direction. */
 function getOffset(orientation: 'horizontal' | 'vertical', direction: 'start' | 'end', node: Node): number {
   const el: Element = node as Element;
-  if (!el.getBoundingClientRect) {
+  if (isNil(el.getBoundingClientRect)) {
     return 0;
   }
   const rect: ClientRect = el.getBoundingClientRect();
@@ -80,9 +80,10 @@ function getOffset(orientation: 'horizontal' | 'vertical', direction: 'start' | 
   return direction === 'start' ? rect.top : rect.bottom;
 }
 
+/* eslint-disable @angular-eslint/no-conflicting-lifecycle */
 @Directive({
   selector: '[pupaVirtualFor][pupaVirtualForOf]',
-  providers: [{ provide: _VIEW_REPEATER_STRATEGY, useClass: _RecycleViewRepeaterStrategy }]
+  providers: [{ provide: _VIEW_REPEATER_STRATEGY, useClass: _RecycleViewRepeaterStrategy }],
 })
 export class PupaVirtualScrollForDirective<T>
   implements CdkVirtualScrollRepeater<T>, CollectionViewer, OnChanges, DoCheck, OnDestroy
@@ -129,7 +130,7 @@ export class PupaVirtualScrollForDirective<T>
    * @deprecated Angular shit: no $-naming 🤡
    * Emits whenever the data in the current DataSource changes.
    * */
-  public dataStream: Observable<T[] | ReadonlyArray<T>> = this.dataSourceChanges$.pipe(
+  public dataStream: Observable<T[] | readonly T[]> = this.dataSourceChanges$.pipe(
     // Bundle up the previous and current data sources so we can work with both.
     pairwise(),
     // Use `_changeDataSource` to disconnect from the previous data source and connect to the
@@ -148,7 +149,7 @@ export class PupaVirtualScrollForDirective<T>
   );
 
   /** The most recent data emitted from the DataSource. */
-  private readonly data$: BehaviorSubject<T[] | ReadonlyArray<T>> = new BehaviorSubject<T[] | ReadonlyArray<T>>(null);
+  private readonly data$: BehaviorSubject<T[] | readonly T[]> = new BehaviorSubject<T[] | readonly T[]>(null);
 
   /** The currently rendered items. */
   private readonly renderedItems$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
@@ -238,7 +239,7 @@ export class PupaVirtualScrollForDirective<T>
     for (let i: number = 0; i < rangeLen; i++) {
       const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> | null =
         this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
-      if (view && view.rootNodes.length) {
+      if (!isNil(view) && view.rootNodes.length > 0) {
         firstNode = lastNode = view.rootNodes[0];
         break;
       }
@@ -248,13 +249,13 @@ export class PupaVirtualScrollForDirective<T>
     for (let i: number = rangeLen - 1; i > -1; i--) {
       const view: EmbeddedViewRef<PupaVirtualScrollForOfContext<T>> | null =
         this.getViewFromViewContainerAsEmbeddedViewRef(i + renderedStartIndex);
-      if (view && view.rootNodes.length) {
+      if (!isNil(view) && view.rootNodes.length > 0) {
         lastNode = view.rootNodes[view.rootNodes.length - 1];
         break;
       }
     }
 
-    return firstNode && lastNode
+    return !isNil(firstNode) && !isNil(lastNode)
       ? getOffset(orientation, 'end', lastNode) - getOffset(orientation, 'start', firstNode)
       : 0;
   }
@@ -281,7 +282,7 @@ export class PupaVirtualScrollForDirective<T>
       )
       .subscribe(
         ([data, trackByFunction, differ, _pupaVirtualForOf]: [
-          T[] | ReadonlyArray<T>,
+          T[] | readonly T[],
           TrackByFunction<T> | undefined,
           IterableDiffer<T> | null,
           T[]
@@ -295,9 +296,9 @@ export class PupaVirtualScrollForDirective<T>
           }
           // Use a wrapper function for the `trackBy` so any new values are
           // picked up automatically without having to recreate the differ.
-          const newDiffer: IterableDiffer<T> = this.differs.find(renderedItems).create((index: number, item: T) => {
-            return isNil(trackByFunction) ? item : trackByFunction(index, item);
-          });
+          const newDiffer: IterableDiffer<T> = this.differs
+            .find(renderedItems)
+            .create((index: number, item: T) => (isNil(trackByFunction) ? item : trackByFunction(index, item)));
 
           this.differ$.next(newDiffer);
         }
@@ -308,18 +309,18 @@ export class PupaVirtualScrollForDirective<T>
   private changeDataSource(
     oldDataSource: DataSource<T> | null,
     newDataSource: DataSource<T> | null
-  ): Observable<T[] | ReadonlyArray<T>> {
-    if (oldDataSource) {
+  ): Observable<T[] | readonly T[]> {
+    if (!isNil(oldDataSource)) {
       oldDataSource.disconnect(this);
     }
 
     this.needsUpdate$.next(true);
-    return newDataSource ? newDataSource.connect(this) : observableOf();
+    return !isNil(newDataSource) ? newDataSource.connect(this) : observableOf();
   }
 
   /** Update the `CdkVirtualForOfContext` for all views. */
   private updateContext({ needApplyDetectChanges }: UpdateContextArguments = { needApplyDetectChanges: true }): void {
-    this.data$.pipe(filterNotNil(), take(1)).subscribe((data: T[] | ReadonlyArray<T>) => {
+    this.data$.pipe(filterNotNil(), take(1)).subscribe((data: T[] | readonly T[]) => {
       const count: number = data.length;
       const viewContainerLength: number = this.viewContainerRef.length;
 
@@ -353,7 +354,7 @@ export class PupaVirtualScrollForDirective<T>
           this.viewContainerRef,
           (record: IterableChangeRecord<T>, _adjustedPreviousIndex: number | null, currentIndex: number | null) =>
             this.getEmbeddedViewArgs(record, currentIndex, pupaVirtualForOf),
-          record => record.item
+          (record: IterableChangeRecord<T>) => record.item
         );
 
         // Update $implicit for any items that had an identity change.
@@ -395,9 +396,9 @@ export class PupaVirtualScrollForDirective<T>
         first: false,
         last: false,
         odd: false,
-        even: false
+        even: false,
       },
-      index
+      index,
     };
   }
 
@@ -415,7 +416,7 @@ export class PupaVirtualScrollForDirective<T>
   }
 
   private processDataStreamChanges(): Subscription {
-    return this.dataStream.subscribe((data: T[] | ReadonlyArray<T>) => {
+    return this.dataStream.subscribe((data: T[] | readonly T[]) => {
       this.data$.next(data);
       this.onRenderedDataChange();
     });
@@ -431,7 +432,7 @@ export class PupaVirtualScrollForDirective<T>
       .subscribe(([[differ, _needsUpdate], renderedItems]: [[IterableDiffer<T> | null, boolean], T[]]) => {
         const changes: IterableChanges<T> = differ.diff(renderedItems);
 
-        changes ? this.applyChanges(changes) : this.updateContext();
+        !isNil(changes) ? this.applyChanges(changes) : this.updateContext();
         this.needsUpdate$.next(false);
       });
   }
@@ -494,8 +495,8 @@ export class PupaVirtualScrollForDirective<T>
 
     const startIndex: number = isNil(this._renderedRange) ? 0 : this._renderedRange.start;
 
-    const serializedTrackByFunction: TrackByFunction<T> | undefined = updatedTrackByFunction
-      ? (index, item) => updatedTrackByFunction(index + startIndex, item)
+    const serializedTrackByFunction: TrackByFunction<T> | undefined = !isNil(updatedTrackByFunction)
+      ? (index: number, item: T) => updatedTrackByFunction(index + startIndex, item)
       : undefined;
 
     this.trackByFunction$.next(serializedTrackByFunction);

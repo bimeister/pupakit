@@ -14,5 +14,5 @@ export const iosOpenIcon: IconDefinition = {
 		C464,74.5,462,71,459.5,68.5z"/>
 </g>
 </svg>
-`
+`,
 };

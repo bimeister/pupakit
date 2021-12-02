@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { isEmpty, isNil, shareReplayWithRefCount, sortByProperty, stringFilterPredicate } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { DrawerRef } from '../../../../../../src/internal/declarations/classes/drawer-ref.class';
 import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { FormControl } from '@angular/forms';
 
 interface LinkItem {
   title: string;
@@ -22,7 +22,7 @@ interface LinksGroup {
   templateUrl: './sidebar-content.component.html',
   styleUrls: ['./sidebar-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarContentComponent {
   private readonly infoGroup: LinksGroup = {
@@ -32,10 +32,10 @@ export class SidebarContentComponent {
         { title: 'Typography', link: '/kit/typography' },
         { title: 'Colors', link: '/kit/colors' },
         { title: 'Adaptive', link: '/kit/adaptive' },
-        { title: 'Controls isPatched', link: '/kit/controls-is-patched' }
+        { title: 'Controls isPatched', link: '/kit/controls-is-patched' },
       ],
       'title'
-    )
+    ),
   };
 
   private readonly generalGroup: LinksGroup = {
@@ -79,10 +79,10 @@ export class SidebarContentComponent {
         { title: '⚠️ Icon button', link: '/kit/icon-button' },
         { title: '⚠️ Draggable', link: '/kit/draggable' },
         { title: '⚠️ Droppable', link: '/kit/droppable' },
-        { title: '⚠️ Draggable list', link: '/kit/draggable-list' }
+        { title: '⚠️ Draggable list', link: '/kit/draggable-list' },
       ],
       'title'
-    )
+    ),
   };
 
   private readonly overlayGroup: LinksGroup = {
@@ -93,15 +93,15 @@ export class SidebarContentComponent {
         { title: 'Tooltip', link: '/kit/tooltip' },
         { title: '⚠️ Drawer', link: '/kit/drawer-old' },
         { title: 'Drawer', link: '/kit/drawer' },
-        { title: 'Modal', link: '/kit/modal' }
+        { title: 'Modal', link: '/kit/modal' },
       ],
       'title'
-    )
+    ),
   };
 
   private readonly demoToolsGroup: LinksGroup = {
     title: 'Demo Tools',
-    linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title')
+    linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title'),
   };
 
   private readonly otherGroup: LinksGroup = {
@@ -109,10 +109,10 @@ export class SidebarContentComponent {
     linkItems: sortByProperty(
       [
         { title: 'Layout', link: './layout' },
-        { title: '⚠️ Scrollbar Styles', link: '/kit/scrollbar' }
+        { title: '⚠️ Scrollbar Styles', link: '/kit/scrollbar' },
       ],
       'title'
-    )
+    ),
   };
 
   private readonly linkGroups: LinksGroup[] = [
@@ -120,7 +120,7 @@ export class SidebarContentComponent {
     this.generalGroup,
     this.overlayGroup,
     this.demoToolsGroup,
-    this.otherGroup
+    this.otherGroup,
   ];
 
   public readonly searchControl: FormControl = new FormControl('');
@@ -143,7 +143,7 @@ export class SidebarContentComponent {
 
         filteredGroups.push({
           ...group,
-          linkItems: filteredLinks
+          linkItems: filteredLinks,
         });
 
         return filteredGroups;

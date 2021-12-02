@@ -12,5 +12,5 @@ export const mdBulbIcon: IconDefinition = {
 		C400,123.9,335.7,64,256,64z"/>
 </g>
 </svg>
-`
+`,
 };

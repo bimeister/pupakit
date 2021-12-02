@@ -8,7 +8,7 @@ import { CheckboxService } from '../../services/checkbox.service';
   selector: 'pupa-checkbox-mark',
   templateUrl: './checkbox-mark.component.html',
   styleUrls: ['./checkbox-mark.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxMarkComponent {
   public readonly disabled$: BehaviorSubject<boolean> = this.checkboxService.disabled$;
@@ -21,7 +21,7 @@ export class CheckboxMarkComponent {
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.disabled$,
     this.value$,
-    this.indeterminate$
+    this.indeterminate$,
   ]).pipe(
     map(([disabled, value, indeterminate]: [boolean, boolean, boolean]) => {
       const disabledStateClass: string = disabled ? 'checkbox_disabled' : null;

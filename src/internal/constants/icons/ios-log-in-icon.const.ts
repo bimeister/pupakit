@@ -15,5 +15,5 @@ export const iosLogInIcon: IconDefinition = {
 		c-5.5,5.5-5.5,14.3,0,19.8l65.2,64.2H63c-7.7,0-14,6.3-14,14s6.3,14,14,14h224.6L224,334.2z"/>
 </g>
 </svg>
-`
+`,
 };

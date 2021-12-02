@@ -5,12 +5,12 @@ import { ChipDemoComponent } from './chip-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ChipDemoComponent
-  }
+    component: ChipDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ChipDemoRoutingModule {}

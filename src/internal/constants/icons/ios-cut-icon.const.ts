@@ -23,5 +23,5 @@ export const iosCutIcon: IconDefinition = {
 		C396.1,408.6,385.4,421.1,372.1,421.1z"/>
 </g>
 </svg>
-`
+`,
 };

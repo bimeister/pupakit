@@ -13,5 +13,5 @@ export const iosDownloadIcon: IconDefinition = {
 	<path d="M269,61c0-7.2-5.8-13-13-13s-13,5.8-13,13v83h26V61z"/>
 </g>
 </svg>
-`
+`,
 };

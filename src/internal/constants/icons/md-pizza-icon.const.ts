@@ -16,5 +16,5 @@ export const mdPizzaIcon: IconDefinition = {
 		c6.6,0,12.2-3.3,15-8.1l9.8-24.1C448,72,443.2,68.5,436.9,66z"/>
 </g>
 </svg>
-`
+`,
 };

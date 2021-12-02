@@ -5,12 +5,12 @@ import { AvatarDemoComponent } from './avatar-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: AvatarDemoComponent
-  }
+    component: AvatarDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AvatarDemoRoutingModule {}

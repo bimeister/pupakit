@@ -27,5 +27,5 @@ export const appTrashUndoIcon: IconDefinition = {
     id="path71"
     style="stroke-width:0.1" /></g>
 </svg>
-`
+`,
 };

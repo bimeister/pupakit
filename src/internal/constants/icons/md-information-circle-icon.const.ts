@@ -11,5 +11,5 @@ export const mdInformationCircleIcon: IconDefinition = {
 		h42V360z M277,194h-42v-42h42V194z"/>
 </g>
 </svg>
-`
+`,
 };

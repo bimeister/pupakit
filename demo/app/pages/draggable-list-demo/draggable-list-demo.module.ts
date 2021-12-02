@@ -5,6 +5,6 @@ import { DraggableListDemoComponent } from './draggable-demo.component';
 
 @NgModule({
   declarations: [DraggableListDemoComponent],
-  imports: [DemoSharedModule, DraggableListDemoRoutingModule]
+  imports: [DemoSharedModule, DraggableListDemoRoutingModule],
 })
 export class DraggableListDemoModule {}

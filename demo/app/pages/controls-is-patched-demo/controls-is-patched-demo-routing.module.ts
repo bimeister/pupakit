@@ -5,12 +5,12 @@ import { ControlsIsPatchedDemoComponent } from './controls-is-patched-demo.compo
 const routes: Routes = [
   {
     path: '',
-    component: ControlsIsPatchedDemoComponent
-  }
+    component: ControlsIsPatchedDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ControlsIsPatchedDemoRoutingModule {}

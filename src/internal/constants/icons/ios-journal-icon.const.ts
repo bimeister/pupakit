@@ -12,5 +12,5 @@ export const iosJournalIcon: IconDefinition = {
 	<path d="M432,416c8.8,0,16-7.2,16-16V60.1c0-15.5-12.6-28.1-28.1-28.1H368v384H432z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -2,7 +2,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 
 @Pipe({
-  name: 'timeFormat'
+  name: 'timeFormat',
 })
 export class TimeFormatPipe implements PipeTransform {
   public transform(entity: unknown): string {

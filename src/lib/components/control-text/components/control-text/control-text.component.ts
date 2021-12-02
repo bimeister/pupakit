@@ -4,7 +4,7 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   selector: 'pupa-control-text',
   templateUrl: './control-text.component.html',
   styleUrls: ['./control-text.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ControlTextComponent {
   @Input() public isError: boolean = false;

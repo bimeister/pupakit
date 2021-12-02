@@ -18,5 +18,5 @@ export const mdRocketIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -16,5 +16,5 @@ export const mdSpeedometerIcon: IconDefinition = {
 		l-22.1-22l-22.9,22.9l22.1,22.1l4,4h58.8c27.6-35.3,44.1-79.7,44.1-128C464,141.1,370.9,48,256,48z"/>
 </g>
 </svg>
-`
+`,
 };

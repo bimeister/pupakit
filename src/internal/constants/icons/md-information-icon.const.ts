@@ -11,5 +11,5 @@ export const mdInformationIcon: IconDefinition = {
 	<rect x="232" y="140" width="48" height="48"/>
 </g>
 </svg>
-`
+`,
 };

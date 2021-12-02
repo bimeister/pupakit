@@ -21,5 +21,5 @@ export const mdLogOutIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

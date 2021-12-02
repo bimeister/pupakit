@@ -13,5 +13,5 @@ export const mdChatbubblesIcon: IconDefinition = {
 		/>
 </g>
 </svg>
-`
+`,
 };

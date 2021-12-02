@@ -12,5 +12,5 @@ export const mdDocumentIcon: IconDefinition = {
 		V80l112,112H272z"/>
 </g>
 </svg>
-`
+`,
 };

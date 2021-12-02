@@ -2,7 +2,7 @@ import { Directive, TemplateRef } from '@angular/core';
 import { TreeItemTemplateContext } from '../../../../internal/declarations/interfaces/tree-item-template-context.interface';
 
 @Directive({
-  selector: '[pupaTreeItemTemplate]'
+  selector: '[pupaTreeItemTemplate]',
 })
 export class TreeItemTemplateDirective<T> {
   constructor(public readonly templateRef: TemplateRef<TreeItemTemplateContext<T>>) {}

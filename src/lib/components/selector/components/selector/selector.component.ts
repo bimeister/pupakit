@@ -7,7 +7,7 @@ import {
   OnDestroy,
   OnInit,
   Optional,
-  QueryList
+  QueryList,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isNil } from '@bimeister/utilities';
@@ -19,7 +19,7 @@ import { SelectorItemComponent } from '../selector-item/selector-item.component'
   selector: 'pupa-selector',
   templateUrl: './selector.component.html',
   styleUrls: ['./selector.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectorComponent<T> implements AfterContentInit, OnInit, OnDestroy, ControlValueAccessor {
   @ContentChildren(SelectorItemComponent)
@@ -95,14 +95,14 @@ export class SelectorComponent<T> implements AfterContentInit, OnInit, OnDestroy
   public setDisabledState(isDisabled: boolean): void {
     this.isEnabled = !isDisabled;
 
-    this.items.forEach(item => item.setEnabled(this.isEnabled));
+    this.items.forEach((item: SelectorItemComponent<T>) => item.setEnabled(this.isEnabled));
 
     this.changeDetector.detectChanges();
   }
 
   private onSelectedItemsUpdate(items: SelectorItemComponent<T>[]): void {
     if (!isNil(this.onFormChange)) {
-      this.onFormChange(items.map(item => item.value));
+      this.onFormChange(items.map((item: SelectorItemComponent<T>) => item.value));
     }
 
     if (!this.isTouched) {

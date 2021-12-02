@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[pupaScrollableContent]'
+  selector: '[pupaScrollableContent]',
 })
 export class ScrollableContentDirective {
   constructor(private readonly elementRef: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {

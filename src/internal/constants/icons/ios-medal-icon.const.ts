@@ -29,5 +29,5 @@ export const iosMedalIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

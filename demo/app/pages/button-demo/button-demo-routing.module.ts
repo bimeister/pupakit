@@ -5,12 +5,12 @@ import { ButtonDemoComponent } from './button-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ButtonDemoComponent
-  }
+    component: ButtonDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ButtonDemoRoutingModule {}

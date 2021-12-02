@@ -5,6 +5,6 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
   templateUrl: './modal-layout-body.component.html',
   styleUrls: ['./modal-layout-body.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalLayoutBodyComponent {}

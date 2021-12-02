@@ -15,5 +15,5 @@ export const iosSwapIcon: IconDefinition = {
 		c0,3.4,1.3,6.6,3.7,9.1l69,70C109.8,409.2,118,409.3,123.1,404.3z"/>
 </g>
 </svg>
-`
+`,
 };

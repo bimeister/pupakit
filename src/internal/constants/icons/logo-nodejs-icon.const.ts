@@ -28,5 +28,5 @@ export const logoNodejsIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

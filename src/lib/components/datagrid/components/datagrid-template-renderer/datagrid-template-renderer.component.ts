@@ -11,7 +11,7 @@ type Params = ICellRendererParams | IHeaderParams;
   selector: 'pupa-datagrid-template-renderer',
   templateUrl: './datagrid-template-renderer.component.html',
   styleUrls: ['./datagrid-template-renderer.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatagridTemplateRendererComponent implements ICellRendererAngularComp, IHeaderAngularComp {
   public template: TemplateRef<HTMLElement>;
@@ -24,7 +24,7 @@ export class DatagridTemplateRendererComponent implements ICellRendererAngularCo
 
     this.templateContext = {
       $implicit: implicitData,
-      params
+      params,
     };
 
     return true;

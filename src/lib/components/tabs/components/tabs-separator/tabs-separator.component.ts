@@ -5,6 +5,6 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
   templateUrl: './tabs-separator.component.html',
   styleUrls: ['./tabs-separator.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TabsSeparatorComponent {}

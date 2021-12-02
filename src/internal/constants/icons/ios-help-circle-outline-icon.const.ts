@@ -24,5 +24,5 @@ export const iosHelpCircleOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

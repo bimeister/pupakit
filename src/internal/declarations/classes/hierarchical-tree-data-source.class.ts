@@ -91,11 +91,9 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
         );
         return forkJoin([flatTreeNodesWithElements$, flatTreeElements$]);
       }),
-      map(([flatTreeNodesWithElements, flatTreeElements]: [FlatTreeItem[], FlatTreeItem[]]) => {
-        return [...flatTreeNodesWithElements, ...flatTreeElements].filter(
-          (flatTreeItem: FlatTreeItem) => !isNil(flatTreeItem)
-        );
-      })
+      map(([flatTreeNodesWithElements, flatTreeElements]: [FlatTreeItem[], FlatTreeItem[]]) =>
+        [...flatTreeNodesWithElements, ...flatTreeElements].filter((flatTreeItem: FlatTreeItem) => !isNil(flatTreeItem))
+      )
     );
   }
 
@@ -114,12 +112,10 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
         HierarchicalTreeDataSource.getFilteredRootNodes(nodesWithChildren)
       ),
       withLatestFrom(rootElements$),
-      map(([rootNodes, rootElements]: [NodeWithChildren[], TreeItem[]]) => {
-        return {
-          nodes: rootNodes,
-          elements: rootElements
-        };
-      })
+      map(([rootNodes, rootElements]: [NodeWithChildren[], TreeItem[]]) => ({
+        nodes: rootNodes,
+        elements: rootElements,
+      }))
     );
   }
 
@@ -127,9 +123,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     return timer(0, asyncScheduler).pipe(
       observeOn(asyncScheduler),
       subscribeOn(asyncScheduler),
-      map(() => {
-        return nodesWithChildren.filter((node: NodeWithChildren) => isNil(node.parentId));
-      })
+      map(() => nodesWithChildren.filter((node: NodeWithChildren) => isNil(node.parentId)))
     );
   }
 
@@ -157,8 +151,8 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     return timer(0, asyncScheduler).pipe(
       observeOn(asyncScheduler),
       subscribeOn(asyncScheduler),
-      map(() => {
-        return nodesWithElements.map((node: NodeWithElements | NodeWithChildren): NodeWithChildren => {
+      map(() =>
+        nodesWithElements.map((node: NodeWithElements | NodeWithChildren): NodeWithChildren => {
           const childNodes: NodeWithElements[] = HierarchicalTreeDataSource.isNodeWithChildNodes(node)
             ? node.childNodes
             : [];
@@ -169,10 +163,10 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
           return {
             ...node,
             childElements,
-            childNodes
+            childNodes,
           };
-        });
-      })
+        })
+      )
     );
   }
 
@@ -201,7 +195,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
             value: childNodes,
             configurable: true,
             enumerable: true,
-            writable: true
+            writable: true,
           });
         });
         return nodesWithElements;
@@ -224,7 +218,7 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
           const childElements: TreeItem[] = elementsByParentId.has(nodeId) ? elementsByParentId.get(nodeId) : [];
           return {
             ...node,
-            childElements
+            childElements,
           };
         });
         nodesWithElements.forEach((nodeWithChildElements: NodeWithElements) => {
@@ -246,9 +240,9 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
       switchMap(() => elementsByParentId$),
       map((elementsByParentId: Map<string, TreeItem[]>) => {
         const rootParentIds: string[] = [null, undefined];
-        return rootParentIds.map((parentId: string) => {
-          return elementsByParentId.has(parentId) ? elementsByParentId.get(parentId) : [];
-        });
+        return rootParentIds.map((parentId: string) =>
+          elementsByParentId.has(parentId) ? elementsByParentId.get(parentId) : []
+        );
       }),
       switchMap((groupedRootElements: TreeItem[][]) => HierarchicalTreeDataSource.getFlatArray(groupedRootElements))
     );
@@ -310,9 +304,11 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
             );
 
         return forkJoin([childNodes$, childElements$]).pipe(
-          map(([childNodes, childElements]: [FlatTreeItem[], FlatTreeItem[]]) => {
-            return [node, ...childNodes, ...childElements];
-          })
+          map(([childNodes, childElements]: [FlatTreeItem[], FlatTreeItem[]]) => [
+            node,
+            ...childNodes,
+            ...childElements,
+          ])
         );
       })
     );
@@ -325,13 +321,13 @@ export class HierarchicalTreeDataSource extends FlatTreeDataSource {
     return timer(0, asyncScheduler).pipe(
       observeOn(asyncScheduler),
       subscribeOn(asyncScheduler),
-      map(() => {
-        return childElements.map((childElement: TreeItem) => {
+      map(() =>
+        childElements.map((childElement: TreeItem) => {
           const { isExpandable, name, id, originalData, isElement }: TreeItem = childElement;
           const currentLevel: number = isNil(parentItemLevel) ? 0 : parentItemLevel + 1;
           return new FlatTreeItem(isExpandable, name, currentLevel, id, originalData, isElement);
-        });
-      })
+        })
+      )
     );
   }
 

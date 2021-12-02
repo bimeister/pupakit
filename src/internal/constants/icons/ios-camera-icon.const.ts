@@ -15,5 +15,5 @@ export const iosCameraIcon: IconDefinition = {
 		 M352,218c-7.2,0-13-5.8-13-13s5.8-13,13-13s13,5.8,13,13S359.2,218,352,218z"/>
 </g>
 </svg>
-`
+`,
 };

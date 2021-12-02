@@ -22,5 +22,5 @@ export const iosPeopleIcon: IconDefinition = {
 		c0,0-3.8-6,8.7-8.3c0,0,17.2-4.3,19.2-6.7C373.3,299.5,372,286,372,286z"/>
 </g>
 </svg>
-`
+`,
 };

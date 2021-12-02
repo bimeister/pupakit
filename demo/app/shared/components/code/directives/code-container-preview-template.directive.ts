@@ -1,7 +1,7 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({
-  selector: '[pupaCodeContainerPreviewTemplate]'
+  selector: '[pupaCodeContainerPreviewTemplate]',
 })
 export class CodeContainerPreviewTemplateDirective {
   constructor(public readonly templateRef: TemplateRef<unknown>) {}

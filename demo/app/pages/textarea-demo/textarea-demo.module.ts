@@ -13,7 +13,7 @@ const EXAMPLES: Type<unknown>[] = [
   TextareaExample2Component,
   TextareaExample3Component,
   TextareaExample4Component,
-  TextareaExample5Component
+  TextareaExample5Component,
 ];
 const COMPONENTS: Type<unknown>[] = [TextareaDemoComponent, ...EXAMPLES];
 
@@ -21,6 +21,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [DemoSharedModule, TextareaDemoRoutingModule]
+  imports: [DemoSharedModule, TextareaDemoRoutingModule],
 })
 export class TextareaDemoModule {}

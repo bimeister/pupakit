@@ -18,5 +18,5 @@ export const iosCodeWorkingIcon: IconDefinition = {
 	<circle cx="320" cy="256" r="22"/>
 </g>
 </svg>
-`
+`,
 };

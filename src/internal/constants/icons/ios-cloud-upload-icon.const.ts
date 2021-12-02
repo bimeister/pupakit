@@ -15,5 +15,5 @@ export const iosCloudUploadIcon: IconDefinition = {
 	<path d="M243,467c0,7.2,5.8,13,13,13s13-5.8,13-13V352h-26V467z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -5,6 +5,6 @@ import { IconPageComponent } from './icon-page.component';
 
 @NgModule({
   declarations: [IconPageComponent],
-  imports: [DemoSharedModule, IconPageRoutingModule]
+  imports: [DemoSharedModule, IconPageRoutingModule],
 })
 export class IconPageModule {}

@@ -20,5 +20,5 @@ export const iosReverseCameraIcon: IconDefinition = {
 		c13.3,12.3,23.2,32.1,26.2,52.4l21.1,0c0.6,0,1.3,0.2,1.8,0.5C366.2,266.5,366.8,270.4,364.9,273z"/>
 </g>
 </svg>
-`
+`,
 };

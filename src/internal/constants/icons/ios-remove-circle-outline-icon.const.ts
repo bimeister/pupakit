@@ -17,5 +17,5 @@ export const iosRemoveCircleOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

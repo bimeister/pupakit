@@ -5,7 +5,7 @@ import {
   HostBinding,
   HostListener,
   Input,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 
 const DEFAULT_ROTATION_TRANSFORM: string = 'rotateX(0deg) rotateY(0deg)';
@@ -16,7 +16,7 @@ type ResetType = 'onMouseLeave' | 'custom';
   templateUrl: './floating-card.component.html',
   styleUrls: ['./floating-card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class FloatingCardComponent {
   @HostBinding('style.transform') public transform: string = DEFAULT_ROTATION_TRANSFORM;
