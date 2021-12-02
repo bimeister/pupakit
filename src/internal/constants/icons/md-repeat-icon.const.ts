@@ -9,5 +9,5 @@ export const mdRepeatIcon: IconDefinition = {
 <path d="M149.3,152h213.3v62.4l85.3-83.2L362.7,48v62.4h-256v124.8h42.7V152z M362.7,360H149.3v-62.4L64,380.8l85.3,83.2v-62.4h256
 	V276.8h-42.7V360z"/>
 </svg>
-`
+`,
 };

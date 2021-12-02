@@ -5,12 +5,12 @@ import { BreadcrumbsDemoComponent } from './breadcrumbs-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: BreadcrumbsDemoComponent
-  }
+    component: BreadcrumbsDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class BreadcrumbsDemoRoutingModule {}

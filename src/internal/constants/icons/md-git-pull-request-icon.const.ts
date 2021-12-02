@@ -16,5 +16,5 @@ export const mdGitPullRequestIcon: IconDefinition = {
 		s40,17.9,40,40S150.1,152,128,152z"/>
 </g>
 </svg>
-`
+`,
 };

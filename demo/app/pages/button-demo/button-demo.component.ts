@@ -6,68 +6,68 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   templateUrl: './button-demo.component.html',
   styleUrls: ['./button-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ButtonDemoComponent {
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Large',
-      value: 'large'
+      value: 'large',
     },
     {
       caption: 'Medium',
       value: 'medium',
-      isDefault: true
+      isDefault: true,
     },
     {
       caption: 'Small',
-      value: 'small'
-    }
+      value: 'small',
+    },
   ];
 
   public readonly kindOptions: RadioOption[] = [
     {
       caption: 'Primary',
-      value: 'primary'
+      value: 'primary',
     },
     {
       caption: 'Secondary',
-      value: 'secondary'
+      value: 'secondary',
     },
     {
       caption: 'Warning',
-      value: 'warning'
+      value: 'warning',
     },
     {
       caption: 'Danger',
-      value: 'danger'
+      value: 'danger',
     },
     {
       caption: 'Subtle',
-      value: 'subtle'
+      value: 'subtle',
     },
     {
       caption: 'Border',
-      value: 'border'
+      value: 'border',
     },
     {
       caption: 'Subtle-danger',
-      value: 'subtle-danger'
-    }
+      value: 'subtle-danger',
+    },
   ];
 
   public readonly iconPositionOptions: RadioOption[] = [
     {
       caption: 'Unset',
-      value: null
+      value: null,
     },
     {
       caption: 'Left',
-      value: 'left'
+      value: 'left',
     },
     {
       caption: 'Right',
-      value: 'right'
-    }
+      value: 'right',
+    },
   ];
 }

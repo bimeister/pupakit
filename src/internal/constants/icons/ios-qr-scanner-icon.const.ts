@@ -17,5 +17,5 @@ export const iosQrScannerIcon: IconDefinition = {
 		s6.3,14,14,14h58.8c37,0,67.2-30.1,67.2-67.2V322C464,314.3,457.7,308,450,308z"/>
 </g>
 </svg>
-`
+`,
 };

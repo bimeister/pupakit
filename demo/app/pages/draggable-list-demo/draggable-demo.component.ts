@@ -5,29 +5,29 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   styleUrls: ['../demo.scss', './draggable-list-demo.component.scss'],
   templateUrl: './draggable-list-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class DraggableListDemoComponent {
   public list: any[] = [
     {
       id: '1',
-      content: '🐢'
+      content: '🐢',
     },
     {
       id: '2',
-      content: '🐍'
+      content: '🐍',
     },
     {
       id: '3',
-      content: '🦖'
+      content: '🦖',
     },
     {
       id: '4',
-      content: '🐊'
+      content: '🐊',
     },
     {
       id: '5',
-      content: '🦎'
-    }
+      content: '🦎',
+    },
   ];
 }

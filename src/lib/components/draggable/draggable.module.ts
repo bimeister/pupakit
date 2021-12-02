@@ -7,6 +7,6 @@ import { DraggerComponent } from './components/dragger/dragger.component';
 @NgModule({
   declarations: [DraggableComponent, DraggerComponent],
   imports: [SharedModule],
-  exports: [DraggableComponent, DraggerComponent]
+  exports: [DraggableComponent, DraggerComponent],
 })
 export class DraggableModule {}

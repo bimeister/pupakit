@@ -4,8 +4,9 @@ import {
   EventEmitter,
   forwardRef,
   Input,
+  OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { filterFalsy, filterTruthy, isNil, Nullable } from '@bimeister/utilities';
@@ -25,11 +26,11 @@ import { SwitcherSize } from '../../../../../internal/declarations/types/switche
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => SwitcherComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
-export class SwitcherComponent implements ControlValueAccessor {
+export class SwitcherComponent implements OnChanges, ControlValueAccessor {
   @Input() public disabled: boolean = false;
   @Input() public value: boolean;
   @Input() public tabindex: number = 0;
@@ -103,12 +104,12 @@ export class SwitcherComponent implements ControlValueAccessor {
     this.blur.emit(blurEvent);
   }
 
-  public onChange: CallableFunction = (_innerValue: string) => {
-    return;
+  public onChange: CallableFunction = () => {
+    // not implemented
   };
 
   public onTouched: VoidFunction = () => {
-    return;
+    // not implemented
   };
 
   private handleValueChanges(change: ComponentChange<this, boolean>): void {

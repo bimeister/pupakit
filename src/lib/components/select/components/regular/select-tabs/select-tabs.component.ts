@@ -6,7 +6,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SelectTabsService } from '../../../services/select-tabs-state.service';
@@ -17,7 +17,7 @@ import { SelectTabsService } from '../../../services/select-tabs-state.service';
   styleUrls: ['./select-tabs.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [SelectTabsService]
+  providers: [SelectTabsService],
 })
 export class SelectTabsComponent<T> implements OnInit, OnDestroy {
   @Input() public readonly initialSelect: T;

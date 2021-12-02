@@ -12,5 +12,5 @@ export const mdPrintIcon: IconDefinition = {
 		C464,188.803,435.175,160,399.95,160z M352,416H160V288h192V416z M384.101,64H127.899v80h256.201V64z"/>
 </g>
 </svg>
-`
+`,
 };

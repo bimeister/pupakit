@@ -33,7 +33,7 @@ export class PortalLayersService {
     const newPortalLayerLinks: PortalLayerLinks = {
       current: portalLayer,
       prev: null,
-      next: null
+      next: null,
     };
     this.portalLayerLinksMap.set(portalLayer.id, newPortalLayerLinks);
   }

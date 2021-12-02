@@ -5,12 +5,12 @@ import { IconButtonDemoComponent } from './icon-button-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: IconButtonDemoComponent
-  }
+    component: IconButtonDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class IconButtonDemoRoutingModule {}

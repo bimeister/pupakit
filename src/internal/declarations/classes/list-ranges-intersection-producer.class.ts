@@ -58,7 +58,7 @@ export class ListRangesIntersectionProducer {
       getFrom: serializedGetFrom,
       getTo: serializedGetTo,
       removeFrom: serializedRemoveFrom,
-      removeTo: serializedRemoveTo
+      removeTo: serializedRemoveTo,
     });
   }
 
@@ -80,7 +80,7 @@ export class ListRangesIntersectionProducer {
         currentTo: serializedCurrentRangeEnd,
 
         getFrom: serializedCurrentRangeStart,
-        getTo: serializedCurrentRangeEnd
+        getTo: serializedCurrentRangeEnd,
       });
     }
 
@@ -97,7 +97,7 @@ export class ListRangesIntersectionProducer {
         getTo: serializedCurrentRangeEnd,
 
         removeFrom: serializedPreviousRangeStart,
-        removeTo: serializedPreviousRangeEnd
+        removeTo: serializedPreviousRangeEnd,
       });
     }
 
@@ -119,7 +119,7 @@ export class ListRangesIntersectionProducer {
         currentTo: serializedPreviousRangeEnd,
 
         previousFrom: serializedPreviousRangeStart,
-        previousTo: serializedPreviousRangeEnd
+        previousTo: serializedPreviousRangeEnd,
       });
     }
 
@@ -139,7 +139,7 @@ export class ListRangesIntersectionProducer {
         previousTo: serializedPreviousRangeEnd,
 
         getFrom: serializedCurrentRangeStart,
-        getTo: serializedCurrentRangeEnd
+        getTo: serializedCurrentRangeEnd,
       });
     }
 
@@ -162,7 +162,7 @@ export class ListRangesIntersectionProducer {
         getTo: serializedCurrentRangeEnd,
 
         removeFrom: serializedPreviousRangeStart,
-        removeTo: intersectionStart
+        removeTo: intersectionStart,
       });
     }
 
@@ -178,7 +178,7 @@ export class ListRangesIntersectionProducer {
       getTo: intersectionStart,
 
       removeFrom: intersectionEnd,
-      removeTo: serializedPreviousRangeEnd
+      removeTo: serializedPreviousRangeEnd,
     });
   }
 

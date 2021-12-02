@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './example-1.component.html',
   styleUrls: ['./example-1.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SwitcherExample1Component {
   public readonly simpleControl: FormControl = new FormControl(true);

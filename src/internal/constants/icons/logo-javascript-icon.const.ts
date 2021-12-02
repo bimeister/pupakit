@@ -19,5 +19,5 @@ export const logoJavascriptIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

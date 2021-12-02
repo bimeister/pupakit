@@ -12,7 +12,7 @@ function buildDemo(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }
@@ -23,9 +23,9 @@ function bundleAssetsTask(): TaskFunction {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,
-          targetPath
+          targetPath,
         });
-      }
+      },
     });
     onDone();
   };
@@ -37,9 +37,9 @@ function copyStylesToDistFolder(): TaskFunction {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,
-          targetPath
+          targetPath,
         });
-      }
+      },
     });
     onDone();
   };
@@ -51,7 +51,7 @@ function replaceAssetsUrlsInStyles(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }

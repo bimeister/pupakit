@@ -25,5 +25,5 @@ export const iosBasketballIcon: IconDefinition = {
 		C235.7,373.6,226.3,357.3,214.9,342.3z"/>
 </g>
 </svg>
-`
+`,
 };

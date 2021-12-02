@@ -14,12 +14,12 @@ const MODULES: Type<unknown>[] = [
   ExampleViewerModule,
   ComponentsModule,
   ReactiveFormsModule,
-  InfoBlockModule
+  InfoBlockModule,
 ];
 
 @NgModule({
   imports: [...MODULES, IconModule.forRoot(getAllIcons())],
   exports: [...MODULES, IconModule],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DemoSharedModule {}

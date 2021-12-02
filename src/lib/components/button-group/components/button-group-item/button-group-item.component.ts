@@ -4,8 +4,9 @@ import {
   ElementRef,
   Inject,
   Input,
+  OnInit,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
 import { BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/button-group-state-service.token';
@@ -17,9 +18,9 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   templateUrl: './button-group-item.component.html',
   styleUrls: ['./button-group-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonGroupItemComponent extends TabsItemBase<ButtonGroupStateService> {
+export class ButtonGroupItemComponent extends TabsItemBase<ButtonGroupStateService> implements OnInit {
   @Input() public name: string = '';
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;

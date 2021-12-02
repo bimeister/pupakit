@@ -5,6 +5,6 @@ import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/
   templateUrl: './table-skeleton.component.html',
   styleUrls: ['./table-skeleton.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableSkeletonComponent {}

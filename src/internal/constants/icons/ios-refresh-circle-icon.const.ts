@@ -13,5 +13,5 @@ export const iosRefreshCircleIcon: IconDefinition = {
 		c0.4-5.2,4.7-9.1,9.9-9.1h0c5.8,0,10.4,4.9,9.9,10.7C378.1,332.7,323.1,384.1,256,384.1z"/>
 </g>
 </svg>
-`
+`,
 };

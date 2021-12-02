@@ -1,10 +1,10 @@
-import { Directive } from '@angular/core';
+import { AfterViewInit, Directive } from '@angular/core';
 import { AbstractControl, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { AbstractControlMethodsKey } from '../../enums/abstract-control-methods-key.enum';
 
 @Directive()
-export abstract class AbstractControlWithNotifier {
+export abstract class AbstractControlWithNotifier implements AfterViewInit {
   public readonly propertyChanges$: Subject<AbstractControlMethodsKey> = new Subject<AbstractControlMethodsKey>();
   constructor(private readonly ngControl: NgControl) {}
 

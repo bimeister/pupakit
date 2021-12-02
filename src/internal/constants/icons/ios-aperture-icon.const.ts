@@ -20,5 +20,5 @@ export const iosApertureIcon: IconDefinition = {
 	<path d="M60.1,325.9c15.2,42.6,43.9,78.8,81,103.4V249.8c0-1.8-2.2-2.7-3.4-1.4L60.1,325.9z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -14,5 +14,5 @@ export const iosPhoneLandscapeIcon: IconDefinition = {
 	<path d="M441.6,255.5c0,5.5,4.5,10,9.9,10c5.5,0,10-4.5,10-10s-4.5-10-10-10C446.1,245.6,441.6,250,441.6,255.5z"/>
 </g>
 </svg>
-`
+`,
 };

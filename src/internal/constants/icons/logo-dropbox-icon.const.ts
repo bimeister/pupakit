@@ -15,5 +15,5 @@ export const logoDropboxIcon: IconDefinition = {
 	<polygon points="256.2,298.3 176.4,364.3 142,342.1 142,367 256,435 370,367 370,342.1 335.8,364.3 	"/>
 </g>
 </svg>
-`
+`,
 };

@@ -21,5 +21,5 @@ export const iosCreateIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

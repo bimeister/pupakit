@@ -7,7 +7,7 @@ import { IconComponent } from './components/icon/icon.component';
 /** @dynamic */
 @NgModule({
   declarations: [IconComponent],
-  exports: [IconComponent]
+  exports: [IconComponent],
 })
 export class IconModule {
   public static forRoot(icons: IconDefinition[] = []): ModuleWithProviders<IconModule> {
@@ -26,7 +26,7 @@ export class IconModule {
 
     return {
       ngModule: IconModule,
-      providers: [{ provide: AVAILABLE_ICONS_TOKEN, useValue: filledIconsRegistry, multi: true }]
+      providers: [{ provide: AVAILABLE_ICONS_TOKEN, useValue: filledIconsRegistry, multi: true }],
     };
   }
 }

@@ -5,7 +5,7 @@ import {
   EventEmitter,
   forwardRef,
   Input,
-  Output
+  Output,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -19,21 +19,21 @@ type StarSize = 'large' | 'medium' | 'small';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => RatingComponent),
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RatingComponent {
   @Input() public set numberOfStars(v: number) {
     this._numberOfStars = v;
     this.initStars();
   }
-  get value(): number {
+  public get value(): number {
     return this._value;
   }
 
-  @Input() set value(v: number) {
+  @Input() public set value(v: number) {
     if (v !== this._value) {
       this._value = v;
       this.onChange(v);

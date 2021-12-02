@@ -17,5 +17,5 @@ export const logoPinterestIcon: IconDefinition = {
 		c20.1,5.9,41.4,9.2,63.5,9.2c123.7,0,224-100.3,224-224C480,132.3,379.7,32,256,32z"/>
 </g>
 </svg>
-`
+`,
 };

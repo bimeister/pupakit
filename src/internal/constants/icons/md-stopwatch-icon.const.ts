@@ -23,5 +23,5 @@ export const mdStopwatchIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

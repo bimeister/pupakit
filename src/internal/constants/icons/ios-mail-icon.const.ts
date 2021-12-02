@@ -16,5 +16,5 @@ export const iosMailIcon: IconDefinition = {
 		C227.3,289.2,241.2,295.1,256,295.1z"/>
 </g>
 </svg>
-`
+`,
 };

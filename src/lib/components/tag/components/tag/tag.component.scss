@@ -58,14 +58,14 @@
       light: (
         background-color: color(get-map-field($tagColorMap, [backgroundColor, light])),
         font-color: color(get-map-field($tagColorMap, [fontColor, light])),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, light]))
+        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, light])),
       ),
       dark: (
         background-color: color(get-map-field($tagColorMap, [backgroundColor, dark])),
         font-color: color(get-map-field($tagColorMap, [fontColor, dark])),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, dark]))
-      )
-    )
+        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, dark])),
+      ),
+    ),
   );
 
   $disabled-tag: (
@@ -73,14 +73,14 @@
       light: (
         background-color: color(base-white-n400),
         font-color: color(base-white-n250),
-        box-shadow: shadow-helper(base-white-n400)
+        box-shadow: shadow-helper(base-white-n400),
       ),
       dark: (
         background-color: color(base-dark-n500),
         font-color: color(base-dark-n250),
-        box-shadow: shadow-helper(base-dark-n500)
-      )
-    )
+        box-shadow: shadow-helper(base-dark-n500),
+      ),
+    ),
   );
 
   $clickable-tag: map.deep-merge(
@@ -88,12 +88,12 @@
     (
       default: (
         light: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, light]))
+          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, light])),
         ),
         dark: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, dark]))
-        )
-      )
+          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, dark])),
+        ),
+      ),
     )
   );
 
@@ -105,13 +105,13 @@
           map.get($clickable-tag, default),
           (
             light: (
-              background-color: color(get-map-field($tagColorMap, [clickableColor, light]))
+              background-color: color(get-map-field($tagColorMap, [clickableColor, light])),
             ),
             dark: (
-              background-color: color(get-map-field($tagColorMap, [clickableColor, dark]))
-            )
+              background-color: color(get-map-field($tagColorMap, [clickableColor, dark])),
+            ),
           )
-        )
+        ),
     )
   );
 
@@ -123,20 +123,20 @@
           map.get($clickable-tag, default),
           (
             light: (
-              box-shadow: shadow-helper(primary-n400, 2px)
+              box-shadow: shadow-helper(primary-n400, 2px),
             ),
             dark: (
-              box-shadow: shadow-helper(primary-n400, 2px)
-            )
+              box-shadow: shadow-helper(primary-n400, 2px),
+            ),
           )
-        )
+        ),
     )
   );
 
   $config: (
     base-tag: $base-tag,
     clickable-tag: $clickable-tag,
-    disabled-tag: $disabled-tag
+    disabled-tag: $disabled-tag,
   );
 
   @return $config;
@@ -145,76 +145,76 @@
 $defaultColorMap: (
   backgroundColor: (
     light: base-white-n300,
-    dark: base-dark-n300
+    dark: base-dark-n300,
   ),
   fontColor: (
     light: base-n600,
-    dark: base-n0
+    dark: base-n0,
   ),
   clickableColor: (
     light: base-white-n275,
-    dark: base-dark-n275
-  )
+    dark: base-dark-n275,
+  ),
 );
 
 $redColorMap: (
   backgroundColor: (
     light: red-n500,
-    dark: red-n500
+    dark: red-n500,
   ),
   fontColor: (
     light: base-n0,
-    dark: base-n0
+    dark: base-n0,
   ),
   clickableColor: (
     light: red-n400,
-    dark: red-n400
-  )
+    dark: red-n400,
+  ),
 );
 
 $yellowColorMap: (
   backgroundColor: (
     light: yellow-n500,
-    dark: yellow-n500
+    dark: yellow-n500,
   ),
   fontColor: (
     light: base-n0,
-    dark: base-n0
+    dark: base-n0,
   ),
   clickableColor: (
     light: yellow-n400,
-    dark: yellow-n400
-  )
+    dark: yellow-n400,
+  ),
 );
 
 $primaryColorMap: (
   backgroundColor: (
     light: primary-n500,
-    dark: primary-n500
+    dark: primary-n500,
   ),
   fontColor: (
     light: base-n0,
-    dark: base-n0
+    dark: base-n0,
   ),
   clickableColor: (
     light: primary-n400,
-    dark: primary-n400
-  )
+    dark: primary-n400,
+  ),
 );
 
 $greenColorMap: (
   backgroundColor: (
     light: green-n500,
-    dark: green-n500
+    dark: green-n500,
   ),
   fontColor: (
     light: base-n0,
-    dark: base-n0
+    dark: base-n0,
   ),
   clickableColor: (
     light: green-n400,
-    dark: green-n400
-  )
+    dark: green-n400,
+  ),
 );
 
 $themeConfigs: (
@@ -222,7 +222,7 @@ $themeConfigs: (
   red: getTagThemeConfig($redColorMap),
   yellow: getTagThemeConfig($yellowColorMap),
   primary: getTagThemeConfig($primaryColorMap),
-  green: getTagThemeConfig($greenColorMap)
+  green: getTagThemeConfig($greenColorMap),
 );
 
 @mixin apply-background-color-modifiers($root, $theme) {

@@ -2,12 +2,11 @@ import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { AgGridEvent, ColDef, ColumnApi, GridApi, GridReadyEvent, IDatasource } from 'ag-grid-community';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscriber } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-
 import { GridState } from '../interfaces/grid-state.interface';
 import { DatagridManipulatorConfiguration } from './datagrid-manipulator-configuration.class';
 
-export class DatagridManipulator<rowDataT> {
-  public get config(): DatagridManipulatorConfiguration<rowDataT> {
+export class DatagridManipulator<RowDataT> {
+  public get config(): DatagridManipulatorConfiguration<RowDataT> {
     return this.configuration;
   }
 
@@ -16,7 +15,7 @@ export class DatagridManipulator<rowDataT> {
 
   public readonly onGridReady$: ReplaySubject<GridReadyEvent> = new ReplaySubject<GridReadyEvent>(1);
 
-  constructor(private readonly configuration: DatagridManipulatorConfiguration<rowDataT>) {}
+  constructor(private readonly configuration: DatagridManipulatorConfiguration<RowDataT>) {}
 
   public gridReady(gridReadyEvent: GridReadyEvent): void {
     this.onGridReady$.next(gridReadyEvent);
@@ -42,7 +41,7 @@ export class DatagridManipulator<rowDataT> {
     });
   }
 
-  public setRowData(rowData: rowDataT[]): void {
+  public setRowData(rowData: RowDataT[]): void {
     this.gridApi$.pipe(take(1)).subscribe((gridApi: GridApi) => {
       if (isNil(gridApi)) {
         this.config.gridOptions.rowModelType = 'clientSide';
@@ -78,12 +77,10 @@ export class DatagridManipulator<rowDataT> {
   public getGridState(): Observable<GridState> {
     return combineLatest([this.gridApi$.pipe(filterNotNil()), this.columnApi$.pipe(filterNotNil())]).pipe(
       take(1),
-      map(([gridApi, columnApi]: [GridApi, ColumnApi]) => {
-        return {
-          columnState: columnApi.getColumnState(),
-          sortModel: gridApi.getSortModel()
-        };
-      })
+      map(([gridApi, columnApi]: [GridApi, ColumnApi]) => ({
+        columnState: columnApi.getColumnState(),
+        sortModel: gridApi.getSortModel(),
+      }))
     );
   }
 
@@ -102,7 +99,7 @@ export class DatagridManipulator<rowDataT> {
       this.addEventListener(eventType, listener);
 
       return {
-        unsubscribe: () => this.removeEventListener(eventType, listener)
+        unsubscribe: () => this.removeEventListener(eventType, listener),
       };
     });
   }

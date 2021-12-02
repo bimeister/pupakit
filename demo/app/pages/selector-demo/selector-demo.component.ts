@@ -5,7 +5,7 @@ import { FormControl } from '@angular/forms';
   selector: 'demo-select',
   styleUrls: ['./selector-demo.component.scss'],
   templateUrl: './selector-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectorDemoComponent {
   public readonly formControl: FormControl = new FormControl();

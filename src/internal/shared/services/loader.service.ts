@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { LoaderType } from '../../declarations/types/loader-type.type';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoaderService {
   private readonly loaderVisibilityState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

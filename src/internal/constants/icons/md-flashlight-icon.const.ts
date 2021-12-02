@@ -11,5 +11,5 @@ export const mdFlashlightIcon: IconDefinition = {
 		l-29.9,30.4L80,110.4z M357.1,125.6l45-45.5l29.9,30.4L387.1,156L357.1,125.6z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -19,5 +19,5 @@ export const mdRestaurantIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

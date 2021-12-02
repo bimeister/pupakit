@@ -5,12 +5,12 @@ import { ModalDemoComponent } from './modal-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: ModalDemoComponent
-  }
+    component: ModalDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ModalDemoRoutingModule {}

@@ -6,6 +6,6 @@ import { SearchFieldDemoComponent } from './search-field-demo.component';
 
 @NgModule({
   declarations: [SearchFieldDemoComponent, SearchFieldExample1Component],
-  imports: [DemoSharedModule, SearchFieldDemoRoutingModule]
+  imports: [DemoSharedModule, SearchFieldDemoRoutingModule],
 })
 export class SearchFieldDemoModule {}

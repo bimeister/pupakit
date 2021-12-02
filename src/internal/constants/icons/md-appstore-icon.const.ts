@@ -13,5 +13,5 @@ export const mdAppstoreIcon: IconDefinition = {
 		 M204,397.64V228.867l142.999,84.387L204,397.64z"/>
 </g>
 </svg>
-`
+`,
 };

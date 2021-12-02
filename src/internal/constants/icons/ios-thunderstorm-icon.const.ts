@@ -13,5 +13,5 @@ export const iosThunderstormIcon: IconDefinition = {
 	<path d="M206.8,458.9c-1.2,4.4,4.8,7,7.2,3.2L283.4,352H236L206.8,458.9z"/>
 </g>
 </svg>
-`
+`,
 };

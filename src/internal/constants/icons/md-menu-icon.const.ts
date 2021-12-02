@@ -13,5 +13,5 @@ export const mdMenuIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

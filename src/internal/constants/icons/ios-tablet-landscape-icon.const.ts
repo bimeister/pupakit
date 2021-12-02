@@ -16,5 +16,5 @@ export const iosTabletLandscapeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

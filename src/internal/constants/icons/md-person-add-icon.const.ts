@@ -19,5 +19,5 @@ export const mdPersonAddIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -5,12 +5,12 @@ import { TextareaDemoComponent } from './textarea-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TextareaDemoComponent
-  }
+    component: TextareaDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TextareaDemoRoutingModule {}

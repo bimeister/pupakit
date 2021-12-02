@@ -13,5 +13,5 @@ export const mdPricetagsIcon: IconDefinition = {
 		c20.7,0,36.8,19.6,30.7,41.3C371.8,139.6,363.6,147.8,353.3,150.7z"/>
 </g>
 </svg>
-`
+`,
 };

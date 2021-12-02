@@ -9,5 +9,5 @@ export const mdBookmarkIcon: IconDefinition = {
 	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M360,64H152c-22.002,0-40,17.998-40,40v344l144-64l144,64V104C400,81.998,382.002,64,360,64z"/>
 </svg>
-`
+`,
 };

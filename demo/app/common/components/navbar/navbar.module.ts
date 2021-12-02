@@ -15,9 +15,9 @@ import { SidebarModule } from '../sidebar/sidebar.module';
     ThemeToggleComponent,
     MenuToggleComponent,
     GridToggleComponent,
-    SidebarDrawerContentContainerComponent
+    SidebarDrawerContentContainerComponent,
   ],
   exports: [NavbarComponent],
-  imports: [DemoSharedModule, RouterModule, FormsModule, SidebarModule]
+  imports: [DemoSharedModule, RouterModule, FormsModule, SidebarModule],
 })
 export class NavbarModule {}

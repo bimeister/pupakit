@@ -1,36 +1,37 @@
 import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  TemplateRef,
-  Input,
-  ElementRef,
   AfterViewInit,
-  OnDestroy
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  TemplateRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import { TableTemplatesService } from '../../services/table-templates.service';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { TableColumn } from '../../../../../internal/declarations/classes/table-column.class';
 import { TableRow } from '../../../../../internal/declarations/classes/table-row.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
 import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { TableTemplatesService } from '../../services/table-templates.service';
 
 @Component({
   selector: 'pupa-table-header-cell-container',
   templateUrl: './table-header-cell-container.component.html',
   styleUrls: ['./table-header-cell-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableHeaderCellContainerComponent<T> implements AfterViewInit, OnDestroy {
+export class TableHeaderCellContainerComponent<T> implements AfterViewInit, OnChanges, OnDestroy {
   @Input() public column: TableColumn;
   @Input() public row: TableRow;
 
   public templateRef: TemplateRef<TableHeaderCellContext>;
   public templateContext: TableHeaderCellContext = {
-    $implicit: null
+    $implicit: null,
   };
 
   constructor(
@@ -58,7 +59,7 @@ export class TableHeaderCellContainerComponent<T> implements AfterViewInit, OnDe
     }
     this.templateRef = this.tableTemplatesService.getHeaderCellTemplateByType(value.definition.type);
     this.templateContext = {
-      $implicit: value
+      $implicit: value,
     };
   }
 }

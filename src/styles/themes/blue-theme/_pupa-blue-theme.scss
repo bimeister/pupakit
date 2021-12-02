@@ -86,7 +86,7 @@ $font-size: (
   'font-size_h2': $font-size_h2,
   'font-size_h3': $font-size_h3,
   'font-size_h4': $font-size_h4,
-  'font-size_h5': $font-size_h5
+  'font-size_h5': $font-size_h5,
 );
 
 $line-height: (
@@ -95,7 +95,7 @@ $line-height: (
   'line-height_h2': $line-height_h2,
   'line-height_h3': $line-height_h3,
   'line-height_h4': $line-height_h4,
-  'line-height_h5': $line-height_h5
+  'line-height_h5': $line-height_h5,
 );
 
 $variables: (
@@ -115,7 +115,7 @@ $variables: (
   'transition-duration_entering_screen': $transition-duration_entering_screen,
   'transition-duration_leaving_screen': $transition-duration_leaving_screen,
   'transition-timing-function_common': $transition-timing-function_common,
-  'opacity_hovered-button': $opacity_hovered-button
+  'opacity_hovered-button': $opacity_hovered-button,
 );
 
 @include generate-css-variables($colors, merge-variables-maps($font-size, $line-height, $variables));

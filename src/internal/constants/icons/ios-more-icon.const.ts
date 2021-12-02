@@ -12,5 +12,5 @@ export const iosMoreIcon: IconDefinition = {
 	<path d="M410,218c-21,0-38,17-38,38s17,38,38,38c21,0,38-17,38-38S431,218,410,218L410,218z"/>
 </g>
 </svg>
-`
+`,
 };

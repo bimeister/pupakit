@@ -4,9 +4,10 @@ import {
   EventEmitter,
   HostListener,
   Input,
+  OnChanges,
   OnDestroy,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -29,9 +30,9 @@ const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
   styleUrls: ['./date-picker.component.scss'],
   providers: [DatePickerStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatePickerComponent implements OnDestroy {
+export class DatePickerComponent implements OnChanges, OnDestroy {
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
 
   @Input() public selectionMode: DatePickerSelectionMode = 'range';
@@ -259,7 +260,8 @@ export class DatePickerComponent implements OnDestroy {
         filterFalsy(),
         switchMap(() => this.selectedRange$),
         map((range: [Date, Date]) => {
-          const sortFunction = (dateA: Date, dateB: Date) => dateA.valueOf() - dateB.valueOf();
+          const sortFunction: (dateA: Date, dateB: Date) => number = (dateA: Date, dateB: Date) =>
+            dateA.valueOf() - dateB.valueOf();
           return [...range].sort(sortFunction);
         }),
         distinctUntilChanged((previousValue: Date[], currentValue: Date[]) => isEqual(previousValue, currentValue)),

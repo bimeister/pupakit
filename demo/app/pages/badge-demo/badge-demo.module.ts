@@ -11,13 +11,13 @@ const EXAMPLES: Type<unknown>[] = [
   BadgeExample1Component,
   BadgeExample2Component,
   BadgeExample3Component,
-  BadgeExample4Component
+  BadgeExample4Component,
 ];
 const COMPONENTS: Type<unknown>[] = [BadgeDemoComponent, ...EXAMPLES];
 const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [DemoSharedModule, BadgeDemoRoutingModule]
+  imports: [DemoSharedModule, BadgeDemoRoutingModule],
 })
 export class BadgeDemoModule {}

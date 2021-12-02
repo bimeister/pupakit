@@ -1,12 +1,12 @@
+import { Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
 import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { filter, mapTo, switchMap, withLatestFrom } from 'rxjs/operators';
-import { FlatTreeItem } from './flat-tree-item.class';
-import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
 import { QueueEvents } from '../events/queue.events';
 import { TreeEvents } from '../events/tree.events';
-import { Type } from '@angular/core';
+import { FlatTreeItem } from './flat-tree-item.class';
+import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
 
 export class DefaultTreeEventHandler {
   protected subscription: Subscription = new Subscription();
@@ -30,9 +30,7 @@ export class DefaultTreeEventHandler {
   protected getSubscriptionToSetData(): Subscription {
     return this.getEvents(TreeEvents.SetData)
       .pipe(
-        switchMap((event: TreeEvents.SetData) => {
-          return this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event));
-        })
+        switchMap((event: TreeEvents.SetData) => this.dataDisplayCollection.setData(event.payload).pipe(mapTo(event)))
       )
       .subscribe((event: TreeEvents.SetData) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
@@ -95,9 +93,7 @@ export class DefaultTreeEventHandler {
     if (!treeItemExists) {
       return;
     }
-    const updatedData: FlatTreeItem[] = data.filter((treeItem: FlatTreeItem) => {
-      return treeItem.id !== removeItemId;
-    });
+    const updatedData: FlatTreeItem[] = data.filter((treeItem: FlatTreeItem) => treeItem.id !== removeItemId);
     this.eventBus.dispatch(new TreeEvents.SetData(updatedData));
   }
 
@@ -142,7 +138,7 @@ export class DefaultTreeEventHandler {
     expandedIdsList: string[]
   ): void {
     if (isNil(parentId)) {
-      const newData: FlatTreeItem[] = children.map(treeItem => ({ ...treeItem, level: 0 }));
+      const newData: FlatTreeItem[] = children.map((treeItem: FlatTreeItem) => ({ ...treeItem, level: 0 }));
       this.eventBus.dispatch(new TreeEvents.SetData(newData));
       this.eventBus.dispatch(new TreeEvents.SetExpanded([]));
       return;
@@ -161,7 +157,7 @@ export class DefaultTreeEventHandler {
       childrenIdsSet.add(childItem.id);
       return {
         ...childItem,
-        level: parent.level + 1
+        level: parent.level + 1,
       };
     });
     const parentIndex: number = data.indexOf(parent);
@@ -169,7 +165,7 @@ export class DefaultTreeEventHandler {
       ...data.slice(0, parentIndex),
       parent,
       ...childrenWithLevel,
-      ...data.slice(parentIndex + 1)
+      ...data.slice(parentIndex + 1),
     ];
     const noExpandedChildrenList: string[] = expandedIdsList.filter(
       (expandedTreeItemId: string) => !childrenIdsSet.has(expandedTreeItemId)
@@ -191,9 +187,9 @@ export class DefaultTreeEventHandler {
       data,
       expanded
     );
-    const dataWithoutRemovedItem: FlatTreeItem[] = dataWithoutChildren.filter((treeItem: FlatTreeItem) => {
-      return treeItem.id !== removeItemId;
-    });
+    const dataWithoutRemovedItem: FlatTreeItem[] = dataWithoutChildren.filter(
+      (treeItem: FlatTreeItem) => treeItem.id !== removeItemId
+    );
     this.eventBus.dispatch(new TreeEvents.SetData(dataWithoutRemovedItem));
     this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
   }
@@ -216,9 +212,9 @@ export class DefaultTreeEventHandler {
     const parentIndex: number = data.indexOf(parent);
     const dataBeforeParent: FlatTreeItem[] = parentIndex === 0 ? [] : data.slice(0, parentIndex);
     const dataAfterParent: FlatTreeItem[] = data.slice(parentIndex + 1);
-    const nextNonChildIndex: number = dataAfterParent.findIndex((dataItem: FlatTreeItem) => {
-      return dataItem.level <= parent.level;
-    });
+    const nextNonChildIndex: number = dataAfterParent.findIndex(
+      (dataItem: FlatTreeItem) => dataItem.level <= parent.level
+    );
     const isLastParent: boolean = nextNonChildIndex === -1;
     const children: FlatTreeItem[] = dataAfterParent.slice(0, nextNonChildIndex);
     const childrenIdsList: string[] = children.map((child: FlatTreeItem) => child.id);

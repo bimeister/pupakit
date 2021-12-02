@@ -11,7 +11,7 @@ function createForComponents(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }
@@ -22,7 +22,7 @@ function createForInternal(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }

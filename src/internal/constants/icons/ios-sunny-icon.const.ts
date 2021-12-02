@@ -28,5 +28,5 @@ export const iosSunnyIcon: IconDefinition = {
 	<path d="M256,160c-52.9,0-96,43.1-96,96s43.1,96,96,96c52.9,0,96-43.1,96-96S308.9,160,256,160L256,160z"/>
 </g>
 </svg>
-`
+`,
 };

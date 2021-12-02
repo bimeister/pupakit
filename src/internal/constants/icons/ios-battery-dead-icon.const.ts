@@ -12,5 +12,5 @@ export const iosBatteryDeadIcon: IconDefinition = {
 	<path d="M464,204.6v102.8c16,0,32-27.7,32-51.4C496,232.3,480,204.6,464,204.6z"/>
 </g>
 </svg>
-`
+`,
 };

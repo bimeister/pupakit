@@ -15,5 +15,5 @@ export const mdSubwayIcon: IconDefinition = {
 		"/>
 </g>
 </svg>
-`
+`,
 };

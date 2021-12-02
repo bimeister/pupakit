@@ -6,6 +6,6 @@ import { SwitcherComponent } from './components/switcher/switcher.component';
 @NgModule({
   declarations: [SwitcherComponent],
   imports: [SharedModule],
-  exports: [SwitcherComponent]
+  exports: [SwitcherComponent],
 })
 export class SwitcherModule {}

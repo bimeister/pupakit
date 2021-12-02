@@ -20,7 +20,7 @@ const PREVIEW_TAB_NAME: string = 'Preview';
   templateUrl: './code-container.component.html',
   styleUrls: ['./code-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeContainerComponent implements OnInit {
   @ContentChild(CodeContainerPreviewTemplateDirective, { static: true })
@@ -37,7 +37,7 @@ export class CodeContainerComponent implements OnInit {
 
   public readonly tabs$: Observable<Tab[]> = combineLatest([
     this.contentWithCode$.pipe(filterNotEmpty()),
-    this.isPreviewExist$
+    this.isPreviewExist$,
   ]).pipe(
     map(([contentWithCode, isPreviewExist]: [Record<string, string>, boolean]) => {
       const tabNames: string[] = Object.keys(contentWithCode);
@@ -45,7 +45,7 @@ export class CodeContainerComponent implements OnInit {
 
       return names.map((tabName: string) => ({
         name: tabName,
-        code: tabName === PREVIEW_TAB_NAME ? null : contentWithCode[tabName]
+        code: tabName === PREVIEW_TAB_NAME ? null : contentWithCode[tabName],
       }));
     })
   );

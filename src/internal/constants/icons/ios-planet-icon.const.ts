@@ -19,5 +19,5 @@ export const iosPlanetIcon: IconDefinition = {
 		c1.9-1.2,2.9-3.3,2.7-5.5C315.5,356.8,314.1,354.9,312,354z"/>
 </g>
 </svg>
-`
+`,
 };

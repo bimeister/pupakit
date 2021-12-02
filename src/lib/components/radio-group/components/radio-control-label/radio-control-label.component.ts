@@ -8,7 +8,7 @@ import { RadioControlComponent } from '../radio-control/radio-control.component'
   templateUrl: './radio-control-label.component.html',
   styleUrls: ['./radio-control-label.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioControlLabelComponent<T> {
   public readonly isSelected$: Observable<boolean> = this.radioControlComponent.isSelected$;

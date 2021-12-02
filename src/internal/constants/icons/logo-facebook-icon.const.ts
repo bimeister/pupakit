@@ -16,5 +16,5 @@ export const logoFacebookIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

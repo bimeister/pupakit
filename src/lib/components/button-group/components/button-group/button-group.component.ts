@@ -8,7 +8,7 @@ import {
   Optional,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/button-group-state-service.token';
 import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
@@ -21,7 +21,7 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   styleUrls: ['./button-group.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [ButtonGroupStateService]
+  providers: [ButtonGroupStateService],
 })
 export class ButtonGroupComponent extends TabsBase<ButtonGroupStateService> implements OnInit {
   @ViewChild('buttonGroupContainer', { static: true })

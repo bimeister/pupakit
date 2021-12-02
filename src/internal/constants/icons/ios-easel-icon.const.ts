@@ -26,5 +26,5 @@ export const iosEaselIcon: IconDefinition = {
 	<path d="M256,32c-13.4-0.2-24.4,12.2-24.4,25.6h48.7C280.4,44.2,269.4,31.8,256,32z"/>
 </g>
 </svg>
-`
+`,
 };

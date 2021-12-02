@@ -18,5 +18,5 @@ export const mdCloudOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

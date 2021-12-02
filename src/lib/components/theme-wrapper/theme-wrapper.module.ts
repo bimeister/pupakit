@@ -5,6 +5,6 @@ import { ThemeWrapperComponent } from './components/theme-wrapper/theme-wrapper.
 @NgModule({
   declarations: [ThemeWrapperComponent],
   imports: [SharedModule],
-  exports: [ThemeWrapperComponent]
+  exports: [ThemeWrapperComponent],
 })
 export class ThemeWrapperModule {}

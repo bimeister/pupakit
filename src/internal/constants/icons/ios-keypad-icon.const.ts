@@ -27,5 +27,5 @@ export const iosKeypadIcon: IconDefinition = {
 		"/>
 </g>
 </svg>
-`
+`,
 };

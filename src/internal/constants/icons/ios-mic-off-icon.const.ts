@@ -20,5 +20,5 @@ export const iosMicOffIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

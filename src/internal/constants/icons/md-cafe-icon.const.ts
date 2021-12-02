@@ -14,5 +14,5 @@ export const mdCafeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

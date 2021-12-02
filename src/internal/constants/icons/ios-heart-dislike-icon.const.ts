@@ -17,5 +17,5 @@ export const iosHeartDislikeIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

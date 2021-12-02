@@ -11,5 +11,5 @@ export const mdHourglassIcon: IconDefinition = {
 		H128z M341.3,351.9v71.5H170.7v-71.5l85.3-85.2L341.3,351.9z M256,245.4l-85.3-85.2V87.6h170.7v72.5L256,245.4z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -13,5 +13,5 @@ export const iosHelpIcon: IconDefinition = {
 		C239.9,352,230.4,343,230.4,331.4z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -18,5 +18,5 @@ export const iosDesktopIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

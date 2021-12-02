@@ -4,7 +4,7 @@ import {
   Component,
   Input,
   OnChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { ReplaySubject } from 'rxjs';
@@ -16,7 +16,7 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   templateUrl: './skeleton.component.html',
   styleUrls: ['./skeleton.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonComponent implements OnChanges {
   @Input() public isActive?: boolean;

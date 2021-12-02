@@ -14,5 +14,5 @@ export const iosAlbumsIcon: IconDefinition = {
 		C416,71.2,410.2,77,403.2,77z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -17,5 +17,5 @@ export const mdWatchIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

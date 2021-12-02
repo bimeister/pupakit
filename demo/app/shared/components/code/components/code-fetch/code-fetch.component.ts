@@ -11,7 +11,7 @@ import { ExamplesRequestsService } from '../../../../services/requests/examples-
   templateUrl: './code-fetch.component.html',
   styleUrls: ['./code-fetch.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeFetchComponent implements OnChanges {
   @Input() public readonly codeFilePath: string = '';

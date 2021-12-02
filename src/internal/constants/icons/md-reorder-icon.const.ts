@@ -13,5 +13,5 @@ export const mdReorderIcon: IconDefinition = {
 	<rect x="96" y="275.8" width="320" height="35.6"/>
 </g>
 </svg>
-`
+`,
 };

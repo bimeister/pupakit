@@ -64,278 +64,294 @@ const demoRoutes: Routes = [
       {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'typography'
+        redirectTo: 'typography',
       },
       {
         path: 'typography',
         loadChildren: (): Promise<Type<TypographyPageModule>> =>
-          import('./pages/typography-page/typography-page.module').then(module => module.TypographyPageModule)
+          import('./pages/typography-page/typography-page.module').then((module: any) => module.TypographyPageModule),
       },
       {
         path: 'avatar',
         loadChildren: (): Promise<Type<AvatarDemoModule>> =>
-          import('./pages/avatar-demo/avatar-demo.module').then(module => module.AvatarDemoModule)
+          import('./pages/avatar-demo/avatar-demo.module').then((module: any) => module.AvatarDemoModule),
       },
       {
         path: 'colors',
         loadChildren: (): Promise<Type<ColorsDemoModule>> =>
-          import('./pages/colors-demo/colors-demo.module').then(module => module.ColorsDemoModule)
+          import('./pages/colors-demo/colors-demo.module').then((module: any) => module.ColorsDemoModule),
       },
       {
         path: 'icon',
         loadChildren: (): Promise<Type<IconPageModule>> =>
-          import('./pages/icon-page/icon-page.module').then(module => module.IconPageModule)
+          import('./pages/icon-page/icon-page.module').then((module: any) => module.IconPageModule),
       },
       {
         path: 'spinner',
         loadChildren: (): Promise<Type<SpinnerDemoModule>> =>
-          import('./pages/spinner-demo/spinner-demo.module').then(module => module.SpinnerDemoModule)
+          import('./pages/spinner-demo/spinner-demo.module').then((module: any) => module.SpinnerDemoModule),
       },
       {
         path: 'loader',
         loadChildren: (): Promise<Type<LoaderDemoModule>> =>
-          import('./pages/loader-demo/loader-demo.module').then(module => module.LoaderDemoModule)
+          import('./pages/loader-demo/loader-demo.module').then((module: any) => module.LoaderDemoModule),
       },
       {
         path: 'button',
         loadChildren: (): Promise<Type<ButtonDemoModule>> =>
-          import('./pages/button-demo/button-demo.module').then(module => module.ButtonDemoModule)
+          import('./pages/button-demo/button-demo.module').then((module: any) => module.ButtonDemoModule),
       },
       {
         path: 'button-multi',
         loadChildren: (): Promise<Type<ButtonMultiDemoModule>> =>
-          import('./pages/button-multi-demo/button-multi-demo.module').then(module => module.ButtonMultiDemoModule)
+          import('./pages/button-multi-demo/button-multi-demo.module').then(
+            (module: any) => module.ButtonMultiDemoModule
+          ),
       },
       {
         path: 'chip',
         loadChildren: (): Promise<Type<ChipDemoModule>> =>
-          import('./pages/chip-demo/chip-demo.module').then(module => module.ChipDemoModule)
+          import('./pages/chip-demo/chip-demo.module').then((module: any) => module.ChipDemoModule),
       },
       {
         path: 'chip-tabs',
         loadChildren: (): Promise<Type<ChipTabsDemoModule>> =>
-          import('./pages/chip-tabs-demo/chip-tabs-demo.module').then(module => module.ChipTabsDemoModule)
+          import('./pages/chip-tabs-demo/chip-tabs-demo.module').then((module: any) => module.ChipTabsDemoModule),
       },
       {
         path: 'icon-button',
         loadChildren: (): Promise<Type<IconButtonDemoModule>> =>
-          import('./pages/icon-button-demo/icon-button-demo.module').then(module => module.IconButtonDemoModule)
+          import('./pages/icon-button-demo/icon-button-demo.module').then((module: any) => module.IconButtonDemoModule),
       },
       {
         path: 'checkbox',
         loadChildren: (): Promise<Type<CheckboxDemoModule>> =>
-          import('./pages/checkbox-demo/checkbox-demo.module').then(module => module.CheckboxDemoModule)
+          import('./pages/checkbox-demo/checkbox-demo.module').then((module: any) => module.CheckboxDemoModule),
       },
       {
         path: 'input',
         loadChildren: (): Promise<Type<InputDemoModule>> =>
-          import('./pages/input-demo/input-demo.module').then(module => module.InputDemoModule)
+          import('./pages/input-demo/input-demo.module').then((module: any) => module.InputDemoModule),
       },
       {
         path: 'label',
         loadChildren: (): Promise<Type<LabelDemoModule>> =>
-          import('./pages/label-demo/label-demo.module').then(module => module.LabelDemoModule)
+          import('./pages/label-demo/label-demo.module').then((module: any) => module.LabelDemoModule),
       },
       {
         path: 'search-field',
         loadChildren: (): Promise<Type<SearchFieldDemoModule>> =>
-          import('./pages/search-field-demo/search-field-demo.module').then(module => module.SearchFieldDemoModule)
+          import('./pages/search-field-demo/search-field-demo.module').then(
+            (module: any) => module.SearchFieldDemoModule
+          ),
       },
       {
         path: 'tree',
         loadChildren: (): Promise<Type<TreeDemoModule>> =>
-          import('./pages/tree-demo/tree-demo.module').then(module => module.TreeDemoModule)
+          import('./pages/tree-demo/tree-demo.module').then((module: any) => module.TreeDemoModule),
       },
       {
         path: 'tree-new',
         loadChildren: (): Promise<Type<TreeNewDemoModule>> =>
-          import('./pages/tree-new-demo/tree-new-demo.module').then(module => module.TreeNewDemoModule)
+          import('./pages/tree-new-demo/tree-new-demo.module').then((module: any) => module.TreeNewDemoModule),
       },
       {
         path: 'select',
         loadChildren: (): Promise<Type<SelectDemoModule>> =>
-          import('./pages/select-demo/select-demo.module').then(module => module.SelectDemoModule)
+          import('./pages/select-demo/select-demo.module').then((module: any) => module.SelectDemoModule),
       },
       {
         path: 'switcher',
         loadChildren: (): Promise<Type<SwitcherDemoModule>> =>
-          import('./pages/switcher-demo/switcher-demo.module').then(module => module.SwitcherDemoModule)
+          import('./pages/switcher-demo/switcher-demo.module').then((module: any) => module.SwitcherDemoModule),
       },
       {
         path: 'droppable',
         loadChildren: (): Promise<Type<DroppableDemoModule>> =>
-          import('./pages/droppable-demo/droppable-demo.module').then(module => module.DroppableDemoModule)
+          import('./pages/droppable-demo/droppable-demo.module').then((module: any) => module.DroppableDemoModule),
       },
       {
         path: 'rating',
         loadChildren: (): Promise<Type<RatingDemoModule>> =>
-          import('./pages/rating-demo/rating-demo.module').then(module => module.RatingDemoModule)
+          import('./pages/rating-demo/rating-demo.module').then((module: any) => module.RatingDemoModule),
       },
       {
         path: 'draggable',
         loadChildren: (): Promise<Type<DraggableDemoModule>> =>
-          import('./pages/draggable-demo/draggable-demo.module').then(module => module.DraggableDemoModule)
+          import('./pages/draggable-demo/draggable-demo.module').then((module: any) => module.DraggableDemoModule),
       },
       {
         path: 'date-time-picker',
         loadChildren: (): Promise<Type<DateTimePickerDemoModule>> =>
           import('./pages/date-time-picker-demo/date-time-picker-demo.module').then(
-            module => module.DateTimePickerDemoModule
-          )
+            (module: any) => module.DateTimePickerDemoModule
+          ),
       },
       {
         path: 'paged-virtual-scroll',
         loadChildren: (): Promise<Type<PagedVirtualScrollDemoModule>> =>
           import('./pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module').then(
-            module => module.PagedVirtualScrollDemoModule
-          )
+            (module: any) => module.PagedVirtualScrollDemoModule
+          ),
       },
       {
         path: 'scrollbar',
         loadChildren: (): Promise<Type<ScrollbarDemoModule>> =>
-          import('./pages/scrollbar-demo/scrollbar-demo.module').then(module => module.ScrollbarDemoModule)
+          import('./pages/scrollbar-demo/scrollbar-demo.module').then((module: any) => module.ScrollbarDemoModule),
       },
       {
         path: 'modal',
         loadChildren: (): Promise<Type<ModalDemoModule>> =>
-          import('./pages/modal-demo/modal-demo.module').then(module => module.ModalDemoModule)
+          import('./pages/modal-demo/modal-demo.module').then((module: any) => module.ModalDemoModule),
       },
       {
         path: 'tabs',
         loadChildren: (): Promise<Type<TabsDemoModule>> =>
-          import('./pages/tabs-demo/tabs-demo.module').then(module => module.TabsDemoModule)
+          import('./pages/tabs-demo/tabs-demo.module').then((module: any) => module.TabsDemoModule),
       },
       {
         path: 'datagrid',
         loadChildren: (): Promise<Type<DatagridDemoModule>> =>
-          import('./pages/datagrid-demo/datagrid-demo.module').then(module => module.DatagridDemoModule)
+          import('./pages/datagrid-demo/datagrid-demo.module').then((module: any) => module.DatagridDemoModule),
       },
       {
         path: 'drawer-old',
         loadChildren: (): Promise<Type<DrawerOldDemoModule>> =>
-          import('./pages/drawer-old-demo/drawer-old-demo.module').then(module => module.DrawerOldDemoModule)
+          import('./pages/drawer-old-demo/drawer-old-demo.module').then((module: any) => module.DrawerOldDemoModule),
       },
       {
         path: 'drawer',
         loadChildren: (): Promise<Type<DrawerDemoModule>> =>
-          import('./pages/drawer-demo/drawer-demo.module').then(module => module.DrawerDemoModule)
+          import('./pages/drawer-demo/drawer-demo.module').then((module: any) => module.DrawerDemoModule),
       },
       {
         path: 'textarea',
         loadChildren: (): Promise<Type<TextareaDemoModule>> =>
-          import('./pages/textarea-demo/textarea-demo.module').then(module => module.TextareaDemoModule)
+          import('./pages/textarea-demo/textarea-demo.module').then((module: any) => module.TextareaDemoModule),
       },
       {
         path: 'radio',
         loadChildren: (): Promise<Type<RadioButtonDemoModule>> =>
-          import('./pages/radio-button-demo/radio-button-demo.module').then(module => module.RadioButtonDemoModule)
+          import('./pages/radio-button-demo/radio-button-demo.module').then(
+            (module: any) => module.RadioButtonDemoModule
+          ),
       },
       {
         path: 'layout',
         loadChildren: (): Promise<Type<LayoutDemoModule>> =>
-          import('./pages/layout-demo/layout-demo.module').then(module => module.LayoutDemoModule)
+          import('./pages/layout-demo/layout-demo.module').then((module: any) => module.LayoutDemoModule),
       },
       {
         path: 'tooltip',
         loadChildren: (): Promise<Type<TooltipDemoModule>> =>
-          import('./pages/tooltip-demo/tooltip-demo.module').then(module => module.TooltipDemoModule)
+          import('./pages/tooltip-demo/tooltip-demo.module').then((module: any) => module.TooltipDemoModule),
       },
       {
         path: 'draggable-list',
         loadChildren: (): Promise<Type<DraggableListDemoModule>> =>
           import('./pages/draggable-list-demo/draggable-list-demo.module').then(
-            module => module.DraggableListDemoModule
-          )
+            (module: any) => module.DraggableListDemoModule
+          ),
       },
       {
         path: 'dropdown-menu',
         loadChildren: (): Promise<Type<DropdownMenuDemoModule>> =>
-          import('./pages/dropdown-menu-demo/dropdown-menu-demo.module').then(module => module.DropdownMenuDemoModule)
+          import('./pages/dropdown-menu-demo/dropdown-menu-demo.module').then(
+            (module: any) => module.DropdownMenuDemoModule
+          ),
       },
       {
         path: 'selector',
         loadChildren: (): Promise<Type<SelectorDemoModule>> =>
-          import('./pages/selector-demo/selector-demo.module').then(module => module.SelectorDemoModule)
+          import('./pages/selector-demo/selector-demo.module').then((module: any) => module.SelectorDemoModule),
       },
       {
         path: 'uploads',
         loadChildren: (): Promise<Type<UploadsDemoModule>> =>
-          import('./pages/uploads-demo/uploads-demo.module').then(module => module.UploadsDemoModule)
+          import('./pages/uploads-demo/uploads-demo.module').then((module: any) => module.UploadsDemoModule),
       },
       {
         path: 'vertical-tabs',
         loadChildren: (): Promise<Type<VerticalTabsDemoModule>> =>
-          import('./pages/vertical-tabs-demo/vertical-tabs-demo.module').then(module => module.VerticalTabsDemoModule)
+          import('./pages/vertical-tabs-demo/vertical-tabs-demo.module').then(
+            (module: any) => module.VerticalTabsDemoModule
+          ),
       },
       {
         path: 'controls-is-patched',
         loadChildren: (): Promise<Type<ControlsIsPatchedDemoModule>> =>
           import('./pages/controls-is-patched-demo/controls-is-patched-demo.module').then(
-            module => module.ControlsIsPatchedDemoModule
-          )
+            (module: any) => module.ControlsIsPatchedDemoModule
+          ),
       },
       {
         path: 'floating-card',
         loadChildren: (): Promise<Type<FloatingCardDemoModule>> =>
-          import('./pages/floating-card-demo/floating-card-demo.module').then(module => module.FloatingCardDemoModule)
+          import('./pages/floating-card-demo/floating-card-demo.module').then(
+            (module: any) => module.FloatingCardDemoModule
+          ),
       },
       {
         path: 'adaptive',
         loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
-          import('./pages/adaptive-demo/adaptive-demo.module').then(module => module.AdaptiveDemoModule)
+          import('./pages/adaptive-demo/adaptive-demo.module').then((module: any) => module.AdaptiveDemoModule),
       },
       {
         path: 'code',
         loadChildren: (): Promise<Type<CodeDemoModule>> =>
-          import('./pages/code-demo/code-demo.module').then(module => module.CodeDemoModule)
+          import('./pages/code-demo/code-demo.module').then((module: any) => module.CodeDemoModule),
       },
       {
         path: 'table',
         loadChildren: (): Promise<Type<TableDemoModule>> =>
-          import('./pages/table-demo/table-demo.module').then(module => module.TableDemoModule)
+          import('./pages/table-demo/table-demo.module').then((module: any) => module.TableDemoModule),
       },
       {
         path: 'tag',
         loadChildren: (): Promise<Type<TagDemoModule>> =>
-          import('./pages/tag-demo/tag-demo.module').then(module => module.TagDemoModule)
+          import('./pages/tag-demo/tag-demo.module').then((module: any) => module.TagDemoModule),
       },
       {
         path: 'scrollable',
         loadChildren: (): Promise<Type<ScrollableDemoModule>> =>
-          import('./pages/scrollable-demo/scrollable-demo.module').then(module => module.ScrollableDemoModule)
+          import('./pages/scrollable-demo/scrollable-demo.module').then((module: any) => module.ScrollableDemoModule),
       },
       {
         path: 'info-block',
         loadChildren: (): Promise<Type<InfoBlockDemoModule>> =>
-          import('./pages/info-block-demo/info-block-demo.module').then(module => module.InfoBlockDemoModule)
+          import('./pages/info-block-demo/info-block-demo.module').then((module: any) => module.InfoBlockDemoModule),
       },
       {
         path: 'status',
         loadChildren: (): Promise<Type<StatusDemoModule>> =>
-          import('./pages/status-demo/status-demo.module').then(module => module.StatusDemoModule)
+          import('./pages/status-demo/status-demo.module').then((module: any) => module.StatusDemoModule),
       },
       {
         path: 'badge',
         loadChildren: (): Promise<Type<BadgeDemoModule>> =>
-          import('./pages/badge-demo/badge-demo.module').then(module => module.BadgeDemoModule)
+          import('./pages/badge-demo/badge-demo.module').then((module: any) => module.BadgeDemoModule),
       },
       {
         path: 'breadcrumbs',
         loadChildren: (): Promise<Type<BreadcrumbsDemoModule>> =>
-          import('./pages/breadcrumbs-demo/breadcrumbs-demo.module').then(module => module.BreadcrumbsDemoModule)
+          import('./pages/breadcrumbs-demo/breadcrumbs-demo.module').then(
+            (module: any) => module.BreadcrumbsDemoModule
+          ),
       },
       {
         path: 'button-group',
         loadChildren: (): Promise<Type<ButtonGroupDemoModule>> =>
-          import('./pages/button-group-demo/button-group-demo.module').then(module => module.ButtonGroupDemoModule)
-      }
-    ]
+          import('./pages/button-group-demo/button-group-demo.module').then(
+            (module: any) => module.ButtonGroupDemoModule
+          ),
+      },
+    ],
   },
   {
     path: '',
     pathMatch: 'full',
     loadChildren: (): Promise<Type<MainPageModule>> =>
-      import('./pages/main-page/main-page.module').then(module => module.MainPageModule)
+      import('./pages/main-page/main-page.module').then((module: any) => module.MainPageModule),
   },
   {
     path: '',
@@ -344,10 +360,10 @@ const demoRoutes: Routes = [
       {
         path: '**',
         loadChildren: (): Promise<Type<NotFoundPageModule>> =>
-          import('./pages/not-found-page/not-found-page.module').then(module => module.NotFoundPageModule)
-      }
-    ]
-  }
+          import('./pages/not-found-page/not-found-page.module').then((module: any) => module.NotFoundPageModule),
+      },
+    ],
+  },
 ];
 
 @NgModule({
@@ -360,9 +376,9 @@ const demoRoutes: Routes = [
       initialNavigation: 'enabledNonBlocking',
       scrollPositionRestoration: 'enabled',
       relativeLinkResolution: 'legacy',
-      useHash: true
-    })
+      useHash: true,
+    }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

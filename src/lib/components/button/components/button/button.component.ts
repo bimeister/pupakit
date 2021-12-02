@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -14,9 +14,9 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnChanges {
   @Input() public readonly size: ButtonSize = 'medium';
   public readonly size$: BehaviorSubject<ButtonSize> = new BehaviorSubject<ButtonSize>('medium');
 
@@ -45,7 +45,7 @@ export class ButtonComponent {
 
   protected readonly iconContainerClass$: Observable<Nullable<string>> = combineLatest([
     this.icon$,
-    this.iconPosition$
+    this.iconPosition$,
   ]).pipe(
     map(([icon, iconPosition]: [Nullable<string>, Nullable<ButtonIconPosition>]) => {
       if (isNil(icon) || isNil(iconPosition)) {
@@ -61,7 +61,7 @@ export class ButtonComponent {
     this.kind$,
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
     this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
-    this.iconContainerClass$
+    this.iconContainerClass$,
   ]).pipe(
     map((classes: string[]) =>
       classes

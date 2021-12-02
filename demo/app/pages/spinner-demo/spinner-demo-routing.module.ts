@@ -5,12 +5,12 @@ import { SpinnerDemoComponent } from './spinner-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: SpinnerDemoComponent
-  }
+    component: SpinnerDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SpinnerDemoRoutingModule {}

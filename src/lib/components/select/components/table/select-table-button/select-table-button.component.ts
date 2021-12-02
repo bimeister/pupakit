@@ -9,7 +9,7 @@ import { SelectButtonBase } from './../../../../../../internal/declarations/clas
   templateUrl: './select-table-button.component.html',
   styleUrls: ['./select-table-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTableButtonComponent<T> extends SelectButtonBase<T> {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;

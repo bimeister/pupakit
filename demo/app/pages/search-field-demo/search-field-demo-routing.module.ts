@@ -5,12 +5,12 @@ import { SearchFieldDemoComponent } from './search-field-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: SearchFieldDemoComponent
-  }
+    component: SearchFieldDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SearchFieldDemoRoutingModule {}

@@ -8,5 +8,5 @@ export const mdQuoteIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M96.4,416h77.1l50.9-96.6V96h-160v223.4h77.1L96.4,416z M320.4,416h77.1l50-96.6V96H288.4v223.4h82L320.4,416z"/>
 </svg>
-`
+`,
 };

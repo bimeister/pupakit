@@ -13,5 +13,5 @@ export const mdBeakerIcon: IconDefinition = {
 	<path d="M182,160v226c0,4.4,3.6,8,8,8h148c4.4,0,8-3.6,8-8V160H182z"/>
 </g>
 </svg>
-`
+`,
 };

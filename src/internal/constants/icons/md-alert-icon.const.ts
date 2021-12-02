@@ -14,5 +14,5 @@ export const mdAlertIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

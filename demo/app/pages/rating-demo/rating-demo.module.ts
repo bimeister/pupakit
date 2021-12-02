@@ -5,6 +5,6 @@ import { RatingDemoComponent } from './rating-demo.component';
 
 @NgModule({
   declarations: [RatingDemoComponent],
-  imports: [DemoSharedModule, RatingDemoRoutingModule]
+  imports: [DemoSharedModule, RatingDemoRoutingModule],
 })
 export class RatingDemoModule {}

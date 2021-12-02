@@ -18,5 +18,5 @@ export const mdBoatIcon: IconDefinition = {
 		C400.212,472,341.231,408.007,341.231,408.007z"/>
 </g>
 </svg>
-`
+`,
 };

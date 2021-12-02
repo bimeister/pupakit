@@ -17,5 +17,5 @@ export const mdColorWandIcon: IconDefinition = {
 	<rect x="64" y="176" width="65" height="37"/>
 </g>
 </svg>
-`
+`,
 };

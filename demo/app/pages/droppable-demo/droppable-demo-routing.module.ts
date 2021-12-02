@@ -5,12 +5,12 @@ import { DroppableDemoComponent } from './droppable-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DroppableDemoComponent
-  }
+    component: DroppableDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DroppableDemoRoutingModule {}

@@ -13,5 +13,5 @@ export const mdQrScannerIcon: IconDefinition = {
 	<path d="M108.2,399c-6.9,0-12.2-5.2-12.2-12.2V320H48v66.8c0,33.5,27.7,61.2,61.2,61.2H176v-49H108.2z"/>
 </g>
 </svg>
-`
+`,
 };

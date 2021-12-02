@@ -18,5 +18,5 @@ export const iosManIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

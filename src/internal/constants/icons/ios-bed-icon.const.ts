@@ -15,5 +15,5 @@ export const iosBedIcon: IconDefinition = {
 		c-17.6,0-32,14.4-32,32v94C76,210.4,79.6,214,84,214z"/>
 </g>
 </svg>
-`
+`,
 };

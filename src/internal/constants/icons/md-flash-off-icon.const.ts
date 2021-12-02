@@ -11,5 +11,5 @@ export const mdFlashOffIcon: IconDefinition = {
 	<polygon points="352,208 288,208 352,48 160,48 160,88.3 328,255.9 	"/>
 </g>
 </svg>
-`
+`,
 };

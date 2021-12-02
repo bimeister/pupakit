@@ -5,7 +5,7 @@ import {
   Input,
   OnDestroy,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { isEmpty } from '@bimeister/utilities';
@@ -17,7 +17,7 @@ import { PropsCheckboxComponent } from '../props-checkbox/props-checkbox.compone
   templateUrl: './props-form-control-validators.component.html',
   styleUrls: ['./props-form-control-validators.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDestroy {
   @ViewChild(PropsCheckboxComponent)

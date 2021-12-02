@@ -11,7 +11,7 @@ DATE_PLUS_FIVE_DAYS.setDate(DATE_PLUS_FIVE_DAYS.getDate() + 5);
   selector: 'demo-date-time-picker-demo',
   templateUrl: './date-time-picker-demo.component.html',
   styleUrls: ['./date-time-picker-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DateTimePickerDemoComponent {
   public readonly availableEndDate: Date = DATE_PLUS_FIVE_DAYS;

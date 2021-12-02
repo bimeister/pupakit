@@ -3,5 +3,5 @@ export enum DatagridThemes {
   Default = 'default',
   Boxed = 'boxed',
   BorderLess = 'borderless',
-  BorderLessEvenColored = 'borderless-even-colored'
+  BorderLessEvenColored = 'borderless-even-colored',
 }

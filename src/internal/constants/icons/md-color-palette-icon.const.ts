@@ -19,5 +19,5 @@ export const mdColorPaletteIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

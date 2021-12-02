@@ -31,7 +31,7 @@ export class BreadcrumbsProducer {
     breadcrumbWidthList,
     isMobile,
     unfitBreadcrumbTriggerWidthPx,
-    rootBreadcrumb
+    rootBreadcrumb,
   }: BreadcrumbsData) {
     this.breadcrumbs = breadcrumbs;
     this.breadcrumbsContainerWidthPx = breadcrumbsContainerWidthPx;
@@ -83,13 +83,13 @@ export class BreadcrumbsProducer {
   ): number[] {
     const initialReduceData: AccumulatedValue = {
       freeSpaceWidthPx: freeSpacePx,
-      fitBreadcrumbsIndexes: []
+      fitBreadcrumbsIndexes: [],
     };
 
     const result: AccumulatedValue = breadcrumbWidthList
       .map((widthPx: number, index: number) => ({
         widthPx,
-        index
+        index,
       }))
       .filter(({ index }: WidthWithIndex) => index >= unfitBreadcrumbFirstIndex)
       .reduceRight((accumulatedValue: AccumulatedValue, currentWidthWithIndex: WidthWithIndex) => {
@@ -103,7 +103,7 @@ export class BreadcrumbsProducer {
 
         return {
           freeSpaceWidthPx: remainingFreeSpacePx,
-          fitBreadcrumbsIndexes: [...fitBreadcrumbsIndexes, index]
+          fitBreadcrumbsIndexes: [...fitBreadcrumbsIndexes, index],
         };
       }, initialReduceData);
 

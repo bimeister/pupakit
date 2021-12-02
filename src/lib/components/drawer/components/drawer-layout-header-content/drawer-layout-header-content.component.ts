@@ -10,7 +10,7 @@ const DEFAULT_TYPE: Types = 'right';
   templateUrl: './drawer-layout-header-content.component.html',
   styleUrls: ['./drawer-layout-header-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutHeaderContentComponent {
   @Input()

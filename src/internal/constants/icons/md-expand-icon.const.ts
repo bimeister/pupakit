@@ -14,5 +14,5 @@ export const mdExpandIcon: IconDefinition = {
 	<polygon points="115.2,396.795 115.2,320 64,320 64,448 192,448 192,396.795 	"/>
 </g>
 </svg>
-`
+`,
 };

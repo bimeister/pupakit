@@ -23,5 +23,5 @@ export const logoOctocatIcon: IconDefinition = {
 		c17.7,15.8,26.6,35.5,26.6,59.1C422.3,365.5,408.2,392.5,380.4,405.6z"/>
 </g>
 </svg>
-`
+`,
 };

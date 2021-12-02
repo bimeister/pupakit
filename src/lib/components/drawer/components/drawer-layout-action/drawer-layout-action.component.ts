@@ -7,7 +7,7 @@ import { DrawerRef } from '../../../../../internal/declarations/classes/drawer-r
   templateUrl: './drawer-layout-action.component.html',
   styleUrls: ['./drawer-layout-action.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutActionComponent<ValueT> {
   @Input() public value: Nullable<ValueT> | 'none' = 'none';

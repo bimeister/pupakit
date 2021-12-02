@@ -11,7 +11,7 @@ import { InputBaseControlValueAccessor } from './input-base-control-value-access
 const SIZES_LIST: [InputSize, number][] = [
   ['small', 12],
   ['medium', 16],
-  ['large', 20]
+  ['large', 20],
 ];
 const BUTTON_WIDTH_PX: number = 24;
 
@@ -47,7 +47,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isDisabled$,
     this.isPatched$,
     this.isValid$,
-    this.isTouched$
+    this.isTouched$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(
@@ -60,7 +60,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.size$,
     this.isInvalid$.pipe(map((isInvalid: boolean) => (isInvalid ? 'invalid' : null))),
     this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
-    this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null)))
+    this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -72,7 +72,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   public readonly isVisibleReset$: Observable<boolean> = combineLatest([
     this.withReset$,
     this.isFilled$,
-    this.isDisabled$
+    this.isDisabled$,
   ]).pipe(
     map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
   );

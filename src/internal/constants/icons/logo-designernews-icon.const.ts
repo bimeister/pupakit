@@ -20,5 +20,5 @@ export const logoDesignernewsIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -13,7 +13,7 @@ import {
   TemplateRef,
   TrackByFunction,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BusEventBase, EventBus } from '@bimeister/event-bus';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
@@ -63,7 +63,7 @@ function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset {
   styleUrls: ['./table.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TableTemplatesService, TableColumnsIntersectionService, TableScrollbarsService]
+  providers: [TableTemplatesService, TableColumnsIntersectionService, TableScrollbarsService],
 })
 export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
@@ -296,7 +296,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   private registerDefaultTemplates(): void {
     this.tableTemplatesService.registerDefaultTemplates({
       headerCell: this.defaultHeaderCellTemplateRef,
-      bodyCell: this.defaultBodyCellTemplateRef
+      bodyCell: this.defaultBodyCellTemplateRef,
     });
   }
 
@@ -325,7 +325,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   private processLeftHiddenColumnIdsChanges(): Subscription {
     return combineLatest([
       this.tableColumnsIntersectionService.leftHiddenColumnIds$,
-      this.tableColumnsIntersectionService.rightHiddenColumnIds$
+      this.tableColumnsIntersectionService.rightHiddenColumnIds$,
     ])
       .pipe(withLatestFrom(this.eventBus$))
       .subscribe(([[leftHiddenColumnIds, rightHiddenColumnIds], eventBus]: [[string[], string[]], EventBus]) =>

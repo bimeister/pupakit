@@ -21,5 +21,5 @@ export const mdPartlySunnyIcon: IconDefinition = {
 		c0,53,43,96,96,96h208c44.2,0,80-35.8,80-80C480,325.8,447.2,291.5,405.6,288.6z"/>
 </g>
 </svg>
-`
+`,
 };

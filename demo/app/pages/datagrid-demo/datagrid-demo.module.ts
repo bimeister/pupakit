@@ -5,6 +5,6 @@ import { DatagridDemoComponent } from './datagrid-demo.component';
 
 @NgModule({
   declarations: [DatagridDemoComponent],
-  imports: [DemoSharedModule, DatagridDemoRoutingModule]
+  imports: [DemoSharedModule, DatagridDemoRoutingModule],
 })
 export class DatagridDemoModule {}

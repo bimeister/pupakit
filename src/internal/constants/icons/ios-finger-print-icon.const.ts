@@ -43,5 +43,5 @@ export const iosFingerPrintIcon: IconDefinition = {
 		c3.9-35.5,4.6-76.6,2-115.8C278.7,296.6,273,264.6,265.2,245.9z"/>
 </g>
 </svg>
-`
+`,
 };

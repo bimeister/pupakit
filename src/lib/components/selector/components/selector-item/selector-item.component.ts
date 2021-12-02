@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'pupa-selector-item',
   templateUrl: './selector-item.component.html',
   styleUrls: ['./selector-item.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectorItemComponent<T> {
   @Input() public value: T;

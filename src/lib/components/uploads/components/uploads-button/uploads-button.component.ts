@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   templateUrl: './uploads-button.component.html',
   styleUrls: ['./uploads-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadsButtonComponent {
   @Input() public isActive: boolean = false;

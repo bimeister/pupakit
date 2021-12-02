@@ -20,16 +20,14 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
   styleUrls: ['./input-date.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateComponent extends InputDateTimeBase {
   public readonly date$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
     filter((value: string) => isEmpty(value) || value.length === MAX_LENGTH_INPUT_VALUE),
     distinctUntilChanged(),
-    map((value: string) => {
-      return this.getParsedDate(value);
-    }),
+    map((value: string) => this.getParsedDate(value)),
     withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
     filter(
       ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>

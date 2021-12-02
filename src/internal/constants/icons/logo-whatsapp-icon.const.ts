@@ -20,5 +20,5 @@ export const logoWhatsappIcon: IconDefinition = {
 		C375.012,309.131,374.596,320.282,369.424,333.11z"/>
 </g>
 </svg>
-`
+`,
 };

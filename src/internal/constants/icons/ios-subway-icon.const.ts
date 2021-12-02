@@ -24,5 +24,5 @@ export const iosSubwayIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

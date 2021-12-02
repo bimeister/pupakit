@@ -12,5 +12,5 @@ export const iosArrowDropupCircleIcon: IconDefinition = {
 		c3.8,3.8,5.7,8.7,5.7,13.7c0,4.9-1.9,9.9-5.6,13.6c-7.5,7.5-19.7,7.6-27.3,0L256,219.5z"/>
 </g>
 </svg>
-`
+`,
 };

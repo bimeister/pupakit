@@ -13,5 +13,5 @@ export const iosPhonePortraitIcon: IconDefinition = {
 		 M350,416H162c-1.1,0-2-0.9-2-2V85c0-1.1,0.9-2,2-2h188c1.1,0,2,0.9,2,2v329C352,415.1,351.1,416,350,416z"/>
 </g>
 </svg>
-`
+`,
 };

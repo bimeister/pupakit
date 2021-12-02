@@ -3,16 +3,7 @@ import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
-import {
-  distinctUntilChanged,
-  filter,
-  map,
-  shareReplay,
-  startWith,
-  switchMap,
-  take,
-  withLatestFrom
-} from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
@@ -20,7 +11,7 @@ import { SelectOuterValue } from '../../../../internal/declarations/types/select
 
 /** @dynamic */
 @Injectable({
-  providedIn: 'any'
+  providedIn: 'any',
 })
 export class SelectStateService<T> implements SelectStateServiceInterface<T>, OnDestroy {
   private readonly currentSerializedValue$: BehaviorSubject<Set<string>> = new BehaviorSubject<Set<string>>(
@@ -28,7 +19,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   );
   public readonly currentValue$: Observable<T[]> = this.currentSerializedValue$.pipe(
     map((serializedSet: Set<string>) => SelectStateService.getParsedValue<T>(serializedSet)),
-    shareReplay({ bufferSize: 1, refCount: true })
+    shareReplayWithRefCount()
   );
 
   private readonly subscription: Subscription = new Subscription();
@@ -76,9 +67,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       const { width }: ClientRect = button?.getBoundingClientRect();
       return width;
     }),
-    map((width: number | undefined) => {
-      return isNil(width) ? 0 : width;
-    })
+    map((width: number | undefined) => (isNil(width) ? 0 : width))
   );
 
   public ngOnDestroy(): void {

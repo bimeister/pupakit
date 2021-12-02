@@ -10,6 +10,6 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [SharedModule],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class StatusModule {}

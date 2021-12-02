@@ -17,7 +17,7 @@ import { DropdownMenuSeparatorComponent } from './components/dropdown-menu-separ
     DropdownMenuContainerComponent,
     DropdownMenuItemComponent,
     DropdownMenuItemIconComponent,
-    DropdownMenuSeparatorComponent
+    DropdownMenuSeparatorComponent,
   ],
   imports: [SharedModule, IconModule.forFeature(), OverlayModule, ScrollableModule],
   exports: [
@@ -25,7 +25,7 @@ import { DropdownMenuSeparatorComponent } from './components/dropdown-menu-separ
     DropdownMenuContentComponent,
     DropdownMenuItemComponent,
     DropdownMenuItemIconComponent,
-    DropdownMenuSeparatorComponent
-  ]
+    DropdownMenuSeparatorComponent,
+  ],
 })
 export class DropdownMenuModule {}

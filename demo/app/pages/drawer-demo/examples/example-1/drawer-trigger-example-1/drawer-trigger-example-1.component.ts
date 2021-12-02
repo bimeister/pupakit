@@ -12,7 +12,7 @@ import { ThemeWrapperService } from '../../../../../../../src/lib/components/the
 @Component({
   selector: 'demo-drawer-trigger-example-1',
   templateUrl: './drawer-trigger-example-1.component.html',
-  styleUrls: ['./drawer-trigger-example-1.component.scss']
+  styleUrls: ['./drawer-trigger-example-1.component.scss'],
 })
 export class DrawerTriggerExample1Component {
   public drawerCloseMessage$: Observable<string>;
@@ -34,10 +34,10 @@ export class DrawerTriggerExample1Component {
         providers: [
           {
             provide: DRAWER_DATA_TOKEN,
-            useValue: [1, 2, 3, 4]
-          }
+            useValue: [1, 2, 3, 4],
+          },
         ],
-        theme
+        theme,
       });
 
       this.drawerCloseMessage$ = drawer.closed$;

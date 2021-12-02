@@ -18,5 +18,5 @@ export const mdCloudCircleIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

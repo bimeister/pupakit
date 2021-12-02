@@ -28,5 +28,5 @@ export const iosRadioIcon: IconDefinition = {
 	<path d="M256,218c-21,0-38,17-38,38c0,21,17,38,38,38c21,0,38-17,38-38C294,235,276.9,218,256,218z"/>
 </g>
 </svg>
-`
+`,
 };

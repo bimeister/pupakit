@@ -6,7 +6,7 @@ const BASE_REQUEST_PATH: string = 'code-demo/examples';
   selector: 'demo-code-example-2',
   templateUrl: './example-2.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeExample2Component {
   public readonly simpleCode: string = '<div>here is simple code!</div>';
@@ -16,6 +16,6 @@ export class CodeExample2Component {
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     TypeScript: this.example1TsPath,
-    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
   };
 }

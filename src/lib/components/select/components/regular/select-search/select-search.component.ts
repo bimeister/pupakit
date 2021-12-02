@@ -5,7 +5,7 @@ import {
   HostListener,
   Input,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { SelectSearchBase } from './../../../../../../internal/declarations/classes/abstract/select-search-base.abstract';
@@ -15,7 +15,7 @@ import { SelectSearchBase } from './../../../../../../internal/declarations/clas
   templateUrl: './select-search.component.html',
   styleUrls: ['./select-search.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectSearchComponent extends SelectSearchBase {
   @Input() public placeholder: string = '';

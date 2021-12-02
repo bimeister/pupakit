@@ -15,5 +15,5 @@ export const iosCardIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './table-body-row-container.component.html',
   styleUrls: ['./table-body-row-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableBodyRowContainerComponent<T> {
   @Input() public columns: TableColumn[];

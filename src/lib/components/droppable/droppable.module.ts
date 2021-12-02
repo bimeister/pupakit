@@ -15,7 +15,7 @@ import { DroppableComponent } from './components/droppable/droppable.component';
     DroppableTriggerComponent,
     DroppableContentComponent,
     DroppableComponent,
-    DroppableNativeContentComponent
+    DroppableNativeContentComponent,
   ],
   imports: [SharedModule, OverlayModule, PortalModule],
   exports: [
@@ -23,7 +23,7 @@ import { DroppableComponent } from './components/droppable/droppable.component';
     DroppableTriggerComponent,
     DroppableContentComponent,
     DroppableComponent,
-    DroppableNativeContentComponent
-  ]
+    DroppableNativeContentComponent,
+  ],
 })
 export class DroppableModule {}

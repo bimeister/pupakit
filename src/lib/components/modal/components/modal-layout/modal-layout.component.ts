@@ -8,7 +8,7 @@ import { ModalLayoutTitleComponent } from '../modal-layout-title/modal-layout-ti
   templateUrl: './modal-layout.component.html',
   styleUrls: ['./modal-layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalLayoutComponent implements AfterContentInit {
   @ContentChild(ModalLayoutFooterComponent) private readonly modalLayoutFooterComponent: ModalLayoutFooterComponent;

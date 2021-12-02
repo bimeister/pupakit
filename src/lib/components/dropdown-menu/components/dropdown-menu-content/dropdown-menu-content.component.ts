@@ -1,23 +1,23 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  Input,
-  ViewChild,
-  TemplateRef,
-  AfterViewInit,
-  Optional,
-  OnChanges
-} from '@angular/core';
 import { HorizontalConnectionPos } from '@angular/cdk/overlay';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnChanges,
+  Optional,
+  TemplateRef,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-import { DropdownContextService } from '../../services/dropdown-context.service';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { DropdownContextService } from '../../services/dropdown-context.service';
 
 type ContentTemplate = Nullable<TemplateRef<unknown>>;
 
@@ -29,7 +29,7 @@ const DEFAULT_POSITION: HorizontalConnectionPos = 'center';
   styleUrls: ['./dropdown-menu-content.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DropdownContextService]
+  providers: [DropdownContextService],
 })
 export class DropdownMenuContentComponent implements OnChanges, AfterViewInit {
   @Input() public horizontalPosition: HorizontalConnectionPos = DEFAULT_POSITION;
@@ -42,7 +42,7 @@ export class DropdownMenuContentComponent implements OnChanges, AfterViewInit {
 
   public readonly contextId: Uuid = this.dropdownContextService.contextId;
 
-  public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ || of('');
+  public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ ?? of('');
 
   @ViewChild('contentTemplate') private readonly dropdownMenuContentTemplate: ContentTemplate;
   private readonly contentTemplateState$: BehaviorSubject<ContentTemplate> = new BehaviorSubject<ContentTemplate>(null);

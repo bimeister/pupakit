@@ -21,7 +21,7 @@ const BACKEND_DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefi
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -31,29 +31,29 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'First Name',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 200 },
-    type: 'first-name'
+    type: 'first-name',
   },
   {
     id: 'last-name',
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'age-column',
     modelKey: 'age',
     title: 'Age',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 100 }
-  }
+    defaultSizes: { widthPx: 100 },
+  },
 ];
 
 @Component({
@@ -61,7 +61,7 @@ const COLUMNS: TableColumnDefinition[] = [
   templateUrl: './example-7.component.html',
   styleUrls: ['./example-7.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample7Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();

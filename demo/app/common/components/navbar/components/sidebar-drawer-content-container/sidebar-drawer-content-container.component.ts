@@ -8,7 +8,7 @@ import { ThemeWrapperService } from '../../../../../../../src/lib/components/the
   templateUrl: './sidebar-drawer-content-container.component.html',
   styleUrls: ['./sidebar-drawer-content-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarDrawerContentContainerComponent {
   public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;

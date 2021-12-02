@@ -35,5 +35,5 @@ export const iosWatchIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

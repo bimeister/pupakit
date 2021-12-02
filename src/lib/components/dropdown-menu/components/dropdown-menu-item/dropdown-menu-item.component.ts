@@ -1,28 +1,28 @@
 import {
-  Component,
-  HostListener,
   ChangeDetectionStrategy,
-  Input,
-  Output,
+  Component,
   EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
   ViewEncapsulation,
-  OnChanges
 } from '@angular/core';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
-import { DropdownMenuService } from '../../services/dropdown-menu.service';
-import { DropdownContextService } from '../../services/dropdown-context.service';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
+import { DropdownContextService } from '../../services/dropdown-context.service';
+import { DropdownMenuService } from '../../services/dropdown-menu.service';
 
 @Component({
   selector: 'pupa-dropdown-menu-item',
   templateUrl: './dropdown-menu-item.component.html',
   styleUrls: ['./dropdown-menu-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuItemComponent implements OnChanges {
   @Input() public active: boolean = false;
@@ -37,7 +37,7 @@ export class DropdownMenuItemComponent implements OnChanges {
   @Output() public readonly select: EventEmitter<void> = new EventEmitter<void>();
 
   private readonly isAlive$: Observable<boolean> = combineLatest([this.disabled$, this.plain$]).pipe(
-    map(([disabled, plain]) => !disabled && !plain)
+    map(([disabled, plain]: [boolean, boolean]) => !disabled && !plain)
   );
   public tabindex$: Observable<Nullable<string>> = this.isAlive$.pipe(
     map((isAlive: boolean) => (isAlive ? '0' : null))

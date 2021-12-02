@@ -12,5 +12,5 @@ export const iosFlameIcon: IconDefinition = {
 		s40.4,47.3,40.4,88.3C296.7,391.3,295.9,397.1,294.4,402.7z"/>
 </g>
 </svg>
-`
+`,
 };

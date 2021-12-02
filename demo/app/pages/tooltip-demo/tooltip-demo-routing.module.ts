@@ -5,12 +5,12 @@ import { TooltipDemoComponent } from './tooltip-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TooltipDemoComponent
-  }
+    component: TooltipDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TooltipDemoRoutingModule {}

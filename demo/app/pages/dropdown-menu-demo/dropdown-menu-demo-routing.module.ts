@@ -5,12 +5,12 @@ import { DropdownMenuDemoComponent } from './dropdown-menu-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: DropdownMenuDemoComponent
-  }
+    component: DropdownMenuDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class DropdownMenuDemoRoutingModule {}

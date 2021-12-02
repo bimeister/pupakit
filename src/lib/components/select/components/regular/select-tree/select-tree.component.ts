@@ -7,7 +7,7 @@ import {
   Output,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { FlatTreeItem } from '../../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -24,7 +24,7 @@ import { SelectTreeBase } from './../../../../../../internal/declarations/classe
   templateUrl: './select-tree.component.html',
   styleUrls: ['./select-tree.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTreeComponent extends SelectTreeBase {
   @ViewChild('customPupaTreeComponent') public readonly customPupaTreeComponent: TreeComponent;

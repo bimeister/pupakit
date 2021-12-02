@@ -25,5 +25,5 @@ export const iosAmericanFootballIcon: IconDefinition = {
 		C170.6,49.4,141.2,48,116.8,48z"/>
 </g>
 </svg>
-`
+`,
 };

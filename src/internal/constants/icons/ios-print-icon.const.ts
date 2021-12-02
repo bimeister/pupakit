@@ -16,5 +16,5 @@ export const iosPrintIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

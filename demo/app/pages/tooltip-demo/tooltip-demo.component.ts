@@ -8,7 +8,7 @@ const BASE_REQUEST_PATH: string = 'tooltip-demo/examples';
   selector: 'demo-tooltip',
   templateUrl: './tooltip-demo.component.html',
   styleUrls: ['./tooltip-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TooltipDemoComponent {
   public readonly hideOnTooltipHoverControl: FormControl = new FormControl(true);
@@ -26,15 +26,15 @@ export class TooltipDemoComponent {
   public readonly contentControl: FormControl = new FormControl(this.defaultContent.trim());
 
   public readonly example1Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
   };
 
   public readonly example2Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
   };
 
   public readonly example3Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
   };
 
   constructor(private readonly domSanitizer: DomSanitizer) {}

@@ -10,6 +10,6 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [TagExample1Component, TagExample2Co
 
 @NgModule({
   declarations: [...EXAMPLE_COMPONENTS, TagDemoComponent],
-  imports: [DemoSharedModule, TagDemoRoutingModule]
+  imports: [DemoSharedModule, TagDemoRoutingModule],
 })
 export class TagDemoModule {}

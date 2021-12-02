@@ -8,7 +8,7 @@ import {
   Input,
   OnChanges,
   Renderer2,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
@@ -28,7 +28,7 @@ const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderB
   ['left-bottom', 'sw-resize'],
   ['left-top', 'nw-resize'],
   ['vertical', 'ns-resize'],
-  ['horizontal', 'ew-resize']
+  ['horizontal', 'ew-resize'],
 ]);
 
 /** @dynamic */
@@ -37,7 +37,7 @@ const CURSOR_BY_BEHAVIOR_NAME: Map<ExpanderBehavior, string> = new Map<ExpanderB
   templateUrl: './expander.component.html',
   styleUrls: ['./expander.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExpanderComponent extends PositionController implements OnChanges {
   @Input() public behavior: ExpanderBehavior;

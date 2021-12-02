@@ -15,7 +15,7 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   const value: unknown = control.value;
   const isObject: boolean = typeof value === 'object';
   const isEmptyValue: boolean = !Array.isArray(value) && !isObject && isEmpty(value);
-  const isEmptyRange: boolean = Array.isArray(value) && value.every(item => isNil(item));
+  const isEmptyRange: boolean = Array.isArray(value) && value.every((item) => isNil(item));
   if (isEmptyValue || isEmptyRange || isNil(value)) {
     return { required: true };
   }
@@ -27,7 +27,7 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   styleUrls: ['input-demo.component.scss'],
   templateUrl: './input-demo.component.html',
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoComponent {
   public readonly placeholder: string = 'Placeholder';
@@ -35,60 +35,60 @@ export class InputDemoComponent {
   public readonly typeOptions: RadioOption[] = [
     {
       caption: 'Text',
-      value: 'text'
+      value: 'text',
     },
     {
       caption: 'Password',
-      value: 'password'
+      value: 'password',
     },
     {
       caption: 'Number',
-      value: 'number'
+      value: 'number',
     },
     {
       caption: 'Time',
-      value: 'time'
+      value: 'time',
     },
     {
       caption: 'Time with seconds',
-      value: 'time-seconds'
+      value: 'time-seconds',
     },
     {
       caption: 'Date',
-      value: 'date'
+      value: 'date',
     },
     {
       caption: 'Date + Time',
-      value: 'date-time'
+      value: 'date-time',
     },
     {
       caption: 'Date + Time with seconds',
-      value: 'date-time-seconds'
+      value: 'date-time-seconds',
     },
     {
       caption: 'Date Range',
-      value: 'date-range'
+      value: 'date-range',
     },
     {
       caption: 'Date Range Double',
-      value: 'date-range-double'
-    }
+      value: 'date-range-double',
+    },
   ];
 
   public readonly sizeOptions: RadioOption[] = [
     {
       caption: 'Large',
-      value: 'large'
+      value: 'large',
     },
     {
       caption: 'Medium',
       value: 'medium',
-      isDefault: true
+      isDefault: true,
     },
     {
       caption: 'Small',
-      value: 'small'
-    }
+      value: 'small',
+    },
   ];
 
   public readonly validators: ValidatorFn[] = [REQUIRED_VALIDATOR];
@@ -114,7 +114,7 @@ export class InputDemoComponent {
     this.timeSecondsFormControl,
     this.dateTimeSecondsFormControl,
     this.rangeFormControl,
-    this.rangeDoubleFormControl
+    this.rangeDoubleFormControl,
   ];
   private readonly isDisabled$: Observable<boolean> = this.propertyControl.statusChanges.pipe(
     map(() => this.propertyControl.disabled)

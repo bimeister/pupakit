@@ -10,7 +10,7 @@ import { OpenedDrawer } from '../../declarations/interfaces/opened-drawer.interf
 import { PortalLayersService } from './portal-layers.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DrawersService {
   protected readonly drawerRefs: Map<string, DrawerRef<unknown>> = new Map();
@@ -53,7 +53,7 @@ export class DrawersService {
     return {
       id: drawer.id,
       closed$: drawerRef.closed$,
-      isFullscreen$: drawerRef.isFullscreen$
+      isFullscreen$: drawerRef.isFullscreen$,
     };
   }
 

@@ -6,7 +6,7 @@ import {
   Input,
   OnChanges,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 
@@ -19,7 +19,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   styleUrls: ['./select-table.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [SelectStateService]
+  providers: [SelectStateService],
 })
 export class SelectTableComponent<T> extends SelectBase<T> implements OnChanges, ControlValueAccessor {
   @Input() public isMultiSelectionEnabled: boolean = false;

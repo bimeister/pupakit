@@ -15,5 +15,5 @@ export const iosListIcon: IconDefinition = {
 	<path d="M191.5,148H432c8.8,0,16-7.2,16-16s-7.2-16-16-16H191.5c-8.8,0-16,7.2-16,16S182.7,148,191.5,148z"/>
 </g>
 </svg>
-`
+`,
 };

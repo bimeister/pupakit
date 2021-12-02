@@ -15,5 +15,5 @@ export const iosKeyIcon: IconDefinition = {
 		c0-17.7,14.3-32,32-32s32,14.3,32,32C400,385.7,385.7,400,368,400z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -5,6 +5,6 @@ import { FloatingCardComponent } from './components/floating-card.component';
 @NgModule({
   declarations: [FloatingCardComponent],
   imports: [SharedModule],
-  exports: [FloatingCardComponent]
+  exports: [FloatingCardComponent],
 })
 export class FloatingCardModule {}

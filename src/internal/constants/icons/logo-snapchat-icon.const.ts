@@ -33,5 +33,5 @@ export const logoSnapchatIcon: IconDefinition = {
 		S312.836,176,304,176z"/>
 </g>
 </svg>
-`
+`,
 };

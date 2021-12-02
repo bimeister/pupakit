@@ -11,7 +11,7 @@ const DEFAULT_TYPE: LocatedIn = 'layout';
   templateUrl: './drawer-layout-separator.component.html',
   styleUrls: ['./drawer-layout-separator.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutSeparatorComponent {
   @Input()

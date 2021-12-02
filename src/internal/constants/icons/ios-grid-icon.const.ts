@@ -17,5 +17,5 @@ export const iosGridIcon: IconDefinition = {
 		l0,0C408,197.7,401.7,204,394,204z"/>
 </g>
 </svg>
-`
+`,
 };

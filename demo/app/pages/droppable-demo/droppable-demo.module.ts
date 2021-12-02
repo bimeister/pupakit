@@ -5,6 +5,6 @@ import { DroppableDemoComponent } from './droppable-demo.component';
 
 @NgModule({
   declarations: [DroppableDemoComponent],
-  imports: [DemoSharedModule, DroppableDemoRoutingModule]
+  imports: [DemoSharedModule, DroppableDemoRoutingModule],
 })
 export class DroppableDemoModule {}

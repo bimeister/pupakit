@@ -12,5 +12,5 @@ export const mdTimeIcon: IconDefinition = {
 	<path fill-opacity="0.9" d="M266.4,152h-31.2v124.8l109.2,65.5l15.6-25.6l-93.6-55.5V152z"/>
 </g>
 </svg>
-`
+`,
 };

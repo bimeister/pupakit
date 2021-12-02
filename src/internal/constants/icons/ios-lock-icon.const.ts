@@ -13,5 +13,5 @@ export const iosLockIcon: IconDefinition = {
 		 M324,192H188v-48c0-18.1,7.1-35.1,20-48s29.9-20,48-20s35.1,7.1,48,20s20,29.9,20,48V192z"/>
 </g>
 </svg>
-`
+`,
 };

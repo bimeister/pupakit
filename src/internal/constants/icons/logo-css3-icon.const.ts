@@ -16,5 +16,5 @@ export const logoCss3Icon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

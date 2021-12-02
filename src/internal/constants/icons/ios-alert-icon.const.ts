@@ -13,5 +13,5 @@ export const iosAlertIcon: IconDefinition = {
 		S266.7,354,256,354z"/>
 </g>
 </svg>
-`
+`,
 };

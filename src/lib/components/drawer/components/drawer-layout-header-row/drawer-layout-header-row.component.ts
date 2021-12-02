@@ -5,7 +5,7 @@ import {
   ContentChild,
   Input,
   OnChanges,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { isNil } from '@bimeister/utilities';
@@ -22,7 +22,7 @@ const DEFAULT_TYPE: Types = 'middle';
   templateUrl: './drawer-layout-header-row.component.html',
   styleUrls: ['./drawer-layout-header-row.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutHeaderRowComponent implements OnChanges, AfterContentInit {
   @ContentChild(DrawerTitleComponent) public titleComponent: DrawerTitleComponent;

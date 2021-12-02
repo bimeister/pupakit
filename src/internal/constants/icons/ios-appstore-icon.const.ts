@@ -18,5 +18,5 @@ export const iosAppstoreIcon: IconDefinition = {
 		C384.4,291.8,377.8,298.6,369.5,298.6z"/>
 </g>
 </svg>
-`
+`,
 };

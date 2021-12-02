@@ -28,5 +28,5 @@ export const logoNoSmokingIcon: IconDefinition = {
 		c3.1,5.3,6.9,13.5,6.9,41.4h16V244z"/>
 </g>
 </svg>
-`
+`,
 };

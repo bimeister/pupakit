@@ -12,5 +12,5 @@ export const mdPersonIcon: IconDefinition = {
 		c-63.598,0-192,32.402-192,96v48h384v-48C448,336.402,319.598,304,256,304z"/>
 </g>
 </svg>
-`
+`,
 };

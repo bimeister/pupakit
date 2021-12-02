@@ -10,7 +10,7 @@ import { TableScrollbarsService } from '../../services/table-scrollbars.service'
   templateUrl: './table-placeholder-row-container.component.html',
   styleUrls: ['./table-placeholder-row-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TablePlaceholderRowContainerComponent {
   @Input() public columns: TableColumn[];

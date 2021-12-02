@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnDestroy, Output, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getUuid, shareReplayWithRefCount } from '@bimeister/utilities';
 import { asyncScheduler, concat, Observable, of, Subject, Subscriber } from 'rxjs';
-import { observeOn, shareReplay, takeUntil, tap } from 'rxjs/operators';
-import { getUuid } from '@bimeister/utilities';
+import { observeOn, takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'demo-props-checkbox',
@@ -14,11 +14,11 @@ import { getUuid } from '@bimeister/utilities';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: PropsCheckboxComponent,
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
-export class PropsCheckboxComponent extends Observable<unknown> implements ControlValueAccessor {
+export class PropsCheckboxComponent extends Observable<unknown> implements ControlValueAccessor, OnDestroy {
   public readonly id: string;
 
   public readonly control: FormControl = new FormControl(false);
@@ -31,13 +31,11 @@ export class PropsCheckboxComponent extends Observable<unknown> implements Contr
     observeOn(asyncScheduler),
     takeUntil(this.unsubscribe$),
     tap((newValue: unknown) => this.changes.emit(newValue)),
-    shareReplay(1)
+    shareReplayWithRefCount()
   );
 
   constructor() {
-    super((subscriber: Subscriber<unknown>) => {
-      return this.valueChanges$.subscribe(subscriber);
-    });
+    super((subscriber: Subscriber<unknown>) => this.valueChanges$.subscribe(subscriber));
 
     this.id = getUuid();
   }

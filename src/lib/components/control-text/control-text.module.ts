@@ -6,6 +6,6 @@ import { ControlTextComponent } from './components/control-text/control-text.com
 @NgModule({
   declarations: [ControlTextComponent],
   imports: [SharedModule],
-  exports: [ControlTextComponent]
+  exports: [ControlTextComponent],
 })
 export class ControlTextModule {}

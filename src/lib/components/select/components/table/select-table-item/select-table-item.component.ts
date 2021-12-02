@@ -7,7 +7,7 @@ import { SelectItemBase } from './../../../../../../internal/declarations/classe
   templateUrl: './select-table-item.component.html',
   styleUrls: ['./select-table-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTableItemComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;

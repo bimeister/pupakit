@@ -13,5 +13,5 @@ export const mdArrowDownIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

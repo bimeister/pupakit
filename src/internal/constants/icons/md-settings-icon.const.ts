@@ -21,5 +21,5 @@ export const mdSettingsIcon: IconDefinition = {
 		z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -15,5 +15,5 @@ export const iosVideocamIcon: IconDefinition = {
 		C324.9,360.8,301.8,384,273.5,384z"/>
 </g>
 </svg>
-`
+`,
 };

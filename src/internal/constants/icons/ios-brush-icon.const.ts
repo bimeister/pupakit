@@ -15,5 +15,5 @@ export const iosBrushIcon: IconDefinition = {
 		c0-7.5,3-14.8,8-20.4l144.8-164.4C485,90.3,480.7,73.3,467.7,60.4z"/>
 </g>
 </svg>
-`
+`,
 };

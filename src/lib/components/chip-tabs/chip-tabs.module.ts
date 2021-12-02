@@ -7,6 +7,6 @@ import { ChipTabsComponent } from './components/chip-tabs/chip-tabs.component';
 @NgModule({
   declarations: [ChipTabsComponent, ChipTabsItemComponent],
   imports: [SharedModule],
-  exports: [ChipTabsComponent, ChipTabsItemComponent]
+  exports: [ChipTabsComponent, ChipTabsItemComponent],
 })
 export class ChipTabsModule {}

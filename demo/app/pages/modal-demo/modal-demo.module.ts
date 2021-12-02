@@ -20,11 +20,11 @@ const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample3Component,
   ModalDemoExample3HelperComponent,
   ModalDemoExample4Component,
-  ModalDemoExample4HelperComponent
+  ModalDemoExample4HelperComponent,
 ];
 
 @NgModule({
   declarations: [ModalDemoComponent, ModalDemoContentComponent, ...EXAMPLES],
-  imports: [DemoSharedModule, ModalDemoRoutingModule]
+  imports: [DemoSharedModule, ModalDemoRoutingModule],
 })
 export class ModalDemoModule {}

@@ -12,6 +12,6 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [SharedModule, IconModule],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class TagModule {}

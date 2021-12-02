@@ -7,7 +7,7 @@ import { CheckboxService } from '../../services/checkbox.service';
   templateUrl: './checkbox-label.component.html',
   styleUrls: ['./checkbox-label.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxLabelComponent {
   public readonly disabled$: BehaviorSubject<boolean> = this.checkboxService.disabled$;

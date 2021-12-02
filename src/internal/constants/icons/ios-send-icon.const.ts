@@ -12,5 +12,5 @@ export const iosSendIcon: IconDefinition = {
 		L447.2,76C450.5,68.8,443,61.5,435.9,64.9z"/>
 </g>
 </svg>
-`
+`,
 };

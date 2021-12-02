@@ -22,5 +22,5 @@ export const iosWalkIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

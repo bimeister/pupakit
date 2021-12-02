@@ -12,7 +12,7 @@ function repeatTextByNumber(text: string, repeatNumber: number = 1): string {
   templateUrl: './example-1.component.html',
   styleUrls: ['./example-1.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbsExample1Component {
   public readonly breadcrumbs: Breadcrumb[] = Array(10)
@@ -20,6 +20,6 @@ export class BreadcrumbsExample1Component {
     .map((_item: undefined, itemIndex: number) => ({
       name: repeatTextByNumber(`Breadcrumb ${itemIndex + 1}`),
       id: getUuid(),
-      routerLink: '/kit/breadcrumbs'
+      routerLink: '/kit/breadcrumbs',
     }));
 }

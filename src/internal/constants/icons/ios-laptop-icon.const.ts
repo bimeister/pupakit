@@ -16,5 +16,5 @@ export const iosLaptopIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

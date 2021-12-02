@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './example-5.component.html',
   styleUrls: ['./example-5.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaExample5Component {
   public readonly control: FormControl = new FormControl();

@@ -13,5 +13,5 @@ export const iosHappyIcon: IconDefinition = {
 		C338.3,339.1,300.7,369,256,369z"/>
 </g>
 </svg>
-`
+`,
 };

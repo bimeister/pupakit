@@ -5,6 +5,6 @@ import { DrawerOldDemoComponent } from './drawer-old-demo.component';
 
 @NgModule({
   declarations: [DrawerOldDemoComponent],
-  imports: [DemoSharedModule, DrawerOldDemoRoutingModule]
+  imports: [DemoSharedModule, DrawerOldDemoRoutingModule],
 })
 export class DrawerOldDemoModule {}

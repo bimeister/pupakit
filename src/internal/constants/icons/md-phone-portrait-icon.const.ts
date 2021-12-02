@@ -14,5 +14,5 @@ export const mdPhonePortraitIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

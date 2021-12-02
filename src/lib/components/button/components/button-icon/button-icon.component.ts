@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -13,9 +13,9 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
   templateUrl: './button-icon.component.html',
   styleUrls: ['./button-icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonIconComponent {
+export class ButtonIconComponent implements OnChanges {
   @Input() public readonly size: ButtonSize = 'medium';
   public readonly size$: BehaviorSubject<ButtonSize> = new BehaviorSubject<ButtonSize>('medium');
 
@@ -43,7 +43,7 @@ export class ButtonIconComponent {
     this.size$,
     this.kind$,
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
-    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null)))
+    this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes

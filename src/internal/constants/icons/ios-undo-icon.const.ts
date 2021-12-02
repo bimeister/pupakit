@@ -13,5 +13,5 @@ export const iosUndoIcon: IconDefinition = {
 		C480,420.2,479.9,405.2,479.9,394.9z"/>
 </g>
 </svg>
-`
+`,
 };

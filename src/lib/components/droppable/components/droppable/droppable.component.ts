@@ -8,7 +8,7 @@ import {
   Input,
   OnDestroy,
   ViewEncapsulation,
-  ViewRef
+  ViewRef,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -23,7 +23,7 @@ import { DroppableWidth } from '../../../../../internal/declarations/types/dropp
   styleUrls: ['./droppable.component.scss'],
   templateUrl: './droppable.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class DroppableComponent implements OnDestroy {
   @Input() public closeOnContentClick: boolean = false;
@@ -118,14 +118,14 @@ export class DroppableComponent implements OnDestroy {
           originY: this.verticalPosition,
           overlayX: 'start',
           overlayY: 'top',
-          offsetY: this.offsetYPx
-        }
+          offsetY: this.offsetYPx,
+        },
       ]);
 
     return new OverlayConfig({
       positionStrategy,
       hasBackdrop: this.hasBackdrop,
-      backdropClass: 'cdk-overlay-transparent-backdrop'
+      backdropClass: 'cdk-overlay-transparent-backdrop',
     });
   }
 }

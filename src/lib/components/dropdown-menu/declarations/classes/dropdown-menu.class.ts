@@ -8,7 +8,7 @@ import {
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
   Overlay,
-  VerticalConnectionPos
+  VerticalConnectionPos,
 } from '@angular/cdk/overlay';
 import { DropdownMenuContainerComponent } from '../../components/dropdown-menu-container/dropdown-menu-container.component';
 import { DropdownBase } from './abstract/dropdown-base.abstract';
@@ -37,9 +37,9 @@ export class DropdownMenu extends DropdownBase<DropdownMenuContainerComponent> {
       providers: [
         {
           provide: DROPDOWN_CONTEXT_ID_TOKEN,
-          useValue: this.contextId
-        }
-      ]
+          useValue: this.contextId,
+        },
+      ],
     });
 
     return new ComponentPortal(DropdownMenuContainerComponent, null, portalInjector);

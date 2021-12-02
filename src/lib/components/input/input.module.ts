@@ -34,7 +34,7 @@ const EXPORTS: any[] = [
   InputDateTimeComponent,
   InputDateTimeSecondsComponent,
   InputDateRangeComponent,
-  InputDateRangeDoubleComponent
+  InputDateRangeDoubleComponent,
 ];
 
 const DECLARATIONS: any[] = [...EXPORTS];
@@ -55,10 +55,10 @@ const DECLARATIONS: any[] = [...EXPORTS];
       appEyeOnIcon,
       appEyeOffIcon,
       iosHelpCircleIcon,
-      appCrossCircleIcon
+      appCrossCircleIcon,
     ]),
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
   ],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class InputModule {}

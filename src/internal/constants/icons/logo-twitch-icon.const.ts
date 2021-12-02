@@ -15,5 +15,5 @@ export const logoTwitchIcon: IconDefinition = {
 	<rect x="208" y="143" width="48" height="129"/>
 </g>
 </svg>
-`
+`,
 };

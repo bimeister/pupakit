@@ -13,5 +13,5 @@ export const mdSquareOutlineIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

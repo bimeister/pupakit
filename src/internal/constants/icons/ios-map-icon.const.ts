@@ -17,5 +17,5 @@ export const iosMapIcon: IconDefinition = {
 		C272.6,74.9,265.7,78.9,265.7,85.6z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -8,35 +8,35 @@ const BASE_REQUEST_PATH: string = 'status-demo/examples';
   templateUrl: './status-demo.component.html',
   styleUrls: ['./status-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class StatusDemoComponent {
   public readonly colorOptions: RadioOption[] = [
     {
       caption: 'Primary',
-      value: 'primary'
+      value: 'primary',
     },
     {
       caption: 'Warning',
-      value: 'warning'
+      value: 'warning',
     },
     {
       caption: 'Danger',
-      value: 'danger'
+      value: 'danger',
     },
     {
       caption: 'Success',
-      value: 'success'
-    }
+      value: 'success',
+    },
   ];
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
   };
 
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
   };
 }

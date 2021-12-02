@@ -1,7 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../../../../internal/constants/tokens/drawer-container-data.token';
 import { DrawerContainerData } from '../../../../../internal/declarations/interfaces/drawer-container-data.interface';
 
@@ -17,25 +16,25 @@ const ANIMATION: string = `400ms cubic-bezier(0.25, 0.8, 0.25, 1)`;
     trigger('drawerLeftExpanded', [
       state('void', style({ left: '-100%', opacity: 0 })),
       state('enter', style({ left: '0', opacity: 1 })),
-      transition('* => *', animate(ANIMATION))
+      transition('* => *', animate(ANIMATION)),
     ]),
     trigger('drawerRightExpanded', [
       state('void', style({ right: '-100%', opacity: 0 })),
       state('enter', style({ right: '0', opacity: 1 })),
-      transition('* => *', animate(ANIMATION))
-    ])
-  ]
+      transition('* => *', animate(ANIMATION)),
+    ]),
+  ],
 })
-export class DrawerContainerOldComponent<componentT> {
+export class DrawerContainerOldComponent<ComponentT> {
   public animationState: 'void' | 'enter' | 'leave' = 'enter';
 
   public get float(): 'left' | 'right' {
     return this.componentData.float;
   }
 
-  public get componentPortal(): ComponentPortal<componentT> {
+  public get componentPortal(): ComponentPortal<ComponentT> {
     return this.componentData.contentComponentPortal;
   }
 
-  constructor(@Inject(DRAWER_CONTAINER_DATA_TOKEN) private readonly componentData: DrawerContainerData<componentT>) {}
+  constructor(@Inject(DRAWER_CONTAINER_DATA_TOKEN) private readonly componentData: DrawerContainerData<ComponentT>) {}
 }

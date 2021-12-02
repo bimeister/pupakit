@@ -13,5 +13,5 @@ export const mdSkipBackwardIcon: IconDefinition = {
 	<rect x="64" y="64" width="64" height="384"/>
 </g>
 </svg>
-`
+`,
 };

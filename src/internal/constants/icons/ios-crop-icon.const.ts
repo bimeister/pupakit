@@ -15,5 +15,5 @@ export const iosCropIcon: IconDefinition = {
 		c0-15.5-12.5-28-28-28H78C70.3,128,64,134.3,64,142z"/>
 </g>
 </svg>
-`
+`,
 };

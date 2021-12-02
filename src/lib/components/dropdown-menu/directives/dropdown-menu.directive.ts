@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  TemplateRef
+  TemplateRef,
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
@@ -25,7 +25,7 @@ const CURSOR_NOT_ALLOWED: string = 'not-allowed';
 
 @Directive({
   selector: '[pupaDropdownMenu]',
-  exportAs: 'pupaDropdownMenu'
+  exportAs: 'pupaDropdownMenu',
 })
 export class DropdownMenuDirective implements OnChanges, OnDestroy {
   @HostBinding('style.cursor') public cursorStyle: string = CURSOR_POINTER;

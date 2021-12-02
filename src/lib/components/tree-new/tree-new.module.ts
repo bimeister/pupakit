@@ -19,9 +19,9 @@ import { TreeItemTemplateDirective } from './directives/tree-item-template.direc
     SpinnerModule,
     ScrollingModule,
     CdkTreeModule,
-    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon])
+    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
   ],
   providers: [],
-  exports: [TreeNewComponent, TreeItemTemplateDirective]
+  exports: [TreeNewComponent, TreeItemTemplateDirective],
 })
 export class TreeNewModule {}

@@ -12,5 +12,5 @@ export const logoFlickrIcon: IconDefinition = {
 		s48,21.5,48,48S354.5,304,328,304z"/>
 </g>
 </svg>
-`
+`,
 };

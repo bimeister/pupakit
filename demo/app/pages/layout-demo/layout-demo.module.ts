@@ -5,6 +5,6 @@ import { LayoutDemoComponent } from './layout-demo.component';
 
 @NgModule({
   declarations: [LayoutDemoComponent],
-  imports: [DemoSharedModule, LayoutDemoRoutingModule]
+  imports: [DemoSharedModule, LayoutDemoRoutingModule],
 })
 export class LayoutDemoModule {}

@@ -18,5 +18,5 @@ export const mdLocateIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

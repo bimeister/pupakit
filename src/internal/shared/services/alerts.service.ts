@@ -4,7 +4,7 @@ import { map, take } from 'rxjs/operators';
 import { Alert } from '../../declarations/interfaces/alert.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AlertsService {
   public alerts$: BehaviorSubject<Map<string, Alert>> = new BehaviorSubject<Map<string, Alert>>(
@@ -20,7 +20,7 @@ export class AlertsService {
         const id: string = this.createNewId();
         const copyAlert: Alert = {
           ...alert,
-          id
+          id,
         };
         alertCollection.set(id, copyAlert);
         this.alerts$.next(alertCollection);

@@ -30,5 +30,5 @@ export const iosBonfireIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

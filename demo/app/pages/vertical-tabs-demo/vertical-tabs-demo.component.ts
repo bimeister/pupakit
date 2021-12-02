@@ -20,7 +20,7 @@ const MOCK_CHECKS: MockCheckModel[] = Array(100)
     timesPassed: Math.round(Math.random() * 10),
     name: `some check ${index + 1}`,
     createdBy: 'admin admin',
-    id: getUuid()
+    id: getUuid(),
   }));
 
 @Component({
@@ -28,7 +28,7 @@ const MOCK_CHECKS: MockCheckModel[] = Array(100)
   templateUrl: './vertical-tabs-demo.component.html',
   styleUrls: ['./vertical-tabs-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class VerticalTabsDemoComponent {
   public readonly checks: MockCheckModel[] = MOCK_CHECKS;

@@ -18,5 +18,5 @@ export const iosCashIcon: IconDefinition = {
 	<circle cx="256" cy="206" r="53"/>
 </g>
 </svg>
-`
+`,
 };

@@ -16,6 +16,6 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [SharedModule, SpinnerModule, IconModule.forFeature(), DropdownMenuModule],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class ButtonModule {}

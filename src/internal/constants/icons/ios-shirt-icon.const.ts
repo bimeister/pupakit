@@ -14,5 +14,5 @@ export const iosShirtIcon: IconDefinition = {
 		c29.8,0,54-19.3,54,10.7C310,130.3,285.8,143,256,143z"/>
 </g>
 </svg>
-`
+`,
 };

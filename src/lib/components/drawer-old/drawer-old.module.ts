@@ -20,9 +20,9 @@ import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.con
     IconButtonModule,
     OverlayModule,
     PortalModule,
-    IconModule.forFeature([mdMoreIcon, mdCloseIcon])
+    IconModule.forFeature([mdMoreIcon, mdCloseIcon]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [DrawerOldComponent, DrawerDraggerOldComponent, DrawerLayoutOldComponent, OverlayModule, PortalModule]
+  exports: [DrawerOldComponent, DrawerDraggerOldComponent, DrawerLayoutOldComponent, OverlayModule, PortalModule],
 })
 export class DrawerOldModule {}

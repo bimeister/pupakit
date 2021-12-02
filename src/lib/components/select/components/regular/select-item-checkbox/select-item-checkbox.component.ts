@@ -7,7 +7,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   templateUrl: './select-item-checkbox.component.html',
   styleUrls: ['./select-item-checkbox.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectItemCheckboxComponent<T> extends SelectItemBase<T> {
   @Input() public value: T = null;

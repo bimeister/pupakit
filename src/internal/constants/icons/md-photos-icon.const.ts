@@ -17,5 +17,5 @@ export const mdPhotosIcon: IconDefinition = {
 		c23.5,0,42.7-19.2,42.7-42.7V90.7C464,67.2,444.8,48,421.3,48z"/>
 </g>
 </svg>
-`
+`,
 };

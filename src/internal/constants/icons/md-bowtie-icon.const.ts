@@ -16,5 +16,5 @@ export const mdBowtieIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

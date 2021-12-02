@@ -13,7 +13,7 @@ import { CodeContainerPreviewTemplateDirective } from './directives/code-contain
 
 const HIGHLIGHT_CONFIG: HighlightOptions = {
   fullLibraryLoader: () => import('highlight.js'),
-  lineNumbersLoader: () => import('highlightjs-line-numbers.js')
+  lineNumbersLoader: () => import('highlightjs-line-numbers.js'),
 };
 
 const COMPONENTS: Type<unknown>[] = [CodeComponent, CodeContainerComponent, CodeFetchComponent, CodeInlineComponent];
@@ -27,9 +27,9 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
   providers: [
     {
       provide: HIGHLIGHT_OPTIONS,
-      useValue: HIGHLIGHT_CONFIG
-    }
+      useValue: HIGHLIGHT_CONFIG,
+    },
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CodeModule {}

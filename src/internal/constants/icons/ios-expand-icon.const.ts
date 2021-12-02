@@ -21,5 +21,5 @@ export const iosExpandIcon: IconDefinition = {
 		c7.7,0,13.9-6.2,13.9-13.9V321.9C448,314.2,441.8,308,434.1,308z"/>
 </g>
 </svg>
-`
+`,
 };

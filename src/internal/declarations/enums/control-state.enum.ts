@@ -1,4 +1,4 @@
 export enum ControlState {
   expanded = 'true',
-  collapsed = 'false'
+  collapsed = 'false',
 }

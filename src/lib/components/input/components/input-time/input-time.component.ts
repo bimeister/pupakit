@@ -24,7 +24,7 @@ const MAX_MINUTES: number = 59;
   styleUrls: ['./input-time.component.scss'],
   providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputTimeComponent extends InputDateTimeBase {
   public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;

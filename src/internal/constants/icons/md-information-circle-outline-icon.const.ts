@@ -13,5 +13,5 @@ export const mdInformationCircleOutlineIcon: IconDefinition = {
 	<path d="M277,360h-42V235h42V360z M277,194h-42v-42h42V194z"/>
 </g>
 </svg>
-`
+`,
 };

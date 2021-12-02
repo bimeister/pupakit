@@ -21,5 +21,5 @@ export const iosPawIcon: IconDefinition = {
 		c11.7,28.8,34.1,47.8,53.9,47.8C113,295.4,116.6,294.7,120.1,293.3z"/>
 </g>
 </svg>
-`
+`,
 };

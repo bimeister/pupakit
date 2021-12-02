@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef } from '@angular/core';
 
 @Directive({
-  selector: '[pupaAutofocus]'
+  selector: '[pupaAutofocus]',
 })
 export class PupaAutofocusDirective implements AfterViewInit {
   constructor(private readonly elementRef: ElementRef) {}

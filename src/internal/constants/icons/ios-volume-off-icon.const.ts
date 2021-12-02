@@ -23,5 +23,5 @@ export const iosVolumeOffIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

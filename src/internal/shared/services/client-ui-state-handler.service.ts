@@ -7,7 +7,7 @@ import config from '../../../assets/configs/adaptive-config.json';
 import { UiState } from '../../declarations/interfaces/ui-state.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClientUiStateHandlerService implements OnDestroy {
   private readonly iframeElement$: BehaviorSubject<Nullable<HTMLIFrameElement>> = new BehaviorSubject<

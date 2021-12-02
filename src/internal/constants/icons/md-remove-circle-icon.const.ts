@@ -12,5 +12,5 @@ export const mdRemoveCircleIcon: IconDefinition = {
 		z"/>
 </g>
 </svg>
-`
+`,
 };

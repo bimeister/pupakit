@@ -273,7 +273,7 @@
           "error",
           {
             "type": "element",
-            "prefix": "pupa",
+            "prefix": ["pupa", "demo"],
             "style": "kebab-case"
           }
         ],

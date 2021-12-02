@@ -4,7 +4,7 @@ import { isEmpty, isNil } from '@bimeister/utilities';
 @Component({
   selector: 'pupa-drawer-layout-old',
   templateUrl: './drawer-layout-old.component.html',
-  styleUrls: ['./drawer-layout-old.component.scss']
+  styleUrls: ['./drawer-layout-old.component.scss'],
 })
 export class DrawerLayoutOldComponent {
   @Output() public readonly closeButtonClicked: EventEmitter<void> = new EventEmitter();

@@ -23,5 +23,5 @@ export const iosCellularIcon: IconDefinition = {
 		c19.7-6,34-24.3,34-45.9C304,144.7,282.5,123.2,256,123.2z"/>
 </g>
 </svg>
-`
+`,
 };

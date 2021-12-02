@@ -15,5 +15,5 @@ export const iosCubeIcon: IconDefinition = {
 		C53.8,166.2,48,170.1,48,175.9z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -8,7 +8,7 @@ import { VerticalTabsStateService } from '../../services/vertical-tabs-state.ser
   templateUrl: './vertical-tabs-item.component.html',
   styleUrls: ['./vertical-tabs-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VerticalTabsItemComponent extends TabsContainerItem {
   constructor(

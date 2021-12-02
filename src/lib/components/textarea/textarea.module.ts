@@ -12,6 +12,6 @@ import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 @NgModule({
   declarations: [TextareaComponent, TextareaInlineComponent],
   imports: [SharedModule, ScrollableModule, ButtonModule, ThemeWrapperModule, OverlayModule, PortalModule],
-  exports: [TextareaComponent, TextareaInlineComponent]
+  exports: [TextareaComponent, TextareaInlineComponent],
 })
 export class TextareaModule {}

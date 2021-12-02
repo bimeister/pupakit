@@ -13,5 +13,5 @@ export const mdCashIcon: IconDefinition = {
 	<rect x="32" y="384" width="448" height="32"/>
 </g>
 </svg>
-`
+`,
 };

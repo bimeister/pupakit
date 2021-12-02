@@ -5,5 +5,5 @@ export enum WeekdaysShort {
   Ср,
   Чт,
   Пт,
-  Сб
+  Сб,
 }

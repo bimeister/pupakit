@@ -11,7 +11,7 @@ import { BreadcrumbsExample3Component } from './examples/example-3/example-3.com
 const EXAMPLES: Type<unknown>[] = [
   BreadcrumbsExample1Component,
   BreadcrumbsExample2Component,
-  BreadcrumbsExample3Component
+  BreadcrumbsExample3Component,
 ];
 const COMPONENTS: Type<unknown>[] = [BreadcrumbsDemoComponent, ...EXAMPLES];
 
@@ -19,6 +19,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [BreadcrumbsDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule]
+  imports: [BreadcrumbsDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule],
 })
 export class BreadcrumbsDemoModule {}

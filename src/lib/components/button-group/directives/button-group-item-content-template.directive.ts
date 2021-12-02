@@ -2,7 +2,7 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { ContentTemplateNameDirective } from '../../../../internal/declarations/interfaces/content-template-name.interface';
 
 @Directive({
-  selector: '[pupaButtonGroupItemContentTemplate]'
+  selector: '[pupaButtonGroupItemContentTemplate]',
 })
 export class ButtonGroupItemContentTemplateDirective implements ContentTemplateNameDirective {
   @Input() public pupaButtonGroupItemContentTemplate: string = '';

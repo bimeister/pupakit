@@ -10,7 +10,7 @@ import { TableScrollbarsService } from '../../services/table-scrollbars.service'
   templateUrl: './table-header-row-container.component.html',
   styleUrls: ['./table-header-row-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableHeaderRowContainerComponent {
   @Input() public columns: TableColumn[];

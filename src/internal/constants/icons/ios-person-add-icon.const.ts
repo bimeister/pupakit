@@ -19,5 +19,5 @@ export const iosPersonAddIcon: IconDefinition = {
 		C448,298.2,443.3,293.5,437.5,293.5z"/>
 </g>
 </svg>
-`
+`,
 };

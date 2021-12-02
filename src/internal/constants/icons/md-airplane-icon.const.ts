@@ -13,5 +13,5 @@ export const mdAirplaneIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

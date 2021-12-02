@@ -5,6 +5,6 @@ import { LabelDemoComponent } from './label-demo.component';
 
 @NgModule({
   declarations: [LabelDemoComponent],
-  imports: [DemoSharedModule, LabelDemoRoutingModule]
+  imports: [DemoSharedModule, LabelDemoRoutingModule],
 })
 export class LabelDemoModule {}

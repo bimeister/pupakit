@@ -20,7 +20,7 @@ const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, ind
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
   city: 'Moscow',
-  age: index + 1
+  age: index + 1,
 }));
 
 const COLUMNS: TableColumnDefinition[] = [
@@ -29,21 +29,21 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'firstName',
     title: 'First Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'last-name',
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'city',
     modelKey: 'city',
     title: 'City',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 }
+    defaultSizes: { widthPx: 200 },
   },
   {
     id: 'age',
@@ -51,8 +51,8 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'Age',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 100 },
-    type: 'age'
-  }
+    type: 'age',
+  },
 ];
 
 const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableColumnDefinition>(
@@ -64,13 +64,13 @@ const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableCol
   templateUrl: './example-6.component.html',
   styleUrls: ['./example-6.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample6Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>({
-    trackBy: (_index: number, rowData: SomeData) => rowData.id
+    trackBy: (_index: number, rowData: SomeData) => rowData.id,
   });
 
   public readonly columnWidthChanged$: Subject<TableEvents.ColumnWidthChanged> =
@@ -115,7 +115,7 @@ export class TableExample6Component implements OnDestroy {
       title: 'example',
       pin: TableColumnPin.None,
       type: 'example',
-      defaultSizes: { widthPx: 1500 }
+      defaultSizes: { widthPx: 1500 },
     };
 
     this.controller.setColumnDefinitions([newColumn, ...COLUMNS]);

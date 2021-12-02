@@ -1,5 +1,5 @@
 export enum PanelExpansionState {
   initial = 'void',
-  dissapeared = 'false',
-  appeared = 'true'
+  disappeared = 'false',
+  appeared = 'true',
 }

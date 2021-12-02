@@ -16,5 +16,5 @@ export const mdAmericanFootballIcon: IconDefinition = {
 		v-32h32V240z"/>
 </g>
 </svg>
-`
+`,
 };

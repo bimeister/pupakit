@@ -13,5 +13,5 @@ export const iosCheckboxIcon: IconDefinition = {
 		c1.1,0,2.1,0.4,2.8,1.2l17.5,18.1C365.1,194.4,365.1,196.9,363.5,198.5z"/>
 </g>
 </svg>
-`
+`,
 };

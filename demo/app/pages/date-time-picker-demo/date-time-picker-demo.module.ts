@@ -5,6 +5,6 @@ import { DateTimePickerDemoComponent } from './date-time-picker-demo.component';
 
 @NgModule({
   declarations: [DateTimePickerDemoComponent],
-  imports: [DemoSharedModule, DateTimePickerDemoRoutingModule]
+  imports: [DemoSharedModule, DateTimePickerDemoRoutingModule],
 })
 export class DateTimePickerDemoModule {}

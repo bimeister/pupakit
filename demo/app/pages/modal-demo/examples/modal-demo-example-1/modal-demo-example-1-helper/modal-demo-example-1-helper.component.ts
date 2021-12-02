@@ -7,7 +7,7 @@ import { ModalDemoExample1Component } from '../modal-content/modal-demo-example-
   templateUrl: './modal-demo-example-1-helper.component.html',
   styleUrls: ['./modal-demo-example-1-helper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalDemoExample1HelperComponent {
   constructor(private readonly modalsService: ModalsService) {}

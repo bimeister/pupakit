@@ -6,6 +6,6 @@ import { DemoSharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [MainPageComponent],
-  imports: [DemoSharedModule, MainPageRoutingModule]
+  imports: [DemoSharedModule, MainPageRoutingModule],
 })
 export class MainPageModule {}

@@ -5,6 +5,6 @@ import { ColorsDemoComponent } from './colors-demo.component';
 
 @NgModule({
   declarations: [ColorsDemoComponent],
-  imports: [DemoSharedModule, ColorsDemoRoutingModule]
+  imports: [DemoSharedModule, ColorsDemoRoutingModule],
 })
 export class ColorsDemoModule {}

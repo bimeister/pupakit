@@ -17,5 +17,5 @@ export const logoInstagramIcon: IconDefinition = {
 		c-53,0-96,43-96,96s43,96,96,96c53,0,96-43,96-96S309,160,256,160L256,160z"/>
 </g>
 </svg>
-`
+`,
 };

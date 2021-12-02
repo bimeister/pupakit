@@ -14,5 +14,5 @@ export const mdMicIcon: IconDefinition = {
 		C354.281,386.561,416,322.421,416,244.548H377.139z"/>
 </g>
 </svg>
-`
+`,
 };

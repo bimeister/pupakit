@@ -5,7 +5,7 @@ import {
   HostListener,
   Input,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { SelectStateService } from '../../../services/select-state.service';
@@ -17,7 +17,7 @@ import { SelectBase } from './../../../../../../internal/declarations/classes/ab
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [SelectStateService]
+  providers: [SelectStateService],
 })
 export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isMultiSelectionEnabled: boolean = false;

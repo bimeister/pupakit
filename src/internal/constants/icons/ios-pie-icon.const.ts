@@ -15,5 +15,5 @@ export const iosPieIcon: IconDefinition = {
 		C91,33.9,32,149,32,239.3z"/>
 </g>
 </svg>
-`
+`,
 };

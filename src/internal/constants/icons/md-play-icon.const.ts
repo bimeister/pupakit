@@ -8,5 +8,5 @@ export const mdPlayIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M96,52v408l320-204L96,52z"/>
 </svg>
-`
+`,
 };

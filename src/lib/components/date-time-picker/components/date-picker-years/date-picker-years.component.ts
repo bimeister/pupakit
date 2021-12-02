@@ -5,7 +5,7 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
@@ -24,7 +24,7 @@ const DEFAULT_YEARS: number[] = Array(YEARS_IN_SECTION)
   templateUrl: './date-picker-years.component.html',
   styleUrls: ['./date-picker-years.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerYearsComponent implements OnChanges {
   @Input() public readonly years: number[] = DEFAULT_YEARS;

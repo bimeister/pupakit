@@ -16,5 +16,5 @@ export const logoAppleIcon: IconDefinition = {
 		C320.3,110.2,329.6,87.4,326.2,64L326.2,64z"/>
 </g>
 </svg>
-`
+`,
 };

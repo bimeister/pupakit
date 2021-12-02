@@ -14,5 +14,5 @@ export const iosPodiumIcon: IconDefinition = {
 		C448,259.5,444.5,256,440.1,256z"/>
 </g>
 </svg>
-`
+`,
 };

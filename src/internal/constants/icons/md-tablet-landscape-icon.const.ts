@@ -12,5 +12,5 @@ export const mdTabletLandscapeIcon: IconDefinition = {
 		c0-7.7,6.4-14.1,14-14.1C455.5,242,462,248.3,462,256z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -1,5 +1,5 @@
 import { ComponentPortal } from '@angular/cdk/portal';
 
-export interface ModalContainerData<componentT> {
-  contentComponentPortal: ComponentPortal<componentT>;
+export interface ModalContainerData<ComponentT> {
+  contentComponentPortal: ComponentPortal<ComponentT>;
 }

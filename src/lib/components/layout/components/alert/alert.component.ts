@@ -14,9 +14,9 @@ import { AlertsService } from '../../../../../internal/shared/services/alerts.se
       state('false', style({ height: '0px' })),
       state('true', style({ height: '*' })),
       transition('false => true', animate('0.2s')),
-      transition('true => false', animate('0.2s'))
-    ])
-  ]
+      transition('true => false', animate('0.2s')),
+    ]),
+  ],
 })
 export class AlertComponent implements AfterContentInit {
   @Input()

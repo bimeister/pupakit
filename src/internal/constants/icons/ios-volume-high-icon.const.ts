@@ -22,5 +22,5 @@ export const iosVolumeHighIcon: IconDefinition = {
 		c0,0,0,0,0,0s0,0,0,0C317.4,228.2,306.8,202.1,287.5,182.5z"/>
 </g>
 </svg>
-`
+`,
 };

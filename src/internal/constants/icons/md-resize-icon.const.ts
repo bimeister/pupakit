@@ -8,5 +8,5 @@ export const mdResizeIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <polygon points="297.6,48 362.5,112.9 112.9,362.5 48,297.6 48,464 214.4,464 149.5,399.1 399.1,149.5 464,214.4 464,48 "/>
 </svg>
-`
+`,
 };

@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Output, ViewEncapsula
   templateUrl: './pupa-tag-delete-button.component.html',
   styleUrls: ['./pupa-tag-delete-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagDeleteButtonComponent {
   @Output() public readonly close: EventEmitter<void> = new EventEmitter();

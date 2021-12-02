@@ -15,5 +15,5 @@ export const mdUmbrellaIcon: IconDefinition = {
 		C378.2,255,392.9,244.1,410.1,244.1z"/>
 </g>
 </svg>
-`
+`,
 };

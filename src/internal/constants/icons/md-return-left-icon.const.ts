@@ -8,5 +8,5 @@ export const mdReturnLeftIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M432.8,136v96H122.3l84.4-86.2L173.5,112L32,256l141.5,144l33.2-33.8L122.3,280H480V136H432.8z"/>
 </svg>
-`
+`,
 };

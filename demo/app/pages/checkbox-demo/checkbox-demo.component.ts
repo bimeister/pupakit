@@ -10,7 +10,7 @@ const MAX_HINT_STRING_LENGTH: number = 25;
   selector: 'demo-checkbox',
   templateUrl: './checkbox-demo.component.html',
   styleUrls: ['./checkbox-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxDemoComponent implements AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
@@ -25,7 +25,7 @@ export class CheckboxDemoComponent implements AfterViewInit, OnDestroy {
   public checkboxExampleCode: {
     HTML: string;
   } = {
-    HTML: 'checkbox-demo/examples/checkbox-demo-example/checkbox-demo-example.component.html'
+    HTML: 'checkbox-demo/examples/checkbox-demo-example/checkbox-demo-example.component.html',
   };
 
   @ViewChild('disabled', { static: false }) public readonly disabledCheckBoxComponent: PropsCheckboxComponent;

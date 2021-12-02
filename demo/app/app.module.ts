@@ -30,9 +30,9 @@ registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
     KitLayoutModule,
     MainLayoutModule,
     HttpClientModule,
-    ThemeControllerModule
+    ThemeControllerModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru-RU' }],
-  exports: [LogPipe]
+  exports: [LogPipe],
 })
 export class AppModule {}

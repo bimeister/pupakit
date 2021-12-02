@@ -16,5 +16,5 @@ export const iosColorPaletteIcon: IconDefinition = {
 		s14.3-32,32-32s32,14.3,32,32S337.7,192,320,192z"/>
 </g>
 </svg>
-`
+`,
 };

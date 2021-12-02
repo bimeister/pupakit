@@ -4,14 +4,14 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   selector: 'demo-uploads',
   styleUrls: ['../demo.scss', './uploads-demo.component.scss'],
   templateUrl: './uploads-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadsDemoComponent {
   public fileAttachments: any[] = new Array(1000).fill({}).map(() => ({
     name: 'File name.pdf',
     size: 10,
     status: 'uploading',
-    percentage: Math.random() * 101
+    percentage: Math.random() * 101,
   }));
 
   constructor() {
@@ -24,9 +24,9 @@ export class UploadsDemoComponent {
         name: 'File name.pdf',
         size: 10,
         status: 'pending',
-        percentage: Math.random() * 101
+        percentage: Math.random() * 101,
       },
-      ...this.fileAttachments
+      ...this.fileAttachments,
     ];
   }
 }

@@ -8,5 +8,5 @@ export const mdFlashIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M160,48v224h64v192l128-256h-64l64-160H160z"/>
 </svg>
-`
+`,
 };

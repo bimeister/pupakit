@@ -6,13 +6,13 @@ import { MainPageComponent } from './components/main-page/main-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: MainPageComponent
-  }
+    component: MainPageComponent,
+  },
 ];
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class MainPageRoutingModule {}

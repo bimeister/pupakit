@@ -6,7 +6,7 @@ import {
   OnDestroy,
   TrackByFunction,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
@@ -24,7 +24,7 @@ import { LoaderService } from '../../../../../internal/shared/services/loader.se
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class LayoutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
@@ -72,8 +72,8 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public readonly trackByAlertId: TrackByFunction<Alert> = (_, item: Alert) => item.id;
-  public readonly trackByColumnIndex: TrackByFunction<number> = (_, item: number) => item;
+  public readonly trackByAlertId: TrackByFunction<Alert> = (_: number, item: Alert) => item.id;
+  public readonly trackByColumnIndex: TrackByFunction<number> = (_: number, item: number) => item;
 
   private setIframeElement(): void {
     this.clientUiHandlerService.setIframeElement(this.iframeElementRef.nativeElement);

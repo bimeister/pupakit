@@ -21,5 +21,5 @@ export const iosImagesIcon: IconDefinition = {
 		l29.7,2.6l51.6,4.5C447.4,158.1,450.2,161.4,449.8,165.1z"/>
 </g>
 </svg>
-`
+`,
 };

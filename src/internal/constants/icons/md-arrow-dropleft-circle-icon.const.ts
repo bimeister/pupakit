@@ -12,5 +12,5 @@ export const mdArrowDropleftCircleIcon: IconDefinition = {
 		L192,256z"/>
 </g>
 </svg>
-`
+`,
 };

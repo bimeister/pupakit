@@ -7,7 +7,7 @@ export function buildLibraryTask(): TaskFunction {
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
       onDone,
-      printDefaultOutput: false
+      printDefaultOutput: false,
     });
   };
 }

@@ -8,5 +8,5 @@ export const mdPauseIcon: IconDefinition = {
 	 viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <path d="M96,448h106.7V64H96V448z M309.3,64v384H416V64H309.3z"/>
 </svg>
-`
+`,
 };

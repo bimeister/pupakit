@@ -5,6 +5,6 @@ import { UploadsDemoComponent } from './uploads-demo.component';
 
 @NgModule({
   declarations: [UploadsDemoComponent],
-  imports: [DemoSharedModule, UploadsDemoRoutingModule]
+  imports: [DemoSharedModule, UploadsDemoRoutingModule],
 })
 export class UploadsDemoModule {}

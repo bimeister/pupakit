@@ -4,7 +4,7 @@ import { from, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ExamplesRequestsService {
   private readonly requestsBase: string = '/examples';

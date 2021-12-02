@@ -13,5 +13,5 @@ export const iosCheckmarkCircleIcon: IconDefinition = {
 		l17.5,18.1C364.1,194.4,364.1,196.9,362.5,198.5z"/>
 </g>
 </svg>
-`
+`,
 };

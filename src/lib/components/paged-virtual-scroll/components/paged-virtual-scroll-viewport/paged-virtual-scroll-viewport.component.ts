@@ -10,7 +10,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Subject, Subscription } from 'rxjs';
@@ -29,7 +29,7 @@ const DEBOUNCE_TIME_MS: number = 500;
   styleUrls: ['./paged-virtual-scroll-viewport.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [PagedVirtualScrollStateService]
+  providers: [PagedVirtualScrollStateService],
 })
 export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
   @Input() public itemSize: number;

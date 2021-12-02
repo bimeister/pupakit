@@ -13,5 +13,5 @@ export const mdNavigateIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

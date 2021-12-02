@@ -7,7 +7,7 @@ import {
   Input,
   Output,
   Renderer2,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { AgGridAngular } from 'ag-grid-angular';
@@ -20,9 +20,8 @@ import {
   GridOptions,
   GridReadyEvent,
   IDatasource,
-  IGetRowsParams
+  IGetRowsParams,
 } from 'ag-grid-community';
-
 import { DatagridManipulator } from '../../../../../internal/declarations/classes/datagrid-manipulator.class';
 import { DatagridThemes } from '../../../../../internal/declarations/enums/datagrid-themes.enum';
 
@@ -32,9 +31,9 @@ export { ColDef, ColumnApi, GridApi, GridOptions, GridReadyEvent, IDatasource, I
   selector: 'pupa-datagrid',
   templateUrl: './datagrid.component.html',
   styleUrls: ['./datagrid.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatagridComponent<rowDataT> {
+export class DatagridComponent<RowDataT> {
   public get themeClass(): string {
     if (this.manipulator.config.theme === DatagridThemes.None) {
       return '';
@@ -44,7 +43,7 @@ export class DatagridComponent<rowDataT> {
 
   @Output() public rowClicked: EventEmitter<unknown> = new EventEmitter<unknown>();
 
-  @Input() public manipulator: DatagridManipulator<rowDataT>;
+  @Input() public manipulator: DatagridManipulator<RowDataT>;
 
   @Input()
   public suppressHorizontalScroll: boolean = false;
@@ -73,7 +72,7 @@ export class DatagridComponent<rowDataT> {
     }
 
     this.isShadowOverlayApplied = shadowOverlayMustBeApplied;
-    this.leftPinnedElements.forEach(pinnedElement => {
+    this.leftPinnedElements.forEach((pinnedElement: HTMLElement) => {
       if (shadowOverlayMustBeApplied) {
         this.renderer.addClass(pinnedElement, DatagridComponent.shadowOverlayClassName);
       } else {
@@ -99,7 +98,7 @@ export class DatagridComponent<rowDataT> {
 
     this.leftPinnedElements = [
       this.gridElement.nativeElement.querySelector('.ag-pinned-left-header'),
-      this.gridElement.nativeElement.querySelector('.ag-pinned-left-cols-container')
+      this.gridElement.nativeElement.querySelector('.ag-pinned-left-cols-container'),
     ];
 
     /** {@link https://github.com/ag-grid/ag-grid/issues/2911|AgGrid issue} */

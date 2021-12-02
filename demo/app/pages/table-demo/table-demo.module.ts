@@ -17,11 +17,11 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample4Component,
   TableExample5Component,
   TableExample6Component,
-  TableExample7Component
+  TableExample7Component,
 ];
 
 @NgModule({
   declarations: [...EXAMPLE_COMPONENTS, TableDemoComponent],
-  imports: [TableDemoRoutingModule, DemoSharedModule]
+  imports: [TableDemoRoutingModule, DemoSharedModule],
 })
 export class TableDemoModule {}

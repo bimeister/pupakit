@@ -14,5 +14,5 @@ export const mdCameraIcon: IconDefinition = {
 		S317.855,392,256,392z"/>
 </g>
 </svg>
-`
+`,
 };

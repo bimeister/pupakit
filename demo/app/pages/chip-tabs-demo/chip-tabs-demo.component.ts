@@ -7,30 +7,30 @@ import { Tab } from '../../../../src/internal/declarations/interfaces/tab.interf
   templateUrl: './chip-tabs-demo.component.html',
   styleUrls: ['./chip-tabs-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipTabsDemoComponent {
   public readonly tabs: Tab[] = [
     {
       isActive: true,
       value: 'properties',
-      name: 'Свойства'
+      name: 'Свойства',
     },
     {
       isActive: false,
       value: 'interfaces',
-      name: 'Интерфейсы'
+      name: 'Интерфейсы',
     },
     {
       isActive: false,
       value: 'classes',
-      name: 'Классы'
+      name: 'Классы',
     },
     {
       isActive: false,
       value: 'structures',
-      name: 'Структуры'
-    }
+      name: 'Структуры',
+    },
   ];
 
   public readonly activeValues$: BehaviorSubject<unknown[]> = new BehaviorSubject<unknown[]>(

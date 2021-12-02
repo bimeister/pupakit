@@ -19,5 +19,5 @@ export const iosNotificationsOutlineIcon: IconDefinition = {
 		c6.5,15.2,14.4,25.9,21.5,33.9C378.3,353.9,376.5,358,373,358z"/>
 </g>
 </svg>
-`
+`,
 };

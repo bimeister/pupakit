@@ -12,5 +12,5 @@ export const mdTabletPortraitIcon: IconDefinition = {
 		c7.7,0,14.1,6.4,14.1,14C270,455.5,263.7,462,256,462z"/>
 </g>
 </svg>
-`
+`,
 };

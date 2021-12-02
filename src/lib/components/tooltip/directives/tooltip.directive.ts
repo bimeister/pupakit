@@ -10,7 +10,7 @@ import { TooltipService } from '../services/tooltip.service';
 @Directive({
   selector: '[pupaTooltip]',
   providers: [TooltipService],
-  exportAs: 'pupaTooltip'
+  exportAs: 'pupaTooltip',
 })
 export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit {
   @Input() public tooltipHideOnHover: boolean = true;

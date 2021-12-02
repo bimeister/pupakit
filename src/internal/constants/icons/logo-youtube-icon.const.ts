@@ -14,5 +14,5 @@ export const logoYoutubeIcon: IconDefinition = {
 		C512.1,220.1,511,184.5,508.6,148.8z M207,353.9V157.4l145,98.2L207,353.9z"/>
 </g>
 </svg>
-`
+`,
 };

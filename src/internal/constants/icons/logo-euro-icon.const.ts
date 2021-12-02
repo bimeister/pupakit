@@ -14,5 +14,5 @@ export const logoEuroIcon: IconDefinition = {
 		c-64.276,0-79.223-18.739-79.223-63.086V320h116.795l7.148-48H234z"/>
 </g>
 </svg>
-`
+`,
 };

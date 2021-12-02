@@ -7,7 +7,7 @@ import { getAllIcons } from '../../../declarations/functions/get-all-icons.funct
   templateUrl: './icon-page.component.html',
   styleUrls: ['./icon-page.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconPageComponent {
   public readonly iconNames: string[] = getAllIcons().map((icon: IconDefinition) => icon.name);

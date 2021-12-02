@@ -4,7 +4,7 @@ import {
   AnimationFactory,
   AnimationMetadata,
   AnimationPlayer,
-  style
+  style,
 } from '@angular/animations';
 import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
 import {
@@ -17,7 +17,7 @@ import {
   OnDestroy,
   Renderer2,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { combineLatest, Observable, Subject, Subscription } from 'rxjs';
@@ -34,7 +34,7 @@ type Floats = 'bottom' | 'left' | 'right';
 const animations: { [key in Floats]: AnimationMetadata[] } = {
   left: [style({ left: '-100%', opacity: 0 }), animate(ANIMATION, style({ left: '0', bottom: '0', opacity: 1 }))],
   right: [style({ right: '-100%', opacity: 0 }), animate(ANIMATION, style({ right: '0', bottom: '0', opacity: 1 }))],
-  bottom: [style({ bottom: '-100%', opacity: 0 }), animate(ANIMATION, style({ bottom: '0', right: '0', opacity: 1 }))]
+  bottom: [style({ bottom: '-100%', opacity: 0 }), animate(ANIMATION, style({ bottom: '0', right: '0', opacity: 1 }))],
 };
 
 @Component({
@@ -42,7 +42,7 @@ const animations: { [key in Floats]: AnimationMetadata[] } = {
   templateUrl: './drawer-container.component.html',
   styleUrls: ['./drawer-container.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerContainerComponent<ComponentT> implements AfterViewInit, OnDestroy {
   @ViewChild('drawerContainer', { read: ElementRef }) public drawerContainerElement: ElementRef;
@@ -82,7 +82,7 @@ export class DrawerContainerComponent<ComponentT> implements AfterViewInit, OnDe
 
   private readonly animationPlayer$: Observable<AnimationPlayer> = combineLatest([
     this.float$,
-    this.drawerContainerElement$.pipe(filterNotNil())
+    this.drawerContainerElement$.pipe(filterNotNil()),
   ]).pipe(
     map(([float, elementRef]: [Floats, ElementRef]) => {
       const animationFactory: AnimationFactory = this.animationBuilder.build(animations[float]);

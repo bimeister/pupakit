@@ -7,6 +7,6 @@ import { ScrollableExample2Component } from './examples/example-2/example-2.comp
 
 @NgModule({
   declarations: [ScrollableDemoComponent, ScrollableExample1Component, ScrollableExample2Component],
-  imports: [DemoSharedModule, ScrollableDemoRoutingModule]
+  imports: [DemoSharedModule, ScrollableDemoRoutingModule],
 })
 export class ScrollableDemoModule {}

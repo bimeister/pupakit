@@ -6,7 +6,7 @@ import { isNil } from '@bimeister/utilities';
 const THEME_MODE_KEY: string = 'theme-mode';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ThemeSaverService {
   public getTheme(): Theme {

@@ -13,5 +13,5 @@ export const logoNpmIcon: IconDefinition = {
 		V298.9z"/>
 </g>
 </svg>
-`
+`,
 };

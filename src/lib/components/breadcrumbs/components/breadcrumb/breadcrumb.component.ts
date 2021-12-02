@@ -5,7 +5,7 @@ import {
   Input,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterTruthy, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
@@ -18,7 +18,7 @@ import { Breadcrumb } from '../../../../../internal/declarations/interfaces/brea
   templateUrl: './breadcrumb.component.html',
   styleUrls: ['./breadcrumb.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BreadcrumbComponent {
   @Input() public breadcrumb: Nullable<Breadcrumb> = null;

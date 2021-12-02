@@ -14,5 +14,5 @@ export const iosSadIcon: IconDefinition = {
 		c14.8-1.2,27,11.1,25.9,25.9C351,237.6,341.6,247,329.9,247.9z"/>
 </g>
 </svg>
-`
+`,
 };

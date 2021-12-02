@@ -19,5 +19,5 @@ export const iosCarIcon: IconDefinition = {
 	<path d="M352,384c48,0,96-5,96-5c0,16,2,29-5,29s-79.3,0-86,0S352,394.5,352,384z"/>
 </g>
 </svg>
-`
+`,
 };

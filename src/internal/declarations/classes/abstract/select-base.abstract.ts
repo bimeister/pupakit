@@ -48,9 +48,7 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.selectStateService.dropdownOverlayRef$
       .pipe(
         take(1),
-        map((overlayRef: OverlayRef | null | undefined) => {
-          return isNil(overlayRef) ? null : overlayRef.overlayElement;
-        })
+        map((overlayRef: OverlayRef | null | undefined) => (isNil(overlayRef) ? null : overlayRef.overlayElement))
       )
       .subscribe((overlayElement: Element | null) => {
         const currentComponentElement: Element = this.elementRef.nativeElement;

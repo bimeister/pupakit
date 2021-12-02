@@ -11,7 +11,7 @@ const ANIMATION_DURATION_MS: number = 150;
 
 enum AnimationStates {
   SHOW = 'show',
-  VOID = 'void'
+  VOID = 'void',
 }
 
 @Component({
@@ -25,9 +25,11 @@ enum AnimationStates {
       state(AnimationStates.VOID, style({ transform: 'translateY(10px)', opacity: 0 })),
       state(AnimationStates.SHOW, style({ transform: 'translateY(0px)', opacity: 1 })),
       transition(`${AnimationStates.VOID} => ${AnimationStates.SHOW}`, [animate(`${ANIMATION_DURATION_MS}ms ease-in`)]),
-      transition(`${AnimationStates.SHOW} => ${AnimationStates.VOID}`, [animate(`${ANIMATION_DURATION_MS}ms ease-out`)])
-    ])
-  ]
+      transition(`${AnimationStates.SHOW} => ${AnimationStates.VOID}`, [
+        animate(`${ANIMATION_DURATION_MS}ms ease-out`),
+      ]),
+    ]),
+  ],
 })
 export class DropdownMenuContainerComponent {
   public readonly dropdownMenuService: DropdownMenuService;

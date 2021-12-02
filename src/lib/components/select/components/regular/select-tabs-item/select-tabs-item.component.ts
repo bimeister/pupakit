@@ -9,7 +9,7 @@ import { SelectTabsService } from '../../../services/select-tabs-state.service';
   templateUrl: './select-tabs-item.component.html',
   styleUrls: ['./select-tabs-item.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTabsItemComponent<T> {
   @Input() public readonly value: T;

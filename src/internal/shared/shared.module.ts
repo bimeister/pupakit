@@ -8,6 +8,6 @@ const MODULES: any[] = [CommonModule, FormsModule, ReactiveFormsModule, PipesMod
 
 @NgModule({
   imports: [...MODULES],
-  exports: [...MODULES]
+  exports: [...MODULES],
 })
 export class SharedModule {}

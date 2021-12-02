@@ -9,5 +9,5 @@ export const mdRemoveIcon: IconDefinition = {
 	 width="512px" height="512px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
 <rect x="96" y="235" width="320" height="42"/>
 </svg>
-`
+`,
 };

@@ -24,5 +24,5 @@ export const iosLinkIcon: IconDefinition = {
 		l68.6-68.6c19.8-19.8,30.7-46.2,30.7-74.4S453.1,98.5,433.3,78.7z"/>
 </g>
 </svg>
-`
+`,
 };

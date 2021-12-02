@@ -3,7 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GridStateService {
   public readonly isGridVisible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

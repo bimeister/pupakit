@@ -3,8 +3,8 @@ import { MonoTypeOperatorFunction, Observable, Subscriber, Subscription } from '
 import { Nullable } from '@bimeister/utilities';
 
 export function subscribeOutsideAngular<T>(ngZone: NgZone): MonoTypeOperatorFunction<T> {
-  return (source$: Observable<T>) => {
-    return new Observable<T>((subscriber: Subscriber<T>) => {
+  return (source$: Observable<T>) =>
+    new Observable<T>((subscriber: Subscriber<T>) => {
       let subscription: Nullable<Subscription> = null;
 
       ngZone.runOutsideAngular(() => {
@@ -13,5 +13,4 @@ export function subscribeOutsideAngular<T>(ngZone: NgZone): MonoTypeOperatorFunc
 
       return { unsubscribe: () => subscription?.unsubscribe() };
     });
-  };
 }

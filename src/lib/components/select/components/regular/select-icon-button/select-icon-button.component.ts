@@ -8,7 +8,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   templateUrl: './select-icon-button.component.html',
   styleUrls: ['./select-icon-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectIconButtonComponent<T> extends SelectButtonBase<T> {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;

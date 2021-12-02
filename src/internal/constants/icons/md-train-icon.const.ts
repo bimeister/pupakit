@@ -13,5 +13,5 @@ export const mdTrainIcon: IconDefinition = {
 		s14.7-32.8,33-32.8s33,14.7,33,32.8S373.3,376.4,355,376.4z"/>
 </g>
 </svg>
-`
+`,
 };

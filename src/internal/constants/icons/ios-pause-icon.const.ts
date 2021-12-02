@@ -13,5 +13,5 @@ export const iosPauseIcon: IconDefinition = {
 		z"/>
 </g>
 </svg>
-`
+`,
 };

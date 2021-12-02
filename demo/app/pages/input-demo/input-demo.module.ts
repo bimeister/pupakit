@@ -5,6 +5,6 @@ import { InputDemoComponent } from './input-demo.component';
 
 @NgModule({
   declarations: [InputDemoComponent],
-  imports: [DemoSharedModule, InputDemoRoutingModule]
+  imports: [DemoSharedModule, InputDemoRoutingModule],
 })
 export class InputDemoModule {}

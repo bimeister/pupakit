@@ -15,5 +15,5 @@ export const iosFlashOffIcon: IconDefinition = {
 	<path d="M191.6,474.9c-0.9,4.5,4.6,7.1,7.2,3.4L285,365.1l-42.4-72.3L191.6,474.9z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -5,7 +5,7 @@ import { CountColor } from '../../../../../internal/declarations/types/count-col
   selector: 'pupa-counter',
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent {
   @Input() public count: number;

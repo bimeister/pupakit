@@ -14,5 +14,5 @@ export const iosFlashlightIcon: IconDefinition = {
 	<circle cx="256" cy="273" r="20"/>
 </g>
 </svg>
-`
+`,
 };

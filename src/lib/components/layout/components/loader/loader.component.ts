@@ -1,7 +1,6 @@
 import { animate, AnimationEvent, state, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, ChangeDetectionStrategy, Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-
 import { ElementState } from '../../../../../internal/declarations/enums/element-state.enum';
 
 @Component({
@@ -11,45 +10,45 @@ import { ElementState } from '../../../../../internal/declarations/enums/element
   animations: [
     trigger('lineAppeared', [
       state(
-        ElementState.dissapeared,
+        ElementState.disappeared,
         style({
-          transform: 'scale(0)'
+          transform: 'scale(0)',
         })
       ),
       state(
         ElementState.appeared,
         style({
-          transform: 'scale(1)'
+          transform: 'scale(1)',
         })
       ),
       transition('false => true', animate('0.4s ease-out')),
-      transition('true => false', animate('0.5s cubic-bezier(0.5, 1, 1, 1.2)'))
+      transition('true => false', animate('0.5s cubic-bezier(0.5, 1, 1, 1.2)')),
     ]),
     trigger('rectangleAppeared', [
       state(
-        ElementState.dissapeared,
+        ElementState.disappeared,
         style({
-          transform: 'scale(0)'
+          transform: 'scale(0)',
         })
       ),
       state(
         ElementState.appeared,
         style({
-          transform: 'scale(1)'
+          transform: 'scale(1)',
         })
       ),
       transition('false => true', animate('0.5s cubic-bezier(0.2, 1, 1, 1)')),
-      transition('true => false', animate('0.25s cubic-bezier(0.5, 1, 0.8, 1)'))
-    ])
+      transition('true => false', animate('0.25s cubic-bezier(0.5, 1, 0.8, 1)')),
+    ]),
   ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderComponent implements AfterViewInit {
-  public isLeftLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.dissapeared);
-  public isCenterLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.dissapeared);
-  public isRightLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.dissapeared);
-  public isTopRectangleVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.dissapeared);
-  public isBottomRectangleVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.dissapeared);
+  public isLeftLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
+  public isCenterLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
+  public isRightLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
+  public isTopRectangleVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
+  public isBottomRectangleVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
 
   public ngAfterViewInit(): void {
     this.startAnimation();
@@ -60,7 +59,7 @@ export class LoaderComponent implements AfterViewInit {
     animationStateRef: BehaviorSubject<string>,
     delay: number = 0
   ): void {
-    if (animationEvent.fromState === ElementState.initial || animationEvent.toState === ElementState.dissapeared) {
+    if (animationEvent.fromState === ElementState.initial || animationEvent.toState === ElementState.disappeared) {
       return;
     }
     setTimeout(() => {
@@ -73,7 +72,7 @@ export class LoaderComponent implements AfterViewInit {
     animationStateRef: BehaviorSubject<string>,
     delay: number = 0
   ): void {
-    if (animationEvent.fromState === ElementState.initial || animationEvent.toState === ElementState.dissapeared) {
+    if (animationEvent.fromState === ElementState.initial || animationEvent.toState === ElementState.disappeared) {
       return;
     }
     setTimeout(() => {
@@ -82,15 +81,15 @@ export class LoaderComponent implements AfterViewInit {
   }
 
   public hideAllElements(animationEvent: AnimationEvent, delay: number = 0): void {
-    if (animationEvent.fromState === ElementState.appeared || animationEvent.toState === ElementState.dissapeared) {
+    if (animationEvent.fromState === ElementState.appeared || animationEvent.toState === ElementState.disappeared) {
       return;
     }
     setTimeout(() => {
-      this.isLeftLineVisible$.next(ElementState.dissapeared);
-      this.isCenterLineVisible$.next(ElementState.dissapeared);
-      this.isRightLineVisible$.next(ElementState.dissapeared);
-      this.isTopRectangleVisible$.next(ElementState.dissapeared);
-      this.isBottomRectangleVisible$.next(ElementState.dissapeared);
+      this.isLeftLineVisible$.next(ElementState.disappeared);
+      this.isCenterLineVisible$.next(ElementState.disappeared);
+      this.isRightLineVisible$.next(ElementState.disappeared);
+      this.isTopRectangleVisible$.next(ElementState.disappeared);
+      this.isBottomRectangleVisible$.next(ElementState.disappeared);
     }, delay);
     const repeatDelay: number = 2000;
     this.startAnimation(repeatDelay);

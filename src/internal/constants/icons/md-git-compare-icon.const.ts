@@ -15,5 +15,5 @@ export const mdGitCompareIcon: IconDefinition = {
 		z M416,456c-22.1,0-40-17.9-40-40s17.9-40,40-40s40,17.9,40,40S438.1,456,416,456z"/>
 </g>
 </svg>
-`
+`,
 };

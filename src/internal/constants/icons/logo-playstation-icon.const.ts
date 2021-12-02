@@ -22,5 +22,5 @@ export const logoPlaystationIcon: IconDefinition = {
 		C510.1,355.4,512,351,512,345.9z"/>
 </g>
 </svg>
-`
+`,
 };

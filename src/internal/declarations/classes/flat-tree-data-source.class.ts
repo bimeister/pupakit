@@ -35,14 +35,14 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
 
   private readonly treeDataWithoutHiddenItems$: Observable<FlatTreeItem[]> = combineLatest([
     this.treeDataWithProcessedRoot$,
-    this.expandedItemIds$
+    this.expandedItemIds$,
   ]).pipe(
     observeOn(asyncScheduler),
     subscribeOn(asyncScheduler),
     tap(() => this.processingIsActive$.next(true)),
-    switchMap(([allItems, expandedNodesIds]: [FlatTreeItem[], Set<string>]) => {
-      return FlatTreeDataSource.getNotHiddenItems(allItems, expandedNodesIds);
-    }),
+    switchMap(([allItems, expandedNodesIds]: [FlatTreeItem[], Set<string>]) =>
+      FlatTreeDataSource.getNotHiddenItems(allItems, expandedNodesIds)
+    ),
     tap((filteredData: FlatTreeItem[]) => this.filteredData$.next(filteredData)),
     tap(() => this.processingIsActive$.next(false)),
     shareReplayWithRefCount()
@@ -86,9 +86,9 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (isNil(item)) {
       return false;
     }
-    const itemIsCollapsedManualy: boolean = item.hasOwnProperty('__isCollapsed') && Boolean(item['__isCollapsed']);
+    const itemIsCollapsedManually: boolean = item.hasOwnProperty('__isCollapsed') && Boolean(item['__isCollapsed']);
     const itemIsNotExpanded: boolean = !expandedItemIds.has(item.id);
-    return FlatTreeDataSource.isExpandable(item) && (itemIsCollapsedManualy || itemIsNotExpanded);
+    return FlatTreeDataSource.isExpandable(item) && (itemIsCollapsedManually || itemIsNotExpanded);
   }
 
   private static isHidden(item: FlatTreeItem): item is FlatTreeItem & { __isHidden: boolean } {
@@ -102,9 +102,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     return timer(0, asyncScheduler).pipe(
       observeOn(asyncScheduler),
       subscribeOn(asyncScheduler),
-      map(() => {
-        return FlatTreeDataSource.filterNotHiddenItems(allItems, expandedNodesIds);
-      })
+      map(() => FlatTreeDataSource.filterNotHiddenItems(allItems, expandedNodesIds))
     );
   }
 
@@ -126,7 +124,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
       const itemToInsert: FlatTreeItemWithMarkers = { ...currentItem, __isCollapsed: currentItemIsCollapsed };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
 
@@ -137,18 +135,18 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
-        __isHidden: true
+        __isHidden: true,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
     if (previousItemIsParent && !parentIsHidden && !parentIsCollapsed) {
       const itemToInsert: FlatTreeItemWithMarkers = { ...currentItem, __isCollapsed: currentItemIsCollapsed };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
 
@@ -158,11 +156,11 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
         __isHidden: siblingIsHidden,
-        __isCollapsed: currentItemIsCollapsed
+        __isCollapsed: currentItemIsCollapsed,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
 
@@ -177,20 +175,20 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
-        __isHidden: true
+        __isHidden: true,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
     const unProcessedItem: FlatTreeItemWithMarkers = {
       ...currentItem,
-      __isCollapsed: FlatTreeDataSource.isCollapsed(currentItem, expandedItemIds)
+      __isCollapsed: FlatTreeDataSource.isCollapsed(currentItem, expandedItemIds),
     };
     return {
       previousItem: unProcessedItem,
-      currentResult: [...currentResult, unProcessedItem]
+      currentResult: [...currentResult, unProcessedItem],
     };
   }
 
@@ -209,7 +207,7 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (currentItemIsRoot) {
       return {
         previousItem: currentItem,
-        currentResult: [...currentResult, currentItem]
+        currentResult: [...currentResult, currentItem],
       };
     }
 
@@ -221,17 +219,17 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (previousItemIsParent && (parentIsHidden || parentIsCollapsed)) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
-        __isHidden: true
+        __isHidden: true,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
     if (previousItemIsParent && !parentIsHidden && !parentIsCollapsed) {
       return {
         previousItem: currentItem,
-        currentResult: [...currentResult, currentItem]
+        currentResult: [...currentResult, currentItem],
       };
     }
 
@@ -240,11 +238,11 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (previousItemIsSibling) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
-        __isHidden: siblingIsHidden
+        __isHidden: siblingIsHidden,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
 
@@ -259,16 +257,16 @@ export class FlatTreeDataSource extends DataSource<FlatTreeItem> implements Tree
     if (farParentIsCollapsed || farParentIsHidden) {
       const itemToInsert: FlatTreeItemWithMarkers = {
         ...currentItem,
-        __isHidden: true
+        __isHidden: true,
       };
       return {
         previousItem: itemToInsert,
-        currentResult: [...currentResult, itemToInsert]
+        currentResult: [...currentResult, itemToInsert],
       };
     }
     return {
       previousItem: currentItem,
-      currentResult: [...currentResult, currentItem]
+      currentResult: [...currentResult, currentItem],
     };
   }
 

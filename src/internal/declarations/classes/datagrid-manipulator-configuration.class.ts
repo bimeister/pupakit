@@ -3,9 +3,9 @@ import { DatagridDomLayouts } from '../enums/datagrid-dom-layouts.enum';
 import { DatagridThemes } from '../enums/datagrid-themes.enum';
 import { DatagridManipulatorConfigurationData } from '../interfaces/datagrid-manipulator-configuration-data.interface';
 
-export class DatagridManipulatorConfiguration<rowDataT> implements DatagridManipulatorConfigurationData {
+export class DatagridManipulatorConfiguration<RowDataT> implements DatagridManipulatorConfigurationData {
   public initialColumnDefs: ColDef[];
-  public initialRowData: rowDataT[];
+  public initialRowData: RowDataT[];
 
   public initialRowDataSource: IDatasource;
   public sizeColumnsToFit: boolean = false;
@@ -17,15 +17,14 @@ export class DatagridManipulatorConfiguration<rowDataT> implements DatagridManip
     deltaRowDataMode: true,
     defaultColDef: {
       sortable: true,
-      unSortIcon: true
-    }
+      unSortIcon: true,
+    },
   };
 
   constructor(config: Partial<DatagridManipulatorConfigurationData>) {
     Object.assign(this, config);
   }
 
-  public rowTrackByFn: GetRowNodeIdFunc = (data: rowDataT): string => {
-    return data.hasOwnProperty('id') ? data['id'] : String(data);
-  };
+  public rowTrackByFn: GetRowNodeIdFunc = (data: RowDataT): string =>
+    data.hasOwnProperty('id') ? data['id'] : String(data);
 }

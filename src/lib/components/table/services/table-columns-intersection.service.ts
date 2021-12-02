@@ -72,7 +72,7 @@ export class TableColumnsIntersectionService implements OnDestroy {
         },
         {
           root: element,
-          threshold: 0
+          threshold: 0,
         }
       );
 

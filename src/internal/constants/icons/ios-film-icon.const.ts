@@ -18,5 +18,5 @@ export const iosFilmIcon: IconDefinition = {
 		V160z"/>
 </g>
 </svg>
-`
+`,
 };

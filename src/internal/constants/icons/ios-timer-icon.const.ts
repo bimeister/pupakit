@@ -16,5 +16,5 @@ export const iosTimerIcon: IconDefinition = {
 		c-3.2-4.5-2.2-10.8,2.3-14C167.8,159.3,172.5,159.5,175.9,161.9z"/>
 </g>
 </svg>
-`
+`,
 };

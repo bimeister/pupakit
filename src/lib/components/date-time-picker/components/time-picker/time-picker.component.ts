@@ -6,7 +6,7 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
@@ -20,7 +20,7 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   styleUrls: ['./time-picker.component.scss'],
   providers: [TimePickerStateService],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerComponent implements OnChanges {
   @Input() public readonly withSeconds: boolean = false;

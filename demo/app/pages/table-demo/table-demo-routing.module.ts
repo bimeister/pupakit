@@ -5,12 +5,12 @@ import { TableDemoComponent } from './table-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: TableDemoComponent
-  }
+    component: TableDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TableDemoRoutingModule {}

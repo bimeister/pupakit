@@ -12,7 +12,7 @@ const BREAKPOINTS: string[] = ['xxl', 'xl', 'xlg', 'lg', 'md', 'sm', 'xs'];
 const UNDEFINED_SIZES: TableColumnSizes = {
   widthPx: 100,
   minWidthPx: -Infinity,
-  maxWidthPx: Infinity
+  maxWidthPx: Infinity,
 };
 
 export class TableColumn implements TableColumnRef {
@@ -42,7 +42,7 @@ export class TableColumn implements TableColumnRef {
 
   private readonly breakpointToSizesMap$: Observable<Map<string, TableColumnSizes>> = combineLatest([
     this.defaultSizes$,
-    this.adaptiveSizes$
+    this.adaptiveSizes$,
   ]).pipe(
     map(([defaultSizes, adaptiveSizes]: [Nullable<TableColumnSizes>, Nullable<TableAdaptiveColumnSizes>]) => {
       const sanitizedSizes: TableColumnSizes = isNil(defaultSizes)
@@ -69,7 +69,7 @@ export class TableColumn implements TableColumnRef {
 
   public readonly currentBreakpointSizes$: Observable<TableColumnSizes> = combineLatest([
     this.breakpoint$.pipe(filterNotNil()),
-    this.breakpointToSizesMap$
+    this.breakpointToSizesMap$,
   ]).pipe(
     map(([currentBreakpoint, breakpointToSizesMap]: [string, Map<string, TableColumnSizes>]) =>
       breakpointToSizesMap.get(currentBreakpoint)
@@ -87,7 +87,7 @@ export class TableColumn implements TableColumnRef {
     this.definitionWidthPxState$,
     this.minWidthPx$,
     this.maxWidthPx$,
-    this.userWidthPxState$
+    this.userWidthPxState$,
   ]).pipe(
     map(([widthPxState, minWidthPx, maxWidthPx, userPxState]: [number, number, number, Nullable<number>]) => {
       const widthPx: number = isNil(userPxState) ? widthPxState : userPxState;

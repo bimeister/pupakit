@@ -11,7 +11,7 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subscription } from 'rxjs';
@@ -31,9 +31,9 @@ import { DrawerDraggerOldComponent } from '../drawer-dragger-old/drawer-dragger-
       state('false', style({ width: 0 })),
       state('true', style({ width: `*` })),
       transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
-      transition('true => false', animate('0.2s ease-in-out'))
-    ])
-  ]
+      transition('true => false', animate('0.2s ease-in-out')),
+    ]),
+  ],
 })
 /** @deprecated legacy */
 export class DrawerOldComponent implements OnChanges, AfterContentInit, OnDestroy {

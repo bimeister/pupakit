@@ -9,7 +9,7 @@ import {
   OnDestroy,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filterTruthy, isEmpty, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
@@ -25,7 +25,7 @@ import { SelectButtonBase } from './../../../../../../internal/declarations/clas
   templateUrl: './select-button-input.component.html',
   styleUrls: ['./select-button-input.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectButtonInputComponent<T> extends SelectButtonBase<T> implements OnDestroy, OnChanges {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;

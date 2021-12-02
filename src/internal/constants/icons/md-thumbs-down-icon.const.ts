@@ -12,5 +12,5 @@ export const mdThumbsDownIcon: IconDefinition = {
 	<rect x="400" y="64" width="64" height="224"/>
 </g>
 </svg>
-`
+`,
 };

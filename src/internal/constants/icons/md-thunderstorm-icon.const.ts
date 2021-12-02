@@ -13,5 +13,5 @@ export const mdThunderstormIcon: IconDefinition = {
 	<polygon points="212,368 234,368 234,464 293,336 212,336 	"/>
 </g>
 </svg>
-`
+`,
 };

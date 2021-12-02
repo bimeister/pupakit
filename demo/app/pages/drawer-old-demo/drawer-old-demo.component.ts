@@ -9,26 +9,26 @@ import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.toke
   selector: 'demo-drawer-old-demo',
   templateUrl: './drawer-old-demo.component.html',
   styleUrls: ['./drawer-old-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerOldDemoComponent {
   public readonly formGroup: FormGroup = new FormGroup({
     hasBackdrop: new FormControl(true),
     closeOnBackdropClick: new FormControl(true),
     isBackdropTransparent: new FormControl(false),
-    float: new FormControl('right')
+    float: new FormControl('right'),
   });
 
   public readonly floatOptions: RadioOption[] = [
     {
       caption: 'Left',
-      value: 'left'
+      value: 'left',
     },
     {
       caption: 'Right',
       value: 'right',
-      isDefault: true
-    }
+      isDefault: true,
+    },
   ];
 
   constructor(private readonly drawerService: DrawersService, private readonly injector: Injector) {}
@@ -41,9 +41,9 @@ export class DrawerOldDemoComponent {
       providers: [
         {
           provide: DRAWER_DATA_TOKEN,
-          useValue: [1, 2, 3, 4]
-        }
-      ]
+          useValue: [1, 2, 3, 4],
+        },
+      ],
     });
   }
 }

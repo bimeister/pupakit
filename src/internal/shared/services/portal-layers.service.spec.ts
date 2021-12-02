@@ -25,7 +25,7 @@ describe('portal-layers.service.ts', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [PortalLayersService]
+      providers: [PortalLayersService],
     });
 
     service = TestBed.inject(PortalLayersService);
@@ -81,7 +81,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
       LAYER_MOCKS[1],
-      LAYER_MOCKS[0]
+      LAYER_MOCKS[0],
     ]);
 
     expect(LAYER_MOCKS[4].getCurrentZIndex()).toBe(1004);
@@ -105,7 +105,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[4],
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
-      LAYER_MOCKS[0]
+      LAYER_MOCKS[0],
     ]);
 
     expect(LAYER_MOCKS[1].getCurrentZIndex()).toBe(1005);
@@ -129,7 +129,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[4],
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
-      LAYER_MOCKS[1]
+      LAYER_MOCKS[1],
     ]);
 
     expect(LAYER_MOCKS[0].getCurrentZIndex()).toBe(1005);
@@ -153,7 +153,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
       LAYER_MOCKS[1],
-      LAYER_MOCKS[0]
+      LAYER_MOCKS[0],
     ]);
 
     expect(LAYER_MOCKS[4].getCurrentZIndex()).toBe(1004);
@@ -177,7 +177,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[4],
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
-      LAYER_MOCKS[0]
+      LAYER_MOCKS[0],
     ]);
 
     expect(LAYER_MOCKS[4].getCurrentZIndex()).toBe(1004);
@@ -244,7 +244,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[1],
       LAYER_MOCKS[4],
       LAYER_MOCKS[2],
-      LAYER_MOCKS[3]
+      LAYER_MOCKS[3],
     ]);
 
     expect(LAYER_MOCKS[0].getCurrentZIndex()).toBe(1008);
@@ -293,7 +293,7 @@ describe('portal-layers.service.ts', () => {
       LAYER_MOCKS[3],
       LAYER_MOCKS[2],
       LAYER_MOCKS[1],
-      LAYER_MOCKS[0]
+      LAYER_MOCKS[0],
     ]);
 
     expect(LAYER_MOCKS[4].getCurrentZIndex()).toBe(1004);

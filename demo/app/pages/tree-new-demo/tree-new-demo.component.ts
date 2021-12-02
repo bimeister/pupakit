@@ -13,7 +13,7 @@ const DATA: FlatTreeItem[] = [
   CAR,
   ...generateChildren(CAR.id, `${CAR.name} child`, 3),
   HAPPY,
-  BURGER
+  BURGER,
 ];
 
 @Component({
@@ -21,7 +21,7 @@ const DATA: FlatTreeItem[] = [
   styleUrls: ['./tree-new-demo.component.scss'],
   templateUrl: './tree-new-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class TreeNewDemoComponent {
   public readonly controller: TreeController = new TreeController();

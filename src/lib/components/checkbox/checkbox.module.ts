@@ -12,6 +12,6 @@ import { CheckboxHintComponent } from './components/checkbox-hint/checkbox-hint.
 @NgModule({
   declarations: [CheckboxMarkComponent, CheckboxComponent, CheckboxLabelComponent, CheckboxHintComponent],
   imports: [SharedModule, IconModule.forFeature([appExceptionsCheck10Icon, appCheckboxMinusIcon])],
-  exports: [CheckboxMarkComponent, CheckboxComponent, CheckboxLabelComponent, CheckboxHintComponent]
+  exports: [CheckboxMarkComponent, CheckboxComponent, CheckboxLabelComponent, CheckboxHintComponent],
 })
 export class CheckboxModule {}

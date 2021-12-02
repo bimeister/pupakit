@@ -9,11 +9,11 @@ const EXAMPLE_VALUE: string =
   templateUrl: './example-4.component.html',
   styleUrls: ['./example-4.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TextareaExample4Component {
   public readonly control: FormControl = new FormControl(EXAMPLE_VALUE, [
     Validators.required,
-    Validators.maxLength(100)
+    Validators.maxLength(100),
   ]);
 }

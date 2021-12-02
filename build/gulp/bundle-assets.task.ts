@@ -8,9 +8,9 @@ export function bundleAssetsTask(): TaskFunction {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,
-          targetPath
+          targetPath,
         });
-      }
+      },
     });
     onDone();
   };

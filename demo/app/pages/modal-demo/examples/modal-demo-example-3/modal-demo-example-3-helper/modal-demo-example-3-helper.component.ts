@@ -7,7 +7,7 @@ import { ModalDemoExample3Component } from '../modal-content/modal-demo-example-
   templateUrl: './modal-demo-example-3-helper.component.html',
   styleUrls: ['./modal-demo-example-3-helper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalDemoExample3HelperComponent {
   constructor(private readonly modalsService: ModalsService) {}
@@ -15,7 +15,7 @@ export class ModalDemoExample3HelperComponent {
   public openModal(): void {
     this.modalsService.open(ModalDemoExample3Component, {
       isBackdropTransparent: true,
-      closeOnBackdropClick: false
+      closeOnBackdropClick: false,
     });
   }
 }

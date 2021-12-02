@@ -17,5 +17,5 @@ export const mdAttachIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

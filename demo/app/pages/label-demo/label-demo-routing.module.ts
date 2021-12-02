@@ -5,12 +5,12 @@ import { LabelDemoComponent } from './label-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: LabelDemoComponent
-  }
+    component: LabelDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class LabelDemoRoutingModule {}

@@ -13,6 +13,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [CodeDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule]
+  imports: [CodeDemoRoutingModule, CommonModule, ComponentsModule, DemoSharedModule],
 })
 export class CodeDemoModule {}

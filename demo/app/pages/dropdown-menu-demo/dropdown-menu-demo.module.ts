@@ -11,6 +11,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: [DemoSharedModule, DropdownMenuDemoRoutingModule]
+  imports: [DemoSharedModule, DropdownMenuDemoRoutingModule],
 })
 export class DropdownMenuDemoModule {}

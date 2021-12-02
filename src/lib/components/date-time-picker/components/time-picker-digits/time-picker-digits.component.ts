@@ -12,7 +12,7 @@ import {
   Output,
   TrackByFunction,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
@@ -26,7 +26,7 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   templateUrl: './time-picker-digits.component.html',
   styleUrls: ['./time-picker-digits.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, AfterContentInit {
   @Input() public readonly digits: number[] = [];
@@ -71,9 +71,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
     this.subscription.unsubscribe();
   }
 
-  public readonly trackByItem: TrackByFunction<number> = (index: number, item: number): string => {
-    return `${index}-${item}`;
-  };
+  public readonly trackByItem: TrackByFunction<number> = (index: number, item: number): string => `${index}-${item}`;
 
   public selectDigit(digit: number, index: number): void {
     this.viewPort.scrollToIndex(index, 'smooth');

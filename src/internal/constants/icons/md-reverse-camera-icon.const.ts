@@ -13,5 +13,5 @@ export const mdReverseCameraIcon: IconDefinition = {
 		c30.8,0,58.7,12.6,79,32.9l32.8-32.9V267z"/>
 </g>
 </svg>
-`
+`,
 };

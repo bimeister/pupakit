@@ -10,7 +10,7 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
   templateUrl: './uploads-item-status.component.html',
   styleUrls: ['./uploads-item-status.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploadsItemStatusComponent implements OnChanges {
   public readonly uploadingStatus: typeof UploadingStatus = UploadingStatus;

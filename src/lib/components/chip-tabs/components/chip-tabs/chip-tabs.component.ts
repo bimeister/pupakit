@@ -8,7 +8,7 @@ import { ChipTabsStateService } from '../../services/chip-tabs-state.service';
   styleUrls: ['./chip-tabs.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
-  providers: [ChipTabsStateService]
+  providers: [ChipTabsStateService],
 })
 export class ChipTabsComponent extends TabsContainer {
   constructor(chipTabsStateService: ChipTabsStateService) {

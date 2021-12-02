@@ -14,5 +14,5 @@ export const iosBatteryChargingIcon: IconDefinition = {
 		 M218.8,308l8.4-43H200l45.2-61l-8.4,43H264L218.8,308z"/>
 </g>
 </svg>
-`
+`,
 };

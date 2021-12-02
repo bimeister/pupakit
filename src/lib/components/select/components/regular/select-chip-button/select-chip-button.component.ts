@@ -8,7 +8,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   templateUrl: './select-chip-button.component.html',
   styleUrls: ['./select-chip-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectChipButtonComponent<T> extends SelectButtonBase<T> {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;

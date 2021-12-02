@@ -13,5 +13,5 @@ export const iosExitIcon: IconDefinition = {
 	<path d="M61,243c-7.2,0-13,5.8-13,13c0,7.2,5.8,13,13,13h83v-26H61z"/>
 </g>
 </svg>
-`
+`,
 };

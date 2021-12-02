@@ -5,6 +5,6 @@ import { TypographyPageComponent } from './typography-page.component';
 
 @NgModule({
   declarations: [TypographyPageComponent],
-  imports: [DemoSharedModule, TypographyPageRoutingModule]
+  imports: [DemoSharedModule, TypographyPageRoutingModule],
 })
 export class TypographyPageModule {}

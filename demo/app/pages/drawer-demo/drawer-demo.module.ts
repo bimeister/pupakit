@@ -11,8 +11,8 @@ import { DrawerTriggerExample1Component } from './examples/example-1/drawer-trig
     DrawerDemoComponent,
     TestDrawerComponent,
     DrawerLayoutExample1Component,
-    DrawerTriggerExample1Component
+    DrawerTriggerExample1Component,
   ],
-  imports: [DemoSharedModule, DrawerDemoRoutingModule]
+  imports: [DemoSharedModule, DrawerDemoRoutingModule],
 })
 export class DrawerDemoModule {}

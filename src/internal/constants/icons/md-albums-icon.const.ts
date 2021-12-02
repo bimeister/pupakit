@@ -17,5 +17,5 @@ export const mdAlbumsIcon: IconDefinition = {
 		C67.2,400,48,380.8,48,357.3V90.7C48,67.2,67.2,48,90.7,48z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -5,6 +5,6 @@ import { AvatarDemoComponent } from './avatar-demo.component';
 
 @NgModule({
   declarations: [AvatarDemoComponent],
-  imports: [DemoSharedModule, AvatarDemoRoutingModule]
+  imports: [DemoSharedModule, AvatarDemoRoutingModule],
 })
 export class AvatarDemoModule {}

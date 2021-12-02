@@ -13,5 +13,5 @@ export const mdMailUnreadIcon: IconDefinition = {
 		C413.9,218,397,212.6,382.9,203.4z"/>
 </g>
 </svg>
-`
+`,
 };

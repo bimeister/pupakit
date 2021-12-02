@@ -18,5 +18,5 @@ export const mdBarcodeIcon: IconDefinition = {
 	<polygon points="408,56 408,104 448,104 448,408 408,408 408,456 496,456 496,448 496,408 496,104 496,64 496,56 	"/>
 </g>
 </svg>
-`
+`,
 };

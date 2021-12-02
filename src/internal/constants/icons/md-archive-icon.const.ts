@@ -14,5 +14,5 @@ export const mdArchiveIcon: IconDefinition = {
 		h92.443V256h80.89L256,383.109z M96.534,94.221l18.486-23.111h277.331l21.965,23.111H96.534z"/>
 </g>
 </svg>
-`
+`,
 };

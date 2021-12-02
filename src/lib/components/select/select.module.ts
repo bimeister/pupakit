@@ -56,7 +56,7 @@ const COMPONENTS: any[] = [
   SelectTabsComponent,
   SelectTabsItemComponent,
   SelectButtonInputComponent,
-  SelectChipsContainerComponent
+  SelectChipsContainerComponent,
 ];
 
 @NgModule({
@@ -69,8 +69,8 @@ const COMPONENTS: any[] = [
     ChipModule,
     CheckboxModule,
     IconButtonModule,
-    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon])
+    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon]),
   ],
-  exports: [...COMPONENTS]
+  exports: [...COMPONENTS],
 })
 export class SelectModule {}

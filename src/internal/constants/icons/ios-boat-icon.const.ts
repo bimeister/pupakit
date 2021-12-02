@@ -25,5 +25,5 @@ export const iosBoatIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

@@ -7,5 +7,5 @@ export const appCrossCircleIcon: IconDefinition = {
   <path d="M11 5L5 11" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M5 5L11 11" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
   </svg>
-`
+`,
 };

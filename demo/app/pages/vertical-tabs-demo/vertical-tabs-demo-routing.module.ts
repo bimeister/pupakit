@@ -5,12 +5,12 @@ import { VerticalTabsDemoComponent } from './vertical-tabs-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: VerticalTabsDemoComponent
-  }
+    component: VerticalTabsDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class VerticalTabsDemoRoutingModule {}

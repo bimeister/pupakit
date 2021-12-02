@@ -16,5 +16,5 @@ export const iosRestaurantIcon: IconDefinition = {
 		c18.6-6.6,32-24.2,32-45.2C208,128,186.5,64,160,64z"/>
 </g>
 </svg>
-`
+`,
 };

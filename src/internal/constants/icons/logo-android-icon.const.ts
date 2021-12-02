@@ -24,5 +24,5 @@ export const logoAndroidIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

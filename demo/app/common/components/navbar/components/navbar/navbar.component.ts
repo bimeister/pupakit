@@ -15,13 +15,11 @@ import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-conten
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnDestroy {
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
-    map((themeMode: Theme) => {
-      return themeMode === Theme.Light ? this.logoLight : this.logoDark;
-    })
+    map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
 
   private readonly logoDark: SafeResourceUrl;
@@ -97,7 +95,7 @@ export class NavbarComponent implements OnDestroy {
           isBackdropTransparent: false,
           float: 'left',
           injector: this.injector,
-          theme
+          theme,
         })
       )
     );

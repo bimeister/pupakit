@@ -6,7 +6,7 @@ import { StatusColor } from '../../../../../internal/declarations/types/status-c
   templateUrl: './status.component.html',
   styleUrls: ['./status.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StatusComponent {
   @Input() public color: StatusColor = 'primary';

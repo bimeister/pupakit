@@ -19,5 +19,5 @@ export const mdMicOffIcon: IconDefinition = {
 	<polygon points="459.999,446.427 426.102,412.684 459.957,446.469 	"/>
 </g>
 </svg>
-`
+`,
 };

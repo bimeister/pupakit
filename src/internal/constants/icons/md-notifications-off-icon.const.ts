@@ -15,5 +15,5 @@ export const mdNotificationsOffIcon: IconDefinition = {
 		v14.578c-15,3.438-29.048,9.501-41.75,17.663L391,319.355V225.07z"/>
 </g>
 </svg>
-`
+`,
 };

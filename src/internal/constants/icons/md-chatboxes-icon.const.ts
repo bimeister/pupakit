@@ -14,5 +14,5 @@ export const mdChatboxesIcon: IconDefinition = {
 		c4.478,0,7.604-4.262,7.604-8.682V136.103C464,131.689,460.874,127,456.396,127z"/>
 </g>
 </svg>
-`
+`,
 };

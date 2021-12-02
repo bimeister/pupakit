@@ -15,5 +15,5 @@ export const iosBodyIcon: IconDefinition = {
 		c13.3,0,24-10.7,24-24S437.3,144,424,144z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -6,7 +6,7 @@ import {
   Input,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 
 import { SelectTreeBase } from '../../../../../../internal/declarations/classes/abstract/select-tree-base.abstract';
@@ -22,7 +22,7 @@ import { SelectStateService } from '../../../services/select-state.service';
   templateUrl: './select-table-tree.component.html',
   styleUrls: ['./select-table-tree.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTableTreeComponent extends SelectTreeBase {
   @ViewChild('customPupaTreeComponent') public readonly customPupaTreeComponent: TreeComponent;

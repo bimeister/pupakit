@@ -22,5 +22,5 @@ export const iosBusinessIcon: IconDefinition = {
 		V172z"/>
 </g>
 </svg>
-`
+`,
 };

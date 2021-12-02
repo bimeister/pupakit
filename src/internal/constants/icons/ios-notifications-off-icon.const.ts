@@ -17,5 +17,5 @@ export const iosNotificationsOffIcon: IconDefinition = {
 		C412.5,384,421.9,365.2,412,352.2z"/>
 </g>
 </svg>
-`
+`,
 };

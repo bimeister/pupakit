@@ -5,7 +5,7 @@ import {
   Input,
   OnChanges,
   Output,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -24,7 +24,7 @@ const DEFAULT_CURRENT_DATE: Date = dateClearTime(new Date());
   templateUrl: './date-picker-simple-time.component.html',
   styleUrls: ['./date-picker-simple-time.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerSimpleTimeComponent implements OnChanges {
   @Input() public baseDate: Date = DEFAULT_CURRENT_DATE;

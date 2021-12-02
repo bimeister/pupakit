@@ -17,8 +17,8 @@ import { DatagridComponent } from './components/datagrid/datagrid.component';
     IconButtonModule,
     DroppableModule,
     IconModule.forFeature([mdSettingsIcon]),
-    AgGridModule.withComponents([DatagridTemplateRendererComponent])
+    AgGridModule.withComponents([DatagridTemplateRendererComponent]),
   ],
-  exports: [DatagridComponent, DatagridTemplateRendererComponent]
+  exports: [DatagridComponent, DatagridTemplateRendererComponent],
 })
 export class DatagridModule {}

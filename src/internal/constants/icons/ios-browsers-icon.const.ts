@@ -13,5 +13,5 @@ export const iosBrowsersIcon: IconDefinition = {
 		c0-22.1-17.9-40-40-40H181.4C159.3,48,141.4,65.9,141.4,88z"/>
 </g>
 </svg>
-`
+`,
 };

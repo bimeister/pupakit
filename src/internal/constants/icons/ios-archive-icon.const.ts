@@ -17,5 +17,5 @@ export const iosArchiveIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

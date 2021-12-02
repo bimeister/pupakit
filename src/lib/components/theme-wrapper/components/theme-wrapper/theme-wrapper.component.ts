@@ -6,7 +6,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -20,7 +20,7 @@ import { ThemeWrapperService } from '../../services/theme-wrapper.service';
   styleUrls: ['./theme-wrapper.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ThemeWrapperService]
+  providers: [ThemeWrapperService],
 })
 export class ThemeWrapperComponent implements OnChanges, OnInit, OnDestroy {
   @Input() public theme: Theme = Theme.Light;

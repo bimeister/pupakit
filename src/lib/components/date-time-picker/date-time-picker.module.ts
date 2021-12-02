@@ -26,13 +26,13 @@ const DECLARATIONS: any[] = [
   TimePickerComponent,
   TimePickerSimpleComponent,
   TimePickerDigitsComponent,
-  DatePickerSimpleTimeComponent
+  DatePickerSimpleTimeComponent,
 ];
 
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [SharedModule, ScrollingModule, IconModule.forFeature([iosArrowBackIcon, iosArrowForwardIcon])],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class DateTimePickerModule {}

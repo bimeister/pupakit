@@ -13,5 +13,5 @@ export const mdWarningIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

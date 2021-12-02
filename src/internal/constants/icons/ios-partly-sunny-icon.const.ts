@@ -27,5 +27,5 @@ export const iosPartlySunnyIcon: IconDefinition = {
 		C91.7,247.3,117,276.9,150.7,283.6z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -9,7 +9,7 @@ import { InputButtonSize } from '../../../../../internal/declarations/types/icon
   selector: 'pupa-icon-button',
   templateUrl: './icon-button.component.html',
   styleUrls: ['./icon-button.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconButtonComponent {
   @ViewChild('buttonElement', { static: true }) public buttonElement: ElementRef<HTMLButtonElement>;

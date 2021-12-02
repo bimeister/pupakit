@@ -41,5 +41,5 @@ export const iosBaseballIcon: IconDefinition = {
 		C433.7,277.8,431.7,279,431.1,280.9z"/>
 </g>
 </svg>
-`
+`,
 };

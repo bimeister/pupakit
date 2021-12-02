@@ -5,12 +5,12 @@ import { TypographyPageComponent } from './typography-page.component';
 const routes: Routes = [
   {
     path: '',
-    component: TypographyPageComponent
-  }
+    component: TypographyPageComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class TypographyPageRoutingModule {}

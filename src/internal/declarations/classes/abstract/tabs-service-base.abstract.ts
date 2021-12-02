@@ -26,7 +26,7 @@ export abstract class TabsServiceBase {
 
   public readonly railHighlighterOffsetLeftPx$: Observable<number> = combineLatest([
     this.activeHtmlElement$.pipe(filterNotNil()),
-    this.tabsHtmlElement$.pipe(filterNotNil())
+    this.tabsHtmlElement$.pipe(filterNotNil()),
   ]).pipe(
     observeOn(asyncScheduler),
     map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement]) => {

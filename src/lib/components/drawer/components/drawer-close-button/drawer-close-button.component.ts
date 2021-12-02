@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
+import { BehaviorSubject } from 'rxjs';
 import { DrawerRef } from '../../../../../internal/declarations/classes/drawer-ref.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 const DEFAULT_ICON: string = 'app-cross';
 
@@ -16,9 +16,9 @@ const DEFAULT_VISIBLE_ON: VisibleOn = 'all';
   templateUrl: './drawer-close-button.component.html',
   styleUrls: ['./drawer-close-button.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerCloseButtonComponent {
+export class DrawerCloseButtonComponent implements OnChanges {
   @Input() public icon: string = DEFAULT_ICON;
   public readonly icon$: BehaviorSubject<string> = new BehaviorSubject<string>(DEFAULT_ICON);
 

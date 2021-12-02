@@ -12,5 +12,5 @@ export const mdStarIcon: IconDefinition = {
 		164.192,305.934 131.161,448 	"/>
 </g>
 </svg>
-`
+`,
 };

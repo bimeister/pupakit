@@ -17,5 +17,5 @@ export const iosBowtieIcon: IconDefinition = {
 		c28.5,0,51.5-68.5,51.5-144S454.1,112,427.6,112z"/>
 </g>
 </svg>
-`
+`,
 };

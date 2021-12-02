@@ -15,5 +15,5 @@ export const iosFolderIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

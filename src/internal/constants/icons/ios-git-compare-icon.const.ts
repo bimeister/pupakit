@@ -21,5 +21,5 @@ export const iosGitCompareIcon: IconDefinition = {
 		 M410,452c-23.2,0-42-18.8-42-42s18.8-42,42-42s42,18.8,42,42S433.2,452,410,452z"/>
 </g>
 </svg>
-`
+`,
 };

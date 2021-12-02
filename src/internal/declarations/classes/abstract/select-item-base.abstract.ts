@@ -24,7 +24,7 @@ export abstract class SelectItemBase<T> implements OnChanges {
 
   public readonly isDisabled$: Observable<boolean> = combineLatest([
     this.isSelfDisabled$,
-    this.selectStateService.isDisabled$
+    this.selectStateService.isDisabled$,
   ]).pipe(map(([isSelfDisabled, isDisabled]: [boolean, boolean]) => isSelfDisabled || isDisabled));
 
   constructor(private readonly selectStateService: SelectStateService<T>) {}

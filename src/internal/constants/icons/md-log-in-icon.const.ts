@@ -18,5 +18,5 @@ export const mdLogInIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

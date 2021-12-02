@@ -6,11 +6,11 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   selector: 'demo-chip',
   templateUrl: './chip-demo.component.html',
   styleUrls: ['./chip-demo.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipDemoComponent {
   public readonly colorOptions: RadioOption[] = Object.values(ChipColors).map((value: string) => ({
     caption: value,
-    value
+    value,
   }));
 }

@@ -5,12 +5,12 @@ import { SwitcherDemoComponent } from './switcher-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: SwitcherDemoComponent
-  }
+    component: SwitcherDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class SwitcherDemoRoutingModule {}

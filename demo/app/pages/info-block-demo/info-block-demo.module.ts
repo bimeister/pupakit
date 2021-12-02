@@ -6,6 +6,6 @@ import { InfoBlockDemoComponent } from './info-block-demo.component';
 
 @NgModule({
   declarations: [InfoBlockDemoComponent, InfoBlockExample1Component],
-  imports: [DemoSharedModule, InfoBlockDemoRoutingModule]
+  imports: [DemoSharedModule, InfoBlockDemoRoutingModule],
 })
 export class InfoBlockDemoModule {}

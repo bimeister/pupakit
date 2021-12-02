@@ -10,6 +10,6 @@ const DECLARATIONS: any[] = [...EXPORTS];
 @NgModule({
   declarations: [...DECLARATIONS],
   imports: [SharedModule, IconModule],
-  exports: [...EXPORTS]
+  exports: [...EXPORTS],
 })
 export class LabelModule {}

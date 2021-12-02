@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -10,9 +18,9 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   templateUrl: './time-picker-simple.component.html',
   styleUrls: ['./time-picker-simple.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TimePickerSimpleComponent {
+export class TimePickerSimpleComponent implements OnChanges {
   @Input() public readonly withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

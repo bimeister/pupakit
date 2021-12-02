@@ -10,6 +10,6 @@ const SHARED_PIPES: any[] = [IsNullOrUndefinedPipe, ToString, TimeFormatPipe, Fo
 
 @NgModule({
   declarations: [...SHARED_PIPES],
-  exports: [...SHARED_PIPES]
+  exports: [...SHARED_PIPES],
 })
 export class PipesModule {}

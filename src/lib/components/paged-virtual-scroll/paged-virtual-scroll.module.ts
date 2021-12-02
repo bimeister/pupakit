@@ -12,6 +12,6 @@ const DIRECTIVES: any[] = [PupaVirtualScrollForDirective];
   declarations: [...COMPONENTS, ...DIRECTIVES],
   imports: [SharedModule, ScrollingModule],
   exports: [...COMPONENTS, ...DIRECTIVES],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class PagedVirtualScrollModule {}

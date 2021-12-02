@@ -4,7 +4,7 @@ import {
   Component,
   ContentChild,
   Input,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { AvatarComponent } from '../../../avatar/components/avatar/avatar.compon
   templateUrl: './tag.component.html',
   styleUrls: ['./tag.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagComponent implements AfterContentInit {
   @ContentChild(AvatarComponent) private readonly avatarComponent: AvatarComponent;
@@ -51,7 +51,7 @@ export class TagComponent implements AfterContentInit {
 
   @Input() public tabIndex: number = 0;
 
-  get tabIndexAttribute(): null | number {
+  public get tabIndexAttribute(): null | number {
     if (this.clickable) {
       return this.tabIndex;
     } else {

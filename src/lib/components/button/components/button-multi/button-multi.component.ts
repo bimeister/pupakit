@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,9 +12,9 @@ import { ButtonComponent } from '../button/button.component';
   templateUrl: './button-multi.component.html',
   styleUrls: ['./button-multi.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonMultiComponent extends ButtonComponent {
+export class ButtonMultiComponent extends ButtonComponent implements OnChanges {
   @Input() public readonly dropdownMenuContent: DropdownMenuContentComponent;
   @Input() public readonly expandActive: boolean = false;
   public readonly expandActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -24,7 +24,7 @@ export class ButtonMultiComponent extends ButtonComponent {
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
     this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
     this.expandActive$.pipe(map((isActive: boolean) => (isActive ? 'expand-active' : null))),
-    this.iconContainerClass$
+    this.iconContainerClass$,
   ]).pipe(
     map((classes: string[]) =>
       classes

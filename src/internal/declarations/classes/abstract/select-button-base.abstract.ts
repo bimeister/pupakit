@@ -23,7 +23,7 @@ export abstract class SelectButtonBase<T> implements OnInit, AfterViewInit {
     this.isDisabled$,
     this.isPatched$,
     this.isValid$,
-    this.isTouched$
+    this.isTouched$,
   ]).pipe(
     distinctUntilSerializedChanged(),
     map(

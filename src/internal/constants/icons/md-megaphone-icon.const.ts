@@ -15,5 +15,5 @@ export const mdMegaphoneIcon: IconDefinition = {
 		C352,203,338.4,185.8,320,184.1z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -14,5 +14,5 @@ export const mdContractIcon: IconDefinition = {
 	</g>
 </g>
 </svg>
-`
+`,
 };

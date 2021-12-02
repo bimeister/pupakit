@@ -14,5 +14,5 @@ export const mdCloudDoneIcon: IconDefinition = {
 		l29.865,29.864L213.333,362.667z"/>
 </g>
 </svg>
-`
+`,
 };

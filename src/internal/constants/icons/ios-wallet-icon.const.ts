@@ -15,5 +15,5 @@ export const iosWalletIcon: IconDefinition = {
 		C374.8,66.6,358.6,61.7,342.9,65z"/>
 </g>
 </svg>
-`
+`,
 };

@@ -5,6 +5,6 @@ import { ThemeControllerDirective } from './theme-controller.directive';
 @NgModule({
   declarations: [ThemeControllerDirective],
   imports: [CommonModule],
-  exports: [ThemeControllerDirective]
+  exports: [ThemeControllerDirective],
 })
 export class ThemeControllerModule {}
