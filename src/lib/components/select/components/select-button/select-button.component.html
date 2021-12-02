@@ -1,20 +1,22 @@
 <button
   type="button"
-  class="select-button"
-  [class.select-button_active]="isExpanded$ | async"
-  [class.select-button_disabled]="isDisabled$ | async"
-  [class.select-button_transparent]="transparent"
-  [class.select-button_invalid]="isInvalid$ | async"
+  class="trigger"
+  [class.trigger_active]="isExpanded$ | async"
+  [class.trigger_disabled]="isDisabled$ | async"
+  [class.trigger_invalid]="isInvalid$ | async"
   (click)="processButtonClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="select-button__text">
+  <div class="trigger__text">
     <ng-content></ng-content>
   </div>
 
-  <div class="select-button__icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
+  <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
     <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
+
+  <!-- <pupa-button-icon class="trigger__icon" icon="ios-arrow-down" size="small" tabIndex="-1" kind="subtle">
+  </pupa-button-icon> -->
 </button>

@@ -1,7 +1,12 @@
 <h1>Select</h1>
 
-<h2>Example 1</h2>
-<pupa-select [isMultiSelectionEnabled]="false" [formControl]="control">
+<h2>Simple usage</h2>
+
+<pupa-code-container [content]="example1Content">
+  <demo-select-example-1 *pupaCodeContainerPreviewTemplate></demo-select-example-1>
+</pupa-code-container>
+
+<!-- <pupa-select [isMultiSelectionEnabled]="false" [formControl]="control">
   <pupa-select-button-input
     [placeholder]="'Введите название отчета'"
     [selectedValuePreview]="selectedValuePreview$ | async"
@@ -67,7 +72,6 @@
   <pupa-select-button> 123 </pupa-select-button>
 
   <pupa-select-dropdown>
-    <!-- <pupa-select-search></pupa-select-search> -->
 
     <pupa-select-items-container>
       <pupa-select-item [value]="1">1</pupa-select-item>
@@ -178,4 +182,4 @@
       >
     </pupa-select-items-container>
   </pupa-select-dropdown>
-</pupa-select>
+</pupa-select> -->

@@ -5,11 +5,12 @@
 $width_icon: 4rem;
 
 :host {
-  display: block;
+  box-sizing: border-box;
+  position: relative;
   width: 100%;
 }
 
-.select-button {
+.trigger {
   box-sizing: border-box;
 
   width: 100%;
@@ -22,40 +23,41 @@ $width_icon: 4rem;
 
   cursor: pointer;
 
-  border-radius: 8px;
-  border: 1px solid color('grey-ivory');
+  border: 1px solid transparent;
 
-  background: color('white');
-  color: color('text');
+  color: color(base-n600);
+  background-color: color(base-white-n500);
 
-  padding: 6px 12px;
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  @include transition(#{'border'});
+  font-size: 3rem;
+  line-height: 4rem;
+  @include font-type-caption();
+  padding: 2rem 4rem;
 
-  &:hover {
-    border-color: color('grey-light');
-  }
+  &:not(.trigger_disabled) {
+    &:not(.trigger_active) {
+      @include hover() {
+        background-color: color(base-white-n400);
+      }
+    }
 
-  &_active {
-    border-color: color('active') !important;
-  }
-
-  &_disabled {
-    border-color: color('grey-apple') !important;
-    color: color('grey-apple') !important;
-    pointer-events: none;
-  }
-
-  &_transparent {
-    border-color: transparent;
-    background-color: transparent;
-    &:hover {
-      border-color: transparent;
+    &.trigger_invalid {
+      border-color: color(red-n400);
     }
   }
 
-  &_invalid:not(.select-button_disabled) {
-    border-color: color(error) !important;
+  &_active {
+    border-color: color(base-white-n275);
+    background-color: color(base-n0);
+  }
+
+  &_disabled {
+    border-color: transparent;
+    background-color: color(base-white-n500);
+    color: color('base-dark-n250');
+    cursor: not-allowed;
   }
 
   &__text {
@@ -71,11 +73,9 @@ $width_icon: 4rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-
-    font-size: 4rem;
   }
 
-  &__icon {
+  &__rotate-icon {
     width: $width_icon;
 
     display: flex;
@@ -83,10 +83,10 @@ $width_icon: 4rem;
     align-items: center;
     justify-content: center;
 
-    color: inherit;
-    font-size: 18px;
+    color: color(base-white-n200);
+    font-size: 3rem;
     margin-left: 1rem;
-    transition: transform 0.2s ease;
+    transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common);
     transform-origin: center;
 
     &.expanded {

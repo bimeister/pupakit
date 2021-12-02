@@ -10,8 +10,6 @@ export abstract class SelectButtonBase<T> implements OnInit, AfterViewInit {
   protected abstract readonly overlayOrigin: CdkOverlayOrigin;
   protected abstract readonly button: ElementRef<HTMLButtonElement>;
 
-  public abstract transparent: boolean;
-
   public readonly isExpanded$: BehaviorSubject<boolean> = this.selectStateService.isExpanded$;
   public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;
 

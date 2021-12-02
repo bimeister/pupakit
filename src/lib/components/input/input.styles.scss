@@ -39,9 +39,13 @@
   border-radius: 1px;
   box-sizing: border-box;
   border: 1px solid transparent;
-  color: map.get($input_light_styles, input, color);
-  caret-color: map.get($input_light_styles, input, caret-color);
-  background-color: map.get($input_light_styles, input, background-color);
+  color: map.get($light, input, color);
+  caret-color: map.get($light, input, caret-color);
+  background-color: map.get($light, input, background-color);
+
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
   &:-webkit-autofill {
     border-color: map.get($input_light_styles, input, background-color);
     -webkit-text-fill-color: map.get($input_light_styles, input, color);
@@ -52,7 +56,9 @@
   &::placeholder {
     opacity: 0;
     will-change: opacity;
-    color: map.get($input_light_styles, input, placeholder, color);
+    transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common),
+      opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
+    color: map.get($light, input, placeholder, color);
   }
   &__icons-list {
     z-index: 3;

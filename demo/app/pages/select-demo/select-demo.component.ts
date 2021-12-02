@@ -12,6 +12,8 @@ interface SelectOption {
   caption: string;
 }
 
+const BASE_REQUEST_PATH: string = 'select-demo/examples';
+
 @Component({
   selector: 'demo-select',
   styleUrls: ['./select-demo.component.scss'],
@@ -19,6 +21,12 @@ interface SelectOption {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemoComponent {
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`
+  };
+
   public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });
 
   public readonly control: FormControl = new FormControl({ value: null, disabled: false });
