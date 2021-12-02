@@ -1,0 +1,15 @@
+<pupa-select class="select" [isMultiSelectionEnabled]="false" [formControl]="control">
+  <pupa-select-button>
+    {{ control.value || 'Choose' }}
+  </pupa-select-button>
+
+  <pupa-select-dropdown>
+    <pupa-select-items-container>
+      <pupa-select-item [value]="'Option 1'">Option 1</pupa-select-item>
+      <pupa-select-item [value]="'Option 2'">Option 2</pupa-select-item>
+      <pupa-select-item [value]="'Option 3'">Option 3</pupa-select-item>
+      <pupa-select-item [value]="'Option 4'">Option 4</pupa-select-item>
+      <pupa-select-item [value]="'Option 5'">Option 5</pupa-select-item>
+    </pupa-select-items-container>
+  </pupa-select-dropdown>
+</pupa-select>
