@@ -1,0 +1,347 @@
+{
+  "root": true,
+  "ignorePatterns": [
+    "projects/**/*"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.ts"
+      ],
+      "parser": "@typescript-eslint/parser",
+      "parserOptions": {
+        "ecmaVersion": 2020,
+        "sourceType": "module",
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
+        "createDefaultProgram": true
+      },
+      "plugins": [
+        "prettier",
+        "jsdoc",
+        "deprecation",
+        "editorconfig",
+        "ban"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/ng-cli-compat",
+        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "prettier"
+      ],
+      "rules": {
+        "@typescript-eslint/array-type": [
+          "error",
+          {
+            "default": "array"
+          }
+        ],
+        "@typescript-eslint/ban-types": [
+          "error",
+          {
+            "types": {
+              "Object": null
+            },
+            "extendDefaults": false
+          }
+        ],
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/consistent-type-assertions": [
+          "error",
+          {
+            "assertionStyle": "as",
+            "objectLiteralTypeAssertions": "never"
+          }
+        ],
+        "@typescript-eslint/explicit-member-accessibility": [
+          "error",
+          {
+            "accessibility": "explicit",
+            "overrides": {
+              "constructors": "off",
+              "parameterProperties": "off"
+            }
+          }
+        ],
+        "@typescript-eslint/member-ordering": [
+          "error",
+          {
+            "default": [
+              "instance-field",
+              "protected-static-field",
+              "public-static-field",
+              "private-static-field",
+              "constructor",
+              "protected-instance-method",
+              "public-instance-method",
+              "private-instance-method",
+              "protected-static-method",
+              "public-static-method",
+              "private-static-method"
+            ]
+          }
+        ],
+        "@typescript-eslint/no-empty-function": "error",
+        "@typescript-eslint/no-empty-interface": "error",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-require-imports": "error",
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/no-unnecessary-type-assertion": "error",
+        "@typescript-eslint/no-unused-expressions": "off",
+        "@typescript-eslint/no-var-requires": "error",
+        "@typescript-eslint/prefer-for-of": "off",
+        "@typescript-eslint/prefer-readonly": "error",
+        "@typescript-eslint/quotes": "off",
+        "@typescript-eslint/restrict-plus-operands": "error",
+        "@typescript-eslint/strict-boolean-expressions": ["error",
+          {
+            "allowString": false,
+            "allowNumber": false,
+            "allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing": true
+          }
+        ],
+        "@typescript-eslint/typedef": [
+          "error",
+          {
+            "arrowParameter": true,
+            "arrayDestructuring": false,
+            "memberVariableDeclaration": true,
+            "objectDestructuring": false,
+            "parameter": true,
+            "propertyDeclaration": true,
+            "variableDeclaration": true,
+            "variableDeclarationIgnoreFunction": true
+          }
+        ],
+        "@typescript-eslint/type-annotation-spacing": "error",
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/no-namespace": "off",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/no-dynamic-delete": "error",
+        "@typescript-eslint/unified-signatures": "error",
+        "@typescript-eslint/semi": [
+          "error",
+          "always"
+        ],
+        "@typescript-eslint/no-extra-semi": "error",
+        "@typescript-eslint/naming-convention": [
+          "error",
+          { 
+            "selector": "default",
+            "format": ["camelCase"],
+            "filter": {
+              "regex": "^___.*|^__.*",
+              "match": false
+            }
+          },
+          { 
+            "selector": "variable",
+            "format": ["camelCase", "UPPER_CASE"]
+          },
+          { 
+            "selector": "enumMember",
+            "format": ["camelCase", "PascalCase"]
+          },
+          {
+            "selector": "class",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "typeLike",
+            "format": ["PascalCase"]
+          },
+          {
+            "selector": "classProperty",
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow"
+          },
+          {
+            "selector": "objectLiteralProperty",
+            "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+            "filter": {
+              "regex": "^___.*|^__.*",
+              "match": false
+            }
+          },
+          {
+            "selector": "typeProperty",
+            "format": ["camelCase", "PascalCase", "UPPER_CASE"],
+            "filter": {
+              "regex": "^___.*|^__.*",
+              "match": false
+            }
+          },
+          {
+            "selector": "function",
+            "format": ["camelCase", "PascalCase"],
+            "modifiers": ["exported"]
+          },
+          {
+            "selector": "parameter",
+            "format": ["camelCase"],
+            "leadingUnderscore": "allow",
+            "filter": {
+              "regex": "^__$",
+              "match": false
+            }
+          },
+          {
+            "selector": "interface",
+            "format": ["PascalCase"],
+            "custom": {
+              "regex": "^I[A-Z]",
+              "match": false
+            }
+          }
+        ],
+        "jsdoc/no-types": "error",
+        "complexity": [
+          "error",
+          {
+            "max": 30
+          }
+        ],
+        "consistent-return": "off",
+        "constructor-super": "error",
+        "no-underscore-dangle": "off",
+        "default-case": "error",
+        "default-case-last": "error",
+        "eqeqeq": [
+          "error",
+          "always"
+        ],
+        "import/no-default-export": "error",
+        "max-len": [
+          "error",
+          {
+            "ignorePattern": ".*\\);$|(^import|^export \\{(.*?)\\})|(class(.+)extends(.+)\\{$)|(^.*\\($)",
+            "code": 120,
+            "ignoreTemplateLiterals": true,
+            "ignoreStrings": true
+          }
+        ],
+        "no-caller": "error",
+        "no-duplicate-case": "error",
+        "no-duplicate-imports": "error",
+        "no-empty": "error",
+        "no-sequences": ["error", 
+          {
+            "allowInParentheses": false
+          }
+        ],
+        "no-restricted-imports": ["error", "@angular/compiler", "rxjs/Rx"],
+        "no-multi-spaces": "error",
+        "no-sparse-arrays": "error",
+        "no-template-curly-in-string": "error",
+        "prefer-object-spread": "error",
+        "use-isnan": "error",
+        "prefer-template": "error",
+        "object-shorthand": "error",
+        "quote-props": "off",
+        "no-shadow": "off",
+        "@typescript-eslint/no-shadow": [
+          "error",
+          {
+            "ignoreTypeValueShadow": true
+          }
+        ],
+        "no-throw-literal": "off",
+        "@typescript-eslint/no-throw-literal": ["error"],
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ],
+        "@angular-eslint/directive-selector": [
+          "error",
+          {
+            "type": "attribute",
+            "prefix": "pupa",
+            "style": "camelCase"
+          }
+        ],
+        "@angular-eslint/component-selector": [
+          "error",
+          {
+            "type": "element",
+            "prefix": "pupa",
+            "style": "kebab-case"
+          }
+        ],
+        "@angular-eslint/no-output-native": "off",
+        "no-var": "error",
+        "no-fallthrough": "error",
+        "no-trailing-spaces": "error",
+        "no-unneeded-ternary": "error",
+        "no-undef-init": "error",
+        "no-new-wrappers": "error",
+        "no-bitwise": "error",
+        "no-debugger": "error",
+        "spaced-comment": [
+          "error",
+          "always",
+          {
+            "markers": ["/"]
+          }
+        ],
+        "prefer-const": "error",
+        "eol-last": "error",
+        "radix": "error",
+        "no-eval": "error",
+        "no-console": [
+          "error",
+          { 
+            "allow": [
+              "warn"
+            ]
+          }
+        ],
+        "id-blacklist": "off",
+        "arrow-body-style": [
+          "error",
+          "as-needed"
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "endOfLine": "auto"
+          }
+        ],
+        "prefer-arrow/prefer-arrow-functions": "off",
+        "deprecation/deprecation": "warn",
+        "editorconfig/charset": "error",
+        "ban/ban": [
+          "error",
+          {
+            "name": "tapLog",
+            "message": "console logging is not allowed in production"
+          },
+          {
+            "name": "shareReplay",
+            "message": "causes memory leak; use [shareReplayWithRefCount] instead"
+          }
+        ]
+      }
+    },
+    {
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended"
+      ],
+      "rules": {
+        "@angular-eslint/template/no-negated-async": "off"
+      }
+    }
+  ]
+}

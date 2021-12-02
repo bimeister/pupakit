@@ -6,7 +6,7 @@ import { Alert, AlertsService } from '../../../../src/public-api';
   selector: 'demo-overlay',
   styleUrls: ['../demo.scss', './layout-demo.component.scss'],
   templateUrl: './layout-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LayoutDemoComponent {
   private readonly step: number = 0.25;
@@ -18,7 +18,7 @@ export class LayoutDemoComponent {
       id: null,
       text: 'Текст сообщения',
       type: this.randomAlertType(),
-      needToBeClosed: this.randomCloseMode()
+      needToBeClosed: this.randomCloseMode(),
     };
     this.alertsService.create(alert).subscribe();
   }
@@ -27,10 +27,10 @@ export class LayoutDemoComponent {
     const result: number = Math.random();
     return result < this.step
       ? 'info'
-      : // tslint:disable-next-line: no-magic-numbers
+      : // eslint-disable-next-line no-magic-numbers
       result < this.step * 2
       ? 'warning'
-      : // tslint:disable-next-line: no-magic-numbers
+      : // eslint-disable-next-line no-magic-numbers
       result < this.step * 3
       ? 'success'
       : 'danger';
@@ -38,7 +38,7 @@ export class LayoutDemoComponent {
 
   private randomCloseMode(): boolean {
     const result: number = Math.random();
-    // tslint:disable-next-line: no-magic-numbers
+    // eslint-disable-next-line no-magic-numbers
     return result < this.step * 2 ? true : false;
   }
 }

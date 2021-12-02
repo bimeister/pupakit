@@ -16,7 +16,7 @@ interface SelectOption {
   selector: 'demo-select',
   styleUrls: ['./select-demo.component.scss'],
   templateUrl: './select-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectDemoComponent {
   public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });
@@ -27,7 +27,7 @@ export class SelectDemoComponent {
     { value: 2, caption: 'Отчет 2' },
     { value: 3, caption: 'Отчет 3' },
     { value: 4, caption: 'Отчет 4' },
-    { value: 5, caption: 'Отчет 5' }
+    { value: 5, caption: 'Отчет 5' },
   ];
   public readonly selectedValuePreview$: Observable<string> = this.control.valueChanges.pipe(
     startWith(this.control.value),
@@ -37,7 +37,7 @@ export class SelectDemoComponent {
 
   public readonly formControl: FormControl = new FormControl({ value: [], disabled: false });
   public readonly invalidFormControl: FormControl = new FormControl({ value: 1, disabled: false }, [
-    Validators.requiredTrue
+    Validators.requiredTrue,
   ]);
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
@@ -66,7 +66,7 @@ export class SelectDemoComponent {
     new FlatTreeItem(false, '🐵', 1, null, null, true),
     new FlatTreeItem(false, '🙊', 1, null, null, true),
     new FlatTreeItem(false, '🙉', 1, null, null, true),
-    new FlatTreeItem(false, '🙈', 1, null, null, true)
+    new FlatTreeItem(false, '🙈', 1, null, null, true),
   ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
 
   public lorems: string[] = `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -82,23 +82,23 @@ export class SelectDemoComponent {
           children: [
             { children: [], childrenCount: 0, description: '1', name: 'sample 1 1 1', id: null, roles: [] },
             { children: [], childrenCount: 0, description: '2', name: 'sample 1 1 2', id: null, roles: [] },
-            { children: [], childrenCount: 0, description: '3', name: 'sample 1 1 3', id: null, roles: [] }
+            { children: [], childrenCount: 0, description: '3', name: 'sample 1 1 3', id: null, roles: [] },
           ],
           childrenCount: 3,
           description: '4',
           name: 'sample 1 1',
           id: null,
-          roles: []
+          roles: [],
         },
         { children: [], childrenCount: 0, description: '5', name: 'sample 1 2', id: null, roles: [] },
         { children: [], childrenCount: 0, description: '6', name: 'sample 1 3', id: null, roles: [] },
-        { children: [], childrenCount: 0, description: '7', name: 'sample 1 4', id: null, roles: [] }
+        { children: [], childrenCount: 0, description: '7', name: 'sample 1 4', id: null, roles: [] },
       ],
       childrenCount: 4,
       description: '8',
       name: 'sample 1',
       id: null,
-      roles: []
+      roles: [],
     },
     { children: [], childrenCount: 0, description: '9', name: 'sample 2', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 3', id: null, roles: [] },
@@ -106,12 +106,12 @@ export class SelectDemoComponent {
     { children: [], childrenCount: 0, description: '', name: 'sample 5', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 6', id: null, roles: [] },
     { children: [], childrenCount: 0, description: '', name: 'sample 7', id: null, roles: [] },
-    { children: [], childrenCount: 0, description: '', name: 'sample 8', id: null, roles: [] }
+    { children: [], childrenCount: 0, description: '', name: 'sample 8', id: null, roles: [] },
   ];
 
   public tabItems: any[] = new Array(10).fill(null).map((_value: null, index: number) => ({
     value: index,
-    caption: `Значение ${index}`
+    caption: `Значение ${index}`,
   }));
 
   public itemsWithoutCaptionNested: any[] = [
@@ -122,8 +122,8 @@ export class SelectDemoComponent {
         description: '',
         name: 'sample 1',
         id: null,
-        roles: []
-      }
+        roles: [],
+      },
     },
     {
       data: {
@@ -132,8 +132,8 @@ export class SelectDemoComponent {
         description: '',
         name: 'sample 2',
         id: null,
-        roles: []
-      }
+        roles: [],
+      },
     },
     {
       data: {
@@ -142,16 +142,16 @@ export class SelectDemoComponent {
         description: '',
         name: 'sample 3',
         id: null,
-        roles: []
-      }
-    }
+        roles: [],
+      },
+    },
   ];
 
   constructor() {
-    /* tslint:disable */
+    /* eslint-disable */
     this.formControl.valueChanges.subscribe(console.log);
     this.chipsFormControl.valueChanges.subscribe(console.log);
-    /* tslint:enable */
+    /* eslint-enable */
   }
 
   public toggleLoader(): void {
@@ -161,12 +161,12 @@ export class SelectDemoComponent {
   }
 
   public processTabsSelect(event: any): void {
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(event);
   }
 
   public log(...data: any[]): void {
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(...data);
   }
 }

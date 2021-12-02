@@ -21,52 +21,52 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
     const currentRangeThatIntersectedRight: ListRange = {
       start: currentRangeStartInPreviousRange,
-      end: currentRangeEndNotInPreviousRange
+      end: currentRangeEndNotInPreviousRange,
     };
 
     const currentRangeThatIntersectedLeft: ListRange = {
       start: currentRangeStartNotInPreviousRange,
-      end: currentRangeEndInPreviousRange
+      end: currentRangeEndInPreviousRange,
     };
 
     const currentRangeThatIntersectedRightBound: ListRange = {
       start: previousEnd,
-      end: currentRangeEndNotInPreviousRange
+      end: currentRangeEndNotInPreviousRange,
     };
 
     const currentRangeThatIntersectedLeftBound: ListRange = {
       start: currentRangeStartNotInPreviousRange,
-      end: previousStart
+      end: previousStart,
     };
 
     const currentRangeThatIncludingPreviousWithEqualLeftBound: ListRange = {
       start: previousRange.start,
-      end: currentRangeEndNotInPreviousRange
+      end: currentRangeEndNotInPreviousRange,
     };
 
     const currentRangeThatIncludingPreviousWithEqualRightBound: ListRange = {
       start: currentRangeStartNotInPreviousRange,
-      end: previousRange.end
+      end: previousRange.end,
     };
 
     const currentRangeNotIntersectedPreviousRight: ListRange = {
       start: currentRangeEndNotInPreviousRange,
-      end: currentRangeEndNotInPreviousRange + 20
+      end: currentRangeEndNotInPreviousRange + 20,
     };
 
     const currentRangeNotIntersectedPreviousLeft: ListRange = {
       start: 2,
-      end: currentRangeStartNotInPreviousRange
+      end: currentRangeStartNotInPreviousRange,
     };
 
     const currentRangeThatIncludedInPrevious: ListRange = {
       start: currentRangeStartInPreviousRange,
-      end: currentRangeEndInPreviousRange
+      end: currentRangeEndInPreviousRange,
     };
 
     const currentRangeThatContainsPrevious: ListRange = {
       start: currentRangeStartNotInPreviousRange,
-      end: currentRangeEndNotInPreviousRange
+      end: currentRangeEndNotInPreviousRange,
     };
 
     it('should return right intersection if current range intersected right', () => {
@@ -84,7 +84,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedRight.end,
 
         removeFrom: previousRange.start,
-        removeTo: currentRangeThatIntersectedRight.start
+        removeTo: currentRangeThatIntersectedRight.start,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -104,7 +104,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: previousRange.start,
 
         removeFrom: currentRangeThatIntersectedLeft.end,
-        removeTo: previousRange.end
+        removeTo: previousRange.end,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -127,7 +127,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedRightBound.end,
 
         removeFrom: previousRange.start,
-        removeTo: previousRange.end
+        removeTo: previousRange.end,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -150,7 +150,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedLeftBound.end,
 
         removeFrom: previousRange.start,
-        removeTo: previousRange.end
+        removeTo: previousRange.end,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -173,7 +173,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeNotIntersectedPreviousRight.end,
 
         removeFrom: previousRange.start,
-        removeTo: previousRange.end
+        removeTo: previousRange.end,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -196,7 +196,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeNotIntersectedPreviousLeft.end,
 
         removeFrom: previousRange.start,
-        removeTo: previousRange.end
+        removeTo: previousRange.end,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -219,7 +219,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIncludingPreviousWithEqualLeftBound.end,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -242,7 +242,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: previousRange.start,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -262,12 +262,11 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedRight.end,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    // tslint:disable-next-line: max-line-length
     it('should return current range for get items if some previous range arguments is null, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments =
         ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
@@ -286,12 +285,11 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedRight.end,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
 
-    // tslint:disable-next-line: max-line-length
     it('should return current range for get items if every previous range arguments is null, not remove anything', () => {
       const paginationArguments: PagedVirtualScrollArguments =
         ListRangesIntersectionProducer.getPagedVirtualScrollArguments(
@@ -310,7 +308,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatIntersectedRight.end,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -333,7 +331,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: null,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -353,7 +351,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
         getTo: currentRangeThatContainsPrevious.end,
 
         removeFrom: null,
-        removeTo: null
+        removeTo: null,
       };
       expect(paginationArguments).toEqual(expectedResult);
     });
@@ -369,7 +367,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 0,
-        end: 80
+        end: 80,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -383,7 +381,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 10,
-        end: 80
+        end: 80,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -397,7 +395,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 30,
-        end: 100
+        end: 100,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -411,7 +409,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 110,
-        end: 210
+        end: 210,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -425,7 +423,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 1080,
-        end: 1660
+        end: 1660,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -439,7 +437,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 0,
-        end: 10
+        end: 10,
       };
       expect(returnedRange).toEqual(expectedResult);
     });
@@ -453,7 +451,7 @@ describe('list-ranges-intersection-producer.class.ts', () => {
 
       const expectedResult: ListRange = {
         start: 0,
-        end: 10
+        end: 10,
       };
       expect(returnedRange).toEqual(expectedResult);
     });

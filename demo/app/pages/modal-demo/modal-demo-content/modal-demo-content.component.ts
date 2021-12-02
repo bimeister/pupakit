@@ -5,7 +5,7 @@ import {
   Inject,
   Optional,
   Self,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ModalRef, Position, Theme, ThemeWrapperService } from '../../../../../src/public-api';
@@ -17,7 +17,7 @@ import { ModalDemoLocalService } from '../services/modal-demo-local.service';
   templateUrl: './modal-demo-content.component.html',
   styleUrls: ['./modal-demo-content.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalDemoContentComponent {
   public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
@@ -29,9 +29,9 @@ export class ModalDemoContentComponent {
     private readonly modalDemoLocalService: ModalDemoLocalService,
     private readonly themeWrapperService: ThemeWrapperService
   ) {
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(modalRef);
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(data);
 
     this.modalDemoLocalService.logEmoji();

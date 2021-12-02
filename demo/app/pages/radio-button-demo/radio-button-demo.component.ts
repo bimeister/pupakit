@@ -5,14 +5,14 @@ import { FormControl } from '@angular/forms';
   selector: 'demo-button',
   styleUrls: ['./radio-button-demo.component.scss'],
   templateUrl: './radio-button-demo.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonDemoComponent {
   public formControl: FormControl = new FormControl(1);
 
   constructor() {
     // this.formControl.disable();
-    // tslint:disable-next-line: no-console
-    this.formControl.valueChanges.subscribe(data => console.log(data));
+    // eslint-disable-next-line no-console
+    this.formControl.valueChanges.subscribe((data) => console.log(data));
   }
 }
