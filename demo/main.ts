@@ -1,10 +1,8 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
+import 'hammerjs';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
-
-import 'hammerjs';
 
 if (environment.production) {
   enableProdMode();
@@ -12,5 +10,5 @@ if (environment.production) {
 
 platformBrowserDynamic()
   .bootstrapModule(AppModule)
-  // tslint:disable-next-line: no-console
-  .catch(err => console.error(err));
+  // eslint-disable-next-line no-console
+  .catch((err) => console.error(err));

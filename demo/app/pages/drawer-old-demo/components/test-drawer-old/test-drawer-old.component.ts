@@ -6,7 +6,7 @@ import { DRAWER_DATA_TOKEN } from '../../../../../declarations/tokens/drawer-dat
   selector: 'demo-test-drawer-old',
   templateUrl: './test-drawer-old.component.html',
   styleUrls: ['./test-drawer-old.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TestDrawerOldComponent implements OnInit {
   constructor(
@@ -15,9 +15,9 @@ export class TestDrawerOldComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(this.drawerRef);
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(this.data);
   }
 

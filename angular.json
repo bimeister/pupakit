@@ -95,25 +95,26 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "configurations": {
             "debugging": {
               "fix": true,
               "force": true,
-              "format": "prose",
-              "silent": true
+              "quiet": true
             },
             "inspection": {
               "fix": false,
               "force": false,
-              "format": "stylish",
-              "silent": false
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
             }
           },
           "options": {
-            "exclude": ["**/node_modules/**"],
-            "tsConfig": ["tsconfig.app.json", "tsconfig.spec.json"],
-            "typeCheck": true
+            "lintFilePatterns": ["./src/**/*.ts", "./src/**/*.html"]
           }
         },
         "serve": {
@@ -164,25 +165,26 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "configurations": {
             "debugging": {
               "fix": true,
               "force": true,
-              "format": "prose",
-              "silent": true
+              "quiet": true
             },
             "inspection": {
               "fix": false,
               "force": false,
-              "format": "stylish",
-              "silent": false
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
             }
           },
           "options": {
-            "exclude": ["**/node_modules/**"],
-            "tsConfig": ["tsconfig.lib.json", "tsconfig.spec.json"],
-            "typeCheck": true
+            "lintFilePatterns": ["./src/**/*.ts", "./src/**/*.html"]
           }
         },
         "test": {

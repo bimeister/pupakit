@@ -11,7 +11,7 @@ import {
   OnDestroy,
   OnInit,
   QueryList,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { filterNotNil, isNil } from '@bimeister/utilities';
@@ -23,7 +23,7 @@ import {
   map,
   shareReplay,
   switchMap,
-  withLatestFrom
+  withLatestFrom,
 } from 'rxjs/operators';
 import { UnitHeightStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-height-style-changes-processor.class';
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
@@ -40,7 +40,7 @@ import { ExpanderComponent } from '../expander/expander.component';
   templateUrl: './expansible.component.html',
   styleUrls: ['./expansible.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ExpansibleComponent
   implements OnInit, OnChanges, AfterContentInit, OnDestroy, WidthUnitBinding, HeightUnitBinding
@@ -54,7 +54,7 @@ export class ExpansibleComponent
 
   @Input() public width: string | null = null;
   @Input() public height: string | null = null;
-  // tslint:disable: no-input-rename
+  // eslint-disable no-input-rename
   @Input('width.%') public widthPercents: number | null = null;
   @Input('height.%') public heightPercents: number | null = null;
   @Input('width.px') public widthPx: number | null = null;
@@ -63,13 +63,13 @@ export class ExpansibleComponent
   @Input('height.vh') public heightVh: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
   @Input('height.rem') public heightRem: number | null = null;
-  // tslint:enable: no-input-rename
+  // eslint-enable no-input-rename
 
   public readonly width$: Observable<SafeStyle> = this.widthChangesProcessor.safeStyle$;
   public readonly height$: Observable<SafeStyle> = this.heightChangesProcessor.safeStyle$;
 
   @ContentChildren(ExpanderComponent, {
-    descendants: true
+    descendants: true,
   })
   private readonly expandersList: QueryList<ExpanderComponent>;
 

@@ -10,35 +10,34 @@ import {
   OnDestroy,
   OnInit,
   Optional,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
-
 import { UnitWidthStyleChangesProcessor } from '../../../../../internal/declarations/classes/unit-width-style-changes-processor.class';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { WidthUnitBinding } from '../../../../../internal/declarations/interfaces/width-unit-binding.interface';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 
 @Component({
   selector: 'pupa-skeleton-line',
   templateUrl: './skeleton-line.component.html',
   styleUrls: ['./skeleton-line.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy, WidthUnitBinding {
   private readonly unitWidthStyleChangesProcessor: UnitWidthStyleChangesProcessor<this> =
     new UnitWidthStyleChangesProcessor(this.domSanitizer);
 
   @Input() public width: string | null = null;
-  // tslint:disable: no-input-rename
+  // eslint-disable no-input-rename
   @Input('width.%') public widthPercents: number | null = null;
   @Input('width.px') public widthPx: number | null = null;
   @Input('width.vw') public widthVw: number | null = null;
   @Input('width.rem') public widthRem: number | null = null;
-  // tslint:enable: no-input-rename
+  // eslint-enable no-input-rename
   @Input() public hasMarginLeft: boolean = true;
 
   @HostBinding('style.width') public widthStyle: SafeStyle;
