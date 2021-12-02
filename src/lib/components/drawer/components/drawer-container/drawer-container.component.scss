@@ -3,19 +3,28 @@
 $drawer_padding: 8px;
 
 .drawer-container {
-  height: vh(90);
-  width: 100vw;
+  width: fit-content;
+  height: 100%;
   background: transparent;
   position: fixed;
   box-sizing: border-box;
+  max-height: vh(100);
 
-  @include gt-xs() {
-    width: fit-content;
-    height: 100%;
+  &_with-padding {
+    padding: $drawer_padding;
+  }
 
-    &_with-padding {
-      padding: $drawer_padding;
-      max-height: vh(100);
-    }
+  @include lt-sm() {
+    height: vh(90);
+    width: 100vw;
+    padding: 0;
+    bottom: 0;
+  }
+
+  &_full-screen {
+    width: 100vw;
+    height: vh(100);
+    padding: 0;
+    margin: 0;
   }
 }

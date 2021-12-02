@@ -2,16 +2,16 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
+import { DrawerContainerOldComponent } from '../../../lib/components/drawer-old/components/drawer-container-old/drawer-container-old.component';
+import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
+import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
+import { Theme } from '../enums/theme.enum';
 import { DrawerConfig } from '../interfaces/drawer-config.interface';
 import { DrawerContainerData } from '../interfaces/drawer-container-data.interface';
-import { DrawerRef } from './drawer-ref.class';
-import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { DrawerLayoutConfig } from '../interfaces/drawer-layout-config.interface';
-import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
-import { DrawerContainerOldComponent } from '../../../lib/components/drawer-old/components/drawer-container-old/drawer-container-old.component';
-import { Theme } from '../enums/theme.enum';
-import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
+import { PortalLayer } from '../interfaces/portal-layer.interface';
+import { DrawerRef } from './drawer-ref.class';
 
 export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer {
   public readonly id: string;
@@ -38,6 +38,10 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
   }
 
   public open(): DrawerRef {
+    if (this.config.isFullscreen) {
+      this.drawerRef.changeFullscreenMode(this.config.isFullscreen);
+    }
+
     this.overlayRef.attach(this.getComponentPortal());
     return this.drawerRef;
   }
@@ -72,6 +76,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     };
 
     const injectionTokens: WeakMap<object, any> = new WeakMap();
+    injectionTokens.set(DrawerRef, this.drawerRef);
     injectionTokens.set(DRAWER_CONTAINER_DATA_TOKEN, drawerContainerData);
 
     return new PortalInjector(this.injector, injectionTokens);
@@ -96,7 +101,8 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     return {
       float: this.config.float,
       hasBackdrop: this.config.hasBackdrop,
-      hasPadding: this.config.hasPadding ?? true
+      hasPadding: this.config.hasPadding ?? true,
+      isFullscreen: this.config.isFullscreen ?? false
     };
   }
 

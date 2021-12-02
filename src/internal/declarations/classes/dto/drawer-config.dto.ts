@@ -1,8 +1,8 @@
+import { ComponentType } from '@angular/cdk/portal';
 import { Injector, StaticProvider } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { DrawerConfig } from '../../interfaces/drawer-config.interface';
 import { Theme } from '../../enums/theme.enum';
-import { ComponentType } from '@angular/cdk/portal';
+import { DrawerConfig } from '../../interfaces/drawer-config.interface';
 
 export class DrawerConfigDto<ContainerComponent> implements DrawerConfig<ContainerComponent> {
   /** @deprecated soon it will be only 'right' */
@@ -14,6 +14,7 @@ export class DrawerConfigDto<ContainerComponent> implements DrawerConfig<Contain
   public providers: StaticProvider[] = [];
   public containerComponent: ComponentType<ContainerComponent> | null = null;
   public theme: Theme = Theme.Light;
+  public isFullscreen: boolean;
 
   constructor(config: Partial<DrawerConfig<ContainerComponent>>) {
     if (isNil(config)) {

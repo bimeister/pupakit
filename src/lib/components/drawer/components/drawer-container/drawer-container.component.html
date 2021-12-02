@@ -1,3 +1,9 @@
-<div class="drawer-container" [class.drawer-container_with-padding]="hasPadding" #drawerContainer>
-  <ng-container [cdkPortalOutlet]="componentPortal"></ng-container>
+<div
+  class="drawer-container"
+  [class.drawer-container_with-padding]="hasPadding && !(isFullscreen$ | async)"
+  [class.drawer-container_full-screen]="isFullscreen$ | async"
+  [ngStyle]="floatStyles$ | async"
+  #drawerContainer
+>
+  <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
 </div>

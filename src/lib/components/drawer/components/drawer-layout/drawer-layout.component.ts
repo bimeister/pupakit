@@ -6,11 +6,11 @@ import {
   Inject,
   ViewEncapsulation
 } from '@angular/core';
+import { isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject } from 'rxjs';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../../../../internal/constants/tokens/drawer-layout-data.token';
 import { DrawerLayoutConfig } from '../../../../../internal/declarations/interfaces/drawer-layout-config.interface';
 import { DrawerLayoutFooterComponent } from '../drawer-layout-footer/drawer-layout-footer.component';
-import { BehaviorSubject } from 'rxjs';
-import { isNil, Nullable } from '@bimeister/utilities';
 
 @Component({
   selector: 'pupa-drawer-layout',

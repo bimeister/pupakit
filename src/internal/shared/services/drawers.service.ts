@@ -52,7 +52,8 @@ export class DrawersService {
 
     return {
       id: drawer.id,
-      closed$: drawerRef.closed$
+      closed$: drawerRef.closed$,
+      isFullscreen$: drawerRef.isFullscreen$
     };
   }
 
