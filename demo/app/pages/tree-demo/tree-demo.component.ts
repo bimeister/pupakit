@@ -15,24 +15,24 @@ export class TreeDemoComponent {
     new FlatTreeItem(true, 'Wolves', 0, null),
     ...new Array(this.leafElementsCount)
       .fill(null)
-      .map((_, index: number) => new FlatTreeItem(false, `🐺 ${index + 1}`, 1, null)),
+      .map((_: null, index: number) => new FlatTreeItem(false, `🐺 ${index + 1}`, 1, null)),
     new FlatTreeItem(true, 'Cars', 0, null),
     ...new Array(this.leafElementsCount)
       .fill(null)
-      .map((_, index: number) => new FlatTreeItem(false, `🚗 ${index + 1}`, 1, null)),
+      .map((_: null, index: number) => new FlatTreeItem(false, `🚗 ${index + 1}`, 1, null)),
     new FlatTreeItem(true, 'Burgers', 0, null),
     ...new Array(this.leafElementsCount)
       .fill(null)
-      .map((_, index: number) => new FlatTreeItem(false, `🍔 ${index + 1}`, 1, null)),
+      .map((_: null, index: number) => new FlatTreeItem(false, `🍔 ${index + 1}`, 1, null)),
     new FlatTreeItem(true, 'Faces', 0, null),
     new FlatTreeItem(true, 'Happy', 1, null),
     ...new Array(this.leafElementsCount)
       .fill(null)
-      .map((_, index: number) => new FlatTreeItem(false, `😀 ${index + 1}`, 2, null)),
+      .map((_: null, index: number) => new FlatTreeItem(false, `😀 ${index + 1}`, 2, null)),
     new FlatTreeItem(true, 'Sad', 1, null),
     ...new Array(this.leafElementsCount)
       .fill(null)
-      .map((_, index: number) => new FlatTreeItem(false, `😥 ${index + 1}`, 2, null)),
+      .map((_: null, index: number) => new FlatTreeItem(false, `😥 ${index + 1}`, 2, null)),
     new FlatTreeItem(false, '🐵', 1, null),
     new FlatTreeItem(false, '🙊', 1, null),
     new FlatTreeItem(false, '🙉', 1, null),

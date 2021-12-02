@@ -50,7 +50,7 @@ export class PropsRadioSelectComponent
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (changes.options) {
+    if (!isNil(changes.options)) {
       const currentValue: RadioOption[] = changes.options.currentValue;
       const firstOption: RadioOption = currentValue[0];
       const defaultOption: RadioOption = currentValue.find((option: RadioOption) => option.isDefault);

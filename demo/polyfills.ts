@@ -14,6 +14,8 @@
  * Learn more in https://angular.io/guide/browser-support
  */
 
+/* eslint-disable */
+
 /***************************************************************************************************
  * BROWSER POLYFILLS
  */
@@ -55,8 +57,8 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import './zone-flags';
 import 'zone.js'; // Included with Angular CLI.
+import './zone-flags';
 
 /***************************************************************************************************
  * APPLICATION IMPORTS

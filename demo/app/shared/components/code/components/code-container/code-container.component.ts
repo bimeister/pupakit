@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, ContentChild, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
 import { map } from 'rxjs/internal/operators/map';
@@ -22,7 +30,7 @@ const PREVIEW_TAB_NAME: string = 'Preview';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CodeContainerComponent implements OnInit {
+export class CodeContainerComponent implements OnInit, OnChanges {
   @ContentChild(CodeContainerPreviewTemplateDirective, { static: true })
   public previewTemplate: CodeContainerPreviewTemplateDirective;
 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ const BASE_REQUEST_PATH: string = 'button-multi-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonMultiDemoComponent {
+export class ButtonMultiDemoComponent implements AfterViewInit {
   @ViewChild('activeRadio') public readonly activeRadio$: Observable<Nullable<string>>;
   public active$: Observable<boolean>;
   public expandActive$: Observable<boolean>;

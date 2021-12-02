@@ -18,9 +18,7 @@ export class MainPageComponent implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
-    map((themeMode: Theme) => {
-      return themeMode === Theme.Light ? this.logoLight : this.logoDark;
-    })
+    map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
 
   private readonly logoDark: SafeResourceUrl;
