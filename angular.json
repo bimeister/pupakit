@@ -114,7 +114,7 @@
             }
           },
           "options": {
-            "lintFilePatterns": ["./src/**/*.ts", "./src/**/*.html"]
+            "lintFilePatterns": ["./demo/**/*.ts", "./demo/**/*.html"]
           }
         },
         "serve": {

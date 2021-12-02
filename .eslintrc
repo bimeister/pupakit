@@ -265,7 +265,7 @@
           "error",
           {
             "type": "attribute",
-            "prefix": "pupa",
+            "prefix": ["pupa", "demo"],
             "style": "camelCase"
           }
         ],

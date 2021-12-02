@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   const value: unknown = control.value;
   const isObject: boolean = typeof value === 'object';
   const isEmptyValue: boolean = !Array.isArray(value) && !isObject && isEmpty(value);
-  const isEmptyRange: boolean = Array.isArray(value) && value.every((item) => isNil(item));
+  const isEmptyRange: boolean = Array.isArray(value) && value.every((item: unknown) => isNil(item));
   if (isEmptyValue || isEmptyRange || isNil(value)) {
     return { required: true };
   }
@@ -29,7 +29,7 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputDemoComponent {
+export class InputDemoComponent implements OnInit, OnDestroy {
   public readonly placeholder: string = 'Placeholder';
 
   public readonly typeOptions: RadioOption[] = [

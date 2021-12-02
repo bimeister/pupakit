@@ -14,10 +14,10 @@ import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'r
 import { debounceTime, delay, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { PagedVirtualScrollArguments, PagedVirtualScrollViewportComponent } from '../../../../src/public-api';
 
-type DATA_TYPE = number;
+type DataType = number;
 
 const ROWS_COUNT: number = 500;
-const DATA: DATA_TYPE[] = Array(ROWS_COUNT)
+const DATA: DataType[] = Array(ROWS_COUNT)
   .fill(1)
   .map((_: number, index: number) => index + 1);
 
@@ -43,14 +43,14 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
   public readonly searchControl: FormControl = new FormControl();
   private readonly searchValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  private readonly data$: Observable<DATA_TYPE[]> = timer(200).pipe(switchMap(() => of(DATA)));
+  private readonly data$: Observable<DataType[]> = timer(200).pipe(switchMap(() => of(DATA)));
   public readonly totalCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly isVisible$: Observable<boolean> = this.totalCount$.pipe(
     map((tasksTotalCount: number) => isNil(tasksTotalCount) || tasksTotalCount > 0)
   );
 
-  public readonly rows$: BehaviorSubject<DATA_TYPE[]> = new BehaviorSubject<DATA_TYPE[]>([]);
+  public readonly rows$: BehaviorSubject<DataType[]> = new BehaviorSubject<DataType[]>([]);
   private readonly pagedVirtualScrollArguments$: Subject<PagedVirtualScrollArguments> =
     new Subject<PagedVirtualScrollArguments>();
   private readonly firstSliceCount$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
@@ -62,9 +62,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
       .add(this.handleSearchEventsToFillSearchValue());
   }
 
-  public readonly trackByFunction: TrackByFunction<DATA_TYPE> = (_: number, row: DATA_TYPE): number => {
-    return row;
-  };
+  public readonly trackByFunction: TrackByFunction<DataType> = (_: number, row: DataType): number => row;
 
   public ngAfterViewInit(): void {
     this.pagedVirtualScrollViewportRefresh();
@@ -85,29 +83,29 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
   private processPagedVirtualScrollArgumentsChanges(): Subscription {
     return this.pagedVirtualScrollArguments$
       .pipe(
-        switchMap((pagedVirtualScrollArguments: PagedVirtualScrollArguments) => {
-          return this.data$.pipe(
+        switchMap((pagedVirtualScrollArguments: PagedVirtualScrollArguments) =>
+          this.data$.pipe(
             filterNotNil(),
             take(1),
             withLatestFrom(this.searchValue$),
-            map(([data, searchValue]: [DATA_TYPE[], string]) => {
+            map(([data, searchValue]: [DataType[], string]) => {
               const { currentTo, currentFrom }: PagedVirtualScrollArguments = pagedVirtualScrollArguments;
 
-              const filteredData: DATA_TYPE[] = data.filter((item: number) => `${item - 1}`.includes(searchValue));
+              const filteredData: DataType[] = data.filter((item: number) => `${item - 1}`.includes(searchValue));
 
-              const emptyRows: DATA_TYPE[] = this.getEmptyRows(currentFrom);
-              const newData: DATA_TYPE[] = filteredData.slice(currentFrom, currentTo);
+              const emptyRows: DataType[] = this.getEmptyRows(currentFrom);
+              const newData: DataType[] = filteredData.slice(currentFrom, currentTo);
 
-              const dataToRender: DATA_TYPE[] = [...emptyRows, ...newData];
+              const dataToRender: DataType[] = [...emptyRows, ...newData];
               const total: number = filteredData.length;
 
               return [dataToRender, total];
             }),
             delay(Math.random() * DEFAULT_REQUEST_DELAY_MS + MIN_DEFAULT_REQUEST_DELAY_MS)
-          );
-        })
+          )
+        )
       )
-      .subscribe(([dataToRender, total]: [DATA_TYPE[], number]) => {
+      .subscribe(([dataToRender, total]: [DataType[], number]) => {
         this.rows$.next(dataToRender);
         this.totalCount$.next(total);
 
@@ -115,7 +113,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
       });
   }
 
-  private getEmptyRows(emptyRowsCount: number): DATA_TYPE[] {
+  private getEmptyRows(emptyRowsCount: number): DataType[] {
     return Array(emptyRowsCount).fill(null);
   }
 

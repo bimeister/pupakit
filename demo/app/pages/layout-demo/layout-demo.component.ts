@@ -39,6 +39,6 @@ export class LayoutDemoComponent {
   private randomCloseMode(): boolean {
     const result: number = Math.random();
     // eslint-disable-next-line no-magic-numbers
-    return result < this.step * 2 ? true : false;
+    return result < this.step * 2;
   }
 }

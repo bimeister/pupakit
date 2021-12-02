@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { getUuid } from '@bimeister/utilities';
+import { BehaviorSubject } from 'rxjs';
 import { Uuid } from '../../../../src/internal/declarations/types/uuid.type';
 
 export interface MockCheckModel {
@@ -14,7 +14,7 @@ export interface MockCheckModel {
 
 const MOCK_CHECKS: MockCheckModel[] = Array(100)
   .fill(undefined)
-  .map((_, index: number) => ({
+  .map((_: undefined, index: number) => ({
     isEnabled: [true, false][Math.round(Math.random())],
     attachedCheckLists: Math.round(Math.random() * 10),
     timesPassed: Math.round(Math.random() * 10),

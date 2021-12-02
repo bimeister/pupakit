@@ -48,5 +48,7 @@ export class TreeNewDemoComponent {
 function generateChildren(parentId: string, name: string, leafElementsCount: number): FlatTreeItem[] {
   return new Array(leafElementsCount)
     .fill(null)
-    .map((_, index: number) => new FlatTreeItem(false, `${name} ${index + 1}`, null, getUuid(), { parentId }, true));
+    .map(
+      (_: null, index: number) => new FlatTreeItem(false, `${name} ${index + 1}`, null, getUuid(), { parentId }, true)
+    );
 }

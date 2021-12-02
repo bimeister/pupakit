@@ -13,6 +13,6 @@ export class RadioButtonDemoComponent {
   constructor() {
     // this.formControl.disable();
     // eslint-disable-next-line no-console
-    this.formControl.valueChanges.subscribe((data) => console.log(data));
+    this.formControl.valueChanges.subscribe((data: number) => console.log(data));
   }
 }
