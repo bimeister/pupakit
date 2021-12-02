@@ -1,14 +1,13 @@
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap, take } from 'rxjs/operators';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { filterTruthy, isNil, mapToVoid } from '@bimeister/utilities';
-
-import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
-import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
 import { OpenedDrawer } from '../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
+import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
+import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
 
 @Component({
@@ -31,11 +30,6 @@ export class NavbarComponent implements OnDestroy {
 
   private readonly subscription: Subscription = new Subscription();
 
-  private readonly openedDrawerInitialValue: OpenedDrawer = {
-    id: null,
-    closed$: of(null)
-  };
-
   public readonly isMenuOpenedControl: FormControl = new FormControl(false);
 
   private readonly menuOpened$: Observable<void> = this.isMenuOpenedControl.valueChanges.pipe(
@@ -43,9 +37,7 @@ export class NavbarComponent implements OnDestroy {
     mapToVoid()
   );
 
-  private readonly currentOpenedDrawer$: BehaviorSubject<OpenedDrawer> = new BehaviorSubject<OpenedDrawer>(
-    this.openedDrawerInitialValue
-  );
+  private readonly currentOpenedDrawer$: BehaviorSubject<OpenedDrawer> = new BehaviorSubject<OpenedDrawer>(null);
 
   private readonly drawerOpened$: Observable<OpenedDrawer> = this.currentOpenedDrawer$.pipe(
     filter((currentOpenedDrawer: OpenedDrawer) => !isNil(currentOpenedDrawer?.id))
@@ -83,7 +75,7 @@ export class NavbarComponent implements OnDestroy {
 
   private closeMenuWhenDrawerClosed(): Subscription {
     return this.drawerClosed$.subscribe(() => {
-      this.currentOpenedDrawer$.next({ ...this.openedDrawerInitialValue });
+      this.currentOpenedDrawer$.next(null);
       this.isMenuOpenedControl.setValue(false);
     });
   }
@@ -119,7 +111,7 @@ export class NavbarComponent implements OnDestroy {
       )
       .subscribe((id: string) => {
         this.drawerService.closeById(id);
-        this.currentOpenedDrawer$.next({ ...this.openedDrawerInitialValue });
+        this.currentOpenedDrawer$.next(null);
       });
   }
 }

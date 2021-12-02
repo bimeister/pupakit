@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
-import { TestDrawerComponent } from './components/test-drawer/test-drawer.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
-import { DrawersService } from '../../../../src/internal/shared/services/drawers.service';
-import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
-import { DrawerContainerComponent } from '../../../../src/lib/components/drawer/components/drawer-container/drawer-container.component';
-import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { take } from 'rxjs/operators';
 import { Theme } from '../../../../src/internal/declarations/enums/theme.enum';
+import { DrawersService } from '../../../../src/internal/shared/services/drawers.service';
+import { DrawerContainerComponent } from '../../../../src/lib/components/drawer/components/drawer-container/drawer-container.component';
+import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
+import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { TestDrawerComponent } from './components/test-drawer/test-drawer.component';
 
 const BASE_REQUEST_PATH: string = 'drawer-demo/examples';
 
@@ -30,7 +30,8 @@ export class DrawerDemoComponent {
     closeOnBackdropClick: new FormControl(true),
     isBackdropTransparent: new FormControl(false),
     hasPadding: new FormControl(true),
-    float: new FormControl('right')
+    float: new FormControl('right'),
+    isFullscreen: new FormControl(false)
   });
 
   public readonly floatOptions: RadioOption[] = [
