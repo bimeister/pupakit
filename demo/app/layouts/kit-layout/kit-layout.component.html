@@ -1,13 +1,15 @@
 <demo-navbar></demo-navbar>
 <pupa-layout>
   <div class="layout-wrapper">
-    <main class="content-wrapper">
-      <div class="content">
-        <div class="inside-content">
-          <router-outlet></router-outlet>
+    <pupa-scrollable>
+      <main class="content-wrapper">
+        <div class="content">
+          <div class="inside-content">
+            <router-outlet></router-outlet>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </pupa-scrollable>
 
     <ng-container [ngTemplateOutlet]="navigation"></ng-container>
   </div>

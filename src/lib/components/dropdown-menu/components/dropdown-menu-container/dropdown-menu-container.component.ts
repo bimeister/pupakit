@@ -49,4 +49,8 @@ export class DropdownMenuContainerComponent {
       map((isOpen: boolean) => (isOpen ? AnimationStates.SHOW : AnimationStates.VOID))
     );
   }
+
+  public stopEvent(event: Event): void {
+    event.stopPropagation();
+  }
 }

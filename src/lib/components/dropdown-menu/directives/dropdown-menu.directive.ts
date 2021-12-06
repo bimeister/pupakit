@@ -71,6 +71,17 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  @HostListener('document:wheel')
+  @HostListener('document:mousedown')
+  @HostListener('document:touchmove')
+  public close(): void {
+    if (this.dropdownMenuDisabled) {
+      return;
+    }
+
+    this.setIsOpen(false);
+  }
+
   @HostListener('click')
   public handleClick(): void {
     if (this.dropdownMenuDisabled) {
