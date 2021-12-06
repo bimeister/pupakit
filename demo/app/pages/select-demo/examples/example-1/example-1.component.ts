@@ -9,5 +9,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SelectExample1Component {
-  public readonly control: FormControl = new FormControl();
+  public readonly control: FormControl = new FormControl([]);
+  public readonly controlWithIcon: FormControl = new FormControl([]);
+  public readonly controlWithPlaceholder: FormControl = new FormControl([]);
 }

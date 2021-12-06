@@ -22,15 +22,17 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     shareReplayWithRefCount()
   );
 
+  public readonly isFilled$: Observable<boolean> = this.currentValue$.pipe(map((value: T[]) => !isEmpty(value)));
+
   private readonly subscription: Subscription = new Subscription();
 
   private readonly isMultiSelectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly isUnselectionEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isExpanded$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
-  public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
-  public readonly isPatched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
+  public readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject<Nullable<NgControl>>(null);
+  public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<Nullable<boolean>>(null);
+  public readonly isPatched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<Nullable<boolean>>(null);
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
       isNil(control)
@@ -43,6 +45,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     distinctUntilChanged(),
     shareReplayWithRefCount()
   );
+
+  public readonly placeholder$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<SelectOuterValue<T>>> = new BehaviorSubject<
     OnChangeCallback<SelectOuterValue<T>>
@@ -119,6 +123,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setIsPatchedState(isPatched: boolean): void {
     this.isPatched$.next(isPatched);
+  }
+
+  public setPlaceholderState(placeholder: string): void {
+    this.placeholder$.next(placeholder);
   }
 
   public setDisabledState(isDisabled: boolean): void {

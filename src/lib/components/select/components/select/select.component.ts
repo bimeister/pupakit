@@ -8,6 +8,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { Nullable } from '@bimeister/utilities';
 import { SelectBase } from '../../../../../internal/declarations/classes/abstract/select-base.abstract';
 import { SelectStateService } from '../../services/select-state.service';
 
@@ -23,6 +24,7 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isMultiSelectionEnabled: boolean = false;
   @Input() public isUnselectionEnabled: boolean = false;
   @Input() public isPatched: boolean = false;
+  @Input() public placeholder: Nullable<string> = null;
 
   constructor(
     selectStateService: SelectStateService<T>,

@@ -7,9 +7,11 @@
 }
 
 .items-container {
-  padding: 8px 0;
+  padding-top: 1rem;
+  padding-bottom: 3rem;
   width: 100%;
   height: auto;
+
   max-height: 300px;
   overflow-y: auto;
 }

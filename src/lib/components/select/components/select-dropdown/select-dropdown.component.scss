@@ -15,12 +15,15 @@
 
   filter: drop-shadow(0px 14px 24px rgba(color(base-n700-rbg), 0.03));
 
-  padding: 4rem 5rem;
   overflow: hidden;
   margin-top: 2rem;
 
-  @include host-selector-dark-theme() {
-    background-color: color(base-dark-n400);
+  @include dark-theme-class-parent() {
+    background-color: color(base-n600);
     border-color: color(base-dark-n400);
   }
+}
+
+.select-dropdown-wrapper {
+  display: contents;
 }

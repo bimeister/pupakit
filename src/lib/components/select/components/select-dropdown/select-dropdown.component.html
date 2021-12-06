@@ -5,11 +5,12 @@
   [cdkConnectedOverlayWidth]="width ? width : (dropDownTriggerButtonWidthPx$ | async)"
   [cdkConnectedOverlayPositions]="overlayPositions"
   [cdkConnectedOverlayFlexibleDimensions]="true"
-  [cdkConnectedOverlayOffsetY]="8"
   (attach)="handleAttachOverlay()"
   (detach)="handleDetachOverlay()"
 >
-  <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
-    <ng-content></ng-content>
-  </section>
+  <div class="select-dropdown-wrapper" [ngClass]="themeClass$ | async">
+    <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
+      <ng-content></ng-content>
+    </section>
+  </div>
 </ng-template>

@@ -10,7 +10,9 @@
   #button
 >
   <div class="trigger__text">
-    <ng-content></ng-content>
+    <ng-container *ngIf="(isFilled$ | async) || (placeholder$ | async | isNullOrUndefined); else placeholder">
+      <ng-content></ng-content>
+    </ng-container>
   </div>
 
   <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
@@ -20,3 +22,9 @@
   <!-- <pupa-button-icon class="trigger__icon" icon="ios-arrow-down" size="small" tabIndex="-1" kind="subtle">
   </pupa-button-icon> -->
 </button>
+
+<ng-template #placeholder>
+  <div class="placeholder">
+    {{ placeholder$ | async }}
+  </div>
+</ng-template>
