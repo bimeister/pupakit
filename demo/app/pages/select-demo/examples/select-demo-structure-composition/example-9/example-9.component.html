@@ -1,0 +1,33 @@
+<pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="false" [formControl]="controlTag">
+  <pupa-select-button>
+    <pupa-tag [clickable]="true" [size]="'small'">
+      <pupa-icon name="app-cube"></pupa-icon>
+      {{ controlTag.value }}
+      <pupa-pupa-tag-delete-button (click)="handleControlTagReset()"></pupa-pupa-tag-delete-button>
+    </pupa-tag>
+  </pupa-select-button>
+
+  <pupa-select-dropdown>
+    <pupa-select-header> Header: any content can be here </pupa-select-header>
+
+    <pupa-select-items-container>
+      <pupa-select-item [value]="'Option 1'">
+        <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 1</pupa-tag>
+      </pupa-select-item>
+      <pupa-select-item [value]="'Option 2'">
+        <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 2</pupa-tag>
+      </pupa-select-item>
+      <pupa-select-item [value]="'Option 3'">
+        <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 3</pupa-tag>
+      </pupa-select-item>
+      <pupa-select-item [value]="'Option 4'">
+        <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 4</pupa-tag>
+      </pupa-select-item>
+      <pupa-select-item [value]="'Option 5'">
+        <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 5</pupa-tag>
+      </pupa-select-item>
+    </pupa-select-items-container>
+
+    <pupa-select-footer> Footer: any content can be here </pupa-select-footer>
+  </pupa-select-dropdown>
+</pupa-select>

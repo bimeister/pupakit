@@ -25,6 +25,7 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isUnselectionEnabled: boolean = false;
   @Input() public isPatched: boolean = false;
   @Input() public placeholder: Nullable<string> = null;
+  @Input() public placeholderOnHover: boolean = true;
 
   constructor(
     selectStateService: SelectStateService<T>,

@@ -19,6 +19,8 @@ export abstract class SelectButtonBase<T> implements OnInit, AfterViewInit {
   public readonly isFilled$: Observable<boolean> = this.selectStateService.isFilled$;
 
   public readonly placeholder$: Observable<string> = this.selectStateService.placeholder$;
+  public readonly placeholderIsVisibleOnHover$: Observable<boolean> =
+    this.selectStateService.placeholderIsVisibleOnHover$;
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,

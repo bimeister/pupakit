@@ -1,6 +1,8 @@
 @import 'themes/functions';
 @import 'functions';
 
+$max-height_item-container: 75rem;
+
 :host {
   display: block;
   width: 100%;
@@ -12,6 +14,6 @@
   width: 100%;
   height: auto;
 
-  max-height: 300px;
+  max-height: $max-height_item-container;
   overflow-y: auto;
 }

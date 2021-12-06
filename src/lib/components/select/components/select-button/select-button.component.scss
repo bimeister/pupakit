@@ -38,6 +38,10 @@
     &:not(.trigger_active) {
       @include hover() {
         background-color: color(base-white-n400);
+
+        .placeholder.on-hover {
+          opacity: 1;
+        }
       }
     }
 
@@ -49,6 +53,10 @@
   &_active {
     border-color: color(base-white-n275);
     background-color: color(base-n0);
+
+    .placeholder.on-hover {
+      opacity: 1;
+    }
   }
 
   &_disabled {
@@ -59,6 +67,10 @@
 
     .trigger__rotate-icon {
       color: color(base-dark-n250);
+    }
+
+    .placeholder {
+      color: color(base-white-n275);
     }
   }
 
@@ -119,12 +131,25 @@
     &_disabled {
       background-color: color(base-dark-n500);
       color: color(base-dark-n250);
+
+      .placeholder {
+        color: color(base-dark-n275);
+      }
     }
   }
 }
 
 .placeholder {
   color: color(base-white-n100);
+  width: 100%;
+  text-align: left;
+  opacity: 1;
+  will-change: opacity;
+  transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  &.on-hover {
+    opacity: 0;
+  }
 
   @include host-selector-dark-theme() {
     color: color(base-dark-n100);
