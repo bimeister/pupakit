@@ -9,7 +9,7 @@ import { map, startWith } from 'rxjs/operators';
   templateUrl: './example-1.component.html',
   styleUrls: ['./example-1.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFieldExample1Component {
   public readonly searchControl: FormControl = new FormControl('');
@@ -20,15 +20,13 @@ export class SearchFieldExample1Component {
     '🍇 grapes',
     '🍍 pineapple',
     '🍑 peach',
-    '🍉 watermelon'
+    '🍉 watermelon',
   ]);
 
   public readonly filteredFruitList$: Observable<string[]> = combineLatest([
     this.fruits$,
-    this.searchControl.valueChanges.pipe(startWith(''))
+    this.searchControl.valueChanges.pipe(startWith('')),
   ]).pipe(
-    map(([fruits, query]: [string[], string]) => {
-      return fruits.filter((fruit: string) => stringFilterPredicate(fruit, query));
-    })
+    map(([fruits, query]: [string[], string]) => fruits.filter((fruit: string) => stringFilterPredicate(fruit, query)))
   );
 }

@@ -40,6 +40,13 @@ services:
       args:
         - BASE_IMAGE
 
+  spell-check_service:
+    build:
+      context: ./
+      dockerfile: ./build/docker/spell-check.dockerfile
+      args:
+        - BASE_IMAGE
+
   deploy_service:
     build:
       context: ./

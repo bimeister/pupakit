@@ -25,14 +25,14 @@
     "lint:debug": "ng lint --configuration=debugging",
     "lint:ci": "ng lint --configuration=inspection-ci",
     "lint:prettier": "yarn run prettier:check",
-    "spellcheck": "cspell \"src/**/*.*\" --config=\"cspell.json\"",
+    "check:spelling": "cspell \"src/**/*.*\" --config=\"cspell.json\"",
     "prettier:format": "prettier --loglevel warn --config ./.prettierrc --ignore-path ./.prettierignore --write \"./**/*.{html,css,scss,json,js,ts}\"",
     "prettier:check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check \"./**/*.{html,css,scss,json,js,ts}\"",
     "prettify": "yarn run prettier:format && yarn run lint:debug",
     "test": "yarn run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "yarn run build:demo-puppeteer && ng test --configuration=ci",
-    "autofix": "yarn run prettify & yarn run lint:debug & yarn run spellcheck",
+    "autofix": "yarn run prettify & yarn run check:spelling",
     "create-untracked-files": "gulp create:untracked-files"
   },
   "peerDependencies": {
