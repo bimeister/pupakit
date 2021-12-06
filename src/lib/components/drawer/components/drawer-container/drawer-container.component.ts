@@ -60,7 +60,7 @@ export class DrawerContainerComponent<ComponentT> implements AfterViewInit, OnDe
 
   public readonly floatStyles$: Observable<Nullable<Record<string, number>>> = combineLatest([
     this.float$.pipe(take(1)),
-    this.isFullscreen$.pipe(take(1))
+    this.isFullscreen$.pipe(take(1)),
   ]).pipe(
     map(([float, isFullscreen]: [Floats, boolean]) => {
       if (!isFullscreen) {

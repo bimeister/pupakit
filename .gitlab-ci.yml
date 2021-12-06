@@ -31,6 +31,14 @@ Lint:
   script:
     - scripts/build.sh lint_service
 
+Spell Check:
+  stage: check
+  needs: ['Dependencies']
+  interruptible: true
+  allow_failure: false
+  script:
+    - scripts/build.sh spell-check_service
+
 Test:
   stage: check
   needs: ['Dependencies']

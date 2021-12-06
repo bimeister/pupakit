@@ -1,15 +1,9 @@
 {
-  "version": "0.1",
-  // language - current active spelling language
+  "version": "0.2",
   "language": "en, ru",
-  // words - list of words to be always considered correct
   "words": ["ngsw", "ngxs"],
-  // flagWords - list of words to be always considered incorrect
-  // This is useful for offensive words and common spelling errors.
-  // For example "hte" should be "the"
   "flagWords": [],
   "ignoreRegExpList": ["CStyleComment"],
-  // "maxNumberOfProblems": 0
   "ignorePaths": [
     "**/node_modules/**",
     "**/assets/**",
