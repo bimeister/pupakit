@@ -2,8 +2,6 @@
 @import 'mixins';
 @import 'functions';
 
-$width_icon: 4rem;
-
 :host {
   box-sizing: border-box;
   position: relative;
@@ -56,14 +54,16 @@ $width_icon: 4rem;
   &_disabled {
     border-color: transparent;
     background-color: color(base-white-n500);
-    color: color('base-dark-n250');
+    color: color(base-dark-n250);
     cursor: not-allowed;
+
+    .trigger__rotate-icon {
+      color: color(base-dark-n250);
+    }
   }
 
   &__text {
-    padding: 0 6px 0 0;
-
-    width: calc(100% - #{$width_icon});
+    flex: 1;
 
     display: flex;
     flex-direction: row;
@@ -76,14 +76,12 @@ $width_icon: 4rem;
   }
 
   &__rotate-icon {
-    width: $width_icon;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 
-    color: color(base-white-n200);
+    color: color(base-n600);
     font-size: 3rem;
     margin-left: 1rem;
     transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -92,5 +90,43 @@ $width_icon: 4rem;
     &.expanded {
       transform: rotate(180deg);
     }
+  }
+}
+
+// dark styles
+.trigger {
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+    background-color: color(base-dark-n500);
+
+    &:not(.trigger_disabled) {
+      &:not(.trigger_active) {
+        @include hover() {
+          background-color: color(base-dark-n400);
+        }
+      }
+    }
+
+    &__rotate-icon {
+      color: color(base-n0);
+    }
+
+    &_active {
+      border-color: color(base-white-n275);
+      background-color: color(base-n600);
+    }
+
+    &_disabled {
+      background-color: color(base-dark-n500);
+      color: color(base-dark-n250);
+    }
+  }
+}
+
+.placeholder {
+  color: color(base-white-n100);
+
+  @include host-selector-dark-theme() {
+    color: color(base-dark-n100);
   }
 }

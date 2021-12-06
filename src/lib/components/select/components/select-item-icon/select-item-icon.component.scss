@@ -1,0 +1,11 @@
+@import 'functions';
+@import 'mixins';
+
+:host {
+  display: flex;
+  font-size: 4rem;
+  width: 7rem;
+  margin-right: 1rem;
+  transition: color variable(transition-duration_shortest) variable(transition-timing-function_common);
+  color: var(--select-item-icon-color);
+}

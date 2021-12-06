@@ -2,6 +2,7 @@
   class="item"
   [class.item_picked]="isPicked$ | async"
   [class.item_disabled]="isDisabled$ | async"
+  [style.height.px]="heightPx"
   (click)="processClick()"
 >
   <ng-content></ng-content>
