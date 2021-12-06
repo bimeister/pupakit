@@ -3,7 +3,8 @@
 @use 'utils' as *;
 
 :host {
-  max-height: 100%;
+  display: block;
+  height: 100%;
 }
 
 .sidebar-content {
@@ -21,29 +22,37 @@
   &__top-section {
     flex-shrink: 0;
     position: relative;
-    margin-top: 5rem;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    width: 100%;
 
     .search-field-container {
-      padding: 2rem;
+      @include grid-container-offset('padding-left');
+      @include grid-container-offset('padding-right');
+      padding-top: 4rem;
+      padding-bottom: 4rem;
       display: flex;
       justify-content: center;
       align-items: center;
+      overflow: hidden;
+      width: 100%;
     }
   }
 
   &__close {
-    position: absolute;
-    top: 50%;
-    right: 2rem;
+    flex-shrink: 0;
     display: block;
-    transform: translate(0%, -50%);
+    @include grid-container-offset('padding-right');
+  }
+
+  .scrollable-content {
+    padding-bottom: 8rem;
   }
 
   .links-container {
     height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
+    overflow: hidden;
   }
 
   .empty-placeholder {
@@ -61,22 +70,44 @@
   }
 
   .subheader {
+    display: inline-block;
     font-weight: 300;
-    margin-bottom: 8px;
-    padding-left: 24px;
+    margin-bottom: 2rem;
     font-size: 18px;
     line-height: 1.5;
+    @include font-size-header;
+    @include font-type-point;
+    @include grid-container-offset('padding-left');
+    @include grid-container-offset('padding-right');
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+
+    margin-top: 8rem;
+
+    &::after {
+      content: '';
+      display: block;
+      width: calc(100% + 8rem);
+      height: 1px;
+      margin-top: 2rem;
+      background-color: color(base-white-n500);
+
+      @include host-selector-dark-theme {
+        background-color: color(base-dark-n500);
+      }
+    }
   }
 
   .side-nav-item {
-    font-size: 14px;
     display: block;
-    padding: 12px 48px 12px 32px;
-    line-height: 1.333;
+    padding: 3rem 0;
     text-decoration: none;
     box-sizing: border-box;
+    @include grid-container-offset('padding-left');
+    @include grid-container-offset('padding-right');
+
+    @include font-size-small;
+    @include font-type-caption;
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
 

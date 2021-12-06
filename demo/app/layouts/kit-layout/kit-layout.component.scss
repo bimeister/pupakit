@@ -12,7 +12,7 @@
   box-sizing: border-box;
 
   position: relative;
-  min-height: calc(100vh - #{$navbar-height});
+  height: 100%;
 }
 
 .side-nav {
@@ -58,14 +58,15 @@
 }
 
 .content {
+  box-sizing: border-box;
+  padding: 100px 0 64px 0;
+  min-height: calc(#{vh(100)});
   @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
 }
 
 .inside-content {
   max-width: 1200px;
   margin: auto;
-  margin-bottom: 64px;
-  margin-top: 100px;
 
   display: flex;
   flex-direction: column;

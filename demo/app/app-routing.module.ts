@@ -10,7 +10,6 @@ import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
 import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-demo.module';
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
-import { ChipButtonDemoModule } from './pages/chip-button-demo/chip-button-demo.module';
 import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
 import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
@@ -18,12 +17,10 @@ import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { ControlsIsPatchedDemoModule } from './pages/controls-is-patched-demo/controls-is-patched-demo.module';
 import { DatagridDemoModule } from './pages/datagrid-demo/datagrid-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
-import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
 import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
 import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 import { DrawerOldDemoModule } from './pages/drawer-old-demo/drawer-old-demo.module';
-import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { DroppableDemoModule } from './pages/droppable-demo/droppable-demo.module';
 import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
@@ -36,7 +33,6 @@ import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
 import { LoaderDemoModule } from './pages/loader-demo/loader-demo.module';
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { ModalDemoModule } from './pages/modal-demo/modal-demo.module';
-import { MultiselectionListDemoModule } from './pages/multiselection-list-demo/multiselection-list-demo.module';
 import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
 import { PagedVirtualScrollDemoModule } from './pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module';
 import { RadioButtonDemoModule } from './pages/radio-button-demo/radio-button-demo.module';
@@ -45,18 +41,14 @@ import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.mo
 import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.module';
 import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
 import { SelectDemoModule } from './pages/select-demo/select-demo.module';
-import { SelectMultipleDemoModule } from './pages/select-multiple-demo/select-multiple-demo.module';
 import { SelectorDemoModule } from './pages/selector-demo/selector-demo.module';
 import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { SwitcherDemoModule } from './pages/switcher-demo/switcher-demo.module';
 import { TableDemoModule } from './pages/table-demo/table-demo.module';
-import { TableInputDemoModule } from './pages/table-input-demo/table-input-demo.module';
 import { TabsDemoModule } from './pages/tabs-demo/tabs-demo.module';
 import { TagDemoModule } from './pages/tag-demo/tag-demo.module';
 import { TextareaDemoModule } from './pages/textarea-demo/textarea-demo.module';
-import { TileDemoModule } from './pages/tile-demo/tile-demo.module';
-import { TimeInputDemoModule } from './pages/time-input-demo/time-input-demo.module';
 import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
 import { TreeDemoModule } from './pages/tree-demo/tree-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
@@ -120,11 +112,6 @@ const demoRoutes: Routes = [
           import('./pages/chip-demo/chip-demo.module').then(module => module.ChipDemoModule)
       },
       {
-        path: 'chip-button',
-        loadChildren: (): Promise<Type<ChipButtonDemoModule>> =>
-          import('./pages/chip-button-demo/chip-button-demo.module').then(module => module.ChipButtonDemoModule)
-      },
-      {
         path: 'chip-tabs',
         loadChildren: (): Promise<Type<ChipTabsDemoModule>> =>
           import('./pages/chip-tabs-demo/chip-tabs-demo.module').then(module => module.ChipTabsDemoModule)
@@ -150,29 +137,9 @@ const demoRoutes: Routes = [
           import('./pages/label-demo/label-demo.module').then(module => module.LabelDemoModule)
       },
       {
-        path: 'table-input',
-        loadChildren: (): Promise<Type<TableInputDemoModule>> =>
-          import('./pages/table-input-demo/table-input-demo.module').then(module => module.TableInputDemoModule)
-      },
-      {
         path: 'search-field',
         loadChildren: (): Promise<Type<SearchFieldDemoModule>> =>
           import('./pages/search-field-demo/search-field-demo.module').then(module => module.SearchFieldDemoModule)
-      },
-      {
-        path: 'dropdown',
-        loadChildren: (): Promise<Type<DropdownDemoModule>> =>
-          import('./pages/dropdown-demo/dropdown-demo.module').then(module => module.DropdownDemoModule)
-      },
-      {
-        path: 'tile',
-        loadChildren: (): Promise<Type<TileDemoModule>> =>
-          import('./pages/tile-demo/tile-demo.module').then(module => module.TileDemoModule)
-      },
-      {
-        path: 'time-input',
-        loadChildren: (): Promise<Type<TimeInputDemoModule>> =>
-          import('./pages/time-input-demo/time-input-demo.module').then(module => module.TimeInputDemoModule)
       },
       {
         path: 'tree',
@@ -190,13 +157,6 @@ const demoRoutes: Routes = [
           import('./pages/select-demo/select-demo.module').then(module => module.SelectDemoModule)
       },
       {
-        path: 'select-multiple',
-        loadChildren: (): Promise<Type<SelectMultipleDemoModule>> =>
-          import('./pages/select-multiple-demo/select-multiple-demo.module').then(
-            module => module.SelectMultipleDemoModule
-          )
-      },
-      {
         path: 'switcher',
         loadChildren: (): Promise<Type<SwitcherDemoModule>> =>
           import('./pages/switcher-demo/switcher-demo.module').then(module => module.SwitcherDemoModule)
@@ -210,11 +170,6 @@ const demoRoutes: Routes = [
         path: 'rating',
         loadChildren: (): Promise<Type<RatingDemoModule>> =>
           import('./pages/rating-demo/rating-demo.module').then(module => module.RatingDemoModule)
-      },
-      {
-        path: 'day-selector',
-        loadChildren: (): Promise<Type<DaySelectorDemoModule>> =>
-          import('./pages/day-selector-demo/day-selector-demo.module').then(module => module.DaySelectorDemoModule)
       },
       {
         path: 'draggable',
@@ -279,13 +234,6 @@ const demoRoutes: Routes = [
         path: 'layout',
         loadChildren: (): Promise<Type<LayoutDemoModule>> =>
           import('./pages/layout-demo/layout-demo.module').then(module => module.LayoutDemoModule)
-      },
-      {
-        path: 'multiselection-list',
-        loadChildren: (): Promise<Type<MultiselectionListDemoModule>> =>
-          import('./pages/multiselection-list-demo/multiselection-list-demo.module').then(
-            module => module.MultiselectionListDemoModule
-          )
       },
       {
         path: 'tooltip',
