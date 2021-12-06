@@ -2,14 +2,13 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'demo-select-example-1',
-  templateUrl: './example-1.component.html',
-  styleUrls: ['./example-1.component.scss'],
+  selector: 'demo-select-example-7',
+  templateUrl: './example-7.component.html',
+  styleUrls: ['./example-7.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectExample1Component {
-  public readonly control: FormControl = new FormControl([]);
+export class SelectExample7Component {
+  public readonly control: FormControl = new FormControl({ value: ['Option 2'], disabled: true });
   public readonly controlWithIcon: FormControl = new FormControl([]);
-  public readonly controlWithPlaceholder: FormControl = new FormControl([]);
 }

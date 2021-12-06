@@ -23,6 +23,7 @@ export interface SelectStateService<T> {
   readonly isFilled$: Observable<boolean>;
 
   readonly placeholder$: BehaviorSubject<Nullable<string>>;
+  readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean>;
 
   setControlRef(control: NgControl): void;
 
@@ -39,6 +40,7 @@ export interface SelectStateService<T> {
   setUnselectionState(isEnabled: boolean): void;
   setIsPatchedState(isPatched: boolean): void;
   setPlaceholderState(placeholder: string): void;
+  setPlaceholderOnHoverState(placeholderOnHover: boolean): void;
   setDisabledState(isDisabled: boolean): void;
 
   processSelection(value: T): void;

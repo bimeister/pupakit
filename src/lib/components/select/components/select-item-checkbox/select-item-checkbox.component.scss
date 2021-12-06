@@ -1,27 +1,12 @@
-@import 'themes/functions';
-@import 'functions';
-
-:host {
-  display: block;
-  width: 100%;
-}
+@import './../../select-item.style.scss';
 
 .item {
-  box-sizing: border-box;
-  height: 24px;
-  width: 100%;
-  cursor: pointer;
-  background: color('white');
-  color: color('grey-text');
-  padding: 0 8px;
-  user-select: none;
-  font-size: 4rem;
+  &__wrapper {
+    display: flex;
+    align-items: center;
+  }
 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.checkmark {
-  padding-top: 1rem;
+  &__checkbox {
+    margin-right: 3rem;
+  }
 }

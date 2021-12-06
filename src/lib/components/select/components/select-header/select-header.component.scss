@@ -1,0 +1,22 @@
+@import 'themes/functions';
+@import 'functions';
+@import 'mixins';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.header {
+  font-size: 3rem;
+  line-height: 4rem;
+  @include font-type-caption();
+
+  padding: 4rem 5rem;
+
+  color: color(base-n600);
+
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+  }
+}

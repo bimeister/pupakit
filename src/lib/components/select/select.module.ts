@@ -18,6 +18,8 @@ import { SelectChipButtonComponent } from './components/select-chip-button/selec
 import { SelectChipItemComponent } from './components/select-chip-item/select-chip-item.component';
 import { SelectChipsContainerComponent } from './components/select-chips-container/select-chips-container.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
+import { SelectFooterComponent } from './components/select-footer/select-footer.component';
+import { SelectHeaderComponent } from './components/select-header/select-header.component';
 import { SelectIconButtonComponent } from './components/select-icon-button/select-icon-button.component';
 import { SelectItemCheckboxComponent } from './components/select-item-checkbox/select-item-checkbox.component';
 import { SelectItemIconComponent } from './components/select-item-icon/select-item-icon.component';
@@ -47,6 +49,9 @@ const COMPONENTS: any[] = [
   SelectButtonInputComponent,
   SelectChipsContainerComponent,
   SelectItemIconComponent,
+
+  SelectHeaderComponent,
+  SelectFooterComponent,
 ];
 
 @NgModule({

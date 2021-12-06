@@ -48,6 +48,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public readonly placeholder$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
+  public readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<SelectOuterValue<T>>> = new BehaviorSubject<
     OnChangeCallback<SelectOuterValue<T>>
   >(null);
@@ -127,6 +129,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setPlaceholderState(placeholder: string): void {
     this.placeholder$.next(placeholder);
+  }
+
+  public setPlaceholderOnHoverState(placeholderOnHover: boolean): void {
+    this.placeholderIsVisibleOnHover$.next(placeholderOnHover);
   }
 
   public setDisabledState(isDisabled: boolean): void {

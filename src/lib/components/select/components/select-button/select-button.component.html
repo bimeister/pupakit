@@ -18,13 +18,10 @@
   <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
     <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
-
-  <!-- <pupa-button-icon class="trigger__icon" icon="ios-arrow-down" size="small" tabIndex="-1" kind="subtle">
-  </pupa-button-icon> -->
 </button>
 
 <ng-template #placeholder>
-  <div class="placeholder">
+  <div class="placeholder" [class.on-hover]="placeholderIsVisibleOnHover$ | async">
     {{ placeholder$ | async }}
   </div>
 </ng-template>

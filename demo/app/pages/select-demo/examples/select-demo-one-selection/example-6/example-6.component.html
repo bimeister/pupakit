@@ -1,0 +1,60 @@
+<p>base usage</p>
+<pupa-select
+  class="select"
+  [placeholder]="'Placeholder'"
+  [placeholderOnHover]="false"
+  [isMultiSelectionEnabled]="false"
+  [formControl]="control"
+>
+  <pupa-select-button>
+    {{ control.value }}
+  </pupa-select-button>
+
+  <pupa-select-dropdown>
+    <pupa-select-items-container>
+      <pupa-select-item-checkbox [value]="'Option 1'"> Option 1 </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 2'"> Option 2 </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 3'"> Option 3 </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 4'"> Option 4 </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 5'"> Option 5 </pupa-select-item-checkbox>
+    </pupa-select-items-container>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<p>with icon</p>
+<pupa-select
+  class="select"
+  [placeholder]="'Placeholder'"
+  [placeholderOnHover]="false"
+  [isMultiSelectionEnabled]="false"
+  [formControl]="controlWithIcon"
+>
+  <pupa-select-button>
+    {{ controlWithIcon.value }}
+  </pupa-select-button>
+
+  <pupa-select-dropdown>
+    <pupa-select-items-container>
+      <pupa-select-item-checkbox [value]="'Option 1'">
+        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+        Option 1
+      </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 2'">
+        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+        Option 2
+      </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 3'">
+        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+        Option 3
+      </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 4'">
+        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+        Option 4
+      </pupa-select-item-checkbox>
+      <pupa-select-item-checkbox [value]="'Option 5'">
+        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+        Option 5
+      </pupa-select-item-checkbox>
+    </pupa-select-items-container>
+  </pupa-select-dropdown>
+</pupa-select>

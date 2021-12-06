@@ -17,6 +17,7 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract isUnselectionEnabled: boolean;
   public abstract isPatched: boolean;
   public abstract placeholder: string;
+  public abstract placeholderOnHover: boolean;
 
   @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
   @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
@@ -77,6 +78,7 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
     this.processIsPatchedValueChange(changes?.isPatched);
     this.processPlaceholderValueChange(changes?.placeholder);
+    this.processPlaceholderOnHoverValueChange(changes?.placeholderOnHover);
   }
 
   public ngOnDestroy(): void {
@@ -137,6 +139,16 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     }
 
     this.selectStateService.setPlaceholderState(updatedState);
+  }
+
+  private processPlaceholderOnHoverValueChange(change: ComponentChange<this, boolean>): void {
+    const updatedState: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedState)) {
+      return;
+    }
+
+    this.selectStateService.setPlaceholderOnHoverState(updatedState);
   }
 
   private handleIsExpandedChangesToEmitFocusEvents(): Subscription {
