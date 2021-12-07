@@ -75,6 +75,12 @@ export class SelectDemoComponent {
     TS: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-9/example-9.component.ts`
   };
 
+  public readonly selectDemoTagsContainerExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.ts`
+  };
+
   public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });
 
   public readonly control: FormControl = new FormControl({ value: null, disabled: false });

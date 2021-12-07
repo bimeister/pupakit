@@ -10,7 +10,7 @@ import { BreadcrumbSeparatorComponent } from './components/breadcrumb-separator/
 import { BreadcrumbUnfitTriggerComponent } from './components/breadcrumb-unfit-trigger/breadcrumb-unfit-trigger.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
-import { PupaBreadcrumbTemplateDirective } from './directives/table-cell-template.directive';
+import { PupaBreadcrumbTemplateDirective } from './directives/breadcrumb-template.directive';
 
 const COMPONENTS: Type<unknown>[] = [
   BreadcrumbsComponent,

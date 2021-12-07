@@ -39,9 +39,9 @@
   border-radius: 1px;
   box-sizing: border-box;
   border: 1px solid transparent;
-  color: map.get($light, input, color);
-  caret-color: map.get($light, input, caret-color);
-  background-color: map.get($light, input, background-color);
+  color: map.get($input_light_styles, input, color);
+  caret-color: map.get($input_light_styles, input, caret-color);
+  background-color: map.get($input_light_styles, input, background-color);
 
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -58,7 +58,7 @@
     will-change: opacity;
     transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common),
       opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
-    color: map.get($light, input, placeholder, color);
+    color: map.get($input_light_styles, input, placeholder, color);
   }
   &__icons-list {
     z-index: 3;

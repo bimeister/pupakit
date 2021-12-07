@@ -5,48 +5,48 @@
   [isMultiSelectionEnabled]="false"
   [formControl]="control"
 >
-  <pupa-select-button>
+  <pupa-select-trigger>
     {{ control.value }}
-  </pupa-select-button>
+  </pupa-select-trigger>
 
   <pupa-select-dropdown>
-    <pupa-select-items-container>
-      <pupa-select-item [value]="'Option 1'"> Option 1 </pupa-select-item>
-      <pupa-select-item [value]="'Option 2'"> Option 2 </pupa-select-item>
-      <pupa-select-item [value]="'Option 3'"> Option 3 </pupa-select-item>
-      <pupa-select-item [value]="'Option 4'"> Option 4 </pupa-select-item>
-      <pupa-select-item [value]="'Option 5'"> Option 5 </pupa-select-item>
-    </pupa-select-items-container>
+    <pupa-select-options-container>
+      <pupa-select-option [value]="'Option 1'"> Option 1 </pupa-select-option>
+      <pupa-select-option [value]="'Option 2'"> Option 2 </pupa-select-option>
+      <pupa-select-option [value]="'Option 3'"> Option 3 </pupa-select-option>
+      <pupa-select-option [value]="'Option 4'"> Option 4 </pupa-select-option>
+      <pupa-select-option [value]="'Option 5'"> Option 5 </pupa-select-option>
+    </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
 
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="false" [formControl]="control">
-  <pupa-select-button>
+  <pupa-select-trigger>
     <pupa-tag [clickable]="true" [size]="'small'" [disabled]="control.disabled">
       <pupa-icon name="app-cube"></pupa-icon>
       {{ control.value }}
       <pupa-pupa-tag-delete-button></pupa-pupa-tag-delete-button>
     </pupa-tag>
-  </pupa-select-button>
+  </pupa-select-trigger>
 
   <pupa-select-dropdown>
-    <pupa-select-items-container>
-      <pupa-select-item [value]="'Option 1'">
+    <pupa-select-options-container>
+      <pupa-select-option [value]="'Option 1'">
         <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 1</pupa-tag>
-      </pupa-select-item>
-      <pupa-select-item [value]="'Option 2'">
+      </pupa-select-option>
+      <pupa-select-option [value]="'Option 2'">
         <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 2</pupa-tag>
-      </pupa-select-item>
-      <pupa-select-item [value]="'Option 3'">
+      </pupa-select-option>
+      <pupa-select-option [value]="'Option 3'">
         <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 3</pupa-tag>
-      </pupa-select-item>
-      <pupa-select-item [value]="'Option 4'">
+      </pupa-select-option>
+      <pupa-select-option [value]="'Option 4'">
         <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 4</pupa-tag>
-      </pupa-select-item>
-      <pupa-select-item [value]="'Option 5'">
+      </pupa-select-option>
+      <pupa-select-option [value]="'Option 5'">
         <pupa-tag [clickable]="true" [size]="'small'"><pupa-icon name="app-cube"></pupa-icon>Option 5</pupa-tag>
-      </pupa-select-item>
-    </pupa-select-items-container>
+      </pupa-select-option>
+    </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
 
@@ -58,32 +58,32 @@
   [isMultiSelectionEnabled]="false"
   [formControl]="controlWithIcon"
 >
-  <pupa-select-button>
+  <pupa-select-trigger>
     {{ controlWithIcon.value }}
-  </pupa-select-button>
+  </pupa-select-trigger>
 
   <pupa-select-dropdown>
-    <pupa-select-items-container>
-      <pupa-select-item-checkbox [value]="'Option 1'">
-        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+    <pupa-select-options-container>
+      <pupa-select-option-checkbox [value]="'Option 1'">
+        <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
         Option 1
-      </pupa-select-item-checkbox>
-      <pupa-select-item-checkbox [value]="'Option 2'">
-        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+      </pupa-select-option-checkbox>
+      <pupa-select-option-checkbox [value]="'Option 2'">
+        <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
         Option 2
-      </pupa-select-item-checkbox>
-      <pupa-select-item-checkbox [value]="'Option 3'">
-        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+      </pupa-select-option-checkbox>
+      <pupa-select-option-checkbox [value]="'Option 3'">
+        <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
         Option 3
-      </pupa-select-item-checkbox>
-      <pupa-select-item-checkbox [isDisabled]="true" [value]="'Option 4'">
-        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+      </pupa-select-option-checkbox>
+      <pupa-select-option-checkbox [isDisabled]="true" [value]="'Option 4'">
+        <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
         Option 4
-      </pupa-select-item-checkbox>
-      <pupa-select-item-checkbox [value]="'Option 5'">
-        <pupa-select-item-icon name="app-cube"></pupa-select-item-icon>
+      </pupa-select-option-checkbox>
+      <pupa-select-option-checkbox [value]="'Option 5'">
+        <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
         Option 5
-      </pupa-select-item-checkbox>
-    </pupa-select-items-container>
+      </pupa-select-option-checkbox>
+    </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>

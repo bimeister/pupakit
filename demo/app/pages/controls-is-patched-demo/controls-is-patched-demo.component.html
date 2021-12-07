@@ -96,44 +96,32 @@
 </ng-template>
 
 <ng-template #selectsTemplate>
-  <span>select table</span>
-  <pupa-select-table class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
-    <pupa-select-table-button> select table </pupa-select-table-button>
-    <pupa-select-table-dropdown>
-      <pupa-select-table-items-container>
-        <pupa-select-table-item [value]="1">1</pupa-select-table-item>
-        <pupa-select-table-item [value]="2">2</pupa-select-table-item>
-        <pupa-select-table-item [value]="3">3</pupa-select-table-item>
-      </pupa-select-table-items-container>
-    </pupa-select-table-dropdown>
-  </pupa-select-table>
-
   <span>select regular</span>
   <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
-    <pupa-select-button> select regular </pupa-select-button>
+    <pupa-select-trigger> select regular </pupa-select-trigger>
     <pupa-select-dropdown>
-      <pupa-select-items-container>
-        <pupa-select-item [value]="1">1</pupa-select-item>
-        <pupa-select-item [value]="2">2</pupa-select-item>
-        <pupa-select-item [value]="3">3</pupa-select-item>
-      </pupa-select-items-container>
+      <pupa-select-options-container>
+        <pupa-select-option [value]="1">1</pupa-select-option>
+        <pupa-select-option [value]="2">2</pupa-select-option>
+        <pupa-select-option [value]="3">3</pupa-select-option>
+      </pupa-select-options-container>
     </pupa-select-dropdown>
   </pupa-select>
 
   <span>select-button-input</span>
   <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
-    <pupa-select-button-input [placeholder]="'select-button-input'">
+    <pupa-select-trigger-input [placeholder]="'select-button-input'">
       <pupa-icon-button [size]="'small'" [color]="'light-blue'" class="content-icon">
         <pupa-icon name="md-lock"></pupa-icon>
       </pupa-icon-button>
-    </pupa-select-button-input>
+    </pupa-select-trigger-input>
 
     <pupa-select-dropdown>
-      <pupa-select-items-container>
-        <pupa-select-item [value]="1">1</pupa-select-item>
-        <pupa-select-item [value]="2">2</pupa-select-item>
-        <pupa-select-item [value]="3">3</pupa-select-item>
-      </pupa-select-items-container>
+      <pupa-select-options-container>
+        <pupa-select-option [value]="1">1</pupa-select-option>
+        <pupa-select-option [value]="2">2</pupa-select-option>
+        <pupa-select-option [value]="3">3</pupa-select-option>
+      </pupa-select-options-container>
     </pupa-select-dropdown>
   </pupa-select>
 </ng-template>

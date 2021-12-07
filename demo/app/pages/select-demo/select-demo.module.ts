@@ -11,6 +11,7 @@ import { SelectExample6Component } from './examples/select-demo-one-selection/ex
 import { SelectExample7Component } from './examples/select-demo-one-selection/example-7/example-7.component';
 import { SelectExample8Component } from './examples/select-demo-multi-selection/example-8/example-8.component';
 import { SelectExample9Component } from './examples/select-demo-structure-composition/example-9/example-9.component';
+import { SelectDemoTagsContainerExampleComponent } from './examples/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component';
 
 const EXAMPLES: Type<unknown>[] = [
   SelectExample1Component,
@@ -21,7 +22,9 @@ const EXAMPLES: Type<unknown>[] = [
   SelectExample6Component,
   SelectExample7Component,
   SelectExample8Component,
-  SelectExample9Component
+  SelectExample9Component,
+
+  SelectDemoTagsContainerExampleComponent
 ];
 const COMPONENTS: Type<unknown>[] = [SelectDemoComponent, ...EXAMPLES];
 

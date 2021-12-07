@@ -1,0 +1,42 @@
+<button
+  type="button"
+  class="trigger"
+  [class.trigger_active]="isExpanded$ | async"
+  [class.trigger_disabled]="isDisabled$ | async"
+  [class.trigger_invalid]="isInvalid$ | async"
+  (click)="processButtonClick()"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+  #button
+>
+  <div class="trigger__text">
+    <ng-container *ngIf="(isFilled$ | async) || (placeholder$ | async | isNullOrUndefined); else placeholder">
+      <div class="tags-container">
+        <ng-container *ngFor="let tag of renderTags$ | async">
+          <ng-container
+            [ngTemplateOutlet]="getSelectTriggerTagTemplateRef()"
+            [ngTemplateOutletContext]="{ $implicit: tag }"
+          ></ng-container>
+        </ng-container>
+      </div>
+
+      <div class="tags-counter">
+        <pupa-tag [clickable]="true">+12</pupa-tag>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
+    <pupa-icon name="ios-arrow-down"></pupa-icon>
+  </div>
+</button>
+
+<ng-template #placeholder>
+  <div class="placeholder" [class.on-hover]="placeholderIsVisibleOnHover$ | async">
+    {{ placeholder$ | async }}
+  </div>
+</ng-template>
+
+<ng-template #defaultTemplate let-tag>
+  <pupa-tag>{{ tag }}</pupa-tag>
+</ng-template>
