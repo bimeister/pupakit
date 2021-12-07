@@ -30,6 +30,6 @@ export class DrawerLayoutComponent implements AfterContentInit {
   constructor(@Inject(DRAWER_LAYOUT_CONFIG_TOKEN) private readonly drawerLayoutConfig: DrawerLayoutConfig) {}
 
   public ngAfterContentInit(): void {
-    this.isFooterComponentExists$.next(isNil(this.footerComponent));
+    this.isFooterComponentExists$.next(!isNil(this.footerComponent));
   }
 }

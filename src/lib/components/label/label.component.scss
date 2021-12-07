@@ -10,7 +10,7 @@
   width: inherit;
   max-width: inherit;
   @include flex-container(row, center, flex-start);
-  height: 4rem;
+  height: 3.5rem;
   gap: 1.5rem;
   &__icon {
     flex-shrink: 0;
