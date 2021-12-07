@@ -40,19 +40,19 @@
     [formControl]="columnSettingsFormControl"
     [isMultiSelectionEnabled]="true"
   >
-    <pupa-select-icon-button>
+    <pupa-select-trigger-extra-case>
       <pupa-icon name="settings"></pupa-icon>
-    </pupa-select-icon-button>
-    <pupa-select-dropdown [fitContent]="true">
-      <pupa-select-items-container>
-        <pupa-select-item-checkbox
+    </pupa-select-trigger-extra-case>
+    <pupa-select-dropdown [width]="300">
+      <pupa-select-options-container>
+        <pupa-select-option-checkbox
           *ngFor="let column of columns$ | async"
           [value]="column.colId"
           [isDisabled]="!column.isAvailable"
         >
           <div class="checkbox-label">{{ column.name }}</div>
-        </pupa-select-item-checkbox>
-      </pupa-select-items-container>
+        </pupa-select-option-checkbox>
+      </pupa-select-options-container>
     </pupa-select-dropdown>
   </pupa-select>
 </ng-template>

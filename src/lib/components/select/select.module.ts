@@ -1,5 +1,5 @@
 import { OverlayModule } from '@angular/cdk/overlay';
-import { NgModule } from '@angular/core';
+import { NgModule, Type } from '@angular/core';
 import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
 import { mdArrowDropdownIcon } from '../../../internal/constants/icons/md-arrow-dropdown-icon.const';
 import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-circle-icon.const';
@@ -10,52 +10,50 @@ import { CheckboxModule } from '../checkbox/checkbox.module';
 import { ChipModule } from '../chip/chip.module';
 import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
+import { TagModule } from '../tag/tag.module';
 import { TooltipModule } from '../tooltip/tooltip.module';
 import { TreeModule } from '../tree/tree.module';
-import { SelectButtonInputComponent } from './components/select-button-input/select-button-input.component';
-import { SelectButtonComponent } from './components/select-button/select-button.component';
-import { SelectChipButtonComponent } from './components/select-chip-button/select-chip-button.component';
-import { SelectChipItemComponent } from './components/select-chip-item/select-chip-item.component';
-import { SelectChipsContainerComponent } from './components/select-chips-container/select-chips-container.component';
+import { SelectDropdownFooterComponent } from './components/select-dropdown-footer/select-dropdown-footer.component';
+import { SelectDropdownHeaderComponent } from './components/select-dropdown-header/select-dropdown-header.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
-import { SelectFooterComponent } from './components/select-footer/select-footer.component';
-import { SelectHeaderComponent } from './components/select-header/select-header.component';
-import { SelectIconButtonComponent } from './components/select-icon-button/select-icon-button.component';
-import { SelectItemCheckboxComponent } from './components/select-item-checkbox/select-item-checkbox.component';
-import { SelectItemIconComponent } from './components/select-item-icon/select-item-icon.component';
-import { SelectItemComponent } from './components/select-item/select-item.component';
-import { SelectItemsContainerComponent } from './components/select-items-container/select-items-container.component';
-import { SelectSearchComponent } from './components/select-search/select-search.component';
-import { SelectTabsItemComponent } from './components/select-tabs-item/select-tabs-item.component';
-import { SelectTabsComponent } from './components/select-tabs/select-tabs.component';
+import { SelectOptionCheckboxComponent } from './components/select-option-checkbox/select-option-checkbox.component';
+import { SelectOptionIconComponent } from './components/select-option-icon/select-option-icon.component';
+import { SelectOptionComponent } from './components/select-option/select-option.component';
+import { SelectOptionsContainerComponent } from './components/select-options-container/select-options-container.component';
 import { SelectTreeComponent } from './components/select-tree/select-tree.component';
+import { SelectTriggerExtraCaseComponent } from './components/select-trigger-extra-case/select-trigger-extra-case.component';
+import { SelectTriggerInputComponent } from './components/select-trigger-input/select-trigger-input.component';
+import { SelectTriggerTagsComponent } from './components/select-trigger-tags/select-trigger-tags.component';
+import { SelectTriggerComponent } from './components/select-trigger/select-trigger.component';
 import { SelectComponent } from './components/select/select.component';
+import { PupaSelectTriggerTagTemplate } from './directives/select-trigger-tag-template.directive';
 
-const COMPONENTS: any[] = [
+const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
-  SelectSearchComponent,
-  SelectItemComponent,
-  SelectItemCheckboxComponent,
-  SelectItemsContainerComponent,
+
+  SelectTriggerComponent,
+  SelectTriggerInputComponent,
+  SelectTriggerTagsComponent,
+  SelectTriggerExtraCaseComponent,
+
+  SelectOptionsContainerComponent,
+  SelectOptionComponent,
+  SelectOptionCheckboxComponent,
+  SelectOptionIconComponent,
+
   SelectTreeComponent,
-  SelectButtonComponent,
-  SelectIconButtonComponent,
-  SelectChipButtonComponent,
   SelectDropdownComponent,
-
-  SelectChipItemComponent,
-  SelectTabsComponent,
-  SelectTabsItemComponent,
-  SelectButtonInputComponent,
-  SelectChipsContainerComponent,
-  SelectItemIconComponent,
-
-  SelectHeaderComponent,
-  SelectFooterComponent,
+  SelectDropdownHeaderComponent,
+  SelectDropdownFooterComponent,
 ];
 
+const DIRECTIVES: Type<unknown>[] = [PupaSelectTriggerTagTemplate];
+
+const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
+const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
+
 @NgModule({
-  declarations: [...COMPONENTS],
+  declarations: [...DECLARATIONS],
   imports: [
     SharedModule,
     OverlayModule,
@@ -64,9 +62,10 @@ const COMPONENTS: any[] = [
     ChipModule,
     CheckboxModule,
     IconButtonModule,
+    TagModule,
     ButtonModule,
     IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon]),
   ],
-  exports: [...COMPONENTS],
+  exports: [...EXPORTS],
 })
 export class SelectModule {}

@@ -24,7 +24,7 @@ import { BreadcrumbsParts } from '../../../../../internal/declarations/interface
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
-import { PupaBreadcrumbTemplateDirective } from '../../directives/table-cell-template.directive';
+import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-template.directive';
 
 const CAPACITY_CALCULATING_DEBOUNCE_TIME_MS: number = 200;
 
