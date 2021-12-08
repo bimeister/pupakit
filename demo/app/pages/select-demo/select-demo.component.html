@@ -1,5 +1,10 @@
 <h1>Select</h1>
 
+<h4>Trigger input for option searching</h4>
+<pupa-code-container [content]="example13Content">
+  <demo-select-example-13 *pupaCodeContainerPreviewTemplate></demo-select-example-13>
+</pupa-code-container>
+
 <h2>One selection</h2>
 
 <pupa-info-block variant="info">Most examples are valid for the multi selection case</pupa-info-block>
@@ -61,109 +66,14 @@
   <demo-select-example-11 *pupaCodeContainerPreviewTemplate></demo-select-example-11>
 </pupa-code-container>
 
-<!-- <pupa-select [isMultiSelectionEnabled]="false" [formControl]="control">
-  <pupa-select-trigger-input
-    [placeholder]="'Введите название отчета'"
-    [selectedValuePreview]="selectedValuePreview$ | async"
-    (query)="log($event)"
-  >
-    <pupa-icon-button [size]="'small'" [color]="'light-blue'" class="content-icon">
-      <pupa-icon name="md-lock"></pupa-icon>
-    </pupa-icon-button>
-  </pupa-select-trigger-input>
+<h2>Extra cases</h2>
 
-  <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <ng-container *ngFor="let option of options">
-        <pupa-select-option [value]="option.value" #item>
-          <div class="name-container" [class.hovered]="(item.isHovered$ | async) || (item.isPicked$ | async)">
-            <pupa-icon class="name-container__icon" name="md-lock"></pupa-icon>
-            <div class="name-container__name">{{ option.caption }}</div>
-          </div>
-        </pupa-select-option>
-      </ng-container>
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
+<h4>Custom trigger</h4>
+<pupa-code-container [content]="example12Content">
+  <demo-select-example-12 *pupaCodeContainerPreviewTemplate></demo-select-example-12>
+</pupa-code-container>
 
-<h2>Example 2</h2>
-<pupa-select [isMultiSelectionEnabled]="true" [formControl]="chipsFormControl">
-  <pupa-select-trigger>
-    <pupa-select-chip-item *ngFor="let chip of chipsFormControl.value" [value]="chip">{{ chip }}</pupa-select-chip-item>
-  </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">1</pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        >aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</pupa-select-option
-      >
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
-
-<h2>Example 3</h2>
-<pupa-select [formControl]="formControl">
-  <pupa-select-trigger> 123 </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-    <pupa-select-tabs (selectChange)="processTabsSelect($event)" [initialSelect]="1">
-      <pupa-select-tabs-item *ngFor="let item of tabItems" [value]="item.value">{{
-        item.caption
-      }}</pupa-select-tabs-item>
-    </pupa-select-tabs>
-
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">1</pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option [value]="3">3</pupa-select-option>
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
-
-<h2>Example 4</h2>
-<pupa-select [formControl]="formControl">
-  <pupa-select-trigger> 123 </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">1</pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option [value]="3">3</pupa-select-option>
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
-
-<h2>Example 5</h2>
-<pupa-select [isMultiSelectionEnabled]="true" [formControl]="formControl">
-  <pupa-select-trigger> 123 </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-    <pupa-select-search placeholder="Поиск..." (query)="log($event)"></pupa-select-search>
-
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">
-        1 fdskj flkjdslk jl jlk jlk jslk jl jlk jsdlk jlkj lj lksj lksjd lkjfdlk kjsdlk jslk j
-      </pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option [value]="3">3</pupa-select-option>
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
-
-<h2>Example 6</h2>
-<pupa-select [isMultiSelectionEnabled]="true">
-  <pupa-select-trigger> 123 </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-    <pupa-select-search placeholder="Поиск..." (query)="log($event)"></pupa-select-search>
-    <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
-    <pupa-select-tree type="flat" [flatDataOrigin]="treeDataOrigin" [isLoading]="isLoading$ | async"></pupa-select-tree>
-  </pupa-select-dropdown>
-</pupa-select>
-
+<!--
 <h2>Example 7</h2>
 <pupa-select [isMultiSelectionEnabled]="true">
   <pupa-select-trigger> pupa-select-tree with custom template</pupa-select-trigger>
@@ -183,58 +93,4 @@
 <ng-template #customNodeTemplate let-node="node">
   <div class="select-tree-item-custom-template">{{ node?.name }} - BOY NEXT DOOR</div>
 </ng-template>
-
-<h2>Example 8</h2>
-<pupa-select [formControl]="invalidFormControl">
-  <pupa-select-trigger> Invalid Select </pupa-select-trigger>
-
-  <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">1</pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option [value]="3">3</pupa-select-option>
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select>
-
-<h2>Example 9</h2>
-<div class="horizontal">
-  <div class="cell">
-    <pupa-select [isMultiSelectionEnabled]="true">
-      <pupa-select-trigger-extra-case>
-        <pupa-icon name="settings"></pupa-icon>
-      </pupa-select-trigger-extra-case>
-
-      <pupa-select-dropdown [width]="'fit-content'">
-        <pupa-select-options-container>
-          <pupa-select-option-checkbox [value]="1">1 Какой-то текст </pupa-select-option-checkbox>
-          <pupa-select-option-checkbox [value]="2" [isDisabled]="true">2</pupa-select-option-checkbox>
-          <pupa-select-option-checkbox [value]="3">3</pupa-select-option-checkbox>
-        </pupa-select-options-container>
-      </pupa-select-dropdown>
-    </pupa-select>
-  </div>
-</div>
-
-<h2>Example 10</h2>
-<pupa-select [isMultiSelectionEnabled]="true" [formControl]="chipsFormControl">
-  <pupa-select-chips-container>
-    <pupa-select-trigger-extra-case>
-      asdasdasd
-      <pupa-icon name="add"></pupa-icon>
-    </pupa-select-trigger-extra-case>
-    <pupa-select-chip-item *ngFor="let chip of chipsFormControl.value" [value]="chip">
-      {{ chip }}
-    </pupa-select-chip-item>
-  </pupa-select-chips-container>
-
-  <pupa-select-dropdown [width]="'fit-content'">
-    <pupa-select-options-container>
-      <pupa-select-option [value]="1">1</pupa-select-option>
-      <pupa-select-option [value]="2">2</pupa-select-option>
-      <pupa-select-option value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        >aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</pupa-select-option
-      >
-    </pupa-select-options-container>
-  </pupa-select-dropdown>
-</pupa-select> -->
+ -->

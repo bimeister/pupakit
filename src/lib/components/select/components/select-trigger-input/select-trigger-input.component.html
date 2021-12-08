@@ -1,19 +1,19 @@
 <div
-  class="select-button"
-  [class.select-button_active]="isExpanded$ | async"
-  [class.select-button_disabled]="isDisabled$ | async"
-  [class.select-button_invalid]="isInvalid$ | async"
+  class="trigger"
+  [class.trigger_active]="isExpanded$ | async"
+  [class.trigger_disabled]="isDisabled$ | async"
+  [class.trigger_invalid]="isInvalid$ | async"
   (click)="processButtonInputClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="select-button__input-container">
-    <div class="select-button__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
+  <div class="trigger__input-container">
+    <div class="trigger__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
       <ng-content></ng-content>
     </div>
-    <input type="text" class="select-button__input" [placeholder]="placeholder" #inputElement [formControl]="control" />
-    <pupa-icon-button
+    <input type="text" class="trigger__input" [placeholder]="placeholder" #inputElement [formControl]="control" />
+    <!-- <pupa-icon-button
       class="select-button__close-button"
       [size]="'small'"
       [color]="'light-blue'"
@@ -22,10 +22,10 @@
       *ngIf="!(selectedValuePreviewIsEmpty$ | async) && !(isExpanded$ | async)"
     >
       <pupa-icon name="close"></pupa-icon>
-    </pupa-icon-button>
+    </pupa-icon-button> -->
   </div>
 
-  <div class="select-button__icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
+  <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
     <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
 </div>
