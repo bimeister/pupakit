@@ -10,7 +10,7 @@
   #button
 >
   <div class="trigger__text">
-    <ng-container *ngIf="(isFilled$ | async) || (placeholder$ | async | isNullOrUndefined); else placeholder">
+    <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
       <ng-content></ng-content>
     </ng-container>
   </div>

@@ -1,11 +1,8 @@
 <h1>Select</h1>
 
-<h2>Tags container in trigger</h2>
-<pupa-code-container [content]="selectDemoTagsContainerExampleContent">
-  <demo-select-demo-tags-container-example *pupaCodeContainerPreviewTemplate></demo-select-demo-tags-container-example>
-</pupa-code-container>
-
 <h2>One selection</h2>
+
+<pupa-info-block variant="info">Most examples are valid for the multi selection case</pupa-info-block>
 
 <h4>Base usage</h4>
 <pupa-code-container [content]="example1Content">
@@ -43,13 +40,25 @@
 </pupa-code-container>
 
 <h2>Multi selection</h2>
+
+<h4>Base usage</h4>
 <pupa-code-container [content]="example8Content">
   <demo-select-example-8 *pupaCodeContainerPreviewTemplate></demo-select-example-8>
 </pupa-code-container>
 
-<h2>Structure composition</h2>
+<h4>Tags counter case (default)</h4>
 <pupa-code-container [content]="example9Content">
   <demo-select-example-9 *pupaCodeContainerPreviewTemplate></demo-select-example-9>
+</pupa-code-container>
+
+<h4>Tags counter case (custom tag)</h4>
+<pupa-code-container [content]="example10Content">
+  <demo-select-example-10 *pupaCodeContainerPreviewTemplate></demo-select-example-10>
+</pupa-code-container>
+
+<h2>Structure composition</h2>
+<pupa-code-container [content]="example11Content">
+  <demo-select-example-11 *pupaCodeContainerPreviewTemplate></demo-select-example-11>
 </pupa-code-container>
 
 <!-- <pupa-select [isMultiSelectionEnabled]="false" [formControl]="control">

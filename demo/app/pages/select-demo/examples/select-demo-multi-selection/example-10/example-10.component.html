@@ -1,5 +1,11 @@
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="true" [formControl]="control">
-  <pupa-select-trigger> Selected: {{ control.value.length }} </pupa-select-trigger>
+  <pupa-select-trigger-tags class="trigger" [tags]="control.value">
+    <pupa-tag class="tag" [clickable]="true" [size]="'small'" *pupaSelectTriggerTagTemplate="let tag">
+      <pupa-icon class="tag__icon" name="app-cube"></pupa-icon>
+      <span class="tag__name">{{ tag }}</span>
+      <pupa-pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-pupa-tag-delete-button>
+    </pupa-tag>
+  </pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
     <pupa-select-options-container>
