@@ -1,0 +1,21 @@
+<pupa-select class="select" [isMultiSelectionEnabled]="false" [formControl]="control">
+  <pupa-select-trigger-input
+    [placeholder]="'Placeholder'"
+    [selectedValuePreview]="selectedValuePreview$ | async"
+    (query)="search($event)"
+  >
+    <pupa-button-icon [size]="'small'" [icon]="'app-notification'" [kind]="'border'" class="content-icon">
+    </pupa-button-icon>
+  </pupa-select-trigger-input>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <ng-container *ngFor="let option of options$ | async">
+        <pupa-select-option [value]="option.value">
+          <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+          {{ option.caption }}
+        </pupa-select-option>
+      </ng-container>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>

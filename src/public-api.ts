@@ -42,7 +42,6 @@ export {
   SelectDropdownBase,
   SelectItemBase,
   SelectItemsContainerBase,
-  SelectOption,
   SelectSearchBase,
   SelectTreeBase,
   SortModel,

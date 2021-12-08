@@ -1,100 +1,15 @@
-@import 'themes/functions';
+@import './../../select-trigger.style.scss';
+
 @import 'mixins';
 @import 'functions';
 
-$width_icon: 4rem;
-
-:host {
-  display: block;
-  width: 100%;
-}
-
-.select-button {
-  box-sizing: border-box;
-
-  width: 100%;
-  height: 8rem;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-
-  cursor: pointer;
-
-  border-radius: 8px;
-  border: 1px solid color('grey-ivory');
-
-  background-color: color('white');
-  color: color('text');
-
-  padding: 6px 10px 6px 8px;
-
-  &:hover {
-    border-color: color('grey-light');
-  }
-
-  &_active {
-    border-color: color('active') !important;
-    background-color: color('light') !important;
-  }
-
-  &_disabled {
-    border-color: color('grey-apple') !important;
-    color: color('grey-apple') !important;
-    pointer-events: none;
-  }
-
-  &_transparent {
-    border-color: transparent;
-    background-color: transparent;
-    &:hover {
-      border-color: transparent;
-    }
-  }
-
-  &_invalid:not(.select-button_disabled) {
-    border-color: color(error) !important;
-  }
-
-  &__text {
-    padding: 0 6px 0 0;
-
-    width: calc(100% - #{$width_icon});
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-    font-size: 4rem;
-  }
-
-  &__icon {
-    width: $width_icon;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    color: inherit;
-    font-size: 18px;
-    margin-left: 1rem;
-    transition: transform 0.2s ease;
-    transform-origin: center;
-
-    &.expanded {
-      transform: rotate(180deg);
-    }
+.trigger {
+  &__button-icons-container {
+    margin-right: 1rem;
   }
 
   &__close-button {
-    padding-left: 1.6rem;
+    padding-left: 2rem;
   }
 
   &__input-container {
@@ -107,30 +22,37 @@ $width_icon: 4rem;
 
   &__input {
     width: 100%;
+    height: 100%;
     flex: 1;
 
     box-sizing: border-box;
 
     background-color: transparent;
-    color: color(text);
     border: none;
     padding: 0;
     outline: none;
-    font-size: 4rem;
-    line-height: 1;
+
+    font-size: 3rem;
+    line-height: 4rem;
+    @include font-type-caption();
 
     position: relative;
 
     text-overflow: ellipsis;
     overflow: hidden;
 
-    @include regular();
-
     &::placeholder {
-      position: absolute;
-      left: 0;
-      color: color(grey-light);
-      @include transition(#{'color'});
+      color: color(base-white-n100);
+      width: 100%;
+      text-align: left;
+      opacity: 1;
+      will-change: opacity;
+      transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
+      align-self: center;
+
+      @include host-selector-dark-theme() {
+        color: color(base-dark-n100);
+      }
     }
   }
 }
