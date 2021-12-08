@@ -7,7 +7,7 @@ import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
 
 @Directive()
-export abstract class SelectItemBase<T> implements OnChanges {
+export abstract class SelectOptionBase<T> implements OnChanges {
   public abstract value: T;
   public abstract isDisabled: boolean;
 

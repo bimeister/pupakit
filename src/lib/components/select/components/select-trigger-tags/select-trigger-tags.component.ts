@@ -21,7 +21,7 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 import { SelectTriggerTagContext } from '../../../../../internal/declarations/interfaces/select-trigger-tag-context.interface';
 import { PupaSelectTriggerTagTemplate } from '../../directives/select-trigger-tag-template.directive';
 import { SelectStateService } from '../../services/select-state.service';
-import { SelectButtonBase } from './../../../../../internal/declarations/classes/abstract/select-button-base.abstract';
+import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 
 const MAX_TAGS_RENDER_COUNT: number = 20;
 const RESIZE_DEBOUNCE_TIME_MS: number = 200;
@@ -33,7 +33,7 @@ const RESIZE_DEBOUNCE_TIME_MS: number = 200;
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectTriggerTagsComponent<T> extends SelectButtonBase<T> implements OnChanges, AfterViewInit, OnDestroy {
+export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
   @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
 

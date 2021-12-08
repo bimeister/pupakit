@@ -1,7 +1,7 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
-import { ElementRef, Injectable, OnDestroy } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
@@ -21,8 +21,6 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     map((serializedSet: Set<string>) => SelectStateService.getParsedValue<T>(serializedSet)),
     shareReplayWithRefCount()
   );
-
-  public readonly isFilled$: Observable<boolean> = this.currentValue$.pipe(map((value: T[]) => !isEmpty(value)));
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -45,6 +43,20 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     distinctUntilChanged(),
     shareReplayWithRefCount()
   );
+
+  public readonly isFilled$: Observable<boolean> = this.control$.pipe(
+    switchMap((control: NgControl) => control.valueChanges.pipe(startWith(control.value))),
+    map((value: unknown) => !isEmpty(value))
+  );
+
+  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly invalidTooltipHideOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly invalidTooltipDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly invalidTooltip$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+  public readonly invalidTooltipContentTemplate$: BehaviorSubject<Nullable<TemplateRef<unknown>>> = new BehaviorSubject<
+    Nullable<TemplateRef<unknown>>
+  >(null);
 
   public readonly placeholder$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
@@ -135,6 +147,26 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     this.placeholderIsVisibleOnHover$.next(placeholderOnHover);
   }
 
+  public setWithResetState(withReset: boolean): void {
+    this.withReset$.next(withReset);
+  }
+
+  public setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void {
+    this.invalidTooltipHideOnHover$.next(invalidTooltipHideOnHover);
+  }
+
+  public setInvalidTooltipDisabledState(invalidTooltipDisabled: boolean): void {
+    this.invalidTooltipDisabled$.next(invalidTooltipDisabled);
+  }
+
+  public setInvalidTooltipState(invalidTooltip: Nullable<string>): void {
+    this.invalidTooltip$.next(invalidTooltip);
+  }
+
+  public setInvalidTooltipContentTemplateState(invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>>): void {
+    this.invalidTooltipContentTemplate$.next(invalidTooltipContentTemplate);
+  }
+
   public setDisabledState(isDisabled: boolean): void {
     this.isDisabled$.next(isDisabled);
   }
@@ -219,6 +251,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     if (!isEmpty(value)) {
       this.isTouched$.next(true);
     }
+  }
+
+  public reset(): void {
+    this.control$.pipe(take(1), filterNotNil()).subscribe((control: NgControl) => control.reset());
   }
 
   public processFocusInputContainer(inputElement: ElementRef<HTMLInputElement>): Subscription {

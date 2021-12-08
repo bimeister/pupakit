@@ -5,6 +5,7 @@ import {
   HostListener,
   Input,
   Optional,
+  TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
@@ -26,6 +27,13 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isPatched: boolean = false;
   @Input() public placeholder: Nullable<string> = null;
   @Input() public placeholderOnHover: boolean = true;
+
+  @Input() public withReset: boolean = false;
+
+  @Input() public invalidTooltipHideOnHover: boolean = false;
+  @Input() public invalidTooltipDisabled: boolean = false;
+  @Input() public invalidTooltip: Nullable<string> = null;
+  @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
   constructor(
     selectStateService: SelectStateService<T>,

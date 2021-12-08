@@ -60,6 +60,12 @@
     }
   }
 
+  &_active ~ .icons {
+    .icons__icon-reset {
+      opacity: 1;
+    }
+  }
+
   &_disabled {
     border-color: transparent;
     background-color: color(base-white-n500);
@@ -157,4 +163,19 @@
   @include host-selector-dark-theme() {
     color: color(base-dark-n100);
   }
+}
+
+.icons {
+  z-index: 3;
+  position: absolute;
+  overflow: hidden;
+  top: 1px;
+  bottom: 1px;
+  right: 7.5rem;
+  box-sizing: border-box;
+  height: calc(100% - 2px);
+  @include flex-container(row, center);
+  width: fit-content;
+  background-color: transparent;
+  gap: 1px;
 }

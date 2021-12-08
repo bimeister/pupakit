@@ -1,4 +1,5 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
+import { TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -24,6 +25,12 @@ export interface SelectStateService<T> {
 
   readonly placeholder$: BehaviorSubject<Nullable<string>>;
   readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean>;
+  readonly withReset$: BehaviorSubject<boolean>;
+
+  readonly invalidTooltipHideOnHover$: BehaviorSubject<boolean>;
+  readonly invalidTooltipDisabled$: BehaviorSubject<boolean>;
+  readonly invalidTooltip$: BehaviorSubject<Nullable<string>>;
+  readonly invalidTooltipContentTemplate$: BehaviorSubject<Nullable<TemplateRef<unknown>>>;
 
   setControlRef(control: NgControl): void;
 
@@ -41,9 +48,16 @@ export interface SelectStateService<T> {
   setIsPatchedState(isPatched: boolean): void;
   setPlaceholderState(placeholder: string): void;
   setPlaceholderOnHoverState(placeholderOnHover: boolean): void;
+  setWithResetState(withReset: boolean): void;
   setDisabledState(isDisabled: boolean): void;
+
+  setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void;
+  setInvalidTooltipDisabledState(invalidTooltipDisabled: boolean): void;
+  setInvalidTooltipState(invalidTooltip: Nullable<string>): void;
+  setInvalidTooltipContentTemplateState(invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>>): void;
 
   processSelection(value: T): void;
   isPicked(value: T): Observable<boolean>;
   setValue(value: SelectOuterValue<T>): void;
+  reset(): void;
 }

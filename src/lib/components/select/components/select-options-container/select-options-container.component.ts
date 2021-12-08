@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
 
-import { SelectItemsContainerBase } from './../../../../../internal/declarations/classes/abstract/select-items-container-base.abstract';
+import { SelectOptionsContainerBase } from '../../../../../internal/declarations/classes/abstract/select-options-container-base.abstract';
 
 @Component({
   selector: 'pupa-select-options-container',
@@ -9,7 +9,7 @@ import { SelectItemsContainerBase } from './../../../../../internal/declarations
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectOptionsContainerComponent extends SelectItemsContainerBase {
+export class SelectOptionsContainerComponent extends SelectOptionsContainerBase {
   @HostListener('click', ['$event'])
   @HostListener('touchstart', ['$event'])
   public stopPropagation(event: Event): void {

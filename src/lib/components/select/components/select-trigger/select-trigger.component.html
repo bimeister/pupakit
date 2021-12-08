@@ -9,7 +9,7 @@
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="trigger__text">
+  <div class="trigger__text" [style.paddingRight.px]="rightPaddingPx$ | async">
     <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
       <ng-content></ng-content>
     </ng-container>
@@ -19,6 +19,32 @@
     <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
 </button>
+
+<div class="icons">
+  <pupa-button-icon
+    *ngIf="isVisibleReset$ | async"
+    class="icons__icon icons__icon-reset"
+    icon="app-cross-circle"
+    size="small"
+    tabIndex="-1"
+    kind="subtle"
+    (click)="reset()"
+  >
+  </pupa-button-icon>
+  <pupa-button-icon
+    *ngIf="isInvalid$ | async"
+    class="icons__icon icons__icon-invalid"
+    icon="ios-information-circle-outline"
+    kind="subtle-danger"
+    size="small"
+    tabIndex="-1"
+    [pupaTooltip]="invalidTooltip$ | async"
+    [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
+    [tooltipDisabled]="isInvalidTooltipDisabled$ | async"
+    [tooltipContentTemplate]="invalidTooltipContentTemplate$ | async"
+  >
+  </pupa-button-icon>
+</div>
 
 <ng-template #placeholder>
   <div class="placeholder" [class.on-hover]="placeholderIsVisibleOnHover$ | async">
