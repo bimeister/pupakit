@@ -1,14 +1,11 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule, Type } from '@angular/core';
+import { appCrossCircleIcon } from '../../../internal/constants/icons/app-cross-circle-icon.const';
 import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
-import { mdArrowDropdownIcon } from '../../../internal/constants/icons/md-arrow-dropdown-icon.const';
-import { mdCloseCircleIcon } from '../../../internal/constants/icons/md-close-circle-icon.const';
-import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
+import { iosInformationCircleOutlineIcon } from '../../../internal/constants/icons/ios-information-circle-outline-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { ButtonModule } from '../button/button.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
-import { ChipModule } from '../chip/chip.module';
-import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
 import { TagModule } from '../tag/tag.module';
 import { TooltipModule } from '../tooltip/tooltip.module';
@@ -59,12 +56,10 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     OverlayModule,
     TreeModule,
     TooltipModule,
-    ChipModule,
     CheckboxModule,
-    IconButtonModule,
     TagModule,
     ButtonModule,
-    IconModule.forFeature([mdArrowDropdownIcon, mdCloseCircleIcon, iosArrowDownIcon, mdCloseIcon, iosArrowDownIcon]),
+    IconModule.forFeature([iosArrowDownIcon, appCrossCircleIcon, iosInformationCircleOutlineIcon]),
   ],
   exports: [...EXPORTS],
 })

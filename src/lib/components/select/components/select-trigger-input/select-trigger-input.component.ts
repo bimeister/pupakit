@@ -18,7 +18,7 @@ import { map, startWith, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { SelectStateService } from '../../services/select-state.service';
-import { SelectButtonBase } from './../../../../../internal/declarations/classes/abstract/select-button-base.abstract';
+import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 
 @Component({
   selector: 'pupa-select-trigger-input',
@@ -27,7 +27,7 @@ import { SelectButtonBase } from './../../../../../internal/declarations/classes
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectTriggerInputComponent<T> extends SelectButtonBase<T> implements OnDestroy, OnChanges {
+export class SelectTriggerInputComponent<T> extends SelectTriggerBase<T> implements OnDestroy, OnChanges {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
   @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
 

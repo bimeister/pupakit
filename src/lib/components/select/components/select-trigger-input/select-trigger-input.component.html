@@ -12,20 +12,43 @@
     <div class="trigger__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
       <ng-content></ng-content>
     </div>
-    <input type="text" class="trigger__input" [placeholder]="placeholder" #inputElement [formControl]="control" />
-    <!-- <pupa-icon-button
-      class="select-button__close-button"
-      [size]="'small'"
-      [color]="'light-blue'"
-      (click)="resetQuery($event)"
-      [title]="'Очистить'"
-      *ngIf="!(selectedValuePreviewIsEmpty$ | async) && !(isExpanded$ | async)"
-    >
-      <pupa-icon name="close"></pupa-icon>
-    </pupa-icon-button> -->
+    <input
+      type="text"
+      class="trigger__input"
+      [style.paddingRight.px]="rightPaddingPx$ | async"
+      [placeholder]="placeholder"
+      #inputElement
+      [formControl]="control"
+    />
   </div>
 
   <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
     <pupa-icon name="ios-arrow-down"></pupa-icon>
   </div>
+</div>
+
+<div class="icons">
+  <pupa-button-icon
+    *ngIf="isVisibleReset$ | async"
+    class="icons__icon icons__icon-reset"
+    icon="app-cross-circle"
+    size="small"
+    tabIndex="-1"
+    kind="subtle"
+    (click)="reset()"
+  >
+  </pupa-button-icon>
+  <pupa-button-icon
+    *ngIf="isInvalid$ | async"
+    class="icons__icon icons__icon-invalid"
+    icon="ios-information-circle-outline"
+    kind="subtle-danger"
+    size="small"
+    tabIndex="-1"
+    [pupaTooltip]="invalidTooltip$ | async"
+    [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
+    [tooltipDisabled]="isInvalidTooltipDisabled$ | async"
+    [tooltipContentTemplate]="invalidTooltipContentTemplate$ | async"
+  >
+  </pupa-button-icon>
 </div>

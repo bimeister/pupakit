@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { SelectStateService } from '../../services/select-state.service';
-import { SelectItemBase } from '../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
+import { SelectOptionBase } from '../../../../../internal/declarations/classes/abstract/select-option-base.abstract';
 
 @Component({
   selector: 'pupa-select-option',
@@ -9,7 +9,7 @@ import { SelectItemBase } from '../../../../../internal/declarations/classes/abs
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectOptionComponent<T> extends SelectItemBase<T> {
+export class SelectOptionComponent<T> extends SelectOptionBase<T> {
   @Input() public value: T = null;
   @Input() public isDisabled: boolean = false;
 

@@ -1,6 +1,6 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, ElementRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { SelectButtonBase } from '../../../../../internal/declarations/classes/abstract/select-button-base.abstract';
+import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 import { SelectStateService } from '../../services/select-state.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { SelectStateService } from '../../services/select-state.service';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectTriggerExtraCaseComponent<T> extends SelectButtonBase<T> {
+export class SelectTriggerExtraCaseComponent<T> extends SelectTriggerBase<T> {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
   @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
 

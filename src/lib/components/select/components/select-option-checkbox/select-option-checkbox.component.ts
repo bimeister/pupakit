@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { SelectItemBase } from '../../../../../internal/declarations/classes/abstract/select-item-base.abstract';
+import { SelectOptionBase } from '../../../../../internal/declarations/classes/abstract/select-option-base.abstract';
 import { SelectStateService } from '../../services/select-state.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { SelectStateService } from '../../services/select-state.service';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectOptionCheckboxComponent<T> extends SelectItemBase<T> {
+export class SelectOptionCheckboxComponent<T> extends SelectOptionBase<T> {
   @Input() public value: T = null;
   @Input() public isDisabled: boolean = false;
 

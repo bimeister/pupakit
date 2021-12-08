@@ -1,7 +1,7 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { Directive, ElementRef, EventEmitter, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Directive, ElementRef, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { getElementAllNestedChildren, isNil } from '@bimeister/utilities';
+import { getElementAllNestedChildren, isNil, Nullable } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';
@@ -18,6 +18,12 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract isPatched: boolean;
   public abstract placeholder: string;
   public abstract placeholderOnHover: boolean;
+  public abstract withReset: boolean;
+
+  public abstract invalidTooltipHideOnHover: boolean = false;
+  public abstract invalidTooltipDisabled: boolean = false;
+  public abstract invalidTooltip: Nullable<string> = null;
+  public abstract invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
   @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
   @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
@@ -79,6 +85,12 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.processIsPatchedValueChange(changes?.isPatched);
     this.processPlaceholderValueChange(changes?.placeholder);
     this.processPlaceholderOnHoverValueChange(changes?.placeholderOnHover);
+    this.processWithResetChange(changes?.withReset);
+
+    this.processInvalidTooltipHideOnHoverChange(changes?.invalidTooltipHideOnHover);
+    this.processInvalidTooltipDisabledChange(changes?.invalidTooltipDisabled);
+    this.processInvalidTooltipChange(changes?.invalidTooltip);
+    this.processInvalidTooltipContentTemplateChange(changes?.invalidTooltipContentTemplate);
   }
 
   public ngOnDestroy(): void {
@@ -149,6 +161,57 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     }
 
     this.selectStateService.setPlaceholderOnHoverState(updatedState);
+  }
+
+  private processWithResetChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.selectStateService.setWithResetState(updatedValue);
+  }
+
+  private processInvalidTooltipHideOnHoverChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setInvalidTooltipHideOnHoverState(updatedValue);
+  }
+
+  private processInvalidTooltipDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setInvalidTooltipDisabledState(updatedValue);
+  }
+
+  private processInvalidTooltipChange(change: ComponentChange<this, Nullable<string>>): void {
+    const updatedValue: Nullable<string> | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setInvalidTooltipState(updatedValue);
+  }
+
+  private processInvalidTooltipContentTemplateChange(
+    change: ComponentChange<this, Nullable<TemplateRef<unknown>>>
+  ): void {
+    const updatedValue: Nullable<TemplateRef<unknown>> | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setInvalidTooltipContentTemplateState(updatedValue);
   }
 
   private handleIsExpandedChangesToEmitFocusEvents(): Subscription {
