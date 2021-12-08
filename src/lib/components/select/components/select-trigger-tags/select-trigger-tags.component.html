@@ -10,18 +10,18 @@
   #button
 >
   <div class="trigger__text">
-    <ng-container *ngIf="(isFilled$ | async) || (placeholder$ | async | isNullOrUndefined); else placeholder">
-      <div class="tags-container">
-        <ng-container *ngFor="let tag of renderTags$ | async">
+    <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
+      <div class="tags-container" #tagsContainer>
+        <div class="tag" *ngFor="let tag of renderTags$ | async; let count = count" [class.is-one]="count === 1">
           <ng-container
             [ngTemplateOutlet]="getSelectTriggerTagTemplateRef()"
             [ngTemplateOutletContext]="{ $implicit: tag }"
           ></ng-container>
-        </ng-container>
+        </div>
       </div>
 
-      <div class="tags-counter">
-        <pupa-tag [clickable]="true">+12</pupa-tag>
+      <div class="tags-counter" *ngIf="this.tagsOverflowCount$ | async as tagsOverflowCount">
+        <pupa-tag [size]="'small'" [clickable]="true">+{{ tagsOverflowCount }}</pupa-tag>
       </div>
     </ng-container>
   </div>
@@ -38,5 +38,7 @@
 </ng-template>
 
 <ng-template #defaultTemplate let-tag>
-  <pupa-tag>{{ tag }}</pupa-tag>
+  <pupa-tag class="default-tag"
+    ><span class="deafult-tag__name">{{ tag }}</span></pupa-tag
+  >
 </ng-template>

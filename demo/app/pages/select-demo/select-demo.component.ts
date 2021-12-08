@@ -70,15 +70,21 @@ export class SelectDemoComponent {
   };
 
   public readonly example9Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-9/example-9.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-9/example-9.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-9/example-9.component.ts`
+    HTML: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-9/example-9.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-9/example-9.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-9/example-9.component.ts`
   };
 
-  public readonly selectDemoTagsContainerExampleContent: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-tags-container/select-demo-tags-container-example/select-demo-tags-container-example.component.ts`
+  public readonly example10Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-10/example-10.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-10/example-10.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-multi-selection/example-10/example-10.component.ts`
+  };
+
+  public readonly example11Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-11/example-11.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-11/example-11.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-structure-composition/example-11/example-11.component.ts`
   };
 
   public readonly chipsFormControl: FormControl = new FormControl({ value: [], disabled: false });

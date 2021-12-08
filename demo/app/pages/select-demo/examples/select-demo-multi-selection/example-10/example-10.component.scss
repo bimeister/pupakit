@@ -1,0 +1,21 @@
+@import 'mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.select {
+  width: 80rem;
+  margin-bottom: 3rem;
+}
+
+.tag {
+  display: block;
+  max-width: 100%;
+
+  &__name {
+    @include ellipsis-text-overflow;
+  }
+}

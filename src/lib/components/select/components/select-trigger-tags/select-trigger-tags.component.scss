@@ -4,8 +4,12 @@
   width: 100%;
   display: flex;
   align-items: center;
+}
 
-  border: 1px dashed #000;
+.trigger {
+  &__text {
+    align-items: flex-start;
+  }
 }
 
 .tags-container {
@@ -21,5 +25,25 @@
 
 .tags-counter {
   flex: none;
-  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.tag {
+  padding-bottom: 1rem;
+
+  & + & {
+    padding-left: 1rem;
+  }
+
+  max-width: 170px;
+
+  &.is-one {
+    max-width: 100%;
+  }
+}
+
+.default-tag {
+  &__name {
+    @include ellipsis-text-overflow;
+  }
 }
