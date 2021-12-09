@@ -30,7 +30,7 @@
         <div class="input__icons-list" [ngClass]="size$ | async">
           <pupa-button-icon
             class="input__icon input__icon-calendar"
-            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'app-cross-circle':'ios-calendar'"
+            [icon]="dateToResetSwitcherEnabled$ | conditionAsync: 'app-cross-circle':'app-calendar'"
             size="small"
             tabIndex="-1"
             (mouseout)="handleIconHover($event, false)"
@@ -42,7 +42,7 @@
           <pupa-button-icon
             *ngIf="isInvalid$ | async"
             class="input__icon input__icon-invalid"
-            icon="ios-information-circle-outline"
+            icon="app-info"
             kind="subtle-danger"
             size="small"
             tabIndex="-1"

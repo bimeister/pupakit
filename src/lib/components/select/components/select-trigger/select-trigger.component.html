@@ -16,7 +16,7 @@
   </div>
 
   <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
-    <pupa-icon name="ios-arrow-down"></pupa-icon>
+    <pupa-icon name="app-chevron-down"></pupa-icon>
   </div>
 </button>
 
@@ -34,7 +34,7 @@
   <pupa-button-icon
     *ngIf="isInvalid$ | async"
     class="icons__icon icons__icon-invalid"
-    icon="ios-information-circle-outline"
+    icon="app-info"
     kind="subtle-danger"
     size="small"
     tabIndex="-1"
@@ -42,6 +42,7 @@
     [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
     [tooltipDisabled]="isInvalidTooltipDisabled$ | async"
     [tooltipContentTemplate]="invalidTooltipContentTemplate$ | async"
+    (click)="button.click()"
   >
   </pupa-button-icon>
 </div>

@@ -1,8 +1,8 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { NgModule, Type } from '@angular/core';
+import { appChevronDownIcon } from '../../../internal/constants/icons/app-chevron-down-icon.const';
 import { appCrossCircleIcon } from '../../../internal/constants/icons/app-cross-circle-icon.const';
-import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
-import { iosInformationCircleOutlineIcon } from '../../../internal/constants/icons/ios-information-circle-outline-icon.const';
+import { appInfoIcon } from '../../../internal/constants/icons/app-info-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { ButtonModule } from '../button/button.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
@@ -59,7 +59,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     CheckboxModule,
     TagModule,
     ButtonModule,
-    IconModule.forFeature([iosArrowDownIcon, appCrossCircleIcon, iosInformationCircleOutlineIcon]),
+    IconModule.forFeature([appChevronDownIcon, appCrossCircleIcon, appInfoIcon]),
   ],
   exports: [...EXPORTS],
 })
