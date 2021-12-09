@@ -1,0 +1,103 @@
+<pupa-select
+  class="select"
+  #select
+  [placeholder]="'Placeholder'"
+  [isMultiSelectionEnabled]="true"
+  [formControl]="control"
+>
+  <pupa-select-trigger-tags class="trigger" [tags]="selectedUsers$ | async">
+    <ng-container *pupaSelectTriggerTagTemplate="let user">
+      <pupa-tag class="tag" [clickable]="true" [size]="'small'" [pupaTooltip]="user.username">
+        <pupa-avatar [username]="user.username"></pupa-avatar>
+        <span class="tag__name">{{ user.username }}</span>
+        <pupa-pupa-tag-delete-button (click)="handleUserDelete(user, $event)"></pupa-pupa-tag-delete-button>
+      </pupa-tag>
+    </ng-container>
+  </pupa-select-trigger-tags>
+
+  <pupa-select-dropdown #dropdown>
+    <pupa-theme-wrapper [theme]="theme$ | async">
+      <pupa-button-group-container class="group-container" *ngIf="dropdown.isExpanded$ | async">
+        <pupa-select-dropdown-header class="header">
+          <pupa-search-field
+            class="header__search"
+            [formControl]="searchControl"
+            placeholder="Search"
+            [collapsible]="false"
+          >
+          </pupa-search-field>
+
+          <pupa-button-group class="button-group">
+            <pupa-button-group-item class="button-group__item" name="group-1"> Group 1 </pupa-button-group-item>
+            <pupa-button-group-item class="button-group__item" name="group-2"> Group 2 </pupa-button-group-item>
+          </pupa-button-group>
+        </pupa-select-dropdown-header>
+
+        <pupa-select-options-container [fixedHeightPx]="200">
+          <pupa-button-group-content>
+            <ng-container *pupaButtonGroupItemContentTemplate="'group-1'">
+              <cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="virtual-scroll-viewport">
+                <pupa-select-option
+                  *cdkVirtualFor="let user of usersByGroup1$ | async"
+                  [heightPx]="itemSizePx"
+                  [value]="user.id"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="userTemplate"
+                    [ngTemplateOutletContext]="{ $implicit: user }"
+                  ></ng-container>
+                </pupa-select-option>
+
+                <ng-container *ngIf="usersByGroup2IsEmpty$ | async">
+                  <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
+                </ng-container>
+              </cdk-virtual-scroll-viewport>
+            </ng-container>
+
+            <ng-container *pupaButtonGroupItemContentTemplate="'group-2'">
+              <cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="virtual-scroll-viewport">
+                <pupa-select-option
+                  *cdkVirtualFor="let user of usersByGroup2$ | async"
+                  [heightPx]="itemSizePx"
+                  [value]="user.id"
+                >
+                  <ng-container
+                    [ngTemplateOutlet]="userTemplate"
+                    [ngTemplateOutletContext]="{ $implicit: user }"
+                  ></ng-container>
+                </pupa-select-option>
+
+                <ng-container *ngIf="usersByGroup1IsEmpty$ | async">
+                  <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
+                </ng-container>
+              </cdk-virtual-scroll-viewport>
+            </ng-container>
+          </pupa-button-group-content>
+        </pupa-select-options-container>
+      </pupa-button-group-container>
+
+      <pupa-select-dropdown-footer>
+        <div class="footer">
+          <pupa-switcher [formControl]="selectedControl"></pupa-switcher>
+          <div class="footer__option">Only selected</div>
+        </div>
+      </pupa-select-dropdown-footer>
+    </pupa-theme-wrapper>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<ng-template #userTemplate let-user>
+  <div class="user">
+    <pupa-avatar class="user__avatar" [username]="user.username" [size]="'medium'"></pupa-avatar>
+    <div class="user__name-wrapper">
+      <div class="user__name">{{ user.name }}&nbsp;{{ user.surname }}</div>
+      <div class="user__login">{{ user.login }}</div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #placeholderTemplate>
+  <div class="placeholder">
+    <div class="placeholder__text">No data for display</div>
+  </div>
+</ng-template>

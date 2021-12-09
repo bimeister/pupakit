@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, HostListener, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 
 import { SelectOptionsContainerBase } from '../../../../../internal/declarations/classes/abstract/select-options-container-base.abstract';
 
@@ -10,6 +10,8 @@ import { SelectOptionsContainerBase } from '../../../../../internal/declarations
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectOptionsContainerComponent extends SelectOptionsContainerBase {
+  @Input() public fixedHeightPx: number = null;
+
   @HostListener('click', ['$event'])
   @HostListener('touchstart', ['$event'])
   public stopPropagation(event: Event): void {

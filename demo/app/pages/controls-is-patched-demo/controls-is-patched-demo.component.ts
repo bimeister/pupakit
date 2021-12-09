@@ -11,6 +11,7 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
 })
 export class ControlsIsPatchedDemoComponent {
   public readonly formControl: FormControl = new FormControl(null, Validators.required);
+  public readonly controlRange: FormControl = new FormControl([], Validators.required);
 
   public readonly typeOptions: RadioOption[] = [
     {
