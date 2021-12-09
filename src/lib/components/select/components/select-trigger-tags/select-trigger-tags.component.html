@@ -65,7 +65,7 @@
 </ng-template>
 
 <ng-template #defaultTemplate let-tag>
-  <pupa-tag class="default-tag"
-    ><span class="deafult-tag__name">{{ tag }}</span></pupa-tag
-  >
+  <pupa-tag class="default-tag" [clickable]="true" [size]="'small'">
+    <span class="deafult-tag__name">{{ tag }}</span>
+  </pupa-tag>
 </ng-template>

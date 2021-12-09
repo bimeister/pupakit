@@ -11,7 +11,7 @@
 
           <pupa-search-field
             [formControl]="formControl"
-            placeholder="Поиск"
+            placeholder="Search"
             [collapsible]="true"
             [collapseDirection]="collapseDirection | async"
           >
@@ -19,7 +19,8 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="false">
-          <pupa-search-field [formControl]="formControl" placeholder="Поиск" [collapsible]="false"> </pupa-search-field>
+          <pupa-search-field [formControl]="formControl" placeholder="Search" [collapsible]="false">
+          </pupa-search-field>
         </ng-container>
       </ng-container>
     </div>

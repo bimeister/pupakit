@@ -83,21 +83,26 @@
   <span>input date-range</span>
   <pupa-input-date-range
     class="controls__control"
-    [formControl]="formControl"
+    [formControl]="controlRange"
     [isPatched]="isPatched | async"
   ></pupa-input-date-range>
 
   <span>input date-range-double</span>
   <pupa-input-date-range-double
     class="controls__control"
-    [formControl]="formControl"
+    [formControl]="controlRange"
     [isPatched]="isPatched | async"
   ></pupa-input-date-range-double>
 </ng-template>
 
 <ng-template #selectsTemplate>
   <span>select regular</span>
-  <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
+  <pupa-select
+    class="controls__control"
+    [formControl]="formControl"
+    [isPatched]="isPatched | async"
+    [invalidTooltip]="'Required field'"
+  >
     <pupa-select-trigger> select regular </pupa-select-trigger>
     <pupa-select-dropdown>
       <pupa-select-options-container>
@@ -111,9 +116,8 @@
   <span>select-button-input</span>
   <pupa-select class="controls__control" [formControl]="formControl" [isPatched]="isPatched | async">
     <pupa-select-trigger-input [placeholder]="'select-button-input'">
-      <pupa-icon-button [size]="'small'" [color]="'light-blue'" class="content-icon">
-        <pupa-icon name="md-lock"></pupa-icon>
-      </pupa-icon-button>
+      <pupa-button-icon [size]="'small'" [icon]="'app-notification'" [kind]="'border'" class="content-icon">
+      </pupa-button-icon>
     </pupa-select-trigger-input>
 
     <pupa-select-dropdown>

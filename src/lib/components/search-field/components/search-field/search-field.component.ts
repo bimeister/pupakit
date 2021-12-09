@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
+import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, switchMapTo, take, tap } from 'rxjs/operators';
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
@@ -71,6 +71,10 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
   public setValue(value: Nullable<string>): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
+
+    if (!isEmpty(serializedValue)) {
+      this.isFilled$.next(true);
+    }
   }
 
   public reset(): void {
