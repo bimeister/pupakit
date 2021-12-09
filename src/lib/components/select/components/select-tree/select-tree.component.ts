@@ -18,7 +18,10 @@ import { TreeComponent } from '../../../tree/components/tree/tree.component';
 import { SelectStateService } from '../../services/select-state.service';
 import { SelectTreeBase } from './../../../../../internal/declarations/classes/abstract/select-tree-base.abstract';
 
-/** @deprecated remove ViewEncapsulation.None when tree styling is available */
+/**
+ * @deprecated remove ViewEncapsulation.None when tree styling is available
+ * need support new design
+ */
 @Component({
   selector: 'pupa-select-tree',
   templateUrl: './select-tree.component.html',

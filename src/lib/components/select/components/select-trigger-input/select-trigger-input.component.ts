@@ -20,6 +20,9 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 import { SelectStateService } from '../../services/select-state.service';
 import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 
+/**
+ * @deprecated need support new design
+ */
 @Component({
   selector: 'pupa-select-trigger-input',
   templateUrl: './select-trigger-input.component.html',

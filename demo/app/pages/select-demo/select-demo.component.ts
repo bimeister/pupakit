@@ -86,4 +86,16 @@ export class SelectDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-13/example-13.component.scss`,
     TS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-13/example-13.component.ts`,
   };
+
+  public readonly example14Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.ts`
+  };
+
+  public readonly example15Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.ts`
+  };
 }

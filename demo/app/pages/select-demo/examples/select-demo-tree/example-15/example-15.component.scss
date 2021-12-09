@@ -1,0 +1,24 @@
+@import 'mixins';
+
+:host {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.select {
+  width: 80rem;
+  margin-bottom: 3rem;
+}
+
+.custom-template {
+  display: flex;
+
+  &__name {
+    @include ellipsis-text-overflow;
+  }
+
+  &__spinner {
+    margin-right: 1rem;
+  }
+}
