@@ -1,0 +1,23 @@
+<pupa-select class="select" [isMultiSelectionEnabled]="true" [placeholder]="'Placeholder'" [formControl]="control">
+  <pupa-select-trigger> Selected: {{ control.value.length }} </pupa-select-trigger>
+
+  <pupa-select-dropdown>
+    <pupa-select-tree
+      type="flat"
+      [flatDataOrigin]="treeDataOrigin"
+      [nodeTemplate]="customNodeTemplate"
+      [isLoading]="isLoading$ | async"
+    ></pupa-select-tree>
+
+    <pupa-select-dropdown-footer>
+      <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
+    </pupa-select-dropdown-footer>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<ng-template #customNodeTemplate let-node="node">
+  <div class="custom-template">
+    <pupa-spinner class="custom-template__spinner" [size]="'16px'"></pupa-spinner>
+    <span class="custom-template__name">{{ node?.name }}</span>
+  </div>
+</ng-template>
