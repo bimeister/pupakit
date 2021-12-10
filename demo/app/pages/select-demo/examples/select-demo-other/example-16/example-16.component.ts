@@ -21,20 +21,20 @@ const GROUP_1_USERS: User[] = Array(DEFAULT_USERS_COUNT)
   .fill(null)
   .map((_, index: number) => ({
     id: getUuid(),
-    name: `Name ${index + 1}`,
-    surname: `Surname ${index + 1}`,
+    name: `Name${index + 1}`,
+    surname: `Surname${index + 1}`,
     login: `login${index + 1}@login.com`,
-    username: `Name ${index + 1} Surname ${index + 1}`
+    username: `Name${index + 1} Surname${index + 1}`
   }));
 
 const GROUP_2_USERS: User[] = Array(DEFAULT_USERS_COUNT)
   .fill(null)
   .map((_, index: number) => ({
     id: getUuid(),
-    name: `Name ${DEFAULT_USERS_COUNT + index + 1}`,
-    surname: `Surname ${DEFAULT_USERS_COUNT + index + 1}`,
+    name: `Name${DEFAULT_USERS_COUNT + index + 1}`,
+    surname: `Surname${DEFAULT_USERS_COUNT + index + 1}`,
     login: `login${DEFAULT_USERS_COUNT + index + 1}@login.com`,
-    username: `Name ${DEFAULT_USERS_COUNT + index + 1} Surname ${DEFAULT_USERS_COUNT + index + 1}`
+    username: `Name${DEFAULT_USERS_COUNT + index + 1} Surname${DEFAULT_USERS_COUNT + index + 1}`
   }));
 
 const USERS_MAP: Map<string, User> = new Map([...GROUP_1_USERS, ...GROUP_2_USERS].map((user: User) => [user.id, user]));
