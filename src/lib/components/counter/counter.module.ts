@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { CounterComponent } from './components/chip/counter.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [CounterComponent],
