@@ -1,0 +1,72 @@
+<div class="settings">
+  <pupa-switcher class="settings__control" [formControl]="isPatchedControl"></pupa-switcher>
+  <div class="settings__label">isPatched: show validation before touch control</div>
+</div>
+
+<div class="settings">
+  <pupa-switcher class="settings__control" [formControl]="invalidTooltipDisabledControl"></pupa-switcher>
+  <div class="settings__label">error tooltip massage disabled: not shown in this case</div>
+</div>
+
+<p>Base use of error tooltip</p>
+<pupa-select
+  class="select"
+  [placeholder]="'Placeholder'"
+  [isMultiSelectionEnabled]="true"
+  [withReset]="true"
+  [invalidTooltip]="'Required filed'"
+  [invalidTooltipDisabled]="invalidTooltipDisabledControl.value"
+  [isPatched]="isPatchedControl.value"
+  [formControl]="control1"
+>
+  <pupa-select-trigger-tags class="trigger" [tags]="control1.value">
+    <pupa-tag class="tag" [clickable]="true" [size]="'small'" *pupaSelectTriggerTagTemplate="let tag">
+      <pupa-icon class="tag__icon" name="app-cube"></pupa-icon>
+      <span class="tag__name">{{ tag }}</span>
+      <pupa-pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-pupa-tag-delete-button>
+    </pupa-tag>
+  </pupa-select-trigger-tags>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let option of options" [value]="option">
+        <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
+      </pupa-select-option>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<p>Custom template of error tooltip</p>
+<pupa-select
+  class="select"
+  [placeholder]="'Placeholder'"
+  [isMultiSelectionEnabled]="true"
+  [withReset]="true"
+  [invalidTooltipContentTemplate]="errorMessageTemplate"
+  [invalidTooltipDisabled]="invalidTooltipDisabledControl.value"
+  [isPatched]="isPatchedControl.value"
+  [formControl]="control2"
+>
+  <pupa-select-trigger-tags class="trigger" [tags]="control2.value">
+    <pupa-tag class="tag" [clickable]="true" [size]="'small'" *pupaSelectTriggerTagTemplate="let tag">
+      <pupa-icon class="tag__icon" name="app-cube"></pupa-icon>
+      <span class="tag__name">{{ tag }}</span>
+      <pupa-pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-pupa-tag-delete-button>
+    </pupa-tag>
+  </pupa-select-trigger-tags>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let option of options" [value]="option">
+        <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
+      </pupa-select-option>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<ng-template #errorMessageTemplate>
+  <div class="error">
+    <pupa-spinner class="error__spinner" [size]="'16px'"></pupa-spinner>
+    <div class="error__message">Required field</div>
+  </div>
+</ng-template>

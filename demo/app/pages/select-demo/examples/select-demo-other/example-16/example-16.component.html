@@ -48,7 +48,7 @@
                   ></ng-container>
                 </pupa-select-option>
 
-                <ng-container *ngIf="usersByGroup2IsEmpty$ | async">
+                <ng-container *ngIf="usersByGroup1IsEmpty$ | async">
                   <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
                 </ng-container>
               </cdk-virtual-scroll-viewport>
@@ -67,7 +67,7 @@
                   ></ng-container>
                 </pupa-select-option>
 
-                <ng-container *ngIf="usersByGroup1IsEmpty$ | async">
+                <ng-container *ngIf="usersByGroup2IsEmpty$ | async">
                   <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
                 </ng-container>
               </cdk-virtual-scroll-viewport>

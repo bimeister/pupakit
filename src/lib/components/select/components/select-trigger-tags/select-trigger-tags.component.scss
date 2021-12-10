@@ -8,7 +8,7 @@
 
 .trigger {
   &__text {
-    align-items: flex-start;
+    align-items: center;
   }
 }
 
@@ -19,6 +19,8 @@
   align-items: flex-start;
   align-self: flex-start;
   flex-wrap: wrap;
+
+  padding-top: 1px;
 
   flex: 1;
 }

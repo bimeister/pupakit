@@ -104,4 +104,10 @@ export class SelectDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.scss`,
     TS: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.ts`
   };
+
+  public readonly example17Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.ts`
+  };
 }
