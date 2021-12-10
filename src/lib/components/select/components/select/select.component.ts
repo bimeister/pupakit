@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   HostListener,
   Input,
   Optional,
@@ -35,19 +34,15 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public invalidTooltip: Nullable<string> = null;
   @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
-  constructor(
-    selectStateService: SelectStateService<T>,
-    elementRef: ElementRef<HTMLElement>,
-    @Optional() ngControl: NgControl
-  ) {
-    super(selectStateService, elementRef, ngControl);
+  constructor(selectStateService: SelectStateService<T>, @Optional() ngControl: NgControl) {
+    super(selectStateService, ngControl);
   }
 
-  @HostListener('window:resize', ['$event'])
-  @HostListener('window:touchstart', ['$event'])
-  @HostListener('window:click', ['$event'])
-  @HostListener('window:wheel', ['$event'])
-  public closeOnOuterEvents(event: Event): void {
-    this.processCloseEvent(event);
+  @HostListener('document:resize', ['$event'])
+  @HostListener('document:touchstart', ['$event'])
+  @HostListener('document:mousedown', ['$event'])
+  @HostListener('document:wheel', ['$event'])
+  public closeOnOuterEvents(): void {
+    this.processCloseEvent();
   }
 }

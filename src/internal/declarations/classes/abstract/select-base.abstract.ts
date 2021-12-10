@@ -1,9 +1,7 @@
-import { OverlayRef } from '@angular/cdk/overlay';
-import { Directive, ElementRef, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
+import { Directive, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { getElementAllNestedChildren, isNil, Nullable } from '@bimeister/utilities';
+import { isNil, Nullable } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
@@ -30,11 +28,7 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(
-    private readonly selectStateService: SelectStateService<T>,
-    private readonly elementRef: ElementRef<HTMLElement>,
-    ngControl: NgControl
-  ) {
+  constructor(protected readonly selectStateService: SelectStateService<T>, ngControl: NgControl) {
     if (isNil(ngControl)) {
       return;
     }
@@ -45,36 +39,8 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.subscription.add(this.handleIsExpandedChangesToEmitFocusEvents());
   }
 
-  protected processCloseEvent(event: Event): void {
-    const eventTarget: EventTarget = event.target;
-
-    if (!(eventTarget instanceof Element)) {
-      this.selectStateService.collapse();
-      return;
-    }
-
-    this.selectStateService.dropdownOverlayRef$
-      .pipe(
-        take(1),
-        map((overlayRef: OverlayRef | null | undefined) => (isNil(overlayRef) ? null : overlayRef.overlayElement))
-      )
-      .subscribe((overlayElement: Element | null) => {
-        const currentComponentElement: Element = this.elementRef.nativeElement;
-        const currentComponentElementChildren: Element[] = getElementAllNestedChildren(currentComponentElement);
-
-        const dropdownElementChildren: Element[] = isNil(overlayElement)
-          ? []
-          : getElementAllNestedChildren(overlayElement);
-
-        const dropdownElements: Element[] = [...currentComponentElementChildren, ...dropdownElementChildren];
-        const isInnerEvent: boolean = dropdownElements.includes(eventTarget);
-
-        if (isInnerEvent) {
-          return;
-        }
-
-        this.selectStateService.collapse();
-      });
+  protected processCloseEvent(): void {
+    this.selectStateService.collapse();
   }
 
   public abstract closeOnOuterEvents(event: Event): void;
