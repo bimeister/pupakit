@@ -36,41 +36,53 @@
         <pupa-select-options-container [fixedHeightPx]="200">
           <pupa-button-group-content>
             <ng-container *pupaButtonGroupItemContentTemplate="'group-1'">
-              <cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="virtual-scroll-viewport">
-                <pupa-select-option
-                  *cdkVirtualFor="let user of usersByGroup1$ | async"
-                  [heightPx]="itemSizePx"
-                  [value]="user.id"
+              <pupa-scrollable class="scrollable">
+                <cdk-virtual-scroll-viewport
+                  pupaScrollableContent
+                  [itemSize]="itemSizePx"
+                  class="virtual-scroll-viewport"
                 >
-                  <ng-container
-                    [ngTemplateOutlet]="userTemplate"
-                    [ngTemplateOutletContext]="{ $implicit: user }"
-                  ></ng-container>
-                </pupa-select-option>
+                  <pupa-select-option
+                    *cdkVirtualFor="let user of usersByGroup1$ | async"
+                    [heightPx]="itemSizePx"
+                    [value]="user.id"
+                  >
+                    <ng-container
+                      [ngTemplateOutlet]="userTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: user }"
+                    ></ng-container>
+                  </pupa-select-option>
 
-                <ng-container *ngIf="usersByGroup1IsEmpty$ | async">
-                  <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
-                </ng-container>
-              </cdk-virtual-scroll-viewport>
+                  <ng-container *ngIf="usersByGroup1IsEmpty$ | async">
+                    <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
+                  </ng-container>
+                </cdk-virtual-scroll-viewport>
+              </pupa-scrollable>
             </ng-container>
 
             <ng-container *pupaButtonGroupItemContentTemplate="'group-2'">
-              <cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="virtual-scroll-viewport">
-                <pupa-select-option
-                  *cdkVirtualFor="let user of usersByGroup2$ | async"
-                  [heightPx]="itemSizePx"
-                  [value]="user.id"
+              <pupa-scrollable class="scrollable">
+                <cdk-virtual-scroll-viewport
+                  pupaScrollableContent
+                  [itemSize]="itemSizePx"
+                  class="virtual-scroll-viewport"
                 >
-                  <ng-container
-                    [ngTemplateOutlet]="userTemplate"
-                    [ngTemplateOutletContext]="{ $implicit: user }"
-                  ></ng-container>
-                </pupa-select-option>
+                  <pupa-select-option
+                    *cdkVirtualFor="let user of usersByGroup2$ | async"
+                    [heightPx]="itemSizePx"
+                    [value]="user.id"
+                  >
+                    <ng-container
+                      [ngTemplateOutlet]="userTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: user }"
+                    ></ng-container>
+                  </pupa-select-option>
 
-                <ng-container *ngIf="usersByGroup2IsEmpty$ | async">
-                  <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
-                </ng-container>
-              </cdk-virtual-scroll-viewport>
+                  <ng-container *ngIf="usersByGroup2IsEmpty$ | async">
+                    <ng-container [ngTemplateOutlet]="placeholderTemplate"></ng-container>
+                  </ng-container>
+                </cdk-virtual-scroll-viewport>
+              </pupa-scrollable>
             </ng-container>
           </pupa-button-group-content>
         </pupa-select-options-container>

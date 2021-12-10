@@ -29,9 +29,11 @@
 
   <pupa-select-dropdown>
     <pupa-select-options-container>
-      <pupa-select-option *ngFor="let option of options" [value]="option">
-        <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
-      </pupa-select-option>
+      <pupa-scrollable class="scrollable">
+        <pupa-select-option *ngFor="let option of options" [value]="option">
+          <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
+        </pupa-select-option>
+      </pupa-scrollable>
     </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
@@ -57,9 +59,11 @@
 
   <pupa-select-dropdown>
     <pupa-select-options-container>
-      <pupa-select-option *ngFor="let option of options" [value]="option">
-        <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
-      </pupa-select-option>
+      <pupa-scrollable class="scrollable">
+        <pupa-select-option *ngFor="let option of options" [value]="option">
+          <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
+        </pupa-select-option>
+      </pupa-scrollable>
     </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
