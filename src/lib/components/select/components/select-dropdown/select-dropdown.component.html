@@ -8,7 +8,13 @@
   (attach)="handleAttachOverlay()"
   (detach)="handleDetachOverlay()"
 >
-  <div class="select-dropdown-wrapper" [ngClass]="themeClass$ | async">
+  <div
+    class="select-dropdown-wrapper"
+    (wheel)="processEventPropagation($event)"
+    (mousedown)="processEventPropagation($event)"
+    (touchstart)="processEventPropagation($event)"
+    [ngClass]="themeClass$ | async"
+  >
     <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
       <ng-content></ng-content>
     </section>

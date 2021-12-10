@@ -44,6 +44,10 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public processEventPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
   public handleAttachOverlay(): void {
     this.isOverlayAttached$.next(true);
   }
