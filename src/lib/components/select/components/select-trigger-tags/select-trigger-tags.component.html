@@ -21,7 +21,7 @@
       </div>
 
       <div class="tags-counter" *ngIf="this.tagsOverflowCount$ | async as tagsOverflowCount">
-        <pupa-tag [size]="'small'" [clickable]="true">+{{ tagsOverflowCount }}</pupa-tag>
+        <pupa-tag [size]="'small'" [clickable]="true">+{{ tagsOverflowCount | formatCount }}</pupa-tag>
       </div>
     </ng-container>
   </div>
