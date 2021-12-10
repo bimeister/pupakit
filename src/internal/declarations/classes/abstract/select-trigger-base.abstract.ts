@@ -1,6 +1,6 @@
 import { CdkOverlayOrigin } from '@angular/cdk/overlay';
 import { AfterViewInit, Directive, ElementRef, OnInit, TemplateRef } from '@angular/core';
-import { distinctUntilSerializedChanged, filterFalsy, isNil, Nullable } from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
@@ -66,7 +66,7 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
         Nullable<string>,
         Nullable<TemplateRef<unknown>>,
         boolean
-      ]) => (!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled)
+      ]) => (isEmpty(invalidTooltip) && isNil(invalidTooltipContentTemplate) ? true : invalidTooltipDisabled)
     )
   );
 
