@@ -10,12 +10,15 @@ import { DrawerRef } from '../../../../../internal/declarations/classes/drawer-r
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DrawerLayoutActionComponent<ValueT> {
-  @Input() public value: Nullable<ValueT> = null;
+  @Input() public value: Nullable<ValueT> | 'none' = 'none';
 
   constructor(@Inject(DrawerRef) private readonly drawerRef: DrawerRef<ValueT>) {}
 
   @HostListener('click')
   public processActionClick(): void {
+    if (this.value === 'none') {
+      return;
+    }
     this.drawerRef.close(this.value);
   }
 }
