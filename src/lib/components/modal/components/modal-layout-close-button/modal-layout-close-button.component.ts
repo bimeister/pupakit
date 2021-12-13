@@ -15,7 +15,7 @@ export class ModalLayoutCloseButtonComponent<ValueT> {
   constructor(@Inject(ModalRef) private readonly modalRef: ModalRef<ValueT>) {}
 
   @HostListener('click')
-  public processCloseBUttonClick(): void {
+  public processCloseButtonClick(): void {
     this.modalRef.close(this.value);
   }
 }
