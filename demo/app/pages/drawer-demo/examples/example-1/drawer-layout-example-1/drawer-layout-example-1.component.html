@@ -36,7 +36,9 @@
 
         <pupa-tabs-content>
           <ng-container *ngFor="let tab of tabs">
-            <div *pupaTabsItemContentTemplate="tab.name">{{ tab.text }}</div>
+            <div *pupaTabsItemContentTemplate="tab.name">
+              <div class="box"></div>
+            </div>
           </ng-container>
         </pupa-tabs-content>
       </pupa-tabs-container>
