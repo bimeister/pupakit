@@ -10,9 +10,12 @@
   max-height: 100%;
   box-sizing: border-box;
   width: 100%;
-  padding: 5rem 11rem 0rem 11rem;
 
-  @include xs() {
-    padding: 4rem 5rem 0rem 5rem;
+  &__scrollable {
+    padding: 5rem 11rem 0rem 11rem;
+
+    @include xs() {
+      padding: 4rem 5rem 0rem 5rem;
+    }
   }
 }
