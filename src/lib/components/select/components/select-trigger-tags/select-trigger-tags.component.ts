@@ -11,7 +11,7 @@ import {
   OnDestroy,
   TemplateRef,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { filterNotNil, isEmpty, isNil, Nullable, resizeObservable } from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -19,7 +19,7 @@ import { debounceTime, distinctUntilChanged, map, observeOn, switchMap, withLate
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { SelectTriggerTagContext } from '../../../../../internal/declarations/interfaces/select-trigger-tag-context.interface';
-import { PupaSelectTriggerTagTemplate } from '../../directives/select-trigger-tag-template.directive';
+import { PupaSelectTriggerTagTemplateDirective } from '../../directives/select-trigger-tag-template.directive';
 import { SelectStateService } from '../../services/select-state.service';
 import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 
@@ -31,7 +31,7 @@ const RESIZE_DEBOUNCE_TIME_MS: number = 200;
   templateUrl: './select-trigger-tags.component.html',
   styleUrls: ['./select-trigger-tags.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
@@ -41,7 +41,8 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
   public readonly renderTags$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   private readonly tagsTotalCount$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 
-  @ContentChild(PupaSelectTriggerTagTemplate) public readonly selectTriggerTagTemplate: PupaSelectTriggerTagTemplate<T>;
+  @ContentChild(PupaSelectTriggerTagTemplateDirective)
+  public readonly selectTriggerTagTemplate: PupaSelectTriggerTagTemplateDirective<T>;
 
   @ViewChild('defaultTemplate') private readonly defaultTemplateRef: TemplateRef<SelectTriggerTagContext<T>>;
 

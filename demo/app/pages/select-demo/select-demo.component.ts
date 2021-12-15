@@ -90,24 +90,24 @@ export class SelectDemoComponent {
   public readonly example14Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.ts`
+    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-14/example-14.component.ts`,
   };
 
   public readonly example15Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.ts`
+    TS: `${BASE_REQUEST_PATH}/select-demo-tree/example-15/example-15.component.ts`,
   };
 
   public readonly example16Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.ts`
+    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-16/example-16.component.ts`,
   };
 
   public readonly example17Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.ts`
+    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.ts`,
   };
 }

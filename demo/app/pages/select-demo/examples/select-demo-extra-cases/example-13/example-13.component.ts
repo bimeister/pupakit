@@ -13,7 +13,7 @@ const SELECT_OPTIONS: SelectOption[] = [
   { value: 2, caption: 'Report 2' },
   { value: 3, caption: 'Report 3' },
   { value: 4, caption: 'Report 4' },
-  { value: 5, caption: 'Report 5' }
+  { value: 5, caption: 'Report 5' },
 ];
 
 @Component({
@@ -21,7 +21,7 @@ const SELECT_OPTIONS: SelectOption[] = [
   templateUrl: './example-13.component.html',
   styleUrls: ['./example-13.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectExample13Component {
   public readonly control: FormControl = new FormControl();

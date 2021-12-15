@@ -23,7 +23,7 @@ import { SelectTriggerInputComponent } from './components/select-trigger-input/s
 import { SelectTriggerTagsComponent } from './components/select-trigger-tags/select-trigger-tags.component';
 import { SelectTriggerComponent } from './components/select-trigger/select-trigger.component';
 import { SelectComponent } from './components/select/select.component';
-import { PupaSelectTriggerTagTemplate } from './directives/select-trigger-tag-template.directive';
+import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigger-tag-template.directive';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -44,7 +44,7 @@ const COMPONENTS: Type<unknown>[] = [
   SelectDropdownFooterComponent,
 ];
 
-const DIRECTIVES: Type<unknown>[] = [PupaSelectTriggerTagTemplate];
+const DIRECTIVES: Type<unknown>[] = [PupaSelectTriggerTagTemplateDirective];
 
 const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
 const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
