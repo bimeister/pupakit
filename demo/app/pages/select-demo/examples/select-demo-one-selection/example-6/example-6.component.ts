@@ -6,7 +6,7 @@ import { FormControl } from '@angular/forms';
   templateUrl: './example-6.component.html',
   styleUrls: ['./example-6.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectExample6Component {
   public readonly control: FormControl = new FormControl([]);

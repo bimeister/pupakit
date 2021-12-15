@@ -8,7 +8,7 @@ const OPTIONS_COUNT: number = 10;
   templateUrl: './example-17.component.html',
   styleUrls: ['./example-17.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectExample17Component {
   public readonly control1: FormControl = new FormControl([], Validators.required);
@@ -19,5 +19,5 @@ export class SelectExample17Component {
 
   public readonly options: string[] = Array(OPTIONS_COUNT)
     .fill(null)
-    .map((_, index: number) => `Option ${index + 1}`);
+    .map((_: null, index: number) => `Option ${index + 1}`);
 }

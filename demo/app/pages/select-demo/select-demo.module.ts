@@ -37,7 +37,7 @@ const EXAMPLES: Type<unknown>[] = [
   SelectExample14Component,
   SelectExample15Component,
   SelectExample16Component,
-  SelectExample17Component
+  SelectExample17Component,
 ];
 const COMPONENTS: Type<unknown>[] = [SelectDemoComponent, ...EXAMPLES];
 

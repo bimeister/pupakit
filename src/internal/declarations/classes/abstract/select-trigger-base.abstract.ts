@@ -45,7 +45,7 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   public readonly isVisibleReset$: Observable<boolean> = combineLatest([
     this.withReset$,
     this.isFilled$,
-    this.isDisabled$
+    this.isDisabled$,
   ]).pipe(
     map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
   );
@@ -59,7 +59,7 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   public readonly isInvalidTooltipDisabled$: Observable<boolean> = combineLatest([
     this.invalidTooltip$,
     this.invalidTooltipContentTemplate$,
-    this.invalidTooltipDisabled$
+    this.invalidTooltipDisabled$,
   ]).pipe(
     map(
       ([invalidTooltip, invalidTooltipContentTemplate, invalidTooltipDisabled]: [

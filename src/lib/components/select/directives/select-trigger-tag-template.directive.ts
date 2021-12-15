@@ -2,9 +2,9 @@ import { Directive, Input, TemplateRef } from '@angular/core';
 import { SelectTriggerTagContext } from '../../../../internal/declarations/interfaces/select-trigger-tag-context.interface';
 
 @Directive({
-  selector: '[pupaSelectTriggerTagTemplate]'
+  selector: '[pupaSelectTriggerTagTemplate]',
 })
-export class PupaSelectTriggerTagTemplate<T> {
+export class PupaSelectTriggerTagTemplateDirective<T> {
   @Input() public pupaSelectTriggerTagTemplateTypeFrom: T;
 
   constructor(public readonly templateRef: TemplateRef<SelectTriggerTagContext<T>>) {}

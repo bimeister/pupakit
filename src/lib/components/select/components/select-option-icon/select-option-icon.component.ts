@@ -5,7 +5,7 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
   templateUrl: './select-option-icon.component.html',
   styleUrls: ['./select-option-icon.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectOptionIconComponent {
   @Input() public name: string;
