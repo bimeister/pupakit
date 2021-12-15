@@ -7,11 +7,12 @@
   width: 100%;
 }
 
-.item {
+.option {
   box-sizing: border-box;
   height: 8rem;
   width: 100%;
   cursor: pointer;
+  position: relative;
 
   background-color: color(base-n0);
   color: color(base-n600);
@@ -33,12 +34,23 @@
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  --select-item-icon-color: #{color(base-white-n200)};
+  --select-option-icon-color: #{color(base-white-n200)};
 
-  &:not(.item_disabled) {
+  &::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    content: '';
+    width: 0.5rem;
+    background-color: transparent;
+    pointer-events: none;
+  }
+
+  &:not(.option_disabled) {
     @include hover() {
       background-color: color(base-white-n400);
-      --select-item-icon-color: #{color(base-n600)};
+      --select-option-icon-color: #{color(base-n600)};
     }
   }
 
@@ -46,39 +58,35 @@
     cursor: not-allowed;
     background-color: color(base-n0);
     color: color(base-white-n275);
-    --select-item-icon-color: #{color(base-white-n250)};
+    --select-option-icon-color: #{color(base-white-n250)};
   }
 
   &_picked {
-    background-color: color(base-white-n300);
-    --select-item-icon-color: #{color(base-600)};
+    &::after {
+      background-color: color(primary-n500);
+    }
   }
 }
 
 // dark styles
-.item {
+.option {
   @include host-selector-dark-theme() {
     background-color: color(base-n600);
     color: color(base-n0);
 
-    --select-item-icon-color: #{color(base-dark-n100)};
+    --select-option-icon-color: #{color(base-dark-n100)};
 
-    &:not(.item_disabled) {
+    &:not(.option_disabled) {
       @include hover() {
         background-color: color(base-dark-n400);
-        --select-item-icon-color: #{color(base-n0)};
+        --select-option-icon-color: #{color(base-n0)};
       }
     }
 
     &_disabled {
       background-color: color(base-n600);
       color: color(base-dark-n275);
-      --select-item-icon-color: #{color(base-dark-n250)};
-    }
-
-    &_picked {
-      background-color: color(base-dark-n300);
-      --select-item-icon-color: #{color(base-dark-n250)};
+      --select-option-icon-color: #{color(base-dark-n250)};
     }
   }
 }
