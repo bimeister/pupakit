@@ -1,14 +1,14 @@
 <pupa-checkbox
-  class="item"
-  [class.item_picked]="isPicked$ | async"
-  [class.item_disabled]="isDisabled$ | async"
+  class="option"
+  [class.option_picked]="isPicked$ | async"
+  [class.option_disabled]="isDisabled$ | async"
   [style.height.px]="heightPx"
   (click)="processClick()"
   [value]="isPicked$ | async"
   [disabled]="isDisabled$ | async"
 >
-  <div class="item__wrapper">
-    <pupa-checkbox-mark class="item__checkbox"></pupa-checkbox-mark>
+  <div class="option__wrapper">
+    <pupa-checkbox-mark class="option__checkbox"></pupa-checkbox-mark>
     <ng-content></ng-content>
   </div>
 </pupa-checkbox>

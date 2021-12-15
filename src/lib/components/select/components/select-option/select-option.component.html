@@ -1,7 +1,7 @@
 <div
-  class="item"
-  [class.item_picked]="isPicked$ | async"
-  [class.item_disabled]="isDisabled$ | async"
+  class="option"
+  [class.option_picked]="isPicked$ | async"
+  [class.option_disabled]="isDisabled$ | async"
   [style.height.px]="heightPx"
   (click)="processClick()"
 >

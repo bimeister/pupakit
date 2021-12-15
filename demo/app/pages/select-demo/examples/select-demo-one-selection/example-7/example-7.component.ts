@@ -10,5 +10,5 @@ import { FormControl } from '@angular/forms';
 })
 export class SelectExample7Component {
   public readonly control: FormControl = new FormControl({ value: ['Option 2'], disabled: true });
-  public readonly controlWithIcon: FormControl = new FormControl([]);
+  public readonly controlWithIcon: FormControl = new FormControl(['Option 3']);
 }
