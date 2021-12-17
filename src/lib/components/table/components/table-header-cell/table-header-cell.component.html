@@ -4,7 +4,7 @@
   [class.header-cell_resizable]="resizable"
   [class.header-cell_sortable]="sortable"
   [class.header-cell_sortable-with-icon]="sortable && (isIconVisible$ | async)"
-  (tap)="processTap()"
+  (click)="processClick()"
 >
   <span class="header-cell__text">
     <ng-content></ng-content>

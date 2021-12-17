@@ -69,7 +69,7 @@ export class TableHeaderCellComponent implements OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public processTap(): void {
+  public processClick(): void {
     if (!this.sortable) {
       return;
     }
