@@ -92,6 +92,10 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
     this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectStateService.toggleExpansion());
   }
 
+  public processEventPropagation(event: Event): void {
+    event.stopPropagation();
+  }
+
   public toggleDropdown(event: Event): void {
     event.stopPropagation();
     this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectStateService.toggleExpansion());

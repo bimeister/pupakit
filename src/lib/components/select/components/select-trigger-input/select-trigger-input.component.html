@@ -3,6 +3,8 @@
   [class.trigger_active]="isExpanded$ | async"
   [class.trigger_disabled]="isDisabled$ | async"
   [class.trigger_invalid]="isInvalid$ | async"
+  (mousedown)="processEventPropagation($event)"
+  (touchstart)="processEventPropagation($event)"
   (click)="processButtonInputClick()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"
