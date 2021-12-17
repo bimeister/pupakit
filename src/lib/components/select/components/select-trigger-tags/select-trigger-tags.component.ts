@@ -13,15 +13,15 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { filterNotNil, isEmpty, isNil, Nullable, resizeObservable } from '@bimeister/utilities';
+import { filterNotNil, isNil, Nullable, resizeObservable } from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, observeOn, switchMap, withLatestFrom } from 'rxjs/operators';
+import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { SelectTriggerTagContext } from '../../../../../internal/declarations/interfaces/select-trigger-tag-context.interface';
 import { PupaSelectTriggerTagTemplateDirective } from '../../directives/select-trigger-tag-template.directive';
 import { SelectStateService } from '../../services/select-state.service';
-import { SelectTriggerBase } from '../../../../../internal/declarations/classes/abstract/select-trigger-base.abstract';
 
 const MAX_TAGS_RENDER_COUNT: number = 20;
 const RESIZE_DEBOUNCE_TIME_MS: number = 200;
@@ -68,7 +68,7 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processCodeFilePathChange(changes?.tags);
+    this.processTagsChanges(changes?.tags);
   }
 
   public ngAfterViewInit(): void {
@@ -86,10 +86,10 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
     return this.selectTriggerTagTemplate?.templateRef ?? this.defaultTemplateRef;
   }
 
-  private processCodeFilePathChange(change: ComponentChange<this, T[]>): void {
+  private processTagsChanges(change: ComponentChange<this, T[]>): void {
     const updatedValue: T[] | undefined = change?.currentValue;
 
-    if (isEmpty(updatedValue)) {
+    if (!Array.isArray(updatedValue)) {
       return;
     }
 
