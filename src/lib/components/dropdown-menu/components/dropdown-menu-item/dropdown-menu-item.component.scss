@@ -69,5 +69,6 @@
     overflow: hidden;
     transition: transform variable(transition-duration_shortest) ease-in-out;
     transform: translateX(var(--dropdown-item-transform-x));
+    width: 100%;
   }
 }
