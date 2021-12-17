@@ -106,7 +106,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public toggleExpansion(): void {
     this.isExpanded$.pipe(take(1)).subscribe((isExpanded: boolean) => {
-      this.isExpanded$.next(!isExpanded);
+      isExpanded ? this.collapse() : this.open();
     });
   }
 

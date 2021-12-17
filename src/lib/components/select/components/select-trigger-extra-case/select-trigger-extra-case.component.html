@@ -1,3 +1,10 @@
-<div (click)="processButtonClick()" cdkOverlayOrigin #overlayOrigin="cdkOverlayOrigin" #button>
+<div
+  (click)="processButtonClick()"
+  (mousedown)="processEventPropagation($event)"
+  (touchstart)="processEventPropagation($event)"
+  cdkOverlayOrigin
+  #overlayOrigin="cdkOverlayOrigin"
+  #button
+>
   <ng-content></ng-content>
 </div>
