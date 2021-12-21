@@ -23,6 +23,7 @@
   padding-top: 1px;
 
   flex: 1;
+  overflow: hidden;
 }
 
 .tags-counter {
@@ -45,7 +46,5 @@
 }
 
 .default-tag {
-  &__name {
-    @include ellipsis-text-overflow;
-  }
+  max-width: inherit;
 }

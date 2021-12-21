@@ -4,6 +4,8 @@
   &__wrapper {
     display: flex;
     align-items: center;
+
+    overflow: hidden;
   }
 
   &__checkbox {

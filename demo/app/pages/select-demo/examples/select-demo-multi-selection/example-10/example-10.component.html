@@ -3,7 +3,7 @@
     <pupa-tag class="tag" [clickable]="true" [size]="'small'" *pupaSelectTriggerTagTemplate="let tag">
       <pupa-icon class="tag__icon" name="app-cube"></pupa-icon>
       <span class="tag__name">{{ tag }}</span>
-      <pupa-pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-pupa-tag-delete-button>
+      <pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-tag-delete-button>
     </pupa-tag>
   </pupa-select-trigger-tags>
 
