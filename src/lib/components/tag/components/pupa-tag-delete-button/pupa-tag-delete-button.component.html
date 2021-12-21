@@ -1,1 +1,6 @@
-<pupa-icon class="tag-delete-button" name="app-exceptions-cross-8" (click)="closeHandler()"></pupa-icon>
+<pupa-icon
+  class="tag-delete-button"
+  [class.tag-delete-button_disabled]="isDisabled$ | async"
+  name="app-exceptions-cross-8"
+  (click)="closeHandler($event)"
+></pupa-icon>

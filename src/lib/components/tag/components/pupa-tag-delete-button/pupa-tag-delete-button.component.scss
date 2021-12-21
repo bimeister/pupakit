@@ -1,5 +1,12 @@
 .tag-delete-button {
   width: 2rem;
   height: 2rem;
+  padding: 1rem;
+  margin: -1rem;
   cursor: pointer;
+  pointer-events: all;
+
+  &_disabled {
+    cursor: not-allowed;
+  }
 }
