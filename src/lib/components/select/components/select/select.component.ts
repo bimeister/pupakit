@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
+import { take } from 'rxjs/operators';
 import { SelectBase } from '../../../../../internal/declarations/classes/abstract/select-base.abstract';
 import { SelectStateService } from '../../services/select-state.service';
 
@@ -38,9 +39,17 @@ export class SelectComponent<T> extends SelectBase<T> {
     super(selectStateService, ngControl);
   }
 
-  @HostListener('document:resize', ['$event'])
   @HostListener('document:touchstart', ['$event'])
   @HostListener('document:mousedown', ['$event'])
+  public processCloseOnTriggerTouch(): void {
+    this.isTriggerTouched$
+      .pipe(take(1))
+      .subscribe((isTriggerTouched: boolean) =>
+        isTriggerTouched ? this.resetIsTriggerTouchedState() : this.processCloseEvent()
+      );
+  }
+
+  @HostListener('document:resize', ['$event'])
   @HostListener('document:wheel', ['$event'])
   public closeOnOuterEvents(): void {
     this.processCloseEvent();

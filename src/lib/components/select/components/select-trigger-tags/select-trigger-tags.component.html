@@ -5,6 +5,8 @@
   [class.trigger_disabled]="isDisabled$ | async"
   [class.trigger_invalid]="isInvalid$ | async"
   (click)="processButtonClick()"
+  (mousedown)="processTriggerTouch()"
+  (touchstart)="processTriggerTouch()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"
   #button

@@ -51,6 +51,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   public readonly invalidTooltipHideOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly invalidTooltipDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly invalidTooltip$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
@@ -129,6 +131,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setMultiSelectionState(isEnabled: boolean): void {
     this.isMultiSelectionEnabled$.next(isEnabled);
+  }
+
+  public setIsTriggerTouchedState(isTriggerTouched: boolean): void {
+    this.isTriggerTouched$.next(isTriggerTouched);
   }
 
   public setUnselectionState(isEnabled: boolean): void {

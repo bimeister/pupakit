@@ -1,7 +1,7 @@
 import { Directive, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { isNil, Nullable } from '@bimeister/utilities';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
@@ -23,6 +23,8 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract invalidTooltip: Nullable<string> = null;
   public abstract invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
+  public readonly isTriggerTouched$: Observable<boolean> = this.selectStateService.isTriggerTouched$;
+
   @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
   @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
 
@@ -41,6 +43,10 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
 
   protected processCloseEvent(): void {
     this.selectStateService.collapse();
+  }
+
+  protected resetIsTriggerTouchedState(): void {
+    this.selectStateService.setIsTriggerTouchedState(false);
   }
 
   public abstract closeOnOuterEvents(event: Event): void;
