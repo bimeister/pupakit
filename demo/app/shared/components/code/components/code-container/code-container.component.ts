@@ -9,8 +9,7 @@ import {
 } from '@angular/core';
 import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/internal/operators/map';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../../../src/internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../../../src/internal/declarations/interfaces/component-changes.interface';
 import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';
