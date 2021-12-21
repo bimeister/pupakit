@@ -18,15 +18,14 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4px;
+  gap: 1rem;
 
   margin: 0;
 
   box-sizing: border-box;
 
-  border-radius: 12px;
+  border-radius: 3rem;
 
-  min-width: fit-content;
   width: inherit;
   max-width: inherit;
   overflow: hidden;
@@ -245,7 +244,7 @@ $themeConfigs: (
       }
 
       &#{$root + '_disabled' } {
-        cursor: default;
+        cursor: not-allowed;
 
         @include apply-themes(get-map-field($theme-value, [ disabled-tag, default]));
 

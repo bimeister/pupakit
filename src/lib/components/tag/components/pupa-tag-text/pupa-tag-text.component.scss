@@ -1,0 +1,10 @@
+@import 'mixins';
+
+:host {
+  display: block;
+  color: inherit;
+  font-size: inherit;
+  line-height: inherit;
+
+  @include ellipsis-text-overflow;
+}
