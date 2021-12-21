@@ -27,6 +27,8 @@ export interface SelectStateService<T> {
   readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean>;
   readonly withReset$: BehaviorSubject<boolean>;
 
+  readonly isTriggerTouched$: BehaviorSubject<boolean>;
+
   readonly invalidTooltipHideOnHover$: BehaviorSubject<boolean>;
   readonly invalidTooltipDisabled$: BehaviorSubject<boolean>;
   readonly invalidTooltip$: BehaviorSubject<Nullable<string>>;
@@ -55,6 +57,7 @@ export interface SelectStateService<T> {
   setInvalidTooltipDisabledState(invalidTooltipDisabled: boolean): void;
   setInvalidTooltipState(invalidTooltip: Nullable<string>): void;
   setInvalidTooltipContentTemplateState(invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>>): void;
+  setIsTriggerTouchedState(isTriggered: boolean): void;
 
   processSelection(value: T): void;
   isPicked(value: T): Observable<boolean>;

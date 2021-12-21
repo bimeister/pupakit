@@ -88,6 +88,10 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
     this.isContentInit$.next(true);
   }
 
+  public processTriggerTouch(): void {
+    this.selectStateService.setIsTriggerTouchedState(true);
+  }
+
   public processButtonClick(): void {
     this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectStateService.toggleExpansion());
   }
