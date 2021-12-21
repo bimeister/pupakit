@@ -1,0 +1,14 @@
+<pupa-huge-tree
+  [treeItemSizePx]="treeItemSizePx"
+  [treeItemsData]="treeItemsData$ | async"
+  [totalTreeItemsLength]="totalTreeItemsLength$ | async"
+  (requestParams)="processRequestParamsEmit($event)"
+></pupa-huge-tree>
+
+<ng-template #skeleton>
+  <pupa-skeleton>
+    <pupa-skeleton-group>
+      <pupa-skeleton-line></pupa-skeleton-line>
+    </pupa-skeleton-group>
+  </pupa-skeleton>
+</ng-template>

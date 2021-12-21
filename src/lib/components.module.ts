@@ -22,6 +22,7 @@ import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.mod
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
 import { FloatingCardModule } from './components/floating-card/floating-card.module';
+import { HugeTreeModule } from './components/huge-tree/huge-tree.module';
 import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { InputModule } from './components/input/input.module';
 import { LabelModule } from './components/label/label.module';
@@ -85,6 +86,7 @@ const EXPORTS: any[] = [
   DropdownMenuModule,
   TreeModule,
   TreeNewModule,
+  HugeTreeModule,
   VerticalTabsModule,
   SkeletonModule,
   DraggableListModule,

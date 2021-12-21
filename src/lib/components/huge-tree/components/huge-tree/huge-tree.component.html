@@ -1,0 +1,42 @@
+<section class="tree">
+  <cdk-virtual-scroll-viewport
+    [itemSize]="treeItemSizePx$ | async"
+    class="viewport"
+    [maxBufferPx]="bufferPx$ | async"
+    [minBufferPx]="bufferPx$ | async"
+    #viewport
+  >
+    <ng-container *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async; let index = index; let odd = odd">
+      <ng-container
+      [ngTemplateOutlet]="treeNode"
+      [ngTemplateOutletContext]="{
+        nodeData: getTreeNodeDataByIndex(index)
+      }"
+    ></ng-container>
+    </ng-container>
+  </cdk-virtual-scroll-viewport>
+</section>
+
+<ng-template #skeleton>
+  <pupa-skeleton>
+    <pupa-skeleton-group>
+      <pupa-skeleton-line></pupa-skeleton-line>
+    </pupa-skeleton-group>
+  </pupa-skeleton>
+</ng-template>
+
+
+<ng-template #treeNode let-nodeData="nodeData">
+  <div class="tree-node" *ngIf="nodeData" [style.padding-left.px]="10 * nodeData.level">
+    <ng-container *ngIf="nodeData.id !== null; else skeleton">
+      <div class="tree-node__expansion-button" (click)="toggleExpansion(nodeData.id, nodeData.parentItemId)">
+        <button class="default-expansion-button">
+          <pupa-icon
+            [name]="isExpanded(expandedTreeItemIds$ | async, nodeData.id) ? 'ios-arrow-down' : 'ios-arrow-forward'"
+          ></pupa-icon>
+        </button>
+      </div>
+      {{ nodeData.name }}
+    </ng-container>
+  </div>
+</ng-template>
