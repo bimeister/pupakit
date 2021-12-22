@@ -23,17 +23,19 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   encapsulation: ViewEncapsulation.Emulated,
   providers: [ButtonGroupStateService],
 })
-export class ButtonGroupComponent extends TabsBase<ButtonGroupStateService> implements OnInit {
+export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService<T>> implements OnInit {
   @ViewChild('buttonGroupContainer', { static: true })
   private readonly buttonGroupContainerRef: ElementRef<HTMLElement>;
   @ViewChild('scrollable', { static: true }) private readonly scrollable: ScrollableComponent;
 
-  @Output() public readonly activeTabNameChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    stateService: ButtonGroupStateService,
-    @Optional() @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: ButtonGroupStateService
+    stateService: ButtonGroupStateService<T>,
+    @Optional()
+    @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN)
+    fromContainerStateService?: ButtonGroupStateService<T>
   ) {
     super(stateService, fromContainerStateService);
   }

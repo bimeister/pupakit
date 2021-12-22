@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
-export interface ContentTemplateNameDirective {
+export interface ContentTemplateNameDirective<T> {
   templateRef: TemplateRef<unknown>;
 
-  getTemplateName(): string;
+  getTemplateName(): T;
 }

@@ -6,14 +6,14 @@ import { map } from 'rxjs/operators';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
-export abstract class TabsItemBase<S extends TabsServiceBase> implements OnChanges, OnInit {
-  public abstract name: string;
+export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements OnChanges, OnInit {
+  public abstract name: T;
   public abstract isActive: Nullable<boolean>;
   public abstract disabled: Nullable<boolean>;
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
   public readonly isActive$: Observable<boolean> = this.stateService.activeTabName$.pipe(
-    map((activeTab: string | null) => activeTab === this.name)
+    map((activeTab: T | null) => activeTab === this.name)
   );
 
   constructor(private readonly tabsService: S, private readonly containerService?: S) {}

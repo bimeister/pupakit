@@ -20,15 +20,15 @@ import { TabsStateService } from '../../services/tabs-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class TabsItemComponent extends TabsItemBase<TabsStateService> implements OnInit {
-  @Input() public name: string = '';
+export class TabsItemComponent<T> extends TabsItemBase<T, TabsStateService<T>> implements OnInit {
+  @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    stateService: TabsStateService,
-    @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService
+    stateService: TabsStateService<T>,
+    @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
     super(stateService, fromContainerStateService);
   }

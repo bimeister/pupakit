@@ -20,15 +20,17 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ButtonGroupItemComponent extends TabsItemBase<ButtonGroupStateService> implements OnInit {
-  @Input() public name: string = '';
+export class ButtonGroupItemComponent<T> extends TabsItemBase<T, ButtonGroupStateService<T>> implements OnInit {
+  @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    stateService: ButtonGroupStateService,
-    @Optional() @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: ButtonGroupStateService
+    stateService: ButtonGroupStateService<T>,
+    @Optional()
+    @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN)
+    fromContainerStateService?: ButtonGroupStateService<T>
   ) {
     super(stateService, fromContainerStateService);
   }
