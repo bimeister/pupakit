@@ -5,13 +5,13 @@ import { delay, map } from 'rxjs/operators';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
-export abstract class TabsBase<S extends TabsServiceBase> implements AfterViewChecked, OnDestroy {
+export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements AfterViewChecked, OnDestroy {
   protected readonly subscription: Subscription = new Subscription();
 
-  public abstract readonly activeTabNameChange: EventEmitter<string>;
+  public abstract readonly activeTabNameChange: EventEmitter<T>;
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
-  private readonly activeTabName$: Observable<Nullable<string>> = this.stateService.activeTabName$;
+  private readonly activeTabName$: Observable<Nullable<T>> = this.stateService.activeTabName$;
 
   public readonly railHighlighterOffsetLeftTransform$: Observable<string> =
     this.stateService.railHighlighterOffsetLeftPx$.pipe(
@@ -34,7 +34,7 @@ export abstract class TabsBase<S extends TabsServiceBase> implements AfterViewCh
   }
 
   private processActiveTabNameChanges(): Subscription {
-    return this.activeTabName$.pipe(filterNotNil()).subscribe((activeTabName: string) => {
+    return this.activeTabName$.pipe(filterNotNil()).subscribe((activeTabName: T) => {
       this.activeTabNameChange.emit(activeTabName);
     });
   }

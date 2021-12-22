@@ -1,7 +1,7 @@
 import { TemplateRef } from '@angular/core';
 
-export interface TabTemplateRef {
+export interface TabTemplateRef<T> {
   templateRef: TemplateRef<unknown>;
-  name: string;
+  name: T;
   isActive: boolean;
 }

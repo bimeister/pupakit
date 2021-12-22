@@ -25,11 +25,11 @@ import { TabsStateService } from '../../services/tabs-state.service';
   encapsulation: ViewEncapsulation.Emulated,
   providers: [TabsStateService],
 })
-export class TabsComponent extends TabsBase<TabsStateService> implements OnInit {
+export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implements OnInit {
   @ViewChild('tabsContainer', { static: true }) private readonly tabsContainerRef: ElementRef<HTMLElement>;
   @ViewChild('scrollable', { static: true }) private readonly scrollable: ScrollableComponent;
 
-  @Output() public readonly activeTabNameChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
   private readonly railOffsetLeftPx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly railOffsetLeftTransform$: Observable<string> = this.railOffsetLeftPx$.pipe(
@@ -38,8 +38,8 @@ export class TabsComponent extends TabsBase<TabsStateService> implements OnInit 
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    stateService: TabsStateService,
-    @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService
+    stateService: TabsStateService<T>,
+    @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
     super(stateService, fromContainerStateService);
   }

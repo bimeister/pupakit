@@ -3,10 +3,10 @@ import { asyncScheduler, BehaviorSubject, combineLatest, Observable } from 'rxjs
 import { filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
 import { ScrollableComponent } from '../../../../lib/components/scrollable/components/scrollable/scrollable.component';
 
-export abstract class TabsServiceBase {
+export abstract class TabsServiceBase<T> {
   protected readonly tabNameToHtmlElementMap: Map<string, HTMLElement> = new Map<string, HTMLElement>();
-  private readonly activeTabNameState$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
-  public readonly activeTabName$: Observable<Nullable<string>> = this.activeTabNameState$.asObservable();
+  private readonly activeTabNameState$: BehaviorSubject<Nullable<T>> = new BehaviorSubject<Nullable<T>>(null);
+  public readonly activeTabName$: Observable<Nullable<T>> = this.activeTabNameState$.asObservable();
 
   protected readonly hostElement$: BehaviorSubject<Nullable<HTMLElement>> = new BehaviorSubject<Nullable<HTMLElement>>(
     null
@@ -20,7 +20,7 @@ export abstract class TabsServiceBase {
 
   private readonly activeHtmlElement$: Observable<HTMLElement> = this.activeTabName$.pipe(
     filterNotNil(),
-    map((activeTabName: string) => this.tabNameToHtmlElementMap.get(activeTabName)),
+    map((activeTabName: T) => this.tabNameToHtmlElementMap.get(JSON.stringify(activeTabName))),
     shareReplayWithRefCount()
   );
 
@@ -39,9 +39,9 @@ export abstract class TabsServiceBase {
     map((activeHtmlElement: HTMLElement) => activeHtmlElement.clientWidth)
   );
 
-  private readonly tabNames: string[] = [];
+  private readonly tabNames: T[] = [];
 
-  public registerTab(tabName: string): void {
+  public registerTab(tabName: T): void {
     this.tabNames.push(tabName);
   }
 
@@ -49,7 +49,7 @@ export abstract class TabsServiceBase {
     this.activeTabName$
       .pipe(
         take(1),
-        filter((activeTab: Nullable<string>) => isNil(activeTab) && !isEmpty(this.tabNames)),
+        filter((activeTab: Nullable<T>) => isNil(activeTab) && !isEmpty(this.tabNames)),
         subscribeOn(asyncScheduler)
       )
       .subscribe(() => {
@@ -57,7 +57,7 @@ export abstract class TabsServiceBase {
       });
   }
 
-  public setActiveTab(tabName: string): void {
+  public setActiveTab(tabName: T): void {
     this.activeTabNameState$.next(tabName);
     this.correctScrollLeftByTargetTab(tabName);
   }
@@ -74,12 +74,12 @@ export abstract class TabsServiceBase {
     this.scrollable$.next(scrollable);
   }
 
-  public registerTabHtmlElement(tabName: string, htmlElement: HTMLElement): void {
-    this.tabNameToHtmlElementMap.set(tabName, htmlElement);
+  public registerTabHtmlElement(tabName: T, htmlElement: HTMLElement): void {
+    this.tabNameToHtmlElementMap.set(JSON.stringify(tabName), htmlElement);
   }
 
-  private correctScrollLeftByTargetTab(tabName: string): void {
-    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(tabName);
+  private correctScrollLeftByTargetTab(tabName: T): void {
+    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
 
     combineLatest([this.hostElement$.pipe(filterNotNil()), this.scrollable$.pipe(filterNotNil())])
       .pipe(

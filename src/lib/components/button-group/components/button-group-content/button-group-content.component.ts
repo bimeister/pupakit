@@ -20,13 +20,13 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonGroupContentComponent extends TabsContentBase<ButtonGroupStateService> {
+export class ButtonGroupContentComponent<T> extends TabsContentBase<T, ButtonGroupStateService<T>> {
   @Input() public destroyable: boolean = true;
 
   @ContentChildren(ButtonGroupItemContentTemplateDirective)
-  public tabTemplates: QueryList<ContentTemplateNameDirective>;
+  public tabTemplates: QueryList<ContentTemplateNameDirective<T>>;
 
-  constructor(@Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN) stateService: ButtonGroupStateService) {
+  constructor(@Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN) stateService: ButtonGroupStateService<T>) {
     super(stateService);
   }
 }

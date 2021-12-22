@@ -4,12 +4,12 @@ import { ContentTemplateNameDirective } from '../../../../internal/declarations/
 @Directive({
   selector: '[pupaTabsItemContentTemplate]',
 })
-export class TabsItemContentTemplateDirective implements ContentTemplateNameDirective {
-  @Input() public pupaTabsItemContentTemplate: string = '';
+export class TabsItemContentTemplateDirective<T> implements ContentTemplateNameDirective<T> {
+  @Input() public pupaTabsItemContentTemplate: T;
 
   constructor(public readonly templateRef: TemplateRef<unknown>) {}
 
-  public getTemplateName(): string {
+  public getTemplateName(): T {
     return this.pupaTabsItemContentTemplate;
   }
 }

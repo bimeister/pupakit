@@ -19,11 +19,13 @@ import { TabsContentBase } from '../../../../../internal/declarations/classes/ab
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsContentComponent extends TabsContentBase<TabsStateService> {
+export class TabsContentComponent<T> extends TabsContentBase<T, TabsStateService<T>> {
   @Input() public destroyable: boolean = true;
-  @ContentChildren(TabsItemContentTemplateDirective) public tabTemplates: QueryList<TabsItemContentTemplateDirective>;
+  @ContentChildren(TabsItemContentTemplateDirective) public tabTemplates: QueryList<
+    TabsItemContentTemplateDirective<T>
+  >;
 
-  constructor(@Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) stateService: TabsStateService) {
+  constructor(@Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) stateService: TabsStateService<T>) {
     super(stateService);
   }
 }

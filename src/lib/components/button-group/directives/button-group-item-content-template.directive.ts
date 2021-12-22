@@ -4,12 +4,12 @@ import { ContentTemplateNameDirective } from '../../../../internal/declarations/
 @Directive({
   selector: '[pupaButtonGroupItemContentTemplate]',
 })
-export class ButtonGroupItemContentTemplateDirective implements ContentTemplateNameDirective {
-  @Input() public pupaButtonGroupItemContentTemplate: string = '';
+export class ButtonGroupItemContentTemplateDirective<T> implements ContentTemplateNameDirective<T> {
+  @Input() public pupaButtonGroupItemContentTemplate: T;
 
   constructor(public readonly templateRef: TemplateRef<unknown>) {}
 
-  public getTemplateName(): string {
+  public getTemplateName(): T {
     return this.pupaButtonGroupItemContentTemplate;
   }
 }
