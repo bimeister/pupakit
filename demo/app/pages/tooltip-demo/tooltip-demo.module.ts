@@ -5,8 +5,14 @@ import { TooltipExample2Component } from './examples/example-2/example-2.compone
 import { TooltipExample3Component } from './examples/example-3/example-3.component';
 import { TooltipDemoRoutingModule } from './tooltip-demo-routing.module';
 import { TooltipDemoComponent } from './tooltip-demo.component';
+import { TooltipExample4Component } from './examples/example-4/example-4.component';
 
-const EXAMPLES: Type<unknown>[] = [TooltipExample1Component, TooltipExample2Component, TooltipExample3Component];
+const EXAMPLES: Type<unknown>[] = [
+  TooltipExample1Component,
+  TooltipExample2Component,
+  TooltipExample3Component,
+  TooltipExample4Component,
+];
 const COMPONENTS: Type<unknown>[] = [TooltipDemoComponent, ...EXAMPLES];
 
 const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];

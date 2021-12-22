@@ -37,6 +37,10 @@ export class TooltipDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
   };
 
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+  };
+
   constructor(private readonly domSanitizer: DomSanitizer) {}
 
   public getSanitizedHtml(): SafeHtml {

@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, TemplateRef } from '@angular/core';
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
 import { fromEvent, Observable, Subscription } from 'rxjs';
-import { filter, switchMap, take } from 'rxjs/operators';
+import { delay, filter, switchMap, take, tap } from 'rxjs/operators';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { isTabletDevice } from '../../../../internal/helpers/is-tablet-device.helper';
@@ -15,6 +15,7 @@ import { TooltipService } from '../services/tooltip.service';
 export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit {
   @Input() public tooltipHideOnHover: boolean = true;
   @Input() public tooltipDisabled: boolean = false;
+  @Input() public tooltipDelayMs: number = 0;
 
   @Input() public pupaTooltip: Nullable<string> = null;
   @Input() public tooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
@@ -30,6 +31,8 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
     this.triggerRef.nativeElement,
     'mouseleave'
   );
+
+  private isMouseOverElement: boolean = false;
 
   private readonly subscription: Subscription = new Subscription();
   constructor(private readonly tooltipService: TooltipService, public readonly triggerRef: ElementRef<HTMLElement>) {}
@@ -91,6 +94,11 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   private processTriggerMouseEnterEvent(): Subscription {
     return this.triggerMouseEnter$
       .pipe(
+        tap(() => {
+          this.isMouseOverElement = true;
+        }),
+        delay(this.tooltipDelayMs),
+        filter(() => this.isMouseOverElement),
         switchMap(() =>
           this.isDisabled$.pipe(
             take(1),
@@ -105,8 +113,14 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   }
 
   private processTriggerMouseLeaveEvent(): Subscription {
-    return this.triggerMouseLeave$.subscribe(() => {
-      this.tooltipService.processTriggerMouseLeave();
-    });
+    return this.triggerMouseLeave$
+      .pipe(
+        tap(() => {
+          this.isMouseOverElement = false;
+        })
+      )
+      .subscribe(() => {
+        this.tooltipService.processTriggerMouseLeave();
+      });
   }
 }
