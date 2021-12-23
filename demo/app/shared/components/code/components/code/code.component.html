@@ -1,5 +1,10 @@
 <div class="container" *ngIf="code$ | async as code">
-  <code class="container__code" [lineNumbers]="true" [highlight]="code"></code>
+  <code
+    class="container__code"
+    [lineNumbers]="true"
+    [languages]="['html', 'css', 'scss', 'typescript']"
+    [highlight]="code"
+  ></code>
   <pupa-button-icon
     class="container__copy-button"
     [kind]="'secondary'"
