@@ -15,17 +15,17 @@
       <pupa-icon [name]="iconName$ | async"></pupa-icon>
     </span>
   </div>
+</div>
 
-  <div
-    class="header-cell__resizer resizer"
-    *ngIf="resizable"
-    [class.resizer_visible]="isResizing$ | async"
-    (press)="processPress()"
-    (panstart)="processPress()"
-    (panmove)="processPan($event)"
-    (panend)="processPanEnd()"
-    (pressup)="processPressup()"
-  >
-    <div class="resizer__stick"></div>
-  </div>
+<div
+  class="header-cell__resizer resizer"
+  *ngIf="resizable"
+  [class.resizer_visible]="isResizing$ | async"
+  (press)="processPress()"
+  (panstart)="processPress()"
+  (panmove)="processPan($event)"
+  (panend)="processPanEnd()"
+  (pressup)="processPressup()"
+>
+  <div class="resizer__stick"></div>
 </div>
