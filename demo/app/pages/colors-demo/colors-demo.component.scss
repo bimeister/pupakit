@@ -1,10 +1,19 @@
-@import 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
 }
 
+.header {
+  margin-bottom: 20rem;
+}
+
 .colors-demo {
+  &__group {
+    margin-bottom: 20rem;
+  }
+
   &__list {
     box-sizing: border-box;
     padding-top: 4rem;
@@ -12,23 +21,54 @@
     @include flex-container(row);
     flex-wrap: wrap;
   }
-  &__item {
-    box-sizing: border-box;
-    padding: 4rem;
-    border-radius: 2rem;
-    color: color(base-n0);
-    cursor: pointer;
-    white-space: nowrap;
-    box-shadow: 0 0 2rem 1px rgba(color(base-dark-n250-rgb), 0.2);
-    @include grid-size($xs: 4, $sm: 4, $md: 4, $lg: 4, $xlg: 4, $xl: 4, $xxl: 2);
-    @include flex-container(row, center);
-    @include font-type-point;
-    @include font-size-large;
-    &_inverted {
-      color: color(base-n600);
-    }
+}
+
+.color {
+  position: relative;
+  box-sizing: border-box;
+  padding: 4rem;
+  border-radius: 1px;
+  color: color(base-n0);
+
+  @include grid-size($xs: 4, $sm: 4, $md: 4, $lg: 4, $xlg: 4, $xl: 4, $xxl: 4);
+  @include font-type-caption;
+  @include font-size-small;
+
+  border-width: 1px;
+  border-style: solid;
+  border-color: color(base-dark-n500);
+  transition: transform 0.15s;
+
+  @include host-selector-dark-theme {
+    border-color: color(base-white-n500);
   }
-  &__item:hover {
-    transform: scale(1.05);
+
+  &_inverted {
+    color: color(base-n600);
+  }
+
+  &__name {
+    @include font-size-medium;
+    @include font-type-point;
+    margin-bottom: 1rem;
+    cursor: pointer;
+  }
+
+  &__key {
+    margin-bottom: 8rem;
+    cursor: pointer;
+  }
+
+  &__value {
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    &-name {
+      opacity: 0.6;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

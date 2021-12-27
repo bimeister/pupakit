@@ -66,6 +66,8 @@ export {
   TreeItem,
   UiState,
   UploadingStatus,
+  ColorsService,
+  Color,
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

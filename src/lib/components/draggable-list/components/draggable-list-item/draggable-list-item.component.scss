@@ -1,5 +1,4 @@
-@import './../../../../../styles/themes/functions';
-@import './../../../../../styles/functions.scss';
+@use 'functions' as *;
 
 :host {
   width: 100%;

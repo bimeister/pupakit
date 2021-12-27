@@ -1,0 +1,6 @@
+@function grid-column($columnsCount, $gutter, $size) {
+  $gutter: $gutter * 1px;
+  $gutters: ($columnsCount - 1) * $gutter;
+
+  @return calc((((100% - #{$gutters}) / #{$columnsCount}) * #{$size}) + #{max(($size - 1) * $gutter, 0)});
+}

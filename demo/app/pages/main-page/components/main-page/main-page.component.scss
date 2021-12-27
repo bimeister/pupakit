@@ -1,6 +1,8 @@
-@use 'src/styles/mixins' as *;
-@use 'demo/styles/demo-mixins' as *;
-@use 'demo/styles/demo-variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
+@use 'demo-mixins' as *;
+@use 'demo-variables' as *;
 
 .main-page {
   display: flex;

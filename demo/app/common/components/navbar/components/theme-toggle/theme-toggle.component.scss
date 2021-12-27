@@ -1,5 +1,5 @@
-@import 'src/styles/functions';
-@import 'src/styles/mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .theme-toggle {
   cursor: pointer;

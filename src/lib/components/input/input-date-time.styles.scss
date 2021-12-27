@@ -1,6 +1,10 @@
 @use 'sass:map';
 @use 'sass:string';
-@import './input.styles.scss';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+@use './input.styles';
 
 $width_time: 29rem;
 $width_time-seconds: 33rem;

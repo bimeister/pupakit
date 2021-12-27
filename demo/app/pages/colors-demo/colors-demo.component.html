@@ -1,14 +1,52 @@
 <h1>Colors</h1>
 
-<div class="colors-demo__list">
-  <ng-container *ngFor="let color of colorsList">
-    <div
-      class="colors-demo__item"
-      [ngStyle]="getBackground(color)"
-      [class.colors-demo__item_inverted]="isColorLight(color)"
-      (click)="copyToClipboard(color)"
-    >
-      {{ color }}
-    </div>
-  </ng-container>
+<div class="header">
+  <pupa-info-block> Click on the color info line to copy the value. </pupa-info-block>
 </div>
+
+<div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
+  <h2>{{ colorGroup.name }}</h2>
+
+  <div class="colors-demo__list">
+    <div
+      *ngFor="let color of colorGroup.colors"
+      class="color"
+      [style.background-color]="color.getAsCssValue()"
+      [class.color_inverted]="color.isLight"
+    >
+      <div class="color__name" (click)="copyToClipboard(color.name)">{{ color.name }}</div>
+      <div class="color__key" (click)="copyToClipboard(color.key)">{{ color.key }}</div>
+      <div class="color__value" (click)="copyToClipboard(color.hex)">
+        <span class="color__value-name">hex:</span> #{{ color.hex }}
+      </div>
+      <div class="color__value" (click)="copyToClipboard(color.formattedRgb)">
+        <span class="color__value-name">rgb:</span> {{ color.formattedRgb }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<h2>Using and overriding colors with .scss component styles</h2>
+<pupa-code-container [content]="example1Content">
+  <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
+</pupa-code-container>
+
+<pupa-info-block>
+  Second parameter in <pupa-code-inline>override-colors</pupa-code-inline> mixin is a CSS selector. Set it as ':root'
+  for global color overriding.
+</pupa-info-block>
+
+<pupa-info-block>
+  Second parameter in <pupa-code-inline>color</pupa-code-inline> function is a alpha value. Default alpha value is 1.
+</pupa-info-block>
+
+<pupa-info-block variant="note"> If you set invalid color key you will get error. </pupa-info-block>
+
+<h2>Using and overriding colors with .css component styles</h2>
+<pupa-code-container [content]="example2Content">
+  <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
+</pupa-code-container>
+
+<pupa-info-block> Use RGB values for CSS variables. </pupa-info-block>
+
+<pupa-info-block variant="warning"> CSS variables are not validated. </pupa-info-block>

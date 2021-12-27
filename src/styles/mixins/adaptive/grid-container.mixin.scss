@@ -1,0 +1,11 @@
+@use './grid-container-offset.mixin' as *;
+
+@mixin grid-container() {
+  display: flex;
+  float: none;
+  width: 100%;
+  margin: 0 auto;
+
+  @include grid-container-offset('padding-right');
+  @include grid-container-offset('padding-left');
+}

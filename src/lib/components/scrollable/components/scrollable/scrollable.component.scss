@@ -1,6 +1,6 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'variables';
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'functions' as *;
 
 $width_scrollbar-half: $width_scrollbar / 2;
 
@@ -140,17 +140,17 @@ $color_dark: 'base-dark-n275';
   height: 100%;
   backdrop-filter: blur(4px);
   box-sizing: content-box;
-  background-color: rgba(color('#{$color_light}-rgb'), 0.9);
+  background-color: color('#{$color_light}', 0.9);
 
   @include supports-backdrop-blur {
-    background-color: rgba(color('#{$color_light}-rgb'), 0.5);
+    background-color: color('#{$color_light}', 0.5);
   }
 
   @include host-selector-dark-theme {
-    background-color: rgba(color('#{$color_dark}-rgb'), 0.9);
+    background-color: color('#{$color_dark}', 0.9);
 
     @include supports-backdrop-blur {
-      background-color: rgba(color('#{$color_dark}-rgb'), 0.4);
+      background-color: color('#{$color_dark}', 0.4);
     }
   }
 }

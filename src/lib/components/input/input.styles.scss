@@ -1,10 +1,9 @@
 @use 'sass:map';
 @use 'sass:string';
 
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
-@import 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 @mixin large {
   @include font-size-large();

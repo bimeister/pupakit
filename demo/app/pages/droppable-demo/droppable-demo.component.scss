@@ -1,4 +1,4 @@
-@import '~src/styles/themes/functions';
+@use 'functions' as *;
 
 .wrapper {
   display: flex;

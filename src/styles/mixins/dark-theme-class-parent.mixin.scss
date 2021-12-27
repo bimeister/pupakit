@@ -1,0 +1,7 @@
+@use './../variables/common.variables' as *;
+
+@mixin dark-theme-class-parent {
+  #{$darkThemeClass} & {
+    @content;
+  }
+}

@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 $padding_days-area-container: 0 4rem 2rem 4rem;
 $padding_days-area: 0 4rem;
@@ -65,7 +64,7 @@ $height_month: 24px;
   font-stretch: normal;
   user-select: none;
   display: flex;
-  @include regular;
+  @include font-type-caption;
 
   &__month:not(.disable-hover),
   &__year:not(.disable-hover) {
@@ -89,7 +88,7 @@ $height_month: 24px;
   font-size: $font-size_days-line-item;
   font-weight: normal;
   user-select: none;
-  @include regular;
+  @include font-type-caption;
   @include flex-container(column, center, center, nowrap);
 }
 
@@ -106,7 +105,7 @@ $height_month: 24px;
   padding: 0;
 
   user-select: none;
-  @include regular;
+  @include font-type-caption;
   @include flex-container(column, center, center, nowrap);
 
   &__range {
@@ -254,7 +253,7 @@ $height_month: 24px;
   padding: 0;
 
   @include transition(#{'background, color'});
-  @include regular;
+  @include font-type-caption;
   @include flex-container(column, center, center, nowrap);
 
   &.current {
@@ -285,7 +284,7 @@ $height_month: 24px;
   border-radius: $height_month;
   z-index: 2;
   @include transition(#{'background, color'});
-  @include regular;
+  @include font-type-caption;
   @include flex-container(column, center, center, nowrap);
 
   &:hover {
@@ -309,7 +308,7 @@ $height_month: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  @include regular;
+  @include font-type-caption;
 
   &.not-showing {
     visibility: hidden;

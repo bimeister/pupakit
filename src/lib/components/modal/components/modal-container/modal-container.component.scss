@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as *;
 
 :host {
   max-width: 100%;

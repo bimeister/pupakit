@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .control-text {
   height: auto;
@@ -10,7 +9,7 @@
   margin: 0;
   padding: 0;
   color: color(grey-light);
-  @include regular;
+  @include font-type-caption;
 
   &_error {
     color: color(error);

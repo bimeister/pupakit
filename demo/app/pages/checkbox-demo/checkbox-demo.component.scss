@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 .tooltip-content {
   min-width: 40rem;

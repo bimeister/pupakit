@@ -1,0 +1,8 @@
+@use './../functions/variable.function' as *;
+
+@mixin icon-size($size: variable(font-size_root)) {
+  font-size: $size;
+  height: $size;
+  width: $size;
+  line-height: 1;
+}

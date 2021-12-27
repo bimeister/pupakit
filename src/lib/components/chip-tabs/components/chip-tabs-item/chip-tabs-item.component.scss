@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'functions.scss';
-@import 'mixins.scss';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .chip-tabs-item {
   box-sizing: border-box;

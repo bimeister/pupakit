@@ -1,20 +1,23 @@
-@import 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 /*
   Explore the possibility of excluding the management of external styles
   Originates from https://bimeister.atlassian.net/browse/BIM-14668
 */
+
+@mixin apply-background() {
+  background-color: color(base-n600, 0.94);
+
+  &#{$darkThemeClass} {
+    background-color: color(base-n700, 0.88);
+  }
+}
+
 .cdk-global-overlay-wrapper,
 .cdk-overlay-connected-position-bounding-box {
   z-index: 10000;
-}
-
-@mixin apply-background() {
-  background-color: rgba(color(base-n600-rgb), 0.94);
-
-  &#{$darkThemeClass} {
-    background-color: rgba(color(base-n700-rgb), 0.88);
-  }
 }
 
 .cdk-overlay-dark-backdrop {

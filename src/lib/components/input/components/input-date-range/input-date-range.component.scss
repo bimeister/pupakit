@@ -1,5 +1,4 @@
-@import './../../input.styles.scss';
-@import './../../input-date-time.styles.scss';
+@use './../../input-date-time.styles.scss';
 
 :host {
   display: block;

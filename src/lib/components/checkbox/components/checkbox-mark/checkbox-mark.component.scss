@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   @include flex-container(row, center, flex-start, nowrap);
@@ -21,17 +20,17 @@
 
   @mixin common-styles() {
     @include hover() {
-      background: rgba(color(primary-n500-rgb), 0.16);
+      background: color(primary-n500, 0.16);
       border: 1px solid color(primary-n400);
     }
 
     &:active {
-      background: rgba(color(primary-n500-rgb), 0.16);
+      background: color(primary-n500, 0.16);
       border: 1px solid color(primary-n550);
     }
 
     &:focus-visible {
-      background: rgba(color(primary-n500-rgb), 0.16);
+      background: color(primary-n500, 0.16);
       border: 1px solid color(primary-n400);
       outline: 1px solid color(primary-n400);
     }

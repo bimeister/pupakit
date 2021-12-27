@@ -1,4 +1,5 @@
-@import '../../date-picker.style.scss';
+@use 'functions' as *;
+@use '../../date-picker.style.scss';
 
 $width_time-seconds: 110px;
 $width_time: 74px;

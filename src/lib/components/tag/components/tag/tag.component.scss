@@ -1,10 +1,8 @@
 @use 'sass:map';
 @use 'sass:string';
-@use 'utils' as *;
 
-@import 'mixins';
-@import 'themes/functions';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 @mixin apply-base-styles() {
   all: unset;

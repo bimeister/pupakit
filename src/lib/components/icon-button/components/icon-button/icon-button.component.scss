@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   appearance: none;
@@ -18,7 +17,7 @@
   font-size: 3rem;
   border: none;
   border-radius: 50%;
-  @include regular();
+  @include font-type-caption();
   @include transition(#{'background, color'});
   @include inline-flex-container(row, center, space-evenly, nowrap);
 
@@ -76,7 +75,7 @@
   }
 
   &_float {
-    box-shadow: 0 3rem 8rem 0 rgba(color(black-rgb), 0.15);
+    box-shadow: 0 3rem 8rem 0 color(black, 0.15);
   }
 
   &:hover:not(:disabled) {
@@ -101,11 +100,11 @@
 
 .button_light:disabled,
 .button_light-blue:disabled {
-  color: rgba(color(main-rgb), 0.3);
+  color: color(main, 0.3);
   background: color(white);
 }
 .button_dark:disabled {
-  color: rgba(color(light-rgb), 0.3);
+  color: color(light, 0.3);
   background: color(main);
 }
 

@@ -1,6 +1,8 @@
-@import 'themes/functions';
-@import './functions.scss';
-@import './mixins.scss';
+/** @deprecated: remove with ag-grid */
+
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'sass:meta';
 
 $ag-border-color: null;
 $ag-row-height: null;
@@ -28,9 +30,6 @@ $font-weight: normal;
 $foreground-color: color(text);
 $odd-row-background-color: transparent;
 $header-cell-moving-background-color: color(light);
-
-@import 'ag-grid-community/src/styles/ag-grid.scss';
-@import 'ag-grid-community/src/styles/ag-theme-balham/sass/legacy/_ag-theme-balham-v22-compat';
 
 /* additional customization */
 @mixin ionic-icon-font {

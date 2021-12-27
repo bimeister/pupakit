@@ -1,4 +1,7 @@
-@use './../../textarea.styles' as *;
+@use 'functions' as *;
+@use 'mixins' as *;
+
+@use './../../textarea.styles';
 
 .textarea-inline {
   display: block;

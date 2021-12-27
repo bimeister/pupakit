@@ -1,0 +1,5 @@
+@use './../functions/color.function' as *;
+
+@mixin debug() {
+  background-color: color(error, 0.33) !important;
+}

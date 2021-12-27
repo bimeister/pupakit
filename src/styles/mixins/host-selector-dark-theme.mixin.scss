@@ -1,0 +1,8 @@
+@use './host-selector.mixin' as *;
+@use './../variables/common.variables' as *;
+
+@mixin host-selector-dark-theme {
+  @include host-selector(#{$darkThemeClass}) {
+    @content;
+  }
+}

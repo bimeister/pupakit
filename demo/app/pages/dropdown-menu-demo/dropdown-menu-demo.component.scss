@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as *;
 
 .text {
   @include ellipsis-text-overflow;

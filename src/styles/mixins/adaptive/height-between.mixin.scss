@@ -1,0 +1,8 @@
+@mixin height-between($min-height, $max-height) {
+  $max-height: $max-height - 1;
+  $min-height: $min-height;
+
+  @media (min-height: $min-height * 1px) and (max-height: $max-height * 1px) {
+    @content;
+  }
+}

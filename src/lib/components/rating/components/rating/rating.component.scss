@@ -1,4 +1,4 @@
-@import 'functions';
+@use 'functions' as *;
 
 :host {
   display: flex;

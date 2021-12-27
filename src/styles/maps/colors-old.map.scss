@@ -1,0 +1,35 @@
+@use 'sass:map';
+@use './colors.map' as *;
+
+/** @deprecated: remove with legacy components */
+$colorsOldMap: (
+  'main': map.get($colorsMap, base-dark-n500),
+  'main-dark': map.get($colorsMap, base-n600),
+  'accent': map.get($colorsMap, base-dark-n500),
+  'active': map.get($colorsMap, primary-n500),
+  'success': map.get($colorsMap, green-n500),
+  'alert': map.get($colorsMap, yellow-n500),
+  'text': map.get($colorsMap, base-n600),
+  'subdark': map.get($colorsMap, base-white-n250),
+  'grey-light': #797979,
+  'grey-ivory': #a6a6a6,
+  'grey-apple': map.get($colorsMap, base-white-n250),
+  'white': map.get($colorsMap, base-n0),
+  'black': #000000,
+  'pale-blue': #d9eafe,
+  'cadet-blue': #9fb7d3,
+  'cadet-blue-light': #e0eaf5,
+  'dark-overlay': rgba(0, 0, 0, 0.82),
+  'error': map.get($colorsMap, red-n500),
+  'error-hovered': map.get($colorsMap, red-n400),
+  'error-active': map.get($colorsMap, red-n550),
+  'error-disabled': map.get($colorsMap, base-dark-n250),
+  'light': map.get($colorsMap, primary-n100),
+  'light-hovered': map.get($colorsMap, primary-n200),
+  'light-active': map.get($colorsMap, primary-n300),
+  'light-disabled': map.get($colorsMap, base-white-n500),
+  'primary': map.get($colorsMap, primary-n500),
+  'primary-hovered': map.get($colorsMap, base-dark-n275),
+  'primary-active': map.get($colorsMap, base-dark-n300),
+  'primary-disabled': map.get($colorsMap, base-dark-n250),
+);

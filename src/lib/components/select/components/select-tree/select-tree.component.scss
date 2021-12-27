@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 $height_item-container: 75rem;
 
@@ -22,10 +21,10 @@ $height_item-container: 75rem;
     padding: 0;
 
     &__loader {
-      background-color: rgba(color(base-n0-rgb), 0.8);
+      background-color: color(base-n0, 0.8);
 
       @include dark-theme-class-parent() {
-        background-color: rgba(color(base-n600-rgb), 0.8);
+        background-color: color(base-n600, 0.8);
         color: color(base-n0);
       }
     }

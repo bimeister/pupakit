@@ -1,6 +1,6 @@
-@import 'mixins';
-@import 'themes/functions';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 $adaptive-property: 'max-width';
 

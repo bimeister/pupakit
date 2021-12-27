@@ -1,6 +1,6 @@
 @use 'mixins' as *;
-@use 'demo/styles/demo-variables' as *;
-@use 'utils' as *;
+@use 'functions' as *;
+@use 'demo-variables' as *;
 
 :host {
   display: block;

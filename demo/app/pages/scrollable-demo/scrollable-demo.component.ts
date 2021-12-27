@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RadioOption } from '../../shared/components/example-viewer/radio-option';
 
-const BASE_REQUEST_PATH: string = 'scrollsble-demo/examples';
+const BASE_REQUEST_PATH: string = 'scrollable-demo/examples';
 
 @Component({
   selector: 'demo-scrollable-demo',

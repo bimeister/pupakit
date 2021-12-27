@@ -1,7 +1,7 @@
-@import './../../select-trigger.style.scss';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-@import 'mixins';
-@import 'functions';
+@use './../../select-trigger.style.scss' as *;
 
 .trigger {
   &__button-icons-container {

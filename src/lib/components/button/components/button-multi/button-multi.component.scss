@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   appearance: none;
@@ -216,7 +215,7 @@
             background-color: color(base-white-n400);
           }
           .button-multi__icon {
-            color: color(base-white-n600);
+            color: color(base-n0);
           }
         }
       }
@@ -228,7 +227,7 @@
             background-color: color(base-white-n300);
           }
           .button-multi__icon {
-            color: color(base-white-n600);
+            color: color(base-n0);
           }
         }
       }

@@ -1,5 +1,4 @@
-@import 'functions';
-@import 'themes/functions';
+@use 'functions' as *;
 
 // colors alerts
 $color_alert-info: #b4dff8;

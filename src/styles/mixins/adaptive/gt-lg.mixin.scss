@@ -1,0 +1,8 @@
+@use './../../variables/adaptive.variables' as *;
+@use './width-more-than.mixin' as *;
+
+@mixin gt-lg() {
+  @include width-more-than($xlgBreakPoint) {
+    @content;
+  }
+}

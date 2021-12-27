@@ -1,9 +1,17 @@
-@import '~@angular/cdk/overlay-prebuilt.css';
-@import './overlay.scss';
-@import './functions.scss';
-@import './font-faces.scss';
-@import './mixins.scss';
-@import './grid-styles.scss';
+@use 'sass:meta';
+@use 'functions' as *;
+@use 'mixins' as *;
+
+/** @deprecated: remove with ag-grid */
+@use 'ag-grid-community/src/styles/ag-grid.scss';
+@use 'ag-grid-community/src/styles/ag-theme-balham/sass/legacy/_ag-theme-balham-v22-compat';
+
+@use '@angular/cdk/overlay-prebuilt.css';
+
+@use 'overlay';
+@use 'css-variables';
+@use 'font-faces';
+@use 'grid-styles';
 
 h1,
 h2,

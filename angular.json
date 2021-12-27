@@ -80,9 +80,13 @@
             "outputPath": "./dist/demo",
             "polyfills": "demo/polyfills.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles/"]
+              "includePaths": ["src/styles", "demo/styles", "node_modules"]
             },
-            "styles": ["demo/styles/styles.scss"],
+            "styles": [
+              "src/styles/styles.scss",
+              "node_modules/highlight.js/styles/github.css",
+              "demo/styles/styles.scss"
+            ],
             "tsConfig": "./tsconfig.app.json",
             "aot": false,
             "vendorChunk": true,

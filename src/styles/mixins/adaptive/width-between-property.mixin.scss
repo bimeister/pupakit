@@ -1,0 +1,30 @@
+@use './width-between.mixin' as *;
+@use './calc-between-width.mixin' as *;
+@use './width-less-than.mixin' as *;
+@use './width-more-than.mixin' as *;
+
+@mixin width-between-property(
+  $property,
+  $width-start,
+  $value-start,
+  $width-end,
+  $value-end,
+  $is-save-width-before: false,
+  $is-save-width-after: false
+) {
+  @include width-between($width-start, $width-end) {
+    #{$property}: calc-between-width($width-start, $value-start, $width-end, $value-end);
+  }
+
+  @if $is-save-width-before {
+    @include width-less-than($width-start) {
+      #{$property}: $value-start * 1px;
+    }
+  }
+
+  @if $is-save-width-after {
+    @include width-more-than($width-end) {
+      #{$property}: $value-end * 1px;
+    }
+  }
+}

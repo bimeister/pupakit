@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: contents;

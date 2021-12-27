@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .switcher {
   position: relative;
@@ -19,7 +18,7 @@
   &__marker {
     background-color: color(base-n0);
     border-radius: 50%;
-    box-shadow: 0px 0px 1rem rgba(color(base-n600-rgb) 0.06);
+    box-shadow: 0px 0px 1rem color(base-n600, 0.06);
 
     transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common),
       background-color variable(transition-duration_shorter) variable(transition-timing-function_common);

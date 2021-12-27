@@ -1,0 +1,36 @@
+@use './../../variables/adaptive.variables' as *;
+@use './../../functions/adaptive/grid-column-offset.function' as *;
+
+@use './xs.mixin' as *;
+@use './sm.mixin' as *;
+@use './md.mixin' as *;
+@use './lg.mixin' as *;
+@use './lg.mixin' as *;
+@use './xlg.mixin' as *;
+@use './xl.mixin' as *;
+@use './xxl.mixin' as *;
+@use './xxl.mixin' as *;
+
+@mixin grid-offset($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'margin-left') {
+  @include xs() {
+    #{$property}: grid-column-offset($xsColumnsCount, $xsGutter, $xs);
+  }
+  @include sm() {
+    #{$property}: grid-column-offset($smColumnsCount, $smGutter, $sm);
+  }
+  @include md() {
+    #{$property}: grid-column-offset($mdColumnsCount, $mdGutter, $md);
+  }
+  @include lg() {
+    #{$property}: grid-column-offset($lgColumnsCount, $lgGutter, $lg);
+  }
+  @include xlg() {
+    #{$property}: grid-column-offset($xlgColumnsCount, $xlgGutter, $xlg);
+  }
+  @include xl() {
+    #{$property}: grid-column-offset($xlColumnsCount, $xlGutter, $xl);
+  }
+  @include xxl() {
+    #{$property}: grid-column-offset($xxlColumnsCount, $xxlGutter, $xxl);
+  }
+}

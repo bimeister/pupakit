@@ -1,0 +1,8 @@
+@mixin width-between($min-width, $max-width) {
+  $max-width: $max-width - 1;
+  $min-width: $min-width;
+
+  @media (min-width: $min-width * 1px) and (max-width: $max-width * 1px) {
+    @content;
+  }
+}

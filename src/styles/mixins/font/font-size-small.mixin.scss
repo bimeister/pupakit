@@ -1,0 +1,6 @@
+@use './../../variables/font.variables' as *;
+
+@mixin font-size-small($paragraph: false) {
+  font-size: $fontSizeSmall * 1px;
+  line-height: if($paragraph, $lineHeightSmallParagraph * 1px, $lineHeightSmall * 1px);
+}

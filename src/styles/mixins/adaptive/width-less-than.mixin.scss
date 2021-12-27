@@ -1,0 +1,7 @@
+@mixin width-less-than($width) {
+  $width: $width - 1;
+
+  @media (max-width: $width * 1px) {
+    @content;
+  }
+}

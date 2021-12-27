@@ -1,7 +1,6 @@
 @use 'mixins' as *;
 
-@import 'themes/functions';
-@import 'functions';
+@use 'functions' as *;
 
 $layout_border-size: 1px;
 
@@ -37,10 +36,10 @@ $layout_border-size: 1px;
   }
 
   &_with-shadow {
-    box-shadow: 0px 4px 24px rgba(color(base-n600-rgb), 0.04);
+    box-shadow: 0px 4px 24px color(base-n600, 0.04);
 
     @include host-selector-dark-theme() {
-      box-shadow: 0px 4px 24px rgba(color(base-n700-rgb), 0.12);
+      box-shadow: 0px 4px 24px color(base-n700, 0.12);
     }
   }
 

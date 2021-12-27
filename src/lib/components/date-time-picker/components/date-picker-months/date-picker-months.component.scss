@@ -1,4 +1,5 @@
-@import '../../date-picker.style.scss';
+@use '../../date-picker.style.scss';
+@use 'mixins' as *;
 
 $max-height_container: 178px;
 
