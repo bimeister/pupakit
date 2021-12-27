@@ -55,6 +55,8 @@ $end-item-margin: 4rem;
   @include grid-container-offset('padding-left');
 
   &__logo-wrapper {
+    position: relative;
+
     @include no-tap-highlight();
     cursor: pointer;
 
@@ -81,6 +83,14 @@ $end-item-margin: 4rem;
   }
 
   &__logo-icon {
+    height: 32px;
+    width: 32px;
+  }
+
+  &__santa-hat-icon {
+    position: absolute;
+    top: -13px;
+    left: -13px;
     height: 32px;
     width: 32px;
   }

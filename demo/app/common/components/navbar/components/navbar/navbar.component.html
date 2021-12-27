@@ -7,6 +7,7 @@
   </div>
 
   <div class="navbar__logo-wrapper" routerLink="/">
+    <img *ngIf="santaHatIcon" [src]="santaHatIcon" alt="" class="navbar__santa-hat-icon" />
     <img [src]="logoIcon" alt="" class="navbar__logo-icon" />
     <img [src]="logo$ | async" alt="" class="navbar__logo-image" />
   </div>

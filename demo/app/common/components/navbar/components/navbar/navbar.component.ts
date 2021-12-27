@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { filterTruthy, isNil, mapToVoid } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap, take } from 'rxjs/operators';
 import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
+import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
 import { OpenedDrawer } from '../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
-import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { DrawersService } from '../../../../../../../src/internal/shared/services/drawers.service';
 import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
 
 @Component({
@@ -25,6 +25,7 @@ export class NavbarComponent implements OnDestroy {
   private readonly logoDark: SafeResourceUrl;
   private readonly logoLight: SafeResourceUrl;
   public readonly logoIcon: SafeResourceUrl;
+  public readonly santaHatIcon: Nullable<SafeResourceUrl>;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -45,6 +46,14 @@ export class NavbarComponent implements OnDestroy {
     switchMap((openDrawer: OpenedDrawer) => openDrawer.closed$)
   );
 
+  private get isNewYearTime(): boolean {
+    const currentDate: Date = new Date();
+    const startDate: Date = new Date(currentDate.getFullYear(), 11, 15);
+    const endDate: Date = new Date(currentDate.getFullYear() + 1, 1, 15);
+
+    return startDate <= currentDate && currentDate <= endDate;
+  }
+
   constructor(
     private readonly themeWrapperService: ThemeWrapperService,
     private readonly sanitizer: DomSanitizer,
@@ -54,6 +63,9 @@ export class NavbarComponent implements OnDestroy {
     this.logoLight = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-light.svg');
     this.logoDark = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-dark.svg');
     this.logoIcon = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-icon.svg');
+    if (this.isNewYearTime) {
+      this.santaHatIcon = this.sanitizer.bypassSecurityTrustResourceUrl('assets/santa-hat.svg');
+    }
 
     this.subscription.add(this.closeMenuWhenDrawerClosed());
     this.subscription.add(this.openDrawerWhenMenuOpen());
