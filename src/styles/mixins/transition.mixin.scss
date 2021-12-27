@@ -1,0 +1,11 @@
+@use './../functions/variable.function' as *;
+
+@mixin transition(
+  $transition-property: all,
+  $transition-duration: variable(transition-duration_common),
+  $transition-timing-function: variable(transition-timing-function_common)
+) {
+  transition-duration: $transition-duration;
+  transition-timing-function: $transition-timing-function;
+  transition-property: $transition-property;
+}

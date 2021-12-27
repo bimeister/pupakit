@@ -1,0 +1,8 @@
+@use './../../variables/adaptive.variables' as *;
+@use './width-less-than.mixin' as *;
+
+@mixin lt-xxl() {
+  @include width-less-than($xxlBreakPoint) {
+    @content;
+  }
+}

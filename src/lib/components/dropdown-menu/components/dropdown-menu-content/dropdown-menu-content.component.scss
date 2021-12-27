@@ -1,5 +1,6 @@
-@import 'mixins';
-@import 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 .dropdown-content {
   &__menu {
@@ -8,7 +9,7 @@
     max-height: 72rem;
     max-width: 76rem;
     box-shadow: variable(box-shadow_dropdown);
-    background-color: rgba(color(white-rgb), 0.8);
+    background-color: color(white, 0.8);
     backdrop-filter: blur(40px);
     user-select: none;
     overflow: auto;
@@ -21,7 +22,7 @@
 
     &#{$darkThemeClass} {
       border-color: color(base-dark-n400);
-      background-color: rgba(color(base-n600-rgb), 0.94);
+      background-color: color(base-n600, 0.94);
     }
   }
 

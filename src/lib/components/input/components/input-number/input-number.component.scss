@@ -1,4 +1,4 @@
-@import './../../input.styles.scss';
+@use './../../input.styles.scss';
 
 .input {
   &[type='number']::-webkit-inner-spin-button,

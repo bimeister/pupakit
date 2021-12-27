@@ -1,5 +1,4 @@
-@import 'themes/functions';
-@import 'functions';
+@use 'functions' as *;
 
 $max-height_item-container: 75rem;
 

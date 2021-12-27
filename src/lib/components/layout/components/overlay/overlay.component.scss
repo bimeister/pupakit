@@ -1,4 +1,4 @@
-@import 'themes/functions';
+@use 'functions' as *;
 
 :host {
   display: contents;

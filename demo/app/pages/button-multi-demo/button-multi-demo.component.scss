@@ -1,8 +1,7 @@
-@use '../../../styles/demo-variables' as *;
+@use 'demo-variables' as *;
 
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 .content {
   background-color: color(base-n0);

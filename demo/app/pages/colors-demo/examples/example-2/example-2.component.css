@@ -1,0 +1,16 @@
+:host {
+  --color_primary-n550: 44, 112, 17;
+  --color_primary-n500: 25, 154, 31;
+  --color_primary-n400: 34, 210, 29;
+}
+
+.usage-example {
+  margin-top: 16px;
+  color: rgb(var(--color_base-white-n275));
+}
+
+.square {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(var(--color_primary-n550), 0.5);
+}

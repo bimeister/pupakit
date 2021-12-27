@@ -1,0 +1,7 @@
+@mixin width-more-than($width) {
+  $width: $width;
+
+  @media (min-width: $width * 1px) {
+    @content;
+  }
+}

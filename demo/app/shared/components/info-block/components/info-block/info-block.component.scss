@@ -1,6 +1,6 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 $color_light-info: color(primary-n100);
 $color_dark_info: color(primary-n550);

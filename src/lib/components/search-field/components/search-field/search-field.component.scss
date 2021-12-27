@@ -1,9 +1,8 @@
 @use 'sass:map';
 
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
-@import 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: block;

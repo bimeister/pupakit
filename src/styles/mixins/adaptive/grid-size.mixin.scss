@@ -1,0 +1,36 @@
+@use './../../variables/adaptive.variables' as *;
+@use './../../functions/adaptive/grid-column.function' as *;
+
+@use './xs.mixin' as *;
+@use './sm.mixin' as *;
+@use './md.mixin' as *;
+@use './lg.mixin' as *;
+@use './lg.mixin' as *;
+@use './xlg.mixin' as *;
+@use './xl.mixin' as *;
+@use './xxl.mixin' as *;
+@use './xxl.mixin' as *;
+
+@mixin grid-size($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'width') {
+  @include xs() {
+    #{$property}: grid-column($xsColumnsCount, $xsGutter, $xs);
+  }
+  @include sm() {
+    #{$property}: grid-column($smColumnsCount, $smGutter, $sm);
+  }
+  @include md() {
+    #{$property}: grid-column($mdColumnsCount, $mdGutter, $md);
+  }
+  @include lg() {
+    #{$property}: grid-column($lgColumnsCount, $lgGutter, $lg);
+  }
+  @include xlg() {
+    #{$property}: grid-column($xlgColumnsCount, $xlgGutter, $xlg);
+  }
+  @include xl() {
+    #{$property}: grid-column($xlColumnsCount, $xlGutter, $xl);
+  }
+  @include xxl() {
+    #{$property}: grid-column($xxlColumnsCount, $xxlGutter, $xxl);
+  }
+}

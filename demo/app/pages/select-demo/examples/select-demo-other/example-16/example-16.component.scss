@@ -1,4 +1,5 @@
-@import 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: flex;

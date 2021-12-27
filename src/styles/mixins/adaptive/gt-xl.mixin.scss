@@ -1,0 +1,8 @@
+@use './../../variables/adaptive.variables' as *;
+@use './width-more-than.mixin' as *;
+
+@mixin gt-xl() {
+  @include width-more-than($xxlBreakPoint) {
+    @content;
+  }
+}

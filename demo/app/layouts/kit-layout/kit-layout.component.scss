@@ -1,9 +1,7 @@
-@use 'utils' as *;
-
-@import 'themes/functions';
-@import 'demo/styles/demo-variables';
-@import 'mixins';
-@import 'functions';
+@use 'demo-variables' as *;
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
 
 .layout-wrapper {
   display: flex;

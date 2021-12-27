@@ -1,4 +1,4 @@
-@import 'src/styles/functions';
+@use 'functions' as *;
 
 .tooltip-demo {
   &__viewer-properties {

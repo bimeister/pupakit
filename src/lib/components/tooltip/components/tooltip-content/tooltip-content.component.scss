@@ -1,8 +1,7 @@
-@import 'functions';
-@import 'themes/functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
-$tooltip_background-color: rgba(color(base-n700-rgb), 0.8);
+$tooltip_background-color: color(base-n700, 0.8);
 $tooltip_max-text-lines-count: 13;
 
 .tooltip {

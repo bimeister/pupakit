@@ -1,0 +1,5 @@
+@mixin host-selector($selector) {
+  :host-context(#{$selector}) & {
+    @content;
+  }
+}

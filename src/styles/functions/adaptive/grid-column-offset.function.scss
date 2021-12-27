@@ -1,0 +1,7 @@
+@function grid-column-offset($columnCount, $gutter, $breakpointWidth) {
+  $gutter: $gutter * 1px;
+  $gutters: ($columnCount - 1) * $gutter;
+  $guttersOffset: ($breakpointWidth) * $gutter;
+
+  @return calc((((100% - #{$gutters}) / #{$columnCount}) * #{$breakpointWidth}) + #{$guttersOffset});
+}

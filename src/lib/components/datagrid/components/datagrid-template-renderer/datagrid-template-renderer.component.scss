@@ -1,4 +1,4 @@
-@import './../../../../../styles/mixins';
+@use 'mixins' as *;
 
 :host {
   width: 100%;

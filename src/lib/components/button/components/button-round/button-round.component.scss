@@ -1,4 +1,5 @@
-@import './../../button.styles.scss';
+@use 'mixins' as *;
+@use './../../button.styles.scss';
 
 .button {
   padding: 2rem;

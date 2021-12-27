@@ -1,6 +1,5 @@
-@import 'functions.scss';
-@import 'functions.scss';
-@import 'mixins.scss';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .container {
   height: 700px;

@@ -1,0 +1,8 @@
+@use './../../variables/adaptive.variables' as *;
+@use './width-between.mixin' as *;
+
+@mixin md() {
+  @include width-between($mdBreakPoint, $lgBreakPoint) {
+    @content;
+  }
+}

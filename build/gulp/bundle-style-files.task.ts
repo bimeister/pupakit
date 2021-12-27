@@ -4,22 +4,11 @@ import { info } from 'fancy-log';
 import { series, TaskFunction } from 'gulp';
 
 export function bundleStyleFilesTask(): TaskFunction {
-  return series(bundleScssFiles(), copyStylesToDistFolder(), processScssFiles());
-}
-
-function bundleScssFiles(): TaskFunction {
-  const command: string = 'scss-bundle --config scss-bundle.config.json';
-
-  return (onDone: VoidFunction): void => {
-    executeCommandWithLogging(command, {
-      onDone,
-      printDefaultOutput: false,
-    });
-  };
+  return series(processScssFiles(), copyStylesToDistFolder());
 }
 
 function processScssFiles(): TaskFunction {
-  const command: string = 'sass ./dist/lib/styles.scss ./dist/lib/styles.css';
+  const command: string = 'sass --load-path=node_modules ./src/styles/styles.scss ./dist/lib/styles.css';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {

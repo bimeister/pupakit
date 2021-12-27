@@ -1,0 +1,30 @@
+@use 'height-between.mixin' as *;
+@use 'calc-between-height.mixin' as *;
+@use 'height-less-than.mixin' as *;
+@use 'height-more-than.mixin' as *;
+
+@mixin height-between-property(
+  $property,
+  $height-start,
+  $value-start,
+  $height-end,
+  $value-end,
+  $is-save-height-before: false,
+  $is-save-height-after: false
+) {
+  @include height-between($height-start, $height-end) {
+    #{$property}: calc-between-height($height-start, $value-start, $height-end, $value-end);
+  }
+
+  @if $is-save-height-before {
+    @include height-less-than($height-start) {
+      #{$property}: $value-start * 1px;
+    }
+  }
+
+  @if $is-save-height-after {
+    @include height-more-than($height-end) {
+      #{$property}: $value-end * 1px;
+    }
+  }
+}

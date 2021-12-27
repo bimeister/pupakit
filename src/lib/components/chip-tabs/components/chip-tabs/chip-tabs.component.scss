@@ -1,6 +1,4 @@
-@import 'functions.scss';
-@import 'functions.scss';
-@import 'mixins.scss';
+@use 'functions' as *;
 
 .chip-tabs {
   width: 100%;

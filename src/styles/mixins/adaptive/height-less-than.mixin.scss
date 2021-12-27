@@ -1,0 +1,7 @@
+@mixin height-less-than($height) {
+  $height: $height - 1;
+
+  @media (max-height: $height * 1px) {
+    @content;
+  }
+}

@@ -3,8 +3,10 @@
 @use 'sass:map';
 
 @use 'mixins' as *;
-@use 'demo/styles/demo-mixins' as *;
-@use 'demo/styles/demo-variables' as *;
+@use 'functions' as *;
+@use 'demo-mixins' as *;
+@use 'variables' as *;
+@use 'demo-variables' as *;
 
 .not-found {
   display: flex;

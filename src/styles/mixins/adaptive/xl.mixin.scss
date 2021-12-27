@@ -1,0 +1,8 @@
+@use './../../variables/adaptive.variables' as *;
+@use './width-between.mixin' as *;
+
+@mixin xl() {
+  @include width-between($xlBreakPoint, $xxlBreakPoint) {
+    @content;
+  }
+}

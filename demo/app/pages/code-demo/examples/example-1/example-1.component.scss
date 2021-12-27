@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'functions' as *;
 
 .circle {
   display: block;

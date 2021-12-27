@@ -1,0 +1,13 @@
+@use './../maps/colors.map' as *;
+@use 'sass:map';
+
+@mixin override-colors($colorsToOverrideMap, $selector: ':root') {
+  #{$selector} {
+    @each $name, $value in $colorsToOverrideMap {
+      @if ((not map.has-key($colorsMap, $name))) {
+        @error '[override-colors] Wrong color key #{$name}';
+      }
+      --color_#{$name}: #{red($value), green($value), blue($value)};
+    }
+  }
+}

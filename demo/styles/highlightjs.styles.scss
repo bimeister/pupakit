@@ -1,6 +1,6 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 .hljs-tag {
   background: none;

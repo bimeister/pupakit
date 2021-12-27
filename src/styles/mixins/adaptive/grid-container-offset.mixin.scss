@@ -1,0 +1,35 @@
+@use './../../variables/adaptive.variables' as *;
+
+@use './xs.mixin' as *;
+@use './sm.mixin' as *;
+@use './md.mixin' as *;
+@use './lg.mixin' as *;
+@use './lg.mixin' as *;
+@use './xlg.mixin' as *;
+@use './xl.mixin' as *;
+@use './xxl.mixin' as *;
+@use './xxl.mixin' as *;
+
+@mixin grid-container-offset($property: 'padding-left') {
+  @include xs() {
+    #{$property}: $xsOffset * 1px;
+  }
+  @include sm() {
+    #{$property}: $smOffset * 1px;
+  }
+  @include md() {
+    #{$property}: $mdOffset * 1px;
+  }
+  @include lg() {
+    #{$property}: $lgOffset * 1px;
+  }
+  @include xlg() {
+    #{$property}: $xlgOffset * 1px;
+  }
+  @include xl() {
+    #{$property}: $xlOffset * 1px;
+  }
+  @include xxl() {
+    #{$property}: $xxlOffset * 1px;
+  }
+}

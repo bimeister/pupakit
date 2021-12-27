@@ -1,0 +1,14 @@
+@use 'maps' as *;
+@use 'sass:map';
+
+:root {
+  @each $name, $value in map.merge($colorsMap, $colorsOldMap) {
+    --color_#{$name}: #{red($value), green($value), blue($value)};
+  }
+}
+
+:root {
+  @each $name, $value in $variablesMap {
+    --#{$name}: #{$value};
+  }
+}

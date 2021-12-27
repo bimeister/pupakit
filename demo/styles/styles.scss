@@ -1,8 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~src/styles/themes/functions';
-@import '~src/styles/styles';
-@import '~src/styles/themes/blue-theme/pupa-blue-theme.scss';
-@import './highlightjs.styles.scss';
+@use 'functions' as *;
+@use 'mixins' as *;
+
+@use './highlightjs.styles.scss';
 
 @include scrollbar();
 
@@ -14,7 +14,7 @@ html {
 body {
   font-size: 4rem;
   line-height: 6rem;
-  @include regular();
+  @include font-type-caption();
   padding: variable(padding_body);
   margin: 0;
   overscroll-behavior: none;

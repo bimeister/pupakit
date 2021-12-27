@@ -1,5 +1,4 @@
-@import 'themes/functions';
-@import 'functions';
+@use 'functions' as *;
 
 .drawer-container {
   width: fit-content;

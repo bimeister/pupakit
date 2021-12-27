@@ -1,4 +1,4 @@
-@import 'functions';
+@use 'functions' as *;
 
 .virtual-scroll-viewport {
   height: 270px;

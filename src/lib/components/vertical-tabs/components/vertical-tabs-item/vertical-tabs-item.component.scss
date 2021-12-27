@@ -1,5 +1,4 @@
-@import 'themes/functions';
-@import 'functions.scss';
+@use 'functions' as *;
 
 .vertical-tabs__item {
   height: auto;

@@ -1,1 +1,21 @@
-@import '../example.styles';
+@use 'mixins' as *;
+
+.example-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  &__item {
+    width: 60px;
+    padding: 0 20px;
+
+    &_small-tag {
+      align-self: center;
+    }
+  }
+}
+
+.pupa-tag__content-text {
+  width: 11rem;
+  @include ellipsis-text-overflow;
+}

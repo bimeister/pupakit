@@ -1,5 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
@@ -36,7 +36,7 @@
   &_active {
     background-color: transparent;
 
-    box-shadow: 0px 2px 8px rgba(color(base-n700), 0.03);
+    box-shadow: 0px 2px 8px color(base-n700, 0.03);
   }
 
   &_disabled {

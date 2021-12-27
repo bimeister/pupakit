@@ -1,5 +1,4 @@
-@import 'functions';
-@import 'themes/functions';
+@use 'functions' as *;
 
 .item {
   border-radius: 2rem;

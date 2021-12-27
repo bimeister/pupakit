@@ -1,9 +1,7 @@
-@use 'demo/styles/demo-variables' as *;
-@use 'utils' as *;
+@use 'demo-variables' as *;
 
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 .container {
   border: 1px solid;

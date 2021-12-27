@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   appearance: none;
@@ -176,7 +175,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
 
@@ -187,7 +186,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
     }
@@ -214,7 +213,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(red-n500);
         }
       }
 
@@ -225,7 +224,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(red-n500);
         }
       }
     }
@@ -300,7 +299,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
 
@@ -311,7 +310,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
     }
@@ -341,7 +340,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
 
@@ -352,7 +351,7 @@
         }
 
         .button__icon {
-          color: color(base-white-n600);
+          color: color(base-n600);
         }
       }
     }

@@ -1,6 +1,5 @@
-@import 'themes/functions';
-@import 'mixins';
-@import 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 .code-inline {
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);

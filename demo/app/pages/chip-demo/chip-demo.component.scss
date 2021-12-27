@@ -1,4 +1,4 @@
-@import 'mixins';
+@use 'mixins' as *;
 
 pupa-chip {
   margin: 1rem;

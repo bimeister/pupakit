@@ -1,5 +1,5 @@
-@import 'functions';
-@import 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 .dropdown-item {
   --dropdown-item-icon-color: #{color(base-white-n200)};

@@ -1,7 +1,7 @@
-@use '../../../../../../styles/demo-variables' as *;
-@use '../../../../../../styles/demo-mixins' as *;
-@use 'src/styles/mixins' as *;
-@use 'utils' as *;
+@use 'demo-variables' as *;
+@use 'demo-mixins' as *;
+@use 'mixins' as *;
+@use 'functions' as *;
 
 @mixin apply-theme($theme-mode) {
   background-color: get-map-field($theme-config, [$theme-mode, 'navbar', 'background-color' ]);
@@ -36,19 +36,16 @@ $end-item-margin: 4rem;
   vertical-align: middle;
 
   background-color: transparent;
-  background-image: radial-gradient(rgba(color(base-white-n400-rgb), 0) 1px, rgba(color(base-white-n400-rgb), 0.9) 1px);
+  background-image: radial-gradient(color(base-white-n400, 0) 1px, color(base-white-n400, 0.9) 1px);
   background-size: 1rem 1rem;
   backdrop-filter: brightness(100%) blur(1rem);
 
   @include supports-backdrop-blur {
-    background-image: radial-gradient(
-      rgba(color(base-white-n400-rgb), 0) 1px,
-      rgba(color(base-white-n400-rgb), 0.5) 1px
-    );
+    background-image: radial-gradient(color(base-white-n400, 0) 1px, color(base-white-n400, 0.5) 1px);
   }
 
   @include host-selector-dark-theme() {
-    background-image: radial-gradient(rgba(color(base-dark-n500-rgb), 0) 1px, rgba(color(base-dark-n500-rgb), 0.5) 1px);
+    background-image: radial-gradient(color(base-dark-n500, 0) 1px, color(base-dark-n500, 0.5) 1px);
   }
 
   @include grid-container-offset('padding-right');
