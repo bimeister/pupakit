@@ -111,14 +111,13 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
     const tags: Element[] = Array.from(this.tagsContainerRef?.nativeElement?.children ?? []);
 
     const tagsWidthPxList: number[] = tags.map(({ clientWidth }: Element) => clientWidth);
-    const firstTagWidthPx: number = tagsWidthPxList[0];
 
     const totalWidthPxByTagPositionList: number[] = tagsWidthPxList.reduce(
       (tagsWidthPxAccumulator: number[], tagWidthPx: number) => {
-        const previousTotalWidthPx: number = tagsWidthPxAccumulator[tagsWidthPxAccumulator.length - 1];
+        const previousTotalWidthPx: number = tagsWidthPxAccumulator[tagsWidthPxAccumulator.length - 1] ?? 0;
         return [...tagsWidthPxAccumulator, previousTotalWidthPx + tagWidthPx];
       },
-      [firstTagWidthPx]
+      []
     );
 
     const indexOfTagOnBoundContainer: number = totalWidthPxByTagPositionList.findIndex(
