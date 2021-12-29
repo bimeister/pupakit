@@ -1,7 +1,7 @@
 export class ExpandedTreeItem {
   public readonly id: string;
   public parentTreeItem: ExpandedTreeItem;
-  public childTreeItem: ExpandedTreeItem;
+  public readonly childrenTreeItemsMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>();
   constructor(id: string) {
     this.id = id;
   }
@@ -16,41 +16,35 @@ export class ExpandedTreeItem {
   }
 
   public setChild(child: NonNullable<ExpandedTreeItem>): void {
-    if (this.childTreeItem?.id === child?.id) {
+    if (this.childrenTreeItemsMap.has(child?.id)) {
       return;
     }
-    this.childTreeItem = child;
+    this.childrenTreeItemsMap.set(child.id, child);
 
     child.setParent(this);
   }
 
-  public getAllParentIds(): string[] {
-    const parentIds: string[] = [];
-
-    let incomingParent: ExpandedTreeItem | undefined = this.parentTreeItem;
-    do {
-      if (incomingParent === undefined) {
-        break;
-      }
-      parentIds.push(incomingParent.id);
-      incomingParent = incomingParent.parentTreeItem;
-    } while (incomingParent !== undefined);
-
-    return parentIds;
-  }
-
   public getAllChildrenIds(): string[] {
-    const childrenIds: string[] = [];
+    const neededIds: string[] = Array.from(this.childrenTreeItemsMap.keys());
 
-    let incomingChild: ExpandedTreeItem | undefined = this.childTreeItem;
-    do {
-      if (incomingChild === undefined) {
-        break;
-      }
-      childrenIds.push(incomingChild.id);
-      incomingChild = incomingChild.childTreeItem;
-    } while (incomingChild !== undefined);
+    if (this.childrenTreeItemsMap.size > 0) {
+      const pushChildrenIds: (childrenIds: string[], treeItemsMap: Map<string, ExpandedTreeItem>) => void = (
+        childrenIds: string[],
+        treeItemsMap: Map<string, ExpandedTreeItem>
+      ) => {
+        if (treeItemsMap.size === 0) {
+          return;
+        }
 
-    return childrenIds;
+        const childChildrenIds: string[] = Array.from(treeItemsMap.keys());
+        childrenIds.push(...childChildrenIds);
+
+        treeItemsMap.forEach((treeItem: ExpandedTreeItem) =>
+          pushChildrenIds(childrenIds, treeItem.childrenTreeItemsMap)
+        );
+      };
+    }
+
+    return neededIds;
   }
 }

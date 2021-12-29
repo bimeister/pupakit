@@ -13,12 +13,13 @@ import {
 } from '@angular/core';
 import { distinctUntilSerializedChanged, isEmpty, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { debounceTime, map, take } from 'rxjs/operators';
+import { map, startWith } from 'rxjs/operators';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { HugeTreeRequestParams } from '../../../../../internal/declarations/interfaces/huge-tree-request-params.interface';
-import { ExpandedTreeItem } from '../classes/expanded-tree-item.class';
+import { HugeTreeState } from '../../../../../internal/declarations/interfaces/huge-tree-state.interface';
+import { HugeTreeExpandedItemsService } from '../services/huge-tree-expanded-items.service';
 
 interface ObjectWithLength {
   length: number;
@@ -32,15 +33,11 @@ const ITEM_BUFFER_COUNT: number = 50;
   styleUrls: ['./huge-tree.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [HugeTreeExpandedItemsService],
 })
 export class HugeTreeComponent implements OnChanges, AfterViewInit {
   @ViewChild('viewport', { static: true }) public readonly viewport: CdkVirtualScrollViewport;
-  private readonly expandedTreeItemsByIdMap$: BehaviorSubject<Map<string, ExpandedTreeItem>> = new BehaviorSubject(
-    new Map<string, ExpandedTreeItem>()
-  );
-  public readonly expandedTreeItemIds$: Observable<string[]> = this.expandedTreeItemsByIdMap$.pipe(
-    map((expandedItemsMap: Map<string, ExpandedTreeItem>) => Array.from(expandedItemsMap.keys()))
-  );
+  public readonly expandedTreeItemIds$: Observable<string[]> = this.hugeTreeExpandedItemsService.expandedTreeItemIds$;
 
   @Input() public totalTreeItemsLength: number;
   public readonly dataObjectWithLength$: BehaviorSubject<ObjectWithLength> = new BehaviorSubject<ObjectWithLength>({
@@ -52,6 +49,7 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   public readonly treeItemsData$: BehaviorSubject<FlatHugeTreeItem[]> = new BehaviorSubject<FlatHugeTreeItem[]>(null);
 
   @Output() public requestParams: EventEmitter<HugeTreeRequestParams> = new EventEmitter<HugeTreeRequestParams>();
+  @Output() public treeState: EventEmitter<HugeTreeState> = new EventEmitter<HugeTreeState>();
 
   public readonly bufferPx$: Observable<number> = this.treeItemSizePx$.pipe(
     map((sizePx: number) => sizePx * ITEM_BUFFER_COUNT),
@@ -60,6 +58,7 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
 
   private readonly subscription: Subscription = new Subscription();
 
+  constructor(private readonly hugeTreeExpandedItemsService: HugeTreeExpandedItemsService) {}
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processTreeItemSizeChanges(changes?.treeItemSizePx);
     this.processObjectLengthChanges(changes?.totalTreeItemsLength);
@@ -74,74 +73,15 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   }
 
   public toggleExpansion(id: string, parentId: string): void {
-    this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
-      const updatedMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>(expandedTreeItemsMap);
-
-      const expandedItem: ExpandedTreeItem | undefined = updatedMap.get(id);
-
-      if (isNil(expandedItem)) {
-        const newExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(id);
-
-        const parentTreeItem: ExpandedTreeItem | undefined = updatedMap.get(parentId);
-
-        const parentTreeItemFound: boolean = !isNil(parentTreeItem);
-
-        parentTreeItemFound
-          ? parentTreeItem.setChild(newExpandedTreeItem)
-          : newExpandedTreeItem.setParent(new ExpandedTreeItem(parentId));
-
-        updatedMap.set(id, newExpandedTreeItem);
-        this.expandedTreeItemsByIdMap$.next(updatedMap);
-        return;
-      }
-      expandedItem.getAllChildrenIds().forEach((childId: string) => updatedMap.delete(childId));
-      updatedMap.delete(id);
-
-      this.expandedTreeItemsByIdMap$.next(updatedMap);
-    });
+    this.hugeTreeExpandedItemsService.toggleExpansion(id, parentId);
   }
 
-  // пихнуть наружу
-  public scrollToIndexAndExpandParents(entityIndex: number, arrayOfParentIds: string[]): void {
-    this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
-      const updatedMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>(expandedTreeItemsMap);
-
-      const nearestParentId: string = arrayOfParentIds[arrayOfParentIds.length - 1];
-      const nearestParentExpandedItem: ExpandedTreeItem | undefined = updatedMap.get(nearestParentId);
-      const nearestParentTreeItemFound: boolean = !isNil(nearestParentExpandedItem);
-      if (isEmpty(arrayOfParentIds) || nearestParentTreeItemFound) {
-        this.viewport.scrollToIndex(entityIndex);
-        return;
-      }
-
-      arrayOfParentIds.forEach((parentId: string, index: number) => {
-        if (updatedMap.has(parentId)) {
-          return;
-        }
-        const newExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(parentId);
-
-        const nextParentId: string = arrayOfParentIds[index + 1];
-        if (!isNil(nextParentId)) {
-          const nextParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(nextParentId);
-          newExpandedTreeItem.setChild(nextParentExpandedTreeItem);
-        }
-
-        const previousParentId: string = arrayOfParentIds[index - 1];
-        if (!isNil(previousParentId)) {
-          const previousParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(previousParentId);
-          newExpandedTreeItem.setParent(previousParentExpandedTreeItem);
-        }
-
-        updatedMap.set(parentId, newExpandedTreeItem);
-      });
-
-      this.expandedTreeItemsByIdMap$.next(updatedMap);
-      this.scrollToIndex(entityIndex);
-    });
+  public expandParentsByIds(parentIds: string[]): void {
+    this.hugeTreeExpandedItemsService.expandParents(parentIds);
   }
 
-  private scrollToIndex(index: number): void {
-    this.treeItemsData$.pipe(debounceTime(500), take(1)).subscribe(() => this.viewport.scrollToIndex(index));
+  public scrollToIndex(index: number): void {
+    this.viewport.scrollToIndex(index);
   }
 
   private setDataObjectLength(length: number): void {
@@ -191,12 +131,36 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     return this.treeItemsData[neededIndex];
   }
 
+  public getTreeState(): Observable<HugeTreeState> {
+    return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange.pipe(startWith(0))]).pipe(
+      map(([expandedItemIds, currentFirstVisibleIndex]: [string[], number]) => {
+        const actualRange: ListRange = this.viewport.getRenderedRange();
+        return {
+          range: actualRange,
+          expandedItemIds,
+          currentIndex: currentFirstVisibleIndex,
+          totalCount: this.totalTreeItemsLength,
+        };
+      })
+    );
+  }
+
+  public setTreeState(treeState: HugeTreeState, treeItems: FlatHugeTreeItem[], needToScroll?: boolean): void {
+    this.treeItemsData = treeItems;
+
+    if (needToScroll) {
+      this.viewport.scrollToIndex(treeState.currentIndex);
+    }
+  }
+
   private emitRequestParamsChanges(): Subscription {
     return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange, this.dataObjectWithLength$])
       .pipe(distinctUntilSerializedChanged())
       .subscribe(([expandedItemIds, _, objectWithLength]: [string[], number, ObjectWithLength]) => {
         const renderedRange: ListRange = this.viewport.getRenderedRange();
         const roundedRange: ListRange = this.roundListRange(renderedRange, objectWithLength.length);
+        console.log('renderedRange: ', renderedRange);
+        console.log('roundedRange: ', roundedRange);
         this.requestParams.emit({ range: roundedRange, expandedItemIds });
       });
   }

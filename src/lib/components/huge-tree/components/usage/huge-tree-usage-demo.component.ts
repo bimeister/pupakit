@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { HttpResponse } from '@angular/common/http';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -16,10 +16,12 @@ import { HugeTreeItem } from '../../../../../internal/declarations/interfaces/hu
 import { HugeTreeItemsQuery } from '../../../../../internal/declarations/interfaces/huge-tree-items-query.interface';
 import { HugeTreeRequestParams } from '../../../../../internal/declarations/interfaces/huge-tree-request-params.interface';
 import { HugeTreeComponent } from '../api';
+import { HugeTreeDemoRequestsService } from '../services/huge-tree-demo-requests.service';
 
 const TREE_ITEM_SIZE_PX: number = 28;
 const REQUEST_DELAY_MS: number = 300;
 const INITIAL_TOTAL_TREE_ITEMS_LENGTH: number = 1;
+const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
 
 @Component({
   selector: 'pupa-huge-tree-usage-demo',
@@ -32,10 +34,6 @@ export class HugeTreeUsageDemoComponent implements AfterContentInit, OnDestroy {
   @ViewChild('hugeTree', { static: true }) public readonly hugeTree: HugeTreeComponent;
 
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
-  private readonly requestUrl: string = `https://sb16.bimeister.com/api/Trees/output2.csv/TreeItems`;
-  private readonly requestHttpHeaders: HttpHeaders = new HttpHeaders({
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2OTY5YjY1NC05NzExLTQ2OWItOGVjZS0yOTcyYjZkMjE0OWEiLCJpc3MiOiJodHRwOi8vd2ViYXBpIiwiaWF0IjoxNjM5NzUzNTMwLCJzaWQiOiJkMGMxZTljZS1lNzI2LTQ2ODctYmZjMi1iYjJmZDY1OTcyY2UiLCJzdWIiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTeXN0ZW0gQWRtaW5pc3RyYXRvciIsInRlbmFudF9pZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIsInVzZXJfcm9sZSI6ImFkbWluIiwibmJmIjoxNjM5NzUzNTMwLCJleHAiOjE2NDUwMzM1MzAsImF1ZCI6Imh0dHA6Ly9mcm9udGVuZCJ9.MMT0y15p2h4m39AzU6A1corCt92XcXmsIBLGF73z0Ok`,
-  });
 
   public readonly totalTreeItemsLength$: BehaviorSubject<number> = new BehaviorSubject<number>(
     INITIAL_TOTAL_TREE_ITEMS_LENGTH
@@ -47,7 +45,10 @@ export class HugeTreeUsageDemoComponent implements AfterContentInit, OnDestroy {
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly httpClient: HttpClient, private readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private readonly hugeTreeDemoRequestsService: HugeTreeDemoRequestsService,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {}
 
   public ngAfterContentInit(): void {
     this.subscription.add(this.getSubscriptionForRangeChanges());
@@ -61,11 +62,16 @@ export class HugeTreeUsageDemoComponent implements AfterContentInit, OnDestroy {
     this.requestParams$.next(params);
   }
 
-  public scrollByEntityId(
-    index: number = 9,
-    parentIds: string[] = ['c7c72951-5c29-464d-ba81-22edf8ea879d', '32f7b74e-1959-4ac0-ac67-b57c449481a8']
-  ): void {
-    this.hugeTree.scrollToIndexAndExpandParents(index, parentIds);
+  public a(): void {
+    this.expandParentByIds(['c7c72951-5c29-464d-ba81-22edf8ea879d', '32f7b74e-1959-4ac0-ac67-b57c449481a8']);
+    this.scrollByEntityId(9);
+  }
+  public scrollByEntityId(index: number): void {
+    this.hugeTree.scrollToIndex(index);
+  }
+
+  public expandParentByIds(parentIds: string[]): void {
+    this.hugeTree.expandParentsByIds(parentIds);
   }
 
   private setFakeArray(): void {
@@ -87,16 +93,13 @@ export class HugeTreeUsageDemoComponent implements AfterContentInit, OnDestroy {
         switchMap(({ range, expandedItemIds }: HugeTreeRequestParams) => {
           const query: HugeTreeItemsQuery = { expandedItemIds, fromIndex: range.start, toIndex: range.end };
 
-          return this.httpClient.post<any>(this.requestUrl, query, {
-            headers: this.requestHttpHeaders,
-            observe: 'response',
-          });
+          return this.hugeTreeDemoRequestsService.postTreeItems(query);
         })
       )
-      .subscribe((response: HttpResponse<Partial<HugeTreeItem[]>>) => {
-        const { headers, body: data }: HttpResponse<Partial<HugeTreeItem[]>> = response;
+      .subscribe((response: HttpResponse<HugeTreeItem[]>) => {
+        const { headers, body: data }: HttpResponse<HugeTreeItem[]> = response;
 
-        const visibleTotalCount: number = Number(headers.get('x-visible-total-count'));
+        const visibleTotalCount: number = Number(headers.get(TOTAL_COUNT_HEADER_NAME));
         this.totalTreeItemsLength$.next(visibleTotalCount);
 
         const updatedData: FlatHugeTreeItem[] = data.map(
