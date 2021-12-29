@@ -17,7 +17,6 @@ import { map, startWith } from 'rxjs/operators';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { HugeTreeRequestParams } from '../../../../../internal/declarations/interfaces/huge-tree-request-params.interface';
 import { HugeTreeState } from '../../../../../internal/declarations/interfaces/huge-tree-state.interface';
 import { HugeTreeExpandedItemsService } from '../services/huge-tree-expanded-items.service';
 
@@ -39,17 +38,13 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   @ViewChild('viewport', { static: true }) public readonly viewport: CdkVirtualScrollViewport;
   public readonly expandedTreeItemIds$: Observable<string[]> = this.hugeTreeExpandedItemsService.expandedTreeItemIds$;
 
-  @Input() public totalTreeItemsLength: number;
   public readonly dataObjectWithLength$: BehaviorSubject<ObjectWithLength> = new BehaviorSubject<ObjectWithLength>({
     length: 0,
   });
   @Input() public treeItemSizePx: number;
   public readonly treeItemSizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  @Input() public treeItemsData: FlatHugeTreeItem[];
-  public readonly treeItemsData$: BehaviorSubject<FlatHugeTreeItem[]> = new BehaviorSubject<FlatHugeTreeItem[]>(null);
-
-  @Output() public requestParams: EventEmitter<HugeTreeRequestParams> = new EventEmitter<HugeTreeRequestParams>();
-  @Output() public treeState: EventEmitter<HugeTreeState> = new EventEmitter<HugeTreeState>();
+  public treeItemsData: FlatHugeTreeItem[];
+  @Output() public updateNeeded: EventEmitter<void> = new EventEmitter<void>();
 
   public readonly bufferPx$: Observable<number> = this.treeItemSizePx$.pipe(
     map((sizePx: number) => sizePx * ITEM_BUFFER_COUNT),
@@ -61,8 +56,6 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   constructor(private readonly hugeTreeExpandedItemsService: HugeTreeExpandedItemsService) {}
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processTreeItemSizeChanges(changes?.treeItemSizePx);
-    this.processObjectLengthChanges(changes?.totalTreeItemsLength);
-    this.processTreeItemsDataChanges(changes?.treeItemsData);
   }
 
   public ngAfterViewInit(): void {
@@ -99,32 +92,12 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     this.treeItemSizePx$.next(updatedValue);
   }
 
-  private processObjectLengthChanges(change: ComponentChange<this, number>): void {
-    const updatedValue: number | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.setDataObjectLength(updatedValue);
-  }
-
-  private processTreeItemsDataChanges(change: ComponentChange<this, FlatHugeTreeItem[]>): void {
-    const updatedValue: FlatHugeTreeItem[] | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.treeItemsData$.next(updatedValue);
-  }
-
-  public getTreeNodeDataByIndex(index: number): FlatHugeTreeItem | undefined {
+  public getTreeNodeDataByIndex(index: number, totalTreeItemsLength: number): FlatHugeTreeItem | undefined {
     if (isNil(index) || isEmpty(this.treeItemsData)) {
       return undefined;
     }
     const currentRenderedRange: ListRange = this.viewport.getRenderedRange();
-    const roundedRange: ListRange | undefined = this.roundListRange(currentRenderedRange, this.totalTreeItemsLength);
+    const roundedRange: ListRange | undefined = this.roundListRange(currentRenderedRange, totalTreeItemsLength);
 
     const neededIndex: number = isNil(roundedRange) ? index : index - roundedRange.start;
 
@@ -132,40 +105,41 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   }
 
   public getTreeState(): Observable<HugeTreeState> {
-    return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange.pipe(startWith(0))]).pipe(
-      map(([expandedItemIds, currentFirstVisibleIndex]: [string[], number]) => {
+    return combineLatest([
+      this.expandedTreeItemIds$,
+      this.viewport.scrolledIndexChange.pipe(startWith(0)),
+      this.dataObjectWithLength$,
+    ]).pipe(
+      map(([expandedItemIds, currentFirstVisibleIndex, dataObjectWithLength]: [string[], number, ObjectWithLength]) => {
         const actualRange: ListRange = this.viewport.getRenderedRange();
+        const totalTreeItemsLength: number = dataObjectWithLength.length;
+
         return {
           range: actualRange,
           expandedItemIds,
           currentIndex: currentFirstVisibleIndex,
-          totalCount: this.totalTreeItemsLength,
+          totalCount: totalTreeItemsLength,
         };
       })
     );
   }
 
-  public setTreeState(treeState: HugeTreeState, treeItems: FlatHugeTreeItem[], needToScroll?: boolean): void {
+  public setTreeState(
+    totalCount: number,
+    treeItems: FlatHugeTreeItem[],
+    indexToScroll?: number,
+    needToScroll?: boolean
+  ): void {
     this.treeItemsData = treeItems;
 
+    this.setDataObjectLength(totalCount);
+
     if (needToScroll) {
-      this.viewport.scrollToIndex(treeState.currentIndex);
+      this.viewport.scrollToIndex(indexToScroll);
     }
   }
 
-  private emitRequestParamsChanges(): Subscription {
-    return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange, this.dataObjectWithLength$])
-      .pipe(distinctUntilSerializedChanged())
-      .subscribe(([expandedItemIds, _, objectWithLength]: [string[], number, ObjectWithLength]) => {
-        const renderedRange: ListRange = this.viewport.getRenderedRange();
-        const roundedRange: ListRange = this.roundListRange(renderedRange, objectWithLength.length);
-        console.log('renderedRange: ', renderedRange);
-        console.log('roundedRange: ', roundedRange);
-        this.requestParams.emit({ range: roundedRange, expandedItemIds });
-      });
-  }
-
-  private roundListRange(range: ListRange, totalCount: number): ListRange {
+  public roundListRange(range: ListRange, totalCount: number): ListRange {
     const { start, end }: ListRange = range;
 
     const countItemsInViewport: number = end - start;
@@ -184,5 +158,11 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     const convertedEnd: number = roundedEnd === 0 ? roundValue : roundedEnd;
 
     return { start: roundedStart, end: convertedEnd };
+  }
+
+  private emitRequestParamsChanges(): Subscription {
+    return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange.pipe(startWith(0))])
+      .pipe(distinctUntilSerializedChanged())
+      .subscribe(() => this.updateNeeded.emit());
   }
 }
