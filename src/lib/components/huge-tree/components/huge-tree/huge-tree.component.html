@@ -6,11 +6,11 @@
     [minBufferPx]="bufferPx$ | async"
     #viewport
   >
-    <ng-container *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async; let index = index; let odd = odd">
+    <ng-container *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async as dataObjectWithLength; let index = index; let odd = odd">
       <ng-container
       [ngTemplateOutlet]="treeNode"
       [ngTemplateOutletContext]="{
-        nodeData: getTreeNodeDataByIndex(index)
+        nodeData: getTreeNodeDataByIndex(index, dataObjectWithLength)
       }"
     ></ng-container>
     </ng-container>

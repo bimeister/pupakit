@@ -1,8 +1,6 @@
 <pupa-huge-tree #hugeTree
   [treeItemSizePx]="treeItemSizePx"
-  [treeItemsData]="treeItemsData$ | async"
-  [totalTreeItemsLength]="totalTreeItemsLength$ | async"
-  (requestParams)="processRequestParamsEmit($event)"
+  (updateNeeded)="processTreeUpdateNeeded()"
 ></pupa-huge-tree>
 
-<button (click)="a()">scroll plz</button>
+<button (click)="a()">scroll plz (hardcode)</button>

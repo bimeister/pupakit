@@ -25,7 +25,7 @@ export class ExpandedTreeItem {
   }
 
   public getAllChildrenIds(): string[] {
-    const neededIds: string[] = Array.from(this.childrenTreeItemsMap.keys());
+    const neededIds: string[] = [];
 
     if (this.childrenTreeItemsMap.size > 0) {
       const pushChildrenIds: (childrenIds: string[], treeItemsMap: Map<string, ExpandedTreeItem>) => void = (
@@ -43,6 +43,8 @@ export class ExpandedTreeItem {
           pushChildrenIds(childrenIds, treeItem.childrenTreeItemsMap)
         );
       };
+
+      pushChildrenIds(neededIds, this.childrenTreeItemsMap);
     }
 
     return neededIds;
