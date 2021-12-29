@@ -51,7 +51,7 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
     null
   );
 
-  private readonly tagsContainerWidthPx$: Observable<number> = this.tagsContainer$.pipe(
+  public readonly tagsContainerWidthPx$: Observable<number> = this.tagsContainer$.pipe(
     observeOn(animationFrameScheduler),
     filterNotNil(),
     distinctUntilChanged(),
@@ -109,6 +109,10 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
 
   private getCurrentTagsOverflowCount(tagsContainerWidthPx: number): number {
     const tags: Element[] = Array.from(this.tagsContainerRef?.nativeElement?.children ?? []);
+
+    if (tags.length === 1) {
+      return 0;
+    }
 
     const tagsWidthPxList: number[] = tags.map(({ clientWidth }: Element) => clientWidth);
 

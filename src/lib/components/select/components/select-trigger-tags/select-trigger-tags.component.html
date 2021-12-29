@@ -4,6 +4,7 @@
   [class.trigger_active]="isExpanded$ | async"
   [class.trigger_disabled]="isDisabled$ | async"
   [class.trigger_invalid]="isInvalid$ | async"
+  [style.--tags-container-width-px]="(tagsContainerWidthPx$ | async) + 'px'"
   (click)="processButtonClick()"
   (mousedown)="processTriggerTouch()"
   (touchstart)="processTriggerTouch()"
