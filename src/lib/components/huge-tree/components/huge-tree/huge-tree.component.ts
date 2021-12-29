@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { distinctUntilSerializedChanged, isEmpty, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { debounceTime, map, take } from 'rxjs/operators';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -35,7 +35,7 @@ const ITEM_BUFFER_COUNT: number = 50;
 })
 export class HugeTreeComponent implements OnChanges, AfterViewInit {
   @ViewChild('viewport', { static: true }) public readonly viewport: CdkVirtualScrollViewport;
-  public readonly expandedTreeItemsByIdMap$: BehaviorSubject<Map<string, ExpandedTreeItem>> = new BehaviorSubject(
+  private readonly expandedTreeItemsByIdMap$: BehaviorSubject<Map<string, ExpandedTreeItem>> = new BehaviorSubject(
     new Map<string, ExpandedTreeItem>()
   );
   public readonly expandedTreeItemIds$: Observable<string[]> = this.expandedTreeItemsByIdMap$.pipe(
@@ -101,6 +101,49 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     });
   }
 
+  // пихнуть наружу
+  public scrollToIndexAndExpandParents(entityIndex: number, arrayOfParentIds: string[]): void {
+    this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
+      const updatedMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>(expandedTreeItemsMap);
+
+      const nearestParentId: string = arrayOfParentIds[arrayOfParentIds.length - 1];
+      const nearestParentExpandedItem: ExpandedTreeItem | undefined = updatedMap.get(nearestParentId);
+      const nearestParentTreeItemFound: boolean = !isNil(nearestParentExpandedItem);
+      if (isEmpty(arrayOfParentIds) || nearestParentTreeItemFound) {
+        this.viewport.scrollToIndex(entityIndex);
+        return;
+      }
+
+      arrayOfParentIds.forEach((parentId: string, index: number) => {
+        if (updatedMap.has(parentId)) {
+          return;
+        }
+        const newExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(parentId);
+
+        const nextParentId: string = arrayOfParentIds[index + 1];
+        if (!isNil(nextParentId)) {
+          const nextParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(nextParentId);
+          newExpandedTreeItem.setChild(nextParentExpandedTreeItem);
+        }
+
+        const previousParentId: string = arrayOfParentIds[index - 1];
+        if (!isNil(previousParentId)) {
+          const previousParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(previousParentId);
+          newExpandedTreeItem.setParent(previousParentExpandedTreeItem);
+        }
+
+        updatedMap.set(parentId, newExpandedTreeItem);
+      });
+
+      this.expandedTreeItemsByIdMap$.next(updatedMap);
+      this.scrollToIndex(entityIndex);
+    });
+  }
+
+  private scrollToIndex(index: number): void {
+    this.treeItemsData$.pipe(debounceTime(500), take(1)).subscribe(() => this.viewport.scrollToIndex(index));
+  }
+
   private setDataObjectLength(length: number): void {
     const objectWithLength: ObjectWithLength = { length };
     this.dataObjectWithLength$.next(objectWithLength);
@@ -158,10 +201,7 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
       });
   }
 
-  private roundListRange(range: ListRange, totalCount: number): ListRange | undefined {
-    if (isNil(totalCount)) {
-      return undefined;
-    }
+  private roundListRange(range: ListRange, totalCount: number): ListRange {
     const { start, end }: ListRange = range;
 
     const countItemsInViewport: number = end - start;
