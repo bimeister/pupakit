@@ -6,13 +6,15 @@
     [minBufferPx]="bufferPx$ | async"
     #viewport
   >
-    <ng-container *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async as dataObjectWithLength; let index = index; let odd = odd">
+    <ng-container
+      *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async as dataObjectWithLength; let index = index; let odd = odd"
+    >
       <ng-container
-      [ngTemplateOutlet]="treeNode"
-      [ngTemplateOutletContext]="{
+        [ngTemplateOutlet]="treeNode"
+        [ngTemplateOutletContext]="{
         nodeData: getTreeNodeDataByIndex(index, dataObjectWithLength)
       }"
-    ></ng-container>
+      ></ng-container>
     </ng-container>
   </cdk-virtual-scroll-viewport>
 </section>
@@ -24,7 +26,6 @@
     </pupa-skeleton-group>
   </pupa-skeleton>
 </ng-template>
-
 
 <ng-template #treeNode let-nodeData="nodeData">
   <div class="tree-node" *ngIf="nodeData" [style.padding-left.px]="10 * nodeData.level">

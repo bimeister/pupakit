@@ -5,4 +5,5 @@ export interface HugeTreeState {
   expandedItemIds: string[];
   currentIndex: number;
   totalCount: number;
+  currentTreeItemsLength: number;
 }

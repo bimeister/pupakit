@@ -5,6 +5,6 @@ import { HugeTreeDemoComponent } from './huge-tree-demo.component';
 
 @NgModule({
   declarations: [HugeTreeDemoComponent],
-  imports: [DemoSharedModule, HugeTreeDemoRoutingModule]
+  imports: [DemoSharedModule, HugeTreeDemoRoutingModule],
 })
 export class HugeTreeDemoModule {}

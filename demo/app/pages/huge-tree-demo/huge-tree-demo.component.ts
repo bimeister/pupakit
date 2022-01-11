@@ -5,6 +5,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   styleUrls: ['./huge-tree-demo.component.scss'],
   templateUrl: './huge-tree-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  encapsulation: ViewEncapsulation.Emulated
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class HugeTreeDemoComponent {}

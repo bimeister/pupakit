@@ -3,13 +3,13 @@ import { HttpResponse } from '@angular/common/http';
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 import { isEqual } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, of, Subscription } from 'rxjs';
-import { debounceTime, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { delay, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/api';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
 import { HugeTreeItem } from '../../../../../internal/declarations/interfaces/huge-tree-item.interface';
 import { HugeTreeItemsQuery } from '../../../../../internal/declarations/interfaces/huge-tree-items-query.interface';
 import { HugeTreeState } from '../../../../../internal/declarations/interfaces/huge-tree-state.interface';
-import { HugeTreeComponent } from '../api';
+import { HugeTreeComponent } from '../huge-tree/huge-tree.component';
 import { HugeTreeDemoRequestsService } from '../services/huge-tree-demo-requests.service';
 
 const TREE_ITEM_SIZE_PX: number = 28;
@@ -47,10 +47,12 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
   public processTreeUpdateNeeded(): void {
     this.hugeTree
       .getTreeState()
-      .pipe(debounceTime(REQUEST_DELAY_MS), take(1))
+      .pipe(
+        tap(({ currentTreeItemsLength }: HugeTreeState) => this.setFakeArray(currentTreeItemsLength)),
+        delay(REQUEST_DELAY_MS),
+        take(1)
+      )
       .subscribe((treeState: HugeTreeState) => {
-        console.log('treeState upd need?: ', treeState);
-
         const initialRequestOrEmptyTree: boolean = treeState.range.end === 0;
 
         if (initialRequestOrEmptyTree) {
@@ -62,24 +64,34 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
       });
   }
 
-  public a(): void {
-    this.expandParentByIds(['c7c72951-5c29-464d-ba81-22edf8ea879d', '32f7b74e-1959-4ac0-ac67-b57c449481a8']);
-    this.scrollByEntityId(9);
+  public hardCodeScroll1(): void {
+    const someElementId: string = '19baee1f-e883-44f9-b841-f52a2a73ccfe';
+    const someElementParentIds: string[] = [
+      'c7c72951-5c29-464d-ba81-22edf8ea879d',
+      '205f847d-4aad-4e9b-8537-1eafa8d7d329',
+    ];
+
+    this.expandParentByIdsAndScroll(someElementParentIds, someElementId);
   }
 
-  public scrollByEntityId(index: number): void {
-    this.hugeTree.scrollToIndex(index);
-  }
+  public hardCodeScroll2(): void {
+    const someElementId: string = '3284558e-73ae-4e1f-84ae-dba123046c9b';
+    const someElementParentIds: string[] = [
+      'c7c72951-5c29-464d-ba81-22edf8ea879d',
+      '61cc67b4-9938-4300-abe4-b3b378cf25cc',
+      '6ead6b0b-29cc-4ab7-8944-2abd6cbac8ad',
+      '0a043e42-d1fc-4695-9af8-551d8a305713',
+    ];
 
-  public expandParentByIds(parentIds: string[]): void {
-    this.hugeTree.expandParentsByIds(parentIds);
+    this.expandParentByIdsAndScroll(someElementParentIds, someElementId);
   }
 
   public expandParentByIdsAndScroll(parentIds: string[], entityId: string): void {
     this.hugeTree
       .getTreeState()
       .pipe(
-        debounceTime(REQUEST_DELAY_MS),
+        tap(({ currentTreeItemsLength }: HugeTreeState) => this.setFakeArray(currentTreeItemsLength)),
+        delay(REQUEST_DELAY_MS),
         take(1),
         switchMap((treeState: HugeTreeState) => {
           const updatedExpandedIds: string[] = Array.from(new Set([...treeState.expandedItemIds, ...parentIds]));
@@ -96,13 +108,14 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
             of(updatedState),
           ]);
         }),
+        take(1),
         switchMap(
           ([entityIndex, treeItemsResponse, treeState]: [number, HttpResponse<HugeTreeItem[]>, HugeTreeState]) => {
             const { headers }: HttpResponse<HugeTreeItem[]> = treeItemsResponse;
             const visibleTotalCount: number = Number(headers.get(TOTAL_COUNT_HEADER_NAME));
 
             const updatedRange: ListRange = this.hugeTree.roundListRange(
-              { start: entityIndex, end: entityIndex > treeState.range.end ? treeState.range.end : entityIndex + 100 },
+              { start: entityIndex, end: entityIndex < treeState.range.end ? treeState.range.end : entityIndex },
               visibleTotalCount
             );
 
@@ -118,7 +131,8 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
               this.currentTreeItemsData$,
             ]);
           }
-        )
+        ),
+        take(1)
       )
       .subscribe(
         ([response, entityIndex, currentTreeItemsData]: [HttpResponse<HugeTreeItem[]>, number, FlatHugeTreeItem[]]) => {
@@ -135,6 +149,7 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
           );
 
           if (isEqual(updatedTreeItemsData, currentTreeItemsData)) {
+            this.hugeTree.setTreeItemsData(currentTreeItemsData);
             return;
           }
 
@@ -142,11 +157,18 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
 
           this.currentTreeItemsData$.next(updatedTreeItemsData);
 
-          this.hugeTree.setTreeState(visibleTotalCount, updatedTreeItemsData, entityIndex, true);
-
           this.hugeTree.expandParentsByIds(parentIds);
+
+          this.hugeTree.setTreeState(visibleTotalCount, updatedTreeItemsData, true, entityIndex);
         }
       );
+  }
+
+  private setFakeArray(arrayLength: number): void {
+    const fakeArray: FlatHugeTreeItem[] = new Array(arrayLength).fill(
+      new FlatHugeTreeItem(false, null, null, null, null)
+    );
+    this.hugeTree.setTreeItemsData(fakeArray);
   }
 
   private processInitialDataRequest(hugeTreeState: HugeTreeState): void {
@@ -195,6 +217,7 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
         );
 
         if (isEqual(updatedTreeItemsData, currentTreeItemsData)) {
+          this.hugeTree.setTreeItemsData(currentTreeItemsData);
           return;
         }
         const visibleTotalCount: number = Number(headers.get(TOTAL_COUNT_HEADER_NAME));
@@ -204,13 +227,4 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
         this.hugeTree.setTreeState(visibleTotalCount, updatedTreeItemsData);
       });
   }
-
-  // private setFakeArray(): void {
-  //   this.treeItemsData$.pipe(take(1), filterNotEmpty()).subscribe((data: FlatHugeTreeItem[]) => {
-  //     const fakeArray: FlatHugeTreeItem[] = new Array(data.length).fill(
-  //       new FlatHugeTreeItem(false, null, null, null, null)
-  //     );
-  //     this.treeItemsData$.next(fakeArray);
-  //   });
-  // }
 }
