@@ -260,7 +260,11 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   }
 
   public reset(): void {
-    this.control$.pipe(take(1), filterNotNil()).subscribe((control: NgControl) => control.reset());
+    this.control$
+      .pipe(take(1), filterNotNil(), withLatestFrom(this.isMultiSelectionEnabled$))
+      .subscribe(([control, isMultiSelectionEnable]: [NgControl, boolean]) => {
+        control.reset(isMultiSelectionEnable ? [] : null);
+      });
   }
 
   public processFocusInputContainer(inputElement: ElementRef<HTMLInputElement>): Subscription {
