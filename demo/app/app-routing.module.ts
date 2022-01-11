@@ -71,7 +71,7 @@ const demoRoutes: Routes = [
       {
         path: 'huge-tree',
         loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
-          import('./pages/huge-tree-demo/huge-tree-demo.module').then(module => module.HugeTreeDemoModule)
+          import('./pages/huge-tree-demo/huge-tree-demo.module').then((module: any) => module.HugeTreeDemoModule),
       },
       {
         path: 'typography',

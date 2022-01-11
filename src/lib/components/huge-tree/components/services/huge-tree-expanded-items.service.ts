@@ -46,12 +46,17 @@ export class HugeTreeExpandedItemsService {
 
   public expandParents(parentIds: string[]): void {
     this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
+      if (isEmpty(parentIds)) {
+        return;
+      }
+
       const updatedMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>(expandedTreeItemsMap);
 
       const nearestParentId: string = parentIds[parentIds.length - 1];
       const nearestParentExpandedItem: ExpandedTreeItem | undefined = updatedMap.get(nearestParentId);
       const nearestParentTreeItemFound: boolean = !isNil(nearestParentExpandedItem);
-      if (isEmpty(parentIds) || nearestParentTreeItemFound) {
+
+      if (nearestParentTreeItemFound) {
         return;
       }
 
@@ -59,17 +64,12 @@ export class HugeTreeExpandedItemsService {
         if (updatedMap.has(parentId)) {
           return;
         }
-        const newExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(parentId);
 
-        const nextParentId: string = parentIds[index + 1];
-        if (!isNil(nextParentId)) {
-          const nextParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(nextParentId);
-          newExpandedTreeItem.setChild(nextParentExpandedTreeItem);
-        }
+        const newExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(parentId);
 
         const previousParentId: string = parentIds[index - 1];
         if (!isNil(previousParentId)) {
-          const previousParentExpandedTreeItem: ExpandedTreeItem = new ExpandedTreeItem(previousParentId);
+          const previousParentExpandedTreeItem: ExpandedTreeItem = updatedMap.get(previousParentId);
           newExpandedTreeItem.setParent(previousParentExpandedTreeItem);
         }
 

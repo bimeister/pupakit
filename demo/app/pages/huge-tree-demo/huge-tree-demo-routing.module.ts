@@ -5,12 +5,12 @@ import { HugeTreeDemoComponent } from './huge-tree-demo.component';
 const routes: Routes = [
   {
     path: '',
-    component: HugeTreeDemoComponent
-  }
+    component: HugeTreeDemoComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class HugeTreeDemoRoutingModule {}

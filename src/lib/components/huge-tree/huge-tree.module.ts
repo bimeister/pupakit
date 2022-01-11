@@ -18,9 +18,9 @@ import { HugeTreeUsageDemoComponent } from './components/usage/huge-tree-usage-d
     SpinnerModule,
     ScrollingModule,
     CdkTreeModule,
-    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon])
+    IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
   ],
   providers: [],
-  exports: [HugeTreeComponent, HugeTreeUsageDemoComponent]
+  exports: [HugeTreeComponent, HugeTreeUsageDemoComponent],
 })
 export class HugeTreeModule {}

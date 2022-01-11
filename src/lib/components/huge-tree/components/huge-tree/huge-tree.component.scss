@@ -1,5 +1,5 @@
-@import './../../../../../styles/themes/functions';
-@import './../../../../../styles/functions.scss';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   width: 100%;
@@ -15,20 +15,6 @@
   width: auto;
   user-select: none;
   background: color(white);
-
-  &__loader {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(color(white-rgb), 0.8);
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: color(main);
-  }
 }
 
 .viewport {
@@ -42,14 +28,6 @@
     z-index: -1;
     pointer-events: none;
   }
-}
-
-.tree-node-row {
-  all: unset;
-  display: block;
-  height: 7rem;
-  background: color(white);
-  padding-bottom: 1px;
 }
 
 .tree-node {

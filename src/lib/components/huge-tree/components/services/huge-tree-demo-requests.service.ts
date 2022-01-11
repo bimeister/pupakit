@@ -15,9 +15,11 @@ interface TreeView {
 export class HugeTreeDemoRequestsService {
   private readonly requestUrl: string = `https://sb16.bimeister.com/api/Trees`;
 
+  // cSpell:disable
   private readonly requestHttpHeaders: HttpHeaders = new HttpHeaders({
     Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiI2OTY5YjY1NC05NzExLTQ2OWItOGVjZS0yOTcyYjZkMjE0OWEiLCJpc3MiOiJodHRwOi8vd2ViYXBpIiwiaWF0IjoxNjM5NzUzNTMwLCJzaWQiOiJkMGMxZTljZS1lNzI2LTQ2ODctYmZjMi1iYjJmZDY1OTcyY2UiLCJzdWIiOiJhZG1pbiIsInVzZXJuYW1lIjoiYWRtaW4iLCJkaXNwbGF5X25hbWUiOiJTeXN0ZW0gQWRtaW5pc3RyYXRvciIsInRlbmFudF9pZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDAwMDAwMDAwMCIsInVzZXJfcm9sZSI6ImFkbWluIiwibmJmIjoxNjM5NzUzNTMwLCJleHAiOjE2NDUwMzM1MzAsImF1ZCI6Imh0dHA6Ly9mcm9udGVuZCJ9.MMT0y15p2h4m39AzU6A1corCt92XcXmsIBLGF73z0Ok`,
   });
+  // cSpell:enable
 
   constructor(private readonly httpClient: HttpClient) {}
 
