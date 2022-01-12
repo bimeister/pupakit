@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 @Component({
   selector: 'demo-spinner-demo',
@@ -8,17 +8,18 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
 })
 export class SpinnerDemoComponent {
   public readonly size: string = '32px';
-  public readonly typeOptions: RadioOption[] = [
+
+  public readonly typeOptions: PropsOption[] = [
     {
-      caption: 'Simple',
-      value: 'simple',
+      caption: 'pupa-bagel-spinner',
+      value: 'bagel-spinner',
     },
     {
-      caption: 'Bagel',
-      value: 'bagel',
+      caption: 'pupa-spinner ',
+      value: 'spinner',
     },
     {
-      caption: 'Scene loader',
+      caption: 'pupa-loader',
       value: 'loader',
     },
   ];

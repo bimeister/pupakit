@@ -2,12 +2,19 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" hasDragAndDrop="true" [isLoading]="loading | async">
+    <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" hasDragAndDrop="true" [isLoading]="isLoading$ | async">
     </pupa-tree>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #loading>Loading</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="isLoading" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is in loading state.</ng-container>
+      <demo-props-switcher #isLoading$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="flatDataOrigin" type="FlatTreeItem[]">
+      <ng-container *demoExampleViewerPropertyDescription>Origin flat data.</ng-container>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>

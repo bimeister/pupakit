@@ -2,11 +2,39 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-rating [value]="3" [disabled]="disabled | async"></pupa-rating>
+    <pupa-rating
+      [value]="valueFormControl.value"
+      (change)="handleValueChange($event)"
+      [disabled]="disabled$ | async"
+      [numberOfStars]="numberOfStarsFormControl.value"
+      [size]="starSize$ | async"
+    ></pupa-rating>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="value" type="number">
+      <ng-container *demoExampleViewerPropertyDescription>Rating value.</ng-container>
+      <pupa-input-number [formControl]="valueFormControl"></pupa-input-number>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="numberOfStars" type="number">
+      <ng-container *demoExampleViewerPropertyDescription>Number of stars.</ng-container>
+      <pupa-input-number [formControl]="numberOfStarsFormControl"></pupa-input-number>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="size" type="StarSize">
+      <ng-container *demoExampleViewerPropertyDescription>Size of star.</ng-container>
+      <demo-props-radio-select #starSize$ [options]="starSizeOptions" direction="row"></demo-props-radio-select>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="output" name="change" type="EventEmitter<number>">
+      <ng-container *demoExampleViewerPropertyDescription>Emits new rating value.</ng-container>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>

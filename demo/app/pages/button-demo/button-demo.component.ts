@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'demo-button',
@@ -9,7 +10,9 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ButtonDemoComponent {
-  public readonly sizeOptions: RadioOption[] = [
+  public readonly buttonIconFormControl: FormControl = new FormControl('app-notification');
+
+  public readonly sizeOptions: PropsOption[] = [
     {
       caption: 'Large',
       value: 'large',
@@ -25,7 +28,7 @@ export class ButtonDemoComponent {
     },
   ];
 
-  public readonly kindOptions: RadioOption[] = [
+  public readonly kindOptions: PropsOption[] = [
     {
       caption: 'Primary',
       value: 'primary',
@@ -56,7 +59,7 @@ export class ButtonDemoComponent {
     },
   ];
 
-  public readonly iconPositionOptions: RadioOption[] = [
+  public readonly iconPositionOptions: PropsOption[] = [
     {
       caption: 'Unset',
       value: null,

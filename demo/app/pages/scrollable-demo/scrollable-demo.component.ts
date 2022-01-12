@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'scrollable-demo/examples';
 
@@ -9,7 +9,7 @@ const BASE_REQUEST_PATH: string = 'scrollable-demo/examples';
   styleUrls: ['./scrollable-demo.component.scss'],
 })
 export class ScrollableDemoComponent {
-  public readonly sizeOptions: RadioOption[] = [
+  public readonly sizeOptions: PropsOption[] = [
     {
       caption: 'Large',
       value: 'large',

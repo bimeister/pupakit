@@ -1,0 +1,17 @@
+@use '../../styles/example-viewer-section-item.styles' as *;
+
+.property {
+  @extend .section-item;
+
+  &__decorator-name {
+    text-transform: capitalize;
+  }
+
+  &__info {
+    @extend .section-item__info;
+  }
+
+  &__control {
+    @extend .section-item__control;
+  }
+}

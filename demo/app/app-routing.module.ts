@@ -14,7 +14,6 @@ import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
 import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
 import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
-import { ControlsIsPatchedDemoModule } from './pages/controls-is-patched-demo/controls-is-patched-demo.module';
 import { DatagridDemoModule } from './pages/datagrid-demo/datagrid-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
@@ -275,13 +274,6 @@ const demoRoutes: Routes = [
         loadChildren: (): Promise<Type<VerticalTabsDemoModule>> =>
           import('./pages/vertical-tabs-demo/vertical-tabs-demo.module').then(
             (module: any) => module.VerticalTabsDemoModule
-          ),
-      },
-      {
-        path: 'controls-is-patched',
-        loadChildren: (): Promise<Type<ControlsIsPatchedDemoModule>> =>
-          import('./pages/controls-is-patched-demo/controls-is-patched-demo.module').then(
-            (module: any) => module.ControlsIsPatchedDemoModule
           ),
       },
       {

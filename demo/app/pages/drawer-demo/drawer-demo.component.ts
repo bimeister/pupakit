@@ -6,7 +6,7 @@ import { DrawersService } from '../../../../src/internal/shared/services/drawers
 import { DrawerContainerComponent } from '../../../../src/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { TestDrawerComponent } from './components/test-drawer/test-drawer.component';
 
 const BASE_REQUEST_PATH: string = 'drawer-demo/examples';
@@ -34,7 +34,7 @@ export class DrawerDemoComponent {
     isFullscreen: new FormControl(false),
   });
 
-  public readonly floatOptions: RadioOption[] = [
+  public readonly floatOptions: PropsOption[] = [
     {
       caption: 'Right',
       value: 'right',

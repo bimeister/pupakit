@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 @Component({
   selector: 'demo-icon-button-demo',
@@ -8,7 +8,7 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconButtonDemoComponent {
-  public readonly sizeOptions: RadioOption[] = [
+  public readonly sizeOptions: PropsOption[] = [
     {
       caption: 'Large',
       value: 'large',
@@ -27,7 +27,7 @@ export class IconButtonDemoComponent {
     },
   ];
 
-  public readonly colorOptions: RadioOption[] = [
+  public readonly colorOptions: PropsOption[] = [
     {
       caption: 'Dark',
       value: 'dark',

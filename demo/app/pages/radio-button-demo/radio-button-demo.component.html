@@ -20,8 +20,14 @@
     </pupa-radio-group>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-form-control-disabled [control]="formControl">Disabled</demo-props-form-control-disabled>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-config-item name="Set form control to disabled state">
+      <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
+      <ng-container *demoExampleViewerConfigItemDescription>
+        Use
+        <pupa-code-inline>formControl.disable()</pupa-code-inline>
+      </ng-container>
+    </demo-example-viewer-config-item>
+  </demo-example-viewer-section>
 </demo-example-viewer>

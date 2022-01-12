@@ -2,11 +2,11 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <ng-container [ngSwitch]="type | async">
-      <ng-container *ngSwitchCase="'simple'">
+    <ng-container [ngSwitch]="type$ | async">
+      <ng-container *ngSwitchCase="'spinner'">
         <pupa-spinner [size]="size"></pupa-spinner>
       </ng-container>
-      <ng-container *ngSwitchCase="'bagel'">
+      <ng-container *ngSwitchCase="'bagel-spinner'">
         <pupa-bagel-spinner [size]="size"></pupa-bagel-spinner>
       </ng-container>
       <ng-container *ngSwitchCase="'loader'">
@@ -15,8 +15,10 @@
     </ng-container>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Type</demo-props-group-label>
-    <demo-props-radio-select #type [options]="typeOptions"></demo-props-radio-select>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-config-item name="Select one of the loader components">
+      <demo-props-select #type$ [options]="typeOptions"></demo-props-select>
+    </demo-example-viewer-config-item>
+  </demo-example-viewer-section>
 </demo-example-viewer>

@@ -14,19 +14,33 @@
     >
     </pupa-button-icon>
   </demo-example-viewer-content>
+  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-config-item name="Tooltip content text">
+      <pupa-textarea [formControl]="contentControl"></pupa-textarea>
+    </demo-example-viewer-config-item>
+  </demo-example-viewer-section>
 
-  <demo-example-viewer-properties class="tooltip-demo__viewer-properties">
-    <demo-props-group-label>Properties</demo-props-group-label>
-    <demo-props-checkbox class="tooltip-demo__hide-on-tooltip-hover-checkbox" [formControl]="hideOnTooltipHoverControl"
-      >Hide On Tooltip Hover</demo-props-checkbox
-    >
-    <demo-props-checkbox class="tooltip-demo__disabled-checkbox" [formControl]="disabledControl"
-      >Disabled</demo-props-checkbox
-    >
+  <demo-example-viewer-section-label>PupaTooltipDirective Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="pupaTooltip" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>Tooltip simple content.</ng-container>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Content</demo-props-group-label>
-    <pupa-textarea [formControl]="contentControl"> </pupa-textarea>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-property decoratorName="input" name="tooltipContentTemplate" type="TemplateRef">
+      <ng-container *demoExampleViewerPropertyDescription>Tooltip content template.</ng-container>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="tooltipHideOnHover" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Hide On Tooltip Hover</ng-container>
+      <demo-props-switcher [formControl]="hideOnTooltipHoverControl"> </demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher [formControl]="disabledControl"> </demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <h2>Simple usage</h2>
@@ -57,7 +71,8 @@
     <li>Tooltips are not shown on touch devices.</li>
     <li>
       If you don't want to show the tooltip under any conditions, then the directive has an boolean input
-      <pupa-code-inline>tooltipDisabled</pupa-code-inline>.
+      <pupa-code-inline>tooltipDisabled</pupa-code-inline>
+      .
     </li>
   </ul>
 </pupa-info-block>

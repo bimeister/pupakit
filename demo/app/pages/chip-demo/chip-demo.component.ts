@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChipColors } from '../../../../src/public-api';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 @Component({
   selector: 'demo-chip',
@@ -9,7 +9,7 @@ import { RadioOption } from '../../shared/components/example-viewer/radio-option
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChipDemoComponent {
-  public readonly colorOptions: RadioOption[] = Object.values(ChipColors).map((value: string) => ({
+  public readonly colorOptions: PropsOption[] = Object.values(ChipColors).map((value: string) => ({
     caption: value,
     value,
   }));

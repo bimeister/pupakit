@@ -1,0 +1,11 @@
+<pupa-select class="select" [formControl]="formControl">
+  <pupa-select-trigger>
+    {{caption}}
+  </pupa-select-trigger>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let option of options" [value]="option.value">{{option.caption}}</pupa-select-option>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>

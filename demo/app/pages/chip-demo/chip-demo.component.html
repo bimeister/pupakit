@@ -3,29 +3,27 @@
 <demo-example-viewer>
   <demo-example-viewer-content>
     <pupa-chip
-      [color]="color | async"
-      [isDisabled]="disabled | async"
+      [color]="color$ | async"
+      [isDisabled]="isDisabled$ | async"
       [pupaTooltip]="'Chip'"
-      [tooltipDisabled]="disabled | async"
+      [tooltipDisabled]="isDisabled$ | async"
     >
       <div class="chip-content">
-        <div *ngIf="icon | async" class="chip-content__icon-container">
-          <pupa-icon class="chip-content__icon" name="app-pie"></pupa-icon>
-        </div>
-        <pupa-avatar *ngIf="avatar | async" class="chip-content__avatar" userName="Гаев Иван Антонович"></pupa-avatar>
         <div class="chip-content__text">Chip</div>
-        <pupa-icon *ngIf="deleteButton | async" class="chip-content__delete-button" name="ios-close"></pupa-icon>
       </div>
     </pupa-chip>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Color</demo-props-group-label>
-    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
-    <demo-props-group-label>Content</demo-props-group-label>
-    <demo-props-checkbox class="disabled-checkbox" #disabled>Disabled</demo-props-checkbox>
-    <demo-props-checkbox class="icon-checkbox" #icon>With icon</demo-props-checkbox>
-    <demo-props-checkbox class="avatar-checkbox" #avatar>With avatar</demo-props-checkbox>
-    <demo-props-checkbox class="with-delete-button-checkbox" #deleteButton>With delete button</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="color" type="ChipColors">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the element.</ng-container>
+      <demo-props-radio-select #color$ [options]="colorOptions" direction="row"></demo-props-radio-select>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="isDisabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #isDisabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>

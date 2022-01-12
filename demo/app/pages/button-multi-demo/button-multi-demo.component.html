@@ -1,15 +1,14 @@
 <h1>ButtonMulti</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content class="content">
+  <demo-example-viewer-content>
     <pupa-button-multi
-      class="content__button"
-      [size]="size | async"
-      [kind]="kind | async"
-      [disabled]="disabled | async"
-      [icon]="'app-notification'"
-      [iconPosition]="iconPosition | async"
-      [loading]="loading | async"
+      [size]="size$ | async"
+      [kind]="kind$ | async"
+      [disabled]="disabled$ | async"
+      [icon]="buttonIconFormControl.value"
+      [iconPosition]="iconPosition$ | async"
+      [loading]="loading$ | async"
       [active]="active$ | async"
       [expandActive]="expandActive$ | async"
       [dropdownMenuContent]="dropdownContent"
@@ -23,23 +22,50 @@
     </pupa-dropdown-menu-content>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Size</demo-props-group-label>
-    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="size" type="ButtonSize">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the button.</ng-container>
+      <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Kind</demo-props-group-label>
-    <demo-props-radio-select #kind [options]="kindOptions"></demo-props-radio-select>
+    <demo-example-viewer-property decoratorName="input" name="kind" type="ButtonKind">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the kind of the button.</ng-container>
+      <demo-props-select #kind$ [options]="kindOptions"></demo-props-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Icon</demo-props-group-label>
-    <demo-props-radio-select #iconPosition [options]="iconPositionOptions"></demo-props-radio-select>
+    <demo-example-viewer-property decoratorName="input" name="icon" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+      <pupa-input-text [formControl]="buttonIconFormControl"></pupa-input-text>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Force state</demo-props-group-label>
-    <demo-props-radio-select #activeRadio [options]="activeOptions"></demo-props-radio-select>
+    <demo-example-viewer-property decoratorName="input" name="iconPosition" type="ButtonIconPosition">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the icon.</ng-container>
+      <demo-props-radio-select #iconPosition$ direction="row" [options]="iconPositionOptions"></demo-props-radio-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
-    <demo-props-checkbox #loading>Loading</demo-props-checkbox>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="loading" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is in loading state.</ng-container>
+      <demo-props-switcher #loading$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="active" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is in active state.</ng-container>
+      <demo-props-switcher #active$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="expandActive" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription
+        >Whether the element's expand error is in active state.
+      </ng-container>
+      <demo-props-switcher #expandActive$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <pupa-code-container [isPreviewExist]="false" [content]="example1Content"></pupa-code-container>

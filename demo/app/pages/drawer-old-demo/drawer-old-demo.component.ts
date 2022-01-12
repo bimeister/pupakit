@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { TestDrawerOldComponent } from './components/test-drawer-old/test-drawer-old.component';
 import { FormControl, FormGroup } from '@angular/forms';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { DrawersService } from '../../../../src/internal/shared/services/drawers.service';
 import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
 
@@ -19,7 +19,7 @@ export class DrawerOldDemoComponent {
     float: new FormControl('right'),
   });
 
-  public readonly floatOptions: RadioOption[] = [
+  public readonly floatOptions: PropsOption[] = [
     {
       caption: 'Left',
       value: 'left',

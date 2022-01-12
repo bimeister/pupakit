@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 function getDefaultDateNextMonth(): Date {
   const date: Date = new Date();
@@ -30,52 +30,12 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoComponent implements OnInit, OnDestroy {
-  public readonly placeholder: string = 'Placeholder';
+  public readonly inputIconFormControl: FormControl = new FormControl('ios-help-circle');
+  public readonly placeholderFormControl: FormControl = new FormControl('Custom placeholder');
 
-  public readonly typeOptions: RadioOption[] = [
-    {
-      caption: 'Text',
-      value: 'text',
-    },
-    {
-      caption: 'Password',
-      value: 'password',
-    },
-    {
-      caption: 'Number',
-      value: 'number',
-    },
-    {
-      caption: 'Time',
-      value: 'time',
-    },
-    {
-      caption: 'Time with seconds',
-      value: 'time-seconds',
-    },
-    {
-      caption: 'Date',
-      value: 'date',
-    },
-    {
-      caption: 'Date + Time',
-      value: 'date-time',
-    },
-    {
-      caption: 'Date + Time with seconds',
-      value: 'date-time-seconds',
-    },
-    {
-      caption: 'Date Range',
-      value: 'date-range',
-    },
-    {
-      caption: 'Date Range Double',
-      value: 'date-range-double',
-    },
-  ];
+  public readonly isDisabledFormControl: FormControl = new FormControl(false);
 
-  public readonly sizeOptions: RadioOption[] = [
+  public readonly sizeOptions: PropsOption[] = [
     {
       caption: 'Large',
       value: 'large',

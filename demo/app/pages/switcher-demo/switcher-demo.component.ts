@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'switcher-demo/examples';
 
@@ -11,7 +11,7 @@ const BASE_REQUEST_PATH: string = 'switcher-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class SwitcherDemoComponent {
-  public readonly sizeOptions: RadioOption[] = [
+  public readonly sizeOptions: PropsOption[] = [
     {
       caption: 'Medium',
       value: 'medium',

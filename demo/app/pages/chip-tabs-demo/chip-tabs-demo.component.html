@@ -4,7 +4,7 @@
   <demo-example-viewer-content>
     <pupa-chip-tabs
       (selectedTabValues)="handleTabSelection($event)"
-      [isMultiSelectionEnabled]="isMultiSelectionEnabled | async"
+      [isMultiSelectionEnabled]="isMultiSelectionEnabled$ | async"
     >
       <pupa-chip-tabs-item
         *ngFor="let tab of tabs"
@@ -16,8 +16,11 @@
     </pupa-chip-tabs>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #isMultiSelectionEnabled>isMultiSelectionEnabled</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="isMultiSelectionEnabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the multi selection is enabled.</ng-container>
+      <demo-props-switcher #isMultiSelectionEnabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
