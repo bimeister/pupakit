@@ -46,6 +46,7 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   public readonly treeItemSizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public treeItemsData: FlatHugeTreeItem[] = [];
   @Output() public updateNeeded: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public nodeClicked: EventEmitter<string> = new EventEmitter<string>();
 
   public readonly bufferPx$: Observable<number> = this.treeItemSizePx$.pipe(
     map((sizePx: number) => sizePx * ITEM_BUFFER_COUNT),
@@ -73,6 +74,12 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
 
   public toggleExpansion(id: string, parentId: string): void {
     this.hugeTreeExpandedItemsService.toggleExpansion(id, parentId);
+  }
+
+  public processClick(id: string): void {
+    if (!isNil(id)) {
+      this.nodeClicked.emit(id);
+    }
   }
 
   public expandParentsByIds(parentIds: string[]): void {

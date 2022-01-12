@@ -28,16 +28,16 @@
 </ng-template>
 
 <ng-template #treeNode let-nodeData="nodeData">
-  <div class="tree-node" *ngIf="nodeData" [style.padding-left.px]="10 * nodeData.level">
+  <div class="tree-node" *ngIf="nodeData" [style.padding-left.px]="10 * nodeData.level" (click)="processClick(nodeData.id)">
     <ng-container *ngIf="nodeData.id !== null; else skeleton">
-      <div class="tree-node__expansion-button" (click)="toggleExpansion(nodeData.id, nodeData.parentItemId)">
+      <div class="tree-node__expansion-button" (click)="toggleExpansion(nodeData.id, nodeData.parentItemId); $event.stopPropagation()">
         <button class="default-expansion-button">
           <pupa-icon
             [name]="isExpanded(expandedTreeItemIds$ | async, nodeData.id) ? 'ios-arrow-down' : 'ios-arrow-forward'"
           ></pupa-icon>
         </button>
       </div>
-      {{ nodeData.name }}
+        {{ nodeData.name }}
     </ng-container>
   </div>
 </ng-template>
