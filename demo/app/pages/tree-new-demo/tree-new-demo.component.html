@@ -1,10 +1,12 @@
 <h1>Tree (new)</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-tree-new [controller]="controller">
-      <ng-container *pupaTreeItemTemplate="let data"> {{ data.name }} (customTemplate)</ng-container>
-    </pupa-tree-new>
-    <pupa-tree-new [controller]="controller"></pupa-tree-new>
+  <demo-example-viewer-content [isSticky]="false">
+    <div class="tree-wrapper">
+      <pupa-tree-new [controller]="controller">
+        <ng-container *pupaTreeItemTemplate="let data"> {{ data.name }} (customTemplate)</ng-container>
+      </pupa-tree-new>
+      <pupa-tree-new [controller]="controller"></pupa-tree-new>
+    </div>
   </demo-example-viewer-content>
 </demo-example-viewer>

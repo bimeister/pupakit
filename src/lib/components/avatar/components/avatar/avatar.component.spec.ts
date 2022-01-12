@@ -11,7 +11,6 @@ const {
   slowMo: SLOW_MO,
   launchBrowserArguments: LAUNCH_BROWSER_ARGUMENTS,
   ignoreDefaultArguments: IGNORE_DEFAULT_ARGUMENTS,
-  baseUrlCI: BASE_URL_CI,
   baseKitUrl: BASE_KIT_URL,
 }: PuppeteerSetupVariables = getPuppeteerSetupVariables();
 const SCREEN_SHOT_PATH: string = `${SCREEN_SHOTS_PATH}/avatar.screenshot.png`;
@@ -40,7 +39,7 @@ describe('avatar.component.ts', () => {
         switchMap(() => from(page.goto(`${BASE_KIT_URL}/avatar`, { waitUntil: 'domcontentloaded' })))
       )
       .subscribe(() => done());
-  });
+  }, TIME_OUT_MS);
 
   it(
     'should render page title as PupaKit',
@@ -80,10 +79,10 @@ describe('avatar.component.ts', () => {
   it(
     'avatar size should 16px when small',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('input[value="small"]'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "Small")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap(() => from(page.waitForXPath('//pupa-avatar//div'))),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
         )
         .subscribe(({ width, height }: BoundingBox) => {
@@ -98,10 +97,10 @@ describe('avatar.component.ts', () => {
   it(
     'avatar size should 20px when medium',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('input[value="medium"]'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "Medium")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap(() => from(page.waitForXPath('//pupa-avatar//div'))),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
         )
         .subscribe(({ width, height }: BoundingBox) => {
@@ -116,10 +115,10 @@ describe('avatar.component.ts', () => {
   it(
     'avatar size should 24px when large',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('input[value="large"]'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "Large")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
+          switchMap(() => from(page.waitForXPath('//pupa-avatar//div'))),
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.boundingBox()))
         )
         .subscribe(({ width, height }: BoundingBox) => {
@@ -131,43 +130,9 @@ describe('avatar.component.ts', () => {
     TIME_OUT_MS
   );
 
-  it(
-    'should click on set avatar button and check that avatar background image, after that clear input',
-    (done: jest.DoneCallback) => {
-      from(page.waitForSelector('pupa-button'))
-        .pipe(
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
-          switchMap(() =>
-            from(
-              page.evaluate(() =>
-                window.getComputedStyle(document.querySelector('.avatar')).getPropertyValue('background-image')
-              )
-            )
-          ),
-          tap((resultBackGroundImage: string) => expect(resultBackGroundImage).not.toEqual('url("")')),
-          switchMap(() => from(page.waitForSelector('.clear-image'))),
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() => from(page.waitForSelector('pupa-avatar'))),
-          switchMap(() =>
-            from(
-              page.evaluate(() =>
-                window.getComputedStyle(document.querySelector('.avatar')).getPropertyValue('background-image')
-              )
-            )
-          )
-        )
-        .subscribe((resultBackGroundImage: string) => {
-          expect(resultBackGroundImage).toEqual(`url("${BASE_URL_CI}")`);
-          done();
-        });
-    },
-    TIME_OUT_MS
-  );
-
   afterAll((done: jest.DoneCallback) => {
     from(page.close())
       .pipe(switchMap(() => from(browser.close())))
       .subscribe(() => done());
-  });
+  }, TIME_OUT_MS);
 });

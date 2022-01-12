@@ -1,6 +1,6 @@
 import { mapToVoid } from '@bimeister/utilities';
 import { Browser, ElementHandle, launch, Page, Viewport } from 'puppeteer';
-import { from, Observable, of, race } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { delay, mapTo, switchMap, tap } from 'rxjs/operators';
 import { PuppeteerSetupVariables } from '../../../../../internal/declarations/interfaces/puppeteer-setup-variables.interface';
 import { getPuppeteerSetupVariables } from '../../../../../internal/helpers/get-puppeteer-setup-variables.helper';
@@ -39,7 +39,7 @@ describe('chip.component.ts', () => {
         switchMap(() => from(page.goto(`${BASE_KIT_URL}/chip`, { waitUntil: 'domcontentloaded' })))
       )
       .subscribe(() => done());
-  });
+  }, TIME_OUT_MS);
 
   it(
     'should render page title as PupaKit',
@@ -79,7 +79,7 @@ describe('chip.component.ts', () => {
   it(
     'should check chip-color is primary',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('input[value="primary"]'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "primary")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() => from(page.evaluate(() => document.querySelector('.chip').classList.contains('chip_primary'))))
@@ -95,7 +95,7 @@ describe('chip.component.ts', () => {
   it(
     'should check chip-color is light',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('input[value="light"]'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "light")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           switchMap(() => from(page.evaluate(() => document.querySelector('.chip').classList.contains('chip_light'))))
@@ -109,56 +109,15 @@ describe('chip.component.ts', () => {
   );
 
   it(
-    'should check chip has icon',
+    'should check chip-color is error',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.icon-checkbox input'))
+      from(page.waitForXPath('//pupa-radio-control[contains(., "error")]'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() =>
-            race(from(page.waitForSelector('.chip-content__icon')).pipe(mapTo(true)), of(false).pipe(delay(4000)))
-          )
+          switchMap(() => from(page.evaluate(() => document.querySelector('.chip').classList.contains('chip_error'))))
         )
-        .subscribe((hasIcon: boolean) => {
-          expect(hasIcon).toBeTruthy();
-          done();
-        });
-    },
-    TIME_OUT_MS
-  );
-
-  it(
-    'should check chip has avatar',
-    (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.avatar-checkbox input'))
-        .pipe(
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() =>
-            race(from(page.waitForSelector('.chip-content__avatar')).pipe(mapTo(true)), of(false).pipe(delay(4000)))
-          )
-        )
-        .subscribe((hasAvatar: boolean) => {
-          expect(hasAvatar).toBeTruthy();
-          done();
-        });
-    },
-    TIME_OUT_MS
-  );
-
-  it(
-    'should check chip has delete-button',
-    (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.with-delete-button-checkbox input'))
-        .pipe(
-          switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
-          switchMap(() =>
-            race(
-              from(page.waitForSelector('.chip-content__delete-button')).pipe(mapTo(true)),
-              of(false).pipe(delay(4000))
-            )
-          )
-        )
-        .subscribe((havAvatar: boolean) => {
-          expect(havAvatar).toBeTruthy();
+        .subscribe((isLight: boolean) => {
+          expect(isLight).toBeTruthy();
           done();
         });
     },
@@ -168,7 +127,7 @@ describe('chip.component.ts', () => {
   it(
     'should check chip is disabled',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.disabled-checkbox input'))
+      from(page.waitForXPath('//demo-example-viewer-property[@name="isDisabled"]//demo-props-switcher'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           delay(0),
@@ -188,5 +147,5 @@ describe('chip.component.ts', () => {
     from(page.close())
       .pipe(switchMap(() => from(browser.close())))
       .subscribe(() => done());
-  });
+  }, TIME_OUT_MS);
 });

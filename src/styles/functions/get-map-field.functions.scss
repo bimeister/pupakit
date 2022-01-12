@@ -1,8 +1,6 @@
 @use 'sass:map';
 @use 'sass:list';
 
-// @deprecated need to move into functions.scss migration from '@import' to '@use'
-
 /*
   return value:
     the nested value in map by array of keys
