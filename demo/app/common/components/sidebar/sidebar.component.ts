@@ -18,13 +18,13 @@ interface LinksGroup {
 }
 
 @Component({
-  selector: 'demo-sidebar-content',
-  templateUrl: './sidebar-content.component.html',
-  styleUrls: ['./sidebar-content.component.scss'],
+  selector: 'demo-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarContentComponent {
+export class SidebarComponent {
   private readonly infoGroup: LinksGroup = {
     title: 'Info',
     linkItems: sortByProperty(

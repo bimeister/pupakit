@@ -1,9 +1,15 @@
 <h1>Tree</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-tree type="flat" [flatDataOrigin]="dataOrigin" hasDragAndDrop="true" [isLoading]="isLoading$ | async">
-    </pupa-tree>
+  <demo-example-viewer-content [isSticky]="false">
+    <div class="tree-wrapper">
+      <pupa-tree
+        type="flat"
+        [flatDataOrigin]="dataOrigin"
+        hasDragAndDrop="true"
+        [isLoading]="isLoading$ | async"
+      ></pupa-tree>
+    </div>
   </demo-example-viewer-content>
 
   <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>

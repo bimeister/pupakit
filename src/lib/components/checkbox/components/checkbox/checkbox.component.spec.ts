@@ -41,7 +41,7 @@ describe('checkbox.component.ts', () => {
       .subscribe(() => {
         done();
       });
-  });
+  }, TIME_OUT_MS);
 
   it(
     'should render page title as PupaKit',
@@ -131,7 +131,7 @@ describe('checkbox.component.ts', () => {
   it(
     'should click on indeterminate option and rerender checkbox marker',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.indeterminate-props input'))
+      from(page.waitForXPath('//demo-example-viewer-property[@name="indeterminate"]//demo-props-switcher'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           delay(500),
@@ -150,7 +150,7 @@ describe('checkbox.component.ts', () => {
   it(
     'should click on disabled option and rerender checkbox marker',
     (done: jest.DoneCallback) => {
-      from(page.waitForSelector('.disabled-props input'))
+      from(page.waitForXPath('//demo-example-viewer-property[@name="disabled"]//demo-props-switcher'))
         .pipe(
           switchMap((elementHandle: ElementHandle<Element>) => from(elementHandle.click())),
           delay(500),
@@ -170,5 +170,5 @@ describe('checkbox.component.ts', () => {
     from(page.close())
       .pipe(switchMap(() => from(browser.close())))
       .subscribe(() => done());
-  });
+  }, TIME_OUT_MS);
 });

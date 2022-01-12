@@ -2,7 +2,7 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 @use 'demo-functions' as *;
-@forward 'bordered-box.mixin';
+@use 'demo-variables' as *;
 
 /*
   why use it:
@@ -31,4 +31,16 @@
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
   user-select: none;
+}
+
+@mixin bordered-box {
+  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
+  border: 1px solid get-map-field($theme-config, [ 'light', 'body', border-color]);
+
+  @include host-selector-dark-theme() {
+    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
+    border: 1px solid get-map-field($theme-config, [ 'dark', 'body', border-color]);
+  }
+
+  border-radius: 1px;
 }
