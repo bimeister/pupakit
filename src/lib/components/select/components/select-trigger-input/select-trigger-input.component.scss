@@ -41,6 +41,10 @@
     text-overflow: ellipsis;
     overflow: hidden;
 
+    @include host-selector-dark-theme() {
+      color: color(base-dark-n100);
+    }
+
     &::placeholder {
       color: color(base-white-n100);
       width: 100%;

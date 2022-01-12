@@ -1,0 +1,8 @@
+<div #intersectionIndicator></div>
+<div
+  class="viewer-content"
+  [class.viewer-content_sticky]="isSticky$ | async"
+  [class.viewer-content_unstuck]="isUnstuck$ | async"
+>
+  <ng-content></ng-content>
+</div>

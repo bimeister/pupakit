@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'status-demo/examples';
 
@@ -11,7 +11,7 @@ const BASE_REQUEST_PATH: string = 'status-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class StatusDemoComponent {
-  public readonly colorOptions: RadioOption[] = [
+  public readonly colorOptions: PropsOption[] = [
     {
       caption: 'Primary',
       value: 'primary',

@@ -8,5 +8,7 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelDemoComponent {
-  public readonly formControl: FormControl = new FormControl('Label Text');
+  public readonly buttonIconFormControl: FormControl = new FormControl('app-info');
+
+  public readonly textFormControl: FormControl = new FormControl('Label Text');
 }

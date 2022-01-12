@@ -1,17 +1,35 @@
 <h1>Floating Card Demo</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content class="content">
-    <pupa-floating-card [ratio]="4">
-      <pupa-button class="content__item"> Button With Twice Ratio </pupa-button>
+  <demo-example-viewer-content>
+    <ng-container
+      [ngTemplateOutlet]="content"
+      [ngTemplateOutletContext]="{$implicit: formControl.value || 0}"
+    ></ng-container>
+  </demo-example-viewer-content>
+
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="ratio" type="number">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the ratio of the element.</ng-container>
+      <pupa-input-number [formControl]="formControl" [withReset]="true"></pupa-input-number>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
+</demo-example-viewer>
+
+<ng-template #content let-ratio>
+  <div class="content">
+    <pupa-floating-card [ratio]="ratio">
+      <pupa-button> Button With {{ratio}} Ratio</pupa-button>
     </pupa-floating-card>
-    <pupa-floating-card resetType="custom" #floating>
+
+    <pupa-floating-card resetType="custom" [ratio]="ratio" #floating>
       <div class="content__div">
-        Div With Default Ratio
+        Div With {{ratio}} Ratio
         <pupa-button kind="subtle" (mousemove)="$event.stopPropagation()" (click)="floating.dropTransform()">
           Reset Floating
         </pupa-button>
       </div>
     </pupa-floating-card>
-  </demo-example-viewer-content>
-</demo-example-viewer>
+  </div>
+</ng-template>

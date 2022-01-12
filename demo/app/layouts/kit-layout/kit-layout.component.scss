@@ -33,7 +33,7 @@
   height: calc(100% - #{$navbar-height});
   z-index: 11;
 
-  @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+  @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 3, $xlg: 3, $xl: 3, $xxl: 4);
 
   @include lt-md() {
     display: none;
@@ -42,7 +42,6 @@
 
 .content-wrapper {
   flex: 1;
-  overflow: auto;
   @include grid-container-offset('padding-left');
   @include grid-container-offset('padding-right');
 
@@ -59,7 +58,7 @@
   box-sizing: border-box;
   padding: 100px 0 64px 0;
   min-height: calc(#{vh(100)});
-  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 4, $xlg: 3, $xl: 3, $xxl: 4);
+  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 3, $xlg: 3, $xl: 3, $xxl: 4);
 }
 
 .inside-content {
@@ -76,7 +75,7 @@
     $width-end: 1800,
     $value-end: 1200,
     $is-save-width-before: true,
-    $is-save-width-after: false
+    $is-save-width-after: true
   );
 
   @include sm() {

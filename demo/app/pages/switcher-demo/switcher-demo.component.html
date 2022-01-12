@@ -2,16 +2,21 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-switcher [disabled]="disabled | async" [size]="size | async"></pupa-switcher>
+    <pupa-switcher [disabled]="disabled$ | async" [size]="size$ | async"></pupa-switcher>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Size</demo-props-group-label>
-    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="size" type="SwitcherSize">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+      <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <h2>Usage</h2>

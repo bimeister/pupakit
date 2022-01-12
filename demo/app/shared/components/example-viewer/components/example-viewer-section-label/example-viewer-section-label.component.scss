@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.header {
+  @include font-type-point();
+  @include font-size-header();
+}

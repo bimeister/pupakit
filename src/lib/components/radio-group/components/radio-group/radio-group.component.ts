@@ -1,9 +1,9 @@
 import {
   AfterViewInit,
-  Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Input,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
@@ -29,19 +29,14 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, Aft
   private readonly subscription: Subscription = new Subscription();
 
   public readonly internalControl: FormControl = new FormControl();
-  public readonly direction: RadioGroupDirection;
 
-  constructor(
-    @Attribute('direction') direction: RadioGroupDirection = 'column',
-    private readonly ngControl: NgControl,
-    private readonly changeDetectorRef: ChangeDetectorRef
-  ) {
+  @Input() public direction: RadioGroupDirection = 'column';
+
+  constructor(private readonly ngControl: NgControl, private readonly changeDetectorRef: ChangeDetectorRef) {
     if (isNil(ngControl)) {
       throw new Error('NgControl passed to RadioGroupComponent is undefined');
     }
     this.ngControl.valueAccessor = this;
-
-    this.direction = direction;
   }
 
   public ngOnInit(): void {
@@ -67,9 +62,11 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, Aft
   public registerOnChange(onChange: OnChangeCallback<T>): void {
     this.onChange = onChange;
   }
+
   public registerOnTouched(onTouched: OnTouchedCallback): void {
     this.onTouched = onTouched;
   }
+
   public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) {
       this.internalControl.disable();

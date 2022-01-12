@@ -2,6 +2,7 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 @use 'demo-functions' as *;
+@forward 'bordered-box.mixin';
 
 /*
   why use it:

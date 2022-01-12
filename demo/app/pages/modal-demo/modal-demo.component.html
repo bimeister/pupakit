@@ -2,15 +2,26 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-button (click)="openModal()"> Open modal window </pupa-button>
+    <pupa-button (click)="openModal()"> Open modal window</pupa-button>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties [formGroup]="formGroup">
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox formControlName="hasBackdrop">Has backdrop</demo-props-checkbox>
-    <demo-props-checkbox formControlName="isBackdropTransparent">Backdrop transparent</demo-props-checkbox>
-    <demo-props-checkbox formControlName="closeOnBackdropClick">Close on backdrop click</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>ModalConfig</demo-example-viewer-section-label>
+  <demo-example-viewer-section [formGroup]="formGroup">
+    <demo-example-viewer-property name="hasBackdrop" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Has backdrop.</ng-container>
+      <demo-props-switcher formControlName="hasBackdrop"></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="isBackdropTransparent" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Backdrop transparent.</ng-container>
+      <demo-props-switcher formControlName="isBackdropTransparent"></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="closeOnBackdropClick" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Close on backdrop click.</ng-container>
+      <demo-props-switcher formControlName="closeOnBackdropClick"></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <h2>Simple usage</h2>

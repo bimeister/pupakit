@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Theme } from '../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
-import { RadioOption } from '../../shared/components/example-viewer/radio-option';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'dropdown-menu-demo/examples';
 
@@ -17,7 +17,7 @@ export class DropdownMenuDemoComponent {
   public readonly theme: typeof Theme = Theme;
   public readonly triggerText: FormControl = new FormControl('Show dropdown');
 
-  public readonly horizontalPositionOptions: RadioOption[] = [
+  public readonly horizontalPositionOptions: PropsOption[] = [
     {
       caption: 'start',
       value: 'start',

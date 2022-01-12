@@ -1,0 +1,6 @@
+<pupa-radio-group [direction]="direction" [formControl]="formControl">
+  <pupa-radio-control [value]="option.value" *ngFor="let option of options">
+    <pupa-radio-control-marker></pupa-radio-control-marker>
+    <pupa-radio-control-label>{{ option.caption }}</pupa-radio-control-label>
+  </pupa-radio-control>
+</pupa-radio-group>

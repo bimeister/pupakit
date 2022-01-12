@@ -1,107 +1,146 @@
 <h1>Input</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content class="form">
-    <pupa-label [disabled]="textControl.disabled">pupa-input-text</pupa-label>
-    <pupa-input-text
-      class="form__control"
-      [size]="size | async"
-      [icon]="(withIcon | async) ? 'ios-help-circle' : ''"
-      [placeholder]="placeholder"
-      [formControl]="textControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-text>
+  <demo-example-viewer-content [isSticky]="false">
+    <div class="form">
+      <pupa-label [disabled]="textControl.disabled">pupa-input-text</pupa-label>
+      <pupa-input-text
+        class="form__control"
+        [size]="size$ | async"
+        [icon]="inputIconFormControl.value"
+        [placeholder]="placeholderFormControl.value"
+        [formControl]="textControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-text>
 
-    <pupa-label [disabled]="passwordControl.disabled">pupa-input-password</pupa-label>
-    <pupa-input-password
-      class="form__control"
-      [size]="size | async"
-      [placeholder]="placeholder"
-      [formControl]="passwordControl"
-      [autocomplete]="false"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-password>
+      <pupa-label [disabled]="passwordControl.disabled">pupa-input-password</pupa-label>
+      <pupa-input-password
+        class="form__control"
+        [size]="size$ | async"
+        [placeholder]="placeholderFormControl.value"
+        [formControl]="passwordControl"
+        [autocomplete]="false"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-password>
 
-    <pupa-label [disabled]="numberControl.disabled">pupa-input-number</pupa-label>
-    <pupa-input-number
-      class="form__control"
-      [size]="size | async"
-      [icon]="(withIcon | async) ? 'ios-help-circle' : ''"
-      [placeholder]="placeholder"
-      [formControl]="numberControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-number>
+      <pupa-label [disabled]="numberControl.disabled">pupa-input-number</pupa-label>
+      <pupa-input-number
+        class="form__control"
+        [size]="size$ | async"
+        [icon]="inputIconFormControl.value"
+        [placeholder]="placeholderFormControl.value"
+        [formControl]="numberControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-number>
 
-    <pupa-label [disabled]="timeFormControl.disabled">pupa-input-time</pupa-label>
-    <pupa-input-time
-      class="form__control form__control_date"
-      [formControl]="timeFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-time>
+      <pupa-label [disabled]="timeFormControl.disabled">pupa-input-time</pupa-label>
+      <pupa-input-time
+        class="form__control form__control_date"
+        [formControl]="timeFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-time>
 
-    <pupa-label [disabled]="timeSecondsFormControl.disabled">pupa-input-time-seconds</pupa-label>
-    <pupa-input-time-seconds
-      class="form__control form__control_date"
-      [formControl]="timeSecondsFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-time-seconds>
+      <pupa-label [disabled]="timeSecondsFormControl.disabled">pupa-input-time-seconds</pupa-label>
+      <pupa-input-time-seconds
+        class="form__control form__control_date"
+        [formControl]="timeSecondsFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-time-seconds>
 
-    <pupa-label [disabled]="dateFormControl.disabled">pupa-input-date</pupa-label>
-    <pupa-input-date
-      class="form__control form__control_date"
-      [withReset]="withReset | async"
-      [formControl]="dateFormControl"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-date>
+      <pupa-label [disabled]="dateFormControl.disabled">pupa-input-date</pupa-label>
+      <pupa-input-date
+        class="form__control form__control_date"
+        [withReset]="withReset$ | async"
+        [formControl]="dateFormControl"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-date>
 
-    <pupa-label [disabled]="dateTimeFormControl.disabled">pupa-input-date-time</pupa-label>
-    <pupa-input-date-time
-      class="form__control form__control_date"
-      [formControl]="dateTimeFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-date-time>
+      <pupa-label [disabled]="dateTimeFormControl.disabled">pupa-input-date-time</pupa-label>
+      <pupa-input-date-time
+        class="form__control form__control_date"
+        [formControl]="dateTimeFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-date-time>
 
-    <pupa-label [disabled]="dateTimeSecondsFormControl.disabled">pupa-input-date-time-seconds</pupa-label>
-    <pupa-input-date-time-seconds
-      class="form__control form__control_date"
-      [formControl]="dateTimeSecondsFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-date-time-seconds>
+      <pupa-label [disabled]="dateTimeSecondsFormControl.disabled">pupa-input-date-time-seconds</pupa-label>
+      <pupa-input-date-time-seconds
+        class="form__control form__control_date"
+        [formControl]="dateTimeSecondsFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-date-time-seconds>
 
-    <pupa-label [disabled]="rangeFormControl.disabled">pupa-input-date-range</pupa-label>
-    <pupa-input-date-range
-      class="form__control form__control_date"
-      [formControl]="rangeFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-date-range>
+      <pupa-label [disabled]="rangeFormControl.disabled">pupa-input-date-range</pupa-label>
+      <pupa-input-date-range
+        class="form__control form__control_date"
+        [formControl]="rangeFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-date-range>
 
-    <pupa-label [disabled]="rangeDoubleFormControl.disabled">pupa-input-date-range-double</pupa-label>
-    <pupa-input-date-range-double
-      class="form__control form__control_date"
-      [formControl]="rangeDoubleFormControl"
-      [withReset]="withReset | async"
-      [invalidTooltipContentTemplate]="errorTemplate"
-    ></pupa-input-date-range-double>
+      <pupa-label [disabled]="rangeDoubleFormControl.disabled">pupa-input-date-range-double</pupa-label>
+      <pupa-input-date-range-double
+        class="form__control form__control_date"
+        [formControl]="rangeDoubleFormControl"
+        [withReset]="withReset$ | async"
+        [invalidTooltipContentTemplate]="errorTemplate"
+      ></pupa-input-date-range-double>
+    </div>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties class="input-demo__properties">
-    <demo-props-group-label>Control</demo-props-group-label>
-    <demo-props-form-control-disabled [control]="propertyControl"></demo-props-form-control-disabled>
-    <demo-props-form-control-validators [controlsList]="controlsList" [validators]="validators">
-    </demo-props-form-control-validators>
-    <demo-props-checkbox #withIcon>With custom icon</demo-props-checkbox>
-    <demo-props-checkbox #withReset>With Reset</demo-props-checkbox>
+  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-config-item name="Set form control to disabled state">
+      <demo-props-form-control-disabled [control]="propertyControl"></demo-props-form-control-disabled>
+      <ng-container *demoExampleViewerConfigItemDescription>
+        Use
+        <pupa-code-inline>formControl.disable()</pupa-code-inline>
+      </ng-container>
+    </demo-example-viewer-config-item>
 
-    <demo-props-group-label>Size</demo-props-group-label>
-    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-config-item name="Set form control validators">
+      <ng-container *demoExampleViewerConfigItemDescription>
+        Use
+        <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
+      </ng-container>
+      <demo-props-form-control-validators
+        [controlsList]="controlsList"
+        [validators]="validators"
+      ></demo-props-form-control-validators>
+    </demo-example-viewer-config-item>
+  </demo-example-viewer-section>
+
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="size" type="InputSize">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+      <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="icon" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+      <pupa-input-text [formControl]="inputIconFormControl" [withReset]="true"></pupa-input-text>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
+      <pupa-input-text [formControl]="placeholderFormControl" [withReset]="true"></pupa-input-text>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="withReset" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is resettable.</ng-container>
+      <demo-props-switcher #withReset$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="invalidTooltipContentTemplate" type="TemplateRef">
+      <ng-container *demoExampleViewerPropertyDescription>Template for invalid content tooltip.</ng-container>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
-<ng-template #errorTemplate> Required field </ng-template>
+<ng-template #errorTemplate> Required field</ng-template>

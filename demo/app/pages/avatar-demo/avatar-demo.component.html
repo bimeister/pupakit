@@ -5,44 +5,47 @@
     <pupa-avatar
       [username]="usernameControl.value"
       [src]="imageSrcControl.value"
-      [size]="size | async"
-      [withBorder]="border | async"
-      [disabled]="disabled | async"
+      [size]="size$ | async"
+      [withBorder]="withBorder$ | async"
+      [disabled]="disabled$ | async"
     ></pupa-avatar>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Size</demo-props-group-label>
-    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="size" type="AvatarSize">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+      <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Border</demo-props-group-label>
-    <demo-props-radio-select #border [options]="borderOptions"></demo-props-radio-select>
+    <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element has a border.</ng-container>
+      <demo-props-switcher #withBorder$></demo-props-switcher>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Disabled</demo-props-group-label>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
+    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Username</demo-props-group-label>
-    <div class="avatar__row">
-      <pupa-input-text class="username-input" placeholder="Username" [formControl]="usernameControl"></pupa-input-text>
-      <pupa-icon-button
-        class="avatar__icon-button clear-username"
-        [color]="'light-blue'"
-        (click)="clearUsernameInput()"
-      >
-        <pupa-icon name="close-circle"></pupa-icon>
-      </pupa-icon-button>
-    </div>
+    <demo-example-viewer-property decoratorName="input" name="username" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>The string to display inside the element.</ng-container>
 
-    <demo-props-group-label>Image Src</demo-props-group-label>
-    <div class="avatar__row">
-      <pupa-input-text placeholder="Image Src" [formControl]="imageSrcControl"></pupa-input-text>
-      <pupa-icon-button class="avatar__icon-button clear-image" [color]="'light-blue'" (click)="clearImageSrcInput()">
-        <pupa-icon name="close-circle"></pupa-icon>
-      </pupa-icon-button>
-    </div>
+      <pupa-input-text
+        class="username-input"
+        placeholder="Username"
+        [formControl]="usernameControl"
+        [withReset]="true"
+      ></pupa-input-text>
+    </demo-example-viewer-property>
 
-    <pupa-button class="avatar__button" (click)="setAvatar()">Set Keanu Reeves Avatar</pupa-button>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-property decoratorName="input" name="src" type="string">
+      <ng-container *demoExampleViewerPropertyDescription>
+        The source of the image displayed inside the element.
+      </ng-container>
+      <pupa-input-text placeholder="Image Src" [formControl]="imageSrcControl" [withReset]="true"></pupa-input-text>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <h2>Сode Example</h2>

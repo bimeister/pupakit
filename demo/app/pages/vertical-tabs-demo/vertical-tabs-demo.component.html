@@ -1,11 +1,11 @@
 <h1>Vertical Tabs</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content>
+  <demo-example-viewer-content [isSticky]="false">
     <div class="container">
       <pupa-vertical-tabs
         (selectedTabValues)="handleTabSelection($event)"
-        [isMultiSelectionEnabled]="isMultiSelectionEnabled | async"
+        [isMultiSelectionEnabled]="isMultiSelectionEnabled$ | async"
       >
         <pupa-vertical-tabs-item
           *ngFor="let check of checks"
@@ -17,10 +17,13 @@
       </pupa-vertical-tabs>
     </div>
   </demo-example-viewer-content>
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #isMultiSelectionEnabled>isMultiSelectionEnabled</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="isMultiSelectionEnabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the multi selection is enabled.</ng-container>
+      <demo-props-switcher #isMultiSelectionEnabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <ng-template #checkTemplate let-check="check">
@@ -30,7 +33,7 @@
     </h3>
 
     <div class="check__switcher">
-      <pupa-switcher [value]="check?.isEnabled" (click)="$event.stopPropagation()"> </pupa-switcher>
+      <pupa-switcher [value]="check?.isEnabled" (click)="$event.stopPropagation()"></pupa-switcher>
     </div>
 
     <div class="check__author check__metadata">

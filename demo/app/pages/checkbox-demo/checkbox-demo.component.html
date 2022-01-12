@@ -2,7 +2,7 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-checkbox [indeterminate]="indeterminate | async" [formControl]="control">
+    <pupa-checkbox [indeterminate]="indeterminate$ | async" [formControl]="control" [disabled]="disabled$ | async">
       <pupa-checkbox-mark></pupa-checkbox-mark>
       <div [pupaTooltip] [tooltipContentTemplate]="tooltipTemplate" [tooltipDisabled]="isNeedDisableTooltip$ | async">
         <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
@@ -11,11 +11,18 @@
     </pupa-checkbox>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox class="indeterminate-props" #indeterminate>Indeterminate</demo-props-checkbox>
-    <demo-props-checkbox class="disabled-props" #disabled>Disabled</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="indeterminate" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is indeterminate.</ng-container>
+      <demo-props-switcher #indeterminate$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>
 
 <h2>Basic usage of Checkbox</h2>

@@ -1,17 +1,33 @@
-<h1>Input</h1>
+<h1>Label</h1>
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-label class="label" [disabled]="formControl.disabled" [icon]="(withIcon | async) ? 'app-info' : null">
-      {{ formControl.value }}</pupa-label
-    >
+    <pupa-label class="label" [disabled]="disabled$ | async" [icon]="buttonIconFormControl.value">
+      {{ textFormControl.value }}
+    </pupa-label>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Text</demo-props-group-label>
-    <pupa-input-text placeholder="Text" [formControl]="formControl"></pupa-input-text>
-    <demo-props-group-label>Flags</demo-props-group-label>
-    <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
-    <demo-props-checkbox #withIcon>With Icon</demo-props-checkbox>
-  </demo-example-viewer-properties>
+  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-config-item name="Set form control value">
+      <ng-container *demoExampleViewerConfigItemDescription>
+        Use
+        <pupa-code-inline>formControl.setValue()</pupa-code-inline>
+      </ng-container>
+      <pupa-input-text [formControl]="textFormControl"></pupa-input-text>
+    </demo-example-viewer-config-item>
+  </demo-example-viewer-section>
+
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="icon" type="string" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+      <pupa-input-text [formControl]="buttonIconFormControl" [withReset]="true"></pupa-input-text>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>

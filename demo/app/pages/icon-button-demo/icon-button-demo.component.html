@@ -3,30 +3,55 @@
 <demo-example-viewer>
   <demo-example-viewer-content>
     <pupa-icon-button
-      [color]="color | async"
-      [size]="size | async"
-      [disabled]="disabled | async"
-      [active]="active | async"
-      [isFloat]="isFloat | async"
-      [fixed]="fixed | async"
-      [isDisabledContentOpacity]="isDisabledContentOpacity | async"
+      [color]="color$ | async"
+      [size]="size$ | async"
+      [disabled]="disabled$ | async"
+      [active]="active$ | async"
+      [isFloat]="isFloat$ | async"
+      [fixed]="fixed$ | async"
+      [isDisabledContentOpacity]="isDisabledContentOpacity$ | async"
     >
       <pupa-icon name="add-circle"></pupa-icon>
     </pupa-icon-button>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-properties>
-    <demo-props-group-label>Size</demo-props-group-label>
-    <demo-props-radio-select #size [options]="sizeOptions"></demo-props-radio-select>
+  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section>
+    <demo-example-viewer-property decoratorName="input" name="size" type="InputButtonSize">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+      <demo-props-select #size$ direction="row" [options]="sizeOptions"></demo-props-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Color</demo-props-group-label>
-    <demo-props-radio-select #color [options]="colorOptions"></demo-props-radio-select>
+    <demo-example-viewer-property name="color" type="InputButtonColor" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the element.</ng-container>
+      <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
+    </demo-example-viewer-property>
 
-    <demo-props-group-label>Other</demo-props-group-label>
-    <demo-props-checkbox #active>Active</demo-props-checkbox>
-    <demo-props-checkbox #disabled>Disabled</demo-props-checkbox>
-    <demo-props-checkbox #isFloat>Floating</demo-props-checkbox>
-    <demo-props-checkbox #fixed>Fixed</demo-props-checkbox>
-    <demo-props-checkbox #isDisabledContentOpacity>Disabled content opacity</demo-props-checkbox>
-  </demo-example-viewer-properties>
+    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+      <demo-props-switcher #disabled$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is active.</ng-container>
+      <demo-props-switcher #active$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="isFloat" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element is floating.</ng-container>
+      <demo-props-switcher #isFloat$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="fixed" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>Whether the element has fixed position.</ng-container>
+      <demo-props-switcher #fixed$></demo-props-switcher>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="isDisabledContentOpacity" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription
+        >Whether the element has disabled content opacity.
+      </ng-container>
+      <demo-props-switcher #isDisabledContentOpacity$></demo-props-switcher>
+    </demo-example-viewer-property>
+  </demo-example-viewer-section>
 </demo-example-viewer>

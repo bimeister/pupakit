@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+@use '../../styles/example-viewer-section-item.styles' as *;
+
+.config-item {
+  @extend .section-item;
+
+  &__info {
+    @extend .section-item__info;
+  }
+
+  &__control {
+    @extend .section-item__control;
+  }
+
+  &__name {
+    @include font-type-caption();
+    @include font-size-medium();
+  }
+}
