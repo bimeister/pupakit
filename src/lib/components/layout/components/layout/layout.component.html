@@ -18,11 +18,5 @@
     </div>
   </div>
 </div>
-
-<div class="layout-wrapper alerts">
-  <div class="alerts-wrapper">
-    <pupa-alert *ngFor="let alert of alertList$ | async; trackBy: trackByAlertId" [alert]="alert"></pupa-alert>
-  </div>
-</div>
 <div class="layout-wrapper context-menus"></div>
 <iframe class="layout-wrapper iframe" #iframe frameborder="0"></iframe>

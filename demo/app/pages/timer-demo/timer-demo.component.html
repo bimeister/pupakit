@@ -1,0 +1,44 @@
+<h1>Timer</h1>
+
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <pupa-info-block variant="warning">
+      Maximum <pupa-code-inline>seconds</pupa-code-inline> property value is 999.
+    </pupa-info-block>
+
+    <h2>Usage</h2>
+
+    <h3>Basic usage</h3>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-basic-example *pupaCodeContainerPreviewTemplate></demo-basic-example>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-timer-round [seconds]="secondsControl.value"></pupa-timer-round>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="@Output() timeIsUp" type="EventEmitter<void>">
+          <ng-container *demoExampleViewerPropertyDescription> Emit when the timer expires. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="@Input() seconds" type="number">
+          <ng-container *demoExampleViewerPropertyDescription> Timer seconds. Maximum value is 999.</ng-container>
+
+          <pupa-input-number [formControl]="secondsControl"></pupa-input-number>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>Methods</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="restart()" type="void">
+          <ng-container *demoExampleViewerPropertyDescription> Restarts the timer. </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

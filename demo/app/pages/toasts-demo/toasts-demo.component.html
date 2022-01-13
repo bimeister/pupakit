@@ -1,0 +1,87 @@
+<h1>Toasts</h1>
+
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Usage</h2>
+
+    <h3>Basic usage</h3>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-basic-example *pupaCodeContainerPreviewTemplate></demo-basic-example>
+    </pupa-code-container>
+
+    <h3>Template rendering</h3>
+    <pupa-code-container [content]="templateRenderingExampleContent">
+      <demo-template-rendering-example *pupaCodeContainerPreviewTemplate></demo-template-rendering-example>
+    </pupa-code-container>
+
+    <h3>Change theme</h3>
+    <pupa-code-container [content]="changeThemeExampleContent">
+      <demo-change-theme-example *pupaCodeContainerPreviewTemplate></demo-change-theme-example>
+    </pupa-code-container>
+    <pupa-info-block>
+      We recommend using light toasts for dark pages and dark toasts for light pages. Also switch theme of toast on page
+      theme changed.
+    </pupa-info-block>
+
+    <h2>Customization</h2>
+
+    <h3>Custom component rendering</h3>
+    <p>
+      Also you can render your own component. Extend it from
+      <pupa-code-inline>ToastComponentBase</pupa-code-inline> and pass to the
+      <pupa-code-inline>open</pupa-code-inline> method. Toast data type and return data type will be calculated
+      automatically.
+    </p>
+
+    <h3>Animations for your own component</h3>
+    <p>
+      You can use default animation or set your own animation. Use
+      <pupa-code-inline>ToastComponentBase.animations</pupa-code-inline> or write animation like in the example.
+    </p>
+    <pupa-code filePath="toasts-demo/examples/animation.example.txt"> </pupa-code>
+    <p>and use animation in html</p>
+    <pupa-code filePath="toasts-demo/examples/animation-usage.example.txt"> </pupa-code>
+  </div>
+
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-section-label>ToastsService</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property
+          name="open<TComponent>(config: ToastConfig<TComponent, TData>)"
+          type="OpenedToast<TReturn>"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            TData and TReturn are automatically calculated from the passed component.
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="setTheme(theme: Theme)" type="void">
+          <ng-container *demoExampleViewerPropertyDescription> Method for switch toasts theme. </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>ToastConfig&#60;TComponent, TData&#62;</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="component?" type="ComponentType<C>">
+          <ng-container *demoExampleViewerPropertyDescription> Component to render as toast. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="data" type="TData">
+          <ng-container *demoExampleViewerPropertyDescription> Params for opened component. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="injector?" type="Injector">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Injector for accessing component to outer data.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+
+  <div *demoPageTab="'setup'">
+    <p>Set default theme in root component</p>
+    <pupa-code filePath="toasts-demo/examples/default-theme.example.txt"> </pupa-code>
+  </div>
+</demo-page>

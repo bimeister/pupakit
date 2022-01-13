@@ -1,1 +1,1 @@
-export type PageTabNames = 'overview' | 'api';
+export type PageTabNames = 'overview' | 'api' | 'setup';

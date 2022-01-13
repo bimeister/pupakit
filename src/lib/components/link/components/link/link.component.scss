@@ -1,0 +1,100 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+@mixin link-color($lightColor, $darkColor) {
+  color: $lightColor;
+
+  @include host-selector-dark-theme {
+    color: $darkColor;
+  }
+
+  &::after {
+    background-color: $lightColor;
+
+    @include host-selector-dark-theme {
+      background-color: $darkColor;
+    }
+  }
+}
+
+:host {
+  appearance: none;
+  text-decoration: none;
+  font-size: inherit;
+  text-transform: inherit;
+  font-weight: inherit;
+  font-family: inherit;
+
+  outline: none;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+
+  .link-content {
+    position: relative;
+    white-space: nowrap;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 1px;
+      bottom: -1rem;
+      left: 0;
+      display: none;
+      z-index: 1;
+    }
+
+    @include link-color(color(link-lnl001), color(link-lnd001));
+  }
+
+  @include hover {
+    .link-content {
+      @include link-color(color(link-lnl002), color(link-lnd002));
+
+      &::after {
+        display: block;
+      }
+    }
+  }
+
+  &:active {
+    .link-content {
+      @include link-color(color(link-lnl003), color(link-lnd003));
+    }
+  }
+
+  &:visited {
+    .link-content {
+      @include link-color(color(link-ln004), color(link-ln004));
+    }
+  }
+
+  &:focus-visible {
+    .link-content {
+      .substrate {
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 2px;
+
+        border-color: color(primary-n400);
+      }
+    }
+  }
+}
+
+.icon {
+  margin-right: 1rem;
+  margin-top: -0.25em;
+}
+
+.substrate {
+  position: absolute;
+  width: calc(100% + 2rem);
+  height: calc(100% + 2px);
+  top: 0;
+  left: -1rem;
+  z-index: 2;
+}

@@ -1,0 +1,18 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  @include font-size-medium;
+  @include font-type-point;
+  line-height: 1;
+  padding-right: 14px;
+
+  color: color(base-n600);
+  @include host-selector-dark-theme {
+    color: color(base-n0);
+  }
+}

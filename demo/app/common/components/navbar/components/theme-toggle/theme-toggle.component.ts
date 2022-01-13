@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
+import { DOCUMENT } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
+
+import { ToastsService } from '../../../../../../../src/internal/api';
 import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
+import { AlertsService } from '../../../../../../../src/internal/shared/services/alerts.service';
 import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { DOCUMENT } from '@angular/common';
 
 enum IconNames {
   DARK = 'ios-moon',
@@ -64,7 +67,9 @@ export class ThemeToggleComponent {
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
     private readonly themeWrapperService: ThemeWrapperService,
-    private readonly renderer: Renderer2
+    private readonly renderer: Renderer2,
+    private readonly alertsService: AlertsService,
+    private readonly toastsService: ToastsService
   ) {
     this.setInitialBrowserToolbarTheme();
   }
@@ -78,6 +83,10 @@ export class ThemeToggleComponent {
       .subscribe((theme: Theme) => {
         this.setBrowserToolbarTheme(theme);
         this.themeWrapperService.setTheme(theme);
+
+        const alertsAndToastsTheme: Theme = theme === Theme.Light ? Theme.Dark : Theme.Light;
+        this.alertsService.setTheme(alertsAndToastsTheme);
+        this.toastsService.setTheme(alertsAndToastsTheme);
       });
   }
 

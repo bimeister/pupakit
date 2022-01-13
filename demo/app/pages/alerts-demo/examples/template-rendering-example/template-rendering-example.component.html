@@ -1,0 +1,20 @@
+<pupa-button (click)="openAlert()">Open Alert</pupa-button>
+
+<ng-template #alertTemplate let-name let-alertRef="alertRef">
+  <pupa-alert-layout type="success">
+    <pupa-alert-layout-header>
+      Some Title!
+      <pupa-alert-layout-close-button (click)="alertRef.close()"></pupa-alert-layout-close-button>
+    </pupa-alert-layout-header>
+
+    <pupa-alert-layout-body>
+      <div>
+        Hello, <span [pupaTooltip]="name"> {{ name }} </span>
+      </div>
+    </pupa-alert-layout-body>
+
+    <pupa-alert-layout-footer>
+      <pupa-button size="small" kind="border-contrast" (click)="alertRef.close()">Ok!</pupa-button>
+    </pupa-alert-layout-footer>
+  </pupa-alert-layout>
+</ng-template>

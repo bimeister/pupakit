@@ -1,1 +1,9 @@
-export type ButtonKind = 'primary' | 'secondary' | 'border' | 'subtle' | 'warning' | 'danger' | 'subtle-danger';
+export type ButtonKind =
+  | 'primary'
+  | 'secondary'
+  | 'border'
+  | 'border-contrast'
+  | 'subtle'
+  | 'warning'
+  | 'danger'
+  | 'subtle-danger';

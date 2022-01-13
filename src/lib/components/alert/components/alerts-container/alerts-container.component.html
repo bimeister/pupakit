@@ -1,0 +1,15 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <div class="alerts-container">
+    <div class="toolbar" *ngIf="toolbarComponentPortal">
+      <ng-template [cdkPortalOutlet]="toolbarComponentPortal"></ng-template>
+    </div>
+
+    <div class="scroll-container">
+      <div class="alerts">
+        <ng-container *ngFor="let componentPortal of componentPortals$ | async; trackBy: trackByFn">
+          <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</pupa-theme-wrapper>

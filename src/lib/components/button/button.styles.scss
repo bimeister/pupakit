@@ -366,6 +366,47 @@
     }
   }
 
+  &_border-contrast {
+    .button__background {
+      background-color: transparent;
+      border: 1px solid color(base-white-n400);
+      transition: background-color 0.2s ease, transform 0.1s, border-color 0.2s ease;
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(base-white-n400);
+          border-color: color(base-white-n400);
+        }
+
+        .button__icon {
+          color: color(base-n600);
+        }
+      }
+
+      &:active,
+      &.button_active {
+        .button__background {
+          background-color: color(base-white-n300);
+        }
+
+        .button__icon {
+          color: color(base-n600);
+        }
+      }
+    }
+
+    .button__content,
+    .button__loading {
+      color: color(base-n600);
+    }
+
+    .button__icon {
+      color: color(base-white-n200);
+    }
+  }
+
   &_disabled {
     cursor: not-allowed;
 
@@ -388,6 +429,13 @@
     }
 
     &.button_border {
+      .button__background {
+        background-color: transparent;
+        border: 1px solid color(base-dark-n100);
+      }
+    }
+
+    &.button_border-contrast {
       .button__background {
         background-color: transparent;
         border: 1px solid color(base-dark-n100);
@@ -418,7 +466,8 @@
   }
   &_secondary,
   &_subtle,
-  &_border {
+  &_border,
+  &_border-contrast {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: color(base-dark-n500);
@@ -475,6 +524,15 @@
     }
   }
 
+  &_border-contrast {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: transparent;
+        border: 1px solid color(base-n0);
+      }
+    }
+  }
+
   &_disabled {
     @include host-selector-dark-theme() {
       .button__background {
@@ -496,6 +554,13 @@
       }
 
       &.button_border {
+        .button__background {
+          background-color: transparent;
+          border: 1px solid color(base-dark-n500);
+        }
+      }
+
+      &.button_border-contrast {
         .button__background {
           background-color: transparent;
           border: 1px solid color(base-dark-n500);

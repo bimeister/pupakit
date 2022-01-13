@@ -1,13 +1,14 @@
+import { ListRange } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
-import { Uuid } from '../../../../../../src/internal/declarations/types/uuid.type';
-import { TableColumnDefinition } from '../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
-import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
 import { getUuid } from '@bimeister/utilities';
 import { Observable, of, Subscription } from 'rxjs';
-import { TableEvents } from '../../../../../../src/internal/declarations/events/table.events';
 import { debounceTime, delay, map, switchMap } from 'rxjs/operators';
-import { ListRange } from '@angular/cdk/collections';
+
+import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
+import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
+import { TableEvents } from '../../../../../../src/internal/declarations/events/table.events';
+import { TableColumnDefinition } from '../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
+import { Uuid } from '../../../../../../src/internal/declarations/types/uuid.type';
 
 interface SomeData {
   id: Uuid;

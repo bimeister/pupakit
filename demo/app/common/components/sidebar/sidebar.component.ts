@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { isEmpty, isNil, shareReplayWithRefCount, sortByProperty, stringFilterPredicate } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+
 import { DrawerRef } from '../../../../../src/internal/declarations/classes/drawer-ref.class';
 import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
 import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
@@ -69,6 +70,8 @@ export class SidebarComponent {
         { title: 'Spinner & loader', link: '/kit/spinner' },
         { title: 'Rating', link: '/kit/rating' },
         { title: 'Selector', link: '/kit/selector' },
+        { title: 'Link', link: '/kit/link' },
+        { title: 'Timer', link: '/kit/timer' },
         { title: '⚠️ Chip Tabs', link: '/kit/chip-tabs' },
         { title: '⚠️ Chip', link: '/kit/chip' },
         { title: '⚠️ Vertical Tabs', link: '/kit/vertical-tabs' },
@@ -90,6 +93,8 @@ export class SidebarComponent {
       [
         { title: 'Dropdown menu', link: '/kit/dropdown-menu' },
         { title: 'Tooltip', link: '/kit/tooltip' },
+        { title: 'Alert', link: '/kit/alerts' },
+        { title: 'Toast', link: '/kit/toasts' },
         { title: '⚠️ Drawer', link: '/kit/drawer-old' },
         { title: 'Drawer', link: '/kit/drawer' },
         { title: 'Modal', link: '/kit/modal' },

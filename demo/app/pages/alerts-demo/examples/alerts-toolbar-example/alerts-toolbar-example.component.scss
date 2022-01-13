@@ -1,0 +1,16 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.alerts-toolbar {
+  color: color(base-n600);
+  background-color: color(base-white-n300);
+
+  @include host-selector-dark-theme {
+    color: color(base-n0);
+    background-color: color(base-n600);
+  }
+
+  &__container {
+    padding: 2rem 4rem;
+  }
+}

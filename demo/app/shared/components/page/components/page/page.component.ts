@@ -7,11 +7,12 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { PageTabDirective } from '../../directives/page-tab.directive';
-import { PageTabNames } from '../../declarations/types/page-tab-names.type';
 import { filterFalsy, isEmpty, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+
+import { PageTabNames } from '../../declarations/types/page-tab-names.type';
+import { PageTabDirective } from '../../directives/page-tab.directive';
 
 interface BaseTab {
   title: string;
@@ -25,6 +26,7 @@ interface Tab extends BaseTab {
 const TAB_TITLE_BY_NAME_MAP: Map<PageTabNames, string> = new Map([
   ['overview', 'Description and Examples'],
   ['api', 'Api'],
+  ['setup', 'Setup'],
 ]);
 
 @Component({

@@ -1,0 +1,7 @@
+<div
+  class="alert"
+  [@show]="{ value: animationState$ | async, params: { openAnimationDurationMs, closeAnimationDurationMs } }"
+  [style.transform]="panTranslateX$ | async"
+>
+  <ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="templateContext"></ng-container>
+</div>

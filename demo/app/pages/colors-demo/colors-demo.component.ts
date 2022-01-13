@@ -1,8 +1,9 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Alert, AlertsService } from '../../../../src/public-api';
-import { ColorsService } from '../../../../src/internal/shared/services/colors.service';
+
 import { ColorGroup } from '../../../../src/internal/declarations/classes/color-group.class';
+import { ColorsService } from '../../../../src/internal/shared/services/colors.service';
+import { ToastsService } from '../../../../src/internal/shared/services/toasts.service';
 
 const BASE_REQUEST_PATH: string = 'colors-demo/examples';
 
@@ -28,22 +29,21 @@ export class ColorsDemoComponent {
 
   constructor(
     private readonly cdkClipboard: Clipboard,
-    private readonly alertsService: AlertsService,
+    public readonly toastsService: ToastsService,
     private readonly colorsService: ColorsService
   ) {}
 
   public copyToClipboard(value: string): void {
     this.cdkClipboard.copy(value);
-    this.showClipboardAlert(`Скопировано в буфер обмена: ${value}`);
+    this.showClipboardAlert(`Copied to clipboard: ${value}`);
   }
 
   private showClipboardAlert(text: string): void {
-    const alert: Alert = {
-      id: null,
-      text,
-      type: 'success',
-      needToBeClosed: false,
-    };
-    this.alertsService.create(alert).subscribe();
+    this.toastsService.open({
+      data: {
+        bodyText: text,
+        type: 'info',
+      },
+    });
   }
 }

@@ -1,5 +1,6 @@
 import { NgModule, Type } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
@@ -336,6 +337,25 @@ const demoRoutes: Routes = [
           import('./pages/button-group-demo/button-group-demo.module').then(
             (module: any) => module.ButtonGroupDemoModule
           ),
+      },
+      {
+        path: 'alerts',
+        loadChildren: () =>
+          import('./pages/alerts-demo/alerts-demo.module').then((module: any) => module.AlertsDemoModule),
+      },
+      {
+        path: 'toasts',
+        loadChildren: () =>
+          import('./pages/toasts-demo/toasts-demo.module').then((module: any) => module.ToastsDemoModule),
+      },
+      {
+        path: 'link',
+        loadChildren: () => import('./pages/link-demo/link-demo.module').then((module: any) => module.LinkDemoModule),
+      },
+      {
+        path: 'timer',
+        loadChildren: () =>
+          import('./pages/timer-demo/timer-demo.module').then((module: any) => module.TimerDemoModule),
       },
     ],
   },
