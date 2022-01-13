@@ -1,10 +1,7 @@
 export class ExpandedTreeItem {
-  public readonly id: string;
   public parentTreeItem: ExpandedTreeItem;
   public readonly childrenTreeItemsMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>();
-  constructor(id: string) {
-    this.id = id;
-  }
+  constructor(public readonly id: string) {}
 
   public setParent(parent: NonNullable<ExpandedTreeItem>): void {
     if (this.parentTreeItem?.id === parent?.id) {
@@ -25,28 +22,18 @@ export class ExpandedTreeItem {
   }
 
   public getAllChildrenIds(): string[] {
-    const neededIds: string[] = [];
+    return this.getAllNestedChildrenIds(this.childrenTreeItemsMap);
+  }
 
-    if (this.childrenTreeItemsMap.size > 0) {
-      const pushChildrenIds: (childrenIds: string[], treeItemsMap: Map<string, ExpandedTreeItem>) => void = (
-        childrenIds: string[],
-        treeItemsMap: Map<string, ExpandedTreeItem>
-      ) => {
-        if (treeItemsMap.size === 0) {
-          return;
-        }
-
-        const childChildrenIds: string[] = Array.from(treeItemsMap.keys());
-        childrenIds.push(...childChildrenIds);
-
-        treeItemsMap.forEach((treeItem: ExpandedTreeItem) =>
-          pushChildrenIds(childrenIds, treeItem.childrenTreeItemsMap)
-        );
-      };
-
-      pushChildrenIds(neededIds, this.childrenTreeItemsMap);
+  private getAllNestedChildrenIds(treeItemsMap: Map<string, ExpandedTreeItem>, childrenIds: string[] = []): string[] {
+    if (treeItemsMap.size === 0) {
+      return childrenIds;
     }
 
-    return neededIds;
+    const updatedChildrenIds: string[] = childrenIds.concat(Array.from(treeItemsMap.keys()));
+    const childrenIdsSections: string[][] = Array.from(treeItemsMap.values()).map((treeItem: ExpandedTreeItem) =>
+      this.getAllNestedChildrenIds(treeItem.childrenTreeItemsMap, updatedChildrenIds)
+    );
+    return childrenIdsSections.flat(1);
   }
 }
