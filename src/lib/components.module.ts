@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
+
 import { SharedModule } from '../internal/shared/shared.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
@@ -25,6 +26,7 @@ import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { InputModule } from './components/input/input.module';
 import { LabelModule } from './components/label/label.module';
 import { LayoutModule } from './components/layout/layout.module';
+import { LinkModule } from './components/link/link.module';
 import { ModalModule } from './components/modal/modal.module';
 import { PagedVirtualScrollModule } from './components/paged-virtual-scroll/paged-virtual-scroll.module';
 import { ProgressBarModule } from './components/progress-bar/progress-bar.module';
@@ -43,6 +45,8 @@ import { TabsModule } from './components/tabs/tabs.module';
 import { TagModule } from './components/tag/tag.module';
 import { TextareaModule } from './components/textarea/textarea.module';
 import { ThemeWrapperModule } from './components/theme-wrapper/theme-wrapper.module';
+import { TimerModule } from './components/timer/timer.module';
+import { ToastModule } from './components/toast/toast.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
@@ -97,6 +101,9 @@ const EXPORTS: any[] = [
   BadgeModule,
   BreadcrumbsModule,
   ButtonGroupModule,
+  ToastModule,
+  LinkModule,
+  TimerModule,
 ];
 
 @NgModule({

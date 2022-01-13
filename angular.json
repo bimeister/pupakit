@@ -154,7 +154,10 @@
       "root": "./demo",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "style": "scss",
+          "viewEncapsulation": "Emulated",
+          "changeDetection": "OnPush",
+          "skipTests": true
         }
       },
       "sourceRoot": "./demo"

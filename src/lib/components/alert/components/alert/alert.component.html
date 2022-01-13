@@ -1,0 +1,26 @@
+<div
+  class="alert"
+  [@show]="{ value: animationState$ | async, params: { openAnimationDurationMs, closeAnimationDurationMs } }"
+  [style.transform]="panTranslateX$ | async"
+>
+  <pupa-alert-layout [type]="type">
+    <pupa-alert-layout-close-button
+      *ngIf="hasCloseButton"
+      (click)="processCloseButtonClick()"
+    ></pupa-alert-layout-close-button>
+
+    <pupa-alert-layout-header *ngIf="hasHeader">
+      <span>{{ title }}</span>
+    </pupa-alert-layout-header>
+
+    <pupa-alert-layout-body>
+      {{ bodyText }}
+    </pupa-alert-layout-body>
+
+    <pupa-alert-layout-footer *ngIf="hasButtons">
+      <pupa-button size="small" [kind]="button.kind" *ngFor="let button of buttons" (click)="button.action()">
+        {{ button.text }}
+      </pupa-button>
+    </pupa-alert-layout-footer>
+  </pupa-alert-layout>
+</div>

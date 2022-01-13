@@ -1,0 +1,11 @@
+<div [@show]="{ value: animationState$ | async, params: { openAnimationDurationMs, closeAnimationDurationMs } }">
+  <pupa-toast-layout [type]="type">
+    <div class="content">
+      <div class="timer">
+        <pupa-timer-round *ngIf="hasTimer" [seconds]="autoCloseTimeSeconds"></pupa-timer-round>
+      </div>
+      <span>{{ bodyText }}</span>
+    </div>
+    <button pupaLink *ngIf="actionText" (click)="processActionClick()">{{ actionText }}</button>
+  </pupa-toast-layout>
+</div>

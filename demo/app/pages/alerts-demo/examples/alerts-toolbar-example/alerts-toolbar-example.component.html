@@ -1,0 +1,5 @@
+<div class="alerts-toolbar" [@show]="isVisible$ | async">
+  <div class="alerts-toolbar__container">
+    <pupa-button size="small" kind="secondary" (click)="closeAll()">Close All</pupa-button>
+  </div>
+</div>

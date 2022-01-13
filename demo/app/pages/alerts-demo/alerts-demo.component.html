@@ -1,0 +1,125 @@
+<h1>Alerts</h1>
+
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Usage</h2>
+
+    <h3>Basic usage</h3>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-basic-example *pupaCodeContainerPreviewTemplate></demo-basic-example>
+    </pupa-code-container>
+
+    <h3>Basic usage with additional settings</h3>
+    <pupa-code-container [content]="basicAdditionalSettingsExampleContent">
+      <demo-basic-additional-settings-example
+        *pupaCodeContainerPreviewTemplate
+      ></demo-basic-additional-settings-example>
+    </pupa-code-container>
+
+    <h3>Template rendering</h3>
+    <pupa-code-container [content]="templateRenderingExampleContent">
+      <demo-template-rendering-example *pupaCodeContainerPreviewTemplate></demo-template-rendering-example>
+    </pupa-code-container>
+
+    <h3>Change theme</h3>
+    <pupa-code-container [content]="changeThemeExampleContent">
+      <demo-change-theme-example *pupaCodeContainerPreviewTemplate></demo-change-theme-example>
+    </pupa-code-container>
+    <pupa-info-block>
+      We recommend using light alerts for dark pages and dark alerts for light pages. Also switch theme of alerts on
+      page theme changed.
+    </pupa-info-block>
+
+    <h2>Customization</h2>
+
+    <h3>Custom component rendering</h3>
+    <p>
+      Also you can render your own component. Extend it from
+      <pupa-code-inline>AlertComponentBase</pupa-code-inline> and pass to the
+      <pupa-code-inline>open</pupa-code-inline> method. Alert data type and return data type will be calculated
+      automatically.
+    </p>
+
+    <h3>Animations for your own component</h3>
+    <p>
+      You can use default animation or set your own animation. Use
+      <pupa-code-inline>AlertComponentBase.animations</pupa-code-inline> or write animation like in the example.
+    </p>
+    <pupa-code filePath="alerts-demo/examples/animation.example.txt"> </pupa-code>
+    <p>and use animation in html</p>
+    <pupa-code filePath="alerts-demo/examples/animation-usage.example.txt"> </pupa-code>
+  </div>
+
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-section-label>AlertModuleConfig</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="toolbarComponent" type="ComponentType<unknown> | null">
+          <ng-container *demoExampleViewerPropertyDescription>
+            This component is displayed on top of all alerts.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>AlertsService</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="alertsCount$" type="number">
+          <ng-container *demoExampleViewerPropertyDescription> Count of opened alerts. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property
+          name="open<TComponent>(config: AlertConfig<TComponent, TData>)"
+          type="OpenedAlert<TReturn>"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            TData and TReturn are automatically calculated from the passed component.
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="setTheme(theme: Theme)" type="void">
+          <ng-container *demoExampleViewerPropertyDescription> Method for switch alerts theme. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="closeAll()" type="void">
+          <ng-container *demoExampleViewerPropertyDescription> Closes all alerts. </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>AlertConfig&#60;TComponent, TData&#62;</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="component?" type="ComponentType<TComponent>">
+          <ng-container *demoExampleViewerPropertyDescription> Component to render as alert. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="data" type="TData">
+          <ng-container *demoExampleViewerPropertyDescription> Params for opened component. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="injector?" type="Injector">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Injector for accessing component to outer data.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+
+  <div *demoPageTab='"setup"'>
+    <ol>
+      <li>
+        <p>
+          Import <pupa-code-inline>AlertModule</pupa-code-inline> with config to your module. Pass
+          <pupa-code-inline>toolbarComponent</pupa-code-inline> to display UI above all alerts.
+        </p>
+        <pupa-code filePath="alerts-demo/examples/module-import.example.txt"> </pupa-code>
+
+        <pupa-code-container [content]="alertsToolbarExampleContent" [isPreviewExist]="false"></pupa-code-container>
+      </li>
+
+      <li>
+        <p>Set default theme in root component</p>
+        <pupa-code filePath="alerts-demo/examples/default-theme.example.txt"> </pupa-code>
+      </li>
+    </ol>
+  </div>
+</demo-page>

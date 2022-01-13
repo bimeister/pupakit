@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { FormControl } from '@angular/forms';
+
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 @Component({
   selector: 'demo-button',
@@ -52,6 +53,10 @@ export class ButtonDemoComponent {
     {
       caption: 'Border',
       value: 'border',
+    },
+    {
+      caption: 'Border Contrast',
+      value: 'border-contrast',
     },
     {
       caption: 'Subtle-danger',

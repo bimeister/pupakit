@@ -1,0 +1,31 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  max-width: 100%;
+}
+
+.alerts-container {
+  display: flex;
+  max-width: inherit;
+  max-height: vh(100);
+  flex-direction: column;
+}
+
+.toolbar {
+  flex: 0 0 auto;
+}
+
+.scroll-container {
+  flex: 0 1 auto;
+  overflow-y: auto;
+  @include invisible-scrollbars;
+}
+
+.alerts {
+  display: flex;
+  flex-direction: column;
+  margin-right: 1rem;
+  padding-bottom: 2rem;
+}

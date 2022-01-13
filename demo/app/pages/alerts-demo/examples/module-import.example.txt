@@ -1,0 +1,11 @@
+import { NgModule } from '@angular/core';
+
+...
+
+import { AlertModule } from '@bimeister/pupakit';
+
+@NgModule({
+  declarations: [...],
+  imports: [..., AlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent })],
+})
+export class SharedModule {}

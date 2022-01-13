@@ -1,0 +1,5 @@
+<div 
+  [@show]="{ value: animationState$ | async, params: { openAnimationDurationMs, closeAnimationDurationMs } }"
+>
+  ...
+</div>

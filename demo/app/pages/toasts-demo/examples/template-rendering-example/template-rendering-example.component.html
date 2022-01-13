@@ -1,0 +1,11 @@
+<pupa-button (click)="openToast()">Open Toast</pupa-button>
+
+<ng-template #toastTemplate let-text let-toastRef="toastRef">
+  <pupa-toast-layout type="success">
+    <span
+      >Hello, <span [pupaTooltip]="text">{{text}}</span
+      >!</span
+    >
+    <button pupaLink (click)="toastRef.close(true)">Some action</button>
+  </pupa-toast-layout>
+</ng-template>

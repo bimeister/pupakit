@@ -1,0 +1,13 @@
+trigger('show', [
+  state(ToastAnimationState.ClosedInitial, style({ height: 0, opacity: 0 })),
+  state(ToastAnimationState.Opened, style({ height: '*', opacity: 1 })),
+  state(ToastAnimationState.Closed, style({ opacity: 0 })),
+  transition(
+    `${ToastAnimationState.ClosedInitial} => ${ToastAnimationState.Opened}`,
+    animate('{{ openAnimationDurationMs }}ms cubic-bezier(0.35, 0.7, 0.46, 0.96)')
+  ),
+  transition(
+    `${ToastAnimationState.Opened} => ${ToastAnimationState.Closed}`,
+    animate('{{ closeAnimationDurationMs }}ms cubic-bezier(0.35, 0.7, 0.46, 0.96)')
+  ),
+])

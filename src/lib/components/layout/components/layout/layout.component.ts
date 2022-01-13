@@ -11,10 +11,9 @@ import {
 import { filterNotNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Alert } from '../../../../../internal/declarations/interfaces/alert.interface';
+
 import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
 import { LoaderType } from '../../../../../internal/declarations/types/loader-type.type';
-import { AlertsService } from '../../../../../internal/shared/services/alerts.service';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { GridStateService } from '../../../../../internal/shared/services/grid-state.service';
 import { LoaderService } from '../../../../../internal/shared/services/loader.service';
@@ -28,10 +27,6 @@ import { LoaderService } from '../../../../../internal/shared/services/loader.se
 })
 export class LayoutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
-
-  public readonly alertList$: Observable<Alert[]> = this.alertsService.alerts$.pipe(
-    map((collection: Map<string, Alert>) => Array.from(collection.values()))
-  );
 
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderService.isLoaderVisible$;
   public readonly loaderType$: Observable<LoaderType> = this.loaderService.loaderType$;
@@ -59,7 +54,6 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly loaderService: LoaderService,
-    private readonly alertsService: AlertsService,
     private readonly clientUiHandlerService: ClientUiStateHandlerService,
     private readonly gridStateService: GridStateService
   ) {}
@@ -72,7 +66,6 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public readonly trackByAlertId: TrackByFunction<Alert> = (_: number, item: Alert) => item.id;
   public readonly trackByColumnIndex: TrackByFunction<number> = (_: number, item: number) => item;
 
   private setIframeElement(): void {

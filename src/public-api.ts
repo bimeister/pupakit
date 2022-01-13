@@ -1,6 +1,4 @@
 export {
-  Alert,
-  AlertsService,
   Breadcrumb,
   ChipColors,
   ClientUiStateHandlerService,
@@ -68,6 +66,19 @@ export {
   UploadingStatus,
   ColorsService,
   Color,
+  AlertsService,
+  AlertComponentBase,
+  AlertRef,
+  OpenedAlert,
+  AlertModuleConfig,
+  AlertData,
+  AlertTemplateData,
+  ToastsService,
+  ToastComponentBase,
+  ToastRef,
+  OpenedToast,
+  ToastData,
+  ToastTemplateData,
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

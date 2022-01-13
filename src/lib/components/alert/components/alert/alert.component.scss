@@ -1,0 +1,8 @@
+@use 'mixins' as *;
+
+.alert {
+  display: flex;
+  align-items: flex-end;
+  width: 80rem;
+  margin-top: 2rem;
+}

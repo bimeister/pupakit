@@ -1,0 +1,20 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  width: 129rem;
+
+  @include xs {
+    width: 100%;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.timer {
+  align-self: stretch;
+}

@@ -1,0 +1,16 @@
+...
+
+@Component({
+  selector: 'app-root',
+  styleUrls: ['./app.component.scss'],
+  templateUrl: './app.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated,
+})
+export class AppComponent {
+  ...
+
+  constructor(private readonly alertsService: AlertsService) {
+    this.alertsService.setTheme(Theme.Light);
+  }
+}
