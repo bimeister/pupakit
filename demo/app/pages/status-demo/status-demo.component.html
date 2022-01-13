@@ -1,30 +1,36 @@
 <h1>Status</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content class="content">
-    <pupa-status [color]="color$ | async" [disabled]="disabled$ | async">Status</pupa-status>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Base usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-status-example-1 *pupaCodeContainerPreviewTemplate></demo-status-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property name="color" type="StatusColor" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the element.</ng-container>
-      <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
-    </demo-example-viewer-property>
+    <h2>Extra cases</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-status-example-2 *pupaCodeContainerPreviewTemplate></demo-status-example-2>
+    </pupa-code-container>
+  </div>
 
-    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-content class="content">
+        <pupa-status [color]="color$ | async" [disabled]="disabled$ | async">Status</pupa-status>
+      </demo-example-viewer-content>
 
-<h2>Base usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-status-example-1 *pupaCodeContainerPreviewTemplate></demo-status-example-1>
-</pupa-code-container>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="color" type="StatusColor" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the element.</ng-container>
+          <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
+        </demo-example-viewer-property>
 
-<h2>Extra cases</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-status-example-2 *pupaCodeContainerPreviewTemplate></demo-status-example-2>
-</pupa-code-container>
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
