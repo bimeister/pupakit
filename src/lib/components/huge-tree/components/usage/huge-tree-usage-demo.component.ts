@@ -25,7 +25,7 @@ const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HugeTreeUsageDemoComponent implements OnDestroy {
-  @ViewChild('hugeTree', { static: true }) public readonly hugeTree: HugeTreeComponent;
+  @ViewChild(HugeTreeComponent, { static: true }) public readonly hugeTree: HugeTreeComponent;
 
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
 
