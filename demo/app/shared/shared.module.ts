@@ -7,6 +7,7 @@ import { ComponentsModule } from '../../../src/lib/components.module';
 import { getAllIcons } from '../../declarations/functions/get-all-icons.function';
 import { IconModule } from '../../../src/lib/components/icon/icon.module';
 import { InfoBlockModule } from './components/info-block/info-block.module';
+import { PageModule } from './components/page/page.module';
 
 const MODULES: Type<unknown>[] = [
   CommonModule,
@@ -15,6 +16,7 @@ const MODULES: Type<unknown>[] = [
   ComponentsModule,
   ReactiveFormsModule,
   InfoBlockModule,
+  PageModule,
 ];
 
 @NgModule({

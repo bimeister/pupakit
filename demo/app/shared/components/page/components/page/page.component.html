@@ -1,0 +1,31 @@
+<div class="page__content" *ngIf="isNoTabsMode$ | async; else tabs">
+  <ng-content></ng-content>
+</div>
+
+<ng-template #tabs>
+  <pupa-tabs-container *ngIf="pageTabs$ | async as pageTabs">
+    <pupa-tabs>
+      <pupa-tabs-item
+        *ngFor="let tab of pageTabs"
+        [routerLink]="'.'"
+        [queryParams]="{tab: tab.name}"
+        routerLinkActive
+        #routerLinkActive="routerLinkActive"
+        [isActive]="routerLinkActive.isActive"
+        [name]="tab.title"
+      >
+        {{ tab.title }}
+      </pupa-tabs-item>
+    </pupa-tabs>
+
+    <pupa-tabs-separator></pupa-tabs-separator>
+
+    <pupa-tabs-content>
+      <ng-container *ngFor="let tab of pageTabs">
+        <div class="page__content" *pupaTabsItemContentTemplate="tab.title">
+          <ng-template [ngTemplateOutlet]="tab.templateRef"></ng-template>
+        </div>
+      </ng-container>
+    </pupa-tabs-content>
+  </pupa-tabs-container>
+</ng-template>
