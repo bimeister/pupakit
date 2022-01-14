@@ -1,8 +1,9 @@
 import { FlexibleConnectedPositionStrategy, Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ElementRef, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ElementRef, Inject, TemplateRef } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { asyncScheduler, BehaviorSubject, Observable } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, fromEvent, merge, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, observeOn, take, takeWhile, withLatestFrom } from 'rxjs/operators';
 
 export abstract class DropdownBase<ContainerComponent extends unknown> {
@@ -22,7 +23,7 @@ export abstract class DropdownBase<ContainerComponent extends unknown> {
 
   private readonly overlayRef$: BehaviorSubject<Nullable<OverlayRef>> = new BehaviorSubject<Nullable<OverlayRef>>(null);
 
-  protected constructor(protected readonly overlay: Overlay) {}
+  protected constructor(protected readonly overlay: Overlay, @Inject(DOCUMENT) private readonly document: Document) {}
 
   protected abstract getPositionStrategy(): Observable<FlexibleConnectedPositionStrategy>;
 
@@ -57,6 +58,8 @@ export abstract class DropdownBase<ContainerComponent extends unknown> {
         overlayRef.updatePosition();
         this.closeOnClickOutside(overlayRef);
         this.isOpenState$.next(true);
+
+        this.listenOutsideEventsForClose();
       });
   }
 
@@ -98,5 +101,16 @@ export abstract class DropdownBase<ContainerComponent extends unknown> {
         const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
         this.overlayRef$.next(overlayRef);
       });
+  }
+
+  private listenOutsideEventsForClose(): void {
+    const mouseDown$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'mousedown');
+    const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
+    const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
+    const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
+
+    merge(mouseDown$, touchMove$, wheel$, resize$)
+      .pipe(take(1))
+      .subscribe(() => this.close());
   }
 }

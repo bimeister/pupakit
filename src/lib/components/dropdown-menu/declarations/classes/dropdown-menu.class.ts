@@ -1,4 +1,4 @@
-import { ElementRef, Injector } from '@angular/core';
+import { ElementRef, Inject, Injector } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentPortal } from '@angular/cdk/portal';
@@ -14,6 +14,7 @@ import { DropdownMenuContainerComponent } from '../../components/dropdown-menu-c
 import { DropdownBase } from './abstract/dropdown-base.abstract';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { DROPDOWN_CONTEXT_ID_TOKEN } from '../../constants/tokens/dropdown-context-id.token';
+import { DOCUMENT } from '@angular/common';
 
 const HORIZONTAL_POSITIONS: HorizontalConnectionPos[] = ['center', 'end', 'start'];
 const VERTICAL_POSITIONS: VerticalConnectionPos[] = ['top', 'bottom'];
@@ -28,8 +29,8 @@ export class DropdownMenu extends DropdownBase<DropdownMenuContainerComponent> {
     )
   );
 
-  constructor(overlay: Overlay, private readonly contextId: Uuid) {
-    super(overlay);
+  constructor(overlay: Overlay, private readonly contextId: Uuid, @Inject(DOCUMENT) document: Document) {
+    super(overlay, document);
   }
 
   protected getComponentPortal(): ComponentPortal<DropdownMenuContainerComponent> {

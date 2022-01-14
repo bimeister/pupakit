@@ -49,8 +49,6 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.selectStateService.setIsTriggerTouchedState(false);
   }
 
-  public abstract closeOnOuterEvents(event: Event): void;
-
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
