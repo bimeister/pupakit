@@ -48,4 +48,8 @@ export class SelectComponent<T> extends SelectBase<T> {
         isTriggerTouched ? this.resetIsTriggerTouchedState() : this.processCloseEvent()
       );
   }
+
+  public close(): void {
+    this.processCloseEvent();
+  }
 }
