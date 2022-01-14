@@ -48,10 +48,4 @@ export class SelectComponent<T> extends SelectBase<T> {
         isTriggerTouched ? this.resetIsTriggerTouchedState() : this.processCloseEvent()
       );
   }
-
-  @HostListener('document:resize', ['$event'])
-  @HostListener('document:wheel', ['$event'])
-  public closeOnOuterEvents(): void {
-    this.processCloseEvent();
-  }
 }

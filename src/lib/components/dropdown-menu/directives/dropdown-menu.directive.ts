@@ -1,9 +1,11 @@
 import { HorizontalConnectionPos, Overlay } from '@angular/cdk/overlay';
+import { DOCUMENT } from '@angular/common';
 import {
   Directive,
   ElementRef,
   HostBinding,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   OnDestroy,
@@ -50,7 +52,8 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
   constructor(
     private readonly dropdownMenuService: DropdownMenuService,
     public readonly triggerRef: ElementRef<HTMLElement>,
-    private readonly overlay: Overlay
+    private readonly overlay: Overlay,
+    @Inject(DOCUMENT) private readonly document: Document
   ) {
     this.registerDropdown();
     this.subscription.add(this.setContentTemplateWhenContentComponentChanged());
@@ -69,17 +72,6 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
     });
 
     this.subscription.unsubscribe();
-  }
-
-  @HostListener('document:wheel')
-  @HostListener('document:mousedown')
-  @HostListener('document:touchmove')
-  public close(): void {
-    if (this.dropdownMenuDisabled) {
-      return;
-    }
-
-    this.setIsOpen(false);
   }
 
   @HostListener('click')
@@ -129,7 +121,7 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
 
   private registerDropdown(): void {
     this.contextId$.pipe(take(1)).subscribe((id: Uuid) => {
-      this.dropdownMenuService.registerDropdown(id, new DropdownMenu(this.overlay, id));
+      this.dropdownMenuService.registerDropdown(id, new DropdownMenu(this.overlay, id, this.document));
       this.setTriggerRef();
     });
   }

@@ -1,8 +1,9 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
-import { ElementRef, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ElementRef, Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
@@ -90,6 +91,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     map((width: number | undefined) => (isNil(width) ? 0 : width))
   );
 
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {}
+
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -104,6 +107,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public open(): void {
     this.isExpanded$.next(true);
+    this.listenOutsideEventsForClose();
   }
 
   public toggleExpansion(): void {
@@ -273,6 +277,16 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       .subscribe((isExpanded: boolean) =>
         isExpanded ? inputElement.nativeElement.focus() : inputElement.nativeElement.blur()
       );
+  }
+
+  private listenOutsideEventsForClose(): void {
+    const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
+    const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
+    const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
+
+    merge(touchMove$, wheel$, resize$)
+      .pipe(take(1))
+      .subscribe(() => this.collapse());
   }
 
   private static getParsedValue<V>(serializedSet: Set<string>): V[] {
