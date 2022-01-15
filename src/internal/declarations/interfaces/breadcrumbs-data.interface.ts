@@ -1,4 +1,3 @@
-import { Nullable } from '@bimeister/utilities';
 import { Breadcrumb } from './breadcrumb.interface';
 
 export interface BreadcrumbsData {
@@ -8,5 +7,4 @@ export interface BreadcrumbsData {
   breadcrumbWidthList: number[];
   isMobile: boolean;
   unfitBreadcrumbTriggerWidthPx: number;
-  rootBreadcrumb: Nullable<Breadcrumb>;
 }
