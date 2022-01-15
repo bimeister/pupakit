@@ -4,7 +4,7 @@ export class ExpandedTreeItem {
   constructor(public readonly id: string) {}
 
   public setParent(parent: NonNullable<ExpandedTreeItem>): void {
-    if (this.parentTreeItem?.id === parent?.id) {
+    if (this.parentTreeItem?.id === parent.id) {
       return;
     }
     this.parentTreeItem = parent;
@@ -13,7 +13,7 @@ export class ExpandedTreeItem {
   }
 
   public setChild(child: NonNullable<ExpandedTreeItem>): void {
-    if (this.childrenTreeItemsMap.has(child?.id)) {
+    if (this.childrenTreeItemsMap.has(child.id)) {
       return;
     }
     this.childrenTreeItemsMap.set(child.id, child);
