@@ -14,9 +14,17 @@ import {
   ViewChildren,
   ViewEncapsulation,
 } from '@angular/core';
-import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable, resizeObservable } from '@bimeister/utilities';
+import {
+  distinctUntilSerializedChanged,
+  filterNotEmpty,
+  filterNotNil,
+  isEmpty,
+  isNil,
+  Nullable,
+  resizeObservable,
+} from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, of, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, observeOn, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, map, observeOn, switchMap } from 'rxjs/operators';
 import { BreadcrumbsProducer } from '../../../../../internal/declarations/classes/breadcrumbs-producer.class';
 import { BreadcrumbContext } from '../../../../../internal/declarations/interfaces/breadcrumb-context.interface';
 import { Breadcrumb } from '../../../../../internal/declarations/interfaces/breadcrumb.interface';
@@ -25,8 +33,6 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-template.directive';
-
-const CAPACITY_CALCULATING_DEBOUNCE_TIME_MS: number = 200;
 
 @Component({
   selector: 'pupa-breadcrumbs',
@@ -68,9 +74,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
 
   public readonly unfitBreadcrumbs$: BehaviorSubject<Breadcrumb[]> = new BehaviorSubject<Breadcrumb[]>([]);
   public readonly fitBreadcrumbs$: BehaviorSubject<Breadcrumb[]> = new BehaviorSubject<Breadcrumb[]>([]);
-  public readonly rootBreadcrumb$: BehaviorSubject<Nullable<Breadcrumb>> = new BehaviorSubject<Nullable<Breadcrumb>>(
-    null
-  );
+  public readonly rootBreadcrumb$: BehaviorSubject<Breadcrumb | null> = new BehaviorSubject<Breadcrumb | null>(null);
 
   private readonly subscription: Subscription = new Subscription();
   constructor(
@@ -110,12 +114,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
     if (!Array.isArray(updatedBreadcrumbs) || isEmpty(updatedBreadcrumbs)) {
       return;
     }
-
     this.breadcrumbs$.next(updatedBreadcrumbs);
-
-    if (updatedBreadcrumbs.length > 1) {
-      this.rootBreadcrumb$.next(updatedBreadcrumbs[0]);
-    }
   }
 
   private setBreadcrumbsContainer(): void {
@@ -170,11 +169,8 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
       this.breadcrumbWidthList$.pipe(filterNotEmpty()),
       this.isMobile$,
       this.unfitBreadcrumbTriggerWidthPx$.pipe(filterNotNil()),
-      this.rootBreadcrumb$,
     ])
       .pipe(
-        observeOn(animationFrameScheduler),
-        debounceTime(CAPACITY_CALCULATING_DEBOUNCE_TIME_MS),
         map(
           ([
             breadcrumbs,
@@ -183,8 +179,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
             breadcrumbWidthList,
             isMobile,
             unfitBreadcrumbTriggerWidthPx,
-            rootBreadcrumb,
-          ]: [Breadcrumb[], number, boolean, number[], boolean, number, Nullable<Breadcrumb>]) =>
+          ]: [Breadcrumb[], number, boolean, number[], boolean, number]) =>
             new BreadcrumbsProducer({
               breadcrumbs,
               breadcrumbsContainerWidthPx,
@@ -192,15 +187,14 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
               breadcrumbWidthList,
               isMobile,
               unfitBreadcrumbTriggerWidthPx,
-              rootBreadcrumb,
             }).getBreadcrumbsParts()
-        )
+        ),
+        distinctUntilSerializedChanged()
       )
-      .subscribe(({ unfitBreadcrumbs, fitBreadcrumbs }: BreadcrumbsParts) => {
+      .subscribe(({ unfitBreadcrumbs, fitBreadcrumbs, rootBreadcrumb }: BreadcrumbsParts) => {
         this.unfitBreadcrumbs$.next(unfitBreadcrumbs);
         this.fitBreadcrumbs$.next(fitBreadcrumbs);
-
-        this.detectChanges();
+        this.rootBreadcrumb$.next(rootBreadcrumb);
       });
   }
 

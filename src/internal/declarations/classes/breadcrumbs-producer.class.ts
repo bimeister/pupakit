@@ -1,4 +1,4 @@
-import { isNil, Nullable } from '@bimeister/utilities';
+import { Nullable } from '@bimeister/utilities';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
 import { BreadcrumbsData } from '../interfaces/breadcrumbs-data.interface';
 import { BreadcrumbsParts } from '../interfaces/breadcrumbs-parts.interface';
@@ -22,7 +22,7 @@ export class BreadcrumbsProducer {
   private readonly breadcrumbWidthList: number[];
   private readonly isMobile: boolean;
   private readonly unfitBreadcrumbTriggerWidthPx: number;
-  private readonly rootBreadcrumb: Nullable<Breadcrumb>;
+  private readonly hasRoot: boolean;
 
   constructor({
     breadcrumbs,
@@ -31,7 +31,6 @@ export class BreadcrumbsProducer {
     breadcrumbWidthList,
     isMobile,
     unfitBreadcrumbTriggerWidthPx,
-    rootBreadcrumb,
   }: BreadcrumbsData) {
     this.breadcrumbs = breadcrumbs;
     this.breadcrumbsContainerWidthPx = breadcrumbsContainerWidthPx;
@@ -39,7 +38,7 @@ export class BreadcrumbsProducer {
     this.breadcrumbWidthList = breadcrumbWidthList;
     this.isMobile = isMobile;
     this.unfitBreadcrumbTriggerWidthPx = unfitBreadcrumbTriggerWidthPx;
-    this.rootBreadcrumb = rootBreadcrumb;
+    this.hasRoot = breadcrumbs.length > 1;
   }
 
   public getBreadcrumbsParts(): BreadcrumbsParts {
@@ -68,12 +67,13 @@ export class BreadcrumbsProducer {
     const fitBreadcrumbs: Breadcrumb[] = fitBreadcrumbsIndexes.map(
       (capacityIndex: number) => this.breadcrumbs[capacityIndex]
     );
+    const rootBreadcrumb: Nullable<Breadcrumb> = this.hasRoot ? this.breadcrumbs[0] : null;
 
-    return { unfitBreadcrumbs, fitBreadcrumbs };
+    return { unfitBreadcrumbs, fitBreadcrumbs, rootBreadcrumb };
   }
 
   private getRootBreadcrumbWidthPx(): number {
-    return isNil(this.rootBreadcrumb) || this.isMobile ? 0 : this.breadcrumbWidthList[0];
+    return !this.hasRoot || this.isMobile ? 0 : this.breadcrumbWidthList[0];
   }
 
   private static getFitBreadcrumbIndexes(
