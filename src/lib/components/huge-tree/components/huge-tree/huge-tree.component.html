@@ -7,7 +7,7 @@
     #viewport
   >
     <ng-container
-      *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async as dataObjectWithLength; let index = index; let odd = odd"
+      *cdkVirtualFor="let treeItem of dataObjectWithLength$ | async as dataObjectWithLength; let index = index"
     >
       <ng-container
         [ngTemplateOutlet]="treeNode"
