@@ -32,20 +32,20 @@
     class="tree-node"
     *ngIf="nodeData"
     [style.padding-left.px]="10 * nodeData.level"
-    (click)="processClick(nodeData.id)"
+    (click)="processClick(nodeData.entityId)"
   >
-    <ng-container *ngIf="nodeData.id !== null; else skeleton">
+    <ng-container *ngIf="nodeData.entityId !== null; else skeleton">
       <div
         class="tree-node__expansion-button"
-        (click)="toggleExpansion(nodeData.id, nodeData.parentItemId); $event.stopPropagation()"
+        (click)="toggleExpansion(nodeData.entityId, nodeData.parentEntityId); $event.stopPropagation()"
       >
         <button class="default-expansion-button">
           <pupa-icon
-            [name]="isExpanded(expandedTreeItemIds$ | async, nodeData.id) ? 'ios-arrow-down' : 'ios-arrow-forward'"
+            [name]="isExpanded(expandedTreeItemIds$ | async, nodeData.entityId) ? 'ios-arrow-down' : 'ios-arrow-forward'"
           ></pupa-icon>
         </button>
       </div>
-      {{ nodeData.name }}
+      {{ nodeData.entityValue }}
     </ng-container>
   </div>
 </ng-template>
