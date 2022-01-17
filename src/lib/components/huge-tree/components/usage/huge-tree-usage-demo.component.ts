@@ -1,8 +1,8 @@
 import { ListRange } from '@angular/cdk/collections';
 import { HttpResponse } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { isEqual } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, of } from 'rxjs';
 import { delay, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { VOID } from '../../../../../internal/api';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
@@ -14,7 +14,6 @@ import { HugeTreeDemoRequestsService } from '../services/huge-tree-demo-requests
 
 const TREE_ITEM_SIZE_PX: number = 28;
 const REQUEST_DELAY_MS: number = 300;
-const INITIAL_TOTAL_TREE_ITEMS_LENGTH: number = 1;
 const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
 
 @Component({
@@ -24,25 +23,16 @@ const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HugeTreeUsageDemoComponent implements OnDestroy {
+export class HugeTreeUsageDemoComponent {
   @ViewChild(HugeTreeComponent, { static: true }) public readonly hugeTree: HugeTreeComponent;
 
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
 
-  public readonly totalTreeItemsLength$: BehaviorSubject<number> = new BehaviorSubject<number>(
-    INITIAL_TOTAL_TREE_ITEMS_LENGTH
-  );
-  public readonly currentTreeItemsData$: BehaviorSubject<FlatHugeTreeItem[]> = new BehaviorSubject<FlatHugeTreeItem[]>(
+  private readonly currentTreeItemsData$: BehaviorSubject<FlatHugeTreeItem[]> = new BehaviorSubject<FlatHugeTreeItem[]>(
     []
   );
 
-  private readonly subscription: Subscription = new Subscription();
-
   constructor(private readonly hugeTreeDemoRequestsService: HugeTreeDemoRequestsService) {}
-
-  public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   public processTreeUpdateNeeded(): void {
     this.hugeTree
@@ -140,11 +130,10 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
           const updatedTreeItemsData: FlatHugeTreeItem[] = responseData.map(
             (item: HugeTreeItem) =>
               new FlatHugeTreeItem(
-                true,
-                `Name 🍟: (id: ${item.entityId}) ${item.entityValue}`,
-                item.level,
                 item.entityId,
-                item.parentEntityId
+                item.parentEntityId,
+                `Name 🍟: (id: ${item.entityId}) ${item.entityValue}`,
+                item.level
               )
           );
 
@@ -165,9 +154,7 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
   }
 
   private setFakeArray(arrayLength: number): void {
-    const fakeArray: FlatHugeTreeItem[] = new Array(arrayLength).fill(
-      new FlatHugeTreeItem(false, null, null, null, null)
-    );
+    const fakeArray: FlatHugeTreeItem[] = new Array(arrayLength).fill(new FlatHugeTreeItem(null, null, null, null));
     this.hugeTree.setTreeItemsData(fakeArray);
   }
 
@@ -208,11 +195,10 @@ export class HugeTreeUsageDemoComponent implements OnDestroy {
         const updatedTreeItemsData: FlatHugeTreeItem[] = responseData.map(
           (item: HugeTreeItem) =>
             new FlatHugeTreeItem(
-              true,
-              `Name 🍟: (id: ${item.entityId}) ${item.entityValue}`,
-              item.level,
               item.entityId,
-              item.parentEntityId
+              item.parentEntityId,
+              `Name 🍟: (id: ${item.entityId}) ${item.entityValue}`,
+              item.level
             )
         );
 

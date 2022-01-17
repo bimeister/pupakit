@@ -1,17 +1,10 @@
-import { FlatTreeItem } from './flat-tree-item.class';
+import { HugeTreeItem } from '../interfaces/huge-tree-item.interface';
 
-export class FlatHugeTreeItem<T = any> extends FlatTreeItem<T> {
-  public parentItemId: string;
+export class FlatHugeTreeItem implements HugeTreeItem {
   constructor(
-    isExpandable: boolean,
-    name: string,
-    level: number,
-    id: string,
-    parentItemId: string,
-    originalData: T = null,
-    isElement: boolean = false
-  ) {
-    super(isExpandable, name, level, id, originalData, isElement);
-    this.parentItemId = parentItemId;
-  }
+    public entityId: string,
+    public parentEntityId: string,
+    public entityValue: string,
+    public level: number
+  ) {}
 }
