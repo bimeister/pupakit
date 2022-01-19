@@ -14,8 +14,8 @@ import { ButtonType } from '../../../../../internal/declarations/types/button-ty
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ButtonRoundComponent implements OnChanges {
-  @Input() public readonly type: ButtonType = 'submit';
-  public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('submit');
+  @Input() public readonly type: ButtonType = 'button';
+  public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('button');
 
   @Input() public readonly disabled: boolean = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
