@@ -23,8 +23,8 @@ export class ButtonComponent implements OnChanges {
   @Input() public readonly kind: ButtonKind = 'primary';
   public readonly kind$: BehaviorSubject<ButtonKind> = new BehaviorSubject<ButtonKind>('primary');
 
-  @Input() public readonly type: ButtonType = 'submit';
-  public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('submit');
+  @Input() public readonly type: ButtonType = 'button';
+  public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('button');
 
   @Input() public readonly disabled: boolean = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
