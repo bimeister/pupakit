@@ -22,6 +22,7 @@ import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/dr
 import { DrawerTitleContainerComponent } from './components/drawer-title-container/drawer-title-container.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
 import { ScrollableModule } from '../scrollable/scrollable.module';
+import { DrawerLayoutStubComponent } from './components/drawer-stub/drawer-layout-stub.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { ScrollableModule } from '../scrollable/scrollable.module';
     DrawerLayoutComponent,
     DrawerLayoutHeaderComponent,
     DrawerLayoutBodyComponent,
+    DrawerLayoutStubComponent,
     DrawerLayoutFooterComponent,
     DrawerLayoutHeaderContentComponent,
     DrawerCloseButtonComponent,
@@ -55,6 +57,7 @@ import { ScrollableModule } from '../scrollable/scrollable.module';
     OverlayModule,
     PortalModule,
     DrawerLayoutBodyComponent,
+    DrawerLayoutStubComponent,
     DrawerLayoutFooterComponent,
     DrawerLayoutHeaderComponent,
     DrawerLayoutHeaderContentComponent,

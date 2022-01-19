@@ -46,12 +46,4 @@ $layout_border-size: 1px;
   @include xs() {
     border-radius: 1rem 1rem 0px 0px;
   }
-
-  &__footer-stub {
-    padding-top: 5rem;
-
-    @include xs() {
-      padding-top: 4rem;
-    }
-  }
 }
