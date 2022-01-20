@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { isEmpty, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
+import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap, take } from 'rxjs/operators';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
@@ -25,6 +25,7 @@ interface ObjectWithLength {
   length: number;
 }
 
+const TREE_ITEM_SIZE_PX: number = 32;
 const ITEM_BUFFER_COUNT: number = 50;
 
 @Component({
@@ -42,16 +43,16 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   public readonly dataObjectWithLength$: BehaviorSubject<ObjectWithLength> = new BehaviorSubject<ObjectWithLength>({
     length: 0,
   });
-  @Input() public treeItemSizePx: number;
-  public readonly treeItemSizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
+
+  @Input() public selectedNodeId: string;
+  public readonly selectedNodeId$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
   public treeItemsData: FlatHugeTreeItem[] = [];
   @Output() public updateNeeded: EventEmitter<void> = new EventEmitter<void>();
   @Output() public nodeClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  public readonly bufferPx$: Observable<number> = this.treeItemSizePx$.pipe(
-    map((sizePx: number) => sizePx * ITEM_BUFFER_COUNT),
-    shareReplayWithRefCount()
-  );
+  public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -61,15 +62,22 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processTreeItemSizeChanges(changes?.treeItemSizePx);
+    this.processSelectedNodeIdChanges(changes?.selectedNodeId);
   }
 
   public ngAfterViewInit(): void {
     this.subscription.add(this.emitRequestParamsChanges());
   }
 
-  public isExpanded(expandedIds: string[], id: string): boolean {
-    return !isNil(id) && expandedIds.includes(id);
+  public isExpanded(expandedIds: string[], nodeId: string): boolean {
+    return !isNil(nodeId) && expandedIds.includes(nodeId);
+  }
+
+  public isSelected(selectedId: string, nodeId: string): boolean {
+    if (isNil(selectedId)) {
+      return false;
+    }
+    return !isNil(nodeId) && selectedId === nodeId;
   }
 
   public toggleExpansion(id: string, parentId: string): void {
@@ -174,14 +182,14 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     this.dataObjectWithLength$.next(objectWithLength);
   }
 
-  private processTreeItemSizeChanges(change: ComponentChange<this, number>): void {
-    const updatedValue: number | undefined = change?.currentValue;
+  private processSelectedNodeIdChanges(change: ComponentChange<this, string>): void {
+    const updatedValue: Nullable<string> = change?.currentValue;
 
-    if (isNil(updatedValue)) {
+    if (updatedValue === undefined) {
       return;
     }
 
-    this.treeItemSizePx$.next(updatedValue);
+    this.selectedNodeId$.next(updatedValue);
   }
 
   private emitRequestParamsChanges(): Subscription {
