@@ -1,9 +1,9 @@
 <section class="tree">
   <cdk-virtual-scroll-viewport
-    [itemSize]="treeItemSizePx$ | async"
+    [itemSize]="treeItemSizePx"
     class="viewport"
-    [maxBufferPx]="bufferPx$ | async"
-    [minBufferPx]="bufferPx$ | async"
+    [maxBufferPx]="bufferPx"
+    [minBufferPx]="bufferPx"
     #viewport
   >
     <ng-container
@@ -32,6 +32,7 @@
     class="tree-node"
     *ngIf="nodeData"
     [style.padding-left.px]="10 * nodeData.level"
+    [class.tree-node_selected]="isSelected(selectedNodeId$ | async, nodeData.entityId)"
     (click)="processClick(nodeData.entityId)"
   >
     <ng-container *ngIf="nodeData.entityId !== null; else skeleton">

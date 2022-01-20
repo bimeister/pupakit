@@ -14,20 +14,11 @@
   height: 100%;
   width: auto;
   user-select: none;
-  background: color(white);
+  background: color(base-n0);
 }
 
 .viewport {
   height: 100%;
-
-  &_skeleton {
-    top: 0;
-    left: 0;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-    pointer-events: none;
-  }
 }
 
 .tree-node {
@@ -39,20 +30,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  height: 7rem;
-  background: color(white);
-  border-radius: 3.5rem;
+  height: 8rem;
+  background: color(base-n0);
   border-width: 0;
   box-sizing: border-box;
-  color: color(main-dark);
-  font-size: 3rem;
+  color: color(base-n600);
+  font-size: 14px;
   cursor: pointer;
   white-space: nowrap;
-
-  &__no-expansion-button {
-    padding-left: 7rem;
-    width: 100%;
-  }
 
   &__expansion-button {
     border: none;
@@ -61,36 +46,23 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 7rem;
-    height: 7rem;
+    width: 8rem;
+    height: 8rem;
     flex-shrink: 0;
     user-select: none;
-
-    & > button:disabled {
-      opacity: 0;
-    }
   }
 
-  &:hover,
+  &:hover {
+    background: color(primary-n200);
+    color: color(base-n0);
+  }
+
   &_selected {
-    background: color(main);
-    color: color(white);
-  }
+    background: color(base-n600);
+    color: color(base-n0);
 
-  &_highlighted {
-    background: color(main);
-    color: color(white);
-
-    &:hover,
-    &#{$tree_node}_selected {
-      background: color(text);
-    }
-  }
-
-  &_is-disabled-expandable {
-    pointer-events: none;
-    & > button:disabled {
-      opacity: 0.5;
+    &:hover {
+      background: color(base-n600);
     }
   }
 }
@@ -105,18 +77,5 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-  }
-}
-
-.draggable {
-  position: absolute;
-  pointer-events: none;
-  box-shadow: variable(box-shadow_hover);
-}
-
-.prevent-drop {
-  opacity: 0.3;
-  &:hover {
-    background: unset;
   }
 }

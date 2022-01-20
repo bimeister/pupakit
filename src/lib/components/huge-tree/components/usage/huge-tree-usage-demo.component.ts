@@ -12,7 +12,6 @@ import { HugeTreeState } from '../../../../../internal/declarations/interfaces/h
 import { HugeTreeComponent } from '../huge-tree/huge-tree.component';
 import { HugeTreeDemoRequestsService } from '../services/huge-tree-demo-requests.service';
 
-const TREE_ITEM_SIZE_PX: number = 28;
 const REQUEST_DELAY_MS: number = 300;
 const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
 
@@ -25,8 +24,6 @@ const TOTAL_COUNT_HEADER_NAME: string = 'x-visible-total-count';
 })
 export class HugeTreeUsageDemoComponent {
   @ViewChild(HugeTreeComponent, { static: true }) public readonly hugeTree: HugeTreeComponent;
-
-  public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
 
   private readonly currentTreeItemsData$: BehaviorSubject<FlatHugeTreeItem[]> = new BehaviorSubject<FlatHugeTreeItem[]>(
     []
