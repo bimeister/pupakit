@@ -69,11 +69,6 @@ const demoRoutes: Routes = [
         redirectTo: 'typography',
       },
       {
-        path: 'huge-tree',
-        loadChildren: (): Promise<Type<AdaptiveDemoModule>> =>
-          import('./pages/huge-tree-demo/huge-tree-demo.module').then((module: any) => module.HugeTreeDemoModule),
-      },
-      {
         path: 'typography',
         loadChildren: (): Promise<Type<TypographyPageModule>> =>
           import('./pages/typography-page/typography-page.module').then((module: any) => module.TypographyPageModule),

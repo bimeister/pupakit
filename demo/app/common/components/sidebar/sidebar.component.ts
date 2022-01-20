@@ -42,7 +42,6 @@ export class SidebarComponent {
     title: 'Components',
     linkItems: sortByProperty(
       [
-        { title: 'Huge tree', link: '/kit/huge-tree' },
         { title: 'Icon', link: '/kit/icon' },
         { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
         { title: 'ButtonMulti', link: '/kit/button-multi' },
