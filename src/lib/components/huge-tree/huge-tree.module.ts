@@ -8,10 +8,9 @@ import { IconModule } from '../icon/icon.module';
 import { SkeletonModule } from '../skeleton/skeleton.module';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { HugeTreeComponent } from './components/huge-tree/huge-tree.component';
-import { HugeTreeUsageDemoComponent } from './components/usage/huge-tree-usage-demo.component';
 
 @NgModule({
-  declarations: [HugeTreeComponent, HugeTreeUsageDemoComponent],
+  declarations: [HugeTreeComponent],
   imports: [
     SharedModule,
     SkeletonModule,
@@ -21,6 +20,6 @@ import { HugeTreeUsageDemoComponent } from './components/usage/huge-tree-usage-d
     IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
   ],
   providers: [],
-  exports: [HugeTreeComponent, HugeTreeUsageDemoComponent],
+  exports: [HugeTreeComponent],
 })
 export class HugeTreeModule {}
