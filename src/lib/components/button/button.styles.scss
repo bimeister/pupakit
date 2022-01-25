@@ -152,7 +152,7 @@
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(primary-n550);
+          background-color: color(primary-n600);
         }
       }
     }
@@ -160,6 +160,76 @@
     .button__content,
     .button__loading {
       color: color(base-n0);
+    }
+  }
+
+  &_primary-secondary {
+    .button__background {
+      background-color: color(primary-n50);
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(primary-n100);
+        }
+        .button__content,
+        .button__icon {
+          color: color(primary-n700);
+        }
+      }
+
+      &:active,
+      &.button_active {
+        .button__background {
+          background-color: color(primary-n150);
+        }
+        .button__content,
+        .button__icon {
+          color: color(primary-n800);
+        }
+      }
+    }
+
+    .button__content,
+    .button__icon,
+    .button__loading {
+      color: color(primary-n600);
+    }
+  }
+
+  &_primary-subtle {
+    .button__background {
+      background-color: transparent;
+    }
+
+    &:not([disabled]) {
+      @include hover() {
+        .button__background {
+          background-color: color(primary-n100);
+        }
+        .button__content,
+        .button__icon {
+          color: color(primary-n700);
+        }
+      }
+
+      &:active,
+      &.button_active {
+        .button__background {
+          background-color: color(primary-n150);
+        }
+        .button__content,
+        .button__icon {
+          color: color(primary-n800);
+        }
+      }
+    }
+
+    .button__content,
+    .button__icon,
+    .button__loading {
+      color: color(primary-n600);
     }
   }
 
@@ -421,10 +491,20 @@
       color: color(base-white-n250);
     }
 
-    &.button_subtle {
+    &.button_subtle,
+    &.button_primary-subtle {
       .button__background {
         background-color: transparent;
         border: none;
+      }
+    }
+
+    &.button_primary-secondary,
+    &.button_primary-subtle {
+      .button__content,
+      .button__loading,
+      .button__icon {
+        color: color(primary-n350);
       }
     }
 
@@ -446,6 +526,74 @@
 
 /** dark colors */
 .button {
+  &_primary-secondary {
+    @include host-selector-dark-theme() {
+      .button__background {
+        background-color: color(primary-n900);
+      }
+
+      &:not([disabled]) {
+        @include hover() {
+          .button__background {
+            background-color: color(primary-n800);
+          }
+          .button__content,
+          .button__icon {
+            color: color(primary-n150);
+          }
+        }
+
+        &:active,
+        &.button_active {
+          .button__background {
+            background-color: color(primary-n700);
+          }
+          .button__content,
+          .button__icon {
+            color: color(primary-n100);
+          }
+        }
+      }
+
+      .button__content,
+      .button__icon,
+      .button__loading {
+        color: color(primary-n200);
+      }
+    }
+  }
+  &_primary-subtle {
+    @include host-selector-dark-theme() {
+      &:not([disabled]) {
+        @include hover() {
+          .button__background {
+            background-color: color(primary-n800);
+          }
+          .button__content,
+          .button__icon {
+            color: color(primary-n150);
+          }
+        }
+
+        &:active,
+        &.button_active {
+          .button__background {
+            background-color: color(primary-n700);
+          }
+          .button__content,
+          .button__icon {
+            color: color(primary-n100);
+          }
+        }
+      }
+
+      .button__content,
+      .button__icon,
+      .button__loading {
+        color: color(primary-n200);
+      }
+    }
+  }
   &_subtle-danger {
     @include host-selector-dark-theme() {
       &:not([disabled]) {
@@ -507,7 +655,8 @@
     }
   }
 
-  &_subtle {
+  &_subtle,
+  &_primary-subtle {
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
@@ -546,10 +695,34 @@
         color: color(base-dark-n250);
       }
 
-      &.button_subtle {
+      &.button_subtle,
+      &.button_primary-subtle {
         .button__background {
           background-color: transparent;
           border: none;
+        }
+      }
+
+      &.button_primary-secondary {
+        .button__background {
+          background-color: color(primary-n900);
+          border: none;
+        }
+      }
+
+      &.button_primary-secondary {
+        .button__content,
+        .button__loading,
+        .button__icon {
+          color: color(primary-n600);
+        }
+      }
+
+      &.button_primary-subtle {
+        .button__content,
+        .button__loading,
+        .button__icon {
+          color: color(primary-n700);
         }
       }
 

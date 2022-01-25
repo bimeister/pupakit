@@ -1,3 +1,6 @@
 .badge-container {
-  margin-top: 4rem;
+  margin-top: 6rem;
+  &__content {
+    line-height: 4rem;
+  }
 }

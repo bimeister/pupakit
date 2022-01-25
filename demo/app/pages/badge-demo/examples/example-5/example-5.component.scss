@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+
+.badge-container {
+  display: flex;
+  margin: 4rem 0;
+}
+
+.badge-container__item + .badge-container__item {
+  margin-left: 6rem;
+}

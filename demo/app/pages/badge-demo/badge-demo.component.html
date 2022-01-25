@@ -1,27 +1,61 @@
 <h1>Badge</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Simple usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-badge-example-1 *pupaCodeContainerPreviewTemplate></demo-badge-example-1>
+    </pupa-code-container>
 
-<h2>Simple usage</h2>
+    <h2>Badges with counters</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-badge-example-2 *pupaCodeContainerPreviewTemplate></demo-badge-example-2>
+    </pupa-code-container>
 
-<pupa-code-container [content]="example1Content">
-  <demo-badge-example-1 *pupaCodeContainerPreviewTemplate></demo-badge-example-1>
-</pupa-code-container>
+    <h2>Badge size</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-badge-example-3 *pupaCodeContainerPreviewTemplate></demo-badge-example-3>
+    </pupa-code-container>
 
-<h2>Badges with counters</h2>
+    <h2>Badge indicators</h2>
+    <pupa-info-block>Small badge size are perfect for indicators.</pupa-info-block>
+    <pupa-code-container [content]="example4Content">
+      <demo-badge-example-4 *pupaCodeContainerPreviewTemplate></demo-badge-example-4>
+    </pupa-code-container>
 
-<pupa-code-container [content]="example2Content">
-  <demo-badge-example-2 *pupaCodeContainerPreviewTemplate></demo-badge-example-2>
-</pupa-code-container>
+    <h2>Badge marker block</h2>
+    <pupa-code-container [content]="example5Content">
+      <demo-badge-example-5 *pupaCodeContainerPreviewTemplate></demo-badge-example-5>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <pupa-badge>
+            <pupa-badge-marker [size]="size$ | async"><div class="content__marker"></div></pupa-badge-marker>
+            Badge marker
+          </pupa-badge>
+          <pupa-badge>
+            <pupa-badge-marker [size]="size$ | async"
+              ><pupa-badge-indicator [state]="state$ | async"></pupa-badge-indicator
+            ></pupa-badge-marker>
+            Badge marker with indicator
+          </pupa-badge>
+        </div>
+      </demo-example-viewer-content>
 
-<h2>Badge size</h2>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="size" type="BadgeMarkerSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the badge marker.</ng-container>
+          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
 
-<pupa-code-container [content]="example3Content">
-  <demo-badge-example-3 *pupaCodeContainerPreviewTemplate></demo-badge-example-3>
-</pupa-code-container>
-
-<h2>Badge indicators</h2>
-
-<pupa-info-block>Small badge size are perfect for indicators.</pupa-info-block>
-
-<pupa-code-container [content]="example4Content">
-  <demo-badge-example-4 *pupaCodeContainerPreviewTemplate></demo-badge-example-4>
-</pupa-code-container>
+        <demo-example-viewer-property decoratorName="input" name="state" type="BadgeIndicatorState">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the state of the badge indicator.</ng-container>
+          <demo-props-select #state$ [options]="stateOptions"></demo-props-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
