@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'badge-demo/examples';
 
@@ -10,6 +11,34 @@ const BASE_REQUEST_PATH: string = 'badge-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeDemoComponent {
+  public readonly sizeOptions: PropsOption[] = [
+    {
+      caption: 'Medium',
+      value: 'medium',
+      isDefault: true,
+    },
+    {
+      caption: 'Small',
+      value: 'small',
+    },
+  ];
+
+  public readonly stateOptions: PropsOption[] = [
+    {
+      caption: 'Progress',
+      value: 'progress',
+      isDefault: true,
+    },
+    {
+      caption: 'Complete',
+      value: 'complete',
+    },
+    {
+      caption: 'Error',
+      value: 'error',
+    },
+  ];
+
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
@@ -28,5 +57,10 @@ export class BadgeDemoComponent {
   public readonly example4Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
   };
 }

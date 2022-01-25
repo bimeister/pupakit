@@ -26,7 +26,7 @@
 
     &:active {
       background: color(primary-n500, 0.16);
-      border: 1px solid color(primary-n550);
+      border: 1px solid color(primary-n600);
     }
 
     &:focus-visible {
@@ -47,12 +47,12 @@
       }
 
       &:active {
-        background: color(primary-n550);
-        border: 1px solid color(primary-n550);
+        background: color(primary-n600);
+        border: 1px solid color(primary-n600);
       }
 
       &:focus-visible {
-        background: color(primary-n550);
+        background: color(primary-n600);
         border: 1px solid color(primary-n400);
         outline: 1px solid color(primary-n400);
       }

@@ -2,7 +2,7 @@
 @use 'functions' as *;
 
 $colorsToOverride: (
-  primary-n550: #701111,
+  primary-n600: #701111,
   primary-n500: #9a1919,
   primary-n400: #d21d1d,
 );
@@ -17,5 +17,5 @@ $colorsToOverride: (
 .square {
   width: 40px;
   height: 40px;
-  background-color: color(primary-n550, 0.5);
+  background-color: color(primary-n600, 0.5);
 }

@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+
+.button-container {
+  display: flex;
+  margin: 4rem 0;
+
+  @include lt-lg() {
+    flex-direction: column;
+  }
+}
+
+.button-container__item + .button-container__item {
+  margin-left: 6rem;
+
+  @include lt-lg() {
+    margin-top: 6rem;
+    margin-left: initial;
+  }
+}

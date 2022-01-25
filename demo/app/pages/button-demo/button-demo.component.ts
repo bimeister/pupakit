@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
+
+const BASE_REQUEST_PATH: string = 'button-demo/examples';
 
 @Component({
   selector: 'demo-button',
@@ -33,6 +34,14 @@ export class ButtonDemoComponent {
     {
       caption: 'Primary',
       value: 'primary',
+    },
+    {
+      caption: 'Primary-secondary',
+      value: 'primary-secondary',
+    },
+    {
+      caption: 'Primary-subtle',
+      value: 'primary-subtle',
     },
     {
       caption: 'Secondary',
@@ -78,4 +87,29 @@ export class ButtonDemoComponent {
       value: 'right',
     },
   ];
+
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+  };
+
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+  };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
+  };
 }

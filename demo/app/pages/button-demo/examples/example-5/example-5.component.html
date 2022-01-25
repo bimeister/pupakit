@@ -1,0 +1,27 @@
+<div class="button-container">
+  <pupa-button class="button-container__item" [pupaTooltip]="'Hello there!'">Tooltip</pupa-button>
+  <pupa-button class="button-container__item" icon="app-cube">Text with icon</pupa-button>
+  <pupa-button class="button-container__item" icon="app-cube" iconPosition="right"
+    >Text with icon on the right</pupa-button
+  >
+</div>
+<div class="button-container">
+  <pupa-button class="button-container__item" [disabled]="true">Disabled</pupa-button>
+  <pupa-button-icon class="button-container__item" [disabled]="true" icon="app-cube"></pupa-button-icon>
+  <pupa-button-round class="button-container__item" [disabled]="true" icon="app-cube"></pupa-button-round>
+</div>
+<div class="button-container">
+  <pupa-button class="button-container__item" [loading]="true">Loading</pupa-button>
+  <pupa-button-icon class="button-container__item" [loading]="true" icon="app-cube"></pupa-button-icon>
+  <pupa-button-round class="button-container__item" [loading]="true"></pupa-button-round>
+</div>
+<div class="button-container">
+  <pupa-button class="button-container__item" [loading]="true" [disabled]="true">Loading</pupa-button>
+  <pupa-button-icon
+    class="button-container__item"
+    [loading]="true"
+    [disabled]="true"
+    icon="app-cube"
+  ></pupa-button-icon>
+  <pupa-button-round class="button-container__item" [loading]="true" [disabled]="true"></pupa-button-round>
+</div>

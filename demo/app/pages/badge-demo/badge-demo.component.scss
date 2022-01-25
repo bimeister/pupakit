@@ -1,4 +1,20 @@
-:host {
-  padding-bottom: 16rem;
-  display: block;
+@use 'demo-variables' as *;
+
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.content {
+  display: flex;
+  flex-direction: row;
+  margin-top: 4rem;
+  align-items: center;
+  gap: 4rem;
+  &__marker {
+    background-color: color(primary-n500);
+    height: 100%;
+    width: 9rem;
+  }
+  &__indicator {
+    display: inline;
+  }
 }

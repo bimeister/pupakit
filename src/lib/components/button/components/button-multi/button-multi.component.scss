@@ -167,7 +167,7 @@
       background-color: color(primary-n500);
     }
     .expand__background {
-      border-left: 1px solid color(primary-n550);
+      border-left: 1px solid color(primary-n600);
     }
 
     &:not(.button-multi_disabled) {
@@ -184,7 +184,7 @@
         &:active,
         &_active {
           .button-multi__background {
-            background-color: color(primary-n550);
+            background-color: color(primary-n600);
           }
         }
       }
