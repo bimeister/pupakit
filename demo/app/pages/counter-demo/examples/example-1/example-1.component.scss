@@ -1,0 +1,7 @@
+.counter-container {
+  height: 4rem;
+  &__content {
+    display: flex;
+    gap: 4rem;
+  }
+}

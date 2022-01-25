@@ -15,6 +15,7 @@ import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
 import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
 import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
+import { CounterDemoModule } from './pages/counter-demo/counter-demo.module';
 import { DatagridDemoModule } from './pages/datagrid-demo/datagrid-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
 import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
@@ -356,6 +357,11 @@ const demoRoutes: Routes = [
         path: 'timer',
         loadChildren: () =>
           import('./pages/timer-demo/timer-demo.module').then((module: any) => module.TimerDemoModule),
+      },
+      {
+        path: 'counter',
+        loadChildren: (): Promise<Type<CounterDemoModule>> =>
+          import('./pages/counter-demo/counter-demo.module').then((module: any) => module.CounterDemoModule),
       },
     ],
   },

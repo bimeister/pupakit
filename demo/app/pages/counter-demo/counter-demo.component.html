@@ -1,0 +1,36 @@
+<h1>Counter</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Basic counter</h2>
+    <pupa-info-block>The default color is <pupa-code-inline>neutral</pupa-code-inline>.</pupa-info-block>
+    <pupa-code-container [content]="example1Content">
+      <demo-counter-example-1 *pupaCodeContainerPreviewTemplate></demo-counter-example-1>
+    </pupa-code-container>
+
+    <h2>Extra cases</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-counter-example-2 *pupaCodeContainerPreviewTemplate></demo-counter-example-2>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <pupa-counter [count]="+countFormControl.value" [color]="color$ | async"></pupa-counter>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="color" type="CountColor">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the counter.</ng-container>
+          <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="count" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>The number value of counter.</ng-container>
+          <pupa-input-number [formControl]="countFormControl"></pupa-input-number>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

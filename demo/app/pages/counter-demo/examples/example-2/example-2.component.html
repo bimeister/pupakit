@@ -1,0 +1,16 @@
+<div class="counter-container">
+  <div class="counter-container__content">
+    <pupa-counter [count]="9"></pupa-counter>
+    <pupa-counter [count]="9999"></pupa-counter>
+    <pupa-counter [count]="9999999"></pupa-counter>
+    <pupa-counter [count]="9999999999"></pupa-counter>
+    <pupa-counter [count]="9999999999999"></pupa-counter>
+  </div>
+
+  <pupa-badge>
+    <pupa-button (click)="increment()" kind="secondary">Increment</pupa-button>
+    <pupa-badge-marker-block>
+      <pupa-counter [count]="count" color="primary"></pupa-counter>
+    </pupa-badge-marker-block>
+  </pupa-badge>
+</div>
