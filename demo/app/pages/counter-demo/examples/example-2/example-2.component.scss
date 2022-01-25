@@ -1,0 +1,8 @@
+.counter-container {
+  margin-top: 6rem;
+  &__content {
+    display: flex;
+    gap: 4rem;
+    margin-bottom: 6rem;
+  }
+}

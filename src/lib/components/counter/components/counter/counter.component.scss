@@ -1,12 +1,12 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
-.count {
+.counter {
   box-sizing: border-box;
   height: 4rem;
   border-radius: 2rem;
   padding: 2px 6px;
-  color: color(base-dark-n500);
+  color: color(base-n0);
 
   display: flex;
   flex-direction: column;
@@ -28,16 +28,18 @@
 
   &_primary {
     background-color: color(primary-n500);
-    color: color(base-n0);
   }
 
   &_danger {
     background-color: color(red-n500);
-    color: color(base-n0);
   }
 
   &_warning {
     background-color: color(yellow-n500);
     color: color(base-n600);
+  }
+
+  &_success {
+    background-color: color(green-n500);
   }
 }
