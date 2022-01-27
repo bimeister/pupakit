@@ -53,14 +53,29 @@
   $base-tag: (
     default: (
       light: (
-        background-color: color(get-map-field($tagColorMap, [backgroundColor, light])),
-        font-color: color(get-map-field($tagColorMap, [fontColor, light])),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, light])),
+        background-color: color(get-map-field($tagColorMap, (backgroundColor, light))),
+        font-color: color(get-map-field($tagColorMap, (fontColor, light))),
+        box-shadow: shadow-helper(get-map-field($tagColorMap, (backgroundColor, light))),
       ),
       dark: (
-        background-color: color(get-map-field($tagColorMap, [backgroundColor, dark])),
-        font-color: color(get-map-field($tagColorMap, [fontColor, dark])),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, [backgroundColor, dark])),
+        background-color: color(get-map-field($tagColorMap, (backgroundColor, dark))),
+        font-color: color(get-map-field($tagColorMap, (fontColor, dark))),
+        box-shadow: shadow-helper(get-map-field($tagColorMap, (backgroundColor, dark))),
+      ),
+    ),
+  );
+
+  $bold-tag: (
+    default: (
+      light: (
+        background-color: color(get-map-field($tagColorMap, (boldBackgroundColor, light))),
+        font-color: color(get-map-field($tagColorMap, (boldFontColor, light))),
+        box-shadow: shadow-helper(get-map-field($tagColorMap, (boldBackgroundColor, light))),
+      ),
+      dark: (
+        background-color: color(get-map-field($tagColorMap, (boldBackgroundColor, dark))),
+        font-color: color(get-map-field($tagColorMap, (boldFontColor, dark))),
+        box-shadow: shadow-helper(get-map-field($tagColorMap, (boldBackgroundColor, dark))),
       ),
     ),
   );
@@ -85,10 +100,10 @@
     (
       default: (
         light: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, light])),
+          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableColor, light))),
         ),
         dark: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, [clickableColor, dark])),
+          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableColor, dark))),
         ),
       ),
     )
@@ -102,10 +117,10 @@
           map.get($clickable-tag, default),
           (
             light: (
-              background-color: color(get-map-field($tagColorMap, [clickableColor, light])),
+              background-color: color(get-map-field($tagColorMap, (clickableColor, light))),
             ),
             dark: (
-              background-color: color(get-map-field($tagColorMap, [clickableColor, dark])),
+              background-color: color(get-map-field($tagColorMap, (clickableColor, dark))),
             ),
           )
         ),
@@ -130,9 +145,43 @@
     )
   );
 
+  $clickable-bold-tag: map.deep-merge(
+    $bold-tag,
+    (
+      default: (
+        light: (
+          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableBoldColor, light))),
+        ),
+        dark: (
+          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableBoldColor, dark))),
+        ),
+      ),
+    )
+  );
+
+  $clickable-bold-tag: map.deep-merge(
+    $clickable-bold-tag,
+    (
+      hover:
+        map.deep-merge(
+          map.get($clickable-bold-tag, default),
+          (
+            light: (
+              background-color: color(get-map-field($tagColorMap, (clickableBoldColor, light))),
+            ),
+            dark: (
+              background-color: color(get-map-field($tagColorMap, (clickableBoldColor, dark))),
+            ),
+          )
+        ),
+    )
+  );
+
   $config: (
     base-tag: $base-tag,
+    bold-tag: $bold-tag,
     clickable-tag: $clickable-tag,
+    clickable-bold-tag: $clickable-bold-tag,
     disabled-tag: $disabled-tag,
   );
 
@@ -152,65 +201,125 @@ $defaultColorMap: (
     light: base-white-n275,
     dark: base-dark-n275,
   ),
+  clickableBoldColor: (
+    light: base-white-n275,
+    dark: base-dark-n275,
+  ),
+  boldBackgroundColor: (
+    light: base-white-n300,
+    dark: base-dark-n300,
+  ),
+  boldFontColor: (
+    light: base-n600,
+    dark: base-n0,
+  ),
 );
 
 $redColorMap: (
   backgroundColor: (
+    light: red-n100,
+    dark: red-n100,
+  ),
+  fontColor: (
+    light: red-n550,
+    dark: red-n550,
+  ),
+  clickableColor: (
+    light: red-n200,
+    dark: red-n200,
+  ),
+  clickableBoldColor: (
+    light: red-n400,
+    dark: red-n400,
+  ),
+  boldBackgroundColor: (
     light: red-n500,
     dark: red-n500,
   ),
-  fontColor: (
+  boldFontColor: (
     light: base-n0,
     dark: base-n0,
-  ),
-  clickableColor: (
-    light: red-n400,
-    dark: red-n400,
   ),
 );
 
 $yellowColorMap: (
   backgroundColor: (
+    light: yellow-n100,
+    dark: yellow-n100,
+  ),
+  fontColor: (
+    light: base-n600,
+    dark: base-n600,
+  ),
+  clickableColor: (
+    light: yellow-n200,
+    dark: yellow-n200,
+  ),
+  clickableBoldColor: (
+    light: yellow-n400,
+    dark: yellow-n400,
+  ),
+  boldBackgroundColor: (
     light: yellow-n500,
     dark: yellow-n500,
   ),
-  fontColor: (
-    light: base-n0,
-    dark: base-n0,
-  ),
-  clickableColor: (
-    light: yellow-n400,
-    dark: yellow-n400,
+  boldFontColor: (
+    light: base-n600,
+    dark: base-n600,
   ),
 );
 
 $primaryColorMap: (
   backgroundColor: (
+    light: primary-n100,
+    dark: primary-n100,
+  ),
+  fontColor: (
+    light: primary-n600,
+    dark: primary-n600,
+  ),
+  clickableColor: (
+    light: primary-n200,
+    dark: primary-n200,
+  ),
+  clickableBoldColor: (
+    light: primary-n400,
+    dark: primary-n400,
+  ),
+  boldBackgroundColor: (
     light: primary-n500,
     dark: primary-n500,
   ),
-  fontColor: (
+  boldFontColor: (
     light: base-n0,
     dark: base-n0,
-  ),
-  clickableColor: (
-    light: primary-n400,
-    dark: primary-n400,
   ),
 );
 
 $greenColorMap: (
   backgroundColor: (
+    light: green-n100,
+    dark: green-n100,
+  ),
+  fontColor: (
+    light: green-n550,
+    dark: green-n550,
+  ),
+  clickableColor: (
+    light: green-n200,
+    dark: green-n200,
+  ),
+  clickableBoldColor: (
+    light: green-n400,
+    dark: green-n400,
+  ),
+  boldBackgroundColor: (
     light: green-n500,
     dark: green-n500,
   ),
-  fontColor: (
+  boldFontColor: (
     light: base-n0,
     dark: base-n0,
-  ),
-  clickableColor: (
-    light: green-n400,
-    dark: green-n400,
   ),
 );
 
@@ -225,29 +334,47 @@ $themeConfigs: (
 @mixin apply-background-color-modifiers($root, $theme) {
   @each $theme-name, $theme-value in $theme {
     #{$root + '_' + $theme-name} {
-      @include apply-themes(get-map-field($theme-value, [ base-tag, default]));
+      @include apply-themes(get-map-field($theme-value, (base-tag, default)));
+
+      &#{$root + '_bold'} {
+        @include apply-themes(get-map-field($theme-value, (bold-tag, default)));
+      }
 
       &#{$root + '_clickable' } {
         cursor: pointer;
 
-        @include apply-themes(get-map-field($theme-value, [ clickable-tag, default]));
+        @include apply-themes(get-map-field($theme-value, (clickable-tag, default)));
 
         @include hover() {
-          @include apply-themes(get-map-field($theme-value, [ clickable-tag, hover]));
+          @include apply-themes(get-map-field($theme-value, (clickable-tag, hover)));
         }
 
         &:focus-visible:not(.tag_disabled) {
-          @include apply-themes(get-map-field($theme-value, [ clickable-tag, active]));
+          @include apply-themes(get-map-field($theme-value, (clickable-tag, active)));
+        }
+
+        &.tag_bold:not(.tag_disabled) {
+          @include apply-themes(get-map-field($theme-value, (clickable-bold-tag, default)));
+
+          @include hover() {
+            @include apply-themes(get-map-field($theme-value, (clickable-bold-tag, hover)));
+          }
         }
       }
 
       &#{$root + '_disabled' } {
         cursor: not-allowed;
 
-        @include apply-themes(get-map-field($theme-value, [ disabled-tag, default]));
+        @include apply-themes(get-map-field($theme-value, (disabled-tag, default)));
 
         @include hover() {
-          @include apply-themes(get-map-field($theme-value, [ disabled-tag, default]));
+          @include apply-themes(get-map-field($theme-value, (disabled-tag, default)));
+        }
+      }
+
+      &#{$root + '_with-border' } {
+        &:not(.tag_clickable:focus-visible):not(.tag_disabled) {
+          box-shadow: shadow-helper(base-n0) !important;
         }
       }
     }
@@ -274,11 +401,17 @@ $themeConfigs: (
   &_small {
     height: 20px;
     padding: 3px 8px;
+    &.tag_with-border {
+      height: 22px;
+    }
   }
 
   &_medium {
     height: 24px;
     padding: 5px 8px;
+    &.tag_with-border {
+      height: 26px;
+    }
   }
 }
 

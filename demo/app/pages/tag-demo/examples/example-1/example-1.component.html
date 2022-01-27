@@ -1,55 +1,13 @@
-<div class="example-container">
-  <div class="example-container__item">
-    <h5>Clickable</h5>
-    <pupa-tag [clickable]="true">Pupa</pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>Disabled</h5>
-    <pupa-tag [disabled]="true">Lupa</pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>Clickable and Disabled</h5>
-    <pupa-tag [disabled]="true" [clickable]="true">Dupa</pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>With text</h5>
-    <pupa-tag class="pupa-tag" [pupaTooltip]="'DupaGupaBupa'">
-      <span class="pupa-tag__content-text">DupaGupaBupa</span>
-    </pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>With icon</h5>
-    <pupa-tag> <pupa-icon name="app-cube"></pupa-icon> Vupa </pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>With delete icon</h5>
-    <pupa-tag>
-      <pupa-icon name="app-cube"></pupa-icon> Zupa
-      <pupa-tag-delete-button></pupa-tag-delete-button>
-    </pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>Clickable with icon</h5>
-    <pupa-tag [clickable]="true"> <pupa-icon name="app-save"></pupa-icon> Gupa </pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>Disabled with icon</h5>
-    <pupa-tag [disabled]="true"> <pupa-icon name="app-save"></pupa-icon> Bupa </pupa-tag>
-  </div>
-
-  <div class="example-container__item">
-    <h5>Clickable with avatar</h5>
-    <pupa-tag [clickable]="true"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
-  </div>
-  <div class="example-container__item example-container__item_small-tag">
-    <h5>Small with avatar</h5>
-    <pupa-tag [size]="'small'"> <pupa-avatar></pupa-avatar> Zupa </pupa-tag>
-  </div>
+<div class="tag-container">
+  <pupa-tag>Default</pupa-tag>
+  <pupa-tag color="primary">Primary Bold</pupa-tag>
+  <pupa-tag color="green">Green Bold</pupa-tag>
+  <pupa-tag color="red">Red Bold</pupa-tag>
+  <pupa-tag color="yellow">Yellow Bold</pupa-tag>
+</div>
+<div class="tag-container">
+  <pupa-tag color="primary" [bold]="false">Primary Normal</pupa-tag>
+  <pupa-tag color="green" [bold]="false">Green Normal</pupa-tag>
+  <pupa-tag color="red" [bold]="false">Red Normal</pupa-tag>
+  <pupa-tag color="yellow" [bold]="false">Yellow Normal</pupa-tag>
 </div>

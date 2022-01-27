@@ -1,5 +1,7 @@
 <div
   [attr.tabindex]="tabIndexAttribute"
+  [class.tag_bold]="isBold$ | async"
+  [class.tag_with-border]="isWithBorder$ | async"
   [class.tag_clickable]="isClickable$ | async"
   [class.tag_disabled]="isDisabled$ | async"
   [class.tag_with-avatar]="withAvatar$ | async"

@@ -1,21 +1,10 @@
-@use 'mixins' as *;
-
-.example-container {
+.tag-container {
   display: flex;
+  gap: 4rem;
   flex-wrap: wrap;
   align-items: flex-end;
 
-  &__item {
-    width: 60px;
-    padding: 0 20px;
-
-    &_small-tag {
-      align-self: center;
-    }
+  &:not(:last-child) {
+    margin-bottom: 6rem;
   }
-}
-
-.pupa-tag__content-text {
-  width: 11rem;
-  @include ellipsis-text-overflow;
 }

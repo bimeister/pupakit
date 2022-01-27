@@ -1,151 +1,113 @@
 <h1>Tag</h1>
 
-<demo-example-viewer class="tag-demo">
-  <demo-example-viewer-content class="tag-demo__content">
-    <div class="tag-demo__wrapper">
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async">
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async">
-        <pupa-icon name="app-apps"></pupa-icon>
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async">
-        <pupa-avatar></pupa-avatar>
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-    </div>
-    <div class="tag-demo__wrapper">
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async" [size]="'small'">
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async" [size]="'small'">
-        <pupa-icon name="app-apps"></pupa-icon>
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag [disabled]="disabled$ | async" [clickable]="clickable$ | async" [size]="'small'">
-        <pupa-avatar></pupa-avatar>
-        Tag
-        <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-    </div>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Basic tag</h2>
+    <pupa-info-block>Colored tags are bold by default.</pupa-info-block>
+    <pupa-code-container [content]="example1Content">
+      <demo-tag-example-1 *pupaCodeContainerPreviewTemplate></demo-tag-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Add the delete button">
-      <ng-container *demoExampleViewerConfigItemDescription>
-        Use
-        <pupa-code-inline>pupa-tag-delete-button</pupa-code-inline>
-      </ng-container>
-      <demo-props-switcher #deleteButton$></demo-props-switcher>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
+    <h2>Clickable tags</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-tag-example-2 *pupaCodeContainerPreviewTemplate></demo-tag-example-2>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
+    <h2>Additional properties</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-tag-example-3 *pupaCodeContainerPreviewTemplate></demo-tag-example-3>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="clickable" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is clickable.</ng-container>
-      <demo-props-switcher #clickable$></demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+    <h2>Extra cases</h2>
+    <pupa-code-container [content]="example4Content">
+      <demo-tag-example-4 *pupaCodeContainerPreviewTemplate></demo-tag-example-4>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer class="tag-demo">
+      <demo-example-viewer-content class="tag-demo__content">
+        <div class="tag-demo__wrapper">
+          <pupa-tag
+            [size]="size$ | async"
+            [color]="color$ | async"
+            [disabled]="disabled$ | async"
+            [clickable]="clickable$ | async"
+            [bold]="boldFormControl.value"
+            [withBorder]="withBorder$ | async"
+          >
+            Tag
+            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
+          </pupa-tag>
+          <pupa-tag
+            [size]="size$ | async"
+            [color]="color$ | async"
+            [disabled]="disabled$ | async"
+            [clickable]="clickable$ | async"
+            [bold]="boldFormControl.value"
+            [withBorder]="withBorder$ | async"
+          >
+            <pupa-icon name="app-apps"></pupa-icon>
+            Tag
+            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
+          </pupa-tag>
+          <pupa-tag
+            [size]="size$ | async"
+            [color]="color$ | async"
+            [disabled]="disabled$ | async"
+            [clickable]="clickable$ | async"
+            [bold]="boldFormControl.value"
+            [withBorder]="withBorder$ | async"
+          >
+            <pupa-avatar></pupa-avatar>
+            Tag
+            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
+          </pupa-tag>
+        </div>
+      </demo-example-viewer-content>
 
-<h1>Color Tag</h1>
+      <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="Add the delete button">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>pupa-tag-delete-button</pupa-code-inline>
+          </ng-container>
+          <demo-props-switcher #deleteButton$></demo-props-switcher>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
 
-<demo-example-viewer class="tag-demo">
-  <demo-example-viewer-content class="tag-demo__content">
-    <div class="tag-demo__wrapper">
-      <pupa-tag color="red" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async"
-        >Lupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag color="green" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async"
-        >Pupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag color="primary" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async"
-        >Dupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag color="yellow" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async"
-        >Zupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-    </div>
-    <div class="tag-demo__wrapper">
-      <pupa-tag color="red" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async" [size]="'small'"
-        >Lupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag color="green" [disabled]="colorDisabled$ | async" [clickable]="colorClickable$ | async" [size]="'small'"
-        >Pupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag
-        color="primary"
-        [disabled]="colorDisabled$ | async"
-        [clickable]="colorClickable$ | async"
-        [size]="'small'"
-        >Dupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-      <pupa-tag
-        color="yellow"
-        [disabled]="colorDisabled$ | async"
-        [clickable]="colorClickable$ | async"
-        [size]="'small'"
-        >Zupa
-        <pupa-tag-delete-button *ngIf="colorDeleteButton$ | async"></pupa-tag-delete-button>
-      </pupa-tag>
-    </div>
-  </demo-example-viewer-content>
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Add the delete button">
-      <ng-container *demoExampleViewerConfigItemDescription>
-        Use
-        <pupa-code-inline>pupa-tag-delete-button</pupa-code-inline>
-      </ng-container>
-      <demo-props-switcher #colorDeleteButton$></demo-props-switcher>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="size" type="TagSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the tag.</ng-container>
+          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #colorDisabled$></demo-props-switcher>
-    </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="color" type="TagColor">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the tag.</ng-container>
+          <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
+        </demo-example-viewer-property>
 
-    <demo-example-viewer-property decoratorName="input" name="clickable" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is clickable.</ng-container>
-      <demo-props-switcher #colorClickable$></demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+        <demo-example-viewer-property decoratorName="input" name="bold" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is bold.</ng-container>
+          <demo-props-switcher [formControl]="boldFormControl"></demo-props-switcher>
+        </demo-example-viewer-property>
 
-<h2>Basic usage of Tag</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-tag-example-1 *pupaCodeContainerPreviewTemplate></demo-tag-example-1>
-</pupa-code-container>
+        <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is bordered.</ng-container>
+          <demo-props-switcher #withBorder$></demo-props-switcher>
+        </demo-example-viewer-property>
 
-<h2>Basic usage of Color Tag</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-tag-example-2 *pupaCodeContainerPreviewTemplate></demo-tag-example-2>
-</pupa-code-container>
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
 
-<h2>Truncate Tag</h2>
-<pupa-code-container [content]="example3Content">
-  <demo-tag-example-3 *pupaCodeContainerPreviewTemplate></demo-tag-example-3>
-</pupa-code-container>
+        <demo-example-viewer-property decoratorName="input" name="clickable" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is clickable.</ng-container>
+          <demo-props-switcher #clickable$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
