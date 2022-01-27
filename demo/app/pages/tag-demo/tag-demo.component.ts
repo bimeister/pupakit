@@ -11,7 +11,6 @@ const BASE_REQUEST_PATH: string = 'tag-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-// 'green' | 'red' | 'yellow' | 'primary' | 'default'
 export class TagDemoComponent {
   public readonly boldFormControl: FormControl = new FormControl(true);
 
