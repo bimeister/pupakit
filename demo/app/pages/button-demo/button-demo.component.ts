@@ -68,8 +68,8 @@ export class ButtonDemoComponent {
       value: 'border-contrast',
     },
     {
-      caption: 'Subtle-danger',
-      value: 'subtle-danger',
+      caption: 'Danger-subtle',
+      value: 'danger-subtle',
     },
   ];
 

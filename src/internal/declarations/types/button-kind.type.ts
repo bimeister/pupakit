@@ -8,4 +8,4 @@ export type ButtonKind =
   | 'subtle'
   | 'warning'
   | 'danger'
-  | 'subtle-danger';
+  | 'danger-subtle';

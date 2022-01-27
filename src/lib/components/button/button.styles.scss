@@ -271,7 +271,7 @@
     }
   }
 
-  &_subtle-danger {
+  &_danger-subtle {
     .button__background {
       background-color: transparent;
     }
@@ -594,7 +594,7 @@
       }
     }
   }
-  &_subtle-danger {
+  &_danger-subtle {
     @include host-selector-dark-theme() {
       &:not([disabled]) {
         @include hover() {
