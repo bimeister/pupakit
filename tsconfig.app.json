@@ -4,5 +4,5 @@
     "outDir": "./out-tsc/app"
   },
   "include": ["demo/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.stories.ts"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }
