@@ -374,6 +374,9 @@ $themeConfigs: (
 
       &#{$root + '_with-border' } {
         &:not(.tag_clickable:focus-visible):not(.tag_disabled) {
+          /*
+            Need refactoring https://bimeister.atlassian.net/browse/BIM-18178
+          */
           box-shadow: shadow-helper(base-n0) !important;
         }
       }
@@ -390,27 +393,27 @@ $themeConfigs: (
 
   &_with-avatar {
     &.tag_small {
-      padding-left: 4px;
+      padding-left: 1rem;
     }
 
     &.tag_medium {
-      padding-left: 6px;
+      padding-left: 1.5rem;
     }
   }
 
   &_small {
-    height: 20px;
+    height: 5rem;
     padding: 3px 8px;
     &.tag_with-border {
-      height: 22px;
+      height: 5.5rem;
     }
   }
 
   &_medium {
-    height: 24px;
+    height: 6rem;
     padding: 5px 8px;
     &.tag_with-border {
-      height: 26px;
+      height: 6.5rem;
     }
   }
 }
