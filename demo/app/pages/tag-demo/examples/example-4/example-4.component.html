@@ -1,0 +1,19 @@
+<div class="tag-container">
+  <pupa-tag [pupaTooltip]="'Thanks!'">Hover me!</pupa-tag>
+  <pupa-tag><pupa-icon name="app-cube"></pupa-icon>With icon</pupa-tag>
+  <pupa-tag>
+    <pupa-icon name="app-cube"></pupa-icon>Icon and delete
+    <pupa-tag-delete-button></pupa-tag-delete-button>
+  </pupa-tag>
+  <pupa-tag [clickable]="true" color="primary">
+    <pupa-icon name="app-cube"></pupa-icon>And clickable!
+    <pupa-tag-delete-button></pupa-tag-delete-button>
+  </pupa-tag>
+  <pupa-tag [disabled]="true"> <pupa-icon name="app-save"></pupa-icon>Disabled with icon</pupa-tag>
+  <pupa-tag [clickable]="true" [withBorder]="true" [bold]="false" color="primary" size="small">
+    <pupa-avatar [username]="'Pupa'"></pupa-avatar> Little one user
+  </pupa-tag>
+  <pupa-tag [clickable]="true" [disabled]="true" size="small">
+    <pupa-avatar [username]="'Pupa'"></pupa-avatar> Disabled user
+  </pupa-tag>
+</div>

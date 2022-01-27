@@ -34,6 +34,12 @@ export class TagComponent implements AfterContentInit, OnChanges {
   @Input() public clickable: boolean = false;
   public readonly isClickable$: BehaviorSubject<boolean> = this.tagStateService.isClickable$;
 
+  @Input() public bold: boolean = true;
+  public readonly isBold$: BehaviorSubject<boolean> = this.tagStateService.isBold$;
+
+  @Input() public withBorder: boolean = false;
+  public readonly isWithBorder$: BehaviorSubject<boolean> = this.tagStateService.isWithBorder$;
+
   @Input() public tabIndex: number = 0;
   public readonly tabIndex$: BehaviorSubject<number> = this.tagStateService.tabIndex$;
 
@@ -60,6 +66,8 @@ export class TagComponent implements AfterContentInit, OnChanges {
     this.processTabIndexChange(changes?.tabIndex);
     this.processColorChange(changes?.color);
     this.processSizeChange(changes?.size);
+    this.processBoldChange(changes?.bold);
+    this.processWithBorderChange(changes?.withBorder);
   }
 
   public ngAfterContentInit(): void {
@@ -119,5 +127,25 @@ export class TagComponent implements AfterContentInit, OnChanges {
     }
 
     this.size$.next(updatedValue);
+  }
+
+  private processBoldChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isBold$.next(updatedValue);
+  }
+
+  private processWithBorderChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isWithBorder$.next(updatedValue);
   }
 }

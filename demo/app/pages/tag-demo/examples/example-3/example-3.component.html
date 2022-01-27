@@ -1,4 +1,22 @@
-<pupa-tag class="tag" [disabled]="false">
-  <pupa-tag-text>Tag Tag Tag Tag Tag Tag Tag Tag Tag Tag</pupa-tag-text>
-  <pupa-tag-delete-button></pupa-tag-delete-button>
-</pupa-tag>
+<div class="tag-container">
+  <pupa-tag>
+    With delete button
+    <pupa-tag-delete-button></pupa-tag-delete-button>
+  </pupa-tag>
+  <pupa-tag class="fixed-width">
+    <pupa-tag-text>With truncate text component</pupa-tag-text>
+  </pupa-tag>
+</div>
+<div class="tag-container">
+  <pupa-tag size="medium">Medium size tag</pupa-tag>
+  <pupa-tag size="small">Small size tag</pupa-tag>
+</div>
+<div class="tag-container">
+  <pupa-tag [disabled]="true">Disabled</pupa-tag>
+  <pupa-tag [disabled]="true" color="green">Colored disabled</pupa-tag>
+</div>
+<div class="tag-container">
+  <pupa-tag [withBorder]="true">With white border</pupa-tag>
+  <pupa-tag [withBorder]="true" color="primary">Colored with border</pupa-tag>
+  <pupa-tag [withBorder]="true" color="primary" [clickable]="true">Colored clickable with border</pupa-tag>
+</div>

@@ -10,4 +10,6 @@ export class TagStateService {
   public readonly tabIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   public readonly isClickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly color$: BehaviorSubject<TagColor> = new BehaviorSubject<TagColor>('default');
+  public readonly isBold$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly isWithBorder$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 }
