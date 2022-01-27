@@ -6,20 +6,29 @@
   position: relative;
   cursor: default;
   @include font-size-small();
+  color: color(base-n600);
   transition: color 0.2s ease;
 
   text-overflow: inherit;
   overflow: inherit;
 
-  &__line {
+  &__marker {
     position: absolute;
     left: 0;
-    top: -1px;
-    height: 100%;
     width: 1rem;
     content: '';
     border-radius: 100px;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+
+    &_line {
+      height: 100%;
+      top: -1px;
+    }
+
+    &_dot {
+      top: calc(50% - 3.5px);
+      height: 5px;
+    }
   }
 
   &__text {
@@ -27,43 +36,55 @@
     overflow: inherit;
   }
 
-  &_primary {
-    color: color(primary-n500);
-
-    .status__line {
-      background-color: color(primary-n500);
-    }
+  &_primary .status__marker {
+    background-color: color(primary-n500);
   }
 
-  &_success {
-    color: color(green-n500);
-
-    .status__line {
-      background-color: color(green-n500);
-    }
+  &_success .status__marker {
+    background-color: color(green-n500);
   }
 
-  &_warning {
-    color: color(yellow-n500);
-
-    .status__line {
-      background-color: color(yellow-n500);
-    }
+  &_warning .status__marker {
+    background-color: color(yellow-n500);
   }
 
-  &_danger {
-    color: color(red-n500);
+  &_danger .status__marker {
+    background-color: color(red-n500);
+  }
 
-    .status__line {
-      background-color: color(red-n500);
+  &_neutral {
+    color: color(base-white-n100);
+
+    .status__marker {
+      background-color: color(base-white-n200);
     }
   }
 
   &.disabled {
-    color: color(base-dark-n250);
+    color: color(base-white-n250);
 
-    .status__line {
-      background-color: color(base-dark-n250);
+    .status__marker {
+      background-color: color(base-white-n250);
+    }
+  }
+
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+
+    &.status__neutral {
+      color: color(base-dark-n100);
+
+      .status__marker {
+        background-color: color(base-dark-n200);
+      }
+    }
+
+    &.disabled {
+      color: color(base-dark-n250);
+
+      .status__marker {
+        background-color: color(base-dark-n250);
+      }
     }
   }
 }

@@ -1,1 +1,1 @@
-export type StatusColor = 'primary' | 'danger' | 'warning' | 'success';
+export type StatusColor = 'primary' | 'danger' | 'warning' | 'success' | 'neutral';

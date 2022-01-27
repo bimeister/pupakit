@@ -28,6 +28,15 @@ export class StatusDemoComponent {
       caption: 'Success',
       value: 'success',
     },
+    {
+      caption: 'Neutral',
+      value: 'neutral',
+    },
+  ];
+
+  public readonly kindOptions: PropsOption[] = [
+    { caption: 'Line', value: 'line', isDefault: true },
+    { caption: 'Dot', value: 'dot' },
   ];
 
   public readonly example1Content: Record<string, string> = {
