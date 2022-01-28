@@ -195,6 +195,7 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
         this.unfitBreadcrumbs$.next(unfitBreadcrumbs);
         this.fitBreadcrumbs$.next(fitBreadcrumbs);
         this.rootBreadcrumb$.next(rootBreadcrumb);
+        this.detectChanges();
       });
   }
 
