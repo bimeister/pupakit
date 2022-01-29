@@ -4,7 +4,7 @@
   "license": "SEE LICENSE IN LICENSE",
   "repository": {
     "type": "git",
-    "url": "https://git.bimeister.com/common/pupakit.git"
+    "url": "https://git.bimeister.io/common/pupakit.git"
   },
   "engines": {
     "node": ">=14.0.0"
