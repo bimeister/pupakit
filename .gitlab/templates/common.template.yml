@@ -7,7 +7,7 @@ variables:
   PIPELINE_ID: ${CI_PIPELINE_IID}
   BASE_IMAGE: base-image:${CI_COMMIT_SHORT_SHA}
   BUILD_IMAGE: build-image:${CI_COMMIT_SHORT_SHA}
-  DEPLOY_IMAGE: docker.bimeister.com/bimeister/pupakit:${CI_COMMIT_SHORT_SHA}
+  DEPLOY_IMAGE: dockerhub.bimeister.io/bimeister/pupakit:${CI_COMMIT_SHORT_SHA}
 
 before_script:
   - docker --version

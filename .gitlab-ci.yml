@@ -107,7 +107,7 @@ dev:
   stage: deploy
   variables:
     CI: $CI
-    BASE_HREF: 'pupakit-dev.bimeister.com'
+    BASE_HREF: 'pupakit-dev.bimeister.io'
   when: manual
   interruptible: true
   allow_failure: true
@@ -122,7 +122,7 @@ test:
   stage: deploy
   variables:
     CI: $CI
-    BASE_HREF: 'pupakit-test.bimeister.com'
+    BASE_HREF: 'pupakit-test.bimeister.io'
   when: manual
   interruptible: true
   allow_failure: true

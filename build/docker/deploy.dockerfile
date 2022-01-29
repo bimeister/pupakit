@@ -7,7 +7,7 @@ RUN yarn run build-cli npm-package npmrc-prepare \
       --npmrc_path="./.npmrc" \
       --auth_token="${NPM_AUTH_TOKEN}" \
       --org_email="info@bimeister.com" \
-      --registry="https://git.bimeister.com/api/v4/projects/98/packages/npm/" \
+      --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" \
       --remove_scoped_registries="true" \
       && cp ./.npmrc ./.npmignore --target-directory ./dist/lib/ \
       \
