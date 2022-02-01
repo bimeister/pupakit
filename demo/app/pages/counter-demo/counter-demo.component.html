@@ -16,7 +16,11 @@
     <demo-example-viewer>
       <demo-example-viewer-content>
         <div class="content">
-          <pupa-counter [count]="+countFormControl.value" [color]="color$ | async"></pupa-counter>
+          <pupa-counter
+            [count]="+countFormControl.value"
+            [color]="color$ | async"
+            [mode]="mode$ | async"
+          ></pupa-counter>
         </div>
       </demo-example-viewer-content>
 
@@ -25,6 +29,10 @@
         <demo-example-viewer-property decoratorName="input" name="color" type="CountColor">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the counter.</ng-container>
           <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="mode" type="CounterMode">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the mode of the counter.</ng-container>
+          <demo-props-select #mode$ [options]="modeOptions"></demo-props-select>
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="count" type="number">
           <ng-container *demoExampleViewerPropertyDescription>The number value of counter.</ng-container>

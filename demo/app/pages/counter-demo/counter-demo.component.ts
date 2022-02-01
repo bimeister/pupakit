@@ -38,6 +38,18 @@ export class CounterDemoComponent {
     },
   ];
 
+  public readonly modeOptions: PropsOption[] = [
+    {
+      caption: 'Default',
+      value: 'default',
+      isDefault: true,
+    },
+    {
+      caption: 'Full',
+      value: 'full',
+    },
+  ];
+
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
