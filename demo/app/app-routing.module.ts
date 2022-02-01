@@ -45,6 +45,7 @@ import { SelectDemoModule } from './pages/select-demo/select-demo.module';
 import { SelectorDemoModule } from './pages/selector-demo/selector-demo.module';
 import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
+import { StepperDemoModule } from './pages/stepper-demo/stepper-demo.module';
 import { SwitcherDemoModule } from './pages/switcher-demo/switcher-demo.module';
 import { TableDemoModule } from './pages/table-demo/table-demo.module';
 import { TabsDemoModule } from './pages/tabs-demo/tabs-demo.module';
@@ -209,6 +210,11 @@ const demoRoutes: Routes = [
         path: 'tabs',
         loadChildren: (): Promise<Type<TabsDemoModule>> =>
           import('./pages/tabs-demo/tabs-demo.module').then((module: any) => module.TabsDemoModule),
+      },
+      {
+        path: 'stepper',
+        loadChildren: (): Promise<Type<StepperDemoModule>> =>
+          import('./pages/stepper-demo/stepper-demo.module').then((module: any) => module.StepperDemoModule),
       },
       {
         path: 'datagrid',
