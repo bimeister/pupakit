@@ -1,0 +1,52 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  flex-shrink: 0;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.stepper {
+  &__container {
+    width: 100%;
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+}
+
+.gradient {
+  display: none;
+  position: absolute;
+
+  z-index: 9;
+  pointer-events: none;
+
+  width: 23.75rem;
+  height: 10rem;
+
+  background: linear-gradient(270deg, color('base-n0') 0%, color('base-n0', 0) 87.96%);
+  @include host-selector-dark-theme {
+    background: linear-gradient(270deg, color('base-n600') 0%, color('base-n0', 0) 87.96%);
+  }
+
+  &_left {
+    left: 0;
+
+    transform: rotate(-180deg);
+  }
+
+  &_right {
+    right: 0;
+  }
+
+  &_visible {
+    display: block;
+  }
+}

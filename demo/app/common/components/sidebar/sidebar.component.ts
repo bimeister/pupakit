@@ -73,6 +73,7 @@ export class SidebarComponent {
         { title: 'Link', link: '/kit/link' },
         { title: 'Timer', link: '/kit/timer' },
         { title: 'Counter', link: '/kit/counter' },
+        { title: 'Stepper', link: '/kit/stepper' },
         { title: '⚠️ Chip Tabs', link: '/kit/chip-tabs' },
         { title: '⚠️ Chip', link: '/kit/chip' },
         { title: '⚠️ Vertical Tabs', link: '/kit/vertical-tabs' },

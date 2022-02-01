@@ -1,0 +1,91 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+:host {
+  display: flex;
+  outline: none;
+  flex-shrink: 0;
+  align-items: center;
+  flex-grow: 1;
+
+  &:last-child {
+    flex-grow: 0;
+  }
+}
+
+.stepper-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  padding: 1.5rem 2rem;
+
+  min-width: 1rem;
+  max-width: 42rem;
+
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+
+  &__title-wrapper {
+    height: 7rem;
+    max-height: 7rem;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  &__title {
+    vertical-align: middle;
+
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+
+    max-width: 66rem;
+    overflow: hidden;
+    white-space: break-spaces;
+
+    @include font-type-caption;
+    @include font-size-mark;
+  }
+
+  &__counter {
+    margin-right: 3rem;
+  }
+
+  color: color('base-n600');
+  @include host-selector-dark-theme {
+    color: color('base-n0');
+  }
+
+  &:not(&_disabled) {
+    @include hover {
+      background: color('base-white-n400');
+      @include host-selector-dark-theme {
+        background: color('base-dark-n400');
+      }
+    }
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    color: color('base-white-n250');
+
+    @include host-selector-dark-theme {
+      color: color('base-dark-n250');
+    }
+  }
+}
+
+.step-line {
+  display: flex;
+  min-width: 16rem;
+  margin: 0 3rem 0;
+  flex-grow: 1;
+  border-top: 1.5px dashed color('base-white-n400');
+  height: 0;
+}

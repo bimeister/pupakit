@@ -1,0 +1,43 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.stepper-counter {
+  width: 6rem;
+  height: 6rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: color('base-n600');
+  background: color('base-white-n500');
+  border-radius: 1rem;
+
+  @include font-type-caption;
+  @include font-size-mark;
+
+  @include host-selector-dark-theme {
+    background-color: color('base-dark-n275');
+    color: color('base-n0');
+  }
+
+  &_active {
+    background: color('primary-n550');
+    color: color('base-n0');
+
+    @include host-selector-dark-theme {
+      background: color('primary-n400');
+    }
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    background: color('base-white-n500');
+    color: color('base-white-n250');
+
+    @include host-selector-dark-theme {
+      background: color('base-dark-n275');
+      color: color('base-dark-n250');
+    }
+  }
+}

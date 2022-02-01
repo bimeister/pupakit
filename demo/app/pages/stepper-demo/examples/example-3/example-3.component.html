@@ -1,0 +1,22 @@
+<pupa-stepper-container>
+  <pupa-stepper>
+    <ng-container *ngFor="let route of routes">
+      <pupa-stepper-item
+        [routerLink]="route.path"
+        [queryParams]="route.queryParams"
+        routerLinkActive
+        #routerLinkActive="routerLinkActive"
+        [isActive]="routerLinkActive.isActive"
+        [name]="route.title"
+      >
+        {{ route.title }}
+      </pupa-stepper-item>
+    </ng-container>
+  </pupa-stepper>
+
+  <pupa-stepper-content>
+    <ng-container *ngFor="let route of routes">
+      <div class="step" *pupaStepperItemContentTemplate="route.title">For route {{ route.queryParams | json }}</div>
+    </ng-container>
+  </pupa-stepper-content>
+</pupa-stepper-container>

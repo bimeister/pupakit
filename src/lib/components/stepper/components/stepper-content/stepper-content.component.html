@@ -1,0 +1,13 @@
+<ng-container *ngIf="destroyable; else stepper" [ngTemplateOutlet]="activeTemplateRef$ | async"></ng-container>
+
+<ng-content></ng-content>
+
+<ng-template #stepper>
+  <div
+    *ngFor="let stepperTemplate of nonDestroyableTemplateRefs$ | async; trackBy: tabTrackBy"
+    class="stepper"
+    [class.stepper_visible]="stepperTemplate.isActive"
+  >
+    <ng-container [ngTemplateOutlet]="stepperTemplate.templateRef"></ng-container>
+  </div>
+</ng-template>

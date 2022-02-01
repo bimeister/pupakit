@@ -39,6 +39,7 @@ import { SelectorModule } from './components/selector/selector.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { StatusModule } from './components/status/status.module';
+import { StepperModule } from './components/stepper/stepper.module';
 import { SwitcherModule } from './components/switcher/switcher.module';
 import { TableModule } from './components/table/table.module';
 import { TabsModule } from './components/tabs/tabs.module';
@@ -104,6 +105,7 @@ const EXPORTS: any[] = [
   ToastModule,
   LinkModule,
   TimerModule,
+  StepperModule,
 ];
 
 @NgModule({
