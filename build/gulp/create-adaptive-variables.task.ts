@@ -62,7 +62,7 @@ function writeAdaptiveVariablesToFile(fileData: string): Observable<string> {
 
 function getVariablesWithPostfix(data: Record<string, number>, postfix: string = ''): string {
   return Object.keys(data).reduce(
-    (accumulator: string, dataKey: string) => accumulator + `$${dataKey}${postfix}: ${data[dataKey]};\n`,
+    (accumulator: string, dataKey: string) => `${accumulator}$${dataKey}${postfix}: ${data[dataKey]};\n`,
     ''
   );
 }

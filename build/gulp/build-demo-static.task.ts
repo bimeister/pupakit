@@ -1,6 +1,7 @@
-import { copyFolderWithFiles, executeCommandWithLogging } from '@bimeister/utilities';
 import { info } from 'fancy-log';
 import { series, TaskFunction } from 'gulp';
+import { copyFolderWithFiles } from '../copy-folder-with-files';
+import { executeCommandWithLogging } from '../execute-command-with-logging';
 
 export function buildDemoStatic(): TaskFunction {
   return series(buildDemo(), bundleAssetsTask(), copyStylesToDistFolder(), replaceAssetsUrlsInStyles());

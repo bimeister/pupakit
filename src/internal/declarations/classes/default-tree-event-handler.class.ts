@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { EventBus } from '@bimeister/event-bus';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { filter, mapTo, switchMap, withLatestFrom } from 'rxjs/operators';
@@ -109,7 +109,7 @@ export class DefaultTreeEventHandler {
 
   public getEvents<E extends TreeEvents.TreeEventBase>(eventType: Type<E>): Observable<E> {
     return this.eventBus
-      .catchEvents()
+      .listen()
       .pipe(filter((event: TreeEvents.TreeEventBase): event is E => event instanceof eventType));
   }
 

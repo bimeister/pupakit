@@ -1,4 +1,4 @@
-import { mapToVoid } from '@bimeister/utilities';
+import { mapToVoid } from '@bimeister/utilities/rxjs';
 import { BoundingBox, Browser, ElementHandle, launch, Page, Viewport } from 'puppeteer';
 import { from, Observable } from 'rxjs';
 import { delay, mapTo, switchMap, tap } from 'rxjs/operators';

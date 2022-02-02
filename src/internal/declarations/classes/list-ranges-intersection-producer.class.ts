@@ -1,5 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { Nullable } from '@bimeister/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { PagedVirtualScrollArguments } from '../interfaces/paged-virtual-scroll-arguments.interface';
 import { PagedVirtualScrollArgumentsDto } from './dto/paged-virtual-scroll-arguments.dto';
 
