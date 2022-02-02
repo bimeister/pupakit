@@ -1,5 +1,5 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
-import { TemplateRef } from '@angular/core';
+import { EventEmitter, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -33,6 +33,8 @@ export interface SelectStateService<T> {
   readonly invalidTooltipDisabled$: BehaviorSubject<boolean>;
   readonly invalidTooltip$: BehaviorSubject<Nullable<string>>;
   readonly invalidTooltipContentTemplate$: BehaviorSubject<Nullable<TemplateRef<unknown>>>;
+
+  readonly resetOutput: EventEmitter<void>;
 
   setControlRef(control: NgControl): void;
 
