@@ -15,16 +15,18 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BusEventBase, EventBus } from '@bimeister/event-bus';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
-import { map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filter, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { BusEventBase } from '../../../../../internal/declarations/classes/abstract/bus-event-base.abstract';
 import { TableBodyRow } from '../../../../../internal/declarations/classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../../../../../internal/declarations/classes/table-body-rows-data-source.class';
 import { TableColumn } from '../../../../../internal/declarations/classes/table-column.class';
 import { TableController } from '../../../../../internal/declarations/classes/table-controller.class';
 import { TableRow } from '../../../../../internal/declarations/classes/table-row.class';
 import { TableColumnSorting } from '../../../../../internal/declarations/enums/table-column-sorting.enum';
+import { TableRowType } from '../../../../../internal/declarations/enums/table-row-type.enum';
 import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
 import { TableEvents } from '../../../../../internal/declarations/events/table.events';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -264,6 +266,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     }
 
     this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
+      if (!TableComponent.isTableRowType(cellData.rowType)) {
+        return;
+      }
+
       eventBus.dispatch(new TableEvents.CellClick(cellData.columnId, cellData.rowId, cellData.rowType));
     });
   }
@@ -388,7 +394,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     return this.eventBus$
       .pipe(
         switchMap((eventBus: EventBus) =>
-          eventBus.catchEvents((event: BusEventBase) => event instanceof TableEvents.ScrollViewportByIndex)
+          eventBus.listen().pipe(filter((event: BusEventBase) => event instanceof TableEvents.ScrollViewportByIndex))
         ),
         withLatestFrom(this.scrollBehavior$)
       )
@@ -426,5 +432,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   private registerHeaderScrollableContainerForIntersectionDetection(): void {
     const headerScrollableRowsContainer: HTMLElement = this.headerScrollableRowsContainerRef.nativeElement;
     this.tableColumnsIntersectionService.registerScrollArea(headerScrollableRowsContainer);
+  }
+
+  private static isTableRowType(input: string): input is TableRowType {
+    const enumKeys: TableRowType[] = [TableRowType.Body, TableRowType.Header];
+    return new Set<string>(enumKeys).has(input);
   }
 }

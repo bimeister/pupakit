@@ -1,15 +1,15 @@
+import { TrackByFunction, Type } from '@angular/core';
+import { EventBus } from '@bimeister/event-bus/rxjs';
+import { Nullable } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
+import { QueueEvents } from '../events/queue.events';
 import { TreeEvents } from '../events/tree.events';
+import { TreeControllerOptions } from '../interfaces/tree-controller-options.interface';
 import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-collection-ref.interface';
 import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
+import { EventsQueue } from './events-queue.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
-import { Nullable } from '@bimeister/utilities';
-import { TreeControllerOptions } from '../interfaces/tree-controller-options.interface';
-import { EventBus } from '@bimeister/event-bus';
-import { EventsQueue } from './events-queue.class';
-import { QueueEvents } from '../events/queue.events';
-import { TrackByFunction, Type } from '@angular/core';
-import { Observable } from 'rxjs';
 
 export class TreeController {
   public readonly eventBus: EventBus = new EventBus();

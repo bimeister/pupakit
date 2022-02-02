@@ -1,5 +1,5 @@
-import { BusEventBase } from '@bimeister/event-bus';
 import { getUuid, Nullable } from '@bimeister/utilities';
+import { BusEventBase } from '../classes/abstract/bus-event-base.abstract';
 
 class QueueEventBase<T> extends BusEventBase<T> {
   public readonly scope: Nullable<string> = null;

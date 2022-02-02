@@ -1,6 +1,6 @@
 import { getUuid, Nullable } from '@bimeister/utilities';
+import { BusEventBase } from '../classes/abstract/bus-event-base.abstract';
 import { FlatTreeItem } from '../classes/flat-tree-item.class';
-import { BusEventBase } from '@bimeister/event-bus';
 import { DropEventInterface } from '../interfaces/drop-event.interface';
 
 interface SetChildrenEventPayload {

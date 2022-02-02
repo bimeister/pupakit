@@ -1,6 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
 import { TrackByFunction } from '@angular/core';
-import { EventBus } from '@bimeister/event-bus';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';

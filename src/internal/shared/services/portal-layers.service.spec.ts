@@ -1,7 +1,7 @@
-import { PortalLayersService } from './portal-layers.service';
 import { TestBed } from '@angular/core/testing';
+import { getUuid } from '@bimeister/utilities/common';
 import { PortalLayer } from '../../declarations/interfaces/portal-layer.interface';
-import { getUuid } from '@bimeister/utilities';
+import { PortalLayersService } from './portal-layers.service';
 
 class TestLayer implements PortalLayer {
   public readonly id: string = getUuid();

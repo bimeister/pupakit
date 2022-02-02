@@ -1,9 +1,9 @@
-import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { ListRange } from '@angular/cdk/collections';
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
-import { BusEventBase } from '@bimeister/event-bus';
 import { getUuid, Nullable } from '@bimeister/utilities';
+import { BusEventBase } from '../classes/abstract/bus-event-base.abstract';
+import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { TableRowType } from '../enums/table-row-type.enum';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 
 export namespace TableEvents {
   export class TableEventBase<T = unknown> extends BusEventBase<T> {

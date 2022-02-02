@@ -1,7 +1,7 @@
-import { TaskFunction } from 'gulp';
 import * as fs from 'fs';
-import { format, Options, resolveConfig } from 'prettier';
+import { TaskFunction } from 'gulp';
 import * as path from 'path';
+import { format, Options, resolveConfig } from 'prettier';
 
 interface GeneratorConfig {
   exportName: string;
@@ -11,18 +11,17 @@ interface GeneratorConfig {
   interfaceImportPath: string;
 }
 
-const createTargetFileContent = (config: GeneratorConfig) =>
+const createTargetFileContent = (config: GeneratorConfig): string =>
   `import {${config.interfaceName}} from '${config.interfaceImportPath}';\n\n` +
   `export const ${config.exportName}: ${config.interfaceName} = {\n` +
   `  name: '${config.iconName}',\n` +
   `  data: \`${config.iconData}\`\n` +
   `};\n`;
 
-const kebabToCamelName = (name: string): string => {
-  return name.replace(/([-_][a-z])/gi, (nameToProcess) => {
-    return nameToProcess.toUpperCase().replace('-', '').replace('_', '');
-  });
-};
+const kebabToCamelName = (name: string): string =>
+  name.replace(/([-_][a-z])/gi, (nameToProcess: string) =>
+    nameToProcess.toUpperCase().replace('-', '').replace('_', '')
+  );
 
 export function buildIconsTask(): TaskFunction {
   const basePath: string = 'src/assets/icons';

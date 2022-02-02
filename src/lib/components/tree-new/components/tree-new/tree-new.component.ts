@@ -17,7 +17,7 @@ import {
   Type,
   ViewChild,
 } from '@angular/core';
-import { EventBus } from '@bimeister/event-bus';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@bimeister/utilities';
 import {
   animationFrameScheduler,
@@ -321,7 +321,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
 
   private getEvents<E extends TreeEvents.TreeEventBase>(eventType: Type<E>): Observable<E> {
     return this.eventBus
-      .catchEvents()
+      .listen()
       .pipe(filter((event: TreeEvents.TreeEventBase): event is E => event instanceof eventType));
   }
 

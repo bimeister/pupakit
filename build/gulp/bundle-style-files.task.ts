@@ -1,7 +1,7 @@
-import { copyFolderWithFiles } from '@bimeister/utilities';
-import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
 import { info } from 'fancy-log';
 import { series, TaskFunction } from 'gulp';
+import { copyFolderWithFiles } from '../copy-folder-with-files';
+import { executeCommandWithLogging } from '../execute-command-with-logging';
 
 export function bundleStyleFilesTask(): TaskFunction {
   return series(processScssFiles(), copyStylesToDistFolder());

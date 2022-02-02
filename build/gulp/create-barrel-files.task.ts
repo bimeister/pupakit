@@ -1,5 +1,5 @@
-import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
 import { parallel, TaskFunction } from 'gulp';
+import { executeCommandWithLogging } from '../execute-command-with-logging';
 
 export function createBarrelFilesTask(): TaskFunction {
   return parallel(createForComponents(), createForInternal());

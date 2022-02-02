@@ -1,5 +1,5 @@
-import { executeCommandWithLogging } from '@bimeister/utilities/commonjs/lib/terminal/execute-command-with-logging.function';
 import { TaskFunction } from 'gulp';
+import { executeCommandWithLogging } from '../execute-command-with-logging';
 
 export function buildLibraryTask(): TaskFunction {
   const command: string = 'ng build';

@@ -1,9 +1,10 @@
 import { Type } from '@angular/core';
-import { BusEventBase, EventBus } from '@bimeister/event-bus';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { isEmpty } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, withLatestFrom } from 'rxjs/operators';
 import { QueueEvents } from '../events/queue.events';
+import { BusEventBase } from './abstract/bus-event-base.abstract';
 
 export class EventsQueue {
   private readonly queue: BusEventBase[] = [];
@@ -29,7 +30,7 @@ export class EventsQueue {
   }
 
   public getEvents<T extends BusEventBase>(eventType: Type<T>): Observable<T> {
-    return this.eventBus.catchEvents().pipe(filter((event: BusEventBase): event is T => event instanceof eventType));
+    return this.eventBus.listen().pipe(filter((event: BusEventBase): event is T => event instanceof eventType));
   }
 
   private getSubscriptionForStartEvents(): Subscription {

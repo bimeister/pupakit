@@ -1,12 +1,12 @@
-import { EventBus } from '@bimeister/event-bus';
-import { TableDataDisplayCollection } from './table-data-display-collection.class';
+import { ListRange } from '@angular/cdk/collections';
+import { Type } from '@angular/core';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, mapTo, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { QueueEvents } from '../events/queue.events';
 import { TableEvents } from '../events/table.events';
 import { TableColumn } from './table-column.class';
-import { ListRange } from '@angular/cdk/collections';
-import { Type } from '@angular/core';
+import { TableDataDisplayCollection } from './table-data-display-collection.class';
 
 export class DefaultTableEventHandler<T> {
   protected subscription: Subscription = new Subscription();
@@ -156,7 +156,7 @@ export class DefaultTableEventHandler<T> {
 
   public getEvents<E extends TableEvents.TableEventBase>(eventType: Type<E>): Observable<E> {
     return this.eventBus
-      .catchEvents()
+      .listen()
       .pipe(filter((event: TableEvents.TableEventBase): event is E => event instanceof eventType));
   }
 }
