@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
-import { ComponentsModule } from '../../../../../src/public-api';
+import { ComponentsModule } from '@kit/public-api';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { BreadcrumbsDemoRoutingModule } from './breadcrumbs-demo-routing.module';
 import { BreadcrumbsDemoComponent } from './breadcrumbs-demo.component';

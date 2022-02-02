@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getUuid } from '@bimeister/utilities';
+import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { FlatTreeItem } from '../../../../../../../../src/internal/declarations/classes/flat-tree-item.class';
 
 const leafElementsCount: number = 1000;
 

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
-import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'dropdown-menu-demo/examples';

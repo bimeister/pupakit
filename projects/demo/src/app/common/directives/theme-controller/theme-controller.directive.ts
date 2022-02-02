@@ -1,9 +1,9 @@
 import { Directive, OnDestroy } from '@angular/core';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { AlertsService } from '@kit/internal/shared/services/alerts.service';
+import { ToastsService } from '@kit/internal/shared/services/toasts.service';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Subscription } from 'rxjs';
-import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
-import { AlertsService } from '../../../../../../src/internal/shared/services/alerts.service';
-import { ToastsService } from '../../../../../../src/internal/shared/services/toasts.service';
-import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ThemeSaverService } from '../../services/theme-saver.service';
 
 @Directive({

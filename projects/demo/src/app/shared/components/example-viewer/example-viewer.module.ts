@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RadioGroupModule } from '../../../../../../src/lib/components/radio-group/radio-group.module';
-import { SelectModule } from '../../../../../../src/lib/components/select/select.module';
-import { SwitcherModule } from '../../../../../../src/lib/components/switcher/switcher.module';
+import { RadioGroupModule } from '@kit/lib/components/radio-group/radio-group.module';
+import { SelectModule } from '@kit/lib/components/select/select.module';
+import { SwitcherModule } from '@kit/lib/components/switcher/switcher.module';
 import { CodeModule } from '../code/code.module';
 import { ExampleViewerConfigItemComponent } from './components/example-viewer-config-item/example-viewer-config-item.component';
 import { ExampleViewerContentComponent } from './components/example-viewer-content/example-viewer-content.component';

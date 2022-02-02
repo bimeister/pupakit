@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
-import { ComponentsModule } from '../../../../../src/public-api';
+import { ComponentsModule } from '@kit/lib/components.module';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { AdaptiveDemoRoutingModule } from './adaptive-demo-routing.module';
 import { AdaptiveDemoComponent } from './adaptive-demo.component';

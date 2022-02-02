@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GridStateService } from '../../../../../../../../src/internal/shared/services/grid-state.service';
+import { GridStateService } from '@kit/internal/shared/services/grid-state.service';
 
 @Component({
   selector: 'demo-grid-toggle',

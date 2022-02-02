@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IconModule } from '../../../../../../src/public-api';
+import { IconModule } from '@kit/public-api';
 import { InfoBlockComponent } from './components/info-block/info-block.component';
 
 @NgModule({

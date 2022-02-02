@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { DrawersService } from '@kit/internal/shared/services/drawers.service';
+import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { take } from 'rxjs/operators';
-import { Theme } from '../../../../../src/internal/declarations/enums/theme.enum';
-import { DrawersService } from '../../../../../src/internal/shared/services/drawers.service';
-import { DrawerContainerComponent } from '../../../../../src/lib/components/drawer/components/drawer-container/drawer-container.component';
-import { ThemeWrapperService } from '../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { TestDrawerComponent } from './components/test-drawer/test-drawer.component';

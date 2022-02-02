@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ModalsService } from '../../../../../../../../src/public-api';
+import { ModalsService } from '@kit/public-api';
 import { ModalDemoExample3Component } from '../modal-content/modal-demo-example-3.component';
 
 @Component({

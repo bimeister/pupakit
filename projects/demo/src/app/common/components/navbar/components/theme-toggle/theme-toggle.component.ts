@@ -1,12 +1,12 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
+import { ToastsService } from '@kit/internal/api';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { AlertsService } from '@kit/internal/shared/services/alerts.service';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { ToastsService } from '../../../../../../../../src/internal/api';
-import { Theme } from '../../../../../../../../src/internal/declarations/enums/theme.enum';
-import { AlertsService } from '../../../../../../../../src/internal/shared/services/alerts.service';
-import { ThemeWrapperService } from '../../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 enum IconNames {
   DARK = 'ios-moon',

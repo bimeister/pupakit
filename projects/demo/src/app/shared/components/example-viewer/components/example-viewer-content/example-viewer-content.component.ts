@@ -9,10 +9,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
+import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
 import { BehaviorSubject, Observable, ReplaySubject, Subscriber } from 'rxjs';
 import { distinctUntilChanged, map, switchMap } from 'rxjs/operators';
-import { ComponentChange } from '../../../../../../../../src/internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '../../../../../../../../src/internal/declarations/interfaces/component-changes.interface';
 
 const CONTENT_TOP_STYLE_PX: number = 80;
 

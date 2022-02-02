@@ -1,8 +1,8 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ColorGroup } from '../../../../../src/internal/declarations/classes/color-group.class';
-import { ColorsService } from '../../../../../src/internal/shared/services/colors.service';
-import { ToastsService } from '../../../../../src/internal/shared/services/toasts.service';
+import { ColorGroup } from '@kit/internal/declarations/classes/color-group.class';
+import { ColorsService } from '@kit/internal/shared/services/colors.service';
+import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 
 const BASE_REQUEST_PATH: string = 'colors-demo/examples';
 

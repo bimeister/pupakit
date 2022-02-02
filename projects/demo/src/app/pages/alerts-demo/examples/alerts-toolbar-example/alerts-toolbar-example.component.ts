@@ -1,8 +1,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { AlertsService } from '@kit/internal/shared/services/alerts.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AlertsService } from '../../../../../../../src/internal/shared/services/alerts.service';
 
 @Component({
   selector: 'demo-alerts-toolbar-example',

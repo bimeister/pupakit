@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { ChipColors } from '../../../../../src/public-api';
+import { ChipColors } from '@kit/public-api';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 @Component({

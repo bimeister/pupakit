@@ -1,16 +1,16 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getUuid, shareReplayWithRefCount } from '@bimeister/utilities';
-import { ColDef, Column, ColumnApi, FirstDataRenderedEvent } from 'ag-grid-community';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { map, take, withLatestFrom } from 'rxjs/operators';
 import {
   DatagridDomLayouts,
   DatagridManipulator,
   DatagridManipulatorConfiguration,
   DatagridTemplateRendererComponent,
   DatagridThemes,
-} from '../../../../../src/public-api';
+} from '@kit/public-api';
+import { ColDef, Column, ColumnApi, FirstDataRenderedEvent } from 'ag-grid-community';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 
 interface ColumnSetting {
   colId: string;

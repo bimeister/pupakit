@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
-import { ComponentsModule } from '../../../../../src/public-api';
+import { ComponentsModule } from '@kit/public-api';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { CodeDemoRoutingModule } from './code-demo-routing.module';
 import { CodeDemoComponent } from './code-demo.component';

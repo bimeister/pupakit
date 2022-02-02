@@ -1,11 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { subscribeOutsideAngular } from '@kit/internal/functions/rxjs-operators/subscribe-outside-angular.operator';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
-import { subscribeOutsideAngular } from '../../../../../../../src/internal/functions/rxjs-operators/subscribe-outside-angular.operator';
-import { ThemeWrapperService } from '../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 @Component({
   selector: 'demo-main-page',

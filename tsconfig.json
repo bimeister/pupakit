@@ -28,6 +28,9 @@
         "name": "@angular/language-service"
       }
     ],
+    "paths": {
+      "@kit/*": ["./src/*"]
+    },
     "types": ["jest", "node", "hammerjs"],
     "resolveJsonModule": true
   },

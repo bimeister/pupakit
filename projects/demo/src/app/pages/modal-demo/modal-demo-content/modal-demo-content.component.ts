@@ -7,8 +7,8 @@ import {
   Self,
   ViewEncapsulation,
 } from '@angular/core';
+import { ModalRef, Position, Theme, ThemeWrapperService } from '@kit/public-api';
 import { Observable } from 'rxjs';
-import { ModalRef, Position, Theme, ThemeWrapperService } from '../../../../../../src/public-api';
 import { MODAL_DATA_TOKEN } from '../../../../declarations/tokens/modal-data.token';
 import { ModalDemoLocalService } from '../services/modal-demo-local.service';
 

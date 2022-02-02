@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./out-tsc/app"
-  },
-  "include": ["./projects/demo/src/main.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
-}

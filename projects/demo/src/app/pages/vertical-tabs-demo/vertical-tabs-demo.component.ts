@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
+import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 import { BehaviorSubject } from 'rxjs';
-import { Uuid } from '../../../../../src/internal/declarations/types/uuid.type';
 
 export interface MockCheckModel {
   isEnabled: boolean;

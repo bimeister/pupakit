@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Theme } from '../../../../../../../src/internal/declarations/enums/theme.enum';
-import { AlertsService } from '../../../../../../../src/internal/shared/services/alerts.service';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { AlertsService } from '@kit/internal/shared/services/alerts.service';
 
 @Component({
   selector: 'demo-change-theme-example',

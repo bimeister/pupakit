@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { isEmpty, isNil, shareReplayWithRefCount, sortByProperty, stringFilterPredicate } from '@bimeister/utilities';
+import { DrawerRef } from '@kit/internal/declarations/classes/drawer-ref.class';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { DrawerRef } from '../../../../../../src/internal/declarations/classes/drawer-ref.class';
-import { Theme } from '../../../../../../src/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 interface LinkItem {
   title: string;
