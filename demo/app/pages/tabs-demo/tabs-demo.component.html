@@ -1,31 +1,40 @@
 <h1>Tabs</h1>
 
-<h2>Basic usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-tabs-example-1 *pupaCodeContainerPreviewTemplate></demo-tabs-example-1>
-</pupa-code-container>
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Basic usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-tabs-example-1 *pupaCodeContainerPreviewTemplate></demo-tabs-example-1>
+    </pupa-code-container>
 
-<h2>Non destroyable tab content</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-tabs-example-2 *pupaCodeContainerPreviewTemplate></demo-tabs-example-2>
-</pupa-code-container>
+    <h2>Non destroyable tab content</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-tabs-example-2 *pupaCodeContainerPreviewTemplate></demo-tabs-example-2>
+    </pupa-code-container>
 
-<h2>Control by router</h2>
-<pupa-code-container [content]="example3Content">
-  <demo-tabs-example-3 *pupaCodeContainerPreviewTemplate></demo-tabs-example-3>
-</pupa-code-container>
+    <h2>Control by router</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-tabs-example-3 *pupaCodeContainerPreviewTemplate></demo-tabs-example-3>
+    </pupa-code-container>
 
-<h2>Without default tab content</h2>
-<pupa-code-container [content]="example4Content">
-  <demo-tabs-example-4 *pupaCodeContainerPreviewTemplate></demo-tabs-example-4>
-</pupa-code-container>
+    <h2>Without default tab content</h2>
+    <pupa-code-container [content]="example4Content">
+      <demo-tabs-example-4 *pupaCodeContainerPreviewTemplate></demo-tabs-example-4>
+    </pupa-code-container>
 
-<h2>Disabled tab</h2>
-<pupa-code-container [content]="example5Content">
-  <demo-tabs-example-5 *pupaCodeContainerPreviewTemplate></demo-tabs-example-5>
-</pupa-code-container>
+    <h2>Disabled tab</h2>
+    <pupa-code-container [content]="example5Content">
+      <demo-tabs-example-5 *pupaCodeContainerPreviewTemplate></demo-tabs-example-5>
+    </pupa-code-container>
 
-<h2>With separator</h2>
-<pupa-code-container [content]="example6Content">
-  <demo-tabs-example-6 *pupaCodeContainerPreviewTemplate></demo-tabs-example-6>
-</pupa-code-container>
+    <h2>With separator</h2>
+    <pupa-code-container [content]="example6Content">
+      <demo-tabs-example-6 *pupaCodeContainerPreviewTemplate></demo-tabs-example-6>
+    </pupa-code-container>
+
+    <h2>Scroll logic</h2>
+    <pupa-code-container [content]="example7Content">
+      <demo-tabs-example-7 *pupaCodeContainerPreviewTemplate></demo-tabs-example-7>
+    </pupa-code-container>
+  </div>
+</demo-page>

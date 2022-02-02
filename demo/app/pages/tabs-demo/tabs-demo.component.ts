@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 const BASE_REQUEST_PATH: string = 'tabs-demo/examples';
 
@@ -7,6 +7,7 @@ const BASE_REQUEST_PATH: string = 'tabs-demo/examples';
   templateUrl: './tabs-demo.component.html',
   styleUrls: ['./tabs-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.Emulated,
 })
 export class TabsDemoComponent {
   public readonly example1Content: Record<string, string> = {
@@ -17,6 +18,7 @@ export class TabsDemoComponent {
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
   };
 
   public readonly example3Content: Record<string, string> = {
@@ -38,5 +40,11 @@ export class TabsDemoComponent {
   public readonly example6Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
+  };
+
+  public readonly example7Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-7/example-7.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-7/example-7.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-7/example-7.component.ts`,
   };
 }

@@ -1,3 +1,4 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -16,19 +17,28 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject, combineLatest, forkJoin, fromEvent, of, Subscription } from 'rxjs';
-import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 import { isNil } from '@bimeister/utilities';
-import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
-import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
+import { BehaviorSubject, combineLatest, EMPTY, forkJoin, fromEvent, merge, of, Subscription } from 'rxjs';
+import {
+  distinctUntilChanged,
+  filter,
+  map,
+  pairwise,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap,
+  throttleTime,
+} from 'rxjs/operators';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
-import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
-import { filter, switchMap, take, tap, throttleTime } from 'rxjs/operators';
-import { DOCUMENT } from '@angular/common';
-import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
-import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
-
+import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
+import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
+import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
+import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
+import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
+import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 
 const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_visible';
@@ -50,12 +60,18 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   @Input() public size: ScrollbarSize = 'small';
   @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
+  @Input() public horizontalScrollWheelMode: boolean = false;
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
 
   @Output() public readonly verticalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public readonly horizontalScrollVisibilityChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output() public readonly scrolledToHorizontalStart: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public readonly scrolledToHorizontalEnd: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public readonly scrolledToVerticalStart: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() public readonly scrolledToVerticalEnd: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @ViewChild('content', { static: true }) public contentRef: ElementRef<HTMLElement>;
   @ContentChild(ScrollableContentDirective, { static: true, read: ElementRef })
@@ -70,8 +86,8 @@ export class ScrollableComponent implements OnInit, OnDestroy {
   private readonly verticalScrollbar: Scrollbar = new Scrollbar();
   private readonly horizontalScrollbar: Scrollbar = new Scrollbar();
 
-  public readonly hasVerticalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly hasHorizontalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly hasVerticalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly hasHorizontalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isVerticalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -97,6 +113,8 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.subscription.add(this.processVerticalScrollbarPan());
     this.subscription.add(this.processHorizontalScrollbarPan());
     this.subscription.add(this.updateSizesOnAnimationFrame());
+    this.subscription.add(this.processScrollStartEndChanges());
+    this.subscription.add(this.handleHorizontalScrollWheelMode());
   }
 
   public ngOnDestroy(): void {
@@ -125,8 +143,10 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.setContentScrollTopByDelta(deltaScrollTop);
   }
 
-  public setScrollLeftByDelta(deltaScrollLeft: number): void {
-    this.setContentScrollLeftByDelta(deltaScrollLeft);
+  public setScrollLeftByDelta(deltaScrollLeft: number, isSmoothScroll: boolean = false): void {
+    isSmoothScroll
+      ? this.setSmoothContentScrollLeftByDelta(deltaScrollLeft)
+      : this.setContentScrollLeftByDelta(deltaScrollLeft);
   }
 
   private processContentScrollEvent(): Subscription {
@@ -296,21 +316,24 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     combineLatest([this.hasVerticalScrollbar$, this.hasHorizontalScrollbar$])
       .pipe(take(1))
       .subscribe(([hasVerticalScrollbar, hasHorizontalScrollbar]: [boolean, boolean]) => {
+        const hasVerticalScrollbarCurrent: boolean = contentElement.scrollHeight > contentElement.clientHeight;
+        const hasHorizontalScrollbarCurrent: boolean = contentElement.scrollWidth > contentElement.clientWidth;
+        this.hasVerticalScrollbar$.next(hasVerticalScrollbarCurrent);
+        this.hasHorizontalScrollbar$.next(hasHorizontalScrollbarCurrent);
+
         const isVerticalScrollbarVisible: boolean =
-          !this.invisibleScrollbars.includes('vertical') && contentElement.scrollHeight > contentElement.clientHeight;
+          !this.invisibleScrollbars.includes('vertical') && hasVerticalScrollbarCurrent;
 
         const isHorizontalScrollbarVisible: boolean =
-          !this.invisibleScrollbars.includes('horizontal') && contentElement.scrollWidth > contentElement.clientWidth;
+          !this.invisibleScrollbars.includes('horizontal') && hasHorizontalScrollbarCurrent;
 
         if (isVerticalScrollbarVisible !== hasVerticalScrollbar) {
           this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible);
-          this.hasVerticalScrollbar$.next(isVerticalScrollbarVisible);
           this.setScrollbarsClassesByVerticalScrollbarVisibility(isVerticalScrollbarVisible);
         }
 
         if (isHorizontalScrollbarVisible !== hasHorizontalScrollbar) {
           this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible);
-          this.hasHorizontalScrollbar$.next(isHorizontalScrollbarVisible);
           this.setScrollbarsClassesByHorizontalScrollbarVisibility(isHorizontalScrollbarVisible);
         }
 
@@ -348,6 +371,11 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.renderer.setProperty(contentElement, 'scrollLeft', contentElement.scrollLeft + scrollLeftDelta);
   }
 
+  private setSmoothContentScrollLeftByDelta(scrollLeftDelta: number): void {
+    const contentElement: HTMLElement = this.contentElement;
+    contentElement.scrollTo({ left: contentElement.scrollLeft + scrollLeftDelta, behavior: 'smooth' });
+  }
+
   private setBodyGrabbingCursor(): void {
     this.renderer.setStyle(this.document.body, 'cursor', 'grabbing', RendererStyleFlags2.Important);
   }
@@ -382,5 +410,76 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
     this.renderer.removeClass(verticalScrollbar, VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS);
     this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
+  }
+
+  private handleHorizontalScrollWheelMode(): Subscription {
+    if (!this.horizontalScrollWheelMode) {
+      return EMPTY.subscribe();
+    }
+    const contentElement: HTMLElement = this.contentElement;
+    return fromEvent(contentElement, 'mouseenter')
+      .pipe(
+        subscribeOutsideAngular(this.ngZone),
+        switchMap(() =>
+          fromEvent(contentElement, 'wheel').pipe(
+            tap((event: WheelEvent) => {
+              event.preventDefault();
+              contentElement.scrollLeft += event.deltaY;
+            }),
+            takeUntil(fromEvent(contentElement, 'mouseleave').pipe(take(1)))
+          )
+        )
+      )
+      .subscribe();
+  }
+
+  private processScrollStartEndChanges(): Subscription {
+    const contentElement: HTMLElement = this.contentElement;
+
+    return merge(
+      fromEvent(contentElement, 'scroll'),
+      this.hasVerticalScrollbar$.pipe(distinctUntilChanged()),
+      this.hasHorizontalScrollbar$.pipe(distinctUntilChanged())
+    )
+      .pipe(
+        subscribeOutsideAngular(this.ngZone),
+        map(() => {
+          const scrolledToHorizontalStart: boolean = contentElement.scrollLeft > 0;
+          const scrolledToHorizontalEnd: boolean =
+            contentElement.offsetWidth + contentElement.scrollLeft < contentElement.scrollWidth;
+          const scrolledToVerticalStart: boolean = contentElement.scrollTop > 0;
+          const scrolledToVerticalEnd: boolean =
+            contentElement.offsetHeight + contentElement.scrollTop < contentElement.scrollHeight;
+
+          return [scrolledToHorizontalStart, scrolledToHorizontalEnd, scrolledToVerticalStart, scrolledToVerticalEnd];
+        }),
+        startWith([false, false, false, false]),
+        pairwise(),
+        tap(
+          ([
+            [
+              scrolledToHorizontalStartPrev,
+              scrolledToHorizontalEndPrev,
+              scrolledToVerticalStartPrev,
+              scrolledToVerticalEndPrev,
+            ],
+            [scrolledToHorizontalStart, scrolledToHorizontalEnd, scrolledToVerticalStart, scrolledToVerticalEnd],
+          ]: [boolean[], boolean[]]) => {
+            if (scrolledToHorizontalStartPrev !== scrolledToHorizontalStart) {
+              this.scrolledToHorizontalStart.emit(scrolledToHorizontalStart);
+            }
+            if (scrolledToHorizontalEndPrev !== scrolledToHorizontalEnd) {
+              this.scrolledToHorizontalEnd.emit(scrolledToHorizontalEnd);
+            }
+            if (scrolledToVerticalStartPrev !== scrolledToVerticalStart) {
+              this.scrolledToVerticalStart.emit(scrolledToVerticalStart);
+            }
+            if (scrolledToVerticalEndPrev !== scrolledToVerticalEnd) {
+              this.scrolledToVerticalEnd.emit(scrolledToVerticalEnd);
+            }
+          }
+        )
+      )
+      .subscribe();
   }
 }

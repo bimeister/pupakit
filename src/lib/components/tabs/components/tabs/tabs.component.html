@@ -1,8 +1,14 @@
+<div class="gradient gradient_left" [class.gradient_visible]="isLeftGradient$ | async"></div>
+<div class="gradient gradient_right" [class.gradient_visible]="isRightGradient$ | async"></div>
+
 <pupa-scrollable
   #scrollable
   (scrollLeftChanged)="processScrollLeft($event)"
   class="tabs"
   [invisibleScrollbars]="['horizontal', 'vertical']"
+  [horizontalScrollWheelMode]="true"
+  (scrolledToHorizontalStart)="setLeftGradient($event)"
+  (scrolledToHorizontalEnd)="setRightGradient($event)"
 >
   <div class="tabs__container" #tabsContainer>
     <div class="tabs__items">
