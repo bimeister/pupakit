@@ -17,7 +17,7 @@
   </div>
 </pupa-scrollable>
 <div class="tabs__rail-container">
-  <div class="tabs__rail tabs-rail" [style.transform]="railOffsetLeftTransform$ | async">
+  <div class="tabs__rail tabs-rail" #rail>
     <div
       [style.width.px]="railHighlighterWidthPx$ | async"
       [style.transform]="railHighlighterOffsetLeftTransform$ | async"
