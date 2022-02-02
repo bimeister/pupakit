@@ -1,0 +1,27 @@
+@use 'sass:selector';
+@use 'mixins' as *;
+@use 'projects/demo/src/styles/demo-variables' as *;
+@use 'projects/demo/src/styles/demo-mixins' as *;
+
+.viewer-content {
+  @include bordered-box();
+
+  top: calc(#{$navbar-height} + 4rem);
+  z-index: 100000;
+
+  padding: 4rem;
+  margin-bottom: 4rem;
+  transition: box-shadow 100ms ease-in;
+
+  &_sticky {
+    position: sticky;
+  }
+
+  &_sticky#{&}_unstuck {
+    box-shadow: 0 0rem 3rem 2rem rgba(0, 0, 0, 0.08);
+
+    @include host-selector-dark-theme() {
+      box-shadow: 0 0rem 3rem 2rem rgba(0, 0, 0, 0.2);
+    }
+  }
+}
