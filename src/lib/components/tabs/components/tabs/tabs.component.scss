@@ -28,6 +28,8 @@
 }
 
 .tabs-rail {
+  transform: translateX(0);
+
   &__highlighter {
     width: 0;
     height: 2px;
