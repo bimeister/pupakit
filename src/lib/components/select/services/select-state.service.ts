@@ -1,6 +1,6 @@
 import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { ElementRef, Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
+import { ElementRef, EventEmitter, Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
@@ -90,6 +90,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     }),
     map((width: number | undefined) => (isNil(width) ? 0 : width))
   );
+
+  public readonly resetOutput: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
@@ -268,6 +270,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       .pipe(take(1), filterNotNil(), withLatestFrom(this.isMultiSelectionEnabled$))
       .subscribe(([control, isMultiSelectionEnable]: [NgControl, boolean]) => {
         control.reset(isMultiSelectionEnable ? [] : null);
+
+        this.resetOutput.next();
       });
   }
 

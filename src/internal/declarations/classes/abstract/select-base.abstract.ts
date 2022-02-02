@@ -25,8 +25,9 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
 
   public readonly isTriggerTouched$: Observable<boolean> = this.selectStateService.isTriggerTouched$;
 
-  @Output() public focus: EventEmitter<void> = new EventEmitter<void>();
-  @Output() public blur: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public readonly focus: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public readonly blur: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public readonly reset: EventEmitter<void> = this.selectStateService.resetOutput;
 
   private readonly subscription: Subscription = new Subscription();
 
