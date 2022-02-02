@@ -85,9 +85,11 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   }
 
   public processClick(id: string): void {
-    if (!isNil(id)) {
-      this.nodeClicked.emit(id);
+    if (isNil(id)) {
+      return;
     }
+
+    this.nodeClicked.emit(id);
   }
 
   public expandParentsByIds(parentIds: string[]): void {
