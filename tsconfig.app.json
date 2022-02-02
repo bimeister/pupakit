@@ -3,6 +3,6 @@
   "compilerOptions": {
     "outDir": "./out-tsc/app"
   },
-  "include": ["demo/**/*.ts"],
+  "include": ["./projects/demo/src/main.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
 }

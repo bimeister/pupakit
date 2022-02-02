@@ -57,8 +57,8 @@
           },
           "options": {
             "assets": [
-              "./demo/assets",
-              "./demo/favicon.ico",
+              "./projects/demo/src/assets",
+              "./projects/demo/src/assets/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "./node_modules/ionicons/dist/ionicons",
@@ -66,7 +66,7 @@
               },
               {
                 "glob": "**/examples/**/*",
-                "input": "./demo/app/pages",
+                "input": "./projects/demo/src/app/pages",
                 "output": "/examples"
               },
               {
@@ -75,17 +75,17 @@
                 "output": "/assets"
               }
             ],
-            "index": "demo/index.html",
-            "main": "demo/main.ts",
+            "index": "./projects/demo/src/index.html",
+            "main": "./projects/demo/src/main.ts",
             "outputPath": "./dist/demo",
-            "polyfills": "demo/polyfills.ts",
+            "polyfills": "./projects/demo/src/polyfills.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles", "demo/styles", "node_modules"]
+              "includePaths": ["src/styles", "./projects/demo/src/styles", "node_modules"]
             },
             "styles": [
               "src/styles/styles.scss",
               "node_modules/highlight.js/styles/github.css",
-              "demo/styles/styles.scss"
+              "./projects/demo/src/styles/styles.scss"
             ],
             "tsConfig": "./tsconfig.app.json",
             "aot": false,
@@ -118,7 +118,7 @@
             }
           },
           "options": {
-            "lintFilePatterns": ["./demo/**/*.ts", "./demo/**/*.html"]
+            "lintFilePatterns": ["./projects/demo/**/*.ts", "./projects/demo/**/*.html"]
           }
         },
         "serve": {
