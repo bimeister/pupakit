@@ -59,7 +59,8 @@ export abstract class TabsServiceBase<T> {
 
   public setActiveTab(tabName: T): void {
     this.activeTabNameState$.next(tabName);
-    this.correctScrollLeftByTargetTab(tabName);
+    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
+    targetElement?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
   }
 
   public registerTabsHtmlElement(htmlElement: HTMLElement): void {
@@ -76,39 +77,5 @@ export abstract class TabsServiceBase<T> {
 
   public registerTabHtmlElement(tabName: T, htmlElement: HTMLElement): void {
     this.tabNameToHtmlElementMap.set(JSON.stringify(tabName), htmlElement);
-  }
-
-  private correctScrollLeftByTargetTab(tabName: T): void {
-    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
-
-    combineLatest([this.hostElement$.pipe(filterNotNil()), this.scrollable$.pipe(filterNotNil())])
-      .pipe(
-        take(1),
-        map(([hostElement, scrollable]: [HTMLElement, ScrollableComponent]) => {
-          const hostClientRect: ClientRect = hostElement.getBoundingClientRect();
-          const targetClientRect: ClientRect = targetElement.getBoundingClientRect();
-
-          const leftOffsetPx: number = targetClientRect.left - hostClientRect.left;
-          const rightOffsetPx: number = hostClientRect.right - targetClientRect.right;
-
-          return [leftOffsetPx, rightOffsetPx, scrollable];
-        })
-      )
-      .subscribe(([leftOffsetPx, rightOffsetPx, scrollable]: [number, number, ScrollableComponent]) => {
-        if (leftOffsetPx > 0 && rightOffsetPx > 0) {
-          return;
-        }
-
-        const isNeedScrollToLeft: boolean = leftOffsetPx < rightOffsetPx;
-        const isNeedScrollToRight: boolean = rightOffsetPx < leftOffsetPx;
-
-        if (isNeedScrollToLeft) {
-          scrollable.setScrollLeftByDelta(Math.ceil(leftOffsetPx));
-        }
-
-        if (isNeedScrollToRight) {
-          scrollable.setScrollLeftByDelta(Math.ceil(-rightOffsetPx));
-        }
-      });
   }
 }

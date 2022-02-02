@@ -1,0 +1,11 @@
+<pupa-tabs-container>
+  <pupa-tabs>
+    <pupa-tabs-item *ngFor="let tab of tabs" [name]="tab.value"> {{ tab.name }} </pupa-tabs-item>
+  </pupa-tabs>
+
+  <pupa-tabs-content>
+    <ng-container *ngFor="let tab of tabs">
+      <div class="tab" *pupaTabsItemContentTemplate="tab.value">{{ tab.content }}</div>
+    </ng-container>
+  </pupa-tabs-content>
+</pupa-tabs-container>

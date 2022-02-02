@@ -8,6 +8,7 @@ import { TabsExample3Component } from './examples/example-3/example-3.component'
 import { TabsExample4Component } from './examples/example-4/example-4.component';
 import { TabsExample5Component } from './examples/example-5/example-5.component';
 import { TabsExample6Component } from './examples/example-6/example-6.component';
+import { TabsExample7Component } from './examples/example-7/example-7.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { TabsExample6Component } from './examples/example-6/example-6.component'
     TabsExample4Component,
     TabsExample5Component,
     TabsExample6Component,
+    TabsExample7Component,
   ],
   imports: [DemoSharedModule, TabsDemoRoutingModule],
 })

@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'demo-tabs-example-2',
@@ -7,4 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TabsExample2Component {}
+export class TabsExample2Component {
+  public readonly control1: FormControl = new FormControl('1');
+  public readonly control2: FormControl = new FormControl('2');
+}

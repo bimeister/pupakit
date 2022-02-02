@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -36,8 +37,12 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
     map((railOffsetLeft: number) => `translateX(${railOffsetLeft}px)`)
   );
 
+  public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly changeDetectorRef: ChangeDetectorRef,
     stateService: TabsStateService<T>,
     @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
@@ -52,5 +57,19 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
 
   public processScrollLeft(scrollLeft: number): void {
     this.railOffsetLeftPx$.next(-scrollLeft);
+  }
+
+  public setLeftGradient(isLeftGradient: boolean): void {
+    this.isLeftGradient$.next(isLeftGradient);
+    this.detectChanges();
+  }
+
+  public setRightGradient(isRightGradient: boolean): void {
+    this.isRightGradient$.next(isRightGradient);
+    this.detectChanges();
+  }
+
+  private detectChanges(): void {
+    this.changeDetectorRef.detectChanges();
   }
 }
