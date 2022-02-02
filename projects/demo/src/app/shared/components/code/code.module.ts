@@ -1,10 +1,10 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
+import { iosCopyIcon } from '@kit/internal/constants/icons/ios-copy-icon.const';
+import { SharedModule } from '@kit/internal/shared/shared.module';
+import { ButtonModule } from '@kit/lib/components/button/button.module';
+import { IconModule } from '@kit/lib/components/icon/icon.module';
+import { TabsModule } from '@kit/lib/components/tabs/tabs.module';
 import { HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
-import { iosCopyIcon } from '../../../../../../src/internal/constants/icons/ios-copy-icon.const';
-import { SharedModule } from '../../../../../../src/internal/shared/shared.module';
-import { ButtonModule } from '../../../../../../src/lib/components/button/button.module';
-import { IconModule } from '../../../../../../src/lib/components/icon/icon.module';
-import { TabsModule } from '../../../../../../src/lib/components/tabs/tabs.module';
 import { CodeContainerComponent } from './components/code-container/code-container.component';
 import { CodeFetchComponent } from './components/code-fetch/code-fetch.component';
 import { CodeInlineComponent } from './components/code-inline/code-inline.component';

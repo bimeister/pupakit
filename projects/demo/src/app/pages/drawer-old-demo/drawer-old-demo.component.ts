@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { DrawersService } from '../../../../../src/internal/shared/services/drawers.service';
+import { DrawersService } from '@kit/internal/shared/services/drawers.service';
 import { DRAWER_DATA_TOKEN } from '../../../declarations/tokens/drawer-data.token';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { TestDrawerOldComponent } from './components/test-drawer-old/test-drawer-old.component';

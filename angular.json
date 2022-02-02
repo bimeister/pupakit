@@ -57,8 +57,6 @@
           },
           "options": {
             "assets": [
-              "./projects/demo/src/assets",
-              "./projects/demo/src/assets/favicon.ico",
               {
                 "glob": "**/*",
                 "input": "./node_modules/ionicons/dist/ionicons",
@@ -66,12 +64,22 @@
               },
               {
                 "glob": "**/examples/**/*",
-                "input": "./projects/demo/src/app/pages",
+                "input": "./projects/demo/app/pages",
                 "output": "/examples"
               },
               {
                 "glob": "**/*",
-                "input": "./src/assets",
+                "input": "./src/assets/fonts",
+                "output": "/assets/fonts"
+              },
+              {
+                "glob": "**/*",
+                "input": "./src/assets/configs",
+                "output": "/assets/configs"
+              },
+              {
+                "glob": "**/*",
+                "input": "./projects/demo/src/assets",
                 "output": "/assets"
               }
             ],
@@ -87,7 +95,7 @@
               "node_modules/highlight.js/styles/github.css",
               "./projects/demo/src/styles/styles.scss"
             ],
-            "tsConfig": "./tsconfig.app.json",
+            "tsConfig": "./projects/demo/tsconfig.demo.json",
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

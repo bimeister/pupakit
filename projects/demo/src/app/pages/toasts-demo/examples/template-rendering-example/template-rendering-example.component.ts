@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { filterTruthy } from '@bimeister/utilities';
-import { OpenedToast } from '../../../../../../../src/internal/declarations/classes/opened-toast.class';
-import { ToastsService } from '../../../../../../../src/internal/shared/services/toasts.service';
-import { ToastTemplateComponent } from '../../../../../../../src/lib/components/toast/components/toast-template/toast-template.component';
+import { OpenedToast } from '@kit/internal/declarations/classes/opened-toast.class';
+import { ToastsService } from '@kit/internal/shared/services/toasts.service';
+import { ToastTemplateComponent } from '@kit/lib/components/toast/components/toast-template/toast-template.component';
 
 interface ToastTemplateData {
   $implicit: string;

@@ -10,9 +10,9 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
+import { PagedVirtualScrollArguments, PagedVirtualScrollViewportComponent } from '@kit/public-api';
 import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { debounceTime, delay, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { PagedVirtualScrollArguments, PagedVirtualScrollViewportComponent } from '../../../../../src/public-api';
 
 type DataType = number;
 

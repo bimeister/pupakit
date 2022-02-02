@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
-import { Breadcrumb } from '../../../../../../../src/internal/declarations/interfaces/breadcrumb.interface';
+import { Breadcrumb } from '@kit/internal/declarations/interfaces/breadcrumb.interface';
 
 function repeatTextByNumber(text: string, repeatNumber: number = 1): string {
   const serializedText: string = `${text} `;

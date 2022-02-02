@@ -35,10 +35,6 @@
     "autofix": "yarn run prettify & yarn run check:spelling",
     "create-untracked-files": "gulp create:untracked-files"
   },
-  "peerDependencies": {
-    "@bimeister/event-bus": "^0.1.0",
-    "@bimeister/utilities": "^0.1.0"
-  },
   "dependencies": {
     "@angular/cdk": "~12.2.6",
     "@types/hammerjs": "^2.0.40",

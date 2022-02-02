@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulat
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { OpenedDrawer } from '@kit/internal/declarations/interfaces/opened-drawer.interface';
+import { DrawersService } from '@kit/internal/shared/services/drawers.service';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import { Theme } from '../../../../../../../../src/internal/declarations/enums/theme.enum';
-import { OpenedDrawer } from '../../../../../../../../src/internal/declarations/interfaces/opened-drawer.interface';
-import { DrawersService } from '../../../../../../../../src/internal/shared/services/drawers.service';
-import { ThemeWrapperService } from '../../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
 
 @Component({

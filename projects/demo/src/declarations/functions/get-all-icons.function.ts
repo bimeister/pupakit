@@ -1,5 +1,5 @@
-import * as iconsList from '../../../../src/internal/constants/icons/api';
-import { IconDefinition } from '../../../../src/internal/declarations/interfaces/icon-definition.interface';
+import * as iconsList from '@kit/internal/constants/icons/api';
+import { IconDefinition } from '@kit/internal/declarations/interfaces/icon-definition.interface';
 
 export function getAllIcons(): IconDefinition[] {
   return Object.values(iconsList);

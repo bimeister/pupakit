@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
-import { FlatTreeItem, TreeController, TreeEvents } from '../../../../../src/public-api';
+import { FlatTreeItem, TreeController, TreeEvents } from '@kit/public-api';
 
 const WOLF: FlatTreeItem = new FlatTreeItem(true, 'Wolves', null, getUuid(), { parentId: null });
 const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: WOLF.id });

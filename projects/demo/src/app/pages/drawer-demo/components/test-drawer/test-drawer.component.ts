@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { Theme, ThemeWrapperService } from '@kit/public-api';
 import { Observable } from 'rxjs';
-import { Theme, ThemeWrapperService } from '../../../../../../../src/public-api';
 
 @Component({
   selector: 'demo-test-drawer',

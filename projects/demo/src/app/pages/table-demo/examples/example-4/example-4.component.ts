@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
-import { TableController } from '../../../../../../../src/internal/declarations/classes/table-controller.class';
-import { TableColumnPin } from '../../../../../../../src/internal/declarations/enums/table-column-pin.enum';
-import { TableColumnDefinition } from '../../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
-import { Uuid } from '../../../../../../../src/internal/declarations/types/uuid.type';
+import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
+import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
+import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
+import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 
 interface SomeData {
   id: Uuid;

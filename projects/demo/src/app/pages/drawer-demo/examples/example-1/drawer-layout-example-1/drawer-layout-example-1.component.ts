@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
-import { Theme } from '../../../../../../../../src/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '../../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 @Component({
   selector: 'demo-drawer-layout-example-1',

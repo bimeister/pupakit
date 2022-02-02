@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getUuid, isEmpty } from '@bimeister/utilities';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';
-import { Theme } from '../../../../../../../../src/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '../../../../../../../../src/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 interface User {
   id: string;

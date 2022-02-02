@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
-import { FlatTreeItem, TreeComponent } from '../../../../../src/public-api';
+import { FlatTreeItem, TreeComponent } from '@kit/public-api';
 
 @Component({
   selector: 'demo-tree',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { OpenedAlert } from '../../../../../../../src/internal/declarations/classes/opened-alert.class';
-import { AlertsService } from '../../../../../../../src/internal/shared/services/alerts.service';
+import { OpenedAlert } from '@kit/internal/declarations/classes/opened-alert.class';
+import { AlertsService } from '@kit/internal/shared/services/alerts.service';
 
 @Component({
   selector: 'demo-basic-additional-settings-example',

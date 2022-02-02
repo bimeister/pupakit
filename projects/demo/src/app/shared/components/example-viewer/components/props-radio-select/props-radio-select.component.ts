@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isNil } from '@bimeister/utilities';
-import { ComponentChanges } from '../../../../../../../../src/internal/declarations/interfaces/component-changes.interface';
-import { RadioGroupDirection } from '../../../../../../../../src/internal/declarations/types/radio-group-direction.type';
+import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
+import { RadioGroupDirection } from '@kit/internal/declarations/types/radio-group-direction.type';
 import { PropsBase } from '../../declarations/classes/props-base.abstract';
 import { PropsOption } from '../../declarations/interfaces/props.option';
 

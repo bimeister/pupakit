@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Tab } from '@kit/internal/declarations/interfaces/tab.interface';
 import { BehaviorSubject } from 'rxjs';
-import { Tab } from '../../../../../src/internal/declarations/interfaces/tab.interface';
 
 @Component({
   selector: 'demo-chip-tabs-demo',
