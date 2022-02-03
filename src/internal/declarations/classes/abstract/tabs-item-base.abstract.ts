@@ -1,8 +1,8 @@
 import { Directive, OnChanges, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { isNil, Nullable } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()

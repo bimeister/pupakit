@@ -476,7 +476,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     this.renderer.removeClass(verticalScrollbar, VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS);
     this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
   }
-
   private processScrollStartEndChanges(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
 
