@@ -8,7 +8,7 @@
     "target": "ESNext",
     "resolveJsonModule": true
   },
-  "include": ["src"],
+  "include": ["projects/kit/src"],
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,

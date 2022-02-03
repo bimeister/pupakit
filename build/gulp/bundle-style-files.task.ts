@@ -8,7 +8,7 @@ export function bundleStyleFilesTask(): TaskFunction {
 }
 
 function processScssFiles(): TaskFunction {
-  const command: string = 'sass --load-path=node_modules ./src/styles/styles.scss ./dist/lib/styles.css';
+  const command: string = 'sass --load-path=node_modules ./projects/kit/src/styles/styles.scss ./dist/lib/styles.css';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
@@ -20,7 +20,7 @@ function processScssFiles(): TaskFunction {
 
 function copyStylesToDistFolder(): TaskFunction {
   return (onDone: VoidFunction): void => {
-    copyFolderWithFiles('./src/styles', './dist/lib/styles', {
+    copyFolderWithFiles('./projects/kit/src/styles', './dist/lib/styles', {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,

@@ -4,11 +4,11 @@ import { readFile, writeFile } from 'fs';
 import { TaskFunction } from 'gulp';
 import { Observable, of, Subscriber, TeardownLogic } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
-import { Color } from './../../src/internal/declarations/classes/color.class';
-import { ColorsConfig } from './../../src/internal/declarations/interfaces/colors-config.interface';
+import { Color } from '../../projects/kit/src/internal/declarations/classes/color.class';
+import { ColorsConfig } from '../../projects/kit/src/internal/declarations/interfaces/colors-config.interface';
 
-const COLORS_CONFIG_PATH: string = './src/assets/configs/colors-config.json';
-const COLORS_MAP_PATH: string = './src/styles/maps/colors.map.scss';
+const COLORS_CONFIG_PATH: string = './projects/kit/src/assets/configs/colors-config.json';
+const COLORS_MAP_PATH: string = './projects/kit/src/styles/maps/colors.map.scss';
 
 export function createColorsMapTask(): TaskFunction {
   return (onDone: VoidFunction): void => {

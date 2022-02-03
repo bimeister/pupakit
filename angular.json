@@ -23,8 +23,8 @@
               "buildOptimizer": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/development.environment.ts"
+                  "replace": "./projects/demo/src/environments/environment.ts",
+                  "with": "./projects/demo/src/environments/development.environment.ts"
                 }
               ],
               "namedChunks": false,
@@ -44,8 +44,8 @@
               "extractLicenses": true,
               "fileReplacements": [
                 {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/production.environment.ts"
+                  "replace": "./projects/demo/src/environments/environment.ts",
+                  "with": "./projects/demo/src/environments/production.environment.ts"
                 }
               ],
               "namedChunks": false,
@@ -69,12 +69,12 @@
               },
               {
                 "glob": "**/*",
-                "input": "./src/assets/fonts",
+                "input": "./projects/kit/src/assets/fonts",
                 "output": "/assets/fonts"
               },
               {
                 "glob": "**/*",
-                "input": "./src/assets/configs",
+                "input": "./projects/kit/src/assets/configs",
                 "output": "/assets/configs"
               },
               {
@@ -88,11 +88,11 @@
             "outputPath": "./dist/demo",
             "polyfills": "./projects/demo/src/polyfills.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["src/styles", "./projects/demo/src/styles", "node_modules"]
+              "includePaths": ["./projects/kit/src/styles", "./projects/demo/src/styles", "./node_modules"]
             },
             "styles": [
-              "src/styles/styles.scss",
-              "node_modules/highlight.js/styles/github.css",
+              "./projects/kit/src/styles/styles.scss",
+              "./node_modules/highlight.js/styles/github.css",
               "./projects/demo/src/styles/styles.scss"
             ],
             "tsConfig": "./projects/demo/tsconfig.demo.json",
@@ -168,7 +168,7 @@
           "skipTests": true
         }
       },
-      "sourceRoot": "./demo"
+      "sourceRoot": "./projects/demo/"
     },
     "pupakit": {
       "architect": {
@@ -199,7 +199,7 @@
             }
           },
           "options": {
-            "lintFilePatterns": ["./src/**/*.ts", "./src/**/*.html"]
+            "lintFilePatterns": ["./projects/kit/src/**/*.ts", "./projects/demo/src/**/*.html"]
           }
         },
         "test": {
@@ -260,7 +260,7 @@
           "skipTests": true
         }
       },
-      "sourceRoot": "./src"
+      "sourceRoot": "./projects/kit/"
     }
   },
   "version": 1
