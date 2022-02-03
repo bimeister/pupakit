@@ -59,8 +59,7 @@ export abstract class TabsServiceBase<T> {
 
   public setActiveTab(tabName: T): void {
     this.activeTabNameState$.next(tabName);
-    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
-    targetElement?.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+    this.correctScrollLeftByTargetTab(tabName);
   }
 
   public registerTabsHtmlElement(htmlElement: HTMLElement): void {
@@ -77,5 +76,46 @@ export abstract class TabsServiceBase<T> {
 
   public registerTabHtmlElement(tabName: T, htmlElement: HTMLElement): void {
     this.tabNameToHtmlElementMap.set(JSON.stringify(tabName), htmlElement);
+  }
+
+  private correctScrollLeftByTargetTab(tabName: T): void {
+    const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
+
+    combineLatest([this.hostElement$.pipe(filterNotNil()), this.scrollable$.pipe(filterNotNil())])
+      .pipe(
+        take(1),
+        map(([hostElement, scrollable]: [HTMLElement, ScrollableComponent]) => {
+          const hostClientRect: ClientRect = hostElement.getBoundingClientRect();
+          const targetClientRect: ClientRect = targetElement.getBoundingClientRect();
+
+          const leftOffsetPx: number = targetClientRect.left - hostClientRect.left;
+          const rightOffsetPx: number = hostClientRect.right - targetClientRect.right;
+          const centerLeftDeltaPx: number = (hostClientRect.width - targetClientRect.width) / 2;
+          return [leftOffsetPx, rightOffsetPx, scrollable, centerLeftDeltaPx];
+        })
+      )
+      .subscribe(
+        ([leftOffsetPx, rightOffsetPx, scrollable, centerLeftDeltaPx]: [
+          number,
+          number,
+          ScrollableComponent,
+          number
+        ]) => {
+          const isNeedScrollToLeft: boolean = leftOffsetPx < rightOffsetPx;
+          const isNeedScrollToRight: boolean = rightOffsetPx < leftOffsetPx;
+
+          const isSmoothScroll: boolean = true;
+
+          if (isNeedScrollToLeft) {
+            scrollable.setScrollLeftByDelta(Math.ceil(-centerLeftDeltaPx + leftOffsetPx), isSmoothScroll);
+            return;
+          }
+
+          if (isNeedScrollToRight) {
+            scrollable.setScrollLeftByDelta(Math.ceil(-rightOffsetPx + centerLeftDeltaPx), isSmoothScroll);
+            return;
+          }
+        }
+      );
   }
 }

@@ -9,6 +9,7 @@ import {
   Inject,
   Input,
   NgZone,
+  OnChanges,
   OnDestroy,
   OnInit,
   Output,
@@ -17,8 +18,8 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, EMPTY, forkJoin, fromEvent, merge, of, Subscription } from 'rxjs';
+import { filterTruthy, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -27,11 +28,12 @@ import {
   startWith,
   switchMap,
   take,
-  takeUntil,
   tap,
   throttleTime,
 } from 'rxjs/operators';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
@@ -53,14 +55,15 @@ const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizon
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScrollableComponent implements OnInit, OnDestroy {
+export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public invisibleScrollbars: ScrollbarType[] = [];
   @Input() public size: ScrollbarSize = 'small';
   @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
-  @Input() public horizontalScrollWheelMode: boolean = false;
+  @Input() public horizontalScrollDragModeEnabled: boolean = false;
+  private readonly horizontalScrollDragModeEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -101,6 +104,10 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     public readonly changeDetectorRef: ChangeDetectorRef,
     @Inject(DOCUMENT) private readonly document: Document
   ) {}
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processHorizontalScrollDragModeEnabledChange(changes?.horizontalScrollDragModeEnabled);
+  }
 
   public ngOnInit(): void {
     this.setContentElement();
@@ -248,6 +255,44 @@ export class ScrollableComponent implements OnInit, OnDestroy {
 
         if (event.type === 'panend') {
           this.isHorizontalThumbGrabbing$.next(false);
+          this.removeBodyGrabbingCursor();
+          lastDeltaX = 0;
+        }
+      });
+  }
+
+  private handleHorizontalScrollWheelMode(): Subscription {
+    const contentElement: HTMLElement = this.contentElement;
+    let lastDeltaX: number = 0;
+
+    return this.horizontalScrollDragModeEnabled$
+      .pipe(
+        filterTruthy(),
+        filter(() => {
+          const isHorizontalScrollingAvailable: boolean = contentElement.offsetWidth < contentElement.scrollWidth;
+          return isHorizontalScrollingAvailable;
+        }),
+        switchMap(() => {
+          const hammer: HammerManager = new Hammer(contentElement);
+          hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+
+          return fromHammerEvent(hammer, ['panstart', 'panleft', 'panright', 'panend']);
+        }),
+        subscribeOutsideAngular(this.ngZone)
+      )
+      .subscribe((event: HammerInput) => {
+        if (event.type === 'panstart') {
+          this.setBodyGrabbingCursor();
+        }
+
+        const prevContentScrollLeft: number = contentElement.scrollLeft;
+        this.setContentScrollLeft(contentElement.scrollLeft + (lastDeltaX - event.deltaX));
+
+        if (contentElement.scrollLeft !== prevContentScrollLeft) {
+          lastDeltaX = event.deltaX;
+        }
+
+        if (event.type === 'panend') {
           this.removeBodyGrabbingCursor();
           lastDeltaX = 0;
         }
@@ -412,27 +457,6 @@ export class ScrollableComponent implements OnInit, OnDestroy {
     this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
   }
 
-  private handleHorizontalScrollWheelMode(): Subscription {
-    if (!this.horizontalScrollWheelMode) {
-      return EMPTY.subscribe();
-    }
-    const contentElement: HTMLElement = this.contentElement;
-    return fromEvent(contentElement, 'mouseenter')
-      .pipe(
-        subscribeOutsideAngular(this.ngZone),
-        switchMap(() =>
-          fromEvent(contentElement, 'wheel').pipe(
-            tap((event: WheelEvent) => {
-              event.preventDefault();
-              contentElement.scrollLeft += event.deltaY;
-            }),
-            takeUntil(fromEvent(contentElement, 'mouseleave').pipe(take(1)))
-          )
-        )
-      )
-      .subscribe();
-  }
-
   private processScrollStartEndChanges(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
 
@@ -481,5 +505,15 @@ export class ScrollableComponent implements OnInit, OnDestroy {
         )
       )
       .subscribe();
+  }
+
+  private processHorizontalScrollDragModeEnabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.horizontalScrollDragModeEnabled$.next(updatedValue);
   }
 }
