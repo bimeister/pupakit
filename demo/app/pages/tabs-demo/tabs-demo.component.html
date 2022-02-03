@@ -37,4 +37,51 @@
       <demo-tabs-example-7 *pupaCodeContainerPreviewTemplate></demo-tabs-example-7>
     </pupa-code-container>
   </div>
+
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-content class="content">
+        <pupa-tabs-container>
+          <pupa-tabs>
+            <pupa-tabs-item name="tab1" [disabled]="disabled$ | async">Tab 1 </pupa-tabs-item>
+          </pupa-tabs>
+          <pupa-tabs-content>
+            <div class="tab" *pupaTabsItemContentTemplate="'tab1'">Tab 1 content</div>
+          </pupa-tabs-content>
+        </pupa-tabs-container>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>TabsItemComponent properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="name" type="string" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Set the name of the element for content's match.</ng-container
+          >
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Whether the element is active. First element is active by default.</ng-container
+          >
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>TabsContentComponent properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="destroyable" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Whether the content is destroyable.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>TabsComponent events</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="activeTabNameChange" type="EventEmitter<T>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Get active tab's name.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
 </demo-page>

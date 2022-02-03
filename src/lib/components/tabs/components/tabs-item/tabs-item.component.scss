@@ -47,6 +47,10 @@
     }
   }
 
+  &_grabbing {
+    cursor: grabbing;
+  }
+
   @include ellipsis-text-overflow;
   @include font-type-caption;
   @include font-size-small;

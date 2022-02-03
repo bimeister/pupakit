@@ -1,7 +1,7 @@
-import { AfterViewChecked, Directive, EventEmitter, OnDestroy } from '@angular/core';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { Observable, Subscription } from 'rxjs';
-import { delay, map } from 'rxjs/operators';
+import { AfterViewChecked, ChangeDetectorRef, Directive, EventEmitter, OnDestroy } from '@angular/core';
+import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { delay, distinctUntilChanged, map } from 'rxjs/operators';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
@@ -21,8 +21,30 @@ export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements After
     delay(0)
   );
 
-  constructor(private readonly tabsService: S, private readonly containerService?: S) {
+  public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly isHorizontalScrollExist$: Observable<boolean> = combineLatest([
+    this.isLeftGradient$,
+    this.isRightGradient$,
+  ]).pipe(
+    map(([isLeftGradient, isRightGradient]: [boolean, boolean]) => isLeftGradient || isRightGradient),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly isContentDragging$: Observable<boolean> = this.tabsService.isContentDragging$;
+
+  constructor(
+    private readonly tabsService: S,
+    protected readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly containerService?: S
+  ) {
     this.subscription.add(this.processActiveTabNameChanges());
+  }
+
+  protected detectChanges(): void {
+    this.changeDetectorRef.detectChanges();
   }
 
   public ngAfterViewChecked(): void {
@@ -31,6 +53,26 @@ export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements After
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  public handleContentDragStart(): void {
+    this.tabsService.setContentDraggingStateState(true);
+    this.detectChanges();
+  }
+
+  public handleContentDragEnd(): void {
+    this.tabsService.setContentDraggingStateState(false);
+    this.detectChanges();
+  }
+
+  public setLeftGradient(isLeftGradient: boolean): void {
+    this.isLeftGradient$.next(isLeftGradient);
+    this.detectChanges();
+  }
+
+  public setRightGradient(isRightGradient: boolean): void {
+    this.isRightGradient$.next(isRightGradient);
+    this.detectChanges();
   }
 
   private processActiveTabNameChanges(): Subscription {

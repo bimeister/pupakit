@@ -1,6 +1,6 @@
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
 import { ScrollableComponent } from '../../../../lib/components/scrollable/components/scrollable/scrollable.component';
 
 export abstract class TabsServiceBase<T> {
@@ -41,6 +41,9 @@ export abstract class TabsServiceBase<T> {
 
   private readonly tabNames: T[] = [];
 
+  private readonly isContentDraggingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isContentDragging$: Observable<boolean> = this.isContentDraggingState$.pipe(distinctUntilChanged());
+
   public registerTab(tabName: T): void {
     this.tabNames.push(tabName);
   }
@@ -76,6 +79,10 @@ export abstract class TabsServiceBase<T> {
 
   public registerTabHtmlElement(tabName: T, htmlElement: HTMLElement): void {
     this.tabNameToHtmlElementMap.set(JSON.stringify(tabName), htmlElement);
+  }
+
+  public setContentDraggingStateState(isContentDragging: boolean): void {
+    this.isContentDraggingState$.next(isContentDragging);
   }
 
   private correctScrollLeftByTargetTab(tabName: T): void {

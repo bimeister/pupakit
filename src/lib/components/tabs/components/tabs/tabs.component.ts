@@ -12,7 +12,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { TABS_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/tabs-container-state-service.token';
 import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
 import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
@@ -33,17 +32,14 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
 
   @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
-  public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
-    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly renderer: Renderer2,
+    changeDetectorRef: ChangeDetectorRef,
     stateService: TabsStateService<T>,
     @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
-    super(stateService, fromContainerStateService);
+    super(stateService, changeDetectorRef, fromContainerStateService);
   }
 
   public ngOnInit(): void {
@@ -54,19 +50,5 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
 
   public processScrollLeft(scrollLeft: number): void {
     this.renderer.setStyle(this.railRef?.nativeElement, 'transform', `translateX(${-scrollLeft}px)`);
-  }
-
-  public setLeftGradient(isLeftGradient: boolean): void {
-    this.isLeftGradient$.next(isLeftGradient);
-    this.detectChanges();
-  }
-
-  public setRightGradient(isRightGradient: boolean): void {
-    this.isRightGradient$.next(isRightGradient);
-    this.detectChanges();
-  }
-
-  private detectChanges(): void {
-    this.changeDetectorRef.detectChanges();
   }
 }

@@ -2,6 +2,7 @@
   class="tabs-item"
   [class.tabs-item_disabled]="disabled"
   [class.tabs-item_active]="isActive$ | async"
+  [class.tabs-item_grabbing]="isContentDragging$ | async"
   (tap)="setAsActive()"
 >
   <ng-content></ng-content>
