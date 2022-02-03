@@ -25,6 +25,14 @@
     width: 100%;
     overflow-x: hidden;
   }
+
+  &_grab {
+    cursor: grab;
+  }
+
+  &_grabbing {
+    cursor: grabbing;
+  }
 }
 
 .tabs-rail {
@@ -45,8 +53,8 @@
   z-index: 9;
   pointer-events: none;
 
-  width: 23.75rem;
-  height: 10rem;
+  width: 24rem;
+  height: 100%;
 
   background: linear-gradient(270deg, color('base-n0') 0%, color('base-n0', 0) 87.96%);
   @include host-selector-dark-theme {

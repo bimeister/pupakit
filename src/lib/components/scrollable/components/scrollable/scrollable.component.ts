@@ -1,5 +1,6 @@
 import { DOCUMENT } from '@angular/common';
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -19,11 +20,21 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { filterTruthy, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, of, Subscription } from 'rxjs';
+import {
+  animationFrameScheduler,
+  BehaviorSubject,
+  combineLatest,
+  forkJoin,
+  fromEvent,
+  merge,
+  of,
+  Subscription,
+} from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
   map,
+  observeOn,
   pairwise,
   startWith,
   switchMap,
@@ -55,7 +66,7 @@ const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizon
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
+export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public invisibleScrollbars: ScrollbarType[] = [];
@@ -75,6 +86,9 @@ export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
   @Output() public readonly scrolledToHorizontalEnd: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public readonly scrolledToVerticalStart: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() public readonly scrolledToVerticalEnd: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  @Output() public readonly contentDragStart: EventEmitter<void> = new EventEmitter<void>();
+  @Output() public readonly contentDragEnd: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('content', { static: true }) public contentRef: ElementRef<HTMLElement>;
   @ContentChild(ScrollableContentDirective, { static: true, read: ElementRef })
@@ -121,7 +135,10 @@ export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
     this.subscription.add(this.processHorizontalScrollbarPan());
     this.subscription.add(this.updateSizesOnAnimationFrame());
     this.subscription.add(this.processScrollStartEndChanges());
-    this.subscription.add(this.handleHorizontalScrollWheelMode());
+  }
+
+  public ngAfterViewInit(): void {
+    this.subscription.add(this.processHorizontalScrollDragMode());
   }
 
   public ngOnDestroy(): void {
@@ -261,13 +278,14 @@ export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
       });
   }
 
-  private handleHorizontalScrollWheelMode(): Subscription {
+  private processHorizontalScrollDragMode(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
     let lastDeltaX: number = 0;
 
     return this.horizontalScrollDragModeEnabled$
       .pipe(
         filterTruthy(),
+        observeOn(animationFrameScheduler),
         filter(() => {
           const isHorizontalScrollingAvailable: boolean = contentElement.offsetWidth < contentElement.scrollWidth;
           return isHorizontalScrollingAvailable;
@@ -283,6 +301,7 @@ export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
       .subscribe((event: HammerInput) => {
         if (event.type === 'panstart') {
           this.setBodyGrabbingCursor();
+          this.contentDragStart.emit();
         }
 
         const prevContentScrollLeft: number = contentElement.scrollLeft;
@@ -295,6 +314,7 @@ export class ScrollableComponent implements OnInit, OnDestroy, OnChanges {
         if (event.type === 'panend') {
           this.removeBodyGrabbingCursor();
           lastDeltaX = 0;
+          this.contentDragEnd.emit();
         }
       });
   }

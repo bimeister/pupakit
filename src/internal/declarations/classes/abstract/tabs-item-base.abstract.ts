@@ -16,6 +16,8 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
     map((activeTab: T | null) => activeTab === this.name)
   );
 
+  public readonly isContentDragging$: Observable<boolean> = this.tabsService.isContentDragging$;
+
   constructor(private readonly tabsService: S, private readonly containerService?: S) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {

@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -33,11 +34,12 @@ export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
     stateService: ButtonGroupStateService<T>,
+    changeDetectorRef: ChangeDetectorRef,
     @Optional()
     @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN)
     fromContainerStateService?: ButtonGroupStateService<T>
   ) {
-    super(stateService, fromContainerStateService);
+    super(stateService, changeDetectorRef, fromContainerStateService);
   }
 
   public ngOnInit(): void {
