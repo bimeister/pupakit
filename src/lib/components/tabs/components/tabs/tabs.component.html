@@ -6,7 +6,7 @@
   (scrollLeftChanged)="processScrollLeft($event)"
   class="tabs"
   [invisibleScrollbars]="['horizontal', 'vertical']"
-  [horizontalScrollWheelMode]="true"
+  [horizontalScrollDragModeEnabled]="true"
   (scrolledToHorizontalStart)="setLeftGradient($event)"
   (scrolledToHorizontalEnd)="setRightGradient($event)"
 >
