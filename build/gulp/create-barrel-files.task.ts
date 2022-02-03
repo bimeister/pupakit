@@ -6,7 +6,7 @@ export function createBarrelFilesTask(): TaskFunction {
 }
 
 function createForComponents(): TaskFunction {
-  const command: string = 'barrelsby --config="./barrelsby.json" --directory="./src/lib/components"';
+  const command: string = 'barrelsby --config="./barrelsby.json" --directory="./projects/kit/src/lib/components"';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
@@ -17,7 +17,7 @@ function createForComponents(): TaskFunction {
 }
 
 function createForInternal(): TaskFunction {
-  const command: string = 'barrelsby --config="./barrelsby.json" --directory="./src/internal"';
+  const command: string = 'barrelsby --config="./barrelsby.json" --directory="./projects/kit/src/internal"';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {

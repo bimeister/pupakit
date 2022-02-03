@@ -20,7 +20,7 @@ function buildDemo(): TaskFunction {
 
 function bundleAssetsTask(): TaskFunction {
   return (onDone: VoidFunction): void => {
-    copyFolderWithFiles('./src/assets', './dist/demo/assets', {
+    copyFolderWithFiles('./projects/kit/src/assets', './dist/demo/assets', {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,
@@ -34,7 +34,7 @@ function bundleAssetsTask(): TaskFunction {
 
 function copyStylesToDistFolder(): TaskFunction {
   return (onDone: VoidFunction): void => {
-    copyFolderWithFiles('./src/styles', './dist/demo/styles', {
+    copyFolderWithFiles('./projects/kit/src/styles', './dist/demo/styles', {
       onCopy: (sourcePath: string, targetPath: string) => {
         info({
           sourcePath,

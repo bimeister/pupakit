@@ -5,8 +5,8 @@ import { TaskFunction } from 'gulp';
 import { Observable, of, Subscriber, TeardownLogic } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 
-const ADAPTIVE_CONFIG_PATH: string = './src/assets/configs/adaptive-config.json';
-const ADAPTIVE_VARIABLES_PATH: string = './src/styles/variables/adaptive.variables.scss';
+const ADAPTIVE_CONFIG_PATH: string = './projects/kit/src/assets/configs/adaptive-config.json';
+const ADAPTIVE_VARIABLES_PATH: string = './projects/kit/src/styles/variables/adaptive.variables.scss';
 
 export function createAdaptiveVariablesTask(): TaskFunction {
   return (onDone: VoidFunction): void => {

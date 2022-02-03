@@ -29,7 +29,7 @@
       }
     ],
     "paths": {
-      "@kit/*": ["./src/*"]
+      "@kit/*": ["./projects/kit/src/*"]
     },
     "types": ["jest", "node", "hammerjs"],
     "resolveJsonModule": true
