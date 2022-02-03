@@ -32,8 +32,8 @@ export class StepperComponent<T> extends TabsBase<T, TabsStateService<T>> implem
 
   @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
-  public readonly isLeftGradient: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  public readonly isRightGradient: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private readonly changeDetectorRef: ChangeDetectorRef,
@@ -51,12 +51,12 @@ export class StepperComponent<T> extends TabsBase<T, TabsStateService<T>> implem
   }
 
   public setLeftGradient(isLeftGradient: boolean): void {
-    this.isLeftGradient.next(isLeftGradient);
+    this.isLeftGradient$.next(isLeftGradient);
     this.detectChanges();
   }
 
   public setRightGradient(isRightGradient: boolean): void {
-    this.isRightGradient.next(isRightGradient);
+    this.isRightGradient$.next(isRightGradient);
     this.detectChanges();
   }
 

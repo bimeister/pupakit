@@ -16,6 +16,8 @@
   @include font-type-caption;
   @include font-size-mark;
 
+  transition: background-color 0.2s ease;
+
   @include host-selector-dark-theme {
     background-color: color('base-dark-n275');
     color: color('base-n0');

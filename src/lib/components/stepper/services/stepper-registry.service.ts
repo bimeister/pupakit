@@ -5,17 +5,17 @@ import { StepperItemComponent } from '../api';
 
 @Injectable()
 export class StepperRegistryService<T> {
-  private readonly stepperItemsSubject$: BehaviorSubject<StepperItemComponent<T>[]> = new BehaviorSubject([]);
+  private readonly stepperItemsState$: BehaviorSubject<StepperItemComponent<T>[]> = new BehaviorSubject([]);
 
-  public readonly stepperItems$: Observable<StepperItemComponent<T>[]> = this.stepperItemsSubject$.asObservable();
+  public readonly stepperItems$: Observable<StepperItemComponent<T>[]> = this.stepperItemsState$.asObservable();
 
   public readonly stepperItemsLength$: Observable<number> = this.stepperItems$.pipe(
     map((stepperItems: StepperItemComponent<T>[]) => stepperItems.length)
   );
 
   public registerStepperItem(stepperItem: StepperItemComponent<T>): void {
-    this.stepperItemsSubject$.pipe(take(1)).subscribe((stepperItems: StepperItemComponent<T>[]) => {
-      this.stepperItemsSubject$.next([...stepperItems, stepperItem]);
+    this.stepperItemsState$.pipe(take(1)).subscribe((stepperItems: StepperItemComponent<T>[]) => {
+      this.stepperItemsState$.next([...stepperItems, stepperItem]);
     });
   }
 

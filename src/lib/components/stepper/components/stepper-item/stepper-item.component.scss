@@ -24,9 +24,12 @@
   min-width: 1rem;
   max-width: 42rem;
 
+  border-radius: 1rem;
+
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.2s ease;
 
   &__title-wrapper {
     height: 7rem;

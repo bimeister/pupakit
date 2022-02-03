@@ -1,26 +1,77 @@
 <h1>Stepper</h1>
 
-<h2>Basic usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-stepper-example-1 *pupaCodeContainerPreviewTemplate></demo-stepper-example-1>
-</pupa-code-container>
+<demo-page>
+  <div *demoPageTab='"overview"'>
+    <h2>Basic usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-stepper-example-1 *pupaCodeContainerPreviewTemplate></demo-stepper-example-1>
+    </pupa-code-container>
 
-<h2>Non destroyable step content</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-stepper-example-2 *pupaCodeContainerPreviewTemplate></demo-stepper-example-2>
-</pupa-code-container>
+    <h2>Non destroyable step content</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-stepper-example-2 *pupaCodeContainerPreviewTemplate></demo-stepper-example-2>
+    </pupa-code-container>
 
-<h2>Control by router</h2>
-<pupa-code-container [content]="example3Content">
-  <demo-stepper-example-3 *pupaCodeContainerPreviewTemplate></demo-stepper-example-3>
-</pupa-code-container>
+    <h2>Control by router</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-stepper-example-3 *pupaCodeContainerPreviewTemplate></demo-stepper-example-3>
+    </pupa-code-container>
 
-<h2>Without default step content</h2>
-<pupa-code-container [content]="example4Content">
-  <demo-stepper-example-4 *pupaCodeContainerPreviewTemplate></demo-stepper-example-4>
-</pupa-code-container>
+    <h2>Without default step content</h2>
+    <pupa-code-container [content]="example4Content">
+      <demo-stepper-example-4 *pupaCodeContainerPreviewTemplate></demo-stepper-example-4>
+    </pupa-code-container>
 
-<h2>Disabled step</h2>
-<pupa-code-container [content]="example5Content">
-  <demo-stepper-example-5 *pupaCodeContainerPreviewTemplate></demo-stepper-example-5>
-</pupa-code-container>
+    <h2>Disabled step</h2>
+    <pupa-code-container [content]="example5Content">
+      <demo-stepper-example-5 *pupaCodeContainerPreviewTemplate></demo-stepper-example-5>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab='"api"'>
+    <demo-example-viewer>
+      <demo-example-viewer-content class="content">
+        <pupa-stepper-container>
+          <pupa-stepper>
+            <pupa-stepper-item name="step1" [disabled]="disabled$ | async">Step 1 </pupa-stepper-item>
+          </pupa-stepper>
+          <pupa-stepper-content>
+            <div class="step" *pupaStepperItemContentTemplate="'step1'">Step 1 content</div>
+          </pupa-stepper-content>
+        </pupa-stepper-container>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>StepperItemComponent properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="name" type="string" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Set the name of the element for content's match.</ng-container
+          >
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Whether the element is active. First element is active by default.</ng-container
+          >
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>StepperContentComponent properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="destroyable" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Whether the content is destroyable.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>StepperComponent events</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="activeTabNameChange" type="EventEmitter<T>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Get active tab's name.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
