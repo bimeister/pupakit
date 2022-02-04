@@ -1,37 +1,48 @@
-<div
-  class="search-field"
-  [ngClass]="collapseDirection$ | async"
-  [class.search-field_collapsible]="isCollapsible$ | async"
-  [class.search-field_collapsed]="!(isShowInput$ | async)"
+<ng-container
+  [ngTemplateOutlet]="searchFieldTemplate"
+  [ngTemplateOutletContext]="{
+    isCollapsed: isCollapsed$ | async,
+    isDisabled: isDisabled$ | async
+  }"
 >
-  <input
-    class="search-field__input"
-    [ngClass]="resultClassList$ | async"
-    type="text"
-    #inputElement
-    [placeholder]="placeholder"
-    [attr.disabled]="(isDisabled$ | async) ? true : null"
-    (input)="updateValue(inputElement.value)"
-    (focus)="emitFocusEvent($event)"
-    (blur)="emitBlurEvent($event)"
-    [autocomplete]="autocomplete ? 'on' : 'off'"
-    [value]="value$ | async"
-  />
-  <pupa-icon
-    class="search-field__icon"
-    [class.search-field__icon_collapsed]="!(isShowInput$ | async)"
-    [class.search-field__icon_disabled]="isDisabled$ | async"
-    (click)="changeCollapsed()"
-    name="app-search"
+</ng-container>
+
+<ng-template #searchFieldTemplate let-isCollapsed="isCollapsed" let-isDisabled="isDisabled">
+  <div
+    class="search-field"
+    [ngClass]="collapseDirection$ | async"
+    [class.search-field_collapsible]="isCollapsible$ | async"
+    [class.search-field_collapsed]="isCollapsed"
   >
-  </pupa-icon>
-  <pupa-button-icon
-    class="search-field__reset"
-    icon="app-cross-circle"
-    size="small"
-    tabIndex="-1"
-    kind="subtle"
-    (click)="reset()"
-  >
-  </pupa-button-icon>
-</div>
+    <input
+      class="search-field__input"
+      [ngClass]="resultClassList$ | async"
+      type="text"
+      #inputElement
+      [placeholder]="placeholder"
+      [attr.disabled]="isDisabled ? true : null"
+      (input)="updateValue(inputElement.value)"
+      (focus)="emitFocusEvent($event)"
+      (blur)="emitBlurEvent($event)"
+      [autocomplete]="autocomplete ? 'on' : 'off'"
+      [value]="value$ | async"
+    />
+    <pupa-icon
+      class="search-field__icon"
+      [class.search-field__icon_collapsed]="isCollapsed"
+      [class.search-field__icon_disabled]="isDisabled"
+      (click)="changeCollapsed()"
+      name="app-search"
+    >
+    </pupa-icon>
+    <pupa-button-icon
+      class="search-field__reset"
+      icon="app-cross-circle"
+      size="small"
+      tabIndex="-1"
+      kind="subtle"
+      (click)="reset()"
+    >
+    </pupa-button-icon>
+  </div>
+</ng-template>

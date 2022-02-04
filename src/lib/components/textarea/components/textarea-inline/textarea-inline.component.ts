@@ -1,20 +1,19 @@
 import {
-  Component,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
-  Optional,
-  ViewChild,
+  Component,
   ElementRef,
-  TemplateRef,
-  ViewContainerRef,
   HostListener,
+  Optional,
+  TemplateRef,
+  ViewChild,
+  ViewContainerRef,
+  ViewEncapsulation,
 } from '@angular/core';
 import { TextareaBase } from '../../../../../internal/declarations/classes/abstract/textarea-base.abstract';
 import { ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { BrowserService } from '../../../../../internal/shared/services/browser.service';
 import { NgControl } from '@angular/forms';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { TemplatePortal } from '@angular/cdk/portal';
@@ -55,14 +54,13 @@ export class TextareaInlineComponent extends TextareaBase {
   private lastDeltaScrollY: number = 0;
 
   constructor(
-    browserService: BrowserService,
     @Optional() ngControl: NgControl,
     @Optional() themeWrapperService: ThemeWrapperService,
     private readonly overlay: Overlay,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly viewContainerRef: ViewContainerRef
   ) {
-    super(browserService, ngControl, themeWrapperService);
+    super(ngControl, themeWrapperService);
   }
 
   public open(): void {

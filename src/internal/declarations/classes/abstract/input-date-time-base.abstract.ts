@@ -9,7 +9,6 @@ import { InputDateTimeStateService } from '../../../../lib/components/input/serv
 import { dateClearTime } from '../../../helpers/date-clear-time.helper';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
 import { TimeFormatPipe } from '../../../pipes/time-format.pipe';
-import { BrowserService } from '../../../shared/services/browser.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { ParsedDateData } from '../../interfaces/parsed-date-data.interface';
@@ -127,11 +126,10 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   constructor(
     public readonly inputDateTimeStateService: InputDateTimeStateService,
     private readonly timeFormatPipe: TimeFormatPipe,
-    browserService: BrowserService,
     public readonly datePipe: DatePipe,
     @Optional() ngControl: NgControl
   ) {
-    super(browserService, ngControl);
+    super(ngControl);
   }
 
   @HostListener('window:click')

@@ -3,7 +3,6 @@ import { NgControl } from '@angular/forms';
 import { distinctUntilSerializedChanged, filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { BrowserService } from '../../../shared/services/browser.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
@@ -83,11 +82,10 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   );
 
   constructor(
-    browserService: BrowserService,
     @Optional() ngControl: NgControl,
     @Optional() protected readonly themeWrapperService: ThemeWrapperService
   ) {
-    super(browserService, ngControl);
+    super(ngControl);
   }
 
   protected setValue(value: Nullable<string>): void {
