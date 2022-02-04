@@ -4,9 +4,14 @@
 <pupa-scrollable
   #scrollable
   class="stepper"
+  [class.stepper_grab]="isHorizontalScrollExist$ | async"
+  [class.stepper_grabbing]="isContentDragging$ | async"
   [invisibleScrollbars]="['horizontal', 'vertical']"
+  [horizontalScrollDragModeEnabled]="true"
   (scrolledToHorizontalStart)="setLeftGradient($event)"
   (scrolledToHorizontalEnd)="setRightGradient($event)"
+  (contentDragStart)="handleContentDragStart()"
+  (contentDragEnd)="handleContentDragEnd()"
 >
   <div class="stepper__container" #stepperContainer>
     <div class="stepper__items">

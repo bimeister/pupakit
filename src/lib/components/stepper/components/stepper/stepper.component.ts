@@ -11,7 +11,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
 import { TabsBase } from '../../../../../internal/api';
 import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/stepper-container-state-service.token';
 import { ScrollableComponent, TabsStateService } from '../../../api';
@@ -32,35 +31,18 @@ export class StepperComponent<T> extends TabsBase<T, TabsStateService<T>> implem
 
   @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
-  public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   constructor(
-    private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly elementRef: ElementRef<HTMLElement>,
     stateService: StepperStateService<T>,
+    changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(STEPPER_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: StepperStateService<T>
   ) {
-    super(stateService, fromContainerStateService);
+    super(stateService, changeDetectorRef, fromContainerStateService);
   }
 
   public ngOnInit(): void {
     this.stateService.registerHostHtmlElement(this.elementRef.nativeElement);
     this.stateService.registerScrollable(this.scrollable);
     this.stateService.registerTabsHtmlElement(this.stepperContainerRef.nativeElement);
-  }
-
-  public setLeftGradient(isLeftGradient: boolean): void {
-    this.isLeftGradient$.next(isLeftGradient);
-    this.detectChanges();
-  }
-
-  public setRightGradient(isRightGradient: boolean): void {
-    this.isRightGradient$.next(isRightGradient);
-    this.detectChanges();
-  }
-
-  private detectChanges(): void {
-    this.changeDetectorRef.detectChanges();
   }
 }
