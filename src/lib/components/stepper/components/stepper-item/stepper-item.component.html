@@ -1,4 +1,10 @@
-<div #stepperItem class="stepper-item" [class.stepper-item_disabled]="disabled" (click)="setAsActive()">
+<div
+  #stepperItem
+  class="stepper-item"
+  [class.stepper-item_disabled]="disabled"
+  [class.stepper-item_grabbing]="isContentDragging$ | async"
+  (tap)="setAsActive()"
+>
   <div class="stepper-item__counter">
     <pupa-stepper-counter
       [disabled]="disabled"

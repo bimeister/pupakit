@@ -37,6 +37,7 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
     private readonly renderer: Renderer2,
     changeDetectorRef: ChangeDetectorRef,
     stateService: TabsStateService<T>,
+    changeDetectorRef: ChangeDetectorRef,
     @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
     super(stateService, changeDetectorRef, fromContainerStateService);
