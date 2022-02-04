@@ -1,13 +1,14 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, switchMapTo, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription } from 'rxjs';
+import { distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
 import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { CollapseDirection } from '../../../../../internal/declarations/types/collapse-direction.type';
+import { NgControl } from '@angular/forms';
 
 const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
 
@@ -33,17 +34,13 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
   );
 
   @Input() public collapsible: boolean = false;
-  public readonly isCollapsible$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public readonly isCollapsible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private readonly isCollapsed$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-
-  public readonly isShowInput$: Observable<boolean> = combineLatest([this.isCollapsible$, this.isCollapsed$]).pipe(
-    map(([collapsible, collapsed]: [boolean, boolean]) => !(collapsible && collapsed))
-  );
+  public readonly isCollapsed$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
   private readonly searchFieldClassList$: Observable<string[]> = combineLatest([
     this.isCollapsible$.pipe(map((isCollapsible: boolean) => (isCollapsible ? 'collapsible' : null))),
-    this.isShowInput$.pipe(map((isShowInput: boolean) => (isShowInput ? null : 'collapsed'))),
+    this.isCollapsed$.pipe(map((isCollapsed: boolean) => (isCollapsed ? 'collapsed' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -62,6 +59,12 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     })
   );
 
+  constructor(@Optional() ngControl: NgControl) {
+    super(ngControl);
+
+    this.subscription.add(this.processIsCollapsedWhenIsCollapsibleChanged());
+  }
+
   public ngOnChanges(changes: ComponentChanges<this>): void {
     super.ngOnChanges(changes);
     this.processCollapsibleChange(changes?.collapsible);
@@ -79,7 +82,7 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
 
   public reset(): void {
     this.updateValue('');
-    this.isCollapsible$.subscribe((collapsible: boolean) => {
+    this.isCollapsible$.pipe(take(1)).subscribe((collapsible: boolean) => {
       if (collapsible) {
         this.isCollapsed$.next(true);
         return;
@@ -123,5 +126,11 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     }
 
     this.collapseDirection$.next(updatedValue);
+  }
+
+  private processIsCollapsedWhenIsCollapsibleChanged(): Subscription {
+    return this.isCollapsible$.pipe(distinctUntilChanged()).subscribe((isCollapsible: boolean) => {
+      this.isCollapsed$.next(isCollapsible);
+    });
   }
 }

@@ -3,7 +3,6 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
-import { BrowserService } from '../../../shared/services/browser.service';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 
@@ -37,9 +36,9 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
     null
   );
 
-  private readonly subscription: Subscription = new Subscription();
+  protected readonly subscription: Subscription = new Subscription();
 
-  constructor(protected readonly browserService: BrowserService, @Optional() protected readonly ngControl: NgControl) {
+  constructor(@Optional() protected readonly ngControl: NgControl) {
     if (isNil(ngControl)) {
       return;
     }
