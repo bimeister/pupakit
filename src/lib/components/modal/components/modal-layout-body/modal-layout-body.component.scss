@@ -18,6 +18,8 @@
 
 .modal-layout-body {
   flex: 1;
+  overflow: hidden;
+
   &__scrollable-content {
     box-sizing: border-box;
     padding: 8rem 10rem 10rem;
