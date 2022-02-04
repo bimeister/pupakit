@@ -33,10 +33,11 @@ export class ModalsService {
     const configDto: ModalConfigDto = new ModalConfigDto(config);
 
     const modal: Modal<ComponentT> = new Modal(component, configDto, this.overlay, this.injector, this.rendererFactory);
-    this.portalLayersService.register(modal);
-    this.portalLayersService.moveToTopById(modal.id);
 
     const modalRef: ModalRef<ReturnDataT> = modal.open();
+
+    this.portalLayersService.register(modal);
+    this.portalLayersService.moveToTopById(modal.id);
     this.modalRefs.set(modal.id, modalRef);
 
     this.processModalClosed(modal);

@@ -43,6 +43,11 @@ export class Modal<ComponentT> implements PortalLayer {
     }
     this.currentZIndex = zIndex;
     this.renderer.setStyle(this.overlayRef.hostElement, 'z-index', zIndex);
+
+    const backdropElement: HTMLElement | null = this.overlayRef.backdropElement;
+    if (!isNil(backdropElement)) {
+      this.renderer.setStyle(backdropElement, 'z-index', zIndex);
+    }
   }
 
   public open(): ModalRef {

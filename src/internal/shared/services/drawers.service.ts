@@ -39,10 +39,11 @@ export class DrawersService {
       this.injector,
       this.rendererFactory
     );
-    this.portalLayersService.register(drawer);
-    this.portalLayersService.moveToTopById(drawer.id);
 
     const drawerRef: DrawerRef<ReturnDataT> = drawer.open();
+
+    this.portalLayersService.register(drawer);
+    this.portalLayersService.moveToTopById(drawer.id);
     this.drawerRefs.set(drawer.id, drawerRef);
 
     drawerRef.closed$.subscribe(() => {
