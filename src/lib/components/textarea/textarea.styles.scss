@@ -195,16 +195,24 @@
   color: color(base-dark-n250);
   background-color: color(base-white-n500);
 
-  .textarea__control::placeholder {
+  .textarea__control {
     color: color(base-dark-n250);
+
+    &::placeholder {
+      color: color(base-dark-n250);
+    }
   }
 
   @include dark-theme-class-parent {
     color: color(base-white-n275);
     background-color: color(base-dark-n500);
 
-    .textarea__control::placeholder {
+    .textarea__control {
       color: color(base-white-n275);
+
+      &::placeholder {
+        color: color(base-white-n275);
+      }
     }
   }
 }
