@@ -7,6 +7,7 @@ import { ButtonExample2Component } from './examples/example-2/example-2.componen
 import { ButtonExample3Component } from './examples/example-3/example-3.component';
 import { ButtonExample4Component } from './examples/example-4/example-4.component';
 import { ButtonExample5Component } from './examples/example-5/example-5.component';
+import { DirectivesModule } from '../../../../src/internal/directives/directives.module';
 
 const EXAMPLES: Type<unknown>[] = [
   ButtonExample1Component,
@@ -21,6 +22,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: [DemoSharedModule, ButtonDemoRoutingModule],
+  imports: [DemoSharedModule, ButtonDemoRoutingModule, DirectivesModule],
 })
 export class ButtonDemoModule {}

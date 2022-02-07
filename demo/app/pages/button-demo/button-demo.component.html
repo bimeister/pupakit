@@ -4,8 +4,11 @@
   <div *demoPageTab="'overview'">
     <h2>Basic button</h2>
     <pupa-info-block>
-      The <pupa-code-inline>kind</pupa-code-inline> attribute allows you to color the buttons according to the current
-      theme. The default button kind is <pupa-code-inline>primary</pupa-code-inline>.
+      The
+      <pupa-code-inline>kind</pupa-code-inline>
+      attribute allows you to color the buttons according to the current theme. The default button kind is
+      <pupa-code-inline>primary</pupa-code-inline>
+      .
     </pupa-info-block>
     <pupa-code-container [content]="example1Content">
       <demo-button-example-1 *pupaCodeContainerPreviewTemplate></demo-button-example-1>
@@ -17,7 +20,11 @@
     </pupa-code-container>
 
     <h2>Button size</h2>
-    <pupa-info-block> The default button size is <pupa-code-inline>medium</pupa-code-inline>.</pupa-info-block>
+    <pupa-info-block>
+      The default button size is
+      <pupa-code-inline>medium</pupa-code-inline>
+      .
+    </pupa-info-block>
     <pupa-code-container [content]="example4Content">
       <demo-button-example-4 *pupaCodeContainerPreviewTemplate></demo-button-example-4>
     </pupa-code-container>
@@ -36,34 +43,43 @@
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content>
-        <div class="content">
+        <div
+          class="content"
+          *pupaLet="{
+            size: size$ | async,
+            kind: kind$ | async,
+            disabled: disabled$ | async,
+            loading: loading$ | async,
+            active: active$ | async
+          }; let size=size; let kind=kind; let disabled=disabled; let loading=loading; let active=active;"
+        >
           <pupa-button
-            [size]="size$ | async"
-            [kind]="kind$ | async"
-            [disabled]="disabled$ | async"
+            [size]="size"
+            [kind]="kind"
+            [disabled]="disabled"
             [icon]="buttonIconFormControl.value"
             [iconPosition]="iconPosition$ | async"
-            [loading]="loading$ | async"
-            [active]="active$ | async"
+            [loading]="loading"
+            [active]="active"
           >
             Button Name
           </pupa-button>
 
           <pupa-button-icon
-            [size]="size$ | async"
-            [kind]="kind$ | async"
-            [disabled]="disabled$ | async"
+            [size]="size"
+            [kind]="kind"
+            [disabled]="disabled"
             [icon]="buttonIconFormControl.value"
-            [loading]="loading$ | async"
-            [active]="active$ | async"
+            [loading]="loading"
+            [active]="active"
           >
           </pupa-button-icon>
 
           <pupa-button-round
-            [disabled]="disabled$ | async"
+            [disabled]="disabled"
             [icon]="buttonIconFormControl.value"
-            [loading]="loading$ | async"
-            [active]="active$ | async"
+            [loading]="loading"
+            [active]="active"
           >
           </pupa-button-round>
         </div>
