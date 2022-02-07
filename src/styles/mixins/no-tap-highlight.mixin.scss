@@ -1,0 +1,6 @@
+@mixin no-tap-highlight() {
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  user-select: none;
+}

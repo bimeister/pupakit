@@ -1,15 +1,17 @@
-@use 'sass:map';
-@use 'sass:string';
-
 @use 'mixins' as *;
 @use 'functions' as *;
 
-@mixin apply-base-styles() {
+@function shadow-helper($color, $width: 1px) {
+  @return inset 0 0 0 $width color($color);
+}
+
+:host {
+  outline: none;
+}
+
+.tag {
   all: unset;
-  appearance: none;
-  -webkit-tap-highlight-color: transparent;
-  pointer-events: auto;
-  user-select: none;
+  @include no-tap-highlight();
 
   cursor: default;
 
@@ -31,391 +33,178 @@
   @include font-size-mark();
 }
 
-@mixin apply-colors($config) {
-  background-color: map.get($config, background-color);
-  color: map.get($config, font-color);
-  box-shadow: map.get($config, box-shadow);
-}
-
-@mixin apply-themes($themes) {
-  @include apply-colors(map.get($themes, light));
-
+.tag_default:not(.tag_disabled) {
+  background-color: color(base-white-n300);
+  color: color(base-n600);
   @include host-selector-dark-theme() {
-    @include apply-colors(map.get($themes, dark));
+    background-color: color(base-dark-n300);
+    color: color(base-n0);
   }
-}
 
-@function shadow-helper($color, $width: 1px) {
-  @return inset 0 0 0 $width color($color);
-}
+  &.tag_clickable {
+    box-shadow: shadow-helper(base-white-n275);
+    @include host-selector-dark-theme() {
+      box-shadow: shadow-helper(base-dark-n275);
+    }
 
-@function getTagThemeConfig($tagColorMap) {
-  $base-tag: (
-    default: (
-      light: (
-        background-color: color(get-map-field($tagColorMap, (backgroundColor, light))),
-        font-color: color(get-map-field($tagColorMap, (fontColor, light))),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, (backgroundColor, light))),
-      ),
-      dark: (
-        background-color: color(get-map-field($tagColorMap, (backgroundColor, dark))),
-        font-color: color(get-map-field($tagColorMap, (fontColor, dark))),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, (backgroundColor, dark))),
-      ),
-    ),
-  );
-
-  $bold-tag: (
-    default: (
-      light: (
-        background-color: color(get-map-field($tagColorMap, (boldBackgroundColor, light))),
-        font-color: color(get-map-field($tagColorMap, (boldFontColor, light))),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, (boldBackgroundColor, light))),
-      ),
-      dark: (
-        background-color: color(get-map-field($tagColorMap, (boldBackgroundColor, dark))),
-        font-color: color(get-map-field($tagColorMap, (boldFontColor, dark))),
-        box-shadow: shadow-helper(get-map-field($tagColorMap, (boldBackgroundColor, dark))),
-      ),
-    ),
-  );
-
-  $disabled-tag: (
-    default: (
-      light: (
-        background-color: color(base-white-n400),
-        font-color: color(base-white-n250),
-        box-shadow: shadow-helper(base-white-n400),
-      ),
-      dark: (
-        background-color: color(base-dark-n400),
-        font-color: color(base-dark-n250),
-        box-shadow: shadow-helper(base-dark-n500),
-      ),
-    ),
-  );
-
-  $clickable-tag: map.deep-merge(
-    $base-tag,
-    (
-      default: (
-        light: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableColor, light))),
-        ),
-        dark: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableColor, dark))),
-        ),
-      ),
-    )
-  );
-
-  $clickable-tag: map.deep-merge(
-    $clickable-tag,
-    (
-      hover:
-        map.deep-merge(
-          map.get($clickable-tag, default),
-          (
-            light: (
-              background-color: color(get-map-field($tagColorMap, (clickableColor, light))),
-            ),
-            dark: (
-              background-color: color(get-map-field($tagColorMap, (clickableColor, dark))),
-            ),
-          )
-        ),
-    )
-  );
-
-  $clickable-tag: map.deep-merge(
-    $clickable-tag,
-    (
-      active:
-        map.deep-merge(
-          map.get($clickable-tag, default),
-          (
-            light: (
-              box-shadow: shadow-helper(primary-n400, 2px),
-            ),
-            dark: (
-              box-shadow: shadow-helper(primary-n400, 2px),
-            ),
-          )
-        ),
-    )
-  );
-
-  $clickable-bold-tag: map.deep-merge(
-    $bold-tag,
-    (
-      default: (
-        light: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableBoldColor, light))),
-        ),
-        dark: (
-          box-shadow: shadow-helper(get-map-field($tagColorMap, (clickableBoldColor, dark))),
-        ),
-      ),
-    )
-  );
-
-  $clickable-bold-tag: map.deep-merge(
-    $clickable-bold-tag,
-    (
-      hover:
-        map.deep-merge(
-          map.get($clickable-bold-tag, default),
-          (
-            light: (
-              background-color: color(get-map-field($tagColorMap, (clickableBoldColor, light))),
-            ),
-            dark: (
-              background-color: color(get-map-field($tagColorMap, (clickableBoldColor, dark))),
-            ),
-          )
-        ),
-    )
-  );
-
-  $config: (
-    base-tag: $base-tag,
-    bold-tag: $bold-tag,
-    clickable-tag: $clickable-tag,
-    clickable-bold-tag: $clickable-bold-tag,
-    disabled-tag: $disabled-tag,
-  );
-
-  @return $config;
-}
-
-$defaultColorMap: (
-  backgroundColor: (
-    light: base-white-n300,
-    dark: base-dark-n300,
-  ),
-  fontColor: (
-    light: base-n600,
-    dark: base-n0,
-  ),
-  clickableColor: (
-    light: base-white-n275,
-    dark: base-dark-n275,
-  ),
-  clickableBoldColor: (
-    light: base-white-n275,
-    dark: base-dark-n275,
-  ),
-  boldBackgroundColor: (
-    light: base-white-n300,
-    dark: base-dark-n300,
-  ),
-  boldFontColor: (
-    light: base-n600,
-    dark: base-n0,
-  ),
-);
-
-$redColorMap: (
-  backgroundColor: (
-    light: red-n100,
-    dark: red-n100,
-  ),
-  fontColor: (
-    light: red-n550,
-    dark: red-n550,
-  ),
-  clickableColor: (
-    light: red-n200,
-    dark: red-n200,
-  ),
-  clickableBoldColor: (
-    light: red-n400,
-    dark: red-n400,
-  ),
-  boldBackgroundColor: (
-    light: red-n500,
-    dark: red-n500,
-  ),
-  boldFontColor: (
-    light: base-n0,
-    dark: base-n0,
-  ),
-);
-
-$yellowColorMap: (
-  backgroundColor: (
-    light: yellow-n100,
-    dark: yellow-n100,
-  ),
-  fontColor: (
-    light: base-n600,
-    dark: base-n600,
-  ),
-  clickableColor: (
-    light: yellow-n200,
-    dark: yellow-n200,
-  ),
-  clickableBoldColor: (
-    light: yellow-n400,
-    dark: yellow-n400,
-  ),
-  boldBackgroundColor: (
-    light: yellow-n500,
-    dark: yellow-n500,
-  ),
-  boldFontColor: (
-    light: base-n600,
-    dark: base-n600,
-  ),
-);
-
-$primaryColorMap: (
-  backgroundColor: (
-    light: primary-n100,
-    dark: primary-n100,
-  ),
-  fontColor: (
-    light: primary-n600,
-    dark: primary-n600,
-  ),
-  clickableColor: (
-    light: primary-n200,
-    dark: primary-n200,
-  ),
-  clickableBoldColor: (
-    light: primary-n400,
-    dark: primary-n400,
-  ),
-  boldBackgroundColor: (
-    light: primary-n500,
-    dark: primary-n500,
-  ),
-  boldFontColor: (
-    light: base-n0,
-    dark: base-n0,
-  ),
-);
-
-$greenColorMap: (
-  backgroundColor: (
-    light: green-n100,
-    dark: green-n100,
-  ),
-  fontColor: (
-    light: green-n550,
-    dark: green-n550,
-  ),
-  clickableColor: (
-    light: green-n200,
-    dark: green-n200,
-  ),
-  clickableBoldColor: (
-    light: green-n400,
-    dark: green-n400,
-  ),
-  boldBackgroundColor: (
-    light: green-n500,
-    dark: green-n500,
-  ),
-  boldFontColor: (
-    light: base-n0,
-    dark: base-n0,
-  ),
-);
-
-$themeConfigs: (
-  default: getTagThemeConfig($defaultColorMap),
-  red: getTagThemeConfig($redColorMap),
-  yellow: getTagThemeConfig($yellowColorMap),
-  primary: getTagThemeConfig($primaryColorMap),
-  green: getTagThemeConfig($greenColorMap),
-);
-
-@mixin apply-background-color-modifiers($root, $theme) {
-  @each $theme-name, $theme-value in $theme {
-    #{$root + '_' + $theme-name} {
-      @include apply-themes(get-map-field($theme-value, (base-tag, default)));
-
-      &#{$root + '_bold'} {
-        @include apply-themes(get-map-field($theme-value, (bold-tag, default)));
-      }
-
-      &#{$root + '_clickable' } {
-        cursor: pointer;
-
-        @include apply-themes(get-map-field($theme-value, (clickable-tag, default)));
-
-        @include hover() {
-          @include apply-themes(get-map-field($theme-value, (clickable-tag, hover)));
-        }
-
-        &:focus-visible:not(.tag_disabled) {
-          @include apply-themes(get-map-field($theme-value, (clickable-tag, active)));
-        }
-
-        &.tag_bold:not(.tag_disabled) {
-          @include apply-themes(get-map-field($theme-value, (clickable-bold-tag, default)));
-
-          @include hover() {
-            @include apply-themes(get-map-field($theme-value, (clickable-bold-tag, hover)));
-          }
-        }
-      }
-
-      &#{$root + '_disabled' } {
-        cursor: not-allowed;
-
-        @include apply-themes(get-map-field($theme-value, (disabled-tag, default)));
-
-        @include hover() {
-          @include apply-themes(get-map-field($theme-value, (disabled-tag, default)));
-        }
-      }
-
-      &#{$root + '_with-border' } {
-        &:not(.tag_clickable:focus-visible):not(.tag_disabled) {
-          /*
-            Need refactoring https://bimeister.atlassian.net/browse/BIM-18178
-          */
-          box-shadow: shadow-helper(base-n0) !important;
-        }
+    @include hover() {
+      background-color: color(base-white-n275);
+      @include host-selector-dark-theme() {
+        background-color: color(base-dark-n275);
       }
     }
   }
 }
 
-:host {
-  outline: none;
-}
+.tag_red:not(.tag_disabled) {
+  background-color: color(red-n100);
+  color: color(red-n550);
 
-.tag {
-  @include apply-base-styles();
-
-  &_with-avatar {
-    &.tag_small {
-      padding-left: 1rem;
-    }
-
-    &.tag_medium {
-      padding-left: 1.5rem;
+  &.tag_clickable {
+    box-shadow: shadow-helper(red-n200);
+    @include hover() {
+      background-color: color(red-n200);
     }
   }
 
-  &_small {
-    height: 5rem;
-    padding: 3px 8px;
-    &.tag_with-border {
-      height: 5.5rem;
-    }
-  }
+  &.tag_bold {
+    color: color(base-n0);
+    background-color: color(red-n500);
+    box-shadow: shadow-helper(red-n500);
 
-  &_medium {
-    height: 6rem;
-    padding: 5px 8px;
-    &.tag_with-border {
-      height: 6.5rem;
+    &.tag_clickable {
+      box-shadow: shadow-helper(red-n400);
+      @include hover() {
+        background-color: color(red-n400);
+      }
     }
   }
 }
 
-@include apply-background-color-modifiers('.tag', $themeConfigs);
+.tag_yellow:not(.tag_disabled) {
+  background-color: color(yellow-n100);
+  color: color(base-n600);
+
+  &.tag_clickable {
+    box-shadow: shadow-helper(yellow-n200);
+    @include hover() {
+      background-color: color(yellow-n200);
+    }
+  }
+
+  &.tag_bold {
+    color: color(base-n600);
+    background-color: color(yellow-n500);
+    box-shadow: shadow-helper(yellow-n500);
+
+    &.tag_clickable {
+      box-shadow: shadow-helper(yellow-n400);
+      @include hover() {
+        background-color: color(yellow-n400);
+      }
+    }
+  }
+}
+
+.tag_green:not(.tag_disabled) {
+  background-color: color(green-n100);
+  color: color(green-n550);
+
+  &.tag_clickable {
+    box-shadow: shadow-helper(green-n200);
+    @include hover() {
+      background-color: color(green-n200);
+    }
+  }
+
+  &.tag_bold {
+    color: color(base-n0);
+    background-color: color(green-n500);
+    box-shadow: shadow-helper(green-n500);
+
+    &.tag_clickable {
+      box-shadow: shadow-helper(green-n400);
+      @include hover() {
+        background-color: color(green-n400);
+      }
+    }
+  }
+}
+
+.tag_primary:not(.tag_disabled) {
+  background-color: color(primary-n100);
+  color: color(primary-n600);
+
+  &.tag_clickable {
+    box-shadow: shadow-helper(primary-n200);
+    @include hover() {
+      background-color: color(primary-n200);
+    }
+  }
+
+  &.tag_bold {
+    color: color(base-n0);
+    background-color: color(primary-n500);
+    box-shadow: shadow-helper(primary-n500);
+
+    &.tag_clickable {
+      box-shadow: shadow-helper(primary-n400);
+      @include hover() {
+        background-color: color(primary-n400);
+      }
+    }
+  }
+}
+
+.tag_clickable {
+  cursor: pointer;
+
+  &:focus-visible:not(.tag_disabled) {
+    box-shadow: shadow-helper(primary-n400, 2px);
+  }
+}
+
+.tag_with-border:not(.tag_clickable:focus-visible):not(.tag_disabled) {
+  box-shadow: shadow-helper(base-n0);
+}
+
+.tag_small {
+  height: 5rem;
+  padding: 3px 8px;
+
+  &.tag_with-border {
+    height: 5.5rem;
+  }
+}
+
+.tag_medium {
+  height: 6rem;
+  padding: 5px 8px;
+
+  &.tag_with-border {
+    height: 6.5rem;
+  }
+}
+
+.tag_with-avatar {
+  &.tag_small {
+    padding-left: 1rem;
+  }
+
+  &.tag_medium {
+    padding-left: 1.5rem;
+  }
+}
+
+.tag_disabled {
+  cursor: not-allowed;
+
+  background-color: color(base-white-n400);
+  color: color(base-white-n250);
+  box-shadow: shadow-helper(base-white-n400);
+  @include host-selector-dark-theme() {
+    background-color: color(base-dark-n400);
+    color: color(base-dark-n250);
+    box-shadow: shadow-helper(base-dark-n500);
+  }
+}
