@@ -10,7 +10,7 @@ import { OnChangeCallback } from '../../../../internal/declarations/types/on-cha
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
 import { FormControlStatus } from '../../../../internal/declarations/enums/form-control-status.enum';
-import { isFormControlValidStatus } from '../../../../internal/functions/form-control-valid-status.function';
+import { isFormControlValidStatus } from '../../../../internal/functions/is-form-control-valid-status.function';
 
 /** @dynamic */
 @Injectable({
