@@ -9,6 +9,8 @@ import { SelectStateService as SelectStateServiceInterface } from '../../../../i
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
+import { FormControlStatus } from '../../../../internal/declarations/enums/form-control-status.enum';
+import { isFormControlValidStatus } from '../../../../internal/functions/form-control-valid-status.function';
 
 /** @dynamic */
 @Injectable({
@@ -38,7 +40,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
         ? of(true)
         : control.statusChanges.pipe(
             startWith(control.status),
-            map((status: string) => status === 'VALID')
+            map((status: FormControlStatus) => isFormControlValidStatus(status))
           )
     ),
     distinctUntilChanged(),
