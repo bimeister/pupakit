@@ -6,7 +6,7 @@ import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } fro
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 import { FormControlStatus } from '../../enums/form-control-status.enum';
-import { isFormControlValidStatus } from '../../../functions/form-control-valid-status.function';
+import { isFormControlValidStatus } from '../../../functions/is-form-control-valid-status.function';
 
 @Directive()
 export abstract class InputBaseControlValueAccessor<T> implements ControlValueAccessor, OnDestroy, OnInit {
