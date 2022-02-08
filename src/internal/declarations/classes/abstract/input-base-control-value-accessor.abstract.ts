@@ -5,6 +5,8 @@ import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rx
 import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
+import { FormControlStatus } from '../../enums/form-control-status.enum';
+import { isFormControlValidStatus } from '../../../functions/form-control-valid-status.function';
 
 @Directive()
 export abstract class InputBaseControlValueAccessor<T> implements ControlValueAccessor, OnDestroy, OnInit {
@@ -22,7 +24,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
         ? of(true)
         : control.statusChanges.pipe(
             startWith(control.status),
-            map((status: string) => status === 'VALID')
+            map((status: FormControlStatus) => isFormControlValidStatus(status))
           )
     ),
     distinctUntilChanged(),
