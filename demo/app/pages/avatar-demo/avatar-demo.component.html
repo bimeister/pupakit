@@ -1,52 +1,77 @@
 <h1>Avatar</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-avatar
-      [username]="usernameControl.value"
-      [src]="imageSrcControl.value"
-      [size]="size$ | async"
-      [withBorder]="withBorder$ | async"
-      [disabled]="disabled$ | async"
-    ></pupa-avatar>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h4>Avatar without parameters</h4>
+    <pupa-code-container [content]="example1Content">
+      <demo-avatar-example-1 *pupaCodeContainerPreviewTemplate></demo-avatar-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="size" type="AvatarSize">
-      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
-      <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
-    </demo-example-viewer-property>
+    <h4>Avatar with name</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-avatar-example-2 *pupaCodeContainerPreviewTemplate></demo-avatar-example-2>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element has a border.</ng-container>
-      <demo-props-switcher #withBorder$></demo-props-switcher>
-    </demo-example-viewer-property>
+    <h4>Avatar of different sizes</h4>
+    <pupa-code-container [content]="example3Content">
+      <demo-avatar-example-3 *pupaCodeContainerPreviewTemplate></demo-avatar-example-3>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
+    <h4>Avatar with border</h4>
+    <pupa-code-container [content]="example4Content">
+      <demo-avatar-example-4 *pupaCodeContainerPreviewTemplate></demo-avatar-example-4>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="username" type="string">
-      <ng-container *demoExampleViewerPropertyDescription>The string to display inside the element.</ng-container>
+    <h4>Disabled avatar</h4>
+    <pupa-code-container [content]="example5Content">
+      <demo-avatar-example-5 *pupaCodeContainerPreviewTemplate></demo-avatar-example-5>
+    </pupa-code-container>
 
-      <pupa-input-text
-        class="username-input"
-        placeholder="Username"
-        [formControl]="usernameControl"
-        [withReset]="true"
-      ></pupa-input-text>
-    </demo-example-viewer-property>
+    <h4>Uploading an avatar image</h4>
+    <pupa-code-container [content]="example6Content">
+      <demo-avatar-example-6 *pupaCodeContainerPreviewTemplate></demo-avatar-example-6>
+    </pupa-code-container>
+  </div>
 
-    <demo-example-viewer-property decoratorName="input" name="src" type="string">
-      <ng-container *demoExampleViewerPropertyDescription>
-        The source of the image displayed inside the element.
-      </ng-container>
-      <pupa-input-text placeholder="Image Src" [formControl]="imageSrcControl" [withReset]="true"></pupa-input-text>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer-content>
+      <pupa-avatar
+        [username]="avatarForm.get('name').value"
+        [src]="avatarForm.get('src').value"
+        [withBorder]="border$ | async"
+        [disabled]="disabled$ | async"
+        [size]="sizeOptions$ | async"
+      ></pupa-avatar>
+    </demo-example-viewer-content>
 
-<h2>Сode Example</h2>
-<pupa-code [code]="codeExample"></pupa-code>
+    <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+    <demo-example-viewer-section [formGroup]="avatarForm">
+      <demo-example-viewer-property decoratorName="input" name="username" type="string">
+        <ng-container *demoExampleViewerPropertyDescription>The string to display inside the element.</ng-container>
+        <pupa-input-text formControlName="name"></pupa-input-text>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="src" type="string">
+        <ng-container *demoExampleViewerPropertyDescription
+          >The source of the image displayed inside the element.</ng-container
+        >
+        <pupa-input-text formControlName="src"></pupa-input-text>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="size" type="AvatarSize">
+        <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+        <demo-props-radio-select #sizeOptions$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Whether the element has a border.</ng-container>
+        <demo-props-switcher #border$></demo-props-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+        <demo-props-switcher #disabled$></demo-props-switcher>
+      </demo-example-viewer-property>
+    </demo-example-viewer-section>
+  </div>
+</demo-page>
