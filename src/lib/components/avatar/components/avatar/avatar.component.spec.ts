@@ -36,7 +36,7 @@ describe('avatar.component.ts', () => {
         tap((responsePage: Page) => (page = responsePage)),
         switchMap((responsePage: Page) => from(responsePage.setViewport(VIEWPORT)).pipe(mapTo(responsePage))),
         switchMap((responsePage: Page) => from(responsePage.goto(BASE_KIT_URL, { waitUntil: 'domcontentloaded' }))),
-        switchMap(() => from(page.goto(`${BASE_KIT_URL}/avatar`, { waitUntil: 'domcontentloaded' })))
+        switchMap(() => from(page.goto(`${BASE_KIT_URL}/avatar?tab=api`, { waitUntil: 'domcontentloaded' })))
       )
       .subscribe(() => done());
   }, TIME_OUT_MS);

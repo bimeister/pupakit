@@ -1,0 +1,21 @@
+.avatar-container {
+  display: flex;
+
+  &__wrapper {
+    display: flex;
+    margin-right: 20rem;
+    align-items: center;
+
+    span {
+      margin-right: 2rem;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  .small-marker {
+    font-size: 2.5rem;
+  }
+}
