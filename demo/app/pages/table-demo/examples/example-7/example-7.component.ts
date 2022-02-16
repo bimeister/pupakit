@@ -1,9 +1,8 @@
 import { ListRange } from '@angular/cdk/collections';
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { getUuid } from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, getUuid } from '@bimeister/utilities';
 import { Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, map, switchMap } from 'rxjs/operators';
-
 import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
 import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
 import { TableEvents } from '../../../../../../src/internal/declarations/events/table.events';
@@ -72,6 +71,7 @@ export class TableExample7Component implements OnDestroy {
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
+    this.controller.setBodyInitialCountOfSkeletonRows();
 
     this.subscription.add(this.processRangeDataChanges());
   }
@@ -86,6 +86,7 @@ export class TableExample7Component implements OnDestroy {
       .pipe(
         debounceTime(500),
         map((event: TableEvents.ListRangeChanged) => event.listRange),
+        distinctUntilSerializedChanged(),
         switchMap((listRange: ListRange) => {
           const skip: number = listRange.start;
           const take: number = listRange.end - listRange.start;
