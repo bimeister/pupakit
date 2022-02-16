@@ -12,6 +12,8 @@ import { TrackByFunction, Type } from '@angular/core';
 import { Observable } from 'rxjs';
 import TableEventBase = TableEvents.TableEventBase;
 
+const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
+
 export class TableController<T> {
   public readonly eventBus: EventBus = new EventBus();
 
@@ -87,6 +89,10 @@ export class TableController<T> {
 
   public setBodyRowHeightPx(bodyRowHeightPx?: number): void {
     this.dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx);
+  }
+
+  public setBodyInitialCountOfSkeletonRows(countOfRows: number = DEFAULT_SKELETON_ROWS_COUNT): void {
+    this.setData(new Array(countOfRows).fill(null));
   }
 
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {

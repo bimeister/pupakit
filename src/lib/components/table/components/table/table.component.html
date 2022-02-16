@@ -67,6 +67,7 @@
         pupaScrollableContent
         class="table-body__scroll-viewport"
         [itemSize]="bodyRowHeightPx$ | async"
+        [minBufferPx]="minBufferPx$ | async"
       >
         <ng-container
           *cdkVirtualFor="let row of virtualScrollDataSource$ | async; trackBy: trackBy$ | async"

@@ -2,7 +2,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { TrackByFunction } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus';
 import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { TableColumnPin } from '../enums/table-column-pin.enum';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
@@ -19,6 +19,7 @@ interface DistributedColumns {
 }
 
 const DEFAULT_ROW_HEIGHT_PX: number = 50;
+const DEFAULT_MIN_BUFFER_PX: number = 100;
 
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
@@ -35,6 +36,9 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public readonly headerRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
   public readonly bodyRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
+
+  public readonly minBufferPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_MIN_BUFFER_PX);
+  public readonly countOfVisibleRows$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   public readonly virtualScrollDataSource: TableBodyRowsDataSource<T> = new TableBodyRowsDataSource<T>(this.data$);
 
@@ -119,6 +123,9 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   );
 
   public readonly tableWidthPx$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
+  public readonly tableHeightPx$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
+
+  public readonly tableViewportSizePx$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   constructor(public readonly eventBus: EventBus) {}
 
@@ -137,6 +144,25 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public setTableWidthPx(value: number): void {
     this.tableWidthPx$.next(value);
+  }
+
+  public setTableHeightPx(value: number): void {
+    this.tableHeightPx$.next(value);
+  }
+
+  public setTableViewportSizePx(value: number): void {
+    this.tableViewportSizePx$.next(value);
+  }
+
+  public measureFirstVisibleListRange(): void {
+    combineLatest([this.bodyRowHeightPx$, this.tableViewportSizePx$, this.minBufferPx$])
+      .pipe(take(1))
+      .subscribe(([bodyRowHeightPx, tableViewportSizePx, minBufferPx]: [number, number, number]) => {
+        const countOfVisibleRows: number = Math.ceil((tableViewportSizePx + minBufferPx * 2) / bodyRowHeightPx);
+        this.countOfVisibleRows$.next(countOfVisibleRows);
+
+        this.virtualScrollDataSource.setInitialListRange({ start: 0, end: countOfVisibleRows });
+      });
   }
 
   public setHeaderRowHeightPx(value?: number): void {

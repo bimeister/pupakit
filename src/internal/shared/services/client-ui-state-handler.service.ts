@@ -15,6 +15,14 @@ export class ClientUiStateHandlerService implements OnDestroy {
   >(null);
 
   public readonly uiState$: BehaviorSubject<Nullable<UiState>> = new BehaviorSubject<Nullable<UiState>>(null);
+
+  public readonly windowSquare$: Observable<number> = this.uiState$.pipe(
+    filterNotNil(),
+    map(({ windowWidth, windowHeight }: UiState) => windowWidth * windowHeight),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
   public readonly breakpoint$: Observable<string> = this.uiState$.pipe(
     filterNotNil(),
     map((uiState: UiState) => uiState.breakpoint),

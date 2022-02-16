@@ -24,11 +24,18 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>>;
 
   readonly tableWidthPx$: Observable<Nullable<number>>;
+  readonly tableHeightPx$: Observable<Nullable<number>>;
+  readonly tableViewportSizePx$: Observable<number>;
+  readonly minBufferPx$: Observable<number>;
+  readonly countOfVisibleRows$: Observable<number>;
 
   setData(value: T[]): Observable<T[]>;
   setSelectedIdsList(value: string[]): void;
   setColumnDefinitions(value: TableColumnDefinition[]): void;
   setTableWidthPx(value: number): void;
+  setTableHeightPx(value: number): void;
+  setTableViewportSizePx(value: number): void;
+  measureFirstVisibleListRange(): void;
   setHeaderRowHeightPx(value: number): void;
   setBodyRowHeightPx(value: number): void;
 }

@@ -18,7 +18,7 @@ import {
 import { BusEventBase, EventBus } from '@bimeister/event-bus';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { TableBodyRow } from '../../../../../internal/declarations/classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../../../../../internal/declarations/classes/table-body-rows-data-source.class';
 import { TableColumn } from '../../../../../internal/declarations/classes/table-column.class';
@@ -33,7 +33,6 @@ import { TableBodyCellContext } from '../../../../../internal/declarations/inter
 import { TableCellHtmlElementDataset } from '../../../../../internal/declarations/interfaces/table-cell-html-element-dataset.interface';
 import { TableDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/table-data-display-collection-ref.interface';
 import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
-import { UiState } from '../../../../../internal/declarations/interfaces/ui-state.interface';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { isTableCellHtmlElement } from '../../../../../internal/type-guards/is-table-cell-html-element.type-guard';
 import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
@@ -138,7 +137,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     map((bodyRowIdToBodyRowMap: Map<string, TableBodyRow<T>>) => Array.from(bodyRowIdToBodyRowMap.values()))
   );
 
-  public headerRow$: Observable<TableRow> = this.dataDisplayCollection$.pipe(
+  public readonly headerRow$: Observable<TableRow> = this.dataDisplayCollection$.pipe(
     map((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.headerRow)
   );
 
@@ -146,25 +145,31 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     map((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.placeholderRow)
   );
 
-  public trackBy$: Observable<TrackByFunction<T>> = this.dataDisplayCollection$.pipe(
+  public readonly trackBy$: Observable<TrackByFunction<T>> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.trackBy$)
   );
 
-  public scrollBehavior$: Observable<ScrollBehavior> = this.dataDisplayCollection$.pipe(
+  public readonly scrollBehavior$: Observable<ScrollBehavior> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.scrollBehavior$)
   );
 
-  public eventBus$: Observable<EventBus> = this.availableController$.pipe(
+  public readonly minBufferPx$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.minBufferPx$)
+  );
+
+  public readonly eventBus$: Observable<EventBus> = this.availableController$.pipe(
     map((controller: TableController<T>) => controller.eventBus)
   );
 
-  public leftHiddenColumnsCount$: Observable<number> = this.tableColumnsIntersectionService.leftHiddenColumnIds$.pipe(
-    map((leftHiddenColumnIds: string[]) => leftHiddenColumnIds.length)
-  );
+  public readonly leftHiddenColumnsCount$: Observable<number> =
+    this.tableColumnsIntersectionService.leftHiddenColumnIds$.pipe(
+      map((leftHiddenColumnIds: string[]) => leftHiddenColumnIds.length)
+    );
 
-  public rightHiddenColumnsCount$: Observable<number> = this.tableColumnsIntersectionService.rightHiddenColumnIds$.pipe(
-    map((rightHiddenColumnIds: string[]) => rightHiddenColumnIds.length)
-  );
+  public readonly rightHiddenColumnsCount$: Observable<number> =
+    this.tableColumnsIntersectionService.rightHiddenColumnIds$.pipe(
+      map((rightHiddenColumnIds: string[]) => rightHiddenColumnIds.length)
+    );
   constructor(
     private readonly tableTemplatesService: TableTemplatesService<T>,
     public readonly clientUiStateHandlerService: ClientUiStateHandlerService,
@@ -193,10 +198,11 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   public ngAfterViewInit(): void {
-    this.subscription.add(this.updateDataTableWidthOnWindowResize());
+    this.subscription.add(this.updateDataTableSizesOnWindowResize());
 
     this.startEventsQueue();
-    this.registrerHeaderScrollableContainerForIntersectionDetection();
+    this.registerHeaderScrollableContainerForIntersectionDetection();
+    this.measureFirstVisibleListRange();
   }
 
   public ngOnDestroy(): void {
@@ -267,6 +273,16 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerRef?.nativeElement;
     this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
     this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
+  }
+
+  private measureFirstVisibleListRange(): void {
+    this.dataDisplayCollection$.pipe(take(1)).subscribe((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => {
+      this.cdkVirtualScrollViewportRef.checkViewportSize();
+      const viewportSizePx: number = this.cdkVirtualScrollViewportRef.getViewportSize();
+
+      dataDisplayCollection.setTableViewportSizePx(viewportSizePx);
+      dataDisplayCollection.measureFirstVisibleListRange();
+    });
   }
 
   private processTableControllerChanges(change: ComponentChange<this, TableController<T>>): void {
@@ -381,18 +397,24 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       });
   }
 
-  private updateDataTableWidthOnWindowResize(): Subscription {
-    return this.clientUiStateHandlerService.uiState$
+  private updateDataTableSizesOnWindowResize(): Subscription {
+    return this.clientUiStateHandlerService.windowSquare$
       .pipe(
-        filterNotNil(),
-        map((uiState: UiState) => uiState.windowWidth),
-        distinctUntilChanged(),
-        map(() => this.tableRef.nativeElement.clientWidth),
+        map(() => {
+          const { clientWidth, clientHeight }: HTMLElement = this.tableRef.nativeElement;
+          return { tableWidthPx: clientWidth, tableHeightPx: clientHeight };
+        }),
         withLatestFrom(this.dataDisplayCollection$)
       )
-      .subscribe(([tableWidthPx, dataDisplayCollection]: [number, TableDataDisplayCollectionRef<T>]) => {
-        dataDisplayCollection.setTableWidthPx(tableWidthPx);
-      });
+      .subscribe(
+        ([{ tableWidthPx, tableHeightPx }, dataDisplayCollection]: [
+          { tableWidthPx: number; tableHeightPx: number },
+          TableDataDisplayCollectionRef<T>
+        ]) => {
+          dataDisplayCollection.setTableWidthPx(tableWidthPx);
+          dataDisplayCollection.setTableHeightPx(tableHeightPx);
+        }
+      );
   }
 
   private startEventsQueue(): void {
@@ -401,7 +423,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     });
   }
 
-  private registrerHeaderScrollableContainerForIntersectionDetection(): void {
+  private registerHeaderScrollableContainerForIntersectionDetection(): void {
     const headerScrollableRowsContainer: HTMLElement = this.headerScrollableRowsContainerRef.nativeElement;
     this.tableColumnsIntersectionService.registerScrollArea(headerScrollableRowsContainer);
   }

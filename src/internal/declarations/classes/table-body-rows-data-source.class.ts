@@ -1,12 +1,9 @@
 import { CollectionViewer, DataSource, ListRange } from '@angular/cdk/collections';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { ReplaySubject, Observable, Subscription } from 'rxjs';
 import { filterNotNil } from '@bimeister/utilities';
 
 export class TableBodyRowsDataSource<T> extends DataSource<T> {
-  public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>({
-    start: 0,
-    end: 0,
-  });
+  public readonly listRange$: ReplaySubject<ListRange> = new ReplaySubject<ListRange>(1);
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly data$: Observable<T[]>) {
@@ -23,5 +20,9 @@ export class TableBodyRowsDataSource<T> extends DataSource<T> {
 
   public disconnect(_collectionViewer: CollectionViewer): void {
     this.subscription.unsubscribe();
+  }
+
+  public setInitialListRange(listRange: ListRange): void {
+    this.listRange$.next(listRange);
   }
 }
