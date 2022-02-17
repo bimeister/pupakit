@@ -40,21 +40,19 @@ import { TableColumnsIntersectionService } from '../../services/table-columns-in
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
 import { TableTemplatesService } from '../../services/table-templates.service';
 
-function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset {
+function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset | null {
   const targetPath: EventTarget[] = event.composedPath();
 
-  let rowId: string = null;
-  let columnId: string = null;
+  let cellData: Nullable<TableCellHtmlElementDataset> = null;
 
   for (const target of targetPath) {
     if (!isTableCellHtmlElement(target)) {
       continue;
     }
-    rowId = target.dataset.rowId;
-    columnId = target.dataset.columnId;
+    cellData = target.dataset;
   }
 
-  return { rowId, columnId };
+  return cellData;
 }
 
 @Component({
@@ -235,32 +233,32 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
             row.isHovered$.next(false);
           }
 
-          const { rowId, columnId }: TableCellHtmlElementDataset = getCellDataFromEvent(event);
+          const cellData: Nullable<TableCellHtmlElementDataset> = getCellDataFromEvent(event);
 
-          if (isNil(rowId) || isNil(columnId)) {
+          if (isNil(cellData)) {
             eventBus.dispatch(new TableEvents.RowHover(null));
             eventBus.dispatch(new TableEvents.ColumnHover(null));
             return;
           }
 
-          columnIdToColumnMap.get(columnId)?.isHovered$?.next(true);
-          bodyRowIdToBodyRowMap.get(rowId)?.isHovered$?.next(true);
+          columnIdToColumnMap.get(cellData.columnId)?.isHovered$?.next(true);
+          bodyRowIdToBodyRowMap.get(cellData.rowId)?.isHovered$?.next(true);
 
-          eventBus.dispatch(new TableEvents.RowHover(rowId));
-          eventBus.dispatch(new TableEvents.ColumnHover(columnId));
+          eventBus.dispatch(new TableEvents.RowHover(cellData.rowId));
+          eventBus.dispatch(new TableEvents.ColumnHover(cellData.columnId));
         }
       );
   }
 
   public processTap(event: HammerInput): void {
-    const { rowId, columnId }: TableCellHtmlElementDataset = getCellDataFromEvent(event.srcEvent);
+    const cellData: Nullable<TableCellHtmlElementDataset> = getCellDataFromEvent(event.srcEvent);
 
-    if (isNil(rowId) || isNil(columnId)) {
+    if (isNil(cellData)) {
       return;
     }
 
     this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
-      eventBus.dispatch(new TableEvents.CellClick(columnId, rowId));
+      eventBus.dispatch(new TableEvents.CellClick(cellData.columnId, cellData.rowId, cellData.rowType));
     });
   }
 

@@ -3,6 +3,7 @@ import { ListRange } from '@angular/cdk/collections';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { BusEventBase } from '@bimeister/event-bus';
 import { getUuid, Nullable } from '@bimeister/utilities';
+import { TableRowType } from '../enums/table-row-type.enum';
 
 export namespace TableEvents {
   export class TableEventBase<T = unknown> extends BusEventBase<T> {
@@ -27,7 +28,11 @@ export namespace TableEvents {
     }
   }
   export class CellClick extends TableEventBase {
-    constructor(public readonly columnId: string, public readonly rowId: string) {
+    constructor(
+      public readonly columnId: string,
+      public readonly rowId: string,
+      public readonly rowType: TableRowType
+    ) {
       super();
     }
   }

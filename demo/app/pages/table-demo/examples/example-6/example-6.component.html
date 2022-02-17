@@ -26,48 +26,63 @@
 <div class="events">
   <div>
     <h3>TableEvents.ColumnWidthChanged:</h3>
-    columnId: {{ (columnWidthChanged$ | async)?.columnId }}, widthPx: {{ (columnWidthChanged$ | async)?.widthPx }}
+    <ng-container *pupaLet="columnWidthChanged$ | async; let columnId = columnId; let widthPx = widthPx">
+      columnId: {{ columnId }}, widthPx: {{ widthPx }}
+    </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.ColumnSortingChanged:</h3>
-    columnId: {{ (columnSortingChanged$ | async)?.columnId }}, sorting: {{ (columnSortingChanged$ | async)?.sorting }}
+    <ng-container *pupaLet="columnSortingChanged$ | async; let columnId = columnId; let sorting = sorting">
+      columnId: {{ columnId }}, sorting: {{ sorting }}
+    </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.ColumnHover:</h3>
-    columnId: {{ (columnHover$ | async)?.columnId }}
+    <ng-container *pupaLet="columnHover$ | async; let columnId = columnId"> columnId: {{ columnId }} </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.RowHover:</h3>
-    rowId: {{ (rowHover$ | async)?.rowId }}
+    <ng-container *pupaLet="rowHover$ | async; let rowId = rowId"> rowId: {{ rowId }} </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.CellClick:</h3>
-    columnId: {{ (cellClick$ | async)?.columnId }}, rowId: {{ (cellClick$ | async)?.rowId }}
+    <ng-container *pupaLet="cellClick$ | async; let columnId = columnId; let rowId = rowId; let rowType = rowType">
+      columnId: {{ columnId }}, rowId: {{ rowId }}, rowType: {{ rowType }}
+    </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.HorizontalScrollBarVisibilityChanged:</h3>
-    isVisible: {{ (horizontalScrollBarVisibilityChanged$ | async)?.isVisible }}
+    <ng-container *pupaLet="horizontalScrollBarVisibilityChanged$ | async; let isVisible = isVisible">
+      isVisible: {{ isVisible }}
+    </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.VerticalScrollBarVisibilityChanged:</h3>
-    isVisible: {{ (verticalScrollBarVisibilityChanged$ | async)?.isVisible }}
+    <ng-container *pupaLet="verticalScrollBarVisibilityChanged$ | async; let isVisible = isVisible">
+      isVisible: {{ isVisible }}
+    </ng-container>
   </div>
 
   <div>
     <h3>TableEvents.HiddenColumnIdsChanged:</h3>
-    leftColumnIds: {{ (hiddenColumnIdsChanged$ | async)?.leftColumnIds | json }}, rightColumnIds:
-    {{ (hiddenColumnIdsChanged$ | async)?.rightColumnIds | json }}
+    <ng-container
+      *pupaLet="hiddenColumnIdsChanged$ | async; let leftColumnIds = leftColumnIds; let rightColumnIds = rightColumnIds"
+    >
+      leftColumnIds: {{ leftColumnIds | json }}, rightColumnIds: {{ rightColumnIds | json }}
+    </ng-container>
   </div>
-  table.component.ts
+
   <div>
     <h3>TableEvents.ListRangeChanged:</h3>
-    listRande: {{ (listRangeChanged$ | async)?.listRange | json }}
+    <ng-container *pupaLet="listRangeChanged$ | async; let listRange = listRange">
+      listRange: {{ listRange | json }}
+    </ng-container>
   </div>
 </div>
 

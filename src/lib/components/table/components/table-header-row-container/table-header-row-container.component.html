@@ -8,6 +8,7 @@
   [style.width.px]="column.widthPx$ | async"
   [attr.data-column-id]="column.definition.id"
   [attr.data-row-id]="row.id"
+  [attr.data-row-type]="rowType"
 >
 </pupa-table-header-cell-container>
 <div
@@ -16,4 +17,5 @@
   [class.row-hovered]="row.isHovered$ | async"
   [attr.data-column-id]="'placeholder'"
   [attr.data-row-id]="row.id"
+  [attr.data-row-type]="rowType"
 ></div>

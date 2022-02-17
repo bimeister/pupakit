@@ -4,6 +4,7 @@ import { TableBodyRow } from '../../../../../internal/declarations/classes/table
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { TableRowType } from '../../../../../internal/declarations/enums/table-row-type.enum';
 
 @Component({
   selector: 'pupa-table-body-row-container',
@@ -15,6 +16,8 @@ import { map } from 'rxjs/operators';
 export class TableBodyRowContainerComponent<T> {
   @Input() public columns: TableColumn[];
   @Input() public row: TableBodyRow<T>;
+
+  public readonly rowType: TableRowType = TableRowType.Body;
 
   public readonly isPlaceholderVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$.pipe(
     map((isHorizontalVisible: boolean) => !isHorizontalVisible)

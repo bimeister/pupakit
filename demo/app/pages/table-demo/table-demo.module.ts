@@ -9,6 +9,7 @@ import { TableExample4Component } from './examples/example-4/example-4.component
 import { TableExample5Component } from './examples/example-5/example-5.component';
 import { TableExample6Component } from './examples/example-6/example-6.component';
 import { TableExample7Component } from './examples/example-7/example-7.component';
+import { DirectivesModule } from '../../../../src/internal/directives/directives.module';
 
 const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample1Component,
@@ -22,6 +23,6 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
 
 @NgModule({
   declarations: [...EXAMPLE_COMPONENTS, TableDemoComponent],
-  imports: [TableDemoRoutingModule, DemoSharedModule],
+  imports: [TableDemoRoutingModule, DemoSharedModule, DirectivesModule],
 })
 export class TableDemoModule {}
