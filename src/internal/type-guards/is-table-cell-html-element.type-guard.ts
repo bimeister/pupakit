@@ -6,5 +6,9 @@ export function isTableCellHtmlElement(value: unknown): value is TableCellHtmlEl
   }
 
   const element: TableCellHtmlElement = value as TableCellHtmlElement;
-  return element.dataset.columnId !== undefined && element.dataset.rowId !== undefined;
+  return (
+    element.dataset.columnId !== undefined &&
+    element.dataset.rowId !== undefined &&
+    element.dataset.rowType !== undefined
+  );
 }
