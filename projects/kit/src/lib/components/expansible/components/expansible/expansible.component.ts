@@ -111,7 +111,7 @@ export class ExpansibleComponent
     this.subscription
       .add(this.updateHostWidthOnWidthChanges())
       .add(this.updateHostHeightOnHeightChanges())
-      .add(this.updateHostPositionOnPositionControllerMissmatchTargetPosition());
+      .add(this.updateHostPositionOnPositionControllerMissMatchTargetPosition());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -146,7 +146,7 @@ export class ExpansibleComponent
     });
   }
 
-  private updateHostPositionOnPositionControllerMissmatchTargetPosition(): Subscription {
+  private updateHostPositionOnPositionControllerMissMatchTargetPosition(): Subscription {
     return this.activeExpander$
       .pipe(
         filterNotNil(),
