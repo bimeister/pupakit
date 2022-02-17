@@ -16,7 +16,22 @@
     "*.spec.ts",
     "*.mock.ts"
   ],
-  "dictionaries": ["en_us", "en-gb", "typescript", "node", "css", "bash", "softwareTerms", "localTerms"],
+  "import": [
+    "./node_modules/cspell-dict-russian/cspell-ext.json",
+    "./node_modules/cspell-dict-lorem-ipsum/cspell-ext.json"
+  ],
+  "dictionaries": [
+    "en_us",
+    "en-gb",
+    "russian",
+    "lorem-ipsum",
+    "typescript",
+    "node",
+    "css",
+    "bash",
+    "softwareTerms",
+    "localTerms"
+  ],
   "dictionaryDefinitions": [
     {
       "name": "localTerms",

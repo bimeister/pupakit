@@ -49,10 +49,10 @@ export class DraggableComponent {
     private readonly changeDetectorRef: ChangeDetectorRef,
     private readonly renderer: Renderer2
   ) {
-    this.subscription.add(this.moveDraggableElementIfDraggerPositionDoesntMatchTarget());
+    this.subscription.add(this.moveDraggableElementIfDraggerPositionDoesNotMatchTarget());
   }
 
-  private moveDraggableElementIfDraggerPositionDoesntMatchTarget(): Subscription {
+  private moveDraggableElementIfDraggerPositionDoesNotMatchTarget(): Subscription {
     return this.draggerPositionMoveDelta$.subscribe((positionMoveDelta: Position) => {
       const containerClientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
       const [deltaXPx, deltaYPx]: Position = positionMoveDelta;

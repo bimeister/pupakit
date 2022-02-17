@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScrollableExample2Component {
-  public readonly virstualScrollItems: number[] = Array.from({ length: 500 }).map(
+  public readonly virtualScrollItems: number[] = Array.from({ length: 500 }).map(
     (_item: number, index: number) => index
   );
 }
