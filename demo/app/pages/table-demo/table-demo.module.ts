@@ -10,6 +10,7 @@ import { TableExample5Component } from './examples/example-5/example-5.component
 import { TableExample6Component } from './examples/example-6/example-6.component';
 import { TableExample7Component } from './examples/example-7/example-7.component';
 import { DirectivesModule } from '../../../../src/internal/directives/directives.module';
+import { TableExample8Component } from './examples/example-8/example-8.component';
 
 const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample1Component,
@@ -19,6 +20,7 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample5Component,
   TableExample6Component,
   TableExample7Component,
+  TableExample8Component,
 ];
 
 @NgModule({

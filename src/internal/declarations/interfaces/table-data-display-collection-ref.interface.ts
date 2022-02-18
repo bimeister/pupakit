@@ -1,11 +1,11 @@
-import { Observable } from 'rxjs';
-import { TableColumnDefinition } from './table-column-definition.interface';
+import { TrackByFunction } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
+import { TableBodyRow } from '../classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../classes/table-body-rows-data-source.class';
 import { TableColumn } from '../classes/table-column.class';
 import { TableRow } from '../classes/table-row.class';
-import { TableBodyRow } from '../classes/table-body-row.class';
-import { TrackByFunction } from '@angular/core';
+import { TableColumnDefinition } from './table-column-definition.interface';
 
 export interface TableDataDisplayCollectionRef<T> {
   readonly trackBy$: Observable<TrackByFunction<T>>;

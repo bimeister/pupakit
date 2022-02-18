@@ -52,6 +52,7 @@ export {
   TableColumnSorting,
   TableController,
   TableControllerOptions,
+  TablePagedDataProducer,
   TableDataDisplayCollection,
   TableDataDisplayCollectionRef,
   TableEvents,
