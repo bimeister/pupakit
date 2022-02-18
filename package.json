@@ -6,14 +6,7 @@
     "type": "git",
     "url": "https://git.bimeister.io/common/pupakit.git"
   },
-  "engines": {
-    "node": ">=14.0.0"
-  },
   "scripts": {
-    "ng": "ng",
-    "build-cli": "build-cli",
-    "gulp": "gulp",
-    "yarn": "yarn",
     "start": "yarn run start:demo",
     "start:demo": "yarn run create-untracked-files && ng serve --project=demo --open --host 0.0.0.0 --port 4201",
     "build": "gulp build",

@@ -64,7 +64,7 @@
               },
               {
                 "glob": "**/examples/**/*",
-                "input": "./projects/demo/app/pages",
+                "input": "./projects/demo/src/app/pages",
                 "output": "/examples"
               },
               {
