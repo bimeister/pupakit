@@ -1,7 +1,6 @@
 import { NgModule, Type } from '@angular/core';
-import { TableDemoComponent } from './table-demo.component';
+import { DirectivesModule } from '@kit/internal/directives/directives.module';
 import { DemoSharedModule } from '../../shared/shared.module';
-import { TableDemoRoutingModule } from './table-demo-routing.module';
 import { TableExample1Component } from './examples/example-1/example-1.component';
 import { TableExample2Component } from './examples/example-2/example-2.component';
 import { TableExample3Component } from './examples/example-3/example-3.component';
@@ -9,8 +8,9 @@ import { TableExample4Component } from './examples/example-4/example-4.component
 import { TableExample5Component } from './examples/example-5/example-5.component';
 import { TableExample6Component } from './examples/example-6/example-6.component';
 import { TableExample7Component } from './examples/example-7/example-7.component';
-import { DirectivesModule } from '../../../../src/internal/directives/directives.module';
 import { TableExample8Component } from './examples/example-8/example-8.component';
+import { TableDemoRoutingModule } from './table-demo-routing.module';
+import { TableDemoComponent } from './table-demo.component';
 
 const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample1Component,
