@@ -30,7 +30,7 @@ Dependencies:
     paths:
       - ./node_modules/
 
-Static Files:
+Static Files (kit):
   stage: build
   needs: ['Dependencies']
   dependencies:
@@ -38,7 +38,21 @@ Static Files:
   interruptible: true
   allow_failure: false
   script:
-    - npm run build
+    - npm run build:kit
+  artifacts:
+    paths:
+      - ./node_modules/
+      - ./dist/
+
+Static Files (demo):
+  stage: build
+  needs: ['Dependencies']
+  dependencies:
+    - 'Dependencies'
+  interruptible: true
+  allow_failure: false
+  script:
+    - npm run build:demo-ci
   artifacts:
     paths:
       - ./node_modules/
@@ -84,9 +98,9 @@ Code Style:
 
 NPM (dev):
   stage: deploy
-  needs: ['Static Files']
+  needs: ['Static Files (kit)']
   dependencies:
-    - 'Static Files'
+    - 'Static Files (kit)'
   interruptible: false
   allow_failure: true
   variables:
@@ -98,17 +112,17 @@ NPM (dev):
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
       --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
       --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc ./.npmignore ./LICENSE --target-directory ./dist/
+    - cp ./.npmrc  --target-directory ./dist/lib/
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
-      --package_json_path="./dist/package.json" --commit_hash="${GIT_COMMIT_HASH}-dev"
-    - npm publish ./dist/ --tag="${TAG}" --access="public"
+      --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}-dev"
+    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
 
 NPM (stable):
   stage: deploy
   # needs: ['Static Files', 'Test', 'Code Style', 'Lint', 'Spell Check']
-  needs: ['Static Files', 'Code Style', 'Lint', 'Spell Check']
+  needs: ['Static Files (kit)', 'Code Style', 'Lint', 'Spell Check']
   dependencies:
-    - 'Static Files'
+    - 'Static Files (kit)'
   interruptible: false
   allow_failure: true
   variables:
@@ -120,26 +134,27 @@ NPM (stable):
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
       --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
       --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc ./.npmignore --target-directory ./dist/ && cp ./package.json ./LICENSE --target-directory ./dist/
-    - cp ./.npmrc ./.npmignore ./LICENSE --target-directory ./dist/
+    - cp ./.npmrc  --target-directory ./dist/lib/
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
-      --package_json_path="./dist/package.json" --commit_hash="${GIT_COMMIT_HASH}"
-    - npm publish ./dist/ --tag="${TAG}" --access="public"
-# pages:
-#   stage: deploy
-#   needs: ['Dependencies']
-#   interruptible: true
-#   allow_failure: false
-#   script:
-#     - scripts/build.sh pages_service
-#     - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=pages_service" dist/demo
-#       public
-#   when: always
-#   artifacts:
-#     when: always
-#     paths:
-#       - public
+      --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}"
+    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
 
+pages:
+  # tags:
+  #   - common
+  stage: deploy
+  needs: ['Static Files (demo)']
+  dependencies:
+    - 'Static Files (demo)'
+  interruptible: true
+  allow_failure: false
+  script:
+    - mv dist/demo public
+  when: always
+  artifacts:
+    when: always
+    paths:
+      - public
 # dev:
 #   stage: deploy
 #   variables:
