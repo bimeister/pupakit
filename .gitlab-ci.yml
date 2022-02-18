@@ -1,5 +1,13 @@
-include:
-  - local: .gitlab/templates/common.template.yml
+variables:
+  NPM_AUTH_TOKEN: ${CI_JOB_TOKEN}
+  GIT_COMMIT_HASH: ${CI_COMMIT_SHORT_SHA}
+
+default:
+  tags:
+    - docker-executor
+  image:
+    name: dockerhub.bimeister.io/proxy_cache/library/node:16-slim
+    entrypoint: ['']
 
 stages:
   - preinstall
@@ -13,15 +21,28 @@ Dependencies:
   interruptible: true
   allow_failure: false
   script:
-    - scripts/build.sh base_service
+    - npm ci
+  cache:
+    key: dependencies
+    paths:
+      - node_modules/
+  artifacts:
+    paths:
+      - ./node_modules/
 
-Static files:
+Static Files:
   stage: build
   needs: ['Dependencies']
+  dependencies:
+    - 'Dependencies'
   interruptible: true
   allow_failure: false
   script:
-    - scripts/build.sh build_service
+    - npm run build
+  artifacts:
+    paths:
+      - ./node_modules/
+      - ./dist/
 
 Lint:
   stage: check
@@ -29,7 +50,7 @@ Lint:
   interruptible: true
   allow_failure: false
   script:
-    - scripts/build.sh lint_service
+    - npm run lint
 
 Spell Check:
   stage: check
@@ -37,22 +58,21 @@ Spell Check:
   interruptible: true
   allow_failure: false
   script:
-    - scripts/build.sh spell-check_service
+    - npm run cspell:check
 
-Test:
-  stage: check
-  needs: ['Dependencies']
-  interruptible: true
-  allow_failure: false
-  script:
-    - scripts/build.sh test_service
-    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=test_service" coverage
-      coverage
-  artifacts:
-    when: always
-    reports:
-      junit:
-        - coverage/junit.xml
+# Test:
+#   stage: check
+#   needs: ['Dependencies'] # Необходимо подготовить Image со всеми зависимостями.
+#   interruptible: true # Поддержка будет возвращена в сл. MR
+#   allow_failure: false
+#   script:
+#     - npm run test:ci
+#   artifacts:
+#     name: 'code-coverage'
+#     when: always
+#     reports:
+#       junit:
+#         - coverage/junit.xml
 
 Code Style:
   stage: check
@@ -60,75 +80,92 @@ Code Style:
   interruptible: true
   allow_failure: false
   script:
-    - scripts/build.sh codestyle_service
-
-NPM (stable):
-  stage: deploy
-  needs: ['Static files', 'Test', 'Lint', 'Code Style']
-  interruptible: false
-  allow_failure: true
-  only:
-    - master
-  when: always
-  variables:
-    TAG: 'stable'
-  script:
-    - scripts/build.sh deploy_service
+    - npm run prettier:check
 
 NPM (dev):
   stage: deploy
-  needs: ['Static files', 'Test', 'Lint', 'Code Style']
+  needs: ['Static Files']
+  dependencies:
+    - 'Static Files'
   interruptible: false
   allow_failure: true
+  variables:
+    TAG: 'dev'
   except:
     - master
   when: manual
-  variables:
-    TAG: 'dev'
   script:
-    - scripts/build.sh deploy_service
+    - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
+      --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
+      --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
+    - cp ./.npmrc ./.npmignore ./LICENSE --target-directory ./dist/
+    - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
+      --package_json_path="./dist/package.json" --commit_hash="${GIT_COMMIT_HASH}-dev"
+    - npm publish ./dist/ --tag="${TAG}" --access="public"
 
-pages:
+NPM (stable):
   stage: deploy
-  needs: ['Dependencies']
-  interruptible: true
-  allow_failure: false
-  script:
-    - scripts/build.sh pages_service
-    - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=pages_service" dist/demo
-      public
+  # needs: ['Static Files', 'Test', 'Code Style', 'Lint', 'Spell Check']
+  needs: ['Static Files', 'Code Style', 'Lint', 'Spell Check']
+  dependencies:
+    - 'Static Files'
+  interruptible: false
+  allow_failure: true
+  variables:
+    TAG: 'stable'
+  only:
+    - master
   when: always
-  artifacts:
-    when: always
-    paths:
-      - public
-
-dev:
-  stage: deploy
-  variables:
-    CI: $CI
-    BASE_HREF: 'pupakit-dev.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
   script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
+    - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
+      --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
+      --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
+    - cp ./.npmrc ./.npmignore --target-directory ./dist/ && cp ./package.json ./LICENSE --target-directory ./dist/
+    - cp ./.npmrc ./.npmignore ./LICENSE --target-directory ./dist/
+    - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
+      --package_json_path="./dist/package.json" --commit_hash="${GIT_COMMIT_HASH}"
+    - npm publish ./dist/ --tag="${TAG}" --access="public"
+# pages:
+#   stage: deploy
+#   needs: ['Dependencies']
+#   interruptible: true
+#   allow_failure: false
+#   script:
+#     - scripts/build.sh pages_service
+#     - scripts/cp-from-image.sh "pipeline=${PIPELINE_ID};commit=${GIT_COMMIT_HASH};service=pages_service" dist/demo
+#       public
+#   when: always
+#   artifacts:
+#     when: always
+#     paths:
+#       - public
 
-test:
-  stage: deploy
-  variables:
-    CI: $CI
-    BASE_HREF: 'pupakit-test.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
+# dev:
+#   stage: deploy
+#   variables:
+#     CI: $CI
+#     BASE_HREF: 'pupakit-dev.bimeister.io'
+#   when: manual
+#   interruptible: true
+#   allow_failure: true
+#   before_script:
+#     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+#   script:
+#     - scripts/build.sh stage_deploy_service
+#     - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+#       "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
+
+# test:
+#   stage: deploy
+#   variables:
+#     CI: $CI
+#     BASE_HREF: 'pupakit-test.bimeister.io'
+#   when: manual
+#   interruptible: true
+#   allow_failure: true
+#   before_script:
+#     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+#   script:
+#     - scripts/build.sh stage_deploy_service
+#     - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+#       "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
