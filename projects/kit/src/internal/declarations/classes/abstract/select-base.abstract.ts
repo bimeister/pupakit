@@ -18,10 +18,10 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract placeholderOnHover: boolean;
   public abstract withReset: boolean;
 
-  public abstract invalidTooltipHideOnHover: boolean = false;
-  public abstract invalidTooltipDisabled: boolean = false;
-  public abstract invalidTooltip: Nullable<string> = null;
-  public abstract invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
+  public invalidTooltipHideOnHover: boolean = false;
+  public invalidTooltipDisabled: boolean = false;
+  public invalidTooltip: Nullable<string> = null;
+  public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
   public readonly isTriggerTouched$: Observable<boolean> = this.selectStateService.isTriggerTouched$;
 

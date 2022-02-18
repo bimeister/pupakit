@@ -8,7 +8,7 @@ export function buildDemoStatic(): TaskFunction {
 }
 
 function buildDemo(): TaskFunction {
-  const command: string = 'yarn run build:demo --baseHref #';
+  const command: string = 'yarn run build:demo --base-href #';
 
   return (onDone: VoidFunction): void => {
     executeCommandWithLogging(command, {
