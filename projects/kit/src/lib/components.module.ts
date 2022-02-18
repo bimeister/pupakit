@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
-
 import { SharedModule } from '../internal/shared/shared.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
