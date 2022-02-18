@@ -126,7 +126,7 @@
             }
           },
           "options": {
-            "lintFilePatterns": ["./projects/demo/**/*.ts", "./projects/demo/**/*.html"]
+            "lintFilePatterns": ["./projects/demo/src/**/*.ts", "./projects/demo/src/**/*.html"]
           }
         },
         "serve": {
