@@ -1,7 +1,9 @@
 module.exports = {
   verbose: true,
   collectCoverage: true,
-  roots: ['<rootDir>/src'],
+  setupFiles: ['./jest.setup.js'],
+  rootDir: './',
+  roots: ['<rootDir>/projects/kit/src'],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
@@ -13,4 +15,7 @@ module.exports = {
   },
   coverageDirectory: 'coverage',
   reporters: [['jest-junit', { suiteName: 'Unit Tests', outputDirectory: 'coverage' }]],
+  moduleNameMapper: {
+    '^@bimeister/utilities/.*$': '<rootDir>/node_modules/@bimeister/utilities',
+  },
 };

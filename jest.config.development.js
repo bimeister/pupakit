@@ -1,7 +1,9 @@
 module.exports = {
   verbose: true,
   collectCoverage: true,
-  roots: ['<rootDir>/src'],
+  setupFiles: ['./jest.setup.js'],
+  rootDir: './',
+  roots: ['<rootDir>/projects/kit/src'],
   transform: {
     '^.+\\.ts$': 'ts-jest',
   },
@@ -10,5 +12,8 @@ module.exports = {
     'ts-jest': {
       tsconfig: 'tsconfig.spec.json',
     },
+  },
+  moduleNameMapper: {
+    '^@bimeister/utilities/.*$': '<rootDir>/node_modules/@bimeister/utilities',
   },
 };

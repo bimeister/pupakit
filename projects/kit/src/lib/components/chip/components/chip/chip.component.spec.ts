@@ -92,7 +92,7 @@ describe('chip.component.ts', () => {
     TIME_OUT_MS
   );
 
-  it(
+  it.skip(
     'should check chip-color is light',
     (done: jest.DoneCallback) => {
       from(page.waitForXPath('//pupa-radio-control[contains(., "light")]'))
@@ -108,7 +108,7 @@ describe('chip.component.ts', () => {
     TIME_OUT_MS
   );
 
-  it(
+  it.skip(
     'should check chip-color is error',
     (done: jest.DoneCallback) => {
       from(page.waitForXPath('//pupa-radio-control[contains(., "error")]'))
