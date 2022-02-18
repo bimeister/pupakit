@@ -1,15 +1,16 @@
-import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
-import { TableDataDisplayCollection } from './table-data-display-collection.class';
-import { DefaultTableEventHandler } from './default-table-event-handler.class';
-import { TableEvents } from '../events/table.events';
-import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
-import { TableControllerOptions } from '../interfaces/table-controller-options.interface';
-import { EventsQueue } from './events-queue.class';
-import { EventBus } from '@bimeister/event-bus';
-import { QueueEvents } from '../events/queue.events';
 import { TrackByFunction, Type } from '@angular/core';
+import { EventBus } from '@bimeister/event-bus';
+import { Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
+import { TableColumnSorting } from '../enums/table-column-sorting.enum';
+import { QueueEvents } from '../events/queue.events';
+import { TableEvents } from '../events/table.events';
+import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
+import { TableControllerOptions } from '../interfaces/table-controller-options.interface';
+import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
+import { DefaultTableEventHandler } from './default-table-event-handler.class';
+import { EventsQueue } from './events-queue.class';
+import { TableDataDisplayCollection } from './table-data-display-collection.class';
 import TableEventBase = TableEvents.TableEventBase;
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
@@ -91,8 +92,9 @@ export class TableController<T> {
     this.dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx);
   }
 
-  public setBodyInitialCountOfSkeletonRows(countOfRows: number = DEFAULT_SKELETON_ROWS_COUNT): void {
-    this.setData(new Array(countOfRows).fill(null));
+  public setBodyInitialCountOfSkeletonRows(countOfRows: Nullable<number> = DEFAULT_SKELETON_ROWS_COUNT): void {
+    const skeletonRows: T[] = new Array(countOfRows ?? DEFAULT_SKELETON_ROWS_COUNT).fill(null);
+    this.setData(skeletonRows);
   }
 
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {
