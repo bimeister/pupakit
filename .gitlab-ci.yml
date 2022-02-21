@@ -1,6 +1,9 @@
 variables:
   NPM_AUTH_TOKEN: ${CI_JOB_TOKEN}
   GIT_COMMIT_HASH: ${CI_COMMIT_SHORT_SHA}
+  PIPELINE_ID: ${CI_PIPELINE_IID}
+  DEPLOY_IMAGE: dockerhub.bimeister.io/bimeister/pupakit:${CI_COMMIT_SHORT_SHA}
+  BUILD_EFFECTIVE_YML_FILE: docker-compose.yml
 
 default:
   tags:
@@ -140,8 +143,6 @@ NPM (stable):
     - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
 
 pages:
-  # tags:
-  #   - common
   stage: deploy
   needs: ['Static Files (demo)']
   dependencies:
@@ -155,32 +156,37 @@ pages:
     when: always
     paths:
       - public
-# dev:
-#   stage: deploy
-#   variables:
-#     CI: $CI
-#     BASE_HREF: 'pupakit-dev.bimeister.io'
-#   when: manual
-#   interruptible: true
-#   allow_failure: true
-#   before_script:
-#     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-#   script:
-#     - scripts/build.sh stage_deploy_service
-#     - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-#       "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
 
-# test:
-#   stage: deploy
-#   variables:
-#     CI: $CI
-#     BASE_HREF: 'pupakit-test.bimeister.io'
-#   when: manual
-#   interruptible: true
-#   allow_failure: true
-#   before_script:
-#     - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-#   script:
-#     - scripts/build.sh stage_deploy_service
-#     - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-#       "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"
+Stage (dev):
+  tags:
+    - common
+  stage: deploy
+  variables:
+    CI: $CI
+    BASE_HREF: 'pupakit-dev.bimeister.io'
+  when: manual
+  interruptible: true
+  allow_failure: true
+  before_script:
+    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+  script:
+    - scripts/build.sh stage_deploy_service
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+      "docker rm -f pupakit-dev ; docker run -d -p 80:80 --name pupakit-dev $DEPLOY_IMAGE"
+
+Stage (test):
+  tags:
+    - common
+  stage: deploy
+  variables:
+    CI: $CI
+    BASE_HREF: 'pupakit-test.bimeister.io'
+  when: manual
+  interruptible: true
+  allow_failure: true
+  before_script:
+    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+  script:
+    - scripts/build.sh stage_deploy_service
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+      "docker rm -f pupakit-test ; docker run -d -p 8080:80 --name pupakit-test $DEPLOY_IMAGE"

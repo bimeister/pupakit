@@ -13,6 +13,7 @@
     "build:kit": "yarn run create-untracked-files && gulp build",
     "build:dev": "yarn run create-untracked-files && ng build --watch",
     "build:demo": "yarn run create-untracked-files && ng build --project=demo",
+    "build:demo-stage": "yarn run create-untracked-files && ng build --project=demo --base-href #",
     "build:demo-ci": "yarn run create-untracked-files && ng build --project=demo --base-href \"${CI_PAGES_URL}/\"",
     "build:demo-puppeteer": "gulp build-demo-static",
     "lint": "yarn run lint:inspect",
