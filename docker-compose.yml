@@ -1,75 +1,6 @@
 version: '3.4'
 
 services:
-  base_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/base.dockerfile
-    image: ${BASE_IMAGE}
-
-  build_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/build.dockerfile
-      args:
-        - BASE_IMAGE
-    image: ${BUILD_IMAGE}
-
-  lint_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/lint.dockerfile
-      args:
-        - BASE_IMAGE
-
-  test_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/test.dockerfile
-      labels:
-        pipeline: ${PIPELINE_ID}
-        commit: ${GIT_COMMIT_HASH}
-        service: test_service
-      args:
-        - BASE_IMAGE
-
-  codestyle_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/codestyle.dockerfile
-      args:
-        - BASE_IMAGE
-
-  spell-check_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/spell-check.dockerfile
-      args:
-        - BASE_IMAGE
-
-  deploy_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/deploy.dockerfile
-      args:
-        - NPM_AUTH_TOKEN
-        - GIT_COMMIT_HASH
-        - BUILD_IMAGE
-        - TAG
-
-  pages_service:
-    build:
-      context: ./
-      dockerfile: ./build/docker/pages.dockerfile
-      labels:
-        pipeline: ${PIPELINE_ID}
-        commit: ${GIT_COMMIT_HASH}
-        service: pages_service
-      args:
-        - BASE_IMAGE
-    environment:
-      - CI_PAGES_URL
-
   stage_deploy_service:
     build:
       context: ./
@@ -79,6 +10,5 @@ services:
         commit: ${GIT_COMMIT_HASH}
         service: stage_deploy_service
       args:
-        - BASE_IMAGE
         - BASE_HREF
     image: ${DEPLOY_IMAGE}
