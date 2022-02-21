@@ -13,4 +13,4 @@ const CENTER_TOP_POSITION: ConnectedPosition = {
   overlayY: 'top',
 };
 
-export const OVERLAY_POSITIONS: ConnectedPosition[] = [CENTER_BOTTOM_POSITION, CENTER_TOP_POSITION];
+export const OVERLAY_POSITIONS: ConnectedPosition[] = [CENTER_TOP_POSITION, CENTER_BOTTOM_POSITION];
