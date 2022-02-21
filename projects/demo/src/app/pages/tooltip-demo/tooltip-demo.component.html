@@ -1,83 +1,93 @@
 <h1>Tooltip</h1>
 
-<demo-example-viewer class="tooltip-demo">
-  <demo-example-viewer-content>
-    <pupa-button-icon
-      [pupaTooltip]="'Tooltip simple content here!'"
-      [icon]="'app-notification'"
-      [pupaTooltip]
-      #tooltip="pupaTooltip"
-      [tooltipContentTemplate]="customTooltipTemplate"
-      [tooltipHideOnHover]="hideOnTooltipHoverControl.value"
-      [tooltipDisabled]="disabledControl.value"
-      [active]="tooltip.isOpened$ | async"
-    >
-    </pupa-button-icon>
-  </demo-example-viewer-content>
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Tooltip content text">
-      <pupa-textarea [formControl]="contentControl"></pupa-textarea>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h4>Simple usage</h4>
+    <pupa-code-container [content]="example1Content">
+      <demo-tooltip-example-1 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>PupaTooltipDirective Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="pupaTooltip" type="string">
-      <ng-container *demoExampleViewerPropertyDescription>Tooltip simple content.</ng-container>
-    </demo-example-viewer-property>
+    <h4>Tooltip with custom template</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-tooltip-example-2 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-2>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="tooltipContentTemplate" type="TemplateRef">
-      <ng-container *demoExampleViewerPropertyDescription>Tooltip content template.</ng-container>
-    </demo-example-viewer-property>
+    <h4>Tooltip with opened state</h4>
+    <pupa-code-container [content]="example3Content">
+      <demo-tooltip-example-3 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-3>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="tooltipHideOnHover" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Hide On Tooltip Hover</ng-container>
-      <demo-props-switcher [formControl]="hideOnTooltipHoverControl"> </demo-props-switcher>
-    </demo-example-viewer-property>
+    <pupa-info-block variant="info" class="tooltip-demo__info-block">
+      <ul>
+        <li>
+          If you submit simple content and a template to the directive at the same time, the display will take
+          precedence over the template.
+        </li>
+        <li>Tooltips are not shown on touch devices.</li>
+        <li>
+          If you don't want to show the tooltip under any conditions, then the directive has an boolean input
+          <pupa-code-inline>tooltipDisabled</pupa-code-inline>
+          .
+        </li>
+      </ul>
+    </pupa-info-block>
 
-    <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher [formControl]="disabledControl"> </demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+    <h4>Tooltip with delay</h4>
+    <pupa-code-container [content]="example4Content">
+      <demo-tooltip-example-4 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-4>
+    </pupa-code-container>
+  </div>
 
-<h2>Simple usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-tooltip-example-1 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-1>
-</pupa-code-container>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer-content>
+      <pupa-button-icon
+        #tooltip="pupaTooltip"
+        [pupaTooltip]="'Tooltip simple content here!'"
+        [icon]="'app-notification'"
+        [tooltipContentTemplate]="(tooltipContent$ | async) ? customTooltipTemplate : ''"
+        [tooltipHideOnHover]="tooltipHideOnHover$ | async"
+        [tooltipDisabled]="disabledControl$ | async"
+        [active]="tooltip.isOpened$ | async"
+      >
+      </pupa-button-icon>
+    </demo-example-viewer-content>
 
-<h2>Tooltip with custom template</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-tooltip-example-2 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-2>
-</pupa-code-container>
+    <demo-example-viewer-section>
+      <demo-example-viewer-config-item name="Tooltip content text">
+        <pupa-textarea [formControl]="contentControl"></pupa-textarea>
+      </demo-example-viewer-config-item>
+    </demo-example-viewer-section>
 
-<h2>Tooltip with opened state</h2>
-<pupa-code-container [content]="example3Content">
-  <demo-tooltip-example-3 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-3>
-</pupa-code-container>
+    <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+    <demo-example-viewer-section>
+      <demo-example-viewer-property decoratorName="input" name="pupaTooltip" type="string">
+        <ng-container *demoExampleViewerPropertyDescription>Tooltip simple content.</ng-container>
+      </demo-example-viewer-property>
 
-<ng-template #customTooltipTemplate>
-  <div [innerHtml]="getSanitizedHtml()"></div>
-</ng-template>
+      <demo-example-viewer-property decoratorName="input" name="tooltipContentTemplate" type="TemplateRef">
+        <ng-container *demoExampleViewerPropertyDescription>Tooltip content template.</ng-container>
+        <demo-props-switcher #tooltipContent$></demo-props-switcher>
+      </demo-example-viewer-property>
 
-<pupa-info-block variant="info" class="tooltip-demo__info-block">
-  <ul>
-    <li>
-      If you submit simple content and a template to the directive at the same time, the display will take precedence
-      over the template.
-    </li>
-    <li>Tooltips are not shown on touch devices.</li>
-    <li>
-      If you don't want to show the tooltip under any conditions, then the directive has an boolean input
-      <pupa-code-inline>tooltipDisabled</pupa-code-inline>
-      .
-    </li>
-  </ul>
-</pupa-info-block>
+      <demo-example-viewer-property decoratorName="input" name="tooltipHideOnHover" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Hide On Tooltip Hover</ng-container>
+        <demo-props-switcher #tooltipHideOnHover$></demo-props-switcher>
+      </demo-example-viewer-property>
 
-<h2>Tooltip with delay</h2>
-<pupa-code-container [content]="example4Content">
-  <demo-tooltip-example-4 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-4>
-</pupa-code-container>
+      <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+        <demo-props-switcher #disabledControl$></demo-props-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="tooltipDelayMs" type="number">
+        <ng-container *demoExampleViewerPropertyDescription
+          >Time in ms to delay the opening of the tooltip</ng-container
+        >
+      </demo-example-viewer-property>
+    </demo-example-viewer-section>
+  </div>
+
+  <ng-template #customTooltipTemplate>
+    <div [innerHtml]="getSanitizedHtml()"></div>
+  </ng-template>
+</demo-page>
