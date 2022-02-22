@@ -1,6 +1,10 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
+:host {
+  display: flex;
+}
+
 .separator {
   @include font-size-small();
   transform: translateY(2px);
