@@ -27,7 +27,11 @@
   <div class="breadcrumbs breadcrumbs_visible-layer">
     <ng-container *ngIf="!(isMobile$ | async)">
       <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="rootBreadcrumb$ | async as rootBreadcrumb">
-        <pupa-breadcrumb [template]="breadcrumbTemplate" [breadcrumb]="rootBreadcrumb"></pupa-breadcrumb>
+        <pupa-breadcrumb
+          [template]="breadcrumbTemplate"
+          [breadcrumb]="rootBreadcrumb"
+          (click)="emitClickedId(rootBreadcrumb.id)"
+        ></pupa-breadcrumb>
         <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
       </div>
     </ng-container>
@@ -42,7 +46,12 @@
 
       <pupa-dropdown-menu-content #dropdownMenuContent [horizontalPosition]="'center'">
         <ng-container *ngFor="let breadcrumb of unfitBreadcrumbs$ | async">
-          <pupa-dropdown-menu-item [tabindex]="-1" [id]="breadcrumb.id" [routerLink]="breadcrumb.routerLink">
+          <pupa-dropdown-menu-item
+            [tabindex]="-1"
+            [id]="breadcrumb.id"
+            [routerLink]="breadcrumb.routerLink"
+            (select)="emitClickedId(breadcrumb.id)"
+          >
             <ng-container
               [ngTemplateOutlet]="breadcrumbTemplate"
               [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
@@ -60,6 +69,7 @@
           [template]="breadcrumbTemplate"
           [breadcrumb]="breadcrumb"
           [active]="isActive"
+          (click)="emitClickedId(breadcrumb.id, isActive)"
         ></pupa-breadcrumb>
         <pupa-breadcrumb-separator *ngIf="!isActive"></pupa-breadcrumb-separator>
       </div>

@@ -5,9 +5,11 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   QueryList,
   TemplateRef,
   ViewChild,
@@ -31,6 +33,7 @@ import { Breadcrumb } from '../../../../../internal/declarations/interfaces/brea
 import { BreadcrumbsParts } from '../../../../../internal/declarations/interfaces/breadcrumbs-parts.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-template.directive';
 
@@ -44,6 +47,8 @@ import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-tem
 export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() public breadcrumbs: Breadcrumb[] = [];
   public readonly breadcrumbs$: BehaviorSubject<Breadcrumb[]> = new BehaviorSubject<Breadcrumb[]>([]);
+
+  @Output() public clickedBreadcrumbId: EventEmitter<Uuid> = new EventEmitter<Uuid>();
 
   @ViewChild('breadcrumbs') private readonly breadcrumbsContainerRef: ElementRef<HTMLElement>;
   @ViewChildren('breadcrumb') private readonly breadcrumbList: QueryList<ElementRef<HTMLElement>>;
@@ -106,6 +111,13 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
 
   public handleClickOnUnfitTrigger(): void {
     this.detectChanges();
+  }
+
+  public emitClickedId(clickedId: Uuid, isActive: boolean = false): void {
+    if (isActive) {
+      return;
+    }
+    this.clickedBreadcrumbId.emit(clickedId);
   }
 
   private processBreadcrumbChange(change: ComponentChange<this, Breadcrumb[]>): void {
