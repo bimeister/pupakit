@@ -2,7 +2,7 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { filterNotNil } from '@bimeister/utilities';
 import { BehaviorSubject, Subscription, timer } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, withLatestFrom } from 'rxjs/operators';
-import { SidebarScrollDelay } from '../../../../../../demo/declarations/enums/sidebar-scroll-delay.enum';
+import { SidebarScrollDelay } from '../../../declarations/enums/sidebar-scroll-delay.enum';
 
 @Injectable()
 export class SidebarScrollService implements OnDestroy {
