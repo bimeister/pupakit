@@ -1,6 +1,6 @@
 import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { Nullable } from '@bimeister/utilities/types';
+import { Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { QueueEvents } from '../events/queue.events';

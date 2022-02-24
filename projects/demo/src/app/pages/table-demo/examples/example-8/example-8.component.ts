@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { distinctUntilSerializedChanged, getUuid } from '@bimeister/utilities';
+import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
+import { TablePagedDataProducer } from '@kit/internal/declarations/classes/table-paged-data-producer.class';
+import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
+import { TableEvents } from '@kit/internal/declarations/events/table.events';
+import { PagedVirtualScrollArguments } from '@kit/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
+import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
+import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 import { Observable, of, Subscription } from 'rxjs';
 import { debounceTime, delay, map, switchMap } from 'rxjs/operators';
-import { PagedVirtualScrollArguments, TableEvents } from '../../../../../../src/internal/api';
-import { TableController } from '../../../../../../src/internal/declarations/classes/table-controller.class';
-import { TableColumnPin } from '../../../../../../src/internal/declarations/enums/table-column-pin.enum';
-import { TableColumnDefinition } from '../../../../../../src/internal/declarations/interfaces/table-column-definition.interface';
-import { Uuid } from '../../../../../../src/internal/declarations/types/uuid.type';
-import { TablePagedDataProducer } from '../../../../../../src/public-api';
 
 interface SomeData {
   id: Uuid;

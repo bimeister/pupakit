@@ -28,7 +28,7 @@
     "test": "yarn run test:debug",
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "yarn run build:demo-puppeteer && ng test --configuration=ci",
-    "autofix": "yarn run prettify & yarn run check:spelling",
+    "autofix": "yarn run prettify & yarn run cspell:check",
     "create-untracked-files": "gulp create:untracked-files"
   },
   "dependencies": {

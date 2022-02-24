@@ -3,7 +3,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 const BASE_REQUEST_PATH: string = 'stepper-demo/examples';
 
 @Component({
-  selector: 'demo-stepepr-demo',
+  selector: 'demo-stepper-demo',
   templateUrl: './stepper-demo.component.html',
   styleUrls: ['./stepper-demo.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
