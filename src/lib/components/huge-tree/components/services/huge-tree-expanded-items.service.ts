@@ -79,4 +79,39 @@ export class HugeTreeExpandedItemsService {
       this.expandedTreeItemsByIdMap$.next(updatedMap);
     });
   }
+
+  public closeChildrenByParentId(id: string, withParent: boolean): void {
+    this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
+      const updatedMap: Map<string, ExpandedTreeItem> = new Map<string, ExpandedTreeItem>(expandedTreeItemsMap);
+
+      const expandedItem: ExpandedTreeItem | undefined = updatedMap.get(id);
+
+      if (isNil(expandedItem)) {
+        return;
+      }
+      expandedItem.getAllChildrenIds().forEach((childId: string) => updatedMap.delete(childId));
+      if (withParent) {
+        updatedMap.delete(id);
+      }
+
+      this.expandedTreeItemsByIdMap$.next(updatedMap);
+    });
+  }
+
+  public closeChildById(parentId: string, id: string): void {
+    this.expandedTreeItemsByIdMap$.pipe(take(1)).subscribe((expandedTreeItemsMap: Map<string, ExpandedTreeItem>) => {
+      const expandedItem: ExpandedTreeItem | undefined = expandedTreeItemsMap.get(parentId);
+
+      if (isNil(expandedItem)) {
+        return;
+      }
+      const childTreeId: string = expandedItem.getAllChildrenIds().find((childId: string) => childId === id);
+
+      if (isNil(childTreeId)) {
+        return;
+      }
+
+      this.closeChildrenByParentId(childTreeId, true);
+    });
+  }
 }
