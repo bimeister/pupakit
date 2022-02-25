@@ -104,6 +104,7 @@
     padding: 3rem 0;
     text-decoration: none;
     box-sizing: border-box;
+    position: relative;
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
 
@@ -112,10 +113,26 @@
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
 
+    &::before {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      content: '';
+      width: 1rem;
+      pointer-events: none;
+      background-color: rgba(var(--color_primary-n500), 1);
+    }
+
     &.active,
     &:hover {
       color: color(base-n700);
       background: color(base-white-n500);
+
+      &::before {
+        display: block;
+      }
     }
   }
 }

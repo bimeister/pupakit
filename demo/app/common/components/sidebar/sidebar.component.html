@@ -21,8 +21,9 @@
           <ng-container *ngFor="let group of filteredLinkGroups$ | async">
             <h3 class="subheader">{{ group.title }}</h3>
             <a
-              routerLinkActive="active"
               *ngFor="let linkItem of group.linkItems"
+              [demoSidebarLink]="linkItem.link"
+              routerLinkActive="active"
               [routerLink]="linkItem.link"
               (click)="handleClickLink()"
               class="side-nav-item"
