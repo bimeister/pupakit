@@ -96,6 +96,14 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     this.hugeTreeExpandedItemsService.expandParents(parentIds);
   }
 
+  public closeChildrenByParentId(id: string, withParent: boolean = true): void {
+    this.hugeTreeExpandedItemsService.closeChildrenByParentId(id, withParent);
+  }
+
+  public closeChildById(parentId: string, id: string): void {
+    this.hugeTreeExpandedItemsService.closeChildById(parentId, id);
+  }
+
   public getTreeNodeDataByIndex(index: number, totalTreeItemsLength: number): FlatHugeTreeItem | undefined {
     if (isNil(index) || isEmpty(this.treeItemsData)) {
       return undefined;
