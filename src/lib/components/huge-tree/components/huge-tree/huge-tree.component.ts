@@ -13,7 +13,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map, startWith, switchMap, take } from 'rxjs/operators';
 import { FlatHugeTreeItem } from '../../../../../internal/declarations/classes/flat-huge-tree-item.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -49,12 +49,11 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   public readonly selectedNodeId$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
   public treeItemsData: FlatHugeTreeItem[] = [];
-  @Output() public updateNeeded: EventEmitter<void> = new EventEmitter<void>();
   @Output() public nodeClicked: EventEmitter<string> = new EventEmitter<string>();
 
-  public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
+  public treeStateRequestParams$: Observable<HugeTreeState>;
 
-  private readonly subscription: Subscription = new Subscription();
+  public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
 
   constructor(
     private readonly hugeTreeExpandedItemsService: HugeTreeExpandedItemsService,
@@ -66,7 +65,22 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.subscription.add(this.emitRequestParamsChanges());
+    this.treeStateRequestParams$ = combineLatest([
+      this.expandedTreeItemIds$,
+      this.viewport.scrolledIndexChange.pipe(startWith(0)),
+    ]).pipe(
+      switchMap(() => this.getTreeState()),
+      distinctUntilChanged((prevState: HugeTreeState, currState: HugeTreeState) => {
+        const prevRoundedRange: ListRange = this.roundListRange(prevState.range, prevState.totalCount);
+        const currRoundedRange: ListRange = this.roundListRange(currState.range, currState.totalCount);
+
+        return (
+          JSON.stringify(prevState.expandedItemIds) === JSON.stringify(currState.expandedItemIds) &&
+          prevRoundedRange.end === currRoundedRange.end &&
+          prevRoundedRange.start === currRoundedRange.start
+        );
+      })
+    );
   }
 
   public isExpanded(expandedIds: string[], nodeId: string): boolean {
@@ -200,23 +214,5 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     }
 
     this.selectedNodeId$.next(updatedValue);
-  }
-
-  private emitRequestParamsChanges(): Subscription {
-    return combineLatest([this.expandedTreeItemIds$, this.viewport.scrolledIndexChange.pipe(startWith(0))])
-      .pipe(
-        switchMap(() => this.getTreeState()),
-        distinctUntilChanged((prevState: HugeTreeState, currState: HugeTreeState) => {
-          const prevRoundedRange: ListRange = this.roundListRange(prevState.range, prevState.totalCount);
-          const currRoundedRange: ListRange = this.roundListRange(currState.range, currState.totalCount);
-
-          return (
-            JSON.stringify(prevState.expandedItemIds) === JSON.stringify(currState.expandedItemIds) &&
-            prevRoundedRange.end === currRoundedRange.end &&
-            prevRoundedRange.start === currRoundedRange.start
-          );
-        })
-      )
-      .subscribe(() => this.updateNeeded.emit());
   }
 }
