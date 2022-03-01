@@ -46,7 +46,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
   @Input() public withReset: boolean;
-  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
@@ -325,7 +325,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public reset(): void {
-    this.withReset$.pipe(take(1)).subscribe(() => this.updateValue(''));
+    this.withReset$.pipe(take(1), filterTruthy()).subscribe(() => this.updateValue(''));
     this.inputElementRef.nativeElement.focus();
   }
 
