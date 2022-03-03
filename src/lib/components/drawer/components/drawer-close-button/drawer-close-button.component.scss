@@ -2,6 +2,10 @@
 @use 'variables' as *;
 @use 'sass:map';
 
+:host {
+  display: contents;
+}
+
 .drawer-close-button {
   display: none;
 

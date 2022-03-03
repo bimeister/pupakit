@@ -9,14 +9,14 @@
   font-size: 5rem;
   line-height: 6rem;
 
-  padding: 1rem 7rem;
+  padding: 1rem;
   margin-bottom: 0rem;
 
   @include ellipsis-text-overflow;
 
   @include xs() {
-    padding: 1rem;
     margin-bottom: 2rem;
+    padding: 1rem 2rem;
   }
 
   @include font-type-point();

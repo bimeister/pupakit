@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, HostBinding, Input, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
-type Types = 'right' | 'left';
-
-const DEFAULT_TYPE: Types = 'right';
+type Mode = 'normal' | 'buttons';
 
 @Component({
   selector: 'pupa-drawer-layout-header-content',
@@ -13,14 +10,5 @@ const DEFAULT_TYPE: Types = 'right';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerLayoutHeaderContentComponent {
-  @Input()
-  public set type(value: Types) {
-    if (isNil(value)) {
-      return;
-    }
-
-    this.hostClass = value;
-  }
-
-  @HostBinding('class') public hostClass: string = DEFAULT_TYPE;
+  @Input() public mode: Mode = 'normal';
 }

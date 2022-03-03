@@ -1,13 +1,19 @@
-:host.right {
-  margin-left: auto;
-}
-
-:host.left {
-  margin-right: auto;
-}
+@use 'mixins' as *;
 
 .drawer-layout-header-content {
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  &_mode-normal {
+    padding: 0 1rem;
+
+    @include xs() {
+      padding: 0 2rem;
+    }
+  }
+
+  &_mode-buttons {
+    padding: 0;
+  }
 }
