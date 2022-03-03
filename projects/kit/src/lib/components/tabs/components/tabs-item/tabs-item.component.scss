@@ -5,6 +5,7 @@
   display: block;
   margin-right: 20px;
   outline: none;
+  position: relative;
 
   &:last-child {
     margin-right: 0;
@@ -13,10 +14,10 @@
 
 .tabs-item {
   min-width: 1rem;
-  max-width: 42rem;
+  max-width: 46rem;
   color: color('base-white-n100');
   box-sizing: border-box;
-  padding-bottom: 4rem;
+  padding: 0 2rem 4rem 2rem;
   cursor: pointer;
   user-select: none;
 
