@@ -19,10 +19,8 @@ import { DrawerLayoutHeaderRowComponent } from './components/drawer-layout-heade
 import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/drawer-layout-header.component';
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
-import { DrawerTitleContainerComponent } from './components/drawer-title-container/drawer-title-container.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
 import { ScrollableModule } from '../scrollable/scrollable.module';
-import { DrawerLayoutStubComponent } from './components/drawer-stub/drawer-layout-stub.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +28,12 @@ import { DrawerLayoutStubComponent } from './components/drawer-stub/drawer-layou
     DrawerLayoutComponent,
     DrawerLayoutHeaderComponent,
     DrawerLayoutBodyComponent,
-    DrawerLayoutStubComponent,
     DrawerLayoutFooterComponent,
     DrawerLayoutHeaderContentComponent,
     DrawerCloseButtonComponent,
     DrawerButtonIconComponent,
     DrawerLayoutHeaderRowComponent,
     DrawerTitleComponent,
-    DrawerTitleContainerComponent,
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,
@@ -57,7 +53,6 @@ import { DrawerLayoutStubComponent } from './components/drawer-stub/drawer-layou
     OverlayModule,
     PortalModule,
     DrawerLayoutBodyComponent,
-    DrawerLayoutStubComponent,
     DrawerLayoutFooterComponent,
     DrawerLayoutHeaderComponent,
     DrawerLayoutHeaderContentComponent,
@@ -65,7 +60,6 @@ import { DrawerLayoutStubComponent } from './components/drawer-stub/drawer-layou
     DrawerButtonIconComponent,
     DrawerLayoutHeaderRowComponent,
     DrawerTitleComponent,
-    DrawerTitleContainerComponent,
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,

@@ -6,8 +6,8 @@
   box-sizing: border-box;
 
   &_body {
-    margin-left: -11rem;
-    margin-right: -11rem;
+    margin-left: -6rem;
+    margin-right: -6rem;
 
     @include xs() {
       margin-left: -5rem;

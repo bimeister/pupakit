@@ -4,21 +4,20 @@
 .drawer-layout-header-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 
   box-sizing: border-box;
   width: 100%;
-  padding: 2rem 4rem;
+  padding: 2rem 5rem;
 
-  &_title-container {
-    padding: 0rem 4rem;
+  @include xs() {
+    padding: 2rem 3rem;
   }
 
-  &_top {
+  &_type-top {
     margin-bottom: 2rem;
 
     @include xs() {
-      padding: 2rem 3rem;
-
       box-shadow: 0px -1px 0px 0px color(base-white-n400) inset;
 
       @include host-selector-dark-theme() {

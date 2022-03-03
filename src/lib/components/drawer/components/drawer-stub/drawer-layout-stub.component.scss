@@ -1,9 +1,0 @@
-@use 'mixins' as *;
-
-.footer-stub {
-  padding-top: 5rem;
-
-  @include xs() {
-    padding-top: 4rem;
-  }
-}
