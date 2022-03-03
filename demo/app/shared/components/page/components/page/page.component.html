@@ -8,7 +8,7 @@
       <pupa-tabs-item
         *ngFor="let tab of pageTabs"
         [routerLink]="'.'"
-        [queryParams]="{tab: tab.name}"
+        [queryParams]="{ tab: tab.name }"
         routerLinkActive
         #routerLinkActive="routerLinkActive"
         [isActive]="routerLinkActive.isActive"

@@ -1,3 +1,11 @@
-<div [@show]="{ value: animationState$ | async, params: { openAnimationDurationMs, closeAnimationDurationMs } }">
+<div
+  [@show]="{
+    value: animationState$ | async,
+    params: {
+      openAnimationDurationMs: this.openAnimationDurationMs,
+      closeAnimationDurationMs: this.closeAnimationDurationMs
+    }
+  }"
+>
   <ng-container [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="templateContext"></ng-container>
 </div>

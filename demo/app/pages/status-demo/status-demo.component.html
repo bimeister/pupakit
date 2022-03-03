@@ -1,7 +1,7 @@
 <h1>Status</h1>
 
 <demo-page>
-  <div *demoPageTab='"overview"'>
+  <div *demoPageTab="'overview'">
     <h2>Base usage</h2>
     <pupa-code-container [content]="example1Content">
       <demo-status-example-1 *pupaCodeContainerPreviewTemplate></demo-status-example-1>
@@ -13,7 +13,7 @@
     </pupa-code-container>
   </div>
 
-  <div *demoPageTab='"api"'>
+  <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content class="content">
         <pupa-status [color]="color$ | async" [kind]="kind$ | async" [disabled]="disabled$ | async">Status</pupa-status>
