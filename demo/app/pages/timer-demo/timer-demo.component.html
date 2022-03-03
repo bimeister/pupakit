@@ -1,7 +1,7 @@
 <h1>Timer</h1>
 
 <demo-page>
-  <div *demoPageTab='"overview"'>
+  <div *demoPageTab="'overview'">
     <pupa-info-block variant="warning">
       Maximum <pupa-code-inline>seconds</pupa-code-inline> property value is 999.
     </pupa-info-block>
@@ -14,7 +14,7 @@
     </pupa-code-container>
   </div>
 
-  <div *demoPageTab='"api"'>
+  <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content>
         <pupa-timer-round [seconds]="secondsControl.value"></pupa-timer-round>

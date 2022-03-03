@@ -1,17 +1,17 @@
-import { LetDirective } from './let.directive';
-import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
-import { BehaviorSubject, combineLatest, from } from 'rxjs';
-import { ComponentFixture, TestBed, TestBedStatic, waitForAsync } from '@angular/core/testing';
 import { CommonModule, JsonPipe } from '@angular/common';
-import { take } from 'rxjs/operators';
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, TestBedStatic, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { BehaviorSubject, combineLatest, from } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { LetDirective } from './let.directive';
 
 @Component({
   template: `
-    <div *pupaLet='{id: id$ | async, name: name$ | async} as groupedVariables; let id=id; let name=name'>
-      <div id='name'>{{name}}</div>
-      <div id='id'>{{id}}</div>
-      <div id='grouped'>{{groupedVariables | json}}</div>
+    <div *pupaLet="{ id: id$ | async, name: name$ | async } as groupedVariables; let id = id; let name = name">
+      <div id="name">{{ name }}</div>
+      <div id="id">{{ id }}</div>
+      <div id="grouped">{{ groupedVariables | json }}</div>
     </div>
   `,
 })

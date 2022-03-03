@@ -12,8 +12,8 @@
       <ng-container
         [ngTemplateOutlet]="treeNode"
         [ngTemplateOutletContext]="{
-        nodeData: getTreeNodeDataByIndex(index, dataObjectWithLength)
-      }"
+          nodeData: getTreeNodeDataByIndex(index, dataObjectWithLength)
+        }"
       ></ng-container>
     </ng-container>
   </cdk-virtual-scroll-viewport>
@@ -42,7 +42,9 @@
       >
         <button class="default-expansion-button">
           <pupa-icon
-            [name]="isExpanded(expandedTreeItemIds$ | async, nodeData.entityId) ? 'ios-arrow-down' : 'ios-arrow-forward'"
+            [name]="
+              isExpanded(expandedTreeItemIds$ | async, nodeData.entityId) ? 'ios-arrow-down' : 'ios-arrow-forward'
+            "
           ></pupa-icon>
         </button>
       </div>

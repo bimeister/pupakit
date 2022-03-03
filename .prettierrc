@@ -15,7 +15,6 @@
   "htmlWhitespaceSensitivity": "css",
   "vueIndentScriptAndStyle": false,
   "endOfLine": "lf",
-  "embeddedLanguageFormatting": "off",
   "cursorOffset": 0,
   "filepath": "none",
   "printWidth": 120

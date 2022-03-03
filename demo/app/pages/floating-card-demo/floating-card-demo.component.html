@@ -4,7 +4,7 @@
   <demo-example-viewer-content>
     <ng-container
       [ngTemplateOutlet]="content"
-      [ngTemplateOutletContext]="{$implicit: formControl.value || 0}"
+      [ngTemplateOutletContext]="{ $implicit: formControl.value || 0 }"
     ></ng-container>
   </demo-example-viewer-content>
 
@@ -20,12 +20,12 @@
 <ng-template #content let-ratio>
   <div class="content">
     <pupa-floating-card [ratio]="ratio">
-      <pupa-button> Button With {{ratio}} Ratio</pupa-button>
+      <pupa-button> Button With {{ ratio }} Ratio</pupa-button>
     </pupa-floating-card>
 
     <pupa-floating-card resetType="custom" [ratio]="ratio" #floating>
       <div class="content__div">
-        Div With {{ratio}} Ratio
+        Div With {{ ratio }} Ratio
         <pupa-button kind="subtle" (mousemove)="$event.stopPropagation()" (click)="floating.dropTransform()">
           Reset Floating
         </pupa-button>

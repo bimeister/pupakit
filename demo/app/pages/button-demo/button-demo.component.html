@@ -45,13 +45,20 @@
       <demo-example-viewer-content>
         <div
           class="content"
-          *pupaLet="{
-            size: size$ | async,
-            kind: kind$ | async,
-            disabled: disabled$ | async,
-            loading: loading$ | async,
-            active: active$ | async
-          }; let size=size; let kind=kind; let disabled=disabled; let loading=loading; let active=active;"
+          *pupaLet="
+            {
+              size: size$ | async,
+              kind: kind$ | async,
+              disabled: disabled$ | async,
+              loading: loading$ | async,
+              active: active$ | async
+            };
+            let size = size;
+            let kind = kind;
+            let disabled = disabled;
+            let loading = loading;
+            let active = active
+          "
         >
           <pupa-button
             [size]="size"
