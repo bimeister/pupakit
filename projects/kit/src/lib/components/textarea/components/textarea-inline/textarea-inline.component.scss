@@ -5,7 +5,7 @@
 
 .textarea-inline {
   display: block;
-  padding: 8px 16px;
+  padding: 2rem 4rem;
   box-sizing: border-box;
   border: 1px solid;
   border-radius: 1px;
@@ -16,6 +16,8 @@
   @include font-size-mark(true);
   @include font-type-caption();
   @include ellipsis-text-overflow;
+
+  height: 8rem;
 
   &_disabled {
     cursor: not-allowed;
