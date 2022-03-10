@@ -96,3 +96,4 @@ export {
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';
 export * from './lib/components/api';
+export * from './internal/functions/api';
