@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
-const MAX_LABEL_STRING_LENGTH: number = 21;
-const MAX_HINT_STRING_LENGTH: number = 25;
+const BASE_REQUEST_PATH: string = 'checkbox-demo/examples';
 
 @Component({
   selector: 'demo-checkbox',
@@ -13,16 +12,31 @@ const MAX_HINT_STRING_LENGTH: number = 25;
 })
 export class CheckboxDemoComponent {
   public readonly control: FormControl = new FormControl(false);
-  public label: string = 'Очень большое название чего-либо';
-  public hint: string = 'Очень большое описание чего-либо';
+  public label: string = 'Label';
 
-  public readonly isNeedDisableTooltip$: Observable<boolean> = of(
-    MAX_LABEL_STRING_LENGTH > this.label.length || MAX_HINT_STRING_LENGTH > this.hint.length
-  );
-
-  public checkboxExampleCode: {
-    HTML: string;
-  } = {
-    HTML: 'checkbox-demo/examples/checkbox-demo-example/checkbox-demo-example.component.html',
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
   };
+
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+  };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+  };
+
+  public readonly labelSizeOptions: PropsOption[] = [
+    {
+      caption: 'medium',
+      value: 'medium',
+      isDefault: true,
+    },
+    {
+      caption: 'small',
+      value: 'small',
+    },
+  ];
 }
