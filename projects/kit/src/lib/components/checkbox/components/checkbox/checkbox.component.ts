@@ -1,10 +1,24 @@
-import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnChanges,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { filterFalsy, filterTruthy, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { filterFalsy, filterTruthy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { Observable, Subscription } from 'rxjs';
 import { map, switchMapTo, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { CheckboxLabelSize } from '../../../../../internal/declarations/types/checkbox-label-size.type';
 import { CheckboxService } from '../../services/checkbox.service';
 
 @Component({
@@ -22,17 +36,37 @@ import { CheckboxService } from '../../services/checkbox.service';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CheckboxComponent implements ControlValueAccessor, OnChanges {
-  @Input() public disabled: boolean = false;
-  @Input() public indeterminate: boolean = false;
-  @Input() public value: boolean;
+export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
+  @ViewChild('contentLabelWrapper') private readonly contentLabelWrapper: ElementRef<HTMLDivElement>;
 
-  private readonly disabled$: BehaviorSubject<boolean> = this.checkboxService.disabled$;
-  private readonly value$: BehaviorSubject<boolean> = this.checkboxService.value$;
-  private readonly indeterminate$: BehaviorSubject<boolean> = this.checkboxService.indeterminate$;
+  @Input() public disabled: boolean;
+  @Input() public indeterminate: boolean;
+  @Input() public value: boolean;
+  @Input() public error: boolean;
+  @Input() public size: CheckboxLabelSize = 'medium';
+
+  @Output() public readonly valueChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+  public readonly disabled$: Observable<boolean> = this.checkboxService.disabled$;
+  public readonly value$: Observable<boolean> = this.checkboxService.value$;
+  public readonly indeterminate$: Observable<boolean> = this.checkboxService.indeterminate$;
+  public readonly error$: Observable<boolean> = this.checkboxService.error$;
+  public readonly withLabel$: Observable<boolean> = this.checkboxService.withLabel$;
+  public readonly size$: Observable<CheckboxLabelSize> = this.checkboxService.size$;
+
+  public readonly checkboxTabindex$: Observable<number> = this.withLabel$.pipe(
+    map((withLabel: boolean) => (withLabel ? 1 : -1))
+  );
+  public readonly checkboxMarkerTabindex$: Observable<number> = this.withLabel$.pipe(
+    map((withLabel: boolean) => (withLabel ? -1 : 1))
+  );
+
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly checkboxService: CheckboxService) {
+  constructor(
+    private readonly checkboxService: CheckboxService,
+    private readonly changeDetectorRef: ChangeDetectorRef
+  ) {
     this.subscription.add(this.processSetIndeterminate());
   }
 
@@ -40,6 +74,12 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
     this.handleIndeterminateChanges(changes?.indeterminate);
     this.handleDisabledChanges(changes?.disabled);
     this.handleValueChanges(changes?.value);
+    this.handleErrorChanges(changes?.error);
+    this.handleSizeChanges(changes?.size);
+  }
+
+  public ngAfterViewInit(): void {
+    this.handleLabelUpdate();
   }
 
   public changeValue(): void {
@@ -52,8 +92,9 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
         map((value: boolean) => !value)
       )
       .subscribe((value: boolean) => {
-        this.value$.next(value);
-        this.indeterminate$.next(false);
+        this.valueChanged.emit(value);
+        this.checkboxService.setValue(value);
+        this.checkboxService.setIndeterminate(false);
         this.onTouched();
         this.onChange(value);
       });
@@ -68,11 +109,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
   }
 
   public writeValue(value: boolean): void {
-    this.value$.next(value);
+    this.checkboxService.setValue(value);
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    this.disabled$.next(isDisabled);
+    this.checkboxService.setDisabled(isDisabled);
   }
 
   public onChange: CallableFunction = (_innerValue: string) => {
@@ -90,7 +131,17 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
       return;
     }
 
-    this.value$.next(updatedValue);
+    this.checkboxService.setValue(updatedValue);
+  }
+
+  private handleErrorChanges(change: ComponentChange<this, boolean>): void {
+    const updatedValue: Nullable<boolean> = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.checkboxService.setError(updatedValue);
   }
 
   private handleIndeterminateChanges(change: ComponentChange<this, boolean>): void {
@@ -100,7 +151,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
       return;
     }
 
-    this.indeterminate$.next(updatedValue);
+    this.checkboxService.setIndeterminate(updatedValue);
   }
 
   private handleDisabledChanges(change: ComponentChange<this, boolean>): void {
@@ -110,10 +161,26 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges {
       return;
     }
 
-    this.disabled$.next(updatedValue);
+    this.checkboxService.setDisabled(updatedValue);
+  }
+
+  private handleSizeChanges(change: ComponentChange<this, CheckboxLabelSize>): void {
+    const updatedValue: Nullable<CheckboxLabelSize> = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.checkboxService.setSize(updatedValue);
   }
 
   private processSetIndeterminate(): Subscription {
-    return this.indeterminate$.pipe(filterTruthy()).subscribe(() => this.value$.next(null));
+    return this.indeterminate$.pipe(filterTruthy()).subscribe(() => this.checkboxService.setValue(null));
+  }
+
+  private handleLabelUpdate(): void {
+    const hasLabel: boolean = !isEmpty(this.contentLabelWrapper?.nativeElement?.childNodes);
+    this.checkboxService.setWithLabel(hasLabel);
+    this.changeDetectorRef.detectChanges();
   }
 }

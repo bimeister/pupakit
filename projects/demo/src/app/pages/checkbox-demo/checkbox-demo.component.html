@@ -1,38 +1,66 @@
 <h1>Checkbox</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-checkbox [indeterminate]="indeterminate$ | async" [formControl]="control" [disabled]="disabled$ | async">
-      <pupa-checkbox-mark></pupa-checkbox-mark>
-      <div [pupaTooltip] [tooltipContentTemplate]="tooltipTemplate" [tooltipDisabled]="isNeedDisableTooltip$ | async">
-        <pupa-checkbox-label>{{ label }}</pupa-checkbox-label>
-        <pupa-checkbox-hint>{{ hint }}</pupa-checkbox-hint>
-      </div>
-    </pupa-checkbox>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Simple usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-checkbox-example-1 *pupaCodeContainerPreviewTemplate></demo-checkbox-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="indeterminate" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is indeterminate.</ng-container>
-      <demo-props-switcher #indeterminate$></demo-props-switcher>
-    </demo-example-viewer-property>
+    <h2>Label size</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-checkbox-example-2 *pupaCodeContainerPreviewTemplate></demo-checkbox-example-2>
+    </pupa-code-container>
 
-    <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
-
-<h2>Basic usage of Checkbox</h2>
-<pupa-code-container [content]="checkboxExampleCode">
-  <demo-checkbox-demo-example *pupaCodeContainerPreviewTemplate></demo-checkbox-demo-example>
-</pupa-code-container>
-
-<ng-template #tooltipTemplate>
-  <div class="tooltip-content">
-    <div>{{ label }}</div>
-    <div>{{ hint }}</div>
+    <h2>Direction</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-checkbox-example-3 *pupaCodeContainerPreviewTemplate></demo-checkbox-example-3>
+    </pupa-code-container>
   </div>
-</ng-template>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <pupa-checkbox
+            [indeterminate]="indeterminate$ | async"
+            [formControl]="control"
+            [disabled]="disabled$ | async"
+            [error]="error$ | async"
+            [value]="value$ | async"
+            [size]="labelSize$ | async"
+          >
+            {{ label }}
+          </pupa-checkbox>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="indeterminate" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is indeterminate.</ng-container>
+          <demo-props-switcher #indeterminate$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="error" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is errored.</ng-container>
+          <demo-props-switcher #error$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="value" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Checkbox value</ng-container>
+          <demo-props-switcher #value$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="labelSize" type="small | medium">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the label size of the checkbox.</ng-container>
+          <demo-props-select #labelSize$ [options]="labelSizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

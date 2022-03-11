@@ -1,3 +1,60 @@
-<div class="wrapper" (click)="changeValue()">
-  <ng-content></ng-content>
-</div>
+<ng-container
+  [ngTemplateOutlet]="template"
+  [ngTemplateOutletContext]="{
+    disabled: disabled$ | async,
+    withLabel: withLabel$ | async,
+    value: value$ | async,
+    indeterminate: indeterminate$ | async,
+    error: error$ | async,
+    size: size$ | async,
+    checkboxTabindex: checkboxTabindex$ | async,
+    checkboxMarkerTabindex: checkboxMarkerTabindex$ | async
+  }"
+>
+</ng-container>
+
+<ng-template
+  #template
+  let-disabled="disabled"
+  let-withLabel="withLabel"
+  let-value="value"
+  let-indeterminate="indeterminate"
+  let-error="error"
+  let-size="size"
+  let-checkboxTabindex="checkboxTabindex"
+  let-checkboxMarkerTabindex="checkboxMarkerTabindex"
+>
+  <div
+    class="checkbox"
+    (click)="changeValue()"
+    [class.checkbox_disabled]="disabled"
+    [class.checkbox_without-label]="!withLabel"
+    [tabindex]="checkboxTabindex"
+    (keydown.enter)="changeValue()"
+  >
+    <div
+      class="checkbox__marker"
+      [class.checkbox__marker_checked]="value || indeterminate"
+      [class.checkbox__marker_disabled]="disabled"
+      [class.checkbox__marker_error]="error"
+      [tabindex]="checkboxMarkerTabindex"
+    >
+      <pupa-icon
+        class="checkbox__marker-icon"
+        *ngIf="!indeterminate && value"
+        name="app-exceptions-check-10"
+      ></pupa-icon>
+      <pupa-icon class="checkbox__marker-icon" *ngIf="indeterminate" name="app-checkbox-minus"></pupa-icon>
+    </div>
+
+    <div
+      #contentLabelWrapper
+      class="checkbox__label"
+      [class.checkbox__label_disabled]="disabled"
+      [class.checkbox__label_small]="size === 'small'"
+      [class.checkbox__label_hidden]="!(withLabel$ | async)"
+    >
+      <ng-content></ng-content>
+    </div>
+  </div>
+</ng-template>
