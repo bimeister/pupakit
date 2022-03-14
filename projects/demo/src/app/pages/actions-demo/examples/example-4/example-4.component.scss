@@ -1,0 +1,35 @@
+@use 'functions' as *;
+
+.action-container {
+  background-color: color(base-n600);
+  padding: 2rem 5rem;
+}
+
+.action {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin-right: 2rem;
+  box-sizing: border-box;
+  color: color(base-dark-n100, 1);
+  cursor: pointer;
+
+  &:hover {
+    background-color: color(base-dark-n400, 1);
+    color: color(base-n0, 1);
+  }
+}
+
+.more-button {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: color(base-dark-n100, 1);
+
+  &:hover {
+    color: color(base-n0, 1);
+  }
+}

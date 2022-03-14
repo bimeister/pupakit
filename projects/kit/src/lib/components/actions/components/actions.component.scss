@@ -1,0 +1,17 @@
+.actions-wrapper {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+}
+
+.actions-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  flex: 1;
+  overflow: hidden;
+}
+
+.is-one {
+  max-width: 100%;
+}

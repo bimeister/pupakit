@@ -86,6 +86,7 @@ export {
   TreeItem,
   UiState,
   UploadingStatus,
+  ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';

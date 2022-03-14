@@ -1,0 +1,22 @@
+<div class="action-container">
+  <pupa-actions [actions]="actions">
+    <ng-container *pupaActionTemplate="let action">
+      <div class="action">
+        <pupa-icon [name]="action.name" [style.color]="getColor(action.count)"></pupa-icon>
+        <div>{{ action.description }}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *pupaActionDropdownTemplate="let action">
+      <pupa-dropdown-menu-item>
+        <div class="dropdown-action">{{ action.description }}</div>
+      </pupa-dropdown-menu-item>
+    </ng-container>
+
+    <ng-container *pupaActionMoreTriggerTemplate="let count">
+      <div class="dropdown-trigger">
+        <pupa-tag>Show more {{ count }}</pupa-tag>
+      </div>
+    </ng-container>
+  </pupa-actions>
+</div>

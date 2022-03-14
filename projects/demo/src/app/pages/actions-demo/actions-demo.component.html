@@ -1,0 +1,93 @@
+<h1>Actions</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h4>Basic usage</h4>
+    <pupa-code-container [content]="example6Content">
+      <demo-actions-example-6 *pupaCodeContainerPreviewTemplate></demo-actions-example-6>
+    </pupa-code-container>
+
+    <pupa-info-block>
+      The component renders the passed template based on the length of the action array. When changing the width of the
+      window, an action that does not go crazy in width will be hidden and available in dropdown by trigger
+    </pupa-info-block>
+
+    <pupa-info-block>
+      This component works on the basis of several building blocks:
+      <div class="info-description">1. <pupa-code-inline>actions</pupa-code-inline> - See API section</div>
+      <div class="info-description">
+        2. <pupa-code-inline>pupaActionTemplate</pupa-code-inline> - Structural directive, used to describe an action
+        template
+      </div>
+      <div class="info-description">
+        3. <pupa-code-inline>pupaActionDropdownTemplate</pupa-code-inline> - Structural directive, used to describe the
+        dropdown action template
+      </div>
+      <div>
+        4. <pupa-code-inline>pupaActionMoreTriggerTemplate</pupa-code-inline> - Structural directive, used to describe a
+        trigger template for displaying hidden actions
+      </div>
+    </pupa-info-block>
+
+    <h4>Simple actions model</h4>
+    <pupa-code-container [content]="example1Content">
+      <demo-actions-example-1 *pupaCodeContainerPreviewTemplate></demo-actions-example-1>
+    </pupa-code-container>
+
+    <h4>Object actions model</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-actions-example-2 *pupaCodeContainerPreviewTemplate></demo-actions-example-2>
+    </pupa-code-container>
+
+    <h4>Actions panel</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-actions-example-3 *pupaCodeContainerPreviewTemplate></demo-actions-example-3>
+    </pupa-code-container>
+
+    <h4>Navigation menu</h4>
+    <pupa-code-container [content]="example4Content">
+      <demo-actions-example-4 *pupaCodeContainerPreviewTemplate></demo-actions-example-4>
+    </pupa-code-container>
+
+    <pupa-info-block>
+      When using the default trigger, you can customize the button text by adding the token
+      <pupa-code-inline>ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN</pupa-code-inline> to the providers and adjust
+      its value
+    </pupa-info-block>
+    <h5>Custom text with default trigger</h5>
+    <pupa-code-container [content]="example5Content">
+      <demo-actions-example-5 *pupaCodeContainerPreviewTemplate></demo-actions-example-5>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="action-container">
+          <pupa-actions [actions]="actions">
+            <ng-container *pupaActionTemplate="let action">
+              <div class="action">{{ action }}</div>
+            </ng-container>
+
+            <ng-container *pupaActionDropdownTemplate="let action">
+              <pupa-dropdown-menu-item>
+                <div class="action">{{ action }}</div>
+              </pupa-dropdown-menu-item>
+            </ng-container>
+
+            <ng-container *pupaActionMoreTriggerTemplate="let count">
+              <div>Show more {{ count }}</div>
+            </ng-container>
+          </pupa-actions>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="Actions" type="T[]">
+          <ng-container *demoExampleViewerPropertyDescription>An array of data used to render templates</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
