@@ -44,6 +44,7 @@ export class SidebarComponent {
         { title: 'Icon', link: '/kit/icon' },
         { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
         { title: 'ButtonMulti', link: '/kit/button-multi' },
+        { title: 'Actions', link: '/kit/actions' },
         { title: 'Avatar', link: '/kit/avatar' },
         { title: 'Info block', link: '/kit/info-block' },
         { title: 'Input', link: '/kit/input' },

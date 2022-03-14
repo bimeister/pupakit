@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
 import { SharedModule } from '../internal/shared/shared.module';
+import { ActionsModule } from './components/actions/actions.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
@@ -107,6 +108,7 @@ const EXPORTS: any[] = [
   LinkModule,
   TimerModule,
   StepperModule,
+  ActionsModule,
 ];
 
 @NgModule({

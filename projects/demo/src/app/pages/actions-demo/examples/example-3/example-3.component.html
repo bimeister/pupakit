@@ -1,0 +1,13 @@
+<div class="action-container">
+  <pupa-actions [actions]="actions">
+    <ng-container *pupaActionTemplate="let action">
+      <pupa-button kind="subtle" (click)="action.action()">{{ action.name }}</pupa-button>
+    </ng-container>
+
+    <ng-container *pupaActionDropdownTemplate="let action">
+      <pupa-dropdown-menu-item>
+        <div class="dropdown-action" (click)="action.action()">{{ action.name }}</div>
+      </pupa-dropdown-menu-item>
+    </ng-container>
+  </pupa-actions>
+</div>

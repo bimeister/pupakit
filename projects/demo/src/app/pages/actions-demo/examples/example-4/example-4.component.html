@@ -1,0 +1,20 @@
+<div class="action-container">
+  <pupa-actions [actions]="actions">
+    <ng-container *pupaActionTemplate="let action">
+      <div class="action">
+        <pupa-icon [name]="action"></pupa-icon>
+        <div>{{ action }}</div>
+      </div>
+    </ng-container>
+
+    <ng-container *pupaActionDropdownTemplate="let action">
+      <pupa-dropdown-menu-item>
+        <div class="dropdown-action">{{ action }}</div>
+      </pupa-dropdown-menu-item>
+    </ng-container>
+
+    <ng-container *pupaActionMoreTriggerTemplate="let count">
+      <div class="more-button">More {{ count }}</div>
+    </ng-container>
+  </pupa-actions>
+</div>

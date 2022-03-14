@@ -1,0 +1,26 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.action-container {
+  border: 1px solid color(base-dark-n250);
+  padding: 2rem 8rem;
+}
+
+.action {
+  display: block;
+  text-align: center;
+  width: 96px;
+  background: color(red-n100);
+  padding: 1rem 0;
+  height: 10rem;
+  box-sizing: border-box;
+  margin-right: 2rem;
+
+  @include host-selector-dark-theme() {
+    background: color(red-n200);
+  }
+}
+
+.info-description {
+  margin-bottom: 3rem;
+}

@@ -1,0 +1,22 @@
+@use 'functions' as *;
+
+@mixin action {
+  display: block;
+  text-align: center;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  padding-right: 2rem;
+}
+
+.action {
+  @include action();
+  margin-right: 2rem;
+}
+
+.dropdown-trigger {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 0 2rem;
+}

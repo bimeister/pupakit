@@ -1,0 +1,38 @@
+<div class="actions-wrapper">
+  <div class="actions-container" [style.max-height.px]="actionsContainerMaxHeight$ | async" #actionsContainer>
+    <div
+      class="actions-container__action"
+      *ngFor="let action of renderActions$ | async; let count = count"
+      [class.is-one]="count === 1"
+    >
+      <ng-container
+        [ngTemplateOutlet]="actionTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: action }"
+      ></ng-container>
+    </div>
+  </div>
+
+  <div
+    *ngIf="actionsOverflowCount$ | async as actionsOverflowCount"
+    class="actions-container__more-button"
+    [pupaDropdownMenu]="dropdownContent"
+    #dropdownContainer
+  >
+    <ng-container
+      [ngTemplateOutlet]="getActionMoreTriggerTemplateRef()"
+      [ngTemplateOutletContext]="{ $implicit: actionsOverflowCount }"
+    ></ng-container>
+  </div>
+</div>
+
+<ng-template #defaultTemplate let-count>
+  <pupa-button size="large" kind="secondary"> {{ defaultMoreButtonText }} ({{ count }}) </pupa-button>
+</ng-template>
+
+<pupa-dropdown-menu-content #dropdownContent horizontalPosition="start">
+  <ng-container
+    *ngFor="let action of renderDropdownActions$ | async"
+    [ngTemplateOutlet]="actionDropdownTemplate?.templateRef"
+    [ngTemplateOutletContext]="{ $implicit: action }"
+  ></ng-container>
+</pupa-dropdown-menu-content>

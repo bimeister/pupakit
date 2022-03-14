@@ -1,0 +1,11 @@
+<div class="action-container">
+  <pupa-actions [actions]="actions">
+    <div *pupaActionTemplate="let action" class="action">{{ action }}</div>
+
+    <pupa-dropdown-menu-item *pupaActionDropdownTemplate="let action">
+      <div class="dropdown-action">{{ action }}</div>
+    </pupa-dropdown-menu-item>
+
+    <div *pupaActionMoreTriggerTemplate="let count" class="dropdown-trigger">Show more {{ count }}</div>
+  </pupa-actions>
+</div>

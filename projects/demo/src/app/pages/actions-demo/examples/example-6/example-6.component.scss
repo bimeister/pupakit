@@ -1,0 +1,14 @@
+@use 'functions' as *;
+
+.action-container {
+  box-shadow: 0px -1px 0px #ebedee;
+  padding: 2rem 8rem;
+}
+
+.action-button {
+  margin-right: 2rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
