@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { take } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { DrawerRef } from '../../../../../internal/declarations/classes/drawer-ref.class';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pupa-drawer-expand-button',
@@ -10,6 +11,10 @@ import { DrawerRef } from '../../../../../internal/declarations/classes/drawer-r
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DrawerExpandButtonComponent {
+  public icon$: Observable<string> = this.drawerRef.isFullscreen$.pipe(
+    map((isFullscreen: boolean) => (isFullscreen ? 'app-fit-to-page' : 'app-resize'))
+  );
+
   constructor(@Inject(DrawerRef) private readonly drawerRef: DrawerRef) {}
 
   public handleClick(): void {
