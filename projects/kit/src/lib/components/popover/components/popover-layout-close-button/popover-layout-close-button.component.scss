@@ -1,0 +1,8 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  display: block;
+  color: color(base-white-n200);
+}

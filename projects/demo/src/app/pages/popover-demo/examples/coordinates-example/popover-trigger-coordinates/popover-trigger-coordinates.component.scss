@@ -1,0 +1,9 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  max-width: 30rem;
+  gap: 4rem;
+}
+.label {
+  margin-bottom: 1rem;
+}

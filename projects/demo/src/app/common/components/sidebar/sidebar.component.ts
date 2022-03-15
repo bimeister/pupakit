@@ -100,6 +100,7 @@ export class SidebarComponent {
         { title: '⚠️ Drawer', link: '/kit/drawer-old' },
         { title: 'Drawer', link: '/kit/drawer' },
         { title: 'Modal', link: '/kit/modal' },
+        { title: 'Popover', link: '/kit/popover' },
       ],
       'title'
     ),

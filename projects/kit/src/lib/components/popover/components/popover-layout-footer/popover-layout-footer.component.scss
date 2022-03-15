@@ -1,0 +1,18 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  padding: 3rem 4rem;
+  border-top: 1px solid color(base-white-n400);
+  height: 12rem;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  @include font-type-paragraph;
+  @include font-size-mark(true);
+  @include host-selector-dark-theme {
+    border-color: color(base-dark-n400);
+  }
+}

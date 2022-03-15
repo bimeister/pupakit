@@ -375,6 +375,11 @@ const demoRoutes: Routes = [
         loadChildren: (): Promise<Type<CounterDemoModule>> =>
           import('./pages/counter-demo/counter-demo.module').then((module: any) => module.CounterDemoModule),
       },
+      {
+        path: 'popover',
+        loadChildren: () =>
+          import('./pages/popover-demo/popover-demo.module').then((module: any) => module.PopoverDemoModule),
+      },
     ],
   },
   {

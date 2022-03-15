@@ -1,0 +1,18 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-popover-layout>
+    <pupa-popover-layout-header>
+      <pupa-popover-layout-close-button>
+        <pupa-button-icon [kind]="'subtle'" [icon]="'app-cross'" [size]="'small'"></pupa-button-icon>
+      </pupa-popover-layout-close-button>
+    </pupa-popover-layout-header>
+    <pupa-popover-layout-body>{{ title }}</pupa-popover-layout-body>
+    <pupa-popover-layout-footer>
+      <pupa-popover-layout-action value="submit">
+        <pupa-button (click)="buttonClick()" [size]="'small'">Submit</pupa-button>
+      </pupa-popover-layout-action>
+      <pupa-popover-layout-action value="close">
+        <pupa-button [kind]="'secondary'" [size]="'small'">Cancel</pupa-button>
+      </pupa-popover-layout-action>
+    </pupa-popover-layout-footer>
+  </pupa-popover-layout>
+</pupa-theme-wrapper>
