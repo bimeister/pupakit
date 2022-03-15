@@ -1,22 +1,24 @@
 import {
-  AfterViewInit,
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
+  forwardRef,
   Input,
+  OnChanges,
   OnDestroy,
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
-import { isNil } from '@bimeister/utilities';
-import { Subscription, timer } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { filterTruthy, isEmpty } from '@bimeister/utilities';
+import { Observable, Subscription } from 'rxjs';
 import { VOID } from '../../../../../internal/constants/void.const';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
+import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
+import { RadioControlSize } from '../../../../../internal/declarations/types/radio-control-size.type';
 import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
-
-type OnChangeCallback<T> = (value: T) => void;
-type OnTouchedCallback = VoidFunction;
+import { RadioGroupService } from '../../services/radio-group.service';
 
 @Component({
   selector: 'pupa-radio-group',
@@ -24,27 +26,36 @@ type OnTouchedCallback = VoidFunction;
   styleUrls: ['./radio-group.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    RadioGroupService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RadioGroupComponent),
+      multi: true,
+    },
+  ],
 })
-export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, AfterViewInit, OnDestroy {
+export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
+  @Input() public direction: RadioGroupDirection = 'column';
+  @Input() public readonly size: RadioControlSize = 'medium';
+  @Input() public readonly disabled: boolean = false;
+
   private readonly subscription: Subscription = new Subscription();
 
-  public readonly internalControl: FormControl = new FormControl();
+  public readonly value$: Observable<T> = this.radioGroupService.value$;
+  public readonly onTouch$: Observable<boolean> = this.radioGroupService.onTouch$;
 
-  @Input() public direction: RadioGroupDirection = 'column';
-
-  constructor(private readonly ngControl: NgControl, private readonly changeDetectorRef: ChangeDetectorRef) {
-    if (isNil(ngControl)) {
-      throw new Error('NgControl passed to RadioGroupComponent is undefined');
-    }
-    this.ngControl.valueAccessor = this;
-  }
+  constructor(private readonly radioGroupService: RadioGroupService<T>) {}
 
   public ngOnInit(): void {
     this.subscription.add(this.triggerCallBackOnChange());
+    this.subscription.add(this.triggerCallBackOnTouch());
   }
 
-  public ngAfterViewInit(): void {
-    this.writeValue(this.ngControl.value);
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processLabelSizeChange(changes?.size);
+    this.processIsDisabledChange(changes?.disabled);
+    this.processDirectionChange(changes?.direction);
   }
 
   public ngOnDestroy(): void {
@@ -52,41 +63,58 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, Aft
   }
 
   public writeValue(value: T): void {
-    this.internalControl.setValue(value, {
-      emitEvent: true,
-    });
-
-    this.triggerChangeDetector();
+    this.radioGroupService.setValue(value);
   }
 
+  public setDisabledState?(isDisabled: boolean): void {
+    this.radioGroupService.setDisabled(isDisabled);
+  }
+
+  public onChange: OnChangeCallback<T> = () => VOID;
   public registerOnChange(onChange: OnChangeCallback<T>): void {
     this.onChange = onChange;
   }
 
+  public onTouched: OnTouchedCallback = () => VOID;
   public registerOnTouched(onTouched: OnTouchedCallback): void {
     this.onTouched = onTouched;
   }
 
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) {
-      this.internalControl.disable();
+  private triggerCallBackOnChange(): Subscription {
+    return this.value$.subscribe((value: T) => this.onChange(value));
+  }
+
+  private triggerCallBackOnTouch(): Subscription {
+    return this.onTouch$.pipe(filterTruthy()).subscribe(() => this.onTouched());
+  }
+
+  private processLabelSizeChange(change: ComponentChange<this, RadioControlSize>): void {
+    const updatedValue: RadioControlSize | undefined = change?.currentValue;
+
+    if (isEmpty(updatedValue)) {
       return;
     }
-    this.internalControl.enable();
+
+    this.radioGroupService.setLabelSize(updatedValue);
   }
 
-  public onTouched: OnTouchedCallback = () => VOID;
-  private onChange: OnChangeCallback<T> = () => VOID;
+  private processIsDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
 
-  private triggerCallBackOnChange(): Subscription {
-    return this.internalControl.valueChanges.pipe().subscribe((value: T) => this.onChange(value));
+    if (isEmpty(updatedValue)) {
+      return;
+    }
+
+    this.radioGroupService.setDisabled(updatedValue);
   }
 
-  private triggerChangeDetector(): void {
-    timer()
-      .pipe(take(1))
-      .subscribe(() => {
-        this.changeDetectorRef.markForCheck();
-      });
+  private processDirectionChange(change: ComponentChange<this, RadioGroupDirection>): void {
+    const updatedValue: RadioGroupDirection | undefined = change?.currentValue;
+
+    if (isEmpty(updatedValue)) {
+      return;
+    }
+
+    this.radioGroupService.setDirection(updatedValue);
   }
 }

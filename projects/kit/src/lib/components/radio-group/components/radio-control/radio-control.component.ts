@@ -1,9 +1,10 @@
-import { ChangeDetectionStrategy, Component, Host, HostListener, Input, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
-import { RadioGroupComponent } from '../radio-group/radio-group.component';
+import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import { filterFalsy, shareReplayWithRefCount } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
+import { RadioControlSize } from '../../../../../internal/declarations/types/radio-control-size.type';
+import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
+import { RadioGroupService } from '../../services/radio-group.service';
 
 /** @dynamic */
 @Component({
@@ -14,54 +15,36 @@ import { RadioGroupComponent } from '../radio-group/radio-group.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioControlComponent<T> {
-  private readonly groupControl: FormControl = this.radioGroupComponent.internalControl;
-
   @Input() private readonly value: T;
+  @Input() public tabindex: number = 0;
 
-  private readonly groupControlValue$: Observable<T> = this.groupControl.valueChanges.pipe(
-    startWith(this.groupControl.value),
+  public readonly labelSize$: Observable<RadioControlSize> = this.radioGroupService.labelSize$;
+
+  public readonly isSelected$: Observable<boolean> = this.radioGroupService.value$.pipe(
     distinctUntilChanged(),
-    shareReplayWithRefCount()
-  );
-  public readonly isSelected$: Observable<boolean> = this.groupControlValue$.pipe(
     map((groupControlValue: T) => groupControlValue === this.value),
     shareReplayWithRefCount()
   );
 
-  private readonly groupControlStatus$: Observable<string> = this.groupControl.statusChanges.pipe(
-    map(() => this.groupControl.status),
-    startWith(this.groupControl.status),
-    distinctUntilChanged(),
-    shareReplayWithRefCount()
-  );
-  public readonly isDisabled$: Observable<boolean> = this.groupControlStatus$.pipe(
-    map(() => this.groupControl.disabled)
-  );
+  public readonly isDisabled$: Observable<boolean> = this.radioGroupService.isDisabled$;
 
-  public readonly isTouched$: Observable<boolean> = this.groupControlValue$.pipe(map(() => this.groupControl.touched));
-  public readonly isHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly directions$: Observable<RadioGroupDirection> = this.radioGroupService.direction$;
 
-  constructor(@Host() private readonly radioGroupComponent: RadioGroupComponent<T>) {}
+  constructor(private readonly radioGroupService: RadioGroupService<T>) {}
 
   @HostListener('click')
   public processClick(): void {
-    if (this.groupControl.disabled) {
-      return;
-    }
-
-    this.select();
-    this.radioGroupComponent.onTouched();
+    this.radioGroupService.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
+      this.select();
+      this.setOnTouch();
+    });
   }
 
-  public select(): void {
-    this.radioGroupComponent.writeValue(this.value);
+  private select(): void {
+    this.radioGroupService.setValue(this.value);
   }
 
-  public markAsHovered(): void {
-    this.isHovered$.next(true);
-  }
-
-  public markAsBlured(): void {
-    this.isHovered$.next(false);
+  private setOnTouch(): void {
+    this.radioGroupService.setOnTouch(true);
   }
 }
