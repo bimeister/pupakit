@@ -1,33 +1,76 @@
 <h1>Radio buttons</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Simple usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-radio-button-example-1 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-1>
+    </pupa-code-container>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-radio-group [formControl]="formControl">
-      <pupa-radio-control [value]="1">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>Option 1</pupa-radio-control-label>
-      </pupa-radio-control>
+    <h2>Label size</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-radio-button-example-2 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-2>
+    </pupa-code-container>
 
-      <pupa-radio-control [value]="2">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>Option 2</pupa-radio-control-label>
-      </pupa-radio-control>
+    <h2>Direction</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-radio-button-example-3 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-3>
+    </pupa-code-container>
 
-      <pupa-radio-control [value]="3">
-        <pupa-radio-control-marker></pupa-radio-control-marker>
-        <pupa-radio-control-label>Option 3</pupa-radio-control-label>
-      </pupa-radio-control>
-    </pupa-radio-group>
-  </demo-example-viewer-content>
+    <h2>Disabled</h2>
+    <pupa-code-container [content]="example4Content">
+      <demo-radio-button-example-4 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-4>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <pupa-radio-group
+            class="radio-group"
+            [formControl]="formControl"
+            [direction]="direction$ | async"
+            [size]="labelSize$ | async"
+            [disabled]="disabled$ | async"
+          >
+            <pupa-radio-control [value]="1"> Option 1 </pupa-radio-control>
 
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Set form control to disabled state">
-      <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
-      <ng-container *demoExampleViewerConfigItemDescription>
-        Use
-        <pupa-code-inline>formControl.disable()</pupa-code-inline>
-      </ng-container>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+            <pupa-radio-control [value]="2"> Option 2 </pupa-radio-control>
+
+            <pupa-radio-control [value]="3"> Option 3 </pupa-radio-control>
+          </pupa-radio-group>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties [Radio group]</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="direction" type="column | row">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the direction of the radio group.</ng-container>
+          <demo-props-select #direction$ [options]="directionOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="labelSize" type="small | medium">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Adjusts the label size of the radio control.</ng-container
+          >
+          <demo-props-select #labelSize$ [options]="labelSizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the radio group is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>Properties [Radio control]</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="value" type="any">
+          <ng-container *demoExampleViewerPropertyDescription>Set the value for radio control.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="tabindex" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>Set the tab index for radio control.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

@@ -1,8 +1,45 @@
-<section
-  class="radio-control"
-  [class.radio-control_disabled]="isDisabled$ | async"
-  (mouseover)="markAsHovered()"
-  (mouseout)="markAsBlured()"
+<ng-container
+  [ngTemplateOutlet]="template"
+  [ngTemplateOutletContext]="{
+    isDisabled: isDisabled$ | async,
+    isSelected: isSelected$ | async,
+    labelSize: labelSize$ | async,
+    direction: directions$ | async
+  }"
 >
-  <ng-content></ng-content>
-</section>
+</ng-container>
+
+<ng-template
+  #template
+  let-isDisabled="isDisabled"
+  let-isSelected="isSelected"
+  let-labelSize="labelSize"
+  let-direction="direction"
+>
+  <section
+    class="radio-control"
+    [tabindex]="tabindex"
+    [class.radio-control_disabled]="isDisabled"
+    [class.radio-control_row]="direction === 'row'"
+    [class.radio-control_column]="direction === 'column'"
+    (keydown.enter)="processClick()"
+  >
+    <div class="radio-control-marker-wrapper">
+      <div
+        class="radio-control-marker"
+        [class.radio-control-marker_selected]="isSelected"
+        [class.radio-control-marker_disabled]="isDisabled"
+      >
+        <div class="radio-control-marker__dot"></div>
+      </div>
+    </div>
+    <div
+      class="radio-control-label"
+      [class.radio-control-label_selected]="isSelected"
+      [class.radio-control-label_disabled]="isDisabled"
+      [class.radio-control-label_small]="labelSize === 'small'"
+    >
+      <ng-content></ng-content>
+    </div>
+  </section>
+</ng-template>

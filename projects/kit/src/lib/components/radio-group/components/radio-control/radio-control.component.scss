@@ -1,1 +1,155 @@
-@use './../../radio-group.scss';
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  @include host-selector('.radio-group_column') {
+    width: 100%;
+  }
+}
+
+.radio-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  border-radius: 1px;
+  position: relative;
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  &:focus-visible {
+    outline: none;
+    &:not(.radio-control_disabled) {
+      outline: 2px solid color(primary-n500);
+    }
+  }
+  padding: 2rem;
+
+  &:hover:not(.radio-control_disabled) {
+    background: color(base-white-n400);
+    @include host-selector-dark-theme() {
+      background: color(base-dark-n275, 0.5);
+    }
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+  }
+}
+
+.radio-control-marker-wrapper {
+  width: 4rem;
+  height: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.radio-control-marker {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: color(base-n0);
+  border: 1px solid color(base-white-n200);
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    transform variable(transition-duration_shorter) variable(transition-timing-function_common);
+  @include host-selector-dark-theme() {
+    background: color(base-n600);
+    border: 1px solid color(base-dark-n100);
+  }
+
+  &_selected {
+    background: color(primary-n500);
+    border: none;
+
+    @include host-selector-dark-theme() {
+      background: color(primary-n500);
+      border: none;
+    }
+  }
+
+  &:focus-visible:not(.radio-control-marker_disabled) {
+    transform: scale(1.14);
+    border: 2px solid color(primary-n400);
+    outline: none;
+    &:not(.radio-control-marker_selected) {
+      background: color(primary-n500, 0.16);
+    }
+
+    @include host-selector-dark-theme() {
+      border: 2px solid color(primary-n400);
+    }
+  }
+
+  &__dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+    background: transparent;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &_selected .radio-control-marker__dot {
+    background: color(base-n0);
+    @include host-selector-dark-theme() {
+      background: color(base-n600);
+    }
+  }
+
+  &_disabled {
+    border-color: color(base-white-n250);
+    &.radio-control-marker_selected {
+      background: color(base-white-n250);
+      @include host-selector-dark-theme() {
+        background: color(base-white-n250);
+      }
+    }
+  }
+}
+
+.radio-control-label {
+  margin: 0 0 0 3rem;
+  user-select: none;
+  z-index: 2;
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  @include font-size-small();
+
+  &_small {
+    margin: 0 0 0 2rem;
+    @include font-size-mark();
+  }
+
+  &_disabled {
+    color: color(base-white-n250);
+  }
+
+  &_disabled.radio-control-label_selected {
+    color: color(base-white-n250);
+  }
+}
+
+.radio-control:hover:not(.radio-control_disabled) {
+  .radio-control-marker {
+    background: color(primary-n500, 0.16);
+    border: 2px solid color(primary-n400);
+    @include host-selector-dark-theme() {
+      background: color(primary-n500, 0.16);
+      border: 2px solid color(primary-n400);
+    }
+
+    &_selected {
+      background: color(primary-n400);
+      @include host-selector-dark-theme() {
+        background: color(primary-n400);
+      }
+    }
+  }
+}
