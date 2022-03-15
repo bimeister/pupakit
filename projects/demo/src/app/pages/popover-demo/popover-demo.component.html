@@ -1,0 +1,61 @@
+<h1>Popover</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Usage</h2>
+    <h3>Basic example</h3>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-popover-trigger-basic *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-basic>
+    </pupa-code-container>
+
+    <h3>Coordinates</h3>
+    <pupa-code-container [content]="coordinatesExampleContent">
+      <demo-popover-trigger-coordinates *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-coordinates>
+    </pupa-code-container>
+
+    <h3>Drawer case</h3>
+    <pupa-code-container [content]="otherExampleContent">
+      <demo-popover-trigger-other *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-other>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-section-label>PopoversService</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property
+          name="open<TComponent>(config: PopoverConfig<TComponent, TData>)"
+          type="OpenedPopover<TReturn>"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            TData and TReturn are automatically calculated from the passed component.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>PopoverConfig&#60;TComponent, TData&#62;</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="component" type="ComponentType<C>">
+          <ng-container *demoExampleViewerPropertyDescription> Component to render as popover content. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="data" type="TData">
+          <ng-container *demoExampleViewerPropertyDescription> Params for opened component. </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="anchor" type="ElementRef<HTMLElement> | Position">
+          <ng-container *demoExampleViewerPropertyDescription> Location to render popover.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="injector?" type="Injector">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Injector for accessing component to outer data.
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="hasBackdrop" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription> Render with backdrop.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

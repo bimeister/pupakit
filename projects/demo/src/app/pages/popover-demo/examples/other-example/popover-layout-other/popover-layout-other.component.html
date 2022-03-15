@@ -1,0 +1,12 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-popover-layout>
+    <pupa-popover-layout-header>
+      <pupa-popover-layout-close-button>
+        <pupa-button-icon [kind]="'subtle'" [icon]="'app-cross'" [size]="'small'"></pupa-button-icon>
+      </pupa-popover-layout-close-button>
+    </pupa-popover-layout-header>
+    <pupa-popover-layout-body>
+      <pupa-button (click)="openDrawer()">Open Drawer</pupa-button>
+    </pupa-popover-layout-body>
+  </pupa-popover-layout>
+</pupa-theme-wrapper>

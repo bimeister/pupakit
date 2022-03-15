@@ -30,6 +30,7 @@ import { LayoutModule } from './components/layout/layout.module';
 import { LinkModule } from './components/link/link.module';
 import { ModalModule } from './components/modal/modal.module';
 import { PagedVirtualScrollModule } from './components/paged-virtual-scroll/paged-virtual-scroll.module';
+import { PopoverModule } from './components/popover/popover.module';
 import { ProgressBarModule } from './components/progress-bar/progress-bar.module';
 import { RadioGroupModule } from './components/radio-group/radio-group.module';
 import { RatingModule } from './components/rating/rating.module';
@@ -109,6 +110,7 @@ const EXPORTS: any[] = [
   TimerModule,
   StepperModule,
   ActionsModule,
+  PopoverModule,
 ];
 
 @NgModule({

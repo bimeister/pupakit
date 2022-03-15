@@ -1,0 +1,22 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-popover-layout>
+    <pupa-popover-layout-header>
+      <pupa-popover-layout-close-button>
+        <pupa-button-icon [kind]="'subtle'" [icon]="'app-cross'" [size]="'small'"></pupa-button-icon>
+      </pupa-popover-layout-close-button>
+    </pupa-popover-layout-header>
+    <pupa-popover-layout-body>
+      Choose your fruit!
+      <pupa-select class="select" [isMultiSelectionEnabled]="false" [formControl]="control">
+        <pupa-select-trigger>
+          {{ control.value }}
+        </pupa-select-trigger>
+        <pupa-select-dropdown>
+          <pupa-select-options-container>
+            <pupa-select-option *ngFor="let fruit of fruits" [value]="fruit">{{ fruit }}</pupa-select-option>
+          </pupa-select-options-container>
+        </pupa-select-dropdown>
+      </pupa-select>
+    </pupa-popover-layout-body>
+  </pupa-popover-layout>
+</pupa-theme-wrapper>
