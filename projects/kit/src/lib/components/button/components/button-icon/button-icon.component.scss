@@ -1,5 +1,9 @@
 @use './../../button.styles.scss';
 
+:host {
+  display: inline-block;
+}
+
 .button {
   padding: 2rem;
 
