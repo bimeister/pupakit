@@ -1,15 +1,3 @@
 <div class="table">
-  <pupa-table [controller]="controller">
-    <pupa-table-column-template columnType="last-name">
-      <pupa-table-header-cell
-        *pupaTableHeaderCellTemplate="let column"
-        [column]="column"
-        [resizable]="true"
-        [sortable]="true"
-        [isSortingNoneAvailable]="false"
-      >
-        {{ column.definition.title }}
-      </pupa-table-header-cell>
-    </pupa-table-column-template>
-  </pupa-table>
+  <pupa-table [controller]="controller"> </pupa-table>
 </div>

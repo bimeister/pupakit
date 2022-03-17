@@ -32,6 +32,7 @@ export class TableHeaderCellContainerComponent<T> implements AfterViewInit, OnCh
   public templateRef: TemplateRef<TableHeaderCellContext>;
   public templateContext: TableHeaderCellContext = {
     $implicit: null,
+    isDndClone: false,
   };
 
   constructor(
@@ -57,9 +58,11 @@ export class TableHeaderCellContainerComponent<T> implements AfterViewInit, OnCh
     if (isNil(value)) {
       return;
     }
+
     this.templateRef = this.tableTemplatesService.getHeaderCellTemplateByType(value.definition.type);
     this.templateContext = {
       $implicit: value,
+      isDndClone: false,
     };
   }
 }

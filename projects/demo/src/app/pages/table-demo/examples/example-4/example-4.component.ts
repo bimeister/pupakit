@@ -1,9 +1,11 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { getUuid } from '@bimeister/utilities';
 import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
 import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
 import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
 import { Uuid } from '@kit/internal/declarations/types/uuid.type';
+import { Subscription } from 'rxjs';
+import { TableEvents } from '@kit/internal/declarations/events/table.events';
 
 interface SomeData {
   id: Uuid;
@@ -26,7 +28,9 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'firstName',
     title: 'First Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 },
+    defaultSizes: { widthPx: 200, maxWidthPx: 300, minWidthPx: 100 },
+    resizable: true,
+    draggable: true,
 
     // use type for template
     type: 'name',
@@ -36,7 +40,9 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-    defaultSizes: { widthPx: 200 },
+    defaultSizes: { widthPx: 200, maxWidthPx: 300, minWidthPx: 100 },
+    resizable: true,
+    draggable: true,
 
     // use type for template
     type: 'name',
@@ -47,6 +53,7 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'City',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 200 },
+    draggable: true,
 
     // use type for template
     type: 'city',
@@ -57,6 +64,7 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'Age',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 100 },
+    draggable: true,
 
     // use type for template
     type: 'age',
@@ -70,13 +78,35 @@ const COLUMNS: TableColumnDefinition[] = [
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableExample4Component {
+export class TableExample4Component implements OnDestroy {
+  private readonly subscription: Subscription = new Subscription();
+
   public readonly rowType: SomeData;
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();
 
+  private columnDefinitions: TableColumnDefinition[] = COLUMNS;
+
   constructor() {
-    this.controller.setColumnDefinitions(COLUMNS);
+    this.controller.setColumnDefinitions(this.columnDefinitions);
     this.controller.setData(DATA);
+
+    this.subscription.add(this.processDndEnd());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private processDndEnd(): Subscription {
+    return this.controller.getEvents(TableEvents.ColumnDragEnd).subscribe((event: TableEvents.ColumnDragEnd) => {
+      const columnDefinitions: TableColumnDefinition[] = [...this.columnDefinitions];
+
+      columnDefinitions.splice(event.oldIndex, 1);
+      columnDefinitions.splice(event.newIndex, 0, this.columnDefinitions[event.oldIndex]);
+
+      this.controller.setColumnDefinitions(columnDefinitions);
+      this.columnDefinitions = columnDefinitions;
+    });
   }
 }

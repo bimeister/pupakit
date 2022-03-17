@@ -59,7 +59,7 @@
   "dependencies": {
     "@angular/cdk": "~12.2.6",
     "@bimeister/event-bus": "0.2.0-68b57267",
-    "@bimeister/utilities": "0.2.0-2aff75c4-dev",
+    "@bimeister/utilities": "0.2.0-011ef52c",
     "@types/hammerjs": "^2.0.40",
     "ag-grid-angular": "^23.1.1",
     "ag-grid-community": "^23.1.1",

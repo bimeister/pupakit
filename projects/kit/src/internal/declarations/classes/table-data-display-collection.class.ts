@@ -1,5 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
-import { TrackByFunction } from '@angular/core';
+import { Injector, TrackByFunction } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
@@ -47,12 +47,16 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     map((definitions: TableColumnDefinition[]) => {
       const newColumnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
 
-      for (const definition of definitions) {
+      definitions.forEach((definition: TableColumnDefinition, index: number) => {
         const existingColumn: Nullable<TableColumn> = this.columnIdToColumnMap.get(definition.id);
-        const column: TableColumn = isNil(existingColumn) ? new TableColumn() : existingColumn;
+        const column: TableColumn = isNil(existingColumn)
+          ? new TableColumn(this.injector, this.eventBus)
+          : existingColumn;
+
+        column.index = index;
         column.definition = definition;
         newColumnIdToColumnMap.set(definition.id, column);
-      }
+      });
 
       this.columnIdToColumnMap = newColumnIdToColumnMap;
       return this.columnIdToColumnMap;
@@ -127,7 +131,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public readonly tableViewportSizePx$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-  constructor(public readonly eventBus: EventBus) {}
+  constructor(public readonly eventBus: EventBus, private readonly injector: Injector) {}
 
   public setData(data: T[]): Observable<T[]> {
     this.data$.next(data);

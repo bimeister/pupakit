@@ -12,7 +12,7 @@ interface SomeData {
   age: number;
 }
 
-const DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, index: number) => ({
+const DATA: SomeData[] = Array.from({ length: 300_000 }).map((_value: undefined, index: number) => ({
   id: getUuid(),
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
@@ -36,9 +36,9 @@ const COLUMNS: TableColumnDefinition[] = [
     defaultSizes: { widthPx: 200 },
   },
   {
-    id: 'city',
+    id: `city`,
     modelKey: 'city',
-    title: 'City',
+    title: `City`,
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 200 },
   },

@@ -3,13 +3,23 @@
   class="header-cell"
   [class.row-hovered]="row.isHovered$ | async"
   [class.column-hovered]="column.isHovered$ | async"
+  [class.column-dragged]="column.isDragged$ | async"
   [row]="row"
   [column]="column"
   [style.width.px]="column.widthPx$ | async"
+  [attr.data-index]="column.index"
   [attr.data-column-id]="column.definition.id"
   [attr.data-row-id]="row.id"
   [attr.data-row-type]="rowType"
 >
+  <div
+    *ngIf="column.definition.resizable"
+    data-resizer
+    class="header-cell__resizer resizer"
+    [class.resizer_visible]="column?.isCurrentResizable$ | async"
+  >
+    <div class="resizer__stick"></div>
+  </div>
 </pupa-table-header-cell-container>
 <div
   *ngIf="isPlaceholderVisible$ | async"

@@ -2,12 +2,29 @@
   <pupa-table [controller]="controller">
     <!-- columnType = TableColumnDefinition.type-->
     <pupa-table-column-template columnType="name">
-      <div class="name-header-cell" *pupaTableHeaderCellTemplate="let column">
-        <span *ngIf="column.isHovered$ | async">👻</span>
-        {{ column.definition.title }}
+      <div
+        class="name-header-cell"
+        [class.name-header-cell_current-resizable]="column.isCurrentResizable$ | async"
+        [class.name-header-cell_current-draggable]="isDndClone"
+        *pupaTableHeaderCellTemplate="let column; let isDndClone = isDndClone"
+      >
+        <ng-container [ngSwitch]="isDndClone">
+          <ng-container *ngSwitchCase="false">
+            <span *ngIf="column.isHovered$ | async">👻</span>
+            {{ column.definition.title }}
+          </ng-container>
+
+          <ng-container *ngSwitchCase="true">
+            <span class="name-header-cell__dnd-text">DND!!! {{ column.definition.title }}</span>
+          </ng-container>
+        </ng-container>
       </div>
 
-      <div class="name-body-cell" *pupaTableBodyCellTemplate="let row; let column = column; typeFrom: rowType">
+      <div
+        class="name-body-cell"
+        [class.name-body-cell_current-resizable]="column.isCurrentResizable$ | async"
+        *pupaTableBodyCellTemplate="let row; let column = column; typeFrom: rowType"
+      >
         <span *ngIf="row.isHovered$ | async">🤡</span>
         <span *ngIf="column.isHovered$ | async">👻</span>
         {{ row.data[column.definition.modelKey] }}
@@ -16,8 +33,8 @@
 
     <!-- header cell template only-->
     <pupa-table-column-template columnType="city">
-      <ng-container *pupaTableHeaderCellTemplate="let column">
-        <pupa-table-header-cell [column]="column">
+      <ng-container *pupaTableHeaderCellTemplate="let column; let isDndClone = isDndClone">
+        <pupa-table-header-cell [column]="column" [isDndClone]="isDndClone">
           {{ column.definition.title }}
         </pupa-table-header-cell>
       </ng-container>

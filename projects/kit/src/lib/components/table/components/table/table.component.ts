@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Injector,
   Input,
   OnChanges,
   OnDestroy,
@@ -16,44 +17,81 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, Subscription } from 'rxjs';
-import { filter, map, observeOn, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { filterByInstanceOf, filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { BusEventBase } from '../../../../../internal/declarations/classes/abstract/bus-event-base.abstract';
 import { TableBodyRow } from '../../../../../internal/declarations/classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../../../../../internal/declarations/classes/table-body-rows-data-source.class';
 import { TableColumn } from '../../../../../internal/declarations/classes/table-column.class';
 import { TableController } from '../../../../../internal/declarations/classes/table-controller.class';
+import { TableCommonController } from '../../../../../internal/declarations/classes/table-controllers/table-common-controller.class';
+import { TableDndController } from '../../../../../internal/declarations/classes/table-controllers/table-dnd-controller.class';
+import { TableHoverController } from '../../../../../internal/declarations/classes/table-controllers/table-hover-controller.class';
+import { TableResizeController } from '../../../../../internal/declarations/classes/table-controllers/table-resize-controller.class';
+import { TableScrollController } from '../../../../../internal/declarations/classes/table-controllers/table-scroll-controller.class';
+import { TableSortingController } from '../../../../../internal/declarations/classes/table-controllers/table-sorting-controller.class';
 import { TableRow } from '../../../../../internal/declarations/classes/table-row.class';
-import { TableColumnSorting } from '../../../../../internal/declarations/enums/table-column-sorting.enum';
 import { TableRowType } from '../../../../../internal/declarations/enums/table-row-type.enum';
 import { QueueEvents } from '../../../../../internal/declarations/events/queue.events';
 import { TableEvents } from '../../../../../internal/declarations/events/table.events';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { TableApi } from '../../../../../internal/declarations/interfaces/table-api.interface';
 import { TableBodyCellContext } from '../../../../../internal/declarations/interfaces/table-body-cell-context.interface';
 import { TableCellHtmlElementDataset } from '../../../../../internal/declarations/interfaces/table-cell-html-element-dataset.interface';
+import { TableCellHtmlElement } from '../../../../../internal/declarations/interfaces/table-cell-html-element.interface';
 import { TableDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/table-data-display-collection-ref.interface';
+import { TableFeatureController } from '../../../../../internal/declarations/interfaces/table-feature-controller.interface';
 import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
+import { TableFeatureControllerConstructor } from '../../../../../internal/declarations/types/table-feature-controller-constructor.type';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { isTableCellHtmlElement } from '../../../../../internal/type-guards/is-table-cell-html-element.type-guard';
+import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
 import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
 import { TableTemplatesService } from '../../services/table-templates.service';
+import { TableEventTargetCellData } from '../../../../../internal/declarations/interfaces/table-event-target-cell-data.interface';
 
-function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset | null {
+function isTriggeredByResizer(event: Event): boolean {
+  const targetPath: EventTarget[] = event.composedPath();
+  return targetPath.some((target: EventTarget) => target instanceof HTMLElement && 'resizer' in target.dataset);
+}
+
+function getCellHtmlElementFromEvent(event: Event): Nullable<TableCellHtmlElement> {
   const targetPath: EventTarget[] = event.composedPath();
 
-  let cellData: Nullable<TableCellHtmlElementDataset> = null;
+  let element: Nullable<TableCellHtmlElement> = null;
 
   for (const target of targetPath) {
     if (!isTableCellHtmlElement(target)) {
       continue;
     }
-    cellData = target.dataset;
+    element = target;
   }
 
-  return cellData;
+  return element;
+}
+
+function convertCellHtmlElementToTargetCellData(
+  tableCellHtmlElement: Nullable<TableCellHtmlElement>
+): Nullable<TableEventTargetCellData> {
+  const cellData: Nullable<TableCellHtmlElementDataset> = tableCellHtmlElement?.dataset;
+
+  return isNil(cellData)
+    ? null
+    : {
+        index: Number(cellData.index),
+        columnId: cellData.columnId,
+        rowId: cellData.rowId,
+        rowType: cellData.rowType,
+        element: tableCellHtmlElement,
+      };
+}
+
+function isTableRowType(input: string): input is TableRowType {
+  const enumKeys: TableRowType[] = [TableRowType.Body, TableRowType.Header];
+  return new Set<string>(enumKeys).has(input);
 }
 
 @Component({
@@ -65,6 +103,8 @@ function getCellDataFromEvent(event: Event): TableCellHtmlElementDataset | null 
   providers: [TableTemplatesService, TableColumnsIntersectionService, TableScrollbarsService],
 })
 export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDestroy {
+  private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement);
+
   private readonly subscription: Subscription = new Subscription();
 
   @ViewChild('table', { static: true })
@@ -83,10 +123,13 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   public headerScrollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
 
   @ViewChild('headerScrollableRowContainer', { read: ElementRef })
-  public headerScrollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
+  public headerScrollableRowContainerElementRef?: Nullable<ElementRef<HTMLElement>>;
+
+  @ViewChild('bodyScrollableContainer', { static: true })
+  public bodyScrollableContainerRef?: Nullable<ScrollableComponent>;
 
   @ViewChild('decorScrollableRowContainer', { read: ElementRef })
-  public decorScrollableRowContainerRef?: Nullable<ElementRef<HTMLElement>>;
+  public decorScrollableRowContainerElementRef?: Nullable<ElementRef<HTMLElement>>;
 
   @Input() public controller: TableController<T>;
   private readonly controller$: BehaviorSubject<Nullable<TableController<T>>> = new BehaviorSubject<TableController<T>>(
@@ -98,7 +141,9 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   public readonly isHorizontalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$;
 
   private readonly dataDisplayCollection$: Observable<TableDataDisplayCollectionRef<T>> =
-    this.availableController$.pipe(map((controller: TableController<T>) => controller.getDataDisplayCollectionRef()));
+    this.availableController$.pipe(
+      switchMap((controller: TableController<T>) => controller.getDataDisplayCollectionRef())
+    );
 
   public readonly data$: Observable<T[]> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.data$)
@@ -113,10 +158,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   public readonly virtualScrollDataSource$: Observable<TableBodyRowsDataSource<T>> = this.dataDisplayCollection$.pipe(
     map((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.virtualScrollDataSource)
-  );
-
-  private readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.columnIdToColumnMap$)
   );
 
   public readonly pinnedLeftColumns$: Observable<TableColumn[]> = this.dataDisplayCollection$.pipe(
@@ -151,10 +192,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.trackBy$)
   );
 
-  public readonly scrollBehavior$: Observable<ScrollBehavior> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.scrollBehavior$)
-  );
-
   public readonly minBufferPx$: Observable<number> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.minBufferPx$)
   );
@@ -172,13 +209,32 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.tableColumnsIntersectionService.rightHiddenColumnIds$.pipe(
       map((rightHiddenColumnIds: string[]) => rightHiddenColumnIds.length)
     );
+
+  public readonly columnDndIndicatorOffsetLeft$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<
+    Nullable<number>
+  >(null);
+
+  private readonly featureControllers: TableFeatureControllerConstructor<T>[] = [
+    TableCommonController,
+    TableResizeController,
+    TableSortingController,
+    TableDndController,
+    TableScrollController,
+    TableHoverController,
+  ];
+  private activeFeatureConstructors: TableFeatureController[] = [];
+
   constructor(
     private readonly tableTemplatesService: TableTemplatesService<T>,
     public readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly tableColumnsIntersectionService: TableColumnsIntersectionService,
     private readonly tableScrollbarsService: TableScrollbarsService,
-    private readonly renderer: Renderer2
-  ) {}
+    private readonly renderer: Renderer2,
+    private readonly injector: Injector,
+    private readonly elementRef: ElementRef
+  ) {
+    this.initHammerEvents();
+  }
 
   public readonly rowTrackByFunction: TrackByFunction<TableBodyRow<T>> = (index: number, _item: TableBodyRow<T>) =>
     index;
@@ -191,16 +247,14 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.setCdkVirtualScrollContentWrapperWidth();
     this.registerDefaultTemplates();
 
-    this.subscription.add(this.setColumnsBreakpointOnCurrentBreakpointChanges());
     this.subscription.add(this.processListRangeChanges());
-    this.subscription.add(this.processLeftHiddenColumnIdsChanges());
-    this.subscription.add(this.processColumnWidthChanges());
-    this.subscription.add(this.processColumnSortingChanges());
-    this.subscription.add(this.processScrollViewportEvent());
+    this.subscription.add(this.processHiddenColumnIdsChanges());
+    this.subscription.add(this.processColumnDndIndicatorPositionChanges());
   }
 
   public ngAfterViewInit(): void {
     this.subscription.add(this.updateDataTableSizesOnWindowResize());
+    this.subscription.add(this.setFeatureControllersOnApiDataChanges());
 
     this.startEventsQueue();
     this.registerHeaderScrollableContainerForIntersectionDetection();
@@ -209,76 +263,92 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.disposeFeatureControllers();
   }
 
   public processVerticalScrollBarVisibilityChanges(isVisible: boolean): void {
     this.tableScrollbarsService.isVerticalVisible$.next(isVisible);
-    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
-      eventBus.dispatch(new TableEvents.VerticalScrollBarVisibilityChanged(isVisible));
-    });
+    this.dispatchEvent(new TableEvents.VerticalScrollBarVisibilityChanged(isVisible));
   }
 
   public processHorizontalScrollBarVisibilityChanges(isVisible: boolean): void {
-    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
-      this.tableScrollbarsService.isHorizontalVisible$.next(isVisible);
-      eventBus.dispatch(new TableEvents.HorizontalScrollBarVisibilityChanged(isVisible));
-    });
+    this.tableScrollbarsService.isHorizontalVisible$.next(isVisible);
+    this.dispatchEvent(new TableEvents.HorizontalScrollBarVisibilityChanged(isVisible));
   }
 
   public processTableMouseEvent(event: MouseEvent): void {
-    combineLatest([this.columnIdToColumnMap$, this.bodyRowIdToBodyRowMap$, this.eventBus$])
-      .pipe(take(1))
-      .subscribe(
-        ([columnIdToColumnMap, bodyRowIdToBodyRowMap, eventBus]: [
-          Map<string, TableColumn>,
-          Map<string, TableBodyRow<T>>,
-          EventBus
-        ]) => {
-          for (const column of columnIdToColumnMap.values()) {
-            column.isHovered$.next(false);
-          }
-          for (const row of bodyRowIdToBodyRowMap.values()) {
-            row.isHovered$.next(false);
-          }
-
-          const cellData: Nullable<TableCellHtmlElementDataset> = getCellDataFromEvent(event);
-
-          if (isNil(cellData)) {
-            eventBus.dispatch(new TableEvents.RowHover(null));
-            eventBus.dispatch(new TableEvents.ColumnHover(null));
-            return;
-          }
-
-          columnIdToColumnMap.get(cellData.columnId)?.isHovered$?.next(true);
-          bodyRowIdToBodyRowMap.get(cellData.rowId)?.isHovered$?.next(true);
-
-          eventBus.dispatch(new TableEvents.RowHover(cellData.rowId));
-          eventBus.dispatch(new TableEvents.ColumnHover(cellData.columnId));
-        }
-      );
+    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event);
+    this.dispatchEvent(new TableEvents.MouseOver(convertCellHtmlElementToTargetCellData(element)));
   }
 
-  public processTap(event: HammerInput): void {
-    const cellData: Nullable<TableCellHtmlElementDataset> = getCellDataFromEvent(event.srcEvent);
+  public processClick(event: Event): void {
+    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event);
 
-    if (isNil(cellData)) {
+    if (isNil(element)) {
       return;
     }
 
-    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
-      if (!TableComponent.isTableRowType(cellData.rowType)) {
-        return;
-      }
+    const cellData: TableCellHtmlElementDataset = element.dataset;
 
-      eventBus.dispatch(new TableEvents.CellClick(cellData.columnId, cellData.rowId, cellData.rowType));
-    });
+    if (!isTableRowType(cellData.rowType)) {
+      return;
+    }
+
+    this.dispatchEvent(new TableEvents.CellClick(convertCellHtmlElementToTargetCellData(element)));
+  }
+
+  public processPanStart(event: HammerInput): void {
+    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event.srcEvent);
+    this.dispatchEvent(
+      new TableEvents.PanStart(
+        convertCellHtmlElementToTargetCellData(element),
+        isTriggeredByResizer(event.srcEvent),
+        event.pointerType
+      )
+    );
+  }
+
+  public processPan(event: HammerInput): void {
+    const srcEvent: Event = event.srcEvent;
+
+    if (!(srcEvent instanceof PointerEvent)) {
+      return;
+    }
+
+    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(srcEvent);
+
+    this.dispatchEvent(
+      new TableEvents.Pan(
+        convertCellHtmlElementToTargetCellData(element),
+        [event.deltaX, event.deltaY],
+        [srcEvent.clientX, srcEvent.clientY]
+      )
+    );
+  }
+
+  public processPanEnd(event: HammerInput): void {
+    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event.srcEvent);
+    this.dispatchEvent(new TableEvents.PanEnd(convertCellHtmlElementToTargetCellData(element)));
   }
 
   public processBodyScrollLeftChanges(scrollLeft: number): void {
-    const scrollableHeaderCells: HTMLElement = this.headerScrollableRowContainerRef?.nativeElement;
-    const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerRef?.nativeElement;
+    const scrollableHeaderCells: HTMLElement = this.headerScrollableRowContainerElementRef?.nativeElement;
+    const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerElementRef?.nativeElement;
     this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
     this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
+  }
+
+  private initHammerEvents(): void {
+    this.hammerManager.add(new Hammer.Pan({ direction: Hammer.DIRECTION_ALL, threshold: 0, velocity: 0 }));
+    this.hammerManager.add(new Hammer.Press());
+
+    this.hammerManager.on('panstart', (event: HammerInput) => this.processPanStart(event));
+    this.hammerManager.on('pan', (event: HammerInput) => this.processPan(event));
+    this.hammerManager.on('panend', (event: HammerInput) => this.processPanEnd(event));
+  }
+
+  private startEventsQueue(): void {
+    this.dispatchEvent(new QueueEvents.StartQueue());
   }
 
   private measureFirstVisibleListRange(): void {
@@ -292,16 +362,17 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   private processTableControllerChanges(change: ComponentChange<this, TableController<T>>): void {
-    const value: TableController<T> = change?.currentValue;
-    if (isNil(value)) {
+    const controller: TableController<T> = change?.currentValue;
+    if (isNil(controller)) {
       return;
     }
-    this.controller$.next(value);
+    controller.init(this.injector);
+    this.controller$.next(controller);
   }
 
   /**
    * @description
-   * Angular shit: 🦯🤡 content need max width from table element.
+   * Angular shit: 🩼🦯🤡 content need max width from table element.
    * Use this method instead of :ng-deep
    */
   private setCdkVirtualScrollContentWrapperWidth(): void {
@@ -320,87 +391,22 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     });
   }
 
-  private setColumnsBreakpointOnCurrentBreakpointChanges(): Subscription {
-    return combineLatest([this.clientUiStateHandlerService.breakpoint$, this.columnIdToColumnMap$]).subscribe(
-      ([currentBreakpoint, columnIdToColumnMap]: [string, Map<string, TableColumn>]) => {
-        for (const column of columnIdToColumnMap.values()) {
-          column.breakpoint$.next(currentBreakpoint);
-        }
-      }
-    );
-  }
-
   private processListRangeChanges(): Subscription {
     return this.virtualScrollDataSource$
       .pipe(
         take(1),
-        switchMap((virtualScrollDataSource: TableBodyRowsDataSource<T>) => virtualScrollDataSource.listRange$),
-        withLatestFrom(this.eventBus$)
+        switchMap((virtualScrollDataSource: TableBodyRowsDataSource<T>) => virtualScrollDataSource.listRange$)
       )
-      .subscribe(([listRange, eventBus]: [ListRange, EventBus]) =>
-        eventBus.dispatch(new TableEvents.ListRangeChanged(listRange))
-      );
+      .subscribe((listRange: ListRange) => this.dispatchEvent(new TableEvents.ListRangeChanged(listRange)));
   }
 
-  private processLeftHiddenColumnIdsChanges(): Subscription {
+  private processHiddenColumnIdsChanges(): Subscription {
     return combineLatest([
       this.tableColumnsIntersectionService.leftHiddenColumnIds$,
       this.tableColumnsIntersectionService.rightHiddenColumnIds$,
-    ])
-      .pipe(withLatestFrom(this.eventBus$))
-      .subscribe(([[leftHiddenColumnIds, rightHiddenColumnIds], eventBus]: [[string[], string[]], EventBus]) =>
-        eventBus.dispatch(new TableEvents.HiddenColumnIdsChanged(leftHiddenColumnIds, rightHiddenColumnIds))
-      );
-  }
-
-  private processColumnWidthChanges(): Subscription {
-    return this.columnIdToColumnMap$
-      .pipe(
-        switchMap((columnIdToColumnMap: Map<string, TableColumn>) => {
-          const columnWidthChangesList: Observable<[string, number]>[] = Array.from(columnIdToColumnMap.values()).map(
-            (column: TableColumn) => column.widthPx$.pipe(map((widthPx: number) => [column.definition.id, widthPx]))
-          );
-
-          return merge(...columnWidthChangesList);
-        }),
-        observeOn(animationFrameScheduler),
-        withLatestFrom(this.eventBus$)
-      )
-      .subscribe(([[columnId, widthPx], eventBus]: [[string, number], EventBus]) => {
-        eventBus.dispatch(new TableEvents.ColumnWidthChanged(widthPx, columnId));
-      });
-  }
-
-  private processColumnSortingChanges(): Subscription {
-    return this.columnIdToColumnMap$
-      .pipe(
-        switchMap((columnIdToColumnMap: Map<string, TableColumn>) => {
-          const columnWidthChangesList: Observable<[string, TableColumnSorting]>[] = Array.from(
-            columnIdToColumnMap.values()
-          ).map((column: TableColumn) =>
-            column.sorting$.pipe(map((sorting: TableColumnSorting) => [column.definition.id, sorting]))
-          );
-
-          return merge(...columnWidthChangesList);
-        }),
-        withLatestFrom(this.eventBus$)
-      )
-      .subscribe(([[columnId, sorting], eventBus]: [[string, TableColumnSorting], EventBus]) => {
-        eventBus.dispatch(new TableEvents.ColumnSortingChanged(sorting, columnId));
-      });
-  }
-
-  private processScrollViewportEvent(): Subscription {
-    return this.eventBus$
-      .pipe(
-        switchMap((eventBus: EventBus) =>
-          eventBus.listen().pipe(filter((event: BusEventBase) => event instanceof TableEvents.ScrollViewportByIndex))
-        ),
-        withLatestFrom(this.scrollBehavior$)
-      )
-      .subscribe(([event, scrollBehavior]: [TableEvents.ScrollViewportByIndex, ScrollBehavior]) => {
-        this.cdkVirtualScrollViewportRef.scrollToIndex(event.index, scrollBehavior);
-      });
+    ]).subscribe(([leftHiddenColumnIds, rightHiddenColumnIds]: [string[], string[]]) =>
+      this.dispatchEvent(new TableEvents.HiddenColumnIdsChanged(leftHiddenColumnIds, rightHiddenColumnIds))
+    );
   }
 
   private updateDataTableSizesOnWindowResize(): Subscription {
@@ -423,19 +429,56 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       );
   }
 
-  private startEventsQueue(): void {
-    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
-      eventBus.dispatch(new QueueEvents.StartQueue());
-    });
-  }
-
   private registerHeaderScrollableContainerForIntersectionDetection(): void {
     const headerScrollableRowsContainer: HTMLElement = this.headerScrollableRowsContainerRef.nativeElement;
     this.tableColumnsIntersectionService.registerScrollArea(headerScrollableRowsContainer);
   }
 
-  private static isTableRowType(input: string): input is TableRowType {
-    const enumKeys: TableRowType[] = [TableRowType.Body, TableRowType.Header];
-    return new Set<string>(enumKeys).has(input);
+  private setFeatureControllersOnApiDataChanges(): Subscription {
+    return combineLatest([this.eventBus$, this.dataDisplayCollection$]).subscribe(
+      ([eventBus, dataDisplayCollection]: [EventBus, TableDataDisplayCollectionRef<T>]) => {
+        this.disposeFeatureControllers();
+
+        const tableApi: TableApi<T> = {
+          eventBus,
+          displayData: dataDisplayCollection,
+          bodyScrollableContainerRef: this.bodyScrollableContainerRef,
+          cdkVirtualScrollViewportRef: this.cdkVirtualScrollViewportRef,
+          templatesRegistry: this.tableTemplatesService,
+          tableInjector: this.injector,
+          tableElement: this.tableRef.nativeElement,
+        };
+
+        for (const featureControllerConstructor of this.featureControllers) {
+          this.activeFeatureConstructors.push(new featureControllerConstructor(tableApi));
+        }
+      }
+    );
+  }
+
+  private processColumnDndIndicatorPositionChanges(): Subscription {
+    return this.eventBus$
+      .pipe(
+        switchMap((eventBus: EventBus) => eventBus.listen()),
+        filterByInstanceOf(TableEvents.ColumnDragIndicatorPositionChange),
+        map((event: TableEvents.ColumnDragIndicatorPositionChange) => event.offsetLeft),
+        distinctUntilChanged()
+      )
+      .subscribe((offsetLeft: Nullable<number>) => {
+        this.columnDndIndicatorOffsetLeft$.next(offsetLeft);
+      });
+  }
+
+  private disposeFeatureControllers(): void {
+    for (const featureController of this.activeFeatureConstructors) {
+      featureController.dispose();
+    }
+    this.activeFeatureConstructors = [];
+  }
+
+  private dispatchEvent(event: BusEventBase): void {
+    this.eventBus$.pipe(take(1)).subscribe((eventBus: EventBus) => {
+      eventBus.dispatch(event);
+    });
   }
 }

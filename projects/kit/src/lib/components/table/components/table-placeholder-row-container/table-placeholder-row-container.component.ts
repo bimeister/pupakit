@@ -4,6 +4,7 @@ import { TableRow } from '../../../../../internal/declarations/classes/table-row
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
+import { TableRowType } from '../../../../../internal/declarations/enums/table-row-type.enum';
 
 @Component({
   selector: 'pupa-table-placeholder-row-container',
@@ -16,6 +17,7 @@ export class TablePlaceholderRowContainerComponent {
   @Input() public columns: TableColumn[];
   @Input() public row: TableRow;
   @Input() public isFullHeightCells: boolean = false;
+  public readonly rowType: TableRowType = TableRowType.Body;
 
   public readonly isPlaceholderVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$.pipe(
     map((isHorizontalVisible: boolean) => !isHorizontalVisible)

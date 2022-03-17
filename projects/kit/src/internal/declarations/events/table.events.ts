@@ -2,8 +2,8 @@ import { ListRange } from '@angular/cdk/collections';
 import { getUuid, Nullable } from '@bimeister/utilities';
 import { BusEventBase } from '../classes/abstract/bus-event-base.abstract';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
-import { TableRowType } from '../enums/table-row-type.enum';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
+import { TableEventTargetCellData } from '../interfaces/table-event-target-cell-data.interface';
 
 export namespace TableEvents {
   export class TableEventBase<T = unknown> extends BusEventBase<T> {
@@ -28,11 +28,53 @@ export namespace TableEvents {
     }
   }
   export class CellClick extends TableEventBase {
+    constructor(public readonly targetCell: Nullable<TableEventTargetCellData>) {
+      super();
+    }
+  }
+
+  export class MouseOver extends TableEventBase {
+    constructor(public readonly targetCell: Nullable<TableEventTargetCellData>) {
+      super();
+    }
+  }
+
+  export class PanStart extends TableEventBase {
     constructor(
-      public readonly columnId: string,
-      public readonly rowId: string,
-      public readonly rowType: TableRowType
+      public readonly targetCell: Nullable<TableEventTargetCellData>,
+      public readonly triggeredByResizer: boolean,
+      public readonly pointerType: string
     ) {
+      super();
+    }
+  }
+  export class Pan extends TableEventBase {
+    constructor(
+      public readonly targetCell: Nullable<TableEventTargetCellData>,
+      public readonly panDelta: [number, number],
+      public readonly globalPosition: [number, number]
+    ) {
+      super();
+    }
+  }
+  export class PanEnd extends TableEventBase {
+    constructor(public readonly targetCell: Nullable<TableEventTargetCellData>) {
+      super();
+    }
+  }
+
+  export class ColumnDragStart extends TableEventBase {
+    constructor(public readonly columnId: string) {
+      super();
+    }
+  }
+  export class ColumnDragIndicatorPositionChange extends TableEventBase {
+    constructor(public readonly offsetLeft: Nullable<number>) {
+      super();
+    }
+  }
+  export class ColumnDragEnd extends TableEventBase {
+    constructor(public readonly columnId: string, public readonly newIndex: number, public readonly oldIndex: number) {
       super();
     }
   }
@@ -103,11 +145,6 @@ export namespace TableEvents {
     }
   }
   export class ScrollByIndex extends TableEventBase {
-    constructor(public readonly index: number) {
-      super();
-    }
-  }
-  export class ScrollViewportByIndex extends TableEventBase {
     constructor(public readonly index: number) {
       super();
     }

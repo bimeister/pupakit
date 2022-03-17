@@ -95,10 +95,6 @@
     </pupa-table-column-template>
 
     <pupa-table-column-template columnType="age">
-      <pupa-table-header-cell *pupaTableHeaderCellTemplate="let column" [column]="column" [sortable]="true">
-        {{ column.definition.title }}
-      </pupa-table-header-cell>
-
       <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; let column = column" [clickable]="true">
         {{ row.data[column.definition.modelKey] }}
       </pupa-table-body-cell>

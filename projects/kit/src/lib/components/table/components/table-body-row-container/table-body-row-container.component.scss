@@ -6,6 +6,7 @@
 }
 
 .body-cell {
+  position: relative;
   display: block;
   background-color: color('base-white-n500');
   margin-right: 1px;
@@ -21,15 +22,45 @@
     background-color: color('primary-n100');
   }
 
+  &::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: calc(100% + 1px);
+    background-color: color('base-white-n400');
+    position: absolute;
+    right: -1px;
+    top: 0;
+  }
+
   @include host-selector('.table-body__scrollable-container') {
     &:last-child {
       margin-right: 0;
+
+      &::after {
+        display: none;
+      }
     }
   }
 
   @include host-selector('.table-body__pinned-right-container') {
     margin-left: 1px;
     margin-right: 0;
+
+    &::after {
+      right: auto;
+      left: -1px;
+    }
+  }
+
+  &.row-hovered {
+    &::after {
+      background-color: color('base-n0');
+    }
+  }
+
+  &.column-current-draggable {
+    background-color: color(base-white-n500, 0.5);
   }
 }
 
