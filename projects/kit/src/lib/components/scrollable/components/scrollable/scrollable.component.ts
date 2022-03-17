@@ -39,6 +39,7 @@ import {
   startWith,
   switchMap,
   take,
+  takeUntil,
   tap,
   throttleTime,
 } from 'rxjs/operators';
@@ -58,6 +59,8 @@ const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_vis
 const VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS: string = 'pupa-scrollbar_vertical_with-horizontal';
 const HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_horizontal_visible';
 const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizontal_with-vertical';
+
+const HORIZONTAL_AUTO_SCROLL_SENSITIVITY_WIDTH_PX: number = 30;
 
 @Component({
   selector: 'pupa-scrollable',
@@ -110,13 +113,20 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private contentElement: HTMLElement;
+  public get element(): HTMLElement {
+    return this.contentElement;
+  }
+
   private ignoreNextContentScrollEvent: boolean = false;
+
+  private scrollByDeltaSubscription: Subscription | null = null;
 
   constructor(
     private readonly ngZone: NgZone,
     private readonly renderer: Renderer2,
     public readonly changeDetectorRef: ChangeDetectorRef,
-    @Inject(DOCUMENT) private readonly document: Document
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly elementRef: ElementRef<HTMLElement>
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -143,6 +153,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.scrollByDeltaSubscription?.unsubscribe();
   }
 
   public scrollToBottom(): void {
@@ -171,6 +182,51 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     isSmoothScroll
       ? this.setSmoothContentScrollLeftByDelta(deltaScrollLeft)
       : this.setContentScrollLeftByDelta(deltaScrollLeft);
+  }
+
+  public startScrollLeftByDeltaLoop(deltaScrollLeft: number): void {
+    this.scrollByDeltaSubscription = getAnimationFrameLoop()
+      .pipe(takeUntil(merge(this.scrolledToHorizontalStart, this.scrolledToHorizontalEnd)))
+      .subscribe(() => {
+        this.setScrollLeftByDelta(deltaScrollLeft);
+      });
+  }
+
+  public stopScrollLeftByDeltaLoop(): void {
+    this.scrollByDeltaSubscription?.unsubscribe();
+    this.scrollByDeltaSubscription = null;
+  }
+
+  public isIntersectsLeftScrollTriggerZone(positionX: number): boolean {
+    const clientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+
+    const leftSensitivityZone: [number, number] = [
+      clientRect.left,
+      clientRect.left + HORIZONTAL_AUTO_SCROLL_SENSITIVITY_WIDTH_PX,
+    ];
+
+    return positionX >= leftSensitivityZone[0] && positionX <= leftSensitivityZone[1];
+  }
+
+  public isIntersectsRightScrollTriggerZone(positionX: number): boolean {
+    const clientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+
+    const rightSensitivityZone: [number, number] = [
+      clientRect.right - HORIZONTAL_AUTO_SCROLL_SENSITIVITY_WIDTH_PX,
+      clientRect.right,
+    ];
+
+    return positionX >= rightSensitivityZone[0] && positionX <= rightSensitivityZone[1];
+  }
+
+  private processHorizontalScrollDragModeEnabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.horizontalScrollDragModeEnabled$.next(updatedValue);
   }
 
   private processContentScrollEvent(): Subscription {
@@ -525,15 +581,5 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
         )
       )
       .subscribe();
-  }
-
-  private processHorizontalScrollDragModeEnabledChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.horizontalScrollDragModeEnabled$.next(updatedValue);
   }
 }

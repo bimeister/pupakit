@@ -35,6 +35,10 @@
     }
   }
 
+  &_current-draggable {
+    opacity: 0.5;
+  }
+
   &__content {
     display: block;
     width: 100%;

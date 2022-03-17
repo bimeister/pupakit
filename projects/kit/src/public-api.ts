@@ -18,7 +18,6 @@ export {
   DatagridManipulator,
   DatagridManipulatorConfiguration,
   DatagridThemes,
-  DefaultTableEventHandler,
   DefaultTreeEventHandler,
   DraggableListChangeIndexEvent,
   DrawerConfig,

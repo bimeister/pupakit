@@ -6,20 +6,41 @@
 }
 
 .table-placeholder-cell {
+  position: relative;
   height: 1px;
   margin-right: 1px;
   background-color: color('base-n0');
   flex-shrink: 0;
 
+  &::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 100%;
+    background-color: color('base-white-n400');
+    position: absolute;
+    right: -1px;
+    top: 0;
+  }
+
   @include host-selector('.table-placeholder__scrollable-container') {
     &:last-child {
       margin-right: 0;
+
+      &::after {
+        display: none;
+      }
     }
   }
 
   @include host-selector('.table-placeholder__pinned-right-container') {
     margin-left: 1px;
     margin-right: 0;
+
+    &::after {
+      right: auto;
+      left: -1px;
+    }
   }
 
   &_full-height {

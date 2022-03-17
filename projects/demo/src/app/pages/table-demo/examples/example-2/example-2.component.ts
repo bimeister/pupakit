@@ -36,6 +36,19 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
+
+    // set draggable as true
+    draggable: true,
+
+    // set resizable as true
+    resizable: true,
+
+    // set sortable as true
+    sortable: true,
+
+    // set sorting None state availability
+    isSortingNoneAvailable: false,
+
     defaultSizes: {
       widthPx: 200,
 
@@ -82,11 +95,14 @@ export class TableExample2Component implements OnDestroy {
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();
 
+  private columnDefinitions: TableColumnDefinition[] = COLUMNS;
+
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
     this.controller.setData(DATA);
 
     this.subscription.add(this.processSortingChanges());
+    this.subscription.add(this.processDndEnd());
   }
 
   public ngOnDestroy(): void {
@@ -111,5 +127,17 @@ export class TableExample2Component implements OnDestroy {
 
         this.controller.setData(DATA);
       });
+  }
+
+  private processDndEnd(): Subscription {
+    return this.controller.getEvents(TableEvents.ColumnDragEnd).subscribe((event: TableEvents.ColumnDragEnd) => {
+      const columnDefinitions: TableColumnDefinition[] = [...this.columnDefinitions];
+
+      columnDefinitions.splice(event.oldIndex, 1);
+      columnDefinitions.splice(event.newIndex, 0, this.columnDefinitions[event.oldIndex]);
+
+      this.controller.setColumnDefinitions(columnDefinitions);
+      this.columnDefinitions = columnDefinitions;
+    });
   }
 }

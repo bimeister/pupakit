@@ -1,31 +1,20 @@
 <div
+  *pupaLet="
+    { isSortable: isSortable$ | async, isIconVisible: isIconVisible$ | async };
+    let isSortable = isSortable;
+    let isIconVisible = isIconVisible
+  "
   class="header-cell"
-  [class.header-cell_resizing]="isResizing$ | async"
-  [class.header-cell_resizable]="resizable"
-  [class.header-cell_sortable]="sortable"
-  [class.header-cell_sortable-with-icon]="sortable && (isIconVisible$ | async)"
-  (click)="processClick()"
+  [class.header-cell_sortable]="isSortable"
+  [class.header-cell_sortable-with-icon]="isSortable && isIconVisible"
+  [class.header-cell_dnd-clone]="isDndClone"
+  [class.header-cell_current-draggable]="isCurrentDraggable$ | async"
 >
-  <span class="header-cell__text">
-    <ng-content></ng-content>
-  </span>
+  <span class="header-cell__text"> <ng-content></ng-content> </span>
 
-  <div class="header-cell__sort-wrapper" *ngIf="sortable && (isIconVisible$ | async)">
+  <div class="header-cell__sort-wrapper" *ngIf="isSortable && isIconVisible">
     <span class="header-cell__sort">
       <pupa-icon [name]="iconName$ | async"></pupa-icon>
     </span>
   </div>
-</div>
-
-<div
-  class="header-cell__resizer resizer"
-  *ngIf="resizable"
-  [class.resizer_visible]="isResizing$ | async"
-  (press)="processPress()"
-  (panstart)="processPress()"
-  (panmove)="processPan($event)"
-  (panend)="processPanEnd()"
-  (pressup)="processPressup()"
->
-  <div class="resizer__stick"></div>
 </div>

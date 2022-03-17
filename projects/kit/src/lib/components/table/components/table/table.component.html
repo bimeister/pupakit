@@ -3,7 +3,7 @@
   class="table"
   (mouseover)="processTableMouseEvent($event)"
   (mouseleave)="processTableMouseEvent($event)"
-  (tap)="processTap($event)"
+  (click)="processClick($event)"
 >
   <div class="table__header table-header">
     <div class="table-header__pinned-left-container">
@@ -188,18 +188,22 @@
       ></pupa-table-placeholder-row-container>
     </div>
   </div>
+
+  <ng-container *pupaLet="columnDndIndicatorOffsetLeft$ | async as offsetLeft">
+    <div class="columns-dnd-indicator" *ngIf="!(offsetLeft | isNullOrUndefined)" [style.left.px]="offsetLeft"></div>
+  </ng-container>
 </div>
 
 <ng-content></ng-content>
 
-<ng-template #defaultHeaderCellTemplate let-column>
-  <pupa-table-header-cell>
+<ng-template #defaultHeaderCellTemplate let-column let-isDndClone="isDndClone">
+  <pupa-table-header-cell [column]="column" [isDndClone]="isDndClone">
     {{ column.definition.title ?? '' }}
   </pupa-table-header-cell>
 </ng-template>
 
 <ng-template #defaultBodyCellTemplate let-row let-column="column">
-  <pupa-table-body-cell *ngIf="!(row.data | isNullOrUndefined); else skeleton">
+  <pupa-table-body-cell *ngIf="!(row.data | isNullOrUndefined); else skeleton" [column]="column">
     {{ row.data[column.definition.modelKey] ?? '' }}
   </pupa-table-body-cell>
 </ng-template>

@@ -15,6 +15,7 @@ import { ControlTextModule } from './components/control-text/control-text.module
 import { CounterModule } from './components/counter/counter.module';
 import { DatagridModule } from './components/datagrid/datagrid.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
+import { DndCloneContainerModule } from './components/dnd-clone-container/dnd-clone-container.module';
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
@@ -113,6 +114,7 @@ const EXPORTS: any[] = [
   ActionsModule,
   PopoverModule,
   DropdownModule,
+  DndCloneContainerModule,
 ];
 
 @NgModule({

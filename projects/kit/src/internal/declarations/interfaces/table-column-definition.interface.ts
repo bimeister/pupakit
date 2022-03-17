@@ -8,6 +8,10 @@ export interface TableColumnDefinition {
   title?: string;
   pin?: TableColumnPin;
   type?: string;
+  draggable?: boolean;
+  sortable?: boolean;
+  isSortingNoneAvailable?: boolean;
+  resizable?: boolean;
   rerenderOnRowOrColumnChanges?: boolean;
   defaultSizes?: TableColumnSizes;
   adaptiveSizes?: TableAdaptiveColumnSizes;

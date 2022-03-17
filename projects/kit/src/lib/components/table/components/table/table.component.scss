@@ -2,6 +2,8 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
+$scrollbarHeight: 12px;
+
 :host {
   display: block;
   width: 100%;
@@ -13,6 +15,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .table__header {
@@ -51,7 +54,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1;
+  z-index: 2;
 
   &_left {
     right: 0;
@@ -128,7 +131,6 @@
   width: fit-content;
   display: flex;
   box-sizing: border-box;
-  background-color: color('base-white-n400');
   min-width: 100%;
 
   &_hovered,
@@ -197,4 +199,15 @@
   width: fit-content;
   height: 1px;
   display: flex;
+}
+
+.columns-dnd-indicator {
+  position: absolute;
+  left: 100px;
+  top: 0;
+  width: 2px;
+  height: calc(100% - #{$scrollbarHeight});
+  background-color: color(primary-n500);
+  z-index: 5;
+  pointer-events: none;
 }

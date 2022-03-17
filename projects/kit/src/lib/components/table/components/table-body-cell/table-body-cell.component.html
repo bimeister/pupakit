@@ -1,4 +1,8 @@
-<div class="table-body-cell" [class.table-body-cell_clickable]="clickable">
+<div
+  class="table-body-cell"
+  [class.table-body-cell_clickable]="clickable"
+  [class.table-body-cell_current-draggable]="isCurrentDraggable$ | async"
+>
   <div class="table-body-cell__content">
     <ng-content></ng-content>
   </div>

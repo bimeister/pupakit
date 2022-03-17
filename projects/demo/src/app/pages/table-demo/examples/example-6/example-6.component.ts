@@ -51,6 +51,7 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'Age',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 100 },
+    sortable: true,
     type: 'age',
   },
 ];

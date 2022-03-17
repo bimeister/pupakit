@@ -1,14 +1,14 @@
-import { TrackByFunction, Type } from '@angular/core';
+import { Injector, TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { Nullable } from '@bimeister/utilities';
-import { Observable } from 'rxjs';
+import { filterNotNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { QueueEvents } from '../events/queue.events';
 import { TableEvents } from '../events/table.events';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableControllerOptions } from '../interfaces/table-controller-options.interface';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
-import { DefaultTableEventHandler } from './default-table-event-handler.class';
 import { EventsQueue } from './events-queue.class';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
 import TableEventBase = TableEvents.TableEventBase;
@@ -20,13 +20,7 @@ export class TableController<T> {
 
   protected readonly queue: EventsQueue = new EventsQueue(this.eventBus);
 
-  protected readonly dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>(
-    this.eventBus
-  );
-  protected readonly handler: DefaultTableEventHandler<T> = new DefaultTableEventHandler<T>(
-    this.eventBus,
-    this.dataDisplayCollection
-  );
+  protected readonly dataDisplayCollection$: BehaviorSubject<TableDataDisplayCollection<T>> = new BehaviorSubject(null);
 
   constructor(options?: TableControllerOptions<T>) {
     this.setHeaderRowHeightPx(options?.headerRowHeightPx);
@@ -40,12 +34,21 @@ export class TableController<T> {
     this.eventBus.dispatch(queueEvent);
   }
 
+  public init(injector: Injector): void {
+    const dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>(
+      this.eventBus,
+      injector
+    );
+
+    this.dataDisplayCollection$.next(dataDisplayCollection);
+  }
+
   public getEvents<E extends TableEventBase>(eventType: Type<E>): Observable<E> {
     return this.queue.getEvents(eventType);
   }
 
-  public getDataDisplayCollectionRef(): TableDataDisplayCollectionRef<T> {
-    return this.dataDisplayCollection;
+  public getDataDisplayCollectionRef(): Observable<TableDataDisplayCollectionRef<T>> {
+    return this.dataDisplayCollection$.pipe(filterNotNil());
   }
 
   public setData(data: T[]): void {
@@ -85,11 +88,19 @@ export class TableController<T> {
   }
 
   public setHeaderRowHeightPx(headerRowHeightPx?: number): void {
-    this.dataDisplayCollection.setHeaderRowHeightPx(headerRowHeightPx);
+    this.dataDisplayCollection$
+      .pipe(filterNotNil(), take(1))
+      .subscribe((dataDisplayCollection: TableDataDisplayCollection<T>) =>
+        dataDisplayCollection.setHeaderRowHeightPx(headerRowHeightPx)
+      );
   }
 
   public setBodyRowHeightPx(bodyRowHeightPx?: number): void {
-    this.dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx);
+    this.dataDisplayCollection$
+      .pipe(filterNotNil(), take(1))
+      .subscribe((dataDisplayCollection: TableDataDisplayCollection<T>) =>
+        dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx)
+      );
   }
 
   public setBodyInitialCountOfSkeletonRows(countOfRows: Nullable<number> = DEFAULT_SKELETON_ROWS_COUNT): void {
@@ -98,10 +109,18 @@ export class TableController<T> {
   }
 
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {
-    this.dataDisplayCollection.scrollBehavior$.next(scrollBehavior);
+    this.dataDisplayCollection$
+      .pipe(filterNotNil(), take(1))
+      .subscribe((dataDisplayCollection: TableDataDisplayCollection<T>) =>
+        dataDisplayCollection.scrollBehavior$.next(scrollBehavior)
+      );
   }
 
   private setTrackBy(trackBy: TrackByFunction<T> = TableDataDisplayCollection.trackBy): void {
-    this.dataDisplayCollection.trackBy$.next(trackBy);
+    this.dataDisplayCollection$
+      .pipe(filterNotNil(), take(1))
+      .subscribe((dataDisplayCollection: TableDataDisplayCollection<T>) =>
+        dataDisplayCollection.trackBy$.next(trackBy)
+      );
   }
 }
