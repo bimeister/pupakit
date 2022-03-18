@@ -9,12 +9,14 @@
 
 <ng-template #searchFieldTemplate let-isCollapsed="isCollapsed" let-isDisabled="isDisabled">
   <div
+    data-meta="pupa-search-field"
     class="search-field"
     [ngClass]="collapseDirection$ | async"
     [class.search-field_collapsible]="isCollapsible$ | async"
     [class.search-field_collapsed]="isCollapsed"
   >
     <input
+      data-meta="pupa-search-field__input"
       class="search-field__input"
       [ngClass]="resultClassList$ | async"
       type="text"
@@ -28,6 +30,7 @@
       [value]="value$ | async"
     />
     <pupa-icon
+      data-meta="pupa-search-field__collapse-button"
       class="search-field__icon"
       [class.search-field__icon_collapsed]="isCollapsed"
       [class.search-field__icon_disabled]="isDisabled"
@@ -36,6 +39,7 @@
     >
     </pupa-icon>
     <pupa-button-icon
+      data-meta="pupa-search-field__reset-button"
       class="search-field__reset"
       icon="app-cross-circle"
       size="small"
