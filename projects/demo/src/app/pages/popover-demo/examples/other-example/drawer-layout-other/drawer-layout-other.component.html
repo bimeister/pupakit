@@ -1,0 +1,60 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-drawer-layout>
+    <pupa-drawer-layout-header>
+      <pupa-drawer-layout-header-row type="top">
+        <pupa-drawer-layout-header-content mode="buttons">
+          <pupa-drawer-close-button visibleOn="mobile"></pupa-drawer-close-button>
+          <pupa-drawer-button-icon icon="ios-expand"></pupa-drawer-button-icon>
+        </pupa-drawer-layout-header-content>
+
+        <pupa-drawer-layout-header-content mode="buttons">
+          <pupa-drawer-button-icon icon="app-time"></pupa-drawer-button-icon>
+          <pupa-drawer-button-icon icon="app-link" pupaTooltip="Копировать ссылку"></pupa-drawer-button-icon>
+
+          <pupa-drawer-expand-button></pupa-drawer-expand-button>
+
+          <pupa-drawer-button-icon icon="app-more"></pupa-drawer-button-icon>
+          <pupa-drawer-close-button visibleOn="desktop"></pupa-drawer-close-button>
+        </pupa-drawer-layout-header-content>
+      </pupa-drawer-layout-header-row>
+
+      <pupa-drawer-layout-header-row>
+        <pupa-drawer-title> Title </pupa-drawer-title>
+
+        <pupa-drawer-layout-header-content>
+          <pupa-button>Button</pupa-button>
+          <pupa-button>Button</pupa-button>
+        </pupa-drawer-layout-header-content>
+      </pupa-drawer-layout-header-row>
+    </pupa-drawer-layout-header>
+
+    <pupa-drawer-layout-body>
+      <pupa-tabs-container>
+        <pupa-tabs>
+          <pupa-tabs-item name="tab1"> Tab 1</pupa-tabs-item>
+          <pupa-tabs-item name="tab2"> Tab 2</pupa-tabs-item>
+        </pupa-tabs>
+
+        <pupa-drawer-layout-separator locatedIn="body"></pupa-drawer-layout-separator>
+
+        <pupa-tabs-content>
+          <div *pupaTabsItemContentTemplate="'tab1'">
+            <p>Tab 1 content</p>
+            <div><input /></div>
+          </div>
+          <div *pupaTabsItemContentTemplate="'tab2'">Tab 2 content</div>
+        </pupa-tabs-content>
+      </pupa-tabs-container>
+    </pupa-drawer-layout-body>
+
+    <pupa-drawer-layout-footer>
+      <pupa-drawer-layout-action value="van">
+        <pupa-button kind="secondary">Action</pupa-button>
+      </pupa-drawer-layout-action>
+
+      <pupa-drawer-layout-action value="boy next">
+        <pupa-button>Action</pupa-button>
+      </pupa-drawer-layout-action>
+    </pupa-drawer-layout-footer>
+  </pupa-drawer-layout>
+</pupa-theme-wrapper>

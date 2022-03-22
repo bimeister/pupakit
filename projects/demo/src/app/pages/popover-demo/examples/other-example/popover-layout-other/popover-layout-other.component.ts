@@ -5,8 +5,9 @@ import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
+import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { DRAWER_DATA_TOKEN } from '../../../../../../declarations/tokens/drawer-data.token';
-import { DrawerLayoutExample1Component } from '../../../../drawer-demo/examples/example-1/drawer-layout-example-1/drawer-layout-example-1.component';
+import { DrawerLayoutOtherComponent } from '../drawer-layout-other/drawer-layout-other.component';
 
 @Component({
   selector: 'demo-popover-layout-other',
@@ -28,11 +29,9 @@ export class PopoverLayoutOtherComponent extends PopoverComponentBase<{}, void> 
   }
 
   public openDrawer(): void {
-    this.drawersService.open(DrawerLayoutExample1Component, {
+    this.drawersService.open(DrawerLayoutOtherComponent, {
       injector: this.injector,
-      hasBackdrop: true,
-      closeOnBackdropClick: true,
-      isBackdropTransparent: false,
+      containerComponent: DrawerContainerComponent,
       providers: [
         {
           provide: DRAWER_DATA_TOKEN,

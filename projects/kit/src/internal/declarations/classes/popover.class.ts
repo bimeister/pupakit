@@ -127,13 +127,14 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
   private handleXsBreakpointChange(): void {
     this.clientUiStateHandlerService.breakpointIsXs$
       .pipe(takeUntil(this.popoverRef.closed$))
-      .subscribe((breakpointIsSm: boolean) => {
-        if (breakpointIsSm) {
-          const mobilePositionStrategy: GlobalPositionStrategy = this.overlay.position().global().centerHorizontally();
-          this.overlayRef.updatePositionStrategy(mobilePositionStrategy);
+      .subscribe((breakpointIsXs: boolean) => {
+        if (!breakpointIsXs) {
+          this.overlayRef.updatePositionStrategy(this.defaultPosition);
           return;
         }
-        this.overlayRef.updatePositionStrategy(this.defaultPosition);
+
+        const mobilePositionStrategy: GlobalPositionStrategy = this.overlay.position().global().centerHorizontally();
+        this.overlayRef.updatePositionStrategy(mobilePositionStrategy);
       });
   }
 
