@@ -1,16 +1,79 @@
 <h1>Button Group</h1>
 
-<h2>Basic usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-button-group-example-1 *pupaCodeContainerPreviewTemplate></demo-button-group-example-1>
-</pupa-code-container>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <p>
+      Button groups are used to create sets of similar type buttons and can be used as an alternative to radio buttons
+      or as container component to group content.
+    </p>
 
-<h2>Full space for buttons</h2>
-<pupa-code-container [content]="example2Content">
-  <demo-button-group-example-2 *pupaCodeContainerPreviewTemplate></demo-button-group-example-2>
-</pupa-code-container>
+    <h2>Basic usage</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-button-group-example-1 *pupaCodeContainerPreviewTemplate></demo-button-group-example-1>
+    </pupa-code-container>
 
-<h2>Not destroyable content</h2>
-<pupa-code-container [content]="example3Content">
-  <demo-button-group-example-3 *pupaCodeContainerPreviewTemplate></demo-button-group-example-3>
-</pupa-code-container>
+    <h2>Full button space</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-button-group-example-2 *pupaCodeContainerPreviewTemplate></demo-button-group-example-2>
+    </pupa-code-container>
+
+    <h2>Disabled</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-button-group-example-3 *pupaCodeContainerPreviewTemplate></demo-button-group-example-3>
+    </pupa-code-container>
+
+    <h2>Active</h2>
+    <p>
+      Active group button can be set programmatically by the <pupa-code-inline>isActive</pupa-code-inline> property on a
+      group item. If the property is not specified, the first button in the group becomes active by default.
+    </p>
+    <pupa-code-container [content]="example4Content">
+      <demo-button-group-example-4 *pupaCodeContainerPreviewTemplate></demo-button-group-example-4>
+    </pupa-code-container>
+
+    <h2>Group with content</h2>
+    <p>
+      The contents of the group are not cached by default, so when the item becomes inactive, the related content is
+      destroyed. You may use <pupa-code-inline>destroyable</pupa-code-inline> property on
+      <pupa-code-inline>PupaButtonGroupContent</pupa-code-inline> to configure this behavior.
+    </p>
+    <pupa-code-container [content]="example5Content">
+      <demo-button-group-example-5 *pupaCodeContainerPreviewTemplate></demo-button-group-example-5>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-section-label>PupaButtonGroup Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="activeTabNameChange" type="EventEmitter<T>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Emits on change active button.</div>
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>PupaButtonGroupItem Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="name" type="T" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Unique button name. </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Whether the button is disabled. </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="isActive" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Whether the button is active. </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>PupaButtonGroupContent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="destroyable" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Whether or not to destroy the content when the active button changes.</div>
+            <div>Default: <pupa-code-inline>true</pupa-code-inline></div>
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

@@ -2,11 +2,29 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-.button-group-content-item {
+@mixin content-border {
   border: 1px solid get-map-field($theme-config, [ 'light', 'body', border-color]);
   @include host-selector-dark-theme() {
     border-color: get-map-field($theme-config, [ 'dark', 'body', border-color]);
   }
+}
+
+.button-group-content-item {
+  @include content-border;
   margin-top: 4rem;
   padding: 2rem;
+}
+
+.switcher-container {
+  @include content-border;
+  display: flex;
+  margin: 4rem 0;
+  padding: 2rem;
+
+  .switcher-label {
+    @include host-selector-dark-theme() {
+      color: color(base-n0);
+    }
+    margin-right: 2rem;
+  }
 }
