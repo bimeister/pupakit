@@ -2,12 +2,13 @@
   [ngTemplateOutlet]="searchFieldTemplate"
   [ngTemplateOutletContext]="{
     isCollapsed: isCollapsed$ | async,
-    isDisabled: isDisabled$ | async
+    isDisabled: isDisabled$ | async,
+    isFocused: isFocused$ | async
   }"
 >
 </ng-container>
 
-<ng-template #searchFieldTemplate let-isCollapsed="isCollapsed" let-isDisabled="isDisabled">
+<ng-template #searchFieldTemplate let-isCollapsed="isCollapsed" let-isDisabled="isDisabled" let-isFocused="isFocused">
   <div
     data-meta="pupa-search-field"
     class="search-field"
@@ -41,6 +42,7 @@
     <pupa-button-icon
       data-meta="pupa-search-field__reset-button"
       class="search-field__reset"
+      [class.search-field__reset_visible]="isFocused"
       icon="app-cross-circle"
       size="small"
       tabIndex="-1"

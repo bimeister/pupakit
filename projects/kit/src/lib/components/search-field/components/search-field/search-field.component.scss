@@ -105,10 +105,6 @@
       &::placeholder {
         color: map.get($input_light_styles, focus, placeholder, color);
       }
-
-      ~ .search-field__reset {
-        display: block;
-      }
     }
 
     &[disabled] {
@@ -134,13 +130,6 @@
 
       ~ .search-field__icon {
         color: map.get($input_light_styles, disabled, color);
-      }
-    }
-
-    &_filled,
-    &_collapsible {
-      ~ .search-field__reset {
-        display: block;
       }
     }
 
@@ -211,10 +200,17 @@
     position: absolute;
     z-index: 3;
     right: 2rem;
-    display: none;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
     color: map.get($input_light_styles, input, color);
     @include host-selector-dark-theme() {
       color: map.get($input_dark_styles, input, color);
+    }
+
+    &_visible {
+      pointer-events: all;
+      opacity: 1;
     }
   }
 

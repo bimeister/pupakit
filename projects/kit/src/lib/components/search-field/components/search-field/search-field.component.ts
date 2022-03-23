@@ -1,9 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
-import { remSizePx } from '../../../../../internal/constants/rem-size-px.const';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -18,14 +16,6 @@ const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
   styleUrls: ['./search-field.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('controlExpanded', [
-      state('false', style({ width: `${11.25 * remSizePx}px` })),
-      state('true', style({ width: `100%` })),
-      transition('false => true', animate('0.32s cubic-bezier(0.97, 0.84, .03, 0.95)')),
-      transition('true => false', animate('0.2s ease-in-out')),
-    ]),
-  ],
 })
 export class SearchFieldComponent extends InputBase<Nullable<string>> implements OnChanges {
   @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
