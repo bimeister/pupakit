@@ -8,3 +8,8 @@
   @include font-type-point();
   @include font-size-header();
 }
+
+.medium {
+  @include font-type-point();
+  @include font-size-medium();
+}

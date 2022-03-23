@@ -1,0 +1,11 @@
+<div class="button-container">
+  <pupa-button-multi class="button-container__item" [dropdownMenuContent]="dropdownContent"> Button </pupa-button-multi>
+</div>
+
+<pupa-dropdown-menu-content #dropdownContent>
+  <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+  <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+  <pupa-dropdown-menu-item [plain]="true">plain</pupa-dropdown-menu-item>
+  <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+  <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+</pupa-dropdown-menu-content>

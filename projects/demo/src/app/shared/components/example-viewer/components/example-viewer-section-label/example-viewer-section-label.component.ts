@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'demo-example-viewer-section-label',
@@ -7,4 +7,6 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ExampleViewerSectionLabelComponent {}
+export class ExampleViewerSectionLabelComponent {
+  @Input() public size: 'header' | 'medium' = 'header';
+}
