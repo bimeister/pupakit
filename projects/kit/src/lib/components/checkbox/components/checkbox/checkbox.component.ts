@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { filterFalsy, filterTruthy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { Observable, Subscription } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMapTo, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
@@ -59,6 +59,15 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
   );
   public readonly checkboxMarkerTabindex$: Observable<number> = this.withLabel$.pipe(
     map((withLabel: boolean) => (withLabel ? -1 : 1))
+  );
+  public readonly checkBoxDataMeta$: Observable<string> = combineLatest([this.indeterminate$, this.value$]).pipe(
+    map(([isIndeterminate, isHasValue]: [boolean, boolean]) => {
+      if (isIndeterminate) {
+        return 'indeterminate';
+      }
+
+      return isHasValue ? 'checked' : 'default';
+    })
   );
 
   private readonly subscription: Subscription = new Subscription();
