@@ -1,0 +1,95 @@
+<div class="button-container">
+  <ng-container *ngFor="let iconPosition of ['left', 'right']">
+    <pupa-button-multi
+      [iconPosition]="iconPosition"
+      class="button-container__item"
+      icon="app-cube"
+      [dropdownMenuContent]="dropdownContent"
+    >
+      Icon on the {{ iconPosition }}
+    </pupa-button-multi>
+    <pupa-dropdown-menu-content #dropdownContent>
+      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+    </pupa-dropdown-menu-content>
+  </ng-container>
+</div>
+
+<div class="button-container">
+  <ng-container>
+    <pupa-button-multi
+      class="button-container__item"
+      [pupaTooltip]="'Hello there!'"
+      [dropdownMenuContent]="dropdownContent"
+    >
+      With tooltip
+    </pupa-button-multi>
+    <pupa-dropdown-menu-content #dropdownContent>
+      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+    </pupa-dropdown-menu-content>
+  </ng-container>
+</div>
+
+<div class="button-container">
+  <ng-container *ngFor="let disabled of [true, false]">
+    <ng-container *ngFor="let loading of [true, false]">
+      <pupa-button-multi
+        class="button-container__item"
+        [disabled]="disabled"
+        [loading]="loading"
+        [dropdownMenuContent]="dropdownContent"
+      >
+        Disabled
+      </pupa-button-multi>
+      <pupa-dropdown-menu-content #dropdownContent>
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu-content>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="button-container">
+  <ng-container *ngFor="let disabled of [true, false]">
+    <ng-container *ngFor="let loading of [true, false]">
+      <pupa-button-multi
+        class="button-container__item"
+        [disabled]="disabled"
+        [loading]="loading"
+        icon="app-cube"
+        [dropdownMenuContent]="dropdownContent"
+      >
+      </pupa-button-multi>
+      <pupa-dropdown-menu-content #dropdownContent>
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu-content>
+    </ng-container>
+  </ng-container>
+</div>
+
+<div class="button-container">
+  <ng-container>
+    <pupa-button-multi class="button-container__item" [active]="true" [dropdownMenuContent]="dropdownContent1"
+      >Button active</pupa-button-multi
+    >
+    <pupa-button-multi class="button-container__item" [expandActive]="true" [dropdownMenuContent]="dropdownContent2"
+      >Expand active</pupa-button-multi
+    >
+    <pupa-dropdown-menu-content #dropdownContent1>
+      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+    </pupa-dropdown-menu-content>
+    <pupa-dropdown-menu-content #dropdownContent2>
+      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+    </pupa-dropdown-menu-content>
+  </ng-container>
+</div>

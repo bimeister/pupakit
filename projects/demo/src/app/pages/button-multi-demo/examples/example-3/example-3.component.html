@@ -1,0 +1,20 @@
+<div class="button-container">
+  <ng-container *ngFor="let size of sizes">
+    <ng-container *ngFor="let kind of kinds">
+      <pupa-button-multi
+        class="button-container__item"
+        icon="app-cube"
+        [size]="size"
+        [kind]="kind"
+        [dropdownMenuContent]="dropdownContent"
+      >
+        {{ kind }} ({{ size }})
+      </pupa-button-multi>
+      <pupa-dropdown-menu-content #dropdownContent>
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu-content>
+    </ng-container>
+  </ng-container>
+</div>

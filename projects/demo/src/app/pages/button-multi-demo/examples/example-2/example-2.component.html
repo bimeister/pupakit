@@ -1,8 +1,11 @@
 <div class="button-container">
   <ng-container *ngFor="let kind of kinds">
-    <pupa-button-multi class="button-container__item" [kind]="kind" [dropdownMenuContent]="dropdownContent">{{
-      kind
-    }}</pupa-button-multi>
+    <pupa-button-multi
+      class="button-container__item"
+      icon="app-cube"
+      [kind]="kind"
+      [dropdownMenuContent]="dropdownContent"
+    ></pupa-button-multi>
     <pupa-dropdown-menu-content #dropdownContent>
       <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
       <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
