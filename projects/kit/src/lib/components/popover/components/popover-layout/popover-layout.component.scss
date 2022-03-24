@@ -36,7 +36,13 @@ $pointer-width: 14px;
 .popover-pointer {
   position: absolute;
   fill: color(base-n0);
-  stroke: color(base-white-n400);
+
+  &__line {
+    stroke: color(base-white-n400);
+    @include host-selector-dark-theme {
+      stroke: color(base-dark-n400);
+    }
+  }
 
   @include host-selector('.popover__mobile') {
     display: none;
@@ -44,7 +50,6 @@ $pointer-width: 14px;
 
   @include host-selector-dark-theme {
     fill: color(base-dark-n500);
-    stroke: color(base-dark-n400);
   }
 
   @include host-selector('.pointer__top-left') {
