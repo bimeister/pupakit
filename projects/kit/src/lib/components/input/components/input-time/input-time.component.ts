@@ -1,22 +1,21 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnChanges, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
-import { ParsedTimeData } from '../../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
-
-const PLACEHOLDER: string = '00:00';
-const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
-
-const DATE_FORMAT: string = 'HH:mm';
+import { InputBase } from '@kit/internal/declarations/classes/abstract/input-base.abstract';
+import { NgControl } from '@angular/forms';
+import { NumericParsedTimeData } from '@kit/internal/declarations/types/numeric-parsed-time-data.type';
+import { isDate } from '@kit/internal/helpers/is-date.helper';
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
+const MAX_SECONDS: number = 59;
+
+const DATE_FORMAT: string = 'HH:mm';
 
 @Component({
   selector: 'pupa-input-time',
@@ -26,35 +25,43 @@ const MAX_MINUTES: number = 59;
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputTimeComponent extends InputDateTimeBase {
-  public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
+export class InputTimeComponent extends InputBase<ValueType> implements OnChanges, OnDestroy {
+  public readonly maxLengthInputValue: number = DATE_FORMAT.length;
 
-  public readonly placeholderPreviewLeft$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? '' : `${value}`))
-  );
+  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
 
-  public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
-  );
+  constructor(
+    private readonly inputDateTimeStateService: InputDateTimeStateService,
+    private readonly datePipe: DatePipe,
+    ngControl: NgControl
+  ) {
+    super(ngControl);
+  }
 
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
-    this.value$.next(serializedValue.slice(0, MAX_LENGTH_INPUT_VALUE));
+    const truncatedValue: string = serializedValue.slice(0, this.maxLengthInputValue);
+    this.value$.next(truncatedValue);
+  }
+
+  public reset(): void {
+    this.updateValue('');
+    this.inputElementRef.nativeElement.focus();
   }
 
   public writeValue(newValue: ValueType): void {
-    if (isNil(newValue)) {
+    if (isNil(newValue) || !isDate(newValue)) {
       this.setValue('');
       return;
     }
 
     const serializedValue: string = String(newValue);
-    const parsedValue: string = this.datePipe.transform(serializedValue, DATE_FORMAT);
 
+    const parsedValue: string = this.datePipe.transform(serializedValue, DATE_FORMAT);
     this.setValue(parsedValue);
   }
 
-  public handleChangedValue(onChangeCallback: OnChangeCallback<any>, value: ValueType): void {
+  public handleChangedValue(onChangeCallback: OnChangeCallback<unknown>, value: ValueType): void {
     const serializedValue: string = String(value);
 
     if (isEmpty(serializedValue)) {
@@ -63,32 +70,39 @@ export class InputTimeComponent extends InputDateTimeBase {
       return;
     }
 
-    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+    if (serializedValue.length < this.maxLengthInputValue) {
       onChangeCallback(new Date(undefined));
       this.setValue(serializedValue);
       return;
     }
 
-    const { hours, minutes }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(serializedValue);
-    const parsedHours: number = Number(hours);
-    const parsedMinutes: number = Number(minutes);
-
-    const isCorrectHours: boolean = parsedHours >= 0 && parsedHours <= MAX_HOURS;
-    const isCorrectMinutes: boolean = parsedMinutes >= 0 && parsedMinutes <= MAX_MINUTES;
-
-    if (!isCorrectHours || !isCorrectMinutes) {
-      onChangeCallback(new Date(undefined));
-      this.setValue(serializedValue);
-      return;
-    }
-
-    const date: Date = new Date();
-
-    date.setHours(parsedHours);
-    date.setMinutes(parsedMinutes);
-    date.setSeconds(0);
+    const date: Date = this.getDateFromSerializedTime(serializedValue);
 
     onChangeCallback(date);
     this.setValue(serializedValue);
+  }
+
+  private getDateFromSerializedTime(value: string): Date {
+    const parseTimeData: NumericParsedTimeData = this.inputDateTimeStateService.getParsedNumericTimeData(value);
+
+    if (!this.isCorrectParsedNumericData(parseTimeData)) {
+      return new Date(undefined);
+    }
+
+    const date: Date = new Date();
+    date.setHours(parseTimeData.hours);
+    date.setMinutes(parseTimeData.minutes);
+    date.setSeconds(parseTimeData.seconds);
+
+    return date;
+  }
+
+  private isCorrectParsedNumericData({ hours, minutes, seconds }: NumericParsedTimeData): boolean {
+    const isTimePartCorrect = (value: number, maxValue: number): boolean => value >= 0 && value <= maxValue;
+    const isCorrectHours: boolean = isTimePartCorrect(hours, MAX_HOURS);
+    const isCorrectMinutes: boolean = isTimePartCorrect(minutes, MAX_MINUTES);
+    const isCorrectSeconds: boolean = isTimePartCorrect(seconds, MAX_SECONDS);
+
+    return isCorrectHours && isCorrectMinutes && isCorrectSeconds;
   }
 }

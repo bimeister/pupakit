@@ -19,7 +19,6 @@ import { InputDateComponent } from './components/input-date/input-date.component
 import { InputNumberComponent } from './components/input-number/input-number.component';
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
-import { InputTimeSecondsComponent } from './components/input-time-seconds/input-time-seconds.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
 
 const EXPORTS: any[] = [
@@ -28,7 +27,6 @@ const EXPORTS: any[] = [
   InputDateComponent,
   InputNumberComponent,
   InputTimeComponent,
-  InputTimeSecondsComponent,
   InputDateTimeComponent,
   InputDateTimeSecondsComponent,
   InputDateRangeComponent,

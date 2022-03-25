@@ -1,0 +1,88 @@
+<form [formGroup]="formGroup" class="controls-table">
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-text</pupa-label>
+    <pupa-input-text
+      [icon]="'ios-nuclear'"
+      [placeholder]="'Enter value'"
+      [formControlName]="'text'"
+      [withReset]="true"
+      [invalidTooltip]="(errorMessagesByControlName.text | async)?.[0]"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-password</pupa-label>
+    <pupa-input-password
+      [placeholder]="'Enter password'"
+      [formControlName]="'password'"
+      [withReset]="true"
+      [autocomplete]="false"
+      [invalidTooltip]="(errorMessagesByControlName.password | async)?.[0]"
+    ></pupa-input-password>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-number</pupa-label>
+    <pupa-input-number
+      [placeholder]="'Enter number'"
+      [formControlName]="'number'"
+      [withReset]="true"
+      [invalidTooltip]="(errorMessagesByControlName.number | async)?.[0]"
+    ></pupa-input-number>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-time</pupa-label>
+    <pupa-input-time
+      [placeholder]="'Enter time'"
+      [formControlName]="'time'"
+      [withReset]="true"
+      [invalidTooltip]="(errorMessagesByControlName.time | async)?.[0]"
+    ></pupa-input-time>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-date</pupa-label>
+    <pupa-input-date
+      [withReset]="true"
+      [formControlName]="'date'"
+      [invalidTooltip]="(errorMessagesByControlName.date | async)?.[0]"
+    ></pupa-input-date>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-date-time</pupa-label>
+    <pupa-input-date-time
+      [withReset]="true"
+      [formControlName]="'dateTime'"
+      [invalidTooltip]="(errorMessagesByControlName.dateTime | async)?.[0]"
+    ></pupa-input-date-time>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-date-time-seconds</pupa-label>
+    <pupa-input-date-time-seconds
+      [withReset]="true"
+      [formControlName]="'dateTimeSeconds'"
+      [invalidTooltip]="(errorMessagesByControlName.dateTimeSeconds | async)?.[0]"
+    ></pupa-input-date-time-seconds>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-date-range</pupa-label>
+    <pupa-input-date-range
+      [withReset]="true"
+      [formControlName]="'dateRange'"
+      [invalidTooltip]="(errorMessagesByControlName.dateRange | async)?.[0]"
+    ></pupa-input-date-range>
+  </div>
+
+  <div class="controls-table__block">
+    <pupa-label class="control-label">pupa-input-date-range-double</pupa-label>
+    <pupa-input-date-range-double
+      [withReset]="true"
+      [formControlName]="'dateRangeDouble'"
+      [invalidTooltip]="(errorMessagesByControlName.dateRangeDouble | async)?.[0]"
+    ></pupa-input-date-range-double>
+  </div>
+</form>

@@ -4,11 +4,11 @@ import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
-import { ParsedTimeData } from '../../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
+import { NumericParsedTimeData } from '@kit/internal/declarations/types/numeric-parsed-time-data.type';
 
 const PLACEHOLDER_TIME: string = '00:00';
 const PLACEHOLDER_DATE: string = '00.00.0000';
@@ -102,12 +102,10 @@ export class InputDateTimeComponent extends InputDateTimeBase {
       return;
     }
 
-    const { hours, minutes }: ParsedTimeData = this.inputDateTimeStateService.getParsedTimeData(timePart);
-    const parsedHours: number = Number(hours);
-    const parsedMinutes: number = Number(minutes);
+    const { hours, minutes }: NumericParsedTimeData = this.inputDateTimeStateService.getParsedNumericTimeData(timePart);
 
-    const isCorrectHours: boolean = parsedHours >= 0 && parsedHours <= MAX_HOURS;
-    const isCorrectMinutes: boolean = parsedMinutes >= 0 && parsedMinutes <= MAX_MINUTES;
+    const isCorrectHours: boolean = hours >= 0 && hours <= MAX_HOURS;
+    const isCorrectMinutes: boolean = minutes >= 0 && minutes <= MAX_MINUTES;
 
     if (!isCorrectHours || !isCorrectMinutes) {
       onChangeCallback(new Date(undefined));
@@ -115,8 +113,8 @@ export class InputDateTimeComponent extends InputDateTimeBase {
       return;
     }
 
-    date.setHours(parsedHours);
-    date.setMinutes(parsedMinutes);
+    date.setHours(hours);
+    date.setMinutes(minutes);
     date.setSeconds(0);
 
     onChangeCallback(date);

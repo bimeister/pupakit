@@ -24,6 +24,8 @@ export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDes
   private readonly propsSwitcher: PropsSwitcherComponent;
   private readonly subscription: Subscription = new Subscription();
 
+  @Input() public initialValue: boolean = false;
+
   @Input()
   public controlsList: FormControl[] = [];
 
