@@ -1,0 +1,46 @@
+<div class="controls-list">
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Tooltip with text</pupa-label>
+    <pupa-input-text
+      [isPatched]="true"
+      [formControl]="formControls[0]"
+      [invalidTooltip]="'Error text'"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Tooltip with template</pupa-label>
+    <pupa-input-text
+      [isPatched]="true"
+      [formControl]="formControls[1]"
+      [invalidTooltipContentTemplate]="errorTemplate"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Hide tooltip on hover</pupa-label>
+    <pupa-input-text
+      [isPatched]="true"
+      [formControl]="formControls[2]"
+      [invalidTooltipContentTemplate]="errorTemplate"
+      [invalidTooltipHideOnHover]="true"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Disabled tooltip</pupa-label>
+    <pupa-input-text
+      [isPatched]="true"
+      [formControl]="formControls[3]"
+      [invalidTooltipContentTemplate]="errorTemplate"
+      [invalidTooltipDisabled]="true"
+    ></pupa-input-text>
+  </div>
+</div>
+
+<ng-template #errorTemplate>
+  Error content
+  <pupa-icon name="ios-nuclear"></pupa-icon>
+  <pupa-icon name="ios-nuclear"></pupa-icon>
+  <pupa-icon name="ios-nuclear"></pupa-icon>
+</ng-template>

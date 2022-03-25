@@ -1,25 +1,9 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'input-demo' as *;
 
 :host {
   display: block;
-}
-
-.form {
-  @include flex-container(column);
-  &__control {
-    width: 60rem;
-    &_date {
-      width: fit-content;
-    }
-  }
-  &__control ~ &__control {
-    margin-top: 1rem;
-  }
-  pupa-label {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
 }
 
 .hidden {

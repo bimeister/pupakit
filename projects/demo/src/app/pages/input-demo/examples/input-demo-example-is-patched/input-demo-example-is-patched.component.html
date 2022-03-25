@@ -1,0 +1,11 @@
+<div class="controls-list">
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Patched input</pupa-label>
+    <pupa-input-password [isPatched]="true" [formControl]="formControls[0]"></pupa-input-password>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-label class="control-label">Not patched input</pupa-label>
+    <pupa-input-password [formControl]="formControls[1]"></pupa-input-password>
+  </div>
+</div>

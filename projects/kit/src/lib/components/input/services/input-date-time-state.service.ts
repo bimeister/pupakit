@@ -3,6 +3,7 @@ import { isNil } from '@bimeister/utilities';
 import { ParsedDateData } from '../../../../internal/declarations/interfaces/parsed-date-data.interface';
 import { ParsedTimeData } from '../../../../internal/declarations/interfaces/parsed-time-data.interface';
 import { TimeFormatPipe } from '../../../../internal/pipes/time-format.pipe';
+import { NumericParsedTimeData } from '@kit/internal/declarations/types/numeric-parsed-time-data.type';
 
 @Injectable({ providedIn: 'any' })
 export class InputDateTimeStateService {
@@ -41,6 +42,16 @@ export class InputDateTimeStateService {
     const dateParts: string[] = [...parsedDateParts, ...defaultDateParts].slice(0, allowedTimePartsLength);
 
     return { day: dateParts[0], month: dateParts[1], year: dateParts[2] };
+  }
+
+  public getParsedNumericTimeData(inputValue: string): NumericParsedTimeData {
+    const { hours, minutes, seconds }: ParsedTimeData = this.getParsedTimeData(inputValue);
+
+    return {
+      hours: Number(hours),
+      minutes: Number(minutes),
+      seconds: Number(seconds),
+    };
   }
 
   public getParsedTimeData(inputValue: string): ParsedTimeData {
