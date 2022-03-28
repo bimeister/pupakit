@@ -6,9 +6,9 @@ import { filter, map } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
-import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
-import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
-import { NumericParsedTimeData } from '@kit/internal/declarations/types/numeric-parsed-time-data.type';
+import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
+import { NumericParsedTimeData } from '../../../../../internal/declarations/types/numeric-parsed-time-data.type';
+import { InputDateTimeHelper } from '../../../../../internal/declarations/classes/input-date-time-helper.class';
 
 const PLACEHOLDER_TIME: string = '00:00';
 const PLACEHOLDER_DATE: string = '00.00.0000';
@@ -26,7 +26,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy HH:mm';
   selector: 'pupa-input-date-time',
   templateUrl: './input-date-time.component.html',
   styleUrls: ['./input-date-time.component.scss'],
-  providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
+  providers: [TimeDigitFormatPipe, DatePipe],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -102,7 +102,7 @@ export class InputDateTimeComponent extends InputDateTimeBase {
       return;
     }
 
-    const { hours, minutes }: NumericParsedTimeData = this.inputDateTimeStateService.getParsedNumericTimeData(timePart);
+    const { hours, minutes }: NumericParsedTimeData = InputDateTimeHelper.getParsedNumericTimeData(timePart);
 
     const isCorrectHours: boolean = hours >= 0 && hours <= MAX_HOURS;
     const isCorrectMinutes: boolean = minutes >= 0 && minutes <= MAX_MINUTES;

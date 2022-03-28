@@ -4,12 +4,12 @@ import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
-import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
-import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
-import { InputBase } from '@kit/internal/declarations/classes/abstract/input-base.abstract';
+import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
+import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { NgControl } from '@angular/forms';
-import { NumericParsedTimeData } from '@kit/internal/declarations/types/numeric-parsed-time-data.type';
-import { isDate } from '@kit/internal/helpers/is-date.helper';
+import { NumericParsedTimeData } from '../../../../../internal/declarations/types/numeric-parsed-time-data.type';
+import { isDate } from '../../../../../internal/helpers/is-date.helper';
+import { InputDateTimeHelper } from '../../../../../internal/declarations/classes/input-date-time-helper.class';
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
@@ -21,7 +21,7 @@ const DATE_FORMAT: string = 'HH:mm';
   selector: 'pupa-input-time',
   templateUrl: './input-time.component.html',
   styleUrls: ['./input-time.component.scss'],
-  providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
+  providers: [TimeDigitFormatPipe, DatePipe],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -30,11 +30,7 @@ export class InputTimeComponent extends InputBase<ValueType> implements OnChange
 
   public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
 
-  constructor(
-    private readonly inputDateTimeStateService: InputDateTimeStateService,
-    private readonly datePipe: DatePipe,
-    ngControl: NgControl
-  ) {
+  constructor(private readonly datePipe: DatePipe, ngControl: NgControl) {
     super(ngControl);
   }
 
@@ -83,7 +79,7 @@ export class InputTimeComponent extends InputBase<ValueType> implements OnChange
   }
 
   private getDateFromSerializedTime(value: string): Date {
-    const parseTimeData: NumericParsedTimeData = this.inputDateTimeStateService.getParsedNumericTimeData(value);
+    const parseTimeData: NumericParsedTimeData = InputDateTimeHelper.getParsedNumericTimeData(value);
 
     if (!this.isCorrectParsedNumericData(parseTimeData)) {
       return new Date(undefined);

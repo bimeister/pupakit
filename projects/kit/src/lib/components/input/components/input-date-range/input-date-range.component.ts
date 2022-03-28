@@ -6,8 +6,7 @@ import { filter, map, withLatestFrom } from 'rxjs/operators';
 import { InputDateTimeBase } from '../../../../../internal/declarations/classes/abstract/input-date-time-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
-import { TimeFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
-import { InputDateTimeStateService } from '../../services/input-date-time-state.service';
+import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 
 const PLACEHOLDER_DATE: string = '00.00.0000';
 const PLACEHOLDER: string = `${PLACEHOLDER_DATE} – ${PLACEHOLDER_DATE}`;
@@ -21,7 +20,7 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
   selector: 'pupa-input-date-range',
   templateUrl: './input-date-range.component.html',
   styleUrls: ['./input-date-range.component.scss'],
-  providers: [TimeFormatPipe, DatePipe, InputDateTimeStateService],
+  providers: [TimeDigitFormatPipe, DatePipe],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

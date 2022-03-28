@@ -18,6 +18,12 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   return null;
 };
 
+function getDefaultDateNextMonth(): Date {
+  const date: Date = new Date();
+  date.setMonth(new Date().getMonth() + 1);
+  return date;
+}
+
 @Component({
   selector: 'demo-input-demo-example-all-inputs',
   templateUrl: './input-demo-example-all-inputs.component.html',
@@ -30,12 +36,12 @@ export class InputDemoExampleAllInputsComponent {
     text: new FormControl('', REQUIRED_VALIDATOR),
     password: new FormControl('', REQUIRED_VALIDATOR),
     number: new FormControl('', REQUIRED_VALIDATOR),
-    time: new FormControl('', REQUIRED_VALIDATOR),
-    date: new FormControl('', REQUIRED_VALIDATOR),
-    dateTime: new FormControl('', REQUIRED_VALIDATOR),
-    dateTimeSeconds: new FormControl('', REQUIRED_VALIDATOR),
-    dateRange: new FormControl('', REQUIRED_VALIDATOR),
-    dateRangeDouble: new FormControl('', REQUIRED_VALIDATOR),
+    time: new FormControl(new Date(), REQUIRED_VALIDATOR),
+    date: new FormControl(new Date(), REQUIRED_VALIDATOR),
+    dateTime: new FormControl(new Date(), REQUIRED_VALIDATOR),
+    dateTimeSeconds: new FormControl(new Date(), REQUIRED_VALIDATOR),
+    dateRange: new FormControl([new Date(), getDefaultDateNextMonth()], REQUIRED_VALIDATOR),
+    dateRangeDouble: new FormControl([new Date(), getDefaultDateNextMonth()], REQUIRED_VALIDATOR),
   };
 
   public readonly formGroup: FormGroup = new FormGroup(this.controlByName);
