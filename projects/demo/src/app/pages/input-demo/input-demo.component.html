@@ -42,28 +42,30 @@
               withReset: withReset$ | async,
               isPatched: isPatched$ | async,
               invalidTooltipHideOnHover: invalidTooltipHideOnHover$ | async,
-              invalidTooltipDisabled: invalidTooltipDisabled$ | async
+              invalidTooltipDisabled: invalidTooltipDisabled$ | async,
+              size: size$ | async
             };
             let withReset = withReset;
             let isPatched = isPatched;
             let invalidTooltipHideOnHover = invalidTooltipHideOnHover;
-            let invalidTooltipDisabled = invalidTooltipDisabled
+            let invalidTooltipDisabled = invalidTooltipDisabled;
+            let size = size
           "
         >
           <div class="controls-list__block">
             <pupa-label class="control-label" [disabled]="textControl.disabled">pupa-input-text</pupa-label>
             <pupa-input-text
               class="form__control"
-              [size]="size$ | async"
-              [icon]="inputIconFormControl.value"
-              [placeholder]="placeholderFormControl.value"
               [formControl]="textControl"
+              [size]="size"
               [withReset]="withReset"
               [isPatched]="isPatched"
+              [placeholder]="placeholderFormControl.value"
               [invalidTooltipContentTemplate]="errorTemplate"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
+              [icon]="inputIconFormControl.value"
             ></pupa-input-text>
           </div>
 
@@ -72,6 +74,7 @@
             <pupa-input-time
               class="form__control form__control_date"
               [formControl]="timeFormControl"
+              [size]="size"
               [withReset]="withReset"
               [isPatched]="isPatched"
               [placeholder]="placeholderFormControl.value"

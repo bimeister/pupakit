@@ -5,15 +5,15 @@ import { distinctUntilSerializedChanged, filterNotNil, filterTruthy, isEmpty, is
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
-import { InputDateTimeStateService } from '../../../../lib/components/input/services/input-date-time-state.service';
 import { dateClearTime } from '../../../helpers/date-clear-time.helper';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
-import { TimeFormatPipe } from '../../../pipes/time-format.pipe';
+import { TimeDigitFormatPipe } from '../../../pipes/time-format.pipe';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { ParsedDateData } from '../../interfaces/parsed-date-data.interface';
 import { ValueType } from '../../types/input-value.type';
 import { InputBase } from './input-base.abstract';
+import { InputDateTimeHelper } from '../../../../internal/declarations/classes/input-date-time-helper.class';
 
 const DEFAULT_DATE: Date = new Date();
 const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(DEFAULT_DATE);
@@ -124,8 +124,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   );
 
   constructor(
-    public readonly inputDateTimeStateService: InputDateTimeStateService,
-    private readonly timeFormatPipe: TimeFormatPipe,
+    private readonly timeFormatPipe: TimeDigitFormatPipe,
     public readonly datePipe: DatePipe,
     @Optional() ngControl: NgControl
   ) {
@@ -157,27 +156,21 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
 
   public selectHours(hours: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedHours: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectHours(hours, value);
+      const parsedHours: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectHours(hours, value);
       this.updateValue(parsedHours);
     });
   }
 
   public selectMinutes(minutes: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedMinutes: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectMinutes(
-        minutes,
-        value
-      );
+      const parsedMinutes: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectMinutes(minutes, value);
       this.updateValue(parsedMinutes);
     });
   }
 
   public selectSeconds(seconds: number): void {
     this.value$.pipe(take(1)).subscribe((value: string) => {
-      const parsedSeconds: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectSeconds(
-        seconds,
-        value
-      );
+      const parsedSeconds: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectSeconds(seconds, value);
       this.updateValue(parsedSeconds);
     });
   }
@@ -186,10 +179,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.value$.pipe(take(1)).subscribe((value: string) => {
       const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
 
-      const parsedHours: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectHours(
-        hours,
-        valueTime
-      );
+      const parsedHours: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectHours(hours, valueTime);
       const transformedHours: string = parsedHours.slice(0, SIZE_PLACEHOLDER_TIME);
 
       if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
@@ -208,10 +198,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.value$.pipe(take(1)).subscribe((value: string) => {
       const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
 
-      const parsedMinutes: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectMinutes(
-        minutes,
-        valueTime
-      );
+      const parsedMinutes: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectMinutes(minutes, valueTime);
       const transformedMinutes: string = parsedMinutes.slice(0, SIZE_PLACEHOLDER_TIME);
 
       if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
@@ -230,10 +217,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.value$.pipe(take(1)).subscribe((value: string) => {
       const valueTime: string = isNil(value) ? '' : value.slice(SIZE_PLACEHOLDER_DATE).trim();
 
-      const parsedSeconds: string = this.inputDateTimeStateService.getUpdatedValueStringAfterSelectSeconds(
-        seconds,
-        valueTime
-      );
+      const parsedSeconds: string = InputDateTimeHelper.getUpdatedValueStringAfterSelectSeconds(seconds, valueTime);
       const transformedSeconds: string = parsedSeconds.slice(0, SIZE_PLACEHOLDER_TIME);
 
       if (isNil(value) || value.length < SIZE_PLACEHOLDER_DATE) {
@@ -281,7 +265,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public getParsedDate(value: string): Date {
-    const { day, month, year }: ParsedDateData = this.inputDateTimeStateService.getParsedDateData(value);
+    const { day, month, year }: ParsedDateData = InputDateTimeHelper.getParsedDateData(value);
     const convertedYear: number = Number(year);
     const convertedMonth: number = Number(month) - 1;
     const convertedDay: number = Number(day);

@@ -5,6 +5,6 @@
     (click)="selectDigit(digit, index)"
     [class.selected]="(selectedDigit$ | async) === digit"
   >
-    {{ digit | timeFormat }}
+    {{ digit | timeDigitFormat }}
   </div>
 </cdk-virtual-scroll-viewport>

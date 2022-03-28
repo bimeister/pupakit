@@ -3,10 +3,10 @@ import { ConditionAsyncPipe } from './condition-async.pipe';
 import { FormatCountPipe } from './format-count.pipe';
 
 import { IsNullOrUndefinedPipe } from './is-null-or-undefined.pipe';
-import { TimeFormatPipe } from './time-format.pipe';
+import { TimeDigitFormatPipe } from './time-format.pipe';
 import { ToString } from './to-string.pipe';
 
-const SHARED_PIPES: any[] = [IsNullOrUndefinedPipe, ToString, TimeFormatPipe, FormatCountPipe, ConditionAsyncPipe];
+const SHARED_PIPES: any[] = [IsNullOrUndefinedPipe, ToString, TimeDigitFormatPipe, FormatCountPipe, ConditionAsyncPipe];
 
 @NgModule({
   declarations: [...SHARED_PIPES],
