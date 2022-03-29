@@ -48,7 +48,16 @@
           ></pupa-icon>
         </button>
       </div>
-      {{ nodeData.entityValue }}
+      <ng-container
+        [ngTemplateOutlet]="nodeTemplate ?? defaultTemplate"
+        [ngTemplateOutletContext]="{
+          nodeData: nodeData
+        }"
+      ></ng-container>
     </ng-container>
   </div>
+</ng-template>
+
+<ng-template #defaultTemplate let-nodeData="nodeData">
+  {{ nodeData.entityValue }}
 </ng-template>

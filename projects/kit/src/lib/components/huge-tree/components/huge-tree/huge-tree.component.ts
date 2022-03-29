@@ -9,6 +9,7 @@ import {
   Input,
   OnChanges,
   Output,
+  TemplateRef,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -44,6 +45,8 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
     length: 0,
   });
   public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
+
+  @Input() public readonly nodeTemplate?: TemplateRef<any>;
 
   @Input() public selectedNodeId: string;
   public readonly selectedNodeId$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
