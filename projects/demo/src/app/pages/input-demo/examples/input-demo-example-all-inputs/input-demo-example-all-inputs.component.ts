@@ -3,8 +3,17 @@ import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn 
 import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { isDate } from '@kit/internal/helpers/is-date.helper';
 
-const ERROR_MESSAGE_BY_KEY: Map<string, string> = new Map<string, string>([['required', 'Field is required']]);
+enum ErrorMessageKey {
+  Required = 'required',
+  InvalidTime = 'invalidTime',
+}
+
+const ERROR_MESSAGE_BY_KEY: Map<string, string> = new Map<ErrorMessageKey, string>([
+  [ErrorMessageKey.Required, 'Field is required'],
+  [ErrorMessageKey.InvalidTime, 'Time is invalid'],
+]);
 
 const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   const value: unknown = control.value;
@@ -12,7 +21,19 @@ const REQUIRED_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
   const isEmptyValue: boolean = !Array.isArray(value) && !isObject && isEmpty(value);
   const isEmptyRange: boolean = Array.isArray(value) && value.every((item: unknown) => isNil(item));
   if (isEmptyValue || isEmptyRange || isNil(value)) {
-    return { required: true };
+    return { [ErrorMessageKey.Required]: true };
+  }
+
+  return null;
+};
+
+const INVALID_TIME_VALIDATOR: ValidatorFn = (control: AbstractControl) => {
+  const value: unknown = control.value;
+
+  if (!isDate(value)) {
+    return {
+      [ErrorMessageKey.InvalidTime]: true,
+    };
   }
 
   return null;
@@ -36,7 +57,7 @@ export class InputDemoExampleAllInputsComponent {
     text: new FormControl('', REQUIRED_VALIDATOR),
     password: new FormControl('', REQUIRED_VALIDATOR),
     number: new FormControl('', REQUIRED_VALIDATOR),
-    time: new FormControl(new Date(), REQUIRED_VALIDATOR),
+    time: new FormControl(new Date(), [REQUIRED_VALIDATOR, INVALID_TIME_VALIDATOR]),
     date: new FormControl(new Date(), REQUIRED_VALIDATOR),
     dateTime: new FormControl(new Date(), REQUIRED_VALIDATOR),
     dateTimeSeconds: new FormControl(new Date(), REQUIRED_VALIDATOR),
