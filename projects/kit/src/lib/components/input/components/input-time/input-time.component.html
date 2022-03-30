@@ -3,7 +3,7 @@
   [ngClass]="resultClassList$ | async"
   type="text"
   #inputElement
-  [placeholder]="placeholder"
+  [placeholder]="'00:00'"
   [style.paddingRight.px]="rightPaddingPx$ | async"
   [attr.disabled]="(isDisabled$ | async) ? true : null"
   (input)="updateValue(inputElement.value)"
