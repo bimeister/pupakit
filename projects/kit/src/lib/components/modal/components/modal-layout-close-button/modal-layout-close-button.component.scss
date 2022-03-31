@@ -3,12 +3,4 @@
 
 :host {
   display: block;
-  position: absolute;
-  top: 3rem;
-  right: 4rem;
-
-  @include xs() {
-    top: 5rem;
-    right: 5rem;
-  }
 }

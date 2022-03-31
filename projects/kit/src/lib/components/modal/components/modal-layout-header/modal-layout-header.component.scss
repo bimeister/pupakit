@@ -2,38 +2,22 @@
 @use 'mixins' as *;
 
 :host {
-  display: block;
   width: 100%;
 
+  display: flex;
+  box-sizing: border-box;
+  height: 14rem;
+  padding: 4rem 6rem;
   background-color: color(base-n0);
 
-  @include host-selector-dark-theme {
+  box-shadow: 0px -1px 0px 0px color(base-white-n400) inset;
+
+  @include host-selector-dark-theme() {
+    box-shadow: 0px -1px 0px 0px color(base-dark-n400) inset;
     background-color: color(base-n600);
   }
-}
 
-.modal-layout-header {
-  position: relative;
-  box-sizing: border-box;
-  height: 12rem;
-  padding: 3rem 4rem;
   @include xs() {
-    padding: 3rem 5em;
-  }
-
-  &_with-title {
-    height: 17rem;
-    padding: 6rem 14rem 6rem 10rem;
-
-    border-bottom: 1px solid color(base-white-n400);
-
-    @include host-selector-dark-theme {
-      border-bottom: 1px solid color(base-dark-n400);
-    }
-
-    @include xs() {
-      height: 16rem;
-      padding: 22px 16rem 22px 5rem;
-    }
+    padding: 4rem 5rem;
   }
 }

@@ -1,0 +1,13 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+
+  :host-context(.modal-layout_no-title) {
+    width: 100%;
+  }
+}

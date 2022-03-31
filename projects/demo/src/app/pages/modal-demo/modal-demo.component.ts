@@ -18,22 +18,32 @@ const BASE_REQUEST_PATH: string = 'modal-demo/examples';
 export class ModalDemoComponent {
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/modal-demo-example-1/modal-content/modal-demo-example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-1/modal-content/modal-demo-example-1.component.scss`,
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-1/modal-demo-example-1-helper/modal-demo-example-1-helper.component.ts`,
   };
 
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/modal-demo-example-2/modal-content/modal-demo-example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-2/modal-content/modal-demo-example-2.component.scss`,
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-2/modal-demo-example-2-helper/modal-demo-example-2-helper.component.ts`,
   };
 
   public readonly example3Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/modal-demo-example-3/modal-content/modal-demo-example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-3/modal-content/modal-demo-example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-3/modal-demo-example-3-helper/modal-demo-example-3-helper.component.ts`,
   };
 
   public readonly example4Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/modal-demo-example-4/modal-content/modal-demo-example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-4/modal-content/modal-demo-example-4.component.scss`,
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-4/modal-demo-example-4-helper/modal-demo-example-4-helper.component.ts`,
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-content/modal-demo-example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-content/modal-demo-example-5.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-demo-example-5-helper/modal-demo-example-5-helper.component.ts`,
   };
 
   public readonly formGroup: FormGroup = new FormGroup({
