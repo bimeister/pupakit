@@ -1,0 +1,27 @@
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'sass:map';
+
+:host {
+  display: contents;
+}
+
+.modal-close-button {
+  display: none;
+
+  &_mobile {
+    @include xs() {
+      display: block;
+    }
+  }
+
+  &_desktop {
+    @include gt-xs() {
+      display: block;
+    }
+  }
+
+  &_all {
+    display: block;
+  }
+}

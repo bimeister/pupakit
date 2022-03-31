@@ -1,4 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Theme } from '@kit/internal/declarations/api';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pupa-modal-demo-example-4',
@@ -7,4 +10,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ModalDemoExample4Component {}
+export class ModalDemoExample4Component {
+  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
+
+  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
+}

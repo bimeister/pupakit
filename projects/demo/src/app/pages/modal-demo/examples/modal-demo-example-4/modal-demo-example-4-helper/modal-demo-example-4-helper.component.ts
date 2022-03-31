@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ModalsService } from '@kit/public-api';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { OpenedModal } from '@kit/internal/declarations/interfaces/opened-modal.interface';
+import { ModalsService } from '@kit/internal/shared/services/modals.service';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ModalDemoExample4Component } from '../modal-content/modal-demo-example-4.component';
 
 @Component({
@@ -10,9 +15,22 @@ import { ModalDemoExample4Component } from '../modal-content/modal-demo-example-
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalDemoExample4HelperComponent {
-  constructor(private readonly modalsService: ModalsService) {}
+  public modalCloseMessage$: Observable<string>;
+
+  constructor(
+    private readonly modalsService: ModalsService,
+    private readonly injector: Injector,
+    private readonly themeWrapperService: ThemeWrapperService
+  ) {}
 
   public openModal(): void {
-    this.modalsService.open(ModalDemoExample4Component);
+    this.themeWrapperService.theme$.pipe(take(1)).subscribe((theme: Theme) => {
+      const modal: OpenedModal<string> = this.modalsService.open(ModalDemoExample4Component, {
+        injector: this.injector,
+        theme,
+      });
+
+      this.modalCloseMessage$ = modal.closed$;
+    });
   }
 }
