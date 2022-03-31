@@ -4,10 +4,7 @@ import { LoaderDemoRoutingModule } from './loader-demo-routing.module';
 import { LoaderDemoComponent } from './loader-demo.component';
 
 @NgModule({
-    declarations: [LoaderDemoComponent],
-    imports: [DemoSharedModule, LoaderDemoRoutingModule],
-    exports: [
-        LoaderDemoComponent
-    ]
+  declarations: [LoaderDemoComponent],
+  imports: [DemoSharedModule, LoaderDemoRoutingModule],
 })
 export class LoaderDemoModule {}
