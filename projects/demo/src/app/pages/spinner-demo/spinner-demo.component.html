@@ -1,49 +1,49 @@
 <h1>Spinner & loader</h1>
 
 <demo-example-viewer>
-  <h2>Examples</h2>
-  <demo-example-viewer-content>
-      <pupa-tabs-container>
-        <pupa-tabs (activeTabNameChange)="activeTabName$.next($event)">
-          <pupa-tabs-item name="Plain spinner">Plain spinner</pupa-tabs-item>
-          <pupa-tabs-item name="Bagel spinner">Bagel spinner</pupa-tabs-item>
-          <pupa-tabs-item name="Loader">Loader</pupa-tabs-item>
-        </pupa-tabs>
+  <pupa-tabs-container>
+    <pupa-tabs>
+      <pupa-tabs-item name="Description and Examples">Description and Examples</pupa-tabs-item>
+      <pupa-tabs-item name="Api">Api</pupa-tabs-item>
+    </pupa-tabs>
 
-        <pupa-tabs-content>
-          <ng-container *pupaTabsItemContentTemplate="'Plain spinner'">
-            <pupa-spinner [size]="size"></pupa-spinner>
-          </ng-container>
-          <ng-container *pupaTabsItemContentTemplate="'Bagel spinner'">
-            <pupa-bagel-spinner [size]="size"></pupa-bagel-spinner>
-          </ng-container>
-          <ng-container *pupaTabsItemContentTemplate="'Loader'">
-            <pupa-loader></pupa-loader>
-          </ng-container>
-        </pupa-tabs-content>
-      </pupa-tabs-container>
-  </demo-example-viewer-content>
+    <pupa-tabs-content>
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Description and Examples'">
+        <h2>Plain spinner</h2>
+        <pupa-code-container [content]="plainSpinnerExampleContent">
+          <demo-plain-spinner *pupaCodeContainerPreviewTemplate></demo-plain-spinner>
+        </pupa-code-container>
 
-  <h2>Properties</h2>
-  <demo-example-viewer-section>
-    <ng-container *ngIf="activeTabName$ | async as tabName">
-      <ng-container *ngIf="propertiesMap[tabName].length > 0; else noProps">
-        <div *ngFor="let propData of propertiesMap[tabName]">
-          <demo-example-viewer-property
-            [name]="propData.name"
-            [decoratorName]="propData.decorator"
-            [type]="propData.type"
-          >
-            <ng-template demoExampleViewerPropertyDescription>
-              <div>{{ propData.desc }}</div>
-            </ng-template>
-          </demo-example-viewer-property>
-        </div>
-      </ng-container>
-    </ng-container>
-  </demo-example-viewer-section>
+        <h2>Bagel spinner</h2>
+        <pupa-code-container [content]="bagelSpinnerExampleContent">
+          <demo-bagel-spinner *pupaCodeContainerPreviewTemplate></demo-bagel-spinner>
+        </pupa-code-container>
+
+        <h2>Loader</h2>
+        <pupa-code-container [content]="loaderExampleContent">
+          <demo-loader *pupaCodeContainerPreviewTemplate></demo-loader>
+        </pupa-code-container>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Api'">
+        <demo-example-viewer-content>
+          <pupa-spinner [size]="size + 'px'"></pupa-spinner>
+        </demo-example-viewer-content>
+
+        <h2>Properties</h2>
+        <demo-example-viewer-property
+          name="size"
+          type="string"
+          decoratorName="input"
+          description="Set width and height of spinner"
+        >
+          <ng-template demoExampleViewerPropertyDescription>
+            Set width and size of spinner
+          </ng-template>
+
+          <pupa-input-number [(ngModel)]="size"></pupa-input-number>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </pupa-tabs-content>
+  </pupa-tabs-container>
 </demo-example-viewer>
-
-<ng-template #noProps>
-  <p>Element has no properties.</p>
-</ng-template>
