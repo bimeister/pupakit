@@ -5,7 +5,7 @@ import { SpinnerDemoComponent } from './spinner-demo.component';
 import { DemoPlainSpinnerComponent } from './examples/demo-plain-spinner/demo-plain-spinner.component';
 import { DemoLoaderComponent } from './examples/demo-loader/demo-loader.component';
 import { DemoBagelSpinnerComponent } from './examples/demo-bagel-spinner/demo-bagel-spinner.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SpinnerDemoComponent, DemoPlainSpinnerComponent, DemoLoaderComponent, DemoBagelSpinnerComponent],
