@@ -40,12 +40,6 @@ export class ModalDemoComponent {
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-4/modal-demo-example-4-helper/modal-demo-example-4-helper.component.ts`,
   };
 
-  public readonly example5Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-content/modal-demo-example-5.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-content/modal-demo-example-5.component.scss`,
-    TS: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-demo-example-5-helper/modal-demo-example-5-helper.component.ts`,
-  };
-
   public readonly formGroup: FormGroup = new FormGroup({
     hasBackdrop: new FormControl(true),
     closeOnBackdropClick: new FormControl(true),

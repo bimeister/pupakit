@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ModalsService } from '@kit/public-api';
+import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { OpenedModal } from '@kit/internal/declarations/interfaces/opened-modal.interface';
+import { ModalsService } from '@kit/internal/shared/services/modals.service';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { ModalDemoExample3Component } from '../modal-content/modal-demo-example-3.component';
 
 @Component({
@@ -10,12 +15,24 @@ import { ModalDemoExample3Component } from '../modal-content/modal-demo-example-
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ModalDemoExample3HelperComponent {
-  constructor(private readonly modalsService: ModalsService) {}
+  public modalCloseMessage$: Observable<string>;
+
+  constructor(
+    private readonly modalsService: ModalsService,
+    private readonly injector: Injector,
+    private readonly themeWrapperService: ThemeWrapperService
+  ) {}
 
   public openModal(): void {
-    this.modalsService.open(ModalDemoExample3Component, {
-      isBackdropTransparent: true,
-      closeOnBackdropClick: false,
+    this.themeWrapperService.theme$.pipe(take(1)).subscribe((theme: Theme) => {
+      const modal: OpenedModal<string> = this.modalsService.open(ModalDemoExample3Component, {
+        injector: this.injector,
+        closeOnBackdropClick: false,
+        isBackdropTransparent: true,
+        theme,
+      });
+
+      this.modalCloseMessage$ = modal.closed$;
     });
   }
 }

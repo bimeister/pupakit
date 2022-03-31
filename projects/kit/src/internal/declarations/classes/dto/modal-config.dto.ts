@@ -4,6 +4,7 @@ import { ModalConfig } from '../../interfaces/modal-config.interface';
 import { Position } from '../../types/position.type';
 import { ConnectedPositionX } from '../../types/connected-position-x.type';
 import { ConnectedPositionY } from '../../types/connected-position-y.type';
+import { Theme } from '../../enums/theme.enum';
 
 export class ModalConfigDto implements ModalConfig {
   public hasBackdrop: boolean = true;
@@ -15,6 +16,7 @@ export class ModalConfigDto implements ModalConfig {
   public viewportMarginPx: number = 0;
   public injector: Injector = null;
   public providers: StaticProvider[] = [];
+  public theme: Theme = Theme.Light;
   public width: number | string = 0;
   public height: number | string = 0;
 
