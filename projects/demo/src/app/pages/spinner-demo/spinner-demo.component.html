@@ -1,24 +1,49 @@
 <h1>Spinner & loader</h1>
 
 <demo-example-viewer>
+  <h2>Examples</h2>
   <demo-example-viewer-content>
-    <ng-container [ngSwitch]="type$ | async">
-      <ng-container *ngSwitchCase="'spinner'">
-        <pupa-spinner [size]="size"></pupa-spinner>
-      </ng-container>
-      <ng-container *ngSwitchCase="'bagel-spinner'">
-        <pupa-bagel-spinner [size]="size"></pupa-bagel-spinner>
-      </ng-container>
-      <ng-container *ngSwitchCase="'loader'">
-        <pupa-loader></pupa-loader>
-      </ng-container>
-    </ng-container>
+      <pupa-tabs-container>
+        <pupa-tabs (activeTabNameChange)="activeTabName$.next($event)">
+          <pupa-tabs-item name="Plain spinner">Plain spinner</pupa-tabs-item>
+          <pupa-tabs-item name="Bagel spinner">Bagel spinner</pupa-tabs-item>
+          <pupa-tabs-item name="Loader">Loader</pupa-tabs-item>
+        </pupa-tabs>
+
+        <pupa-tabs-content>
+          <ng-container *pupaTabsItemContentTemplate="'Plain spinner'">
+            <pupa-spinner [size]="size"></pupa-spinner>
+          </ng-container>
+          <ng-container *pupaTabsItemContentTemplate="'Bagel spinner'">
+            <pupa-bagel-spinner [size]="size"></pupa-bagel-spinner>
+          </ng-container>
+          <ng-container *pupaTabsItemContentTemplate="'Loader'">
+            <pupa-loader></pupa-loader>
+          </ng-container>
+        </pupa-tabs-content>
+      </pupa-tabs-container>
   </demo-example-viewer-content>
 
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+  <h2>Properties</h2>
   <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Select one of the loader components">
-      <demo-props-select #type$ [options]="typeOptions"></demo-props-select>
-    </demo-example-viewer-config-item>
+    <ng-container *ngIf="activeTabName$ | async as tabName">
+      <ng-container *ngIf="propertiesMap[tabName].length > 0; else noProps">
+        <div *ngFor="let propData of propertiesMap[tabName]">
+          <demo-example-viewer-property
+            [name]="propData.name"
+            [decoratorName]="propData.decorator"
+            [type]="propData.type"
+          >
+            <ng-template demoExampleViewerPropertyDescription>
+              <div>{{ propData.desc }}</div>
+            </ng-template>
+          </demo-example-viewer-property>
+        </div>
+      </ng-container>
+    </ng-container>
   </demo-example-viewer-section>
 </demo-example-viewer>
+
+<ng-template #noProps>
+  <p>Element has no properties.</p>
+</ng-template>
