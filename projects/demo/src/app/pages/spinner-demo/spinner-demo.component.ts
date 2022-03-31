@@ -1,5 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
+import { Subject } from 'rxjs';
+import { Nullable } from '@bimeister/utilities';
+
+interface PropertiesMap {
+  [elementName: string]: { name: string; desc: string; type: string; decorator?: Nullable<'input' | 'output'> }[];
+}
 
 @Component({
   selector: 'demo-spinner-demo',
@@ -7,20 +12,12 @@ import { PropsOption } from '../../shared/components/example-viewer/declarations
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpinnerDemoComponent {
+  public readonly activeTabName$: Subject<string> = new Subject<string>();
   public readonly size: string = '32px';
 
-  public readonly typeOptions: PropsOption[] = [
-    {
-      caption: 'pupa-bagel-spinner',
-      value: 'bagel-spinner',
-    },
-    {
-      caption: 'pupa-spinner ',
-      value: 'spinner',
-    },
-    {
-      caption: 'pupa-loader',
-      value: 'loader',
-    },
-  ];
+  public readonly propertiesMap: PropertiesMap = {
+    'Plain spinner': [{ name: 'size', desc: 'Set width and height of spinner', decorator: 'input', type: 'number' }],
+    'Bagel spinner': [{ name: 'size', desc: 'Set width and height of spinner', decorator: 'input', type: 'number' }],
+    Loader: [],
+  };
 }
