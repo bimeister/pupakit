@@ -1,0 +1,9 @@
+@use 'functions' as *;
+
+.modal-layout {
+  width: 1100px;
+  height: 700px;
+
+  max-width: calc(100vw - 10rem);
+  max-height: calc(#{vh(100)} - 10rem);
+}

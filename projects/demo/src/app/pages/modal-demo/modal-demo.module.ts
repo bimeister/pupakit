@@ -8,6 +8,8 @@ import { ModalDemoExample3Component } from './examples/modal-demo-example-3/moda
 import { ModalDemoExample3HelperComponent } from './examples/modal-demo-example-3/modal-demo-example-3-helper/modal-demo-example-3-helper.component';
 import { ModalDemoExample4Component } from './examples/modal-demo-example-4/modal-content/modal-demo-example-4.component';
 import { ModalDemoExample4HelperComponent } from './examples/modal-demo-example-4/modal-demo-example-4-helper/modal-demo-example-4-helper.component';
+import { ModalDemoExample5Component } from './examples/modal-demo-example-5/modal-content/modal-demo-example-5.component';
+import { ModalDemoExample5HelperComponent } from './examples/modal-demo-example-5/modal-demo-example-5-helper/modal-demo-example-5-helper.component';
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoRoutingModule } from './modal-demo-routing.module';
 import { ModalDemoComponent } from './modal-demo.component';
@@ -21,6 +23,8 @@ const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample3HelperComponent,
   ModalDemoExample4Component,
   ModalDemoExample4HelperComponent,
+  ModalDemoExample5Component,
+  ModalDemoExample5HelperComponent,
 ];
 
 @NgModule({

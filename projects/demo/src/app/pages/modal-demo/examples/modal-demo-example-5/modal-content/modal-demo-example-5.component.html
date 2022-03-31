@@ -1,5 +1,7 @@
 <pupa-modal-layout class="modal-layout">
   <pupa-modal-layout-header>
+    <pupa-modal-layout-title> Modal window </pupa-modal-layout-title>
+
     <pupa-modal-layout-header-actions>
       <pupa-modal-layout-close-button [value]="'🤷'">
         <pupa-button-icon [kind]="'subtle'" [icon]="'app-cross'" [size]="'small'"> </pupa-button-icon>
@@ -9,5 +11,9 @@
 
   <pupa-modal-layout-body> Any content can be here </pupa-modal-layout-body>
 
-  <pupa-modal-layout-footer> Footer custom template </pupa-modal-layout-footer>
+  <pupa-modal-layout-footer>
+    <pupa-modal-layout-action [value]="'close'">
+      <pupa-button>Close</pupa-button>
+    </pupa-modal-layout-action>
+  </pupa-modal-layout-footer>
 </pupa-modal-layout>
