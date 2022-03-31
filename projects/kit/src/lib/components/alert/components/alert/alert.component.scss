@@ -5,4 +5,7 @@
   align-items: flex-end;
   width: 80rem;
   margin-top: 2rem;
+  &__body {
+    white-space: pre-line;
+  }
 }
