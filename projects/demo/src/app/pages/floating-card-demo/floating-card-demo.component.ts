@@ -10,6 +10,8 @@ const BASE_EXAMPLES_URL: string = 'floating-card-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class FloatingCardDemoComponent {
+  public ratio: number = 3;
+
   public readonly floatingCardExampleContent: Record<string, string> = {
     HTML: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.html`,
     CSS: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.scss`,

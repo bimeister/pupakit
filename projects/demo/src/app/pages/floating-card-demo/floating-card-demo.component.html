@@ -19,6 +19,33 @@
           <pupa-demo-floating-card-with-custom-reset-type-example *pupaCodeContainerPreviewTemplate></pupa-demo-floating-card-with-custom-reset-type-example>
         </pupa-code-container>
       </demo-example-viewer-section>
+
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Api'">
+        <demo-example-viewer-content>
+          <div class="floating-card-demo__api-card">
+            <pupa-floating-card [ratio]="ratio">
+              <pupa-button size="large">Some button</pupa-button>
+            </pupa-floating-card>
+          </div>
+
+          <h2>Properties</h2>
+          <demo-example-viewer-property
+            name="ratio"
+            decoratorName="input"
+            type="number"
+          >
+            <ng-template demoExampleViewerPropertyDescription>Angle factor.</ng-template>
+            <pupa-input-number [(ngModel)]="ratio"></pupa-input-number>
+          </demo-example-viewer-property>
+          <demo-example-viewer-property
+            name="resetType"
+            decoratorName="input"
+            type="'onMouseLeave' | 'custom'"
+          >
+            <ng-template demoExampleViewerPropertyDescription>Change reset floating behavior. <b>Default</b>: onMouseLeave.</ng-template>
+          </demo-example-viewer-property>
+        </demo-example-viewer-content>
+      </demo-example-viewer-section>
     </pupa-tabs-content>
   </pupa-tabs-container>
 </demo-example-viewer>
