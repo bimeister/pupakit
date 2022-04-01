@@ -1,0 +1,10 @@
+<pupa-floating-card
+  #floatingCard
+  class="floating-card-example"
+  [ratio]="3"
+  resetType="custom"
+>
+  <pupa-button size="large">Another button</pupa-button>
+</pupa-floating-card>
+
+<pupa-button size="large" (click)="floatingCard.dropTransform()">Click me for reset floating</pupa-button>
