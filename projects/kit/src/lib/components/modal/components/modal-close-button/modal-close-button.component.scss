@@ -3,7 +3,7 @@
 @use 'sass:map';
 
 :host {
-  display: contents;
+  display: block;
 }
 
 .modal-close-button {

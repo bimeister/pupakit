@@ -1,7 +1,5 @@
 import { OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Subject } from 'rxjs';
-import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
@@ -12,6 +10,7 @@ export class ModalRef<ReturnDataT = null> {
   public readonly opened$: Subject<void> = new Subject<void>();
   public readonly positionUpdated$: Subject<Position> = new Subject<Position>();
   public readonly toTopLayerMoved$: Subject<void> = new Subject();
+  public readonly isFullscreen$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     public readonly modalId: string,
@@ -35,14 +34,12 @@ export class ModalRef<ReturnDataT = null> {
     return this.config.overlayY;
   }
 
-  public updatePosition(newPosition: Position): void {
-    this.positionUpdated$.next(newPosition);
+  public changeFullscreenMode(isFullscreen: boolean): void {
+    this.isFullscreen$.next(isFullscreen);
   }
 
-  public open(componentPortal: ComponentPortal<ModalContainerComponent<unknown>>): void {
-    this.overlayRef.attach(componentPortal);
-    this.opened$.next();
-    this.opened$.complete();
+  public updatePosition(newPosition: Position): void {
+    this.positionUpdated$.next(newPosition);
   }
 
   public close(data: ReturnDataT = null): void {

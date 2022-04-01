@@ -48,6 +48,7 @@ export class ModalsService {
       id: modal.id,
       closed$: modalRef.closed$,
       positionUpdated$: modalRef.positionUpdated$,
+      isFullscreen$: modalRef.isFullscreen$,
     };
   }
 

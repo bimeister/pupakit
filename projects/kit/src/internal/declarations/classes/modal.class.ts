@@ -53,7 +53,13 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   public open(): ModalRef {
-    this.modalRef.open(this.getComponentPortal());
+    if (this.config.isFullscreen) {
+      this.modalRef.changeFullscreenMode(this.config.isFullscreen);
+    }
+
+    this.overlayRef.attach(this.getComponentPortal());
+    this.modalRef.opened$.next();
+    this.modalRef.opened$.complete();
     return this.modalRef;
   }
 
@@ -98,6 +104,7 @@ export class Modal<ComponentT> implements PortalLayer {
     };
 
     const injectionTokens: WeakMap<object, any> = new WeakMap();
+    injectionTokens.set(ModalRef, this.modalRef);
     injectionTokens.set(MODAL_CONTAINER_DATA_TOKEN, modalContainerData).set(OverlayRef, this.overlayRef);
 
     return new PortalInjector(this.injector, injectionTokens);

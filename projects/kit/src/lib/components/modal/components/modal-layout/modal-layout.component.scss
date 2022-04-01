@@ -19,6 +19,7 @@
     border: none;
     box-shadow: none;
 
+    // here important need to redefine outside element styles
     width: 100vw !important;
     height: calc(100vh - 80px) !important;
     margin-top: 80px !important;
@@ -55,4 +56,17 @@
 :host-context(.modal-container_with-backdrop) :host {
   border: none;
   box-shadow: none;
+}
+
+:host-context(.modal-container_full-screen) :host {
+  // here important need to redefine outside element styles
+  width: 100vw !important;
+  height: vh(100) !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+
+  @include xs() {
+    margin-top: 0 !important;
+    height: vh(100) !important;
+  }
 }
