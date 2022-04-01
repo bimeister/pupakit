@@ -34,7 +34,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<T>> = new BehaviorSubject<OnChangeCallback<T>>(
     null
   );
-  private readonly onTouchedCallback$: BehaviorSubject<OnChangeCallback<T[]>> = new BehaviorSubject<OnTouchedCallback>(
+  private readonly onTouchedCallback$: BehaviorSubject<OnTouchedCallback> = new BehaviorSubject<OnTouchedCallback>(
     null
   );
 
