@@ -18,6 +18,9 @@ export class ModalButtonIconComponent implements OnChanges {
   @Input() public icon: string;
   public readonly icon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  @Input() public active: boolean;
+  public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private readonly isMobile$: Observable<boolean> = this.clientUiStateHandlerService.breakpointIsXs$;
 
   public readonly size$: Observable<ButtonSize> = this.isMobile$.pipe(
@@ -28,6 +31,7 @@ export class ModalButtonIconComponent implements OnChanges {
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processIconChange(changes?.icon);
+    this.processActiveChange(changes?.active);
   }
 
   private processIconChange(change: ComponentChange<this, string>): void {
@@ -38,5 +42,15 @@ export class ModalButtonIconComponent implements OnChanges {
     }
 
     this.icon$.next(currentValue);
+  }
+
+  private processActiveChange(change: ComponentChange<this, boolean>): void {
+    const currentValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(currentValue)) {
+      return;
+    }
+
+    this.active$.next(currentValue);
   }
 }

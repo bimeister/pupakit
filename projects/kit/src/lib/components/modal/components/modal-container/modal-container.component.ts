@@ -1,11 +1,10 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { ChangeDetectionStrategy, Component, Inject, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { CdkPortalOutlet, ComponentPortal } from '@angular/cdk/portal';
+import { ChangeDetectionStrategy, Component, Inject, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../../../../internal/constants/tokens/modal-container-data.token';
+import { ModalRef } from '../../../../../internal/declarations/classes/modal-ref.class';
 import { ModalContainerData } from '../../../../../internal/declarations/interfaces/modal-container-data.interface';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 
@@ -39,39 +38,30 @@ type AnimationState = 'void' | 'enter' | 'leave' | 'enterMobile';
   ],
 })
 export class ModalContainerComponent<ComponentT> implements OnDestroy {
-  public animationState$: BehaviorSubject<AnimationState> = new BehaviorSubject('void');
+  @ViewChild(CdkPortalOutlet) public сdkPortalOutlet: CdkPortalOutlet;
 
-  public isBackdropColorful$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly animationState$: BehaviorSubject<AnimationState> = new BehaviorSubject('void');
 
-  private readonly subscription: Subscription = new Subscription();
+  public readonly isFullscreen$: Observable<boolean> = this.modalRef.isFullscreen$;
 
   public get componentPortal(): ComponentPortal<ComponentT> {
     return this.componentData.contentComponentPortal;
   }
+  private readonly subscription: Subscription = new Subscription();
 
   constructor(
     @Inject(MODAL_CONTAINER_DATA_TOKEN) private readonly componentData: ModalContainerData<ComponentT>,
-    private readonly overlayRef: OverlayRef,
+    private readonly modalRef: ModalRef,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService
   ) {
-    this.subscription.add(this.handleBackdropAttached());
-    this.subscription.add(this.handleBreakpoint());
+    this.subscription.add(this.processAnimationStateByBreakpoint());
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  private handleBackdropAttached(): Subscription {
-    return this.overlayRef.attachments().subscribe(() => {
-      this.isBackdropColorful$.next(
-        !isNil(this.overlayRef.backdropElement) &&
-          this.overlayRef.backdropElement.classList.contains('cdk-overlay-dark-backdrop')
-      );
-    });
-  }
-
-  private handleBreakpoint(): Subscription {
+  private processAnimationStateByBreakpoint(): Subscription {
     return this.clientUiStateHandlerService.breakpoint$
       .pipe(
         map((breakpoint: string) => breakpoint === 'xs'),

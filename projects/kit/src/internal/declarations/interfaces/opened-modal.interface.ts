@@ -6,4 +6,5 @@ export interface OpenedModal<ReturnDataT = null> {
   id: string;
   closed$: Observable<ReturnDataT>;
   positionUpdated$: Observable<Position>;
+  isFullscreen$: Observable<boolean>;
 }

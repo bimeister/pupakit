@@ -9,6 +9,7 @@ import { ModalButtonIconComponent } from './components/modal-button-icon/modal-b
 import { ModalCloseButtonComponent } from './components/modal-close-button/modal-close-button.component';
 import { ModalContainerComponent } from './components/modal-container/modal-container.component';
 import { ModalDraggerComponent } from './components/modal-dragger/modal-dragger.component';
+import { ModalExpandButtonComponent } from './components/modal-expand-button/modal-expand-button.component';
 import { ModalLayoutActionComponent } from './components/modal-layout-action/modal-layout-action.component';
 import { ModalLayoutBodyComponent } from './components/modal-layout-body/modal-layout-body.component';
 import { ModalLayoutFooterComponent } from './components/modal-layout-footer/modal-layout-footer.component';
@@ -30,6 +31,7 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     ModalLayoutTitleComponent,
     ModalButtonIconComponent,
     ModalCloseButtonComponent,
+    ModalExpandButtonComponent,
   ],
   imports: [SharedModule, ButtonModule, OverlayModule, PortalModule, ThemeWrapperModule, ScrollableModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -43,6 +45,7 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     ModalLayoutTitleComponent,
     ModalButtonIconComponent,
     ModalCloseButtonComponent,
+    ModalExpandButtonComponent,
     ModalDraggerComponent,
     OverlayModule,
     PortalModule,

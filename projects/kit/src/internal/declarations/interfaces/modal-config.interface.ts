@@ -16,4 +16,5 @@ export interface ModalConfig {
   injector: Injector;
   providers: StaticProvider[];
   theme?: Theme;
+  isFullscreen?: boolean;
 }
