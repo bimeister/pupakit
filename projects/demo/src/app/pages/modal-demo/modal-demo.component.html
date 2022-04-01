@@ -2,11 +2,6 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <h2>Fullscreen</h2>
-    <pupa-code-container [content]="example4Content">
-      <pupa-modal-demo-example-4-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-4-helper>
-    </pupa-code-container>
-
     <h2>Simple usage</h2>
     <pupa-code-container [content]="example1Content">
       <pupa-modal-demo-example-1-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-1-helper>
@@ -20,6 +15,11 @@
     <h2>No Footer, With Scroll, Transparent Backdrop, No Close on Backdrop</h2>
     <pupa-code-container [content]="example3Content">
       <pupa-modal-demo-example-3-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-3-helper>
+    </pupa-code-container>
+
+    <h2>Fullscreen</h2>
+    <pupa-code-container [content]="example4Content">
+      <pupa-modal-demo-example-4-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-4-helper>
     </pupa-code-container>
   </div>
 
@@ -44,6 +44,11 @@
         <demo-example-viewer-property name="closeOnBackdropClick" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Close on backdrop click.</ng-container>
           <demo-props-switcher formControlName="closeOnBackdropClick"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isFullscreen" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Fullscreen mode.</ng-container>
+          <demo-props-switcher formControlName="isFullscreen"></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

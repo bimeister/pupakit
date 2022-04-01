@@ -44,6 +44,7 @@ export class ModalDemoComponent {
     hasBackdrop: new FormControl(true),
     closeOnBackdropClick: new FormControl(true),
     isBackdropTransparent: new FormControl(false),
+    isFullscreen: new FormControl(false),
   });
 
   constructor(private readonly modalsService: ModalsService, private readonly injector: Injector) {}
