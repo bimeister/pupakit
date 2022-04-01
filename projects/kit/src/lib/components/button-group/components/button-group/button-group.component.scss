@@ -20,9 +20,9 @@ $container-padding: 4px;
     max-width: inherit;
     box-sizing: border-box;
 
-    background-color: color('base-white-n500');
+    background-color: color('base-white-n400');
     @include host-selector-dark-theme {
-      background-color: color('base-dark-n500');
+      background-color: color('base-dark-n400');
     }
   }
   &__rail-container {
