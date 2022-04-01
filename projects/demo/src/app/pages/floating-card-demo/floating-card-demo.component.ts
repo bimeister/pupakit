@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 const BASE_EXAMPLES_URL: string = 'floating-card-demo/examples';
 
@@ -10,7 +11,7 @@ const BASE_EXAMPLES_URL: string = 'floating-card-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class FloatingCardDemoComponent {
-  public ratio: number = 3;
+  public readonly ratio: FormControl = new FormControl(3);
 
   public readonly floatingCardExampleContent: Record<string, string> = {
     HTML: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.html`,
