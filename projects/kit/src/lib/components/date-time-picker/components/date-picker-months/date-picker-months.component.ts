@@ -17,7 +17,7 @@ export class DatePickerMonthsComponent {
   public readonly months: Date[] = Array(MONTH_COUNT)
     .fill(new Date())
     .map((date: Date, index: number) => {
-      date.setMonth(index);
+      date.setMonth(index, 1);
       return dateClearTime(new Date(date));
     });
 

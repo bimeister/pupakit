@@ -230,8 +230,7 @@ export class DatePickerSimpleComponent implements OnChanges {
         take(1),
         map((currentBaseDate: Date) => {
           const month: number = currentBaseDate.getMonth() - 1;
-          currentBaseDate.setDate(1);
-          currentBaseDate.setMonth(month);
+          currentBaseDate.setMonth(month, 1);
           return currentBaseDate;
         }),
         map((newBaseDateMs: Date) => dateClearTime(new Date(newBaseDateMs)))
@@ -248,8 +247,7 @@ export class DatePickerSimpleComponent implements OnChanges {
         take(1),
         map((currentBaseDate: Date) => {
           const month: number = currentBaseDate.getMonth() + 1;
-          currentBaseDate.setMonth(month);
-          currentBaseDate.setDate(1);
+          currentBaseDate.setMonth(month, 1);
           return currentBaseDate;
         }),
         map((newBaseDateMs: Date) => dateClearTime(new Date(newBaseDateMs)))
@@ -284,7 +282,7 @@ export class DatePickerSimpleComponent implements OnChanges {
     this.baseDate$
       .pipe(
         take(1),
-        map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setMonth(month))))
+        map((currentBaseDate: Date) => dateClearTime(new Date(currentBaseDate.setMonth(month, 1))))
       )
       .subscribe((newBaseDate: Date) => {
         this.datePickerPreviewMode$.next(DatePickerState.Days);
