@@ -309,7 +309,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public reset(): void {
-    this.withReset$.pipe(take(1), filterTruthy()).subscribe(() => this.updateValue(null));
+    this.withReset$.pipe(take(1), filterTruthy()).subscribe(() => this.updateValue(''));
     this.inputElementRef.nativeElement.focus();
   }
 
