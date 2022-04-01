@@ -70,8 +70,13 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
     combineLatest([this.onChangeCallback$, this.onTouchedCallback$])
       .pipe(take(1))
       .subscribe(([onChangeCallback, onTouchedCallback]: [OnChangeCallback<T>, OnTouchedCallback]) => {
-        this.handleChangedValue(onChangeCallback, updatedValue);
-        onTouchedCallback();
+        if (typeof onTouchedCallback === 'function') {
+          onTouchedCallback();
+        }
+
+        if (typeof onChangeCallback === 'function') {
+          this.handleChangedValue(onChangeCallback, updatedValue);
+        }
       });
   }
 
