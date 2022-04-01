@@ -1,35 +1,24 @@
 <h1>Floating Card Demo</h1>
 
 <demo-example-viewer>
-  <demo-example-viewer-content>
-    <ng-container
-      [ngTemplateOutlet]="content"
-      [ngTemplateOutletContext]="{ $implicit: formControl.value || 0 }"
-    ></ng-container>
-  </demo-example-viewer-content>
+  <pupa-tabs-container>
+    <pupa-tabs>
+      <pupa-tabs-item name="Description and Examples">Description and Examples</pupa-tabs-item>
+      <pupa-tabs-item name="Api">Api</pupa-tabs-item>
+    </pupa-tabs>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="ratio" type="number">
-      <ng-container *demoExampleViewerPropertyDescription>Adjusts the ratio of the element.</ng-container>
-      <pupa-input-number [formControl]="formControl" [withReset]="true"></pupa-input-number>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
+    <pupa-tabs-content>
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Description and Examples'">
+        <h2>Usage example</h2>
+        <pupa-code-container [content]="floatingCardExampleContent">
+          <demo-floating-card-example *pupaCodeContainerPreviewTemplate></demo-floating-card-example>
+        </pupa-code-container>
+
+        <h2>With custom reset type</h2>
+        <pupa-code-container [content]="floatingCardWithCustomResetTypeExample">
+          <pupa-demo-floating-card-with-custom-reset-type-example *pupaCodeContainerPreviewTemplate></pupa-demo-floating-card-with-custom-reset-type-example>
+        </pupa-code-container>
+      </demo-example-viewer-section>
+    </pupa-tabs-content>
+  </pupa-tabs-container>
 </demo-example-viewer>
-
-<ng-template #content let-ratio>
-  <div class="content">
-    <pupa-floating-card [ratio]="ratio">
-      <pupa-button> Button With {{ ratio }} Ratio</pupa-button>
-    </pupa-floating-card>
-
-    <pupa-floating-card resetType="custom" [ratio]="ratio" #floating>
-      <div class="content__div">
-        Div With {{ ratio }} Ratio
-        <pupa-button kind="subtle" (mousemove)="$event.stopPropagation()" (click)="floating.dropTransform()">
-          Reset Floating
-        </pupa-button>
-      </div>
-    </pupa-floating-card>
-  </div>
-</ng-template>
