@@ -272,7 +272,9 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       .pipe(take(1), filterNotNil(), withLatestFrom(this.isMultiSelectionEnabled$, this.onTouchedCallback$))
       .subscribe(([control, isMultiSelectionEnable, onTouchedCallback]: [NgControl, boolean, OnTouchedCallback]) => {
         control.reset(isMultiSelectionEnable ? [] : null);
-        onTouchedCallback();
+        if (typeof onTouchedCallback === 'function') {
+          onTouchedCallback();
+        }
 
         this.resetOutput.next();
       });
