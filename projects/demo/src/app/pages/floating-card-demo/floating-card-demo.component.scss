@@ -1,17 +1,6 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-
-.content {
-  display: flex;
-  flex-direction: column;
-
-  justify-content: center;
-  align-items: center;
-
-  &__div {
-    cursor: default;
-    margin-top: 16px;
-    background-color: color(primary-n400);
-    padding: 8px 0 8px 8px;
+.floating-card-demo {
+  &__api-card {
+    display: flex;
+    justify-content: center;
   }
 }
