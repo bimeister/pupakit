@@ -21,7 +21,7 @@
 
     // here important need to redefine outside element styles
     width: 100vw !important;
-    height: calc(100vh - 80px) !important;
+    height: calc(#{vh(100)} - 80px) !important;
     margin-top: 80px !important;
     min-width: none !important;
     max-width: none !important;
