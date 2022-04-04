@@ -1,0 +1,11 @@
+import { IconDefinition } from '../../declarations/interfaces/icon-definition.interface';
+
+export const appArrowFullRightIcon: IconDefinition = {
+  name: 'app-arrow-full-right',
+  data: `
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M9.35354 3.14645C9.15828 2.95118 8.8417 2.95118 8.64644 3.14645C8.45117 3.34171 8.45118 3.65829 8.64644 3.85355L12.2929 7.49996H2.5C2.22386 7.49996 2 7.72382 2 7.99996C2 8.2761 2.22386 8.49996 2.5 8.49996H12.2929L8.64646 12.1464C8.45119 12.3416 8.45119 12.6582 8.64645 12.8535C8.84171 13.0487 9.1583 13.0487 9.35356 12.8535L13.8536 8.35354C13.8673 8.33984 13.8801 8.32542 13.892 8.31037C13.9578 8.22739 13.9978 8.12304 13.9999 8.00942C14 8.00628 14 8.00313 14 7.99999C14 7.99787 14 7.99576 14 7.99364C13.9983 7.85658 13.9414 7.7328 13.8506 7.64347L9.35354 3.14645Z" fill="currentColor"/>
+  </svg>
+  
+  `,
+};
