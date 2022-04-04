@@ -15,11 +15,11 @@ export class FloatingCardDemoComponent {
 
   public readonly floatingCardExampleContent: Record<string, string> = {
     HTML: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.html`,
-    CSS: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.scss`,
+    SCSS: `${BASE_EXAMPLES_URL}/demo-floating-card-example/demo-floating-card-example.component.scss`,
   };
 
   public readonly floatingCardWithCustomResetTypeExample: Record<string, string> = {
     HTML: `${BASE_EXAMPLES_URL}/demo-floating-card-with-custom-reset-type-example/demo-floating-card-with-custom-reset-type-example.component.html`,
-    CSS: `${BASE_EXAMPLES_URL}/demo-floating-card-with-custom-reset-type-example/demo-floating-card-with-custom-reset-type-example.component.scss`,
+    SCSS: `${BASE_EXAMPLES_URL}/demo-floating-card-with-custom-reset-type-example/demo-floating-card-with-custom-reset-type-example.component.scss`,
   };
 }
