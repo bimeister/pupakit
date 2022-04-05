@@ -93,6 +93,7 @@ export class SidebarComponent {
     title: 'Overlay Components',
     linkItems: sortByProperty(
       [
+        { title: 'Dropdown', link: '/kit/dropdown' },
         { title: 'Dropdown menu', link: '/kit/dropdown-menu' },
         { title: 'Tooltip', link: '/kit/tooltip' },
         { title: 'Alert', link: '/kit/alerts' },

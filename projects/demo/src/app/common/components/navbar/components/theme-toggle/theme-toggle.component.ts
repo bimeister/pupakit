@@ -1,7 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
-import { ToastsService } from '@kit/internal/api';
+import { DropdownsService, ToastsService } from '@kit/internal/api';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { AlertsService } from '@kit/internal/shared/services/alerts.service';
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
@@ -68,6 +68,7 @@ export class ThemeToggleComponent {
     private readonly themeWrapperService: ThemeWrapperService,
     private readonly renderer: Renderer2,
     private readonly alertsService: AlertsService,
+    private readonly dropdownsService: DropdownsService,
     private readonly toastsService: ToastsService
   ) {
     this.setInitialBrowserToolbarTheme();
@@ -82,6 +83,7 @@ export class ThemeToggleComponent {
       .subscribe((theme: Theme) => {
         this.setBrowserToolbarTheme(theme);
         this.themeWrapperService.setTheme(theme);
+        this.dropdownsService.setTheme(theme);
 
         const alertsAndToastsTheme: Theme = theme === Theme.Light ? Theme.Dark : Theme.Light;
         this.alertsService.setTheme(alertsAndToastsTheme);
