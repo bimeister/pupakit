@@ -11,6 +11,7 @@ import { PopoverLayoutBodyComponent } from './components/popover-layout-body/pop
 import { PopoverLayoutCloseButtonComponent } from './components/popover-layout-close-button/popover-layout-close-button.component';
 import { PopoverLayoutFooterComponent } from './components/popover-layout-footer/popover-layout-footer.component';
 import { PopoverLayoutHeaderComponent } from './components/popover-layout-header/popover-layout-header.component';
+import { PopoverLayoutTitleComponent } from './components/popover-layout-title/popover-layout-title.component';
 import { PopoverLayoutComponent } from './components/popover-layout/popover-layout.component';
 
 const DECLARATIONS: Type<unknown>[] = [PopoverContainerComponent];
@@ -22,6 +23,7 @@ const EXPORTS: Type<unknown>[] = [
   PopoverLayoutFooterComponent,
   PopoverLayoutCloseButtonComponent,
   PopoverLayoutActionComponent,
+  PopoverLayoutTitleComponent,
 ];
 
 @NgModule({
