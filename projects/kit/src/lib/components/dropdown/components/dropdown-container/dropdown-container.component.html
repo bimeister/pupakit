@@ -1,0 +1,5 @@
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <div (mousedown)="stopEvent($event)" (touchmove)="stopEvent($event)" (wheel)="stopEvent($event)">
+    <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
+  </div>
+</pupa-theme-wrapper>

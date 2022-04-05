@@ -58,6 +58,7 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
+import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -177,6 +178,11 @@ const demoRoutes: Routes = [
         path: 'droppable',
         loadChildren: (): Promise<Type<DroppableDemoModule>> =>
           import('./pages/droppable-demo/droppable-demo.module').then((module: any) => module.DroppableDemoModule),
+      },
+      {
+        path: 'dropdown',
+        loadChildren: (): Promise<Type<DropdownDemoModule>> =>
+          import('./pages/dropdown-demo/dropdown-demo.module').then((module: any) => module.DropdownDemoModule),
       },
       {
         path: 'rating',

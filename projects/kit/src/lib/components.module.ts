@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
+import { DropdownModule } from './components/dropdown/dropdown.module';
 import { SharedModule } from '../internal/shared/shared.module';
 import { ActionsModule } from './components/actions/actions.module';
 import { AvatarModule } from './components/avatar/avatar.module';
@@ -111,6 +112,7 @@ const EXPORTS: any[] = [
   StepperModule,
   ActionsModule,
   PopoverModule,
+  DropdownModule,
 ];
 
 @NgModule({
