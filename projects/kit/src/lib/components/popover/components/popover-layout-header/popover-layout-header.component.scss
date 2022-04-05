@@ -8,6 +8,7 @@
   border-bottom: 1px solid color(base-white-n400);
   box-sizing: border-box;
   display: flex;
+  align-items: center;
 
   @include host-selector-dark-theme {
     border-color: color(base-dark-n400);
