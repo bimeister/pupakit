@@ -19,7 +19,10 @@
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content>
-        <pupa-switcher [disabled]="disabled$ | async" [size]="size$ | async"></pupa-switcher>
+        <div class="row">
+          <pupa-switcher [disabled]="disabled$ | async" [size]="size$ | async" [value]="value$ | async"></pupa-switcher>
+          <span class="label">Switcher example</span>
+        </div>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
@@ -32,6 +35,11 @@
         <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
           <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="value" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Switcher value</ng-container>
+          <demo-props-switcher #value$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
