@@ -4,12 +4,12 @@
   @include flex-container(row, center);
 
   .label {
-    margin-left: 5px;
+    margin-left: 1rem;
   }
 }
 
 .switcher-demo {
   &__info-block {
-    margin-top: 20px;
+    margin-top: 5rem;
   }
 }
