@@ -27,4 +27,9 @@ export class SwitcherDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
   };
+
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
+  };
 }

@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'demo-switcher-example-1',
-  templateUrl: './example-1.component.html',
-  styleUrls: ['./example-1.component.scss'],
+  selector: 'demo-switcher-example-2',
+  templateUrl: './example-2.component.html',
+  styleUrls: ['./example-2.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SwitcherExample1Component {}
+export class SwitcherExample2Component {}

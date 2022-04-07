@@ -1,28 +1,39 @@
 <h1>Switcher</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-switcher [disabled]="disabled$ | async" [size]="size$ | async"></pupa-switcher>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h4>Basic usage</h4>
+    <pupa-code-container [content]="example1Content">
+      <demo-switcher-example-1 *pupaCodeContainerPreviewTemplate></demo-switcher-example-1>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="size" type="SwitcherSize">
-      <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
-      <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
-    </demo-example-viewer-property>
+    <h4>Sizes</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-switcher-example-2 *pupaCodeContainerPreviewTemplate></demo-switcher-example-2>
+    </pupa-code-container>
+  </div>
 
-    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-switcher [disabled]="disabled$ | async" [size]="size$ | async"></pupa-switcher>
+      </demo-example-viewer-content>
 
-<h2>Usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-switcher-example-1 *pupaCodeContainerPreviewTemplate></demo-switcher-example-1>
-</pupa-code-container>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="size" type="SwitcherSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
 
 <pupa-info-block variant="info" class="switcher-demo__info-block">
   We don't recommend using control and value at the same time. Using of control is preferable.
