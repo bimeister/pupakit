@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'demo-switcher-example-1',
@@ -7,4 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SwitcherExample1Component {}
+export class SwitcherExample1Component {
+  public formControl: FormControl = new FormControl(true);
+  public value: boolean = true;
+}
