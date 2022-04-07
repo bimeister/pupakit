@@ -17,7 +17,7 @@
   display: block;
   padding: 0;
   border: 1px solid;
-  border-radius: 1px;
+  border-radius: 1rem;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
   @include font-size-mark(true);
@@ -157,12 +157,12 @@
   }
 
   &:focus-within {
-    background-color: color(base-n0);
-    border-color: color(base-white-n275);
+    background-color: color(base-white-n300);
+    border-color: transparent;
 
     @include dark-theme-class-parent {
-      background-color: color(base-n600);
-      border-color: color(base-dark-n275);
+      background-color: color(base-dark-n300);
+      border-color: transparent;
     }
 
     .textarea__control {
@@ -174,10 +174,10 @@
     }
 
     .textarea__control::placeholder {
-      color: color(base-white-n275);
+      color: color(base-n600);
 
       @include dark-theme-class-parent {
-        color: color(base-dark-n300);
+        color: color(base-n0);
       }
     }
   }

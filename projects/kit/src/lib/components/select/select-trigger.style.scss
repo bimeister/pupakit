@@ -20,6 +20,7 @@
 
   cursor: pointer;
 
+  border-radius: 1rem;
   border: 1px solid transparent;
 
   color: color(base-n600);
@@ -31,7 +32,7 @@
   font-size: 3rem;
   line-height: 4rem;
   @include font-type-caption();
-  padding: 1rem 4rem;
+  padding: 2rem 3rem;
   padding-right: 14px;
 
   &:not(.trigger_disabled) {
@@ -51,8 +52,7 @@
   }
 
   &_active {
-    border-color: color(base-white-n275);
-    background-color: color(base-n0);
+    background-color: color(base-white-n500);
 
     .placeholder.on-hover {
       opacity: 1;
@@ -131,8 +131,7 @@
     }
 
     &_active {
-      border-color: color(base-white-n275);
-      background-color: color(base-n600);
+      background-color: color(base-dark-n500);
     }
 
     &_disabled {
