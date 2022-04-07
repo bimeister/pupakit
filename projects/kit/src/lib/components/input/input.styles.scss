@@ -284,3 +284,15 @@
     }
   }
 }
+
+:host.ghost input {
+  background-color: unset;
+}
+
+:host.bold input {
+  font-weight: bold;
+
+  &::placeholder {
+    font-weight: bold;
+  }
+}
