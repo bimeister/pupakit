@@ -9,6 +9,6 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SwitcherExample1Component {
-  public formControl: FormControl = new FormControl(true);
-  public value: boolean = true;
+  public formControl: FormControl = new FormControl(false);
+  public value: boolean = false;
 }
