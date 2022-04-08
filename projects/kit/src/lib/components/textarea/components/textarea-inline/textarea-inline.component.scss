@@ -201,14 +201,6 @@
         border-color: color(base-dark-n275);
       }
 
-      .textarea__control {
-        color: color(base-n600);
-
-        @include dark-theme-class-parent {
-          color: color(base-n0);
-        }
-      }
-
       .textarea__control::placeholder {
         color: color(base-white-n275);
 
