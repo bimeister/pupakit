@@ -252,6 +252,20 @@
         -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
       }
     }
+
+    &_ghost {
+      background-color: unset;
+      border-color: transparent;
+    }
+
+    &_bold {
+      font-weight: bold;
+
+      &::placeholder {
+        font-weight: bold;
+      }
+    }
+
     &_invalid {
       border-color: map.get($input_dark_styles, invalid, border-color);
       &:-webkit-autofill {
