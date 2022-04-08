@@ -6,6 +6,7 @@ import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
+import { InputStyles } from '../../types/input-style.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 const SIZES_LIST: [InputSize, number][] = [
@@ -40,6 +41,9 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public styles: InputStyles[] = ['bold', 'ghost'];
+  public readonly styles$: BehaviorSubject<InputStyles[]> = new BehaviorSubject<InputStyles[]>(['bold', 'ghost']);
+
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
@@ -62,6 +66,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
     this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
   ]).pipe(
+    withLatestFrom(this.styles$),
+    map(([classes, styleClasses]: [string[], string[]]) => [...classes, ...styleClasses]),
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
@@ -116,6 +122,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processAutocompleteChange(changes?.autocomplete);
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
+    this.processStylesChange(changes?.styles);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -165,5 +172,15 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.autocomplete$.next(updatedValue);
+  }
+
+  private processStylesChange(change: ComponentChange<this, InputStyles[]>): void {
+    const updatedValue: InputStyles[] | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.styles$.next(updatedValue);
   }
 }
