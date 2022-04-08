@@ -20,6 +20,10 @@
     "name": "Base/dark surface",
     "colors": [
       {
+        "name": "Base/Dark/N550",
+        "hex": "07232F"
+      },
+      {
         "name": "Base/Dark/N500",
         "hex": "0F2A36"
       },
@@ -52,6 +56,10 @@
   {
     "name": "Base/white surface",
     "colors": [
+      {
+        "name": "Base/White/N550",
+        "hex": "FAFAFB"
+      },
       {
         "name": "Base/White/N500",
         "hex": "F5F6F7"
