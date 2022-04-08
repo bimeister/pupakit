@@ -129,6 +129,19 @@
     @include small();
   }
 
+  &_ghost {
+    background-color: unset;
+    border-color: transparent;
+  }
+
+  &_bold {
+    font-weight: bold;
+
+    &::placeholder {
+      font-weight: bold;
+    }
+  }
+
   &:hover:not(:focus):not([disabled]) {
     background-color: map.get($input_light_styles, hover, background-color);
     &:-webkit-autofill {
@@ -270,18 +283,5 @@
     &::placeholder {
       opacity: 1;
     }
-  }
-}
-
-:host.ghost input {
-  background-color: unset;
-  border-color: transparent;
-}
-
-:host.bold input {
-  font-weight: bold;
-
-  &::placeholder {
-    font-weight: bold;
   }
 }
