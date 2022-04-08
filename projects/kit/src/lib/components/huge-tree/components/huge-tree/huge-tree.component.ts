@@ -53,6 +53,7 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
 
   public treeItemsData: FlatHugeTreeItem[] = [];
   @Output() public nodeClicked: EventEmitter<string> = new EventEmitter<string>();
+  @Output() public scrolledByY: EventEmitter<number> = new EventEmitter<number>();
 
   public treeStateRequestParams$: Observable<HugeTreeState>;
 
@@ -65,6 +66,17 @@ export class HugeTreeComponent implements OnChanges, AfterViewInit {
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processSelectedNodeIdChanges(changes?.selectedNodeId);
+  }
+
+  public onScroll(): void {
+    const scrollTopPx: number = this.viewport.elementRef.nativeElement.scrollTop;
+    this.scrolledByY.emit(scrollTopPx);
+  }
+
+  public setScrollTop(scrollTopPx: number): void {
+    this.viewport.scrollTo({
+      top: scrollTopPx,
+    });
   }
 
   public ngAfterViewInit(): void {
