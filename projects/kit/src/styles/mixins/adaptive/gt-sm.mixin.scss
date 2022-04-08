@@ -2,7 +2,7 @@
 @use './width-more-than.mixin' as *;
 
 @mixin gt-sm() {
-  @include width-more-than($mdBreakPoint) {
+  @include width-more-than($smBreakPoint) {
     @content;
   }
 }
