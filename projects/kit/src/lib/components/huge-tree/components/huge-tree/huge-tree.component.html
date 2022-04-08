@@ -4,6 +4,7 @@
     class="viewport"
     [maxBufferPx]="bufferPx"
     [minBufferPx]="bufferPx"
+    (scroll)="onScroll()"
     #viewport
   >
     <ng-container
