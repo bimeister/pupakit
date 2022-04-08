@@ -157,11 +157,11 @@
   }
 
   &:focus-within {
-    background-color: color(base-white-n300);
+    background-color: color(base-white-n500);
     border-color: transparent;
 
     @include dark-theme-class-parent {
-      background-color: color(base-dark-n300);
+      background-color: color(base-dark-n500);
       border-color: transparent;
     }
 
