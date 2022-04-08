@@ -1,0 +1,29 @@
+<div class="controls-list">
+  <div class="controls-list__block">
+    <pupa-input-text [formControl]="defaultTextControl" [placeholder]="'Enter value'"></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text
+      [styles]="['ghost']"
+      [formControl]="ghostTextControl"
+      [placeholder]="'Enter value'"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text
+      [styles]="['bold']"
+      [formControl]="mediumTextControl"
+      [placeholder]="'Enter value'"
+    ></pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text
+      [styles]="['ghost', 'bold']"
+      [formControl]="largeTextControl"
+      [placeholder]="'Enter value'"
+    ></pupa-input-text>
+  </div>
+</div>
