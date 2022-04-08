@@ -166,12 +166,6 @@
       opacity: 1;
       color: map.get($input_light_styles, focus, placeholder, color);
     }
-    &:not(.input_invalid) {
-      border-color: map.get($input_light_styles, focus, border-color);
-      &:-webkit-autofill {
-        border-color: map.get($input_light_styles, focus, border-color);
-      }
-    }
     background-color: map.get($input_light_styles, focus, background-color);
     &:-webkit-autofill {
       box-shadow: none;
@@ -240,12 +234,6 @@
       &::placeholder {
         color: map.get($input_dark_styles, focus, placeholder, color);
       }
-      &:not(.input_invalid) {
-        border-color: map.get($input_dark_styles, focus, border-color);
-        &:-webkit-autofill {
-          border-color: map.get($input_dark_styles, focus, border-color);
-        }
-      }
       &:-webkit-autofill {
         box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
@@ -287,6 +275,7 @@
 
 :host.ghost input {
   background-color: unset;
+  border-color: transparent;
 }
 
 :host.bold input {
