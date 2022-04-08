@@ -6,7 +6,7 @@ import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
-import { InputStyles } from '../../types/input-style.type';
+import { InputStyleCustomization } from '../../types/input-style.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 const SIZES_LIST: [InputSize, number][] = [
@@ -41,8 +41,10 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public styles: InputStyles[] = ['bold', 'ghost'];
-  public readonly styles$: BehaviorSubject<InputStyles[]> = new BehaviorSubject<InputStyles[]>(['bold', 'ghost']);
+  @Input() public styles: InputStyleCustomization[] = [];
+  public readonly styles$: BehaviorSubject<InputStyleCustomization[]> = new BehaviorSubject<InputStyleCustomization[]>(
+    []
+  );
 
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
@@ -174,8 +176,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.autocomplete$.next(updatedValue);
   }
 
-  private processStylesChange(change: ComponentChange<this, InputStyles[]>): void {
-    const updatedValue: InputStyles[] | undefined = change?.currentValue;
+  private processStylesChange(change: ComponentChange<this, InputStyleCustomization[]>): void {
+    const updatedValue: InputStyleCustomization[] | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
