@@ -8,6 +8,7 @@ import { InputDemoExampleWithResetComponent } from './examples/input-demo-exampl
 import { InputDemoExampleTooltipComponent } from './examples/input-demo-example-tooltip/input-demo-example-tooltip.component';
 import { InputDemoExampleIsPatchedComponent } from './examples/input-demo-example-is-patched/input-demo-example-is-patched.component';
 import { InputDemoExampleAllInputsComponent } from './examples/input-demo-example-all-inputs/input-demo-example-all-inputs.component';
+import { InputDemoExampleStylesComponent } from './examples/input-demo-example-styles/input-demo-example-styles.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { InputDemoExampleAllInputsComponent } from './examples/input-demo-exampl
     InputDemoExampleAllInputsComponent,
     InputDemoExampleTooltipComponent,
     InputDemoExampleIsPatchedComponent,
+    InputDemoExampleStylesComponent,
   ],
   imports: [DemoSharedModule, InputDemoRoutingModule, DirectivesModule],
 })
