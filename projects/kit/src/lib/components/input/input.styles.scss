@@ -129,19 +129,6 @@
     @include small();
   }
 
-  &_ghost {
-    background-color: unset;
-    border-color: transparent;
-  }
-
-  &_bold {
-    font-weight: bold;
-
-    &::placeholder {
-      font-weight: bold;
-    }
-  }
-
   &:hover:not(:focus):not([disabled]) {
     background-color: map.get($input_light_styles, hover, background-color);
     &:-webkit-autofill {
@@ -253,19 +240,6 @@
       }
     }
 
-    &_ghost {
-      background-color: unset;
-      border-color: transparent;
-    }
-
-    &_bold {
-      font-weight: bold;
-
-      &::placeholder {
-        font-weight: bold;
-      }
-    }
-
     &_invalid {
       border-color: map.get($input_dark_styles, invalid, border-color);
       &:-webkit-autofill {
@@ -296,6 +270,36 @@
   .input:not(:focus):not([disabled]) {
     &::placeholder {
       opacity: 1;
+    }
+  }
+}
+
+[class^='input'] {
+  &[class*='ghost'] {
+    background-color: unset;
+    border-color: transparent;
+  }
+
+  &[class*='bold'] {
+    font-weight: bold;
+
+    &::placeholder {
+      font-weight: bold;
+    }
+  }
+
+  @include host-selector-dark-theme() {
+    &[class*='ghost'] {
+      background-color: unset;
+      border-color: transparent;
+    }
+
+    &[class*='bold'] {
+      font-weight: bold;
+
+      &::placeholder {
+        font-weight: bold;
+      }
     }
   }
 }

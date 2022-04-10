@@ -36,6 +36,17 @@ export class InputDemoComponent implements OnInit, OnDestroy {
       value: 'small',
     },
   ];
+  public readonly styleOptions: PropsOption[] = [
+    {
+      caption: 'Ghost',
+      value: 'ghost',
+      isDefault: true,
+    },
+    {
+      caption: 'Bold',
+      value: 'bold',
+    },
+  ];
 
   public readonly validators: ValidatorFn[] = [Validators.required];
 
