@@ -25,6 +25,9 @@ export class PropsSelectComponent extends PropsBase implements OnChanges {
   @Input()
   public options: PropsOption[] = [];
 
+  @Input()
+  public isMultiSelectionEnabled: boolean = false;
+
   public subscription: Subscription = new Subscription();
 
   public caption: string = '';

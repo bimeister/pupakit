@@ -48,13 +48,15 @@
               isPatched: isPatched$ | async,
               invalidTooltipHideOnHover: invalidTooltipHideOnHover$ | async,
               invalidTooltipDisabled: invalidTooltipDisabled$ | async,
-              size: size$ | async
+              size: size$ | async,
+              styles: styles$ | async
             };
             let withReset = withReset;
             let isPatched = isPatched;
             let invalidTooltipHideOnHover = invalidTooltipHideOnHover;
             let invalidTooltipDisabled = invalidTooltipDisabled;
-            let size = size
+            let size = size;
+            let styles = styles
           "
         >
           <div class="controls-list__block">
@@ -71,6 +73,7 @@
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
               [icon]="inputIconFormControl.value"
+              [styles]="styles"
             ></pupa-input-text>
           </div>
 
@@ -86,6 +89,7 @@
               [invalidTooltipContentTemplate]="errorTemplate"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
+              [styles]="styles"
             ></pupa-input-time>
           </div>
         </div>
@@ -163,6 +167,11 @@
         <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the invalid tooltip is disabled.</ng-container>
           <demo-props-switcher #invalidTooltipDisabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="styles" type="InputStyleCustomization[]">
+          <ng-container *demoExampleViewerPropertyDescription>Different input styles.</ng-container>
+          <demo-props-select #styles$ [options]="styleOptions" [isMultiSelectionEnabled]="true"></demo-props-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

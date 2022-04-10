@@ -67,9 +67,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isInvalid$.pipe(map((isInvalid: boolean) => (isInvalid ? 'invalid' : null))),
     this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
     this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
+    this.styles$.pipe(map((styles: InputStyleCustomization[]) => (styles.length > 0 ? styles.join('-') : null))),
   ]).pipe(
-    withLatestFrom(this.styles$),
-    map(([classes, styleClasses]: [string[], string[]]) => [...classes, ...styleClasses]),
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
@@ -183,6 +182,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
       return;
     }
 
-    this.styles$.next(updatedValue);
+    this.styles$.next(Array.isArray(updatedValue) ? updatedValue : [updatedValue]);
   }
 }
