@@ -1,12 +1,12 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, TemplateRef, ViewChild } from '@angular/core';
-import { distinctUntilSerializedChanged, isNil, Nullable } from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
 import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
-import { InputStyleCustomization } from '../../types/input-style.type';
+import { InputStyleCustomization } from '../../types/input-style-customization.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 const SIZES_LIST: [InputSize, number][] = [
@@ -67,7 +67,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isInvalid$.pipe(map((isInvalid: boolean) => (isInvalid ? 'invalid' : null))),
     this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
     this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
-    this.styles$.pipe(map((styles: InputStyleCustomization[]) => (styles.length > 0 ? styles.join('-') : null))),
+    this.styles$.pipe(map((styles: InputStyleCustomization[]) => (!isEmpty(styles) ? styles.join('-') : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes

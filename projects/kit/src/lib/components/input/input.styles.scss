@@ -203,6 +203,21 @@
     }
   }
 
+  &[class*='ghost'] {
+    background-color: unset;
+    &:not(.input_invalid) {
+      border-color: transparent;
+    }
+  }
+
+  &[class*='bold'] {
+    @include font-type-point;
+
+    &::placeholder {
+      @include font-type-point;
+    }
+  }
+
   @include host-selector-dark-theme() {
     color: map.get($input_dark_styles, input, color);
     caret-color: map.get($input_dark_styles, input, caret-color);
@@ -259,6 +274,21 @@
         color: map.get($input_dark_styles, disabled, placeholder, color);
       }
     }
+
+    &[class*='ghost'] {
+      background-color: unset;
+      &:not(.input_invalid) {
+        border-color: transparent;
+      }
+    }
+
+    &[class*='bold'] {
+      @include font-type-point;
+
+      &::placeholder {
+        @include font-type-point;
+      }
+    }
   }
 }
 
@@ -270,40 +300,6 @@
   .input:not(:focus):not([disabled]) {
     &::placeholder {
       opacity: 1;
-    }
-  }
-}
-
-[class^='input'] {
-  &[class*='ghost'] {
-    background-color: unset;
-    &:not(.input_invalid) {
-      border-color: transparent;
-    }
-  }
-
-  &[class*='bold'] {
-    font-weight: bold;
-
-    &::placeholder {
-      font-weight: bold;
-    }
-  }
-
-  @include host-selector-dark-theme() {
-    &[class*='ghost'] {
-      background-color: unset;
-      &:not(.input_invalid) {
-        border-color: transparent;
-      }
-    }
-
-    &[class*='bold'] {
-      font-weight: bold;
-
-      &::placeholder {
-        font-weight: bold;
-      }
     }
   }
 }
