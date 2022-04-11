@@ -9,8 +9,8 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoExampleStylesComponent {
-  public readonly defaultTextControl: FormControl = new FormControl('Default');
-  public readonly ghostTextControl: FormControl = new FormControl('Ghost');
-  public readonly mediumTextControl: FormControl = new FormControl('Bold');
-  public readonly largeTextControl: FormControl = new FormControl('Ghost and bold');
+  public readonly defaultStyleControl: FormControl = new FormControl('Default');
+  public readonly ghostStyleControl: FormControl = new FormControl('Ghost');
+  public readonly boldStyleControl: FormControl = new FormControl('Bold');
+  public readonly ghostBoldStyleControl: FormControl = new FormControl('Ghost and bold');
 }
