@@ -35,7 +35,7 @@
   cursor: pointer;
   outline: none;
   width: 100%;
-  border-radius: 1rem;
+  border-radius: $controlBorderRadius;
   box-sizing: border-box;
   border: 1px solid transparent;
   color: map.get($input_light_styles, input, color);

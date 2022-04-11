@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   box-sizing: border-box;
@@ -20,7 +21,7 @@
 
   cursor: pointer;
 
-  border-radius: 1rem;
+  border-radius: $controlBorderRadius;
   border: 1px solid transparent;
 
   color: color(base-n600);
