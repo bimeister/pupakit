@@ -44,7 +44,7 @@ export class PropsSelectComponent extends PropsBase implements OnChanges {
       const firstOption: PropsOption = currentValue[0];
       const defaultOption: PropsOption = currentValue.find((option: PropsOption) => option.isDefault);
       const optionToSet: PropsOption = defaultOption ?? firstOption;
-      this.formControl.setValue(optionToSet?.value);
+      this.formControl.setValue(this.isMultiSelectionEnabled ? [optionToSet?.value] : optionToSet?.value);
     }
   }
 
@@ -52,7 +52,15 @@ export class PropsSelectComponent extends PropsBase implements OnChanges {
     this.formControl.valueChanges
       .pipe(
         takeUntil(this.unsubscribe$),
-        map((value: string) => this.options.find((item: PropsOption) => item.value === value)?.caption ?? '')
+        map((value: string | string[]) => {
+          if (Array.isArray(value)) {
+            return this.options
+              .filter((item: PropsOption) => value.some((valueItem: string) => valueItem === item.value))
+              .map((item: PropsOption) => item?.caption)
+              .join(', ');
+          }
+          return this.options.find((item: PropsOption) => item.value === value)?.caption ?? '';
+        })
       )
       .subscribe((caption: string) => {
         this.caption = caption;
