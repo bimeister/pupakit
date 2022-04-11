@@ -277,7 +277,9 @@
 [class^='input'] {
   &[class*='ghost'] {
     background-color: unset;
-    border-color: transparent;
+    &:not(.input_invalid) {
+      border-color: transparent;
+    }
   }
 
   &[class*='bold'] {
@@ -291,7 +293,9 @@
   @include host-selector-dark-theme() {
     &[class*='ghost'] {
       background-color: unset;
-      border-color: transparent;
+      &:not(.input_invalid) {
+        border-color: transparent;
+      }
     }
 
     &[class*='bold'] {
