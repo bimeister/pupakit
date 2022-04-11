@@ -182,6 +182,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
       return;
     }
 
-    this.styles$.next(Array.isArray(updatedValue) ? updatedValue : [updatedValue]);
+    this.styles$.next(updatedValue);
   }
 }
