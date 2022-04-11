@@ -40,7 +40,6 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     {
       caption: 'Ghost',
       value: 'ghost',
-      isDefault: true,
     },
     {
       caption: 'Bold',
