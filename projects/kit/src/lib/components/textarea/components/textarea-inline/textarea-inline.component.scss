@@ -1,5 +1,6 @@
 @use 'functions' as *;
 @use 'mixins' as *;
+@use 'variables' as *;
 
 @use './../../textarea.styles';
 
@@ -8,7 +9,7 @@
   padding: 2rem 4rem;
   box-sizing: border-box;
   border: 1px solid;
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
   white-space: nowrap;
   cursor: text;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
