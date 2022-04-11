@@ -44,6 +44,7 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     {
       caption: 'Bold',
       value: 'bold',
+      isDefault: true,
     },
   ];
 
