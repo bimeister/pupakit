@@ -33,7 +33,7 @@
   font-size: 3rem;
   line-height: 4rem;
   @include font-type-caption();
-  padding: 2rem 3rem;
+  padding: 1rem 3rem;
   padding-right: 14px;
 
   &:not(.trigger_disabled) {
