@@ -211,10 +211,10 @@
   }
 
   &[class*='bold'] {
-    @include font-type-point;
+    @include font-type-bold;
 
     &::placeholder {
-      @include font-type-point;
+      @include font-type-bold;
     }
   }
 
@@ -283,10 +283,10 @@
     }
 
     &[class*='bold'] {
-      @include font-type-point;
+      @include font-type-bold;
 
       &::placeholder {
-        @include font-type-point;
+        @include font-type-bold;
       }
     }
   }
