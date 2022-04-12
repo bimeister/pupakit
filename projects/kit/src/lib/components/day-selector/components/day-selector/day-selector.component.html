@@ -1,0 +1,8 @@
+<pupa-day-selector-item
+  *ngFor="let item of localeDaysOfWeek$ | async"
+  [name]="item.localeName"
+  [selected]="isSelected(item.value)"
+  (selectedStateChange)="changeDaySelectState(item.value)"
+  [disabled]="isDisabled$ | async"
+  [size]="size"
+></pupa-day-selector-item>

@@ -58,6 +58,7 @@ import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
 import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
+import { DaySelectorModule } from '@kit/lib/components/day-selector/day-selector.module';
 
 const EXPORTS: any[] = [
   LabelModule,
@@ -117,6 +118,7 @@ const EXPORTS: any[] = [
   PopoverModule,
   DropdownModule,
   DndCloneContainerModule,
+  DaySelectorModule,
 ];
 
 @NgModule({

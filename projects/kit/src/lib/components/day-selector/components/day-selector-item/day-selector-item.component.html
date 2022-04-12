@@ -1,0 +1,12 @@
+<div
+  class="day-selector-item"
+  tabindex="0"
+  [class]="{
+    selected,
+    disabled,
+    'day-selector-item_small': size === 'small'
+  }">
+  <div class="day-selector-item__content">
+    {{ name | titlecase }}
+  </div>
+</div>

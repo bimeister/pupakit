@@ -1,0 +1,25 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  display: inline-flex;
+  padding: 1rem;
+  border-radius: 2rem;
+
+  font-family: 'PT Root UI', sans-serif;
+  font-weight: 400;
+  @include font-size-medium();
+  @include ellipsis-text-overflow();
+
+  background: color(base-white-n500);
+  @include host-selector-dark-theme {
+    background: color(base-dark-n500);
+  }
+
+  color: color(base-n600);
+  @include host-selector-dark-theme {
+    color: color(base-n0);
+  }
+
+}
