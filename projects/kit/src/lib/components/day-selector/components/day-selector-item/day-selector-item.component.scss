@@ -1,0 +1,68 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.day-selector-item {
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  border-radius: 2rem;
+  border: 1rem solid transparent;
+
+  @include transition();
+  transition-property: background-color, border-color;
+
+  &__content {
+    padding: 3rem 2.5rem;
+    border-radius: 2rem;
+  }
+
+  &_small &__content {
+    @include font-size-small();
+    padding: 2rem 1.5rem;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: color(primary-n600);
+  }
+
+  &:hover:not(.selected):not(.disabled) {
+    background: color(base-white-n400);
+    @include host-selector-dark-theme {
+      background: color(base-dark-n400);
+    }
+  }
+
+  &.selected &__content {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.08);
+
+    background: color(base-n0);
+    @include host-selector-dark-theme {
+      background: color(base-dark-n300);
+    }
+  }
+
+  &:hover.selected:not(.disabled) {
+    border-color: color(base-white-n400);
+    @include host-selector-dark-theme {
+      border-color: color(base-dark-n400);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+
+    color: color(base-white-n250);
+    @include host-selector-dark-theme {
+      color: color(base-dark-n250);
+    }
+  }
+
+  &.disabled.selected &__content {
+    background: color(base-white-n300);
+    @include host-selector-dark-theme {
+      background: color(base-dark-n300);
+    }
+  }
+}

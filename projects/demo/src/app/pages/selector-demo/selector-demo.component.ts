@@ -8,6 +8,5 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectorDemoComponent {
-  public readonly formControl: FormControl = new FormControl();
-  public readonly daysOfWeek: string[] = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+  public readonly formControl: FormControl = new FormControl(['mon', 'thu', 'wed', 'fri']);
 }
