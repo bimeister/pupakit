@@ -41,10 +41,10 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public styles: InputStyleCustomization[] = [];
-  public readonly styles$: BehaviorSubject<InputStyleCustomization[]> = new BehaviorSubject<InputStyleCustomization[]>(
-    []
-  );
+  @Input() public customStyles: InputStyleCustomization[] = [];
+  public readonly customStyles$: BehaviorSubject<InputStyleCustomization[]> = new BehaviorSubject<
+    InputStyleCustomization[]
+  >([]);
 
   @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
@@ -67,7 +67,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.isInvalid$.pipe(map((isInvalid: boolean) => (isInvalid ? 'invalid' : null))),
     this.isFilled$.pipe(map((filled: boolean) => (filled ? 'filled' : null))),
     this.isDisabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
-    this.styles$.pipe(map((styles: InputStyleCustomization[]) => (!isEmpty(styles) ? styles.join('-') : null))),
+    this.customStyles$.pipe(map((styles: InputStyleCustomization[]) => (!isEmpty(styles) ? styles.join('-') : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -123,7 +123,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processAutocompleteChange(changes?.autocomplete);
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
-    this.processStylesChange(changes?.styles);
+    this.processStylesChange(changes?.customStyles);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -182,6 +182,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
       return;
     }
 
-    this.styles$.next(updatedValue);
+    this.customStyles$.next(updatedValue);
   }
 }
