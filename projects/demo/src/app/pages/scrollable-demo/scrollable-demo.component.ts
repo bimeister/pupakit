@@ -31,4 +31,10 @@ export class ScrollableDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
   };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
+  };
 }
