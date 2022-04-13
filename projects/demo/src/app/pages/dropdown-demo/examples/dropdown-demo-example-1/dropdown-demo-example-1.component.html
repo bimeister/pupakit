@@ -1,26 +1,18 @@
-<pupa-tag
-  [clickable]="true"
-  color="primary"
-  [pupaDropdown]="dropdownContent"
-  [pupaDropdownWidthType]="widthType"
-  [pupaDropdownDisabled]="disabled"
-  #dropdown="pupaDropdown"
->
-  {{ (dropdown.opened$ | async) ? 'CLOSE' : 'OPEN' }}
-  <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-chevron-up' : 'app-chevron-down'"></pupa-icon>
-</pupa-tag>
+<div class="trigger-container">
+  <pupa-tag
+    color="primary"
+    #dropdown="pupaDropdown"
+    [clickable]="true"
+    [pupaDropdown]="dropdownContent"
+    [pupaDropdownWidthType]="widthType"
+    [pupaDropdownDisabled]="disabled"
+  >
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-chevron-up' : 'app-chevron-down'"></pupa-icon>
+  </pupa-tag>
+</div>
 
 <ng-template #dropdownContent>
-  <div class="dropdown-container">
-    <div class="dropdown-item">
-      <div class="dropdown-item__preview">
-        <pupa-icon class="dropdown-item__icon" name="ios-image"></pupa-icon>
-        <span>image.jpg</span>
-      </div>
-      <div class="dropdown-item__actions">
-        <pupa-button-icon icon="ios-download" kind="subtle"></pupa-button-icon>
-        <pupa-button-icon icon="app-trash" kind="subtle"></pupa-button-icon>
-      </div>
-    </div>
-  </div>
+  <div>sample content</div>
+  <div>🎳</div>
 </ng-template>
