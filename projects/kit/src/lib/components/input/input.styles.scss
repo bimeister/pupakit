@@ -35,6 +35,7 @@
   cursor: pointer;
   outline: none;
   width: 100%;
+  padding: 2rem 2rem 2rem 3rem;
   border-radius: $controlBorderRadius;
   box-sizing: border-box;
   border: 1px solid transparent;
@@ -109,7 +110,6 @@
 
   &_large {
     height: 10rem;
-    padding: 2rem 5rem;
     @include large();
     &::placeholder {
       @include font-type-caption();
@@ -120,12 +120,10 @@
     font-size: 3rem;
     line-height: 4rem;
     @include font-type-caption();
-    padding: 2rem 4rem;
     @include medium();
   }
   &_small {
     height: 6rem;
-    padding: 2rem 3rem;
     @include small();
   }
 
