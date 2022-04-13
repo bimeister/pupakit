@@ -8,7 +8,7 @@
   display: block;
   padding: 2rem 4rem;
   box-sizing: border-box;
-  border: 1px solid;
+  border: none;
   border-radius: $controlBorderRadius;
   white-space: nowrap;
   cursor: text;
@@ -35,11 +35,9 @@
 
 .textarea-inline {
   background-color: color(base-white-n500);
-  border-color: color(base-white-n500);
 
   @include dark-theme-class-parent {
     background-color: color(base-dark-n500);
-    border-color: color(base-dark-n500);
   }
 }
 
@@ -87,10 +85,10 @@
     }
 
     &.textarea-inline_invalid {
-      border-color: color(red-n400);
+      border: 1px solid color(red-n400);
 
       @include dark-theme-class-parent {
-        border-color: color(red-n400);
+        border: 1px solid color(red-n400);
       }
     }
   }
@@ -193,13 +191,14 @@
 
 .overlay-textarea {
   .textarea:not(.textarea_disabled) {
+    border-color: transparent;
     &:focus-within {
       background-color: color(base-n0);
-      border-color: color(base-white-n275);
+      border: 1px solid color(base-white-n275);
 
       @include dark-theme-class-parent {
         background-color: color(base-n600);
-        border-color: color(base-dark-n275);
+        border: 1px solid color(base-dark-n275);
       }
 
       .textarea__control::placeholder {

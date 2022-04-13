@@ -22,7 +22,7 @@
   cursor: pointer;
 
   border-radius: $controlBorderRadius;
-  border: 1px solid transparent;
+  border: none;
 
   color: color(base-n600);
   background-color: color(base-white-n500);
@@ -48,7 +48,7 @@
     }
 
     &.trigger_invalid {
-      border-color: color(red-n400);
+      border: 1px solid color(red-n400);
     }
   }
 
@@ -67,7 +67,6 @@
   }
 
   &_disabled {
-    border-color: transparent;
     background-color: color(base-white-n500);
     color: color(base-dark-n250);
     cursor: not-allowed;
