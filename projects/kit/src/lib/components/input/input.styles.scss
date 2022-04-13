@@ -38,7 +38,7 @@
   padding: 2rem 2rem 2rem 3rem;
   border-radius: $controlBorderRadius;
   box-sizing: border-box;
-  border: 1px solid transparent;
+  border: none;
   color: map.get($input_light_styles, input, color);
   caret-color: map.get($input_light_styles, input, caret-color);
   background-color: map.get($input_light_styles, input, background-color);
@@ -47,7 +47,6 @@
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
   &:-webkit-autofill {
-    border-color: map.get($input_light_styles, input, background-color);
     -webkit-text-fill-color: map.get($input_light_styles, input, color);
     box-shadow: none;
     -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
@@ -133,18 +132,11 @@
       box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
     }
-    &:-webkit-autofill {
-      &:not(.input_invalid) {
-        border-color: map.get($input_light_styles, hover, background-color);
-      }
-    }
   }
 
   &:active:not(:focus):not([disabled]) {
-    border-color: transparent;
     background-color: map.get($input_light_styles, active, background-color);
     &:-webkit-autofill {
-      border-color: map.get($input_light_styles, active, background-color);
       box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, active, background-color) inset;
     }
@@ -172,14 +164,13 @@
   }
 
   &_invalid {
-    border-color: map.get($input_light_styles, invalid, border-color);
+    border: 1px solid map.get($input_light_styles, invalid, border-color);
     &:-webkit-autofill {
-      border-color: map.get($input_light_styles, invalid, border-color);
+      border: 1px solid map.get($input_light_styles, invalid, border-color);
     }
   }
 
   &[disabled] {
-    border-color: transparent;
     cursor: not-allowed;
     color: map.get($input_light_styles, disabled, color);
     background-color: map.get($input_light_styles, disabled, background-color);
@@ -187,7 +178,6 @@
       -webkit-text-fill-color: map.get($input_light_styles, disabled, color);
       box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, disabled, background-color) inset;
-      border-color: map.get($input_light_styles, disabled, background-color);
     }
     &::selection {
       background: transparent;
@@ -203,9 +193,6 @@
 
   &[class*='ghost'] {
     background-color: unset;
-    &:not(.input_invalid) {
-      border-color: transparent;
-    }
   }
 
   &[class*='bold'] {
@@ -224,7 +211,6 @@
       -webkit-text-fill-color: map.get($input_dark_styles, input, color);
       box-shadow: none;
       -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, input, background-color) inset;
-      border-color: map.get($input_dark_styles, input, background-color);
     }
     &::placeholder {
       color: map.get($input_dark_styles, input, placeholder, color);
@@ -234,9 +220,6 @@
       &:-webkit-autofill {
         box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
-        &:not(.input_invalid) {
-          border-color: map.get($input_dark_styles, hover, background-color);
-        }
       }
     }
     &:active:not(:focus):not([disabled]) {
@@ -254,9 +237,9 @@
     }
 
     &_invalid {
-      border-color: map.get($input_dark_styles, invalid, border-color);
+      border: 1px solid map.get($input_dark_styles, invalid, border-color);
       &:-webkit-autofill {
-        border-color: map.get($input_dark_styles, invalid, border-color);
+        border: 1px solid map.get($input_dark_styles, invalid, border-color);
       }
     }
     &[disabled] {
@@ -266,7 +249,6 @@
         -webkit-text-fill-color: map.get($input_dark_styles, disabled, color);
         box-shadow: none;
         -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, disabled, background-color) inset;
-        border-color: map.get($input_dark_styles, disabled, background-color);
       }
       &::placeholder {
         color: map.get($input_dark_styles, disabled, placeholder, color);
@@ -275,9 +257,6 @@
 
     &[class*='ghost'] {
       background-color: unset;
-      &:not(.input_invalid) {
-        border-color: transparent;
-      }
     }
 
     &[class*='bold'] {

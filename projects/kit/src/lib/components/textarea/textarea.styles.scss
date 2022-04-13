@@ -17,7 +17,7 @@
 .textarea {
   display: block;
   padding: 0;
-  border: 1px solid;
+  border: none;
   border-radius: $controlBorderRadius;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
@@ -105,12 +105,10 @@
 .textarea {
   color: color(base-n600);
   background-color: color(base-white-n500);
-  border-color: color(base-white-n500);
 
   @include dark-theme-class-parent {
     color: color(base-n0);
     background-color: color(base-dark-n500);
-    border-color: color(base-dark-n500);
   }
 }
 
@@ -159,11 +157,9 @@
 
   &:focus-within {
     background-color: color(base-white-n500);
-    border-color: transparent;
 
     @include dark-theme-class-parent {
       background-color: color(base-dark-n500);
-      border-color: transparent;
     }
 
     .textarea__control {
@@ -184,10 +180,10 @@
   }
 
   &.textarea_invalid {
-    border-color: color(red-n400);
+    border: 1px solid color(red-n400);
 
     @include dark-theme-class-parent {
-      border-color: color(red-n400);
+      border: 1px solid color(red-n400);
     }
   }
 }
