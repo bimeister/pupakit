@@ -19,6 +19,16 @@ export class ScrollableDemoComponent {
       value: 'small',
     },
   ];
+  public readonly positionOptions: PropsOption[] = [
+    {
+      caption: 'Internal',
+      value: 'internal',
+    },
+    {
+      caption: 'External',
+      value: 'external',
+    },
+  ];
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
