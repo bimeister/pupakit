@@ -1,4 +1,10 @@
-.scrollable-box {
-  width: 400px;
-  height: 400px;
+.row {
+  display: flex;
+  justify-content: space-between;
+  .scrollable-box {
+    width: 46%;
+    box-sizing: border-box;
+
+    height: 400px;
+  }
 }

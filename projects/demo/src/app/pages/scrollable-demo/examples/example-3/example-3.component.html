@@ -1,25 +1,43 @@
-<pupa-scrollable class="scrollable-box">
-  <div class="text-content" [style.width.px]="contentWidth$ | async" [style.height.px]="contentHeight$ | async">
-    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-    standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
-    type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-    remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-    Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of
-    Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it
-    to make a type specimen book. It has survived not only five centuries, but also the leap into electronic
-    typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
-    containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
-    versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-    been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-    scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
-    electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
-    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
-    PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting
-    industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took
-    a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also
-    the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like
-    Aldus PageMaker including versions of Lorem Ipsum.
-  </div>
-</pupa-scrollable>
+<div class="row">
+  <pupa-scrollable class="scrollable-box" [syncWith]="[otherScrollable]">
+    <div class="text-content">
+      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+      standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a
+      type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+      remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+      Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+      of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+      the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+      scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into
+      electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of
+      Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus
+      PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and typesetting
+      industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer
+      took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+      also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with
+      the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software
+      like Aldus PageMaker including versions of Lorem Ipsum. Lorem Ipsum is simply dummy text of the printing and
+      typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an
+      unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five
+      centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+      the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop
+      publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+    </div>
+  </pupa-scrollable>
+
+  <pupa-scrollable class="scrollable-box" #otherScrollable>
+    <div class="text-content">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum distinctio soluta iusto earum nemo rerum animi,
+      doloribus nesciunt debitis omnis voluptates esse quaerat vel veritatis, assumenda nihil consequuntur, mollitia aut
+      quam? Mollitia ipsum pariatur veritatis et officia exercitationem dolore, optio corporis labore suscipit nemo quo
+      esse animi magnam eligendi tempore consequuntur enim! Maiores iusto voluptates, dignissimos rem et provident
+      reprehenderit eius quam facilis alias laudantium aperiam, minima ex veritatis ipsum itaque doloribus blanditiis
+      natus tempore. Temporibus ipsum, voluptatibus molestias expedita, et qui voluptatem ex praesentium deserunt
+      repellendus odio fugit molestiae nostrum? Iure possimus dicta placeat sunt unde magni illo sit, molestiae dolorem
+      doloremque voluptas id quas voluptatem cum. Omnis, quas maxime similique libero est aspernatur ducimus quidem id
+      eligendi iure, explicabo ipsum dolorum, ab excepturi! Magnam nostrum numquam quam tenetur officia veniam inventore
+      in eveniet asperiores placeat quasi quo sit aliquid nesciunt unde, accusamus error ullam earum. Provident, numquam
+      magnam?
+    </div>
+  </pupa-scrollable>
+</div>
