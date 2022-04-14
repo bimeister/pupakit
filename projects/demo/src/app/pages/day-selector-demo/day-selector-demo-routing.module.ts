@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SelectorDemoComponent } from './selector-demo.component';
+import { DaySelectorDemoComponent } from './day-selector-demo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SelectorDemoComponent,
+    component: DaySelectorDemoComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SelectorDemoRoutingModule {}
+export class DaySelectorDemoRoutingModule {}

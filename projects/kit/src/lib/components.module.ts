@@ -40,7 +40,6 @@ import { RatingModule } from './components/rating/rating.module';
 import { ScrollableModule } from './components/scrollable/scrollable.module';
 import { SearchFieldModule } from './components/search-field/search-field.module';
 import { SelectModule } from './components/select/select.module';
-import { SelectorModule } from './components/selector/selector.module';
 import { SkeletonModule } from './components/skeleton/skeleton.module';
 import { SpinnerModule } from './components/spinner/spinner.module';
 import { StatusModule } from './components/status/status.module';
@@ -58,7 +57,7 @@ import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
 import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
-import { DaySelectorModule } from '@kit/lib/components/day-selector/day-selector.module';
+import { DaySelectorModule } from './components/day-selector/day-selector.module';
 
 const EXPORTS: any[] = [
   LabelModule,
@@ -82,7 +81,6 @@ const EXPORTS: any[] = [
   RadioGroupModule,
   RatingModule,
   SearchFieldModule,
-  SelectorModule,
   SpinnerModule,
   SwitcherModule,
   TabsModule,

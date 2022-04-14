@@ -1,21 +1,18 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  OnInit,
-  OnDestroy,
-  Input,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { DaySelectorStateService } from '@kit/lib/components/day-selector/services/day-selector-state.service';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import { isNil, Nullable } from '@bimeister/utilities';
-import { LocaleDayFormatterService } from '@kit/lib/components/day-selector/services/locale-day-formatter.service';
-import { DayOfWeek } from '@kit/lib/components/day-selector/types/day-of-week';
-import { DaySelectorItem } from '@kit/lib/components/day-selector/types/day-selector-item';
-import { DEFAULT_LOCALE } from '@kit/lib/components/day-selector/constants/default-locale.const';
-import { DaySelectorSize } from '@kit/lib/components/day-selector/constants/day-selector-size.const';
+import { combineLatest, Observable } from 'rxjs';
+import { isNil } from '@bimeister/utilities';
+import { isEmpty } from '@bimeister/utilities/common';
+import { map, tap } from 'rxjs/operators';
+import { DaySelectorStateService } from '../../services/day-selector-state.service';
+import { LocaleDayFormatterService } from '../../services/locale-day-formatter.service';
+import { DaySelectorSize } from '../../constants/day-selector-size.const';
+import { DaySelectorItem } from '../../interfaces/day-selector-item.interface';
+import { DaySelectionStateMap } from '../../types/day-selection-state-map';
+import { DayOfWeek } from '../../types/day-of-week';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
+import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
+import { LocaleDayNames } from '../../types/locale-day-names';
 
 @Component({
   selector: 'pupa-day-selector',
@@ -25,72 +22,80 @@ import { DaySelectorSize } from '@kit/lib/components/day-selector/constants/day-
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DaySelectorStateService, LocaleDayFormatterService],
 })
-export class DaySelectorComponent implements ControlValueAccessor, OnInit, OnDestroy {
+export class DaySelectorComponent implements ControlValueAccessor {
   @Input() public size: DaySelectorSize = 'medium';
 
   @Input() public set locale(value: string) {
-    if (isNil(value) || value === '') this.localeDateFormatter.locale = DEFAULT_LOCALE;
-    else this.localeDateFormatter.locale = value;
+    this.localeDateFormatter.locale = value;
   }
 
-  public readonly selectedDays$: Observable<DayOfWeek[]> = this.daySelectorState.selectedDays$;
   public readonly isDisabled$: Observable<boolean> = this.daySelectorState.isDisabled$;
-  public readonly localeDaysOfWeek$: Observable<DaySelectorItem[]> = this.localeDateFormatter.localeDaysOfWeek$;
+  public readonly selectorItems$: Observable<DaySelectorItem[]> = combineLatest([
+    this.daySelectorState.daysOfWeek$,
+    this.localeDateFormatter.localeNames$,
+  ]).pipe(
+    map(([daysOfWeek, localeNames]: [DaySelectionStateMap, LocaleDayNames]) => {
+      const selectorItems: DaySelectorItem[] = [];
+      daysOfWeek.forEach((isSelected: boolean, day: DayOfWeek) => {
+        selectorItems.push({
+          isSelected,
+          key: day,
+          localeName: localeNames[day],
+        });
+      });
+      return selectorItems;
+    }),
+    tap(this.handleSelectedDaysChanged.bind(this))
+  );
 
-  private updateSelectedDays: Nullable<(days: DayOfWeek[]) => void> = null;
-  private onTouched: Nullable<() => void> = null;
-
-  private subscription: Subscription;
+  private onChangeCallback: OnChangeCallback<DayOfWeek[]>;
+  private onTouchedCallback: OnTouchedCallback;
 
   constructor(
     private readonly daySelectorState: DaySelectorStateService,
     private readonly localeDateFormatter: LocaleDayFormatterService,
-    private readonly cdr: ChangeDetectorRef,
     ngControl: NgControl
   ) {
-    if (!isNil(ngControl)) ngControl.valueAccessor = this;
+    if (!isNil(ngControl)) {
+      ngControl.valueAccessor = this;
+    }
   }
 
-  public ngOnInit(): void {
-    this.subscription = this.handleSelectedChanges();
+  public changeDaySelectionState(day: DayOfWeek): void {
+    this.daySelectorState.changeDaysSelectionState([day]);
   }
 
-  public ngOnDestroy(): void {
-    this.subscription?.unsubscribe();
+  public writeValue(days: DayOfWeek[]): void {
+    this.daySelectorState.changeDaysSelectionState(isEmpty(days) ? [] : days);
   }
 
-  public isSelected(day: DayOfWeek): boolean {
-    return this.daySelectorState.isSelected(day);
+  public registerOnChange(onChangeCallback: OnChangeCallback<DayOfWeek[]>): void {
+    this.onChangeCallback = onChangeCallback;
   }
 
-  public changeDaySelectState(day: DayOfWeek): void {
-    this.daySelectorState.changeDaySelectState(day);
-  }
-
-  public writeValue(days: DayOfWeek[] | string | null): void {
-    if (isNil(days) || days === '') this.daySelectorState.setSelectedDays([]);
-    else this.daySelectorState.setSelectedDays(days as DayOfWeek[]);
-  }
-
-  public registerOnChange(fn: (selectedDays: DayOfWeek[]) => void): void {
-    this.updateSelectedDays = fn;
-  }
-
-  public registerOnTouched(fn: () => void): void {
-    this.onTouched = fn;
+  public registerOnTouched(onTouchedCallback: OnTouchedCallback): void {
+    this.onTouchedCallback = onTouchedCallback;
   }
 
   public setDisabledState(isDisabled: boolean): void {
-    this.daySelectorState.setDisabled(isDisabled);
+    this.daySelectorState.disabled = isDisabled;
   }
 
-  private handleSelectedChanges(): Subscription {
-    return this.selectedDays$.subscribe((days: DayOfWeek[]) => {
-      if (this.onTouched !== null) this.onTouched();
+  public trackByFunc(_: number, item: DaySelectorItem): string {
+    return item.key;
+  }
 
-      if (this.updateSelectedDays !== null) this.updateSelectedDays(days);
+  private handleSelectedDaysChanged(selectorItems: DaySelectorItem[]): void {
+    if (typeof this.onTouchedCallback === 'function') {
+      this.onTouchedCallback();
+    }
 
-      this.cdr.markForCheck();
-    });
+    if (typeof this.onChangeCallback === 'function') {
+      const selectedDays: DayOfWeek[] = selectorItems
+        .filter((item: DaySelectorItem) => item.isSelected)
+        .map((item: DaySelectorItem) => item.key);
+
+      this.onChangeCallback(selectedDays);
+    }
   }
 }

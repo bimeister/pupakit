@@ -70,7 +70,7 @@ export class SidebarComponent {
         { title: 'Breadcrumbs', link: '/kit/breadcrumbs' },
         { title: 'Spinner & loader', link: '/kit/spinner' },
         { title: 'Rating', link: '/kit/rating' },
-        { title: 'Selector', link: '/kit/selector' },
+        { title: 'Day selector', link: '/kit/day-selector' },
         { title: 'Link', link: '/kit/link' },
         { title: 'Timer', link: '/kit/timer' },
         { title: 'Counter', link: '/kit/counter' },

@@ -7,8 +7,7 @@
   padding: 1rem;
   border-radius: 2rem;
 
-  font-family: 'PT Root UI', sans-serif;
-  font-weight: 400;
+  @include font-type-caption();
   @include font-size-medium();
   @include ellipsis-text-overflow();
 

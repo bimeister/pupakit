@@ -1,22 +1,17 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 
-const BASE_SRC: string = 'selector-demo/examples';
+const BASE_SRC: string = 'day-selector-demo/examples';
 
 @Component({
   selector: 'demo-select',
-  styleUrls: ['./selector-demo.component.scss'],
-  templateUrl: './selector-demo.component.html',
+  styleUrls: ['./day-selector-demo.component.scss'],
+  templateUrl: './day-selector-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectorDemoComponent {
+export class DaySelectorDemoComponent {
   public readonly formControl: FormControl = new FormControl([]);
-  public readonly locale: FormControl = new FormControl('en-US');
   public readonly size: FormControl = new FormControl('medium');
-
-  public readonly localeValue$: Observable<string> = this.locale.valueChanges.pipe(debounceTime(1000));
 
   public plainDemoDaySelectorExample: Record<string, string> = {
     HTML: `${BASE_SRC}/demo-plain-day-selector-example/demo-plain-day-selector-example.component.html`,

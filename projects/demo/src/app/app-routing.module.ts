@@ -43,7 +43,7 @@ import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.mo
 import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.module';
 import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
 import { SelectDemoModule } from './pages/select-demo/select-demo.module';
-import { SelectorDemoModule } from './pages/selector-demo/selector-demo.module';
+import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
 import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { StepperDemoModule } from './pages/stepper-demo/stepper-demo.module';
@@ -286,9 +286,11 @@ const demoRoutes: Routes = [
           ),
       },
       {
-        path: 'selector',
-        loadChildren: (): Promise<Type<SelectorDemoModule>> =>
-          import('./pages/selector-demo/selector-demo.module').then((module: any) => module.SelectorDemoModule),
+        path: 'day-selector',
+        loadChildren: (): Promise<Type<DaySelectorDemoModule>> =>
+          import('./pages/day-selector-demo/day-selector-demo.module').then(
+            (module: any) => module.DaySelectorDemoModule
+          ),
       },
       {
         path: 'uploads',
