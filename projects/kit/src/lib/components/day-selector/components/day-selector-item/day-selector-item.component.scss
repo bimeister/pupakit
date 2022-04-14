@@ -13,13 +13,13 @@
   transition-property: background-color, border-color;
 
   &__content {
-    padding: 3rem 2.5rem;
+    padding: 3rem;
     border-radius: 2rem;
   }
 
   &_small &__content {
     @include font-size-small();
-    padding: 2rem 1.5rem;
+    padding: 2rem;
   }
 
   &:focus {

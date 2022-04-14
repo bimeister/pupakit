@@ -1,1 +1,69 @@
-<pupa-day-selector [formControl]="formControl"></pupa-day-selector>
+<h1>Day selector</h1>
+
+<demo-example-viewer>
+  <pupa-tabs-container>
+    <pupa-tabs>
+      <pupa-tabs-item name="Description and Examples">Description and Examples</pupa-tabs-item>
+      <pupa-tabs-item name="Api">Api</pupa-tabs-item>
+    </pupa-tabs>
+
+    <pupa-tabs-content>
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Description and Examples'">
+        <h2>Plain selector example</h2>
+        <pupa-code-container [content]="plainDemoDaySelectorExample">
+          <demo-plain-day-selector-example *pupaCodeContainerPreviewTemplate></demo-plain-day-selector-example>
+        </pupa-code-container>
+
+        <h2>Items size example</h2>
+        <pupa-code-container [content]="itemSizeDaySelectorExample">
+          <demo-item-size-day-selector-example *pupaCodeContainerPreviewTemplate></demo-item-size-day-selector-example>
+        </pupa-code-container>
+
+        <h2>Locale example</h2>
+        <pupa-code-container [content]="localeDaySelectorExample">
+          <demo-locale-day-selector-example *pupaCodeContainerPreviewTemplate></demo-locale-day-selector-example>
+        </pupa-code-container>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Api'">
+        <demo-example-viewer-content>
+          <pupa-day-selector
+            [formControl]="formControl"
+            [size]="size.value"
+            [locale]="localeValue$ | async"
+          ></pupa-day-selector>
+        </demo-example-viewer-content>
+
+        <h2>Properties</h2>
+        <demo-example-viewer-property name="size" decoratorName="input" type="small | medium">
+          <ng-template demoExampleViewerPropertyDescription> Change size of day selector elements </ng-template>
+
+          <pupa-select class="select" [formControl]="size">
+            <pupa-select-trigger>
+              {{ size.value }}
+            </pupa-select-trigger>
+
+            <pupa-select-dropdown>
+              <pupa-select-options-container>
+                <pupa-select-option value="small">small</pupa-select-option>
+                <pupa-select-option value="medium">medium</pupa-select-option>
+              </pupa-select-options-container>
+            </pupa-select-dropdown>
+          </pupa-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="locale" decoratorName="input" type="string">
+          <p class="locale-description" *demoExampleViewerPropertyDescription>
+            Set locale of selector elements in format
+            <a
+              href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument"
+              >LCID tag</a
+            >. If the locale is not found or not supported, the default system locale will be used.
+          </p>
+
+          <pupa-input-text [formControl]="locale"></pupa-input-text>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </pupa-tabs-content>
+  </pupa-tabs-container>
+</demo-example-viewer>
