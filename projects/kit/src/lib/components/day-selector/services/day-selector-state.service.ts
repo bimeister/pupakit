@@ -1,31 +1,38 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { DayOfWeek } from '@kit/lib/components/day-selector/types/day-of-week';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+import { DayOfWeek } from '../types/day-of-week';
+import { DaySelectionStateMap } from '../types/day-selection-state-map';
 
 @Injectable()
 export class DaySelectorStateService {
-  private selectedDays: DayOfWeek[] = [];
+  private readonly daySelectionStateMap: DaySelectionStateMap = new Map<DayOfWeek, boolean>([
+    ['mon', false],
+    ['tue', false],
+    ['wed', false],
+    ['thu', false],
+    ['fri', false],
+    ['sat', false],
+    ['sun', false],
+  ]);
 
-  public readonly selectedDays$: BehaviorSubject<DayOfWeek[]> = new BehaviorSubject<DayOfWeek[]>(this.selectedDays);
+  private readonly daysWithSelectionStateChanged$: BehaviorSubject<DayOfWeek[]> = new BehaviorSubject<DayOfWeek[]>([]);
+
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly daysOfWeek$: Observable<DaySelectionStateMap> = this.daysWithSelectionStateChanged$.pipe(
+    tap((selectionChangedDays: DayOfWeek[]) => {
+      selectionChangedDays.forEach((day: DayOfWeek) => {
+        this.daySelectionStateMap.set(day, !this.daySelectionStateMap.get(day));
+      });
+    }),
+    map(() => this.daySelectionStateMap)
+  );
 
-  public setSelectedDays(days: DayOfWeek[]): void {
-    this.selectedDays = days;
-    this.selectedDays$.next(this.selectedDays);
-  }
-
-  public setDisabled(isDisabled: boolean): void {
+  public set disabled(isDisabled: boolean) {
     this.isDisabled$.next(isDisabled);
   }
 
-  public isSelected(day: DayOfWeek): boolean {
-    return this.selectedDays.includes(day);
-  }
-
-  public changeDaySelectState(day: DayOfWeek): void {
-    if (this.isSelected(day)) this.selectedDays.splice(this.selectedDays.indexOf(day), 1);
-    else this.selectedDays.push(day);
-
-    this.selectedDays$.next(this.selectedDays);
+  public changeDaysSelectionState(days: DayOfWeek[]): void {
+    this.daysWithSelectionStateChanged$.next(days);
   }
 }

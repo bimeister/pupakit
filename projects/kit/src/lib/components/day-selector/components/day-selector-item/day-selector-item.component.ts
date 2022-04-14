@@ -1,13 +1,5 @@
-import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  Input,
-  HostListener,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { DaySelectorSize } from '@kit/lib/components/day-selector/constants/day-selector-size.const';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
+import { DaySelectorSize } from '../../constants/day-selector-size.const';
 
 @Component({
   selector: 'pupa-day-selector-item',
@@ -17,7 +9,7 @@ import { DaySelectorSize } from '@kit/lib/components/day-selector/constants/day-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DaySelectorItemComponent {
-  @Input() public readonly name: string;
+  @Input() public name: string;
   @Input() public size: DaySelectorSize;
 
   @Input() public selected: boolean = false;
@@ -25,15 +17,19 @@ export class DaySelectorItemComponent {
 
   @Input() public disabled: boolean = false;
 
-  @HostListener('mousedown', ['$event'])
   public onMouseDown(event: MouseEvent): void {
     event.preventDefault();
-    if (!this.disabled) this.selectedStateChange.next();
+    if (this.disabled) {
+      return;
+    }
+    this.selectedStateChange.next();
   }
 
-  @HostListener('keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent): void {
     const ENTER_EVENT_CODE: string = 'Enter';
-    if (!this.disabled && event.code === ENTER_EVENT_CODE) this.selectedStateChange.next();
+    if (this.disabled || event.code !== ENTER_EVENT_CODE) {
+      return;
+    }
+    this.selectedStateChange.next();
   }
 }

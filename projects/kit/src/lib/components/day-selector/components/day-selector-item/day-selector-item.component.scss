@@ -1,6 +1,8 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
+$box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
+
 .day-selector-item {
   box-sizing: border-box;
 
@@ -15,6 +17,7 @@
   &__content {
     padding: 3rem;
     border-radius: 2rem;
+    text-transform: capitalize;
   }
 
   &_small &__content {
@@ -35,7 +38,7 @@
   }
 
   &.selected &__content {
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.08);
+    box-shadow: 1px 1px 5px $box-shadow-selector-item-color;
 
     background: color(base-n0);
     @include host-selector-dark-theme {

@@ -1,13 +1,13 @@
 <div
   class="day-selector-item"
   tabindex="0"
-  [class]="{
-    selected,
-    disabled,
-    'day-selector-item_small': size === 'small'
-  }"
+  [class.selected]="selected"
+  [class.disabled]="disabled"
+  [class.day-selector-item_small]="size === 'small'"
+  (mousedown)="onMouseDown($event)"
+  (keydown)="onKeyDown($event)"
 >
   <div class="day-selector-item__content">
-    {{ name | titlecase }}
+    {{ name }}
   </div>
 </div>

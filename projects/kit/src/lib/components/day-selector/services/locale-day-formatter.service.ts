@@ -1,51 +1,32 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { DAYS_OF_WEEK } from '@kit/lib/components/day-selector/constants/days-of-week.const';
-import { DaySelectorItem } from '@kit/lib/components/day-selector/types/day-selector-item';
-import { DEFAULT_LOCALE } from '@kit/lib/components/day-selector/constants/default-locale.const';
+import { Inject, Injectable, Optional } from '@angular/core';
+import { DayOfWeek } from '../types/day-of-week';
+import { isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { DEFAULT_LOCALE } from '../constants/default-locale.const';
+import { LocaleDayNames } from '../types/locale-day-names';
+import { DAY_SELECTOR_CONFIG_TOKEN } from '../../../../internal/constants/tokens/day-selector-config.token';
+import { DaySelectorConfig } from '../../../../internal/declarations/interfaces/day-selector-config.interface';
+import { DEFAULT_DAY_SELECTOR_CONFIG } from '../constants/default-day-selector-config.const';
 
 @Injectable()
 export class LocaleDayFormatterService {
-  private currentLocale: string = DEFAULT_LOCALE;
+  private readonly translates: Record<string, Record<DayOfWeek, string>>;
 
-  public localeDaysOfWeek$: BehaviorSubject<DaySelectorItem[]> = new BehaviorSubject<DaySelectorItem[]>(
-    LocaleDayFormatterService.getLocaleDaysOfWeek(this.currentLocale)
+  private readonly currentLocale$: BehaviorSubject<string> = new BehaviorSubject<string>(DEFAULT_LOCALE);
+
+  public readonly localeNames$: Observable<LocaleDayNames> = this.currentLocale$.pipe(
+    map((locale: string) => this.translates[locale])
   );
 
-  public set locale(locale: string) {
-    if (locale === DEFAULT_LOCALE && this.currentLocale === DEFAULT_LOCALE) return;
-
-    this.currentLocale = locale;
-    this.localeDaysOfWeek$.next(LocaleDayFormatterService.getLocaleDaysOfWeek(this.currentLocale));
+  constructor(@Optional() @Inject(DAY_SELECTOR_CONFIG_TOKEN) daySelectorConfig?: DaySelectorConfig) {
+    const config: DaySelectorConfig = !isNil(daySelectorConfig) ? daySelectorConfig : DEFAULT_DAY_SELECTOR_CONFIG;
+    this.translates = config.translates;
   }
 
-  private static getLocaleDaysOfWeek(locale: string): DaySelectorItem[] {
-    const datesOfWeek: Date[] = LocaleDayFormatterService.generateWeekDates();
+  public set locale(value: string) {
+    if (isNil(this.translates[value])) throw new Error('No translates for current locale');
 
-    const dateFormatter: Intl.DateTimeFormat = new Intl.DateTimeFormat(locale, {
-      weekday: 'short',
-    });
-
-    return datesOfWeek.map((date: Date, idx: number) => ({
-      value: DAYS_OF_WEEK[idx],
-      localeName: dateFormatter.format(date),
-    }));
-  }
-
-  private static generateWeekDates(): Date[] {
-    const startOfWeek: number = 11;
-    const monday: Date = new Date(2022, 3, startOfWeek);
-
-    let countOfDays: number = 0;
-    const daysAWeek: number = 7;
-
-    const dates: Date[] = [monday];
-
-    while (countOfDays < daysAWeek - 1) {
-      countOfDays++;
-      dates.push(new Date(2022, 3, startOfWeek + countOfDays));
-    }
-
-    return dates;
+    this.currentLocale$.next(value);
   }
 }
