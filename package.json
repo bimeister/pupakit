@@ -29,11 +29,13 @@
     "test:debug": "ng test --configuration=debugging",
     "test:ci": "yarn run build:demo-puppeteer && ng test --configuration=ci",
     "autofix": "yarn run prettify & yarn run cspell:check",
-    "create-untracked-files": "npm run barrel:all && gulp create:untracked-files",
+    "create-untracked-files": "npm run barrel:all && npm run styling:variables && gulp create:untracked-files",
     "🥫": "Barrel export files generation",
     "barrel:components": "barrelsby --config ./barrelsby.json --directory ./projects/kit/src/lib/components",
     "barrel:internal": "barrelsby --config ./barrelsby.json --directory ./projects/kit/src/internal",
-    "barrel:all": "npm run barrel:components && npm run barrel:internal"
+    "barrel:all": "npm run barrel:components && npm run barrel:internal",
+    "💅": "Styling files generation",
+    "styling:variables": "ts-node ./build/native/create-adaptive-variables.script.ts"
   },
   "dependencies": {
     "@angular/cdk": "~12.2.6",
