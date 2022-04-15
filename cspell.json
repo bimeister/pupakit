@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en, ru",
-  "words": ["ngsw", "ngxs"],
+  "words": ["ngsw", "ngxs", "barrelsby"],
   "flagWords": [],
   "ignoreRegExpList": ["CStyleComment"],
   "ignorePaths": [
