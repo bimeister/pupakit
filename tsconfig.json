@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "declaration": false,
-    "lib": ["dom", "esnext"],
+    "lib": ["DOM", "ESNext"],
     "importHelpers": true,
     "locale": "en",
     "newLine": "lf",
