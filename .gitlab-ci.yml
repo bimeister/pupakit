@@ -160,122 +160,69 @@ pages:
     paths:
       - public
 
-Stage 1:
+.stage-deploy:
   tags:
     - common
   needs: []
   stage: deploy (demo)
+  when: manual
+  interruptible: true
+  allow_failure: true
+  before_script:
+    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
+  script:
+    - scripts/build.sh stage_deploy_service
+    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
+      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
+  after_script:
+    - echo "Successfully deployed to ${BASE_HREF}:${PORT}"
+
+# If you add new Stages, request system administrators to apply changes to DNS
+
+Stage 1:
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-1'
     PORT: 8081
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
 
-Stage 1:
-  tags:
-    - common
-  needs: []
-  stage: deploy (demo)
+Stage 2:
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-2'
     PORT: 8082
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
 
 Stage 3:
-  tags:
-    - common
-  needs: []
-  stage: deploy (demo)
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-3'
     PORT: 8083
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
 
 Stage 4:
-  tags:
-    - common
-  needs: []
-  stage: deploy (demo)
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-4'
     PORT: 8084
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
 
 Stage 5:
-  tags:
-    - common
-  needs: []
-  stage: deploy (demo)
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-5'
     PORT: 8085
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
 
 Stage 6:
-  tags:
-    - common
-  needs: []
-  stage: deploy (demo)
+  extends: .stage-deploy
   variables:
     CI: $CI
     CONTAINER: 'pupa-6'
     PORT: 8086
     BASE_HREF: '${CONTAINER}.bimeister.io'
-  when: manual
-  interruptible: true
-  allow_failure: true
-  before_script:
-    - echo "$SSH_DEPLOY_KEY" > id_rsa && chmod 600 id_rsa
-  script:
-    - scripts/build.sh stage_deploy_service
-    - ssh -i id_rsa -o "UserKnownHostsFile=/dev/null" -o "StrictHostKeyChecking=no" ${TARGET_USER}@${TARGET_HOST}
-      "docker rm --force ${CONTAINER} ; docker run --detach --publish ${PORT}:80 --name ${CONTAINER} ${DEPLOY_IMAGE}"
