@@ -2,6 +2,7 @@ import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, Temp
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { delay, filter, switchMap, take, tap } from 'rxjs/operators';
+import { TOOLTIP_SERVICE_TOKEN } from '../../../../internal/constants/tokens/tooltip-service.token';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { isTabletDevice } from '../../../../internal/helpers/is-tablet-device.helper';
@@ -9,7 +10,13 @@ import { TooltipService } from '../services/tooltip.service';
 
 @Directive({
   selector: '[pupaTooltip]',
-  providers: [TooltipService],
+  providers: [
+    TooltipService,
+    {
+      provide: TOOLTIP_SERVICE_TOKEN,
+      useExisting: TooltipService,
+    },
+  ],
   exportAs: 'pupaTooltip',
 })
 export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit {
