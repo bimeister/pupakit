@@ -8,7 +8,7 @@
   [class.tabs_grabbing]="isContentDragging$ | async"
   (scrollLeftChanged)="processScrollLeft($event)"
   [invisibleScrollbars]="['horizontal', 'vertical']"
-  [horizontalScrollDragModeEnabled]="true"
+  [scrollDragMode]="'horizontal'"
   (scrolledToHorizontalStart)="setLeftGradient($event)"
   (scrolledToHorizontalEnd)="setRightGradient($event)"
   (contentDragStart)="handleContentDragStart()"

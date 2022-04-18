@@ -62,6 +62,7 @@
   max-width: 100% !important;
   max-height: 100% !important;
   border: none;
+  border-radius: unset;
   box-shadow: none;
 
   @include xs() {

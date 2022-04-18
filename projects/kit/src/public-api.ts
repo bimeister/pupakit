@@ -90,6 +90,7 @@ export {
   TreeItem,
   UiState,
   UploadingStatus,
+  ScrollDragMode,
   ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
 } from './internal/api';
 export * from './internal/constants/icons/api';

@@ -19,22 +19,12 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { filterTruthy, isNil } from '@bimeister/utilities';
-import {
-  animationFrameScheduler,
-  BehaviorSubject,
-  combineLatest,
-  forkJoin,
-  fromEvent,
-  merge,
-  of,
-  Subscription,
-} from 'rxjs';
+import { isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, of, Subscription } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
   map,
-  observeOn,
   pairwise,
   startWith,
   switchMap,
@@ -42,10 +32,12 @@ import {
   takeUntil,
   tap,
   throttleTime,
+  withLatestFrom,
 } from 'rxjs/operators';
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ScrollDragMode } from '../../../../../internal/declarations/types/scroll-drag-mode.type';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
@@ -76,8 +68,10 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   @Input() public size: ScrollbarSize = 'small';
   @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
-  @Input() public horizontalScrollDragModeEnabled: boolean = false;
-  private readonly horizontalScrollDragModeEnabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  @Input() public scrollDragMode: Nullable<ScrollDragMode> = null;
+  private readonly scrollDragMode$: BehaviorSubject<Nullable<ScrollDragMode>> = new BehaviorSubject<
+    Nullable<ScrollDragMode>
+  >(null);
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -130,7 +124,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processHorizontalScrollDragModeEnabledChange(changes?.horizontalScrollDragModeEnabled);
+    this.processScrollDragModeChanges(changes?.scrollDragMode);
   }
 
   public ngOnInit(): void {
@@ -148,7 +142,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   public ngAfterViewInit(): void {
-    this.subscription.add(this.processHorizontalScrollDragMode());
+    this.subscription.add(this.processScrollDragMode());
   }
 
   public ngOnDestroy(): void {
@@ -217,16 +211,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     ];
 
     return positionX >= rightSensitivityZone[0] && positionX <= rightSensitivityZone[1];
-  }
-
-  private processHorizontalScrollDragModeEnabledChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.horizontalScrollDragModeEnabled$.next(updatedValue);
   }
 
   private processContentScrollEvent(): Subscription {
@@ -334,41 +318,76 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
       });
   }
 
-  private processHorizontalScrollDragMode(): Subscription {
+  private processScrollDragMode(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
+    let lastDeltaY: number = 0;
     let lastDeltaX: number = 0;
 
-    return this.horizontalScrollDragModeEnabled$
+    return this.scrollDragMode$
       .pipe(
-        filterTruthy(),
-        observeOn(animationFrameScheduler),
-        filter(() => {
-          const isHorizontalScrollingAvailable: boolean = contentElement.offsetWidth < contentElement.scrollWidth;
-          return isHorizontalScrollingAvailable;
-        }),
-        switchMap(() => {
-          const hammer: HammerManager = new Hammer(contentElement);
-          hammer.get('pan').set({ direction: Hammer.DIRECTION_HORIZONTAL });
+        switchMap((scrollDragMode: ScrollDragMode) => {
+          if (isNil(scrollDragMode)) {
+            return NEVER;
+          }
 
-          return fromHammerEvent(hammer, ['panstart', 'panleft', 'panright', 'panend']);
+          const hammer: HammerManager = new Hammer(contentElement);
+          hammer.get('pan').set({ direction: Hammer.DIRECTION_ALL });
+
+          const verticalPanEvents: string[] = ['vertical', 'all'].includes(scrollDragMode) ? ['panup', 'pandown'] : [];
+          const horizontalPanEvents: string[] = ['horizontal', 'all'].includes(scrollDragMode)
+            ? ['panleft', 'panright']
+            : [];
+
+          return fromHammerEvent(hammer, ['panstart', 'panend', ...verticalPanEvents, ...horizontalPanEvents]).pipe(
+            withLatestFrom(of(scrollDragMode))
+          );
+        }),
+        filter(([_event, scrollDragMode]: [HammerInput, ScrollDragMode]) => {
+          const isVerticalScrollingAvailable: boolean = contentElement.offsetHeight < contentElement.scrollHeight;
+          const isHorizontalScrollingAvailable: boolean = contentElement.offsetWidth < contentElement.scrollWidth;
+
+          if (scrollDragMode === 'vertical') {
+            return isVerticalScrollingAvailable;
+          }
+
+          if (scrollDragMode === 'horizontal') {
+            return isHorizontalScrollingAvailable;
+          }
+
+          return isVerticalScrollingAvailable || isHorizontalScrollingAvailable;
         }),
         subscribeOutsideAngular(this.ngZone)
       )
-      .subscribe((event: HammerInput) => {
+      .subscribe(([event, scrollDragMode]: [HammerInput, ScrollDragMode]) => {
         if (event.type === 'panstart') {
           this.setBodyGrabbingCursor();
           this.contentDragStart.emit();
         }
 
-        const prevContentScrollLeft: number = contentElement.scrollLeft;
-        this.setContentScrollLeft(contentElement.scrollLeft + (lastDeltaX - event.deltaX));
+        const isVerticalScrollDragMode: boolean = ['vertical', 'all'].includes(scrollDragMode);
+        const isHorizontalScrollDragMode: boolean = ['horizontal', 'all'].includes(scrollDragMode);
 
-        if (contentElement.scrollLeft !== prevContentScrollLeft) {
-          lastDeltaX = event.deltaX;
+        if (isVerticalScrollDragMode) {
+          const prevContentScrollTop: number = contentElement.scrollTop;
+          this.setContentScrollTop(contentElement.scrollTop + (lastDeltaY - event.deltaY));
+
+          if (contentElement.scrollTop !== prevContentScrollTop) {
+            lastDeltaY = event.deltaY;
+          }
+        }
+
+        if (isHorizontalScrollDragMode) {
+          const prevContentScrollLeft: number = contentElement.scrollLeft;
+          this.setContentScrollLeft(contentElement.scrollLeft + (lastDeltaX - event.deltaX));
+
+          if (contentElement.scrollLeft !== prevContentScrollLeft) {
+            lastDeltaX = event.deltaX;
+          }
         }
 
         if (event.type === 'panend') {
           this.removeBodyGrabbingCursor();
+          lastDeltaY = 0;
           lastDeltaX = 0;
           this.contentDragEnd.emit();
         }
@@ -581,5 +600,15 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
         )
       )
       .subscribe();
+  }
+
+  private processScrollDragModeChanges(change: ComponentChange<this, ScrollDragMode>): void {
+    const updatedValue: ScrollDragMode | undefined = change?.currentValue;
+
+    if (updatedValue === undefined) {
+      return;
+    }
+
+    this.scrollDragMode$.next(updatedValue);
   }
 }

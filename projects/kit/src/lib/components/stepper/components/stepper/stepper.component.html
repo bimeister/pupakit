@@ -7,7 +7,7 @@
   [class.stepper_grab]="isHorizontalScrollExist$ | async"
   [class.stepper_grabbing]="isContentDragging$ | async"
   [invisibleScrollbars]="['horizontal', 'vertical']"
-  [horizontalScrollDragModeEnabled]="true"
+  [scrollDragMode]="'horizontal'"
   (scrolledToHorizontalStart)="setLeftGradient($event)"
   (scrolledToHorizontalEnd)="setRightGradient($event)"
   (contentDragStart)="handleContentDragStart()"
