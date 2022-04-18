@@ -8,3 +8,4 @@
 api.ts
 .DS_Store
 Folder.DotSettings.user
+/projects/kit/src/styles/variables/adaptive.variables.scss
