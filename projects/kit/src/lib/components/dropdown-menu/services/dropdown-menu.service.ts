@@ -1,13 +1,10 @@
-import { Injectable } from '@angular/core';
-import { DropdownServiceBase } from '../declarations/classes/abstract/dropdown-service-base.abstract';
 import { HorizontalConnectionPos } from '@angular/cdk/overlay';
-import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
+import { DropdownMenuService as DropdownMenuServiceInterface } from '@kit/internal/declarations/interfaces/dropdown-menu-service.interface';
 import { Uuid } from '../../../../internal/declarations/types/uuid.type';
+import { DropdownServiceBase } from '../declarations/classes/abstract/dropdown-service-base.abstract';
+import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class DropdownMenuService extends DropdownServiceBase<DropdownMenu> {
+export class DropdownMenuService extends DropdownServiceBase<DropdownMenu> implements DropdownMenuServiceInterface {
   public setDropdownHorizontalPosition(id: Uuid, position: HorizontalConnectionPos): void {
     if (!this.dropdownsStore.doesDropdownExists(id)) {
       return;
