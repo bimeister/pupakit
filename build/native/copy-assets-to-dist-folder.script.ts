@@ -2,9 +2,9 @@ import { existsSync, Stats } from 'fs';
 import { stat } from 'fs/promises';
 import { copyRecursive } from '../copy-recursive';
 
-async function copyStylesToDistFolder(): Promise<void> {
-  const sourcePath: string = './projects/kit/src/styles/';
-  const targetPath: string = './dist/lib/styles/';
+async function copyAssetsToDistFolder(): Promise<void> {
+  const sourcePath: string = './projects/kit/src/assets/';
+  const targetPath: string = './dist/lib/assets/';
 
   if (!existsSync(sourcePath)) {
     throw new Error('Source path does not exit.');
@@ -18,4 +18,4 @@ async function copyStylesToDistFolder(): Promise<void> {
   await copyRecursive(sourcePath, targetPath);
 }
 
-Promise.resolve().then(() => copyStylesToDistFolder());
+Promise.resolve().then(() => copyAssetsToDistFolder());
