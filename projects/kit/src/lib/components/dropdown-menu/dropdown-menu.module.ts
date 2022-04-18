@@ -1,14 +1,16 @@
-import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { IconModule } from '../icon/icon.module';
+import { NgModule } from '@angular/core';
+import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../internal/constants/tokens/dropdown-menu-service.token';
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { IconModule } from '../icon/icon.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
-import { DropdownMenuDirective } from './directives/dropdown-menu.directive';
-import { DropdownMenuContentComponent } from './components/dropdown-menu-content/dropdown-menu-content.component';
 import { DropdownMenuContainerComponent } from './components/dropdown-menu-container/dropdown-menu-container.component';
-import { DropdownMenuItemComponent } from './components/dropdown-menu-item/dropdown-menu-item.component';
+import { DropdownMenuContentComponent } from './components/dropdown-menu-content/dropdown-menu-content.component';
 import { DropdownMenuItemIconComponent } from './components/dropdown-menu-item-icon/dropdown-menu-item-icon.component';
+import { DropdownMenuItemComponent } from './components/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuSeparatorComponent } from './components/dropdown-menu-separator/dropdown-menu-separator.component';
+import { DropdownMenuDirective } from './directives/dropdown-menu.directive';
+import { DropdownMenuService } from './services/dropdown-menu.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,13 @@ import { DropdownMenuSeparatorComponent } from './components/dropdown-menu-separ
     DropdownMenuItemComponent,
     DropdownMenuItemIconComponent,
     DropdownMenuSeparatorComponent,
+  ],
+  providers: [
+    DropdownMenuService,
+    {
+      provide: DROPDOWN_MENU_SERVICE_TOKEN,
+      useExisting: DropdownMenuService,
+    },
   ],
 })
 export class DropdownMenuModule {}

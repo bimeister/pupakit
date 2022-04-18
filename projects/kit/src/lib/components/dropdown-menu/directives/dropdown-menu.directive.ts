@@ -14,12 +14,13 @@ import {
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { pluck, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../../internal/constants/tokens/dropdown-menu-service.token';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
+import { DropdownMenuService } from '../../../../internal/declarations/interfaces/dropdown-menu-service.interface';
 import { Uuid } from '../../../../internal/declarations/types/uuid.type';
 import { DropdownMenuContentComponent } from '../components/dropdown-menu-content/dropdown-menu-content.component';
 import { DropdownMenu } from '../declarations/classes/dropdown-menu.class';
-import { DropdownMenuService } from '../services/dropdown-menu.service';
 
 type ContentComponent = Nullable<DropdownMenuContentComponent>;
 const CURSOR_POINTER: string = 'pointer';
@@ -50,7 +51,7 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   constructor(
-    private readonly dropdownMenuService: DropdownMenuService,
+    @Inject(DROPDOWN_MENU_SERVICE_TOKEN) private readonly dropdownMenuService: DropdownMenuService,
     public readonly triggerRef: ElementRef<HTMLElement>,
     private readonly overlay: Overlay,
     @Inject(DOCUMENT) private readonly document: Document

@@ -1,11 +1,12 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Injector, TemplateRef } from '@angular/core';
-import { DropdownMenuService } from '../../services/dropdown-menu.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { DROPDOWN_CONTEXT_ID_TOKEN } from '../../constants/tokens/dropdown-context-id.token';
-import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Injector, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/dropdown-menu-service.token';
+import { DropdownMenuService } from '../../../../../internal/declarations/interfaces/dropdown-menu-service.interface';
+import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
+import { DROPDOWN_CONTEXT_ID_TOKEN } from '../../constants/tokens/dropdown-context-id.token';
 
 const ANIMATION_DURATION_MS: number = 150;
 
@@ -42,7 +43,7 @@ export class DropdownMenuContainerComponent {
   public readonly animationState$: Observable<AnimationStates>;
 
   constructor(private readonly injector: Injector) {
-    this.dropdownMenuService = this.injector.get(DropdownMenuService);
+    this.dropdownMenuService = this.injector.get(DROPDOWN_MENU_SERVICE_TOKEN);
     this.contextId = this.injector.get(DROPDOWN_CONTEXT_ID_TOKEN);
 
     this.contentTemplate$ = this.dropdownMenuService.getDropdownTemplate(this.contextId);

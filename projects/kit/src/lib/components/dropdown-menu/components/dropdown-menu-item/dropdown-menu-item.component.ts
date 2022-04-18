@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   HostListener,
+  Inject,
   Input,
   OnChanges,
   Output,
@@ -11,11 +12,12 @@ import {
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
+import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/dropdown-menu-service.token';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { DropdownMenuService } from '../../../../../internal/declarations/interfaces/dropdown-menu-service.interface';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { DropdownContextService } from '../../services/dropdown-context.service';
-import { DropdownMenuService } from '../../services/dropdown-menu.service';
 
 @Component({
   selector: 'pupa-dropdown-menu-item',
@@ -47,7 +49,7 @@ export class DropdownMenuItemComponent implements OnChanges {
 
   constructor(
     private readonly dropdownContextService: DropdownContextService,
-    private readonly dropdownMenuService: DropdownMenuService
+    @Inject(DROPDOWN_MENU_SERVICE_TOKEN) private readonly dropdownMenuService: DropdownMenuService
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
