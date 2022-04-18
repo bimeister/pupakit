@@ -41,7 +41,10 @@
     "💅": "Styling files generation",
     "styling:variables": "ts-node ./build/native/create-adaptive-variables.script.ts",
     "styling:color-maps": "ts-node ./build/native/create-colors-map.script.ts",
-    "styling:all": "npm run styling:variables && npm run styling:color-maps"
+    "styling:convert-scss-to-css": "sass --load-path=node_modules ./projects/kit/src/styles/styles.scss ./dist/lib/styles.css",
+    "styling:all": "npm run styling:variables && npm run styling:color-maps && npm run styling:convert-scss-to-css",
+    "📦": "Bundle generation",
+    "bundle:styles": "ts-node ./build/native/copy-styles-to-dist-folder.script.ts"
   },
   "dependencies": {
     "@angular/cdk": "~12.2.6",
