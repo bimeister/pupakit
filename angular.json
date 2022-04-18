@@ -153,8 +153,7 @@
             }
           },
           "options": {
-            "browserTarget": "demo:build",
-            "sourceMap": true
+            "browserTarget": "demo:build"
           }
         }
       },
