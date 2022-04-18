@@ -11,9 +11,10 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { TabsBase } from '../../../../../internal/api';
 import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/stepper-container-state-service.token';
-import { ScrollableComponent, TabsStateService } from '../../../api';
+import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
+import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
+import { TabsStateService } from '../../../tabs/services/tabs-state.service';
 import { StepperRegistryService } from '../../services/stepper-registry.service';
 import { StepperStateService } from '../../services/stepper-state.service';
 

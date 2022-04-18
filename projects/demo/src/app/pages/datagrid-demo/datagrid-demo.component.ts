@@ -1,13 +1,12 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getUuid, shareReplayWithRefCount } from '@bimeister/utilities';
-import {
-  DatagridDomLayouts,
-  DatagridManipulator,
-  DatagridManipulatorConfiguration,
-  DatagridTemplateRendererComponent,
-  DatagridThemes,
-} from '@kit/public-api';
+
+import { DatagridManipulatorConfiguration } from '@kit/internal/declarations/classes/datagrid-manipulator-configuration.class';
+import { DatagridManipulator } from '@kit/internal/declarations/classes/datagrid-manipulator.class';
+import { DatagridDomLayouts } from '@kit/internal/declarations/enums/datagrid-dom-layouts.enum';
+import { DatagridThemes } from '@kit/internal/declarations/enums/datagrid-themes.enum';
+import { DatagridTemplateRendererComponent } from '@kit/lib/components/datagrid/components/datagrid-template-renderer/datagrid-template-renderer.component';
 import { ColDef, Column, ColumnApi, FirstDataRenderedEvent } from 'ag-grid-community';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, take, withLatestFrom } from 'rxjs/operators';

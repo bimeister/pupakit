@@ -3,8 +3,8 @@ import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { timer } from 'rxjs';
 import { take } from 'rxjs/operators';
 
-import { AlertButton } from '../../../../../internal/api';
 import { AlertComponentBase } from '../../../../../internal/declarations/classes/abstract/alert-component-base.abstract';
+import { AlertButton } from '../../../../../internal/declarations/interfaces/alert-button.interface';
 import { AlertData } from '../../../../../internal/declarations/interfaces/alert-data.interface';
 import { AlertType } from '../../../../../internal/declarations/types/alert-type.type';
 

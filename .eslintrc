@@ -218,7 +218,26 @@
             "allowInParentheses": false
           }
         ],
-        "no-restricted-imports": ["error", "@angular/compiler", "rxjs/Rx"],
+        "no-restricted-imports": [
+          "error",
+          {
+            "paths": ["rxjs/Rx", "@angular/compiler"],
+            "patterns": [
+              {
+                "group": ["**/api", "**/public-api"],
+                "message": "Use direct module import instead."
+              },
+              {
+                "group": ["**/dist/**"],
+                "message": "Use import from sources instead."
+              },
+              {
+                "group": ["projects/**"],
+                "message": "Use relative to file import instead."
+              }
+            ]
+          }
+        ],
         "no-multi-spaces": "error",
         "no-sparse-arrays": "error",
         "no-template-curly-in-string": "error",

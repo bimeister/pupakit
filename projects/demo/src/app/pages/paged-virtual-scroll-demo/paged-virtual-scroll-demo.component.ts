@@ -10,7 +10,8 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
-import { PagedVirtualScrollArguments, PagedVirtualScrollViewportComponent } from '@kit/public-api';
+import { PagedVirtualScrollArguments } from '@kit/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
+import { PagedVirtualScrollViewportComponent } from '@kit/lib/components/paged-virtual-scroll/components/paged-virtual-scroll-viewport/paged-virtual-scroll-viewport.component';
 import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { debounceTime, delay, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { StepperItemComponent } from '../api';
+import { StepperItemComponent } from '../components/stepper-item/stepper-item.component';
 
 @Injectable()
 export class StepperRegistryService<T> {

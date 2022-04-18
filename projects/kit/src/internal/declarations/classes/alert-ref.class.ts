@@ -1,8 +1,8 @@
 import { getUuid } from '@bimeister/utilities';
 import { Observable, Subject, timer } from 'rxjs';
 import { delayWhen } from 'rxjs/operators';
+import { AlertConfig } from '../interfaces/alert-config.interface';
 
-import { AlertConfig } from '../api';
 import { Uuid } from '../types/uuid.type';
 
 export class AlertRef<TData = unknown, TReturn = void> {
