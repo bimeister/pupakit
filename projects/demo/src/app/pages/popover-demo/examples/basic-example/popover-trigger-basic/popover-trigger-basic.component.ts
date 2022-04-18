@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
 import { PopoversService } from '@kit/internal/shared/services/popovers.service';
-import { ToastsService } from '../../../../../../../../kit/src/public-api';
+import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 import { PopoverLayoutBasicComponent } from '../popover-layout-basic/popover-layout-basic.component';
 
 @Component({

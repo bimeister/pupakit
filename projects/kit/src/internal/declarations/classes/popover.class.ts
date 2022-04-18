@@ -13,13 +13,13 @@ import { take, takeUntil } from 'rxjs/operators';
 import { PopoverContainerComponent } from '../../../lib/components/popover/components/popover-container/popover-container.component';
 import { POPOVER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/popover-container-data.token';
 import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
-import { PopoverReturnType } from '../api';
 import { PopoverConfig } from '../interfaces/popover-config.interface';
 import { PopoverContainerData } from '../interfaces/popover-container-data.interface';
 import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { Position } from '../types/position.type';
 import { PopoverDataType } from '../types/utility-types/popover-data.utility-type';
-import { PopoverComponentBase } from './api';
+import { PopoverReturnType } from '../types/utility-types/popover-return.utility-type';
+import { PopoverComponentBase } from './abstract/popover-component-base.abstract';
 import { PopoverRef } from './popover-ref.class';
 
 const OVERLAY_POSITIONS: ConnectionPositionPair[] = [

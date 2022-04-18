@@ -1,19 +1,9 @@
 {
   "version": "0.2",
   "language": "en, ru",
-  "words": [
-    "autofix",
-    "barrelsby",
-    "loglevel",
-    "ngsw",
-    "ngxs",
-    "prettierignore",
-    "prettierrc"
-  ],
+  "words": ["autofix", "barrelsby", "loglevel", "ngsw", "ngxs", "prettierignore", "prettierrc"],
   "flagWords": [],
-  "ignoreRegExpList": [
-    "CStyleComment"
-  ],
+  "ignoreRegExpList": ["CStyleComment"],
   "ignorePaths": [
     "**/node_modules/**",
     "**/assets/**",

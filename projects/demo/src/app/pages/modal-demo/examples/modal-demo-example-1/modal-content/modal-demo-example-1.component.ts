@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Theme } from '@kit/internal/declarations/api';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 

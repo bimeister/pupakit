@@ -12,8 +12,9 @@ import {
 import { filterNotNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN, TabsItemBase } from '../../../../../internal/api';
-import { TabsStateService } from '../../../api';
+import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/stepper-container-state-service.token';
+import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
+import { TabsStateService } from '../../../tabs/services/tabs-state.service';
 import { StepperRegistryService } from '../../services/stepper-registry.service';
 import { StepperStateService } from '../../services/stepper-state.service';
 

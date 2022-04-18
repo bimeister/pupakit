@@ -1,6 +1,6 @@
-import { ViewEncapsulation, ChangeDetectionStrategy, Component, HostListener, Inject, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Inject, Input, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
-import { PopoverRef } from '../../../../../internal/api';
+import { PopoverRef } from '../../../../../internal/declarations/classes/popover-ref.class';
 
 @Component({
   selector: 'pupa-popover-layout-close-button',

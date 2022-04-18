@@ -1,5 +1,5 @@
 import { Directive, Input, TemplateRef } from '@angular/core';
-import { ContentTemplateNameDirective } from '../../../../internal/api';
+import { ContentTemplateNameDirective } from '../../../../internal/declarations/interfaces/content-template-name.interface';
 
 @Directive({
   selector: '[pupaStepperItemContentTemplate]',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ToastsService } from '@kit/internal/api';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 
 @Component({
   selector: 'demo-change-theme-example',

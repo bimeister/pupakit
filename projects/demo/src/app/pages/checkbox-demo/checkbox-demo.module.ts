@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CheckboxModule } from '../../../../../kit/src/lib/components/checkbox/checkbox.module';
+import { CheckboxModule } from '@kit/lib/components/checkbox/checkbox.module';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { CheckboxDemoRoutingModule } from './checkbox-demo-routing.module';
 import { CheckboxDemoComponent } from './checkbox-demo.component';

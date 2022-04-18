@@ -4,9 +4,9 @@ import { Injectable, Injector } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ToastContainerComponent } from '../../../lib/components/toast/components/toast-container/toast-container.component';
 
 import { ToastComponent } from '../../../lib/components/toast/components/toast/toast.component';
-import { ToastContainerComponent } from '../../../public-api';
 import { TOAST_CONTAINER_DATA_TOKEN } from '../../constants/tokens/toast-container-data.token';
 import { ToastComponentBase } from '../../declarations/classes/abstract/toast-component-base.abstract';
 import { OpenedToast } from '../../declarations/classes/opened-toast.class';

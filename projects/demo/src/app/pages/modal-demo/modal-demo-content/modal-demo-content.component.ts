@@ -7,7 +7,10 @@ import {
   Self,
   ViewEncapsulation,
 } from '@angular/core';
-import { ModalRef, Position, Theme, ThemeWrapperService } from '@kit/public-api';
+import { ModalRef } from '@kit/internal/declarations/classes/modal-ref.class';
+import { Theme } from '@kit/internal/declarations/enums/theme.enum';
+import { Position } from '@kit/internal/declarations/types/position.type';
+import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 import { MODAL_DATA_TOKEN } from '../../../../declarations/tokens/modal-data.token';
 import { ModalDemoLocalService } from '../services/modal-demo-local.service';

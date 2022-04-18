@@ -7,9 +7,9 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
-import { TabsContentBase } from '../../../../../internal/api';
 import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/stepper-container-state-service.token';
-import { TabsStateService } from '../../../api';
+import { TabsContentBase } from '../../../../../internal/declarations/classes/abstract/tabs-content-base.abstract';
+import { TabsStateService } from '../../../tabs/services/tabs-state.service';
 import { StepperItemContentDirective } from '../../directives/stepper-item-content.directive';
 import { StepperStateService } from '../../services/stepper-state.service';
 

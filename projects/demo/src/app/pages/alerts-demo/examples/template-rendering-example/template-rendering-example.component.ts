@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AlertsService } from '@kit/internal/shared/services/alerts.service';
-import { AlertTemplateComponent } from '@kit/public-api';
+import { AlertTemplateComponent } from '@kit/lib/components/alert/components/alert-template/alert-template.component';
 
 interface AlertTemplateData {
   $implicit: string;

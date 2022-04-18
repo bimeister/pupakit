@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject, OnInit } from '@angular/core';
-import { DrawerRef } from '@kit/public-api';
+import { DrawerRef } from '@kit/internal/declarations/classes/drawer-ref.class';
 import { DRAWER_DATA_TOKEN } from '../../../../../declarations/tokens/drawer-data.token';
 
 @Component({

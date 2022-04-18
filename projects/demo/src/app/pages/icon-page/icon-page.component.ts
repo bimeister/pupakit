@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { IconDefinition } from '@kit/public-api';
+import { IconDefinition } from '@kit/internal/declarations/interfaces/icon-definition.interface';
 import { getAllIcons } from '../../../declarations/functions/get-all-icons.function';
 
 @Component({

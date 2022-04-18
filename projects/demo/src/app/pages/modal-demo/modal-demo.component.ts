@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { ModalsService, OpenedModal, Position } from '@kit/public-api';
+import { OpenedModal } from '@kit/internal/declarations/interfaces/opened-modal.interface';
+import { Position } from '@kit/internal/declarations/types/position.type';
+import { ModalsService } from '@kit/internal/shared/services/modals.service';
 import { MODAL_DATA_TOKEN } from '../../../declarations/tokens/modal-data.token';
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoLocalService } from './services/modal-demo-local.service';
