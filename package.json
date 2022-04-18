@@ -44,7 +44,9 @@
     "styling:convert-scss-to-css": "sass --load-path=node_modules ./projects/kit/src/styles/styles.scss ./dist/lib/styles.css",
     "styling:all": "npm run styling:variables && npm run styling:color-maps && npm run styling:convert-scss-to-css",
     "📦": "Bundle generation",
-    "bundle:styles": "ts-node ./build/native/copy-styles-to-dist-folder.script.ts"
+    "bundle:styles": "ts-node ./build/native/copy-styles-to-dist-folder.script.ts",
+    "bundle:assets": "ts-node ./build/native/copy-assets-to-dist-folder.script.ts",
+    "bundle:all": "npm run ts-node ./build/native/copy-styles-to-dist-folder.script.ts && npm run ts-node ./build/native/copy-assets-to-dist-folder.script.ts"
   },
   "dependencies": {
     "@angular/cdk": "~12.2.6",
