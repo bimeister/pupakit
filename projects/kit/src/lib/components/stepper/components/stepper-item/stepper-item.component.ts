@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { STEPPER_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/stepper-container-state-service.token';
 import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
+import { StepperItem } from '../../../../../internal/declarations/interfaces/stepper-item.interface';
 import { TabsStateService } from '../../../tabs/services/tabs-state.service';
 import { StepperRegistryService } from '../../services/stepper-registry.service';
 import { StepperStateService } from '../../services/stepper-state.service';
@@ -25,7 +26,7 @@ import { StepperStateService } from '../../services/stepper-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class StepperItemComponent<T> extends TabsItemBase<T, TabsStateService<T>> implements OnInit {
+export class StepperItemComponent<T> extends TabsItemBase<T, TabsStateService<T>> implements OnInit, StepperItem<T> {
   @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
