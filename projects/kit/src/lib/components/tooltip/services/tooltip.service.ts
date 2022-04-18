@@ -10,11 +10,13 @@ import { ElementRef, Injectable, Injector, OnDestroy, TemplateRef } from '@angul
 import { filterNotNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
+import { TOOLTIP_SERVICE_TOKEN } from '../../../../internal/constants/tokens/tooltip-service.token';
+import { TooltipService as ServiceInterface } from '../../../../internal/declarations/interfaces/tooltip-service.interface';
 import { TooltipContentComponent } from '../components/tooltip-content/tooltip-content.component';
 import { OVERLAY_POSITIONS } from '../positions';
 
 @Injectable()
-export class TooltipService implements OnDestroy {
+export class TooltipService implements OnDestroy, ServiceInterface {
   private readonly subscription: Subscription = new Subscription();
 
   private readonly mouseOverTrigger$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -177,7 +179,7 @@ export class TooltipService implements OnDestroy {
     const portalInjector: Injector = Injector.create({
       providers: [
         {
-          provide: TooltipService,
+          provide: TOOLTIP_SERVICE_TOKEN,
           useValue: this,
         },
       ],

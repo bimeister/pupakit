@@ -13,7 +13,8 @@ import {
 import { filterFalsy, filterNotNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription, zip } from 'rxjs';
 import { map, take, withLatestFrom } from 'rxjs/operators';
-import { TooltipService } from '../../services/tooltip.service';
+import { TOOLTIP_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/tooltip-service.token';
+import { TooltipService } from '../../../../../internal/declarations/interfaces/tooltip-service.interface';
 
 const OFFSET_PX: number = 4;
 const ANIMATION: string = `200ms ease-in-out`;
@@ -57,7 +58,7 @@ export class TooltipContentComponent implements OnDestroy {
     private readonly injector: Injector,
     private readonly hostElementRef: ElementRef<HTMLElement>
   ) {
-    this.tooltipService = this.injector.get(TooltipService);
+    this.tooltipService = this.injector.get(TOOLTIP_SERVICE_TOKEN);
     this.tooltipHideOnHoverHover$ = this.tooltipService.tooltipHideOnHoverHover$;
     this.tooltipContent$ = this.tooltipService.tooltipContent$;
     this.tooltipContentTemplate$ = this.tooltipService.tooltipContentTemplate$;
