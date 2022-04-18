@@ -68,7 +68,7 @@ Lint:
   interruptible: true
   allow_failure: false
   script:
-    - npm run lint
+    - npm run linter:check-ci
 
 Spell Check:
   stage: check
@@ -76,7 +76,7 @@ Spell Check:
   interruptible: true
   allow_failure: false
   script:
-    - npm run cspell:check
+    - npm run linter:spell-checker
 
 # Test:
 #   stage: check
@@ -92,13 +92,21 @@ Spell Check:
 #       junit:
 #         - coverage/junit.xml
 
+Circular Dependencies:
+  stage: check
+  needs: ['Dependencies']
+  interruptible: true
+  allow_failure: false
+  script:
+    - npm run linter:circular-dependencies
+
 Code Style:
   stage: check
   needs: ['Dependencies']
   interruptible: true
   allow_failure: false
   script:
-    - npm run prettier:check
+    - npm run linter:formatting
 
 NPM (dev):
   stage: deploy (NPM)
@@ -124,7 +132,7 @@ NPM (dev):
 NPM (stable):
   stage: deploy (NPM)
   # needs: ['Static Files', 'Test', 'Code Style', 'Lint', 'Spell Check']
-  needs: ['Static Files (kit)', 'Code Style', 'Lint', 'Spell Check']
+  needs: ['Static Files (kit)', 'Code Style', 'Lint', 'Spell Check', 'Circular Dependencies']
   dependencies:
     - 'Static Files (kit)'
   interruptible: false
