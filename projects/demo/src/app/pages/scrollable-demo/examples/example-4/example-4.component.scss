@@ -1,0 +1,16 @@
+.scrollable-box {
+  width: 400px;
+  height: 400px;
+
+  .content {
+    display: flex;
+    width: 1500px;
+
+    .square {
+      width: 100px;
+      height: 100px;
+      background: red;
+      margin-left: 15px;
+    }
+  }
+}
