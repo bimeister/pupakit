@@ -4,7 +4,7 @@ import { copyRecursive } from './copy-recursive';
 
 async function copyAssetsToDistFolder(): Promise<void> {
   const sourcePath: string = './projects/kit/src/assets/';
-  const targetPath: string = './dist/lib/assets/';
+  const targetPath: string = './dist/kit/assets/';
 
   if (!existsSync(sourcePath)) {
     throw new Error('Source path does not exit.');

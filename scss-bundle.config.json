@@ -1,7 +1,7 @@
 {
   "bundlerOptions": {
     "entryFile": "./src/styles/styles.scss",
-    "outFile": "dist/lib/styles.scss",
+    "outFile": "dist/kit/styles.scss",
     "includePaths": ["./", "./node_modules"]
   }
 }
