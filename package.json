@@ -10,7 +10,7 @@
     "autofix": "npm run linter:fix",
     "create-untracked-files": "npm run barrel:all && npm run styling:all",
     "🏗️": "Build",
-    "build:kit": "npm run create-untracked-files && ng build --project pupakit && npm run bundle:all && npm run replace:all",
+    "build:kit": "npm run create-untracked-files && ng build --project pupakit && npm run styling:all && npm run bundle:all && npm run replace:all",
     "build:demo": "npm run create-untracked-files && ng build --project=demo",
     "build:demo-stage": "npm run create-untracked-files && ng build --project=demo --base-href #",
     "build:demo-ci": "npm run create-untracked-files && ng build --project=demo --base-href \"${CI_PAGES_URL}/\"",

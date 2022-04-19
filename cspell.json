@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en, ru",
-  "words": ["autofix", "barrelsby", "loglevel", "ngsw", "ngxs", "prettierignore", "prettierrc"],
+  "words": ["autofix", "barrelsby", "loglevel", "ngsw", "ngxs", "npmrc", "prettierignore", "prettierrc"],
   "flagWords": [],
   "ignoreRegExpList": ["CStyleComment"],
   "ignorePaths": [
