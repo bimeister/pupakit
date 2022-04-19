@@ -1,6 +1,6 @@
 import { existsSync, Stats } from 'fs';
 import { stat } from 'fs/promises';
-import { copyRecursive } from '../copy-recursive';
+import { copyRecursive } from './copy-recursive';
 
 async function copyAssetsToDistFolder(): Promise<void> {
   const sourcePath: string = './projects/kit/src/assets/';
