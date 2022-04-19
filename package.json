@@ -42,7 +42,7 @@
     "📦": "Bundle generation",
     "bundle:styles": "ts-node ./build/node/copy-styles-to-dist-folder.script.ts",
     "bundle:assets": "ts-node ./build/node/copy-assets-to-dist-folder.script.ts",
-    "bundle:all": "npm run ts-node ./build/node/copy-styles-to-dist-folder.script.ts && npm run ts-node ./build/node/copy-assets-to-dist-folder.script.ts",
+    "bundle:all": "ts-node ./build/node/copy-styles-to-dist-folder.script.ts && ts-node ./build/node/copy-assets-to-dist-folder.script.ts",
     "🖼️": "Formatting",
     "formatter:fix": "prettier --loglevel warn --config ./.prettierrc --ignore-path ./.prettierignore --write \"./**/*.{html,css,scss,json,js,ts}\"",
     "formatter:check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check \"./**/*.{html,css,scss,json,js,ts}\"",
