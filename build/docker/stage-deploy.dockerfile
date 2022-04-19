@@ -7,7 +7,7 @@ COPY .npmrc package.json package-lock.json tsconfig.lib.json tsconfig.spec.json 
 RUN rm ./raw-copy/docker --recursive --force \
   && mkdir ./build \
   \
-  && mv ./raw-copy/gulp --target-directory="./build" \
+  && mv ./raw-copy/node --target-directory="./build" \
   && mv ./raw-copy/* --target-directory="./" \
   && rm ./raw-copy --recursive --force \
   \
