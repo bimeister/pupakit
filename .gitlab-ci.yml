@@ -124,7 +124,7 @@ NPM (dev):
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
       --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
       --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc  --target-directory ./dist/lib/
+    - cp ./.npmrc --target-directory ./dist/lib/
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
       --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}-dev"
     - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
@@ -146,7 +146,7 @@ NPM (stable):
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
       --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
       --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc  --target-directory ./dist/lib/
+    - cp ./.npmrc --target-directory ./dist/lib/
     - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
       --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}"
     - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
