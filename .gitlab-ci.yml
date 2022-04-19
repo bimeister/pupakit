@@ -108,48 +108,36 @@ Code Style:
   script:
     - npm run linter:formatting
 
-NPM (dev):
+.npm-deploy:
   stage: deploy (NPM)
-  needs: ['Static Files (kit)']
   dependencies:
     - 'Static Files (kit)'
   interruptible: false
   allow_failure: true
+  script:
+    - npm run prepare:all
+    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
+
+NPM (dev):
+  extends: .npm-deploy
+  needs: ['Static Files (kit)']
   variables:
     TAG: 'dev'
+    COMMIT_HASH: '${GIT_COMMIT_HASH}-dev'
   except:
     - main
   when: manual
-  script:
-    - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
-      --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
-      --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc --target-directory ./dist/lib/
-    - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
-      --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}-dev"
-    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
 
 NPM (stable):
-  stage: deploy (NPM)
+  extends: .npm-deploy
   # needs: ['Static Files (kit)', 'Test', 'Code Style', 'Lint', 'Spell Check', 'Circular Dependencies']
   needs: ['Static Files (kit)', 'Code Style', 'Lint', 'Spell Check', 'Circular Dependencies']
-  dependencies:
-    - 'Static Files (kit)'
-  interruptible: false
-  allow_failure: true
   variables:
     TAG: 'stable'
+    COMMIT_HASH: '${GIT_COMMIT_HASH}'
   only:
     - main
   when: always
-  script:
-    - node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path="./.npmrc"
-      --auth_token="${NPM_AUTH_TOKEN}" --org_email="info@bimeister.com"
-      --registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries="true"
-    - cp ./.npmrc --target-directory ./dist/lib/
-    - node ./node_modules/@bimeister/build-cli/executable.js npm-package package-json-prepare
-      --package_json_path="./dist/lib/package.json" --commit_hash="${GIT_COMMIT_HASH}"
-    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
 
 pages:
   stage: deploy (demo)
