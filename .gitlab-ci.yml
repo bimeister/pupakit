@@ -116,7 +116,7 @@ Code Style:
   allow_failure: true
   script:
     - npm run prepare:all
-    - npm publish ./dist/lib/ --tag="${TAG}" --access="public"
+    - npm publish ./dist/kit/ --tag="${TAG}" --access="public"
 
 NPM (dev):
   extends: .npm-deploy

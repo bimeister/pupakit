@@ -4,7 +4,7 @@ import { join } from 'path';
 async function copyNpmFilesToDistFolder(): Promise<void> {
   const npmrcPath: string = './.npmrc';
   const npmignorePath: string = './.npmignore';
-  const targetPath: string = './dist/lib/';
+  const targetPath: string = './dist/kit/';
 
   await copyFile(npmrcPath, join(targetPath, npmrcPath));
   await copyFile(npmignorePath, join(targetPath, npmignorePath));
