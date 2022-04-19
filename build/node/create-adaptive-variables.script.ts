@@ -8,7 +8,7 @@ function getVariablesWithPostfix(data: Record<string, number>, postfix: string =
 }
 
 async function writeAdaptiveVariablesToFile(fileData: string): Promise<void> {
-  return await writeFile('./projects/kit/src/styles/variables/adaptive.variables.scss', fileData, null);
+  await writeFile('./projects/kit/src/styles/variables/adaptive.variables.scss', fileData, null);
 }
 
 async function getAdaptiveVariablesData(): Promise<string> {
