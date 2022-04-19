@@ -131,7 +131,7 @@ NPM (dev):
 
 NPM (stable):
   stage: deploy (NPM)
-  # needs: ['Static Files', 'Test', 'Code Style', 'Lint', 'Spell Check']
+  # needs: ['Static Files (kit)', 'Test', 'Code Style', 'Lint', 'Spell Check', 'Circular Dependencies']
   needs: ['Static Files (kit)', 'Code Style', 'Lint', 'Spell Check', 'Circular Dependencies']
   dependencies:
     - 'Static Files (kit)'
