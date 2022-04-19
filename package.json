@@ -46,6 +46,10 @@
     "🖼️": "Formatting",
     "formatter:fix": "prettier --loglevel warn --config ./.prettierrc --ignore-path ./.prettierignore --write \"./**/*.{html,css,scss,json,js,ts}\"",
     "formatter:check": "prettier --config ./.prettierrc --ignore-path ./.prettierignore --check \"./**/*.{html,css,scss,json,js,ts}\"",
+    "📮": "Package preparation",
+    "package:prepare-.npmrc": "node ./node_modules/@bimeister/build-cli/executable.js npm-package npmrc-prepare --npmrc_path=\"./.npmrc\" --auth_token=\"${NPM_AUTH_TOKEN}\" --org_email=\"info@bimeister.com\" --registry=\"https://git.bimeister.io/api/v4/projects/98/packages/npm/\" --remove_scoped_registries=\"true\"",
+    "package:copy-npm-files": "",
+    "package:prepare-package.json": "",
     "💬": "Spell checking",
     "spell-checker:check": "cspell lint './projects/**/*.*' --config cspell.json"
   },
