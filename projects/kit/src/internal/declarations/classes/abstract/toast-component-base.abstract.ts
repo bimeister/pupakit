@@ -32,7 +32,7 @@ export abstract class ToastComponentBase<TData, TReturn> implements AfterViewIni
     ]),
   ];
 
-  constructor(public readonly toastRef: ToastRef<TData, TReturn>) {
+  constructor(protected readonly toastRef: ToastRef<TData, TReturn>) {
     this.toastRef.setCloseDelayMs(this.closeAnimationDurationMs);
   }
 
