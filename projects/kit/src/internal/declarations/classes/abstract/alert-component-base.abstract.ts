@@ -40,7 +40,7 @@ export abstract class AlertComponentBase<TData, TReturn> implements AfterViewIni
     ]),
   ];
 
-  constructor(public readonly alertRef: AlertRef<TData, TReturn>) {
+  constructor(protected readonly alertRef: AlertRef<TData, TReturn>) {
     this.alertRef.setCloseDelayMs(this.closeAnimationDurationMs);
   }
 
