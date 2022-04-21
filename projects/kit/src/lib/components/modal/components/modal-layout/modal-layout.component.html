@@ -2,6 +2,8 @@
   class="modal-layout"
   [class.modal-layout_no-footer]="!(withFooter$ | async)"
   [class.modal-layout_no-title]="!(withTitle$ | async)"
+  tabindex="0"
+  pupaAutofocus
 >
   <ng-content></ng-content>
 </div>
