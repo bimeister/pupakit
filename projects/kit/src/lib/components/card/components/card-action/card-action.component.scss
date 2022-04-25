@@ -1,0 +1,12 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+:host {
+  flex: 8rem 0;
+  margin-left: auto;
+  color: color(base-white-n200);
+
+  @include host-selector-dark-theme {
+    color: color(base-dark-n400);
+  }
+}

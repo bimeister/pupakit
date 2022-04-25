@@ -1,0 +1,20 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.card-title {
+  @include font-type-caption();
+  @include font-size-mark(true);
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-style: normal;
+
+  &_medium {
+    -webkit-line-clamp: 1;
+  }
+
+  &_large {
+    -webkit-line-clamp: 2;
+  }
+}

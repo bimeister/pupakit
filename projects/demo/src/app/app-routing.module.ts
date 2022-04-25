@@ -59,6 +59,7 @@ import { TypographyPageModule } from './pages/typography-page/typography-page.mo
 import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
+import { CardDemoModule } from './pages/card-demo/card-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -116,6 +117,11 @@ const demoRoutes: Routes = [
           import('./pages/button-multi-demo/button-multi-demo.module').then(
             (module: any) => module.ButtonMultiDemoModule
           ),
+      },
+      {
+        path: 'card',
+        loadChildren: (): Promise<Type<CardDemoModule>> =>
+          import('./pages/card-demo/card-demo.module').then((module: any) => module.CardDemoModule),
       },
       {
         path: 'chip',

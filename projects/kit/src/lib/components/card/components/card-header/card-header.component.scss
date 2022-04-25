@@ -1,0 +1,7 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+}

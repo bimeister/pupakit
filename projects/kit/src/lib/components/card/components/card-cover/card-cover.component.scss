@@ -1,0 +1,25 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+$container-border-size: 0.5rem;
+
+:host {
+  height: calc(100% + #{$container-border-size});
+  aspect-ratio: 1;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+
+  padding: 2rem;
+  margin-right: 3rem;
+  border-radius: 1rem;
+  background-color: color(base-white-n500);
+
+  @include host-selector-dark-theme {
+    background: color(base-dark-n500);
+    color: color(base-n0);
+  }
+}
