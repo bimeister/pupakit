@@ -27,14 +27,10 @@ export {
   DropdownItem,
   DropEventInterface,
   EventsQueue,
-  FlatHugeTreeItem,
   FlatTreeItem,
   GridRowEvent,
   GridState,
   GridStateService,
-  HugeTreeItem,
-  HugeTreeItemsQuery,
-  HugeTreeState,
   IconData,
   IconDefinition,
   LoaderService,
@@ -100,6 +96,7 @@ export {
   UiState,
   UploadingStatus,
   ScrollDragMode,
+  TreeNodeProperties,
   ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
 } from './internal/api';
 export { DAY_SELECTOR_CONFIG_TOKEN } from './internal/constants/tokens/api';

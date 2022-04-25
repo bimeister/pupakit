@@ -1,0 +1,45 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.tree-node-skeleton {
+  display: flex;
+  padding: 1rem 2rem;
+
+  &__left,
+  &__center,
+  &__right {
+    background-color: color(base-white-n550);
+  }
+
+  &__left {
+    min-width: 6rem;
+    height: 6rem;
+    border-radius: 0.5rem;
+  }
+
+  &__center {
+    width: 100%;
+    height: 6rem;
+    margin: 0 3rem;
+    border-radius: 1rem;
+  }
+
+  &__right {
+    min-width: 6rem;
+    height: 6rem;
+    border-radius: 1rem;
+  }
+
+  @include host-selector-dark-theme() {
+    &__left,
+    &__center,
+    &__right {
+      background-color: color(base-dark-n550);
+    }
+  }
+}

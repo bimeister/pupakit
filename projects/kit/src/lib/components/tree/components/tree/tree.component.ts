@@ -31,6 +31,7 @@ import {
   Subject,
   Subscription,
   timer,
+  combineLatest,
 } from 'rxjs';
 import { debounce, distinctUntilChanged, filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../internal/declarations/classes/flat-tree-item.class';
@@ -43,6 +44,7 @@ import { TreeDataSource } from '../../../../../internal/declarations/interfaces/
 import { TreeItemInterface } from '../../../../../internal/declarations/interfaces/tree-item.interface';
 import { TreeManipulatorDataOrigin } from '../../../../../internal/declarations/types/tree-manipulator-data-origin.type';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
+import { TreeNodeProperties } from '../../../../../internal/declarations/interfaces/tree-node-properties.interface';
 
 interface Position {
   top: number;
@@ -64,7 +66,7 @@ const NODE_HAS_NO_CHILD_COMPARATOR: CdkTreeNodeDefWhen<FlatTreeItem> = (_: numbe
   !isNil(node) && !node.isExpandable && !node.isElement;
 const NODE_IS_ELEMENT: CdkTreeNodeDefWhen<FlatTreeItem> = (_: number, element: FlatTreeItem): boolean =>
   !isNil(element) && !element.isExpandable && element.isElement;
-const TREE_ITEM_SIZE_PX: number = 28;
+const TREE_ITEM_SIZE_PX: number = 32;
 @Component({
   selector: 'pupa-tree',
   templateUrl: './tree.component.html',
@@ -311,6 +313,30 @@ export class TreeComponent implements OnInit, OnChanges, AfterContentInit, OnDes
 
   public isExpanded(expandedItemsIds: Set<string>, node: FlatTreeItem): boolean {
     return expandedItemsIds.has(node.id);
+  }
+
+  public getTreeNodeProperties(node: FlatTreeItem): Observable<TreeNodeProperties> {
+    return combineLatest([this.expandedItemIds$, this.selectedNodesIds$, this.highlightedNodesIds$]).pipe(
+      map(
+        ([expandedItemIds, selectedNodesIds, highlightedNodesIds]: [
+          Set<string>,
+          string[],
+          string[]
+        ]): TreeNodeProperties => ({
+          level: node.level,
+          isDirectory: !node.isElement,
+          hasChildren: node.isExpandable,
+          isLoading: false,
+          isExpanded: this.isExpanded(expandedItemIds, node),
+          isSelected: this.idsIncludesNodeId(selectedNodesIds, node),
+          isHighlighted: this.idsIncludesNodeId(highlightedNodesIds, node),
+          isDisabled: false,
+          expand: () => {
+            this.toggleExpansion(node);
+          },
+        })
+      )
+    );
   }
 
   public mouseDown(treeNode: FlatTreeItem, event: MouseEvent): void {

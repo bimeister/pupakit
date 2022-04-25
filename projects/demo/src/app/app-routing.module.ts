@@ -61,6 +61,7 @@ import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
+import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -404,6 +405,11 @@ const demoRoutes: Routes = [
         path: 'form-layout',
         loadChildren: () =>
           import('./pages/form-layout-demo/form-layout-demo.module').then((module: any) => module.FormLayoutDemoModule),
+      },
+      {
+        path: 'tree-node',
+        loadChildren: (): Promise<Type<TreeNodeDemoModule>> =>
+          import('./pages/tree-node-demo/tree-node-demo.module').then((module: any) => module.TreeNodeDemoModule),
       },
     ],
   },

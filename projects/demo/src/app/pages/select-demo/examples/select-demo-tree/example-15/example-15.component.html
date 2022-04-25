@@ -3,6 +3,7 @@
 
   <pupa-select-dropdown>
     <pupa-select-tree
+      #selectTreeComponent
       type="flat"
       [flatDataOrigin]="treeDataOrigin"
       [nodeTemplate]="customNodeTemplate"
@@ -16,8 +17,7 @@
 </pupa-select>
 
 <ng-template #customNodeTemplate let-node="node">
-  <div class="custom-template">
-    <pupa-spinner class="custom-template__spinner" [size]="'16px'"></pupa-spinner>
-    <span class="custom-template__name">{{ node?.name }}</span>
-  </div>
+  <pupa-tree-node [treeNodeProperties]="selectTreeComponent.treeComponent.getTreeNodeProperties(node) | async">
+    {{ node?.name }} (custom template)
+  </pupa-tree-node>
 </ng-template>

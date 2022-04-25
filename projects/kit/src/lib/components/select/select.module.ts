@@ -24,6 +24,7 @@ import { SelectTriggerTagsComponent } from './components/select-trigger-tags/sel
 import { SelectTriggerComponent } from './components/select-trigger/select-trigger.component';
 import { SelectComponent } from './components/select/select.component';
 import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigger-tag-template.directive';
+import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -60,6 +61,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     TagModule,
     ButtonModule,
     IconModule.forFeature([appChevronDownIcon, appCrossCircleIcon, appInfoIcon]),
+    TreeLayoutModule,
   ],
   exports: [...EXPORTS],
 })

@@ -39,6 +39,7 @@ $color_dark: 'base-dark-n275';
     max-height: inherit;
     overflow-x: inherit;
     overflow-y: inherit;
+    box-sizing: border-box;
 
     @include invisible-scrollbars;
   }

@@ -1,9 +1,9 @@
 @use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   width: 100%;
   height: 100%;
-  padding: 2rem 0 0 2rem;
   box-sizing: border-box;
   display: block;
 }
@@ -13,7 +13,6 @@
   height: 100%;
   width: auto;
   user-select: none;
-  background: color(white);
 
   &__loader {
     width: 100%;
@@ -32,112 +31,27 @@
 
 .viewport {
   height: 100%;
+  background-color: color('white');
 
   &_skeleton {
-    top: 0;
-    left: 0;
     width: 100%;
-    position: absolute;
-    z-index: -1;
     pointer-events: none;
   }
-}
 
-.tree-node-row {
-  all: unset;
-  display: block;
-  height: 7rem;
-  background: color(white);
-  padding-bottom: 1px;
-}
-
-.tree-node {
-  $tree_node: &;
-
-  all: unset;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  height: 7rem;
-  background: color(white);
-  border-radius: 3.5rem;
-  border-width: 0;
-  box-sizing: border-box;
-  color: color(main-dark);
-  font-size: 3rem;
-  cursor: pointer;
-  white-space: nowrap;
-
-  &__no-expansion-button {
-    padding-left: 7rem;
-    width: 100%;
-  }
-
-  &__expansion-button {
-    border: none;
-    background: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 7rem;
-    height: 7rem;
-    flex-shrink: 0;
-    user-select: none;
-
-    & > button:disabled {
-      opacity: 0;
-    }
-  }
-
-  &:hover,
-  &_selected {
-    background: color(main);
-    color: color(white);
-  }
-
-  &_highlighted {
-    background: color(main);
-    color: color(white);
-
-    &:hover,
-    &#{$tree_node}_selected {
-      background: color(text);
-    }
-  }
-
-  &_is-disabled-expandable {
-    pointer-events: none;
-    & > button:disabled {
-      opacity: 0.5;
-    }
+  @include host-selector-dark-theme() {
+    background-color: color(base-n600);
   }
 }
 
-.default {
-  &-expansion-button {
-    all: unset;
-    box-sizing: border-box;
-    appearance: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-  }
+.skeleton-scrollable {
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
 .draggable {
   position: absolute;
   pointer-events: none;
   box-shadow: variable(box-shadow_hover);
-}
-
-.prevent-drop {
-  opacity: 0.3;
-  &:hover {
-    background: unset;
-  }
+  z-index: 1;
 }

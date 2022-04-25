@@ -1,0 +1,92 @@
+<h1>Tree node</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Nodes examples</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-tree-node-example-1 *pupaCodeContainerPreviewTemplate></demo-tree-node-example-1>
+    </pupa-code-container>
+    <h2>Scroll</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-tree-node-example-2 *pupaCodeContainerPreviewTemplate></demo-tree-node-example-2>
+    </pupa-code-container>
+    <h2>Skeleton</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-tree-node-example-3 *pupaCodeContainerPreviewTemplate></demo-tree-node-example-3>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <pupa-tree-node [treeNodeProperties]="treeNodePropertiesForm.value">
+            Test
+            <ng-container *pupaTreeNodeActions="hasActions$ | async">
+              <pupa-button-icon
+                [disabled]="treeNodePropertiesForm.value.isDisabled"
+                icon="app-eye-on"
+                size="small"
+                kind="subtle"
+              ></pupa-button-icon>
+              <pupa-button-icon
+                [disabled]="treeNodePropertiesForm.value.isDisabled"
+                icon="app-more"
+                size="small"
+                kind="subtle"
+              ></pupa-button-icon>
+            </ng-container>
+          </pupa-tree-node>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section [formGroup]="treeNodePropertiesForm">
+        <demo-example-viewer-property name="level" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>The level of node.</ng-container>
+          <pupa-input-number formControlName="level"></pupa-input-number>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isDirectory" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is directory.</ng-container>
+          <demo-props-switcher formControlName="isDirectory"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isLoading" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is loading.</ng-container>
+          <demo-props-switcher formControlName="isLoading"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="hasChildren" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node has children.</ng-container>
+          <demo-props-switcher formControlName="hasChildren"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isExpanded" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is expanded.</ng-container>
+          <demo-props-switcher formControlName="isExpanded"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isSelected" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is selected.</ng-container>
+          <demo-props-switcher formControlName="isSelected"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isHighlighted" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is highlighted.</ng-container>
+          <demo-props-switcher formControlName="isHighlighted"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="isDisabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node is disabled.</ng-container>
+          <demo-props-switcher formControlName="isDisabled"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="hasActions" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the node has actions.</ng-container>
+          <demo-props-switcher #hasActions$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

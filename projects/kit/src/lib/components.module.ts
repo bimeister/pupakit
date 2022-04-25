@@ -26,7 +26,6 @@ import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
 import { FloatingCardModule } from './components/floating-card/floating-card.module';
-import { HugeTreeModule } from './components/huge-tree/huge-tree.module';
 import { IconButtonModule } from './components/icon-button/icon-button.module';
 import { InputModule } from './components/input/input.module';
 import { LabelModule } from './components/label/label.module';
@@ -60,6 +59,7 @@ import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
 import { FormLayoutModule } from './components/form-layout/form-layout.module';
+import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
@@ -93,7 +93,6 @@ const EXPORTS: any[] = [
   DropdownMenuModule,
   TreeModule,
   TreeNewModule,
-  HugeTreeModule,
   VerticalTabsModule,
   SkeletonModule,
   DraggableListModule,
@@ -121,6 +120,7 @@ const EXPORTS: any[] = [
   DndCloneContainerModule,
   DaySelectorModule,
   FormLayoutModule,
+  TreeLayoutModule,
 ];
 
 @NgModule({

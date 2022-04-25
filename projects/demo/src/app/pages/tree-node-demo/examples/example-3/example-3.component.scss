@@ -1,0 +1,15 @@
+@use 'mixins' as *;
+
+.tree-node-skeletons {
+  display: grid;
+  grid-gap: 3rem;
+  grid-template-columns: 1fr 2fr 3fr;
+
+  @include lt-lg() {
+    grid-template-columns: 1fr;
+  }
+
+  &__heading {
+    margin: 0;
+  }
+}

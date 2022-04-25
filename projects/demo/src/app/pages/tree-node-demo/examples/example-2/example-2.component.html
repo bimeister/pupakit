@@ -1,0 +1,65 @@
+<pupa-scrollable class="scrollable-box">
+  <div class="scrollable-box__container">
+    <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="selectedLevel0TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="normalLevel1TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="normalLevel2TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel2TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="normalLevel3TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel3TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="normalLevel4TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel4TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+    <pupa-tree-node [treeNodeProperties]="normalLevel5TreeNodeProperties">
+      Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel5TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+  </div>
+</pupa-scrollable>

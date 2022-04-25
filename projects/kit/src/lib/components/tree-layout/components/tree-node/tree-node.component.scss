@@ -1,0 +1,208 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  display: block;
+  height: 8rem;
+}
+
+.tree-node {
+  min-width: 48.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-color: color(base-n0);
+  border-radius: $controlBorderRadius;
+  cursor: pointer;
+  @include no-tap-highlight();
+
+  &__selection {
+    position: sticky;
+    left: 0;
+    width: 2px;
+    min-width: 2px;
+    height: 8rem;
+    opacity: 0;
+  }
+
+  &__left {
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 1rem 0 1rem 1.5rem;
+    margin-right: -4rem;
+  }
+
+  &__right {
+    position: sticky;
+    right: 0;
+    height: 6rem;
+    margin: 1rem 0 1rem auto;
+    padding-left: 4rem;
+    padding-right: 2rem;
+    background: linear-gradient(90deg, color(base-n0, 0.8) -95%, color(base-n0) 70%);
+
+    &-container {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: fit-content;
+    }
+  }
+
+  &__arrow-container {
+    min-width: 9rem;
+    height: 6rem;
+    padding-right: 3rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__without-children {
+    width: 1rem;
+    height: 1rem;
+    color: color(base-dark-n250);
+  }
+
+  &__text {
+    @include font-size-mark;
+    @include font-type-caption;
+    color: color(base-n600);
+    white-space: nowrap;
+    padding-right: 4rem;
+  }
+
+  @include hover {
+    background-color: color(base-white-n400);
+
+    .tree-node__right {
+      background: linear-gradient(90deg, color(base-white-n400, 0.8) -95%, color(base-white-n400) 70%);
+    }
+  }
+
+  &:active {
+    background-color: color(base-white-n300);
+
+    .tree-node__right {
+      background: linear-gradient(90deg, color(base-white-n300, 0.8) -95%, color(base-white-n300) 70%);
+    }
+  }
+
+  &:focus {
+    border: 2px solid color(primary-n500);
+  }
+
+  &--dragover {
+    border: 1px solid color(primary-n500);
+  }
+
+  &--selected {
+    background-color: color(base-white-n550);
+
+    .tree-node__selection {
+      opacity: 1;
+    }
+
+    .tree-node__right {
+      background: linear-gradient(90deg, color(base-white-n550, 0.8) -95%, color(base-white-n550) 70%);
+    }
+  }
+
+  &--disabled {
+    &.tree-node {
+      cursor: not-allowed;
+      background-color: color(base-n0);
+
+      .tree-node__right {
+        background: linear-gradient(90deg, color(base-n0, 0.8) -95%, color(base-n0) 70%);
+      }
+
+      .tree-node__text {
+        color: color(base-dark-n250);
+      }
+
+      &--selected {
+        background-color: color(base-white-n550);
+
+        .tree-node__selection {
+          opacity: 0;
+        }
+
+        .tree-node__right {
+          background: linear-gradient(90deg, color(base-white-n550, 0.8) -95%, color(base-white-n550) 70%);
+        }
+      }
+    }
+  }
+
+  &--expanded {
+    .tree-node__text {
+      @include font-type-point;
+    }
+  }
+
+  @include host-selector-dark-theme() {
+    background-color: color(base-n600);
+
+    &__right {
+      background: linear-gradient(90deg, color(base-n600, 0.8) -95%, color(base-n600) 70%);
+    }
+
+    &__text {
+      color: color(base-n0);
+    }
+
+    @include hover {
+      background-color: color(base-dark-n400);
+
+      .tree-node__right {
+        background: linear-gradient(90deg, color(base-dark-n400, 0.8) -95%, color(base-dark-n400) 70%);
+      }
+    }
+
+    &:active {
+      background-color: color(base-dark-n300);
+
+      .tree-node__right {
+        background: linear-gradient(90deg, color(base-dark-n300, 0.8) -95%, color(base-dark-n300) 70%);
+      }
+    }
+
+    &--selected {
+      background-color: color(base-dark-n500);
+
+      .tree-node__right {
+        background: linear-gradient(90deg, color(base-dark-n500, 0.8) -95%, color(base-dark-n500) 70%);
+      }
+    }
+
+    &.tree-node--disabled {
+      background-color: color(base-n600);
+
+      .tree-node__right {
+        background: linear-gradient(90deg, color(base-n600, 0.8) -95%, color(base-n600) 70%);
+      }
+
+      .tree-node__text {
+        color: color(base-dark-n250);
+      }
+
+      &.tree-node--selected {
+        background-color: color(base-dark-n500);
+
+        .tree-node__right {
+          background: linear-gradient(90deg, color(base-dark-n500, 0.8) -95%, color(base-dark-n500) 70%);
+        }
+
+        .tree-node__text {
+          color: color(base-dark-n250);
+        }
+      }
+    }
+  }
+}

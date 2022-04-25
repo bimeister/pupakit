@@ -1,0 +1,188 @@
+<div class="tree-nodes">
+  <div>
+    <h6 class="tree-nodes__heading">Normal level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Normal level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Normal level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Custom template level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties">
+      <pupa-checkbox
+        [value]="normalLevel0TreeNodeProperties.isSelected"
+        [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+      >
+        Test
+      </pupa-checkbox>
+    </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Custom template level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel1TreeNodeProperties">
+      <pupa-checkbox
+        [value]="normalLevel1TreeNodeProperties.isSelected"
+        [disabled]="normalLevel1TreeNodeProperties.isDisabled"
+      >
+        Test
+      </pupa-checkbox>
+    </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Custom template level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel2TreeNodeProperties">
+      <pupa-checkbox
+        [value]="normalLevel2TreeNodeProperties.isSelected"
+        [disabled]="normalLevel2TreeNodeProperties.isDisabled"
+      >
+        Test
+      </pupa-checkbox>
+    </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">With actions level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties">
+      Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+          icon="app-eye-on"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+        <pupa-button-icon
+          [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">With actions level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel1TreeNodeProperties">
+      Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">With actions level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="normalLevel2TreeNodeProperties">
+      Test
+      <ng-container *pupaTreeNodeActions>
+        <pupa-button-icon
+          [disabled]="normalLevel0TreeNodeProperties.isDisabled"
+          icon="app-more"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+      </ng-container>
+    </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Selected level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Selected level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Selected level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Disabled level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="disabledLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Disabled level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="disabledLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Disabled level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="disabledLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Selected disabled level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedDisabledLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Selected disabled level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedDisabledLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Selected disabled level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="selectedDisabledLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Loading level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="loadingLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Loading level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="loadingLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Loading level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="loadingLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Without children level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="withoutChildrenLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Without children level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="withoutChildrenLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Without children level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="withoutChildrenLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Expanded level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="expandedLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Expanded level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="expandedLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Expanded level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="expandedLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+
+  <div>
+    <h6 class="tree-nodes__heading">Not directory level 0</h6>
+    <pupa-tree-node [treeNodeProperties]="notDirectoryLevel0TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Not directory level 1</h6>
+    <pupa-tree-node [treeNodeProperties]="notDirectoryLevel1TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+  <div>
+    <h6 class="tree-nodes__heading">Not directory level 2</h6>
+    <pupa-tree-node [treeNodeProperties]="notDirectoryLevel2TreeNodeProperties"> Test </pupa-tree-node>
+  </div>
+</div>

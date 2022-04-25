@@ -69,7 +69,9 @@
 </ng-template>
 
 <ng-template #defaultNodeTemplate let-node="node">
-  <div class="select-tree-item-custom-template" (click)="processNodeClick(node)">
-    {{ node?.name }}
-  </div>
+  <pupa-tree-node
+    [treeNodeProperties]="treeComponent.getTreeNodeProperties(node) | async"
+    (click)="processNodeClick(node)"
+    >{{ node?.name }}</pupa-tree-node
+  >
 </ng-template>

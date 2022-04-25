@@ -1,0 +1,50 @@
+<div
+  class="tree-node"
+  [class.tree-node--selected]="isSelected"
+  [class.tree-node--disabled]="treeNodeProperties.isDisabled"
+  [class.tree-node--expanded]="treeNodeProperties.isExpanded"
+>
+  <svg
+    class="tree-node__selection"
+    width="2"
+    height="31"
+    viewBox="0 0 2 31"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M2 31V0C0.4 0 0 2 0 3V28C0 30.4 1.33333 31 2 31Z" fill="#1D5EFF" />
+  </svg>
+  <div class="tree-node__left">
+    <div [style.margin-left]="arrowOffset" class="tree-node__arrow-container">
+      <ng-container *ngIf="treeNodeProperties.isDirectory">
+        <pupa-button-icon
+          (click)="expand($event)"
+          *ngIf="treeNodeProperties.hasChildren"
+          [icon]="arrowIcon"
+          [disabled]="treeNodeProperties.isDisabled"
+          [loading]="treeNodeProperties.isLoading"
+          [isTransitionDurationDisabled]="true"
+          size="small"
+          kind="subtle"
+        ></pupa-button-icon>
+        <pupa-icon
+          *ngIf="!treeNodeProperties.hasChildren"
+          class="tree-node__without-children"
+          name="app-circle"
+        ></pupa-icon>
+      </ng-container>
+    </div>
+    <div class="tree-node__text">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="tree-node__right">
+    <div
+      *ngIf="treeNodeActionsTemplate?.isDisplayed$ | async"
+      (click)="$event.stopPropagation()"
+      class="tree-node__right-container"
+    >
+      <ng-container [ngTemplateOutlet]="treeNodeActionsTemplate?.templateRef"></ng-container>
+    </div>
+  </div>
+</div>
