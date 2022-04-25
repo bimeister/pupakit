@@ -10,6 +10,8 @@ import { IconModule } from '../icon/icon.module';
 import { iosArrowDownIcon } from '../../../internal/constants/icons/ios-arrow-down-icon.const';
 import { iosArrowForwardIcon } from '../../../internal/constants/icons/ios-arrow-forward-icon.const';
 import { TreeItemTemplateDirective } from './directives/tree-item-template.directive';
+import { TreeLayoutModule } from '../../components/tree-layout/tree-layout.module';
+import { ScrollableModule } from '../../components/scrollable/scrollable.module';
 
 @NgModule({
   declarations: [TreeNewComponent, TreeItemTemplateDirective],
@@ -20,6 +22,8 @@ import { TreeItemTemplateDirective } from './directives/tree-item-template.direc
     ScrollingModule,
     CdkTreeModule,
     IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
+    TreeLayoutModule,
+    ScrollableModule,
   ],
   providers: [],
   exports: [TreeNewComponent, TreeItemTemplateDirective],

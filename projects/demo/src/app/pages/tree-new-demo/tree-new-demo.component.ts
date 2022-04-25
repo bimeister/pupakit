@@ -3,6 +3,7 @@ import { getUuid } from '@bimeister/utilities';
 import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
 import { TreeController } from '@kit/internal/declarations/classes/tree-controller.class';
 import { TreeEvents } from '@kit/internal/declarations/events/tree.events';
+import { EventBus } from '@bimeister/event-bus/rxjs';
 
 const WOLF: FlatTreeItem = new FlatTreeItem(true, 'Wolves', null, getUuid(), { parentId: null });
 const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: WOLF.id });
@@ -26,19 +27,32 @@ const DATA: FlatTreeItem[] = [
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class TreeNewDemoComponent {
-  public readonly controller: TreeController = new TreeController();
+  public readonly customTreeController: TreeController = new TreeController();
+  public readonly defaultTreeController: TreeController = new TreeController();
+  private readonly eventBus: EventBus;
 
   constructor(public readonly injector: Injector) {
-    this.controller.setChildren(null, this.fetch());
-    this.controller
+    this.initController(this.customTreeController);
+    this.initController(this.defaultTreeController);
+
+    this.eventBus = this.customTreeController.eventBus;
+  }
+
+  public customTreeNodeClick(treeItem: FlatTreeItem): void {
+    this.eventBus.dispatch(new TreeEvents.Click(treeItem));
+  }
+
+  private initController(controller: TreeController): void {
+    controller.setChildren(null, this.fetch());
+    controller
       .getEvents(TreeEvents.Expand)
-      .subscribe((event: TreeEvents.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));
-    this.controller
+      .subscribe((event: TreeEvents.Expand) => controller.setChildren(event.payload, this.fetch(event.payload)));
+    controller
       .getEvents(TreeEvents.Click)
-      .subscribe((event: TreeEvents.Click) => this.controller.setSelected(event.payload.id));
-    this.controller
+      .subscribe((event: TreeEvents.Click) => controller.setSelected(event.payload.id));
+    controller
       .getEvents(TreeEvents.Collapse)
-      .subscribe((event: TreeEvents.Collapse) => this.controller.removeChildren(event.payload));
+      .subscribe((event: TreeEvents.Collapse) => controller.removeChildren(event.payload));
   }
 
   private fetch(parentId: string = null): FlatTreeItem[] {

@@ -74,6 +74,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   private readonly scrollDragMode$: BehaviorSubject<Nullable<ScrollDragMode>> = new BehaviorSubject<
     Nullable<ScrollDragMode>
   >(null);
+  @Input() public innerPadding: string;
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();

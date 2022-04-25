@@ -39,6 +39,9 @@ export class ButtonIconComponent implements OnChanges {
 
   @Input() public readonly tabIndex: string = '0';
 
+  @Input() public isTransitionDurationDisabled: boolean = false;
+  public readonly transitionDuration$: BehaviorSubject<string> = new BehaviorSubject<string>('0.2s');
+
   public readonly loadingSizePx$: Observable<string> = this.size$.pipe(
     map((size: ButtonSize) => (size === 'extra-small' ? '12px' : '16px'))
   );
@@ -64,6 +67,7 @@ export class ButtonIconComponent implements OnChanges {
     this.processIconChange(changes?.icon);
     this.processLoadingChange(changes?.loading);
     this.processActiveChange(changes?.active);
+    this.processIsTransitionDurationDisabledChange(changes?.isTransitionDurationDisabled);
   }
 
   @HostListener('pointerup', ['$event'])
@@ -141,5 +145,15 @@ export class ButtonIconComponent implements OnChanges {
     }
 
     this.active$.next(updatedValue);
+  }
+
+  private processIsTransitionDurationDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.transitionDuration$.next(updatedValue ? '0s' : '0.2s');
   }
 }

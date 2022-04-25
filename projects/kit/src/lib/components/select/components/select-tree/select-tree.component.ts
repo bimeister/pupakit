@@ -60,6 +60,19 @@ export class SelectTreeComponent extends SelectTreeBase {
 
   @Output() public readonly expandedNode: EventEmitter<FlatTreeItem> = new EventEmitter();
 
+  public get treeComponent(): TreeComponent {
+    switch (this.type) {
+      case TreeType.Flat:
+        return this.flatTreeComponent;
+      case TreeType.Hierarchical:
+        return this.hierarchicalTreeComponent;
+      case TreeType.Custom:
+        return this.customPupaTreeComponent;
+      default:
+        return;
+    }
+  }
+
   constructor(@Attribute('type') type: TreeType, selectStateService: SelectStateService<Uuid>) {
     super(type, selectStateService);
   }

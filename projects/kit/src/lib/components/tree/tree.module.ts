@@ -8,6 +8,8 @@ import { IconModule } from '../icon/icon.module';
 import { SkeletonModule } from '../skeleton/skeleton.module';
 import { SpinnerModule } from '../spinner/spinner.module';
 import { TreeComponent } from './components/tree/tree.component';
+import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
+import { ScrollableModule } from '../scrollable/scrollable.module';
 
 @NgModule({
   declarations: [TreeComponent],
@@ -18,6 +20,8 @@ import { TreeComponent } from './components/tree/tree.component';
     ScrollingModule,
     CdkTreeModule,
     IconModule.forFeature([iosArrowDownIcon, iosArrowForwardIcon]),
+    TreeLayoutModule,
+    ScrollableModule,
   ],
   exports: [TreeComponent],
 })

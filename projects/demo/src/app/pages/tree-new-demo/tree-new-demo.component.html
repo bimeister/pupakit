@@ -3,10 +3,19 @@
 <demo-example-viewer>
   <demo-example-viewer-content [isSticky]="false">
     <div class="tree-wrapper">
-      <pupa-tree-new [controller]="controller">
-        <ng-container *pupaTreeItemTemplate="let data"> {{ data.name }} (customTemplate)</ng-container>
+      <pupa-tree-new #treeNew [controller]="customTreeController" class="tree-wrapper__item">
+        <pupa-tree-node
+          *pupaTreeItemTemplate="let data"
+          (click)="customTreeNodeClick(data)"
+          [treeNodeProperties]="treeNew.getTreeNodeProperties(data) | async"
+          >{{ data?.name }} (customTemplate)
+          <ng-container *pupaTreeNodeActions>
+            <pupa-button-icon icon="app-eye-on" size="small" kind="subtle"></pupa-button-icon>
+            <pupa-button-icon icon="app-more" size="small" kind="subtle"></pupa-button-icon>
+          </ng-container>
+        </pupa-tree-node>
       </pupa-tree-new>
-      <pupa-tree-new [controller]="controller"></pupa-tree-new>
+      <pupa-tree-new [controller]="defaultTreeController" class="tree-wrapper__item"></pupa-tree-new>
     </div>
   </demo-example-viewer-content>
 </demo-example-viewer>

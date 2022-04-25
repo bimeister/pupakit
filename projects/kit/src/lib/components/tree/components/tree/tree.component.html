@@ -3,148 +3,85 @@
     <pupa-spinner size="40px"></pupa-spinner>
   </div>
 
-  <cdk-virtual-scroll-viewport [itemSize]="treeItemSizePx" class="viewport" #viewPort>
-    <ng-container *cdkVirtualFor="let item of filteredSource$ | async"> </ng-container>
-
-    <cdk-tree
-      (contextmenu)="$event.preventDefault()"
-      [dataSource]="dataSource"
-      [treeControl]="treeControl"
-      [trackBy]="trackBy$ | async"
+  <pupa-scrollable
+    [invisibleScrollbars]="['vertical', 'horizontal']"
+    class="skeleton-scrollable"
+    innerPadding="2rem 3rem 3rem 2rem"
+  >
+    <cdk-virtual-scroll-viewport
+      pupaScrollableContent
+      #skeletonViewPort
+      [itemSize]="treeItemSizePx"
+      class="viewport viewport_skeleton"
     >
-      <cdk-tree-node
-        *cdkTreeNodeDef="let node; when: isElement"
-        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
-        cdkTreeNodePadding
-        class="tree-node-row"
-        (mousedown)="mouseDown(node, $event)"
-        (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
-      >
-        <div
-          class="tree-node"
-          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
-          [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
-        >
-          <div class="tree-node__no-expansion-button">
-            <ng-container
-              [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
-              [ngTemplateOutletContext]="{
-                node: node
-              }"
-            ></ng-container>
-          </div>
-        </div>
-      </cdk-tree-node>
+      <pupa-skeleton>
+        <pupa-skeleton-group *cdkVirtualFor="let item of filteredSource$ | async">
+          <pupa-tree-node-skeleton [level]="item.level"></pupa-tree-node-skeleton>
+        </pupa-skeleton-group>
+      </pupa-skeleton>
+    </cdk-virtual-scroll-viewport>
+  </pupa-scrollable>
 
-      <cdk-tree-node
-        *cdkTreeNodeDef="let node; when: hasNoChild"
-        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
-        cdkTreeNodePadding
-        class="tree-node-row"
-        (mousedown)="mouseDown(node, $event)"
-        (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
-      >
-        <div
-          class="tree-node"
-          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
-        >
-          <div class="tree-node__expansion-button tree-node_is-disabled-expandable">
-            <ng-container
-              [ngTemplateOutlet]="defaultExpansionButtonTemplate"
-              [ngTemplateOutletContext]="{
-                node: node,
-                hasChild: false,
-                isElement: false
-              }"
-            ></ng-container>
-          </div>
+  <pupa-scrollable innerPadding="2rem 3rem 3rem 2rem">
+    <cdk-virtual-scroll-viewport pupaScrollableContent [itemSize]="treeItemSizePx" class="viewport" #viewPort>
+      <ng-container *cdkVirtualFor="let item of filteredSource$ | async"> </ng-container>
 
+      <cdk-tree [dataSource]="dataSource" [treeControl]="treeControl" [trackBy]="trackBy$ | async">
+        <cdk-tree-node
+          *cdkTreeNodeDef="let node; when: isElement"
+          (mousedown)="mouseDown(node, $event)"
+          (mouseenter)="mouseEnter(node)"
+          (mouseleave)="mouseLeave()"
+        >
           <ng-container
             [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
             [ngTemplateOutletContext]="{
               node: node
             }"
           ></ng-container>
-        </div>
-      </cdk-tree-node>
+        </cdk-tree-node>
 
-      <cdk-tree-node
-        *cdkTreeNodeDef="let node; when: hasChild"
-        [cdkTreeNodePaddingIndent]="nodesWithoutPadding ? 0 : 10"
-        cdkTreeNodePadding
-        class="tree-node-row"
-        (mousedown)="mouseDown(node, $event)"
-        (mouseenter)="mouseEnter(node)"
-        (mouseleave)="mouseLeave()"
-      >
-        <div
-          class="tree-node"
-          [style.padding-left.px]="nodesWithoutPadding ? 10 * node.level : 0"
-          [class.prevent-drop]="draggingHasStarted && !canDrop(node)"
-          [class.tree-node_selected]="idsIncludesNodeId(selectedNodesIds$ | async, node)"
-          [class.tree-node_highlighted]="idsIncludesNodeId(highlightedNodesIds$ | async, node)"
+        <cdk-tree-node
+          *cdkTreeNodeDef="let node; when: hasNoChild"
+          (mousedown)="mouseDown(node, $event)"
+          (mouseenter)="mouseEnter(node)"
+          (mouseleave)="mouseLeave()"
         >
-          <div class="tree-node__expansion-button" (click)="toggleExpansion(node)">
-            <ng-container
-              [ngTemplateOutlet]="defaultExpansionButtonTemplate"
-              [ngTemplateOutletContext]="{
-                node: node,
-                hasChild: true,
-                isElement: false
-              }"
-            ></ng-container>
-          </div>
-
           <ng-container
             [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
             [ngTemplateOutletContext]="{
               node: node
             }"
           ></ng-container>
-        </div>
-      </cdk-tree-node>
-    </cdk-tree>
-  </cdk-virtual-scroll-viewport>
+        </cdk-tree-node>
 
-  <cdk-virtual-scroll-viewport #skeletonViewPort [itemSize]="treeItemSizePx" class="viewport viewport_skeleton">
-    <pupa-skeleton>
-      <pupa-skeleton-group *cdkVirtualFor="let item of filteredSource$ | async">
-        <pupa-skeleton-line></pupa-skeleton-line>
-      </pupa-skeleton-group>
-    </pupa-skeleton>
-  </cdk-virtual-scroll-viewport>
+        <cdk-tree-node
+          *cdkTreeNodeDef="let node; when: hasChild"
+          (mousedown)="mouseDown(node, $event)"
+          (mouseenter)="mouseEnter(node)"
+          (mouseleave)="mouseLeave()"
+        >
+          <ng-container
+            [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
+            [ngTemplateOutletContext]="{
+              node: node
+            }"
+          ></ng-container>
+        </cdk-tree-node>
+      </cdk-tree>
+    </cdk-virtual-scroll-viewport>
+  </pupa-scrollable>
 
-  <div *ngIf="draggingHasStarted" class="draggable tree-node" #draggable>
-    <div class="tree-node__expansion-button">
-      <ng-container
-        [ngTemplateOutlet]="defaultExpansionButtonTemplate"
-        [ngTemplateOutletContext]="{
-          node: draggableNode,
-          hasChild: draggableNode.isExpandable,
-          isElement: draggableNode.isElement
-        }"
-      ></ng-container>
-    </div>
-
+  <div *ngIf="draggingHasStarted" class="draggable" #draggable>
     <ng-container
       [ngTemplateOutlet]="nodeTemplate || defaultTemplate"
-      [ngTemplateOutletContext]="{ node: draggableNode }"
+      [ngTemplateOutletContext]="{
+        node: draggableNode
+      }"
     ></ng-container>
   </div>
 </section>
 
-<ng-template #defaultExpansionButtonTemplate let-node="node" let-hasChild="hasChild">
-  <button class="default-expansion-button" [disabled]="!hasChild">
-    <pupa-icon [name]="isExpanded(expandedItemIds$ | async, node) ? 'ios-arrow-down' : 'ios-arrow-forward'"></pupa-icon>
-  </button>
-</ng-template>
-
 <ng-template #defaultTemplate let-node="node">
-  {{ node?.name }}
+  <pupa-tree-node [treeNodeProperties]="getTreeNodeProperties(node) | async">{{ node?.name }}</pupa-tree-node>
 </ng-template>

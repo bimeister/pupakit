@@ -1,5 +1,4 @@
 import { ListRange } from '@angular/cdk/collections';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
   AfterViewInit,
@@ -22,6 +21,7 @@ import { filterNotNil, filterTruthy, getClampedValue, isNil, Nullable } from '@b
 import {
   animationFrameScheduler,
   BehaviorSubject,
+  combineLatest,
   interval,
   NEVER,
   Observable,
@@ -40,6 +40,8 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
 import { TreeDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/tree-data-display-collection-ref.interface';
 import { TreeItemTemplateDirective } from '../../directives/tree-item-template.directive';
+import { TreeNodeProperties } from '../../../../../internal/declarations/interfaces/tree-node-properties.interface';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 
 interface Position {
   top: number;
@@ -200,6 +202,26 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
 
   public toggleExpansion(expandedIdsList: string[], treeItem: FlatTreeItem): void {
     this.isExpanded(expandedIdsList, treeItem) ? this.collapseClick(treeItem) : this.expandClick(treeItem);
+  }
+
+  public getTreeNodeProperties(node: FlatTreeItem): Observable<TreeNodeProperties> {
+    return combineLatest([this.expandedIdsList$, this.selectedIdsList$]).pipe(
+      map(
+        ([expandedIdsList, selectedIdsList]: [string[], string[]]): TreeNodeProperties => ({
+          level: node.level,
+          isDirectory: !node.isElement,
+          hasChildren: node.isExpandable,
+          isLoading: false,
+          isExpanded: this.isExpanded(expandedIdsList, node),
+          isSelected: this.idsIncludesNodeId(selectedIdsList, node),
+          isHighlighted: this.idsIncludesNodeId(selectedIdsList, node),
+          isDisabled: false,
+          expand: () => {
+            this.toggleExpansion(expandedIdsList, node);
+          },
+        })
+      )
+    );
   }
 
   private setupController(change: ComponentChange<this, TreeController>): void {
