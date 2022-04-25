@@ -22,7 +22,7 @@
   display: inline-block;
 
   border-radius: 1px;
-  padding: 2rem 3rem;
+  padding: 2rem 10px;
 
   user-select: none;
 
@@ -747,6 +747,15 @@
 .button {
   &_large {
     height: 10rem;
+    padding: 2rem 3rem;
+
+    &.button_with-icon-left {
+      padding-left: 10px;
+    }
+
+    &.button_with-icon-right {
+      padding-right: 10px;
+    }
   }
 
   &_medium {
@@ -764,6 +773,29 @@
 
     .button__icon {
       @include font-size-small();
+    }
+  }
+
+  &_extra-small {
+    height: 4rem;
+    padding: 0px 2rem;
+
+    @include font-size-extra-small();
+
+    .button__content {
+      @include font-size-extra-small();
+    }
+
+    .button__icon {
+      @include font-size-mark();
+    }
+
+    &.button_with-icon-left {
+      padding-left: 1rem;
+    }
+
+    &.button_with-icon-right {
+      padding-right: 1rem;
     }
   }
 }

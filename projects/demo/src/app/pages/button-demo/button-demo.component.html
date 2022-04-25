@@ -51,21 +51,24 @@
               kind: kind$ | async,
               disabled: disabled$ | async,
               loading: loading$ | async,
-              active: active$ | async
+              active: active$ | async,
+              iconPosition: iconPosition$ | async
             };
             let size = size;
             let kind = kind;
             let disabled = disabled;
             let loading = loading;
-            let active = active
+            let active = active;
+            let iconPosition = iconPosition
           "
         >
           <pupa-button
+            class="content__button"
             [size]="size"
             [kind]="kind"
             [disabled]="disabled"
             [icon]="buttonIconFormControl.value"
-            [iconPosition]="iconPosition$ | async"
+            [iconPosition]="iconPosition"
             [loading]="loading"
             [active]="active"
           >
@@ -73,6 +76,7 @@
           </pupa-button>
 
           <pupa-button-icon
+            class="content__button"
             [size]="size"
             [kind]="kind"
             [disabled]="disabled"
@@ -83,6 +87,7 @@
           </pupa-button-icon>
 
           <pupa-button-round
+            class="content__button"
             [disabled]="disabled"
             [icon]="buttonIconFormControl.value"
             [loading]="loading"
@@ -96,7 +101,7 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="ButtonSize">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the button.</ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+          <demo-props-select #size$ direction="row" [options]="sizeOptions"></demo-props-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="kind" type="ButtonKind">

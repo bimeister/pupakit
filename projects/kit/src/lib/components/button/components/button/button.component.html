@@ -30,6 +30,6 @@
   </div>
 
   <div class="button__loading" *ngIf="loading$ | async" focusable="false">
-    <pupa-spinner [size]="'16px'"></pupa-spinner>
+    <pupa-spinner [size]="loadingSizePx$ | async"></pupa-spinner>
   </div>
 </button>

@@ -2,18 +2,7 @@
 
 .button-container {
   display: flex;
+  flex-wrap: wrap;
   margin: 4rem 0;
-
-  @include lt-lg() {
-    flex-direction: column;
-  }
-}
-
-.button-container__item + .button-container__item {
-  margin-left: 1rem;
-
-  @include lt-lg() {
-    margin-top: 1rem;
-    margin-left: initial;
-  }
+  gap: 2rem;
 }
