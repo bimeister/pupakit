@@ -25,15 +25,22 @@
   }
   padding: 2rem;
 
-  &:hover:not(.radio-control_disabled) {
-    background: color(base-white-n400);
-    @include host-selector-dark-theme() {
-      background: color(base-dark-n275, 0.5);
+  &:not(.radio-control_disabled):not(.radio-control_without-label) {
+    @include hover() {
+      background: color(base-white-n400);
+      @include host-selector-dark-theme() {
+        background: color(base-dark-n275, 0.5);
+      }
     }
   }
 
   &_disabled {
     cursor: not-allowed;
+  }
+
+  &_without-label {
+    height: auto;
+    padding: 0;
   }
 }
 
@@ -133,6 +140,9 @@
 
   &_disabled.radio-control-label_selected {
     color: color(base-white-n250);
+  }
+  &_hidden {
+    display: none;
   }
 }
 

@@ -20,6 +20,11 @@
     <pupa-code-container [content]="example4Content">
       <demo-radio-button-example-4 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-4>
     </pupa-code-container>
+
+    <h2>Without Label</h2>
+    <pupa-code-container [content]="example5Content">
+      <demo-radio-button-example-5 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-5>
+    </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer>
@@ -69,6 +74,12 @@
 
         <demo-example-viewer-property decoratorName="input" name="tabindex" type="number">
           <ng-container *demoExampleViewerPropertyDescription>Set the tab index for radio control.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="withLabel" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Set style without label for radio control. Default value is true.</ng-container
+          >
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
