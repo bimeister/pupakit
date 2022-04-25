@@ -3,7 +3,7 @@
     {{ caption }}
   </pupa-select-trigger>
 
-  <pupa-select-dropdown>
+  <pupa-select-dropdown [width]="'auto'">
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let option of options" [value]="option.value">
         {{ option.caption }}

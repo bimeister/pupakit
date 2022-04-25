@@ -8,4 +8,8 @@
   flex-direction: row;
   align-items: center;
   gap: 4rem;
+
+  &__button {
+    display: inline-flex;
+  }
 }

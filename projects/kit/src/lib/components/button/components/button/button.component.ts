@@ -43,6 +43,10 @@ export class ButtonComponent implements OnChanges {
 
   @Input() public readonly tabIndex: string = '0';
 
+  public readonly loadingSizePx$: Observable<string> = this.size$.pipe(
+    map((size: ButtonSize) => (size === 'extra-small' ? '12px' : '16px'))
+  );
+
   protected readonly iconContainerClass$: Observable<Nullable<string>> = combineLatest([
     this.icon$,
     this.iconPosition$,

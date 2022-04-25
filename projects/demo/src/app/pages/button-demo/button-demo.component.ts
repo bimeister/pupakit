@@ -28,6 +28,10 @@ export class ButtonDemoComponent {
       caption: 'Small',
       value: 'small',
     },
+    {
+      caption: 'Extra-Small',
+      value: 'extra-small',
+    },
   ];
 
   public readonly kindOptions: PropsOption[] = [
