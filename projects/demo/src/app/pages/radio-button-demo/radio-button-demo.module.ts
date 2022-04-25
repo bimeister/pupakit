@@ -4,6 +4,7 @@ import { RadioButtonExample1Component } from './examples/example-1/example-1.com
 import { RadioButtonExample2Component } from './examples/example-2/example-2.component';
 import { RadioButtonExample3Component } from './examples/example-3/example-3.component';
 import { RadioButtonExample4Component } from './examples/example-4/example-4.component';
+import { RadioButtonExample5Component } from './examples/example-5/example-5.component';
 import { RadioButtonDemoRoutingModule } from './radio-button-demo-routing.module';
 import { RadioButtonDemoComponent } from './radio-button-demo.component';
 
@@ -14,6 +15,7 @@ import { RadioButtonDemoComponent } from './radio-button-demo.component';
     RadioButtonExample2Component,
     RadioButtonExample3Component,
     RadioButtonExample4Component,
+    RadioButtonExample5Component,
   ],
   imports: [DemoSharedModule, RadioButtonDemoRoutingModule],
 })

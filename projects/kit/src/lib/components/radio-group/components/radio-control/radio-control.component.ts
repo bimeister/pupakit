@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
-import { filterFalsy, shareReplayWithRefCount } from '@bimeister/utilities';
-import { Observable } from 'rxjs';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { filterFalsy, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { RadioControlSize } from '../../../../../internal/declarations/types/radio-control-size.type';
 import { RadioGroupDirection } from '../../../../../internal/declarations/types/radio-group-direction.type';
 import { RadioGroupService } from '../../services/radio-group.service';
@@ -14,9 +16,10 @@ import { RadioGroupService } from '../../services/radio-group.service';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioControlComponent<T> {
+export class RadioControlComponent<T> implements OnChanges {
   @Input() private readonly value: T;
   @Input() public tabindex: number = 0;
+  @Input() public withLabel: boolean = true;
 
   public readonly labelSize$: Observable<RadioControlSize> = this.radioGroupService.labelSize$;
 
@@ -30,6 +33,8 @@ export class RadioControlComponent<T> {
 
   public readonly directions$: Observable<RadioGroupDirection> = this.radioGroupService.direction$;
 
+  public readonly isWithLabel$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   constructor(private readonly radioGroupService: RadioGroupService<T>) {}
 
   @HostListener('click')
@@ -40,11 +45,25 @@ export class RadioControlComponent<T> {
     });
   }
 
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processWithLabelChange(changes?.withLabel);
+  }
+
   private select(): void {
     this.radioGroupService.setValue(this.value);
   }
 
   private setOnTouch(): void {
     this.radioGroupService.setOnTouch(true);
+  }
+
+  private processWithLabelChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.isWithLabel$.next(updatedValue);
   }
 }

@@ -4,7 +4,8 @@
     isDisabled: isDisabled$ | async,
     isSelected: isSelected$ | async,
     labelSize: labelSize$ | async,
-    direction: directions$ | async
+    direction: directions$ | async,
+    isWithLabel: isWithLabel$ | async
   }"
 >
 </ng-container>
@@ -15,6 +16,7 @@
   let-isSelected="isSelected"
   let-labelSize="labelSize"
   let-direction="direction"
+  let-isWithLabel="isWithLabel"
 >
   <section
     class="radio-control"
@@ -22,6 +24,7 @@
     [class.radio-control_disabled]="isDisabled"
     [class.radio-control_row]="direction === 'row'"
     [class.radio-control_column]="direction === 'column'"
+    [class.radio-control_without-label]="!isWithLabel"
     (keydown.enter)="processClick()"
   >
     <div class="radio-control-marker-wrapper">
@@ -38,6 +41,7 @@
       [class.radio-control-label_selected]="isSelected"
       [class.radio-control-label_disabled]="isDisabled"
       [class.radio-control-label_small]="labelSize === 'small'"
+      [class.radio-control-label_hidden]="!isWithLabel"
     >
       <ng-content></ng-content>
     </div>
