@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
+import { CardModule } from './components/card/card.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { SharedModule } from '../internal/shared/shared.module';
 import { ActionsModule } from './components/actions/actions.module';
@@ -62,6 +63,7 @@ const EXPORTS: any[] = [
   LabelModule,
   ExpansibleModule,
   ButtonModule,
+  CardModule,
   CheckboxModule,
   ChipModule,
   ChipTabsModule,

@@ -49,6 +49,7 @@ export class SidebarComponent {
         { title: 'Info block', link: '/kit/info-block' },
         { title: 'Input', link: '/kit/input' },
         { title: 'Select', link: '/kit/select' },
+        { title: 'Card', link: '/kit/card' },
         { title: 'Textarea', link: '/kit/textarea' },
         { title: 'Date time pickers', link: '/kit/date-time-picker' },
         { title: 'Label', link: '/kit/label' },

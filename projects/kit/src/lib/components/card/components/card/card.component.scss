@@ -1,0 +1,69 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+$layout-height-large: 16rem;
+$layout-height-medium: 12rem;
+$normal-shadow-color: rgba(33, 33, 33, 0.05);
+$hover-shadow-color: rgba(33, 33, 33, 0.08);
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem 3rem 2rem 2rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-radius: 1rem;
+  border: 1px solid transparent;
+
+  box-shadow: 0 1px 7px $normal-shadow-color;
+  background: color(base-n0);
+  color: color(base-n600);
+  outline: none;
+
+  &_medium {
+    height: $layout-height-medium;
+  }
+
+  &_large {
+    height: $layout-height-large;
+  }
+
+  &_disabled {
+    color: color(base-white-n250);
+  }
+
+  &_clickable {
+    cursor: pointer;
+  }
+
+  &:not(.card_disabled) {
+    &:focus {
+      border: 1px solid color(primary-n600);
+    }
+
+    @include hover() {
+      box-shadow: 0 1px 3px $hover-shadow-color;
+
+      @include host-selector-dark-theme() {
+        background: color(base-dark-n275);
+      }
+    }
+  }
+
+  @include host-selector-dark-theme() {
+    background: color(base-dark-n400);
+    color: color(base-n0);
+
+    &_disabled {
+      color: color(base-white-n250);
+    }
+  }
+}

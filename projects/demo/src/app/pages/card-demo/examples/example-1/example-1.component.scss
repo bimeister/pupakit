@@ -1,0 +1,24 @@
+@use 'mixins' as *;
+
+.container {
+  display: grid;
+  grid-template-columns: 95rem 95rem;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  justify-items: center;
+  align-items: center;
+
+  @include lt-lg() {
+    grid-template-columns: 95rem;
+  }
+
+  @include xs() {
+    grid-template-columns: 100%;
+  }
+
+  .icon {
+    width: 5rem;
+    height: 5rem;
+  }
+}

@@ -1,0 +1,74 @@
+<h1>Card</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <p><pupa-code-inline>pupa-card</pupa-code-inline> is a flexible container component.</p>
+    <p>It can be used alone, but it also provides several common pre-styled card sections:</p>
+    <ul>
+      <li><pupa-code-inline>pupa-card-cover</pupa-code-inline> - container for icon/image content</li>
+      <li><pupa-code-inline>pupa-card-header</pupa-code-inline> - container for card header content</li>
+      <li><pupa-code-inline>pupa-card-title</pupa-code-inline> - container for card title</li>
+      <li><pupa-code-inline>pupa-card-description</pupa-code-inline> - container for card description</li>
+      <li><pupa-code-inline>pupa-card-action</pupa-code-inline> - container for action button</li>
+    </ul>
+    <p>All these sections are optional.</p>
+
+    <h2>Large card</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-card-example-1 *pupaCodeContainerPreviewTemplate></demo-card-example-1>
+    </pupa-code-container>
+
+    <h2>Medium card</h2>
+    <pupa-code-container [content]="example2Content">
+      <demo-card-example-2 *pupaCodeContainerPreviewTemplate></demo-card-example-2>
+    </pupa-code-container>
+
+    <h2>Extra cases</h2>
+    <pupa-code-container [content]="example3Content">
+      <demo-card-example-3 *pupaCodeContainerPreviewTemplate></demo-card-example-3>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-card
+          [disabled]="disabled$ | async"
+          [clickable]="clickable$ | async"
+          [size]="size$ | async"
+          [tabIndex]="tabIndexFormControl.value"
+        >
+          <pupa-card-cover>
+            <pupa-icon name="app-cube"></pupa-icon>
+          </pupa-card-cover>
+          <pupa-card-header>
+            <pupa-card-title>Title</pupa-card-title>
+            <pupa-card-description>Description</pupa-card-description>
+          </pupa-card-header>
+          <pupa-card-action>
+            <pupa-button-icon kind="subtle" icon="app-more"></pupa-button-icon>
+          </pupa-card-action>
+        </pupa-card>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="size" type="CardSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the card.</ng-container>
+          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the card is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="clickable" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the card is clickable.</ng-container>
+          <demo-props-switcher #clickable$></demo-props-switcher>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="tabIndex" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>Set the tab index for clickable card.</ng-container>
+          <pupa-input-number [formControl]="tabIndexFormControl"></pupa-input-number>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
