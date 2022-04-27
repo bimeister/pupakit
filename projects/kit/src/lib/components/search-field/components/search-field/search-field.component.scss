@@ -41,11 +41,11 @@
     cursor: pointer;
     outline: none;
     width: 100%;
-    border-radius: 1px;
+    border-radius: $controlBorderRadius;
     box-sizing: border-box;
     border: 1px solid transparent;
     height: 8rem;
-    padding: 2rem 10rem;
+    padding: 2rem 9rem;
     color: map.get($input_light_styles, input, color);
     caret-color: map.get($input_light_styles, input, caret-color);
     background-color: map.get($input_light_styles, input, background-color);
@@ -199,7 +199,7 @@
   &__reset {
     position: absolute;
     z-index: 3;
-    right: 2rem;
+    right: 1rem;
     pointer-events: none;
     opacity: 0;
     transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -221,7 +221,7 @@
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
     color: map.get($input_light_styles, input, color);
     padding: 2rem;
-    transform: translateX(2rem);
+    transform: translateX(1rem);
 
     &_collapsed {
       transform: translateX(0);
