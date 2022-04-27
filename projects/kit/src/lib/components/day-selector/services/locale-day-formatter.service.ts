@@ -1,13 +1,12 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { DayOfWeek } from '../types/day-of-week';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { DEFAULT_LOCALE } from '../constants/default-locale.const';
-import { LocaleDayNames } from '../types/locale-day-names';
+import { DEFAULT_LOCALE } from '../../../../internal/constants/default-locale.const';
 import { DAY_SELECTOR_CONFIG_TOKEN } from '../../../../internal/constants/tokens/day-selector-config.token';
 import { DaySelectorConfig } from '../../../../internal/declarations/interfaces/day-selector-config.interface';
-import { DEFAULT_DAY_SELECTOR_CONFIG } from '../constants/default-day-selector-config.const';
+import { DEFAULT_DAY_SELECTOR_CONFIG } from '../../../../internal/constants/default-day-selector-config.const';
+import { DayOfWeek } from '../../../../internal/declarations/enums/day-of-week.enum';
 
 @Injectable()
 export class LocaleDayFormatterService {
@@ -15,7 +14,7 @@ export class LocaleDayFormatterService {
 
   private readonly currentLocale$: BehaviorSubject<string> = new BehaviorSubject<string>(DEFAULT_LOCALE);
 
-  public readonly localeNames$: Observable<LocaleDayNames> = this.currentLocale$.pipe(
+  public readonly localeNames$: Observable<Record<DayOfWeek, string>> = this.currentLocale$.pipe(
     map((locale: string) => this.translates[locale])
   );
 

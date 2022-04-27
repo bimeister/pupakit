@@ -93,6 +93,8 @@ export {
   ScrollDragMode,
   ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
 } from './internal/api';
+export { DAY_SELECTOR_CONFIG_TOKEN } from './internal/constants/tokens/api';
+export { DayOfWeek } from './internal/declarations/enums/day-of-week.enum';
 export * from './internal/constants/icons/api';
 export { ComponentsModule } from './lib/components.module';
 export * from './lib/components/api';

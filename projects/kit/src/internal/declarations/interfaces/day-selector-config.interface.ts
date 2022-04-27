@@ -1,4 +1,4 @@
-import { DayOfWeek } from '@kit/lib/components/day-selector/types/day-of-week';
+import { DayOfWeek } from '../enums/day-of-week.enum';
 
 export interface DaySelectorConfig {
   translates: Record<string, Record<DayOfWeek, string>>;

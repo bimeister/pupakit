@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../types/day-of-week';
+import { DayOfWeek } from '../enums/day-of-week.enum';
 
 export interface DaySelectorItem {
   key: DayOfWeek;

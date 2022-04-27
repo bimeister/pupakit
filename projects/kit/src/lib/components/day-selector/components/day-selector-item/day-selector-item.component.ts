@@ -1,5 +1,18 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
-import { DaySelectorSize } from '../../constants/day-selector-size.const';
+import {
+  Component,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  Input,
+  Output,
+  EventEmitter,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+  Renderer2,
+  SimpleChange,
+} from '@angular/core';
+import { DaySelectorSize } from '../../../../../internal/constants/day-selector-size.const';
+import { isNil } from '@bimeister/utilities';
 
 @Component({
   selector: 'pupa-day-selector-item',
@@ -8,7 +21,7 @@ import { DaySelectorSize } from '../../constants/day-selector-size.const';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DaySelectorItemComponent {
+export class DaySelectorItemComponent implements OnChanges {
   @Input() public name: string;
   @Input() public size: DaySelectorSize;
 
@@ -16,6 +29,17 @@ export class DaySelectorItemComponent {
   @Output() public readonly selectedStateChange: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() public disabled: boolean = false;
+
+  constructor(private readonly hostElement: ElementRef, private readonly renderer: Renderer2) {}
+
+  public ngOnChanges(changes: SimpleChanges): void {
+    const size: SimpleChange = changes.size;
+    if (!isNil(size) && size.previousValue !== size.currentValue) {
+      const element: HTMLElement = this.hostElement.nativeElement;
+      this.renderer.removeClass(element, size.previousValue);
+      this.renderer.addClass(element, size.currentValue);
+    }
+  }
 
   public onMouseDown(event: MouseEvent): void {
     event.preventDefault();
