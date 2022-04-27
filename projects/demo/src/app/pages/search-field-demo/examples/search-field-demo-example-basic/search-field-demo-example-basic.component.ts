@@ -5,13 +5,13 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 @Component({
-  selector: 'demo-search-field-example-1',
-  templateUrl: './example-1.component.html',
-  styleUrls: ['./example-1.component.scss'],
+  selector: 'demo-search-field-demo-example-basic',
+  templateUrl: './search-field-demo-example-basic.component.html',
+  styleUrls: ['./search-field-demo-example-basic.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFieldExample1Component {
+export class SearchFieldDemoExampleBasicComponent {
   public readonly searchControl: FormControl = new FormControl('');
 
   private readonly fruits$: Observable<string[]> = of([

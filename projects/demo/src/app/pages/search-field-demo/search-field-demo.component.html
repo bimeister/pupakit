@@ -1,57 +1,70 @@
 <h1>Search field</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <div class="search-wrapper">
-      <pupa-search-field
-        [formControl]="formControl"
-        [placeholder]="placeholderControl.value"
-        [collapsible]="collapsible$ | async"
-        [collapseDirection]="collapseDirection$ | async"
-      >
-      </pupa-search-field>
-    </div>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab="'overview'" class="overview">
+    <h4>Basic usage</h4>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-search-field-demo-example-basic *pupaCodeContainerPreviewTemplate></demo-search-field-demo-example-basic>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Set form control to disabled state">
-      <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
-      <ng-container *demoExampleViewerConfigItemDescription>
-        Use
-        <pupa-code-inline>formControl.disable()</pupa-code-inline>
-      </ng-container>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
+    <h4>Collapsible</h4>
+    <pupa-code-container [content]="collapsibleExampleContent">
+      <demo-search-field-demo-example-collapsible
+        *pupaCodeContainerPreviewTemplate
+      ></demo-search-field-demo-example-collapsible>
+    </pupa-code-container>
+  </div>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property name="collapsible" type="boolean" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is collapsible.</ng-container>
-      <demo-props-switcher #collapsible$></demo-props-switcher>
-    </demo-example-viewer-property>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="search-wrapper">
+          <pupa-search-field
+            [formControl]="formControl"
+            [placeholder]="placeholderControl.value"
+            [collapsible]="collapsible$ | async"
+            [collapseDirection]="collapseDirection$ | async"
+          >
+          </pupa-search-field>
+        </div>
+      </demo-example-viewer-content>
 
-    <demo-example-viewer-property name="collapseDirection" type="CollapseDirection" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription
-        >Adjusts the collapse direction of the element. (Only for
-        <pupa-code-inline>[collapsible]='true'</pupa-code-inline>
-        )
-      </ng-container>
-      <demo-props-radio-select
-        #collapseDirection$
-        [options]="collapseDirectionOptions"
-        direction="row"
-      ></demo-props-radio-select>
-    </demo-example-viewer-property>
+      <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="Set form control to disabled state">
+          <demo-props-form-control-disabled [control]="formControl"></demo-props-form-control-disabled>
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>formControl.disable()</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
 
-    <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
-      <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
-      <pupa-input-text [formControl]="placeholderControl" [withReset]="true"></pupa-input-text>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="collapsible" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is collapsible.</ng-container>
+          <demo-props-switcher #collapsible$></demo-props-switcher>
+        </demo-example-viewer-property>
 
-<h2>Usage</h2>
-<pupa-code-container [content]="example1Content">
-  <demo-search-field-example-1 *pupaCodeContainerPreviewTemplate></demo-search-field-example-1>
-</pupa-code-container>
+        <demo-example-viewer-property name="collapseDirection" type="CollapseDirection" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Adjusts the collapse direction of the element. (Only for
+            <pupa-code-inline>[collapsible]='true'</pupa-code-inline>
+            )
+          </ng-container>
+          <demo-props-radio-select
+            #collapseDirection$
+            [options]="collapseDirectionOptions"
+            direction="row"
+          ></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
+          <pupa-input-text [formControl]="placeholderControl" [withReset]="true"></pupa-input-text>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

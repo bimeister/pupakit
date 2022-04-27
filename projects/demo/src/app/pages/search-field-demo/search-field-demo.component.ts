@@ -27,8 +27,13 @@ export class SearchFieldDemoComponent {
     },
   ];
 
-  public readonly example1Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
+  public readonly basicExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/search-field-demo-example-basic/search-field-demo-example-basic.component.html`,
+    TS: `${BASE_REQUEST_PATH}/search-field-demo-example-basic/search-field-demo-example-basic.component.ts`,
+  };
+
+  public readonly collapsibleExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/search-field-demo-example-collapsible/search-field-demo-example-collapsible.component.html`,
+    TS: `${BASE_REQUEST_PATH}/search-field-demo-example-collapsible/search-field-demo-example-collapsible.component.ts`,
   };
 }
