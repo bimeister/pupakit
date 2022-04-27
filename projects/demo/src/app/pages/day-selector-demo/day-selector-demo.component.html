@@ -20,7 +20,7 @@
 
   <demo-example-viewer-section *demoPageTab="'api'">
     <demo-example-viewer-content>
-      <pupa-day-selector [formControl]="formControl" [size]="size.value"></pupa-day-selector>
+      <pupa-day-selector [formControl]="formControl" [size]="size.value" [locale]="locale.value"></pupa-day-selector>
     </demo-example-viewer-content>
 
     <h2>Properties</h2>
@@ -33,7 +33,7 @@
         </pupa-select-trigger>
 
         <pupa-select-dropdown>
-          <pupa-select-option *ngFor="let value of ['small', 'medium']" [value]="value">{{ value }}</pupa-select-option>
+          <pupa-select-option *ngFor="let value of selectorSizes" [value]="value">{{ value }}</pupa-select-option>
         </pupa-select-dropdown>
       </pupa-select>
     </demo-example-viewer-property>
@@ -42,6 +42,16 @@
       <ng-template demoExampleViewerPropertyDescription>
         Set locale of selector items. Locale value is one of keys of translates object in DaySelectorConfig.
       </ng-template>
+
+      <pupa-select class="select" [formControl]="locale">
+        <pupa-select-trigger>
+          {{ locale.value }}
+        </pupa-select-trigger>
+
+        <pupa-select-dropdown>
+          <pupa-select-option *ngFor="let value of selectorLocales" [value]="value">{{ value }}</pupa-select-option>
+        </pupa-select-dropdown>
+      </pupa-select>
     </demo-example-viewer-property>
 
     <h2>Constants</h2>

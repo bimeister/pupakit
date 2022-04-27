@@ -4,20 +4,13 @@
 
 :host {
   display: inline-flex;
-  padding: 1rem;
-  border-radius: 2rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
 
   @include font-type-caption();
-  @include font-size-medium();
-  @include ellipsis-text-overflow();
 
   background: color(base-white-n500);
   @include host-selector-dark-theme {
     background: color(base-dark-n500);
-  }
-
-  color: color(base-n600);
-  @include host-selector-dark-theme {
-    color: color(base-n0);
   }
 }

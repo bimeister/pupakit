@@ -3,37 +3,70 @@
 
 $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
+:host {
+  box-sizing: border-box;
+  width: 8rem;
+  height: 8rem;
+
+  font-size: 3.5rem;
+  line-height: 7rem;
+  text-transform: capitalize;
+  text-align: center;
+
+  &.medium {
+    width: 7rem;
+    height: 7rem;
+    font-size: 3rem;
+    line-height: 6rem;
+  }
+
+  &.small {
+    width: 6rem;
+    height: 6rem;
+    font-size: 2.5rem;
+    line-height: 5rem;
+  }
+}
+
 .day-selector-item {
   box-sizing: border-box;
-
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  border: 0.5rem solid transparent;
   cursor: pointer;
 
-  border-radius: 2rem;
-  border: 1rem solid transparent;
+  color: color(base-n600);
+  @include host-selector-dark-theme {
+    color: color(base-n0);
+  }
 
   @include transition();
   transition-property: background-color, border-color;
 
   &__content {
-    padding: 3rem;
-    border-radius: 2rem;
-    text-transform: capitalize;
-  }
-
-  &_small &__content {
-    @include font-size-small();
-    padding: 2rem;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
   }
 
   &:focus {
     outline: none;
-    border-color: color(primary-n600);
+    border-color: color(primary-n600) !important;
   }
 
   &:hover:not(.selected):not(.disabled) {
     background: color(base-white-n400);
     @include host-selector-dark-theme {
       background: color(base-dark-n400);
+    }
+  }
+
+  &.selected {
+    color: color(base-n600);
+    @include host-selector-dark-theme {
+      color: color(base-n0);
     }
   }
 

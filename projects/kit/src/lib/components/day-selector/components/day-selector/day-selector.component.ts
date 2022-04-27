@@ -6,13 +6,11 @@ import { isEmpty } from '@bimeister/utilities/common';
 import { map, tap } from 'rxjs/operators';
 import { DaySelectorStateService } from '../../services/day-selector-state.service';
 import { LocaleDayFormatterService } from '../../services/locale-day-formatter.service';
-import { DaySelectorSize } from '../../constants/day-selector-size.const';
-import { DaySelectorItem } from '../../interfaces/day-selector-item.interface';
-import { DaySelectionStateMap } from '../../types/day-selection-state-map';
-import { DayOfWeek } from '../../types/day-of-week';
+import { DaySelectorSize } from '../../../../../internal/constants/day-selector-size.const';
+import { DaySelectorItem } from '../../../../../internal/declarations/interfaces/day-selector-item.interface';
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../../internal/declarations/types/on-touched-callback.type';
-import { LocaleDayNames } from '../../types/locale-day-names';
+import { DayOfWeek } from '../../../../../internal/declarations/enums/day-of-week.enum';
 
 @Component({
   selector: 'pupa-day-selector',
@@ -23,7 +21,7 @@ import { LocaleDayNames } from '../../types/locale-day-names';
   providers: [DaySelectorStateService, LocaleDayFormatterService],
 })
 export class DaySelectorComponent implements ControlValueAccessor {
-  @Input() public size: DaySelectorSize = 'medium';
+  @Input() public size: DaySelectorSize = 'large';
 
   @Input() public set locale(value: string) {
     this.localeDateFormatter.locale = value;
@@ -34,7 +32,7 @@ export class DaySelectorComponent implements ControlValueAccessor {
     this.daySelectorState.daysOfWeek$,
     this.localeDateFormatter.localeNames$,
   ]).pipe(
-    map(([daysOfWeek, localeNames]: [DaySelectionStateMap, LocaleDayNames]) => {
+    map(([daysOfWeek, localeNames]: [Map<DayOfWeek, boolean>, Record<DayOfWeek, string>]) => {
       const selectorItems: DaySelectorItem[] = [];
       daysOfWeek.forEach((isSelected: boolean, day: DayOfWeek) => {
         selectorItems.push({
@@ -81,7 +79,7 @@ export class DaySelectorComponent implements ControlValueAccessor {
     this.daySelectorState.disabled = isDisabled;
   }
 
-  public trackByFunc(_: number, item: DaySelectorItem): string {
+  public trackByFunc(_: number, item: DaySelectorItem): DayOfWeek {
     return item.key;
   }
 

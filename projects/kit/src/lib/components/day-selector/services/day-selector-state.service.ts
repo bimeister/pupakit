@@ -1,25 +1,24 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { DayOfWeek } from '../types/day-of-week';
-import { DaySelectionStateMap } from '../types/day-selection-state-map';
+import { DayOfWeek } from '../../../../internal/declarations/enums/day-of-week.enum';
 
 @Injectable()
 export class DaySelectorStateService {
-  private readonly daySelectionStateMap: DaySelectionStateMap = new Map<DayOfWeek, boolean>([
-    ['mon', false],
-    ['tue', false],
-    ['wed', false],
-    ['thu', false],
-    ['fri', false],
-    ['sat', false],
-    ['sun', false],
+  private readonly daySelectionStateMap: Map<DayOfWeek, boolean> = new Map<DayOfWeek, boolean>([
+    [DayOfWeek.Monday, false],
+    [DayOfWeek.Tuesday, false],
+    [DayOfWeek.Wednesday, false],
+    [DayOfWeek.Thursday, false],
+    [DayOfWeek.Friday, false],
+    [DayOfWeek.Saturday, false],
+    [DayOfWeek.Sunday, false],
   ]);
 
   private readonly daysWithSelectionStateChanged$: BehaviorSubject<DayOfWeek[]> = new BehaviorSubject<DayOfWeek[]>([]);
 
   public readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly daysOfWeek$: Observable<DaySelectionStateMap> = this.daysWithSelectionStateChanged$.pipe(
+  public readonly daysOfWeek$: Observable<Map<DayOfWeek, boolean>> = this.daysWithSelectionStateChanged$.pipe(
     tap((selectionChangedDays: DayOfWeek[]) => {
       selectionChangedDays.forEach((day: DayOfWeek) => {
         this.daySelectionStateMap.set(day, !this.daySelectionStateMap.get(day));

@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DAY_SELECTOR_CONFIG_TOKEN } from '@kit/internal/constants/tokens/day-selector-config.token';
+import { DayOfWeek } from '@kit/internal/declarations/enums/day-of-week.enum';
 
 @Component({
   selector: 'demo-locale-day-selector-example',
@@ -13,23 +14,14 @@ import { DAY_SELECTOR_CONFIG_TOKEN } from '@kit/internal/constants/tokens/day-se
       provide: DAY_SELECTOR_CONFIG_TOKEN,
       useValue: {
         translates: {
-          en: {
-            mon: 'Mon',
-            tue: 'Tue',
-            wed: 'Wed',
-            thu: 'Thu',
-            fri: 'Fri',
-            sat: 'Sat',
-            sun: 'Sun',
-          },
           fr: {
-            mon: 'Lu.',
-            tue: 'Ma.',
-            wed: 'Me.',
-            thu: 'Je.',
-            fri: 'Ve.',
-            sat: 'Sa.',
-            sun: 'Di.',
+            [DayOfWeek.Monday]: 'Lu.',
+            [DayOfWeek.Tuesday]: 'Ma.',
+            [DayOfWeek.Wednesday]: 'Me.',
+            [DayOfWeek.Thursday]: 'Je.',
+            [DayOfWeek.Friday]: 'Ve.',
+            [DayOfWeek.Saturday]: 'Sa.',
+            [DayOfWeek.Sunday]: 'Di.',
           },
         },
       },

@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class DemoPlainDaySelectorExampleComponent {
   public readonly formControl: FormControl = new FormControl([]);
-  public readonly anotherFormControl: FormControl = new FormControl([]);
+  public readonly anotherFormControl: FormControl = new FormControl([1, 3, 4]);
 
   constructor() {
     this.anotherFormControl.disable();
