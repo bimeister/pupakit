@@ -22,6 +22,8 @@ const DEFAULT_ROW_HEIGHT_PX: number = 50;
 const DEFAULT_MIN_BUFFER_PX: number = 100;
 
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
+  private readonly tableInjector$: ReplaySubject<Injector> = new ReplaySubject<Injector>(1);
+
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
@@ -43,15 +45,16 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly virtualScrollDataSource: TableBodyRowsDataSource<T> = new TableBodyRowsDataSource<T>(this.data$);
 
   private columnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
-  public readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = this.columnDefinitions$.pipe(
-    map((definitions: TableColumnDefinition[]) => {
+  public readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = combineLatest([
+    this.columnDefinitions$,
+    this.tableInjector$,
+  ]).pipe(
+    map(([definitions, injector]: [TableColumnDefinition[], Injector]) => {
       const newColumnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
 
       definitions.forEach((definition: TableColumnDefinition, index: number) => {
         const existingColumn: Nullable<TableColumn> = this.columnIdToColumnMap.get(definition.id);
-        const column: TableColumn = isNil(existingColumn)
-          ? new TableColumn(this.injector, this.eventBus)
-          : existingColumn;
+        const column: TableColumn = isNil(existingColumn) ? new TableColumn(injector, this.eventBus) : existingColumn;
 
         column.index = index;
         column.definition = definition;
@@ -131,7 +134,11 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public readonly tableViewportSizePx$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
-  constructor(public readonly eventBus: EventBus, private readonly injector: Injector) {}
+  constructor(private readonly eventBus: EventBus) {}
+
+  public setTableInjector(injector: Injector): void {
+    this.tableInjector$.next(injector);
+  }
 
   public setData(data: T[]): Observable<T[]> {
     this.data$.next(data);

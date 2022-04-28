@@ -42,6 +42,7 @@ import { TableBodyCellContext } from '../../../../../internal/declarations/inter
 import { TableCellHtmlElementDataset } from '../../../../../internal/declarations/interfaces/table-cell-html-element-dataset.interface';
 import { TableCellHtmlElement } from '../../../../../internal/declarations/interfaces/table-cell-html-element.interface';
 import { TableDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/table-data-display-collection-ref.interface';
+import { TableEventTargetCellData } from '../../../../../internal/declarations/interfaces/table-event-target-cell-data.interface';
 import { TableFeatureController } from '../../../../../internal/declarations/interfaces/table-feature-controller.interface';
 import { TableHeaderCellContext } from '../../../../../internal/declarations/interfaces/table-header-cell-context.interface';
 import { TableFeatureControllerConstructor } from '../../../../../internal/declarations/types/table-feature-controller-constructor.type';
@@ -51,7 +52,6 @@ import { ScrollableComponent } from '../../../scrollable/components/scrollable/s
 import { TableColumnsIntersectionService } from '../../services/table-columns-intersection.service';
 import { TableScrollbarsService } from '../../services/table-scrollbars.service';
 import { TableTemplatesService } from '../../services/table-templates.service';
-import { TableEventTargetCellData } from '../../../../../internal/declarations/interfaces/table-event-target-cell-data.interface';
 
 function isTriggeredByResizer(event: Event): boolean {
   const targetPath: EventTarget[] = event.composedPath();
@@ -141,9 +141,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   public readonly isHorizontalScrollBarVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$;
 
   private readonly dataDisplayCollection$: Observable<TableDataDisplayCollectionRef<T>> =
-    this.availableController$.pipe(
-      switchMap((controller: TableController<T>) => controller.getDataDisplayCollectionRef())
-    );
+    this.availableController$.pipe(map((controller: TableController<T>) => controller.getDataDisplayCollectionRef()));
 
   public readonly data$: Observable<T[]> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.data$)
