@@ -1,0 +1,88 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+$normal-shadow-color: rgba(33, 33, 33, 0.05);
+
+:host {
+  display: flex;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.card {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 2rem 3rem 2rem 2rem;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  border-radius: 1rem;
+  border: 1px solid transparent;
+
+  box-shadow: 0 1px 7px $normal-shadow-color;
+  background: color(base-n0);
+  color: color(base-n600);
+  outline: none;
+
+  &__title {
+    flex: 1;
+  }
+}
+
+.presets {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 4rem 0;
+}
+
+.font-preset-h1 {
+  @include font-preset-h1;
+}
+
+.font-preset-h2 {
+  @include font-preset-h2;
+}
+
+.font-preset-h3 {
+  @include font-preset-h3;
+}
+
+.font-preset-h4 {
+  @include font-preset-h4;
+}
+
+.font-preset-h5 {
+  @include font-preset-h5;
+}
+
+.font-preset-h6 {
+  @include font-preset-h6;
+}
+
+.font-preset-caption-m {
+  @include font-preset-caption-m;
+}
+
+.font-preset-caption-s {
+  @include font-preset-caption-s;
+}
+
+.font-preset-caption-xs {
+  @include font-preset-caption-xs;
+}
+
+.font-preset-caption-xxs {
+  @include font-preset-caption-xxs;
+}
+
+.font-preset-body-m {
+  @include font-preset-body-m;
+}
+
+.font-preset-body-s {
+  @include font-preset-body-s;
+}

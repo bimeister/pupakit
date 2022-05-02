@@ -57,7 +57,7 @@ $width_date-range: 60rem;
     top: 0;
     right: 0;
     bottom: 0;
-    @include font-type-caption();
+    @include font-type-regular();
     z-index: 3;
     font-size: 3rem;
     line-height: 4rem;

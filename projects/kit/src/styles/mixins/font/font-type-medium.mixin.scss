@@ -1,0 +1,8 @@
+@mixin font-type-medium($condensed: false) {
+  @if $condensed {
+    font-family: 'NotoSansDisplay-Condensed', sans-serif;
+  } @else {
+    font-family: 'NotoSans', sans-serif;
+  }
+  font-weight: 500;
+}

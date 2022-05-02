@@ -2,12 +2,13 @@
 
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 .container {
   border: 1px solid;
   padding: 4rem 0;
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
 
   margin: 5rem 0;
 

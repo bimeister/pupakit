@@ -1,10 +1,15 @@
-@forward './font-size-header.mixin';
-@forward './font-size-large.mixin';
-@forward './font-size-mark.mixin';
-@forward './font-size-medium.mixin';
-@forward './font-size-small.mixin';
-@forward './font-type-bold.mixin.scss';
-@forward './font-size-extra-small.mixin';
-@forward './font-type-caption.mixin';
-@forward './font-type-paragraph.mixin';
-@forward './font-type-point.mixin';
+@forward './font-type-light.mixin';
+@forward './font-type-regular.mixin';
+@forward './font-type-medium.mixin';
+@forward './font-type-semibold.mixin';
+@forward './font-type-bold.mixin';
+
+@forward './font-size-xxs.mixin';
+@forward './font-size-xs.mixin';
+@forward './font-size-s.mixin';
+@forward './font-size-m.mixin';
+@forward './font-size-l.mixin';
+@forward './font-size-xl.mixin';
+@forward './font-size-xxl.mixin';
+
+@forward './presets';

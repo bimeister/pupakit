@@ -55,7 +55,7 @@
     line-height: 3rem;
     white-space: nowrap;
     color: color(base-dark-n500);
-    @include font-type-caption();
+    @include font-type-regular();
     box-sizing: border-box;
     height: 100%;
     width: 100%;

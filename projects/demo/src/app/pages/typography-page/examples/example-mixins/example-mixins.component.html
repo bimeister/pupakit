@@ -1,0 +1,75 @@
+<pupa-info-block class="info-block">Note that font-size-xxl and font-size-xl has adaptive variable</pupa-info-block>
+
+<div class="controls">
+  <div class="controls__control">
+    <pupa-select class="select" [formControl]="sizeControl">
+      <pupa-select-trigger>
+        Size:&nbsp;<pupa-tag size="small">{{ sizeControl.value }}</pupa-tag>
+      </pupa-select-trigger>
+
+      <pupa-select-dropdown>
+        <pupa-select-options-container>
+          <pupa-select-option *ngFor="let size of sizes" [value]="size">{{ size }}</pupa-select-option>
+        </pupa-select-options-container>
+      </pupa-select-dropdown>
+    </pupa-select>
+  </div>
+
+  <div class="controls__control">
+    <pupa-select class="select" [formControl]="typeControl">
+      <pupa-select-trigger>
+        Type:&nbsp;<pupa-tag size="small">{{ typeControl.value }}</pupa-tag>
+      </pupa-select-trigger>
+
+      <pupa-select-dropdown>
+        <pupa-select-options-container>
+          <pupa-select-option *ngFor="let type of types" [value]="type">{{ type }}</pupa-select-option>
+        </pupa-select-options-container>
+      </pupa-select-dropdown>
+    </pupa-select>
+  </div>
+
+  <div class="control__control">
+    <pupa-checkbox [formControl]="paragraphControl">in paragraph</pupa-checkbox>
+  </div>
+
+  <div class="control__control">
+    <pupa-checkbox [formControl]="condensedControl">condensed</pupa-checkbox>
+  </div>
+</div>
+
+<div class="active-mixin">
+  <b>Active size mixin</b>:&nbsp;
+  <pupa-code-inline>{{ activeSizeMixin$ | async }}</pupa-code-inline>
+  <pupa-button-icon
+    class="copy-button"
+    kind="subtle"
+    icon="app-doc-many"
+    pupaTooltip="Copy size mixin"
+    [tooltipDelayMs]="500"
+    (click)="copyActiveSizeMixinToClipBoard()"
+  ></pupa-button-icon>
+</div>
+
+<div class="active-mixin">
+  <b>Active type mixin</b>:&nbsp;
+  <pupa-code-inline>{{ activeTypeMixin$ | async }}</pupa-code-inline>
+  <pupa-button-icon
+    class="copy-button"
+    kind="subtle"
+    icon="app-doc-many"
+    pupaTooltip="Copy type mixin"
+    [tooltipDelayMs]="500"
+    (click)="copyActiveTypeMixinToClipBoard()"
+  ></pupa-button-icon>
+</div>
+
+<div
+  class="description"
+  [class]="[sizeControl.value, typeControl.value]"
+  [class.isParagraph]="paragraphControl.value"
+  [class.isCondensed]="condensedControl.value"
+>
+  PupaKit is an open source collection of Angular components based&nbsp;on an&nbsp;atomic approach &nbsp;building
+  interfaces, which guarantees better performance and&nbsp;greater development flexibility.
+</div>

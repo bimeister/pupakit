@@ -1,0 +1,7 @@
+@use './../font-size-m.mixin.scss' as *;
+@use './../font-type-semibold.mixin.scss' as *;
+
+@mixin font-preset-h4() {
+  @include font-type-semibold();
+  @include font-size-m();
+}

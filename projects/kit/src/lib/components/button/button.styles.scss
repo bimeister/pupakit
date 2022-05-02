@@ -45,8 +45,8 @@
   }
 
   &__content {
-    @include font-size-small();
-    @include font-type-caption();
+    @include font-size-m();
+    @include font-type-regular();
     line-height: 17px;
     user-select: none;
 
@@ -99,7 +99,7 @@
   }
 
   &__icon {
-    @include font-size-medium();
+    @include font-size-l();
     transition: color 0.2s ease;
     min-width: 1em;
     pointer-events: none;
@@ -769,11 +769,11 @@
     padding-bottom: 1rem;
 
     .button__content {
-      @include font-size-mark();
+      @include font-size-xs();
     }
 
     .button__icon {
-      @include font-size-small();
+      @include font-size-m();
     }
   }
 

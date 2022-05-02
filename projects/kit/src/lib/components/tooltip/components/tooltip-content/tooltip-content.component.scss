@@ -22,8 +22,8 @@ $tooltip_max-text-lines-count: 13;
     padding: 1rem 2rem;
     color: color('base-n0');
 
-    @include font-type-paragraph();
-    @include font-size-mark($paragraph: true);
+    @include font-type-regular();
+    @include font-size-xs($paragraph: true);
 
     line-height: 4.5rem;
     max-width: 126rem;

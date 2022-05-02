@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
@@ -12,8 +13,9 @@
   position: relative;
 
   &__code {
-    @include font-size-small();
+    @include font-size-m();
     font-family: monospace;
+    border-radius: $controlBorderRadius;
   }
 
   &__copy-button {

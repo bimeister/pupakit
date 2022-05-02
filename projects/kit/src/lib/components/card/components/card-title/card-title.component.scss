@@ -2,8 +2,8 @@
 @use 'functions' as *;
 
 .card-title {
-  @include font-type-caption();
-  @include font-size-mark(true);
+  @include font-type-regular();
+  @include font-size-xs(true);
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

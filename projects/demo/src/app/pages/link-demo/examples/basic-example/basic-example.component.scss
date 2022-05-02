@@ -1,16 +1,14 @@
 @use 'mixins' as *;
 
 .mark {
-  @include font-size-mark;
-  @include font-type-paragraph;
+  @include font-preset-caption-xs;
 }
 
 .small {
-  @include font-size-small;
-  @include font-type-paragraph;
+  @include font-preset-body-m;
 }
 
 .medium {
-  @include font-size-medium;
-  @include font-type-paragraph;
+  @include font-size-l;
+  @include font-type-regular;
 }

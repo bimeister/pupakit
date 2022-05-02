@@ -13,7 +13,7 @@
   }
 
   &__name {
-    @include font-type-caption();
-    @include font-size-medium();
+    @include font-type-regular();
+    @include font-size-l();
   }
 }

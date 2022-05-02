@@ -4,8 +4,8 @@
 $adaptive-property: 'max-width';
 
 .trigger {
-  @include font-type-caption();
-  @include font-size-medium();
+  @include font-type-regular();
+  @include font-size-l();
 
   padding: 1.5rem 2rem;
 
@@ -40,7 +40,7 @@ $adaptive-property: 'max-width';
   }
 
   @include xs() {
-    @include font-size-small();
+    @include font-size-m();
   }
 }
 

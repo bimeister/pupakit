@@ -30,7 +30,7 @@
   max-width: inherit;
   overflow: hidden;
 
-  @include font-size-mark();
+  @include font-size-xs();
 }
 
 .tag_default:not(.tag_disabled) {

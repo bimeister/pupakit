@@ -10,8 +10,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  @include font-type-paragraph;
-  @include font-size-mark(true);
+  @include font-type-regular;
+  @include font-size-xs(true);
   @include host-selector-dark-theme {
     border-color: color(base-dark-n400);
   }

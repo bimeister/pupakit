@@ -14,8 +14,8 @@
   cursor: text;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-size-mark(true);
-  @include font-type-caption();
+  @include font-size-xs(true);
+  @include font-type-regular();
   @include ellipsis-text-overflow;
 
   height: 8rem;

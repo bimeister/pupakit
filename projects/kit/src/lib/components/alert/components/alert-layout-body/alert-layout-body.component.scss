@@ -3,8 +3,7 @@
 
 :host {
   display: flex;
-  @include font-size-small;
-  @include font-type-paragraph;
+  @include font-preset-caption-m;
   align-items: center;
   justify-content: space-between;
   gap: 2rem;

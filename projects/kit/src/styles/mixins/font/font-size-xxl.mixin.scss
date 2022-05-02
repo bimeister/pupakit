@@ -1,0 +1,25 @@
+@use './../adaptive/width-between-property.mixin' as *;
+@use './../../variables/font.variables' as *;
+@use './../../variables/adaptive.variables' as *;
+
+@mixin font-size-xxl($paragraph: false) {
+  @include width-between-property(
+    'font-size',
+    $smBreakPoint,
+    $fontSizeMobileXXL,
+    $mdBreakPoint,
+    $fontSizeDesktopXXL,
+    true,
+    true
+  );
+
+  @include width-between-property(
+    'line-height',
+    $smBreakPoint,
+    if($paragraph, $fontSizeMobileXXL * 1.5, $lineHeightMobileXXL),
+    $mdBreakPoint,
+    if($paragraph, $fontSizeDesktopXXL * 1.5, $lineHeightDesktopXXL),
+    true,
+    true
+  );
+}

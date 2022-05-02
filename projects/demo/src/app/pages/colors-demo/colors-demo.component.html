@@ -5,7 +5,7 @@
 </div>
 
 <div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
-  <h2>{{ colorGroup.name }}</h2>
+  <h3>{{ colorGroup.name }}</h3>
 
   <div class="colors-demo__list">
     <div
@@ -26,7 +26,7 @@
   </div>
 </div>
 
-<h2>Using and overriding colors with .scss component styles</h2>
+<h3>Using and overriding colors with .scss component styles</h3>
 <pupa-code-container [content]="example1Content">
   <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
 </pupa-code-container>
@@ -42,7 +42,7 @@
 
 <pupa-info-block variant="note"> If you set invalid color key you will get error. </pupa-info-block>
 
-<h2>Using and overriding colors with .css component styles</h2>
+<h3>Using and overriding colors with .css component styles</h3>
 <pupa-code-container [content]="example2Content">
   <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
 </pupa-code-container>

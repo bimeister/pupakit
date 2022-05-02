@@ -8,8 +8,8 @@
   white-space: nowrap;
   flex: 1;
 
-  @include font-type-point;
-  @include font-size-medium;
+  @include font-type-medium;
+  @include font-size-l;
 
   color: color(base-n600);
 

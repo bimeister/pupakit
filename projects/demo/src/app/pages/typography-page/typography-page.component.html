@@ -1,15 +1,10 @@
 <h1>Typography</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3>Presets</h3>
+    <demo-typography-example-presets></demo-typography-example-presets>
 
-<div class="items">
-  <h2 class="items__column-header" *ngFor="let screenSize of screenSizes">
-    {{ screenSize }}
-  </h2>
-
-  <ng-container *ngFor="let fontSize of fontSizes; let isLast = last">
-    <ng-container *ngFor="let fontType of fontTypes">
-      <div [class]="[fontType, fontSize]" *ngFor="let screenSize of screenSizes">{{ fontSize }} {{ fontType }}</div>
-    </ng-container>
-
-    <div class="items__delimiter" *ngIf="!isLast"></div>
-  </ng-container>
-</div>
+    <h3>Mixins</h3>
+    <demo-typography-example-mixins></demo-typography-example-mixins>
+  </div>
+</demo-page>

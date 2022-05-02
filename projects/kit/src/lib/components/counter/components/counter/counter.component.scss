@@ -13,8 +13,8 @@
   align-items: center;
   justify-content: center;
 
-  @include font-type-point;
-  @include font-size-mark;
+  @include font-type-medium;
+  @include font-size-xs;
 
   &_neutral {
     background-color: color(base-white-n300);

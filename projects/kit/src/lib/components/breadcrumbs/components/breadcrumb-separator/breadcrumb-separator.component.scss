@@ -6,14 +6,14 @@
 }
 
 .separator {
-  @include font-size-small();
+  @include font-size-m();
   transform: translateY(2px);
 
   cursor: default;
   color: color(base-white-n200);
 
   @include xs() {
-    @include font-size-mark();
+    @include font-size-xs();
     transform: translateY(1px);
   }
 

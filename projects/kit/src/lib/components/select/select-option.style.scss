@@ -21,7 +21,7 @@
 
   font-size: 3rem;
   line-height: 4rem;
-  @include font-type-caption();
+  @include font-type-regular();
 
   display: flex;
   align-items: center;
