@@ -1,0 +1,74 @@
+<pupa-info-block>These presets are a combination of existing mixins</pupa-info-block>
+<pupa-tabs-container>
+  <pupa-tabs>
+    <pupa-tabs-item name="heading-presets"> Heading </pupa-tabs-item>
+    <pupa-tabs-item name="caption-presets"> Caption </pupa-tabs-item>
+    <pupa-tabs-item name="body-presets"> Body </pupa-tabs-item>
+  </pupa-tabs>
+  <pupa-tabs-separator></pupa-tabs-separator>
+
+  <pupa-tabs-content>
+    <div *pupaTabsItemContentTemplate="'heading-presets'">
+      <div class="presets">
+        <div class="card" *ngFor="let card of headingPresets">
+          <div class="card__title">
+            <span [class]="card.class">{{ card.title }}</span>
+          </div>
+          <div class="card__actions">
+            <pupa-button-icon
+              kind="subtle"
+              icon="app-doc-many"
+              pupaTooltip="Copy preset mixin"
+              [tooltipDelayMs]="500"
+              (click)="copyToClipBoard(card.mixin)"
+            ></pupa-button-icon>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *pupaTabsItemContentTemplate="'caption-presets'">
+      <div class="presets">
+        <pupa-card *ngFor="let card of captionPresets">
+          <pupa-card-header>
+            <pupa-card-title>
+              <span [class]="card.class">{{ card.title }}</span>
+            </pupa-card-title>
+          </pupa-card-header>
+
+          <pupa-card-action>
+            <pupa-button-icon
+              kind="subtle"
+              icon="app-doc-many"
+              pupaTooltip="Copy preset mixin"
+              [tooltipDelayMs]="500"
+              (click)="copyToClipBoard(card.mixin)"
+            ></pupa-button-icon>
+          </pupa-card-action>
+        </pupa-card>
+      </div>
+    </div>
+
+    <div *pupaTabsItemContentTemplate="'body-presets'">
+      <div class="presets">
+        <pupa-card *ngFor="let card of bodyPresets">
+          <pupa-card-header>
+            <pupa-card-title>
+              <span [class]="card.class">{{ card.title }}</span>
+            </pupa-card-title>
+          </pupa-card-header>
+
+          <pupa-card-action>
+            <pupa-button-icon
+              kind="subtle"
+              icon="app-doc-many"
+              pupaTooltip="Copy preset mixin"
+              [tooltipDelayMs]="500"
+              (click)="copyToClipBoard(card.mixin)"
+            ></pupa-button-icon>
+          </pupa-card-action>
+        </pupa-card>
+      </div>
+    </div>
+  </pupa-tabs-content>
+</pupa-tabs-container>

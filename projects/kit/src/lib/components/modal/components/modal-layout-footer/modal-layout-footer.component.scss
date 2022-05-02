@@ -21,8 +21,8 @@
   justify-content: flex-end;
   box-sizing: border-box;
   padding: 2rem 4rem;
-  @include font-type-paragraph;
-  @include font-size-mark(true);
+  @include font-type-regular;
+  @include font-size-xs(true);
 
   &_with-actions {
     padding: 4rem;

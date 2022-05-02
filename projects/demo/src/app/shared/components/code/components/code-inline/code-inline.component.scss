@@ -12,7 +12,7 @@
   margin: 5rem 0;
 
   padding: 1rem 2rem;
-  @include font-size-small();
+  @include font-size-m();
   border-radius: 1rem;
 
   @include host-selector-dark-theme() {

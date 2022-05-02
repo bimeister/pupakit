@@ -7,22 +7,22 @@
       or as container component to group content.
     </p>
 
-    <h2>Basic usage</h2>
+    <h3>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
       <demo-button-group-example-1 *pupaCodeContainerPreviewTemplate></demo-button-group-example-1>
     </pupa-code-container>
 
-    <h2>Full button space</h2>
+    <h3>Full button space</h3>
     <pupa-code-container [content]="example2Content">
       <demo-button-group-example-2 *pupaCodeContainerPreviewTemplate></demo-button-group-example-2>
     </pupa-code-container>
 
-    <h2>Disabled</h2>
+    <h3>Disabled</h3>
     <pupa-code-container [content]="example3Content">
       <demo-button-group-example-3 *pupaCodeContainerPreviewTemplate></demo-button-group-example-3>
     </pupa-code-container>
 
-    <h2>Active</h2>
+    <h3>Active</h3>
     <p>
       Active group button can be set programmatically by the <pupa-code-inline>isActive</pupa-code-inline> property on a
       group item. If the property is not specified, the first button in the group becomes active by default.
@@ -31,7 +31,7 @@
       <demo-button-group-example-4 *pupaCodeContainerPreviewTemplate></demo-button-group-example-4>
     </pupa-code-container>
 
-    <h2>Group with content</h2>
+    <h3>Group with content</h3>
     <p>
       The contents of the group are not cached by default, so when the item becomes inactive, the related content is
       destroyed. You may use <pupa-code-inline>destroyable</pupa-code-inline> property on

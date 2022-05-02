@@ -21,8 +21,8 @@
   border-radius: $controlBorderRadius;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-size-mark(true);
-  @include font-type-caption();
+  @include font-size-xs(true);
+  @include font-type-regular();
 
   &__scrollable {
     @include textarea-fonts;

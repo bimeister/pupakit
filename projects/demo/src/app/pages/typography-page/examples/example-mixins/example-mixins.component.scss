@@ -1,0 +1,120 @@
+@use 'mixins' as *;
+
+.controls {
+  display: flex;
+  gap: 4rem;
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  margin-bottom: 4rem;
+
+  &__control {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+
+.select {
+  max-width: 60rem;
+}
+
+.active-mixin {
+  display: flex;
+  align-items: center;
+  margin: 4rem 0;
+  flex-wrap: wrap;
+}
+
+.copy-button {
+  margin-left: 2rem;
+}
+
+.info-block {
+  margin-bottom: 4rem;
+}
+
+.xxl {
+  @include font-size-xxl();
+  &.isParagraph {
+    @include font-size-xxl(true);
+  }
+}
+
+.xl {
+  @include font-size-xl();
+  &.isParagraph {
+    @include font-size-xl(true);
+  }
+}
+
+.l {
+  @include font-size-l();
+  &.isParagraph {
+    @include font-size-l(true);
+  }
+}
+
+.m {
+  @include font-size-m();
+  &.isParagraph {
+    @include font-size-m(true);
+  }
+}
+
+.s {
+  @include font-size-s();
+  &.isParagraph {
+    @include font-size-s(true);
+  }
+}
+
+.xs {
+  @include font-size-xs();
+  &.isParagraph {
+    @include font-size-xs(true);
+  }
+}
+
+.xxs {
+  @include font-size-xxs();
+  &.isParagraph {
+    @include font-size-xxs(true);
+  }
+}
+
+.light {
+  @include font-type-light();
+  &.isCondensed {
+    @include font-type-light(true);
+  }
+}
+
+.regular {
+  @include font-type-regular();
+  &.isCondensed {
+    @include font-type-regular(true);
+  }
+}
+
+.medium {
+  @include font-type-medium();
+  &.isCondensed {
+    @include font-type-medium(true);
+  }
+}
+
+.semibold {
+  @include font-type-semibold();
+  &.isCondensed {
+    @include font-type-semibold(true);
+  }
+}
+
+.bold {
+  @include font-type-bold();
+  &.isCondensed {
+    @include font-type-bold(true);
+  }
+}

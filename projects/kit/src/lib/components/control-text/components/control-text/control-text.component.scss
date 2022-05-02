@@ -9,7 +9,7 @@
   margin: 0;
   padding: 0;
   color: color(grey-light);
-  @include font-type-caption;
+  @include font-type-regular;
 
   &_error {
     color: color(error);

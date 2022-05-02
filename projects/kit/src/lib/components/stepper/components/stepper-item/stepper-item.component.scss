@@ -52,8 +52,8 @@
     overflow: hidden;
     white-space: break-spaces;
 
-    @include font-type-caption;
-    @include font-size-mark;
+    @include font-type-regular;
+    @include font-size-xs;
   }
 
   &__counter {

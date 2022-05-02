@@ -50,8 +50,8 @@
     caret-color: map.get($input_light_styles, input, caret-color);
     background-color: map.get($input_light_styles, input, background-color);
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-    @include font-type-paragraph();
-    @include font-size-mark(true);
+    @include font-type-regular();
+    @include font-size-xs(true);
 
     &_collapsed {
       padding: 2rem;

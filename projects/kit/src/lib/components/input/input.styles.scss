@@ -6,19 +6,19 @@
 @use 'variables' as *;
 
 @mixin large {
-  @include font-size-large();
-  @include font-type-point();
+  @include font-size-xl();
+  @include font-type-medium();
 }
 
 @mixin medium {
   font-size: 3rem;
   line-height: 4rem;
-  @include font-type-caption();
+  @include font-type-regular();
 }
 
 @mixin small {
-  @include font-type-caption();
-  @include font-size-mark();
+  @include font-type-regular();
+  @include font-size-xs();
 }
 
 :host {
@@ -111,14 +111,14 @@
     height: 10rem;
     @include large();
     &::placeholder {
-      @include font-type-caption();
+      @include font-type-regular();
     }
   }
   &_medium {
     height: 8rem;
     font-size: 3rem;
     line-height: 4rem;
-    @include font-type-caption();
+    @include font-type-regular();
     @include medium();
   }
   &_small {

@@ -13,8 +13,8 @@
   background: color(base-white-n500);
   border-radius: 1rem;
 
-  @include font-type-caption;
-  @include font-size-mark;
+  @include font-type-regular;
+  @include font-size-xs;
 
   transition: background-color 0.2s ease;
 

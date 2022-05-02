@@ -1,0 +1,7 @@
+@use './../font-size-s.mixin.scss' as *;
+@use './../font-type-regular.mixin.scss' as *;
+
+@mixin font-preset-body-s() {
+  @include font-type-regular();
+  @include font-size-s($paragraph: true);
+}

@@ -1,5 +1,5 @@
 @use './../functions/color.function' as *;
-@use './../mixins/font/font-type-caption.mixin' as *;
+@use './../mixins/font/font-type-regular.mixin' as *;
 
 @mixin pupa-label($horizontal: false) {
   box-sizing: border-box;
@@ -8,7 +8,7 @@
   } @else {
     padding: 0 0 1rem;
   }
-  @include font-type-caption();
+  @include font-type-regular();
   color: color(text);
   font-size: 4rem;
   line-height: 1.13;

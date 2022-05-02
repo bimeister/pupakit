@@ -14,8 +14,8 @@
   height: 100%;
   box-sizing: border-box;
   padding: 2rem 20px 2rem 4rem;
-  @include font-size-small;
-  @include font-type-caption;
+  @include font-size-m;
+  @include font-type-regular;
   background-color: color('base-n0');
   color: color('base-white-n100');
   line-height: 17px;

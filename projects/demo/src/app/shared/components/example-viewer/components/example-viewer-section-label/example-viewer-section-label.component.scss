@@ -5,11 +5,9 @@
 }
 
 .header {
-  @include font-type-point();
-  @include font-size-header();
+  @include font-preset-h3;
 }
 
 .medium {
-  @include font-type-point();
-  @include font-size-medium();
+  @include font-preset-h4;
 }

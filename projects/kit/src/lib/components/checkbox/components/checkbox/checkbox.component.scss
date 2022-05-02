@@ -138,10 +138,11 @@
   @include ellipsis-text-overflow;
   margin-left: 3rem;
 
-  @include font-size-small();
+  @include font-size-m();
+  line-height: 1.2;
 
   &_small {
-    @include font-size-mark();
+    @include font-size-xs();
   }
 
   &_hidden {

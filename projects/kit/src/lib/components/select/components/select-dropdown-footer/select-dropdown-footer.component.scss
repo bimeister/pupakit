@@ -9,7 +9,7 @@
 .footer {
   font-size: 3rem;
   line-height: 4rem;
-  @include font-type-caption();
+  @include font-type-regular();
 
   padding: 4rem 5rem;
 

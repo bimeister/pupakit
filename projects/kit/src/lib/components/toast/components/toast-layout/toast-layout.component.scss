@@ -47,8 +47,8 @@
   margin-bottom: 10px;
   margin-right: 3rem;
 
-  @include font-size-small;
-  @include font-type-paragraph;
+  @include font-size-m;
+  @include font-type-regular;
 
   color: color(base-n600);
   @include host-selector-dark-theme {

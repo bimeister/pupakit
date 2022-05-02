@@ -33,7 +33,7 @@
   height: calc(100% - #{$navbar-height});
   z-index: 11;
 
-  @include grid-size($xs: $xsColumnsCount, $sm: $smColumnsCount, $md: 4, $lg: 3, $xlg: 3, $xl: 3, $xxl: 4);
+  width: 80rem;
 
   @include lt-md() {
     display: none;
@@ -57,28 +57,29 @@
 .content {
   box-sizing: border-box;
   padding: 100px 0 64px 0;
+  margin-left: 80rem;
   min-height: calc(#{vh(100)});
-  @include grid-offset($xs: 0, $sm: 0, $md: 4, $lg: 3, $xlg: 3, $xl: 3, $xxl: 4);
+
+  @include lt-md() {
+    margin: 0;
+  }
 }
 
 .inside-content {
-  max-width: 1200px;
-  margin: auto;
+  margin: 0 35rem;
 
   display: flex;
   flex-direction: column;
 
-  @include width-between-property(
-    $property: 'max-width',
-    $width-start: 1600,
-    $value-start: 1000,
-    $width-end: 1800,
-    $value-end: 1200,
-    $is-save-width-before: true,
-    $is-save-width-after: true
-  );
+  @include lt-xl() {
+    margin: 0 20rem;
+  }
 
-  @include sm() {
-    max-width: 700px;
+  @include lt-lg() {
+    margin: 0 10rem;
+  }
+
+  @include lt-md() {
+    margin: 0;
   }
 }

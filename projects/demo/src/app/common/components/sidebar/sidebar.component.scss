@@ -50,6 +50,9 @@
 
   .scrollable-content {
     padding-bottom: 8rem;
+
+    display: flex;
+    flex-direction: column;
   }
 
   .links-container {
@@ -73,31 +76,16 @@
 
   .subheader {
     display: inline-block;
-    font-weight: 300;
     margin-bottom: 2rem;
-    font-size: 18px;
-    line-height: 1.5;
-    @include font-size-header;
-    @include font-type-point;
+
+    @include font-preset-h3;
+
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
 
-    margin-top: 8rem;
-
-    &::after {
-      content: '';
-      display: block;
-      width: calc(100% + 8rem);
-      height: 1px;
-      margin-top: 2rem;
-      background-color: color(base-white-n500);
-
-      @include host-selector-dark-theme {
-        background-color: color(base-dark-n500);
-      }
-    }
+    margin-top: 6rem;
   }
 
   .side-nav-item {
@@ -109,30 +97,36 @@
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
 
-    @include font-size-small;
-    @include font-type-caption;
+    @include font-size-m;
+    @include font-type-regular;
 
     color: get-map-field($theme-config, [ 'light', 'body', font-color]);
 
+    transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+      background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
     &::before {
-      display: none;
       position: absolute;
       top: 0;
       left: 0;
       bottom: 0;
       content: '';
-      width: 1rem;
+      width: 0.5rem;
       pointer-events: none;
       background-color: rgba(var(--color_primary-n500), 1);
+      opacity: 0;
     }
 
-    &.active,
     &:hover {
       color: color(base-n700);
-      background: color(base-white-n500);
+      background: color(base-white-n550);
+    }
 
+    &.active {
+      color: color(base-n700);
+      background: color(base-white-n550);
       &::before {
-        display: block;
+        opacity: 1;
       }
     }
   }

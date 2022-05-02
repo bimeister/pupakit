@@ -43,7 +43,7 @@ $height_item-container: 75rem;
 
         font-size: 3rem;
         line-height: 4rem;
-        @include font-type-caption();
+        @include font-type-regular();
 
         background-color: color(base-n0);
         color: color(base-n600);

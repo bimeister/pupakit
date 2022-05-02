@@ -9,17 +9,17 @@
 
     <pupa-tabs-content>
       <demo-example-viewer-section *pupaTabsItemContentTemplate="'Description and Examples'">
-        <h2>Plain spinner</h2>
+        <h3>Plain spinner</h3>
         <pupa-code-container [content]="plainSpinnerExampleContent">
           <demo-plain-spinner *pupaCodeContainerPreviewTemplate></demo-plain-spinner>
         </pupa-code-container>
 
-        <h2>Bagel spinner</h2>
+        <h3>Bagel spinner</h3>
         <pupa-code-container [content]="bagelSpinnerExampleContent">
           <demo-bagel-spinner *pupaCodeContainerPreviewTemplate></demo-bagel-spinner>
         </pupa-code-container>
 
-        <h2>Loader</h2>
+        <h3>Loader</h3>
         <pupa-code-container [content]="loaderExampleContent">
           <demo-loader *pupaCodeContainerPreviewTemplate></demo-loader>
         </pupa-code-container>
@@ -30,7 +30,7 @@
           <pupa-spinner [size]="size + 'px'"></pupa-spinner>
         </demo-example-viewer-content>
 
-        <h2>Properties</h2>
+        <h3>Properties</h3>
         <demo-example-viewer-property name="size" type="string" decoratorName="input">
           <ng-template demoExampleViewerPropertyDescription> Set width and height of spinner </ng-template>
 

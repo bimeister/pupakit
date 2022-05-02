@@ -18,8 +18,8 @@
   &__content {
     flex-shrink: 1;
     color: color(base-white-n100);
-    @include font-type-caption();
-    @include font-size-mark();
+    @include font-type-regular();
+    @include font-size-xs();
     @include ellipsis-text-overflow;
   }
   &_large .label__content {

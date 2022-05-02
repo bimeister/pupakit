@@ -43,8 +43,7 @@
     @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);
 
     margin-top: 0;
-    @include font-size-large();
-    @include font-type-caption();
+    @include font-preset-h2;
   }
 
   &__action {
