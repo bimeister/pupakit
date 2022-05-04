@@ -59,7 +59,6 @@
     background-color: transparent;
 
     display: flex;
-    justify-content: center;
 
     pointer-events: none;
 
@@ -71,6 +70,7 @@
   &__content-inner {
     display: inline-flex;
     white-space: nowrap;
+    overflow: hidden;
 
     pointer-events: none;
   }
@@ -100,7 +100,7 @@
   &__icon {
     @include font-size-medium();
     transition: color 0.2s ease;
-
+    min-width: 1em;
     pointer-events: none;
 
     &.left {
@@ -778,7 +778,7 @@
 
   &_extra-small {
     height: 4rem;
-    padding: 0px 2rem;
+    padding: 0 2rem;
 
     @include font-size-extra-small();
 
