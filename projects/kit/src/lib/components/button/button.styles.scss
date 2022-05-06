@@ -4,8 +4,8 @@
 :host {
   appearance: none;
   user-select: none;
-
   pointer-events: none;
+  display: flex;
 }
 
 /** base styles */
@@ -59,6 +59,7 @@
     background-color: transparent;
 
     display: flex;
+    justify-content: center;
 
     pointer-events: none;
 
