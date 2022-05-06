@@ -1,8 +1,15 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, Optional, Output, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { distinctUntilSerializedChanged, filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import {
+  distinctUntilSerializedChanged,
+  filterNotNil,
+  isNil,
+  Nullable,
+  shareReplayWithRefCount,
+} from '@bimeister/utilities';
+import { TextAreaCounterVisibility } from '../../../../internal/declarations/types/text-area-counter-visibility-mode.type';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
@@ -54,6 +61,10 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   @Input() public maxLength: Nullable<number> = null;
   public readonly maxLength$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 
+  @Input() public counterVisibility: TextAreaCounterVisibility = 'always';
+  public readonly counterVisibility$: BehaviorSubject<TextAreaCounterVisibility> =
+    new BehaviorSubject<TextAreaCounterVisibility>('always');
+
   @Output() private readonly focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() private readonly blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
@@ -81,6 +92,18 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     map(([maxLength, valueLength]: [number, number]) => `${valueLength}/${maxLength}`)
   );
 
+  public readonly isCounterVisible$: Observable<boolean> = combineLatest([
+    this.counterVisibility$,
+    this.isFocused$,
+  ]).pipe(
+    map(
+      ([counterVisibilityMode, isFocused]: [TextAreaCounterVisibility, boolean]) =>
+        !(counterVisibilityMode === 'onfocus' && !isFocused)
+    ),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
   constructor(
     @Optional() ngControl: NgControl,
     @Optional() protected readonly themeWrapperService: ThemeWrapperService
@@ -101,6 +124,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     this.processMaxLengthChange(changes?.maxLength);
     this.processMaxRowsChange(changes?.maxRows);
     this.processMinRowsChange(changes?.minRows);
+    this.processCounterVisibilityChange(changes?.counterVisibility);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -182,6 +206,16 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     }
 
     this.minRows$.next(updatedValue);
+  }
+
+  private processCounterVisibilityChange(change: ComponentChange<this, TextAreaCounterVisibility>): void {
+    const updatedValue: TextAreaCounterVisibility = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.counterVisibility$.next(updatedValue);
   }
 
   private getHeightPxByRowsCount(rowsCount: number): number {

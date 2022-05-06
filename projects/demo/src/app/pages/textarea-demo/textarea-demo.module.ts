@@ -5,6 +5,7 @@ import { TextareaExample2Component } from './examples/example-2/example-2.compon
 import { TextareaExample3Component } from './examples/example-3/example-3.component';
 import { TextareaExample4Component } from './examples/example-4/example-4.component';
 import { TextareaExample5Component } from './examples/example-5/example-5.component';
+import { TextareaExample6Component } from './examples/example-6/example-6.component';
 import { TextareaDemoRoutingModule } from './textarea-demo-routing.module';
 import { TextareaDemoComponent } from './textarea-demo.component';
 
@@ -14,6 +15,7 @@ const EXAMPLES: Type<unknown>[] = [
   TextareaExample3Component,
   TextareaExample4Component,
   TextareaExample5Component,
+  TextareaExample6Component,
 ];
 const COMPONENTS: Type<unknown>[] = [TextareaDemoComponent, ...EXAMPLES];
 

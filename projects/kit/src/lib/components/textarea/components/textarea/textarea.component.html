@@ -27,7 +27,8 @@
     </pupa-scrollable>
   </label>
 
-  <div class="counter" [class.counter_invalid]="isInvalid$ | async" *ngIf="maxLength$ | async as maxLength">
-    {{ counterValue$ | async }}
+  <div class="counter" [class.counter_invalid]="isInvalid$ | async" *ngIf="maxLength$ | async">
+    <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
+    >&nbsp;
   </div>
 </div>
