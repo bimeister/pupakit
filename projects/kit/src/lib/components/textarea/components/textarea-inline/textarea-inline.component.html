@@ -19,9 +19,10 @@
     class="counter"
     [class.counter_invalid]="isInvalid$ | async"
     [class.counter_invisible]="isOpened$ | async"
-    *ngIf="maxLength$ | async as maxLength"
+    *ngIf="maxLength$ | async"
   >
-    {{ counterValue$ | async }}
+    <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
+    >&nbsp;
   </div>
 </div>
 
@@ -73,9 +74,10 @@
         class="counter counter_overlay"
         [class.counter_mobile]="isMobile$ | async"
         [class.counter_invalid]="isInvalid$ | async"
-        *ngIf="maxLength$ | async as maxLength"
+        *ngIf="maxLength$ | async"
       >
-        {{ counterValue$ | async }}
+        <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
+        >&nbsp;
       </div>
     </div>
   </div>
