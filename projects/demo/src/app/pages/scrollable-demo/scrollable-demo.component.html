@@ -21,7 +21,21 @@
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content class="content" [isSticky]="false">
-        <pupa-scrollable class="scrollable-box" [size]="size$ | async" [position]="position$ | async">
+        <pupa-scrollable
+          class="scrollable-box"
+          [size]="size$ | async"
+          [position]="position$ | async"
+          (scrollTopChanged)="onScrollTopChanged($event)"
+          (scrollLeftChanged)="onScrollLeftChanged($event)"
+          (verticalScrollVisibilityChanged)="onVerticalScrollVisibilityChanged($event)"
+          (horizontalScrollVisibilityChanged)="onHorizontalScrollVisibilityChanged($event)"
+          (scrolledToHorizontalStart)="onScrolledToHorizontalStart($event)"
+          (scrolledToHorizontalEnd)="onScrolledToHorizontalEnd($event)"
+          (scrolledToVerticalStart)="onScrolledToVerticalStart($event)"
+          (scrolledToVerticalEnd)="onScrolledToVerticalEnd($event)"
+          (contentDragStart)="onContentDragStart($event)"
+          (contentDragEnd)="onContentDragEnd($event)"
+        >
           <div class="text-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -59,6 +73,60 @@
         <demo-example-viewer-property decoratorName="input" name="position" type="ScrollbarPosition">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the scrollbar.</ng-container>
           <demo-props-radio-select #position$ direction="row" [options]="positionOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>Events</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="scrollTopChanged" type="EventEmitter<number>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Emit scroll top position.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="scrollLeftChanged" type="EventEmitter<number>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Emit scroll left position.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property
+          name="verticalScrollVisibilityChanged"
+          type="EventEmitter<boolean>"
+          decoratorName="output"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Emit vertical scroll visibility changed.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property
+          name="horizontalScrollVisibilityChanged"
+          type="EventEmitter<boolean>"
+          decoratorName="output"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Emit horizontal scroll visibility changed.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property
+          name="scrolledToHorizontalStart"
+          type="EventEmitter<boolean>"
+          decoratorName="output"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Emit when horizontal scroll starts.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property
+          name="scrolledToHorizontalEnd"
+          type="EventEmitter<boolean>"
+          decoratorName="output"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Emit when horizontal scroll ends.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property
+          name="scrolledToVerticalStart"
+          type="EventEmitter<boolean>"
+          decoratorName="output"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Emit when vertical scroll starts.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="scrolledToVerticalEnd" type="EventEmitter<boolean>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Emit when vertical scroll ends.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="contentDragStart" type="EventEmitter<void>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Emit when content drag starts.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="contentDragEnd" type="EventEmitter<void>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription>Emit when content drag ends.</ng-container>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
