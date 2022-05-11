@@ -29,6 +29,36 @@ export class ScrollableDemoComponent {
       value: 'external',
     },
   ];
+  public readonly scrollDragModeOptions: PropsOption[] = [
+    {
+      caption: 'None',
+      value: 'null',
+      isDefault: true,
+    },
+    {
+      caption: 'Vertical',
+      value: 'vertical',
+    },
+    {
+      caption: 'Horizontal',
+      value: 'horizontal',
+    },
+    {
+      caption: 'All',
+      value: 'all',
+    },
+  ];
+  public readonly invisibleScrollbarsOptions: PropsOption[] = [
+    {
+      caption: 'Vertical',
+      value: 'vertical',
+    },
+    {
+      caption: 'Horizontal',
+      value: 'horizontal',
+      isDefault: true,
+    },
+  ];
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
@@ -47,44 +77,4 @@ export class ScrollableDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
   };
-
-  public onScrollTopChanged(event: number): void {
-    console.log(event);
-  }
-
-  public onScrollLeftChanged(event: number): void {
-    console.log(event);
-  }
-
-  public onVerticalScrollVisibilityChanged(event: boolean): void {
-    console.log(event);
-  }
-
-  public onHorizontalScrollVisibilityChanged(event: boolean): void {
-    console.log(event);
-  }
-
-  public onScrolledToHorizontalStart(event: boolean): void {
-    console.log(event);
-  }
-
-  public onScrolledToHorizontalEnd(event: boolean): void {
-    console.log(event);
-  }
-
-  public onScrolledToVerticalStart(event: boolean): void {
-    console.log(event);
-  }
-
-  public onScrolledToVerticalEnd(event: boolean): void {
-    console.log(event);
-  }
-
-  public onContentDragStart(event: void): void {
-    console.log(event);
-  }
-
-  public onContentDragEnd(event: void): void {
-    console.log(event);
-  }
 }
