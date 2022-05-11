@@ -20,7 +20,7 @@
 
   <div *demoPageTab="'api'">
     <demo-example-viewer>
-      <demo-example-viewer-content class="content" [isSticky]="false">
+      <demo-example-viewer-content class="content" [isSticky]="true">
         <pupa-scrollable
           class="scrollable-box"
           [size]="size$ | async"
@@ -75,8 +75,8 @@
             [options]="scrollDragModeOptions"
           ></demo-props-radio-select>
         </demo-example-viewer-property>
-        <demo-example-viewer-property decoratorName="input" name="customStyles" type="InputStyleCustomization[]">
-          <ng-container *demoExampleViewerPropertyDescription>Different input styles.</ng-container>
+        <demo-example-viewer-property decoratorName="input" name="invisibleScrollbars" type="ScrollbarType[]">
+          <ng-container *demoExampleViewerPropertyDescription>Hide vertical and/or horizontal scrollbars.</ng-container>
           <demo-props-select
             #invisibleScrollbars$
             [options]="invisibleScrollbarsOptions"
