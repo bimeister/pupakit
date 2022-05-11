@@ -47,4 +47,44 @@ export class ScrollableDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
   };
+
+  public onScrollTopChanged(event: number): void {
+    console.log(event);
+  }
+
+  public onScrollLeftChanged(event: number): void {
+    console.log(event);
+  }
+
+  public onVerticalScrollVisibilityChanged(event: boolean): void {
+    console.log(event);
+  }
+
+  public onHorizontalScrollVisibilityChanged(event: boolean): void {
+    console.log(event);
+  }
+
+  public onScrolledToHorizontalStart(event: boolean): void {
+    console.log(event);
+  }
+
+  public onScrolledToHorizontalEnd(event: boolean): void {
+    console.log(event);
+  }
+
+  public onScrolledToVerticalStart(event: boolean): void {
+    console.log(event);
+  }
+
+  public onScrolledToVerticalEnd(event: boolean): void {
+    console.log(event);
+  }
+
+  public onContentDragStart(event: void): void {
+    console.log(event);
+  }
+
+  public onContentDragEnd(event: void): void {
+    console.log(event);
+  }
 }
