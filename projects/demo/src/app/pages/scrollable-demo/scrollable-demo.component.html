@@ -25,16 +25,9 @@
           class="scrollable-box"
           [size]="size$ | async"
           [position]="position$ | async"
-          (scrollTopChanged)="onScrollTopChanged($event)"
-          (scrollLeftChanged)="onScrollLeftChanged($event)"
-          (verticalScrollVisibilityChanged)="onVerticalScrollVisibilityChanged($event)"
-          (horizontalScrollVisibilityChanged)="onHorizontalScrollVisibilityChanged($event)"
-          (scrolledToHorizontalStart)="onScrolledToHorizontalStart($event)"
-          (scrolledToHorizontalEnd)="onScrolledToHorizontalEnd($event)"
-          (scrolledToVerticalStart)="onScrolledToVerticalStart($event)"
-          (scrolledToVerticalEnd)="onScrolledToVerticalEnd($event)"
-          (contentDragStart)="onContentDragStart($event)"
-          (contentDragEnd)="onContentDragEnd($event)"
+          [scrollDragMode]="scrollDragMode$ | async"
+          [scrollDragMode]="'horizontal'"
+          [invisibleScrollbars]="(invisibleScrollbars$ | async) || []"
         >
           <div class="text-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
@@ -73,6 +66,22 @@
         <demo-example-viewer-property decoratorName="input" name="position" type="ScrollbarPosition">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the scrollbar.</ng-container>
           <demo-props-radio-select #position$ direction="row" [options]="positionOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="scrollDragMode" type="Nullable<ScrollDragMode>">
+          <ng-container *demoExampleViewerPropertyDescription>Enables scroll on drag on desktop devices.</ng-container>
+          <demo-props-radio-select
+            #scrollDragMode$
+            direction="row"
+            [options]="scrollDragModeOptions"
+          ></demo-props-radio-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="customStyles" type="InputStyleCustomization[]">
+          <ng-container *demoExampleViewerPropertyDescription>Different input styles.</ng-container>
+          <demo-props-select
+            #invisibleScrollbars$
+            [options]="invisibleScrollbarsOptions"
+            [isMultiSelectionEnabled]="true"
+          ></demo-props-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 
