@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ScrollbarType } from '@kit/internal/api';
-import { BehaviorSubject } from 'rxjs';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'scrollable-demo/examples';
@@ -78,13 +76,4 @@ export class ScrollableDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
   };
-
-  public readonly invisibleScrollbarsObs$: BehaviorSubject<ScrollbarType[]> = new BehaviorSubject([]);
-
-  constructor() {
-    // setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal']), 3000);
-    // setTimeout(() => this.invisibleScrollbarsObs$.next(['vertical']), 6000);
-    // setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal', 'vertical']), 9000);
-    // setTimeout(() => this.invisibleScrollbarsObs$.next([]), 12000);
-  }
 }
