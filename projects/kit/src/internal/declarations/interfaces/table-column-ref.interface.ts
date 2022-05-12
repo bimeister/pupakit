@@ -1,18 +1,22 @@
+import { Type } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
+import { TableColumnEvents } from '../events/table-column.events';
 import { TableColumnDefinition } from './table-column-definition.interface';
 
 export interface TableColumnRef {
   readonly index: number;
   readonly definition: TableColumnDefinition;
-  readonly sorting$: Observable<TableColumnSorting>;
   readonly widthPx$: Observable<number>;
   readonly isHovered$: Observable<boolean>;
   readonly isCurrentResizable$: Observable<boolean>;
   readonly isCurrentDraggable$: Observable<boolean>;
   readonly isCurrentDragTarget$: Observable<boolean>;
-  toggleSorting(isNoneAvailable: boolean): void;
-  setSorting(sorting: TableColumnSorting): void;
-  updateWidthByDeltaPx(deltaPx: number): Observable<boolean>;
-  setWidth(widthPx: number): Observable<boolean>;
+
+  listenEvent<T extends TableColumnEvents.TableColumnEventBase>(event: Type<T>): Observable<T>;
+
+  dispatchEvent(event: TableColumnEvents.TableColumnEventBase): Observable<unknown>;
+  dispatchEvent<R extends TableColumnEvents.TableColumnEventBase>(
+    event: TableColumnEvents.TableColumnEventBase,
+    response: Type<R>
+  ): Observable<R>;
 }

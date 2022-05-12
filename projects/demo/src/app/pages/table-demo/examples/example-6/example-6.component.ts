@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { getUuid, sortByProperty } from '@bimeister/utilities';
 import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
+import { TableSortingFeature } from '@kit/internal/declarations/classes/table-external-predefined-features/table-sorting-feature.class';
 import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
 import { TableColumnSorting } from '@kit/internal/declarations/enums/table-column-sorting.enum';
+import { TableFeatureEvents } from '@kit/internal/declarations/events/table-feature.events';
 import { TableEvents } from '@kit/internal/declarations/events/table.events';
 import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
 import { Uuid } from '@kit/internal/declarations/types/uuid.type';
@@ -51,8 +53,12 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'Age',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 100 },
-    sortable: true,
     type: 'age',
+    featureOptions: {
+      defaultState: TableColumnSorting.None,
+      sortable: true,
+      isSortingNoneAvailable: true,
+    },
   },
 ];
 
@@ -72,12 +78,13 @@ export class TableExample6Component implements OnDestroy {
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>({
     trackBy: (_index: number, rowData: SomeData) => rowData.id,
+    features: [TableSortingFeature],
   });
 
   public readonly columnWidthChanged$: Subject<TableEvents.ColumnWidthChanged> =
     new Subject<TableEvents.ColumnWidthChanged>();
-  public readonly columnSortingChanged$: Subject<TableEvents.ColumnSortingChanged> =
-    new Subject<TableEvents.ColumnSortingChanged>();
+  public readonly columnSortingChanged$: Subject<TableFeatureEvents.ColumnSortingChanged> =
+    new Subject<TableFeatureEvents.ColumnSortingChanged>();
   public readonly columnHover$: Subject<TableEvents.ColumnHover> = new Subject<TableEvents.ColumnHover>();
   public readonly rowHover$: Subject<TableEvents.RowHover> = new Subject<TableEvents.RowHover>();
   public readonly cellClick$: Subject<TableEvents.CellClick> = new Subject<TableEvents.CellClick>();
@@ -135,11 +142,11 @@ export class TableExample6Component implements OnDestroy {
   }
 
   public toggleAgeSorting(): void {
-    this.controller.toggleColumnSorting('age');
+    this.controller.dispatchFeatureEvent(new TableFeatureEvents.ToggleColumnSorting('age'));
   }
 
   public resetAgeSorting(): void {
-    this.controller.setColumnSorting('age', TableColumnSorting.None);
+    this.controller.dispatchFeatureEvent(new TableFeatureEvents.SetColumnSorting('age', TableColumnSorting.None));
   }
 
   public highlightSecondRow(): void {
@@ -168,8 +175,8 @@ export class TableExample6Component implements OnDestroy {
 
   private processColumnSortChangedEvent(): Subscription {
     return this.controller
-      .getEvents(TableEvents.ColumnSortingChanged)
-      .subscribe((event: TableEvents.ColumnSortingChanged) => {
+      .getEvents(TableFeatureEvents.ColumnSortingChanged)
+      .subscribe((event: TableFeatureEvents.ColumnSortingChanged) => {
         this.columnSortingChanged$.next(event);
 
         if (event.sorting === TableColumnSorting.Asc) {

@@ -1,6 +1,6 @@
 import { TableColumnPin } from '../enums/table-column-pin.enum';
-import { TableColumnSizes } from './table-column-sizes.interface';
 import { TableAdaptiveColumnSizes } from './table-adaptive-column-sizes.interface';
+import { TableColumnSizes } from './table-column-sizes.interface';
 
 export interface TableColumnDefinition {
   id: string;
@@ -15,4 +15,5 @@ export interface TableColumnDefinition {
   rerenderOnRowOrColumnChanges?: boolean;
   defaultSizes?: TableColumnSizes;
   adaptiveSizes?: TableAdaptiveColumnSizes;
+  featureOptions?: unknown;
 }

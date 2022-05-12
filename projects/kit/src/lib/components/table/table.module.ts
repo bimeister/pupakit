@@ -1,22 +1,22 @@
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { TableComponent } from './components/table/table.component';
-import { TableColumnTemplateComponent } from './components/table-column-template/table-column-template.component';
+import { TableComponent } from './components/system/table/table.component';
+import { TableColumnTemplateComponent } from './components/system/table-column-template/table-column-template.component';
 import { TableHeaderCellTemplateDirective } from './directives/table-header-cell-template.directive';
 import { TableBodyCellTemplateDirective } from './directives/table-cell-template.directive';
 import { ScrollingModule } from '@angular/cdk/scrolling';
-import { TableHeaderCellComponent } from './components/table-header-cell/table-header-cell.component';
-import { TableBodyCellComponent } from './components/table-body-cell/table-body-cell.component';
-import { TableBodyCellContainerComponent } from './components/table-body-cell-container/table-body-cell-container.component';
-import { TableHeaderCellContainerComponent } from './components/table-header-cell-container/table-header-cell-container.component';
-import { TableBodyRowContainerComponent } from './components/table-body-row-container/table-body-row-container.component';
-import { TableHeaderRowContainerComponent } from './components/table-header-row-container/table-header-row-container.component';
-import { TablePlaceholderRowContainerComponent } from './components/table-placeholder-row-container/table-placeholder-row-container.component';
+import { TableHeaderCellComponent } from './components/external-predefined/table-header-cell/table-header-cell.component';
+import { TableBodyCellComponent } from './components/external-predefined/table-body-cell/table-body-cell.component';
+import { TableBodyCellContainerComponent } from './components/system/table-body-cell-container/table-body-cell-container.component';
+import { TableHeaderCellContainerComponent } from './components/system/table-header-cell-container/table-header-cell-container.component';
+import { TableBodyRowContainerComponent } from './components/system/table-body-row-container/table-body-row-container.component';
+import { TableHeaderRowContainerComponent } from './components/system/table-header-row-container/table-header-row-container.component';
+import { TablePlaceholderRowContainerComponent } from './components/system/table-placeholder-row-container/table-placeholder-row-container.component';
 import { SkeletonModule } from '../skeleton/skeleton.module';
 import { IconModule } from '../icon/icon.module';
 import { appArrowFullTopIcon } from '../../../internal/constants/icons/app-arrow-full-top-icon.const';
 import { appArrowFullBotIcon } from '../../../internal/constants/icons/app-arrow-full-bot-icon.const';
-import { TableSkeletonComponent } from './components/table-skeleton/table-skeleton.component';
+import { TableSkeletonComponent } from './components/external-predefined/table-skeleton/table-skeleton.component';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
