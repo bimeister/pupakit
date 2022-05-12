@@ -27,8 +27,9 @@
           [position]="position$ | async"
           [scrollDragMode]="scrollDragMode$ | async"
           [scrollDragMode]="'horizontal'"
-          [invisibleScrollbars]="(invisibleScrollbars$ | async) || []"
+          [invisibleScrollbars]="invisibleScrollbarsObs$ | async"
         >
+          <h5>invisibleScrollbars: {{ invisibleScrollbarsObs$ | async }}</h5>
           <div class="text-content">
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
             industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
@@ -77,11 +78,12 @@
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="invisibleScrollbars" type="ScrollbarType[]">
           <ng-container *demoExampleViewerPropertyDescription>Hide vertical and/or horizontal scrollbars.</ng-container>
-          <demo-props-select
-            #invisibleScrollbars$
-            [options]="invisibleScrollbarsOptions"
-            [isMultiSelectionEnabled]="true"
-          ></demo-props-select>
+          <demo-props-select #invisibleScrollbars$ [options]="invisibleScrollbarsOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="syncWith" type="ScrollableComponent[]">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Sync scroll with another scrollable components.</ng-container
+          >
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 
