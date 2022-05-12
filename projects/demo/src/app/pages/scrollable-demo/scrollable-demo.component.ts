@@ -82,9 +82,9 @@ export class ScrollableDemoComponent {
   public readonly invisibleScrollbarsObs$: BehaviorSubject<ScrollbarType[]> = new BehaviorSubject([]);
 
   constructor() {
-    setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal']), 3000);
-    setTimeout(() => this.invisibleScrollbarsObs$.next(['vertical']), 6000);
-    setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal', 'vertical']), 9000);
-    setTimeout(() => this.invisibleScrollbarsObs$.next([]), 12000);
+    // setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal']), 3000);
+    // setTimeout(() => this.invisibleScrollbarsObs$.next(['vertical']), 6000);
+    // setTimeout(() => this.invisibleScrollbarsObs$.next(['horizontal', 'vertical']), 9000);
+    // setTimeout(() => this.invisibleScrollbarsObs$.next([]), 12000);
   }
 }

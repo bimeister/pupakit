@@ -70,11 +70,7 @@
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="scrollDragMode" type="Nullable<ScrollDragMode>">
           <ng-container *demoExampleViewerPropertyDescription>Enables scroll on drag on desktop devices.</ng-container>
-          <demo-props-radio-select
-            #scrollDragMode$
-            direction="row"
-            [options]="scrollDragModeOptions"
-          ></demo-props-radio-select>
+          <demo-props-select #scrollDragMode$ [options]="scrollDragModeOptions"></demo-props-select>
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="invisibleScrollbars" type="ScrollbarType[]">
           <ng-container *demoExampleViewerPropertyDescription>Hide vertical and/or horizontal scrollbars.</ng-container>
