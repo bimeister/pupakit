@@ -1,16 +1,18 @@
-import { Injector, TrackByFunction, Type } from '@angular/core';
+import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { QueueEvents } from '../events/queue.events';
+import { TableFeatureEvents } from '../events/table-feature.events';
 import { TableEvents } from '../events/table.events';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableControllerOptions } from '../interfaces/table-controller-options.interface';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
+import { TableFeatureConstructor } from '../types/table-feature-constructor.type';
 import { EventsQueue } from './events-queue.class';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
 import TableEventBase = TableEvents.TableEventBase;
+import TableFeatureEventBase = TableFeatureEvents.TableFeatureEventBase;
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
 
@@ -19,11 +21,11 @@ export class TableController<T> {
 
   protected readonly queue: EventsQueue = new EventsQueue(this.eventBus);
 
-  protected readonly dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>(
-    this.eventBus
-  );
+  protected readonly dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>();
 
-  constructor(options?: TableControllerOptions<T>) {
+  public readonly features: TableFeatureConstructor<T>[] = this.options?.features ?? [];
+
+  constructor(private readonly options?: TableControllerOptions<T>) {
     this.setHeaderRowHeightPx(options?.headerRowHeightPx);
     this.setBodyRowHeightPx(options?.bodyRowHeightPx);
     this.setScrollBehavior(options?.scrollBehavior);
@@ -35,8 +37,8 @@ export class TableController<T> {
     this.eventBus.dispatch(queueEvent);
   }
 
-  public init(injector: Injector): void {
-    this.dataDisplayCollection.setTableInjector(injector);
+  public dispatchFeatureEvent(event: TableFeatureEventBase): void {
+    this.dispatchInQueue(event);
   }
 
   public getEvents<E extends TableEventBase>(eventType: Type<E>): Observable<E> {
@@ -61,14 +63,6 @@ export class TableController<T> {
 
   public setColumnWidth(columnId: string, widthPx: number): void {
     this.dispatchInQueue(new TableEvents.SetColumnWidth(columnId, widthPx));
-  }
-
-  public toggleColumnSorting(columnId: string): void {
-    this.dispatchInQueue(new TableEvents.ToggleColumnSorting(columnId));
-  }
-
-  public setColumnSorting(columnId: string, sorting: TableColumnSorting): void {
-    this.dispatchInQueue(new TableEvents.SetColumnSorting(columnId, sorting));
   }
 
   public refreshDataSlice(): void {

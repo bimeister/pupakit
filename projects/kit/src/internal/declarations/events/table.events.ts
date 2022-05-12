@@ -1,7 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
 import { getUuid, Nullable } from '@bimeister/utilities';
 import { BusEventBase } from '../classes/abstract/bus-event-base.abstract';
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableEventTargetCellData } from '../interfaces/table-event-target-cell-data.interface';
 
@@ -78,11 +77,6 @@ export namespace TableEvents {
       super();
     }
   }
-  export class ColumnSortingChanged extends TableEventBase {
-    constructor(public readonly sorting: TableColumnSorting, public readonly columnId: string) {
-      super();
-    }
-  }
   export class ColumnWidthChanged extends TableEventBase {
     constructor(public readonly widthPx: number, public readonly columnId: string) {
       super();
@@ -131,16 +125,6 @@ export namespace TableEvents {
   }
   export class SetColumnWidth extends TableEventBase {
     constructor(public columnId: string, public readonly widthPx: number) {
-      super();
-    }
-  }
-  export class ToggleColumnSorting extends TableEventBase {
-    constructor(public columnId: string) {
-      super();
-    }
-  }
-  export class SetColumnSorting extends TableEventBase {
-    constructor(public columnId: string, public readonly sorting: TableColumnSorting) {
       super();
     }
   }

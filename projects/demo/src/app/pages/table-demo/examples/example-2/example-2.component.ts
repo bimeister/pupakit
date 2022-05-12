@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { getUuid, sortByProperty } from '@bimeister/utilities';
 import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
+import { TableSortingFeature } from '@kit/internal/declarations/classes/table-external-predefined-features/table-sorting-feature.class';
 import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
 import { TableColumnSorting } from '@kit/internal/declarations/enums/table-column-sorting.enum';
+import { TableFeatureEvents } from '@kit/internal/declarations/events/table-feature.events';
 import { TableEvents } from '@kit/internal/declarations/events/table.events';
 import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
 import { Uuid } from '@kit/internal/declarations/types/uuid.type';
@@ -43,12 +45,6 @@ const COLUMNS: TableColumnDefinition[] = [
     // set resizable as true
     resizable: true,
 
-    // set sortable as true
-    sortable: true,
-
-    // set sorting None state availability
-    isSortingNoneAvailable: false,
-
     defaultSizes: {
       widthPx: 200,
 
@@ -57,8 +53,17 @@ const COLUMNS: TableColumnDefinition[] = [
       maxWidthPx: 300,
     },
 
-    // use type for template
-    type: 'last-name',
+    // set sorting feature options
+    featureOptions: {
+      // set default state
+      defaultState: TableColumnSorting.Asc,
+
+      // set sortable as true
+      sortable: true,
+
+      // set sorting None state availability
+      isSortingNoneAvailable: false,
+    },
   },
   {
     id: 'city',
@@ -73,9 +78,6 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'Age',
     pin: TableColumnPin.None,
     defaultSizes: { widthPx: 100 },
-
-    // use type for template
-    type: 'age',
   },
 ];
 
@@ -93,7 +95,10 @@ const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableCol
 export class TableExample2Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    // Add predefinded sorting feature. Also you may write your own features
+    features: [TableSortingFeature],
+  });
 
   private columnDefinitions: TableColumnDefinition[] = COLUMNS;
 
@@ -111,8 +116,8 @@ export class TableExample2Component implements OnDestroy {
 
   private processSortingChanges(): Subscription {
     return this.controller
-      .getEvents(TableEvents.ColumnSortingChanged)
-      .subscribe((event: TableEvents.ColumnSortingChanged) => {
+      .getEvents(TableFeatureEvents.ColumnSortingChanged)
+      .subscribe((event: TableFeatureEvents.ColumnSortingChanged) => {
         if (event.sorting === TableColumnSorting.Asc) {
           const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'ascending'));

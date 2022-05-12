@@ -1,6 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
-import { Injector, TrackByFunction } from '@angular/core';
-import { EventBus } from '@bimeister/event-bus/rxjs';
+import { TrackByFunction } from '@angular/core';
 import { isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -22,8 +21,6 @@ const DEFAULT_ROW_HEIGHT_PX: number = 50;
 const DEFAULT_MIN_BUFFER_PX: number = 100;
 
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
-  private readonly tableInjector$: ReplaySubject<Injector> = new ReplaySubject<Injector>(1);
-
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
@@ -45,19 +42,17 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly virtualScrollDataSource: TableBodyRowsDataSource<T> = new TableBodyRowsDataSource<T>(this.data$);
 
   private columnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
-  public readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = combineLatest([
-    this.columnDefinitions$,
-    this.tableInjector$,
-  ]).pipe(
-    map(([definitions, injector]: [TableColumnDefinition[], Injector]) => {
+  public readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> = this.columnDefinitions$.pipe(
+    map((definitions: TableColumnDefinition[]) => {
       const newColumnIdToColumnMap: Map<string, TableColumn> = new Map<string, TableColumn>();
 
       definitions.forEach((definition: TableColumnDefinition, index: number) => {
         const existingColumn: Nullable<TableColumn> = this.columnIdToColumnMap.get(definition.id);
-        const column: TableColumn = isNil(existingColumn) ? new TableColumn(injector, this.eventBus) : existingColumn;
+        const column: TableColumn = isNil(existingColumn) ? new TableColumn() : existingColumn;
 
         column.index = index;
         column.definition = definition;
+
         newColumnIdToColumnMap.set(definition.id, column);
       });
 
@@ -133,12 +128,6 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly tableHeightPx$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 
   public readonly tableViewportSizePx$: ReplaySubject<number> = new ReplaySubject<number>(1);
-
-  constructor(private readonly eventBus: EventBus) {}
-
-  public setTableInjector(injector: Injector): void {
-    this.tableInjector$.next(injector);
-  }
 
   public setData(data: T[]): Observable<T[]> {
     this.data$.next(data);

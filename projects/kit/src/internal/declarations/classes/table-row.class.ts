@@ -1,8 +1,24 @@
-import { getUuid } from '@bimeister/utilities';
-import { BehaviorSubject } from 'rxjs';
+import { Type } from '@angular/core';
+import { EventBus } from '@bimeister/event-bus/rxjs';
+import { filterByInstanceOf, getUuid } from '@bimeister/utilities';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { TableRowEvents } from '../events/table-row.events';
 import { TableRowRef } from '../interfaces/table-row-ref.interface';
 
 export class TableRow implements TableRowRef {
   public readonly id: string = getUuid();
-  public readonly isHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly eventBus: EventBus = new EventBus();
+
+  public readonly isHovered$: Observable<boolean> = this.listenEvent(TableRowEvents.HoverChanged).pipe(
+    map((event: TableRowEvents.HoverChanged) => event.isHovered)
+  );
+
+  public listenEvent<T extends TableRowEvents.TableRowEventBase>(event: Type<T>): Observable<T> {
+    return this.eventBus.listen().pipe(filterByInstanceOf(event));
+  }
+
+  public dispatch(event: TableRowEvents.TableRowEventBase): void {
+    this.eventBus.dispatch(event);
+  }
 }
