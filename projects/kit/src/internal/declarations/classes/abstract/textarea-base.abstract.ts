@@ -3,12 +3,13 @@ import { NgControl } from '@angular/forms';
 import {
   distinctUntilSerializedChanged,
   filterNotNil,
+  filterTruthy,
   isNil,
   Nullable,
   shareReplayWithRefCount,
 } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { TextAreaCounterVisibility } from '../../../../internal/declarations/types/text-area-counter-visibility-mode.type';
 import { ThemeWrapperService } from '../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
@@ -67,6 +68,9 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @Output() private readonly focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() private readonly blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+
+  @Input() public enterKeyPrevented: boolean = false;
+  public readonly enterKeyPrevented$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,
@@ -133,6 +137,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     this.processMaxRowsChange(changes?.maxRows);
     this.processMinRowsChange(changes?.minRows);
     this.processCounterVisibilityChange(changes?.counterVisibility);
+    this.processEnterKeyDisabledChange(changes?.enterKeyPrevented);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -143,6 +148,10 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   public emitBlurEvent(blurEvent: FocusEvent): void {
     this.isFocused$.next(false);
     this.blur.emit(blurEvent);
+  }
+
+  public preventEnterKeyEvent(event: MouseEvent): void {
+    this.enterKeyPrevented$.pipe(take(1), filterTruthy()).subscribe(() => event.preventDefault());
   }
 
   public focusOnTextareaElement(): void {
@@ -224,6 +233,16 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     }
 
     this.counterVisibility$.next(updatedValue);
+  }
+
+  private processEnterKeyDisabledChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.enterKeyPrevented$.next(updatedValue);
   }
 
   private getHeightPxByRowsCount(rowsCount: number): number {

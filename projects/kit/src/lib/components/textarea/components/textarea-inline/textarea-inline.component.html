@@ -56,6 +56,7 @@
               (focus)="emitFocusEvent($event)"
               (blur)="emitBlurEvent($event)"
               (input)="updateValue(textarea.value)"
+              (keydown.enter)="preventEnterKeyEvent($event)"
             >
             </textarea>
           </div>
