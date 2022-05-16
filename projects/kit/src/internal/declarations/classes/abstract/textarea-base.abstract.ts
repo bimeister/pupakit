@@ -7,13 +7,13 @@ import {
   Nullable,
   shareReplayWithRefCount,
 } from '@bimeister/utilities';
-import { TextAreaCounterVisibility } from '../../../../internal/declarations/types/text-area-counter-visibility-mode.type';
 import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+import { TextAreaCounterVisibility } from '../../../../internal/declarations/types/text-area-counter-visibility-mode.type';
+import { ThemeWrapperService } from '../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
-import { ThemeWrapperService } from '../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
 
 const DEFAULT_MAX_ROWS: number = 5;
 const TEXTAREA_VERTICAL_PADDINGS_PX: number = 16;
@@ -95,11 +95,19 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   public readonly isCounterVisible$: Observable<boolean> = combineLatest([
     this.counterVisibility$,
     this.isFocused$,
+    this.valueLength$,
   ]).pipe(
-    map(
-      ([counterVisibilityMode, isFocused]: [TextAreaCounterVisibility, boolean]) =>
-        !(counterVisibilityMode === 'onfocus' && !isFocused)
-    ),
+    map(([counterVisibilityMode, isFocused, valueLength]: [TextAreaCounterVisibility, boolean, number]) => {
+      if (counterVisibilityMode === 'onfocus') {
+        return isFocused;
+      }
+
+      if (counterVisibilityMode === 'filled') {
+        return valueLength > 0;
+      }
+
+      return true;
+    }),
     distinctUntilChanged(),
     shareReplayWithRefCount()
   );
