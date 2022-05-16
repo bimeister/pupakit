@@ -1,1 +1,1 @@
-export type TextAreaCounterVisibility = 'always' | 'onfocus';
+export type TextAreaCounterVisibility = 'always' | 'onfocus' | 'filled';
