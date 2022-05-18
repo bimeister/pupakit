@@ -11,6 +11,7 @@ const BASE_REQUEST_PATH: string = 'button-group-demo/examples';
 export class ButtonGroupDemoComponent {
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
   };
 
   public readonly example2Content: Record<string, string> = {

@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 $container-padding: 4px;
 
@@ -19,6 +20,7 @@ $container-padding: 4px;
     min-width: fit-content;
     max-width: inherit;
     box-sizing: border-box;
+    border-radius: $controlBorderRadius;
 
     background-color: color('base-white-n400');
     @include host-selector-dark-theme {
@@ -41,6 +43,7 @@ $container-padding: 4px;
     transition: transform 0.25s ease-in-out;
     background-color: color('base-n0');
     color: color('primary-n500');
+    border-radius: $controlBorderRadius;
 
     @include host-selector-dark-theme {
       background-color: color('base-dark-n300');
