@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
@@ -10,11 +11,10 @@
 .button-group-item {
   min-width: 1rem;
   box-sizing: border-box;
-  padding: 5px 12px;
+  padding: 5px 4rem;
   cursor: pointer;
   user-select: none;
   text-align: center;
-  border-radius: 1px;
 
   color: color('base-white-n100');
   @include host-selector-dark-theme {
@@ -35,8 +35,13 @@
 
   &_active {
     background-color: transparent;
+    color: color('base-n600');
 
     box-shadow: 0px 2px 8px color(base-n700, 0.03);
+
+    @include host-selector-dark-theme {
+      color: color('base-n0');
+    }
   }
 
   &_disabled {
