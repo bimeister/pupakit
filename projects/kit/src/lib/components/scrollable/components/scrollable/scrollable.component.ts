@@ -89,7 +89,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   @Output() public readonly contentDragStart: EventEmitter<void> = new EventEmitter<void>();
   @Output() public readonly contentDragEnd: EventEmitter<void> = new EventEmitter<void>();
 
-  @Output() public readonly horizontalScrollDirectionChanged: EventEmitter<ScrollDirection> =
+  @Output() public readonly verticalScrollDirectionChanged: EventEmitter<ScrollDirection> =
     new EventEmitter<ScrollDirection>();
 
   @ViewChild('content', { static: true }) public contentRef: ElementRef<HTMLElement>;
@@ -237,9 +237,9 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
       )
       .subscribe(() => {
         if (contentElement.scrollTop > this.lastScrollTop) {
-          this.horizontalScrollDirectionChanged.emit('down');
+          this.verticalScrollDirectionChanged.emit('down');
         } else {
-          this.horizontalScrollDirectionChanged.emit('up');
+          this.verticalScrollDirectionChanged.emit('up');
         }
 
         this.lastScrollTop = contentElement.scrollTop;
