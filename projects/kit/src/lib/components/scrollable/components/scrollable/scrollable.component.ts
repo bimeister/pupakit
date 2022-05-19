@@ -45,6 +45,8 @@ import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-e
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
 import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
+import { ScrollDirection } from '../../../../../internal/declarations/types/scroll-direction.type';
+
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 
 const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_visible';
@@ -87,6 +89,9 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   @Output() public readonly contentDragStart: EventEmitter<void> = new EventEmitter<void>();
   @Output() public readonly contentDragEnd: EventEmitter<void> = new EventEmitter<void>();
 
+  @Output() public readonly horizontalScrollDirectionChanged: EventEmitter<ScrollDirection> =
+    new EventEmitter<ScrollDirection>();
+
   @ViewChild('content', { static: true }) public contentRef: ElementRef<HTMLElement>;
   @ContentChild(ScrollableContentDirective, { static: true, read: ElementRef })
   public directiveContentRef: ElementRef<HTMLElement>;
@@ -112,6 +117,8 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   private ignoreNextContentScrollEvent: boolean = false;
+
+  private lastScrollTop: number = 0;
 
   private scrollByDeltaSubscription: Subscription | null = null;
 
@@ -229,6 +236,16 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
         filter(() => !this.ignoreNextContentScrollEvent)
       )
       .subscribe(() => {
+        if (contentElement.scrollTop > this.lastScrollTop) {
+          this.horizontalScrollDirectionChanged.emit('down');
+        } else {
+          this.horizontalScrollDirectionChanged.emit('up');
+        }
+
+        this.lastScrollTop = contentElement.scrollTop;
+
+        this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
+
         for (const scrollable of this.syncWith) {
           scrollable.setScrollTop(contentElement.scrollTop);
           scrollable.setScrollLeft(contentElement.scrollLeft);
