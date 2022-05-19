@@ -1,7 +1,7 @@
 @use './../../button.styles.scss';
 
 :host {
-  display: flex;
+  display: inline-block;
 }
 
 .button {
