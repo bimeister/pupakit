@@ -236,13 +236,9 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
         filter(() => !this.ignoreNextContentScrollEvent)
       )
       .subscribe(() => {
-        if (contentElement.scrollTop > this.lastScrollTop) {
-          this.verticalScrollDirectionChanged.emit('down');
-        } else {
-          this.verticalScrollDirectionChanged.emit('up');
-        }
-
-        this.lastScrollTop = contentElement.scrollTop;
+        contentElement.scrollTop > this.lastScrollTop
+          ? this.verticalScrollDirectionChanged.emit('down')
+          : this.verticalScrollDirectionChanged.emit('up');
 
         this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
 
