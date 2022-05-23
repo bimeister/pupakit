@@ -324,6 +324,10 @@
           {
             "name": "shareReplay",
             "message": "causes memory leak; use [shareReplayWithRefCount] instead"
+          },
+          {
+            "name": "pluck",
+            "message": "will be removed in v8; use map((foo) => foo?.bar) instead"
           }
         ]
       }

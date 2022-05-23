@@ -1,7 +1,7 @@
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
 import { asapScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, pluck, subscribeOn, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, subscribeOn, switchMap, take } from 'rxjs/operators';
 import { TableAdaptiveColumnSizes } from '../interfaces/table-adaptive-column-sizes.interface';
 import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
 
@@ -58,9 +58,15 @@ export class TableColumnSizeState {
     shareReplayWithRefCount()
   );
 
-  private readonly minWidthPx$: Observable<number> = this.currentBreakpointSizes$.pipe(pluck('minWidthPx'));
-  private readonly maxWidthPx$: Observable<number> = this.currentBreakpointSizes$.pipe(pluck('maxWidthPx'));
-  private readonly definitionWidthPxState$: Observable<number> = this.currentBreakpointSizes$.pipe(pluck('widthPx'));
+  private readonly minWidthPx$: Observable<number> = this.currentBreakpointSizes$.pipe(
+    map((sizes: TableColumnSizes) => sizes.minWidthPx)
+  );
+  private readonly maxWidthPx$: Observable<number> = this.currentBreakpointSizes$.pipe(
+    map((sizes: TableColumnSizes) => sizes.maxWidthPx)
+  );
+  private readonly definitionWidthPxState$: Observable<number> = this.currentBreakpointSizes$.pipe(
+    map((sizes: TableColumnSizes) => sizes.widthPx)
+  );
 
   private readonly userWidthPxState$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 

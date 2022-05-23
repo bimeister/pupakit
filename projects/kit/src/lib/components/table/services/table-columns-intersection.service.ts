@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { map, pluck, take, withLatestFrom } from 'rxjs/operators';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 import { isTableCellHtmlElement } from '../../../../internal/type-guards/is-table-cell-html-element.type-guard';
 
 @Injectable()
@@ -44,8 +44,12 @@ export class TableColumnsIntersectionService implements OnDestroy {
     shareReplayWithRefCount<[string[], string[]]>()
   );
 
-  public readonly leftHiddenColumnIds$: Observable<string[]> = this.hiddenColumnsCount$.pipe(pluck(0));
-  public readonly rightHiddenColumnIds$: Observable<string[]> = this.hiddenColumnsCount$.pipe(pluck(1));
+  public readonly leftHiddenColumnIds$: Observable<string[]> = this.hiddenColumnsCount$.pipe(
+    map((data: [string[], string[]]) => data[0])
+  );
+  public readonly rightHiddenColumnIds$: Observable<string[]> = this.hiddenColumnsCount$.pipe(
+    map((data: [string[], string[]]) => data[1])
+  );
 
   private readonly intersectionObserver$: BehaviorSubject<Nullable<IntersectionObserver>> = new BehaviorSubject<
     Nullable<IntersectionObserver>
