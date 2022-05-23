@@ -13,7 +13,7 @@ import {
 } from '@angular/core';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { pluck, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../../internal/constants/tokens/dropdown-menu-service.token';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
@@ -39,7 +39,7 @@ export class DropdownMenuDirective implements OnChanges, OnDestroy {
 
   private readonly contextId$: Observable<Uuid> = this.dropdownMenuContentComponent$.pipe(
     filterNotNil(),
-    pluck('contextId')
+    map((component: DropdownMenuContentComponent) => component.contextId)
   );
 
   @Input() public dropdownMenuDisabled: boolean = false;
