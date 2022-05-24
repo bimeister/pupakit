@@ -11,7 +11,6 @@ import { ButtonModule } from './components/button/button.module';
 import { CardModule } from './components/card/card.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
-import { ChipModule } from './components/chip/chip.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
 import { CounterModule } from './components/counter/counter.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
@@ -65,7 +64,6 @@ const EXPORTS: any[] = [
   ButtonModule,
   CardModule,
   CheckboxModule,
-  ChipModule,
   ChipTabsModule,
   ControlTextModule,
   DateTimePickerModule,

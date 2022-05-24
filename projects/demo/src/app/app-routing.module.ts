@@ -13,7 +13,6 @@ import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-de
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
-import { ChipDemoModule } from './pages/chip-demo/chip-demo.module';
 import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
 import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
@@ -129,11 +128,6 @@ const demoRoutes: Routes = [
         path: 'card',
         loadChildren: (): Promise<Type<CardDemoModule>> =>
           import('./pages/card-demo/card-demo.module').then((module: any) => module.CardDemoModule),
-      },
-      {
-        path: 'chip',
-        loadChildren: (): Promise<Type<ChipDemoModule>> =>
-          import('./pages/chip-demo/chip-demo.module').then((module: any) => module.ChipDemoModule),
       },
       {
         path: 'chip-tabs',

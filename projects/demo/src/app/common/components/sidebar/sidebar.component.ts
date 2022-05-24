@@ -80,7 +80,6 @@ export class SidebarComponent {
         { title: 'Form Layout', link: '/kit/form-layout' },
         { title: 'Tree node', link: '/kit/tree-node' },
         { title: '⚠️ Chip Tabs', link: '/kit/chip-tabs' },
-        { title: '⚠️ Chip', link: '/kit/chip' },
         { title: '⚠️ Vertical Tabs', link: '/kit/vertical-tabs' },
         { title: '⚠️ Tree', link: '/kit/tree' },
         { title: '⚠️ Draggable', link: '/kit/draggable' },
