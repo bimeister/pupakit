@@ -85,7 +85,6 @@ const EXPORTS: any[] = [
   TreeNewModule,
   VerticalTabsModule,
   SkeletonModule,
-  DraggableListModule,
   SelectModule,
   ProgressBarModule,
   CounterModule,

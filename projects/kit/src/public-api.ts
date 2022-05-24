@@ -16,7 +16,6 @@ export {
   CountColor,
   CustomTreeDataSource,
   DefaultTreeEventHandler,
-  DraggableListChangeIndexEvent,
   DrawerConfig,
   DrawerRef,
   DrawersService,
