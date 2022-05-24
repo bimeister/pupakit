@@ -10,7 +10,6 @@ import { ButtonGroupModule } from './components/button-group/button-group.module
 import { ButtonModule } from './components/button/button.module';
 import { CardModule } from './components/card/card.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
-import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
 import { CounterModule } from './components/counter/counter.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
@@ -18,11 +17,11 @@ import { DaySelectorModule } from './components/day-selector/day-selector.module
 import { DndCloneContainerModule } from './components/dnd-clone-container/dnd-clone-container.module';
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
+import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
-import { ExpansibleModule } from './components/expansible/expansible.module';
 import { FloatingCardModule } from './components/floating-card/floating-card.module';
 import { FormLayoutModule } from './components/form-layout/form-layout.module';
 import { InputModule } from './components/input/input.module';
@@ -56,18 +55,17 @@ import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
+import { UploadsModule } from './components/uploads/uploads.module';
+import { DaySelectorModule } from './components/day-selector/day-selector.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
   LabelModule,
-  ExpansibleModule,
   ButtonModule,
   CardModule,
   CheckboxModule,
-  ChipTabsModule,
   ControlTextModule,
   DateTimePickerModule,
-  DraggableModule,
   DrawerModule,
   DroppableModule,
   InputModule,

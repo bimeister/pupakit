@@ -13,7 +13,6 @@ import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-de
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
-import { ChipTabsDemoModule } from './pages/chip-tabs-demo/chip-tabs-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
 import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { CounterDemoModule } from './pages/counter-demo/counter-demo.module';
@@ -54,6 +53,9 @@ import { TreeDemoModule } from './pages/tree-demo/tree-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
+import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
+import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
+import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 
@@ -130,11 +132,6 @@ const demoRoutes: Routes = [
           import('./pages/card-demo/card-demo.module').then((module: any) => module.CardDemoModule),
       },
       {
-        path: 'chip-tabs',
-        loadChildren: (): Promise<Type<ChipTabsDemoModule>> =>
-          import('./pages/chip-tabs-demo/chip-tabs-demo.module').then((module: any) => module.ChipTabsDemoModule),
-      },
-      {
         path: 'checkbox',
         loadChildren: (): Promise<Type<CheckboxDemoModule>> =>
           import('./pages/checkbox-demo/checkbox-demo.module').then((module: any) => module.CheckboxDemoModule),
@@ -185,11 +182,6 @@ const demoRoutes: Routes = [
         path: 'rating',
         loadChildren: (): Promise<Type<RatingDemoModule>> =>
           import('./pages/rating-demo/rating-demo.module').then((module: any) => module.RatingDemoModule),
-      },
-      {
-        path: 'draggable',
-        loadChildren: (): Promise<Type<DraggableDemoModule>> =>
-          import('./pages/draggable-demo/draggable-demo.module').then((module: any) => module.DraggableDemoModule),
       },
       {
         path: 'date-time-picker',
@@ -274,11 +266,9 @@ const demoRoutes: Routes = [
           ),
       },
       {
-        path: 'vertical-tabs',
-        loadChildren: (): Promise<Type<VerticalTabsDemoModule>> =>
-          import('./pages/vertical-tabs-demo/vertical-tabs-demo.module').then(
-            (module: any) => module.VerticalTabsDemoModule
-          ),
+        path: 'uploads',
+        loadChildren: (): Promise<Type<UploadsDemoModule>> =>
+          import('./pages/uploads-demo/uploads-demo.module').then((module: any) => module.UploadsDemoModule),
       },
       {
         path: 'floating-card',
