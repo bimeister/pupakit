@@ -8,7 +8,6 @@ export {
   AlertTemplateData,
   AlertType,
   Breadcrumb,
-  ChipColors,
   ClientUiStateHandlerService,
   Color,
   ColorsService,
