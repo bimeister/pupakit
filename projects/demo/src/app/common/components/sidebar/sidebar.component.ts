@@ -82,8 +82,6 @@ export class SidebarComponent {
         { title: '⚠️ Chip Tabs', link: '/kit/chip-tabs' },
         { title: '⚠️ Vertical Tabs', link: '/kit/vertical-tabs' },
         { title: '⚠️ Tree', link: '/kit/tree' },
-        { title: '⚠️ Draggable', link: '/kit/draggable' },
-        { title: '⚠️ Draggable list', link: '/kit/draggable-list' },
       ],
       'title'
     ),

@@ -245,13 +245,6 @@ const demoRoutes: Routes = [
           import('./pages/tooltip-demo/tooltip-demo.module').then((module: any) => module.TooltipDemoModule),
       },
       {
-        path: 'draggable-list',
-        loadChildren: (): Promise<Type<DraggableListDemoModule>> =>
-          import('./pages/draggable-list-demo/draggable-list-demo.module').then(
-            (module: any) => module.DraggableListDemoModule
-          ),
-      },
-      {
         path: 'dropdown-menu',
         loadChildren: (): Promise<Type<DropdownMenuDemoModule>> =>
           import('./pages/dropdown-menu-demo/dropdown-menu-demo.module').then(
