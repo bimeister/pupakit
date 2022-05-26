@@ -394,6 +394,11 @@ const demoRoutes: Routes = [
         loadChildren: () =>
           import('./pages/popover-demo/popover-demo.module').then((module: any) => module.PopoverDemoModule),
       },
+      {
+        path: 'form-layout',
+        loadChildren: () =>
+          import('./pages/form-layout-demo/form-layout-demo.module').then((module: any) => module.FormLayoutDemoModule),
+      },
     ],
   },
   {

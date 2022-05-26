@@ -58,6 +58,7 @@ import { TreeModule } from './components/tree/tree.module';
 import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
+import { FormLayoutModule } from './components/form-layout/form-layout.module';
 
 const EXPORTS: any[] = [
   LabelModule,
@@ -117,6 +118,7 @@ const EXPORTS: any[] = [
   DropdownModule,
   DndCloneContainerModule,
   DaySelectorModule,
+  FormLayoutModule,
 ];
 
 @NgModule({

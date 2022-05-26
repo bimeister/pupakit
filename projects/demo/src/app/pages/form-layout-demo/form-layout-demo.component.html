@@ -1,0 +1,18 @@
+<h1>Form Layout</h1>
+
+<demo-example-viewer>
+  <pupa-tabs-container>
+    <pupa-tabs>
+      <pupa-tabs-item name="Description and Examples">Description and Examples</pupa-tabs-item>
+    </pupa-tabs>
+
+    <pupa-tabs-content>
+      <demo-example-viewer-section *pupaTabsItemContentTemplate="'Description and Examples'">
+        <h2>Base example</h2>
+        <pupa-code-container [content]="baseExampleContent">
+          <demo-base-example *pupaCodeContainerPreviewTemplate></demo-base-example>
+        </pupa-code-container>
+      </demo-example-viewer-section>
+    </pupa-tabs-content>
+  </pupa-tabs-container>
+</demo-example-viewer>
