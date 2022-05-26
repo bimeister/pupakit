@@ -1,11 +1,7 @@
 pupakit
 meistersoft
 bimeister
-Datagrid
-datagrid
 Datasource
-pupagrid
-balham
 titlecase
 Unlistener
 unlistener

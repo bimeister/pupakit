@@ -3,9 +3,9 @@ import { PopoverComponentBase } from '@kit/internal/declarations/classes/abstrac
 import { PopoverRef } from '@kit/internal/declarations/classes/popover-ref.class';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
+import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
-import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { DRAWER_DATA_TOKEN } from '../../../../../../declarations/tokens/drawer-data.token';
 import { DrawerLayoutOtherComponent } from '../drawer-layout-other/drawer-layout-other.component';
 

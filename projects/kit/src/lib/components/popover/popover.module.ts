@@ -2,7 +2,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { IconButtonModule } from '../icon-button/icon-button.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 import { PopoverContainerComponent } from './components/popover-container/popover-container.component';
@@ -28,7 +27,7 @@ const EXPORTS: Type<unknown>[] = [
 
 @NgModule({
   declarations: [...DECLARATIONS, ...EXPORTS],
-  imports: [SharedModule, IconButtonModule, OverlayModule, PortalModule, ScrollableModule, ThemeWrapperModule],
+  imports: [SharedModule, OverlayModule, PortalModule, ScrollableModule, ThemeWrapperModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [...EXPORTS, OverlayModule, PortalModule],
 })

@@ -1,4 +1,5 @@
 export {
+  ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
   AlertComponentBase,
   AlertData,
   AlertModuleConfig,
@@ -15,10 +16,6 @@ export {
   ConnectedPositionY,
   CountColor,
   CustomTreeDataSource,
-  DatagridDomLayouts,
-  DatagridManipulator,
-  DatagridManipulatorConfiguration,
-  DatagridThemes,
   DefaultTreeEventHandler,
   DraggableListChangeIndexEvent,
   DrawerConfig,
@@ -29,7 +26,6 @@ export {
   EventsQueue,
   FlatTreeItem,
   GridRowEvent,
-  GridState,
   GridStateService,
   IconData,
   IconDefinition,
@@ -50,6 +46,7 @@ export {
   Position,
   QueueEvents,
   RangedDataSource,
+  ScrollDragMode,
   SelectBase,
   SelectDropdownBase,
   SelectOptionBase,
@@ -57,11 +54,11 @@ export {
   SelectTreeBase,
   SelectTriggerBase as SelectButtonBase,
   SelectTriggerBase,
-  SortModel,
   Tab,
   TableAdaptiveColumnSizes,
   TableBodyRowRef,
   TableColumnDefinition,
+  TableColumnEvents,
   TableColumnPin,
   TableColumnRef,
   TableColumnSizes,
@@ -72,14 +69,13 @@ export {
   TableDataDisplayCollection,
   TableDataDisplayCollectionRef,
   TableEvents,
-  TableFeatureEvents,
-  TableColumnEvents,
-  TableRowEvents,
-  TablePagedDataProducer,
-  TableRowRef,
-  TableRowType,
   TableFeature,
   TableFeatureConstructor,
+  TableFeatureEvents,
+  TablePagedDataProducer,
+  TableRowEvents,
+  TableRowRef,
+  TableRowType,
   TableSortingFeature,
   Theme,
   ToastComponentBase,
@@ -93,15 +89,14 @@ export {
   TreeDataDisplayCollectionRef,
   TreeEvents,
   TreeItem,
+  TreeNodeProperties,
   UiState,
   UploadingStatus,
-  ScrollDragMode,
-  TreeNodeProperties,
-  ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
 } from './internal/api';
-export { DAY_SELECTOR_CONFIG_TOKEN } from './internal/constants/tokens/api';
-export { DayOfWeek } from './internal/declarations/enums/day-of-week.enum';
 export * from './internal/constants/icons/api';
+export { DAY_SELECTOR_CONFIG_TOKEN } from './internal/constants/tokens/api';
+export { DRAWER_CONTAINER_DATA_TOKEN } from './internal/constants/tokens/drawer-container-data.token';
+export { DayOfWeek } from './internal/declarations/enums/day-of-week.enum';
+export * from './internal/functions/api';
 export { ComponentsModule } from './lib/components.module';
 export * from './lib/components/api';
-export * from './internal/functions/api';
