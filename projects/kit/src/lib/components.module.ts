@@ -14,19 +14,18 @@ import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
 import { CounterModule } from './components/counter/counter.module';
-import { DatagridModule } from './components/datagrid/datagrid.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
+import { DaySelectorModule } from './components/day-selector/day-selector.module';
 import { DndCloneContainerModule } from './components/dnd-clone-container/dnd-clone-container.module';
 import { DraggableListModule } from './components/draggable-list/draggable-list.module';
 import { DraggableModule } from './components/draggable/draggable.module';
-import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
 import { FloatingCardModule } from './components/floating-card/floating-card.module';
-import { IconButtonModule } from './components/icon-button/icon-button.module';
+import { FormLayoutModule } from './components/form-layout/form-layout.module';
 import { InputModule } from './components/input/input.module';
 import { LabelModule } from './components/label/label.module';
 import { LayoutModule } from './components/layout/layout.module';
@@ -53,13 +52,10 @@ import { ThemeWrapperModule } from './components/theme-wrapper/theme-wrapper.mod
 import { TimerModule } from './components/timer/timer.module';
 import { ToastModule } from './components/toast/toast.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
+import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
-import { UploadsModule } from './components/uploads/uploads.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
-import { DaySelectorModule } from './components/day-selector/day-selector.module';
-import { FormLayoutModule } from './components/form-layout/form-layout.module';
-import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
@@ -71,13 +67,10 @@ const EXPORTS: any[] = [
   ChipModule,
   ChipTabsModule,
   ControlTextModule,
-  DatagridModule,
   DateTimePickerModule,
   DraggableModule,
   DrawerModule,
-  DrawerOldModule,
   DroppableModule,
-  IconButtonModule,
   InputModule,
   LayoutModule,
   ModalModule,
@@ -98,7 +91,6 @@ const EXPORTS: any[] = [
   DraggableListModule,
   SelectModule,
   ProgressBarModule,
-  UploadsModule,
   CounterModule,
   AvatarModule,
   PagedVirtualScrollModule,

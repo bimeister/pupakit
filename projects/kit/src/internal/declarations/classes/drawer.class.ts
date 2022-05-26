@@ -2,7 +2,6 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
-import { DrawerContainerOldComponent } from '../../../lib/components/drawer-old/components/drawer-container-old/drawer-container-old.component';
 import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
@@ -63,13 +62,10 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
     }
   }
 
-  private getComponentPortal(): ComponentPortal<DrawerContainerOldComponent<unknown> | ContainerComponent> {
+  private getComponentPortal(): ComponentPortal<ContainerComponent> {
     const portalInjector: PortalInjector = this.createDrawerContainerInjector();
 
-    const containerComponent: ComponentType<DrawerContainerOldComponent<unknown> | ContainerComponent> =
-      this.config.containerComponent ?? DrawerContainerOldComponent;
-
-    return new ComponentPortal(containerComponent, null, portalInjector);
+    return new ComponentPortal(this.config.containerComponent, null, portalInjector);
   }
 
   private createDrawerContainerInjector(): PortalInjector {

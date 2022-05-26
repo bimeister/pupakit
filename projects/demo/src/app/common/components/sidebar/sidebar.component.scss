@@ -11,6 +11,7 @@
 .sidebar-content {
   height: 100%;
   width: 100%;
+  background: color(base-n0);
 
   @include lt-md() {
     width: 100vw;

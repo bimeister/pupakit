@@ -1,11 +1,12 @@
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { appFitToPageIcon } from '../../../internal/constants/icons/app-fit-to-page-icon.const';
+import { appResizeIcon } from '../../../internal/constants/icons/app-resize-icon.const';
 import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 import { mdMoreIcon } from '../../../internal/constants/icons/md-more-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { ButtonModule } from '../button/button.module';
-import { IconButtonModule } from '../icon-button/icon-button.module';
 import { IconModule } from '../icon/icon.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { DrawerButtonIconComponent } from './components/drawer-button-icon/drawer-button-icon.component';
@@ -21,8 +22,6 @@ import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/d
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
-import { appFitToPageIcon } from '../../../internal/constants/icons/app-fit-to-page-icon.const';
-import { appResizeIcon } from '../../../internal/constants/icons/app-resize-icon.const';
 
 @NgModule({
   declarations: [
@@ -42,7 +41,6 @@ import { appResizeIcon } from '../../../internal/constants/icons/app-resize-icon
   ],
   imports: [
     SharedModule,
-    IconButtonModule,
     OverlayModule,
     PortalModule,
     IconModule.forFeature([mdMoreIcon, mdCloseIcon, appFitToPageIcon, appResizeIcon]),

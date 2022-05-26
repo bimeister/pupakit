@@ -5,6 +5,7 @@ import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { OpenedDrawer } from '@kit/internal/declarations/interfaces/opened-drawer.interface';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
+import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
@@ -107,6 +108,8 @@ export class NavbarComponent implements OnDestroy {
           isBackdropTransparent: false,
           float: 'left',
           injector: this.injector,
+          isFullscreen: true,
+          containerComponent: DrawerContainerComponent,
           theme,
         })
       )

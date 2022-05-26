@@ -28,7 +28,7 @@ export class DrawersService {
 
   public open<ContentComponent, ReturnDataT = null, ContainerComponent = ComponentType<unknown>>(
     component: ComponentType<ContentComponent>,
-    config: Partial<DrawerConfig<ContainerComponent>> = null
+    config: DrawerConfig<ContainerComponent> = null
   ): OpenedDrawer<ReturnDataT> {
     const configDto: DrawerConfigDto<ContainerComponent> = new DrawerConfigDto(config);
 
