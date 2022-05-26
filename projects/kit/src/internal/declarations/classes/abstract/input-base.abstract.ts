@@ -1,4 +1,14 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, Output, TemplateRef, ViewChild } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  OnChanges,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
@@ -18,6 +28,8 @@ const BUTTON_WIDTH_PX: number = 24;
 
 @Directive()
 export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
+  @HostBinding('attr.pupa-control') public readonly controlAttribute: string = 'input';
+
   @ViewChild('inputElement')
   protected readonly inputElementRef: ElementRef<HTMLInputElement>;
 

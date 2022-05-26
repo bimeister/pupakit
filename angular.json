@@ -168,7 +168,7 @@
           "skipTests": true
         }
       },
-      "sourceRoot": "./projects/demo/"
+      "sourceRoot": "./projects/demo/src"
     },
     "pupakit": {
       "architect": {
@@ -260,7 +260,7 @@
           "skipTests": true
         }
       },
-      "sourceRoot": "./projects/kit/"
+      "sourceRoot": "./projects/kit/src"
     }
   },
   "version": 1
