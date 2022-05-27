@@ -481,12 +481,12 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
           !this.invisibleScrollbars.includes('horizontal') && hasHorizontalScrollbarCurrent;
 
         if (isVerticalScrollbarVisible !== hasVerticalScrollbar) {
-          this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible);
+          this.ngZone.run(() => this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible));
           this.setScrollbarsClassesByVerticalScrollbarVisibility(isVerticalScrollbarVisible);
         }
 
         if (isHorizontalScrollbarVisible !== hasHorizontalScrollbar) {
-          this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible);
+          this.ngZone.run(() => this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible));
           this.setScrollbarsClassesByHorizontalScrollbarVisibility(isHorizontalScrollbarVisible);
         }
 
