@@ -1,7 +1,7 @@
 <div
   (click)="processButtonClick()"
-  (mousedown)="processEventPropagation($event)"
-  (touchstart)="processEventPropagation($event)"
+  (mousedown)="processTriggerTouch()"
+  (touchstart)="processTriggerTouch()"
   cdkOverlayOrigin
   #overlayOrigin="cdkOverlayOrigin"
   #button
