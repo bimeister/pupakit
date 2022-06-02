@@ -5,7 +5,11 @@
     <p><pupa-code-inline>pupa-card</pupa-code-inline> is a flexible container component.</p>
     <p>It can be used alone, but it also provides several common pre-styled card sections:</p>
     <ul>
-      <li><pupa-code-inline>pupa-card-cover</pupa-code-inline> - container for icon/image content</li>
+      <li>
+        <pupa-code-inline>pupa-card-container</pupa-code-inline> - container for card content used inside
+        <pupa-code-inline>pupa-card</pupa-code-inline> but can be used alone
+      </li>
+      <li><pupa-code-inline>pupa-card-cover</pupa-code-inline> - container for icon/image or any other content</li>
       <li><pupa-code-inline>pupa-card-header</pupa-code-inline> - container for card header content</li>
       <li><pupa-code-inline>pupa-card-title</pupa-code-inline> - container for card title</li>
       <li><pupa-code-inline>pupa-card-description</pupa-code-inline> - container for card description</li>
@@ -38,7 +42,9 @@
           [tabIndex]="tabIndexFormControl.value"
         >
           <pupa-card-cover>
-            <pupa-icon name="app-cube"></pupa-icon>
+            <pupa-icon-holder [size]="size$ | async">
+              <pupa-icon name="app-cube"></pupa-icon>
+            </pupa-icon-holder>
           </pupa-card-cover>
           <pupa-card-header>
             <pupa-card-title>Title</pupa-card-title>

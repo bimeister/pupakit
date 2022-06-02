@@ -1,5 +1,6 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { CardSize } from '@kit/internal/declarations/types/card-size.type';
+import { IconHolderSize } from '@kit/internal/declarations/types/icon-holder-size.type';
 
 interface Case {
   title: string;
@@ -7,6 +8,7 @@ interface Case {
   size: CardSize;
   disabled: boolean;
   clickable: boolean;
+  iconHolderSize: IconHolderSize;
 }
 
 @Component({

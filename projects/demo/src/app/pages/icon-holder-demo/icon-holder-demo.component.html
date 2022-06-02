@@ -1,0 +1,31 @@
+<h1>Icon Holder</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h2>Usage example</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-example-1 *pupaCodeContainerPreviewTemplate></demo-example-1>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-icon-holder [size]="size$ | async" [withBackground]="withBackground$ | async">
+          <pupa-icon name="app-cube"></pupa-icon>
+        </pupa-icon-holder>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="size" type="IconHolderSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+          <demo-props-select #size$ direction="row" [options]="sizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element with background.</ng-container>
+          <demo-props-switcher #withBackground$ [initialValue]="true"></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

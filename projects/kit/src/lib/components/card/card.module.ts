@@ -7,6 +7,7 @@ import { CardTitleComponent } from './components/card-title/card-title.component
 import { CardComponent } from './components/card/card.component';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { IconModule } from '../icon/icon.module';
+import { CardContainerComponent } from './components/card-container/card-container.component';
 
 const COMPONENTS: Type<unknown>[] = [
   CardComponent,
@@ -15,6 +16,7 @@ const COMPONENTS: Type<unknown>[] = [
   CardTitleComponent,
   CardDescriptionComponent,
   CardActionComponent,
+  CardContainerComponent,
 ];
 
 @NgModule({

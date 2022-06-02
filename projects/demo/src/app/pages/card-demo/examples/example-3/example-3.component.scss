@@ -22,14 +22,9 @@
   @include xs() {
     grid-template-columns: 100%;
   }
+}
 
-  .icon {
-    width: 5rem;
-    height: 5rem;
-
-    &_small {
-      width: 4rem;
-      height: 4rem;
-    }
-  }
+.icon {
+  height: 12rem;
+  width: 12rem;
 }

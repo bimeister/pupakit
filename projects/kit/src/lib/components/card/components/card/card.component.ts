@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { isNil } from '@bimeister/utilities';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { CardSize } from '../../../../../internal/declarations/types/card-size.type';
@@ -27,9 +27,6 @@ export class CardComponent implements OnChanges {
   public readonly clickable$: Observable<boolean> = this.cardStateService.clickable$.asObservable();
 
   @Input() public tabIndex: number = 0;
-  public get tabIndexAttribute(): Nullable<number> {
-    return this.clickable ? this.tabIndex : null;
-  }
 
   constructor(private readonly cardStateService: CardStateService) {}
 

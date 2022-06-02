@@ -13,13 +13,6 @@ $container-border-size: 0.5rem;
   align-items: center;
   box-sizing: border-box;
 
-  padding: 2rem;
   margin-right: 3rem;
   border-radius: 1rem;
-  background-color: color(base-white-n500);
-
-  @include host-selector-dark-theme {
-    background: color(base-dark-n500);
-    color: color(base-n0);
-  }
 }
