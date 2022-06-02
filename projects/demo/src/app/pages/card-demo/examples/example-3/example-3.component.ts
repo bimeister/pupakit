@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'demo-card-example-3',
@@ -7,4 +8,10 @@ import { Component, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CardDemoExample3Component {}
+export class CardDemoExample3Component {
+  public readonly logoIcon: SafeResourceUrl;
+
+  constructor(sanitizer: DomSanitizer) {
+    this.logoIcon = sanitizer.bypassSecurityTrustResourceUrl('assets/logo-icon.svg');
+  }
+}

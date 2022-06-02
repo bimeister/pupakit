@@ -1,0 +1,51 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+.holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  aspect-ratio: 1;
+
+  color: color(base-white-n200);
+  @include host-selector-dark-theme() {
+    color: color(base-dark-n200);
+  }
+
+  background: transparent;
+
+  &_with-background {
+    background: color(base-white-n500);
+    @include host-selector-dark-theme() {
+      background: color(base-dark-n500);
+    }
+  }
+
+  &_large {
+    height: 12rem;
+    width: 12rem;
+    font-size: 20px;
+  }
+
+  &_medium {
+    height: 8rem;
+    width: 8rem;
+    font-size: 16px;
+  }
+
+  &_small {
+    height: 6rem;
+    width: 6rem;
+    font-size: 12px;
+  }
+
+  &_extra-small {
+    height: 5rem;
+    width: 5rem;
+    font-size: 8px;
+  }
+}

@@ -43,6 +43,7 @@ export class SidebarComponent {
       [
         { title: 'Accordion', link: '/kit/accordion' },
         { title: 'Icon', link: '/kit/icon' },
+        { title: 'Icon holder', link: '/kit/icon-holder' },
         { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
         { title: 'ButtonMulti', link: '/kit/button-multi' },
         { title: 'Actions', link: '/kit/actions' },

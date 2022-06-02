@@ -1,9 +1,7 @@
-<div
-  class="card"
-  [attr.tabindex]="tabIndexAttribute"
-  [class]="sizeClass$ | async"
-  [class.card_disabled]="disabled$ | async"
-  [class.card_clickable]="clickable$ | async"
->
-  <ng-content></ng-content>
+<div class="card" [class]="sizeClass$ | async">
+  <pupa-card-container [tabIndex]="tabIndex" [disabled]="disabled$ | async" [clickable]="clickable$ | async">
+    <div class="card__inner-wrapper">
+      <ng-content></ng-content>
+    </div>
+  </pupa-card-container>
 </div>
