@@ -1,14 +1,15 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 @use 'functions' as *;
+@use 'sass:math';
 
-$width_scrollbar-half: $width_scrollbar / 2;
+$width_scrollbar-half: math.div($width_scrollbar, 2);
 
 $width_scrollbar-thumb-large: 4px;
 $width_scrollbar-thumb-small: 3px;
 
-$padding_scrollbar-thumb-container-large: ($width_scrollbar - $width_scrollbar-thumb-large) / 2;
-$padding_scrollbar-thumb-container-small: ($width_scrollbar - $width_scrollbar-thumb-small) / 2;
+$padding_scrollbar-thumb-container-large: math.div(($width_scrollbar - $width_scrollbar-thumb-large), 2);
+$padding_scrollbar-thumb-container-small: math.div(($width_scrollbar - $width_scrollbar-thumb-small), 2);
 
 $color_light: 'base-white-n275';
 $color_dark: 'base-dark-n275';

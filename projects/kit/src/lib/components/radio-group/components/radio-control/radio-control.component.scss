@@ -127,11 +127,11 @@
   z-index: 2;
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  @include font-size-m();
+  @include font-size-xs();
 
   &_small {
     margin: 0 0 0 2rem;
-    @include font-size-xs();
+    @include font-size-xxs();
   }
 
   &_disabled {

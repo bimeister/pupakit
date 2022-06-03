@@ -13,8 +13,7 @@
   align-items: center;
   justify-content: center;
 
-  @include font-type-medium;
-  @include font-size-xs;
+  @include font-preset-caption-xs();
 
   &_neutral {
     background-color: color(base-white-n300);

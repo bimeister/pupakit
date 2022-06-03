@@ -13,8 +13,7 @@
   background: color(base-white-n500);
   border-radius: 1rem;
 
-  @include font-type-regular;
-  @include font-size-xs;
+  @include font-preset-h6;
 
   transition: background-color 0.2s ease;
 

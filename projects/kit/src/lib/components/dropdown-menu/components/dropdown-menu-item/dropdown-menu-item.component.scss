@@ -1,11 +1,12 @@
 @use 'functions' as *;
 @use 'mixins' as *;
+@use 'variables' as *;
 
 .dropdown-item {
   --dropdown-item-icon-color: #{color(base-white-n200)};
-  --dropdown-item-transform-x: 0;
-  @include font-type-regular();
-  @include font-size-xs(true);
+
+  @include font-preset-caption-s();
+
   display: flex;
   align-items: center;
   color: color(base-n600);
@@ -14,6 +15,9 @@
   white-space: nowrap;
   transition: background-color variable(transition-duration_shortest) ease-in-out;
   cursor: pointer;
+
+  margin: 0 2rem;
+  border-radius: $controlBorderRadius;
 
   @include host-selector-dark-theme {
     --dropdown-item-icon-color: #{color(base-dark-n100)};
@@ -27,7 +31,6 @@
 
   &:hover:not(.item-disabled):not(.item-plain) {
     --dropdown-item-icon-color: #{color(base-n600)};
-    --dropdown-item-transform-x: 2rem;
     background-color: color(base-white-n400);
 
     @include host-selector-dark-theme {
@@ -67,8 +70,6 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    transition: transform variable(transition-duration_shortest) ease-in-out;
-    transform: translateX(var(--dropdown-item-transform-x));
     width: 100%;
   }
 }

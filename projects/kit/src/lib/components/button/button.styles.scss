@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   appearance: none;
@@ -21,7 +22,7 @@
   position: relative;
   display: inline-block;
 
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
   padding: 2rem 10px;
 
   user-select: none;
@@ -37,7 +38,7 @@
     bottom: 0;
     transform: scale(1);
     will-change: transform;
-    border-radius: 1px;
+    border-radius: $controlBorderRadius;
 
     transition: background-color 0.2s ease, transform 0.1s;
 
@@ -45,8 +46,8 @@
   }
 
   &__content {
-    @include font-size-m();
-    @include font-type-regular();
+    @include font-preset-h6();
+
     line-height: 17px;
     user-select: none;
 
@@ -93,7 +94,7 @@
         bottom: -2px;
 
         border: 2px solid color(primary-n400);
-        border-radius: 2px;
+        border-radius: calc(#{$controlBorderRadius} * 2);
       }
     }
   }
@@ -781,14 +782,14 @@
     height: 4rem;
     padding: 0 2rem;
 
-    @include font-size-extra-small();
+    @include font-preset-h7();
 
     .button__content {
-      @include font-size-extra-small();
+      @include font-preset-h7();
     }
 
     .button__icon {
-      @include font-size-mark();
+      @include font-size-xs();
     }
 
     &.button_with-icon-left {

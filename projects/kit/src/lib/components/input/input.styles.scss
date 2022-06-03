@@ -5,22 +5,6 @@
 @use 'functions' as *;
 @use 'variables' as *;
 
-@mixin large {
-  @include font-size-xl();
-  @include font-type-medium();
-}
-
-@mixin medium {
-  font-size: 3rem;
-  line-height: 4rem;
-  @include font-type-regular();
-}
-
-@mixin small {
-  @include font-type-regular();
-  @include font-size-xs();
-}
-
 :host {
   box-sizing: border-box;
   position: relative;
@@ -73,15 +57,15 @@
     background-color: transparent;
     gap: 1px;
     &:not(:empty).large {
-      @include large();
+      @include font-preset-h3();
       right: 3rem;
     }
     &:not(:empty).medium {
-      @include medium();
+      @include font-preset-caption-xs();
       right: 2rem;
     }
     &:not(:empty).small {
-      @include small();
+      @include font-preset-caption-xs();
       right: 1rem;
     }
   }
@@ -109,21 +93,19 @@
 
   &_large {
     height: 10rem;
-    @include large();
+    @include font-preset-h3();
     &::placeholder {
       @include font-type-regular();
     }
   }
   &_medium {
     height: 8rem;
-    font-size: 3rem;
     line-height: 4rem;
-    @include font-type-regular();
-    @include medium();
+    @include font-preset-caption-xs();
   }
   &_small {
     height: 6rem;
-    @include small();
+    @include font-preset-caption-xs();
   }
 
   &:hover:not(:focus):not([disabled]) {
