@@ -6,8 +6,7 @@
 }
 
 .separator {
-  @include font-size-m();
-  transform: translateY(2px);
+  @include font-size-xxs();
 
   cursor: default;
   color: color(base-white-n200);

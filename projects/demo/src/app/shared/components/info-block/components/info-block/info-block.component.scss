@@ -38,7 +38,7 @@ $color_dark-error: color(red-n550);
 
 .info-block {
   display: flex;
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
   padding: 2rem;
 
   .icon {

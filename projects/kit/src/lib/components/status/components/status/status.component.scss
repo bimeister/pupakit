@@ -5,7 +5,7 @@
   padding-left: 3rem;
   position: relative;
   cursor: default;
-  @include font-size-m();
+  @include font-preset-caption-xs();
   color: color(base-n600);
   transition: color 0.2s ease;
 

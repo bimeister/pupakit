@@ -6,8 +6,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
-  @include font-size-l;
-  @include font-type-medium;
+  @include font-preset-h4;
   line-height: 1;
   padding-right: 14px;
 

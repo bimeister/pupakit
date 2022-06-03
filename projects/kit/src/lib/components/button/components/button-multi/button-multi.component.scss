@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   appearance: none;
@@ -69,8 +70,8 @@
     margin-left: 1rem;
   }
   &__background {
-    border-top-left-radius: 2px;
-    border-bottom-left-radius: 2px;
+    border-top-left-radius: $controlBorderRadius;
+    border-bottom-left-radius: $controlBorderRadius;
     transform-origin: center right;
   }
 }
@@ -79,8 +80,8 @@
   height: 100%;
   padding: 2rem 1rem;
   &__background {
-    border-top-right-radius: 2px;
-    border-bottom-right-radius: 2px;
+    border-top-right-radius: $controlBorderRadius;
+    border-bottom-right-radius: $controlBorderRadius;
     transform-origin: center left;
   }
 }
@@ -126,7 +127,7 @@
     pointer-events: none;
   }
   & > &__background {
-    border-radius: 2px;
+    border-radius: $controlBorderRadius;
   }
 
   &__icon {
@@ -151,7 +152,7 @@
         right: -2px;
         bottom: -2px;
         border: 2px solid color(primary-n400);
-        border-radius: 2px;
+        border-radius: $controlBorderRadius;
       }
       .main,
       .expand {

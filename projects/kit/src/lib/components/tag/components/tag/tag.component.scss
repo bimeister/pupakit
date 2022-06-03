@@ -30,7 +30,7 @@
   max-width: inherit;
   overflow: hidden;
 
-  @include font-size-xs();
+  @include font-preset-h6();
 }
 
 .tag_default:not(.tag_disabled) {

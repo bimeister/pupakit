@@ -2,8 +2,7 @@
 @use 'functions' as *;
 
 .card-title {
-  @include font-type-regular();
-  @include font-size-xs(true);
+  @include font-preset-h6();
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

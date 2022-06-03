@@ -3,7 +3,7 @@
 
 :host {
   display: flex;
-  @include font-preset-caption-m;
+  @include font-preset-body-s();
   align-items: center;
   justify-content: space-between;
   gap: 2rem;

@@ -1,5 +1,6 @@
 @use 'functions' as *;
 @use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
@@ -9,7 +10,6 @@
 .option {
   box-sizing: border-box;
   height: 8rem;
-  width: 100%;
   cursor: pointer;
   position: relative;
 
@@ -19,9 +19,7 @@
   padding: 1rem 5rem;
   user-select: none;
 
-  font-size: 3rem;
-  line-height: 4rem;
-  @include font-type-regular();
+  @include font-preset-caption-xs();
 
   display: flex;
   align-items: center;
@@ -34,6 +32,9 @@
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
   --select-option-icon-color: #{color(base-white-n200)};
+
+  margin: 0 2rem;
+  border-radius: $controlBorderRadius;
 
   &::after {
     position: absolute;

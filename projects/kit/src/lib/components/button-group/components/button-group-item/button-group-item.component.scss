@@ -54,6 +54,5 @@
   }
 
   @include ellipsis-text-overflow;
-  @include font-type-regular;
-  @include font-size-xs;
+  @include font-preset-caption-xs;
 }

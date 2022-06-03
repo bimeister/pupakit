@@ -52,8 +52,7 @@
     overflow: hidden;
     white-space: break-spaces;
 
-    @include font-type-regular;
-    @include font-size-xs;
+    @include font-preset-h6;
   }
 
   &__counter {

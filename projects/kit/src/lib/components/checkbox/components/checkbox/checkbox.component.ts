@@ -14,11 +14,11 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { filterFalsy, filterTruthy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { CheckboxLabelSize } from '../../../../../internal/declarations/types/checkbox-label-size.type';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map, switchMapTo, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { CheckboxLabelSize } from '../../../../../internal/declarations/types/checkbox-label-size.type';
 import { CheckboxService } from '../../services/checkbox.service';
 
 @Component({

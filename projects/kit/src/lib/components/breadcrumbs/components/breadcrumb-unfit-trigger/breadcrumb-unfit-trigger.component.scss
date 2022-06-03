@@ -1,17 +1,17 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 $adaptive-property: 'max-width';
 
 .trigger {
-  @include font-type-regular();
-  @include font-size-l();
+  @include font-preset-h7();
 
   padding: 1.5rem 2rem;
 
   display: block;
   border: 0.5rem solid transparent;
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
 
   text-decoration: none;
   color: color(base-white-n100);

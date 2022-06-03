@@ -30,9 +30,8 @@
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  font-size: 3rem;
-  line-height: 4rem;
-  @include font-type-regular();
+  @include font-preset-caption-xs();
+
   padding: 1rem 3rem;
   padding-right: 14px;
 
