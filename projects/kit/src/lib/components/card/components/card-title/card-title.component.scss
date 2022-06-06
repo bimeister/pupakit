@@ -1,19 +1,18 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
+:host {
+  max-height: 100%;
+  height: fit-content;
+}
+
 .card-title {
   @include font-preset-h6();
 
+  height: 100%;
   display: -webkit-box;
+  -webkit-line-clamp: var(--line-clamp);
   -webkit-box-orient: vertical;
   overflow: hidden;
   font-style: normal;
-
-  &_medium {
-    -webkit-line-clamp: 1;
-  }
-
-  &_large {
-    -webkit-line-clamp: 2;
-  }
 }

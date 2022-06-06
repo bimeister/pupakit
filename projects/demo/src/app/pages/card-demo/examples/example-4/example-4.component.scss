@@ -1,0 +1,61 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
+
+:host {
+  width: 100rem;
+  display: block;
+
+  @include xs() {
+    width: 100%;
+  }
+}
+
+.custom-card {
+  display: block;
+  position: relative;
+
+  &__inner {
+    padding: 3rem 8rem 3rem 3rem;
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__indicator {
+    box-sizing: border-box;
+    content: '';
+    margin-right: 1rem;
+    margin-top: 1rem;
+    background-color: color(green-n500);
+    border-radius: 50%;
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__actor {
+    @include font-type-bold();
+  }
+
+  &__subject {
+    @include font-type-bold();
+  }
+
+  &__btn-wrapper {
+    top: 1rem;
+    right: 1rem;
+    display: block;
+    position: absolute;
+    padding: 1rem;
+    margin: -1rem;
+  }
+
+  &__btn {
+    display: flex;
+  }
+
+  &__tags {
+    padding: 2rem 0rem;
+    display: flex;
+    gap: 2rem;
+  }
+}

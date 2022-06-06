@@ -56,6 +56,7 @@ import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
 import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
+import { IconHolderModule } from './components/icon-holder/icon-holder.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
@@ -113,6 +114,7 @@ const EXPORTS: any[] = [
   DaySelectorModule,
   FormLayoutModule,
   TreeLayoutModule,
+  IconHolderModule,
 ];
 
 @NgModule({

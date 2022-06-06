@@ -6,10 +6,16 @@ import { CardDemoComponent } from './card-demo.component';
 import { CardDemoExample1Component } from './examples/example-1/example-1.component';
 import { CardDemoExample2Component } from './examples/example-2/example-2.component';
 import { CardDemoExample3Component } from './examples/example-3/example-3.component';
-import { IconHolderModule } from '@kit/lib/components/icon-holder/icon-holder.module';
+import { CardDemoExample4Component } from './examples/example-4/example-4.component';
 
 @NgModule({
-  declarations: [CardDemoComponent, CardDemoExample1Component, CardDemoExample2Component, CardDemoExample3Component],
-  imports: [DemoSharedModule, CardDemoRoutingModule, CheckboxModule, IconHolderModule],
+  declarations: [
+    CardDemoComponent,
+    CardDemoExample1Component,
+    CardDemoExample2Component,
+    CardDemoExample3Component,
+    CardDemoExample4Component,
+  ],
+  imports: [DemoSharedModule, CardDemoRoutingModule, CheckboxModule],
 })
 export class CardDemoModule {}
