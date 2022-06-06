@@ -9,6 +9,7 @@ import { PopoverLayoutOtherComponent } from './examples/other-example/popover-la
 import { PopoverTriggerOtherComponent } from './examples/other-example/popover-trigger-other/popover-trigger-other.component';
 import { PopoverDemoRoutingModule } from './popover-demo-routing.module';
 import { PopoverDemoComponent } from './popover-demo.component';
+import { DirectiveExampleComponent } from './examples/directive-example/directive-example.component';
 
 const COMPONENTS: Type<unknown>[] = [
   PopoverDemoComponent,
@@ -19,6 +20,7 @@ const COMPONENTS: Type<unknown>[] = [
   PopoverLayoutOtherComponent,
   PopoverTriggerOtherComponent,
   DrawerLayoutOtherComponent,
+  DirectiveExampleComponent,
 ];
 @NgModule({
   declarations: [...COMPONENTS],
