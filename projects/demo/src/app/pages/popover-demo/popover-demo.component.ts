@@ -24,6 +24,10 @@ export class PopoverDemoComponent {
     'trigger.component.ts': `${BASE_REQUEST_PATH}/coordinates-example/popover-trigger-coordinates/popover-trigger-coordinates.component.ts`,
   };
 
+  public readonly directiveExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/directive-example/directive-example.component.html`,
+  };
+
   public readonly otherExampleContent: Record<string, string> = {
     'layout.component.html': `${BASE_REQUEST_PATH}/other-example/popover-layout-other/popover-layout-other.component.html`,
     'layout.component.ts': `${BASE_REQUEST_PATH}/other-example/popover-layout-other/popover-layout-other.component.ts`,

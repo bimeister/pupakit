@@ -1,0 +1,11 @@
+<pupa-button [pupaPopover]="popover">Open Popover</pupa-button>
+
+<ng-template #popover let-popoverRef="popoverRef">
+  <pupa-popover-layout-header> Header </pupa-popover-layout-header>
+
+  <pupa-popover-layout-body> Body </pupa-popover-layout-body>
+
+  <pupa-popover-layout-footer>
+    <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+  </pupa-popover-layout-footer>
+</ng-template>

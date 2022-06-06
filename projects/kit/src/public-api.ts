@@ -41,6 +41,7 @@ export {
   PagedVirtualScrollArguments,
   PopoverComponentBase,
   PopoverConfig,
+  PopoverTemplateData,
   PopoverRef,
   PopoversService,
   Position,
