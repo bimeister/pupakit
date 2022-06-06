@@ -1,0 +1,34 @@
+<pupa-card-container>
+  <div class="custom-card">
+    <div class="custom-card__inner">
+      <pupa-badge>
+        <pupa-badge-marker-block>
+          <div class="custom-card__indicator"></div>
+        </pupa-badge-marker-block>
+        <pupa-icon-holder size="small">
+          <pupa-icon name="app-todo"></pupa-icon>
+        </pupa-icon-holder>
+      </pupa-badge>
+      <pupa-card-header>
+        <pupa-card-title [maxRows]="2">
+          <span class="custom-card__actor">Michael Gold (goldman)</span>{{ ' ' }}
+          <span class="custom-card__action">takes on the task</span>{{ ' ' }}
+          <span class="custom-card__subject">Design an interface</span>
+
+          <div class="custom-card__tags">
+            <pupa-tag size="small" color="primary">Primary</pupa-tag>
+            <pupa-tag size="small" color="green">Green</pupa-tag>
+            <pupa-tag size="small" color="red">Red</pupa-tag>
+            <pupa-tag size="small" color="yellow">Yellow</pupa-tag>
+            <pupa-tag size="small" color="default">Default</pupa-tag>
+          </div>
+        </pupa-card-title>
+        <pupa-card-description> Some description | 18.09.2002 </pupa-card-description>
+      </pupa-card-header>
+    </div>
+
+    <div class="custom-card__btn-wrapper">
+      <pupa-button-icon class="custom-card__btn" size="extra-small" kind="subtle" icon="app-cross"></pupa-button-icon>
+    </div>
+  </div>
+</pupa-card-container>

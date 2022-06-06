@@ -56,7 +56,6 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
-import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 
 const demoRoutes: Routes = [

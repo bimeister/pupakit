@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 const BASE_REQUEST_PATH: string = 'card-demo/examples';
 
@@ -12,6 +14,20 @@ const BASE_REQUEST_PATH: string = 'card-demo/examples';
 })
 export class CardDemoComponent {
   public readonly tabIndexFormControl: FormControl = new FormControl(0);
+
+  public readonly maxRowsFormControl: FormControl = new FormControl(1);
+
+  public readonly maxRows$: Observable<number | 'auto'> = this.maxRowsFormControl.valueChanges.pipe(
+    map((value: string) => {
+      const trimmedValue: string = value.trim();
+
+      if (trimmedValue === 'auto') {
+        return trimmedValue;
+      }
+
+      return parseInt(trimmedValue, 10);
+    })
+  );
 
   public readonly sizeOptions: PropsOption[] = [
     {
@@ -41,5 +57,11 @@ export class CardDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`,
   };
 }
