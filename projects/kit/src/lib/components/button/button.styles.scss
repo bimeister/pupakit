@@ -1,6 +1,5 @@
 @use 'mixins' as *;
 @use 'functions' as *;
-@use 'variables' as *;
 
 :host {
   appearance: none;
@@ -22,7 +21,7 @@
   position: relative;
   display: inline-block;
 
-  border-radius: $controlBorderRadius;
+  border-radius: 2px;
   padding: 2rem 10px;
 
   user-select: none;
@@ -38,7 +37,7 @@
     bottom: 0;
     transform: scale(1);
     will-change: transform;
-    border-radius: $controlBorderRadius;
+    border-radius: 2px;
 
     transition: background-color 0.2s ease, transform 0.1s;
 
@@ -94,7 +93,7 @@
         bottom: -2px;
 
         border: 2px solid color(primary-n400);
-        border-radius: calc(#{$controlBorderRadius} * 2);
+        border-radius: 2px;
       }
     }
   }
