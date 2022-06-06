@@ -1,6 +1,5 @@
 @use 'functions' as *;
 @use 'mixins' as *;
-@use 'variables' as *;
 
 :host {
   display: block;
@@ -10,6 +9,7 @@
 .option {
   box-sizing: border-box;
   height: 8rem;
+  width: 100%;
   cursor: pointer;
   position: relative;
 
@@ -32,9 +32,6 @@
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
   --select-option-icon-color: #{color(base-white-n200)};
-
-  margin: 0 2rem;
-  border-radius: $controlBorderRadius;
 
   &::after {
     position: absolute;

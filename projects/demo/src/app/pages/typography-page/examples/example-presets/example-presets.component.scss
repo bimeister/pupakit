@@ -30,6 +30,11 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
   &__title {
     flex: 1;
   }
+
+  @include host-selector-dark-theme() {
+    background: color(base-dark-n400);
+    color: color(base-n0);
+  }
 }
 
 .presets {
