@@ -9,7 +9,7 @@ default:
   tags:
     - docker-executor
   image:
-    name: dockerhub.bimeister.io/proxy_cache/library/node:16-slim
+    name: node:16.1.0-slim
     entrypoint: ['']
 
 stages:
