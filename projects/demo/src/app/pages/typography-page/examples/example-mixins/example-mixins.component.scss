@@ -37,84 +37,84 @@
 
 .xxl {
   @include font-size-xxl();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-xxl(true);
   }
 }
 
 .xl {
   @include font-size-xl();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-xl(true);
   }
 }
 
 .l {
   @include font-size-l();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-l(true);
   }
 }
 
 .m {
   @include font-size-m();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-m(true);
   }
 }
 
 .s {
   @include font-size-s();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-s(true);
   }
 }
 
 .xs {
   @include font-size-xs();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-xs(true);
   }
 }
 
 .xxs {
   @include font-size-xxs();
-  &.isParagraph {
+  &.is-paragraph {
     @include font-size-xxs(true);
   }
 }
 
 .light {
   @include font-type-light();
-  &.isCondensed {
+  &.is-condensed {
     @include font-type-light(true);
   }
 }
 
 .regular {
   @include font-type-regular();
-  &.isCondensed {
+  &.is-condensed {
     @include font-type-regular(true);
   }
 }
 
 .medium {
   @include font-type-medium();
-  &.isCondensed {
+  &.is-condensed {
     @include font-type-medium(true);
   }
 }
 
 .semibold {
   @include font-type-semibold();
-  &.isCondensed {
+  &.is-condensed {
     @include font-type-semibold(true);
   }
 }
 
 .bold {
   @include font-type-bold();
-  &.isCondensed {
+  &.is-condensed {
     @include font-type-bold(true);
   }
 }

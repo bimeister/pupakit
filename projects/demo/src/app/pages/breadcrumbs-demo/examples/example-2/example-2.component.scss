@@ -6,6 +6,8 @@
 }
 
 .breadcrumb {
+  align-items: center;
+
   &__name {
     @include ellipsis-text-overflow;
   }

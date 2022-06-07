@@ -39,9 +39,7 @@
     pointer-events: none;
   }
   &__content {
-    @include font-size-m();
-    @include font-type-regular();
-    line-height: 17px;
+    @include font-preset-h6();
     user-select: none;
     padding: 2rem;
     z-index: 1;
