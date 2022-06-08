@@ -1,8 +1,7 @@
 @use 'mixins' as *;
 
 :host {
-  @include font-type-point();
-  @include font-size-small();
+  @include font-preset-h4();
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -1,13 +1,10 @@
 @use 'mixins' as *;
 
 :host {
-  @include font-type-caption();
-
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
 
-  font-size: 2.5rem;
-  line-height: 3rem;
+  @include font-size-xxs();
 }
