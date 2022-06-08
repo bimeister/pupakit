@@ -1,0 +1,17 @@
+<div class="accordion" [class.accordion_expanded]="expanded$ | async">
+  <div class="accordion-header" [class.accordion-header_expanded]="expanded$ | async" (click)="toggle()">
+    <ng-content></ng-content>
+
+    <ng-container *ngIf="showArrow">
+      <div class="arrow-container">
+        <pupa-icon name="app-chevron-down" [@arrowRotated]="animationState$ | async"></pupa-icon>
+      </div>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="!destroyable || (expanded$ | async)">
+    <div class="accordion-body" [@accordionExpanded]="animationState$ | async">
+      <ng-content select="pupa-accordion-body"></ng-content>
+    </div>
+  </ng-container>
+</div>

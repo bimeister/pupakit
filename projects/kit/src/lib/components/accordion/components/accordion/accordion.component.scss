@@ -1,0 +1,56 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  width: 100%;
+
+  .accordion-header {
+    height: 15rem;
+  }
+}
+
+.accordion {
+  border-radius: $controlBorderRadius;
+
+  &_expanded {
+    background-color: color(base-white-n550);
+  }
+
+  @include hover {
+    .accordion-header {
+      background-color: color(base-white-n400);
+
+      @include host-selector-dark-theme() {
+        background-color: color(base-dark-n400);
+      }
+    }
+  }
+
+  @include host-selector-dark-theme() {
+    color: color(base-n0);
+
+    &_expanded {
+      background: color(base-dark-n550);
+    }
+  }
+}
+
+.accordion-header {
+  display: flex;
+  width: 100%;
+  padding: 3rem;
+  box-sizing: border-box;
+  border-radius: $controlBorderRadius;
+  cursor: pointer;
+
+  &_expanded {
+    border-radius: $controlBorderRadius $controlBorderRadius 0 0;
+  }
+}
+
+.arrow-container {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}

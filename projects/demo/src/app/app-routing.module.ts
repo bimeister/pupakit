@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
+import { AccordionDemoModule } from './pages/accordion-demo/accordion-demo.module';
 import { ActionsDemoModule } from './pages/actions-demo/actions-demo.module';
 import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
 import { AvatarDemoModule } from './pages/avatar-demo/avatar-demo.module';
@@ -75,6 +76,11 @@ const demoRoutes: Routes = [
         path: 'typography',
         loadChildren: (): Promise<Type<TypographyPageModule>> =>
           import('./pages/typography-page/typography-page.module').then((module: any) => module.TypographyPageModule),
+      },
+      {
+        path: 'accordion',
+        loadChildren: (): Promise<Type<AccordionDemoModule>> =>
+          import('./pages/accordion-demo/accordion-demo.module').then((module: any) => module.AccordionDemoModule),
       },
       {
         path: 'actions',

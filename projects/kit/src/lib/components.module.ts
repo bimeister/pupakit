@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
-import { CardModule } from './components/card/card.module';
-import { DropdownModule } from './components/dropdown/dropdown.module';
 import { SharedModule } from '../internal/shared/shared.module';
+import { AccordionModule } from './components/accordion/accordion.module';
 import { ActionsModule } from './components/actions/actions.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { ButtonGroupModule } from './components/button-group/button-group.module';
 import { ButtonModule } from './components/button/button.module';
+import { CardModule } from './components/card/card.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ChipTabsModule } from './components/chip-tabs/chip-tabs.module';
 import { ChipModule } from './components/chip/chip.module';
@@ -22,6 +22,7 @@ import { DraggableModule } from './components/draggable/draggable.module';
 import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
+import { DropdownModule } from './components/dropdown/dropdown.module';
 import { DroppableModule } from './components/droppable/droppable.module';
 import { ExpansibleModule } from './components/expansible/expansible.module';
 import { FloatingCardModule } from './components/floating-card/floating-card.module';
@@ -61,6 +62,7 @@ import { DaySelectorModule } from './components/day-selector/day-selector.module
 import { FormLayoutModule } from './components/form-layout/form-layout.module';
 
 const EXPORTS: any[] = [
+  AccordionModule,
   LabelModule,
   ExpansibleModule,
   ButtonModule,

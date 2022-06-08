@@ -1,0 +1,11 @@
+@use 'mixins' as *;
+
+:host {
+  @include font-type-point();
+  @include font-size-small();
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
