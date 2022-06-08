@@ -13,6 +13,7 @@ const OPTIONS_COUNT: number = 10;
 export class SelectExample17Component {
   public readonly control1: FormControl = new FormControl([], Validators.required);
   public readonly control2: FormControl = new FormControl([], Validators.required);
+  public readonly control3: FormControl = new FormControl([], Validators.required);
 
   public readonly isPatchedControl: FormControl = new FormControl(false);
   public readonly invalidTooltipDisabledControl: FormControl = new FormControl(false);

@@ -1,13 +1,3 @@
-<div class="settings">
-  <pupa-switcher class="settings__control" [formControl]="isPatchedControl"></pupa-switcher>
-  <div class="settings__label">isPatched: show validation before touch control</div>
-</div>
-
-<div class="settings">
-  <pupa-switcher class="settings__control" [formControl]="invalidTooltipDisabledControl"></pupa-switcher>
-  <div class="settings__label">error tooltip message disabled: not shown in this case</div>
-</div>
-
 <p>Base use of error tooltip</p>
 <pupa-select
   class="select"
@@ -15,8 +5,7 @@
   [isMultiSelectionEnabled]="true"
   [withReset]="true"
   [invalidTooltip]="'Required filed'"
-  [invalidTooltipDisabled]="invalidTooltipDisabledControl.value"
-  [isPatched]="isPatchedControl.value"
+  [isPatched]="true"
   [formControl]="control1"
 >
   <pupa-select-trigger-tags class="trigger" [tags]="control1.value"> </pupa-select-trigger-tags>
@@ -39,11 +28,34 @@
   [isMultiSelectionEnabled]="true"
   [withReset]="true"
   [invalidTooltipContentTemplate]="errorMessageTemplate"
-  [invalidTooltipDisabled]="invalidTooltipDisabledControl.value"
-  [isPatched]="isPatchedControl.value"
+  [isPatched]="true"
   [formControl]="control2"
 >
   <pupa-select-trigger-tags class="trigger" [tags]="control2.value"> </pupa-select-trigger-tags>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-scrollable class="scrollable">
+        <pupa-select-option *ngFor="let option of options" [value]="option">
+          <pupa-tag [clickable]="true" [size]="'small'">{{ option }}</pupa-tag>
+        </pupa-select-option>
+      </pupa-scrollable>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<p>Error tooltip disabled</p>
+<pupa-select
+  class="select"
+  [placeholder]="'Placeholder'"
+  [isMultiSelectionEnabled]="true"
+  [withReset]="true"
+  [invalidTooltip]="'Required filed'"
+  [invalidTooltipDisabled]="true"
+  [isPatched]="true"
+  [formControl]="control3"
+>
+  <pupa-select-trigger-tags class="trigger" [tags]="control3.value"> </pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
     <pupa-select-options-container>

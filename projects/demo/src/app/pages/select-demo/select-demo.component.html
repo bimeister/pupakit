@@ -1,107 +1,360 @@
 <h1>Select</h1>
 
-<h2>One selection</h2>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <p><pupa-code-inline>pupa-select</pupa-code-inline> is a configurable select component.</p>
+    <p>There are range of components that are used as content to build and configure the select itself:</p>
+    <ul>
+      <li><pupa-code-inline>pupa-select-trigger</pupa-code-inline> - simple button trigger</li>
+      <li><pupa-code-inline>pupa-select-trigger-tags</pupa-code-inline> - tag trigger</li>
+      <li>
+        <pupa-code-inline>pupa-select-trigger-input</pupa-code-inline>
+        - input trigger. Provides ability to enter an option name.
+      </li>
+      <li><pupa-code-inline>pupa-select-trigger-extra-case</pupa-code-inline> - custom trigger</li>
+      <li>
+        <pupa-code-inline>pupa-select-dropdown</pupa-code-inline>
+        - overlay that wraps content of dropdown menu. Takes the following components as content:
+        <ul>
+          <li>
+            <pupa-code-inline>pupa-select-dropdown-header</pupa-code-inline>
+            - wrapper for custom dropdown header.
+          </li>
+          <li>
+            <pupa-code-inline>pupa-select-dropdown-tree</pupa-code-inline>
+            - provides tree-like structure of options' list.
+          </li>
+          <li>
+            <pupa-code-inline>pupa-select-dropdown-footer</pupa-code-inline>
+            - wrapper for custom dropdown footer.
+          </li>
+          <li>
+            <pupa-code-inline>pupa-select-options-container</pupa-code-inline>
+            - options' container:
 
-<pupa-info-block variant="info">Most examples are valid for the multi selection case</pupa-info-block>
+            <ul>
+              <li>
+                <pupa-code-inline>pupa-select-options-option</pupa-code-inline>
+                - simple text option of dropdown list.
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
 
-<h4>Base usage</h4>
-<pupa-code-container [content]="example1Content">
-  <demo-select-example-1 *pupaCodeContainerPreviewTemplate></demo-select-example-1>
-</pupa-code-container>
+    <h2>One selection</h2>
 
-<h4>Option with icon</h4>
-<pupa-code-container [content]="example2Content">
-  <demo-select-example-2 *pupaCodeContainerPreviewTemplate></demo-select-example-2>
-</pupa-code-container>
+    <pupa-info-block variant="info">Most examples are valid for the multi selection case</pupa-info-block>
 
-<h4>Placeholder visible on hover (default)</h4>
-<pupa-code-container [content]="example3Content">
-  <demo-select-example-3 *pupaCodeContainerPreviewTemplate></demo-select-example-3>
-</pupa-code-container>
+    <h4>Base usage</h4>
+    <pupa-code-container [content]="example1Content">
+      <demo-select-example-1 *pupaCodeContainerPreviewTemplate></demo-select-example-1>
+    </pupa-code-container>
 
-<h4>Placeholder standard usage</h4>
-<pupa-code-container [content]="example4Content">
-  <demo-select-example-4 *pupaCodeContainerPreviewTemplate></demo-select-example-4>
-</pupa-code-container>
+    <h4>Option with icon</h4>
+    <pupa-code-container [content]="example2Content">
+      <demo-select-example-2 *pupaCodeContainerPreviewTemplate></demo-select-example-2>
+    </pupa-code-container>
 
-<h4>Tag option</h4>
-<pupa-code-container [content]="example5Content">
-  <demo-select-example-5 *pupaCodeContainerPreviewTemplate></demo-select-example-5>
-</pupa-code-container>
+    <h4>Placeholder visible on hover (default)</h4>
+    <pupa-code-container [content]="example3Content">
+      <demo-select-example-3 *pupaCodeContainerPreviewTemplate></demo-select-example-3>
+    </pupa-code-container>
 
-<h4>Checkbox option</h4>
-<pupa-code-container [content]="example6Content">
-  <demo-select-example-6 *pupaCodeContainerPreviewTemplate></demo-select-example-6>
-</pupa-code-container>
+    <h4>Placeholder standard usage</h4>
+    <pupa-code-container [content]="example4Content">
+      <demo-select-example-4 *pupaCodeContainerPreviewTemplate></demo-select-example-4>
+    </pupa-code-container>
 
-<h4>Disabled</h4>
-<pupa-code-container [content]="example7Content">
-  <demo-select-example-7 *pupaCodeContainerPreviewTemplate></demo-select-example-7>
-</pupa-code-container>
+    <h4>Tag option</h4>
+    <pupa-code-container [content]="example5Content">
+      <demo-select-example-5 *pupaCodeContainerPreviewTemplate></demo-select-example-5>
+    </pupa-code-container>
 
-<h2>Multi selection</h2>
+    <h4>Checkbox option</h4>
+    <pupa-code-container [content]="example6Content">
+      <demo-select-example-6 *pupaCodeContainerPreviewTemplate></demo-select-example-6>
+    </pupa-code-container>
 
-<h4>Base usage</h4>
-<pupa-code-container [content]="example8Content">
-  <demo-select-example-8 *pupaCodeContainerPreviewTemplate></demo-select-example-8>
-</pupa-code-container>
+    <h4>Disabled</h4>
+    <pupa-code-container [content]="example7Content">
+      <demo-select-example-7 *pupaCodeContainerPreviewTemplate></demo-select-example-7>
+    </pupa-code-container>
 
-<h4>Tags counter case (default)</h4>
-<pupa-code-container [content]="example9Content">
-  <demo-select-example-9 *pupaCodeContainerPreviewTemplate></demo-select-example-9>
-</pupa-code-container>
+    <h2>Multi selection</h2>
 
-<h4>Tags counter case (custom tag)</h4>
-<pupa-code-container [content]="example10Content">
-  <demo-select-example-10 *pupaCodeContainerPreviewTemplate></demo-select-example-10>
-</pupa-code-container>
+    <h4>Base usage</h4>
+    <pupa-code-container [content]="example8Content">
+      <demo-select-example-8 *pupaCodeContainerPreviewTemplate></demo-select-example-8>
+    </pupa-code-container>
 
-<h2>Structure composition</h2>
-<pupa-code-container [content]="example11Content">
-  <demo-select-example-11 *pupaCodeContainerPreviewTemplate></demo-select-example-11>
-</pupa-code-container>
+    <h4>Tags counter case (default)</h4>
+    <pupa-code-container [content]="example9Content">
+      <demo-select-example-9 *pupaCodeContainerPreviewTemplate></demo-select-example-9>
+    </pupa-code-container>
 
-<h2>Extra cases</h2>
+    <h4>Tags counter case (custom tag)</h4>
+    <pupa-code-container [content]="example10Content">
+      <demo-select-example-10 *pupaCodeContainerPreviewTemplate></demo-select-example-10>
+    </pupa-code-container>
 
-<h4>Custom trigger</h4>
-<pupa-code-container [content]="example12Content">
-  <demo-select-example-12 *pupaCodeContainerPreviewTemplate></demo-select-example-12>
-</pupa-code-container>
+    <h2>Structure composition</h2>
+    <pupa-code-container [content]="example11Content">
+      <demo-select-example-11 *pupaCodeContainerPreviewTemplate></demo-select-example-11>
+    </pupa-code-container>
 
-<h4>Trigger input for option searching</h4>
-<pupa-code-container [content]="example13Content">
-  <demo-select-example-13 *pupaCodeContainerPreviewTemplate></demo-select-example-13>
-</pupa-code-container>
+    <h2>Extra cases</h2>
 
-<h2>Select with tree</h2>
+    <h4>Custom trigger</h4>
+    <pupa-code-container [content]="example12Content">
+      <demo-select-example-12 *pupaCodeContainerPreviewTemplate></demo-select-example-12>
+    </pupa-code-container>
 
-<h4>Base usage</h4>
-<pupa-code-container [content]="example14Content">
-  <demo-select-example-14 *pupaCodeContainerPreviewTemplate></demo-select-example-14>
-</pupa-code-container>
+    <h4>Trigger input for option searching</h4>
+    <pupa-code-container [content]="example13Content">
+      <demo-select-example-13 *pupaCodeContainerPreviewTemplate></demo-select-example-13>
+    </pupa-code-container>
 
-<h4>Custom template</h4>
-<pupa-code-container [content]="example15Content">
-  <demo-select-example-15 *pupaCodeContainerPreviewTemplate></demo-select-example-15>
-</pupa-code-container>
+    <h2>Select with tree</h2>
 
-<h2>Other</h2>
+    <h4>Base usage</h4>
+    <pupa-code-container [content]="example14Content">
+      <demo-select-example-14 *pupaCodeContainerPreviewTemplate></demo-select-example-14>
+    </pupa-code-container>
 
-<h4>User select example</h4>
-<pupa-info-block variant="info">
-  <ul>
-    <li>Technology is used here: cdkVirtualScroll, SearchFieldComponent, ButtonGroupComponent, ScrollableComponent;</li>
-    <li>
-      Please note that to use the cdkVirtualScroll, you need to set the height of the item
-      <pupa-code-inline>pupa-select-options-container</pupa-code-inline>.
-    </li>
-  </ul>
-</pupa-info-block>
-<pupa-code-container [content]="example16Content">
-  <demo-select-example-16 *pupaCodeContainerPreviewTemplate></demo-select-example-16>
-</pupa-code-container>
+    <h4>Custom template</h4>
+    <pupa-code-container [content]="example15Content">
+      <demo-select-example-15 *pupaCodeContainerPreviewTemplate></demo-select-example-15>
+    </pupa-code-container>
 
-<h4>Validation, withReset and isPatched</h4>
-<pupa-code-container [content]="example17Content">
-  <demo-select-example-17 *pupaCodeContainerPreviewTemplate></demo-select-example-17>
-</pupa-code-container>
+    <h2>Other</h2>
+
+    <h4>User select example</h4>
+    <pupa-info-block variant="info">
+      <ul>
+        <li>
+          Technology is used here: cdkVirtualScroll, SearchFieldComponent, ButtonGroupComponent, ScrollableComponent;
+        </li>
+        <li>
+          Please note that to use the cdkVirtualScroll, you need to set the height of the item
+          <pupa-code-inline>pupa-select-options-container</pupa-code-inline>.
+        </li>
+      </ul>
+    </pupa-info-block>
+    <pupa-code-container [content]="example16Content">
+      <demo-select-example-16 *pupaCodeContainerPreviewTemplate></demo-select-example-16>
+    </pupa-code-container>
+
+    <h4>Validation, withReset and isPatched</h4>
+    <pupa-code-container [content]="example17Content">
+      <demo-select-example-17 *pupaCodeContainerPreviewTemplate></demo-select-example-17>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <h4>Base select:</h4>
+        <pupa-select
+          class="select"
+          [placeholder]="'Placeholder'"
+          [placeholderOnHover]="placeholderOnHover$ | async"
+          [isMultiSelectionEnabled]="isMultiSelectionEnabled$ | async"
+          [isPatched]="isPatched$ | async"
+          [isUnselectionEnabled]="isUnselectionEnabled$ | async"
+          [withReset]="withReset$ | async"
+          [invalidTooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
+          [invalidTooltipDisabled]="invalidTooltipDisabled$ | async"
+          [invalidTooltip]="'Invalid Tooltip Text'"
+          [formControl]="control1"
+        >
+          <pupa-select-trigger>
+            {{ control1.value }}
+          </pupa-select-trigger>
+
+          <pupa-select-dropdown>
+            <pupa-select-options-container>
+              <pupa-select-option [value]="'Option 1'">Option 1</pupa-select-option>
+              <pupa-select-option [value]="'Option 2'">Option 2</pupa-select-option>
+              <pupa-select-option [value]="'Option 3'" [isDisabled]="isDisabled$ | async">Option 3</pupa-select-option>
+              <pupa-select-option [value]="'Option 4'">Option 4</pupa-select-option>
+              <pupa-select-option [value]="'Option 5'">Option 5</pupa-select-option>
+              <pupa-select-option [value]="'Option 6'">Option 6</pupa-select-option>
+              <pupa-select-option [value]="'Option 7'">Option 7</pupa-select-option>
+            </pupa-select-options-container>
+          </pupa-select-dropdown>
+        </pupa-select>
+
+        <h4>Tree structure select:</h4>
+        <pupa-select
+          class="select"
+          [isMultiSelectionEnabled]="true"
+          [placeholder]="'Placeholder'"
+          [isUnselectionEnabled]="isUnselectionEnabled$ | async"
+          [withReset]="withReset$ | async"
+          [formControl]="control2"
+        >
+          <pupa-select-trigger> Selected: {{ control2.value.length }} </pupa-select-trigger>
+
+          <pupa-select-dropdown>
+            <pupa-select-tree
+              type="flat"
+              [flatDataOrigin]="treeDataOrigin"
+              [isLoading]="isLoading$ | async"
+              [hideRoot]="hideRoot$ | async"
+              [isNodeSelectionEnabled]="isNodeSelectionEnabled$ | async"
+            ></pupa-select-tree>
+
+            <pupa-select-dropdown-footer>
+              <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
+            </pupa-select-dropdown-footer>
+          </pupa-select-dropdown>
+        </pupa-select>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="Set form control to disabled state">
+          <demo-props-form-control-disabled [control]="isDisabledControl"></demo-props-form-control-disabled>
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>formControl.disable()</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+
+        <demo-example-viewer-config-item name="Set form control validators">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
+          </ng-container>
+          <demo-props-form-control-validators
+            [controlsList]="controlsList"
+            [validators]="validators"
+            [initialValue]="true"
+          ></demo-props-form-control-validators>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>SelectComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="isMultiSelectionEnabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Enables multi selection.</ng-container>
+          <demo-props-switcher #isMultiSelectionEnabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="placeholderOnHover" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Makes placeholder visible only upon hovering.
+          </ng-container>
+          <demo-props-switcher #placeholderOnHover$ [initialValue]="true"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="isPatched" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Shows validation before touching a control.</ng-container>
+          <demo-props-switcher #isPatched$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="isUnselectionEnabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether an option can be unselected.</ng-container>
+          <demo-props-switcher #isUnselectionEnabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="withReset" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the select's input can be reset.</ng-container>
+          <demo-props-switcher #withReset$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="invalidTooltipHideOnHover" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Hides the invalid tooltip stays opened upon hovering.
+          </ng-container>
+          <demo-props-switcher #invalidTooltipHideOnHover$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="invalidTooltipDisabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether an invalid tooltip is disabled.</ng-container>
+          <demo-props-switcher #invalidTooltipDisabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="invalidTooltip" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip simple content.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property
+          decoratorName="input"
+          name="invalidTooltipContentTemplate"
+          type="Nullable<TemplateRef<unknown>>"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip content template.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>SelectTriggerTagsComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="tags" type="T[]">
+          <ng-container *demoExampleViewerPropertyDescription>Tags data source.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+      <demo-example-viewer-section-label>SelectTreeComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="hideRoot" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Hides root folders.</ng-container>
+          <demo-props-switcher #hideRoot$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="isNodeSelectionEnabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the entire folder can be selected.</ng-container>
+          <demo-props-switcher #isNodeSelectionEnabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="isLoading" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Whether loading spinner is enabled (See "Toggle loader" button in dropdown menu).
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="nodeTemplate" type="TemplateRef<unknown>">
+          <ng-container *demoExampleViewerPropertyDescription>Custom node template.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="flatDataOrigin" type="FlatTreeItem[]">
+          <ng-container *demoExampleViewerPropertyDescription>Flatten tree data source.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="treeNodesOrigin" type="TreeItemInterface[]">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Flatten tree nodes (folders) to be combined with treeElementsOrigin.
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="treeElementsOrigin" type="TreeItemInterface[]">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Flatten tree elements (folder items) to be combined with treeNodesOrigin.
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="output" name="expandedNode" type="EventEmitter<FlatTreeItem>">
+          <ng-container *demoExampleViewerPropertyDescription>Emits expanded node.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>SelectOptionsContainerComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="fixedHeightPx" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>Sets fixed height of dropdown container.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>SelectOptionComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="isDisabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Whether select's option is disabled (disables "option 3").
+          </ng-container>
+          <demo-props-switcher #isDisabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

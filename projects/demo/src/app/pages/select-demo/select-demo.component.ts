@@ -1,6 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, Validators, ValidatorFn } from '@angular/forms';
+import { getUuid } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
+import { FlatTreeItem } from '../../../../../kit/src/internal/declarations/classes/flat-tree-item.class';
 
 const BASE_REQUEST_PATH: string = 'select-demo/examples';
+
+const LEAF_ELEMENTS_COUNT: number = 10;
 
 @Component({
   selector: 'demo-select',
@@ -8,7 +15,48 @@ const BASE_REQUEST_PATH: string = 'select-demo/examples';
   templateUrl: './select-demo.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SelectDemoComponent {
+export class SelectDemoComponent implements OnInit, OnDestroy {
+  public readonly control1: FormControl = new FormControl([]);
+  public readonly control2: FormControl = new FormControl([]);
+  public readonly validators: ValidatorFn[] = [Validators.required];
+
+  public readonly isDisabledControl: FormControl = new FormControl();
+  public readonly controlsList: FormControl[] = [this.control1, this.control2];
+  private readonly disabled$: Observable<boolean> = this.isDisabledControl.statusChanges.pipe(
+    map(() => this.isDisabledControl.disabled)
+  );
+
+  private readonly subscription: Subscription = new Subscription();
+  public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly treeDataOrigin: FlatTreeItem[] = [
+    new FlatTreeItem(true, 'Wolves', 0, null, null, false),
+    ...new Array(LEAF_ELEMENTS_COUNT)
+      .fill(null)
+      .map((_: null, index: number) => new FlatTreeItem(false, `🐺 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Cars', 0, null, null, false),
+    ...new Array(LEAF_ELEMENTS_COUNT)
+      .fill(null)
+      .map((_: null, index: number) => new FlatTreeItem(false, `🚗 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Burgers', 0, null, null, false),
+    ...new Array(LEAF_ELEMENTS_COUNT)
+      .fill(null)
+      .map((_: null, index: number) => new FlatTreeItem(false, `🍔 ${index + 1}`, 1, null, null, true)),
+    new FlatTreeItem(true, 'Faces', 0, null, null, false),
+    new FlatTreeItem(true, 'Happy', 1, null, null, false),
+    ...new Array(LEAF_ELEMENTS_COUNT)
+      .fill(null)
+      .map((_: null, index: number) => new FlatTreeItem(false, `😀 ${index + 1}`, 2, null, null, true)),
+    new FlatTreeItem(true, 'Sad', 1, null, null, false),
+    ...new Array(LEAF_ELEMENTS_COUNT)
+      .fill(null)
+      .map((_: null, index: number) => new FlatTreeItem(false, `😥 ${index + 1}`, 2, null, null, true)),
+    new FlatTreeItem(false, '🐵', 1, null, null, true),
+    new FlatTreeItem(false, '🙊', 1, null, null, true),
+    new FlatTreeItem(false, '🙉', 1, null, null, true),
+    new FlatTreeItem(false, '🙈', 1, null, null, true),
+  ].map((item: FlatTreeItem) => ({ ...item, id: getUuid() }));
+
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/select-demo-one-selection/example-1/example-1.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-one-selection/example-1/example-1.component.scss`,
@@ -110,4 +158,24 @@ export class SelectDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.scss`,
     TS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.ts`,
   };
+
+  public ngOnInit(): void {
+    this.subscription.add(this.subscribeToDisabled());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  public toggleLoader(): void {
+    this.isLoading$.pipe(take(1)).subscribe((isLoading: boolean) => {
+      this.isLoading$.next(!isLoading);
+    });
+  }
+
+  private subscribeToDisabled(): Subscription {
+    return this.disabled$.subscribe((isDisabled: boolean) => {
+      this.controlsList.forEach((control: FormControl) => (isDisabled ? control.disable() : control.enable()));
+    });
+  }
 }
