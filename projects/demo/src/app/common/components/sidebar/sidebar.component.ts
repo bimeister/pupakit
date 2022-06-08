@@ -41,6 +41,7 @@ export class SidebarComponent {
     title: 'Components',
     linkItems: sortByProperty(
       [
+        { title: 'Accordion', link: '/kit/accordion' },
         { title: 'Icon', link: '/kit/icon' },
         { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
         { title: 'ButtonMulti', link: '/kit/button-multi' },

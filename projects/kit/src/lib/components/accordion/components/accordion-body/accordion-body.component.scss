@@ -1,0 +1,8 @@
+@use 'mixins' as *;
+
+:host {
+  display: -webkit-box;
+  padding: 0 3rem 3rem 3rem;
+  @include font-size-small();
+  @include font-type-caption();
+}

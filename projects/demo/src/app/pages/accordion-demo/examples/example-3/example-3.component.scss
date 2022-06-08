@@ -1,0 +1,25 @@
+@use 'mixins' as *;
+
+.example-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.cases-container {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: repeat(2, 1fr);
+  grid-column-gap: 2rem;
+  grid-row-gap: 2rem;
+  justify-items: center;
+  align-items: center;
+
+  @include lt-lg() {
+    grid-template-columns: 95rem;
+  }
+
+  @include xs() {
+    grid-template-columns: 100%;
+  }
+}

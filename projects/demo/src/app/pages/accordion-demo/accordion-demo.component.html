@@ -1,0 +1,96 @@
+<h1>Accordion</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-accordion-example-1 *pupaCodeContainerPreviewTemplate></demo-accordion-example-1>
+    </pupa-code-container>
+
+    <h3>Non destroyable accordion body</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-accordion-example-2 *pupaCodeContainerPreviewTemplate></demo-accordion-example-2>
+    </pupa-code-container>
+
+    <h3>Alone</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-accordion-example-3 *pupaCodeContainerPreviewTemplate></demo-accordion-example-3>
+    </pupa-code-container>
+
+    <h3>Extra cases</h3>
+    <pupa-code-container [content]="example4Content">
+      <demo-accordion-example-4 *pupaCodeContainerPreviewTemplate></demo-accordion-example-4>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-accordion-group [closeOthers]="closeOthers$ | async">
+          <pupa-accordion
+            [showArrow]="showArrow$ | async"
+            [destroyable]="destroyable$ | async"
+            [expanded]="expandedFormControl.value"
+            (expandedChange)="expandedFormControl.setValue($event)"
+          >
+            <pupa-accordion-header>
+              <pupa-accordion-title>Accordion Title</pupa-accordion-title>
+              <pupa-accordion-description>Accordion Description</pupa-accordion-description>
+            </pupa-accordion-header>
+            <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+          </pupa-accordion>
+
+          <pupa-accordion>
+            <pupa-accordion-header>
+              <pupa-accordion-title>Accordion Title</pupa-accordion-title>
+              <pupa-accordion-description>Accordion Description</pupa-accordion-description>
+            </pupa-accordion-header>
+            <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+          </pupa-accordion>
+
+          <pupa-accordion>
+            <pupa-accordion-header>
+              <pupa-accordion-title>Accordion Title</pupa-accordion-title>
+              <pupa-accordion-description>Accordion Description</pupa-accordion-description>
+            </pupa-accordion-header>
+            <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+          </pupa-accordion>
+        </pupa-accordion-group>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-section-label>PupaAccordionGroup Properties</demo-example-viewer-section-label>
+        <demo-example-viewer-property decoratorName="input" name="closeOthers" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Whether the other accordions are collapsed when new one is expanded.
+          </ng-container>
+          <demo-props-switcher [initialValue]="true" #closeOthers$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-section-label>PupaAccordion Properties</demo-example-viewer-section-label>
+        <demo-example-viewer-property decoratorName="input" name="showArrow" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Whether the accordion header arrow is shown.
+          </ng-container>
+          <demo-props-switcher [initialValue]="true" #showArrow$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="destroyable" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the accordion body is destroyable.</ng-container>
+          <demo-props-switcher [initialValue]="true" #destroyable$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="expanded" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Whether the accordion is expanded.
+            <div>Default: <pupa-code-inline>false</pupa-code-inline></div>
+          </ng-container>
+          <demo-props-switcher [formControl]="expandedFormControl"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="output" name="expandedChange" type="EventEmitter<boolean>">
+          <ng-container *demoExampleViewerPropertyDescription>Emits on change expanding state.</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
