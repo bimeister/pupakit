@@ -1,7 +1,7 @@
 @use './../font-size-m.mixin.scss' as *;
 @use './../font-type-regular.mixin.scss' as *;
 
-@mixin font-preset-body-m() {
-  @include font-type-regular();
+@mixin font-preset-body-m($condensed: false) {
+  @include font-type-regular($condensed);
   @include font-size-m($paragraph: true);
 }
