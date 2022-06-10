@@ -1,7 +1,7 @@
 @use './../font-size-xxs.mixin.scss' as *;
 @use './../font-type-regular.mixin.scss' as *;
 
-@mixin font-preset-caption-xxs() {
-  @include font-type-regular();
+@mixin font-preset-caption-xxs($condensed: false) {
+  @include font-type-regular($condensed);
   @include font-size-xxs();
 }

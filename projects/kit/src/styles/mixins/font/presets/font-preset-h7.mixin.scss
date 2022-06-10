@@ -1,7 +1,7 @@
 @use './../font-size-xxs.mixin.scss' as *;
 @use './../font-type-medium.mixin.scss' as *;
 
-@mixin font-preset-h7() {
-  @include font-type-medium();
+@mixin font-preset-h7($condensed: false) {
+  @include font-type-medium($condensed);
   @include font-size-xxs();
 }

@@ -1,7 +1,7 @@
 @use './../font-size-xxl.mixin.scss' as *;
 @use './../font-type-bold.mixin.scss' as *;
 
-@mixin font-preset-h1() {
-  @include font-type-bold();
+@mixin font-preset-h1($condensed: false) {
+  @include font-type-bold($condensed);
   @include font-size-xxl();
 }
