@@ -48,6 +48,16 @@ export class ScrollableDemoComponent {
       value: 'all',
     },
   ];
+  public readonly scrollVisibilityModeOptions: PropsOption[] = [
+    {
+      caption: 'always',
+      value: 'always',
+    },
+    {
+      caption: 'onscroll',
+      value: 'onscroll',
+    },
+  ];
   public readonly invisibleScrollbarsOptions: PropsOption[] = [
     {
       caption: 'Vertical',
@@ -75,5 +85,11 @@ export class ScrollableDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`,
   };
 }

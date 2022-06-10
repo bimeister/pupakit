@@ -124,6 +124,16 @@ $color_dark: 'base-dark-n275';
     }
   }
 
+  &_visible-onscroll {
+    &:not(.thumb-container_scrolling) {
+      .thumb {
+        transition: background-color 200ms ease-in;
+        background-color: transparent;
+        backdrop-filter: none;
+      }
+    }
+  }
+
   &:not(.thumb-container_grabbing):hover {
     .thumb {
       padding: 0.5px;
