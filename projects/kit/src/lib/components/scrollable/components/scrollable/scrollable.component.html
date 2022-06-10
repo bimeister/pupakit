@@ -4,6 +4,8 @@
       <div
         class="pupa-scrollbar__thumb-container thumb-container thumb-container_{{ size }}"
         [class.thumb-container_grabbing]="isVerticalThumbGrabbing$ | async"
+        [class.thumb-container_scrolling]="isContentScrolling$ | async"
+        [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
         #verticalScrollbarThumb
       >
         <div class="pupa-scrollbar__thumb thumb"></div>
@@ -13,6 +15,8 @@
       <div
         class="pupa-scrollbar__thumb-container thumb-container thumb-container_{{ size }}"
         [class.thumb-container_grabbing]="isHorizontalThumbGrabbing$ | async"
+        [class.thumb-container_scrolling]="isContentScrolling$ | async"
+        [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
         #horizontalScrollbarThumb
       >
         <div class="pupa-scrollbar__thumb thumb"></div>

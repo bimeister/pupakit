@@ -20,8 +20,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, Observable, of, Subscription } from 'rxjs';
 import {
+  debounceTime,
+  delay,
   distinctUntilChanged,
   filter,
   map,
@@ -44,10 +46,14 @@ import { ScrollbarType } from '../../../../../internal/declarations/types/scroll
 import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
 import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
+import { subscribeInsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-inside-angular.operator';
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 import { ScrollDirection } from '../../../../../internal/declarations/types/scroll-direction.type';
+import { ScrollVisibilityMode } from '../../../../../internal/declarations/types/scroll-visibility-mode.type';
 
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
+const SCROLL_EVENT_DEBOUNCE_TIME_MS: number = 100;
+const SCROLL_THUMB_VISIBILITY_DEBOUNCE_TIME_MS: number = 200;
 
 const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_visible';
 const VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS: string = 'pupa-scrollbar_vertical_with-horizontal';
@@ -75,6 +81,9 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     Nullable<ScrollDragMode>
   >(null);
   @Input() public innerPadding: string;
+  @Input() public scrollVisibilityMode: ScrollVisibilityMode = 'always';
+  private readonly scrollVisibilityMode$: BehaviorSubject<ScrollVisibilityMode> =
+    new BehaviorSubject<ScrollVisibilityMode>('always');
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -112,6 +121,11 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   public readonly isVerticalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  public readonly isScrollbarVisibleOnScroll$: Observable<boolean> = this.scrollVisibilityMode$.pipe(
+    map((mode: ScrollVisibilityMode) => mode === 'onscroll')
+  );
+  public readonly isContentScrolling$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private contentElement: HTMLElement;
   public get element(): HTMLElement {
     return this.contentElement;
@@ -133,6 +147,7 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processScrollDragModeChanges(changes?.scrollDragMode);
+    this.processScrollVisibilityModeChanges(changes?.scrollVisibilityMode);
   }
 
   public ngOnInit(): void {
@@ -234,20 +249,28 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
           this.verticalScrollbar.setContentScrollOffset(contentElement.scrollTop);
           this.horizontalScrollbar.setContentScrollOffset(contentElement.scrollLeft);
         }),
-        filter(() => !this.ignoreNextContentScrollEvent)
+        filter(() => !this.ignoreNextContentScrollEvent),
+        tap(() => {
+          contentElement.scrollTop > this.lastScrollTop
+            ? this.verticalScrollDirectionChanged.emit('down')
+            : this.verticalScrollDirectionChanged.emit('up');
+
+          this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
+
+          for (const scrollable of this.syncWith) {
+            scrollable.setScrollTop(contentElement.scrollTop);
+            scrollable.setScrollLeft(contentElement.scrollLeft);
+          }
+        }),
+        switchMap(() => this.scrollVisibilityMode$),
+        filter((visibilityMode: ScrollVisibilityMode) => visibilityMode === 'onscroll'),
+        subscribeInsideAngular(this.ngZone),
+        tap(() => this.setContentScrolling(true)),
+        debounceTime(SCROLL_EVENT_DEBOUNCE_TIME_MS),
+        delay(SCROLL_THUMB_VISIBILITY_DEBOUNCE_TIME_MS),
+        tap(() => this.setContentScrolling(false))
       )
-      .subscribe(() => {
-        contentElement.scrollTop > this.lastScrollTop
-          ? this.verticalScrollDirectionChanged.emit('down')
-          : this.verticalScrollDirectionChanged.emit('up');
-
-        this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
-
-        for (const scrollable of this.syncWith) {
-          scrollable.setScrollTop(contentElement.scrollTop);
-          scrollable.setScrollLeft(contentElement.scrollLeft);
-        }
-      });
+      .subscribe();
   }
 
   private processVerticalScrollbarPan(): Subscription {
@@ -566,6 +589,13 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     this.renderer.removeClass(horizontalScrollbar, HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS);
   }
 
+  private setContentScrolling(isContentScrolling: boolean): void {
+    this.isContentScrolling$.next(isContentScrolling);
+    for (const scrollable of this.syncWith) {
+      scrollable.isContentScrolling$.next(isContentScrolling);
+    }
+  }
+
   private processScrollStartEndChanges(): Subscription {
     const contentElement: HTMLElement = this.contentElement;
 
@@ -624,5 +654,15 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     }
 
     this.scrollDragMode$.next(updatedValue);
+  }
+
+  private processScrollVisibilityModeChanges(change: ComponentChange<this, ScrollVisibilityMode>): void {
+    const updatedValue: ScrollVisibilityMode | undefined = change?.currentValue;
+
+    if (updatedValue === undefined) {
+      return;
+    }
+
+    this.scrollVisibilityMode$.next(updatedValue);
   }
 }
