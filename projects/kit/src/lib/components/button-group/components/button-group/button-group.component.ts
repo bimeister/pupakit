@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  NgZone,
   OnInit,
   Optional,
   Output,
@@ -35,11 +36,12 @@ export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService
     private readonly elementRef: ElementRef<HTMLElement>,
     stateService: ButtonGroupStateService<T>,
     changeDetectorRef: ChangeDetectorRef,
+    ngZone: NgZone,
     @Optional()
     @Inject(BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN)
     fromContainerStateService?: ButtonGroupStateService<T>
   ) {
-    super(stateService, changeDetectorRef, fromContainerStateService);
+    super(stateService, changeDetectorRef, ngZone, fromContainerStateService);
   }
 
   public ngOnInit(): void {

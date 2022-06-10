@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  NgZone,
   OnInit,
   Optional,
   Output,
@@ -36,9 +37,10 @@ export class StepperComponent<T> extends TabsBase<T, TabsStateService<T>> implem
     private readonly elementRef: ElementRef<HTMLElement>,
     stateService: StepperStateService<T>,
     changeDetectorRef: ChangeDetectorRef,
+    ngZone: NgZone,
     @Optional() @Inject(STEPPER_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: StepperStateService<T>
   ) {
-    super(stateService, changeDetectorRef, fromContainerStateService);
+    super(stateService, changeDetectorRef, ngZone, fromContainerStateService);
   }
 
   public ngOnInit(): void {

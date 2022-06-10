@@ -1,6 +1,13 @@
-import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import {
+  filterNotNil,
+  isEmpty,
+  isNil,
+  Nullable,
+  resizeObservable,
+  shareReplayWithRefCount,
+} from '@bimeister/utilities';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, filter, map, observeOn, subscribeOn, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, observeOn, subscribeOn, switchMap, take } from 'rxjs/operators';
 import { ScrollableComponent } from '../../../../lib/components/scrollable/components/scrollable/scrollable.component';
 
 export abstract class TabsServiceBase<T> {
@@ -24,20 +31,27 @@ export abstract class TabsServiceBase<T> {
     shareReplayWithRefCount()
   );
 
+  private readonly tabsContainerResize$: Observable<ResizeObserverEntry[]> = this.tabsHtmlElement$.pipe(
+    filterNotNil(),
+    switchMap((tabsHtmlElement: HTMLElement) => resizeObservable(tabsHtmlElement))
+  );
+
   public readonly railHighlighterOffsetLeftPx$: Observable<number> = combineLatest([
     this.activeHtmlElement$.pipe(filterNotNil()),
     this.tabsHtmlElement$.pipe(filterNotNil()),
+    this.tabsContainerResize$,
   ]).pipe(
     observeOn(asyncScheduler),
-    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement]) => {
+    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement, ResizeObserverEntry[]]) => {
       const activeClientRect: ClientRect = activeHtmlElement.getBoundingClientRect();
       const tabsClientRect: ClientRect = tabsHtmlElement.getBoundingClientRect();
       return activeClientRect.left - tabsClientRect.left;
     })
   );
-  public readonly railHighlighterWidthPx$: Observable<number> = this.activeHtmlElement$.pipe(
-    map((activeHtmlElement: HTMLElement) => activeHtmlElement.clientWidth)
-  );
+  public readonly railHighlighterWidthPx$: Observable<number> = combineLatest([
+    this.activeHtmlElement$,
+    this.tabsContainerResize$,
+  ]).pipe(map(([activeHtmlElement]: [HTMLElement, ResizeObserverEntry[]]) => activeHtmlElement.clientWidth));
 
   private readonly tabNames: T[] = [];
 
