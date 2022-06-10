@@ -1,11 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
+import { isNil } from '@bimeister/utilities';
 
 const BASE_REQUEST_PATH: string = 'input-demo/examples';
 
+export function isDateCorrect(date: Date): boolean {
+  return !Number.isNaN(Date.parse(String(date)));
+}
+
+export function dateValidator(control: AbstractControl): { dateCorrect: false } | null {
+  return isNil(control.value) || isDateCorrect(control.value) ? null : { dateCorrect: false };
+}
 @Component({
   selector: 'demo-input',
   styleUrls: ['input-demo.component.scss'],
@@ -14,11 +22,6 @@ const BASE_REQUEST_PATH: string = 'input-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoComponent implements OnInit, OnDestroy {
-  public readonly inputIconFormControl: FormControl = new FormControl('ios-help-circle');
-  public readonly placeholderFormControl: FormControl = new FormControl('Custom placeholder');
-  public readonly tooltipTemplateFormControl: FormControl = new FormControl('<b>Invalid tooltip</b>');
-  public readonly tooltipTextFormControl: FormControl = new FormControl('');
-
   public readonly isDisabledFormControl: FormControl = new FormControl(false);
 
   public readonly sizeOptions: PropsOption[] = [
@@ -36,6 +39,7 @@ export class InputDemoComponent implements OnInit, OnDestroy {
       value: 'small',
     },
   ];
+
   public readonly styleOptions: PropsOption[] = [
     {
       caption: 'Ghost',
@@ -52,13 +56,44 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     },
   ];
 
-  public readonly validators: ValidatorFn[] = [Validators.required];
+  public readonly iconOptions: PropsOption[] = [
+    {
+      caption: 'app-admin',
+      value: 'app-admin',
+      isDefault: true,
+    },
+    {
+      caption: 'app-aim',
+      value: 'app-aim',
+    },
+    {
+      caption: 'app-axes',
+      value: 'app-axes',
+    },
+    {
+      caption: 'app-camera',
+      value: 'app-camera',
+    },
+    {
+      caption: 'app-file-add',
+      value: 'app-file-add',
+    },
+  ];
 
+  public readonly validators: ValidatorFn[] = [Validators.required];
+  public readonly dateValidators: ValidatorFn[] = [Validators.required, dateValidator];
+
+  public readonly inputIconFormControl: FormControl = new FormControl();
+  public readonly placeholderFormControl: FormControl = new FormControl('Custom placeholder');
+  public readonly tooltipTemplateFormControl: FormControl = new FormControl('<b>Invalid tooltip</b>');
+  public readonly tooltipTextFormControl: FormControl = new FormControl('');
   public readonly textControl: FormControl = new FormControl('');
   public readonly timeFormControl: FormControl = new FormControl();
+  public readonly dateFormControl: FormControl = new FormControl();
+  public readonly endDateFormControl: FormControl = new FormControl(new Date());
   public readonly isDisabledControl: FormControl = new FormControl();
 
-  public readonly controlsList: FormControl[] = [this.textControl, this.timeFormControl];
+  public readonly controlsList: FormControl[] = [this.textControl];
   private readonly isDisabled$: Observable<boolean> = this.isDisabledControl.statusChanges.pipe(
     map(() => this.isDisabledControl.disabled)
   );

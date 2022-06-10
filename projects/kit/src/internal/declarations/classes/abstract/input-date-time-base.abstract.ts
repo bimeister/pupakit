@@ -1,7 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { distinctUntilSerializedChanged, filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
+import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
@@ -45,9 +45,6 @@ const SECONDS_END_POSITION: number = 8;
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
-  @Input() public withReset: boolean;
-  public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   @Input() public readonly isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -57,9 +54,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
-  @Input() public readonly isPatched: boolean = false;
-  public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
@@ -67,19 +61,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.withReset$,
   ]).pipe(map(([isIconHovered, withReset]: [boolean, boolean]) => isIconHovered && withReset));
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
-
-  public readonly isInvalid$: Observable<boolean> = combineLatest([
-    this.isDisabled$,
-    this.isPatched$,
-    this.isValid$,
-    this.isTouched$,
-  ]).pipe(
-    distinctUntilSerializedChanged(),
-    map(
-      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
-        (isTouched || isPatched) && !isValid && !isDisabled
-    )
-  );
 
   public readonly hours$: Observable<number> = this.value$.pipe(
     map((value: string) =>

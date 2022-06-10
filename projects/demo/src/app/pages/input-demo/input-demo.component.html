@@ -2,6 +2,39 @@
 
 <demo-page>
   <div *demoPageTab="'overview'" class="overview">
+    <p>Represents a family of configurable input elements of the following types:</p>
+    <ul>
+      <li><pupa-code-inline>pupa-input-text</pupa-code-inline>- plain text input.</li>
+      <li><pupa-code-inline>pupa-input-number</pupa-code-inline> - number input.</li>
+      <li><pupa-code-inline>pupa-input-password</pupa-code-inline> - password input.</li>
+      <li>
+        <pupa-code-inline>pupa-input-date</pupa-code-inline>
+        - date input. Provides an ability to enter date manually as well as via droppable calendar.
+      </li>
+      <li>
+        <pupa-code-inline>pupa-input-date-range</pupa-code-inline>
+        - date range input. Allows to enter dates manually or via droppable calendar.
+      </li>
+      <li>
+        <pupa-code-inline>pupa-input-date-range-double</pupa-code-inline>
+        - date range input. Allows to enter dates manually or by picking in two different droppable calendars.
+      </li>
+      <li>
+        <pupa-code-inline>pupa-input-date-time</pupa-code-inline>
+        - Detailed date input. Allows to enter date and time in
+        <pupa-code-inline>hh:mm</pupa-code-inline> format.
+      </li>
+      <li>
+        <pupa-code-inline>pupa-input-date-time-seconds</pupa-code-inline>
+        - Detailed date input. Allows to enter date and time in
+        <pupa-code-inline>hh:mm:ss</pupa-code-inline> format.
+      </li>
+      <li>
+        <pupa-code-inline>pupa-input-time</pupa-code-inline>
+        - time input in <pupa-code-inline>hh:mm</pupa-code-inline> format.
+      </li>
+    </ul>
+
     <h3>All inputs & Validation</h3>
     <pupa-code-container [content]="allInputsExampleContent">
       <demo-input-demo-example-all-inputs *pupaCodeContainerPreviewTemplate></demo-input-demo-example-all-inputs>
@@ -24,9 +57,9 @@
     </pupa-code-container>
 
     <h3>With reset</h3>
-    <pupa-info-block variant="note"
-      >Available only for pupa-input-text, pupa-input-number and pupa-input-time</pupa-info-block
-    >
+    <pupa-info-block variant="note">
+      Available only for pupa-input-text, pupa-input-number and pupa-input-time
+    </pupa-info-block>
     <pupa-code-container [content]="withResetExampleContent">
       <demo-input-demo-example-with-reset *pupaCodeContainerPreviewTemplate></demo-input-demo-example-with-reset>
     </pupa-code-container>
@@ -49,14 +82,20 @@
               invalidTooltipHideOnHover: invalidTooltipHideOnHover$ | async,
               invalidTooltipDisabled: invalidTooltipDisabled$ | async,
               size: size$ | async,
-              styles: styles$ | async
+              styles: styles$ | async,
+              icon: icon$ | async,
+              isFixedSize: isFixedSize$ | async,
+              isBackDating: isBackDating$ | async
             };
             let withReset = withReset;
             let isPatched = isPatched;
             let invalidTooltipHideOnHover = invalidTooltipHideOnHover;
             let invalidTooltipDisabled = invalidTooltipDisabled;
             let size = size;
-            let styles = styles
+            let styles = styles;
+            let icon = icon;
+            let isFixedSize = isFixedSize;
+            let isBackDating = isBackDating
           "
         >
           <div class="controls-list__block">
@@ -68,7 +107,7 @@
               [withReset]="withReset"
               [isPatched]="isPatched"
               [placeholder]="placeholderFormControl.value"
-              [invalidTooltipContentTemplate]="errorTemplate"
+              [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
@@ -86,11 +125,28 @@
               [withReset]="withReset"
               [isPatched]="isPatched"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
-              [invalidTooltipContentTemplate]="errorTemplate"
+              [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
               [customStyles]="styles"
             ></pupa-input-time>
+          </div>
+
+          <div class="controls-list__block">
+            <pupa-label class="control-label" [disabled]="dateFormControl.disabled">pupa-input-date</pupa-label>
+            <pupa-input-date
+              class="form__control form__control_date"
+              [formControl]="dateFormControl"
+              [withReset]="withReset"
+              [isPatched]="isPatched"
+              [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
+              [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
+              [invalidTooltipDisabled]="invalidTooltipDisabled"
+              [invalidTooltip]="tooltipTextFormControl.value"
+              [availableEndDate]="endDateFormControl.value"
+              [isFixedSize]="isFixedSize"
+              [isBackDating]="isBackDating"
+            ></pupa-input-date>
           </div>
         </div>
       </demo-example-viewer-content>
@@ -103,6 +159,18 @@
             Use
             <pupa-code-inline>formControl.disable()</pupa-code-inline>
           </ng-container>
+        </demo-example-viewer-config-item>
+
+        <demo-example-viewer-config-item name="Set date form control validators">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
+          </ng-container>
+          <demo-props-form-control-validators
+            [controlsList]="[dateFormControl, timeFormControl]"
+            [validators]="dateValidators"
+            [initialValue]="true"
+          ></demo-props-form-control-validators>
         </demo-example-viewer-config-item>
 
         <demo-example-viewer-config-item name="Set form control validators">
@@ -118,16 +186,13 @@
         </demo-example-viewer-config-item>
       </demo-example-viewer-section>
 
-      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section-label>Common input properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="InputSize">
-          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>
+            Adjusts the size of the element (Is not applicable for date inputs).
+          </ng-container>
           <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="icon" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
-          <pupa-input-text [formControl]="inputIconFormControl" [withReset]="true"></pupa-input-text>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
@@ -145,18 +210,44 @@
           <demo-props-switcher #isPatched$></demo-props-switcher>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-section-label size="medium"
-          ><pupa-code-inline>invalidTooltip*</pupa-code-inline> properties are written by analogy with a
-          <pupa-code-inline>TooltipDirective</pupa-code-inline></demo-example-viewer-section-label
-        >
+        <demo-example-viewer-section-label size="medium">
+          <pupa-code-inline>invalidTooltip*</pupa-code-inline>
+          properties are written by analogy with a
+          <pupa-code-inline>TooltipDirective</pupa-code-inline>
+        </demo-example-viewer-section-label>
+        <pupa-info-block>
+          <ul>
+            <li>
+              The tooltip is only visible when input is in INVALID state. To trigger invalid state use
+              <pupa-code-inline>setValidators</pupa-code-inline>
+              or <pupa-code-inline>isPatched</pupa-code-inline> switchers.
+            </li>
+            <li>
+              Please note that only one tooltip input value can be applied at the time -
+              <pupa-code-inline>invalidTooltip</pupa-code-inline>
+              or <pupa-code-inline>invalidTooltipContentTemplate</pupa-code-inline>. If you submit simple content and a
+              template to the directive at the same time, the display will take precedence over the template. Please use
+              switcher to disable <pupa-code-inline>invalidTooltipContentTemplate</pupa-code-inline> before entering
+              simple tooltip text.
+            </li>
+          </ul>
+        </pupa-info-block>
+
         <demo-example-viewer-property decoratorName="input" name="invalidTooltip" type="string">
           <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip simple content.</ng-container>
-          <pupa-input-text [formControl]="tooltipTextFormControl" [withReset]="true"></pupa-input-text>
+          <pupa-input-text
+            placeholder="Type tooltip text here"
+            [formControl]="tooltipTextFormControl"
+            [withReset]="true"
+          >
+          </pupa-input-text>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="invalidTooltipContentTemplate" type="TemplateRef">
           <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip content template.</ng-container>
           <pupa-textarea [formControl]="tooltipTemplateFormControl"></pupa-textarea>
+          <br />
+          <demo-props-switcher #isInvalidTooltipContentTemplateEnabled$ [initialValue]="true"></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="tooltipHideOnHover" type="boolean">
@@ -170,10 +261,34 @@
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="customStyles" type="InputStyleCustomization[]">
-          <ng-container *demoExampleViewerPropertyDescription>Different input styles.</ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>
+            Different input styles (Is not applicable for date inputs).
+          </ng-container>
           <demo-props-select #styles$ [options]="styleOptions" [isMultiSelectionEnabled]="true"></demo-props-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>Text inputs specific properties</demo-example-viewer-section-label>
+      <demo-example-viewer-property decoratorName="input" name="icon" type="string">
+        <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+        <demo-props-select #icon$ [options]="iconOptions"></demo-props-select>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-section-label>Date inputs specific properties</demo-example-viewer-section-label>
+      <demo-example-viewer-property decoratorName="input" name="isFixedSize" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Whether the input has a fixed size.</ng-container>
+        <demo-props-switcher #isFixedSize$ [initialValue]="true"></demo-props-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="isBackDating" type="boolean">
+        <ng-container *demoExampleViewerPropertyDescription>Whether the backdating is available.</ng-container>
+        <demo-props-switcher #isBackDating$ [initialValue]="true"></demo-props-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="availableEndDate" type="Date | number">
+        <ng-container *demoExampleViewerPropertyDescription>Max end date available for picking.</ng-container>
+        <pupa-input-date [formControl]="endDateFormControl" [withReset]="true"></pupa-input-date>
+      </demo-example-viewer-property>
     </demo-example-viewer>
   </div>
 </demo-page>

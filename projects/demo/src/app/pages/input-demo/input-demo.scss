@@ -27,7 +27,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 4rem;
 
-  @include lt-md() {
+  @include lt-lg() {
     grid-template-columns: repeat(2, 1fr);
   }
 
