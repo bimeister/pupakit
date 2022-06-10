@@ -59,7 +59,7 @@ $width_date-range: 60rem;
     bottom: 0;
     @include font-type-regular();
     z-index: 3;
-    font-size: 3rem;
+    @include font-size-xs();
     line-height: 4rem;
     padding: 2rem 4rem;
     color: color(neutral-1000);
