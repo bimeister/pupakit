@@ -1,7 +1,27 @@
 <h1>Info block</h1>
 
-<h2>Usage</h2>
-
-<pupa-code-container [content]="example1Content">
-  <demo-info-block-example-1 *pupaCodeContainerPreviewTemplate></demo-info-block-example-1>
-</pupa-code-container>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-info-block-example-1 *pupaCodeContainerPreviewTemplate></demo-info-block-example-1>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-info-block [variant]="variant$ | async">{{ variant$ | async }} block</pupa-info-block>
+      </demo-example-viewer-content>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="variant" type="InfoBlockType">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <p>Sets the variant of the info block.</p>
+            <p>Default: <pupa-code-inline>'info'</pupa-code-inline></p>
+          </ng-container>
+          <demo-props-select #variant$ direction="row" [options]="variantOptions"></demo-props-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
