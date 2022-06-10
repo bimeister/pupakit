@@ -5,6 +5,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  NgZone,
   OnInit,
   Optional,
   Output,
@@ -37,9 +38,10 @@ export class TabsComponent<T> extends TabsBase<T, TabsStateService<T>> implement
     private readonly renderer: Renderer2,
     stateService: TabsStateService<T>,
     changeDetectorRef: ChangeDetectorRef,
+    ngZone: NgZone,
     @Optional() @Inject(TABS_CONTAINER_STATE_SERVICE_TOKEN) fromContainerStateService?: TabsStateService<T>
   ) {
-    super(stateService, changeDetectorRef, fromContainerStateService);
+    super(stateService, changeDetectorRef, ngZone, fromContainerStateService);
   }
 
   public ngOnInit(): void {

@@ -1,7 +1,7 @@
-import { AfterViewChecked, ChangeDetectorRef, Directive, EventEmitter, OnDestroy } from '@angular/core';
+import { AfterViewChecked, ChangeDetectorRef, Directive, EventEmitter, NgZone, OnDestroy } from '@angular/core';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { delay, distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
@@ -12,14 +12,8 @@ export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements After
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
   private readonly activeTabName$: Observable<Nullable<T>> = this.stateService.activeTabName$;
-
-  public readonly railHighlighterOffsetLeftTransform$: Observable<string> =
-    this.stateService.railHighlighterOffsetLeftPx$.pipe(
-      map((railHighlighterOffsetLeftPx: number) => `translateX(${railHighlighterOffsetLeftPx}px)`)
-    );
-  public readonly railHighlighterWidthPx$: Observable<number> = this.stateService.railHighlighterWidthPx$.pipe(
-    delay(0)
-  );
+  public readonly railHighlighterOffsetLeftTransform$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  public readonly railHighlighterWidthPx$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly isLeftGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isRightGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -38,9 +32,12 @@ export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements After
   constructor(
     private readonly tabsService: S,
     protected readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly ngZone: NgZone,
     private readonly containerService?: S
   ) {
     this.subscription.add(this.processActiveTabNameChanges());
+    this.subscription.add(this.processRailHighlighterOffsetLeftTransform());
+    this.subscription.add(this.processRailHighlighterWidthPx());
   }
 
   protected detectChanges(): void {
@@ -78,6 +75,20 @@ export abstract class TabsBase<T, S extends TabsServiceBase<T>> implements After
   private processActiveTabNameChanges(): Subscription {
     return this.activeTabName$.pipe(filterNotNil()).subscribe((activeTabName: T) => {
       this.activeTabNameChange.emit(activeTabName);
+    });
+  }
+
+  private processRailHighlighterOffsetLeftTransform(): Subscription {
+    return this.stateService.railHighlighterOffsetLeftPx$
+      .pipe(map((railHighlighterOffsetLeftPx: number) => `translateX(${railHighlighterOffsetLeftPx}px)`))
+      .subscribe((transformRailHighlighterOffsetLeftPx: string) => {
+        this.ngZone.run(() => this.railHighlighterOffsetLeftTransform$.next(transformRailHighlighterOffsetLeftPx));
+      });
+  }
+
+  private processRailHighlighterWidthPx(): Subscription {
+    return this.stateService.railHighlighterWidthPx$.subscribe((processRailHighlighterWidthPx: number) => {
+      this.ngZone.run(() => this.railHighlighterWidthPx$.next(processRailHighlighterWidthPx));
     });
   }
 }
