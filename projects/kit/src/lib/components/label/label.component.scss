@@ -22,13 +22,13 @@
     @include ellipsis-text-overflow;
   }
   &_large .label__content {
-    @include font-size-large();
+    @include font-size-xl();
   }
   &_medium .label__content {
-    @include font-size-medium();
+    @include font-size-l();
   }
   &_small .label__content {
-    @include font-size-small();
+    @include font-size-m();
   }
   &_disabled {
     .label__icon,
