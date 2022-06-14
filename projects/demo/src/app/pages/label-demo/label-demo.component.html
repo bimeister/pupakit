@@ -1,33 +1,46 @@
 <h1>Label</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content>
-    <pupa-label class="label" [disabled]="disabled$ | async" [icon]="buttonIconFormControl.value">
-      {{ textFormControl.value }}
-    </pupa-label>
-  </demo-example-viewer-content>
+<demo-page>
+  <div *demoPageTab="'overview'" class="overview">
+    <h4>Basic usage</h4>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-label-demo-basic-example *pupaCodeContainerPreviewTemplate></demo-label-demo-basic-example>
+    </pupa-code-container>
 
-  <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-config-item name="Set form control value">
-      <ng-container *demoExampleViewerConfigItemDescription>
-        Use
-        <pupa-code-inline>formControl.setValue()</pupa-code-inline>
-      </ng-container>
-      <pupa-input-text [formControl]="textFormControl"></pupa-input-text>
-    </demo-example-viewer-config-item>
-  </demo-example-viewer-section>
+    <h4>Label size</h4>
+    <pupa-code-container [content]="sizeExampleContent">
+      <demo-label-demo-example-size *pupaCodeContainerPreviewTemplate></demo-label-demo-example-size>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-label
+          class="label"
+          [disabled]="disabled$ | async"
+          [icon]="buttonIconFormControl.value"
+          [size]="size$ | async"
+        >
+          {{ textFormControl.value }}
+        </pupa-label>
+      </demo-example-viewer-content>
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
 
-  <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
-  <demo-example-viewer-section>
-    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
-      <demo-props-switcher #disabled$></demo-props-switcher>
-    </demo-example-viewer-property>
+        <demo-example-viewer-property name="icon" type="string" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+          <pupa-input-text [formControl]="buttonIconFormControl" [withReset]="true"></pupa-input-text>
+        </demo-example-viewer-property>
 
-    <demo-example-viewer-property name="icon" type="string" decoratorName="input">
-      <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
-      <pupa-input-text [formControl]="buttonIconFormControl" [withReset]="true"></pupa-input-text>
-    </demo-example-viewer-property>
-  </demo-example-viewer-section>
-</demo-example-viewer>
+        <demo-example-viewer-property decoratorName="input" name="size" type="LabelSize">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+          <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

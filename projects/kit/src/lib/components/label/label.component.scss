@@ -22,6 +22,15 @@
     @include font-size-mark();
     @include ellipsis-text-overflow;
   }
+  &_large .label__content {
+    @include font-size-large();
+  }
+  &_medium .label__content {
+    @include font-size-medium();
+  }
+  &_small .label__content {
+    @include font-size-small();
+  }
   &_disabled {
     .label__icon,
     .label__content {
