@@ -18,17 +18,17 @@
   &__content {
     flex-shrink: 1;
     color: color(base-white-n100);
-    @include font-preset-caption-s();
+    @include font-preset-caption-xs();
     @include ellipsis-text-overflow;
   }
   &_large .label__content {
-    @include font-size-xl();
+    @include font-size-m();
   }
   &_medium .label__content {
-    @include font-size-l();
+    @include font-size-xs();
   }
   &_small .label__content {
-    @include font-size-m();
+    @include font-size-xxs();
   }
   &_disabled {
     .label__icon,
