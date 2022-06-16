@@ -12,7 +12,7 @@ $height_item-container: 75rem;
   width: 100%;
   height: $height_item-container;
   max-height: $height_item-container;
-  box-sizing: border-box;
+  box-sizing: content-box;
   padding: 1rem 0 3rem 1rem;
 
   .tree {

@@ -17,8 +17,9 @@ type TreePropertiesTransfer = Pick<
 >;
 
 const MAX_SELECT_TREE_HEIGHT_PX: number = 300;
-const TREE_ITEM_SIZE_PX: number = 30;
-const EMPTY_SPACE_PX: number = 12;
+const TREE_ITEM_SIZE_PX: number = 32;
+const EMPTY_SPACE_PX: number = 20;
+const MAX_VISIBLE_ITEMS_COUNT: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
 
 @Directive()
 export abstract class SelectTreeBase implements TreePropertiesTransfer, OnChanges {
@@ -100,10 +101,9 @@ export abstract class SelectTreeBase implements TreePropertiesTransfer, OnChange
       .pipe(
         observeOn(asyncScheduler),
         subscribeOn(asyncScheduler),
-        map(() => {
-          const maxAvailableCount: number = Math.ceil(MAX_SELECT_TREE_HEIGHT_PX / TREE_ITEM_SIZE_PX);
-          return count < maxAvailableCount ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX;
-        }),
+        map(() =>
+          count < MAX_VISIBLE_ITEMS_COUNT ? count * TREE_ITEM_SIZE_PX + EMPTY_SPACE_PX : MAX_SELECT_TREE_HEIGHT_PX
+        ),
         take(1),
         tap((adaptiveTreeHeight: number) => this.adaptiveTreeHeight$.next(adaptiveTreeHeight)),
         delay(100)
