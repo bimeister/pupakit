@@ -86,6 +86,11 @@ export class AccordionComponent implements OnChanges {
 
   private processExpandedChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
     this.expanded$.next(updatedValue);
   }
 }
