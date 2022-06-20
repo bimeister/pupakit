@@ -20,7 +20,7 @@ $input_light_styles: (
     ),
   ),
   invalid: (
-    border-color: color(red-n400),
+    border-color: color(danger-400),
   ),
   focus: (
     background-color: color(base-white-n500),
@@ -53,7 +53,7 @@ $input_dark_styles: (
     ),
   ),
   invalid: (
-    border-color: color(red-n400),
+    border-color: color(danger-400),
   ),
   focus: (
     background-color: color(base-dark-n500),

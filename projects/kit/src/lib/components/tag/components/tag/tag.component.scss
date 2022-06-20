@@ -57,25 +57,25 @@
 }
 
 .tag_red:not(.tag_disabled) {
-  background-color: color(red-n100);
-  color: color(red-n550);
+  background-color: color(danger-150);
+  color: color(danger-600);
 
   &.tag_clickable {
-    box-shadow: shadow-helper(red-n200);
+    box-shadow: shadow-helper(danger-200);
     @include hover() {
-      background-color: color(red-n200);
+      background-color: color(danger-200);
     }
   }
 
   &.tag_bold {
     color: color(neutral-1);
-    background-color: color(red-n500);
-    box-shadow: shadow-helper(red-n500);
+    background-color: color(danger-500);
+    box-shadow: shadow-helper(danger-500);
 
     &.tag_clickable {
-      box-shadow: shadow-helper(red-n400);
+      box-shadow: shadow-helper(danger-400);
       @include hover() {
-        background-color: color(red-n400);
+        background-color: color(danger-400);
       }
     }
   }

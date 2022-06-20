@@ -11,6 +11,6 @@
   }
 
   @include height-between($min-height: 800, $max-height: 900) {
-    background-color: color(red-n550);
+    background-color: color(danger-600);
   }
 }

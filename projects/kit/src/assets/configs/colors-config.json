@@ -460,35 +460,6 @@
     ]
   },
   {
-    "name": "Red",
-    "colors": [
-      {
-        "name": "Red/N550",
-        "hex": "E14C1D"
-      },
-      {
-        "name": "Red/N500",
-        "hex": "F05625"
-      },
-      {
-        "name": "Red/N400",
-        "hex": "ED6439"
-      },
-      {
-        "name": "Red/N300",
-        "hex": "F89678"
-      },
-      {
-        "name": "Red/N200",
-        "hex": "FAB19A"
-      },
-      {
-        "name": "Red/N100",
-        "hex": "FDE1D9"
-      }
-    ]
-  },
-  {
     "name": "Yellow",
     "colors": [
       {

@@ -180,10 +180,10 @@
   }
 
   &.textarea_invalid {
-    border: 1px solid color(red-n400);
+    border: 1px solid color(danger-400);
 
     @include dark-theme-class-parent {
-      border: 1px solid color(red-n400);
+      border: 1px solid color(danger-400);
     }
   }
 }
@@ -228,9 +228,9 @@
   }
 
   &_invalid {
-    color: color(red-n500);
+    color: color(danger-500);
     @include dark-theme-class-parent {
-      color: color(red-n500);
+      color: color(danger-500);
     }
   }
 }

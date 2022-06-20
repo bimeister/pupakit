@@ -8,7 +8,7 @@
 
   @include landscape() {
     border-radius: unset;
-    background-color: color(red-n500);
+    background-color: color(danger-500);
   }
 
   @include portrait() {
