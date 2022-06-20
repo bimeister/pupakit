@@ -21,7 +21,7 @@
   }
 
   @include lg() {
-    background-color: color(green-n500);
+    background-color: color(success-500);
   }
 
   @include xlg() {
@@ -33,6 +33,6 @@
   }
 
   @include xxl() {
-    border-color: color(green-n500);
+    border-color: color(success-500);
   }
 }

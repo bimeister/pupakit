@@ -107,25 +107,25 @@
 }
 
 .tag_green:not(.tag_disabled) {
-  background-color: color(green-n100);
-  color: color(green-n550);
+  background-color: color(success-150);
+  color: color(success-600);
 
   &.tag_clickable {
-    box-shadow: shadow-helper(green-n200);
+    box-shadow: shadow-helper(success-200);
     @include hover() {
-      background-color: color(green-n200);
+      background-color: color(success-200);
     }
   }
 
   &.tag_bold {
     color: color(neutral-1);
-    background-color: color(green-n500);
-    box-shadow: shadow-helper(green-n500);
+    background-color: color(success-500);
+    box-shadow: shadow-helper(success-500);
 
     &.tag_clickable {
-      box-shadow: shadow-helper(green-n400);
+      box-shadow: shadow-helper(success-400);
       @include hover() {
-        background-color: color(green-n400);
+        background-color: color(success-400);
       }
     }
   }
