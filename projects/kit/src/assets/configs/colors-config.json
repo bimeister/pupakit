@@ -423,43 +423,6 @@
     ]
   },
   {
-    "name": "Base/white surface",
-    "colors": [
-      {
-        "name": "Base/White/N550",
-        "hex": "FAFAFB"
-      },
-      {
-        "name": "Base/White/N500",
-        "hex": "F5F6F7"
-      },
-      {
-        "name": "Base/White/N400",
-        "hex": "EBEDEE"
-      },
-      {
-        "name": "Base/White/N300",
-        "hex": "DEE2E3"
-      },
-      {
-        "name": "Base/White/N275",
-        "hex": "D4D9DB"
-      },
-      {
-        "name": "Base/White/N250",
-        "hex": "8F9CA1"
-      },
-      {
-        "name": "Base/White/N200",
-        "hex": "687A82"
-      },
-      {
-        "name": "Base/White/N100",
-        "hex": "3D5159"
-      }
-    ]
-  },
-  {
     "name": "Link",
     "colors": [
       {
