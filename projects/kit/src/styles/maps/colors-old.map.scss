@@ -3,9 +3,9 @@
 
 /** @deprecated: remove with legacy components */
 $colorsOldMap: (
-  'main': map.get($colorsMap, base-dark-n500),
+  'main': map.get($colorsMap, neutral-500),
   'main-dark': map.get($colorsMap, neutral-1000),
-  'accent': map.get($colorsMap, base-dark-n500),
+  'accent': map.get($colorsMap, neutral-500),
   'active': map.get($colorsMap, primary-500),
   'success': map.get($colorsMap, success-500),
   'alert': map.get($colorsMap, warning-500),
@@ -23,13 +23,13 @@ $colorsOldMap: (
   'error': map.get($colorsMap, danger-500),
   'error-hovered': map.get($colorsMap, danger-400),
   'error-active': map.get($colorsMap, danger-600),
-  'error-disabled': map.get($colorsMap, base-dark-n250),
+  'error-disabled': map.get($colorsMap, neutral-60),
   'light': map.get($colorsMap, primary-50),
   'light-hovered': map.get($colorsMap, primary-150),
   'light-active': map.get($colorsMap, primary-200),
   'light-disabled': map.get($colorsMap, neutral-5),
   'primary': map.get($colorsMap, primary-500),
-  'primary-hovered': map.get($colorsMap, base-dark-n275),
-  'primary-active': map.get($colorsMap, base-dark-n300),
-  'primary-disabled': map.get($colorsMap, base-dark-n250),
+  'primary-hovered': map.get($colorsMap, neutral-600),
+  'primary-active': map.get($colorsMap, neutral-700),
+  'primary-disabled': map.get($colorsMap, neutral-60),
 );

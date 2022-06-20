@@ -13,6 +13,6 @@
   @include font-type-regular;
   @include font-size-xs(true);
   @include host-selector-dark-theme {
-    border-color: color(base-dark-n400);
+    border-color: color(neutral-600);
   }
 }

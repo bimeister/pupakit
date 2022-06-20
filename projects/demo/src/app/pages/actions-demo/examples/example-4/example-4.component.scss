@@ -13,11 +13,11 @@
   padding: 2rem;
   margin-right: 2rem;
   box-sizing: border-box;
-  color: color(base-dark-n100, 1);
+  color: color(neutral-9, 1);
   cursor: pointer;
 
   &:hover {
-    background-color: color(base-dark-n400, 1);
+    background-color: color(neutral-600, 1);
     color: color(neutral-1, 1);
   }
 }
@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: color(base-dark-n100, 1);
+  color: color(neutral-9, 1);
 
   &:hover {
     color: color(neutral-1, 1);

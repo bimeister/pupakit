@@ -47,11 +47,11 @@ $adaptive-property: 'max-width';
 // dark styles
 .trigger {
   @include host-selector-dark-theme() {
-    color: color(base-dark-n100);
+    color: color(neutral-9);
 
     &:not(.trigger_active) {
       @include hover() {
-        background-color: color(base-dark-n400);
+        background-color: color(neutral-600);
         color: color(neutral-1);
       }
     }
@@ -59,7 +59,7 @@ $adaptive-property: 'max-width';
     &_active,
     &:active {
       color: color(neutral-1);
-      background-color: color(base-dark-n400);
+      background-color: color(neutral-600);
     }
   }
 }

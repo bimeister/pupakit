@@ -18,6 +18,6 @@
 
   @include host-selector-dark-theme() {
     color: color(neutral-1);
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
   }
 }

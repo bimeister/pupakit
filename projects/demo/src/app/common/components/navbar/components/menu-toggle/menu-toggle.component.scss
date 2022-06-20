@@ -7,7 +7,7 @@ $menu-toggle-size: 28px;
 $strip-height: 3px;
 
 @mixin apply-background() {
-  background: color(base-dark-n400);
+  background: color(neutral-1000);
 
   @include host-selector-dark-theme() {
     background: color(neutral-5);

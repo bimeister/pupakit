@@ -386,43 +386,6 @@
   },
 
   {
-    "name": "Base/dark surface",
-    "colors": [
-      {
-        "name": "Base/Dark/N550",
-        "hex": "07232F"
-      },
-      {
-        "name": "Base/Dark/N500",
-        "hex": "0F2A36"
-      },
-      {
-        "name": "Base/Dark/N400",
-        "hex": "213A45"
-      },
-      {
-        "name": "Base/Dark/N300",
-        "hex": "334A54"
-      },
-      {
-        "name": "Base/Dark/N275",
-        "hex": "425760"
-      },
-      {
-        "name": "Base/Dark/N250",
-        "hex": "8F9CA1"
-      },
-      {
-        "name": "Base/Dark/N200",
-        "hex": "C2C9CC"
-      },
-      {
-        "name": "Base/Dark/N100",
-        "hex": "D6DBDD"
-      }
-    ]
-  },
-  {
     "name": "Link",
     "colors": [
       {

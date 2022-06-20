@@ -20,7 +20,7 @@
     color: color(neutral-1000);
 
     @include host-selector-dark-theme {
-      background-color: color(base-dark-n400);
+      background-color: color(neutral-600);
       color: color(neutral-1);
     }
   }

@@ -16,7 +16,7 @@
   border-radius: 1rem;
 
   @include host-selector-dark-theme() {
-    background: color(base-dark-n300);
+    background: color(neutral-700);
     color: color(neutral-1);
   }
 }

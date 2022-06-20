@@ -108,7 +108,7 @@
 
   @include dark-theme-class-parent {
     color: color(neutral-1);
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
   }
 }
 
@@ -126,7 +126,7 @@
   color: color(neutral-300);
 
   @include dark-theme-class-parent {
-    color: color(base-dark-n100);
+    color: color(neutral-9);
   }
 }
 
@@ -135,7 +135,7 @@
     background-color: color(neutral-7);
 
     @include dark-theme-class-parent {
-      background-color: color(base-dark-n300);
+      background-color: color(neutral-700);
     }
   }
 
@@ -143,7 +143,7 @@
     background-color: color(neutral-6);
 
     @include dark-theme-class-parent {
-      background-color: color(base-dark-n400);
+      background-color: color(neutral-600);
     }
 
     .textarea__control::placeholder {
@@ -159,7 +159,7 @@
     background-color: color(neutral-5);
 
     @include dark-theme-class-parent {
-      background-color: color(base-dark-n500);
+      background-color: color(neutral-500);
     }
 
     .textarea__control {
@@ -202,7 +202,7 @@
 
   @include dark-theme-class-parent {
     color: color(neutral-6);
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
 
     .textarea__control {
       color: color(neutral-6);
@@ -224,7 +224,7 @@
 
   color: color(neutral-300);
   @include dark-theme-class-parent {
-    color: color(base-dark-n100);
+    color: color(neutral-9);
   }
 
   &_invalid {

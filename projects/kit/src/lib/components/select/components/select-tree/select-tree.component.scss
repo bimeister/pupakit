@@ -64,11 +64,11 @@ $height_item-container: 75rem;
           color: color(neutral-1);
 
           @include hover() {
-            background-color: color(base-dark-n400);
+            background-color: color(neutral-600);
           }
 
           &_selected {
-            background-color: color(base-dark-n300);
+            background-color: color(neutral-700);
           }
         }
       }

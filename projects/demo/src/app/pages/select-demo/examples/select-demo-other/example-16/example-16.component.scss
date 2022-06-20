@@ -42,7 +42,7 @@
     @include ellipsis-text-overflow;
 
     @include dark-theme-class-parent() {
-      color: color(base-dark-n100);
+      color: color(neutral-9);
     }
   }
 }
@@ -79,7 +79,7 @@
   justify-content: center;
 
   font-size: 3rem;
-  color: color(base-dark-n250);
+  color: color(neutral-60);
 }
 
 .scrollable {

@@ -11,6 +11,6 @@
 
   background: color(neutral-5);
   @include host-selector-dark-theme {
-    background: color(base-dark-n500);
+    background: color(neutral-500);
   }
 }

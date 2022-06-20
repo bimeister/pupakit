@@ -10,9 +10,9 @@
   background-color: color(neutral-1);
 
   @include host-selector-dark-theme {
-    border-top: 1px solid color(base-dark-n400);
+    border-top: 1px solid color(neutral-600);
     background-color: color(neutral-1000);
-    color: color(base-dark-n100);
+    color: color(neutral-9);
   }
 }
 

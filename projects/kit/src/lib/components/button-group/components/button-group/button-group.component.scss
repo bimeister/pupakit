@@ -24,7 +24,7 @@ $container-padding: 4px;
 
     background-color: color(neutral-6);
     @include host-selector-dark-theme {
-      background-color: color(base-dark-n400);
+      background-color: color(neutral-600);
     }
   }
   &__rail-container {
@@ -46,7 +46,7 @@ $container-padding: 4px;
     border-radius: $controlBorderRadius;
 
     @include host-selector-dark-theme {
-      background-color: color(base-dark-n300);
+      background-color: color(neutral-700);
       color: color(neutral-1);
     }
   }

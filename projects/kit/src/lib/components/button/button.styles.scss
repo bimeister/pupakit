@@ -398,7 +398,7 @@
   &_border {
     .button__background {
       background-color: transparent;
-      border: 1px solid color(base-dark-n100);
+      border: 1px solid color(neutral-9);
       transition: background-color 0.2s ease, transform 0.1s, border-color 0.2s ease;
     }
 
@@ -511,14 +511,14 @@
     &.button_border {
       .button__background {
         background-color: transparent;
-        border: 1px solid color(base-dark-n100);
+        border: 1px solid color(neutral-9);
       }
     }
 
     &.button_border-contrast {
       .button__background {
         background-color: transparent;
-        border: 1px solid color(base-dark-n100);
+        border: 1px solid color(neutral-9);
       }
     }
   }
@@ -599,14 +599,14 @@
       &:not([disabled]) {
         @include hover() {
           .button__background {
-            background-color: color(base-dark-n400);
+            background-color: color(neutral-600);
           }
         }
 
         &:active,
         &.button_active {
           .button__background {
-            background-color: color(base-dark-n300);
+            background-color: color(neutral-700);
           }
         }
       }
@@ -618,13 +618,13 @@
   &_border-contrast {
     @include host-selector-dark-theme() {
       .button__background {
-        background-color: color(base-dark-n500);
+        background-color: color(neutral-500);
       }
 
       &:not([disabled]) {
         @include hover() {
           .button__background {
-            background-color: color(base-dark-n400);
+            background-color: color(neutral-600);
           }
 
           .button__icon {
@@ -635,7 +635,7 @@
         &:active,
         &.button_active {
           .button__background {
-            background-color: color(base-dark-n300);
+            background-color: color(neutral-700);
           }
 
           .button__icon {
@@ -650,7 +650,7 @@
       }
 
       .button__icon {
-        color: color(base-dark-n100);
+        color: color(neutral-9);
       }
     }
   }
@@ -668,7 +668,7 @@
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
-        border: 1px solid color(base-dark-n400);
+        border: 1px solid color(neutral-600);
       }
     }
   }
@@ -685,14 +685,14 @@
   &_disabled {
     @include host-selector-dark-theme() {
       .button__background {
-        background-color: color(base-dark-n500);
+        background-color: color(neutral-500);
         border: none;
       }
 
       .button__content,
       .button__loading,
       .button__icon {
-        color: color(base-dark-n250);
+        color: color(neutral-50);
       }
 
       &.button_subtle,
@@ -729,14 +729,14 @@
       &.button_border {
         .button__background {
           background-color: transparent;
-          border: 1px solid color(base-dark-n500);
+          border: 1px solid color(neutral-500);
         }
       }
 
       &.button_border-contrast {
         .button__background {
           background-color: transparent;
-          border: 1px solid color(base-dark-n500);
+          border: 1px solid color(neutral-500);
         }
       }
     }

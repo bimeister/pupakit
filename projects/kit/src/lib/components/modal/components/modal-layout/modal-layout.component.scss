@@ -12,7 +12,7 @@
   box-shadow: 0px 4px 24px rgba(0, 29, 41, 0.04);
 
   @include host-selector-dark-theme {
-    border: 1px solid color(base-dark-n400);
+    border: 1px solid color(neutral-600);
     box-shadow: 0px 4px 24px rgba(0, 23, 32, 0.12);
   }
 
@@ -46,7 +46,7 @@
   background-color: color(neutral-1);
 
   @include host-selector-dark-theme {
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
   }
 }
 

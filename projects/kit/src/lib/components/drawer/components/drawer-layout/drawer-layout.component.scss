@@ -1,6 +1,7 @@
 @use 'mixins' as *;
 
 @use 'functions' as *;
+@use 'variables' as *;
 
 $layout_border-size: 1px;
 
@@ -16,7 +17,7 @@ $layout_border-size: 1px;
 }
 
 .drawer-layout {
-  border-radius: 1px;
+  border-radius: $controlBorderRadius;
 
   color: color(neutral-1000);
   background-color: color(neutral-1);
@@ -32,7 +33,7 @@ $layout_border-size: 1px;
   @include host-selector-dark-theme() {
     color: color(neutral-1);
     background-color: color(neutral-1000);
-    border: $layout_border-size solid color(base-dark-n400);
+    border: $layout_border-size solid color(neutral-600);
   }
 
   &_with-shadow {

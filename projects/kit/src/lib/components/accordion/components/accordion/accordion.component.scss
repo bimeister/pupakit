@@ -22,7 +22,7 @@
       background-color: color(neutral-6);
 
       @include host-selector-dark-theme() {
-        background-color: color(base-dark-n400);
+        background-color: color(neutral-600);
       }
     }
   }
@@ -31,7 +31,7 @@
     color: color(neutral-1);
 
     &_expanded {
-      background: color(base-dark-n550);
+      background: color(neutral-400);
     }
   }
 }

@@ -77,7 +77,7 @@
 // dark styles
 .switcher {
   @include host-selector-dark-theme() {
-    background-color: color(base-dark-n300);
+    background-color: color(neutral-700);
 
     &_active {
       background-color: color(success-500);
@@ -85,7 +85,7 @@
 
     &:not(.switcher_disabled) {
       @include hover() {
-        background-color: color(base-dark-n275);
+        background-color: color(neutral-600);
 
         &.switcher_active {
           background-color: color(success-400);
@@ -94,11 +94,11 @@
     }
 
     &_disabled {
-      background-color: color(base-dark-n300);
+      background-color: color(neutral-700);
       cursor: not-allowed;
 
       .switcher__marker {
-        background-color: color(base-dark-n250);
+        background-color: color(neutral-60);
       }
     }
   }

@@ -38,15 +38,15 @@
   }
   @include host-selector-dark-theme() {
     &__icon {
-      color: color(base-dark-n100);
+      color: color(neutral-9);
     }
     &__content {
-      color: color(base-dark-n100);
+      color: color(neutral-9);
     }
     &_disabled {
       .label__icon,
       .label__content {
-        color: color(base-dark-n250);
+        color: color(neutral-60);
       }
     }
   }
