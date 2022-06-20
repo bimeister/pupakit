@@ -171,7 +171,7 @@
     }
 
     .textarea__control::placeholder {
-      color: color(neutral-1000);
+      color: color(neutral-50);
 
       @include dark-theme-class-parent {
         color: color(neutral-1);

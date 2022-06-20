@@ -44,6 +44,10 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     {
       caption: 'Bold',
       value: 'bold',
+    },
+    {
+      caption: 'Null',
+      value: 'null',
       isDefault: true,
     },
   ];
