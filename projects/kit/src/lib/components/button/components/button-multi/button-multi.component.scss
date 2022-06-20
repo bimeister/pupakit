@@ -315,10 +315,10 @@
 
   &_warning {
     .button-multi__background {
-      background-color: color(yellow-n500);
+      background-color: color(warning-500);
     }
     .expand__background {
-      border-left: 1px solid color(yellow-n550);
+      border-left: 1px solid color(warning-600);
     }
 
     &:not(.button-multi_disabled) {
@@ -326,7 +326,7 @@
       .main {
         @include hover() {
           .button-multi__background {
-            background-color: color(yellow-n400);
+            background-color: color(warning-400);
           }
         }
       }
@@ -335,7 +335,7 @@
         &:active,
         &_active {
           .button-multi__background {
-            background-color: color(yellow-n550);
+            background-color: color(warning-600);
           }
         }
       }

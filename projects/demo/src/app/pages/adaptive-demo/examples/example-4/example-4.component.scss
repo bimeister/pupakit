@@ -13,7 +13,7 @@
   }
 
   @include sm() {
-    background-color: color(yellow-n500);
+    background-color: color(warning-500);
   }
 
   @include md() {
@@ -29,7 +29,7 @@
   }
 
   @include xl() {
-    border-color: color(yellow-n500);
+    border-color: color(warning-500);
   }
 
   @include xxl() {
