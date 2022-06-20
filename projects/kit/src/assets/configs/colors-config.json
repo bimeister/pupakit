@@ -460,35 +460,6 @@
     ]
   },
   {
-    "name": "Yellow",
-    "colors": [
-      {
-        "name": "Yellow/N550",
-        "hex": "FDCC13"
-      },
-      {
-        "name": "Yellow/N500",
-        "hex": "FFD333"
-      },
-      {
-        "name": "Yellow/N400",
-        "hex": "FFDB5B"
-      },
-      {
-        "name": "Yellow/N300",
-        "hex": "FFE072"
-      },
-      {
-        "name": "Yellow/N200",
-        "hex": "FFE589"
-      },
-      {
-        "name": "Yellow/N100",
-        "hex": "FFF2C3"
-      }
-    ]
-  },
-  {
     "name": "Link",
     "colors": [
       {

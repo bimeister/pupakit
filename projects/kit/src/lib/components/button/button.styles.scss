@@ -333,20 +333,20 @@
 
   &_warning {
     .button__background {
-      background-color: color(yellow-n500);
+      background-color: color(warning-500);
     }
 
     &:not([disabled]) {
       @include hover() {
         .button__background {
-          background-color: color(yellow-n400);
+          background-color: color(warning-400);
         }
       }
 
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(yellow-n550);
+          background-color: color(warning-600);
         }
       }
     }

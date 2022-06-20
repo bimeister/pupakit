@@ -82,25 +82,25 @@
 }
 
 .tag_yellow:not(.tag_disabled) {
-  background-color: color(yellow-n100);
+  background-color: color(warning-150);
   color: color(neutral-1000);
 
   &.tag_clickable {
-    box-shadow: shadow-helper(yellow-n200);
+    box-shadow: shadow-helper(warning-200);
     @include hover() {
-      background-color: color(yellow-n200);
+      background-color: color(warning-200);
     }
   }
 
   &.tag_bold {
     color: color(neutral-1000);
-    background-color: color(yellow-n500);
-    box-shadow: shadow-helper(yellow-n500);
+    background-color: color(warning-500);
+    box-shadow: shadow-helper(warning-500);
 
     &.tag_clickable {
-      box-shadow: shadow-helper(yellow-n400);
+      box-shadow: shadow-helper(warning-400);
       @include hover() {
-        background-color: color(yellow-n400);
+        background-color: color(warning-400);
       }
     }
   }
