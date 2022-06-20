@@ -1,8 +1,9 @@
 @use 'sass:map';
 @use './../maps/colors.map' as *;
+@use './../maps/alpha-colors.map' as *;
 @use './../maps/colors-old.map' as *;
 
-@function color($color, $alpha: 1) {
+@function color($color, $alpha: alpha-1000) {
   $colorsHasKey: map.has-key($colorsMap, #{$color});
   $colorsOldHasKey: map.has-key($colorsOldMap, #{$color});
 
@@ -10,5 +11,11 @@
     @error '[color] Wrong color key #{$color}';
   }
 
-  @return rgba(#{var(--color_#{$color})}, $alpha);
+  $alphaColorsHasKey: map.has-key($alphaColorsMap, #{$alpha});
+
+  @if (not($alphaColorsHasKey)) {
+    @return rgba(#{var(--color_#{$color})}, $alpha);
+  }
+
+  @return rgba(#{var(--color_#{$color})}, #{var(--alpha_#{$alpha})});
 }

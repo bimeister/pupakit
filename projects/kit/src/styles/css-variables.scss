@@ -12,3 +12,9 @@
     --#{$name}: #{$value};
   }
 }
+
+:root {
+  @each $name, $value in $alphaColorsMap {
+    --alpha_#{$name}: #{$value};
+  }
+}
