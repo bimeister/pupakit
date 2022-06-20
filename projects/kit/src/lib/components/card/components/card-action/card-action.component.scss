@@ -4,7 +4,7 @@
 :host {
   flex: 8rem 0;
   margin-left: auto;
-  color: color(base-white-n200);
+  color: color(neutral-300);
 
   @include host-selector-dark-theme {
     color: color(base-dark-n400);

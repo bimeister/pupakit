@@ -118,11 +118,11 @@
     }
 
     &:hover {
-      background: color(base-white-n550);
+      background: color(neutral-4);
     }
 
     &.active {
-      background: color(base-white-n550);
+      background: color(neutral-4);
       &::before {
         opacity: 1;
       }

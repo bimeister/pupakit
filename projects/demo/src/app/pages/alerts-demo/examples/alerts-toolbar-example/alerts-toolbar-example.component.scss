@@ -3,7 +3,7 @@
 
 .alerts-toolbar {
   color: color(neutral-1000);
-  background-color: color(base-white-n300);
+  background-color: color(neutral-7);
 
   @include host-selector-dark-theme {
     color: color(neutral-1);

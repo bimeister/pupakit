@@ -5,8 +5,8 @@
   display: block;
   width: 100%;
 
-  border-top: 1px solid color(base-white-n400);
-  color: color(base-white-n100);
+  border-top: 1px solid color(neutral-5);
+  color: color(neutral-300);
   background-color: color(neutral-1);
 
   @include host-selector-dark-theme {

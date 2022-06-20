@@ -10,7 +10,7 @@ $strip-height: 3px;
   background: color(base-dark-n400);
 
   @include host-selector-dark-theme() {
-    background: color(base-white-n400);
+    background: color(neutral-5);
   }
 }
 

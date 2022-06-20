@@ -34,7 +34,7 @@
 }
 
 .tag_default:not(.tag_disabled) {
-  background-color: color(base-white-n300);
+  background-color: color(neutral-7);
   color: color(neutral-1000);
   @include host-selector-dark-theme() {
     background-color: color(base-dark-n300);
@@ -42,13 +42,13 @@
   }
 
   &.tag_clickable {
-    box-shadow: shadow-helper(base-white-n275);
+    box-shadow: shadow-helper(neutral-6);
     @include host-selector-dark-theme() {
       box-shadow: shadow-helper(base-dark-n275);
     }
 
     @include hover() {
-      background-color: color(base-white-n275);
+      background-color: color(neutral-6);
       @include host-selector-dark-theme() {
         background-color: color(base-dark-n275);
       }
@@ -199,9 +199,9 @@
 .tag_disabled {
   cursor: not-allowed;
 
-  background-color: color(base-white-n400);
-  color: color(base-white-n250);
-  box-shadow: shadow-helper(base-white-n400);
+  background-color: color(neutral-5);
+  color: color(neutral-50);
+  box-shadow: shadow-helper(neutral-5);
   @include host-selector-dark-theme() {
     background-color: color(base-dark-n400);
     color: color(base-dark-n250);

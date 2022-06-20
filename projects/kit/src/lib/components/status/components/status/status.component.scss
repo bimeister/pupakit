@@ -53,18 +53,18 @@
   }
 
   &_neutral {
-    color: color(base-white-n100);
+    color: color(neutral-300);
 
     .status__marker {
-      background-color: color(base-white-n200);
+      background-color: color(neutral-300);
     }
   }
 
   &.disabled {
-    color: color(base-white-n250);
+    color: color(neutral-50);
 
     .status__marker {
-      background-color: color(base-white-n250);
+      background-color: color(neutral-50);
     }
   }
 

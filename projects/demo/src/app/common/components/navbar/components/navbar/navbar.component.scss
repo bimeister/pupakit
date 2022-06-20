@@ -36,12 +36,12 @@ $end-item-margin: 4rem;
   vertical-align: middle;
 
   background-color: transparent;
-  background-image: radial-gradient(color(base-white-n400, 0) 1px, color(base-white-n400, 0.9) 1px);
+  background-image: radial-gradient(color(neutral-5, 0) 1px, color(neutral-5, 0.9) 1px);
   background-size: 1rem 1rem;
   backdrop-filter: brightness(100%) blur(1rem);
 
   @include supports-backdrop-blur {
-    background-image: radial-gradient(color(base-white-n400, 0) 1px, color(base-white-n400, 0.5) 1px);
+    background-image: radial-gradient(color(neutral-5, 0) 1px, color(neutral-5, 0.5) 1px);
   }
 
   @include host-selector-dark-theme() {

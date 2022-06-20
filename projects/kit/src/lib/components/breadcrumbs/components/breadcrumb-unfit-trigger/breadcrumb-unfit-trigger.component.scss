@@ -14,7 +14,7 @@ $adaptive-property: 'max-width';
   border-radius: $controlBorderRadius;
 
   text-decoration: none;
-  color: color(base-white-n100);
+  color: color(neutral-300);
   cursor: pointer;
   @include ellipsis-text-overflow;
 
@@ -23,14 +23,14 @@ $adaptive-property: 'max-width';
 
   &:not(.trigger_active) {
     @include hover() {
-      background-color: color(base-white-n400);
+      background-color: color(neutral-6);
       color: color(neutral-1000);
     }
   }
 
   &_active,
   &:active {
-    background-color: color(base-white-n400);
+    background-color: color(neutral-6);
     color: color(neutral-1000);
   }
 

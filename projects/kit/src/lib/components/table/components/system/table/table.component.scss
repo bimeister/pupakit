@@ -45,7 +45,7 @@ $scrollbarHeight: 12px;
 .table-header__hidden-columns-count {
   position: absolute;
   top: 0;
-  background-color: color(base-white-n300);
+  background-color: color(neutral-7);
   width: 4rem;
   height: 4rem;
   @include font-type-medium;
@@ -133,7 +133,7 @@ $scrollbarHeight: 12px;
   box-sizing: border-box;
   min-width: 100%;
   border-bottom: 1px solid color(neutral-1);
-  background-color: color(base-white-n500);
+  background-color: color(neutral-5);
 
   &_hovered,
   &_selected {
@@ -144,11 +144,11 @@ $scrollbarHeight: 12px;
 .table-row_header {
   height: 100%;
   background-color: color(neutral-1);
-  border-bottom: 1px solid color(base-white-n400);
-  border-top: 1px solid color(base-white-n400);
+  border-bottom: 1px solid color(neutral-5);
+  border-top: 1px solid color(neutral-5);
 
   &_hovered {
-    background-color: color(base-white-n400);
+    background-color: color(neutral-6);
   }
 }
 
@@ -173,7 +173,7 @@ $scrollbarHeight: 12px;
 
   &_visible {
     visibility: initial;
-    border-bottom: 1px solid color(base-white-n400);
+    border-bottom: 1px solid color(neutral-5);
   }
 }
 
@@ -187,12 +187,12 @@ $scrollbarHeight: 12px;
   box-sizing: border-box;
 
   &_has-left-pinned {
-    border-left: 1px solid color(base-white-n400);
+    border-left: 1px solid color(neutral-5);
     margin-left: -1px;
   }
 
   &_has-right-pinned {
-    border-right: 1px solid color(base-white-n400);
+    border-right: 1px solid color(neutral-5);
     margin-right: -1px;
   }
 }

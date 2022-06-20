@@ -5,12 +5,12 @@ $theme-config: (
   light: (
     body: (
       background-color: color(neutral-1),
-      border-color: color(base-white-n300),
+      border-color: color(neutral-7),
       font-color: color(base-dark-n400),
     ),
     navbar: (
-      background-color: color(base-white-n400),
-      border-color: color(base-white-n300),
+      background-color: color(neutral-5),
+      border-color: color(neutral-7),
       font-color: color(base-dark-n400),
     ),
   ),
@@ -18,12 +18,12 @@ $theme-config: (
     body: (
       background-color: color(neutral-1000),
       border-color: color(base-dark-n400),
-      font-color: color(base-white-n400),
+      font-color: color(neutral-5),
     ),
     navbar: (
       background-color: color(base-dark-n500),
       border-color: color(base-dark-n400),
-      font-color: color(base-white-n400),
+      font-color: color(neutral-5),
     ),
   ),
 );

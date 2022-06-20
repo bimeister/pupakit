@@ -13,11 +13,11 @@
   gap: 1.5rem;
   &__icon {
     flex-shrink: 0;
-    color: color(base-white-n200);
+    color: color(neutral-300);
   }
   &__content {
     flex-shrink: 1;
-    color: color(base-white-n100);
+    color: color(neutral-300);
     @include font-preset-caption-xs();
     @include ellipsis-text-overflow;
   }
@@ -33,7 +33,7 @@
   &_disabled {
     .label__icon,
     .label__content {
-      color: color(base-white-n250);
+      color: color(neutral-50);
     }
   }
   @include host-selector-dark-theme() {

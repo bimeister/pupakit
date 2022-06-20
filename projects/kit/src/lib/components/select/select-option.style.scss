@@ -31,7 +31,7 @@
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  --select-option-icon-color: #{color(base-white-n200)};
+  --select-option-icon-color: #{color(neutral-300)};
 
   &::after {
     position: absolute;
@@ -46,7 +46,7 @@
 
   &:not(.option_disabled) {
     @include hover() {
-      background-color: color(base-white-n400);
+      background-color: color(neutral-6);
       --select-option-icon-color: #{color(neutral-1000)};
     }
   }
@@ -54,12 +54,12 @@
   &_disabled {
     cursor: not-allowed;
     background-color: color(neutral-1);
-    color: color(base-white-n275);
-    --select-option-icon-color: #{color(base-white-n250)};
+    color: color(neutral-6);
+    --select-option-icon-color: #{color(neutral-50)};
   }
 
   &_picked {
-    background-color: color(base-white-n550);
+    background-color: color(neutral-4);
 
     &::after {
       background-color: color(primary-500);

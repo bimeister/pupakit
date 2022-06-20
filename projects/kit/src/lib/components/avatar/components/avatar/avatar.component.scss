@@ -13,7 +13,7 @@
   background-repeat: no-repeat;
 
   &_default {
-    background-color: color(base-white-n275);
+    background-color: color(neutral-6);
 
     .avatar__icon {
       color: color(neutral-1000);
@@ -21,7 +21,7 @@
   }
 
   &_disabled {
-    background-color: color(base-white-n400);
+    background-color: color(neutral-5);
 
     @include host-selector-dark-theme {
       background-color: color(base-dark-n275);
