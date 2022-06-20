@@ -9,7 +9,7 @@
   position: relative;
   height: 1px;
   margin-right: 1px;
-  background-color: color('neutral-1');
+  background-color: color(neutral-1);
   flex-shrink: 0;
 
   &::after {
@@ -17,7 +17,7 @@
     display: block;
     width: 1px;
     height: 100%;
-    background-color: color('base-white-n400');
+    background-color: color(base-white-n400);
     position: absolute;
     right: -1px;
     top: 0;

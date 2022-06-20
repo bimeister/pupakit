@@ -20,7 +20,7 @@ $tooltip_max-text-lines-count: 13;
     border-radius: 1px;
     box-sizing: border-box;
     padding: 1rem 2rem;
-    color: color('neutral-1');
+    color: color(neutral-1);
 
     @include font-type-regular();
     @include font-size-xs($paragraph: true);
