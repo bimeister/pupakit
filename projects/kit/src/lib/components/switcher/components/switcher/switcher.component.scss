@@ -27,7 +27,7 @@
   }
 
   &_active {
-    background-color: color(green-n500);
+    background-color: color(success-500);
 
     .switcher__marker {
       transform: translateX(100%);
@@ -50,7 +50,7 @@
   &:not(.switcher_disabled) {
     @include hover() {
       &.switcher_active {
-        background-color: color(green-n400);
+        background-color: color(success-400);
       }
       background-color: color(base-white-n275);
     }
@@ -80,7 +80,7 @@
     background-color: color(base-dark-n300);
 
     &_active {
-      background-color: color(green-n500);
+      background-color: color(success-500);
     }
 
     &:not(.switcher_disabled) {
@@ -88,7 +88,7 @@
         background-color: color(base-dark-n275);
 
         &.switcher_active {
-          background-color: color(green-n400);
+          background-color: color(success-400);
         }
       }
     }

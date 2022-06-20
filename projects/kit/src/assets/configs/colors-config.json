@@ -460,35 +460,6 @@
     ]
   },
   {
-    "name": "Green",
-    "colors": [
-      {
-        "name": "Green/N550",
-        "hex": "00A46D"
-      },
-      {
-        "name": "Green/N500",
-        "hex": "08B87D"
-      },
-      {
-        "name": "Green/N400",
-        "hex": "08D892"
-      },
-      {
-        "name": "Green/N300",
-        "hex": "12E9A1"
-      },
-      {
-        "name": "Green/N200",
-        "hex": "7EF1CB"
-      },
-      {
-        "name": "Green/N100",
-        "hex": "C6F7E7"
-      }
-    ]
-  },
-  {
     "name": "Red",
     "colors": [
       {
