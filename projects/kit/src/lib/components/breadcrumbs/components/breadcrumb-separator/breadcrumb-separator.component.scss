@@ -9,7 +9,7 @@
   @include font-size-xxs();
 
   cursor: default;
-  color: color(base-white-n200);
+  color: color(neutral-300);
 
   @include xs() {
     @include font-size-xs();

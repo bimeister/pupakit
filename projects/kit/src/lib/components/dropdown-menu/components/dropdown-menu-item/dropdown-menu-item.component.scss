@@ -3,7 +3,7 @@
 @use 'variables' as *;
 
 .dropdown-item {
-  --dropdown-item-icon-color: #{color(base-white-n200)};
+  --dropdown-item-icon-color: #{color(neutral-300)};
   --dropdown-item-transform-x: 0;
 
   @include font-preset-caption-s();
@@ -30,7 +30,7 @@
   &:hover:not(.item-disabled):not(.item-plain) {
     --dropdown-item-icon-color: #{color(neutral-1000)};
     --dropdown-item-transform-x: 2rem;
-    background-color: color(base-white-n400);
+    background-color: color(neutral-6);
 
     @include host-selector-dark-theme {
       --dropdown-item-icon-color: #{color(neutral-1)};
@@ -41,7 +41,7 @@
   &.item-active:not(.item-disabled):not(.item-plain),
   &:active:not(.item-disabled):not(.item-plain) {
     --dropdown-item-icon-color: #{color(neutral-1000)};
-    background-color: color(base-white-n300);
+    background-color: color(neutral-7);
 
     @include host-selector-dark-theme {
       --dropdown-item-icon-color: #{color(neutral-1)};
@@ -50,9 +50,9 @@
   }
 
   &.item-disabled {
-    --dropdown-item-icon-color: #{color(base-white-n250)};
+    --dropdown-item-icon-color: #{color(neutral-50)};
     cursor: default;
-    color: color(base-white-n250);
+    color: color(neutral-50);
     pointer-events: none;
 
     @include host-selector-dark-theme {

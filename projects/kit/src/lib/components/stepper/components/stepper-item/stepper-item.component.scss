@@ -70,7 +70,7 @@
 
   &:not(&_disabled) {
     @include hover {
-      background: color(base-white-n400);
+      background: color(neutral-6);
       @include host-selector-dark-theme {
         background: color(base-dark-n400);
       }
@@ -79,7 +79,7 @@
 
   &_disabled {
     cursor: not-allowed;
-    color: color(base-white-n250);
+    color: color(neutral-50);
 
     @include host-selector-dark-theme {
       color: color(base-dark-n250);
@@ -92,6 +92,6 @@
   min-width: 16rem;
   margin: 0 3rem 0;
   flex-grow: 1;
-  border-top: 1.5px dashed color(base-white-n400);
+  border-top: 1.5px dashed color(neutral-5);
   height: 0;
 }

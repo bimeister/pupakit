@@ -4,32 +4,32 @@ $input_light_styles: (
   input: (
     color: color(neutral-1000),
     caret-color: color(neutral-1000),
-    background-color: color(base-white-n500),
+    background-color: color(neutral-5),
     placeholder: (
       color: color(neutral-1000),
     ),
   ),
   hover: (
-    background-color: color(base-white-n400),
+    background-color: color(neutral-6),
   ),
   disabled: (
-    color: color(base-white-n250),
-    background-color: color(base-white-n500),
+    color: color(neutral-50),
+    background-color: color(neutral-5),
     placeholder: (
-      color: color(base-white-n250),
+      color: color(neutral-50),
     ),
   ),
   invalid: (
     border-color: color(danger-400),
   ),
   focus: (
-    background-color: color(base-white-n500),
+    background-color: color(neutral-5),
     placeholder: (
-      color: color(base-white-n275),
+      color: color(neutral-6),
     ),
   ),
   active: (
-    background-color: color(base-white-n300),
+    background-color: color(neutral-7),
   ),
 );
 

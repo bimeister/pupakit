@@ -11,6 +11,6 @@
   user-select: none;
 
   @include host-selector-dark-theme() {
-    color: color(base-white-n400);
+    color: color(neutral-5);
   }
 }

@@ -38,7 +38,7 @@
   }
 
   &__login {
-    color: color(base-white-n100);
+    color: color(neutral-300);
     @include ellipsis-text-overflow;
 
     @include dark-theme-class-parent() {

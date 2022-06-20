@@ -78,18 +78,18 @@
   }
 
   @include hover {
-    background-color: color(base-white-n400);
+    background-color: color(neutral-6);
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(base-white-n400, 0.8) -95%, color(base-white-n400) 70%);
+      background: linear-gradient(90deg, color(neutral-6, 0.8) -95%, color(neutral-6) 70%);
     }
   }
 
   &:active {
-    background-color: color(base-white-n300);
+    background-color: color(neutral-7);
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(base-white-n300, 0.8) -95%, color(base-white-n300) 70%);
+      background: linear-gradient(90deg, color(neutral-7, 0.8) -95%, color(neutral-7) 70%);
     }
   }
 
@@ -102,14 +102,14 @@
   }
 
   &--selected {
-    background-color: color(base-white-n550);
+    background-color: color(neutral-4);
 
     .tree-node__selection {
       opacity: 1;
     }
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(base-white-n550, 0.8) -95%, color(base-white-n550) 70%);
+      background: linear-gradient(90deg, color(neutral-4, 0.8) -95%, color(neutral-4) 70%);
     }
   }
 
@@ -127,14 +127,14 @@
       }
 
       &--selected {
-        background-color: color(base-white-n550);
+        background-color: color(neutral-4);
 
         .tree-node__selection {
           opacity: 0;
         }
 
         .tree-node__right {
-          background: linear-gradient(90deg, color(base-white-n550, 0.8) -95%, color(base-white-n550) 70%);
+          background: linear-gradient(90deg, color(neutral-4, 0.8) -95%, color(neutral-4) 70%);
         }
       }
     }

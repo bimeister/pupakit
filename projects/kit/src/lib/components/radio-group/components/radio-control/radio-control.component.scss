@@ -27,7 +27,7 @@
 
   &:not(.radio-control_disabled):not(.radio-control_without-label) {
     @include hover() {
-      background: color(base-white-n400);
+      background: color(neutral-6);
       @include host-selector-dark-theme() {
         background: color(base-dark-n275, 0.5);
       }
@@ -60,7 +60,7 @@
   box-sizing: border-box;
   border-radius: 50%;
   background: color(neutral-1);
-  border: 1px solid color(base-white-n200);
+  border: 1px solid color(neutral-300);
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
     transform variable(transition-duration_shorter) variable(transition-timing-function_common);
   @include host-selector-dark-theme() {
@@ -111,11 +111,11 @@
   }
 
   &_disabled {
-    border-color: color(base-white-n250);
+    border-color: color(neutral-50);
     &.radio-control-marker_selected {
-      background: color(base-white-n250);
+      background: color(neutral-5);
       @include host-selector-dark-theme() {
-        background: color(base-white-n250);
+        background: color(neutral-5);
       }
     }
   }
@@ -135,11 +135,11 @@
   }
 
   &_disabled {
-    color: color(base-white-n250);
+    color: color(neutral-50);
   }
 
   &_disabled.radio-control-label_selected {
-    color: color(base-white-n250);
+    color: color(neutral-50);
   }
   &_hidden {
     display: none;

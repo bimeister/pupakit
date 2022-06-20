@@ -52,11 +52,11 @@ $height_item-container: 75rem;
           background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
         @include hover() {
-          background-color: color(base-white-n400);
+          background-color: color(neutral-6);
         }
 
         &_selected {
-          background-color: color(base-white-n300);
+          background-color: color(neutral-7);
         }
 
         @include dark-theme-class-parent() {

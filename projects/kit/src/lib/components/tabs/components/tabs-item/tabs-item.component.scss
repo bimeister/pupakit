@@ -16,7 +16,7 @@
 .tabs-item {
   min-width: 1rem;
   max-width: inherit;
-  color: color(base-white-n100);
+  color: color(neutral-300);
   box-sizing: border-box;
   padding: 0 2rem 4rem 2rem;
   cursor: pointer;
@@ -42,7 +42,7 @@
 
   &_disabled {
     cursor: not-allowed;
-    color: color(base-white-n250);
+    color: color(neutral-50);
 
     @include host-selector-dark-theme {
       color: color(base-dark-n250);

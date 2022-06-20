@@ -25,7 +25,7 @@
   border: none;
 
   color: color(neutral-1000);
-  background-color: color(base-white-n500);
+  background-color: color(neutral-5);
 
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
     background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -38,7 +38,7 @@
   &:not(.trigger_disabled) {
     &:not(.trigger_active) {
       @include hover() {
-        background-color: color(base-white-n400);
+        background-color: color(neutral-6);
 
         .placeholder.on-hover {
           opacity: 1;
@@ -52,7 +52,7 @@
   }
 
   &_active {
-    background-color: color(base-white-n500);
+    background-color: color(neutral-5);
 
     .placeholder.on-hover {
       opacity: 1;
@@ -66,7 +66,7 @@
   }
 
   &_disabled {
-    background-color: color(base-white-n500);
+    background-color: color(neutral-5);
     color: color(base-dark-n250);
     cursor: not-allowed;
 
@@ -75,7 +75,7 @@
     }
 
     .placeholder {
-      color: color(base-white-n275);
+      color: color(neutral-50);
     }
   }
 
@@ -145,7 +145,7 @@
 }
 
 .placeholder {
-  color: color(base-white-n100);
+  color: color(neutral-300);
   width: 100%;
   text-align: left;
   opacity: 1;

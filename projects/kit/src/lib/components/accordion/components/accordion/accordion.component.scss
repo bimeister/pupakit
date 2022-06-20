@@ -14,12 +14,12 @@
   border-radius: $controlBorderRadius;
 
   &_expanded {
-    background-color: color(base-white-n550);
+    background-color: color(neutral-4);
   }
 
   @include hover {
     .accordion-header {
-      background-color: color(base-white-n400);
+      background-color: color(neutral-6);
 
       @include host-selector-dark-theme() {
         background-color: color(base-dark-n400);

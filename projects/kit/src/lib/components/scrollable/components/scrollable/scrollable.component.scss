@@ -11,7 +11,7 @@ $width_scrollbar-thumb-small: 3px;
 $padding_scrollbar-thumb-container-large: math.div(($width_scrollbar - $width_scrollbar-thumb-large), 2);
 $padding_scrollbar-thumb-container-small: math.div(($width_scrollbar - $width_scrollbar-thumb-small), 2);
 
-$color_light: 'base-white-n275';
+$color_light: 'neutral-6';
 $color_dark: 'base-dark-n275';
 
 :host {

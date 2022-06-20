@@ -104,7 +104,7 @@
 // container colors
 .textarea {
   color: color(neutral-1000);
-  background-color: color(base-white-n500);
+  background-color: color(neutral-5);
 
   @include dark-theme-class-parent {
     color: color(neutral-1);
@@ -123,7 +123,7 @@
 
 // control placeholder
 .textarea__control::placeholder {
-  color: color(base-white-n100);
+  color: color(neutral-300);
 
   @include dark-theme-class-parent {
     color: color(base-dark-n100);
@@ -132,7 +132,7 @@
 
 .textarea:not(.textarea_disabled) {
   &:active {
-    background-color: color(base-white-n300);
+    background-color: color(neutral-7);
 
     @include dark-theme-class-parent {
       background-color: color(base-dark-n300);
@@ -140,7 +140,7 @@
   }
 
   @include hover() {
-    background-color: color(base-white-n400);
+    background-color: color(neutral-6);
 
     @include dark-theme-class-parent {
       background-color: color(base-dark-n400);
@@ -156,7 +156,7 @@
   }
 
   &:focus-within {
-    background-color: color(base-white-n500);
+    background-color: color(neutral-5);
 
     @include dark-theme-class-parent {
       background-color: color(base-dark-n500);
@@ -189,26 +189,26 @@
 }
 
 .textarea_disabled {
-  color: color(base-dark-n250);
-  background-color: color(base-white-n500);
+  color: color(neutral-50);
+  background-color: color(neutral-5);
 
   .textarea__control {
-    color: color(base-dark-n250);
+    color: color(neutral-50);
 
     &::placeholder {
-      color: color(base-dark-n250);
+      color: color(neutral-50);
     }
   }
 
   @include dark-theme-class-parent {
-    color: color(base-white-n275);
+    color: color(neutral-6);
     background-color: color(base-dark-n500);
 
     .textarea__control {
-      color: color(base-white-n275);
+      color: color(neutral-6);
 
       &::placeholder {
-        color: color(base-white-n275);
+        color: color(neutral-6);
       }
     }
   }
@@ -222,7 +222,7 @@
   line-height: 12px;
   margin-top: 2px;
 
-  color: color(base-white-n100);
+  color: color(neutral-300);
   @include dark-theme-class-parent {
     color: color(base-dark-n100);
   }

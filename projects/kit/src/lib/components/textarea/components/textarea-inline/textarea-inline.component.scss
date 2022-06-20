@@ -34,7 +34,7 @@
 }
 
 .textarea-inline {
-  background-color: color(base-white-n500);
+  background-color: color(neutral-5);
 
   @include dark-theme-class-parent {
     background-color: color(base-dark-n500);
@@ -50,7 +50,7 @@
   }
 
   .textarea-inline__placeholder {
-    color: color(base-white-n100);
+    color: color(neutral-300);
 
     @include dark-theme-class-parent {
       color: color(base-dark-n100);
@@ -61,7 +61,7 @@
 .textarea-inline.textarea-inline_collapsed {
   &:not(.textarea-inline_disabled) {
     &:active {
-      background-color: color(base-white-n300);
+      background-color: color(neutral-7);
 
       @include dark-theme-class-parent {
         background-color: color(base-dark-n300);
@@ -69,7 +69,7 @@
     }
 
     @include hover() {
-      background-color: color(base-white-n400);
+      background-color: color(neutral-6);
 
       @include dark-theme-class-parent {
         background-color: color(base-dark-n400);
@@ -95,19 +95,19 @@
 }
 
 .textarea-inline_disabled {
-  color: color(base-dark-n250);
-  background-color: color(base-white-n500);
+  color: color(neutral-50);
+  background-color: color(neutral-5);
 
   .textarea-inline__placeholder {
-    color: color(base-dark-n250);
+    color: color(neutral-50);
   }
 
   @include dark-theme-class-parent {
-    color: color(base-white-n275);
+    color: color(neutral-6);
     background-color: color(base-dark-n500);
 
     .textarea-inline__placeholder {
-      color: color(base-white-n275);
+      color: color(neutral-6);
     }
   }
 }
@@ -194,7 +194,7 @@
     border-color: transparent;
     &:focus-within {
       background-color: color(neutral-1);
-      border: 1px solid color(base-white-n275);
+      border: 1px solid color(neutral-6);
 
       @include dark-theme-class-parent {
         background-color: color(neutral-1000);
@@ -202,7 +202,7 @@
       }
 
       .textarea__control::placeholder {
-        color: color(base-white-n275);
+        color: color(neutral-6);
 
         @include dark-theme-class-parent {
           color: color(base-dark-n300);

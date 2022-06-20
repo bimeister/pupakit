@@ -21,7 +21,7 @@
 
   &:not(.checkbox_disabled):not(.checkbox_without-label) {
     @include hover() {
-      background: color(base-white-n400, 0.5);
+      background: color(neutral-6, 0.5);
       @include host-selector-dark-theme() {
         background: color(base-dark-n275, 0.5);
       }
@@ -76,7 +76,7 @@
 .checkbox__marker {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid color(base-white-n200);
+  border: 1px solid color(neutral-300);
   box-sizing: border-box;
   border-radius: 1px;
   display: flex;
@@ -117,16 +117,16 @@
   }
 
   &_disabled {
-    border: 1px solid color(base-white-n250);
+    border: 1px solid color(neutral-50);
 
     .checkbox__marker-icon {
-      color: color(base-white-n250);
+      color: color(neutral-50);
     }
   }
 
   &_checked.checkbox__marker_disabled {
     border: none;
-    background: color(base-white-n300);
+    background: color(neutral-7);
   }
 
   &_disabled:focus-visible {
@@ -150,7 +150,7 @@
   }
 
   &_disabled {
-    color: color(base-white-n250);
+    color: color(neutral-50);
   }
 }
 
