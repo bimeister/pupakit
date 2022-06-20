@@ -5,7 +5,7 @@
   display: block;
   width: 100px;
   height: 100px;
-  background-color: color(primary-n500);
+  background-color: color(primary-500);
 
   @include width-less-than($width: 900) {
     border-radius: 50%;
@@ -21,6 +21,6 @@
   }
 
   @include height-more-than($height: 1000) {
-    background: linear-gradient(90deg, color(primary-n500) 0%, color(primary-n400) 35%, color(red-n500) 100%);
+    background: linear-gradient(90deg, color(primary-500) 0%, color(primary-400) 35%, color(red-n500) 100%);
   }
 }

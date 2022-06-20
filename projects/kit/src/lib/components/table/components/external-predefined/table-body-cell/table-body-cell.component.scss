@@ -25,7 +25,7 @@
       cursor: pointer;
 
       @include host-selector('.table-row_selected') {
-        border-color: color('primary-n400');
+        border-color: color('primary-400');
       }
 
       @include xs() {

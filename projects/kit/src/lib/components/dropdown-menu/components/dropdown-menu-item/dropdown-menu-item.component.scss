@@ -24,7 +24,7 @@
 
   &:focus-visible {
     outline: none;
-    border-color: color(primary-n400);
+    border-color: color(primary-400);
   }
 
   &:hover:not(.item-disabled):not(.item-plain) {

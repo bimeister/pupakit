@@ -25,7 +25,7 @@
 }
 
 .complete {
-  background-color: color(primary-n500);
+  background-color: color(primary-500);
 }
 .error {
   background-color: color(red-n500);
@@ -37,14 +37,14 @@
   height: 1rem;
   border-radius: 50%;
   display: inline-block;
-  background-color: color(primary-n500);
+  background-color: color(primary-500);
 }
 .outer-circle {
   position: absolute;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: color(primary-n200);
+  background-color: color(primary-150);
   animation: pulse 1.25s infinite alternate ease-in-out;
 }
 

@@ -57,7 +57,7 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
   &:focus {
     outline: none;
-    border-color: color(primary-n600) !important;
+    border-color: color(primary-600) !important;
   }
 
   &:hover:not(.selected):not(.disabled) {

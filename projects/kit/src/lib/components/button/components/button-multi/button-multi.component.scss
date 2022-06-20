@@ -148,7 +148,7 @@
         left: -2px;
         right: -2px;
         bottom: -2px;
-        border: 2px solid color(primary-n400);
+        border: 2px solid color(primary-400);
         border-radius: 2px;
       }
       .main,
@@ -162,10 +162,10 @@
 
   &_primary {
     .button-multi__background {
-      background-color: color(primary-n500);
+      background-color: color(primary-500);
     }
     .expand__background {
-      border-left: 1px solid color(primary-n600);
+      border-left: 1px solid color(primary-600);
     }
 
     &:not(.button-multi_disabled) {
@@ -173,7 +173,7 @@
       .main {
         @include hover() {
           .button-multi__background {
-            background-color: color(primary-n400);
+            background-color: color(primary-400);
           }
         }
       }
@@ -182,7 +182,7 @@
         &:active,
         &_active {
           .button-multi__background {
-            background-color: color(primary-n600);
+            background-color: color(primary-600);
           }
         }
       }

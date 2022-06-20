@@ -213,7 +213,7 @@ $scrollbarHeight: 12px;
   top: 0;
   width: 2px;
   height: calc(100% - #{$scrollbarHeight});
-  background-color: color(primary-n500);
+  background-color: color(primary-500);
   z-index: 5;
   pointer-events: none;
 }

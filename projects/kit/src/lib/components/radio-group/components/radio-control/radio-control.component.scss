@@ -20,7 +20,7 @@
   &:focus-visible {
     outline: none;
     &:not(.radio-control_disabled) {
-      outline: 2px solid color(primary-n500);
+      outline: 2px solid color(primary-500);
     }
   }
   padding: 2rem;
@@ -69,25 +69,25 @@
   }
 
   &_selected {
-    background: color(primary-n500);
+    background: color(primary-500);
     border: none;
 
     @include host-selector-dark-theme() {
-      background: color(primary-n500);
+      background: color(primary-500);
       border: none;
     }
   }
 
   &:focus-visible:not(.radio-control-marker_disabled) {
     transform: scale(1.14);
-    border: 2px solid color(primary-n400);
+    border: 2px solid color(primary-400);
     outline: none;
     &:not(.radio-control-marker_selected) {
-      background: color(primary-n500, 0.16);
+      background: color(primary-500, 0.16);
     }
 
     @include host-selector-dark-theme() {
-      border: 2px solid color(primary-n400);
+      border: 2px solid color(primary-400);
     }
   }
 
@@ -148,17 +148,17 @@
 
 .radio-control:hover:not(.radio-control_disabled) {
   .radio-control-marker {
-    background: color(primary-n500, 0.16);
-    border: 2px solid color(primary-n400);
+    background: color(primary-500, 0.16);
+    border: 2px solid color(primary-400);
     @include host-selector-dark-theme() {
-      background: color(primary-n500, 0.16);
-      border: 2px solid color(primary-n400);
+      background: color(primary-500, 0.16);
+      border: 2px solid color(primary-400);
     }
 
     &_selected {
-      background: color(primary-n400);
+      background: color(primary-400);
       @include host-selector-dark-theme() {
-        background: color(primary-n400);
+        background: color(primary-400);
       }
     }
   }
