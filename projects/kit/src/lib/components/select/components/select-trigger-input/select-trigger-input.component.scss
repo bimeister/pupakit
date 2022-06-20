@@ -34,7 +34,8 @@
 
     font-size: 3rem;
     line-height: 4rem;
-    @include font-type-regular();
+
+    @include font-preset-caption-xs();
 
     position: relative;
 
@@ -46,7 +47,7 @@
     }
 
     &::placeholder {
-      color: color(neutral-300);
+      color: color(neutral-50);
       width: 100%;
       text-align: left;
       opacity: 1;

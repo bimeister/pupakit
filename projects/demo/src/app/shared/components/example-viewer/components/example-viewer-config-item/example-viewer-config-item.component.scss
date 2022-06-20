@@ -13,7 +13,6 @@
   }
 
   &__name {
-    @include font-type-regular();
-    @include font-size-l();
+    @include font-preset-h4;
   }
 }
