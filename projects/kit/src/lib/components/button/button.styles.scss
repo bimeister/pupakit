@@ -283,7 +283,7 @@
         }
 
         .button__icon {
-          color: color(red-n500);
+          color: color(danger-500);
         }
       }
 
@@ -294,7 +294,7 @@
         }
 
         .button__icon {
-          color: color(red-n500);
+          color: color(danger-500);
         }
       }
     }
@@ -302,25 +302,25 @@
     .button__content,
     .button__loading,
     .button__icon {
-      color: color(red-n500);
+      color: color(danger-500);
     }
   }
 
   &_danger {
     .button__background {
-      background-color: color(red-n500);
+      background-color: color(danger-500);
     }
 
     &:not([disabled]) {
       @include hover() {
         .button__background {
-          background-color: color(red-n400);
+          background-color: color(danger-400);
         }
       }
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(red-n550);
+          background-color: color(danger-600);
         }
       }
     }

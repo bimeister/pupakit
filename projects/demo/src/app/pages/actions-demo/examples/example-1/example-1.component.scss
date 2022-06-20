@@ -5,13 +5,13 @@
   display: block;
   text-align: center;
   width: 96px;
-  background: color(red-n100);
+  background: color(danger-150);
   padding: 1rem 0;
   height: 10rem;
   box-sizing: border-box;
 
   @include host-selector-dark-theme() {
-    background: color(red-n200);
+    background: color(danger-200);
   }
 }
 

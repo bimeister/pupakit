@@ -12,12 +12,12 @@
 
 .block1 {
   @include hover() {
-    background-color: color(red-n500);
+    background-color: color(danger-500);
   }
 }
 
 .block2 {
   &:hover {
-    background-color: color(red-n500);
+    background-color: color(danger-500);
   }
 }

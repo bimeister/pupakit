@@ -9,7 +9,7 @@
   background-color: transparent;
 
   @include xs() {
-    background-color: color(red-n500);
+    background-color: color(danger-500);
   }
 
   @include sm() {
@@ -25,7 +25,7 @@
   }
 
   @include xlg() {
-    border-color: color(red-n500);
+    border-color: color(danger-500);
   }
 
   @include xl() {

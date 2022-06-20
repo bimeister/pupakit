@@ -17,10 +17,10 @@
   }
 
   @include height-less-than($height: 900) {
-    background-color: color(red-n550);
+    background-color: color(danger-600);
   }
 
   @include height-more-than($height: 1000) {
-    background: linear-gradient(90deg, color(primary-500) 0%, color(primary-400) 35%, color(red-n500) 100%);
+    background: linear-gradient(90deg, color(primary-500) 0%, color(primary-400) 35%, color(danger-500) 100%);
   }
 }

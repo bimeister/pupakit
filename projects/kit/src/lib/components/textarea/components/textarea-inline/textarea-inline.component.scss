@@ -85,10 +85,10 @@
     }
 
     &.textarea-inline_invalid {
-      border: 1px solid color(red-n400);
+      border: 1px solid color(danger-400);
 
       @include dark-theme-class-parent {
-        border: 1px solid color(red-n400);
+        border: 1px solid color(danger-400);
       }
     }
   }
