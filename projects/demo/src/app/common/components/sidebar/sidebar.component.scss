@@ -11,7 +11,7 @@
 .sidebar-content {
   height: 100%;
   width: 100%;
-  background: color(base-n0);
+  background: color(neutral-1);
 
   @include lt-md() {
     width: 100vw;
@@ -118,12 +118,10 @@
     }
 
     &:hover {
-      color: color(base-n700);
       background: color(base-white-n550);
     }
 
     &.active {
-      color: color(base-n700);
       background: color(base-white-n550);
       &::before {
         opacity: 1;
@@ -149,7 +147,7 @@
 
       &.active,
       &:hover {
-        color: color(base-n0);
+        color: color(neutral-1);
         background: color(base-dark-n500);
       }
     }

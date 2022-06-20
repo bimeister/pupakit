@@ -1,7 +1,7 @@
 @use 'functions' as *;
 
 .action-container {
-  background-color: color(base-n600);
+  background-color: color(neutral-1000);
   padding: 2rem 5rem;
 }
 
@@ -18,7 +18,7 @@
 
   &:hover {
     background-color: color(base-dark-n400, 1);
-    color: color(base-n0, 1);
+    color: color(neutral-1, 1);
   }
 }
 
@@ -30,6 +30,6 @@
   color: color(base-dark-n100, 1);
 
   &:hover {
-    color: color(base-n0, 1);
+    color: color(neutral-1, 1);
   }
 }

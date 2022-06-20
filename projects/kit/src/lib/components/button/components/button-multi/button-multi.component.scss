@@ -190,7 +190,7 @@
     .main__content,
     .expand,
     .main__loading {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
   }
 
@@ -213,7 +213,7 @@
             background-color: color(base-white-n400);
           }
           .button-multi__icon {
-            color: color(base-n0);
+            color: color(neutral-1);
           }
         }
       }
@@ -225,7 +225,7 @@
             background-color: color(base-white-n300);
           }
           .button-multi__icon {
-            color: color(base-n0);
+            color: color(neutral-1);
           }
         }
       }
@@ -233,7 +233,7 @@
     .main__content,
     .expand,
     .main__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
 
     @include host-selector-dark-theme() {
@@ -246,7 +246,7 @@
       .main__content,
       .expand,
       .main__loading {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
       &:not(.button-multi_disabled) {
         .expand,
@@ -259,7 +259,7 @@
               background-color: color(base-dark-n400);
             }
             .button-multi__icon {
-              color: color(base-n0);
+              color: color(neutral-1);
             }
           }
         }
@@ -271,7 +271,7 @@
               background-color: color(base-dark-n300);
             }
             .button-multi__icon {
-              color: color(base-n0);
+              color: color(neutral-1);
             }
           }
         }
@@ -309,7 +309,7 @@
     .main__content,
     .expand,
     .main__loading {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
   }
 
@@ -343,7 +343,7 @@
     .main__content,
     .expand,
     .main__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
   }
 
@@ -367,7 +367,7 @@
             background-color: color(base-white-n400);
           }
           .button-multi__icon {
-            color: color(base-n600);
+            color: color(neutral-1000);
           }
         }
       }
@@ -379,7 +379,7 @@
             background-color: color(base-white-n300);
           }
           .button-multi__icon {
-            color: color(base-n600);
+            color: color(neutral-1000);
           }
         }
       }
@@ -387,7 +387,7 @@
     .main__content,
     .expand,
     .main__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
     @include host-selector-dark-theme() {
       .expand__background {
@@ -403,7 +403,7 @@
       .main__content,
       .expand,
       .main__loading {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
       &:not(.button-multi_disabled) {
         .expand,
@@ -413,7 +413,7 @@
               background-color: color(base-dark-n400);
             }
             .button-multi__icon {
-              color: color(base-n0);
+              color: color(neutral-1);
             }
           }
         }
@@ -425,7 +425,7 @@
               background-color: color(base-dark-n300);
             }
             .button-multi__icon {
-              color: color(base-n0);
+              color: color(neutral-1);
             }
           }
         }

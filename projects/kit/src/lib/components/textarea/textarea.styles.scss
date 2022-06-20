@@ -103,21 +103,21 @@
 
 // container colors
 .textarea {
-  color: color(base-n600);
+  color: color(neutral-1000);
   background-color: color(base-white-n500);
 
   @include dark-theme-class-parent {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(base-dark-n500);
   }
 }
 
 // control colors
 .textarea__control {
-  color: color(base-n600);
+  color: color(neutral-1000);
 
   @include dark-theme-class-parent {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 }
 
@@ -147,10 +147,10 @@
     }
 
     .textarea__control::placeholder {
-      color: color(base-n600);
+      color: color(neutral-1000);
 
       @include dark-theme-class-parent {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
     }
   }
@@ -163,18 +163,18 @@
     }
 
     .textarea__control {
-      color: color(base-n600);
+      color: color(neutral-1000);
 
       @include dark-theme-class-parent {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
     }
 
     .textarea__control::placeholder {
-      color: color(base-n600);
+      color: color(neutral-1000);
 
       @include dark-theme-class-parent {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
     }
   }

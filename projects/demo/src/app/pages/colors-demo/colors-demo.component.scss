@@ -28,7 +28,7 @@
   box-sizing: border-box;
   padding: 4rem;
   border-radius: 1px;
-  color: color(base-n0);
+  color: color(neutral-1);
 
   @include grid-size($xs: 4, $sm: 4, $md: 4, $lg: 4, $xlg: 4, $xl: 4, $xxl: 4);
   @include font-preset-caption-m;
@@ -43,7 +43,7 @@
   }
 
   &_inverted {
-    color: color(base-n600);
+    color: color(neutral-1000);
   }
 
   &__name {

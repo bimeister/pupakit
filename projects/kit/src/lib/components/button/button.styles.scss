@@ -159,7 +159,7 @@
 
     .button__content,
     .button__loading {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
   }
 
@@ -245,7 +245,7 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
 
@@ -256,14 +256,14 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
     }
 
     .button__content,
     .button__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
 
     .button__icon {
@@ -327,7 +327,7 @@
 
     .button__content,
     .button__loading {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
   }
 
@@ -353,7 +353,7 @@
 
     .button__content,
     .button__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
   }
 
@@ -369,7 +369,7 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
 
@@ -380,14 +380,14 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
     }
 
     .button__content,
     .button__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
 
     .button__icon {
@@ -410,7 +410,7 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
 
@@ -421,14 +421,14 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
     }
 
     .button__content,
     .button__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
 
     .button__icon {
@@ -451,7 +451,7 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
 
@@ -462,14 +462,14 @@
         }
 
         .button__icon {
-          color: color(base-n600);
+          color: color(neutral-1000);
         }
       }
     }
 
     .button__content,
     .button__loading {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
 
     .button__icon {
@@ -628,7 +628,7 @@
           }
 
           .button__icon {
-            color: color(base-n0);
+            color: color(neutral-1);
           }
         }
 
@@ -639,14 +639,14 @@
           }
 
           .button__icon {
-            color: color(base-n0);
+            color: color(neutral-1);
           }
         }
       }
 
       .button__content,
       .button__loading {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
 
       .button__icon {
@@ -677,7 +677,7 @@
     @include host-selector-dark-theme() {
       .button__background {
         background-color: transparent;
-        border: 1px solid color(base-n0);
+        border: 1px solid color(neutral-1);
       }
     }
   }

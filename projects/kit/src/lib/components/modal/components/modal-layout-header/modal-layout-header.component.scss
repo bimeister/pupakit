@@ -9,13 +9,13 @@
   box-sizing: border-box;
   height: 14rem;
   padding: 4rem 6rem;
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
 
   box-shadow: 0px -1px 0px 0px color(base-white-n400) inset;
 
   @include host-selector-dark-theme() {
     box-shadow: 0px -1px 0px 0px color(base-dark-n400) inset;
-    background-color: color(base-n600);
+    background-color: color(neutral-1000);
   }
 
   @include xs() {

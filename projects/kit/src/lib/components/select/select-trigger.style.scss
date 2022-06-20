@@ -24,7 +24,7 @@
   border-radius: $controlBorderRadius;
   border: none;
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   background-color: color(base-white-n500);
 
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
@@ -99,7 +99,7 @@
     align-items: center;
     justify-content: center;
 
-    color: color(base-n600);
+    color: color(neutral-1000);
     font-size: 3rem;
     margin-left: 1rem;
     transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -114,7 +114,7 @@
 // dark styles
 .trigger {
   @include host-selector-dark-theme() {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(base-dark-n500);
 
     &:not(.trigger_disabled) {
@@ -126,7 +126,7 @@
     }
 
     &__rotate-icon {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
 
     &_active {

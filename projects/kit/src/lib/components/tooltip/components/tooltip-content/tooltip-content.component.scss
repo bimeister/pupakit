@@ -2,7 +2,6 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
-$tooltip_background-color: color(base-n700, 0.8);
 $tooltip_max-text-lines-count: 13;
 
 .tooltip {
@@ -15,13 +14,13 @@ $tooltip_max-text-lines-count: 13;
   }
 
   &__content-container {
-    background-color: $tooltip_background-color;
-    backdrop-filter: blur(10px);
+    background-color: color(neutral-1000, 0.8);
+    backdrop-filter: blur(6rem);
 
     border-radius: 1px;
     box-sizing: border-box;
     padding: 1rem 2rem;
-    color: color('base-n0');
+    color: color('neutral-1');
 
     @include font-type-regular();
     @include font-size-xs($paragraph: true);

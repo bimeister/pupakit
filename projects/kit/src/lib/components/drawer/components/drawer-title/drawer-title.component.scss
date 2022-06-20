@@ -21,11 +21,11 @@
   }
 
   @include font-type-medium();
-  color: color(base-n600);
+  color: color(neutral-1000);
 
   @include flex-container(row, center, space-between);
 
   @include host-selector-dark-theme() {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 }

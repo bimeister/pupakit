@@ -12,17 +12,17 @@
   backdrop-filter: blur(5px);
   border-radius: 1rem;
   gap: 2rem;
-  color: color(base-n600);
+  color: color(neutral-1000);
 
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
   @include host-selector-dark-theme {
     background-color: color(base-dark-n275);
   }
 
   @include supports-backdrop-blur {
-    background-color: color(base-n0, 0.75);
+    background-color: color(neutral-1, 0.75);
     @include host-selector-dark-theme {
-      background-color: color(base-n600, 0.75);
+      background-color: color(neutral-1000, 0.75);
     }
   }
 }
@@ -50,9 +50,9 @@
   @include font-size-m;
   @include font-type-regular;
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   @include host-selector-dark-theme {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 }
 

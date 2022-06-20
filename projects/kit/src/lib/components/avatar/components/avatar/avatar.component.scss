@@ -16,7 +16,7 @@
     background-color: color(base-white-n275);
 
     .avatar__icon {
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
   }
 
@@ -32,7 +32,7 @@
       color: color(base-dark-n500);
 
       @include host-selector-dark-theme {
-        color: color(base-n0);
+        color: color(neutral-1);
       }
     }
   }
@@ -104,6 +104,6 @@
   }
 
   &_bordered {
-    border: 1px solid color(base-n0);
+    border: 1px solid color(neutral-1);
   }
 }

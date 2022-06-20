@@ -6,7 +6,7 @@
   position: relative;
   cursor: default;
   @include font-preset-caption-xs();
-  color: color(base-n600);
+  color: color(neutral-1000);
   transition: color 0.2s ease;
 
   text-overflow: inherit;
@@ -69,7 +69,7 @@
   }
 
   @include host-selector-dark-theme() {
-    color: color(base-n0);
+    color: color(neutral-1);
 
     &.status__neutral {
       color: color(base-dark-n100);

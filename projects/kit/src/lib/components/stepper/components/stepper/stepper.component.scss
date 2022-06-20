@@ -39,9 +39,9 @@
   width: 23.75rem;
   height: 10rem;
 
-  background: linear-gradient(270deg, color(base-n0) 0%, color(base-n0, 0) 87.96%);
+  background: linear-gradient(270deg, color(neutral-1) 0%, color(neutral-1, 0) 87.96%);
   @include host-selector-dark-theme {
-    background: linear-gradient(270deg, color(base-n600) 0%, color(base-n0, 0) 87.96%);
+    background: linear-gradient(270deg, color(neutral-1000) 0%, color(neutral-1, 0) 87.96%);
   }
 
   &_left {

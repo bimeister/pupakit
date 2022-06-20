@@ -59,12 +59,12 @@
   height: 3.5rem;
   box-sizing: border-box;
   border-radius: 50%;
-  background: color(base-n0);
+  background: color(neutral-1);
   border: 1px solid color(base-white-n200);
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
     transform variable(transition-duration_shorter) variable(transition-timing-function_common);
   @include host-selector-dark-theme() {
-    background: color(base-n600);
+    background: color(neutral-1000);
     border: 1px solid color(base-dark-n100);
   }
 
@@ -104,9 +104,9 @@
   }
 
   &_selected .radio-control-marker__dot {
-    background: color(base-n0);
+    background: color(neutral-1);
     @include host-selector-dark-theme() {
-      background: color(base-n600);
+      background: color(neutral-1000);
     }
   }
 

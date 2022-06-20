@@ -5,7 +5,7 @@
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
   background: color(base-white-n300);
-  color: color(base-n600);
+  color: color(neutral-1000);
 
   vertical-align: middle;
 
@@ -17,6 +17,6 @@
 
   @include host-selector-dark-theme() {
     background: color(base-dark-n300);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 }

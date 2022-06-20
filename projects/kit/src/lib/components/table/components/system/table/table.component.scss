@@ -132,18 +132,18 @@ $scrollbarHeight: 12px;
   display: flex;
   box-sizing: border-box;
   min-width: 100%;
-  border-bottom: 1px solid color(base-n0);
+  border-bottom: 1px solid color(neutral-1);
   background-color: color(base-white-n500);
 
   &_hovered,
   &_selected {
-    background-color: color('base-n0');
+    background-color: color('neutral-1');
   }
 }
 
 .table-row_header {
   height: 100%;
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
   border-bottom: 1px solid color(base-white-n400);
   border-top: 1px solid color(base-white-n400);
 
@@ -154,7 +154,7 @@ $scrollbarHeight: 12px;
 
 .table-row_decor {
   height: 100%;
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
 }
 
 .table-row_placeholder {

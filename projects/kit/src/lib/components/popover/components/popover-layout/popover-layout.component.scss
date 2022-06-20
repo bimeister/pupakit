@@ -11,7 +11,7 @@ $pointer-width: 14px;
   flex-direction: column;
   border: 1px solid color(base-white-n400);
   border-radius: 1rem 1rem 0 0;
-  background: color(base-n0);
+  background: color(neutral-1);
 
   @include xs {
     height: 100%;
@@ -21,7 +21,7 @@ $pointer-width: 14px;
   @include host-selector-dark-theme {
     background: color(base-dark-n500);
     border-color: color(base-dark-n400);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   @include host-selector('.pointer__top-left, .pointer__top-right') {
@@ -35,7 +35,7 @@ $pointer-width: 14px;
 
 .popover-pointer {
   position: absolute;
-  fill: color(base-n0);
+  fill: color(neutral-1);
 
   &__line {
     stroke: color(base-white-n400);

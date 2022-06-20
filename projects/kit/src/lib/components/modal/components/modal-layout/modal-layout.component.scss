@@ -43,7 +43,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
 
   @include host-selector-dark-theme {
     background-color: color(base-dark-n500);

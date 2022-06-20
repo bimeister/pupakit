@@ -23,8 +23,8 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
   border: 1px solid transparent;
 
   box-shadow: 0 1px 7px $normal-shadow-color;
-  background: color(base-n0);
-  color: color(base-n600);
+  background: color(neutral-1);
+  color: color(neutral-1000);
   outline: none;
 
   &__title {
@@ -33,7 +33,7 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
 
   @include host-selector-dark-theme() {
     background: color(base-dark-n400);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 }
 

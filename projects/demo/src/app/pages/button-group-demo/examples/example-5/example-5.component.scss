@@ -23,7 +23,7 @@
 
   .switcher-label {
     @include host-selector-dark-theme() {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
     margin-right: 2rem;
   }

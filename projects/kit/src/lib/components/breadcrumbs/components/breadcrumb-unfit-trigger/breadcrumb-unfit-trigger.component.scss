@@ -24,14 +24,14 @@ $adaptive-property: 'max-width';
   &:not(.trigger_active) {
     @include hover() {
       background-color: color(base-white-n400);
-      color: color(base-n600);
+      color: color(neutral-1000);
     }
   }
 
   &_active,
   &:active {
     background-color: color(base-white-n400);
-    color: color(base-n600);
+    color: color(neutral-1000);
   }
 
   &:focus-visible {
@@ -52,13 +52,13 @@ $adaptive-property: 'max-width';
     &:not(.trigger_active) {
       @include hover() {
         background-color: color(base-dark-n400);
-        color: color(base-n0);
+        color: color(neutral-1);
       }
     }
 
     &_active,
     &:active {
-      color: color(base-n0);
+      color: color(neutral-1);
       background-color: color(base-dark-n400);
     }
   }

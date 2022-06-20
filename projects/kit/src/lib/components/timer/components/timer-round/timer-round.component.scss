@@ -16,7 +16,7 @@
   color: color(base-white-n100);
 
   @include host-selector-dark-theme {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   &__svg {
