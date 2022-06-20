@@ -23,11 +23,11 @@
   }
 
   &_active {
-    background: color(primary-n600);
+    background: color(primary-600);
     color: color(neutral-1);
 
     @include host-selector-dark-theme {
-      background: color(primary-n400);
+      background: color(primary-400);
     }
   }
 

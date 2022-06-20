@@ -132,25 +132,25 @@
 }
 
 .tag_primary:not(.tag_disabled) {
-  background-color: color(primary-n100);
-  color: color(primary-n600);
+  background-color: color(primary-50);
+  color: color(primary-600);
 
   &.tag_clickable {
-    box-shadow: shadow-helper(primary-n200);
+    box-shadow: shadow-helper(primary-150);
     @include hover() {
-      background-color: color(primary-n200);
+      background-color: color(primary-150);
     }
   }
 
   &.tag_bold {
     color: color(neutral-1);
-    background-color: color(primary-n500);
-    box-shadow: shadow-helper(primary-n500);
+    background-color: color(primary-500);
+    box-shadow: shadow-helper(primary-500);
 
     &.tag_clickable {
-      box-shadow: shadow-helper(primary-n400);
+      box-shadow: shadow-helper(primary-400);
       @include hover() {
-        background-color: color(primary-n400);
+        background-color: color(primary-400);
       }
     }
   }
@@ -160,7 +160,7 @@
   cursor: pointer;
 
   &:focus-visible:not(.tag_disabled) {
-    box-shadow: shadow-helper(primary-n400, 2px);
+    box-shadow: shadow-helper(primary-400, 2px);
   }
 }
 

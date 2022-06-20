@@ -33,11 +33,11 @@
   height: 100%;
   display: flex;
   align-items: center;
-  background-color: color(primary-n300);
+  background-color: color(primary-200);
   box-sizing: border-box;
   padding: 0 2rem;
 
   @include host-selector-dark-theme() {
-    background: color(primary-n500);
+    background: color(primary-500);
   }
 }

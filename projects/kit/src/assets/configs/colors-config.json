@@ -128,63 +128,63 @@
     "name": "Primary",
     "colors": [
       {
-        "name": "primary-new-40",
+        "name": "primary-40",
         "hex": "E9EFFF"
       },
       {
-        "name": "primary-new-50",
+        "name": "primary-50",
         "hex": "D5E0FF"
       },
       {
-        "name": "primary-new-100",
+        "name": "primary-100",
         "hex": "C0D2FF"
       },
       {
-        "name": "primary-new-150",
+        "name": "primary-150",
         "hex": "ACC3FF"
       },
       {
-        "name": "primary-new-200",
+        "name": "primary-200",
         "hex": "97B5FF"
       },
       {
-        "name": "primary-new-300",
+        "name": "primary-300",
         "hex": "6F98FF"
       },
       {
-        "name": "primary-new-400",
+        "name": "primary-400",
         "hex": "467BFF"
       },
       {
-        "name": "primary-new-500",
+        "name": "primary-500",
         "hex": "1D5EFF"
       },
       {
-        "name": "primary-new-600",
+        "name": "primary-600",
         "hex": "1750DC"
       },
       {
-        "name": "primary-new-700",
+        "name": "primary-700",
         "hex": "1142B9"
       },
       {
-        "name": "primary-new-800",
+        "name": "primary-800",
         "hex": "0C3396"
       },
       {
-        "name": "primary-new-850",
+        "name": "primary-850",
         "hex": "092C84"
       },
       {
-        "name": "primary-new-900",
+        "name": "primary-900",
         "hex": "062573"
       },
       {
-        "name": "primary-new-950",
+        "name": "primary-950",
         "hex": "031E62"
       },
       {
-        "name": "primary-new-1000",
+        "name": "primary-1000",
         "hex": "001750"
       }
     ]
@@ -456,59 +456,6 @@
       {
         "name": "Base/White/N100",
         "hex": "3D5159"
-      }
-    ]
-  },
-  {
-    "name": "Primary",
-    "colors": [
-      {
-        "name": "Primary/N900",
-        "hex": "002445"
-      },
-      {
-        "name": "Primary/N800",
-        "hex": "003A71"
-      },
-      {
-        "name": "Primary/N700",
-        "hex": "0056A7"
-      },
-      {
-        "name": "Primary/N600",
-        "hex": "0065C3"
-      },
-      {
-        "name": "Primary/N500",
-        "hex": "0070D8"
-      },
-      {
-        "name": "Primary/N400",
-        "hex": "198BF5"
-      },
-      {
-        "name": "Primary/N350",
-        "hex": "50A7F8"
-      },
-      {
-        "name": "Primary/N300",
-        "hex": "7EBEF9"
-      },
-      {
-        "name": "Primary/N200",
-        "hex": "A3D1FB"
-      },
-      {
-        "name": "Primary/N150",
-        "hex": "C8E3FD"
-      },
-      {
-        "name": "Primary/N100",
-        "hex": "DCEEFF"
-      },
-      {
-        "name": "Primary/N50",
-        "hex": "EDF6FF"
       }
     ]
   },

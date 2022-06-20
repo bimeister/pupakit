@@ -1,7 +1,7 @@
 :host {
   --color_primary-n550: 44, 112, 17;
-  --color_primary-n500: 25, 154, 31;
-  --color_primary-n400: 34, 210, 29;
+  --color_primary-500: 25, 154, 31;
+  --color_primary-400: 34, 210, 29;
 }
 
 .usage-example {

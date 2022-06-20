@@ -91,7 +91,7 @@
         right: -2px;
         bottom: -2px;
 
-        border: 2px solid color(primary-n400);
+        border: 2px solid color(primary-400);
         border-radius: 2px;
       }
     }
@@ -139,20 +139,20 @@
 .button {
   &_primary {
     .button__background {
-      background-color: color(primary-n500);
+      background-color: color(primary-500);
     }
 
     &:not([disabled]) {
       @include hover() {
         .button__background {
-          background-color: color(primary-n400);
+          background-color: color(primary-400);
         }
       }
 
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(primary-n600);
+          background-color: color(primary-600);
         }
       }
     }
@@ -165,28 +165,28 @@
 
   &_primary-secondary {
     .button__background {
-      background-color: color(primary-n50);
+      background-color: color(primary-40);
     }
 
     &:not([disabled]) {
       @include hover() {
         .button__background {
-          background-color: color(primary-n100);
+          background-color: color(primary-50);
         }
         .button__content,
         .button__icon {
-          color: color(primary-n700);
+          color: color(primary-700);
         }
       }
 
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(primary-n150);
+          background-color: color(primary-100);
         }
         .button__content,
         .button__icon {
-          color: color(primary-n800);
+          color: color(primary-800);
         }
       }
     }
@@ -194,7 +194,7 @@
     .button__content,
     .button__icon,
     .button__loading {
-      color: color(primary-n600);
+      color: color(primary-600);
     }
   }
 
@@ -206,22 +206,22 @@
     &:not([disabled]) {
       @include hover() {
         .button__background {
-          background-color: color(primary-n100);
+          background-color: color(primary-50);
         }
         .button__content,
         .button__icon {
-          color: color(primary-n700);
+          color: color(primary-700);
         }
       }
 
       &:active,
       &.button_active {
         .button__background {
-          background-color: color(primary-n150);
+          background-color: color(primary-100);
         }
         .button__content,
         .button__icon {
-          color: color(primary-n800);
+          color: color(primary-800);
         }
       }
     }
@@ -229,7 +229,7 @@
     .button__content,
     .button__icon,
     .button__loading {
-      color: color(primary-n600);
+      color: color(primary-600);
     }
   }
 
@@ -504,7 +504,7 @@
       .button__content,
       .button__loading,
       .button__icon {
-        color: color(primary-n350);
+        color: color(primary-300);
       }
     }
 
@@ -529,28 +529,28 @@
   &_primary-secondary {
     @include host-selector-dark-theme() {
       .button__background {
-        background-color: color(primary-n900);
+        background-color: color(primary-850);
       }
 
       &:not([disabled]) {
         @include hover() {
           .button__background {
-            background-color: color(primary-n800);
+            background-color: color(primary-800);
           }
           .button__content,
           .button__icon {
-            color: color(primary-n150);
+            color: color(primary-100);
           }
         }
 
         &:active,
         &.button_active {
           .button__background {
-            background-color: color(primary-n700);
+            background-color: color(primary-700);
           }
           .button__content,
           .button__icon {
-            color: color(primary-n100);
+            color: color(primary-50);
           }
         }
       }
@@ -558,7 +558,7 @@
       .button__content,
       .button__icon,
       .button__loading {
-        color: color(primary-n200);
+        color: color(primary-150);
       }
     }
   }
@@ -567,22 +567,22 @@
       &:not([disabled]) {
         @include hover() {
           .button__background {
-            background-color: color(primary-n800);
+            background-color: color(primary-800);
           }
           .button__content,
           .button__icon {
-            color: color(primary-n150);
+            color: color(primary-100);
           }
         }
 
         &:active,
         &.button_active {
           .button__background {
-            background-color: color(primary-n700);
+            background-color: color(primary-700);
           }
           .button__content,
           .button__icon {
-            color: color(primary-n100);
+            color: color(primary-50);
           }
         }
       }
@@ -590,7 +590,7 @@
       .button__content,
       .button__icon,
       .button__loading {
-        color: color(primary-n200);
+        color: color(primary-150);
       }
     }
   }
@@ -705,7 +705,7 @@
 
       &.button_primary-secondary {
         .button__background {
-          background-color: color(primary-n900);
+          background-color: color(primary-850);
           border: none;
         }
       }
@@ -714,7 +714,7 @@
         .button__content,
         .button__loading,
         .button__icon {
-          color: color(primary-n600);
+          color: color(primary-600);
         }
       }
 
@@ -722,7 +722,7 @@
         .button__content,
         .button__loading,
         .button__icon {
-          color: color(primary-n700);
+          color: color(primary-700);
         }
       }
 
