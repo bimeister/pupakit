@@ -7,7 +7,7 @@
 
 .header-cell {
   display: block;
-  background-color: color('neutral-1');
+  background-color: color(neutral-1);
   margin-right: 1px;
   box-sizing: border-box;
   height: 100%;
@@ -15,7 +15,7 @@
   position: relative;
 
   &:hover {
-    background-color: color('base-white-n400');
+    background-color: color(base-white-n400);
   }
 
   &::after {
@@ -23,7 +23,7 @@
     display: block;
     width: 1px;
     height: 100%;
-    background-color: color('base-white-n400');
+    background-color: color(base-white-n400);
     position: absolute;
     right: -1px;
     top: 0;

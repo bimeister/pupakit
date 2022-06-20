@@ -152,17 +152,17 @@ $color_dark: 'base-dark-n275';
   height: 100%;
   backdrop-filter: blur(4px);
   box-sizing: content-box;
-  background-color: color('#{$color_light}', 0.9);
+  background-color: color(#{$color_light}, 0.9);
 
   @include supports-backdrop-blur {
-    background-color: color('#{$color_light}', 0.5);
+    background-color: color(#{$color_light}, 0.5);
   }
 
   @include host-selector-dark-theme {
-    background-color: color('#{$color_dark}', 0.9);
+    background-color: color(#{$color_dark}, 0.9);
 
     @include supports-backdrop-blur {
-      background-color: color('#{$color_dark}', 0.4);
+      background-color: color(#{$color_dark}, 0.4);
     }
   }
 }

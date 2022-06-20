@@ -16,40 +16,40 @@
   user-select: none;
   text-align: center;
 
-  color: color('base-white-n100');
+  color: color(base-white-n100);
   @include host-selector-dark-theme {
-    color: color('base-dark-n100');
+    color: color(base-dark-n100);
   }
 
   &:not(&_disabled):not(&_active) {
     @include hover {
-      background-color: color('base-white-n400');
-      color: color('neutral-1000');
+      background-color: color(base-white-n400);
+      color: color(neutral-1000);
 
       @include host-selector-dark-theme {
-        background-color: color('base-dark-n400');
-        color: color('neutral-1');
+        background-color: color(base-dark-n400);
+        color: color(neutral-1);
       }
     }
   }
 
   &_active {
     background-color: transparent;
-    color: color('neutral-1000');
+    color: color(neutral-1000);
 
     box-shadow: 0px 2px 8px color(neutral-1000, 0.03);
 
     @include host-selector-dark-theme {
-      color: color('neutral-1');
+      color: color(neutral-1);
     }
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: color('base-white-n250');
+    color: color(base-white-n250);
 
     @include host-selector-dark-theme {
-      color: color('base-dark-n250');
+      color: color(base-dark-n250);
     }
   }
 

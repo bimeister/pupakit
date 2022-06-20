@@ -22,10 +22,10 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: color('base-white-n275', 0.5);
+    background-color: color(base-white-n275, 0.5);
 
     @include host-selector-dark-theme {
-      background-color: color('base-dark-n275', 0.4);
+      background-color: color(base-dark-n275, 0.4);
     }
   }
 }
