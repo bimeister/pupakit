@@ -41,9 +41,9 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
   border: 0.5rem solid transparent;
   cursor: pointer;
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   @include host-selector-dark-theme {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   @include transition();
@@ -68,16 +68,16 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
   }
 
   &.selected {
-    color: color(base-n600);
+    color: color(neutral-1000);
     @include host-selector-dark-theme {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
   }
 
   &.selected &__content {
     box-shadow: 1px 1px 5px $box-shadow-selector-item-color;
 
-    background: color(base-n0);
+    background: color(neutral-1);
     @include host-selector-dark-theme {
       background: color(base-dark-n300);
     }

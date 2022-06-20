@@ -15,7 +15,7 @@
   box-sizing: border-box;
   padding: 2rem 20px 2rem 4rem;
   @include font-preset-h6;
-  background-color: color('base-n0');
+  background-color: color('neutral-1');
   color: color('base-white-n100');
   line-height: 17px;
 
@@ -37,7 +37,7 @@
 
   &:hover {
     background-color: color('base-white-n400');
-    color: color('base-n600');
+    color: color('neutral-1000');
   }
 
   @include xs() {

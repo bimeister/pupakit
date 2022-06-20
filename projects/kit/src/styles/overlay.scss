@@ -8,10 +8,10 @@
 */
 
 @mixin apply-background() {
-  background-color: color(base-n600, 0.94);
+  background-color: color(neutral-1000, 0.94);
 
   &#{$darkThemeClass} {
-    background-color: color(base-n700, 0.88);
+    background-color: color(neutral-1000, 0.88);
   }
 }
 

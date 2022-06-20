@@ -19,19 +19,19 @@ $height_item-container: 75rem;
     padding: 0;
 
     &__loader {
-      background-color: color(base-n0, 0.8);
+      background-color: color(neutral-1, 0.8);
 
       @include dark-theme-class-parent() {
-        background-color: color(base-n600, 0.8);
-        color: color(base-n0);
+        background-color: color(neutral-1000, 0.8);
+        color: color(neutral-1);
       }
     }
 
     .viewport {
-      background-color: color(base-n0);
+      background-color: color(neutral-1);
 
       @include dark-theme-class-parent() {
-        background-color: color(base-n600);
+        background-color: color(neutral-1000);
       }
     }
 
@@ -45,8 +45,8 @@ $height_item-container: 75rem;
         line-height: 4rem;
         @include font-type-regular();
 
-        background-color: color(base-n0);
-        color: color(base-n600);
+        background-color: color(neutral-1);
+        color: color(neutral-1000);
 
         transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
           background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -60,8 +60,8 @@ $height_item-container: 75rem;
         }
 
         @include dark-theme-class-parent() {
-          background-color: color(base-n600);
-          color: color(base-n0);
+          background-color: color(neutral-1000);
+          color: color(neutral-1);
 
           @include hover() {
             background-color: color(base-dark-n400);

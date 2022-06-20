@@ -2,11 +2,11 @@
 
 $input_light_styles: (
   input: (
-    color: color(base-n600),
-    caret-color: color(base-n600),
+    color: color(neutral-1000),
+    caret-color: color(neutral-1000),
     background-color: color(base-white-n500),
     placeholder: (
-      color: color(base-n600),
+      color: color(neutral-1000),
     ),
   ),
   hover: (
@@ -35,11 +35,11 @@ $input_light_styles: (
 
 $input_dark_styles: (
   input: (
-    color: color(base-n0),
-    caret-color: color(base-n0),
+    color: color(neutral-1),
+    caret-color: color(neutral-1),
     background-color: color(base-dark-n500),
     placeholder: (
-      color: color(base-n0),
+      color: color(neutral-1),
     ),
   ),
   hover: (

@@ -35,10 +35,10 @@
 
 .tag_default:not(.tag_disabled) {
   background-color: color(base-white-n300);
-  color: color(base-n600);
+  color: color(neutral-1000);
   @include host-selector-dark-theme() {
     background-color: color(base-dark-n300);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   &.tag_clickable {
@@ -68,7 +68,7 @@
   }
 
   &.tag_bold {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(red-n500);
     box-shadow: shadow-helper(red-n500);
 
@@ -83,7 +83,7 @@
 
 .tag_yellow:not(.tag_disabled) {
   background-color: color(yellow-n100);
-  color: color(base-n600);
+  color: color(neutral-1000);
 
   &.tag_clickable {
     box-shadow: shadow-helper(yellow-n200);
@@ -93,7 +93,7 @@
   }
 
   &.tag_bold {
-    color: color(base-n600);
+    color: color(neutral-1000);
     background-color: color(yellow-n500);
     box-shadow: shadow-helper(yellow-n500);
 
@@ -118,7 +118,7 @@
   }
 
   &.tag_bold {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(green-n500);
     box-shadow: shadow-helper(green-n500);
 
@@ -143,7 +143,7 @@
   }
 
   &.tag_bold {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(primary-n500);
     box-shadow: shadow-helper(primary-n500);
 
@@ -165,7 +165,7 @@
 }
 
 .tag_with-border:not(.tag_clickable:focus-visible):not(.tag_disabled) {
-  box-shadow: shadow-helper(base-n0);
+  box-shadow: shadow-helper(neutral-1);
 }
 
 .tag_small {

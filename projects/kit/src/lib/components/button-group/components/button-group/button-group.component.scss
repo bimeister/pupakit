@@ -41,13 +41,13 @@ $container-padding: 4px;
     width: 0;
     height: 100%;
     transition: transform 0.25s ease-in-out;
-    background-color: color('base-n0');
+    background-color: color('neutral-1');
     color: color('primary-n500');
     border-radius: $controlBorderRadius;
 
     @include host-selector-dark-theme {
       background-color: color('base-dark-n300');
-      color: color('base-n0');
+      color: color('neutral-1');
     }
   }
 }

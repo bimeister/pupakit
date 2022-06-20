@@ -59,9 +59,9 @@
     margin-right: 3rem;
   }
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   @include host-selector-dark-theme {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   &_grabbing {

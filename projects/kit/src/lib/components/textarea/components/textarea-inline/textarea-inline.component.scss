@@ -43,10 +43,10 @@
 
 // control colors
 .textarea-inline {
-  color: color(base-n600);
+  color: color(neutral-1000);
 
   @include dark-theme-class-parent {
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   .textarea-inline__placeholder {
@@ -76,10 +76,10 @@
       }
 
       .textarea-inline__placeholder {
-        color: color(base-n600);
+        color: color(neutral-1000);
 
         @include dark-theme-class-parent {
-          color: color(base-n0);
+          color: color(neutral-1);
         }
       }
     }
@@ -193,11 +193,11 @@
   .textarea:not(.textarea_disabled) {
     border-color: transparent;
     &:focus-within {
-      background-color: color(base-n0);
+      background-color: color(neutral-1);
       border: 1px solid color(base-white-n275);
 
       @include dark-theme-class-parent {
-        background-color: color(base-n600);
+        background-color: color(neutral-1000);
         border: 1px solid color(base-dark-n275);
       }
 

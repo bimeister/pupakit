@@ -13,8 +13,8 @@
   cursor: pointer;
   position: relative;
 
-  background-color: color(base-n0);
-  color: color(base-n600);
+  background-color: color(neutral-1);
+  color: color(neutral-1000);
 
   padding: 1rem 5rem;
   user-select: none;
@@ -47,13 +47,13 @@
   &:not(.option_disabled) {
     @include hover() {
       background-color: color(base-white-n400);
-      --select-option-icon-color: #{color(base-n600)};
+      --select-option-icon-color: #{color(neutral-1000)};
     }
   }
 
   &_disabled {
     cursor: not-allowed;
-    background-color: color(base-n0);
+    background-color: color(neutral-1);
     color: color(base-white-n275);
     --select-option-icon-color: #{color(base-white-n250)};
   }
@@ -70,20 +70,20 @@
 // dark styles
 .option {
   @include host-selector-dark-theme() {
-    background-color: color(base-n600);
-    color: color(base-n0);
+    background-color: color(neutral-1000);
+    color: color(neutral-1);
 
     --select-option-icon-color: #{color(base-dark-n100)};
 
     &:not(.option_disabled) {
       @include hover() {
         background-color: color(base-dark-n400);
-        --select-option-icon-color: #{color(base-n0)};
+        --select-option-icon-color: #{color(neutral-1)};
       }
     }
 
     &_disabled {
-      background-color: color(base-n600);
+      background-color: color(neutral-1000);
       color: color(base-dark-n275);
       --select-option-icon-color: #{color(base-dark-n250)};
     }

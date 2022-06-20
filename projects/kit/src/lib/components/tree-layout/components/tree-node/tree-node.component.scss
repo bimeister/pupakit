@@ -12,7 +12,7 @@
   height: 100%;
   display: flex;
   align-items: center;
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
   border-radius: $controlBorderRadius;
   cursor: pointer;
   @include no-tap-highlight();
@@ -41,7 +41,7 @@
     margin: 1rem 0 1rem auto;
     padding-left: 4rem;
     padding-right: 2rem;
-    background: linear-gradient(90deg, color(base-n0, 0.8) -95%, color(base-n0) 70%);
+    background: linear-gradient(90deg, color(neutral-1, 0.8) -95%, color(neutral-1) 70%);
 
     &-container {
       position: relative;
@@ -72,7 +72,7 @@
   &__text {
     @include font-preset-caption-xs();
 
-    color: color(base-n600);
+    color: color(neutral-1000);
     white-space: nowrap;
     padding-right: 4rem;
   }
@@ -116,10 +116,10 @@
   &--disabled {
     &.tree-node {
       cursor: not-allowed;
-      background-color: color(base-n0);
+      background-color: color(neutral-1);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(base-n0, 0.8) -95%, color(base-n0) 70%);
+        background: linear-gradient(90deg, color(neutral-1, 0.8) -95%, color(neutral-1) 70%);
       }
 
       .tree-node__text {
@@ -147,14 +147,14 @@
   }
 
   @include host-selector-dark-theme() {
-    background-color: color(base-n600);
+    background-color: color(neutral-1000);
 
     &__right {
-      background: linear-gradient(90deg, color(base-n600, 0.8) -95%, color(base-n600) 70%);
+      background: linear-gradient(90deg, color(neutral-1000, 0.8) -95%, color(neutral-1000) 70%);
     }
 
     &__text {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
 
     @include hover {
@@ -182,10 +182,10 @@
     }
 
     &.tree-node--disabled {
-      background-color: color(base-n600);
+      background-color: color(neutral-1000);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(base-n600, 0.8) -95%, color(base-n600) 70%);
+        background: linear-gradient(90deg, color(neutral-1000, 0.8) -95%, color(neutral-1000) 70%);
       }
 
       .tree-node__text {

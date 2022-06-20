@@ -28,7 +28,7 @@
   }
 
   @include host-selector-dark-theme() {
-    color: color(base-n0);
+    color: color(neutral-1);
 
     &_expanded {
       background: color(base-dark-n550);

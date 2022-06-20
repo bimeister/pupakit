@@ -24,23 +24,23 @@
   &:not(&_disabled):not(&_active) {
     @include hover {
       background-color: color('base-white-n400');
-      color: color('base-n600');
+      color: color('neutral-1000');
 
       @include host-selector-dark-theme {
         background-color: color('base-dark-n400');
-        color: color('base-n0');
+        color: color('neutral-1');
       }
     }
   }
 
   &_active {
     background-color: transparent;
-    color: color('base-n600');
+    color: color('neutral-1000');
 
-    box-shadow: 0px 2px 8px color(base-n700, 0.03);
+    box-shadow: 0px 2px 8px color(neutral-1000, 0.03);
 
     @include host-selector-dark-theme {
-      color: color('base-n0');
+      color: color('neutral-1');
     }
   }
 

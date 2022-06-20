@@ -9,7 +9,7 @@
   justify-content: center;
   align-items: center;
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   background: color(base-white-n500);
   border-radius: 1rem;
 
@@ -19,12 +19,12 @@
 
   @include host-selector-dark-theme {
     background-color: color(base-dark-n275);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   &_active {
     background: color(primary-n600);
-    color: color(base-n0);
+    color: color(neutral-1);
 
     @include host-selector-dark-theme {
       background: color(primary-n400);

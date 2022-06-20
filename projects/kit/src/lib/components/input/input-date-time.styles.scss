@@ -62,9 +62,9 @@ $width_date-range: 60rem;
     font-size: 3rem;
     line-height: 4rem;
     padding: 2rem 4rem;
-    color: color(base-n600);
+    color: color(neutral-1000);
     @include host-selector-dark-theme() {
-      color: color(base-n0);
+      color: color(neutral-1);
     }
     display: flex;
     pointer-events: none;

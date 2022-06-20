@@ -13,11 +13,11 @@
 
   padding: 4rem 5rem;
 
-  color: color(base-n600);
+  color: color(neutral-1000);
   background-color: color(base-white-n500);
 
   @include host-selector-dark-theme() {
-    color: color(base-n0);
+    color: color(neutral-1);
     background-color: color(base-dark-n500);
   }
 }

@@ -386,23 +386,6 @@
   },
 
   {
-    "name": "Base",
-    "colors": [
-      {
-        "name": "Base/N700",
-        "hex": "001720"
-      },
-      {
-        "name": "Base/N600",
-        "hex": "001D29"
-      },
-      {
-        "name": "Base/N0",
-        "hex": "FFFFFF"
-      }
-    ]
-  },
-  {
     "name": "Base/dark surface",
     "colors": [
       {

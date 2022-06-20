@@ -7,11 +7,11 @@
 
   border-top: 1px solid color(base-white-n400);
   color: color(base-white-n100);
-  background-color: color(base-n0);
+  background-color: color(neutral-1);
 
   @include host-selector-dark-theme {
     border-top: 1px solid color(base-dark-n400);
-    background-color: color(base-n600);
+    background-color: color(neutral-1000);
     color: color(base-dark-n100);
   }
 }

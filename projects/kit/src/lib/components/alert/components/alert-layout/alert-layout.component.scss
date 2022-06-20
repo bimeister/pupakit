@@ -14,18 +14,18 @@
   gap: 3rem;
   position: relative;
 
-  background-color: color(base-n0);
-  color: color(base-n600);
+  background-color: color(neutral-1);
+  color: color(neutral-1000);
 
   @include host-selector-dark-theme {
     background-color: color(base-dark-n275);
-    color: color(base-n0);
+    color: color(neutral-1);
   }
 
   @include supports-backdrop-blur {
-    background-color: color(base-n0, 0.75);
+    background-color: color(neutral-1, 0.75);
     @include host-selector-dark-theme {
-      background-color: color(base-n600, 0.75);
+      background-color: color(neutral-1000, 0.75);
     }
   }
 }
