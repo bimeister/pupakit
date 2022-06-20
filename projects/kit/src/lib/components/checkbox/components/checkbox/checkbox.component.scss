@@ -23,7 +23,7 @@
     @include hover() {
       background: color(neutral-6, 0.5);
       @include host-selector-dark-theme() {
-        background: color(base-dark-n275, 0.5);
+        background: color(neutral-600, 0.5);
       }
     }
   }

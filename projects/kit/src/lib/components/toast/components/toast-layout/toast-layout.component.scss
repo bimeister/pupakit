@@ -16,7 +16,7 @@
 
   background-color: color(neutral-1);
   @include host-selector-dark-theme {
-    background-color: color(base-dark-n275);
+    background-color: color(neutral-600);
   }
 
   @include supports-backdrop-blur {

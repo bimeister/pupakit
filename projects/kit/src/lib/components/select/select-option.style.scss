@@ -73,23 +73,23 @@
     background-color: color(neutral-1000);
     color: color(neutral-1);
 
-    --select-option-icon-color: #{color(base-dark-n100)};
+    --select-option-icon-color: #{color(neutral-9)};
 
     &:not(.option_disabled) {
       @include hover() {
-        background-color: color(base-dark-n400);
+        background-color: color(neutral-600);
         --select-option-icon-color: #{color(neutral-1)};
       }
     }
 
     &_disabled {
       background-color: color(neutral-1000);
-      color: color(base-dark-n275);
-      --select-option-icon-color: #{color(base-dark-n250)};
+      color: color(neutral-600);
+      --select-option-icon-color: #{color(neutral-60)};
     }
 
     &_picked {
-      background-color: color(base-dark-n550);
+      background-color: color(neutral-400);
     }
   }
 }

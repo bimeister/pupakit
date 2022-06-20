@@ -29,7 +29,7 @@
     @include hover() {
       background: color(neutral-6);
       @include host-selector-dark-theme() {
-        background: color(base-dark-n275, 0.5);
+        background: color(neutral-600, 0.5);
       }
     }
   }
@@ -65,7 +65,7 @@
     transform variable(transition-duration_shorter) variable(transition-timing-function_common);
   @include host-selector-dark-theme() {
     background: color(neutral-1000);
-    border: 1px solid color(base-dark-n100);
+    border: 1px solid color(neutral-9);
   }
 
   &_selected {

@@ -66,7 +66,7 @@
   &__without-children {
     width: 1rem;
     height: 1rem;
-    color: color(base-dark-n250);
+    color: color(neutral-60);
   }
 
   &__text {
@@ -123,7 +123,7 @@
       }
 
       .tree-node__text {
-        color: color(base-dark-n250);
+        color: color(neutral-60);
       }
 
       &--selected {
@@ -158,26 +158,26 @@
     }
 
     @include hover {
-      background-color: color(base-dark-n400);
+      background-color: color(neutral-600);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(base-dark-n400, 0.8) -95%, color(base-dark-n400) 70%);
+        background: linear-gradient(90deg, color(neutral-600, 0.8) -95%, color(neutral-600) 70%);
       }
     }
 
     &:active {
-      background-color: color(base-dark-n300);
+      background-color: color(neutral-700);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(base-dark-n300, 0.8) -95%, color(base-dark-n300) 70%);
+        background: linear-gradient(90deg, color(neutral-700, 0.8) -95%, color(neutral-700) 70%);
       }
     }
 
     &--selected {
-      background-color: color(base-dark-n500);
+      background-color: color(neutral-500);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(base-dark-n500, 0.8) -95%, color(base-dark-n500) 70%);
+        background: linear-gradient(90deg, color(neutral-500, 0.8) -95%, color(neutral-500) 70%);
       }
     }
 
@@ -189,18 +189,18 @@
       }
 
       .tree-node__text {
-        color: color(base-dark-n250);
+        color: color(neutral-60);
       }
 
       &.tree-node--selected {
-        background-color: color(base-dark-n500);
+        background-color: color(neutral-500);
 
         .tree-node__right {
-          background: linear-gradient(90deg, color(base-dark-n500, 0.8) -95%, color(base-dark-n500) 70%);
+          background: linear-gradient(90deg, color(neutral-500, 0.8) -95%, color(neutral-500) 70%);
         }
 
         .tree-node__text {
-          color: color(base-dark-n250);
+          color: color(neutral-60);
         }
       }
     }

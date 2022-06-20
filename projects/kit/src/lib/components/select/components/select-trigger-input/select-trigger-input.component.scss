@@ -43,7 +43,7 @@
     overflow: hidden;
 
     @include host-selector-dark-theme() {
-      color: color(base-dark-n100);
+      color: color(neutral-9);
     }
 
     &::placeholder {
@@ -56,7 +56,7 @@
       align-self: center;
 
       @include host-selector-dark-theme() {
-        color: color(base-dark-n100);
+        color: color(neutral-9);
       }
     }
   }

@@ -37,7 +37,7 @@
   background-color: color(neutral-5);
 
   @include dark-theme-class-parent {
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
   }
 }
 
@@ -53,7 +53,7 @@
     color: color(neutral-300);
 
     @include dark-theme-class-parent {
-      color: color(base-dark-n100);
+      color: color(neutral-9);
     }
   }
 }
@@ -64,7 +64,7 @@
       background-color: color(neutral-7);
 
       @include dark-theme-class-parent {
-        background-color: color(base-dark-n300);
+        background-color: color(neutral-700);
       }
     }
 
@@ -72,7 +72,7 @@
       background-color: color(neutral-6);
 
       @include dark-theme-class-parent {
-        background-color: color(base-dark-n400);
+        background-color: color(neutral-600);
       }
 
       .textarea-inline__placeholder {
@@ -104,7 +104,7 @@
 
   @include dark-theme-class-parent {
     color: color(neutral-6);
-    background-color: color(base-dark-n500);
+    background-color: color(neutral-500);
 
     .textarea-inline__placeholder {
       color: color(neutral-6);
@@ -186,7 +186,7 @@
 }
 
 .counter_mobile {
-  color: color(base-dark-n100);
+  color: color(neutral-9);
 }
 
 .overlay-textarea {
@@ -198,14 +198,14 @@
 
       @include dark-theme-class-parent {
         background-color: color(neutral-1000);
-        border: 1px solid color(base-dark-n275);
+        border: 1px solid color(neutral-600);
       }
 
       .textarea__control::placeholder {
         color: color(neutral-6);
 
         @include dark-theme-class-parent {
-          color: color(base-dark-n300);
+          color: color(neutral-700);
         }
       }
     }

@@ -35,7 +35,7 @@
 
   border-width: 1px;
   border-style: solid;
-  border-color: color(base-dark-n500);
+  border-color: color(neutral-500);
   transition: transform 0.15s;
 
   @include host-selector-dark-theme {

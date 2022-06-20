@@ -12,7 +12,7 @@ $padding_scrollbar-thumb-container-large: math.div(($width_scrollbar - $width_sc
 $padding_scrollbar-thumb-container-small: math.div(($width_scrollbar - $width_scrollbar-thumb-small), 2);
 
 $color_light: 'neutral-6';
-$color_dark: 'base-dark-n275';
+$color_dark: 'neutral-600';
 
 :host {
   display: block;

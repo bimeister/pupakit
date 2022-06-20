@@ -64,7 +64,7 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
   &:hover:not(.selected):not(.disabled) {
     background: color(neutral-6);
     @include host-selector-dark-theme {
-      background: color(base-dark-n400);
+      background: color(neutral-600);
     }
   }
 
@@ -80,14 +80,14 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
     background: color(neutral-1);
     @include host-selector-dark-theme {
-      background: color(base-dark-n300);
+      background: color(neutral-700);
     }
   }
 
   &:hover.selected:not(.disabled) {
     border-color: color(neutral-5);
     @include host-selector-dark-theme {
-      border-color: color(base-dark-n400);
+      border-color: color(neutral-600);
     }
   }
 
@@ -96,14 +96,14 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
     color: color(neutral-50);
     @include host-selector-dark-theme {
-      color: color(base-dark-n250);
+      color: color(neutral-60);
     }
   }
 
   &.disabled.selected &__content {
     background: color(neutral-7);
     @include host-selector-dark-theme {
-      background: color(base-dark-n300);
+      background: color(neutral-700);
     }
   }
 }

@@ -45,7 +45,7 @@ $end-item-margin: 4rem;
   }
 
   @include host-selector-dark-theme() {
-    background-image: radial-gradient(color(base-dark-n500, 0) 1px, color(base-dark-n500, 0.5) 1px);
+    background-image: radial-gradient(color(neutral-500, 0) 1px, color(neutral-500, 0.5) 1px);
   }
 
   @include grid-container-offset('padding-right');

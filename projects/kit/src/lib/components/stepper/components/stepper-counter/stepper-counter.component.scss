@@ -18,7 +18,7 @@
   transition: background-color 0.2s ease;
 
   @include host-selector-dark-theme {
-    background-color: color(base-dark-n275);
+    background-color: color(neutral-600);
     color: color(neutral-1);
   }
 
@@ -37,8 +37,8 @@
     color: color(neutral-50);
 
     @include host-selector-dark-theme {
-      background: color(base-dark-n275);
-      color: color(base-dark-n250);
+      background: color(neutral-600);
+      color: color(neutral-60);
     }
   }
 }

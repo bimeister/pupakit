@@ -23,7 +23,7 @@
   user-select: none;
 
   @include host-selector-dark-theme {
-    color: color(base-dark-n100);
+    color: color(neutral-9);
   }
 
   &:not(&_disabled) {
@@ -45,7 +45,7 @@
     color: color(neutral-50);
 
     @include host-selector-dark-theme {
-      color: color(base-dark-n250);
+      color: color(neutral-60);
     }
   }
 

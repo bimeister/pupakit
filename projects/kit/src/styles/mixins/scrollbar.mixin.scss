@@ -25,7 +25,7 @@
     background-color: color(neutral-6, 0.5);
 
     @include host-selector-dark-theme {
-      background-color: color(base-dark-n275, 0.4);
+      background-color: color(neutral-600, 0.4);
     }
   }
 }

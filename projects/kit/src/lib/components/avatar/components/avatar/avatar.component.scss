@@ -24,12 +24,12 @@
     background-color: color(neutral-5);
 
     @include host-selector-dark-theme {
-      background-color: color(base-dark-n275);
+      background-color: color(neutral-600);
     }
 
     .avatar__text,
     .avatar__icon {
-      color: color(base-dark-n500);
+      color: color(neutral-500);
 
       @include host-selector-dark-theme {
         color: color(neutral-1);
@@ -47,14 +47,14 @@
     display: block;
     height: 100%;
     width: 100%;
-    color: color(base-dark-n500);
+    color: color(neutral-500);
   }
 
   &__text {
     @include flex-container(row, center, center);
     line-height: 3rem;
     white-space: nowrap;
-    color: color(base-dark-n500);
+    color: color(neutral-500);
     @include font-type-regular();
     box-sizing: border-box;
     height: 100%;

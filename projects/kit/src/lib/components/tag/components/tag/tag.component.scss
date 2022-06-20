@@ -37,20 +37,20 @@
   background-color: color(neutral-7);
   color: color(neutral-1000);
   @include host-selector-dark-theme() {
-    background-color: color(base-dark-n300);
+    background-color: color(neutral-700);
     color: color(neutral-1);
   }
 
   &.tag_clickable {
     box-shadow: shadow-helper(neutral-6);
     @include host-selector-dark-theme() {
-      box-shadow: shadow-helper(base-dark-n275);
+      box-shadow: shadow-helper(neutral-600);
     }
 
     @include hover() {
       background-color: color(neutral-6);
       @include host-selector-dark-theme() {
-        background-color: color(base-dark-n275);
+        background-color: color(neutral-600);
       }
     }
   }
@@ -203,8 +203,8 @@
   color: color(neutral-50);
   box-shadow: shadow-helper(neutral-5);
   @include host-selector-dark-theme() {
-    background-color: color(base-dark-n400);
-    color: color(base-dark-n250);
-    box-shadow: shadow-helper(base-dark-n500);
+    background-color: color(neutral-600);
+    color: color(neutral-60);
+    box-shadow: shadow-helper(neutral-500);
   }
 }

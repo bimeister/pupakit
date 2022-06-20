@@ -238,10 +238,10 @@
 
     @include host-selector-dark-theme() {
       .button-multi__background {
-        background-color: color(base-dark-n500);
+        background-color: color(neutral-500);
       }
       .expand__background {
-        border-left: 1px solid color(base-dark-n300);
+        border-left: 1px solid color(neutral-700);
       }
       .main__content,
       .expand,
@@ -252,11 +252,11 @@
         .expand,
         .main {
           .button-multi__icon {
-            color: color(base-dark-n100);
+            color: color(neutral-9);
           }
           @include hover() {
             .button-multi__background {
-              background-color: color(base-dark-n400);
+              background-color: color(neutral-600);
             }
             .button-multi__icon {
               color: color(neutral-1);
@@ -268,7 +268,7 @@
           &:active,
           &_active {
             .button-multi__background {
-              background-color: color(base-dark-n300);
+              background-color: color(neutral-700);
             }
             .button-multi__icon {
               color: color(neutral-1);
@@ -391,10 +391,10 @@
     }
     @include host-selector-dark-theme() {
       .expand__background {
-        border: 1px solid color(base-dark-n400);
+        border: 1px solid color(neutral-500);
       }
       .main__background {
-        border: 1px solid color(base-dark-n400);
+        border: 1px solid color(neutral-500);
         border-right: none;
       }
       .button-multi__background {
@@ -410,7 +410,7 @@
         .main {
           @include hover() {
             .button-multi__background {
-              background-color: color(base-dark-n400);
+              background-color: color(neutral-600);
             }
             .button-multi__icon {
               color: color(neutral-1);
@@ -422,7 +422,7 @@
           &:active,
           &_active {
             .button-multi__background {
-              background-color: color(base-dark-n300);
+              background-color: color(neutral-700);
             }
             .button-multi__icon {
               color: color(neutral-1);
@@ -454,15 +454,15 @@
     @include host-selector-dark-theme() {
       .button-multi__background {
         border: none;
-        background-color: color(base-dark-n500);
+        background-color: color(neutral-500);
       }
       .expand__background {
-        border-left: 1px solid color(base-dark-n400);
+        border-left: 1px solid color(neutral-500);
       }
       .main__content,
       .expand,
       .main__loading {
-        color: color(base-dark-n250);
+        color: color(neutral-50);
       }
     }
   }
