@@ -1,5 +1,391 @@
 [
   {
+    "name": "Neutral",
+    "colors": [
+      {
+        "name": "neutral-1",
+        "hex": "ffffff"
+      },
+      {
+        "name": "neutral-2",
+        "hex": "FAFAFA"
+      },
+      {
+        "name": "neutral-3",
+        "hex": "F8F8F8"
+      },
+      {
+        "name": "neutral-4",
+        "hex": "F4F4F4"
+      },
+      {
+        "name": "neutral-5",
+        "hex": "EDEDED"
+      },
+      {
+        "name": "neutral-6",
+        "hex": "E4E4E4"
+      },
+      {
+        "name": "neutral-7",
+        "hex": "DBDBDC"
+      },
+      {
+        "name": "neutral-8",
+        "hex": "D2D2D3"
+      },
+      {
+        "name": "neutral-9",
+        "hex": "C9C9CA"
+      },
+      {
+        "name": "neutral-10",
+        "hex": "BFC0C1"
+      },
+      {
+        "name": "neutral-20",
+        "hex": "B6B7B8"
+      },
+      {
+        "name": "neutral-30",
+        "hex": "ADAEAF"
+      },
+      {
+        "name": "neutral-40",
+        "hex": "A4A5A7"
+      },
+      {
+        "name": "neutral-50",
+        "hex": "9B9C9E"
+      },
+      {
+        "name": "neutral-60",
+        "hex": "929395"
+      },
+      {
+        "name": "neutral-70",
+        "hex": "898A8C"
+      },
+      {
+        "name": "neutral-80",
+        "hex": "808183"
+      },
+      {
+        "name": "neutral-90",
+        "hex": "77777A"
+      },
+      {
+        "name": "neutral-100",
+        "hex": "6E6E72"
+      },
+      {
+        "name": "neutral-200",
+        "hex": "656569"
+      },
+      {
+        "name": "neutral-300",
+        "hex": "5C5C60"
+      },
+      {
+        "name": "neutral-400",
+        "hex": "535357"
+      },
+      {
+        "name": "neutral-500",
+        "hex": "494A4E"
+      },
+      {
+        "name": "neutral-600",
+        "hex": "404145"
+      },
+      {
+        "name": "neutral-700",
+        "hex": "37383D"
+      },
+      {
+        "name": "neutral-800",
+        "hex": "2E2F34"
+      },
+      {
+        "name": "neutral-850",
+        "hex": "25262B"
+      },
+      {
+        "name": "neutral-900",
+        "hex": "232429"
+      },
+      {
+        "name": "neutral-950",
+        "hex": "25262A"
+      },
+      {
+        "name": "neutral-1000",
+        "hex": "1C1D22"
+      }
+    ]
+  },
+  {
+    "name": "Primary",
+    "colors": [
+      {
+        "name": "primary-new-40",
+        "hex": "E9EFFF"
+      },
+      {
+        "name": "primary-new-50",
+        "hex": "D5E0FF"
+      },
+      {
+        "name": "primary-new-100",
+        "hex": "C0D2FF"
+      },
+      {
+        "name": "primary-new-150",
+        "hex": "ACC3FF"
+      },
+      {
+        "name": "primary-new-200",
+        "hex": "97B5FF"
+      },
+      {
+        "name": "primary-new-300",
+        "hex": "6F98FF"
+      },
+      {
+        "name": "primary-new-400",
+        "hex": "467BFF"
+      },
+      {
+        "name": "primary-new-500",
+        "hex": "1D5EFF"
+      },
+      {
+        "name": "primary-new-600",
+        "hex": "1750DC"
+      },
+      {
+        "name": "primary-new-700",
+        "hex": "1142B9"
+      },
+      {
+        "name": "primary-new-800",
+        "hex": "0C3396"
+      },
+      {
+        "name": "primary-new-850",
+        "hex": "092C84"
+      },
+      {
+        "name": "primary-new-900",
+        "hex": "062573"
+      },
+      {
+        "name": "primary-new-950",
+        "hex": "031E62"
+      },
+      {
+        "name": "primary-new-1000",
+        "hex": "001750"
+      }
+    ]
+  },
+  {
+    "name": "Success",
+    "colors": [
+      {
+        "name": "success-40",
+        "hex": "7DFD86"
+      },
+      {
+        "name": "success-50",
+        "hex": "71F57A"
+      },
+      {
+        "name": "success-100",
+        "hex": "64ED6E"
+      },
+      {
+        "name": "success-150",
+        "hex": "58E562"
+      },
+      {
+        "name": "success-200",
+        "hex": "4CDD56"
+      },
+      {
+        "name": "success-300",
+        "hex": "33CC3F"
+      },
+      {
+        "name": "success-400",
+        "hex": "1BBC27"
+      },
+      {
+        "name": "success-500",
+        "hex": "FE9000"
+      },
+      {
+        "name": "success-600",
+        "hex": "028A0C"
+      },
+      {
+        "name": "success-700",
+        "hex": "016709"
+      },
+      {
+        "name": "success-800",
+        "hex": "014506"
+      },
+      {
+        "name": "success-850",
+        "hex": "013405"
+      },
+      {
+        "name": "success-900",
+        "hex": "002203"
+      },
+      {
+        "name": "success-950",
+        "hex": "001102"
+      },
+      {
+        "name": "success-1000",
+        "hex": "000000"
+      }
+    ]
+  },
+  {
+    "name": "Warning",
+    "colors": [
+      {
+        "name": "warning-40",
+        "hex": "FFE8CB"
+      },
+      {
+        "name": "warning-50",
+        "hex": "FFDFB7"
+      },
+      {
+        "name": "warning-100",
+        "hex": "FFD6A2"
+      },
+      {
+        "name": "warning-150",
+        "hex": "FFCE8E"
+      },
+      {
+        "name": "warning-200",
+        "hex": "FFC57A"
+      },
+      {
+        "name": "warning-300",
+        "hex": "FEB351"
+      },
+      {
+        "name": "warning-400",
+        "hex": "FEA229"
+      },
+      {
+        "name": "warning-500",
+        "hex": "FE9000"
+      },
+      {
+        "name": "warning-600",
+        "hex": "D57900"
+      },
+      {
+        "name": "warning-700",
+        "hex": "AC6200"
+      },
+      {
+        "name": "warning-800",
+        "hex": "844A00"
+      },
+      {
+        "name": "warning-850",
+        "hex": "6F3F00"
+      },
+      {
+        "name": "warning-900",
+        "hex": "5B3300"
+      },
+      {
+        "name": "warning-950",
+        "hex": "462800"
+      },
+      {
+        "name": "warning-1000",
+        "hex": "321C00"
+      }
+    ]
+  },
+  {
+    "name": "Danger",
+    "colors": [
+      {
+        "name": "danger-40",
+        "hex": "FFBABA"
+      },
+      {
+        "name": "danger-50",
+        "hex": "FDA7A7"
+      },
+      {
+        "name": "danger-100",
+        "hex": "FB9595"
+      },
+      {
+        "name": "danger-150",
+        "hex": "FA8282"
+      },
+      {
+        "name": "danger-200",
+        "hex": "F87070"
+      },
+      {
+        "name": "danger-300",
+        "hex": "F44A4A"
+      },
+      {
+        "name": "danger-400",
+        "hex": "F12525"
+      },
+      {
+        "name": "danger-500",
+        "hex": "ED0000"
+      },
+      {
+        "name": "danger-600",
+        "hex": "C40000"
+      },
+      {
+        "name": "danger-700",
+        "hex": "9B0000"
+      },
+      {
+        "name": "danger-800",
+        "hex": "730000"
+      },
+      {
+        "name": "danger-850",
+        "hex": "5E0000"
+      },
+      {
+        "name": "danger-900",
+        "hex": "4A0000"
+      },
+      {
+        "name": "danger-950",
+        "hex": "350000"
+      },
+      {
+        "name": "danger-1000",
+        "hex": "210000"
+      }
+    ]
+  },
+
+  {
     "name": "Base",
     "colors": [
       {
