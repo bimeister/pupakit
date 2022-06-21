@@ -22,6 +22,7 @@ import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/d
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
+import { DrawerLayoutHeaderTabsComponent } from './components/drawer-layout-header-tabs/drawer-layout-header-tabs.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,
+    DrawerLayoutHeaderTabsComponent,
   ],
   imports: [
     SharedModule,
@@ -63,6 +65,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerLayoutSeparatorComponent,
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,
+    DrawerLayoutHeaderTabsComponent,
   ],
 })
 export class DrawerModule {}
