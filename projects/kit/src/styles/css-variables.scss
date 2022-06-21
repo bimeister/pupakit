@@ -2,7 +2,7 @@
 @use 'sass:map';
 
 :root {
-  @each $name, $value in map.merge($colorsMap, $colorsOldMap) {
+  @each $name, $value in $colorsMap {
     --color_#{$name}: #{red($value), green($value), blue($value)};
   }
 }

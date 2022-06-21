@@ -14,7 +14,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   height: $max-height__container;
   box-shadow: $box-shadow;
   border-radius: 2rem;
-  background: color(white);
+  background: color(neutral-1);
   width: $width_time-picker;
 
   &.with-seconds {
@@ -45,7 +45,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
       height: calc(100% - 4rem);
       width: 1px;
       z-index: 2;
-      background-color: color(light);
+      background-color: color(primary-50);
     }
   }
 
@@ -65,7 +65,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
 .digit {
   font-size: $font-size__digit;
   line-height: 4rem;
-  color: color(text);
+  color: color(neutral-1000);
   font-weight: normal;
   padding: 2rem 2rem 1rem 2rem;
   cursor: pointer;
@@ -78,11 +78,11 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   }
 
   &:hover {
-    color: color(active);
+    color: color(primary-500);
   }
 
   &.selected {
-    color: color(active);
+    color: color(primary-500);
   }
 }
 
