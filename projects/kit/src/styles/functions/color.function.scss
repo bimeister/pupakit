@@ -1,13 +1,11 @@
 @use 'sass:map';
 @use './../maps/colors.map' as *;
 @use './../maps/alpha-colors.map' as *;
-@use './../maps/colors-old.map' as *;
 
 @function color($color, $alpha: alpha-1000) {
   $colorsHasKey: map.has-key($colorsMap, #{$color});
-  $colorsOldHasKey: map.has-key($colorsOldMap, #{$color});
 
-  @if (not($colorsHasKey or $colorsOldHasKey)) {
+  @if (not($colorsHasKey)) {
     @error '[color] Wrong color key #{$color}';
   }
 

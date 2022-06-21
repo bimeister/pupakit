@@ -8,7 +8,7 @@
 
 .close-button {
   display: flex;
-  border: 1px solid color(cadet-blue);
+  border: 1px solid color(primary-200);
   border-radius: 1.2rem;
   cursor: pointer;
   align-items: center;
@@ -18,13 +18,13 @@
   outline: none;
   margin: 0;
   padding: 0;
-  background-color: color(white);
+  background-color: color(neutral-1);
   &:hover {
-    background-color: color(light);
+    background-color: color(primary-50);
   }
   & .icon {
     width: 4.8rem;
     height: 4.8rem;
-    color: color(cadet-blue);
+    color: color(primary-200);
   }
 }

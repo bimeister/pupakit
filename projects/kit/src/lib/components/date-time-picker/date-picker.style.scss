@@ -20,7 +20,7 @@ $height_month: 24px;
   all: unset;
   box-shadow: $box-shadow;
   border-radius: 2rem;
-  background: color(white);
+  background: color(neutral-1);
   @include flex-container(column, stretch, stretch, nowrap);
 
   &__header {
@@ -37,7 +37,7 @@ $height_month: 24px;
     padding: $padding_days-area;
     margin: $margin_days-line;
     box-sizing: border-box;
-    background: color(light);
+    background: color(primary-50);
     @include flex-container(row, center, space-between, nowrap);
   }
 
@@ -57,7 +57,7 @@ $height_month: 24px;
 .title {
   all: unset;
   font-size: variable(font-size_base-text);
-  color: color(main);
+  color: color(neutral-500);
   line-height: 1.43;
   font-weight: normal;
   font-style: normal;
@@ -70,20 +70,20 @@ $height_month: 24px;
   &__year:not(.disable-hover) {
     transition: color 0.2s ease;
     &:hover {
-      color: color(active);
+      color: color(primary-500);
       cursor: pointer;
     }
   }
 
   &.selected {
-    color: color(active);
+    color: color(primary-500);
     cursor: default;
   }
 }
 
 .week-day {
   all: unset;
-  color: color(grey-light);
+  color: color(neutral-200);
   width: $width_days-line-item;
   font-size: $font-size_days-line-item;
   font-weight: normal;
@@ -109,7 +109,7 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &__range {
-    background-color: color(light);
+    background-color: color(primary-50);
   }
 
   &:nth-child(7n) {
@@ -175,7 +175,7 @@ $height_month: 24px;
       left: 0;
       width: 200%;
       height: 100%;
-      background-color: color(light);
+      background-color: color(primary-50);
       border-bottom-left-radius: $height_date;
       border-top-left-radius: $height_date;
       z-index: 0;
@@ -190,7 +190,7 @@ $height_month: 24px;
       right: 0;
       width: 200%;
       height: 100%;
-      background-color: color(light);
+      background-color: color(primary-50);
       border-bottom-right-radius: $height_date;
       border-top-right-radius: $height_date;
       z-index: 0;
@@ -200,7 +200,7 @@ $height_month: 24px;
 
 .date-inner {
   font-size: $font-size_days-line-item;
-  color: color(text);
+  color: color(neutral-1000);
   line-height: 4rem;
   font-weight: normal;
   position: relative;
@@ -215,19 +215,19 @@ $height_month: 24px;
   z-index: 2;
 
   &__selected {
-    background-color: color(active);
-    color: color(white);
+    background-color: color(primary-500);
+    color: color(neutral-1);
   }
 
   &__disabled {
-    color: color(grey-apple);
+    color: color(neutral-50);
     pointer-events: none;
     background-color: transparent;
   }
 
   &:hover:not(.date-inner__selected) {
-    background-color: color(light);
-    color: color(text);
+    background-color: color(primary-50);
+    color: color(neutral-1000);
   }
 }
 
@@ -242,7 +242,7 @@ $height_month: 24px;
   height: $height_year;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: color(text);
+  color: color(neutral-1000);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
@@ -257,12 +257,12 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &.current {
-    background-color: color(light);
-    color: color(text);
+    background-color: color(primary-50);
+    color: color(neutral-1000);
   }
   &:hover {
-    background-color: color(active);
-    color: color(white);
+    background-color: color(primary-500);
+    color: color(neutral-1);
   }
 }
 
@@ -277,7 +277,7 @@ $height_month: 24px;
   height: $height_month;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: color(text);
+  color: color(neutral-1000);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
@@ -288,8 +288,8 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &:hover {
-    background-color: color(active);
-    color: color(white);
+    background-color: color(primary-500);
+    color: color(neutral-1);
   }
 }
 
@@ -304,7 +304,7 @@ $height_month: 24px;
   padding: 0;
   font-weight: $font-weight_days-line-item;
   font-size: 4rem;
-  color: color(grey-apple);
+  color: color(neutral-50);
   cursor: pointer;
   display: flex;
   align-items: center;

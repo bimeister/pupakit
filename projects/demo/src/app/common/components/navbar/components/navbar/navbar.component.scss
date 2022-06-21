@@ -3,12 +3,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-@mixin apply-theme($theme-mode) {
-  background-color: get-map-field($theme-config, [$theme-mode, 'navbar', 'background-color' ]);
-  border-bottom: 1px solid get-map-field($theme-config, [$theme-mode, 'navbar', 'border-color' ]);
-  color: get-map-field($theme-config, [$theme-mode, 'navbar', 'font-color' ]);
-}
-
 $icon-size: 7rem;
 
 $item-margin: 1rem;
@@ -45,7 +39,7 @@ $end-item-margin: 4rem;
   }
 
   @include host-selector-dark-theme() {
-    background-image: radial-gradient(color(neutral-500, 0) 1px, color(neutral-500, 0.5) 1px);
+    background-image: radial-gradient(color(neutral-600, 0) 1px, color(neutral-600, 0.5) 1px);
   }
 
   @include grid-container-offset('padding-right');

@@ -24,7 +24,7 @@
     }
   }
   &.content {
-    background-color: color(white);
+    background-color: color(neutral-1);
     z-index: 1;
   }
   &.loader {
@@ -34,7 +34,7 @@
     align-items: center;
 
     &.filled {
-      background: color(white);
+      background: color(neutral-1);
     }
   }
   &.context-menus {

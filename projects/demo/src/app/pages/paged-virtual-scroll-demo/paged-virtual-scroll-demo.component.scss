@@ -20,7 +20,7 @@ $height_container: 500px;
 .container {
   width: 80%;
   height: $height_container;
-  border: 4px color(black) dashed;
+  border: 4px color(neutral-1000) dashed;
   overflow: hidden;
 }
 
@@ -28,9 +28,9 @@ $height_container: 500px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: color(light);
+  background-color: color(primary-50);
   font-size: 20px;
-  border-bottom: 1px solid color(main);
+  border-bottom: 1px solid color(neutral-500);
   box-sizing: content-box;
 }
 
