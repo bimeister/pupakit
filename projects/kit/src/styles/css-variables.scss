@@ -8,13 +8,13 @@
 }
 
 :root {
-  @each $name, $value in $variablesMap {
+  @each $name, $value in $alphaColorsMap {
     --#{$name}: #{$value};
   }
 }
 
 :root {
-  @each $name, $value in $alphaColorsMap {
-    --alpha_#{$name}: #{$value};
+  @each $name, $value in $variablesMap {
+    --#{$name}: #{$value};
   }
 }

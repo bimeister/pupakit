@@ -13,12 +13,12 @@
   padding: 2rem;
   margin-right: 2rem;
   box-sizing: border-box;
-  color: color(neutral-9, 1);
+  color: color(neutral-9);
   cursor: pointer;
 
   &:hover {
-    background-color: color(neutral-600, 1);
-    color: color(neutral-1, 1);
+    background-color: color(neutral-600);
+    color: color(neutral-1);
   }
 }
 
@@ -27,9 +27,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: color(neutral-9, 1);
+  color: color(neutral-9);
 
   &:hover {
-    color: color(neutral-1, 1);
+    color: color(neutral-1);
   }
 }

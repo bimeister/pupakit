@@ -14,7 +14,7 @@ $tooltip_max-text-lines-count: 13;
   }
 
   &__content-container {
-    background-color: color(neutral-1000, 0.8);
+    background-color: color(neutral-1000, alpha-500);
     backdrop-filter: blur(6rem);
 
     border-radius: 1px;

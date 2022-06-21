@@ -37,7 +37,7 @@ $layout_border-size: 1px;
   }
 
   &_with-shadow {
-    box-shadow: 0px 4px 24px color(neutral-1000, 0.04);
+    box-shadow: 0px 4px 24px color(neutral-1000, alpha-4);
 
     @include host-selector-dark-theme() {
       box-shadow: none;

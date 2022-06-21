@@ -15,5 +15,5 @@
     @return rgba(#{var(--color_#{$color})}, $alpha);
   }
 
-  @return rgba(#{var(--color_#{$color})}, #{var(--alpha_#{$alpha})});
+  @return rgba(#{var(--color_#{$color})}, #{var(--#{$alpha})});
 }

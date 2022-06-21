@@ -21,9 +21,9 @@
 
   &:not(.checkbox_disabled):not(.checkbox_without-label) {
     @include hover() {
-      background: color(neutral-6, 0.5);
+      background: color(neutral-6, alpha-60);
       @include host-selector-dark-theme() {
-        background: color(neutral-600, 0.5);
+        background: color(neutral-600, alpha-60);
       }
     }
   }
@@ -48,7 +48,7 @@
 .checkbox {
   @include hover() {
     :not(.checkbox__marker:focus-visible):not(.checkbox__marker_error):not(.checkbox__marker_disabled).checkbox__marker {
-      background: color(primary-500, 0.16);
+      background: color(primary-500, alpha-7);
       border: 1px solid color(primary-400);
 
       &_checked {
@@ -94,7 +94,7 @@
     border: none;
 
     &:not(.checkbox__marker_checked) {
-      background: color(primary-500, 0.16);
+      background: color(primary-500, alpha-7);
     }
 
     &.checkbox__marker_error {
