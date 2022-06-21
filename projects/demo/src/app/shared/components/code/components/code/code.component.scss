@@ -13,7 +13,7 @@
   position: relative;
 
   &__code {
-    @include font-size-m();
+    @include font-size-s();
     font-family: monospace;
     border-radius: $controlBorderRadius;
   }
