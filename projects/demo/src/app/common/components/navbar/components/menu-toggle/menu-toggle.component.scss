@@ -3,8 +3,8 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
-$menu-toggle-size: 28px;
-$strip-height: 3px;
+$menu-toggle-size: 20px;
+$strip-height: 2px;
 
 @mixin apply-background() {
   background: color(neutral-1000);
@@ -55,6 +55,8 @@ $strip-height: 3px;
     right: 0px;
     height: $strip-height;
 
+    border-radius: 1px;
+
     @include apply-background();
 
     &::before,
@@ -65,6 +67,8 @@ $strip-height: 3px;
       width: 100%;
       height: $strip-height;
       content: '';
+
+      border-radius: 1px;
 
       @include apply-background();
     }
