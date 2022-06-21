@@ -41,7 +41,7 @@
     margin: 1rem 0 1rem auto;
     padding-left: 4rem;
     padding-right: 2rem;
-    background: linear-gradient(90deg, color(neutral-1, 0.8) -95%, color(neutral-1) 70%);
+    background: linear-gradient(90deg, color(neutral-1, alpha-500) -95%, color(neutral-1) 70%);
 
     &-container {
       position: relative;
@@ -81,7 +81,7 @@
     background-color: color(neutral-6);
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-6, 0.8) -95%, color(neutral-6) 70%);
+      background: linear-gradient(90deg, color(neutral-6, alpha-500) -95%, color(neutral-6) 70%);
     }
   }
 
@@ -89,7 +89,7 @@
     background-color: color(neutral-7);
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-7, 0.8) -95%, color(neutral-7) 70%);
+      background: linear-gradient(90deg, color(neutral-7, alpha-500) -95%, color(neutral-7) 70%);
     }
   }
 
@@ -109,7 +109,7 @@
     }
 
     .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-4, 0.8) -95%, color(neutral-4) 70%);
+      background: linear-gradient(90deg, color(neutral-4, alpha-500) -95%, color(neutral-4) 70%);
     }
   }
 
@@ -119,7 +119,7 @@
       background-color: color(neutral-1);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-1, 0.8) -95%, color(neutral-1) 70%);
+        background: linear-gradient(90deg, color(neutral-1, alpha-500) -95%, color(neutral-1) 70%);
       }
 
       .tree-node__text {
@@ -134,7 +134,7 @@
         }
 
         .tree-node__right {
-          background: linear-gradient(90deg, color(neutral-4, 0.8) -95%, color(neutral-4) 70%);
+          background: linear-gradient(90deg, color(neutral-4, alpha-500) -95%, color(neutral-4) 70%);
         }
       }
     }
@@ -150,7 +150,7 @@
     background-color: color(neutral-1000);
 
     &__right {
-      background: linear-gradient(90deg, color(neutral-1000, 0.8) -95%, color(neutral-1000) 70%);
+      background: linear-gradient(90deg, color(neutral-1000, alpha-500) -95%, color(neutral-1000) 70%);
     }
 
     &__text {
@@ -161,7 +161,7 @@
       background-color: color(neutral-600);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-600, 0.8) -95%, color(neutral-600) 70%);
+        background: linear-gradient(90deg, color(neutral-600, alpha-500) -95%, color(neutral-600) 70%);
       }
     }
 
@@ -169,7 +169,7 @@
       background-color: color(neutral-700);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-700, 0.8) -95%, color(neutral-700) 70%);
+        background: linear-gradient(90deg, color(neutral-700, alpha-500) -95%, color(neutral-700) 70%);
       }
     }
 
@@ -177,7 +177,7 @@
       background-color: color(neutral-500);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-500, 0.8) -95%, color(neutral-500) 70%);
+        background: linear-gradient(90deg, color(neutral-500, alpha-500) -95%, color(neutral-500) 70%);
       }
     }
 
@@ -185,7 +185,7 @@
       background-color: color(neutral-1000);
 
       .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-1000, 0.8) -95%, color(neutral-1000) 70%);
+        background: linear-gradient(90deg, color(neutral-1000, alpha-500) -95%, color(neutral-1000) 70%);
       }
 
       .tree-node__text {
@@ -196,7 +196,7 @@
         background-color: color(neutral-500);
 
         .tree-node__right {
-          background: linear-gradient(90deg, color(neutral-500, 0.8) -95%, color(neutral-500) 70%);
+          background: linear-gradient(90deg, color(neutral-500, alpha-500) -95%, color(neutral-500) 70%);
         }
 
         .tree-node__text {

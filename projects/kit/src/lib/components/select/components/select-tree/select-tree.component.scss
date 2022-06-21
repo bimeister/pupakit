@@ -19,10 +19,10 @@ $height_item-container: 75rem;
     padding: 0;
 
     &__loader {
-      background-color: color(neutral-1, 0.8);
+      background-color: color(neutral-1, alpha-500);
 
       @include dark-theme-class-parent() {
-        background-color: color(neutral-1000, 0.8);
+        background-color: color(neutral-1000, alpha-500);
         color: color(neutral-1);
       }
     }

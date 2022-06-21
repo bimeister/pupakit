@@ -22,10 +22,10 @@
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: color(neutral-6, 0.5);
+    background-color: color(neutral-6, alpha-60);
 
     @include host-selector-dark-theme {
-      background-color: color(neutral-600, 0.4);
+      background-color: color(neutral-600, alpha-40);
     }
   }
 }

@@ -30,16 +30,16 @@ $end-item-margin: 4rem;
   vertical-align: middle;
 
   background-color: transparent;
-  background-image: radial-gradient(color(neutral-5, 0) 1px, color(neutral-5, 0.9) 1px);
+  background-image: radial-gradient(color(neutral-5, alpha-1) 1px, color(neutral-5, alpha-700) 1px);
   background-size: 1rem 1rem;
   backdrop-filter: brightness(100%) blur(1rem);
 
   @include supports-backdrop-blur {
-    background-image: radial-gradient(color(neutral-5, 0) 1px, color(neutral-5, 0.5) 1px);
+    background-image: radial-gradient(color(neutral-5, alpha-1) 1px, color(neutral-5, alpha-60) 1px);
   }
 
   @include host-selector-dark-theme() {
-    background-image: radial-gradient(color(neutral-600, 0) 1px, color(neutral-600, 0.5) 1px);
+    background-image: radial-gradient(color(neutral-600, alpha-1) 1px, color(neutral-600, alpha-60) 1px);
   }
 
   @include grid-container-offset('padding-right');

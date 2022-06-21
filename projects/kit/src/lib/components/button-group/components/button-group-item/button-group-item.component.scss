@@ -37,7 +37,7 @@
     background-color: transparent;
     color: color(neutral-1000);
 
-    box-shadow: 0px 2px 8px color(neutral-1000, 0.03);
+    box-shadow: 0px 2px 8px color(neutral-1000, alpha-3);
 
     @include host-selector-dark-theme {
       color: color(neutral-1);
