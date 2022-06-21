@@ -56,7 +56,6 @@ $height_month: 24px;
 
 .title {
   all: unset;
-  font-size: variable(font-size_base-text);
   color: color(neutral-500);
   line-height: 1.43;
   font-weight: normal;
@@ -64,7 +63,8 @@ $height_month: 24px;
   font-stretch: normal;
   user-select: none;
   display: flex;
-  @include font-type-regular;
+
+  @include font-size-m;
 
   &__month:not(.disable-hover),
   &__year:not(.disable-hover) {
