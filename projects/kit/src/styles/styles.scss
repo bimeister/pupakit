@@ -8,34 +8,6 @@
 @use 'css-variables';
 @use 'font-faces';
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 200;
-}
-
-label {
-  @include pupa-label;
-}
-
-label.horizontal {
-  @include pupa-label(true);
-}
-
-.input_container,
-.input_container_medium {
-  display: block;
-  width: 57.925rem;
-}
-
-.input_container_small {
-  display: block;
-  width: 33.25rem;
-}
-
 .icon-inner svg {
   display: block;
   width: 100%;

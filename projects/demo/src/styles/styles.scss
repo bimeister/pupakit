@@ -15,7 +15,7 @@ body {
   font-size: 4rem;
   line-height: 6rem;
   @include font-preset-body-m();
-  padding: variable(padding_body);
+  padding: 0;
   margin: 0;
   overscroll-behavior: none;
   position: relative;
