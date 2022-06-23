@@ -1,22 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-@mixin link-color($lightColor, $darkColor) {
-  color: $lightColor;
-
-  @include host-selector-dark-theme {
-    color: $darkColor;
-  }
-
-  &::after {
-    background-color: $lightColor;
-
-    @include host-selector-dark-theme {
-      background-color: $darkColor;
-    }
-  }
-}
-
 :host {
   appearance: none;
   text-decoration: none;
@@ -35,6 +19,8 @@
     position: relative;
     white-space: nowrap;
 
+    color: semantic-color(link-normal);
+
     &::after {
       content: '';
       position: absolute;
@@ -45,16 +31,17 @@
       left: 0;
       display: none;
       z-index: 1;
-    }
 
-    @include link-color(color(link-lnl001), color(link-lnd001));
+      background-color: semantic-color(link-normal);
+    }
   }
 
   @include hover {
     .link-content {
-      @include link-color(color(link-lnl002), color(link-lnd002));
+      color: semantic-color(link-hover);
 
       &::after {
+        background-color: semantic-color(link-hover);
         display: block;
       }
     }
@@ -62,13 +49,21 @@
 
   &:active {
     .link-content {
-      @include link-color(color(link-lnl003), color(link-lnd003));
+      color: semantic-color(link-pressed);
+
+      &::after {
+        background-color: semantic-color(link-pressed);
+      }
     }
   }
 
   &:visited {
     .link-content {
-      @include link-color(color(link-ln004), color(link-ln004));
+      color: semantic-color(link-visited);
+
+      &::after {
+        background-color: semantic-color(link-visited);
+      }
     }
   }
 

@@ -383,39 +383,5 @@
         "hex": "210000"
       }
     ]
-  },
-
-  {
-    "name": "Link",
-    "colors": [
-      {
-        "name": "Link/LNL001",
-        "hex": "0050B0"
-      },
-      {
-        "name": "Link/LNL002",
-        "hex": "3584B7"
-      },
-      {
-        "name": "Link/LNL003",
-        "hex": "0D4486"
-      },
-      {
-        "name": "Link/LND001",
-        "hex": "61B3E8"
-      },
-      {
-        "name": "Link/LND002",
-        "hex": "C1F4FF"
-      },
-      {
-        "name": "Link/LND003",
-        "hex": "61B3E8"
-      },
-      {
-        "name": "Link/LN004",
-        "hex": "9D52E8"
-      }
-    ]
   }
 ]
