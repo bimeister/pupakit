@@ -12,15 +12,7 @@
 
   margin: 5rem 0;
 
-  border-color: get-map-field($theme-config, [ 'light', 'body', border-color]);
-  @include host-selector-dark-theme() {
-    border-color: get-map-field($theme-config, [ 'dark', 'body', border-color]);
-  }
-
-  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
-  @include host-selector-dark-theme() {
-    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
-  }
+  border-color: semantic-color(borders-border);
 }
 
 .tabs {

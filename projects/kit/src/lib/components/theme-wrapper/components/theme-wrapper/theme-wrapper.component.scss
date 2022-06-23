@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use 'maps' as *;
+@use 'mixins' as *;
+
+:host {
+  @include light-theme-class-parent() {
+    @each $name, $value in $lightColorsMap {
+      --semantic-color_#{$name}: #{$value};
+    }
+
+    @each $name, $value in $lightColorsAlphaMap {
+      --semantic-color-alpha_#{$name}: #{$value};
+    }
+  }
+
+  @include dark-theme-class-parent() {
+    @each $name, $value in $darkColorsMap {
+      --semantic-color_#{$name}: #{$value};
+    }
+
+    @each $name, $value in $darkColorsAlphaMap {
+      --semantic-color-alpha_#{$name}: #{$value};
+    }
+  }
+}

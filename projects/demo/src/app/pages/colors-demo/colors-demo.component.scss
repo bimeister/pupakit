@@ -1,23 +1,32 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
+
+$color-block_width: 134px;
+$alpha-value_width: 120px;
+$semantic-configuration_width: 300px;
 
 :host {
   display: block;
 }
 
-.header {
-  margin-bottom: 20rem;
+.description {
+  margin-top: 10rem;
+  margin-bottom: 14rem;
+}
+
+.last-point {
+  margin-bottom: 14rem;
 }
 
 .colors-demo {
   &__group {
-    margin-bottom: 20rem;
+    margin-bottom: 10rem;
   }
 
   &__list {
     box-sizing: border-box;
     padding-top: 4rem;
-    gap: 4rem;
     @include flex-container(row);
     flex-wrap: wrap;
   }
@@ -27,29 +36,22 @@
   position: relative;
   box-sizing: border-box;
   padding: 4rem;
-  border-radius: 1px;
   color: color(neutral-1);
 
-  @include grid-size($xs: 4, $sm: 4, $md: 4, $lg: 4, $xlg: 4, $xl: 4, $xxl: 4);
-  @include font-preset-caption-m;
+  @include font-preset-caption-s;
 
-  border-width: 1px;
-  border-style: solid;
-  border-color: color(neutral-500);
   transition: transform 0.15s;
 
-  @include host-selector-dark-theme {
-    border-color: color(neutral-5);
-  }
+  width: $color-block_width;
 
   &_inverted {
     color: color(neutral-1000);
   }
 
   &__name {
-    @include font-size-l;
+    @include font-size-m;
     @include font-type-medium;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     cursor: pointer;
   }
 
@@ -69,5 +71,83 @@
     &:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+.alpha-values {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 2rem;
+  margin-bottom: 14rem;
+
+  &__value {
+    display: flex;
+    justify-content: space-between;
+    background-color: semantic-color(surface-tertiary);
+
+    width: $alpha-value_width;
+
+    padding: 3rem;
+    border-radius: $controlBorderRadius;
+
+    @include font-preset-caption-s();
+
+    cursor: pointer;
+  }
+}
+
+.semantic-colors {
+  &__group {
+    margin-bottom: 10rem;
+  }
+
+  &__section {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 2rem;
+  }
+
+  &__configuration {
+    width: $semantic-configuration_width;
+    border: 1px solid semantic-color(borders-border-dark);
+    border-radius: $controlBorderRadius;
+    overflow: hidden;
+
+    cursor: pointer;
+  }
+}
+
+.configuration {
+  display: flex;
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 7rem 4rem;
+    flex: 1;
+  }
+
+  &__title {
+    @include font-size-m();
+    @include font-type-medium;
+  }
+
+  &__description {
+    display: flex;
+
+    @include font-preset-caption-s();
+
+    margin-top: 4rem;
+  }
+
+  &__colors {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  &__color-block {
+    width: 30%;
+    border-left: 1px solid semantic-color(borders-border-dark);
   }
 }

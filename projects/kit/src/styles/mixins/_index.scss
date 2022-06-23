@@ -2,7 +2,9 @@
 @forward './font';
 
 @forward './dark-theme-class-parent.mixin';
+@forward './light-theme-class-parent.mixin';
 @forward './debug.mixin';
+@forward './blur.mixin';
 @forward './ellipsis-text-overflow.mixin';
 @forward './flex-container.mixin';
 @forward './host-selector-dark-theme.mixin';

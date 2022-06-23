@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use './../maps/colors.map' as *;
+@use './../maps/alpha-colors.map' as *;
+@use './../maps/semantic-colors.map' as *;
+
+@function semantic-color($semantic-color, $alpha: 'none') {
+  $semanticColorsHasKey: map.has-key($lightColorsMap, #{$semantic-color});
+
+  @if (not($semanticColorsHasKey)) {
+    @error '[semantic-color] Wrong color key #{$semantic-color}';
+  }
+
+  @if ($alpha == 'none') {
+    @return rgba(#{var(--semantic-color_#{$semantic-color})}, #{var(--semantic-color-alpha_#{$semantic-color})});
+  }
+
+  $alphaColorsHasKey: map.has-key($alphaColorsMap, #{$alpha});
+
+  @if (not($alphaColorsHasKey)) {
+    @return rgba(#{var(--semantic-color_#{$semantic-color})}, $alpha);
+  }
+
+  @return rgba(#{var(--semantic-color_#{$semantic-color})}, #{var(--#{$alpha})});
+}

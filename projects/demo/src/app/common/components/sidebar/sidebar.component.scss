@@ -11,7 +11,8 @@
 .sidebar-content {
   height: 100%;
   width: 100%;
-  background: color(neutral-1);
+  background-color: semantic-color(surface-primary);
+  color: semantic-color(text-primary);
 
   @include lt-md() {
     width: 100vw;
@@ -71,7 +72,7 @@
     top: 0;
     left: 0;
 
-    color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+    color: semantic-color(text-primary);
   }
 
   .subheader {
@@ -83,7 +84,7 @@
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
 
-    color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+    color: semantic-color(text-primary);
 
     margin-top: 6rem;
   }
@@ -97,10 +98,9 @@
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
 
-    @include font-size-m;
-    @include font-type-regular;
+    @include font-preset-caption-m;
 
-    color: get-map-field($theme-config, [ 'light', 'body', font-color]);
+    color: semantic-color(text-primary);
 
     transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
       background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -113,42 +113,18 @@
       content: '';
       width: 0.5rem;
       pointer-events: none;
-      background-color: rgba(var(--color_primary-500), 1);
+      background-color: semantic-color(status-primary-normal);
       opacity: 0;
     }
 
     &:hover {
-      background: color(neutral-4);
+      background: semantic-color(surface-action);
     }
 
     &.active {
-      background: color(neutral-4);
+      background: semantic-color(surface-action);
       &::before {
         opacity: 1;
-      }
-    }
-  }
-}
-
-#{$darkThemeClass} {
-  .sidebar-content {
-    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
-
-    .subheader {
-      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-    }
-
-    .empty-placeholder {
-      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-    }
-
-    .side-nav-item {
-      color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-
-      &.active,
-      &:hover {
-        color: color(neutral-1);
-        background: color(neutral-500);
       }
     }
   }
