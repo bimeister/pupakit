@@ -118,6 +118,9 @@ export namespace TableEvents {
       super();
     }
   }
+  export class FitColumns extends TableEventBase {}
+  export class StartFitColumnsOnResize extends TableEventBase {}
+  export class StopFitColumnsOnResize extends TableEventBase {}
   export class UpdateColumnWidthByDelta extends TableEventBase {
     constructor(public columnId: string, public readonly deltaPx: number) {
       super();

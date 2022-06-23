@@ -1,0 +1,15 @@
+<div class="table">
+  <pupa-table [controller]="controller">
+    <pupa-table-column-template columnType="first-name">
+      <ng-container *pupaTableBodyCellTemplate="let row; typeFrom: rowType">
+        <pupa-table-body-cell *ngIf="row.data; else skeleton">
+          {{ row.data.firstName }}
+        </pupa-table-body-cell>
+      </ng-container>
+    </pupa-table-column-template>
+  </pupa-table>
+</div>
+
+<ng-template #skeleton>
+  <pupa-table-skeleton></pupa-table-skeleton>
+</ng-template>

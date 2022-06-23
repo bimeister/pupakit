@@ -55,4 +55,10 @@ export class TableDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-8/example-8.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-8/example-8.component.ts`,
   };
+
+  public readonly example9Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-9/example-9.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-9/example-9.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-9/example-9.component.ts`,
+  };
 }

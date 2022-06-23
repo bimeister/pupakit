@@ -57,6 +57,18 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
   }
 
+  public fitColumnColumns(): void {
+    this.dispatchInQueue(new TableEvents.FitColumns());
+  }
+
+  public startFitColumnsOnResize(): void {
+    this.dispatchInQueue(new TableEvents.StartFitColumnsOnResize());
+  }
+
+  public stopFitColumnsOnResize(): void {
+    this.dispatchInQueue(new TableEvents.StopFitColumnsOnResize());
+  }
+
   public updateColumnWidthByDelta(columnId: string, deltaPx: number): void {
     this.dispatchInQueue(new TableEvents.UpdateColumnWidthByDelta(columnId, deltaPx));
   }

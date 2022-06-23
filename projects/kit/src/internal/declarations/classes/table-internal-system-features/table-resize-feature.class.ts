@@ -1,7 +1,14 @@
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { filterByInstanceOf, filterTruthy, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
-import { forkJoin, merge, NEVER, Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import {
+  filterByInstanceOf,
+  filterTruthy,
+  isNil,
+  resizeObservable,
+  shareReplayWithRefCount,
+} from '@bimeister/utilities';
+import { SCROLLBAR_WIDTH_PX } from '../../../constants/scrollbar-width-px.const';
+import { combineLatest, forkJoin, merge, NEVER, Observable, of, Subscription } from 'rxjs';
+import { filter, map, switchMap, take, tap, withLatestFrom } from 'rxjs/operators';
 import { ClientUiStateHandlerService } from '../../../shared/services/client-ui-state-handler.service';
 import { QueueEvents } from '../../events/queue.events';
 import { TableColumnEvents } from '../../events/table-column.events';
@@ -16,6 +23,8 @@ export class TableResizeFeature<T> implements TableFeature {
   private readonly eventBus: EventBus = this.api.eventBus;
   public readonly clientUiStateHandlerService: ClientUiStateHandlerService =
     this.api.tableInjector.get(ClientUiStateHandlerService);
+
+  private readonly tableElement: HTMLElement = this.api.tableElement;
 
   private readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> =
     this.api.displayData.columnIdToColumnMap$;
@@ -45,10 +54,15 @@ export class TableResizeFeature<T> implements TableFeature {
   private currentResizableColumn: TableColumn | null = null;
   private lastDeltaPx: number = 0;
 
+  private fitColumnsOnResizeSubscription: Subscription | null = null;
+
   constructor(private readonly api: TableApi<T>) {
     this.subscription.add(this.processPanStart());
     this.subscription.add(this.processPan());
     this.subscription.add(this.processPanEnd());
+    this.subscription.add(this.processOuterStartFitColumnsOnResizeEvent());
+    this.subscription.add(this.processOuterStopFitColumnsOnResizeEvent());
+    this.subscription.add(this.processOuterFitColumnSizesEvent());
     this.subscription.add(this.processOuterUpdateColumnWidthByDeltaEvent());
     this.subscription.add(this.processOuterSetColumnWidthEvent());
     this.subscription.add(this.processColumnWidthChanges());
@@ -57,6 +71,7 @@ export class TableResizeFeature<T> implements TableFeature {
 
   public dispose(): void {
     this.subscription.unsubscribe();
+    this.stopFitColumnsOnResize();
   }
 
   private processPanStart(): Subscription {
@@ -87,6 +102,40 @@ export class TableResizeFeature<T> implements TableFeature {
         this.currentResizableColumn = null;
         this.lastDeltaPx = 0;
       });
+  }
+
+  private processOuterStartFitColumnsOnResizeEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.StartFitColumnsOnResize),
+        tap(() => this.startFitColumnsOnResize())
+      )
+      .subscribe((event: TableEvents.StartFitColumnsOnResize) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
+  }
+
+  private processOuterStopFitColumnsOnResizeEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.StopFitColumnsOnResize),
+        tap(() => this.stopFitColumnsOnResize())
+      )
+      .subscribe((event: TableEvents.StopFitColumnsOnResize) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
+  }
+
+  private processOuterFitColumnSizesEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.FitColumns),
+        tap(() => this.fitColumns())
+      )
+      .subscribe((event: TableEvents.FitColumns) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
   private processOuterUpdateColumnWidthByDeltaEvent(): Subscription {
@@ -211,5 +260,54 @@ export class TableResizeFeature<T> implements TableFeature {
         this.eventBus.dispatch(new TableEvents.ColumnWidthChanged(newWidthPx, columnId));
         this.lastDeltaPx = event.panDelta[0];
       });
+  }
+
+  private startFitColumnsOnResize(): void {
+    this.fitColumnsOnResizeSubscription?.unsubscribe();
+    this.fitColumnsOnResizeSubscription = resizeObservable(this.tableElement).subscribe(() => {
+      this.fitColumns();
+    });
+  }
+
+  private stopFitColumnsOnResize(): void {
+    this.fitColumnsOnResizeSubscription?.unsubscribe();
+    this.fitColumnsOnResizeSubscription = null;
+  }
+
+  private fitColumns(): void {
+    combineLatest([
+      this.columnIdToColumnSizeStateMap$,
+      this.columnIdToColumnMap$,
+      this.clientUiStateHandlerService.breakpoint$,
+    ])
+      .pipe(take(1))
+      .subscribe(
+        ([columnIdToSizeStateMap, columnIdToColumnMap, breakpoint]: [
+          Map<string, TableColumnSizeState>,
+          Map<string, TableColumn>,
+          string
+        ]) => {
+          const columnsWithoutWidth: TableColumn[] = [];
+          let totalWidth: number = 0;
+
+          for (const column of columnIdToColumnMap.values()) {
+            const defaultWidth: number | undefined = column.definition.defaultSizes?.widthPx;
+            const breakpointWidth: number | undefined = column.definition.adaptiveSizes?.[breakpoint]?.widthPx;
+            const targetWidth: number | undefined = breakpointWidth ?? defaultWidth;
+
+            totalWidth += targetWidth ?? 0;
+
+            if (isNil(targetWidth)) {
+              columnsWithoutWidth.push(column);
+            }
+          }
+
+          const availableWidth: number = this.tableElement.clientWidth - totalWidth - SCROLLBAR_WIDTH_PX;
+
+          for (const column of columnsWithoutWidth) {
+            columnIdToSizeStateMap.get(column.definition.id).setFitWidth(availableWidth / columnsWithoutWidth.length);
+          }
+        }
+      );
   }
 }
