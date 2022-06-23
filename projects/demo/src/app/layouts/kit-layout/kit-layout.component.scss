@@ -16,12 +16,7 @@
 .side-nav {
   margin-top: $navbar-height;
 
-  color: #616161;
-
-  border-right: 1px solid get-map-field($theme-config, [light, body, border-color]);
-  @include host-selector-dark-theme() {
-    border-right: 1px solid get-map-field($theme-config, [dark, body, border-color]);
-  }
+  border-right: 1px solid semantic-color(borders-border);
 
   display: flex;
   flex-direction: column;
@@ -45,13 +40,8 @@
   @include grid-container-offset('padding-left');
   @include grid-container-offset('padding-right');
 
-  background-color: get-map-field($theme-config, [ 'light', 'body', background-color]);
-  color: get-map-field($theme-config, [ 'light', 'body', font-color]);
-
-  @include host-selector-dark-theme() {
-    background-color: get-map-field($theme-config, [ 'dark', 'body', background-color]);
-    color: get-map-field($theme-config, [ 'dark', 'body', font-color]);
-  }
+  background-color: semantic-color(surface-primary);
+  color: semantic-color(text-primary);
 }
 
 .content {

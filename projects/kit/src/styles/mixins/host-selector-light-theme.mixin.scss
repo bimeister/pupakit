@@ -1,0 +1,8 @@
+@use './host-selector.mixin' as *;
+@use './../variables/common.variables' as *;
+
+@mixin host-selector-light-theme {
+  @include host-selector(#{$lightThemeClass}) {
+    @content;
+  }
+}

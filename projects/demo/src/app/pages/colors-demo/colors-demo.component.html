@@ -1,52 +1,175 @@
 <h1>Colors</h1>
 
-<div class="header">
-  <pupa-info-block> Click on the color info line to copy the value. </pupa-info-block>
-</div>
-
-<div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
-  <h3>{{ colorGroup.name }}</h3>
-
-  <div class="colors-demo__list">
-    <div
-      *ngFor="let color of colorGroup.colors"
-      class="color"
-      [style.background-color]="color.getAsCssValue()"
-      [class.color_inverted]="color.isLight"
+<pupa-tabs-container>
+  <pupa-tabs>
+    <pupa-tabs-item
+      *ngFor="let route of routes"
+      [routerLink]="route.path"
+      [queryParams]="route.queryParams"
+      routerLinkActive
+      #routerLinkActive="routerLinkActive"
+      [isActive]="routerLinkActive.isActive"
+      [name]="route.title"
     >
-      <div class="color__name" (click)="copyToClipboard(color.name)">{{ color.name }}</div>
-      <div class="color__key" (click)="copyToClipboard(color.key)">{{ color.key }}</div>
-      <div class="color__value" (click)="copyToClipboard(color.hex)">
-        <span class="color__value-name">hex:</span> #{{ color.hex }}
-      </div>
-      <div class="color__value" (click)="copyToClipboard(color.formattedRgb)">
-        <span class="color__value-name">rgb:</span> {{ color.formattedRgb }}
+      {{ route.title }}
+    </pupa-tabs-item>
+  </pupa-tabs>
+  <pupa-tabs-separator></pupa-tabs-separator>
+
+  <pupa-tabs-content>
+    <ng-container *ngFor="let route of routes">
+      <ng-container class="tab" *pupaTabsItemContentTemplate="route.title">
+        <ng-container *ngIf="route.title === 'Main Colors'" [ngTemplateOutlet]="mainPaletteTemplate"></ng-container>
+        <ng-container
+          *ngIf="route.title === 'Semantic Colors'"
+          [ngTemplateOutlet]="semanticColorsTemplate"
+        ></ng-container>
+      </ng-container>
+    </ng-container>
+  </pupa-tabs-content>
+</pupa-tabs-container>
+
+<ng-template #mainPaletteTemplate>
+  <div class="description">
+    <p>
+      This is the main color palette. All other colors use this palette. If you redefine this palette, then all other
+      adjacent colors will be redefined.
+    </p>
+    <pupa-info-block> Click on the color info line to copy the value. </pupa-info-block>
+  </div>
+
+  <div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
+    <h4>{{ colorGroup.name }}</h4>
+
+    <div class="colors-demo__list">
+      <div
+        *ngFor="let color of colorGroup.colors"
+        class="color"
+        [style.background-color]="color.getAsCssValue()"
+        [class.color_inverted]="color.isLight"
+      >
+        <div class="color__name" (click)="copyToClipboard(color.name)">{{ color.name }}</div>
+        <div class="color__value" (click)="copyToClipboard(color.hex)">
+          <span class="color__value-name">hex:</span> #{{ color.hex }}
+        </div>
+        <div class="color__value" (click)="copyToClipboard(color.formattedRgb)">
+          <span class="color__value-name">rgb:</span> {{ color.formattedRgb }}
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<h3>Using and overriding colors with .scss component styles</h3>
-<pupa-code-container [content]="example1Content">
-  <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
-</pupa-code-container>
+  <h3>Alpha Values</h3>
 
-<pupa-info-block>
-  Second parameter in <pupa-code-inline>override-colors</pupa-code-inline> mixin is a CSS selector. Set it as ':root'
-  for global color overriding.
-</pupa-info-block>
+  <div class="description">
+    <pupa-info-block> Click on the alpha value card to copy the value. </pupa-info-block>
+  </div>
 
-<pupa-info-block>
-  Second parameter in <pupa-code-inline>color</pupa-code-inline> function is a alpha value. Default alpha value is 1.
-</pupa-info-block>
+  <div class="alpha-values">
+    <div class="alpha-values__value" *ngFor="let alphaValue of alphaValues" (click)="copyToClipboard(alphaValue.name)">
+      <span>{{ alphaValue.name }}</span>
+      <span>{{ alphaValue.value }}%</span>
+    </div>
+  </div>
 
-<pupa-info-block variant="note"> If you set invalid color key you will get error. </pupa-info-block>
+  <h3>Using and overriding colors with .scss component styles</h3>
+  <pupa-code-container [content]="example1Content">
+    <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
+  </pupa-code-container>
 
-<h3>Using and overriding colors with .css component styles</h3>
-<pupa-code-container [content]="example2Content">
-  <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
-</pupa-code-container>
+  <pupa-info-block>
+    Second parameter in <pupa-code-inline>override-colors</pupa-code-inline> mixin is a CSS selector. Set it as ':root'
+    for global color overriding.
+  </pupa-info-block>
 
-<pupa-info-block> Use RGB values for CSS variables. </pupa-info-block>
+  <pupa-info-block>
+    Second parameter in <pupa-code-inline>color</pupa-code-inline> function is a alpha value. Default alpha value is 1.
+  </pupa-info-block>
 
-<pupa-info-block variant="warning"> CSS variables are not validated. </pupa-info-block>
+  <pupa-info-block variant="note" class="last-point">
+    If you set invalid color key you will get error.
+  </pupa-info-block>
+
+  <h3>Using and overriding colors with .css component styles</h3>
+  <pupa-code-container [content]="example2Content">
+    <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
+  </pupa-code-container>
+
+  <pupa-info-block> Use RGB values for CSS variables. </pupa-info-block>
+
+  <pupa-info-block variant="warning" class="last-point"> CSS variables are not validated. </pupa-info-block>
+
+  <h3>Usage</h3>
+
+  <p>
+    To use colors, you need to use the function
+    <pupa-code-inline>color($color, $alpha: alpha-1000)</pupa-code-inline>. In the second argument you can use some
+    alpha value or a number to set the opacity of the color. The default value is
+    <pupa-code-inline>alpha-1000</pupa-code-inline>. In this case, the configured alpha value from the alpha config is
+    used.
+  </p>
+
+  <pupa-code-container [content]="colorsUsageExampleContent">
+    <demo-color-usage-example *pupaCodeContainerPreviewTemplate></demo-color-usage-example>
+  </pupa-code-container>
+</ng-template>
+
+<ng-template #semanticColorsTemplate>
+  <div class="description">
+    <p>
+      Semantic colors are colors that are automatically overridden based on the active theme. These colors refer to the
+      main palette. To see automatic color changes, change the interface theme.
+    </p>
+
+    <pupa-info-block> Click on the color card to copy the value. </pupa-info-block>
+
+    <pupa-info-block variant="note">
+      Please note that for the semantic color Glass, you need additionally use
+      <pupa-code-inline>@mixin blur($value: 24px)</pupa-code-inline>.
+    </pupa-info-block>
+  </div>
+
+  <div class="semantic-colors__group" *ngFor="let group of semanticConfigurationGroups">
+    <h4>{{ group.name }}</h4>
+
+    <div class="semantic-colors__section" *ngIf="theme$ | async as theme">
+      <div
+        class="semantic-colors__configuration configuration"
+        *ngFor="let configuration of group.configurations"
+        (click)="copyToClipboard(configuration.color.name)"
+      >
+        <div class="configuration__wrapper">
+          <div class="configuration__title">{{ configuration.name }}</div>
+          <div class="configuration__description">
+            <div class="configuration__colors">
+              <span>{{ configuration.color.name }}</span>
+              <span
+                >{{ getSemanticColorNameByTheme(configuration.color, theme) }},
+                {{ getSemanticAlphaValueNameByTheme(configuration.color, theme) }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="configuration__color-block"
+          [style.background-color]="configuration.color.getSemanticColorAsCssValue()"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <h3>Usage</h3>
+
+  <p>
+    To use semantic colors, you need to use the function
+    <pupa-code-inline>semantic-color($semantic-color, $alpha: 'none')</pupa-code-inline>. In the second argument you can
+    use <pupa-code-inline>'none'</pupa-code-inline>, some alpha value or a number to set the opacity of the color. The
+    default value is <pupa-code-inline>'none'</pupa-code-inline>. In this case, the configured alpha value from the
+    config is used.
+  </p>
+
+  <pupa-code-container [content]="semanticColorsUsageExampleContent">
+    <demo-semantic-color-usage-example *pupaCodeContainerPreviewTemplate></demo-semantic-color-usage-example>
+  </pupa-code-container>
+</ng-template>

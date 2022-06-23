@@ -1,0 +1,591 @@
+[
+  {
+    "name": "Surface",
+    "configurations": [
+      {
+        "name": "Primary",
+        "lightColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Secondary",
+        "lightColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-800",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Tertiary",
+        "lightColor": {
+          "color": "neutral-4",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-3"
+        }
+      },
+      {
+        "name": "Action",
+        "lightColor": {
+          "color": "neutral-5",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-500",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Glass",
+        "lightColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-700"
+        },
+        "darkColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-700"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Status-Neutral",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "neutral-5",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-500",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "neutral-6",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-400",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "neutral-7",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "neutral-7",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Selected",
+        "lightColor": {
+          "color": "neutral-4",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-700",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-3",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-850",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Status-Primary",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "primary-500",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-40",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "primary-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-50",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "primary-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-100",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "primary-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-100",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-3",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-850",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Status-Success",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "success-500",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "success-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "success-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "success-200",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "success-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "success-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "success-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "success-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-3",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-850",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Status-Warning",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "warning-500",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "warning-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "warning-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "warning-200",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "warning-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "warning-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "warning-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "warning-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-3",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-850",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Status-Danger",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "danger-500",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "danger-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "danger-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "danger-200",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "danger-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "danger-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "danger-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "danger-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-3",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-850",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Text",
+    "configurations": [
+      {
+        "name": "Primary",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Secondary",
+        "lightColor": {
+          "color": "neutral-300",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-9",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-50",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-60",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Inverse",
+        "lightColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Accent",
+        "lightColor": {
+          "color": "primary-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-150",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Borders",
+    "configurations": [
+      {
+        "name": "Border",
+        "lightColor": {
+          "color": "neutral-5",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-500",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Border-dark",
+        "lightColor": {
+          "color": "neutral-9",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-5",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Accent",
+        "lightColor": {
+          "color": "primary-850",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-500",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Alpha",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-7"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-7"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Icons",
+    "configurations": [
+      {
+        "name": "Accent",
+        "lightColor": {
+          "color": "primary-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Primary",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Inverse",
+        "lightColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-50",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-60",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Secondary",
+        "lightColor": {
+          "color": "neutral-300",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-9",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  },
+  {
+    "name": "Link",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "primary-600",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-150",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "primary-700",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-200",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "primary-800",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-300",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Visited",
+        "lightColor": {
+          "color": "primary-900",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "primary-400",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
+  }
+]

@@ -16,7 +16,8 @@
   min-height: 100vh;
   text-align: center;
 
-  @include apply-theme-dependent-property(background-color, $theme-config, [body, background-color]);
+  background-color: semantic-color(surface-primary);
+  color: semantic-color(text-primary);
 
   &__error {
     width: 100%;
@@ -25,8 +26,6 @@
     font-weight: bold;
     line-height: normal;
     animation: glitch 2s steps(100) infinite;
-
-    @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);
 
     @include width-between-property(
       $property: 'font-size',
@@ -40,8 +39,6 @@
   }
 
   &__text {
-    @include apply-theme-dependent-property(color, $theme-config, [body, font-color]);
-
     margin-top: 0;
     @include font-preset-h2;
   }

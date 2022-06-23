@@ -1,0 +1,8 @@
+@use './../variables/common.variables' as *;
+
+@mixin light-theme-class-parent {
+  &#{$lightThemeClass},
+  #{$lightThemeClass} & {
+    @content;
+  }
+}

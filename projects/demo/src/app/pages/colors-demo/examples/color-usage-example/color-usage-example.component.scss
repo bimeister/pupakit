@@ -1,0 +1,26 @@
+@use 'functions' as *;
+
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 4rem;
+}
+
+.circle {
+  width: 30rem;
+  height: 30rem;
+  content: '';
+  border-radius: 100%;
+
+  &_primary {
+    background-color: color(primary-500);
+  }
+
+  &_success {
+    background-color: color(success-500, alpha-700);
+  }
+
+  &_danger {
+    background-color: color(danger-500, 0.8);
+  }
+}

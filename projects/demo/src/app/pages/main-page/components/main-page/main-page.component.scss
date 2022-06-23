@@ -11,7 +11,7 @@
   width: 100%;
   text-align: center;
 
-  @include apply-theme-dependent-property(background-color, $theme-config, [body, background-color]);
+  background-color: semantic-color(surface-primary);
 
   &__wrapper {
     display: flex;

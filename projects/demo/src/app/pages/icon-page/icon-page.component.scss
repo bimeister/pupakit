@@ -7,21 +7,10 @@
 }
 
 .content {
-  margin-top: 16px;
+  margin-top: 4rem;
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 4rem;
   grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-}
-
-.color {
-  padding: 21px 16px 16px 16px;
-  border-radius: 8px;
-
-  font-weight: 800;
-  font-size: 21px;
-  line-height: 25px;
-
-  color: white;
 }
 
 .icon {
@@ -45,11 +34,7 @@
 
   &-name {
     text-align: center;
-    font-size: 14px;
-    line-height: 24px;
-    @include host-selector-dark-theme() {
-      color: get-map-field($theme-config, [dark, body, font-color]);
-    }
-    color: get-map-field($theme-config, [light, body, font-color]);
+
+    @include font-preset-caption-s();
   }
 }

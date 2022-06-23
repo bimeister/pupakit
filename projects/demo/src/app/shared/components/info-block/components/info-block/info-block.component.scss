@@ -2,35 +2,6 @@
 @use 'functions' as *;
 @use 'variables' as *;
 
-$color_light-info: color(primary-50);
-$color_dark_info: color(primary-600);
-
-$color_light-note: color(neutral-9);
-$color_dark-note: color(neutral-700);
-
-$color_light-success: color(success-150);
-$color_dark-success: color(success-600);
-
-$color_light-warning: color(warning-150);
-$color_dark-warning: color(warning-600);
-
-$color_light-error: color(danger-150);
-$color_dark-error: color(danger-600);
-
-@mixin base-info-block($lightColor, $darkColor) {
-  background-color: $lightColor;
-  .icon {
-    color: $darkColor;
-  }
-
-  @include host-selector-dark-theme {
-    background-color: $darkColor;
-    .icon {
-      color: $lightColor;
-    }
-  }
-}
-
 :host {
   display: block;
   margin-bottom: 3rem;
@@ -48,29 +19,67 @@ $color_dark-error: color(danger-600);
   }
 
   &.info {
-    @include base-info-block($color_light-info, $color_dark-info);
+    background-color: color(primary-50);
+    color: color(neutral-1000);
+
+    .icon {
+      color: color(primary-500);
+    }
+
+    @include host-selector-dark-theme {
+      background-color: color(primary-40);
+    }
   }
 
   &.note {
-    @include base-info-block($color_light-note, $color_dark-note);
+    background-color: color(neutral-5);
+    color: color(neutral-1000);
+
+    .icon {
+      color: color(neutral-1000);
+    }
+
+    @include host-selector-dark-theme {
+      background-color: color(neutral-8);
+    }
   }
 
   &.success {
-    @include base-info-block($color_light-success, $color_dark-success);
+    background-color: color(success-50);
+    color: color(neutral-1000);
+
+    .icon {
+      color: color(success-500);
+    }
+
+    @include host-selector-dark-theme {
+      background-color: color(success-40);
+    }
   }
 
   &.warning {
-    @include base-info-block($color_light-warning, $color_dark-warning);
+    background-color: color(warning-50);
+    color: color(neutral-1000);
+
+    .icon {
+      color: color(warning-500);
+    }
 
     @include host-selector-dark-theme {
-      color: color(neutral-1000);
-      .icon {
-        color: color(danger-600);
-      }
+      background-color: color(warning-40);
     }
   }
 
   &.error {
-    @include base-info-block($color_light-error, $color_dark-error);
+    background-color: color(danger-50);
+    color: color(neutral-1000);
+
+    .icon {
+      color: color(danger-500);
+    }
+
+    @include host-selector-dark-theme {
+      background-color: color(danger-40);
+    }
   }
 }
