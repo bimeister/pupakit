@@ -1,7 +1,7 @@
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
 import { asapScheduler, BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, map, subscribeOn, switchMap, take } from 'rxjs/operators';
+import { distinctUntilChanged, map, subscribeOn, switchMap, take, tap } from 'rxjs/operators';
+import { ClientUiStateHandlerService } from '../../shared/services/client-ui-state-handler.service';
 import { TableAdaptiveColumnSizes } from '../interfaces/table-adaptive-column-sizes.interface';
 import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
 
@@ -52,6 +52,7 @@ export class TableColumnSizeState {
     this.breakpoint$.pipe(filterNotNil()),
     this.breakpointToSizesMap$,
   ]).pipe(
+    tap(() => this.fitWidthPxState$.next(null)),
     map(([currentBreakpoint, breakpointToSizesMap]: [string, Map<string, TableColumnSizes>]) =>
       breakpointToSizesMap.get(currentBreakpoint)
     ),
@@ -69,25 +70,38 @@ export class TableColumnSizeState {
   );
 
   private readonly userWidthPxState$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
+  private readonly fitWidthPxState$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
 
   public readonly widthPx$: Observable<number> = combineLatest([
     this.definitionWidthPxState$,
     this.minWidthPx$,
     this.maxWidthPx$,
     this.userWidthPxState$,
+    this.fitWidthPxState$,
   ]).pipe(
-    map(([widthPxState, minWidthPx, maxWidthPx, userPxState]: [number, number, number, Nullable<number>]) => {
-      const widthPx: number = isNil(userPxState) ? widthPxState : userPxState;
-      if (!isNil(minWidthPx) && widthPx < minWidthPx) {
-        return minWidthPx;
-      }
+    map(
+      ([widthPxState, minWidthPx, maxWidthPx, userPxState, fitWidthPxState]: [
+        number,
+        number,
+        number,
+        Nullable<number>,
+        Nullable<number>
+      ]) => {
+        if (!isNil(fitWidthPxState)) {
+          return fitWidthPxState;
+        }
 
-      if (!isNil(maxWidthPx) && widthPx > maxWidthPx) {
-        return maxWidthPx;
-      }
+        const widthPx: number = userPxState ?? widthPxState;
+        if (!isNil(minWidthPx) && widthPx < minWidthPx) {
+          return minWidthPx;
+        }
 
-      return widthPx;
-    }),
+        if (!isNil(maxWidthPx) && widthPx > maxWidthPx) {
+          return maxWidthPx;
+        }
+        return widthPx;
+      }
+    ),
     distinctUntilChanged()
   );
 
@@ -119,6 +133,7 @@ export class TableColumnSizeState {
 
   public setWidth(widthPx: number): Observable<boolean> {
     const result$: Subject<boolean> = new Subject<boolean>();
+    this.fitWidthPxState$.next(null);
 
     combineLatest([this.minWidthPx$, this.maxWidthPx$])
       .pipe(take(1), subscribeOn(asapScheduler))
@@ -143,5 +158,10 @@ export class TableColumnSizeState {
       });
 
     return result$;
+  }
+
+  public setFitWidth(widthPx: number): void {
+    this.userWidthPxState$.next(null);
+    this.fitWidthPxState$.next(widthPx);
   }
 }

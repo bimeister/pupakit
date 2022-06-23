@@ -88,6 +88,7 @@ export {
   TreeNodeProperties,
   UiState,
   UploadingStatus,
+  SCROLLBAR_WIDTH_PX,
 } from './internal/api';
 export * from './internal/constants/icons/api';
 export { DAY_SELECTOR_CONFIG_TOKEN } from './internal/constants/tokens/api';
