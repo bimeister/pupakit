@@ -1,0 +1,12 @@
+@use './../maps/semantic-colors.map' as *;
+@use 'sass:map';
+
+@mixin apply-light-theme($value: 24px) {
+  @each $name, $value in $lightColorsMap {
+    --semantic-color_#{$name}: #{$value};
+  }
+
+  @each $name, $value in $lightColorsAlphaMap {
+    --semantic-color-alpha_#{$name}: #{$value};
+  }
+}
