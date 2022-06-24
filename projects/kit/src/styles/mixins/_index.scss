@@ -1,6 +1,8 @@
 @forward './adaptive';
 @forward './font';
 
+@forward './apply-light-theme.mixin';
+@forward './apply-dark-theme.mixin';
 @forward './dark-theme-class-parent.mixin';
 @forward './light-theme-class-parent.mixin';
 @forward './debug.mixin';

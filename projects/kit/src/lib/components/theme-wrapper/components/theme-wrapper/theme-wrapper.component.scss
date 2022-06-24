@@ -4,22 +4,10 @@
 
 :host {
   @include light-theme-class-parent() {
-    @each $name, $value in $lightColorsMap {
-      --semantic-color_#{$name}: #{$value};
-    }
-
-    @each $name, $value in $lightColorsAlphaMap {
-      --semantic-color-alpha_#{$name}: #{$value};
-    }
+    @include apply-light-theme();
   }
 
   @include dark-theme-class-parent() {
-    @each $name, $value in $darkColorsMap {
-      --semantic-color_#{$name}: #{$value};
-    }
-
-    @each $name, $value in $darkColorsAlphaMap {
-      --semantic-color-alpha_#{$name}: #{$value};
-    }
+    @include apply-dark-theme();
   }
 }
