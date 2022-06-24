@@ -45,6 +45,11 @@
       <demo-input-demo-example-size *pupaCodeContainerPreviewTemplate></demo-input-demo-example-size>
     </pupa-code-container>
 
+    <h3>Placeholder usage</h3>
+    <pupa-code-container [content]="placeholderExampleContent">
+      <demo-input-demo-example-placeholder *pupaCodeContainerPreviewTemplate></demo-input-demo-example-placeholder>
+    </pupa-code-container>
+
     <h3>Patched input</h3>
     <pupa-code-container [content]="isPatchedExampleContent">
       <demo-input-demo-example-is-patched *pupaCodeContainerPreviewTemplate></demo-input-demo-example-is-patched>
@@ -85,7 +90,8 @@
               styles: styles$ | async,
               icon: icon$ | async,
               isFixedSize: isFixedSize$ | async,
-              isBackDating: isBackDating$ | async
+              isBackDating: isBackDating$ | async,
+              placeholderOnHover: placeholderOnHover$ | async
             };
             let withReset = withReset;
             let isPatched = isPatched;
@@ -95,7 +101,8 @@
             let styles = styles;
             let icon = icon;
             let isFixedSize = isFixedSize;
-            let isBackDating = isBackDating
+            let isBackDating = isBackDating;
+            let placeholderOnHover = placeholderOnHover
           "
         >
           <div class="controls-list__block">
@@ -108,6 +115,7 @@
               [isPatched]="isPatched"
               [placeholder]="placeholderFormControl.value"
               [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
+              [placeholderOnHover]="placeholderOnHover"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
@@ -129,6 +137,7 @@
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
               [customStyles]="styles"
+              [placeholderOnHover]="placeholderOnHover"
             ></pupa-input-time>
           </div>
 
@@ -198,6 +207,13 @@
         <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
           <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
           <pupa-input-text [formControl]="placeholderFormControl" [withReset]="true"></pupa-input-text>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="placeholderOnHover" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Makes placeholder visible only upon hovering.
+          </ng-container>
+          <demo-props-switcher #placeholderOnHover$ [initialValue]="true"></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="withReset" type="boolean">

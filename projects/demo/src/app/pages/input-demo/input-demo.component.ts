@@ -135,6 +135,12 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     SCSS: `${BASE_REQUEST_PATH}/input-demo-example-styles/input-demo-example-styles.component.scss`,
   };
 
+  public readonly placeholderExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.html`,
+    TS: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.scss`,
+  };
+
   public ngOnInit(): void {
     this.subscription.add(this.subscribeToIsDisabled());
   }
