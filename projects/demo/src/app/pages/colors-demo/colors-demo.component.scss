@@ -109,7 +109,7 @@ $semantic-configuration_width: 300px;
 
   &__configuration {
     width: $semantic-configuration_width;
-    border: 1px solid semantic-color(borders-border-dark);
+    border: 1px solid semantic-color(lines-dark);
     border-radius: $controlBorderRadius;
     overflow: hidden;
 
@@ -148,6 +148,6 @@ $semantic-configuration_width: 300px;
 
   &__color-block {
     width: 30%;
-    border-left: 1px solid semantic-color(borders-border-dark);
+    border-left: 1px solid semantic-color(lines-dark);
   }
 }

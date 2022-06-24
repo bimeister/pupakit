@@ -3,7 +3,7 @@
 @use 'functions' as *;
 
 @mixin content-border {
-  border: 1px solid semantic-color(borders-border);
+  border: 1px solid semantic-color(lines-normal);
 }
 
 .button-group-content-item {
