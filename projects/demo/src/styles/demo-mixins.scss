@@ -6,7 +6,7 @@
 
 @mixin bordered-box {
   background-color: semantic-color(surface-primary);
-  border: 1px solid semantic-color(borders-border);
+  border: 1px solid semantic-color(lines-normal);
 
   border-radius: 1rem;
 }

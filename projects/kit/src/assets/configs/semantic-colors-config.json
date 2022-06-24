@@ -60,7 +60,7 @@
     ]
   },
   {
-    "name": "Status-Neutral",
+    "name": "Kind-Neutral",
     "configurations": [
       {
         "name": "Normal",
@@ -131,7 +131,7 @@
     ]
   },
   {
-    "name": "Status-Primary",
+    "name": "Kind-Primary",
     "configurations": [
       {
         "name": "Normal",
@@ -191,7 +191,7 @@
     ]
   },
   {
-    "name": "Status-Success",
+    "name": "Kind-Success",
     "configurations": [
       {
         "name": "Normal",
@@ -251,7 +251,7 @@
     ]
   },
   {
-    "name": "Status-Warning",
+    "name": "Kind-Warning",
     "configurations": [
       {
         "name": "Normal",
@@ -311,7 +311,7 @@
     ]
   },
   {
-    "name": "Status-Danger",
+    "name": "Kind-Danger",
     "configurations": [
       {
         "name": "Normal",
@@ -431,10 +431,10 @@
     ]
   },
   {
-    "name": "Borders",
+    "name": "Lines",
     "configurations": [
       {
-        "name": "Border",
+        "name": "Normal",
         "lightColor": {
           "color": "neutral-5",
           "alpha": "alpha-1000"
@@ -445,7 +445,7 @@
         }
       },
       {
-        "name": "Border-dark",
+        "name": "Dark",
         "lightColor": {
           "color": "neutral-9",
           "alpha": "alpha-1000"
@@ -467,7 +467,7 @@
         }
       },
       {
-        "name": "Alpha",
+        "name": "Opacity",
         "lightColor": {
           "color": "neutral-1000",
           "alpha": "alpha-7"

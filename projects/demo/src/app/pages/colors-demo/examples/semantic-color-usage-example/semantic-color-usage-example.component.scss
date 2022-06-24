@@ -13,18 +13,18 @@
   border-radius: 100%;
 
   &_primary {
-    background-color: semantic-color(status-primary-normal);
+    background-color: semantic-color(kind-primary-normal);
   }
 
   &_success {
-    background-color: semantic-color(status-success-normal, 'none');
+    background-color: semantic-color(kind-success-normal, 'none');
   }
 
   &_warning {
-    background-color: semantic-color(status-warning-normal, alpha-800);
+    background-color: semantic-color(kind-warning-normal, alpha-800);
   }
 
   &_danger {
-    background-color: semantic-color(status-danger-normal, 0.8);
+    background-color: semantic-color(kind-danger-normal, 0.8);
   }
 }
