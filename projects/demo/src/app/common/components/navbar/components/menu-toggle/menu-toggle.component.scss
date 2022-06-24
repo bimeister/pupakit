@@ -3,7 +3,7 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
-$menu-toggle-size: 20px;
+$menu-toggle-size: 5rem;
 $strip-height: 2px;
 
 @mixin apply-background() {

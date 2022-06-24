@@ -2,9 +2,9 @@
 @use 'functions' as *;
 @use 'variables' as *;
 
-$color-block_width: 134px;
-$alpha-value_width: 120px;
-$semantic-configuration_width: 300px;
+$color-block_width: 34rem;
+$alpha-value_width: 30rem;
+$semantic-configuration_width: 75rem;
 
 :host {
   display: block;
