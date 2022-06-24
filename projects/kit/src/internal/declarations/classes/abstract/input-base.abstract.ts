@@ -44,6 +44,9 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
+  @Input() public placeholderOnHover: boolean = true;
+  public readonly placeholderOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -136,6 +139,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
     this.processStylesChange(changes?.customStyles);
+    this.processPlaceholderOnHoverValueChange(changes?.placeholderOnHover);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -195,5 +199,15 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.customStyles$.next(updatedValue);
+  }
+
+  private processPlaceholderOnHoverValueChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.placeholderOnHover$.next(updatedValue);
   }
 }

@@ -9,6 +9,7 @@
         <!-- NOTE: ngModel is incorrect: use other mask instead -->
         <input
           class="input"
+          [class.on-hover]="placeholderOnHover$ | async"
           #inputElement
           type="text"
           placeholder=""

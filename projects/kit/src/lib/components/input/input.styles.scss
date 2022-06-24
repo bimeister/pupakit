@@ -36,8 +36,12 @@
     -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
   }
 
-  &::placeholder {
+  &.on-hover::placeholder {
     opacity: 0;
+  }
+
+  &::placeholder {
+    opacity: 1;
     will-change: opacity;
     transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common),
       opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
