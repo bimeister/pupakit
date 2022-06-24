@@ -8,9 +8,4 @@ export namespace ColorsConfig {
     name: string;
     hex: string;
   }
-
-  export interface AlphaValue {
-    name: string;
-    value: number;
-  }
 }

@@ -13,8 +13,8 @@ const EXAMPLES: Type<unknown>[] = [
   ColorsSemanticColorUsageExampleComponent,
   ColorsColorUsageExampleComponent,
 ];
-const COMPONENTS: Type<unknown>[] = [ColorsDemoComponent, ...EXAMPLES];
-const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
+const COMPONENTS: Type<unknown>[] = [ColorsDemoComponent];
+const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...EXAMPLES];
 
 @NgModule({
   declarations: [...DECLARATIONS],
