@@ -79,8 +79,6 @@ export class SidebarComponent {
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Form Layout', link: '/kit/form-layout' },
         { title: 'Tree node', link: '/kit/tree-node' },
-        { title: '⚠️ Chip Tabs', link: '/kit/chip-tabs' },
-        { title: '⚠️ Vertical Tabs', link: '/kit/vertical-tabs' },
         { title: '⚠️ Tree', link: '/kit/tree' },
       ],
       'title'

@@ -18,8 +18,6 @@ import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { CounterDemoModule } from './pages/counter-demo/counter-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
-import { DraggableDemoModule } from './pages/draggable-demo/draggable-demo.module';
-import { DraggableListDemoModule } from './pages/draggable-list-demo/draggable-list-demo.module';
 import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
@@ -53,10 +51,6 @@ import { TreeDemoModule } from './pages/tree-demo/tree-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
-import { UploadsDemoModule } from './pages/uploads-demo/uploads-demo.module';
-import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
-import { CardDemoModule } from './pages/card-demo/card-demo.module';
-import { VerticalTabsDemoModule } from './pages/vertical-tabs-demo/vertical-tabs-demo.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 
 const demoRoutes: Routes = [
@@ -257,11 +251,6 @@ const demoRoutes: Routes = [
           import('./pages/day-selector-demo/day-selector-demo.module').then(
             (module: any) => module.DaySelectorDemoModule
           ),
-      },
-      {
-        path: 'uploads',
-        loadChildren: (): Promise<Type<UploadsDemoModule>> =>
-          import('./pages/uploads-demo/uploads-demo.module').then((module: any) => module.UploadsDemoModule),
       },
       {
         path: 'floating-card',
