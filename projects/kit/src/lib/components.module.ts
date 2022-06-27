@@ -15,9 +15,6 @@ import { CounterModule } from './components/counter/counter.module';
 import { DateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
 import { DaySelectorModule } from './components/day-selector/day-selector.module';
 import { DndCloneContainerModule } from './components/dnd-clone-container/dnd-clone-container.module';
-import { DraggableListModule } from './components/draggable-list/draggable-list.module';
-import { DraggableModule } from './components/draggable/draggable.module';
-import { DrawerOldModule } from './components/drawer-old/drawer-old.module';
 import { DrawerModule } from './components/drawer/drawer.module';
 import { DropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
@@ -53,10 +50,7 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { TreeModule } from './components/tree/tree.module';
-import { VerticalTabsModule } from './components/vertical-tabs/vertical-tabs.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
-import { UploadsModule } from './components/uploads/uploads.module';
-import { DaySelectorModule } from './components/day-selector/day-selector.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
@@ -83,7 +77,6 @@ const EXPORTS: any[] = [
   DropdownMenuModule,
   TreeModule,
   TreeNewModule,
-  VerticalTabsModule,
   SkeletonModule,
   SelectModule,
   ProgressBarModule,
