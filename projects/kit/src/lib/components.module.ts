@@ -49,7 +49,6 @@ import { ToastModule } from './components/toast/toast.module';
 import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
-import { TreeModule } from './components/tree/tree.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
 
 const EXPORTS: any[] = [
@@ -75,7 +74,6 @@ const EXPORTS: any[] = [
   ThemeWrapperModule,
   TooltipModule,
   DropdownMenuModule,
-  TreeModule,
   TreeNewModule,
   SkeletonModule,
   SelectModule,

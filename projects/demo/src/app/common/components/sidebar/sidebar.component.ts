@@ -79,7 +79,6 @@ export class SidebarComponent {
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Form Layout', link: '/kit/form-layout' },
         { title: 'Tree node', link: '/kit/tree-node' },
-        { title: '⚠️ Tree', link: '/kit/tree' },
       ],
       'title'
     ),
@@ -107,23 +106,11 @@ export class SidebarComponent {
     linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title'),
   };
 
-  private readonly otherGroup: LinksGroup = {
-    title: 'Other',
-    linkItems: sortByProperty(
-      [
-        { title: 'Layout', link: './layout' },
-        { title: '⚠️ Scrollbar Styles', link: '/kit/scrollbar' },
-      ],
-      'title'
-    ),
-  };
-
   private readonly linkGroups: LinksGroup[] = [
     this.infoGroup,
     this.generalGroup,
     this.overlayGroup,
     this.demoToolsGroup,
-    this.otherGroup,
   ];
 
   public readonly searchControl: FormControl = new FormControl('');

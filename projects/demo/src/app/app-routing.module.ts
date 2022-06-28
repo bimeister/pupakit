@@ -47,7 +47,6 @@ import { TabsDemoModule } from './pages/tabs-demo/tabs-demo.module';
 import { TagDemoModule } from './pages/tag-demo/tag-demo.module';
 import { TextareaDemoModule } from './pages/textarea-demo/textarea-demo.module';
 import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
-import { TreeDemoModule } from './pages/tree-demo/tree-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
@@ -146,11 +145,6 @@ const demoRoutes: Routes = [
           import('./pages/search-field-demo/search-field-demo.module').then(
             (module: any) => module.SearchFieldDemoModule
           ),
-      },
-      {
-        path: 'tree',
-        loadChildren: (): Promise<Type<TreeDemoModule>> =>
-          import('./pages/tree-demo/tree-demo.module').then((module: any) => module.TreeDemoModule),
       },
       {
         path: 'tree-new',
