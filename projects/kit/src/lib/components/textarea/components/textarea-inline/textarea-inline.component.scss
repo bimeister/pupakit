@@ -53,7 +53,7 @@
     color: color(neutral-300);
 
     @include dark-theme-class-parent {
-      color: color(neutral-9);
+      color: color(neutral-60);
     }
   }
 }
@@ -72,7 +72,7 @@
       background-color: color(neutral-6);
 
       @include dark-theme-class-parent {
-        background-color: color(neutral-600);
+        background-color: color(neutral-400);
       }
 
       .textarea-inline__placeholder {
@@ -96,18 +96,18 @@
 
 .textarea-inline_disabled {
   color: color(neutral-50);
-  background-color: color(neutral-5);
+  background-color: color(neutral-3);
 
   .textarea-inline__placeholder {
     color: color(neutral-50);
   }
 
   @include dark-theme-class-parent {
-    color: color(neutral-6);
-    background-color: color(neutral-500);
+    color: color(neutral-60);
+    background-color: color(neutral-850);
 
     .textarea-inline__placeholder {
-      color: color(neutral-6);
+      color: color(neutral-60);
     }
   }
 }
@@ -193,12 +193,13 @@
   .textarea:not(.textarea_disabled) {
     border-color: transparent;
     &:focus-within {
-      background-color: color(neutral-1);
-      border: 1px solid color(neutral-6);
+      background-color: color(neutral-1, alpha-700);
+      border: 1px solid color(neutral-5);
+      @include blur();
 
       @include dark-theme-class-parent {
-        background-color: color(neutral-1000);
-        border: 1px solid color(neutral-600);
+        background-color: color(neutral-1000, alpha-700);
+        border: 1px solid color(neutral-500);
       }
 
       .textarea__control::placeholder {

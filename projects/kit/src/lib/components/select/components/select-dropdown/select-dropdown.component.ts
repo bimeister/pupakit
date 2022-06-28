@@ -28,6 +28,7 @@ export class SelectDropdownComponent<T> extends SelectDropdownBase<T> {
   @Input() public width: string | null = null;
 
   public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ ?? of('');
+  public readonly theme$: Observable<string> = this.themeWrapperService?.theme$;
 
   constructor(
     selectStateService: SelectStateService<T>,

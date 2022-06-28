@@ -14,13 +14,28 @@ $tooltip_max-text-lines-count: 13;
   }
 
   &__content-container {
-    background-color: color(neutral-1000, alpha-500);
-    backdrop-filter: blur(6rem);
+    background-color: color(neutral-600);
+    @include dark-theme-class-parent {
+      background-color: color(neutral-1);
+    }
 
-    border-radius: 1px;
+    @include supports-backdrop-blur {
+      background-color: color(neutral-1000, alpha-400);
+      @include dark-theme-class-parent {
+        background-color: color(neutral-1, alpha-400);
+      }
+    }
+
+    @include blur(5px);
+
+    border-radius: $controlBorderRadius;
     box-sizing: border-box;
     padding: 1rem 2rem;
     color: color(neutral-1);
+
+    @include dark-theme-class-parent {
+      color: color(neutral-1000);
+    }
 
     @include font-type-regular();
     @include font-size-xs($paragraph: true);

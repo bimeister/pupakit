@@ -7,11 +7,9 @@
   height: 100%;
   overflow: hidden;
 
-  background-color: color(neutral-1);
   color: color(neutral-1000);
 
   @include host-selector-dark-theme {
-    background-color: color(neutral-1000);
     color: color(neutral-1);
   }
 }

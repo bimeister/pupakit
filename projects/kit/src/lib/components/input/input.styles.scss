@@ -259,6 +259,11 @@
   .input:not(:focus):not([disabled]) {
     &::placeholder {
       opacity: 1;
+      color: color(neutral-1000);
+
+      @include host-selector-dark-theme() {
+        color: color(neutral-1);
+      }
     }
   }
 }

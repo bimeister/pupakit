@@ -106,6 +106,7 @@
 
     .tree-node__selection {
       opacity: 1;
+      color: color(primary-500);
     }
 
     .tree-node__right {
@@ -130,7 +131,8 @@
         background-color: color(neutral-4);
 
         .tree-node__selection {
-          opacity: 0;
+          color: color(primary-500);
+          opacity: 1;
         }
 
         .tree-node__right {
@@ -175,6 +177,10 @@
 
     &--selected {
       background-color: color(neutral-500);
+
+      .tree-node__selection {
+        color: color(primary-40);
+      }
 
       .tree-node__right {
         background: linear-gradient(90deg, color(neutral-500, alpha-500) -95%, color(neutral-500) 70%);

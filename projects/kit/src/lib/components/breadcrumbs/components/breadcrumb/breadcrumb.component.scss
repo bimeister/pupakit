@@ -62,7 +62,7 @@ $adaptive-property: 'max-width';
 
     &:not(.breadcrumb_active) {
       @include hover() {
-        background-color: color(neutral-600);
+        background-color: color(neutral-400);
         color: color(neutral-1);
       }
     }

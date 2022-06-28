@@ -16,6 +16,8 @@
   user-select: none;
   text-align: center;
 
+  border-radius: $controlBorderRadius;
+
   color: color(neutral-300);
   @include host-selector-dark-theme {
     color: color(neutral-9);
@@ -27,7 +29,7 @@
       color: color(neutral-1000);
 
       @include host-selector-dark-theme {
-        background-color: color(neutral-600);
+        background-color: color(neutral-400);
         color: color(neutral-1);
       }
     }
@@ -46,7 +48,7 @@
 
   &_disabled {
     cursor: not-allowed;
-    color: color(neutral-4);
+    color: color(neutral-50);
 
     @include host-selector-dark-theme {
       color: color(neutral-60);

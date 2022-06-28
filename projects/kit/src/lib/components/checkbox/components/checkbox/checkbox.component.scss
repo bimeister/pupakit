@@ -76,7 +76,7 @@
 .checkbox__marker {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid color(neutral-300);
+  border: 1px solid semantic-color(lines-dark);
   box-sizing: border-box;
   border-radius: 1px;
   display: flex;
@@ -126,7 +126,12 @@
 
   &_checked.checkbox__marker_disabled {
     border: none;
-    background: color(neutral-7);
+    background: color(neutral-5);
+
+    @include host-selector-dark-theme() {
+      background-color: color(neutral-850);
+      color: color(neutral-60);
+    }
   }
 
   &_disabled:focus-visible {

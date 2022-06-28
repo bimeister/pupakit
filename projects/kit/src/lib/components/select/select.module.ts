@@ -25,6 +25,7 @@ import { SelectTriggerComponent } from './components/select-trigger/select-trigg
 import { SelectComponent } from './components/select/select.component';
 import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigger-tag-template.directive';
 import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
+import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -59,6 +60,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     TooltipModule,
     CheckboxModule,
     TagModule,
+    ThemeWrapperModule,
     ButtonModule,
     IconModule.forFeature([appChevronDownIcon, appCrossCircleIcon, appInfoIcon]),
     TreeLayoutModule,

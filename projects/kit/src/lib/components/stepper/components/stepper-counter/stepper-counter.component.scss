@@ -18,26 +18,27 @@
   transition: background-color 0.2s ease;
 
   @include host-selector-dark-theme {
-    background-color: color(neutral-600);
+    background-color: color(neutral-500);
     color: color(neutral-1);
   }
 
   &_active {
-    background: color(primary-600);
+    background: color(primary-500);
     color: color(neutral-1);
 
     @include host-selector-dark-theme {
-      background: color(primary-400);
+      background: color(primary-40);
+      color: color(neutral-1000);
     }
   }
 
   &_disabled {
     cursor: not-allowed;
-    background: color(neutral-5);
+    background: color(neutral-3);
     color: color(neutral-50);
 
     @include host-selector-dark-theme {
-      background: color(neutral-600);
+      background: color(neutral-850);
       color: color(neutral-60);
     }
   }

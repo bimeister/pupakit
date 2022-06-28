@@ -6,7 +6,7 @@ $input_light_styles: (
     caret-color: color(neutral-1000),
     background-color: color(neutral-5),
     placeholder: (
-      color: color(neutral-1000),
+      color: color(neutral-300),
     ),
   ),
   hover: (
@@ -14,7 +14,7 @@ $input_light_styles: (
   ),
   disabled: (
     color: color(neutral-50),
-    background-color: color(neutral-5),
+    background-color: color(neutral-3),
     placeholder: (
       color: color(neutral-50),
     ),
@@ -23,7 +23,7 @@ $input_light_styles: (
     border-color: color(danger-400),
   ),
   focus: (
-    background-color: color(neutral-5),
+    background-color: color(neutral-7),
     placeholder: (
       color: color(neutral-50),
     ),
@@ -39,15 +39,15 @@ $input_dark_styles: (
     caret-color: color(neutral-1),
     background-color: color(neutral-500),
     placeholder: (
-      color: color(neutral-1),
+      color: color(neutral-60),
     ),
   ),
   hover: (
-    background-color: color(neutral-600),
+    background-color: color(neutral-400),
   ),
   disabled: (
     color: color(neutral-60),
-    background-color: color(neutral-500),
+    background-color: color(neutral-850),
     placeholder: (
       color: color(neutral-60),
     ),
@@ -56,7 +56,7 @@ $input_dark_styles: (
     border-color: color(danger-400),
   ),
   focus: (
-    background-color: color(neutral-500),
+    background-color: color(neutral-300),
     placeholder: (
       color: color(neutral-60),
     ),

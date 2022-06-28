@@ -10,18 +10,27 @@ $pointer-width: 14px;
   display: flex;
   flex-direction: column;
   border: 1px solid color(neutral-5);
-  border-radius: 1rem 1rem 0 0;
-  background: color(neutral-1);
+  border-radius: $controlBorderRadius;
+  background: color(neutral-1, alpha-700);
+
+  @include blur();
 
   @include xs {
     height: 100%;
     width: 100%;
+
+    backdrop-filter: none;
+    background: color(neutral-1, alpha-1000);
   }
 
   @include host-selector-dark-theme {
-    background: color(neutral-500);
-    border-color: color(neutral-600);
+    background: color(neutral-1000, alpha-700);
+    border-color: color(neutral-500);
     color: color(neutral-1);
+
+    @include xs() {
+      background: color(neutral-1000, alpha-1000);
+    }
   }
 
   @include host-selector('.pointer__top-left, .pointer__top-right') {
@@ -40,7 +49,7 @@ $pointer-width: 14px;
   &__line {
     stroke: color(neutral-5);
     @include host-selector-dark-theme {
-      stroke: color(neutral-600);
+      stroke: color(neutral-500);
     }
   }
 
@@ -49,7 +58,7 @@ $pointer-width: 14px;
   }
 
   @include host-selector-dark-theme {
-    fill: color(neutral-500);
+    fill: color(neutral-1000, alpha-700);
   }
 
   @include host-selector('.pointer__top-left') {

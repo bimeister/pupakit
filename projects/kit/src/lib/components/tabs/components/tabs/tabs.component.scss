@@ -41,8 +41,12 @@
   &__highlighter {
     width: 0;
     height: 2px;
-    background-color: color(primary-400);
+    background-color: color(primary-700);
     transition: 0.25s ease-in-out;
+
+    @include host-selector-dark-theme() {
+      background-color: color(primary-100);
+    }
   }
 }
 
