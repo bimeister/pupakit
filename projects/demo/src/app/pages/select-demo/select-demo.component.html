@@ -21,10 +21,6 @@
             - wrapper for custom dropdown header.
           </li>
           <li>
-            <pupa-code-inline>pupa-select-dropdown-tree</pupa-code-inline>
-            - provides tree-like structure of options' list.
-          </li>
-          <li>
             <pupa-code-inline>pupa-select-dropdown-footer</pupa-code-inline>
             - wrapper for custom dropdown footer.
           </li>
@@ -116,18 +112,6 @@
       <demo-select-example-13 *pupaCodeContainerPreviewTemplate></demo-select-example-13>
     </pupa-code-container>
 
-    <h2>Select with tree</h2>
-
-    <h3>Base usage</h3>
-    <pupa-code-container [content]="example14Content">
-      <demo-select-example-14 *pupaCodeContainerPreviewTemplate></demo-select-example-14>
-    </pupa-code-container>
-
-    <h3>Custom template</h3>
-    <pupa-code-container [content]="example15Content">
-      <demo-select-example-15 *pupaCodeContainerPreviewTemplate></demo-select-example-15>
-    </pupa-code-container>
-
     <h2>Other</h2>
 
     <h3>User select example</h3>
@@ -183,32 +167,6 @@
               <pupa-select-option [value]="'Option 6'">Option 6</pupa-select-option>
               <pupa-select-option [value]="'Option 7'">Option 7</pupa-select-option>
             </pupa-select-options-container>
-          </pupa-select-dropdown>
-        </pupa-select>
-
-        <h3>Tree structure select:</h3>
-        <pupa-select
-          class="select"
-          [isMultiSelectionEnabled]="true"
-          [placeholder]="'Placeholder'"
-          [isUnselectionEnabled]="isUnselectionEnabled$ | async"
-          [withReset]="withReset$ | async"
-          [formControl]="control2"
-        >
-          <pupa-select-trigger> Selected: {{ control2.value.length }} </pupa-select-trigger>
-
-          <pupa-select-dropdown>
-            <pupa-select-tree
-              type="flat"
-              [flatDataOrigin]="treeDataOrigin"
-              [isLoading]="isLoading$ | async"
-              [hideRoot]="hideRoot$ | async"
-              [isNodeSelectionEnabled]="isNodeSelectionEnabled$ | async"
-            ></pupa-select-tree>
-
-            <pupa-select-dropdown-footer>
-              <pupa-button (click)="toggleLoader()">Toggle loader</pupa-button>
-            </pupa-select-dropdown-footer>
           </pupa-select-dropdown>
         </pupa-select>
       </demo-example-viewer-content>
