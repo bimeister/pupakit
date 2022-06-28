@@ -1,4 +1,4 @@
-<div [ngClass]="themeClass$ | async">
+<pupa-theme-wrapper [theme]="theme$ | async" [ngClass]="themeClass$ | async">
   <label
     class="textarea"
     #lineHeightSource
@@ -32,4 +32,4 @@
     <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
     >&nbsp;
   </div>
-</div>
+</pupa-theme-wrapper>

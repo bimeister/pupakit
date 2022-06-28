@@ -21,7 +21,7 @@
       box-shadow: 0px -1px 0px 0px color(neutral-5) inset;
 
       @include host-selector-dark-theme() {
-        box-shadow: 0px -1px 0px 0px color(neutral-600) inset;
+        box-shadow: 0px -1px 0px 0px color(neutral-500) inset;
       }
     }
   }

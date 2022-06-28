@@ -126,7 +126,7 @@
   color: color(neutral-300);
 
   @include dark-theme-class-parent {
-    color: color(neutral-9);
+    color: color(neutral-60);
   }
 }
 
@@ -143,7 +143,7 @@
     background-color: color(neutral-6);
 
     @include dark-theme-class-parent {
-      background-color: color(neutral-600);
+      background-color: color(neutral-400);
     }
 
     .textarea__control::placeholder {
@@ -156,10 +156,10 @@
   }
 
   &:focus-within {
-    background-color: color(neutral-5);
+    background-color: color(neutral-7);
 
     @include dark-theme-class-parent {
-      background-color: color(neutral-500);
+      background-color: color(neutral-300);
     }
 
     .textarea__control {
@@ -174,7 +174,7 @@
       color: color(neutral-50);
 
       @include dark-theme-class-parent {
-        color: color(neutral-1);
+        color: color(neutral-9);
       }
     }
   }
@@ -190,7 +190,7 @@
 
 .textarea_disabled {
   color: color(neutral-50);
-  background-color: color(neutral-5);
+  background-color: color(neutral-3);
 
   .textarea__control {
     color: color(neutral-50);
@@ -201,14 +201,14 @@
   }
 
   @include dark-theme-class-parent {
-    color: color(neutral-6);
-    background-color: color(neutral-500);
+    color: color(neutral-60);
+    background-color: color(neutral-850);
 
     .textarea__control {
-      color: color(neutral-6);
+      color: color(neutral-60);
 
       &::placeholder {
-        color: color(neutral-6);
+        color: color(neutral-60);
       }
     }
   }

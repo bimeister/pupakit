@@ -86,6 +86,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   );
 
   public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ ?? of('');
+  public readonly theme$: Observable<string> = this.themeWrapperService?.theme$;
 
   private readonly valueLength$: Observable<number> = this.value$.pipe(
     filterNotNil(),

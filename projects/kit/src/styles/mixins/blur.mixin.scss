@@ -1,6 +1,6 @@
 @use './../mixins/supports-backdrop-blur.mixin' as *;
 
-@mixin blur($value: 24px) {
+@mixin blur($value: 5px) {
   @include supports-backdrop-blur() {
     backdrop-filter: blur(#{$value});
   }

@@ -65,11 +65,11 @@
   }
 
   &_disabled {
-    background-color: color(neutral-7);
+    background-color: color(neutral-3);
     cursor: not-allowed;
 
     .switcher__marker {
-      background-color: color(neutral-5);
+      background-color: color(neutral-7);
     }
   }
 }
@@ -80,7 +80,7 @@
     background-color: color(neutral-700);
 
     &_active {
-      background-color: color(success-500);
+      background-color: color(success-300);
     }
 
     &:not(.switcher_disabled) {
@@ -88,17 +88,17 @@
         background-color: color(neutral-600);
 
         &.switcher_active {
-          background-color: color(success-400);
+          background-color: color(success-200);
         }
       }
     }
 
     &_disabled {
-      background-color: color(neutral-700);
+      background-color: color(neutral-850);
       cursor: not-allowed;
 
       .switcher__marker {
-        background-color: color(neutral-60);
+        background-color: color(neutral-40);
       }
     }
   }

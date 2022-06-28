@@ -11,17 +11,17 @@
   box-sizing: border-box;
   aspect-ratio: 1;
 
-  color: color(base-white-n200);
+  color: color(neutral-1000);
   @include host-selector-dark-theme() {
-    color: color(base-dark-n200);
+    color: color(neutral-1);
   }
 
   background: transparent;
 
   &_with-background {
-    background: color(base-white-n500);
+    background: color(neutral-5);
     @include host-selector-dark-theme() {
-      background: color(base-dark-n500);
+      background: color(neutral-500);
     }
   }
 

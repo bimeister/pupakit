@@ -28,15 +28,19 @@
 
   &:not(&_disabled) {
     @include hover {
-      color: color(primary-400);
+      color: color(primary-700);
+
+      @include host-selector-dark-theme {
+        color: color(primary-100);
+      }
     }
   }
 
   &_active {
-    color: color(primary-400);
+    color: color(primary-700);
 
     @include host-selector-dark-theme {
-      color: color(primary-400);
+      color: color(primary-100);
     }
   }
 

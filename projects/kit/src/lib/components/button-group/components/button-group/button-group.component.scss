@@ -22,9 +22,9 @@ $container-padding: 4px;
     box-sizing: border-box;
     border-radius: $controlBorderRadius;
 
-    background-color: color(neutral-6);
+    background-color: color(neutral-5);
     @include host-selector-dark-theme {
-      background-color: color(neutral-600);
+      background-color: color(neutral-500);
     }
   }
   &__rail-container {
@@ -42,11 +42,10 @@ $container-padding: 4px;
     height: 100%;
     transition: transform 0.25s ease-in-out;
     background-color: color(neutral-1);
-    color: color(primary-500);
     border-radius: $controlBorderRadius;
 
     @include host-selector-dark-theme {
-      background-color: color(neutral-700);
+      background-color: color(neutral-1000);
       color: color(neutral-1);
     }
   }

@@ -1,4 +1,4 @@
-<div [ngClass]="themeClass$ | async">
+<pupa-theme-wrapper [theme]="theme$ | async" [ngClass]="themeClass$ | async">
   <div
     (click)="open()"
     (mousedown)="$event.stopPropagation()"
@@ -24,13 +24,14 @@
     <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
     >&nbsp;
   </div>
-</div>
+</pupa-theme-wrapper>
 
 <ng-template #overlayTextarea>
-  <div
+  <pupa-theme-wrapper
     class="overlay-container"
     [class.overlay-container_opened]="isOpened$ | async"
     [ngClass]="themeClass$ | async"
+    [theme]="theme$ | async"
     (mousedown)="$event.stopPropagation()"
     (wheel)="$event.stopPropagation()"
   >
@@ -81,7 +82,7 @@
         >&nbsp;
       </div>
     </div>
-  </div>
+  </pupa-theme-wrapper>
 </ng-template>
 
 <ng-template #value>

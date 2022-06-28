@@ -13,7 +13,6 @@
   cursor: pointer;
   position: relative;
 
-  background-color: color(neutral-1);
   color: color(neutral-1000);
 
   padding: 1rem 5rem;
@@ -70,7 +69,6 @@
 // dark styles
 .option {
   @include host-selector-dark-theme() {
-    background-color: color(neutral-1000);
     color: color(neutral-1);
 
     --select-option-icon-color: #{color(neutral-9)};

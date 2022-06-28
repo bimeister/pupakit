@@ -77,6 +77,10 @@
           -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
           border-color: map.get($input_light_styles, hover, background-color);
         }
+
+        &::placeholder {
+          color: color(neutral-1000);
+        }
       }
     }
 
@@ -156,6 +160,10 @@
             box-shadow: none;
             -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
             border-color: map.get($input_dark_styles, hover, background-color);
+          }
+
+          &::placeholder {
+            color: color(neutral-1);
           }
         }
       }

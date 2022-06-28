@@ -72,7 +72,7 @@
     @include hover {
       background: color(neutral-6);
       @include host-selector-dark-theme {
-        background: color(neutral-600);
+        background: color(neutral-400);
       }
     }
   }
@@ -94,4 +94,8 @@
   flex-grow: 1;
   border-top: 1.5px dashed color(neutral-5);
   height: 0;
+
+  @include host-selector-dark-theme {
+    border-color: color(neutral-500);
+  }
 }

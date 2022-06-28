@@ -32,8 +32,8 @@ $layout_border-size: 1px;
 
   @include host-selector-dark-theme() {
     color: color(neutral-1);
-    background-color: color(neutral-1000);
-    border: $layout_border-size solid color(neutral-600);
+    background-color: color(neutral-800);
+    border: $layout_border-size solid color(neutral-500);
   }
 
   &_with-shadow {
