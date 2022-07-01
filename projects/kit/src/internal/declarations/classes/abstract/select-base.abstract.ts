@@ -1,6 +1,6 @@
 import { Directive, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
@@ -70,6 +70,7 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
 
   public writeValue(newValue: SelectOuterValue<T>): void {
     this.selectStateService.setValue(newValue);
+    this.selectStateService.setIsFilled(!isEmpty(newValue));
   }
 
   public registerOnChange(onChange: OnChangeCallback<SelectOuterValue<T>>): void {

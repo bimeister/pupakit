@@ -21,7 +21,7 @@ export interface SelectStateService<T> {
   readonly isTouched$: BehaviorSubject<Nullable<boolean>>;
   readonly isPatched$: BehaviorSubject<Nullable<boolean>>;
   readonly isValid$: Observable<boolean>;
-  readonly isFilled$: Observable<boolean>;
+  readonly isFilled$: BehaviorSubject<boolean>;
 
   readonly placeholder$: BehaviorSubject<Nullable<string>>;
   readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean>;
@@ -65,4 +65,5 @@ export interface SelectStateService<T> {
   isPicked(value: T): Observable<boolean>;
   setValue(value: SelectOuterValue<T>): void;
   reset(): void;
+  setIsFilled(isFilled: boolean): void;
 }
