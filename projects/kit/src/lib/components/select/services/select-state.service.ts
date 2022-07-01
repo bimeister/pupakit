@@ -5,11 +5,11 @@ import { NgControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { FormControlStatus } from '../../../../internal/declarations/enums/form-control-status.enum';
 import { SelectStateService as SelectStateServiceInterface } from '../../../../internal/declarations/interfaces/select-state-service.interface';
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
-import { FormControlStatus } from '../../../../internal/declarations/enums/form-control-status.enum';
 import { isFormControlValidStatus } from '../../../../internal/functions/is-form-control-valid-status.function';
 
 /** @dynamic */
@@ -47,10 +47,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     shareReplayWithRefCount()
   );
 
-  public readonly isFilled$: Observable<boolean> = this.control$.pipe(
-    switchMap((control: NgControl) => control.valueChanges.pipe(startWith(control.value))),
-    map((value: unknown) => !isEmpty(value))
-  );
+  public readonly isFilled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -228,6 +225,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
           OnTouchedCallback,
           boolean
         ]) => {
+          this.setIsFilled(updatedValue.size !== 0);
           this.currentSerializedValue$.next(updatedValue);
           this.isTouched$.next(true);
 
@@ -245,6 +243,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
           }
         }
       );
+  }
+
+  public setIsFilled(isFilled: boolean): void {
+    this.isFilled$.next(isFilled);
   }
 
   public isPicked(value: T): Observable<boolean> {
