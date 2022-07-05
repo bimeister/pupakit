@@ -55,9 +55,13 @@ export class TableCommonFeature<T> implements TableFeature {
       .listen()
       .pipe(
         filterByInstanceOf(TableEvents.RefreshDataSlice),
-        withLatestFrom(this.displayData.virtualScrollDataSource.listRange$),
-        map(([event, listRange]: [TableEvents.RefreshDataSlice, ListRange]) => {
-          this.eventBus.dispatch(new TableEvents.ListRangeChanged(listRange));
+        withLatestFrom(this.displayData.virtualScrollDataSource.listRange$, this.displayData.countOfVisibleRows$),
+        map(([event, listRange, countOfVisibleRows]: [TableEvents.RefreshDataSlice, ListRange, number]) => {
+          const targetListRange: ListRange = { ...listRange };
+          if (listRange.end < countOfVisibleRows) {
+            targetListRange.end = listRange.start + countOfVisibleRows;
+          }
+          this.eventBus.dispatch(new TableEvents.ListRangeChanged(targetListRange));
           return event;
         })
       )
