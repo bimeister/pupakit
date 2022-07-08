@@ -57,7 +57,7 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
   }
 
-  public fitColumnColumns(): void {
+  public fitColumns(): void {
     this.dispatchInQueue(new TableEvents.FitColumns());
   }
 
