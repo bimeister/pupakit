@@ -25,10 +25,11 @@
 }
 
 .complete {
-  background-color: color(primary-500);
+  background-color: semantic-color(kind-primary-normal);
+  color: semantic-color(text-inverse);
 }
 .error {
-  background-color: color(danger-500);
+  background-color: semantic-color(kind-danger-normal);
 }
 
 .inner-circle {
@@ -37,7 +38,7 @@
   height: 1rem;
   border-radius: 50%;
   display: inline-block;
-  background-color: color(primary-500);
+  background-color: semantic-color(kind-primary-normal);
 }
 .outer-circle {
   position: absolute;
