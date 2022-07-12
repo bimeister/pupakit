@@ -4,7 +4,7 @@
 .counter {
   box-sizing: border-box;
   height: 4rem;
-  border-radius: 2rem;
+  border-radius: 0.75rem;
   padding: 2px 6px;
   color: color(neutral-1);
 
@@ -16,29 +16,24 @@
   @include font-preset-caption-xs();
 
   &_neutral {
-    background-color: color(neutral-7);
-    color: color(neutral-1000);
-
-    @include host-selector-dark-theme {
-      background-color: color(neutral-600);
-      color: color(neutral-1);
-    }
+    background-color: semantic-color(surface-action);
+    color: semantic-color(text-primary);
   }
 
   &_primary {
-    background-color: color(primary-500);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(text-inverse);
   }
 
   &_danger {
-    background-color: color(danger-500);
+    background-color: semantic-color(kind-danger-normal);
   }
 
   &_warning {
-    background-color: color(warning-500);
-    color: color(neutral-1000);
+    background-color: semantic-color(kind-warning-normal);
   }
 
   &_success {
-    background-color: color(success-500);
+    background-color: semantic-color(kind-success-normal);
   }
 }
