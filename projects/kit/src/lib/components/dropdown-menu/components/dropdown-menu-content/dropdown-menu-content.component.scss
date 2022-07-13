@@ -8,9 +8,7 @@
     max-height: 72rem;
     max-width: 76rem;
     box-shadow: variable(box-shadow_dropdown);
-    background-color: color(neutral-1, alpha-700);
-
-    @include blur();
+    background-color: color(neutral-1);
 
     user-select: none;
     overflow: auto;
@@ -23,7 +21,7 @@
 
     @include dark-theme-class-parent {
       border-color: color(neutral-500);
-      background-color: color(neutral-1000, alpha-700);
+      background-color: color(neutral-1000);
     }
   }
 

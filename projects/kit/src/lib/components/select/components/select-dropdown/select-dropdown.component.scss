@@ -11,9 +11,7 @@
   width: 100%;
   border-radius: $controlBorderRadius;
   border: 1px solid color(neutral-5);
-  background-color: color(neutral-1, alpha-700);
-
-  @include blur();
+  background-color: color(neutral-1);
 
   filter: drop-shadow(0px 14px 24px color(neutral-1000, alpha-3));
 
@@ -21,10 +19,8 @@
   margin-top: 2rem;
 
   @include dark-theme-class-parent() {
-    background-color: color(neutral-1000, alpha-700);
+    background-color: color(neutral-1000);
     border-color: color(neutral-500);
-
-    @include blur();
   }
 }
 
