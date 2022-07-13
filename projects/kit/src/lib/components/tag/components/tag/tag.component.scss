@@ -34,7 +34,7 @@
 }
 
 .tag_default:not(.tag_disabled) {
-  background-color: color(neutral-7);
+  background-color: color(neutral-10);
   color: color(neutral-1000);
   @include host-selector-dark-theme() {
     background-color: color(neutral-700);
@@ -42,13 +42,13 @@
   }
 
   &.tag_clickable {
-    box-shadow: shadow-helper(neutral-6);
+    box-shadow: shadow-helper(neutral-20);
     @include host-selector-dark-theme() {
       box-shadow: shadow-helper(neutral-600);
     }
 
     @include hover() {
-      background-color: color(neutral-6);
+      background-color: color(neutral-20);
       @include host-selector-dark-theme() {
         background-color: color(neutral-600);
       }

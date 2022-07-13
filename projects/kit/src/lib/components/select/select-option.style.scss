@@ -88,6 +88,10 @@
 
     &_picked {
       background-color: color(neutral-400);
+
+      &::after {
+        background-color: color(primary-40);
+      }
     }
   }
 }

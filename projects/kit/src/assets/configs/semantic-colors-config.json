@@ -447,11 +447,11 @@
       {
         "name": "Dark",
         "lightColor": {
-          "color": "neutral-9",
+          "color": "neutral-300",
           "alpha": "alpha-1000"
         },
         "darkColor": {
-          "color": "neutral-5",
+          "color": "neutral-9",
           "alpha": "alpha-1000"
         }
       },
