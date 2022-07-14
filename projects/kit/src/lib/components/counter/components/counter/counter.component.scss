@@ -14,6 +14,7 @@
   justify-content: center;
 
   @include font-preset-caption-xs();
+  line-height: 0.9;
 
   &_neutral {
     background-color: semantic-color(surface-action);
