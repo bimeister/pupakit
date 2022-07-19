@@ -55,7 +55,7 @@ $lightColorsMap: (
 $darkColorsMap: (
   'surface-primary': var(--color_neutral-1000),
   'surface-secondary': var(--color_neutral-800),
-  'surface-tertiary': var(--color_neutral-1),
+  'surface-tertiary': var(--color_neutral-600),
   'surface-action': var(--color_neutral-500),
   'surface-glass': var(--color_neutral-1000),
   'kind-neutral-normal': var(--color_neutral-500),
@@ -159,7 +159,7 @@ $lightColorsAlphaMap: (
 $darkColorsAlphaMap: (
   'surface-primary': var(--alpha-1000),
   'surface-secondary': var(--alpha-1000),
-  'surface-tertiary': var(--alpha-3),
+  'surface-tertiary': var(--alpha-1000),
   'surface-action': var(--alpha-1000),
   'surface-glass': var(--alpha-700),
   'kind-neutral-normal': var(--alpha-1000),
