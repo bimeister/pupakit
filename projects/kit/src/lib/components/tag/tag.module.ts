@@ -4,11 +4,20 @@ import { SharedModule } from '../../../internal/shared/shared.module';
 import { IconModule } from '../icon/icon.module';
 import { TagDeleteButtonComponent } from './components/pupa-tag-delete-button/pupa-tag-delete-button.component';
 import { TagTextComponent } from './components/pupa-tag-text/pupa-tag-text.component';
+import { TagActionButtonComponent } from './components/tag-action-button/tag-action-button.component';
 import { TagComponent } from './components/tag/tag.component';
+import { TagActionButtonTemplateDirective } from './directives/tag-action-button-template.directive';
 
-const COMPONENTS: Type<unknown>[] = [TagComponent, TagDeleteButtonComponent, TagTextComponent];
+const COMPONENTS: Type<unknown>[] = [
+  TagComponent,
+  TagDeleteButtonComponent,
+  TagTextComponent,
+  TagActionButtonComponent,
+];
 
-const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
+const DIRECTIVES: Type<unknown>[] = [TagActionButtonTemplateDirective];
+
+const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
 const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 
 @NgModule({

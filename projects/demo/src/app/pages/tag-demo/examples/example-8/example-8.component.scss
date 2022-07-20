@@ -1,0 +1,13 @@
+.tag-container {
+  display: flex;
+  gap: 4rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
+
+  &:not(:last-child) {
+    margin-bottom: 6rem;
+  }
+}
+.fixed-width {
+  width: 30rem;
+}

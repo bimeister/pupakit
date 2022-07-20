@@ -131,6 +131,77 @@
     ]
   },
   {
+    "name": "Kind-Opacity",
+    "configurations": [
+      {
+        "name": "Normal",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-5"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-8"
+        }
+      },
+      {
+        "name": "Hover",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-6"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-9"
+        }
+      },
+      {
+        "name": "Pressed",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-7"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-10"
+        }
+      },
+      {
+        "name": "Active",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-7"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-10"
+        }
+      },
+      {
+        "name": "Selected",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-4"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-6"
+        }
+      },
+      {
+        "name": "Disabled",
+        "lightColor": {
+          "color": "neutral-1000",
+          "alpha": "alpha-3"
+        },
+        "darkColor": {
+          "color": "neutral-1",
+          "alpha": "alpha-4"
+        }
+      }
+    ]
+  },
+  {
     "name": "Kind-Primary",
     "configurations": [
       {

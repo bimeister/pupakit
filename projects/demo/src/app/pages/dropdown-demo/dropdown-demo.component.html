@@ -7,7 +7,7 @@
     <h3>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
       <div class="trigger-container" *pupaCodeContainerPreviewTemplate>
-        <pupa-tag color="primary" #dropdown="pupaDropdown" [clickable]="true" [pupaDropdown]="dropdownContent">
+        <pupa-tag kind="primary" #dropdown="pupaDropdown" [clickable]="true" [pupaDropdown]="dropdownContent">
           {{ (dropdown.opened$ | async) ? 'close' : 'open' }}
           <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-chevron-up' : 'app-chevron-down'"></pupa-icon>
         </pupa-tag>

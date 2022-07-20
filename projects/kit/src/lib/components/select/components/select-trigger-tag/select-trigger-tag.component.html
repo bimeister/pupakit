@@ -1,0 +1,21 @@
+<pupa-tag
+  class="trigger_tag"
+  cdkOverlayOrigin
+  #button
+  #overlayOrigin="cdkOverlayOrigin"
+  [kind]="kind"
+  [clickable]="clickable"
+  [disabled]="isDisabled$ | async"
+>
+  <ng-content></ng-content>
+
+  <pupa-tag-action-button
+    [active]="isExpanded$ | async"
+    *pupaTagActionButtonTemplate
+    (click)="processButtonClick()"
+    (mousedown)="processTriggerTouch()"
+    (touchstart)="processTriggerTouch()"
+  >
+    <pupa-icon [name]="(isExpanded$ | async) ? 'app-chevron-up' : 'app-chevron-down'"></pupa-icon>
+  </pupa-tag-action-button>
+</pupa-tag>

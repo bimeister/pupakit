@@ -1,0 +1,30 @@
+<div class="tag-container">
+  <pupa-tag class="fixed-width">
+    <pupa-tag-text [pupaTooltip]="'Truncated text'">Truncated text</pupa-tag-text>
+  </pupa-tag>
+
+  <pupa-tag>
+    <pupa-icon name="app-cube"></pupa-icon>
+    With icon at left
+  </pupa-tag>
+
+  <pupa-tag kind="primary">
+    With icon at right
+    <pupa-icon name="app-cube"></pupa-icon>
+  </pupa-tag>
+
+  <pupa-tag kind="success">
+    <pupa-avatar></pupa-avatar>
+    With avatar
+  </pupa-tag>
+
+  <pupa-tag [disabled]="true">
+    <pupa-icon name="app-cube"></pupa-icon>
+    Disabled with icon
+  </pupa-tag>
+
+  <pupa-tag [disabled]="true">
+    <pupa-avatar [disabled]="true"></pupa-avatar>
+    Disabled with avatar
+  </pupa-tag>
+</div>

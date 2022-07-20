@@ -2,8 +2,14 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <h3>Basic tag</h3>
-    <pupa-info-block>Colored tags are bold by default.</pupa-info-block>
+    <p><pupa-code-inline>pupa-tag</pupa-code-inline> is a configurable tag component.</p>
+    <p>There are range of components that are used as content to build and configure the tag itself:</p>
+    <ul>
+      <li><pupa-code-inline>pupa-tag-text</pupa-code-inline> - a wrapper to truncate long text</li>
+      <li><pupa-code-inline>pupa-tag-action-button</pupa-code-inline> - customized button at left</li>
+    </ul>
+
+    <h3>Basic tags</h3>
     <pupa-code-container [content]="example1Content">
       <demo-tag-example-1 *pupaCodeContainerPreviewTemplate></demo-tag-example-1>
     </pupa-code-container>
@@ -13,89 +19,74 @@
       <demo-tag-example-2 *pupaCodeContainerPreviewTemplate></demo-tag-example-2>
     </pupa-code-container>
 
-    <h3>Additional properties</h3>
+    <h3>Tags with action button</h3>
     <pupa-code-container [content]="example3Content">
       <demo-tag-example-3 *pupaCodeContainerPreviewTemplate></demo-tag-example-3>
     </pupa-code-container>
 
-    <h3>Extra cases</h3>
+    <h3>Disabled tags</h3>
     <pupa-code-container [content]="example4Content">
       <demo-tag-example-4 *pupaCodeContainerPreviewTemplate></demo-tag-example-4>
+    </pupa-code-container>
+
+    <h3>Extra cases</h3>
+    <pupa-code-container [content]="example5Content">
+      <demo-tag-example-5 *pupaCodeContainerPreviewTemplate></demo-tag-example-5>
+    </pupa-code-container>
+
+    <h2>Special cases</h2>
+
+    <h3>Tag as select</h3>
+    <pupa-code-container [content]="example6Content">
+      <demo-tag-example-6 *pupaCodeContainerPreviewTemplate></demo-tag-example-6>
+    </pupa-code-container>
+
+    <h3>Tag with dropdown</h3>
+    <pupa-code-container [content]="example7Content">
+      <demo-tag-example-7 *pupaCodeContainerPreviewTemplate></demo-tag-example-7>
+    </pupa-code-container>
+
+    <h3>Tag with popover</h3>
+    <pupa-code-container [content]="example8Content">
+      <demo-tag-example-8 *pupaCodeContainerPreviewTemplate></demo-tag-example-8>
     </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer class="tag-demo">
       <demo-example-viewer-content class="tag-demo__content">
         <div class="tag-demo__wrapper">
-          <pupa-tag
-            [size]="size$ | async"
-            [color]="color$ | async"
-            [disabled]="disabled$ | async"
-            [clickable]="clickable$ | async"
-            [bold]="boldFormControl.value"
-            [withBorder]="withBorder$ | async"
-          >
+          <pupa-tag [kind]="kind$ | async" [disabled]="disabled$ | async" [clickable]="clickable$ | async">
             Tag
-            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-          </pupa-tag>
-          <pupa-tag
-            [size]="size$ | async"
-            [color]="color$ | async"
-            [disabled]="disabled$ | async"
-            [clickable]="clickable$ | async"
-            [bold]="boldFormControl.value"
-            [withBorder]="withBorder$ | async"
-          >
-            <pupa-icon name="app-apps"></pupa-icon>
-            Tag
-            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
-          </pupa-tag>
-          <pupa-tag
-            [size]="size$ | async"
-            [color]="color$ | async"
-            [disabled]="disabled$ | async"
-            [clickable]="clickable$ | async"
-            [bold]="boldFormControl.value"
-            [withBorder]="withBorder$ | async"
-          >
-            <pupa-avatar></pupa-avatar>
-            Tag
-            <pupa-tag-delete-button *ngIf="deleteButton$ | async"></pupa-tag-delete-button>
+            <pupa-tag-action-button *pupaTagActionButtonTemplate>
+              <pupa-icon [name]="'app-cube'"></pupa-icon>
+            </pupa-tag-action-button>
           </pupa-tag>
         </div>
       </demo-example-viewer-content>
 
-      <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>
       <demo-example-viewer-section>
-        <demo-example-viewer-config-item name="Add the delete button">
+        <demo-example-viewer-config-item name="Add an action button">
           <ng-container *demoExampleViewerConfigItemDescription>
             Use
-            <pupa-code-inline>pupa-tag-delete-button</pupa-code-inline>
+            <pupa-code-inline>pupa-tag-action-button</pupa-code-inline>
           </ng-container>
-          <demo-props-switcher #deleteButton$></demo-props-switcher>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If tag has a fixed width text inside will be truncated">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>pupa-tag-text</pupa-code-inline>
+          </ng-container>
         </demo-example-viewer-config-item>
       </demo-example-viewer-section>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
-        <demo-example-viewer-property decoratorName="input" name="size" type="TagSize">
-          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the tag.</ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="color" type="TagColor">
-          <ng-container *demoExampleViewerPropertyDescription>Adjusts the color of the tag.</ng-container>
-          <demo-props-select #color$ [options]="colorOptions"></demo-props-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="bold" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>Whether the element is bold.</ng-container>
-          <demo-props-switcher [formControl]="boldFormControl"></demo-props-switcher>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>Whether the element is bordered.</ng-container>
-          <demo-props-switcher #withBorder$></demo-props-switcher>
+        <demo-example-viewer-property decoratorName="input" name="kind" type="TagKind">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the kind of the tag.</ng-container>
+          <demo-props-select #kind$ [options]="colorOptions"></demo-props-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">

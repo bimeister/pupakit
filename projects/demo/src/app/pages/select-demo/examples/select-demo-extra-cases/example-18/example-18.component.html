@@ -1,0 +1,16 @@
+<pupa-select class="select" [withReset]="true" [formControl]="control">
+  <pupa-select-trigger-tag>
+    {{ control.value }}
+  </pupa-select-trigger-tag>
+
+  <pupa-select-dropdown [width]="320">
+    <pupa-select-options-container>
+      <ng-container *ngFor="let option of options$ | async">
+        <pupa-select-option [value]="option.value">
+          <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+          {{ option.caption }}
+        </pupa-select-option>
+      </ng-container>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>

@@ -1,0 +1,86 @@
+<div class="tag-container">
+  <pupa-select class="select" [withReset]="true" [formControl]="control1">
+    <pupa-select-trigger-tag>
+      {{ control1.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown [width]="320">
+      <pupa-select-options-container>
+        <ng-container *ngFor="let option of options$ | async">
+          <pupa-select-option [value]="option.value">
+            <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+            {{ option.caption }}
+          </pupa-select-option>
+        </ng-container>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <pupa-select class="select" [withReset]="true" [formControl]="control2">
+    <pupa-select-trigger-tag [kind]="'primary'">
+      {{ control2.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown [width]="320">
+      <pupa-select-options-container>
+        <ng-container *ngFor="let option of options$ | async">
+          <pupa-select-option [value]="option.value">
+            <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+            {{ option.caption }}
+          </pupa-select-option>
+        </ng-container>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <pupa-select class="select" [withReset]="true" [formControl]="control3">
+    <pupa-select-trigger-tag [kind]="'success'">
+      {{ control3.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown [width]="320">
+      <pupa-select-options-container>
+        <ng-container *ngFor="let option of options$ | async">
+          <pupa-select-option [value]="option.value">
+            <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+            {{ option.caption }}
+          </pupa-select-option>
+        </ng-container>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <pupa-select class="select" [withReset]="true" [formControl]="control4">
+    <pupa-select-trigger-tag [kind]="'danger'">
+      {{ control4.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown [width]="320">
+      <pupa-select-options-container>
+        <ng-container *ngFor="let option of options$ | async">
+          <pupa-select-option [value]="option.value">
+            <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+            {{ option.caption }}
+          </pupa-select-option>
+        </ng-container>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
+  <pupa-select class="select" [disabled]="true" [withReset]="true" [formControl]="control5">
+    <pupa-select-trigger-tag [kind]="'warning'">
+      {{ control5.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown [width]="320">
+      <pupa-select-options-container>
+        <ng-container *ngFor="let option of options$ | async">
+          <pupa-select-option [value]="option.value">
+            <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
+            {{ option.caption }}
+          </pupa-select-option>
+        </ng-container>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+</div>

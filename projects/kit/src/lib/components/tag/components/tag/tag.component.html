@@ -1,12 +1,26 @@
-<div
-  [attr.tabindex]="tabIndexAttribute"
-  [class.tag_bold]="isBold$ | async"
-  [class.tag_with-border]="isWithBorder$ | async"
-  [class.tag_clickable]="isClickable$ | async"
-  [class.tag_disabled]="isDisabled$ | async"
-  [class.tag_with-avatar]="withAvatar$ | async"
-  class="tag"
-  [class]="[colorClass$ | async, sizeClass$ | async]"
->
-  <ng-content></ng-content>
+<div class="tag-wrapper" (click)="$event.stopPropagation()">
+  <ng-container *ngIf="isInteractive$ | async; else nonInteractiveTagTemplate">
+    <button
+      type="button"
+      class="tag tag_clickable"
+      [class.tag_disabled]="isDisabled$ | async"
+      [class]="kindClass$ | async"
+    >
+      <ng-container [ngTemplateOutlet]="tagContentTemplate"></ng-container>
+    </button>
+  </ng-container>
+
+  <ng-container *ngIf="tagActionButtonTemplateDirective">
+    <ng-container [ngTemplateOutlet]="tagActionButtonTemplateDirective.templateRef"></ng-container>
+  </ng-container>
 </div>
+
+<ng-template #nonInteractiveTagTemplate>
+  <div class="tag" [class.tag_disabled]="isDisabled$ | async" [class]="kindClass$ | async">
+    <ng-container [ngTemplateOutlet]="tagContentTemplate"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #tagContentTemplate>
+  <ng-content></ng-content>
+</ng-template>

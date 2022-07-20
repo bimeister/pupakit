@@ -1,0 +1,50 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+@use '../../tag.styles.scss' as *;
+
+.action-button {
+  @include tag-preset();
+
+  border-radius: 0 1rem 1rem 0;
+  width: 5rem;
+  height: 5rem;
+  color: semantic-color(text-inverse);
+  box-sizing: content-box;
+  line-height: 14px;
+
+  cursor: pointer;
+
+  &:not([disabled]) {
+    &:focus-visible {
+      box-shadow: inset 0 0 0 0.5rem semantic-color(lines-accent);
+    }
+
+    &.button_danger {
+      @include action-button-color-state('danger');
+    }
+
+    &.button_opacity {
+      @include action-button-color-state('opacity');
+
+      color: semantic-color(text-primary);
+    }
+
+    &.button_primary {
+      @include action-button-color-state('primary');
+    }
+
+    &.button_success {
+      @include action-button-color-state('success');
+    }
+
+    &.button_warning {
+      @include action-button-color-state('warning');
+    }
+  }
+
+  &:disabled {
+    @include disabled-color-state() {
+      border-left: 1px solid semantic-color(lines-opacity);
+    }
+  }
+}
