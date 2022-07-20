@@ -147,6 +147,12 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
     TS: `${BASE_REQUEST_PATH}/select-demo-other/example-17/example-17.component.ts`,
   };
 
+  public readonly example18Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.ts`,
+  };
+
   public ngOnInit(): void {
     this.subscription.add(this.subscribeToDisabled());
   }

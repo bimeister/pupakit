@@ -1,19 +1,43 @@
 <div class="tag-container">
-  <pupa-tag [pupaTooltip]="'Thanks!'">Hover me!</pupa-tag>
-  <pupa-tag><pupa-icon name="app-cube"></pupa-icon>With icon</pupa-tag>
-  <pupa-tag>
-    <pupa-icon name="app-cube"></pupa-icon>Icon and delete
-    <pupa-tag-delete-button></pupa-tag-delete-button>
+  <pupa-tag [disabled]="true">Opacity</pupa-tag>
+  <pupa-tag kind="primary" [disabled]="true">Primary</pupa-tag>
+  <pupa-tag kind="success" [disabled]="true">Success</pupa-tag>
+  <pupa-tag kind="danger" [disabled]="true">Danger</pupa-tag>
+  <pupa-tag kind="warning" [disabled]="true">Warning</pupa-tag>
+</div>
+<div class="tag-container">
+  <pupa-tag [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Opacity</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
-  <pupa-tag [clickable]="true" color="primary">
-    <pupa-icon name="app-cube"></pupa-icon>And clickable!
-    <pupa-tag-delete-button></pupa-tag-delete-button>
+
+  <pupa-tag kind="primary" [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Primary</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
-  <pupa-tag [disabled]="true"> <pupa-icon name="app-save"></pupa-icon>Disabled with icon</pupa-tag>
-  <pupa-tag [clickable]="true" [withBorder]="true" [bold]="false" color="primary" size="small">
-    <pupa-avatar [username]="'Pupa'"></pupa-avatar> Little one user
+
+  <pupa-tag kind="success" [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Success</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
-  <pupa-tag [clickable]="true" [disabled]="true" size="small">
-    <pupa-avatar [username]="'Pupa'"></pupa-avatar> Disabled user
+
+  <pupa-tag kind="danger" [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Danger</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="warning" [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Warning</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
 </div>

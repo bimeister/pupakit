@@ -1,210 +1,69 @@
 @use 'mixins' as *;
 @use 'functions' as *;
-
-@function shadow-helper($color, $width: 1px) {
-  @return inset 0 0 0 $width color($color);
-}
+@use '../../tag.styles.scss' as *;
 
 :host {
   outline: none;
 }
 
+.tag-wrapper {
+  @include flex-container();
+
+  width: 100%;
+}
+
 .tag {
-  all: unset;
-  @include no-tap-highlight();
+  @include tag-preset();
 
-  cursor: default;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 1rem;
-
-  margin: 0;
-
   box-sizing: border-box;
-
-  border-radius: 3rem;
-
+  margin: 0;
+  border-radius: 1rem;
+  padding: 0.5rem 1.5rem;
+  min-height: 5rem;
   width: inherit;
   max-width: inherit;
   overflow: hidden;
+  color: semantic-color(text-inverse);
+  line-height: 0.9;
 
-  @include font-preset-h6();
-}
-
-.tag_default:not(.tag_disabled) {
-  background-color: color(neutral-10);
-  color: color(neutral-1000);
-  @include host-selector-dark-theme() {
-    background-color: color(neutral-700);
-    color: color(neutral-1);
+  &:not(:only-child) {
+    border-radius: 1rem 0 0 1rem;
   }
 
-  &.tag_clickable {
-    box-shadow: shadow-helper(neutral-20);
-    @include host-selector-dark-theme() {
-      box-shadow: shadow-helper(neutral-600);
-    }
-
-    @include hover() {
-      background-color: color(neutral-20);
-      @include host-selector-dark-theme() {
-        background-color: color(neutral-600);
-      }
-    }
-  }
-}
-
-.tag_red:not(.tag_disabled) {
-  background-color: color(danger-150);
-  color: color(danger-600);
-
-  &.tag_clickable {
-    box-shadow: shadow-helper(danger-200);
-    @include hover() {
-      background-color: color(danger-200);
-    }
-  }
-
-  &.tag_bold {
-    color: color(neutral-1);
-    background-color: color(danger-500);
-    box-shadow: shadow-helper(danger-500);
-
+  &:not(.tag_disabled) {
     &.tag_clickable {
-      box-shadow: shadow-helper(danger-400);
-      @include hover() {
-        background-color: color(danger-400);
-      }
+      cursor: pointer;
     }
-  }
-}
 
-.tag_yellow:not(.tag_disabled) {
-  background-color: color(warning-150);
-  color: color(neutral-1000);
-
-  &.tag_clickable {
-    box-shadow: shadow-helper(warning-200);
-    @include hover() {
-      background-color: color(warning-200);
+    &:focus-visible {
+      box-shadow: inset 0 0 0 0.5rem semantic-color(lines-accent);
     }
-  }
 
-  &.tag_bold {
-    color: color(neutral-1000);
-    background-color: color(warning-500);
-    box-shadow: shadow-helper(warning-500);
-
-    &.tag_clickable {
-      box-shadow: shadow-helper(warning-400);
-      @include hover() {
-        background-color: color(warning-400);
-      }
+    &.tag_danger {
+      @include tag-color-state('danger');
     }
-  }
-}
 
-.tag_green:not(.tag_disabled) {
-  background-color: color(success-150);
-  color: color(success-600);
+    &.tag_opacity {
+      @include tag-color-state('opacity');
 
-  &.tag_clickable {
-    box-shadow: shadow-helper(success-200);
-    @include hover() {
-      background-color: color(success-200);
+      color: semantic-color(text-primary);
+    }
+
+    &.tag_primary {
+      @include tag-color-state('primary');
+    }
+
+    &.tag_success {
+      @include tag-color-state('success');
+    }
+
+    &.tag_warning {
+      @include tag-color-state('warning');
     }
   }
 
-  &.tag_bold {
-    color: color(neutral-1);
-    background-color: color(success-500);
-    box-shadow: shadow-helper(success-500);
-
-    &.tag_clickable {
-      box-shadow: shadow-helper(success-400);
-      @include hover() {
-        background-color: color(success-400);
-      }
-    }
-  }
-}
-
-.tag_primary:not(.tag_disabled) {
-  background-color: color(primary-50);
-  color: color(primary-600);
-
-  &.tag_clickable {
-    box-shadow: shadow-helper(primary-150);
-    @include hover() {
-      background-color: color(primary-150);
-    }
-  }
-
-  &.tag_bold {
-    color: color(neutral-1);
-    background-color: color(primary-500);
-    box-shadow: shadow-helper(primary-500);
-
-    &.tag_clickable {
-      box-shadow: shadow-helper(primary-400);
-      @include hover() {
-        background-color: color(primary-400);
-      }
-    }
-  }
-}
-
-.tag_clickable {
-  cursor: pointer;
-
-  &:focus-visible:not(.tag_disabled) {
-    box-shadow: shadow-helper(primary-400, 2px);
-  }
-}
-
-.tag_with-border:not(.tag_clickable:focus-visible):not(.tag_disabled) {
-  box-shadow: shadow-helper(neutral-1);
-}
-
-.tag_small {
-  height: 5rem;
-  padding: 3px 8px;
-
-  &.tag_with-border {
-    height: 5.5rem;
-  }
-}
-
-.tag_medium {
-  height: 6rem;
-  padding: 5px 8px;
-
-  &.tag_with-border {
-    height: 6.5rem;
-  }
-}
-
-.tag_with-avatar {
-  &.tag_small {
-    padding-left: 1rem;
-  }
-
-  &.tag_medium {
-    padding-left: 1.5rem;
-  }
-}
-
-.tag_disabled {
-  cursor: not-allowed;
-
-  background-color: color(neutral-5);
-  color: color(neutral-50);
-  box-shadow: shadow-helper(neutral-5);
-  @include host-selector-dark-theme() {
-    background-color: color(neutral-600);
-    color: color(neutral-60);
-    box-shadow: shadow-helper(neutral-500);
+  &.tag_disabled {
+    @include disabled-color-state();
   }
 }

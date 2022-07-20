@@ -24,6 +24,7 @@ import { SelectComponent } from './components/select/select.component';
 import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigger-tag-template.directive';
 import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
+import { SelectTriggerTagComponent } from './components/select-trigger-tag/select-trigger-tag.component';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -32,6 +33,7 @@ const COMPONENTS: Type<unknown>[] = [
   SelectTriggerInputComponent,
   SelectTriggerTagsComponent,
   SelectTriggerExtraCaseComponent,
+  SelectTriggerTagComponent,
 
   SelectOptionsContainerComponent,
   SelectOptionComponent,

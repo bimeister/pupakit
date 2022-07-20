@@ -1,0 +1,11 @@
+<div (click)="processInteraction($event)" (touchstart)="processInteraction($event)">
+  <button
+    type="button"
+    class="action-button"
+    [class.active]="isActive$ | async"
+    [attr.disabled]="(isDisabled$ | async) ? true : null"
+    [class]="kindClass$ | async"
+  >
+    <ng-content></ng-content>
+  </button>
+</div>

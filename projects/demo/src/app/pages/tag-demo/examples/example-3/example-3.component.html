@@ -1,22 +1,38 @@
 <div class="tag-container">
-  <pupa-tag>
-    With delete button
-    <pupa-tag-delete-button></pupa-tag-delete-button>
+  <pupa-tag [clickable]="true">
+    <pupa-tag-text>Opacity</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
-  <pupa-tag class="fixed-width">
-    <pupa-tag-text>With truncate text component</pupa-tag-text>
+
+  <pupa-tag kind="primary" [clickable]="true">
+    <pupa-tag-text>Primary</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
   </pupa-tag>
-</div>
-<div class="tag-container">
-  <pupa-tag size="medium">Medium size tag</pupa-tag>
-  <pupa-tag size="small">Small size tag</pupa-tag>
-</div>
-<div class="tag-container">
-  <pupa-tag [disabled]="true">Disabled</pupa-tag>
-  <pupa-tag [disabled]="true" color="green">Colored disabled</pupa-tag>
-</div>
-<div class="tag-container">
-  <pupa-tag [withBorder]="true">With white border</pupa-tag>
-  <pupa-tag [withBorder]="true" color="primary">Colored with border</pupa-tag>
-  <pupa-tag [withBorder]="true" color="primary" [clickable]="true">Colored clickable with border</pupa-tag>
+
+  <pupa-tag kind="success" [clickable]="true">
+    <pupa-tag-text>Success</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="danger" [clickable]="true">
+    <pupa-tag-text>Danger</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="warning" [clickable]="true">
+    <pupa-tag-text>Warning</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
 </div>

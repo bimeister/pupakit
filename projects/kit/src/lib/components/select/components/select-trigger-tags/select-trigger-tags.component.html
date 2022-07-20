@@ -24,7 +24,7 @@
       </div>
 
       <div class="tags-counter" *ngIf="this.tagsOverflowCount$ | async as tagsOverflowCount">
-        <pupa-tag [size]="'small'" [clickable]="true" [disabled]="isDisabled$ | async">
+        <pupa-tag [clickable]="true" [disabled]="isDisabled$ | async">
           +{{ tagsOverflowCount | formatCount }}
         </pupa-tag>
       </div>
@@ -70,7 +70,7 @@
 </ng-template>
 
 <ng-template #defaultTemplate let-tag>
-  <pupa-tag class="default-tag" [clickable]="true" [size]="'small'" [disabled]="isDisabled$ | async">
+  <pupa-tag class="default-tag" [clickable]="true" [disabled]="isDisabled$ | async">
     <pupa-tag-text>{{ tag }}</pupa-tag-text>
   </pupa-tag>
 </ng-template>

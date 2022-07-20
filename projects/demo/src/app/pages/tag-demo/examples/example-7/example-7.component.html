@@ -1,0 +1,71 @@
+<div class="tag-container">
+  <div class="trigger-container">
+    <pupa-tag [clickable]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaDropdown]="dropdownContent1" #dropdown="pupaDropdown">
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <div class="trigger-container">
+    <pupa-tag kind="primary" [clickable]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaDropdown]="dropdownContent2" #dropdown="pupaDropdown">
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <div class="trigger-container">
+    <pupa-tag kind="success" [clickable]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaDropdown]="dropdownContent3" #dropdown="pupaDropdown">
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <div class="trigger-container">
+    <pupa-tag kind="danger" [clickable]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaDropdown]="dropdownContent4" #dropdown="pupaDropdown">
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <div class="trigger-container">
+    <pupa-tag kind="warning" [clickable]="true" [disabled]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaDropdown]="dropdownContent5" #dropdown="pupaDropdown">
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <ng-template #dropdownContent1>
+    <div>Hello ninja!</div>
+  </ng-template>
+
+  <ng-template #dropdownContent2>
+    <div>Hello ninja!</div>
+  </ng-template>
+
+  <ng-template #dropdownContent3>
+    <div>Hello ninja!</div>
+  </ng-template>
+
+  <ng-template #dropdownContent4>
+    <div>Hello ninja!</div>
+  </ng-template>
+
+  <ng-template #dropdownContent5>
+    <div>Hello ninja!</div>
+  </ng-template>
+</div>

@@ -7,7 +7,7 @@
 >
   <pupa-select-trigger-tags class="trigger" [tags]="selectedUsers$ | async">
     <ng-container *pupaSelectTriggerTagTemplate="let user">
-      <pupa-tag class="tag" [clickable]="true" [size]="'small'" [pupaTooltip]="user.username">
+      <pupa-tag class="tag" [clickable]="true" [pupaTooltip]="user.username">
         <pupa-avatar [username]="user.username"></pupa-avatar>
         <pupa-tag-text>{{ user.username }}</pupa-tag-text>
         <pupa-tag-delete-button (click)="handleUserDelete(user, $event)"></pupa-tag-delete-button>

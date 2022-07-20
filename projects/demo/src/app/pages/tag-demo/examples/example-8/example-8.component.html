@@ -1,0 +1,121 @@
+<div class="tag-container">
+  <pupa-tag>
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover1">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="primary">
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover2">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="success">
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover3">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="danger">
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover4">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="warning" [disabled]="true">
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover5">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <ng-template #popover1 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>Header</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+
+  <ng-template #popover2 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>Header</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+
+  <ng-template #popover3 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>Header</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+
+  <ng-template #popover4 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>Header</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+
+  <ng-template #popover5 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>OHeader</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+</div>

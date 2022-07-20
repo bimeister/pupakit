@@ -1,0 +1,54 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+@mixin tag-preset {
+  all: unset;
+  @include flex-container(row, center, center);
+  @include no-tap-highlight();
+  @include font-preset-h6();
+  @include transition(background);
+}
+
+@mixin clickable-color-state($state) {
+  @include hover() {
+    background-color: semantic-color(kind-#{$state}-hover);
+  }
+
+  &:active {
+    background-color: semantic-color(kind-#{$state}-active);
+  }
+
+  @content;
+}
+
+@mixin tag-color-state($state) {
+  background-color: semantic-color(kind-#{$state}-normal);
+
+  &.tag_clickable {
+    @include clickable-color-state($state);
+  }
+}
+
+@mixin action-button-color-state($state) {
+  background-color: semantic-color(kind-#{$state}-normal);
+  border-left: 1px solid semantic-color(lines-opacity);
+
+  @include host-selector-dark-theme {
+    border-left-color: semantic-color(kind-#{$state}-active);
+  }
+
+  @include clickable-color-state($state) {
+    &.active {
+      background-color: semantic-color(kind-#{$state}-active);
+    }
+  }
+}
+
+@mixin disabled-color-state {
+  cursor: not-allowed;
+
+  background-color: semantic-color(kind-opacity-normal);
+  color: semantic-color(text-disabled);
+
+  @content;
+}

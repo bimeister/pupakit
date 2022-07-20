@@ -2,6 +2,7 @@ import { NgModule, Type } from '@angular/core';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { SelectExample12Component } from './examples/select-demo-extra-cases/example-12/example-12.component';
 import { SelectExample13Component } from './examples/select-demo-extra-cases/example-13/example-13.component';
+import { SelectExample18Component } from './examples/select-demo-extra-cases/example-18/example-18.component';
 import { SelectExample10Component } from './examples/select-demo-multi-selection/example-10/example-10.component';
 import { SelectExample8Component } from './examples/select-demo-multi-selection/example-8/example-8.component';
 import { SelectExample9Component } from './examples/select-demo-multi-selection/example-9/example-9.component';
@@ -34,6 +35,7 @@ const EXAMPLES: Type<unknown>[] = [
   SelectExample13Component,
   SelectExample16Component,
   SelectExample17Component,
+  SelectExample18Component,
 ];
 const COMPONENTS: Type<unknown>[] = [SelectDemoComponent, ...EXAMPLES];
 
