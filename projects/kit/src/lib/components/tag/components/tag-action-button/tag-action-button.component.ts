@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnChanges } from '@angular/core';
-import { filterTruthy, isNil } from '@bimeister/utilities';
+import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnChanges, HostListener } from '@angular/core';
+import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
@@ -25,12 +25,19 @@ export class TagActionButtonComponent implements OnChanges {
 
   constructor(private readonly tagStateService: TagStateService) {}
 
-  public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processActiveChange(changes?.active);
+  @HostListener('click', ['$event'])
+  public processInteraction(event: Event): void {
+    this.isDisabled$.pipe(take(1)).subscribe((isDisabled: boolean) => {
+      if (isDisabled) {
+        event.stopImmediatePropagation();
+        return;
+      }
+      event.stopPropagation();
+    });
   }
 
-  public processInteraction(event: Event): void {
-    this.isDisabled$.pipe(take(1), filterTruthy()).subscribe(() => event.stopPropagation());
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processActiveChange(changes?.active);
   }
 
   private processActiveChange(change: ComponentChange<this, boolean>): void {

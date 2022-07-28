@@ -1,4 +1,4 @@
-<div class="tag-wrapper" (click)="$event.stopPropagation()">
+<div class="tag-wrapper" (click)="processInteraction($event)">
   <ng-container *ngIf="isInteractive$ | async; else nonInteractiveTagTemplate">
     <button
       type="button"
