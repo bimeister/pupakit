@@ -36,13 +36,16 @@ export abstract class TabsServiceBase<T> {
     switchMap((tabsHtmlElement: HTMLElement) => resizeObservable(tabsHtmlElement))
   );
 
+  private readonly refresh$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
   public readonly railHighlighterOffsetLeftPx$: Observable<number> = combineLatest([
     this.activeHtmlElement$.pipe(filterNotNil()),
     this.tabsHtmlElement$.pipe(filterNotNil()),
     this.tabsContainerResize$,
+    this.refresh$,
   ]).pipe(
     observeOn(asyncScheduler),
-    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement, ResizeObserverEntry[]]) => {
+    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement, ResizeObserverEntry[], boolean]) => {
       const activeClientRect: ClientRect = activeHtmlElement.getBoundingClientRect();
       const tabsClientRect: ClientRect = tabsHtmlElement.getBoundingClientRect();
       return activeClientRect.left - tabsClientRect.left;
@@ -51,7 +54,11 @@ export abstract class TabsServiceBase<T> {
   public readonly railHighlighterWidthPx$: Observable<number> = combineLatest([
     this.activeHtmlElement$,
     this.tabsContainerResize$,
-  ]).pipe(map(([activeHtmlElement]: [HTMLElement, ResizeObserverEntry[]]) => activeHtmlElement.clientWidth));
+    this.refresh$,
+  ]).pipe(
+    observeOn(asyncScheduler),
+    map(([activeHtmlElement]: [HTMLElement, ResizeObserverEntry[], boolean]) => activeHtmlElement.clientWidth)
+  );
 
   private readonly tabNames: T[] = [];
 
@@ -60,6 +67,15 @@ export abstract class TabsServiceBase<T> {
 
   public registerTab(tabName: T): void {
     this.tabNames.push(tabName);
+
+    this.refresh$.next(true);
+  }
+
+  public unregisterTab(tabName: T): void {
+    const tabIndex: number = this.tabNames.findIndex((tab: T) => tab === tabName);
+    this.tabNames.splice(tabIndex, 1);
+
+    this.refresh$.next(true);
   }
 
   public setInitialTab(): void {
