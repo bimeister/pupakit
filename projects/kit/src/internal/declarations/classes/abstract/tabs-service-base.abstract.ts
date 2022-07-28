@@ -8,6 +8,7 @@ import {
 } from '@bimeister/utilities';
 import { asyncScheduler, BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, observeOn, subscribeOn, switchMap, take } from 'rxjs/operators';
+import { VOID } from '../../../../internal/constants/void.const';
 import { ScrollableComponent } from '../../../../lib/components/scrollable/components/scrollable/scrollable.component';
 
 export abstract class TabsServiceBase<T> {
@@ -36,7 +37,7 @@ export abstract class TabsServiceBase<T> {
     switchMap((tabsHtmlElement: HTMLElement) => resizeObservable(tabsHtmlElement))
   );
 
-  private readonly refresh$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  private readonly refresh$: BehaviorSubject<void> = new BehaviorSubject<void>(VOID);
 
   public readonly railHighlighterOffsetLeftPx$: Observable<number> = combineLatest([
     this.activeHtmlElement$.pipe(filterNotNil()),
@@ -45,7 +46,7 @@ export abstract class TabsServiceBase<T> {
     this.refresh$,
   ]).pipe(
     observeOn(asyncScheduler),
-    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement, ResizeObserverEntry[], boolean]) => {
+    map(([activeHtmlElement, tabsHtmlElement]: [HTMLElement, HTMLElement, ResizeObserverEntry[], void]) => {
       const activeClientRect: ClientRect = activeHtmlElement.getBoundingClientRect();
       const tabsClientRect: ClientRect = tabsHtmlElement.getBoundingClientRect();
       return activeClientRect.left - tabsClientRect.left;
@@ -57,10 +58,10 @@ export abstract class TabsServiceBase<T> {
     this.refresh$,
   ]).pipe(
     observeOn(asyncScheduler),
-    map(([activeHtmlElement]: [HTMLElement, ResizeObserverEntry[], boolean]) => activeHtmlElement.clientWidth)
+    map(([activeHtmlElement]: [HTMLElement, ResizeObserverEntry[], void]) => activeHtmlElement.clientWidth)
   );
 
-  private readonly tabNames: T[] = [];
+  private tabNames: T[] = [];
 
   private readonly isContentDraggingState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isContentDragging$: Observable<boolean> = this.isContentDraggingState$.pipe(distinctUntilChanged());
@@ -68,14 +69,13 @@ export abstract class TabsServiceBase<T> {
   public registerTab(tabName: T): void {
     this.tabNames.push(tabName);
 
-    this.refresh$.next(true);
+    this.refresh$.next();
   }
 
   public unregisterTab(tabName: T): void {
-    const tabIndex: number = this.tabNames.findIndex((tab: T) => tab === tabName);
-    this.tabNames.splice(tabIndex, 1);
+    this.tabNames = this.tabNames.filter((tab: T) => tab !== tabName);
 
-    this.refresh$.next(true);
+    this.refresh$.next();
   }
 
   public setInitialTab(): void {
