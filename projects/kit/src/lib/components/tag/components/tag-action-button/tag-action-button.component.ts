@@ -38,7 +38,7 @@ export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDes
 
   constructor(
     private readonly tagStateService: TagStateService,
-    private readonly hostElRef: ElementRef,
+    private readonly hostElementRef: ElementRef,
     private readonly ngZone: NgZone
   ) {}
 
@@ -66,8 +66,8 @@ export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDes
 
   private processSelfClickAndTouch(): Subscription {
     return merge(
-      fromEvent(this.hostElRef.nativeElement, 'click'),
-      fromEvent(this.hostElRef.nativeElement, 'touchstart')
+      fromEvent(this.hostElementRef.nativeElement, 'click'),
+      fromEvent(this.hostElementRef.nativeElement, 'touchstart')
     )
       .pipe(subscribeOutsideAngular(this.ngZone), withLatestFrom(this.isDisabled$.pipe(take(1))))
       .subscribe(([event, isDisabled]: [Event, boolean]) => {
