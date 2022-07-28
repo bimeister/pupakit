@@ -73,7 +73,11 @@ export abstract class TabsServiceBase<T> {
   }
 
   public unregisterTab(tabName: T): void {
+    const allTabNames: T[] = [...this.tabNames];
+
     this.tabNames = this.tabNames.filter((tab: T) => tab !== tabName);
+
+    this.resetActiveTabIfUnregisteredTabIsActive(allTabNames, tabName);
 
     this.refresh$.next();
   }
@@ -118,6 +122,10 @@ export abstract class TabsServiceBase<T> {
   private correctScrollLeftByTargetTab(tabName: T): void {
     const targetElement: HTMLElement = this.tabNameToHtmlElementMap.get(JSON.stringify(tabName));
 
+    if (isNil(targetElement)) {
+      return;
+    }
+
     combineLatest([this.hostElement$.pipe(filterNotNil()), this.scrollable$.pipe(filterNotNil())])
       .pipe(
         take(1),
@@ -154,5 +162,16 @@ export abstract class TabsServiceBase<T> {
           }
         }
       );
+  }
+
+  private resetActiveTabIfUnregisteredTabIsActive(allTabNames: T[], removedTabName: T): void {
+    this.activeTabName$.pipe(take(1)).subscribe((activeTabName: T) => {
+      const activeTabIndex: number = allTabNames.findIndex((tab: T) => tab === activeTabName);
+      const unregisteredTabIndex: number = allTabNames.findIndex((tab: T) => tab === removedTabName);
+
+      if (activeTabIndex === unregisteredTabIndex && this.tabNames.length !== 0) {
+        this.setActiveTab(this.tabNames[0]);
+      }
+    });
   }
 }
