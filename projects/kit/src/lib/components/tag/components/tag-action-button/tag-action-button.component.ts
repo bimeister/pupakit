@@ -25,6 +25,7 @@ export class TagActionButtonComponent implements OnChanges {
 
   constructor(private readonly tagStateService: TagStateService) {}
 
+  @HostListener('touchstart', ['$event'])
   @HostListener('click', ['$event'])
   public processInteraction(event: Event): void {
     this.isDisabled$.pipe(take(1)).subscribe((isDisabled: boolean) => {
