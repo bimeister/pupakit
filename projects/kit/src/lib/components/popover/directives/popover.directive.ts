@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Injector, Input, NgZone, OnDestroy, TemplateRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Injector, Input, NgZone, OnDestroy, TemplateRef } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, merge, NEVER, Observable, Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
@@ -10,7 +10,7 @@ import { PopoverTemplateComponent } from '../components/popover-template/popover
 @Directive({
   selector: '[pupaPopover]',
 })
-export class PopoverDirective implements OnDestroy {
+export class PopoverDirective implements AfterViewInit, OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public pupaPopover: TemplateRef<unknown>;
@@ -27,7 +27,9 @@ export class PopoverDirective implements OnDestroy {
     private readonly popoversService: PopoversService,
     private readonly injector: Injector,
     private readonly ngZone: NgZone
-  ) {
+  ) {}
+
+  public ngAfterViewInit(): void {
     this.subscription.add(this.processSelfClick());
     this.subscription.add(this.processSelfTouch());
   }
