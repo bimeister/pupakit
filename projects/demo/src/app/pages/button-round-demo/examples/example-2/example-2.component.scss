@@ -1,0 +1,10 @@
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 4rem 0;
+  gap: 2rem;
+
+  .pink-icon {
+    --button-icon_color: #f8b7fe;
+  }
+}

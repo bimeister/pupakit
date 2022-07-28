@@ -1,0 +1,20 @@
+@use './../../button.styles.scss';
+
+.button {
+  width: 12rem;
+  height: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+
+  border-radius: 50%;
+
+  &__content {
+    display: flex;
+  }
+
+  &__icon {
+    font-size: 4rem;
+  }
+}

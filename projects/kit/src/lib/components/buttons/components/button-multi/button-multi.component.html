@@ -1,0 +1,33 @@
+<div class="button-multi" type="submit">
+  <button
+    [disabled]="(disabled$ | async) ? true : null"
+    [ngClass]="resultClassList$ | async"
+    [tabIndex]="tabIndex"
+    class="button"
+  >
+    <div [class.reversed-direction]="isReversedDirection$ | async" class="button__content" focusable="false">
+      <ng-container *ngIf="(icon$ | async) && (iconPosition$ | async)">
+        <pupa-icon [class.hidden]="loading$ | async" [name]="icon$ | async" class="button__icon"></pupa-icon>
+      </ng-container>
+
+      <div [class.hidden]="loading$ | async" class="button__content-inner">
+        <ng-content></ng-content>
+      </div>
+    </div>
+    <div *ngIf="loading$ | async" class="button__loading" focusable="false">
+      <pupa-spinner [size]="'16px'"></pupa-spinner>
+    </div>
+  </button>
+  <button
+    (click)="$event.stopPropagation()"
+    [disabled]="(disabled$ | async) ? true : null"
+    [dropdownMenuDisabled]="disabled$ | async"
+    [ngClass]="resultClassListExpand$ | async"
+    [class.button_active]="isMenuOpened$ | async"
+    [pupaDropdownMenu]="dropdownMenuContent"
+    [tabIndex]="tabIndex"
+    class="button-multi_menu-button button"
+  >
+    <pupa-icon [name]="'ios-arrow-down'" class="button__icon" focusable="false"></pupa-icon>
+  </button>
+</div>

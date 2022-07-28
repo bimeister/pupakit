@@ -6,7 +6,6 @@ import { appResizeIcon } from '../../../internal/constants/icons/app-resize-icon
 import { mdCloseIcon } from '../../../internal/constants/icons/md-close-icon.const';
 import { mdMoreIcon } from '../../../internal/constants/icons/md-more-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { DrawerButtonIconComponent } from './components/drawer-button-icon/drawer-button-icon.component';
@@ -22,6 +21,7 @@ import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/d
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
+import { ButtonModule } from '../buttons/button.module';
 import { DrawerLayoutHeaderTabsComponent } from './components/drawer-layout-header-tabs/drawer-layout-header-tabs.component';
 
 @NgModule({

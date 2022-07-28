@@ -1,11 +1,20 @@
-@use 'mixins' as *;
+@use 'functions' as *;
 
 .button-container {
-  display: block;
+  display: flex;
+  align-items: flex-end;
   margin: 2rem 0;
 }
 
 .button-container__item {
   display: inline-block;
   margin: 2rem;
+}
+
+.violet-icon {
+  --button-icon_color: #b310b3;
+}
+
+.green_text {
+  --button_text-color: #{semantic-color(kind-success-normal)};
 }

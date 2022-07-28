@@ -8,7 +8,7 @@ import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { ButtonGroupModule } from './components/button-group/button-group.module';
-import { ButtonModule } from './components/button/button.module';
+import { ButtonModule } from './components/buttons/button.module';
 import { CardModule } from './components/card/card.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ControlTextModule } from './components/control-text/control-text.module';

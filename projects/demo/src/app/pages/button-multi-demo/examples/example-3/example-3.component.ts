@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonKind } from '@kit/internal/declarations/types/button-kind.type';
 import { ButtonSize } from '@kit/internal/declarations/types/button-size.type';
 
 @Component({
@@ -10,7 +9,5 @@ import { ButtonSize } from '@kit/internal/declarations/types/button-size.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonMultiExample3Component {
-  public readonly kinds: ButtonKind[] = ['primary', 'primary-secondary', 'secondary', 'warning', 'danger'];
-
-  public readonly sizes: ButtonSize[] = ['small', 'medium', 'large'];
+  public readonly sizes: ButtonSize[] = ['xl', 'l', 'm', 's', 'xs'];
 }

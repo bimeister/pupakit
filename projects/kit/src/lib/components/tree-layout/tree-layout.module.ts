@@ -3,7 +3,6 @@ import { TreeNodeComponent } from './components/tree-node/tree-node.component';
 import { CdkTreeModule } from '@angular/cdk/tree';
 import { CommonModule } from '@angular/common';
 import { IconModule } from '../../../lib/components/icon/icon.module';
-import { ButtonModule } from '../../../lib/components/button/button.module';
 import { TreeNodeActionsDirective } from './directives/tree-node-actions.directive';
 import { appCircle } from '../../../internal/constants/icons/app-circle-icon.const';
 import { appChevronRightIcon } from '../../../internal/constants/icons/app-chevron-right-icon.const';
@@ -11,6 +10,7 @@ import { appChevronDownIcon } from '../../../internal/constants/icons/app-chevro
 import { CheckboxModule } from '../../../lib/components/checkbox/checkbox.module';
 import { SpinnerModule } from '../../../lib/components/spinner/spinner.module';
 import { TreeNodeSkeletonComponent } from './components/tree-node-skeleton/tree-node-skeleton.component';
+import { ButtonModule } from '../buttons/button.module';
 
 @NgModule({
   declarations: [TreeNodeComponent, TreeNodeActionsDirective, TreeNodeSkeletonComponent],

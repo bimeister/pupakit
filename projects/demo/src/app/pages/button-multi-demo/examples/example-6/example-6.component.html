@@ -1,9 +1,32 @@
 <div class="button-container">
-  <pupa-button-multi class="button-container__item" [dropdownMenuContent]="dropdownContent"> Button </pupa-button-multi>
-</div>
+  <pupa-button-multi
+    class="button-container__item"
+    icon="app-folder"
+    size="xl"
+    kind="border"
+    [dropdownMenuContent]="dropdownContentForFirstButton"
+    style="--button-icon_color: red; --button_text-color: blue"
+  >
+    primary
+  </pupa-button-multi>
+  <pupa-dropdown-menu-content #dropdownContentForFirstButton>
+    <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+    <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+  </pupa-dropdown-menu-content>
 
-<pupa-dropdown-menu-content #dropdownContent>
-  <pupa-dropdown-menu-item>enabled</pupa-dropdown-menu-item>
-  <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-  <pupa-dropdown-menu-item [disabled]="true">disabled</pupa-dropdown-menu-item>
-</pupa-dropdown-menu-content>
+  <pupa-button-multi
+    class="button-container__item violet-icon green_text"
+    icon="app-folder"
+    size="xl"
+    kind="border"
+    [dropdownMenuContent]="dropdownContentForSecondButton"
+  >
+    primary
+  </pupa-button-multi>
+  <pupa-dropdown-menu-content #dropdownContentForSecondButton>
+    <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+    <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+  </pupa-dropdown-menu-content>
+</div>

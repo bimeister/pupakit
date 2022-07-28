@@ -24,7 +24,7 @@
     </pupa-alert-layout-body>
 
     <pupa-alert-layout-footer *ngIf="hasButtons">
-      <pupa-button size="small" [kind]="button.kind" *ngFor="let button of buttons" (click)="button.action()">
+      <pupa-button size="s" [kind]="button.kind" *ngFor="let button of buttons" (click)="button.action()">
         {{ button.text }}
       </pupa-button>
     </pupa-alert-layout-footer>

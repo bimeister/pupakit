@@ -1,0 +1,89 @@
+<h1>Button Round</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3>Round button basic</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-button-round-example-1 *pupaCodeContainerPreviewTemplate></demo-button-round-example-1>
+    </pupa-code-container>
+
+    <h3>Round button custom color</h3>
+
+    <pupa-info-block>
+      There is an opportunity to change the color of icon using css variable
+      <pupa-code-inline>--button-icon_color</pupa-code-inline>
+      .
+    </pupa-info-block>
+
+    <pupa-code-container [content]="example2Content">
+      <demo-button-round-example-2 *pupaCodeContainerPreviewTemplate></demo-button-round-example-2>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div
+          class="content"
+          *pupaLet="
+            {
+              disabled: disabled$ | async,
+              loading: loading$ | async,
+              active: active$ | async
+            };
+            let disabled = disabled;
+            let loading = loading;
+            let active = active
+          "
+        >
+          <pupa-button-round
+            class="content__button"
+            [disabled]="disabled"
+            [icon]="buttonIconFormControl.value"
+            [loading]="loading"
+            [active]="active"
+          >
+          </pupa-button-round>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="icon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+          <pupa-input-text [formControl]="buttonIconFormControl"></pupa-input-text>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="loading" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in loading state.</ng-container>
+          <demo-props-switcher #loading$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="active" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in active state.</ng-container>
+          <demo-props-switcher #active$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="tabIndex" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Sets index of the button in tabbing order.</ng-container>
+          <pupa-input-text [formControl]="tabIndexFormControl"></pupa-input-text>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="type" type="ButtonType">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <p>Sets the type of the button.</p>
+            <p>
+              Default:
+              <pupa-code-inline>'button'</pupa-code-inline>
+            </p>
+          </ng-container>
+          <demo-props-radio-select [options]="typeOptions" direction="row"></demo-props-radio-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

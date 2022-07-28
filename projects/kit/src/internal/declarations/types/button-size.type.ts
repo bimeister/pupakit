@@ -1,1 +1,3 @@
-export type ButtonSize = 'large' | 'medium' | 'small' | 'extra-small';
+import { AtomSize } from '../types/atom-size.type';
+
+export type ButtonSize = Exclude<AtomSize, 'xxl' | 'xxs'>;

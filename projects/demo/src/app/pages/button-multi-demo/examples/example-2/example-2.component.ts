@@ -9,16 +9,5 @@ import { ButtonKind } from '@kit/internal/declarations/types/button-kind.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonMultiExample2Component {
-  public readonly kinds: ButtonKind[] = [
-    'primary',
-    'primary-secondary',
-    'primary-subtle',
-    'secondary',
-    'border',
-    'border-contrast',
-    'subtle',
-    'warning',
-    'danger',
-    'danger-subtle',
-  ];
+  public readonly kinds: ButtonKind[] = ['primary', 'secondary', 'border', 'success', 'warning', 'danger'];
 }

@@ -13,67 +13,68 @@ const BASE_REQUEST_PATH: string = 'button-demo/examples';
 })
 export class ButtonDemoComponent {
   public readonly buttonIconFormControl: FormControl = new FormControl('app-notification');
+  public readonly tabIndexFormControl: FormControl = new FormControl('0');
 
-  public readonly sizeOptions: PropsOption[] = [
+  public readonly typeOptions: PropsOption[] = [
     {
-      caption: 'Large',
-      value: 'large',
-    },
-    {
-      caption: 'Medium',
-      value: 'medium',
+      caption: 'button',
+      value: 'button',
       isDefault: true,
     },
     {
-      caption: 'Small',
-      value: 'small',
+      caption: 'submit',
+      value: 'submit',
+    },
+  ];
+
+  public readonly sizeOptions: PropsOption[] = [
+    {
+      caption: 'xl',
+      value: 'xl',
     },
     {
-      caption: 'Extra-Small',
-      value: 'extra-small',
+      caption: 'l',
+      value: 'l',
+      isDefault: true,
+    },
+    {
+      caption: 'm',
+      value: 'm',
+    },
+    {
+      caption: 's',
+      value: 's',
+    },
+    {
+      caption: 'xs',
+      value: 'xs',
     },
   ];
 
   public readonly kindOptions: PropsOption[] = [
     {
-      caption: 'Primary',
+      caption: 'primary',
       value: 'primary',
     },
     {
-      caption: 'Primary-secondary',
-      value: 'primary-secondary',
-    },
-    {
-      caption: 'Primary-subtle',
-      value: 'primary-subtle',
-    },
-    {
-      caption: 'Secondary',
+      caption: 'secondary',
       value: 'secondary',
     },
     {
-      caption: 'Warning',
-      value: 'warning',
-    },
-    {
-      caption: 'Danger',
-      value: 'danger',
-    },
-    {
-      caption: 'Subtle',
-      value: 'subtle',
-    },
-    {
-      caption: 'Border',
+      caption: 'border',
       value: 'border',
     },
     {
-      caption: 'Border Contrast',
-      value: 'border-contrast',
+      caption: 'success',
+      value: 'success',
     },
     {
-      caption: 'Danger-subtle',
-      value: 'danger-subtle',
+      caption: 'warning',
+      value: 'warning',
+    },
+    {
+      caption: 'danger',
+      value: 'danger',
     },
   ];
 
@@ -83,11 +84,11 @@ export class ButtonDemoComponent {
       value: null,
     },
     {
-      caption: 'Left',
+      caption: 'left',
       value: 'left',
     },
     {
-      caption: 'Right',
+      caption: 'right',
       value: 'right',
     },
   ];
@@ -106,14 +107,8 @@ export class ButtonDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
   };
-
   public readonly example4Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
-  };
-
-  public readonly example5Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
-    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
   };
 }
