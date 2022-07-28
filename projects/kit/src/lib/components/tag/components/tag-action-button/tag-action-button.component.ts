@@ -1,7 +1,18 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, OnChanges, HostListener } from '@angular/core';
+import {
+  Component,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+  Input,
+  OnChanges,
+  AfterViewInit,
+  ElementRef,
+  NgZone,
+  OnDestroy,
+} from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
+import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
+import { map, take, withLatestFrom } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { TagKind } from '../../../../../internal/declarations/types/tag-kind.type';
@@ -14,7 +25,7 @@ import { TagStateService } from '../../services/tag-state.service';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TagActionButtonComponent implements OnChanges {
+export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() public readonly active: boolean = false;
   public isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -23,22 +34,24 @@ export class TagActionButtonComponent implements OnChanges {
     map((kind: TagKind) => `button_${kind}`)
   );
 
-  constructor(private readonly tagStateService: TagStateService) {}
+  private readonly subscription: Subscription = new Subscription();
 
-  @HostListener('touchstart', ['$event'])
-  @HostListener('click', ['$event'])
-  public processInteraction(event: Event): void {
-    this.isDisabled$.pipe(take(1)).subscribe((isDisabled: boolean) => {
-      if (isDisabled) {
-        event.stopImmediatePropagation();
-        return;
-      }
-      event.stopPropagation();
-    });
-  }
+  constructor(
+    private readonly tagStateService: TagStateService,
+    private readonly hostElRef: ElementRef,
+    private readonly ngZone: NgZone
+  ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processActiveChange(changes?.active);
+  }
+
+  public ngAfterViewInit(): void {
+    this.subscription.add(this.processSelfClickAndTouch());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private processActiveChange(change: ComponentChange<this, boolean>): void {
@@ -49,5 +62,20 @@ export class TagActionButtonComponent implements OnChanges {
     }
 
     this.isActive$.next(updatedValue);
+  }
+
+  private processSelfClickAndTouch(): Subscription {
+    return merge(
+      fromEvent(this.hostElRef.nativeElement, 'click'),
+      fromEvent(this.hostElRef.nativeElement, 'touchstart')
+    )
+      .pipe(subscribeOutsideAngular(this.ngZone), withLatestFrom(this.isDisabled$.pipe(take(1))))
+      .subscribe(([event, isDisabled]: [Event, boolean]) => {
+        if (isDisabled) {
+          event.stopImmediatePropagation();
+          return;
+        }
+        event.stopPropagation();
+      });
   }
 }
