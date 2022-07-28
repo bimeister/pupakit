@@ -1,4 +1,4 @@
-import { Directive, OnChanges, OnInit } from '@angular/core';
+import { Directive, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -6,7 +6,7 @@ import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { TabsServiceBase } from './tabs-service-base.abstract';
 
 @Directive()
-export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements OnChanges, OnInit {
+export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements OnChanges, OnInit, OnDestroy {
   public abstract name: T;
   public abstract isActive: Nullable<boolean>;
   public abstract disabled: Nullable<boolean>;
@@ -26,6 +26,10 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
 
   public ngOnInit(): void {
     this.stateService.registerTab(this.name);
+  }
+
+  public ngOnDestroy(): void {
+    this.stateService.unregisterTab(this.name);
   }
 
   public setAsActive(): void {
