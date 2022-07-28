@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
+import { filterTruthy, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { TagKind } from '../../../../../internal/declarations/types/tag-kind.type';
@@ -41,6 +41,12 @@ export class TagComponent implements OnChanges {
     this.processDisabledChange(changes?.disabled);
     this.processClickableChange(changes?.clickable);
     this.processColorChange(changes?.kind);
+  }
+
+  public processInteraction(event: Event): void {
+    this.isDisabled$.pipe(take(1), filterTruthy()).subscribe(() => {
+      event.stopPropagation();
+    });
   }
 
   private processDisabledChange(change: ComponentChange<this, boolean>): void {
