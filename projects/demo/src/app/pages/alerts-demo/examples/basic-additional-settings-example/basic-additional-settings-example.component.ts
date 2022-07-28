@@ -23,12 +23,12 @@ export class BasicAdditionalSettingsExampleComponent {
         buttons: [
           {
             text: 'Button 1',
-            kind: 'border-contrast',
+            kind: 'border',
             action: () => openedAlert.close(),
           },
           {
             text: 'Button 2',
-            kind: 'subtle',
+            kind: 'secondary',
             action: () => openedAlert.close(),
           },
         ],

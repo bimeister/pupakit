@@ -1,11 +1,13 @@
-<h1>ButtonMulti</h1>
+<h1 demoAnchor>Button Multi</h1>
 
 <demo-page>
   <div *demoPageTab="'overview'">
     <p>
       The element combining the default button and the set of options in the dropdown menu. All
-      <pupa-code-inline>Button</pupa-code-inline> properties are available for
-      <pupa-code-inline>ButtonMulti</pupa-code-inline>.
+      <pupa-code-inline>Button</pupa-code-inline>
+      properties are available for
+      <pupa-code-inline>Button Multi</pupa-code-inline>
+      .
     </p>
 
     <h3 demoAnchor>Button kind</h3>
@@ -19,6 +21,13 @@
     </pupa-code-container>
 
     <h3 demoAnchor>Button size</h3>
+
+    <pupa-info-block>
+      The default button size is
+      <pupa-code-inline>l</pupa-code-inline>
+      .
+    </pupa-info-block>
+
     <pupa-code-container [content]="example3Content">
       <demo-button-multi-example-3 *pupaCodeContainerPreviewTemplate></demo-button-multi-example-3>
     </pupa-code-container>
@@ -33,14 +42,16 @@
       <demo-button-multi-example-5 *pupaCodeContainerPreviewTemplate></demo-button-multi-example-5>
     </pupa-code-container>
 
-    <h3 demoAnchor>Dropdown with disabled item</h3>
+    <h3 demoAnchor>Button Multi with custom icon and text color</h3>
+    <pupa-info-block>
+      There is an opportunity to change the color of icon and color of text using css variables
+      <pupa-code-inline>--button-icon_color</pupa-code-inline>
+      and
+      <pupa-code-inline>--button_text-color</pupa-code-inline>
+      .
+    </pupa-info-block>
     <pupa-code-container [content]="example6Content">
       <demo-button-multi-example-6 *pupaCodeContainerPreviewTemplate></demo-button-multi-example-6>
-    </pupa-code-container>
-
-    <h3 demoAnchor>Dropdown with plain item</h3>
-    <pupa-code-container [content]="example7Content">
-      <demo-button-multi-example-7 *pupaCodeContainerPreviewTemplate></demo-button-multi-example-7>
     </pupa-code-container>
   </div>
 
@@ -56,7 +67,6 @@
           [iconPosition]="iconPosition$ | async"
           [loading]="loading$ | async"
           [active]="active$ | async"
-          [expandActive]="expandActive$ | async"
           [dropdownMenuContent]="dropdownContent"
         >
           ButtonMulti
@@ -67,47 +77,34 @@
       </demo-example-viewer-content>
 
       <demo-example-viewer-section>
-        <demo-example-viewer-section-label>PupaButtonMulti Properties</demo-example-viewer-section-label>
-        <demo-example-viewer-property decoratorName="input" name="expandActive" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>
-            Whether the button's expand button is in active state.
-          </ng-container>
-          <demo-props-switcher #expandActive$></demo-props-switcher>
-        </demo-example-viewer-property>
+        <demo-example-viewer-section-label>PupaButton Multi Properties</demo-example-viewer-section-label>
 
         <demo-example-viewer-property
           decoratorName="input"
           name="dropdownMenuContent"
           type="DropdownMenuContentComponent"
         >
-          <ng-container *demoExampleViewerPropertyDescription> Content component for dropdown menu. </ng-container>
+          <ng-container *demoExampleViewerPropertyDescription> Content component for dropdown menu.</ng-container>
         </demo-example-viewer-property>
 
         <demo-example-viewer-section-label size="medium"
-          >Inherited from <pupa-code-inline>Button</pupa-code-inline></demo-example-viewer-section-label
-        >
+          >Inherited from
+          <pupa-code-inline>Button</pupa-code-inline>
+        </demo-example-viewer-section-label>
         <demo-example-viewer-property decoratorName="input" name="size" type="ButtonSize">
-          <ng-container *demoExampleViewerPropertyDescription>
-            <p>Sets the size of the button.</p>
-            <p>Default: <pupa-code-inline>'medium'</pupa-code-inline></p>
-          </ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the button.</ng-container>
+          <demo-props-select #size$ direction="row" [options]="sizeOptions"></demo-props-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="kind" type="ButtonKind">
           <ng-container *demoExampleViewerPropertyDescription>
             <p>Sets the kind of the button.</p>
-            <p>Default: <pupa-code-inline>'primary'</pupa-code-inline></p>
+            <p>
+              Default:
+              <pupa-code-inline>'primary'</pupa-code-inline>
+            </p>
           </ng-container>
           <demo-props-select #kind$ [options]="kindOptions"></demo-props-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="type" type="ButtonType">
-          <ng-container *demoExampleViewerPropertyDescription>
-            <p>Sets the type of the button.</p>
-            <p>Default: <pupa-code-inline>'button'</pupa-code-inline></p>
-          </ng-container>
-          <demo-props-radio-select #type$ [options]="typeOptions" direction="row"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="icon" type="string">
@@ -118,7 +115,10 @@
         <demo-example-viewer-property decoratorName="input" name="iconPosition" type="ButtonIconPosition">
           <ng-container *demoExampleViewerPropertyDescription>
             <p>Sets the position of the icon inside the button.</p>
-            <p>Default: <pupa-code-inline>'left'</pupa-code-inline></p>
+            <p>
+              Default:
+              <pupa-code-inline>'left'</pupa-code-inline>
+            </p>
           </ng-container>
           <demo-props-radio-select
             #iconPosition$
@@ -147,6 +147,17 @@
           <pupa-input-text [formControl]="tabIndexFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 
+        <demo-example-viewer-property decoratorName="input" name="type" type="ButtonType">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <p>Sets the type of the button.</p>
+            <p>
+              Default:
+              <pupa-code-inline>'button'</pupa-code-inline>
+            </p>
+          </ng-container>
+          <demo-props-radio-select #type$ [options]="typeOptions" direction="row"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
         <demo-example-viewer-section-label>PupaDropdownMenuContent Properties</demo-example-viewer-section-label>
         <demo-example-viewer-property decoratorName="input" name="horizontalPosition" type="HorizontalConnectionPos">
           <ng-container *demoExampleViewerPropertyDescription>Sets position of the dropdown.</ng-container>
@@ -160,9 +171,16 @@
         <demo-example-viewer-section-label>PupaDropdownMenuItem Properties</demo-example-viewer-section-label>
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription
-            >Whether the dropdown option is in disabled state.</ng-container
-          >
+            >Whether the dropdown option is in disabled state.
+          </ng-container>
           <demo-props-switcher #optionDisabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="plain" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Whether the dropdown option is in plain state.
+          </ng-container>
+          <demo-props-switcher #optionPlain$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

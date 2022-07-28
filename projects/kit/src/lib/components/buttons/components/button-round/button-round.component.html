@@ -1,0 +1,20 @@
+<button
+  [disabled]="(disabled$ | async) ? true : null"
+  [ngClass]="resultClassList$ | async"
+  [tabIndex]="tabIndex"
+  [type]="type"
+  class="button button_primary"
+>
+  <div class="button__content" focusable="false">
+    <pupa-icon
+      *ngIf="icon$ | async"
+      [class.hidden]="loading$ | async"
+      [name]="icon$ | async"
+      class="button__icon"
+    ></pupa-icon>
+  </div>
+
+  <div *ngIf="loading$ | async" class="button__loading" focusable="false">
+    <pupa-spinner [size]="'24px'"></pupa-spinner>
+  </div>
+</button>

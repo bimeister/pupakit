@@ -12,64 +12,30 @@ const BASE_REQUEST_PATH: string = 'button-multi-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ButtonMultiDemoComponent {
-  public readonly example1Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
-  };
-
-  public readonly example2Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
-  };
-
-  public readonly example3Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
-  };
-
-  public readonly example4Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
-  };
-
-  public readonly example5Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-5/example-5.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
-  };
-
-  public readonly example6Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-6/example-6.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
-  };
-
-  public readonly example7Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-7/example-7.component.html`,
-    TS: `${BASE_REQUEST_PATH}/example-7/example-7.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/example-7/example-7.component.scss`,
-  };
-
   public readonly buttonIconFormControl: FormControl = new FormControl('app-notification');
   public readonly tabIndexFormControl: FormControl = new FormControl('0');
 
   public readonly sizeOptions: PropsOption[] = [
     {
-      caption: 'large',
-      value: 'large',
+      caption: 'xl',
+      value: 'xl',
     },
     {
-      caption: 'medium',
-      value: 'medium',
+      caption: 'l',
+      value: 'l',
       isDefault: true,
     },
     {
-      caption: 'small',
-      value: 'small',
+      caption: 'm',
+      value: 'm',
+    },
+    {
+      caption: 's',
+      value: 's',
+    },
+    {
+      caption: 'xs',
+      value: 'xs',
     },
   ];
 
@@ -77,15 +43,6 @@ export class ButtonMultiDemoComponent {
     {
       caption: 'primary',
       value: 'primary',
-      isDefault: true,
-    },
-    {
-      caption: 'primary-secondary',
-      value: 'primary-secondary',
-    },
-    {
-      caption: 'primary-subtle',
-      value: 'primary-subtle',
     },
     {
       caption: 'secondary',
@@ -96,12 +53,8 @@ export class ButtonMultiDemoComponent {
       value: 'border',
     },
     {
-      caption: 'border-contrast',
-      value: 'border-contrast',
-    },
-    {
-      caption: 'subtle',
-      value: 'subtle',
+      caption: 'success',
+      value: 'success',
     },
     {
       caption: 'warning',
@@ -110,10 +63,6 @@ export class ButtonMultiDemoComponent {
     {
       caption: 'danger',
       value: 'danger',
-    },
-    {
-      caption: 'danger-subtle',
-      value: 'danger-subtle',
     },
   ];
 
@@ -158,4 +107,38 @@ export class ButtonMultiDemoComponent {
       value: 'end',
     },
   ];
+
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+  };
+
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+  };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+  };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-5/example-5.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
+  };
+
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
+  };
 }

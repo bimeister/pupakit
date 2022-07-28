@@ -4,7 +4,6 @@ import { appChevronDownIcon } from '../../../internal/constants/icons/app-chevro
 import { appCrossCircleIcon } from '../../../internal/constants/icons/app-cross-circle-icon.const';
 import { appInfoIcon } from '../../../internal/constants/icons/app-info-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { ButtonModule } from '../button/button.module';
 import { CheckboxModule } from '../checkbox/checkbox.module';
 import { IconModule } from '../icon/icon.module';
 import { TagModule } from '../tag/tag.module';
@@ -25,6 +24,7 @@ import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 import { SelectTriggerTagComponent } from './components/select-trigger-tag/select-trigger-tag.component';
 import { OptionModule } from '../option/option.module';
+import { ButtonModule } from '../buttons/button.module';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,

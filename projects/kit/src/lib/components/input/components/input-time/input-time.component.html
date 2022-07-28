@@ -22,9 +22,9 @@
     *ngIf="isVisibleReset$ | async"
     class="input__icon input__icon-reset"
     icon="app-cross-circle"
-    size="small"
+    size="s"
     tabIndex="-1"
-    kind="subtle"
+    kind="secondary"
     (click)="reset()"
   >
   </pupa-button-icon>
@@ -32,8 +32,8 @@
     *ngIf="isInvalid$ | async"
     class="input__icon input__icon-invalid"
     icon="app-info"
-    kind="danger-subtle"
-    size="small"
+    kind="secondary"
+    size="s"
     tabIndex="-1"
     [pupaTooltip]="invalidTooltip"
     [tooltipHideOnHover]="invalidTooltipHideOnHover"

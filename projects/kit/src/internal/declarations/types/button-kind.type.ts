@@ -1,11 +1,3 @@
-export type ButtonKind =
-  | 'primary'
-  | 'primary-secondary'
-  | 'primary-subtle'
-  | 'secondary'
-  | 'border'
-  | 'border-contrast'
-  | 'subtle'
-  | 'warning'
-  | 'danger'
-  | 'danger-subtle';
+import { SemanticStatusKind } from '../types/semantic-status-kind.type';
+
+export type ButtonKind = Exclude<SemanticStatusKind, 'neutral'> | 'secondary' | 'border';

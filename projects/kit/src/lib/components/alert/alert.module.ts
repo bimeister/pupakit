@@ -5,7 +5,6 @@ import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { appExceptionsCross10Icon } from '../../../internal/constants/icons/app-exceptions-cross-10-icon.const';
 import { ALERT_MODULE_CONFIG_TOKEN } from '../../../internal/constants/tokens/alert-module-config.token';
 import { AlertModuleConfig } from '../../../internal/declarations/interfaces/alert-module-config.interface';
-import { ButtonModule } from '../button/button.module';
 import { IconModule } from '../icon/icon.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
@@ -17,6 +16,7 @@ import { AlertLayoutComponent } from './components/alert-layout/alert-layout.com
 import { AlertTemplateComponent } from './components/alert-template/alert-template.component';
 import { AlertComponent } from './components/alert/alert.component';
 import { AlertsContainerComponent } from './components/alerts-container/alerts-container.component';
+import { ButtonModule } from '../buttons/button.module';
 
 const DECLARATIONS: Type<unknown>[] = [AlertsContainerComponent];
 

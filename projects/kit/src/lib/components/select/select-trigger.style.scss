@@ -179,4 +179,8 @@
   width: fit-content;
   background-color: transparent;
   gap: 1px;
+
+  &__icon-invalid {
+    --button-icon_color: #{semantic-color(kind-danger-normal)};
+  }
 }

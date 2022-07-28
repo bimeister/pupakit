@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { ButtonSize } from '../../../../../internal/declarations/types/button-size.type';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { map } from 'rxjs/operators';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { isNil } from '@bimeister/utilities';
+import { ButtonSize } from '../../../../../internal/declarations/types/button-size.type';
 
 @Component({
   selector: 'pupa-drawer-button-icon',
@@ -21,7 +21,7 @@ export class DrawerButtonIconComponent implements OnChanges {
   private readonly isMobile$: Observable<boolean> = this.clientUiStateHandlerService.breakpointIsXs$;
 
   public readonly size$: Observable<ButtonSize> = this.isMobile$.pipe(
-    map((isMobile: boolean) => (isMobile ? 'medium' : 'small'))
+    map((isMobile: boolean) => (isMobile ? 'm' : 's'))
   );
 
   constructor(private readonly clientUiStateHandlerService: ClientUiStateHandlerService) {}

@@ -7,8 +7,8 @@ import { ActionsComponent } from './components/actions.component';
 import { PupaActionTemplateDirective } from './directives/action-template.directive';
 import { PupaActionDropdownTemplateDirective } from './directives/action-dropdown-template.directive';
 import { PupaActionMoreTriggerTemplateDirective } from './directives/action-more-trigger-template.directive';
-import { ButtonModule } from '../button/button.module';
 import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
+import { ButtonModule } from '../buttons/button.module';
 
 const DECLARATIONS: Type<unknown>[] = [
   ActionsComponent,

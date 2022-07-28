@@ -9,9 +9,7 @@ import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
 import { AvatarDemoModule } from './pages/avatar-demo/avatar-demo.module';
 import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
-import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
 import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-demo.module';
-import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
@@ -55,7 +53,10 @@ import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.
 import { OptionDemoModule } from './pages/option-demo/option-demo.module';
 import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
 import { SectionDemoModule } from './pages/section-demo/section-demo.module';
-
+import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.module';
+import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
+import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
+import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
 const demoRoutes: Routes = [
   {
     path: 'kit',
@@ -122,10 +123,22 @@ const demoRoutes: Routes = [
           import('./pages/button-demo/button-demo.module').then((module: any) => module.ButtonDemoModule),
       },
       {
+        path: 'button-icon',
+        loadChildren: (): Promise<Type<ButtonIconDemoModule>> =>
+          import('./pages/button-icon-demo/button-icon-demo.module').then((module: any) => module.ButtonIconDemoModule),
+      },
+      {
         path: 'button-multi',
         loadChildren: (): Promise<Type<ButtonMultiDemoModule>> =>
           import('./pages/button-multi-demo/button-multi-demo.module').then(
             (module: any) => module.ButtonMultiDemoModule
+          ),
+      },
+      {
+        path: 'button-round',
+        loadChildren: (): Promise<Type<ButtonRoundDemoModule>> =>
+          import('./pages/button-round-demo/button-round-demo.module').then(
+            (module: any) => module.ButtonRoundDemoModule
           ),
       },
       {

@@ -1,7 +1,6 @@
-@use 'mixins' as *;
-
 .button-container {
-  display: block;
+  display: inline-flex;
+  align-items: flex-end;
   margin: 2rem 0;
 }
 

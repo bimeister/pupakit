@@ -1,8 +1,3 @@
-@use 'demo-variables' as *;
-
-@use 'mixins' as *;
-@use 'functions' as *;
-
 .content {
   display: flex;
   flex-direction: row;

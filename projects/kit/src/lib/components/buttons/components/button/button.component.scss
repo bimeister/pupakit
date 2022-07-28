@@ -1,0 +1,32 @@
+@use './../../button.styles.scss';
+
+.button {
+  width: inherit;
+  max-width: inherit;
+
+  &__content {
+    width: inherit;
+    max-width: inherit;
+  }
+
+  &__content-inner {
+    text-align: center;
+    width: inherit;
+    max-width: inherit;
+  }
+
+  &_large {
+    width: inherit;
+    max-width: inherit;
+  }
+
+  &_medium {
+    width: inherit;
+    max-width: inherit;
+  }
+
+  &_small {
+    width: inherit;
+    max-width: inherit;
+  }
+}
