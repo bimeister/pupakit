@@ -73,11 +73,9 @@ export abstract class TabsServiceBase<T> {
   }
 
   public unregisterTab(tabName: T): void {
-    const allTabNames: T[] = [...this.tabNames];
-
     this.tabNames = this.tabNames.filter((tab: T) => tab !== tabName);
 
-    this.resetActiveTabIfUnregisteredTabIsActive(allTabNames, tabName);
+    this.resetActiveTabIfUnregisteredTabIsActive(tabName);
 
     this.refresh$.next();
   }
@@ -164,12 +162,9 @@ export abstract class TabsServiceBase<T> {
       );
   }
 
-  private resetActiveTabIfUnregisteredTabIsActive(allTabNames: T[], removedTabName: T): void {
+  private resetActiveTabIfUnregisteredTabIsActive(removedTabName: T): void {
     this.activeTabName$.pipe(take(1)).subscribe((activeTabName: T) => {
-      const activeTabIndex: number = allTabNames.findIndex((tab: T) => tab === activeTabName);
-      const unregisteredTabIndex: number = allTabNames.findIndex((tab: T) => tab === removedTabName);
-
-      if (activeTabIndex === unregisteredTabIndex && this.tabNames.length !== 0) {
+      if (activeTabName === removedTabName && this.tabNames.length !== 0) {
         this.setActiveTab(this.tabNames[0]);
       }
     });
