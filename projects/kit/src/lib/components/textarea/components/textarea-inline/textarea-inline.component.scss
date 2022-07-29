@@ -85,11 +85,7 @@
     }
 
     &.textarea-inline_invalid {
-      border: 1px solid color(danger-400);
-
-      @include dark-theme-class-parent {
-        border: 1px solid color(danger-400);
-      }
+      border: 1px solid #{semantic-color(kind-danger-normal)};
     }
   }
 }

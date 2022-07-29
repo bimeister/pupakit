@@ -180,11 +180,7 @@
   }
 
   &.textarea_invalid {
-    border: 1px solid color(danger-400);
-
-    @include dark-theme-class-parent {
-      border: 1px solid color(danger-400);
-    }
+    border: 1px solid #{semantic-color(kind-danger-normal)};
   }
 }
 
@@ -222,15 +218,14 @@
   line-height: 12px;
   margin-top: 2px;
 
-  color: color(neutral-300);
-  @include dark-theme-class-parent {
-    color: color(neutral-9);
+  &:not(&_invalid) {
+    color: color(neutral-300);
+    @include dark-theme-class-parent {
+      color: color(neutral-9);
+    }
   }
 
   &_invalid {
-    color: color(danger-500);
-    @include dark-theme-class-parent {
-      color: color(danger-500);
-    }
+    color: #{semantic-color(kind-danger-normal)};
   }
 }

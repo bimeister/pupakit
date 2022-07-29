@@ -169,10 +169,10 @@
   }
 
   &_invalid {
-    border: 1px solid map.get($input_light_styles, invalid, border-color);
+    border: 1px solid #{semantic-color(kind-danger-normal)};
 
     &:-webkit-autofill {
-      border: 1px solid map.get($input_light_styles, invalid, border-color);
+      border: 1px solid #{semantic-color(kind-danger-normal)};
     }
   }
 
@@ -249,13 +249,6 @@
       }
     }
 
-    &_invalid {
-      border: 1px solid map.get($input_dark_styles, invalid, border-color);
-
-      &:-webkit-autofill {
-        border: 1px solid map.get($input_dark_styles, invalid, border-color);
-      }
-    }
     &[disabled] {
       color: map.get($input_dark_styles, disabled, color);
       background-color: map.get($input_dark_styles, disabled, background-color);
