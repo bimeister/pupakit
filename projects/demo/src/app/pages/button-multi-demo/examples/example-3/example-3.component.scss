@@ -1,7 +1,8 @@
 .button-container {
-  display: inline-flex;
+  display: flex;
   align-items: flex-end;
   margin: 2rem 0;
+  flex-wrap: wrap;
 }
 
 .button-container__item {

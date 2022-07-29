@@ -42,10 +42,14 @@ $borderWidth: 0.5rem;
   &::after {
     position: absolute;
     top: 0;
-    left: -#{math.div(-$borderWidth, 2)};
+    left: #{math.div(-$borderWidth, 2)};
     height: 100%;
     width: $borderWidth;
     content: '';
+  }
+
+  &.button_border {
+    border-left: 0 !important;
   }
 
   &:not(.button_secondary) {

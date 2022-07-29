@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ButtonType } from '../../../../../internal/declarations/types/button-type.type';
-import { isNil, Nullable } from '@bimeister/utilities';
-import { map } from 'rxjs/operators';
+import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
+import { map, take } from 'rxjs/operators';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../../internal//declarations/interfaces/component-change.interface';
 import { ButtonKind } from '../../../../../internal//declarations/types/button-kind.type';
@@ -55,6 +55,13 @@ export class ButtonIconComponent implements OnChanges {
         .map((innerProperty: string) => `button_${innerProperty}`)
     )
   );
+
+  @HostListener('pointerup', ['$event'])
+  public handleTap(event: Event): void {
+    this.disabled$.pipe(take(1), filterTruthy()).subscribe(() => {
+      event.stopPropagation();
+    });
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processSizeChange(changes?.size);

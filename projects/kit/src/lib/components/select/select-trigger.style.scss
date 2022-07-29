@@ -47,7 +47,7 @@
     }
 
     &.trigger_invalid {
-      border: 1px solid color(danger-400);
+      border: 1px solid #{semantic-color(kind-danger-normal)};
     }
   }
 

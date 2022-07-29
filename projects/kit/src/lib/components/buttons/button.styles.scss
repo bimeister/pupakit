@@ -31,18 +31,6 @@ $buttonSmallBorderRadius: 0.5rem;
     outline: 0.5rem solid semantic-color(lines-accent);
   }
 
-  &__content:not(.reversed-direction) {
-    :not(:first-child):not(:empty) {
-      margin-left: 2rem;
-    }
-  }
-
-  &__content.reversed-direction {
-    :not(:first-child):not(:empty) {
-      margin-right: 2rem;
-    }
-  }
-
   &__content {
     display: flex;
     align-items: center;
@@ -50,9 +38,9 @@ $buttonSmallBorderRadius: 0.5rem;
     z-index: 1;
     overflow: hidden;
     white-space: nowrap;
+    gap: 2rem;
 
-    .reversed-direction {
-      display: flex;
+    &.reversed-direction {
       flex-direction: row-reverse;
     }
 
@@ -64,6 +52,10 @@ $buttonSmallBorderRadius: 0.5rem;
       white-space: nowrap;
       pointer-events: none;
       overflow: hidden;
+
+      &:empty {
+        display: none;
+      }
     }
   }
 
@@ -129,6 +121,10 @@ $buttonSmallBorderRadius: 0.5rem;
     .button__icon {
       font-size: 3rem;
     }
+
+    .button__content {
+      gap: 1.5rem;
+    }
   }
 
   &_xs {
@@ -139,6 +135,10 @@ $buttonSmallBorderRadius: 0.5rem;
 
     .button__icon {
       font-size: 3rem;
+    }
+
+    .button__content {
+      gap: 1.5rem;
     }
   }
 
@@ -156,8 +156,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-inverse));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-primary-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-primary-hover);
+      }
     }
 
     &:active:not(:disabled) {
@@ -187,8 +189,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-primary));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-opacity-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-opacity-hover);
+      }
     }
 
     &:active:not(:disabled) {
@@ -217,8 +221,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-primary));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-opacity-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-opacity-hover);
+      }
     }
 
     &:active:not(:disabled) {
@@ -246,8 +252,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-inverse));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-success-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-success-hover);
+      }
     }
 
     &:active:not(:disabled) {
@@ -276,8 +284,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-inverse));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-warning-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-warning-hover);
+      }
     }
 
     &:active:not(:disabled) {
@@ -306,8 +316,10 @@ $buttonSmallBorderRadius: 0.5rem;
       color: var(--button-icon_color, semantic-color(text-inverse));
     }
 
-    &:hover:not(:disabled) {
-      background-color: semantic-color(kind-danger-hover);
+    &:not(:disabled) {
+      @include hover() {
+        background-color: semantic-color(kind-danger-hover);
+      }
     }
 
     &:active:not(:disabled) {
