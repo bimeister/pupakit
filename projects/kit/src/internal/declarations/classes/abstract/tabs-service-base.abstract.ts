@@ -163,10 +163,15 @@ export abstract class TabsServiceBase<T> {
   }
 
   private resetActiveTabIfUnregisteredTabIsActive(removedTabName: T): void {
-    this.activeTabName$.pipe(take(1)).subscribe((activeTabName: T) => {
-      if (activeTabName === removedTabName && this.tabNames.length !== 0) {
-        this.setActiveTab(this.tabNames[0]);
-      }
-    });
+    if (isEmpty(this.tabNames)) {
+      return;
+    }
+
+    this.activeTabName$
+      .pipe(
+        take(1),
+        filter((activeTabName: T) => activeTabName === removedTabName)
+      )
+      .subscribe(() => this.setActiveTab(this.tabNames[0]));
   }
 }
