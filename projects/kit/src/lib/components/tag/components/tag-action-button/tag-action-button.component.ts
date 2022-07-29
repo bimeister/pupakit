@@ -70,12 +70,8 @@ export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDes
       fromEvent(this.hostElementRef.nativeElement, 'touchstart')
     )
       .pipe(subscribeOutsideAngular(this.ngZone), withLatestFrom(this.isDisabled$.pipe(take(1))))
-      .subscribe(([event, isDisabled]: [Event, boolean]) => {
-        if (isDisabled) {
-          event.stopImmediatePropagation();
-          return;
-        }
-        event.stopPropagation();
-      });
+      .subscribe(([event, isDisabled]: [Event, boolean]) =>
+        isDisabled ? event.stopImmediatePropagation() : event.stopPropagation()
+      );
   }
 }
