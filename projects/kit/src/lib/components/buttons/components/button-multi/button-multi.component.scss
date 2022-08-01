@@ -22,6 +22,10 @@ $borderWidth: 0.5rem;
       transform: rotate(180deg);
     }
   }
+
+  .button:not(.button-multi_menu-button) {
+    border-right: none;
+  }
 }
 
 .button {
@@ -42,14 +46,17 @@ $borderWidth: 0.5rem;
   &::after {
     position: absolute;
     top: 0;
-    left: #{math.div(-$borderWidth, 2)};
     height: 100%;
     width: $borderWidth;
     content: '';
   }
 
-  &.button_border {
-    border-left: 0 !important;
+  &.button_secondary::after {
+    left: 0;
+  }
+
+  &:not(.button_secondary)::after {
+    left: #{math.div(-$borderWidth, 2)};
   }
 
   &:not(.button_secondary) {
