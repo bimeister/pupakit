@@ -113,7 +113,7 @@
   &_disabled {
     border-color: color(neutral-50);
     &.radio-control-marker_selected {
-      background: color(neutral-5);
+      background: color(neutral-50);
       @include host-selector-dark-theme() {
         background: color(neutral-5);
       }
