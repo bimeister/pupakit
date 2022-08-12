@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, skip, switchMap } from 'rxjs/operators';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DatePickerPreviewMode } from '../../../../../internal/declarations/types/date-picker-preview-mode.type';
@@ -247,6 +247,11 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
         filterNotNil(),
         filterTruthy(),
         switchMap(() => this.selectedDate$),
+        // this.date should emit values on user selection only.
+        // The first emitted value into this.selectedDate$ is BehaviorSubject's default value (null).
+        // The second emitted value into this.selectedDate$ is current value from the pupa-input-date control.
+        // Subsequent emitted values are those that the user has manually selected.
+        skip(2),
         distinctUntilChanged(this.datePickerStateService.isSameDate),
         filterNotNil()
       )
