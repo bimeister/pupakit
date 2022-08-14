@@ -43,8 +43,14 @@ export abstract class SelectOptionBase<T> implements OnChanges {
     if (isNil(changes)) {
       return;
     }
-    this.processValueChange(changes?.value);
-    this.processIsDisabledChange(changes?.isDisabled);
+
+    if (changes.hasOwnProperty('value')) {
+      this.processValueChange(changes.value);
+    }
+
+    if (changes.hasOwnProperty('isDisabled')) {
+      this.processIsDisabledChange(changes.isDisabled);
+    }
   }
 
   public processClick(): void {
