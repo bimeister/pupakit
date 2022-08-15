@@ -80,7 +80,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   private readonly scrollDragMode$: BehaviorSubject<Nullable<ScrollDragMode>> = new BehaviorSubject<
     Nullable<ScrollDragMode>
   >(null);
-  @Input() public innerPadding: string;
   @Input() public scrollVisibilityMode: ScrollVisibilityMode = 'always';
   private readonly scrollVisibilityMode$: BehaviorSubject<ScrollVisibilityMode> =
     new BehaviorSubject<ScrollVisibilityMode>('always');
