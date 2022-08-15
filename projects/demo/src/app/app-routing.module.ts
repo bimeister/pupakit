@@ -1,5 +1,6 @@
 import { NgModule, Type } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { InfinityScrollerDemoModule } from './pages/infinity-scroller-demo/infinity-scroller-demo.module';
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AccordionDemoModule } from './pages/accordion-demo/accordion-demo.module';
@@ -299,6 +300,13 @@ const demoRoutes: Routes = [
         path: 'status',
         loadChildren: (): Promise<Type<StatusDemoModule>> =>
           import('./pages/status-demo/status-demo.module').then((module: any) => module.StatusDemoModule),
+      },
+      {
+        path: 'infinity-scroller',
+        loadChildren: (): Promise<Type<InfinityScrollerDemoModule>> =>
+          import('./pages/infinity-scroller-demo/infinity-scroller-demo.module').then(
+            (module: any) => module.InfinityScrollerDemoModule
+          ),
       },
       {
         path: 'badge',

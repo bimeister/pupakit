@@ -63,6 +63,7 @@ export class SidebarComponent {
         { title: 'Radio buttons', link: '/kit/radio' },
         { title: 'Switcher', link: '/kit/switcher' },
         { title: 'Search Field', link: '/kit/search-field' },
+        { title: 'Infinity Scroller', link: '/kit/infinity-scroller' },
         { title: 'Table', link: '/kit/table' },
         { title: 'Tree', link: '/kit/tree-new' },
         { title: 'Tabs', link: '/kit/tabs' },

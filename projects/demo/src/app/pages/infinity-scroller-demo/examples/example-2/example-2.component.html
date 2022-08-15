@@ -1,0 +1,34 @@
+<div class="scroller__container">
+  <pupa-infinity-scroller [controller]="controller">
+    <div class="chat-bubble" *pupaInfiniteScrollerItemTemplate="let item; typeFrom: itemType">
+      <pupa-avatar
+        class="chat-bubble__avatar"
+        size="large"
+        [username]="item.user.name"
+        *ngIf="item.user.id !== currentUserId"
+      ></pupa-avatar>
+      <pupa-card-container class="chat-bubble__body" [class.chat-bubble__body-self]="item.user.id === currentUserId">
+        <div class="chat-bubble__author">
+          <div>{{ item.user.name }}</div>
+        </div>
+        <div class="chat-bubble__message">
+          <div>{{ item.message }}</div>
+        </div>
+      </pupa-card-container>
+      <pupa-avatar
+        class="chat-bubble__avatar"
+        size="large"
+        [username]="item.user.name"
+        *ngIf="item.user.id === currentUserId"
+      ></pupa-avatar>
+    </div>
+  </pupa-infinity-scroller>
+</div>
+
+<div class="scroller__divider"></div>
+
+<div class="scroller__params">
+  <pupa-tag kind="primary">Last event: {{ event$ | async }}</pupa-tag>
+  <pupa-tag kind="warning">Total items: {{ total }}</pupa-tag>
+  <pupa-tag kind="warning">Total rendered items: {{ totalRendered$ | async }}</pupa-tag>
+</div>

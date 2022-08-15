@@ -31,6 +31,9 @@ $color_dark: 'neutral-600';
   position: relative;
 
   &__content {
+    display: var(--pupa-scrollable-content_display, block);
+    flex-direction: var(--pupa-scrollable-content_flex-direction, row);
+    padding: var(--pupa-scrollable-content_padding, initial);
     position: relative;
     z-index: 1;
 

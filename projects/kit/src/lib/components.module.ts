@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { HammerModule } from '@angular/platform-browser';
+import { InfinityScrollerModule } from './components/infinity-scroller/infinity-scroller.module';
 import { SharedModule } from '../internal/shared/shared.module';
 import { AccordionModule } from './components/accordion/accordion.module';
 import { ActionsModule } from './components/actions/actions.module';
@@ -103,6 +104,7 @@ const EXPORTS: any[] = [
   FormLayoutModule,
   TreeLayoutModule,
   IconHolderModule,
+  InfinityScrollerModule,
 ];
 
 @NgModule({

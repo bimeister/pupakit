@@ -3,11 +3,7 @@
     <pupa-spinner size="40px"></pupa-spinner>
   </div>
 
-  <pupa-scrollable
-    [invisibleScrollbars]="['vertical', 'horizontal']"
-    class="skeleton-scrollable"
-    innerPadding="2rem 3rem 3rem 2rem"
-  >
+  <pupa-scrollable [invisibleScrollbars]="['vertical', 'horizontal']" class="skeleton-scrollable">
     <cdk-virtual-scroll-viewport
       pupaScrollableContent
       #skeletonViewPort
@@ -22,7 +18,7 @@
     </cdk-virtual-scroll-viewport>
   </pupa-scrollable>
 
-  <pupa-scrollable innerPadding="2rem 3rem 3rem 2rem">
+  <pupa-scrollable>
     <cdk-virtual-scroll-viewport pupaScrollableContent #viewPort [itemSize]="treeItemSizePx" class="viewport">
       <ng-container *cdkVirtualFor="let treeItem of data$ | async"> </ng-container>
       <cdk-tree

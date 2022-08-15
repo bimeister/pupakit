@@ -1,0 +1,66 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.scroller {
+  &__container {
+    height: 100rem;
+    max-width: 180rem;
+  }
+
+  &__params {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+
+    @include xs() {
+      flex-direction: column;
+    }
+  }
+
+  &__divider {
+    width: 100%;
+    margin: 5rem 0;
+    height: 1px;
+    background: semantic-color(lines-normal);
+  }
+}
+
+.chat-bubble {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+
+  &__body {
+    width: 70%;
+    margin: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include xs() {
+      width: 100%;
+    }
+
+    &-self {
+      margin-left: auto;
+    }
+  }
+
+  &__avatar {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  &__author {
+    @include font-preset-body-s();
+    @include font-type-bold();
+    padding: 3rem 3rem 0;
+  }
+
+  &__message {
+    @include font-preset-caption-s();
+    padding: 0 3rem 3rem;
+    display: flex;
+    gap: 2rem;
+  }
+}
