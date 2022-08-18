@@ -107,6 +107,11 @@ $buttonSmallBorderRadius: 0.5rem;
     @include font-preset-h6();
     border-radius: $buttonMediumBorderRadius;
 
+    &.icon-button {
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+
     .button__icon {
       font-size: 3rem;
     }
@@ -117,6 +122,11 @@ $buttonSmallBorderRadius: 0.5rem;
     padding: 0.5rem 1.5rem;
     @include font-preset-h6();
     border-radius: $buttonMediumBorderRadius;
+
+    &.icon-button {
+      padding: 1rem;
+      border-radius: 1rem;
+    }
 
     .button__icon {
       font-size: 3rem;
@@ -132,6 +142,11 @@ $buttonSmallBorderRadius: 0.5rem;
     padding: 0.5rem 1.5rem;
     @include font-preset-h7();
     border-radius: $buttonSmallBorderRadius;
+
+    &.icon-button {
+      padding: 0.5rem;
+      border-radius: 1rem;
+    }
 
     .button__icon {
       font-size: 3rem;

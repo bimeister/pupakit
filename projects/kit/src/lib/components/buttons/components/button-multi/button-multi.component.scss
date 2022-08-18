@@ -42,6 +42,7 @@ $borderWidth: 0.5rem;
 
 .button-multi_menu-button {
   position: relative;
+  border-left: 0.25rem solid semantic-color(lines-opacity);
 
   &::after {
     position: absolute;
@@ -51,16 +52,8 @@ $borderWidth: 0.5rem;
     content: '';
   }
 
-  &.button_secondary::after {
-    left: 0;
-  }
-
-  &:not(.button_secondary)::after {
+  &::after {
     left: #{math.div(-$borderWidth, 2)};
-  }
-
-  &:not(.button_secondary) {
-    border-left: 0.25rem solid semantic-color(lines-opacity, alpha-7);
   }
 
   display: flex;

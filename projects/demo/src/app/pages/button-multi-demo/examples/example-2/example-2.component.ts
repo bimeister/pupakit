@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonKind } from '@kit/internal/declarations/types/button-kind.type';
+import { ButtonMultiKind } from '@kit/internal/declarations/types/button-multi-kind.type';
 
 @Component({
   selector: 'demo-button-multi-example-2',
@@ -9,5 +9,5 @@ import { ButtonKind } from '@kit/internal/declarations/types/button-kind.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonMultiExample2Component {
-  public readonly kinds: ButtonKind[] = ['primary', 'secondary', 'border', 'success', 'warning', 'danger'];
+  public readonly kinds: ButtonMultiKind[] = ['primary', 'border', 'success', 'warning', 'danger'];
 }
