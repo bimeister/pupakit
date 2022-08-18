@@ -14,7 +14,7 @@ import { filterTruthy, isNil } from '@bimeister/utilities';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuDirective } from '../../../dropdown-menu/directives/dropdown-menu.directive';
-import { ButtonMultiKind } from '@kit/internal/declarations/types/button-multi-kind.type';
+import { ButtonMultiKind } from '../../../../../internal/declarations/types/button-multi-kind.type';
 
 @Component({
   selector: 'pupa-button-multi',
