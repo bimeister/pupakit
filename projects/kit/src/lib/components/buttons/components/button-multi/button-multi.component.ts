@@ -14,6 +14,7 @@ import { filterTruthy, isNil } from '@bimeister/utilities';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ButtonComponent } from '../button/button.component';
 import { DropdownMenuDirective } from '../../../dropdown-menu/directives/dropdown-menu.directive';
+import { ButtonMultiKind } from '@kit/internal/declarations/types/button-multi-kind.type';
 
 @Component({
   selector: 'pupa-button-multi',
@@ -24,6 +25,8 @@ import { DropdownMenuDirective } from '../../../dropdown-menu/directives/dropdow
 })
 export class ButtonMultiComponent extends ButtonComponent implements OnChanges, AfterViewInit {
   @Input() public readonly dropdownMenuContent: DropdownMenuContentComponent;
+
+  @Input() public readonly kind: ButtonMultiKind = 'primary';
 
   @ViewChild(DropdownMenuDirective) private readonly dropdownMenu: DropdownMenuDirective;
 

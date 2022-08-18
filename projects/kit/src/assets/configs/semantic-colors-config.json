@@ -508,11 +508,11 @@
       {
         "name": "Normal",
         "lightColor": {
-          "color": "neutral-5",
+          "color": "neutral-7",
           "alpha": "alpha-1000"
         },
         "darkColor": {
-          "color": "neutral-500",
+          "color": "neutral-300",
           "alpha": "alpha-1000"
         }
       },
@@ -542,11 +542,11 @@
         "name": "Opacity",
         "lightColor": {
           "color": "neutral-1000",
-          "alpha": "alpha-7"
+          "alpha": "alpha-9"
         },
         "darkColor": {
           "color": "neutral-1",
-          "alpha": "alpha-7"
+          "alpha": "alpha-50"
         }
       }
     ]
