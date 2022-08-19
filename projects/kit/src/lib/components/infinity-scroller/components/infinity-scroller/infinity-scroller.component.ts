@@ -99,7 +99,7 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
     this.subscription.add(this.handleScrollToBottomEvents());
     this.subscription.add(this.handleScrollToTopEvents());
 
-    this.subscription.add(this.processInitialScrollToBottom());
+    this.processInitialScrollToBottom();
   }
 
   public ngOnDestroy(): void {
@@ -180,8 +180,8 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
       );
   }
 
-  private processInitialScrollToBottom(): Subscription {
-    return this.scrollMoveDirection$
+  private processInitialScrollToBottom(): void {
+    this.scrollMoveDirection$
       .pipe(
         take(1),
         filter((scrollDirection: ScrollMoveDirection) => scrollDirection === ScrollMoveDirection.FromBottomToTop),
