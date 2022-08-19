@@ -26,8 +26,10 @@ export class InfinityScrollerController<T> {
     InfinityScrollerController.trackBy
   );
 
-  private readonly currentFetchEvent: BehaviorSubject<FetchEvent | null> = new BehaviorSubject<FetchEvent | null>(null);
-  public readonly isLoading$: Observable<boolean> = this.currentFetchEvent.pipe(
+  private readonly currentFetchEvent$: BehaviorSubject<FetchEvent | null> = new BehaviorSubject<FetchEvent | null>(
+    null
+  );
+  public readonly isLoading$: Observable<boolean> = this.currentFetchEvent$.pipe(
     map((event: FetchEvent | null) => !isNil(event))
   );
 
@@ -104,36 +106,35 @@ export class InfinityScrollerController<T> {
   }
 
   public setData(data: T[]): void {
-    this.currentFetchEvent.pipe(take(1), filterNotNil()).subscribe((event: FetchEvent | null) => {
-      if (
+    this.currentFetchEvent$.pipe(take(1), filterNotNil()).subscribe((event: FetchEvent | null) => {
+      const isBufferOverflow: boolean =
         !isNil(this.bufferSize) &&
-        this.sliceIndexesProducer.endIndex - this.sliceIndexesProducer.startIndex > this.bufferSize
-      ) {
-        const bufferOverflowSlice: number =
-          this.sliceIndexesProducer.endIndex - this.sliceIndexesProducer.startIndex - this.bufferSize;
+        this.sliceIndexesProducer.endIndex - this.sliceIndexesProducer.startIndex > this.bufferSize;
 
-        const shouldBeCutOnTop: boolean =
-          (this.scrollMoveDirection === ScrollMoveDirection.FromTopToBottom &&
-            event instanceof InfinityScrollerEvents.GetNextPage) ||
-          (this.scrollMoveDirection === ScrollMoveDirection.FromBottomToTop &&
-            event instanceof InfinityScrollerEvents.GetPreviousPage);
-
-        event instanceof InfinityScrollerEvents.GetNextPage
-          ? this.sliceIndexesProducer.setStartIndex(this.sliceIndexesProducer.startIndex + bufferOverflowSlice)
-          : this.sliceIndexesProducer.setEndIndex(this.sliceIndexesProducer.endIndex - bufferOverflowSlice);
-
-        const updatedData: T[] = shouldBeCutOnTop
-          ? data.slice(bufferOverflowSlice)
-          : data.slice(0, -bufferOverflowSlice);
-
-        this.resetData(updatedData);
-        this.currentFetchEvent.next(null);
+      if (!isBufferOverflow) {
+        this.resetData(data);
+        this.currentFetchEvent$.next(null);
 
         return;
       }
 
-      this.resetData(data);
-      this.currentFetchEvent.next(null);
+      const bufferOverflowSlice: number =
+        this.sliceIndexesProducer.endIndex - this.sliceIndexesProducer.startIndex - this.bufferSize;
+
+      const shouldBeCutOnTop: boolean =
+        (this.scrollMoveDirection === ScrollMoveDirection.FromTopToBottom &&
+          event instanceof InfinityScrollerEvents.GetNextPage) ||
+        (this.scrollMoveDirection === ScrollMoveDirection.FromBottomToTop &&
+          event instanceof InfinityScrollerEvents.GetPreviousPage);
+
+      event instanceof InfinityScrollerEvents.GetNextPage
+        ? this.sliceIndexesProducer.setStartIndex(this.sliceIndexesProducer.startIndex + bufferOverflowSlice)
+        : this.sliceIndexesProducer.setEndIndex(this.sliceIndexesProducer.endIndex - bufferOverflowSlice);
+
+      const updatedData: T[] = shouldBeCutOnTop ? data.slice(bufferOverflowSlice) : data.slice(0, -bufferOverflowSlice);
+
+      this.resetData(updatedData);
+      this.currentFetchEvent$.next(null);
     });
   }
 
@@ -154,7 +155,7 @@ export class InfinityScrollerController<T> {
       event instanceof InfinityScrollerEvents.GetNextPage ||
       event instanceof InfinityScrollerEvents.GetPreviousPage
     ) {
-      this.currentFetchEvent.next(event);
+      this.currentFetchEvent$.next(event);
     }
 
     return this.eventBus.dispatch(event);
