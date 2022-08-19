@@ -20,6 +20,7 @@ $buttonSmallBorderRadius: 0.5rem;
   position: relative;
   display: flex;
   pointer-events: auto;
+  background-clip: padding-box;
 
   @include no-tap-highlight();
 
