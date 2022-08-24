@@ -1,4 +1,13 @@
-import { ChangeDetectionStrategy, Component, Injector, OnDestroy, ViewEncapsulation } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Injector,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
@@ -9,8 +18,9 @@ import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/
 import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
-import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
+import { AnchorService } from '../../../../services/anchor.service';
 import { ConfigService } from '../../../../services/config.service';
+import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
 
 @Component({
   selector: 'demo-navbar',
@@ -20,11 +30,14 @@ import { ConfigService } from '../../../../services/config.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [ConfigService],
 })
-export class NavbarComponent implements OnDestroy {
+export class NavbarComponent implements AfterViewInit, OnDestroy {
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
     map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
   public readonly version$: Observable<string> = this.configService.getVersionPupakit();
+
+  @ViewChild('navRef', { static: true })
+  private readonly navRef: ElementRef<HTMLElement>;
 
   private readonly logoDark: SafeResourceUrl;
   private readonly logoLight: SafeResourceUrl;
@@ -59,6 +72,7 @@ export class NavbarComponent implements OnDestroy {
   }
 
   constructor(
+    private readonly anchorService: AnchorService,
     private readonly themeWrapperService: ThemeWrapperService,
     private readonly sanitizer: DomSanitizer,
     private readonly drawerService: DrawersService,
@@ -74,6 +88,10 @@ export class NavbarComponent implements OnDestroy {
 
     this.subscription.add(this.closeMenuWhenDrawerClosed());
     this.subscription.add(this.openDrawerWhenMenuOpen());
+  }
+
+  public ngAfterViewInit(): void {
+    this.setAnchorsRequiredIndentFromTop();
   }
 
   public ngOnDestroy(): void {
@@ -130,5 +148,10 @@ export class NavbarComponent implements OnDestroy {
         this.drawerService.closeById(id);
         this.currentOpenedDrawer$.next(null);
       });
+  }
+
+  private setAnchorsRequiredIndentFromTop(): void {
+    const navbarHeight: number = this.navRef.nativeElement.clientHeight;
+    this.anchorService.setScrollableParentRequiredIndentFromTop(navbarHeight);
   }
 }

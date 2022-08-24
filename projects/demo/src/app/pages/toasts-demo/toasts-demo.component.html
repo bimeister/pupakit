@@ -2,19 +2,19 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <h3>Usage</h3>
+    <h3 demoAnchor>Usage</h3>
 
-    <h3>Basic usage</h3>
+    <h3 demoAnchor>Basic usage</h3>
     <pupa-code-container [content]="basicExampleContent">
       <demo-basic-example *pupaCodeContainerPreviewTemplate></demo-basic-example>
     </pupa-code-container>
 
-    <h3>Template rendering</h3>
+    <h3 demoAnchor>Template rendering</h3>
     <pupa-code-container [content]="templateRenderingExampleContent">
       <demo-template-rendering-example *pupaCodeContainerPreviewTemplate></demo-template-rendering-example>
     </pupa-code-container>
 
-    <h3>Change theme</h3>
+    <h3 demoAnchor>Change theme</h3>
     <pupa-code-container [content]="changeThemeExampleContent">
       <demo-change-theme-example *pupaCodeContainerPreviewTemplate></demo-change-theme-example>
     </pupa-code-container>
@@ -23,9 +23,9 @@
       theme changed.
     </pupa-info-block>
 
-    <h3>Customization</h3>
+    <h3 demoAnchor>Customization</h3>
 
-    <h3>Custom component rendering</h3>
+    <h3 demoAnchor>Custom component rendering</h3>
     <p>
       Also you can render your own component. Extend it from
       <pupa-code-inline>ToastComponentBase</pupa-code-inline> and pass to the
@@ -33,7 +33,7 @@
       automatically.
     </p>
 
-    <h3>Animations for your own component</h3>
+    <h3 demoAnchor>Animations for your own component</h3>
     <p>
       You can use default animation or set your own animation. Use
       <pupa-code-inline>ToastComponentBase.animations</pupa-code-inline> or write animation like in the example.

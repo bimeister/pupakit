@@ -8,9 +8,9 @@
       performance of examples, resize the window.
     </pupa-info-block>
 
-    <h3>Mixins</h3>
+    <h3 demoAnchor>Mixins</h3>
 
-    <h4>Basic mixins that adjust adaptive display.</h4>
+    <h4 demoAnchor anchorName="Basic-mixins">Basic mixins that adjust adaptive display.</h4>
 
     <ul>
       <li>
@@ -36,7 +36,9 @@
       <demo-adaptive-example-1 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-1>
     </pupa-code-container>
 
-    <h4>Styles are applied if the width/height is less than/greater than the specified value.</h4>
+    <h4 demoAnchor anchorName="Width-Height-Less-Greater">
+      Styles are applied if the width/height is less than/greater than the specified value.
+    </h4>
     <ul>
       <li>
         <pupa-code-inline> @mixin width-less-than($width)</pupa-code-inline>
@@ -62,7 +64,7 @@
       <demo-adaptive-example-2 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-2>
     </pupa-code-container>
 
-    <h4>These are mixins that help catch device orientation.</h4>
+    <h4 demoAnchor anchorName="Device-orientation">These are mixins that help catch device orientation.</h4>
     <ul>
       <li>
         <pupa-code-inline>@mixin portrait()</pupa-code-inline>
@@ -80,7 +82,7 @@
     </pupa-code-container>
 
     <br />
-    <h3>Grid Mixins</h3>
+    <h3 demoAnchor>Grid Mixins</h3>
     <p>Examples of using mixins built on a grid will be given below.</p>
     <pupa-info-block>
       Active breakpoint is set as a class for the tag
@@ -90,7 +92,9 @@
       .
     </pupa-info-block>
 
-    <h4>For each of these mixins, styles will be applied only to the specified breakpoint.</h4>
+    <h4 demoAnchor anchorName="Specified-breakpoint">
+      For each of these mixins, styles will be applied only to the specified breakpoint.
+    </h4>
     <ul>
       <li>
         <pupa-code-inline>@mixin xs()</pupa-code-inline>
@@ -130,7 +134,7 @@
       <demo-adaptive-example-4 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-4>
     </pupa-code-container>
 
-    <h4>
+    <h4 demoAnchor anchorName="Less-shorthand">
       The names of this set of mixins are shorthand for the name
       <pupa-code-inline>less than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline>
       .
@@ -177,7 +181,7 @@
       <demo-adaptive-example-5 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-5>
     </pupa-code-container>
 
-    <h4>
+    <h4 demoAnchor anchorName="Greater-shorthand">
       The names of this set of mixins are shorthand for the name
       <pupa-code-inline>greater than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline>
       .
@@ -215,7 +219,7 @@
 
     <p><b>Use only for top-level layout, i.e. only for layout of the skeleton of the page itself.</b></p>
 
-    <h4>These mixins are without nested content.</h4>
+    <h4 demoAnchor anchorName="No-nested-content">These mixins are without nested content.</h4>
 
     <ul>
       <li>
@@ -282,9 +286,9 @@
 
     <pupa-code-container [isPreviewExist]="false" [content]="example7Content"></pupa-code-container>
 
-    <h3>CSS locks</h3>
+    <h3 demoAnchor>CSS locks</h3>
 
-    <h4>
+    <h4 demoAnchor anchorName="CSS-gateway-math">
       These are special mixins and functions that allow you to apply css gateway math to scale up proportionately.
     </h4>
 
@@ -335,7 +339,7 @@
       <demo-adaptive-example-8 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-8>
     </pupa-code-container>
 
-    <h4>
+    <h4 demoAnchor anchorName="Grid-Size-Offset-helpers">
       These functions are helper for mixins
       <pupa-code-inline>grid-size</pupa-code-inline>
       and
@@ -357,7 +361,7 @@
       padding.
     </p>
 
-    <h3>Other</h3>
+    <h3 demoAnchor>Other</h3>
     <ul>
       <li>
         <pupa-code-inline>@mixin hover()</pupa-code-inline>
@@ -387,7 +391,7 @@
       <demo-adaptive-example-9 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-9>
     </pupa-code-container>
 
-    <h3>TypeScript</h3>
+    <h3 demoAnchor>TypeScript</h3>
 
     <p>
       Everything is clear with styles. We can track any state of the window and make our own styles depending on these
@@ -400,7 +404,7 @@
       state.
     </p>
 
-    <h3>Touch Events</h3>
+    <h3 demoAnchor>Touch Events</h3>
 
     <p>
       I won’t reveal the secret if I say that the click event on mobile devices is much longer than the tap event. For

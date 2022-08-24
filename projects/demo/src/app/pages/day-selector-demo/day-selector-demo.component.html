@@ -2,17 +2,17 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <h3>Plain selector example</h3>
+    <h3 demoAnchor>Plain selector example</h3>
     <pupa-code-container [content]="plainDemoDaySelectorExample">
       <demo-plain-day-selector-example *pupaCodeContainerPreviewTemplate></demo-plain-day-selector-example>
     </pupa-code-container>
 
-    <h3>Items size example</h3>
+    <h3 demoAnchor>Items size example</h3>
     <pupa-code-container [content]="itemSizeDaySelectorExample">
       <demo-item-size-day-selector-example *pupaCodeContainerPreviewTemplate></demo-item-size-day-selector-example>
     </pupa-code-container>
 
-    <h3>Locale example</h3>
+    <h3 demoAnchor>Locale example</h3>
     <pupa-code-container [content]="localeDaySelectorExample">
       <demo-locale-day-selector-example *pupaCodeContainerPreviewTemplate></demo-locale-day-selector-example>
     </pupa-code-container>
@@ -23,7 +23,7 @@
       <pupa-day-selector [formControl]="formControl" [size]="size.value" [locale]="locale.value"></pupa-day-selector>
     </demo-example-viewer-content>
 
-    <h3>Properties</h3>
+    <h3 demoAnchor>Properties</h3>
     <demo-example-viewer-property name="size" decoratorName="input" type="DaySelectorSize">
       <ng-template demoExampleViewerPropertyDescription> Change size of day selector elements </ng-template>
 
@@ -54,7 +54,7 @@
       </pupa-select>
     </demo-example-viewer-property>
 
-    <h3>Constants</h3>
+    <h3 demoAnchor>Constants</h3>
     <demo-example-viewer-config-item name="DAY_SELECTOR_CONFIG_TOKEN: DaySelectorConfig">
       <ng-template demoExampleViewerConfigItemDescription>
         Injection token that can be used to provide the default options for day-selector element.

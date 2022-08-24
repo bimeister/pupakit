@@ -4,6 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RadioGroupModule } from '@kit/lib/components/radio-group/radio-group.module';
 import { SelectModule } from '@kit/lib/components/select/select.module';
 import { SwitcherModule } from '@kit/lib/components/switcher/switcher.module';
+import { AnchorModule } from '../anchor/anchor.module';
 import { CodeModule } from '../code/code.module';
 import { ExampleViewerConfigItemComponent } from './components/example-viewer-config-item/example-viewer-config-item.component';
 import { ExampleViewerContentComponent } from './components/example-viewer-content/example-viewer-content.component';
@@ -42,6 +43,7 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   SwitcherModule,
   ReactiveFormsModule,
   CodeModule,
+  AnchorModule,
 ];
 
 @NgModule({
