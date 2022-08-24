@@ -2,7 +2,7 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <h3>Usage</h3>
+    <h3 demoAnchor>Usage</h3>
     <pupa-info-block>
       The code of all examples below consists of two parts:
       <ul>
@@ -15,24 +15,24 @@
     <pupa-info-block variant="warning">
       Layout component must implement <pupa-code-inline>PopoverComponentBase</pupa-code-inline>.
     </pupa-info-block>
-    <h3>Basic example</h3>
+    <h3 demoAnchor>Basic example</h3>
     <pupa-info-block> <pupa-code-inline>pupa-popover-layout-footer</pupa-code-inline> is optional. </pupa-info-block>
 
     <pupa-code-container [content]="basicExampleContent">
       <demo-popover-trigger-basic *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-basic>
     </pupa-code-container>
 
-    <h3>Coordinates</h3>
+    <h3 demoAnchor>Coordinates</h3>
     <pupa-code-container [content]="coordinatesExampleContent">
       <demo-popover-trigger-coordinates *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-coordinates>
     </pupa-code-container>
 
-    <h3>Directive</h3>
+    <h3 demoAnchor>Directive</h3>
     <pupa-code-container [content]="directiveExampleContent">
       <demo-directive-example *pupaCodeContainerPreviewTemplate> </demo-directive-example>
     </pupa-code-container>
 
-    <h3>Drawer case</h3>
+    <h3 demoAnchor>Drawer case</h3>
     <pupa-code-container [content]="otherExampleContent">
       <demo-popover-trigger-other *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-other>
     </pupa-code-container>

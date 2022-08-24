@@ -39,7 +39,7 @@
   </div>
 
   <div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
-    <h4>{{ colorGroup.name }}</h4>
+    <h4 demoAnchor [anchorName]="colorGroup.name">{{ colorGroup.name }}</h4>
 
     <div class="colors-demo__list">
       <div
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <h3>Alpha Values</h3>
+  <h3 demoAnchor>Alpha Values</h3>
 
   <div class="description">
     <pupa-info-block> Click on the alpha value card to copy the value. </pupa-info-block>
@@ -72,7 +72,7 @@
     </div>
   </div>
 
-  <h3>Using and overriding colors with .scss component styles</h3>
+  <h3 demoAnchor>Using and overriding colors with .scss component styles</h3>
   <pupa-code-container [content]="example1Content">
     <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
   </pupa-code-container>
@@ -90,7 +90,7 @@
     If you set invalid color key you will get error.
   </pupa-info-block>
 
-  <h3>Using and overriding colors with .css component styles</h3>
+  <h3 demoAnchor>Using and overriding colors with .css component styles</h3>
   <pupa-code-container [content]="example2Content">
     <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
   </pupa-code-container>
@@ -99,7 +99,7 @@
 
   <pupa-info-block variant="warning" class="last-point"> CSS variables are not validated. </pupa-info-block>
 
-  <h3>Usage</h3>
+  <h3 demoAnchor>Usage</h3>
 
   <p>
     To use colors, you need to use the function
@@ -130,7 +130,7 @@
   </div>
 
   <div class="semantic-colors__group" *ngFor="let group of semanticConfigurationGroups">
-    <h4>{{ group.name }}</h4>
+    <h4 demoAnchor [anchorName]="group.name">{{ group.name }}</h4>
 
     <div class="semantic-colors__section" *ngIf="theme$ | async as theme">
       <div
@@ -159,7 +159,7 @@
     </div>
   </div>
 
-  <h3>Usage</h3>
+  <h3 demoAnchor>Usage</h3>
 
   <p>
     To use semantic colors, you need to use the function

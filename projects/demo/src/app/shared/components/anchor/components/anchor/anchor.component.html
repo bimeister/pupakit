@@ -1,0 +1,12 @@
+<span class="anchor-text" [class.anchor-text_animation]="anchorIsActivated$ | async">
+  <ng-content></ng-content>
+</span>
+
+<pupa-button-icon
+  *ngIf="anchorName$ | async"
+  class="anchor-button-icon"
+  icon="ios-link"
+  kind="subtle"
+  title="Copy link"
+  (click)="copyHrefAndShowToast()"
+></pupa-button-icon>

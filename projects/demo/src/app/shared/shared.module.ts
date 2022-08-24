@@ -6,6 +6,7 @@ import { AlertModule } from '@kit/lib/components/alert/alert.module';
 import { IconModule } from '@kit/lib/components/icon/icon.module';
 import { getAllIcons } from '../../declarations/functions/get-all-icons.function';
 import { AlertsToolbarExampleComponent } from '../pages/alerts-demo/examples/alerts-toolbar-example/alerts-toolbar-example.component';
+import { AnchorModule } from './components/anchor/anchor.module';
 import { CodeModule } from './components/code/code.module';
 import { ExampleViewerModule } from './components/example-viewer/example-viewer.module';
 import { InfoBlockModule } from './components/info-block/info-block.module';
@@ -19,6 +20,7 @@ const MODULES: Type<unknown>[] = [
   ReactiveFormsModule,
   InfoBlockModule,
   PageModule,
+  AnchorModule,
 ];
 
 @NgModule({
