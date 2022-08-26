@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
