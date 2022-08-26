@@ -78,6 +78,25 @@ $end-item-margin: 4rem;
     width: 32px;
   }
 
+  &__status {
+    color: semantic-color(text-primary);
+    @include xs() {
+      @include font-size-s();
+    }
+  }
+
+  &__line {
+    width: 0.5rem;
+    height: 5rem;
+    background-color: semantic-color(lines-dark);
+    margin: 0 3rem;
+    border-radius: 2rem;
+    @include xs() {
+      margin: 0 2rem;
+      height: 4rem;
+    }
+  }
+
   &__santa-hat-icon {
     position: absolute;
     top: -13px;

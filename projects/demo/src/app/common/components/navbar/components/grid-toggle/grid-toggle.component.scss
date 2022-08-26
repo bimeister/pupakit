@@ -11,4 +11,10 @@
   @include host-selector-dark-theme() {
     color: color(neutral-5);
   }
+
+  &__label {
+    @include xs() {
+      @include font-size-s();
+    }
+  }
 }
