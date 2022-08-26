@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 const BASE_REQUEST_PATH: string = 'popover-demo/examples';
