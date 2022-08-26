@@ -69,6 +69,11 @@
                 "output": "/examples"
               },
               {
+                "glob": "package.json",
+                "input": "./",
+                "output": "/assets"
+              },
+              {
                 "glob": "**/*",
                 "input": "./projects/kit/src/assets/fonts",
                 "output": "/assets/fonts"

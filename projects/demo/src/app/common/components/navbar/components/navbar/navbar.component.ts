@@ -10,6 +10,7 @@ import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-content-container/sidebar-drawer-content-container.component';
+import { ConfigService } from '../../../../services/config.service';
 
 @Component({
   selector: 'demo-navbar',
@@ -17,11 +18,13 @@ import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-conten
   styleUrls: ['./navbar.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ConfigService],
 })
 export class NavbarComponent implements OnDestroy {
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
     map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
+  public readonly version$: Observable<string> = this.configService.getVersionPupakit();
 
   private readonly logoDark: SafeResourceUrl;
   private readonly logoLight: SafeResourceUrl;
@@ -59,6 +62,7 @@ export class NavbarComponent implements OnDestroy {
     private readonly themeWrapperService: ThemeWrapperService,
     private readonly sanitizer: DomSanitizer,
     private readonly drawerService: DrawersService,
+    private readonly configService: ConfigService,
     private readonly injector: Injector
   ) {
     this.logoLight = this.sanitizer.bypassSecurityTrustResourceUrl('assets/logo-light.svg');
