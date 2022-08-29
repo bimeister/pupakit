@@ -17,7 +17,7 @@ After building your library with `ng build pupakit`, go to the dist folder `cd d
 
 ## Running unit tests
 
-Run `ng test pupakit` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Run `ng run pupakit:test:debugging` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
 ## Further help
 
