@@ -1,7 +1,7 @@
 <pupa-tabs-container class="container">
   <div class="tabs">
     <pupa-tabs>
-      <pupa-tabs-item *ngFor="let tab of tabs$ | async" [name]="tab.name">
+      <pupa-tabs-item class="tabs-item" *ngFor="let tab of tabs$ | async" [name]="tab.name">
         {{ tab.name }}
       </pupa-tabs-item>
     </pupa-tabs>
