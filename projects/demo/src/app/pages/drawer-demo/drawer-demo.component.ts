@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import { ChangeDetectionStrategy, Component, Injector } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
@@ -17,9 +16,13 @@ const BASE_REQUEST_PATH: string = 'drawer-demo/examples';
 })
 export class DrawerDemoComponent {
   public readonly example1Content: Record<string, string> = {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'drawer-layout-example-1.component.html': `${BASE_REQUEST_PATH}/example-1/drawer-layout-example-1/drawer-layout-example-1.component.html`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'drawer-layout-example-1.component.ts': `${BASE_REQUEST_PATH}/example-1/drawer-layout-example-1/drawer-layout-example-1.component.ts`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'drawer-trigger-example-1.component.html': `${BASE_REQUEST_PATH}/example-1/drawer-trigger-example-1/drawer-trigger-example-1.component.html`,
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     'drawer-trigger-example-1.component.ts': `${BASE_REQUEST_PATH}/example-1/drawer-trigger-example-1/drawer-trigger-example-1.component.ts`,
   };
 
