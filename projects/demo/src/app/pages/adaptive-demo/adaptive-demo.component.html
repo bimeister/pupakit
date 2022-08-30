@@ -1,278 +1,417 @@
 <h1>Adaptive</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <pupa-info-block>
+      The purpose of this page is to demonstrate the capabilities of all the mixins in the
+      <pupa-code-inline>adaptive.scss</pupa-code-inline>
+      file. Each of these mixins is applied under conditions that match the resolution of the window. To demonstrate the
+      performance of examples, resize the window.
+    </pupa-info-block>
 
-<h3>Description</h3>
-<p>
-  Цель этой страницы продемонстрировать возможности всех миксинов из файла
-  <pupa-code-inline>adaptive.scss</pupa-code-inline>. Каждый из этих миксинов применяется при условиях совпадения
-  разрешению окна. Для демонстрации работоспособности примеров&nbsp;—&nbsp;делайте ресайз окна.
-</p>
+    <h3>Mixins</h3>
 
-<h3>Mixins</h3>
+    <h4>Basic mixins that adjust adaptive display.</h4>
 
-<p>Базовые миксины, которые настраивают адаптивное отображение.</p>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin width-between($min-width, $max-width)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin height-between($min-height, $max-height)</pupa-code-inline>
+      </li>
+    </ul>
 
-<h3>
-  @mixin width-between($min-width, $max-width)
-  <br />
-  @mixin height-between($min-height, $max-height)
-</h3>
-<p>
-  Стили применятся только в рамках указанных границ. Ниже представлен пример, когда для всех ширин окна отображается
-  квадрат, кроме ширин, лежащих в интервале <pupa-code-inline>[1500, 1599]</pupa-code-inline>. А также блок станет
-  красного цвета, если высота окна находится в интервале <pupa-code-inline>[800, 899]</pupa-code-inline>
-</p>
+    <p>Styles are only applied within the specified bounds.</p>
+    <p>
+      Below is an example when a square is displayed for all window widths, except for widths lying in the interval
+      <pupa-code-inline>[1500, 1599]</pupa-code-inline>
+      .
+    </p>
+    <p>
+      Also, the block will turn red if the height of the window is in the interval
+      <pupa-code-inline>[800, 899]</pupa-code-inline>
+      .
+    </p>
+    <pupa-code-container [content]="example1Content">
+      <demo-adaptive-example-1 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-1>
+    </pupa-code-container>
 
-<pupa-code-container [content]="example1Content">
-  <demo-adaptive-example-1 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-1>
-</pupa-code-container>
+    <h4>Styles are applied if the width/height is less than/greater than the specified value.</h4>
+    <ul>
+      <li>
+        <pupa-code-inline> @mixin width-less-than($width)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline> @mixin height-less-than($height)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline> @mixin width-more-than($width)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin height-more-than($height)</pupa-code-inline>
+      </li>
+    </ul>
+    <p>In the example below:</p>
+    <ul>
+      <li>The square will become a circle if the window width is less than 900;</li>
+      <li>The block will become 2 times larger if the window width is greater than (or equal to) 1500;</li>
+      <li>The block will turn red if the window height is less than 900;</li>
+      <li>The block will take on a gradient fill if the window height is greater than (or equal to) 1000;</li>
+    </ul>
+    <pupa-code-container [content]="example2Content">
+      <demo-adaptive-example-2 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-2>
+    </pupa-code-container>
 
-<h3>
-  @mixin width-less-than($width)
-  <br />
-  @mixin height-less-than($height)
-  <br />
-  @mixin width-more-than($width)
-  <br />
-  @mixin height-more-than($height)
-</h3>
+    <h4>These are mixins that help catch device orientation.</h4>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin portrait()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin landscape()</pupa-code-inline>
+      </li>
+    </ul>
+    <p>
+      In the example below in landscape orientation the box is a red square, and for vertical orientation it is a blue
+      circle.
+    </p>
+    <pupa-code-container [content]="example3Content">
+      <demo-adaptive-example-3 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-3>
+    </pupa-code-container>
 
-<p>Стили применятся, если ширина/высота меньше/больше указанного значения. В примере ниже:</p>
-<ul>
-  <li>Квадрат станет кругом, если ширина окна меньше 900;</li>
-  <li>Блок станет в 2 раза больше, если ширина окна больше (или равна) 1500;</li>
-  <li>Блок станет красным, если высота окна меньше 900;</li>
-  <li>Блок примет градиентную заливку, если высота окна больше (или равна) 1000;</li>
-</ul>
+    <br />
+    <h3>Grid Mixins</h3>
+    <p>Examples of using mixins built on a grid will be given below.</p>
+    <pupa-info-block>
+      Active breakpoint is set as a class for the tag
+      <pupa-code-inline>html</pupa-code-inline>
+      . The grid can be enabled via
+      <pupa-code-inline>toggle grid</pupa-code-inline>
+      .
+    </pupa-info-block>
 
-<pupa-code-container [content]="example2Content">
-  <demo-adaptive-example-2 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-2>
-</pupa-code-container>
+    <h4>For each of these mixins, styles will be applied only to the specified breakpoint.</h4>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin xs()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin sm()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin md()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin xlg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin xl()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin xxl()</pupa-code-inline>
+      </li>
+    </ul>
 
-<h3>
-  @mixin portrait()
-  <br />
-  @mixin landscape()
-</h3>
+    <p>In the example below:</p>
+    <ul>
+      <li>For <b>xs</b>&nbsp;—&nbsp;the block is red</li>
+      <li>For <b>sm</b>&nbsp;—&nbsp;the block is yellow</li>
+      <li>For <b>md</b>&nbsp;—&nbsp;the block is blue</li>
+      <li>For <b>lg</b>&nbsp;—&nbsp;the block is green</li>
+      <li>For <b>xlg</b>&nbsp;—&nbsp;the block is transparent, the border is red</li>
+      <li>For <b>xl</b>&nbsp;—&nbsp;the block is transparent, the border is yellow</li>
+      <li>For <b>xxl</b>&nbsp;—&nbsp;the block is transparent, the border is green</li>
+    </ul>
 
-<p>
-  Это миксины, которые помогают ловить ориентацию устройства. В примере ниже в горизонтальной ориентации
-  блок&nbsp;—&nbsp;это красный квадрат, а для вертикальной ориентации&nbsp;—&nbsp;это синий круг.
-</p>
-<pupa-code-container [content]="example3Content">
-  <demo-adaptive-example-3 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-3>
-</pupa-code-container>
+    <pupa-code-container [content]="example4Content">
+      <demo-adaptive-example-4 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-4>
+    </pupa-code-container>
 
-<br />
-<h3>Grid Mixins</h3>
-<p>
-  Ниже будут приводиться примеры использования миксинов, построенных на сетке. Что такое сетка, зачем она нужна, какие
-  есть согласованные брейкпоинты и отступы можно прочитать
-  <a href="https://bimeister.atlassian.net/wiki/spaces/BIMeister/pages/1196065866" target="_blank">здесь</a>. Активный
-  брейкпоинт выставляется как класс для тега <pupa-code-inline>html</pupa-code-inline>. Сетку можно включить через
-  <pupa-code-inline>toggle grid</pupa-code-inline>.
-</p>
+    <h4>
+      The names of this set of mixins are shorthand for the name
+      <pupa-code-inline>less than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline>
+      .
+    </h4>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin lt-sm()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lt-md()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lt-lg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lt-xlg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lt-xl()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin lt-xxl()</pupa-code-inline>
+      </li>
+    </ul>
 
-<h3>@mixin xs(), @mixin sm(), @mixin md(), @mixin lg(), @mixin xlg(), @mixin xl(), @mixin xxl()</h3>
+    <p>
+      In other words styles will be applied for all resolutions of the smaller breakpoint specified in the name of the
+      mixin. <b>Not including the breakpoint itself</b>. Based on this, it is worth noting that the mixin
+      <pupa-code-inline>lt-sm()</pupa-code-inline>
+      is equivalent to the mixin
+      <pupa-code-inline>xs()</pupa-code-inline>
+      . Let's bring an example of using only one mixin from this set. In the example below, the square will become a
+      circle for all breakpoints smaller than <b>xlg</b>.
+    </p>
 
-<p>Для каждого из этих миксинов стили применятся, только для указанного брейкпоинта. В примере ниже:</p>
-<ul>
-  <li>Для <b>xs</b>&nbsp;—&nbsp;блок красный</li>
-  <li>Для <b>sm</b>&nbsp;—&nbsp;блок желтый</li>
-  <li>Для <b>md</b>&nbsp;—&nbsp;блок синий</li>
-  <li>Для <b>lg</b>&nbsp;—&nbsp;блок зеленый</li>
-  <li>Для <b>xlg</b>&nbsp;—&nbsp;блок прозрачный, граница красная</li>
-  <li>Для <b>xl</b>&nbsp;—&nbsp;блок прозрачный, граница желтая</li>
-  <li>Для <b>xxl</b>&nbsp;—&nbsp;блок прозрачный, граница зеленая</li>
-</ul>
+    <p>
+      Such mixins should be used for more precise adjustment of adaptability. Case study: there is a drover fixed width.
+      But we want its width to be
+      <pupa-code-inline>100vw</pupa-code-inline>
+      for all breakpoints less than <b>lg</b>, to have correct representation for mobile/tablet devices.
+    </p>
 
-<pupa-code-container [content]="example4Content">
-  <demo-adaptive-example-4 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-4>
-</pupa-code-container>
+    <pupa-code-container [content]="example5Content">
+      <demo-adaptive-example-5 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-5>
+    </pupa-code-container>
 
-<h3>@mixin lt-sm(), @mixin lt-md(), @mixin lt-lg(), @mixin lt-xlg(), @mixin lt-xl(), @mixin lt-xxl()</h3>
+    <h4>
+      The names of this set of mixins are shorthand for the name
+      <pupa-code-inline>greater than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline>
+      .
+    </h4>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin gt-sm()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin gt-md()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin gt-lg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin gt-xlg()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin gt-xl()</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin gt-xxl()</pupa-code-inline>
+      </li>
+    </ul>
 
-<p>
-  Имена этого набора миксинов&nbsp;—&nbsp; сокращения от названия
-  <pupa-code-inline>less than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline
-  >. То есть стили будут применяться для всех разрешений меньших брейкпоинта, указанного в названии миксина.
-  <b>Не включая сам брейкпоинт</b>. Исходя из этого, стоит обратить внимание, что миксин
-  <pupa-code-inline>lt-sm()</pupa-code-inline> равносилен миксину <pupa-code-inline>xs()</pupa-code-inline>. Приведем
-  пример использования лишь одного миксина из этого набора. В примере ниже квадрат станет кругом для всех брейкпоинтов
-  меньших <b>xlg</b>.
-</p>
+    <p>
+      In other words the styles will be applied to all resolutions of the large breakpoint specified in the mixin name.
+      <b>Not including the breakpoint itself</b>. In the example below, the square will become a circle for all
+      breakpoints greater than <b>lg</b>.
+    </p>
 
-<p>
-  Такие миксины стоит использовать для более точечной настройки адаптивности. Пример из практики: есть дровер
-  фиксированной ширины. Но мы хотим, чтобы его ширина была <pupa-code-inline>100vw</pupa-code-inline> для всех
-  брейкпоинтов, меньших <b>lg</b>, чтобы иметь корректное представление для мобильных/планшетных устройств.
-</p>
+    <pupa-code-container [content]="example6Content">
+      <demo-adaptive-example-6 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-6>
+    </pupa-code-container>
 
-<pupa-code-container [content]="example5Content">
-  <demo-adaptive-example-5 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-5>
-</pupa-code-container>
+    <p><b>Use only for top-level layout, i.e. only for layout of the skeleton of the page itself.</b></p>
 
-<h3>@mixin gt-sm(), @mixin gt-md(), @mixin gt-lg(), @mixin gt-xlg(), @mixin gt-xl(), @mixin gt-xxl()</h3>
+    <h4>These mixins are without nested content.</h4>
 
-<p>
-  Имена этого набора миксинов&nbsp;—&nbsp; сокращения от названия
-  <pupa-code-inline>greater than {{ '${' }}breakpoint{{ '}' }}</pupa-code-inline
-  >. То есть стили будут применяться для всех разрешений больших брейкпоинта, указанного в названии миксина.
-  <b>Не включая сам брейкпоинт</b>. В примере ниже квадрат станет кругом для всех брейкпоинтов больших <b>lg</b>.
-</p>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin grid-size($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'width')</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline
+          >@mixin grid-offset($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'margin-left')
+        </pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin grid-container-offset($property: 'padding-left')</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin grid-container()</pupa-code-inline>
+      </li>
+    </ul>
 
-<pupa-code-container [content]="example6Content">
-  <demo-adaptive-example-6 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-6>
-</pupa-code-container>
+    <p>
+      The mixin
+      <pupa-code-inline>grid-size</pupa-code-inline>
+      sets how many columns an element occupies in each breakpoint. The last argument is the property being passed. It
+      can be customized as needed. The default is
+      <pupa-code-inline>width</pupa-code-inline>
+      .
+    </p>
 
-<p><b>Использовать только для верхнеуровневой верстки. То есть только для верстки скелета самой страницы</b></p>
+    <p>
+      The mixin
+      <pupa-code-inline>grid-offset</pupa-code-inline>
+      sets how many columns the element should indent by every breakpoint. The last argument is the property being
+      passed. It can be customized as needed. The default is
+      <pupa-code-inline>margin-left</pupa-code-inline>
+      .
+    </p>
 
-<h3>
-  @mixin grid-size($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'width')
-  <br />
-  @mixin grid-offset($xs, $sm, $md, $lg, $xlg, $xl, $xxl, $property: 'margin-left')
-  <br />
-  @mixin grid-container-offset($property: 'padding-left')
-  <br />
-  @mixin grid-container()
-</h3>
+    <p>
+      The mixin
+      <pupa-code-inline>grid-container-offset</pupa-code-inline>
+      sets the padding of the container from the edge of the page. The indent itself is taken from the agreed config.
+      The last argument is the property being passed. It can be customized as needed. The default is
+      <pupa-code-inline>padding-left</pupa-code-inline>
+      .
+    </p>
 
-<p>Эти миксины без вложенного контента.</p>
+    <p>
+      The mixin
+      <pupa-code-inline>grid-container</pupa-code-inline>
+      is collection mixin for convenience. It sets indents from the edge of the page from the config to the left and
+      right (through a mixin
+      <pupa-code-inline>grid-container-offset</pupa-code-inline>
+      with properties
+      <pupa-code-inline>padding-left</pupa-code-inline>
+      and
+      <pupa-code-inline>padding-right</pupa-code-inline>
+      respectively). It adds flex positioning and more base styles for the container.
+    </p>
 
-<p>
-  Миксин <pupa-code-inline>grid-size</pupa-code-inline> устанавливает сколько колонок занимает элемент на каждом
-  брейкпоинте. Последним аргументом является передаваемое свойство. Его можно настраивать по необходимости. По умолчанию
-  это <pupa-code-inline>width</pupa-code-inline>.
-</p>
+    <p>
+      The entire PupaKit design system is adapted through these mixins. For example, for the menu (sidebar) the rule is
+      specified: how many columns it captures at each breakpoint. The main content adheres to rules that deviate from
+      the truth sidebar. Display the grid to see it.
+    </p>
 
-<p>
-  Миксин <pupa-code-inline>grid-offset</pupa-code-inline> устанавливает сколько колонок должен отступить элемент на
-  каждом брейкпоинте. Последним аргументом является передаваемое свойство. Его можно настраивать по необходимости. По
-  умолчанию это <pupa-code-inline>margin-left</pupa-code-inline>.
-</p>
+    <pupa-code-container [isPreviewExist]="false" [content]="example7Content"></pupa-code-container>
 
-<p>
-  Миксин <pupa-code-inline>grid-container-offset</pupa-code-inline> устанавливает отступ контейнера от края страницы.
-  Сам отступ берется из согласованного конфига. Последним аргументом является передаваемое свойство. Его можно
-  настраивать по необходимости. По умолчанию это <pupa-code-inline>padding-left</pupa-code-inline>.
-</p>
+    <h3>CSS locks</h3>
 
-<p>
-  Миксин <pupa-code-inline>grid-container</pupa-code-inline> это собирательный миксин для удобства. Он устанавливает
-  отступы от края страницы из конфига слева и справа (через миксин
-  <pupa-code-inline>grid-container-offset</pupa-code-inline> со свойствами
-  <pupa-code-inline>padding-left</pupa-code-inline> и
-  <pupa-code-inline>padding-right</pupa-code-inline> соответственно). Добавляет позиционирование флексом и другие
-  базовые стили для контейнера.
-</p>
+    <h4>
+      These are special mixins and functions that allow you to apply css gateway math to scale up proportionately.
+    </h4>
 
-<p>
-  Вcя дизайн-система PupaKit заадптирована через эти миксины. Например, для меню (сайдбар) указано правило: сколько
-  колонок оно занимает на каждом конкретном брейкпоинте. А основной контент придерживается правилу отступа на ширину
-  сайдбара. Отобразите сетку, чтобы увидеть это.
-</p>
+    <ul>
+      <li>
+        <pupa-code-inline>@function calc-between-width(...)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@function calc-between-height(...)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin width-between-property(...)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@mixin height-between-property(...)</pupa-code-inline>
+      </li>
+    </ul>
 
-<pupa-code-container [isPreviewExist]="false" [content]="example7Content"></pupa-code-container>
+    <p>
+      The functions
+      <pupa-code-inline>calc-between-width(...)</pupa-code-inline>
+      and
+      <pupa-code-inline>calc-between-height(...)</pupa-code-inline>
+      They calculate the proportional dimension in pixels. Its can be set to any property that supports pixel
+      dimensions. The math in them looks like this way:
+    </p>
 
-<h3>CSS locks / СSS шлюзы</h3>
+    <pupa-code-fetch [codeFilePath]="example8CalcBetweenScssPath"></pupa-code-fetch>
 
-<p>
-  Это специальные миксины и функции, которые позволяют применить математику css-шлюзов для пропорционального увеличения
-  размерностей.
-</p>
+    <p>
+      The mixins
+      <pupa-code-inline>width-between-property(...)</pupa-code-inline>
+      and
+      <pupa-code-inline>height-between-property(...)</pupa-code-inline>
+      internally use the functions above and assign the value of the passed property. These mixins have checkboxes
+      <pupa-code-inline>$is-save-width-before</pupa-code-inline>
+      and
+      <pupa-code-inline>$is-save-width-after</pupa-code-inline>
+      , that allow you to save the set value after outside the specified interval.
+    </p>
+    <p>
+      In the example below, there are 6 blocks containing text. The first 3 respond to window width changes, the last 3
+      to height change. In each of these cases, the first block reacts only in the specified interval. The 2nd block
+      keeps value after the interval. The 3rd block stores the value after the interval.
+    </p>
 
-<h3>
-  @function calc-between-width(...)
-  <br />
-  @function calc-between-height(...)
-  <br />
-  @mixin width-between-property(...)
-  <br />
-  @mixin height-between-property(...)
-</h3>
+    <pupa-code-container [content]="example8Content">
+      <demo-adaptive-example-8 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-8>
+    </pupa-code-container>
 
-<p>
-  Функции <pupa-code-inline>calc-between-width(...)</pupa-code-inline> и
-  <pupa-code-inline>calc-between-height(...)</pupa-code-inline> рассчитывают пропорциональную размерность в пикселях. Ее
-  можно выставить любому свойству, которое поддерживает размерность в пикселях. Математика в них выглядит следующим
-  образом:
-</p>
+    <h4>
+      These functions are helper for mixins
+      <pupa-code-inline>grid-size</pupa-code-inline>
+      and
+      <pupa-code-inline>grid-offset</pupa-code-inline>
+      .
+    </h4>
 
-<pupa-code-fetch [codeFilePath]="example8CalcBetweenScssPath"></pupa-code-fetch>
+    <ul>
+      <li>
+        <pupa-code-inline>@function grid-column($columnsCount, $gutter, $breakpointWidth)</pupa-code-inline>
+      </li>
+      <li>
+        <pupa-code-inline>@function grid-column-offset($columnCount, $gutter, $breakpointWidth)</pupa-code-inline>
+      </li>
+    </ul>
 
-<p>
-  Миксины <pupa-code-inline>width-between-property(...)</pupa-code-inline> и
-  <pupa-code-inline>height-between-property(...)</pupa-code-inline> внутри себя используют функции выше и присваивают
-  значение переданному свойству. У этих миксинов есть флажки
-  <pupa-code-inline>$is-save-width-before</pupa-code-inline> и
-  <pupa-code-inline>$is-save-width-after</pupa-code-inline>, которые позволяют сохранить установленное значение после
-  выхода за пределы указанного интервала.
-</p>
+    <p>
+      They calculate the size/padding of the container at each breakpoint depending on the number of columns and
+      padding.
+    </p>
 
-<p>
-  В примере ниже есть 6 блоков содержащих текст. Первые 3 реагируют на изменения ширины окна, последние 3&nbsp;—&nbsp;на
-  изменение высоты. В каждом из этих кейсов первый блок реагирует только в указанном интервале. Второй блок сохраняет
-  значение после интервала. Третий блок&nbsp;—&nbsp;сохраняет значение после интервала.
-</p>
+    <h3>Other</h3>
+    <ul>
+      <li>
+        <pupa-code-inline>@mixin hover()</pupa-code-inline>
+      </li>
+    </ul>
 
-<pupa-code-container [content]="example8Content">
-  <demo-adaptive-example-8 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-8>
-</pupa-code-container>
+    <p>
+      We have a mouse on desktop resolutions. So there is a hover state. The state when the mouse was pointed at the
+      element. Certain styles can be hung on this state. Hover states also skip on mobile devices, even under the
+      logical condition that there is no mouse there. Hover-state blinks just before the
+      <pupa-code-inline>tap</pupa-code-inline>
+      on the element, which looks "not good". You can use the
+      <pupa-code-inline>hover()</pupa-code-inline>
+      mixin to avoid this. It will only enable the hover style at resolutions where there is actually a hover.
+    </p>
 
-<h3>
-  @function grid-column($columnsCount, $gutter, $breakpointWidth)
-  <br />
-  @function grid-column-offset($columnCount, $gutter, $breakpointWidth)
-</h3>
+    <p>
+      In the example below, when we hover over a block, it will turn red. But on mobile devices, no matter how we click
+      on block hover state will not slip. The second block uses the usual
+      <pupa-code-inline>:hover</pupa-code-inline>
+      to show the result. When you click on it on a mobile device, you can see the hover state.
+    </p>
 
-<p>
-  Эти функции вспомогательные для миксинов <pupa-code-inline>grid-size</pupa-code-inline> и
-  <pupa-code-inline>grid-offset</pupa-code-inline>. Они рассчитывают размеры/отступы контейнера на каждом брейкпоинте в
-  зависимости от количества колонок и отступов.
-</p>
+    <pupa-info-block>Turn on mobile display mode in <b>DevTools</b> to see it.</pupa-info-block>
 
-<h3>Other</h3>
+    <pupa-code-container [content]="example9Content">
+      <demo-adaptive-example-9 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-9>
+    </pupa-code-container>
 
-<h3>@mixin hover()</h3>
+    <h3>TypeScript</h3>
 
-<p>
-  На десктопных разрешениях у нас есть мышка. А значит есть и ховер-состояние. Состояние, когда навелись мышкой на
-  элемент. На это состояние можно повесить определенные стили. Но как бы мы этого не хотели, придется смириться с тем,
-  что ховер состояния проскакивают и на мобильных девайсах, даже при логичном условии, что нет там никакой мышки. Перед
-  самым <pupa-code-inline>tap</pupa-code-inline>-ом по элементу моргает hover-состояние, что выглядит "нехорошо". Чтобы
-  этого избежать можно использовать миксин <pupa-code-inline>hover()</pupa-code-inline>. Он включит стиль наведения
-  только на тех разрешениях, где действительно есть ховер.
-</p>
+    <p>
+      Everything is clear with styles. We can track any state of the window and make our own styles depending on these
+      restrictions through mixins. But sometimes you need to catch the window state in ts. You can use
+      <pupa-code-inline>ClientUiStateHandlerService</pupa-code-inline>
+      for this purpose in PupaKit. You can find all the necessary information in the stream
+      <pupa-code-inline>uiState$</pupa-code-inline>
+      , including the active breakpoint. BIMeister also catches this state and writes it to the
+      <pupa-code-inline>UiState</pupa-code-inline>
+      state.
+    </p>
 
-<p>
-  В примере ниже, когда наведемся на блок он станет красным. Но на мобильных устройствах как бы мы не кликали по
-  блоку&nbsp;—&nbsp;ховер состояние не проскочит. Для демонстрации результата второй блок использует обычный
-  <pupa-code-inline>:hover</pupa-code-inline>. Когда по нему кликать на мобильном устройстве, можно увидеть
-  ховер-состояние.
-</p>
+    <h3>Touch Events</h3>
 
-<p>Чтобы увидеть это&nbsp;—&nbsp;включите режим мобильного отображения в <b>DevTools</b>.</p>
-
-<pupa-code-container [content]="example9Content">
-  <demo-adaptive-example-9 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-9>
-</pupa-code-container>
-
-<h3>TypeScript</h3>
-
-<p>
-  Со стилями все понятно. Через миксины можем отслеживать любое состояние окна и делать в зависимости от этих
-  ограничений свои стили. Но иногда нужно поймать состояние окна в ts. Что делать в таких случаях? Для этих целей в
-  PupaKit можно использовать <pupa-code-inline>ClientUiStateHandlerService</pupa-code-inline>. В стриме
-  <pupa-code-inline>uiState$</pupa-code-inline> можно найти всю необходимую информацию, в том числе об активном
-  брейкпоинте. BIMeister также ловит это состояние и записывает в стейт <pupa-code-inline>UiState</pupa-code-inline>.
-</p>
-
-<h3>Touch Events</h3>
-
-<p>
-  Не открою тайну, если скажу, что событие клика на мобильных устройствах намного более долгое, чем событие тапа. Чтобы
-  улучшить отклик интерфейса для этих целей добавили библиотеку <b>hammer.js</b> в PupaKit и Bimeister. Используя
-  <pupa-code-inline>(tap)</pupa-code-inline> можно улучшить отклик. На десктопных девайсах
-  <pupa-code-inline>(tap)</pupa-code-inline> отработает как <pupa-code-inline>(click)</pupa-code-inline>. В этой
-  библиотеке собрано еще множество тач-событий, найти их всех можно
-  <a href="https://hammerjs.github.io/" target="_blank">здесь</a>.
-</p>
+    <p>
+      I won’t reveal the secret if I say that the click event on mobile devices is much longer than the tap event. For
+      these purposes, we added the <b>hammer.js</b> library to improve the interface response in PupaKit and Bimeister.
+      You can improve the response using
+      <pupa-code-inline>(tap)</pupa-code-inline>
+      . On desktop devices
+      <pupa-code-inline>(tap)</pupa-code-inline>
+      will work like
+      <pupa-code-inline>(click)</pupa-code-inline>
+      . You can find more detailed information about different touch events in this library.
+    </p>
+  </div>
+</demo-page>
