@@ -11,9 +11,7 @@ import {
 import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
-import { Observable } from 'rxjs';
-import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { Subscription } from 'rxjs/internal/Subscription';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, pairwise, take, withLatestFrom } from 'rxjs/operators';
 import { AnchorService } from '../../../../../common/services/anchor.service';
 
