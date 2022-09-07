@@ -1,0 +1,16 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.accordion-wrapper {
+  width: 100%;
+}
+
+.accordion-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}

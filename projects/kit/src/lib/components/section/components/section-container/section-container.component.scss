@@ -1,0 +1,12 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  @include flex-container(column, flex-start);
+  width: 100%;
+  box-sizing: border-box;
+  gap: 4rem;
+  padding: 4rem;
+  border: 1px solid semantic-color(kind-neutral-pressed);
+  border-radius: 2rem;
+}

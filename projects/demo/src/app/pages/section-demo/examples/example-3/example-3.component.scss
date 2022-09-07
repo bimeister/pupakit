@@ -1,0 +1,28 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+}
+
+.section-container {
+  border-color: semantic-color(kind-primary-pressed);
+  padding: 2rem;
+  gap: 1rem;
+
+  &__title {
+    color: semantic-color(kind-primary-pressed);
+    display: flex;
+    justify-content: center;
+  }
+
+  &__subtitle {
+    color: semantic-color(kind-primary-pressed);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__content {
+    @include font-type-semibold();
+  }
+}
