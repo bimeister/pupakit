@@ -50,6 +50,7 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
+import { SectionModule } from './components/section/section.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
@@ -76,6 +77,7 @@ const EXPORTS: any[] = [
   DropdownMenuModule,
   TreeNewModule,
   SkeletonModule,
+  SectionModule,
   SelectModule,
   ProgressBarModule,
   CounterModule,

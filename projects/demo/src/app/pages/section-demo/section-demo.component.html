@@ -1,0 +1,41 @@
+<h1>Section</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-section-example-1 *pupaCodeContainerPreviewTemplate></demo-section-example-1>
+    </pupa-code-container>
+
+    <pupa-info-block>
+      This component is a wrapper over the content that adds a border, padding, and padding between elements
+    </pupa-info-block>
+
+    <pupa-info-block>
+      You can also change styles by attaching classes to components and specifying the necessary styles (see example
+      Custom styles)
+    </pupa-info-block>
+
+    <ul>
+      <li><pupa-code-inline>pupa-section-container</pupa-code-inline> - container for your content</li>
+      <li>
+        <pupa-code-inline>pupa-section-title</pupa-code-inline> container for the header, positions the elements at the
+        edges
+      </li>
+      <li>
+        <pupa-code-inline>pupa-section-sub-title</pupa-code-inline> container for subheading, positions elements at the
+        edges
+      </li>
+    </ul>
+
+    <h3 demoAnchor>Extra cases</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-section-example-2 *pupaCodeContainerPreviewTemplate></demo-section-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Custom styles</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-section-example-3 *pupaCodeContainerPreviewTemplate></demo-section-example-3>
+    </pupa-code-container>
+  </div>
+</demo-page>

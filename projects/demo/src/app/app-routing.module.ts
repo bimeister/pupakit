@@ -51,6 +51,7 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
+import { SectionDemoModule } from './pages/section-demo/section-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -150,6 +151,11 @@ const demoRoutes: Routes = [
         path: 'tree-new',
         loadChildren: (): Promise<Type<TreeNewDemoModule>> =>
           import('./pages/tree-new-demo/tree-new-demo.module').then((module: any) => module.TreeNewDemoModule),
+      },
+      {
+        path: 'section',
+        loadChildren: (): Promise<Type<SectionDemoModule>> =>
+          import('./pages/section-demo/section-demo.module').then((module: any) => module.SectionDemoModule),
       },
       {
         path: 'select',

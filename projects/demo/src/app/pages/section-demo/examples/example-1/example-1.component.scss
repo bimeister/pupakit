@@ -1,0 +1,23 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  width: 72rem;
+  display: block;
+  margin: 0 auto;
+
+  @include gt-sm() {
+    width: 92rem;
+  }
+}
+
+.controls-wrapper {
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+}
+
+.wide-button {
+  flex: 1;
+  width: 100%;
+}
