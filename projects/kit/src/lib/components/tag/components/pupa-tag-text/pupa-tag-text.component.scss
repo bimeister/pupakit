@@ -5,6 +5,8 @@
   color: inherit;
   font-size: inherit;
   line-height: inherit;
+  height: 100%;
+  padding-top: 5px;
 
   @include ellipsis-text-overflow;
 }
