@@ -22,7 +22,7 @@ import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
-import { IconPageModule } from './pages/icon-page/icon-page.module';
+import { IconsPageModule } from './pages/icons-page/icons-page.module';
 import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 import { InputDemoModule } from './pages/input-demo/input-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
@@ -51,6 +51,7 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
+import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
 import { SectionDemoModule } from './pages/section-demo/section-demo.module';
 
 const demoRoutes: Routes = [
@@ -89,9 +90,14 @@ const demoRoutes: Routes = [
           import('./pages/colors-demo/colors-demo.module').then((module: any) => module.ColorsDemoModule),
       },
       {
+        path: 'icons',
+        loadChildren: (): Promise<Type<IconsPageModule>> =>
+          import('./pages/icons-page/icons-page.module').then((module: any) => module.IconsPageModule),
+      },
+      {
         path: 'icon',
-        loadChildren: (): Promise<Type<IconPageModule>> =>
-          import('./pages/icon-page/icon-page.module').then((module: any) => module.IconPageModule),
+        loadChildren: (): Promise<Type<IconDemoModule>> =>
+          import('./pages/icon-demo/icon-demo.module').then((module: any) => module.IconDemoModule),
       },
       {
         path: 'icon-holder',

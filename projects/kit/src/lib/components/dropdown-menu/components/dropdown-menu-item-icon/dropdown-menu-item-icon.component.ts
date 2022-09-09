@@ -9,5 +9,4 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 })
 export class DropdownMenuItemIconComponent {
   @Input() public name: string;
-  @Input() public src: string;
 }

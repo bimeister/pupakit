@@ -32,6 +32,7 @@ export class SidebarComponent {
         { title: 'Typography', link: '/kit/typography' },
         { title: 'Colors', link: '/kit/colors' },
         { title: 'Adaptive', link: '/kit/adaptive' },
+        { title: 'Icons', link: '/kit/icons' },
       ],
       'title'
     ),
@@ -42,8 +43,8 @@ export class SidebarComponent {
     linkItems: sortByProperty(
       [
         { title: 'Accordion', link: '/kit/accordion' },
-        { title: 'Icon', link: '/kit/icon' },
         { title: 'Icon holder', link: '/kit/icon-holder' },
+        { title: 'Icon', link: '/kit/icon' },
         { title: 'Button & Button Icon & Button Round', link: '/kit/button' },
         { title: 'ButtonMulti', link: '/kit/button-multi' },
         { title: 'Actions', link: '/kit/actions' },

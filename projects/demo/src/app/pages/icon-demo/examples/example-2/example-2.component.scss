@@ -1,0 +1,22 @@
+@use 'functions' as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+}
+
+.icon1 {
+  font-size: 3rem;
+  color: semantic-color(kind-primary-normal);
+}
+
+.icon2 {
+  font-size: 5rem;
+  color: semantic-color(kind-warning-normal);
+}
+
+.icon3 {
+  font-size: 7rem;
+  color: semantic-color(kind-danger-normal);
+}

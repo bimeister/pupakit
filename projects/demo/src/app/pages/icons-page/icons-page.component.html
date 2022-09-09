@@ -1,0 +1,22 @@
+<div class="icons__header">
+  <h1>Icons</h1>
+  <div class="icons__search-field">
+    <pupa-search-field [formControl]="searchControl" placeholder="Search for icons"></pupa-search-field>
+  </div>
+</div>
+
+<div class="icons__content">
+  <ng-container *ngFor="let iconName of filteredIcons$ | async">
+    <div class="icon" (click)="copyToClipBoard(iconName)">
+      <div class="icon-preview">
+        <pupa-icon [name]="iconName"></pupa-icon>
+      </div>
+      <div class="icon-name">{{ iconName }}</div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="icons__empty" *ngIf="isEmpty$ | async">
+  Not found
+  <div>🤷</div>
+</div>

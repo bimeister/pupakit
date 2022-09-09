@@ -1,0 +1,63 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'demo-variables' as *;
+
+:host {
+  display: block;
+}
+.icons {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__search-field {
+    display: flex;
+    align-items: center;
+  }
+
+  &__content {
+    margin-top: 4rem;
+    display: grid;
+    grid-gap: 4rem;
+    grid-template-columns: repeat(auto-fill, minmax(37.5rem, 1fr));
+  }
+
+  &__info-block {
+    width: fit-content;
+  }
+
+  &__empty {
+    display: flex;
+    justify-content: center;
+    @include font-size-xl();
+    margin-top: 5rem;
+  }
+}
+
+.icon {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 32rem;
+  height: 32rem;
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
+
+  @include hover() {
+    cursor: pointer;
+    color: semantic-color(kind-primary-hover);
+  }
+
+  &-preview {
+    font-size: 8rem;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &-name {
+    text-align: center;
+
+    @include font-preset-caption-s();
+  }
+}
