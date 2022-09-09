@@ -9,5 +9,4 @@ import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@a
 })
 export class SelectOptionIconComponent {
   @Input() public name: string;
-  @Input() public src: string;
 }

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IconPageComponent } from './icon-page.component';
+import { IconsPageComponent } from './icons-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: IconPageComponent,
+    component: IconsPageComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class IconPageRoutingModule {}
+export class IconsPageRoutingModule {}

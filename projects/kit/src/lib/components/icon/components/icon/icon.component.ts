@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { Nullable } from '@bimeister/utilities';
 import { AVAILABLE_ICONS_TOKEN } from '../../../../../internal/constants/tokens/available-icons.token';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { IconRegistry } from '../../../../../internal/declarations/types/icon-registry.type';
@@ -15,11 +15,7 @@ import { IconRegistry } from '../../../../../internal/declarations/types/icon-re
 export class IconComponent implements OnChanges {
   public iconHtmlCode: SafeHtml;
 
-  @Input()
-  public name: string;
-
-  @Input()
-  public src: string;
+  @Input() public name: string;
 
   constructor(
     @Inject(AVAILABLE_ICONS_TOKEN) private readonly availableIconRegistries: IconRegistry[],
@@ -28,8 +24,7 @@ export class IconComponent implements OnChanges {
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     const currentName: string = changes?.name?.currentValue ?? null;
-    const currentSource: string = changes?.src?.currentValue ?? null;
-    const data: string = isNil(currentName) ? currentSource : this.getIconDataByName(currentName);
+    const data: string = this.getIconDataByName(currentName);
     this.iconHtmlCode = this.domSanitizer.bypassSecurityTrustHtml(data);
   }
 

@@ -1,0 +1,43 @@
+<h1>Icon</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <pupa-info-block>You can see a library of icons <a pupaLink routerLink="/kit/icons">here</a>.</pupa-info-block>
+    <h2 demoAnchor>Usage example</h2>
+    <pupa-code-container [content]="example1Content">
+      <demo-icon-example-1 *pupaCodeContainerPreviewTemplate></demo-icon-example-1>
+    </pupa-code-container>
+    <pupa-info-block>
+      <ul>
+        <li>
+          The default icon size is 16*16px. You can use the property
+          <pupa-code-inline>font-size</pupa-code-inline>
+          to change the icon size.
+        </li>
+        <li>
+          The default icon color is black. You can use the property
+          <pupa-code-inline>color</pupa-code-inline>
+          to change the icon color
+        </li>
+      </ul>
+    </pupa-info-block>
+    <pupa-code-container [content]="example2Content">
+      <demo-icon-example-2 *pupaCodeContainerPreviewTemplate></demo-icon-example-2>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <pupa-icon class="icon" [name]="buttonIconFormControl.value"></pupa-icon>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="icon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
+          <pupa-input-text [formControl]="buttonIconFormControl"></pupa-input-text>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
