@@ -45,7 +45,7 @@ $scrollbarHeight: 12px;
 .table-header__hidden-columns-count {
   position: absolute;
   top: 0;
-  background-color: color(neutral-7);
+  background-color: semantic-color(surface-action);
   width: 4rem;
   height: 4rem;
   @include font-type-medium;
@@ -132,29 +132,29 @@ $scrollbarHeight: 12px;
   display: flex;
   box-sizing: border-box;
   min-width: 100%;
-  border-bottom: 1px solid color(neutral-1);
-  background-color: color(neutral-5);
+  border-bottom: 1px solid semantic-color(lines-normal);
+  background-color: semantic-color(surface-tertiary);
 
   &_hovered,
   &_selected {
-    background-color: color(neutral-1);
+    background-color: semantic-color(kind-neutral-normal);
   }
 }
 
 .table-row_header {
   height: 100%;
-  background-color: color(neutral-1);
-  border-bottom: 1px solid color(neutral-5);
-  border-top: 1px solid color(neutral-5);
+  background-color: semantic-color(surface-secondary);
+  border-bottom: 1px solid semantic-color(lines-normal);
+  border-top: 1px solid semantic-color(lines-normal);
 
   &_hovered {
-    background-color: color(neutral-6);
+    background-color: semantic-color(kind-neutral-hover);
   }
 }
 
 .table-row_decor {
   height: 100%;
-  background-color: color(neutral-1);
+  background-color: unset;
 }
 
 .table-row_placeholder {
@@ -173,7 +173,7 @@ $scrollbarHeight: 12px;
 
   &_visible {
     visibility: initial;
-    border-bottom: 1px solid color(neutral-5);
+    border-bottom: 1px solid semantic-color(lines-normal);
   }
 }
 
@@ -187,12 +187,12 @@ $scrollbarHeight: 12px;
   box-sizing: border-box;
 
   &_has-left-pinned {
-    border-left: 1px solid color(neutral-5);
+    border-left: 1px solid semantic-color(lines-normal);
     margin-left: -1px;
   }
 
   &_has-right-pinned {
-    border-right: 1px solid color(neutral-5);
+    border-right: 1px solid semantic-color(lines-normal);
     margin-right: -1px;
   }
 }
@@ -213,7 +213,7 @@ $scrollbarHeight: 12px;
   top: 0;
   width: 2px;
   height: calc(100% - #{$scrollbarHeight});
-  background-color: color(primary-500);
+  background-color: semantic-color(kind-primary-normal);
   z-index: 5;
   pointer-events: none;
 }

@@ -11,7 +11,7 @@
   box-sizing: border-box;
   padding: 2rem 20px 2rem 4rem;
   @include font-preset-caption-s;
-  color: color(neutral-1000);
+  color: semantic-color(text-primary);
   line-height: 17px;
 
   display: flex;
@@ -20,12 +20,12 @@
 
   &_clickable {
     &:hover {
-      border: 1px solid color(neutral-6);
+      border: 1px solid semantic-color(kind-neutral-hover);
       padding: 7px 19px 7px 15px;
       cursor: pointer;
 
       @include host-selector('.table-row_selected') {
-        border-color: color(primary-400);
+        border-color: semantic-color(kind-primary-normal);
       }
 
       @include xs() {
