@@ -8,17 +8,17 @@
 .body-cell {
   position: relative;
   display: block;
-  background-color: color(neutral-4);
+  background-color: semantic-color(surface-tertiary);
   margin-right: 1px;
   box-sizing: border-box;
   flex-shrink: 0;
 
   &.row-hovered {
-    background-color: color(neutral-6);
+    background-color: semantic-color(kind-neutral-hover);
   }
 
   &.row-selected {
-    background-color: color(primary-50);
+    background-color: semantic-color(kind-neutral-active);
   }
 
   &::after {
@@ -26,7 +26,7 @@
     display: block;
     width: 1px;
     height: calc(100% + 1px);
-    background-color: color(neutral-6);
+    background-color: semantic-color(lines-normal);
     position: absolute;
     right: -1px;
     top: 0;

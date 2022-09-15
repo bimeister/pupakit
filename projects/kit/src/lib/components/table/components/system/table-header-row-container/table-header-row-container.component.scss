@@ -7,7 +7,7 @@
 
 .header-cell {
   display: block;
-  background-color: color(neutral-1);
+  background-color: semantic-color(surface-secondary);
   margin-right: 1px;
   box-sizing: border-box;
   height: 100%;
@@ -15,7 +15,7 @@
   position: relative;
 
   &:hover {
-    background-color: color(neutral-6);
+    background-color: semantic-color(kind-neutral-hover);
   }
 
   &::after {
@@ -23,7 +23,7 @@
     display: block;
     width: 1px;
     height: 100%;
-    background-color: color(neutral-6);
+    background-color: semantic-color(lines-normal);
     position: absolute;
     right: -1px;
     top: 0;
@@ -75,7 +75,7 @@
   user-select: none;
   width: 5px;
   height: 100%;
-  background-color: color(primary-500);
+  background-color: semantic-color(kind-primary-normal);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -91,6 +91,6 @@
     width: 1px;
     height: 12px;
     border-radius: 1px;
-    background-color: color(neutral-1);
+    background-color: semantic-color(surface-primary);
   }
 }

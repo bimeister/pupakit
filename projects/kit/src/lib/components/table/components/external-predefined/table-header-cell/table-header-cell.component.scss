@@ -15,8 +15,8 @@
   box-sizing: border-box;
   padding: 2rem 20px 2rem 4rem;
   @include font-preset-h6;
-  background-color: color(neutral-1);
-  color: color(neutral-300);
+  background-color: semantic-color(surface-secondary);
+  color: semantic-color(text-primary);
   line-height: 17px;
 
   transition: color 0.2s ease, background-color 0.2s ease;
@@ -36,8 +36,7 @@
   }
 
   &:hover {
-    background-color: color(neutral-6);
-    color: color(neutral-1000);
+    background-color: semantic-color(kind-neutral-hover);
   }
 
   @include xs() {
