@@ -143,7 +143,13 @@ export class TableDndFeature<T> implements TableFeature {
     const dndCloneWidthPx: number = targetCell.element.clientWidth;
     const dndCloneHeightPx: number = targetCell.element.clientHeight;
 
-    this.dndCloneService.create(headerCellTemplateRef, templateContext, dndCloneWidthPx, dndCloneHeightPx);
+    this.dndCloneService.create(
+      headerCellTemplateRef,
+      templateContext,
+      dndCloneWidthPx,
+      dndCloneHeightPx,
+      this.api.tableInjector
+    );
   }
 
   private updateCurrentTargetCell(event: TableEvents.Pan): void {
