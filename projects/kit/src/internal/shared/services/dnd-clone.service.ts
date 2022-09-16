@@ -11,7 +11,13 @@ export class DndCloneService {
 
   constructor(private readonly overlay: Overlay, private readonly rendererFactory: RendererFactory2) {}
 
-  public create<C>(templateRef: TemplateRef<C>, data: C, widthPx: number, heightPx: number): void {
+  public create<C>(
+    templateRef: TemplateRef<C>,
+    data: C,
+    widthPx: number,
+    heightPx: number,
+    parentInjector: Injector
+  ): void {
     this.destroy();
 
     this.overlayRef = this.overlay.create({
@@ -32,6 +38,7 @@ export class DndCloneService {
           useValue: dndCloneContainerData,
         },
       ],
+      parent: parentInjector,
     });
 
     const componentPortal: ComponentPortal<DndCloneContainerComponent<C>> = new ComponentPortal<
