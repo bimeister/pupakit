@@ -1,8 +1,9 @@
-<pupa-theme-wrapper [theme]="theme$ | async" [ngClass]="themeClass$ | async">
+<pupa-theme-wrapper class="textarea-wrapper" [theme]="theme$ | async" [ngClass]="themeClass$ | async">
   <div
     (click)="open()"
     (mousedown)="$event.stopPropagation()"
     class="textarea-inline"
+    [class]="size$ | async"
     [class.textarea-inline_disabled]="isDisabled$ | async"
     [class.textarea-inline_invalid]="isInvalid$ | async"
     [class.textarea-inline_collapsed]="!(isOpened$ | async)"
@@ -64,13 +65,7 @@
         </pupa-scrollable>
       </label>
 
-      <pupa-button-icon
-        class="close-button"
-        kind="secondary"
-        size="s"
-        icon="app-fit-to-page"
-        (click)="close()"
-      ></pupa-button-icon>
+      <pupa-icon class="close-icon" name="m-collapse" (click)="close()"></pupa-icon>
 
       <div
         class="counter counter_overlay"

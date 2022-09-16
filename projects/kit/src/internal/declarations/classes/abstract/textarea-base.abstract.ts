@@ -14,10 +14,12 @@ import { TextAreaCounterVisibility } from '../../../../internal/declarations/typ
 import { ThemeWrapperService } from '../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
+import { TextareaSize } from '../../types/textarea-size.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 const DEFAULT_MAX_ROWS: number = 5;
-const TEXTAREA_VERTICAL_PADDINGS_PX: number = 16;
+const LARGE_TEXTAREA_VERTICAL_PADDINGS_PX: number = 24;
+const MEDIUM_TEXTAREA_VERTICAL_PADDINGS_PX: number = 16;
 
 @Directive()
 export abstract class TextareaBase extends InputBaseControlValueAccessor<string> implements OnChanges {
@@ -26,6 +28,9 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @ViewChild('textarea')
   protected readonly textareaElementRef: ElementRef<HTMLTextAreaElement>;
+
+  @Input() public size: TextareaSize = 'medium';
+  public readonly size$: BehaviorSubject<TextareaSize> = new BehaviorSubject<TextareaSize>('medium');
 
   @Input() public readonly placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
@@ -38,25 +43,27 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @Input() public minRows: number = 2;
   private readonly minRows$: BehaviorSubject<number> = new BehaviorSubject<number>(this.minRows);
-  public readonly minHeightPx$: Observable<number> = this.minRows$.pipe(
-    map((minRows: number) => this.getHeightPxByRowsCount(minRows) + TEXTAREA_VERTICAL_PADDINGS_PX)
+  public readonly minHeightPx$: Observable<number> = combineLatest([this.minRows$, this.size$]).pipe(
+    map(([minRows, size]: [number, TextareaSize]) =>
+      TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, minRows, size)
+    )
   );
 
   @Input() public maxRows: number = DEFAULT_MAX_ROWS;
   private readonly maxRows$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(this.maxRows);
-  public readonly maxHeightPx$: Observable<Nullable<number>> = combineLatest([this.minRows$, this.maxRows$]).pipe(
-    map(([minRows, maxRows]: [number, Nullable<number>]) => {
+  public readonly maxHeightPx$: Observable<Nullable<number>> = combineLatest([
+    this.minRows$,
+    this.maxRows$,
+    this.size$,
+  ]).pipe(
+    map(([minRows, maxRows, size]: [number, Nullable<number>, TextareaSize]) => {
       if (isNil(maxRows)) {
         return null;
       }
 
-      if (maxRows < minRows) {
-        return minRows;
-      }
-
-      return maxRows;
-    }),
-    map((rowCount: number) => this.getHeightPxByRowsCount(rowCount) + TEXTAREA_VERTICAL_PADDINGS_PX)
+      const rowsCount: number = minRows > maxRows ? minRows : maxRows;
+      return TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, rowsCount, size);
+    })
   );
 
   @Input() public maxLength: Nullable<number> = null;
@@ -130,6 +137,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processSizeChange(changes?.size);
     this.processPlaceholderChange(changes?.placeholder);
     this.processAutocompleteChange(changes?.autocomplete);
     this.processIsPatchedChange(changes?.isPatched);
@@ -165,6 +173,16 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
       return;
     }
     event.preventDefault();
+  }
+
+  private processSizeChange(change: ComponentChange<this, TextareaSize>): void {
+    const updatedValue: TextareaSize | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.size$.next(updatedValue);
   }
 
   private processPlaceholderChange(change: ComponentChange<this, string>): void {
@@ -246,9 +264,17 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     this.enterKeyPrevented$.next(updatedValue);
   }
 
-  private getHeightPxByRowsCount(rowsCount: number): number {
-    const computedStyles: CSSStyleDeclaration = getComputedStyle(this.lineHeightSourceRef.nativeElement);
+  private static getHeightPxByRowsCount(
+    lineHeightSourceRef: ElementRef<HTMLTextAreaElement>,
+    rowsCount: number,
+    size: TextareaSize
+  ): number {
+    const verticalPaddingsPx: number =
+      size === 'large' ? LARGE_TEXTAREA_VERTICAL_PADDINGS_PX : MEDIUM_TEXTAREA_VERTICAL_PADDINGS_PX;
+
+    const computedStyles: CSSStyleDeclaration = getComputedStyle(lineHeightSourceRef.nativeElement);
     const lineHeightPx: number = Number.parseFloat(computedStyles.lineHeight);
-    return lineHeightPx * rowsCount;
+
+    return lineHeightPx * rowsCount + verticalPaddingsPx;
   }
 }

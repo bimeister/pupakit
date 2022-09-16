@@ -9,7 +9,6 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoExampleSizeComponent {
-  public readonly smallTextControl: FormControl = new FormControl('small size');
   public readonly mediumTextControl: FormControl = new FormControl('medium size');
   public readonly largeTextControl: FormControl = new FormControl('large size');
 }

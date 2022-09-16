@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
@@ -6,7 +7,6 @@ import { InputBase } from '../../../../../internal/declarations/classes/abstract
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { CollapseDirection } from '../../../../../internal/declarations/types/collapse-direction.type';
-import { NgControl } from '@angular/forms';
 
 const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
 
@@ -28,7 +28,7 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
 
   public readonly isCollapsed$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
-  private readonly searchFieldClassList$: Observable<string[]> = combineLatest([
+  public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.isCollapsible$.pipe(map((isCollapsible: boolean) => (isCollapsible ? 'collapsible' : null))),
     this.isCollapsed$.pipe(map((isCollapsed: boolean) => (isCollapsed ? 'collapsed' : null))),
   ]).pipe(
@@ -37,16 +37,6 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
         .filter((innerClass: string) => !isNil(innerClass))
         .map((innerProperty: string) => `search-field__input_${innerProperty}`)
     )
-  );
-
-  public readonly resultClassList$: Observable<string[]> = combineLatest([
-    this.resultClassList$,
-    this.searchFieldClassList$,
-  ]).pipe(
-    map(([baseClassList, searchFieldClassList]: [string[], string[]]) => {
-      const baseSearchFieldClassList: string[] = baseClassList.map((baseClass: string) => `search-field__${baseClass}`);
-      return [...baseSearchFieldClassList, ...searchFieldClassList];
-    })
   );
 
   constructor(@Optional() ngControl: NgControl) {

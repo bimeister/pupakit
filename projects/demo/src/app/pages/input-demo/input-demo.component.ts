@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
-import { isNil } from '@bimeister/utilities';
 
 const BASE_REQUEST_PATH: string = 'input-demo/examples';
 
@@ -34,16 +34,12 @@ export class InputDemoComponent implements OnInit, OnDestroy {
       value: 'medium',
       isDefault: true,
     },
-    {
-      caption: 'Small',
-      value: 'small',
-    },
   ];
 
   public readonly styleOptions: PropsOption[] = [
     {
-      caption: 'Ghost',
-      value: 'ghost',
+      caption: 'Inline',
+      value: 'inline',
     },
     {
       caption: 'Bold',
@@ -58,9 +54,13 @@ export class InputDemoComponent implements OnInit, OnDestroy {
 
   public readonly iconOptions: PropsOption[] = [
     {
+      caption: 'None',
+      value: '',
+      isDefault: true,
+    },
+    {
       caption: 'app-admin',
       value: 'app-admin',
-      isDefault: true,
     },
     {
       caption: 'app-aim',
@@ -83,7 +83,6 @@ export class InputDemoComponent implements OnInit, OnDestroy {
   public readonly validators: ValidatorFn[] = [Validators.required];
   public readonly dateValidators: ValidatorFn[] = [Validators.required, dateValidator];
 
-  public readonly inputIconFormControl: FormControl = new FormControl();
   public readonly placeholderFormControl: FormControl = new FormControl('Custom placeholder');
   public readonly tooltipTemplateFormControl: FormControl = new FormControl('<b>Invalid tooltip</b>');
   public readonly tooltipTextFormControl: FormControl = new FormControl('');
@@ -93,7 +92,7 @@ export class InputDemoComponent implements OnInit, OnDestroy {
   public readonly endDateFormControl: FormControl = new FormControl(new Date());
   public readonly isDisabledControl: FormControl = new FormControl();
 
-  public readonly controlsList: FormControl[] = [this.textControl];
+  public readonly controlsList: FormControl[] = [this.textControl, this.timeFormControl, this.dateFormControl];
   private readonly isDisabled$: Observable<boolean> = this.isDisabledControl.statusChanges.pipe(
     map(() => this.isDisabledControl.disabled)
   );
@@ -133,12 +132,6 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     HTML: `${BASE_REQUEST_PATH}/input-demo-example-styles/input-demo-example-styles.component.html`,
     TS: `${BASE_REQUEST_PATH}/input-demo-example-styles/input-demo-example-styles.component.ts`,
     SCSS: `${BASE_REQUEST_PATH}/input-demo-example-styles/input-demo-example-styles.component.scss`,
-  };
-
-  public readonly placeholderExampleContent: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.html`,
-    TS: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.ts`,
-    SCSS: `${BASE_REQUEST_PATH}/input-demo-example-placeholder/input-demo-example-placeholder.component.scss`,
   };
 
   public ngOnInit(): void {

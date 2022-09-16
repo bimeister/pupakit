@@ -15,6 +15,8 @@ import { SelectExample6Component } from './examples/select-demo-one-selection/ex
 import { SelectExample7Component } from './examples/select-demo-one-selection/example-7/example-7.component';
 import { SelectExample16Component } from './examples/select-demo-other/example-16/example-16.component';
 import { SelectExample17Component } from './examples/select-demo-other/example-17/example-17.component';
+import { SelectExample19Component } from './examples/select-demo-other/example-19/example-19.component';
+import { SelectExample20Component } from './examples/select-demo-other/example-20/example-20.component';
 import { SelectExample11Component } from './examples/select-demo-structure-composition/example-11/example-11.component';
 import { SelectDemoRoutingModule } from './select-demo-routing.module';
 import { SelectDemoComponent } from './select-demo.component';
@@ -37,6 +39,8 @@ const EXAMPLES: Type<unknown>[] = [
   SelectExample16Component,
   SelectExample17Component,
   SelectExample18Component,
+  SelectExample19Component,
+  SelectExample20Component,
 ];
 const COMPONENTS: Type<unknown>[] = [SelectDemoComponent, ...EXAMPLES];
 

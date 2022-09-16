@@ -1,3 +1,5 @@
+import { ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,16 +11,14 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { TextareaBase } from '../../../../../internal/declarations/classes/abstract/textarea-base.abstract';
-import { ConnectionPositionPair, Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { map, switchMap, take, tap } from 'rxjs/operators';
 import { NgControl } from '@angular/forms';
+import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs/operators';
+import { TextareaBase } from '../../../../../internal/declarations/classes/abstract/textarea-base.abstract';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
 import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
+import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
 
 const CLOSE_ANIMATION_MS: number = 100;
 const DELTA_SCROLL_FOR_CLOSE_PX: number = 50;

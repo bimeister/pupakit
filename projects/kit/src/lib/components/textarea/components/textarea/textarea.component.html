@@ -2,6 +2,7 @@
   <label
     class="textarea"
     #lineHeightSource
+    [class]="size$ | async"
     [class.textarea_disabled]="isDisabled$ | async"
     [class.textarea_invalid]="isInvalid$ | async"
     (mousedown)="processMouseDown($event)"

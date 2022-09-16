@@ -17,12 +17,27 @@
 .textarea {
   display: block;
   padding: 0;
-  border: none;
+  border: 1px solid transparent;
   border-radius: $controlBorderRadius;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-size-xs(true);
-  @include font-type-regular();
+  @include font-preset-caption-xs();
+
+  &.large {
+    .textarea__pseudo-content,
+    .textarea__control {
+      min-height: 10rem;
+      padding: 3rem 2rem;
+    }
+  }
+
+  &.medium {
+    .textarea__pseudo-content,
+    .textarea__control {
+      min-height: 8rem;
+      padding: 2rem;
+    }
+  }
 
   &__scrollable {
     @include textarea-fonts;
@@ -33,6 +48,7 @@
     @include textarea-fonts;
 
     position: relative;
+    display: grid;
     width: 100%;
     height: max-content;
     overflow: hidden;
@@ -54,7 +70,6 @@
     word-wrap: break-word;
     pointer-events: none;
 
-    padding: 8px 16px;
     box-sizing: border-box;
   }
 
@@ -79,7 +94,6 @@
     white-space: pre-wrap;
     word-wrap: break-word;
 
-    padding: 2rem 2rem 2rem 3rem;
     box-sizing: border-box;
 
     &::placeholder {
@@ -103,109 +117,54 @@
 
 // container colors
 .textarea {
-  color: color(neutral-1000);
-  background-color: color(neutral-5);
-
-  @include dark-theme-class-parent {
-    color: color(neutral-1);
-    background-color: color(neutral-500);
-  }
+  color: semantic-color(text-primary);
+  background-color: semantic-color(surface-primary);
+  border-color: semantic-color(lines-opacity);
 }
 
 // control colors
 .textarea__control {
-  color: color(neutral-1000);
-
-  @include dark-theme-class-parent {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 }
 
 // control placeholder
 .textarea__control::placeholder {
-  color: color(neutral-300);
-
-  @include dark-theme-class-parent {
-    color: color(neutral-60);
-  }
+  color: semantic-color(text-secondary);
 }
 
 .textarea:not(.textarea_disabled) {
-  &:active {
-    background-color: color(neutral-7);
-
-    @include dark-theme-class-parent {
-      background-color: color(neutral-700);
-    }
-  }
-
   @include hover() {
-    background-color: color(neutral-6);
-
-    @include dark-theme-class-parent {
-      background-color: color(neutral-400);
-    }
+    background-color: semantic-color(surface-tertiary);
+    border-color: semantic-color(kind-primary-normal);
 
     .textarea__control::placeholder {
-      color: color(neutral-1000);
-
-      @include dark-theme-class-parent {
-        color: color(neutral-1);
-      }
+      color: semantic-color(text-primary);
     }
   }
 
   &:focus-within {
-    background-color: color(neutral-7);
-
-    @include dark-theme-class-parent {
-      background-color: color(neutral-300);
-    }
-
-    .textarea__control {
-      color: color(neutral-1000);
-
-      @include dark-theme-class-parent {
-        color: color(neutral-1);
-      }
-    }
+    background-color: semantic-color(surface-primary);
+    border-color: semantic-color(kind-primary-normal);
 
     .textarea__control::placeholder {
-      color: color(neutral-50);
-
-      @include dark-theme-class-parent {
-        color: color(neutral-9);
-      }
+      color: semantic-color(text-primary);
     }
   }
 
   &.textarea_invalid {
-    border: 1px solid #{semantic-color(kind-danger-normal)};
+    border-color: semantic-color(kind-danger-normal);
   }
 }
 
 .textarea_disabled {
-  color: color(neutral-50);
-  background-color: color(neutral-3);
+  color: semantic-color(text-disabled);
+  background-color: semantic-color(kind-neutral-disabled);
 
   .textarea__control {
-    color: color(neutral-50);
+    color: semantic-color(text-disabled);
 
     &::placeholder {
-      color: color(neutral-50);
-    }
-  }
-
-  @include dark-theme-class-parent {
-    color: color(neutral-60);
-    background-color: color(neutral-850);
-
-    .textarea__control {
-      color: color(neutral-60);
-
-      &::placeholder {
-        color: color(neutral-60);
-      }
+      color: semantic-color(text-disabled);
     }
   }
 }
@@ -217,15 +176,9 @@
   font-size: 10px;
   line-height: 12px;
   margin-top: 2px;
-
-  &:not(&_invalid) {
-    color: color(neutral-300);
-    @include dark-theme-class-parent {
-      color: color(neutral-9);
-    }
-  }
+  color: semantic-color(text-secondary);
 
   &_invalid {
-    color: #{semantic-color(kind-danger-normal)};
+    color: semantic-color(kind-danger-normal);
   }
 }

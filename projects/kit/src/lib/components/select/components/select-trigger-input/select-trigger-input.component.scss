@@ -50,9 +50,6 @@
       color: color(neutral-50);
       width: 100%;
       text-align: left;
-      opacity: 1;
-      will-change: opacity;
-      transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
       align-self: center;
 
       @include host-selector-dark-theme() {

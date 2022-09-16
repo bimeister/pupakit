@@ -1,15 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, OnChanges, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { isEmpty, isNil } from '@bimeister/utilities';
-import { Observable } from 'rxjs';
-import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
-import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
-import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
-import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { NumericParsedTimeData } from '../../../../../internal/declarations/types/numeric-parsed-time-data.type';
-import { isDate } from '../../../../../internal/helpers/is-date.helper';
+import { isEmpty, isNil } from '@bimeister/utilities';
+import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { InputDateTimeHelper } from '../../../../../internal/declarations/classes/input-date-time-helper.class';
+import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
+import { NumericParsedTimeData } from '../../../../../internal/declarations/types/numeric-parsed-time-data.type';
+import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
+import { isDate } from '../../../../../internal/helpers/is-date.helper';
+import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 
 const MAX_HOURS: number = 23;
 const MAX_MINUTES: number = 59;
@@ -25,13 +24,13 @@ const DATE_FORMAT: string = 'HH:mm';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InputTimeComponent extends InputBase<ValueType> implements OnChanges, OnDestroy {
-  public readonly maxLengthInputValue: number = DATE_FORMAT.length;
-
-  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
+export class InputTimeComponent extends InputBase<ValueType> implements OnDestroy {
+  public readonly timeMask: string = '00:00';
+  public readonly maxLengthInputValue: number = this.timeMask.length;
 
   constructor(private readonly datePipe: DatePipe, ngControl: NgControl) {
     super(ngControl);
+    this.leftIcon$.next('m-clock');
   }
 
   public setValue(value: ValueType): void {

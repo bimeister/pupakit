@@ -53,5 +53,11 @@ export class TextareaDemoComponent {
     TS: `${BASE_REQUEST_PATH}/example-7/example-7.component.ts`,
   };
 
+  public readonly example8Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-8/example-8.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-8/example-8.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-8/example-8.component.ts`,
+  };
+
   public formControl: FormControl = new FormControl();
 }

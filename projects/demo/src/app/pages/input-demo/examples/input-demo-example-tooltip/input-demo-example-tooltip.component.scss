@@ -1,1 +1,23 @@
-@use '../../input-demo' as *;
+@use 'mixins' as *;
+
+.controls-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4rem;
+
+  @include xs() {
+    align-items: normal;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  &__block {
+    flex: 1;
+  }
+}
+
+.control-label {
+  margin-bottom: 2rem;
+  display: block;
+}

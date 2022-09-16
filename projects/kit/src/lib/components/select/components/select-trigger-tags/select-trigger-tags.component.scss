@@ -1,9 +1,9 @@
+@use 'mixins' as *;
 @use './../../select-trigger.style.scss';
 
 :host {
   width: 100%;
-  display: flex;
-  align-items: center;
+  @include flex-container(row, center);
 }
 
 .trigger {
@@ -13,17 +13,11 @@
 }
 
 .tags-container {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  align-self: flex-start;
-  flex-wrap: wrap;
-  gap: 1rem;
-
-  padding-top: 0.5rem;
-
+  @include flex-container(row, flex-start, flex-start, wrap);
   flex: 1;
+  align-self: flex-start;
+  gap: 1rem;
+  width: 100%;
   overflow: hidden;
 }
 

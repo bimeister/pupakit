@@ -8,13 +8,9 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 
-const PLACEHOLDER_DATE: string = '00.00.0000';
-const PLACEHOLDER: string = `${PLACEHOLDER_DATE} – ${PLACEHOLDER_DATE}`;
-const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
-
-const SIZE_PLACEHOLDER_DATE: number = PLACEHOLDER_DATE.length;
-
 const DATE_FORMAT: string = 'dd.MM.yyyy';
+const DATE_MASK: string = '00.00.0000';
+const DATE_MASK_SIZE: number = DATE_MASK.length;
 
 @Component({
   selector: 'pupa-input-date-range-double',
@@ -25,13 +21,16 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateRangeDoubleComponent extends InputDateTimeBase {
+  public readonly dateRangeMask: string = `${DATE_MASK} – ${DATE_MASK}`;
+  public readonly maxLengthInputValue: number = this.dateRangeMask.length;
+
   public readonly dateRangeFirst$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
     map((inputValue: string) => {
-      if (inputValue.length <= SIZE_PLACEHOLDER_DATE) {
+      if (inputValue.length <= DATE_MASK_SIZE) {
         return null;
       }
-      const value: string = inputValue.slice(0, SIZE_PLACEHOLDER_DATE);
+      const value: string = inputValue.slice(0, DATE_MASK_SIZE);
       return this.getParsedDate(value);
     }),
     withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
@@ -46,10 +45,10 @@ export class InputDateRangeDoubleComponent extends InputDateTimeBase {
     filterNotNil(),
     map((value: string) => value.trim()),
     map((inputValue: string) => {
-      if (inputValue.length < MAX_LENGTH_INPUT_VALUE) {
+      if (inputValue.length < this.maxLengthInputValue) {
         return null;
       }
-      const value: string = inputValue.slice(-SIZE_PLACEHOLDER_DATE);
+      const value: string = inputValue.slice(-DATE_MASK_SIZE);
 
       return this.getParsedDate(value);
     }),
@@ -63,19 +62,9 @@ export class InputDateRangeDoubleComponent extends InputDateTimeBase {
 
   public readonly range$: Observable<[Date, Date]> = combineLatest([this.dateRangeFirst$, this.dateRangeSecond$]);
 
-  public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
-
-  public readonly placeholderPreviewLeft$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? '' : `${value}`))
-  );
-
-  public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
-  );
-
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
-    this.value$.next(serializedValue.slice(0, MAX_LENGTH_INPUT_VALUE));
+    this.value$.next(serializedValue.slice(0, this.maxLengthInputValue));
   }
 
   public writeValue(newValue: any): void {
@@ -114,14 +103,14 @@ export class InputDateRangeDoubleComponent extends InputDateTimeBase {
       return;
     }
 
-    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+    if (serializedValue.length < this.maxLengthInputValue) {
       onChangeCallback(new Date(undefined));
       this.setValue(serializedValue);
       return;
     }
 
-    const datePartFirst: string = serializedValue.slice(0, SIZE_PLACEHOLDER_DATE);
-    const datePartSecond: string = serializedValue.slice(SIZE_PLACEHOLDER_DATE + 2).trim();
+    const datePartFirst: string = serializedValue.slice(0, DATE_MASK_SIZE);
+    const datePartSecond: string = serializedValue.slice(DATE_MASK_SIZE + 2).trim();
 
     const dateFirst: Date = this.getParsedDate(datePartFirst);
     const dateSecond: Date = this.getParsedDate(datePartSecond);

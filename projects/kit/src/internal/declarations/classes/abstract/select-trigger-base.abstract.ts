@@ -4,6 +4,7 @@ import { distinctUntilSerializedChanged, filterFalsy, isEmpty, isNil, Nullable }
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, switchMap, take } from 'rxjs/operators';
 import { SelectStateService } from '../../interfaces/select-state-service.interface';
+import { SelectSize } from '../../types/select-size.type';
 
 const BUTTON_WIDTH_PX: number = 24;
 
@@ -20,10 +21,10 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   public readonly isValid$: Observable<boolean> = this.selectStateService.isValid$;
   public readonly isFilled$: Observable<boolean> = this.selectStateService.isFilled$;
   public readonly withReset$: Observable<boolean> = this.selectStateService.withReset$;
+  public readonly inline$: Observable<boolean> = this.selectStateService.inline$;
+  public readonly size$: Observable<SelectSize> = this.selectStateService.size$;
 
   public readonly placeholder$: Observable<string> = this.selectStateService.placeholder$;
-  public readonly placeholderIsVisibleOnHover$: Observable<boolean> =
-    this.selectStateService.placeholderIsVisibleOnHover$;
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,

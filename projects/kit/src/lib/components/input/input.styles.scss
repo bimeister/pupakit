@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use 'sass:string';
 
 @use 'mixins' as *;
@@ -12,84 +11,79 @@
   @include flex-container(row, center, flex-start);
 }
 
-.input {
-  z-index: 2;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  outline: none;
-  width: 100%;
-  padding: 2rem 2rem 2rem 3rem;
+.input-wrapper {
+  background-color: semantic-color(surface-primary);
+  border: 1px solid semantic-color(lines-opacity);
   border-radius: $controlBorderRadius;
   box-sizing: border-box;
-  border: none;
-  color: map.get($input_light_styles, input, color);
-  caret-color: map.get($input_light_styles, input, caret-color);
-  background-color: map.get($input_light_styles, input, background-color);
+  cursor: pointer;
+  @include flex-container(row, center, flex-start);
+  gap: 1rem;
+  height: fit-content;
+  overflow: hidden;
+  padding: 0 2rem;
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    border-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  width: 100%;
 
-  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
-    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
-
-  &:-webkit-autofill {
-    -webkit-text-fill-color: map.get($input_light_styles, input, color);
-    box-shadow: none;
-    -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
-  }
-
-  &.on-hover::placeholder {
-    opacity: 0;
-  }
-
-  &::placeholder {
-    opacity: 1;
-    will-change: opacity;
-    transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common),
-      opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
-    color: map.get($input_light_styles, input, placeholder, color);
-  }
-
-  &__icons-list {
-    z-index: 3;
-    position: absolute;
-    overflow: hidden;
-    top: 1px;
-    bottom: 1px;
-    right: 0;
-    box-sizing: border-box;
-    height: calc(100% - 2px);
-    @include flex-container(row, center);
-    width: fit-content;
+  .input {
     background-color: transparent;
-    gap: 1px;
+    border: none;
+    color: inherit;
+    cursor: inherit;
+    padding: 0;
+    transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  }
 
-    &:not(:empty).large {
-      @include font-preset-h3();
-      right: 3rem;
-    }
-
-    &:not(:empty).medium {
-      @include font-preset-caption-xs();
-      right: 2rem;
-    }
-
-    &:not(:empty).small {
-      @include font-preset-caption-xs();
-      right: 1rem;
+  .input-icon {
+    &_password {
+      opacity: 0;
+      will-change: opacity;
     }
   }
 
-  &__icon {
-    position: relative;
-    opacity: 0;
-    will-change: opacity;
+  &:focus-within:not(.input-wrapper_disabled) {
+    cursor: text;
+  }
 
-    &:focus,
-    &:active,
-    &:hover,
-    &-invalid,
-    &-phone-locale,
-    &-calendar {
-      opacity: 1;
+  &:hover:not(.input-wrapper_disabled) {
+    background-color: semantic-color(surface-tertiary);
+  }
+
+  &:focus-within,
+  &:hover {
+    &:not(.input-wrapper_disabled) {
+      &:not(.input-wrapper_invalid) {
+        border-color: semantic-color(kind-primary-normal);
+      }
+
+      .input::placeholder {
+        color: semantic-color(text-primary);
+      }
+
+      .input-icon {
+        opacity: 1;
+      }
+    }
+  }
+
+  &_large {
+    .input {
+      @extend .input_large;
+    }
+
+    .input-icon {
+      @extend .input-icon_large;
+    }
+  }
+
+  &_medium {
+    .input {
+      @extend .input_medium;
+    }
+
+    .input-icon {
+      @extend .input-icon_medium;
     }
 
     &-invalid {
@@ -97,112 +91,159 @@
     }
   }
 
-  &_filled ~ .input__icons-list {
-    .input__icon-reset,
-    .input__icon-password {
+  &_invalid {
+    border-color: semantic-color(kind-danger-normal);
+  }
+
+  &_filled {
+    .input-icon_password {
       opacity: 1;
+    }
+  }
+
+  &_disabled {
+    cursor: not-allowed;
+    color: semantic-color(text-disabled);
+    background-color: semantic-color(kind-neutral-disabled);
+
+    .input {
+      pointer-events: none;
+
+      &::selection {
+        background: transparent;
+        color: semantic-color(text-disabled);
+      }
+
+      &::placeholder {
+        color: semantic-color(text-disabled);
+      }
+    }
+
+    .input-icon {
+      &_error,
+      &_reset {
+        display: none;
+      }
+
+      &:hover {
+        color: semantic-color(icons-disabled);
+        cursor: inherit;
+      }
+    }
+  }
+
+  &[class*='inline'] {
+    &:not(:hover):not(:focus-within):not(.input-wrapper_invalid) {
+      border-color: transparent;
+    }
+
+    &:hover:not(.input-wrapper_disabled) {
+      background-color: semantic-color(kind-opacity-hover);
+    }
+
+    &.input-wrapper_disabled {
+      border-color: transparent;
+      background-color: transparent;
+    }
+  }
+
+  &[class*='bold'] .input {
+    @include font-type-bold;
+
+    &::placeholder {
+      @include font-type-bold;
+    }
+  }
+}
+
+.input {
+  background-color: semantic-color(surface-primary);
+  border: 1px solid semantic-color(lines-opacity);
+  border-radius: $controlBorderRadius;
+  box-sizing: border-box;
+  caret-color: semantic-color(text-primary);
+  color: semantic-color(text-primary);
+  cursor: pointer;
+  height: 100%;
+  overflow: hidden;
+  outline: none;
+  padding: 0 2rem;
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    border-color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  width: 100%;
+  @include font-preset-caption-xs();
+
+  &:-webkit-autofill {
+    -webkit-text-fill-color: semantic-color(text-primary);
+  }
+
+  &::placeholder {
+    will-change: opacity;
+    transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
+    color: semantic-color(text-secondary);
+    @include font-preset-caption-xs();
+  }
+
+  &:focus:not(.input_disabled) {
+    cursor: text;
+  }
+
+  &:focus,
+  &:hover {
+    &:not(.input_disabled) {
+      &:not(.input_invalid) {
+        border-color: semantic-color(kind-primary-normal);
+      }
+
+      &::placeholder {
+        color: semantic-color(text-primary);
+      }
     }
   }
 
   &_large {
     height: 10rem;
-    @include font-preset-h3();
-
-    &::placeholder {
-      @include font-type-regular();
-    }
   }
 
   &_medium {
     height: 8rem;
-    line-height: 4rem;
-    @include font-preset-caption-xs();
-  }
-
-  &_small {
-    height: 6rem;
-    @include font-preset-caption-xs();
-  }
-
-  &:hover:not(:focus):not([disabled]) {
-    background-color: map.get($input_light_styles, hover, background-color);
-
-    &:-webkit-autofill {
-      box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
-    }
-  }
-
-  &:active:not(:focus):not([disabled]) {
-    background-color: map.get($input_light_styles, active, background-color);
-
-    &:-webkit-autofill {
-      box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, active, background-color) inset;
-    }
-
-    &::placeholder {
-      opacity: 1;
-    }
-  }
-
-  &:focus:not([disabled]) {
-    cursor: text;
-
-    & ~ .input__icons-list {
-      .input__icon-password {
-        opacity: 1;
-      }
-    }
-
-    &::placeholder {
-      opacity: 1;
-      color: map.get($input_light_styles, focus, placeholder, color);
-    }
-
-    background-color: map.get($input_light_styles, focus, background-color);
-
-    &:-webkit-autofill {
-      box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, focus, background-color) inset;
-    }
   }
 
   &_invalid {
-    border: 1px solid #{semantic-color(kind-danger-normal)};
-
-    &:-webkit-autofill {
-      border: 1px solid #{semantic-color(kind-danger-normal)};
-    }
+    border-color: semantic-color(kind-danger-normal);
   }
 
-  &[disabled] {
+  &_disabled {
     cursor: not-allowed;
-    color: map.get($input_light_styles, disabled, color);
-    background-color: map.get($input_light_styles, disabled, background-color);
-
-    &:-webkit-autofill {
-      -webkit-text-fill-color: map.get($input_light_styles, disabled, color);
-      box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, disabled, background-color) inset;
-    }
+    color: semantic-color(text-disabled);
+    background-color: semantic-color(kind-neutral-disabled);
 
     &::selection {
       background: transparent;
     }
 
     &::placeholder {
-      opacity: 1;
-      color: map.get($input_light_styles, disabled, placeholder, color);
+      color: semantic-color(text-disabled);
     }
 
-    ~ .input__icons-list {
-      display: none;
+    &:-webkit-autofill {
+      -webkit-text-fill-color: semantic-color(text-disabled);
     }
   }
 
-  &[class*='ghost'] {
-    background-color: unset;
+  &[class*='inline'] {
+    &:not(:hover):not(:focus):not(.input_invalid) {
+      border-color: transparent;
+    }
+
+    &:hover:not(.input_disabled) {
+      background-color: semantic-color(kind-opacity-hover);
+    }
+
+    &.input_disabled {
+      background-color: transparent;
+    }
   }
 
   &[class*='bold'] {
@@ -212,86 +253,35 @@
       @include font-type-bold;
     }
   }
-
-  @include host-selector-dark-theme() {
-    color: map.get($input_dark_styles, input, color);
-    caret-color: map.get($input_dark_styles, input, caret-color);
-    background-color: map.get($input_dark_styles, input, background-color);
-    &:-webkit-autofill {
-      -webkit-text-fill-color: map.get($input_dark_styles, input, color);
-      box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, input, background-color) inset;
-    }
-    &::placeholder {
-      color: map.get($input_dark_styles, input, placeholder, color);
-    }
-    &:hover:not(:focus):not([disabled]) {
-      background-color: map.get($input_dark_styles, hover, background-color);
-
-      &:-webkit-autofill {
-        box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
-      }
-    }
-    &:active:not(:focus):not([disabled]) {
-      color: map.get($input_dark_styles, active, color);
-    }
-    &:focus {
-      background-color: map.get($input_dark_styles, focus, background-color);
-
-      &::placeholder {
-        color: map.get($input_dark_styles, focus, placeholder, color);
-      }
-
-      &:-webkit-autofill {
-        box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
-      }
-    }
-
-    &[disabled] {
-      color: map.get($input_dark_styles, disabled, color);
-      background-color: map.get($input_dark_styles, disabled, background-color);
-
-      &:-webkit-autofill {
-        -webkit-text-fill-color: map.get($input_dark_styles, disabled, color);
-        box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, disabled, background-color) inset;
-      }
-
-      &::placeholder {
-        color: map.get($input_dark_styles, disabled, placeholder, color);
-      }
-    }
-
-    &[class*='ghost'] {
-      background-color: unset;
-    }
-
-    &[class*='bold'] {
-      @include font-type-bold;
-
-      &::placeholder {
-        @include font-type-bold;
-      }
-    }
-  }
 }
 
-// to show icons or placeholder - used their host-hover
-:host:hover {
-  .input__icons-list .input__icon:not(.input__icon-password) {
-    opacity: 1;
+.input-icon {
+  padding: 1rem;
+  margin: -1rem;
+  cursor: pointer;
+  pointer-events: all;
+
+  &_large {
+    font-size: 4.5rem;
   }
 
-  .input:not(:focus):not([disabled]) {
-    &::placeholder {
-      opacity: 1;
-      color: color(neutral-1000);
+  &_medium {
+    font-size: 4rem;
+  }
 
-      @include host-selector-dark-theme() {
-        color: color(neutral-1);
-      }
+  &_invalid {
+    color: semantic-color(kind-danger-normal);
+  }
+
+  &_calendar,
+  &_password,
+  &_reset {
+    &:hover {
+      color: semantic-color(kind-primary-hover);
     }
+  }
+
+  &_custom {
+    cursor: default;
   }
 }

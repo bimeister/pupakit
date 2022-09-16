@@ -1,5 +1,3 @@
-@use 'sass:map';
-
 @use 'mixins' as *;
 @use 'functions' as *;
 @use 'variables' as *;
@@ -46,9 +44,9 @@
     border: 1px solid transparent;
     height: 8rem;
     padding: 2rem 9rem;
-    color: map.get($input_light_styles, input, color);
-    caret-color: map.get($input_light_styles, input, caret-color);
-    background-color: map.get($input_light_styles, input, background-color);
+    color: semantic-color(text-primary);
+    caret-color: semantic-color(text-primary);
+    background-color: semantic-color(kind-neutral-normal);
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
     @include font-type-regular();
     @include font-size-xs(true);
@@ -58,70 +56,70 @@
     }
 
     &:-webkit-autofill {
-      border-color: map.get($input_light_styles, input, background-color);
-      -webkit-text-fill-color: map.get($input_light_styles, input, color);
+      border-color: semantic-color(kind-neutral-normal);
+      -webkit-text-fill-color: semantic-color(text-primary);
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, input, background-color) inset;
+      -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-normal) inset;
     }
 
     &::placeholder {
-      color: map.get($input_light_styles, input, placeholder, color);
+      color: semantic-color(text-secondary);
     }
 
     &:not(:focus):not([disabled]) {
       @include hover() {
-        background-color: map.get($input_light_styles, hover, background-color);
+        background-color: semantic-color(kind-neutral-hover);
 
         &:-webkit-autofill {
           box-shadow: none;
-          -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, hover, background-color) inset;
-          border-color: map.get($input_light_styles, hover, background-color);
+          -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-hover) inset;
+          border-color: semantic-color(kind-neutral-hover);
         }
 
         &::placeholder {
-          color: color(neutral-1000);
+          color: semantic-color(text-primary);
         }
       }
     }
 
     &:active:not(:focus):not([disabled]) {
       border-color: transparent;
-      background-color: map.get($input_light_styles, active, background-color);
+      background-color: semantic-color(kind-neutral-active);
 
       &:-webkit-autofill {
-        border-color: map.get($input_light_styles, active, background-color);
+        border-color: semantic-color(kind-neutral-active);
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, active, background-color) inset;
+        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-active) inset;
       }
     }
 
     &:focus:not([disabled]) {
       cursor: text;
-      border-color: map.get($input_light_styles, focus, border-color);
-      background-color: map.get($input_light_styles, focus, background-color);
+      border-color: transparent;
+      background-color: semantic-color(kind-neutral-active);
 
       &:-webkit-autofill {
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, focus, background-color) inset;
-        border-color: map.get($input_light_styles, focus, border-color);
+        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-active) inset;
+        border-color: transparent;
       }
 
       &::placeholder {
-        color: map.get($input_light_styles, focus, placeholder, color);
+        color: semantic-color(text-disabled);
       }
     }
 
     &[disabled] {
       border-color: transparent;
       cursor: not-allowed;
-      color: map.get($input_light_styles, disabled, color);
-      background-color: map.get($input_light_styles, disabled, background-color);
+      color: semantic-color(text-disabled);
+      background-color: semantic-color(kind-neutral-disabled);
 
       &:-webkit-autofill {
-        -webkit-text-fill-color: map.get($input_light_styles, disabled, color);
+        -webkit-text-fill-color: semantic-color(text-disabled);
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_light_styles, disabled, background-color) inset;
-        border-color: map.get($input_light_styles, disabled, background-color);
+        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-disabled) inset;
+        border-color: semantic-color(kind-neutral-disabled);
       }
 
       &::selection {
@@ -129,77 +127,11 @@
       }
 
       &::placeholder {
-        color: map.get($input_light_styles, disabled, placeholder, color);
+        color: semantic-color(text-disabled);
       }
 
       ~ .search-field__icon {
-        color: map.get($input_light_styles, disabled, color);
-      }
-    }
-
-    @include host-selector-dark-theme() {
-      color: map.get($input_dark_styles, input, color);
-      caret-color: map.get($input_dark_styles, input, caret-color);
-      background-color: map.get($input_dark_styles, input, background-color);
-
-      &:-webkit-autofill {
-        -webkit-text-fill-color: map.get($input_dark_styles, input, color);
-        box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, input, background-color) inset;
-        border-color: map.get($input_dark_styles, input, background-color);
-      }
-
-      &::placeholder {
-        color: map.get($input_dark_styles, input, placeholder, color);
-      }
-
-      &:not(:focus):not([disabled]) {
-        @include hover() {
-          background-color: map.get($input_dark_styles, hover, background-color);
-          &:-webkit-autofill {
-            box-shadow: none;
-            -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, hover, background-color) inset;
-            border-color: map.get($input_dark_styles, hover, background-color);
-          }
-
-          &::placeholder {
-            color: color(neutral-1);
-          }
-        }
-      }
-
-      &:active:not(:focus):not([disabled]) {
-        color: map.get($input_dark_styles, active, color);
-      }
-
-      &:focus {
-        background-color: map.get($input_dark_styles, focus, background-color);
-        &::placeholder {
-          color: map.get($input_dark_styles, focus, placeholder, color);
-        }
-        border-color: map.get($input_dark_styles, focus, border-color);
-
-        &:-webkit-autofill {
-          border-color: map.get($input_dark_styles, focus, border-color);
-          box-shadow: none;
-          -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, focus, background-color) inset;
-        }
-      }
-
-      &[disabled] {
-        color: map.get($input_dark_styles, disabled, color);
-        background-color: map.get($input_dark_styles, disabled, background-color);
-
-        &:-webkit-autofill {
-          -webkit-text-fill-color: map.get($input_dark_styles, disabled, color);
-          box-shadow: none;
-          -webkit-box-shadow: 0 10rem 0 0 map.get($input_dark_styles, disabled, background-color) inset;
-          border-color: map.get($input_dark_styles, disabled, background-color);
-        }
-
-        &::placeholder {
-          color: map.get($input_dark_styles, disabled, placeholder, color);
-        }
+        color: semantic-color(text-disabled);
       }
     }
   }
@@ -211,10 +143,7 @@
     pointer-events: none;
     opacity: 0;
     transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
-    color: map.get($input_light_styles, input, color);
-    @include host-selector-dark-theme() {
-      color: map.get($input_dark_styles, input, color);
-    }
+    color: semantic-color(icons-primary);
 
     &_visible {
       pointer-events: all;
@@ -227,7 +156,7 @@
     z-index: 4;
     pointer-events: none;
     transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-    color: map.get($input_light_styles, input, color);
+    color: semantic-color(icons-primary);
     padding: 2rem;
     transform: translateX(1rem);
 
@@ -237,24 +166,13 @@
       left: 0;
       pointer-events: all;
       transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-      caret-color: map.get($input_light_styles, input, caret-color);
-      background-color: map.get($input_light_styles, input, background-color);
+      caret-color: semantic-color(text-primary);
+      background-color: semantic-color(kind-neutral-normal);
       @include flex-container(row, center, center);
 
       &:not(.search-field__icon_disabled) {
         @include hover() {
-          background-color: map.get($input_light_styles, hover, background-color);
-        }
-      }
-
-      @include host-selector-dark-theme() {
-        caret-color: map.get($input_dark_styles, input, caret-color);
-        background-color: map.get($input_dark_styles, input, background-color);
-
-        &:not(.search-field__icon_disabled) {
-          @include hover() {
-            background-color: map.get($input_dark_styles, hover, background-color);
-          }
+          background-color: semantic-color(kind-neutral-hover);
         }
       }
     }
@@ -262,17 +180,8 @@
     &_disabled {
       border-color: transparent;
       cursor: not-allowed;
-      color: map.get($input_light_styles, disabled, color);
-      background-color: map.get($input_light_styles, disabled, background-color);
-    }
-
-    @include host-selector-dark-theme() {
-      color: map.get($input_dark_styles, input, color);
-
-      &_disabled {
-        color: map.get($input_dark_styles, disabled, color);
-        background-color: map.get($input_dark_styles, disabled, background-color);
-      }
+      color: semantic-color(icons-disabled);
+      background-color: semantic-color(kind-neutral-disabled);
     }
   }
 }

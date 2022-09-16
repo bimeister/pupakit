@@ -1,11 +1,5 @@
 <p>base usage</p>
-<pupa-select
-  class="select"
-  [placeholder]="'Placeholder'"
-  [placeholderOnHover]="false"
-  [isMultiSelectionEnabled]="false"
-  [formControl]="control"
->
+<pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="false" [formControl]="control">
   <pupa-select-trigger>
     {{ control.value }}
   </pupa-select-trigger>
@@ -23,7 +17,6 @@
 <pupa-select
   class="select"
   [placeholder]="'Placeholder'"
-  [placeholderOnHover]="false"
   [isMultiSelectionEnabled]="false"
   [formControl]="controlWithIcon"
 >

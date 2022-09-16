@@ -46,11 +46,6 @@
       <demo-select-example-2 *pupaCodeContainerPreviewTemplate></demo-select-example-2>
     </pupa-code-container>
 
-    <h3 demoAnchor>Placeholder visible on hover (default)</h3>
-    <pupa-code-container [content]="example3Content">
-      <demo-select-example-3 *pupaCodeContainerPreviewTemplate></demo-select-example-3>
-    </pupa-code-container>
-
     <h3 demoAnchor>Placeholder standard usage</h3>
     <pupa-code-container [content]="example4Content">
       <demo-select-example-4 *pupaCodeContainerPreviewTemplate></demo-select-example-4>
@@ -132,6 +127,16 @@
     <pupa-code-container [content]="example17Content">
       <demo-select-example-17 *pupaCodeContainerPreviewTemplate></demo-select-example-17>
     </pupa-code-container>
+
+    <h3 demoAnchor>Inline</h3>
+    <pupa-code-container [content]="example19Content">
+      <demo-select-example-19 *pupaCodeContainerPreviewTemplate></demo-select-example-19>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Size</h3>
+    <pupa-code-container [content]="example20Content">
+      <demo-select-example-20 *pupaCodeContainerPreviewTemplate></demo-select-example-20>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -141,11 +146,12 @@
         <pupa-select
           class="select"
           [placeholder]="'Placeholder'"
-          [placeholderOnHover]="placeholderOnHover$ | async"
           [isMultiSelectionEnabled]="isMultiSelectionEnabled$ | async"
           [isPatched]="isPatched$ | async"
           [isUnselectionEnabled]="isUnselectionEnabled$ | async"
           [withReset]="withReset$ | async"
+          [inline]="inline$ | async"
+          [size]="size$ | async"
           [invalidTooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
           [invalidTooltipDisabled]="invalidTooltipDisabled$ | async"
           [invalidTooltip]="'Invalid Tooltip Text'"
@@ -197,13 +203,6 @@
           <demo-props-switcher #isMultiSelectionEnabled$></demo-props-switcher>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property decoratorName="input" name="placeholderOnHover" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>
-            Makes placeholder visible only upon hovering.
-          </ng-container>
-          <demo-props-switcher #placeholderOnHover$ [initialValue]="true"></demo-props-switcher>
-        </demo-example-viewer-property>
-
         <demo-example-viewer-property decoratorName="input" name="isPatched" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Shows validation before touching a control.</ng-container>
           <demo-props-switcher #isPatched$></demo-props-switcher>
@@ -241,6 +240,16 @@
           type="Nullable<TemplateRef<unknown>>"
         >
           <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip content template.</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="inline" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Enables inline mode.</ng-container>
+          <demo-props-switcher #inline$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="size" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
+          <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 

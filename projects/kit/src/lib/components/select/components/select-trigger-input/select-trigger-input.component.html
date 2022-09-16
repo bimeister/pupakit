@@ -1,8 +1,10 @@
 <div
   class="trigger"
+  [class]="size$ | async"
   [class.trigger_active]="isExpanded$ | async"
   [class.trigger_disabled]="isDisabled$ | async"
   [class.trigger_invalid]="isInvalid$ | async"
+  [class.trigger_inline]="inline$ | async"
   (mousedown)="processEventPropagation($event)"
   (touchstart)="processEventPropagation($event)"
   (click)="processButtonInputClick()"
@@ -30,28 +32,18 @@
 </div>
 
 <div class="icons">
-  <pupa-button-icon
-    *ngIf="isVisibleReset$ | async"
-    class="icons__icon icons__icon-reset"
-    icon="app-cross-circle"
-    size="s"
-    tabIndex="-1"
-    kind="secondary"
-    (click)="reset()"
-  >
-  </pupa-button-icon>
-  <pupa-button-icon
+  <pupa-icon *ngIf="isVisibleReset$ | async" class="icons__icon icons__icon-reset" name="m-abort" (click)="reset()">
+  </pupa-icon>
+
+  <pupa-icon
     *ngIf="isInvalid$ | async"
     class="icons__icon icons__icon-invalid"
-    icon="app-info"
-    kind="secondary"
-    size="s"
-    tabIndex="-1"
+    name="m-error"
     [pupaTooltip]="invalidTooltip$ | async"
     [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
     [tooltipDisabled]="isInvalidTooltipDisabled$ | async"
     [tooltipContentTemplate]="invalidTooltipContentTemplate$ | async"
     (click)="button.click()"
   >
-  </pupa-button-icon>
+  </pupa-icon>
 </div>

@@ -9,7 +9,8 @@ import { FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoExampleIsPatchedComponent {
-  public readonly formControls: FormControl[] = new Array(2)
-    .fill(0)
-    .map(() => new FormControl('', [Validators.required, Validators.minLength(6)]));
+  public readonly formControls: FormControl[] = [
+    new FormControl('', [Validators.required, Validators.minLength(6)]),
+    new FormControl('', [Validators.required, Validators.minLength(6)]),
+  ];
 }

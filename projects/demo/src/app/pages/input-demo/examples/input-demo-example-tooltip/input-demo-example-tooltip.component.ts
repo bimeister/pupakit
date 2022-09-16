@@ -9,7 +9,10 @@ import { FormControl, Validators } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoExampleTooltipComponent {
-  public readonly formControls: FormControl[] = new Array(4)
-    .fill(0)
-    .map(() => new FormControl('', Validators.required));
+  public readonly formControls: FormControl[] = [
+    new FormControl('', Validators.required),
+    new FormControl('', Validators.required),
+    new FormControl('', Validators.required),
+    new FormControl('', Validators.required),
+  ];
 }

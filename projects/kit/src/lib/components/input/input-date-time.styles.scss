@@ -1,4 +1,3 @@
-@use 'sass:map';
 @use 'sass:string';
 @use 'functions' as *;
 @use 'mixins' as *;
@@ -42,55 +41,5 @@ $width_date-range: 60rem;
 
   &.date-range.fixed-size {
     width: $width_date-range;
-  }
-}
-
-.time-input-container {
-  position: relative;
-
-  background-color: transparent;
-  border-radius: 2rem;
-
-  &__shape-container {
-    position: absolute;
-    left: 1px;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    @include font-type-regular();
-    z-index: 3;
-    @include font-size-xs();
-    line-height: 4rem;
-    padding: 2rem 4rem;
-    color: color(neutral-1000);
-    @include host-selector-dark-theme() {
-      color: color(neutral-1);
-    }
-    display: flex;
-    pointer-events: none;
-  }
-
-  &__shape-left {
-    display: inline;
-    color: transparent;
-    white-space: break-spaces;
-  }
-
-  &__shape-right {
-    display: inline;
-    color: inherit;
-    white-space: break-spaces;
-  }
-}
-
-.integrated-space {
-  line-height: inherit;
-  font-size: inherit;
-}
-
-.input[disabled] ~ .time-input-container__shape-container {
-  color: map.get($input_light_styles, disabled, placeholder, color);
-  @include host-selector-dark-theme() {
-    color: map.get($input_dark_styles, disabled, placeholder, color);
   }
 }
