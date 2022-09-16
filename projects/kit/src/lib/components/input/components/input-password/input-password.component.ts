@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { InputBase } from '../../../../../internal/declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../../internal/declarations/types/input-value.type';
 
@@ -13,8 +13,6 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputPasswordComponent extends InputBase<ValueType> {
-  private readonly isEnabled$: Observable<boolean> = this.isDisabled$.pipe(map((isDisabled: boolean) => !isDisabled));
-  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isEnabled$]);
   public readonly typeIsText$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public togglePassword(): void {

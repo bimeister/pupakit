@@ -4,21 +4,31 @@
 
 @use './../../textarea.styles';
 
+.textarea-wrapper {
+  display: grid;
+}
+
 .textarea-inline {
   display: block;
-  padding: 2rem 4rem;
   box-sizing: border-box;
-  border: none;
+  border: 1px solid transparent;
   border-radius: $controlBorderRadius;
   white-space: nowrap;
   cursor: text;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-size-xs(true);
-  @include font-type-regular();
+  @include font-preset-caption-xs();
   @include ellipsis-text-overflow;
 
-  height: 8rem;
+  &.large {
+    min-height: 10rem;
+    padding: 3rem 2rem;
+  }
+
+  &.medium {
+    min-height: 8rem;
+    padding: 2rem 2rem;
+  }
 
   &_disabled {
     cursor: not-allowed;
@@ -31,80 +41,49 @@
       opacity: 0;
     }
   }
+
+  &:not(.textarea-inline_collapsed) {
+    border-color: semantic-color(kind-primary-normal);
+  }
 }
 
 .textarea-inline {
-  background-color: color(neutral-5);
-
-  @include dark-theme-class-parent {
-    background-color: color(neutral-500);
-  }
+  background-color: semantic-color(surface-primary);
+  border-color: semantic-color(lines-opacity);
 }
 
 // control colors
 .textarea-inline {
-  color: color(neutral-1000);
-
-  @include dark-theme-class-parent {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 
   .textarea-inline__placeholder {
-    color: color(neutral-300);
-
-    @include dark-theme-class-parent {
-      color: color(neutral-60);
-    }
+    color: semantic-color(text-secondary);
   }
 }
 
 .textarea-inline.textarea-inline_collapsed {
   &:not(.textarea-inline_disabled) {
-    &:active {
-      background-color: color(neutral-7);
-
-      @include dark-theme-class-parent {
-        background-color: color(neutral-700);
-      }
-    }
-
     @include hover() {
-      background-color: color(neutral-6);
-
-      @include dark-theme-class-parent {
-        background-color: color(neutral-400);
-      }
+      background-color: semantic-color(surface-tertiary);
+      border-color: semantic-color(kind-primary-normal);
 
       .textarea-inline__placeholder {
-        color: color(neutral-1000);
-
-        @include dark-theme-class-parent {
-          color: color(neutral-1);
-        }
+        color: semantic-color(text-primary);
       }
     }
 
     &.textarea-inline_invalid {
-      border: 1px solid #{semantic-color(kind-danger-normal)};
+      border-color: semantic-color(kind-danger-normal);
     }
   }
 }
 
 .textarea-inline_disabled {
-  color: color(neutral-50);
-  background-color: color(neutral-3);
+  color: semantic-color(text-disabled);
+  background-color: semantic-color(kind-neutral-disabled);
 
   .textarea-inline__placeholder {
-    color: color(neutral-50);
-  }
-
-  @include dark-theme-class-parent {
-    color: color(neutral-60);
-    background-color: color(neutral-850);
-
-    .textarea-inline__placeholder {
-      color: color(neutral-60);
-    }
+    color: semantic-color(text-disabled);
   }
 }
 
@@ -164,12 +143,23 @@
   }
 }
 
-.close-button {
+.close-icon {
+  --pseudoIndentSize: 1rem;
   position: absolute;
   top: 50%;
-  right: 8px;
-  transform: translateY(-50%);
+  right: 2rem;
+  transform: translateY(calc(-50% + var(--pseudoIndentSize)));
   z-index: 2;
+  font-size: 4rem;
+  padding: var(--pseudoIndentSize);
+  margin: calc(var(--pseudoIndentSize) * -1);
+  cursor: pointer;
+  pointer-events: all;
+  color: semantic-color(icons-secondary);
+
+  &:hover {
+    color: semantic-color(kind-primary-hover);
+  }
 }
 
 .counter_overlay {
@@ -182,28 +172,20 @@
 }
 
 .counter_mobile {
-  color: color(neutral-9);
+  color: semantic-color(text-secondary);
 }
 
 .overlay-textarea {
   .textarea:not(.textarea_disabled) {
     border-color: transparent;
+
     &:focus-within {
-      background-color: color(neutral-1, alpha-700);
-      border: 1px solid color(neutral-5);
+      background-color: semantic-color(surface-primary);
+      border: 1px solid semantic-color(lines-opacity);
       @include blur();
 
-      @include dark-theme-class-parent {
-        background-color: color(neutral-1000, alpha-700);
-        border: 1px solid color(neutral-500);
-      }
-
       .textarea__control::placeholder {
-        color: color(neutral-6);
-
-        @include dark-theme-class-parent {
-          color: color(neutral-700);
-        }
+        color: semantic-color(text-primary);
       }
     }
   }

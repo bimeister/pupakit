@@ -1,0 +1,23 @@
+<pupa-select [formControl]="control" [placeholder]="'Default'" [inline]="false">
+  <pupa-select-trigger>
+    {{ control.value }}
+  </pupa-select-trigger>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let option of options" [value]="option">{{ option }}</pupa-select-option>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>
+
+<pupa-select [formControl]="control" [placeholder]="'Inline'" [inline]="true">
+  <pupa-select-trigger>
+    {{ control.value }}
+  </pupa-select-trigger>
+
+  <pupa-select-dropdown>
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let option of options" [value]="option">{{ option }}</pupa-select-option>
+    </pupa-select-options-container>
+  </pupa-select-dropdown>
+</pupa-select>

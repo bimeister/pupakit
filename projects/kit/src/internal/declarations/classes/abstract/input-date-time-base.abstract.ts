@@ -4,6 +4,7 @@ import { NgControl } from '@angular/forms';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
+import { InputDateTimeHelper } from '../../../../internal/declarations/classes/input-date-time-helper.class';
 import { DroppableComponent } from '../../../../lib/components/droppable/components/droppable/droppable.component';
 import { dateClearTime } from '../../../helpers/date-clear-time.helper';
 import { getDaysInMonth } from '../../../helpers/get-days-in-month.helper';
@@ -13,7 +14,6 @@ import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { ParsedDateData } from '../../interfaces/parsed-date-data.interface';
 import { ValueType } from '../../types/input-value.type';
 import { InputBase } from './input-base.abstract';
-import { InputDateTimeHelper } from '../../../../internal/declarations/classes/input-date-time-helper.class';
 
 const DEFAULT_DATE: Date = new Date();
 const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(DEFAULT_DATE);
@@ -54,13 +54,18 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
-  public readonly rightPaddingPx$: Observable<number> = this.getRightPadding([this.isInvalid$, this.isVisibleReset$]);
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
     this.isIconHovered$,
+    this.valueIsNotEmpty$,
     this.withReset$,
-  ]).pipe(map(([isIconHovered, withReset]: [boolean, boolean]) => isIconHovered && withReset));
-  public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
+  ]).pipe(
+    map(
+      ([isIconHovered, valueIsNotEmpty, withReset]: [boolean, boolean, boolean]) =>
+        isIconHovered && valueIsNotEmpty && withReset
+    )
+  );
 
   public readonly hours$: Observable<number> = this.value$.pipe(
     map((value: string) =>
@@ -102,6 +107,19 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
         !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
     ),
     map(([date, _]: [Date, [boolean, Date]]) => date)
+  );
+
+  public readonly rightIconWithCondition$: Observable<string> = combineLatest([
+    this.rightIcon$,
+    this.dateToResetSwitcherEnabled$,
+  ]).pipe(
+    map(([rightIcon, dateToResetSwitcherEnabled]: [string, boolean]) => {
+      if (dateToResetSwitcherEnabled) {
+        return 'm-abort';
+      }
+
+      return isEmpty(rightIcon) ? 'm-calendar' : rightIcon;
+    })
   );
 
   constructor(
@@ -270,8 +288,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.processIsFixedSizeChange(changes?.isFixedSize);
     this.processIsBackDatingChange(changes?.isBackDating);
     this.processAvailableEndDateChange(changes?.availableEndDate);
-    this.processIsPatchedChange(changes?.isPatched);
-    this.processWithResetChange(changes?.withReset);
+    super.ngOnChanges(changes);
   }
 
   public setValue(value: ValueType): void {

@@ -29,7 +29,7 @@ export class IconComponent implements OnChanges {
   }
 
   private getIconDataByName(name: string): Nullable<string> {
-    const prefixes: string[] = ['md-', 'ios-', 'logo-', 'app-'];
+    const prefixes: string[] = ['m-', 'md-', 'ios-', 'logo-', 'app-'];
     const defaultPrefix: string = 'md-';
     const hasPrefix: boolean = prefixes.some((prefix: string) => name.startsWith(prefix));
     const nameWithPrefix: string = hasPrefix ? name : defaultPrefix + name;

@@ -27,7 +27,7 @@
       {
         "name": "Tertiary",
         "lightColor": {
-          "color": "neutral-4",
+          "color": "neutral-3",
           "alpha": "alpha-1000"
         },
         "darkColor": {

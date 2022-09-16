@@ -1,1 +1,1 @@
-export type InputStyleCustomization = 'ghost' | 'bold';
+export type InputStyleCustomization = 'inline' | 'bold';

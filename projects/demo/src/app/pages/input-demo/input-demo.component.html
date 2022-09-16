@@ -4,7 +4,7 @@
   <div *demoPageTab="'overview'" class="overview">
     <p>Represents a family of configurable input elements of the following types:</p>
     <ul>
-      <li><pupa-code-inline>pupa-input-text</pupa-code-inline>- plain text input.</li>
+      <li><pupa-code-inline>pupa-input-text</pupa-code-inline> - plain text input.</li>
       <li><pupa-code-inline>pupa-input-number</pupa-code-inline> - number input.</li>
       <li><pupa-code-inline>pupa-input-password</pupa-code-inline> - password input.</li>
       <li>
@@ -45,11 +45,6 @@
       <demo-input-demo-example-size *pupaCodeContainerPreviewTemplate></demo-input-demo-example-size>
     </pupa-code-container>
 
-    <h3 demoAnchor>Placeholder usage</h3>
-    <pupa-code-container [content]="placeholderExampleContent">
-      <demo-input-demo-example-placeholder *pupaCodeContainerPreviewTemplate></demo-input-demo-example-placeholder>
-    </pupa-code-container>
-
     <h3 demoAnchor>Patched input</h3>
     <pupa-code-container [content]="isPatchedExampleContent">
       <demo-input-demo-example-is-patched *pupaCodeContainerPreviewTemplate></demo-input-demo-example-is-patched>
@@ -88,10 +83,10 @@
               invalidTooltipDisabled: invalidTooltipDisabled$ | async,
               size: size$ | async,
               styles: styles$ | async,
-              icon: icon$ | async,
+              leftIcon: leftIcon$ | async,
+              rightIcon: rightIcon$ | async,
               isFixedSize: isFixedSize$ | async,
-              isBackDating: isBackDating$ | async,
-              placeholderOnHover: placeholderOnHover$ | async
+              isBackDating: isBackDating$ | async
             };
             let withReset = withReset;
             let isPatched = isPatched;
@@ -99,10 +94,10 @@
             let invalidTooltipDisabled = invalidTooltipDisabled;
             let size = size;
             let styles = styles;
-            let icon = icon;
+            let leftIcon = leftIcon;
+            let rightIcon = rightIcon;
             let isFixedSize = isFixedSize;
-            let isBackDating = isBackDating;
-            let placeholderOnHover = placeholderOnHover
+            let isBackDating = isBackDating
           "
         >
           <div class="controls-list__block">
@@ -115,11 +110,11 @@
               [isPatched]="isPatched"
               [placeholder]="placeholderFormControl.value"
               [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
-              [placeholderOnHover]="placeholderOnHover"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
-              [icon]="inputIconFormControl.value"
+              [leftIcon]="leftIcon"
+              [rightIcon]="rightIcon"
               [customStyles]="styles"
             ></pupa-input-text>
           </div>
@@ -137,7 +132,6 @@
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
               [customStyles]="styles"
-              [placeholderOnHover]="placeholderOnHover"
             ></pupa-input-time>
           </div>
 
@@ -146,6 +140,7 @@
             <pupa-input-date
               class="form__control form__control_date"
               [formControl]="dateFormControl"
+              [size]="size"
               [withReset]="withReset"
               [isPatched]="isPatched"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
@@ -155,6 +150,7 @@
               [availableEndDate]="endDateFormControl.value"
               [isFixedSize]="isFixedSize"
               [isBackDating]="isBackDating"
+              [customStyles]="styles"
             ></pupa-input-date>
           </div>
         </div>
@@ -170,26 +166,26 @@
           </ng-container>
         </demo-example-viewer-config-item>
 
-        <demo-example-viewer-config-item name="Set date form control validators">
-          <ng-container *demoExampleViewerConfigItemDescription>
-            Use
-            <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
-          </ng-container>
-          <demo-props-form-control-validators
-            [controlsList]="[dateFormControl, timeFormControl]"
-            [validators]="dateValidators"
-            [initialValue]="true"
-          ></demo-props-form-control-validators>
-        </demo-example-viewer-config-item>
-
         <demo-example-viewer-config-item name="Set form control validators">
           <ng-container *demoExampleViewerConfigItemDescription>
             Use
             <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
           </ng-container>
           <demo-props-form-control-validators
-            [controlsList]="controlsList"
+            [controlsList]="[textControl]"
             [validators]="validators"
+            [initialValue]="true"
+          ></demo-props-form-control-validators>
+        </demo-example-viewer-config-item>
+
+        <demo-example-viewer-config-item name="Set date form control validators">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>formControl.setValidators()</pupa-code-inline>
+          </ng-container>
+          <demo-props-form-control-validators
+            [controlsList]="[timeFormControl, dateFormControl]"
+            [validators]="dateValidators"
             [initialValue]="true"
           ></demo-props-form-control-validators>
         </demo-example-viewer-config-item>
@@ -198,22 +194,13 @@
       <demo-example-viewer-section-label>Common input properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="InputSize">
-          <ng-container *demoExampleViewerPropertyDescription>
-            Adjusts the size of the element (Is not applicable for date inputs).
-          </ng-container>
+          <ng-container *demoExampleViewerPropertyDescription> Adjusts the size of the element. </ng-container>
           <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
           <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
           <pupa-input-text [formControl]="placeholderFormControl" [withReset]="true"></pupa-input-text>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="placeholderOnHover" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>
-            Makes placeholder visible only upon hovering.
-          </ng-container>
-          <demo-props-switcher #placeholderOnHover$ [initialValue]="true"></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="withReset" type="boolean">
@@ -224,6 +211,20 @@
         <demo-example-viewer-property decoratorName="input" name="isPatched" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is patched.</ng-container>
           <demo-props-switcher #isPatched$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="leftIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            The icon displayed on the left side of the element.
+          </ng-container>
+          <demo-props-select #leftIcon$ [options]="iconOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="rightIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            The icon displayed on the right side of the element.
+          </ng-container>
+          <demo-props-select #rightIcon$ [options]="iconOptions"></demo-props-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-section-label size="medium">
@@ -283,12 +284,6 @@
           <demo-props-select #styles$ [options]="styleOptions" [isMultiSelectionEnabled]="true"></demo-props-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
-
-      <demo-example-viewer-section-label>Text inputs specific properties</demo-example-viewer-section-label>
-      <demo-example-viewer-property decoratorName="input" name="icon" type="string">
-        <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element.</ng-container>
-        <demo-props-select #icon$ [options]="iconOptions"></demo-props-select>
-      </demo-example-viewer-property>
 
       <demo-example-viewer-section-label>Date inputs specific properties</demo-example-viewer-section-label>
       <demo-example-viewer-property decoratorName="input" name="isFixedSize" type="boolean">

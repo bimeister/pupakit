@@ -10,7 +10,7 @@ import { FormControl } from '@angular/forms';
 })
 export class InputDemoExampleStylesComponent {
   public readonly defaultStyleControl: FormControl = new FormControl('Default');
-  public readonly ghostStyleControl: FormControl = new FormControl('Ghost');
+  public readonly inlineStyleControl: FormControl = new FormControl('Inline');
   public readonly boldStyleControl: FormControl = new FormControl('Bold');
-  public readonly ghostBoldStyleControl: FormControl = new FormControl('Ghost and bold');
+  public readonly inlineBoldStyleControl: FormControl = new FormControl('Inline and bold');
 }

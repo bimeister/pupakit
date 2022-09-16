@@ -8,9 +8,6 @@ import { ValueType } from '../../../../../internal/declarations/types/input-valu
 import { OnChangeCallback } from '../../../../../internal/declarations/types/on-change-callback.type';
 import { TimeDigitFormatPipe } from '../../../../../internal/pipes/time-format.pipe';
 
-const PLACEHOLDER: string = '00.00.0000';
-const MAX_LENGTH_INPUT_VALUE: number = PLACEHOLDER.length;
-
 const DATE_FORMAT: string = 'dd.MM.yyyy';
 
 @Component({
@@ -22,9 +19,12 @@ const DATE_FORMAT: string = 'dd.MM.yyyy';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDateComponent extends InputDateTimeBase {
+  public readonly dateMask: string = '00.00.0000';
+  public readonly maxLengthInputValue: number = this.dateMask.length;
+
   public readonly date$: Observable<Date> = this.value$.pipe(
     filterNotNil(),
-    filter((value: string) => isEmpty(value) || value.length === MAX_LENGTH_INPUT_VALUE),
+    filter((value: string) => isEmpty(value) || value.length === this.maxLengthInputValue),
     distinctUntilChanged(),
     map((value: string) => this.getParsedDate(value)),
     withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
@@ -33,16 +33,6 @@ export class InputDateComponent extends InputDateTimeBase {
         !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
     ),
     map(([date, _]: [Date, [boolean, Date]]) => date)
-  );
-
-  public readonly maxLengthInputValue: number = MAX_LENGTH_INPUT_VALUE;
-
-  public readonly placeholderPreviewLeft$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? '' : `${value}`))
-  );
-
-  public readonly placeholderPreviewRight$: Observable<string> = this.value$.pipe(
-    map((value: string) => (isEmpty(value) ? PLACEHOLDER : `${PLACEHOLDER.slice(value.length)}`))
   );
 
   public setValue(value: ValueType): void {
@@ -71,7 +61,7 @@ export class InputDateComponent extends InputDateTimeBase {
       return;
     }
 
-    if (serializedValue.length < MAX_LENGTH_INPUT_VALUE) {
+    if (serializedValue.length < this.maxLengthInputValue) {
       onChangeCallback(new Date(undefined));
       this.setValue(serializedValue);
       return;

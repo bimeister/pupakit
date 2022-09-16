@@ -1,1 +1,20 @@
-@use '../../input-demo' as *;
+@use 'mixins' as *;
+
+.controls-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 4rem;
+
+  @include lt-lg() {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include xs() {
+    grid-template-columns: 1fr;
+  }
+}
+
+.control-label {
+  margin-bottom: 2rem;
+  display: block;
+}

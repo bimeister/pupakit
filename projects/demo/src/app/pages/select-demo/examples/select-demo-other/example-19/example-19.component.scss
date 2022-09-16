@@ -1,0 +1,11 @@
+@use 'mixins' as *;
+
+:host {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 4rem;
+
+  @include xs() {
+    grid-template-columns: 1fr;
+  }
+}

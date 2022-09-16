@@ -8,6 +8,7 @@ import { SelectStateService } from '../../interfaces/select-state-service.interf
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
 import { SelectOuterValue } from '../../types/select-outer-value.type';
+import { SelectSize } from '../../types/select-size.type';
 
 @Directive()
 export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValueAccessor {
@@ -15,8 +16,9 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
   public abstract isUnselectionEnabled: boolean;
   public abstract isPatched: boolean;
   public abstract placeholder: string;
-  public abstract placeholderOnHover: boolean;
   public abstract withReset: boolean;
+  public abstract inline: boolean;
+  public abstract size: SelectSize;
 
   public invalidTooltipHideOnHover: boolean = false;
   public invalidTooltipDisabled: boolean = false;
@@ -55,8 +57,9 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
     this.processIsPatchedValueChange(changes?.isPatched);
     this.processPlaceholderValueChange(changes?.placeholder);
-    this.processPlaceholderOnHoverValueChange(changes?.placeholderOnHover);
     this.processWithResetChange(changes?.withReset);
+    this.processInlineChange(changes?.inline);
+    this.processSizeChange(changes?.size);
 
     this.processInvalidTooltipHideOnHoverChange(changes?.invalidTooltipHideOnHover);
     this.processInvalidTooltipDisabledChange(changes?.invalidTooltipDisabled);
@@ -125,16 +128,6 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     this.selectStateService.setPlaceholderState(updatedState);
   }
 
-  private processPlaceholderOnHoverValueChange(change: ComponentChange<this, boolean>): void {
-    const updatedState: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedState)) {
-      return;
-    }
-
-    this.selectStateService.setPlaceholderOnHoverState(updatedState);
-  }
-
   private processWithResetChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
@@ -142,6 +135,26 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
       return;
     }
     this.selectStateService.setWithResetState(updatedValue);
+  }
+
+  private processInlineChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setInlineState(updatedValue);
+  }
+
+  private processSizeChange(change: ComponentChange<this, SelectSize>): void {
+    const updatedValue: SelectSize | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setSizeState(updatedValue);
   }
 
   private processInvalidTooltipHideOnHoverChange(change: ComponentChange<this, boolean>): void {

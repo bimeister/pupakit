@@ -11,6 +11,7 @@ import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
 import { take } from 'rxjs/operators';
 import { SelectBase } from '../../../../../internal/declarations/classes/abstract/select-base.abstract';
+import { SelectSize } from '../../../../../internal/declarations/types/select-size.type';
 import { SelectStateService } from '../../services/select-state.service';
 
 @Component({
@@ -26,9 +27,10 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isUnselectionEnabled: boolean = false;
   @Input() public isPatched: boolean = false;
   @Input() public placeholder: Nullable<string> = null;
-  @Input() public placeholderOnHover: boolean = true;
 
   @Input() public withReset: boolean = false;
+  @Input() public inline: boolean = false;
+  @Input() public size: SelectSize = 'medium';
 
   @Input() public invalidTooltipHideOnHover: boolean = false;
   @Input() public invalidTooltipDisabled: boolean = false;

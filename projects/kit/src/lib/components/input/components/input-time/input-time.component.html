@@ -1,45 +1,40 @@
-<input
-  class="input"
-  [class.on-hover]="placeholderOnHover$ | async"
-  [ngClass]="resultClassList$ | async"
-  type="text"
-  #inputElement
-  [placeholder]="'00:00'"
-  [style.paddingRight.px]="rightPaddingPx$ | async"
-  [attr.disabled]="(isDisabled$ | async) ? true : null"
-  (input)="updateValue(inputElement.value)"
-  (focus)="emitFocusEvent($event)"
-  (blur)="emitBlurEvent($event)"
-  [autocomplete]="autocomplete ? 'on' : 'off'"
-  [value]="value$ | async"
-  [mask]="'00:00'"
-  [maxLength]="maxLengthInputValue"
-  [ngModel]="value$ | async"
-/>
+<div class="input-wrapper" [ngClass]="resultClassList$ | async">
+  <pupa-icon *ngIf="leftIcon$ | async as leftIcon" class="input-icon input-icon_custom" [name]="leftIcon"></pupa-icon>
 
-<div class="input__icons-list" [ngClass]="size$ | async">
-  <pupa-button-icon
-    *ngIf="isVisibleReset$ | async"
-    class="input__icon input__icon-reset"
-    icon="app-cross-circle"
-    size="s"
-    tabIndex="-1"
-    kind="secondary"
-    (click)="reset()"
-  >
-  </pupa-button-icon>
-  <pupa-button-icon
+  <input
+    class="input"
+    type="text"
+    #inputElement
+    [placeholder]="timeMask"
+    [attr.disabled]="(isDisabled$ | async) ? true : null"
+    (input)="updateValue(inputElement.value)"
+    (focus)="emitFocusEvent($event)"
+    (blur)="emitBlurEvent($event)"
+    [autocomplete]="autocomplete ? 'on' : 'off'"
+    [value]="value$ | async"
+    [mask]="timeMask"
+    [maxLength]="maxLengthInputValue"
+    [ngModel]="value$ | async"
+  />
+
+  <pupa-icon
+    *ngIf="rightIcon$ | async as rightIcon"
+    class="input-icon input-icon_custom"
+    [name]="rightIcon"
+  ></pupa-icon>
+
+  <pupa-icon *ngIf="isVisibleReset$ | async" class="input-icon input-icon_reset" name="m-abort" (click)="reset()">
+  </pupa-icon>
+
+  <pupa-icon
     *ngIf="isInvalid$ | async"
-    class="input__icon input__icon-invalid"
-    icon="app-info"
-    kind="secondary"
-    size="s"
-    tabIndex="-1"
+    class="input-icon input-icon_invalid"
+    name="m-error"
     [pupaTooltip]="invalidTooltip"
     [tooltipHideOnHover]="invalidTooltipHideOnHover"
     [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
     [tooltipContentTemplate]="invalidTooltipContentTemplate"
     (click)="inputElement.focus()"
   >
-  </pupa-button-icon>
+  </pupa-icon>
 </div>

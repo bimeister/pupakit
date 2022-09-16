@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { NgxMaskModule } from 'ngx-mask';
-import { appCalendarIcon } from '../../../internal/constants/icons/app-calendar.const';
-import { appCrossCircleIcon } from '../../../internal/constants/icons/app-cross-circle-icon.const';
-import { appEyeOffIcon } from '../../../internal/constants/icons/app-eye-off-icon.const';
-import { appEyeOnIcon } from '../../../internal/constants/icons/app-eye-on-icon.const';
-import { appInfoIcon } from '../../../internal/constants/icons/app-info-icon.const';
+import { mAbortIcon } from '../../../internal/constants/icons/m-abort-icon.const';
+import { mCalendarIcon } from '../../../internal/constants/icons/m-calendar-icon.const';
+import { mClockIcon } from '../../../internal/constants/icons/m-clock-icon.const';
+import { mErrorIcon } from '../../../internal/constants/icons/m-error-icon.const';
+import { mEyeClosedIcon } from '../../../internal/constants/icons/m-eye-closed-icon.const';
+import { mEyeOpenIcon } from '../../../internal/constants/icons/m-eye-open-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
-import { ButtonsModule } from '../buttons/buttons.module';
 import { DateTimePickerModule } from '../date-time-picker/date-time-picker.module';
 import { DroppableModule } from '../droppable/droppable.module';
 import { IconModule } from '../icon/icon.module';
@@ -41,9 +41,8 @@ const DECLARATIONS: any[] = [...EXPORTS];
     SharedModule,
     DateTimePickerModule,
     DroppableModule,
-    ButtonsModule,
     TooltipModule,
-    IconModule.forFeature([appCalendarIcon, appEyeOnIcon, appEyeOffIcon, appCrossCircleIcon, appInfoIcon]),
+    IconModule.forFeature([mAbortIcon, mCalendarIcon, mErrorIcon, mEyeClosedIcon, mEyeOpenIcon, mClockIcon]),
     NgxMaskModule.forRoot(),
   ],
   exports: [...EXPORTS],

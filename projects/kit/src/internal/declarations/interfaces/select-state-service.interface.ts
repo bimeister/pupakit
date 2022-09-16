@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { OnChangeCallback } from '../types/on-change-callback.type';
 import { OnTouchedCallback } from '../types/on-touched-callback.type';
 import { SelectOuterValue } from '../types/select-outer-value.type';
+import { SelectSize } from '../types/select-size.type';
 
 export interface SelectStateService<T> {
   readonly currentValue$: Observable<T[]>;
@@ -24,8 +25,9 @@ export interface SelectStateService<T> {
   readonly isFilled$: BehaviorSubject<boolean>;
 
   readonly placeholder$: BehaviorSubject<Nullable<string>>;
-  readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean>;
   readonly withReset$: BehaviorSubject<boolean>;
+  readonly inline$: BehaviorSubject<boolean>;
+  readonly size$: BehaviorSubject<SelectSize>;
 
   readonly isTriggerTouched$: BehaviorSubject<boolean>;
 
@@ -51,8 +53,9 @@ export interface SelectStateService<T> {
   setUnselectionState(isEnabled: boolean): void;
   setIsPatchedState(isPatched: boolean): void;
   setPlaceholderState(placeholder: string): void;
-  setPlaceholderOnHoverState(placeholderOnHover: boolean): void;
   setWithResetState(withReset: boolean): void;
+  setInlineState(inline: boolean): void;
+  setSizeState(size: SelectSize): void;
   setDisabledState(isDisabled: boolean): void;
 
   setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void;

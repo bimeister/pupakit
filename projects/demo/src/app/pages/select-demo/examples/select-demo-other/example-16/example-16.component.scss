@@ -1,4 +1,3 @@
-@use 'mixins' as *;
 @use 'functions' as *;
 
 :host {
@@ -34,16 +33,16 @@
   }
 
   &__name {
-    @include ellipsis-text-overflow;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   &__login {
-    color: color(neutral-300);
-    @include ellipsis-text-overflow;
-
-    @include dark-theme-class-parent() {
-      color: color(neutral-9);
-    }
+    color: semantic-color(text-secondary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 

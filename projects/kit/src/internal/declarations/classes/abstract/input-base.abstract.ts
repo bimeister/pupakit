@@ -11,20 +11,13 @@ import {
 } from '@angular/core';
 import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map, withLatestFrom } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { isDate } from '../../../helpers/is-date.helper';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { InputSize } from '../../types/input-size.type';
 import { InputStyleCustomization } from '../../types/input-style-customization.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
-
-const SIZES_LIST: [InputSize, number][] = [
-  ['small', 12],
-  ['medium', 16],
-  ['large', 20],
-];
-const BUTTON_WIDTH_PX: number = 24;
 
 @Directive()
 export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
@@ -44,9 +37,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  @Input() public placeholderOnHover: boolean = true;
-  public readonly placeholderOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-
   @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -61,8 +51,14 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     InputStyleCustomization[]
   >([]);
 
-  @Output() public focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
-  @Output() public blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Input() public leftIcon: string = '';
+  public readonly leftIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  @Input() public rightIcon: string = '';
+  public readonly rightIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
+  @Output() public readonly focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
+  @Output() public readonly blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,
@@ -87,7 +83,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `input_${innerProperty}`)
+        .map((innerProperty: string) => `input-wrapper_${innerProperty}`)
     )
   );
 
@@ -99,8 +95,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
   );
 
-  protected readonly sizeMap: Map<InputSize, number> = new Map(SIZES_LIST);
-
   protected processIsPatchedChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
@@ -109,18 +103,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.isPatched$.next(updatedValue);
-  }
-
-  protected getRightPadding(flagsList: Observable<boolean>[]): Observable<number> {
-    return combineLatest(flagsList).pipe(
-      withLatestFrom(this.size$.pipe(map((inputSize: InputSize) => this.sizeMap.get(inputSize)))),
-      map(([buttonsStatesList, initPadding]: [boolean[], number]) =>
-        buttonsStatesList.reduce(
-          (width: number, state: boolean) => (state ? width + BUTTON_WIDTH_PX : width),
-          initPadding
-        )
-      )
-    );
   }
 
   protected processWithResetChange(change: ComponentChange<this, boolean>): void {
@@ -139,7 +121,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
     this.processStylesChange(changes?.customStyles);
-    this.processPlaceholderOnHoverValueChange(changes?.placeholderOnHover);
+    this.processLeftIconChange(changes?.leftIcon);
+    this.processRightIconChange(changes?.rightIcon);
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -201,13 +184,23 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.customStyles$.next(updatedValue);
   }
 
-  private processPlaceholderOnHoverValueChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean = change?.currentValue;
+  private processLeftIconChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
     }
 
-    this.placeholderOnHover$.next(updatedValue);
+    this.leftIcon$.next(updatedValue);
+  }
+
+  private processRightIconChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.rightIcon$.next(updatedValue);
   }
 }

@@ -4,6 +4,7 @@ import { getUuid } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { FlatTreeItem } from '../../../../../kit/src/internal/declarations/classes/flat-tree-item.class';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'select-demo/examples';
 
@@ -25,6 +26,18 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
   private readonly disabled$: Observable<boolean> = this.isDisabledControl.statusChanges.pipe(
     map(() => this.isDisabledControl.disabled)
   );
+
+  public readonly sizeOptions: PropsOption[] = [
+    {
+      caption: 'Large',
+      value: 'large',
+    },
+    {
+      caption: 'Medium',
+      value: 'medium',
+      isDefault: true,
+    },
+  ];
 
   private readonly subscription: Subscription = new Subscription();
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -151,6 +164,18 @@ export class SelectDemoComponent implements OnInit, OnDestroy {
     HTML: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.scss`,
     TS: `${BASE_REQUEST_PATH}/select-demo-extra-cases/example-18/example-18.component.ts`,
+  };
+
+  public readonly example19Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-other/example-19/example-19.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-19/example-19.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-19/example-19.component.ts`,
+  };
+
+  public readonly example20Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/select-demo-other/example-20/example-20.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/select-demo-other/example-20/example-20.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/select-demo-other/example-20/example-20.component.ts`,
   };
 
   public ngOnInit(): void {

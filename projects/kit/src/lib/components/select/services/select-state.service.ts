@@ -10,6 +10,7 @@ import { SelectStateService as SelectStateServiceInterface } from '../../../../i
 import { OnChangeCallback } from '../../../../internal/declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../internal/declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../../internal/declarations/types/select-outer-value.type';
+import { SelectSize } from '../../../../internal/declarations/types/select-size.type';
 import { isFormControlValidStatus } from '../../../../internal/functions/is-form-control-valid-status.function';
 
 /** @dynamic */
@@ -50,6 +51,8 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   public readonly isFilled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly inline$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly size$: BehaviorSubject<SelectSize> = new BehaviorSubject<SelectSize>('medium');
 
   public readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -61,8 +64,6 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   >(null);
 
   public readonly placeholder$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
-
-  public readonly placeholderIsVisibleOnHover$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   private readonly onChangeCallback$: BehaviorSubject<OnChangeCallback<SelectOuterValue<T>>> = new BehaviorSubject<
     OnChangeCallback<SelectOuterValue<T>>
@@ -154,12 +155,16 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     this.placeholder$.next(placeholder);
   }
 
-  public setPlaceholderOnHoverState(placeholderOnHover: boolean): void {
-    this.placeholderIsVisibleOnHover$.next(placeholderOnHover);
-  }
-
   public setWithResetState(withReset: boolean): void {
     this.withReset$.next(withReset);
+  }
+
+  public setInlineState(inline: boolean): void {
+    this.inline$.next(inline);
+  }
+
+  public setSizeState(size: SelectSize): void {
+    this.size$.next(size);
   }
 
   public setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void {
