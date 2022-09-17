@@ -51,7 +51,7 @@ export class ButtonComponent implements OnChanges {
   ];
 
   public readonly loadingSizePx$: Observable<string> = this.size$.pipe(
-    map((size: ButtonSize) => (size === 'xs' ? '12px' : '16px'))
+    map((size: ButtonSize) => (size === 's' ? '12px' : '16px'))
   );
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
