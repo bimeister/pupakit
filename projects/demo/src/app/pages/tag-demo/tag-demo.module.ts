@@ -11,6 +11,7 @@ import { TagExample5Component } from './examples/example-5/example-5.component';
 import { TagExample6Component } from './examples/example-6/example-6.component';
 import { TagExample7Component } from './examples/example-7/example-7.component';
 import { TagExample8Component } from './examples/example-8/example-8.component';
+import { TagExample9Component } from './examples/example-9/example-9.component';
 
 const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TagExample1Component,
@@ -21,6 +22,7 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TagExample6Component,
   TagExample7Component,
   TagExample8Component,
+  TagExample9Component,
 ];
 
 @NgModule({

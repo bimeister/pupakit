@@ -5,6 +5,7 @@ import { IconModule } from '../icon/icon.module';
 import { TagDeleteButtonComponent } from './components/pupa-tag-delete-button/pupa-tag-delete-button.component';
 import { TagTextComponent } from './components/pupa-tag-text/pupa-tag-text.component';
 import { TagActionButtonComponent } from './components/tag-action-button/tag-action-button.component';
+import { TagInlineComponent } from './components/tag-inline/tag-inline.component';
 import { TagComponent } from './components/tag/tag.component';
 import { TagActionButtonTemplateDirective } from './directives/tag-action-button-template.directive';
 
@@ -13,6 +14,7 @@ const COMPONENTS: Type<unknown>[] = [
   TagDeleteButtonComponent,
   TagTextComponent,
   TagActionButtonComponent,
+  TagInlineComponent,
 ];
 
 const DIRECTIVES: Type<unknown>[] = [TagActionButtonTemplateDirective];

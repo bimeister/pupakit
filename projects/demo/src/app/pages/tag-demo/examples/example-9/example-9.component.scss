@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+:host {
+  @include flex-container(column);
+  gap: 4rem;
+}

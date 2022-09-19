@@ -66,4 +66,9 @@ export class TagDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-8/example-8.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-8/example-8.component.scss`,
   };
+
+  public readonly example9Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-9/example-9.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-9/example-9.component.scss`,
+  };
 }
