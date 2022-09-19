@@ -1,54 +1,45 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use './tag-preset.styles.scss' as *;
 
-@mixin tag-preset {
-  all: unset;
-  @include flex-container(row, center, center);
-  @include no-tap-highlight();
-  @include font-preset-h6();
-  @include transition(background);
-}
-
-@mixin clickable-color-state($state) {
-  @include hover() {
-    background-color: semantic-color(kind-#{$state}-hover);
+.tag {
+  &:not(:only-child) {
+    border-radius: 1rem 0 0 1rem;
   }
 
-  &:active {
-    background-color: semantic-color(kind-#{$state}-active);
-  }
+  &:not(.tag_disabled) {
+    &.tag_clickable {
+      cursor: pointer;
+    }
 
-  @content;
-}
+    &:focus-visible {
+      box-shadow: inset 0 0 0 0.5rem semantic-color(lines-accent);
+    }
 
-@mixin tag-color-state($state) {
-  background-color: semantic-color(kind-#{$state}-normal);
+    &.tag_danger {
+      @include tag-color-state('danger');
+    }
 
-  &.tag_clickable {
-    @include clickable-color-state($state);
-  }
-}
+    &.tag_opacity {
+      @include tag-color-state('opacity');
 
-@mixin action-button-color-state($state) {
-  background-color: semantic-color(kind-#{$state}-normal);
-  border-left: 1px solid semantic-color(lines-opacity);
+      color: semantic-color(text-primary);
+    }
 
-  @include host-selector-dark-theme {
-    border-left-color: semantic-color(kind-#{$state}-active);
-  }
+    &.tag_primary {
+      @include tag-color-state('primary');
+    }
 
-  @include clickable-color-state($state) {
-    &.active {
-      background-color: semantic-color(kind-#{$state}-active);
+    &.tag_success {
+      @include tag-color-state('success');
+    }
+
+    &.tag_warning {
+      @include tag-color-state('warning');
     }
   }
-}
 
-@mixin disabled-color-state {
-  cursor: not-allowed;
-
-  background-color: semantic-color(kind-opacity-normal);
-  color: semantic-color(text-disabled);
-
-  @content;
+  &.tag_disabled {
+    @include disabled-color-state();
+  }
 }

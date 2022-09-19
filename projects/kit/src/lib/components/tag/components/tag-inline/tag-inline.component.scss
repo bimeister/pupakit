@@ -5,25 +5,16 @@
 
 :host {
   outline: none;
-}
-
-.tag-wrapper {
-  @include flex-container();
-
-  width: 100%;
+  display: inline;
 }
 
 .tag {
-  @include tag-preset();
-
-  gap: 1rem;
-  box-sizing: border-box;
-  margin: 0;
+  @include font-preset-h6();
+  display: inline;
   border-radius: 1rem;
   padding: 0.5rem 1.5rem;
   min-height: 5rem;
-  width: inherit;
-  max-width: inherit;
-  overflow: hidden;
   color: semantic-color(text-inverse);
+  line-height: 6rem;
+  vertical-align: middle;
 }

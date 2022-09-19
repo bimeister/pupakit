@@ -5,9 +5,19 @@
     <p><pupa-code-inline>pupa-tag</pupa-code-inline> is a configurable tag component.</p>
     <p>There are range of components that are used as content to build and configure the tag itself:</p>
     <ul>
-      <li><pupa-code-inline>pupa-tag-text</pupa-code-inline> - a wrapper to truncate long text</li>
-      <li><pupa-code-inline>pupa-tag-action-button</pupa-code-inline> - customized button at left</li>
+      <li><pupa-code-inline>pupa-tag-text</pupa-code-inline> - a wrapper to truncate long text.</li>
+      <li><pupa-code-inline>pupa-tag-action-button</pupa-code-inline> - customized button at left.</li>
     </ul>
+    <p><pupa-code-inline>pupa-tag-inline</pupa-code-inline> - the tag component that makes the content inline.</p>
+    <ul>
+      <li>
+        <pupa-code-inline>&lt;div pupaTagInline&gt;</pupa-code-inline> - you can also use component as tag attribute.
+      </li>
+    </ul>
+    <pupa-info-block variant="warning">
+      The content inside <pupa-code-inline>pupa-tag-inline</pupa-code-inline> can be anything, but we recommend using it
+      with text.
+    </pupa-info-block>
 
     <h3 demoAnchor>Basic tags</h3>
     <pupa-code-container [content]="example1Content">
@@ -50,6 +60,11 @@
     <pupa-code-container [content]="example8Content">
       <demo-tag-example-8 *pupaCodeContainerPreviewTemplate></demo-tag-example-8>
     </pupa-code-container>
+
+    <h3 demoAnchor>Tag inline</h3>
+    <pupa-code-container [content]="example9Content">
+      <demo-tag-example-9 *pupaCodeContainerPreviewTemplate></demo-tag-example-9>
+    </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer class="tag-demo">
@@ -61,6 +76,13 @@
               <pupa-icon [name]="'app-cube'"></pupa-icon>
             </pupa-tag-action-button>
           </pupa-tag>
+        </div>
+
+        <div class="tag-demo__wrapper">
+          <pupa-tag-inline [kind]="kind$ | async" [disabled]="disabled$ | async" [clickable]="clickable$ | async">
+            Inline tag content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis in adipisci alias sit
+            cupiditate quas tempora reprehenderit ut beatae reiciendis.
+          </pupa-tag-inline>
         </div>
       </demo-example-viewer-content>
 

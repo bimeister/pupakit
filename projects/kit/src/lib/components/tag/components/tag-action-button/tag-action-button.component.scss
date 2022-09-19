@@ -1,6 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
-@use '../../tag.styles.scss' as *;
+@use '../../tag-preset.styles.scss' as *;
 
 .action-button {
   @include tag-preset();
