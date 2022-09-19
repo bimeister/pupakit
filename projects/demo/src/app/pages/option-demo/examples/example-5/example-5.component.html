@@ -1,0 +1,23 @@
+<div class="content">
+  <pupa-option [hasCheckbox]="true">
+    <pupa-option-icon name="app-folder"></pupa-option-icon>
+    <pupa-avatar size="small"></pupa-avatar>
+    <div class="title">option title</div>
+
+    <ng-container *pupaOptionActionsRight>
+      <pupa-counter [count]="99" color="primary"></pupa-counter>
+      <pupa-button size="small" (click)="$event.stopPropagation()">button</pupa-button>
+    </ng-container>
+  </pupa-option>
+
+  <pupa-option [hasCheckbox]="true" [disabled]="true" #disabledOption>
+    <pupa-option-icon name="app-folder"></pupa-option-icon>
+    <pupa-avatar size="small"></pupa-avatar>
+    <div class="title">option title</div>
+
+    <ng-container *pupaOptionActionsRight>
+      <pupa-counter [count]="99" color="primary"></pupa-counter>
+      <pupa-button size="small" [disabled]="disabled$ | async" (click)="$event.stopPropagation()">button</pupa-button>
+    </ng-container>
+  </pupa-option>
+</div>

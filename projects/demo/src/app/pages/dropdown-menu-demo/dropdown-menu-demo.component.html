@@ -15,51 +15,23 @@
 
         <pupa-dropdown-menu-content #dropdownContent1 [horizontalPosition]="horizontalPosition$ | async">
           <pupa-dropdown-menu-item>
-            <pupa-dropdown-menu-item-icon name="add-circle"></pupa-dropdown-menu-item-icon>
+            <pupa-option-icon name="add-circle"></pupa-option-icon>
             Default item
           </pupa-dropdown-menu-item>
           <pupa-dropdown-menu-item [active]="true">
-            <pupa-dropdown-menu-item-icon name="add"></pupa-dropdown-menu-item-icon>
+            <pupa-option-icon name="add"></pupa-option-icon>
             Active item
           </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [plain]="true">
-            <pupa-dropdown-menu-item-icon name="md-lock"></pupa-dropdown-menu-item-icon>
-            Plain item
-          </pupa-dropdown-menu-item>
           <pupa-dropdown-menu-item [disabled]="true">
-            <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+            <pupa-option-icon name="close-circle"></pupa-option-icon>
             Disabled item
           </pupa-dropdown-menu-item>
           <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
+          <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
+            <pupa-option-title>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolore iste non nostrum numquam quasi
+              repellendus sit? Ducimus, molestiae, voluptatum.
+            </pupa-option-title>
           </pupa-dropdown-menu-item>
         </pupa-dropdown-menu-content>
 
@@ -76,29 +48,12 @@
 
         <pupa-dropdown-menu-content #dropdownContent2 [horizontalPosition]="horizontalPosition$ | async">
           <pupa-dropdown-menu-item [disabled]="true">
-            <pupa-dropdown-menu-item-icon name="close-circle"></pupa-dropdown-menu-item-icon>
+            <pupa-option-icon name="close-circle"></pupa-option-icon>
             Disabled item
           </pupa-dropdown-menu-item>
           <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item>
-            <div class="text">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            </div>
+          <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
+            <div class="text">option {{ index }}</div>
           </pupa-dropdown-menu-item>
         </pupa-dropdown-menu-content>
       </div>

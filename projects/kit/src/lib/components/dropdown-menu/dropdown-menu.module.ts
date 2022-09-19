@@ -6,11 +6,12 @@ import { IconModule } from '../icon/icon.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { DropdownMenuContainerComponent } from './components/dropdown-menu-container/dropdown-menu-container.component';
 import { DropdownMenuContentComponent } from './components/dropdown-menu-content/dropdown-menu-content.component';
-import { DropdownMenuItemIconComponent } from './components/dropdown-menu-item-icon/dropdown-menu-item-icon.component';
 import { DropdownMenuItemComponent } from './components/dropdown-menu-item/dropdown-menu-item.component';
 import { DropdownMenuSeparatorComponent } from './components/dropdown-menu-separator/dropdown-menu-separator.component';
 import { DropdownMenuDirective } from './directives/dropdown-menu.directive';
 import { DropdownMenuService } from './services/dropdown-menu.service';
+import { OptionModule } from '../option/option.module';
+import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 
 @NgModule({
   declarations: [
@@ -18,15 +19,13 @@ import { DropdownMenuService } from './services/dropdown-menu.service';
     DropdownMenuContentComponent,
     DropdownMenuContainerComponent,
     DropdownMenuItemComponent,
-    DropdownMenuItemIconComponent,
     DropdownMenuSeparatorComponent,
   ],
-  imports: [SharedModule, IconModule.forFeature(), OverlayModule, ScrollableModule],
+  imports: [SharedModule, IconModule.forFeature(), OverlayModule, ScrollableModule, OptionModule, ThemeWrapperModule],
   exports: [
     DropdownMenuDirective,
     DropdownMenuContentComponent,
     DropdownMenuItemComponent,
-    DropdownMenuItemIconComponent,
     DropdownMenuSeparatorComponent,
   ],
   providers: [

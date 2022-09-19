@@ -62,9 +62,7 @@
           ButtonMulti
         </pupa-button-multi>
         <pupa-dropdown-menu-content #dropdownContent [horizontalPosition]="horizontalPosition$ | async">
-          <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async" [plain]="optionPlain$ | async">
-            option
-          </pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async"> option </pupa-dropdown-menu-item>
         </pupa-dropdown-menu-content>
       </demo-example-viewer-content>
 
@@ -165,13 +163,6 @@
             >Whether the dropdown option is in disabled state.</ng-container
           >
           <demo-props-switcher #optionDisabled$></demo-props-switcher>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="plain" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription
-            >Whether the dropdown option is in plain state.</ng-container
-          >
-          <demo-props-switcher #optionPlain$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

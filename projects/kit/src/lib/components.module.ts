@@ -51,6 +51,7 @@ import { TooltipModule } from './components/tooltip/tooltip.module';
 import { TreeLayoutModule } from './components/tree-layout/tree-layout.module';
 import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
+import { OptionModule } from './components/option/option.module';
 import { SectionModule } from './components/section/section.module';
 
 const EXPORTS: any[] = [
@@ -105,6 +106,7 @@ const EXPORTS: any[] = [
   TreeLayoutModule,
   IconHolderModule,
   InfinityScrollerModule,
+  OptionModule,
 ];
 
 @NgModule({

@@ -19,6 +19,7 @@ import { PropsSelectComponent } from './components/props-select/props-select.com
 import { PropsSwitcherComponent } from './components/props-switcher/props-switcher.component';
 import { ExampleViewerConfigItemDescriptionDirective } from './directives/example-viewer-config-item-description.directive';
 import { ExampleViewerPropertyDescriptionDirective } from './directives/example-viewer-property-description.directive';
+import { OptionModule } from '../../../../../../kit/src/lib/components/option/option.module';
 
 const EXPORTS: Type<unknown>[] = [
   ExampleViewerContentComponent,
@@ -43,6 +44,7 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   SwitcherModule,
   ReactiveFormsModule,
   CodeModule,
+  OptionModule,
   AnchorModule,
 ];
 

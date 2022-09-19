@@ -18,6 +18,7 @@ import { SelectExample17Component } from './examples/select-demo-other/example-1
 import { SelectExample11Component } from './examples/select-demo-structure-composition/example-11/example-11.component';
 import { SelectDemoRoutingModule } from './select-demo-routing.module';
 import { SelectDemoComponent } from './select-demo.component';
+import { OptionModule } from '@kit/lib/components/option/option.module';
 
 const EXAMPLES: Type<unknown>[] = [
   SelectExample1Component,
@@ -43,6 +44,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [DemoSharedModule, SelectDemoRoutingModule],
+  imports: [DemoSharedModule, SelectDemoRoutingModule, OptionModule],
 })
 export class SelectDemoModule {}

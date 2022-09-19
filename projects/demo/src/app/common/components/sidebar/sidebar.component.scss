@@ -77,55 +77,16 @@
 
   .subheader {
     display: inline-block;
-    margin-bottom: 2rem;
-
     @include font-preset-h3;
-
-    @include grid-container-offset('padding-left');
-    @include grid-container-offset('padding-right');
 
     color: semantic-color(text-primary);
 
-    margin-top: 6rem;
+    margin: 6rem 0 2rem 5rem;
   }
 
   .side-nav-item {
-    display: block;
-    padding: 3rem 0;
     text-decoration: none;
-    box-sizing: border-box;
-    position: relative;
     @include grid-container-offset('padding-left');
     @include grid-container-offset('padding-right');
-
-    @include font-preset-caption-m;
-
-    color: semantic-color(text-primary);
-
-    transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
-      background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      content: '';
-      width: 0.5rem;
-      pointer-events: none;
-      background-color: semantic-color(kind-primary-normal);
-      opacity: 0;
-    }
-
-    &:hover {
-      background: semantic-color(surface-action);
-    }
-
-    &.active {
-      background: semantic-color(surface-action);
-      &::before {
-        opacity: 1;
-      }
-    }
   }
 }

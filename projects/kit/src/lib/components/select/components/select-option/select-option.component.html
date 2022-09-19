@@ -1,9 +1,10 @@
-<div
-  class="option"
-  [class.option_picked]="isPicked$ | async"
-  [class.option_disabled]="isDisabled$ | async"
-  [style.height.px]="heightPx"
-  (click)="processClick()"
->
-  <ng-content></ng-content>
+<div [style.height.px]="heightPx" (click)="processClick()">
+  <pupa-option
+    [active]="isPicked$ | async"
+    [disabled]="isDisabled$ | async"
+    [hasCheckbox]="hasCheckbox"
+    [forceResetHover]="isOpened$ | async"
+  >
+    <ng-content></ng-content>
+  </pupa-option>
 </div>

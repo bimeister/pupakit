@@ -10,12 +10,10 @@
 
   <pupa-select-dropdown>
     <pupa-select-options-container>
-      <ng-container *ngFor="let option of options$ | async">
-        <pupa-select-option [value]="option.value">
-          <pupa-select-option-icon name="app-cube"></pupa-select-option-icon>
-          {{ option.caption }}
-        </pupa-select-option>
-      </ng-container>
+      <pupa-select-option *ngFor="let option of options$ | async" [value]="option.value">
+        <pupa-icon name="app-cube"></pupa-icon>
+        {{ option.caption }}
+      </pupa-select-option>
     </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>

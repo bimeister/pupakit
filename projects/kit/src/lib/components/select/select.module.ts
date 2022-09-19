@@ -12,7 +12,6 @@ import { TooltipModule } from '../tooltip/tooltip.module';
 import { SelectDropdownFooterComponent } from './components/select-dropdown-footer/select-dropdown-footer.component';
 import { SelectDropdownHeaderComponent } from './components/select-dropdown-header/select-dropdown-header.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
-import { SelectOptionCheckboxComponent } from './components/select-option-checkbox/select-option-checkbox.component';
 import { SelectOptionIconComponent } from './components/select-option-icon/select-option-icon.component';
 import { SelectOptionComponent } from './components/select-option/select-option.component';
 import { SelectOptionsContainerComponent } from './components/select-options-container/select-options-container.component';
@@ -25,6 +24,7 @@ import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigg
 import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 import { SelectTriggerTagComponent } from './components/select-trigger-tag/select-trigger-tag.component';
+import { OptionModule } from '../option/option.module';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -37,7 +37,6 @@ const COMPONENTS: Type<unknown>[] = [
 
   SelectOptionsContainerComponent,
   SelectOptionComponent,
-  SelectOptionCheckboxComponent,
   SelectOptionIconComponent,
 
   SelectDropdownComponent,
@@ -62,6 +61,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     ButtonModule,
     IconModule.forFeature([appChevronDownIcon, appCrossCircleIcon, appInfoIcon]),
     TreeLayoutModule,
+    OptionModule,
   ],
   exports: [...EXPORTS],
 })

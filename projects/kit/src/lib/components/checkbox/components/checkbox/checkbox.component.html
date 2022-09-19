@@ -2,6 +2,7 @@
   [ngTemplateOutlet]="template"
   [ngTemplateOutletContext]="{
     disabled: disabled$ | async,
+    hovered: hovered$ | async,
     withLabel: withLabel$ | async,
     value: value$ | async,
     indeterminate: indeterminate$ | async,
@@ -40,6 +41,7 @@
       [class.checkbox__marker_checked]="value || indeterminate"
       [class.checkbox__marker_disabled]="disabled"
       [class.checkbox__marker_error]="error"
+      [class.checkbox__marker_hovered]="hovered"
       [tabindex]="checkboxMarkerTabindex"
     >
       <pupa-icon

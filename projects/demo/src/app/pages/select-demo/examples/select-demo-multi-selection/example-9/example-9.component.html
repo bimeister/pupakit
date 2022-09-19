@@ -1,22 +1,10 @@
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="true" [formControl]="control">
-  <pupa-select-trigger-tags class="trigger" [tags]="control.value"> </pupa-select-trigger-tags>
+  <pupa-select-trigger-tags class="trigger" [tags]="control.value"></pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
     <pupa-select-options-container>
-      <pupa-select-option [value]="'Option 1'">
-        <pupa-tag [clickable]="true">Option 1</pupa-tag>
-      </pupa-select-option>
-      <pupa-select-option [value]="'Option 2'">
-        <pupa-tag [clickable]="true">Option 2</pupa-tag>
-      </pupa-select-option>
-      <pupa-select-option [value]="'Option 3'">
-        <pupa-tag [clickable]="true">Option 3</pupa-tag>
-      </pupa-select-option>
-      <pupa-select-option [value]="'Option 4'">
-        <pupa-tag [clickable]="true">Option 4</pupa-tag>
-      </pupa-select-option>
-      <pupa-select-option [value]="'Option 5'">
-        <pupa-tag [clickable]="true">Option 5</pupa-tag>
+      <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" value="Option {{ index }}">
+        <pupa-tag [clickable]="true">Option {{ index }}</pupa-tag>
       </pupa-select-option>
     </pupa-select-options-container>
   </pupa-select-dropdown>

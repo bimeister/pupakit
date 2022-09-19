@@ -39,6 +39,7 @@
 
   &_disabled {
     cursor: not-allowed;
+
     &:focus-visible {
       outline: none;
     }
@@ -62,9 +63,11 @@
 
     :not(.checkbox__marker:focus-visible):not(.checkbox__marker_disabled).checkbox__marker_error {
       background: color(danger-150);
+
       &:not(.checkbox__marker_checked) {
         border: 1px solid color(danger-500);
       }
+
       &.checkbox__marker_checked {
         background: color(danger-400);
         border: none;
@@ -111,6 +114,7 @@
 
   &_error {
     border: 1px solid color(danger-500);
+
     &.checkbox__marker_checked {
       background: color(danger-500);
     }
@@ -136,6 +140,19 @@
 
   &_disabled:focus-visible {
     outline: none;
+  }
+
+  &_hovered:not(&_disabled) {
+    background: color(primary-500, alpha-7);
+    border: 1px solid color(primary-400);
+
+    &.checkbox__marker_checked {
+      background: color(primary-400);
+      @include host-selector-dark-theme() {
+        background: color(primary-400);
+      }
+      border: none;
+    }
   }
 }
 
