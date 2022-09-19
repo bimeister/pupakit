@@ -6,11 +6,13 @@ import { InfinityScrollerEvents } from '@kit/internal/declarations/events/infini
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { delay, map } from 'rxjs/operators';
 
+type UserId = `userId${number}`;
+
 interface Item {
   id: Uuid;
   message: string;
   user: {
-    id: number;
+    id: UserId;
     name: string;
   };
 }
@@ -56,10 +58,10 @@ export class InfinityScrollerExample2Component implements OnInit, OnDestroy {
 
   private readonly subscription: Subscription = new Subscription();
 
-  public readonly currentUserId: number = 0;
-  private readonly userNameById: Record<number, string> = {
-    0: 'P. Pupa',
-    1: 'L. Lupa',
+  public readonly currentUserId: UserId = 'userId0';
+  private readonly userNameById: Record<UserId, string> = {
+    userId0: 'P. Pupa',
+    userId1: 'L. Lupa',
   };
 
   public ngOnInit(): void {
@@ -118,7 +120,8 @@ export class InfinityScrollerExample2Component implements OnInit, OnDestroy {
     return Array(count)
       .fill(1)
       .map(() => {
-        const userId: number = Math.random() < 0.5 ? 0 : 1;
+        const randomUserId: number = Math.random() < 0.5 ? 0 : 1;
+        const userId: UserId = `userId${randomUserId}`;
 
         return {
           id: getUuid(),
