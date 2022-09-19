@@ -1,7 +1,7 @@
 @use './../maps/semantic-colors.map' as *;
 @use 'sass:map';
 
-@mixin apply-dark-theme($value: 24px) {
+@mixin apply-dark-theme() {
   @each $name, $value in $darkColorsMap {
     --semantic-color_#{$name}: #{$value};
   }

@@ -6,18 +6,21 @@ import {
   Inject,
   Input,
   OnChanges,
+  Optional,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filterFalsy, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { DROPDOWN_MENU_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/dropdown-menu-service.token';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DropdownMenuService } from '../../../../../internal/declarations/interfaces/dropdown-menu-service.interface';
 import { Uuid } from '../../../../../internal/declarations/types/uuid.type';
 import { DropdownContextService } from '../../services/dropdown-context.service';
+import { Theme } from '../../../../../internal/declarations/enums/theme.enum';
+import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
 
 @Component({
   selector: 'pupa-dropdown-menu-item',
@@ -33,34 +36,31 @@ export class DropdownMenuItemComponent implements OnChanges {
   @Input() public disabled: boolean = false;
   public disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public plain: boolean = false;
-  public plain$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   @Output() public readonly select: EventEmitter<void> = new EventEmitter<void>();
 
-  private readonly isAlive$: Observable<boolean> = combineLatest([this.disabled$, this.plain$]).pipe(
-    map(([disabled, plain]: [boolean, boolean]) => !disabled && !plain)
-  );
-  public tabindex$: Observable<Nullable<string>> = this.isAlive$.pipe(
-    map((isAlive: boolean) => (isAlive ? '0' : null))
-  );
+  public readonly theme$: Observable<Theme> = this.themeWrapperService?.theme$;
+  public readonly isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private readonly contextId: Uuid = this.dropdownContextService.contextId;
 
+  private readonly subscription: Subscription = new Subscription();
+
   constructor(
     private readonly dropdownContextService: DropdownContextService,
-    @Inject(DROPDOWN_MENU_SERVICE_TOKEN) private readonly dropdownMenuService: DropdownMenuService
-  ) {}
+    @Inject(DROPDOWN_MENU_SERVICE_TOKEN) private readonly dropdownMenuService: DropdownMenuService,
+    @Optional() private readonly themeWrapperService: ThemeWrapperService
+  ) {
+    this.subscription.add(this.subscribeToContentOpen());
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processActiveChange(changes?.active);
     this.processDisabledChange(changes?.disabled);
-    this.processPlainChange(changes?.plain);
   }
 
   @HostListener('click')
   public clicked(): void {
-    this.isAlive$.pipe(take(1), filterTruthy()).subscribe(() => {
+    this.disabled$.pipe(take(1), filterFalsy()).subscribe(() => {
       this.dropdownMenuService.setDropdownIsOpen(this.contextId, false);
       this.select.emit();
     });
@@ -68,10 +68,10 @@ export class DropdownMenuItemComponent implements OnChanges {
 
   @HostListener('keydown', ['$event'])
   public keydown(event: KeyboardEvent): void {
-    this.isAlive$
+    this.disabled$
       .pipe(
         take(1),
-        filter((isAlive: boolean) => isAlive && event.key === 'Enter')
+        filter((disabled: boolean) => !disabled && event.key === 'Enter')
       )
       .subscribe(() => {
         this.dropdownMenuService.setDropdownIsOpen(this.contextId, false);
@@ -99,13 +99,9 @@ export class DropdownMenuItemComponent implements OnChanges {
     this.disabled$.next(updatedValue);
   }
 
-  private processPlainChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.plain$.next(updatedValue);
+  private subscribeToContentOpen(): void {
+    this.dropdownMenuService
+      .getDropdownIsOpen(this.contextId)
+      .subscribe((isOpen: boolean) => this.isOpened$.next(isOpen));
   }
 }

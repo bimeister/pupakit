@@ -27,7 +27,7 @@ export abstract class SelectOptionBase<T> implements OnChanges {
     this.selectStateService.isDisabled$,
   ]).pipe(map(([isSelfDisabled, isDisabled]: [boolean, boolean]) => isSelfDisabled || isDisabled));
 
-  constructor(private readonly selectStateService: SelectStateService<T>) {}
+  constructor(protected readonly selectStateService: SelectStateService<T>) {}
 
   @HostListener('mouseover')
   public processMouseOver(): void {

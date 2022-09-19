@@ -1,9 +1,3 @@
-@use 'mixins' as *;
-
-.text {
-  @include ellipsis-text-overflow;
-}
-
 .content {
   width: fit-content;
 }

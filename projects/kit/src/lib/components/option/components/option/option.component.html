@@ -1,0 +1,20 @@
+<div class="option" [class.option--selected]="active" [class.option--disabled]="disabled" tabindex="0">
+  <div #content class="option__content">
+    <div *ngIf="hasCheckbox">
+      <pupa-checkbox
+        class="option__checkbox"
+        tabindex="-1"
+        [value]="active"
+        [disabled]="disabled"
+        [hovered]="hovered$ | async"
+      >
+      </pupa-checkbox>
+    </div>
+    <div class="option__content-container">
+      <ng-content></ng-content>
+    </div>
+  </div>
+  <div class="option__actions" (click)="$event.stopPropagation()">
+    <ng-container [ngTemplateOutlet]="optionActionsRightDirective?.templateRef"></ng-container>
+  </div>
+</div>

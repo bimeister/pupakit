@@ -1,0 +1,148 @@
+<h1>Option</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <p>
+      <pupa-code-inline>pupa-option</pupa-code-inline>
+      is a configurable option component.
+    </p>
+    <p>There are range of components that are used as content to build and configure the option itself:</p>
+    <ul>
+      <li>
+        <pupa-code-inline>pupa-option-title</pupa-code-inline>
+        - a wrapper to truncate long text
+      </li>
+      <li>
+        <pupa-code-inline>pupa-option-description</pupa-code-inline>
+        - a wrapper to truncate long description
+      </li>
+      <li>
+        <pupa-code-inline>pupa-option-icon</pupa-code-inline>
+        - a wrapper to adding icon
+      </li>
+    </ul>
+
+    <pupa-info-block
+      >This is a visual component. Activity state changes outside. You can see it on tab
+      <a pupaLink routerLink="../" [queryParams]="{ tab: 'api' }">Api</a>.
+    </pupa-info-block>
+
+    <h3>Basic option</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-option-example-1 *pupaCodeContainerPreviewTemplate></demo-option-example-1>
+    </pupa-code-container>
+
+    <h3>Option with long title</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-option-example-2 *pupaCodeContainerPreviewTemplate></demo-option-example-2>
+    </pupa-code-container>
+
+    <h3>Option with description</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-option-example-3 *pupaCodeContainerPreviewTemplate></demo-option-example-3>
+    </pupa-code-container>
+
+    <h3>Option with icon</h3>
+    <pupa-code-container [content]="example4Content">
+      <demo-option-example-4 *pupaCodeContainerPreviewTemplate></demo-option-example-4>
+    </pupa-code-container>
+
+    <h3>Directive *pupaOptionActionsRight</h3>
+    <p>
+      You can use the directive
+      <pupa-code-inline>*pupaOptionActionsRight</pupa-code-inline>
+      for adding any actions in right side of option.
+    </p>
+    <pupa-code-container [content]="example5Content">
+      <demo-option-example-5 *pupaCodeContainerPreviewTemplate></demo-option-example-5>
+    </pupa-code-container>
+
+    <h3>Attribute pupaOptionLink</h3>
+    <p>
+      You can use tag
+      <pupa-code-inline>a</pupa-code-inline>
+      with the attr
+      <pupa-code-inline>pupaOptionLink</pupa-code-inline>
+      to use navigation. Also this tag will look and fill as
+      <pupa-code-inline>pupa-option</pupa-code-inline>
+      .
+    </p>
+    <pupa-code-container [content]="example6Content">
+      <demo-option-example-6 *pupaCodeContainerPreviewTemplate></demo-option-example-6>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer class="option-demo">
+      <demo-example-viewer-content class="option-demo__content">
+        <div class="option-demo__wrapper">
+          <pupa-option [disabled]="disabled$ | async" [active]="active$ | async" [hasCheckbox]="hasCheckbox$ | async">
+            Option
+          </pupa-option>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="Add an icon">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>pupa-option-icon</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If option has long text inside will be truncated">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>pupa-option-title</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If option has long description inside will be truncated">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use
+            <pupa-code-inline>pupa-option-description</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If you want to add any actions in right side of option">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use directive
+            <pupa-code-inline>*pupaOptionActionsRight</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If you want using the option together with the tag a">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use attr
+            <pupa-code-inline>pupaOptionLink</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
+          <demo-props-switcher #disabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="active" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is active.</ng-container>
+          <demo-props-switcher #active$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="hasCheckbox" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element has a checkbox.</ng-container>
+          <demo-props-switcher #hasCheckbox$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

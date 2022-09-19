@@ -52,6 +52,7 @@ import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
+import { OptionDemoModule } from './pages/option-demo/option-demo.module';
 import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
 import { SectionDemoModule } from './pages/section-demo/section-demo.module';
 
@@ -365,6 +366,11 @@ const demoRoutes: Routes = [
         path: 'tree-node',
         loadChildren: (): Promise<Type<TreeNodeDemoModule>> =>
           import('./pages/tree-node-demo/tree-node-demo.module').then((module: any) => module.TreeNodeDemoModule),
+      },
+      {
+        path: 'option',
+        loadChildren: (): Promise<Type<OptionDemoModule>> =>
+          import('./pages/option-demo/option-demo.module').then((module: any) => module.OptionDemoModule),
       },
     ],
   },

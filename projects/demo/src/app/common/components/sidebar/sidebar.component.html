@@ -21,6 +21,9 @@
           <ng-container *ngFor="let group of filteredLinkGroups$ | async">
             <h3 class="subheader">{{ group.title }}</h3>
             <a
+              #linkActive="routerLinkActive"
+              pupaOptionLink
+              [active]="linkActive.isActive"
               *ngFor="let linkItem of group.linkItems"
               [demoSidebarLink]="linkItem.link"
               routerLinkActive="active"

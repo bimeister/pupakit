@@ -8,16 +8,14 @@
   [isPatched]="true"
   [formControl]="control1"
 >
-  <pupa-select-trigger-tags class="trigger" [tags]="control1.value"> </pupa-select-trigger-tags>
+  <pupa-select-trigger-tags class="trigger" [tags]="control1.value"></pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <pupa-scrollable class="scrollable">
-        <pupa-select-option *ngFor="let option of options" [value]="option">
-          <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
-        </pupa-select-option>
-      </pupa-scrollable>
-    </pupa-select-options-container>
+    <pupa-scrollable class="scrollable">
+      <pupa-select-option *ngFor="let option of options" [value]="option">
+        <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
+      </pupa-select-option>
+    </pupa-scrollable>
   </pupa-select-dropdown>
 </pupa-select>
 
@@ -31,16 +29,14 @@
   [isPatched]="true"
   [formControl]="control2"
 >
-  <pupa-select-trigger-tags class="trigger" [tags]="control2.value"> </pupa-select-trigger-tags>
+  <pupa-select-trigger-tags class="trigger" [tags]="control2.value"></pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <pupa-scrollable class="scrollable">
-        <pupa-select-option *ngFor="let option of options" [value]="option">
-          <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
-        </pupa-select-option>
-      </pupa-scrollable>
-    </pupa-select-options-container>
+    <pupa-scrollable class="scrollable">
+      <pupa-select-option *ngFor="let option of options" [value]="option">
+        <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
+      </pupa-select-option>
+    </pupa-scrollable>
   </pupa-select-dropdown>
 </pupa-select>
 
@@ -55,16 +51,14 @@
   [isPatched]="true"
   [formControl]="control3"
 >
-  <pupa-select-trigger-tags class="trigger" [tags]="control3.value"> </pupa-select-trigger-tags>
+  <pupa-select-trigger-tags class="trigger" [tags]="control3.value"></pupa-select-trigger-tags>
 
   <pupa-select-dropdown>
-    <pupa-select-options-container>
-      <pupa-scrollable class="scrollable">
-        <pupa-select-option *ngFor="let option of options" [value]="option">
-          <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
-        </pupa-select-option>
-      </pupa-scrollable>
-    </pupa-select-options-container>
+    <pupa-scrollable class="scrollable">
+      <pupa-select-option *ngFor="let option of options" [value]="option">
+        <pupa-tag [clickable]="true">{{ option }}</pupa-tag>
+      </pupa-select-option>
+    </pupa-scrollable>
   </pupa-select-dropdown>
 </pupa-select>
 

@@ -82,6 +82,7 @@ export class SidebarComponent {
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Form Layout', link: '/kit/form-layout' },
         { title: 'Tree node', link: '/kit/tree-node' },
+        { title: 'Option', link: '/kit/option' },
       ],
       'title'
     ),

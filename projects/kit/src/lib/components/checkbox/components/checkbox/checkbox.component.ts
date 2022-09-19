@@ -40,6 +40,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
   @ViewChild('contentLabelWrapper') private readonly contentLabelWrapper: ElementRef<HTMLDivElement>;
 
   @Input() public disabled: boolean;
+  @Input() public hovered: boolean;
   @Input() public indeterminate: boolean;
   @Input() public value: boolean;
   @Input() public error: boolean;
@@ -48,6 +49,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
   @Output() public readonly valueChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public readonly disabled$: Observable<boolean> = this.checkboxService.disabled$;
+  public readonly hovered$: Observable<boolean> = this.checkboxService.hovered$;
   public readonly value$: Observable<boolean> = this.checkboxService.value$;
   public readonly indeterminate$: Observable<boolean> = this.checkboxService.indeterminate$;
   public readonly error$: Observable<boolean> = this.checkboxService.error$;
@@ -85,6 +87,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.handleValueChanges(changes?.value);
     this.handleErrorChanges(changes?.error);
     this.handleSizeChanges(changes?.size);
+    this.handleHoveredChanges(changes?.hovered);
   }
 
   public ngAfterViewInit(): void {
@@ -171,6 +174,16 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     }
 
     this.checkboxService.setDisabled(updatedValue);
+  }
+
+  private handleHoveredChanges(change: ComponentChange<this, boolean>): void {
+    const updatedValue: Nullable<boolean> = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.checkboxService.setHovered(updatedValue);
   }
 
   private handleSizeChanges(change: ComponentChange<this, CheckboxLabelSize>): void {

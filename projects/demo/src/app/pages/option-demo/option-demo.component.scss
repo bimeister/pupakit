@@ -1,0 +1,13 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.option-demo {
+  &__wrapper {
+    width: 50%;
+  }
+
+  &__content {
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}

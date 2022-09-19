@@ -1,11 +1,5 @@
-<div
-  class="dropdown-item"
-  [class.item-active]="active$ | async"
-  [class.item-disabled]="disabled$ | async"
-  [class.item-plain]="plain$ | async"
-  [attr.tabindex]="tabindex$ | async"
->
-  <div class="dropdown-item__content">
+<pupa-theme-wrapper [theme]="theme$ | async">
+  <pupa-option [disabled]="disabled$ | async" [active]="active$ | async" [forceResetHover]="isOpened$ | async">
     <ng-content></ng-content>
-  </div>
-</div>
+  </pupa-option>
+</pupa-theme-wrapper>

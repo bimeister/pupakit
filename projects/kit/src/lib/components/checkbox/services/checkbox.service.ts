@@ -7,6 +7,9 @@ export class CheckboxService {
   private readonly disabledState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly disabled$: Observable<boolean> = this.disabledState$.asObservable();
 
+  private readonly hoveredState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly hovered$: Observable<boolean> = this.hoveredState$.asObservable();
+
   private readonly valueState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly value$: Observable<boolean> = this.valueState$.asObservable();
 
@@ -44,5 +47,9 @@ export class CheckboxService {
 
   public setSize(value: CheckboxLabelSize): void {
     this.sizeState$.next(value);
+  }
+
+  public setHovered(value: boolean): void {
+    this.hoveredState$.next(value);
   }
 }

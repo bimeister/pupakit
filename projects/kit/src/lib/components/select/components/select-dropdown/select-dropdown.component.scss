@@ -17,6 +17,7 @@
 
   overflow: hidden;
   margin-top: 2rem;
+  padding: 1rem 2rem 3rem 2rem;
 
   @include dark-theme-class-parent() {
     background-color: color(neutral-1000);

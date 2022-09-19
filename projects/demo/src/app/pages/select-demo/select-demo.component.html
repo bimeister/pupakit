@@ -25,15 +25,8 @@
             - wrapper for custom dropdown footer.
           </li>
           <li>
-            <pupa-code-inline>pupa-select-options-container</pupa-code-inline>
-            - options' container:
-
-            <ul>
-              <li>
-                <pupa-code-inline>pupa-select-options-option</pupa-code-inline>
-                - simple text option of dropdown list.
-              </li>
-            </ul>
+            <pupa-code-inline>pupa-select-option</pupa-code-inline>
+            - configurable option. <a pupaLink routerLink="../../option">Here is more info</a>.
           </li>
         </ul>
       </li>
@@ -164,13 +157,11 @@
 
           <pupa-select-dropdown>
             <pupa-select-options-container>
-              <pupa-select-option [value]="'Option 1'">Option 1</pupa-select-option>
-              <pupa-select-option [value]="'Option 2'">Option 2</pupa-select-option>
-              <pupa-select-option [value]="'Option 3'" [isDisabled]="isDisabled$ | async">Option 3</pupa-select-option>
-              <pupa-select-option [value]="'Option 4'">Option 4</pupa-select-option>
-              <pupa-select-option [value]="'Option 5'">Option 5</pupa-select-option>
-              <pupa-select-option [value]="'Option 6'">Option 6</pupa-select-option>
-              <pupa-select-option [value]="'Option 7'">Option 7</pupa-select-option>
+              <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5, 6]" value="Option {{ index }}">
+                Option {{ index }}
+              </pupa-select-option>
+
+              <pupa-select-option value="Option 7" [isDisabled]="isDisabled$ | async"> Option 7 </pupa-select-option>
             </pupa-select-options-container>
           </pupa-select-dropdown>
         </pupa-select>
@@ -313,7 +304,7 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="isDisabled" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>
-            Whether select's option is disabled (disables "option 3").
+            Whether select's option is disabled (disables "option 7").
           </ng-container>
           <demo-props-switcher #isDisabled$></demo-props-switcher>
         </demo-example-viewer-property>
