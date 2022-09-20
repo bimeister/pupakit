@@ -16,7 +16,7 @@ export class DropdownDemoComponent {
     TS: `${BASE_REQUEST_PATH}/dropdown-demo-example-1/dropdown-demo-example-1.component.ts`,
   };
 
-  public readonly sizeOptions: PropsOption[] = [
+  public readonly widthTypeOptions: PropsOption[] = [
     {
       caption: 'auto',
       value: 'auto',
@@ -25,6 +25,22 @@ export class DropdownDemoComponent {
     {
       caption: 'by-trigger',
       value: 'by-trigger',
+    },
+  ];
+
+  public readonly horizontalPositionOptions: PropsOption[] = [
+    {
+      caption: 'start',
+      value: 'start',
+      isDefault: true,
+    },
+    {
+      caption: 'center',
+      value: 'center',
+    },
+    {
+      caption: 'end',
+      value: 'end',
     },
   ];
 }

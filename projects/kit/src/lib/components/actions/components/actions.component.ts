@@ -27,8 +27,8 @@ import { PupaActionTemplateDirective } from '../directives/action-template.direc
 import { ComponentChanges } from '../../../../internal/declarations/interfaces/component-changes.interface';
 import { ComponentChange } from '../../../../internal/declarations/interfaces/component-change.interface';
 import { ActionContext } from '../../../../internal/declarations/interfaces/action-context.interface';
-import { DropdownContextService } from '../../dropdown-menu/services/dropdown-context.service';
 import { ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN } from '../../../../internal/constants/tokens/actions-default-more-button-trigger-text.token';
+import { DropdownMenuContextService } from '../../dropdown-menu/services/dropdown-menu-context.service';
 
 const MAX_ACTIONS_RENDER_COUNT: number = 20;
 const RESIZE_DEBOUNCE_TIME_MS: number = 200;
@@ -39,7 +39,7 @@ const RESIZE_DEBOUNCE_TIME_MS: number = 200;
   styleUrls: ['./actions.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [DropdownContextService],
+  providers: [DropdownMenuContextService],
 })
 export class ActionsComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy {
   @Input()

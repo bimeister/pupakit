@@ -17,8 +17,11 @@ export {
   DefaultTreeEventHandler,
   DrawerConfig,
   DrawerRef,
+  DropdownsService,
   DrawersService,
   DropdownItem,
+  DropdownHost,
+  DropdownDirectiveParams,
   DropEventInterface,
   EventsQueue,
   FlatTreeItem,
@@ -95,6 +98,7 @@ export {
   InfinityScrollerPaginationConfig,
   UiState,
   UploadingStatus,
+  createProviderIfMissing,
   SCROLLBAR_WIDTH_PX,
 } from './internal/api';
 export * from './internal/constants/icons/api';

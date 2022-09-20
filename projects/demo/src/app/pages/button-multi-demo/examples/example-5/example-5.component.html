@@ -1,12 +1,16 @@
 <div class="button-container">
   <ng-container *ngFor="let horizontalPosition of horizontalConnectionPositions">
-    <pupa-button-multi class="button-container__item" [dropdownMenuContent]="dropdownContent">
-      {{ horizontalPosition }}
+    <pupa-button-multi #buttonMulti class="button-container__item">
+      test text {{ horizontalPosition }}
+
+      <pupa-dropdown-menu
+        *pupaDropdownTemplate="buttonMulti; horizontalPosition: horizontalPosition; let dropdownRef"
+        [dropdownRef]="dropdownRef"
+      >
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
     </pupa-button-multi>
-    <pupa-dropdown-menu-content #dropdownContent [horizontalPosition]="horizontalPosition">
-      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
   </ng-container>
 </div>

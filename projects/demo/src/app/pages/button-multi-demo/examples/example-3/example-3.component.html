@@ -1,17 +1,15 @@
 <div class="button-container">
   <ng-container *ngFor="let size of sizes">
-    <pupa-button-multi
-      class="button-container__item"
-      icon="app-folder"
-      [size]="size"
-      [dropdownMenuContent]="dropdownContent"
-    >
-      primary {{ size }}
-    </pupa-button-multi>
-    <pupa-dropdown-menu-content #dropdownContent>
-      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
+    <ng-container *ngFor="let kind of kinds">
+      <pupa-button-multi #buttonMulti class="button-container__item" icon="app-cube" [size]="size">
+        primary {{ size }}
+
+        <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti; let dropdownRef" [dropdownRef]="dropdownRef">
+          <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+          <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+          <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+        </pupa-dropdown-menu>
+      </pupa-button-multi>
+    </ng-container>
   </ng-container>
 </div>

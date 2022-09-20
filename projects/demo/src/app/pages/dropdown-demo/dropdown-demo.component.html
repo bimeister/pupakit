@@ -6,17 +6,12 @@
 
     <h3 demoAnchor>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
-      <div class="trigger-container" *pupaCodeContainerPreviewTemplate>
-        <pupa-tag kind="primary" #dropdown="pupaDropdown" [clickable]="true" [pupaDropdown]="dropdownContent">
-          {{ (dropdown.opened$ | async) ? 'close' : 'open' }}
-          <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-chevron-up' : 'app-chevron-down'"></pupa-icon>
-        </pupa-tag>
-      </div>
-
-      <ng-template #dropdownContent>
-        <div>sample content</div>
-        <div>🎳</div>
-      </ng-template>
+      <demo-dropdown-example-1
+        *pupaCodeContainerPreviewTemplate
+        [disabled]="disabled$ | async"
+        [widthType]="widthType$ | async"
+        [horizontalPosition]="horizontalPosition$ | async"
+      ></demo-dropdown-example-1>
     </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
@@ -25,16 +20,11 @@
         <demo-dropdown-example-1
           [disabled]="disabled$ | async"
           [widthType]="widthType$ | async"
+          [horizontalPosition]="horizontalPosition$ | async"
         ></demo-dropdown-example-1>
       </demo-example-viewer-content>
       <demo-example-viewer-section-label>pupaDropdown Properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
-        <demo-example-viewer-property name="pupaDropdown" type="TemplateRef<unknown>" decoratorName="input">
-          <ng-container *demoExampleViewerPropertyDescription>
-            <div>Dropdown content template.</div>
-          </ng-container>
-        </demo-example-viewer-property>
-
         <demo-example-viewer-property name="pupaDropdownDisabled" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription>
             <div>Sets dropdown disabled state.</div>
@@ -42,11 +32,45 @@
           <demo-props-switcher #disabled$></demo-props-switcher>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property name="pupaDropdownWidthType" type="PupaDropdownWidthType" decoratorName="input">
+        <demo-example-viewer-property name="pupaDropdownRealTriggerElement" type="HTMLElement" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription>
-            <div>Sets dropdown width.</div>
+            <div>Sets real trigger element sizes.</div>
           </ng-container>
-          <demo-props-radio-select #widthType$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>*pupaDropdownTemplate Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="pupaDropdownTemplate" type="DropdownHost" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Sets dropdown trigger host.</div>
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property
+          name="pupaDropdownTemplateWidthType"
+          type="DropdownWidthType"
+          decoratorName="input"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Sets width of dropdown.</div>
+          </ng-container>
+          <demo-props-radio-select #widthType$ direction="row" [options]="widthTypeOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property
+          name="pupaDropdownTemplateHorizontalPosition"
+          type="HorizontalConnectionPos"
+          decoratorName="input"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Sets horizontal position of dropdown.</div>
+          </ng-container>
+          <demo-props-radio-select
+            #horizontalPosition$
+            direction="row"
+            [options]="horizontalPositionOptions"
+          ></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

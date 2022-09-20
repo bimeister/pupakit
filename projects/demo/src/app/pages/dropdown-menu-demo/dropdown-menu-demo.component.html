@@ -5,15 +5,18 @@
     <pupa-theme-wrapper [theme]="theme$ | async">
       <div class="content">
         <div
-          [class.is-open]="dropdown.isOpen$ | async"
-          [pupaDropdownMenu]="dropdownContent1"
-          [dropdownMenuDisabled]="dropdownMenuDisabled$ | async"
-          #dropdown="pupaDropdownMenu"
+          [class.is-open]="dropdown1.opened$ | async"
+          pupaDropdown
+          [pupaDropdownDisabled]="dropdownMenuDisabled$ | async"
+          #dropdown1="pupaDropdown"
         >
           <span>[1] {{ triggerText.value }}</span>
         </div>
 
-        <pupa-dropdown-menu-content #dropdownContent1 [horizontalPosition]="horizontalPosition$ | async">
+        <pupa-dropdown-menu
+          *pupaDropdownTemplate="dropdown1; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
+          [dropdownRef]="dropdownRef"
+        >
           <pupa-dropdown-menu-item>
             <pupa-option-icon name="add-circle"></pupa-option-icon>
             Default item
@@ -33,20 +36,23 @@
               repellendus sit? Ducimus, molestiae, voluptatum.
             </pupa-option-title>
           </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu-content>
+        </pupa-dropdown-menu>
 
         <br />
 
         <div
-          [class.is-open]="dropdown.isOpen$ | async"
-          [pupaDropdownMenu]="dropdownContent2"
-          [dropdownMenuDisabled]="dropdownMenuDisabled$ | async"
-          #dropdown="pupaDropdownMenu"
+          [class.is-open]="dropdown2.opened$ | async"
+          pupaDropdown
+          [pupaDropdownDisabled]="dropdownMenuDisabled$ | async"
+          #dropdown2="pupaDropdown"
         >
           <span>[2] {{ triggerText.value }}</span>
         </div>
 
-        <pupa-dropdown-menu-content #dropdownContent2 [horizontalPosition]="horizontalPosition$ | async">
+        <pupa-dropdown-menu
+          *pupaDropdownTemplate="dropdown2; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
+          [dropdownRef]="dropdownRef"
+        >
           <pupa-dropdown-menu-item [disabled]="true">
             <pupa-option-icon name="close-circle"></pupa-option-icon>
             Disabled item
@@ -55,7 +61,7 @@
           <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
             <div class="text">option {{ index }}</div>
           </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu-content>
+        </pupa-dropdown-menu>
       </div>
     </pupa-theme-wrapper>
   </demo-example-viewer-content>
@@ -67,27 +73,33 @@
     </demo-example-viewer-config-item>
   </demo-example-viewer-section>
 
-  <demo-example-viewer-section-label>DropdownMenuDirective Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section-label>DropdownMenuComponent properties</demo-example-viewer-section-label>
   <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="pupaDropdownMenu" type="DropdownMenuContentComponent">
-      <ng-container *demoExampleViewerPropertyDescription>Content component for dropdown menu.</ng-container>
-    </demo-example-viewer-property>
-
-    <demo-example-viewer-property decoratorName="input" name="dropdownMenuDisabled" type="boolean">
-      <ng-container *demoExampleViewerPropertyDescription>Whether the dropdown menu is disabled.</ng-container>
-      <demo-props-switcher #dropdownMenuDisabled$></demo-props-switcher>
+    <demo-example-viewer-property name="dropdownRef" type="DropdownRef" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>
+        <div>Sets dropdown ref for auto closing.</div>
+      </ng-container>
     </demo-example-viewer-property>
   </demo-example-viewer-section>
 
-  <demo-example-viewer-section-label>DropdownMenuContentComponent Properties</demo-example-viewer-section-label>
+  <demo-example-viewer-section-label>DropdownMenuItemComponent properties</demo-example-viewer-section-label>
   <demo-example-viewer-section>
-    <demo-example-viewer-property decoratorName="input" name="horizontalPosition" type="HorizontalConnectionPos">
-      <ng-container *demoExampleViewerPropertyDescription>Adjusts the horizontal position of the element.</ng-container>
-      <demo-props-radio-select
-        #horizontalPosition$
-        [options]="horizontalPositionOptions"
-        direction="row"
-      ></demo-props-radio-select>
+    <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>
+        <div>Sets active state of item</div>
+      </ng-container>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>
+        <div>Sets disabled state of item</div>
+      </ng-container>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="autoClose" type="boolean" decoratorName="input">
+      <ng-container *demoExampleViewerPropertyDescription>
+        <div>Sets auto closing mode for item</div>
+      </ng-container>
     </demo-example-viewer-property>
   </demo-example-viewer-section>
 </demo-example-viewer>

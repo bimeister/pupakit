@@ -1,5 +1,3 @@
-<pupa-theme-wrapper [theme]="theme$ | async">
-  <pupa-option [disabled]="disabled$ | async" [active]="active$ | async" [forceResetHover]="isOpened$ | async">
-    <ng-content></ng-content>
-  </pupa-option>
-</pupa-theme-wrapper>
+<pupa-option [disabled]="disabled" [active]="active" [forceResetHover]="true">
+  <ng-content></ng-content>
+</pupa-option>

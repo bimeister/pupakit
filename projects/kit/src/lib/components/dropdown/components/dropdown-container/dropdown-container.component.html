@@ -1,5 +1,6 @@
-<pupa-theme-wrapper [theme]="theme$ | async">
+<pupa-theme-wrapper class="theme-container" [theme]="theme">
   <div
+    class="content-container"
     (mousedown)="stopEvent($event)"
     (touchstart)="stopEvent($event)"
     (touchmove)="stopEvent($event)"

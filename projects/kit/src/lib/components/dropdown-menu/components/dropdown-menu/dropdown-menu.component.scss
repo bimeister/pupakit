@@ -2,18 +2,21 @@
 @use 'functions' as *;
 @use 'variables' as *;
 
+:host {
+  display: flex;
+  width: 100%;
+  height: auto;
+  max-height: 72rem;
+  max-width: 76rem;
+  overflow: hidden;
+}
+
 .dropdown-content {
   &__menu {
-    border-radius: $controlBorderRadius;
-    max-height: 72rem;
-    max-width: 76rem;
-    box-shadow: variable(box-shadow_dropdown);
-    background-color: color(neutral-1);
-
     user-select: none;
     overflow: auto;
     box-sizing: border-box;
-    border: 1px solid color(neutral-5);
+    max-height: 72rem;
 
     &:focus {
       outline: none;
@@ -27,6 +30,6 @@
 
   &__scrollable-content {
     width: 100%;
-    padding: 2rem;
+    padding: 2rem 0;
   }
 }

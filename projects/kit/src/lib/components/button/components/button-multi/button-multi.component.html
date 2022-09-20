@@ -1,0 +1,52 @@
+<div #realDropdownTrigger type="submit" class="button-multi" [ngClass]="resultClassList$ | async">
+  <button
+    class="button-multi__main main"
+    [tabIndex]="tabIndex"
+    [ngClass]="mainClassList$ | async"
+    [attr.disabled]="(disabled$ | async) ? true : null"
+  >
+    <span class="button-multi__background main__background" focusable="false"></span>
+    <div class="main__content" focusable="false" [class.main__content_hidden]="loading$ | async">
+      <ng-container *ngIf="icon$ | async">
+        <pupa-icon
+          class="button-multi__icon button-multi__icon_left"
+          [name]="icon$ | async"
+          *ngIf="isLeftIconPosition(iconPosition$ | async)"
+        >
+        </pupa-icon>
+      </ng-container>
+
+      <div class="main__content-inner">
+        <ng-content></ng-content>
+      </div>
+      <ng-container *ngIf="icon$ | async">
+        <pupa-icon
+          class="button-multi__icon button-multi__icon_right"
+          [name]="icon$ | async"
+          *ngIf="isRightIconPosition(iconPosition$ | async)"
+        >
+        </pupa-icon>
+      </ng-container>
+    </div>
+    <div class="main__loading" *ngIf="loading$ | async" focusable="false">
+      <pupa-spinner [size]="'16px'"></pupa-spinner>
+    </div>
+  </button>
+  <button
+    class="button-multi__expand expand"
+    pupaDropdown
+    [pupaDropdownRealTriggerElement]="realDropdownTrigger"
+    [pupaDropdownDisabled]="disabled$ | async"
+    #dropdown="pupaDropdown"
+    tabindex="-1"
+    [ngClass]="expandClassList$ | async"
+    (click)="$event.stopPropagation()"
+    [attr.disabled]="(disabled$ | async) ? true : null"
+  >
+    <span class="button-multi__background expand__background" focusable="false"></span>
+    <pupa-icon
+      class="button-multi__icon"
+      [name]="dropdown.opened$ | conditionAsync: 'ios-arrow-up':'ios-arrow-down'"
+    ></pupa-icon>
+  </button>
+</div>

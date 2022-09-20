@@ -15,8 +15,8 @@ export abstract class DropdownComponentBase<TData> implements AfterViewInit {
 
   public static readonly animations: AnimationTriggerMetadata[] = [
     trigger('show', [
-      state('false', style({ margin: '0', transform: 'translateY(10px)', opacity: 0 })),
-      state('true', style({ margin: '8px 0', transform: 'translateY(0)', opacity: 1 })),
+      state('false', style({ transform: 'translateY(10px)', opacity: 0 })),
+      state('true', style({ transform: 'translateY(0)', opacity: 1 })),
       transition('false => true', [animate(`150ms ease-in`)]),
       transition('true => false', [animate(`150ms ease-out`)]),
     ]),
