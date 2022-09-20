@@ -6,7 +6,7 @@ import { IconModule } from '../icon/icon.module';
 import { ButtonIconComponent } from './components/button-icon/button-icon.component';
 import { ButtonRoundComponent } from './components/button-round/button-round.component';
 import { ButtonMultiComponent } from './components/button-multi/button-multi.component';
-import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
+import { DropdownModule } from '../dropdown/dropdown.module';
 
 const COMPONENTS: Type<unknown>[] = [ButtonComponent, ButtonIconComponent, ButtonRoundComponent, ButtonMultiComponent];
 
@@ -15,7 +15,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [SharedModule, SpinnerModule, IconModule.forFeature(), DropdownMenuModule],
+  imports: [SharedModule, SpinnerModule, IconModule.forFeature(), DropdownModule],
   exports: [...EXPORTS],
 })
 export class ButtonModule {}

@@ -1,48 +1,39 @@
 <div class="button-container">
   <ng-container *ngFor="let iconPosition of ['left', 'right']">
-    <pupa-button-multi
-      [iconPosition]="iconPosition"
-      class="button-container__item"
-      icon="app-folder"
-      [dropdownMenuContent]="dropdownContent"
-    >
+    <pupa-button-multi #buttonMulti1 [iconPosition]="iconPosition" class="button-container__item" icon="app-folder">
       Icon on the {{ iconPosition }}
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti1; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
     </pupa-button-multi>
-    <pupa-dropdown-menu-content #dropdownContent>
-      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
   </ng-container>
 </div>
 
 <div class="button-container">
   <ng-container>
-    <pupa-button-multi
-      class="button-container__item"
-      [active]="true"
-      [dropdownMenuContent]="dropdownContentForActiveButton"
-      >Button active
+    <pupa-button-multi #buttonMulti2 class="button-container__item" [active]="true">
+      Button active
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti2; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
     </pupa-button-multi>
-    <pupa-dropdown-menu-content #dropdownContentForActiveButton>
-      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
   </ng-container>
 
   <ng-container>
-    <pupa-button-multi
-      class="button-container__item"
-      [pupaTooltip]="'Tooltip text'"
-      [dropdownMenuContent]="dropdownContentForButtonWithTooltip"
-    >
+    <pupa-button-multi #buttonMulti3 class="button-container__item" [pupaTooltip]="'Tooltip text'">
       With tooltip
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti3; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
     </pupa-button-multi>
-    <pupa-dropdown-menu-content #dropdownContentForButtonWithTooltip>
-      <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
-      <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-      <pupa-dropdown-menu-item>second</pupa-dropdown-menu-item>
-    </pupa-dropdown-menu-content>
   </ng-container>
 </div>

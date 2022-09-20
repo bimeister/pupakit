@@ -1,24 +1,43 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewInit, Directive, ElementRef, Inject, Input, NgZone, OnDestroy, TemplateRef } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Inject,
+  Input,
+  NgZone,
+  OnDestroy,
+  Optional,
+} from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, fromEvent, merge, Subscription } from 'rxjs';
+import { subscribeInsideAngular } from '../../../../internal/functions/rxjs-operators/subscribe-inside-angular.operator';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { OpenedDropdown } from '../../../../internal/declarations/classes/opened-dropdown.class';
-import { DropdownWidthType } from '../../../../internal/declarations/types/dropdown-width.type';
+import { Theme } from '../../../../internal/declarations/enums/theme.enum';
+import { DropdownDirectiveParams } from '../../../../internal/declarations/interfaces/dropdown-directive-params.interface';
+import { DropdownHost } from '../../../../internal/declarations/interfaces/dropdown-host.interface';
 import { subscribeOutsideAngular } from '../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { DropdownsService } from '../../../../internal/shared/services/dropdowns.service';
 import { DropdownTemplateComponent } from '../../../../lib/components/dropdown/components/dropdown-template/dropdown-template.component';
+import { ThemeWrapperService } from '../../theme-wrapper/services/theme-wrapper.service';
+
+const CURSOR_POINTER: string = 'pointer';
 
 @Directive({
   selector: '[pupaDropdown]',
   exportAs: 'pupaDropdown',
 })
-export class DropdownDirective implements AfterViewInit, OnDestroy {
-  @Input() public pupaDropdown: TemplateRef<unknown>;
+export class DropdownDirective implements AfterViewInit, OnDestroy, DropdownHost {
   @Input() public pupaDropdownDisabled: boolean = false;
-  @Input() public pupaDropdownWidthType: DropdownWidthType = 'auto';
+  @Input() public pupaDropdownRealTriggerElement?: HTMLElement;
+
+  @HostBinding('style.cursor') public cursorStyle: string = CURSOR_POINTER;
 
   public readonly opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  private readonly theme$: Observable<Theme> = this.themeWrapperService?.theme$ ?? of(Theme.Light);
 
   private readonly subscription: Subscription = new Subscription();
   private readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -26,11 +45,14 @@ export class DropdownDirective implements AfterViewInit, OnDestroy {
   private dropdown: Nullable<OpenedDropdown> = null;
   private outsideTouchEventSubscription: Nullable<Subscription> = null;
 
+  private params: DropdownDirectiveParams | null = null;
+
   constructor(
     public readonly triggerRef: ElementRef<HTMLElement>,
     private readonly dropdownsService: DropdownsService,
     private readonly ngZone: NgZone,
-    @Inject(DOCUMENT) private readonly document: Document
+    @Inject(DOCUMENT) private readonly document: Document,
+    @Optional() private readonly themeWrapperService?: ThemeWrapperService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -42,28 +64,45 @@ export class DropdownDirective implements AfterViewInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
+  public setDropdownParams(params: DropdownDirectiveParams): void {
+    this.params = params;
+  }
+
   public open(): void {
+    if (this.params === null) {
+      throw new Error('[DropdownDirective] dropdownParams has not set. You can set *pupaDropdownTemplate on element');
+    }
+
     if (this.pupaDropdownDisabled) {
       return;
     }
 
-    this.dropdown = this.dropdownsService.open<DropdownTemplateComponent<unknown>>({
-      target: this.triggerRef,
-      widthType: this.pupaDropdownWidthType,
-      data: {
-        templateRef: this.pupaDropdown,
-      },
-    });
+    this.theme$
+      .pipe(
+        take(1),
+        switchMap((theme: Theme) => {
+          this.dropdown = this.dropdownsService.open<DropdownTemplateComponent<unknown>>({
+            target: this.pupaDropdownRealTriggerElement ?? this.triggerRef.nativeElement,
+            widthType: this.params.widthType,
+            horizontalPosition: this.params.horizontalPosition,
+            theme,
+            data: {
+              templateRef: this.params.templateRef,
+            },
+          });
 
-    this.opened$.next(true);
-    this.isTriggerTouched$.next(false);
-    this.outsideTouchEventSubscription = this.handleOutsideTriggerTouchEvents();
+          this.opened$.next(true);
+          this.isTriggerTouched$.next(false);
+          this.outsideTouchEventSubscription = this.handleOutsideTriggerTouchEvents();
 
-    this.dropdown.closed$.pipe(take(1)).subscribe(() => {
-      this.outsideTouchEventSubscription?.unsubscribe();
-      this.opened$.next(false);
-      this.dropdown = null;
-    });
+          return this.dropdown.closed$;
+        })
+      )
+      .subscribe(() => {
+        this.outsideTouchEventSubscription?.unsubscribe();
+        this.opened$.next(false);
+        this.dropdown = null;
+      });
   }
 
   public close(): void {
@@ -71,7 +110,9 @@ export class DropdownDirective implements AfterViewInit, OnDestroy {
   }
 
   public toggle(): void {
-    this.opened$.pipe(take(1)).subscribe((opened: boolean) => (opened ? this.close() : this.open()));
+    this.opened$
+      .pipe(take(1), subscribeInsideAngular(this.ngZone))
+      .subscribe((opened: boolean) => (opened ? this.close() : this.open()));
   }
 
   private handleTriggerClickEvents(): Subscription {

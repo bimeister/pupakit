@@ -15,24 +15,24 @@
   <div
     *ngIf="actionsOverflowCount$ | async as actionsOverflowCount"
     class="actions-container__more-button"
-    [pupaDropdownMenu]="dropdownContent"
-    #dropdownContainer
+    pupaDropdown
+    #dropdown="pupaDropdown"
   >
     <ng-container
       [ngTemplateOutlet]="getActionMoreTriggerTemplateRef()"
       [ngTemplateOutletContext]="{ $implicit: actionsOverflowCount }"
     ></ng-container>
+
+    <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+      <ng-container
+        *ngFor="let action of renderDropdownActions$ | async"
+        [ngTemplateOutlet]="actionDropdownTemplate?.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: action }"
+      ></ng-container>
+    </pupa-dropdown-menu>
   </div>
 </div>
 
 <ng-template #defaultTemplate let-count>
   <pupa-button size="l" kind="secondary"> {{ defaultMoreButtonText }} ({{ count }}) </pupa-button>
 </ng-template>
-
-<pupa-dropdown-menu-content #dropdownContent horizontalPosition="start">
-  <ng-container
-    *ngFor="let action of renderDropdownActions$ | async"
-    [ngTemplateOutlet]="actionDropdownTemplate?.templateRef"
-    [ngTemplateOutletContext]="{ $implicit: action }"
-  ></ng-container>
-</pupa-dropdown-menu-content>

@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { appChevronRightIcon } from '../../../internal/constants/icons/app-chevron-right-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
 import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
+import { DropdownModule } from '../dropdown/dropdown.module';
 import { IconModule } from '../icon/icon.module';
 import { TooltipModule } from '../tooltip/tooltip.module';
 import { BreadcrumbSeparatorComponent } from './components/breadcrumb-separator/breadcrumb-separator.component';
@@ -30,6 +31,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     RouterModule,
     IconModule.forFeature([appChevronRightIcon]),
     ButtonModule,
+    DropdownModule,
     DropdownMenuModule,
     TooltipModule,
   ],

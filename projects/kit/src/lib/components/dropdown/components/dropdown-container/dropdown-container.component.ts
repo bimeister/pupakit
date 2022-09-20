@@ -1,9 +1,8 @@
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DROPDOWN_CONTAINER_DATA_TOKEN } from '../../../../../internal/constants/tokens/dropdown-container-data.token';
-import { DropdownContainerData } from '../../../../../internal/declarations/interfaces/dropdown-container-data.interface';
 import { Theme } from '../../../../../internal/declarations/enums/theme.enum';
+import { DropdownContainerData } from '../../../../../internal/declarations/interfaces/dropdown-container-data.interface';
 
 @Component({
   selector: 'pupa-dropdown-container',
@@ -14,7 +13,7 @@ import { Theme } from '../../../../../internal/declarations/enums/theme.enum';
 })
 export class DropdownContainerComponent {
   public readonly componentPortal: ComponentPortal<DropdownContainerComponent> = this.componentData.componentPortal;
-  public readonly theme$: Observable<Theme> = this.componentData.theme$;
+  public readonly theme: Theme = this.componentData.theme;
 
   constructor(
     @Inject(DROPDOWN_CONTAINER_DATA_TOKEN)

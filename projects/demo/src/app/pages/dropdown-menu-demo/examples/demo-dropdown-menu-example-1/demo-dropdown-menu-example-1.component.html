@@ -1,14 +1,12 @@
 <div class="example-container">
-  <div
-    [class.is-open]="dropdown.isOpen$ | async"
-    [pupaDropdownMenu]="dropdownContent1"
-    [dropdownMenuDisabled]="false"
-    #dropdown="pupaDropdownMenu"
-  >
+  <div [class.is-open]="dropdown.opened$ | async" pupaDropdown #dropdown="pupaDropdown">
     <span>open dropdown with start horizontal position</span>
   </div>
 
-  <pupa-dropdown-menu-content #dropdownContent1 horizontalPosition="start">
+  <pupa-dropdown-menu
+    *pupaDropdownTemplate="dropdown; horizontalPosition: 'start'; let dropdownRef"
+    [dropdownRef]="dropdownRef"
+  >
     <pupa-dropdown-menu-item>
       <pupa-option-icon name="add-circle"></pupa-option-icon>
       Default item
@@ -27,5 +25,5 @@
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
       </div>
     </pupa-dropdown-menu-item>
-  </pupa-dropdown-menu-content>
+  </pupa-dropdown-menu>
 </div>

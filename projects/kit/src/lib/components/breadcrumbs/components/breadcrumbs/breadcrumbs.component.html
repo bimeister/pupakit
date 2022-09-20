@@ -37,28 +37,26 @@
     </ng-container>
 
     <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="!(isContainerFullFitted$ | async)">
-      <div [pupaDropdownMenu]="dropdownMenuContent" #dropdownMenu="pupaDropdownMenu">
+      <div #dropdown="pupaDropdown" pupaDropdown>
         <pupa-breadcrumb-unfit-trigger
-          [active]="dropdownMenu.isOpen$ | async"
+          [active]="dropdown.opened$ | async"
           (click)="handleClickOnUnfitTrigger()"
         ></pupa-breadcrumb-unfit-trigger>
       </div>
 
-      <pupa-dropdown-menu-content #dropdownMenuContent [horizontalPosition]="'center'">
-        <ng-container *ngFor="let breadcrumb of unfitBreadcrumbs$ | async">
-          <pupa-dropdown-menu-item
-            [tabindex]="-1"
-            [id]="breadcrumb.id"
-            [routerLink]="breadcrumb.routerLink"
-            (select)="emitClickedId(breadcrumb.id)"
-          >
-            <ng-container
-              [ngTemplateOutlet]="breadcrumbTemplate"
-              [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
-            ></ng-container>
-          </pupa-dropdown-menu-item>
-        </ng-container>
-      </pupa-dropdown-menu-content>
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item
+          *ngFor="let breadcrumb of unfitBreadcrumbs$ | async"
+          [id]="breadcrumb.id"
+          [routerLink]="breadcrumb.routerLink"
+          (select)="emitClickedId(breadcrumb.id)"
+        >
+          <ng-container
+            [ngTemplateOutlet]="breadcrumbTemplate"
+            [ngTemplateOutletContext]="{ $implicit: breadcrumb }"
+          ></ng-container>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
 
       <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
     </div>

@@ -25,6 +25,7 @@ import {
   Nullable,
   resizeObservable,
 } from '@bimeister/utilities';
+import { DropdownMenuContextService } from '../../../dropdown-menu/services/dropdown-menu-context.service';
 import { animationFrameScheduler, BehaviorSubject, combineLatest, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, observeOn, switchMap } from 'rxjs/operators';
 import { BreadcrumbsProducer } from '../../../../../internal/declarations/classes/breadcrumbs-producer.class';
@@ -43,6 +44,7 @@ import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-tem
   styleUrls: ['./breadcrumbs.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [DropdownMenuContextService],
 })
 export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit {
   @Input() public breadcrumbs: Breadcrumb[] = [];

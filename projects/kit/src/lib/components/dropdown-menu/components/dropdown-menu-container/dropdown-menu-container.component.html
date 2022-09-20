@@ -1,9 +1,0 @@
-<div
-  [@dropdownShow]="animationState$ | async"
-  class="dropdown-menu-container"
-  (mousedown)="stopEvent($event)"
-  (touchmove)="stopEvent($event)"
-  (wheel)="stopEvent($event)"
->
-  <ng-container [ngTemplateOutlet]="contentTemplate$ | async"></ng-container>
-</div>

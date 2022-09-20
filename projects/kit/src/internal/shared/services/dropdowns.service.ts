@@ -1,13 +1,19 @@
-import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import {
+  ConnectionPositionPair,
+  FlexibleConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  Overlay,
+  OverlayRef,
+  VerticalConnectionPos,
+} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { ElementRef, Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { getUuid, isNil, Uuid } from '@bimeister/utilities';
-import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DROPDOWN_CONTAINER_DATA_TOKEN } from '../../../internal/constants/tokens/dropdown-container-data.token';
+import { Theme } from '../../../internal/declarations/enums/theme.enum';
 import { DropdownContainerComponent } from '../../../lib/components/dropdown/components/dropdown-container/dropdown-container.component';
 import { DropdownTemplateComponent } from '../../../lib/components/dropdown/components/dropdown-template/dropdown-template.component';
-import { Theme } from '../../../internal/declarations/enums/theme.enum';
 import { DropdownComponentBase } from '../../declarations/classes/abstract/dropdown-component-base.abstract';
 import { DropdownRef } from '../../declarations/classes/dropdown-ref.class';
 import { OpenedDropdown } from '../../declarations/classes/opened-dropdown.class';
@@ -16,17 +22,14 @@ import { DropdownContainerData } from '../../declarations/interfaces/dropdown-co
 import { Position } from '../../declarations/types/position.type';
 import { DropdownDataType } from '../../declarations/types/utility-types/dropdown-data.utility-type';
 
-const DROPDOWN_POSITIONS: ConnectionPositionPair[] = [
-  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }),
-];
+const HORIZONTAL_POSITIONS: HorizontalConnectionPos[] = ['center', 'end', 'start'];
+const VERTICAL_POSITIONS: VerticalConnectionPos[] = ['top', 'bottom'];
+
+const VIEWPORT_MARGIN_PX: number = 4;
 
 @Injectable({ providedIn: 'root' })
 export class DropdownsService {
   private readonly dropdownStore: Map<string, DropdownRef> = new Map();
-  private readonly theme$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.Light);
 
   constructor(protected readonly overlay: Overlay, protected readonly injector: Injector) {}
 
@@ -68,10 +71,6 @@ export class DropdownsService {
     return this.dropdownStore.has(id);
   }
 
-  public setTheme(theme: Theme): void {
-    this.theme$.next(theme);
-  }
-
   private getComponentPortal<TComponent extends DropdownComponentBase<unknown>>(
     config: DropdownConfig<TComponent, DropdownDataType<TComponent>>,
     dropdownRef: DropdownRef<DropdownDataType<TComponent>>
@@ -89,7 +88,7 @@ export class DropdownsService {
 
     const containerData: DropdownContainerData<unknown> = {
       componentPortal,
-      theme$: this.theme$,
+      theme: config.theme ?? Theme.Light,
     };
 
     return new ComponentPortal(
@@ -113,35 +112,50 @@ export class DropdownsService {
   private getTargetPosition<TComponent extends DropdownComponentBase<unknown>>(
     config: DropdownConfig<TComponent, DropdownDataType<TComponent>>
   ): FlexibleConnectedPositionStrategy {
-    const target: ElementRef | Position = config.target;
+    const target: HTMLElement | Position = config.target;
 
-    return target instanceof ElementRef
-      ? this.getFlexiblePositionStrategy(target)
-      : this.getCoordinatesPositionStrategy(target);
-  }
-
-  private getFlexiblePositionStrategy(target: ElementRef): FlexibleConnectedPositionStrategy {
     return this.overlay
       .position()
-      .flexibleConnectedTo(target)
-      .withFlexibleDimensions(true)
-      .withPositions(DROPDOWN_POSITIONS);
-  }
-
-  private getCoordinatesPositionStrategy([x, y]: Position): FlexibleConnectedPositionStrategy {
-    return this.overlay.position().flexibleConnectedTo({ x, y }).withPositions(DROPDOWN_POSITIONS);
+      .flexibleConnectedTo(target instanceof HTMLElement ? target : { x: target[0], y: target[1] })
+      .withPositions(this.getOverlayPositionsByHorizontalPosition(config.horizontalPosition))
+      .withPush(false)
+      .withViewportMargin(VIEWPORT_MARGIN_PX);
   }
 
   private getOverlayWidth<TComponent extends DropdownComponentBase<unknown>>(
     config: DropdownConfig<TComponent, DropdownDataType<TComponent>>
   ): string | number {
-    const target: ElementRef<HTMLElement> | Position = config.target;
+    const target: HTMLElement | Position = config.target;
 
-    if (target instanceof ElementRef && config.widthType === 'by-trigger') {
-      const { width } = target.nativeElement.getBoundingClientRect();
+    if (target instanceof HTMLElement && config.widthType === 'by-trigger') {
+      const { width } = target.getBoundingClientRect();
       return width;
     }
 
     return 'auto';
+  }
+
+  private getOverlayPositionsByHorizontalPosition(
+    currentHorizontalPos: HorizontalConnectionPos
+  ): ConnectionPositionPair[] {
+    const sortedHorizontalPositions: HorizontalConnectionPos[] = HORIZONTAL_POSITIONS.sort(
+      (horizontalPos: HorizontalConnectionPos) => (horizontalPos === currentHorizontalPos ? -1 : 1)
+    );
+
+    const overlayPositions: ConnectionPositionPair[] = VERTICAL_POSITIONS.flatMap(
+      (verticalPos: VerticalConnectionPos) =>
+        sortedHorizontalPositions.map((horizontalPos: HorizontalConnectionPos) =>
+          this.getConnectionPositionPair(horizontalPos, verticalPos)
+        )
+    );
+
+    return overlayPositions;
+  }
+
+  private getConnectionPositionPair(
+    overlayX: HorizontalConnectionPos,
+    overlayY: VerticalConnectionPos
+  ): ConnectionPositionPair {
+    return new ConnectionPositionPair({ originX: overlayX, originY: 'bottom' }, { overlayX, overlayY });
   }
 }

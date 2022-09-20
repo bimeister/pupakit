@@ -64,6 +64,7 @@
     <demo-example-viewer>
       <demo-example-viewer-content>
         <pupa-button-multi
+          #buttonMulti
           [size]="size$ | async"
           [kind]="kind$ | async"
           [disabled]="disabled$ | async"
@@ -72,13 +73,17 @@
           [iconPosition]="iconPosition$ | async"
           [loading]="loading$ | async"
           [active]="active$ | async"
-          [dropdownMenuContent]="dropdownContent"
+          [expandActive]="expandActive$ | async"
         >
           ButtonMulti
+
+          <pupa-dropdown-menu
+            *pupaDropdownTemplate="buttonMulti; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
+            [dropdownRef]="dropdownRef"
+          >
+            <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async"> option </pupa-dropdown-menu-item>
+          </pupa-dropdown-menu>
         </pupa-button-multi>
-        <pupa-dropdown-menu-content #dropdownContent [horizontalPosition]="horizontalPosition$ | async">
-          <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async"> option </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu-content>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section>
