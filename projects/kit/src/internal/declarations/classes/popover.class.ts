@@ -8,6 +8,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementRef, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil, Uuid } from '@bimeister/utilities';
+import { OVERLAY_VIEWPORT_MARGIN_PX } from '../../../internal/constants/overlay-viewport-margin-px.const';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { PopoverContainerComponent } from '../../../lib/components/popover/components/popover-container/popover-container.component';
@@ -84,7 +85,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
         .position()
         .flexibleConnectedTo(anchor)
         .withPositions(OVERLAY_POSITIONS)
-        .withViewportMargin(4);
+        .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
       return elementPosition;
     }
@@ -93,7 +94,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
       .position()
       .flexibleConnectedTo({ x: anchor[0], y: anchor[1] })
       .withPositions(OVERLAY_POSITIONS)
-      .withViewportMargin(4);
+      .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
     return coordsPosition;
   }

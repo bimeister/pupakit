@@ -9,6 +9,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
 import { getUuid, isNil, Uuid } from '@bimeister/utilities';
+import { OVERLAY_VIEWPORT_MARGIN_PX } from '../../../internal/constants/overlay-viewport-margin-px.const';
 import { take } from 'rxjs/operators';
 import { DROPDOWN_CONTAINER_DATA_TOKEN } from '../../../internal/constants/tokens/dropdown-container-data.token';
 import { Theme } from '../../../internal/declarations/enums/theme.enum';
@@ -24,8 +25,6 @@ import { DropdownDataType } from '../../declarations/types/utility-types/dropdow
 
 const HORIZONTAL_POSITIONS: HorizontalConnectionPos[] = ['center', 'end', 'start'];
 const VERTICAL_POSITIONS: VerticalConnectionPos[] = ['top', 'bottom'];
-
-const VIEWPORT_MARGIN_PX: number = 4;
 
 @Injectable({ providedIn: 'root' })
 export class DropdownsService {
@@ -117,9 +116,9 @@ export class DropdownsService {
     return this.overlay
       .position()
       .flexibleConnectedTo(target instanceof HTMLElement ? target : { x: target[0], y: target[1] })
+      .withFlexibleDimensions(false)
       .withPositions(this.getOverlayPositionsByHorizontalPosition(config.horizontalPosition))
-      .withPush(false)
-      .withViewportMargin(VIEWPORT_MARGIN_PX);
+      .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
   }
 
   private getOverlayWidth<TComponent extends DropdownComponentBase<unknown>>(
