@@ -8,6 +8,7 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementRef, Injectable, Injector, OnDestroy, TemplateRef } from '@angular/core';
 import { filterNotNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { OVERLAY_VIEWPORT_MARGIN_PX } from '../../../../internal/constants/overlay-viewport-margin-px.const';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { TOOLTIP_SERVICE_TOKEN } from '../../../../internal/constants/tokens/tooltip-service.token';
@@ -149,7 +150,7 @@ export class TooltipService implements OnDestroy, ServiceInterface {
           .position()
           .flexibleConnectedTo(triggerRef)
           .withPositions(OVERLAY_POSITIONS)
-          .withViewportMargin(4);
+          .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
         return positionStrategy;
       })
