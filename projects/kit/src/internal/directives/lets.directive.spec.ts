@@ -34,39 +34,47 @@ describe('lets.directive.ts', () => {
     });
   });
 
-  beforeEach(waitForAsync(() => {
-    from(testBedStatic.compileComponents())
-      .pipe(take(1))
-      .subscribe(() => {
-        fixture = TestBed.createComponent(TestComponent);
-        component = fixture.componentInstance;
-      });
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      from(testBedStatic.compileComponents())
+        .pipe(take(1))
+        .subscribe(() => {
+          fixture = TestBed.createComponent(TestComponent);
+          component = fixture.componentInstance;
+        });
+    })
+  );
 
   beforeEach(() => {
     fixture.detectChanges();
   });
 
-  it('should allow to declare variables by name and use in the template', waitForAsync(() => {
-    const idTextContent: string = fixture.debugElement.query(By.css('#id')).nativeElement.textContent;
-    const nameTextContent: string = fixture.debugElement.query(By.css('#name')).nativeElement.textContent;
+  it(
+    'should allow to declare variables by name and use in the template',
+    waitForAsync(() => {
+      const idTextContent: string = fixture.debugElement.query(By.css('#id')).nativeElement.textContent;
+      const nameTextContent: string = fixture.debugElement.query(By.css('#name')).nativeElement.textContent;
 
-    combineLatest([component.id$, component.name$])
-      .pipe(take(1))
-      .subscribe(([idText, nameText]: [string, string]) => {
-        expect(idTextContent).toContain(idText);
-        expect(nameTextContent).toContain(nameText);
-      });
-  }));
+      combineLatest([component.id$, component.name$])
+        .pipe(take(1))
+        .subscribe(([idText, nameText]: [string, string]) => {
+          expect(idTextContent).toContain(idText);
+          expect(nameTextContent).toContain(nameText);
+        });
+    })
+  );
 
-  it('should allow to declare variable by "as" syntax and use in the template', waitForAsync(() => {
-    const jsonPipe: JsonPipe = testBedStatic.inject(JsonPipe);
-    const groupedVariablesJson: string = fixture.debugElement.query(By.css('#grouped')).nativeElement.textContent;
+  it(
+    'should allow to declare variable by "as" syntax and use in the template',
+    waitForAsync(() => {
+      const jsonPipe: JsonPipe = testBedStatic.inject(JsonPipe);
+      const groupedVariablesJson: string = fixture.debugElement.query(By.css('#grouped')).nativeElement.textContent;
 
-    combineLatest([component.id$, component.name$])
-      .pipe(take(1))
-      .subscribe(([id, name]: [string, string]) => {
-        expect(groupedVariablesJson).toContain(jsonPipe.transform({ id, name }));
-      });
-  }));
+      combineLatest([component.id$, component.name$])
+        .pipe(take(1))
+        .subscribe(([id, name]: [string, string]) => {
+          expect(groupedVariablesJson).toContain(jsonPipe.transform({ id, name }));
+        });
+    })
+  );
 });
