@@ -168,7 +168,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-inverse));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-inverse));
+      color: var(--button_icon-color, semantic-color(icons-inverse));
     }
 
     &:not(:disabled) {
@@ -201,7 +201,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-primary));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-primary));
+      color: var(--button_icon-color, semantic-color(icons-primary));
     }
 
     &:not(:disabled) {
@@ -233,7 +233,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-primary));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-primary));
+      color: var(--button_icon-color, semantic-color(icons-primary));
     }
 
     &:not(:disabled) {
@@ -264,7 +264,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-inverse));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-inverse));
+      color: var(--button_icon-color, semantic-color(icons-inverse));
     }
 
     &:not(:disabled) {
@@ -296,7 +296,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-inverse));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-inverse));
+      color: var(--button_icon-color, semantic-color(icons-inverse));
     }
 
     &:not(:disabled) {
@@ -328,7 +328,7 @@ $buttonSmallBorderRadius: 0.5rem;
     color: var(--button_text-color, semantic-color(text-inverse));
 
     .button__icon {
-      color: var(--button-icon_color, semantic-color(icons-inverse));
+      color: var(--button_icon-color, semantic-color(icons-inverse));
     }
 
     &:not(:disabled) {
