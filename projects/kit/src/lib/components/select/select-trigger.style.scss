@@ -181,6 +181,6 @@
   gap: 1px;
 
   &__icon-invalid {
-    --button-icon_color: #{semantic-color(kind-danger-normal)};
+    --button_icon-color: #{semantic-color(kind-danger-normal)};
   }
 }
