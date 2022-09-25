@@ -112,6 +112,6 @@
   }
 
   &_bordered {
-    border: 1px solid color(neutral-1);
+    border: 1px solid var(--avatar-border_color, color(neutral-1));
   }
 }

@@ -35,6 +35,7 @@
   }
 
   &__right {
+    display: flex;
     position: sticky;
     right: 0;
     height: 6rem;
