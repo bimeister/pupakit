@@ -21,8 +21,8 @@ import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/d
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
-import { ButtonModule } from '../buttons/button.module';
 import { DrawerLayoutHeaderTabsComponent } from './components/drawer-layout-header-tabs/drawer-layout-header-tabs.component';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,7 @@ import { DrawerLayoutHeaderTabsComponent } from './components/drawer-layout-head
     OverlayModule,
     PortalModule,
     IconModule.forFeature([mdMoreIcon, mdCloseIcon, appFitToPageIcon, appResizeIcon]),
-    ButtonModule,
+    ButtonsModule,
     ScrollableModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -24,7 +24,7 @@ import { TreeLayoutModule } from '../tree-layout/tree-layout.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 import { SelectTriggerTagComponent } from './components/select-trigger-tag/select-trigger-tag.component';
 import { OptionModule } from '../option/option.module';
-import { ButtonModule } from '../buttons/button.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -58,7 +58,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     CheckboxModule,
     TagModule,
     ThemeWrapperModule,
-    ButtonModule,
+    ButtonsModule,
     IconModule.forFeature([appChevronDownIcon, appCrossCircleIcon, appInfoIcon]),
     TreeLayoutModule,
     OptionModule,

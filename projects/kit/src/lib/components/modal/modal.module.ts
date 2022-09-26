@@ -2,6 +2,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 import { ScrollableModule } from '../scrollable/scrollable.module';
 import { ThemeWrapperModule } from '../theme-wrapper/theme-wrapper.module';
 import { ModalButtonIconComponent } from './components/modal-button-icon/modal-button-icon.component';
@@ -16,7 +17,6 @@ import { ModalLayoutHeaderActionsComponent } from './components/modal-layout-hea
 import { ModalLayoutHeaderComponent } from './components/modal-layout-header/modal-layout-header.component';
 import { ModalLayoutTitleComponent } from './components/modal-layout-title/modal-layout-title.component';
 import { ModalLayoutComponent } from './components/modal-layout/modal-layout.component';
-import { ButtonModule } from '../buttons/button.module';
 
 @NgModule({
   declarations: [
@@ -33,7 +33,7 @@ import { ButtonModule } from '../buttons/button.module';
     ModalCloseButtonComponent,
     ModalExpandButtonComponent,
   ],
-  imports: [SharedModule, ButtonModule, OverlayModule, PortalModule, ThemeWrapperModule, ScrollableModule],
+  imports: [SharedModule, ButtonsModule, OverlayModule, PortalModule, ThemeWrapperModule, ScrollableModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     ModalLayoutComponent,

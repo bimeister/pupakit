@@ -10,7 +10,7 @@ import { appChevronDownIcon } from '../../../internal/constants/icons/app-chevro
 import { CheckboxModule } from '../../../lib/components/checkbox/checkbox.module';
 import { SpinnerModule } from '../../../lib/components/spinner/spinner.module';
 import { TreeNodeSkeletonComponent } from './components/tree-node-skeleton/tree-node-skeleton.component';
-import { ButtonModule } from '../buttons/button.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 @NgModule({
   declarations: [TreeNodeComponent, TreeNodeActionsDirective, TreeNodeSkeletonComponent],
@@ -18,7 +18,7 @@ import { ButtonModule } from '../buttons/button.module';
     CdkTreeModule,
     CommonModule,
     IconModule,
-    ButtonModule,
+    ButtonsModule,
     IconModule.forFeature([appCircle, appChevronDownIcon, appChevronRightIcon]),
     CheckboxModule,
     SpinnerModule,

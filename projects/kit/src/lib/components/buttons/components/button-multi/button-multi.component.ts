@@ -7,14 +7,15 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { DropdownMenuContentComponent } from '../../../dropdown-menu/components/dropdown-menu-content/dropdown-menu-content.component';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { filterTruthy, isNil } from '@bimeister/utilities';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ButtonComponent } from '../button/button.component';
-import { DropdownMenuDirective } from '../../../dropdown-menu/directives/dropdown-menu.directive';
 import { ButtonMultiKind } from '../../../../../internal/declarations/types/button-multi-kind.type';
+import { DropdownDirective } from '../../../dropdown/directives/dropdown.directive';
+import { DropdownHost } from '../../../../../internal/declarations/interfaces/dropdown-host.interface';
+import { DropdownDirectiveParams } from '../../../../../internal/declarations/interfaces/dropdown-directive-params.interface';
 
 @Component({
   selector: 'pupa-button-multi',
@@ -23,18 +24,16 @@ import { ButtonMultiKind } from '../../../../../internal/declarations/types/butt
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ButtonMultiComponent extends ButtonComponent implements OnChanges, AfterViewInit {
-  @Input() public readonly dropdownMenuContent: DropdownMenuContentComponent;
-
+export class ButtonMultiComponent extends ButtonComponent implements OnChanges, AfterViewInit, DropdownHost {
   @Input() public readonly kind: ButtonMultiKind = 'primary';
 
-  @ViewChild(DropdownMenuDirective) private readonly dropdownMenu: DropdownMenuDirective;
+  @ViewChild(DropdownDirective, { static: true }) private readonly dropdown: DropdownDirective;
 
   private readonly isComponentViewReady$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isMenuOpened$: Observable<boolean> = this.isComponentViewReady$.pipe(
     startWith(false),
     filterTruthy(),
-    switchMap(() => this.dropdownMenu.isOpen$)
+    switchMap(() => this.dropdown.opened$)
   );
 
   public readonly resultClassListExpand$: Observable<string[]> = combineLatest([...this.commonButtonClasses]).pipe(
@@ -51,5 +50,9 @@ export class ButtonMultiComponent extends ButtonComponent implements OnChanges, 
 
   public ngAfterViewInit(): void {
     this.isComponentViewReady$.next(true);
+  }
+
+  public setDropdownParams(params: DropdownDirectiveParams): void {
+    this.dropdown.setDropdownParams(params);
   }
 }

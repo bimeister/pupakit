@@ -6,6 +6,7 @@ import { appEyeOffIcon } from '../../../internal/constants/icons/app-eye-off-ico
 import { appEyeOnIcon } from '../../../internal/constants/icons/app-eye-on-icon.const';
 import { appInfoIcon } from '../../../internal/constants/icons/app-info-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 import { DateTimePickerModule } from '../date-time-picker/date-time-picker.module';
 import { DroppableModule } from '../droppable/droppable.module';
 import { IconModule } from '../icon/icon.module';
@@ -19,7 +20,6 @@ import { InputNumberComponent } from './components/input-number/input-number.com
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
-import { ButtonModule } from '../buttons/button.module';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -41,7 +41,7 @@ const DECLARATIONS: any[] = [...EXPORTS];
     SharedModule,
     DateTimePickerModule,
     DroppableModule,
-    ButtonModule,
+    ButtonsModule,
     TooltipModule,
     IconModule.forFeature([appCalendarIcon, appEyeOnIcon, appEyeOffIcon, appCrossCircleIcon, appInfoIcon]),
     NgxMaskModule.forRoot(),

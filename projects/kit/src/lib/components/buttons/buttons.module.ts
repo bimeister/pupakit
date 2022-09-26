@@ -18,4 +18,4 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
   imports: [SharedModule, SpinnerModule, IconModule.forFeature(), DropdownModule],
   exports: [...EXPORTS],
 })
-export class ButtonModule {}
+export class ButtonsModule {}

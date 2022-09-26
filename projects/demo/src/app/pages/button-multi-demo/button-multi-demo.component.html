@@ -73,7 +73,6 @@
           [iconPosition]="iconPosition$ | async"
           [loading]="loading$ | async"
           [active]="active$ | async"
-          [expandActive]="expandActive$ | async"
         >
           ButtonMulti
 
@@ -166,31 +165,6 @@
             </p>
           </ng-container>
           <demo-props-radio-select #type$ [options]="typeOptions" direction="row"></demo-props-radio-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-section-label>PupaDropdownMenuContent Properties</demo-example-viewer-section-label>
-        <demo-example-viewer-property decoratorName="input" name="horizontalPosition" type="HorizontalConnectionPos">
-          <ng-container *demoExampleViewerPropertyDescription>Sets position of the dropdown.</ng-container>
-          <demo-props-radio-select
-            #horizontalPosition$
-            [options]="horizontalPositions"
-            direction="row"
-          ></demo-props-radio-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-section-label>PupaDropdownMenuItem Properties</demo-example-viewer-section-label>
-        <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription
-            >Whether the dropdown option is in disabled state.
-          </ng-container>
-          <demo-props-switcher #optionDisabled$></demo-props-switcher>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="plain" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription
-            >Whether the dropdown option is in plain state.
-          </ng-container>
-          <demo-props-switcher #optionPlain$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
