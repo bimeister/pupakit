@@ -1,4 +1,4 @@
-<div class="button-multi" type="submit">
+<div class="button-multi" type="submit" #mainContainer>
   <button
     [disabled]="(disabled$ | async) ? true : null"
     [ngClass]="resultClassList$ | async"
@@ -21,11 +21,12 @@
   <button
     (click)="$event.stopPropagation()"
     [disabled]="(disabled$ | async) ? true : null"
-    [dropdownMenuDisabled]="disabled$ | async"
     [ngClass]="resultClassListExpand$ | async"
     [class.button_active]="isMenuOpened$ | async"
-    [pupaDropdownMenu]="dropdownMenuContent"
     [tabIndex]="tabIndex"
+    pupaDropdown
+    [pupaDropdownDisabled]="disabled$ | async"
+    [pupaDropdownRealTriggerElement]="mainContainer"
     class="button-multi_menu-button button"
   >
     <pupa-icon [name]="'ios-arrow-down'" class="button__icon" focusable="false"></pupa-icon>

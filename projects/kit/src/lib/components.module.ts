@@ -8,7 +8,6 @@ import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
 import { BreadcrumbsModule } from './components/breadcrumbs/breadcrumbs.module';
 import { ButtonGroupModule } from './components/button-group/button-group.module';
-import { ButtonModule } from './components/buttons/button.module';
 import { CardModule } from './components/card/card.module';
 import { CheckboxModule } from './components/checkbox/checkbox.module';
 import { ControlTextModule } from './components/control-text/control-text.module';
@@ -53,11 +52,12 @@ import { TreeNewModule } from './components/tree-new/tree-new.module';
 import { IconHolderModule } from './components/icon-holder/icon-holder.module';
 import { OptionModule } from './components/option/option.module';
 import { SectionModule } from './components/section/section.module';
+import { ButtonsModule } from './components/buttons/buttons.module';
 
 const EXPORTS: any[] = [
   AccordionModule,
   LabelModule,
-  ButtonModule,
+  ButtonsModule,
   CardModule,
   CheckboxModule,
   ControlTextModule,

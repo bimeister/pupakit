@@ -8,8 +8,8 @@ import { PupaActionTemplateDirective } from './directives/action-template.direct
 import { PupaActionDropdownTemplateDirective } from './directives/action-dropdown-template.directive';
 import { PupaActionMoreTriggerTemplateDirective } from './directives/action-more-trigger-template.directive';
 import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
-import { ButtonModule } from '../buttons/button.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 
 const DECLARATIONS: Type<unknown>[] = [
   ActionsComponent,
@@ -21,6 +21,6 @@ const DECLARATIONS: Type<unknown>[] = [
 @NgModule({
   declarations: [...DECLARATIONS],
   exports: [...DECLARATIONS],
-  imports: [CommonModule, ButtonModule, DropdownModule, DropdownMenuModule, ScrollingModule],
+  imports: [CommonModule, ButtonsModule, DropdownModule, DropdownMenuModule, ScrollingModule],
 })
 export class ActionsModule {}

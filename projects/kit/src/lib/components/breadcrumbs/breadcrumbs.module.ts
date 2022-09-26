@@ -2,6 +2,7 @@ import { NgModule, Type } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appChevronRightIcon } from '../../../internal/constants/icons/app-chevron-right-icon.const';
 import { SharedModule } from '../../../internal/shared/shared.module';
+import { ButtonsModule } from '../buttons/buttons.module';
 import { DropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
 import { DropdownModule } from '../dropdown/dropdown.module';
 import { IconModule } from '../icon/icon.module';
@@ -11,7 +12,6 @@ import { BreadcrumbUnfitTriggerComponent } from './components/breadcrumb-unfit-t
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 import { PupaBreadcrumbTemplateDirective } from './directives/breadcrumb-template.directive';
-import { ButtonModule } from '../buttons/button.module';
 
 const COMPONENTS: Type<unknown>[] = [
   BreadcrumbsComponent,
@@ -30,7 +30,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     SharedModule,
     RouterModule,
     IconModule.forFeature([appChevronRightIcon]),
-    ButtonModule,
+    ButtonsModule,
     DropdownModule,
     DropdownMenuModule,
     TooltipModule,
