@@ -5,4 +5,5 @@ export interface TreeControllerOptions {
   scrollBehavior?: ScrollBehavior;
   trackBy?: TrackByFunction<FlatTreeItem>;
   hasDragAndDrop?: boolean;
+  treeItemSizePx?: number;
 }

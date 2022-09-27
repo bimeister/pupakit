@@ -1,0 +1,12 @@
+<pupa-tree-new #treeNew [controller]="controller" class="tree">
+  <ng-container *pupaTreeItemTemplate="let data">
+    <pupa-tree-node
+      *pupaLet="treeNew.getTreeNodeProperties(data) | async as treeNodeProperties"
+      [treeNodeProperties]="treeNodeProperties"
+    >
+      <pupa-checkbox [value]="treeNodeProperties.isSelected" [disabled]="treeNodeProperties.isDisabled">
+        {{ data?.name }} (custom template)
+      </pupa-checkbox>
+    </pupa-tree-node>
+  </ng-container>
+</pupa-tree-new>

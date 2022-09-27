@@ -49,7 +49,6 @@ interface Position {
 }
 type ScrollDirection = null | 'up' | 'down';
 
-const TREE_ITEM_SIZE_PX: number = 28;
 const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
 
 interface DragAndDropMeta {
@@ -84,6 +83,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   public isLoading$: Observable<boolean>;
   public hasDragAndDrop$: Observable<boolean>;
   public trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
+  public treeItemSizePx$: Observable<number>;
   private scrollBehavior$: Observable<ScrollBehavior>;
   private eventBus: EventBus;
 
@@ -91,7 +91,6 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     TreeNewComponent.getLevel,
     TreeNewComponent.isExpandable
   );
-  public readonly treeItemSizePx: number = TREE_ITEM_SIZE_PX;
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
   public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
   private readonly expandWithDelay$: Subject<Nullable<FlatTreeItem>> = new Subject<Nullable<FlatTreeItem>>();
@@ -235,6 +234,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     this.eventBus = this.controller.eventBus;
     this.scrollBehavior$ = this.dataDisplayCollection.scrollBehavior$;
     this.trackBy$ = this.dataDisplayCollection.trackBy$;
+    this.treeItemSizePx$ = this.dataDisplayCollection.treeItemSizePx$;
     this.data$ = this.dataDisplayCollection.data$;
     this.isLoading$ = this.dataDisplayCollection.isLoading$;
     this.selectedIdsList$ = this.dataDisplayCollection.selectedIdsList$;

@@ -1,8 +1,5 @@
-import { Observable } from 'rxjs';
-import { FlatTreeItem } from '../classes/flat-tree-item.class';
-import { TrackByFunction } from '@angular/core';
-
-export interface TreeDataDisplayCollectionRef {
+export const treeDataDisplayCollectionRefDeclarationsData: string = `
+interface TreeDataDisplayCollectionRef {
   readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
   readonly treeItemSizePx$: Observable<number>;
   readonly scrollBehavior$: Observable<ScrollBehavior>;
@@ -17,3 +14,5 @@ export interface TreeDataDisplayCollectionRef {
   setData(data: FlatTreeItem[]): Observable<FlatTreeItem[]>;
   setSelectedIdsList(value: string[]): void;
 }
+
+`;

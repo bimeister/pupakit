@@ -1,0 +1,14 @@
+<div class="row">
+  <pupa-switcher [size]="'small'" [formControl]="withActions"></pupa-switcher>
+  <span class="label">Show tree items' actions</span>
+</div>
+
+<pupa-tree-new #treeNew [controller]="controller" class="tree">
+  <pupa-tree-node *pupaTreeItemTemplate="let data" [treeNodeProperties]="treeNew.getTreeNodeProperties(data) | async"
+    >{{ data?.name }}
+    <ng-container *pupaTreeNodeActions="withActions.value">
+      <pupa-button-icon icon="app-eye-on" size="s" kind="secondary"></pupa-button-icon>
+      <pupa-button-icon icon="app-more" size="s" kind="secondary"></pupa-button-icon>
+    </ng-container>
+  </pupa-tree-node>
+</pupa-tree-new>

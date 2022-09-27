@@ -10,6 +10,7 @@ import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
 import { EventsQueue } from './events-queue.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
+import { DEFAULT_TREE_ITEM_SIZE_PX } from '../../constants/default-tree-item-size-px.const';
 
 export class TreeController {
   public readonly eventBus: EventBus = new EventBus();
@@ -25,6 +26,7 @@ export class TreeController {
     this.setScrollBehavior(options?.scrollBehavior);
     this.setTrackBy(options?.trackBy);
     this.setHasDragAndDrop(options?.hasDragAndDrop);
+    this.setTreeItemSizePx(options?.treeItemSizePx);
   }
 
   protected dispatchInQueue(event: TreeEvents.TreeEventBase): void {
@@ -86,5 +88,9 @@ export class TreeController {
 
   private setHasDragAndDrop(hasDragAndDrop: boolean = false): void {
     this.dataDisplayCollection.hasDragAndDrop$.next(hasDragAndDrop);
+  }
+
+  private setTreeItemSizePx(treeItemSizePx: number = DEFAULT_TREE_ITEM_SIZE_PX): void {
+    this.dataDisplayCollection.treeItemSizePx$.next(treeItemSizePx);
   }
 }
