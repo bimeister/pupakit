@@ -1,23 +1,10 @@
-import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { getUuid } from '@bimeister/utilities';
-import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
-import { TreeController } from '@kit/internal/declarations/classes/tree-controller.class';
-import { TreeEvents } from '@kit/internal/declarations/events/tree.events';
-import { EventBus } from '@bimeister/event-bus/rxjs';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { treeControllerDeclarationsData } from './data/tree-controller-declarations.data';
+import { treeControllerOptionsDeclarationsData } from './data/tree-controller-options-declarations.data';
+import { flatTreeItemDeclarationsData } from './data/flat-tree-item-declarations.data';
+import { treeDataDisplayCollectionRefDeclarationsData } from './data/tree-data-display-collection-ref-declarations.data';
 
-const WOLF: FlatTreeItem = new FlatTreeItem(true, 'Wolves', null, getUuid(), { parentId: null });
-const CAR: FlatTreeItem = new FlatTreeItem(true, 'Cars', null, getUuid(), { parentId: WOLF.id });
-const HAPPY: FlatTreeItem = new FlatTreeItem(false, '😀', null, getUuid(), { parentId: null });
-const BURGER: FlatTreeItem = new FlatTreeItem(false, 'Burger', null, getUuid(), { parentId: null }, true);
-
-const DATA: FlatTreeItem[] = [
-  WOLF,
-  ...generateChildren(WOLF.id, `${WOLF.name} child`, 3),
-  CAR,
-  ...generateChildren(CAR.id, `${CAR.name} child`, 3),
-  HAPPY,
-  BURGER,
-];
+const BASE_REQUEST_PATH: string = 'tree-new-demo/examples';
 
 @Component({
   selector: 'demo-new-tree',
@@ -27,44 +14,64 @@ const DATA: FlatTreeItem[] = [
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class TreeNewDemoComponent {
-  public readonly customTreeController: TreeController = new TreeController();
-  public readonly defaultTreeController: TreeController = new TreeController();
-  private readonly eventBus: EventBus;
+  public readonly example1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-1/tree-new-example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-1/tree-new-example-1.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-1/tree-new-example-1.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-  constructor(public readonly injector: Injector) {
-    this.initController(this.customTreeController);
-    this.initController(this.defaultTreeController);
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/tree-new-example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/tree-new-example-2.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-2/tree-new-example-2.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-    this.eventBus = this.customTreeController.eventBus;
-  }
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/tree-new-example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/tree-new-example-3.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-3/tree-new-example-3.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-  public customTreeNodeClick(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new TreeEvents.Click(treeItem));
-  }
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/tree-new-example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/tree-new-example-4.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-4/tree-new-example-4.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-  private initController(controller: TreeController): void {
-    controller.setChildren(null, this.fetch());
-    controller
-      .getEvents(TreeEvents.Expand)
-      .subscribe((event: TreeEvents.Expand) => controller.setChildren(event.payload, this.fetch(event.payload)));
-    controller
-      .getEvents(TreeEvents.Click)
-      .subscribe((event: TreeEvents.Click) => controller.setSelected(event.payload.id));
-    controller
-      .getEvents(TreeEvents.Collapse)
-      .subscribe((event: TreeEvents.Collapse) => controller.removeChildren(event.payload));
-  }
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/tree-new-example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/tree-new-example-5.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-5/tree-new-example-5.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-  private fetch(parentId: string = null): FlatTreeItem[] {
-    const children: FlatTreeItem[] = [...DATA].filter((item: FlatTreeItem) => item.originalData.parentId === parentId);
-    return children;
-  }
-}
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/tree-new-example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/tree-new-example-6.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-6/tree-new-example-6.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
 
-function generateChildren(parentId: string, name: string, leafElementsCount: number): FlatTreeItem[] {
-  return new Array(leafElementsCount)
-    .fill(null)
-    .map(
-      (_: null, index: number) => new FlatTreeItem(false, `${name} ${index + 1}`, null, getUuid(), { parentId }, true)
-    );
+  public readonly example7Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-7/tree-new-example-7.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-7/tree-new-example-7.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-7/tree-new-example-7.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree-for-scroll-demo.data.ts`,
+  };
+
+  public readonly example8Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-8/tree-new-example-8.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-8/tree-new-example-8.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-8/tree-new-example-8.component.ts`,
+    DATA: `${BASE_REQUEST_PATH}/example-tree.data.ts`,
+  };
+
+  public readonly treeControllerDeclarationsData: string = treeControllerDeclarationsData;
+  public readonly treeControllerOptionsDeclarationsData: string = treeControllerOptionsDeclarationsData;
+  public readonly flatTreeItemDeclarationsData: string = flatTreeItemDeclarationsData;
+  public readonly treeDataDisplayCollectionRefDeclarationsData: string = treeDataDisplayCollectionRefDeclarationsData;
 }

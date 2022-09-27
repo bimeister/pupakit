@@ -1,0 +1,12 @@
+<div class="row">
+  <pupa-button (click)="scrollToTreeNode()" class="button" kind="secondary">Scroll to random tree item</pupa-button>
+  <ng-container *ngIf="treeNodeToScrollId$ | async as treeNodeToScrollId"
+    >Tree node to scroll id: {{ treeNodeToScrollId }}</ng-container
+  >
+</div>
+
+<pupa-tree-new #treeNew [controller]="controller" class="tree">
+  <pupa-tree-node *pupaTreeItemTemplate="let data" [treeNodeProperties]="treeNew.getTreeNodeProperties(data) | async">
+    Id: {{ data?.id }} - {{ data?.name }}
+  </pupa-tree-node>
+</pupa-tree-new>

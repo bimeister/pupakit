@@ -1,5 +1,6 @@
 import { TrackByFunction } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
+import { DEFAULT_TREE_ITEM_SIZE_PX } from '../../constants/default-tree-item-size-px.const';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-collection-ref.interface';
@@ -15,6 +16,7 @@ export class TreeDataDisplayCollection implements TreeDataDisplayCollectionRef {
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
   public readonly expandedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
   public readonly hasDragAndDrop$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public readonly treeItemSizePx$: BehaviorSubject<number> = new BehaviorSubject(DEFAULT_TREE_ITEM_SIZE_PX);
   public readonly isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public setExpandedIdsList(value: string[]): void {

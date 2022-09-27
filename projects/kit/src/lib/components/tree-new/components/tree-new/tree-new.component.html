@@ -7,7 +7,7 @@
     <cdk-virtual-scroll-viewport
       pupaScrollableContent
       #skeletonViewPort
-      [itemSize]="treeItemSizePx"
+      [itemSize]="treeItemSizePx$ | async"
       class="viewport viewport_skeleton"
     >
       <pupa-skeleton>
@@ -19,7 +19,7 @@
   </pupa-scrollable>
 
   <pupa-scrollable>
-    <cdk-virtual-scroll-viewport pupaScrollableContent #viewPort [itemSize]="treeItemSizePx" class="viewport">
+    <cdk-virtual-scroll-viewport pupaScrollableContent #viewPort [itemSize]="treeItemSizePx$ | async" class="viewport">
       <ng-container *cdkVirtualFor="let treeItem of data$ | async"> </ng-container>
       <cdk-tree
         [dataSource]="dataSource"

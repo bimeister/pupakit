@@ -1,0 +1,19 @@
+@use 'mixins' as *;
+
+.tree {
+  width: 50%;
+  height: 50rem;
+
+  @include lt-sm() {
+    width: 100%;
+  }
+}
+
+.row {
+  margin-bottom: 4rem;
+  @include flex-container(row, center);
+}
+
+.button {
+  margin-right: 2rem;
+}

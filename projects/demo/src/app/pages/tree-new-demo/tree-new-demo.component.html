@@ -1,21 +1,62 @@
-<h1>Tree (new)</h1>
+<h1>Tree</h1>
 
-<demo-example-viewer>
-  <demo-example-viewer-content [isSticky]="false">
-    <div class="tree-wrapper">
-      <pupa-tree-new #treeNew [controller]="customTreeController" class="tree-wrapper__item">
-        <pupa-tree-node
-          *pupaTreeItemTemplate="let data"
-          (click)="customTreeNodeClick(data)"
-          [treeNodeProperties]="treeNew.getTreeNodeProperties(data) | async"
-          >{{ data?.name }} (customTemplate)
-          <ng-container *pupaTreeNodeActions>
-            <pupa-button-icon icon="app-eye-on" size="s" kind="secondary"></pupa-button-icon>
-            <pupa-button-icon icon="app-more" size="s" kind="secondary"></pupa-button-icon>
-          </ng-container>
-        </pupa-tree-node>
-      </pupa-tree-new>
-      <pupa-tree-new [controller]="defaultTreeController" class="tree-wrapper__item"></pupa-tree-new>
-    </div>
-  </demo-example-viewer-content>
-</demo-example-viewer>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-tree-new-example-1 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Custom template usage</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-tree-new-example-2 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Tree item actions usage</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-tree-new-example-3 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-3>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Tree with single selection</h3>
+    <pupa-code-container [content]="example4Content">
+      <demo-tree-new-example-4 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-4>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Tree with multiple selection</h3>
+    <pupa-code-container [content]="example5Content">
+      <demo-tree-new-example-5 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-5>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Loading tree</h3>
+    <pupa-code-container [content]="example6Content">
+      <demo-tree-new-example-6 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-6>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Scroll to tree item</h3>
+    <pupa-code-container [content]="example7Content">
+      <demo-tree-new-example-7 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-7>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Remove tree item</h3>
+    <pupa-code-container [content]="example8Content">
+      <demo-tree-new-example-8 *pupaCodeContainerPreviewTemplate></demo-tree-new-example-8>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <h3 demoAnchor>TreeController</h3>
+    <p>Uses to customize behavior and data of the tree.</p>
+    <pupa-code [code]="treeControllerDeclarationsData"></pupa-code>
+
+    <h3 demoAnchor>TreeControllerOptions</h3>
+    <p>Uses to setup TreeController.</p>
+    <pupa-code [code]="treeControllerOptionsDeclarationsData"></pupa-code>
+
+    <h3 demoAnchor>FlatTreeItem</h3>
+    <p>Tree item data model</p>
+    <pupa-code [code]="flatTreeItemDeclarationsData"></pupa-code>
+
+    <h3 demoAnchor>TreeDataDisplayCollectionRef</h3>
+    <p>Current tree state model.</p>
+    <pupa-code [code]="treeDataDisplayCollectionRefDeclarationsData"></pupa-code>
+  </div>
+</demo-page>

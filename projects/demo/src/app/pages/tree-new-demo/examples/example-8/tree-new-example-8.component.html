@@ -1,0 +1,17 @@
+<pupa-tree-new #treeNew [controller]="controller" class="tree">
+  <ng-container *pupaTreeItemTemplate="let data">
+    <pupa-tree-node
+      *pupaLet="treeNew.getTreeNodeProperties(data) | async as treeNodeProperties"
+      [treeNodeProperties]="treeNodeProperties"
+    >
+      {{ data?.name }}
+      <pupa-button-icon
+        *pupaTreeNodeActions
+        (click)="removeTreeItem(data)"
+        icon="app-trash"
+        size="s"
+        kind="secondary"
+      ></pupa-button-icon>
+    </pupa-tree-node>
+  </ng-container>
+</pupa-tree-new>
