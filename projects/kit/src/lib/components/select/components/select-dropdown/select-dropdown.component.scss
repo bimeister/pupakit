@@ -19,6 +19,10 @@
   margin-top: 2rem;
   padding: 1rem 2rem 3rem 2rem;
 
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
   @include dark-theme-class-parent() {
     background-color: color(neutral-1000);
     border-color: color(neutral-500);
