@@ -4,6 +4,7 @@
 :host {
   display: block;
   width: 100%;
+  flex-shrink: 0;
 }
 
 .footer {

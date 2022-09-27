@@ -5,13 +5,15 @@ $max-height_item-container: 75rem;
 :host {
   display: block;
   width: 100%;
+  height: 100%;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  overflow: hidden;
 }
 
 .options-container {
-  margin-top: 1rem;
-  margin-bottom: 3rem;
   width: 100%;
-  height: auto;
+  height: 100%;
 
   max-height: $max-height_item-container;
   overflow-y: auto;
