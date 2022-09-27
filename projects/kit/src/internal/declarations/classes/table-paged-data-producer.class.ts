@@ -1,5 +1,6 @@
 import { ListRange } from '@angular/cdk/collections';
-import { distinctUntilSerializedChanged, filterNotNil } from '@bimeister/utilities';
+import { distinctUntilSerializedChanged, filterNotNil, shareReplayWithRefCount } from '@bimeister/utilities';
+import { isNil } from '@bimeister/utilities/common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { debounceTime, map, tap, withLatestFrom } from 'rxjs/operators';
 import { TableEvents } from '../events/table.events';
@@ -8,38 +9,100 @@ import { TablePagedDataProducerOptions } from '../interfaces/table-paged-data-pr
 import { ListRangesIntersectionProducer } from './list-ranges-intersection-producer.class';
 import { TableController } from './table-controller.class';
 
-const REACT_ON_RANGE_CHANGES_DELAY_MS: number = 500;
+const DEFAULT_LIST_RANGE_CHANGES_DEBOUNCE_TIME_MS: number = 500;
+const DEFAULT_ROWS_BUFFER_SIZE: number = 200;
 
 export class TablePagedDataProducer<T> {
-  private readonly reactRangeChangesTimeMs: number =
-    this.options?.reactRangeChangesTimeMs ?? REACT_ON_RANGE_CHANGES_DELAY_MS;
   private readonly bodyInitialCountOfSkeletonRows: number = this.options?.bodyInitialCountOfSkeletonRows;
 
-  private readonly previousListRange$: BehaviorSubject<ListRange> = new BehaviorSubject<ListRange>({
-    start: null,
-    end: null,
-  });
+  private readonly listRangeChangesDebounceTimeMs: number =
+    this.options?.listRangeChangesDebounceTimeMs ?? DEFAULT_LIST_RANGE_CHANGES_DEBOUNCE_TIME_MS;
+
+  private readonly rowsBufferSize: number = this.options?.rowsBufferSize ?? DEFAULT_ROWS_BUFFER_SIZE;
+
+  private readonly loadedSlice$: BehaviorSubject<ListRange | null> = new BehaviorSubject<ListRange | null>(null);
 
   public readonly arguments$: Observable<PagedVirtualScrollArguments> = this.controller
     .getEvents(TableEvents.ListRangeChanged)
     .pipe(
       filterNotNil(),
-      map((event: TableEvents.ListRangeChanged) => event.listRange),
+      map(({ listRange }: TableEvents.ListRangeChanged) => listRange),
       distinctUntilSerializedChanged(),
-      filterNotNil(),
-      debounceTime(this.reactRangeChangesTimeMs),
-      withLatestFrom(this.previousListRange$),
-      tap(([currentRange, _previousRange]: [ListRange, ListRange]) => this.previousListRange$.next(currentRange)),
-      map(([currentRange, previousRange]: [ListRange, ListRange]) =>
-        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(previousRange, currentRange)
+      debounceTime(this.listRangeChangesDebounceTimeMs),
+      withLatestFrom(this.loadedSlice$),
+      map(([visibleSlice, loadedSlice]: [ListRange, ListRange | null]) =>
+        TablePagedDataProducer.getSliceToLoad(this.rowsBufferSize, visibleSlice, loadedSlice)
       ),
-      distinctUntilSerializedChanged()
-    );
+      filterNotNil(),
+      distinctUntilSerializedChanged(),
+      withLatestFrom(this.loadedSlice$),
+      tap(([sliceToLoad]: [ListRange, ListRange]) => this.loadedSlice$.next(sliceToLoad)),
+      map(([sliceToLoad, loadedSlice]: [ListRange, ListRange]) =>
+        ListRangesIntersectionProducer.getPagedVirtualScrollArguments(loadedSlice, sliceToLoad)
+      ),
+      shareReplayWithRefCount()
+    ) as Observable<PagedVirtualScrollArguments>;
 
   constructor(
     private readonly controller: TableController<T>,
     private readonly options?: TablePagedDataProducerOptions
   ) {
     this.controller.setBodyInitialCountOfSkeletonRows(this.bodyInitialCountOfSkeletonRows);
+  }
+
+  private static getSliceToLoad(
+    rowsBufferSize: number,
+    visibleSlice: ListRange,
+    loadedSlice: ListRange | null = null
+  ): ListRange | undefined {
+    if (isNil(loadedSlice)) {
+      return TablePagedDataProducer.getSliceToLoadByVisibleSlice(visibleSlice, rowsBufferSize);
+    }
+
+    const needToLoadNewSlice: boolean = TablePagedDataProducer.isFirstSliceReachedSecond(visibleSlice, loadedSlice);
+    if (!needToLoadNewSlice) {
+      return;
+    }
+
+    return TablePagedDataProducer.getSliceToLoadByVisibleSlice(visibleSlice, rowsBufferSize);
+  }
+
+  private static getSliceToLoadByVisibleSlice(visibleSlice: ListRange, rowsBufferSize: number): ListRange {
+    const visibleSliceRowsCount: number = Math.floor(visibleSlice.end - visibleSlice.start);
+
+    if (rowsBufferSize < visibleSliceRowsCount) {
+      return {
+        start: visibleSlice.start,
+        end: visibleSlice.end,
+      };
+    }
+
+    const halfRowsBufferSize: number = Math.floor(rowsBufferSize / 2);
+
+    if (visibleSlice.start >= halfRowsBufferSize) {
+      return {
+        start: visibleSlice.start - halfRowsBufferSize,
+        end: visibleSlice.start + halfRowsBufferSize,
+      };
+    }
+
+    if (visibleSlice.end >= halfRowsBufferSize) {
+      return {
+        start: 0,
+        end: rowsBufferSize,
+      };
+    }
+
+    return {
+      start: 0,
+      end: halfRowsBufferSize,
+    };
+  }
+
+  private static isFirstSliceReachedSecond(firstSlice: ListRange, secondSlice: ListRange): boolean {
+    const { getFrom, getTo }: PagedVirtualScrollArguments =
+      ListRangesIntersectionProducer.getPagedVirtualScrollArguments(secondSlice, firstSlice);
+
+    return !isNil(getFrom) && !isNil(getTo);
   }
 }

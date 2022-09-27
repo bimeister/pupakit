@@ -1,14 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { distinctUntilSerializedChanged, getUuid } from '@bimeister/utilities';
+import { getUuid } from '@bimeister/utilities';
 import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
 import { TablePagedDataProducer } from '@kit/internal/declarations/classes/table-paged-data-producer.class';
 import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
-import { TableEvents } from '@kit/internal/declarations/events/table.events';
 import { PagedVirtualScrollArguments } from '@kit/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
 import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
 import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 import { Observable, of, Subscription } from 'rxjs';
-import { debounceTime, delay, map, switchMap } from 'rxjs/operators';
+import { delay, map, switchMap } from 'rxjs/operators';
 
 interface SomeData {
   id: Uuid;
@@ -17,7 +16,7 @@ interface SomeData {
   age: number;
 }
 
-const BACKEND_DATA: SomeData[] = Array.from({ length: 200 }).map((_value: undefined, index: number) => ({
+const BACKEND_DATA: SomeData[] = Array.from({ length: 1000 }).map((_: undefined, index: number) => ({
   id: getUuid(),
   firstName: `Azamat ${index}`,
   lastName: `Aitaliev ${index}`,
@@ -70,21 +69,13 @@ export class TableExample8Component implements OnDestroy {
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>();
   private readonly pagedDataProducer: TablePagedDataProducer<SomeData> = new TablePagedDataProducer(this.controller);
-
   private readonly pagedArguments$: Observable<PagedVirtualScrollArguments> = this.pagedDataProducer.arguments$;
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
     this.subscription.add(this.processRangeDataChanges());
 
-    this.controller
-      .getEvents(TableEvents.ListRangeChanged)
-      .pipe(
-        debounceTime(500),
-        map((event: TableEvents.ListRangeChanged) => event.listRange),
-        distinctUntilSerializedChanged()
-      )
-      .subscribe(console.warn);
+    this.subscription.add(this.pagedArguments$.subscribe(console.warn));
   }
 
   public ngOnDestroy(): void {
@@ -94,7 +85,6 @@ export class TableExample8Component implements OnDestroy {
   private processRangeDataChanges(): Subscription {
     return this.pagedArguments$
       .pipe(
-        distinctUntilSerializedChanged(),
         switchMap((pagedArguments: PagedVirtualScrollArguments) => {
           const skip: number = pagedArguments.currentFrom;
           const take: number = pagedArguments.currentTo - pagedArguments.currentFrom;

@@ -1,4 +1,5 @@
 export interface TablePagedDataProducerOptions {
-  reactRangeChangesTimeMs?: number;
   bodyInitialCountOfSkeletonRows?: number;
+  listRangeChangesDebounceTimeMs?: number;
+  rowsBufferSize?: number;
 }
