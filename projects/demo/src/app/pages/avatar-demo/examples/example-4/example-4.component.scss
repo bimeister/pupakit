@@ -1,3 +1,5 @@
+@use 'functions' as *;
+
 .avatar-container {
   display: flex;
 
@@ -13,6 +15,10 @@
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  &__avatar_success {
+    --avatar-border_color: #{semantic-color(kind-success-normal)};
   }
 
   .small-marker {
