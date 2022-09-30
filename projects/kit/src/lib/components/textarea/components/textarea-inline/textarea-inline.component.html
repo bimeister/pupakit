@@ -1,4 +1,4 @@
-<pupa-theme-wrapper class="textarea-wrapper" [theme]="theme$ | async" [ngClass]="themeClass$ | async">
+<pupa-theme-wrapper class="textarea-wrapper">
   <div
     (click)="open()"
     (mousedown)="$event.stopPropagation()"
@@ -31,8 +31,6 @@
   <pupa-theme-wrapper
     class="overlay-container"
     [class.overlay-container_opened]="isOpened$ | async"
-    [ngClass]="themeClass$ | async"
-    [theme]="theme$ | async"
     (mousedown)="$event.stopPropagation()"
     (wheel)="$event.stopPropagation()"
   >

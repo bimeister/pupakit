@@ -1,8 +1,6 @@
 import { Directive, OnDestroy } from '@angular/core';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { AlertsService } from '@kit/internal/shared/services/alerts.service';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { ThemeService } from '@kit/internal/shared/services/theme.service';
 import { Subscription } from 'rxjs';
 import { ThemeSaverService } from '../../services/theme-saver.service';
 
@@ -12,12 +10,7 @@ import { ThemeSaverService } from '../../services/theme-saver.service';
 export class ThemeControllerDirective implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(
-    private readonly themeWrapperService: ThemeWrapperService,
-    private readonly themeSaverService: ThemeSaverService,
-    private readonly alertsService: AlertsService,
-    private readonly toastsService: ToastsService
-  ) {
+  constructor(private readonly themeService: ThemeService, private readonly themeSaverService: ThemeSaverService) {
     this.setSavedTheme();
 
     this.subscription.add(this.saveThemeWhenItChanged());
@@ -29,15 +22,12 @@ export class ThemeControllerDirective implements OnDestroy {
 
   private setSavedTheme(): void {
     const theme: Theme = this.themeSaverService.getTheme();
-    const alertsAndToastsTheme: Theme = theme === Theme.Light ? Theme.Dark : Theme.Light;
 
-    this.themeWrapperService.setTheme(theme);
-    this.alertsService.setTheme(alertsAndToastsTheme);
-    this.toastsService.setTheme(alertsAndToastsTheme);
+    this.themeService.setTheme(theme);
   }
 
   private saveThemeWhenItChanged(): Subscription {
-    return this.themeWrapperService.theme$.subscribe((theme: Theme) => {
+    return this.themeService.theme$.subscribe((theme: Theme) => {
       this.themeSaverService.setTheme(theme);
     });
   }

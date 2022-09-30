@@ -91,7 +91,7 @@ export class ClientUiStateHandlerService implements OnDestroy {
   );
 
   private readonly subscription: Subscription = new Subscription();
-  constructor(@Inject(DOCUMENT) readonly document: Document) {
+  constructor(@Inject(DOCUMENT) private readonly document: Document) {
     this.subscription.add(this.handleIframeResizeEvents());
   }
 

@@ -11,13 +11,14 @@ import {
   Optional,
 } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
-import { subscribeInsideAngular } from '../../../../internal/functions/rxjs-operators/subscribe-inside-angular.operator';
-import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
+import { ThemeService } from '../../../../internal/shared/services/theme.service';
+import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { OpenedDropdown } from '../../../../internal/declarations/classes/opened-dropdown.class';
 import { Theme } from '../../../../internal/declarations/enums/theme.enum';
 import { DropdownDirectiveParams } from '../../../../internal/declarations/interfaces/dropdown-directive-params.interface';
 import { DropdownHost } from '../../../../internal/declarations/interfaces/dropdown-host.interface';
+import { subscribeInsideAngular } from '../../../../internal/functions/rxjs-operators/subscribe-inside-angular.operator';
 import { subscribeOutsideAngular } from '../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { DropdownsService } from '../../../../internal/shared/services/dropdowns.service';
 import { DropdownTemplateComponent } from '../../../../lib/components/dropdown/components/dropdown-template/dropdown-template.component';
@@ -37,7 +38,7 @@ export class DropdownDirective implements AfterViewInit, OnDestroy, DropdownHost
 
   public readonly opened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  private readonly theme$: Observable<Theme> = this.themeWrapperService?.theme$ ?? of(Theme.Light);
+  private readonly theme$: Observable<Theme> = this.themeWrapperService?.theme$ ?? this.themeService.theme$;
 
   private readonly subscription: Subscription = new Subscription();
   private readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -51,6 +52,7 @@ export class DropdownDirective implements AfterViewInit, OnDestroy, DropdownHost
     public readonly triggerRef: ElementRef<HTMLElement>,
     private readonly dropdownsService: DropdownsService,
     private readonly ngZone: NgZone,
+    private readonly themeService: ThemeService,
     @Inject(DOCUMENT) private readonly document: Document,
     @Optional() private readonly themeWrapperService?: ThemeWrapperService
   ) {}

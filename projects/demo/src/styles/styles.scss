@@ -9,6 +9,14 @@
 html {
   color: color(neutral-1000);
   font-size: 4px;
+
+  @include light-theme-class-parent() {
+    @include apply-light-theme();
+  }
+
+  @include dark-theme-class-parent() {
+    @include apply-dark-theme();
+  }
 }
 
 body {

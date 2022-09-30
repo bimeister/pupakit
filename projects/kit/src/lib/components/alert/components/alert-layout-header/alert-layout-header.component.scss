@@ -9,9 +9,4 @@
   @include font-preset-h4;
   line-height: 1;
   padding-right: 14px;
-
-  color: color(neutral-1000);
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
 }

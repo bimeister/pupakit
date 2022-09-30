@@ -1,4 +1,4 @@
-<pupa-theme-wrapper [theme]="theme$ | async">
+<pupa-theme-wrapper [theme]="reversedTheme$ | async">
   <div class="alerts-container">
     <div class="toolbar" *ngIf="toolbarComponentPortal">
       <ng-template [cdkPortalOutlet]="toolbarComponentPortal"></ng-template>

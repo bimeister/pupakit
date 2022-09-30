@@ -1,11 +1,8 @@
-import { ChangeDetectionStrategy, Component, Optional, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
+import { PopoverComponentBase } from '../../../../../internal/declarations/classes/abstract/popover-component-base.abstract';
 import { PopoverRef } from '../../../../../internal/declarations/classes/popover-ref.class';
 import { PopoverTemplateData } from '../../../../../internal/declarations/interfaces/popover-template-data.interface';
-import { ThemeWrapperService } from '../../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
-import { PopoverComponentBase } from '../../../../../internal/declarations/classes/abstract/popover-component-base.abstract';
-import { Observable, of } from 'rxjs';
-import { Theme } from '../../../../../internal/declarations/enums/theme.enum';
 
 @Component({
   selector: 'pupa-popover-template',
@@ -21,12 +18,7 @@ export class PopoverTemplateComponent<TContext> extends PopoverComponentBase<Pop
     popoverRef: this.popoverRef,
   };
 
-  public readonly theme$: Observable<Theme> = this.themeWrapperService?.theme$ ?? of(Theme.Light);
-
-  constructor(
-    popoverRef: PopoverRef<PopoverTemplateData<TContext>, void>,
-    @Optional() private readonly themeWrapperService?: ThemeWrapperService
-  ) {
+  constructor(popoverRef: PopoverRef<PopoverTemplateData<TContext>, void>) {
     super(popoverRef);
   }
 }

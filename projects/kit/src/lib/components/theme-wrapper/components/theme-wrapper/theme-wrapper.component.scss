@@ -3,11 +3,14 @@
 @use 'mixins' as *;
 
 :host {
-  @include light-theme-class-parent() {
-    @include apply-light-theme();
-  }
+  // To increase style priority
+  html & {
+    @include light-theme-class-parent() {
+      @include apply-light-theme();
+    }
 
-  @include dark-theme-class-parent() {
-    @include apply-dark-theme();
+    @include dark-theme-class-parent() {
+      @include apply-dark-theme();
+    }
   }
 }

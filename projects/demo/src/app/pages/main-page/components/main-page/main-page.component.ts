@@ -3,7 +3,7 @@ import { Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild } from '@an
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { subscribeOutsideAngular } from '@kit/internal/functions/rxjs-operators/subscribe-outside-angular.operator';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { ThemeService } from '@kit/internal/shared/services/theme.service';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -17,7 +17,7 @@ export class MainPageComponent implements OnDestroy {
 
   private readonly subscription: Subscription = new Subscription();
 
-  public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
+  public readonly logo$: Observable<SafeResourceUrl> = this.themeService.theme$.pipe(
     map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
 
@@ -27,7 +27,7 @@ export class MainPageComponent implements OnDestroy {
 
   constructor(
     private readonly sanitizer: DomSanitizer,
-    private readonly themeWrapperService: ThemeWrapperService,
+    private readonly themeService: ThemeService,
     private readonly ngZone: NgZone,
     @Inject(DOCUMENT) private readonly document: Document
   ) {

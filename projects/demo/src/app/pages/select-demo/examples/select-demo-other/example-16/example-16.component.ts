@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { getUuid, isEmpty } from '@bimeister/utilities';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';
 
@@ -47,8 +45,6 @@ const USERS_MAP: Map<string, User> = new Map([...GROUP_1_USERS, ...GROUP_2_USERS
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectExample16Component implements OnDestroy {
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
-
   public readonly control: FormControl = new FormControl([]);
   public readonly searchControl: FormControl = new FormControl();
   public readonly selectedControl: FormControl = new FormControl(false);
@@ -89,7 +85,7 @@ export class SelectExample16Component implements OnDestroy {
   );
 
   private readonly subscription: Subscription = new Subscription();
-  constructor(private readonly themeWrapperService: ThemeWrapperService) {
+  constructor() {
     this.subscription.add(this.setInitialSubjectData());
   }
 

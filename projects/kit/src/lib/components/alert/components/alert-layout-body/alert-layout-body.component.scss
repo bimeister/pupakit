@@ -7,9 +7,4 @@
   align-items: center;
   justify-content: space-between;
   gap: 2rem;
-
-  color: color(neutral-1000);
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
 }

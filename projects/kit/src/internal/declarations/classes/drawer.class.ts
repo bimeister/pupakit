@@ -2,10 +2,8 @@ import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
 import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
-import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
 import { DRAWER_CONTAINER_DATA_TOKEN } from '../../constants/tokens/drawer-container-data.token';
 import { DRAWER_LAYOUT_CONFIG_TOKEN } from '../../constants/tokens/drawer-layout-data.token';
-import { Theme } from '../enums/theme.enum';
 import { DrawerConfig } from '../interfaces/drawer-config.interface';
 import { DrawerContainerData } from '../interfaces/drawer-container-data.interface';
 import { DrawerLayoutConfig } from '../interfaces/drawer-layout-config.interface';
@@ -133,11 +131,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
   }
 
   private getBackdropClasses(): string[] {
-    let classes: string[] = [];
-
-    if (this.config.theme === Theme.Dark) {
-      classes = [...classes, DARK_THEME_CLASS];
-    }
+    const classes: string[] = [];
 
     if (this.config.hasBackdrop) {
       const backdropClass: string = this.config.isBackdropTransparent

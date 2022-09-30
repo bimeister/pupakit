@@ -2,8 +2,6 @@ import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation
 import { FormControl } from '@angular/forms';
 import { isEmpty, isNil, shareReplayWithRefCount, sortByProperty, stringFilterPredicate } from '@bimeister/utilities';
 import { DrawerRef } from '@kit/internal/declarations/classes/drawer-ref.class';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
@@ -154,12 +152,7 @@ export class SidebarComponent {
 
   public isOpenInDrawer: boolean = !isNil(this.drawerRef);
 
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
-
-  constructor(
-    @Inject(DrawerRef) @Optional() private readonly drawerRef: DrawerRef<number>,
-    private readonly themeWrapperService: ThemeWrapperService
-  ) {}
+  constructor(@Inject(DrawerRef) @Optional() private readonly drawerRef: DrawerRef<number>) {}
 
   public handleClickLink(): void {
     this.closeSidebar();

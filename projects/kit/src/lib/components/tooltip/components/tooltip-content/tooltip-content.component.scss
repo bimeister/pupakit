@@ -15,13 +15,13 @@ $tooltip_max-text-lines-count: 13;
 
   &__content-container {
     background-color: color(neutral-600);
-    @include dark-theme-class-parent {
+    @include host-selector-dark-theme {
       background-color: color(neutral-1);
     }
 
     @include supports-backdrop-blur {
       background-color: color(neutral-1000, alpha-400);
-      @include dark-theme-class-parent {
+      @include host-selector-dark-theme {
         background-color: color(neutral-1, alpha-400);
       }
     }
@@ -33,7 +33,7 @@ $tooltip_max-text-lines-count: 13;
     padding: 1rem 2rem;
     color: color(neutral-1);
 
-    @include dark-theme-class-parent {
+    @include host-selector-dark-theme {
       color: color(neutral-1000);
     }
 

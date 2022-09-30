@@ -27,9 +27,4 @@ export class AlertsDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/template-rendering-example/template-rendering-example.component.html`,
     TS: `${BASE_REQUEST_PATH}/template-rendering-example/template-rendering-example.component.ts`,
   };
-
-  public readonly changeThemeExampleContent: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/change-theme-example/change-theme-example.component.html`,
-    TS: `${BASE_REQUEST_PATH}/change-theme-example/change-theme-example.component.ts`,
-  };
 }
