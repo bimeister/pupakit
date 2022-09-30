@@ -8,10 +8,9 @@
 }
 
 .tree-node {
+  @include flex-container(row, center);
   min-width: 48.5rem;
   height: 100%;
-  display: flex;
-  align-items: center;
   background-color: color(neutral-1);
   border-radius: $controlBorderRadius;
   cursor: pointer;
@@ -27,15 +26,14 @@
   }
 
   &__left {
-    display: flex;
-    align-items: center;
+    @include flex-container(row, center);
     overflow: hidden;
     padding: 1rem 0 1rem 1.5rem;
     margin-right: -4rem;
   }
 
   &__right {
-    display: flex;
+    @include flex-container(row);
     position: sticky;
     right: 0;
     height: 6rem;
@@ -45,23 +43,19 @@
     background: linear-gradient(90deg, color(neutral-1, alpha-500) -95%, color(neutral-1) 70%);
 
     &-container {
+      @include flex-container(row, center, flex-end);
       position: relative;
       z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
       width: fit-content;
     }
   }
 
   &__arrow-container {
+    @include flex-container(row, center, center);
     min-width: 9rem;
     height: 6rem;
     padding-right: 3rem;
     box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
   }
 
   &__without-children {
