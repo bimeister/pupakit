@@ -6,7 +6,7 @@ import {
   Injector,
   OnDestroy,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -14,8 +14,8 @@ import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { OpenedDrawer } from '@kit/internal/declarations/interfaces/opened-drawer.interface';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
+import { ThemeService } from '@kit/internal/shared/services/theme.service';
 import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { AnchorService } from '../../../../services/anchor.service';
@@ -33,7 +33,7 @@ import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-conten
 export class NavbarComponent implements AfterViewInit, OnDestroy {
   public readonly linkToGithubPupakit: string = 'https://github.com/bimeister/pupakit';
 
-  public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
+  public readonly logo$: Observable<SafeResourceUrl> = this.themeService.theme$.pipe(
     map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );
   public readonly version$: Observable<string> = this.configService.getVersionPupakit();
@@ -75,7 +75,7 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
 
   constructor(
     private readonly anchorService: AnchorService,
-    private readonly themeWrapperService: ThemeWrapperService,
+    private readonly themeService: ThemeService,
     private readonly sanitizer: DomSanitizer,
     private readonly drawerService: DrawersService,
     private readonly configService: ConfigService,
@@ -116,28 +116,22 @@ export class NavbarComponent implements AfterViewInit, OnDestroy {
   }
 
   private openDrawerWhenMenuOpen(): Subscription {
-    return this.menuOpened$.pipe(switchMap(() => this.getOpenedDrawer())).subscribe((openedDrawer: OpenedDrawer) => {
+    return this.menuOpened$.pipe(map(() => this.getOpenedDrawer())).subscribe((openedDrawer: OpenedDrawer) => {
       this.currentOpenedDrawer$.next(openedDrawer);
     });
   }
 
-  private getOpenedDrawer(): Observable<OpenedDrawer> {
-    return this.themeWrapperService.theme$.pipe(
-      take(1),
-      map((theme: Theme) =>
-        this.drawerService.open(SidebarDrawerContentContainerComponent, {
-          hasBackdrop: true,
-          hasPadding: false,
-          closeOnBackdropClick: true,
-          isBackdropTransparent: false,
-          float: 'left',
-          injector: this.injector,
-          isFullscreen: true,
-          containerComponent: DrawerContainerComponent,
-          theme,
-        })
-      )
-    );
+  private getOpenedDrawer(): OpenedDrawer {
+    return this.drawerService.open(SidebarDrawerContentContainerComponent, {
+      hasBackdrop: true,
+      hasPadding: false,
+      closeOnBackdropClick: true,
+      isBackdropTransparent: false,
+      float: 'left',
+      injector: this.injector,
+      isFullscreen: true,
+      containerComponent: DrawerContainerComponent,
+    });
   }
 
   private closeDrawer(): void {

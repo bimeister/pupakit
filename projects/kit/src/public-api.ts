@@ -9,6 +9,7 @@ export {
   AlertType,
   Breadcrumb,
   ClientUiStateHandlerService,
+  ThemeService,
   Color,
   ColorsService,
   ConnectedPositionX,

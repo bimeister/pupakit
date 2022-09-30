@@ -1,11 +1,8 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { PopoverComponentBase } from '@kit/internal/declarations/classes/abstract/popover-component-base.abstract';
 import { PopoverRef } from '@kit/internal/declarations/classes/popover-ref.class';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { DrawersService } from '@kit/internal/shared/services/drawers.service';
 import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { Observable } from 'rxjs';
 import { DRAWER_DATA_TOKEN } from '../../../../../../declarations/tokens/drawer-data.token';
 import { DrawerLayoutOtherComponent } from '../drawer-layout-other/drawer-layout-other.component';
 
@@ -17,12 +14,9 @@ import { DrawerLayoutOtherComponent } from '../drawer-layout-other/drawer-layout
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class PopoverLayoutOtherComponent extends PopoverComponentBase<{}, void> {
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
-
   constructor(
     public readonly popoverRef: PopoverRef<{}, void>,
     private readonly drawersService: DrawersService,
-    private readonly themeWrapperService: ThemeWrapperService,
     private readonly injector: Injector
   ) {
     super(popoverRef);

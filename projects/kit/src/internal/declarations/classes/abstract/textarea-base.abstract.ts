@@ -8,10 +8,9 @@ import {
   Nullable,
   shareReplayWithRefCount,
 } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { TextAreaCounterVisibility } from '../../../../internal/declarations/types/text-area-counter-visibility-mode.type';
-import { ThemeWrapperService } from '../../../../lib/components/theme-wrapper/services/theme-wrapper.service';
 import { ComponentChange } from '../../interfaces/component-change.interface';
 import { ComponentChanges } from '../../interfaces/component-changes.interface';
 import { TextareaSize } from '../../types/textarea-size.type';
@@ -92,9 +91,6 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     )
   );
 
-  public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ ?? of('');
-  public readonly theme$: Observable<string> = this.themeWrapperService?.theme$;
-
   private readonly valueLength$: Observable<number> = this.value$.pipe(
     filterNotNil(),
     map((currentValue: string) => currentValue?.length ?? 0)
@@ -124,10 +120,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
     shareReplayWithRefCount()
   );
 
-  constructor(
-    @Optional() ngControl: NgControl,
-    @Optional() protected readonly themeWrapperService: ThemeWrapperService
-  ) {
+  constructor(@Optional() ngControl: NgControl) {
     super(ngControl);
   }
 

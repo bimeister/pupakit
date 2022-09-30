@@ -3,9 +3,7 @@ import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/por
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
 import { ModalContainerComponent } from '../../../lib/components/modal/components/modal-container/modal-container.component';
-import { DARK_THEME_CLASS } from '../../constants/dark-theme-class.const';
 import { MODAL_CONTAINER_DATA_TOKEN } from '../../constants/tokens/modal-container-data.token';
-import { Theme } from '../enums/theme.enum';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ModalContainerData } from '../interfaces/modal-container-data.interface';
 import { PortalLayer } from '../interfaces/portal-layer.interface';
@@ -146,7 +144,7 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   private getBackdropClass(): string[] {
-    const classes: string[] = this.config.theme === Theme.Dark ? [DARK_THEME_CLASS] : [];
+    const classes: string[] = [];
 
     if (this.config.hasBackdrop) {
       const backdropClass: string = this.config.isBackdropTransparent

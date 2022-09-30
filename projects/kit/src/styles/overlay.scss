@@ -10,7 +10,7 @@
 @mixin apply-background() {
   background-color: color(neutral-1000, alpha-800);
 
-  &#{$darkThemeClass} {
+  @include dark-theme-class-parent() {
     background-color: color(neutral-1000, alpha-700);
   }
 }

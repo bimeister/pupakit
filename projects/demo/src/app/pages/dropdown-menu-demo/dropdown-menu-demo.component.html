@@ -2,68 +2,50 @@
 
 <demo-example-viewer>
   <demo-example-viewer-content>
-    <pupa-theme-wrapper [theme]="theme$ | async">
-      <div class="content">
-        <div
-          [class.is-open]="dropdown1.opened$ | async"
-          pupaDropdown
-          [pupaDropdownDisabled]="dropdownMenuDisabled$ | async"
-          #dropdown1="pupaDropdown"
-        >
-          <span>[1] {{ triggerText.value }}</span>
-        </div>
-
-        <pupa-dropdown-menu
-          *pupaDropdownTemplate="dropdown1; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
-          [dropdownRef]="dropdownRef"
-        >
-          <pupa-dropdown-menu-item>
-            <pupa-option-icon name="add-circle"></pupa-option-icon>
-            Default item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [active]="true">
-            <pupa-option-icon name="add"></pupa-option-icon>
-            Active item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-item [disabled]="true">
-            <pupa-option-icon name="close-circle"></pupa-option-icon>
-            Disabled item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-          <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
-            <pupa-option-title>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolore iste non nostrum numquam quasi
-              repellendus sit? Ducimus, molestiae, voluptatum.
-            </pupa-option-title>
-          </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu>
-
-        <br />
-
-        <div
-          [class.is-open]="dropdown2.opened$ | async"
-          pupaDropdown
-          [pupaDropdownDisabled]="dropdownMenuDisabled$ | async"
-          #dropdown2="pupaDropdown"
-        >
-          <span>[2] {{ triggerText.value }}</span>
-        </div>
-
-        <pupa-dropdown-menu
-          *pupaDropdownTemplate="dropdown2; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
-          [dropdownRef]="dropdownRef"
-        >
-          <pupa-dropdown-menu-item [disabled]="true">
-            <pupa-option-icon name="close-circle"></pupa-option-icon>
-            Disabled item
-          </pupa-dropdown-menu-item>
-          <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
-          <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
-            <div class="text">option {{ index }}</div>
-          </pupa-dropdown-menu-item>
-        </pupa-dropdown-menu>
+    <div class="content">
+      <div [class.is-open]="dropdown1.opened$ | async" pupaDropdown #dropdown1="pupaDropdown">
+        <span>[1] {{ triggerText.value }}</span>
       </div>
-    </pupa-theme-wrapper>
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown1; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item>
+          <pupa-option-icon name="add-circle"></pupa-option-icon>
+          Default item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item [active]="true">
+          <pupa-option-icon name="add"></pupa-option-icon>
+          Active item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-item [disabled]="true">
+          <pupa-option-icon name="close-circle"></pupa-option-icon>
+          Disabled item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
+          <pupa-option-title>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolor dolore iste non nostrum numquam quasi
+            repellendus sit? Ducimus, molestiae, voluptatum.
+          </pupa-option-title>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
+
+      <br />
+
+      <div [class.is-open]="dropdown2.opened$ | async" pupaDropdown #dropdown2="pupaDropdown">
+        <span>[2] {{ triggerText.value }}</span>
+      </div>
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown2; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item [disabled]="true">
+          <pupa-option-icon name="close-circle"></pupa-option-icon>
+          Disabled item
+        </pupa-dropdown-menu-item>
+        <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
+        <pupa-dropdown-menu-item *ngFor="let index of [1, 2, 3, 4, 5, 6]">
+          <div class="text">option {{ index }}</div>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
+    </div>
   </demo-example-viewer-content>
 
   <demo-example-viewer-section-label>Configuration</demo-example-viewer-section-label>

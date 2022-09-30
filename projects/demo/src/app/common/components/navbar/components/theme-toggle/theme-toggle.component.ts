@@ -2,9 +2,7 @@ import { animate, keyframes, style, transition, trigger } from '@angular/animati
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { AlertsService } from '@kit/internal/shared/services/alerts.service';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
+import { ThemeService } from '@kit/internal/shared/services/theme.service';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 
@@ -51,7 +49,7 @@ const COLOR_BASE_DARK_N500: string = '#0f2a36';
   ],
 })
 export class ThemeToggleComponent {
-  private readonly isDarkMode$: Observable<boolean> = this.themeWrapperService.theme$.pipe(
+  private readonly isDarkMode$: Observable<boolean> = this.themeService.theme$.pipe(
     map((theme: Theme) => theme === Theme.Dark)
   );
 
@@ -65,32 +63,18 @@ export class ThemeToggleComponent {
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
-    private readonly themeWrapperService: ThemeWrapperService,
-    private readonly renderer: Renderer2,
-    private readonly alertsService: AlertsService,
-    private readonly toastsService: ToastsService
+    private readonly themeService: ThemeService,
+    private readonly renderer: Renderer2
   ) {
     this.setInitialBrowserToolbarTheme();
   }
 
   public toggleDarkMode(): void {
-    this.isDarkMode$
-      .pipe(
-        take(1),
-        map((isDarkMode: boolean) => (isDarkMode ? Theme.Light : Theme.Dark))
-      )
-      .subscribe((theme: Theme) => {
-        this.setBrowserToolbarTheme(theme);
-        this.themeWrapperService.setTheme(theme);
-
-        const alertsAndToastsTheme: Theme = theme === Theme.Light ? Theme.Dark : Theme.Light;
-        this.alertsService.setTheme(alertsAndToastsTheme);
-        this.toastsService.setTheme(alertsAndToastsTheme);
-      });
+    this.themeService.toggleTheme();
   }
 
   private setInitialBrowserToolbarTheme(): void {
-    this.themeWrapperService.theme$.pipe(take(1)).subscribe((theme: Theme) => this.setBrowserToolbarTheme(theme));
+    this.themeService.theme$.pipe(take(1)).subscribe((theme: Theme) => this.setBrowserToolbarTheme(theme));
   }
 
   private setBrowserToolbarTheme(theme: Theme): void {

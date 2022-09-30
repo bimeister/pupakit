@@ -14,19 +14,11 @@
   gap: 3rem;
   position: relative;
 
-  background-color: color(neutral-1);
-  color: color(neutral-1000);
-
-  @include host-selector-dark-theme {
-    background-color: color(neutral-600);
-    color: color(neutral-1);
-  }
+  background-color: semantic-color(surface-secondary);
+  color: semantic-color(text-primary);
 
   @include supports-backdrop-blur {
-    background-color: color(neutral-1, alpha-400);
-    @include host-selector-dark-theme {
-      background-color: color(neutral-1000, alpha-400);
-    }
+    background-color: semantic-color(surface-secondary, alpha-400);
   }
 }
 

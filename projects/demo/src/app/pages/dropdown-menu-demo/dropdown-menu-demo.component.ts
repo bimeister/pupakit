@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { Observable } from 'rxjs';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'dropdown-menu-demo/examples';
@@ -32,11 +30,7 @@ export class DropdownMenuDemoComponent {
     },
   ];
 
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
-
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/demo-dropdown-menu-example-1/demo-dropdown-menu-example-1.component.html`,
   };
-
-  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
 }

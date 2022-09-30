@@ -15,8 +15,6 @@
     (touchstart)="processEventPropagation($event)"
     (touchmove)="processEventPropagation($event)"
     (touchend)="processEventPropagation($event)"
-    [theme]="theme$ | async"
-    [ngClass]="themeClass$ | async"
   >
     <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
       <ng-content></ng-content>

@@ -1,41 +1,39 @@
-<pupa-theme-wrapper [theme]="theme$ | async">
-  <div class="sidebar-content">
-    <div class="sidebar-content__top-section">
-      <div class="search-field-container">
-        <pupa-search-field [formControl]="searchControl" placeholder="Component name"></pupa-search-field>
-      </div>
-
-      <div class="sidebar-content__close" *ngIf="isOpenInDrawer">
-        <pupa-button-icon icon="app-cross" kind="secondary" (click)="closeSidebar()"> </pupa-button-icon>
-      </div>
+<div class="sidebar-content">
+  <div class="sidebar-content__top-section">
+    <div class="search-field-container">
+      <pupa-search-field [formControl]="searchControl" placeholder="Component name"></pupa-search-field>
     </div>
 
-    <div class="links-container">
-      <pupa-scrollable>
-        <div class="scrollable-content">
-          <div class="empty-placeholder" *ngIf="isEmpty$ | async">
-            Not found
-            <div>🤷</div>
-          </div>
-
-          <ng-container *ngFor="let group of filteredLinkGroups$ | async">
-            <h3 class="subheader">{{ group.title }}</h3>
-            <a
-              #linkActive="routerLinkActive"
-              pupaOptionLink
-              [active]="linkActive.isActive"
-              *ngFor="let linkItem of group.linkItems"
-              [demoSidebarLink]="linkItem.link"
-              routerLinkActive="active"
-              [routerLink]="linkItem.link"
-              (click)="handleClickLink()"
-              class="side-nav-item"
-            >
-              {{ linkItem.title }}
-            </a>
-          </ng-container>
-        </div>
-      </pupa-scrollable>
+    <div class="sidebar-content__close" *ngIf="isOpenInDrawer">
+      <pupa-button-icon icon="app-cross" kind="secondary" (click)="closeSidebar()"> </pupa-button-icon>
     </div>
   </div>
-</pupa-theme-wrapper>
+
+  <div class="links-container">
+    <pupa-scrollable>
+      <div class="scrollable-content">
+        <div class="empty-placeholder" *ngIf="isEmpty$ | async">
+          Not found
+          <div>🤷</div>
+        </div>
+
+        <ng-container *ngFor="let group of filteredLinkGroups$ | async">
+          <h3 class="subheader">{{ group.title }}</h3>
+          <a
+            #linkActive="routerLinkActive"
+            pupaOptionLink
+            [active]="linkActive.isActive"
+            *ngFor="let linkItem of group.linkItems"
+            [demoSidebarLink]="linkItem.link"
+            routerLinkActive="active"
+            [routerLink]="linkItem.link"
+            (click)="handleClickLink()"
+            class="side-nav-item"
+          >
+            {{ linkItem.title }}
+          </a>
+        </ng-container>
+      </div>
+    </pupa-scrollable>
+  </div>
+</div>

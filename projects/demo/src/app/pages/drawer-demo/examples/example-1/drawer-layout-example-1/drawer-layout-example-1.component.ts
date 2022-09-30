@@ -1,7 +1,4 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'demo-drawer-layout-example-1',
@@ -17,8 +14,4 @@ export class DrawerLayoutExample1Component {
     { name: 'tab 3', title: 'Zupa', text: 'Zupa tab' },
     { name: 'tab 4', title: 'Dupa', text: 'Dupa tab' },
   ];
-
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
-
-  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
 }

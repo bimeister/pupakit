@@ -7,7 +7,6 @@ import { AlertsToolbarExampleComponent } from './examples/alerts-toolbar-example
 import { BasicAdditionalSettingsExampleComponent } from './examples/basic-additional-settings-example/basic-additional-settings-example.component';
 import { BasicExampleComponent } from './examples/basic-example/basic-example.component';
 import { TemplateRenderingExampleComponent } from './examples/template-rendering-example/template-rendering-example.component';
-import { ChangeThemeExampleComponent } from './examples/change-theme-example/change-theme-example.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { ChangeThemeExampleComponent } from './examples/change-theme-example/cha
     BasicAdditionalSettingsExampleComponent,
     AlertsToolbarExampleComponent,
     TemplateRenderingExampleComponent,
-    ChangeThemeExampleComponent,
   ],
   imports: [DemoSharedModule, AlertsDemoRoutingModule],
 })

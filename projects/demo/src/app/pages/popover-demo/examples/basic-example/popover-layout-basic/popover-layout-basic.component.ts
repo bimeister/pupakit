@@ -1,9 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Observable } from 'rxjs';
 import { PopoverComponentBase } from '@kit/internal/declarations/classes/abstract/popover-component-base.abstract';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
 import { PopoverRef } from '@kit/internal/declarations/classes/popover-ref.class';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 
 interface PopoverContentData {
   title: string;
@@ -19,12 +16,8 @@ interface PopoverContentData {
 })
 export class PopoverLayoutBasicComponent extends PopoverComponentBase<PopoverContentData, void> {
   public readonly title: string = this.data.title ?? '';
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
 
-  constructor(
-    public readonly popoverRef: PopoverRef<PopoverContentData, void>,
-    private readonly themeWrapperService: ThemeWrapperService
-  ) {
+  constructor(public readonly popoverRef: PopoverRef<PopoverContentData, void>) {
     super(popoverRef);
   }
 

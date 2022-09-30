@@ -1,5 +1,6 @@
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
+import { ThemeService } from '../../../../../internal/shared/services/theme.service';
 import { Observable } from 'rxjs';
 
 import { TOAST_CONTAINER_DATA_TOKEN } from '../../../../../internal/constants/tokens/toast-container-data.token';
@@ -15,7 +16,10 @@ import { ToastContainerData } from '../../../../../internal/declarations/interfa
 })
 export class ToastContainerComponent {
   public readonly componentPortal: ComponentPortal<unknown> = this.data.componentPortal;
-  public readonly theme$: Observable<Theme> = this.data.theme$;
+  public readonly reversedTheme$: Observable<Theme> = this.themeService.reversedTheme$;
 
-  constructor(@Inject(TOAST_CONTAINER_DATA_TOKEN) private readonly data: ToastContainerData) {}
+  constructor(
+    @Inject(TOAST_CONTAINER_DATA_TOKEN) private readonly data: ToastContainerData,
+    private readonly themeService: ThemeService
+  ) {}
 }

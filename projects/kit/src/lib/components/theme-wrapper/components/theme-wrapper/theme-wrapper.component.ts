@@ -1,17 +1,20 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  HostBinding,
+  ElementRef,
   Input,
   OnChanges,
   OnDestroy,
   OnInit,
+  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
-import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { distinctUntilChanged, withLatestFrom } from 'rxjs/operators';
 import { Theme } from '../../../../../internal/declarations/enums/theme.enum';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { ThemeWrapperService } from '../../services/theme-wrapper.service';
 
 @Component({
@@ -23,11 +26,17 @@ import { ThemeWrapperService } from '../../services/theme-wrapper.service';
   providers: [ThemeWrapperService],
 })
 export class ThemeWrapperComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() public theme: Theme = Theme.Light;
-  @HostBinding('class') public themeClass: string;
+  @Input() public theme: Theme;
+
+  private readonly themeClass$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly themeWrapperService: ThemeWrapperService) {}
+  constructor(
+    private readonly themeWrapperService: ThemeWrapperService,
+    private readonly renderer: Renderer2,
+    private readonly hostElement: ElementRef
+  ) {}
 
   public ngOnInit(): void {
     this.subscription.add(this.processThemeClass());
@@ -46,6 +55,16 @@ export class ThemeWrapperComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private processThemeClass(): Subscription {
-    return this.themeWrapperService.themeClass$.subscribe((themeClass: string) => (this.themeClass = themeClass));
+    return this.themeWrapperService.themeClass$
+      .pipe(distinctUntilChanged(), withLatestFrom(this.themeClass$))
+      .subscribe(([themeClass, localThemeClass]: [string, string | null]) => {
+        this.renderer.addClass(this.hostElement.nativeElement, themeClass);
+
+        if (!isNil(localThemeClass)) {
+          this.renderer.removeClass(this.hostElement.nativeElement, localThemeClass);
+        }
+
+        this.themeClass$.next(themeClass);
+      });
   }
 }

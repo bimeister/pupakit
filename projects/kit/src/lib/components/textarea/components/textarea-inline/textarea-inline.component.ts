@@ -18,7 +18,6 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 import { TextareaBase } from '../../../../../internal/declarations/classes/abstract/textarea-base.abstract';
 import { ClientUiStateHandlerService } from '../../../../../internal/shared/services/client-ui-state-handler.service';
 import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
-import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
 
 const CLOSE_ANIMATION_MS: number = 100;
 const DELTA_SCROLL_FOR_CLOSE_PX: number = 50;
@@ -55,12 +54,11 @@ export class TextareaInlineComponent extends TextareaBase {
 
   constructor(
     @Optional() ngControl: NgControl,
-    @Optional() themeWrapperService: ThemeWrapperService,
     private readonly overlay: Overlay,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly viewContainerRef: ViewContainerRef
   ) {
-    super(ngControl, themeWrapperService);
+    super(ngControl);
   }
 
   public open(): void {

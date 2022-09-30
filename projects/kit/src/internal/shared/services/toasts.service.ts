@@ -2,16 +2,13 @@ import { GlobalPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overla
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ToastContainerComponent } from '../../../lib/components/toast/components/toast-container/toast-container.component';
-
 import { ToastComponent } from '../../../lib/components/toast/components/toast/toast.component';
 import { TOAST_CONTAINER_DATA_TOKEN } from '../../constants/tokens/toast-container-data.token';
 import { ToastComponentBase } from '../../declarations/classes/abstract/toast-component-base.abstract';
 import { OpenedToast } from '../../declarations/classes/opened-toast.class';
 import { ToastRef } from '../../declarations/classes/toast-ref.class';
-import { Theme } from '../../declarations/enums/theme.enum';
 import { ToastConfig } from '../../declarations/interfaces/toast-config.interface';
 import { ToastContainerData } from '../../declarations/interfaces/toast-container-data.interface';
 import { ToastDataType } from '../../declarations/types/utility-types/toast-data.utility-type';
@@ -25,16 +22,10 @@ const LEFT_OFFSET_PX: number = 24;
 export class ToastsService {
   private toastRef: ToastRef<unknown, unknown> | null = null;
 
-  private readonly theme$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.Dark);
-
   constructor(
     private readonly overlay: Overlay,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService
   ) {}
-
-  public setTheme(theme: Theme): void {
-    this.theme$.next(theme);
-  }
 
   public open<TComponent extends ToastComponentBase<unknown, unknown> = ToastComponent>(
     config: ToastConfig<TComponent, ToastDataType<TComponent>>
@@ -75,7 +66,6 @@ export class ToastsService {
 
     const containerData: ToastContainerData = {
       componentPortal,
-      theme$: this.theme$,
     };
 
     return new ComponentPortal(

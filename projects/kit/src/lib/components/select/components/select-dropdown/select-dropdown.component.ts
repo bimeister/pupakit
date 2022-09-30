@@ -1,9 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkConnectedOverlay } from '@angular/cdk/overlay';
-import { ChangeDetectionStrategy, Component, Input, Optional, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SelectDropdownBase } from '../../../../../internal/declarations/classes/abstract/select-dropdown-base.abstract';
-import { ThemeWrapperService } from '../../../theme-wrapper/services/theme-wrapper.service';
 import { SelectStateService } from '../../services/select-state.service';
 
 const ANIMATION_DURATION_MS: number = 150;
@@ -27,13 +25,7 @@ export class SelectDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;
   @Input() public width: string | null = null;
 
-  public readonly themeClass$: Observable<string> = this.themeWrapperService?.themeClass$ ?? of('');
-  public readonly theme$: Observable<string> = this.themeWrapperService?.theme$;
-
-  constructor(
-    selectStateService: SelectStateService<T>,
-    @Optional() private readonly themeWrapperService: ThemeWrapperService
-  ) {
+  constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);
   }
 }

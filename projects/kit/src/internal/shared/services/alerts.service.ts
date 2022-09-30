@@ -11,7 +11,6 @@ import { ALERTS_CONTAINER_DATA_TOKEN } from '../../constants/tokens/alerts-conta
 import { AlertComponentBase } from '../../declarations/classes/abstract/alert-component-base.abstract';
 import { AlertRef } from '../../declarations/classes/alert-ref.class';
 import { OpenedAlert } from '../../declarations/classes/opened-alert.class';
-import { Theme } from '../../declarations/enums/theme.enum';
 import { AlertConfig } from '../../declarations/interfaces/alert-config.interface';
 import { AlertsContainerData } from '../../declarations/interfaces/alerts-container-data.interface';
 import { AlertDataType } from '../../declarations/types/utility-types/alert-data.utility-type';
@@ -39,8 +38,6 @@ export class AlertsService implements OnDestroy {
     distinctUntilChanged()
   );
 
-  private readonly theme$: BehaviorSubject<Theme> = new BehaviorSubject<Theme>(Theme.Dark);
-
   private overlayRef: OverlayRef | null = null;
 
   constructor(private readonly overlay: Overlay) {
@@ -49,10 +46,6 @@ export class AlertsService implements OnDestroy {
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  public setTheme(theme: Theme): void {
-    this.theme$.next(theme);
   }
 
   public open<TComponent extends AlertComponentBase<unknown, unknown> = AlertComponent>(
@@ -105,7 +98,6 @@ export class AlertsService implements OnDestroy {
 
       const alertsContainerData: AlertsContainerData = {
         componentPortals$: this.componentPortals$,
-        theme$: this.theme$,
       };
 
       this.overlayRef = this.overlay.create({

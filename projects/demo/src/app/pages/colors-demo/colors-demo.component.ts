@@ -8,8 +8,8 @@ import { SemanticConfigurationGroup } from '@kit/internal/declarations/interface
 import { ColorsAlphaValuesService } from '@kit/internal/shared/services/colors-alpha-values.service';
 import { ColorsService } from '@kit/internal/shared/services/colors.service';
 import { SemanticColorsService } from '@kit/internal/shared/services/semantic-colors.service';
+import { ThemeService } from '@kit/internal/shared/services/theme.service';
 import { ToastsService } from '@kit/internal/shared/services/toasts.service';
-import { ThemeWrapperService } from '@kit/lib/components/theme-wrapper/services/theme-wrapper.service';
 import { Observable } from 'rxjs';
 
 const BASE_REQUEST_PATH: string = 'colors-demo/examples';
@@ -65,7 +65,7 @@ export class ColorsDemoComponent {
   public readonly alphaValues: ColorsAlphaValuesConfig.AlphaValue[] = this.colorsAlphaValuesService.config;
   public readonly semanticConfigurationGroups: SemanticConfigurationGroup[] = this.semanticColorsService.groups;
 
-  public readonly theme$: Observable<Theme> = this.themeWrapperService.theme$;
+  public readonly theme$: Observable<Theme> = this.themeService.theme$;
 
   constructor(
     private readonly cdkClipboard: Clipboard,
@@ -73,7 +73,7 @@ export class ColorsDemoComponent {
     private readonly colorsService: ColorsService,
     private readonly colorsAlphaValuesService: ColorsAlphaValuesService,
     private readonly semanticColorsService: SemanticColorsService,
-    private readonly themeWrapperService: ThemeWrapperService
+    private readonly themeService: ThemeService
   ) {}
 
   public copyToClipboard(value: string): void {
