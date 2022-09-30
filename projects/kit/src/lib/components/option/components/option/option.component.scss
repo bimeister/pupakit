@@ -34,7 +34,7 @@
   }
 
   &__content {
-    padding: 2rem 0;
+    min-height: var(--option_min-height, 8rem);
 
     &-container {
       display: flex;

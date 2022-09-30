@@ -3,7 +3,7 @@
     {{ control.value }}
   </pupa-select-trigger-tag>
 
-  <pupa-select-dropdown width="320">
+  <pupa-select-dropdown [width]="320">
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let option of options$ | async" [value]="option.value">
         <pupa-icon name="app-cube"></pupa-icon>
