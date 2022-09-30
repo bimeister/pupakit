@@ -3,10 +3,12 @@
     <pupa-button-icon kind="border" icon="app-notification"></pupa-button-icon>
   </pupa-select-trigger-extra-case>
 
-  <pupa-select-dropdown width="320">
-    <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" [hasCheckbox]="true" value="Option {{ index }}">
-      Option {{ index }}
-    </pupa-select-option>
+  <pupa-select-dropdown [width]="320">
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" [hasCheckbox]="true" value="Option {{ index }}">
+        Option {{ index }}
+      </pupa-select-option>
+    </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
 
@@ -18,9 +20,11 @@
     </pupa-tag>
   </pupa-select-trigger-extra-case>
 
-  <pupa-select-dropdown width="320">
-    <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" [hasCheckbox]="true" value="Option {{ index }}">
-      Option {{ index }}
-    </pupa-select-option>
+  <pupa-select-dropdown [width]="320">
+    <pupa-select-options-container>
+      <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" [hasCheckbox]="true" value="Option {{ index }}">
+        Option {{ index }}
+      </pupa-select-option>
+    </pupa-select-options-container>
   </pupa-select-dropdown>
 </pupa-select>
