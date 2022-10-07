@@ -50,6 +50,10 @@ export class TreeController {
     this.eventBus.dispatch(new TreeEvents.SetLoading(isLoading));
   }
 
+  public setHasDragAndDrop(hasDragAndDrop: boolean = false): void {
+    this.dataDisplayCollection.hasDragAndDrop$.next(hasDragAndDrop);
+  }
+
   public getEvents<E extends TreeEvents.TreeEventBase>(eventType: Type<E>): Observable<E> {
     return this.queue.getEvents(eventType);
   }
@@ -84,10 +88,6 @@ export class TreeController {
 
   private setTrackBy(trackBy: TrackByFunction<FlatTreeItem> = TreeDataDisplayCollection.trackBy): void {
     this.dataDisplayCollection.trackBy$.next(trackBy);
-  }
-
-  private setHasDragAndDrop(hasDragAndDrop: boolean = false): void {
-    this.dataDisplayCollection.hasDragAndDrop$.next(hasDragAndDrop);
   }
 
   private setTreeItemSizePx(treeItemSizePx: number = DEFAULT_TREE_ITEM_SIZE_PX): void {
