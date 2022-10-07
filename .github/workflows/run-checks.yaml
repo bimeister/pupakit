@@ -1,0 +1,133 @@
+name: Run Checks
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - $default-branch
+
+jobs:
+  install_dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.15.1
+          cache: 'npm'
+      - name: Install dependencies by lockfile
+        run: npm clean-install
+      - name: Generate Public API
+        run: npm run barrel
+      - name: Pack prepared workspace to archive
+        run: tar --totals --create --file workspace.tar ./
+      - name: Share prepared workspace with other jobs
+        uses: actions/upload-artifact@v3
+        with:
+          name: workspace
+          path: workspace.tar
+
+  static_files_kit:
+    name: Build Static Files Kit
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Build static files
+        run: npm run build:kit
+      - name: Pack static files to archive
+        run: tar --totals --create --file dist.tar ./dist
+      - name: Share prepared workspace with other jobs
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist.tar
+
+  static_files_demo:
+    name: Build Static Files
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Build static files
+        run: npm run build:demo-ci
+      - name: Pack static files to archive
+        run: tar --totals --create --file dist.tar ./dist
+      - name: Share prepared workspace with other jobs
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist.tar
+
+  run_lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Lint sources
+        run: npm run lint:check-ci
+
+  run_spell_check:
+    name: Spell Check
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Check spelling in sources
+        run: npm run linter:spell-checker
+
+  run_circular-dependencies:
+    name: Check Circular Dependencies
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Check circular dependencies
+        run: npm run linter:circular-dependencies
+
+  run_code_style:
+    name: Check Code Style
+    runs-on: ubuntu-latest
+    needs: [ install_dependencies ]
+    steps:
+      - name: Download prepared workspace
+        uses: actions/download-artifact@v3
+        with:
+          name: workspace
+      - name: Restore workspace from archive
+        run: tar --totals --extract --file workspace.tar && rm --force workspace.tar
+      - name: Check codestyle
+        run: npm run linter:formatting
+
+
+

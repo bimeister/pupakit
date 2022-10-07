@@ -88,7 +88,6 @@
     "@angular/platform-browser-dynamic": "~12.2.7",
     "@angular/router": "~12.2.7",
     "@babel/core": "7.17.2",
-    "@bimeister/build-cli": "0.1.0-c869ab81",
     "@types/jest": "^27.0.0",
     "@types/node": "^14.0.0",
     "@typescript-eslint/eslint-plugin": "4.28.2",
