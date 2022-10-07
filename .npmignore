@@ -1,5 +1,4 @@
 /.*/
-!/.gitlab/
 /dist/
 /docs/
 /coverage/
