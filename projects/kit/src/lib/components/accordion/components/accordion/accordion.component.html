@@ -1,6 +1,8 @@
-<div class="accordion" [class.accordion_expanded]="expanded$ | async">
+<div class="accordion" [ngClass]="accordionClass$ | async" [class.accordion_expanded]="expanded$ | async">
   <div class="accordion-header" [class.accordion-header_expanded]="expanded$ | async" (click)="toggle()">
-    <ng-content></ng-content>
+    <div class="accordion-header__content" [class.accordion-header__content_with-arrow]="showArrow">
+      <ng-content></ng-content>
+    </div>
 
     <ng-container *ngIf="showArrow">
       <div class="arrow-container">

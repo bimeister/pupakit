@@ -26,13 +26,13 @@ export class TypographyPresetsComponent {
 
   public readonly captionPresets: Preset[] = ['m', 's', 'xs', 'xxs'].map((item: string) => ({
     class: `font-preset-caption-${item}`,
-    mixin: `@include font-preset-caption-${item}};`,
+    mixin: `@include font-preset-caption-${item};`,
     title: `caption-${item}: PupaKit is an open source collection of Angular components`,
   }));
 
   public readonly bodyPresets: Preset[] = ['m', 's'].map((item: string) => ({
     class: `font-preset-body-${item}`,
-    mixin: `@include font-preset-body-${item}};`,
+    mixin: `@include font-preset-body-${item};`,
     title: `body-${item}: PupaKit is an open source collection of Angular components`,
   }));
 
