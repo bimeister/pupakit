@@ -4,37 +4,29 @@
 
 :host {
   width: 100%;
-
-  .accordion-header {
-    height: 15rem;
-  }
 }
 
 .accordion {
   border-radius: $controlBorderRadius;
 
-  &_expanded {
-    background-color: color(neutral-4);
+  &_normal#{&}_expanded {
+    background-color: semantic-color(surface-tertiary);
   }
 
-  @include hover {
-    .accordion-header {
-      background-color: color(neutral-6);
-
-      @include host-selector-dark-theme() {
-        background-color: color(neutral-400);
+  &_normal {
+    @include hover() {
+      .accordion-header {
+        background-color: semantic-color(kind-opacity-hover);
       }
     }
   }
 
-  @include host-selector-dark-theme() {
-    color: color(neutral-1);
-
-    &_expanded {
-      background: color(neutral-700);
-    }
+  &_border {
+    border: 1px solid semantic-color(lines-normal);
   }
 }
+
+$width_arrow-icon: 14px;
 
 .accordion-header {
   display: flex;
@@ -46,6 +38,14 @@
 
   &_expanded {
     border-radius: $controlBorderRadius $controlBorderRadius 0 0;
+  }
+
+  &__content {
+    max-width: 100%;
+
+    &_with-arrow {
+      max-width: calc(100% - #{$width_arrow-icon});
+    }
   }
 }
 

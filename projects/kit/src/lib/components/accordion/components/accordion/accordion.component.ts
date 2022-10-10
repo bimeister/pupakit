@@ -9,7 +9,7 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
+import { AccordionKind } from '../../../../../internal/declarations/types/accordion-kind.type';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -44,9 +44,12 @@ const TRANSITION: string = '300ms ease-in-out';
   ],
 })
 export class AccordionComponent implements OnChanges {
-  @Input() public readonly showArrow: boolean = true;
+  @Input() public showArrow: boolean = true;
 
   @Input() public destroyable: boolean = true;
+
+  @Input() public kind: AccordionKind = 'normal';
+  public readonly kind$: BehaviorSubject<AccordionKind> = new BehaviorSubject<AccordionKind>(this.kind);
 
   @Input() public expanded: boolean = false;
   @Output() public readonly expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -56,13 +59,20 @@ export class AccordionComponent implements OnChanges {
     map((expanded: boolean) => (expanded ? AnimationState.Expanded : AnimationState.Void))
   );
 
+  public readonly accordionClass$: Observable<string> = this.kind$.pipe(
+    map((kind: AccordionKind) => `accordion_${kind}`)
+  );
+
   constructor(private readonly changeDetectionRef: ChangeDetectorRef) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    if (isNil(changes)) {
-      return;
+    if (changes.hasOwnProperty('kind')) {
+      this.processKindChange(changes.kind);
     }
-    this.processExpandedChange(changes?.expanded);
+
+    if (changes.hasOwnProperty('expanded')) {
+      this.processExpandedChange(changes.expanded);
+    }
   }
 
   public toggle(): void {
@@ -84,13 +94,11 @@ export class AccordionComponent implements OnChanges {
     this.changeDetectionRef.detectChanges();
   }
 
-  private processExpandedChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
+  private processExpandedChange(expanded: ComponentChange<this, boolean>): void {
+    this.expanded$.next(expanded.currentValue);
+  }
 
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.expanded$.next(updatedValue);
+  private processKindChange(kind: ComponentChange<this, AccordionKind>): void {
+    this.kind$.next(kind.currentValue);
   }
 }
