@@ -31,6 +31,8 @@ import { SidebarDrawerContentContainerComponent } from '../sidebar-drawer-conten
   providers: [ConfigService],
 })
 export class NavbarComponent implements AfterViewInit, OnDestroy {
+  public readonly linkToGithubPupakit: string = 'https://github.com/bimeister/pupakit';
+
   public readonly logo$: Observable<SafeResourceUrl> = this.themeWrapperService.theme$.pipe(
     map((themeMode: Theme) => (themeMode === Theme.Light ? this.logoLight : this.logoDark))
   );

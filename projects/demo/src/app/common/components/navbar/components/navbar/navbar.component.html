@@ -14,12 +14,15 @@
 
   <div class="navbar__spacer"></div>
   <div class="navbar__item navbar__status">v.{{ version$ | async }}</div>
+  <a class="navbar__icon icon-github" [href]="linkToGithubPupakit" target="_blank" rel="noopener noreferrer">
+    <pupa-icon name="logo-github"></pupa-icon>
+  </a>
   <div class="navbar__line"></div>
   <div class="navbar__item">
     <demo-grid-toggle label="toggle grid"></demo-grid-toggle>
   </div>
 
-  <div class="navbar__icon right-end">
+  <div class="navbar__icon">
     <demo-theme-toggle></demo-theme-toggle>
   </div>
 </nav>
