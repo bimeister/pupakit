@@ -1,16 +1,19 @@
 import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { filterFalsy, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { InfinityScrollerSliceIndexesProducer } from '../../../internal/declarations/classes/infinity-scroller-slice-indexes-producer.class';
 import { TableDataDisplayCollection } from '../../../internal/declarations/classes/table-data-display-collection.class';
-import { InfinityScrollerOptions } from '../../../internal/declarations/interfaces/infinity-scroller-options.interface';
 import { ScrollMoveDirection } from '../../../internal/declarations/enums/scroll-move-direction.enum';
 import { InfinityScrollerEvents } from '../../../internal/declarations/events/infinity-scroller.events';
+import { InfinityScrollerOptions } from '../../../internal/declarations/interfaces/infinity-scroller-options.interface';
 import { InfinityScrollerPaginationConfig } from '../../../internal/declarations/interfaces/infinity-scroller-pagination-config.interface';
 
-type FetchEvent = InfinityScrollerEvents.GetNextPage | InfinityScrollerEvents.GetPreviousPage;
+type FetchEvent =
+  | InfinityScrollerEvents.GetNextPage
+  | InfinityScrollerEvents.GetPreviousPage
+  | InfinityScrollerEvents.GetSpecificPage;
 
 export class InfinityScrollerController<T> {
   public readonly eventBus: EventBus = new EventBus();
@@ -29,9 +32,11 @@ export class InfinityScrollerController<T> {
   private readonly currentFetchEvent$: BehaviorSubject<FetchEvent | null> = new BehaviorSubject<FetchEvent | null>(
     null
   );
-  public readonly isLoading$: Observable<boolean> = this.currentFetchEvent$.pipe(
-    map((event: FetchEvent | null) => !isNil(event))
-  );
+  private readonly scrolledToIndexInSpecificSlice$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly isLoading$: Observable<boolean> = combineLatest([
+    this.currentFetchEvent$,
+    this.scrolledToIndexInSpecificSlice$,
+  ]).pipe(map(([event, isScrolled]: [FetchEvent | null, boolean]) => !isNil(event) || !isScrolled));
 
   public readonly sliceIndexesProducer: InfinityScrollerSliceIndexesProducer =
     new InfinityScrollerSliceIndexesProducer();
@@ -47,7 +52,7 @@ export class InfinityScrollerController<T> {
       throw new Error('[InfinityScrollerComponent] pageSize should not exceed bufferSize');
     }
 
-    this.sliceIndexesProducer.initialize(config);
+    this.sliceIndexesProducer.initialize(config, this.scrollMoveDirection);
     this.data$.next([]);
 
     const event: FetchEvent = new InfinityScrollerEvents.GetNextPage([], {
@@ -105,6 +110,21 @@ export class InfinityScrollerController<T> {
       });
   }
 
+  public handleGetSpecificSlice(scrollToIndex: number): void {
+    this.isLoading$.pipe(filterFalsy(), take(1)).subscribe(() => {
+      const event: FetchEvent = new InfinityScrollerEvents.GetSpecificPage(
+        this.sliceIndexesProducer.generateSpecificPageIndexes(scrollToIndex)
+      );
+
+      this.dispatchEvent(event);
+      this.scrolledToIndexInSpecificSlice$.next(false);
+    });
+  }
+
+  public setScrolledToIndexInSpecificSlice(isScrolled: boolean): void {
+    this.scrolledToIndexInSpecificSlice$.next(isScrolled);
+  }
+
   public setData(data: T[]): void {
     this.currentFetchEvent$.pipe(take(1), filterNotNil()).subscribe((event: FetchEvent | null) => {
       const isBufferOverflow: boolean =
@@ -153,7 +173,8 @@ export class InfinityScrollerController<T> {
   public dispatchEvent<E extends InfinityScrollerEvents.InfinityScrollerEventBase>(event: E): Observable<unknown> {
     if (
       event instanceof InfinityScrollerEvents.GetNextPage ||
-      event instanceof InfinityScrollerEvents.GetPreviousPage
+      event instanceof InfinityScrollerEvents.GetPreviousPage ||
+      event instanceof InfinityScrollerEvents.GetSpecificPage
     ) {
       this.currentFetchEvent$.next(event);
     }

@@ -1,12 +1,16 @@
 .infinite-scroller {
-  &_container {
+  &__container {
     display: flex;
     flex-direction: column;
     gap: var(--pupa-infinity-scroller-item_gap);
   }
 
-  &_top,
-  &_bottom {
+  &__item {
+    display: contents;
+  }
+
+  &__top,
+  &__bottom {
     width: 100%;
     height: 1px;
     min-height: 1px;
