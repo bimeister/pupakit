@@ -22,6 +22,8 @@ import {
   isNil,
   Nullable,
 } from '@bimeister/utilities';
+import { asyncScheduler, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, map, observeOn, skip, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { InfinityScrollerController } from '../../../../../internal/declarations/classes/infinity-scroller-controller.class';
 import { ScrollMoveDirection } from '../../../../../internal/declarations/enums/scroll-move-direction.enum';
 import { InfinityScrollerEvents } from '../../../../../internal/declarations/events/infinity-scroller.events';
@@ -30,11 +32,15 @@ import { ComponentChanges } from '../../../../../internal/declarations/interface
 import { ScrollDirection } from '../../../../../internal/declarations/types/scroll-direction.type';
 import { InfiniteScrollerScrollService } from '../../../../components/infinity-scroller/services/infinite-scroller-scroll.service';
 import { ScrollableComponent } from '../../../../components/scrollable/components/scrollable/scrollable.component';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { filter, map, skip, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { InfiniteScrollerItemTemplateDirective } from '../../directives/infinite-scroller-item-template.directive';
 import { InfiniteScrollerBottomItemTemplateDirective } from '../../directives/infinity-scroller-bottom-item-template.directive';
 import { InfiniteScrollerTopItemTemplateDirective } from '../../directives/infinity-scroller-top-item-template.directive';
+
+const DEFAULT_SCROLL_INTO_VIEW_OPTIONS: ScrollIntoViewOptions = {
+  block: 'nearest',
+  behavior: 'smooth',
+};
+const SCROLL_ANIMATION_DURATION_MS: number = 500;
 
 @Component({
   selector: 'pupa-infinity-scroller',
@@ -83,6 +89,8 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
     switchMap((controller: InfinityScrollerController<T>) => controller.trackBy$)
   );
 
+  public readonly isEntriesFirstTimeRendered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly infiniteScrollerScrollService: InfiniteScrollerScrollService) {}
@@ -92,12 +100,14 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
   }
 
   public ngAfterViewInit(): void {
+    this.subscription.add(this.handleEntriesChanges());
     this.subscription.add(this.registerTopAnchorIntersectionObserver());
     this.subscription.add(this.registerBottomAnchorIntersectionObserver());
     this.subscription.add(this.processTopContentChange());
 
     this.subscription.add(this.handleScrollToBottomEvents());
     this.subscription.add(this.handleScrollToTopEvents());
+    this.subscription.add(this.handleScrollToIndexEvents());
 
     this.processInitialScrollToBottom();
   }
@@ -116,6 +126,12 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
       return;
     }
     this.controller$.next(controller);
+  }
+
+  private handleEntriesChanges(): Subscription {
+    return this.entries.changes.subscribe(() => {
+      this.isEntriesFirstTimeRendered$.next(true);
+    });
   }
 
   private registerTopAnchorIntersectionObserver(): Subscription {
@@ -224,6 +240,68 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
         }
 
         this.entries.changes.pipe(take(1)).subscribe(() => this.scrollable.scrollToBottom());
+      });
+  }
+
+  private handleScrollToIndexEvents(): Subscription {
+    return this.eventBus$
+      .pipe(
+        switchMap((eventBus: EventBus) => eventBus.listen()),
+        filterByInstanceOf(InfinityScrollerEvents.ScrollToIndex),
+        withLatestFrom(this.availableController$)
+      )
+      .subscribe(
+        ([{ scrollToIndex, scrollOptions }, controller]: [
+          InfinityScrollerEvents.ScrollToIndex,
+          InfinityScrollerController<T>
+        ]) => {
+          this.isEntriesFirstTimeRendered$.pipe(filterTruthy(), take(1)).subscribe(() => {
+            if (controller.sliceIndexesProducer.isIndexInCurrentSlice(scrollToIndex)) {
+              this.scrollToRenderedElement(controller, scrollToIndex, scrollOptions);
+              return;
+            }
+
+            controller.handleGetSpecificSlice(scrollToIndex);
+            this.scrollToElementAfterRender(scrollToIndex, scrollOptions);
+          });
+        }
+      );
+  }
+
+  private scrollToRenderedElement(
+    controller: InfinityScrollerController<T>,
+    scrollToIndex: number,
+    scrollOptions: Nullable<ScrollIntoViewOptions>
+  ): void {
+    const actualElementIndex: number = controller.sliceIndexesProducer.getHtmlElementIndex(scrollToIndex);
+    const scrollerItem: ElementRef<HTMLElement> | undefined = this.entries.find(
+      (_: ElementRef<HTMLElement>, index: number) => index === actualElementIndex
+    );
+    const elementToScroll: ChildNode | undefined = scrollerItem?.nativeElement.firstChild;
+
+    if (!(elementToScroll instanceof HTMLElement)) {
+      return;
+    }
+
+    const scrollIntoViewOptions: ScrollIntoViewOptions = isNil(scrollOptions)
+      ? DEFAULT_SCROLL_INTO_VIEW_OPTIONS
+      : scrollOptions;
+
+    setTimeout(() => {
+      elementToScroll.scrollIntoView(scrollIntoViewOptions);
+      this.controller.setScrolledToIndexInSpecificSlice(true);
+    }, SCROLL_ANIMATION_DURATION_MS);
+  }
+
+  private scrollToElementAfterRender(scrollToIndex: number, scrollOptions: Nullable<ScrollIntoViewOptions>): void {
+    this.entries.changes
+      .pipe(
+        observeOn(asyncScheduler),
+        take(1),
+        switchMap(() => this.availableController$)
+      )
+      .subscribe((controller: InfinityScrollerController<T>) => {
+        this.scrollToRenderedElement(controller, scrollToIndex, scrollOptions);
       });
   }
 }

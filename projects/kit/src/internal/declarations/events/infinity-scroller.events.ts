@@ -26,6 +26,12 @@ export namespace InfinityScrollerEvents {
     }
   }
 
+  export class GetSpecificPage<T = unknown> extends InfinityScrollerEventBase<T[]> {
+    constructor(public readonly offset: InfinityScrollerOffset) {
+      super();
+    }
+  }
+
   export class ScrollToBottom extends InfinityScrollerEventBase {
     constructor(public readonly afterRender: boolean) {
       super();
@@ -34,6 +40,12 @@ export namespace InfinityScrollerEvents {
 
   export class ScrollToTop extends InfinityScrollerEventBase {
     constructor(public readonly afterRender: boolean) {
+      super();
+    }
+  }
+
+  export class ScrollToIndex extends InfinityScrollerEventBase {
+    constructor(public readonly scrollToIndex: number, public readonly scrollOptions?: ScrollIntoViewOptions) {
       super();
     }
   }

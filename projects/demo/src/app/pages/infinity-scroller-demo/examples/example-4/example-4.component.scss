@@ -1,0 +1,8 @@
+@use '../../infinity-scroller-demo.component.scss';
+
+:host {
+  --pupa-scrollable-content_padding: 2rem;
+  --pupa-scrollable-content_display: flex;
+  --pupa-scrollable-content_flex-direction: column;
+  --pupa-infinity-scroller-item_gap: 2rem;
+}

@@ -1,3 +1,4 @@
+import { ScrollMoveDirection } from '../enums/scroll-move-direction.enum';
 import { InfinityScrollerOffset } from '../interfaces/infinity-scroller-offset.interface';
 import { InfinityScrollerPaginationConfig } from '../interfaces/infinity-scroller-pagination-config.interface';
 
@@ -6,13 +7,15 @@ export class InfinityScrollerSliceIndexesProducer {
   private endIndexState: number;
   private totalCountState: number;
   private pageSizeState: number;
+  private scrollMoveDirection: ScrollMoveDirection;
 
-  public initialize(config: InfinityScrollerPaginationConfig): void {
+  public initialize(config: InfinityScrollerPaginationConfig, scrollMoveDirection: ScrollMoveDirection): void {
     const { startIndex, endIndex, pageSize } = config;
 
     this.startIndexState = startIndex;
     this.endIndexState = endIndex;
     this.pageSizeState = pageSize;
+    this.scrollMoveDirection = scrollMoveDirection;
     this.totalCountState = 0;
   }
 
@@ -75,11 +78,38 @@ export class InfinityScrollerSliceIndexesProducer {
     return { startIndex, itemsCount };
   }
 
+  public generateSpecificPageIndexes(scrollToIndex: number): InfinityScrollerOffset {
+    const startIndex: number =
+      scrollToIndex < this.pageSizeState ? 0 : Math.floor(scrollToIndex - this.pageSizeState / 2);
+
+    const itemsCount: number = this.pageSizeState;
+
+    this.startIndexState =
+      startIndex + this.pageSizeState > this.totalCountState ? this.totalCountState - this.pageSizeState : startIndex;
+
+    this.endIndexState = this.startIndexState + itemsCount;
+
+    return { startIndex: this.startIndexState, itemsCount };
+  }
+
+  public getHtmlElementIndex(itemIndex: number): number {
+    const htmlElementIndex: number =
+      this.scrollMoveDirection === ScrollMoveDirection.FromBottomToTop
+        ? this.endIndexState - itemIndex - 1
+        : itemIndex - this.startIndexState;
+
+    return htmlElementIndex;
+  }
+
   public isOnBottom(): boolean {
     return this.endIndexState === this.totalCountState;
   }
 
   public isOnTop(): boolean {
     return this.startIndexState === 0;
+  }
+
+  public isIndexInCurrentSlice(indexToCheck: number): boolean {
+    return indexToCheck >= this.startIndexState && indexToCheck < this.endIndexState;
   }
 }

@@ -39,17 +39,17 @@ import {
 import { Scrollbar } from '../../../../../internal/declarations/classes/scrollbar.class';
 import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ScrollDirection } from '../../../../../internal/declarations/types/scroll-direction.type';
 import { ScrollDragMode } from '../../../../../internal/declarations/types/scroll-drag-mode.type';
+import { ScrollVisibilityMode } from '../../../../../internal/declarations/types/scroll-visibility-mode.type';
 import { ScrollbarPosition } from '../../../../../internal/declarations/types/scrollbar-position.type';
 import { ScrollbarSize } from '../../../../../internal/declarations/types/scrollbar-size.type';
 import { ScrollbarType } from '../../../../../internal/declarations/types/scrollbar-type.type';
 import { fromHammerEvent } from '../../../../../internal/functions/from-hammer-event.function';
 import { getAnimationFrameLoop } from '../../../../../internal/functions/get-animation-frame-loop.function';
-import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { subscribeInsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-inside-angular.operator';
+import { subscribeOutsideAngular } from '../../../../../internal/functions/rxjs-operators/subscribe-outside-angular.operator';
 import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
-import { ScrollDirection } from '../../../../../internal/declarations/types/scroll-direction.type';
-import { ScrollVisibilityMode } from '../../../../../internal/declarations/types/scroll-visibility-mode.type';
 
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 const SCROLL_EVENT_DEBOUNCE_TIME_MS: number = 100;

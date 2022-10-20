@@ -1,0 +1,26 @@
+<pupa-form-element>
+  <pupa-label>Index</pupa-label>
+  <pupa-input-number [formControl]="scrollToIndexControl"></pupa-input-number>
+</pupa-form-element>
+
+<div class="scroller__container">
+  <pupa-infinity-scroller [controller]="controller">
+    <div class="chat-bubble" *pupaInfiniteScrollerItemTemplate="let item; typeFrom: itemType">
+      <pupa-avatar class="chat-bubble__avatar" size="large" [username]="'Scroller'"></pupa-avatar>
+      <pupa-card-container class="chat-bubble__body">
+        <div class="chat-bubble__author">Scroller</div>
+        <div class="chat-bubble__message">
+          {{ item }}
+        </div>
+      </pupa-card-container>
+    </div>
+  </pupa-infinity-scroller>
+</div>
+
+<div class="scroller__divider"></div>
+
+<div class="scroller__params">
+  <pupa-tag kind="primary">Last event: {{ event$ | async }}</pupa-tag>
+  <pupa-tag kind="warning">Total items: {{ total }}</pupa-tag>
+  <pupa-tag kind="warning">Total rendered items: {{ totalRendered$ | async }}</pupa-tag>
+</div>

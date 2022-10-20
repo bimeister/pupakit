@@ -3,17 +3,17 @@
   [scrollVisibilityMode]="'onscroll'"
   (verticalScrollDirectionChanged)="onVerticalScrollDirectionChanged($event)"
 >
-  <div class="infinite-scroller_top" #anchorTop></div>
+  <div class="infinite-scroller__top" #anchorTop></div>
   <ng-container *ngTemplateOutlet="infiniteScrollTopItemTemplate?.templateRef"></ng-container>
-  <div class="infinite-scroller_container">
-    <ng-container
-      #scrollEntry
-      *ngFor="let item of data$ | async; trackBy: trackBy$ | async"
-      [ngTemplateOutlet]="infiniteScrollItemTemplate.templateRef"
-      [ngTemplateOutletContext]="{ $implicit: item }"
-    >
-    </ng-container>
+  <div class="infinite-scroller__container">
+    <div class="infinite-scroller__item" #scrollEntry *ngFor="let item of data$ | async; trackBy: trackBy$ | async">
+      <ng-container
+        [ngTemplateOutlet]="infiniteScrollItemTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: item }"
+      >
+      </ng-container>
+    </div>
   </div>
   <ng-container *ngTemplateOutlet="infiniteScrollBottomItemTemplate?.templateRef"></ng-container>
-  <div class="infinite-scroller_bottom" #anchorBottom></div>
+  <div class="infinite-scroller__bottom" #anchorBottom></div>
 </pupa-scrollable>
