@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { InfinityScrollerController, InfinityScrollerEvents, ScrollMoveDirection } from '@bimeister/pupakit.widgets';
 import { filterNotEmpty } from '@bimeister/utilities';
-import { InfinityScrollerController } from '@kit/internal/declarations/classes/infinity-scroller-controller.class';
-import { ScrollMoveDirection } from '@kit/internal/declarations/enums/scroll-move-direction.enum';
-import { InfinityScrollerEvents } from '@kit/internal/declarations/events/infinity-scroller.events';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { debounceTime, delay, map, startWith } from 'rxjs/operators';
 

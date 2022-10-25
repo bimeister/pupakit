@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Uuid } from '@bimeister/pupakit.common';
+import { TableColumnDefinition, TableColumnPin, TableController } from '@bimeister/pupakit.table';
 import { getUuid } from '@bimeister/utilities';
-import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
-import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
-import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
-import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 
 interface SomeData {
   id: Uuid;

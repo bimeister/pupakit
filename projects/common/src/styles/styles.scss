@@ -1,0 +1,64 @@
+@use 'sass:meta';
+@use 'functions' as *;
+@use 'mixins' as *;
+
+@use '../../../../node_modules/@angular/cdk/overlay-prebuilt.css';
+
+@use 'overlay';
+@use 'css-variables';
+@use 'font-faces';
+
+.icon-inner svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chip-content {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  max-width: inherit;
+
+  &__text {
+    flex-shrink: 1;
+    box-sizing: border-box;
+    padding: 0 2rem;
+    width: 100%;
+    max-width: inherit;
+    min-width: 0;
+    @include ellipsis-text-overflow;
+  }
+
+  &__delete-button {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-right: 2rem;
+    height: 5rem;
+    width: 5rem;
+  }
+
+  &__avatar {
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-left: 1rem;
+    height: 4rem;
+    width: 4rem;
+  }
+
+  &__icon-container {
+    display: inline-flex;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding-left: 2rem;
+  }
+
+  &__icon {
+    height: 3rem;
+    width: 3rem;
+  }
+}
+
+.invisible-scrollbars {
+  @include invisible-scrollbars;
+}

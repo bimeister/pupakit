@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
-import { PopoversService } from '@kit/internal/shared/services/popovers.service';
+import { PopoversService } from '@bimeister/pupakit.overlays';
 import { PopoverLayoutOtherComponent } from '../popover-layout-other/popover-layout-other.component';
 
 @Component({

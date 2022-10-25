@@ -1,0 +1,54 @@
+type: 'application'
+language: 'typescript'
+
+project:
+  name: 'demo'
+  description: 'PupaKit Demo'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'
+  - 'overlays'
+  - 'tree'
+  - 'table'
+  - 'widgets'
+  - 'forms'
+
+workspace:
+  inheritedTasks:
+    exclude: ['barrel', 'test-ci', 'test-debug']
+
+tasks:
+  build:
+    options:
+      mergeDeps: 'replace'
+      runInCI: false
+
+  build-ci:
+    command: 'npm run build:demo-ci'
+    inputs:
+      - '@group(sources)'
+    outputs:
+      - 'dist'
+    deps:
+      - '~:barrel'
+
+  serve:
+    command: 'ng serve $project'
+    local: true
+    deps:
+      - '^:build'
+    options:
+      mergeOutputs: 'replace'
+      mergeDeps: 'replace'
+
+  serve-fast:
+    command: 'ng serve $project'
+    local: true
+
+  barrel:
+    command: 'noop'

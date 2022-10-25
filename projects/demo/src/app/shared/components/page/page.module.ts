@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { TabsModule } from '@kit/lib/components/tabs/tabs.module';
+import { PupaTabsModule } from '@bimeister/pupakit.kit';
 import { PageComponent } from './components/page/page.component';
 import { PageTabDirective } from './directives/page-tab.directive';
 
 const EXPORTS: Type<unknown>[] = [PageComponent, PageTabDirective];
-const IMPORTS: Type<unknown>[] = [CommonModule, RouterModule, TabsModule];
+const IMPORTS: Type<unknown>[] = [CommonModule, RouterModule, PupaTabsModule];
 
 @NgModule({
   declarations: EXPORTS,

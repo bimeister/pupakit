@@ -14,6 +14,6 @@ module.exports = {
     },
   },
   moduleNameMapper: {
-    '^@bimeister/utilities/.*$': '<rootDir>/node_modules/@bimeister/utilities',
+    '^@bimeister/utilities/.*$': '<rootDir>/../../node_modules/@bimeister/utilities',
   },
 };

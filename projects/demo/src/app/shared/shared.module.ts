@@ -1,10 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ComponentsModule } from '@kit/lib/components.module';
-import { AlertModule } from '@kit/lib/components/alert/alert.module';
-import { IconModule } from '@kit/lib/components/icon/icon.module';
-import { getAllIcons } from '../../declarations/functions/get-all-icons.function';
+import { PupaCommonModule } from '@bimeister/pupakit.common';
+import { PupaFormsModule } from '@bimeister/pupakit.forms';
+import { getAllIcons, PupaIconsModule } from '@bimeister/pupakit.icons';
+import { PupaKitModule } from '@bimeister/pupakit.kit';
+import { PupaAlertModule, PupaOverlaysModule } from '@bimeister/pupakit.overlays';
+import { PupaTableModule } from '@bimeister/pupakit.table';
+import { PupaTreeModule } from '@bimeister/pupakit.tree';
+import { PupaWidgetsModule } from '@bimeister/pupakit.widgets';
 import { AlertsToolbarExampleComponent } from '../pages/alerts-demo/examples/alerts-toolbar-example/alerts-toolbar-example.component';
 import { AnchorModule } from './components/anchor/anchor.module';
 import { CodeModule } from './components/code/code.module';
@@ -16,21 +20,27 @@ const MODULES: Type<unknown>[] = [
   CommonModule,
   CodeModule,
   ExampleViewerModule,
-  ComponentsModule,
   ReactiveFormsModule,
   InfoBlockModule,
   PageModule,
   AnchorModule,
+  PupaTableModule,
+  PupaCommonModule,
+  PupaKitModule,
+  PupaFormsModule,
+  PupaTreeModule,
+  PupaOverlaysModule,
+  PupaWidgetsModule,
 ];
 
 @NgModule({
   declarations: [],
   imports: [
     ...MODULES,
-    IconModule.forRoot(getAllIcons()),
-    AlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent }),
+    PupaIconsModule.forRoot(getAllIcons()),
+    PupaAlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent }),
   ],
-  exports: [...MODULES, IconModule, AlertModule],
+  exports: [...MODULES],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DemoSharedModule {}

@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { RadioGroupModule } from '@kit/lib/components/radio-group/radio-group.module';
-import { SelectModule } from '@kit/lib/components/select/select.module';
-import { SwitcherModule } from '@kit/lib/components/switcher/switcher.module';
 import { AnchorModule } from '../anchor/anchor.module';
 import { CodeModule } from '../code/code.module';
 import { ExampleViewerConfigItemComponent } from './components/example-viewer-config-item/example-viewer-config-item.component';
@@ -19,7 +16,8 @@ import { PropsSelectComponent } from './components/props-select/props-select.com
 import { PropsSwitcherComponent } from './components/props-switcher/props-switcher.component';
 import { ExampleViewerConfigItemDescriptionDirective } from './directives/example-viewer-config-item-description.directive';
 import { ExampleViewerPropertyDescriptionDirective } from './directives/example-viewer-property-description.directive';
-import { OptionModule } from '../../../../../../kit/src/lib/components/option/option.module';
+import { PupaRadioGroupModule, PupaSelectModule, PupaSwitcherModule } from '@bimeister/pupakit.forms';
+import { PupaOptionModule } from '@bimeister/pupakit.kit';
 
 const EXPORTS: Type<unknown>[] = [
   ExampleViewerContentComponent,
@@ -39,12 +37,12 @@ const EXPORTS: Type<unknown>[] = [
 
 const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   CommonModule,
-  RadioGroupModule,
-  SelectModule,
-  SwitcherModule,
+  PupaRadioGroupModule,
+  PupaSelectModule,
+  PupaSwitcherModule,
   ReactiveFormsModule,
   CodeModule,
-  OptionModule,
+  PupaOptionModule,
   AnchorModule,
 ];
 

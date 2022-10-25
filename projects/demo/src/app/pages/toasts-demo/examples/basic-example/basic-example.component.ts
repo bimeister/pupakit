@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { OpenedToast, ToastsService } from '@bimeister/pupakit.overlays';
 import { filterTruthy } from '@bimeister/utilities';
-import { OpenedToast } from '@kit/internal/declarations/classes/opened-toast.class';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 
 @Component({
   selector: 'demo-basic-example',

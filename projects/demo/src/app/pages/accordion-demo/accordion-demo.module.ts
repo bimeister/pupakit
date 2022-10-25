@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CheckboxModule } from '@kit/lib/components/checkbox/checkbox.module';
 import { AccordionDemoExample1Component } from './examples/example-1/example-1.component';
 import { AccordionDemoExample2Component } from './examples/example-2/example-2.component';
 import { AccordionDemoExample3Component } from './examples/example-3/example-3.component';
@@ -16,6 +15,6 @@ import { AccordionDemoComponent } from './accordion-demo.component';
     AccordionDemoExample3Component,
     AccordionDemoExample4Component,
   ],
-  imports: [DemoSharedModule, AccordionDemoRoutingModule, CheckboxModule],
+  imports: [DemoSharedModule, AccordionDemoRoutingModule],
 })
 export class AccordionDemoModule {}

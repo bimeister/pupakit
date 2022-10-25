@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { OpenedAlert } from '@kit/internal/declarations/classes/opened-alert.class';
-import { AlertsService } from '@kit/internal/shared/services/alerts.service';
+import { AlertsService, OpenedAlert } from '@bimeister/pupakit.overlays';
 
 @Component({
   selector: 'demo-basic-example',

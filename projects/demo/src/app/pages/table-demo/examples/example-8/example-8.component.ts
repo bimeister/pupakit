@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { PagedVirtualScrollArguments, Uuid } from '@bimeister/pupakit.common';
+import {
+  TableColumnDefinition,
+  TableColumnPin,
+  TableController,
+  TablePagedDataProducer,
+} from '@bimeister/pupakit.table';
 import { getUuid } from '@bimeister/utilities';
-import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
-import { TablePagedDataProducer } from '@kit/internal/declarations/classes/table-paged-data-producer.class';
-import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
-import { PagedVirtualScrollArguments } from '@kit/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
-import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
-import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 import { Observable, of, Subscription } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 

@@ -9,7 +9,7 @@
 
   @include pointer-fine() {
     .anchor-button-icon {
-      opacity: 0;
+      opacity: 0.5;
       transition: opacity variable(transition-duration_shorter) variable(transition-timing-function_common);
       will-change: opacity;
     }

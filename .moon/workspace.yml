@@ -1,0 +1,66 @@
+# https://moonrepo.dev/docs/config/workspace
+$schema: 'https://moonrepo.dev/schemas/workspace.json'
+
+# Extend and inherit an external configuration file. Must be a valid HTTPS URL or file system path.
+# extends: './shared/workspace.yml'
+
+# REQUIRED: A map of all projects found within the workspace, or a list or file system globs.
+# When using a map, each entry requires a unique project ID as the map key, and a file system
+# path to the project folder as the map value. File paths are relative from the workspace root,
+# and cannot reference projects located outside the workspace boundary.
+projects:
+  - 'projects/*'
+
+# Configures the version control system to utilize within the workspace. A VCS
+# is required for determining touched (added, modified, etc) files, calculating file hashes,
+# computing affected files, and much more.
+vcs:
+  # The manager/binary to use when managing the repository.
+  # Accepts "git", or "svn". Defaults to "git".
+  manager: 'git'
+
+  # The default branch (master/main/trunk) in the repository for comparing the
+  # local branch against. For git, this is is typically "master" or "main",
+  # and must include the remote prefix (before /). For svn, this should always be "trunk".
+  defaultBranch: 'origin/main'
+
+  # The version of the package manager (above) to use.
+  npm:
+    version: '8.19.3'
+
+    # Add `node.version` as a constraint in the root `package.json` `engines`.
+    addEnginesConstraint: false
+
+    # Use the `package.json` name as an alias for the respective moon project.
+    aliasPackageNames: 'name-and-scope'
+
+    # Dedupe dependencies after the lockfile has changed.
+    dedupeOnLockfileChange: true
+
+    # Version format to use when syncing dependencies within the project's `package.json`.
+    dependencyVersionFormat: 'version-caret'
+
+    # Infer and automatically create moon tasks from `package.json` scripts, per project.
+    # BEWARE: Tasks and scripts are not 1:1 in functionality, so please refer to the documentation.
+    inferTasksFromScripts: false
+
+    # Sync a project's `dependsOn` as dependencies within the project's `package.json`.
+    syncProjectWorkspaceDependencies: true
+
+    # Sync `node.version` to a 3rd-party version manager's config file.
+    # Accepts "nodenv" (.node-version), "nvm" (.nvmrc), or none.
+    # syncVersionManagerConfig: 'nvm'
+
+runner:
+  implicitInputs:
+    - 'package.json'
+    - '/.moon/project.yml'
+    - '/.moon/workspace.yml'
+    - '/projects/**/package.json'
+    - '/projects/**/tsconfig.json'
+    - '/projects/**/tsconfig.lib.json'
+    - 'tsconfig.eslint.json'
+    - 'tsconfig.base.json'
+    - 'tsconfig.spec.json'
+    - '**/moon.yml'
+    - '**/moon.yaml'

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonMultiKind } from '@kit/internal/declarations/types/button-multi-kind.type';
+import { ButtonMultiKind } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'demo-button-multi-example-2',

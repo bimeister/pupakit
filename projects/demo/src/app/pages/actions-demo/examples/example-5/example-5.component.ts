@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN } from '@kit/internal/constants/tokens/actions-default-more-button-trigger-text.token';
+import { ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN } from '@bimeister/pupakit.widgets';
 
 const ITEM_COUNT: number = 25;
 

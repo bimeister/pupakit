@@ -1,8 +1,7 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, Renderer2, ViewEncapsulation } from '@angular/core';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeService } from '@kit/internal/shared/services/theme.service';
+import { Theme, ThemeService } from '@bimeister/pupakit.common';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 

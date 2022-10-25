@@ -1,7 +1,7 @@
 import { AfterViewInit, Directive, ElementRef, HostListener, Inject, Input, Optional } from '@angular/core';
 import { Router } from '@angular/router';
+import { DrawerRef } from '@bimeister/pupakit.overlays';
 import { isNil, Nullable } from '@bimeister/utilities';
-import { DrawerRef } from '@kit/internal/declarations/classes/drawer-ref.class';
 import { SidebarScrollDelay } from '../../../../declarations/enums/sidebar-scroll-delay.enum';
 import { SidebarScrollService } from '../../services/sidebar-scroll.service';
 

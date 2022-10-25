@@ -1,0 +1,9 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'icons'
+  description: 'PupaKit Icons'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []

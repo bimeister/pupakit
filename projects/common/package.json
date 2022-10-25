@@ -1,0 +1,30 @@
+{
+  "name": "@bimeister/pupakit.common",
+  "version": "0.2.0",
+  "description": "PupaKit Common",
+  "keywords": [
+    "angular",
+    "common",
+    "library",
+    "utilities"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bimeister/pupakit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimeister/pupakit",
+    "directory": "projects/common"
+  },
+  "scripts": {
+    "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@bimeister/utilities": "*"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "main": "dist"
+}

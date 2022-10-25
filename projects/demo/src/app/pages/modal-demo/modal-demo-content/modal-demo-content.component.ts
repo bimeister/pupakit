@@ -7,8 +7,8 @@ import {
   Self,
   ViewEncapsulation,
 } from '@angular/core';
-import { ModalRef } from '@kit/internal/declarations/classes/modal-ref.class';
-import { Position } from '@kit/internal/declarations/types/position.type';
+import { Position } from '@bimeister/pupakit.common';
+import { ModalRef } from '@bimeister/pupakit.overlays';
 import { MODAL_DATA_TOKEN } from '../../../../declarations/tokens/modal-data.token';
 import { ModalDemoLocalService } from '../services/modal-demo-local.service';
 

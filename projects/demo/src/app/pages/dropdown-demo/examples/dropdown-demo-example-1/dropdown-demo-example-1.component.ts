@@ -1,6 +1,6 @@
 import { HorizontalConnectionPos } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { DropdownWidthType } from '@kit/internal/declarations/types/dropdown-width.type';
+import { DropdownWidthType } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'demo-dropdown-example-1',

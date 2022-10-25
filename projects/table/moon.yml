@@ -1,0 +1,15 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'table'
+  description: 'PupaKit Table'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'
+  - 'overlays'

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { TreeNodeProperties } from '@kit/internal/declarations/interfaces/tree-node-properties.interface';
+import { TreeNodeProperties } from '@bimeister/pupakit.tree';
 
 @Component({
   selector: 'demo-tree-node-example-1',

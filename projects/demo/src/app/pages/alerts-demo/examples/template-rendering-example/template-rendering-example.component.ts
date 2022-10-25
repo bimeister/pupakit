@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
-import { AlertsService } from '@kit/internal/shared/services/alerts.service';
-import { AlertTemplateComponent } from '@kit/lib/components/alert/components/alert-template/alert-template.component';
+import { AlertsService, AlertTemplateComponent } from '@bimeister/pupakit.overlays';
 
 interface AlertTemplateData {
   $implicit: string;

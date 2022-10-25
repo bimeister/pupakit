@@ -4,7 +4,6 @@ import { FloatingCardDemoRoutingModule } from './floating-card-demo-routing.modu
 import { FloatingCardDemoComponent } from './floating-card-demo.component';
 import { DemoFloatingCardExampleComponent } from './examples/demo-floating-card-example/demo-floating-card-example.component';
 import { DemoFloatingCardWithCustomResetTypeExampleComponent } from './examples/demo-floating-card-with-custom-reset-type-example/demo-floating-card-with-custom-reset-type-example.component';
-import { SharedModule } from '@kit/internal/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -12,6 +11,6 @@ import { SharedModule } from '@kit/internal/shared/shared.module';
     DemoFloatingCardExampleComponent,
     DemoFloatingCardWithCustomResetTypeExampleComponent,
   ],
-  imports: [DemoSharedModule, FloatingCardDemoRoutingModule, SharedModule],
+  imports: [DemoSharedModule, FloatingCardDemoRoutingModule],
 })
 export class FloatingCardDemoModule {}

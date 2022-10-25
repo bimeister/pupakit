@@ -1,0 +1,55 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../.moon/cache/types/projects/widgets",
+    "declaration": true,
+    "inlineSources": false,
+    "module": "ES2020",
+    "target": "ES2020",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {
+      "@bimeister/pupakit.common": [
+        "../common/src/index.ts"
+      ],
+      "@bimeister/pupakit.common/*": [
+        "../common/src/*"
+      ],
+      "@bimeister/pupakit.icons": [
+        "../icons/src/index.ts"
+      ],
+      "@bimeister/pupakit.icons/*": [
+        "../icons/src/*"
+      ],
+      "@bimeister/pupakit.kit": [
+        "../kit/src/index.ts"
+      ],
+      "@bimeister/pupakit.kit/*": [
+        "../kit/src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "enableIvy": true
+  },
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../icons"
+    },
+    {
+      "path": "../kit"
+    }
+  ]
+}

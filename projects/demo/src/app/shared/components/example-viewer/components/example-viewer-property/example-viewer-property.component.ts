@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulation } from '@angular/core';
+import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
 import { Nullable } from '@bimeister/utilities';
-import { ClientUiStateHandlerService } from '@kit/internal/shared/services/client-ui-state-handler.service';
 import { Observable } from 'rxjs';
 import { ExampleViewerPropertyDescriptionDirective } from '../../directives/example-viewer-property-description.directive';
 

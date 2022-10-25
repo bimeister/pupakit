@@ -16,6 +16,6 @@ module.exports = {
   coverageDirectory: 'coverage',
   reporters: [['jest-junit', { suiteName: 'Unit Tests', outputDirectory: 'coverage' }]],
   moduleNameMapper: {
-    '^@bimeister/utilities/.*$': '<rootDir>/node_modules/@bimeister/utilities',
+    '^@bimeister/utilities/.*$': '<rootDir>/../../node_modules/@bimeister/utilities',
   },
 };

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { IconHolderSize } from '@kit/internal/declarations/types/icon-holder-size.type';
+import { IconHolderSize } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'demo-example-1',

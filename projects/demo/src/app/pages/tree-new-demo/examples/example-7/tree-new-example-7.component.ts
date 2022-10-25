@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { TreeController } from '@kit/internal/declarations/classes/tree-controller.class';
-import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
-import { TreeEvents } from '@kit/internal/declarations/events/tree.events';
+import { FlatTreeItem, TreeController, TreeEvents } from '@bimeister/pupakit.tree';
 import { Subject, Subscription } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { DATA } from '../example-tree-for-scroll-demo.data';

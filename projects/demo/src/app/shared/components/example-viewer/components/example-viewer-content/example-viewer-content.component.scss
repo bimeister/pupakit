@@ -1,7 +1,7 @@
 @use 'sass:selector';
 @use 'mixins' as *;
-@use 'projects/demo/src/styles/demo-variables' as *;
-@use 'projects/demo/src/styles/demo-mixins' as *;
+@use 'demo-variables' as *;
+@use 'demo-mixins' as *;
 
 .viewer-content {
   @include bordered-box();

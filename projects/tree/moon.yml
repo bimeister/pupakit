@@ -1,0 +1,14 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'tree'
+  description: 'PupaKit Tree'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'

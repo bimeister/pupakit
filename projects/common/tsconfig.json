@@ -1,0 +1,32 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs",
+      "plugins": []
+    }
+  },
+  "compilerOptions": {
+    "outDir": "../../.moon/cache/types/projects/common",
+    "declaration": true,
+    "inlineSources": false,
+    "module": "ES2020",
+    "target": "ES2020",
+    "resolveJsonModule": true,
+    "baseUrl": ".",
+    "paths": {}
+  },
+  "include": [
+    "src/**/*.ts",
+    "scripts/**/*.ts"
+  ],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "skipTemplateCodegen": true,
+    "strictMetadataEmit": true,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": true,
+    "enableResourceInlining": true,
+    "enableIvy": true
+  }
+}

@@ -1,12 +1,22 @@
 /.*/
 !/.github/
 /.vscode/
-/coverage/
-/dist/
+coverage/
+dist/
 /node_modules/
 *.log
 api.ts
 .DS_Store
 Folder.DotSettings.user
-/projects/kit/src/styles/variables/adaptive.variables.scss
-/projects/kit/src/styles/maps/colors.map.scss
+/projects/**/node_modules
+
+/projects/common/**/colors.map.scss
+/projects/common/**/alpha-colors.map.scss
+/projects/common/**/semantic-colors.map.scss
+/projects/common/**/adaptive.variables.scss
+
+
+# moon
+!/.moon/
+.moon/cache
+.moon/docker

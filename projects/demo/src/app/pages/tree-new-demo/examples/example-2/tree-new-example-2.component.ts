@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
-import { TreeController } from '@kit/internal/declarations/classes/tree-controller.class';
-import { TreeEvents } from '@kit/internal/declarations/events/tree.events';
+import { FlatTreeItem, TreeController, TreeEvents } from '@bimeister/pupakit.tree';
 import { Subscription } from 'rxjs';
 import { DATA } from '../example-tree.data';
 

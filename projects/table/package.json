@@ -1,0 +1,32 @@
+{
+  "name": "@bimeister/pupakit.table",
+  "version": "0.2.0",
+  "description": "PupaKit Table",
+  "keywords": [
+    "angular",
+    "table"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bimeister/pupakit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimeister/pupakit",
+    "directory": "projects/table"
+  },
+  "scripts": {
+    "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@bimeister/utilities": "*"
+  },
+  "dependencies": {
+    "@bimeister/pupakit.common": "^0.2.0",
+    "@bimeister/pupakit.icons": "^0.2.0",
+    "@bimeister/pupakit.kit": "^0.2.0",
+    "@bimeister/pupakit.overlays": "^0.2.0",
+    "tslib": "^2.3.0"
+  },
+  "main": "dist"
+}

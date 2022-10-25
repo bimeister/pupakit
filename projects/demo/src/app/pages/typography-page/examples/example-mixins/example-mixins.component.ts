@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 import { combineLatest, Observable } from 'rxjs';
 import { map, startWith, take } from 'rxjs/operators';
 import { Clipboard } from '@angular/cdk/clipboard';
 import { shareReplayWithRefCount } from '@bimeister/utilities';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 
 @Component({
   selector: 'demo-typography-example-mixins',

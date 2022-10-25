@@ -1,0 +1,15 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'forms'
+  description: 'PupaKit Forms'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'
+  - 'tree'

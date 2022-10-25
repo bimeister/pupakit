@@ -1,0 +1,13 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'kit'
+  description: 'PupaKit Atoms'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'

@@ -1,6 +1,5 @@
 import { Directive, OnDestroy } from '@angular/core';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ThemeService } from '@kit/internal/shared/services/theme.service';
+import { Theme, ThemeService } from '@bimeister/pupakit.common';
 import { Subscription } from 'rxjs';
 import { ThemeSaverService } from '../../services/theme-saver.service';
 

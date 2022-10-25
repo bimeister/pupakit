@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
-import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
 import { Subscription } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
 import { PropsBase } from '../../declarations/classes/props-base.abstract';

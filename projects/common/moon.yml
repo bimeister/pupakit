@@ -1,0 +1,174 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'common'
+  description: 'PupaKit Common'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+workspace:
+  inheritedTasks:
+    exclude: ['build']
+
+tasks:
+  build:
+    common: 'noop'
+    deps:
+      - '~:build-package'
+      - '~:convert-scss-to-css'
+      - '~:bundle-all'
+    options:
+      runDepsInParallel: false
+
+  build-package:
+    command: 'ng build $project'
+    options:
+      mergeOutputs: 'replace'
+      mergeDeps: 'append'
+    inputs:
+      - '@group(sources)'
+    outputs:
+      - 'dist'
+    deps:
+      - '~:barrel'
+      - '~:style-all'
+
+  style-all:
+    command: 'noop'
+    deps:
+      - '~:style-variables'
+      - '~:style-colors-map'
+      - '~:style-alpha-colors-map'
+      - '~:style-semantic-colors-map'
+
+  style-variables:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-adaptive-variables.script.ts'
+      - 'src/assets/configs/adaptive-config.json'
+    outputs:
+      - 'src/styles/variables/adaptive.variables.scss'
+
+  style-colors-map:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-colors-map.script.ts'
+      - 'src/assets/configs/colors-config.json'
+    outputs:
+      - 'src/styles/maps/colors.map.scss'
+
+  style-alpha-colors-map:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-alpha-colors-map.script.ts'
+      - 'src/assets/configs/alpha-colors-config.json'
+    outputs:
+      - 'src/styles/maps/alpha-colors.map.scss'
+
+  style-semantic-colors-map:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-semantic-colors-map.script.ts'
+      - 'src/assets/configs/semantic-colors-config.json'
+    outputs:
+      - 'src/styles/maps/semantic-colors.map.scss'
+
+  convert-scss-to-css:
+    command:
+      - 'sass'
+      - '--load-path=node_modules'
+      - '@in(0)'
+      - '@out(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'src/styles/styles.scss'
+    outputs:
+      - 'dist/styles/styles.css'
+
+  bundle-all:
+    command: 'noop'
+    deps:
+      - '~:bundle-styles'
+      - '~:bundle-assets'
+    options:
+      cache: false
+      runInCI: false
+
+  bundle-styles:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+      cache: false
+    inputs:
+      - 'scripts/copy-styles-to-dist-folder.script.ts'
+
+  bundle-assets:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+      cache: false
+    inputs:
+      - 'scripts/copy-assets-to-dist-folder.script.ts'
+
+  # prepare-npmrc:
+  #   command:
+  #     - 'node'
+  #     - '@in(0)'
+  #     - '--npmrc_path'
+  #     - '@in(1)'
+  #     - '--auth_token="${NPM_AUTH_TOKEN}"'
+  #     - '--org_email="info@bimeister.com"'
+  #     - '--registry="https://git.bimeister.io/api/v4/projects/98/packages/npm/" --remove_scoped_registries=\"true\'
+  #     - '--remove_scoped_registries="true"'
+  #   platform: 'node'
+  #   inputs:
+  #     - '/node_modules/@bimeister/build-cli/executable.js'
+  #     - '/.npmrc'
+
+  # prepare-npm-files:
+  #   command:
+  #     - 'ts-node'
+  #     - '@in(0)'
+  #   inputs:
+  #     - '/scripts/copy-npm-files-to-dist-folder.script.ts'
+  #     - '/.npmrc'
+  #     - '/.npmignore'
+  #   outputs:
+  #     - '/dist/.npmrc'
+  #     - '/dits/.npmignore'
+
+  # prepare-all:
+  #   command: 'noop'
+  #   deps:
+  #     - '~:prepare-npmrc'
+  #     - '~:prepare-npm-files'

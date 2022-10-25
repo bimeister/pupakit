@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Uuid } from '@bimeister/pupakit.common';
+import {
+  TableColumnDefinition,
+  TableColumnPin,
+  TableColumnSorting,
+  TableController,
+  TableEvents,
+  TableFeatureEvents,
+  TableSortingFeature,
+} from '@bimeister/pupakit.table';
 import { getUuid, sortByProperty } from '@bimeister/utilities';
-import { TableController } from '@kit/internal/declarations/classes/table-controller.class';
-import { TableSortingFeature } from '@kit/internal/declarations/classes/table-external-predefined-features/table-sorting-feature.class';
-import { TableColumnPin } from '@kit/internal/declarations/enums/table-column-pin.enum';
-import { TableColumnSorting } from '@kit/internal/declarations/enums/table-column-sorting.enum';
-import { TableFeatureEvents } from '@kit/internal/declarations/events/table-feature.events';
-import { TableEvents } from '@kit/internal/declarations/events/table.events';
-import { TableColumnDefinition } from '@kit/internal/declarations/interfaces/table-column-definition.interface';
-import { Uuid } from '@kit/internal/declarations/types/uuid.type';
 import { Subject, Subscription } from 'rxjs';
 
 interface SomeData {

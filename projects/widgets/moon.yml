@@ -1,0 +1,14 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'widgets'
+  description: 'PupaKit Widgets'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'

@@ -10,12 +10,9 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Theme, ThemeService } from '@bimeister/pupakit.common';
+import { DrawersService, OpenedDrawer, DrawerContainerComponent } from '@bimeister/pupakit.overlays';
 import { filterTruthy, isNil, mapToVoid, Nullable } from '@bimeister/utilities';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { OpenedDrawer } from '@kit/internal/declarations/interfaces/opened-drawer.interface';
-import { DrawersService } from '@kit/internal/shared/services/drawers.service';
-import { ThemeService } from '@kit/internal/shared/services/theme.service';
-import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { AnchorService } from '../../../../services/anchor.service';

@@ -9,9 +9,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PagedVirtualScrollArguments } from '@bimeister/pupakit.common';
+import { PagedVirtualScrollViewportComponent } from '@bimeister/pupakit.widgets';
 import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
-import { PagedVirtualScrollArguments } from '@kit/internal/declarations/interfaces/paged-virtual-scroll-arguments.interface';
-import { PagedVirtualScrollViewportComponent } from '@kit/lib/components/paged-virtual-scroll/components/paged-virtual-scroll-viewport/paged-virtual-scroll-viewport.component';
 import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
 import { debounceTime, delay, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 

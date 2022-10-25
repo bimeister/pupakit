@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../out-tsc/spec",
+    "types": ["jest", "node"],
+    "paths": {
+      "@bimeister/pupakit.common": ["dist/common"]
+    }
+  },
+  "include": ["**/*.spec.ts", "**/*.d.ts"]
+}

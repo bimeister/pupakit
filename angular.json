@@ -4,10 +4,13 @@
     "analytics": false,
     "packageManager": "npm"
   },
-  "defaultProject": "pupakit",
   "newProjectRoot": "projects",
   "projects": {
     "demo": {
+      "prefix": "demo",
+      "projectType": "application",
+      "root": "./demo",
+      "sourceRoot": "./projects/demo/src",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -31,38 +34,10 @@
               "namedChunks": false,
               "outputHashing": "none",
               "vendorChunk": false
-            },
-            "production": {
-              "aot": true,
-              "budgets": [
-                {
-                  "maximumError": "5mb",
-                  "maximumWarning": "2mb",
-                  "type": "initial"
-                }
-              ],
-              "buildOptimizer": true,
-              "extractLicenses": true,
-              "fileReplacements": [
-                {
-                  "replace": "./projects/demo/src/environments/environment.ts",
-                  "with": "./projects/demo/src/environments/production.environment.ts"
-                }
-              ],
-              "namedChunks": false,
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "vendorChunk": false
             }
           },
           "options": {
             "assets": [
-              {
-                "glob": "**/*",
-                "input": "./node_modules/ionicons/dist/ionicons",
-                "output": "/ionicons"
-              },
               {
                 "glob": "**/examples/**/*",
                 "input": "./projects/demo/src/app/pages",
@@ -75,12 +50,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "./projects/kit/src/assets/fonts",
-                "output": "/assets/fonts"
-              },
-              {
-                "glob": "**/*",
-                "input": "./projects/kit/src/assets/configs",
+                "input": "./projects/common/src/assets/configs",
                 "output": "/assets/configs"
               },
               {
@@ -91,13 +61,13 @@
             ],
             "index": "./projects/demo/src/index.html",
             "main": "./projects/demo/src/main.ts",
-            "outputPath": "./dist/demo",
+            "outputPath": "./projects/demo/dist",
             "polyfills": "./projects/demo/src/polyfills.ts",
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects/kit/src/styles", "./projects/demo/src/styles", "./node_modules"]
+              "includePaths": ["./projects/common/src/styles", "./projects/demo/src/styles", "./node_modules"]
             },
             "styles": [
-              "./projects/kit/src/styles/styles.scss",
+              "./projects/common/src/styles/styles.scss",
               "./node_modules/highlight.js/styles/github.css",
               "./projects/demo/src/styles/styles.scss"
             ],
@@ -137,51 +107,34 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "development",
           "configurations": {
             "development": {
-              "aot": true,
               "browserTarget": "demo:build:development",
               "disableHostCheck": true,
               "open": true,
-              "progress": true,
-              "watch": true
-            },
-            "production": {
-              "aot": true,
-              "browserTarget": "demo:build:production",
-              "disableHostCheck": true,
               "host": "0.0.0.0",
-              "open": true,
-              "port": 4200,
-              "progress": true,
-              "watch": false
+              "watch": true,
+              "port": 4201
             }
           },
           "options": {
             "browserTarget": "demo:build"
           }
         }
-      },
-      "prefix": "demo",
-      "projectType": "application",
-      "root": "./demo",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss",
-          "viewEncapsulation": "Emulated",
-          "changeDetection": "OnPush",
-          "skipTests": true
-        }
-      },
-      "sourceRoot": "./projects/demo/src"
+      }
     },
-    "pupakit": {
+    "icons": {
+      "projectType": "library",
+      "root": "projects/icons",
+      "sourceRoot": "projects/icons/src",
+      "prefix": "pupa",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "./ng-package.json",
-            "tsConfig": "./tsconfig.lib.json"
+            "project": "projects/icons/ng-package.json",
+            "tsConfig": "projects/icons/tsconfig.lib.json"
           }
         },
         "lint": {
@@ -204,7 +157,7 @@
             }
           },
           "options": {
-            "lintFilePatterns": ["./projects/kit/src/**/*.ts", "./projects/demo/src/**/*.html"]
+            "lintFilePatterns": ["./projects/icons/src/**/*.ts"]
           }
         },
         "test": {
@@ -224,48 +177,467 @@
               "watch": true,
               "configPath": "jest.config.development.js"
             }
+          },
+          "options": {
+            "passWithNoTests": true
           }
         }
-      },
-      "prefix": "pupa",
+      }
+    },
+    "table": {
       "projectType": "library",
-      "root": "./",
-      "schematics": {
-        "@schematics/angular:component": {
-          "changeDetection": "OnPush",
-          "export": false,
-          "flat": false,
-          "inlineStyle": false,
-          "inlineTemplate": false,
-          "skipImport": false,
-          "skipTests": true,
-          "style": "scss",
-          "viewEncapsulation": "Emulated"
+      "root": "projects/table",
+      "sourceRoot": "projects/table/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/table/ng-package.json",
+            "tsConfig": "projects/table/tsconfig.lib.json"
+          }
         },
-        "@schematics/angular:directive": {
-          "export": true,
-          "flat": true,
-          "skipImport": false,
-          "skipTests": false
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/table/src/**/*.ts"]
+          }
         },
-        "@schematics/angular:module": {
-          "commonModule": false,
-          "flat": false,
-          "routing": false,
-          "routingScope": "Child"
-        },
-        "@schematics/angular:pipe": {
-          "export": true,
-          "flat": true,
-          "skipImport": false,
-          "skipTests": false
-        },
-        "@schematics/angular:service": {
-          "flat": true,
-          "skipTests": true
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
         }
-      },
-      "sourceRoot": "./projects/kit/src"
+      }
+    },
+    "common": {
+      "projectType": "library",
+      "root": "projects/common",
+      "sourceRoot": "projects/common/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/common/ng-package.json",
+            "tsConfig": "projects/common/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/common/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "kit": {
+      "projectType": "library",
+      "root": "projects/kit",
+      "sourceRoot": "projects/kit/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/kit/ng-package.json",
+            "tsConfig": "projects/kit/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/kit/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "forms": {
+      "projectType": "library",
+      "root": "projects/forms",
+      "sourceRoot": "projects/forms/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/forms/ng-package.json",
+            "tsConfig": "projects/forms/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/forms/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tree": {
+      "projectType": "library",
+      "root": "projects/tree",
+      "sourceRoot": "projects/tree/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/tree/ng-package.json",
+            "tsConfig": "projects/tree/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/tree/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "overlays": {
+      "projectType": "library",
+      "root": "projects/overlays",
+      "sourceRoot": "projects/overlays/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/overlays/ng-package.json",
+            "tsConfig": "projects/overlays/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/overlays/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "widgets": {
+      "projectType": "library",
+      "root": "projects/widgets",
+      "sourceRoot": "projects/widgets/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/widgets/ng-package.json",
+            "tsConfig": "projects/widgets/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/widgets/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
+    }
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "export": false,
+      "flat": false,
+      "inlineStyle": false,
+      "inlineTemplate": false,
+      "skipImport": false,
+      "skipTests": true,
+      "style": "scss",
+      "viewEncapsulation": "Emulated"
+    },
+    "@schematics/angular:directive": {
+      "export": true,
+      "flat": true,
+      "skipImport": false,
+      "skipTests": false
+    },
+    "@schematics/angular:module": {
+      "commonModule": false,
+      "flat": false,
+      "routing": false,
+      "routingScope": "Child"
+    },
+    "@schematics/angular:pipe": {
+      "export": true,
+      "flat": true,
+      "skipImport": false,
+      "skipTests": false
+    },
+    "@schematics/angular:service": {
+      "flat": true,
+      "skipTests": true
     }
   },
   "version": 1

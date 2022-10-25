@@ -1,9 +1,16 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, ElementRef, Inject, NgZone, OnDestroy, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  OnDestroy,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { subscribeOutsideAngular } from '@kit/internal/functions/rxjs-operators/subscribe-outside-angular.operator';
-import { ThemeService } from '@kit/internal/shared/services/theme.service';
+import { subscribeOutsideAngular, Theme, ThemeService } from '@bimeister/pupakit.common';
 import { fromEvent, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -11,6 +18,8 @@ import { map } from 'rxjs/operators';
   selector: 'demo-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.scss'],
+  encapsulation: ViewEncapsulation.Emulated,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainPageComponent implements OnDestroy {
   @ViewChild('parallax', { read: ElementRef, static: false }) public parallaxElement: ElementRef;
@@ -51,11 +60,11 @@ export class MainPageComponent implements OnDestroy {
   }
 
   private setRotate3dStyleByMouseEvent(mouseEvent: MouseEvent): void {
-    const clientRect: ClientRect = this.parallaxElement.nativeElement.getBoundingClientRect();
+    const clientRect: DOMRect = this.parallaxElement.nativeElement.getBoundingClientRect();
     this.parallaxElement.nativeElement.style.transform = this.getRotate3dStyle(mouseEvent, clientRect);
   }
 
-  private getRotate3dStyle({ clientX, clientY }: MouseEvent, { left, top, width, height }: ClientRect): string {
+  private getRotate3dStyle({ clientX, clientY }: MouseEvent, { left, top, width, height }: DOMRect): string {
     const cx: number = left + width / 2;
     const cy: number = top + height / 2;
     const dx: number = clientX - cx;

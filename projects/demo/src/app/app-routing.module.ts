@@ -416,7 +416,7 @@ const demoRoutes: Routes = [
       initialNavigation: 'enabledNonBlocking',
       scrollPositionRestoration: 'enabled',
       relativeLinkResolution: 'legacy',
-      useHash: true,
+      useHash: false,
     }),
   ],
   exports: [RouterModule],

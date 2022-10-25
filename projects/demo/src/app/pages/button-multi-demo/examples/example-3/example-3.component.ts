@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ButtonSize } from '@kit/internal/declarations/types/button-size.type';
+import { ButtonSize } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'demo-button-multi-example-3',

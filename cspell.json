@@ -1,7 +1,7 @@
 {
   "version": "0.2",
   "language": "en, ru",
-  "words": ["autofix", "barrelsby", "loglevel", "ngsw", "ngxs", "npmrc", "prettierignore", "prettierrc"],
+  "words": ["autofix", "barrelsby", "loglevel", "ngsw", "ngxs", "npmrc", "opensource", "prettierignore", "prettierrc"],
   "flagWords": [],
   "ignoreRegExpList": ["CStyleComment"],
   "ignorePaths": [
@@ -16,10 +16,7 @@
     "*.spec.ts",
     "*.mock.ts"
   ],
-  "import": [
-    "./node_modules/cspell-dict-russian/cspell-ext.json",
-    "./node_modules/cspell-dict-lorem-ipsum/cspell-ext.json"
-  ],
+  "import": ["./node_modules/cspell-dict-russian/cspell-ext.json"],
   "dictionaries": [
     "en_us",
     "en-gb",

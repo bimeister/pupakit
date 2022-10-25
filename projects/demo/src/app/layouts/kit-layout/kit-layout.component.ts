@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ScrollableComponent } from '@kit/lib/components/scrollable/components/scrollable/scrollable.component';
+import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { AnchorService } from '../../common/services/anchor.service';
 
 @Component({
