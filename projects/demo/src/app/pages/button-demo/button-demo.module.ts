@@ -5,8 +5,8 @@ import { ButtonExample2Component } from './examples/example-2/example-2.componen
 import { ButtonDemoComponent } from './button-demo.component';
 import { ButtonDemoRoutingModule } from './button-demo-routing.module';
 import { DemoSharedModule } from '../../shared/shared.module';
-import { DirectivesModule } from '@kit/internal/directives/directives.module';
 import { ButtonExample4Component } from './examples/example-4/example-4.component';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 
 const EXAMPLES: Type<unknown>[] = [
   ButtonExample1Component,
@@ -20,6 +20,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: DECLARATIONS,
-  imports: [DemoSharedModule, ButtonDemoRoutingModule, DirectivesModule],
+  imports: [DemoSharedModule, ButtonDemoRoutingModule, PupaDirectivesModule],
 })
 export class ButtonDemoModule {}

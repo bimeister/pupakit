@@ -1,46 +1,34 @@
 {
-  "compileOnSave": false,
-  "exclude": ["node_modules"],
-  "compilerOptions": {
-    "downlevelIteration": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "declaration": false,
-    "lib": ["DOM", "ESNext"],
-    "importHelpers": true,
-    "locale": "en",
-    "newLine": "lf",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "typeRoots": ["node_modules/@types"],
-    "importsNotUsedAsValues": "preserve",
-    "pretty": true,
-    "removeComments": true,
-    "sourceMap": true,
-    "module": "ES2020",
-    "target": "ES2020",
-    "moduleResolution": "Node",
-    "outDir": "./dist/out-tsc",
-    "plugins": [
-      {
-        "name": "@angular/language-service"
-      }
-    ],
-    "paths": {
-      "@kit/*": ["./projects/kit/src/*"]
+  "references": [
+    {
+      "path": "projects/common"
     },
-    "types": ["jest", "node", "hammerjs"],
-    "resolveJsonModule": true
-  },
-  "angularCompilerOptions": {
-    "enableIvy": true
-  },
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs",
-      "plugins": []
+    {
+      "path": "projects/demo"
+    },
+    {
+      "path": "projects/forms"
+    },
+    {
+      "path": "projects/icons"
+    },
+    {
+      "path": "projects/index"
+    },
+    {
+      "path": "projects/kit"
+    },
+    {
+      "path": "projects/overlays"
+    },
+    {
+      "path": "projects/table"
+    },
+    {
+      "path": "projects/tree"
+    },
+    {
+      "path": "projects/widgets"
     }
-  }
+  ]
 }

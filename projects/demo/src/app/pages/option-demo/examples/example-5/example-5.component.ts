@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild, ViewEncapsulation } from '@angular/core';
-import { OptionComponent } from '@kit/lib/components/option/components/option/option.component';
+import { OptionComponent } from '@bimeister/pupakit.kit';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

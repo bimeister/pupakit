@@ -1,12 +1,11 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { IconDefinition } from '@kit/internal/declarations/interfaces/icon-definition.interface';
-import { getAllIcons } from '../../../declarations/functions/get-all-icons.function';
 import { FormControl } from '@angular/forms';
 import { combineLatest, Observable, of } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { isEmpty, stringFilterPredicate } from '@bimeister/utilities';
 import { Clipboard } from '@angular/cdk/clipboard';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
+import { getAllIcons, IconDefinition } from '@bimeister/pupakit.icons';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 
 @Component({
   selector: 'demo-icons-page',

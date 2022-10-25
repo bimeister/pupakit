@@ -1,0 +1,157 @@
+# https://moonrepo.dev/docs/config/global-project
+$schema: 'https://moonrepo.dev/schemas/global-project.json'
+
+# Extend and inherit an external configuration file. Must be a valid HTTPS URL or file system path.
+# extends: './shared/project.yml'
+
+# File groups are a mechanism for grouping similar types of files within a project
+# using file glob patterns. These groups are then used by tasks to calculate functionality like
+# cache computation, affected files since last change, command line arguments, deterministic
+# builds, and more.
+#
+# This setting requires a map, where the key is the file group name, and the value is a list of
+# globs. Globs are relative to a project, even though they are defined globally. This enables
+# enforcement of organizational patterns across all projects in the workspace.
+fileGroups:
+  # List of configuration files located within the project root.
+  configs:
+    - '*.{js,json}'
+
+  # List of configuration files in all formats.
+  file-formats:
+    - '**/*.{html,css,scss,json,js,ts,yml,yaml}'
+
+  # List of non-test source files.
+  sources:
+    - 'src/**/*'
+
+  # List of non-source test files.
+  tests:
+    - 'src/**/*.spec.ts'
+
+  # All static assets within the project.
+  # This may include styles, images, videos, etc.
+  assets:
+    - 'assets/**/*'
+    - 'images/**/*'
+    - 'static/**/*'
+    - '**/*.{scss,css}'
+
+# A task is an action that is ran within the context of a project, and wraps
+# around an npm or system command. Tasks that are defined here and inherited by all projects
+# within the workspace, but can be overridden per project.
+#
+# This setting requires a map, where the key is a unique name for the task,
+# and the value is an object of task parameters.
+tasks:
+  build:
+    command: 'ng build $project'
+    options:
+      mergeOutputs: 'replace'
+      mergeDeps: 'append'
+    inputs:
+      - '@group(sources)'
+    outputs:
+      - 'dist'
+    deps:
+      - '~:barrel'
+      - '^:build'
+
+  barrel:
+    command: 'npm run barrel'
+    options:
+      cache: false
+    inputs:
+      - '@group(sources)'
+
+  lint:
+    command: 'ng lint $project'
+    inputs:
+      - '@group(sources)'
+    deps:
+      - '~:barrel'
+      - '~:format-check'
+      - '~:spell-check'
+    options:
+      runDepsInParallel: false
+      runInCI: false
+
+  lint-ci:
+    command: 'ng lint $project --configuration=inspection-ci'
+    inputs:
+      - '@group(sources)'
+    deps:
+      - '~:barrel'
+      - '~:format-check'
+      - '~:spell-check'
+    options:
+      runDepsInParallel: false
+
+  test-ci:
+    command: 'ng run $project:test:ci'
+    inputs:
+      - '@group(tests)'
+    outputs:
+      - 'coverage'
+    deps:
+      - '~:barrel'
+
+  test-debug:
+    command: 'ng run $project:test:debugging'
+    local: true
+    inputs:
+      - '@group(tests)'
+    deps:
+      - '~:barrel'
+
+  format-check:
+    command:
+      - 'prettier'
+      - '--config'
+      - '@in(0)'
+      - '--ignore-path'
+      - '@in(1)'
+      - '--check'
+      - '@group(file-formats)'
+    options:
+      cache: false
+      runInCI: false
+    inputs:
+      - '/.prettierrc'
+      - '/.prettierignore'
+      - '@group(sources)'
+      - '@group(file-formats)'
+
+  format-fix:
+    command:
+      - 'prettier'
+      - '--loglevel'
+      - 'warn'
+      - '--config'
+      - '@in(0)'
+      - '--ignore-path'
+      - '@in(1)'
+      - '--write'
+      - '@group(file-formats)'
+    options:
+      cache: false
+      runInCI: false
+    inputs:
+      - '/.prettierrc'
+      - '/.prettierignore'
+      - '@group(sources)'
+      - '@group(file-formats)'
+
+  spell-check:
+    command:
+      - 'cspell'
+      - 'lint'
+      - '@in(0)'
+      - '--config'
+      - '@in(1)'
+    options:
+      cache: false
+      runInCI: false
+    inputs:
+      - 'src/**/*.*'
+      - '/cspell.json'

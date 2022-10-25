@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { CardSize } from '@kit/internal/declarations/types/card-size.type';
-import { IconHolderSize } from '@kit/internal/declarations/types/icon-holder-size.type';
+import { CardSize, IconHolderSize } from '@bimeister/pupakit.kit';
 
 interface Case {
   title: string;

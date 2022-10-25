@@ -1,4 +1,4 @@
-import { FlatTreeItem } from '@kit/internal/declarations/classes/flat-tree-item.class';
+import { FlatTreeItem } from '@bimeister/pupakit.tree';
 import { getUuid } from '@bimeister/utilities';
 
 const ANIMAL: FlatTreeItem = new FlatTreeItem(true, '🦄 Animals', null, getUuid(), { parentId: null });

@@ -1,9 +1,8 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 import { isNil } from '@bimeister/utilities';
-import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 import { BehaviorSubject } from 'rxjs';
 import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';
 

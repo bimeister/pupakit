@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { FlatTreeItem } from '@bimeister/pupakit.tree';
 import { getUuid } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { FlatTreeItem } from '../../../../../kit/src/internal/declarations/classes/flat-tree-item.class';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'select-demo/examples';

@@ -1,8 +1,8 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { Injectable, OnDestroy } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, UrlTree } from '@angular/router';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 import { filterByInstanceOf, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 import { BehaviorSubject, Observable, Subject, Subscription, timer } from 'rxjs';
 import { filter, map, pairwise, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 

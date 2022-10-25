@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { IconModule } from '@kit/lib/components/icon/icon.module';
+import { PupaIconModule } from '@bimeister/pupakit.kit';
 import { InfoBlockComponent } from './components/info-block/info-block.component';
 
 @NgModule({
   declarations: [InfoBlockComponent],
   exports: [InfoBlockComponent],
-  imports: [IconModule, CommonModule],
+  imports: [PupaIconModule, CommonModule],
 })
 export class InfoBlockModule {}

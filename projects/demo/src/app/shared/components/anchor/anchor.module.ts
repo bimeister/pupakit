@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ComponentsModule } from '@kit/lib/components.module';
+import { PupaButtonsModule } from '@bimeister/pupakit.kit';
 import { AnchorComponent } from './components/anchor/anchor.component';
 
 @NgModule({
   declarations: [AnchorComponent],
-  imports: [CommonModule, ComponentsModule],
+  imports: [CommonModule, PupaButtonsModule],
   exports: [AnchorComponent],
 })
 export class AnchorModule {}

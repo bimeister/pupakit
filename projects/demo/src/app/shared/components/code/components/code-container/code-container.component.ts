@@ -7,9 +7,8 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterNotEmpty, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
 import { BehaviorSubject, combineLatest, forkJoin, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';

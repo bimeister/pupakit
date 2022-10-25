@@ -1,7 +1,6 @@
 import { Component, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DAY_SELECTOR_CONFIG_TOKEN } from '@kit/internal/constants/tokens/day-selector-config.token';
-import { DayOfWeek } from '@kit/internal/declarations/enums/day-of-week.enum';
+import { DayOfWeek, DAY_SELECTOR_CONFIG_TOKEN } from '@bimeister/pupakit.forms';
 
 @Component({
   selector: 'demo-locale-day-selector-example',

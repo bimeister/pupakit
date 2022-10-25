@@ -1,0 +1,14 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'overlays'
+  description: 'PupaKit Overlays'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'
+  - 'icons'
+  - 'kit'

@@ -1,0 +1,89 @@
+{
+  "extends": "./../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "../../.moon/cache/types/projects/demo",
+    "baseUrl": ".",
+    "paths": {
+      "@bimeister/pupakit.common": [
+        "../common/src/index.ts"
+      ],
+      "@bimeister/pupakit.common/*": [
+        "../common/src/*"
+      ],
+      "@bimeister/pupakit.forms": [
+        "../forms/src/index.ts"
+      ],
+      "@bimeister/pupakit.forms/*": [
+        "../forms/src/*"
+      ],
+      "@bimeister/pupakit.icons": [
+        "../icons/src/index.ts"
+      ],
+      "@bimeister/pupakit.icons/*": [
+        "../icons/src/*"
+      ],
+      "@bimeister/pupakit.kit": [
+        "../kit/src/index.ts"
+      ],
+      "@bimeister/pupakit.kit/*": [
+        "../kit/src/*"
+      ],
+      "@bimeister/pupakit.overlays": [
+        "../overlays/src/index.ts"
+      ],
+      "@bimeister/pupakit.overlays/*": [
+        "../overlays/src/*"
+      ],
+      "@bimeister/pupakit.table": [
+        "../table/src/index.ts"
+      ],
+      "@bimeister/pupakit.table/*": [
+        "../table/src/*"
+      ],
+      "@bimeister/pupakit.tree": [
+        "../tree/src/index.ts"
+      ],
+      "@bimeister/pupakit.tree/*": [
+        "../tree/src/*"
+      ],
+      "@bimeister/pupakit.widgets": [
+        "../widgets/src/index.ts"
+      ],
+      "@bimeister/pupakit.widgets/*": [
+        "../widgets/src/*"
+      ]
+    }
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "./src/**/*.spec.ts"
+  ],
+  "references": [
+    {
+      "path": "../common"
+    },
+    {
+      "path": "../forms"
+    },
+    {
+      "path": "../icons"
+    },
+    {
+      "path": "../kit"
+    },
+    {
+      "path": "../overlays"
+    },
+    {
+      "path": "../table"
+    },
+    {
+      "path": "../tree"
+    },
+    {
+      "path": "../widgets"
+    }
+  ]
+}

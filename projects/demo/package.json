@@ -1,0 +1,40 @@
+{
+  "name": "@bimeister/pupakit.demo",
+  "version": "0.2.0",
+  "description": "PupaKit demonstration part. Documentation for developers",
+  "keywords": [
+    "angular",
+    "kit",
+    "ui",
+    "demo",
+    "application",
+    "documentation",
+    "opensource"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bimeister/pupakit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimeister/pupakit",
+    "directory": "projects/demo"
+  },
+  "scripts": {
+    "build:demo-ci": "moon run demo:build -- --base-href \"${CI_PAGES_URL}/\""
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0"
+  },
+  "dependencies": {
+    "@bimeister/pupakit.common": "^0.2.0",
+    "@bimeister/pupakit.forms": "^0.2.0",
+    "@bimeister/pupakit.icons": "^0.2.0",
+    "@bimeister/pupakit.kit": "^0.2.0",
+    "@bimeister/pupakit.overlays": "^0.2.0",
+    "@bimeister/pupakit.table": "^0.2.0",
+    "@bimeister/pupakit.tree": "^0.2.0",
+    "@bimeister/pupakit.widgets": "^0.2.0",
+    "tslib": "^2.3.0"
+  },
+  "main": "dist"
+}

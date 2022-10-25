@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isEmpty } from '@bimeister/utilities';
-import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ExamplesRequestsService } from '../../../../services/requests/examples-request.service';

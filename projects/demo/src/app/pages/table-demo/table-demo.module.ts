@@ -1,5 +1,5 @@
 import { NgModule, Type } from '@angular/core';
-import { DirectivesModule } from '@kit/internal/directives/directives.module';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { TableExample1Component } from './examples/example-1/example-1.component';
 import { TableExample2Component } from './examples/example-2/example-2.component';
@@ -27,6 +27,6 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
 
 @NgModule({
   declarations: [...EXAMPLE_COMPONENTS, TableDemoComponent],
-  imports: [TableDemoRoutingModule, DemoSharedModule, DirectivesModule],
+  imports: [TableDemoRoutingModule, DemoSharedModule, PupaDirectivesModule],
 })
 export class TableDemoModule {}

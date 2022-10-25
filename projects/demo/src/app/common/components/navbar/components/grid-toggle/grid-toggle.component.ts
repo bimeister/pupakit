@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { GridStateService } from '@kit/internal/shared/services/grid-state.service';
+import { GridStateService } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'demo-grid-toggle',

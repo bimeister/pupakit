@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { PopoverComponentBase } from '@kit/internal/declarations/classes/abstract/popover-component-base.abstract';
-import { PopoverRef } from '@kit/internal/declarations/classes/popover-ref.class';
-import { DrawersService } from '@kit/internal/shared/services/drawers.service';
-import { DrawerContainerComponent } from '@kit/lib/components/drawer/components/drawer-container/drawer-container.component';
+import {
+  DrawerContainerComponent,
+  DrawersService,
+  PopoverComponentBase,
+  PopoverRef,
+} from '@bimeister/pupakit.overlays';
 import { DRAWER_DATA_TOKEN } from '../../../../../../declarations/tokens/drawer-data.token';
 import { DrawerLayoutOtherComponent } from '../drawer-layout-other/drawer-layout-other.component';
 

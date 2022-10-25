@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PopoverComponentBase } from '@kit/internal/declarations/classes/abstract/popover-component-base.abstract';
-import { PopoverRef } from '@kit/internal/declarations/classes/popover-ref.class';
+import { PopoverComponentBase, PopoverRef } from '@bimeister/pupakit.overlays';
 
 interface PopoverContentData {
   fruits: string[];

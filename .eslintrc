@@ -7,7 +7,7 @@
       "parserOptions": {
         "ecmaVersion": 2020,
         "sourceType": "module",
-        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "project": ["tsconfig.eslint.json"],
         "createDefaultProgram": true
       },
       "plugins": ["prettier", "jsdoc", "deprecation", "editorconfig", "ban"],
@@ -82,7 +82,7 @@
         "@typescript-eslint/quotes": "off",
         "@typescript-eslint/restrict-plus-operands": "error",
         "@typescript-eslint/strict-boolean-expressions": [
-          "error",
+          "warn",
           {
             "allowString": false,
             "allowNumber": false,
@@ -224,7 +224,7 @@
             "paths": ["rxjs/Rx", "@angular/compiler"],
             "patterns": [
               {
-                "group": ["**/api", "**/public-api"],
+                "group": ["**/api", "**/public-api", "**/index"],
                 "message": "Use direct module import instead."
               },
               {

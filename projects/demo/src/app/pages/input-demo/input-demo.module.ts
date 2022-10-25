@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { DirectivesModule } from '@kit/internal/directives/directives.module';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { InputDemoExampleAllInputsComponent } from './examples/input-demo-example-all-inputs/input-demo-example-all-inputs.component';
 import { InputDemoExampleIsPatchedComponent } from './examples/input-demo-example-is-patched/input-demo-example-is-patched.component';
@@ -20,6 +20,6 @@ import { InputDemoComponent } from './input-demo.component';
     InputDemoExampleIsPatchedComponent,
     InputDemoExampleStylesComponent,
   ],
-  imports: [DemoSharedModule, InputDemoRoutingModule, DirectivesModule],
+  imports: [DemoSharedModule, InputDemoRoutingModule, PupaDirectivesModule],
 })
 export class InputDemoModule {}

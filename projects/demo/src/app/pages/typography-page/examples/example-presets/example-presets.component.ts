@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 
 interface Preset {
   mixin: string;

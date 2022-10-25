@@ -1,9 +1,0 @@
-import { IconDefinition } from '../../declarations/interfaces/icon-definition.interface';
-
-export const appCrossIcon: IconDefinition = {
-  name: 'app-cross',
-  data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M2.14645 13.1464C1.95118 13.3417 1.95118 13.6583 2.14645 13.8536C2.34171 14.0488 2.65829 14.0488 2.85355 13.8536L8 8.70711L13.1464 13.8536C13.3417 14.0488 13.6583 14.0488 13.8536 13.8536C14.0488 13.6583 14.0488 13.3417 13.8536 13.1464L8.70711 8L13.8536 2.85355C14.0488 2.65829 14.0488 2.34171 13.8536 2.14645C13.6583 1.95118 13.3417 1.95118 13.1464 2.14645L8 7.29289L2.85355 2.14645C2.65829 1.95118 2.34171 1.95118 2.14645 2.14645C1.95118 2.34171 1.95118 2.65829 2.14645 2.85355L7.29289 8L2.14645 13.1464Z" fill="currentColor"/>
-</svg>
-`,
-};

@@ -7,7 +7,7 @@ import { switchMap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ExamplesRequestsService {
-  private readonly requestsBase: string = '/examples';
+  private readonly requestsBase: string = './examples';
 
   constructor(private readonly httpClient: HttpClient) {}
 

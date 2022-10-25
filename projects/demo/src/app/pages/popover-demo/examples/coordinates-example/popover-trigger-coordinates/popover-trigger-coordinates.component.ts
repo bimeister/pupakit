@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { PopoversService } from '@kit/internal/shared/services/popovers.service';
-import { Position } from '@kit/internal/declarations/types/position.type';
+import { Position } from '@bimeister/pupakit.common';
+import { PopoversService } from '@bimeister/pupakit.overlays';
 import { PopoverLayoutCoordinatesComponent } from '../popover-layout-coordinates/popover-layout-coordinates.component';
 
 @Component({

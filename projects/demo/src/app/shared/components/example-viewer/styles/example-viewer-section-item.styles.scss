@@ -1,5 +1,5 @@
 @use 'mixins' as *;
-@use 'projects/demo/src/styles/demo-mixins' as *;
+@use 'demo-mixins' as *;
 
 .section-item {
   display: flex;

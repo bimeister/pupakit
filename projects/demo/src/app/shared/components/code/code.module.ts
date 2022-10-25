@@ -1,9 +1,7 @@
+import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
-import { iosCopyIcon } from '@kit/internal/constants/icons/ios-copy-icon.const';
-import { SharedModule } from '@kit/internal/shared/shared.module';
-import { ButtonsModule } from '@kit/lib/components/buttons/buttons.module';
-import { IconModule } from '@kit/lib/components/icon/icon.module';
-import { TabsModule } from '@kit/lib/components/tabs/tabs.module';
+import { iosCopyIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
+import { PupaButtonsModule, PupaIconModule, PupaTabsModule } from '@bimeister/pupakit.kit';
 import { HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CodeContainerComponent } from './components/code-container/code-container.component';
 import { CodeFetchComponent } from './components/code-fetch/code-fetch.component';
@@ -23,7 +21,14 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
 @NgModule({
   declarations: [...DECLARATIONS],
   exports: [...DECLARATIONS],
-  imports: [SharedModule, TabsModule, ButtonsModule, IconModule.forFeature([iosCopyIcon]), HighlightModule],
+  imports: [
+    CommonModule,
+    PupaTabsModule,
+    PupaButtonsModule,
+    PupaIconModule,
+    PupaIconsModule.forFeature([iosCopyIcon]),
+    HighlightModule,
+  ],
   providers: [
     {
       provide: HIGHLIGHT_OPTIONS,

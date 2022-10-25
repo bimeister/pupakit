@@ -1,15 +1,17 @@
 import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ColorGroup } from '@kit/internal/declarations/classes/color-group.class';
-import { SemanticColor } from '@kit/internal/declarations/classes/semantic-color.class';
-import { Theme } from '@kit/internal/declarations/enums/theme.enum';
-import { ColorsAlphaValuesConfig } from '@kit/internal/declarations/interfaces/colors-alpha-values-config.interface';
-import { SemanticConfigurationGroup } from '@kit/internal/declarations/interfaces/semantic-configuration-group.interface';
-import { ColorsAlphaValuesService } from '@kit/internal/shared/services/colors-alpha-values.service';
-import { ColorsService } from '@kit/internal/shared/services/colors.service';
-import { SemanticColorsService } from '@kit/internal/shared/services/semantic-colors.service';
-import { ThemeService } from '@kit/internal/shared/services/theme.service';
-import { ToastsService } from '@kit/internal/shared/services/toasts.service';
+import {
+  ColorGroup,
+  ColorsAlphaValuesConfig,
+  ColorsAlphaValuesService,
+  ColorsService,
+  SemanticColor,
+  SemanticColorsService,
+  SemanticConfigurationGroup,
+  Theme,
+  ThemeService,
+} from '@bimeister/pupakit.common';
+import { ToastsService } from '@bimeister/pupakit.overlays';
 import { Observable } from 'rxjs';
 
 const BASE_REQUEST_PATH: string = 'colors-demo/examples';

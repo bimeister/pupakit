@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
-import { OpenedModal } from '@kit/internal/declarations/interfaces/opened-modal.interface';
-import { ModalsService } from '@kit/internal/shared/services/modals.service';
+import { ModalsService, OpenedModal } from '@bimeister/pupakit.overlays';
 import { Observable } from 'rxjs';
 import { ModalDemoExample3Component } from '../modal-content/modal-demo-example-3.component';
 

@@ -1,5 +1,6 @@
 src/assets/
-/dist/
-/coverage/
-/node_modules/
+dist
+coverage
+node_modules
 /.angular/
+**/tsconfig.json

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject, Optional, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { DrawerRef } from '@bimeister/pupakit.overlays';
 import { isEmpty, isNil, shareReplayWithRefCount, sortByProperty, stringFilterPredicate } from '@bimeister/utilities';
-import { DrawerRef } from '@kit/internal/declarations/classes/drawer-ref.class';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 

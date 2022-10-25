@@ -8,9 +8,8 @@ import {
   OnInit,
   ViewEncapsulation,
 } from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { ComponentChange } from '@kit/internal/declarations/interfaces/component-change.interface';
-import { ComponentChanges } from '@kit/internal/declarations/interfaces/component-changes.interface';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { map, pairwise, take, withLatestFrom } from 'rxjs/operators';
 import { AnchorService } from '../../../../../common/services/anchor.service';
