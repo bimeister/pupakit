@@ -1,4 +1,9 @@
-<pupa-scrollable #scrollable class="button-group" [invisibleScrollbars]="['horizontal', 'vertical']">
+<pupa-scrollable
+  #scrollable
+  class="button-group"
+  [class]="sizeClass$ | async"
+  [invisibleScrollbars]="['horizontal', 'vertical']"
+>
   <div class="button-group__container" #buttonGroupContainer>
     <div class="button-group__rail-container">
       <div class="button-group__rail button-group-rail">

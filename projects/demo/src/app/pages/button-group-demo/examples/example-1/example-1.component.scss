@@ -1,3 +1,9 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
 .pupa-button-group-item {
   &:last-of-type {
     width: 100px;

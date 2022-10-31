@@ -13,8 +13,20 @@ $container-padding: 4px;
 }
 
 .button-group {
+  &_l {
+    --container-padding: 4px;
+  }
+
+  &_m {
+    --container-padding: 3px;
+  }
+
+  &_s {
+    --container-padding: 2px;
+  }
+
   &__container {
-    padding: $container-padding;
+    padding: var(--container-padding);
     display: flex;
     width: 100%;
     min-width: fit-content;
@@ -31,7 +43,7 @@ $container-padding: 4px;
     position: absolute;
     left: 0;
     width: 100%;
-    height: calc(100% - #{$container-padding * 2});
+    height: calc(100% - var(--container-padding) * 2);
   }
 }
 
