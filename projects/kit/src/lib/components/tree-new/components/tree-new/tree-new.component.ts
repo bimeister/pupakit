@@ -1,4 +1,5 @@
 import { ListRange } from '@angular/cdk/collections';
+import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import { FlatTreeControl } from '@angular/cdk/tree';
 import {
   AfterViewInit,
@@ -39,9 +40,8 @@ import { ComponentChange } from '../../../../../internal/declarations/interfaces
 import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
 import { DropEventInterface } from '../../../../../internal/declarations/interfaces/drop-event.interface';
 import { TreeDataDisplayCollectionRef } from '../../../../../internal/declarations/interfaces/tree-data-display-collection-ref.interface';
-import { TreeItemTemplateDirective } from '../../directives/tree-item-template.directive';
 import { TreeNodeProperties } from '../../../../../internal/declarations/interfaces/tree-node-properties.interface';
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
+import { TreeItemTemplateDirective } from '../../directives/tree-item-template.directive';
 
 interface Position {
   top: number;
@@ -245,7 +245,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   private expandClick(treeItem: FlatTreeItem): void {
-    this.eventBus.dispatch(new TreeEvents.Expand(treeItem.id));
+    this.controller.expand(treeItem.id);
   }
 
   private collapseClick(treeItem: FlatTreeItem): void {

@@ -2,6 +2,7 @@ import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
+import { DEFAULT_TREE_ITEM_SIZE_PX } from '../../constants/default-tree-item-size-px.const';
 import { QueueEvents } from '../events/queue.events';
 import { TreeEvents } from '../events/tree.events';
 import { TreeControllerOptions } from '../interfaces/tree-controller-options.interface';
@@ -10,7 +11,6 @@ import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
 import { EventsQueue } from './events-queue.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
-import { DEFAULT_TREE_ITEM_SIZE_PX } from '../../constants/default-tree-item-size-px.const';
 
 export class TreeController {
   public readonly eventBus: EventBus = new EventBus();
@@ -60,6 +60,10 @@ export class TreeController {
 
   public getDataDisplayCollectionRef(): TreeDataDisplayCollectionRef {
     return this.dataDisplayCollection;
+  }
+
+  public expand(treeItemId: string): void {
+    this.eventBus.dispatch(new TreeEvents.Expand(treeItemId));
   }
 
   public setChildren(treeItemId: string, children: FlatTreeItem[]): void {
