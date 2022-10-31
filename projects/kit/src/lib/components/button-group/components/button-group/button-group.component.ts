@@ -5,13 +5,20 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  Input,
   NgZone,
+  OnChanges,
   OnInit,
   Optional,
   Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { ComponentChange } from '../../../../../internal/declarations/interfaces/component-change.interface';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ComponentChanges } from '../../../../../internal/declarations/interfaces/component-changes.interface';
+import { ButtonGroupSize } from '../../../../../internal/declarations/types/button-group-size.type';
 import { BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/button-group-state-service.token';
 import { TabsBase } from '../../../../../internal/declarations/classes/abstract/tabs-base.abstract';
 import { ScrollableComponent } from '../../../scrollable/components/scrollable/scrollable.component';
@@ -25,12 +32,18 @@ import { ButtonGroupStateService } from '../../services/button-group-state.servi
   encapsulation: ViewEncapsulation.Emulated,
   providers: [ButtonGroupStateService],
 })
-export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService<T>> implements OnInit {
+export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService<T>> implements OnInit, OnChanges {
+  @Input() public size: ButtonGroupSize = 'm';
+
   @ViewChild('buttonGroupContainer', { static: true })
   private readonly buttonGroupContainerRef: ElementRef<HTMLElement>;
   @ViewChild('scrollable', { static: true }) private readonly scrollable: ScrollableComponent;
 
   @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
+
+  public readonly sizeClass$: Observable<string> = this.stateService.buttonGroupSize$.pipe(
+    map((size: ButtonGroupSize) => `button-group_${size}`)
+  );
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
@@ -48,5 +61,15 @@ export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService
     this.stateService.registerHostHtmlElement(this.elementRef.nativeElement);
     this.stateService.registerScrollable(this.scrollable);
     this.stateService.registerTabsHtmlElement(this.buttonGroupContainerRef.nativeElement);
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (changes.hasOwnProperty('size')) {
+      this.processSizeChange(changes.size);
+    }
+  }
+
+  private processSizeChange(size: ComponentChange<this, ButtonGroupSize>): void {
+    this.stateService.setButtonGroupSize(size.currentValue);
   }
 }

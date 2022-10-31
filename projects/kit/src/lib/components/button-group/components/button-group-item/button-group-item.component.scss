@@ -11,7 +11,6 @@
 .button-group-item {
   min-width: 1rem;
   box-sizing: border-box;
-  padding: 5px 4rem;
   cursor: pointer;
   user-select: none;
   text-align: center;
@@ -55,6 +54,19 @@
     }
   }
 
-  @include ellipsis-text-overflow;
-  @include font-preset-caption-xs;
+  &_l {
+    padding: 2rem 4rem;
+  }
+
+  &_m {
+    padding: 5px 4rem;
+  }
+
+  &_s {
+    @include font-size-xxs();
+    padding: 1rem 4rem;
+  }
+
+  @include ellipsis-text-overflow();
+  @include font-preset-caption-xs();
 }

@@ -9,6 +9,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
+import { map } from 'rxjs/operators';
+import { ButtonGroupSize } from '../../../../../internal/declarations/types/button-group-size.type';
+import { Observable } from 'rxjs';
 import { BUTTON_GROUP_CONTAINER_STATE_SERVICE_TOKEN } from '../../../../../internal/constants/tokens/button-group-state-service.token';
 import { TabsItemBase } from '../../../../../internal/declarations/classes/abstract/tabs-item-base.abstract';
 import { ButtonGroupStateService } from '../../services/button-group-state.service';
@@ -24,6 +27,10 @@ export class ButtonGroupItemComponent<T> extends TabsItemBase<T, ButtonGroupStat
   @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
+
+  public readonly sizeClass$: Observable<string> = this.stateService.buttonGroupSize$.pipe(
+    map((size: ButtonGroupSize) => `button-group-item_${size}`)
+  );
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,

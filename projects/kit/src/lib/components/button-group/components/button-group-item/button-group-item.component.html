@@ -2,6 +2,7 @@
   class="button-group-item"
   [class.button-group-item_disabled]="disabled"
   [class.button-group-item_active]="isActive$ | async"
+  [class]="sizeClass$ | async"
   (click)="setAsActive()"
 >
   <ng-content></ng-content>
