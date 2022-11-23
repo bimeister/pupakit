@@ -130,8 +130,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     return this.contentElement;
   }
 
-  private ignoreNextContentScrollEvent: boolean = false;
-
   private lastScrollTop: number = 0;
 
   private scrollByDeltaSubscription: Subscription | null = null;
@@ -186,7 +184,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   }
 
   public setScrollLeft(scrollLeft: number): void {
-    this.ignoreNextContentScrollEvent = true;
     this.setContentScrollLeft(scrollLeft);
   }
 
@@ -248,7 +245,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
           this.verticalScrollbar.setContentScrollOffset(contentElement.scrollTop);
           this.horizontalScrollbar.setContentScrollOffset(contentElement.scrollLeft);
         }),
-        filter(() => !this.ignoreNextContentScrollEvent),
         tap(() => {
           contentElement.scrollTop > this.lastScrollTop
             ? this.verticalScrollDirectionChanged.emit('down')
@@ -256,9 +252,14 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
 
           this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
 
+          // prevents scrollLeft out of bounds in safari browser
+          const minScrollLeft: number = 0;
+          const maxScrollLeft: number = contentElement.scrollWidth - contentElement.clientWidth;
+          const currentScrollLeft: number = Math.min(Math.max(contentElement.scrollLeft, minScrollLeft), maxScrollLeft);
+
           for (const scrollable of this.syncWith) {
             scrollable.setScrollTop(contentElement.scrollTop);
-            scrollable.setScrollLeft(contentElement.scrollLeft);
+            scrollable.setScrollLeft(currentScrollLeft);
           }
         }),
         switchMap(() => this.scrollVisibilityMode$),
