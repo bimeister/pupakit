@@ -4,17 +4,30 @@
   [style.background-color]="hslBackgroundColor$ | async"
   [class.avatar_default]="isEmptyUserName$ | async"
   [class.avatar_disabled]="disabled$ | async"
-  [style.background-image]="backgroundImage$ | async"
+  [ngSwitch]="mode$ | async"
 >
-  <ng-container *ngIf="src$ | async | isNullOrUndefined">
-    <ng-container *ngIf="username$ | async | isNullOrUndefined; else nameTemplate">
-      <div class="avatar__icon-container">
-        <pupa-icon class="avatar__icon" name="app-user"></pupa-icon>
-      </div>
-    </ng-container>
-  </ng-container>
+  <ng-container *ngSwitchCase="mode.Icon" [ngTemplateOutlet]="iconTemplate"></ng-container>
+  <ng-container *ngSwitchCase="mode.Image" [ngTemplateOutlet]="imageTemplate"></ng-container>
+  <ng-container *ngSwitchCase="mode.Username" [ngTemplateOutlet]="usernameTemplate"></ng-container>
+  <ng-container *ngSwitchDefault [ngTemplateOutlet]="defaultTemplate"></ng-container>
 </div>
 
-<ng-template #nameTemplate>
+<ng-template #iconTemplate>
+  <div class="avatar__icon-container">
+    <pupa-icon class="avatar__icon" [name]="iconName$ | async"></pupa-icon>
+  </div>
+</ng-template>
+
+<ng-template #imageTemplate>
+  <div class="avatar__image-container" [style.background-image]="backgroundImage$ | async"></div>
+</ng-template>
+
+<ng-template #usernameTemplate>
   <div class="avatar__text">{{ initials$ | async }}</div>
+</ng-template>
+
+<ng-template #defaultTemplate>
+  <div class="avatar__icon-container">
+    <pupa-icon class="avatar__icon" [name]="'app-user'"></pupa-icon>
+  </div>
 </ng-template>

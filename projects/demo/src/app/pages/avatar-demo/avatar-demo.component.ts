@@ -15,6 +15,7 @@ const BASE_REQUEST_PATH: string = 'avatar-demo/examples';
 export class AvatarDemoComponent {
   public readonly avatarForm: FormGroup = new FormGroup({
     name: new FormControl(''),
+    iconName: new FormControl(''),
     src: new FormControl(''),
   });
 
@@ -59,5 +60,9 @@ export class AvatarDemoComponent {
 
   public readonly example6Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+  };
+
+  public readonly example7Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-7/example-7.component.html`,
   };
 }

@@ -1,16 +1,16 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
+:host {
+  font-size: 4rem;
+}
+
 .avatar {
   @include flex-container(row, center, center);
   border-radius: 100%;
   overflow: hidden;
   z-index: 1;
   user-select: none;
-
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
 
   &_default {
     background-color: color(neutral-5);
@@ -51,6 +51,16 @@
     width: 100%;
   }
 
+  &__image-container {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
   &__icon {
     display: block;
     height: 100%;
@@ -70,44 +80,41 @@
   }
 
   &_small {
-    width: 4rem;
-    height: 4rem;
+    width: 1em;
+    height: 1em;
 
     .avatar__icon-container {
-      padding: 2px;
+      padding: 0.125em;
     }
 
     .avatar__text {
-      font-size: 6px;
-      padding: 2.5px 2px;
+      font-size: 0.375em;
     }
   }
 
   &_medium {
-    width: 5rem;
-    height: 5rem;
+    width: 1.25em;
+    height: 1.25em;
 
     .avatar__icon-container {
-      padding: 4px;
+      padding: 0.25em;
     }
 
     .avatar__text {
-      font-size: 8px;
-      padding: 2.5px 4px;
+      font-size: 0.5em;
     }
   }
 
   &_large {
-    width: 6rem;
-    height: 6rem;
+    width: 1.5em;
+    height: 1.5em;
 
     .avatar__icon-container {
-      padding: 4px;
+      padding: 0.25em;
     }
 
     .avatar__text {
-      font-size: 10px;
-      padding: 2.5px 6px;
+      font-size: 0.625em;
     }
   }
 

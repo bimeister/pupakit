@@ -10,6 +10,13 @@ import { getInitials } from '../../../../../internal/functions/get-initials.func
 const SATURATION: number = 88;
 const LIGHTNESS: number = 78;
 
+enum Mode {
+  Icon = 'icon',
+  Image = 'image',
+  Username = 'username',
+  Default = 'default',
+}
+
 @Component({
   selector: 'pupa-avatar',
   templateUrl: './avatar.component.html',
@@ -20,6 +27,9 @@ const LIGHTNESS: number = 78;
 export class AvatarComponent implements OnChanges {
   @Input() public username: string;
   public readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+
+  @Input() public iconName: string;
+  public readonly iconName$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public src: string;
   public readonly src$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
@@ -63,8 +73,26 @@ export class AvatarComponent implements OnChanges {
     map((src: Nullable<string>) => `url('${src ?? ''}')`)
   );
 
+  public readonly mode$: Observable<Mode> = combineLatest([this.iconName$, this.src$, this.username$]).pipe(
+    map(([iconName, src, username]: [Nullable<string>, Nullable<string>, Nullable<string>]) => {
+      if (!isNil(iconName)) {
+        return Mode.Icon;
+      }
+      if (!isNil(src)) {
+        return Mode.Image;
+      }
+      if (!isNil(username)) {
+        return Mode.Username;
+      }
+
+      return Mode.Default;
+    })
+  );
+  public readonly mode: typeof Mode = Mode;
+
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processUsernameChange(changes?.username);
+    this.processIconNameChange(changes?.iconName);
     this.processSrcChange(changes?.src);
     this.processSizeChange(changes?.size);
     this.processWithBorderChange(changes?.withBorder);
@@ -81,6 +109,16 @@ export class AvatarComponent implements OnChanges {
       return this.username$.next(null);
     }
     this.username$.next(updatedValue);
+  }
+  private processIconNameChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    const serializedValue: string = isEmpty(updatedValue) ? null : updatedValue;
+    this.iconName$.next(serializedValue);
   }
 
   private processSrcChange(change: ComponentChange<this, string>): void {

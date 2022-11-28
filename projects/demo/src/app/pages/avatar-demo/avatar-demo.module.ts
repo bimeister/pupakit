@@ -10,6 +10,7 @@ import { AvatarExample3Component } from './examples/example-3/example-3.componen
 import { AvatarExample4Component } from './examples/example-4/example-4.component';
 import { AvatarExample5Component } from './examples/example-5/example-5.component';
 import { AvatarExample6Component } from './examples/example-6/example-6.component';
+import { AvatarExample7Component } from './examples/example-7/example-7.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AvatarExample6Component } from './examples/example-6/example-6.componen
     AvatarExample4Component,
     AvatarExample5Component,
     AvatarExample6Component,
+    AvatarExample7Component,
   ],
   imports: [DemoSharedModule, AvatarDemoRoutingModule],
 })
