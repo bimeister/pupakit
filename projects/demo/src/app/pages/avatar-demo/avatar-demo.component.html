@@ -31,12 +31,18 @@
     <pupa-code-container [content]="example6Content">
       <demo-avatar-example-6 *pupaCodeContainerPreviewTemplate></demo-avatar-example-6>
     </pupa-code-container>
+
+    <h3 demoAnchor>Avatar with icon</h3>
+    <pupa-code-container [content]="example7Content">
+      <demo-avatar-example-7 *pupaCodeContainerPreviewTemplate></demo-avatar-example-7>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
     <demo-example-viewer-content>
       <pupa-avatar
         [username]="avatarForm.get('name').value"
+        [iconName]="avatarForm.get('iconName').value"
         [src]="avatarForm.get('src').value"
         [withBorder]="border$ | async"
         [disabled]="disabled$ | async"
@@ -51,10 +57,17 @@
         <pupa-input-text formControlName="name"></pupa-input-text>
       </demo-example-viewer-property>
 
+      <demo-example-viewer-property decoratorName="input" name="iconName" type="string">
+        <ng-container *demoExampleViewerPropertyDescription>
+          The source of the icon displayed inside the element.
+        </ng-container>
+        <pupa-input-text formControlName="iconName"></pupa-input-text>
+      </demo-example-viewer-property>
+
       <demo-example-viewer-property decoratorName="input" name="src" type="string">
-        <ng-container *demoExampleViewerPropertyDescription
-          >The source of the image displayed inside the element.</ng-container
-        >
+        <ng-container *demoExampleViewerPropertyDescription>
+          The source of the image displayed inside the element.
+        </ng-container>
         <pupa-input-text formControlName="src"></pupa-input-text>
       </demo-example-viewer-property>
 
