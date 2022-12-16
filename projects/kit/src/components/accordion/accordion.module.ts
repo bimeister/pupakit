@@ -6,7 +6,7 @@ import { AccordionTitleComponent } from './components/accordion-title/accordion-
 import { AccordionBodyComponent } from './components/accordion-body/accordion-body.component';
 import { AccordionGroupComponent } from './components/accordion-group/accordion-group.component';
 import { CommonModule } from '@angular/common';
-import { PupaIconModule } from '../icon/icon.module';
+import { PupaIconsModule } from '@bimeister/pupakit.icons';
 
 const COMPONENTS: Type<unknown>[] = [
   AccordionComponent,
@@ -19,7 +19,7 @@ const COMPONENTS: Type<unknown>[] = [
 
 @NgModule({
   declarations: [...COMPONENTS],
-  imports: [CommonModule, PupaIconModule],
+  imports: [CommonModule, PupaIconsModule],
   exports: [...COMPONENTS],
 })
 export class PupaAccordionModule {}

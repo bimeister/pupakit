@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
 import { appExceptionsCross8Icon, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaDropdownModule } from '../dropdown/dropdown.module';
-import { PupaIconModule } from '../icon/icon.module';
 import { TagDeleteButtonComponent } from './components/pupa-tag-delete-button/pupa-tag-delete-button.component';
 import { TagTextComponent } from './components/pupa-tag-text/pupa-tag-text.component';
 import { TagActionButtonComponent } from './components/tag-action-button/tag-action-button.component';
@@ -25,7 +24,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [CommonModule, PupaDropdownModule, PupaIconModule, PupaIconsModule.forFeature([appExceptionsCross8Icon])],
+  imports: [CommonModule, PupaDropdownModule, PupaIconsModule.forFeature([appExceptionsCross8Icon])],
   exports: [...EXPORTS],
 })
 export class PupaTagModule {}

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { iosCopyIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
-import { PupaButtonsModule, PupaIconModule, PupaTabsModule } from '@bimeister/pupakit.kit';
+import { PupaButtonsModule, PupaTabsModule } from '@bimeister/pupakit.kit';
 import { HighlightModule, HighlightOptions, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 import { CodeContainerComponent } from './components/code-container/code-container.component';
 import { CodeFetchComponent } from './components/code-fetch/code-fetch.component';
@@ -25,7 +25,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS, ...DIRECTIVES];
     CommonModule,
     PupaTabsModule,
     PupaButtonsModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([iosCopyIcon]),
     HighlightModule,
   ],

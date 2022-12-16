@@ -8,11 +8,11 @@ import { BrowserModule, HammerModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LogPipe } from './log.pipe';
-import { DemoSharedModule } from './shared/shared.module';
+import { ThemeControllerModule } from './common/directives/theme-controller/theme-controller.module';
 import { KitLayoutModule } from './layouts/kit-layout/kit-layout.module';
 import { MainLayoutModule } from './layouts/main-layout/main-layout.module';
-import { ThemeControllerModule } from './common/directives/theme-controller/theme-controller.module';
+import { LogPipe } from './log.pipe';
+import { DemoSharedModule } from './shared/shared.module';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 

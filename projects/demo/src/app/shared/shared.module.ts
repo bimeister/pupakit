@@ -40,7 +40,7 @@ const MODULES: Type<unknown>[] = [
     PupaIconsModule.forRoot(getAllIcons()),
     PupaAlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent }),
   ],
-  exports: [...MODULES],
+  exports: [...MODULES, PupaIconsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class DemoSharedModule {}

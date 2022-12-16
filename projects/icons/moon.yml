@@ -7,3 +7,6 @@ project:
   channel: '#'
   owner: 'Bimeister Team'
   maintainers: []
+
+dependsOn:
+  - 'common'

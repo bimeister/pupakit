@@ -11,7 +11,6 @@ import { PupaCounterModule } from './components/counter/counter.module';
 import { PupaDropdownMenuModule } from './components/dropdown-menu/dropdown-menu.module';
 import { PupaDropdownModule } from './components/dropdown/dropdown.module';
 import { PupaIconHolderModule } from './components/icon-holder/icon-holder.module';
-import { PupaIconModule } from './components/icon/icon.module';
 import { PupaLayoutModule } from './components/layout/layout.module';
 import { PupaLinkModule } from './components/link/link.module';
 import { PupaOptionModule } from './components/option/option.module';
@@ -30,7 +29,6 @@ import { PupaTooltipModule } from './components/tooltip/tooltip.module';
 
 const MODULES: Type<unknown>[] = [
   PupaSkeletonModule,
-  PupaIconModule,
   PupaScrollableModule,
   PupaTagModule,
   PupaDropdownModule,

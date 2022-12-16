@@ -1,6 +1,7 @@
 {
   "name": "@bimeister/pupakit.demo",
   "version": "0.2.0",
+  "private": true,
   "description": "PupaKit demonstration part. Documentation for developers",
   "keywords": [
     "angular",

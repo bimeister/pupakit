@@ -1,6 +1,7 @@
 {
   "name": "@bimeister/pupakit.icons",
   "version": "0.2.0",
+  "private": true,
   "description": "PupaKit Icons",
   "keywords": [
     "angular",
@@ -22,6 +23,7 @@
     "@angular/core": "^14.2.0"
   },
   "dependencies": {
+    "@bimeister/pupakit.common": "^0.2.0",
     "tslib": "^2.3.0"
   },
   "main": "dist"

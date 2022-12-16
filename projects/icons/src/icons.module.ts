@@ -1,12 +1,13 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
+import { PupaIconModule } from './components/icon/icon.module';
 import { IconDefinition } from './declarations/interfaces/icon-definition.interface';
 import { AVAILABLE_ICONS_TOKEN } from './declarations/tokens/available-icons.token';
 import { IconRegistry } from './declarations/types/icon-registry.type';
 
 @NgModule({
   declarations: [],
-  imports: [],
-  exports: [],
+  imports: [PupaIconModule],
+  exports: [PupaIconModule],
 })
 export class PupaIconsModule {
   public static forRoot(icons: IconDefinition[] = []): ModuleWithProviders<PupaIconsModule> {

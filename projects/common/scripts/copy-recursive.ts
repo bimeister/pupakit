@@ -67,13 +67,9 @@ export async function copyRecursive(sourcePath: string, targetPath: string): Pro
     })
   );
 
-  await Promise.all(
-    groupedFiles.map(async ({ resultPath, path }: Entry<Type.File>) => await copyFile(path, resultPath))
-  );
+  await Promise.all(groupedFiles.map(({ resultPath, path }: Entry<Type.File>) => copyFile(path, resultPath)));
 
-  await Promise.all(
-    groupedFolders.map(async ({ path, resultPath }: Entry<Type.Folder>) => await copyRecursive(path, resultPath))
-  );
+  await Promise.all(groupedFolders.map(({ path, resultPath }: Entry<Type.Folder>) => copyRecursive(path, resultPath)));
 }
 
 function getType(stats: Stats): Type {

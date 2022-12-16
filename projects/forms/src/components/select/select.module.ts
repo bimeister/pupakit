@@ -12,7 +12,6 @@ import {
 } from '@bimeister/pupakit.icons';
 import {
   PupaCheckboxModule,
-  PupaIconModule,
   PupaOptionModule,
   PupaTagModule,
   PupaThemeWrapperModule,
@@ -68,7 +67,6 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     PupaCheckboxModule,
     PupaTagModule,
     PupaThemeWrapperModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([appChevronDownIcon, appChevronUpIcon, mAbortIcon, mErrorIcon]),
     PupaTreeLayoutModule,
     PupaOptionModule,

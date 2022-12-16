@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { ComponentChanges } from '@bimeister/pupakit.common';
-import { AVAILABLE_ICONS_TOKEN } from '@bimeister/pupakit.icons';
 import { Nullable } from '@bimeister/utilities';
+import { AVAILABLE_ICONS_TOKEN } from '../../../../declarations/tokens/available-icons.token';
 
 @Component({
   selector: 'pupa-icon',
