@@ -82,7 +82,7 @@
         "@typescript-eslint/quotes": "off",
         "@typescript-eslint/restrict-plus-operands": "error",
         "@typescript-eslint/strict-boolean-expressions": [
-          "warn",
+          "error",
           {
             "allowString": false,
             "allowNumber": false,

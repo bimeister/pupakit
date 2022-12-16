@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { PupaPipesModule } from '@bimeister/pupakit.common';
 import { PupaIconsModule, iosArrowBackIcon, iosArrowForwardIcon } from '@bimeister/pupakit.icons';
-import { PupaIconModule } from '@bimeister/pupakit.kit';
 import { DatePickerDoubleComponent } from './components/date-picker-double/date-picker-double.component';
 import { DatePickerMonthsComponent } from './components/date-picker-months/date-picker-months.component';
 import { DatePickerSimpleTimeComponent } from './components/date-picker-simple-time/date-picker-simple-time.component';
@@ -34,7 +33,6 @@ const DECLARATIONS: any[] = [
     CommonModule,
     ScrollingModule,
     PupaPipesModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([iosArrowBackIcon, iosArrowForwardIcon]),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

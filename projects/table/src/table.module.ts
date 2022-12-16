@@ -4,6 +4,7 @@ import { appArrowFullBotIcon, appArrowFullTopIcon, PupaIconsModule } from '@bime
 
 import { CommonModule } from '@angular/common';
 import { PupaCommonModule } from '@bimeister/pupakit.common';
+import { PupaScrollableModule, PupaSkeletonModule } from '@bimeister/pupakit.kit';
 import { TableBodyCellComponent } from './components/external-predefined/table-body-cell/table-body-cell.component';
 import { TableHeaderCellComponent } from './components/external-predefined/table-header-cell/table-header-cell.component';
 import { TableSkeletonComponent } from './components/external-predefined/table-skeleton/table-skeleton.component';
@@ -16,7 +17,6 @@ import { TablePlaceholderRowContainerComponent } from './components/system/table
 import { TableComponent } from './components/system/table/table.component';
 import { TableBodyCellTemplateDirective } from './directives/table-cell-template.directive';
 import { TableHeaderCellTemplateDirective } from './directives/table-header-cell-template.directive';
-import { PupaIconModule, PupaScrollableModule, PupaSkeletonModule } from '@bimeister/pupakit.kit';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableBodyCellContainerComponent,
@@ -42,7 +42,6 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   PupaCommonModule,
   PupaScrollableModule,
   PupaSkeletonModule,
-  PupaIconModule,
   PupaIconsModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon]),
 ];
 

@@ -2,14 +2,9 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { appExceptionsCross10Icon, PupaIconsModule } from '@bimeister/pupakit.icons';
-import {
-  PupaButtonsModule,
-  PupaIconModule,
-  PupaScrollableModule,
-  PupaThemeWrapperModule,
-} from '@bimeister/pupakit.kit';
-import { ALERT_MODULE_CONFIG_TOKEN } from '../../declarations/tokens/alert-module-config.token';
+import { PupaButtonsModule, PupaScrollableModule, PupaThemeWrapperModule } from '@bimeister/pupakit.kit';
 import { AlertModuleConfig } from '../../declarations/interfaces/alert-module-config.interface';
+import { ALERT_MODULE_CONFIG_TOKEN } from '../../declarations/tokens/alert-module-config.token';
 import { AlertLayoutBodyComponent } from './components/alert-layout-body/alert-layout-body.component';
 import { AlertLayoutCloseButtonComponent } from './components/alert-layout-close-button/alert-layout-close-button.component';
 import { AlertLayoutFooterComponent } from './components/alert-layout-footer/alert-layout-footer.component';
@@ -40,7 +35,6 @@ const EXPORTS: Type<unknown>[] = [
     PupaScrollableModule,
     PortalModule,
     PupaThemeWrapperModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([appExceptionsCross10Icon]),
   ],
 })

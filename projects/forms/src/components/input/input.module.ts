@@ -11,7 +11,7 @@ import {
   mEyeOpenIcon,
   PupaIconsModule,
 } from '@bimeister/pupakit.icons';
-import { PupaIconModule, PupaTooltipModule } from '@bimeister/pupakit.kit';
+import { PupaTooltipModule } from '@bimeister/pupakit.kit';
 import { NgxMaskModule } from 'ngx-mask';
 import { PupaDateTimePickerModule } from '../date-time-picker/date-time-picker.module';
 import { PupaDroppableModule } from '../droppable/droppable.module';
@@ -49,7 +49,6 @@ const DECLARATIONS: any[] = [...EXPORTS];
     PupaDateTimePickerModule,
     PupaDroppableModule,
     PupaTooltipModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([mAbortIcon, mCalendarIcon, mErrorIcon, mEyeClosedIcon, mEyeOpenIcon, mClockIcon]),
     NgxMaskModule.forRoot(),
   ],

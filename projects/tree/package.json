@@ -1,6 +1,7 @@
 {
   "name": "@bimeister/pupakit.tree",
   "version": "0.2.0",
+  "private": true,
   "description": "PupaKit Tree",
   "keywords": [
     "angular",

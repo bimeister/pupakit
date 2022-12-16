@@ -23,78 +23,116 @@ interface LinksGroup {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
-  private readonly infoGroup: LinksGroup = {
-    title: 'Info',
+  private readonly commonGroup: LinksGroup = {
+    title: 'Common',
     linkItems: sortByProperty(
       [
         { title: 'Typography', link: '/kit/typography' },
         { title: 'Colors', link: '/kit/colors' },
         { title: 'Adaptive', link: '/kit/adaptive' },
-        { title: 'Icons', link: '/kit/icons' },
       ],
       'title'
     ),
   };
 
-  private readonly generalGroup: LinksGroup = {
-    title: 'Components',
+  private readonly kitGroup: LinksGroup = {
+    title: 'Kit',
     linkItems: sortByProperty(
       [
         { title: 'Accordion', link: '/kit/accordion' },
         { title: 'Icon holder', link: '/kit/icon-holder' },
-        { title: 'Icon', link: '/kit/icon' },
         { title: 'Button Multi', link: '/kit/button-multi' },
         { title: 'Button Round', link: '/kit/button-round' },
         { title: 'Button Icon', link: '/kit/button-icon' },
         { title: 'Button', link: '/kit/button' },
-        { title: 'Actions', link: '/kit/actions' },
+        { title: 'Dropdown', link: '/kit/dropdown' },
+        { title: 'Dropdown menu', link: '/kit/dropdown-menu' },
         { title: 'Avatar', link: '/kit/avatar' },
-        { title: 'Info block', link: '/kit/info-block' },
-        { title: 'Input', link: '/kit/input' },
-        { title: 'Select', link: '/kit/select' },
         { title: 'Section', link: '/kit/section' },
         { title: 'Card', link: '/kit/card' },
-        { title: 'Textarea', link: '/kit/textarea' },
-        { title: 'Date time pickers', link: '/kit/date-time-picker' },
-        { title: 'Label', link: '/kit/label' },
         { title: 'Tag', link: '/kit/tag' },
         { title: 'Status', link: '/kit/status' },
-        { title: 'Checkbox', link: '/kit/checkbox' },
-        { title: 'Radio buttons', link: '/kit/radio' },
-        { title: 'Switcher', link: '/kit/switcher' },
-        { title: 'Search Field', link: '/kit/search-field' },
-        { title: 'Infinity Scroller', link: '/kit/infinity-scroller' },
-        { title: 'Table', link: '/kit/table' },
-        { title: 'Tree', link: '/kit/tree-new' },
         { title: 'Tabs', link: '/kit/tabs' },
-        { title: 'Floating Card', link: '/kit/floating-card' },
         { title: 'Button Group', link: '/kit/button-group' },
         { title: 'Scrollable', link: '/kit/scrollable' },
-        { title: 'Paged Virtual Scroll', link: '/kit/paged-virtual-scroll' },
         { title: 'Badge', link: '/kit/badge' },
         { title: 'Breadcrumbs', link: '/kit/breadcrumbs' },
         { title: 'Spinner & loader', link: '/kit/spinner' },
-        { title: 'Rating', link: '/kit/rating' },
-        { title: 'Day selector', link: '/kit/day-selector' },
         { title: 'Link', link: '/kit/link' },
         { title: 'Timer', link: '/kit/timer' },
         { title: 'Counter', link: '/kit/counter' },
         { title: 'Stepper', link: '/kit/stepper' },
-        { title: 'Form Layout', link: '/kit/form-layout' },
-        { title: 'Tree node', link: '/kit/tree-node' },
         { title: 'Option', link: '/kit/option' },
       ],
       'title'
     ),
   };
 
-  private readonly overlayGroup: LinksGroup = {
-    title: 'Overlay Components',
+  private readonly formsGroup: LinksGroup = {
+    title: 'Forms',
     linkItems: sortByProperty(
       [
-        { title: 'Dropdown', link: '/kit/dropdown' },
-        { title: 'Dropdown menu', link: '/kit/dropdown-menu' },
-        { title: 'Tooltip', link: '/kit/tooltip' },
+        { title: 'Input', link: '/kit/input' },
+        { title: 'Select', link: '/kit/select' },
+        { title: 'Textarea', link: '/kit/textarea' },
+        { title: 'Date time pickers', link: '/kit/date-time-picker' },
+        { title: 'Label', link: '/kit/label' },
+        { title: 'Checkbox', link: '/kit/checkbox' },
+        { title: 'Radio buttons', link: '/kit/radio' },
+        { title: 'Switcher', link: '/kit/switcher' },
+        { title: 'Search Field', link: '/kit/search-field' },
+        { title: 'Rating', link: '/kit/rating' },
+        { title: 'Day selector', link: '/kit/day-selector' },
+        { title: 'Form Layout', link: '/kit/form-layout' },
+      ],
+      'title'
+    ),
+  };
+
+  private readonly iconsGroup: LinksGroup = {
+    title: 'Icons',
+    linkItems: sortByProperty(
+      [
+        { title: 'Icons', link: '/kit/icons' },
+        { title: 'Icon', link: '/kit/icon' },
+      ],
+      'title'
+    ),
+  };
+
+  private readonly widgetsGroup: LinksGroup = {
+    title: 'Widgets',
+    linkItems: sortByProperty(
+      [
+        { title: 'Actions', link: '/kit/actions' },
+        { title: 'Infinity Scroller', link: '/kit/infinity-scroller' },
+        { title: 'Floating Card', link: '/kit/floating-card' },
+        { title: 'Paged Virtual Scroll', link: '/kit/paged-virtual-scroll' },
+      ],
+      'title'
+    ),
+  };
+
+  private readonly tableGroup: LinksGroup = {
+    title: 'Table',
+    linkItems: sortByProperty([{ title: 'Table', link: '/kit/table' }], 'title'),
+  };
+
+  private readonly treeGroup: LinksGroup = {
+    title: 'Tree',
+    linkItems: sortByProperty(
+      [
+        { title: 'Tree', link: '/kit/tree-new' },
+        { title: 'Tree node', link: '/kit/tree-node' },
+      ],
+      'title'
+    ),
+  };
+
+  private readonly overlaysGroup: LinksGroup = {
+    title: 'Overlays',
+    linkItems: sortByProperty(
+      [
         { title: 'Alert', link: '/kit/alerts' },
         { title: 'Toast', link: '/kit/toasts' },
         { title: 'Drawer', link: '/kit/drawer' },
@@ -107,13 +145,24 @@ export class SidebarComponent {
 
   private readonly demoToolsGroup: LinksGroup = {
     title: 'Demo Tools',
-    linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title'),
+    linkItems: sortByProperty(
+      [
+        { title: 'Code', link: '/kit/code' },
+        { title: 'Info block', link: '/kit/info-block' },
+      ],
+      'title'
+    ),
   };
 
   private readonly linkGroups: LinksGroup[] = [
-    this.infoGroup,
-    this.generalGroup,
-    this.overlayGroup,
+    this.commonGroup,
+    this.iconsGroup,
+    this.kitGroup,
+    this.formsGroup,
+    this.overlaysGroup,
+    this.tableGroup,
+    this.treeGroup,
+    this.widgetsGroup,
     this.demoToolsGroup,
   ];
 

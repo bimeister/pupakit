@@ -3,8 +3,8 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PupaIconsModule, mCollapseIcon } from '@bimeister/pupakit.icons';
-import { PupaIconModule, PupaScrollableModule, PupaThemeWrapperModule } from '@bimeister/pupakit.kit';
+import { mCollapseIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
+import { PupaScrollableModule, PupaThemeWrapperModule } from '@bimeister/pupakit.kit';
 import { TextareaInlineComponent } from './components/textarea-inline/textarea-inline.component';
 import { TextareaComponent } from './components/textarea/textarea.component';
 
@@ -15,7 +15,6 @@ import { TextareaComponent } from './components/textarea/textarea.component';
     FormsModule,
     ReactiveFormsModule,
     PupaScrollableModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([mCollapseIcon]),
     PupaThemeWrapperModule,
     OverlayModule,

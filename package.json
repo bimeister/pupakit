@@ -1,6 +1,7 @@
 {
   "name": "@bimeister/pupakit",
   "version": "0.2.0",
+  "private": true,
   "description": "Root package.json contains only scripts",
   "license": "Apache-2.0",
   "homepage": "https://github.com/bimeister/pupakit",
@@ -35,14 +36,14 @@
     "moon": "moon",
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "start": "ng serve demo",
-    "styling: all": "moon run common:style-all",
+    "styling:all": "moon run common:style-all",
     "styling:alpha-color-maps": "moon run common:style-alpha-colors-map",
     "styling:color-maps": "moon run common:style-colors-map",
     "styling:convert-scss-to-css": "moon run common:convert-scss-to-css",
     "styling:semantic-color-maps": "moon run common:style-semantic-colors-map",
     "styling:variables": "moon run common:style-variables",
-    "test:ci": "ng run :test-ci",
-    "test:debug": "ng run :test-debug"
+    "test:ci": "moon run :test-ci",
+    "test:debug": "moon run :test-debug"
   },
   "dependencies": {
     "@angular/cdk": "^14.1.3",

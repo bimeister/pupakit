@@ -3,7 +3,7 @@ import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { appFitToPageIcon, appResizeIcon, mdCloseIcon, mdMoreIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
-import { PupaButtonsModule, PupaIconModule, PupaScrollableModule } from '@bimeister/pupakit.kit';
+import { PupaButtonsModule, PupaScrollableModule } from '@bimeister/pupakit.kit';
 import { DrawerButtonIconComponent } from './components/drawer-button-icon/drawer-button-icon.component';
 import { DrawerCloseButtonComponent } from './components/drawer-close-button/drawer-close-button.component';
 import { DrawerContainerComponent } from './components/drawer-container/drawer-container.component';
@@ -40,7 +40,6 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     CommonModule,
     OverlayModule,
     PortalModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([mdMoreIcon, mdCloseIcon, appFitToPageIcon, appResizeIcon]),
     PupaButtonsModule,
     PupaScrollableModule,

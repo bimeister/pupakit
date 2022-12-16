@@ -5,7 +5,6 @@ import { appChevronRightIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaButtonsModule } from '../buttons/buttons.module';
 import { PupaDropdownMenuModule } from '../dropdown-menu/dropdown-menu.module';
 import { PupaDropdownModule } from '../dropdown/dropdown.module';
-import { PupaIconModule } from '../icon/icon.module';
 import { PupaTooltipModule } from '../tooltip/tooltip.module';
 import { BreadcrumbSeparatorComponent } from './components/breadcrumb-separator/breadcrumb-separator.component';
 import { BreadcrumbUnfitTriggerComponent } from './components/breadcrumb-unfit-trigger/breadcrumb-unfit-trigger.component';
@@ -29,7 +28,6 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
   imports: [
     CommonModule,
     RouterModule,
-    PupaIconModule,
     PupaIconsModule.forFeature([appChevronRightIcon]),
     PupaButtonsModule,
     PupaDropdownModule,
