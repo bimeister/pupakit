@@ -17,6 +17,7 @@ import { TablePlaceholderRowContainerComponent } from './components/system/table
 import { TableComponent } from './components/system/table/table.component';
 import { TableBodyCellTemplateDirective } from './directives/table-cell-template.directive';
 import { TableHeaderCellTemplateDirective } from './directives/table-header-cell-template.directive';
+import { PupaDndModule } from '@bimeister/pupakit.overlays';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableBodyCellContainerComponent,
@@ -42,12 +43,13 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   PupaCommonModule,
   PupaScrollableModule,
   PupaSkeletonModule,
+  PupaDndModule,
   PupaIconsModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon]),
 ];
 
 @NgModule({
   declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
-  imports: IMPORTS,
+  imports: [IMPORTS],
   exports: [...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
 })
 export class PupaTableModule {}

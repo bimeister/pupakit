@@ -57,6 +57,7 @@ import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.
 import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
+import { DndDemoModule } from './pages/dnd-demo/dnd-demo.module';
 const demoRoutes: Routes = [
   {
     path: 'kit',
@@ -384,6 +385,11 @@ const demoRoutes: Routes = [
         path: 'option',
         loadChildren: (): Promise<Type<OptionDemoModule>> =>
           import('./pages/option-demo/option-demo.module').then((module: any) => module.OptionDemoModule),
+      },
+      {
+        path: 'dnd',
+        loadChildren: (): Promise<Type<DndDemoModule>> =>
+          import('./pages/dnd-demo/dnd-demo.module').then((module: any) => module.DndDemoModule),
       },
     ],
   },

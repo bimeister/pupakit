@@ -10,9 +10,9 @@ import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-
 import { TableFeatureConstructor } from '../types/table-feature-constructor.type';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
 import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
-
 import TableEventBase = TableEvents.TableEventBase;
 import TableFeatureEventBase = TableFeatureEvents.TableFeatureEventBase;
+import { DndSettings } from '@bimeister/pupakit.common/declarations/interfaces/dnd-settings.interface';
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
 
@@ -24,6 +24,8 @@ export class TableController<T> {
   protected readonly dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>();
 
   public readonly features: TableFeatureConstructor<T>[] = this.options?.features ?? [];
+
+  public readonly dndRowsSettings: DndSettings<T> | undefined = this.options?.dndRowsSettings;
 
   constructor(private readonly options?: TableControllerOptions<T>) {
     this.setHeaderRowHeightPx(options?.headerRowHeightPx);
