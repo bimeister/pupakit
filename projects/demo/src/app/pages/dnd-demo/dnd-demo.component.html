@@ -1,0 +1,15 @@
+<h1>Drag&Drop</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Simple usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-example-1 *pupaCodeContainerPreviewTemplate></demo-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Move items in current host and between different hosts</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-example-2 *pupaCodeContainerPreviewTemplate></demo-example-2>
+    </pupa-code-container>
+  </div>
+</demo-page>

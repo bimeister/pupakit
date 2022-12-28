@@ -16,6 +16,7 @@ import { TableTemplatesRegistry } from '../../interfaces/tables-templates-regist
 import { TableColumn } from '../table-column.class';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { DndCloneService } from '@bimeister/pupakit.overlays';
+import { ConnectedPosition } from '@angular/cdk/overlay';
 
 const SCROLL_SPEED_PX: number = 5;
 
@@ -82,6 +83,13 @@ export class TableDndFeature<T> implements TableFeature {
   }
 
   private processPan(): Subscription {
+    const overlayConnectedPosition: ConnectedPosition = {
+      originX: 'center',
+      originY: 'center',
+      overlayX: 'center',
+      overlayY: 'center',
+    };
+
     return this.eventBus
       .listen()
       .pipe(
@@ -93,7 +101,10 @@ export class TableDndFeature<T> implements TableFeature {
         this.updateCurrentTargetCell(event);
         this.checkAndStartScrollLoop(event);
         this.calculateNewIndexAndUpdateDndIndicatorPosition(event);
-        this.moveCurrentDraggableColumnClone([event.globalPosition[0], event.globalPosition[1]]);
+        this.moveCurrentDraggableColumnClone(
+          [event.globalPosition[0], event.globalPosition[1]],
+          overlayConnectedPosition
+        );
       });
   }
 
@@ -144,10 +155,14 @@ export class TableDndFeature<T> implements TableFeature {
     const dndCloneHeightPx: number = targetCell.element.clientHeight;
 
     this.dndCloneService.create(
-      headerCellTemplateRef,
-      templateContext,
-      dndCloneWidthPx,
-      dndCloneHeightPx,
+      [
+        {
+          templateRef: headerCellTemplateRef,
+          templateContext,
+          widthPx: dndCloneWidthPx,
+          heightPx: dndCloneHeightPx,
+        },
+      ],
       this.api.tableInjector
     );
   }
@@ -248,8 +263,11 @@ export class TableDndFeature<T> implements TableFeature {
     this.eventBus.dispatch(new TableEvents.ColumnDragIndicatorPositionChange(null));
   }
 
-  private moveCurrentDraggableColumnClone(position: [number, number]): void {
-    this.dndCloneService.updatePosition(position);
+  private moveCurrentDraggableColumnClone(
+    position: [number, number],
+    overlayConnectedPosition: ConnectedPosition
+  ): void {
+    this.dndCloneService.updatePosition(position, 0, overlayConnectedPosition);
   }
 
   private stopColumnDragging(): void {

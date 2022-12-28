@@ -138,6 +138,7 @@ export class SidebarComponent {
         { title: 'Drawer', link: '/kit/drawer' },
         { title: 'Modal', link: '/kit/modal' },
         { title: 'Popover', link: '/kit/popover' },
+        { title: 'Dnd', link: '/kit/dnd' },
       ],
       'title'
     ),

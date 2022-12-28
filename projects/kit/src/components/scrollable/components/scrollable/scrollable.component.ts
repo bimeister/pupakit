@@ -63,6 +63,7 @@ const HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_horizontal
 const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizontal_with-vertical';
 
 const HORIZONTAL_AUTO_SCROLL_SENSITIVITY_WIDTH_PX: number = 30;
+const VERTICAL_AUTO_SCROLL_SENSITIVITY_HEIGHT_PX: number = 30;
 
 @Component({
   selector: 'pupa-scrollable',
@@ -212,6 +213,17 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     this.scrollByDeltaSubscription = null;
   }
 
+  public startScrollTopByDeltaLoop(deltaScrollTop: number): void {
+    this.scrollByDeltaSubscription = getAnimationFrameLoop()
+      .pipe(takeUntil(merge(this.scrolledToVerticalStart, this.scrolledToVerticalEnd)))
+      .subscribe(() => this.setScrollTopByDelta(deltaScrollTop));
+  }
+
+  public stopScrollTopByDeltaLoop(): void {
+    this.scrollByDeltaSubscription?.unsubscribe();
+    this.scrollByDeltaSubscription = null;
+  }
+
   public isIntersectsLeftScrollTriggerZone(positionX: number): boolean {
     const clientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
 
@@ -232,6 +244,28 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     ];
 
     return positionX >= rightSensitivityZone[0] && positionX <= rightSensitivityZone[1];
+  }
+
+  public isIntersectsTopScrollTriggerZone(positionY: number): boolean {
+    const clientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+
+    const topSensitivityZone: [number, number] = [
+      clientRect.top,
+      clientRect.top + VERTICAL_AUTO_SCROLL_SENSITIVITY_HEIGHT_PX,
+    ];
+
+    return positionY >= topSensitivityZone[0] && positionY <= topSensitivityZone[1];
+  }
+
+  public isIntersectsBottomScrollTriggerZone(positionY: number): boolean {
+    const clientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+
+    const bottomSensitivityZone: [number, number] = [
+      clientRect.bottom - VERTICAL_AUTO_SCROLL_SENSITIVITY_HEIGHT_PX,
+      clientRect.bottom,
+    ];
+
+    return positionY >= bottomSensitivityZone[0] && positionY <= bottomSensitivityZone[1];
   }
 
   private processContentScrollEvent(): Subscription {

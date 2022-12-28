@@ -4,6 +4,7 @@
   (mouseover)="processTableMouseEvent($event)"
   (mouseleave)="processTableMouseEvent($event)"
   (click)="processClick($event)"
+  *pupaLet="dndRowsSettings$ | async as dndRowsSettings"
 >
   <div class="table__header table-header">
     <div class="table-header__pinned-left-container">
@@ -56,99 +57,122 @@
   </div>
 
   <div class="table__body table-body">
-    <pupa-scrollable
-      class="table-body__scrollable"
-      [size]="'large'"
-      (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
-      [position]="'external'"
+    <pupa-dnd-host
+      [isDraggable]="!(dndRowsSettings | isNullOrUndefined)"
+      [dndCloneItemsOffset]="dndRowsSettings?.dndCloneItemsOffset"
+      (dndMove)="processDndMove($event)"
+      (dndDrop)="processDndDrop($event)"
     >
-      <cdk-virtual-scroll-viewport
-        #cdkVirtualScrollViewport
-        pupaScrollableContent
-        class="table-body__scroll-viewport"
-        [itemSize]="bodyRowHeightPx$ | async"
-        [minBufferPx]="minBufferPx$ | async"
+      <pupa-dnd-indicator
+        *ngIf="dndIndicatorTopPxCoords$ | async as topCoordsPx"
+        [topCoordsPx]="topCoordsPx"
+      ></pupa-dnd-indicator>
+
+      <pupa-scrollable
+        #scrollableContainer
+        class="table-body__scrollable"
+        [size]="'large'"
+        (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
+        [position]="'external'"
       >
-        <ng-container
-          *cdkVirtualFor="let row of virtualScrollDataSource$ | async; trackBy: trackBy$ | async"
-        ></ng-container>
+        <cdk-virtual-scroll-viewport
+          #cdkVirtualScrollViewport
+          pupaScrollableContent
+          class="table-body__scroll-viewport"
+          [itemSize]="bodyRowHeightPx$ | async"
+          [minBufferPx]="minBufferPx$ | async"
+        >
+          <ng-container
+            *cdkVirtualFor="let row of virtualScrollDataSource$ | async; trackBy: trackBy$ | async"
+          ></ng-container>
 
-        <div class="table-decor">
-          <div class="table-placeholder__pinned-left-container table-decor__pinned-left-container">
-            <pupa-table-placeholder-row-container
-              class="table-row table-row_decor"
-              [isFullHeightCells]="true"
-              [row]="placeholderRow$ | async"
-              [columns]="pinnedLeftColumns$ | async"
-            ></pupa-table-placeholder-row-container>
+          <div class="table-decor">
+            <div class="table-placeholder__pinned-left-container table-decor__pinned-left-container">
+              <pupa-table-placeholder-row-container
+                class="table-row table-row_decor"
+                [isFullHeightCells]="true"
+                [row]="placeholderRow$ | async"
+                [columns]="pinnedLeftColumns$ | async"
+              ></pupa-table-placeholder-row-container>
+            </div>
+
+            <div class="table-placeholder__scrollable-container table-decor__scrollable-container">
+              <pupa-table-placeholder-row-container
+                #decorScrollableRowContainer
+                class="table-row table-row_decor"
+                [isFullHeightCells]="true"
+                [row]="placeholderRow$ | async"
+                [columns]="scrollableColumns$ | async"
+              ></pupa-table-placeholder-row-container>
+            </div>
+
+            <div class="table-placeholder__pinned-right-container table-decor__pinned-right-container">
+              <pupa-table-placeholder-row-container
+                class="table-row table-row_decor"
+                [isFullHeightCells]="true"
+                [row]="placeholderRow$ | async"
+                [columns]="pinnedRightColumns$ | async"
+              ></pupa-table-placeholder-row-container>
+            </div>
           </div>
 
-          <div class="table-placeholder__scrollable-container table-decor__scrollable-container">
-            <pupa-table-placeholder-row-container
-              #decorScrollableRowContainer
-              class="table-row table-row_decor"
-              [isFullHeightCells]="true"
-              [row]="placeholderRow$ | async"
-              [columns]="scrollableColumns$ | async"
-            ></pupa-table-placeholder-row-container>
-          </div>
+          <div class="table-body__scroll-viewport-container">
+            <div class="table-body__pinned-left-container">
+              <pupa-table-body-row-container
+                *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
+                class="table-row"
+                [class.table-row_hovered]="row.isHovered$ | async"
+                [class.table-row_selected]="row.isSelected$ | async"
+                [style.height.px]="bodyRowHeightPx$ | async"
+                [row]="row"
+                [columns]="pinnedLeftColumns$ | async"
+                pupaDndItem
+                [dndItemData]="row.data"
+                [dndItemId]="row.id"
+                [dndItemTemplateRef]="dndRowsSettings?.dndCloneItemTemplate"
+                [canBeMoved]="dndRowsSettings?.dndItemCanBeMoved"
+                [canBeDroppableFor]="dndRowsSettings?.dndItemCanBeDroppableFor"
+              ></pupa-table-body-row-container>
+            </div>
 
-          <div class="table-placeholder__pinned-right-container table-decor__pinned-right-container">
-            <pupa-table-placeholder-row-container
-              class="table-row table-row_decor"
-              [isFullHeightCells]="true"
-              [row]="placeholderRow$ | async"
-              [columns]="pinnedRightColumns$ | async"
-            ></pupa-table-placeholder-row-container>
-          </div>
-        </div>
+            <pupa-scrollable
+              class="table-body__scrollable-container"
+              #bodyScrollableContainer
+              [size]="'large'"
+              [syncWith]="[placeholderScrollableContainer]"
+              (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
+              [invisibleScrollbars]="['horizontal']"
+            >
+              <pupa-table-body-row-container
+                *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
+                class="table-row"
+                [class.table-row_hovered]="row.isHovered$ | async"
+                [class.table-row_selected]="row.isSelected$ | async"
+                [style.height.px]="bodyRowHeightPx$ | async"
+                [row]="row"
+                [columns]="scrollableColumns$ | async"
+                pupaDndItem
+                [dndItemId]="row.id"
+              ></pupa-table-body-row-container>
+            </pupa-scrollable>
 
-        <div class="table-body__scroll-viewport-container">
-          <div class="table-body__pinned-left-container">
-            <pupa-table-body-row-container
-              *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
-              class="table-row"
-              [class.table-row_hovered]="row.isHovered$ | async"
-              [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="bodyRowHeightPx$ | async"
-              [row]="row"
-              [columns]="pinnedLeftColumns$ | async"
-            ></pupa-table-body-row-container>
+            <div class="table-body__pinned-right-container">
+              <pupa-table-body-row-container
+                *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
+                class="table-row"
+                [class.table-row_hovered]="row.isHovered$ | async"
+                [class.table-row_selected]="row.isSelected$ | async"
+                [style.height.px]="bodyRowHeightPx$ | async"
+                [row]="row"
+                [columns]="pinnedRightColumns$ | async"
+                pupaDndItem
+                [dndItemId]="row.id"
+              ></pupa-table-body-row-container>
+            </div>
           </div>
-
-          <pupa-scrollable
-            class="table-body__scrollable-container"
-            #bodyScrollableContainer
-            [size]="'large'"
-            [syncWith]="[placeholderScrollableContainer]"
-            (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
-            [invisibleScrollbars]="['horizontal']"
-          >
-            <pupa-table-body-row-container
-              *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
-              class="table-row"
-              [class.table-row_hovered]="row.isHovered$ | async"
-              [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="bodyRowHeightPx$ | async"
-              [row]="row"
-              [columns]="scrollableColumns$ | async"
-            ></pupa-table-body-row-container>
-          </pupa-scrollable>
-
-          <div class="table-body__pinned-right-container">
-            <pupa-table-body-row-container
-              *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
-              class="table-row"
-              [class.table-row_hovered]="row.isHovered$ | async"
-              [class.table-row_selected]="row.isSelected$ | async"
-              [style.height.px]="bodyRowHeightPx$ | async"
-              [row]="row"
-              [columns]="pinnedRightColumns$ | async"
-            ></pupa-table-body-row-container>
-          </div>
-        </div>
-      </cdk-virtual-scroll-viewport>
-    </pupa-scrollable>
+        </cdk-virtual-scroll-viewport>
+      </pupa-scrollable>
+    </pupa-dnd-host>
   </div>
 
   <div

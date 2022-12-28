@@ -17,7 +17,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { filterByInstanceOf, filterNotNil, isNil, Nullable } from '@bimeister/utilities';
+import { filterByInstanceOf, filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { TableBodyRow } from '../../../declarations/classes/table-body-row.class';
@@ -45,7 +45,6 @@ import { isTableCellHtmlElement } from '../../../declarations/type-guards/is-tab
 import { TableColumnsIntersectionService } from '../../../services/table-columns-intersection.service';
 import { TableScrollbarsService } from '../../../services/table-scrollbars.service';
 import { TableTemplatesService } from '../../../services/table-templates.service';
-
 import {
   BusEventBase,
   ClientUiStateHandlerService,
@@ -54,6 +53,10 @@ import {
   QueueEvents,
 } from '@bimeister/pupakit.common';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
+import { DndSettings } from '@bimeister/pupakit.common/declarations/interfaces/dnd-settings.interface';
+import { DndDropData, DndMoveData } from '@bimeister/pupakit.overlays';
+
+const SCROLL_SPEED_PX: number = 5;
 
 function isTriggeredByResizer(event: Event): boolean {
   const targetPath: EventTarget[] = event.composedPath();
@@ -120,6 +123,9 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   @ViewChild('cdkVirtualScrollViewport', { static: true })
   public cdkVirtualScrollViewportRef: Nullable<CdkVirtualScrollViewport>;
+
+  @ViewChild('scrollableContainer', { static: true })
+  public scrollableContainerRef?: ScrollableComponent | undefined;
 
   @ViewChild('headerScrollableContainer', { static: true })
   public headerScrollableRowsContainerRef?: Nullable<ElementRef<HTMLElement>>;
@@ -214,6 +220,15 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     Nullable<number>
   >(null);
 
+  public readonly dndRowsSettings$: Observable<DndSettings<T> | undefined> = this.availableController$.pipe(
+    take(1),
+    map((tableController: TableController<T>) => tableController.dndRowsSettings),
+    shareReplayWithRefCount()
+  );
+  public readonly dndIndicatorTopPxCoords$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public readonly currentDndTargetItemId$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
+  private dndScrollIsActive: boolean = false;
+
   private readonly internalSystemFeatures: TableFeatureConstructor<T>[] = [
     TableCommonFeature,
     TableResizeFeature,
@@ -265,6 +280,24 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.subscription.unsubscribe();
     this.disposeFeatures();
     this.hammerManager.destroy();
+  }
+
+  public processDndMove(dndMoveData: DndMoveData): void {
+    this.dndRowsSettings$.pipe(filterNotNil(), take(1)).subscribe((dndRowsSettings: DndSettings<T>) => {
+      dndRowsSettings.dndOnMove(dndMoveData);
+      this.checkAndStartScrollLoop(dndMoveData.dndCloneCoords[1]);
+      this.highlightDndDroppableZone(dndMoveData);
+    });
+  }
+
+  public processDndDrop(dndDropData: DndDropData): void {
+    this.dndRowsSettings$.pipe(filterNotNil(), take(1)).subscribe((dndRowsSettings: DndSettings<T>) => {
+      dndRowsSettings.dndOnDrop(dndDropData);
+      this.scrollableContainerRef.stopScrollTopByDeltaLoop();
+      this.dndScrollIsActive = false;
+      this.dndIndicatorTopPxCoords$.next(null);
+      this.currentDndTargetItemId$.next(null);
+    });
   }
 
   public processVerticalScrollBarVisibilityChanges(isVisible: boolean): void {
@@ -350,6 +383,36 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   private startEventsQueue(): void {
     this.dispatchEvent(new QueueEvents.StartQueue());
+  }
+
+  private checkAndStartScrollLoop(positionY: number): void {
+    this.scrollableContainerRef.stopScrollTopByDeltaLoop();
+
+    this.dndScrollIsActive = true;
+
+    if (this.scrollableContainerRef.isIntersectsTopScrollTriggerZone(positionY)) {
+      this.scrollableContainerRef.startScrollTopByDeltaLoop(-SCROLL_SPEED_PX);
+      return;
+    }
+
+    if (this.scrollableContainerRef.isIntersectsBottomScrollTriggerZone(positionY)) {
+      this.scrollableContainerRef.startScrollTopByDeltaLoop(SCROLL_SPEED_PX);
+      return;
+    }
+
+    this.dndScrollIsActive = false;
+  }
+
+  private highlightDndDroppableZone(dndMoveData: DndMoveData): void {
+    if (dndMoveData.dndDropPosition === 'within') {
+      this.currentDndTargetItemId$.next(dndMoveData.dndTargetItem.id);
+      this.dndIndicatorTopPxCoords$.next(null);
+      return;
+    }
+
+    if (!this.dndScrollIsActive) {
+      this.dndIndicatorTopPxCoords$.next(dndMoveData.dndIndicatorCoords);
+    }
   }
 
   private measureFirstVisibleListRange(): void {
