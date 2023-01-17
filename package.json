@@ -7,7 +7,7 @@
   "homepage": "https://github.com/bimeister/pupakit",
   "repository": "https://github.com/bimeister/pupakit",
   "engines": {
-    "node": "18.12.0",
+    "node": "18.13.0",
     "npm": ">=8.0.0"
   },
   "packageManager": "npm@8.19.3",
@@ -47,8 +47,8 @@
   },
   "dependencies": {
     "@angular/cdk": "^14.1.3",
-    "@bimeister/event-bus": "0.2.0-68b57267",
-    "@bimeister/utilities": "0.2.0-424d04b4",
+    "@bimeister/event-bus": "1.0.0",
+    "@bimeister/utilities": "1.1.0",
     "@types/hammerjs": "^2.0.40",
     "rxjs": "^6.6.0",
     "tslib": "^2.0.0",
@@ -74,7 +74,6 @@
     "@angular/platform-browser-dynamic": "^14.1.3",
     "@angular/router": "^14.1.3",
     "@babel/core": "7.17.2",
-    "@bimeister/build-cli": "0.1.0-c869ab81",
     "@moonrepo/cli": "0.22.0",
     "@types/jest": "^27.0.0",
     "@types/node": "^16.10.0",
