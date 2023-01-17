@@ -14,7 +14,7 @@ workspace:
 
 tasks:
   build:
-    common: 'noop'
+    command: 'noop'
     deps:
       - '~:build-package'
       - '~:convert-scss-to-css'
