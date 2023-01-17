@@ -20,3 +20,5 @@ runner:
     - 'tsconfig.spec.json'
     - '**/moon.yml'
     - '**/moon.yaml'
+
+versionConstraint: '>=0.20.0'
