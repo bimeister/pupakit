@@ -33,7 +33,8 @@
     "fullTemplateTypeCheck": false,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "enableIvy": true
+    "enableIvy": true,
+    "compilationMode": "partial"
   },
   "references": [
     {
