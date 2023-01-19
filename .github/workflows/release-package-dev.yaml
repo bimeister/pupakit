@@ -1,0 +1,201 @@
+name: Release Package Dev
+
+on: workflow_dispatch
+
+jobs:
+  install_dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+
+      - name: Install missing packages
+        run: npm install @moonrepo/core-linux-x64-gnu --save-dev
+
+      - name: Install dependencies by lockfile
+        run: npm clean-install
+
+      - name: Cache workspace
+        uses: actions/cache@v3
+        with:
+          key: 'workspace:${{github.sha}}'
+          path: ./
+
+  static_files:
+    name: Build Static Files
+    runs-on: ubuntu-latest
+    needs: [install_dependencies]
+    steps:
+      - name: Download cached workspace
+        uses: actions/cache@v3
+        with:
+          key: 'workspace:${{github.sha}}'
+          path: ./
+
+      - name: Build static files with checks
+        run: npm run moon run :build
+
+      - name: Generate report
+        uses: moonrepo/run-report-action@v1
+        if: success() || failure()
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache build common
+        uses: actions/cache@v3
+        with:
+          key: 'dist:common:${{github.sha}}'
+          path: ./projects/common/dist
+
+      - name: Cache build forms
+        uses: actions/cache@v3
+        with:
+          key: 'dist:forms:${{github.sha}}'
+          path: ./projects/forms/dist
+
+      - name: Cache build icons
+        uses: actions/cache@v3
+        with:
+          key: 'dist:icons:${{github.sha}}'
+          path: ./projects/icons/dist
+
+      - name: Cache build kit
+        uses: actions/cache@v3
+        with:
+          key: 'dist:kit:${{github.sha}}'
+          path: ./projects/kit/dist
+
+      - name: Cache build overlays
+        uses: actions/cache@v3
+        with:
+          key: 'dist:overlays:${{github.sha}}'
+          path: ./projects/overlays/dist
+
+      - name: Cache build table
+        uses: actions/cache@v3
+        with:
+          key: 'dist:table:${{github.sha}}'
+          path: ./projects/table/dist
+
+      - name: Cache build tree
+        uses: actions/cache@v3
+        with:
+          key: 'dist:tree:${{github.sha}}'
+          path: ./projects/tree/dist
+
+      - name: Cache build widgets
+        uses: actions/cache@v3
+        with:
+          key: 'dist:widgets:${{github.sha}}'
+          path: ./projects/widgets/dist
+
+  publish:
+    name: Run publish
+    runs-on: ubuntu-latest
+    needs: [static_files]
+    steps:
+      - name: Download cached workspace
+        uses: actions/cache@v3
+        with:
+          key: 'workspace:${{github.sha}}'
+          path: ./
+
+      - name: Download cached common dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:common:${{github.sha}}'
+          path: ./projects/common/dist
+
+      - name: Download cached forms dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:forms:${{github.sha}}'
+          path: ./projects/forms/dist
+
+      - name: Download cached icons dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:icons:${{github.sha}}'
+          path: ./projects/icons/dist
+
+      - name: Download cached kit dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:kit:${{github.sha}}'
+          path: ./projects/kit/dist
+
+      - name: Download cached overlays dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:overlays:${{github.sha}}'
+          path: ./projects/overlays/dist
+
+      - name: Download cached table dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:table:${{github.sha}}'
+          path: ./projects/table/dist
+
+      - name: Download cached tree dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:tree:${{github.sha}}'
+          path: ./projects/tree/dist
+
+      - name: Download cached widgets dist
+        uses: actions/cache@v3
+        with:
+          key: 'dist:widgets:${{github.sha}}'
+          path: ./projects/widgets/dist
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: 18
+
+      - name: 'Authorize to NPM Registry'
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/common/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/forms/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/icons/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/kit/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/overlays/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/table/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/tree/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/widgets/dist/.npmrc
+
+      - name: Do prepublish
+        run: |
+          export VERSION=$(git describe --abbrev=0 --tags)
+
+      - name: Publish common
+        run: cd projects/common/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish forms
+        run: cd projects/forms/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish icons
+        run: cd projects/icons/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish kit
+        run: cd projects/kit/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish overlays
+        run: cd projects/overlays/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish table
+        run: cd projects/table/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish tree
+        run: cd projects/tree/dist && npm publish --access public --tag dev && cd -
+
+      - name: Publish widgets
+        run: cd projects/widgets/dist && npm publish --access public --tag dev && cd -
