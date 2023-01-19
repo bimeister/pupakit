@@ -3,7 +3,7 @@ name: Release Package Next
 on:
   push:
     branches:
-      - 'main'
+      - '**'
 
 jobs:
   install_dependencies:
@@ -166,14 +166,14 @@ jobs:
 
       - name: 'Authorize to NPM Registry'
         run: |
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/common/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/forms/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/icons/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/kit/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/overlays/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/table/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/tree/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./project/widgets/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/common/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/forms/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/icons/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/kit/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/overlays/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/table/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/tree/dist/.npmrc
+          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/widgets/dist/.npmrc
 
       - name: Do prepublish
         run: |
