@@ -9,6 +9,7 @@ fileGroups:
 
   sources:
     - 'src/**/*'
+    - '**/*'
 
   tests:
     - 'src/**/*.spec.ts'

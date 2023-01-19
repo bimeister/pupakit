@@ -23,23 +23,23 @@ jobs:
           cache: 'npm'
 
       - name: Install missing packages
-        run: npm install @moonrepo/core-linux-x64-gnu
+        run: npm install @moonrepo/core-linux-x64-gnu --save-dev
 
       - name: Install dependencies by lockfile
         run: npm clean-install
 
-      - name: Share prepared workspace with other jobs
+      - name: Cache workspace
         uses: actions/cache@v3
         with:
           key: 'workspace:${{github.sha}}'
           path: ./
 
   static_files:
-    name: Build Static Files
+    name: Build Static Files And Run Checks
     runs-on: ubuntu-latest
     needs: [install_dependencies]
     steps:
-      - name: Download prepared workspace
+      - name: Download cached workspace
         uses: actions/cache@v3
         with:
           key: 'workspace:${{github.sha}}'
