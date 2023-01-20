@@ -1,6 +1,6 @@
 {
   "name": "@bimeister/pupakit.common",
-  "version": "0.2.0",
+  "version": "local",
   "private": true,
   "description": "PupaKit Common",
   "keywords": [

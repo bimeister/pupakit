@@ -1,6 +1,6 @@
 {
   "name": "@bimeister/pupakit.kit",
-  "version": "0.2.0",
+  "version": "local",
   "private": true,
   "description": "PupaKit is an open source collection of Angular components based on an atomic approach to building interfaces, which guarantees better performance and greater development flexibility.",
   "keywords": [
@@ -26,8 +26,8 @@
     "@angular/core": "^14.2.0"
   },
   "dependencies": {
-    "@bimeister/pupakit.common": "^0.2.0",
-    "@bimeister/pupakit.icons": "^0.2.0",
+    "@bimeister/pupakit.common": "*",
+    "@bimeister/pupakit.icons": "*",
     "tslib": "^2.3.0"
   },
   "main": "dist"
