@@ -178,6 +178,9 @@ jobs:
       - name: Do prepublish
         run: |
           export VERSION=$(git describe --abbrev=0 --tags)
+          npm run build:prepublish
+        env:
+          GIT_COMMIT_HASH: ${{github.sha}}
 
       - name: Publish common
         run: cd projects/common/dist && npm publish --access public --tag next && cd -
