@@ -1,49 +1,57 @@
 name: Publish projects
 description: PupaKit action for publish project dist folders
 
+inputs:
+  token:
+    description: NPM Deploy Token
+    required: true
+  tag:
+    description: NPM Publish Tag
+    default: next
+
 runs:
   using: composite
   steps:
     - name: 'Authorize to NPM Registry'
       shell: bash
       run: |
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/common/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/forms/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/icons/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/kit/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/overlays/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/table/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/tree/dist/.npmrc
-        echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/widgets/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/common/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/forms/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/icons/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/kit/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/overlays/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/table/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/tree/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/widgets/dist/.npmrc
 
     - name: Publish common
       shell: bash
-      run: cd projects/common/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/common/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish forms
       shell: bash
-      run: cd projects/forms/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/forms/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish icons
       shell: bash
-      run: cd projects/icons/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/icons/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish kit
       shell: bash
-      run: cd projects/kit/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/kit/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish overlays
       shell: bash
-      run: cd projects/overlays/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/overlays/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish table
       shell: bash
-      run: cd projects/table/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/table/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish tree
       shell: bash
-      run: cd projects/tree/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/tree/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish widgets
       shell: bash
-      run: cd projects/widgets/dist && npm publish --access public --tag dev && cd -
+      run: cd projects/widgets/dist && npm publish --access public --tag ${{inputs.tag}} && cd -

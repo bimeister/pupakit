@@ -45,6 +45,12 @@ jobs:
           key: 'workspace:${{github.sha}}'
           path: ./
 
+      - name: Download moon cache
+        uses: actions/cache@v3
+        with:
+          key: 'moon'
+          path: ./.moon/cache
+
       - name: Build static files with checks
         run: npm run moon ci
 
