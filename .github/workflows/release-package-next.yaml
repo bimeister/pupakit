@@ -3,7 +3,7 @@ name: Release Package Next
 on:
   push:
     branches:
-      - '**'
+      - 'main'
 
 jobs:
   install_dependencies:
@@ -42,7 +42,13 @@ jobs:
           key: 'workspace:${{github.sha}}'
           path: ./
 
-      - name: Build static files with checks
+      - name: Download moon cache
+        uses: actions/cache@v3
+        with:
+          key: 'moon'
+          path: ./.moon/cache
+
+      - name: Build static files
         run: npm run moon run :build
 
       - name: Generate report
@@ -83,3 +89,5 @@ jobs:
 
       - name: Publish projects
         uses: ./.github/actions/publish-projects
+        with:
+          token: ${{secrets.NPM_DEPLOY_TOKEN}}
