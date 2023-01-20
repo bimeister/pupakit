@@ -88,3 +88,4 @@ jobs:
         uses: ./.github/actions/publish-projects
         with:
           token: ${{secrets.NPM_DEPLOY_TOKEN}}
+          tag: latest
