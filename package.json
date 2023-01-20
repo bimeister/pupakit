@@ -5,7 +5,14 @@
   "description": "Root package.json contains only scripts",
   "license": "Apache-2.0",
   "homepage": "https://github.com/bimeister/pupakit",
-  "repository": "https://github.com/bimeister/pupakit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimeister/pupakit"
+  },
+  "bugs": {
+    "url": "https://github.com/bimeister/utilities/issues",
+    "email": "opensource@bimeister.com"
+  },
   "engines": {
     "node": "18.13.0",
     "npm": ">=8.0.0"
@@ -49,7 +56,7 @@
   "dependencies": {
     "@angular/cdk": "^14.1.3",
     "@bimeister/event-bus": "1.0.0",
-    "@bimeister/utilities": "1.1.0",
+    "@bimeister/utilities": "^1.2.0",
     "@types/hammerjs": "^2.0.40",
     "rxjs": "^6.6.0",
     "tslib": "^2.0.0",

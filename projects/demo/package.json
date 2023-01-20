@@ -19,6 +19,10 @@
     "url": "https://github.com/bimeister/pupakit",
     "directory": "projects/demo"
   },
+  "bugs": {
+    "url": "https://github.com/bimeister/utilities/issues",
+    "email": "opensource@bimeister.com"
+  },
   "scripts": {
     "build:demo-ci": "moon run demo:build -- --base-href \"${CI_PAGES_URL}/\""
   },

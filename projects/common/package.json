@@ -16,6 +16,10 @@
     "url": "https://github.com/bimeister/pupakit",
     "directory": "projects/common"
   },
+  "bugs": {
+    "url": "https://github.com/bimeister/utilities/issues",
+    "email": "opensource@bimeister.com"
+  },
   "scripts": {
     "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
   },
