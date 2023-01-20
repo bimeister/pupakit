@@ -74,17 +74,6 @@ jobs:
           always-auth: true
           node-version: 18
 
-      - name: 'Authorize to NPM Registry'
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/common/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/forms/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/icons/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/kit/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/overlays/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/table/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/tree/dist/.npmrc
-          echo "//registry.npmjs.org/:_authToken=${{secrets.NPM_DEPLOY_TOKEN}}" >> ./projects/widgets/dist/.npmrc
-
       - name: Do prepublish
         run: |
           export VERSION=$(git describe --abbrev=0 --tags)
@@ -92,26 +81,5 @@ jobs:
         env:
           GIT_COMMIT_HASH: ${{github.sha}}
 
-      - name: Publish common
-        run: cd projects/common/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish forms
-        run: cd projects/forms/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish icons
-        run: cd projects/icons/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish kit
-        run: cd projects/kit/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish overlays
-        run: cd projects/overlays/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish table
-        run: cd projects/table/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish tree
-        run: cd projects/tree/dist && npm publish --access public --tag next && cd -
-
-      - name: Publish widgets
-        run: cd projects/widgets/dist && npm publish --access public --tag next && cd -
+      - name: Publish projects
+        uses: ./.github/actions/publish-projects
