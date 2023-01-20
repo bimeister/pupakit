@@ -1,6 +1,6 @@
 {
   "name": "@bimeister/pupakit",
-  "version": "0.2.0",
+  "version": "#.#.#",
   "private": true,
   "description": "Root package.json contains only scripts",
   "license": "Apache-2.0",

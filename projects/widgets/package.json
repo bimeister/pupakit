@@ -1,6 +1,6 @@
 {
   "name": "@bimeister/pupakit.widgets",
-  "version": "0.2.0",
+  "version": "local",
   "private": true,
   "description": "PupaKit Widgets",
   "keywords": [
@@ -22,9 +22,9 @@
     "@angular/core": "^14.2.0"
   },
   "dependencies": {
-    "@bimeister/pupakit.common": "^0.2.0",
-    "@bimeister/pupakit.icons": "^0.2.0",
-    "@bimeister/pupakit.kit": "^0.2.0",
+    "@bimeister/pupakit.common": "*",
+    "@bimeister/pupakit.icons": "*",
+    "@bimeister/pupakit.kit": "*",
     "tslib": "^2.3.0"
   },
   "main": "dist"
