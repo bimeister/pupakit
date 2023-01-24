@@ -4,7 +4,6 @@ import { PupaDrawerModule } from './components/drawer/drawer.module';
 import { PupaModalModule } from './components/modal/modal.module';
 import { PupaPopoverModule } from './components/popover/popover.module';
 import { PupaToastModule } from './components/toast/toast.module';
-import { PupaDndModule } from './components/dnd/dnd.module';
 
 const MODULES: Type<unknown>[] = [
   PupaModalModule,
@@ -12,7 +11,6 @@ const MODULES: Type<unknown>[] = [
   PupaPopoverModule,
   PupaToastModule,
   PupaAlertModule,
-  PupaDndModule,
 ];
 
 @NgModule({

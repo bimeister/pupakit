@@ -51,3 +51,9 @@ runs:
       with:
         key: 'dist:widgets:${{github.sha}}'
         path: ./projects/widgets/dist
+
+    - name: Cache build dnd
+      uses: actions/cache@v3
+      with:
+        key: 'dist:dnd:${{github.sha}}'
+        path: ./projects/dnd/dist

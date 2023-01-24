@@ -138,10 +138,14 @@ export class SidebarComponent {
         { title: 'Drawer', link: '/kit/drawer' },
         { title: 'Modal', link: '/kit/modal' },
         { title: 'Popover', link: '/kit/popover' },
-        { title: 'Dnd', link: '/kit/dnd' },
       ],
       'title'
     ),
+  };
+
+  private readonly dndGroup: LinksGroup = {
+    title: 'Drag&drop',
+    linkItems: sortByProperty([{ title: 'Drag&drop', link: '/kit/dnd' }], 'title'),
   };
 
   private readonly demoToolsGroup: LinksGroup = {
@@ -164,6 +168,7 @@ export class SidebarComponent {
     this.tableGroup,
     this.treeGroup,
     this.widgetsGroup,
+    this.dndGroup,
     this.demoToolsGroup,
   ];
 

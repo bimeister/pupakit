@@ -1,7 +1,6 @@
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { appArrowFullBotIcon, appArrowFullTopIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
-
 import { CommonModule } from '@angular/common';
 import { PupaCommonModule } from '@bimeister/pupakit.common';
 import { PupaScrollableModule, PupaSkeletonModule } from '@bimeister/pupakit.kit';
@@ -17,7 +16,7 @@ import { TablePlaceholderRowContainerComponent } from './components/system/table
 import { TableComponent } from './components/system/table/table.component';
 import { TableBodyCellTemplateDirective } from './directives/table-cell-template.directive';
 import { TableHeaderCellTemplateDirective } from './directives/table-header-cell-template.directive';
-import { PupaDndModule } from '@bimeister/pupakit.overlays';
+import { PupaDndModule } from '@bimeister/pupakit.dnd';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableBodyCellContainerComponent,

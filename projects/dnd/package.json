@@ -1,0 +1,35 @@
+{
+  "name": "@bimeister/pupakit.dnd",
+  "version": "local",
+  "private": true,
+  "description": "PupaKit Dnd",
+  "keywords": [
+    "angular",
+    "dnd",
+    "drag-and-drop"
+  ],
+  "license": "Apache-2.0",
+  "homepage": "https://github.com/bimeister/pupakit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bimeister/pupakit",
+    "directory": "projects/dnd"
+  },
+  "bugs": {
+    "url": "https://github.com/bimeister/utilities/issues",
+    "email": "opensource@bimeister.com"
+  },
+  "scripts": {
+    "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.2.0",
+    "@angular/core": "^14.2.0",
+    "@bimeister/utilities": "*"
+  },
+  "dependencies": {
+    "@bimeister/pupakit.common": "*",
+    "tslib": "^2.3.0"
+  },
+  "main": "dist"
+}

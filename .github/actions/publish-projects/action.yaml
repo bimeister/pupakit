@@ -23,6 +23,7 @@ runs:
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/table/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/tree/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/widgets/dist/.npmrc
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/dnd/dist/.npmrc
 
     - name: Publish common
       shell: bash
@@ -55,3 +56,7 @@ runs:
     - name: Publish widgets
       shell: bash
       run: cd projects/widgets/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
+
+    - name: Publish dnd
+      shell: bash
+      run: cd projects/dnd/dist && npm publish --access public --tag ${{inputs.tag}} && cd -

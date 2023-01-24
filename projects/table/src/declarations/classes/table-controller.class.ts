@@ -12,7 +12,7 @@ import { TableDataDisplayCollection } from './table-data-display-collection.clas
 import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
 import TableEventBase = TableEvents.TableEventBase;
 import TableFeatureEventBase = TableFeatureEvents.TableFeatureEventBase;
-import { DndSettings } from '@bimeister/pupakit.common/declarations/interfaces/dnd-settings.interface';
+import { DndSettings } from '@bimeister/pupakit.dnd';
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
 

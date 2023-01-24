@@ -1,0 +1,10 @@
+@use 'functions' as *;
+
+:host {
+  display: block;
+  width: fit-content;
+  padding: 1rem 2rem;
+  border-radius: 1rem;
+  color: semantic-color(surface-primary);
+  background: semantic-color(kind-primary-normal);
+}

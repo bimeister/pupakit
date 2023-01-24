@@ -15,6 +15,12 @@
       "@bimeister/pupakit.common/*": [
         "../common/src/*"
       ],
+      "@bimeister/pupakit.dnd": [
+        "../dnd/src/index.ts"
+      ],
+      "@bimeister/pupakit.dnd/*": [
+        "../dnd/src/*"
+      ],
       "@bimeister/pupakit.icons": [
         "../icons/src/index.ts"
       ],
@@ -51,6 +57,9 @@
   "references": [
     {
       "path": "../common"
+    },
+    {
+      "path": "../dnd"
     },
     {
       "path": "../icons"

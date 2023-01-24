@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DndDropData, DndItem } from '@bimeister/pupakit.overlays';
+import { DndDropData, DndItem } from '@bimeister/pupakit.dnd';
+import { dndHostData as hostData } from './data/dnd-host.data';
+import { dndMoveData as moveData } from './data/dnd-move.data';
+import { dndDropData as dropData } from './data/dnd-drop.data';
+import { dndItemData } from './data/dnd-item.data';
 
 const BASE_REQUEST_PATH: string = 'dnd-demo/examples';
 
@@ -20,22 +24,19 @@ export function generateData(count: number): DndData[] {
 
 export function moveDndItemsToTarget(
   dndTargetHostData: DndData[],
-  dndDropData: DndDropData,
+  dndDropData: DndDropData<DndData, DndData>,
   targetHostIsSource: boolean = false
 ): void {
-  const sourceItems: DndItem<DndData>[] = dndDropData.dndSourceItems as DndItem<DndData>[];
-  const targetItem: DndItem<DndData> = dndDropData.dndTargetItem as DndItem<DndData>;
-
   if (targetHostIsSource) {
-    removeSourceDndItems(dndTargetHostData, sourceItems);
+    removeSourceDndItems(dndTargetHostData, dndDropData.dndSourceItems);
   }
 
-  const targetItemIndex: number = dndTargetHostData.indexOf(targetItem.data);
+  const targetItemIndex: number = dndTargetHostData.indexOf(dndDropData.dndTargetItem.data);
 
   dndTargetHostData.splice(
     targetItemIndex + 1,
     0,
-    ...sourceItems.map((sourceItem: DndItem<DndData>) => sourceItem.data)
+    ...dndDropData.dndSourceItems.map((sourceItem: DndItem<DndData>) => sourceItem.data)
   );
 }
 
@@ -64,10 +65,17 @@ export class DndDemoComponent {
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
   };
 
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
   };
+
+  public readonly dndHostDeclaration: string = hostData;
+  public readonly dndMoveDeclaration: string = moveData;
+  public readonly dndDropDeclaration: string = dropData;
+  public readonly dndItemDeclaration: string = dndItemData;
 }

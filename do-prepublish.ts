@@ -9,7 +9,17 @@ const GIT_COMMIT_HASH: string | undefined = env.GIT_COMMIT_HASH;
 const CURRENT_LOCATION: string = join(__dirname, 'projects');
 const VERSION: string | undefined = env.VERSION;
 
-const PUBLISH_PROJECT_FOLDERS: string[] = ['common', 'forms', 'icons', 'kit', 'overlays', 'table', 'tree', 'widgets'];
+const PUBLISH_PROJECT_FOLDERS: string[] = [
+  'common',
+  'forms',
+  'icons',
+  'kit',
+  'overlays',
+  'table',
+  'tree',
+  'widgets',
+  'dnd',
+];
 
 async function preparePackages(): Promise<void> {
   for (const projectPath of PUBLISH_PROJECT_FOLDERS) {

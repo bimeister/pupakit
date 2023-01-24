@@ -1,5 +1,12 @@
 <div class="wrapper">
-  <pupa-dnd-host class="element" (dndMove)="processMoved1($event)" (dndDrop)="processDropped1($event)">
+  <pupa-dnd-host
+    class="element"
+    [dndHostId]="dndHost1Id"
+    (dndMove)="processMoved1($event)"
+    (dndDrop)="processDropped1($event)"
+    [sourceType]="sourceType"
+    [targetType]="targetType"
+  >
     <pupa-dnd-indicator
       *ngIf="dndIndicatorTopPx1$ | async"
       [topCoordsPx]="dndIndicatorTopPx1$ | async"
@@ -17,7 +24,14 @@
     </pupa-option>
   </pupa-dnd-host>
 
-  <pupa-dnd-host class="element" (dndMove)="processMoved2($event)" (dndDrop)="processDropped2($event)">
+  <pupa-dnd-host
+    class="element"
+    [dndHostId]="dndHost2Id"
+    (dndMove)="processMoved2($event)"
+    (dndDrop)="processDropped2($event)"
+    [sourceType]="sourceType"
+    [targetType]="targetType"
+  >
     <pupa-dnd-indicator
       *ngIf="dndIndicatorTopPx2$ | async"
       [topCoordsPx]="dndIndicatorTopPx2$ | async"

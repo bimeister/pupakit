@@ -1,0 +1,12 @@
+type: 'library'
+language: 'typescript'
+
+project:
+  name: 'dnd'
+  description: 'PupaKit Dnd'
+  channel: '#'
+  owner: 'Bimeister Team'
+  maintainers: []
+
+dependsOn:
+  - 'common'

@@ -9,6 +9,7 @@ import { PupaAlertModule, PupaOverlaysModule } from '@bimeister/pupakit.overlays
 import { PupaTableModule } from '@bimeister/pupakit.table';
 import { PupaTreeModule } from '@bimeister/pupakit.tree';
 import { PupaWidgetsModule } from '@bimeister/pupakit.widgets';
+import { PupaDndModule } from '@bimeister/pupakit.dnd';
 import { AlertsToolbarExampleComponent } from '../pages/alerts-demo/examples/alerts-toolbar-example/alerts-toolbar-example.component';
 import { AnchorModule } from './components/anchor/anchor.module';
 import { CodeModule } from './components/code/code.module';
@@ -31,6 +32,7 @@ const MODULES: Type<unknown>[] = [
   PupaTreeModule,
   PupaOverlaysModule,
   PupaWidgetsModule,
+  PupaDndModule,
 ];
 
 @NgModule({

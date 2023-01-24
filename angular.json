@@ -603,6 +603,66 @@
           }
         }
       }
+    },
+    "dnd": {
+      "projectType": "library",
+      "root": "projects/dnd",
+      "sourceRoot": "projects/dnd/src",
+      "prefix": "pupa",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/dnd/ng-package.json",
+            "tsConfig": "projects/dnd/tsconfig.lib.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "configurations": {
+            "debugging": {
+              "fix": true,
+              "force": true,
+              "quiet": true
+            },
+            "inspection": {
+              "fix": false,
+              "force": false,
+              "quiet": true
+            },
+            "inspection-ci": {
+              "fix": false,
+              "force": false,
+              "quiet": false
+            }
+          },
+          "options": {
+            "lintFilePatterns": ["./projects/dnd/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@angular-builders/jest:run",
+          "configurations": {
+            "ci": {
+              "bail": true,
+              "cache": false,
+              "ci": true,
+              "watch": false,
+              "configPath": "jest.config.ci.js"
+            },
+            "debugging": {
+              "bail": false,
+              "cache": true,
+              "ci": false,
+              "watch": true,
+              "configPath": "jest.config.development.js"
+            }
+          },
+          "options": {
+            "passWithNoTests": true
+          }
+        }
+      }
     }
   },
   "schematics": {
