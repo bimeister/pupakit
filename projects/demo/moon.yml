@@ -17,6 +17,7 @@ dependsOn:
   - 'table'
   - 'widgets'
   - 'forms'
+  - 'dnd'
 
 workspace:
   inheritedTasks:

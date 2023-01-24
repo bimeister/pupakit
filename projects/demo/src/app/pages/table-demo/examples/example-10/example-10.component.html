@@ -1,0 +1,7 @@
+<div class="table" *ngIf="controller$ | async as controller">
+  <pupa-table *ngIf="controller" [controller]="controller"></pupa-table>
+</div>
+
+<ng-template #dndCloneTemplate let-data>
+  <pupa-dnd-clone-wrapper>{{ data.firstName }} {{ data.lastName }} from {{ data.city }}</pupa-dnd-clone-wrapper>
+</ng-template>

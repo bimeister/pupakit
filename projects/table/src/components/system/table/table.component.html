@@ -58,6 +58,7 @@
 
   <div class="table__body table-body">
     <pupa-dnd-host
+      dndHostId="pupa-table"
       [isDraggable]="!(dndRowsSettings | isNullOrUndefined)"
       [dndCloneItemsOffset]="dndRowsSettings?.dndCloneItemsOffset"
       (dndMove)="processDndMove($event)"

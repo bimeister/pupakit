@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.overlays';
 import { canBeDroppableFor, DndData, generateData, moveDndItemsToTarget } from '../../dnd-demo.component';
 import { BehaviorSubject } from 'rxjs';
-import { DndCanBeDroppableForFunc } from '@bimeister/pupakit.overlays/declarations/types/dnd-can-be-droppable-for-func.type';
+import { DndCanBeDroppableForFunc, DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.dnd';
 
 @Component({
   selector: 'demo-example-1',
@@ -15,18 +14,19 @@ export class Example1Component {
   public readonly dndIndicatorTopPx$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   public readonly canBeDroppableForFunc: DndCanBeDroppableForFunc<DndData> = canBeDroppableFor;
 
-  public processMoved(dndMoveData: DndMoveData): void {
-    if (!dndMoveData.currentHostIsSource) {
-      return;
-    }
+  public readonly sourceType: DndData;
+  public readonly targetType: DndData;
 
-    if (!dndMoveData.currentHostIsTarget) {
+  public processMoved(dndMoveData: DndMoveData<DndData, DndData>): void {
+    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map(
+      (dndSourceItem: DndItem<DndData>) => dndSourceItem.id
+    );
+    if (
+      !dndMoveData.currentHostIsSource ||
+      !dndMoveData.currentHostIsTarget ||
+      sourceItemIds.includes(dndMoveData.dndTargetItem.id)
+    ) {
       this.dndIndicatorTopPx$.next(null);
-      return;
-    }
-
-    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map((dndSourceItem: DndItem) => dndSourceItem.id);
-    if (sourceItemIds.includes(dndMoveData.dndTargetItem.id)) {
       return;
     }
 
@@ -37,8 +37,8 @@ export class Example1Component {
     this.dndIndicatorTopPx$.next(null);
   }
 
-  public processDropped(dndDropData: DndDropData): void {
-    if (!dndDropData.currentHostIsSource) {
+  public processDropped(dndDropData: DndDropData<DndData, DndData>): void {
+    if (!dndDropData.currentHostIsSource || !dndDropData.currentHostIsTarget) {
       return;
     }
 

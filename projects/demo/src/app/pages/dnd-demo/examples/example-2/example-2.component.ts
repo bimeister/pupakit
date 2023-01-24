@@ -7,8 +7,7 @@ import {
   removeSourceDndItems,
 } from '../../dnd-demo.component';
 import { BehaviorSubject } from 'rxjs';
-import { DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.overlays';
-import { DndCanBeDroppableForFunc } from '@bimeister/pupakit.overlays/declarations/types/dnd-can-be-droppable-for-func.type';
+import { DndCanBeDroppableForFunc, DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.dnd';
 
 @Component({
   selector: 'demo-example-2',
@@ -17,6 +16,9 @@ import { DndCanBeDroppableForFunc } from '@bimeister/pupakit.overlays/declaratio
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Example2Component {
+  public readonly dndHost1Id: string = 'example2DndHost1Id';
+  public readonly dndHost2Id: string = 'example2DndHost2Id';
+
   public readonly dndHost1Data: DndData[] = generateData(10);
   public readonly dndHost2Data: DndData[] = generateData(10);
 
@@ -25,14 +27,15 @@ export class Example2Component {
 
   public readonly canBeDroppableForFunc: DndCanBeDroppableForFunc<DndData> = canBeDroppableFor;
 
-  public processMoved1(dndMoveData: DndMoveData): void {
-    if (!dndMoveData.currentHostIsTarget) {
-      this.dndIndicatorTopPx1$.next(null);
-      return;
-    }
+  public readonly sourceType: DndData;
+  public readonly targetType: DndData;
 
-    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map((dndSourceItem: DndItem) => dndSourceItem.id);
-    if (sourceItemIds.includes(dndMoveData.dndTargetItem.id)) {
+  public processMoved1(dndMoveData: DndMoveData<DndData, DndData>): void {
+    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map(
+      (dndSourceItem: DndItem<DndData>) => dndSourceItem.id
+    );
+    if (!dndMoveData.currentHostIsTarget || sourceItemIds.includes(dndMoveData.dndTargetItem.id)) {
+      this.dndIndicatorTopPx1$.next(null);
       return;
     }
 
@@ -43,7 +46,15 @@ export class Example2Component {
     this.dndIndicatorTopPx1$.next(null);
   }
 
-  public processDropped1(dndDropData: DndDropData): void {
+  public processDropped1(dndDropData: DndDropData<DndData, DndData>): void {
+    if (dndDropData.dndSourceHostId !== this.dndHost1Id && dndDropData.dndSourceHostId !== this.dndHost2Id) {
+      return;
+    }
+
+    if (dndDropData.dndTargetHostId !== this.dndHost1Id && dndDropData.dndTargetHostId !== this.dndHost2Id) {
+      return;
+    }
+
     this.dndIndicatorTopPx1$.next(null);
 
     if (dndDropData.currentHostIsSource && dndDropData.currentHostIsTarget) {
@@ -52,21 +63,19 @@ export class Example2Component {
     }
 
     if (dndDropData.currentHostIsSource) {
-      removeSourceDndItems(this.dndHost1Data, dndDropData.dndSourceItems as DndItem<DndData>[]);
+      removeSourceDndItems(this.dndHost1Data, dndDropData.dndSourceItems);
       return;
     }
 
     moveDndItemsToTarget(this.dndHost1Data, dndDropData);
   }
 
-  public processMoved2(dndMoveData: DndMoveData): void {
-    if (!dndMoveData.currentHostIsTarget) {
+  public processMoved2(dndMoveData: DndMoveData<DndData, DndData>): void {
+    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map(
+      (dndSourceItem: DndItem<DndData>) => dndSourceItem.id
+    );
+    if (!dndMoveData.currentHostIsTarget || sourceItemIds.includes(dndMoveData.dndTargetItem.id)) {
       this.dndIndicatorTopPx2$.next(null);
-      return;
-    }
-
-    const sourceItemIds: string[] = dndMoveData.dndSourceItems.map((dndSourceItem: DndItem) => dndSourceItem.id);
-    if (sourceItemIds.includes(dndMoveData.dndTargetItem.id)) {
       return;
     }
 
@@ -77,7 +86,15 @@ export class Example2Component {
     this.dndIndicatorTopPx2$.next(null);
   }
 
-  public processDropped2(dndDropData: DndDropData): void {
+  public processDropped2(dndDropData: DndDropData<DndData, DndData>): void {
+    if (dndDropData.dndSourceHostId !== this.dndHost1Id && dndDropData.dndSourceHostId !== this.dndHost2Id) {
+      return;
+    }
+
+    if (dndDropData.dndTargetHostId !== this.dndHost1Id && dndDropData.dndTargetHostId !== this.dndHost2Id) {
+      return;
+    }
+
     this.dndIndicatorTopPx2$.next(null);
 
     if (dndDropData.currentHostIsSource && dndDropData.currentHostIsTarget) {
@@ -86,7 +103,7 @@ export class Example2Component {
     }
 
     if (dndDropData.currentHostIsSource) {
-      removeSourceDndItems(this.dndHost2Data, dndDropData.dndSourceItems as DndItem<DndData>[]);
+      removeSourceDndItems(this.dndHost2Data, dndDropData.dndSourceItems);
       return;
     }
 

@@ -1,4 +1,9 @@
-<pupa-dnd-host (dndMove)="processMoved($event)" (dndDrop)="processDropped($event)">
+<pupa-dnd-host
+  (dndMove)="processMoved($event)"
+  (dndDrop)="processDropped($event)"
+  [sourceType]="sourceType"
+  [targetType]="targetType"
+>
   <pupa-dnd-indicator
     *ngIf="dndIndicatorTopPx$ | async"
     [topCoordsPx]="dndIndicatorTopPx$ | async"

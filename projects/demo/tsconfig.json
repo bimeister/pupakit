@@ -10,6 +10,12 @@
       "@bimeister/pupakit.common/*": [
         "../common/src/*"
       ],
+      "@bimeister/pupakit.dnd": [
+        "../dnd/src/index.ts"
+      ],
+      "@bimeister/pupakit.dnd/*": [
+        "../dnd/src/*"
+      ],
       "@bimeister/pupakit.forms": [
         "../forms/src/index.ts"
       ],
@@ -84,6 +90,9 @@
     },
     {
       "path": "../widgets"
+    },
+    {
+      "path": "../dnd"
     }
   ]
 }

@@ -39,6 +39,7 @@
     "@bimeister/pupakit.table": "*",
     "@bimeister/pupakit.tree": "*",
     "@bimeister/pupakit.widgets": "*",
+    "@bimeister/pupakit.dnd": "*",
     "tslib": "^2.3.0"
   },
   "main": "dist"

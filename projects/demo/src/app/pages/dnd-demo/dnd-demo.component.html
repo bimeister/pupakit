@@ -7,9 +7,32 @@
       <demo-example-1 *pupaCodeContainerPreviewTemplate></demo-example-1>
     </pupa-code-container>
 
-    <h3 demoAnchor>Move items in current host and between different hosts</h3>
+    <h3 demoAnchor>
+      Move items in current host and between different hosts (hold down the shift key for moving multiple items)
+    </h3>
     <pupa-code-container [content]="example2Content">
       <demo-example-2 *pupaCodeContainerPreviewTemplate></demo-example-2>
     </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <h3 demoAnchor>DndHostComponent</h3>
+    <p>Wrapper for draggable items. Also this component is a drop zone for draggable items of other hosts</p>
+    <pupa-code [code]="dndHostDeclaration"></pupa-code>
+
+    <h3 demoAnchor>DndMoveData</h3>
+    <p>Interface of data, emitted by dndMove event of host element</p>
+    <pupa-code [code]="dndMoveDeclaration"></pupa-code>
+
+    <h3 demoAnchor>DndDropData</h3>
+    <p>Interface of data, emitted by dndDrop event of host element</p>
+    <pupa-code [code]="dndDropDeclaration"></pupa-code>
+
+    <h3 demoAnchor>DndItemDirective</h3>
+    <p>Draggable item directive</p>
+    <pupa-code [code]="dndItemDeclaration"></pupa-code>
+
+    <h3 demoAnchor>PupaDndIndicatorComponent</h3>
+    <p>Can be used for highlighting droppable zone of target item</p>
   </div>
 </demo-page>

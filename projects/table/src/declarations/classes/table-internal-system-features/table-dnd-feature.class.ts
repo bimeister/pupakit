@@ -15,8 +15,8 @@ import { TableHeaderCellContext } from '../../interfaces/table-header-cell-conte
 import { TableTemplatesRegistry } from '../../interfaces/tables-templates-registry.interface';
 import { TableColumn } from '../table-column.class';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
-import { DndCloneService } from '@bimeister/pupakit.overlays';
 import { ConnectedPosition } from '@angular/cdk/overlay';
+import { DndCloneService } from '@bimeister/pupakit.dnd';
 
 const SCROLL_SPEED_PX: number = 5;
 

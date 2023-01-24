@@ -13,3 +13,4 @@ dependsOn:
   - 'icons'
   - 'kit'
   - 'overlays'
+  - 'dnd'

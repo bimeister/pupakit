@@ -31,6 +31,7 @@
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
     "@bimeister/pupakit.overlays": "*",
+    "@bimeister/pupakit.dnd": "*",
     "tslib": "^2.3.0"
   },
   "main": "dist"

@@ -53,8 +53,7 @@ import {
   QueueEvents,
 } from '@bimeister/pupakit.common';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
-import { DndSettings } from '@bimeister/pupakit.common/declarations/interfaces/dnd-settings.interface';
-import { DndDropData, DndMoveData } from '@bimeister/pupakit.overlays';
+import { DndDropData, DndMoveData, DndSettings } from '@bimeister/pupakit.dnd';
 
 const SCROLL_SPEED_PX: number = 5;
 
@@ -227,7 +226,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   );
   public readonly dndIndicatorTopPxCoords$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
   public readonly currentDndTargetItemId$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
-  private dndScrollIsActive: boolean = false;
 
   private readonly internalSystemFeatures: TableFeatureConstructor<T>[] = [
     TableCommonFeature,
@@ -294,7 +292,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.dndRowsSettings$.pipe(filterNotNil(), take(1)).subscribe((dndRowsSettings: DndSettings<T>) => {
       dndRowsSettings.dndOnDrop(dndDropData);
       this.scrollableContainerRef.stopScrollTopByDeltaLoop();
-      this.dndScrollIsActive = false;
       this.dndIndicatorTopPxCoords$.next(null);
       this.currentDndTargetItemId$.next(null);
     });
@@ -388,8 +385,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   private checkAndStartScrollLoop(positionY: number): void {
     this.scrollableContainerRef.stopScrollTopByDeltaLoop();
 
-    this.dndScrollIsActive = true;
-
     if (this.scrollableContainerRef.isIntersectsTopScrollTriggerZone(positionY)) {
       this.scrollableContainerRef.startScrollTopByDeltaLoop(-SCROLL_SPEED_PX);
       return;
@@ -399,8 +394,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       this.scrollableContainerRef.startScrollTopByDeltaLoop(SCROLL_SPEED_PX);
       return;
     }
-
-    this.dndScrollIsActive = false;
   }
 
   private highlightDndDroppableZone(dndMoveData: DndMoveData): void {
@@ -410,9 +403,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       return;
     }
 
-    if (!this.dndScrollIsActive) {
-      this.dndIndicatorTopPxCoords$.next(dndMoveData.dndIndicatorCoords);
-    }
+    this.dndIndicatorTopPxCoords$.next(dndMoveData.dndIndicatorCoords);
   }
 
   private measureFirstVisibleListRange(): void {
