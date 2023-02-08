@@ -4,6 +4,7 @@
   <input
     class="input"
     type="number"
+    step="any"
     #inputElement
     [placeholder]="placeholder"
     [attr.disabled]="(isDisabled$ | async) ? true : null"
