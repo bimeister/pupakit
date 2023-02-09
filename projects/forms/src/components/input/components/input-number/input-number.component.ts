@@ -12,8 +12,8 @@ import { ValueType } from '../../../../declarations/types/input-value.type';
 })
 export class InputNumberComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
-    const serializedValue: number | string = isEmpty(value) ? '' : Number(value);
-    this.value$.next(serializedValue);
+    const sanitizedValue: string = isEmpty(value) ? '' : String(value);
+    this.value$.next(sanitizedValue);
   }
 
   public reset(): void {
