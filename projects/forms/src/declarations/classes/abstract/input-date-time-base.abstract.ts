@@ -58,10 +58,11 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.isIconHovered$,
     this.valueIsNotEmpty$,
     this.withReset$,
+    this.isDisabled$,
   ]).pipe(
     map(
-      ([isIconHovered, valueIsNotEmpty, withReset]: [boolean, boolean, boolean]) =>
-        isIconHovered && valueIsNotEmpty && withReset
+      ([isIconHovered, valueIsNotEmpty, withReset, isDisabled]: [boolean, boolean, boolean, boolean]) =>
+        isIconHovered && valueIsNotEmpty && withReset && !isDisabled
     )
   );
 
@@ -305,7 +306,13 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public reset(): void {
-    this.withReset$.pipe(take(1), filterTruthy()).subscribe(() => this.updateValue(''));
+    combineLatest([this.withReset$, this.isDisabled$])
+      .pipe(
+        map(([withReset, isDisabled]: [boolean, boolean]) => withReset && !isDisabled),
+        take(1),
+        filterTruthy()
+      )
+      .subscribe(() => this.updateValue(''));
     this.inputElementRef.nativeElement.focus();
   }
 
