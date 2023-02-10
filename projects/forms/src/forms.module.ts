@@ -8,6 +8,7 @@ import { PupaInputModule } from './components/input/input.module';
 import { PupaLabelModule } from './components/label/label.module';
 import { PupaRadioGroupModule } from './components/radio-group/radio-group.module';
 import { PupaRatingModule } from './components/rating/rating.module';
+import { PupaRequiredFieldModule } from './components/required-field/required-field.module';
 import { PupaSearchFieldModule } from './components/search-field/search-field.module';
 import { PupaSelectModule } from './components/select/select.module';
 import { PupaSwitcherModule } from './components/switcher/switcher.module';
@@ -26,6 +27,7 @@ const MODULES: Type<unknown>[] = [
   PupaFormLayoutModule,
   PupaSwitcherModule,
   PupaRatingModule,
+  PupaRequiredFieldModule,
   PupaLabelModule,
 ];
 

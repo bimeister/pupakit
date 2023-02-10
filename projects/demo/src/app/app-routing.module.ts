@@ -1,6 +1,5 @@
 import { NgModule, Type } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { InfinityScrollerDemoModule } from './pages/infinity-scroller-demo/infinity-scroller-demo.module';
 import { KitLayoutComponent } from './layouts/kit-layout/kit-layout.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { AccordionDemoModule } from './pages/accordion-demo/accordion-demo.module';
@@ -9,7 +8,11 @@ import { AdaptiveDemoModule } from './pages/adaptive-demo/adaptive-demo.module';
 import { AvatarDemoModule } from './pages/avatar-demo/avatar-demo.module';
 import { BadgeDemoModule } from './pages/badge-demo/badge-demo.module';
 import { BreadcrumbsDemoModule } from './pages/breadcrumbs-demo/breadcrumbs-demo.module';
+import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
 import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-demo.module';
+import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.module';
+import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
+import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
@@ -17,11 +20,15 @@ import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { CounterDemoModule } from './pages/counter-demo/counter-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
+import { DndDemoModule } from './pages/dnd-demo/dnd-demo.module';
 import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
+import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
+import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 import { IconsPageModule } from './pages/icons-page/icons-page.module';
+import { InfinityScrollerDemoModule } from './pages/infinity-scroller-demo/infinity-scroller-demo.module';
 import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
 import { InputDemoModule } from './pages/input-demo/input-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
@@ -30,12 +37,15 @@ import { LoaderDemoModule } from './pages/loader-demo/loader-demo.module';
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { ModalDemoModule } from './pages/modal-demo/modal-demo.module';
 import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
+import { OptionDemoModule } from './pages/option-demo/option-demo.module';
 import { PagedVirtualScrollDemoModule } from './pages/paged-virtual-scroll-demo/paged-virtual-scroll-demo.module';
 import { RadioButtonDemoModule } from './pages/radio-button-demo/radio-button-demo.module';
 import { RatingDemoModule } from './pages/rating-demo/rating-demo.module';
+import { RequiredFieldDemoModule } from './pages/required-field-demo/required-field-demo.module';
 import { ScrollableDemoModule } from './pages/scrollable-demo/scrollable-demo.module';
 import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.module';
 import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
+import { SectionDemoModule } from './pages/section-demo/section-demo.module';
 import { SelectDemoModule } from './pages/select-demo/select-demo.module';
 import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
@@ -49,15 +59,7 @@ import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
-import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
-import { OptionDemoModule } from './pages/option-demo/option-demo.module';
-import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
-import { SectionDemoModule } from './pages/section-demo/section-demo.module';
-import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.module';
-import { ButtonDemoModule } from './pages/button-demo/button-demo.module';
-import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
-import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
-import { DndDemoModule } from './pages/dnd-demo/dnd-demo.module';
+
 const demoRoutes: Routes = [
   {
     path: 'kit',
@@ -161,6 +163,13 @@ const demoRoutes: Routes = [
         path: 'label',
         loadChildren: (): Promise<Type<LabelDemoModule>> =>
           import('./pages/label-demo/label-demo.module').then((module: any) => module.LabelDemoModule),
+      },
+      {
+        path: 'required-field',
+        loadChildren: (): Promise<Type<RequiredFieldDemoModule>> =>
+          import('./pages/required-field-demo/required-field-demo.module').then(
+            (module: any) => module.RequiredFieldDemoModule
+          ),
       },
       {
         path: 'search-field',

@@ -1,0 +1,13 @@
+@use 'functions' as *;
+
+.content {
+  position: relative;
+  padding-left: 2.5rem;
+
+  &__required-asterisk {
+    color: semantic-color(kind-danger-normal);
+    position: absolute;
+    top: -1rem;
+    left: 0;
+  }
+}
