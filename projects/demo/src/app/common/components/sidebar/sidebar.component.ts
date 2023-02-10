@@ -77,6 +77,7 @@ export class SidebarComponent {
         { title: 'Textarea', link: '/kit/textarea' },
         { title: 'Date time pickers', link: '/kit/date-time-picker' },
         { title: 'Label', link: '/kit/label' },
+        { title: 'Required Field', link: '/kit/required-field' },
         { title: 'Checkbox', link: '/kit/checkbox' },
         { title: 'Radio buttons', link: '/kit/radio' },
         { title: 'Switcher', link: '/kit/switcher' },
