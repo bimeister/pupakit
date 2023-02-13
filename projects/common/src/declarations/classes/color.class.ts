@@ -19,7 +19,7 @@ export class Color {
   private getRgb(): [number, number, number] {
     return [
       parseInt(this.hex.substring(0, 2), 16),
-      parseInt(this.hex.substring(2, 2), 16),
+      parseInt(this.hex.substring(2, 4), 16),
       parseInt(this.hex.substring(4, 2), 16),
     ];
   }
