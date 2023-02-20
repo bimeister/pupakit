@@ -1,14 +1,21 @@
 <div class="accordion" [ngClass]="accordionClass$ | async" [class.accordion_expanded]="expanded$ | async">
-  <div class="accordion-header" [class.accordion-header_expanded]="expanded$ | async" (click)="toggle()">
-    <div class="accordion-header__content" [class.accordion-header__content_with-arrow]="showArrow">
+  <div
+    class="accordion-header"
+    [class.accordion-header_expanded]="expanded$ | async"
+    [class.accordion-header_sticky]="stickyHeader"
+    (click)="toggle()"
+  >
+    <div class="accordion-header__content">
       <ng-content></ng-content>
     </div>
 
-    <ng-container *ngIf="showArrow">
-      <div class="arrow-container">
-        <pupa-icon name="app-chevron-down" [@arrowRotated]="animationState$ | async"></pupa-icon>
-      </div>
-    </ng-container>
+    <div class="accordion-header__action" *ngIf="!(actionTemplate | isNullOrUndefined)">
+      <ng-container [ngTemplateOutlet]="actionTemplate?.templateRef"></ng-container>
+    </div>
+
+    <div class="accordion-header__action" *ngIf="showArrow">
+      <pupa-icon name="app-chevron-down" [@arrowRotated]="animationState$ | async"></pupa-icon>
+    </div>
   </div>
 
   <ng-container *ngIf="!destroyable || (expanded$ | async)">

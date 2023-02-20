@@ -30,4 +30,19 @@ export class AccordionDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
   };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
+  };
+
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
+  };
+
+  public readonly example7Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-7/example-7.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-7/example-7.component.scss`,
+  };
 }
