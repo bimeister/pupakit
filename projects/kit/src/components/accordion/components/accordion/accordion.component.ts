@@ -3,12 +3,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ContentChild,
   EventEmitter,
   Input,
   OnChanges,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import { PupaAccordionActionTemplateDirective } from '../../directives/accordion-action-template.directive';
 import { AccordionKind } from '../../../../declarations/types/accordion-kind.type';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -43,9 +45,14 @@ const TRANSITION: string = '300ms ease-in-out';
   ],
 })
 export class AccordionComponent implements OnChanges {
+  @ContentChild(PupaAccordionActionTemplateDirective)
+  public readonly actionTemplate: PupaAccordionActionTemplateDirective;
+
   @Input() public showArrow: boolean = true;
 
   @Input() public destroyable: boolean = true;
+
+  @Input() public stickyHeader: boolean = false;
 
   @Input() public kind: AccordionKind = 'normal';
   public readonly kind$: BehaviorSubject<AccordionKind> = new BehaviorSubject<AccordionKind>(this.kind);

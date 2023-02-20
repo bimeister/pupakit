@@ -3,7 +3,6 @@
 .example-container {
   display: flex;
   flex-direction: column;
-  gap: 4rem;
 
   &__title {
     @include font-preset-h5();

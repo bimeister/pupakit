@@ -1,0 +1,14 @@
+<div class="example-container">
+  <pupa-scrollable>
+    <pupa-accordion-group>
+      <pupa-accordion *ngFor="let item of [].constructor(10)" [kind]="'border-bottom'" [stickyHeader]="true">
+        <span class="example-container__title">Border Bottom</span>
+        <pupa-accordion-body>
+          <div class="demo-content">
+            <div *ngFor="let item of [].constructor(50)">🎳</div>
+          </div>
+        </pupa-accordion-body>
+      </pupa-accordion>
+    </pupa-accordion-group>
+  </pupa-scrollable>
+</div>

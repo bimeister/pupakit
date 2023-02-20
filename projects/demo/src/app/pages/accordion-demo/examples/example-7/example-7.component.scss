@@ -4,8 +4,15 @@
   display: flex;
   flex-direction: column;
   gap: 4rem;
+  overflow: hidden;
+  height: 50rem;
 
   &__title {
     @include font-preset-h5();
   }
+}
+
+.demo-content {
+  display: flex;
+  flex-direction: column;
 }

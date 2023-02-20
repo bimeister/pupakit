@@ -1,0 +1,25 @@
+<div class="example-container">
+  <pupa-accordion-group>
+    <pupa-accordion [kind]="'border-bottom'">
+      <span class="example-container__title">Counter</span>
+      <pupa-counter *pupaAccordionActionTemplate [count]="2" color="primary"></pupa-counter>
+      <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+    </pupa-accordion>
+    <pupa-accordion [kind]="'border-bottom'">
+      <span class="example-container__title">Button</span>
+      <pupa-button-icon
+        *pupaAccordionActionTemplate
+        icon="app-search"
+        size="s"
+        kind="border"
+        (click)="$event.stopPropagation()"
+      ></pupa-button-icon>
+      <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+    </pupa-accordion>
+    <pupa-accordion [kind]="'border-bottom'">
+      <span class="example-container__title">Spinner</span>
+      <pupa-spinner *pupaAccordionActionTemplate size="16px"></pupa-spinner>
+      <pupa-accordion-body>Accordion Body</pupa-accordion-body>
+    </pupa-accordion>
+  </pupa-accordion-group>
+</div>

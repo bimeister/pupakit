@@ -13,6 +13,18 @@
     background-color: semantic-color(surface-tertiary);
   }
 
+  &_border-bottom#{&}_expanded {
+    .accordion-header {
+      border-radius: 1rem;
+      background-color: semantic-color(kind-neutral-hover);
+    }
+  }
+
+  &_border-bottom {
+    border-radius: 0;
+    border-bottom: 1px solid semantic-color(lines-normal);
+  }
+
   &_normal {
     @include hover() {
       .accordion-header {
@@ -35,22 +47,25 @@ $width_arrow-icon: 14px;
   box-sizing: border-box;
   border-radius: $controlBorderRadius;
   cursor: pointer;
+  gap: 4rem;
 
   &_expanded {
     border-radius: $controlBorderRadius $controlBorderRadius 0 0;
   }
 
-  &__content {
-    max-width: 100%;
-
-    &_with-arrow {
-      max-width: calc(100% - #{$width_arrow-icon});
-    }
+  &_expanded.accordion-header_sticky {
+    position: sticky;
+    top: 0;
+    z-index: 3;
   }
-}
 
-.arrow-container {
-  display: flex;
-  align-items: center;
-  margin-left: auto;
+  &__content {
+    flex: 1;
+    @include ellipsis-text-overflow();
+  }
+
+  &__action {
+    display: flex;
+    align-items: center;
+  }
 }

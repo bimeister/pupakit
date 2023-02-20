@@ -1,1 +1,1 @@
-export type AccordionKind = 'normal' | 'border';
+export type AccordionKind = 'normal' | 'border' | 'border-bottom';
