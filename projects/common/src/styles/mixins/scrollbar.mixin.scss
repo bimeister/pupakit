@@ -22,13 +22,13 @@
     background-color: color(neutral-6, alpha-60);
 
     &:vertical {
-      border-left: 5px solid transparent;
-      border-right: 5px solid transparent;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
     }
 
     &:horizontal {
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
+      border-top: 6px solid transparent;
+      border-bottom: 6px solid transparent;
     }
 
     @include host-selector-dark-theme {

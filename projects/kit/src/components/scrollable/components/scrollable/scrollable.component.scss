@@ -68,6 +68,7 @@ $color_dark: 'neutral-600';
     right: 0;
     bottom: 0;
     display: none;
+    border: 1px solid transparent;
 
     &_external {
       transform: translateX(100%);
@@ -106,9 +107,48 @@ $color_dark: 'neutral-600';
 }
 
 .thumb-container {
-  width: 100%;
+  position: absolute;
+  left: 1rem;
   height: 100%;
+  width: 5px;
   box-sizing: border-box;
+  border-radius: 11px;
+  background-color: color(#{$color_light}, alpha-700);
+
+  @include supports-backdrop-blur {
+    background-color: color(#{$color_light});
+  }
+
+  @include host-selector-dark-theme {
+    background-color: color(#{$color_dark}, alpha-700);
+
+    @include supports-backdrop-blur {
+      background-color: color(#{$color_dark}, alpha-40);
+    }
+  }
+
+  &:hover {
+    left: 0;
+    width: 11px;
+    border: none;
+  }
+
+  &_grabbing {
+    cursor: grabbing;
+    left: 0px;
+    width: 11px;
+    border: none;
+    background-color: color(#{$color_dark}, alpha-700);
+    box-sizing: border-box;
+
+    @include host-selector-dark-theme {
+      background-color: color(#{$color_light}, alpha-700);
+    }
+  }
+
+  // width: 100%;
+  // height: 100%;
+  // box-sizing: border-box;
 
   &:not(.thumb-container_grabbing) {
     cursor: pointer;
@@ -149,13 +189,13 @@ $color_dark: 'neutral-600';
   }
 }
 
-.thumb {
-  width: 100%;
-  height: 100%;
-  backdrop-filter: blur(4px);
-  box-sizing: content-box;
-  background-color: semantic-color(lines-opacity);
-}
+// .thumb {
+//   width: 100%;
+//   height: 100%;
+//   backdrop-filter: blur(4px);
+//   box-sizing: content-box;
+//   background-color: semantic-color(lines-opacity);
+// }
 
 .track {
   position: absolute;
