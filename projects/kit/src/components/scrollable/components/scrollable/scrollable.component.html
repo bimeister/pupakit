@@ -1,6 +1,7 @@
 <div class="pupa-scrollable">
   <div class="pupa-scrollbars">
     <div #verticalScrollbar class="pupa-scrollbar pupa-scrollbar_vertical pupa-scrollbar_vertical_external">
+      <div class="pupa-scrollbar__track track"></div>
       <div
         class="pupa-scrollbar__thumb-container thumb-container"
         [class.thumb-container_grabbing]="isVerticalThumbGrabbing$ | async"
@@ -12,6 +13,7 @@
       </div>
     </div>
     <div #horizontalScrollbar class="pupa-scrollbar pupa-scrollbar_horizontal pupa-scrollbar_horizontal_external">
+      <div class="pupa-scrollbar__track track"></div>
       <div
         class="pupa-scrollbar__thumb-container thumb-container"
         [class.thumb-container_grabbing]="isHorizontalThumbGrabbing$ | async"

@@ -156,3 +156,24 @@ $color_dark: 'neutral-600';
   box-sizing: content-box;
   background-color: semantic-color(lines-opacity);
 }
+
+.track {
+  position: absolute;
+  left: 6px;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  box-sizing: border-box;
+  background-clip: content-box;
+  background-color: color(#{$color_light}, alpha-700);
+  pointer-events: auto;
+  cursor: pointer;
+
+  @include host-selector-dark-theme {
+    background-color: color(#{$color_dark}, alpha-700);
+
+    // @include supports-backdrop-blur {
+    //   background-color: color(#{$color_dark}, alpha-40);
+    // }
+  }
+}
