@@ -1,24 +1,28 @@
-<div class="pupa-scrollbars">
-  <div #verticalScrollbar class="pupa-scrollbar pupa-scrollbar_vertical pupa-scrollbar_vertical_external">
-    <div class="pupa-scrollbar__track track"></div>
-    <div
-      class="pupa-scrollbar__thumb-container thumb-container"
-      [class.thumb-container_grabbing]="isVerticalThumbGrabbing$ | async"
-      [class.thumb-container_scrolling]="isContentScrolling$ | async"
-      [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
-      #verticalScrollbarThumb
-    ></div>
-  </div>
-  <div #horizontalScrollbar class="pupa-scrollbar pupa-scrollbar_horizontal pupa-scrollbar_horizontal_external">
-    <div class="pupa-scrollbar__track track"></div>
-    <div
-      class="pupa-scrollbar__thumb-container thumb-container"
-      [class.thumb-container_grabbing]="isHorizontalThumbGrabbing$ | async"
-      [class.thumb-container_scrolling]="isContentScrolling$ | async"
-      [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
-      #horizontalScrollbarThumb
-    ></div>
-  </div>
+<div #verticalScrollbar class="pupa-scrollable__scrollbar pupa-scrollbar__vertical">
+  <div class="pupa-scrollbar__track pupa-scrollbar__track__vertical"></div>
+  <div
+    class="pupa-scrollbar__thumb-container pupa-scrollbar__thumb-container__vertical"
+    [ngClass]="{
+      'pupa-scrollbar__thumb-container__grabbing': isVerticalThumbGrabbing$ | async,
+      'pupa-scrollbar__thumb-container__grabbing__vertical': isVerticalThumbGrabbing$ | async
+    }"
+    [class.pupa-scrollbar__thumb-container__scrolling]="isContentScrolling$ | async"
+    [class.pupa-scrollbar__thumb-container__visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
+    #verticalScrollbarThumb
+  ></div>
+</div>
+<div #horizontalScrollbar class="pupa-scrollable__scrollbar pupa-scrollbar__horizontal">
+  <div class="pupa-scrollbar__track pupa-scrollbar__track__horizontal"></div>
+  <div
+    class="pupa-scrollbar__thumb-container pupa-scrollbar__thumb-container__horizontal"
+    [ngClass]="{
+      'pupa-scrollbar__thumb-container__grabbing': isHorizontalThumbGrabbing$ | async,
+      'pupa-scrollbar__thumb-container__grabbing__horizontal': isHorizontalThumbGrabbing$ | async
+    }"
+    [class.pupa-scrollbar__thumb-container__scrolling]="isContentScrolling$ | async"
+    [class.pupa-scrollbar__thumb-container__visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
+    #horizontalScrollbarThumb
+  ></div>
 </div>
 
 <div #content class="pupa-scrollable__content">

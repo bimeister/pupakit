@@ -57,10 +57,10 @@ const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 const SCROLL_EVENT_DEBOUNCE_TIME_MS: number = 100;
 const SCROLL_THUMB_VISIBILITY_DEBOUNCE_TIME_MS: number = 200;
 
-const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_vertical_visible';
-const VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS: string = 'pupa-scrollbar_vertical_with-horizontal';
-const HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar_horizontal_visible';
-const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar_horizontal_with-vertical';
+const VERTICAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar__vertical__visible';
+const VERTICAL_SCROLLBAR_WITH_HORIZONTAL_CLASS: string = 'pupa-scrollbar__vertical__with-horizontal';
+const HORIZONTAL_SCROLLBAR_VISIBILITY_CLASS: string = 'pupa-scrollbar__horizontal__visible';
+const HORIZONTAL_SCROLLBAR_WITH_VERTICAL_CLASS: string = 'pupa-scrollbar__horizontal__with-vertical';
 
 const HORIZONTAL_AUTO_SCROLL_SENSITIVITY_WIDTH_PX: number = 30;
 const VERTICAL_AUTO_SCROLL_SENSITIVITY_HEIGHT_PX: number = 30;
