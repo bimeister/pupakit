@@ -1,6 +1,6 @@
 import { IconDefinition } from '../../interfaces/icon-definition.interface';
 
-export const dragVerticalIcon: IconDefinition = {
+export const appDragVerticalIcon: IconDefinition = {
   name: 'app-drag-vertical',
   data: `<svg width="8" height="12" viewBox="0 0 8 12" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.75 1.5C0.75 2.05228 1.19772 2.5 1.75 2.5C2.30228 2.5 2.75 2.05228 2.75 1.5C2.75 0.947715 2.30228 0.5 1.75 0.5C1.19772 0.5 0.75 0.947715 0.75 1.5Z" fill="currentColor"/>
