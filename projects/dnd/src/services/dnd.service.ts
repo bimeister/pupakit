@@ -36,15 +36,11 @@ export class DndService implements OnDestroy {
   }
 
   public processPanStart(
-    event: HammerInput,
+    srcEvent: PointerEvent,
     sourceHost: DndHostComponent,
     hostInjector: Injector,
     dndCloneItemsOffset: number
   ): void {
-    if (!(event.srcEvent instanceof PointerEvent)) {
-      return;
-    }
-
     this.sourceHost = sourceHost;
     this.sourceDndItemConfigs = this.sourceHost.getSelectedDndItemConfigs();
     this.currentDndCloneItemsOffset = dndCloneItemsOffset;
@@ -57,10 +53,7 @@ export class DndService implements OnDestroy {
       })
     );
     this.dndCloneService.create(selectedDndItemsCloneData, hostInjector);
-    this.dndCloneService.updatePosition(
-      [event.srcEvent.clientX, event.srcEvent.clientY],
-      this.currentDndCloneItemsOffset
-    );
+    this.dndCloneService.updatePosition([srcEvent.clientX, srcEvent.clientY], this.currentDndCloneItemsOffset);
 
     this.initPanListeners();
   }

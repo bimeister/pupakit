@@ -9,4 +9,5 @@ export interface DndItemConfig<T = unknown> {
   canBeMoved: DndCanBeMovedFunc<T>;
   canBeDroppableFor: DndCanBeDroppableForFunc<T>;
   itemTemplate: TemplateRef<DndItemTemplateContext<T>>;
+  dndStartTrigger?: HTMLElement;
 }

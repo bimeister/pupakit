@@ -143,13 +143,21 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
 
   private processPanStart(event: HammerInput): void {
     const targetItem: DndItemHtmlElement | null = getDndTargetItemFromEvent(event.srcEvent);
-    if (isNil(targetItem)) {
+    if (isNil(targetItem) || !(event.srcEvent instanceof PointerEvent)) {
       return;
     }
 
     this.selectedDndItemIds.add(targetItem.dataset.dndItemId);
 
-    this.dndService.processPanStart(event, this, this.injector, this.dndCloneItemsOffset);
+    const targetItemConfig: DndItemConfig = this.dndItemsRegistryService.getDndItemConfig(targetItem.dataset.dndItemId);
+    if (
+      !isNil(targetItemConfig.dndStartTrigger) &&
+      !this.cursorOverElement([event.srcEvent.clientX, event.srcEvent.clientY], targetItemConfig.dndStartTrigger)
+    ) {
+      return;
+    }
+
+    this.dndService.processPanStart(event.srcEvent, this, this.injector, this.dndCloneItemsOffset);
   }
 
   private processDndMove(): Subscription {
@@ -157,7 +165,10 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
       .pipe(filterByInstanceOf(DndEvents.DndMove))
       .subscribe((dndMoveEvent: DndEvents.DndMove<Source>) => {
         const currentHostIsSource: boolean = dndMoveEvent.dndSourceHost === this;
-        const currentHostIsTarget: boolean = this.currentHostIsTarget(dndMoveEvent.dndCloneCoords);
+        const currentHostIsTarget: boolean = this.cursorOverElement(
+          dndMoveEvent.dndCloneCoords,
+          this.elementRef.nativeElement
+        );
 
         const dndSourceItems: DndItem<Source>[] = dndMoveEvent.dndSourceItemConfigs.map(
           ({ dndItem }: DndItemConfig<Source>) => dndItem
@@ -214,7 +225,10 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
       .pipe(filterByInstanceOf(DndEvents.DndDrop))
       .subscribe((dndDropEvent: DndEvents.DndDrop<Source>) => {
         const currentHostIsSource: boolean = dndDropEvent.dndSourceHost === this;
-        const currentHostIsTarget: boolean = this.currentHostIsTarget(dndDropEvent.dndCloneCoords);
+        const currentHostIsTarget: boolean = this.cursorOverElement(
+          dndDropEvent.dndCloneCoords,
+          this.elementRef.nativeElement
+        );
 
         if (!(currentHostIsTarget || currentHostIsSource)) {
           return;
@@ -264,15 +278,14 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
       });
   }
 
-  private currentHostIsTarget([dndCloneX, dndCloneY]: [number, number]): boolean {
-    const hostElement: Element = this.elementRef.nativeElement;
-    const hostElementRect: DOMRect = hostElement.getBoundingClientRect();
+  private cursorOverElement([positionX, positionY]: [number, number], element: Element): boolean {
+    const elementRect: DOMRect = element.getBoundingClientRect();
 
     return (
-      hostElementRect.left <= dndCloneX &&
-      hostElementRect.right >= dndCloneX &&
-      hostElementRect.top <= dndCloneY &&
-      hostElementRect.bottom >= dndCloneY
+      elementRect.left <= positionX &&
+      elementRect.right >= positionX &&
+      elementRect.top <= positionY &&
+      elementRect.bottom >= positionY
     );
   }
 
