@@ -147,8 +147,6 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
       return;
     }
 
-    this.selectedDndItemIds.add(targetItem.dataset.dndItemId);
-
     const targetItemConfig: DndItemConfig = this.dndItemsRegistryService.getDndItemConfig(targetItem.dataset.dndItemId);
     if (
       !isNil(targetItemConfig.dndStartTrigger) &&
@@ -156,6 +154,8 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
     ) {
       return;
     }
+
+    this.selectedDndItemIds.add(targetItem.dataset.dndItemId);
 
     this.dndService.processPanStart(event.srcEvent, this, this.injector, this.dndCloneItemsOffset);
   }
