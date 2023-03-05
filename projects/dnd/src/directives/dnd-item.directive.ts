@@ -1,4 +1,14 @@
-import { Directive, ElementRef, Input, OnChanges, OnDestroy, OnInit, Renderer2, TemplateRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ContentChild,
+  Directive,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Renderer2,
+  TemplateRef,
+} from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { DndItemTemplateContext } from '../declarations/interfaces/dnd-item-template-context.interface';
@@ -7,14 +17,17 @@ import { DndCanBeMovedFunc } from '../declarations/types/dnd-can-be-moved-func.t
 import { DndCanBeDroppableForFunc } from '../declarations/types/dnd-can-be-droppable-for-func.type';
 import { DND_ITEM_ID_ATTRIBUTE } from '../declarations/constants/dnd-item-id-attrIbute.const';
 import { DndItemConfig } from '../declarations/interfaces/dnd-item-config.interface';
+import { DndStartTriggerDirective } from './dnd-start-trigger.directive';
 
 @Directive({
   selector: '[pupaDndItem]',
 })
-export class DndItemDirective<T> implements OnChanges, OnInit, OnDestroy {
+export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy {
   @Input() public dndItemData: T;
   @Input() public dndItemId: string;
   @Input() public dndItemTemplateRef: TemplateRef<DndItemTemplateContext<T>>;
+
+  @ContentChild(DndStartTriggerDirective) public dndStartTrigger: DndStartTriggerDirective | undefined;
 
   constructor(
     private readonly elementRef: ElementRef,
@@ -29,17 +42,22 @@ export class DndItemDirective<T> implements OnChanges, OnInit, OnDestroy {
     this.processDndItemIdAndDataChanges(changes);
   }
 
-  public ngOnInit(): void {
+  public ngAfterViewInit(): void {
     this.renderer.setAttribute(this.elementRef.nativeElement, DND_ITEM_ID_ATTRIBUTE, this.dndItemId);
 
-    const dndItemConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
+    let dndItemConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
     if (isNil(dndItemConfig)) {
-      this.dndItemRegistryService.registerDndItem(this.dndItemId, {
+      dndItemConfig = {
         dndItem: { id: this.dndItemId, data: this.dndItemData, elementParts: [this.elementRef.nativeElement] },
         itemTemplate: this.dndItemTemplateRef,
         canBeMoved: this.canBeMoved,
         canBeDroppableFor: this.canBeDroppableFor,
-      });
+      };
+      if (!isNil(this.dndStartTrigger)) {
+        dndItemConfig.dndStartTrigger = this.dndStartTrigger.elementRef.nativeElement;
+      }
+
+      this.dndItemRegistryService.registerDndItem(this.dndItemId, dndItemConfig);
       return;
     }
 

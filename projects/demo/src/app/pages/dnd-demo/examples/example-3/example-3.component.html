@@ -1,0 +1,27 @@
+<pupa-dnd-host
+  (dndMove)="processMoved($event)"
+  (dndDrop)="processDropped($event)"
+  [sourceType]="sourceType"
+  [targetType]="targetType"
+>
+  <pupa-dnd-indicator
+    *ngIf="dndIndicatorTopPx$ | async"
+    [topCoordsPx]="dndIndicatorTopPx$ | async"
+  ></pupa-dnd-indicator>
+
+  <pupa-option
+    *ngFor="let data of dndHostData"
+    pupaDndItem
+    [dndItemData]="data"
+    [dndItemId]="data.itemNumber.toString()"
+    [dndItemTemplateRef]="templateRef"
+    [canBeDroppableFor]="canBeDroppableForFunc"
+  >
+    <pupa-icon pupaDndStartTrigger class="drag-icon" name="app-apps"></pupa-icon>
+    {{ data.payload }}
+  </pupa-option>
+</pupa-dnd-host>
+
+<ng-template #templateRef let-data>
+  <pupa-dnd-clone-wrapper>{{ data.payload }}</pupa-dnd-clone-wrapper>
+</ng-template>
