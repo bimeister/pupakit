@@ -3,6 +3,7 @@ import { Position } from '@bimeister/pupakit.common';
 
 import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
+import { ModalHeightType } from '../types/modal-height.type';
 
 export interface ModalConfig {
   hasBackdrop: boolean;
@@ -15,4 +16,6 @@ export interface ModalConfig {
   injector: Injector;
   providers: StaticProvider[];
   isFullscreen?: boolean;
+  height: number;
+  size?: ModalHeightType;
 }

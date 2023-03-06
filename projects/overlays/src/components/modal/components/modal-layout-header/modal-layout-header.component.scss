@@ -7,16 +7,10 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  height: 14rem;
-  padding: 4rem 6rem;
-
-  box-shadow: 0px -1px 0px 0px color(neutral-5) inset;
-
-  @include host-selector-dark-theme() {
-    box-shadow: 0px -1px 0px 0px color(neutral-500) inset;
-  }
+  min-height: 12rem;
+  padding: 5rem 0;
 
   @include xs() {
-    padding: 4rem 5rem;
+    padding: 5rem 5rem 2rem;
   }
 }

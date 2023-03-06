@@ -3,14 +3,20 @@
 
 :host {
   display: flex;
-  width: 100%;
+  width: calc(100% + 5rem);
   height: 100%;
   overflow: hidden;
+  padding-top: 3rem;
 
   color: color(neutral-1000);
 
   @include host-selector-dark-theme {
     color: color(neutral-1);
+  }
+
+  @include xs() {
+    width: 100%;
+    padding-top: 2rem;
   }
 }
 
@@ -20,9 +26,9 @@
 
   &__scrollable-content {
     box-sizing: border-box;
-    padding: 8rem 10rem 10rem;
+    padding: 1rem 0 10rem;
     @include xs() {
-      padding: 6rem 5rem 8rem;
+      padding: 1rem 5rem 8rem;
     }
   }
 }
@@ -35,5 +41,12 @@
 :host-context(.modal-layout_no-title) {
   .modal-layout-body__scrollable-content {
     padding-top: 0;
+  }
+}
+
+.modal-layout-body__content-container {
+  width: calc(100% - 5rem);
+  @include xs() {
+    width: calc(100% - 1.5rem);
   }
 }

@@ -51,4 +51,8 @@ export class ModalRef<ReturnDataT = null> {
     this.positionUpdated$.complete();
     this.toTopLayerMoved$.complete();
   }
+
+  public get size(): string | null {
+    return this.config.size;
+  }
 }

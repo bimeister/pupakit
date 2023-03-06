@@ -17,7 +17,7 @@ export class ModalConfigDto implements ModalConfig {
   public providers: StaticProvider[] = [];
   public theme: Theme = Theme.Light;
   public width: number | string = 0;
-  public height: number | string = 0;
+  public height: number = 0;
   public isFullscreen: boolean = false;
 
   constructor(config: Partial<ModalConfig>) {

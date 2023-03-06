@@ -21,6 +21,11 @@
     <pupa-code-container [content]="example4Content">
       <pupa-modal-demo-example-4-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-4-helper>
     </pupa-code-container>
+
+    <h3 demoAnchor>Predefined height XS</h3>
+    <pupa-code-container [content]="example5Content">
+      <pupa-modal-demo-example-5-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-5-helper>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -49,6 +54,15 @@
         <demo-example-viewer-property name="isFullscreen" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Fullscreen mode.</ng-container>
           <demo-props-switcher formControlName="isFullscreen"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="height" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Predefined height</ng-container>
+          <demo-props-radio-select
+            formControlName="size"
+            direction="row"
+            [options]="sizeOptions"
+          ></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

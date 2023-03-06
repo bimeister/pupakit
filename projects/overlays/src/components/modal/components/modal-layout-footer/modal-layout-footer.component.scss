@@ -5,25 +5,22 @@
   display: block;
   width: 100%;
 
-  border-top: 1px solid color(neutral-5);
-  color: color(neutral-300);
-
-  @include host-selector-dark-theme {
-    border-top: 1px solid color(neutral-500);
-    color: color(neutral-9);
+  @include xs() {
+    border-top: 1px solid semantic-color(lines-normal);
   }
+  color: semantic-color(surface-secondary);
 }
 
 .modal-layout-footer {
   display: flex;
-  justify-content: flex-end;
+  column-gap: 2rem;
   box-sizing: border-box;
-  padding: 2rem 4rem;
+  padding-top: 2rem;
   @include font-type-regular;
   @include font-size-xs(true);
 
   &_with-actions {
-    padding: 4rem;
+    padding-top: 4rem;
     @include xs() {
       padding: 3rem 5rem;
     }
