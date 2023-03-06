@@ -205,7 +205,7 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
           dndTargetItem.elementParts,
           dndMoveEvent.dndCloneCoords
         );
-        const dndIndicatorCoords: number = this.calcDndIndicatorCoords(dndTargetItem.elementParts[0]);
+        const dndIndicatorCoords: number = this.calcDndIndicatorCoords(dndTargetItem.elementParts[0], dndDropPosition);
 
         this.dndMove.next({
           dndSourceItems,
@@ -296,30 +296,54 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
     for (const elementPart of targetItemElementParts) {
       const elementPartRect: DOMRect = elementPart.getBoundingClientRect();
 
-      if (
-        this.dndItemsDirection === 'row' &&
-        dndCloneX > elementPartRect.right - elementPartRect.width * DND_POSITION_PERCENT
-      ) {
-        return 'after';
+      if (this.dndItemsDirection === 'row') {
+        if (dndCloneX < elementPartRect.left + elementPartRect.width * DND_POSITION_PERCENT) {
+          return 'before';
+        }
+
+        if (dndCloneX > elementPartRect.right - elementPartRect.width * DND_POSITION_PERCENT) {
+          return 'after';
+        }
       }
 
-      if (
-        this.dndItemsDirection === 'column' &&
-        dndCloneY > elementPartRect.bottom - elementPartRect.height * DND_POSITION_PERCENT
-      ) {
-        return 'after';
+      if (this.dndItemsDirection === 'column') {
+        if (dndCloneY < elementPartRect.top + elementPartRect.height * DND_POSITION_PERCENT) {
+          return 'before';
+        }
+
+        if (dndCloneY > elementPartRect.bottom - elementPartRect.height * DND_POSITION_PERCENT) {
+          return 'after';
+        }
       }
     }
 
     return 'within';
   }
 
-  private calcDndIndicatorCoords(elementPart: DndItemHtmlElement): number {
+  private calcDndIndicatorCoords(elementPart: DndItemHtmlElement, dndDropPosition: DndDropPosition): number | null {
+    if (dndDropPosition === 'within') {
+      return null;
+    }
+
     const itemClientRect: DOMRect = elementPart.getBoundingClientRect();
     const hostClientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
 
-    return this.dndItemsDirection === 'row'
-      ? itemClientRect.right - hostClientRect.left
-      : itemClientRect.bottom - hostClientRect.top;
+    if (this.dndItemsDirection === 'column') {
+      if (dndDropPosition === 'before') {
+        return itemClientRect.top - hostClientRect.top;
+      }
+
+      if (dndDropPosition === 'after') {
+        return itemClientRect.bottom - hostClientRect.top;
+      }
+    } else {
+      if (dndDropPosition === 'before') {
+        return itemClientRect.left - hostClientRect.left;
+      }
+
+      if (dndDropPosition === 'after') {
+        return itemClientRect.right - hostClientRect.left;
+      }
+    }
   }
 }

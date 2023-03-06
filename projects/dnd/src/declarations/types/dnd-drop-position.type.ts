@@ -1,1 +1,1 @@
-export type DndDropPosition = 'after' | 'within';
+export type DndDropPosition = 'before' | 'after' | 'within';
