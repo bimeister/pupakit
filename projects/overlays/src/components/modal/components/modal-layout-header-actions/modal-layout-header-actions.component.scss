@@ -5,7 +5,13 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  justify-content: flex-end;
+  border-bottom: 1px solid color(neutral-7);
+  min-height: 9rem;
+
+  @include xs() {
+    padding: 0 4rem;
+    min-height: 12rem;
+  }
 
   :host-context(.modal-layout_no-title) {
     width: 100%;

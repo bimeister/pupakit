@@ -1,9 +1,15 @@
 .modal-layout {
   width: 400px;
-  height: 400px;
+}
+
+.close-button {
+  flex: 1;
 }
 
 .layout-action {
   display: flex;
-  justify-content: center;
+}
+
+.footer-button {
+  flex: 1;
 }

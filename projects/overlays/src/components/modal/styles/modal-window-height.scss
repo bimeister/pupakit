@@ -1,0 +1,19 @@
+@use 'functions' as *;
+
+@mixin modalWindowHeight() {
+  &[height='xs'] {
+    height: vh(48);
+  }
+
+  &[height='s'] {
+    height: vh(72);
+  }
+
+  &[height='m'] {
+    height: vh(84);
+  }
+
+  &[height='l'] {
+    height: vh(96);
+  }
+}

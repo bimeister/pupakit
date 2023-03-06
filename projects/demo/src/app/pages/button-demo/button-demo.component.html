@@ -45,6 +45,16 @@
     <pupa-code-container [content]="example4Content">
       <demo-button-example-4 *pupaCodeContainerPreviewTemplate></demo-button-example-4>
     </pupa-code-container>
+
+    <h3 demoAnchor>Flexible button</h3>
+    <pupa-info-block>
+      The
+      <pupa-code-inline>flexible</pupa-code-inline>
+      allows you to adopt button size by parent container.
+    </pupa-info-block>
+    <pupa-code-container [content]="example5Content">
+      <demo-button-example-5 *pupaCodeContainerPreviewTemplate></demo-button-example-5>
+    </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer>
@@ -57,13 +67,15 @@
               kind: kind$ | async,
               disabled: disabled$ | async,
               loading: loading$ | async,
-              active: active$ | async
+              active: active$ | async,
+              flexible: flexible$ | async
             };
             let size = size;
             let kind = kind;
             let disabled = disabled;
             let loading = loading;
-            let active = active
+            let active = active;
+            let flexible = flexible
           "
         >
           <pupa-button
@@ -75,6 +87,7 @@
             [rightIcon]="buttonRightIconFormControl.value"
             [loading]="loading"
             [active]="active"
+            [flexible]="flexible"
           >
             Button Name
           </pupa-button>
@@ -136,6 +149,11 @@
             </p>
           </ng-container>
           <demo-props-radio-select [options]="typeOptions" direction="row"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="flexible" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Make button flexible </ng-container>
+          <demo-props-switcher #flexible$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

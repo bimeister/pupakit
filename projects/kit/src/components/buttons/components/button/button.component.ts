@@ -43,6 +43,9 @@ export class ButtonComponent implements OnChanges {
 
   @Input() public readonly tabIndex: string = '0';
 
+  @Input() public readonly flexible: boolean = false;
+  public readonly flexible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   protected commonButtonClasses: Observable<string>[] = [
     this.size$,
     this.kind$,
@@ -56,6 +59,7 @@ export class ButtonComponent implements OnChanges {
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     ...this.commonButtonClasses,
     this.active$.pipe(map((isActive: boolean) => (isActive ? 'active' : null))),
+    this.flexible$.pipe(map((isFlexible: boolean) => (isFlexible ? 'flexible' : null))),
   ]).pipe(
     map((classes: string[]) =>
       classes
@@ -73,6 +77,7 @@ export class ButtonComponent implements OnChanges {
     this.processRightIconChange(changes?.rightIcon);
     this.processLoadingChange(changes?.loading);
     this.processActiveChange(changes?.active);
+    this.processFlexibleChange(changes?.flexible);
   }
 
   @HostListener('pointerup', ['$event'])
@@ -160,5 +165,15 @@ export class ButtonComponent implements OnChanges {
     }
 
     this.active$.next(updatedValue);
+  }
+
+  private processFlexibleChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.flexible$.next(updatedValue);
   }
 }

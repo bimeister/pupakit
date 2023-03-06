@@ -8,11 +8,7 @@
 */
 
 @mixin apply-background() {
-  background-color: color(neutral-1000, alpha-800);
-
-  @include dark-theme-class-parent() {
-    background-color: color(neutral-1000, alpha-700);
-  }
+  background-color: semantic-color(kind-opacity-normal, alpha-60);
 }
 
 .cdk-global-overlay-wrapper,

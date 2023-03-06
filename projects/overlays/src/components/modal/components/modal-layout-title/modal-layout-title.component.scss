@@ -3,9 +3,6 @@
 
 :host {
   display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   flex: 1;
 
   @include font-type-medium;
@@ -16,4 +13,8 @@
   @include host-selector-dark-theme {
     color: color(neutral-1);
   }
+}
+
+.content-wrapper {
+  @include line-clamp(3);
 }

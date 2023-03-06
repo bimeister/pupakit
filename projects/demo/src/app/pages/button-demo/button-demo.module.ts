@@ -7,12 +7,14 @@ import { ButtonDemoRoutingModule } from './button-demo-routing.module';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { ButtonExample4Component } from './examples/example-4/example-4.component';
 import { PupaDirectivesModule } from '@bimeister/pupakit.common';
+import { ButtonExample5Component } from './examples/example-5/example-5.component';
 
 const EXAMPLES: Type<unknown>[] = [
   ButtonExample1Component,
   ButtonExample4Component,
   ButtonExample2Component,
   ButtonExample3Component,
+  ButtonExample5Component,
 ];
 const COMPONENTS: Type<unknown>[] = [ButtonDemoComponent, ...EXAMPLES];
 
