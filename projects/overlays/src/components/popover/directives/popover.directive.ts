@@ -37,6 +37,10 @@ export class PopoverDirective implements OnDestroy {
     this.openedPopover?.close();
   }
 
+  public getPopoverId(): string | null {
+    return isNil(this.openedPopover) ? null : this.openedPopover.id;
+  }
+
   private processSelfClick(): Subscription {
     return fromEvent(this.elementRef.nativeElement, 'click')
       .pipe(

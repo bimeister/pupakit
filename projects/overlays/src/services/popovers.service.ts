@@ -2,6 +2,7 @@ import { Overlay } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, Injector, RendererFactory2 } from '@angular/core';
 import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
+import { isNil } from '@bimeister/utilities';
 import { PopoverComponentBase } from '../declarations/classes/abstract/popover-component-base.abstract';
 import { OpenedPopover } from '../declarations/classes/opened-popover.class';
 import { PopoverRef } from '../declarations/classes/popover-ref.class';
@@ -44,5 +45,15 @@ export class PopoversService {
     });
 
     return new OpenedPopover(popover.id, popoverRef);
+  }
+
+  public updateOverlayPosition(popoverId?: string): void {
+    const popover: unknown = isNil(popoverId)
+      ? this.portalLayersService.getTopLayer()
+      : this.portalLayersService.getLayerById(popoverId);
+
+    if (popover instanceof Popover) {
+      popover.updateOverlayPosition();
+    }
   }
 }

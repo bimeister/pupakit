@@ -32,9 +32,9 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
   public readonly id: Uuid = getUuid();
   private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
 
-  private readonly defaultPosition: FlexibleConnectedPositionStrategy = this.getAnchorPosition();
+  private readonly positionStrategy: FlexibleConnectedPositionStrategy = this.getAnchorPosition();
   private readonly overlayRef: OverlayRef = this.overlay.create({
-    positionStrategy: this.defaultPosition,
+    positionStrategy: this.positionStrategy,
     hasBackdrop: this.config.hasBackdrop,
   });
   private readonly popoverRef: PopoverRef<PopoverDataType<TComponent>, PopoverReturnType<TComponent>> = new PopoverRef(
@@ -54,6 +54,11 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     this.handleXsBreakpointChange();
     this.listenOutsideEventsForClose();
   }
+
+  public updateOverlayPosition(): void {
+    this.positionStrategy.apply();
+  }
+
   public getCurrentZIndex(): number {
     return this.currentZIndex;
   }
@@ -82,6 +87,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
       const elementPosition: FlexibleConnectedPositionStrategy = this.overlay
         .position()
         .flexibleConnectedTo(anchor)
+        .withGrowAfterOpen(true)
         .withPositions(OVERLAY_POSITIONS)
         .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
@@ -111,7 +117,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
 
     const containerData: PopoverContainerData = {
       componentPortal,
-      positionChanges$: this.defaultPosition.positionChanges,
+      positionChanges$: this.positionStrategy.positionChanges,
     };
 
     return new ComponentPortal(
@@ -127,13 +133,13 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     this.clientUiStateHandlerService.breakpointIsXs$
       .pipe(takeUntil(this.popoverRef.closed$))
       .subscribe((breakpointIsXs: boolean) => {
-        if (!breakpointIsXs) {
-          this.overlayRef.updatePositionStrategy(this.defaultPosition);
+        if (breakpointIsXs) {
+          const mobilePositionStrategy: GlobalPositionStrategy = this.overlay.position().global().centerHorizontally();
+          this.overlayRef.updatePositionStrategy(mobilePositionStrategy);
           return;
         }
 
-        const mobilePositionStrategy: GlobalPositionStrategy = this.overlay.position().global().centerHorizontally();
-        this.overlayRef.updatePositionStrategy(mobilePositionStrategy);
+        this.overlayRef.updatePositionStrategy(this.positionStrategy);
       });
   }
 
