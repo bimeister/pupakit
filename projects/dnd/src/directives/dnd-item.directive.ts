@@ -45,23 +45,19 @@ export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy 
   public ngAfterViewInit(): void {
     this.renderer.setAttribute(this.elementRef.nativeElement, DND_ITEM_ID_ATTRIBUTE, this.dndItemId);
 
-    let dndItemConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
-    if (isNil(dndItemConfig)) {
-      dndItemConfig = {
-        dndItem: { id: this.dndItemId, data: this.dndItemData, elementParts: [this.elementRef.nativeElement] },
-        itemTemplate: this.dndItemTemplateRef,
-        canBeMoved: this.canBeMoved,
-        canBeDroppableFor: this.canBeDroppableFor,
-      };
-      if (!isNil(this.dndStartTrigger)) {
-        dndItemConfig.dndStartTrigger = this.dndStartTrigger.elementRef.nativeElement;
-      }
-
-      this.dndItemRegistryService.registerDndItem(this.dndItemId, dndItemConfig);
+    const dndItemConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
+    if (!isNil(dndItemConfig)) {
+      dndItemConfig.dndItem.elementParts = [...dndItemConfig.dndItem.elementParts, this.elementRef.nativeElement];
       return;
     }
 
-    dndItemConfig.dndItem.elementParts = [...dndItemConfig.dndItem.elementParts, this.elementRef.nativeElement];
+    this.dndItemRegistryService.registerDndItem(this.dndItemId, {
+      dndItem: { id: this.dndItemId, data: this.dndItemData, elementParts: [this.elementRef.nativeElement] },
+      itemTemplate: this.dndItemTemplateRef,
+      canBeMoved: this.canBeMoved,
+      canBeDroppableFor: this.canBeDroppableFor,
+      dndStartTrigger: !isNil(this.dndStartTrigger) ? this.dndStartTrigger.elementRef.nativeElement : undefined,
+    });
   }
 
   public ngOnDestroy(): void {
