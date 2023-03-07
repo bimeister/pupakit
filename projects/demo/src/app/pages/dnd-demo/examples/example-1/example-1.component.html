@@ -5,7 +5,7 @@
   [targetType]="targetType"
 >
   <pupa-dnd-indicator
-    *ngIf="!(dndIndicatorTopPx$ | async | isNullOrUndefined)"
+    *ngIf="dndIndicatorTopPx$ | async"
     [topCoordsPx]="dndIndicatorTopPx$ | async"
   ></pupa-dnd-indicator>
 
