@@ -81,9 +81,13 @@ export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy 
       return;
     }
 
-    const prevDndItemIdConfig: DndItemConfig = this.dndItemRegistryService.getDndItemConfig(
+    const prevDndItemIdConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(
       dndItemIdChange.previousValue
     );
+    if (isNil(prevDndItemIdConfig)) {
+      return;
+    }
+
     this.dndItemRegistryService.unRegisterDndItem(dndItemIdChange.previousValue);
     this.dndItemRegistryService.registerDndItem(dndItemIdChange.currentValue, {
       ...prevDndItemIdConfig,
