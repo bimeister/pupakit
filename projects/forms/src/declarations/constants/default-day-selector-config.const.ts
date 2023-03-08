@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../enums/day-of-week.enum';
+import { DayOfWeek } from '@bimeister/pupakit.calendar';
 import { DaySelectorConfig } from '../interfaces/day-selector-config.interface';
 
 export const DEFAULT_DAY_SELECTOR_CONFIG: DaySelectorConfig = {

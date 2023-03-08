@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { DayOfWeek, DaySelectorSize, DAY_SELECTOR_CONFIG_TOKEN } from '@bimeister/pupakit.forms';
+import { DayOfWeek } from '@bimeister/pupakit.calendar';
+import { DaySelectorSize, DAY_SELECTOR_CONFIG_TOKEN } from '@bimeister/pupakit.forms';
 
 const BASE_SRC: string = 'day-selector-demo/examples';
 

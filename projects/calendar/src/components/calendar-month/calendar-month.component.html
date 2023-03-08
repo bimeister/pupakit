@@ -1,0 +1,20 @@
+<div class="day-wrapper" *ngFor="let calendarDay of calendarMonth | monthDayCells : startWeekday; let index = index">
+  <ng-container *pupaLet="calendarDay | isNullOrUndefined as isEmptyDay">
+    <pupa-calendar-day
+      *ngIf="isEmptyDay"
+      class="day"
+      [isRangeEmptySpace]="index | isEmptyDayInDateRange : calendarMonth : selectedDates"
+      [isEmpty]="true"
+    ></pupa-calendar-day>
+
+    <pupa-calendar-day
+      *ngIf="!isEmptyDay"
+      class="day"
+      (select)="handleSelectDay(calendarDay)"
+      [value]="calendarDay.day"
+      [isCurrent]="isCurrent && calendarDay.day === currentDayNumber"
+      [positionInRange]="calendarDay | dayPositionInDateRange : selectedDates"
+      [isSelected]="calendarDay | isDaySelected : selectedDates"
+    ></pupa-calendar-day>
+  </ng-container>
+</div>

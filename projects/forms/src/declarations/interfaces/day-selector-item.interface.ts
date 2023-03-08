@@ -1,4 +1,4 @@
-import { DayOfWeek } from '../enums/day-of-week.enum';
+import { DayOfWeek } from '@bimeister/pupakit.calendar';
 
 export interface DaySelectorItem {
   key: DayOfWeek;

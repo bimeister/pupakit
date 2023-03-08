@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PupaCalendarModule } from '@bimeister/pupakit.calendar';
 import { PupaCommonModule } from '@bimeister/pupakit.common';
+import { PupaDndModule } from '@bimeister/pupakit.dnd';
 import { PupaFormsModule } from '@bimeister/pupakit.forms';
 import { getAllIcons, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaKitModule } from '@bimeister/pupakit.kit';
@@ -9,7 +11,6 @@ import { PupaAlertModule, PupaOverlaysModule } from '@bimeister/pupakit.overlays
 import { PupaTableModule } from '@bimeister/pupakit.table';
 import { PupaTreeModule } from '@bimeister/pupakit.tree';
 import { PupaWidgetsModule } from '@bimeister/pupakit.widgets';
-import { PupaDndModule } from '@bimeister/pupakit.dnd';
 import { AlertsToolbarExampleComponent } from '../pages/alerts-demo/examples/alerts-toolbar-example/alerts-toolbar-example.component';
 import { AnchorModule } from './components/anchor/anchor.module';
 import { CodeModule } from './components/code/code.module';
@@ -33,6 +34,7 @@ const MODULES: Type<unknown>[] = [
   PupaOverlaysModule,
   PupaWidgetsModule,
   PupaDndModule,
+  PupaCalendarModule,
 ];
 
 @NgModule({

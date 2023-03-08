@@ -1,0 +1,23 @@
+<pupa-calendar-header>
+  <h4 class="header-content">
+    {{ headerTitle$ | async }}
+  </h4>
+</pupa-calendar-header>
+
+<div class="scroller-wrapper">
+  <pupa-scrollable>
+    <cdk-virtual-scroll-viewport pupaScrollableContent class="scroller" [itemSize]="rowHeight">
+      <div class="scroller__row" *cdkVirtualFor="let yearsRow of yearsTable; templateCacheSize: 10">
+        <div *ngFor="let year of yearsRow" class="scroller__col">
+          <pupa-button
+            class="scroller__item"
+            (click)="selectYear(year)"
+            [kind]="year === currentYear ? 'border' : 'secondary'"
+          >
+            {{ year }}
+          </pupa-button>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </pupa-scrollable>
+</div>

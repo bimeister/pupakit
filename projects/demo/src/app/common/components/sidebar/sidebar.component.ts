@@ -149,6 +149,11 @@ export class SidebarComponent {
     linkItems: sortByProperty([{ title: 'Drag&drop', link: '/kit/dnd' }], 'title'),
   };
 
+  private readonly calendarGroup: LinksGroup = {
+    title: 'Calendar',
+    linkItems: sortByProperty([{ title: 'Calendar', link: '/kit/calendar' }], 'title'),
+  };
+
   private readonly demoToolsGroup: LinksGroup = {
     title: 'Demo Tools',
     linkItems: sortByProperty(
@@ -170,6 +175,7 @@ export class SidebarComponent {
     this.treeGroup,
     this.widgetsGroup,
     this.dndGroup,
+    this.calendarGroup,
     this.demoToolsGroup,
   ];
 

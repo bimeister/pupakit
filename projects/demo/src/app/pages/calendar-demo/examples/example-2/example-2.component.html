@@ -1,0 +1,10 @@
+<div class="calendar">
+  <pupa-calendar [selected]="selectedDates" (select)="selectDates($event)" [isRange]="true"></pupa-calendar>
+</div>
+<div>
+  Range:
+  <span *ngIf="selectedDates[0] as firstDate">
+    {{ firstDate | date }}
+  </span>
+  <span *ngIf="selectedDates[1] as secondDate"> &mdash; {{ secondDate | date }} </span>
+</div>

@@ -9,11 +9,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { isDate } from '../../functions/is-date.function';
 import { InputSize } from '../../types/input-size.type';
 import { InputStyleCustomization } from '../../types/input-style-customization.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';

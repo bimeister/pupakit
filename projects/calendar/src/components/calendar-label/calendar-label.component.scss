@@ -1,0 +1,9 @@
+@use 'sass:math';
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  display: block;
+  @include font-size-s();
+  @include font-type-medium();
+}

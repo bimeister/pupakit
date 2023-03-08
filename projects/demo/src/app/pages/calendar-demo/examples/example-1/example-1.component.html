@@ -1,0 +1,4 @@
+<div class="calendar">
+  <pupa-calendar [selected]="selectedDate" (select)="selectDate($event)"></pupa-calendar>
+</div>
+<div>Date: {{ selectedDate | date }}</div>

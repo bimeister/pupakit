@@ -35,6 +35,7 @@
     "build:table": "moon run table:build",
     "build:tree": "moon run tree:build",
     "build:widgets": "moon run widgets:build",
+    "build:calendar": "moon run calendar:build",
     "build:dnd": "moon run dnd:build",
     "build:prepublish": "ts-node do-prepublish.ts",
     "formatter:check": "moon run :format-check",

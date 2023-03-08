@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { isDate } from '@bimeister/pupakit.forms';
+import { isDate } from '@bimeister/pupakit.calendar';
 import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-
 enum ErrorMessageKey {
   Required = 'required',
   InvalidTime = 'invalidTime',

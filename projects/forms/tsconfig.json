@@ -9,6 +9,12 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
+      "@bimeister/pupakit.calendar": [
+        "../calendar/src/index.ts"
+      ],
+      "@bimeister/pupakit.calendar/*": [
+        "../calendar/src/*"
+      ],
       "@bimeister/pupakit.common": [
         "../common/src/index.ts"
       ],
@@ -60,6 +66,9 @@
     },
     {
       "path": "../tree"
+    },
+    {
+      "path": "../calendar"
     }
   ]
 }

@@ -13,6 +13,7 @@ import { ButtonGroupDemoModule } from './pages/button-group-demo/button-group-de
 import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.module';
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
+import { CalendarDemoModule } from './pages/calendar-demo/calendar-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
@@ -399,6 +400,11 @@ const demoRoutes: Routes = [
         path: 'dnd',
         loadChildren: (): Promise<Type<DndDemoModule>> =>
           import('./pages/dnd-demo/dnd-demo.module').then((module: any) => module.DndDemoModule),
+      },
+      {
+        path: 'calendar',
+        loadChildren: (): Promise<Type<CalendarDemoModule>> =>
+          import('./pages/calendar-demo/calendar-demo.module').then((module: any) => module.CalendarDemoModule),
       },
     ],
   },
