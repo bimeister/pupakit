@@ -18,6 +18,7 @@ dependsOn:
   - 'widgets'
   - 'forms'
   - 'dnd'
+  - 'calendar'
 
 workspace:
   inheritedTasks:

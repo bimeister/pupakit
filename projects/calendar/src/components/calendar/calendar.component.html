@@ -1,0 +1,21 @@
+<pupa-calendar-header class="header">
+  <pupa-calendar-control-panel></pupa-calendar-control-panel>
+  <pupa-calendar-week-panel></pupa-calendar-week-panel>
+</pupa-calendar-header>
+<pupa-calendar-scroller class="days-scroller"></pupa-calendar-scroller>
+
+<ng-container [ngSwitch]="fastSelectMode$ | async">
+  <pupa-calendar-month-selector
+    (selected)="handleMonthSelected($event)"
+    *ngSwitchCase="fastSelectMode.Month"
+    [@fastSelectorAnimation]
+    class="fast-selector"
+  ></pupa-calendar-month-selector>
+
+  <pupa-calendar-year-selector
+    (selected)="handleYearSelected($event)"
+    *ngSwitchCase="fastSelectMode.Year"
+    [@fastSelectorAnimation]
+    class="fast-selector"
+  ></pupa-calendar-year-selector>
+</ng-container>

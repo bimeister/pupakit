@@ -1,0 +1,17 @@
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 12rem;
+  padding: 0 4rem;
+}
+
+.selection {
+  display: flex;
+  gap: 1rem;
+}
+
+.navigation {
+  display: flex;
+  gap: 1rem;
+}

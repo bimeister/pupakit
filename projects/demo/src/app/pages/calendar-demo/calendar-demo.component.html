@@ -1,0 +1,89 @@
+<h1>Calendar</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Basic example</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-calendar-example-1 *pupaCodeContainerPreviewTemplate></demo-calendar-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Range Selection</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-calendar-example-2 *pupaCodeContainerPreviewTemplate></demo-calendar-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Custom Configuration</h3>
+    <pupa-info-block variant="info">
+      You can override default configuration by providing
+      <pupa-code-inline>CALENDAR_CONFIG_TOKEN</pupa-code-inline>
+    </pupa-info-block>
+    <pupa-code-container [content]="example3Content">
+      <demo-calendar-example-3 *pupaCodeContainerPreviewTemplate></demo-calendar-example-3>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content [isSticky]="false">
+        <div class="calendar">
+          <pupa-calendar
+            [isRange]="isRange | async"
+            [selected]="dateFormControl.value"
+            (select)="handleSelect($event)"
+          ></pupa-calendar>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label> CalendarComponent properties </demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="isRange" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the range selection is enabled</ng-container>
+          <demo-props-switcher #isRange></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="selected" type="Date[] | Date">
+          <ng-container *demoExampleViewerPropertyDescription>Selected value</ng-container>
+
+          <pupa-input-date-range
+            *ngIf="isRange | async; else singleDateElement"
+            [formControl]="dateFormControl"
+            [withReset]="true"
+          ></pupa-input-date-range>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="output" name="select" type="EventEmitter<Date[]>">
+          <ng-container *demoExampleViewerPropertyDescription>Emits selected value</ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label> CalendarConfig properties </demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="startYear" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>Start year in calendar</ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="yearsRange" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Maximum years range in calendar. Must be a multiple of 28 (calendar cycle is 28 years)
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="startWeekday" type="DayOfWeek">
+          <ng-container *demoExampleViewerPropertyDescription>
+            The day on which the week starts on the calendar
+          </ng-container>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="translations" type="Record<string, CalendarTranslation>">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Object with translations for specific locales. "en" locale is built in by default
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
+
+<ng-template #singleDateElement>
+  <pupa-input-date [formControl]="dateFormControl" [withReset]="true"></pupa-input-date>
+</ng-template>

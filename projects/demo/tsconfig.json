@@ -4,6 +4,12 @@
     "outDir": "../../.moon/cache/types/projects/demo",
     "baseUrl": ".",
     "paths": {
+      "@bimeister/pupakit.calendar": [
+        "../calendar/src/index.ts"
+      ],
+      "@bimeister/pupakit.calendar/*": [
+        "../calendar/src/*"
+      ],
       "@bimeister/pupakit.common": [
         "../common/src/index.ts"
       ],
@@ -93,6 +99,9 @@
     },
     {
       "path": "../dnd"
+    },
+    {
+      "path": "../calendar"
     }
   ]
 }

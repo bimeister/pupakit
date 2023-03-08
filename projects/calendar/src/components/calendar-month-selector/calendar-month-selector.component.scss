@@ -1,0 +1,66 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.header {
+  &__title {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    height: 12rem;
+  }
+
+  &__content {
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 4rem;
+  }
+}
+
+.scroller-wrapper {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  display: block;
+}
+
+.scroller {
+  width: 100%;
+  height: 100%;
+  display: block;
+  box-sizing: border-box;
+
+  &__item {
+    padding: 0rem 4rem;
+  }
+
+  &__divider {
+    display: block;
+    width: 100%;
+    height: 3rem;
+  }
+}
+
+.year-label {
+  @include font-preset-caption-xs();
+}
+
+.year-table {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  column-gap: 2rem;
+  row-gap: 5rem;
+
+  &__month {
+    width: 100%;
+  }
+
+  &__month-btn {
+    width: 100%;
+  }
+}

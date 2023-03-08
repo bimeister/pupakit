@@ -1,16 +1,16 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { combineLatest, Observable } from 'rxjs';
+import { DayOfWeek } from '@bimeister/pupakit.calendar';
 import { isNil } from '@bimeister/utilities';
 import { isEmpty } from '@bimeister/utilities/common';
+import { combineLatest, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
-import { DaySelectorStateService } from '../../services/day-selector-state.service';
-import { LocaleDayFormatterService } from '../../services/locale-day-formatter.service';
-import { DaySelectorSize } from '../../../../declarations/types/day-selector-size.type';
 import { DaySelectorItem } from '../../../../declarations/interfaces/day-selector-item.interface';
+import { DaySelectorSize } from '../../../../declarations/types/day-selector-size.type';
 import { OnChangeCallback } from '../../../../declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../declarations/types/on-touched-callback.type';
-import { DayOfWeek } from '../../../../declarations/enums/day-of-week.enum';
+import { DaySelectorStateService } from '../../services/day-selector-state.service';
+import { LocaleDayFormatterService } from '../../services/locale-day-formatter.service';
 
 @Component({
   selector: 'pupa-day-selector',

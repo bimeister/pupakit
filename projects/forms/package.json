@@ -38,6 +38,7 @@
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
     "@bimeister/pupakit.tree": "*",
+    "@bimeister/pupakit.calendar": "*",
     "ngx-mask": "^11.0.0",
     "tslib": "^2.3.0"
   },

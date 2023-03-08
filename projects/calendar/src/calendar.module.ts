@@ -1,10 +1,60 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
+import { PupaDirectivesModule, PupaPipesModule } from '@bimeister/pupakit.common';
+import { appChevronDownIcon, appChevronUpIcon, iosRadioButtonOffIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
+import { PupaButtonsModule, PupaScrollableModule } from '@bimeister/pupakit.kit';
+import { CalendarControlPanelComponent } from './components/calendar-control-panel/calendar-control-panel.component';
+import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
+import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
+import { CalendarLabelComponent } from './components/calendar-label/calendar-label.component';
+import { CalendarMonthSelectorComponent } from './components/calendar-month-selector/calendar-month-selector.component';
+import { CalendarMonthComponent } from './components/calendar-month/calendar-month.component';
+import { CalendarScrollerComponent } from './components/calendar-scroller/calendar-scroller.component';
+import { CalendarWeekPanelComponent } from './components/calendar-week-panel/calendar-week-panel.component';
+import { CalendarYearSelectorComponent } from './components/calendar-year-selector/calendar-year-selector.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { DayPositionInDateRangePipe } from './pipes/day-position-in-date-range.pipe';
+import { IsCurrentCalendarMonthPipe } from './pipes/is-current-calendar-month.pipe';
+import { IsDaySelectedPipe } from './pipes/is-day-selected.pipe';
+import { IsEmptyDayInDateRangePipe } from './pipes/is-empty-day-in-date-range.pipe';
+import { MonthDayCellsPipe } from './pipes/month-day-cells.pipe';
+import { NextCalendarMonthPipe } from './pipes/next-calendar-month.pipe';
 
-const MODULES: Type<unknown>[] = [];
+const INTERNAL_COMPONENTS: Type<unknown>[] = [
+  CalendarScrollerComponent,
+  CalendarDayComponent,
+  CalendarLabelComponent,
+  CalendarWeekPanelComponent,
+  CalendarHeaderComponent,
+  CalendarMonthComponent,
+  CalendarControlPanelComponent,
+  CalendarYearSelectorComponent,
+  CalendarMonthSelectorComponent,
+];
+
+const INTERNAL_PIPES: Type<unknown>[] = [
+  MonthDayCellsPipe,
+  IsCurrentCalendarMonthPipe,
+  NextCalendarMonthPipe,
+  IsDaySelectedPipe,
+  DayPositionInDateRangePipe,
+  IsEmptyDayInDateRangePipe,
+];
+
+const EXTERNAL_COMPONENTS: Type<unknown>[] = [CalendarComponent];
 
 @NgModule({
-  declarations: [],
-  imports: MODULES,
-  exports: MODULES,
+  declarations: [INTERNAL_COMPONENTS, EXTERNAL_COMPONENTS, INTERNAL_PIPES],
+  imports: [
+    CommonModule,
+    PupaButtonsModule,
+    PupaScrollableModule,
+    PupaDirectivesModule,
+    PupaPipesModule,
+    ScrollingModule,
+    PupaIconsModule.forFeature([appChevronDownIcon, appChevronUpIcon, iosRadioButtonOffIcon]),
+  ],
+  exports: [EXTERNAL_COMPONENTS],
 })
 export class PupaCalendarModule {}
