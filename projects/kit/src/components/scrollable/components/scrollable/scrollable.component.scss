@@ -73,16 +73,6 @@ $color_dark: 'neutral-600';
       }
     }
 
-    &__visible-onscroll {
-      &:not(.thumb-container_scrolling) {
-        .thumb {
-          transition: background-color 200ms ease-in;
-          background-color: transparent;
-          backdrop-filter: none;
-        }
-      }
-    }
-
     &__grabbing {
       cursor: grabbing;
       border: none;

@@ -173,7 +173,8 @@ $scrollbarHeight: 12px;
 
   &_visible {
     visibility: initial;
-    border-bottom: 1px solid semantic-color(lines-normal);
+    // ! Is border neccessary?
+    // border-bottom: 1px solid semantic-color(lines-normal);
   }
 }
 
@@ -185,6 +186,9 @@ $scrollbarHeight: 12px;
   width: 100%;
   overflow-y: auto;
   box-sizing: border-box;
+
+  // TODO: investigate how to remove manual gutter setting
+  scrollbar-gutter: auto;
 
   &_has-left-pinned {
     border-left: 1px solid semantic-color(lines-normal);

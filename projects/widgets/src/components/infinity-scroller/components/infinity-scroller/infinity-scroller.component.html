@@ -1,8 +1,4 @@
-<pupa-scrollable
-  class="infinite-scroller"
-  [scrollVisibilityMode]="'onscroll'"
-  (verticalScrollDirectionChanged)="onVerticalScrollDirectionChanged($event)"
->
+<pupa-scrollable class="infinite-scroller" (verticalScrollDirectionChanged)="onVerticalScrollDirectionChanged($event)">
   <div class="infinite-scroller__top" #anchorTop></div>
   <ng-container *ngTemplateOutlet="infiniteScrollTopItemTemplate?.templateRef"></ng-container>
   <div class="infinite-scroller__container">

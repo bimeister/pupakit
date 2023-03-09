@@ -20,7 +20,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, Observable, of, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, of, Subscription } from 'rxjs';
 import {
   debounceTime,
   delay,
@@ -46,10 +46,7 @@ import {
   getAnimationFrameLoop,
 } from '@bimeister/pupakit.common';
 import { ScrollbarType } from '../../../../declarations/types/scrollbar-type.type';
-import { ScrollbarSize } from '../../../../declarations/types/scrollbar-size.type';
-import { ScrollbarPosition } from '../../../../declarations/types/scrollbar-position.type';
 import { ScrollDragMode } from '../../../../declarations/types/scroll-drag-mode.type';
-import { ScrollVisibilityMode } from '../../../../declarations/types/scroll-visibility-mode.type';
 import { ScrollDirection } from '../../../../declarations/types/scroll-direction.type';
 import { Scrollbar } from '../../../../declarations/classes/scrollbar.class';
 
@@ -76,16 +73,11 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public invisibleScrollbars: ScrollbarType[] = [];
-  @Input() public size: ScrollbarSize = 'small';
-  @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
   @Input() public scrollDragMode: Nullable<ScrollDragMode> = null;
   private readonly scrollDragMode$: BehaviorSubject<Nullable<ScrollDragMode>> = new BehaviorSubject<
     Nullable<ScrollDragMode>
   >(null);
-  @Input() public scrollVisibilityMode: ScrollVisibilityMode = 'always';
-  private readonly scrollVisibilityMode$: BehaviorSubject<ScrollVisibilityMode> =
-    new BehaviorSubject<ScrollVisibilityMode>('always');
 
   @Output() public readonly scrollTopChanged: EventEmitter<number> = new EventEmitter<number>();
   @Output() public readonly scrollLeftChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -123,9 +115,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   public readonly isVerticalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly isScrollbarVisibleOnScroll$: Observable<boolean> = this.scrollVisibilityMode$.pipe(
-    map((mode: ScrollVisibilityMode) => mode === 'onscroll')
-  );
   public readonly isContentScrolling$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   private contentElement: HTMLElement;
@@ -147,7 +136,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processScrollDragModeChanges(changes?.scrollDragMode);
-    this.processScrollVisibilityModeChanges(changes?.scrollVisibilityMode);
   }
 
   public ngOnInit(): void {
@@ -289,8 +277,9 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
           this.lastScrollTop = contentElement.scrollTop <= 0 ? 0 : contentElement.scrollTop;
 
           // prevents scrollLeft out of bounds in safari browser
+          // TODO: Investigate the reason contentElement.scrollWith bigger then clientWidth by 1px
           const minScrollLeft: number = 0;
-          const maxScrollLeft: number = contentElement.scrollWidth - contentElement.clientWidth;
+          const maxScrollLeft: number = contentElement.scrollWidth - 1 - contentElement.clientWidth;
           const currentScrollLeft: number = Math.min(Math.max(contentElement.scrollLeft, minScrollLeft), maxScrollLeft);
 
           for (const scrollable of this.syncWith) {
@@ -298,8 +287,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
             scrollable.setScrollLeft(currentScrollLeft);
           }
         }),
-        switchMap(() => this.scrollVisibilityMode$),
-        filter((visibilityMode: ScrollVisibilityMode) => visibilityMode === 'onscroll'),
         subscribeInsideAngular(this.ngZone),
         tap(() => this.setContentScrolling(true)),
         debounceTime(SCROLL_EVENT_DEBOUNCE_TIME_MS),
@@ -690,15 +677,5 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     }
 
     this.scrollDragMode$.next(updatedValue);
-  }
-
-  private processScrollVisibilityModeChanges(change: ComponentChange<this, ScrollVisibilityMode>): void {
-    const updatedValue: ScrollVisibilityMode | undefined = change?.currentValue;
-
-    if (updatedValue === undefined) {
-      return;
-    }
-
-    this.scrollVisibilityMode$.next(updatedValue);
   }
 }
