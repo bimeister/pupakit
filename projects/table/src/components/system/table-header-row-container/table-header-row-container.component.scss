@@ -76,6 +76,9 @@
   width: 5px;
   height: 100%;
   background-color: semantic-color(kind-primary-normal);
+  background-clip: content-box;
+  box-sizing: content-box;
+  padding: 0 2.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
