@@ -6,7 +6,7 @@
 
     <ng-container *pupaOptionActionsRight>
       <pupa-counter [count]="99" color="primary"></pupa-counter>
-      <pupa-button size="small" (click)="$event.stopPropagation()">button</pupa-button>
+      <pupa-button size="xs" (click)="$event.stopPropagation()">button</pupa-button>
     </ng-container>
   </pupa-option>
 
@@ -17,7 +17,7 @@
 
     <ng-container *pupaOptionActionsRight>
       <pupa-counter [count]="99" color="primary"></pupa-counter>
-      <pupa-button size="small" [disabled]="disabled$ | async" (click)="$event.stopPropagation()">button</pupa-button>
+      <pupa-button size="xs" [disabled]="disabled$ | async" (click)="$event.stopPropagation()">button</pupa-button>
     </ng-container>
   </pupa-option>
 </div>
