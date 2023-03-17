@@ -1,6 +1,7 @@
 <pupa-theme-wrapper class="theme-container" [theme]="theme">
   <div
     class="content-container"
+    @dropdownShow
     (mousedown)="stopEvent($event)"
     (touchstart)="stopEvent($event)"
     (touchmove)="stopEvent($event)"
