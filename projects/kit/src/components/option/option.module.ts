@@ -4,6 +4,7 @@ import { PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaCheckboxModule } from '../checkbox/checkbox.module';
 import { OptionDescriptionComponent } from './components/option-description/option-description.component';
 import { OptionIconComponent } from './components/option-icon/option-icon.component';
+import { OptionTextComponent } from './components/option-text/option-text.component';
 import { OptionTitleComponent } from './components/option-title/option-title.component';
 import { OptionComponent } from './components/option/option.component';
 import { OptionActionsRightDirective } from './directives/option-actions-right.directive';
@@ -13,6 +14,7 @@ const COMPONENTS: Type<unknown>[] = [
   OptionTitleComponent,
   OptionDescriptionComponent,
   OptionIconComponent,
+  OptionTextComponent,
 ];
 
 const DIRECTIVES: Type<unknown>[] = [OptionActionsRightDirective];
