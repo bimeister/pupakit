@@ -1,9 +1,10 @@
 import { animate, AnimationTriggerMetadata, state, style, transition, trigger } from '@angular/animations';
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Directive, Inject } from '@angular/core';
+import { Position } from '@bimeister/pupakit.common';
 import { VOID } from '@bimeister/utilities';
 import { asapScheduler, BehaviorSubject, fromEvent, merge, Observable, of, scheduled } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { DropdownRef } from '../dropdown-ref.class';
 
 @Directive()
@@ -42,12 +43,30 @@ export abstract class DropdownComponentBase<TData> implements AfterViewInit {
   }
 
   private listenOutsideEventsForClose(): void {
+    const mouseDown$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'mousedown').pipe(
+      filter(
+        (event: MouseEvent) =>
+          !(
+            DropdownComponentBase.eventTargetIsHtmlElement(event.target) &&
+            DropdownComponentBase.dropdownTargetIsHtmlElement(this.dropdownRef.config.target) &&
+            this.dropdownRef.config.target.contains(event.target)
+          )
+      )
+    );
     const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
     const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
 
-    merge(touchMove$, wheel$, resize$)
+    merge(mouseDown$, touchMove$, wheel$, resize$)
       .pipe(take(1))
       .subscribe(() => this.dropdownRef.close());
+  }
+
+  private static eventTargetIsHtmlElement(target: EventTarget): target is HTMLElement {
+    return target instanceof HTMLElement;
+  }
+
+  private static dropdownTargetIsHtmlElement(target: HTMLElement | Position): target is HTMLElement {
+    return target instanceof HTMLElement;
   }
 }
