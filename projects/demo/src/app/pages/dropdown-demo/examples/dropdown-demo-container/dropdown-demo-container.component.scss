@@ -1,0 +1,12 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+.container {
+  @include blur(12px);
+  display: flex;
+  flex-direction: column;
+  background-color: semantic-color(surface-glass, alpha-700);
+  border: 1px solid semantic-color(lines-normal);
+  border-radius: $controlBorderRadius;
+}

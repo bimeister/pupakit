@@ -6,12 +6,17 @@
 
     <h3 demoAnchor>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
-      <demo-dropdown-example-1
-        *pupaCodeContainerPreviewTemplate
-        [disabled]="disabled$ | async"
-        [widthType]="widthType$ | async"
-        [horizontalPosition]="horizontalPosition$ | async"
-      ></demo-dropdown-example-1>
+      <demo-dropdown-example-1 *pupaCodeContainerPreviewTemplate></demo-dropdown-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Opening a dropdown by coordinates</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-dropdown-example-2 *pupaCodeContainerPreviewTemplate></demo-dropdown-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Opening a dropdown as context menu</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-dropdown-example-3 *pupaCodeContainerPreviewTemplate></demo-dropdown-example-3>
     </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">

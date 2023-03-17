@@ -1,0 +1,11 @@
+<pupa-card [clickable]="false" size="large" (contextmenu)="openContextMenu($event)">
+  <pupa-card-cover>
+    <pupa-icon-holder size="large">
+      <pupa-icon class="icon" name="m-task"></pupa-icon>
+    </pupa-icon-holder>
+  </pupa-card-cover>
+  <pupa-card-header>
+    <pupa-card-title [maxRows]="2">I'm a card with a context menu</pupa-card-title>
+    <pupa-card-description>open me with a right-click</pupa-card-description>
+  </pupa-card-header>
+</pupa-card>
