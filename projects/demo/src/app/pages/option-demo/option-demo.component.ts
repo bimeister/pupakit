@@ -21,7 +21,7 @@ export class OptionDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
   };
   public readonly example4Content: Record<string, string> = {
-    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
   };
   public readonly example5Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
