@@ -3,10 +3,12 @@
 @use 'variables' as *;
 
 .container {
-  @include blur(12px);
+  @include blur(3rem);
   display: flex;
   flex-direction: column;
   background-color: semantic-color(surface-glass, alpha-700);
   border: 1px solid semantic-color(lines-normal);
   border-radius: $controlBorderRadius;
+  gap: 1rem;
+  padding: 2rem;
 }
