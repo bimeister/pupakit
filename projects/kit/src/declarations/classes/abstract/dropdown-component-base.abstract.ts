@@ -53,9 +53,9 @@ export abstract class DropdownComponentBase<TData> implements AfterViewInit {
           )
       )
     );
-    const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
+    const touchMove$: Observable<TouchEvent> = fromEvent<TouchEvent>(this.document, 'touchmove');
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
-    const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
+    const resize$: Observable<UIEvent> = fromEvent<UIEvent>(window, 'resize');
 
     merge(mouseDown$, touchMove$, wheel$, resize$)
       .pipe(take(1))
