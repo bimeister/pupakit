@@ -103,7 +103,6 @@
   }
 
   &__text {
-    @include flex-container(row, center, flex-start);
     @include ellipsis-text-overflow;
 
     flex: 1;
