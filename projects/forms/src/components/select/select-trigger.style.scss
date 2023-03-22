@@ -104,7 +104,6 @@
 
   &__text {
     @include ellipsis-text-overflow;
-
     flex: 1;
     height: 100%;
   }
