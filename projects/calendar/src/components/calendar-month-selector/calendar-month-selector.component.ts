@@ -14,7 +14,6 @@ import { map } from 'rxjs/operators';
 import { MONTHS_IN_YEAR } from '../../declarations/constants/months-in-year.const';
 import { CalendarTextKey } from '../../declarations/enums/calendar-text-key.enum';
 import { MonthIndex } from '../../declarations/enums/month-index.enum';
-import { getCurrentCalendarMonth } from '../../declarations/functions/get-current-calendar-month.function';
 import { CalendarMonth } from '../../declarations/interfaces/calendar-month.interface';
 import { CalendarTranslation } from '../../declarations/interfaces/calendar-translation.interface';
 import { CalendarConfigService } from '../../services/calendar-config.service';
@@ -29,6 +28,8 @@ const DIVIDER_HEIGHT_PX: number = 12;
 const YEAR_LABEL_HEIGHT_PX: number = 16;
 const YEAR_TABLE_HEIGHT_PX: number = 188;
 
+const ITEM_HEIGHT_PX: number = DIVIDER_HEIGHT_PX * 2 + YEAR_LABEL_HEIGHT_PX + YEAR_TABLE_HEIGHT_PX;
+
 @Component({
   selector: 'pupa-calendar-month-selector',
   templateUrl: './calendar-month-selector.component.html',
@@ -37,7 +38,7 @@ const YEAR_TABLE_HEIGHT_PX: number = 188;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarMonthSelectorComponent implements AfterViewInit {
-  @Output() public selected: EventEmitter<CalendarMonth> = new EventEmitter<CalendarMonth>();
+  @Output() public select: EventEmitter<CalendarMonth> = new EventEmitter<CalendarMonth>();
 
   @ViewChild(CdkVirtualScrollViewport)
   private readonly virtualScrollViewport: CdkVirtualScrollViewport;
@@ -46,7 +47,7 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
     map((translation: CalendarTranslation) => translation.texts[CalendarTextKey.SelectMonth])
   );
 
-  public readonly itemHeight: number = DIVIDER_HEIGHT_PX * 2 + YEAR_LABEL_HEIGHT_PX + YEAR_TABLE_HEIGHT_PX;
+  public readonly itemHeight: number = ITEM_HEIGHT_PX;
 
   private readonly startYear: number = this.calendarConfigService.startYear;
 
@@ -61,8 +62,6 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
 
   public readonly monthNameByIndex$: Observable<Record<MonthIndex, string>> =
     this.calendarTranslationService.translation$.pipe(map((translation: CalendarTranslation) => translation.months));
-
-  public readonly currentCalendarMonth: CalendarMonth = getCurrentCalendarMonth();
 
   constructor(
     private readonly calendarTranslationService: CalendarTranslationService,
@@ -83,7 +82,7 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
   }
 
   public selectMonth(year: number, month: number): void {
-    this.selected.emit({
+    this.select.emit({
       year,
       month,
     });

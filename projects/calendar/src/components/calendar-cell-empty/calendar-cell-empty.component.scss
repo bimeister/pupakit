@@ -1,0 +1,12 @@
+@use 'functions' as *;
+@use '../../styles/calendar.styles' as *;
+
+.cell {
+  @include base-cell();
+
+  content: '';
+
+  &_in-range {
+    background-color: semantic-color($range-selection-color);
+  }
+}

@@ -1,8 +1,7 @@
+@use '../../styles/calendar.styles' as *;
+
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+  @include base-fast-selector();
 }
 
 .header-content {
@@ -28,20 +27,11 @@
   box-sizing: border-box;
 
   &__row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     box-sizing: border-box;
     width: 100%;
-    padding: 1rem 4rem;
+    padding: 2rem 4rem;
     gap: 1rem;
-  }
-
-  &__col {
-    flex-basis: 22rem;
-  }
-
-  &__item {
-    width: 100%;
   }
 }

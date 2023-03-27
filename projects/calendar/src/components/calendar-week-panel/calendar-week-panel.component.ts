@@ -28,15 +28,17 @@ function getWeekdaysInOrderByWeekStart(weekStart: DayOfWeek): DayOfWeek[] {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarWeekPanelComponent {
+  private readonly weekdaysInOrder: DayOfWeek[] = getWeekdaysInOrderByWeekStart(
+    this.calendarConfigService.startWeekday
+  );
+
   public readonly weekdays$: Observable<string[]> = this.calendarTranslationService.translation$.pipe(
     map(({ weekdays }: CalendarTranslation) => {
       if (isEmpty(weekdays)) {
         throwError(`No translation for weekdays`);
       }
 
-      const weekdaysInOrder: DayOfWeek[] = getWeekdaysInOrderByWeekStart(this.calendarConfigService.startWeekday);
-
-      return weekdaysInOrder.map((day: DayOfWeek) => weekdays[day]);
+      return this.weekdaysInOrder.map((day: DayOfWeek) => weekdays[day]);
     })
   );
 

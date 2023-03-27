@@ -1,70 +1,11 @@
 @use 'mixins' as *;
 @use 'functions' as *;
-@use '../../styles/calendar-variables.styles' as *;
+@use '../../styles/calendar.styles' as *;
 
-$border-width: 0.5rem;
-
-.root-wrapper {
-  height: $day-size + $border-width * 2;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &_range-empty-space {
-    .day-wrapper {
-      background-color: semantic-color(surface-action);
-      border: $border-width solid semantic-color(surface-action);
-    }
-
-    .filler {
-      background-color: semantic-color(surface-action);
-    }
-  }
-
-  &_in-range {
-    .day-wrapper {
-      background-color: semantic-color(surface-action);
-      border: $border-width solid semantic-color(surface-action);
-    }
-  }
-
-  &_in-range-inside .filler {
-    background-color: semantic-color(surface-action);
-  }
-
-  &_in-range-first {
-    .day-wrapper {
-      border-top-left-radius: 1rem;
-      border-bottom-left-radius: 1rem;
-    }
-
-    .filler_right {
-      background-color: semantic-color(surface-action);
-    }
-  }
-
-  &_in-range-last {
-    .day-wrapper {
-      border-top-right-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-    }
-
-    .filler_left {
-      background-color: semantic-color(surface-action);
-    }
-  }
-}
-
-.filler {
-  height: 100%;
-  width: 100%;
-  content: '';
-}
-
-.day-wrapper {
-  box-sizing: content-box;
+:host {
+  display: block;
+  width: $day-size;
+  height: $day-size;
 }
 
 .day {
@@ -74,48 +15,71 @@ $border-width: 0.5rem;
   flex-grow: 0;
   flex-shrink: 0;
 
-  width: $day-size;
-  height: $day-size;
+  width: 100%;
+  height: 100%;
   box-sizing: border-box;
+  border-color: transparent;
+  background-color: transparent;
 
-  border-radius: 1rem;
+  border-radius: $day-border-radius;
 
   cursor: pointer;
 
   transition: variable(transition-duration_shortest) variable(transition-timing-function_common);
 
-  @include font-size-s();
-  @include font-type-regular();
+  @include font-preset-caption-xs();
 
   @include hover() {
-    background: semantic-color(surface-tertiary);
+    background-color: semantic-color(kind-neutral-hover);
+  }
+
+  &:active {
+    background-color: semantic-color(kind-neutral-pressed);
   }
 
   &:focus-visible {
     border: 1px solid color(primary-600);
     outline: none;
   }
+}
 
-  &_disabled {
-    background: semantic-color(surface-primary);
+.day_current {
+  border: 1px solid semantic-color(kind-primary-normal);
+}
+
+.day_selected {
+  background-color: semantic-color(kind-primary-normal);
+  color: semantic-color(text-inverse);
+
+  @include font-preset-h6();
+
+  @include hover() {
+    background-color: semantic-color(kind-primary-hover);
   }
 
-  &_empty {
-    background: transparent;
-    cursor: default;
-
-    @include hover() {
-      background: transparent;
-    }
+  &:active {
+    background-color: semantic-color(kind-primary-pressed);
   }
+}
 
-  &_current {
-    border: 1px solid semantic-color(kind-neutral-normal);
+.day_disabled {
+  color: semantic-color(text-disabled);
+  background-color: transparent;
+
+  @include hover() {
+    background-color: transparent;
   }
+}
 
-  &_selected {
-    background-color: semantic-color(surface-primary);
-    border: 2px solid semantic-color(surface-action);
-    box-shadow: 1px 1px 5px color(neutral-1, alpha-5);
+.day_empty {
+  cursor: default;
+
+  background-color: transparent;
+  color: transparent;
+  border: none;
+
+  @include hover() {
+    border: none;
+    background-color: transparent;
   }
 }

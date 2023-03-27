@@ -10,7 +10,7 @@ import { CalendarTranslation } from '../declarations/interfaces/calendar-transla
 import { CalendarVirtualScrollConfig } from '../declarations/interfaces/calendar-virtual-scroll-config.interface';
 
 const LABEL_HEIGHT_PX: number = 16;
-const DIVIDER_HEIGHT_PX: number = 16;
+const DIVIDER_HEIGHT_PX: number = 12;
 const WEEK_HEIGHT_PX: number = 36;
 const BUFFER_PX: number = 500;
 

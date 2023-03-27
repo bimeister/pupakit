@@ -15,7 +15,6 @@
       <pupa-calendar-month
         [calendarMonth]="month"
         [isCurrent]="month | isCurrentCalendarMonth"
-        [startWeekday]="startWeekday"
         (selectDate)="addSelectedDate($event)"
         [selectedDates]="selectedDates"
       ></pupa-calendar-month>

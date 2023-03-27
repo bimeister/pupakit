@@ -2,15 +2,19 @@
   <pupa-button (click)="setFastSelectModeMonth()" kind="secondary">
     {{ (monthNameByIndex$ | async)[currentCalendarMonth.month] }}
   </pupa-button>
+
   <pupa-button (click)="setFastSelectModeYear()" kind="secondary">
     {{ currentCalendarMonth.year }}
   </pupa-button>
 </div>
+
 <div class="navigation">
-  <pupa-button-icon size="s" kind="secondary" icon="app-chevron-down" (click)="scrollToNextMonth()"></pupa-button-icon>
-  <pupa-button-icon size="s" kind="secondary" icon="ios-radio-button-off" (click)="resetScroll()"></pupa-button-icon>
+  <pupa-button-icon size="m" kind="secondary" icon="app-chevron-down" (click)="scrollToNextMonth()"></pupa-button-icon>
+
+  <pupa-button-icon size="m" kind="secondary" icon="ios-radio-button-off" (click)="resetScroll()"></pupa-button-icon>
+
   <pupa-button-icon
-    size="s"
+    size="m"
     kind="secondary"
     icon="app-chevron-up"
     (click)="scrollToPreviousMonth()"

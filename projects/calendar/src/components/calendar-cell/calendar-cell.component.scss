@@ -1,0 +1,26 @@
+@use 'functions' as *;
+@use '../../styles/calendar.styles' as *;
+
+.cell {
+  @include base-cell();
+
+  &_in-range {
+    &-first {
+      border-top-left-radius: $cell-border-radius;
+      border-bottom-left-radius: $cell-border-radius;
+
+      background-color: semantic-color($range-selection-color);
+    }
+
+    &-inside {
+      background-color: semantic-color($range-selection-color);
+    }
+
+    &-last {
+      border-top-right-radius: $cell-border-radius;
+      border-bottom-right-radius: $cell-border-radius;
+
+      background-color: semantic-color($range-selection-color);
+    }
+  }
+}

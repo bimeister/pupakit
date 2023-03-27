@@ -17,6 +17,19 @@ import { CalendarConfigService } from '../../services/calendar-config.service';
 import { CalendarTranslationService } from '../../services/calendar-translation.service';
 
 const YEARS_IN_ROW: number = 3;
+const ROW_HEIGHT_PX: number = 48;
+
+function createYearsTable(startYear: number, endYear: number): number[][] {
+  return Array.from({
+    length: Math.ceil((endYear - startYear) / YEARS_IN_ROW),
+  }).map((_: unknown, rowIndex: number) =>
+    Array.from({
+      length: YEARS_IN_ROW,
+    })
+      .map((__: unknown, colIndex: number) => startYear + rowIndex * YEARS_IN_ROW + colIndex)
+      .filter((year: number) => year < endYear)
+  );
+}
 
 @Component({
   selector: 'pupa-calendar-year-selector',
@@ -27,7 +40,7 @@ const YEARS_IN_ROW: number = 3;
 })
 export class CalendarYearSelectorComponent implements AfterViewInit {
   @Output()
-  public readonly selected: EventEmitter<number> = new EventEmitter<number>();
+  public readonly select: EventEmitter<number> = new EventEmitter<number>();
 
   @ViewChild(CdkVirtualScrollViewport)
   private readonly virtualScrollViewport: CdkVirtualScrollViewport;
@@ -36,22 +49,14 @@ export class CalendarYearSelectorComponent implements AfterViewInit {
     map((translation: CalendarTranslation) => translation.texts[CalendarTextKey.SelectYear])
   );
 
-  public readonly rowHeight: number = 40;
+  public readonly rowHeightPx: number = ROW_HEIGHT_PX;
+
+  public readonly currentYear: number = new Date().getFullYear();
 
   private readonly startYear: number = this.calendarConfigService.startYear;
   private readonly endYear: number = this.calendarConfigService.endYear;
 
-  public readonly currentYear: number = new Date().getFullYear();
-
-  public readonly yearsTable: number[][] = Array.from({
-    length: Math.ceil(this.calendarConfigService.yearsRange / YEARS_IN_ROW),
-  }).map((_: unknown, rowIndex: number) =>
-    Array.from({
-      length: YEARS_IN_ROW,
-    })
-      .map((__: unknown, colIndex: number) => this.startYear + rowIndex * YEARS_IN_ROW + colIndex)
-      .filter((year: number) => year < this.endYear)
-  );
+  public readonly yearsTable: number[][] = createYearsTable(this.startYear, this.endYear);
 
   constructor(
     private readonly calendarTranslationService: CalendarTranslationService,
@@ -63,7 +68,7 @@ export class CalendarYearSelectorComponent implements AfterViewInit {
   }
 
   public selectYear(year: number): void {
-    this.selected.emit(year);
+    this.select.emit(year);
   }
 
   private scrollToCurrentYear(): void {

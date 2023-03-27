@@ -1,25 +1,22 @@
 @use 'mixins' as *;
 
+@use '../../styles/calendar.styles' as *;
+
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 100%;
+  @include base-fast-selector();
 }
 
-.header {
-  &__title {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    height: 12rem;
-  }
+.header-content {
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 0 4rem;
+}
 
-  &__content {
-    flex-direction: column;
-    box-sizing: border-box;
-    padding: 0 4rem;
-  }
+.header-title {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  height: 12rem;
 }
 
 .scroller-wrapper {
@@ -57,10 +54,6 @@
   row-gap: 5rem;
 
   &__month {
-    width: 100%;
-  }
-
-  &__month-btn {
     width: 100%;
   }
 }

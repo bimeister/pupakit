@@ -7,7 +7,7 @@ interface TestCase {
 }
 
 describe('get-weeks-count-in-month.function.ts', () => {
-  it.only('should return weeks for months', () => {
+  it('should return weeks for months', () => {
     const testCases: TestCase[] = [
       {
         input: [2022, 7, DayOfWeek.Sunday],
