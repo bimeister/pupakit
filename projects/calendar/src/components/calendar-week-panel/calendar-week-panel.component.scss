@@ -1,20 +1,21 @@
 @use 'mixins' as *;
 @use 'functions' as *;
-@use '../../styles/calendar-variables.styles' as *;
+@use '../../styles/calendar.styles' as *;
 
 :host {
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 6rem;
-  padding: 0 6rem;
+  padding: 0 4rem;
 }
 
-.item {
+.weekday {
   display: flex;
-  width: $day-size;
+  width: $cell-size;
   justify-content: center;
-  @include font-size-s();
-  @include font-type-regular();
+
+  @include font-preset-caption-xs();
+
   color: semantic-color(text-secondary);
 }

@@ -1,5 +1,5 @@
-import { DayPositionInDateRange } from '../enums/day-position-in-date-range.enum';
 import { CalendarDay } from '../interfaces/calendar-day.interface';
+import { DayPositionInDateRange } from '../types/day-position-in-date-range.type';
 import { getDateFromCalendarDay } from './get-date-from-calendar-day.function';
 
 export function getDayPositionInDateRange(
@@ -15,14 +15,14 @@ export function getDayPositionInDateRange(
   const [rangeBegin, rangeEnd]: number[] = selectedDates.map((item: Date) => item.getTime());
 
   if (inputTime === rangeBegin) {
-    return DayPositionInDateRange.First;
+    return 'first';
   }
 
   if (inputTime === rangeEnd) {
-    return DayPositionInDateRange.Last;
+    return 'last';
   }
 
   const isInRange: boolean = inputTime > rangeBegin && inputTime < rangeEnd;
 
-  return isInRange ? DayPositionInDateRange.Inside : null;
+  return isInRange ? 'inside' : null;
 }

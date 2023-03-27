@@ -1,21 +1,11 @@
 <div
-  class="root-wrapper"
-  [class.root-wrapper_in-range]="positionInRange"
-  [class.root-wrapper_range-empty-space]="isRangeEmptySpace"
-  [ngClass]="'root-wrapper_in-range-' + positionInRange"
+  class="day"
+  [class.day_disabled]="isDisabled"
+  [class.day_empty]="isEmpty"
+  [class.day_current]="isCurrent"
+  [class.day_selected]="isSelected"
+  (click)="handleClick()"
+  [tabindex]="isEmpty ? -1 : 0"
 >
-  <div class="filler filler_left"></div>
-  <div class="day-wrapper">
-    <div
-      class="day"
-      [class.day_disabled]="isDisabled"
-      [class.day_empty]="isEmpty"
-      [class.day_current]="isCurrent"
-      [class.day_selected]="isSelected"
-      (click)="handleClick()"
-    >
-      {{ value }}
-    </div>
-  </div>
-  <div class="filler filler_right"></div>
+  {{ value }}
 </div>

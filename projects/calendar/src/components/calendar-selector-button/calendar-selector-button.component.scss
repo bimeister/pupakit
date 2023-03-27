@@ -1,0 +1,41 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 8rem;
+  border-radius: 1rem;
+  box-sizing: border-box;
+
+  appearance: none;
+  user-select: none;
+  pointer-events: none;
+  background: transparent;
+  border-color: transparent;
+
+  @include no-tap-highlight();
+
+  cursor: pointer;
+
+  @include font-preset-h6();
+  color: semantic-color(text-primary);
+
+  transition: variable(transition-duration_shortest) variable(transition-timing-function_common);
+
+  @include hover() {
+    background-color: semantic-color(kind-primary-hover);
+    color: semantic-color(surface-primary);
+  }
+
+  &:active {
+    background-color: semantic-color(kind-primary-active);
+  }
+
+  &_current {
+    border: 1px solid semantic-color(kind-primary-active);
+  }
+}

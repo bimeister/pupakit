@@ -78,12 +78,12 @@ export class CalendarComponent implements OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  public handleYearSelected(year: number): void {
+  public handleYearSelect(year: number): void {
     this.calendarStateService.resetFastSelectMode();
     this.calendarManipulatorService.scrollToYear(year, 'auto');
   }
 
-  public handleMonthSelected(month: CalendarMonth): void {
+  public handleMonthSelect(month: CalendarMonth): void {
     this.calendarStateService.resetFastSelectMode();
     this.calendarManipulatorService.scrollToMonth(month, 'auto');
   }
@@ -103,19 +103,13 @@ export class CalendarComponent implements OnChanges, OnDestroy {
       return;
     }
 
-    if (Array.isArray(value)) {
-      if (value.every(isDate)) {
-        this.calendarStateService.setSelectedDates(value);
-      }
+    const dates: Date[] = Array.isArray(value) ? value : [value];
 
+    if (!dates.every(isDate)) {
       return;
     }
 
-    if (!isDate(value)) {
-      return;
-    }
-
-    this.calendarStateService.setSelectedDates([value]);
+    this.calendarStateService.setSelectedDates(dates);
   }
 
   private emitSelectDatesWhenSelectionChanged(): Subscription {

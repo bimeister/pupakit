@@ -1,0 +1,36 @@
+@use 'functions' as *;
+
+$row-height: 9rem;
+
+$cell-size: 7rem;
+$cell-border-radius: 1rem;
+
+$day-size: 6rem;
+$day-border-radius: 1rem;
+
+$range-selection-color: surface-tertiary;
+
+@mixin base-cell() {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $cell-size;
+  width: $cell-size;
+}
+
+@mixin base-fast-selector() {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: semantic-color(surface-primary);
+}

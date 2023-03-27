@@ -1,20 +1,43 @@
-<div class="day-wrapper" *ngFor="let calendarDay of calendarMonth | monthDayCells : startWeekday; let index = index">
-  <ng-container *pupaLet="calendarDay | isNullOrUndefined as isEmptyDay">
-    <pupa-calendar-day
-      *ngIf="isEmptyDay"
-      class="day"
-      [isRangeEmptySpace]="index | isEmptyDayInDateRange : calendarMonth : selectedDates"
-      [isEmpty]="true"
-    ></pupa-calendar-day>
+<pupa-calendar-week *ngFor="let week of calendarMonth | monthDayCells">
+  <ng-container *ngFor="let cell of week; let isLast = last">
+    <ng-container
+      *ngIf="cell.isEmpty"
+      [ngTemplateOutlet]="emptyWeekPart"
+      [ngTemplateOutletContext]="{ isLast: isLast, cellIndex: cell.index }"
+    >
+    </ng-container>
 
-    <pupa-calendar-day
-      *ngIf="!isEmptyDay"
-      class="day"
-      (select)="handleSelectDay(calendarDay)"
-      [value]="calendarDay.day"
-      [isCurrent]="isCurrent && calendarDay.day === currentDayNumber"
-      [positionInRange]="calendarDay | dayPositionInDateRange : selectedDates"
-      [isSelected]="calendarDay | isDaySelected : selectedDates"
-    ></pupa-calendar-day>
+    <ng-container
+      *ngIf="!cell.isEmpty"
+      [ngTemplateOutlet]="weekPart"
+      [ngTemplateOutletContext]="{ isLast: isLast, cell: cell }"
+    >
+    </ng-container>
   </ng-container>
-</div>
+</pupa-calendar-week>
+
+<ng-template #weekPart let-cell="cell" let-isLast="isLast">
+  <ng-container *pupaLet="cell.calendarDay | dayPositionInDateRange : selectedDates as positionInRange">
+    <pupa-calendar-cell [positionInRange]="positionInRange">
+      <pupa-calendar-day
+        (select)="handleSelectDay(cell.calendarDay)"
+        [value]="cell.calendarDay.day"
+        [isCurrent]="isCurrent && cell.isCurrent"
+        [isSelected]="cell.calendarDay | isDaySelected : selectedDates"
+      ></pupa-calendar-day>
+    </pupa-calendar-cell>
+
+    <pupa-calendar-cell-separator
+      *ngIf="!isLast"
+      [isInRange]="positionInRange === 'inside' || positionInRange === 'first'"
+    ></pupa-calendar-cell-separator>
+  </ng-container>
+</ng-template>
+
+<ng-template #emptyWeekPart let-cellIndex="cellIndex" let-isLast="isLast">
+  <ng-container *pupaLet="cellIndex | isEmptyDayInDateRange : calendarMonth : selectedDates as isInRange">
+    <pupa-calendar-cell-empty [isInRange]="isInRange"></pupa-calendar-cell-empty>
+
+    <pupa-calendar-cell-separator *ngIf="!isLast" [isInRange]="isInRange"></pupa-calendar-cell-separator>
+  </ng-container>
+</ng-template>

@@ -1,28 +1,5 @@
-@use '../../styles/calendar-variables.styles' as *;
-
-$col-gap: 4rem;
-
 :host {
   height: 100%;
   width: 100%;
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  grid-auto-rows: $row-height;
-  justify-content: space-between;
-}
-
-.day-wrapper {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.day {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: block;
 }

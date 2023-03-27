@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { getDateFromCalendarDay } from '../../declarations/functions/get-date-from-calendar-day.function';
-import { DayOfWeek } from '../../declarations/enums/day-of-week.enum';
 import { CalendarDay } from '../../declarations/interfaces/calendar-day.interface';
 import { CalendarMonth } from '../../declarations/interfaces/calendar-month.interface';
 
@@ -14,7 +13,6 @@ import { CalendarMonth } from '../../declarations/interfaces/calendar-month.inte
 })
 export class CalendarMonthComponent {
   @Input() public calendarMonth: CalendarMonth;
-  @Input() public startWeekday: DayOfWeek;
   @Input() public isCurrent: boolean = false;
   @Input() public selectedDates: Date[] = [];
 

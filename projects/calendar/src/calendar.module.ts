@@ -4,6 +4,9 @@ import { NgModule, Type } from '@angular/core';
 import { PupaDirectivesModule, PupaPipesModule } from '@bimeister/pupakit.common';
 import { appChevronDownIcon, appChevronUpIcon, iosRadioButtonOffIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaButtonsModule, PupaScrollableModule } from '@bimeister/pupakit.kit';
+import { CalendarCellEmptyComponent } from './components/calendar-cell-empty/calendar-cell-empty.component';
+import { CalendarCellSeparatorComponent } from './components/calendar-cell-separator/calendar-cell-separator.component';
+import { CalendarCellComponent } from './components/calendar-cell/calendar-cell.component';
 import { CalendarControlPanelComponent } from './components/calendar-control-panel/calendar-control-panel.component';
 import { CalendarDayComponent } from './components/calendar-day/calendar-day.component';
 import { CalendarHeaderComponent } from './components/calendar-header/calendar-header.component';
@@ -11,7 +14,9 @@ import { CalendarLabelComponent } from './components/calendar-label/calendar-lab
 import { CalendarMonthSelectorComponent } from './components/calendar-month-selector/calendar-month-selector.component';
 import { CalendarMonthComponent } from './components/calendar-month/calendar-month.component';
 import { CalendarScrollerComponent } from './components/calendar-scroller/calendar-scroller.component';
+import { CalendarSelectorButtonComponent } from './components/calendar-selector-button/calendar-selector-button.component';
 import { CalendarWeekPanelComponent } from './components/calendar-week-panel/calendar-week-panel.component';
+import { CalendarWeekComponent } from './components/calendar-week/calendar-week.component';
 import { CalendarYearSelectorComponent } from './components/calendar-year-selector/calendar-year-selector.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { DayPositionInDateRangePipe } from './pipes/day-position-in-date-range.pipe';
@@ -31,6 +36,11 @@ const INTERNAL_COMPONENTS: Type<unknown>[] = [
   CalendarControlPanelComponent,
   CalendarYearSelectorComponent,
   CalendarMonthSelectorComponent,
+  CalendarWeekComponent,
+  CalendarCellComponent,
+  CalendarCellEmptyComponent,
+  CalendarCellSeparatorComponent,
+  CalendarSelectorButtonComponent,
 ];
 
 const INTERNAL_PIPES: Type<unknown>[] = [
