@@ -86,12 +86,8 @@ export class DatePickerSimpleComponent implements OnChanges {
   public readonly primarySectionStartDate$: Observable<Date> = this.baseDate$.pipe(
     distinctUntilChanged(),
     filter((baseDate: Date) => isDate(baseDate)),
-    map((baseDate: Date) => {
-      const baseMonthDay: number = baseDate.getDate();
-      const baseDateMs: number = baseDate.valueOf();
-      return baseDateMs - (baseMonthDay - 1) * dayInMs;
-    }),
-    map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
+    map((baseDate: Date) => new Date(baseDate.getFullYear(), baseDate.getMonth(), 1)),
+    map((startDate: Date) => dateClearTime(startDate))
   );
 
   public readonly baseYear$: Observable<number> = this.primarySectionStartDate$.pipe(
@@ -102,14 +98,8 @@ export class DatePickerSimpleComponent implements OnChanges {
   public readonly primarySectionEndDate$: Observable<Date> = this.baseDate$.pipe(
     distinctUntilChanged(),
     filter((baseDate: Date) => isDate(baseDate)),
-    map((baseDate: Date) => {
-      const baseMonthDay: number = baseDate.getDate();
-      const baseDateMs: number = baseDate.valueOf();
-      const daysInMonth: number = getDaysInMonth(baseDate);
-
-      return Object.is(baseMonthDay, daysInMonth) ? baseDateMs : baseDateMs + (daysInMonth - baseMonthDay) * dayInMs;
-    }),
-    map((sectionStartDateMs: number) => dateClearTime(new Date(sectionStartDateMs)))
+    map((baseDate: Date) => new Date(baseDate.getFullYear(), baseDate.getMonth() + 1, 0)),
+    map((endDate: Date) => dateClearTime(endDate))
   );
 
   public readonly primarySectionDates$: Observable<Date[]> = this.primarySectionStartDate$.pipe(
