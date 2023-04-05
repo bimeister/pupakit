@@ -18,27 +18,37 @@
   }
 
   &__content {
-    flex-shrink: 1;
-    color: semantic-color(text-primary);
-    @include font-preset-h6();
-    @include ellipsis-text-overflow;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    &.reversed-direction {
+      flex-direction: row-reverse;
+    }
+
+    &-inner {
+      flex-shrink: 1;
+      color: semantic-color(text-primary);
+      @include font-preset-h6();
+      @include ellipsis-text-overflow;
+    }
   }
 
-  &_large .label__content {
+  &_large .label__content-inner {
     @include font-size-m();
   }
 
-  &_medium .label__content {
+  &_medium .label__content-inner {
     @include font-size-xs();
   }
 
-  &_small .label__content {
+  &_small .label__content-inner {
     @include font-size-xxs();
   }
 
   &_disabled {
     .label__icon,
-    .label__content {
+    .label__content-inner {
       color: color(neutral-50);
     }
   }
@@ -46,7 +56,7 @@
   @include host-selector-dark-theme() {
     &_disabled {
       .label__icon,
-      .label__content {
+      .label__content-inner {
         color: color(neutral-60);
       }
     }
