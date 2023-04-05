@@ -20,6 +20,7 @@
           [disabled]="disabled$ | async"
           [icon]="buttonIconFormControl.value"
           [size]="size$ | async"
+          [iconPosition]="iconPosition$ | async"
         >
           {{ textFormControl.value }}
         </pupa-label>
@@ -39,6 +40,17 @@
         <demo-example-viewer-property decoratorName="input" name="size" type="LabelSize">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
           <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="iconPosition" type="LabelIconPosition">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Responsible for the positioning of the icon relative to the text.</ng-container
+          >
+          <demo-props-radio-select
+            #iconPosition$
+            [options]="iconPositionOptions"
+            direction="row"
+          ></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

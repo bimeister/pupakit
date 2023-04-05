@@ -31,6 +31,18 @@ export class LabelDemoComponent {
     },
   ];
 
+  public readonly iconPositionOptions: PropsOption[] = [
+    {
+      caption: 'Left',
+      value: 'left',
+      isDefault: true,
+    },
+    {
+      caption: 'Right',
+      value: 'right',
+    },
+  ];
+
   public readonly basicExampleContent: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/label-demo-basic-example/label-demo-basic-example.component.html`,
   };
