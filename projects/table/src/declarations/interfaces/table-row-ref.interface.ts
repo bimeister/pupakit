@@ -4,6 +4,7 @@ import { TableRowEvents } from '../events/table-row.events';
 
 export interface TableRowRef {
   readonly id: string;
+  readonly index: number;
   readonly isHovered$: Observable<boolean>;
 
   listenEvent<T extends TableRowEvents.TableRowEventBase>(event: Type<T>): Observable<T>;

@@ -8,6 +8,7 @@ import { TableRowRef } from '../interfaces/table-row-ref.interface';
 
 export class TableRow implements TableRowRef {
   public readonly id: string = getUuid();
+  public readonly index: number = 0;
   public readonly eventBus: EventBus = new EventBus();
 
   public readonly isHovered$: Observable<boolean> = this.listenEvent(TableRowEvents.HoverChanged).pipe(
