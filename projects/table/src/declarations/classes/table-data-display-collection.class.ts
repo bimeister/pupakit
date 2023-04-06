@@ -115,7 +115,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
       const dataSlice: T[] = data.slice(listRange.start, listRange.end);
       dataSlice.forEach((dataItem: T, index: number) => {
         const id: string = trackBy(index, dataItem);
-        const row: TableBodyRow<T> = new TableBodyRow<T>(id, dataItem, this.selectedIdsSet$);
+        const row: TableBodyRow<T> = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
         newColumnIdToColumnMap.set(id, row);
       });
 

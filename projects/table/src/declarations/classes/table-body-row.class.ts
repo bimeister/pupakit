@@ -10,6 +10,7 @@ export class TableBodyRow<T> extends TableRow implements TableBodyRowRef<T> {
 
   constructor(
     public readonly id: string,
+    public readonly index: number,
     public readonly data: T,
     private readonly selectedIds$: Observable<Set<string>>
   ) {
