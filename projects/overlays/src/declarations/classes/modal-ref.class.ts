@@ -1,6 +1,6 @@
 import { OverlayRef } from '@angular/cdk/overlay';
 import { Position } from '@bimeister/pupakit.common';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
@@ -9,8 +9,9 @@ export class ModalRef<ReturnDataT = null> {
   public readonly closed$: Subject<ReturnDataT> = new Subject<ReturnDataT>();
   public readonly opened$: Subject<void> = new Subject<void>();
   public readonly positionUpdated$: Subject<Position> = new Subject<Position>();
-  public readonly toTopLayerMoved$: Subject<void> = new Subject();
-  public readonly isFullscreen$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public readonly toTopLayerMoved$: Subject<void> = new Subject<void>();
+  public readonly isFullscreen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly backdropClick$: Observable<MouseEvent> = this.overlayRef.backdropClick();
 
   constructor(
     public readonly modalId: string,
