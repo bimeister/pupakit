@@ -19,7 +19,10 @@ export class DndService implements OnDestroy {
   private sourceDndItemConfigs: DndItemConfig[] | null = null;
   private currentDndCloneItemsOffset: number | null = null;
 
-  private readonly hammerManager: HammerManager = new Hammer.Manager(this.document.body);
+  private readonly hammerManager: HammerManager = new Hammer.Manager(this.document.body, {
+    cssProps: undefined,
+    touchAction: 'auto',
+  });
   private readonly eventBus: EventBus = new EventBus();
 
   public readonly dndEvents$: Observable<unknown> = this.eventBus.listen();
