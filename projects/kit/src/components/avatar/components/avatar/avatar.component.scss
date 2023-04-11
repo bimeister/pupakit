@@ -13,18 +13,10 @@
   user-select: none;
 
   &_default {
-    background-color: color(neutral-5);
+    background-color: color(warning-200);
 
     .avatar__icon {
       color: color(neutral-1000);
-    }
-
-    @include host-selector-dark-theme {
-      background-color: color(neutral-500);
-
-      .avatar__icon {
-        color: color(neutral-1);
-      }
     }
   }
 
@@ -72,7 +64,7 @@
     @include flex-container(row, center, center);
     line-height: 3rem;
     white-space: nowrap;
-    color: color(neutral-500);
+    color: color(neutral-1000);
     @include font-type-regular();
     box-sizing: border-box;
     height: 100%;
