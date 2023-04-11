@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { ComponentChanges, ComponentChange } from '@bimeister/pupakit.common';
-import { getHslColorFromString, HslColor, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { HslColor, Nullable, getHslColorFromString, isEmpty, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AvatarSize } from '../../../../declarations/types/avatar-size.type';
 import { getInitials } from '../../../../declarations/functions/get-initials.function';
+import { AvatarSize } from '../../../../declarations/types/avatar-size.type';
 
-const SATURATION: number = 88;
-const LIGHTNESS: number = 78;
+const SATURATION: number = 75;
+const LIGHTNESS: number = 80;
 
 enum Mode {
   Icon = 'icon',
