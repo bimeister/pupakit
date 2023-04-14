@@ -7,6 +7,7 @@
   [cdkConnectedOverlayFlexibleDimensions]="true"
   (attach)="handleAttachOverlay()"
   (detach)="handleDetachOverlay()"
+  (overlayOutsideClick)="handleOutsideClick($event)"
 >
   <pupa-theme-wrapper
     class="select-dropdown-wrapper"
