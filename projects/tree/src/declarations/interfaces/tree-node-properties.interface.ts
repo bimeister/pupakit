@@ -7,5 +7,6 @@ export interface TreeNodeProperties {
   isSelected?: boolean;
   isHighlighted?: boolean;
   isDisabled?: boolean;
+  forceHover?: boolean;
   expand?: () => void;
 }

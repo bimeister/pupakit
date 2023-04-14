@@ -38,5 +38,6 @@ export class TreeNodeDemoComponent {
     isSelected: new FormControl(false),
     isHighlighted: new FormControl(false),
     isDisabled: new FormControl(false),
+    forceHover: new FormControl(false),
   });
 }

@@ -56,5 +56,11 @@ export class TreeController {
    The input parameter is the ID of the selected tree item.
   */
   public scrollTo(treeItemId: string): void
+
+    /*
+   Uses to scroll to force the vertical scroll.
+   The input parameter is number which is count of pixels for scrolling.
+  */
+  public scrollTop(scrollTopPx: number): void
 }
 `;
