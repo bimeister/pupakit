@@ -1,15 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostListener,
-  Input,
-  Optional,
-  TemplateRef,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Optional, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
-import { take } from 'rxjs/operators';
 import { SelectBase } from '../../../../declarations/classes/abstract/select-base.abstract';
 import { SelectSize } from '../../../../declarations/types/select-size.type';
 import { SelectStateService } from '../../services/select-state.service';
@@ -39,16 +30,6 @@ export class SelectComponent<T> extends SelectBase<T> {
 
   constructor(selectStateService: SelectStateService<T>, @Optional() ngControl: NgControl) {
     super(selectStateService, ngControl);
-  }
-
-  @HostListener('document:touchstart', ['$event'])
-  @HostListener('document:mousedown', ['$event'])
-  public processCloseOnTriggerTouch(): void {
-    this.isTriggerTouched$
-      .pipe(take(1))
-      .subscribe((isTriggerTouched: boolean) =>
-        isTriggerTouched ? this.resetIsTriggerTouchedState() : this.processCloseEvent()
-      );
   }
 
   public close(): void {
