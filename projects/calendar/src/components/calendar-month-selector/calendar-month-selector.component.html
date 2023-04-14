@@ -9,32 +9,31 @@
 </pupa-calendar-header>
 
 <div class="scroller-wrapper">
-  <pupa-scrollable>
-    <cdk-virtual-scroll-viewport
-      *pupaLet="monthNameByIndex$ | async as monthNameByIndex"
-      pupaScrollableContent
-      class="scroller"
-      [itemSize]="itemHeight"
-    >
-      <div class="scroller__item" *cdkVirtualFor="let item of items; templateCacheSize: 10; let isLast = last">
-        <div class="scroller__divider"></div>
+  <!-- wrap into pupa-scrollable to add scroll -->
+  <cdk-virtual-scroll-viewport
+    *pupaLet="monthNameByIndex$ | async as monthNameByIndex"
+    pupaScrollableContent
+    class="scroller"
+    [itemSize]="itemHeight"
+  >
+    <div class="scroller__item" *cdkVirtualFor="let item of items; templateCacheSize: 10; let isLast = last">
+      <div class="scroller__divider"></div>
 
-        <div class="year-table">
-          <div class="year-table__month" *ngFor="let month of item.months">
-            <pupa-calendar-selector-button
-              [isCurrent]="{ year: item.year, month } | isCurrentCalendarMonth"
-              (click)="selectMonth(item.year, month)"
-            >
-              {{ monthNameByIndex[month] }}
-            </pupa-calendar-selector-button>
-          </div>
+      <div class="year-table">
+        <div class="year-table__month" *ngFor="let month of item.months">
+          <pupa-calendar-selector-button
+            [isCurrent]="{ year: item.year, month } | isCurrentCalendarMonth"
+            (click)="selectMonth(item.year, month)"
+          >
+            {{ monthNameByIndex[month] }}
+          </pupa-calendar-selector-button>
         </div>
-
-        <ng-container *ngIf="!isLast">
-          <div class="scroller__divider"></div>
-          <div class="year-label">{{ item.year + 1 }}</div>
-        </ng-container>
       </div>
-    </cdk-virtual-scroll-viewport>
-  </pupa-scrollable>
+
+      <ng-container *ngIf="!isLast">
+        <div class="scroller__divider"></div>
+        <div class="year-label">{{ item.year + 1 }}</div>
+      </ng-container>
+    </div>
+  </cdk-virtual-scroll-viewport>
 </div>

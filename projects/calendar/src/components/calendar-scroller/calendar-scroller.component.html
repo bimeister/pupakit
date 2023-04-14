@@ -1,33 +1,32 @@
-<pupa-scrollable>
-  <cdk-virtual-scroll-viewport
-    pupaScrollableContent
-    class="scroller"
-    *pupaLet="
-      {
-        monthNameByIndex: monthNameByIndex$ | async,
-        selectedDates: selectedDates$ | async
-      };
-      let monthNameByIndex = monthNameByIndex;
-      let selectedDates = selectedDates
-    "
-  >
-    <div class="scroller__item" *cdkVirtualFor="let month of calendarMonths; templateCacheSize: 10; let isLast = last">
-      <pupa-calendar-month
-        [calendarMonth]="month"
-        [isCurrent]="month | isCurrentCalendarMonth"
-        (selectDate)="addSelectedDate($event)"
-        [selectedDates]="selectedDates"
-      ></pupa-calendar-month>
+<!-- wrap into pupa-scrollable to add scroll -->
+<cdk-virtual-scroll-viewport
+  pupaScrollableContent
+  class="scroller"
+  *pupaLet="
+    {
+      monthNameByIndex: monthNameByIndex$ | async,
+      selectedDates: selectedDates$ | async
+    };
+    let monthNameByIndex = monthNameByIndex;
+    let selectedDates = selectedDates
+  "
+>
+  <div class="scroller__item" *cdkVirtualFor="let month of calendarMonths; templateCacheSize: 10; let isLast = last">
+    <pupa-calendar-month
+      [calendarMonth]="month"
+      [isCurrent]="month | isCurrentCalendarMonth"
+      (selectDate)="addSelectedDate($event)"
+      [selectedDates]="selectedDates"
+    ></pupa-calendar-month>
 
-      <ng-container *ngIf="!isLast">
-        <div class="scroller__divider"></div>
+    <ng-container *ngIf="!isLast">
+      <div class="scroller__divider"></div>
 
-        <pupa-calendar-label *pupaLet="month | nextCalendarMonth as nextMonth">
-          {{ nextMonth.year }} {{ monthNameByIndex[nextMonth.month] }}
-        </pupa-calendar-label>
+      <pupa-calendar-label *pupaLet="month | nextCalendarMonth as nextMonth">
+        {{ nextMonth.year }} {{ monthNameByIndex[nextMonth.month] }}
+      </pupa-calendar-label>
 
-        <div class="scroller__divider"></div>
-      </ng-container>
-    </div>
-  </cdk-virtual-scroll-viewport>
-</pupa-scrollable>
+      <div class="scroller__divider"></div>
+    </ng-container>
+  </div>
+</cdk-virtual-scroll-viewport>
