@@ -85,6 +85,10 @@ export class TreeController {
     this.dispatchInQueue(new TreeEvents.ScrollById(treeItemId));
   }
 
+  public scrollTop(scrollTopPx: number): void {
+    this.dispatchInQueue(new TreeEvents.ScrollTop(scrollTopPx));
+  }
+
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {
     this.dataDisplayCollection.scrollBehavior$.next(scrollBehavior);
   }

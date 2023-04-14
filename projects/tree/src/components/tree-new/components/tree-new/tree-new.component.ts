@@ -7,10 +7,12 @@ import {
   Component,
   ContentChild,
   ElementRef,
+  EventEmitter,
   HostListener,
   Input,
   OnChanges,
   OnDestroy,
+  Output,
   Renderer2,
   TrackByFunction,
   Type,
@@ -48,6 +50,8 @@ interface Position {
 type ScrollDirection = null | 'up' | 'down';
 
 const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
+const TREE_ITEM_SIZE_PX: number = 32;
+const ITEM_BUFFER_COUNT: number = 50;
 const DRAG_CLONE_OFFSET_PX: number = 2;
 
 interface DragAndDropMeta {
@@ -74,6 +78,8 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   @ViewChild('viewPort', { static: true }) public readonly viewPort: CdkVirtualScrollViewport;
   @ContentChild(TreeItemTemplateDirective) public readonly treeItemTemplate: TreeItemTemplateDirective<T>;
 
+  @Output() public readonly scrolledByY: EventEmitter<number> = new EventEmitter<number>();
+
   public dataSource: TreeRangedDataSource;
   public dataDisplayCollection: TreeDataDisplayCollectionRef;
   public data$: Observable<FlatTreeItem[]>;
@@ -92,6 +98,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   );
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
   public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
+
+  public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
+
   private readonly expandWithDelay$: Subject<Nullable<FlatTreeItem>> = new Subject<Nullable<FlatTreeItem>>();
   private readonly subscription: Subscription = new Subscription();
 
@@ -104,6 +113,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   public ngAfterViewInit(): void {
     this.subscription.add(this.getSubscriptionToSetLoading());
     this.subscription.add(this.getSubscriptionToScrollToIndex());
+    this.subscription.add(this.getSubscriptionToScrollTop());
     this.subscription.add(this.getSubscriptionToSetExpanded());
     this.subscription.add(this.getSubscriptionToSetSelected());
     this.subscription.add(this.getSubscriptionForScrollWithDrag());
@@ -222,6 +232,11 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     );
   }
 
+  public onScroll(): void {
+    const scrollTopPx: number = this.viewPort.elementRef.nativeElement.scrollTop;
+    this.scrolledByY.emit(scrollTopPx);
+  }
+
   private setupController(change: ComponentChange<this, TreeController>): void {
     const value: Nullable<TreeController> = change?.currentValue;
     if (isNil(value)) {
@@ -313,6 +328,22 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     this.scrollBehavior$.pipe(take(1)).subscribe((scrollBehavior: ScrollBehavior) => {
       this.viewPort.scrollToIndex(index, scrollBehavior);
       this.skeletonViewPort.scrollToIndex(index, scrollBehavior);
+    });
+  }
+
+  private getSubscriptionToScrollTop(): Subscription {
+    return this.getEvents(TreeEvents.ScrollTop).subscribe((event: TreeEvents.ScrollTop) => {
+      this.scrollTop(event.payload);
+      this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
+    });
+  }
+
+  private scrollTop(scrollTopPx: number): void {
+    this.viewPort.scrollTo({
+      top: scrollTopPx,
+    });
+    this.skeletonViewPort.scrollTo({
+      top: scrollTopPx,
     });
   }
 

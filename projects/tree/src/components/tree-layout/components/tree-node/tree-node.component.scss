@@ -143,6 +143,14 @@
     }
   }
 
+  &--hovered {
+    background-color: color(neutral-6);
+
+    .tree-node__right {
+      background: linear-gradient(90deg, color(neutral-6, alpha-500) -95%, color(neutral-6) 70%);
+    }
+  }
+
   @include host-selector-dark-theme() {
     background-color: color(neutral-1000);
 
