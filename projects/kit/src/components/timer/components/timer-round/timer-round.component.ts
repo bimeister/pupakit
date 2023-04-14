@@ -104,7 +104,6 @@ export class TimerRoundComponent implements OnChanges {
 
   private stopTimer(): void {
     this.isActive$.next(false);
-    this.seconds$.next(this.sanitizedSecondsInput);
     this.setTimerPercentage(100);
 
     if (isNil(this.subscription)) {
