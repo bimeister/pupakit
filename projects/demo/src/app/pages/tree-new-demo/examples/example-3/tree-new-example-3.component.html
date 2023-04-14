@@ -7,8 +7,8 @@
   <pupa-tree-node *pupaTreeItemTemplate="let data" [treeNodeProperties]="treeNew.getTreeNodeProperties(data) | async"
     >{{ data?.name }}
     <ng-container *pupaTreeNodeActions="withActions.value">
-      <pupa-button-icon icon="app-eye-on" size="s" kind="secondary"></pupa-button-icon>
-      <pupa-button-icon icon="app-more" size="s" kind="secondary"></pupa-button-icon>
+      <pupa-button-icon icon="app-eye-on" size="m" kind="secondary"></pupa-button-icon>
+      <pupa-button-icon icon="app-more" size="m" kind="secondary"></pupa-button-icon>
     </ng-container>
   </pupa-tree-node>
 </pupa-tree-new>
