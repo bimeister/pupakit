@@ -63,6 +63,7 @@ export class TimerRoundComponent implements OnChanges {
   }
 
   public stop(): void {
+    this.seconds$.next(this.sanitizedSecondsInput);
     this.stopTimer();
   }
 
