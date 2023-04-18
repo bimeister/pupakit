@@ -38,8 +38,8 @@ export class RadioControlComponent<T> implements OnChanges {
   @HostListener('click')
   public processClick(): void {
     this.radioGroupService.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
-      this.select();
       this.setOnTouch();
+      this.select();
     });
   }
 
