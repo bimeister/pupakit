@@ -1,5 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { IconHolderSize } from '../../../../declarations/types/icon-holder-size.type';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { IconHolderSize } from '../../../..';
+import { IconHolderKind } from '../../../..';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 
 @Component({
   selector: 'pupa-icon-holder',
@@ -8,8 +12,33 @@ import { IconHolderSize } from '../../../../declarations/types/icon-holder-size.
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class IconHolderComponent {
+export class IconHolderComponent implements OnChanges {
   @Input() public size: IconHolderSize = 'large';
-
+  @Input() public kind: IconHolderKind = 'opacity';
   @Input() public withBackground: boolean = true;
+
+  private readonly kind$: BehaviorSubject<IconHolderKind> = new BehaviorSubject<IconHolderKind>('opacity');
+  private readonly size$: BehaviorSubject<IconHolderSize> = new BehaviorSubject<IconHolderSize>('large');
+
+  public readonly resultClassList$: Observable<string[]> = combineLatest([this.kind$, this.size$]).pipe(
+    map((classes: string[]) => classes.map((innerClass: string) => `holder_${innerClass}`))
+  );
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (changes.hasOwnProperty('size')) {
+      this.processSizeChange(changes?.size);
+    }
+
+    if (changes.hasOwnProperty('kind')) {
+      this.processColorChange(changes?.kind);
+    }
+  }
+
+  private processSizeChange(change: ComponentChange<this, IconHolderSize>): void {
+    this.size$.next(change.currentValue);
+  }
+
+  private processColorChange(change: ComponentChange<this, IconHolderKind>): void {
+    this.kind$.next(change.currentValue);
+  }
 }

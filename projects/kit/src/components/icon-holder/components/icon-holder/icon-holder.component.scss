@@ -1,6 +1,48 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
+$largeSize: 12rem;
+$mediumSize: 8rem;
+$smallSize: 6rem;
+$extraSmallSize: 5rem;
+
+@mixin super-rectangle($size) {
+  width: $size;
+  height: $size;
+  $width: trim($size);
+  $height: trim($size);
+  $halfWidth: $width / 2;
+  $halfHeight: $height / 2;
+  -webkit-mask: url("data:image/svg+xml;charset=US-ASCII,%3Csvg version='1.1' id='rectangle' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='" + $width + "' height='" + $height + "' viewBox='0 0 " + $width + ' ' + $height + "' enable-background='new 0 0 " + $width + ' ' + $height + "' xml:space='preserve'%3E%3Cpath fill='black' stroke='none' d='M 0," + $halfHeight + ' C 0,0 0,0 ' + $halfWidth + ',0 S ' + $width + ',0 ' + $width + ',' + $halfHeight + ' ' + $width + ',' + $height + ' ' + $halfWidth + ',' + $height + ' 0,' + $height + ' 0,' + $halfHeight + "'%3E%3C/path%3E%3C/svg%3E");
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  -webkit-mask-size: contain;
+}
+
+@mixin semantic-colors-rectangle() {
+  &.holder_danger {
+    background-color: semantic-color(kind-danger-normal);
+  }
+  &.holder_neutral {
+    background-color: semantic-color(kind-neutral-normal);
+  }
+  &.holder_opacity {
+    background-color: semantic-color(kind-opacity-normal);
+  }
+  &.holder_primary {
+    background-color: semantic-color(kind-primary-normal);
+  }
+  &.holder_success {
+    background-color: semantic-color(kind-success-normal);
+  }
+  &.holder_warning {
+    background-color: semantic-color(kind-warning-normal);
+  }
+  &.holder_disabled {
+    background-color: semantic-color(kind-neutral-disabled);
+  }
+}
+
 .holder {
   display: flex;
   justify-content: center;
@@ -11,7 +53,6 @@
   box-sizing: border-box;
   aspect-ratio: 1;
 
-  color: color(neutral-1000);
   @include host-selector-dark-theme() {
     color: color(neutral-1);
   }
@@ -26,26 +67,60 @@
   }
 
   &_large {
-    height: 12rem;
-    width: 12rem;
+    height: $largeSize;
+    width: $largeSize;
     font-size: 5rem;
   }
 
   &_medium {
-    height: 8rem;
-    width: 8rem;
+    height: $mediumSize;
+    width: $mediumSize;
     font-size: 4rem;
   }
 
   &_small {
-    height: 6rem;
-    width: 6rem;
+    height: $smallSize;
+    width: $smallSize;
     font-size: 3rem;
   }
 
   &_extra-small {
-    height: 5rem;
-    width: 5rem;
-    font-size: 8px;
+    height: $extraSmallSize;
+    width: $extraSmallSize;
+    font-size: 2rem;
+  }
+
+  &_with-background {
+    &.holder_large {
+      $size: $largeSize;
+      font-size: 5rem;
+
+      @include super-rectangle($size);
+      @include semantic-colors-rectangle();
+    }
+
+    &.holder_medium {
+      $size: $mediumSize;
+      font-size: 4rem;
+
+      @include super-rectangle($size);
+      @include semantic-colors-rectangle();
+    }
+
+    &.holder_small {
+      $size: $smallSize;
+      font-size: 3rem;
+
+      @include super-rectangle($size);
+      @include semantic-colors-rectangle();
+    }
+
+    &.holder_extra-small {
+      $size: $extraSmallSize;
+      font-size: 2rem;
+
+      @include super-rectangle($size);
+      @include semantic-colors-rectangle();
+    }
   }
 }
