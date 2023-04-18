@@ -1,55 +1,66 @@
 import { ListRange } from '@angular/cdk/collections';
 import { CdkVirtualScrollViewport, VirtualScrollStrategy } from '@angular/cdk/scrolling';
-import { isNil, shareReplayWithRefCount } from '@bimeister/utilities';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { isNil } from '@bimeister/utilities';
+import { Observable, Subject } from 'rxjs';
+import { distinctUntilChanged } from 'rxjs/operators';
 import { MONTHS_IN_YEAR } from '../constants/months-in-year.const';
 import { SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS } from '../constants/small-calendar-cycle-size-in-years.const';
 import { MonthIndex } from '../enums/month-index.enum';
 import { getHeightForEachMonthInCalendarCycle } from '../functions/get-height-for-each-month-in-calendar-cycle.function';
 import { CalendarVirtualScrollConfig } from '../interfaces/calendar-virtual-scroll-config.interface';
 
+function getCalendarCycleIndexByIndex(index: number): number {
+  const yearIndex: number = Math.floor(index / MONTHS_IN_YEAR);
+
+  return Math.floor(yearIndex / SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS);
+}
+
+function getDistanceToMonthInCycle(
+  cycle: readonly (readonly number[])[],
+  lastYear: number = SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS,
+  lastMonthIndex: MonthIndex = MonthIndex.December
+): number {
+  return cycle.reduce((total: number, year: readonly number[], yearIndex: number) => {
+    if (yearIndex > lastYear) {
+      return total;
+    }
+
+    const yearHeight: number = year.reduce((sum: number, monthHeight: number, monthIndex: MonthIndex) => {
+      const isBeforeTargetMonth: boolean = yearIndex < lastYear || monthIndex < lastMonthIndex;
+
+      return isBeforeTargetMonth ? sum + monthHeight : sum;
+    }, 0);
+
+    return total + yearHeight;
+  }, 0);
+}
+
 export class CalendarVirtualScrollStrategy implements VirtualScrollStrategy {
   private readonly index$: Subject<number> = new Subject<number>();
 
-  private readonly cycleIndex$: Observable<number> = this.index$.pipe(
-    distinctUntilChanged(),
-    map((index: number) => {
-      const yearIndex: number = Math.floor(index / MONTHS_IN_YEAR);
-
-      return Math.floor(yearIndex / SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS);
-    }),
-    distinctUntilChanged()
-  );
+  private cycleIndex: number = 0;
 
   private viewport: CdkVirtualScrollViewport | null = null;
 
   private cycleHeight: number;
 
-  public readonly scrolledIndexChange: Observable<number> = this.index$.pipe(
-    distinctUntilChanged(),
-    shareReplayWithRefCount()
-  );
+  public readonly scrolledIndexChange: Observable<number> = this.index$.pipe(distinctUntilChanged());
 
   private cycleMonthsHeights: readonly (readonly number[])[] = this.getCycleMonthHeights(0);
 
-  private readonly subscription: Subscription = new Subscription();
-
   constructor(private readonly config: CalendarVirtualScrollConfig) {
-    this.cycleHeight = CalendarVirtualScrollStrategy.getDistanceToMonthInCycle(this.cycleMonthsHeights);
+    this.cycleHeight = getDistanceToMonthInCycle(this.cycleMonthsHeights);
   }
 
   public attach(viewport: CdkVirtualScrollViewport): void {
     this.viewport = viewport;
     this.viewport.setTotalContentSize(this.getViewportHeight(this.cycleHeight, this.config.yearsRange));
     this.updateRenderedRange(this.viewport);
-    this.subscription.add(this.updateCycleMonthHeightsWhenCycleIndexChanged());
   }
 
   public detach(): void {
     this.index$.complete();
     this.viewport = null;
-    this.subscription.unsubscribe();
   }
 
   public onContentScrolled(): void {
@@ -119,23 +130,35 @@ export class CalendarVirtualScrollStrategy implements VirtualScrollStrategy {
     const firstVisibleIndex: number = this.getIndexForOffset(offset);
 
     const startOffset: number = offset - this.getOffsetForIndex(start);
+    const endOffset: number = this.getOffsetForIndex(end) - offset - viewport.getViewportSize();
 
-    if (startOffset < this.config.bufferPx && start !== 0) {
+    const isScrollUp: boolean = startOffset < this.config.bufferPx && start !== 0;
+    const isScrollDown: boolean = endOffset < this.config.bufferPx && end !== viewport.getDataLength();
+
+    const update: VoidFunction = () => {
+      viewport.setRenderedRange(newRange);
+      viewport.setRenderedContentOffset(this.getOffsetForIndex(newRange.start));
+      this.index$.next(firstVisibleIndex);
+      this.updateViewportHeightByIndex(firstVisibleIndex);
+    };
+
+    if (isScrollUp) {
       newRange.start = this.getRangeStartByOffset(offset, 2);
       newRange.end = this.getRangeEndByOffset(offset);
-    } else {
-      const endOffset: number = this.getOffsetForIndex(end) - offset - viewport.getViewportSize();
 
-      if (endOffset < this.config.bufferPx && end !== viewport.getDataLength()) {
-        newRange.start = this.getRangeStartByOffset(offset);
-        newRange.end = this.getRangeEndByOffset(offset, 2);
-      }
+      update();
+      return;
     }
 
-    viewport.setRenderedRange(newRange);
-    viewport.setRenderedContentOffset(this.getOffsetForIndex(newRange.start));
+    if (isScrollDown) {
+      newRange.start = this.getRangeStartByOffset(offset);
+      newRange.end = this.getRangeEndByOffset(offset, 2);
 
-    this.index$.next(firstVisibleIndex);
+      update();
+      return;
+    }
+
+    update();
   }
 
   private getRangeStartByOffset(offset: number, bufferFactor: number = 1): number {
@@ -143,20 +166,19 @@ export class CalendarVirtualScrollStrategy implements VirtualScrollStrategy {
   }
 
   private getRangeEndByOffset(offset: number, bufferFactor: number = 1): number {
-    return Math.min(
-      this.viewport.getDataLength(),
-      this.getIndexForOffset(offset + this.viewport.getViewportSize() + this.config.bufferPx * bufferFactor)
-    );
+    const itemsCount: number = this.viewport.getDataLength();
+
+    const bufferSizePx: number = this.config.bufferPx * bufferFactor;
+
+    const endOffset: number = offset + this.viewport.getViewportSize();
+
+    return Math.min(itemsCount, this.getIndexForOffset(endOffset + bufferSizePx));
   }
 
   private getDistanceToMonthInScroll(year: number, monthIndex?: number): number {
     const remainderYear: number = year % SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS;
 
-    const remainderHeight: number = CalendarVirtualScrollStrategy.getDistanceToMonthInCycle(
-      this.cycleMonthsHeights,
-      remainderYear,
-      monthIndex
-    );
+    const remainderHeight: number = getDistanceToMonthInCycle(this.cycleMonthsHeights, remainderYear, monthIndex);
 
     const fullCyclesCount: number = (year - remainderYear) / SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS;
 
@@ -167,12 +189,19 @@ export class CalendarVirtualScrollStrategy implements VirtualScrollStrategy {
     return year === 0 ? distanceToMonth : distanceToMonth + this.config.dividerHeightPx;
   }
 
-  private updateCycleMonthHeightsWhenCycleIndexChanged(): Subscription {
-    return this.cycleIndex$.subscribe((cycleIndex: number) => {
-      this.cycleMonthsHeights = this.getCycleMonthHeights(cycleIndex);
-      this.cycleHeight = CalendarVirtualScrollStrategy.getDistanceToMonthInCycle(this.cycleMonthsHeights);
-      this.viewport.setTotalContentSize(this.getViewportHeight(this.cycleHeight, this.config.yearsRange));
-    });
+  private updateViewportHeightByIndex(index: number): void {
+    const newCycleIndex: number = getCalendarCycleIndexByIndex(index);
+
+    if (newCycleIndex === this.cycleIndex) {
+      return;
+    }
+
+    this.cycleIndex = newCycleIndex;
+
+    this.cycleMonthsHeights = this.getCycleMonthHeights(this.cycleIndex);
+    this.cycleHeight = getDistanceToMonthInCycle(this.cycleMonthsHeights);
+
+    this.viewport.setTotalContentSize(this.getViewportHeight(this.cycleHeight, this.config.yearsRange));
   }
 
   private getCycleMonthHeights(cycleIndex: number): readonly (readonly number[])[] {
@@ -193,25 +222,5 @@ export class CalendarVirtualScrollStrategy implements VirtualScrollStrategy {
       this.config.labelHeightPx -
       this.config.dividerHeightPx * 2
     );
-  }
-
-  private static getDistanceToMonthInCycle(
-    cycle: readonly (readonly number[])[],
-    lastYear: number = SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS,
-    lastMonthIndex: MonthIndex = MonthIndex.December
-  ): number {
-    return cycle.reduce((total: number, year: readonly number[], yearIndex: number) => {
-      if (yearIndex > lastYear) {
-        return total;
-      }
-
-      const yearHeight: number = year.reduce((sum: number, monthHeight: number, monthIndex: MonthIndex) => {
-        const isBeforeTargetMonth: boolean = yearIndex < lastYear || monthIndex < lastMonthIndex;
-
-        return isBeforeTargetMonth ? sum + monthHeight : sum;
-      }, 0);
-
-      return total + yearHeight;
-    }, 0);
   }
 }

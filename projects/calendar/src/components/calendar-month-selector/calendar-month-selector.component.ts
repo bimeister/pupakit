@@ -9,8 +9,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { MONTHS_IN_YEAR } from '../../declarations/constants/months-in-year.const';
 import { CalendarTextKey } from '../../declarations/enums/calendar-text-key.enum';
 import { MonthIndex } from '../../declarations/enums/month-index.enum';
@@ -18,11 +18,6 @@ import { CalendarMonth } from '../../declarations/interfaces/calendar-month.inte
 import { CalendarTranslation } from '../../declarations/interfaces/calendar-translation.interface';
 import { CalendarConfigService } from '../../services/calendar-config.service';
 import { CalendarTranslationService } from '../../services/calendar-translation.service';
-
-interface ItemToRender {
-  year: number;
-  months: number[];
-}
 
 const DIVIDER_HEIGHT_PX: number = 12;
 const YEAR_LABEL_HEIGHT_PX: number = 16;
@@ -43,22 +38,25 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
   @ViewChild(CdkVirtualScrollViewport)
   private readonly virtualScrollViewport: CdkVirtualScrollViewport;
 
+  private readonly virtualScrollViewport$: Subject<CdkVirtualScrollViewport> = new Subject<CdkVirtualScrollViewport>();
+
   public readonly headerTitle$: Observable<string> = this.calendarTranslationService.translation$.pipe(
     map((translation: CalendarTranslation) => translation.texts[CalendarTextKey.SelectMonth])
   );
 
   public readonly itemHeight: number = ITEM_HEIGHT_PX;
 
-  private readonly startYear: number = this.calendarConfigService.startYear;
+  public readonly startYear: number = this.calendarConfigService.startYear;
 
-  public currentYearInScroll$: Observable<number>;
+  public readonly currentYearInScroll$: Observable<number> = this.virtualScrollViewport$.pipe(
+    switchMap((viewport: CdkVirtualScrollViewport) => viewport.scrolledIndexChange),
+    map((index: number) => index + this.startYear)
+  );
 
-  public readonly items: ItemToRender[] = Array.from({
+  public readonly yearsIndexes: unknown[] = Array.from({
     length: this.calendarConfigService.yearsRange,
-  }).map((_: unknown, yearIndex: number) => ({
-    year: this.startYear + yearIndex,
-    months: Array.from({ length: MONTHS_IN_YEAR }).map((__: unknown, monthIndex: MonthIndex) => monthIndex),
-  }));
+  });
+  public readonly monthsIndexes: unknown[] = Array.from({ length: MONTHS_IN_YEAR });
 
   public readonly monthNameByIndex$: Observable<Record<MonthIndex, string>> =
     this.calendarTranslationService.translation$.pipe(map((translation: CalendarTranslation) => translation.months));
@@ -69,16 +67,11 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
   ) {}
 
   public ngAfterViewInit(): void {
-    this.currentYearInScroll$ = this.getCurrentYearInScroll();
     this.scrollToCurrentYear();
-  }
 
-  public getCurrentYearInScroll(): Observable<number> {
-    if (isNil(this.virtualScrollViewport)) {
-      throw new Error('[CalendarMonthSelectorComponent] virtualScrollViewport is not provided');
+    if (!isNil(this.virtualScrollViewport)) {
+      this.virtualScrollViewport$.next(this.virtualScrollViewport);
     }
-
-    return this.virtualScrollViewport.scrolledIndexChange.pipe(map((index: number) => index + this.startYear));
   }
 
   public selectMonth(year: number, month: number): void {
@@ -96,7 +89,7 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
     const currentYearIndex: number = new Date().getFullYear() - this.startYear;
 
     requestAnimationFrame(() => {
-      this.virtualScrollViewport.scrollToIndex(currentYearIndex, 'auto');
+      this.virtualScrollViewport.scrollToIndex(currentYearIndex);
     });
   }
 }

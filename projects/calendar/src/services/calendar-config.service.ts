@@ -1,7 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { isEmpty, isNil } from '@bimeister/utilities';
-import { DEFAULT_CALENDAR_TRANSLATIONS } from '../declarations/constants/default-calendar-translations.const';
-import { DEFAULT_CALENDAR_YEARS_RANGE } from '../declarations/constants/default-calendar-years-range.const';
+import { DEFAULT_CALENDAR_CONFIG } from '../declarations/constants/default-calendar-config.const';
 import { SMALL_CALENDAR_CYCLE_SIZE_IN_YEARS } from '../declarations/constants/small-calendar-cycle-size-in-years.const';
 import { CALENDAR_CONFIG_TOKEN } from '../declarations/constants/tokens/calendar-config.token';
 import { DayOfWeek } from '../declarations/enums/day-of-week.enum';
@@ -39,7 +38,7 @@ export class CalendarConfigService {
   }
 
   constructor(@Optional() @Inject(CALENDAR_CONFIG_TOKEN) config: Partial<CalendarConfig>) {
-    this.startWeekday = config?.startWeekday ?? DayOfWeek.Monday;
+    this.startWeekday = config?.startWeekday ?? DEFAULT_CALENDAR_CONFIG.startWeekday;
 
     this.startYear = config?.startYear ?? CalendarConfigService.getDefaultStartYear();
 
@@ -49,15 +48,15 @@ export class CalendarConfigService {
 
     this.endYear = this.startYear + this.yearsRange;
 
-    this.translations = !isEmpty(config?.translations) ? config.translations : DEFAULT_CALENDAR_TRANSLATIONS;
+    this.translations = !isEmpty(config?.translations) ? config.translations : DEFAULT_CALENDAR_CONFIG.translations;
   }
 
   private static getDefaultStartYear(): number {
-    return new Date().getFullYear() - Math.floor(DEFAULT_CALENDAR_YEARS_RANGE / 2);
+    return new Date().getFullYear() - Math.floor(DEFAULT_CALENDAR_CONFIG.yearsRange / 2);
   }
 
   private static getDefaultEndYear(): number {
-    return new Date().getFullYear() + Math.floor(DEFAULT_CALENDAR_YEARS_RANGE / 2);
+    return new Date().getFullYear() + Math.floor(DEFAULT_CALENDAR_CONFIG.yearsRange / 2);
   }
 
   private static validateYearsRange(yearsRange: number | undefined): void {

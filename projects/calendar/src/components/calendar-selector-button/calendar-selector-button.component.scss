@@ -2,6 +2,8 @@
 @use 'functions' as *;
 
 .button {
+  all: unset;
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,12 +12,6 @@
   height: 8rem;
   border-radius: 1rem;
   box-sizing: border-box;
-
-  appearance: none;
-  user-select: none;
-  pointer-events: none;
-  background: transparent;
-  border-color: transparent;
 
   @include no-tap-highlight();
 

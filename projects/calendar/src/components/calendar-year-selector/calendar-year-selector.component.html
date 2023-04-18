@@ -5,7 +5,6 @@
 </pupa-calendar-header>
 
 <div class="scroller-wrapper">
-  <!-- wrap into pupa-scrollable to add scroll -->
   <cdk-virtual-scroll-viewport pupaScrollableContent class="scroller" [itemSize]="rowHeightPx">
     <div class="scroller__row" *cdkVirtualFor="let yearsRow of yearsTable; templateCacheSize: 10">
       <pupa-calendar-selector-button

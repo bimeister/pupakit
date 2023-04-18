@@ -1,10 +1,10 @@
-<div class="selection" *ngIf="currentCalendarMonth$ | async as currentCalendarMonth">
+<div class="selection" *ngIf="displayedMonth$ | async as displayedMonth">
   <pupa-button (click)="setFastSelectModeMonth()" kind="secondary">
-    {{ (monthNameByIndex$ | async)[currentCalendarMonth.month] }}
+    {{ displayedMonth.month }}
   </pupa-button>
 
   <pupa-button (click)="setFastSelectModeYear()" kind="secondary">
-    {{ currentCalendarMonth.year }}
+    {{ displayedMonth.year }}
   </pupa-button>
 </div>
 

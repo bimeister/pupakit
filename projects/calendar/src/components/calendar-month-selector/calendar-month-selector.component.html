@@ -9,21 +9,23 @@
 </pupa-calendar-header>
 
 <div class="scroller-wrapper">
-  <!-- wrap into pupa-scrollable to add scroll -->
   <cdk-virtual-scroll-viewport
     *pupaLet="monthNameByIndex$ | async as monthNameByIndex"
     pupaScrollableContent
     class="scroller"
     [itemSize]="itemHeight"
   >
-    <div class="scroller__item" *cdkVirtualFor="let item of items; templateCacheSize: 10; let isLast = last">
+    <div
+      class="scroller__item"
+      *cdkVirtualFor="let _ of yearsIndexes; templateCacheSize: 10; let isLast = last; let yearIndex = index"
+    >
       <div class="scroller__divider"></div>
 
       <div class="year-table">
-        <div class="year-table__month" *ngFor="let month of item.months">
+        <div class="year-table__month" *ngFor="let __ of monthsIndexes; let month = index">
           <pupa-calendar-selector-button
-            [isCurrent]="{ year: item.year, month } | isCurrentCalendarMonth"
-            (click)="selectMonth(item.year, month)"
+            [isCurrent]="{ year: startYear + yearIndex, month } | isCurrentCalendarMonth"
+            (click)="selectMonth(startYear + yearIndex, month)"
           >
             {{ monthNameByIndex[month] }}
           </pupa-calendar-selector-button>
@@ -32,7 +34,7 @@
 
       <ng-container *ngIf="!isLast">
         <div class="scroller__divider"></div>
-        <div class="year-label">{{ item.year + 1 }}</div>
+        <div class="year-label">{{ yearIndex + startYear + 1 }}</div>
       </ng-container>
     </div>
   </cdk-virtual-scroll-viewport>

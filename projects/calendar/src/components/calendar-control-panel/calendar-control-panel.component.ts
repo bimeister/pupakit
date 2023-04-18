@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { CalendarFastSelectMode } from '../../declarations/enums/calendar-fast-select-mode.enum';
 import { MonthIndex } from '../../declarations/enums/month-index.enum';
@@ -9,6 +9,11 @@ import { CalendarManipulatorService } from '../../services/calendar-manipulator.
 import { CalendarStateService } from '../../services/calendar-state.service';
 import { CalendarTranslationService } from '../../services/calendar-translation.service';
 
+interface DisplayedMonth {
+  year: number;
+  month: string;
+}
+
 @Component({
   selector: 'pupa-calendar-control-panel',
   templateUrl: './calendar-control-panel.component.html',
@@ -17,11 +22,18 @@ import { CalendarTranslationService } from '../../services/calendar-translation.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarControlPanelComponent {
-  public readonly currentCalendarMonth$: Observable<CalendarMonth> =
-    this.calendarManipulatorService.currentCalendarMonth$;
-
-  public readonly monthNameByIndex$: Observable<Record<MonthIndex, string>> =
+  private readonly monthTranslationByIndex$: Observable<Record<MonthIndex, string>> =
     this.calendarTranslationService.translation$.pipe(map((translation: CalendarTranslation) => translation.months));
+
+  public readonly displayedMonth$: Observable<DisplayedMonth> = combineLatest([
+    this.calendarManipulatorService.currentCalendarMonth$,
+    this.monthTranslationByIndex$,
+  ]).pipe(
+    map(([calendarMonth, monthTranslationByIndex]: [CalendarMonth, Record<MonthIndex, string>]) => ({
+      year: calendarMonth.year,
+      month: monthTranslationByIndex[calendarMonth.month],
+    }))
+  );
 
   constructor(
     private readonly calendarManipulatorService: CalendarManipulatorService,

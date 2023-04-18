@@ -39,11 +39,7 @@ export class CalendarScrollerComponent implements AfterViewInit {
 
   public readonly calendarMonths: CalendarMonth[] = Array.from(
     { length: this.calendarConfigService.yearsRange * MONTHS_IN_YEAR },
-    (_: unknown, i: number) => ({
-      year:
-        Math.floor(i / MONTHS_IN_YEAR) + (this.calendarConfigService.endYear - this.calendarConfigService.yearsRange),
-      month: i % MONTHS_IN_YEAR,
-    })
+    (_: unknown, monthGlobalIndex: number) => this.getCalendarMonthByMonthGlobalIndex(monthGlobalIndex)
   );
 
   public readonly monthNameByIndex$: Observable<Record<MonthIndex, string>> =
@@ -67,5 +63,12 @@ export class CalendarScrollerComponent implements AfterViewInit {
 
   public addSelectedDate(date: Date): void {
     this.calendarStateService.addSelectedDate(date);
+  }
+
+  private getCalendarMonthByMonthGlobalIndex(index: number): CalendarMonth {
+    return {
+      year: Math.floor(index / MONTHS_IN_YEAR) + this.calendarConfigService.startYear,
+      month: index % MONTHS_IN_YEAR,
+    };
   }
 }
