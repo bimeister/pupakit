@@ -233,13 +233,13 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
           this.currentSerializedValue$.next(updatedValue);
           this.isTouched$.next(true);
 
+          if (typeof onTouchedCallback === 'function') {
+            onTouchedCallback();
+          }
+
           if (typeof onChangeCallback === 'function') {
             const parsedValue: T[] = SelectStateService.getParsedValue<T>(updatedValue);
             onChangeCallback(isMultiSelectionEnabled ? parsedValue : parsedValue[0]);
-          }
-
-          if (typeof onTouchedCallback === 'function') {
-            onTouchedCallback();
           }
 
           if (!isMultiSelectionEnabled) {
@@ -266,11 +266,12 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     const sanitizedValue: T[] = Array.isArray(value) ? value : [value];
     const serializedValue: string[] = sanitizedValue.map((valueItem: T) => JSON.stringify(valueItem));
     const serializedSet: Set<string> = new Set<string>(serializedValue);
-    this.currentSerializedValue$.next(serializedSet);
 
     if (!isEmpty(value)) {
       this.isTouched$.next(true);
     }
+
+    this.currentSerializedValue$.next(serializedSet);
   }
 
   public reset(): void {
