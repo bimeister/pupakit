@@ -535,20 +535,16 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
         this.hasHorizontalScrollbar$.next(hasHorizontalScrollbarCurrent);
 
         const isVerticalScrollbarVisible: boolean =
-          !this.invisibleScrollbars.includes('vertical') && hasVerticalScrollbarCurrent;
+          !this.invisibleScrollbars.includes('vertical') && hasVerticalScrollbarCurrent && hasVerticalScrollbar;
 
         const isHorizontalScrollbarVisible: boolean =
-          !this.invisibleScrollbars.includes('horizontal') && hasHorizontalScrollbarCurrent;
+          !this.invisibleScrollbars.includes('horizontal') && hasHorizontalScrollbarCurrent && hasHorizontalScrollbar;
 
-        if (isVerticalScrollbarVisible !== hasVerticalScrollbar) {
-          this.ngZone.run(() => this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible));
-          this.setScrollbarsClassesByVerticalScrollbarVisibility(isVerticalScrollbarVisible);
-        }
+        this.ngZone.run(() => this.verticalScrollVisibilityChanged.emit(isVerticalScrollbarVisible));
+        this.setScrollbarsClassesByVerticalScrollbarVisibility(isVerticalScrollbarVisible);
 
-        if (isHorizontalScrollbarVisible !== hasHorizontalScrollbar) {
-          this.ngZone.run(() => this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible));
-          this.setScrollbarsClassesByHorizontalScrollbarVisibility(isHorizontalScrollbarVisible);
-        }
+        this.ngZone.run(() => this.horizontalScrollVisibilityChanged.emit(isHorizontalScrollbarVisible));
+        this.setScrollbarsClassesByHorizontalScrollbarVisibility(isHorizontalScrollbarVisible);
 
         this.verticalScrollbar.setSizes({
           contentSizePx: contentElement.clientHeight,
