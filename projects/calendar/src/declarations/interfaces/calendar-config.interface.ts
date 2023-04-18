@@ -1,9 +1,5 @@
-import { CalendarTranslation } from '../../declarations/interfaces/calendar-translation.interface';
-import { DayOfWeek } from '../enums/day-of-week.enum';
+import { BaseCalendarConfig } from './base-calendar-config.interface';
 
-export interface CalendarConfig {
-  readonly startWeekday: DayOfWeek;
+export interface CalendarConfig extends BaseCalendarConfig {
   readonly startYear: number;
-  readonly yearsRange: number;
-  readonly translations: Record<string, CalendarTranslation>;
 }

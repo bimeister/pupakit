@@ -79,7 +79,7 @@ export class CalendarYearSelectorComponent implements AfterViewInit {
     const currentYearIndex: number = Math.floor((this.currentYear - this.startYear) / YEARS_IN_ROW);
 
     requestAnimationFrame(() => {
-      this.virtualScrollViewport.scrollToIndex(currentYearIndex, 'auto');
+      this.virtualScrollViewport.scrollToIndex(currentYearIndex);
     });
   }
 }
