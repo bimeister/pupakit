@@ -3,7 +3,7 @@ import { DOCUMENT } from '@angular/common';
 import { ElementRef, EventEmitter, Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { FormControlStatus, NgControl } from '@angular/forms';
 import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
+import { asyncScheduler, BehaviorSubject, combineLatest, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, startWith, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { isFormControlValidStatus } from '../../../declarations/functions/is-form-control-valid-status.function';
 import { SelectStateServiceDeclaration as SelectStateServiceInterface } from '../../../declarations/interfaces/select-state-service-declaration.interface';
@@ -103,7 +103,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   }
 
   public collapse(): void {
-    this.isExpanded$.next(false);
+    asyncScheduler.schedule(() => this.isExpanded$.next(false));
   }
 
   public open(): void {
