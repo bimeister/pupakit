@@ -24,7 +24,7 @@
     "email": "opensource@bimeister.com"
   },
   "scripts": {
-    "build:demo-ci": "moon run demo:build -- --base-href \"${CI_PAGES_URL}/\""
+    "build:demo-ci": "moon run demo:build -- --base-href \"https://bimeister.github.io/pupakit/\""
   },
   "peerDependencies": {
     "@angular/common": "^14.2.0",

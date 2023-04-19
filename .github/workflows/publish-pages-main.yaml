@@ -1,0 +1,104 @@
+name: Publish Pages Main
+
+on:
+  push:
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+jobs:
+  install:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.14.0
+          cache: 'npm'
+
+      - name: Install missing packages
+        run: npm install @moonrepo/core-linux-x64-gnu --save-dev
+
+      - name: Install dependencies by lockfile
+        run: npm clean-install
+
+      - name: Cache workspace
+        uses: actions/cache@v3
+        with:
+          key: 'workspace:${{github.sha}}'
+          path: ./
+
+  bundle:
+    name: Build Demo Static Files
+    runs-on: ubuntu-latest
+    needs:
+      - install
+    steps:
+      - name: Download cached workspace
+        uses: actions/cache@v3
+        with:
+          key: 'workspace:${{github.sha}}'
+          path: ./
+
+      - name: Download moon cache
+        uses: actions/cache@v3
+        with:
+          key: 'moon'
+          path: ./.moon/cache
+
+      - name: Build static files
+        run: |
+          npm run moon run demo:build-ci
+          cp ./projects/demo/dist/index.html ./projects/demo/dist/404.html
+
+      - name: Generate report
+        uses: moonrepo/run-report-action@v1
+        if: success() || failure()
+        with:
+          access-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Cache demo project
+        uses: actions/cache@v3
+        with:
+          key: 'pages-main:demo:${{github.sha}}'
+          path: ./projects/demo/dist
+
+  deploy:
+    name: Deploy to GitHub Pages
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - bundle
+    steps:
+      - name: Download cached demo project
+        uses: actions/cache@v3
+        with:
+          key: 'pages-main:demo:${{github.sha}}'
+          path: ./projects/demo/dist
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: './projects/demo/dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
