@@ -1,7 +1,18 @@
-import { AfterContentInit, ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  HostBinding,
+  Inject,
+  ViewEncapsulation,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ModalLayoutFooterComponent } from '../modal-layout-footer/modal-layout-footer.component';
 import { ModalLayoutTitleComponent } from '../modal-layout-title/modal-layout-title.component';
+import { ModalLayoutHeaderComponent } from '../modal-layout-header/modal-layout-header.component';
+import { ModalRef } from '../../../../declarations/classes/modal-ref.class';
+import { ModalHeightType } from '../../../../declarations/types/modal-height.type';
 
 @Component({
   selector: 'pupa-modal-layout',
@@ -19,9 +30,20 @@ export class ModalLayoutComponent implements AfterContentInit {
 
   public readonly withTitle$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @ContentChild(ModalLayoutHeaderComponent) public modalLayoutHeaderComponent: ModalLayoutHeaderComponent;
+
+  public readonly withHeader$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public readonly withBorder: boolean = this.modalRef.hasBorder;
+
+  @HostBinding('attr.height') public readonly modalHeight: ModalHeightType = this.modalRef.height;
+
+  constructor(@Inject(ModalRef) public readonly modalRef: ModalRef<string>) {}
+
   public ngAfterContentInit(): void {
     this.processWithTitleChange();
     this.processWithFooterChange();
+    this.processWithHeaderChange();
   }
 
   private processWithTitleChange(): void {
@@ -32,5 +54,10 @@ export class ModalLayoutComponent implements AfterContentInit {
   private processWithFooterChange(): void {
     const withFooter: boolean = this.modalLayoutFooterComponent !== undefined;
     this.withFooter$.next(withFooter);
+  }
+
+  private processWithHeaderChange(): void {
+    const withHeader: boolean = this.modalLayoutHeaderComponent !== undefined;
+    this.withHeader$.next(withHeader);
   }
 }

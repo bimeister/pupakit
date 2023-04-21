@@ -13,6 +13,8 @@ import { ModalDemoExample5HelperComponent } from './examples/modal-demo-example-
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoRoutingModule } from './modal-demo-routing.module';
 import { ModalDemoComponent } from './modal-demo.component';
+import { ModalDemoExample6Component } from './examples/modal-demo-example-6/modal-content/modal-demo-example-6.component';
+import { ModalDemoExample6HelperComponent } from './examples/modal-demo-example-6/modal-demo-example-6-helper/modal-demo-example-6-helper.component';
 
 const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample1Component,
@@ -25,6 +27,8 @@ const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample4HelperComponent,
   ModalDemoExample5Component,
   ModalDemoExample5HelperComponent,
+  ModalDemoExample6Component,
+  ModalDemoExample6HelperComponent,
 ];
 
 @NgModule({

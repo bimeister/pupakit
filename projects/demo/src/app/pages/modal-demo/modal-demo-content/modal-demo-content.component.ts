@@ -37,8 +37,4 @@ export class ModalDemoContentComponent {
   public changeModalPosition(newPosition: Position): void {
     this.modalRef.updatePosition(newPosition);
   }
-
-  public get size(): string {
-    return this.modalRef.size;
-  }
 }

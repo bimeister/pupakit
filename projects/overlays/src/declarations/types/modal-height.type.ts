@@ -1,1 +1,1 @@
-export type ModalHeightType = 'xs' | 's' | 'm' | 'l';
+export type ModalHeightType = 'xs' | 's' | 'm' | 'l' | '';

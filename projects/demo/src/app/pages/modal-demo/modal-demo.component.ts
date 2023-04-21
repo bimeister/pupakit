@@ -1,14 +1,16 @@
 import { ChangeDetectionStrategy, Component, Injector, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Position } from '@bimeister/pupakit.common';
-import { ModalsService, OpenedModal } from '@bimeister/pupakit.overlays';
+import { ModalConfig, ModalHeightType, ModalsService, OpenedModal } from '@bimeister/pupakit.overlays';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { MODAL_DATA_TOKEN } from '../../../declarations/tokens/modal-data.token';
 import { ModalDemoContentComponent } from './modal-demo-content/modal-demo-content.component';
 import { ModalDemoLocalService } from './services/modal-demo-local.service';
-import { isNil } from '@bimeister/utilities';
 
 const BASE_REQUEST_PATH: string = 'modal-demo/examples';
+type ModalFormStructure = {
+  [Key in keyof ModalConfig]: FormControl<ModalConfig[Key]>;
+};
 
 @Component({
   selector: 'demo-modal-demo',
@@ -49,13 +51,19 @@ export class ModalDemoComponent {
     TS: `${BASE_REQUEST_PATH}/modal-demo-example-5/modal-demo-example-5-helper/modal-demo-example-5-helper.component.ts`,
   };
 
-  public readonly formGroup: FormGroup = new FormGroup({
-    hasBackdrop: new FormControl(true),
-    closeOnBackdropClick: new FormControl(true),
-    isBackdropTransparent: new FormControl(false),
-    isFullscreen: new FormControl(false),
-    height: new FormControl(''),
-    size: new FormControl(''),
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/modal-demo-example-6/modal-content/modal-demo-example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/modal-demo-example-6/modal-content/modal-demo-example-6.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/modal-demo-example-6/modal-demo-example-6-helper/modal-demo-example-6-helper.component.ts`,
+  };
+
+  public readonly formGroup: FormGroup = new FormGroup<Partial<ModalFormStructure>>({
+    hasBackdrop: new FormControl<boolean>(true),
+    closeOnBackdropClick: new FormControl<boolean>(true),
+    isBackdropTransparent: new FormControl<boolean>(false),
+    isFullscreen: new FormControl<boolean>(false),
+    height: new FormControl<ModalHeightType>(''),
+    hasBorder: new FormControl<boolean>(false),
   });
 
   public readonly sizeOptions: PropsOption[] = [
@@ -87,7 +95,6 @@ export class ModalDemoComponent {
     const openedModal: OpenedModal<string> = this.modalsService.open(ModalDemoContentComponent, {
       ...this.formGroup.value,
       injector: this.injector,
-      height: isNil(this.formGroup.value.size) ? 400 : null,
       width: 400,
       providers: [
         {

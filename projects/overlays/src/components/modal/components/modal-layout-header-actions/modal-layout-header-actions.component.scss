@@ -3,17 +3,46 @@
 
 :host {
   display: flex;
-  align-items: center;
+  justify-content: flex-end;
   gap: 1rem;
-  border-bottom: 1px solid color(neutral-7);
-  min-height: 9rem;
 
-  @include xs() {
-    padding: 0 4rem;
-    min-height: 12rem;
+  @include xs {
+    position: relative;
+    padding-bottom: calc(3.5rem + 1px);
+    margin-bottom: 3.5rem;
+
+    &::after {
+      content: '';
+      width: calc(100% + 10rem);
+      height: 0.5px;
+      background-color: semantic-color(lines-normal);
+      position: absolute;
+      top: 100%;
+      left: -5rem;
+    }
   }
 
   :host-context(.modal-layout_no-title) {
     width: 100%;
+  }
+}
+
+:host-context(.modal-layout_no-border) {
+  :host {
+    @include xs {
+      padding-bottom: calc(3.5rem + 1px);
+      margin-bottom: 0;
+      &::after {
+        content: none;
+      }
+    }
+  }
+}
+
+:host-context(.modal-layout_no-title) {
+  :host {
+    @include xs {
+      margin-bottom: 0;
+    }
   }
 }

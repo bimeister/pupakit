@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ModalConfig } from '../interfaces/modal-config.interface';
 import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
+import { ModalHeightType } from '../types/modal-height.type';
 
 export class ModalRef<ReturnDataT = null> {
   public readonly closed$: Subject<ReturnDataT> = new Subject<ReturnDataT>();
@@ -52,7 +53,11 @@ export class ModalRef<ReturnDataT = null> {
     this.toTopLayerMoved$.complete();
   }
 
-  public get size(): string | null {
-    return this.config.size;
+  public get height(): ModalHeightType {
+    return this.config.height;
+  }
+
+  public get hasBorder(): boolean {
+    return this.config.hasBorder;
   }
 }

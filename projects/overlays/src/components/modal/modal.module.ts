@@ -2,7 +2,12 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { PupaButtonsModule, PupaScrollableModule, PupaThemeWrapperModule } from '@bimeister/pupakit.kit';
+import {
+  PupaButtonsModule,
+  PupaScrollableModule,
+  PupaThemeWrapperModule,
+  PupaTooltipModule,
+} from '@bimeister/pupakit.kit';
 import { ModalButtonIconComponent } from './components/modal-button-icon/modal-button-icon.component';
 import { ModalCloseButtonComponent } from './components/modal-close-button/modal-close-button.component';
 import { ModalContainerComponent } from './components/modal-container/modal-container.component';
@@ -31,7 +36,15 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     ModalCloseButtonComponent,
     ModalExpandButtonComponent,
   ],
-  imports: [CommonModule, PupaButtonsModule, OverlayModule, PortalModule, PupaThemeWrapperModule, PupaScrollableModule],
+  imports: [
+    CommonModule,
+    PupaButtonsModule,
+    OverlayModule,
+    PortalModule,
+    PupaThemeWrapperModule,
+    PupaScrollableModule,
+    PupaTooltipModule,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
     ModalLayoutComponent,

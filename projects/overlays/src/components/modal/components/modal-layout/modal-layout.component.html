@@ -2,6 +2,8 @@
   class="modal-layout"
   [class.modal-layout_no-footer]="!(withFooter$ | async)"
   [class.modal-layout_no-title]="!(withTitle$ | async)"
+  [class.modal-layout_no-header]="!(withHeader$ | async)"
+  [class.modal-layout_no-border]="!withBorder"
   tabindex="0"
   pupaAutofocus
 >

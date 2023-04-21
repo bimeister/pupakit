@@ -26,6 +26,11 @@
     <pupa-code-container [content]="example5Content">
       <pupa-modal-demo-example-5-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-5-helper>
     </pupa-code-container>
+
+    <h3 demoAnchor>With borders, with flexible buttons</h3>
+    <pupa-code-container [content]="example6Content">
+      <pupa-modal-demo-example-6-helper *pupaCodeContainerPreviewTemplate></pupa-modal-demo-example-6-helper>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -59,10 +64,15 @@
         <demo-example-viewer-property name="height" type="string">
           <ng-container *demoExampleViewerPropertyDescription>Predefined height</ng-container>
           <demo-props-radio-select
-            formControlName="size"
+            formControlName="height"
             direction="row"
             [options]="sizeOptions"
           ></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property name="hasBorder" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Has border.</ng-container>
+          <demo-props-switcher formControlName="hasBorder"></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

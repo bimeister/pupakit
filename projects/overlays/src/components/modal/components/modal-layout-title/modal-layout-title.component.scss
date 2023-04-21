@@ -2,17 +2,14 @@
 @use 'mixins' as *;
 
 :host {
-  display: block;
+  display: flex;
+  align-items: center;
   flex: 1;
 
   @include font-type-medium;
   @include font-size-l;
 
-  color: color(neutral-1000);
-
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 }
 
 .content-wrapper {
