@@ -4,25 +4,29 @@
 :host {
   display: block;
   width: 100%;
-
-  @include xs() {
-    border-top: 1px solid semantic-color(lines-normal);
-  }
-  color: semantic-color(surface-secondary);
+  color: semantic-color(text-secondary);
 }
 
 .modal-layout-footer {
   display: flex;
+  justify-content: flex-end;
   column-gap: 2rem;
   box-sizing: border-box;
-  padding-top: 2rem;
+  border-top: 1px solid semantic-color(lines-normal);
   @include font-type-regular;
   @include font-size-xs(true);
 
   &_with-actions {
-    padding-top: 4rem;
-    @include xs() {
-      padding: 3rem 5rem;
+    padding: 5rem;
+  }
+}
+
+:host-context(.modal-layout_no-border) {
+  .modal-layout-footer {
+    border-top: none;
+
+    &_with-actions {
+      padding-top: 2.5rem;
     }
   }
 }

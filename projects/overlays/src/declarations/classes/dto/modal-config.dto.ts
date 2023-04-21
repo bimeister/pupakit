@@ -4,6 +4,7 @@ import { ModalConfig } from '../../interfaces/modal-config.interface';
 import { ConnectedPositionX } from '../../types/connected-position-x.type';
 import { ConnectedPositionY } from '../../types/connected-position-y.type';
 import { Position, Theme } from '@bimeister/pupakit.common';
+import { ModalHeightType } from '../../types/modal-height.type';
 
 export class ModalConfigDto implements ModalConfig {
   public hasBackdrop: boolean = true;
@@ -17,8 +18,9 @@ export class ModalConfigDto implements ModalConfig {
   public providers: StaticProvider[] = [];
   public theme: Theme = Theme.Light;
   public width: number | string = 0;
-  public height: number = 0;
+  public height: ModalHeightType = '';
   public isFullscreen: boolean = false;
+  public hasBorder: boolean = false;
 
   constructor(config: Partial<ModalConfig>) {
     if (isNil(config)) {

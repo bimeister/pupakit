@@ -3,21 +3,12 @@
 
 :host {
   display: flex;
-  width: calc(100% + 5rem);
+  width: 100%;
   height: 100%;
   overflow: hidden;
-  padding-top: 3rem;
-
-  color: color(neutral-1000);
-
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
-
-  @include xs() {
-    width: 100%;
-    padding-top: 2rem;
-  }
+  box-sizing: border-box;
+  color: semantic-color(text-primary);
+  --pupa-scrollable-content_padding: 0 5rem;
 }
 
 .modal-layout-body {
@@ -25,28 +16,28 @@
   overflow: hidden;
 
   &__scrollable-content {
+    padding: 3.5rem 0 5rem;
     box-sizing: border-box;
-    padding: 1rem 0 10rem;
-    @include xs() {
-      padding: 1rem 5rem 8rem;
-    }
+    width: 100%;
+    --pupa-scrollable-content_padding: initial;
+  }
+}
+
+:host-context(.modal-layout_no-border) {
+  .modal-layout-body__scrollable-content {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+:host-context(.modal-layout_no-header) {
+  .modal-layout-body__scrollable-content {
+    padding-top: 5rem;
   }
 }
 
 :host-context(.modal-layout_no-footer) {
   .modal-layout-body__scrollable-content {
-    padding-bottom: 12rem;
-  }
-}
-:host-context(.modal-layout_no-title) {
-  .modal-layout-body__scrollable-content {
-    padding-top: 0;
-  }
-}
-
-.modal-layout-body__content-container {
-  width: calc(100% - 5rem);
-  @include xs() {
-    width: calc(100% - 1.5rem);
+    padding-bottom: 5rem;
   }
 }

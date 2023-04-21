@@ -1,4 +1,7 @@
 :host {
   display: block;
+}
+
+:host.flexible {
   flex: 1;
 }

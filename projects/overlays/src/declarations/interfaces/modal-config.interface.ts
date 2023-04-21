@@ -16,6 +16,6 @@ export interface ModalConfig {
   injector: Injector;
   providers: StaticProvider[];
   isFullscreen?: boolean;
-  height: number;
-  size?: ModalHeightType;
+  height?: ModalHeightType;
+  hasBorder?: boolean;
 }

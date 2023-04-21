@@ -22,7 +22,7 @@ export class ModalButtonIconComponent implements OnChanges {
   private readonly isMobile$: Observable<boolean> = this.clientUiStateHandlerService.breakpointIsXs$;
 
   public readonly size$: Observable<ButtonSize> = this.isMobile$.pipe(
-    map((isMobile: boolean) => (isMobile ? 'm' : 's'))
+    map((isMobile: boolean) => (isMobile ? 's' : 'm'))
   );
 
   constructor(private readonly clientUiStateHandlerService: ClientUiStateHandlerService) {}

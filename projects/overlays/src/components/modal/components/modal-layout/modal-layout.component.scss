@@ -6,14 +6,12 @@
 :host {
   display: block;
   overflow: hidden;
-  max-height: 500px;
   max-width: 500px;
-  border: 1px solid color(neutral-7);
+  border: 1px solid semantic-color(lines-normal);
   border-radius: calc($controlBorderRadius + 1rem);
   box-shadow: 0px 4px 24px rgba(0, 29, 41, 0.04);
 
   @include host-selector-dark-theme {
-    border: 1px solid color(neutral-300);
     box-shadow: 0px 4px 24px rgba(0, 23, 32, 0.12);
   }
 
@@ -42,15 +40,15 @@
   height: 100%;
   max-width: inherit;
   max-height: inherit;
+  min-height: inherit;
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background-color: color(neutral-1);
-  padding: 5rem;
 
   @include xs() {
-    padding: 0px;
+    padding: 0;
   }
 
   @include host-selector-dark-theme {
