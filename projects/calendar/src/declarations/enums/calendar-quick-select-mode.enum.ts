@@ -1,4 +1,4 @@
-export enum CalendarFastSelectMode {
+export enum CalendarQuickSelectMode {
   Month = 'Month',
   Year = 'Year',
 }

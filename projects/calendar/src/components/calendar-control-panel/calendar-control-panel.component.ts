@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CalendarFastSelectMode } from '../../declarations/enums/calendar-fast-select-mode.enum';
+import { CalendarQuickSelectMode } from '../../declarations/enums/calendar-quick-select-mode.enum';
 import { MonthIndex } from '../../declarations/enums/month-index.enum';
 import { CalendarMonth } from '../../declarations/interfaces/calendar-month.interface';
 import { CalendarTranslation } from '../../declarations/interfaces/calendar-translation.interface';
@@ -53,11 +53,11 @@ export class CalendarControlPanelComponent {
     this.calendarManipulatorService.scrollToPreviousMonth('smooth');
   }
 
-  public setFastSelectModeMonth(): void {
-    this.calendarStateService.setFastSelectMode(CalendarFastSelectMode.Month);
+  public setQuickSelectModeMonth(): void {
+    this.calendarStateService.setQuickSelectMode(CalendarQuickSelectMode.Month);
   }
 
-  public setFastSelectModeYear(): void {
-    this.calendarStateService.setFastSelectMode(CalendarFastSelectMode.Year);
+  public setQuickSelectModeYear(): void {
+    this.calendarStateService.setQuickSelectMode(CalendarQuickSelectMode.Year);
   }
 }
