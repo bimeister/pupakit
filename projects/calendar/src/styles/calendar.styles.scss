@@ -19,7 +19,7 @@ $range-selection-color: surface-tertiary;
   width: $cell-size;
 }
 
-@mixin base-fast-selector() {
+@mixin base-quick-selector() {
   display: flex;
   flex-direction: column;
   height: 100%;

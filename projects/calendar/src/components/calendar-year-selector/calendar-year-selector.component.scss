@@ -1,7 +1,7 @@
 @use '../../styles/calendar.styles' as *;
 
 :host {
-  @include base-fast-selector();
+  @include base-quick-selector();
 }
 
 .header-content {

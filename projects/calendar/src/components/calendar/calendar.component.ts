@@ -12,7 +12,7 @@ import {
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
-import { CalendarFastSelectMode } from '../../declarations/enums/calendar-fast-select-mode.enum';
+import { CalendarQuickSelectMode } from '../../declarations/enums/calendar-quick-select-mode.enum';
 import { isDate } from '../../declarations/functions/is-date.function';
 import { CalendarMonth } from '../../declarations/interfaces/calendar-month.interface';
 import { CalendarConfigService } from '../../services/calendar-config.service';
@@ -30,7 +30,7 @@ const ANIMATION_DURATION_MS: number = 200;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [CalendarConfigService, CalendarTranslationService, CalendarManipulatorService, CalendarStateService],
   animations: [
-    trigger('fastSelectorAnimation', [
+    trigger('quickSelectorAnimation', [
       transition(':enter', [
         style({ opacity: 0, top: '-100%' }),
         animate(`${ANIMATION_DURATION_MS}ms ease-out`, style({ opacity: 1, top: 0 })),
@@ -52,9 +52,9 @@ export class CalendarComponent implements OnChanges, OnDestroy {
   @Output()
   public readonly select: EventEmitter<Date[]> = new EventEmitter<Date[]>();
 
-  public readonly fastSelectMode: typeof CalendarFastSelectMode = CalendarFastSelectMode;
+  public readonly quickSelectMode: typeof CalendarQuickSelectMode = CalendarQuickSelectMode;
 
-  public readonly fastSelectMode$: Observable<CalendarFastSelectMode> = this.calendarStateService.fastSelectMode$;
+  public readonly quickSelectMode$: Observable<CalendarQuickSelectMode> = this.calendarStateService.quickSelectMode$;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -79,12 +79,12 @@ export class CalendarComponent implements OnChanges, OnDestroy {
   }
 
   public handleYearSelect(year: number): void {
-    this.calendarStateService.resetFastSelectMode();
+    this.calendarStateService.resetQuickSelectMode();
     this.calendarManipulatorService.scrollToYear(year, 'auto');
   }
 
   public handleMonthSelect(month: CalendarMonth): void {
-    this.calendarStateService.resetFastSelectMode();
+    this.calendarStateService.resetQuickSelectMode();
     this.calendarManipulatorService.scrollToMonth(month, 'auto');
   }
 

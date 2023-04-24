@@ -5,16 +5,16 @@
 
 <pupa-calendar-scroller></pupa-calendar-scroller>
 
-<ng-container [ngSwitch]="fastSelectMode$ | async">
+<ng-container [ngSwitch]="quickSelectMode$ | async">
   <pupa-calendar-month-selector
     (select)="handleMonthSelect($event)"
-    *ngSwitchCase="fastSelectMode.Month"
-    [@fastSelectorAnimation]
+    *ngSwitchCase="quickSelectMode.Month"
+    [@quickSelectorAnimation]
   ></pupa-calendar-month-selector>
 
   <pupa-calendar-year-selector
     (select)="handleYearSelect($event)"
-    *ngSwitchCase="fastSelectMode.Year"
-    [@fastSelectorAnimation]
+    *ngSwitchCase="quickSelectMode.Year"
+    [@quickSelectorAnimation]
   ></pupa-calendar-year-selector>
 </ng-container>

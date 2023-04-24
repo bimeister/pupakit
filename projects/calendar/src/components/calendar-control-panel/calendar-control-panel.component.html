@@ -1,9 +1,9 @@
 <div class="selection" *ngIf="displayedMonth$ | async as displayedMonth">
-  <pupa-button (click)="setFastSelectModeMonth()" kind="secondary">
+  <pupa-button (click)="setQuickSelectModeMonth()" kind="secondary">
     {{ displayedMonth.month }}
   </pupa-button>
 
-  <pupa-button (click)="setFastSelectModeYear()" kind="secondary">
+  <pupa-button (click)="setQuickSelectModeYear()" kind="secondary">
     {{ displayedMonth.year }}
   </pupa-button>
 </div>

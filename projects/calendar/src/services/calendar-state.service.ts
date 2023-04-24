@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { CalendarFastSelectMode } from '../declarations/enums/calendar-fast-select-mode.enum';
+import { CalendarQuickSelectMode } from '../declarations/enums/calendar-quick-select-mode.enum';
 import { getClearDate } from '../declarations/functions/get-clear-date.function';
 import { getSortedDates } from '../declarations/functions/get-sorted-dates.function';
 
@@ -39,8 +39,8 @@ export class CalendarStateService {
 
   public readonly selectedDates$: BehaviorSubject<Date[]> = new BehaviorSubject<Date[]>([]);
 
-  public readonly fastSelectMode$: BehaviorSubject<CalendarFastSelectMode | null> =
-    new BehaviorSubject<CalendarFastSelectMode>(null);
+  public readonly quickSelectMode$: BehaviorSubject<CalendarQuickSelectMode | null> =
+    new BehaviorSubject<CalendarQuickSelectMode>(null);
 
   public setSelectedDates(dates: Date[]): void {
     this.selectedDates$.next(getProcessedDates(dates));
@@ -69,12 +69,12 @@ export class CalendarStateService {
     return getProcessedDates([...dates, newDate]);
   }
 
-  public setFastSelectMode(mode: CalendarFastSelectMode): void {
-    this.fastSelectMode$.next(mode);
+  public setQuickSelectMode(mode: CalendarQuickSelectMode): void {
+    this.quickSelectMode$.next(mode);
   }
 
-  public resetFastSelectMode(): void {
-    this.fastSelectMode$.next(null);
+  public resetQuickSelectMode(): void {
+    this.quickSelectMode$.next(null);
   }
 
   public setIsRange(isRange: boolean): void {
