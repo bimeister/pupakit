@@ -34,6 +34,9 @@
               "namedChunks": false,
               "outputHashing": "none",
               "vendorChunk": false
+            },
+            "non-strict-mode": {
+              "tsConfig": "./projects/demo/tsconfig.non-strict.json"
             }
           },
           "options": {
@@ -111,6 +114,14 @@
           "configurations": {
             "development": {
               "browserTarget": "demo:build:development",
+              "disableHostCheck": true,
+              "open": true,
+              "host": "0.0.0.0",
+              "watch": true,
+              "port": 4201
+            },
+            "non-strict": {
+              "browserTarget": "demo:build:non-strict-mode",
               "disableHostCheck": true,
               "open": true,
               "host": "0.0.0.0",
