@@ -48,6 +48,7 @@ interface Position {
 type ScrollDirection = null | 'up' | 'down';
 
 const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
+const DRAG_CLONE_OFFSET_PX: number = 2;
 
 interface DragAndDropMeta {
   dragTreeItem: FlatTreeItem;
@@ -141,9 +142,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
 
   public mouseDown(dragTreeItem: FlatTreeItem, event: MouseEvent): void {
     this.hasDragAndDrop$.pipe(take(1), filterTruthy()).subscribe(() => {
-      const mouseDownPosition: Position = { left: event?.screenX, top: event?.screenY };
-      const target: EventTarget = event.target;
-      const draggableElementBoundingBox: DOMRect =
+      const mouseDownPosition: Position = { left: event.clientX, top: event.clientY };
+      const target: EventTarget = event.currentTarget;
+      const draggableElementBoundingBox: DOMRect | null =
         target instanceof HTMLElement ? target.getBoundingClientRect() : null;
       const dragTreeItemWidth: number = draggableElementBoundingBox?.width;
       this.dragAndDropMeta$.next({
@@ -173,7 +174,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   @HostListener('window:mousemove', ['$event'])
   public mouseMove(event: MouseEvent): void {
     this.dragAndDropMeta$.pipe(take(1), filterNotNil()).subscribe((dragAndDropMeta: DragAndDropMeta) => {
-      this.processDragMoving(dragAndDropMeta, event.screenX, event.screenY);
+      this.processDragMoving(dragAndDropMeta, event.clientX, event.clientY);
     });
   }
 
@@ -345,18 +346,18 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
       .pipe(filter((event: TreeEvents.TreeEventBase): event is E => event instanceof eventType));
   }
 
-  private processDragMoving(dragAndDropMeta: DragAndDropMeta, x: number, y: number): void {
+  private processDragMoving(dragAndDropMeta: DragAndDropMeta, mouseX: number, mouseY: number): void {
     const draggableElementBoundingBox: DOMRect = dragAndDropMeta.draggableElementBoundingBox;
-    const mouseDownPosition: Position = dragAndDropMeta.mouseDownPosition;
-    const draggableElementPositionShift: Position = {
-      left: mouseDownPosition?.left - draggableElementBoundingBox?.left,
-      top: mouseDownPosition?.top - draggableElementBoundingBox?.top,
-    };
     const bottomBorderPositionY: number = this.host.nativeElement.clientHeight - draggableElementBoundingBox?.height;
+    const { left: hostElementLeft, top: hostElementTop }: DOMRect = this.host.nativeElement.getBoundingClientRect();
+
+    const dragTreeItemLeft: number = mouseX - hostElementLeft + DRAG_CLONE_OFFSET_PX;
+    const dragTreeItemTop: number = mouseY - hostElementTop + DRAG_CLONE_OFFSET_PX;
+
     const newMeta: DragAndDropMeta = {
       ...dragAndDropMeta,
-      dragTreeItemLeft: x - draggableElementBoundingBox?.left - draggableElementPositionShift.left,
-      dragTreeItemTop: getClampedValue(y - draggableElementPositionShift.top, 0, bottomBorderPositionY),
+      dragTreeItemLeft,
+      dragTreeItemTop: getClampedValue(dragTreeItemTop, 0, bottomBorderPositionY),
     };
     const isTopBorderReached: boolean = newMeta.dragTreeItemTop <= draggableElementBoundingBox?.height;
     const isBottomBorderReached: boolean = newMeta.dragTreeItemTop >= bottomBorderPositionY;
