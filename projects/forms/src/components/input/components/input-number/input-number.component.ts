@@ -13,7 +13,10 @@ import { ValueType } from '../../../../declarations/types/input-value.type';
 export class InputNumberComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
-    this.value$.next(serializedValue);
+    const prevValue: ValueType = this.value$.getValue();
+    if (!prevValue) {
+      this.value$.next(serializedValue);
+    }
   }
 
   public reset(): void {
