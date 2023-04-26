@@ -14,7 +14,7 @@ export class InputNumberComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     const prevValue: ValueType = this.value$.getValue();
-    if (!prevValue) {
+    if (!prevValue || serializedValue) {
       this.value$.next(serializedValue);
     }
   }
