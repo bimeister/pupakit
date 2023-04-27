@@ -15,6 +15,7 @@ runs:
     - name: 'Authorize to NPM Registry'
       shell: bash
       run: |
+        echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/calendar/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/common/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/forms/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/icons/dist/.npmrc
@@ -24,6 +25,10 @@ runs:
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/tree/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/widgets/dist/.npmrc
         echo "//registry.npmjs.org/:_authToken=${{inputs.token}}" >> ./projects/dnd/dist/.npmrc
+
+    - name: Publish calendar
+      shell: bash
+      run: cd projects/calendar/dist && npm publish --access public --tag ${{inputs.tag}} && cd -
 
     - name: Publish common
       shell: bash
