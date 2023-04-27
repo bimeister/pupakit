@@ -13,6 +13,7 @@ const BASE_REQUEST_PATH: string = 'counter-demo/examples';
 })
 export class CounterDemoComponent {
   public readonly countFormControl: FormControl = new FormControl(1);
+  public readonly maxCountFormControl: FormControl = new FormControl(99);
 
   public readonly colorOptions: PropsOption[] = [
     {

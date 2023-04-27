@@ -3,6 +3,6 @@
     {{ count }}
   </ng-container>
   <ng-container *ngSwitchDefault>
-    {{ count | formatCount }}
+    {{ count | formatCount : maxCount }}
   </ng-container>
 </div>
