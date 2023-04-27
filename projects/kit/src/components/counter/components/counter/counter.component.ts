@@ -13,4 +13,5 @@ export class CounterComponent {
   @Input() public count: number;
   @Input() public color: CountColor = 'neutral';
   @Input() public mode: CounterMode = 'default';
+  @Input() public maxCount: number | null = null;
 }

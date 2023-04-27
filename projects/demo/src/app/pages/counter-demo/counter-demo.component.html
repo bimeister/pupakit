@@ -20,6 +20,7 @@
             [count]="+countFormControl.value"
             [color]="color$ | async"
             [mode]="mode$ | async"
+            [maxCount]="+maxCountFormControl.value"
           ></pupa-counter>
         </div>
       </demo-example-viewer-content>
@@ -37,6 +38,13 @@
         <demo-example-viewer-property decoratorName="input" name="count" type="number">
           <ng-container *demoExampleViewerPropertyDescription>The number value of counter.</ng-container>
           <pupa-input-number [formControl]="countFormControl"></pupa-input-number>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="maxCount" type="number">
+          <ng-container *demoExampleViewerPropertyDescription
+            >The maximum number of the counter it can display. If the actual number count is greater than maxCount then
+            the counter will display a maxCount+ format string, e.g. 99+.</ng-container
+          >
+          <pupa-input-number [formControl]="maxCountFormControl"></pupa-input-number>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
