@@ -23,7 +23,7 @@
   overflow: hidden;
   padding: 0 2rem;
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
-    border-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  border-color variable(transition-duration_shorter) variable(transition-timing-function_common);
   width: 100%;
 
   .input {
@@ -68,9 +68,7 @@
   }
 
   &_large {
-    .input {
-      @extend .input_large;
-    }
+    @extend .input_large;
 
     .input-icon {
       @extend .input-icon_large;
@@ -78,11 +76,7 @@
   }
 
   &_medium {
-    max-height: 8rem;
-
-    .input {
-      @extend .input_medium;
-    }
+    @extend .input_medium;
 
     .input-icon {
       @extend .input-icon_medium;
@@ -171,8 +165,8 @@
   outline: none;
   padding: 0 2rem;
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
-    border-color variable(transition-duration_shorter) variable(transition-timing-function_common),
-    color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  border-color variable(transition-duration_shorter) variable(transition-timing-function_common),
+  color variable(transition-duration_shorter) variable(transition-timing-function_common);
   width: 100%;
   @include font-preset-caption-xs();
 
