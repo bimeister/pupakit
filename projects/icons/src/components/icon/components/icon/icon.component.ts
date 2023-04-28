@@ -22,12 +22,12 @@ export class IconComponent implements OnChanges {
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    const currentName: string = changes?.name?.currentValue ?? null;
+    const currentName: string = changes?.name?.currentValue;
     const data: string = this.getIconDataByName(currentName);
     this.iconHtmlCode = this.domSanitizer.bypassSecurityTrustHtml(data);
   }
 
-  private getIconDataByName(name: string): Nullable<string> {
+  private getIconDataByName(name: Nullable<string>): Nullable<string> {
     const prefixes: string[] = ['m-', 'md-', 'ios-', 'logo-', 'app-'];
     const defaultPrefix: string = 'md-';
     const hasPrefix: boolean = prefixes.some((prefix: string) => name.startsWith(prefix));
