@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, Input, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { SelectStateService } from '../../services/select-state.service';
 import { SelectOptionBase } from '../../../../declarations/classes/abstract/select-option-base.abstract';
 import { BehaviorSubject, Subscription } from 'rxjs';
+import { OptionActionsRightDirective } from '@bimeister/pupakit.kit';
 
 @Component({
   selector: 'pupa-select-option',
@@ -11,6 +12,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectOptionComponent<T> extends SelectOptionBase<T> implements OnDestroy {
+  @ContentChild(OptionActionsRightDirective) public optionActionsRightDirective: OptionActionsRightDirective;
   @Input() public value: T = null;
   @Input() public isDisabled: boolean = false;
   @Input() public hasCheckbox: boolean = false;

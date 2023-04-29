@@ -6,5 +6,6 @@
     [forceResetHover]="isOpened$ | async"
   >
     <ng-content></ng-content>
+    <ng-container *pupaOptionActionsRight [ngTemplateOutlet]="optionActionsRightDirective?.templateRef"></ng-container>
   </pupa-option>
 </div>
