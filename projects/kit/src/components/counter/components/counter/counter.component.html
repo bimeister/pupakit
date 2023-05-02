@@ -3,14 +3,6 @@
     {{ count }}
   </ng-container>
   <ng-container *ngSwitchDefault>
-    <ng-container [ngTemplateOutlet]="maxCount ? moreThanCountFormat : abbreviatedCountFormat"></ng-container>
+    {{ count | formatCount }}
   </ng-container>
 </div>
-
-<ng-template #abbreviatedCountFormat>
-  <ng-container> {{ count | formatCount }}</ng-container>
-</ng-template>
-
-<ng-template #moreThanCountFormat>
-  <ng-container>{{ count | formatCount : maxCount }}</ng-container>
-</ng-template>
