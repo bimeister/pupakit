@@ -7,6 +7,7 @@ interface Case {
   size: CardSize;
   disabled: boolean;
   clickable: boolean;
+  selected: boolean;
   iconHolderSize: IconHolderSize;
 }
 
@@ -31,6 +32,12 @@ export class CardDemoExample1Component {
     {
       title: 'Large clickable',
       description: 'A large card that you can click on',
+      clickable: true,
+    },
+    {
+      title: 'Large selected',
+      description: 'A large card in selected state',
+      selected: true,
       clickable: true,
     },
     {

@@ -10,8 +10,8 @@ import { Nullable } from '@bimeister/utilities';
 })
 export class CardContainerComponent {
   @Input() public disabled: boolean = false;
-
   @Input() public clickable: boolean = false;
+  @Input() public selected: boolean = false;
 
   @Input() public tabIndex: number = 0;
   public get tabIndexAttribute(): Nullable<number> {

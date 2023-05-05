@@ -1,13 +1,15 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-$normal-shadow-color: rgba(33, 33, 33, 0.05);
-$hover-shadow-color: rgba(33, 33, 33, 0.08);
+$normal-shadow-color: rgba(33, 33, 33, 0.08);
+$hover-shadow-color: rgba(33, 33, 33, 0.1);
+$disabled-shadow-color: rgba(33, 33, 33, 0.05);
 
 :host {
   display: block;
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .container {
@@ -16,21 +18,22 @@ $hover-shadow-color: rgba(33, 33, 33, 0.08);
   width: 100%;
   box-sizing: border-box;
 
-  border-radius: 1rem;
-  border: 1px solid transparent;
-  box-shadow: 0 1px 7px $normal-shadow-color;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  box-shadow: 2px 3px 8px $normal-shadow-color;
   outline: none;
 
-  background: color(neutral-1);
+  background-color: semantic-color(surface-secondary);
   color: color(neutral-1000);
 
   &_disabled {
     color: color(neutral-50);
+    box-shadow: 0 1px 7px $disabled-shadow-color;
   }
 
   &:not(.container_disabled) {
     @include hover() {
-      box-shadow: 0 1px 3px $hover-shadow-color;
+      box-shadow: 2px 3px 10px $hover-shadow-color;
 
       @include host-selector-dark-theme() {
         background: color(neutral-400);
@@ -41,8 +44,24 @@ $hover-shadow-color: rgba(33, 33, 33, 0.08);
   &_clickable:not(.container_disabled) {
     cursor: pointer;
 
-    &:focus {
-      border: 1px solid color(primary-600);
+    &:not(.container_selected) {
+      &:focus {
+        border: 2px solid semantic-color(lines-accent);
+      }
+    }
+  }
+
+  &_selected:not(.container_disabled) {
+    &::before {
+      display: block;
+      width: 4px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      background-color: semantic-color(kind-primary-normal);
+      border-radius: 4px 0 0 4px;
     }
   }
 
