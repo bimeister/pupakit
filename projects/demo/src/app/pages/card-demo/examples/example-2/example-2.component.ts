@@ -7,6 +7,7 @@ interface Case {
   size: CardSize;
   disabled: boolean;
   clickable: boolean;
+  selected: boolean;
 }
 
 @Component({
@@ -30,6 +31,12 @@ export class CardDemoExample2Component {
     {
       title: 'Medium clickable',
       description: 'A medium card that you can click on',
+      clickable: true,
+    },
+    {
+      title: 'Medium selected',
+      description: 'A medium card in selected state',
+      selected: true,
       clickable: true,
     },
     {

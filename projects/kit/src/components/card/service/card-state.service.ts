@@ -7,6 +7,7 @@ export class CardStateService {
   public readonly size$: BehaviorSubject<CardSize> = new BehaviorSubject<CardSize>('large');
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly clickable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly selected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public setSize(size: CardSize): void {
     this.size$.next(size);
@@ -18,5 +19,9 @@ export class CardStateService {
 
   public setClickableState(clickable: boolean): void {
     this.clickable$.next(clickable);
+  }
+
+  public setSelectedState(selected: boolean): void {
+    this.selected$.next(selected);
   }
 }

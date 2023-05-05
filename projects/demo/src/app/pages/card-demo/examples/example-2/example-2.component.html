@@ -1,5 +1,11 @@
 <div class="container">
-  <pupa-card *ngFor="let card of mediumCards" [disabled]="card.disabled" [clickable]="card.clickable" size="medium">
+  <pupa-card
+    *ngFor="let card of mediumCards"
+    [disabled]="card.disabled"
+    [clickable]="card.clickable"
+    [selected]="card.selected"
+    size="medium"
+  >
     <pupa-card-cover>
       <pupa-icon-holder size="medium">
         <pupa-icon class="icon" name="app-cube"></pupa-icon>

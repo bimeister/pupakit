@@ -25,6 +25,9 @@ export class CardComponent implements OnChanges {
   @Input() public clickable: boolean = false;
   public readonly clickable$: Observable<boolean> = this.cardStateService.clickable$.asObservable();
 
+  @Input() public selected: boolean = false;
+  public readonly selected$: Observable<boolean> = this.cardStateService.selected$.asObservable();
+
   @Input() public tabIndex: number = 0;
 
   constructor(private readonly cardStateService: CardStateService) {}
@@ -33,6 +36,7 @@ export class CardComponent implements OnChanges {
     this.processDisabledChange(changes?.disabled);
     this.processSizeChange(changes?.size);
     this.processClickableChange(changes?.clickable);
+    this.processSelectedChange(changes?.selected);
   }
 
   private processDisabledChange(change: ComponentChange<this, boolean>): void {
@@ -63,5 +67,15 @@ export class CardComponent implements OnChanges {
     }
 
     this.cardStateService.setClickableState(updatedValue);
+  }
+
+  private processSelectedChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.cardStateService.setSelectedState(updatedValue);
   }
 }
