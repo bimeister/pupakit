@@ -20,21 +20,36 @@ export namespace TreeEvents {
   }
 
   export class Click extends TreeEventBase<FlatTreeItem> {}
+
   export class RemoveItem extends TreeEventBase<string> {}
+
   export class UpdateItem extends TreeEventBase<FlatTreeItem> {}
+
   export class ScrollById extends TreeEventBase<string> {}
+
   export class Drop extends TreeEventBase<DropEventInterface<FlatTreeItem>> {}
+
   export class ScrollByIndex extends TreeEventBase<number> {}
 
   export class ScrollTop extends TreeEventBase<number> {}
+
   export class ScrollViewport extends TreeEventBase<number> {}
+
   export class SetData extends TreeEventBase<FlatTreeItem[]> {}
+
   export class SetLoading extends TreeEventBase<boolean> {}
+
   export class SetSelected extends TreeEventBase<string[]> {}
+
   export class Collapse extends TreeEventBase<string> {}
-  export class Expand extends TreeEventBase<string> {}
+
+  export class Expand extends TreeEventBase<FlatTreeItem> {}
+
   export class ExpandWhileDragging extends TreeEventBase<string> {}
+
   export class RemoveChildren extends TreeEventBase<string> {}
+
   export class SetExpanded extends TreeEventBase<string[]> {}
+
   export class SetChildren extends TreeEventBase<SetChildrenEventPayload> {}
 }

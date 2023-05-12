@@ -31,7 +31,9 @@ export class TreeNewExample2Component implements OnDestroy {
   private setChildrenOnExpand(): Subscription {
     return this.controller
       .getEvents(TreeEvents.Expand)
-      .subscribe((event: TreeEvents.Expand) => this.controller.setChildren(event.payload, this.fetch(event.payload)));
+      .subscribe((event: TreeEvents.Expand) =>
+        this.controller.setChildren(event.payload.id, this.fetch(event.payload.id))
+      );
   }
 
   private removeChildrenOnCollapse(): Subscription {

@@ -47,6 +47,7 @@ interface Position {
   top: number;
   left: number;
 }
+
 type ScrollDirection = null | 'up' | 'down';
 
 const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
@@ -89,18 +90,15 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   public hasDragAndDrop$: Observable<boolean>;
   public trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
   public treeItemSizePx$: Observable<number>;
-  private scrollBehavior$: Observable<ScrollBehavior>;
-  private eventBus: EventBus;
-
   public readonly treeControl: FlatTreeControl<FlatTreeItem> = new FlatTreeControl<FlatTreeItem>(
     TreeNewComponent.getLevel,
     TreeNewComponent.isExpandable
   );
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
   public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
-
   public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
-
+  private scrollBehavior$: Observable<ScrollBehavior>;
+  private eventBus: EventBus;
   private readonly expandWithDelay$: Subject<Nullable<FlatTreeItem>> = new Subject<Nullable<FlatTreeItem>>();
   private readonly subscription: Subscription = new Subscription();
 
@@ -109,6 +107,14 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     public readonly host: ElementRef<HTMLElement>,
     private readonly changeDetectorRef: ChangeDetectorRef
   ) {}
+
+  private static getLevel(treeItem: FlatTreeItem): number {
+    return treeItem.level;
+  }
+
+  private static isExpandable(treeItem: FlatTreeItem): boolean {
+    return treeItem.isExpandable;
+  }
 
   public ngAfterViewInit(): void {
     this.subscription.add(this.getSubscriptionToSetLoading());
@@ -259,7 +265,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   }
 
   private expandClick(treeItem: FlatTreeItem): void {
-    this.controller.expand(treeItem.id);
+    this.controller.expand(treeItem);
   }
 
   private collapseClick(treeItem: FlatTreeItem): void {
@@ -396,13 +402,5 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     newMeta.dragTreeItemIsDisplayed = true;
 
     this.dragAndDropMeta$.next(newMeta);
-  }
-
-  private static getLevel(treeItem: FlatTreeItem): number {
-    return treeItem.level;
-  }
-
-  private static isExpandable(treeItem: FlatTreeItem): boolean {
-    return treeItem.isExpandable;
   }
 }

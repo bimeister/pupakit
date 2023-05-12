@@ -28,11 +28,6 @@ export class TreeController {
     this.setTreeItemSizePx(options?.treeItemSizePx);
   }
 
-  protected dispatchInQueue(event: TreeEvents.TreeEventBase): void {
-    const queueEvent: QueueEvents.AddToQueue = new QueueEvents.AddToQueue(event);
-    this.eventBus.dispatch(queueEvent);
-  }
-
   public getOptions(): Nullable<TreeControllerOptions> {
     return this.options;
   }
@@ -61,8 +56,8 @@ export class TreeController {
     return this.dataDisplayCollection;
   }
 
-  public expand(treeItemId: string): void {
-    this.eventBus.dispatch(new TreeEvents.Expand(treeItemId));
+  public expand(treeItem: FlatTreeItem): void {
+    this.eventBus.dispatch(new TreeEvents.Expand(treeItem));
   }
 
   public setChildren(treeItemId: string, children: FlatTreeItem[]): void {
@@ -87,6 +82,11 @@ export class TreeController {
 
   public scrollTop(scrollTopPx: number): void {
     this.dispatchInQueue(new TreeEvents.ScrollTop(scrollTopPx));
+  }
+
+  protected dispatchInQueue(event: TreeEvents.TreeEventBase): void {
+    const queueEvent: QueueEvents.AddToQueue = new QueueEvents.AddToQueue(event);
+    this.eventBus.dispatch(queueEvent);
   }
 
   private setScrollBehavior(scrollBehavior: ScrollBehavior = 'smooth'): void {
