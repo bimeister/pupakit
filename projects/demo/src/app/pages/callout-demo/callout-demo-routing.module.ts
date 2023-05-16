@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { InfoBlockDemoComponent } from './info-block-demo.component';
+import { CalloutDemoComponent } from './callout-demo.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: InfoBlockDemoComponent,
+    component: CalloutDemoComponent,
   },
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InfoBlockDemoRoutingModule {}
+export class CalloutDemoRoutingModule {}

@@ -15,7 +15,6 @@ import { AlertsToolbarExampleComponent } from '../pages/alerts-demo/examples/ale
 import { AnchorModule } from './components/anchor/anchor.module';
 import { CodeModule } from './components/code/code.module';
 import { ExampleViewerModule } from './components/example-viewer/example-viewer.module';
-import { InfoBlockModule } from './components/info-block/info-block.module';
 import { PageModule } from './components/page/page.module';
 
 const MODULES: Type<unknown>[] = [
@@ -23,7 +22,6 @@ const MODULES: Type<unknown>[] = [
   CodeModule,
   ExampleViewerModule,
   ReactiveFormsModule,
-  InfoBlockModule,
   PageModule,
   AnchorModule,
   PupaTableModule,

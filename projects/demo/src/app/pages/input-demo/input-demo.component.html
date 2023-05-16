@@ -51,15 +51,15 @@
     </pupa-code-container>
 
     <h3 demoAnchor>Invalid tooltip</h3>
-    <pupa-info-block variant="note">Displayed when hovering over the icon in the input field.</pupa-info-block>
+    <pupa-callout variant="info">Displayed when hovering over the icon in the input field.</pupa-callout>
     <pupa-code-container [content]="tooltipExampleContent">
       <demo-input-demo-example-tooltip *pupaCodeContainerPreviewTemplate></demo-input-demo-example-tooltip>
     </pupa-code-container>
 
     <h3 demoAnchor>With reset</h3>
-    <pupa-info-block variant="note">
+    <pupa-callout variant="info">
       Available only for pupa-input-text, pupa-input-number and pupa-input-time
-    </pupa-info-block>
+    </pupa-callout>
     <pupa-code-container [content]="withResetExampleContent">
       <demo-input-demo-example-with-reset *pupaCodeContainerPreviewTemplate></demo-input-demo-example-with-reset>
     </pupa-code-container>
@@ -233,7 +233,7 @@
           properties are written by analogy with a
           <pupa-code-inline>TooltipDirective</pupa-code-inline>
         </demo-example-viewer-section-label>
-        <pupa-info-block>
+        <pupa-callout>
           <ul>
             <li>
               The tooltip is only visible when input is in INVALID state. To trigger invalid state use
@@ -249,7 +249,7 @@
               simple tooltip text.
             </li>
           </ul>
-        </pupa-info-block>
+        </pupa-callout>
 
         <demo-example-viewer-property decoratorName="input" name="invalidTooltip" type="string">
           <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip simple content.</ng-container>

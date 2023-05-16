@@ -30,7 +30,7 @@ import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 import { IconsPageModule } from './pages/icons-page/icons-page.module';
 import { InfinityScrollerDemoModule } from './pages/infinity-scroller-demo/infinity-scroller-demo.module';
-import { InfoBlockDemoModule } from './pages/info-block-demo/info-block-demo.module';
+import { CalloutDemoModule } from './pages/callout-demo/callout-demo.module';
 import { InputDemoModule } from './pages/input-demo/input-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
 import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
@@ -317,9 +317,9 @@ const demoRoutes: Routes = [
           import('./pages/scrollable-demo/scrollable-demo.module').then((module: any) => module.ScrollableDemoModule),
       },
       {
-        path: 'info-block',
-        loadChildren: (): Promise<Type<InfoBlockDemoModule>> =>
-          import('./pages/info-block-demo/info-block-demo.module').then((module: any) => module.InfoBlockDemoModule),
+        path: 'callout',
+        loadChildren: (): Promise<Type<CalloutDemoModule>> =>
+          import('./pages/callout-demo/callout-demo.module').then((module: any) => module.CalloutDemoModule),
       },
       {
         path: 'status',

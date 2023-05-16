@@ -63,6 +63,7 @@ export class SidebarComponent {
         { title: 'Counter', link: '/kit/counter' },
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Option', link: '/kit/option' },
+        { title: 'Callout', link: '/kit/callout' },
       ],
       'title'
     ),
@@ -156,13 +157,7 @@ export class SidebarComponent {
 
   private readonly demoToolsGroup: LinksGroup = {
     title: 'Demo Tools',
-    linkItems: sortByProperty(
-      [
-        { title: 'Code', link: '/kit/code' },
-        { title: 'Info block', link: '/kit/info-block' },
-      ],
-      'title'
-    ),
+    linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title'),
   };
 
   private readonly linkGroups: LinksGroup[] = [

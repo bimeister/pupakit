@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
-  selector: 'demo-info-block-example-1',
+  selector: 'demo-callout-example-1',
   templateUrl: './example-1.component.html',
   styleUrls: ['./example-1.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InfoBlockExample1Component {}
+export class CalloutExample1Component {}

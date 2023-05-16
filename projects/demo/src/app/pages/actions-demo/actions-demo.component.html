@@ -7,12 +7,12 @@
       <demo-actions-example-6 *pupaCodeContainerPreviewTemplate></demo-actions-example-6>
     </pupa-code-container>
 
-    <pupa-info-block>
+    <pupa-callout>
       The component renders the passed template based on the length of the action array. When changing the width of the
       window, an action that does not go crazy in width will be hidden and available in dropdown by trigger
-    </pupa-info-block>
+    </pupa-callout>
 
-    <pupa-info-block>
+    <pupa-callout>
       This component works on the basis of several building blocks:
       <div class="info-description">1. <pupa-code-inline>actions</pupa-code-inline> - See API section</div>
       <div class="info-description">
@@ -27,7 +27,7 @@
         4. <pupa-code-inline>pupaActionMoreTriggerTemplate</pupa-code-inline> - Structural directive, used to describe a
         trigger template for displaying hidden actions
       </div>
-    </pupa-info-block>
+    </pupa-callout>
 
     <h3 demoAnchor>Simple actions model</h3>
     <pupa-code-container [content]="example1Content">
@@ -49,11 +49,11 @@
       <demo-actions-example-4 *pupaCodeContainerPreviewTemplate></demo-actions-example-4>
     </pupa-code-container>
 
-    <pupa-info-block>
+    <pupa-callout>
       When using the default trigger, you can customize the button text by adding the token
       <pupa-code-inline>ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN</pupa-code-inline> to the providers and adjust
       its value
-    </pupa-info-block>
+    </pupa-callout>
     <h5 demoAnchor>Custom text with default trigger</h5>
     <pupa-code-container [content]="example5Content">
       <demo-actions-example-5 *pupaCodeContainerPreviewTemplate></demo-actions-example-5>

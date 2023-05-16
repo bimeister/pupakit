@@ -1,4 +1,4 @@
-<div class="info-block" [ngClass]="variant">
+<div class="callout" [ngClass]="'callout_' + variant">
   <div class="icon"><pupa-icon [name]="icons.get(variant)"></pupa-icon></div>
   <div>
     <ng-content></ng-content>

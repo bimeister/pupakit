@@ -3,7 +3,7 @@
 <demo-page>
   <div *demoPageTab="'overview'">
     <h3 demoAnchor>Usage</h3>
-    <pupa-info-block>
+    <pupa-callout>
       The code of all examples below consists of two parts:
       <ul>
         <li><pupa-code-inline>layout.component</pupa-code-inline> - component that is the content of popover.</li>
@@ -11,12 +11,12 @@
           <pupa-code-inline>trigger.component</pupa-code-inline> - component that demonstrates the opening of popover.
         </li>
       </ul>
-    </pupa-info-block>
-    <pupa-info-block variant="warning">
+    </pupa-callout>
+    <pupa-callout variant="warning">
       Layout component must implement <pupa-code-inline>PopoverComponentBase</pupa-code-inline>.
-    </pupa-info-block>
+    </pupa-callout>
     <h3 demoAnchor>Basic example</h3>
-    <pupa-info-block> <pupa-code-inline>pupa-popover-layout-footer</pupa-code-inline> is optional. </pupa-info-block>
+    <pupa-callout> <pupa-code-inline>pupa-popover-layout-footer</pupa-code-inline> is optional. </pupa-callout>
 
     <pupa-code-container [content]="basicExampleContent">
       <demo-popover-trigger-basic *pupaCodeContainerPreviewTemplate> </demo-popover-trigger-basic>
