@@ -2,12 +2,12 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <pupa-info-block>You can see a library of icons <a pupaLink routerLink="/kit/icons">here</a>.</pupa-info-block>
+    <pupa-callout>You can see a library of icons <a pupaLink routerLink="/kit/icons">here</a>.</pupa-callout>
     <h2 demoAnchor>Usage example</h2>
     <pupa-code-container [content]="example1Content">
       <demo-icon-example-1 *pupaCodeContainerPreviewTemplate></demo-icon-example-1>
     </pupa-code-container>
-    <pupa-info-block>
+    <pupa-callout>
       <ul>
         <li>
           The default icon size is 16*16px. You can use the property
@@ -20,7 +20,7 @@
           to change the icon color
         </li>
       </ul>
-    </pupa-info-block>
+    </pupa-callout>
     <pupa-code-container [content]="example2Content">
       <demo-icon-example-2 *pupaCodeContainerPreviewTemplate></demo-icon-example-2>
     </pupa-code-container>

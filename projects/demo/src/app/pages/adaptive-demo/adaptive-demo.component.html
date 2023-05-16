@@ -1,12 +1,12 @@
 <h1>Adaptive</h1>
 <demo-page>
   <div *demoPageTab="'overview'">
-    <pupa-info-block>
+    <pupa-callout>
       The purpose of this page is to demonstrate the capabilities of all the mixins in the
       <pupa-code-inline>adaptive.scss</pupa-code-inline>
       file. Each of these mixins is applied under conditions that match the resolution of the window. To demonstrate the
       performance of examples, resize the window.
-    </pupa-info-block>
+    </pupa-callout>
 
     <h3 demoAnchor>Mixins</h3>
 
@@ -84,13 +84,13 @@
     <br />
     <h3 demoAnchor>Grid Mixins</h3>
     <p>Examples of using mixins built on a grid will be given below.</p>
-    <pupa-info-block>
+    <pupa-callout>
       Active breakpoint is set as a class for the tag
       <pupa-code-inline>html</pupa-code-inline>
       . The grid can be enabled via
       <pupa-code-inline>toggle grid</pupa-code-inline>
       .
-    </pupa-info-block>
+    </pupa-callout>
 
     <h4 demoAnchor anchorName="Specified-breakpoint">
       For each of these mixins, styles will be applied only to the specified breakpoint.
@@ -385,7 +385,7 @@
       to show the result. When you click on it on a mobile device, you can see the hover state.
     </p>
 
-    <pupa-info-block>Turn on mobile display mode in <b>DevTools</b> to see it.</pupa-info-block>
+    <pupa-callout>Turn on mobile display mode in <b>DevTools</b> to see it.</pupa-callout>
 
     <pupa-code-container [content]="example9Content">
       <demo-adaptive-example-9 *pupaCodeContainerPreviewTemplate></demo-adaptive-example-9>

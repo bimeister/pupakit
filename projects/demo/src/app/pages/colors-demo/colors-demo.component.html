@@ -35,7 +35,7 @@
       This is the main color palette. All other colors use this palette. If you redefine this palette, then all other
       adjacent colors will be redefined.
     </p>
-    <pupa-info-block> Click on the color info line to copy the value. </pupa-info-block>
+    <pupa-callout> Click on the color info line to copy the value. </pupa-callout>
   </div>
 
   <div class="colors-demo__group" *ngFor="let colorGroup of colorGroups">
@@ -62,7 +62,7 @@
   <h3 demoAnchor>Alpha Values</h3>
 
   <div class="description">
-    <pupa-info-block> Click on the alpha value card to copy the value. </pupa-info-block>
+    <pupa-callout> Click on the alpha value card to copy the value. </pupa-callout>
   </div>
 
   <div class="alpha-values">
@@ -77,27 +77,25 @@
     <demo-colors-example-1 *pupaCodeContainerPreviewTemplate></demo-colors-example-1>
   </pupa-code-container>
 
-  <pupa-info-block>
+  <pupa-callout>
     Second parameter in <pupa-code-inline>override-colors</pupa-code-inline> mixin is a CSS selector. Set it as ':root'
     for global color overriding.
-  </pupa-info-block>
+  </pupa-callout>
 
-  <pupa-info-block>
+  <pupa-callout>
     Second parameter in <pupa-code-inline>color</pupa-code-inline> function is a alpha value. Default alpha value is 1.
-  </pupa-info-block>
+  </pupa-callout>
 
-  <pupa-info-block variant="note" class="last-point">
-    If you set invalid color key you will get error.
-  </pupa-info-block>
+  <pupa-callout variant="info" class="last-point"> If you set invalid color key you will get error. </pupa-callout>
 
   <h3 demoAnchor>Using and overriding colors with .css component styles</h3>
   <pupa-code-container [content]="example2Content">
     <demo-colors-example-2 *pupaCodeContainerPreviewTemplate></demo-colors-example-2>
   </pupa-code-container>
 
-  <pupa-info-block> Use RGB values for CSS variables. </pupa-info-block>
+  <pupa-callout> Use RGB values for CSS variables. </pupa-callout>
 
-  <pupa-info-block variant="warning" class="last-point"> CSS variables are not validated. </pupa-info-block>
+  <pupa-callout variant="warning" class="last-point"> CSS variables are not validated. </pupa-callout>
 
   <h3 demoAnchor>Usage</h3>
 
@@ -121,12 +119,12 @@
       main palette. To see automatic color changes, change the interface theme.
     </p>
 
-    <pupa-info-block> Click on the color card to copy the value. </pupa-info-block>
+    <pupa-callout> Click on the color card to copy the value. </pupa-callout>
 
-    <pupa-info-block variant="note">
+    <pupa-callout variant="info">
       Please note that for the semantic color Glass, you need additionally use
       <pupa-code-inline>@mixin blur($value: 24px)</pupa-code-inline>.
-    </pupa-info-block>
+    </pupa-callout>
   </div>
 
   <div class="semantic-colors__group" *ngFor="let group of semanticConfigurationGroups">

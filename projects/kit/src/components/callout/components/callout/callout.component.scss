@@ -1,0 +1,56 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
+
+:host {
+  display: block;
+  margin-bottom: 3rem;
+}
+
+.callout {
+  display: flex;
+  border-radius: $controlBorderRadius;
+  padding: 2rem;
+
+  .icon {
+    font-size: 5rem;
+    line-height: 4rem;
+    margin-right: 2rem;
+  }
+
+  &_info {
+    background: semantic-color(kind-primary-normal, alpha-5);
+    color: semantic-color(text-primary);
+
+    .icon {
+      color: semantic-color(kind-primary-normal);
+    }
+  }
+
+  &_success {
+    background: semantic-color(kind-success-normal, alpha-5);
+    color: semantic-color(text-primary);
+
+    .icon {
+      color: semantic-color(kind-success-normal);
+    }
+  }
+
+  &_warning {
+    background: semantic-color(kind-warning-normal, alpha-6);
+    color: semantic-color(text-primary);
+
+    .icon {
+      color: semantic-color(kind-warning-normal);
+    }
+  }
+
+  &_danger {
+    background: semantic-color(kind-danger-normal, alpha-5);
+    color: semantic-color(text-primary);
+
+    .icon {
+      color: semantic-color(kind-danger-normal);
+    }
+  }
+}

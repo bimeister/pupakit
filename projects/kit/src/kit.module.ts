@@ -26,6 +26,7 @@ import { PupaTagModule } from './components/tag/tag.module';
 import { PupaThemeWrapperModule } from './components/theme-wrapper/theme-wrapper.module';
 import { PupaTimerModule } from './components/timer/timer.module';
 import { PupaTooltipModule } from './components/tooltip/tooltip.module';
+import { PupaCalloutModule } from './components/callout/callout.module';
 
 const MODULES: Type<unknown>[] = [
   PupaSkeletonModule,
@@ -55,6 +56,7 @@ const MODULES: Type<unknown>[] = [
   PupaTabsModule,
   PupaStepperModule,
   PupaThemeWrapperModule,
+  PupaCalloutModule,
 ];
 
 @NgModule({
