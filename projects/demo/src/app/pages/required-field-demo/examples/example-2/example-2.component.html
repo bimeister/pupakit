@@ -1,0 +1,14 @@
+<pupa-form-layout>
+  <pupa-form-element class="switcher-container">
+    <pupa-switcher [formControl]="isRequiredControl"></pupa-switcher>
+    <pupa-label class="switcher-container__label">Is required</pupa-label>
+  </pupa-form-element>
+
+  <pupa-form-element>
+    <pupa-required-field [isRequired]="isRequiredControl.value">
+      <pupa-label>Field Label</pupa-label>
+    </pupa-required-field>
+
+    <pupa-input-text></pupa-input-text>
+  </pupa-form-element>
+</pupa-form-layout>
