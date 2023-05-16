@@ -1,0 +1,15 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  width: 100%;
+  max-width: 100rem;
+}
+
+.switcher-container {
+  @include flex-container(row, center);
+
+  &__label {
+    margin-left: 1rem;
+  }
+}

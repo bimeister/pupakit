@@ -2,7 +2,10 @@
 
 .content {
   position: relative;
-  padding-left: 2.5rem;
+
+  &_required {
+    padding-left: 2.5rem;
+  }
 
   &__required-asterisk {
     color: semantic-color(kind-danger-normal);
