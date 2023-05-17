@@ -1,3 +1,4 @@
-<pupa-option [disabled]="disabled" [active]="active" [forceResetHover]="true">
+<pupa-option (click)="disabled && $event.stopPropagation()" [active]="active" [disabled]="disabled"
+             [forceResetHover]="true">
   <ng-content></ng-content>
 </pupa-option>
