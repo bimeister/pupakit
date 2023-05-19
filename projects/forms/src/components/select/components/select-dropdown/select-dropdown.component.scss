@@ -10,22 +10,14 @@
 .select-dropdown {
   width: 100%;
   border-radius: $controlBorderRadius;
-  border: 1px solid color(neutral-5);
-  background-color: color(neutral-1);
-
-  filter: drop-shadow(0px 14px 24px color(neutral-1000, alpha-3));
-
+  @include blur(3rem);
+  background-color: semantic-color(surface-glass, alpha-700);
+  border: 1px solid semantic-color(lines-normal);
   overflow: hidden;
   margin-top: 2rem;
-
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-
-  @include dark-theme-class-parent() {
-    background-color: color(neutral-1000);
-    border-color: color(neutral-500);
-  }
 }
 
 .select-dropdown-wrapper {
