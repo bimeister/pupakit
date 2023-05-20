@@ -60,7 +60,7 @@
     <pupa-dnd-host
       dndHostId="pupa-table"
       [isDraggable]="!(dndRowsSettings | isNullOrUndefined)"
-      [dndCloneItemsOffset]="dndRowsSettings?.dndCloneItemsOffset"
+      [dndCloneItemsTemplateRef]="dndRowsSettings?.dndCloneItemsTemplate"
       (dndMove)="processDndMove($event)"
       (dndDrop)="processDndDrop($event)"
     >
@@ -129,7 +129,6 @@
                 pupaDndItem
                 [dndItemData]="row.data"
                 [dndItemId]="row.id"
-                [dndItemTemplateRef]="dndRowsSettings?.dndCloneItemTemplate"
                 [canBeMoved]="dndRowsSettings?.dndItemCanBeMoved"
                 [canBeDroppableFor]="dndRowsSettings?.dndItemCanBeDroppableFor"
               ></pupa-table-body-row-container>

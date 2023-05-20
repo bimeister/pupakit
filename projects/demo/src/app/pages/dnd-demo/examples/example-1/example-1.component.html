@@ -3,6 +3,7 @@
   (dndDrop)="processDropped($event)"
   [sourceType]="sourceType"
   [targetType]="targetType"
+  [dndCloneItemsTemplateRef]="templateRef"
 >
   <pupa-dnd-indicator
     *ngIf="dndIndicatorTopPx$ | async"
@@ -14,13 +15,15 @@
     pupaDndItem
     [dndItemData]="data"
     [dndItemId]="data.itemNumber.toString()"
-    [dndItemTemplateRef]="templateRef"
     [canBeDroppableFor]="canBeDroppableForFunc"
   >
     {{ data.payload }}
   </pupa-option>
 </pupa-dnd-host>
 
-<ng-template #templateRef let-data>
-  <pupa-dnd-clone-wrapper>{{ data.payload }}</pupa-dnd-clone-wrapper>
+<ng-template #templateRef let-items>
+  <pupa-dnd-clone-items [dndSourceItems]="items">
+    <ng-container *pupaDndCloneItemTemplate="let data">{{ data.payload }}</ng-container>
+    <ng-container *pupaDndCloneGroupItemsTemplate="let itemsCount">{{ 'Selected (' + itemsCount + ')' }}</ng-container>
+  </pupa-dnd-clone-items>
 </ng-template>

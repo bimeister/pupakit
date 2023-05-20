@@ -1,4 +1,4 @@
-import { Inject, Injectable, Injector, OnDestroy } from '@angular/core';
+import { Inject, Injectable, Injector, OnDestroy, TemplateRef } from '@angular/core';
 import { DndCloneService } from './dnd-clone.service';
 import { DOCUMENT } from '@angular/common';
 import { EventBus } from '@bimeister/event-bus/rxjs';
@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { DndHostComponent } from '../components/dnd-host/dnd-host.component';
 import { isNil } from '@bimeister/utilities';
 import { DndItemConfig } from '../declarations/interfaces/dnd-item-config.interface';
-import { DndCloneData } from '../declarations/interfaces/dnd-clone-data.interface';
 import { DndItemHtmlElement } from '../declarations/interfaces/dnd-item-html-element.interface';
 import { getDndTargetItemFromEvent } from '../declarations/functions/get-dnd-target-item-from-event.function';
 import { DndEvents } from '../declarations/events/dnd.events';
@@ -17,7 +16,6 @@ import { getDndHostElementFromEvent } from '../declarations/functions/get-dnd-ho
 export class DndService implements OnDestroy {
   private sourceHost: DndHostComponent | null = null;
   private sourceDndItemConfigs: DndItemConfig[] | null = null;
-  private currentDndCloneItemsOffset: number | null = null;
 
   private readonly hammerManager: HammerManager = new Hammer.Manager(this.document.body, {
     cssProps: undefined,
@@ -42,21 +40,23 @@ export class DndService implements OnDestroy {
     srcEvent: PointerEvent,
     sourceHost: DndHostComponent,
     hostInjector: Injector,
-    dndCloneItemsOffset: number
+    dndCloneItemsTemplateRef: TemplateRef<unknown>
   ): void {
     this.sourceHost = sourceHost;
     this.sourceDndItemConfigs = this.sourceHost.getSelectedDndItemConfigs();
-    this.currentDndCloneItemsOffset = dndCloneItemsOffset;
 
-    const selectedDndItemsCloneData: DndCloneData[] = this.sourceDndItemConfigs.map(
-      (selectedDndItemConfig: DndItemConfig) => ({
-        heightPx: selectedDndItemConfig.dndItem.elementParts[0].offsetHeight,
-        templateRef: selectedDndItemConfig.itemTemplate,
-        templateContext: { $implicit: selectedDndItemConfig.dndItem.data },
-      })
+    this.dndCloneService.create(
+      {
+        templateContext: {
+          $implicit: this.sourceDndItemConfigs.map(
+            (selectedDndItemConfig: DndItemConfig) => selectedDndItemConfig.dndItem
+          ),
+        },
+        templateRef: dndCloneItemsTemplateRef,
+      },
+      hostInjector
     );
-    this.dndCloneService.create(selectedDndItemsCloneData, hostInjector);
-    this.dndCloneService.updatePosition([srcEvent.clientX, srcEvent.clientY], this.currentDndCloneItemsOffset);
+    this.dndCloneService.updatePosition([srcEvent.clientX, srcEvent.clientY]);
 
     this.initPanListeners();
   }
@@ -71,10 +71,7 @@ export class DndService implements OnDestroy {
       return;
     }
 
-    this.dndCloneService.updatePosition(
-      [event.srcEvent.clientX, event.srcEvent.clientY],
-      this.currentDndCloneItemsOffset
-    );
+    this.dndCloneService.updatePosition([event.srcEvent.clientX, event.srcEvent.clientY]);
 
     const targetDndItemElement: DndItemHtmlElement | null = getDndTargetItemFromEvent(event.srcEvent);
 
@@ -117,7 +114,6 @@ export class DndService implements OnDestroy {
 
     this.sourceHost = null;
     this.sourceDndItemConfigs = null;
-    this.currentDndCloneItemsOffset = null;
   }
 
   private removePanListeners(): void {

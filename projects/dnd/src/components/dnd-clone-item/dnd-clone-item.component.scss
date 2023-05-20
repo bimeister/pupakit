@@ -1,10 +1,15 @@
 @use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: block;
   width: fit-content;
-  padding: 1rem 2rem;
+  padding: 1.25rem 2rem;
   border-radius: 1rem;
   color: semantic-color(surface-primary);
   background: semantic-color(kind-primary-normal);
+  max-width: 256px;
+  box-sizing: border-box;
+  @include ellipsis-text-overflow;
+  @include font-size-xs();
 }

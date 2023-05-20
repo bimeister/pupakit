@@ -1,0 +1,21 @@
+<ng-container *ngIf="dndSourceItems.length <= maxDisplayedItemsCount; else templatesGroupView">
+  <ng-container *ngFor="let dndSourceItem of dndSourceItems">
+    <pupa-dnd-clone-item>
+      <ng-container
+        [ngTemplateOutlet]="dndCloneItemTemplate.templateRef"
+        [ngTemplateOutletContext]="{ $implicit: dndSourceItem.data }"
+      ></ng-container>
+    </pupa-dnd-clone-item>
+  </ng-container>
+</ng-container>
+
+<ng-template #templatesGroupView>
+  <pupa-dnd-clone-item class="group-view">
+    <ng-container
+      [ngTemplateOutlet]="templatesGroupItemsTemplate"
+      [ngTemplateOutletContext]="{ $implicit: dndSourceItems.length }"
+    ></ng-container
+  ></pupa-dnd-clone-item>
+</ng-template>
+
+<ng-template #defaultCloneGroupItemsTemplate let-itemsCount>{{ 'Выбранные (' + itemsCount + ')' }}</ng-template>
