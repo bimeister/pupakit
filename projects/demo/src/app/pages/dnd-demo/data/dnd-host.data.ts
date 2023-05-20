@@ -10,8 +10,8 @@ export class DndHost {
   // Used to calculate drop position and indicator coordinates of draggable items
   @Input() public dndItemsDirection: 'row' | 'column' = 'column';
 
-  // Offset between element clones if moving multiple elements
-  @Input() public dndCloneItemsOffset: number = DND_CLONE_OFFSET_PX;
+  // Dnd clone items template
+  @Input() public dndCloneItemsTemplateRef: TemplateRef<DndItemTemplateContext<T>>;
 
   // Used for typing source items
   @Input() public sourceType: Source;

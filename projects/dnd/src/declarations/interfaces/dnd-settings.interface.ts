@@ -6,8 +6,7 @@ import { DndCanBeMovedFunc } from '../types/dnd-can-be-moved-func.type';
 import { DndCanBeDroppableForFunc } from '../types/dnd-can-be-droppable-for-func.type';
 
 export interface DndSettings<T> {
-  dndCloneItemTemplate: TemplateRef<DndItemTemplateContext<T>> | null;
-  dndCloneItemsOffset: number;
+  dndCloneItemsTemplate: TemplateRef<DndItemTemplateContext<T>> | null;
   dndOnMove: (dndMoveData: DndMoveData) => void;
   dndOnDrop: (dndDropData: DndDropData) => void;
   dndItemCanBeMoved: DndCanBeMovedFunc<T>;

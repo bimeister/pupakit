@@ -10,6 +10,7 @@ import {
   OnInit,
   Output,
   Renderer2,
+  TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
 import { DndItemHtmlElement } from '../../declarations/interfaces/dnd-item-html-element.interface';
@@ -26,9 +27,9 @@ import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { DndItemRegistryService } from '../../services/dnd-item-registry.service';
 import { DndEvents } from '../../declarations/events/dnd.events';
 import { DND_HOST_ID_ATTRIBUTE } from '../../declarations/constants/dnd-host-id-attribute.const';
+import { DndItemTemplateContext } from '../../declarations/interfaces/dnd-item-template-context.interface';
 
 const DND_POSITION_PERCENT: number = 0.2;
-const DND_CLONE_OFFSET_PX: number = 4;
 
 @Component({
   selector: 'pupa-dnd-host',
@@ -42,10 +43,11 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
   @Input() public dndHostId: string;
   @Input() public isDraggable: boolean = true;
   @Input() public dndItemsDirection: 'row' | 'column' = 'column';
-  @Input() public dndCloneItemsOffset: number = DND_CLONE_OFFSET_PX;
 
   @Input() public sourceType: Source;
   @Input() public targetType: Target;
+
+  @Input() public dndCloneItemsTemplateRef: TemplateRef<DndItemTemplateContext<Source>>;
 
   @Output() public readonly dndMove: EventEmitter<DndMoveData<Source, Target>> = new EventEmitter<
     DndMoveData<Source, Target>
@@ -157,7 +159,7 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
 
     this.selectedDndItemIds.add(targetItem.dataset.dndItemId);
 
-    this.dndService.processPanStart(event.srcEvent, this, this.injector, this.dndCloneItemsOffset);
+    this.dndService.processPanStart(event.srcEvent, this, this.injector, this.dndCloneItemsTemplateRef);
   }
 
   private processDndMove(): Subscription {
