@@ -146,23 +146,21 @@ export class TableDndFeature<T> implements TableFeature {
     const headerCellTemplateRef: TemplateRef<TableHeaderCellContext> =
       this.templateRegistry.getHeaderCellTemplateByType(columnType);
 
+    const dndCloneWidthPx: number = targetCell.element.clientWidth;
+    const dndCloneHeightPx: number = targetCell.element.clientHeight;
+
     const templateContext: TableHeaderCellContext = {
       $implicit: this.currentDraggableColumn,
       isDndClone: true,
     };
 
-    const dndCloneWidthPx: number = targetCell.element.clientWidth;
-    const dndCloneHeightPx: number = targetCell.element.clientHeight;
-
     this.dndCloneService.create(
-      [
-        {
-          templateRef: headerCellTemplateRef,
-          templateContext,
-          widthPx: dndCloneWidthPx,
-          heightPx: dndCloneHeightPx,
-        },
-      ],
+      {
+        templateRef: headerCellTemplateRef,
+        templateContext,
+        widthPx: dndCloneWidthPx,
+        heightPx: dndCloneHeightPx,
+      },
       this.api.tableInjector
     );
   }
@@ -267,7 +265,7 @@ export class TableDndFeature<T> implements TableFeature {
     position: [number, number],
     overlayConnectedPosition: ConnectedPosition
   ): void {
-    this.dndCloneService.updatePosition(position, 0, overlayConnectedPosition);
+    this.dndCloneService.updatePosition(position, overlayConnectedPosition);
   }
 
   private stopColumnDragging(): void {

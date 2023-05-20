@@ -59,7 +59,7 @@ const COLUMNS: TableColumnDefinition[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample10Component implements AfterViewInit {
-  @ViewChild('dndCloneTemplate') public dndCloneItemTemplate: TemplateRef<DndItemTemplateContext<SomeData>>;
+  @ViewChild('dndCloneTemplate') public dndCloneItemsTemplate: TemplateRef<DndItemTemplateContext<SomeData>>;
 
   public readonly controller$: BehaviorSubject<TableController<SomeData> | null> =
     new BehaviorSubject<TableController<SomeData> | null>(null);
@@ -67,8 +67,7 @@ export class TableExample10Component implements AfterViewInit {
   public ngAfterViewInit(): void {
     const controller: TableController<SomeData> = new TableController<SomeData>({
       dndRowsSettings: {
-        dndCloneItemTemplate: this.dndCloneItemTemplate,
-        dndCloneItemsOffset: -10,
+        dndCloneItemsTemplate: this.dndCloneItemsTemplate,
         dndItemCanBeMoved: () => true,
         dndItemCanBeDroppableFor: (currentDndItem: DndItem<SomeData>, dndDropItems: DndItem[]) =>
           !dndDropItems.map((dndDropItem: DndItem<SomeData>) => dndDropItem.id).includes(currentDndItem.id),

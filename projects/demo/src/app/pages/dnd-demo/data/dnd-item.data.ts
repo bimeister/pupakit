@@ -6,9 +6,6 @@ export class DndItemDirective<T> {
   // Item id
   @Input() public dndItemId: string;
 
-  // Dnd clone template
-  @Input() public dndItemTemplateRef: TemplateRef<DndItemTemplateContext<T>>;
-
   // Filter func. Return true, if current item can be draggable, false otherwise
   @Input() public canBeMoved: DndCanBeMovedFunc<T> = () => true;
 

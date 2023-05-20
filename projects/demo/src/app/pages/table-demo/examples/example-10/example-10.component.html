@@ -2,6 +2,10 @@
   <pupa-table *ngIf="controller" [controller]="controller"></pupa-table>
 </div>
 
-<ng-template #dndCloneTemplate let-data>
-  <pupa-dnd-clone-wrapper>{{ data.firstName }} {{ data.lastName }} from {{ data.city }}</pupa-dnd-clone-wrapper>
+<ng-template #dndCloneTemplate let-items>
+  <pupa-dnd-clone-items [dndSourceItems]="items">
+    <ng-container *pupaDndCloneItemTemplate="let data"
+      >{{ data.firstName }} {{ data.lastName }} from {{ data.city }}
+    </ng-container>
+  </pupa-dnd-clone-items>
 </ng-template>
