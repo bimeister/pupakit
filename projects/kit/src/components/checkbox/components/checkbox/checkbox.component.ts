@@ -13,12 +13,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { filterFalsy, filterTruthy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { combineLatest, Observable, Subscription } from 'rxjs';
-import { map, switchMapTo, take } from 'rxjs/operators';
-import { CheckboxService } from '../../services/checkbox.service';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { filterTruthy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { CheckboxLabelSize } from '../../../../declarations/types/checkbox-label-size.type';
+import { CheckboxService } from '../../services/checkbox.service';
 
 @Component({
   selector: 'pupa-checkbox',
@@ -44,10 +44,12 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
   @Input() public value: boolean;
   @Input() public error: boolean;
   @Input() public size: CheckboxLabelSize = 'medium';
+  @Input() public externalValuesControl: boolean;
 
   @Output() public readonly valueChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   public readonly disabled$: Observable<boolean> = this.checkboxService.disabled$;
+  public readonly externalValuesControl$: Observable<boolean> = this.checkboxService.externalValuesControl$;
   public readonly hovered$: Observable<boolean> = this.checkboxService.hovered$;
   public readonly value$: Observable<boolean> = this.checkboxService.value$;
   public readonly indeterminate$: Observable<boolean> = this.checkboxService.indeterminate$;
@@ -87,6 +89,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.handleErrorChanges(changes?.error);
     this.handleSizeChanges(changes?.size);
     this.handleHoveredChanges(changes?.hovered);
+    this.handleExternalValuesControlChanges(changes?.externalValuesControl);
   }
 
   public ngAfterViewInit(): void {
@@ -94,11 +97,11 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
   }
 
   public changeValue(): void {
-    this.disabled$
+    combineLatest([this.disabled$, this.externalValuesControl$])
       .pipe(
         take(1),
-        filterFalsy(),
-        switchMapTo(this.value$),
+        filter(([disabled, externalValuesControl]: [boolean, boolean]) => !disabled && !externalValuesControl),
+        switchMap(() => this.value$),
         take(1),
         map((value: boolean) => !value)
       )
@@ -183,6 +186,16 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     }
 
     this.checkboxService.setHovered(updatedValue);
+  }
+
+  private handleExternalValuesControlChanges(change: ComponentChange<this, boolean>): void {
+    const updatedValue: Nullable<boolean> = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.checkboxService.setExternalValuesControl(updatedValue);
   }
 
   private handleSizeChanges(change: ComponentChange<this, CheckboxLabelSize>): void {
