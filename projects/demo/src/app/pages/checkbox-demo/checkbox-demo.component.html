@@ -23,6 +23,7 @@
         <div class="content">
           <pupa-checkbox
             [indeterminate]="indeterminate$ | async"
+            [externalValuesControl]="externalValuesControl$ | async"
             [formControl]="control"
             [disabled]="disabled$ | async"
             [error]="error$ | async"
@@ -52,13 +53,21 @@
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="value" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>Checkbox value</ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>Checkbox value.</ng-container>
           <demo-props-switcher #value$></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="labelSize" type="small | medium">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the label size of the checkbox.</ng-container>
           <demo-props-select #labelSize$ [options]="labelSizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="externalValuesControl" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Allows you to control the state of "indeterminate" and "value" only outside the component without reacting
+            to the click event.</ng-container
+          >
+          <demo-props-switcher #externalValuesControl$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

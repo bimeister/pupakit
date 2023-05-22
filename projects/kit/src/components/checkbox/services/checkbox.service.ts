@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { CheckboxLabelSize } from '../../../declarations/types/checkbox-label-size.type';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { CheckboxLabelSize } from '../../../declarations/types/checkbox-label-size.type';
 
 @Injectable({ providedIn: 'any' })
 export class CheckboxService {
@@ -9,6 +9,9 @@ export class CheckboxService {
 
   private readonly hoveredState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly hovered$: Observable<boolean> = this.hoveredState$.asObservable();
+
+  private readonly externalValuesControlState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly externalValuesControl$: Observable<boolean> = this.externalValuesControlState$.asObservable();
 
   private readonly valueState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly value$: Observable<boolean> = this.valueState$.asObservable();
@@ -51,5 +54,9 @@ export class CheckboxService {
 
   public setHovered(value: boolean): void {
     this.hoveredState$.next(value);
+  }
+
+  public setExternalValuesControl(value: boolean): void {
+    this.externalValuesControlState$.next(value);
   }
 }
