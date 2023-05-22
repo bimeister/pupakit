@@ -10,6 +10,10 @@
       <pupa-switcher [formControl]="useAvailableEndDateControl" [id]="'formControl'"></pupa-switcher>
       <label class="switcher__label" for="formControl">use available end date</label>
     </div>
+    <div class="switcher">
+      <pupa-switcher [formControl]="useAvailableStartDateControl" [id]="'formControl'"></pupa-switcher>
+      <label class="switcher__label" for="formControl">use available start date</label>
+    </div>
 
     <h3 demoAnchor>Time Picker</h3>
     <h5 demoAnchor>pupa-time-picker</h5>
@@ -31,11 +35,17 @@
       [previewMode]="'simple'"
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
     ></pupa-date-picker>
-    <p>Back Dating is not available and Available End Date</p>
+    <p>Available Start Date (current date)</p>
+    <pupa-date-picker
+      [previewMode]="'simple'"
+      [availableStartDate]="useAvailableStartDateControl.value ? availableStartDate : -infinity"
+    ></pupa-date-picker>
+    <p>Back Dating is not available, Available Start Date and Available End Date</p>
     <pupa-date-picker
       [previewMode]="'simple'"
       [isBackDating]="useIsBackDatingControl.value"
       [availableEndDate]="useAvailableEndDateControl.value ? availableEndDate : infinity"
+      [availableStartDate]="useAvailableStartDateControl.value ? availableStartDate : -infinity"
     ></pupa-date-picker>
   </div>
 </div>

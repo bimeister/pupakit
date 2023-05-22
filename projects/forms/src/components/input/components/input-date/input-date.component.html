@@ -60,6 +60,7 @@
         [selectionMode]="'date'"
         [isBackDating]="isBackDating$ | async"
         [availableEndDate]="availableEndDate$ | async"
+        [availableStartDate]="availableStartDate$ | async"
         (click)="handleFocusEvent($event)"
         (date)="selectDate($event)"
         [previewMode]="'simple'"

@@ -61,6 +61,7 @@
         [selectionMode]="'range'"
         [isBackDating]="isBackDating$ | async"
         [availableEndDate]="availableEndDate$ | async"
+        [availableStartDate]="availableStartDate$ | async"
         (click)="handleFocusEvent($event)"
         (range)="selectRange($event)"
         [previewMode]="'double'"

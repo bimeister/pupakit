@@ -52,6 +52,9 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
+  @Input() public readonly availableStartDate: Date | number = 0;
+  public readonly availableStartDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(-Infinity);
+
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([
@@ -100,12 +103,12 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     filter((value: string) => isEmpty(value) || value.length >= SIZE_PLACEHOLDER_DATE),
     map((value: string) => value.slice(0, SIZE_PLACEHOLDER_DATE)),
     map((value: string) => this.getParsedDate(value)),
-    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableStartDate$, this.availableEndDate$])),
     filter(
-      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
-        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+      ([date, [isBackDating, availableStartDate, availableEndDate]]: [Date, [boolean, Date, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableStartDate, availableEndDate)
     ),
-    map(([date, _]: [Date, [boolean, Date]]) => date)
+    map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
   public readonly rightIconWithCondition$: Observable<string> = combineLatest([
@@ -287,6 +290,7 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.processIsFixedSizeChange(changes?.isFixedSize);
     this.processIsBackDatingChange(changes?.isBackDating);
     this.processAvailableEndDateChange(changes?.availableEndDate);
+    this.processAvailableStartDateChange(changes?.availableStartDate);
     super.ngOnChanges(changes);
   }
 
@@ -328,8 +332,17 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
       .subscribe(() => this.updateValue(''));
   }
 
-  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date): boolean {
-    return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
+  public dateIsNotAvailable(
+    date: Date,
+    isBackDating: boolean,
+    availableStartDate: Date,
+    availableEndDate: Date
+  ): boolean {
+    return (
+      (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) ||
+      date < availableStartDate ||
+      date > availableEndDate
+    );
   }
 
   private processIsFixedSizeChange(change: ComponentChange<this, boolean>): void {
@@ -358,5 +371,14 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
       return;
     }
     this.availableEndDate$.next(updatedValue);
+  }
+
+  private processAvailableStartDateChange(change: ComponentChange<this, Date | number>): void {
+    const updatedValue: Date | number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.availableStartDate$.next(updatedValue);
   }
 }

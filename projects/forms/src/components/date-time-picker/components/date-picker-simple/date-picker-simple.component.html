@@ -62,7 +62,8 @@
     class="date-wrapper"
     *ngFor="let date of dateOrigin; index as index; last as last; first as first"
     [class.date-wrapper__disabled]="
-      disabled || dateIsNotAvailable(date, isBackDating$ | async, availableEndDate$ | async)
+      disabled ||
+      dateIsNotAvailable(date, isBackDating$ | async, availableStartDate$ | async, availableEndDate$ | async)
     "
     [class.date-wrapper__range]="
       !disabled &&
@@ -89,7 +90,8 @@
             : dateIsInDateArray(date, selectedRange$ | async)
         "
         [class.date-inner__disabled]="
-          disabled || dateIsNotAvailable(date, isBackDating$ | async, availableEndDate$ | async)
+          disabled ||
+          dateIsNotAvailable(date, isBackDating$ | async, availableStartDate$ | async, availableEndDate$ | async)
         "
       >
         {{ date | date : 'd' }}

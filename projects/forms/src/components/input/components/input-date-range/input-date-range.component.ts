@@ -33,12 +33,12 @@ export class InputDateRangeComponent extends InputDateTimeBase {
       const value: string = inputValue.slice(0, DATE_MASK_SIZE);
       return this.getParsedDate(value);
     }),
-    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableStartDate$, this.availableEndDate$])),
     filter(
-      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
-        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+      ([date, [isBackDating, availableStartDate, availableEndDate]]: [Date, [boolean, Date, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableStartDate, availableEndDate)
     ),
-    map(([date, _]: [Date, [boolean, Date]]) => date)
+    map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
   public readonly dateRangeSecond$: Observable<Date> = this.value$.pipe(
@@ -52,12 +52,12 @@ export class InputDateRangeComponent extends InputDateTimeBase {
 
       return this.getParsedDate(value);
     }),
-    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableStartDate$, this.availableEndDate$])),
     filter(
-      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
-        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+      ([date, [isBackDating, availableStartDate, availableEndDate]]: [Date, [boolean, Date, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableStartDate, availableEndDate)
     ),
-    map(([date, _]: [Date, [boolean, Date]]) => date)
+    map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
   public readonly range$: Observable<[Date, Date]> = combineLatest([this.dateRangeFirst$, this.dateRangeSecond$]);

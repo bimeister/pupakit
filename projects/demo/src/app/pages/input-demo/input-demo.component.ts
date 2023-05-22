@@ -6,7 +6,9 @@ import { map } from 'rxjs/operators';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'input-demo/examples';
-
+const START_DATE: Date = new Date();
+START_DATE.setHours(0, 0, 0, 0);
+START_DATE.setDate(START_DATE.getDate() - 5);
 export function isDateCorrect(date: Date): boolean {
   return !Number.isNaN(Date.parse(String(date)));
 }
@@ -14,6 +16,7 @@ export function isDateCorrect(date: Date): boolean {
 export function dateValidator(control: AbstractControl): { dateCorrect: false } | null {
   return isNil(control.value) || isDateCorrect(control.value) ? null : { dateCorrect: false };
 }
+
 @Component({
   selector: 'demo-input',
   styleUrls: ['input-demo.component.scss'],
@@ -22,7 +25,7 @@ export function dateValidator(control: AbstractControl): { dateCorrect: false } 
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputDemoComponent implements OnInit, OnDestroy {
-  public readonly isDisabledFormControl: FormControl = new FormControl(false);
+  public readonly isDisabledFormControl: FormControl<boolean> = new FormControl<boolean>(false);
 
   public readonly sizeOptions: PropsOption[] = [
     {
@@ -83,14 +86,19 @@ export class InputDemoComponent implements OnInit, OnDestroy {
   public readonly validators: ValidatorFn[] = [Validators.required];
   public readonly dateValidators: ValidatorFn[] = [Validators.required, dateValidator];
 
-  public readonly placeholderFormControl: FormControl = new FormControl('Custom placeholder');
-  public readonly tooltipTemplateFormControl: FormControl = new FormControl('<b>Invalid tooltip</b>');
-  public readonly tooltipTextFormControl: FormControl = new FormControl('');
-  public readonly textControl: FormControl = new FormControl('');
-  public readonly timeFormControl: FormControl = new FormControl();
-  public readonly dateFormControl: FormControl = new FormControl();
-  public readonly endDateFormControl: FormControl = new FormControl(new Date());
-  public readonly isDisabledControl: FormControl = new FormControl();
+  public readonly placeholderFormControl: FormControl<string | null> = new FormControl<string | null>(
+    'Custom placeholder'
+  );
+  public readonly tooltipTemplateFormControl: FormControl<string | null> = new FormControl<string | null>(
+    '<b>Invalid tooltip</b>'
+  );
+  public readonly tooltipTextFormControl: FormControl<string | null> = new FormControl<string | null>('');
+  public readonly textControl: FormControl<string | null> = new FormControl<string | null>('');
+  public readonly timeFormControl: FormControl<Date | null> = new FormControl();
+  public readonly dateFormControl: FormControl<Date | null> = new FormControl();
+  public readonly endDateFormControl: FormControl<Date | null> = new FormControl<Date | null>(new Date());
+  public readonly startDateFormControl: FormControl<Date | null> = new FormControl<Date | null>(START_DATE);
+  public readonly isDisabledControl: FormControl<boolean> = new FormControl();
 
   public readonly controlsList: FormControl[] = [this.textControl, this.timeFormControl, this.dateFormControl];
   private readonly isDisabled$: Observable<boolean> = this.isDisabledControl.statusChanges.pipe(
