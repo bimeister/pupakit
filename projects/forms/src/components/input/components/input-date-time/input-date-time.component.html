@@ -60,6 +60,7 @@
         [selectionMode]="'date'"
         [isBackDating]="isBackDating$ | async"
         [availableEndDate]="availableEndDate$ | async"
+        [availableStartDate]="availableStartDate$ | async"
         [hours]="hours$ | async"
         [minutes]="minutes$ | async"
         (selectedHours)="selectDateTimeHours($event)"

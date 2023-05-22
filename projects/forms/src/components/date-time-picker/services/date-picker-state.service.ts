@@ -25,6 +25,7 @@ export class DatePickerStateService {
 
   public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
+  public readonly availableStartDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(-Infinity);
 
   public readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> =
     new BehaviorSubject<DatePickerSelectionMode>('range');
@@ -150,8 +151,17 @@ export class DatePickerStateService {
     return this.isSameDate(rangeEndDate, date);
   }
 
-  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date | number): boolean {
-    return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
+  public dateIsNotAvailable(
+    date: Date,
+    isBackDating: boolean,
+    availableStartDate: Date | number,
+    availableEndDate: Date | number
+  ): boolean {
+    return (
+      (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) ||
+      date < availableStartDate ||
+      date > availableEndDate
+    );
   }
 
   public isDateStartInHoveredAndSelectedRange(date: Date, hoveredRange: Date[], selectedRange: Date[]): boolean {

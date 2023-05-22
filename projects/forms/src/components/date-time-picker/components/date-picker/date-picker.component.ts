@@ -65,6 +65,9 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
   @Input() public readonly availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableEndDate$;
 
+  @Input() public readonly availableStartDate: Date | number = -Infinity;
+  public readonly availableStartDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableStartDate$;
+
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();
 
@@ -91,6 +94,7 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
     this.processSecondsChange(changes?.seconds);
     this.processIsBackDatingChange(changes?.isBackDating);
     this.processAvailableEndDateChange(changes?.availableEndDate);
+    this.processAvailableStartDateChange(changes?.availableStartDate);
   }
 
   public ngOnDestroy(): void {
@@ -196,6 +200,15 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
       return;
     }
     this.availableEndDate$.next(updatedValue);
+  }
+
+  private processAvailableStartDateChange(change: ComponentChange<this, Date | number>): void {
+    const updatedValue: Date | number | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+    this.availableStartDate$.next(updatedValue);
   }
 
   private processSelectedDateChange(change: ComponentChange<this, Date>): void {

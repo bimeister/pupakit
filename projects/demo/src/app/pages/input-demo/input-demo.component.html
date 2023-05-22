@@ -148,6 +148,7 @@
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
               [availableEndDate]="endDateFormControl.value"
+              [availableStartDate]="startDateFormControl.value"
               [isFixedSize]="isFixedSize"
               [isBackDating]="isBackDating"
               [customStyles]="styles"
@@ -299,6 +300,11 @@
       <demo-example-viewer-property decoratorName="input" name="availableEndDate" type="Date | number">
         <ng-container *demoExampleViewerPropertyDescription>Max end date available for picking.</ng-container>
         <pupa-input-date [formControl]="endDateFormControl" [withReset]="true"></pupa-input-date>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="availableStartDate" type="Date | number">
+        <ng-container *demoExampleViewerPropertyDescription>Min start date available for picking.</ng-container>
+        <pupa-input-date [formControl]="startDateFormControl" [withReset]="true"></pupa-input-date>
       </demo-example-viewer-property>
     </demo-example-viewer>
   </div>

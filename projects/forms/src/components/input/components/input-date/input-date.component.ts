@@ -27,12 +27,12 @@ export class InputDateComponent extends InputDateTimeBase {
     filter((value: string) => isEmpty(value) || value.length === this.maxLengthInputValue),
     distinctUntilChanged(),
     map((value: string) => this.getParsedDate(value)),
-    withLatestFrom(combineLatest([this.isBackDating$, this.availableEndDate$])),
+    withLatestFrom(combineLatest([this.isBackDating$, this.availableStartDate$, this.availableEndDate$])),
     filter(
-      ([date, [isBackDating, availableEndDate]]: [Date, [boolean, Date]]) =>
-        !this.dateIsNotAvailable(date, isBackDating, availableEndDate)
+      ([date, [isBackDating, availableStartDate, availableEndDate]]: [Date, [boolean, Date, Date]]) =>
+        !this.dateIsNotAvailable(date, isBackDating, availableStartDate, availableEndDate)
     ),
-    map(([date, _]: [Date, [boolean, Date]]) => date)
+    map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
   public setValue(value: ValueType): void {
