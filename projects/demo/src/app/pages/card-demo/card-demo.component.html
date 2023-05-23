@@ -43,6 +43,7 @@
         <pupa-card
           [disabled]="disabled$ | async"
           [clickable]="clickable$ | async"
+          [selected]="selected$ | async"
           [size]="size$ | async"
           [tabIndex]="tabIndexFormControl.value"
         >
@@ -80,6 +81,10 @@
         <demo-example-viewer-property decoratorName="input" name="clickable" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the card is clickable.</ng-container>
           <demo-props-switcher #clickable$></demo-props-switcher>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="selected" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the card is selected.</ng-container>
+          <demo-props-switcher #selected$></demo-props-switcher>
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="tabIndex" type="number">
           <ng-container *demoExampleViewerPropertyDescription>Set the tab index for clickable card.</ng-container>

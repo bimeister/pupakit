@@ -1,5 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
+@use 'variables' as *;
 
 $normal-shadow-color: rgba(33, 33, 33, 0.08);
 $hover-shadow-color: rgba(33, 33, 33, 0.1);
@@ -18,7 +19,7 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
   width: 100%;
   box-sizing: border-box;
 
-  border-radius: 4px;
+  border-radius: $controlBorderRadius;
   border: 2px solid transparent;
   box-shadow: 2px 3px 8px $normal-shadow-color;
   outline: none;
@@ -54,14 +55,14 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
   &_selected:not(.container_disabled) {
     &::before {
       display: block;
-      width: 4px;
+      width: 1rem;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
       content: '';
       background-color: semantic-color(kind-primary-normal);
-      border-radius: 4px 0 0 4px;
+      border-radius: $controlBorderRadius 0 0 $controlBorderRadius;
     }
   }
 
