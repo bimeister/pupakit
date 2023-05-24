@@ -14,6 +14,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { ScrollableComponent, ScrollDirection } from '@bimeister/pupakit.kit';
 import {
   filterByInstanceOf,
   filterNotNil,
@@ -22,17 +24,15 @@ import {
   isNil,
   Nullable,
 } from '@bimeister/utilities';
+import { asyncScheduler, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { filter, map, observeOn, skip, switchMap, take, withLatestFrom } from 'rxjs/operators';
+import { InfiniteScrollerScrollService } from '../../../../components/infinity-scroller/services/infinite-scroller-scroll.service';
 import { InfinityScrollerController } from '../../../../declarations/classes/infinity-scroller-controller.class';
 import { ScrollMoveDirection } from '../../../../declarations/enums/scroll-move-direction.enum';
 import { InfinityScrollerEvents } from '../../../../declarations/events/infinity-scroller.events';
-import { InfiniteScrollerScrollService } from '../../../../components/infinity-scroller/services/infinite-scroller-scroll.service';
 import { InfiniteScrollerItemTemplateDirective } from '../../directives/infinite-scroller-item-template.directive';
 import { InfiniteScrollerBottomItemTemplateDirective } from '../../directives/infinity-scroller-bottom-item-template.directive';
 import { InfiniteScrollerTopItemTemplateDirective } from '../../directives/infinity-scroller-top-item-template.directive';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { ScrollableComponent, ScrollDirection } from '@bimeister/pupakit.kit';
-import { asyncScheduler, BehaviorSubject, Observable, Subscription } from 'rxjs';
-import { switchMap, map, skip, withLatestFrom, filter, take, observeOn } from 'rxjs/operators';
 
 const DEFAULT_SCROLL_INTO_VIEW_OPTIONS: ScrollIntoViewOptions = {
   block: 'nearest',
@@ -116,6 +116,18 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
 
   public onVerticalScrollDirectionChanged(direction: ScrollDirection): void {
     this.infiniteScrollerScrollService.scrollDirection$.next(direction);
+  }
+
+  public scrolledToVerticalStart(event: boolean): void {
+    this.availableController$
+      .pipe(take(1))
+      .subscribe((controller: InfinityScrollerController<T>) => controller.setScrolledToVerticalStartState(event));
+  }
+
+  public scrolledToVerticalEnd(event: boolean): void {
+    this.availableController$
+      .pipe(take(1))
+      .subscribe((controller: InfinityScrollerController<T>) => controller.setScrolledToVerticalEndState(event));
   }
 
   private processControllerChanges(change: ComponentChange<this, InfinityScrollerController<T>>): void {

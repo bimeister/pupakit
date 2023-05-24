@@ -1,12 +1,12 @@
 import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { filterFalsy, filterNotNil, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subject } from 'rxjs';
 import { filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { InfinityScrollerSliceIndexesProducer } from '../../declarations/classes/infinity-scroller-slice-indexes-producer.class';
-import { InfinityScrollerOptions } from '../../declarations/interfaces/infinity-scroller-options.interface';
 import { ScrollMoveDirection } from '../../declarations/enums/scroll-move-direction.enum';
 import { InfinityScrollerEvents } from '../../declarations/events/infinity-scroller.events';
+import { InfinityScrollerOptions } from '../../declarations/interfaces/infinity-scroller-options.interface';
 import { InfinityScrollerPaginationConfig } from '../../declarations/interfaces/infinity-scroller-pagination-config.interface';
 
 type FetchEvent =
@@ -27,6 +27,12 @@ export class InfinityScrollerController<T> {
   public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject<TrackByFunction<T>>(
     InfinityScrollerController.trackBy
   );
+
+  private readonly scrolledToVerticalStartState$: ReplaySubject<boolean> = new ReplaySubject<boolean>();
+  public readonly scrolledToVerticalStart$: Observable<boolean> = this.scrolledToVerticalStartState$.asObservable();
+
+  private readonly scrolledToVerticalEndState$: ReplaySubject<boolean> = new ReplaySubject<boolean>();
+  public readonly scrolledToVerticalEnd$: Observable<boolean> = this.scrolledToVerticalEndState$.asObservable();
 
   private readonly currentFetchEvent$: BehaviorSubject<FetchEvent | null> = new BehaviorSubject<FetchEvent | null>(
     null
@@ -179,6 +185,14 @@ export class InfinityScrollerController<T> {
     }
 
     return this.eventBus.dispatch(event);
+  }
+
+  public setScrolledToVerticalStartState(state: boolean): void {
+    this.scrolledToVerticalStartState$.next(state);
+  }
+
+  public setScrolledToVerticalEndState(state: boolean): void {
+    this.scrolledToVerticalEndState$.next(state);
   }
 
   private setTrackBy(trackBy: TrackByFunction<T> = InfinityScrollerController.trackBy): void {
