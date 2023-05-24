@@ -2,6 +2,8 @@
   class="infinite-scroller"
   [scrollVisibilityMode]="'onscroll'"
   (verticalScrollDirectionChanged)="onVerticalScrollDirectionChanged($event)"
+  (scrolledToVerticalStart)="scrolledToVerticalStart($event)"
+  (scrolledToVerticalEnd)="scrolledToVerticalEnd($event)"
 >
   <div class="infinite-scroller__top" #anchorTop></div>
   <ng-container *ngTemplateOutlet="infiniteScrollTopItemTemplate?.templateRef"></ng-container>
