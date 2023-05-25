@@ -20,16 +20,11 @@
 
   &_clickable {
     &:hover {
-      border: 1px solid semantic-color(kind-neutral-hover);
-      padding: 7px 19px 7px 15px;
+      color: semantic-color(kind-primary-normal);
       cursor: pointer;
 
       @include host-selector('.table-row_selected') {
         border-color: semantic-color(kind-primary-normal);
-      }
-
-      @include xs() {
-        padding: 5px 15px 5px 11px;
       }
     }
   }
