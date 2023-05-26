@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { IconHolderSize } from '../../../..';
-import { IconHolderKind } from '../../../..';
+import { IconHolderSize } from '../../../../declarations/types/icon-holder-size.type';
+import { IconHolderKind } from '../../../../declarations/types/icon-holder-kind.type';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
