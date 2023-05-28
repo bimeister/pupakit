@@ -13,6 +13,10 @@
     <div class="button__content-inner" [class.hidden]="loading$ | async">
       <ng-content></ng-content>
     </div>
+
+    <ng-container *ngIf="(rightIcon$ | async) && (rightIconPosition$ | async)">
+      <pupa-icon class="button__icon" [name]="rightIcon$ | async"></pupa-icon>
+    </ng-container>
   </div>
 
   <div class="button__loading" *ngIf="loading$ | async" focusable="false">
