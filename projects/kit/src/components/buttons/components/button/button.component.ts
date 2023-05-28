@@ -31,8 +31,16 @@ export class ButtonComponent implements OnChanges {
   @Input() public readonly icon: Nullable<string>;
   public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
+  @Input() public readonly rightIcon: Nullable<string>;
+  public readonly rightIcon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+
   @Input() public readonly iconPosition: ButtonIconPosition = 'left';
   public readonly iconPosition$: BehaviorSubject<ButtonIconPosition> = new BehaviorSubject<ButtonIconPosition>('left');
+
+  @Input() public readonly rightIconPosition: ButtonIconPosition = 'right';
+  public readonly rightIconPosition$: BehaviorSubject<ButtonIconPosition> = new BehaviorSubject<ButtonIconPosition>(
+    'right'
+  );
   public readonly isReversedDirection$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public readonly loading: boolean = false;
@@ -70,7 +78,9 @@ export class ButtonComponent implements OnChanges {
     this.processKindChange(changes?.kind);
     this.processDisabledChange(changes?.disabled);
     this.processIconChange(changes?.icon);
+    this.processRightIconChange(changes?.rightIcon);
     this.processIconPositionChange(changes?.iconPosition);
+    this.processRightIconPositionChange(changes?.rightIconPosition);
     this.processLoadingChange(changes?.loading);
     this.processActiveChange(changes?.active);
   }
@@ -132,6 +142,16 @@ export class ButtonComponent implements OnChanges {
     this.icon$.next(updatedValue);
   }
 
+  private processRightIconChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (typeof updatedValue === 'undefined') {
+      return;
+    }
+
+    this.rightIcon$.next(updatedValue);
+  }
+
   private processIconPositionChange(change: ComponentChange<this, ButtonIconPosition>): void {
     const updatedValue: ButtonIconPosition | undefined = change?.currentValue;
 
@@ -140,6 +160,16 @@ export class ButtonComponent implements OnChanges {
     }
 
     this.isReversedDirection$.next(updatedValue === 'right');
+  }
+
+  private processRightIconPositionChange(change: ComponentChange<this, ButtonIconPosition>): void {
+    const updatedValue: ButtonIconPosition | undefined = change?.currentValue;
+
+    if (typeof updatedValue === 'undefined') {
+      return;
+    }
+
+    this.isReversedDirection$.next(updatedValue === 'left');
   }
 
   private processLoadingChange(change: ComponentChange<this, boolean>): void {
