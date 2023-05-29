@@ -57,15 +57,13 @@
               kind: kind$ | async,
               disabled: disabled$ | async,
               loading: loading$ | async,
-              active: active$ | async,
-              iconPosition: iconPosition$ | async
+              active: active$ | async
             };
             let size = size;
             let kind = kind;
             let disabled = disabled;
             let loading = loading;
-            let active = active;
-            let iconPosition = iconPosition
+            let active = active
           "
         >
           <pupa-button
@@ -73,8 +71,8 @@
             [size]="size"
             [kind]="kind"
             [disabled]="disabled"
-            [icon]="buttonIconFormControl.value"
-            [iconPosition]="iconPosition"
+            [leftIcon]="buttonLeftIconFormControl.value"
+            [rightIcon]="buttonRightIconFormControl.value"
             [loading]="loading"
             [active]="active"
           >
@@ -95,18 +93,18 @@
           <demo-props-select #kind$ [options]="kindOptions"></demo-props-select>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property decoratorName="input" name="icon" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>The icon to display inside the element. </ng-container>
-          <pupa-input-text [formControl]="buttonIconFormControl"></pupa-input-text>
+        <demo-example-viewer-property decoratorName="input" name="leftIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription
+            >The left icon to display inside the element.
+          </ng-container>
+          <pupa-input-text [formControl]="buttonLeftIconFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property decoratorName="input" name="iconPosition" type="ButtonIconPosition">
-          <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the icon.</ng-container>
-          <demo-props-radio-select
-            #iconPosition$
-            direction="row"
-            [options]="iconPositionOptions"
-          ></demo-props-radio-select>
+        <demo-example-viewer-property decoratorName="input" name="rightIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription
+            >The right icon to display inside the element.
+          </ng-container>
+          <pupa-input-text [formControl]="buttonRightIconFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
@@ -115,17 +113,17 @@
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="loading" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in loading state. </ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in loading state.</ng-container>
           <demo-props-switcher #loading$></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="active" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in active state. </ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is in active state.</ng-container>
           <demo-props-switcher #active$></demo-props-switcher>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="tabIndex" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>Sets index of the button in tabbing order. </ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>Sets index of the button in tabbing order.</ng-container>
           <pupa-input-text [formControl]="tabIndexFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 

@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, Vie
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { ButtonType } from '../../../../declarations/types/button-type.type';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
-import { ButtonIconPosition } from '../../../../declarations/types/button-icon-position.type';
 import { map, take } from 'rxjs/operators';
 import { ButtonKind } from '../../../../declarations/types/button-kind.type';
 import { ButtonSize } from '../../../../declarations/types/button-size.type';
@@ -28,19 +27,12 @@ export class ButtonComponent implements OnChanges {
   @Input() public readonly disabled: boolean = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly icon: Nullable<string>;
-  public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+  @Input() public readonly leftIcon: Nullable<string>;
+  public readonly leftIcon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public readonly rightIcon: Nullable<string>;
   public readonly rightIcon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public readonly iconPosition: ButtonIconPosition = 'left';
-  public readonly iconPosition$: BehaviorSubject<ButtonIconPosition> = new BehaviorSubject<ButtonIconPosition>('left');
-
-  @Input() public readonly rightIconPosition: ButtonIconPosition = 'right';
-  public readonly rightIconPosition$: BehaviorSubject<ButtonIconPosition> = new BehaviorSubject<ButtonIconPosition>(
-    'right'
-  );
   public readonly isReversedDirection$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public readonly loading: boolean = false;
@@ -77,10 +69,8 @@ export class ButtonComponent implements OnChanges {
     this.processTypeChange(changes?.type);
     this.processKindChange(changes?.kind);
     this.processDisabledChange(changes?.disabled);
-    this.processIconChange(changes?.icon);
+    this.processLeftIconChange(changes?.leftIcon);
     this.processRightIconChange(changes?.rightIcon);
-    this.processIconPositionChange(changes?.iconPosition);
-    this.processRightIconPositionChange(changes?.rightIconPosition);
     this.processLoadingChange(changes?.loading);
     this.processActiveChange(changes?.active);
   }
@@ -132,14 +122,14 @@ export class ButtonComponent implements OnChanges {
     this.disabled$.next(updatedValue);
   }
 
-  private processIconChange(change: ComponentChange<this, string>): void {
+  private processLeftIconChange(change: ComponentChange<this, string>): void {
     const updatedValue: string | undefined = change?.currentValue;
 
     if (typeof updatedValue === 'undefined') {
       return;
     }
 
-    this.icon$.next(updatedValue);
+    this.leftIcon$.next(updatedValue);
   }
 
   private processRightIconChange(change: ComponentChange<this, string>): void {
@@ -150,26 +140,6 @@ export class ButtonComponent implements OnChanges {
     }
 
     this.rightIcon$.next(updatedValue);
-  }
-
-  private processIconPositionChange(change: ComponentChange<this, ButtonIconPosition>): void {
-    const updatedValue: ButtonIconPosition | undefined = change?.currentValue;
-
-    if (typeof updatedValue === 'undefined') {
-      return;
-    }
-
-    this.isReversedDirection$.next(updatedValue === 'right');
-  }
-
-  private processRightIconPositionChange(change: ComponentChange<this, ButtonIconPosition>): void {
-    const updatedValue: ButtonIconPosition | undefined = change?.currentValue;
-
-    if (typeof updatedValue === 'undefined') {
-      return;
-    }
-
-    this.isReversedDirection$.next(updatedValue === 'left');
   }
 
   private processLoadingChange(change: ComponentChange<this, boolean>): void {

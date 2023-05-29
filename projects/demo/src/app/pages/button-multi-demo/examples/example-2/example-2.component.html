@@ -1,6 +1,6 @@
 <div class="button-container">
   <ng-container *ngFor="let kind of kinds">
-    <pupa-button-multi #buttonMulti class="button-container__item" icon="app-folder" [kind]="kind">
+    <pupa-button-multi #buttonMulti class="button-container__item" leftIcon="app-folder" [kind]="kind">
       <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti; let dropdownRef" [dropdownRef]="dropdownRef">
         <pupa-dropdown-menu-item>first</pupa-dropdown-menu-item>
         <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>

@@ -12,7 +12,8 @@ const BASE_REQUEST_PATH: string = 'button-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ButtonDemoComponent {
-  public readonly buttonIconFormControl: FormControl = new FormControl('app-notification');
+  public readonly buttonLeftIconFormControl: FormControl = new FormControl('app-notification');
+  public readonly buttonRightIconFormControl: FormControl = new FormControl('app-user');
   public readonly tabIndexFormControl: FormControl = new FormControl('0');
 
   public readonly typeOptions: PropsOption[] = [
