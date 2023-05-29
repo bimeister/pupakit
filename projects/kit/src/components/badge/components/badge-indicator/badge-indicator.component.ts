@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-
-type BadgeIndicatorState = 'progress' | 'complete' | 'error';
+import { BadgeIndicatorState } from '../../../../declarations/types/badge-indicator-state.type';
 
 @Component({
   selector: 'pupa-badge-indicator',
