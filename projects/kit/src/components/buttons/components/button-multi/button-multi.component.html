@@ -6,13 +6,17 @@
     class="button"
   >
     <div [class.reversed-direction]="isReversedDirection$ | async" class="button__content" focusable="false">
-      <ng-container *ngIf="(icon$ | async) && (iconPosition$ | async)">
-        <pupa-icon [class.hidden]="loading$ | async" [name]="icon$ | async" class="button__icon"></pupa-icon>
+      <ng-container *ngIf="leftIcon$ | async as leftIcon">
+        <pupa-icon [class.hidden]="loading$ | async" [name]="leftIcon" class="button__icon"></pupa-icon>
       </ng-container>
 
       <div [class.hidden]="loading$ | async" class="button__content-inner">
         <ng-content></ng-content>
       </div>
+
+      <ng-container *ngIf="rightIcon$ | async as rightIcon">
+        <pupa-icon class="button__icon" [name]="rightIcon"></pupa-icon>
+      </ng-container>
     </div>
     <div *ngIf="loading$ | async" class="button__loading" focusable="false">
       <pupa-spinner [size]="'16px'"></pupa-spinner>

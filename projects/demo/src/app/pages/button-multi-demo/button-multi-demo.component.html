@@ -13,7 +13,9 @@
     <h3 demoAnchor>Button kind</h3>
 
     <pupa-info-block>
-      There is no <pupa-code-inline>secondary</pupa-code-inline> kind for button multi .
+      There is no
+      <pupa-code-inline>secondary</pupa-code-inline>
+      kind for button multi .
     </pupa-info-block>
 
     <pupa-code-container [content]="example1Content">
@@ -69,8 +71,8 @@
           [kind]="kind$ | async"
           [disabled]="disabled$ | async"
           [type]="type$ | async"
-          [icon]="buttonIconFormControl.value"
-          [iconPosition]="iconPosition$ | async"
+          [leftIcon]="buttonLeftIconFormControl.value"
+          [rightIcon]="buttonRightIconFormControl.value"
           [loading]="loading$ | async"
           [active]="active$ | async"
         >
@@ -80,7 +82,7 @@
             *pupaDropdownTemplate="buttonMulti; horizontalPosition: horizontalPosition$ | async; let dropdownRef"
             [dropdownRef]="dropdownRef"
           >
-            <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async"> option </pupa-dropdown-menu-item>
+            <pupa-dropdown-menu-item [disabled]="optionDisabled$ | async"> option</pupa-dropdown-menu-item>
           </pupa-dropdown-menu>
         </pupa-button-multi>
       </demo-example-viewer-content>
@@ -116,24 +118,18 @@
           <demo-props-select #kind$ [options]="kindOptions"></demo-props-select>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property decoratorName="input" name="icon" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>Sets the icon to display inside the button.</ng-container>
-          <pupa-input-text [formControl]="buttonIconFormControl"></pupa-input-text>
+        <demo-example-viewer-property decoratorName="input" name="leftIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Sets the left icon to display inside the button.
+          </ng-container>
+          <pupa-input-text [formControl]="buttonLeftIconFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 
-        <demo-example-viewer-property decoratorName="input" name="iconPosition" type="ButtonIconPosition">
-          <ng-container *demoExampleViewerPropertyDescription>
-            <p>Sets the position of the icon inside the button.</p>
-            <p>
-              Default:
-              <pupa-code-inline>'left'</pupa-code-inline>
-            </p>
+        <demo-example-viewer-property decoratorName="input" name="rightIcon" type="string">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Sets the right icon to display inside the button.
           </ng-container>
-          <demo-props-radio-select
-            #iconPosition$
-            direction="row"
-            [options]="iconPositionOptions"
-          ></demo-props-radio-select>
+          <pupa-input-text [formControl]="buttonRightIconFormControl"></pupa-input-text>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">

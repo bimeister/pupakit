@@ -1,7 +1,7 @@
 <div class="action-container">
   <pupa-actions [actions]="actions">
     <ng-container *pupaActionTemplate="let action">
-      <pupa-button class="action-button" kind="secondary" icon="app-cube" (click)="action.action()">{{
+      <pupa-button class="action-button" kind="secondary" leftIcon="app-cube" (click)="action.action()">{{
         action.name
       }}</pupa-button>
     </ng-container>
@@ -13,7 +13,7 @@
     </ng-container>
 
     <ng-container *pupaActionMoreTriggerTemplate="let count">
-      <pupa-button kind="secondary" icon="app-chevron-down" iconPosition="right"> More ({{ count }}) </pupa-button>
+      <pupa-button kind="secondary" rightIcon="app-chevron-down"> More ({{ count }})</pupa-button>
     </ng-container>
   </pupa-actions>
 </div>
