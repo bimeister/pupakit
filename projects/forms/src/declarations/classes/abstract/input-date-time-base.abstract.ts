@@ -328,8 +328,8 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
       .subscribe(() => this.updateValue(''));
   }
 
-  public dateIsNotAvailable(date: Date, isBackDating: boolean, availableEndDate: Date): boolean {
-    return (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
+  public dateIsNotAvailable(date: Date | undefined, isBackDating: boolean, availableEndDate: Date): boolean {
+    return (!isBackDating && !isNil(date) && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) || date > availableEndDate;
   }
 
   private processIsFixedSizeChange(change: ComponentChange<this, boolean>): void {
