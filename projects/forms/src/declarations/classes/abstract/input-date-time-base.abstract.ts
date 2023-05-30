@@ -333,13 +333,13 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public dateIsNotAvailable(
-    date: Date,
+    date: Date | null,
     isBackDating: boolean,
     availableStartDate: Date,
     availableEndDate: Date
   ): boolean {
     return (
-      (!isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) ||
+      (!isNil(date) && !isBackDating && date < DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME) ||
       date < availableStartDate ||
       date > availableEndDate
     );
