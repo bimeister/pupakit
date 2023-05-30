@@ -132,12 +132,14 @@ export class TooltipService implements OnDestroy, TooltipServiceDeclaration {
     this.getPositionStrategy()
       .pipe(take(1), filterNotNil())
       .subscribe((positionStrategy: FlexibleConnectedPositionStrategy) => {
+        this.tooltipPositionStrategy$.next(positionStrategy);
+
         const overlayConfig: OverlayConfig = new OverlayConfig({
           positionStrategy,
         });
         const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
+
         this.overlayRef$.next(overlayRef);
-        this.tooltipPositionStrategy$.next(positionStrategy);
       });
   }
 
@@ -150,6 +152,7 @@ export class TooltipService implements OnDestroy, TooltipServiceDeclaration {
           .position()
           .flexibleConnectedTo(triggerRef)
           .withPositions(OVERLAY_POSITIONS)
+          .withGrowAfterOpen()
           .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
         return positionStrategy;

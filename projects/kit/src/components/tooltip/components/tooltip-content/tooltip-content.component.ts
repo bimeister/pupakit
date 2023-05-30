@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { filterFalsy, filterNotNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription, zip } from 'rxjs';
-import { map, take, withLatestFrom } from 'rxjs/operators';
+import { distinctUntilChanged, map, take, withLatestFrom } from 'rxjs/operators';
 import { TOOLTIP_SERVICE_TOKEN } from '../../../../declarations/tokens/tooltip-service.token';
 import { TooltipServiceDeclaration } from '../../../../declarations/interfaces/tooltip-service-declaration.interface';
 
@@ -119,7 +119,10 @@ export class TooltipContentComponent implements OnDestroy {
     );
 
     return zip(offsetXPx$, offsetYPx$)
-      .pipe(map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`))
+      .pipe(
+        map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`),
+        distinctUntilChanged()
+      )
       .subscribe((transformStyle: string) => {
         this.styleTransform$.next(transformStyle);
         this.detectChanges();
