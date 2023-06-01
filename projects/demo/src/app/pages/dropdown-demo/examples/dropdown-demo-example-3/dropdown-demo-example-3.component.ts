@@ -20,6 +20,7 @@ export class DropdownDemoExample3Component {
       target: [event.clientX, event.clientY],
       widthType: 'auto',
       horizontalPosition: 'center',
+      verticalPosition: 'bottom',
       component: DropdownDemoContainerComponent,
       injector: this.injector,
     });

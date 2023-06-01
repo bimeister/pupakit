@@ -55,4 +55,16 @@ export class DropdownDemoComponent {
       value: 'end',
     },
   ];
+
+  public readonly verticalPositionOptions: PropsOption[] = [
+    {
+      caption: 'bottom',
+      value: 'bottom',
+      isDefault: true,
+    },
+    {
+      caption: 'top',
+      value: 'top',
+    },
+  ];
 }

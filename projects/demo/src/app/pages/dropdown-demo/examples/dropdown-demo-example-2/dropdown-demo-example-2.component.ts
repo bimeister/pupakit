@@ -24,6 +24,7 @@ export class DropdownDemoExample2Component {
       target: coordinates,
       widthType: 'auto',
       horizontalPosition: 'center',
+      verticalPosition: 'bottom',
       component: DropdownDemoContainerComponent,
       injector: this.injector,
     });

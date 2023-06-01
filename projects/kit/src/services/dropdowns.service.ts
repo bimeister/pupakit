@@ -1,11 +1,4 @@
-import {
-  ConnectionPositionPair,
-  FlexibleConnectedPositionStrategy,
-  HorizontalConnectionPos,
-  Overlay,
-  OverlayRef,
-  VerticalConnectionPos,
-} from '@angular/cdk/overlay';
+import { ConnectionPositionPair, FlexibleConnectedPositionStrategy, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { Injectable, Injector } from '@angular/core';
 import { getUuid, isNil, Uuid } from '@bimeister/utilities';
@@ -21,8 +14,17 @@ import { DropdownContainerData } from '../declarations/interfaces/dropdown-conta
 import { DropdownDataType } from '../declarations/types/utility-types/dropdown-data.utility-type';
 import { OVERLAY_VIEWPORT_MARGIN_PX, Position, Theme } from '@bimeister/pupakit.common';
 
-const HORIZONTAL_POSITIONS: HorizontalConnectionPos[] = ['center', 'end', 'start'];
-const VERTICAL_POSITIONS: VerticalConnectionPos[] = ['top', 'bottom'];
+const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
+  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
+  new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
+  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
+  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' }),
+  new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'bottom' }),
+  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' }),
+  new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
+  new ConnectionPositionPair({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }),
+  new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }),
+];
 
 @Injectable({ providedIn: 'root' })
 export class DropdownsService {
@@ -115,7 +117,7 @@ export class DropdownsService {
       .position()
       .flexibleConnectedTo(target instanceof HTMLElement ? target : { x: target[0], y: target[1] })
       .withFlexibleDimensions(false)
-      .withPositions(this.getOverlayPositionsByHorizontalPosition(config.horizontalPosition))
+      .withPositions(this.getOverlayPositions(config))
       .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
   }
 
@@ -132,27 +134,18 @@ export class DropdownsService {
     return 'auto';
   }
 
-  private getOverlayPositionsByHorizontalPosition(
-    currentHorizontalPos: HorizontalConnectionPos
+  private getOverlayPositions<TComponent extends DropdownComponentBase<unknown>>(
+    config: DropdownConfig<TComponent, DropdownDataType<TComponent>>
   ): ConnectionPositionPair[] {
-    const sortedHorizontalPositions: HorizontalConnectionPos[] = HORIZONTAL_POSITIONS.sort(
-      (horizontalPos: HorizontalConnectionPos) => (horizontalPos === currentHorizontalPos ? -1 : 1)
+    const sortedHorizontalPositions: ConnectionPositionPair[] = OVERLAY_POSITIONS.sort(
+      (position: ConnectionPositionPair) =>
+        position.overlayX === config.horizontalPosition &&
+        position.originY === config.verticalPosition &&
+        position.overlayY !== config.verticalPosition
+          ? -1
+          : 1
     );
 
-    const overlayPositions: ConnectionPositionPair[] = VERTICAL_POSITIONS.flatMap(
-      (verticalPos: VerticalConnectionPos) =>
-        sortedHorizontalPositions.map((horizontalPos: HorizontalConnectionPos) =>
-          this.getConnectionPositionPair(horizontalPos, verticalPos)
-        )
-    );
-
-    return overlayPositions;
-  }
-
-  private getConnectionPositionPair(
-    overlayX: HorizontalConnectionPos,
-    overlayY: VerticalConnectionPos
-  ): ConnectionPositionPair {
-    return new ConnectionPositionPair({ originX: overlayX, originY: 'bottom' }, { overlayX, overlayY });
+    return sortedHorizontalPositions;
   }
 }
