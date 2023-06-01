@@ -88,7 +88,19 @@ export class TooltipContentComponent implements OnDestroy {
   }
 
   private calculateTooltipStyleTransform(): Subscription {
-    const offsetXPx$: Observable<number> = this.tooltipPosition$.pipe(
+    return zip(this.getTooltipOffsetXPx(), this.getTooltipOffsetYPx())
+      .pipe(
+        map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`),
+        distinctUntilChanged()
+      )
+      .subscribe((transformStyle: string) => {
+        this.styleTransform$.next(transformStyle);
+        this.detectChanges();
+      });
+  }
+
+  private getTooltipOffsetXPx(): Observable<number> {
+    return this.tooltipPosition$.pipe(
       filterNotNil(),
       map((tooltipPosition: ConnectedOverlayPositionChange) => tooltipPosition.connectionPair),
       map((connectionPair: ConnectionPositionPair) => {
@@ -102,8 +114,10 @@ export class TooltipContentComponent implements OnDestroy {
         }
       })
     );
+  }
 
-    const offsetYPx$: Observable<number> = this.tooltipPosition$.pipe(
+  private getTooltipOffsetYPx(): Observable<number> {
+    return this.tooltipPosition$.pipe(
       filterNotNil(),
       map((tooltipPosition: ConnectedOverlayPositionChange) => tooltipPosition.connectionPair),
       map((connectionPair: ConnectionPositionPair) => {
@@ -117,16 +131,6 @@ export class TooltipContentComponent implements OnDestroy {
         }
       })
     );
-
-    return zip(offsetXPx$, offsetYPx$)
-      .pipe(
-        map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`),
-        distinctUntilChanged()
-      )
-      .subscribe((transformStyle: string) => {
-        this.styleTransform$.next(transformStyle);
-        this.detectChanges();
-      });
   }
 
   private detectChanges(): void {
