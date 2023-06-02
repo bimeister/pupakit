@@ -145,8 +145,10 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
   }
 
   private registerTopAnchorIntersectionObserver(): Subscription {
+    console.log('[PUPAKIT] registerTopAnchorIntersectionObserver');
     return intersectionObservable(this.anchorTop.nativeElement, {
       root: this.scrollable.element,
+      threshold: 0,
     })
       .pipe(
         skip(1),
@@ -162,6 +164,7 @@ export class InfinityScrollerComponent<T> implements OnChanges, AfterViewInit, O
   }
 
   private registerBottomAnchorIntersectionObserver(): Subscription {
+    console.log('[PUPAKIT] registerBottomAnchorIntersectionObserver');
     return intersectionObservable(this.anchorBottom.nativeElement, {
       root: this.scrollable.element,
     })

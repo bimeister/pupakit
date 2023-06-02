@@ -69,6 +69,8 @@ export class InfinityScrollerController<T> {
   }
 
   public handleTopAnchorIntersect(): void {
+    console.log('[PUPAKIT] handleTopAnchorIntersect');
+
     this.data$
       .pipe(
         take(1),
@@ -92,6 +94,8 @@ export class InfinityScrollerController<T> {
   }
 
   public handleBottomAnchorIntersect(): void {
+    console.log('[PUPAKIT] handleBottomAnchorIntersect');
+
     this.data$
       .pipe(
         take(1),
@@ -181,6 +185,8 @@ export class InfinityScrollerController<T> {
       event instanceof InfinityScrollerEvents.GetPreviousPage ||
       event instanceof InfinityScrollerEvents.GetSpecificPage
     ) {
+      console.log('[PUPAKIT] dispatchEvent', event);
+
       this.currentFetchEvent$.next(event);
     }
 
