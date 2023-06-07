@@ -11,14 +11,8 @@
   font-size: 3rem;
   line-height: 4rem;
   @include font-type-regular();
-
-  padding: 4rem 5rem;
-
-  color: color(neutral-1000);
-  background-color: color(neutral-5);
-
-  @include host-selector-dark-theme() {
-    color: color(neutral-1);
-    background-color: color(neutral-500);
-  }
+  color: semantic-color(text-primary);
+  @include blur(3rem);
+  background-color: semantic-color(surface-action);
+  padding: 2rem;
 }

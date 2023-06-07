@@ -9,7 +9,7 @@
 
 .select-dropdown {
   width: 100%;
-  border-radius: $controlBorderRadius;
+  border-radius: $containerBorderRadius;
   @include blur(3rem);
   background-color: semantic-color(surface-glass, alpha-700);
   border: 1px solid semantic-color(lines-normal);
