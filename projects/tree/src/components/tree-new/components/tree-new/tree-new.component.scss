@@ -1,5 +1,6 @@
 @use 'functions' as *;
 @use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
   width: 100%;
@@ -7,7 +8,7 @@
   box-sizing: border-box;
   display: block;
 
-  --pupa-scrollable-content_padding: 2rem 3rem 3rem 2rem;
+  --pupa-scrollable-content_padding: 2rem 0 0 2rem;
 }
 
 .tree {
@@ -49,6 +50,8 @@
   top: 0;
   left: 0;
   position: absolute;
+  padding-bottom: $width_scrollbar;
+  box-sizing: border-box;
 }
 
 .draggable {

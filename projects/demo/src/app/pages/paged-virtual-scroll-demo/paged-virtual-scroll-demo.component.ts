@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 import { PagedVirtualScrollArguments } from '@bimeister/pupakit.common';
 import { PagedVirtualScrollViewportComponent } from '@bimeister/pupakit.widgets';
 import { filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, of, Subject, Subscription, timer } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription, of, timer } from 'rxjs';
 import { debounceTime, delay, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 
 type DataType = number;

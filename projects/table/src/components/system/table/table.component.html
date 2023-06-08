@@ -72,9 +72,9 @@
       <pupa-scrollable
         #scrollableContainer
         class="table-body__scrollable"
-        [size]="'large'"
         (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
         [position]="'external'"
+        [hasContentOffset]="false"
       >
         <cdk-virtual-scroll-viewport
           #cdkVirtualScrollViewport
@@ -139,7 +139,6 @@
             <pupa-scrollable
               class="table-body__scrollable-container"
               #bodyScrollableContainer
-              [size]="'large'"
               [syncWith]="[placeholderScrollableContainer]"
               (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
               [invisibleScrollbars]="['horizontal']"
@@ -191,8 +190,8 @@
     <pupa-scrollable
       #placeholderScrollableContainer
       class="table-bottom-scrollbar__scrollable-container"
-      [size]="'large'"
       [syncWith]="[bodyScrollableContainer]"
+      [hasContentOffset]="false"
       (scrollLeftChanged)="processBodyScrollLeftChanges($event)"
       (horizontalScrollVisibilityChanged)="processHorizontalScrollBarVisibilityChanges($event)"
       [class.table-bottom-scrollbar__scrollable-container_has-left-pinned]="(pinnedLeftColumns$ | async)?.length > 0"

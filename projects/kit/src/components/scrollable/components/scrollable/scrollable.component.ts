@@ -19,6 +19,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  ComponentChange,
+  ComponentChanges,
+  fromHammerEvent,
+  getAnimationFrameLoop,
+  subscribeInsideAngular,
+  subscribeOutsideAngular,
+} from '@bimeister/pupakit.common';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, forkJoin, fromEvent, merge, NEVER, Observable, of, Subscription } from 'rxjs';
 import {
@@ -36,22 +44,13 @@ import {
   throttleTime,
   withLatestFrom,
 } from 'rxjs/operators';
-import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
-import {
-  ComponentChanges,
-  ComponentChange,
-  subscribeOutsideAngular,
-  subscribeInsideAngular,
-  fromHammerEvent,
-  getAnimationFrameLoop,
-} from '@bimeister/pupakit.common';
-import { ScrollbarType } from '../../../../declarations/types/scrollbar-type.type';
-import { ScrollbarSize } from '../../../../declarations/types/scrollbar-size.type';
-import { ScrollbarPosition } from '../../../../declarations/types/scrollbar-position.type';
+import { Scrollbar } from '../../../../declarations/classes/scrollbar.class';
+import { ScrollDirection } from '../../../../declarations/types/scroll-direction.type';
 import { ScrollDragMode } from '../../../../declarations/types/scroll-drag-mode.type';
 import { ScrollVisibilityMode } from '../../../../declarations/types/scroll-visibility-mode.type';
-import { ScrollDirection } from '../../../../declarations/types/scroll-direction.type';
-import { Scrollbar } from '../../../../declarations/classes/scrollbar.class';
+import { ScrollbarPosition } from '../../../../declarations/types/scrollbar-position.type';
+import { ScrollbarType } from '../../../../declarations/types/scrollbar-type.type';
+import { ScrollableContentDirective } from '../../directives/scrollable-content.directive';
 
 const ANIMATION_FRAME_THROTTLE_TIME_MS: number = 1000 / 15;
 const SCROLL_EVENT_DEBOUNCE_TIME_MS: number = 100;
@@ -76,7 +75,6 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   private readonly subscription: Subscription = new Subscription();
 
   @Input() public invisibleScrollbars: ScrollbarType[] = [];
-  @Input() public size: ScrollbarSize = 'small';
   @Input() public position: ScrollbarPosition = 'internal';
   @Input() public syncWith: ScrollableComponent[] = [];
   @Input() public scrollDragMode: Nullable<ScrollDragMode> = null;
@@ -84,6 +82,8 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
     Nullable<ScrollDragMode>
   >(null);
   @Input() public scrollVisibilityMode: ScrollVisibilityMode = 'always';
+
+  @Input() public hasContentOffset: boolean = true;
   private readonly scrollVisibilityMode$: BehaviorSubject<ScrollVisibilityMode> =
     new BehaviorSubject<ScrollVisibilityMode>('always');
 
@@ -117,8 +117,8 @@ export class ScrollableComponent implements OnInit, AfterViewInit, OnDestroy, On
   private readonly verticalScrollbar: Scrollbar = new Scrollbar();
   private readonly horizontalScrollbar: Scrollbar = new Scrollbar();
 
-  private readonly hasVerticalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private readonly hasHorizontalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly hasVerticalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly hasHorizontalScrollbar$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isVerticalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isHorizontalThumbGrabbing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
