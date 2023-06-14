@@ -26,6 +26,7 @@
           [disabled]="disabled$ | async"
           [widthType]="widthType$ | async"
           [horizontalPosition]="horizontalPosition$ | async"
+          [verticalPosition]="verticalPosition$ | async"
         ></demo-dropdown-example-1>
       </demo-example-viewer-content>
       <demo-example-viewer-section-label>pupaDropdown Properties</demo-example-viewer-section-label>
@@ -75,6 +76,21 @@
             #horizontalPosition$
             direction="row"
             [options]="horizontalPositionOptions"
+          ></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property
+          name="pupaDropdownTemplateHorizontalPosition"
+          type="VerticalConnectionPos"
+          decoratorName="input"
+        >
+          <ng-container *demoExampleViewerPropertyDescription>
+            <div>Sets vertical position of dropdown.</div>
+          </ng-container>
+          <demo-props-radio-select
+            #verticalPosition$
+            direction="row"
+            [options]="verticalPositionOptions"
           ></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>

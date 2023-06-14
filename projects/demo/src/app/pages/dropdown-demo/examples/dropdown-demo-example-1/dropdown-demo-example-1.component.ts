@@ -1,4 +1,4 @@
-import { HorizontalConnectionPos } from '@angular/cdk/overlay';
+import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { DropdownWidthType } from '@bimeister/pupakit.kit';
 
@@ -13,4 +13,5 @@ export class DropdownDemoExample1Component {
   @Input() public disabled: boolean;
   @Input() public widthType: DropdownWidthType;
   @Input() public horizontalPosition: HorizontalConnectionPos;
+  @Input() public verticalPosition: VerticalConnectionPos;
 }
