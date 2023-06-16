@@ -52,6 +52,10 @@
     background-color: color(danger-500);
   }
 
+  &_custom .status__marker {
+    background-color: var(--status_marker-color);
+  }
+
   &_neutral {
     color: color(neutral-300);
 
