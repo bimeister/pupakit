@@ -1,4 +1,9 @@
-<div class="status" [class]="colorClass" [class.disabled]="disabled">
+<div
+  class="status"
+  [class]="colorClass"
+  [class.disabled]="disabled"
+  [class.right-marker-position]="markerPosition === 'right'"
+>
   <div class="status__marker" [class]="kindClass"></div>
   <div class="status__text">
     <ng-content></ng-content>

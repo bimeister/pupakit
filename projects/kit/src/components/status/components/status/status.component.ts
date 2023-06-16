@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { StatusColor } from '../../../../declarations/types/status-color.type';
 import { StatusKind } from '../../../../declarations/types/status-kind.type';
+import { MarkerPosition } from '../../../../declarations/types/marker-position.type';
 
 @Component({
   selector: 'pupa-status',
@@ -12,6 +13,7 @@ import { StatusKind } from '../../../../declarations/types/status-kind.type';
 export class StatusComponent {
   @Input() public color: StatusColor = 'primary';
   @Input() public kind: StatusKind = 'line';
+  @Input() public markerPosition: MarkerPosition = 'left';
   @Input() public disabled: boolean = false;
 
   public get colorClass(): string {

@@ -12,6 +12,11 @@
   text-overflow: inherit;
   overflow: inherit;
 
+  &.right-marker-position {
+    padding-left: 0;
+    padding-right: 3rem;
+  }
+
   &__marker {
     position: absolute;
     left: 0;
@@ -29,6 +34,11 @@
       top: calc(50% - 3.5px);
       height: 5px;
     }
+  }
+
+  &.right-marker-position &__marker {
+    left: unset;
+    right: 0;
   }
 
   &__text {
