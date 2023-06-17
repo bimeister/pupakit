@@ -19,8 +19,8 @@
   &__selection {
     position: sticky;
     left: 0;
-    width: 2px;
-    min-width: 2px;
+    width: 0.5rem;
+    min-width: 0.5rem;
     height: 8rem;
     opacity: 0;
   }
@@ -59,8 +59,6 @@
   }
 
   &__without-children {
-    width: 1rem;
-    height: 1rem;
     color: color(neutral-60);
   }
 

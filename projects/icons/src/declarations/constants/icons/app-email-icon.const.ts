@@ -1,4 +1,4 @@
-import { IconDefinition } from '../../interfaces/icon-definition.interface';
+import { IconDefinition } from '../../../declarations/interfaces/icon-definition.interface';
 
 export const appEmailIcon: IconDefinition = {
   name: 'app-email',

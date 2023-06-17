@@ -13,9 +13,9 @@ export class PupaCalloutComponent {
   @Input() public readonly variant: CalloutType = 'info';
 
   public readonly icons: Map<CalloutType, string> = new Map<CalloutType, string>([
-    ['info', 'ios-information-circle'],
-    ['success', 'ios-checkmark-circle'],
+    ['info', 'app-info-filled'],
+    ['success', 'app-check-round-filled'],
     ['warning', 'app-attention-filled'],
-    ['danger', 'm-error'],
+    ['danger', 'app-error-filled'],
   ]);
 }

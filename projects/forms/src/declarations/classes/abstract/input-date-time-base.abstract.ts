@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ComponentChanges, ComponentChange, TimeDigitFormatPipe } from '@bimeister/pupakit.common';
+import { ComponentChange, ComponentChanges, TimeDigitFormatPipe } from '@bimeister/pupakit.common';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../components/droppable/components/droppable/droppable.component';
 import { dateClearTime } from '../../functions/date-clear-time.function';
@@ -117,10 +117,10 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   ]).pipe(
     map(([rightIcon, dateToResetSwitcherEnabled]: [string, boolean]) => {
       if (dateToResetSwitcherEnabled) {
-        return 'm-abort';
+        return 'app-close-square';
       }
 
-      return isEmpty(rightIcon) ? 'm-calendar' : rightIcon;
+      return isEmpty(rightIcon) ? 'app-calendar' : rightIcon;
     })
   );
 
