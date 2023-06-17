@@ -1,0 +1,9 @@
+import { IconDefinition } from '../../../declarations/interfaces/icon-definition.interface';
+
+export const appHexagonIcon: IconDefinition = {
+  name: 'app-hexagon',
+  data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.9775 13.1571L13.955 7.99995L10.9775 2.84283L5.02257 2.84283L2.0451 7.99995L5.02257 13.1571L10.9775 13.1571ZM14.821 8.49995C14.9996 8.19055 14.9996 7.80935 14.821 7.49995L11.8435 2.34283C11.6649 2.03343 11.3348 1.84283 10.9775 1.84283L5.02257 1.84283C4.6653 1.84283 4.33517 2.03343 4.15654 2.34283L1.17908 7.49995C1.00044 7.80935 1.00044 8.19055 1.17908 8.49995L4.15654 13.6571C4.33517 13.9665 4.6653 14.1571 5.02256 14.1571L10.9775 14.1571C11.3348 14.1571 11.6649 13.9665 11.8435 13.6571L14.821 8.49995Z" fill="currentColor"/>
+</svg>
+`,
+};

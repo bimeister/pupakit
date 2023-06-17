@@ -4,11 +4,11 @@ import { NgModule, Type } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PupaPipesModule } from '@bimeister/pupakit.common';
 import {
+  PupaIconsModule,
   appChevronDownIcon,
   appChevronUpIcon,
-  mAbortIcon,
-  mErrorIcon,
-  PupaIconsModule,
+  appCloseSquareIcon,
+  appErrorFilledIcon,
 } from '@bimeister/pupakit.icons';
 import {
   PupaCheckboxModule,
@@ -67,7 +67,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
     PupaCheckboxModule,
     PupaTagModule,
     PupaThemeWrapperModule,
-    PupaIconsModule.forFeature([appChevronDownIcon, appChevronUpIcon, mAbortIcon, mErrorIcon]),
+    PupaIconsModule.forFeature([appChevronDownIcon, appChevronUpIcon, appCloseSquareIcon, appErrorFilledIcon]),
     PupaTreeLayoutModule,
     PupaOptionModule,
   ],

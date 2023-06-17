@@ -39,13 +39,18 @@
 </button>
 
 <div class="icons">
-  <pupa-icon *ngIf="isVisibleReset$ | async" class="icons__icon icons__icon-reset" name="m-abort" (click)="reset()">
+  <pupa-icon
+    *ngIf="isVisibleReset$ | async"
+    class="icons__icon icons__icon-reset"
+    name="app-close-square"
+    (click)="reset()"
+  >
   </pupa-icon>
 
   <pupa-icon
     *ngIf="isInvalid$ | async"
     class="icons__icon icons__icon-invalid"
-    name="m-error"
+    name="app-error-filled"
     [pupaTooltip]="invalidTooltip$ | async"
     [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
     [tooltipDisabled]="isInvalidTooltipDisabled$ | async"

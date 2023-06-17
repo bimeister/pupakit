@@ -3,7 +3,8 @@ import { IconDefinition } from '../../../declarations/interfaces/icon-definition
 export const appArchiveIcon: IconDefinition = {
   name: 'app-archive',
   data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path fill-rule="evenodd" clip-rule="evenodd" d="M1 4C1 2.89543 1.89543 2 3 2H13C14.1046 2 15 2.89543 15 4V6V6.5H14.5H14V12C14 13.1046 13.1046 14 12 14H4C2.89543 14 2 13.1046 2 12V6.5H1.5H1V6V4ZM3 6.5H13V12C13 12.5523 12.5523 13 12 13H4C3.44772 13 3 12.5523 3 12V6.5ZM2.5 5.5H2V4C2 3.44772 2.44772 3 3 3H13C13.5523 3 14 3.44772 14 4V5.5H13.5H2.5ZM6 8.5C5.72386 8.5 5.5 8.72386 5.5 9C5.5 9.27614 5.72386 9.5 6 9.5H10C10.2761 9.5 10.5 9.27614 10.5 9C10.5 8.72386 10.2761 8.5 10 8.5H6Z" fill="currentColor"/>
-  </svg>  
+<path d="M6 8.5C6 8.22386 6.22386 8 6.5 8H9.5C9.77614 8 10 8.22386 10 8.5C10 8.77614 9.77614 9 9.5 9H6.5C6.22386 9 6 8.77614 6 8.5Z" fill="currentColor"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1 5C1 5.55228 1.44772 6 2 6L2 12C2 13.1046 2.89543 14 4 14H12C13.1046 14 14 13.1046 14 12V6C14.5523 6 15 5.55228 15 5V4C15 2.89543 14.1046 2 13 2H3C1.89543 2 1 2.89543 1 4V5ZM13 3H3C2.44772 3 2 3.44772 2 4V5H14V4C14 3.44772 13.5523 3 13 3ZM3 12V6H13V12C13 12.5523 12.5523 13 12 13H4C3.44772 13 3 12.5523 3 12Z" fill="currentColor"/>
+</svg>
 `,
 };

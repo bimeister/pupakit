@@ -1,7 +1,9 @@
 import { IconDefinition } from '../../../declarations/interfaces/icon-definition.interface';
 
-export const appCircle: IconDefinition = {
+export const appCircleIcon: IconDefinition = {
   name: 'app-circle',
-  data: `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 512 512"><path d="M256 464c-114.69 0-208-93.31-208-208S141.31 48 256 48s208 93.31 208 208s-93.31 208-208 208z" fill="currentColor"/></svg>
+  data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.005 1.32971C4.32979 1.32971 1.33972 4.31978 1.33972 7.99499C1.33972 11.6702 4.32979 14.6603 8.005 14.6603C11.6802 14.6603 14.6703 11.6702 14.6703 7.99499C14.6703 4.31978 11.6802 1.32971 8.005 1.32971ZM8.005 2.3295C11.1399 2.3295 13.6705 4.86011 13.6705 7.99499C13.6705 11.1299 11.1399 13.6605 8.005 13.6605C4.87011 13.6605 2.33951 11.1299 2.33951 7.99499C2.33951 4.86011 4.87011 2.3295 8.005 2.3295Z" fill="currentColor"/>
+</svg>
 `,
 };

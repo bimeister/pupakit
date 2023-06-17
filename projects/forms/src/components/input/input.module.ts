@@ -3,13 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PupaPipesModule } from '@bimeister/pupakit.common';
 import {
-  mAbortIcon,
-  mCalendarIcon,
-  mClockIcon,
-  mErrorIcon,
-  mEyeClosedIcon,
-  mEyeOpenIcon,
   PupaIconsModule,
+  appCalendarIcon,
+  appClockIcon,
+  appCloseSquareIcon,
+  appErrorFilledIcon,
+  appEyeClosedIcon,
+  appEyeOpenIcon,
 } from '@bimeister/pupakit.icons';
 import { PupaTooltipModule } from '@bimeister/pupakit.kit';
 import { NgxMaskModule } from 'ngx-mask';
@@ -49,7 +49,14 @@ const DECLARATIONS: any[] = [...EXPORTS];
     PupaDateTimePickerModule,
     PupaDroppableModule,
     PupaTooltipModule,
-    PupaIconsModule.forFeature([mAbortIcon, mCalendarIcon, mErrorIcon, mEyeClosedIcon, mEyeOpenIcon, mClockIcon]),
+    PupaIconsModule.forFeature([
+      appCloseSquareIcon,
+      appCalendarIcon,
+      appErrorFilledIcon,
+      appEyeClosedIcon,
+      appEyeOpenIcon,
+      appClockIcon,
+    ]),
     NgxMaskModule.forRoot(),
   ],
   exports: [...EXPORTS],
