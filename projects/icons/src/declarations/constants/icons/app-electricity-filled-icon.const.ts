@@ -1,7 +1,7 @@
 import { IconDefinition } from '../../../declarations/interfaces/icon-definition.interface';
 
-export const appElectricityIcon: IconDefinition = {
-  name: 'app-electricity',
+export const appElectricityFilledIcon: IconDefinition = {
+  name: 'app-electricity-filled',
   data: `<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M4.5 14.6666C4.41733 14.6666 4.33433 14.6463 4.25833 14.6043C4.06 14.4946 3.96 14.2653 4.01533 14.0453L5.193 9.33331H3.5C3.343 9.33331 3.19533 9.25964 3.10066 9.13431C3.00633 9.00898 2.976 8.84664 3.019 8.69597L5.019 1.69598C5.08066 1.48131 5.27666 1.33331 5.5 1.33331H10.1667C10.3273 1.33331 10.4783 1.41065 10.5723 1.54098C10.6663 1.67131 10.692 1.83898 10.641 1.99131L9.52699 5.33331H12.5C12.7003 5.33331 12.8813 5.45298 12.96 5.63731C13.0387 5.82164 12.9997 6.03498 12.8607 6.17931L4.86066 14.5126C4.764 14.6136 4.63266 14.6666 4.5 14.6666Z" fill="currentColor"/>
   </svg>`,
