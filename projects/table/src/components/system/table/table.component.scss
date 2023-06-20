@@ -2,8 +2,6 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
-$scrollbarHeight: 12px;
-
 :host {
   display: block;
   width: 100%;
@@ -173,7 +171,6 @@ $scrollbarHeight: 12px;
 
   &_visible {
     visibility: initial;
-    border-bottom: 1px solid semantic-color(lines-normal);
   }
 }
 
@@ -212,7 +209,7 @@ $scrollbarHeight: 12px;
   left: 100px;
   top: 0;
   width: 2px;
-  height: calc(100% - #{$scrollbarHeight});
+  height: calc(100% - #{$width_scrollbar});
   background-color: semantic-color(kind-primary-normal);
   z-index: 5;
   pointer-events: none;

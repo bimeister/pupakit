@@ -51,7 +51,7 @@ export class Scrollbar {
     shareReplayWithRefCount()
   );
 
-  private static readonly maxSizePx: number = 32;
+  private static readonly maxSizePx: number = 28;
 
   public setSizes(sizes: ScrollBarSizes): void {
     if (isEqual(this.lastSizes, sizes)) {
