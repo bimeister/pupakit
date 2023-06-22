@@ -1,0 +1,25 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.status-container {
+  display: flex;
+  flex-direction: column;
+  margin: 4rem 0;
+
+  &__block {
+    max-width: 25rem;
+    border: 1px dashed color(neutral-60);
+
+    padding: 2rem;
+    margin-bottom: 4rem;
+  }
+
+  &__item {
+    @include ellipsis-text-overflow;
+  }
+
+  &__other-item {
+    width: fit-content;
+    margin-bottom: 4rem;
+  }
+}

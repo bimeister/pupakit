@@ -32,11 +32,21 @@ export class StatusDemoComponent {
       caption: 'Neutral',
       value: 'neutral',
     },
+    {
+      caption: 'Custom',
+      value: 'custom',
+    },
   ];
 
   public readonly kindOptions: PropsOption[] = [
     { caption: 'Line', value: 'line', isDefault: true },
     { caption: 'Dot', value: 'dot' },
+    { caption: 'Square', value: 'square' },
+  ];
+
+  public readonly markerPositionOptions: PropsOption[] = [
+    { caption: 'Left', value: 'left', isDefault: true },
+    { caption: 'Right', value: 'right' },
   ];
 
   public readonly example1Content: Record<string, string> = {
@@ -47,5 +57,15 @@ export class StatusDemoComponent {
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+  };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
   };
 }
