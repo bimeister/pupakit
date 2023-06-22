@@ -15,7 +15,7 @@ export class PupaCalloutComponent {
   public readonly icons: Map<CalloutType, string> = new Map([
     ['info', 'ios-information-circle'],
     ['success', 'ios-checkmark-circle'],
-    ['warning', 'ios-warning'],
+    ['warning', 'app-attention-filled'],
     ['danger', 'm-error'],
   ]);
 }
