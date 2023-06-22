@@ -2,8 +2,7 @@
 @use 'functions' as *;
 
 .status {
-  padding-left: 3rem;
-  position: relative;
+  @include flex-container($align-items: center, $gap: 2rem);
   cursor: default;
   @include font-preset-caption-xs();
   color: color(neutral-1000);
@@ -13,35 +12,35 @@
   overflow: inherit;
 
   &.right-marker-position {
-    padding-left: 0;
-    padding-right: 3rem;
+    flex-direction: row-reverse;
   }
 
   &__marker {
-    position: absolute;
-    left: 0;
+    min-width: 1rem;
     width: 1rem;
-    content: '';
     border-radius: 100px;
     transition: all 0.2s ease;
 
     &_line {
-      height: 100%;
-      top: -1px;
+      align-self: stretch;
+      width: 1rem;
+    }
+
+    &_square {
+      min-width: 1.5rem;
+      height: 1.5rem;
+      width: 1.5rem;
+      border-radius: 1px;
     }
 
     &_dot {
-      top: calc(50% - 3.5px);
-      height: 5px;
+      height: 1rem;
+      border-radius: 50%;
     }
   }
 
-  &.right-marker-position &__marker {
-    left: unset;
-    right: 0;
-  }
-
   &__text {
+    flex-grow: 1;
     text-overflow: inherit;
     overflow: inherit;
   }

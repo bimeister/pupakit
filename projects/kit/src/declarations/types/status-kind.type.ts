@@ -1,1 +1,1 @@
-export type StatusKind = 'line' | 'dot';
+export type StatusKind = 'line' | 'dot' | 'square';

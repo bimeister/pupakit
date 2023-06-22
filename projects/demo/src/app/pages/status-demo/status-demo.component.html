@@ -7,16 +7,43 @@
       <demo-status-example-1 *pupaCodeContainerPreviewTemplate></demo-status-example-1>
     </pupa-code-container>
 
-    <h3 demoAnchor>Extra cases</h3>
+    <h3 demoAnchor>Marker kinds</h3>
+    <pupa-callout>
+      The default kind is
+      <pupa-code-inline>line</pupa-code-inline>
+      .
+    </pupa-callout>
     <pupa-code-container [content]="example2Content">
       <demo-status-example-2 *pupaCodeContainerPreviewTemplate></demo-status-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Marker position</h3>
+    <pupa-callout>
+      The default position is
+      <pupa-code-inline>left</pupa-code-inline>
+      .
+    </pupa-callout>
+    <pupa-code-container [content]="example4Content">
+      <demo-status-example-4 *pupaCodeContainerPreviewTemplate></demo-status-example-4>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Truncated text</h3>
+    <pupa-code-container [content]="example3Content">
+      <demo-status-example-3 *pupaCodeContainerPreviewTemplate></demo-status-example-3>
     </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content class="content">
-        <pupa-status [color]="color$ | async" [kind]="kind$ | async" [disabled]="disabled$ | async">Status</pupa-status>
+        <pupa-status
+          [class.custom-marker-color]="(color$ | async) === 'custom'"
+          [color]="color$ | async"
+          [kind]="kind$ | async"
+          [markerPosition]="markerPosition$ | async"
+          [disabled]="disabled$ | async"
+          >Status Status</pupa-status
+        >
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
@@ -29,6 +56,15 @@
         <demo-example-viewer-property decoratorName="input" name="kind" type="StatusKind">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the tag.</ng-container>
           <demo-props-radio-select #kind$ direction="row" [options]="kindOptions"></demo-props-radio-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="markerPosition" type="MarkerPosition">
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the tag.</ng-container>
+          <demo-props-radio-select
+            #markerPosition$
+            direction="row"
+            [options]="markerPositionOptions"
+          ></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">

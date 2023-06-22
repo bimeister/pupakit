@@ -1,6 +1,12 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
+.example-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
 .status-container {
   display: flex;
   gap: 4rem;
