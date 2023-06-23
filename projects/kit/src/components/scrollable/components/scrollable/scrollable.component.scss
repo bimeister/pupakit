@@ -15,7 +15,8 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
 
 :host {
   display: block;
-  width: 100%;
+  width: var(--pupa-scrollable-width, 100%);
+  min-width: var(--pupa-scrollable-min-width, 100%);
   height: 100%;
   overflow: auto;
 }
