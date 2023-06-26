@@ -40,7 +40,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   @HostBinding('style.width') public widthStyle: SafeStyle;
 
-  public readonly width$: Observable<SafeStyle> = this.unitWidthStyleChangesProcessor.safeStyle$;
+  private readonly width$: Observable<SafeStyle> = this.unitWidthStyleChangesProcessor.safeStyle$;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -58,10 +58,7 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
 
   public ngOnInit(): void {
     this.isDestroyed = false;
-    this.subscription
-      .add(this.detectChangesOnWidthChanges())
-      .add(this.detectChangesOnIsActiveValueChanges())
-      .add(this.updateHostWidthOnWidthChanges());
+    this.subscription.add(this.detectChangesOnIsActiveValueChanges()).add(this.updateHostWidthOnWidthChanges());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -75,12 +72,6 @@ export class SkeletonLineComponent implements OnInit, OnChanges, AfterViewInit, 
   public ngOnDestroy(): void {
     this.isDestroyed = true;
     this.subscription.unsubscribe();
-  }
-
-  private detectChangesOnWidthChanges(): Subscription {
-    return this.width$.pipe(distinctUntilChanged()).subscribe(() => {
-      this.detectChanges();
-    });
   }
 
   private detectChangesOnIsActiveValueChanges(): Subscription {
