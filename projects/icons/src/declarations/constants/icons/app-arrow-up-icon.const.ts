@@ -1,6 +1,6 @@
 import { IconDefinition } from '../../interfaces/icon-definition.interface';
 
-export const appArrowUp: IconDefinition = {
+export const appArrowUpIcon: IconDefinition = {
   name: 'app-arrow-up',
   data: `
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
