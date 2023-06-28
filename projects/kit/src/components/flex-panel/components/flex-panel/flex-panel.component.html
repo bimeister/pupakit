@@ -1,0 +1,4 @@
+<div class="flex-panel" [style.width.px]="widthPx$ | async">
+  <ng-content></ng-content>
+  <div *ngIf="resizable" data-resizer class="flex-panel__resizer resizer"></div>
+</div>

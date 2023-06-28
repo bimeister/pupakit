@@ -1,0 +1,36 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+.flex-panel {
+  position: relative;
+  height: 100%;
+
+  &__resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(50%);
+    z-index: 2;
+  }
+}
+
+.resizer {
+  user-select: none;
+  width: 1px;
+  height: 100%;
+  background-color: rgba(var(--semantic-color_lines-normal), var(--semantic-color-alpha_lines-normal));
+  background-clip: content-box;
+  box-sizing: content-box;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: col-resize;
+  z-index: 20;
+
+  &:hover {
+    width: 2px;
+    background-color: semantic-color(kind-primary-normal);
+    transition-delay: 0.1s;
+  }
+}
