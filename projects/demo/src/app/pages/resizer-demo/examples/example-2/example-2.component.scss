@@ -1,0 +1,29 @@
+@use 'mixins' as *;
+
+.tree-wrapper {
+  width: 100%;
+}
+
+.tree {
+  width: 100%;
+
+  @include lt-sm() {
+    width: 100%;
+  }
+}
+
+.resizable {
+  position: relative;
+  height: 80rem;
+  width: 12rem;
+}
+
+.table-container {
+  width: 100%;
+  overflow: hidden;
+}
+
+.container {
+  display: flex;
+  gap: 3rem;
+}

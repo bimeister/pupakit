@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="tree-container">
+    <div class="resizable" pupaResizable>
+      <div class="tree-wrapper">
+        <pupa-tree-new #treeNew [controller]="controller" class="tree">
+          <ng-container *pupaTreeItemTemplate="let data">
+            <pupa-tree-node
+              *pupaLet="treeNew.getTreeNodeProperties(data) | async as treeNodeProperties"
+              [treeNodeProperties]="treeNodeProperties"
+            >
+              {{ data?.name }}
+            </pupa-tree-node>
+          </ng-container>
+        </pupa-tree-new>
+      </div>
+
+      <demo-resizer-example
+        pupaResizer
+        #pupaResizer="pupaResizer"
+        [resizerDefaultSize]="'300px'"
+        [resizerType]="'width'"
+        [resizerMinSize]="'20%'"
+        [resizerMaxSize]="'40%'"
+        [class.active]="pupaResizer.isActive$ | async"
+      ></demo-resizer-example>
+    </div>
+  </div>
+  <div class="table-container">
+    <pupa-table [controller]="tableController"></pupa-table>
+  </div>
+</div>

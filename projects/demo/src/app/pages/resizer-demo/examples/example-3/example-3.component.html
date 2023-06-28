@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="resizable" pupaResizable>
+    <div class="text-container">
+      <p>
+        Here you can find activities to practise your reading skills. Reading will help you to improve your
+        understanding of the language and build your vocabulary. The self-study lessons in this section are written and
+        organised by English level based on the Common European Framework of Reference for languages. There are
+        different types of texts and interactive exercises that practise the reading skills you need to do well in your
+        studies, to get ahead at work and to communicate in English in your free time. Take our free online English test
+        to find out which level to choose. Select your level, from A1 English level (elementary) to C1 English level
+        (advanced), and improve your reading skills at your own speed, whenever it's convenient for you.
+      </p>
+    </div>
+
+    <demo-resizer-example
+      pupaResizer
+      #pupaResizer="pupaResizer"
+      class="height"
+      [resizerDefaultSize]="'50px'"
+      [resizerType]="'height'"
+      [resizerMinSize]="'20px'"
+      [resizerMaxSize]="'300px'"
+      [class.active]="pupaResizer.isActive$ | async"
+    ></demo-resizer-example>
+  </div>
+</div>

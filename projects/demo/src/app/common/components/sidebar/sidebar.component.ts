@@ -60,6 +60,7 @@ export class SidebarComponent {
         { title: 'Spinner & loader', link: '/kit/spinner' },
         { title: 'Link', link: '/kit/link' },
         { title: 'Timer', link: '/kit/timer' },
+        { title: 'Resizer', link: '/kit/resizer' },
         { title: 'Counter', link: '/kit/counter' },
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Option', link: '/kit/option' },

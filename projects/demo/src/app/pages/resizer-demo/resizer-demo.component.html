@@ -1,0 +1,116 @@
+<h1>Resizer</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-resizer-example-1 *pupaCodeContainerPreviewTemplate></demo-resizer-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Width resizer with max percent of viewport (20% min and 40% max in example)</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-resizer-example-2 *pupaCodeContainerPreviewTemplate></demo-resizer-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Height resizer usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-resizer-example-3 *pupaCodeContainerPreviewTemplate></demo-resizer-example-3>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Height and width resizer usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-resizer-example-4 *pupaCodeContainerPreviewTemplate></demo-resizer-example-4>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <div class="resizable" pupaResizable>
+            <div class="text-container">
+              <p>
+                "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum
+                deleniti atque corrupti quos dolores et quas molestias
+              </p>
+            </div>
+
+            <demo-resizer-example
+              pupaResizer
+              #pupaResizer="pupaResizer"
+              [resizerType]="'width'"
+              [resizerMinSize]="resizeMin$ | async"
+              [resizerMaxSize]="resizeMax$ | async"
+              [resizerDefaultSize]="defaultSize$ | async"
+              [resizerInitialSize]="initialSize$ | async"
+              [resizerPaddingsOffsetPx]="paddingsPxFormControl.value"
+              [class.active]="pupaResizer.isActive$ | async"
+              (maxSizeReached)="handlerMaxSizeReached()"
+              (minSizeReached)="handlerMinSizeReached()"
+              (currentSize)="handleSizeChanged($event)"
+            ></demo-resizer-example>
+          </div>
+
+          MaxSizeReached: <b> {{ handlerMaxSizeReached$ | async }} </b> <br />
+          MinSizeReached: <b> {{ handlerMinSizeReached$ | async }} </b> <br />
+          currentSizePx: <b> {{ sizePx$ | async }} </b> <br />
+          currentSizePercent: <b> {{ sizePercent$ | async }} </b> <br />
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="resizerDefaultSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set default size of resizable component. Available input example: '100px' '10%' 100;
+          </ng-container>
+          <demo-props-select #defaultSize$ [options]="defaultSizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="resizerInitialSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set initial size of resizable component. Available input example: '150px' '10%' 150;
+          </ng-container>
+          <demo-props-select #initialSize$ [options]="initialSizeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="resizerType" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set resizer direction. Available input types: 'width' | 'height';
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="resizerMinSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set min size of element for minSizeReached event. Available input example: '10px' '10%' 10;
+          </ng-container>
+          <demo-props-select #resizeMin$ [options]="resizableMinOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="resizerMaxSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set max size of element for maxSizeReached event. Available input example: '10px' '10%' 10;
+          </ng-container>
+          <demo-props-select #resizeMax$ [options]="resizableMaxOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="resizerPaddingsOffsetPx" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set paddings offset. This value subtracted from resizerMinSize and resizerMaxSize. Usable in percentage
+            limits;
+          </ng-container>
+          <pupa-input-number [formControl]="paddingsPxFormControl"></pupa-input-number>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="maxSizeReached" type="void">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Emits when max size (maxSizeReached) reached
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="minSizeReached" type="void">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Emits when min size (minSizeReached) reached
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="currentSize" type="ResizerCurrentSize">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Emits last changed size of resizable element, emitted size in px and percents.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
