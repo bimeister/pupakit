@@ -372,6 +372,11 @@ const demoRoutes: Routes = [
           import('./pages/timer-demo/timer-demo.module').then((module: any) => module.TimerDemoModule),
       },
       {
+        path: 'resizer',
+        loadChildren: () =>
+          import('./pages/resizer-demo/resizer-demo.module').then((module: any) => module.ResizerDemoModule),
+      },
+      {
         path: 'counter',
         loadChildren: (): Promise<Type<CounterDemoModule>> =>
           import('./pages/counter-demo/counter-demo.module').then((module: any) => module.CounterDemoModule),
