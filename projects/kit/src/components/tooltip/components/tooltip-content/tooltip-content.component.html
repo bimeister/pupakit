@@ -11,9 +11,9 @@
 </div>
 
 <ng-template #simpleTooltipContent>
-  <ng-container *ngIf="tooltipContent$ | async as tooltipContent; else emptyTooltipContent">
+  <span class="tooltip__content__simple" *ngIf="tooltipContent$ | async as tooltipContent; else emptyTooltipContent">
     {{ tooltipContent }}
-  </ng-container>
+  </span>
 </ng-template>
 
 <ng-template #emptyTooltipContent> Looks like you forgot to give the tooltip content </ng-template>
