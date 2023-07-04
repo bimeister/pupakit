@@ -3,16 +3,16 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { ComponentChanges } from '@bimeister/pupakit.common';
+import { BehaviorSubject, fromEvent, Subscription } from 'rxjs';
+import { ComponentChanges, subscribeOutsideAngular } from '@bimeister/pupakit.common';
 import { debounceTime, filter, map } from 'rxjs/operators';
 import { filterNotNil, isNil } from '@bimeister/utilities';
 
@@ -35,7 +35,7 @@ export class FlexPanelComponent implements OnInit, OnChanges, OnDestroy {
   private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement);
   private screenWidth: number;
   private maxWidth: number;
-  private subscription: Subscription;
+  private readonly subscription: Subscription = new Subscription();
 
   @Input() public defaultSize: number = 350;
   private lastSize: number = this.defaultSize;
@@ -48,18 +48,7 @@ export class FlexPanelComponent implements OnInit, OnChanges, OnDestroy {
 
   public readonly widthPx$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(this.defaultSize);
 
-  constructor(private readonly elementRef: ElementRef) {}
-
-  @HostListener('window:resize')
-  public onResize(): void {
-    this.screenWidth = window.innerWidth;
-    this.maxWidth = (window.innerWidth / 100) * MAX_PERCENT_OF_VIEWPORT;
-
-    if (this.lastSize > this.maxWidth) {
-      this.setMaxAvailableSize();
-      this.widthPx$.next(this.maxWidth);
-    }
-  }
+  constructor(private readonly elementRef: ElementRef, private readonly ngZone: NgZone) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     if (changes.hasOwnProperty('defaultSize')) {
@@ -71,11 +60,13 @@ export class FlexPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.resetSizeToDefault();
     this.onResize();
     this.initHammerEvents();
-    this.initSizeChangedHandler();
+    this.subscription.add(this.handleSizeChange());
+    this.subscription.add(this.handleTriggerResizeEvent());
   }
 
   public ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.hammerManager.destroy();
   }
 
   public processDoubleTap(): void {
@@ -92,8 +83,24 @@ export class FlexPanelComponent implements OnInit, OnChanges, OnDestroy {
     this.lastSize = this.lastSize + this.lastDeltaPx;
   }
 
-  private initSizeChangedHandler(): void {
-    this.subscription = this.widthPx$
+  private handleTriggerResizeEvent(): Subscription {
+    return fromEvent<UIEvent>(window, 'resize')
+      .pipe(subscribeOutsideAngular(this.ngZone), debounceTime(100))
+      .subscribe(() => this.onResize());
+  }
+
+  private onResize(): void {
+    this.screenWidth = window.innerWidth;
+    this.maxWidth = (window.innerWidth / 100) * MAX_PERCENT_OF_VIEWPORT;
+
+    if (this.lastSize > this.maxWidth) {
+      this.setMaxAvailableSize();
+      this.widthPx$.next(this.maxWidth);
+    }
+  }
+
+  private handleSizeChange(): Subscription {
+    return this.widthPx$
       .pipe(
         filterNotNil(),
         filter((size: number) => size !== this.defaultSize),
