@@ -51,5 +51,9 @@ $tooltip_max-text-lines-count: 13;
     display: -webkit-box;
     -webkit-line-clamp: $tooltip_max-text-lines-count;
     -webkit-box-orient: vertical;
+
+    &__simple {
+      white-space: pre-line;
+    }
   }
 }
