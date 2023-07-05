@@ -32,6 +32,16 @@ export class FlexPanelDemoExample1Component implements OnDestroy {
     this.currentSize.next(size);
   }
 
+  public handlerMaxSizeReached(): void {
+    console.log('handlerMaxSizeReached');
+  }
+  public handlerMinSizeReached(): void {
+    console.log('handlerMinSizeReached');
+  }
+  public handleSizeChanged(sizePx: number): void {
+    console.log('handleSizeChanged', sizePx);
+  }
+
   public initController(): void {
     this.controller.setChildren(null, this.fetch());
   }

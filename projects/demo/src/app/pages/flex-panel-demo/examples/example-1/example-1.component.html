@@ -1,4 +1,20 @@
-<pupa-flex-panel (sizeChanged)="sizeChanged($event)">
-  <pupa-tree-new [controller]="controller" class="tree"></pupa-tree-new>
-  <p>currentSize is {{ currentSize$ | async }}</p>
-</pupa-flex-panel>
+<div class="resizable" pupaResizeable>
+  <div class="resizer"
+       [defaultSize]="300"
+       [pupaResizer]="'height'"
+       [pupaResizerMinSize]="100"
+       [pupaResizerMaxSize]="400"
+       (maxSizeReached)="handlerMaxSizeReached()"
+       (minSizeReached)="handlerMinSizeReached()"
+       (sizeChanged)="handleSizeChanged($event)"></div>
+
+<!--  <div class="resizer height"-->
+<!--       [pupaResizer]="'height'"-->
+<!--       [defaultSize]="100"-->
+<!--       [pupaResizerMinSize]="50"-->
+<!--       [pupaResizerMaxSize]="150"-->
+<!--       (maxSizeReached)="handlerMaxSizeReached()"-->
+<!--       (minSizeReached)="handlerMinSizeReached()"-->
+<!--       (sizeChanged)="handleSizeChanged($event)"></div>-->
+</div>
+

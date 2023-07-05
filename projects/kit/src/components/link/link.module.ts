@@ -5,7 +5,6 @@ import { PupaIconsModule } from '@bimeister/pupakit.icons';
 import { LinkComponent } from './components/link/link.component';
 
 const EXPORTS: Type<unknown>[] = [LinkComponent];
-
 @NgModule({
   declarations: [...EXPORTS],
   imports: [CommonModule, PupaIconsModule.forFeature()],
