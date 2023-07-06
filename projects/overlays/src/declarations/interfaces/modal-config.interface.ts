@@ -3,6 +3,7 @@ import { Position } from '@bimeister/pupakit.common';
 
 import { ConnectedPositionX } from '../types/connected-position-x.type';
 import { ConnectedPositionY } from '../types/connected-position-y.type';
+import { PupaModalViewport } from '../types/pupa-modal-viewport.type';
 import { ModalHeightType } from '../types/modal-height.type';
 
 export interface ModalConfig {
@@ -18,4 +19,5 @@ export interface ModalConfig {
   isFullscreen?: boolean;
   height?: ModalHeightType;
   hasBorder?: boolean;
+  viewport?: PupaModalViewport;
 }

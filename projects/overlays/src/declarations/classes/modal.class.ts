@@ -1,5 +1,5 @@
-import { Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
-import { ComponentPortal, ComponentType, PortalInjector } from '@angular/cdk/portal';
+import { FlexibleConnectedPositionStrategy, Overlay, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
+import { ComponentPortal, ComponentType } from '@angular/cdk/portal';
 import { Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { getUuid, isNil } from '@bimeister/utilities';
 import { ModalContainerComponent } from '../../components/modal/components/modal-container/modal-container.component';
@@ -9,6 +9,10 @@ import { ModalContainerData } from '../interfaces/modal-container-data.interface
 import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { ModalRef } from './modal-ref.class';
 import { Position } from '@bimeister/pupakit.common';
+import { observeOn, skip, take } from 'rxjs/operators';
+import { animationFrameScheduler, Subscription } from 'rxjs';
+import { PupaModalViewportBoundaryPositionStrategy } from './pupa-modal-viewport-boundary-position-strategy.class';
+import { ModalPositionStrategyBuilder } from '../../services/modal-position-strategy.builder';
 
 export class Modal<ComponentT> implements PortalLayer {
   public readonly id: string = getUuid();
@@ -22,13 +26,17 @@ export class Modal<ComponentT> implements PortalLayer {
 
   private readonly modalRef: ModalRef = new ModalRef(this.id, this.overlayRef, this.config);
   private currentZIndex: number = 0;
+  private lastPosition: Position | null = null;
+
+  private readonly subscription: Subscription = new Subscription();
 
   constructor(
     private readonly component: ComponentType<ComponentT>,
     private readonly config: ModalConfig,
     private readonly overlay: Overlay,
     private readonly injector: Injector,
-    private readonly rendererFactory: RendererFactory2
+    private readonly rendererFactory: RendererFactory2,
+    private readonly modalPositionStrategyBuilder: ModalPositionStrategyBuilder
   ) {
     this.handleBackdropClick();
   }
@@ -54,28 +62,107 @@ export class Modal<ComponentT> implements PortalLayer {
     if (this.config.isFullscreen) {
       this.modalRef.changeFullscreenMode(this.config.isFullscreen);
     }
-
     this.overlayRef.attach(this.getComponentPortal());
     this.modalRef.opened$.next();
     this.modalRef.opened$.complete();
+
+    this.initModal();
+
     return this.modalRef;
   }
 
-  public updatePosition(position: Position): void {
-    this.overlayRef.updatePositionStrategy(this.getModalPositionStrategy(position));
+  public updatePosition(position: Position | null): void {
+    this.modalRef.isFullscreen$.pipe(take(1)).subscribe((isFullscreen: boolean) => {
+      if (!isFullscreen) {
+        this.lastPosition = position;
+      }
+
+      const offsetPosition: Position = this.getOffsetPosition(position);
+
+      if (isNil(this.config.viewport)) {
+        const positionStrategy: PositionStrategy = this.getFlexibleConnectedPositionStrategy(offsetPosition);
+        // This line needs to update class inside config
+        this.overlayRef.getConfig().positionStrategy = positionStrategy;
+        this.overlayRef.updatePositionStrategy(positionStrategy);
+        return;
+      }
+
+      const positionStrategy: PositionStrategy = this.overlayRef.getConfig().positionStrategy;
+      if (this.isPupaModalViewportBoundaryPositionStrategy(positionStrategy)) {
+        positionStrategy.updatePortalPositionWithClientMouseCoordinates(offsetPosition);
+      }
+    });
+  }
+
+  private initModal(): void {
+    this.modalRef.closed$.pipe(take(1)).subscribe(() => {
+      this.subscription.unsubscribe();
+    });
+
+    this.subscription.add(this.getFullscreenSubscription());
+  }
+
+  private getFullscreenSubscription(): Subscription {
+    return this.modalRef.isFullscreen$
+      .pipe(skip(1), observeOn(animationFrameScheduler))
+      .subscribe((isFullscreen: boolean) => {
+        const positionStrategy: PositionStrategy = this.overlayRef.getConfig().positionStrategy;
+        if (
+          !this.isPupaModalViewportBoundaryPositionStrategy(positionStrategy) &&
+          !this.isFlexibleConnectedPositionStrategy(positionStrategy)
+        ) {
+          return;
+        }
+
+        if (isFullscreen) {
+          this.updatePosition(null);
+          return;
+        }
+
+        this.updatePosition(this.lastPosition);
+      });
+  }
+
+  private isPupaModalViewportBoundaryPositionStrategy(
+    strategy: PositionStrategy
+  ): strategy is PupaModalViewportBoundaryPositionStrategy {
+    return strategy instanceof PupaModalViewportBoundaryPositionStrategy;
+  }
+
+  private isFlexibleConnectedPositionStrategy(
+    strategy: PositionStrategy
+  ): strategy is FlexibleConnectedPositionStrategy {
+    return strategy instanceof FlexibleConnectedPositionStrategy;
   }
 
   private getPositionStrategy(): PositionStrategy {
-    if (isNil(this.config.position)) {
+    this.lastPosition = this.config.position;
+
+    if (isNil(this.config.viewport) && isNil(this.config.position)) {
       return this.overlay.position().global().centerHorizontally().centerVertically();
     }
-    return this.getModalPositionStrategy(this.config.position);
+    if (!isNil(this.config.viewport)) {
+      return this.getPupaModalViewportBoundaryPositionStrategy();
+    }
+
+    return this.getFlexibleConnectedPositionStrategy(this.config.position);
   }
 
-  private getModalPositionStrategy(position: Position): PositionStrategy {
+  private getPupaModalViewportBoundaryPositionStrategy(): PositionStrategy {
+    return this.modalPositionStrategyBuilder
+      .pupaModalViewportBoundary(this.config.viewport)
+      .setDefaultLocalPosition(this.config.position)
+      .setAlignment({
+        overlayX: this.config.overlayX ?? 'center',
+        overlayY: this.config.overlayY ?? 'center',
+      })
+      .setViewportPadding(this.config.viewportMarginPx);
+  }
+
+  private getFlexibleConnectedPositionStrategy(position: Position): PositionStrategy {
     return this.overlay
       .position()
-      .flexibleConnectedTo({ x: position[0], y: position[1] })
+      .flexibleConnectedTo({ x: position?.[0] ?? 0, y: position?.[1] ?? 0 })
       .withPush(true)
       .withViewportMargin(this.config.viewportMarginPx)
       .withPositions([
@@ -89,37 +176,55 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   private getComponentPortal(): ComponentPortal<ModalContainerComponent<unknown>> {
-    const portalInjector: PortalInjector = this.createModalContainerInjector();
+    const portalInjector: Injector = this.createModalContainerInjector();
 
     return new ComponentPortal(ModalContainerComponent, null, portalInjector);
   }
 
-  private createModalContainerInjector(): PortalInjector {
+  private createModalContainerInjector(): Injector {
     const contentComponentPortal: ComponentPortal<ComponentT> = this.createModalContentComponentPortal();
 
     const modalContainerData: ModalContainerData<ComponentT> = {
       contentComponentPortal,
     };
 
-    const injectionTokens: WeakMap<object, any> = new WeakMap();
-    injectionTokens.set(ModalRef, this.modalRef);
-    injectionTokens.set(MODAL_CONTAINER_DATA_TOKEN, modalContainerData).set(OverlayRef, this.overlayRef);
-
-    return new PortalInjector(this.injector, injectionTokens);
+    return Injector.create({
+      providers: [
+        {
+          provide: ModalRef,
+          useValue: this.modalRef,
+        },
+        {
+          provide: MODAL_CONTAINER_DATA_TOKEN,
+          useValue: modalContainerData,
+        },
+        {
+          provide: OverlayRef,
+          useValue: this.overlayRef,
+        },
+      ],
+      parent: this.injector,
+    });
   }
 
   private createModalContentComponentPortal(): ComponentPortal<ComponentT> {
-    const modalContentInjector: PortalInjector = this.createModalContentInjector();
+    const modalContentInjector: Injector = this.createModalContentInjector();
 
     return new ComponentPortal(this.component, null, modalContentInjector);
   }
 
-  private createModalContentInjector(): PortalInjector {
-    const injectionTokens: WeakMap<object, any> = new WeakMap();
-    injectionTokens.set(ModalRef, this.modalRef);
-
+  private createModalContentInjector(): Injector {
     const parentInjector: Injector = this.getParentInjector();
-    return new PortalInjector(parentInjector, injectionTokens);
+
+    return Injector.create({
+      providers: [
+        {
+          provide: ModalRef,
+          useValue: this.modalRef,
+        },
+      ],
+      parent: parentInjector,
+    });
   }
 
   private getParentInjector(): Injector {
@@ -154,5 +259,48 @@ export class Modal<ComponentT> implements PortalLayer {
     }
 
     return [...classes, 'cdk-overlay-without-backdrop'];
+  }
+
+  private getOffsetPosition(position: Position | null): Position | null {
+    if (isNil(position)) {
+      return null;
+    }
+    return [position[0] + this.getLeftOffsetByOverlayXPosition(), position[1] + this.getTopOffsetByOverlayYPosition()];
+  }
+
+  private getLeftOffsetByOverlayXPosition(): number {
+    const targetClientRect: DOMRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
+
+    if (this.isPupaModalViewportBoundaryPositionStrategy(this.overlayRef.getConfig().positionStrategy)) {
+      return 0;
+    }
+
+    switch (this.modalRef.getOverlayXPosition()) {
+      case 'center':
+        return targetClientRect.width / 2;
+      case 'end':
+        return targetClientRect.width;
+      case 'start':
+      default:
+        return 0;
+    }
+  }
+
+  private getTopOffsetByOverlayYPosition(): number {
+    const targetClientRect: DOMRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
+
+    if (this.isPupaModalViewportBoundaryPositionStrategy(this.overlayRef.getConfig().positionStrategy)) {
+      return 0;
+    }
+
+    switch (this.modalRef.getOverlayYPosition()) {
+      case 'center':
+        return targetClientRect.height / 2;
+      case 'bottom':
+        return targetClientRect.height;
+      case 'top':
+      default:
+        return 0;
+    }
   }
 }

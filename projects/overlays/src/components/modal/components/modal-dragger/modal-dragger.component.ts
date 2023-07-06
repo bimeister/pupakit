@@ -36,8 +36,8 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   public ngAfterViewInit(): void {
-    const selfClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
-    const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
+    const selfClientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
+    const targetClientRect: DOMRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
 
     this.draggerToTargetStartTopPositionDelta = [
       targetClientRect.left - selfClientRect.left,
@@ -55,7 +55,7 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     event.preventDefault();
 
     this.modalRef.moveToTopLayer();
-    const selfClientRect: ClientRect = this.elementRef.nativeElement.getBoundingClientRect();
+    const selfClientRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
     this.draggerToMousePositionDelta = [selfClientRect.left - event.clientX, selfClientRect.top - event.clientY];
 
     this.mouseMoveUnlistener = this.renderer.listen(this.document, 'mousemove', this.processMouseMove.bind(this));
@@ -66,14 +66,8 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     event.stopPropagation();
 
     const newPosition: Position = [
-      event.clientX +
-        this.draggerToTargetStartTopPositionDelta[0] +
-        this.draggerToMousePositionDelta[0] +
-        this.getLeftOffsetByOverlayXPosition(),
-      event.clientY +
-        this.draggerToTargetStartTopPositionDelta[1] +
-        this.draggerToMousePositionDelta[1] +
-        this.getTopOffsetByOverlayYPosition(),
+      event.clientX + this.draggerToTargetStartTopPositionDelta[0] + this.draggerToMousePositionDelta[0],
+      event.clientY + this.draggerToTargetStartTopPositionDelta[1] + this.draggerToMousePositionDelta[1],
     ];
     this.modalRef.updatePosition(newPosition);
   }
@@ -82,34 +76,6 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
     event.stopPropagation();
     ModalDraggerComponent.unlisten(this.mouseMoveUnlistener);
     ModalDraggerComponent.unlisten(this.mouseUpUnlistener);
-  }
-
-  private getLeftOffsetByOverlayXPosition(): number {
-    const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
-
-    switch (this.modalRef.getOverlayXPosition()) {
-      case 'center':
-        return targetClientRect.width / 2;
-      case 'end':
-        return targetClientRect.width;
-      case 'start':
-      default:
-        return 0;
-    }
-  }
-
-  private getTopOffsetByOverlayYPosition(): number {
-    const targetClientRect: ClientRect = this.modalRef.getOverlayHtmlElement().getBoundingClientRect();
-
-    switch (this.modalRef.getOverlayYPosition()) {
-      case 'center':
-        return targetClientRect.height / 2;
-      case 'bottom':
-        return targetClientRect.height;
-      case 'top':
-      default:
-        return 0;
-    }
   }
 
   private static unlisten(eventUnlistener: EventUnlistener): void {
