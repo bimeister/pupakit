@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 import { FlatTreeItem, TreeController, TreeEvents } from '@bimeister/pupakit.tree';
-import { Observable, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, Subscription } from 'rxjs';
 import { DATA } from '../tree-new-demo/examples/example-tree.data';
 import { map } from 'rxjs/operators';
 
@@ -15,6 +15,10 @@ const BASE_REQUEST_PATH: string = 'flex-panel-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FlexPanelDemoComponent implements OnDestroy {
+  public readonly handlerMaxSizeReached$: Subject<any> = new Subject<any>();
+  public readonly handlerMinSizeReached$: Subject<any> = new Subject<any>();
+  public readonly handleSizeChanged$: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+
   public readonly controller: TreeController = new TreeController();
   private readonly subscription: Subscription = new Subscription();
 
@@ -25,18 +29,20 @@ export class FlexPanelDemoComponent implements OnDestroy {
   public currentSize$: Observable<string> = this.currentSize.pipe(map((size: number) => `${size}px`));
 
   public readonly resizableControl: FormControl = new FormControl(true);
-
   public readonly thresholdVwControl: FormControl = new FormControl(200);
-
   public readonly resizableOptions: PropsOption[] = [
     {
-      caption: 'True',
-      value: true,
+      caption: '100px',
+      value: '100px',
+    },
+    {
+      caption: '100',
+      value: 100,
       isDefault: true,
     },
     {
-      caption: 'False',
-      value: false,
+      caption: '10%',
+      value: '10%',
     },
   ];
 
@@ -103,5 +109,19 @@ export class FlexPanelDemoComponent implements OnDestroy {
   private fetch(parentId: string = null): FlatTreeItem[] {
     const children: FlatTreeItem[] = DATA.filter((item: FlatTreeItem) => item.originalData.parentId === parentId);
     return children;
+  }
+
+  public handlerMaxSizeReached(): void {
+    this.handlerMaxSizeReached$.next(true);
+    this.handlerMinSizeReached$.next(false);
+  }
+
+  public handlerMinSizeReached(): void {
+    this.handlerMaxSizeReached$.next(false);
+    this.handlerMinSizeReached$.next(true);
+  }
+
+  public handleSizeChanged(size: number): void {
+    this.handleSizeChanged$.next(size);
   }
 }

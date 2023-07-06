@@ -6,51 +6,84 @@
     <pupa-code-container [content]="example1Content">
       <demo-flex-panel-example-1 *pupaCodeContainerPreviewTemplate></demo-flex-panel-example-1>
     </pupa-code-container>
-  </div>
-<!--  <div *demoPageTab="'api'">-->
-<!--    <demo-example-viewer>-->
-<!--      <demo-example-viewer-content>-->
-<!--        <div class="content">-->
-<!--          <pupa-flex-panel-->
-<!--            [resizable]="resizable$ | async"-->
-<!--            [thresholdVw]="thresholdVw$ | async"-->
-<!--            (thresholdReached)="showThresholdReached()"-->
-<!--            (sizeChanged)="sizeChanged($event)"-->
-<!--          >-->
-<!--            <pupa-tree-new [controller]="controller" class="tree"></pupa-tree-new>-->
-<!--          </pupa-flex-panel>-->
-<!--        </div>-->
-<!--      </demo-example-viewer-content>-->
 
-<!--      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>-->
-<!--      <demo-example-viewer-section>-->
-<!--        <demo-example-viewer-property decoratorName="input" name="resizable" type="boolean">-->
-<!--          <ng-container *demoExampleViewerPropertyDescription>-->
-<!--            Configure the flex panel resizable or not. <br />-->
-<!--            <b>The maximum resize width equal to half user viewport</b> <br />-->
-<!--            flex panel is resizable: <b>{{ resizable$ | async }}</b-->
-<!--            >.-->
-<!--          </ng-container>-->
-<!--          <demo-props-select #resizable$ [options]="resizableOptions"></demo-props-select>-->
-<!--        </demo-example-viewer-property>-->
-<!--        <demo-example-viewer-property decoratorName="input" name="thresholdVw" type="number">-->
-<!--          <ng-container *demoExampleViewerPropertyDescription>-->
-<!--            Threshold event trigger edge in: <b>{{ thresholdVw$ | async }}</b> <br />-->
-<!--            Configure threshold event trigger edge in percent of user viewport. <br />-->
-<!--            thresholdReached event was emitted: <b>{{ emitted$ | async }}</b-->
-<!--            >.-->
-<!--          </ng-container>-->
-<!--          <demo-props-select #thresholdVw$ [options]="thresholdVwOptions"></demo-props-select>-->
-<!--        </demo-example-viewer-property>-->
-<!--        <demo-example-viewer-property decoratorName="output" name="sizeChanged" type="number">-->
-<!--          <ng-container *demoExampleViewerPropertyDescription>-->
-<!--            changeSize event triggered when user change sidebar width <br />-->
-<!--            if defaultSize is equal to changeSize value, event does not fire<br />-->
-<!--            changeSize was emitted value: <b>{{ currentSize$ | async }}</b-->
-<!--            >.-->
-<!--          </ng-container>-->
-<!--        </demo-example-viewer-property>-->
-<!--      </demo-example-viewer-section>-->
-<!--    </demo-example-viewer>-->
-<!--  </div>-->
+    <h3 demoAnchor>Width resizer usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-flex-panel-example-2 *pupaCodeContainerPreviewTemplate></demo-flex-panel-example-2>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Height resizer usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-flex-panel-example-3 *pupaCodeContainerPreviewTemplate></demo-flex-panel-example-3>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Height and width resizer usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-flex-panel-example-4 *pupaCodeContainerPreviewTemplate></demo-flex-panel-example-4>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content>
+        <div class="content">
+          <div class="resizable" pupaResizeable>
+            <div class="resizer"
+                 [pupaResizerDefaultSize]="resizable$ | async"
+                 [pupaResizer]="'width'"
+                 [pupaResizerMinSize]="resizeMin$ | async"
+                 [pupaResizerMaxSize]="resizeMax$ | async"
+                 (maxSizeReached)="handlerMaxSizeReached()"
+                 (minSizeReached)="handlerMinSizeReached()"
+                 (sizeChanged)="handleSizeChanged($event)"></div>
+          </div>
+
+          MaxSizeReached: <b> {{ handlerMaxSizeReached$ | async }} </b> <br/> {{ resizeMax$ | async }}
+          MinSizeReached: <b> {{ handlerMinSizeReached$ | async }} </b> <br/>
+          SizeChanged: <b> {{ handleSizeChanged$ | async }} </b> <br/>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="pupaResizerDefaultSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set default size of resizable component. Available input example: '100px' '10%' 100;
+          </ng-container>
+          <demo-props-select #resizable$ [options]="resizableOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="pupaResizer" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set resizer direction. Available input types: 'width' | 'height';
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="pupaResizerMinSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set min size of element for minSizeReached event. Available input example: '10px' '10%' 10;
+          </ng-container>
+          <demo-props-select #resizeMin$ [options]="resizableOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="pupaResizerMaxSize" type="number | string">
+          <ng-container *demoExampleViewerPropertyDescription>
+            Set max size of element for maxSizeReached event. Available input example: '10px' '10%' 10;
+          </ng-container>
+          <demo-props-select #resizeMax$ [options]="resizableOptions"></demo-props-select>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="maxSizeReached" type="void">
+          <ng-container *demoExampleViewerPropertyDescription>
+            When max size (pupaResizerMinSize) reached
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="minSizeReached" type="void">
+          <ng-container *demoExampleViewerPropertyDescription>
+            When min size (pupaResizerMaxSize) reached
+          </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="output" name="sizeChanged" type="number">
+          <ng-container *demoExampleViewerPropertyDescription>
+            last changed size of resizeable element, emitted size in px.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
 </demo-page>

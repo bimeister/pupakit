@@ -1,0 +1,20 @@
+<div class="resizable" pupaResizeable>
+  <div class="resizer"
+       [pupaResizerDefaultSize]="300"
+       [pupaResizer]="'width'"
+       [pupaResizerMinSize]="100"
+       [pupaResizerMaxSize]="400"
+       (maxSizeReached)="handlerMaxSizeReached()"
+       (minSizeReached)="handlerMinSizeReached()"
+       (sizeChanged)="handleSizeChanged($event)"></div>
+
+  <div class="resizer height"
+       [pupaResizerDefaultSize]="50"
+       [pupaResizer]="'height'"
+       [pupaResizerMinSize]="30"
+       [pupaResizerMaxSize]="60"
+       (maxSizeReached)="handlerMaxSizeReached()"
+       (minSizeReached)="handlerMinSizeReached()"
+       (sizeChanged)="handleSizeChanged($event)"></div>
+</div>
+

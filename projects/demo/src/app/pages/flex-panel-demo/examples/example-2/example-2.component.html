@@ -1,9 +1,9 @@
 <div class="resizable" pupaResizeable>
   <div class="resizer"
-       [pupaResizerDefaultSize]="'200px'"
+       [pupaResizerDefaultSize]="300"
        [pupaResizer]="'width'"
-       [pupaResizerMinSize]="100"
-       [pupaResizerMaxSize]="'50%'"
+       [pupaResizerMinSize]="200"
+       [pupaResizerMaxSize]="400"
        (maxSizeReached)="handlerMaxSizeReached()"
        (minSizeReached)="handlerMinSizeReached()"
        (sizeChanged)="handleSizeChanged($event)"></div>
