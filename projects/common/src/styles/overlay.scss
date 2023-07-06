@@ -16,6 +16,29 @@
   z-index: 10000;
 }
 
+.pupa-viewport-position-bounding-box {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.pupa-viewport-position-bounding-box,
+.pupa-viewport-position-backdrop,
+.pupa-viewport-position-overlay {
+  /*
+  Thus this fields are set by script inside strategy class to proper view in mobile
+  they need to be rewritten by class, so way to do so is using !important
+  */
+  @include xs() {
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
+
 .cdk-overlay-dark-backdrop {
   @include apply-background;
 }

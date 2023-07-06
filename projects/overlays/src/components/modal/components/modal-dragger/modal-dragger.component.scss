@@ -7,6 +7,6 @@
   z-index: 10000;
 
   @include xs() {
-    display: none;
+    pointer-events: none;
   }
 }
