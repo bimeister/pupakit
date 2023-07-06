@@ -15,6 +15,8 @@ import { ModalDemoRoutingModule } from './modal-demo-routing.module';
 import { ModalDemoComponent } from './modal-demo.component';
 import { ModalDemoExample6Component } from './examples/modal-demo-example-6/modal-content/modal-demo-example-6.component';
 import { ModalDemoExample6HelperComponent } from './examples/modal-demo-example-6/modal-demo-example-6-helper/modal-demo-example-6-helper.component';
+import { ModalDemoExample7Component } from './examples/modal-demo-example-7/modal-content/modal-demo-example-7.component';
+import { ModalDemoExample7HelperComponent } from './examples/modal-demo-example-7/modal-demo-example-7-helper/modal-demo-example-7-helper.component';
 
 const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample1Component,
@@ -29,6 +31,8 @@ const EXAMPLES: Type<unknown>[] = [
   ModalDemoExample5HelperComponent,
   ModalDemoExample6Component,
   ModalDemoExample6HelperComponent,
+  ModalDemoExample7Component,
+  ModalDemoExample7HelperComponent,
 ];
 
 @NgModule({

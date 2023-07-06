@@ -8,6 +8,7 @@ import { Modal } from '../declarations/classes/modal.class';
 import { ModalConfig } from '../declarations/interfaces/modal-config.interface';
 import { OpenedModal } from '../declarations/interfaces/opened-modal.interface';
 import { PortalLayersService } from './portal-layers.service';
+import { ModalPositionStrategyBuilder } from './modal-position-strategy.builder';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +24,8 @@ export class ModalsService {
     protected readonly overlay: Overlay,
     protected readonly injector: Injector,
     private readonly rendererFactory: RendererFactory2,
-    private readonly portalLayersService: PortalLayersService
+    private readonly portalLayersService: PortalLayersService,
+    private readonly modalPositionStrategyBuilder: ModalPositionStrategyBuilder
   ) {}
 
   public open<ComponentT, ReturnDataT>(
@@ -32,7 +34,14 @@ export class ModalsService {
   ): OpenedModal<ReturnDataT> {
     const configDto: ModalConfigDto = new ModalConfigDto(config);
 
-    const modal: Modal<ComponentT> = new Modal(component, configDto, this.overlay, this.injector, this.rendererFactory);
+    const modal: Modal<ComponentT> = new Modal(
+      component,
+      configDto,
+      this.overlay,
+      this.injector,
+      this.rendererFactory,
+      this.modalPositionStrategyBuilder
+    );
 
     const modalRef: ModalRef<ReturnDataT> = modal.open();
 

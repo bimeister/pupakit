@@ -1,0 +1,44 @@
+<section class="draggable-example">
+  <section class="draggable-example__config modal-config">
+    <section class="modal-config__inputs">
+      <section class="modal-config__row">
+        <pupa-input-number
+          class="modal-config__input"
+          [formControl]="modalXPosition"
+          [withReset]="true"
+          placeholder="Modal X position"
+        ></pupa-input-number>
+
+        <pupa-radio-group class="radio-group" [formControl]="modalXOverlay" [direction]="'row'">
+          <pupa-radio-control [value]="'start'">start</pupa-radio-control>
+
+          <pupa-radio-control [value]="'center'">center</pupa-radio-control>
+
+          <pupa-radio-control [value]="'end'">end</pupa-radio-control>
+        </pupa-radio-group>
+      </section>
+      <section class="modal-config__row">
+        <pupa-input-number
+          class="modal-config__input"
+          [formControl]="modalYPosition"
+          [withReset]="true"
+          placeholder="Modal Y position"
+        ></pupa-input-number>
+
+        <pupa-radio-group class="radio-group" [formControl]="modalYOverlay" [direction]="'row'">
+          <pupa-radio-control [value]="'top'">top</pupa-radio-control>
+
+          <pupa-radio-control [value]="'center'">center</pupa-radio-control>
+
+          <pupa-radio-control [value]="'bottom'">bottom</pupa-radio-control>
+        </pupa-radio-group>
+      </section>
+      <div class="row">
+        <pupa-switcher [size]="'medium'" [formControl]="insideHostContainer"></pupa-switcher>
+        <span class="label">Bind to viewport</span>
+      </div>
+    </section>
+    <pupa-button (click)="openModal()">Open Modal</pupa-button>
+  </section>
+  <div #container *ngIf="insideHostContainer.value" class="draggable-example__modal-viewport"></div>
+</section>
