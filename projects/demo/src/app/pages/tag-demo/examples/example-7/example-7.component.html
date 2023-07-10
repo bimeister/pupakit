@@ -68,7 +68,7 @@
   </div>
 
   <div class="trigger-container" #tagWarning>
-    <pupa-tag kind="warning" [clickable]="true" [disabled]="true">
+    <pupa-tag kind="warning" [clickable]="true">
       <pupa-tag-text>Ninja tag</pupa-tag-text>
 
       <pupa-tag-action-button
@@ -76,6 +76,23 @@
         pupaDropdown
         #dropdown="pupaDropdown"
         [pupaDropdownRealTriggerElement]="tagWarning"
+      >
+        <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
+
+        <div *pupaDropdownTemplate="dropdown">Hello ninja! 🥷</div>
+      </pupa-tag-action-button>
+    </pupa-tag>
+  </div>
+
+  <div class="trigger-container" #tagCustom>
+    <pupa-tag kind="custom" [clickable]="true">
+      <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+      <pupa-tag-action-button
+        *pupaTagActionButtonTemplate
+        pupaDropdown
+        #dropdown="pupaDropdown"
+        [pupaDropdownRealTriggerElement]="tagCustom"
       >
         <pupa-icon [name]="(dropdown.opened$ | async) ? 'app-eye-off' : 'app-eye-on'"></pupa-icon>
 

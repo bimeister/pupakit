@@ -37,6 +37,11 @@
     &.tag_warning {
       @include tag-color-state('warning');
     }
+
+    &.tag_custom {
+      @include tag-custom-color-variables();
+      @include tag-custom-color-defaults();
+    }
   }
 
   &.tag_disabled {

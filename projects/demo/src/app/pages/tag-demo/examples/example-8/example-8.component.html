@@ -31,10 +31,18 @@
     </pupa-tag-action-button>
   </pupa-tag>
 
-  <pupa-tag kind="warning" [disabled]="true">
+  <pupa-tag kind="warning">
     <pupa-tag-text>Ninja tag</pupa-tag-text>
 
     <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover5">
+      <pupa-icon [name]="'app-resize'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="custom">
+    <pupa-tag-text>Ninja tag</pupa-tag-text>
+
+    <pupa-tag-action-button *pupaTagActionButtonTemplate [pupaPopover]="popover6">
       <pupa-icon [name]="'app-resize'"></pupa-icon>
     </pupa-tag-action-button>
   </pupa-tag>
@@ -104,6 +112,22 @@
   </ng-template>
 
   <ng-template #popover5 let-popoverRef="popoverRef">
+    <pupa-popover-layout-header>OHeader</pupa-popover-layout-header>
+
+    <pupa-popover-layout-body>
+      <ul>
+        <li>List item 1</li>
+        <li>List item 2</li>
+        <li>List item 3</li>
+      </ul>
+    </pupa-popover-layout-body>
+
+    <pupa-popover-layout-footer>
+      <pupa-button size="small" (click)="popoverRef.close()">Close</pupa-button>
+    </pupa-popover-layout-footer>
+  </ng-template>
+
+  <ng-template #popover6 let-popoverRef="popoverRef">
     <pupa-popover-layout-header>OHeader</pupa-popover-layout-header>
 
     <pupa-popover-layout-body>
