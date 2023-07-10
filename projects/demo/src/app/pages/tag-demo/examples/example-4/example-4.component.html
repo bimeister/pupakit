@@ -4,6 +4,7 @@
   <pupa-tag kind="success" [disabled]="true">Success</pupa-tag>
   <pupa-tag kind="danger" [disabled]="true">Danger</pupa-tag>
   <pupa-tag kind="warning" [disabled]="true">Warning</pupa-tag>
+  <pupa-tag kind="custom" [disabled]="true">Custom</pupa-tag>
 </div>
 <div class="tag-container">
   <pupa-tag [clickable]="true" [disabled]="true">
@@ -36,6 +37,13 @@
 
   <pupa-tag kind="warning" [clickable]="true" [disabled]="true">
     <pupa-tag-text>Warning</pupa-tag-text>
+    <pupa-tag-action-button *pupaTagActionButtonTemplate>
+      <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
+    </pupa-tag-action-button>
+  </pupa-tag>
+
+  <pupa-tag kind="custom" [clickable]="true" [disabled]="true">
+    <pupa-tag-text>Custom</pupa-tag-text>
     <pupa-tag-action-button *pupaTagActionButtonTemplate>
       <pupa-icon [name]="'app-chevron-down'"></pupa-icon>
     </pupa-tag-action-button>

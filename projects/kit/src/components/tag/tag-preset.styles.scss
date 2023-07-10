@@ -52,3 +52,23 @@
 
   @content;
 }
+
+@mixin tag-custom-color-variables {
+  --pupa-tag_background-color-default: hsl(300deg 67% 55%);
+  --pupa-tag_background-color-hover-default: hsl(300deg 67% 40%);
+  --pupa-tag_background-color-active-default: hsl(300deg 67% 25%);
+}
+
+@mixin tag-custom-color-defaults {
+  background-color: var(--pupa-tag_background-color, var(--pupa-tag_background-color-default));
+
+  &.tag_clickable {
+    @include hover() {
+      background-color: var(--pupa-tag_background-color-hover, var(--pupa-tag_background-color-hover-default));
+    }
+
+    &:active {
+      background-color: var(--pupa-tag_background-color-active, var(--pupa-tag_background-color-active-default));
+    }
+  }
+}

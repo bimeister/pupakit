@@ -40,6 +40,15 @@
     &.button_warning {
       @include action-button-color-state('warning');
     }
+
+    &.button_custom {
+      --pupa-tag_action_border-color-default: #{semantic-color(lines-opacity)};
+
+      @include tag-custom-color-variables();
+      @include tag-custom-color-defaults();
+
+      border-left: 1px solid var(--pupa-tag_action_border-color, var(--pupa-tag_action_border-color-default));
+    }
   }
 
   &:disabled {

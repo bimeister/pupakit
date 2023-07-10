@@ -20,12 +20,20 @@ export class TagDemoComponent {
     { caption: 'Success', value: 'success' },
     { caption: 'Danger', value: 'danger' },
     { caption: 'Warning', value: 'warning' },
+    { caption: 'Custom', value: 'custom' },
   ];
 
   public readonly sizeOptions: PropsOption[] = [
     { caption: 'Medium', value: 'medium', isDefault: true },
     { caption: 'Small', value: 'small' },
   ];
+
+  public readonly customCssVariables: string = `
+--pupa-tag_background-color
+--pupa-tag_background-color-hover
+--pupa-tag_background-color-active
+--pupa-tag_action_border-color
+`;
 
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,

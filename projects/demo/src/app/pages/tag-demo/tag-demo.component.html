@@ -104,6 +104,16 @@
         </demo-example-viewer-config-item>
       </demo-example-viewer-section>
 
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="Customize colors">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use css-variables for <pupa-code-inline>pupa-tag kind="custom"</pupa-code-inline>
+            &nbsp;
+            <pupa-code [code]="customCssVariables"></pupa-code>
+          </ng-container>
+        </demo-example-viewer-config-item>
+      </demo-example-viewer-section>
+
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="kind" type="TagKind">
