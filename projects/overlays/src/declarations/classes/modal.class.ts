@@ -10,7 +10,7 @@ import { PortalLayer } from '../interfaces/portal-layer.interface';
 import { ModalRef } from './modal-ref.class';
 import { Position } from '@bimeister/pupakit.common';
 import { observeOn, skip, take } from 'rxjs/operators';
-import { animationFrameScheduler, Subscription } from 'rxjs';
+import { asyncScheduler, Subscription } from 'rxjs';
 import { PupaModalViewportBoundaryPositionStrategy } from './pupa-modal-viewport-boundary-position-strategy.class';
 import { ModalPositionStrategyBuilder } from '../../services/modal-position-strategy.builder';
 
@@ -103,24 +103,22 @@ export class Modal<ComponentT> implements PortalLayer {
   }
 
   private getFullscreenSubscription(): Subscription {
-    return this.modalRef.isFullscreen$
-      .pipe(skip(1), observeOn(animationFrameScheduler))
-      .subscribe((isFullscreen: boolean) => {
-        const positionStrategy: PositionStrategy = this.overlayRef.getConfig().positionStrategy;
-        if (
-          !this.isPupaModalViewportBoundaryPositionStrategy(positionStrategy) &&
-          !this.isFlexibleConnectedPositionStrategy(positionStrategy)
-        ) {
-          return;
-        }
+    return this.modalRef.isFullscreen$.pipe(skip(1), observeOn(asyncScheduler)).subscribe((isFullscreen: boolean) => {
+      const positionStrategy: PositionStrategy = this.overlayRef.getConfig().positionStrategy;
+      if (
+        !this.isPupaModalViewportBoundaryPositionStrategy(positionStrategy) &&
+        !this.isFlexibleConnectedPositionStrategy(positionStrategy)
+      ) {
+        return;
+      }
 
-        if (isFullscreen) {
-          this.updatePosition(null);
-          return;
-        }
+      if (isFullscreen) {
+        this.updatePosition(null);
+        return;
+      }
 
-        this.updatePosition(this.lastPosition);
-      });
+      this.updatePosition(this.lastPosition);
+    });
   }
 
   private isPupaModalViewportBoundaryPositionStrategy(
