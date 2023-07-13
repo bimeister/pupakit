@@ -66,6 +66,7 @@ export class SidebarComponent {
         { title: 'Stepper', link: '/kit/stepper' },
         { title: 'Option', link: '/kit/option' },
         { title: 'Callout', link: '/kit/callout' },
+        { title: 'Tooltip', link: '/kit/tooltip' },
       ],
       'title'
     ),
