@@ -157,11 +157,10 @@ export class PupaModalViewportBoundaryPositionStrategy implements PositionStrate
 
   public updatePortalPositionWithClientMouseCoordinates(position: Position | null): void {
     const viewportRect: PupaModalViewportRect = this.getViewPortRect();
-    if (!isNil(position)) {
-      this.preferredPosition = [position[0] - viewportRect.x, position[1] - viewportRect.y];
-    } else {
-      this.preferredPosition = position;
-    }
+    !isNil(position)
+      ? (this.preferredPosition = [position[0] - viewportRect.x, position[1] - viewportRect.y])
+      : (this.preferredPosition = position);
+
     this.applyOverlayPosition();
   }
 

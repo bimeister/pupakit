@@ -31,6 +31,7 @@ export class ModalDemoExample7HelperComponent {
       closeOnBackdropClick: false,
       isBackdropTransparent: false,
       position: this.getModalPosition(),
+      hasBorder: true,
       providers: [
         {
           provide: MODAL_DATA_TOKEN,
