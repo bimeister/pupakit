@@ -24,11 +24,11 @@ const SELECT_OPTIONS: SelectOption[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagExample6Component {
-  public readonly control1: FormControl = new FormControl(SELECT_OPTIONS[0].value);
-  public readonly control2: FormControl = new FormControl(SELECT_OPTIONS[1].value);
-  public readonly control3: FormControl = new FormControl(SELECT_OPTIONS[2].value);
-  public readonly control4: FormControl = new FormControl(SELECT_OPTIONS[3].value);
-  public readonly control5: FormControl = new FormControl(SELECT_OPTIONS[4].value);
-  public readonly control6: FormControl = new FormControl(SELECT_OPTIONS[5].value);
+  public readonly control1: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[0].value);
+  public readonly control2: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[1].value);
+  public readonly control3: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[2].value);
+  public readonly control4: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[3].value);
+  public readonly control5: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[4].value);
+  public readonly control6: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[5].value);
   public readonly options$: BehaviorSubject<SelectOption[]> = new BehaviorSubject<SelectOption[]>(SELECT_OPTIONS);
 }
