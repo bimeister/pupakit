@@ -56,8 +56,7 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
     this.isOverlayAttached$.next(false);
   }
 
-  public handleOutsideClick(event: MouseEvent): void {
-    this.processEventPropagation(event);
+  public handleOutsideClick(): void {
     this.selectStateService.collapse();
   }
 
