@@ -1,8 +1,9 @@
-import { Directive, EventEmitter, OnChanges, OnDestroy, Output, TemplateRef } from '@angular/core';
+import { Directive, EventEmitter, OnChanges, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { Nullable, filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
+import { delay, map, startWith, switchMap, tap } from 'rxjs/operators';
 import { SelectStateServiceDeclaration } from '../../interfaces/select-state-service-declaration.interface';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
@@ -10,7 +11,7 @@ import { SelectOuterValue } from '../../types/select-outer-value.type';
 import { SelectSize } from '../../types/select-size.type';
 
 @Directive()
-export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValueAccessor {
+export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, ControlValueAccessor {
   public abstract isMultiSelectionEnabled: boolean;
   public abstract isUnselectionEnabled: boolean;
   public abstract isPatched: boolean;
@@ -49,6 +50,10 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
 
   protected resetIsTriggerTouchedState(): void {
     this.selectStateService.setIsTriggerTouchedState(false);
+  }
+
+  public ngOnInit(): void {
+    this.subscription.add(this.processNgControlStatusChangesForHandleIsTouched());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -202,5 +207,21 @@ export abstract class SelectBase<T> implements OnChanges, OnDestroy, ControlValu
     return this.selectStateService.isExpanded$.subscribe((isExpanded: boolean) =>
       isExpanded ? this.focus.emit() : this.blur.emit()
     );
+  }
+
+  private processNgControlStatusChangesForHandleIsTouched(): Subscription {
+    return this.selectStateService.control$
+      .pipe(
+        filterNotNil(),
+        switchMap((control: NgControl) =>
+          control.statusChanges.pipe(
+            delay(0),
+            startWith(control.touched),
+            map(() => control.touched),
+            tap((isTouched: boolean) => this.selectStateService.isTouched$.next(isTouched))
+          )
+        )
+      )
+      .subscribe();
   }
 }
