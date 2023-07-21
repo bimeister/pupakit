@@ -3,7 +3,7 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { Nullable, filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
-import { delay, map, startWith, switchMap } from 'rxjs/operators';
+import { map, startWith, switchMap } from 'rxjs/operators';
 import { SelectStateServiceDeclaration } from '../../interfaces/select-state-service-declaration.interface';
 import { OnChangeCallback } from '../../types/on-change-callback.type';
 import { OnTouchedCallback } from '../../types/on-touched-callback.type';
@@ -215,7 +215,6 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
         filterNotNil(),
         switchMap((control: NgControl) =>
           control.statusChanges.pipe(
-            delay(0),
             startWith(control.touched),
             map(() => control.touched)
           )
