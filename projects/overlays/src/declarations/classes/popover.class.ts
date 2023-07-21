@@ -8,9 +8,9 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementRef, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { ClientUiStateHandlerService, OVERLAY_VIEWPORT_MARGIN_PX, Position } from '@bimeister/pupakit.common';
-import { getUuid, isNil, Uuid } from '@bimeister/utilities';
-import { fromEvent, merge, Observable } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { Uuid, getUuid, isNil } from '@bimeister/utilities';
+import { Observable, Subscription, fromEvent, merge } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { PopoverContainerComponent } from '../../components/popover/components/popover-container/popover-container.component';
 import { PopoverConfig } from '../interfaces/popover-config.interface';
 import { PopoverContainerData } from '../interfaces/popover-container-data.interface';
@@ -31,7 +31,7 @@ const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
 export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> implements PortalLayer {
   public readonly id: Uuid = getUuid();
   private readonly renderer: Renderer2 = this.rendererFactory.createRenderer(null, null);
-
+  private readonly outsideEventsSubscription: Subscription = new Subscription();
   private readonly positionStrategy: FlexibleConnectedPositionStrategy = this.getAnchorPosition();
   private readonly overlayRef: OverlayRef = this.overlay.create({
     positionStrategy: this.positionStrategy,
@@ -52,7 +52,8 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     private readonly document: Document
   ) {
     this.handleXsBreakpointChange();
-    this.listenOutsideEventsForClose();
+    this.outsideEventsSubscription.add(this.listenOutsideEventsForCloseProcess());
+    this.outsideEventsSubscription.add(this.popoverRefClosingProcess());
   }
 
   public updateOverlayPosition(): void {
@@ -76,8 +77,10 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     }
   }
 
-  public open(): PopoverRef<PopoverDataType<TComponent>, PopoverReturnType<TComponent>> {
-    this.overlayRef.attach(this.getComponentPortal());
+  public open(fromCache: boolean = false): PopoverRef<PopoverDataType<TComponent>, PopoverReturnType<TComponent>> {
+    if (!fromCache) {
+      this.overlayRef.attach(this.getComponentPortal());
+    }
     return this.popoverRef;
   }
 
@@ -143,14 +146,34 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
       });
   }
 
-  private listenOutsideEventsForClose(): void {
+  private listenOutsideEventsForCloseProcess(): Subscription {
     const mouseDown$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'mousedown');
     const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
     const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
 
-    merge(mouseDown$, touchMove$, wheel$, resize$)
-      .pipe(take(1))
-      .subscribe(() => this.popoverRef.close());
+    return merge(mouseDown$, touchMove$, wheel$, resize$).subscribe(
+      (event: MouseEvent | TouchEvent | WheelEvent | Event) => {
+        const clickedElement: HTMLElement = event.target as HTMLElement;
+
+        if (this.isClickedOnAnchor(clickedElement)) {
+          return;
+        }
+
+        this.popoverRef.close();
+      }
+    );
+  }
+
+  private popoverRefClosingProcess(): Subscription {
+    return this.popoverRef.closed$.subscribe(() => this.outsideEventsSubscription.unsubscribe());
+  }
+
+  private isClickedOnAnchor(clickedElement: HTMLElement): boolean {
+    if (this.config.anchor instanceof ElementRef) {
+      const anchorElement: HTMLElement = this.config.anchor.nativeElement;
+      return anchorElement.contains(clickedElement);
+    }
+    return false;
   }
 }
