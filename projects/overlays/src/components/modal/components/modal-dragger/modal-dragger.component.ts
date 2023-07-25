@@ -70,6 +70,7 @@ export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
       event.clientY + this.draggerToTargetStartTopPositionDelta[1] + this.draggerToMousePositionDelta[1],
     ];
     this.modalRef.updatePosition(newPosition);
+    this.modalRef.positionTouched = true;
   }
 
   private processMouseUp(event: MouseEvent): void {
