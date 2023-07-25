@@ -2,9 +2,13 @@
 
 :host {
   display: block;
-  cursor: move;
+  cursor: grab;
   user-select: none;
   z-index: 10000;
+
+  &:active {
+    cursor: grabbing;
+  }
 
   @include xs() {
     pointer-events: none;

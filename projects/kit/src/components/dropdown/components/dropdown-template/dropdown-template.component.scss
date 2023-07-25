@@ -19,7 +19,7 @@
   @include blur();
 
   overflow: hidden;
-  margin-top: 2rem;
+  margin: var(--pupa-dropdown-top-bottom-margin, 2rem) 0;
 
   @include host-selector-dark-theme {
     color: color(neutral-1);

@@ -40,6 +40,7 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   private isMouseOverElement: boolean = false;
 
   private readonly subscription: Subscription = new Subscription();
+
   constructor(private readonly tooltipService: TooltipService, public readonly triggerRef: ElementRef<HTMLElement>) {}
 
   public ngAfterViewInit(): void {
@@ -64,7 +65,12 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
     if (isNil(change)) {
       return;
     }
+
     this.tooltipService.setDisabledState(change.currentValue);
+
+    if (change.currentValue) {
+      this.tooltipService.setOpenedState(!change.currentValue);
+    }
   }
 
   private processHideOnTooltipHoverChanges(change: ComponentChange<this, boolean>): void {

@@ -61,6 +61,10 @@ export class ModalsService {
     };
   }
 
+  public getModalRefById(id: string): ModalRef<unknown> | undefined {
+    return this.modalRefs.get(id);
+  }
+
   public closeById(id: string): void {
     const modalRef: ModalRef<unknown> = this.modalRefs.get(id);
 

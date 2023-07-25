@@ -13,6 +13,7 @@ export class ModalRef<ReturnDataT = null> {
   public readonly toTopLayerMoved$: Subject<void> = new Subject<void>();
   public readonly isFullscreen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly backdropClick$: Observable<MouseEvent> = this.overlayRef.backdropClick();
+  public positionTouched: boolean = false;
 
   constructor(
     public readonly modalId: string,
