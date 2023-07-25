@@ -1,6 +1,7 @@
 @function trim($number) {
   @if type-of($number) == 'number' and not unitless($number) {
-    @return calc(#{$number} / (#{$number} * 0 + 1));
+    $safeNumber: $number * 0 + 1;
+    @return calc($number / $safeNumber);
   }
   @return $number;
 }
