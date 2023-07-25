@@ -1,11 +1,19 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { ButtonType } from '../../../../declarations/types/button-type.type';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostBinding,
+  HostListener,
+  Input,
+  OnChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { ButtonKind } from '../../../../declarations/types/button-kind.type';
 import { ButtonSize } from '../../../../declarations/types/button-size.type';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { ButtonType } from '../../../../declarations/types/button-type.type';
 
 @Component({
   selector: 'pupa-button',
@@ -45,6 +53,8 @@ export class ButtonComponent implements OnChanges {
 
   @Input() public readonly flexible: boolean = false;
   public readonly flexible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @HostBinding('class.flexible') public hasFlexibleClass: boolean = false;
 
   protected commonButtonClasses: Observable<string>[] = [
     this.size$,
@@ -175,5 +185,6 @@ export class ButtonComponent implements OnChanges {
     }
 
     this.flexible$.next(updatedValue);
+    this.hasFlexibleClass = updatedValue;
   }
 }

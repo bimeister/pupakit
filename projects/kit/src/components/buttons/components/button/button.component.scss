@@ -1,6 +1,6 @@
 @use './../../button.styles.scss';
 
-:host:has(.button_flexible) {
+:host.flexible {
   display: flex;
   flex: 1;
 }
