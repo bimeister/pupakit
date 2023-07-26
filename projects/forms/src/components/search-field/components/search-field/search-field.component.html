@@ -28,6 +28,7 @@
       (focus)="emitFocusEvent($event)"
       (blur)="emitBlurEvent($event)"
       [autocomplete]="autocomplete ? 'on' : 'off'"
+      [pupaAutofocus]="autofocus"
       [value]="value$ | async"
     />
     <pupa-icon
