@@ -11,8 +11,8 @@ import {
 } from '@angular/core';
 import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { Nullable, distinctUntilSerializedChanged, isEmpty, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { InputSize } from '../../types/input-size.type';
 import { InputStyleCustomization } from '../../types/input-style-customization.type';
@@ -38,6 +38,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
 
   @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public autofocus: boolean = false;
 
   @Input() public withReset: boolean = false;
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

@@ -1,13 +1,17 @@
-import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
 
 @Directive({
   selector: '[pupaAutofocus]',
 })
 export class PupaAutofocusDirective implements AfterViewInit {
+  @Input() public pupaAutofocus: boolean = true;
+
   constructor(private readonly elementRef: ElementRef) {}
 
   public ngAfterViewInit(): void {
-    this.processFocus();
+    if (this.pupaAutofocus) {
+      this.processFocus();
+    }
   }
 
   private processFocus(): void {
