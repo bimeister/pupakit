@@ -1,6 +1,15 @@
-<div class="callout" [ngClass]="'callout_' + variant">
-  <div class="icon"><pupa-icon [name]="icons.get(variant)"></pupa-icon></div>
-  <div>
-    <ng-content></ng-content>
+<div *ngIf="isShown$ | async" class="callout" [ngClass]="'callout_' + variant">
+  <div class="callout__container">
+    <div class="icon"><pupa-icon [name]="icons.get(variant)"></pupa-icon></div>
+    <div>
+      <ng-content></ng-content>
+    </div>
   </div>
+  <pupa-button-icon
+    *ngIf="isClosable"
+    (click)="closeCallout()"
+    [icon]="'app-cross'"
+    [kind]="'secondary'"
+    [size]="'xs'"
+  ></pupa-button-icon>
 </div>

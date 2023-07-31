@@ -6,12 +6,20 @@
     <pupa-code-container [content]="example1Content">
       <demo-callout-example-1 *pupaCodeContainerPreviewTemplate></demo-callout-example-1>
     </pupa-code-container>
+    <h3 demoAnchor>Closable callout</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-callout-example-2 *pupaCodeContainerPreviewTemplate></demo-callout-example-2>
+    </pupa-code-container>
   </div>
+
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content>
-        <pupa-callout [variant]="variant$ | async">{{ variant$ | async }}</pupa-callout>
+        <pupa-callout [variant]="variant$ | async" [isClosable]="isClosable$ | async">{{
+          variant$ | async
+        }}</pupa-callout>
       </demo-example-viewer-content>
+
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="variant" type="CalloutType">
@@ -20,6 +28,14 @@
             <p>Default: <pupa-code-inline>'info'</pupa-code-inline></p>
           </ng-container>
           <demo-props-select #variant$ direction="row" [options]="variantOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="isClosable" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <p>Sets is callout closable.</p>
+            <p>Default: <pupa-code-inline>false</pupa-code-inline></p>
+          </ng-container>
+          <demo-props-switcher #isClosable$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
