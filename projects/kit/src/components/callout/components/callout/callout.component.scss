@@ -4,13 +4,13 @@
 
 :host {
   display: block;
-  margin-bottom: 3rem;
 }
 
 .callout {
-  display: flex;
+  @include flex-container(row, center, space-between);
   border-radius: $controlBorderRadius;
   padding: 2rem;
+  margin-bottom: 3rem;
 
   .icon {
     font-size: 5rem;
@@ -52,5 +52,9 @@
     .icon {
       color: semantic-color(kind-danger-normal);
     }
+  }
+
+  &__container {
+    display: flex;
   }
 }
