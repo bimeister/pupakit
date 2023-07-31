@@ -33,7 +33,7 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
   }
 
   public setAsActive(): void {
-    if (this.disabled || !isNil(this.isActive)) {
+    if (this.disabled) {
       return;
     }
     this.stateService.setActiveTab(this.name);
