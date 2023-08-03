@@ -2,7 +2,8 @@
 @use 'functions' as *;
 
 .status {
-  @include flex-container($align-items: center, $gap: 2rem);
+  @include flex-container($align-items: center);
+  gap: 2rem;
   cursor: default;
   @include font-preset-caption-xs();
   color: color(neutral-1000);
