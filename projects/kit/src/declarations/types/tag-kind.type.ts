@@ -1,3 +1,3 @@
 import { SemanticKind } from './semantic-kind.type';
 
-export type TagKind = Omit<SemanticKind, 'neutral'> | 'custom';
+export type TagKind = Omit<SemanticKind, 'neutral'> | 'custom' | 'selected';

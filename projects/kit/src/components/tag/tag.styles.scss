@@ -1,6 +1,7 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 @use './tag-preset.styles.scss' as *;
+@use 'variables' as *;
 
 .tag {
   &:not(:only-child) {
@@ -41,6 +42,22 @@
     &.tag_custom {
       @include tag-custom-color-variables();
       @include tag-custom-color-defaults();
+    }
+
+    &.tag_selected {
+      position: relative;
+      color: semantic-color(text-primary);
+      background-color: semantic-color(kind-primary-normal, alpha-7);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 1rem;
+        height: 100%;
+        border-left: 1rem solid semantic-color(kind-primary-normal);
+        border-radius: 1rem;
+      }
     }
   }
 
