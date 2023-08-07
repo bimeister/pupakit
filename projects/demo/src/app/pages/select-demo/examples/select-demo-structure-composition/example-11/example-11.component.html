@@ -1,7 +1,7 @@
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="false" [formControl]="controlTag">
   <pupa-select-trigger>
     <pupa-tag [clickable]="true">
-      <pupa-icon name="app-cube"></pupa-icon>
+      <pupa-icon name="app-cube-3d"></pupa-icon>
       {{ controlTag.value }}
       <pupa-tag-delete-button (click)="handleControlTagReset()"></pupa-tag-delete-button>
     </pupa-tag>
@@ -11,7 +11,7 @@
     <pupa-select-dropdown-header> Header: any content can be here</pupa-select-dropdown-header>
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" value="Option {{ index }}">
-        <pupa-icon name="app-cube"></pupa-icon>
+        <pupa-icon name="app-cube-3d"></pupa-icon>
         <pupa-tag [clickable]="true">Option {{ index }}</pupa-tag>
       </pupa-select-option>
     </pupa-select-options-container>

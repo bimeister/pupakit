@@ -1,7 +1,7 @@
 <div class="button-container">
   <ng-container *ngFor="let size of sizes">
     <ng-container *ngFor="let kind of kinds">
-      <pupa-button-multi #buttonMulti class="button-container__item" leftIcon="app-cube" [size]="size">
+      <pupa-button-multi #buttonMulti class="button-container__item" leftIcon="app-cube-3d" [size]="size">
         primary {{ size }}
 
         <pupa-dropdown-menu *pupaDropdownTemplate="buttonMulti; let dropdownRef" [dropdownRef]="dropdownRef">
