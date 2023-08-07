@@ -1,1 +1,1 @@
-export type BadgeIndicatorState = 'progress' | 'complete' | 'error';
+export type BadgeIndicatorState = 'new' | 'success' | 'danger' | 'warning' | 'loading';

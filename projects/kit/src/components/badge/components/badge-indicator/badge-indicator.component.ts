@@ -9,10 +9,5 @@ import { BadgeIndicatorState } from '../../../../declarations/types/badge-indica
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeIndicatorComponent {
-  @Input() public readonly state: BadgeIndicatorState = 'progress';
-
-  public readonly icons: Map<BadgeIndicatorState, string> = new Map([
-    ['complete', 'app-exceptions-check-4'],
-    ['error', 'app-exceptions-cross-4'],
-  ]);
+  @Input() public readonly state: BadgeIndicatorState = 'new';
 }
