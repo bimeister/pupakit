@@ -10,50 +10,41 @@
 .badge-indicator {
   width: 2rem;
   height: 2rem;
-  color: color(neutral-1);
-  display: flex;
-  border-radius: 50%;
   align-items: center;
   justify-content: center;
+  display: flex;
   position: relative;
 
-  &__icon {
-    width: 1rem;
-    height: 1rem;
-    position: absolute;
+  &__circle {
+    border-radius: 50%;
+    width: 1.5rem;
+    height: 1.5rem;
+    box-sizing: border-box;
   }
-}
 
-.complete {
-  background-color: semantic-color(kind-primary-normal);
-  color: semantic-color(text-inverse);
-}
-.error {
-  background-color: semantic-color(kind-danger-normal);
-}
-
-.inner-circle {
-  position: absolute;
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  display: inline-block;
-  background-color: semantic-color(kind-primary-normal);
-}
-.outer-circle {
-  position: absolute;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  background-color: color(primary-150);
-  animation: pulse 1.25s infinite alternate ease-in-out;
+  &__new {
+    border: 1.6px solid semantic-color(kind-primary-normal);
+  }
+  &__success {
+    background-color: semantic-color(kind-success-normal);
+  }
+  &__danger {
+    background-color: semantic-color(kind-danger-normal);
+  }
+  &__warning {
+    background-color: semantic-color(kind-warning-normal);
+  }
+  &__loading {
+    background-color: semantic-color(kind-primary-normal);
+    animation: pulse 750ms infinite alternate ease-out;
+  }
 }
 
 @keyframes pulse {
   from {
-    transform: scale(1);
+    opacity: 1;
   }
   to {
-    transform: scale(0.7);
+    opacity: 0.25;
   }
 }

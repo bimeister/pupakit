@@ -1,11 +1,3 @@
-<span class="badge-indicator" [ngClass]="state">
-  <ng-container *ngIf="state === 'progress'; else iconBadge">
-    <span class="badge-indicator__icon outer-circle"></span>
-    <span class="badge-indicator__icon inner-circle"></span>
-  </ng-container>
-</span>
-<ng-template #iconBadge>
-  <ng-container *ngIf="icons.get(state) as name">
-    <pupa-icon class="badge-indicator__icon" [name]="name"></pupa-icon>
-  </ng-container>
-</ng-template>
+<div class="badge-indicator">
+  <span class="badge-indicator__circle" [ngClass]="'badge-indicator__' + state"> </span>
+</div>
