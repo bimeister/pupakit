@@ -15,7 +15,7 @@
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="false" [formControl]="control">
   <pupa-select-trigger>
     <pupa-tag [clickable]="true" [disabled]="control.disabled">
-      <pupa-icon name="app-cube"></pupa-icon>
+      <pupa-icon name="app-cube-3d"></pupa-icon>
       {{ control.value }}
       <pupa-tag-delete-button></pupa-tag-delete-button>
     </pupa-tag>
@@ -24,7 +24,7 @@
   <pupa-select-dropdown>
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" value="Option {{ index }}">
-        <pupa-icon name="app-cube"></pupa-icon>
+        <pupa-icon name="app-cube-3d"></pupa-icon>
         <pupa-tag [clickable]="true">Option {{ index }}</pupa-tag>
       </pupa-select-option>
     </pupa-select-options-container>
@@ -45,7 +45,7 @@
   <pupa-select-dropdown>
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let index of [1, 2, 3]" value="Option {{ index }}" [hasCheckbox]="true">
-        <pupa-icon name="app-cube"></pupa-icon>
+        <pupa-icon name="app-cube-3d"></pupa-icon>
         Option {{ index }}
       </pupa-select-option>
       <pupa-select-option
@@ -54,7 +54,7 @@
         [isDisabled]="true"
         [hasCheckbox]="true"
       >
-        <pupa-icon name="app-cube"></pupa-icon>
+        <pupa-icon name="app-cube-3d"></pupa-icon>
         Option {{ index }}
       </pupa-select-option>
     </pupa-select-options-container>

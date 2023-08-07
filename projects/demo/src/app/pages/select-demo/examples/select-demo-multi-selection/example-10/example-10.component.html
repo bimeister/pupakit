@@ -1,7 +1,7 @@
 <pupa-select class="select" [placeholder]="'Placeholder'" [isMultiSelectionEnabled]="true" [formControl]="control">
   <pupa-select-trigger-tags class="trigger" [tags]="control.value">
     <pupa-tag class="tag" [clickable]="true" *pupaSelectTriggerTagTemplate="let tag">
-      <pupa-icon class="tag__icon" name="app-cube"></pupa-icon>
+      <pupa-icon class="tag__icon" name="app-cube-3d"></pupa-icon>
       <span class="tag__name">{{ tag }}</span>
       <pupa-tag-delete-button (click)="handleTagDelete(tag)"></pupa-tag-delete-button>
     </pupa-tag>
@@ -10,7 +10,7 @@
   <pupa-select-dropdown>
     <pupa-select-options-container>
       <pupa-select-option *ngFor="let index of [1, 2, 3, 4, 5]" value="Option {{ index }}">
-        <pupa-icon name="app-cube"></pupa-icon>
+        <pupa-icon name="app-cube-3d"></pupa-icon>
         <pupa-tag [clickable]="true">Option {{ index }}</pupa-tag>
       </pupa-select-option>
     </pupa-select-options-container>
