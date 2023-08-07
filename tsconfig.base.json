@@ -6,12 +6,13 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
+    "useDefineForClassFields": false,
     "baseUrl": ".",
     "declaration": true,
     "composite": true,
     "lib": ["DOM", "ESNext"],
-    "importHelpers": true,
     "locale": "en",
+    "importHelpers": true,
     "newLine": "lf",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -21,7 +22,7 @@
     "removeComments": true,
     "sourceMap": true,
     "module": "ES2020",
-    "target": "ES2020",
+    "target": "ES2022",
     "moduleResolution": "Node",
     "plugins": [
       {
@@ -33,9 +34,6 @@
     "disableSizeLimit": true,
     "disableReferencedProjectLoad": true,
     "disableSolutionSearching": true
-  },
-  "angularCompilerOptions": {
-    "enableIvy": true
   },
   "ts-node": {
     "compilerOptions": {

@@ -9,7 +9,7 @@
     "demo": {
       "prefix": "demo",
       "projectType": "application",
-      "root": "./demo",
+      "root": "projects/demo",
       "sourceRoot": "./projects/demo/src",
       "architect": {
         "build": {
@@ -709,6 +709,12 @@
     "@schematics/angular:service": {
       "flat": true,
       "skipTests": true
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   },
   "version": 1

@@ -23,7 +23,7 @@ type EventUnlistener = VoidFunction;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ModalDraggerComponent implements AfterViewInit, OnDestroy {
-  private draggerToTargetStartTopPositionDelta: Position = null;
+  private draggerToTargetStartTopPositionDelta: Position | null = null;
   private draggerToMousePositionDelta: Position = null;
   private mouseMoveUnlistener: EventUnlistener = null;
   private mouseUpUnlistener: EventUnlistener = null;

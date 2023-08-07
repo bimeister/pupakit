@@ -9,7 +9,7 @@ export class LetDirective<T = unknown> implements OnChanges {
   @Input()
   public pupaLet: T;
 
-  private context: LetContext<unknown> = { pupaLet: null };
+  private readonly context: LetContext<unknown> = { pupaLet: null };
 
   constructor(
     private readonly viewContainerRef: ViewContainerRef,
