@@ -1,5 +1,5 @@
 import { isNil } from '@bimeister/utilities';
-import { PagedVirtualScrollArguments } from '../../interfaces/paged-virtual-scroll-arguments.interface';
+import { type PagedVirtualScrollArguments } from '../../interfaces/paged-virtual-scroll-arguments.interface';
 
 export class PagedVirtualScrollArgumentsDto implements PagedVirtualScrollArguments {
   public getFrom: number = null;

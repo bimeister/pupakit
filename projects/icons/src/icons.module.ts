@@ -1,8 +1,8 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule, type ModuleWithProviders } from '@angular/core';
 import { PupaIconModule } from './components/icon/icon.module';
 import { IconDefinition } from './declarations/interfaces/icon-definition.interface';
 import { AVAILABLE_ICONS_TOKEN } from './declarations/tokens/available-icons.token';
-import { IconRegistry } from './declarations/types/icon-registry.type';
+import { type IconRegistry } from './declarations/types/icon-registry.type';
 
 @NgModule({
   declarations: [],

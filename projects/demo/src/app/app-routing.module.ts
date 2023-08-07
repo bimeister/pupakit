@@ -441,7 +441,6 @@ const demoRoutes: Routes = [
       preloadingStrategy: PreloadAllModules,
       initialNavigation: 'enabledNonBlocking',
       scrollPositionRestoration: 'enabled',
-      relativeLinkResolution: 'legacy',
       useHash: false,
     }),
   ],

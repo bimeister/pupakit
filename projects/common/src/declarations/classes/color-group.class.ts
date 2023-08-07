@@ -1,4 +1,4 @@
-import { ColorsConfig } from '../interfaces/colors-config.interface';
+import { type ColorsConfig } from '../interfaces/colors-config.interface';
 import { Color } from './color.class';
 
 export class ColorGroup {

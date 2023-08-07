@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import config from '../assets/configs/semantic-colors-config.json';
 import { SemanticColor } from '../declarations/classes/semantic-color.class';
-import { SemanticColorsConfig } from '../declarations/interfaces/semantic-colors-config.interface';
-import { SemanticConfigurationGroup } from '../declarations/interfaces/semantic-configuration-group.interface';
-import { SemanticConfiguration } from '../declarations/interfaces/semantic-configuration.interface';
+import { type SemanticColorsConfig } from '../declarations/interfaces/semantic-colors-config.interface';
+import { type SemanticConfigurationGroup } from '../declarations/interfaces/semantic-configuration-group.interface';
+import { type SemanticConfiguration } from '../declarations/interfaces/semantic-configuration.interface';
 
 @Injectable({ providedIn: 'root' })
 export class SemanticColorsService {

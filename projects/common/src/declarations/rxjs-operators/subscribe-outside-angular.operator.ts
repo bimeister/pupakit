@@ -1,6 +1,6 @@
 import { NgZone } from '@angular/core';
-import { MonoTypeOperatorFunction, Observable, Subscriber, Subscription } from 'rxjs';
-import { Nullable } from '@bimeister/utilities';
+import { type Nullable } from '@bimeister/utilities';
+import { Observable, Subscriber, Subscription, type MonoTypeOperatorFunction } from 'rxjs';
 
 export function subscribeOutsideAngular<T>(ngZone: NgZone): MonoTypeOperatorFunction<T> {
   return (source$: Observable<T>) =>

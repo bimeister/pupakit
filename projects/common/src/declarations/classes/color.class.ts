@@ -1,4 +1,4 @@
-import { ColorsConfig } from '../interfaces/colors-config.interface';
+import { type ColorsConfig } from '../interfaces/colors-config.interface';
 
 const LIGHT_OFFSET: number = 1.61;
 

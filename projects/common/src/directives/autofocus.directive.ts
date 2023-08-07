@@ -1,4 +1,4 @@
-import { AfterViewInit, Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, type AfterViewInit } from '@angular/core';
 
 @Directive({
   selector: '[pupaAutofocus]',

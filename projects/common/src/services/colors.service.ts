@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { isNil, type Nullable } from '@bimeister/utilities';
 import config from '../assets/configs/colors-config.json';
-import { Color } from '../declarations/classes/color.class';
-import { ColorsConfig } from '../declarations/interfaces/colors-config.interface';
 import { ColorGroup } from '../declarations/classes/color-group.class';
-import { isNil, Nullable } from '@bimeister/utilities';
+import { Color } from '../declarations/classes/color.class';
+import { type ColorsConfig } from '../declarations/interfaces/colors-config.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ColorsService {

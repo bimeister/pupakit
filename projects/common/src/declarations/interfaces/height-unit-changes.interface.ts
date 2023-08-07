@@ -1,4 +1,4 @@
-import { ComponentChange } from './component-change.interface';
+import { type ComponentChange } from './component-change.interface';
 
 export interface HeightUnitChanges<C = any> {
   height?: ComponentChange<C>;

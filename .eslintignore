@@ -1,3 +1,4 @@
 *.d.ts
 api.ts
 index.ts
+*.spec.ts

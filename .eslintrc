@@ -10,10 +10,17 @@
         "project": ["tsconfig.eslint.json"],
         "createDefaultProgram": true
       },
-      "plugins": ["prettier", "jsdoc", "deprecation", "editorconfig", "ban"],
+      "plugins": [
+        "prettier",
+        "jsdoc",
+        "deprecation",
+        "editorconfig",
+        "ban",
+        "eslint-plugin-import",
+        "@typescript-eslint"
+      ],
       "extends": [
-        "plugin:@angular-eslint/ng-cli-compat",
-        "plugin:@angular-eslint/ng-cli-compat--formatting-add-on",
+        "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "prettier"
       ],
