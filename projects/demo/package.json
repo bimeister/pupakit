@@ -27,11 +27,12 @@
     "build:demo-ci": "moon run demo:build -- --base-href \"https://bimeister.github.io/pupakit/\""
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0"
+    "@angular/common": "^16.2.12",
+    "@angular/core": "^16.2.12"
   },
   "dependencies": {
     "@bimeister/pupakit.common": "*",
+    "@bimeister/pupakit.dnd": "*",
     "@bimeister/pupakit.forms": "*",
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
@@ -39,8 +40,7 @@
     "@bimeister/pupakit.table": "*",
     "@bimeister/pupakit.tree": "*",
     "@bimeister/pupakit.widgets": "*",
-    "@bimeister/pupakit.dnd": "*",
-    "tslib": "^2.3.0"
+    "tslib": "^2.6.1"
   },
   "main": "dist"
 }

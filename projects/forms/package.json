@@ -29,8 +29,8 @@
     "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/common": "^16.2.12",
+    "@angular/core": "^16.2.12",
     "@bimeister/utilities": "*"
   },
   "dependencies": {
@@ -38,8 +38,8 @@
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
     "@bimeister/pupakit.tree": "*",
-    "ngx-mask": "^11.0.0",
-    "tslib": "^2.3.0"
+    "ngx-mask": "14.2.4",
+    "tslib": "^2.6.1"
   },
   "main": "dist"
 }
