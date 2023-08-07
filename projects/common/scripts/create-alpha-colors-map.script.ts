@@ -1,5 +1,5 @@
-import { ColorsAlphaValuesConfig } from '../src/declarations/interfaces/colors-alpha-values-config.interface';
 import { readFile, writeFile } from 'fs/promises';
+import { type ColorsAlphaValuesConfig } from '../src/declarations/interfaces/colors-alpha-values-config.interface';
 
 async function writeContentToFile(fileData: string): Promise<void> {
   await writeFile('src/styles/maps/alpha-colors.map.scss', fileData, null);

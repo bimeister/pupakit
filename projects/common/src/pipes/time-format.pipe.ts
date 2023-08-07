@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, type PipeTransform } from '@angular/core';
 import { getFormattedTimeDigit } from '../declarations/functions/get-formatted-time-digit.function';
 
 @Pipe({

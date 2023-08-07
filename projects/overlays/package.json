@@ -27,15 +27,15 @@
     "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/common": "^16.1.8",
+    "@angular/core": "^16.1.8",
     "@bimeister/utilities": "*"
   },
   "dependencies": {
     "@bimeister/pupakit.common": "*",
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
-    "tslib": "^2.3.0"
+    "tslib": "2.6.1"
   },
   "main": "dist"
 }

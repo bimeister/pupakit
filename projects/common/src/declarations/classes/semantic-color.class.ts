@@ -1,4 +1,4 @@
-import { SemanticColorsConfig } from '../interfaces/semantic-colors-config.interface';
+import { type SemanticColorsConfig } from '../interfaces/semantic-colors-config.interface';
 
 export class SemanticColor {
   public readonly name: string = `${this.groupName}-${this.configuration.name}`.toLowerCase();

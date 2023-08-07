@@ -1,10 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { Inject, Injectable, OnDestroy } from '@angular/core';
-import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { Inject, Injectable, type OnDestroy } from '@angular/core';
+import { filterNotNil, isNil, shareReplayWithRefCount, type Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
 import config from '../assets/configs/adaptive-config.json';
-import { UiState } from '../declarations/interfaces/ui-state.interface';
+import { type UiState } from '../declarations/interfaces/ui-state.interface';
 
 @Injectable({
   providedIn: 'root',

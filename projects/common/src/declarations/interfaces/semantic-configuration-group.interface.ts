@@ -1,4 +1,4 @@
-import { SemanticConfiguration } from './semantic-configuration.interface';
+import { type SemanticConfiguration } from './semantic-configuration.interface';
 
 export interface SemanticConfigurationGroup {
   name: string;

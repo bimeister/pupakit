@@ -2,7 +2,12 @@
   "extends": "../../tsconfig.base.json",
   "ts-node": {
     "compilerOptions": {
-      "module": "commonjs",
+      "lib": [
+        "ES2022"
+      ],
+      "module": "CommonJS",
+      "target": "ES2022",
+      "verbatimModuleSyntax": false,
       "plugins": []
     }
   },
@@ -10,8 +15,9 @@
     "outDir": "../../.moon/cache/types/projects/common",
     "declaration": true,
     "inlineSources": false,
-    "module": "ES2020",
-    "target": "ES2020",
+    "useDefineForClassFields": false,
+    "module": "ES2022",
+    "target": "ES2022",
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {}
@@ -28,7 +34,6 @@
     "fullTemplateTypeCheck": false,
     "strictInjectionParameters": true,
     "enableResourceInlining": true,
-    "enableIvy": true,
     "compilationMode": "partial"
   }
 }

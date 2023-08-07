@@ -1,6 +1,6 @@
-import { Color } from '../src/declarations/classes/color.class';
-import { ColorsConfig } from '../src/declarations/interfaces/colors-config.interface';
 import { readFile, writeFile } from 'fs/promises';
+import { Color } from '../src/declarations/classes/color.class';
+import { type ColorsConfig } from '../src/declarations/interfaces/colors-config.interface';
 
 async function writeContentToFile(fileData: string): Promise<void> {
   await writeFile('src/styles/maps/colors.map.scss', fileData, null);

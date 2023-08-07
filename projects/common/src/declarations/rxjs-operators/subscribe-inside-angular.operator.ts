@@ -1,5 +1,5 @@
 import { NgZone } from '@angular/core';
-import { MonoTypeOperatorFunction, Observable, Subscriber } from 'rxjs';
+import { Observable, Subscriber, type MonoTypeOperatorFunction } from 'rxjs';
 
 export function subscribeInsideAngular<T>(ngZone: NgZone): MonoTypeOperatorFunction<T> {
   return (source$: Observable<T>) =>

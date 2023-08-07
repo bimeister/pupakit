@@ -1,7 +1,7 @@
-import { ListRange } from '@angular/cdk/collections';
-import { Nullable } from '@bimeister/utilities';
+import { type ListRange } from '@angular/cdk/collections';
+import { type Nullable } from '@bimeister/utilities';
 import { isNil } from '@bimeister/utilities/common';
-import { PagedVirtualScrollArguments } from '../interfaces/paged-virtual-scroll-arguments.interface';
+import { type PagedVirtualScrollArguments } from '../interfaces/paged-virtual-scroll-arguments.interface';
 import { PagedVirtualScrollArgumentsDto } from './dto/paged-virtual-scroll-arguments.dto';
 
 export class ListRangesIntersectionProducer {

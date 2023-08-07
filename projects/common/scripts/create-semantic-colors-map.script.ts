@@ -1,6 +1,6 @@
-import { SemanticColor } from '../src/declarations/classes/semantic-color.class';
-import { SemanticColorsConfig } from '../src/declarations/interfaces/semantic-colors-config.interface';
 import { readFile, writeFile } from 'fs/promises';
+import { SemanticColor } from '../src/declarations/classes/semantic-color.class';
+import { type SemanticColorsConfig } from '../src/declarations/interfaces/semantic-colors-config.interface';
 
 async function writeContentToFile(fileData: string): Promise<void> {
   await writeFile('src/styles/maps/semantic-colors.map.scss', fileData, null);

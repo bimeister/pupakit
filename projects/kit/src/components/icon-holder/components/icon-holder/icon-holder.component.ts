@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { IconHolderSize } from '../../../../declarations/types/icon-holder-size.type';
-import { IconHolderKind } from '../../../../declarations/types/icon-holder-kind.type';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation, type OnChanges } from '@angular/core';
+import { type ComponentChange, type ComponentChanges } from '@bimeister/pupakit.common';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { type IconHolderKind } from '../../../../declarations/types/icon-holder-kind.type';
+import { type IconHolderSize } from '../../../../declarations/types/icon-holder-size.type';
 
 @Component({
   selector: 'pupa-icon-holder',

@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { ComponentChanges } from '@bimeister/pupakit.common';
-import { Nullable } from '@bimeister/utilities';
+import { ChangeDetectionStrategy, Component, Inject, Input, ViewEncapsulation, type OnChanges } from '@angular/core';
+import { DomSanitizer, type SafeHtml } from '@angular/platform-browser';
+import { type ComponentChanges } from '@bimeister/pupakit.common';
+import { type Nullable } from '@bimeister/utilities';
 import { AVAILABLE_ICONS_TOKEN } from '../../../../declarations/tokens/available-icons.token';
 
 @Component({

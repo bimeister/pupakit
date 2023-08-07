@@ -22,17 +22,17 @@
     "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
   },
   "peerDependencies": {
-    "@angular/common": "^14.2.0",
-    "@angular/core": "^14.2.0",
+    "@angular/common": "^16.1.8",
+    "@angular/core": "^16.1.8",
     "@bimeister/utilities": "*"
   },
   "dependencies": {
     "@bimeister/pupakit.common": "*",
+    "@bimeister/pupakit.dnd": "*",
     "@bimeister/pupakit.icons": "*",
     "@bimeister/pupakit.kit": "*",
     "@bimeister/pupakit.overlays": "*",
-    "@bimeister/pupakit.dnd": "*",
-    "tslib": "^2.3.0"
+    "tslib": "2.6.1"
   },
   "main": "dist"
 }

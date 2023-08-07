@@ -1,5 +1,5 @@
-import { FactoryProvider, Optional, SkipSelf } from '@angular/core';
-import { Repeated } from '@bimeister/utilities';
+import { Optional, SkipSelf, type FactoryProvider } from '@angular/core';
+import { type Repeated } from '@bimeister/utilities';
 
 /**
  * @description Creates provider if it doesn't exist in parent injectors.
