@@ -29,6 +29,8 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
 
   public readonly isCollapsed$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
+  @Input() public maxLength: number | null = null;
+
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.isCollapsible$.pipe(map((isCollapsible: boolean) => (isCollapsible ? 'collapsible' : null))),
     this.isCollapsed$.pipe(map((isCollapsed: boolean) => (isCollapsed ? 'collapsed' : null))),
