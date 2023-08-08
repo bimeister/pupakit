@@ -12,8 +12,9 @@ const BASE_REQUEST_PATH: string = 'search-field-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchFieldDemoComponent {
-  public readonly formControl: FormControl = new FormControl('');
-  public readonly placeholderControl: FormControl = new FormControl('Placeholder');
+  public readonly formControl: FormControl<string> = new FormControl<string>('');
+  public readonly placeholderControl: FormControl<string> = new FormControl<string>('Placeholder');
+  public readonly maxLengthControl: FormControl<number | null> = new FormControl<number | null>(null);
 
   public readonly collapseDirectionOptions: PropsOption[] = [
     {

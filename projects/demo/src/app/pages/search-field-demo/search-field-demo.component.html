@@ -24,6 +24,7 @@
             [placeholder]="placeholderControl.value"
             [collapsible]="collapsible$ | async"
             [collapseDirection]="collapseDirection$ | async"
+            [maxLength]="maxLengthControl.value"
           >
           </pupa-search-field>
         </div>
@@ -63,6 +64,11 @@
         <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">
           <ng-container *demoExampleViewerPropertyDescription>The placeholder of the element.</ng-container>
           <pupa-input-text [formControl]="placeholderControl" [withReset]="true"></pupa-input-text>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="maxLength" type="number | null">
+          <ng-container *demoExampleViewerPropertyDescription>Max length of the element.</ng-container>
+          <pupa-input-number [formControl]="maxLengthControl" [withReset]="true"></pupa-input-number>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>
