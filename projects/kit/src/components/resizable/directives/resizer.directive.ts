@@ -96,6 +96,7 @@ export class PupaResizerDirective implements OnInit, OnDestroy, OnChanges {
   }
 
   public ngOnDestroy(): void {
+    this.setInactiveResizerState();
     this.hammerManager.destroy();
     this.subscription.unsubscribe();
   }
