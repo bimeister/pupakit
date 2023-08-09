@@ -16,7 +16,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
 :host {
   display: block;
   width: var(--pupa-scrollable-width, 100%);
-  min-width: var(--pupa-scrollable-min-width, 100%);
+  min-width: var(--pupa-scrollable-min-width, inherit);
   height: 100%;
   overflow: auto;
 }
@@ -181,6 +181,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
     left: $offset_line;
     top: 0.5rem;
   }
+
   &__horizontal {
     width: calc(100% - 1rem);
     height: $width_line;
