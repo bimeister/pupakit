@@ -4,12 +4,12 @@ import { AfterViewInit, Directive, ElementRef, Input } from '@angular/core';
   selector: '[pupaAutofocus]',
 })
 export class PupaAutofocusDirective implements AfterViewInit {
-  @Input() public pupaAutofocus: boolean = true;
+  @Input() public pupaAutofocus: boolean | '' = true;
 
   constructor(private readonly elementRef: ElementRef) {}
 
   public ngAfterViewInit(): void {
-    if (this.pupaAutofocus) {
+    if (this.pupaAutofocus !== false) {
       this.processFocus();
     }
   }
