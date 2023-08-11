@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
-import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription } from 'rxjs';
+import { Nullable, filterFalsy, isEmpty, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, ReplaySubject, Subscription, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
+import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { CollapseDirection } from '../../../../declarations/types/collapse-direction.type';
 
 const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
@@ -21,6 +21,8 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
   public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
     DEFAULT_COLLAPSE_DIRECTION
   );
+
+  @Input() public autofocus: boolean = false;
 
   @Input() public collapsible: boolean = false;
   public readonly isCollapsible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

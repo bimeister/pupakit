@@ -39,8 +39,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public autofocus: boolean = false;
-
   @Input() public withReset: boolean = false;
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
