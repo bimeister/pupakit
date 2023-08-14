@@ -4,10 +4,16 @@
       <pupa-button kind="secondary" (click)="action.action()">{{ action.name }}</pupa-button>
     </ng-container>
 
-    <ng-container *pupaActionDropdownTemplate="let action">
-      <pupa-dropdown-menu-item>
-        <div class="dropdown-action" (click)="action.action()">{{ action.name }}</div>
-      </pupa-dropdown-menu-item>
+    <ng-container *pupaActionMoreTriggerTemplate="let overflowedActions">
+      <pupa-button size="l" kind="secondary" pupaDropdown #dropdown="pupaDropdown">
+        ({{ overflowedActions.length }})
+      </pupa-button>
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item *ngFor="let action of overflowedActions">
+          <div class="dropdown-action" (click)="action.action()">{{ action.name }}</div>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
     </ng-container>
   </pupa-actions>
 </div>

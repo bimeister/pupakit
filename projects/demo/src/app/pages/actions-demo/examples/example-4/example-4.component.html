@@ -7,14 +7,16 @@
       </div>
     </ng-container>
 
-    <ng-container *pupaActionDropdownTemplate="let action">
-      <pupa-dropdown-menu-item>
-        <div class="dropdown-action">{{ action }}</div>
-      </pupa-dropdown-menu-item>
-    </ng-container>
+    <ng-container *pupaActionMoreTriggerTemplate="let overflowedActions">
+      <div class="more-button" pupaDropdown #dropdown="pupaDropdown">
+        More {{ overflowedActions.length }}
 
-    <ng-container *pupaActionMoreTriggerTemplate="let count">
-      <div class="more-button">More {{ count }}</div>
+        <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+          <pupa-dropdown-menu-item *ngFor="let action of overflowedActions">
+            <div class="dropdown-action">{{ action }}</div>
+          </pupa-dropdown-menu-item>
+        </pupa-dropdown-menu>
+      </div>
     </ng-container>
   </pupa-actions>
 </div>

@@ -1,13 +1,13 @@
 <div class="action-container">
   <pupa-actions [actions]="actions">
     <ng-container *pupaActionTemplate="let action">
-      <pupa-button kind="secondary" (click)="action.action()">{{ action.name }}</pupa-button>
+      <pupa-button kind="secondary">{{ action }}</pupa-button>
     </ng-container>
 
-    <ng-container *pupaActionDropdownTemplate="let action">
-      <pupa-dropdown-menu-item>
-        <div class="dropdown-action" (click)="action.action()">{{ action.name }}</div>
-      </pupa-dropdown-menu-item>
-    </ng-container>
+    <div #popoverAnchor *pupaActionMoreTriggerTemplate="let overflowedActions">
+      <pupa-button size="l" kind="secondary" (click)="openPopover(overflowedActions)">
+        ({{ overflowedActions.length }})
+      </pupa-button>
+    </div>
   </pupa-actions>
 </div>

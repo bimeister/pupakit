@@ -1,0 +1,15 @@
+.popover-header {
+  justify-content: flex-end;
+}
+
+.popover-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 52rem;
+}
+
+.popover-item {
+  max-width: 100%;
+  width: fit-content;
+}

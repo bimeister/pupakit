@@ -1,0 +1,13 @@
+<pupa-popover-layout>
+  <pupa-popover-layout-header class="popover-header">
+    <pupa-popover-layout-close-button>
+      <pupa-button-icon kind="secondary" icon="app-cross" size="s"></pupa-button-icon>
+    </pupa-popover-layout-close-button>
+  </pupa-popover-layout-header>
+  <pupa-popover-layout-body class="popover-body">
+    <pupa-tag *ngFor="let tag of tags" class="popover-item">
+      <pupa-tag-text>{{ tag }}</pupa-tag-text>
+      <pupa-icon name="app-close"></pupa-icon>
+    </pupa-tag>
+  </pupa-popover-layout-body>
+</pupa-popover-layout>

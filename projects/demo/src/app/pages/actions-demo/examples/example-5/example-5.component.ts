@@ -1,12 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN } from '@bimeister/pupakit.widgets';
+import { ChangeDetectionStrategy, Component, ElementRef, Injector, ViewChild, ViewEncapsulation } from '@angular/core';
+import { PopoversService } from '@bimeister/pupakit.overlays';
+import { PopoverLayoutComponent } from './popover-layout-basic/popover-layout.component';
 
 const ITEM_COUNT: number = 25;
-
-interface Action {
-  name: string;
-  action: (iterator: number) => void;
-}
 
 @Component({
   selector: 'demo-actions-example-5',
@@ -14,25 +10,25 @@ interface Action {
   styleUrls: ['./example-5.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    {
-      provide: ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN,
-      useValue: 'More actions',
-    },
-  ],
 })
 export class ActionsExample5Component {
-  public readonly actions: Action[] = [];
+  @ViewChild('popoverAnchor') public readonly popoverAnchorRef: ElementRef<HTMLElement>;
 
-  constructor() {
+  public readonly actions: string[] = [];
+
+  constructor(private readonly popoversService: PopoversService, private readonly injector: Injector) {
     for (let i: number = 1; i < ITEM_COUNT; i++) {
-      this.actions.push({
-        name: `Button ${i}`,
-        action() {
-          // eslint-disable-next-line no-console
-          console.log(`Click button №${i}`);
-        },
-      });
+      this.actions.push(`Button ${i}`);
     }
+  }
+
+  public openPopover(overflowedActions: string[]): void {
+    this.popoversService.open({
+      component: PopoverLayoutComponent,
+      anchor: this.popoverAnchorRef,
+      data: overflowedActions,
+      injector: this.injector,
+      hasBackdrop: false,
+    });
   }
 }

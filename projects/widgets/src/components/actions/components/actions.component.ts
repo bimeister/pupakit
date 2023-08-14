@@ -1,16 +1,13 @@
 import {
-  AfterContentInit,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
-  Optional,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
@@ -21,11 +18,9 @@ import { filterNotNil, isNil, Nullable, resizeObservable } from '@bimeister/util
 import { animationFrameScheduler, BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, observeOn, switchMap, withLatestFrom } from 'rxjs/operators';
 
-import { PupaActionDropdownTemplateDirective } from '../directives/action-dropdown-template.directive';
 import { PupaActionMoreTriggerTemplateDirective } from '../directives/action-more-trigger-template.directive';
 import { PupaActionTemplateDirective } from '../directives/action-template.directive';
 import { ActionContext } from '../../../declarations/interfaces/action-context.interface';
-import { ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN } from '../../../declarations/tokens/actions-default-more-button-trigger-text.token';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { DropdownMenuContextService } from '@bimeister/pupakit.kit';
 
@@ -40,12 +35,9 @@ const RESIZE_DEBOUNCE_TIME_MS: number = 200;
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [DropdownMenuContextService],
 })
-export class ActionsComponent<T> implements OnChanges, AfterViewInit, AfterContentInit, OnDestroy {
+export class ActionsComponent<T> implements OnChanges, AfterViewInit, OnDestroy {
   @Input()
   public actions: T[] = [];
-
-  @ViewChild('defaultTemplate', { static: true })
-  private readonly defaultTemplateRef: TemplateRef<ActionContext<T>>;
 
   @ViewChild('dropdownContainer')
   public readonly dropdownContainerRef: ElementRef<HTMLElement>;
@@ -59,13 +51,8 @@ export class ActionsComponent<T> implements OnChanges, AfterViewInit, AfterConte
   @ContentChild(PupaActionTemplateDirective)
   public readonly actionTemplate: PupaActionTemplateDirective<T>;
 
-  @ContentChild(PupaActionDropdownTemplateDirective)
-  public readonly actionDropdownTemplate: PupaActionDropdownTemplateDirective<T>;
-
   @ContentChild(PupaActionMoreTriggerTemplateDirective)
   private readonly actionMoreTriggerTemplate: PupaActionMoreTriggerTemplateDirective<T>;
-
-  public readonly defaultMoreButtonText: string = this.actionsDefaultMoreButtonText;
 
   public readonly renderActions$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly actionsTotalCount$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
@@ -98,19 +85,10 @@ export class ActionsComponent<T> implements OnChanges, AfterViewInit, AfterConte
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(
-    @Optional()
-    @Inject(ACTIONS_DEFAULT_MORE_BUTTON_TRIGGER_TEXT_TOKEN)
-    private readonly actionsDefaultMoreButtonText: string,
-    private readonly changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processActionsChanges(changes?.actions);
-  }
-
-  public ngAfterContentInit(): void {
-    this.checkActionDropdownTemplate();
   }
 
   public ngAfterViewInit(): void {
@@ -124,13 +102,7 @@ export class ActionsComponent<T> implements OnChanges, AfterViewInit, AfterConte
   }
 
   public getActionMoreTriggerTemplateRef(): TemplateRef<ActionContext<T>> {
-    return this.actionMoreTriggerTemplate?.templateRef ?? this.defaultTemplateRef;
-  }
-
-  private checkActionDropdownTemplate(): void {
-    if (isNil(this.actionDropdownTemplate?.templateRef)) {
-      throw Error('Using the pupaActionDropdownTemplate directive is a required for the component to work!');
-    }
+    return this.actionMoreTriggerTemplate?.templateRef;
   }
 
   private processActionsChanges(change: ComponentChange<this, T[]>): void {
