@@ -1,4 +1,4 @@
-.actions-wrapper {
+:host {
   display: flex;
   box-sizing: border-box;
   align-items: center;
@@ -6,7 +6,7 @@
 
 .actions-container {
   display: flex;
-  justify-content: flex-end;
+  justify-content: inherit;
   flex-wrap: wrap;
   flex: 1;
   overflow: hidden;

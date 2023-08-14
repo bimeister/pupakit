@@ -10,6 +10,7 @@ import { ActionsExample3Component } from './examples/example-3/example-3.compone
 import { ActionsExample4Component } from './examples/example-4/example-4.component';
 import { ActionsExample5Component } from './examples/example-5/example-5.component';
 import { ActionsExample6Component } from './examples/example-6/example-6.component';
+import { PopoverLayoutComponent } from './examples/example-5/popover-layout-basic/popover-layout.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ActionsExample6Component } from './examples/example-6/example-6.compone
     ActionsExample4Component,
     ActionsExample5Component,
     ActionsExample6Component,
+    PopoverLayoutComponent,
   ],
   imports: [DemoSharedModule, ActionsDemoRoutingModule],
 })

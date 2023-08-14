@@ -2,10 +2,19 @@
   <pupa-actions [actions]="actions">
     <div *pupaActionTemplate="let action" class="action">{{ action }}</div>
 
-    <pupa-dropdown-menu-item *pupaActionDropdownTemplate="let action">
-      <div class="dropdown-action">{{ action }}</div>
-    </pupa-dropdown-menu-item>
+    <div
+      *pupaActionMoreTriggerTemplate="let overflowedActions"
+      pupaDropdown
+      #dropdown="pupaDropdown"
+      class="dropdown-trigger"
+    >
+      Show more {{ overflowedActions.length }}
 
-    <div *pupaActionMoreTriggerTemplate="let count" class="dropdown-trigger">Show more {{ count }}</div>
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item *ngFor="let action of overflowedActions">
+          <div class="dropdown-action">{{ action }}</div>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
+    </div>
   </pupa-actions>
 </div>
