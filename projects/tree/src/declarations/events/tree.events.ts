@@ -47,9 +47,11 @@ export namespace TreeEvents {
 
   export class ExpandWhileDragging extends TreeEventBase<string> {}
 
-  export class RemoveChildren extends TreeEventBase<string> {}
-
   export class SetExpanded extends TreeEventBase<string[]> {}
 
-  export class SetChildren extends TreeEventBase<SetChildrenEventPayload> {}
+  export class AddChildren extends TreeEventBase<SetChildrenEventPayload> {}
+
+  export class ResetChildren extends TreeEventBase<SetChildrenEventPayload> {}
+
+  export class RemoveChildren extends TreeEventBase<string> {}
 }

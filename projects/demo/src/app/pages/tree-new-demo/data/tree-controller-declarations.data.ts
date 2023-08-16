@@ -28,10 +28,16 @@ export class TreeController {
   public getDataDisplayCollectionRef(): TreeDataDisplayCollectionRef
 
   /*
-   Uses to set children of the selected tree item.
+   Uses to add children to the selected tree item.
    Input parameters are the ID of the selected tree item and an array of children.
   */
-  public setChildren(treeItemId: string, children: FlatTreeItem[]): void
+  public addChildren(treeItemId: string, children: FlatTreeItem[]): void
+
+  /*
+   Uses to add children to the selected tree item with purging previously set children.
+   Input parameters are the ID of the selected tree item and an array of children.
+  */
+  public resetChildren(treeItemId: string, children: FlatTreeItem[]): void
 
   /*
    Uses to remove children from the selected tree item.

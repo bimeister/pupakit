@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { FlatTreeItem, TreeController, TreeEvents } from '@bimeister/pupakit.tree';
 import { Subscription } from 'rxjs';
 import { DATA as treeData } from '../../../tree-new-demo/examples/example-tree.data';
@@ -78,14 +78,14 @@ export class ResizerDemoExample2Component implements OnDestroy {
   }
 
   public initController(): void {
-    this.controller.setChildren(null, this.fetch());
+    this.controller.addChildren(null, this.fetch());
   }
 
   private setChildrenOnExpand(): Subscription {
     return this.controller
       .getEvents(TreeEvents.Expand)
       .subscribe((event: TreeEvents.Expand) =>
-        this.controller.setChildren(event.payload.id, this.fetch(event.payload.id))
+        this.controller.addChildren(event.payload.id, this.fetch(event.payload.id))
       );
   }
 
