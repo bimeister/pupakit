@@ -24,7 +24,8 @@ export class DefaultTreeEventHandler {
     this.subscription.add(this.getSubscriptionForRemoveItem());
     this.subscription.add(this.getSubscriptionForScrollTo());
     this.subscription.add(this.getSubscriptionForRemoveChildren());
-    this.subscription.add(this.getSubscriptionForSetChildren());
+    this.subscription.add(this.getSubscriptionForAddChildren());
+    this.subscription.add(this.getSubscriptionForResetChildren());
   }
 
   protected getSubscriptionToSetData(): Subscription {
@@ -113,11 +114,20 @@ export class DefaultTreeEventHandler {
       .pipe(filter((event: TreeEvents.TreeEventBase): event is E => event instanceof eventType));
   }
 
-  private getSubscriptionForSetChildren(): Subscription {
-    return this.getEvents(TreeEvents.SetChildren)
+  private getSubscriptionForAddChildren(): Subscription {
+    return this.getEvents(TreeEvents.AddChildren)
       .pipe(withLatestFrom(this.dataDisplayCollection.data$, this.dataDisplayCollection.expandedIdsList$))
-      .subscribe(([event, data, expandedIdsList]: [TreeEvents.SetChildren, FlatTreeItem[], string[]]) => {
-        this.setChildren(event.payload.treeItemId, event.payload.children, data, expandedIdsList);
+      .subscribe(([event, data, expandedIdsList]: [TreeEvents.AddChildren, FlatTreeItem[], string[]]) => {
+        this.addChildren(event.payload.treeItemId, event.payload.children, data, expandedIdsList);
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
+      });
+  }
+
+  private getSubscriptionForResetChildren(): Subscription {
+    return this.getEvents(TreeEvents.ResetChildren)
+      .pipe(withLatestFrom(this.dataDisplayCollection.data$, this.dataDisplayCollection.expandedIdsList$))
+      .subscribe(([event, data, expandedIdsList]: [TreeEvents.AddChildren, FlatTreeItem[], string[]]) => {
+        this.resetChildren(event.payload.treeItemId, event.payload.children, data, expandedIdsList);
         this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id));
       });
   }
@@ -131,7 +141,7 @@ export class DefaultTreeEventHandler {
       });
   }
 
-  private setChildren(
+  private addChildren(
     parentId: string,
     children: FlatTreeItem[],
     data: FlatTreeItem[],
@@ -173,6 +183,16 @@ export class DefaultTreeEventHandler {
     const newExpandedList: string[] = [...noExpandedChildrenList, parent.id];
     this.eventBus.dispatch(new TreeEvents.SetData(dataWithChildren));
     this.eventBus.dispatch(new TreeEvents.SetExpanded(newExpandedList));
+  }
+
+  private resetChildren(
+    parentId: string,
+    children: FlatTreeItem[],
+    data: FlatTreeItem[],
+    expandedIdsList: string[]
+  ): void {
+    this.removeChildren(parentId, data, expandedIdsList);
+    this.addChildren(parentId, children, data, expandedIdsList);
   }
 
   private removeItemWithChildren(removeItemId: string, data: FlatTreeItem[], expanded: string[]): void {

@@ -65,8 +65,12 @@ export class TreeController {
     this.eventBus.dispatch(new TreeEvents.Expand(treeItem));
   }
 
-  public setChildren(treeItemId: string, children: FlatTreeItem[]): void {
-    this.dispatchInQueue(new TreeEvents.SetChildren({ treeItemId, children }));
+  public addChildren(treeItemId: string, children: FlatTreeItem[]): void {
+    this.dispatchInQueue(new TreeEvents.AddChildren({ treeItemId, children }));
+  }
+
+  public resetChildren(treeItemId: string, children: FlatTreeItem[]): void {
+    this.dispatchInQueue(new TreeEvents.ResetChildren({ treeItemId, children }));
   }
 
   public removeChildren(treeItemId: string): void {
