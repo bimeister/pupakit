@@ -1,16 +1,8 @@
-@use 'functions' as *;
 @use 'mixins' as *;
+@use 'functions' as *;
 
-.container {
+:host {
   display: flex;
-  flex-direction: column;
-  gap: 5rem;
-}
-
-.tooltip-demo {
-  &__info-block {
-    margin-top: 20px;
-  }
 }
 
 .text-container {
@@ -19,7 +11,7 @@
   margin: 4rem 0;
 
   &__block {
-    max-width: 60rem;
+    max-width: 25rem;
     border: 1px dashed semantic-color(lines-normal);
 
     padding: 2rem;

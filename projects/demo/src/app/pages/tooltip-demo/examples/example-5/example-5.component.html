@@ -1,0 +1,18 @@
+<div class="text-container">
+  <div class="text-container__block">
+    <div
+      class="text-container__item"
+      [pupaTooltip]="'Text that will be truncated because it wont fit in the width'"
+      [tooltipAppearance]="'always'"
+    >
+      Text that will be truncated because it won't fit in the width
+    </div>
+  </div>
+  <div
+    class="text-container__other-item"
+    [pupaTooltip]="'Text that wont be trimmed because it will fit in the width'"
+    [tooltipAppearance]="'truncate'"
+  >
+    Text that won't be trimmed because it will fit in the width
+  </div>
+</div>

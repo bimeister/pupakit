@@ -51,6 +51,7 @@ export class SidebarComponent {
         { title: 'Section', link: '/kit/section' },
         { title: 'Card', link: '/kit/card' },
         { title: 'Tag', link: '/kit/tag' },
+        { title: 'Tooltip', link: '/kit/tooltip' },
         { title: 'Status', link: '/kit/status' },
         { title: 'Tabs', link: '/kit/tabs' },
         { title: 'Button Group', link: '/kit/button-group' },
