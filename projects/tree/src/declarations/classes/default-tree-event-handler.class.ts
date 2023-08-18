@@ -1,7 +1,7 @@
 import { Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { QueueEvents } from '@bimeister/pupakit.common';
-import { isNil } from '@bimeister/utilities';
+import { isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { filter, mapTo, switchMap, withLatestFrom } from 'rxjs/operators';
 import { TreeEvents } from '../events/tree.events';
@@ -147,40 +147,10 @@ export class DefaultTreeEventHandler {
     data: FlatTreeItem[],
     expandedIdsList: string[]
   ): void {
-    if (isNil(parentId)) {
-      const newData: FlatTreeItem[] = children.map((treeItem: FlatTreeItem) => ({ ...treeItem, level: 0 }));
-      this.eventBus.dispatch(new TreeEvents.SetData(newData));
-      this.eventBus.dispatch(new TreeEvents.SetExpanded([]));
+    const [dataWithChildren, newExpandedList] = this.getAddedChildren(parentId, children, data, expandedIdsList);
+    if (isEmpty(dataWithChildren) && isEmpty(newExpandedList)) {
       return;
     }
-    const parentIsExpanded: boolean = expandedIdsList.includes(parentId);
-    if (parentIsExpanded) {
-      return;
-    }
-    const parent: FlatTreeItem = DefaultTreeEventHandler.getTreeItem(parentId, data);
-    const isExpanded: boolean = expandedIdsList.includes(parentId);
-    if (isNil(parent) || isExpanded) {
-      return;
-    }
-    const childrenIdsSet: Set<string> = new Set();
-    const childrenWithLevel: FlatTreeItem[] = children.map((childItem: FlatTreeItem) => {
-      childrenIdsSet.add(childItem.id);
-      return {
-        ...childItem,
-        level: Number(parent.level) + 1,
-      };
-    });
-    const parentIndex: number = data.indexOf(parent);
-    const dataWithChildren: FlatTreeItem[] = [
-      ...data.slice(0, parentIndex),
-      parent,
-      ...childrenWithLevel,
-      ...data.slice(parentIndex + 1),
-    ];
-    const noExpandedChildrenList: string[] = expandedIdsList.filter(
-      (expandedTreeItemId: string) => !childrenIdsSet.has(expandedTreeItemId)
-    );
-    const newExpandedList: string[] = [...noExpandedChildrenList, parent.id];
     this.eventBus.dispatch(new TreeEvents.SetData(dataWithChildren));
     this.eventBus.dispatch(new TreeEvents.SetExpanded(newExpandedList));
   }
@@ -191,8 +161,22 @@ export class DefaultTreeEventHandler {
     data: FlatTreeItem[],
     expandedIdsList: string[]
   ): void {
-    this.removeChildren(parentId, data, expandedIdsList);
-    this.addChildren(parentId, children, data, expandedIdsList);
+    const [newData, expandedIds] = this.getAddedChildren(parentId, children, data, expandedIdsList, true);
+    if (isEmpty(newData) && isEmpty(expandedIds)) {
+      return;
+    }
+    this.eventBus.dispatch(new TreeEvents.SetData(newData));
+    this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedIds));
+  }
+
+  private removeChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): void {
+    const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
+      parentId,
+      data,
+      expanded
+    );
+    this.eventBus.dispatch(new TreeEvents.SetData(dataWithoutChildren));
+    this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
   }
 
   private removeItemWithChildren(removeItemId: string, data: FlatTreeItem[], expanded: string[]): void {
@@ -214,14 +198,80 @@ export class DefaultTreeEventHandler {
     this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
   }
 
-  private removeChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): void {
-    const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
-      parentId,
-      data,
-      expanded
+  private getAddedChildren(
+    parentId: string,
+    children: FlatTreeItem[],
+    data: FlatTreeItem[],
+    expandedIdsList: string[],
+    shouldResetChildren?: boolean
+  ): [FlatTreeItem[], string[]] {
+    if (isNil(parentId)) {
+      const newData: FlatTreeItem[] = children.map((treeItem: FlatTreeItem) => ({ ...treeItem, level: 0 }));
+      return [newData, []];
+    }
+
+    const parentIsExpanded: boolean = expandedIdsList.includes(parentId);
+    if (parentIsExpanded) {
+      return [[], []];
+    }
+
+    const parent: FlatTreeItem = DefaultTreeEventHandler.getTreeItem(parentId, data);
+    const isExpanded: boolean = expandedIdsList.includes(parentId);
+    if (isNil(parent) || isExpanded) {
+      return [[], []];
+    }
+
+    const childrenIdsSet: Set<string> = new Set();
+    const childrenWithLevel: FlatTreeItem[] = children.map((childItem: FlatTreeItem) => {
+      childrenIdsSet.add(childItem.id);
+      return {
+        ...childItem,
+        level: Number(parent.level) + 1,
+      };
+    });
+
+    const noExpandedChildrenList: string[] = expandedIdsList.filter(
+      (expandedTreeItemId: string) => !childrenIdsSet.has(expandedTreeItemId)
     );
-    this.eventBus.dispatch(new TreeEvents.SetData(dataWithoutChildren));
-    this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
+    const newExpandedList: string[] = [...noExpandedChildrenList, parent.id];
+
+    const parentIndex: number = data.indexOf(parent);
+
+    if (shouldResetChildren) {
+      const existingChildren: FlatTreeItem[] = this.getParentNodeChildren(data, parent, parentIndex);
+      const existingChildrenIdsSet: Set<string> = new Set<string>(
+        existingChildren.map((child: FlatTreeItem) => child.id)
+      );
+      const extraChildren: FlatTreeItem[] = children.reduce((acc: FlatTreeItem[], child: FlatTreeItem) => {
+        if (!existingChildrenIdsSet.has(child.id)) {
+          acc.push({ ...child, level: Number(parent.level) + 1 });
+        }
+        return acc;
+      }, []);
+      const newTreeData: FlatTreeItem[] = [
+        ...data.slice(0, parentIndex),
+        parent,
+        ...extraChildren,
+        ...data.slice(parentIndex + 1),
+      ];
+      return [newTreeData, newExpandedList];
+    }
+
+    const dataWithChildren: FlatTreeItem[] = [
+      ...data.slice(0, parentIndex),
+      parent,
+      ...childrenWithLevel,
+      ...data.slice(parentIndex + 1),
+    ];
+    return [dataWithChildren, newExpandedList];
+  }
+
+  private getParentNodeChildren(data: FlatTreeItem[], parent: FlatTreeItem, parentIndex: number): FlatTreeItem[] {
+    const dataAfterParent: FlatTreeItem[] = data.slice(parentIndex + 1);
+    const nextNonChildIndex: number = dataAfterParent.findIndex(
+      (dataItem: FlatTreeItem) => dataItem.level <= parent.level
+    );
+    return dataAfterParent.slice(0, nextNonChildIndex);
   }
 
   private getRemovedChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): [FlatTreeItem[], string[]] {
