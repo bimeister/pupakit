@@ -7,6 +7,10 @@
       <demo-tooltip-example-1 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-1>
     </pupa-code-container>
 
+    <pupa-code-container [content]="example5Content">
+      <demo-tooltip-example-5 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-5>
+    </pupa-code-container>
+
     <h3 demoAnchor>Tooltip with custom template</h3>
     <pupa-code-container [content]="example2Content">
       <demo-tooltip-example-2 *pupaCodeContainerPreviewTemplate></demo-tooltip-example-2>
@@ -40,16 +44,37 @@
 
   <div *demoPageTab="'api'">
     <demo-example-viewer-content>
-      <pupa-button-icon
-        #tooltip="pupaTooltip"
-        [pupaTooltip]="'Tooltip simple content here!'"
-        [icon]="'app-notification'"
-        [tooltipContentTemplate]="(tooltipContent$ | async) ? customTooltipTemplate : ''"
-        [tooltipHideOnHover]="tooltipHideOnHover$ | async"
-        [tooltipDisabled]="disabledControl$ | async"
-        [active]="tooltip.isOpened$ | async"
-      >
-      </pupa-button-icon>
+      <div class="container">
+        <pupa-button-icon
+          #tooltip="pupaTooltip"
+          [pupaTooltip]="'Tooltip simple content here!'"
+          [icon]="'app-notification'"
+          [tooltipContentTemplate]="(tooltipContent$ | async) ? customTooltipTemplate : ''"
+          [tooltipHideOnHover]="tooltipHideOnHover$ | async"
+          [tooltipDisabled]="disabledControl$ | async"
+          [active]="tooltip.isOpened$ | async"
+        >
+        </pupa-button-icon>
+
+        <div class="text-container">
+          <div class="text-container__block">
+            <div
+              class="text-container__item"
+              [pupaTooltip]="'Text that will be truncated because it wont fit in the width'"
+              [tooltipAppearance]="tooltipAppearance$ | async"
+            >
+              Text that will be truncated because it won't fit in the width
+            </div>
+          </div>
+          <div
+            class="text-container__other-item"
+            [pupaTooltip]="'Text that wont be trimmed because it will fit in the width'"
+            [tooltipAppearance]="tooltipAppearance$ | async"
+          >
+            Text that won't be trimmed because it will fit in the width
+          </div>
+        </div>
+      </div>
     </demo-example-viewer-content>
 
     <demo-example-viewer-section>
@@ -77,6 +102,13 @@
       <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
         <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
         <demo-props-switcher #disabledControl$></demo-props-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property decoratorName="input" name="tooltipAppearance" type="TooltipAppearance">
+        <ng-container *demoExampleViewerPropertyDescription>
+          Display the tooltip depending on whether the context is truncated or not. By default it is always displayed.
+        </ng-container>
+        <demo-props-select #tooltipAppearance$ [options]="tooltipAppearanceOptions"></demo-props-select>
       </demo-example-viewer-property>
 
       <demo-example-viewer-property decoratorName="input" name="tooltipDelayMs" type="number">

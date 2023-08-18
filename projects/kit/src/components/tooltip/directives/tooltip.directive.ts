@@ -1,9 +1,10 @@
 import { AfterViewInit, Directive, ElementRef, Input, OnChanges, OnDestroy, TemplateRef } from '@angular/core';
 import { ComponentChange, ComponentChanges, isTabletDevice } from '@bimeister/pupakit.common';
 import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
-import { fromEvent, Observable, Subscription } from 'rxjs';
+import { EMPTY, fromEvent, Observable, Subscription } from 'rxjs';
 import { delay, filter, switchMap, take, tap } from 'rxjs/operators';
 import { TOOLTIP_SERVICE_TOKEN } from '../../../declarations/tokens/tooltip-service.token';
+import { TooltipAppearance } from '../../../declarations/types/tooltip-appearance.type';
 import { TooltipService } from '../services/tooltip.service';
 
 @Directive({
@@ -21,6 +22,7 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   @Input() public tooltipHideOnHover: boolean = true;
   @Input() public tooltipDisabled: boolean = false;
   @Input() public tooltipDelayMs: number = 0;
+  @Input() public tooltipAppearance: TooltipAppearance = 'always';
 
   @Input() public pupaTooltip: Nullable<string> = null;
   @Input() public tooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
@@ -105,9 +107,7 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   private processTriggerMouseEnterEvent(): Subscription {
     return this.triggerMouseEnter$
       .pipe(
-        tap(() => {
-          this.isMouseOverElement = true;
-        }),
+        tap(() => (this.isMouseOverElement = true)),
         delay(this.tooltipDelayMs),
         filter(() => this.isMouseOverElement),
         switchMap(() =>
@@ -116,11 +116,20 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
             filterFalsy(),
             filter(() => !Boolean(isTabletDevice()))
           )
-        )
+        ),
+        switchMap(() => {
+          if (this.tooltipAppearance === 'truncate') {
+            return this.isTextTruncated(this.triggerRef.nativeElement) ? this.isDisabled$ : EMPTY;
+          }
+
+          return this.isDisabled$;
+        })
       )
-      .subscribe(() => {
-        this.tooltipService.processTriggerMouseEnter();
-      });
+      .subscribe(() => this.tooltipService.processTriggerMouseEnter());
+  }
+
+  private isTextTruncated(element: HTMLElement): boolean {
+    return element.scrollWidth > element.clientWidth;
   }
 
   private processTriggerMouseLeaveEvent(): Subscription {

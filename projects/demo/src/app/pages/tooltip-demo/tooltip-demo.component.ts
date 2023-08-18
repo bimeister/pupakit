@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'tooltip-demo/examples';
 const DEFAULT_VALUE: string = `
@@ -47,6 +48,22 @@ export class TooltipDemoComponent {
   public readonly example4Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
   };
+
+  public readonly example5Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
+  };
+
+  public readonly tooltipAppearanceOptions: PropsOption[] = [
+    {
+      caption: 'Always',
+      value: 'always',
+      isDefault: true,
+    },
+    {
+      caption: 'Truncate',
+      value: 'truncate',
+    },
+  ];
 
   constructor(private readonly domSanitizer: DomSanitizer) {}
 
