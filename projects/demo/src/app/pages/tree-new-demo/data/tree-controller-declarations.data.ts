@@ -34,7 +34,7 @@ export class TreeController {
   public addChildren(treeItemId: string, children: FlatTreeItem[]): void
 
   /*
-   Uses to add children to the selected tree item with purging previously set children.
+   Uses to add children to the selected tree item with preventing adding previously added children.
    Input parameters are the ID of the selected tree item and an array of children.
   */
   public resetChildren(treeItemId: string, children: FlatTreeItem[]): void

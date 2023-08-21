@@ -147,7 +147,12 @@ export class DefaultTreeEventHandler {
     data: FlatTreeItem[],
     expandedIdsList: string[]
   ): void {
-    const [dataWithChildren, newExpandedList] = this.getAddedChildren(parentId, children, data, expandedIdsList);
+    const [dataWithChildren, newExpandedList]: [FlatTreeItem[], string[]] = this.getAddedChildren(
+      parentId,
+      children,
+      data,
+      expandedIdsList
+    );
     if (isEmpty(dataWithChildren) && isEmpty(newExpandedList)) {
       return;
     }
@@ -161,7 +166,13 @@ export class DefaultTreeEventHandler {
     data: FlatTreeItem[],
     expandedIdsList: string[]
   ): void {
-    const [newData, expandedIds] = this.getAddedChildren(parentId, children, data, expandedIdsList, true);
+    const [newData, expandedIds]: [FlatTreeItem[], string[]] = this.getAddedChildren(
+      parentId,
+      children,
+      data,
+      expandedIdsList,
+      true
+    );
     if (isEmpty(newData) && isEmpty(expandedIds)) {
       return;
     }
@@ -173,7 +184,7 @@ export class DefaultTreeEventHandler {
     const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
       parentId,
       data,
-      expanded
+      expandedIds
     );
     this.eventBus.dispatch(new TreeEvents.SetData(dataWithoutChildren));
     this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedWithoutChildren));
@@ -183,13 +194,13 @@ export class DefaultTreeEventHandler {
     const treeItemExists: boolean = DefaultTreeEventHandler.treeItemExists(removeItemId, data);
     if (!treeItemExists) {
       this.eventBus.dispatch(new TreeEvents.SetData(data));
-      this.eventBus.dispatch(new TreeEvents.SetExpanded(expanded));
+      this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedIds));
       return;
     }
     const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
       removeItemId,
       data,
-      expanded
+      expandedIds
     );
     const dataWithoutRemovedItem: FlatTreeItem[] = dataWithoutChildren.filter(
       (treeItem: FlatTreeItem) => treeItem.id !== removeItemId
@@ -271,7 +282,7 @@ export class DefaultTreeEventHandler {
     const nextNonChildIndex: number = dataAfterParent.findIndex(
       (dataItem: FlatTreeItem) => dataItem.level <= parent.level
     );
-    return dataAfterParent.slice(0, nextNonChildIndex);
+    return dataAfterParent.slice(0, nextNonChildIndex === -1 ? dataAfterParent.length : nextNonChildIndex);
   }
 
   private getRemovedChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): [FlatTreeItem[], string[]] {
