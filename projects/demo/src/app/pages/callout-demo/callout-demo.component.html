@@ -15,9 +15,9 @@
   <div *demoPageTab="'api'">
     <demo-example-viewer>
       <demo-example-viewer-content>
-        <pupa-callout [variant]="variant$ | async" [isClosable]="isClosable$ | async">{{
-          variant$ | async
-        }}</pupa-callout>
+        <pupa-callout [variant]="variant$ | async" [isClosable]="isClosable$ | async">
+          {{ variant$ | async }}
+        </pupa-callout>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
