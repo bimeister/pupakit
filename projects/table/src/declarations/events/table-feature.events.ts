@@ -1,23 +1,23 @@
-import { TableColumnSorting } from '../enums/table-column-sorting.enum';
+import { TableSort } from '../interfaces/table-sort.interface';
 import { TableEvents } from './table.events';
 
 export namespace TableFeatureEvents {
   export class TableFeatureEventBase extends TableEvents.TableEventBase {}
 
-  export class ColumnSortingChanged extends TableFeatureEventBase {
-    constructor(public readonly sorting: TableColumnSorting, public readonly columnId: string) {
+  export class ColumnSortingChanged<T extends string = string> extends TableFeatureEventBase {
+    constructor(public readonly tableSort: TableSort<T>) {
       super();
     }
   }
 
-  export class ToggleColumnSorting extends TableFeatureEventBase {
-    constructor(public columnId: string) {
+  export class ToggleColumnSorting<T extends string = string> extends TableFeatureEventBase {
+    constructor(public columnId: T) {
       super();
     }
   }
 
-  export class SetColumnSorting extends TableFeatureEventBase {
-    constructor(public columnId: string, public readonly sorting: TableColumnSorting) {
+  export class SetColumnSorting<T extends string = string> extends TableFeatureEventBase {
+    constructor(public readonly tableSort: TableSort<T>) {
       super();
     }
   }

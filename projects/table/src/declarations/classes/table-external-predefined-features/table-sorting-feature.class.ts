@@ -13,6 +13,7 @@ import { TableEventTargetCellData } from '../../interfaces/table-event-target-ce
 import { TableFeature } from '../../interfaces/table-feature.interface';
 import { isTableColumnSortingOptions } from '../../type-guards/is-table-column-sorting-options.type-guard';
 import { TableColumn } from '../table-column.class';
+import { TableSort } from '../../interfaces/table-sort.interface';
 
 export class TableSortingFeature<T> implements TableFeature {
   private readonly eventBus: EventBus = this.api.eventBus;
@@ -145,7 +146,7 @@ export class TableSortingFeature<T> implements TableFeature {
       .pipe(
         filterByInstanceOf(TableFeatureEvents.SetColumnSorting),
         map((event: TableFeatureEvents.SetColumnSorting) => {
-          this.setSorting(event.columnId, event.sorting);
+          this.setSorting(event.tableSort);
           return event;
         })
       )
@@ -201,19 +202,20 @@ export class TableSortingFeature<T> implements TableFeature {
             ? sortings[newIndex + 1]
             : sortings[newIndex];
 
-        this.setSorting(columnId, newSorting);
+        this.setSorting({ columnId, sort: newSorting });
       });
   }
 
-  private setSorting(columnId: string, sorting: TableColumnSorting): void {
+  private setSorting(tableSort: TableSort): void {
+    const { columnId, sort }: TableSort = tableSort;
     const currentSorting: TableColumnSorting = this.columnIdToColumnSortingStateMap.get(columnId);
 
-    if (currentSorting === sorting) {
+    if (currentSorting === sort) {
       return;
     }
 
-    this.columnIdToColumnSortingStateMap.set(columnId, sorting);
-    this.eventBus.dispatch(new TableFeatureEvents.ColumnSortingChanged(sorting, columnId));
+    this.columnIdToColumnSortingStateMap.set(columnId, sort);
+    this.eventBus.dispatch(new TableFeatureEvents.ColumnSortingChanged(tableSort));
     this.columnIdToColumnMap$
       .pipe(
         take(1),
@@ -221,7 +223,7 @@ export class TableSortingFeature<T> implements TableFeature {
         filterNotNil()
       )
       .subscribe((column: TableColumn) => {
-        column.dispatchEvent(new TableColumnEvents.SortingChanged(sorting));
+        column.dispatchEvent(new TableColumnEvents.SortingChanged(sort));
       });
   }
 }

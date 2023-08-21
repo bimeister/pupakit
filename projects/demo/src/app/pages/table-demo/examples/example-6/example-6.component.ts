@@ -148,7 +148,9 @@ export class TableExample6Component implements OnDestroy {
   }
 
   public resetAgeSorting(): void {
-    this.controller.dispatchFeatureEvent(new TableFeatureEvents.SetColumnSorting('age', TableColumnSorting.None));
+    this.controller.dispatchFeatureEvent(
+      new TableFeatureEvents.SetColumnSorting({ columnId: 'age', sort: TableColumnSorting.None })
+    );
   }
 
   public highlightSecondRow(): void {
@@ -181,14 +183,14 @@ export class TableExample6Component implements OnDestroy {
       .subscribe((event: TableFeatureEvents.ColumnSortingChanged) => {
         this.columnSortingChanged$.next(event);
 
-        if (event.sorting === TableColumnSorting.Asc) {
-          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
+        if (event.tableSort.sort === TableColumnSorting.Asc) {
+          const column: TableColumnDefinition = COLUMNS_MAP.get(event.tableSort.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'ascending'));
           return;
         }
 
-        if (event.sorting === TableColumnSorting.Desc) {
-          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
+        if (event.tableSort.sort === TableColumnSorting.Desc) {
+          const column: TableColumnDefinition = COLUMNS_MAP.get(event.tableSort.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'descending'));
           return;
         }

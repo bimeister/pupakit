@@ -119,15 +119,15 @@ export class TableExample2Component implements OnDestroy {
   private processSortingChanges(): Subscription {
     return this.controller
       .getEvents(TableFeatureEvents.ColumnSortingChanged)
-      .subscribe((event: TableFeatureEvents.ColumnSortingChanged) => {
-        if (event.sorting === TableColumnSorting.Asc) {
-          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
+      .subscribe(({ tableSort }: TableFeatureEvents.ColumnSortingChanged) => {
+        if (tableSort.sort === TableColumnSorting.Asc) {
+          const column: TableColumnDefinition = COLUMNS_MAP.get(tableSort.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'ascending'));
           return;
         }
 
-        if (event.sorting === TableColumnSorting.Desc) {
-          const column: TableColumnDefinition = COLUMNS_MAP.get(event.columnId);
+        if (tableSort.sort === TableColumnSorting.Desc) {
+          const column: TableColumnDefinition = COLUMNS_MAP.get(tableSort.columnId);
           this.controller.setData(sortByProperty(DATA, column.modelKey, 'descending'));
           return;
         }
