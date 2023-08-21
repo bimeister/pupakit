@@ -169,7 +169,7 @@ export class DefaultTreeEventHandler {
     this.eventBus.dispatch(new TreeEvents.SetExpanded(expandedIds));
   }
 
-  private removeChildren(parentId: string, data: FlatTreeItem[], expanded: string[]): void {
+  private removeChildren(parentId: string, data: FlatTreeItem[], expandedIds: string[]): void {
     const [dataWithoutChildren, expandedWithoutChildren]: [FlatTreeItem[], string[]] = this.getRemovedChildren(
       parentId,
       data,
