@@ -110,19 +110,18 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
         tap(() => (this.isMouseOverElement = true)),
         delay(this.tooltipDelayMs),
         filter(() => this.isMouseOverElement),
-        switchMap(() =>
-          this.isDisabled$.pipe(
+        switchMap(() => {
+          const isDisabled$: Observable<boolean> = this.isDisabled$.pipe(
             take(1),
             filterFalsy(),
             filter(() => !Boolean(isTabletDevice()))
-          )
-        ),
-        switchMap(() => {
+          );
+
           if (this.tooltipAppearance === 'truncate') {
-            return this.isTextTruncated(this.triggerRef.nativeElement) ? this.isDisabled$ : EMPTY;
+            return this.isTextTruncated(this.triggerRef.nativeElement) ? isDisabled$ : EMPTY;
           }
 
-          return this.isDisabled$;
+          return isDisabled$;
         })
       )
       .subscribe(() => this.tooltipService.processTriggerMouseEnter());
