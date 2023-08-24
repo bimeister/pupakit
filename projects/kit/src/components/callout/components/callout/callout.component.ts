@@ -1,4 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  appAttentionFilledIcon,
+  appCheckRoundFilledIcon,
+  appErrorFilledIcon,
+  appInfoFilledIcon,
+} from '@bimeister/pupakit.icons';
 import { BehaviorSubject } from 'rxjs';
 
 type CalloutType = 'info' | 'success' | 'warning' | 'danger';
@@ -17,10 +23,10 @@ export class PupaCalloutComponent {
   public readonly isShown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   public readonly icons: Map<CalloutType, string> = new Map<CalloutType, string>([
-    ['info', 'app-info-filled'],
-    ['success', 'app-check-round-filled'],
-    ['warning', 'app-attention-filled'],
-    ['danger', 'app-error-filled'],
+    ['info', appInfoFilledIcon.name],
+    ['success', appCheckRoundFilledIcon.name],
+    ['warning', appAttentionFilledIcon.name],
+    ['danger', appErrorFilledIcon.name],
   ]);
 
   public closeCallout(): void {
