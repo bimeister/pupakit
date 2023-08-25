@@ -6,7 +6,7 @@ import { ActionContext } from '../../../declarations/interfaces/action-context.i
   selector: '[pupaActionTemplate]',
 })
 export class PupaActionTemplateDirective<T> {
-  @Input() public pupaActionTemplate: T;
+  @Input() public pupaActionTemplateTypeFrom: T;
 
   constructor(public readonly templateRef: TemplateRef<ActionContext<T>>) {}
 }
