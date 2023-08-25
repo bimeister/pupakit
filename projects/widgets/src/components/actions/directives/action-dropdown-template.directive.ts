@@ -6,7 +6,7 @@ import { ActionContext } from '../../../declarations/interfaces/action-context.i
   selector: '[pupaActionDropdownTemplate]',
 })
 export class PupaActionDropdownTemplateDirective<T> {
-  @Input() public pupaActionDropdownTemplate: T;
+  @Input() public pupaActionDropdownTemplateTypeFrom: T;
 
   constructor(public readonly templateRef: TemplateRef<ActionContext<T>>) {}
 }
