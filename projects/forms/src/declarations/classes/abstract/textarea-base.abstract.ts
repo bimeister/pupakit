@@ -1,15 +1,15 @@
 import { Directive, ElementRef, EventEmitter, Input, OnChanges, Optional, Output, ViewChild } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import {
+  Nullable,
   distinctUntilSerializedChanged,
   filterNotNil,
   filterTruthy,
   isNil,
-  Nullable,
   shareReplayWithRefCount,
 } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { TextareaCounterVisibility } from '../../types/textarea-counter-visibility-mode.type';
 import { TextareaSize } from '../../types/textarea-size.type';
@@ -26,6 +26,8 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @ViewChild('textarea')
   protected readonly textareaElementRef: ElementRef<HTMLTextAreaElement>;
+
+  @Input() public formControl: FormControl;
 
   @Input() public size: TextareaSize = 'medium';
   public readonly size$: BehaviorSubject<TextareaSize> = new BehaviorSubject<TextareaSize>('medium');
@@ -129,6 +131,7 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processFormControlChange(changes?.formControl);
     this.processSizeChange(changes?.size);
     this.processPlaceholderChange(changes?.placeholder);
     this.processAutocompleteChange(changes?.autocomplete);
@@ -165,6 +168,16 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
       return;
     }
     event.preventDefault();
+  }
+
+  private processFormControlChange(change: ComponentChange<this, FormControl>): void {
+    const updatedValue: FormControl | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.setControlRef(this.ngControl);
   }
 
   private processSizeChange(change: ComponentChange<this, TextareaSize>): void {

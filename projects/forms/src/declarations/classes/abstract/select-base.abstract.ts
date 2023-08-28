@@ -1,5 +1,5 @@
-import { Directive, EventEmitter, OnChanges, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
+import { Directive, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, TemplateRef } from '@angular/core';
+import { ControlValueAccessor, FormControl, NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { Nullable, filterNotNil, isEmpty, isNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
@@ -27,13 +27,18 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
 
   public readonly isTriggerTouched$: Observable<boolean> = this.selectStateService.isTriggerTouched$;
 
+  @Input() public formControl: FormControl;
+
   @Output() public readonly focus: EventEmitter<void> = new EventEmitter<void>();
   @Output() public readonly blur: EventEmitter<void> = new EventEmitter<void>();
   @Output() public readonly reset: EventEmitter<void> = this.selectStateService.resetOutput;
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(protected readonly selectStateService: SelectStateServiceDeclaration<T>, ngControl: NgControl) {
+  constructor(
+    protected readonly selectStateService: SelectStateServiceDeclaration<T>,
+    protected readonly ngControl: NgControl
+  ) {
     if (isNil(ngControl)) {
       return;
     }
@@ -57,6 +62,7 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processFormControlChange(changes?.formControl);
     this.processIsMultiSelectionEnabledValueChange(changes?.isMultiSelectionEnabled);
     this.processIsUnselectionEnabledValueChange(changes?.isUnselectionEnabled);
     this.processIsPatchedValueChange(changes?.isPatched);
@@ -90,6 +96,16 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
 
   public setDisabledState(isDisabled: boolean): void {
     this.selectStateService.setDisabledState(isDisabled);
+  }
+
+  private processFormControlChange(change: ComponentChange<this, FormControl>): void {
+    const updatedValue: FormControl | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setControlRef(this.ngControl);
   }
 
   private processIsMultiSelectionEnabledValueChange(change: ComponentChange<this, boolean>): void {
