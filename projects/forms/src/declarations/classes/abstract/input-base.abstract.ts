@@ -9,6 +9,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { Nullable, distinctUntilSerializedChanged, isEmpty, isNil } from '@bimeister/utilities';
@@ -29,6 +30,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public invalidTooltipDisabled: boolean = false;
   @Input() public invalidTooltip: Nullable<string> = null;
   @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
+
+  @Input() public formControl: FormControl;
 
   @Input() public size: InputSize = 'medium';
   public readonly size$: BehaviorSubject<InputSize> = new BehaviorSubject<InputSize>('medium');
@@ -114,6 +117,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
+    this.processFormControlChange(changes?.formControl);
     this.processSizeChange(changes?.size);
     this.processPlaceholderChange(changes?.placeholder);
     this.processAutocompleteChange(changes?.autocomplete);
@@ -141,6 +145,16 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   public focusOnInputElement(): void {
     const inputElement: HTMLInputElement = this.inputElementRef.nativeElement;
     inputElement.focus();
+  }
+
+  private processFormControlChange(change: ComponentChange<this, FormControl>): void {
+    const updatedValue: FormControl | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.setControlRef(this.ngControl);
   }
 
   private processSizeChange(change: ComponentChange<this, InputSize>): void {
