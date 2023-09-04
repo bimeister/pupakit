@@ -19,9 +19,9 @@ export class DatePickerStateService {
   public readonly weekDayNames: string[] = WEEK_DAY_NAMES;
   public readonly currentDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
 
-  public readonly hours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-  public readonly minutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
-  public readonly seconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+  public readonly hours$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public readonly minutes$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
+  public readonly seconds$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(null);
 
   public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);

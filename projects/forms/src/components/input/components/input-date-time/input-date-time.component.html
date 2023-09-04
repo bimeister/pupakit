@@ -63,6 +63,7 @@
         [availableStartDate]="availableStartDate$ | async"
         [hours]="hours$ | async"
         [minutes]="minutes$ | async"
+        [defaultTime]="defaultTime"
         (selectedHours)="selectDateTimeHours($event)"
         (selectedMinutes)="selectDateTimeMinutes($event)"
         (click)="handleFocusEvent($event)"
