@@ -10,8 +10,8 @@ import {
 import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
 import { sanitizeDate } from '../../../../declarations/functions/sanitize-date.function';
 import { DatePickerStateService } from '../../services/date-picker-state.service';
@@ -29,9 +29,11 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
   @Input() public baseDate: Date = DEFAULT_CURRENT_DATE;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE);
 
-  public readonly hours$: BehaviorSubject<number> = this.datePickerStateService.hours$;
-  public readonly minutes$: BehaviorSubject<number> = this.datePickerStateService.minutes$;
-  public readonly seconds$: BehaviorSubject<number> = this.datePickerStateService.seconds$;
+  @Input() public defaultTime: Date | null = null;
+
+  public readonly hours$: BehaviorSubject<number | null> = this.datePickerStateService.hours$;
+  public readonly minutes$: BehaviorSubject<number | null> = this.datePickerStateService.minutes$;
+  public readonly seconds$: BehaviorSubject<number | null> = this.datePickerStateService.seconds$;
 
   @Output() private readonly selectedHours: EventEmitter<number> = new EventEmitter<number>();
   @Output() private readonly selectedMinutes: EventEmitter<number> = new EventEmitter<number>();
@@ -52,6 +54,7 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processBaseDateChange(changes?.baseDate);
+    this.processDefaultTimeChange(changes?.defaultTime);
   }
 
   public selectHours(hour: number): void {
@@ -64,6 +67,24 @@ export class DatePickerSimpleTimeComponent implements OnChanges {
 
   public selectSeconds(second: number): void {
     this.selectedSeconds.emit(second);
+  }
+
+  private processDefaultTimeChange(change: ComponentChange<this, Date>): void {
+    const updatedValue: Date | undefined = change?.currentValue;
+
+    if (isNil(updatedValue) || !isDate(updatedValue)) {
+      return;
+    }
+
+    combineLatest([this.hours$, this.minutes$])
+      .pipe(
+        take(1),
+        filter(([hours, minutes]: number[]) => (hours < 0 || isNil(hours)) && (minutes < 0 || isNil(minutes)))
+      )
+      .subscribe(() => {
+        this.selectHours(updatedValue.getHours());
+        this.selectMinutes(updatedValue.getMinutes());
+      });
   }
 
   private processBaseDateChange(change: ComponentChange<this, Date>): void {

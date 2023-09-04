@@ -55,6 +55,8 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   @Input() public readonly availableStartDate: Date | number = 0;
   public readonly availableStartDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(-Infinity);
 
+  @Input() public defaultTime: Date | null = null;
+
   public readonly isIconHovered$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly valueIsNotEmpty$: Observable<boolean> = this.value$.pipe(map((value: string) => !isEmpty(value)));
   public readonly dateToResetSwitcherEnabled$: Observable<boolean> = combineLatest([

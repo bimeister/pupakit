@@ -50,14 +50,14 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
   @Input() public readonly withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = this.datePickerStateService.withSeconds$;
 
-  @Input() public readonly hours: number = null;
-  public readonly hours$: BehaviorSubject<number> = this.datePickerStateService.hours$;
+  @Input() public readonly hours: number | null = null;
+  public readonly hours$: BehaviorSubject<number | null> = this.datePickerStateService.hours$;
 
-  @Input() public readonly minutes: number = null;
-  public readonly minutes$: BehaviorSubject<number> = this.datePickerStateService.minutes$;
+  @Input() public readonly minutes: number | null = null;
+  public readonly minutes$: BehaviorSubject<number | null> = this.datePickerStateService.minutes$;
 
-  @Input() public readonly seconds: number = null;
-  public readonly seconds$: BehaviorSubject<number> = this.datePickerStateService.seconds$;
+  @Input() public readonly seconds: number | null = null;
+  public readonly seconds$: BehaviorSubject<number | null> = this.datePickerStateService.seconds$;
 
   @Input() public readonly isBackDating: boolean = true;
   public readonly isBackDating$: BehaviorSubject<boolean> = this.datePickerStateService.isBackDating$;
@@ -67,6 +67,8 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
 
   @Input() public readonly availableStartDate: Date | number = -Infinity;
   public readonly availableStartDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableStartDate$;
+
+  @Input() public readonly defaultTime: Date | null = null;
 
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();
