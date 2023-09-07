@@ -60,7 +60,7 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
 
   private readonly selectedDndItemIds: Set<string> = new Set<string>();
 
-  private readonly subscription: Subscription = new Subscription();
+  private subscription: Subscription | undefined;
 
   private listeningIsStarted: boolean = false;
 
@@ -89,6 +89,7 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
 
   public ngOnDestroy(): void {
     this.clearListeners();
+    this.hammerManager.destroy();
   }
 
   public getHostId(): string {
@@ -119,6 +120,8 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
       return;
     }
 
+    this.subscription = new Subscription();
+
     this.hammerManager.on('tap', (event: HammerInput) => this.processTap(event));
     this.hammerManager.on('panstart', (event: HammerInput) => this.processPanStart(event));
 
@@ -129,8 +132,9 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
   }
 
   private clearListeners(): void {
-    this.hammerManager.destroy();
-    this.subscription.unsubscribe();
+    this.hammerManager.off('tap');
+    this.hammerManager.off('panstart');
+    this.subscription?.unsubscribe();
     this.listeningIsStarted = false;
   }
 
