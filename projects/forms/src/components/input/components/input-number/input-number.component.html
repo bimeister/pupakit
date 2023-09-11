@@ -3,11 +3,11 @@
 
   <input
     class="input"
-    type="number"
+    type="text"
     #inputElement
     [placeholder]="placeholder"
     [attr.disabled]="(isDisabled$ | async) ? true : null"
-    (input)="updateValue(inputElement.value)"
+    (input)="updateTextValueToNumberViewValue(inputElement.value)"
     (focus)="emitFocusEvent($event)"
     (blur)="emitBlurEvent($event)"
     [autocomplete]="autocomplete ? 'on' : 'off'"
