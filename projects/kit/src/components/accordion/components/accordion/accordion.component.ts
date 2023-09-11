@@ -85,6 +85,10 @@ export class AccordionComponent implements OnChanges {
     this.updateExpanded(!this.expanded);
   }
 
+  public expand(): void {
+    this.updateExpanded(true);
+  }
+
   public collapse(): void {
     this.updateExpanded(false);
   }
