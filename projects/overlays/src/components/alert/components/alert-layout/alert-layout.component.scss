@@ -9,17 +9,14 @@
 .alert-layout {
   display: flex;
   width: 100%;
-  backdrop-filter: blur(8px);
   border-radius: 1rem;
   gap: 3rem;
   position: relative;
 
-  background-color: semantic-color(surface-secondary);
   color: semantic-color(text-primary);
-
-  @include supports-backdrop-blur {
-    background-color: semantic-color(surface-secondary, alpha-400);
-  }
+  background: semantic-color(surface-glass);
+  @include blur(3rem);
+  border: 1px solid semantic-color(lines-normal);
 }
 
 .alert-layout__color {

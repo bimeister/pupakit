@@ -18,7 +18,6 @@ export class BasicExampleComponent {
         type: 'info',
         hasCloseButton: true,
         closeAction: () => openedAlert.close(),
-        autoCloseTimeMs: 3000,
       },
     });
   }

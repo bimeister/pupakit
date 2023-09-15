@@ -7,7 +7,7 @@ import { PupaDndModule } from '@bimeister/pupakit.dnd';
 import { PupaFormsModule } from '@bimeister/pupakit.forms';
 import { getAllIcons, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaKitModule } from '@bimeister/pupakit.kit';
-import { PupaAlertModule, PupaOverlaysModule } from '@bimeister/pupakit.overlays';
+import { PupaAlertModule, PupaOverlaysModule, ThemeBehavior } from '@bimeister/pupakit.overlays';
 import { PupaTableModule } from '@bimeister/pupakit.table';
 import { PupaTreeModule } from '@bimeister/pupakit.tree';
 import { PupaWidgetsModule } from '@bimeister/pupakit.widgets';
@@ -40,7 +40,7 @@ const MODULES: Type<unknown>[] = [
   imports: [
     ...MODULES,
     PupaIconsModule.forRoot(getAllIcons()),
-    PupaAlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent }),
+    PupaAlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent, themeBehaviour: ThemeBehavior.Inherit }),
   ],
   exports: [...MODULES, PupaIconsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
