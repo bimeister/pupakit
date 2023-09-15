@@ -6,6 +6,9 @@ import { AlertModule } from '@bimeister/pupakit';
 
 @NgModule({
   declarations: [...],
-  imports: [..., AlertModule.forRoot({ toolbarComponent: AlertsToolbarExampleComponent })],
+  imports: [..., AlertModule.forRoot({
+    toolbarComponent: AlertsToolbarExampleComponent,
+    themeBehaviour: ThemeBehavior.Inherit,
+  })],
 })
 export class SharedModule {}

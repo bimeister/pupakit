@@ -2,15 +2,14 @@
 @use 'mixins' as *;
 
 .alerts-toolbar {
-  color: color(neutral-1000);
-  background-color: color(neutral-7);
-
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-    background-color: color(neutral-1000);
-  }
+  color: semantic-color(text-primary);
+  background-color: semantic-color(surface-glass);
+  @include blur(3rem);
 
   &__container {
     padding: 2rem 4rem;
+    border-radius: 0 0 1rem 1rem;
+    border: 1px solid semantic-color(lines-normal);
+    border-top: 0;
   }
 }
