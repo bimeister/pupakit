@@ -89,4 +89,8 @@
   flex-direction: column;
   height: 100%;
   position: relative;
+
+  &-row-direction {
+    flex-direction: row;
+  }
 }

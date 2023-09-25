@@ -3,6 +3,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  Input,
   OnDestroy,
   TrackByFunction,
   ViewChild,
@@ -24,13 +25,14 @@ import { LoaderService } from '../../../../services/loader.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class LayoutComponent implements AfterViewInit, OnDestroy {
+  @Input() public layoutDirection: 'column' | 'row' = 'column';
+
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
 
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderService.isLoaderVisible$;
   public readonly loaderType$: Observable<LoaderType> = this.loaderService.loaderType$;
-  public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderService.loaderOverlayTopOffsetPx$.pipe(
-    filterNotNil()
-  );
+  public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderService.loaderOverlayTopOffsetPx$;
+  public readonly loaderOverlayLeftOffsetPx$: Observable<number> = this.loaderService.loaderOverlayLeftOffsetPx$;
 
   public readonly countOfColumns$: Observable<number> = this.clientUiHandlerService.uiState$.pipe(
     filterNotNil(),

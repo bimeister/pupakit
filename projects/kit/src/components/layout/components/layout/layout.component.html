@@ -1,5 +1,5 @@
 <div class="layout-wrapper content">
-  <div class="wrapper">
+  <div class="wrapper" [class.wrapper-row-direction]="layoutDirection === 'row'">
     <div class="layout-wrapper grid" *ngIf="isGridVisible$ | async">
       <div class="grid__column" *ngFor="let column of columns$ | async; trackBy: trackByColumnIndex">
         <div class="grid__column-digit">
@@ -12,6 +12,7 @@
       class="layout-wrapper loader"
       [ngClass]="loaderType$ | async"
       [style.top.px]="loaderOverlayTopOffsetPx$ | async"
+      [style.left.px]="loaderOverlayLeftOffsetPx$ | async"
       *ngIf="isLoaderVisible$ | async"
     >
       <pupa-spinner [size]="'48px'"></pupa-spinner>
