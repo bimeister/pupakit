@@ -60,11 +60,7 @@
             <pupa-code-inline>[collapsible]='true'</pupa-code-inline>
             )
           </ng-container>
-          <demo-props-radio-select
-            #collapseDirection$
-            [options]="collapseDirectionOptions"
-            direction="row"
-          ></demo-props-radio-select>
+          <demo-props-radio-select #collapseDirection$ [options]="collapseDirectionOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="placeholder" type="string">

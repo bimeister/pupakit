@@ -2,7 +2,10 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <p><pupa-code-inline>pupaDropdown</pupa-code-inline> is used to create a dropdown with custom template</p>
+    <p>
+      <pupa-code-inline>pupaDropdown</pupa-code-inline>
+      is used to create a dropdown with custom template
+    </p>
 
     <h3 demoAnchor>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
@@ -61,7 +64,7 @@
           <ng-container *demoExampleViewerPropertyDescription>
             <div>Sets width of dropdown.</div>
           </ng-container>
-          <demo-props-radio-select #widthType$ direction="row" [options]="widthTypeOptions"></demo-props-radio-select>
+          <demo-props-radio-select #widthType$ [options]="widthTypeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property
@@ -72,11 +75,7 @@
           <ng-container *demoExampleViewerPropertyDescription>
             <div>Sets horizontal position of dropdown.</div>
           </ng-container>
-          <demo-props-radio-select
-            #horizontalPosition$
-            direction="row"
-            [options]="horizontalPositionOptions"
-          ></demo-props-radio-select>
+          <demo-props-radio-select #horizontalPosition$ [options]="horizontalPositionOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property
@@ -87,11 +86,7 @@
           <ng-container *demoExampleViewerPropertyDescription>
             <div>Sets vertical position of dropdown.</div>
           </ng-container>
-          <demo-props-radio-select
-            #verticalPosition$
-            direction="row"
-            [options]="verticalPositionOptions"
-          ></demo-props-radio-select>
+          <demo-props-radio-select #verticalPosition$ [options]="verticalPositionOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

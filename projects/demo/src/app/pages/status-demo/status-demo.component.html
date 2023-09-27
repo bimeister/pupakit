@@ -42,8 +42,8 @@
           [kind]="kind$ | async"
           [markerPosition]="markerPosition$ | async"
           [disabled]="disabled$ | async"
-          >Status Status</pupa-status
-        >
+          >Status Status
+        </pupa-status>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
@@ -55,16 +55,12 @@
 
         <demo-example-viewer-property decoratorName="input" name="kind" type="StatusKind">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the tag.</ng-container>
-          <demo-props-radio-select #kind$ direction="row" [options]="kindOptions"></demo-props-radio-select>
+          <demo-props-radio-select #kind$ [options]="kindOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="markerPosition" type="MarkerPosition">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the tag.</ng-container>
-          <demo-props-radio-select
-            #markerPosition$
-            direction="row"
-            [options]="markerPositionOptions"
-          ></demo-props-radio-select>
+          <demo-props-radio-select #markerPosition$ [options]="markerPositionOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">

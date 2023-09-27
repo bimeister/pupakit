@@ -25,38 +25,35 @@
     <pupa-code-container [content]="example5Content">
       <demo-radio-button-example-5 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-5>
     </pupa-code-container>
+
+    <h3 demoAnchor>Radio image</h3>
+    <pupa-code-container [content]="example6Content">
+      <demo-radio-button-example-6 *pupaCodeContainerPreviewTemplate></demo-radio-button-example-6>
+    </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
-    <demo-example-viewer>
+    <demo-example-viewer class="viewer">
       <demo-example-viewer-content>
-        <div class="content">
-          <pupa-radio-group
-            class="radio-group"
-            [formControl]="formControl"
-            [direction]="direction$ | async"
-            [size]="labelSize$ | async"
-            [disabled]="disabled$ | async"
-          >
-            <pupa-radio-control [value]="1"> Option 1 </pupa-radio-control>
+        <pupa-radio-group
+          class="radio-group"
+          [formControl]="formControl"
+          [size]="labelSize$ | async"
+          [disabled]="disabled$ | async"
+        >
+          <pupa-radio-control [value]="1"> Option 1</pupa-radio-control>
 
-            <pupa-radio-control [value]="2"> Option 2 </pupa-radio-control>
+          <pupa-radio-control [value]="2"> Option 2</pupa-radio-control>
 
-            <pupa-radio-control [value]="3"> Option 3 </pupa-radio-control>
-          </pupa-radio-group>
-        </div>
+          <pupa-radio-control [value]="3"> Option 3</pupa-radio-control>
+        </pupa-radio-group>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties [Radio group]</demo-example-viewer-section-label>
       <demo-example-viewer-section>
-        <demo-example-viewer-property decoratorName="input" name="direction" type="column | row">
-          <ng-container *demoExampleViewerPropertyDescription>Adjusts the direction of the radio group.</ng-container>
-          <demo-props-select #direction$ [options]="directionOptions"></demo-props-select>
-        </demo-example-viewer-property>
-
         <demo-example-viewer-property decoratorName="input" name="labelSize" type="small | medium">
           <ng-container *demoExampleViewerPropertyDescription
-            >Adjusts the label size of the radio control.</ng-container
-          >
+            >Adjusts the label size of the radio control.
+          </ng-container>
           <demo-props-select #labelSize$ [options]="labelSizeOptions"></demo-props-select>
         </demo-example-viewer-property>
 
@@ -78,9 +75,51 @@
 
         <demo-example-viewer-property decoratorName="input" name="withLabel" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription
-            >Set style without label for radio control. Default value is true.</ng-container
-          >
+            >Set style without label for radio control. Default value is true.
+          </ng-container>
         </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-content class="viewer-content">
+        <pupa-radio-group
+          class="radio-group"
+          [formControl]="formControl"
+          [size]="labelSize$ | async"
+          [disabled]="disabled$ | async"
+        >
+          <pupa-radio-image-control class="radio-control" [value]="1">
+            <span>Option 1</span>
+
+            <pupa-icon class="icon" *pupaRadioIcon [name]="'app-help-filled'"></pupa-icon>
+
+            <img class="image" *pupaRadioImage alt="" [src]="'assets/radio-image.svg'" />
+          </pupa-radio-image-control>
+
+          <pupa-radio-image-control class="radio-control" [value]="2">
+            <span>Option 2</span>
+
+            <pupa-icon class="icon" *pupaRadioIcon [name]="'app-help-filled'"></pupa-icon>
+
+            <img class="image" *pupaRadioImage alt="" [src]="'assets/radio-image.svg'" />
+          </pupa-radio-image-control>
+        </pupa-radio-group>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties [Radio image control]</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-config-item name="If you want to add any icon near with label">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use directive
+            <pupa-code-inline>*pupaRadioIcon</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
+
+        <demo-example-viewer-config-item name="If you want to add any image">
+          <ng-container *demoExampleViewerConfigItemDescription>
+            Use directive
+            <pupa-code-inline>*pupaRadioImage</pupa-code-inline>
+          </ng-container>
+        </demo-example-viewer-config-item>
       </demo-example-viewer-section>
     </demo-example-viewer>
   </div>

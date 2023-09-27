@@ -7,6 +7,7 @@ import { RadioButtonExample4Component } from './examples/example-4/example-4.com
 import { RadioButtonExample5Component } from './examples/example-5/example-5.component';
 import { RadioButtonDemoRoutingModule } from './radio-button-demo-routing.module';
 import { RadioButtonDemoComponent } from './radio-button-demo.component';
+import { RadioButtonExample6Component } from './examples/example-6/example-6.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { RadioButtonDemoComponent } from './radio-button-demo.component';
     RadioButtonExample3Component,
     RadioButtonExample4Component,
     RadioButtonExample5Component,
+    RadioButtonExample6Component,
   ],
   imports: [DemoSharedModule, RadioButtonDemoRoutingModule],
 })

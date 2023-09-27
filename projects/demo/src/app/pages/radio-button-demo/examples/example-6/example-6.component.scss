@@ -1,20 +1,8 @@
 @use 'functions' as *;
 
-:host {
-  display: block;
-}
-
-.viewer {
-  display: flex;
-  flex-direction: column;
-}
-
-.viewer-content {
-  margin-top: 10rem;
-}
-
 .radio-group {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
 

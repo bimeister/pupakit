@@ -1,0 +1,8 @@
+.radio-group {
+  display: flex;
+  gap: 3rem;
+
+  &_column {
+    flex-direction: column;
+  }
+}

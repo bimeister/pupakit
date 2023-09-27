@@ -2,18 +2,38 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <p><pupa-code-inline>pupa-card</pupa-code-inline> is a flexible container component.</p>
+    <p>
+      <pupa-code-inline>pupa-card</pupa-code-inline>
+      is a flexible container component.
+    </p>
     <p>It can be used alone, but it also provides several common pre-styled card sections:</p>
     <ul>
       <li>
-        <pupa-code-inline>pupa-card-container</pupa-code-inline> - container for card content used inside
-        <pupa-code-inline>pupa-card</pupa-code-inline> but can be used alone
+        <pupa-code-inline>pupa-card-container</pupa-code-inline>
+        - container for card content used inside
+        <pupa-code-inline>pupa-card</pupa-code-inline>
+        but can be used alone
       </li>
-      <li><pupa-code-inline>pupa-card-cover</pupa-code-inline> - container for icon/image or any other content</li>
-      <li><pupa-code-inline>pupa-card-header</pupa-code-inline> - container for card header content</li>
-      <li><pupa-code-inline>pupa-card-title</pupa-code-inline> - container for card title</li>
-      <li><pupa-code-inline>pupa-card-description</pupa-code-inline> - container for card description</li>
-      <li><pupa-code-inline>pupa-card-action</pupa-code-inline> - container for action button</li>
+      <li>
+        <pupa-code-inline>pupa-card-cover</pupa-code-inline>
+        - container for icon/image or any other content
+      </li>
+      <li>
+        <pupa-code-inline>pupa-card-header</pupa-code-inline>
+        - container for card header content
+      </li>
+      <li>
+        <pupa-code-inline>pupa-card-title</pupa-code-inline>
+        - container for card title
+      </li>
+      <li>
+        <pupa-code-inline>pupa-card-description</pupa-code-inline>
+        - container for card description
+      </li>
+      <li>
+        <pupa-code-inline>pupa-card-action</pupa-code-inline>
+        - container for action button
+      </li>
     </ul>
     <p>All these sections are optional.</p>
 
@@ -32,7 +52,10 @@
       <demo-card-example-3 *pupaCodeContainerPreviewTemplate></demo-card-example-3>
     </pupa-code-container>
 
-    <h2 demoAnchor>Custom card without <pupa-code-inline>pupa-card</pupa-code-inline></h2>
+    <h2 demoAnchor>
+      Custom card without
+      <pupa-code-inline>pupa-card</pupa-code-inline>
+    </h2>
     <pupa-code-container [content]="example4Content">
       <demo-card-example-4 *pupaCodeContainerPreviewTemplate></demo-card-example-4>
     </pupa-code-container>
@@ -58,8 +81,8 @@
               dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
               ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
               fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-              mollit anim id est laborum.</pupa-card-title
-            >
+              mollit anim id est laborum.
+            </pupa-card-title>
             <pupa-card-description>Description</pupa-card-description>
           </pupa-card-header>
           <pupa-card-action>
@@ -72,7 +95,7 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="CardSize">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the card.</ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+          <demo-props-radio-select #size$ [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the card is disabled.</ng-container>
@@ -96,8 +119,9 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="maxRows" type="number | 'auto'">
           <ng-container *demoExampleViewerPropertyDescription>
-            Truncates title at a specific number of rows (<pupa-code-inline>'auto'</pupa-code-inline> - without
-            truncating).
+            Truncates title at a specific number of rows (
+            <pupa-code-inline>'auto'</pupa-code-inline>
+            - without truncating).
           </ng-container>
           <pupa-input-text [formControl]="maxRowsFormControl"></pupa-input-text>
         </demo-example-viewer-property>

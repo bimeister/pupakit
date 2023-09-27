@@ -9,6 +9,6 @@ import { FormControl } from '@angular/forms';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonExample3Component {
-  public formControlColumn: FormControl = new FormControl(1);
-  public formControlRow: FormControl = new FormControl(1);
+  public formControlColumn: FormControl<number> = new FormControl<number>(1);
+  public formControlRow: FormControl<number> = new FormControl<number>(1);
 }

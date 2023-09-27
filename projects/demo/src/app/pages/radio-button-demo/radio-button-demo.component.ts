@@ -11,19 +11,7 @@ const BASE_REQUEST_PATH: string = 'radio-button-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RadioButtonDemoComponent {
-  public formControl: FormControl = new FormControl(1);
-
-  public readonly directionOptions: PropsOption[] = [
-    {
-      caption: 'row',
-      value: 'row',
-      isDefault: true,
-    },
-    {
-      caption: 'column',
-      value: 'column',
-    },
-  ];
+  public formControl: FormControl<number> = new FormControl<number>(1);
 
   public readonly labelSizeOptions: PropsOption[] = [
     {
@@ -60,5 +48,10 @@ export class RadioButtonDemoComponent {
   public readonly example5Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-5/example-5.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
+  };
+
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
   };
 }
