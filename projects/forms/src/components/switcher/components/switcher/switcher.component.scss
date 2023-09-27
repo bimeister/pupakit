@@ -3,7 +3,7 @@
 
 .switcher {
   position: relative;
-  background-color: color(neutral-7);
+  background-color: semantic-color(kind-opacity-active);
   display: flex;
   align-items: center;
 
@@ -16,9 +16,9 @@
   cursor: pointer;
 
   &__marker {
-    background-color: color(neutral-1);
+    background-color: semantic-color(surface-primary);
     border-radius: 50%;
-    box-shadow: 0px 0px 1rem color(neutral-1000, alpha-5);
+    box-shadow: 0px 0px 1rem semantic-color(kind-opacity-normal);
 
     transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common),
       background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -27,7 +27,7 @@
   }
 
   &_active {
-    background-color: color(success-500);
+    background-color: semantic-color(kind-primary-normal);
 
     .switcher__marker {
       transform: translateX(100%);
@@ -50,56 +50,26 @@
   &:not(.switcher_disabled) {
     @include hover() {
       &.switcher_active {
-        background-color: color(success-400);
+        background-color: semantic-color(kind-primary-hover);
       }
-      background-color: color(neutral-6);
+      background-color: semantic-color(kind-neutral-hover);
     }
 
     &:focus-visible {
       outline: none;
 
       &:after {
-        border-color: color(primary-400);
+        border-color: semantic-color(lines-accent);
       }
     }
   }
 
   &_disabled {
-    background-color: color(neutral-3);
+    background-color: semantic-color(kind-opacity-active);
     cursor: not-allowed;
 
     .switcher__marker {
-      background-color: color(neutral-7);
-    }
-  }
-}
-
-// dark styles
-.switcher {
-  @include host-selector-dark-theme() {
-    background-color: color(neutral-700);
-
-    &_active {
-      background-color: color(success-300);
-    }
-
-    &:not(.switcher_disabled) {
-      @include hover() {
-        background-color: color(neutral-600);
-
-        &.switcher_active {
-          background-color: color(success-200);
-        }
-      }
-    }
-
-    &_disabled {
-      background-color: color(neutral-850);
-      cursor: not-allowed;
-
-      .switcher__marker {
-        background-color: color(neutral-40);
-      }
+      background-color: semantic-color(icons-disabled);
     }
   }
 }
