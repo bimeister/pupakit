@@ -64,12 +64,12 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="ScrollbarSize">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the scrollbar.</ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+          <demo-props-radio-select #size$ [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="position" type="ScrollbarPosition">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the position of the scrollbar.</ng-container>
-          <demo-props-radio-select #position$ direction="row" [options]="positionOptions"></demo-props-radio-select>
+          <demo-props-radio-select #position$ [options]="positionOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="scrollDragMode" type="Nullable<ScrollDragMode>">
           <ng-container *demoExampleViewerPropertyDescription>Enables scroll on drag on desktop devices.</ng-container>
@@ -78,11 +78,13 @@
         <demo-example-viewer-property decoratorName="input" name="scrollVisibilityMode" type="ScrollVisibilityMode">
           <ng-container *demoExampleViewerPropertyDescription>
             Sets scrollbar visibility mode.
-            <div>Default: <pupa-code-inline>always</pupa-code-inline></div>
+            <div>
+              Default:
+              <pupa-code-inline>always</pupa-code-inline>
+            </div>
           </ng-container>
           <demo-props-radio-select
             #scrollVisibilityMode$
-            direction="row"
             [options]="scrollVisibilityModeOptions"
           ></demo-props-radio-select>
         </demo-example-viewer-property>
@@ -91,8 +93,8 @@
         </demo-example-viewer-property>
         <demo-example-viewer-property decoratorName="input" name="syncWith" type="ScrollableComponent[]">
           <ng-container *demoExampleViewerPropertyDescription
-            >Sync scroll with another scrollable components.</ng-container
-          >
+            >Sync scroll with another scrollable components.
+          </ng-container>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 

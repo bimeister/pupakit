@@ -9,11 +9,7 @@
   <demo-example-viewer-section [formGroup]="formGroup">
     <demo-example-viewer-property name="float" type="left' | 'right'">
       <ng-container *demoExampleViewerPropertyDescription>Float.</ng-container>
-      <demo-props-radio-select
-        formControlName="float"
-        [options]="floatOptions"
-        direction="row"
-      ></demo-props-radio-select>
+      <demo-props-radio-select formControlName="float" [options]="floatOptions"></demo-props-radio-select>
     </demo-example-viewer-property>
 
     <demo-example-viewer-property name="hasBackdrop" type="boolean">

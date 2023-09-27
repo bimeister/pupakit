@@ -32,7 +32,9 @@
       <demo-example-viewer-content>
         <div class="content">
           <pupa-badge>
-            <pupa-badge-marker [size]="size$ | async"><div class="content__marker"></div></pupa-badge-marker>
+            <pupa-badge-marker [size]="size$ | async">
+              <div class="content__marker"></div>
+            </pupa-badge-marker>
             Badge marker
           </pupa-badge>
           <pupa-badge>
@@ -48,7 +50,7 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="BadgeMarkerSize">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the badge marker.</ng-container>
-          <demo-props-radio-select #size$ direction="row" [options]="sizeOptions"></demo-props-radio-select>
+          <demo-props-radio-select #size$ [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property decoratorName="input" name="state" type="BadgeIndicatorState">

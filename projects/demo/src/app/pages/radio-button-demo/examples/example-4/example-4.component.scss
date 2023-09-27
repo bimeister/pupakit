@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+.radio-group {
+  @include flex-container(column);
+  gap: 3rem;
+}

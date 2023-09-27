@@ -2,16 +2,28 @@
 
 <demo-page>
   <div *demoPageTab="'overview'">
-    <p><pupa-code-inline>pupa-select</pupa-code-inline> is a configurable select component.</p>
+    <p>
+      <pupa-code-inline>pupa-select</pupa-code-inline>
+      is a configurable select component.
+    </p>
     <p>There are range of components that are used as content to build and configure the select itself:</p>
     <ul>
-      <li><pupa-code-inline>pupa-select-trigger</pupa-code-inline> - simple button trigger</li>
-      <li><pupa-code-inline>pupa-select-trigger-tags</pupa-code-inline> - tag trigger</li>
+      <li>
+        <pupa-code-inline>pupa-select-trigger</pupa-code-inline>
+        - simple button trigger
+      </li>
+      <li>
+        <pupa-code-inline>pupa-select-trigger-tags</pupa-code-inline>
+        - tag trigger
+      </li>
       <li>
         <pupa-code-inline>pupa-select-trigger-input</pupa-code-inline>
         - input trigger. Provides ability to enter an option name.
       </li>
-      <li><pupa-code-inline>pupa-select-trigger-extra-case</pupa-code-inline> - custom trigger</li>
+      <li>
+        <pupa-code-inline>pupa-select-trigger-extra-case</pupa-code-inline>
+        - custom trigger
+      </li>
       <li>
         <pupa-code-inline>pupa-select-dropdown</pupa-code-inline>
         - overlay that wraps content of dropdown menu. Takes the following components as content:
@@ -115,7 +127,8 @@
         </li>
         <li>
           Please note that to use the cdkVirtualScroll, you need to set the height of the item
-          <pupa-code-inline>pupa-select-options-container</pupa-code-inline>.
+          <pupa-code-inline>pupa-select-options-container</pupa-code-inline>
+          .
         </li>
       </ul>
     </pupa-callout>
@@ -167,7 +180,7 @@
                 Option {{ index }}
               </pupa-select-option>
 
-              <pupa-select-option value="Option 7" [isDisabled]="isDisabled$ | async"> Option 7 </pupa-select-option>
+              <pupa-select-option value="Option 7" [isDisabled]="isDisabled$ | async"> Option 7</pupa-select-option>
             </pupa-select-options-container>
           </pupa-select-dropdown>
         </pupa-select>
@@ -249,7 +262,7 @@
 
         <demo-example-viewer-property decoratorName="input" name="size" type="string">
           <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
-          <demo-props-radio-select #size$ [options]="sizeOptions" direction="row"></demo-props-radio-select>
+          <demo-props-radio-select #size$ [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 

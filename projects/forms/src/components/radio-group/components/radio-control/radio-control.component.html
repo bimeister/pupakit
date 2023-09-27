@@ -4,7 +4,6 @@
     isDisabled: isDisabled$ | async,
     isSelected: isSelected$ | async,
     labelSize: labelSize$ | async,
-    direction: directions$ | async,
     isWithLabel: isWithLabel$ | async
   }"
 >
@@ -15,15 +14,12 @@
   let-isDisabled="isDisabled"
   let-isSelected="isSelected"
   let-labelSize="labelSize"
-  let-direction="direction"
   let-isWithLabel="isWithLabel"
 >
   <section
     class="radio-control"
     [tabindex]="tabindex"
     [class.radio-control_disabled]="isDisabled"
-    [class.radio-control_row]="direction === 'row'"
-    [class.radio-control_column]="direction === 'column'"
     [class.radio-control_without-label]="!isWithLabel"
     (keydown.enter)="processClick()"
   >

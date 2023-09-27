@@ -68,11 +68,7 @@
 
         <demo-example-viewer-property name="height" type="string">
           <ng-container *demoExampleViewerPropertyDescription>Predefined height</ng-container>
-          <demo-props-radio-select
-            formControlName="height"
-            direction="row"
-            [options]="sizeOptions"
-          ></demo-props-radio-select>
+          <demo-props-radio-select formControlName="height" [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-property name="hasBorder" type="boolean">

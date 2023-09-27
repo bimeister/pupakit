@@ -9,13 +9,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ComponentChanges, ComponentChange } from '@bimeister/pupakit.common';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterTruthy, isEmpty, VOID } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
 import { OnChangeCallback } from '../../../../declarations/types/on-change-callback.type';
 import { OnTouchedCallback } from '../../../../declarations/types/on-touched-callback.type';
 import { RadioControlSize } from '../../../../declarations/types/radio-control-size.type';
-import { RadioGroupDirection } from '../../../../declarations/types/radio-group-direction.type';
 import { RadioGroupService } from '../../services/radio-group.service';
 
 @Component({
@@ -34,7 +33,6 @@ import { RadioGroupService } from '../../services/radio-group.service';
   ],
 })
 export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-  @Input() public direction: RadioGroupDirection = 'column';
   @Input() public readonly size: RadioControlSize = 'medium';
   @Input() public readonly disabled: boolean = false;
 
@@ -53,7 +51,6 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnC
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processLabelSizeChange(changes?.size);
     this.processIsDisabledChange(changes?.disabled);
-    this.processDirectionChange(changes?.direction);
   }
 
   public ngOnDestroy(): void {
@@ -69,11 +66,13 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnC
   }
 
   public onChange: OnChangeCallback<T> = () => VOID;
+
   public registerOnChange(onChange: OnChangeCallback<T>): void {
     this.onChange = onChange;
   }
 
   public onTouched: OnTouchedCallback = () => VOID;
+
   public registerOnTouched(onTouched: OnTouchedCallback): void {
     this.onTouched = onTouched;
   }
@@ -104,15 +103,5 @@ export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnC
     }
 
     this.radioGroupService.setDisabled(updatedValue);
-  }
-
-  private processDirectionChange(change: ComponentChange<this, RadioGroupDirection>): void {
-    const updatedValue: RadioGroupDirection | undefined = change?.currentValue;
-
-    if (isEmpty(updatedValue)) {
-      return;
-    }
-
-    this.radioGroupService.setDirection(updatedValue);
   }
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ComponentChanges } from '@bimeister/pupakit.common';
-import { RadioGroupDirection } from '@bimeister/pupakit.forms';
 import { isNil } from '@bimeister/utilities';
 import { PropsBase } from '../../declarations/classes/props-base.abstract';
 import { PropsOption } from '../../declarations/interfaces/props.option';
@@ -23,8 +22,6 @@ import { PropsOption } from '../../declarations/interfaces/props.option';
 export class PropsRadioSelectComponent extends PropsBase implements OnChanges {
   @Input()
   public options: PropsOption[] = [];
-
-  @Input() public direction: RadioGroupDirection = 'column';
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     if (!isNil(changes.options)) {

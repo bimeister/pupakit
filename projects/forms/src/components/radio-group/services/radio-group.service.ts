@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RadioControlSize } from '../../../declarations/types/radio-control-size.type';
-import { RadioGroupDirection } from '../../../declarations/types/radio-group-direction.type';
 
 @Injectable()
 export class RadioGroupService<T> {
@@ -17,11 +16,6 @@ export class RadioGroupService<T> {
   private readonly labelSizeState$: BehaviorSubject<RadioControlSize> = new BehaviorSubject<RadioControlSize>('medium');
   public readonly labelSize$: Observable<RadioControlSize> = this.labelSizeState$.asObservable();
 
-  private readonly directionState$: BehaviorSubject<RadioGroupDirection> = new BehaviorSubject<RadioGroupDirection>(
-    'column'
-  );
-  public readonly direction$: Observable<RadioGroupDirection> = this.directionState$.asObservable();
-
   public setValue(value: T): void {
     this.valueState$.next(value);
   }
@@ -36,9 +30,5 @@ export class RadioGroupService<T> {
 
   public setLabelSize(value: RadioControlSize): void {
     this.labelSizeState$.next(value);
-  }
-
-  public setDirection(value: RadioGroupDirection): void {
-    this.directionState$.next(value);
   }
 }
