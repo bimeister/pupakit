@@ -39,4 +39,9 @@
   &_success {
     background-color: semantic-color(kind-success-normal);
   }
+
+  &_ghost {
+    background-color: transparent;
+    color: semantic-color(text-secondary);
+  }
 }
