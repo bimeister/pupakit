@@ -1,1 +1,1 @@
-export type CountColor = 'neutral' | 'primary' | 'danger' | 'warning' | 'success';
+export type CountColor = 'neutral' | 'primary' | 'danger' | 'warning' | 'success' | 'ghost';

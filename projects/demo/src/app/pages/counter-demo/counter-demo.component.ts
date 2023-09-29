@@ -37,6 +37,10 @@ export class CounterDemoComponent {
       caption: 'Success',
       value: 'success',
     },
+    {
+      caption: 'Ghost',
+      value: 'ghost',
+    },
   ];
 
   public readonly modeOptions: PropsOption[] = [
