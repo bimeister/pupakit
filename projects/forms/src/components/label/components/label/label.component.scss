@@ -21,6 +21,7 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
+    max-width: 100%;
 
     &.reversed-direction {
       flex-direction: row-reverse;
