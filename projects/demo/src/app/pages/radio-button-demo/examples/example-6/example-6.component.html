@@ -4,8 +4,6 @@
       <pupa-radio-image-control class="radio-control" [value]="1">
         <span>Option 1</span>
 
-        <pupa-icon class="icon" *pupaRadioIcon [name]="'app-help-filled'"></pupa-icon>
-
         <img class="image" *pupaRadioImage alt="" [src]="'assets/radio-image.svg'" />
       </pupa-radio-image-control>
 
@@ -20,7 +18,7 @@
       <pupa-radio-image-control class="radio-control" [value]="3">
         <span>Option 3</span>
 
-        <pupa-icon class="icon" *pupaRadioIcon [name]="'app-help-filled'"></pupa-icon>
+        <pupa-icon class="icon" *pupaRadioIcon [pupaTooltip]="'Tooltip'" [name]="'app-help-filled'"></pupa-icon>
 
         <img class="image" *pupaRadioImage alt="" [src]="'assets/radio-image.svg'" />
       </pupa-radio-image-control>
