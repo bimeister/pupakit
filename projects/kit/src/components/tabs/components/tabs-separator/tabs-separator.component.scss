@@ -5,8 +5,5 @@
   width: 100%;
   height: 1px;
 
-  background-color: color(neutral-5);
-  @include host-selector-dark-theme {
-    background-color: color(neutral-500);
-  }
+  background-color: semantic-color(kind-neutral-normal);
 }

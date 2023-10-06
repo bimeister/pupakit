@@ -41,12 +41,8 @@
   &__highlighter {
     width: 0;
     height: 2px;
-    background-color: color(primary-700);
+    background-color: semantic-color(kind-primary-normal);
     transition: 0.25s ease-in-out;
-
-    @include host-selector-dark-theme() {
-      background-color: color(primary-100);
-    }
   }
 }
 
@@ -60,10 +56,11 @@
   width: 24rem;
   height: 100%;
 
-  background: linear-gradient(270deg, color(neutral-1) 0%, color(neutral-1, alpha-1) 87.96%);
-  @include host-selector-dark-theme {
-    background: linear-gradient(270deg, color(neutral-1000) 0%, color(neutral-1, alpha-1) 87.96%);
-  }
+  background: linear-gradient(
+    270deg,
+    semantic-color(surface-primary) 0%,
+    semantic-color(surface-primary, alpha-3) 87.96%
+  );
 
   &_left {
     left: 0;
