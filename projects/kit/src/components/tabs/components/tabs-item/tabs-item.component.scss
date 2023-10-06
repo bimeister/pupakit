@@ -16,41 +16,25 @@
 .tabs-item {
   min-width: 1rem;
   max-width: inherit;
-  color: color(neutral-300);
+  color: semantic-color(text-primary);
   box-sizing: border-box;
   padding: 0 2rem 4rem 2rem;
   cursor: pointer;
   user-select: none;
 
-  @include host-selector-dark-theme {
-    color: color(neutral-9);
-  }
-
   &:not(&_disabled) {
     @include hover {
-      color: color(primary-700);
-
-      @include host-selector-dark-theme {
-        color: color(primary-100);
-      }
+      color: semantic-color(kind-primary-hover);
     }
   }
 
   &_active {
-    color: color(primary-700);
-
-    @include host-selector-dark-theme {
-      color: color(primary-100);
-    }
+    color: semantic-color(kind-primary-normal);
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: color(neutral-50);
-
-    @include host-selector-dark-theme {
-      color: color(neutral-60);
-    }
+    color: semantic-color(text-disabled);
   }
 
   &_grabbing {
