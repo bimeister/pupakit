@@ -28,6 +28,8 @@ export interface SelectStateServiceDeclaration<T> {
   readonly withReset$: BehaviorSubject<boolean>;
   readonly inline$: BehaviorSubject<boolean>;
   readonly size$: BehaviorSubject<SelectSize>;
+  readonly expandedIcon$: BehaviorSubject<string>;
+  readonly isExpandable$: BehaviorSubject<boolean>;
 
   readonly isTriggerTouched$: BehaviorSubject<boolean>;
 
@@ -70,6 +72,10 @@ export interface SelectStateServiceDeclaration<T> {
   setInlineState(inline: boolean): void;
 
   setSizeState(size: SelectSize): void;
+
+  setExpandedIcon(iconName: string): void;
+
+  setIsExpandable(isExpandable: boolean): void;
 
   setDisabledState(isDisabled: boolean): void;
 
