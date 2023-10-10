@@ -96,6 +96,7 @@ export class DndService implements OnDestroy {
     this.sourceHost.clearSelectedDndItems();
 
     const targetDndItemElement: DndItemHtmlElement | null = getDndTargetItemFromEvent(event.srcEvent);
+
     if (isNil(targetDndItemElement)) {
       return;
     }
