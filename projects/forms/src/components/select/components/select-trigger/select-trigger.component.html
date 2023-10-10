@@ -19,8 +19,12 @@
     </ng-container>
   </div>
 
-  <div class="trigger__rotate-icon" [class.expanded]="isExpanded$ | async" (click)="toggleDropdown($event)">
-    <pupa-icon name="app-chevron-down"></pupa-icon>
+  <div
+    class="trigger__rotate-icon"
+    [class.expanded]="(isExpanded$ | async) && (isExpandable$ | async)"
+    (click)="toggleDropdown($event)"
+  >
+    <pupa-icon [name]="expandedIcon$ | async"></pupa-icon>
   </div>
 </button>
 

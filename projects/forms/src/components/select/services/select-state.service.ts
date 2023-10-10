@@ -11,6 +11,7 @@ import { OnChangeCallback } from '../../../declarations/types/on-change-callback
 import { OnTouchedCallback } from '../../../declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../declarations/types/select-outer-value.type';
 import { SelectSize } from '../../../declarations/types/select-size.type';
+import { appChevronDownIcon } from '@bimeister/pupakit.icons';
 
 const OVERLAY_OFFSET_X_PX: number = 0;
 const OVERLAY_OFFSET_Y_PX: number = 8;
@@ -62,6 +63,9 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly inline$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly size$: BehaviorSubject<SelectSize> = new BehaviorSubject<SelectSize>('medium');
+
+  public readonly isExpandable$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly expandedIcon$: BehaviorSubject<string> = new BehaviorSubject<string>(appChevronDownIcon.name);
 
   public readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -186,6 +190,14 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setSizeState(size: SelectSize): void {
     this.size$.next(size);
+  }
+
+  public setExpandedIcon(iconName: string): void {
+    this.expandedIcon$.next(iconName);
+  }
+
+  public setIsExpandable(isExpandable: boolean): void {
+    this.isExpandable$.next(isExpandable);
   }
 
   public setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void {

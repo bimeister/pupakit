@@ -23,6 +23,8 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   public readonly withReset$: Observable<boolean> = this.selectStateService.withReset$;
   public readonly inline$: Observable<boolean> = this.selectStateService.inline$;
   public readonly size$: Observable<SelectSize> = this.selectStateService.size$;
+  public readonly expandedIcon$: Observable<string> = this.selectStateService.expandedIcon$;
+  public readonly isExpandable$: Observable<boolean> = this.selectStateService.isExpandable$;
 
   public readonly placeholder$: Observable<string> = this.selectStateService.placeholder$;
 

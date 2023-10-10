@@ -19,6 +19,8 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
   public abstract withReset: boolean;
   public abstract inline: boolean;
   public abstract size: SelectSize;
+  public abstract expandedIcon: string;
+  public abstract isExpandable: boolean;
 
   public invalidTooltipHideOnHover: boolean = false;
   public invalidTooltipDisabled: boolean = false;
@@ -70,6 +72,8 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
     this.processWithResetChange(changes?.withReset);
     this.processInlineChange(changes?.inline);
     this.processSizeChange(changes?.size);
+    this.processExpandedIconChange(changes?.expandedIcon);
+    this.processIsExpandableChange(changes?.isExpandable);
 
     this.processInvalidTooltipHideOnHoverChange(changes?.invalidTooltipHideOnHover);
     this.processInvalidTooltipDisabledChange(changes?.invalidTooltipDisabled);
@@ -175,6 +179,26 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
     }
 
     this.selectStateService.setSizeState(updatedValue);
+  }
+
+  private processExpandedIconChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setExpandedIcon(updatedValue);
+  }
+
+  private processIsExpandableChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setIsExpandable(updatedValue);
   }
 
   private processInvalidTooltipHideOnHoverChange(change: ComponentChange<this, boolean>): void {

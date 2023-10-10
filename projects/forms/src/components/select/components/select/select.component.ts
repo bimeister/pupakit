@@ -4,6 +4,7 @@ import { Nullable } from '@bimeister/utilities';
 import { SelectBase } from '../../../../declarations/classes/abstract/select-base.abstract';
 import { SelectSize } from '../../../../declarations/types/select-size.type';
 import { SelectStateService } from '../../services/select-state.service';
+import { appChevronDownIcon } from '@bimeister/pupakit.icons';
 
 @Component({
   selector: 'pupa-select',
@@ -18,6 +19,8 @@ export class SelectComponent<T> extends SelectBase<T> {
   @Input() public isUnselectionEnabled: boolean = false;
   @Input() public isPatched: boolean = false;
   @Input() public placeholder: Nullable<string> = null;
+  @Input() public expandedIcon: string = appChevronDownIcon.name;
+  @Input() public isExpandable: boolean = true;
 
   @Input() public withReset: boolean = false;
   @Input() public inline: boolean = false;
