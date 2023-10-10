@@ -1,8 +1,35 @@
-<pupa-callout variant="info" [isClosable]="true">Info</pupa-callout>
-<pupa-callout variant="success" [isClosable]="true">Success</pupa-callout>
-<pupa-callout variant="warning" [isClosable]="true">Warning</pupa-callout>
-<pupa-callout variant="danger" [isClosable]="true">Danger</pupa-callout>
-<pupa-callout [isClosable]="true">
-  <pupa-code-inline>JavaScript</pupa-code-inline> is a text-based programming language used both on the
-  <strong>client-side and server-side</strong> that allows you to make <em>web pages interactive</em>.
+<pupa-callout kind="warning">
+  <pupa-callout-header>Title</pupa-callout-header>
+
+  <pupa-callout-actions>
+    <pupa-callout-collapse-button></pupa-callout-collapse-button>
+    <pupa-callout-close-button></pupa-callout-close-button>
+  </pupa-callout-actions>
+
+  <pupa-callout-body>
+    Tortor laoreet morbi aliquet curabitur massa scelerisque et tellus ut. Arcu neque nibh at suspendisse eros at
+    suspendisse arcu.
+  </pupa-callout-body>
+
+  <pupa-callout-footer>
+    <pupa-callout-footer-row>
+      <a pupaLink>Link 1</a>
+      <a pupaLink>Link 2</a>
+    </pupa-callout-footer-row>
+    <pupa-callout-footer-row>
+      <pupa-tag><pupa-icon name="app-cube"></pupa-icon>Tag 1</pupa-tag>
+      <pupa-tag><pupa-icon name="app-cube"></pupa-icon>Tag 2</pupa-tag>
+      <pupa-tag> <pupa-icon name="app-cube"></pupa-icon>Tag 3</pupa-tag>
+    </pupa-callout-footer-row>
+  </pupa-callout-footer>
+</pupa-callout>
+
+<h5>Collapse without header</h5>
+
+<pupa-callout>
+  Tortor laoreet morbi aliquet curabitur massa scelerisque et tellus ut. Arcu neque nibh at suspendisse eros at
+  suspendisse arcu.
+  <pupa-callout-actions>
+    <pupa-callout-collapse-button></pupa-callout-collapse-button>
+  </pupa-callout-actions>
 </pupa-callout>

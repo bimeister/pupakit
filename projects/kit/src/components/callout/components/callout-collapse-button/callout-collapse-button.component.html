@@ -1,0 +1,7 @@
+<pupa-button-icon
+  (click)="toggleCalloutCollapse()"
+  icon="app-caret-up"
+  [class.callout_collapsed]="isCollapsed$ | async"
+  kind="secondary"
+  size="xs"
+></pupa-button-icon>

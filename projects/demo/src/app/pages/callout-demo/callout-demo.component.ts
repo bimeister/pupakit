@@ -18,7 +18,7 @@ export class CalloutDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
   };
 
-  public readonly variantOptions: PropsOption[] = [
+  public readonly kindOptions: PropsOption[] = [
     {
       caption: 'Info',
       value: 'info',

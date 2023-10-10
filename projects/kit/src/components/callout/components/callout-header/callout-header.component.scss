@@ -1,0 +1,6 @@
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  @include font-preset-h5;
+}

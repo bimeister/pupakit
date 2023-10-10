@@ -1,13 +1,22 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Input,
+  OnDestroy,
+  ViewEncapsulation,
+} from '@angular/core';
 import {
   appAttentionFilledIcon,
   appCheckRoundFilledIcon,
   appErrorFilledIcon,
   appInfoFilledIcon,
 } from '@bimeister/pupakit.icons';
-import { BehaviorSubject } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { CalloutService } from '../../services/callout.service';
 
-type CalloutType = 'info' | 'success' | 'warning' | 'danger';
+type CalloutKind = 'info' | 'success' | 'warning' | 'danger';
 
 @Component({
   selector: 'pupa-callout',
@@ -15,21 +24,38 @@ type CalloutType = 'info' | 'success' | 'warning' | 'danger';
   styleUrls: ['./callout.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [CalloutService],
 })
-export class PupaCalloutComponent {
-  @Input() public variant: CalloutType = 'info';
-  @Input() public isClosable: boolean = false;
+export class CalloutComponent implements AfterContentInit, OnDestroy {
+  @Input() public kind: CalloutKind = 'info';
 
-  public readonly isShown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly hasHeader$: Observable<boolean> = this.calloutService.hasHeader$;
 
-  public readonly icons: Map<CalloutType, string> = new Map<CalloutType, string>([
+  public readonly isCollapsed$: Observable<boolean> = this.calloutService.isCollapsed$;
+
+  public readonly icons: Map<CalloutKind, string> = new Map<CalloutKind, string>([
     ['info', appInfoFilledIcon.name],
     ['success', appCheckRoundFilledIcon.name],
     ['warning', appAttentionFilledIcon.name],
     ['danger', appErrorFilledIcon.name],
   ]);
 
-  public closeCallout(): void {
-    this.isShown$.next(false);
+  private readonly subscription: Subscription = new Subscription();
+
+  constructor(private readonly hostElement: ElementRef<HTMLElement>, private readonly calloutService: CalloutService) {}
+
+  public ngAfterContentInit(): void {
+    this.subscription.add(this.processCloseEvent());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private processCloseEvent(): Subscription {
+    return this.calloutService.isClosed$.subscribe(() => {
+      this.ngOnDestroy();
+      this.hostElement.nativeElement.remove();
+    });
   }
 }
