@@ -1,12 +1,52 @@
-<h1>Info block</h1>
+<h1>Callout</h1>
 
 <demo-page>
   <div *demoPageTab="'overview'">
+    <p>
+      <pupa-code-inline>pupa-callout</pupa-code-inline>
+      is a static component used to display information for user.
+    </p>
+    <p>It can be used alone, but it also provides several pre-styled sections:</p>
+    <ul>
+      <li>
+        <pupa-code-inline>pupa-callout-header</pupa-code-inline>
+        - container for callout title
+      </li>
+      <li>
+        <pupa-code-inline>pupa-callout-body</pupa-code-inline>
+        - container for main content
+      </li>
+      <li>
+        <pupa-code-inline>pupa-callout-footer</pupa-code-inline>
+        - container for additional links, tags or other components
+      </li>
+      <li>
+        <pupa-code-inline>pupa-callout-row</pupa-code-inline>
+        - flexible container inside <pupa-code-inline>pupa-callout-footer</pupa-code-inline> dividing rows
+      </li>
+      <li>
+        <pupa-code-inline>pupa-callout-actions</pupa-code-inline>
+        - container for action buttons
+      </li>
+    </ul>
+    <p>As well as common action buttons:</p>
+    <ul>
+      <li>
+        <pupa-code-inline>pupa-callout-collapse-button</pupa-code-inline>
+        - button used to shrink callout content
+      </li>
+      <li>
+        <pupa-code-inline>pupa-callout-close-button</pupa-code-inline>
+        - button used to delete callout from page
+      </li>
+    </ul>
+    <p>All these components are optional.</p>
+
     <h3 demoAnchor>Basic usage</h3>
     <pupa-code-container [content]="example1Content">
       <demo-callout-example-1 *pupaCodeContainerPreviewTemplate></demo-callout-example-1>
     </pupa-code-container>
-    <h3 demoAnchor>Closable callout</h3>
+    <h3 demoAnchor>Additional components</h3>
     <pupa-code-container [content]="example2Content">
       <demo-callout-example-2 *pupaCodeContainerPreviewTemplate></demo-callout-example-2>
     </pupa-code-container>
@@ -14,28 +54,20 @@
 
   <div *demoPageTab="'api'">
     <demo-example-viewer>
-      <demo-example-viewer-content>
-        <pupa-callout [variant]="variant$ | async" [isClosable]="isClosable$ | async">
-          {{ variant$ | async }}
+      <demo-example-viewer-content *ngIf="kind$ | async as kind">
+        <pupa-callout [kind]="kind">
+          {{ kind | titlecase }}
         </pupa-callout>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
-        <demo-example-viewer-property decoratorName="input" name="variant" type="CalloutType">
+        <demo-example-viewer-property decoratorName="input" name="kind" type="CalloutKind">
           <ng-container *demoExampleViewerPropertyDescription>
-            <p>Sets the variant of the callout.</p>
+            <p>Sets the kind of the callout.</p>
             <p>Default: <pupa-code-inline>'info'</pupa-code-inline></p>
           </ng-container>
-          <demo-props-select #variant$ direction="row" [options]="variantOptions"></demo-props-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="isClosable" type="boolean">
-          <ng-container *demoExampleViewerPropertyDescription>
-            <p>Sets is callout closable.</p>
-            <p>Default: <pupa-code-inline>false</pupa-code-inline></p>
-          </ng-container>
-          <demo-props-switcher #isClosable$></demo-props-switcher>
+          <demo-props-select #kind$ direction="row" [options]="kindOptions"></demo-props-select>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

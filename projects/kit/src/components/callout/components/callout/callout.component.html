@@ -1,15 +1,17 @@
-<div *ngIf="isShown$ | async" class="callout" [ngClass]="'callout_' + variant">
-  <div class="callout__container">
-    <div class="icon"><pupa-icon [name]="icons.get(variant)"></pupa-icon></div>
-    <div>
+<div
+  class="callout"
+  [ngClass]="'callout_' + kind"
+  [class.callout_collapsed]="isCollapsed$ | async"
+  [class.callout_has-header]="hasHeader$ | async"
+>
+  <div class="icon"><pupa-icon [name]="icons.get(kind)"></pupa-icon></div>
+  <div>
+    <div class="callout__header">
+      <ng-content select="pupa-callout-header"></ng-content>
+    </div>
+    <div class="callout__content">
       <ng-content></ng-content>
     </div>
   </div>
-  <pupa-button-icon
-    *ngIf="isClosable"
-    (click)="closeCallout()"
-    [icon]="'app-cross'"
-    [kind]="'secondary'"
-    [size]="'xs'"
-  ></pupa-button-icon>
+  <ng-content select="pupa-callout-actions"></ng-content>
 </div>

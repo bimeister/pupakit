@@ -7,15 +7,32 @@
 }
 
 .callout {
-  @include flex-container(row, flex-start, space-between);
+  @include flex-container(row, flex-start, flex-start);
+  color: semantic-color(text-primary);
   border-radius: $controlBorderRadius;
-  padding: 2rem;
-  margin-bottom: 3rem;
+  padding: 3rem;
 
   .icon {
-    font-size: 5rem;
-    line-height: 4rem;
+    font-size: 4rem;
+    line-height: 3rem;
     margin-right: 2rem;
+  }
+
+  &__content {
+    @include font-preset-body-s;
+    overflow: hidden;
+  }
+
+  &_collapsed:not(&_has-header) &__content {
+    @include line-clamp(1);
+  }
+
+  &_collapsed.callout_has-header &__content {
+    display: none;
+  }
+
+  &:not(&_collapsed).callout_has-header &__header {
+    margin-bottom: 1rem;
   }
 
   &_info {
@@ -52,9 +69,5 @@
     .icon {
       color: semantic-color(kind-danger-normal);
     }
-  }
-
-  &__container {
-    display: flex;
   }
 }
