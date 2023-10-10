@@ -180,7 +180,7 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
           ({ dndItem }: DndItemConfig<Source>) => dndItem
         );
 
-        if (!currentHostIsTarget) {
+        if (!currentHostIsTarget || isNil(dndMoveEvent.dndTargetItemId)) {
           this.dndMove.next({
             dndSourceItems,
             dndTargetItem: null,
@@ -191,10 +191,6 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
             currentHostIsSource,
             currentHostIsTarget,
           });
-          return;
-        }
-
-        if (isNil(dndMoveEvent.dndTargetItemId)) {
           return;
         }
 
@@ -260,27 +256,21 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
         const dndTargetItemConfig: DndItemConfig<Target> = this.dndItemsRegistryService.getDndItemConfig(
           dndDropEvent.dndTargetItemId
         );
+
         const dndDropPosition: DndDropPosition = this.calcDndDropPosition(
           dndTargetItemConfig.dndItem.elementParts,
           dndDropEvent.dndCloneCoords
         );
-        const allSourceItemsCanBeDroppedToTargetItem: boolean = dndTargetItemConfig.canBeDroppableFor(
-          dndTargetItemConfig.dndItem,
-          dndSourceItems,
-          dndDropPosition
-        );
 
-        if (allSourceItemsCanBeDroppedToTargetItem) {
-          this.dndDrop.next({
-            dndSourceItems,
-            dndTargetItem: dndTargetItemConfig.dndItem,
-            dndDropPosition,
-            dndSourceHostId: dndDropEvent.dndSourceHost.getHostId(),
-            dndTargetHostId: dndDropEvent.dndTargetHostId,
-            currentHostIsSource,
-            currentHostIsTarget,
-          });
-        }
+        this.dndDrop.next({
+          dndSourceItems,
+          dndTargetItem: dndTargetItemConfig.dndItem,
+          dndDropPosition,
+          dndSourceHostId: dndDropEvent.dndSourceHost.getHostId(),
+          dndTargetHostId: dndDropEvent.dndTargetHostId,
+          currentHostIsSource,
+          currentHostIsTarget,
+        });
       });
   }
 
