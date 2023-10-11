@@ -5,6 +5,9 @@ import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { SelectStateServiceDeclaration } from '../../interfaces/select-state-service-declaration.interface';
 
+const OVERLAY_OFFSET_X_PX: number = 0;
+const OVERLAY_OFFSET_Y_PX: number = 8;
+
 @Directive()
 export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
   protected abstract readonly cdkConnectedOverlay: CdkConnectedOverlay;
@@ -26,10 +29,30 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
   );
 
   public readonly overlayPositions: ConnectionPositionPair[] = [
-    new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
-    new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
-    new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
-    new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }),
+    new ConnectionPositionPair(
+      { originX: 'start', originY: 'bottom' },
+      { overlayX: 'start', overlayY: 'top' },
+      OVERLAY_OFFSET_X_PX,
+      OVERLAY_OFFSET_Y_PX
+    ),
+    new ConnectionPositionPair(
+      { originX: 'start', originY: 'top' },
+      { overlayX: 'start', overlayY: 'bottom' },
+      OVERLAY_OFFSET_X_PX,
+      -OVERLAY_OFFSET_Y_PX
+    ),
+    new ConnectionPositionPair(
+      { originX: 'end', originY: 'bottom' },
+      { overlayX: 'end', overlayY: 'top' },
+      OVERLAY_OFFSET_X_PX,
+      OVERLAY_OFFSET_Y_PX
+    ),
+    new ConnectionPositionPair(
+      { originX: 'end', originY: 'top' },
+      { overlayX: 'end', overlayY: 'bottom' },
+      OVERLAY_OFFSET_X_PX,
+      -OVERLAY_OFFSET_Y_PX
+    ),
   ];
 
   public readonly isOverlayAttached$: BehaviorSubject<boolean> = new BehaviorSubject(null);

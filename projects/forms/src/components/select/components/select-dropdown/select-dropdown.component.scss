@@ -9,12 +9,12 @@
 
 .select-dropdown {
   width: 100%;
+  height: 100%;
   border-radius: $containerBorderRadius;
   @include blur(3rem);
   background-color: semantic-color(surface-glass, alpha-700);
   border: 1px solid semantic-color(lines-normal);
   overflow: hidden;
-  margin-top: 2rem;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;

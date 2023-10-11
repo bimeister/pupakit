@@ -5,6 +5,7 @@
   [cdkConnectedOverlayWidth]="width ? width : (dropDownTriggerButtonWidthPx$ | async)"
   [cdkConnectedOverlayPositions]="overlayPositions"
   [cdkConnectedOverlayFlexibleDimensions]="true"
+  [cdkConnectedOverlayMinHeight]="minHeight"
   (attach)="handleAttachOverlay()"
   (detach)="handleDetachOverlay()"
   (overlayOutsideClick)="handleOutsideClick()"
