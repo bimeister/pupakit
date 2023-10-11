@@ -15,7 +15,7 @@ const ANIMATION_DURATION_MS: number = 150;
   animations: [
     trigger('dropdownExpanded', [
       state('void', style({ margin: '0', transform: 'translateY(10px)', opacity: 0 })),
-      state('expanded', style({ margin: '8px 0', transform: 'translateY(0)', opacity: 1 })),
+      state('expanded', style({ transform: 'translateY(0)', opacity: 1 })),
       transition('void => expanded', [animate(`${ANIMATION_DURATION_MS}ms ease-in`)]),
       transition('expanded => void', [animate(`${ANIMATION_DURATION_MS}ms ease-out`)]),
     ]),
@@ -24,6 +24,7 @@ const ANIMATION_DURATION_MS: number = 150;
 export class SelectDropdownComponent<T> extends SelectDropdownBase<T> {
   @ViewChild(CdkConnectedOverlay) protected readonly cdkConnectedOverlay: CdkConnectedOverlay;
   @Input() public width: string | null = null;
+  @Input() public minHeight: number | null = null;
 
   constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);
