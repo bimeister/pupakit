@@ -1,0 +1,7 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  @include ellipsis-text-overflow;
+}

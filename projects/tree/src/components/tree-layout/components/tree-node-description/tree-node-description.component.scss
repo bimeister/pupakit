@@ -1,0 +1,9 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+
+:host {
+  display: block;
+  @include ellipsis-text-overflow;
+  @include font-size-xxs;
+  color: semantic-color(text-secondary);
+}
