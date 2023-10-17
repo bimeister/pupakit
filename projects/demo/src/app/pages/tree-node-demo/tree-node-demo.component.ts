@@ -29,6 +29,12 @@ export class TreeNodeDemoComponent {
     SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
   };
 
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
+  };
+
   public readonly treeNodePropertiesForm: FormGroup = new FormGroup({
     level: new FormControl(0),
     isDirectory: new FormControl(false),

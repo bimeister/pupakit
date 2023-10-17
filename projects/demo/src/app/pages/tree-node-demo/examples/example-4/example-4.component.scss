@@ -1,0 +1,10 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  width: 50%;
+}

@@ -4,7 +4,8 @@
 
 :host {
   display: block;
-  height: 8rem;
+  min-height: 8rem;
+  overflow: hidden;
 }
 
 .tree-node {
@@ -15,15 +16,8 @@
   border-radius: $controlBorderRadius;
   cursor: pointer;
   @include no-tap-highlight();
-
-  &__selection {
-    position: sticky;
-    left: 0;
-    width: 0.5rem;
-    min-width: 0.5rem;
-    height: 8rem;
-    opacity: 0;
-  }
+  position: relative;
+  overflow: hidden;
 
   &__left {
     @include flex-container(row, center);
@@ -34,19 +28,26 @@
 
   &__right {
     @include flex-container(row);
-    position: sticky;
+    position: absolute;
     right: 0;
-    height: 6rem;
-    margin: 1rem 0 1rem auto;
+    top: 0;
+    bottom: 0;
+    margin-left: auto;
     padding-left: 4rem;
-    padding-right: 2rem;
-    background: linear-gradient(90deg, color(neutral-1, alpha-500) -95%, color(neutral-1) 70%);
+
+    &-gradient {
+      height: 100%;
+      width: 5rem;
+      background: linear-gradient(90deg, color(neutral-1, alpha-1) 0%, color(neutral-1) 100%);
+    }
 
     &-container {
       @include flex-container(row, center, flex-end);
       position: relative;
       z-index: 2;
       width: fit-content;
+      padding-right: 2rem;
+      background: color(neutral-1);
     }
   }
 
@@ -62,27 +63,36 @@
     color: color(neutral-60);
   }
 
-  &__text {
+  &__content {
     @include font-preset-caption-xs();
-
+    @include flex-container(column, flex-start, center);
+    gap: 0.5rem;
     color: color(neutral-1000);
     white-space: nowrap;
-    padding-right: 4rem;
+    padding: 1rem 4rem 1rem 0;
   }
 
   @include hover {
     background-color: color(neutral-6);
 
-    .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-6, alpha-500) -95%, color(neutral-6) 70%);
+    .tree-node__right-container {
+      background-color: color(neutral-6);
+    }
+
+    .tree-node__right-gradient {
+      background: linear-gradient(90deg, color(neutral-6, alpha-1) -95%, color(neutral-6) 70%);
     }
   }
 
   &:active {
     background-color: color(neutral-7);
 
-    .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-7, alpha-500) -95%, color(neutral-7) 70%);
+    .tree-node__right-container {
+      background-color: color(neutral-7);
+    }
+
+    .tree-node__right-gradient {
+      background: linear-gradient(90deg, color(neutral-7, alpha-1) -95%, color(neutral-7) 70%);
     }
   }
 
@@ -95,15 +105,29 @@
   }
 
   &--selected {
+    position: relative;
+    background-color: semantic-color(kind-neutral-selected);
+    border-radius: $controlBorderRadius;
+    overflow: hidden;
     background-color: color(neutral-4);
 
-    .tree-node__selection {
-      opacity: 1;
-      color: color(primary-500);
+    .tree-node__right-container {
+      background-color: color(neutral-4);
     }
 
-    .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-4, alpha-500) -95%, color(neutral-4) 70%);
+    .tree-node__right-gradient {
+      background: linear-gradient(90deg, color(neutral-4, alpha-1) -95%, color(neutral-4) 70%);
+    }
+
+    &::after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      content: '';
+      width: 0.5rem;
+      background-color: semantic-color(kind-primary-normal);
+      pointer-events: none;
     }
   }
 
@@ -112,31 +136,34 @@
       cursor: not-allowed;
       background-color: color(neutral-1);
 
-      .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-1, alpha-500) -95%, color(neutral-1) 70%);
+      .tree-node__right-container {
+        background-color: color(neutral-1);
       }
 
-      .tree-node__text {
+      .tree-node__right-gradient {
+        background: linear-gradient(90deg, color(neutral-1, alpha-1) -95%, color(neutral-1) 70%);
+      }
+
+      .tree-node__content {
         color: color(neutral-60);
       }
 
       &--selected {
         background-color: color(neutral-4);
 
-        .tree-node__selection {
-          color: color(primary-500);
-          opacity: 1;
+        .tree-node__right-container {
+          background-color: color(neutral-4);
         }
 
-        .tree-node__right {
-          background: linear-gradient(90deg, color(neutral-4, alpha-500) -95%, color(neutral-4) 70%);
+        .tree-node__right-gradient {
+          background: linear-gradient(90deg, color(neutral-4, alpha-1) -95%, color(neutral-4) 70%);
         }
       }
     }
   }
 
   &--expanded {
-    .tree-node__text {
+    .tree-node__content {
       @include font-preset-h6();
     }
   }
@@ -144,69 +171,93 @@
   &--hovered {
     background-color: color(neutral-6);
 
-    .tree-node__right {
-      background: linear-gradient(90deg, color(neutral-6, alpha-500) -95%, color(neutral-6) 70%);
+    .tree-node__right-container {
+      background-color: color(neutral-6);
+    }
+
+    .tree-node__right-gradient {
+      background: linear-gradient(90deg, color(neutral-6, alpha-1) -95%, color(neutral-6) 70%);
     }
   }
 
   @include host-selector-dark-theme() {
     background-color: color(neutral-1000);
 
-    &__right {
-      background: linear-gradient(90deg, color(neutral-1000, alpha-500) -95%, color(neutral-1000) 70%);
+    &__right-gradient {
+      background: linear-gradient(90deg, color(neutral-1000, alpha-1) -95%, color(neutral-1000) 70%);
     }
 
-    &__text {
+    &__right-container {
+      background-color: color(neutral-1000);
+    }
+
+    &__content {
       color: color(neutral-1);
     }
 
     @include hover {
       background-color: color(neutral-600);
 
-      .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-600, alpha-500) -95%, color(neutral-600) 70%);
+      .tree-node__right-container {
+        background-color: color(neutral-600);
+      }
+
+      .tree-node__right-gradient {
+        background: linear-gradient(90deg, color(neutral-600, alpha-1) -95%, color(neutral-600) 70%);
       }
     }
 
     &:active {
       background-color: color(neutral-700);
 
-      .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-700, alpha-500) -95%, color(neutral-700) 70%);
+      .tree-node__right-container {
+        background-color: color(neutral-700);
+      }
+
+      .tree-node__right-gradient {
+        background: linear-gradient(90deg, color(neutral-700, alpha-1) -95%, color(neutral-700) 70%);
       }
     }
 
     &--selected {
       background-color: color(neutral-500);
 
-      .tree-node__selection {
-        color: color(primary-40);
+      .tree-node__right-container {
+        background-color: color(neutral-500);
       }
 
-      .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-500, alpha-500) -95%, color(neutral-500) 70%);
+      .tree-node__right-gradient {
+        background: linear-gradient(90deg, color(neutral-500, alpha-1) -95%, color(neutral-500) 70%);
       }
     }
 
     &.tree-node--disabled {
       background-color: color(neutral-1000);
 
-      .tree-node__right {
-        background: linear-gradient(90deg, color(neutral-1000, alpha-500) -95%, color(neutral-1000) 70%);
+      .tree-node__right-container {
+        background-color: color(neutral-1000);
       }
 
-      .tree-node__text {
+      .tree-node__right-gradient {
+        background: linear-gradient(90deg, color(neutral-1000, alpha-1) -95%, color(neutral-1000) 70%);
+      }
+
+      .tree-node__content {
         color: color(neutral-60);
       }
 
       &.tree-node--selected {
         background-color: color(neutral-500);
 
-        .tree-node__right {
-          background: linear-gradient(90deg, color(neutral-500, alpha-500) -95%, color(neutral-500) 70%);
+        .tree-node__right-container {
+          background-color: color(neutral-500);
         }
 
-        .tree-node__text {
+        .tree-node__right-gradient {
+          background: linear-gradient(90deg, color(neutral-500, alpha-1) -95%, color(neutral-500) 70%);
+        }
+
+        .tree-node__content {
           color: color(neutral-60);
         }
       }
