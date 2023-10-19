@@ -15,7 +15,7 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: 18.14.0
+          node-version: 18.16.1
           cache: 'npm'
 
       - name: Install missing packages
@@ -77,7 +77,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           always-auth: true
-          node-version: 18.14.0
+          node-version: 18.16.1
 
       - name: Do prepublish
         run: |
