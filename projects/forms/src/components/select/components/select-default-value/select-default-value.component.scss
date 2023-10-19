@@ -1,0 +1,53 @@
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
+:host {
+  min-height: 37px;
+  margin: 2rem 2rem 0;
+}
+
+.default-value {
+  @include font-size-s();
+  @include hover() {
+    background-color: semantic-color(kind-opacity-hover);
+  }
+
+  display: flex;
+  align-items: center;
+  height: 100%;
+  max-height: 32px;
+  padding: 0 3rem;
+  margin-bottom: 1rem;
+  border-radius: $controlBorderRadius;
+  background-color: transparent;
+  cursor: pointer;
+
+  &_selected {
+    position: relative;
+    border-radius: $controlBorderRadius;
+    background-color: semantic-color(kind-neutral-selected);
+    overflow: hidden;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 0.5rem;
+      background-color: semantic-color(kind-primary-normal);
+      pointer-events: none;
+    }
+  }
+
+  &:active {
+    background-color: semantic-color(kind-opacity-pressed);
+  }
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background: semantic-color(lines-normal);
+}

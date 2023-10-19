@@ -19,6 +19,7 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
   public abstract withReset: boolean;
   public abstract inline: boolean;
   public abstract size: SelectSize;
+  public abstract defaultValue: T;
 
   public invalidTooltipHideOnHover: boolean = false;
   public invalidTooltipDisabled: boolean = false;
@@ -70,6 +71,7 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
     this.processWithResetChange(changes?.withReset);
     this.processInlineChange(changes?.inline);
     this.processSizeChange(changes?.size);
+    this.processDefaultValueChange(changes?.defaultValue);
 
     this.processInvalidTooltipHideOnHoverChange(changes?.invalidTooltipHideOnHover);
     this.processInvalidTooltipDisabledChange(changes?.invalidTooltipDisabled);
@@ -175,6 +177,16 @@ export abstract class SelectBase<T> implements OnInit, OnChanges, OnDestroy, Con
     }
 
     this.selectStateService.setSizeState(updatedValue);
+  }
+
+  private processDefaultValueChange(change: ComponentChange<this, T>): void {
+    const updatedValue: T | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.selectStateService.setDefaultValueState(updatedValue);
   }
 
   private processInvalidTooltipHideOnHoverChange(change: ComponentChange<this, boolean>): void {

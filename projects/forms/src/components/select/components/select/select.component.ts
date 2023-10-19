@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, Optional, TemplateRef, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+  Optional,
+  TemplateRef,
+  ViewEncapsulation,
+} from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { Nullable } from '@bimeister/utilities';
+import { isNil, Nullable } from '@bimeister/utilities';
 import { SelectBase } from '../../../../declarations/classes/abstract/select-base.abstract';
 import { SelectSize } from '../../../../declarations/types/select-size.type';
 import { SelectStateService } from '../../services/select-state.service';
@@ -13,11 +21,12 @@ import { SelectStateService } from '../../services/select-state.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [SelectStateService],
 })
-export class SelectComponent<T> extends SelectBase<T> {
+export class SelectComponent<T> extends SelectBase<T> implements OnInit {
   @Input() public isMultiSelectionEnabled: boolean = false;
   @Input() public isUnselectionEnabled: boolean = false;
   @Input() public isPatched: boolean = false;
   @Input() public placeholder: Nullable<string> = null;
+  @Input() public defaultValue: Nullable<T> = null;
 
   @Input() public withReset: boolean = false;
   @Input() public inline: boolean = false;
@@ -34,5 +43,13 @@ export class SelectComponent<T> extends SelectBase<T> {
 
   public close(): void {
     this.processCloseEvent();
+  }
+
+  public ngOnInit(): void {
+    super.ngOnInit();
+
+    if (!isNil(this.defaultValue)) {
+      this.formControl.setValue(this.defaultValue);
+    }
   }
 }

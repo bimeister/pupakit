@@ -31,6 +31,7 @@ import { SelectTriggerTagsComponent } from './components/select-trigger-tags/sel
 import { SelectTriggerComponent } from './components/select-trigger/select-trigger.component';
 import { SelectComponent } from './components/select/select.component';
 import { PupaSelectTriggerTagTemplateDirective } from './directives/select-trigger-tag-template.directive';
+import { SelectDefaultValueComponent } from './components/select-default-value/select-default-value.component';
 
 const COMPONENTS: Type<unknown>[] = [
   SelectComponent,
@@ -48,6 +49,8 @@ const COMPONENTS: Type<unknown>[] = [
   SelectDropdownComponent,
   SelectDropdownHeaderComponent,
   SelectDropdownFooterComponent,
+
+  SelectDefaultValueComponent,
 ];
 
 const DIRECTIVES: Type<unknown>[] = [PupaSelectTriggerTagTemplateDirective];

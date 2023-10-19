@@ -52,6 +52,7 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   public readonly withReset$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly inline$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly size$: BehaviorSubject<SelectSize> = new BehaviorSubject<SelectSize>('medium');
+  public readonly defaultValue$: BehaviorSubject<Nullable<T>> = new BehaviorSubject<Nullable<T>>(null);
 
   public readonly isTriggerTouched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
@@ -164,6 +165,10 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
 
   public setSizeState(size: SelectSize): void {
     this.size$.next(size);
+  }
+
+  public setDefaultValueState(defaultValue: T): void {
+    this.defaultValue$.next(defaultValue);
   }
 
   public setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void {
@@ -279,25 +284,31 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       .pipe(
         take(1),
         filterNotNil(),
-        withLatestFrom(this.isMultiSelectionEnabled$, this.onTouchedCallback$, this.onChangeCallback$)
+        withLatestFrom(
+          this.isMultiSelectionEnabled$,
+          this.onTouchedCallback$,
+          this.onChangeCallback$,
+          this.defaultValue$
+        )
       )
       .subscribe(
-        ([control, isMultiSelectionEnable, onTouchedCallback, onChangeCallback]: [
+        ([control, isMultiSelectionEnable, onTouchedCallback, onChangeCallback, defaultValue]: [
           NgControl,
           boolean,
           OnTouchedCallback,
-          OnChangeCallback<T | T[]>
+          OnChangeCallback<T | T[]>,
+          Nullable<T>
         ]) => {
           const resetValue: T | T[] = isMultiSelectionEnable ? [] : null;
 
-          control.control.setValue(resetValue);
+          control.control.setValue(defaultValue ?? resetValue);
 
           if (typeof onTouchedCallback === 'function') {
             onTouchedCallback();
           }
 
           if (typeof onChangeCallback === 'function') {
-            onChangeCallback(resetValue);
+            onChangeCallback(defaultValue ?? resetValue);
           }
 
           this.resetOutput.next();

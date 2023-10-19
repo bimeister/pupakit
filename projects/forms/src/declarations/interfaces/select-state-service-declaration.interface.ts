@@ -28,6 +28,7 @@ export interface SelectStateServiceDeclaration<T> {
   readonly withReset$: BehaviorSubject<boolean>;
   readonly inline$: BehaviorSubject<boolean>;
   readonly size$: BehaviorSubject<SelectSize>;
+  readonly defaultValue$: BehaviorSubject<Nullable<T>>;
 
   readonly isTriggerTouched$: BehaviorSubject<boolean>;
 
@@ -56,6 +57,7 @@ export interface SelectStateServiceDeclaration<T> {
   setWithResetState(withReset: boolean): void;
   setInlineState(inline: boolean): void;
   setSizeState(size: SelectSize): void;
+  setDefaultValueState(defaultValue: T): void;
   setDisabledState(isDisabled: boolean): void;
 
   setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void;

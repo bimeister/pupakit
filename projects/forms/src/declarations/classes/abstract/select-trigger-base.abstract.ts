@@ -23,6 +23,8 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   public readonly withReset$: Observable<boolean> = this.selectStateService.withReset$;
   public readonly inline$: Observable<boolean> = this.selectStateService.inline$;
   public readonly size$: Observable<SelectSize> = this.selectStateService.size$;
+  public readonly defaultValue$: Observable<Nullable<T>> = this.selectStateService.defaultValue$;
+  public readonly currentValue$: Observable<Nullable<T[]>> = this.selectStateService.currentValue$;
 
   public readonly placeholder$: Observable<string> = this.selectStateService.placeholder$;
 
@@ -43,12 +45,21 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
     map(([isFilled, placeholder]: [boolean, Nullable<string>]) => isFilled || isNil(placeholder))
   );
 
+  public readonly isDefaultValueChosen$: Observable<boolean> = combineLatest([
+    this.defaultValue$,
+    this.currentValue$,
+  ]).pipe(map(([defaultValue, currentValue]: [T, T[]]) => currentValue.some((value: T) => value === defaultValue)));
+
   public readonly isVisibleReset$: Observable<boolean> = combineLatest([
     this.withReset$,
     this.isFilled$,
     this.isDisabled$,
+    this.isDefaultValueChosen$,
   ]).pipe(
-    map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
+    map(
+      ([withReset, isFilled, isDisabled, isDefaultValueChosen]: [boolean, boolean, boolean, boolean]) =>
+        withReset && isFilled && !isDisabled && !isDefaultValueChosen
+    )
   );
 
   public readonly invalidTooltipHideOnHover$: Observable<boolean> = this.selectStateService.invalidTooltipHideOnHover$;
