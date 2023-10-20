@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Clipboard } from '@angular/cdk/clipboard';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { ToastsService } from '@bimeister/pupakit.overlays';
 
 interface Preset {
@@ -7,6 +7,8 @@ interface Preset {
   class: string;
   title: string;
 }
+
+const HEADING_PRESETS_COUNT: number = 7;
 
 @Component({
   selector: 'demo-typography-example-presets',
@@ -16,7 +18,7 @@ interface Preset {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TypographyPresetsComponent {
-  public readonly headingPresets: Preset[] = Array(6)
+  public readonly headingPresets: Preset[] = Array(HEADING_PRESETS_COUNT)
     .fill(undefined)
     .map((_: undefined, index: number) => ({
       class: `font-preset-h${index + 1}`,
