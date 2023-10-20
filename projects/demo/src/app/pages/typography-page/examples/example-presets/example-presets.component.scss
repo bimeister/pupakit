@@ -68,6 +68,10 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
   @include font-preset-h6;
 }
 
+.font-preset-h7 {
+  @include font-preset-h7;
+}
+
 .font-preset-caption-m {
   @include font-preset-caption-m;
 }
