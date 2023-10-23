@@ -24,7 +24,7 @@ import { ComponentChange, ComponentChanges, subscribeOutsideAngular } from '@bim
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDestroy {
-  @Input() public readonly active: boolean = false;
+  @Input() public active: boolean = false;
   public isActive$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public readonly isDisabled$: Observable<boolean> = this.tagStateService.isDisabled$;

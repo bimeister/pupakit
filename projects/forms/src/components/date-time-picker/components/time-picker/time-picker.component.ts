@@ -22,16 +22,16 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerComponent implements OnChanges {
-  @Input() public readonly withSeconds: boolean = false;
+  @Input() public withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly hours: number = null;
+  @Input() public hours: number = null;
   public readonly hours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
-  @Input() public readonly minutes: number = null;
+  @Input() public minutes: number = null;
   public readonly minutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
-  @Input() public readonly seconds: number = null;
+  @Input() public seconds: number = null;
   public readonly seconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   @Output() private readonly selectedHours: EventEmitter<number> = new EventEmitter<number>();

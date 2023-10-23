@@ -14,8 +14,8 @@ import { ExamplesRequestsService } from '../../../../services/requests/examples-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeComponent implements OnChanges {
-  @Input() public readonly code: string = '';
-  @Input() public readonly filePath: string = '';
+  @Input() public code: string = '';
+  @Input() public filePath: string = '';
 
   public readonly code$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 

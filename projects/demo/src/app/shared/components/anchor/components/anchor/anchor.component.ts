@@ -23,7 +23,7 @@ import { AnchorService } from '../../../../../common/services/anchor.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AnchorComponent implements OnChanges, OnInit, OnDestroy {
-  @Input() public readonly anchorName: string;
+  @Input() public anchorName: string;
   public readonly anchorName$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   public readonly anchorIsActivated$: Observable<boolean> = this.anchorService.animateActiveAnchorEvent$.pipe(

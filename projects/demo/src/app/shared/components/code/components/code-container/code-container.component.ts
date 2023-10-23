@@ -32,13 +32,13 @@ export class CodeContainerComponent implements OnInit, OnChanges {
   @ContentChild(CodeContainerPreviewTemplateDirective, { static: true })
   public previewTemplate: CodeContainerPreviewTemplateDirective;
 
-  @Input() public readonly content: Nullable<Record<string, string>> = null;
+  @Input() public content: Nullable<Record<string, string>> = null;
 
   public readonly contentWithCode$: BehaviorSubject<Nullable<Record<string, string>>> = new BehaviorSubject<
     Nullable<Record<string, string>>
   >(null);
 
-  @Input() public readonly isPreviewExist: boolean = true;
+  @Input() public isPreviewExist: boolean = true;
   public readonly isPreviewExist$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
   public readonly tabs$: Observable<Tab[]> = combineLatest([

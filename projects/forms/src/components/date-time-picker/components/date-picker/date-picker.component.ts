@@ -38,37 +38,37 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
   private readonly selectionMode$: BehaviorSubject<DatePickerSelectionMode> =
     this.datePickerStateService.selectionMode$;
 
-  @Input() public readonly selectedDate: Date;
+  @Input() public selectedDate: Date;
   public readonly selectedDate$: BehaviorSubject<Date> = this.datePickerStateService.selectedDate$;
 
-  @Input() public readonly selectedRange: Date[];
+  @Input() public selectedRange: Date[];
   public readonly selectedRange$: BehaviorSubject<Date[]> = this.datePickerStateService.selectedRange$;
 
-  @Input() public readonly previewMode: DatePickerPreviewMode;
+  @Input() public previewMode: DatePickerPreviewMode;
   public readonly previewMode$: BehaviorSubject<DatePickerPreviewMode> = this.datePickerStateService.previewMode$;
 
-  @Input() public readonly withSeconds: boolean = false;
+  @Input() public withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = this.datePickerStateService.withSeconds$;
 
-  @Input() public readonly hours: number | null = null;
+  @Input() public hours: number | null = null;
   public readonly hours$: BehaviorSubject<number | null> = this.datePickerStateService.hours$;
 
-  @Input() public readonly minutes: number | null = null;
+  @Input() public minutes: number | null = null;
   public readonly minutes$: BehaviorSubject<number | null> = this.datePickerStateService.minutes$;
 
-  @Input() public readonly seconds: number | null = null;
+  @Input() public seconds: number | null = null;
   public readonly seconds$: BehaviorSubject<number | null> = this.datePickerStateService.seconds$;
 
-  @Input() public readonly isBackDating: boolean = true;
+  @Input() public isBackDating: boolean = true;
   public readonly isBackDating$: BehaviorSubject<boolean> = this.datePickerStateService.isBackDating$;
 
-  @Input() public readonly availableEndDate: Date | number = Infinity;
+  @Input() public availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableEndDate$;
 
-  @Input() public readonly availableStartDate: Date | number = -Infinity;
+  @Input() public availableStartDate: Date | number = -Infinity;
   public readonly availableStartDate$: BehaviorSubject<Date | number> = this.datePickerStateService.availableStartDate$;
 
-  @Input() public readonly defaultTime: Date | null = null;
+  @Input() public defaultTime: Date | null = null;
 
   @Output() public readonly date: EventEmitter<Date> = new EventEmitter<Date>();
   @Output() public readonly range: EventEmitter<[Date, Date]> = new EventEmitter<[Date, Date]>();

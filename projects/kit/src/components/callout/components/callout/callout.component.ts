@@ -17,8 +17,8 @@ type CalloutType = 'info' | 'success' | 'warning' | 'danger';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PupaCalloutComponent {
-  @Input() public readonly variant: CalloutType = 'info';
-  @Input() public readonly isClosable: boolean = false;
+  @Input() public variant: CalloutType = 'info';
+  @Input() public isClosable: boolean = false;
 
   public readonly isShown$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 

@@ -9,5 +9,5 @@ import { BadgeIndicatorState } from '../../../../declarations/types/badge-indica
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeIndicatorComponent {
-  @Input() public readonly state: BadgeIndicatorState = 'new';
+  @Input() public state: BadgeIndicatorState = 'new';
 }

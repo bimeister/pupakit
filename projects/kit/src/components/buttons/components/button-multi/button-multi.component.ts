@@ -25,7 +25,7 @@ import { DropdownDirectiveParams } from '../../../../declarations/interfaces/dro
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonMultiComponent extends ButtonComponent implements OnChanges, AfterViewInit, DropdownHost {
-  @Input() public readonly kind: ButtonMultiKind = 'primary';
+  @Input() public kind: ButtonMultiKind = 'primary';
 
   @ViewChild(DropdownDirective, { static: true }) private readonly dropdown: DropdownDirective;
 

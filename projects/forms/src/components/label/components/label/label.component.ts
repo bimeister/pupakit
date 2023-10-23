@@ -14,16 +14,16 @@ import { LabelSize } from '../../../../declarations/types/label-size.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LabelComponent implements OnChanges {
-  @Input() public readonly size: LabelSize = 'medium';
+  @Input() public size: LabelSize = 'medium';
   public readonly size$: BehaviorSubject<LabelSize> = new BehaviorSubject<LabelSize>('medium');
 
-  @Input() public readonly disabled: boolean = false;
+  @Input() public disabled: boolean = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly icon: Nullable<string>;
+  @Input() public icon: Nullable<string>;
   public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public readonly iconPosition: LabelIconPosition = 'left';
+  @Input() public iconPosition: LabelIconPosition = 'left';
   public readonly iconPosition$: BehaviorSubject<LabelIconPosition> = new BehaviorSubject<LabelIconPosition>('left');
   public readonly isReversedDirection$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
