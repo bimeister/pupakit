@@ -42,7 +42,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     this.config
   );
   private currentZIndex: number = 0;
-
+  private popoverAutoCloseTimeout: number;
   constructor(
     private readonly config: PopoverConfig<TComponent, PopoverDataType<TComponent>>,
     private readonly overlay: Overlay,
@@ -54,6 +54,9 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     this.handleXsBreakpointChange();
     this.outsideEventsSubscription.add(this.listenOutsideEventsForCloseProcess());
     this.outsideEventsSubscription.add(this.popoverRefClosingProcess());
+    if (!isNil(this.config.autoCloseTimeout)) {
+      this.outsideEventsSubscription.add(this.processOverlayEvents());
+    }
   }
 
   public updateOverlayPosition(): void {
@@ -168,6 +171,15 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
   private popoverRefClosingProcess(): Subscription {
     return this.popoverRef.closed$.subscribe(() => this.outsideEventsSubscription.unsubscribe());
   }
+  private startAutoCloseTimer(): void {
+    if (!isNil(this.popoverAutoCloseTimeout)) {
+      clearTimeout(this.popoverAutoCloseTimeout);
+    }
+
+    this.popoverAutoCloseTimeout = window.setTimeout(() => {
+      this.popoverRef.close();
+    }, this.config.autoCloseTimeout);
+  }
 
   private isClickedOnAnchor(clickedElement: HTMLElement): boolean {
     if (this.config.anchor instanceof ElementRef) {
@@ -175,5 +187,18 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
       return anchorElement.contains(clickedElement);
     }
     return false;
+  }
+
+  private processOverlayEvents(): Subscription {
+    const overlayLeaveEvent$: Observable<Event> = fromEvent(this.overlayRef.overlayElement, 'mouseleave');
+    const overlayEnterEvent$: Observable<Event> = fromEvent(this.overlayRef.overlayElement, 'mouseenter');
+    let triggerLeaveEvent$: Observable<Event>;
+    if (this.config.anchor instanceof ElementRef) {
+      triggerLeaveEvent$ = fromEvent(this.config.anchor.nativeElement, 'mouseleave');
+    }
+
+    return merge(overlayLeaveEvent$, overlayEnterEvent$, triggerLeaveEvent$).subscribe((event: Event) => {
+      event.type === 'mouseenter' ? clearTimeout(this.popoverAutoCloseTimeout) : this.startAutoCloseTimer();
+    });
   }
 }

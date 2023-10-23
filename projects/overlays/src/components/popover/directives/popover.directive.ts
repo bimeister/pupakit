@@ -1,7 +1,6 @@
-import { Directive, ElementRef, Injector, Input, NgZone, OnDestroy, TemplateRef } from '@angular/core';
-import { subscribeOutsideAngular } from '@bimeister/pupakit.common';
+import { Directive, ElementRef, Injector, Input, OnDestroy, TemplateRef } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
-import { BehaviorSubject, fromEvent, merge, NEVER, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { filter, switchMap } from 'rxjs/operators';
 import { OpenedPopover } from '../../../declarations/classes/opened-popover.class';
 import { PopoversService } from '../../../services/popovers.service';
@@ -17,7 +16,6 @@ export class PopoverDirective implements OnDestroy {
   @Input() public pupaPopoverDisabled: boolean = false;
 
   private openedPopover: OpenedPopover | null = null;
-  private isTouched: boolean = false;
 
   private readonly isOpenedState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public readonly isOpened$: Observable<boolean> = this.isOpenedState$.asObservable();
@@ -25,11 +23,9 @@ export class PopoverDirective implements OnDestroy {
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,
     private readonly popoversService: PopoversService,
-    private readonly injector: Injector,
-    private readonly ngZone: NgZone
+    private readonly injector: Injector
   ) {
     this.subscription.add(this.processSelfClick());
-    this.subscription.add(this.processSelfTouch());
   }
 
   public ngOnDestroy(): void {
@@ -46,11 +42,6 @@ export class PopoverDirective implements OnDestroy {
       .pipe(
         filter(() => !this.pupaPopoverDisabled),
         switchMap(() => {
-          if (this.isTouched) {
-            this.isTouched = false;
-            return NEVER;
-          }
-
           this.openedPopover = this.popoversService.open<PopoverTemplateComponent<unknown>>({
             component: PopoverTemplateComponent,
             anchor: this.elementRef,
@@ -68,20 +59,6 @@ export class PopoverDirective implements OnDestroy {
       .subscribe(() => {
         this.openedPopover = null;
         this.isOpenedState$.next(false);
-      });
-  }
-
-  private processSelfTouch(): Subscription {
-    return merge(
-      fromEvent(this.elementRef.nativeElement, 'mousedown'),
-      fromEvent(this.elementRef.nativeElement, 'touchstart')
-    )
-      .pipe(
-        subscribeOutsideAngular(this.ngZone),
-        filter(() => !isNil(this.openedPopover))
-      )
-      .subscribe(() => {
-        this.isTouched = true;
       });
   }
 }
