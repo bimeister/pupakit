@@ -7,5 +7,6 @@ export interface PopoverConfig<TComponent, TData> {
   component: ComponentType<TComponent>;
   anchor: ElementRef<HTMLElement> | Position;
   injector?: Injector;
+  autoCloseTimeout?: number;
   hasBackdrop: boolean;
 }

@@ -28,25 +28,10 @@ export class PopoversService {
     config: PopoverConfig<TComponent, PopoverDataType<TComponent>>
   ): OpenedPopover<PopoverReturnType<TComponent>> {
     const anchor: ElementRef<HTMLElement> | Position = config.anchor;
-    const isExisting: boolean = this.popoverRefByAnchor.has(anchor);
+    const isExists: boolean = this.popoverRefByAnchor.has(anchor);
 
-    const popover: Popover<TComponent> = isExisting
-      ? this.popoverRefByAnchor.get(anchor)
-      : new Popover(
-          config,
-          this.overlay,
-          this.injector,
-          this.rendererFactory,
-          this.clientUiStateHandlerService,
-          this.document
-        );
-
-    const popoverRef: PopoverRef<PopoverDataType<TComponent>, PopoverReturnType<TComponent>> = popover.open(isExisting);
-
-    if (!isExisting) {
-      this.popoverRefByAnchor.set(anchor, popover);
-      this.portalLayersService.register(popover);
-    }
+    const popover: Popover<TComponent> = this.getPopover(config);
+    const popoverRef: PopoverRef<PopoverDataType<TComponent>, PopoverReturnType<TComponent>> = popover.open(isExists);
 
     this.portalLayersService.moveToTopById(popover.id);
 
@@ -66,5 +51,37 @@ export class PopoversService {
     if (popover instanceof Popover) {
       popover.updateOverlayPosition();
     }
+  }
+
+  private getPopover<TComponent extends PopoverComponentBase<unknown, unknown>>(
+    config: PopoverConfig<TComponent, PopoverDataType<TComponent>>
+  ): Popover<TComponent> {
+    const isExists: boolean = this.popoverRefByAnchor.has(config.anchor);
+    return isExists ? this.popoverRefByAnchor.get(config.anchor) : this.createPopover(config);
+  }
+
+  private createPopover<TComponent extends PopoverComponentBase<unknown, unknown>>(
+    config: PopoverConfig<TComponent, PopoverDataType<TComponent>>
+  ): Popover<TComponent> {
+    const popover: Popover<TComponent> = new Popover(
+      config,
+      this.overlay,
+      this.injector,
+      this.rendererFactory,
+      this.clientUiStateHandlerService,
+      this.document
+    );
+
+    this.registerPopover(popover, config.anchor);
+
+    return popover;
+  }
+
+  private registerPopover<TComponent extends PopoverComponentBase<unknown, unknown>>(
+    popover: Popover<TComponent>,
+    anchor: ElementRef<HTMLElement> | Position
+  ): void {
+    this.popoverRefByAnchor.set(anchor, popover);
+    this.portalLayersService.register(popover);
   }
 }
