@@ -21,8 +21,8 @@ type ResetType = 'onMouseLeave' | 'custom';
 export class FloatingCardComponent {
   @HostBinding('style.transform') public transform: string = DEFAULT_ROTATION_TRANSFORM;
 
-  @Input() public readonly ratio: number = 2;
-  @Input() public readonly resetType: ResetType = 'onMouseLeave';
+  @Input() public ratio: number = 2;
+  @Input() public resetType: ResetType = 'onMouseLeave';
 
   constructor(private readonly elementRef: ElementRef<HTMLElement>) {}
 

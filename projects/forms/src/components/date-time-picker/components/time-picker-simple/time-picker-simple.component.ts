@@ -20,19 +20,19 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerSimpleComponent implements OnChanges {
-  @Input() public readonly withSeconds: boolean = false;
+  @Input() public withSeconds: boolean = false;
   public readonly withSeconds$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly withGradient: boolean = false;
+  @Input() public withGradient: boolean = false;
   public readonly withGradient$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly chosenHours: number = null;
+  @Input() public chosenHours: number = null;
   public readonly chosenHours$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
-  @Input() public readonly chosenMinutes: number = null;
+  @Input() public chosenMinutes: number = null;
   public readonly chosenMinutes$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
-  @Input() public readonly chosenSeconds: number = null;
+  @Input() public chosenSeconds: number = null;
   public readonly chosenSeconds$: BehaviorSubject<number> = new BehaviorSubject<number>(null);
 
   public readonly hours: number[] = this.timePickerStateService.hours;

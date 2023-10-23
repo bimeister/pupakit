@@ -33,8 +33,8 @@ import { RadioGroupService } from '../../services/radio-group.service';
   ],
 })
 export class RadioGroupComponent<T> implements ControlValueAccessor, OnInit, OnChanges, OnDestroy {
-  @Input() public readonly size: RadioControlSize = 'medium';
-  @Input() public readonly disabled: boolean = false;
+  @Input() public size: RadioControlSize = 'medium';
+  @Input() public disabled: boolean = false;
 
   private readonly subscription: Subscription = new Subscription();
 

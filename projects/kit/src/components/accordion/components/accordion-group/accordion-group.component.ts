@@ -21,7 +21,7 @@ import { filter, map, mapTo, pairwise, startWith, switchMap } from 'rxjs/operato
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AccordionGroupComponent implements OnDestroy, AfterContentInit {
-  @Input() public readonly closeOthers: boolean = true;
+  @Input() public closeOthers: boolean = true;
 
   @ContentChildren(AccordionComponent) public readonly accordionList: QueryList<AccordionComponent>;
 

@@ -32,13 +32,13 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
   @Input() public size: TextareaSize = 'medium';
   public readonly size$: BehaviorSubject<TextareaSize> = new BehaviorSubject<TextareaSize>('medium');
 
-  @Input() public readonly placeholder: string = '';
+  @Input() public placeholder: string = '';
   public readonly placeholder$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  @Input() public readonly autocomplete: boolean = false;
+  @Input() public autocomplete: boolean = false;
   public readonly autocomplete$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly isPatched: boolean = false;
+  @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public minRows: number = 2;

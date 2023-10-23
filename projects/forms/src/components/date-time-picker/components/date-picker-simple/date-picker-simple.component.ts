@@ -39,16 +39,16 @@ enum DatePickerState {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerSimpleComponent implements OnChanges {
-  @Input() public readonly baseDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
+  @Input() public baseDate: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
 
-  @Input() public readonly isLeftDoubleDatePicker: boolean = false;
+  @Input() public isLeftDoubleDatePicker: boolean = false;
   public readonly isLeftDoubleDatePicker$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly isRightDoubleDatePicker: boolean = false;
+  @Input() public isRightDoubleDatePicker: boolean = false;
   public readonly isRightDoubleDatePicker$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly needAddedWeek: boolean = false;
+  @Input() public needAddedWeek: boolean = false;
   public readonly needAddedWeek$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Output() public readonly nextMonthClicked: EventEmitter<void> = new EventEmitter<void>();

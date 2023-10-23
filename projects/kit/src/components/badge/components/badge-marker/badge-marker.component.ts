@@ -9,5 +9,5 @@ import { BadgeSize } from '../../../../declarations/types/badge-size.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BadgeMarkerComponent {
-  @Input() public readonly size: BadgeSize = 'medium';
+  @Input() public size: BadgeSize = 'medium';
 }

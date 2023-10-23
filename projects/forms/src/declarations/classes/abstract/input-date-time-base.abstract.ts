@@ -43,16 +43,16 @@ const SECONDS_END_POSITION: number = 8;
 export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
-  @Input() public readonly isFixedSize: boolean = true;
+  @Input() public isFixedSize: boolean = true;
   public readonly isFixedSize$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  @Input() public readonly isBackDating: boolean = true;
+  @Input() public isBackDating: boolean = true;
   public readonly isBackDating$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  @Input() public readonly availableEndDate: Date | number = Infinity;
+  @Input() public availableEndDate: Date | number = Infinity;
   public readonly availableEndDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(Infinity);
 
-  @Input() public readonly availableStartDate: Date | number = 0;
+  @Input() public availableStartDate: Date | number = 0;
   public readonly availableStartDate$: BehaviorSubject<Date | number> = new BehaviorSubject<Date | number>(-Infinity);
 
   @Input() public defaultTime: Date | null = null;

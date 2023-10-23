@@ -13,7 +13,7 @@ import { ExamplesRequestsService } from '../../../../services/requests/examples-
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CodeFetchComponent implements OnChanges {
-  @Input() public readonly codeFilePath: string = '';
+  @Input() public codeFilePath: string = '';
   public readonly code$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor(private readonly examplesRequestsService: ExamplesRequestsService) {}

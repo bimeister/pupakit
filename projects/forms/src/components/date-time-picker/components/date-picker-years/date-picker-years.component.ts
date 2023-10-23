@@ -26,7 +26,7 @@ const DEFAULT_YEARS: number[] = Array(YEARS_IN_SECTION)
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DatePickerYearsComponent implements OnChanges {
-  @Input() public readonly years: number[] = DEFAULT_YEARS;
+  @Input() public years: number[] = DEFAULT_YEARS;
   public readonly years$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>(DEFAULT_YEARS);
 
   public readonly currentYear: number = DEFAULT_YEAR;

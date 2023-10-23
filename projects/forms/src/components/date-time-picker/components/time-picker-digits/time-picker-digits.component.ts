@@ -28,10 +28,10 @@ import { TimePickerStateService } from '../../services/time-picker-state.service
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, AfterContentInit {
-  @Input() public readonly digits: number[] = [];
+  @Input() public digits: number[] = [];
   public readonly digits$: BehaviorSubject<number[]> = new BehaviorSubject<number[]>([]);
 
-  @Input() public readonly chosenDigit: number = null;
+  @Input() public chosenDigit: number = null;
 
   public readonly itemSizePx: number = this.timePickerStateService.itemSizePx;
 

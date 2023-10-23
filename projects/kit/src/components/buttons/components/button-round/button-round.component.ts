@@ -13,22 +13,22 @@ import { ButtonType } from '../../../../declarations/types/button-type.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonRoundComponent implements OnChanges {
-  @Input() public readonly type: ButtonType = 'button';
+  @Input() public type: ButtonType = 'button';
   public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('button');
 
-  @Input() public readonly disabled: boolean = false;
+  @Input() public disabled: boolean = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly icon: Nullable<string>;
+  @Input() public icon: Nullable<string>;
   public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public readonly loading: boolean = false;
+  @Input() public loading: boolean = false;
   public readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly active: boolean = false;
+  @Input() public active: boolean = false;
   public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public readonly tabIndex: string = '0';
+  @Input() public tabIndex: string = '0';
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
     this.disabled$.pipe(map((isDisabled: boolean) => (isDisabled ? 'disabled' : null))),
