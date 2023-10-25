@@ -19,6 +19,12 @@
       <pupa-option-icon name="close-circle"></pupa-option-icon>
       Disabled item
     </pupa-dropdown-menu-item>
+    <pupa-dropdown-menu-item>
+      With right actions
+      <ng-container *pupaOptionActionsRight="true">
+        <pupa-button size="m">action</pupa-button>
+      </ng-container>
+    </pupa-dropdown-menu-item>
     <pupa-dropdown-menu-separator></pupa-dropdown-menu-separator>
     <pupa-dropdown-menu-item>
       <div class="text">
