@@ -1,6 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  HostListener,
+  Input,
+  ViewEncapsulation,
+} from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { DropdownMenuContextService } from '../../services/dropdown-menu-context.service';
+import { OptionActionsRightDirective } from '../../../option/directives/option-actions-right.directive';
 
 @Component({
   selector: 'pupa-dropdown-menu-item',
@@ -10,6 +18,8 @@ import { DropdownMenuContextService } from '../../services/dropdown-menu-context
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownMenuItemComponent {
+  @ContentChild(OptionActionsRightDirective) public readonly optionActionsRightDirective: OptionActionsRightDirective;
+
   @Input() public active: boolean = false;
   @Input() public disabled: boolean = false;
   @Input() public autoClose: boolean = true;

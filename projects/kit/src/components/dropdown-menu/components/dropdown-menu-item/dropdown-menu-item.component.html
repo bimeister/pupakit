@@ -5,4 +5,8 @@
   [forceResetHover]="true"
 >
   <ng-content></ng-content>
+
+  <ng-container *pupaOptionActionsRight="true">
+    <ng-container [ngTemplateOutlet]="optionActionsRightDirective?.templateRef"></ng-container>
+  </ng-container>
 </pupa-option>
