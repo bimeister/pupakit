@@ -102,6 +102,7 @@ export class Drawer<ContentComponent, ContainerComponent> implements PortalLayer
       hasBackdrop: this.config.hasBackdrop,
       hasPadding: this.config.hasPadding ?? true,
       isFullscreen: this.config.isFullscreen ?? false,
+      isMiddlePosition: this.config.isMiddlePosition ?? false,
     };
   }
 

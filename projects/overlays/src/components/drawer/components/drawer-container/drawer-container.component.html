@@ -2,6 +2,7 @@
   class="drawer-container"
   [class.drawer-container_with-padding]="hasPadding && !(isFullscreen$ | async)"
   [class.drawer-container_full-screen]="isFullscreen$ | async"
+  [class.drawer-container_middle-position]="isMiddlePosition"
   [ngStyle]="floatStyles$ | async"
   #drawerContainer
 >

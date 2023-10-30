@@ -4,4 +4,5 @@ export interface DrawerLayoutConfig {
   float?: 'left' | 'right';
   hasPadding?: boolean;
   isFullscreen?: boolean;
+  isMiddlePosition?: boolean;
 }
