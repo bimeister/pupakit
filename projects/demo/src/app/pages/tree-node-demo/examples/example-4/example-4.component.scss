@@ -8,3 +8,12 @@
 .content {
   width: 50%;
 }
+
+.node__content {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  & > :not(:last-child) {
+    padding-bottom: 0.5rem;
+  }
+}
