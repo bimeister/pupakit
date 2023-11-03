@@ -3,12 +3,17 @@
   [ngTemplateOutletContext]="{
     isCollapsed: isCollapsed$ | async,
     isDisabled: isDisabled$ | async,
-    isFocused: isFocused$ | async
+    isVisibleReset: isVisibleReset$ | async
   }"
 >
 </ng-container>
 
-<ng-template #searchFieldTemplate let-isCollapsed="isCollapsed" let-isDisabled="isDisabled" let-isFocused="isFocused">
+<ng-template
+  #searchFieldTemplate
+  let-isCollapsed="isCollapsed"
+  let-isDisabled="isDisabled"
+  let-isVisibleReset="isVisibleReset"
+>
   <div
     data-meta="pupa-search-field"
     class="search-field"
@@ -16,6 +21,17 @@
     [class.search-field_collapsible]="isCollapsible$ | async"
     [class.search-field_collapsed]="isCollapsed"
   >
+    <div class="search-field__collapse-icon-container">
+      <pupa-icon
+        data-meta="pupa-search-field__collapse-button"
+        class="search-field__collapse-icon"
+        [class.search-field__collapse-icon_collapsed]="isCollapsed"
+        [class.search-field__collapse-icon_disabled]="isDisabled"
+        (click)="changeCollapsed()"
+        name="app-search"
+      >
+      </pupa-icon>
+    </div>
     <input
       data-meta="pupa-search-field__input"
       class="search-field__input"
@@ -32,26 +48,26 @@
       [value]="value$ | async"
       [attr.maxlength]="maxLength"
     />
-    <pupa-icon
-      data-meta="pupa-search-field__collapse-button"
-      class="search-field__icon"
-      [class.search-field__icon_collapsed]="isCollapsed"
-      [class.search-field__icon_disabled]="isDisabled"
-      (click)="changeCollapsed()"
-      name="app-search"
-    >
-    </pupa-icon>
-    <pupa-button-icon
-      data-meta="pupa-search-field__reset-button"
-      class="search-field__reset"
-      [class.search-field__reset_visible]="isFocused"
-      icon="app-cross-circle"
-      size="s"
-      tabIndex="-1"
-      kind="secondary"
-      [disabled]="isDisabled"
-      (click)="reset()"
-    >
-    </pupa-button-icon>
+
+    <div class="search-field__actions">
+      <pupa-button-icon
+        *ngIf="isVisibleReset"
+        data-meta="pupa-search-field__reset-button"
+        class="search-field__reset"
+        icon="app-close-square"
+        size="m"
+        tabIndex="-1"
+        kind="secondary"
+        [disabled]="isDisabled"
+        (click)="reset()"
+      >
+      </pupa-button-icon>
+
+      <div class="search-field__action-separator" *ngIf="isVisibleSeparator$ | async"></div>
+
+      <div class="search-field__additional-actions" *ngIf="!(isCollapsed$ | async)" (click)="$event.stopPropagation()">
+        <ng-container [ngTemplateOutlet]="searchFieldActionsRightDirective?.templateRef"></ng-container>
+      </div>
+    </div>
   </div>
 </ng-template>
