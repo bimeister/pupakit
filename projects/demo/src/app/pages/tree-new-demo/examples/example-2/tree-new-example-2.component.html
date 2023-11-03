@@ -1,6 +1,7 @@
 <pupa-tree-new #treeNew [controller]="controller" class="tree">
   <ng-container *pupaTreeItemTemplate="let data">
     <pupa-tree-node
+      class="node"
       *pupaLet="treeNew.getTreeNodeProperties(data) | async as treeNodeProperties"
       [treeNodeProperties]="treeNodeProperties"
     >

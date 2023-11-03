@@ -1,0 +1,46 @@
+<div class="content">
+  <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties">
+    <div class="node__content">
+      <pupa-tree-node-title>Title</pupa-tree-node-title>
+      <pupa-tree-node-description>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+      </pupa-tree-node-description>
+    </div>
+  </pupa-tree-node>
+
+  <pupa-tree-node [treeNodeProperties]="disabledLevel0TreeNodeProperties">
+    <div class="node__content">
+      <pupa-tree-node-title>Title</pupa-tree-node-title>
+      <pupa-tree-node-description>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+      </pupa-tree-node-description>
+    </div>
+  </pupa-tree-node>
+
+  <pupa-tree-node [treeNodeProperties]="selectedLevel0TreeNodeProperties">
+    <div class="node__content">
+      <pupa-tree-node-title>Title</pupa-tree-node-title>
+      <pupa-tree-node-description>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+      </pupa-tree-node-description>
+    </div>
+  </pupa-tree-node>
+
+  <pupa-tree-node [treeNodeProperties]="normalLevel0TreeNodeProperties">
+    <div class="node__content">
+      <pupa-tree-node-title>Title</pupa-tree-node-title>
+      <pupa-tree-node-description>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+      </pupa-tree-node-description>
+    </div>
+
+    <ng-container *pupaTreeNodeActions>
+      <pupa-button-icon icon="app-eye-on" size="s" kind="secondary"></pupa-button-icon>
+      <pupa-button-icon icon="app-more" size="s" kind="secondary"></pupa-button-icon>
+    </ng-container>
+  </pupa-tree-node>
+</div>

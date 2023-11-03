@@ -1,0 +1,18 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  width: 40%;
+}
+
+.node__content {
+  padding: 1rem 0;
+
+  & > :not(:last-child) {
+    padding-bottom: 0.5rem;
+  }
+}

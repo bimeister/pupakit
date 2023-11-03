@@ -5,16 +5,11 @@
   [class.tree-node--expanded]="treeNodeProperties.isExpanded"
   [class.tree-node--hovered]="treeNodeProperties.forceHover"
 >
-  <svg
-    class="tree-node__selection"
-    width="2"
-    height="31"
-    viewBox="0 0 2 31"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M2 31V0C0.4 0 0 2 0 3V28C0 30.4 1.33333 31 2 31Z" fill="currentColor" />
-  </svg>
+  <div class="tree-node__left-mask">
+    <div class="tree-node__left-top-round-out"></div>
+    <div class="tree-node__left-bottom-round-out"></div>
+  </div>
+  <div class="tree-node__selection"></div>
   <div class="tree-node__left">
     <div [style.margin-left]="arrowOffset" class="tree-node__arrow-container">
       <ng-container *ngIf="treeNodeProperties.isDirectory">
@@ -39,6 +34,7 @@
     </div>
   </div>
   <div class="tree-node__right">
+    <div class="tree-node__right-gradient"></div>
     <div
       *ngIf="treeNodeActionsTemplate?.isDisplayed$ | async"
       (click)="$event.stopPropagation()"
@@ -46,5 +42,9 @@
     >
       <ng-container [ngTemplateOutlet]="treeNodeActionsTemplate?.templateRef"></ng-container>
     </div>
+  </div>
+  <div class="tree-node__right-mask">
+    <div class="tree-node__right-top-round-out"></div>
+    <div class="tree-node__right-bottom-round-out"></div>
   </div>
 </div>
