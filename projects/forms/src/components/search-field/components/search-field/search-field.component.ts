@@ -1,13 +1,25 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, Optional, ViewEncapsulation } from '@angular/core';
+import {
+  AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Optional,
+  ViewEncapsulation,
+} from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { Nullable, filterFalsy, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, ReplaySubject, Subscription, combineLatest } from 'rxjs';
-import { distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
+import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
+import { debounce, distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
 import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { CollapseDirection } from '../../../../declarations/types/collapse-direction.type';
+import { SearchFieldActionsRightDirective } from '../../directives/search-field-actions-right.directive';
 
 const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
+const ANIMATION_DURATION_MS: number = 200;
 
 @Component({
   selector: 'pupa-search-field',
@@ -16,7 +28,13 @@ const DEFAULT_COLLAPSE_DIRECTION: CollapseDirection = 'to-left';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFieldComponent extends InputBase<Nullable<string>> implements OnChanges {
+export class SearchFieldComponent
+  extends InputBase<Nullable<string>>
+  implements OnChanges, AfterContentInit, OnDestroy
+{
+  @ContentChild(SearchFieldActionsRightDirective)
+  public readonly searchFieldActionsRightDirective: SearchFieldActionsRightDirective;
+
   @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
   public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
     DEFAULT_COLLAPSE_DIRECTION
@@ -42,6 +60,26 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     )
   );
 
+  public readonly isVisibleReset$: Observable<boolean> = combineLatest([
+    this.isCollapsible$,
+    this.isCollapsed$,
+    this.isDisabled$,
+    this.isFilled$,
+  ]).pipe(
+    map(([isCollapsible, isCollapsed, isDisabled, isFilled]: [boolean, boolean, boolean, boolean]) => {
+      const isVisibleReset: boolean = !isDisabled && !isCollapsed && (isCollapsible || isFilled);
+
+      return [isVisibleReset, isCollapsible];
+    }),
+    debounce(([isVisibleReset, isCollapsible]: [boolean, boolean]) =>
+      isVisibleReset && isCollapsible ? timer(ANIMATION_DURATION_MS / 2) : timer(0)
+    ),
+    map(([isVisibleReset]: [boolean, boolean]) => isVisibleReset)
+  );
+
+  public readonly isVisibleSeparatorState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isVisibleSeparator$: Observable<boolean> = this.isVisibleSeparatorState$.asObservable();
+
   constructor(@Optional() ngControl: NgControl) {
     super(ngControl);
 
@@ -52,6 +90,14 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     super.ngOnChanges(changes);
     this.processCollapsibleChange(changes?.collapsible);
     this.processCollapseDirectionChange(changes?.collapseDirection);
+  }
+
+  public ngAfterContentInit(): void {
+    this.subscription.add(this.processActionSeparatorVisibilityChange());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   public setValue(value: Nullable<string>): void {
@@ -111,5 +157,11 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     return this.isCollapsible$.pipe(distinctUntilChanged()).subscribe((isCollapsible: boolean) => {
       this.isCollapsed$.next(isCollapsible);
     });
+  }
+
+  private processActionSeparatorVisibilityChange(): Subscription {
+    return this.isVisibleReset$
+      .pipe(map((isVisibleReset: boolean) => isVisibleReset && !isNil(this.searchFieldActionsRightDirective)))
+      .subscribe((isVisibleSeparator: boolean) => this.isVisibleSeparatorState$.next(isVisibleSeparator));
   }
 }

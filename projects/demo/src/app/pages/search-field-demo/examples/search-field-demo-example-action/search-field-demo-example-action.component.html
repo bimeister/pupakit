@@ -1,0 +1,70 @@
+<div class="example-container">
+  <div class="search-wrapper">
+    <pupa-search-field [formControl]="searchControl1" [placeholder]="'Search with settings'" [collapsible]="false">
+      <pupa-button-icon
+        *pupaSearchFieldActionsRight
+        icon="app-settings-filter"
+        size="m"
+        tabIndex="-1"
+        kind="secondary"
+        (click)="showToast()"
+      >
+      </pupa-button-icon>
+    </pupa-search-field>
+  </div>
+
+  <div class="search-wrapper">
+    <pupa-search-field
+      [formControl]="searchControl2"
+      [placeholder]="'Search with navigation'"
+      [collapsible]="false"
+      [collapseDirection]="'to-left'"
+    >
+      <ng-container *pupaSearchFieldActionsRight>
+        <pupa-button-icon icon="app-caret-left" size="m" tabIndex="-1" kind="secondary" (click)="showToast()">
+        </pupa-button-icon>
+
+        <pupa-button-icon icon="app-caret-right" size="m" tabIndex="-1" kind="secondary" (click)="showToast()">
+        </pupa-button-icon>
+      </ng-container>
+    </pupa-search-field>
+  </div>
+
+  <div class="search-wrapper">
+    <pupa-search-field
+      [formControl]="searchControl3"
+      [placeholder]="'Search with info'"
+      [collapsible]="true"
+      [collapseDirection]="'to-right'"
+    >
+      <pupa-button-icon
+        *pupaSearchFieldActionsRight
+        icon="app-info"
+        size="m"
+        tabIndex="-1"
+        kind="secondary"
+        (click)="showToast()"
+      >
+      </pupa-button-icon>
+    </pupa-search-field>
+  </div>
+
+  <div class="search-wrapper">
+    <pupa-search-field
+      [formControl]="searchControl4"
+      [placeholder]="'Search with cog'"
+      [collapsible]="true"
+      [collapseDirection]="'to-left'"
+    >
+      <pupa-button-icon
+        *pupaSearchFieldActionsRight
+        icon="app-settings-filled"
+        size="m"
+        tabIndex="-1"
+        kind="secondary"
+        (click)="showToast()"
+      >
+      </pupa-button-icon>
+    </pupa-search-field>
+  </div>
+</div>
