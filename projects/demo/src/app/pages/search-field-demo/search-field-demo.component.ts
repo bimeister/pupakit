@@ -37,4 +37,9 @@ export class SearchFieldDemoComponent {
     HTML: `${BASE_REQUEST_PATH}/search-field-demo-example-collapsible/search-field-demo-example-collapsible.component.html`,
     TS: `${BASE_REQUEST_PATH}/search-field-demo-example-collapsible/search-field-demo-example-collapsible.component.ts`,
   };
+
+  public readonly actionExampleContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/search-field-demo-example-action/search-field-demo-example-action.component.html`,
+    TS: `${BASE_REQUEST_PATH}/search-field-demo-example-action/search-field-demo-example-action.component.ts`,
+  };
 }
