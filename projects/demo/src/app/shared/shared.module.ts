@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Type } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PupaCalendarModule } from '@bimeister/pupakit.calendar';
 import { PupaCommonModule } from '@bimeister/pupakit.common';
 import { PupaDndModule } from '@bimeister/pupakit.dnd';
 import { PupaFormsModule } from '@bimeister/pupakit.forms';
@@ -32,7 +31,6 @@ const MODULES: Type<unknown>[] = [
   PupaOverlaysModule,
   PupaWidgetsModule,
   PupaDndModule,
-  PupaCalendarModule,
 ];
 
 @NgModule({

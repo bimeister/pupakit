@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { DayOfWeek } from '@bimeister/pupakit.calendar';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
+import { DayOfWeek } from '../../../declarations/enums/day-of-week.enum';
 
 @Injectable()
 export class DaySelectorStateService {

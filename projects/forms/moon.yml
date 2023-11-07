@@ -13,4 +13,3 @@ dependsOn:
   - 'icons'
   - 'kit'
   - 'tree'
-  - 'calendar'

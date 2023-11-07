@@ -7,14 +7,15 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { DayOfWeek, isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterFalsy, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { dayInMs } from '../../../../declarations/constants/day-in-ms.const';
+import { DayOfWeek } from '../../../../declarations/enums/day-of-week.enum';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
 import { getDaysInMonth } from '../../../../declarations/functions/get-days-in-month.function';
+import { isDate } from '../../../../declarations/functions/is-date.function';
 import { sanitizeDate } from '../../../../declarations/functions/sanitize-date.function';
 import { DatePickerPreviewMode } from '../../../../declarations/types/date-picker-preview-mode.type';
 import { DatePickerStateService } from '../../services/date-picker-state.service';

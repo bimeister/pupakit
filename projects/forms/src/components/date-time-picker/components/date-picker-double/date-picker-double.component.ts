@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
-import { DayOfWeek, isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
 import { dayInMs } from '../../../../declarations/constants/day-in-ms.const';
+import { DayOfWeek } from '../../../../declarations/enums/day-of-week.enum';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
 import { getDaysInMonth } from '../../../../declarations/functions/get-days-in-month.function';
+import { isDate } from '../../../../declarations/functions/is-date.function';
 import { sanitizeDate } from '../../../../declarations/functions/sanitize-date.function';
 
 const DEFAULT_CURRENT_DATE: Date = dateClearTime(new Date());

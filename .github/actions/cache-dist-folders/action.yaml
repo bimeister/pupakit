@@ -4,12 +4,6 @@ description: PupaKit action for cache project dist folders
 runs:
   using: composite
   steps:
-    - name: Cache build calendar
-      uses: actions/cache@v3
-      with:
-        key: 'dist:common:${{github.sha}}'
-        path: ./projects/calendar/dist
-
     - name: Cache build common
       uses: actions/cache@v3
       with:

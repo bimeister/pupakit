@@ -1,0 +1,20 @@
+@use 'mixins' as *;
+
+:host {
+  padding: 4rem;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.time-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.time-picker-header {
+  @include font-preset-h5;
+}

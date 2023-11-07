@@ -40,7 +40,6 @@
     "@bimeister/pupakit.tree": "*",
     "@bimeister/pupakit.widgets": "*",
     "@bimeister/pupakit.dnd": "*",
-    "@bimeister/pupakit.calendar": "*",
     "tslib": "^2.3.0"
   },
   "main": "dist"

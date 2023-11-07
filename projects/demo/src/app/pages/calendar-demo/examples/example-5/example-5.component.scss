@@ -1,0 +1,17 @@
+@use 'mixins' as *;
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4rem;
+  align-items: center;
+
+  @include xs() {
+    justify-content: center;
+  }
+}
+
+.calendar {
+  display: block;
+  height: 73rem;
+}

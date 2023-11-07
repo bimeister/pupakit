@@ -1,5 +1,5 @@
-import { isDate } from '@bimeister/pupakit.calendar';
 import { isNil } from '@bimeister/utilities';
+import { isDate } from '../../declarations/functions/is-date.function';
 
 export function dateClearTime(date: Date): Date {
   if (isNil(date) || !isDate(date)) {
