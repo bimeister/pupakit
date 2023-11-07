@@ -87,6 +87,7 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   }
 
   public writeValue(newValue: T): void {
+    this.isFilled$.next(!isEmpty(newValue));
     this.setValue(newValue);
   }
 
