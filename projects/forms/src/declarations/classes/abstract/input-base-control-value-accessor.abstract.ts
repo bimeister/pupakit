@@ -13,12 +13,10 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   protected readonly control$: BehaviorSubject<Nullable<NgControl>> = new BehaviorSubject(null);
   public readonly value$: BehaviorSubject<T> = new BehaviorSubject(null);
-
+  public readonly isFilled$: Observable<boolean> = this.value$.pipe(map((value: T) => !isEmpty(value)));
   public readonly isDisabled$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isTouched$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
   public readonly isFocused$: BehaviorSubject<Nullable<boolean>> = new BehaviorSubject<boolean>(null);
-  public readonly isFilled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   public readonly isValid$: Observable<boolean> = this.control$.pipe(
     switchMap((control: NgControl) =>
       isNil(control)
@@ -71,7 +69,6 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
 
   public updateValue(updatedValue: T): void {
     this.isTouched$.next(true);
-    this.isFilled$.next(!isEmpty(updatedValue));
 
     combineLatest([this.onChangeCallback$, this.onTouchedCallback$])
       .pipe(take(1))
@@ -87,7 +84,6 @@ export abstract class InputBaseControlValueAccessor<T> implements ControlValueAc
   }
 
   public writeValue(newValue: T): void {
-    this.isFilled$.next(!isEmpty(newValue));
     this.setValue(newValue);
   }
 
