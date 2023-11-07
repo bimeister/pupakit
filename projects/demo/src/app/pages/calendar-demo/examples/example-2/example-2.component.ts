@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { DAYS_IN_WEEK } from '@bimeister/pupakit.calendar';
+import { DAYS_IN_WEEK } from '@bimeister/pupakit.forms';
 
 function getNextWeekDate(date: Date): Date {
   const newDate: Date = new Date(date);

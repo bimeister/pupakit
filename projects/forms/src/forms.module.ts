@@ -1,4 +1,5 @@
 import { NgModule, Type } from '@angular/core';
+import { PupaCalendarModule } from './components/calendar/calendar.module';
 import { PupaControlTextModule } from './components/control-text/control-text.module';
 import { PupaDateTimePickerModule } from './components/date-time-picker/date-time-picker.module';
 import { PupaDaySelectorModule } from './components/day-selector/day-selector.module';
@@ -29,6 +30,7 @@ const MODULES: Type<unknown>[] = [
   PupaRatingModule,
   PupaRequiredFieldModule,
   PupaLabelModule,
+  PupaCalendarModule,
 ];
 
 @NgModule({

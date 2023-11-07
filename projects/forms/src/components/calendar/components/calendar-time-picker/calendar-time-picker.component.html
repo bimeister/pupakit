@@ -1,0 +1,20 @@
+<span class="time-picker-header">{{ timePickerHeader$ | async }}</span>
+
+<ng-container *ngIf="isRange; else singleDate">
+  <div class="time-picker">
+    <pupa-label>{{ startEventTimeText$ | async }}</pupa-label>
+    <ng-container [ngTemplateOutlet]="singleDate"></ng-container>
+  </div>
+  <div class="time-picker">
+    <pupa-label>{{ finishEventTimeText$ | async }}</pupa-label>
+    <ng-container [ngTemplateOutlet]="multipleDate"></ng-container>
+  </div>
+</ng-container>
+
+<ng-template #singleDate>
+  <pupa-input-time [formControl]="startTime" class="time-picker__time-input"></pupa-input-time>
+</ng-template>
+
+<ng-template #multipleDate>
+  <pupa-input-time [formControl]="finishTime" class="time-picker__time-input"></pupa-input-time>
+</ng-template>

@@ -674,66 +674,6 @@
           }
         }
       }
-    },
-    "calendar": {
-      "projectType": "library",
-      "root": "projects/calendar",
-      "sourceRoot": "projects/calendar/src",
-      "prefix": "pupa",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/calendar/ng-package.json",
-            "tsConfig": "projects/calendar/tsconfig.lib.json"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "configurations": {
-            "debugging": {
-              "fix": true,
-              "force": true,
-              "quiet": true
-            },
-            "inspection": {
-              "fix": false,
-              "force": false,
-              "quiet": true
-            },
-            "inspection-ci": {
-              "fix": false,
-              "force": false,
-              "quiet": false
-            }
-          },
-          "options": {
-            "lintFilePatterns": ["./projects/calendar/src/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@angular-builders/jest:run",
-          "configurations": {
-            "ci": {
-              "bail": true,
-              "cache": false,
-              "ci": true,
-              "watch": false,
-              "configPath": "jest.config.ci.js"
-            },
-            "debugging": {
-              "bail": false,
-              "cache": true,
-              "ci": false,
-              "watch": true,
-              "configPath": "jest.config.development.js"
-            }
-          },
-          "options": {
-            "passWithNoTests": true
-          }
-        }
-      }
     }
   },
   "schematics": {

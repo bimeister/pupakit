@@ -1,11 +1,11 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { isDate } from '@bimeister/pupakit.calendar';
 import { TimeDigitFormatPipe } from '@bimeister/pupakit.common';
 import { isEmpty, isNil } from '@bimeister/utilities';
 import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { InputDateTimeHelper } from '../../../../declarations/classes/input-date-time-helper.class';
+import { isDate } from '../../../../declarations/functions/is-date.function';
 import { ValueType } from '../../../../declarations/types/input-value.type';
 import { NumericParsedTimeData } from '../../../../declarations/types/numeric-parsed-time-data.type';
 import { OnChangeCallback } from '../../../../declarations/types/on-change-callback.type';

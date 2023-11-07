@@ -88,6 +88,7 @@ export class SidebarComponent {
         { title: 'Rating', link: '/kit/rating' },
         { title: 'Day selector', link: '/kit/day-selector' },
         { title: 'Form Layout', link: '/kit/form-layout' },
+        { title: 'Calendar', link: '/kit/calendar' },
       ],
       'title'
     ),
@@ -152,11 +153,6 @@ export class SidebarComponent {
     linkItems: sortByProperty([{ title: 'Drag&drop', link: '/kit/dnd' }], 'title'),
   };
 
-  private readonly calendarGroup: LinksGroup = {
-    title: 'Calendar',
-    linkItems: sortByProperty([{ title: 'Calendar', link: '/kit/calendar' }], 'title'),
-  };
-
   private readonly directiveGroup: LinksGroup = {
     title: 'Directives',
     linkItems: sortByProperty([{ title: 'Highlight', link: '/kit/highlight' }], 'title'),
@@ -177,7 +173,6 @@ export class SidebarComponent {
     this.treeGroup,
     this.widgetsGroup,
     this.dndGroup,
-    this.calendarGroup,
     this.demoToolsGroup,
     this.directiveGroup,
   ];

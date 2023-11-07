@@ -20,6 +20,16 @@
     <pupa-code-container [content]="example3Content">
       <demo-calendar-example-3 *pupaCodeContainerPreviewTemplate></demo-calendar-example-3>
     </pupa-code-container>
+
+    <h3 demoAnchor>Date Time Picker</h3>
+    <pupa-code-container [content]="example4Content">
+      <demo-calendar-example-4 *pupaCodeContainerPreviewTemplate></demo-calendar-example-4>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Range Date Time Picker</h3>
+    <pupa-code-container [content]="example5Content">
+      <demo-calendar-example-5 *pupaCodeContainerPreviewTemplate></demo-calendar-example-5>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -27,15 +37,21 @@
       <demo-example-viewer-content [isSticky]="false">
         <div class="calendar">
           <pupa-calendar
+            [mode]="mode | async"
             [isRange]="isRange | async"
             [selected]="dateFormControl.value"
-            (select)="handleSelect($event)"
+            (selectDate)="handleSelect($event)"
           ></pupa-calendar>
         </div>
       </demo-example-viewer-content>
 
       <demo-example-viewer-section-label> CalendarComponent properties </demo-example-viewer-section-label>
       <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="mode" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Mode value</ng-container>
+          <demo-props-select #mode [options]="modeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+
         <demo-example-viewer-property decoratorName="input" name="isRange" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the range selection is enabled</ng-container>
           <demo-props-switcher #isRange></demo-props-switcher>

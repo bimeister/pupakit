@@ -7,12 +7,12 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
+import { isDate } from '../../../../declarations/functions/is-date.function';
 import { sanitizeDate } from '../../../../declarations/functions/sanitize-date.function';
 import { DatePickerStateService } from '../../services/date-picker-state.service';
 

@@ -1,10 +1,10 @@
 import { Inject, Injectable, Optional } from '@angular/core';
-import { DayOfWeek } from '@bimeister/pupakit.calendar';
 import { DEFAULT_LOCALE } from '@bimeister/pupakit.common';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DEFAULT_DAY_SELECTOR_CONFIG } from '../../../declarations/constants/default-day-selector-config.const';
+import { DayOfWeek } from '../../../declarations/enums/day-of-week.enum';
 import { DaySelectorConfig } from '../../../declarations/interfaces/day-selector-config.interface';
 import { DAY_SELECTOR_CONFIG_TOKEN } from '../../../declarations/tokens/day-selector-config.token';
 

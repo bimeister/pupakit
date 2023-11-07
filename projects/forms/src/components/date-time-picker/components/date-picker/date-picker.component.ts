@@ -9,12 +9,12 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, skip, switchMap } from 'rxjs/operators';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
+import { isDate } from '../../../../declarations/functions/is-date.function';
 import { sanitizeDate } from '../../../../declarations/functions/sanitize-date.function';
 import { DatePickerPreviewMode } from '../../../../declarations/types/date-picker-preview-mode.type';
 import { DatePickerSelectionMode } from '../../../../declarations/types/date-picker-selection-mode.type';

@@ -10,7 +10,6 @@ const CURRENT_LOCATION: string = join(__dirname, 'projects');
 const VERSION: string | undefined = env.VERSION;
 
 const PUBLISH_PROJECT_FOLDERS: string[] = [
-  'calendar',
   'common',
   'forms',
   'icons',

@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { LocaleService } from '@bimeister/pupakit.common';
 import {
+  CALENDAR_CONFIG_TOKEN,
   CalendarConfig,
   CalendarTextKey,
-  CALENDAR_CONFIG_TOKEN,
   DayOfWeek,
   MonthIndex,
-} from '@bimeister/pupakit.calendar';
-import { LocaleService } from '@bimeister/pupakit.common';
+} from '@bimeister/pupakit.forms';
 
 const CALENDAR_CONFIG: Partial<CalendarConfig> = {
   startWeekday: DayOfWeek.Sunday,
@@ -40,6 +40,9 @@ const CALENDAR_CONFIG: Partial<CalendarConfig> = {
       texts: {
         [CalendarTextKey.SelectYear]: `Sélectionner l'année`,
         [CalendarTextKey.SelectMonth]: `Sélectionnez un mois`,
+        [CalendarTextKey.Time]: 'Temps',
+        [CalendarTextKey.StartEventTime]: `Heure de début de l'événement`,
+        [CalendarTextKey.FinishEventTime]: `Heure de fin de l'événement`,
       },
     },
   },
