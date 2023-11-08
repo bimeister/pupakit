@@ -1,0 +1,21 @@
+<h1>Hotkey</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <p>
+      <pupa-code-inline>pupa-hotkey</pupa-code-inline>, <pupa-code-inline>pupa-hotkeys</pupa-code-inline> are designed
+      to visually display a type of interaction with the application, which is pressing a button / key on the keyboard,
+      which is assigned a certain action
+    </p>
+
+    <h3 demoAnchor>Basic usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-hotkey-example-1 *pupaCodeContainerPreviewTemplate></demo-hotkey-example-1>
+    </pupa-code-container>
+
+    <h3 demoAnchor>With tooltip</h3>
+    <pupa-code-container [content]="example2Content">
+      <demo-hotkey-example-2 *pupaCodeContainerPreviewTemplate></demo-hotkey-example-2>
+    </pupa-code-container>
+  </div>
+</demo-page>

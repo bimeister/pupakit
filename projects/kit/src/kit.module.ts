@@ -28,6 +28,7 @@ import { PupaTimerModule } from './components/timer/timer.module';
 import { PupaTooltipModule } from './components/tooltip/tooltip.module';
 import { PupaCalloutModule } from './components/callout/callout.module';
 import { ResizableModule } from './components/resizable/resizable.module';
+import { PupaHotkeyModule } from './components/hotkey/hotkey.module';
 
 const MODULES: Type<unknown>[] = [
   PupaSkeletonModule,
@@ -59,6 +60,7 @@ const MODULES: Type<unknown>[] = [
   PupaThemeWrapperModule,
   PupaCalloutModule,
   ResizableModule,
+  PupaHotkeyModule,
 ];
 
 @NgModule({

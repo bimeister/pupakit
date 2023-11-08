@@ -1,0 +1,16 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+:host {
+  @include font-preset-h6();
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  height: 5rem;
+  color: semantic-color(text-secondary);
+  border: 1px solid semantic-color(kind-opacity-normal);
+  border-radius: 0.75rem;
+  user-select: none;
+  width: fit-content;
+}
