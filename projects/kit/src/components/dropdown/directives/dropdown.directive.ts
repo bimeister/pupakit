@@ -83,8 +83,7 @@ export class DropdownDirective implements AfterViewInit, OnDestroy, DropdownHost
           this.dropdown = this.dropdownsService.open<DropdownTemplateComponent<unknown>>({
             target: this.pupaDropdownRealTriggerElement ?? this.triggerRef.nativeElement,
             widthType: this.params.widthType,
-            horizontalPosition: this.params.horizontalPosition,
-            verticalPosition: this.params.verticalPosition,
+            position: this.params.position,
             theme,
             data: {
               templateRef: this.params.templateRef,

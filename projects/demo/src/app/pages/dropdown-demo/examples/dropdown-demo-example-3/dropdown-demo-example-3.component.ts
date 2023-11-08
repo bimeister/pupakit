@@ -19,8 +19,7 @@ export class DropdownDemoExample3Component {
     this.popoversService.open({
       target: [event.clientX, event.clientY],
       widthType: 'auto',
-      horizontalPosition: 'center',
-      verticalPosition: 'bottom',
+      position: 'bottomCenter',
       component: DropdownDemoContainerComponent,
       injector: this.injector,
     });

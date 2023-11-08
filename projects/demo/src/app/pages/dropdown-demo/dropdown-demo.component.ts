@@ -40,31 +40,63 @@ export class DropdownDemoComponent {
     },
   ];
 
-  public readonly horizontalPositionOptions: PropsOption[] = [
-    {
-      caption: 'start',
-      value: 'start',
-      isDefault: true,
-    },
-    {
-      caption: 'center',
-      value: 'center',
-    },
-    {
-      caption: 'end',
-      value: 'end',
-    },
-  ];
-
-  public readonly verticalPositionOptions: PropsOption[] = [
-    {
-      caption: 'bottom',
-      value: 'bottom',
-      isDefault: true,
-    },
+  public readonly positionOptions: PropsOption[] = [
     {
       caption: 'top',
       value: 'top',
+      isDefault: true,
+    },
+    {
+      caption: 'topCenter',
+      value: 'topCenter',
+    },
+    {
+      caption: 'topLeft',
+      value: 'topLeft',
+    },
+    {
+      caption: 'topRight',
+      value: 'topRight',
+    },
+    {
+      caption: 'right',
+      value: 'right',
+    },
+    {
+      caption: 'rightTop',
+      value: 'rightTop',
+    },
+    {
+      caption: 'rightBottom',
+      value: 'rightBottom',
+    },
+    {
+      caption: 'bottom',
+      value: 'bottom',
+    },
+    {
+      caption: 'bottomCenter',
+      value: 'bottomCenter',
+    },
+    {
+      caption: 'bottomLeft',
+      value: 'bottomLeft',
+    },
+    {
+      caption: 'bottomRight',
+      value: 'bottomRight',
+    },
+    {
+      caption: 'left',
+      value: 'left',
+    },
+    {
+      caption: 'leftTop',
+      value: 'leftTop',
+    },
+    {
+      caption: 'leftBottom',
+      value: 'leftBottom',
     },
   ];
 }
