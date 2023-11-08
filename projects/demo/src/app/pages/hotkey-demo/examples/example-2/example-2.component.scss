@@ -1,0 +1,12 @@
+@use 'mixins' as *;
+
+.hotkey-tooltip {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+
+  &__description {
+    @include font-preset-caption-xs();
+  }
+}

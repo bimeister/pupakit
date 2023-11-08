@@ -25,7 +25,7 @@ export abstract class DropdownComponentBase<TData> implements AfterViewInit {
 
   constructor(
     protected readonly dropdownRef: DropdownRef<TData>,
-    @Inject(DOCUMENT) private readonly document: Document
+    @Inject(DOCUMENT) protected readonly document: Document
   ) {
     this.listenOutsideEventsForClose();
   }

@@ -1,0 +1,12 @@
+<pupa-button-icon icon="app-zoom-in" kind="border" pupaTooltip [tooltipContentTemplate]="tooltip"></pupa-button-icon>
+
+<ng-template #tooltip>
+  <pupa-theme-wrapper class="hotkey-tooltip" [theme]="reversedTheme$ | async">
+    <span class="hotkey-tooltip__description"> Increase </span>
+
+    <pupa-hotkeys>
+      <pupa-hotkey>Ctrl</pupa-hotkey>
+      <pupa-hotkey>+</pupa-hotkey>
+    </pupa-hotkeys>
+  </pupa-theme-wrapper>
+</ng-template>
