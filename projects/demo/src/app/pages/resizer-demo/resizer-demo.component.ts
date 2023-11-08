@@ -110,12 +110,28 @@ export class ResizerDemoComponent implements OnDestroy {
     },
   ];
 
-  public readonly expandedFormControl: FormControl<boolean> = new FormControl<boolean>(false);
-
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     TS: `${BASE_REQUEST_PATH}/example-1/example-1.component.ts`,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
+  };
+
+  public readonly example2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-2/example-2.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.scss`,
+  };
+
+  public readonly example3Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-3/example-3.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-3/example-3.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-3/example-3.component.scss`,
+  };
+
+  public readonly example4Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-4/example-4.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-4/example-4.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-4/example-4.component.scss`,
   };
 
   constructor() {
