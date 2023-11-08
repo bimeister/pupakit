@@ -11,6 +11,7 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  min-width: 50rem;
 
   @include flex-container(row, center, flex-start);
 
@@ -30,6 +31,7 @@
 
   &_collapsed {
     width: 8rem;
+    min-width: 8rem;
   }
 
   &__input {
@@ -168,7 +170,6 @@
   &__additional-actions {
     display: flex;
     align-items: center;
-    gap: 2rem;
     height: 100%;
     background: transparent;
     width: fit-content;
