@@ -10,13 +10,13 @@ import { DropdownDemoContainerComponent } from '../dropdown-demo-container/dropd
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DropdownDemoExample3Component {
-  constructor(private readonly popoversService: DropdownsService, private readonly injector: Injector) {}
+  constructor(private readonly dropdownsService: DropdownsService, private readonly injector: Injector) {}
 
   public openContextMenu(event: MouseEvent): void {
     event.stopPropagation();
     event.preventDefault();
 
-    this.popoversService.open({
+    this.dropdownsService.open({
       target: [event.clientX, event.clientY],
       widthType: 'auto',
       horizontalPosition: 'center',
