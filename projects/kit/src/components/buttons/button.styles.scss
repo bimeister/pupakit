@@ -178,7 +178,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-primary-pressed);
+      background-color: semantic-color(kind-primary-active);
     }
 
     &:disabled {
@@ -211,7 +211,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-opacity-pressed);
+      background-color: semantic-color(kind-opacity-active);
     }
 
     &:disabled {
@@ -243,7 +243,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-opacity-pressed);
+      background-color: semantic-color(kind-opacity-active);
     }
 
     &:disabled {
@@ -274,7 +274,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-success-pressed);
+      background-color: semantic-color(kind-success-active);
     }
 
     &:disabled {
@@ -306,7 +306,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-warning-pressed);
+      background-color: semantic-color(kind-warning-active);
     }
 
     &:disabled {
@@ -338,7 +338,7 @@ $buttonSmallBorderRadius: 0.5rem;
     }
 
     &:active:not(:disabled) {
-      background-color: semantic-color(kind-danger-pressed);
+      background-color: semantic-color(kind-danger-active);
     }
 
     &:disabled {

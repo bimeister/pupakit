@@ -5,14 +5,10 @@
 :host {
   height: 7rem;
   padding: 0.5rem 3rem;
-  border-bottom: 1px solid color(neutral-5);
+  border-bottom: 1px solid semantic-color(kind-neutral-normal);
   box-sizing: border-box;
   display: flex;
   align-items: center;
-
-  @include host-selector-dark-theme {
-    border-color: color(neutral-500);
-  }
 
   @include xs {
     height: 14rem;

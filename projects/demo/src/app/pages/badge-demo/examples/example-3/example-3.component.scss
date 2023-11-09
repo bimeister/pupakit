@@ -1,13 +1,3 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-
 .badge-container {
   margin-top: 4rem;
-}
-.circle {
-  background-color: color(success-500);
-  border-radius: 50%;
-  width: 2rem;
-  height: 2rem;
-  position: absolute;
 }

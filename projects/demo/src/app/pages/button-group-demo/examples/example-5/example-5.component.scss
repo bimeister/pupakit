@@ -19,9 +19,6 @@
   padding: 2rem;
 
   .switcher-label {
-    @include host-selector-dark-theme() {
-      color: color(neutral-1);
-    }
     margin-right: 2rem;
   }
 }

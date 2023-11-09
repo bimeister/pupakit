@@ -21,19 +21,11 @@
   }
 
   &_disabled {
-    background-color: color(neutral-3);
-
-    @include host-selector-dark-theme {
-      background-color: color(neutral-600);
-    }
+    background-color: semantic-color(kind-opacity-normal);
 
     .avatar__text,
     .avatar__icon {
-      color: color(neutral-50);
-
-      @include host-selector-dark-theme {
-        color: color(neutral-60);
-      }
+      color: semantic-color(text-disabled);
     }
   }
 
@@ -57,14 +49,14 @@
     display: block;
     height: 100%;
     width: 100%;
-    color: color(neutral-500);
+    color: semantic-color(icons-primary);
   }
 
   &__text {
     @include flex-container(row, center, center);
     line-height: 3rem;
     white-space: nowrap;
-    color: color(neutral-1000);
+    color: semantic-color(text-primary);
     @include font-type-regular();
     box-sizing: border-box;
     height: 100%;

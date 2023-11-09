@@ -33,12 +33,9 @@ $container-padding: 4px;
     max-width: inherit;
     box-sizing: border-box;
     border-radius: $controlBorderRadius;
-
-    background-color: color(neutral-5);
-    @include host-selector-dark-theme {
-      background-color: color(neutral-500);
-    }
+    background-color: semantic-color(kind-neutral-normal);
   }
+
   &__rail-container {
     position: absolute;
     left: 0;
@@ -49,16 +46,13 @@ $container-padding: 4px;
 
 .button-group-rail {
   height: 100%;
+
   &__highlighter {
     width: 0;
     height: 100%;
     transition: transform 0.25s ease-in-out;
-    background-color: color(neutral-1);
+    background-color: semantic-color(surface-primary);
+    color: semantic-color(text-primary);
     border-radius: $controlBorderRadius;
-
-    @include host-selector-dark-theme {
-      background-color: color(neutral-1000);
-      color: color(neutral-1);
-    }
   }
 }

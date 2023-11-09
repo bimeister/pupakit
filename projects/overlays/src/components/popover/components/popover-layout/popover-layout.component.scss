@@ -9,9 +9,10 @@ $pointer-width: 14px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid color(neutral-5);
+  border: 1px solid semantic-color(kind-neutral-normal);
   border-radius: $controlBorderRadius;
-  background: color(neutral-1, alpha-700);
+  background: semantic-color(surface-primary, alpha-700);
+  color: semantic-color(text-primary);
 
   @include blur();
 
@@ -20,17 +21,7 @@ $pointer-width: 14px;
     width: 100%;
 
     backdrop-filter: none;
-    background: color(neutral-1, alpha-1000);
-  }
-
-  @include host-selector-dark-theme {
-    background: color(neutral-1000, alpha-700);
-    border-color: color(neutral-500);
-    color: color(neutral-1);
-
-    @include xs() {
-      background: color(neutral-1000, alpha-1000);
-    }
+    background: semantic-color(surface-primary, alpha-1000);
   }
 
   @include host-selector('.pointer__top-left, .pointer__top-right') {
@@ -44,21 +35,14 @@ $pointer-width: 14px;
 
 .popover-pointer {
   position: absolute;
-  fill: color(neutral-1);
+  fill: semantic-color(surface-primary);
 
   &__line {
-    stroke: color(neutral-5);
-    @include host-selector-dark-theme {
-      stroke: color(neutral-500);
-    }
+    stroke: semantic-color(kind-neutral-normal);
   }
 
   @include host-selector('.popover__mobile') {
     display: none;
-  }
-
-  @include host-selector-dark-theme {
-    fill: color(neutral-1000, alpha-700);
   }
 
   @include host-selector('.pointer__top-left') {

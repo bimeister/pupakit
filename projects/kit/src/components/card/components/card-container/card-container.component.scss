@@ -25,20 +25,16 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
   outline: none;
 
   background-color: semantic-color(surface-secondary);
-  color: color(neutral-1000);
+  color: semantic-color(text-primary);
 
   &_disabled {
-    color: color(neutral-50);
+    color: semantic-color(text-disabled);
     box-shadow: 0 1px 7px $disabled-shadow-color;
   }
 
   &:not(.container_disabled) {
     @include hover() {
       box-shadow: 2px 3px 10px $hover-shadow-color;
-
-      @include host-selector-dark-theme() {
-        background: color(neutral-400);
-      }
     }
   }
 
@@ -63,15 +59,6 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
       content: '';
       background-color: semantic-color(kind-primary-normal);
       border-radius: $controlBorderRadius 0 0 $controlBorderRadius;
-    }
-  }
-
-  @include host-selector-dark-theme() {
-    background: color(neutral-800);
-    color: color(neutral-1);
-
-    &_disabled {
-      color: color(neutral-60);
     }
   }
 }

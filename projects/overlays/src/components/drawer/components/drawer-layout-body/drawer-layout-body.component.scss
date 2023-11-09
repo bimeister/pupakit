@@ -14,10 +14,10 @@
   &__scrollable {
     box-sizing: border-box;
     height: 100%;
-    padding: 5rem 6rem 0rem 6rem;
+    padding: 5rem 6rem 0 6rem;
 
     @include xs() {
-      padding: 4rem 5rem 0rem 5rem;
+      padding: 4rem 5rem 0 5rem;
     }
   }
 }

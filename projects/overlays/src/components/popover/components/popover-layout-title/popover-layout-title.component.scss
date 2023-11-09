@@ -11,11 +11,7 @@
   @include font-type-medium;
   @include font-size-m;
 
-  color: color(neutral-1000);
-
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 }
 
 :host-context(.popover__mobile) {

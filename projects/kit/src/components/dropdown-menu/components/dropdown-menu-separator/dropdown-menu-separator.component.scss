@@ -4,9 +4,5 @@
 .dropdown-separator {
   display: block;
   margin: 2rem 0;
-  border-bottom: 1px solid color(neutral-5);
-
-  @include host-selector-dark-theme {
-    border-color: color(neutral-500);
-  }
+  border-bottom: 1px solid semantic-color(kind-neutral-normal);
 }

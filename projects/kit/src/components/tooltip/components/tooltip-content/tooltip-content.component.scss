@@ -14,16 +14,10 @@ $tooltip_max-text-lines-count: 13;
   }
 
   &__content-container {
-    background-color: color(neutral-600);
-    @include host-selector-dark-theme {
-      background-color: color(neutral-1);
-    }
+    background-color: semantic-color(text-primary, alpha-700);
 
     @include supports-backdrop-blur {
-      background-color: color(neutral-1000, alpha-400);
-      @include host-selector-dark-theme {
-        background-color: color(neutral-1, alpha-400);
-      }
+      background-color: semantic-color(text-primary, alpha-700);
     }
 
     @include blur(5px);
@@ -31,11 +25,7 @@ $tooltip_max-text-lines-count: 13;
     border-radius: $controlBorderRadius;
     box-sizing: border-box;
     padding: 1rem 2rem;
-    color: color(neutral-1);
-
-    @include host-selector-dark-theme {
-      color: color(neutral-1000);
-    }
+    color: semantic-color(text-inverse);
 
     @include font-type-regular();
     @include font-size-xs($paragraph: true);

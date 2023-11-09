@@ -9,14 +9,10 @@
   @include font-size-xxs();
 
   cursor: default;
-  color: color(neutral-300);
+  color: semantic-color(text-secondary);
 
   @include xs() {
     @include font-size-xs();
     transform: translateY(1px);
-  }
-
-  @include host-selector-dark-theme() {
-    color: color(neutral-9);
   }
 }

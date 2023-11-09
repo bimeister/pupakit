@@ -50,16 +50,7 @@
   &_disabled {
     .label__icon,
     .label__content-inner {
-      color: color(neutral-50);
-    }
-  }
-
-  @include host-selector-dark-theme() {
-    &_disabled {
-      .label__icon,
-      .label__content-inner {
-        color: color(neutral-60);
-      }
+      color: semantic-color(text-disabled);
     }
   }
 }

@@ -5,13 +5,11 @@
   [class.stepper-item_grabbing]="isContentDragging$ | async"
   (tap)="setAsActive()"
 >
-  <div class="stepper-item__counter">
-    <pupa-stepper-counter
-      [disabled]="disabled"
-      [active]="isActive$ | async"
-      [stepCount]="counter$ | async"
-    ></pupa-stepper-counter>
-  </div>
+  <pupa-stepper-counter
+    [disabled]="disabled"
+    [active]="isActive$ | async"
+    [stepCount]="counter$ | async"
+  ></pupa-stepper-counter>
   <div class="stepper-item__title-wrapper">
     <div class="stepper-item__title">
       <ng-content></ng-content>

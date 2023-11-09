@@ -11,11 +11,11 @@
   color: semantic-color(text-primary);
   border-radius: $controlBorderRadius;
   padding: 3rem;
+  gap: 2rem;
 
   .icon {
     font-size: 4rem;
     line-height: 3rem;
-    margin-right: 2rem;
   }
 
   &__content {

@@ -9,37 +9,22 @@
   justify-content: center;
   align-items: center;
 
-  color: color(neutral-1000);
-  background: color(neutral-5);
+  color: semantic-color(text-primary);
+  background: semantic-color(kind-neutral-normal);
   border-radius: 1rem;
 
   @include font-preset-h6;
 
   transition: background-color 0.2s ease;
 
-  @include host-selector-dark-theme {
-    background-color: color(neutral-500);
-    color: color(neutral-1);
-  }
-
   &_active {
-    background: color(primary-500);
-    color: color(neutral-1);
-
-    @include host-selector-dark-theme {
-      background: color(primary-40);
-      color: color(neutral-1000);
-    }
+    background: semantic-color(kind-primary-normal);
+    color: semantic-color(surface-primary);
   }
 
   &_disabled {
     cursor: not-allowed;
-    background: color(neutral-3);
-    color: color(neutral-50);
-
-    @include host-selector-dark-theme {
-      background: color(neutral-850);
-      color: color(neutral-60);
-    }
+    background: semantic-color(kind-neutral-disabled);
+    color: semantic-color(text-disabled);
   }
 }

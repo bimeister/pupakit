@@ -42,19 +42,13 @@
     text-overflow: ellipsis;
     overflow: hidden;
 
-    @include host-selector-dark-theme() {
-      color: color(neutral-9);
-    }
+    color: semantic-color(text-primary);
 
     &::placeholder {
-      color: color(neutral-50);
+      color: semantic-color(text-disabled);
       width: 100%;
       text-align: left;
       align-self: center;
-
-      @include host-selector-dark-theme() {
-        color: color(neutral-9);
-      }
     }
   }
 }

@@ -1,12 +1,7 @@
-@use 'mixins' as *;
 @use 'functions' as *;
 
 :host {
   flex: 8rem 0;
   margin-left: auto;
-  color: color(neutral-300);
-
-  @include host-selector-dark-theme {
-    color: color(neutral-500);
-  }
+  color: semantic-color(icons-primary);
 }

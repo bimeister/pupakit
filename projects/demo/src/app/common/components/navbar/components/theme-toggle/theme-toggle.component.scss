@@ -3,14 +3,10 @@
 
 .theme-toggle {
   cursor: pointer;
-  color: color(neutral-1000);
+  color: semantic-color(icons-primary);
 
   appearance: none;
   -webkit-tap-highlight-color: transparent;
   pointer-events: auto;
   user-select: none;
-
-  @include host-selector-dark-theme() {
-    color: color(neutral-5);
-  }
 }

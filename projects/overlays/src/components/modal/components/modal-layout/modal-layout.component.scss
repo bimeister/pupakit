@@ -9,10 +9,10 @@
   max-width: 500px;
   border: 1px solid semantic-color(lines-normal);
   border-radius: calc($controlBorderRadius + 1rem);
-  box-shadow: 0px 4px 24px rgba(0, 29, 41, 0.04);
+  box-shadow: 0 4px 24px rgba(0, 29, 41, 0.04);
 
   @include host-selector-dark-theme {
-    box-shadow: 0px 4px 24px rgba(0, 23, 32, 0.12);
+    box-shadow: 0 4px 24px rgba(0, 23, 32, 0.12);
   }
 
   @include xs() {
@@ -45,14 +45,10 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  background-color: color(neutral-1);
+  background-color: semantic-color(surface-secondary);
 
   @include xs() {
     padding: 0;
-  }
-
-  @include host-selector-dark-theme {
-    background-color: color(neutral-800);
   }
 }
 

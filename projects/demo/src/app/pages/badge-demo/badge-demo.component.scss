@@ -9,11 +9,13 @@
   margin-top: 4rem;
   align-items: center;
   gap: 4rem;
+
   &__marker {
-    background-color: color(primary-500);
+    background-color: semantic-color(kind-primary-normal);
     height: 100%;
     width: 9rem;
   }
+
   &__indicator {
     display: inline;
   }
