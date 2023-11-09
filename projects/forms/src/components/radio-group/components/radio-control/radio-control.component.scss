@@ -1,36 +1,29 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
-:host {
-  @include host-selector('.radio-group_column') {
-    width: 100%;
-  }
-}
-
 .radio-control {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 1rem;
+  gap: 2rem;
+  padding: 2rem;
   position: relative;
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
   &:focus-visible {
     outline: none;
+
     &:not(.radio-control_disabled) {
-      outline: 2px solid color(primary-500);
+      outline: 2px solid semantic-color(lines-accent);
     }
   }
-  padding: 2rem;
 
   &:not(.radio-control_disabled):not(.radio-control_without-label) {
     @include hover() {
-      background: color(neutral-6);
-      @include host-selector-dark-theme() {
-        background: color(neutral-600, alpha-60);
-      }
+      background: semantic-color(kind-opacity-hover);
     }
   }
 
@@ -59,35 +52,23 @@
   height: 3.5rem;
   box-sizing: border-box;
   border-radius: 50%;
-  background: color(neutral-1);
-  border: 1px solid color(neutral-300);
+  background: semantic-color(surface-primary);
+  border: 1px solid semantic-color(text-secondary);
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
     transform variable(transition-duration_shorter) variable(transition-timing-function_common);
-  @include host-selector-dark-theme() {
-    background: color(neutral-1000);
-    border: 1px solid color(neutral-9);
-  }
 
   &_selected {
-    background: color(primary-500);
+    background: semantic-color(kind-primary-normal);
     border: none;
-
-    @include host-selector-dark-theme() {
-      background: color(primary-500);
-      border: none;
-    }
   }
 
   &:focus-visible:not(.radio-control-marker_disabled) {
     transform: scale(1.14);
-    border: 2px solid color(primary-400);
+    border: 2px solid semantic-color(lines-accent);
     outline: none;
-    &:not(.radio-control-marker_selected) {
-      background: color(primary-500, alpha-7);
-    }
 
-    @include host-selector-dark-theme() {
-      border: 2px solid color(primary-400);
+    &:not(.radio-control-marker_selected) {
+      background: semantic-color(kind-primary-normal, kind-opacity-active);
     }
   }
 
@@ -104,25 +85,19 @@
   }
 
   &_selected .radio-control-marker__dot {
-    background: color(neutral-1);
-    @include host-selector-dark-theme() {
-      background: color(neutral-1000);
-    }
+    background: semantic-color(surface-primary);
   }
 
   &_disabled {
-    border-color: color(neutral-50);
+    border-color: semantic-color(text-disabled);
+
     &.radio-control-marker_selected {
-      background: color(neutral-50);
-      @include host-selector-dark-theme() {
-        background: color(neutral-5);
-      }
+      background: semantic-color(icons-disabled);
     }
   }
 }
 
 .radio-control-label {
-  margin: 0 0 0 3rem;
   user-select: none;
   z-index: 2;
   transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
@@ -130,36 +105,18 @@
   @include font-size-xs();
 
   &_small {
-    margin: 0 0 0 2rem;
     @include font-size-xxs();
   }
 
   &_disabled {
-    color: color(neutral-50);
+    color: semantic-color(text-disabled);
   }
 
   &_disabled.radio-control-label_selected {
-    color: color(neutral-50);
+    color: semantic-color(text-disabled);
   }
+
   &_hidden {
     display: none;
-  }
-}
-
-.radio-control:hover:not(.radio-control_disabled) {
-  .radio-control-marker {
-    background: color(primary-500, alpha-7);
-    border: 2px solid color(primary-400);
-    @include host-selector-dark-theme() {
-      background: color(primary-500, alpha-7);
-      border: 2px solid color(primary-400);
-    }
-
-    &_selected {
-      background: color(primary-400);
-      @include host-selector-dark-theme() {
-        background: color(primary-400);
-      }
-    }
   }
 }

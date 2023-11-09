@@ -1,5 +1,5 @@
-@use './../functions/color.function' as *;
+@use './../functions/semantic-color.function' as *;
 
 @mixin debug() {
-  background-color: color(danger-500, alpha-20) !important;
+  background-color: semantic-color(kind-danger-normal, alpha-20) !important;
 }

@@ -7,7 +7,7 @@
   max-height: 70rem;
   overflow: auto;
   box-shadow: variable(box-shadow_hover);
-  background: color(neutral-1);
+  background: semantic-color(surface-primary);
   overflow-x: hidden;
 
   &.width-by-trigger {

@@ -11,7 +11,7 @@
   width: 100%;
   backdrop-filter: blur(5px);
   border-radius: 1rem;
-  gap: 2rem;
+  gap: 3rem;
 
   background-color: semantic-color(surface-secondary);
   color: semantic-color(text-primary);
@@ -37,9 +37,7 @@
   gap: 2rem;
 
   min-height: 6rem;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-right: 3rem;
+  margin: 2.5rem 3rem 2.5rem 0;
 
   @include font-size-m;
   @include font-type-regular;
@@ -47,24 +45,24 @@
 
 .toast-layout_info {
   .toast-layout__color {
-    background-color: color(primary-400);
+    background-color: semantic-color(kind-primary-normal);
   }
 }
 
 .toast-layout_warning {
   .toast-layout__color {
-    background-color: color(warning-400);
+    background-color: semantic-color(kind-warning-normal);
   }
 }
 
 .toast-layout_success {
   .toast-layout__color {
-    background-color: color(success-500);
+    background-color: semantic-color(kind-success-normal);
   }
 }
 
 .toast-layout_danger {
   .toast-layout__color {
-    background-color: color(danger-400);
+    background-color: semantic-color(kind-danger-normal);
   }
 }

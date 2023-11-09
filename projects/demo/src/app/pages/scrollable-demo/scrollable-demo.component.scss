@@ -2,13 +2,8 @@
 @use 'functions' as *;
 
 .content {
-  background-color: color(neutral-1);
-  color: color(neutral-1000);
-
-  @include host-selector-dark-theme() {
-    background-color: color(neutral-1000);
-    color: color(neutral-1);
-  }
+  background-color: semantic-color(surface-primary);
+  color: semantic-color(text-primary);
 }
 
 .scrollable-box {

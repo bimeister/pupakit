@@ -5,7 +5,6 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
 
 :host {
   display: flex;
-  display: flex;
   flex-direction: column;
   gap: 4rem;
 }
@@ -23,17 +22,12 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
   border: 1px solid transparent;
 
   box-shadow: 0 1px 7px $normal-shadow-color;
-  background: color(neutral-1);
-  color: color(neutral-1000);
+  background: semantic-color(surface-secondary);
+  color: semantic-color(text-primary);
   outline: none;
 
   &__title {
     flex: 1;
-  }
-
-  @include host-selector-dark-theme() {
-    background: color(neutral-600);
-    color: color(neutral-1);
   }
 }
 

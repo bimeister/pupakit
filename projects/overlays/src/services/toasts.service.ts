@@ -16,7 +16,6 @@ import { ToastDataType } from '../declarations/types/utility-types/toast-data.ut
 import { ToastReturnType } from '../declarations/types/utility-types/toast-return.utility-type';
 
 const BOTTOM_OFFSET_PX: number = 32;
-const LEFT_OFFSET_PX: number = 24;
 
 @Injectable({ providedIn: 'root' })
 export class ToastsService {
@@ -88,30 +87,10 @@ export class ToastsService {
       positionStrategy: startPosition.centerHorizontally(),
     });
 
-    this.clientUiStateHandlerService.breakpointIsSm$
-      .pipe(takeUntil(toastRef.closeTriggered$))
-      .subscribe((breakpointIsSm: boolean) => {
-        if (breakpointIsSm) {
-          const newPosition: GlobalPositionStrategy = this.overlay
-            .position()
-            .global()
-            .bottom(`${BOTTOM_OFFSET_PX}px`)
-            .left(`${LEFT_OFFSET_PX}px`);
-          overlayRef.updatePositionStrategy(newPosition);
-          return;
-        }
-        const newPosition: GlobalPositionStrategy = this.overlay
-          .position()
-          .global()
-          .bottom(`${BOTTOM_OFFSET_PX}px`)
-          .centerHorizontally();
-        overlayRef.updatePositionStrategy(newPosition);
-      });
-
     this.clientUiStateHandlerService.breakpointIsXs$
       .pipe(takeUntil(toastRef.closeTriggered$))
-      .subscribe((breakpointIsSm: boolean) => {
-        if (breakpointIsSm) {
+      .subscribe((breakpointIsXs: boolean) => {
+        if (breakpointIsXs) {
           overlayRef.updateSize({ width: '100%' });
           return;
         }

@@ -14,7 +14,7 @@ $adaptive-property: 'max-width';
   border-radius: $controlBorderRadius;
 
   text-decoration: none;
-  color: color(neutral-300);
+  color: semantic-color(text-secondary);
   cursor: pointer;
   @include ellipsis-text-overflow;
 
@@ -23,43 +23,23 @@ $adaptive-property: 'max-width';
 
   &:not(.trigger_active) {
     @include hover() {
-      background-color: color(neutral-6);
-      color: color(neutral-1000);
+      background-color: semantic-color(kind-opacity-hover);
+      color: semantic-color(text-primary);
     }
   }
 
   &_active,
   &:active {
-    background-color: color(neutral-6);
-    color: color(neutral-1000);
+    background-color: semantic-color(kind-opacity-hover);
+    color: semantic-color(text-primary);
   }
 
   &:focus-visible {
-    border-color: color(primary-400);
+    border-color: semantic-color(lines-accent);
     outline: none;
   }
 
   @include xs() {
     @include font-size-m();
-  }
-}
-
-// dark styles
-.trigger {
-  @include host-selector-dark-theme() {
-    color: color(neutral-9);
-
-    &:not(.trigger_active) {
-      @include hover() {
-        background-color: color(neutral-600);
-        color: color(neutral-1);
-      }
-    }
-
-    &_active,
-    &:active {
-      color: color(neutral-1);
-      background-color: color(neutral-600);
-    }
   }
 }

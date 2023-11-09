@@ -39,7 +39,7 @@
   }
 
   &:focus-visible {
-    border: 1px solid color(primary-600);
+    border: 1px solid semantic-color(lines-accent);
     outline: none;
   }
 }

@@ -1,5 +1,4 @@
 @use 'mixins' as *;
-@use 'functions' as *;
 
 :host {
   display: -webkit-box;
@@ -9,7 +8,6 @@
   font-style: normal;
 
   line-height: 3rem;
-  margin-top: 1rem;
 
   @include font-preset-caption-xxs();
 }

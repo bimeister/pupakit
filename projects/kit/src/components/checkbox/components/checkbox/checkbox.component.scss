@@ -10,26 +10,28 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 2rem;
 
   width: 100%;
   height: 8rem;
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: 1rem;
   cursor: pointer;
 
   padding: 2rem;
 
   &:not(.checkbox_disabled):not(.checkbox_without-label) {
     @include hover() {
-      background: color(neutral-6, alpha-60);
-      @include host-selector-dark-theme() {
-        background: color(neutral-600, alpha-60);
+      background: semantic-color(kind-neutral-hover);
+
+      &:active {
+        background: semantic-color(kind-neutral-pressed);
       }
     }
   }
 
   &:focus-visible:not(.checkbox_disabled) {
-    outline: 2px solid color(primary-500);
+    outline: 2px solid semantic-color(lines-accent);
   }
 
   &_without-label {
@@ -51,27 +53,24 @@
     :not(.checkbox__marker:focus-visible):not(.checkbox__marker_error):not(
         .checkbox__marker_disabled
       ).checkbox__marker {
-      background: color(primary-500, alpha-7);
-      border: 1px solid color(primary-400);
+      background: semantic-color(kind-primary-normal, alpha-7);
+      border: 1px solid semantic-color(lines-accent);
 
       &_checked {
-        background: color(primary-400);
-        @include host-selector-dark-theme() {
-          background: color(primary-400);
-        }
+        background: semantic-color(kind-primary-normal);
         border: none;
       }
     }
 
     :not(.checkbox__marker:focus-visible):not(.checkbox__marker_disabled).checkbox__marker_error {
-      background: color(danger-150);
+      background: semantic-color(kind-danger-normal, alpha-7);
 
       &:not(.checkbox__marker_checked) {
-        border: 1px solid color(danger-500);
+        border: 1px solid semantic-color(kind-danger-normal);
       }
 
       &.checkbox__marker_checked {
-        background: color(danger-400);
+        background: semantic-color(kind-danger-hover);
         border: none;
       }
     }
@@ -81,7 +80,7 @@
 .checkbox__marker {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid semantic-color(lines-dark);
+  border: 1px solid semantic-color(icons-secondary);
   box-sizing: border-box;
   border-radius: 1px;
   display: flex;
@@ -90,54 +89,49 @@
   flex-shrink: 0;
 
   &_checked {
-    background: color(primary-500);
+    background: semantic-color(kind-primary-normal);
     border: none;
   }
 
   &:focus-visible:not(.checkbox__marker_disabled) {
-    outline: 2px solid color(primary-400);
+    outline: 2px solid semantic-color(lines-accent);
     border: none;
 
     &:not(.checkbox__marker_checked) {
-      background: color(primary-500, alpha-7);
+      background: semantic-color(kind-primary-normal, alpha-7);
     }
 
     &.checkbox__marker_error {
-      background: color(danger-150);
+      background: semantic-color(kind-danger-normal, alpha-7);
 
       &.checkbox__marker_checked {
         border: none;
-        outline: 2px solid color(primary-400);
+        outline: 2px solid semantic-color(lines-accent);
         outline-offset: 1px;
-        background: color(danger-500);
+        background: semantic-color(kind-danger-normal);
       }
     }
   }
 
   &_error {
-    border: 1px solid color(danger-500);
+    border: 1px solid semantic-color(kind-danger-normal);
 
     &.checkbox__marker_checked {
-      background: color(danger-500);
+      background: semantic-color(kind-danger-normal);
     }
   }
 
   &_disabled {
-    border: 1px solid color(neutral-50);
+    border: 1px solid semantic-color(icons-disabled);
 
     .checkbox__marker-icon {
-      color: color(neutral-50);
+      color: semantic-color(text-disabled);
     }
   }
 
   &_checked.checkbox__marker_disabled {
     border: none;
-    background: color(neutral-5);
-
-    @include host-selector-dark-theme() {
-      background-color: color(neutral-850);
-      color: color(neutral-60);
-    }
+    background: semantic-color(kind-primary-disabled);
   }
 
   &_disabled:focus-visible {
@@ -145,14 +139,11 @@
   }
 
   &_hovered:not(&_disabled) {
-    background: color(primary-500, alpha-7);
-    border: 1px solid color(primary-400);
+    background: semantic-color(kind-primary-normal, alpha-7);
+    border: 1px solid semantic-color(link-visited);
 
     &.checkbox__marker_checked {
-      background: color(primary-400);
-      @include host-selector-dark-theme() {
-        background: color(primary-400);
-      }
+      background: semantic-color(link-visited);
       border: none;
     }
   }
@@ -160,7 +151,6 @@
 
 .checkbox__label {
   @include ellipsis-text-overflow;
-  margin-left: 3rem;
 
   @include font-size-xs();
   line-height: 1.2;
@@ -174,7 +164,7 @@
   }
 
   &_disabled {
-    color: color(neutral-50);
+    color: semantic-color(icons-disabled);
   }
 }
 
@@ -183,5 +173,5 @@
   overflow: hidden;
   width: 2.5rem;
   height: 2.5rem;
-  color: color(neutral-1);
+  color: semantic-color(surface-primary);
 }

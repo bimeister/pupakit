@@ -45,24 +45,24 @@
 
 .alert-layout_info {
   .alert-layout__color {
-    background-color: color(primary-400);
+    background-color: semantic-color(kind-primary-normal);
   }
 }
 
 .alert-layout_warning {
   .alert-layout__color {
-    background-color: color(warning-400);
+    background-color: semantic-color(kind-warning-normal);
   }
 }
 
 .alert-layout_success {
   .alert-layout__color {
-    background-color: color(success-500);
+    background-color: semantic-color(kind-success-normal);
   }
 }
 
 .alert-layout_danger {
   .alert-layout__color {
-    background-color: color(danger-400);
+    background-color: semantic-color(kind-danger-normal);
   }
 }

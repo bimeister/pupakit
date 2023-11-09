@@ -17,26 +17,27 @@
   padding: 0;
   margin: 0;
   border: none;
+
   &.context-menus {
     pointer-events: none;
+
     &:empty {
       display: none;
     }
   }
+
   &.content {
-    background-color: color(neutral-1);
+    background-color: semantic-color(surface-primary);
     z-index: 1;
   }
+
   &.loader {
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &.filled {
-      background: color(neutral-1);
-    }
   }
+
   &.context-menus {
     z-index: 50;
   }

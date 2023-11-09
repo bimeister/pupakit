@@ -18,13 +18,11 @@
     box-sizing: border-box;
     max-height: 72rem;
 
+    border-color: semantic-color(lines-normal);
+    background-color: semantic-color(surface-primary, alpha-4);
+
     &:focus {
       outline: none;
-    }
-
-    @include dark-theme-class-parent {
-      border-color: color(neutral-500);
-      background-color: color(neutral-1000);
     }
   }
 

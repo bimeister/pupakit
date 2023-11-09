@@ -25,6 +25,7 @@
   max-width: 42rem;
 
   border-radius: 1rem;
+  gap: 3rem;
 
   box-sizing: border-box;
   cursor: pointer;
@@ -55,14 +56,7 @@
     @include font-preset-h6;
   }
 
-  &__counter {
-    margin-right: 3rem;
-  }
-
-  color: color(neutral-1000);
-  @include host-selector-dark-theme {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 
   &_grabbing {
     cursor: grabbing;
@@ -70,20 +64,13 @@
 
   &:not(&_disabled) {
     @include hover {
-      background: color(neutral-6);
-      @include host-selector-dark-theme {
-        background: color(neutral-400);
-      }
+      background: semantic-color(kind-neutral-hover);
     }
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: color(neutral-50);
-
-    @include host-selector-dark-theme {
-      color: color(neutral-60);
-    }
+    color: semantic-color(text-disabled);
   }
 }
 
@@ -92,10 +79,6 @@
   min-width: 16rem;
   margin: 0 3rem 0;
   flex-grow: 1;
-  border-top: 1.5px dashed color(neutral-5);
+  border-top: 1.5px dashed semantic-color(kind-neutral-normal);
   height: 0;
-
-  @include host-selector-dark-theme {
-    border-color: color(neutral-500);
-  }
 }

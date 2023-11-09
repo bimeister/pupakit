@@ -20,7 +20,7 @@ $height_month: 24px;
   all: unset;
   box-shadow: $box-shadow;
   border-radius: 2rem;
-  background: color(neutral-1);
+  background: semantic-color(surface-secondary);
   @include flex-container(column, stretch, stretch, nowrap);
 
   &__header {
@@ -37,7 +37,6 @@ $height_month: 24px;
     padding: $padding_days-area;
     margin: $margin_days-line;
     box-sizing: border-box;
-    background: color(primary-50);
     @include flex-container(row, center, space-between, nowrap);
   }
 
@@ -56,7 +55,7 @@ $height_month: 24px;
 
 .title {
   all: unset;
-  color: color(neutral-500);
+  color: semantic-color(text-primary);
   line-height: 1.43;
   font-weight: normal;
   font-style: normal;
@@ -69,21 +68,22 @@ $height_month: 24px;
   &__month:not(.disable-hover),
   &__year:not(.disable-hover) {
     transition: color 0.2s ease;
+
     &:hover {
-      color: color(primary-500);
+      color: semantic-color(kind-primary-hover);
       cursor: pointer;
     }
   }
 
   &.selected {
-    color: color(primary-500);
+    color: semantic-color(kind-primary-normal);
     cursor: default;
   }
 }
 
 .week-day {
   all: unset;
-  color: color(neutral-200);
+  color: semantic-color(text-secondary);
   width: $width_days-line-item;
   font-size: $font-size_days-line-item;
   font-weight: normal;
@@ -109,7 +109,7 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &__range {
-    background-color: color(primary-50);
+    background-color: semantic-color(kind-primary-normal, alpha-6);
   }
 
   &:nth-child(7n) {
@@ -150,6 +150,7 @@ $height_month: 24px;
 
   &__disabled {
     pointer-events: none;
+
     .date__range-start,
     .date__range-end {
       &::before {
@@ -173,9 +174,9 @@ $height_month: 24px;
       content: '';
       top: 0;
       left: 0;
-      width: 200%;
+      width: 113%;
       height: 100%;
-      background-color: color(primary-50);
+      background-color: semantic-color(kind-primary-normal, alpha-6);
       border-bottom-left-radius: $height_date;
       border-top-left-radius: $height_date;
       z-index: 0;
@@ -188,9 +189,9 @@ $height_month: 24px;
       content: '';
       top: 0;
       right: 0;
-      width: 200%;
+      width: 113%;
       height: 100%;
-      background-color: color(primary-50);
+      background-color: semantic-color(kind-primary-normal, alpha-6);
       border-bottom-right-radius: $height_date;
       border-top-right-radius: $height_date;
       z-index: 0;
@@ -200,7 +201,7 @@ $height_month: 24px;
 
 .date-inner {
   font-size: $font-size_days-line-item;
-  color: color(neutral-1000);
+  color: semantic-color(text-primary);
   line-height: 4rem;
   font-weight: normal;
   position: relative;
@@ -221,19 +222,19 @@ $height_month: 24px;
   }
 
   &__selected {
-    background-color: color(primary-500);
-    color: color(neutral-1);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(text-inverse);
   }
 
   &__disabled {
-    color: color(neutral-50);
+    color: semantic-color(text-disabled);
     pointer-events: none;
     background-color: transparent;
   }
 
   &:hover:not(.date-inner__selected) {
-    background-color: color(primary-50);
-    color: color(neutral-1000);
+    background-color: semantic-color(kind-primary-normal, alpha-5);
+    color: semantic-color(text-primary);
   }
 }
 
@@ -248,7 +249,7 @@ $height_month: 24px;
   height: $height_year;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: color(neutral-1000);
+  color: semantic-color(kind-opacity-normal);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
@@ -263,12 +264,13 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &.current {
-    background-color: color(primary-50);
-    color: color(neutral-1000);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(kind-opacity-normal);
   }
+
   &:hover {
-    background-color: color(primary-500);
-    color: color(neutral-1);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(surface-primary);
   }
 }
 
@@ -283,7 +285,7 @@ $height_month: 24px;
   height: $height_month;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: color(neutral-1000);
+  color: semantic-color(text-primary);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
@@ -294,8 +296,8 @@ $height_month: 24px;
   @include flex-container(column, center, center, nowrap);
 
   &:hover {
-    background-color: color(primary-500);
-    color: color(neutral-1);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(surface-primary);
   }
 }
 
@@ -310,7 +312,7 @@ $height_month: 24px;
   padding: 0;
   font-weight: $font-weight_days-line-item;
   font-size: 4rem;
-  color: color(neutral-50);
+  color: semantic-color(icons-primary);
   cursor: pointer;
   display: flex;
   align-items: center;

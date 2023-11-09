@@ -19,9 +19,9 @@ $layout_border-size: 1px;
 .drawer-layout {
   border-radius: $controlBorderRadius;
 
-  color: color(neutral-1000);
-  background-color: color(neutral-1);
-  border: $layout_border-size solid color(neutral-5);
+  color: semantic-color(text-primary);
+  background-color: semantic-color(surface-secondary);
+  border: $layout_border-size solid semantic-color(kind-neutral-normal);
 
   height: 100%;
   width: 100%;
@@ -30,14 +30,8 @@ $layout_border-size: 1px;
   flex-direction: column;
   box-sizing: border-box;
 
-  @include host-selector-dark-theme() {
-    color: color(neutral-1);
-    background-color: color(neutral-800);
-    border: $layout_border-size solid color(neutral-500);
-  }
-
   &_with-shadow {
-    box-shadow: 0px 4px 24px color(neutral-1000, alpha-4);
+    box-shadow: 0 4px 24px color(neutral-1000, alpha-4);
 
     @include host-selector-dark-theme() {
       box-shadow: none;
@@ -45,6 +39,6 @@ $layout_border-size: 1px;
   }
 
   @include xs() {
-    border-radius: 1rem 1rem 0px 0px;
+    border-radius: 1rem 1rem 0 0;
   }
 }

@@ -52,18 +52,12 @@ $extraSmallSize: 5rem;
   border-radius: 1rem;
   box-sizing: border-box;
   aspect-ratio: 1;
-
-  @include host-selector-dark-theme() {
-    color: color(neutral-1);
-  }
+  color: semantic-color(text-primary);
 
   background: transparent;
 
   &_with-background {
-    background: color(neutral-5);
-    @include host-selector-dark-theme() {
-      background: color(neutral-500);
-    }
+    background: semantic-color(kind-neutral-normal);
   }
 
   &_large {

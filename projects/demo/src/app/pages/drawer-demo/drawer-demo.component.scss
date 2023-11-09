@@ -1,12 +1,6 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-.placeholder {
-  width: 100px;
-  height: 200vh;
-  background: color(primary-500);
-}
-
 .wrapper {
   width: 100%;
   height: 100vh;

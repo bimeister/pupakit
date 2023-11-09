@@ -8,7 +8,7 @@
 .pupa-star {
   display: block;
   font-size: 12rem;
-  color: color(primary-500);
+  color: semantic-color(kind-primary-normal);
 
   &.clickable {
     cursor: pointer;

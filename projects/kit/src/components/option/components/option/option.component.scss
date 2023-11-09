@@ -35,6 +35,7 @@
 
   &__content {
     min-height: var(--option_min-height, 8rem);
+    gap: 3rem;
 
     &-container {
       display: flex;
@@ -51,7 +52,6 @@
     color: semantic-color(text-primary);
 
     .option__checkbox {
-      margin-right: 3rem;
       width: fit-content;
     }
   }

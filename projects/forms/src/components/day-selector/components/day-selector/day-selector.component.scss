@@ -9,8 +9,5 @@
 
   @include font-type-regular();
 
-  background: color(neutral-5);
-  @include host-selector-dark-theme {
-    background: color(neutral-500);
-  }
+  background: semantic-color(surface-action);
 }

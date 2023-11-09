@@ -8,10 +8,10 @@
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  color: color(neutral-200);
+  color: semantic-color(text-primary);
   @include font-type-regular;
 
   &_error {
-    color: color(danger-500);
+    color: semantic-color(kind-danger-normal);
   }
 }

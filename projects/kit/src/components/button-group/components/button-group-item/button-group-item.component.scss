@@ -17,41 +17,25 @@
 
   border-radius: $controlBorderRadius;
 
-  color: color(neutral-300);
-  @include host-selector-dark-theme {
-    color: color(neutral-9);
-  }
+  color: semantic-color(text-secondary);
 
   &:not(&_disabled):not(&_active) {
     @include hover {
-      background-color: color(neutral-6);
-      color: color(neutral-1000);
-
-      @include host-selector-dark-theme {
-        background-color: color(neutral-400);
-        color: color(neutral-1);
-      }
+      background-color: semantic-color(kind-neutral-hover);
+      color: semantic-color(text-primary);
     }
   }
 
   &_active {
     background-color: transparent;
-    color: color(neutral-1000);
+    color: semantic-color(text-primary);
 
-    box-shadow: 0px 2px 8px color(neutral-1000, alpha-3);
-
-    @include host-selector-dark-theme {
-      color: color(neutral-1);
-    }
+    box-shadow: 0 2px 8px color(neutral-1000, alpha-3);
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: color(neutral-50);
-
-    @include host-selector-dark-theme {
-      color: color(neutral-60);
-    }
+    color: semantic-color(text-disabled);
   }
 
   &_l {

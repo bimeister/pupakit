@@ -7,7 +7,6 @@ const BASE_REQUEST_PATH: string = 'checkbox-demo/examples';
 @Component({
   selector: 'demo-checkbox',
   templateUrl: './checkbox-demo.component.html',
-  styleUrls: ['./checkbox-demo.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CheckboxDemoComponent {

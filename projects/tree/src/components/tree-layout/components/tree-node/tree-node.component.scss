@@ -19,7 +19,7 @@
   @include flex-container(row, center);
   min-width: 48.5rem;
   height: 100%;
-  background-color: color(neutral-1);
+  background-color: semantic-color(surface-primary);
   cursor: pointer;
   @include no-tap-highlight();
   overflow: clip;
@@ -54,7 +54,11 @@
     &-gradient {
       height: 100%;
       width: 5rem;
-      background: linear-gradient(90deg, color(neutral-1, alpha-1) 0%, color(neutral-1) 100%);
+      background: linear-gradient(
+        90deg,
+        semantic-color(surface-primary, alpha-1) 0%,
+        semantic-color(surface-primary) 100%
+      );
     }
 
     &-container {
@@ -63,7 +67,7 @@
       z-index: 2;
       width: fit-content;
       height: 100%;
-      background: color(neutral-1);
+      background: semantic-color(surface-primary);
       padding-right: 2rem;
     }
   }
@@ -77,13 +81,13 @@
   }
 
   &__without-children {
-    color: color(neutral-60);
+    color: semantic-color(icons-disabled);
   }
 
   &__text {
     @include font-preset-caption-xs();
 
-    color: color(neutral-1000);
+    color: semantic-color(text-primary);
     white-space: nowrap;
     padding-right: 4rem;
   }
@@ -111,7 +115,7 @@
   &__right-top-round-out,
   &__right-bottom-round-out {
     @include round-out;
-    background-color: color(neutral-1);
+    background-color: semantic-color(surface-primary);
   }
 
   &__left-bottom-round-out {
@@ -134,32 +138,40 @@
     }
 
     .tree-node__right-gradient {
-      background: linear-gradient(90deg, color(neutral-6, alpha-1) 0%, color(neutral-6) 100%);
-    }
-  }
-
-  &:active {
-    background-color: color(neutral-7);
-
-    .tree-node__right-container {
-      background-color: color(neutral-7);
+      background: linear-gradient(
+        90deg,
+        semantic-color(kind-neutral-hover, alpha-1) 0%,
+        semantic-color(kind-neutral-hover) 100%
+      );
     }
 
-    .tree-node__right-gradient {
-      background: linear-gradient(90deg, color(neutral-7, alpha-1) 0%, color(neutral-7) 100%);
+    &:active {
+      background-color: semantic-color(kind-neutral-pressed);
+
+      .tree-node__right-container {
+        background-color: semantic-color(kind-neutral-pressed);
+      }
+
+      .tree-node__right-gradient {
+        background: linear-gradient(
+          90deg,
+          semantic-color(kind-neutral-pressed, alpha-1) 0%,
+          semantic-color(kind-neutral-pressed) 100%
+        );
+      }
     }
   }
 
   &:focus {
-    border: 2px solid color(primary-500);
+    border: 2px solid semantic-color(lines-accent);
   }
 
   &--dragover {
-    border: 1px solid color(primary-500);
+    border: 1px solid semantic-color(lines-accent);
   }
 
   &--selected {
-    background-color: color(neutral-4);
+    background-color: semantic-color(kind-neutral-selected);
 
     .tree-node__selection {
       opacity: 1;
@@ -167,33 +179,41 @@
     }
 
     .tree-node__right-container {
-      background-color: color(neutral-4);
+      background-color: semantic-color(kind-neutral-selected);
     }
 
     .tree-node__right-gradient {
-      background: linear-gradient(90deg, color(neutral-4, alpha-1) 0%, color(neutral-4) 100%);
+      background: linear-gradient(
+        90deg,
+        semantic-color(kind-neutral-selected, alpha-1) 0%,
+        semantic-color(kind-neutral-selected) 100%
+      );
     }
   }
 
   &--disabled {
     &.tree-node {
       cursor: not-allowed;
-      background-color: color(neutral-1);
+      background-color: semantic-color(surface-primary);
 
       .tree-node__right-container {
-        background-color: color(neutral-1);
+        background-color: semantic-color(surface-primary);
       }
 
       .tree-node__right-gradient {
-        background: linear-gradient(90deg, color(neutral-1, alpha-1) 0%, color(neutral-1) 100%);
+        background: linear-gradient(
+          90deg,
+          semantic-color(surface-primary, alpha-1) 0%,
+          semantic-color(surface-primary) 100%
+        );
       }
 
       .tree-node__text {
-        color: color(neutral-60);
+        color: semantic-color(text-disabled);
       }
 
       &--selected {
-        background-color: color(neutral-4);
+        background-color: semantic-color(kind-neutral-selected);
 
         .tree-node__selection {
           background-color: semantic-color(kind-primary-normal);
@@ -201,11 +221,15 @@
         }
 
         .tree-node__right-container {
-          background-color: color(neutral-4);
+          background-color: semantic-color(kind-neutral-selected);
         }
 
         .tree-node__right-gradient {
-          background: linear-gradient(90deg, color(neutral-4, alpha-1) 0%, color(neutral-4) 100%);
+          background: linear-gradient(
+            90deg,
+            semantic-color(kind-neutral-selected, alpha-1) 0%,
+            semantic-color(kind-neutral-selected) 100%
+          );
         }
       }
     }
@@ -225,99 +249,11 @@
     }
 
     .tree-node__right-gradient {
-      background: linear-gradient(90deg, color(neutral-6, alpha-1) 0%, color(neutral-6) 100%);
-    }
-  }
-
-  @include host-selector-dark-theme() {
-    background-color: color(neutral-1000);
-
-    &__right-container,
-    &__left-top-round-out,
-    &__left-bottom-round-out,
-    &__right-top-round-out,
-    &__right-bottom-round-out {
-      background-color: color(neutral-1000);
-    }
-
-    .tree-node__right-gradient {
-      background: linear-gradient(90deg, color(neutral-1000, alpha-1) 0%, color(neutral-1000) 100%);
-    }
-
-    &__text {
-      color: color(neutral-1);
-    }
-
-    @include hover {
-      background-color: color(neutral-600);
-
-      .tree-node__right-container {
-        background-color: color(neutral-600);
-      }
-
-      .tree-node__right-gradient {
-        background: linear-gradient(90deg, color(neutral-600, alpha-1) 0%, color(neutral-600) 100%);
-      }
-    }
-
-    &:active {
-      background-color: color(neutral-700);
-
-      .tree-node__right-container {
-        background-color: color(neutral-700);
-      }
-
-      .tree-node__right-gradient {
-        background: linear-gradient(90deg, color(neutral-700, alpha-1) 0%, color(neutral-700) 100%);
-      }
-    }
-
-    &--selected {
-      background-color: color(neutral-500);
-
-      .tree-node__selection {
-        background-color: color(primary-40);
-      }
-
-      .tree-node__right-container {
-        background-color: color(neutral-500);
-      }
-
-      .tree-node__right-gradient {
-        background: linear-gradient(90deg, color(neutral-500, alpha-1) 0%, color(neutral-500) 100%);
-      }
-    }
-
-    &.tree-node--disabled {
-      background-color: color(neutral-1000);
-
-      .tree-node__right-container {
-        background-color: color(neutral-1000);
-      }
-
-      .tree-node__right-gradient {
-        background: linear-gradient(90deg, color(neutral-1000, alpha-1) 0%, color(neutral-1000) 100%);
-      }
-
-      .tree-node__text {
-        color: color(neutral-60);
-      }
-
-      &.tree-node--selected {
-        background-color: color(neutral-500);
-
-        .tree-node__right-container {
-          background-color: color(neutral-500);
-        }
-
-        .tree-node__right-gradient {
-          background: linear-gradient(90deg, color(neutral-500, alpha-1) 0%, color(neutral-500) 100%);
-        }
-
-        .tree-node__text {
-          color: color(neutral-60);
-        }
-      }
+      background: linear-gradient(
+        90deg,
+        semantic-color(kind-neutral-hover, alpha-1) 0%,
+        semantic-color(kind-neutral-hover) 100%
+      );
     }
   }
 }

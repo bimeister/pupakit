@@ -11,7 +11,7 @@
   line-height: 6rem;
 
   padding: 1rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 
   @include ellipsis-text-overflow;
 
@@ -21,11 +21,7 @@
   }
 
   @include font-type-medium();
-  color: color(neutral-1000);
+  color: semantic-color(text-primary);
 
   @include flex-container(row, center, space-between);
-
-  @include host-selector-dark-theme() {
-    color: color(neutral-1);
-  }
 }
