@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ContentChild, ViewEncapsulation } from '@angular/core';
+import { DrawerHeaderTabsActionsDirective } from '../../directives/drawer-header-tabs-actions.directive';
 
 @Component({
   selector: 'pupa-drawer-layout-header-tabs',
@@ -7,4 +8,7 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DrawerLayoutHeaderTabsComponent {}
+export class DrawerLayoutHeaderTabsComponent {
+  @ContentChild(DrawerHeaderTabsActionsDirective)
+  public readonly drawerHeaderTabsActions: DrawerHeaderTabsActionsDirective;
+}

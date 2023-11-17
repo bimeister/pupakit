@@ -1,2 +1,9 @@
-<ng-content></ng-content>
+<section class="drawer-layout-header-tabs">
+  <div class="drawer-layout-header-tabs__tabs-list">
+    <ng-content></ng-content>
+  </div>
+  <div *ngIf="drawerHeaderTabsActions?.isDisplayed$ | async" class="drawer-layout-header-tabs__actions">
+    <ng-container [ngTemplateOutlet]="drawerHeaderTabsActions?.templateRef"></ng-container>
+  </div>
+</section>
 <pupa-drawer-layout-separator locatedIn="body"></pupa-drawer-layout-separator>

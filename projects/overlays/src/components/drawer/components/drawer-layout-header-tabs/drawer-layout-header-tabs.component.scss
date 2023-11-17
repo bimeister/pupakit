@@ -1,5 +1,17 @@
 :host {
   display: block;
   padding: 0 6rem;
-  margin-top: 5rem;
+  margin-top: var(--pupa-drawer-header-tab-margin-top, 5rem);
+}
+
+.drawer-layout-header-tabs {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+
+  &__tabs-list {
+    flex-grow: 1;
+    overflow: hidden;
+  }
 }
