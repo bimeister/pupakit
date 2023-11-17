@@ -18,6 +18,7 @@ import { DrawerLayoutHeaderComponent } from './components/drawer-layout-header/d
 import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.component';
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
+import { DrawerHeaderTabsActionsDirective } from './directives/drawer-header-tabs-actions.directive';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,
     DrawerLayoutHeaderTabsComponent,
+    DrawerHeaderTabsActionsDirective,
   ],
   imports: [
     CommonModule,
@@ -61,6 +63,7 @@ import { DrawerTitleComponent } from './components/drawer-title/drawer-title.com
     DrawerLayoutActionComponent,
     DrawerExpandButtonComponent,
     DrawerLayoutHeaderTabsComponent,
+    DrawerHeaderTabsActionsDirective,
   ],
 })
 export class PupaDrawerModule {}

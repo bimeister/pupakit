@@ -16,7 +16,7 @@
       </pupa-drawer-layout-header-row>
 
       <pupa-drawer-layout-header-row>
-        <pupa-drawer-title> Title </pupa-drawer-title>
+        <pupa-drawer-title>Title</pupa-drawer-title>
 
         <pupa-drawer-layout-header-content>
           <pupa-button>Button</pupa-button>
@@ -28,6 +28,9 @@
         <pupa-tabs>
           <pupa-tabs-item *ngFor="let tab of tabs" [name]="tab.name">{{ tab.title }}</pupa-tabs-item>
         </pupa-tabs>
+        <div *pupaDrawerHeaderTabsActions="formControl.value">
+          <pupa-drawer-close-button></pupa-drawer-close-button>
+        </div>
       </pupa-drawer-layout-header-tabs>
     </pupa-drawer-layout-header>
 
@@ -36,6 +39,10 @@
         <ng-container *ngFor="let tab of tabs">
           <div *pupaTabsItemContentTemplate="tab.name">Some content here!</div>
         </ng-container>
+        <div class="row">
+          <pupa-switcher [size]="'medium'" [formControl]="formControl"></pupa-switcher>
+          <span class="label">Show header tabs actions</span>
+        </div>
       </pupa-tabs-content>
     </pupa-drawer-layout-body>
 
