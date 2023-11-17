@@ -128,7 +128,10 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
   }
 
   private isTextTruncated(element: HTMLElement): boolean {
-    return element.scrollWidth > element.clientWidth;
+    const textTruncatedByWidth: boolean = element.scrollWidth > element.clientWidth;
+    const textTruncatedByHeight: boolean = element.scrollHeight > element.clientHeight;
+
+    return textTruncatedByWidth || textTruncatedByHeight;
   }
 
   private processTriggerMouseLeaveEvent(): Subscription {

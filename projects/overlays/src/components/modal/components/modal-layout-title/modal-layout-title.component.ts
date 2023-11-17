@@ -1,10 +1,10 @@
 import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  ElementRef,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -23,12 +23,6 @@ export class ModalLayoutTitleComponent implements AfterContentInit {
   public readonly titleText$: BehaviorSubject<string> = new BehaviorSubject('');
 
   public ngAfterContentInit(): void {
-    this.isTooltipDisabled$.next(!this.isEllipsisActive());
     this.titleText$.next(this.title.nativeElement.innerText);
-  }
-
-  public isEllipsisActive(): boolean {
-    const titleElement: HTMLElement = this.title.nativeElement;
-    return titleElement.scrollHeight > titleElement.offsetHeight;
   }
 }
