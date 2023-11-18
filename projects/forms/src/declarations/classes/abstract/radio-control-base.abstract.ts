@@ -8,7 +8,7 @@ import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 
 @Directive()
 export abstract class RadioControlBase<T> implements OnChanges {
-  @Input() private readonly value: T;
+  @Input() public value: T;
   @Input() public tabindex: number = 0;
   @Input() public withLabel: boolean = true;
 
