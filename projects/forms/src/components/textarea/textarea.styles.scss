@@ -173,9 +173,8 @@
   display: block;
   text-align: right;
   width: 100%;
-  font-size: 10px;
-  line-height: 12px;
   margin-top: 2px;
+  @include font-size-xxs();
   color: semantic-color(text-secondary);
 
   &_invalid {

@@ -51,7 +51,8 @@ $adaptive-property: 'max-width';
     $width-end: $lgBreakPoint,
     $value-end: 220,
     $is-save-width-before: true,
-    $is-save-width-after: true
+    $is-save-width-after: true,
+    $unit: 1px
   );
 }
 

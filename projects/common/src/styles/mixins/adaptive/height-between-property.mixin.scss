@@ -10,21 +10,22 @@
   $height-end,
   $value-end,
   $is-save-height-before: false,
-  $is-save-height-after: false
+  $is-save-height-after: false,
+  $unit: 1px
 ) {
   @include height-between($height-start, $height-end) {
-    #{$property}: calc-between-height($height-start, $value-start, $height-end, $value-end);
+    #{$property}: calc-between-height($height-start, $value-start, $height-end, $value-end, $unit);
   }
 
   @if $is-save-height-before {
     @include height-less-than($height-start) {
-      #{$property}: $value-start * 1px;
+      #{$property}: $value-start * $unit;
     }
   }
 
   @if $is-save-height-after {
     @include height-more-than($height-end) {
-      #{$property}: $value-end * 1px;
+      #{$property}: $value-end * $unit;
     }
   }
 }
