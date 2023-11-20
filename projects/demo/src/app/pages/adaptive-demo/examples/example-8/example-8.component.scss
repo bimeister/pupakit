@@ -11,29 +11,31 @@
 
 .text {
   margin: 2rem 0;
-  font-size: 16px;
+  font-size: 4rem;
 }
 
 .text-width {
   @include width-between-property(
     $property: 'font-size',
     $width-start: 1400,
-    $value-start: 20,
+    $value-start: 5,
     $width-end: 1500,
-    $value-end: 50,
+    $value-end: 12.5,
     $is-save-width-before: false,
-    $is-save-width-after: false
+    $is-save-width-after: false,
+    $unit: 1rem
   );
 
   &.after {
     @include width-between-property(
       $property: 'font-size',
       $width-start: 1400,
-      $value-start: 30,
+      $value-start: 7.5,
       $width-end: 1500,
-      $value-end: 50,
+      $value-end: 12.5,
       $is-save-width-before: false,
-      $is-save-width-after: true
+      $is-save-width-after: true,
+      $unit: 1rem
     );
   }
 
@@ -41,11 +43,12 @@
     @include width-between-property(
       $property: 'font-size',
       $width-start: 1400,
-      $value-start: 30,
+      $value-start: 7.5,
       $width-end: 1500,
-      $value-end: 50,
+      $value-end: 12.5,
       $is-save-width-before: true,
-      $is-save-width-after: false
+      $is-save-width-after: false,
+      $unit: 1rem
     );
   }
 }
@@ -54,22 +57,24 @@
   @include height-between-property(
     $property: 'font-size',
     $height-start: 900,
-    $value-start: 30,
+    $value-start: 7.5,
     $height-end: 1000,
-    $value-end: 50,
+    $value-end: 12.5,
     $is-save-height-before: false,
-    $is-save-height-after: false
+    $is-save-height-after: false,
+    $unit: 1rem
   );
 
   &.after {
     @include height-between-property(
       $property: 'font-size',
       $height-start: 900,
-      $value-start: 30,
+      $value-start: 7.5,
       $height-end: 1000,
-      $value-end: 50,
+      $value-end: 12.5,
       $is-save-height-before: false,
-      $is-save-height-after: true
+      $is-save-height-after: true,
+      $unit: 1rem
     );
   }
 
@@ -77,11 +82,12 @@
     @include height-between-property(
       $property: 'font-size',
       $height-start: 900,
-      $value-start: 30,
+      $value-start: 7.5,
       $height-end: 1000,
-      $value-end: 50,
+      $value-end: 12.5,
       $is-save-height-before: true,
-      $is-save-height-after: false
+      $is-save-height-after: false,
+      $unit: 1rem
     );
   }
 }

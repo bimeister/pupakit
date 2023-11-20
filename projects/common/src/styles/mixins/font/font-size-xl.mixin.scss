@@ -10,7 +10,8 @@
     $mdBreakPoint,
     $fontSizeDesktopXL,
     true,
-    true
+    true,
+    1rem
   );
 
   @include width-between-property(
@@ -20,6 +21,7 @@
     $mdBreakPoint,
     if($paragraph, $fontSizeDesktopXL * 1.5, $lineHeightDesktopXL),
     true,
-    true
+    true,
+    1rem
   );
 }

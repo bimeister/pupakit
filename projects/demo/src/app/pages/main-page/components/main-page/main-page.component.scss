@@ -32,7 +32,8 @@
       $width-end: $xxlBreakPoint,
       $value-end: 500,
       $is-save-width-before: false,
-      $is-save-width-after: true
+      $is-save-width-after: true,
+      $unit: 1px
     );
   }
 
@@ -51,7 +52,8 @@
         $width-end: $lgBreakPoint,
         $value-end: 256,
         $is-save-width-before: false,
-        $is-save-width-after: true
+        $is-save-width-after: true,
+        $unit: 1px
       );
     }
 

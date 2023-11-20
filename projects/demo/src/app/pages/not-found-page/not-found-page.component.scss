@@ -30,11 +30,12 @@
     @include width-between-property(
       $property: 'font-size',
       $width-start: $xsBreakPoint,
-      $value-start: 40 * 4,
+      $value-start: 40,
       $width-end: $mdBreakPoint,
-      $value-end: 70 * 4,
+      $value-end: 70,
       $is-save-width-before: false,
-      $is-save-width-after: true
+      $is-save-width-after: true,
+      $unit: 1rem
     );
   }
 

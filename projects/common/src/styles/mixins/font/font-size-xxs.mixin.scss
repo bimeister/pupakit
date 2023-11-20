@@ -1,6 +1,6 @@
 @use './../../variables/font.variables' as *;
 
 @mixin font-size-xxs($paragraph: false) {
-  font-size: $fontSizeXXS * 1px;
-  line-height: if($paragraph, $fontSizeXXS * 1.5 * 1px, $lineHeightXXS * 1px);
+  font-size: $fontSizeXXS * 1rem;
+  line-height: if($paragraph, $fontSizeXXS * 1.5 * 1rem, $lineHeightXXS * 1rem);
 }
