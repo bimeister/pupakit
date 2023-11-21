@@ -13,18 +13,60 @@ import { DropdownConfig } from '../declarations/interfaces/dropdown-config.inter
 import { DropdownContainerData } from '../declarations/interfaces/dropdown-container-data.interface';
 import { DropdownDataType } from '../declarations/types/utility-types/dropdown-data.utility-type';
 import { OVERLAY_VIEWPORT_MARGIN_PX, Position, Theme } from '@bimeister/pupakit.common';
+import { DropdownMenuPosition } from '../declarations/types/dropdown-menu-position.type';
 
-const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
-  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }),
-];
+export const CONNECTION_POSITION_BY_DROPDOWN_POSITION_MAP: Map<DropdownMenuPosition, ConnectionPositionPair> = new Map<
+  DropdownMenuPosition,
+  ConnectionPositionPair
+>([
+  [
+    'top',
+    new ConnectionPositionPair({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }),
+  ],
+  [
+    'topCenter',
+    new ConnectionPositionPair({ originX: 'center', originY: 'top' }, { overlayX: 'center', overlayY: 'bottom' }),
+  ],
+  ['topRight', new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' })],
+  [
+    'topLeft',
+    new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
+  ],
+  [
+    'right',
+    new ConnectionPositionPair({ originX: 'end', originY: 'center' }, { overlayX: 'start', overlayY: 'center' }),
+  ],
+  ['rightTop', new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'start', overlayY: 'top' })],
+  [
+    'rightBottom',
+    new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'start', overlayY: 'bottom' }),
+  ],
+  [
+    'bottom',
+    new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
+  ],
+  [
+    'bottomCenter',
+    new ConnectionPositionPair({ originX: 'center', originY: 'bottom' }, { overlayX: 'center', overlayY: 'top' }),
+  ],
+  [
+    'bottomLeft',
+    new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
+  ],
+  [
+    'bottomRight',
+    new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
+  ],
+  [
+    'left',
+    new ConnectionPositionPair({ originX: 'start', originY: 'center' }, { overlayX: 'end', overlayY: 'center' }),
+  ],
+  ['leftTop', new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'end', overlayY: 'top' })],
+  [
+    'leftBottom',
+    new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'end', overlayY: 'bottom' }),
+  ],
+]);
 
 @Injectable({ providedIn: 'root' })
 export class DropdownsService {
@@ -112,7 +154,6 @@ export class DropdownsService {
     config: DropdownConfig<TComponent, DropdownDataType<TComponent>>
   ): FlexibleConnectedPositionStrategy {
     const target: HTMLElement | Position = config.target;
-
     return this.overlay
       .position()
       .flexibleConnectedTo(target instanceof HTMLElement ? target : { x: target[0], y: target[1] })
@@ -137,15 +178,15 @@ export class DropdownsService {
   private getOverlayPositions<TComponent extends DropdownComponentBase<unknown>>(
     config: DropdownConfig<TComponent, DropdownDataType<TComponent>>
   ): ConnectionPositionPair[] {
-    const sortedHorizontalPositions: ConnectionPositionPair[] = OVERLAY_POSITIONS.sort(
-      (position: ConnectionPositionPair) =>
-        position.overlayX === config.horizontalPosition &&
-        position.originY === config.verticalPosition &&
-        position.overlayY !== config.verticalPosition
-          ? -1
-          : 1
-    );
+    return [
+      CONNECTION_POSITION_BY_DROPDOWN_POSITION_MAP.get(config.position),
+      ...this.getConnectionPositionPair(config.position),
+    ];
+  }
 
-    return sortedHorizontalPositions;
+  private getConnectionPositionPair(position: DropdownMenuPosition): ConnectionPositionPair[] {
+    return Object.entries(CONNECTION_POSITION_BY_DROPDOWN_POSITION_MAP)
+      .filter(([key, _]: [string, ConnectionPositionPair]) => key !== position)
+      .map(([_, value]: [string, ConnectionPositionPair]) => value);
   }
 }

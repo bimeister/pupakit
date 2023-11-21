@@ -28,8 +28,7 @@
         <demo-dropdown-example-1
           [disabled]="disabled$ | async"
           [widthType]="widthType$ | async"
-          [horizontalPosition]="horizontalPosition$ | async"
-          [verticalPosition]="verticalPosition$ | async"
+          [position]="position$ | async"
         ></demo-dropdown-example-1>
       </demo-example-viewer-content>
       <demo-example-viewer-section-label>pupaDropdown Properties</demo-example-viewer-section-label>
@@ -68,25 +67,16 @@
         </demo-example-viewer-property>
 
         <demo-example-viewer-property
-          name="pupaDropdownTemplateHorizontalPosition"
-          type="HorizontalConnectionPos"
+          name="pupaDropdownTemplatePosition"
+          type="DropdownMenuPositionType"
           decoratorName="input"
         >
           <ng-container *demoExampleViewerPropertyDescription>
-            <div>Sets horizontal position of dropdown.</div>
+            <div>Sets position of dropdown.</div>
           </ng-container>
-          <demo-props-radio-select #horizontalPosition$ [options]="horizontalPositionOptions"></demo-props-radio-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property
-          name="pupaDropdownTemplateHorizontalPosition"
-          type="VerticalConnectionPos"
-          decoratorName="input"
-        >
-          <ng-container *demoExampleViewerPropertyDescription>
-            <div>Sets vertical position of dropdown.</div>
-          </ng-container>
-          <demo-props-radio-select #verticalPosition$ [options]="verticalPositionOptions"></demo-props-radio-select>
+          <div class="container">
+            <demo-props-radio-select #position$ [options]="positionOptions"></demo-props-radio-select>
+          </div>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
     </demo-example-viewer>

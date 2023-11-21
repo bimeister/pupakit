@@ -1,0 +1,15 @@
+export type DropdownMenuPosition =
+  | 'top'
+  | 'topCenter'
+  | 'topLeft'
+  | 'topRight'
+  | 'right'
+  | 'rightTop'
+  | 'rightBottom'
+  | 'bottom'
+  | 'bottomCenter'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'left'
+  | 'leftTop'
+  | 'leftBottom';

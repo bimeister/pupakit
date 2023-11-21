@@ -1,6 +1,6 @@
-import { HorizontalConnectionPos, VerticalConnectionPos } from '@angular/cdk/overlay';
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { DropdownWidthType } from '@bimeister/pupakit.kit';
+import { DropdownMenuPosition } from '@bimeister/pupakit.kit/declarations/types/dropdown-menu-position.type';
 
 @Component({
   selector: 'demo-dropdown-example-1',
@@ -12,6 +12,5 @@ import { DropdownWidthType } from '@bimeister/pupakit.kit';
 export class DropdownDemoExample1Component {
   @Input() public disabled: boolean;
   @Input() public widthType: DropdownWidthType;
-  @Input() public horizontalPosition: HorizontalConnectionPos;
-  @Input() public verticalPosition: VerticalConnectionPos;
+  @Input() public position: DropdownMenuPosition = 'bottomCenter';
 }
