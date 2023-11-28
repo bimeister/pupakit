@@ -331,6 +331,19 @@
           <demo-props-switcher #isDisabled$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>SelectDropdownComponent Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="width" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Sets width of dropdown.</ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property decoratorName="input" name="minBottomViewportDistance" type="number">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Sets the minimum distance between overlay origin and the bottom of viewport to open dropdown downward,
+            otherwise it's opened upward. Usually, overlay origin is pupa-select-trigger. Default value is 150px.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
     </demo-example-viewer>
   </div>
 </demo-page>

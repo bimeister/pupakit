@@ -1,4 +1,4 @@
-import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
 import { EventEmitter, TemplateRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { Nullable } from '@bimeister/utilities';
@@ -38,35 +38,62 @@ export interface SelectStateServiceDeclaration<T> {
 
   readonly resetOutput: EventEmitter<void>;
 
+  readonly overlayPositions$: Observable<ConnectionPositionPair[]>;
+  readonly viewportMargin: number;
+
   setControlRef(control: NgControl): void;
 
   collapse(): void;
+
   open(): void;
+
   toggleExpansion(): void;
 
   defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void;
+
   defineDropdownOverlayRef(overlayRef: OverlayRef): void;
+
   defineOnChangeCallback(onChange: OnChangeCallback<T[]>): void;
+
   defineOnTouchedCallback(onTouched: OnTouchedCallback): void;
 
   setMultiSelectionState(isEnabled: boolean): void;
+
   setUnselectionState(isEnabled: boolean): void;
+
   setIsPatchedState(isPatched: boolean): void;
+
   setPlaceholderState(placeholder: string): void;
+
   setWithResetState(withReset: boolean): void;
+
   setInlineState(inline: boolean): void;
+
   setSizeState(size: SelectSize): void;
+
   setDisabledState(isDisabled: boolean): void;
 
   setInvalidTooltipHideOnHoverState(invalidTooltipHideOnHover: boolean): void;
+
   setInvalidTooltipDisabledState(invalidTooltipDisabled: boolean): void;
+
   setInvalidTooltipState(invalidTooltip: Nullable<string>): void;
+
   setInvalidTooltipContentTemplateState(invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>>): void;
+
   setIsTriggerTouchedState(isTriggered: boolean): void;
 
+  setMinBottomViewportDistance(distance: number): void;
+
   processSelection(value: T): void;
+
   isPicked(value: T): Observable<boolean>;
+
   setValue(value: SelectOuterValue<T>): void;
+
   reset(): void;
+
   setIsFilled(isFilled: boolean): void;
+
+  updateOverlayPositions(distanceToViewportBottom: number): void;
 }

@@ -1,16 +1,17 @@
 import { CdkConnectedOverlay, CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
-import { Directive, OnDestroy, OnInit } from '@angular/core';
-import { filterNotNil, filterTruthy, isNil } from '@bimeister/utilities';
+import { Directive, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { filterNotNil, filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { SelectStateServiceDeclaration } from '../../interfaces/select-state-service-declaration.interface';
-
-const OVERLAY_OFFSET_X_PX: number = 0;
-const OVERLAY_OFFSET_Y_PX: number = 8;
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 
 @Directive()
-export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
+export abstract class SelectDropdownBase<T> implements OnInit, OnChanges, OnDestroy {
   protected abstract readonly cdkConnectedOverlay: CdkConnectedOverlay;
+  public abstract minBottomViewportDistance: number | null;
+
+  public readonly viewportMargin: number = this.selectStateService.viewportMargin;
 
   private readonly subscription: Subscription = new Subscription();
 
@@ -28,32 +29,7 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
     switchMap(() => this.selectStateService.dropdownTriggerButtonWidthPx$)
   );
 
-  public readonly overlayPositions: ConnectionPositionPair[] = [
-    new ConnectionPositionPair(
-      { originX: 'start', originY: 'bottom' },
-      { overlayX: 'start', overlayY: 'top' },
-      OVERLAY_OFFSET_X_PX,
-      OVERLAY_OFFSET_Y_PX
-    ),
-    new ConnectionPositionPair(
-      { originX: 'start', originY: 'top' },
-      { overlayX: 'start', overlayY: 'bottom' },
-      OVERLAY_OFFSET_X_PX,
-      -OVERLAY_OFFSET_Y_PX
-    ),
-    new ConnectionPositionPair(
-      { originX: 'end', originY: 'bottom' },
-      { overlayX: 'end', overlayY: 'top' },
-      OVERLAY_OFFSET_X_PX,
-      OVERLAY_OFFSET_Y_PX
-    ),
-    new ConnectionPositionPair(
-      { originX: 'end', originY: 'top' },
-      { overlayX: 'end', overlayY: 'bottom' },
-      OVERLAY_OFFSET_X_PX,
-      -OVERLAY_OFFSET_Y_PX
-    ),
-  ];
+  public readonly overlayPositions$: Observable<ConnectionPositionPair[]> = this.selectStateService.overlayPositions$;
 
   public readonly isOverlayAttached$: BehaviorSubject<boolean> = new BehaviorSubject(null);
 
@@ -61,6 +37,12 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.subscription.add(this.handleOverlayRefOnOpen());
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (changes.hasOwnProperty('minBottomViewportDistance')) {
+      this.processMinBottomViewportDistanceChanges(changes.minBottomViewportDistance);
+    }
   }
 
   public ngOnDestroy(): void {
@@ -93,5 +75,15 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnDestroy {
       .subscribe((overlayRef: OverlayRef) => {
         this.selectStateService.defineDropdownOverlayRef(overlayRef);
       });
+  }
+
+  private processMinBottomViewportDistanceChanges(change: ComponentChange<this, number | null>): void {
+    const currentValue: Nullable<number> = change.currentValue;
+
+    if (isNil(currentValue)) {
+      return;
+    }
+
+    this.selectStateService.setMinBottomViewportDistance(currentValue);
   }
 }

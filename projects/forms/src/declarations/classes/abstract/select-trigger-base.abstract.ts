@@ -94,7 +94,10 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   }
 
   public processButtonClick(): void {
-    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => this.selectStateService.toggleExpansion());
+    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
+      this.defineOverlayPositionOrder();
+      this.selectStateService.toggleExpansion();
+    });
   }
 
   public processEventPropagation(event: Event): void {
@@ -124,5 +127,11 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
 
   private defineDropdownTrigger(): void {
     this.selectStateService.defineDropdownTrigger(this.overlayOrigin, this.button.nativeElement);
+  }
+
+  private defineOverlayPositionOrder(): void {
+    const { bottom } = this.button.nativeElement.getBoundingClientRect();
+    const distanceToViewportBottom: number = window.innerHeight - bottom;
+    this.selectStateService.updateOverlayPositions(distanceToViewportBottom);
   }
 }
