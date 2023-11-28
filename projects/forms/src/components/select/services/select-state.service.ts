@@ -1,4 +1,4 @@
-import { CdkOverlayOrigin, OverlayRef } from '@angular/cdk/overlay';
+import { CdkOverlayOrigin, ConnectionPositionPair, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
 import { ElementRef, EventEmitter, Inject, Injectable, OnDestroy, TemplateRef } from '@angular/core';
 import { FormControlStatus, NgControl } from '@angular/forms';
@@ -11,6 +11,16 @@ import { OnChangeCallback } from '../../../declarations/types/on-change-callback
 import { OnTouchedCallback } from '../../../declarations/types/on-touched-callback.type';
 import { SelectOuterValue } from '../../../declarations/types/select-outer-value.type';
 import { SelectSize } from '../../../declarations/types/select-size.type';
+
+const OVERLAY_OFFSET_X_PX: number = 0;
+const OVERLAY_OFFSET_Y_PX: number = 8;
+
+const DEFAULT_MIN_BOTTOM_VIEWPORT_DISTANCE_PX: number = 150;
+
+enum OverlaySelectPositionOrder {
+  UpwardFirst = 'UpwardFirst',
+  DownwardFirst = 'DownwardFirst',
+}
 
 /** @dynamic */
 @Injectable({
@@ -91,6 +101,18 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   );
 
   public readonly resetOutput: EventEmitter<void> = new EventEmitter<void>();
+
+  public readonly overlayPositions$: BehaviorSubject<ConnectionPositionPair[]> = new BehaviorSubject<
+    ConnectionPositionPair[]
+  >(this.getOverlayPositions(OverlaySelectPositionOrder.DownwardFirst));
+
+  private readonly overlayOffsetX: number = OVERLAY_OFFSET_X_PX;
+  private readonly overlayOffsetY: number = OVERLAY_OFFSET_Y_PX;
+  public readonly viewportMargin: number = Math.max(this.overlayOffsetX, this.overlayOffsetY) * 2;
+
+  private readonly minBottomViewportDistance$: BehaviorSubject<number> = new BehaviorSubject<number>(
+    DEFAULT_MIN_BOTTOM_VIEWPORT_DISTANCE_PX
+  );
 
   constructor(@Inject(DOCUMENT) private readonly document: Document) {}
 
@@ -313,6 +335,20 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
       );
   }
 
+  public updateOverlayPositions(distanceToViewportBottom: number): void {
+    this.minBottomViewportDistance$.pipe(take(1)).subscribe((minBottomViewportDistance: number) => {
+      const order: OverlaySelectPositionOrder =
+        distanceToViewportBottom >= minBottomViewportDistance
+          ? OverlaySelectPositionOrder.DownwardFirst
+          : OverlaySelectPositionOrder.UpwardFirst;
+      this.overlayPositions$.next(this.getOverlayPositions(order));
+    });
+  }
+
+  public setMinBottomViewportDistance(distance: number): void {
+    this.minBottomViewportDistance$.next(distance);
+  }
+
   private listenOutsideEventsForClose(): void {
     const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
@@ -321,6 +357,49 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     merge(touchMove$, wheel$, resize$)
       .pipe(take(1))
       .subscribe(() => this.collapse());
+  }
+
+  private getOverlayPositions(order: OverlaySelectPositionOrder): ConnectionPositionPair[] {
+    return [
+      order === OverlaySelectPositionOrder.DownwardFirst
+        ? new ConnectionPositionPair(
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'top' },
+            this.overlayOffsetX,
+            this.overlayOffsetY
+          )
+        : new ConnectionPositionPair(
+            { originX: 'start', originY: 'top' },
+            { overlayX: 'start', overlayY: 'bottom' },
+            this.overlayOffsetX,
+            -this.overlayOffsetY
+          ),
+      order === OverlaySelectPositionOrder.DownwardFirst
+        ? new ConnectionPositionPair(
+            { originX: 'start', originY: 'top' },
+            { overlayX: 'start', overlayY: 'bottom' },
+            this.overlayOffsetX,
+            -this.overlayOffsetY
+          )
+        : new ConnectionPositionPair(
+            { originX: 'start', originY: 'bottom' },
+            { overlayX: 'start', overlayY: 'top' },
+            this.overlayOffsetX,
+            this.overlayOffsetY
+          ),
+      new ConnectionPositionPair(
+        { originX: 'end', originY: 'bottom' },
+        { overlayX: 'end', overlayY: 'top' },
+        this.overlayOffsetX,
+        this.overlayOffsetY
+      ),
+      new ConnectionPositionPair(
+        { originX: 'end', originY: 'top' },
+        { overlayX: 'end', overlayY: 'bottom' },
+        this.overlayOffsetX,
+        -this.overlayOffsetY
+      ),
+    ];
   }
 
   private static getParsedValue<V>(serializedSet: Set<string>): V[] {
