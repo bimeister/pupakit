@@ -84,7 +84,12 @@
     >
       <div
         class="date-inner"
-        [class.date-inner__selected]="isDateSelected(date) | async"
+        [class.date-inner__selected]="
+          (isSelectionModeDate$ | async)
+            ? isSameDate(date, selectedDate$ | async)
+            : dateIsInDateArray(date, selectedRange$ | async)
+        "
+        [class.date-inner__current]="isSameDate(date, defaultCurrentDateWithClearedTime)"
         [class.date-inner__disabled]="
           disabled ||
           dateIsNotAvailable(date, isBackDating$ | async, availableStartDate$ | async, availableEndDate$ | async)

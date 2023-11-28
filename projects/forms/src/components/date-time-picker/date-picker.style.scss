@@ -214,6 +214,12 @@ $height_month: 24px;
 
   z-index: 2;
 
+  &__current:not(&__disabled):not(&__selected) {
+    border: 1px solid color(primary-500);
+    color: color(neutral-1000);
+    box-sizing: border-box;
+  }
+
   &__selected {
     background-color: color(primary-500);
     color: color(neutral-1);
