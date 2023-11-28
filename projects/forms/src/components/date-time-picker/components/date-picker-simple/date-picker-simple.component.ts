@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { DayOfWeek, isDate } from '@bimeister/pupakit.calendar';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { filterFalsy, isEmpty, isNil } from '@bimeister/utilities';
+import { filterFalsy, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { dayInMs } from '../../../../declarations/constants/day-in-ms.const';
@@ -204,6 +204,8 @@ export class DatePickerSimpleComponent implements OnChanges {
     map((years: number[]) => years[years.length - 1])
   );
 
+  public readonly defaultCurrentDateWithClearedTime: Date = DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME;
+
   constructor(private readonly datePickerStateService: DatePickerStateService) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -211,18 +213,6 @@ export class DatePickerSimpleComponent implements OnChanges {
     this.processIsLeftDoubleDatePickerChange(changes?.isLeftDoubleDatePicker);
     this.processIsRightDoubleDatePickerChange(changes?.isRightDoubleDatePicker);
     this.processNeedAddedWeekChange(changes?.needAddedWeek);
-  }
-
-  public isDateSelected(date: Date): Observable<boolean> {
-    return combineLatest([this.isSelectionModeDate$, this.selectedDate$, this.selectedRange$]).pipe(
-      map(([isSelectionModeDate, selectedDate, selectedRange]: [boolean, Date, Date[]]) => {
-        if ((isSelectionModeDate && isNil(selectedDate)) || (!isSelectionModeDate && isEmpty(selectedRange))) {
-          return this.isSameDate(date, DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
-        }
-
-        return isSelectionModeDate ? this.isSameDate(date, selectedDate) : this.dateIsInDateArray(date, selectedRange);
-      })
-    );
   }
 
   public switchToPreviousMonth(): void {
