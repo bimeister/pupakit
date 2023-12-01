@@ -157,6 +157,11 @@ export class SidebarComponent {
     linkItems: sortByProperty([{ title: 'Calendar', link: '/kit/calendar' }], 'title'),
   };
 
+  private readonly directiveGroup: LinksGroup = {
+    title: 'Directives',
+    linkItems: sortByProperty([{ title: 'Highlight', link: '/kit/highlight' }], 'title'),
+  };
+
   private readonly demoToolsGroup: LinksGroup = {
     title: 'Demo Tools',
     linkItems: sortByProperty([{ title: 'Code', link: '/kit/code' }], 'title'),
@@ -174,6 +179,7 @@ export class SidebarComponent {
     this.dndGroup,
     this.calendarGroup,
     this.demoToolsGroup,
+    this.directiveGroup,
   ];
 
   public readonly searchControl: FormControl = new FormControl('');

@@ -1,0 +1,22 @@
+<h1>Highlight</h1>
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Simple usage</h3>
+    <pupa-code-container [content]="example1Content">
+      <demo-example-1 *pupaCodeContainerPreviewTemplate></demo-example-1>
+    </pupa-code-container>
+  </div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-section-label> Highlight Directive properties </demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="pupaHighlight" type="string" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Setting search value </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="pupaHighlightKind" type="string" decoratorName="input">
+          <ng-container *demoExampleViewerPropertyDescription> Setting highlight color </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>
