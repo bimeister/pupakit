@@ -60,6 +60,7 @@ import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
+import { HighlightDemoModule } from './pages/highlight-demo/highlight-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -410,6 +411,11 @@ const demoRoutes: Routes = [
         path: 'calendar',
         loadChildren: (): Promise<Type<CalendarDemoModule>> =>
           import('./pages/calendar-demo/calendar-demo.module').then((module: any) => module.CalendarDemoModule),
+      },
+      {
+        path: 'highlight',
+        loadChildren: (): Promise<Type<HighlightDemoModule>> =>
+          import('./pages/highlight-demo/highlight-demo.module').then((module: any) => module.HighlightDemoModule),
       },
     ],
   },
