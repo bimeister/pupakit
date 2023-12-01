@@ -1,7 +1,6 @@
 import { Directive, ElementRef, HostBinding, Inject, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 
-// Adds 'px' to the number and turns it into a string
 const addPx = (value: number): string => {
   if (!Number.isFinite(value)) {
     throw new Error('Input is not a finite number');
@@ -13,8 +12,8 @@ const addPx = (value: number): string => {
   selector: '[pupaHighlight]',
 })
 export class HighlightDirective implements OnChanges, OnInit {
-  @Input() public readonly pupaHighlight: string = '';
-  @Input() public readonly pupaHighlightKind: string = 'rgb(var(--semantic-color_kind-success-normal))';
+  @Input() public pupaHighlight: string = '';
+  @Input() public pupaHighlightKind: string = 'rgb(var(--semantic-color_kind-success-normal))';
 
   @HostBinding('style.position') private readonly position: string = 'relative';
   @HostBinding('style.zIndex') private readonly zIndex: string = '0';
