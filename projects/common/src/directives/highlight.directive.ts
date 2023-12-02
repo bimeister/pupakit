@@ -8,6 +8,11 @@ const addPx = (value: number): string => {
   return `${value}px`;
 };
 
+const acceptNode = (node: Node): number =>
+  node.parentElement.parentElement.classList.contains('table-body-cell__content')
+    ? NodeFilter.FILTER_ACCEPT
+    : NodeFilter.FILTER_SKIP;
+
 @Directive({
   selector: '[pupaHighlight]',
 })
@@ -19,7 +24,9 @@ export class HighlightDirective implements OnChanges, OnInit {
   @HostBinding('style.zIndex') private readonly zIndex: string = '0';
 
   private readonly highlight: HTMLElement = this.setUpHighlight();
-  private readonly treeWalker: TreeWalker = this.doc.createTreeWalker(this.el.nativeElement, NodeFilter.SHOW_TEXT);
+  private readonly treeWalker: TreeWalker = this.doc.createTreeWalker(this.el.nativeElement, NodeFilter.SHOW_TEXT, {
+    acceptNode,
+  });
 
   constructor(
     @Inject(DOCUMENT) private readonly doc: Document,
@@ -42,9 +49,7 @@ export class HighlightDirective implements OnChanges, OnInit {
   }
 
   private indexOf(source: string | null): number {
-    return source === '' || this.pupaHighlight === ''
-      ? -1
-      : source.toLowerCase().indexOf(this.pupaHighlight.toLowerCase());
+    return !source || !this.pupaHighlight ? -1 : source.toLowerCase().indexOf(this.pupaHighlight.toLowerCase());
   }
 
   private updateStyles(): void {
@@ -56,7 +61,7 @@ export class HighlightDirective implements OnChanges, OnInit {
 
     this.treeWalker.currentNode = this.el.nativeElement;
 
-    do {
+    while (this.treeWalker.nextNode()) {
       const index: number = this.indexOf(this.treeWalker.currentNode.nodeValue);
 
       if (index === -1) {
@@ -71,7 +76,7 @@ export class HighlightDirective implements OnChanges, OnInit {
       this.setStyleHighlight(range);
 
       return;
-    } while (this.treeWalker.nextNode());
+    }
   }
 
   private setStyleHighlight(range: Range): void {
