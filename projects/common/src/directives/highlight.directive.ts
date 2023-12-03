@@ -24,18 +24,22 @@ export class HighlightDirective implements OnChanges, OnInit {
   @HostBinding('style.zIndex') private readonly zIndex: string = '0';
 
   private readonly highlight: HTMLElement = this.setUpHighlight();
-  private readonly treeWalker: TreeWalker = this.doc.createTreeWalker(this.el.nativeElement, NodeFilter.SHOW_TEXT, {
-    acceptNode,
-  });
+  private readonly treeWalker: TreeWalker = this.document.createTreeWalker(
+    this.elementRef.nativeElement,
+    NodeFilter.SHOW_TEXT,
+    {
+      acceptNode,
+    }
+  );
 
   constructor(
-    @Inject(DOCUMENT) private readonly doc: Document,
+    @Inject(DOCUMENT) private readonly document: Document,
     @Inject(Renderer2) private readonly renderer: Renderer2,
-    @Inject(ElementRef) private readonly el: ElementRef<HTMLElement>
+    @Inject(ElementRef) private readonly elementRef: ElementRef<HTMLElement>
   ) {}
 
   private get match(): boolean {
-    return this.indexOf(this.el.nativeElement.textContent) !== -1;
+    return this.indexOf(this.elementRef.nativeElement.textContent) !== -1;
   }
 
   public ngOnChanges(): void {
@@ -43,8 +47,8 @@ export class HighlightDirective implements OnChanges, OnInit {
   }
 
   public ngOnInit(): void {
-    this.el.nativeElement.style.position = this.position;
-    this.el.nativeElement.style.zIndex = this.zIndex;
+    this.elementRef.nativeElement.style.position = this.position;
+    this.elementRef.nativeElement.style.zIndex = this.zIndex;
     this.highlight.style.background = this.pupaHighlightKind;
   }
 
@@ -59,7 +63,7 @@ export class HighlightDirective implements OnChanges, OnInit {
       return;
     }
 
-    this.treeWalker.currentNode = this.el.nativeElement;
+    this.treeWalker.currentNode = this.elementRef.nativeElement;
 
     while (this.treeWalker.nextNode()) {
       const index: number = this.indexOf(this.treeWalker.currentNode.nodeValue);
@@ -68,7 +72,7 @@ export class HighlightDirective implements OnChanges, OnInit {
         continue;
       }
 
-      const range: Range = this.doc.createRange();
+      const range: Range = this.document.createRange();
 
       range.setStart(this.treeWalker.currentNode, index);
       range.setEnd(this.treeWalker.currentNode, index + this.pupaHighlight.length);
@@ -80,7 +84,7 @@ export class HighlightDirective implements OnChanges, OnInit {
   }
 
   private setStyleHighlight(range: Range): void {
-    const hostRect: DOMRect = this.el.nativeElement.getBoundingClientRect();
+    const hostRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
     const { left, top, width, height } = range.getBoundingClientRect();
 
     this.highlight.style.background = this.pupaHighlight;
@@ -96,7 +100,7 @@ export class HighlightDirective implements OnChanges, OnInit {
 
     highlight.style.zIndex = '-1';
     highlight.style.position = 'absolute';
-    this.renderer.appendChild(this.el.nativeElement, highlight);
+    this.renderer.appendChild(this.elementRef.nativeElement, highlight);
 
     return highlight;
   }
