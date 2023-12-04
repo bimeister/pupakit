@@ -1,5 +1,6 @@
 import { Directive, ElementRef, HostBinding, Inject, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
+import { HighlightKind } from '@bimeister/pupakit.kit/src/declarations/types/highlight-kind.type';
 
 const addPx = (value: number): string => {
   if (!Number.isFinite(value)) {
@@ -18,7 +19,7 @@ const acceptNode = (node: Node): number =>
 })
 export class HighlightDirective implements OnChanges, OnInit {
   @Input() public pupaHighlight: string = '';
-  @Input() public pupaHighlightKind: string = 'rgb(var(--semantic-color_kind-success-normal))';
+  @Input() public pupaHighlightKind: HighlightKind = 'primary';
 
   @HostBinding('style.position') private readonly position: string = 'relative';
   @HostBinding('style.zIndex') private readonly zIndex: string = '0';
@@ -49,7 +50,7 @@ export class HighlightDirective implements OnChanges, OnInit {
   public ngOnInit(): void {
     this.elementRef.nativeElement.style.position = this.position;
     this.elementRef.nativeElement.style.zIndex = this.zIndex;
-    this.highlight.style.background = this.pupaHighlightKind;
+    this.highlight.classList.add(`highlight_${this.pupaHighlightKind}`);
   }
 
   private indexOf(source: string | null): number {

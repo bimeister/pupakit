@@ -4,7 +4,7 @@
   <pupa-table [controller]="controller">
     <pupa-table-column-template columnType="name">
       <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; typeFrom: rowType" [clickable]="true">
-        <span [pupaHighlight]="searchControl.value" [pupaHighlightKind]="'red'">{{ row.data.firstName }}</span>
+        <span [pupaHighlight]="searchControl.value" pupaHighlightKind="danger">{{ row.data.firstName }}</span>
       </pupa-table-body-cell>
       <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; typeFrom: rowType" [clickable]="true">
         <span [pupaHighlight]="searchControl.value">{{ row.data.lastName }}</span>
@@ -12,14 +12,12 @@
     </pupa-table-column-template>
     <pupa-table-column-template columnType="city">
       <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; typeFrom: rowType" [clickable]="true">
-        <span [pupaHighlight]="searchControl.value" [pupaHighlightKind]="'rgb(var(--color_primary-600))'">{{
-          row.data.city
-        }}</span>
+        <span [pupaHighlight]="searchControl.value">{{ row.data.city }}</span>
       </pupa-table-body-cell>
     </pupa-table-column-template>
     <pupa-table-column-template columnType="age">
       <pupa-table-body-cell *pupaTableBodyCellTemplate="let row; typeFrom: rowType" [clickable]="true">
-        <span [pupaHighlight]="searchControl.value" [pupaHighlightKind]="'#ADFF2F'">{{ row.data.age }}</span>
+        <span [pupaHighlight]="searchControl.value">{{ row.data.age }}</span>
       </pupa-table-body-cell>
     </pupa-table-column-template>
   </pupa-table>
