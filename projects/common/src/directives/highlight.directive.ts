@@ -88,7 +88,6 @@ export class HighlightDirective implements OnChanges, OnInit {
     const hostRect: DOMRect = this.elementRef.nativeElement.getBoundingClientRect();
     const { left, top, width, height } = range.getBoundingClientRect();
 
-    this.highlight.style.background = this.pupaHighlight;
     this.highlight.style.left = addPx(left - hostRect.left);
     this.highlight.style.top = addPx(top - hostRect.top);
     this.highlight.style.width = addPx(width);
