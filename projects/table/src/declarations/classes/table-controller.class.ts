@@ -1,5 +1,7 @@
 import { TrackByFunction, Type } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
+import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
+import { DndSettings } from '@bimeister/pupakit.dnd';
 import { Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
 import { TableFeatureEvents } from '../events/table-feature.events';
@@ -9,10 +11,8 @@ import { TableControllerOptions } from '../interfaces/table-controller-options.i
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
 import { TableFeatureConstructor } from '../types/table-feature-constructor.type';
 import { TableDataDisplayCollection } from './table-data-display-collection.class';
-import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
 import TableEventBase = TableEvents.TableEventBase;
 import TableFeatureEventBase = TableFeatureEvents.TableFeatureEventBase;
-import { DndSettings } from '@bimeister/pupakit.dnd';
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
 
@@ -55,7 +55,9 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.SetData(data));
   }
 
-  public setColumnDefinitions(columnDefinitions: TableColumnDefinition[]): void {
+  public setColumnDefinitions<TFeatureOptions, TModel>(
+    columnDefinitions: TableColumnDefinition<TFeatureOptions, TModel>[]
+  ): void {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
   }
 
