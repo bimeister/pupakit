@@ -84,17 +84,17 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
   public readonly dropdownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin> = new BehaviorSubject<CdkOverlayOrigin>(
     null
   );
-  private readonly dropdownTriggerButton$: BehaviorSubject<HTMLButtonElement> = new BehaviorSubject<HTMLButtonElement>(
+  private readonly dropdownTrigger$: BehaviorSubject<HTMLElement | null> = new BehaviorSubject<HTMLElement | null>(
     null
   );
   public readonly dropdownOverlayRef$: BehaviorSubject<OverlayRef> = new BehaviorSubject<OverlayRef>(null);
-  public readonly dropdownTriggerButtonWidthPx$: Observable<number> = this.dropdownTriggerButton$.pipe(
-    map((button: HTMLButtonElement | null) => {
-      if (isNil(button)) {
+  public readonly dropdownTriggerWidthPx$: Observable<number | undefined> = this.dropdownTrigger$.pipe(
+    map((trigger: HTMLElement | null) => {
+      if (isNil(trigger)) {
         return undefined;
       }
 
-      const { width }: DOMRect = button?.getBoundingClientRect();
+      const { width }: DOMRect = trigger.getBoundingClientRect();
       return width;
     }),
     map((width: number | undefined) => (isNil(width) ? 0 : width))
@@ -139,9 +139,9 @@ export class SelectStateService<T> implements SelectStateServiceInterface<T>, On
     });
   }
 
-  public defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void {
+  public defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLElement): void {
     this.dropdownOverlayOrigin$.next(overlayOrigin);
-    this.dropdownTriggerButton$.next(buttonElement);
+    this.dropdownTrigger$.next(buttonElement);
   }
 
   public defineDropdownOverlayRef(overlayRef: OverlayRef): void {

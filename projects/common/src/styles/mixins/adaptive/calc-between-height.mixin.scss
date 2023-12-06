@@ -1,5 +1,6 @@
 @function calc-between-height($height-start, $value-start, $height-end, $value-end, $unit) {
   @return calc(
-    #{$value-start} * #{$unit} + (#{$value-end} - #{$value-start}) * (100vh - #{$height-start} * 1px) / (#{$height-end} - #{$height-start})
+    #{$value-start} * #{$unit} + (#{$value-end} - #{$value-start}) * (100vh - #{$height-start} * 1px) /
+      (#{$height-end} - #{$height-start})
   );
 }

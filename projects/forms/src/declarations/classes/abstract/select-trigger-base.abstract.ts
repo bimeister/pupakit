@@ -11,7 +11,7 @@ const BUTTON_WIDTH_PX: number = 24;
 @Directive()
 export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
   protected abstract readonly overlayOrigin: CdkOverlayOrigin;
-  protected abstract readonly button: ElementRef<HTMLButtonElement>;
+  protected abstract readonly button: ElementRef<HTMLElement>;
 
   public readonly isExpanded$: BehaviorSubject<boolean> = this.selectStateService.isExpanded$;
   public readonly isDisabled$: Observable<boolean> = this.selectStateService.isDisabled$;

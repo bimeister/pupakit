@@ -31,7 +31,7 @@ import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 })
 export class SelectTriggerInputComponent<T> extends SelectTriggerBase<T> implements OnDestroy, OnChanges {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
-  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
+  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLElement>;
 
   @ViewChild('inputElement', { static: false }) public readonly inputElement: ElementRef<HTMLInputElement>;
 
