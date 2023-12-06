@@ -113,8 +113,8 @@ export namespace TableEvents {
       super();
     }
   }
-  export class SetColumnDefinitions extends TableEventBase {
-    constructor(public readonly definitions: TableColumnDefinition[]) {
+  export class SetColumnDefinitions<TFeatureOptions = unknown, TModel = unknown> extends TableEventBase {
+    constructor(public readonly definitions: TableColumnDefinition<TFeatureOptions, TModel>[]) {
       super();
     }
   }
