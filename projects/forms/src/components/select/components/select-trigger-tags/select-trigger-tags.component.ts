@@ -34,7 +34,7 @@ const RESIZE_DEBOUNCE_TIME_MS: number = 200;
 })
 export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
-  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
+  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLElement>;
 
   @Input() public tags: T[] = [];
   public readonly renderTags$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);

@@ -12,7 +12,7 @@ import { SelectStateService } from '../../services/select-state.service';
 })
 export class SelectTriggerExtraCaseComponent<T> extends SelectTriggerBase<T> {
   @ViewChild('overlayOrigin', { static: true }) protected readonly overlayOrigin: CdkOverlayOrigin;
-  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLButtonElement>;
+  @ViewChild('button', { static: true }) protected readonly button: ElementRef<HTMLElement>;
 
   constructor(selectStateService: SelectStateService<T>) {
     super(selectStateService);

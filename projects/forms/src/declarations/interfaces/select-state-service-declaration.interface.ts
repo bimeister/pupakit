@@ -16,7 +16,7 @@ export interface SelectStateServiceDeclaration<T> {
 
   readonly dropdownOverlayOrigin$: BehaviorSubject<CdkOverlayOrigin>;
   readonly dropdownOverlayRef$: BehaviorSubject<OverlayRef>;
-  readonly dropdownTriggerButtonWidthPx$: Observable<number>;
+  readonly dropdownTriggerWidthPx$: Observable<number>;
 
   readonly control$: BehaviorSubject<Nullable<NgControl>>;
   readonly isTouched$: BehaviorSubject<Nullable<boolean>>;
@@ -49,7 +49,7 @@ export interface SelectStateServiceDeclaration<T> {
 
   toggleExpansion(): void;
 
-  defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLButtonElement): void;
+  defineDropdownTrigger(overlayOrigin: CdkOverlayOrigin, buttonElement: HTMLElement): void;
 
   defineDropdownOverlayRef(overlayRef: OverlayRef): void;
 

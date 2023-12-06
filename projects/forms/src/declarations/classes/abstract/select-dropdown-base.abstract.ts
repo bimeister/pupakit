@@ -24,9 +24,9 @@ export abstract class SelectDropdownBase<T> implements OnInit, OnChanges, OnDest
   public readonly dropDownOverlayOrigin$: Observable<CdkOverlayOrigin> =
     this.selectStateService.dropdownOverlayOrigin$.pipe(filter((origin: CdkOverlayOrigin) => !isNil(origin)));
 
-  public readonly dropDownTriggerButtonWidthPx$: Observable<number> = this.isExpanded$.pipe(
+  public readonly dropDownTriggerWidthPx$: Observable<number | undefined> = this.isExpanded$.pipe(
     filter((isExpanded: boolean) => isExpanded),
-    switchMap(() => this.selectStateService.dropdownTriggerButtonWidthPx$)
+    switchMap(() => this.selectStateService.dropdownTriggerWidthPx$)
   );
 
   public readonly overlayPositions$: Observable<ConnectionPositionPair[]> = this.selectStateService.overlayPositions$;
