@@ -1,6 +1,6 @@
 import { Directive, ElementRef, HostBinding, Inject, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { HighlightKind } from '@bimeister/pupakit.kit/src/declarations/types/highlight-kind.type';
+import { HighlightKind } from '../types/highlight-kind.type';
 
 const addPx = (value: number): string => {
   if (!Number.isFinite(value)) {
