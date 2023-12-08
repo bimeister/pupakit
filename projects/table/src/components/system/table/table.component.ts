@@ -54,6 +54,7 @@ import {
 } from '@bimeister/pupakit.common';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { DndDropData, DndMoveData, DndSettings } from '@bimeister/pupakit.dnd';
+import { TableAdaptiveColumnsService } from '../../../services/table-adaptive-columns.service';
 
 const SCROLL_SPEED_PX: number = 5;
 
@@ -104,7 +105,12 @@ function isTableRowType(input: string): input is TableRowType {
   styleUrls: ['./table.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TableTemplatesService, TableColumnsIntersectionService, TableScrollbarsService],
+  providers: [
+    TableTemplatesService,
+    TableColumnsIntersectionService,
+    TableScrollbarsService,
+    TableAdaptiveColumnsService,
+  ],
 })
 export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDestroy {
   private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement);

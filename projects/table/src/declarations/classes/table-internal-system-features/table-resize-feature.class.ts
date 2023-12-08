@@ -1,5 +1,5 @@
 import { EventBus } from '@bimeister/event-bus/rxjs';
-import { ClientUiStateHandlerService, QueueEvents, SCROLLBAR_WIDTH_PX } from '@bimeister/pupakit.common';
+import { ClientUiStateHandlerService, QueueEvents } from '@bimeister/pupakit.common';
 import {
   filterByInstanceOf,
   filterTruthy,
@@ -16,11 +16,14 @@ import { TableEventTargetCellData } from '../../interfaces/table-event-target-ce
 import { TableFeature } from '../../interfaces/table-feature.interface';
 import { TableColumnSizeState } from '../table-column-size-state.class';
 import { TableColumn } from '../table-column.class';
+import { TableAdaptiveColumnsService } from '../../../services/table-adaptive-columns.service';
 
 export class TableResizeFeature<T> implements TableFeature {
   private readonly eventBus: EventBus = this.api.eventBus;
   public readonly clientUiStateHandlerService: ClientUiStateHandlerService =
     this.api.tableInjector.get(ClientUiStateHandlerService);
+  public readonly tableAdaptiveColumnsService: TableAdaptiveColumnsService =
+    this.api.tableInjector.get(TableAdaptiveColumnsService);
 
   private readonly tableElement: HTMLElement = this.api.tableElement;
 
@@ -262,6 +265,7 @@ export class TableResizeFeature<T> implements TableFeature {
 
   private startFitColumnsOnResize(): void {
     this.fitColumnsOnResizeSubscription?.unsubscribe();
+    this.tableAdaptiveColumnsService.setHasAdaptiveColumns(true);
     this.fitColumnsOnResizeSubscription = resizeObservable(this.tableElement).subscribe(() => {
       this.fitColumns();
     });
@@ -269,6 +273,7 @@ export class TableResizeFeature<T> implements TableFeature {
 
   private stopFitColumnsOnResize(): void {
     this.fitColumnsOnResizeSubscription?.unsubscribe();
+    this.tableAdaptiveColumnsService.setHasAdaptiveColumns(false);
     this.fitColumnsOnResizeSubscription = null;
   }
 
@@ -300,7 +305,9 @@ export class TableResizeFeature<T> implements TableFeature {
             }
           }
 
-          const availableWidth: number = this.tableElement.clientWidth - totalWidth - SCROLLBAR_WIDTH_PX;
+          const borderWidth: number = columnsWithoutWidth.length * 2;
+
+          const availableWidth: number = this.tableElement.clientWidth - totalWidth - borderWidth;
 
           for (const column of columnsWithoutWidth) {
             columnIdToSizeStateMap.get(column.definition.id).setFitWidth(availableWidth / columnsWithoutWidth.length);

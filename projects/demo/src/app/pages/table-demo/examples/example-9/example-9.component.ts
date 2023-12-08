@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Uuid } from '@bimeister/pupakit.common';
-import { TableColumnDefinition, TableController } from '@bimeister/pupakit.table';
+import { TableColumnDefinition, TableColumnPin, TableController } from '@bimeister/pupakit.table';
 import { getUuid } from '@bimeister/utilities';
 
 interface SomeData {
@@ -48,6 +48,7 @@ const COLUMNS: TableColumnDefinition[] = [
     id: 'age-column',
     modelKey: 'age',
     title: 'Age',
+    pin: TableColumnPin.Right,
     defaultSizes: { widthPx: 100 },
   },
 ];
