@@ -55,34 +55,6 @@ export class InputDemoComponent implements OnInit, OnDestroy {
     },
   ];
 
-  public readonly iconOptions: PropsOption[] = [
-    {
-      caption: 'None',
-      value: '',
-      isDefault: true,
-    },
-    {
-      caption: 'app-admin',
-      value: 'app-admin',
-    },
-    {
-      caption: 'app-aim',
-      value: 'app-aim',
-    },
-    {
-      caption: 'app-axes',
-      value: 'app-axes',
-    },
-    {
-      caption: 'app-camera',
-      value: 'app-camera',
-    },
-    {
-      caption: 'app-file-add',
-      value: 'app-file-add',
-    },
-  ];
-
   public readonly validators: ValidatorFn[] = [Validators.required];
   public readonly dateValidators: ValidatorFn[] = [Validators.required, dateValidator];
 

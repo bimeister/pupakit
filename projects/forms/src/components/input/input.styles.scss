@@ -16,12 +16,11 @@
   border: 1px solid semantic-color(lines-opacity);
   border-radius: $controlBorderRadius;
   box-sizing: border-box;
-  cursor: pointer;
   @include flex-container(row, center, flex-start);
   gap: 1rem;
   height: fit-content;
   overflow: hidden;
-  padding: 0 2rem;
+  padding: 0 0.75rem;
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
     border-color variable(transition-duration_shorter) variable(transition-timing-function_common);
   width: 100%;
@@ -30,20 +29,9 @@
     background-color: transparent;
     border: none;
     color: inherit;
-    cursor: inherit;
     padding: 0;
+    margin-left: 1rem;
     transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
-  }
-
-  .input-icon {
-    &_password {
-      opacity: 0;
-      will-change: opacity;
-    }
-  }
-
-  &:focus-within:not(.input-wrapper_disabled) {
-    cursor: text;
   }
 
   &:hover:not(.input-wrapper_disabled) {
@@ -60,41 +48,19 @@
       .input::placeholder {
         color: semantic-color(text-primary);
       }
-
-      .input-icon {
-        opacity: 1;
-      }
     }
   }
 
   &_large {
     @extend .input_large;
-
-    .input-icon {
-      @extend .input-icon_large;
-    }
   }
 
   &_medium {
     @extend .input_medium;
-
-    .input-icon {
-      @extend .input-icon_medium;
-    }
-
-    &-invalid {
-      --button_icon-color: #{semantic-color(kind-danger-normal)};
-    }
   }
 
   &_invalid {
     border-color: semantic-color(kind-danger-normal);
-  }
-
-  &_filled {
-    .input-icon_password {
-      opacity: 1;
-    }
   }
 
   &_disabled {
@@ -112,18 +78,6 @@
 
       &::placeholder {
         color: semantic-color(text-disabled);
-      }
-    }
-
-    .input-icon {
-      &_error,
-      &_reset {
-        display: none;
-      }
-
-      &:hover {
-        color: semantic-color(icons-disabled);
-        cursor: inherit;
       }
     }
   }
@@ -150,12 +104,33 @@
       @include font-type-bold;
     }
   }
+
+  .input-icon {
+    &_invalid {
+      color: semantic-color(kind-danger-normal);
+    }
+  }
+
+  .input-control {
+    @include flex-container(row, center);
+    flex: 1;
+  }
+
+  .input-default-actions {
+    @include flex-container(row, center);
+  }
+
+  .input-actions-separator {
+    height: 4rem;
+    width: 1px;
+    border-radius: 2.5rem;
+    background-color: semantic-color(lines-opacity);
+  }
 }
 
 .input {
   background-color: semantic-color(surface-primary);
   border: 1px solid semantic-color(lines-opacity);
-  border-radius: $controlBorderRadius;
   box-sizing: border-box;
   caret-color: semantic-color(text-primary);
   color: semantic-color(text-primary);
@@ -248,36 +223,5 @@
     &::placeholder {
       @include font-type-bold;
     }
-  }
-}
-
-.input-icon {
-  padding: 1rem;
-  margin: -1rem;
-  cursor: pointer;
-  pointer-events: all;
-
-  &_large {
-    font-size: 4.5rem;
-  }
-
-  &_medium {
-    font-size: 4rem;
-  }
-
-  &_invalid {
-    color: semantic-color(kind-danger-normal);
-  }
-
-  &_calendar,
-  &_password,
-  &_reset {
-    &:hover {
-      color: semantic-color(kind-primary-hover);
-    }
-  }
-
-  &_custom {
-    cursor: default;
   }
 }

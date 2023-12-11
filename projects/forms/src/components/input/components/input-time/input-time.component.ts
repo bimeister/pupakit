@@ -30,7 +30,6 @@ export class InputTimeComponent extends InputBase<ValueType> implements OnDestro
 
   constructor(private readonly datePipe: DatePipe, ngControl: NgControl) {
     super(ngControl);
-    this.leftIcon$.next('app-clock');
   }
 
   public setValue(value: ValueType): void {

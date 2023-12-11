@@ -1,4 +1,6 @@
 import {
+  AfterContentInit,
+  ContentChild,
   Directive,
   ElementRef,
   EventEmitter,
@@ -11,17 +13,25 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { concatBoolean, distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, map } from 'rxjs/operators';
+import { InputActionsLeftDirective } from '../../../components/input/directives/input-actions-left.directive';
+import { InputActionsRightDirective } from '../../../components/input/directives/input-actions-right.directive';
 import { isDate } from '../../../declarations/functions/is-date.function';
 import { InputSize } from '../../types/input-size.type';
 import { InputStyleCustomization } from '../../types/input-style-customization.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 @Directive()
-export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges {
+export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> implements OnChanges, AfterContentInit {
   @HostBinding('attr.pupa-control') public readonly controlAttribute: string = 'input';
+
+  @ContentChild(InputActionsLeftDirective)
+  public readonly inputActionsLeftDirective: InputActionsLeftDirective;
+
+  @ContentChild(InputActionsRightDirective)
+  public readonly inputActionsRightDirective: InputActionsRightDirective;
 
   @ViewChild('inputElement')
   protected readonly inputElementRef: ElementRef<HTMLInputElement>;
@@ -52,12 +62,6 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   public readonly customStyles$: BehaviorSubject<InputStyleCustomization[]> = new BehaviorSubject<
     InputStyleCustomization[]
   >([]);
-
-  @Input() public leftIcon: string = '';
-  public readonly leftIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
-  @Input() public rightIcon: string = '';
-  public readonly rightIcon$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   @Output() public readonly focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public readonly blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
@@ -97,6 +101,18 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     map(([withReset, isFilled, isDisabled]: [boolean, boolean, boolean]) => withReset && isFilled && !isDisabled)
   );
 
+  protected readonly isVisibleDefaultActions$: Observable<boolean> = combineLatest([
+    this.isVisibleReset$,
+    this.isInvalid$,
+  ]).pipe(concatBoolean('or'), distinctUntilChanged());
+
+  private readonly isVisibleSeparatorState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  protected readonly isVisibleSeparator$: Observable<boolean> = this.isVisibleSeparatorState$.pipe(
+    distinctUntilChanged()
+  );
+
+  private readonly withDefaultRightIconState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   protected processIsPatchedChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
@@ -124,8 +140,10 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
     this.processStylesChange(changes?.customStyles);
-    this.processLeftIconChange(changes?.leftIcon);
-    this.processRightIconChange(changes?.rightIcon);
+  }
+
+  public ngAfterContentInit(): void {
+    this.processActionSeparatorVisibilityChange();
   }
 
   public emitFocusEvent(focusEvent: FocusEvent): void {
@@ -145,6 +163,25 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   public focusOnInputElement(): void {
     const inputElement: HTMLInputElement = this.inputElementRef.nativeElement;
     inputElement.focus();
+  }
+
+  public setWithDefaultRightIconState(state: boolean): void {
+    this.withDefaultRightIconState$.next(state);
+  }
+
+  public setIsVisibleSeparatorState(state: boolean): void {
+    this.isVisibleSeparatorState$.next(state);
+  }
+
+  public processActionSeparatorVisibilityChange(): Subscription {
+    return combineLatest([this.isVisibleReset$, this.isInvalid$, this.withDefaultRightIconState$])
+      .pipe(
+        map(
+          ([isVisibleReset, isInvalid, withDefaultRightIcon]: [boolean, boolean, boolean]) =>
+            (isVisibleReset || isInvalid) && (withDefaultRightIcon || !isNil(this.inputActionsRightDirective))
+        )
+      )
+      .subscribe((isVisibleSeparator: boolean) => this.setIsVisibleSeparatorState(isVisibleSeparator));
   }
 
   private processFormControlChange(change: ComponentChange<this, FormControl>): void {
@@ -195,25 +232,5 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     }
 
     this.customStyles$.next(updatedValue);
-  }
-
-  private processLeftIconChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.leftIcon$.next(updatedValue);
-  }
-
-  private processRightIconChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
-
-    if (isNil(updatedValue)) {
-      return;
-    }
-
-    this.rightIcon$.next(updatedValue);
   }
 }
