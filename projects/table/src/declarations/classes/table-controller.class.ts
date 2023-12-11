@@ -13,6 +13,7 @@ import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
 import TableEventBase = TableEvents.TableEventBase;
 import TableFeatureEventBase = TableFeatureEvents.TableFeatureEventBase;
 import { DndSettings } from '@bimeister/pupakit.dnd';
+import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
 
 const DEFAULT_SKELETON_ROWS_COUNT: number = 100;
 
@@ -57,6 +58,10 @@ export class TableController<T> {
 
   public setColumnDefinitions(columnDefinitions: TableColumnDefinition[]): void {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
+  }
+
+  public setTreeDefinition(treeDefinitions: TableTreeDefinition): void {
+    this.dispatchInQueue(new TableEvents.SetTreeDefinition(treeDefinitions));
   }
 
   public fitColumns(): void {

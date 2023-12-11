@@ -8,5 +8,6 @@ export interface TableControllerOptions<T> {
   headerRowHeightPx?: number;
   bodyRowHeightPx?: number;
   dndRowsSettings?: DndSettings<T>;
+  enableTreeData?: boolean;
   features?: TableFeatureConstructor<T>[];
 }

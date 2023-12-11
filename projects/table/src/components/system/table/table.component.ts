@@ -20,7 +20,6 @@ import { EventBus } from '@bimeister/event-bus/rxjs';
 import { filterByInstanceOf, filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
-import { TableBodyRow } from '../../../declarations/classes/table-body-row.class';
 import { TableBodyRowsDataSource } from '../../../declarations/classes/table-body-rows-data-source.class';
 import { TableColumn } from '../../../declarations/classes/table-column.class';
 import { TableController } from '../../../declarations/classes/table-controller.class';
@@ -29,6 +28,7 @@ import { TableDndFeature } from '../../../declarations/classes/table-internal-sy
 import { TableHoverFeature } from '../../../declarations/classes/table-internal-system-features/table-hover-feature.class';
 import { TableResizeFeature } from '../../../declarations/classes/table-internal-system-features/table-resize-feature.class';
 import { TableScrollFeature } from '../../../declarations/classes/table-internal-system-features/table-scroll-feature.class';
+import { TableTreeFeature } from '../../../declarations/classes/table-internal-system-features/table-tree-feature.class';
 import { TableRow } from '../../../declarations/classes/table-row.class';
 import { TableRowType } from '../../../declarations/enums/table-row-type.enum';
 import { TableEvents } from '../../../declarations/events/table.events';
@@ -54,6 +54,7 @@ import {
 } from '@bimeister/pupakit.common';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { DndDropData, DndMoveData, DndSettings } from '@bimeister/pupakit.dnd';
+import { TableBodyRowRef } from '../../../declarations/interfaces/table-body-row-ref.interface';
 
 const SCROLL_SPEED_PX: number = 5;
 
@@ -77,9 +78,8 @@ function getCellHtmlElementFromEvent(event: Event): Nullable<TableCellHtmlElemen
   return element;
 }
 
-function convertCellHtmlElementToTargetCellData(
-  tableCellHtmlElement: Nullable<TableCellHtmlElement>
-): Nullable<TableEventTargetCellData> {
+function convertCellHtmlEventToTargetCellData(event: Event): Nullable<TableEventTargetCellData> {
+  const tableCellHtmlElement: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event);
   const cellData: Nullable<TableCellHtmlElementDataset> = tableCellHtmlElement?.dataset;
 
   return isNil(cellData)
@@ -90,6 +90,7 @@ function convertCellHtmlElementToTargetCellData(
         rowId: cellData.rowId,
         rowType: cellData.rowType,
         element: tableCellHtmlElement,
+        rawEvent: event,
       };
 }
 
@@ -177,12 +178,15 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.pinnedRightColumns$)
   );
 
-  private readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.bodyRowIdToBodyRowMap$)
-  );
+  private readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRowRef<T>>> =
+    this.dataDisplayCollection$.pipe(
+      switchMap(
+        (dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.bodyRowIdToBodyRowMap$
+      )
+    );
 
-  public readonly rows$: Observable<TableBodyRow<T>[]> = this.bodyRowIdToBodyRowMap$.pipe(
-    map((bodyRowIdToBodyRowMap: Map<string, TableBodyRow<T>>) => Array.from(bodyRowIdToBodyRowMap.values()))
+  public readonly rows$: Observable<TableBodyRowRef<T>[]> = this.bodyRowIdToBodyRowMap$.pipe(
+    map((bodyRowIdToBodyRowMap: Map<string, TableBodyRowRef<T>>) => Array.from(bodyRowIdToBodyRowMap.values()))
   );
 
   public readonly headerRow$: Observable<TableRow> = this.dataDisplayCollection$.pipe(
@@ -233,6 +237,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     TableDndFeature,
     TableScrollFeature,
     TableHoverFeature,
+    TableTreeFeature,
   ];
   private activeInternalFeatures: TableFeature[] = [];
   private activeExternalFeatures: TableFeature[] = [];
@@ -249,8 +254,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.initHammerEvents();
   }
 
-  public readonly rowTrackByFunction: TrackByFunction<TableBodyRow<T>> = (index: number, _item: TableBodyRow<T>) =>
-    index;
+  public readonly rowTrackByFunction: TrackByFunction<TableBodyRowRef<T>> = (
+    index: number,
+    _item: TableBodyRowRef<T>
+  ) => index;
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processTableControllerChanges(changes.controller);
@@ -308,31 +315,23 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   public processTableMouseEvent(event: MouseEvent): void {
-    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event);
-    this.dispatchEvent(new TableEvents.MouseOver(convertCellHtmlElementToTargetCellData(element)));
+    this.dispatchEvent(new TableEvents.MouseOver(convertCellHtmlEventToTargetCellData(event)));
   }
 
   public processClick(event: Event): void {
-    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event);
+    const cellData: TableEventTargetCellData = convertCellHtmlEventToTargetCellData(event);
 
-    if (isNil(element)) {
+    if (isNil(cellData) || !isTableRowType(cellData.rowType)) {
       return;
     }
 
-    const cellData: TableCellHtmlElementDataset = element.dataset;
-
-    if (!isTableRowType(cellData.rowType)) {
-      return;
-    }
-
-    this.dispatchEvent(new TableEvents.CellClick(convertCellHtmlElementToTargetCellData(element)));
+    this.dispatchEvent(new TableEvents.CellClick(cellData));
   }
 
   public processPanStart(event: HammerInput): void {
-    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event.srcEvent);
     this.dispatchEvent(
       new TableEvents.PanStart(
-        convertCellHtmlElementToTargetCellData(element),
+        convertCellHtmlEventToTargetCellData(event.srcEvent),
         isTriggeredByResizer(event.srcEvent),
         event.pointerType
       )
@@ -346,11 +345,9 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       return;
     }
 
-    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(srcEvent);
-
     this.dispatchEvent(
       new TableEvents.Pan(
-        convertCellHtmlElementToTargetCellData(element),
+        convertCellHtmlEventToTargetCellData(srcEvent),
         [event.deltaX, event.deltaY],
         [srcEvent.clientX, srcEvent.clientY]
       )
@@ -358,8 +355,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   public processPanEnd(event: HammerInput): void {
-    const element: Nullable<TableCellHtmlElement> = getCellHtmlElementFromEvent(event.srcEvent);
-    this.dispatchEvent(new TableEvents.PanEnd(convertCellHtmlElementToTargetCellData(element)));
+    this.dispatchEvent(new TableEvents.PanEnd(convertCellHtmlEventToTargetCellData(event.srcEvent)));
   }
 
   public processBodyScrollLeftChanges(scrollLeft: number): void {

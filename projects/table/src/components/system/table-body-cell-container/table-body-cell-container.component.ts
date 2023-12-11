@@ -12,9 +12,10 @@ import {
 import { TableTemplatesService } from '../../../services/table-templates.service';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { TableColumn } from '../../../declarations/classes/table-column.class';
-import { TableBodyRow } from '../../../declarations/classes/table-body-row.class';
 import { TableBodyCellContext } from '../../../declarations/interfaces/table-body-cell-context.interface';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { TableBodyRowRef } from '../../../declarations/interfaces/table-body-row-ref.interface';
+import { isTableRowTreeEntity } from '../../../declarations/type-guards/is-table-row-tree-entity.type-guard';
 
 @Component({
   selector: 'pupa-table-body-cell-container',
@@ -27,9 +28,9 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
   @ViewChild('viewContainerRef', { read: ViewContainerRef }) public viewContainerRef?: Nullable<ViewContainerRef>;
 
   @Input() public column: TableColumn;
-  @Input() public row: TableBodyRow<T>;
+  @Input() public row: TableBodyRowRef<T>;
 
-  private lastRowValue: Nullable<TableBodyRow<T>> = null;
+  private lastRowValue: Nullable<TableBodyRowRef<T>> = null;
   private lastColumnValue: Nullable<TableColumn> = null;
 
   public templateRef: TemplateRef<TableBodyCellContext<T>>;
@@ -49,6 +50,10 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     this.rerenderIfOptionIsTrue();
   }
 
+  public hasExpander(): boolean {
+    return isTableRowTreeEntity(this.row) && this.row.isExtendable && this.column.index === 0;
+  }
+
   private processColumnChanges(change: Nullable<ComponentChange<this, TableColumn>>): void {
     const value: Nullable<TableColumn> = change?.currentValue;
     if (isNil(value)) {
@@ -61,8 +66,8 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     };
   }
 
-  private processRowChanges(change: Nullable<ComponentChange<this, TableBodyRow<T>>>): void {
-    const value: Nullable<TableBodyRow<T>> = change?.currentValue;
+  private processRowChanges(change: Nullable<ComponentChange<this, TableBodyRowRef<T>>>): void {
+    const value: Nullable<TableBodyRowRef<T>> = change?.currentValue;
     if (isNil(value)) {
       return;
     }

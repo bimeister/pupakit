@@ -1,3 +1,4 @@
+import { TableRowExpandInfo } from '../interfaces/table-row-expand-info.interface';
 import { TableSort } from '../interfaces/table-sort.interface';
 import { TableEvents } from './table.events';
 
@@ -18,6 +19,12 @@ export namespace TableFeatureEvents {
 
   export class SetColumnSorting<T extends string = string> extends TableFeatureEventBase {
     constructor(public readonly tableSort: TableSort<T>) {
+      super();
+    }
+  }
+
+  export class ExpandRowChanged extends TableFeatureEventBase {
+    constructor(public readonly expandRowInfo: TableRowExpandInfo) {
       super();
     }
   }

@@ -6,10 +6,13 @@ import { map, take } from 'rxjs/operators';
 import { TableColumnPin } from '../enums/table-column-pin.enum';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableDataDisplayCollectionRef } from '../interfaces/table-data-display-collection-ref.interface';
-import { TableBodyRow } from './table-body-row.class';
 import { TableBodyRowsDataSource } from './table-body-rows-data-source.class';
 import { TableColumn } from './table-column.class';
 import { TableRow } from './table-row.class';
+import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
+import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
+import { TableBodyRow } from './table-body-row.class';
+import { TableBodyTreeLeafRow, TableBodyTreeNodeRow } from './table-body-tree-row.class';
 
 interface DistributedColumns {
   leftPinnedColumns: TableColumn[];
@@ -32,6 +35,8 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   private readonly columnDefinitions$: BehaviorSubject<TableColumnDefinition[]> = new BehaviorSubject<
     TableColumnDefinition[]
   >([]);
+  private readonly treeDefinition$: BehaviorSubject<Nullable<TableTreeDefinition>> =
+    new BehaviorSubject<TableTreeDefinition>(null);
 
   public readonly headerRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
   public readonly bodyRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
@@ -104,23 +109,61 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     map((selectedIdsList: string[]) => new Set<string>(selectedIdsList)),
     shareReplayWithRefCount()
   );
-  public readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> = combineLatest([
+  public readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRowRef<T>>> = combineLatest([
     this.data$,
     this.virtualScrollDataSource.listRange$,
     this.trackBy$,
+    this.treeDefinition$,
   ]).pipe(
-    map(([data, listRange, trackBy]: [T[], ListRange, TrackByFunction<T>]) => {
-      const newColumnIdToColumnMap: Map<string, TableBodyRow<T>> = new Map<string, TableBodyRow<T>>();
+    map(
+      ([data, listRange, trackBy, treeDefinition]: [
+        T[],
+        ListRange,
+        TrackByFunction<T>,
+        TableTreeDefinition | null
+      ]) => {
+        const newColumnIdToColumnMap: Map<string, TableBodyRowRef<T>> = new Map<string, TableBodyRowRef<T>>();
+        const dataSlice: T[] = data.slice(listRange.start, listRange.end);
 
-      const dataSlice: T[] = data.slice(listRange.start, listRange.end);
-      dataSlice.forEach((dataItem: T, index: number) => {
-        const id: string = trackBy(index, dataItem);
-        const row: TableBodyRow<T> = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
-        newColumnIdToColumnMap.set(id, row);
-      });
+        dataSlice.forEach((dataItem: T, index: number) => {
+          let row: TableBodyRowRef<T>;
+          const id: string = trackBy(index, dataItem);
+          if (Boolean(treeDefinition)) {
+            const parentId: string = dataItem[treeDefinition.modelParentIdKey];
+            const isExpandable: boolean = dataItem[treeDefinition.modelIsExpandableKey];
+            const isExpanded: boolean = dataItem[treeDefinition.modelIsExpandedKey];
+            const level: number = dataItem[treeDefinition.modelLevelKey];
 
-      return newColumnIdToColumnMap;
-    }),
+            if (Boolean(parentId)) {
+              row = new TableBodyTreeLeafRow<T>(
+                id,
+                index + listRange.start,
+                dataItem,
+                this.selectedIdsSet$,
+                parentId,
+                level
+              );
+            } else {
+              row = new TableBodyTreeNodeRow<T>(
+                id,
+                index + listRange.start,
+                dataItem,
+                this.selectedIdsSet$,
+                parentId,
+                isExpandable,
+                isExpanded,
+                level
+              );
+            }
+          } else {
+            row = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
+          }
+          newColumnIdToColumnMap.set(id, row);
+        });
+
+        return newColumnIdToColumnMap;
+      }
+    ),
     shareReplayWithRefCount()
   );
 
@@ -140,6 +183,10 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public setColumnDefinitions(definitions: TableColumnDefinition[]): void {
     this.columnDefinitions$.next(definitions);
+  }
+
+  public setTreeDefinition(definition: TableTreeDefinition): void {
+    this.treeDefinition$.next(definition);
   }
 
   public setTableWidthPx(value: number): void {

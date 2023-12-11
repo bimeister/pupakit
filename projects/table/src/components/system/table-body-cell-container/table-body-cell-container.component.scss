@@ -3,3 +3,15 @@
 :host {
   display: block;
 }
+
+
+.table-body-tree-cell-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &__expander {
+        margin-left: calc(var(--tree-level)*1rem);
+    }
+}

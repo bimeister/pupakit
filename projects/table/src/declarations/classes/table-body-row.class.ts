@@ -1,9 +1,9 @@
 import { TableRow } from './table-row.class';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
+import { TableBodyBaseRowRef } from '../interfaces/table-body-row-ref.interface';
 
-export class TableBodyRow<T> extends TableRow implements TableBodyRowRef<T> {
+export class TableBodyRow<T> extends TableRow implements TableBodyBaseRowRef<T> {
   public readonly isSelected$: Observable<boolean> = this.selectedIds$.pipe(
     map((selectedIds: Set<string>) => selectedIds.has(this.id))
   );

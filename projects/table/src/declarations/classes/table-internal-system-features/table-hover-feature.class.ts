@@ -9,12 +9,13 @@ import { TableApi } from '../../interfaces/table-api.interface';
 import { TableFeature } from '../../interfaces/table-feature.interface';
 import { TableBodyRow } from '../table-body-row.class';
 import { TableColumn } from '../table-column.class';
+import { TableBodyRowRef } from '../../interfaces/table-body-row-ref.interface';
 
 export class TableHoverFeature<T> implements TableFeature {
   private readonly eventBus: EventBus = this.api.eventBus;
   private readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>> =
     this.api.displayData.columnIdToColumnMap$;
-  private readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> =
+  private readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRowRef<T>>> =
     this.api.displayData.bodyRowIdToBodyRowMap$;
 
   private readonly subscription: Subscription = new Subscription();

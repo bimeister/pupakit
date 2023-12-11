@@ -3,6 +3,7 @@ import { BusEventBase } from '@bimeister/pupakit.common';
 import { getUuid, Nullable } from '@bimeister/utilities';
 import { TableColumnDefinition } from '../interfaces/table-column-definition.interface';
 import { TableEventTargetCellData } from '../interfaces/table-event-target-cell-data.interface';
+import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
 
 export namespace TableEvents {
   export class TableEventBase<T = unknown> extends BusEventBase<T> {
@@ -115,6 +116,11 @@ export namespace TableEvents {
   }
   export class SetColumnDefinitions extends TableEventBase {
     constructor(public readonly definitions: TableColumnDefinition[]) {
+      super();
+    }
+  }
+  export class SetTreeDefinition extends TableEventBase {
+    constructor(public readonly definition: TableTreeDefinition) {
       super();
     }
   }

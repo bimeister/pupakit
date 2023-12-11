@@ -3,7 +3,7 @@ import { ModuleWithProviders, NgModule, Type } from '@angular/core';
 import { appArrowFullBotIcon, appArrowFullTopIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
 import { CommonModule } from '@angular/common';
 import { PupaCommonModule } from '@bimeister/pupakit.common';
-import { PupaScrollableModule, PupaSkeletonModule } from '@bimeister/pupakit.kit';
+import { PupaButtonsModule, PupaScrollableModule, PupaSkeletonModule } from '@bimeister/pupakit.kit';
 import { TableBodyCellComponent } from './components/external-predefined/table-body-cell/table-body-cell.component';
 import { TableHeaderCellComponent } from './components/external-predefined/table-header-cell/table-header-cell.component';
 import { TableSkeletonComponent } from './components/external-predefined/table-skeleton/table-skeleton.component';
@@ -44,6 +44,7 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   PupaSkeletonModule,
   PupaDndModule,
   PupaIconsModule.forFeature([appArrowFullTopIcon, appArrowFullBotIcon]),
+  PupaButtonsModule,
 ];
 
 @NgModule({

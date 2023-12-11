@@ -18,4 +18,9 @@ export namespace TableRowEvents {
       super();
     }
   }
+  export class ExpandChanged extends TableRowEventBase {
+    constructor(public readonly isExpanded: boolean) {
+      super();
+    }
+  }
 }

@@ -1,7 +1,32 @@
-<ng-container
-  *ngIf="!column.definition.rerenderOnRowOrColumnChanges"
+<ng-container *ngIf="hasExpander(); then treeCellTemplate else baseCellTemplate"></ng-container>
+
+<ng-template #treeCellTemplate>
+    <div class="table-body-tree-cell-container">
+        <pupa-button-icon 
+          class="table-body-tree-cell-container__expander"
+          [style.--tree-level]="row.level"
+          [icon]="row.isExtended ? 'app-caret-up' : 'app-caret-down'" 
+          kind="secondary"
+          size="s"
+        ></pupa-button-icon>
+        <ng-container [ngTemplateOutlet]="baseCellTemplate" [ngTemplateOutletContext]="this"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #baseCellTemplate>
+    <ng-container
+        *ngIf="!column.definition.rerenderOnRowOrColumnChanges"
+        [ngTemplateOutlet]="templateRef"
+        [ngTemplateOutletContext]="templateContext"
+    ></ng-container>
+    <ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container>
+</ng-template>
+
+
+<!-- <ng-container
+  *ngIf="!column.definition.rerenderOnRowOrColumnChanges; else viewContainerRef"
   [ngTemplateOutlet]="templateRef"
   [ngTemplateOutletContext]="templateContext"
 ></ng-container>
 
-<ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container>
+<ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container> -->
