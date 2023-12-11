@@ -81,6 +81,14 @@
     <pupa-code-container [content]="stylesExampleContent">
       <demo-input-demo-example-styles *pupaCodeContainerPreviewTemplate></demo-input-demo-example-styles>
     </pupa-code-container>
+
+    <h3 demoAnchor>Input styles</h3>
+    You can use the directives <pupa-code-inline>*pupaInputActionsLeft</pupa-code-inline> and
+    <pupa-code-inline>*pupaInputActionsRight</pupa-code-inline> for adding any action in both side of element. Available
+    only for pupa-input-text and pupa-input-number
+    <pupa-code-container [content]="stylesExampleContent">
+      <demo-input-demo-example-action *pupaCodeContainerPreviewTemplate></demo-input-demo-example-action>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -96,8 +104,6 @@
               invalidTooltipDisabled: invalidTooltipDisabled$ | async,
               size: size$ | async,
               styles: styles$ | async,
-              leftIcon: leftIcon$ | async,
-              rightIcon: rightIcon$ | async,
               isFixedSize: isFixedSize$ | async,
               isBackDating: isBackDating$ | async
             };
@@ -107,8 +113,6 @@
             let invalidTooltipDisabled = invalidTooltipDisabled;
             let size = size;
             let styles = styles;
-            let leftIcon = leftIcon;
-            let rightIcon = rightIcon;
             let isFixedSize = isFixedSize;
             let isBackDating = isBackDating
           "
@@ -126,8 +130,6 @@
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
               [invalidTooltipDisabled]="invalidTooltipDisabled"
               [invalidTooltip]="tooltipTextFormControl.value"
-              [leftIcon]="leftIcon"
-              [rightIcon]="rightIcon"
               [customStyles]="styles"
             ></pupa-input-text>
           </div>
@@ -225,20 +227,6 @@
         <demo-example-viewer-property decoratorName="input" name="isPatched" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is patched.</ng-container>
           <demo-props-switcher #isPatched$></demo-props-switcher>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="leftIcon" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>
-            The icon displayed on the left side of the element.
-          </ng-container>
-          <demo-props-select #leftIcon$ [options]="iconOptions"></demo-props-select>
-        </demo-example-viewer-property>
-
-        <demo-example-viewer-property decoratorName="input" name="rightIcon" type="string">
-          <ng-container *demoExampleViewerPropertyDescription>
-            The icon displayed on the right side of the element.
-          </ng-container>
-          <demo-props-select #rightIcon$ [options]="iconOptions"></demo-props-select>
         </demo-example-viewer-property>
 
         <demo-example-viewer-section-label size="medium">

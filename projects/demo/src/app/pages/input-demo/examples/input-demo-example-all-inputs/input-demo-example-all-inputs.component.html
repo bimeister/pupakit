@@ -2,12 +2,15 @@
   <div class="controls-table__block">
     <pupa-label class="control-label">pupa-input-text</pupa-label>
     <pupa-input-text
-      [rightIcon]="'app-info'"
       [placeholder]="'Enter value'"
       [formControlName]="'text'"
       [withReset]="true"
       [invalidTooltip]="(errorMessagesByControlName.text | async)?.[0]"
-    ></pupa-input-text>
+    >
+      <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsRight>
+        <pupa-icon name="app-info"></pupa-icon>
+      </pupa-icon-holder>
+    </pupa-input-text>
   </div>
 
   <div class="controls-table__block">

@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ContentChild,
@@ -28,10 +27,7 @@ const ANIMATION_DURATION_MS: number = 200;
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SearchFieldComponent
-  extends InputBase<Nullable<string>>
-  implements OnChanges, AfterContentInit, OnDestroy
-{
+export class SearchFieldComponent extends InputBase<Nullable<string>> implements OnChanges, OnDestroy {
   @ContentChild(SearchFieldActionsRightDirective)
   public readonly searchFieldActionsRightDirective: SearchFieldActionsRightDirective;
 
@@ -77,9 +73,6 @@ export class SearchFieldComponent
     map(([isVisibleReset]: [boolean, boolean]) => isVisibleReset)
   );
 
-  public readonly isVisibleSeparatorState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  public readonly isVisibleSeparator$: Observable<boolean> = this.isVisibleSeparatorState$.asObservable();
-
   constructor(@Optional() ngControl: NgControl) {
     super(ngControl);
 
@@ -92,11 +85,8 @@ export class SearchFieldComponent
     this.processCollapseDirectionChange(changes?.collapseDirection);
   }
 
-  public ngAfterContentInit(): void {
-    this.subscription.add(this.processActionSeparatorVisibilityChange());
-  }
-
   public ngOnDestroy(): void {
+    super.ngOnDestroy();
     this.subscription.unsubscribe();
   }
 
@@ -133,6 +123,12 @@ export class SearchFieldComponent
       .subscribe((nextCollapsed: boolean) => this.isCollapsed$.next(nextCollapsed));
   }
 
+  public override processActionSeparatorVisibilityChange(): Subscription {
+    return this.isVisibleReset$
+      .pipe(map((isVisibleReset: boolean) => isVisibleReset && !isNil(this.searchFieldActionsRightDirective)))
+      .subscribe((isVisibleSeparator: boolean) => this.setIsVisibleSeparatorState(isVisibleSeparator));
+  }
+
   private processCollapsibleChange(change: ComponentChange<this, boolean>): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
@@ -157,11 +153,5 @@ export class SearchFieldComponent
     return this.isCollapsible$.pipe(distinctUntilChanged()).subscribe((isCollapsible: boolean) => {
       this.isCollapsed$.next(isCollapsible);
     });
-  }
-
-  private processActionSeparatorVisibilityChange(): Subscription {
-    return this.isVisibleReset$
-      .pipe(map((isVisibleReset: boolean) => isVisibleReset && !isNil(this.searchFieldActionsRightDirective)))
-      .subscribe((isVisibleSeparator: boolean) => this.isVisibleSeparatorState$.next(isVisibleSeparator));
   }
 }

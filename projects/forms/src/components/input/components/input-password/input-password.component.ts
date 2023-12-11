@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Optional, ViewEncapsulation } from '@angular/core';
+import { NgControl } from '@angular/forms';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -15,6 +16,12 @@ import { ValueType } from '../../../../declarations/types/input-value.type';
 export class InputPasswordComponent extends InputBase<ValueType> {
   public readonly typeIsText$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  constructor(@Optional() ngControl: NgControl) {
+    super(ngControl);
+
+    this.setWithDefaultRightIconState(true);
+  }
+
   public togglePassword(): void {
     this.typeIsText$.pipe(take(1)).subscribe((typeIsText: boolean) => this.typeIsText$.next(!typeIsText));
     this.inputElementRef.nativeElement.focus();
@@ -23,5 +30,10 @@ export class InputPasswordComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
+  }
+
+  public reset(): void {
+    this.updateValue('');
+    this.inputElementRef.nativeElement.focus();
   }
 }

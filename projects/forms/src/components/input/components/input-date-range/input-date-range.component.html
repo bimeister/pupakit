@@ -7,50 +7,53 @@
         (click)="handleContainerClick($event)"
         (mousedown)="handleContainerStartEvents($event)"
       >
-        <pupa-icon
-          *ngIf="leftIcon$ | async as leftIcon"
-          class="input-icon input-icon_custom"
-          [name]="leftIcon"
-        ></pupa-icon>
+        <div class="input-control">
+          <pupa-icon-holder size="small" [withBackground]="false">
+            <pupa-icon name="app-calendar"></pupa-icon>
+          </pupa-icon-holder>
 
-        <!-- NOTE: ngModel is incorrect: use other mask instead -->
-        <input
-          class="input"
-          #inputElement
-          type="text"
-          [placeholder]="dateRangeMask"
-          [specialCharacters]="['–', '.', ' ']"
-          [mask]="dateRangeMask"
-          [maxLength]="maxLengthInputValue"
-          [attr.disabled]="(isDisabled$ | async) ? true : null"
-          (input)="updateValue(inputElement.value)"
-          (focus)="emitFocusEvent($event)"
-          (blur)="emitBlurEvent($event)"
-          [autocomplete]="autocomplete ? 'on' : 'off'"
-          [value]="value$ | async"
-          [ngModel]="value$ | async"
-        />
+          <!-- NOTE: ngModel is incorrect: use other mask instead -->
+          <input
+            class="input"
+            #inputElement
+            type="text"
+            [placeholder]="dateRangeMask"
+            [specialCharacters]="['–', '.', ' ']"
+            [mask]="dateRangeMask"
+            [maxLength]="maxLengthInputValue"
+            [attr.disabled]="(isDisabled$ | async) ? true : null"
+            (input)="updateValue(inputElement.value)"
+            (focus)="emitFocusEvent($event)"
+            (blur)="emitBlurEvent($event)"
+            [autocomplete]="autocomplete ? 'on' : 'off'"
+            [value]="value$ | async"
+            [ngModel]="value$ | async"
+          />
+        </div>
 
-        <pupa-icon
-          class="input-icon input-icon_calendar"
-          [name]="rightIconWithCondition$ | async"
-          (mouseleave)="handleIconHover($event, false)"
-          (mouseenter)="handleIconHover($event, true)"
-          (click)="reset()"
-        >
-        </pupa-icon>
+        <div *ngIf="isVisibleDefaultActions$ | async" class="input-default-actions">
+          <pupa-button-icon
+            *ngIf="isVisibleReset$ | async"
+            icon="app-close-square"
+            kind="secondary"
+            size="m"
+            (click)="reset()"
+          >
+          </pupa-button-icon>
 
-        <pupa-icon
-          *ngIf="isInvalid$ | async"
-          class="input-icon input-icon_invalid"
-          name="app-error-filled"
-          [pupaTooltip]="invalidTooltip"
-          [tooltipHideOnHover]="invalidTooltipHideOnHover"
-          [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
-          [tooltipContentTemplate]="invalidTooltipContentTemplate"
-          (click)="inputElement.focus()"
-        >
-        </pupa-icon>
+          <pupa-icon-holder
+            *ngIf="isInvalid$ | async"
+            size="small"
+            [withBackground]="false"
+            [pupaTooltip]="invalidTooltip"
+            [tooltipHideOnHover]="invalidTooltipHideOnHover"
+            [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
+            [tooltipContentTemplate]="invalidTooltipContentTemplate"
+            (click)="inputElement.focus()"
+          >
+            <pupa-icon class="input-icon_invalid" name="app-error-filled"></pupa-icon>
+          </pupa-icon-holder>
+        </div>
       </div>
     </pupa-droppable-trigger>
 

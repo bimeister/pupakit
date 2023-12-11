@@ -3,15 +3,15 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PupaPipesModule } from '@bimeister/pupakit.common';
 import {
-  PupaIconsModule,
   appCalendarIcon,
   appClockIcon,
   appCloseSquareIcon,
   appErrorFilledIcon,
   appEyeClosedIcon,
   appEyeOpenIcon,
+  PupaIconsModule,
 } from '@bimeister/pupakit.icons';
-import { PupaTooltipModule } from '@bimeister/pupakit.kit';
+import { PupaButtonsModule, PupaIconHolderModule, PupaTooltipModule } from '@bimeister/pupakit.kit';
 import { NgxMaskModule } from 'ngx-mask';
 import { PupaDateTimePickerModule } from '../date-time-picker/date-time-picker.module';
 import { PupaDroppableModule } from '../droppable/droppable.module';
@@ -24,6 +24,8 @@ import { InputNumberComponent } from './components/input-number/input-number.com
 import { InputPasswordComponent } from './components/input-password/input-password.component';
 import { InputTextComponent } from './components/input-text/input-text.component';
 import { InputTimeComponent } from './components/input-time/input-time.component';
+import { InputActionsLeftDirective } from './directives/input-actions-left.directive';
+import { InputActionsRightDirective } from './directives/input-actions-right.directive';
 
 const EXPORTS: any[] = [
   InputTextComponent,
@@ -35,6 +37,9 @@ const EXPORTS: any[] = [
   InputDateTimeSecondsComponent,
   InputDateRangeComponent,
   InputDateRangeDoubleComponent,
+
+  InputActionsRightDirective,
+  InputActionsLeftDirective,
 ];
 
 const DECLARATIONS: any[] = [...EXPORTS];
@@ -58,6 +63,8 @@ const DECLARATIONS: any[] = [...EXPORTS];
       appClockIcon,
     ]),
     NgxMaskModule.forRoot(),
+    PupaButtonsModule,
+    PupaIconHolderModule,
   ],
   exports: [...EXPORTS],
 })

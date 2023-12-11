@@ -3,7 +3,7 @@ import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '
 import { NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges, TimeDigitFormatPipe } from '@bimeister/pupakit.common';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../components/droppable/components/droppable/droppable.component';
 import { dateClearTime } from '../../functions/date-clear-time.function';
@@ -113,25 +113,14 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
-  public readonly rightIconWithCondition$: Observable<string> = combineLatest([
-    this.rightIcon$,
-    this.dateToResetSwitcherEnabled$,
-  ]).pipe(
-    map(([rightIcon, dateToResetSwitcherEnabled]: [string, boolean]) => {
-      if (dateToResetSwitcherEnabled) {
-        return 'app-close-square';
-      }
-
-      return isEmpty(rightIcon) ? 'app-calendar' : rightIcon;
-    })
-  );
-
   constructor(
     private readonly timeFormatPipe: TimeDigitFormatPipe,
     public readonly datePipe: DatePipe,
     @Optional() ngControl: NgControl
   ) {
     super(ngControl);
+
+    this.setWithDefaultRightIconState(true);
   }
 
   @HostListener('window:click')
@@ -304,11 +293,6 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   public handleFocusEvent(focusEvent: FocusEvent): void {
     focusEvent.stopPropagation();
     this.emitFocusEvent(focusEvent);
-  }
-
-  public handleIconHover(focusEvent: FocusEvent, isHovered: boolean): void {
-    focusEvent.stopPropagation();
-    this.isIconHovered$.next(isHovered);
   }
 
   public reset(): void {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PupaDirectivesModule } from '@bimeister/pupakit.common';
+import { InputDemoExampleActionComponent } from 'src/app/pages/input-demo/examples/input-demo-example-action/input-demo-example-action.component';
 import { DemoSharedModule } from '../../shared/shared.module';
 import { InputDemoExampleAllInputsComponent } from './examples/input-demo-example-all-inputs/input-demo-example-all-inputs.component';
 import { InputDemoExampleIsPatchedComponent } from './examples/input-demo-example-is-patched/input-demo-example-is-patched.component';
@@ -19,6 +20,7 @@ import { InputDemoComponent } from './input-demo.component';
     InputDemoExampleTooltipComponent,
     InputDemoExampleIsPatchedComponent,
     InputDemoExampleStylesComponent,
+    InputDemoExampleActionComponent,
   ],
   imports: [DemoSharedModule, InputDemoRoutingModule, PupaDirectivesModule],
 })
