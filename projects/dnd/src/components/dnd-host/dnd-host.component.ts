@@ -13,23 +13,23 @@ import {
   TemplateRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { DndItemHtmlElement } from '../../declarations/interfaces/dnd-item-html-element.interface';
-import { DndService } from '../../services/dnd.service';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterByInstanceOf, isNil } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
-import { DndDropData } from '../../declarations/interfaces/dnd-drop-data.interface';
-import { DndMoveData } from '../../declarations/interfaces/dnd-move-data.interface';
-import { getDndTargetItemFromEvent } from '../../declarations/functions/get-dnd-target-item-from-event.function';
-import { DndItemConfig } from '../../declarations/interfaces/dnd-item-config.interface';
-import { DndDropPosition } from '../../declarations/types/dnd-drop-position.type';
-import { DndItem } from '../../declarations/interfaces/dnd-item.interface';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { DndItemRegistryService } from '../../services/dnd-item-registry.service';
-import { DndEvents } from '../../declarations/events/dnd.events';
 import { DND_HOST_ID_ATTRIBUTE } from '../../declarations/constants/dnd-host-id-attribute.const';
+import { DndEvents } from '../../declarations/events/dnd.events';
+import { getDndTargetItemFromEvent } from '../../declarations/functions/get-dnd-target-item-from-event.function';
+import { DndDropData } from '../../declarations/interfaces/dnd-drop-data.interface';
+import { DndItemConfig } from '../../declarations/interfaces/dnd-item-config.interface';
+import { DndItemHtmlElement } from '../../declarations/interfaces/dnd-item-html-element.interface';
 import { DndItemTemplateContext } from '../../declarations/interfaces/dnd-item-template-context.interface';
+import { DndItem } from '../../declarations/interfaces/dnd-item.interface';
+import { DndMoveData } from '../../declarations/interfaces/dnd-move-data.interface';
+import { DndDropPosition } from '../../declarations/types/dnd-drop-position.type';
+import { DndItemRegistryService } from '../../services/dnd-item-registry.service';
+import { DndService } from '../../services/dnd.service';
 
-const DND_POSITION_PERCENT: number = 0.2;
+const DND_POSITION_PERCENT: number = 0.5;
 
 @Component({
   selector: 'pupa-dnd-host',
