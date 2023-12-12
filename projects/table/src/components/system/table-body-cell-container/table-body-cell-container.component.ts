@@ -13,11 +13,9 @@ import { TableTemplatesService } from '../../../services/table-templates.service
 import { isNil, Nullable } from '@bimeister/utilities';
 import { TableColumn } from '../../../declarations/classes/table-column.class';
 import { TableBodyCellContext } from '../../../declarations/interfaces/table-body-cell-context.interface';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { ComponentChanges } from '@bimeister/pupakit.common';
 import { TableBodyRowRef } from '../../../declarations/interfaces/table-body-row-ref.interface';
-import { isTableRowTreeEntity } from '../../../declarations/type-guards/is-table-row-tree-entity.type-guard';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'pupa-table-body-cell-container',
@@ -35,42 +33,33 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
   private lastRowValue: Nullable<TableBodyRowRef<T>> = null;
   private lastColumnValue: Nullable<TableColumn> = null;
 
-  public row$: BehaviorSubject<TableBodyRowRef<T>> = new BehaviorSubject(null);
   public templateRef: TemplateRef<TableBodyCellContext<T>>;
   public templateContext: TableBodyCellContext<T> = {
     $implicit: null,
     column: null,
   };
 
-  public hasExpander$: Observable<boolean> = this.row$.pipe(
-    map((row: TableBodyRowRef<T>) => {
-      const hasExpander: boolean = isTableRowTreeEntity(row) && row.isExpandable && this.column.index === 0;
-      return hasExpander;
-    })
-  );
-  public isTreeRow$: Observable<boolean> = this.row$.pipe(map((row: TableBodyRowRef<T>) => isTableRowTreeEntity(row)));
-  public treeLevel$: Observable<number> = this.row$.pipe(
-    map((row: TableBodyRowRef<T>) => (this.column.index === 0 ? isTableRowTreeEntity(row) && row.level : 0))
-  );
-  public iconName$: Observable<string> = this.row$.pipe(
-    map((row: TableBodyRowRef<T>) =>
-      isTableRowTreeEntity(row) && row.isExpanded ? 'app-caret-down' : 'app-caret-right'
-    )
-  );
+  public hasExpander$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public isTreeRowRootCell$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public treeLevel$: BehaviorSubject<number> = new BehaviorSubject(0);
+  public treeCellMarker$: BehaviorSubject<Nullable<string>> = new BehaviorSubject(null);
 
   constructor(private readonly tableTemplatesService: TableTemplatesService<T>) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    this.processColumnChanges(changes?.column);
-    this.processRowChanges(changes?.row);
+    if (isNil(changes)) return;
+    const column: Nullable<TableColumn> = changes.column?.currentValue;
+    const row: Nullable<TableBodyRowRef<T>> = changes.row?.currentValue;
+    this.processColumnChanges(column);
+    this.processRowChanges(row);
+    this.initTableTreeCell(row, column);
   }
 
   public ngAfterViewChecked(): void {
     this.rerenderIfOptionIsTrue();
   }
 
-  private processColumnChanges(change: Nullable<ComponentChange<this, TableColumn>>): void {
-    const value: Nullable<TableColumn> = change?.currentValue;
+  private processColumnChanges(value: Nullable<TableColumn>): void {
     if (isNil(value)) {
       return;
     }
@@ -81,8 +70,7 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     };
   }
 
-  private processRowChanges(change: Nullable<ComponentChange<this, TableBodyRowRef<T>>>): void {
-    const value: Nullable<TableBodyRowRef<T>> = change?.currentValue;
+  private processRowChanges(value: Nullable<TableBodyRowRef<T>>): void {
     if (isNil(value)) {
       return;
     }
@@ -90,7 +78,36 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
       ...this.templateContext,
       $implicit: value,
     };
-    this.row$.next(value);
+  }
+
+  private initTableTreeCell(row: Nullable<TableBodyRowRef<T>>, column: Nullable<TableColumn>): void {
+    const currentRow: TableBodyRowRef<T> = isNil(row) ? this.row : row;
+    const currentColumn: TableColumn = isNil(column) ? this.column : column;
+
+    if (currentColumn.index !== 0 || isNil(currentRow.treeDefinition)) {
+      return;
+    }
+
+    const {
+      data,
+      treeDefinition: { modelLevelKey, modelExpandableKey, modelExpandedKey, treeNodeMarker },
+    } = currentRow;
+
+    this.isTreeRowRootCell$.next(true);
+
+    const treeLevel: number = data[modelLevelKey];
+    this.treeLevel$.next(treeLevel);
+
+    const isExpandable: boolean = data[modelExpandableKey];
+    this.hasExpander$.next(isExpandable);
+
+    let treeCellMarker: string;
+    if (isExpandable) {
+      treeCellMarker = Boolean(data[modelExpandedKey]) ? 'app-caret-down' : 'app-caret-right';
+    } else {
+      treeCellMarker = treeNodeMarker;
+    }
+    this.treeCellMarker$.next(treeCellMarker);
   }
 
   private rerenderIfOptionIsTrue(): void {

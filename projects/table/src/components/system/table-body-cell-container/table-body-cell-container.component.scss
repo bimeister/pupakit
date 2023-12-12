@@ -15,10 +15,20 @@
     margin-left: calc(var(--tree-level)*1rem);
     padding-left: 3rem;
   }
+
   &__expander {
     &_hidden {
       visibility: hidden;
       pointer-events: none;
     }
+  }
+
+  &__marker {
+    width: 5rem;
+    height: 5rem;
+    flex: 0 0 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

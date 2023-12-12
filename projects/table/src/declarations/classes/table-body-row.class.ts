@@ -1,7 +1,9 @@
 import { TableRow } from './table-row.class';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { TableBodyBaseRowRef } from '../interfaces/table-body-row-ref.interface';
+import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
+import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
+
 
 export interface TableBodyRowOptions<T> {
   id: string;
@@ -10,14 +12,18 @@ export interface TableBodyRowOptions<T> {
   selectedIds$: Observable<Set<string>>;
 }
 
-export class TableBodyRow<T> extends TableRow implements TableBodyBaseRowRef<T> {
-  public readonly data: T;
-  public readonly selectedIds$: Observable<Set<string>>;
-  public readonly isSelected$: Observable<boolean>;
+export class TableBodyRow<T> extends TableRow implements TableBodyRowRef<T> {
+  public readonly isSelected$: Observable<boolean> = this.selectedIds$.pipe(
+    map((selectedIds: Set<string>) => selectedIds.has(this.id))
+  );
+  public treeDefinition: TableTreeDefinition;
 
-  constructor({ id, index, ...rest }: TableBodyRowOptions<T>) {
-    super(id, index);
-    Object.assign(this, rest);
-    this.isSelected$ = this.selectedIds$.pipe(map((selectedIds: Set<string>) => selectedIds.has(this.id)));
+  constructor(
+    public readonly id: string,
+    public readonly index: number,
+    public readonly data: T,
+    private readonly selectedIds$: Observable<Set<string>>
+  ) {
+    super();
   }
 }

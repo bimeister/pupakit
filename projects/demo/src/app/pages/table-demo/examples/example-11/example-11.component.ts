@@ -161,31 +161,10 @@ const COLUMNS: TableColumnDefinition[] = [
     modelKey: 'lastName',
     title: 'Last Name',
     pin: TableColumnPin.None,
-
-    // set draggable as true
-    draggable: true,
-
-    // set resizable as true
-    resizable: true,
-
     defaultSizes: {
       widthPx: 200,
-
-      // use min and max sizes,
       minWidthPx: 70,
       maxWidthPx: 300,
-    },
-
-    // set sorting feature options
-    featureOptions: {
-      // set default state
-      defaultState: TableColumnSorting.Asc,
-
-      // set sortable as true
-      sortable: true,
-
-      // set sorting None state availability
-      isSortingNoneAvailable: false,
     },
   },
   {
@@ -214,6 +193,7 @@ const tableTreeDefinition: TableTreeDefinition = {
   modelExpandedKey: 'expanded',
   modelParentIdKey: 'parentId',
   modelLevelKey: 'level',
+  treeNodeMarker: 'app-dot-single',
 };
 
 @Component({
@@ -251,8 +231,8 @@ export class TableExample11Component implements OnDestroy {
     const data: SomeData[] = [...DATA];
     return this.controller
       .getEvents(TableFeatureEvents.ExpandRowChanged)
-      .subscribe(({ expandRowInfo: { expanded, rowId } }: TableFeatureEvents.ExpandRowChanged) => {
-        const rowDataIndex: number = data.findIndex((item: SomeData) => item.id === rowId);
+      .subscribe(({ expandRowInfo: { expanded, rowDataId } }: TableFeatureEvents.ExpandRowChanged) => {
+        const rowDataIndex: number = data.findIndex((item: SomeData) => item.id === rowDataId);
         const row: SomeData = data[rowDataIndex];
 
         row.expanded = expanded;
@@ -262,7 +242,7 @@ export class TableExample11Component implements OnDestroy {
           let sliceEnd: number;
           for (let index: number = 0; index < DATA.length; index++) {
             const item: SomeData = DATA[index];
-            if (item.id === rowId) {
+            if (item.id === rowDataId) {
               sliceStart = index + 1;
               continue;
             }

@@ -11,12 +11,7 @@ import { TableColumn } from './table-column.class';
 import { TableRow } from './table-row.class';
 import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
 import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
-import { TableBodyRow, TableBodyRowOptions } from './table-body-row.class';
-import {
-  TableBodyTreeLeafRow,
-  TableBodyTreeBranchRow,
-  TableBodyTreeBranchRowOptions,
-} from './table-body-tree-row.class';
+import { TableBodyRow } from './table-body-row.class';
 
 interface DistributedColumns {
   leftPinnedColumns: TableColumn[];
@@ -126,38 +121,16 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
         TrackByFunction<T>,
         TableTreeDefinition | null
       ]) => {
-        const newColumnIdToColumnMap: Map<string, TableBodyRowRef<T>> = new Map<string, TableBodyRowRef<T>>();
+        const newRowIdToRowMap: Map<string, TableBodyRowRef<T>> = new Map<string, TableBodyRowRef<T>>();
         const dataSlice: T[] = data.slice(listRange.start, listRange.end);
-
         dataSlice.forEach((dataItem: T, index: number) => {
-          let row: TableBodyRowRef<T>;
-          const id: string = dataItem['id'] ?? trackBy(index, dataItem);
-          const rowOptions: TableBodyRowOptions<T> = {
-            id,
-            index: index + listRange.start,
-            data: dataItem,
-            selectedIds$: this.selectedIdsSet$,
-          };
-
-          if (!Boolean(treeDefinition)) {
-            row = new TableBodyRow<T>(rowOptions);
-          } else {
-            const treeRowOptions: TableBodyTreeBranchRowOptions<T> = {
-              ...rowOptions,
-              id: dataItem[treeDefinition.modelIdKey],
-              parentId: dataItem[treeDefinition.modelParentIdKey],
-              level: dataItem[treeDefinition.modelLevelKey],
-              isExpandable: dataItem[treeDefinition.modelExpandableKey],
-              isExpanded: dataItem[treeDefinition.modelExpandedKey],
-            };
-            row = Boolean(treeRowOptions.isExpandable)
-              ? new TableBodyTreeBranchRow<T>(treeRowOptions)
-              : new TableBodyTreeLeafRow<T>(treeRowOptions);
-          }
-          newColumnIdToColumnMap.set(id, row);
+          const id: string = trackBy(index, dataItem);
+          const row: TableBodyRow<T> = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
+          row.treeDefinition = treeDefinition;
+          newRowIdToRowMap.set(id, row);
         });
 
-        return newColumnIdToColumnMap;
+        return newRowIdToRowMap;
       }
     ),
     shareReplayWithRefCount()

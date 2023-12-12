@@ -6,10 +6,9 @@ import { TableEvents } from '../../events/table.events';
 import { TableApi } from '../../interfaces/table-api.interface';
 import { TableFeature } from '../../interfaces/table-feature.interface';
 import { QueueEvents } from '@bimeister/pupakit.common';
-import { TableBodyTreeNodeRowRef } from '../../interfaces/table-body-row-ref.interface';
+import { TableBodyRowRef } from '../../interfaces/table-body-row-ref.interface';
 import { TableRowEvents } from '../../events/table-row.events';
 import { TableFeatureEvents } from '../../events/table-feature.events';
-
 
 export class TableTreeFeature<T> implements TableFeature {
   private readonly eventBus: EventBus = this.api.eventBus;
@@ -42,16 +41,22 @@ export class TableTreeFeature<T> implements TableFeature {
     return this.eventBus
       .listen()
       .pipe(filterByInstanceOf(TableEvents.CellClick), withLatestFrom(this.api.displayData.bodyRowIdToBodyRowMap$))
-      .subscribe(([event, bodyRowIdToBodyRowMap]: [TableEvents.CellClick, Map<string, TableBodyTreeNodeRowRef<T>>]) => {
+      .subscribe(([event, bodyRowIdToBodyRowMap]: [TableEvents.CellClick, Map<string, TableBodyRowRef<T>>]) => {
         const isExpanderClick: boolean = this.isExpanderClick(event.targetCell.srcEvent);
 
         if (!isExpanderClick) return;
 
-        const row: TableBodyTreeNodeRowRef<T> = bodyRowIdToBodyRowMap.get(event.targetCell.rowId);
-        const nextExtendedState: boolean = !row.isExpanded;
+        const row: TableBodyRowRef<T> = bodyRowIdToBodyRowMap.get(event.targetCell.rowId);
+        const nextExtendedState: boolean = !Boolean(row.data[row.treeDefinition.modelExpandedKey]);
 
         row.eventBus.dispatch(new TableRowEvents.ExpandChanged(nextExtendedState));
-        this.eventBus.dispatch(new TableFeatureEvents.ExpandRowChanged({ rowId: row.id, expanded: nextExtendedState }));
+        this.eventBus.dispatch(
+          new TableFeatureEvents.ExpandRowChanged({
+            rowId: row.id,
+            rowDataId: row.data[row.treeDefinition.modelIdKey],
+            expanded: nextExtendedState,
+          })
+        );
       });
   }
 
