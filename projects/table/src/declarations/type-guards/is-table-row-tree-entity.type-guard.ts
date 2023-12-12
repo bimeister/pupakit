@@ -9,7 +9,10 @@ export function isTableRowTreeEntity<T>(value: TableBodyRowRef<T>): value is Tab
   const typedValue: TableBodyTreeNodeRowRef<T> = value as TableBodyTreeNodeRowRef<T>;
 
   const hasAllFields: boolean =
-    typedValue.isExtendable !== undefined || typedValue.isExtended !== undefined || typedValue.parentId !== undefined;
+    typedValue.isExpandable !== undefined ||
+    typedValue.isExpanded !== undefined ||
+    typedValue.parentId !== undefined ||
+    typedValue.level !== undefined;
 
   return hasAllFields;
 }

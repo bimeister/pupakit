@@ -1,33 +1,33 @@
-import { Observable } from 'rxjs';
 import { TableBodyTreeBranchRowRef, TableBodyTreeLeafRowRef } from '../interfaces/table-body-row-ref.interface';
-import { TableBodyRow } from './table-body-row.class';
+import { TableBodyRow, TableBodyRowOptions } from './table-body-row.class';
 
-export class TableBodyTreeNodeRow<T> extends TableBodyRow<T> implements TableBodyTreeBranchRowRef<T> {
-  constructor(
-    public readonly id: string,
-    public readonly index: number,
-    public readonly data: T,
-    selectedIds$: Observable<Set<string>>,
-    public readonly parentId: string,
-    public readonly isExtendable: boolean,
-    public readonly isExtended: boolean,
-    public readonly level: number
-  ) {
-    super(id, index, data, selectedIds$);
+export interface TableBodyTreeLeafRowOptions<T> extends TableBodyRowOptions<T> {
+  parentId: string;
+  level: number;
+}
+export interface TableBodyTreeBranchRowOptions<T> extends TableBodyTreeLeafRowOptions<T> {
+  isExpandable: boolean;
+  isExpanded: boolean;
+}
+
+export class TableBodyTreeBranchRow<T> extends TableBodyRow<T> implements TableBodyTreeBranchRowRef<T> {
+  public readonly parentId: string;
+  public readonly level: number;
+  public readonly isExpandable: boolean;
+  public readonly isExpanded: boolean;
+  constructor({ id, index, data, selectedIds$, ...rest }: TableBodyTreeBranchRowOptions<T>) {
+    super({ id, index, data, selectedIds$ });
+    Object.assign(this, rest);
   }
 }
 
 export class TableBodyTreeLeafRow<T> extends TableBodyRow<T> implements TableBodyTreeLeafRowRef<T> {
-  public readonly isExtendable: false = false;
-  public readonly isExtended: false = false;
-  constructor(
-    public readonly id: string,
-    public readonly index: number,
-    public readonly data: T,
-    selectedIds$: Observable<Set<string>>,
-    public readonly parentId: string,
-    public readonly level: number
-  ) {
-    super(id, index, data, selectedIds$);
+  public readonly parentId: string;
+  public readonly level: number;
+  public readonly isExpandable: false = false;
+  public readonly isExpanded: false = false;
+  constructor({ id, index, data, selectedIds$, ...rest }: TableBodyTreeLeafRowOptions<T>) {
+    super({ id, index, data, selectedIds$ });
+    Object.assign(this, rest);
   }
 }

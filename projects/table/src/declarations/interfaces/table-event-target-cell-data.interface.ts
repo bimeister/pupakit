@@ -6,5 +6,5 @@ export interface TableEventTargetCellData {
   rowId: string;
   rowType: TableRowType;
   element: HTMLElement;
-  rawEvent: Event;
+  srcEvent: Event;
 }

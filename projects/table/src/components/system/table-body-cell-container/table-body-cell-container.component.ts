@@ -16,6 +16,8 @@ import { TableBodyCellContext } from '../../../declarations/interfaces/table-bod
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { TableBodyRowRef } from '../../../declarations/interfaces/table-body-row-ref.interface';
 import { isTableRowTreeEntity } from '../../../declarations/type-guards/is-table-row-tree-entity.type-guard';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'pupa-table-body-cell-container',
@@ -33,11 +35,28 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
   private lastRowValue: Nullable<TableBodyRowRef<T>> = null;
   private lastColumnValue: Nullable<TableColumn> = null;
 
+  public row$: BehaviorSubject<TableBodyRowRef<T>> = new BehaviorSubject(null);
   public templateRef: TemplateRef<TableBodyCellContext<T>>;
   public templateContext: TableBodyCellContext<T> = {
     $implicit: null,
     column: null,
   };
+
+  public hasExpander$: Observable<boolean> = this.row$.pipe(
+    map((row: TableBodyRowRef<T>) => {
+      const hasExpander: boolean = isTableRowTreeEntity(row) && row.isExpandable && this.column.index === 0;
+      return hasExpander;
+    })
+  );
+  public isTreeRow$: Observable<boolean> = this.row$.pipe(map((row: TableBodyRowRef<T>) => isTableRowTreeEntity(row)));
+  public treeLevel$: Observable<number> = this.row$.pipe(
+    map((row: TableBodyRowRef<T>) => (this.column.index === 0 ? isTableRowTreeEntity(row) && row.level : 0))
+  );
+  public iconName$: Observable<string> = this.row$.pipe(
+    map((row: TableBodyRowRef<T>) =>
+      isTableRowTreeEntity(row) && row.isExpanded ? 'app-caret-down' : 'app-caret-right'
+    )
+  );
 
   constructor(private readonly tableTemplatesService: TableTemplatesService<T>) {}
 
@@ -48,10 +67,6 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
 
   public ngAfterViewChecked(): void {
     this.rerenderIfOptionIsTrue();
-  }
-
-  public hasExpander(): boolean {
-    return isTableRowTreeEntity(this.row) && this.row.isExtendable && this.column.index === 0;
   }
 
   private processColumnChanges(change: Nullable<ComponentChange<this, TableColumn>>): void {
@@ -75,6 +90,7 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
       ...this.templateContext,
       $implicit: value,
     };
+    this.row$.next(value);
   }
 
   private rerenderIfOptionIsTrue(): void {

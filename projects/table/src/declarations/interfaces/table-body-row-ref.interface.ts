@@ -6,14 +6,14 @@ export interface TableBodyBaseRowRef<T> extends TableRowRef {
   readonly isSelected$: Observable<boolean>;
 }
 export interface TableBodyTreeBranchRowRef<T> extends TableBodyBaseRowRef<T> {
-  readonly isExtendable: boolean;
-  readonly isExtended: boolean;
+  readonly isExpandable: boolean;
+  readonly isExpanded: boolean;
   readonly parentId: string;
   readonly level: number;
 }
 export interface TableBodyTreeLeafRowRef<T> extends TableBodyTreeBranchRowRef<T> {
-  readonly isExtendable: false;
-  readonly isExtended: false;
+  readonly isExpandable: false;
+  readonly isExpanded: false;
 }
 
 export type TableBodyTreeNodeRowRef<T> = TableBodyTreeBranchRowRef<T> | TableBodyTreeLeafRowRef<T>;

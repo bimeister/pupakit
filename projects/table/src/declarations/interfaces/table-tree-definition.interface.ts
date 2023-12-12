@@ -1,8 +1,7 @@
-export interface TableTreeDefinition<TFeatureOptions = unknown> {
-  modelIdKey?: string;
-  modelParentIdKey?: string;
-  modelIsExpandableKey?: string;
-  modelIsExpandedKey?: string;
-  modelLevelKey?: string;
-  featureOptions?: TFeatureOptions;
+export interface TableTreeDefinition {
+  modelIdKey: string;
+  modelParentIdKey: string;
+  modelExpandableKey: string;
+  modelExpandedKey: string;
+  modelLevelKey: string;
 }

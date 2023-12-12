@@ -13,6 +13,7 @@ import { TableExample9Component } from './examples/example-9/example-9.component
 import { TableDemoRoutingModule } from './table-demo-routing.module';
 import { TableDemoComponent } from './table-demo.component';
 import { TableExample10Component } from './examples/example-10/example-10.component';
+import { TableExample11Component } from './examples/example-11/example-11.component';
 
 const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample1Component,
@@ -25,6 +26,7 @@ const EXAMPLE_COMPONENTS: Type<unknown>[] = [
   TableExample8Component,
   TableExample9Component,
   TableExample10Component,
+  TableExample11Component,
 ];
 
 @NgModule({

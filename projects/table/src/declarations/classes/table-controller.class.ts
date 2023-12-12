@@ -60,7 +60,7 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.SetColumnDefinitions(columnDefinitions));
   }
 
-  public setTreeDefinition(treeDefinitions: TableTreeDefinition): void {
+  public setTreeDefinition(treeDefinitions: Nullable<TableTreeDefinition>): void {
     this.dispatchInQueue(new TableEvents.SetTreeDefinition(treeDefinitions));
   }
 

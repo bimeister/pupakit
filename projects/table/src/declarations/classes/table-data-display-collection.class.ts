@@ -11,8 +11,12 @@ import { TableColumn } from './table-column.class';
 import { TableRow } from './table-row.class';
 import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
 import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
-import { TableBodyRow } from './table-body-row.class';
-import { TableBodyTreeLeafRow, TableBodyTreeNodeRow } from './table-body-tree-row.class';
+import { TableBodyRow, TableBodyRowOptions } from './table-body-row.class';
+import {
+  TableBodyTreeLeafRow,
+  TableBodyTreeBranchRow,
+  TableBodyTreeBranchRowOptions,
+} from './table-body-tree-row.class';
 
 interface DistributedColumns {
   leftPinnedColumns: TableColumn[];
@@ -127,36 +131,28 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
         dataSlice.forEach((dataItem: T, index: number) => {
           let row: TableBodyRowRef<T>;
-          const id: string = trackBy(index, dataItem);
-          if (Boolean(treeDefinition)) {
-            const parentId: string = dataItem[treeDefinition.modelParentIdKey];
-            const isExpandable: boolean = dataItem[treeDefinition.modelIsExpandableKey];
-            const isExpanded: boolean = dataItem[treeDefinition.modelIsExpandedKey];
-            const level: number = dataItem[treeDefinition.modelLevelKey];
+          const id: string = dataItem['id'] ?? trackBy(index, dataItem);
+          const rowOptions: TableBodyRowOptions<T> = {
+            id,
+            index: index + listRange.start,
+            data: dataItem,
+            selectedIds$: this.selectedIdsSet$,
+          };
 
-            if (Boolean(parentId)) {
-              row = new TableBodyTreeLeafRow<T>(
-                id,
-                index + listRange.start,
-                dataItem,
-                this.selectedIdsSet$,
-                parentId,
-                level
-              );
-            } else {
-              row = new TableBodyTreeNodeRow<T>(
-                id,
-                index + listRange.start,
-                dataItem,
-                this.selectedIdsSet$,
-                parentId,
-                isExpandable,
-                isExpanded,
-                level
-              );
-            }
+          if (!Boolean(treeDefinition)) {
+            row = new TableBodyRow<T>(rowOptions);
           } else {
-            row = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
+            const treeRowOptions: TableBodyTreeBranchRowOptions<T> = {
+              ...rowOptions,
+              id: dataItem[treeDefinition.modelIdKey],
+              parentId: dataItem[treeDefinition.modelParentIdKey],
+              level: dataItem[treeDefinition.modelLevelKey],
+              isExpandable: dataItem[treeDefinition.modelExpandableKey],
+              isExpanded: dataItem[treeDefinition.modelExpandedKey],
+            };
+            row = Boolean(treeRowOptions.isExpandable)
+              ? new TableBodyTreeBranchRow<T>(treeRowOptions)
+              : new TableBodyTreeLeafRow<T>(treeRowOptions);
           }
           newColumnIdToColumnMap.set(id, row);
         });

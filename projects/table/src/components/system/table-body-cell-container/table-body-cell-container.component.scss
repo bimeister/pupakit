@@ -6,12 +6,19 @@
 
 
 .table-body-tree-cell-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 
-    &__expander {
-        margin-left: calc(var(--tree-level)*1rem);
+  &__indent {
+    margin-left: calc(var(--tree-level)*1rem);
+    padding-left: 3rem;
+  }
+  &__expander {
+    &_hidden {
+      visibility: hidden;
+      pointer-events: none;
     }
+  }
 }

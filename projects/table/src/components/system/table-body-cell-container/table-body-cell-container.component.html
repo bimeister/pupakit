@@ -1,11 +1,15 @@
-<ng-container *ngIf="hasExpander(); then treeCellTemplate else baseCellTemplate"></ng-container>
+<ng-container *ngIf="isTreeRow$ | async; then treeCellTemplate else baseCellTemplate"></ng-container>
 
 <ng-template #treeCellTemplate>
     <div class="table-body-tree-cell-container">
+        <span 
+          class="table-body-tree-cell-container__indent" 
+          [style.--tree-level]="treeLevel$ | async"
+        ></span>
         <pupa-button-icon 
           class="table-body-tree-cell-container__expander"
-          [style.--tree-level]="row.level"
-          [icon]="row.isExtended ? 'app-caret-up' : 'app-caret-down'" 
+          [class.table-body-tree-cell-container__expander_hidden]="!(hasExpander$ | async)" 
+          [icon]="iconName$ | async" 
           kind="secondary"
           size="s"
         ></pupa-button-icon>

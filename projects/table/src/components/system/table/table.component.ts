@@ -90,7 +90,7 @@ function convertCellHtmlEventToTargetCellData(event: Event): Nullable<TableEvent
         rowId: cellData.rowId,
         rowType: cellData.rowType,
         element: tableCellHtmlElement,
-        rawEvent: event,
+        srcEvent: event,
       };
 }
 
