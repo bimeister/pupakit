@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { Uuid } from '@bimeister/pupakit.common';
-import { TableColumnDefinition, TableController } from '@bimeister/pupakit.table';
+import { TableColumnDefinition, TableColumnPin, TableController } from '@bimeister/pupakit.table';
 import { getUuid } from '@bimeister/utilities';
 
 interface SomeData {
@@ -35,6 +35,22 @@ const COLUMNS: TableColumnDefinition[] = [
     // defaultSizes: { ... }
   },
   {
+    id: 'last-name1',
+    modelKey: 'lastName',
+    title: 'Last Name',
+
+    // Don't set defaultSizes property for auto width calculation
+    // defaultSizes: { ... }
+  },
+  {
+    id: 'last-name2',
+    modelKey: 'lastName',
+    title: 'Last Name',
+
+    // Don't set defaultSizes property for auto width calculation
+    // defaultSizes: { ... }
+  },
+  {
     id: 'city',
     modelKey: 'city',
     title: 'City',
@@ -48,6 +64,7 @@ const COLUMNS: TableColumnDefinition[] = [
     id: 'age-column',
     modelKey: 'age',
     title: 'Age',
+    pin: TableColumnPin.Right,
     defaultSizes: { widthPx: 100 },
   },
 ];

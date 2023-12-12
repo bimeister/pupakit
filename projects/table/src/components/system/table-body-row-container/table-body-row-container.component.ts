@@ -1,10 +1,11 @@
-import { Component, ViewEncapsulation, ChangeDetectionStrategy, Input, TrackByFunction } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, TrackByFunction, ViewEncapsulation } from '@angular/core';
 import { TableColumn } from '../../../declarations/classes/table-column.class';
 import { TableBodyRow } from '../../../declarations/classes/table-body-row.class';
 import { TableScrollbarsService } from '../../../services/table-scrollbars.service';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { TableRowType } from '../../../declarations/enums/table-row-type.enum';
+import { TableAdaptiveColumnsService } from '../../../services/table-adaptive-columns.service';
 
 @Component({
   selector: 'pupa-table-body-row-container',
@@ -19,11 +20,17 @@ export class TableBodyRowContainerComponent<T> {
 
   public readonly rowType: TableRowType = TableRowType.Body;
 
-  public readonly isPlaceholderVisible$: Observable<boolean> = this.tableScrollbarsService.isHorizontalVisible$.pipe(
-    map((isHorizontalVisible: boolean) => !isHorizontalVisible)
+  public readonly isPlaceholderVisible$: Observable<boolean> = combineLatest([
+    this.tableScrollbarsService.isHorizontalVisible$,
+    this.tableAdaptiveColumnsService.isAdaptiveColumns$,
+  ]).pipe(
+    map(([isHorizontalVisible, isAdaptiveColumns]: [boolean, boolean]) => !isHorizontalVisible && !isAdaptiveColumns)
   );
 
-  constructor(private readonly tableScrollbarsService: TableScrollbarsService) {}
+  constructor(
+    private readonly tableScrollbarsService: TableScrollbarsService,
+    private readonly tableAdaptiveColumnsService: TableAdaptiveColumnsService
+  ) {}
 
   public trackByFunction: TrackByFunction<TableColumn> = (index: number, _column: TableColumn) => index;
 }
