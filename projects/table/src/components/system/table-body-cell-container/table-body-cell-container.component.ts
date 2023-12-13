@@ -96,7 +96,8 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
     this.isTreeRowRootCell$.next(true);
 
     const treeLevel: number = data[modelLevelKey];
-    this.treeLevel$.next(treeLevel);
+    const uiLevel: number = this.calculateTreePadding(treeLevel);
+    this.treeLevel$.next(uiLevel);
 
     const isExpandable: boolean = data[modelExpandableKey];
     this.hasExpander$.next(isExpandable);
@@ -108,6 +109,12 @@ export class TableBodyCellContainerComponent<T> implements OnChanges, AfterViewC
       treeCellMarker = treeNodeMarker;
     }
     this.treeCellMarker$.next(treeCellMarker);
+  }
+
+  private calculateTreePadding(treeLevel: number): number {
+    const multiplier: number = 3;
+    const uiLevel: number = treeLevel + 1;
+    return uiLevel === 1 ? 1 : (uiLevel - 1) * multiplier + 1;
   }
 
   private rerenderIfOptionIsTrue(): void {
