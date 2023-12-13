@@ -28,7 +28,6 @@ import { TableDndFeature } from '../../../declarations/classes/table-internal-sy
 import { TableHoverFeature } from '../../../declarations/classes/table-internal-system-features/table-hover-feature.class';
 import { TableResizeFeature } from '../../../declarations/classes/table-internal-system-features/table-resize-feature.class';
 import { TableScrollFeature } from '../../../declarations/classes/table-internal-system-features/table-scroll-feature.class';
-import { TableTreeFeature } from '../../../declarations/classes/table-internal-system-features/table-tree-feature.class';
 import { TableRow } from '../../../declarations/classes/table-row.class';
 import { TableRowType } from '../../../declarations/enums/table-row-type.enum';
 import { TableEvents } from '../../../declarations/events/table.events';
@@ -237,7 +236,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     TableDndFeature,
     TableScrollFeature,
     TableHoverFeature,
-    TableTreeFeature,
   ];
   private activeInternalFeatures: TableFeature[] = [];
   private activeExternalFeatures: TableFeature[] = [];

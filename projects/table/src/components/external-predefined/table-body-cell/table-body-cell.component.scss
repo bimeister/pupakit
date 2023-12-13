@@ -43,3 +43,33 @@
     padding: 6px 4rem 6px 3rem;
   }
 }
+
+.table-body-cell-tree {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__indent {
+    margin-left: calc(var(--tree-level)*1rem);
+  }
+
+  &__expander {
+    margin-right: 1rem;
+  }
+
+  &__marker {
+    width: 5rem;
+    height: 5rem;
+    flex: 0 0 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

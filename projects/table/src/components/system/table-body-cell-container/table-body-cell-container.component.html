@@ -1,49 +1,7 @@
-<ng-container *ngIf="isTreeRowRootCell$ | async; then treeCellTemplate else baseCellTemplate"></ng-container>
-
-<ng-template #treeCellTemplate>
-    <div class="table-body-tree-cell-container">
-        <span 
-          class="table-body-tree-cell-container__indent" 
-          [style.--tree-level]="treeLevel$ | async"
-        ></span>
-        <ng-container *ngIf="(hasExpander$ | async); then treeExpander else treeNodeMarker"></ng-container>
-        <ng-container [ngTemplateOutlet]="baseCellTemplate" [ngTemplateOutletContext]="this"></ng-container>
-    </div>
-</ng-template>
-
-<ng-template #baseCellTemplate>
-    <ng-container
-        *ngIf="!column.definition.rerenderOnRowOrColumnChanges"
-        [ngTemplateOutlet]="templateRef"
-        [ngTemplateOutletContext]="templateContext"
-    ></ng-container>
-    <ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container>
-</ng-template>
-
-<ng-template #treeExpander>
-  <pupa-button-icon
-    class="table-body-tree-cell-container__expander"
-    [icon]="treeCellMarker$ | async" 
-    kind="secondary"
-    size="s"
-  ></pupa-button-icon>
-</ng-template>
-
-<ng-template #treeNodeMarker>
-  <div class="table-body-tree-cell-container__marker">
-    <pupa-icon 
-      *ngIf="(treeCellMarker$ | async) as treeCellMarker"
-      [name]="treeCellMarker">
-    </pupa-icon>
-  </div>
-  
-</ng-template>
-        
-
-<!-- <ng-container
-  *ngIf="!column.definition.rerenderOnRowOrColumnChanges; else viewContainerRef"
+<ng-container
+  *ngIf="!column.definition.rerenderOnRowOrColumnChanges"
   [ngTemplateOutlet]="templateRef"
   [ngTemplateOutletContext]="templateContext"
 ></ng-container>
 
-<ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container> -->
+<ng-container *ngIf="column.definition.rerenderOnRowOrColumnChanges" #viewContainerRef></ng-container>

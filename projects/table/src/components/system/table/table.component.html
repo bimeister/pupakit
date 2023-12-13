@@ -224,7 +224,7 @@
 </ng-template>
 
 <ng-template #defaultBodyCellTemplate let-row let-column="column">
-  <pupa-table-body-cell *ngIf="!(row.data | isNullOrUndefined); else skeleton" [column]="column">
+  <pupa-table-body-cell *ngIf="!(row.data | isNullOrUndefined); else skeleton" [column]="column" [row]="row">
     {{ row.data[column.definition.modelKey] ?? '' }}
   </pupa-table-body-cell>
 </ng-template>

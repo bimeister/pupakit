@@ -8,6 +8,7 @@ import {
   TableFeatureEvents,
   TableSortingFeature,
   TableTreeDefinition,
+  TableTreeFeature,
 } from '@bimeister/pupakit.table';
 import { sortByProperty } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
@@ -148,6 +149,15 @@ const DATA: SomeData[] = [
   },
 ];
 
+const tableTreeDefinition: TableTreeDefinition = {
+  modelIdKey: 'id',
+  modelExpandableKey: 'expandable',
+  modelExpandedKey: 'expanded',
+  modelParentIdKey: 'parentId',
+  modelLevelKey: 'level',
+  treeNodeMarker: 'app-dot-single',
+};
+
 const COLUMNS: TableColumnDefinition[] = [
   {
     id: 'first-name',
@@ -155,6 +165,9 @@ const COLUMNS: TableColumnDefinition[] = [
     title: 'First Name',
     pin: TableColumnPin.Left,
     defaultSizes: { widthPx: 200 },
+    featureOptions: {
+      ...tableTreeDefinition,
+    },
   },
   {
     id: 'last-name',
@@ -187,15 +200,6 @@ const COLUMNS_MAP: Map<string, TableColumnDefinition> = new Map<string, TableCol
   COLUMNS.map((column: TableColumnDefinition) => [column.id, column])
 );
 
-const tableTreeDefinition: TableTreeDefinition = {
-  modelIdKey: 'id',
-  modelExpandableKey: 'expandable',
-  modelExpandedKey: 'expanded',
-  modelParentIdKey: 'parentId',
-  modelLevelKey: 'level',
-  treeNodeMarker: 'app-dot-single',
-};
-
 @Component({
   selector: 'demo-table-example-11',
   templateUrl: './example-11.component.html',
@@ -208,7 +212,7 @@ export class TableExample11Component implements OnDestroy {
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>({
     // Add predefinded sorting feature. Also you may write your own features
-    features: [TableSortingFeature],
+    features: [TableSortingFeature, TableTreeFeature],
   });
 
   private columnDefinitions: TableColumnDefinition[] = COLUMNS;
@@ -216,7 +220,6 @@ export class TableExample11Component implements OnDestroy {
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
     this.controller.setData(DATA);
-    this.controller.setTreeDefinition(tableTreeDefinition);
 
     this.subscription.add(this.processSortingChanges());
     this.subscription.add(this.processDndEnd());

@@ -1,9 +1,46 @@
+
+
 <div
   class="table-body-cell"
   [class.table-body-cell_clickable]="clickable"
   [class.table-body-cell_current-draggable]="isCurrentDraggable$ | async"
 >
+  <ng-container *ngIf="(isTreeRootCell$ | async); then treeTemplate else baseTemplate">
+  </ng-container>
+</div>
+
+<ng-template #baseTemplate>
   <div class="table-body-cell__content">
     <ng-content></ng-content>
   </div>
-</div>
+</ng-template>
+
+<ng-template #treeTemplate>
+  <div class="table-body-cell-tree__content">
+    <span 
+      class="table-body-cell-tree__indent" 
+      [style.--tree-level]="treeLevel$ | async"
+    ></span>
+    <ng-container *ngIf="(hasExpander$ | async); then treeExpanderTemplate else treeNodeMarkerTemplate"></ng-container>
+    <ng-container [ngTemplateOutlet]="baseTemplate" ></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #treeExpanderTemplate>
+  <pupa-button-icon
+    class="table-body-cell-tree__expander"
+    data-tree-expander=true
+    [icon]="treeCellMarker$ | async" 
+    kind="secondary"
+    size="s"
+  ></pupa-button-icon>
+</ng-template>
+
+<ng-template #treeNodeMarkerTemplate>
+  <div class="table-body-cell-tree__marker">
+    <pupa-icon 
+      *ngIf="(treeCellMarker$ | async) as treeCellMarker"
+      [name]="treeCellMarker">
+    </pupa-icon>
+  </div>
+</ng-template>

@@ -4,7 +4,6 @@ import { map } from 'rxjs/operators';
 import { TableBodyRowRef } from '../interfaces/table-body-row-ref.interface';
 import { TableTreeDefinition } from '../interfaces/table-tree-definition.interface';
 
-
 export interface TableBodyRowOptions<T> {
   id: string;
   index: number;
