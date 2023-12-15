@@ -18,6 +18,7 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  box-shadow: 0 1rem 1.5rem -0.5rem color(neutral-1000, alpha-3), 0 3rem 4rem -1rem color(neutral-1000, alpha-5);
 }
 
 .select-dropdown-wrapper {
