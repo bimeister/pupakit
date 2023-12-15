@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { TableColumnRef } from '../../../declarations/interfaces/table-column-ref.interface';
 import { TableTreeDefinition } from '../../../declarations/interfaces/table-tree-definition.interface';
@@ -15,22 +15,28 @@ import { TableBodyRowRef } from '../../../declarations/interfaces/table-body-row
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableBodyCellComponent implements OnChanges {
+export class TableBodyCellComponent implements OnChanges, OnDestroy {
   @Input() public clickable: boolean = false;
   @Input() public column: Nullable<TableColumnRef>;
   @Input() public row: Nullable<TableBodyRowRef<unknown>>;
 
   private readonly column$: ReplaySubject<TableColumnRef> = new ReplaySubject<TableColumnRef>(null);
   private readonly row$: ReplaySubject<TableBodyRowRef<unknown>> = new ReplaySubject<TableBodyRowRef<unknown>>(null);
+  private readonly subscription: Subscription = new Subscription();
 
   public hasExpander$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public isTreeRootCell$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   public treeLevel$: BehaviorSubject<number> = new BehaviorSubject(0);
   public treeCellMarker$: BehaviorSubject<Nullable<string>> = new BehaviorSubject(null);
+  public treeLoading$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public readonly isCurrentDraggable$: Observable<boolean> = this.column$.pipe(
     switchMap((column: TableColumnRef) => column.isCurrentDraggable$)
   );
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     if (isNil(changes)) return;
@@ -85,6 +91,7 @@ export class TableBodyCellComponent implements OnChanges {
       treeCellMarker = treeNodeMarker;
     }
     this.treeCellMarker$.next(treeCellMarker);
+    this.subscription.add(row.isLoading$.subscribe((isLoading: boolean) => this.treeLoading$.next(isLoading)));
   }
 
   private calculateTreePadding(treeDataLevel: number): number {

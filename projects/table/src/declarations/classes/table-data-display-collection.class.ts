@@ -23,6 +23,7 @@ const DEFAULT_MIN_BUFFER_PX: number = 100;
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  public readonly loadingIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
   public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject<TrackByFunction<T>>(
     TableDataDisplayCollection.trackBy
@@ -104,6 +105,10 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     map((selectedIdsList: string[]) => new Set<string>(selectedIdsList)),
     shareReplayWithRefCount()
   );
+  private readonly loadingIdsSet$: Observable<Set<string>> = this.loadingIdsList$.pipe(
+    map((loadingIdsList: string[]) => new Set<string>(loadingIdsList)),
+    shareReplayWithRefCount()
+  );
   public readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> = combineLatest([
     this.data$,
     this.virtualScrollDataSource.listRange$,
@@ -115,7 +120,13 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
       const dataSlice: T[] = data.slice(listRange.start, listRange.end);
       dataSlice.forEach((dataItem: T, index: number) => {
         const id: string = trackBy(index, dataItem);
-        const row: TableBodyRow<T> = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
+        const row: TableBodyRow<T> = new TableBodyRow<T>(
+          id,
+          index + listRange.start,
+          dataItem,
+          this.selectedIdsSet$,
+          this.loadingIdsSet$
+        );
         newColumnIdToColumnMap.set(id, row);
       });
 
@@ -136,6 +147,9 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
 
   public setSelectedIdsList(value: string[]): void {
     this.selectedIdsList$.next(value);
+  }
+  public setLoadingIdsList(value: string[]): void {
+    this.loadingIdsList$.next(value);
   }
 
   public setColumnDefinitions(definitions: TableColumnDefinition[]): void {

@@ -136,5 +136,11 @@ export namespace TableEvents {
       super();
     }
   }
+
+  export class SetLoading extends TableEventBase {
+    constructor(public readonly loadingRowTrackByIds: string[]) {
+      super();
+    }
+  }
   export class RefreshDataSlice extends TableEventBase {}
 }

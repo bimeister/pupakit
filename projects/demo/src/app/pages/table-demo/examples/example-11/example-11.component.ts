@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { PagedVirtualScrollArguments } from '@bimeister/pupakit.common';
 import {
   TableColumnDefinition,
   TableColumnPin,
@@ -6,12 +7,14 @@ import {
   TableController,
   TableEvents,
   TableFeatureEvents,
+  TablePagedDataProducer,
   TableSortingFeature,
   TableTreeDefinition,
   TableTreeFeature,
 } from '@bimeister/pupakit.table';
 import { sortByProperty } from '@bimeister/utilities';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
 
 interface SomeData {
   id: string;
@@ -148,6 +151,9 @@ const DATA: SomeData[] = [
     level: 1,
   },
 ];
+// DATA = Array.from({ length: 1000 })
+//   .map((_: undefined) => [...DATA])
+//   .flat();
 
 const tableTreeDefinition: TableTreeDefinition = {
   modelIdKey: 'id',
@@ -217,13 +223,23 @@ export class TableExample11Component implements OnDestroy {
 
   private columnDefinitions: TableColumnDefinition[] = COLUMNS;
 
+  private readonly pagedDataProducer: TablePagedDataProducer<SomeData> = new TablePagedDataProducer(this.controller, {
+    rowsBufferSize: 5,
+    bodyInitialCountOfSkeletonRows: 5,
+  });
+  private readonly pagedArguments$: Observable<PagedVirtualScrollArguments> = this.pagedDataProducer.arguments$;
+  private readonly loadingRowIds: Set<string> = new Set();
+
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
-    this.controller.setData(DATA);
+    // this.controller.setData(DATA);
 
     this.subscription.add(this.processSortingChanges());
     this.subscription.add(this.processDndEnd());
     this.subscription.add(this.processExpandChanges());
+    this.subscription.add(this.processRangeDataChanges());
+
+    this.subscription.add(this.pagedArguments$.subscribe(console.warn));
   }
 
   public ngOnDestroy(): void {
@@ -234,13 +250,15 @@ export class TableExample11Component implements OnDestroy {
     const data: SomeData[] = [...DATA];
     return this.controller
       .getEvents(TableFeatureEvents.ExpandRowChanged)
-      .subscribe(({ expandRowInfo: { expanded, rowDataId } }: TableFeatureEvents.ExpandRowChanged) => {
+      .subscribe(({ expandRowInfo: { expanded, rowDataId, rowId } }: TableFeatureEvents.ExpandRowChanged) => {
         const rowDataIndex: number = data.findIndex((item: SomeData) => item.id === rowDataId);
         const row: SomeData = data[rowDataIndex];
 
         row.expanded = expanded;
 
         if (Boolean(expanded)) {
+          this.loadingRowIds.add(rowId);
+          this.controller.setLoading(...this.loadingRowIds);
           let sliceStart: number;
           let sliceEnd: number;
           for (let index: number = 0; index < DATA.length; index++) {
@@ -255,7 +273,12 @@ export class TableExample11Component implements OnDestroy {
             }
           }
           const slice: SomeData[] = DATA.slice(sliceStart, sliceEnd ?? DATA.length);
-          data.splice(rowDataIndex + 1, 0, ...slice);
+          setTimeout(() => {
+            this.loadingRowIds.delete(rowId);
+            this.controller.setLoading(...this.loadingRowIds);
+            data.splice(rowDataIndex + 1, 0, ...slice);
+            this.controller.setData(data);
+          }, 3000);
         } else {
           const sliceStart: number = rowDataIndex + 1;
           let sliceEnd: number;
@@ -267,8 +290,8 @@ export class TableExample11Component implements OnDestroy {
             }
           }
           data.splice(sliceStart, (sliceEnd ?? DATA.length) - sliceStart);
+          this.controller.setData(data);
         }
-        this.controller.setData(data);
       });
   }
 
@@ -302,5 +325,30 @@ export class TableExample11Component implements OnDestroy {
       this.controller.setColumnDefinitions(columnDefinitions);
       this.columnDefinitions = columnDefinitions;
     });
+  }
+
+  private processRangeDataChanges(): Subscription {
+    return this.pagedArguments$
+      .pipe(
+        switchMap((pagedArguments: PagedVirtualScrollArguments) => {
+          const skip: number = pagedArguments.currentFrom;
+          const take: number = pagedArguments.currentTo - pagedArguments.currentFrom;
+
+          return TableExample11Component.getData(skip, take).pipe(
+            map(({ total, list }: { total: number; list: SomeData[] }) => {
+              const data: SomeData[] = Array.from({ length: total });
+              data.splice(skip, take, ...list);
+
+              return data;
+            })
+          );
+        })
+      )
+      .subscribe((data: SomeData[]) => this.controller.setData(data));
+  }
+
+  private static getData(skip: number, take: number): Observable<{ total: number; list: SomeData[] }> {
+    const dataSlice: SomeData[] = DATA.slice(skip, skip + take);
+    return of({ total: DATA.length, list: dataSlice }).pipe(delay(800));
   }
 }

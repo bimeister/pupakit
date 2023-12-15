@@ -5,7 +5,6 @@ import { withLatestFrom } from 'rxjs/operators';
 import { TableEvents } from '../../events/table.events';
 import { TableApi } from '../../interfaces/table-api.interface';
 import { TableFeature } from '../../interfaces/table-feature.interface';
-import { TableRowEvents } from '../../events/table-row.events';
 import { TableFeatureEvents } from '../../events/table-feature.events';
 import { isTreeExpander } from '../../../declarations/type-guards/is-tree-expander.type-guard';
 import { TableColumn } from '../table-column.class';
@@ -48,8 +47,6 @@ export class TableTreeFeature<T> implements TableFeature {
           const treeDefinition: TableTreeDefinition = hasTreeDefinition(featureOptions) && featureOptions;
           const { modelExpandedKey, modelIdKey } = treeDefinition;
           const nextExtendedState: boolean = !Boolean(row.data[modelExpandedKey]);
-
-          row.eventBus.dispatch(new TableRowEvents.ExpandChanged(nextExtendedState));
           this.eventBus.dispatch(
             new TableFeatureEvents.ExpandRowChanged({
               rowId: row.id,

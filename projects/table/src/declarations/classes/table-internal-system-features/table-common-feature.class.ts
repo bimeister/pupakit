@@ -20,6 +20,7 @@ export class TableCommonFeature<T> implements TableFeature {
     this.subscription.add(this.processOuterSetColumnDefinitionsEvent());
     this.subscription.add(this.processOuterRefreshDataSliceEvent());
     this.subscription.add(this.processOuterSetSelectedEvent());
+    this.subscription.add(this.processOuterSetLoadingEvent());
   }
 
   public dispose(): void {
@@ -81,5 +82,18 @@ export class TableCommonFeature<T> implements TableFeature {
         })
       )
       .subscribe((event: TableEvents.SetSelected) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
+  }
+
+  private processOuterSetLoadingEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.SetLoading),
+        map((event: TableEvents.SetLoading) => {
+          this.displayData.setLoadingIdsList(event.loadingRowTrackByIds);
+          return event;
+        })
+      )
+      .subscribe((event: TableEvents.SetLoading) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 }

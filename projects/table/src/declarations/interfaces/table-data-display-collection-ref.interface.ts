@@ -12,6 +12,7 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly scrollBehavior$: Observable<ScrollBehavior>;
   readonly data$: Observable<T[]>;
   readonly selectedIdsList$: Observable<string[]>;
+  readonly loadingIdsList$: Observable<string[]>;
   readonly headerRowHeightPx$: Observable<number>;
   readonly bodyRowHeightPx$: Observable<number>;
   readonly virtualScrollDataSource: TableBodyRowsDataSource<T>;
@@ -31,6 +32,7 @@ export interface TableDataDisplayCollectionRef<T> {
 
   setData(value: T[]): Observable<T[]>;
   setSelectedIdsList(value: string[]): void;
+  setLoadingIdsList(value: string[]): void;
   setColumnDefinitions(value: TableColumnDefinition[]): void;
   setTableWidthPx(value: number): void;
   setTableHeightPx(value: number): void;

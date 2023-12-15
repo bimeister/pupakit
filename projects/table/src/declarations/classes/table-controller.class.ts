@@ -86,6 +86,9 @@ export class TableController<T> {
   public setSelected(...selectedIdsFromTrackBy: string[]): void {
     this.dispatchInQueue(new TableEvents.SetSelected(selectedIdsFromTrackBy));
   }
+  public setLoading(...loadingIdsFromTrackBy: string[]): void {
+    this.dispatchInQueue(new TableEvents.SetLoading(loadingIdsFromTrackBy));
+  }
 
   public scrollByIndex(index: number): void {
     this.dispatchInQueue(new TableEvents.ScrollByIndex(index));
