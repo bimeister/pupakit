@@ -9,6 +9,7 @@ $layout_border-size: 1px;
   display: block;
   height: 100%;
   width: 100%;
+  box-shadow: 0 6rem 12rem -3rem color(neutral-1000, alpha-6);
 }
 
 :host-context(.drawer-container_full-screen) .drawer-layout {

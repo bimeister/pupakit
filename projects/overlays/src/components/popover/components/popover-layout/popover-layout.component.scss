@@ -13,6 +13,7 @@ $pointer-width: 14px;
   border-radius: $controlBorderRadius;
   background: semantic-color(surface-primary, alpha-700);
   color: semantic-color(text-primary);
+  box-shadow: 0 1.5rem 1.5rem -1rem color(neutral-1000, alpha-3), 0 5rem 6rem -1rem color(neutral-1000, alpha-5);
 
   @include blur();
 

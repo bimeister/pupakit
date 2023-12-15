@@ -12,7 +12,6 @@
   border: 1px solid semantic-color(kind-neutral-normal);
   background-color: semantic-color(surface-primary, alpha-700);
   color: semantic-color(text-primary);
-  box-shadow: variable(box-shadow_dropdown);
   box-sizing: border-box;
 
   filter: drop-shadow(0px 14px 24px color(neutral-1000, alpha-3));
@@ -20,5 +19,5 @@
   @include blur();
 
   overflow: hidden;
-  margin: var(--pupa-dropdown-top-bottom-margin, 2rem) 0;
+  margin: 2rem 0 0;
 }
