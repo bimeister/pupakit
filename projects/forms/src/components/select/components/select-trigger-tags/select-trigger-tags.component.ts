@@ -24,6 +24,7 @@ import { SelectStateService } from '../../services/select-state.service';
 
 const MAX_TAGS_RENDER_COUNT: number = 20;
 const RESIZE_DEBOUNCE_TIME_MS: number = 200;
+const TAGS_CONTAINER_GAP_PX: number = 4;
 
 @Component({
   selector: 'pupa-select-trigger-tags',
@@ -39,6 +40,8 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
   @Input() public tags: T[] = [];
   public readonly renderTags$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   private readonly tagsTotalCount$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);
+
+  public readonly tagsContainerGap: number = TAGS_CONTAINER_GAP_PX;
 
   @ContentChild(PupaSelectTriggerTagTemplateDirective)
   public readonly selectTriggerTagTemplate: PupaSelectTriggerTagTemplateDirective<T>;
@@ -116,9 +119,12 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
     const tagsWidthPxList: number[] = tags.map(({ clientWidth }: Element) => clientWidth);
 
     const totalWidthPxByTagPositionList: number[] = tagsWidthPxList.reduce(
-      (tagsWidthPxAccumulator: number[], tagWidthPx: number) => {
+      (tagsWidthPxAccumulator: number[], tagWidthPx: number, currentIndex: number) => {
         const previousTotalWidthPx: number = tagsWidthPxAccumulator[tagsWidthPxAccumulator.length - 1] ?? 0;
-        return [...tagsWidthPxAccumulator, previousTotalWidthPx + tagWidthPx];
+        const isLastTag: boolean = currentIndex === tags.length - 1;
+        const tagsContainerGap: number = isLastTag ? 0 : this.tagsContainerGap;
+
+        return [...tagsWidthPxAccumulator, previousTotalWidthPx + tagWidthPx + tagsContainerGap];
       },
       []
     );
