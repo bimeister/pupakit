@@ -16,7 +16,7 @@
 >
   <div class="trigger__text" [style.paddingRight.px]="rightPaddingPx$ | async">
     <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
-      <div class="tags-container" #tagsContainer>
+      <div class="tags-container" #tagsContainer [style.gap.px]="tagsContainerGap">
         <div class="tag" *ngFor="let tag of renderTags$ | async; let count = count" [class.is-one]="count === 1">
           <ng-container
             [ngTemplateOutlet]="getSelectTriggerTagTemplateRef()"
