@@ -12,7 +12,7 @@ import {
   TableTreeDefinition,
   TableTreeFeature,
 } from '@bimeister/pupakit.table';
-import { sortByProperty } from '@bimeister/utilities';
+import { getUuid, sortByProperty } from '@bimeister/utilities';
 import { Observable, Subscription, of } from 'rxjs';
 import { delay, map, switchMap } from 'rxjs/operators';
 
@@ -26,134 +26,60 @@ interface SomeData {
   expanded?: boolean;
   parentId?: string | null;
   level?: number;
+  childrenNumber: number;
 }
 
-const DATA: SomeData[] = [
-  {
-    id: '1',
-    firstName: 'Azamat 1',
-    lastName: 'Aitaliev 1',
+function createFlatTree(itemsNumber: number, maxLevel: number = 3, maxChildren: number = 3): SomeData[] {
+  const flatTree: SomeData[] = [];
+  for (let index: number = 0; flatTree.length < itemsNumber; index++) {
+    const treeBranchItems: SomeData[] = Array.from(
+      generateFlatTreeBranch(0, null, maxLevel, maxChildren, index, index)
+    );
+    treeBranchItems.length = Math.min(treeBranchItems.length, itemsNumber - flatTree.length);
+    flatTree.push(...treeBranchItems);
+  }
+  return flatTree;
+}
+
+function createFlatTreeNode(
+  parentId: string,
+  branch: number,
+  level: number,
+  sequence: number,
+  childrenNumber: number
+): SomeData {
+  return {
+    id: getUuid(),
+    firstName: `Azamat ${branch} - ${level} - ${sequence}`,
+    lastName: `Aitaliev ${branch} - ${level} - ${sequence}`,
     city: 'Moscow',
-    age: 100,
-    expandable: true,
-    expanded: true,
-    parentId: null,
-    level: 0,
-  },
-  {
-    id: '11',
-    firstName: 'Azamat 11',
-    lastName: 'Aitaliev 11',
-    city: 'Moscow',
-    age: 100,
-    expandable: true,
-    expanded: true,
-    parentId: '1',
-    level: 1,
-  },
-  {
-    id: '111',
-    firstName: 'Azamat 111',
-    lastName: 'Aitaliev 111',
-    city: 'Moscow',
-    age: 100,
-    expandable: true,
-    expanded: true,
-    parentId: '11',
-    level: 2,
-  },
-  {
-    id: '1111',
-    firstName: 'Azamat 1111',
-    lastName: 'Aitaliev 1111',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
+    age: parseInt(`${branch}${level}${sequence}`, 10),
+    expandable: childrenNumber > 0,
     expanded: false,
-    parentId: '111',
-    level: 3,
-  },
-  {
-    id: '1112',
-    firstName: 'Azamat 1112',
-    lastName: 'Aitaliev 1112',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
-    expanded: false,
-    parentId: '111',
-    level: 3,
-  },
-  {
-    id: '112',
-    firstName: 'Azamat 112',
-    lastName: 'Aitaliev 112',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
-    expanded: false,
-    parentId: '11',
-    level: 2,
-  },
-  {
-    id: '12',
-    firstName: 'Azamat 12',
-    lastName: 'Aitaliev 12',
-    city: 'Moscow',
-    age: 100,
-    expandable: true,
-    expanded: true,
-    parentId: '1',
-    level: 1,
-  },
-  {
-    id: '121',
-    firstName: 'Azamat 121',
-    lastName: 'Aitaliev 121',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
-    expanded: false,
-    parentId: '12',
-    level: 2,
-  },
-  {
-    id: '2',
-    firstName: 'Azamat 2',
-    lastName: 'Aitaliev 2',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
-    expanded: false,
-    parentId: null,
-    level: 0,
-  },
-  {
-    id: '3',
-    firstName: 'Azamat 3',
-    lastName: 'Aitaliev 3',
-    city: 'Moscow',
-    age: 100,
-    expandable: true,
-    expanded: true,
-    parentId: null,
-    level: 0,
-  },
-  {
-    id: '31',
-    firstName: 'Azamat 31',
-    lastName: 'Aitaliev 31',
-    city: 'Moscow',
-    age: 100,
-    expandable: false,
-    expanded: false,
-    parentId: '3',
-    level: 1,
-  },
-];
-// DATA = Array.from({ length: 1000 })
-//   .map((_: undefined) => [...DATA])
-//   .flat();
+    parentId,
+    level,
+    childrenNumber,
+  };
+}
+
+function* generateFlatTreeBranch(
+  level: number,
+  parentId: string,
+  maxLevel: number,
+  maxChildren: number,
+  branch: number,
+  sequence: number
+): Generator<SomeData> {
+  const childNodesNumber: number = Math.max(0, Math.floor(Math.random() * (maxChildren + 1)));
+  const node: SomeData = createFlatTreeNode(parentId, branch, level, sequence, childNodesNumber);
+  yield node;
+
+  for (let counter: number = 0; counter < childNodesNumber; counter++) {
+    yield* generateFlatTreeBranch(level + 1, node.id, maxLevel, maxChildren, branch, counter);
+  }
+}
+
+const DATA: SomeData[] = createFlatTree(50, 15, 1);
 
 const tableTreeDefinition: TableTreeDefinition = {
   modelIdKey: 'id',
@@ -161,6 +87,7 @@ const tableTreeDefinition: TableTreeDefinition = {
   modelExpandedKey: 'expanded',
   modelParentIdKey: 'parentId',
   modelLevelKey: 'level',
+  modelNestedRowNumberKey: 'childrenNumber',
   treeNodeMarker: 'app-dot-single',
 };
 
@@ -229,6 +156,7 @@ export class TableExample11Component implements OnDestroy {
   });
   private readonly pagedArguments$: Observable<PagedVirtualScrollArguments> = this.pagedDataProducer.arguments$;
   private readonly loadingRowIds: Set<string> = new Set();
+  private static readonly data: SomeData[] = DATA.filter((item: SomeData) => item.level === 0);
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);
@@ -247,12 +175,11 @@ export class TableExample11Component implements OnDestroy {
   }
 
   private processExpandChanges(): Subscription {
-    const data: SomeData[] = [...DATA];
     return this.controller
       .getEvents(TableFeatureEvents.ExpandRowChanged)
       .subscribe(({ expandRowInfo: { expanded, rowDataId, rowId } }: TableFeatureEvents.ExpandRowChanged) => {
-        const rowDataIndex: number = data.findIndex((item: SomeData) => item.id === rowDataId);
-        const row: SomeData = data[rowDataIndex];
+        const rowDataIndex: number = TableExample11Component.data.findIndex((item: SomeData) => item.id === rowDataId);
+        const row: SomeData = TableExample11Component.data[rowDataIndex];
 
         row.expanded = expanded;
 
@@ -276,21 +203,21 @@ export class TableExample11Component implements OnDestroy {
           setTimeout(() => {
             this.loadingRowIds.delete(rowId);
             this.controller.setLoading(...this.loadingRowIds);
-            data.splice(rowDataIndex + 1, 0, ...slice);
-            this.controller.setData(data);
+            TableExample11Component.data.splice(rowDataIndex + 1, 0, ...slice);
+            this.controller.setData(TableExample11Component.data);
           }, 3000);
         } else {
           const sliceStart: number = rowDataIndex + 1;
           let sliceEnd: number;
-          for (let index: number = sliceStart; index < data.length; index++) {
-            const item: SomeData = data[index];
+          for (let index: number = sliceStart; index < TableExample11Component.data.length; index++) {
+            const item: SomeData = TableExample11Component.data[index];
             if (item.parentId === row.parentId || item.level < row.level) {
               sliceEnd = index;
               break;
             }
           }
-          data.splice(sliceStart, (sliceEnd ?? DATA.length) - sliceStart);
-          this.controller.setData(data);
+          TableExample11Component.data.splice(sliceStart, (sliceEnd ?? DATA.length) - sliceStart);
+          this.controller.setData(TableExample11Component.data);
         }
       });
   }
@@ -348,7 +275,7 @@ export class TableExample11Component implements OnDestroy {
   }
 
   private static getData(skip: number, take: number): Observable<{ total: number; list: SomeData[] }> {
-    const dataSlice: SomeData[] = DATA.slice(skip, skip + take);
-    return of({ total: DATA.length, list: dataSlice }).pipe(delay(800));
+    const dataSlice: SomeData[] = TableExample11Component.data.slice(skip, skip + take);
+    return of({ total: TableExample11Component.data.length, list: dataSlice }).pipe(delay(800));
   }
 }

@@ -4,5 +4,6 @@ export interface TableTreeDefinition {
   modelExpandableKey: string;
   modelExpandedKey: string;
   modelLevelKey: string;
+  modelNestedRowNumberKey: string;
   treeNodeMarker?: string;
 }

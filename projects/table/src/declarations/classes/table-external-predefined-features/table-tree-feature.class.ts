@@ -45,13 +45,14 @@ export class TableTreeFeature<T> implements TableFeature {
           const row: TableBodyRow<T> = bodyRowIdToBodyRowMap.get(event.targetCell.rowId);
           const featureOptions: unknown = column.definition.featureOptions;
           const treeDefinition: TableTreeDefinition = hasTreeDefinition(featureOptions) && featureOptions;
-          const { modelExpandedKey, modelIdKey } = treeDefinition;
+          const { modelExpandedKey, modelIdKey, modelNestedRowNumberKey: modelChildrenNumberKey } = treeDefinition;
           const nextExtendedState: boolean = !Boolean(row.data[modelExpandedKey]);
           this.eventBus.dispatch(
             new TableFeatureEvents.ExpandRowChanged({
               rowId: row.id,
               rowDataId: row.data[modelIdKey],
               expanded: nextExtendedState,
+              nestedRowNumber: row.data[modelChildrenNumberKey],
             })
           );
       });
