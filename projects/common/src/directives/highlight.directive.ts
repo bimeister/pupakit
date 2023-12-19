@@ -1,4 +1,14 @@
-import { Directive, ElementRef, HostBinding, Inject, Input, OnChanges, OnInit, Renderer2 } from '@angular/core';
+import {
+  AfterViewInit,
+  Directive,
+  ElementRef,
+  HostBinding,
+  Inject,
+  Input,
+  OnChanges,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { HighlightKind } from '../types/highlight-kind.type';
 
@@ -9,15 +19,10 @@ const addPx = (value: number): string => {
   return `${value}px`;
 };
 
-const acceptNode = (node: Node): number =>
-  node.parentElement.parentElement.classList.contains('table-body-cell__content')
-    ? NodeFilter.FILTER_ACCEPT
-    : NodeFilter.FILTER_SKIP;
-
 @Directive({
   selector: '[pupaHighlight]',
 })
-export class HighlightDirective implements OnChanges, OnInit {
+export class HighlightDirective implements OnChanges, OnInit, AfterViewInit {
   @Input() public pupaHighlight: string = '';
   @Input() public pupaHighlightKind: HighlightKind = 'primary';
 
@@ -27,10 +32,7 @@ export class HighlightDirective implements OnChanges, OnInit {
   private readonly highlight: HTMLElement = this.setUpHighlight();
   private readonly treeWalker: TreeWalker = this.document.createTreeWalker(
     this.elementRef.nativeElement,
-    NodeFilter.SHOW_TEXT,
-    {
-      acceptNode,
-    }
+    NodeFilter.SHOW_TEXT
   );
 
   constructor(
@@ -43,14 +45,18 @@ export class HighlightDirective implements OnChanges, OnInit {
     return this.indexOf(this.elementRef.nativeElement.textContent) !== -1;
   }
 
-  public ngOnChanges(): void {
-    this.updateStyles();
-  }
-
   public ngOnInit(): void {
     this.elementRef.nativeElement.style.position = this.position;
     this.elementRef.nativeElement.style.zIndex = this.zIndex;
     this.highlight.classList.add(`highlight_${this.pupaHighlightKind}`);
+  }
+
+  public ngAfterViewInit(): void {
+    this.updateStyles();
+  }
+
+  public ngOnChanges(): void {
+    this.updateStyles();
   }
 
   private indexOf(source: string | null): number {
