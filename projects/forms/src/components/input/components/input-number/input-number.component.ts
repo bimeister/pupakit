@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
+import { isEmpty } from '@bimeister/utilities';
 import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../declarations/types/input-value.type';
 
@@ -12,8 +12,8 @@ import { ValueType } from '../../../../declarations/types/input-value.type';
 })
 export class InputNumberComponent extends InputBase<ValueType> {
   public setValue(value: ValueType): void {
-    const serializedValue: string = isNil(value) ? '' : String(value);
-    this.value$.next(serializedValue);
+    const sanitizedValue: string = isEmpty(value) ? '' : String(value);
+    this.value$.next(sanitizedValue);
   }
 
   public reset(): void {
