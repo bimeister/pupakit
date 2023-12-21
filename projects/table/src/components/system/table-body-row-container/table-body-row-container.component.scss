@@ -30,6 +30,7 @@
     position: absolute;
     right: -1px;
     top: 0;
+    z-index: 2;
   }
 
   @include host-selector('.table-body__scrollable-container') {
