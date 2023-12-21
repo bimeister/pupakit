@@ -65,8 +65,12 @@
 
       <div class="search-field__action-separator" *ngIf="isVisibleSeparator$ | async"></div>
 
-      <div class="search-field__additional-actions" *ngIf="!(isCollapsed$ | async)" (click)="$event.stopPropagation()">
-        <ng-container [ngTemplateOutlet]="searchFieldActionsRightDirective?.templateRef"></ng-container>
+      <div
+        class="search-field__additional-actions"
+        *ngIf="!(isCollapsed$ | async) && !(searchFieldActionsRightDirective | isNullOrUndefined)"
+        (click)="$event.stopPropagation()"
+      >
+        <ng-container [ngTemplateOutlet]="searchFieldActionsRightDirective.templateRef"></ng-container>
       </div>
     </div>
   </div>
