@@ -123,8 +123,10 @@ export class SelectTriggerTagsComponent<T> extends SelectTriggerBase<T> implemen
       []
     );
 
+    const tolerance: number = 0.5;
+
     const indexOfTagOnBoundContainer: number = totalWidthPxByTagPositionList.findIndex(
-      (width: number) => width > tagsContainerWidthPx
+      (width: number) => width + tolerance >= tagsContainerWidthPx
     );
 
     if (indexOfTagOnBoundContainer < 0) {
