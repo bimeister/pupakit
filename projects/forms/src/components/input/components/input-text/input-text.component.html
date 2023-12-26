@@ -13,6 +13,8 @@
       (blur)="emitBlurEvent($event)"
       [autocomplete]="autocomplete ? 'on' : 'off'"
       [value]="value$ | async"
+      [attr.minlength]="minLength"
+      [attr.maxlength]="maxLength"
     />
   </div>
 
