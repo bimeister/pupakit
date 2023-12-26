@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { ValueType } from '../../../../declarations/types/input-value.type';
@@ -11,6 +11,9 @@ import { ValueType } from '../../../../declarations/types/input-value.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InputTextComponent extends InputBase<ValueType> {
+  @Input() public minLength: number | null = null;
+  @Input() public maxLength: number | null = null;
+
   public setValue(value: ValueType): void {
     const serializedValue: string = isNil(value) ? '' : String(value);
     this.value$.next(serializedValue);
