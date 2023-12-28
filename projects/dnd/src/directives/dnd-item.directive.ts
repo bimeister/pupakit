@@ -8,13 +8,13 @@ import {
   OnDestroy,
   Renderer2,
 } from '@angular/core';
-import { isNil } from '@bimeister/utilities';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { DndItemRegistryService } from '../services/dnd-item-registry.service';
-import { DndCanBeMovedFunc } from '../declarations/types/dnd-can-be-moved-func.type';
-import { DndCanBeDroppableForFunc } from '../declarations/types/dnd-can-be-droppable-for-func.type';
+import { isNil } from '@bimeister/utilities';
 import { DND_ITEM_ID_ATTRIBUTE } from '../declarations/constants/dnd-item-id-attrIbute.const';
 import { DndItemConfig } from '../declarations/interfaces/dnd-item-config.interface';
+import { DndCanBeDroppableForFunc } from '../declarations/types/dnd-can-be-droppable-for-func.type';
+import { DndCanBeMovedFunc } from '../declarations/types/dnd-can-be-moved-func.type';
+import { DndItemRegistryService } from '../services/dnd-item-registry.service';
 import { DndStartTriggerDirective } from './dnd-start-trigger.directive';
 
 @Directive({
@@ -22,9 +22,11 @@ import { DndStartTriggerDirective } from './dnd-start-trigger.directive';
 })
 export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy {
   @Input() public dndItemData: T;
-  @Input() public dndItemId: string;
+  @Input() public dndItemIdGetter: (dndItemData: T) => string;
 
   @ContentChild(DndStartTriggerDirective) public dndStartTrigger: DndStartTriggerDirective | undefined;
+
+  public dndItemId: string;
 
   constructor(
     private readonly elementRef: ElementRef,
@@ -40,8 +42,6 @@ export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy 
   }
 
   public ngAfterViewInit(): void {
-    this.renderer.setAttribute(this.elementRef.nativeElement, DND_ITEM_ID_ATTRIBUTE, this.dndItemId);
-
     const dndItemConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
     if (!isNil(dndItemConfig)) {
       dndItemConfig.dndItem.elementParts = [...dndItemConfig.dndItem.elementParts, this.elementRef.nativeElement];
@@ -61,30 +61,24 @@ export class DndItemDirective<T> implements OnChanges, AfterViewInit, OnDestroy 
   }
 
   private processDndItemIdAndDataChanges(changes: ComponentChanges<this>): void {
-    const dndItemIdChange: ComponentChange<this, string> | undefined = changes.dndItemId;
     const dndItemDataChange: ComponentChange<this, T> | undefined = changes.dndItemData;
-    if (isNil(dndItemIdChange)) {
+    if (isNil(dndItemDataChange)) {
       return;
     }
 
-    this.renderer.setAttribute(this.elementRef.nativeElement, DND_ITEM_ID_ATTRIBUTE, dndItemIdChange.currentValue);
+    this.dndItemId = this.dndItemIdGetter(dndItemDataChange.currentValue);
 
-    if (isNil(dndItemDataChange) || isNil(dndItemIdChange.previousValue)) {
-      return;
-    }
+    this.renderer.setAttribute(this.elementRef.nativeElement, DND_ITEM_ID_ATTRIBUTE, this.dndItemId);
 
-    const prevDndItemIdConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(
-      dndItemIdChange.previousValue
-    );
+    const prevDndItemIdConfig: DndItemConfig | undefined = this.dndItemRegistryService.getDndItemConfig(this.dndItemId);
     if (isNil(prevDndItemIdConfig)) {
       return;
     }
 
-    this.dndItemRegistryService.unRegisterDndItem(dndItemIdChange.previousValue);
-    this.dndItemRegistryService.registerDndItem(dndItemIdChange.currentValue, {
+    this.dndItemRegistryService.registerDndItem(this.dndItemId, {
       ...prevDndItemIdConfig,
       dndItem: {
-        id: dndItemIdChange.currentValue,
+        id: this.dndItemId,
         data: dndItemDataChange.currentValue,
         elementParts: prevDndItemIdConfig.dndItem.elementParts,
       },

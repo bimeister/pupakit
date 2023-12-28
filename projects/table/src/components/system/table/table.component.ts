@@ -17,6 +17,15 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { EventBus } from '@bimeister/event-bus/rxjs';
+import {
+  BusEventBase,
+  ClientUiStateHandlerService,
+  ComponentChange,
+  ComponentChanges,
+  QueueEvents,
+} from '@bimeister/pupakit.common';
+import { DndDropData, DndMoveData, DndSettings } from '@bimeister/pupakit.dnd';
+import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { filterByInstanceOf, filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
@@ -40,21 +49,12 @@ import { TableDataDisplayCollectionRef } from '../../../declarations/interfaces/
 import { TableEventTargetCellData } from '../../../declarations/interfaces/table-event-target-cell-data.interface';
 import { TableFeature } from '../../../declarations/interfaces/table-feature.interface';
 import { TableHeaderCellContext } from '../../../declarations/interfaces/table-header-cell-context.interface';
-import { TableFeatureConstructor } from '../../../declarations/types/table-feature-constructor.type';
 import { isTableCellHtmlElement } from '../../../declarations/type-guards/is-table-cell-html-element.type-guard';
+import { TableFeatureConstructor } from '../../../declarations/types/table-feature-constructor.type';
+import { TableAdaptiveColumnsService } from '../../../services/table-adaptive-columns.service';
 import { TableColumnsIntersectionService } from '../../../services/table-columns-intersection.service';
 import { TableScrollbarsService } from '../../../services/table-scrollbars.service';
 import { TableTemplatesService } from '../../../services/table-templates.service';
-import {
-  BusEventBase,
-  ClientUiStateHandlerService,
-  ComponentChange,
-  ComponentChanges,
-  QueueEvents,
-} from '@bimeister/pupakit.common';
-import { ScrollableComponent } from '@bimeister/pupakit.kit';
-import { DndDropData, DndMoveData, DndSettings } from '@bimeister/pupakit.dnd';
-import { TableAdaptiveColumnsService } from '../../../services/table-adaptive-columns.service';
 
 const SCROLL_SPEED_PX: number = 5;
 
@@ -373,6 +373,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerElementRef?.nativeElement;
     this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
     this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
+  }
+
+  public getDndItemIdGetter(rowId: string): () => string {
+    return () => rowId;
   }
 
   private initHammerEvents(): void {

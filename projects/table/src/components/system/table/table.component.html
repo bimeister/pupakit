@@ -128,7 +128,7 @@
                 [columns]="pinnedLeftColumns$ | async"
                 pupaDndItem
                 [dndItemData]="row.data"
-                [dndItemId]="row.id"
+                [dndItemIdGetter]="getDndItemIdGetter(row.id)"
                 [canBeMoved]="dndRowsSettings?.dndItemCanBeMoved"
                 [canBeDroppableFor]="dndRowsSettings?.dndItemCanBeDroppableFor"
               ></pupa-table-body-row-container>
@@ -150,7 +150,8 @@
                 [row]="row"
                 [columns]="scrollableColumns$ | async"
                 pupaDndItem
-                [dndItemId]="row.id"
+                [dndItemData]="row.data"
+                [dndItemIdGetter]="getDndItemIdGetter(row.id)"
               ></pupa-table-body-row-container>
             </pupa-scrollable>
 
@@ -164,7 +165,8 @@
                 [row]="row"
                 [columns]="pinnedRightColumns$ | async"
                 pupaDndItem
-                [dndItemId]="row.id"
+                [dndItemData]="row.data"
+                [dndItemIdGetter]="getDndItemIdGetter(row.id)"
               ></pupa-table-body-row-container>
             </div>
           </div>

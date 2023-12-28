@@ -14,7 +14,7 @@
     *ngFor="let data of dndHostData"
     pupaDndItem
     [dndItemData]="data"
-    [dndItemId]="data.itemNumber.toString()"
+    [dndItemIdGetter]="dndItemIdGetter"
     [canBeDroppableFor]="canBeDroppableForFunc"
   >
     <pupa-icon pupaDndStartTrigger class="drag-icon" name="app-drag-vertical"></pupa-icon>
