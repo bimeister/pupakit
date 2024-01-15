@@ -1,40 +1,48 @@
 <div class="input-wrapper" [ngClass]="resultClassList$ | async">
-  <pupa-icon *ngIf="leftIcon$ | async as leftIcon" class="input-icon input-icon_custom" [name]="leftIcon"></pupa-icon>
+  <div class="input-control">
+    <ng-container [ngTemplateOutlet]="inputActionsLeftDirective?.templateRef"></ng-container>
 
-  <input
-    class="input"
-    type="text"
-    #inputElement
-    [placeholder]="placeholder"
-    [attr.disabled]="(isDisabled$ | async) ? true : null"
-    (input)="updateValue(inputElement.value)"
-    (focus)="emitFocusEvent($event)"
-    (blur)="emitBlurEvent($event)"
-    [autocomplete]="autocomplete ? 'on' : 'off'"
-    [value]="value$ | async"
-  />
+    <input
+      class="input"
+      type="text"
+      #inputElement
+      [placeholder]="placeholder"
+      [attr.disabled]="(isDisabled$ | async) ? true : null"
+      (input)="updateValue(inputElement.value)"
+      (focus)="emitFocusEvent($event)"
+      (blur)="emitBlurEvent($event)"
+      [autocomplete]="autocomplete ? 'on' : 'off'"
+      [value]="value$ | async"
+      [attr.minlength]="minLength"
+      [attr.maxlength]="maxLength"
+    />
+  </div>
 
-  <pupa-icon
-    *ngIf="rightIcon$ | async as rightIcon"
-    class="input-icon input-icon_custom"
-    [name]="rightIcon"
-  ></pupa-icon>
+  <div *ngIf="isVisibleDefaultActions$ | async" class="input-default-actions">
+    <pupa-button-icon
+      *ngIf="isVisibleReset$ | async"
+      icon="app-close-square"
+      kind="secondary"
+      size="m"
+      (click)="reset()"
+    >
+    </pupa-button-icon>
 
-  <pupa-icon
-    *ngIf="isVisibleReset$ | async"
-    class="input-icon input-icon_reset"
-    name="app-close-square"
-    (click)="reset()"
-  ></pupa-icon>
+    <pupa-icon-holder
+      *ngIf="isInvalid$ | async"
+      size="small"
+      [withBackground]="false"
+      [pupaTooltip]="invalidTooltip"
+      [tooltipHideOnHover]="invalidTooltipHideOnHover"
+      [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
+      [tooltipContentTemplate]="invalidTooltipContentTemplate"
+      (click)="inputElement.focus()"
+    >
+      <pupa-icon class="input-icon_invalid" name="app-error-filled"></pupa-icon>
+    </pupa-icon-holder>
+  </div>
 
-  <pupa-icon
-    *ngIf="isInvalid$ | async"
-    class="input-icon input-icon_invalid"
-    name="app-error-filled"
-    [pupaTooltip]="invalidTooltip"
-    [tooltipHideOnHover]="invalidTooltipHideOnHover"
-    [tooltipDisabled]="!invalidTooltip && !invalidTooltipContentTemplate ? true : invalidTooltipDisabled"
-    [tooltipContentTemplate]="invalidTooltipContentTemplate"
-    (click)="inputElement.focus()"
-  ></pupa-icon>
+  <div class="input-actions-separator" *ngIf="isVisibleSeparator$ | async"></div>
+
+  <ng-container [ngTemplateOutlet]="inputActionsRightDirective?.templateRef"></ng-container>
 </div>

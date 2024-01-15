@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { DndCanBeDroppableForFunc, DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.dnd';
+import { BehaviorSubject } from 'rxjs';
 import {
   canBeDroppableFor,
   DndData,
@@ -6,8 +8,6 @@ import {
   moveDndItemsToTarget,
   removeSourceDndItems,
 } from '../../dnd-demo.component';
-import { BehaviorSubject } from 'rxjs';
-import { DndCanBeDroppableForFunc, DndDropData, DndItem, DndMoveData } from '@bimeister/pupakit.dnd';
 
 @Component({
   selector: 'demo-example-2',
@@ -108,5 +108,9 @@ export class Example2Component {
     }
 
     moveDndItemsToTarget(this.dndHost2Data, dndDropData);
+  }
+
+  public dndItemIdGetter(dndItem: DndData): string {
+    return dndItem.itemNumber.toString();
   }
 }

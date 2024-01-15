@@ -16,7 +16,6 @@
   @include flex-container(row, flex-start, flex-start, wrap);
   flex: 1;
   align-self: flex-start;
-  gap: 1rem;
   width: 100%;
   overflow: hidden;
 }

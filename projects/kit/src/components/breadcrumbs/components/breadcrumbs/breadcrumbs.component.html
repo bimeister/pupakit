@@ -7,7 +7,7 @@
 
 <ng-template #mainTemplate let-breadcrumbTemplate="breadcrumbTemplate">
   <div class="breadcrumbs breadcrumbs_hidden" [tabindex]="-1" #breadcrumbs>
-    <ng-container *ngFor="let breadcrumb of breadcrumbs$ | async; let isActive = last">
+    <ng-container *ngFor="let breadcrumb of breadcrumbs$ | async; trackBy: trackByFunc; let isActive = last">
       <div class="breadcrumbs__breadcrumb-wrapper" #breadcrumb>
         <pupa-breadcrumb
           [template]="breadcrumbTemplate"

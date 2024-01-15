@@ -17,7 +17,7 @@
       *ngFor="let data of dndHost1Data"
       pupaDndItem
       [dndItemData]="data"
-      [dndItemId]="data.itemNumber.toString()"
+      [dndItemIdGetter]="dndItemIdGetter"
       [canBeDroppableFor]="canBeDroppableForFunc"
     >
       {{ data.payload }}
@@ -42,7 +42,7 @@
       *ngFor="let data of dndHost2Data"
       pupaDndItem
       [dndItemData]="data"
-      [dndItemId]="data.itemNumber.toString()"
+      [dndItemIdGetter]="dndItemIdGetter"
       [canBeDroppableFor]="canBeDroppableForFunc"
     >
       {{ data.payload }}

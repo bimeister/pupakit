@@ -32,7 +32,7 @@ import { BreadcrumbContext } from '../../../../declarations/interfaces/breadcrum
 import { Breadcrumb } from '../../../../declarations/interfaces/breadcrumb.interface';
 import { BreadcrumbsParts } from '../../../../declarations/interfaces/breadcrumbs-parts.interface';
 import { PupaBreadcrumbTemplateDirective } from '../../directives/breadcrumb-template.directive';
-import { ComponentChanges, ComponentChange, Uuid, ClientUiStateHandlerService } from '@bimeister/pupakit.common';
+import { ClientUiStateHandlerService, ComponentChange, ComponentChanges, Uuid } from '@bimeister/pupakit.common';
 import { DropdownMenuContextService } from '../../../dropdown-menu/services/dropdown-menu-context.service';
 
 @Component({
@@ -117,6 +117,10 @@ export class BreadcrumbsComponent implements OnChanges, OnDestroy, AfterViewInit
       return;
     }
     this.clickedBreadcrumbId.emit(clickedId);
+  }
+
+  public trackByFunc(_: number, item: Breadcrumb): Uuid {
+    return item.id;
   }
 
   private processBreadcrumbChange(change: ComponentChange<this, Breadcrumb[]>): void {

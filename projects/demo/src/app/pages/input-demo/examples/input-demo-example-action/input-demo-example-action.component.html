@@ -1,0 +1,37 @@
+<div class="controls-list">
+  <div class="controls-list__block">
+    <pupa-input-text [withReset]="true" [formControl]="formControls[0]" placeholder="Enter value">
+      <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsLeft>
+        <pupa-icon name="app-string"></pupa-icon>
+      </pupa-icon-holder>
+
+      <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsRight>
+        <pupa-icon name="app-info"></pupa-icon>
+      </pupa-icon-holder>
+    </pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text [withReset]="true" [formControl]="formControls[1]" placeholder="Enter value">
+      <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsLeft>
+        <pupa-icon name="app-number"></pupa-icon>
+      </pupa-icon-holder>
+    </pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text [withReset]="true" [formControl]="formControls[2]" placeholder="Enter value">
+      <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsRight>
+        <pupa-icon name="app-apps"></pupa-icon>
+      </pupa-icon-holder>
+    </pupa-input-text>
+  </div>
+
+  <div class="controls-list__block">
+    <pupa-input-text [withReset]="true" [formControl]="formControls[3]" placeholder="Enter value">
+      <pupa-button-icon size="m" kind="secondary" icon="app-access" *pupaInputActionsLeft></pupa-button-icon>
+
+      <pupa-button-icon size="m" kind="secondary" icon="app-settings-filter" *pupaInputActionsRight></pupa-button-icon>
+    </pupa-input-text>
+  </div>
+</div>
