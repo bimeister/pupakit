@@ -5,6 +5,9 @@
   @each $name, $value in $colorsMap {
     --color_#{$name}: #{red($value), green($value), blue($value)};
   }
+  @each $name, $value in $visualizationColorsMap {
+    --color_#{$name}: #{red($value), green($value), blue($value)};
+  }
 }
 
 :root {

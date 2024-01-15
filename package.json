@@ -50,8 +50,11 @@
     "styling:alpha-color-maps": "moon run common:style-alpha-colors-map",
     "styling:color-maps": "moon run common:style-colors-map",
     "styling:convert-scss-to-css": "moon run common:convert-scss-to-css",
+    "styling:visualization-color-maps": "moon run common:style-visualization-colors-map",
     "styling:semantic-color-maps": "moon run common:style-semantic-colors-map",
     "styling:variables": "moon run common:style-variables",
+    "constantize:all": "moon run common:const-all",
+    "constantize:visualization-colors": "moon run common:const-visualization-colors",
     "test:ci": "moon run :test-ci",
     "test:debug": "moon run :test-debug"
   },

@@ -5,6 +5,8 @@ import {
   ColorsAlphaValuesConfig,
   ColorsAlphaValuesService,
   ColorsService,
+  VisualizationColorsService,
+  VisualizationConfigurationGroup,
   SemanticColor,
   SemanticColorsService,
   SemanticConfigurationGroup,
@@ -41,6 +43,11 @@ export class ColorsDemoComponent {
       path: '.',
       queryParams: { tab: 'semantic-colors' },
     },
+    {
+      title: 'Index & visualization Colors',
+      path: '.',
+      queryParams: { tab: 'index-and-visualization-colors' },
+    },
   ];
 
   public readonly example1Content: Record<string, string> = {
@@ -51,6 +58,17 @@ export class ColorsDemoComponent {
   public readonly example2Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-2/example-2.component.html`,
     CSS: `${BASE_REQUEST_PATH}/example-2/example-2.component.css`,
+  };
+
+  public readonly visualizationColorsUsageExample1Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/visualization-color-usage-example-1/visualization-color-usage-example-1.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/visualization-color-usage-example-1/visualization-color-usage-example-1.component.scss`,
+  };
+
+  public readonly visualizationColorsUsageExample2Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/visualization-color-usage-example-2/visualization-color-usage-example-2.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/visualization-color-usage-example-2/visualization-color-usage-example-2.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/visualization-color-usage-example-2/visualization-color-usage-example-2.component.ts`,
   };
 
   public readonly semanticColorsUsageExampleContent: Record<string, string> = {
@@ -65,6 +83,10 @@ export class ColorsDemoComponent {
 
   public readonly colorGroups: ColorGroup[] = this.colorsService.colorGroups;
   public readonly alphaValues: ColorsAlphaValuesConfig.AlphaValue[] = this.colorsAlphaValuesService.config;
+  public readonly indexConfigurationGroups: VisualizationConfigurationGroup[] =
+    this.visualizationColorsService.indexGroups;
+  public readonly visualizationConfigurationGroups: VisualizationConfigurationGroup[] =
+    this.visualizationColorsService.visualizationGroups;
   public readonly semanticConfigurationGroups: SemanticConfigurationGroup[] = this.semanticColorsService.groups;
 
   public readonly theme$: Observable<Theme> = this.themeService.theme$;
@@ -74,6 +96,7 @@ export class ColorsDemoComponent {
     public readonly toastsService: ToastsService,
     private readonly colorsService: ColorsService,
     private readonly colorsAlphaValuesService: ColorsAlphaValuesService,
+    private readonly visualizationColorsService: VisualizationColorsService,
     private readonly semanticColorsService: SemanticColorsService,
     private readonly themeService: ThemeService
   ) {}
