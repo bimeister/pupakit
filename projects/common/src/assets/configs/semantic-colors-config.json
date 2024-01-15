@@ -659,5 +659,32 @@
         }
       }
     ]
+  },
+  {
+    "name": "Highlighter",
+    "configurations": [
+      {
+        "name": "Entity",
+        "lightColor": {
+          "color": "primary-40",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "neutral-400",
+          "alpha": "alpha-1000"
+        }
+      },
+      {
+        "name": "Search",
+        "lightColor": {
+          "color": "index-yellow-500",
+          "alpha": "alpha-1000"
+        },
+        "darkColor": {
+          "color": "dark-index-yellow-800",
+          "alpha": "alpha-1000"
+        }
+      }
+    ]
   }
 ]

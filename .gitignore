@@ -12,9 +12,12 @@ Folder.DotSettings.user
 
 /projects/common/**/colors.map.scss
 /projects/common/**/alpha-colors.map.scss
+/projects/common/**/visualization-colors.map.scss
 /projects/common/**/semantic-colors.map.scss
 /projects/common/**/adaptive.variables.scss
 
+/projects/common/**/visualization-colors.const.ts
+/projects/common/**/visualization-colors.interface.ts
 
 # moon
 !/.moon/

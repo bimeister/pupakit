@@ -1,0 +1,302 @@
+[
+  {
+    "name": "Green",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "D9F3DB",
+        "darkColor": "E4F6E6"
+      },
+      {
+        "name": "100",
+        "lightColor": "B3E6B7",
+        "darkColor": "CAEECD"
+      },
+      {
+        "name": "200",
+        "lightColor": "80D587",
+        "darkColor": "A6E2AB"
+      },
+      {
+        "name": "300",
+        "lightColor": "4EC557",
+        "darkColor": "83D689"
+      },
+      {
+        "name": "400",
+        "lightColor": "30BB3A",
+        "darkColor": "6ECF75"
+      },
+      {
+        "name": "500",
+        "lightColor": "02AC0F",
+        "darkColor": "4EC557"
+      },
+      {
+        "name": "600",
+        "lightColor": "079212",
+        "darkColor": "45A74D"
+      },
+      {
+        "name": "700",
+        "lightColor": "0A8115",
+        "darkColor": "3F9347"
+      },
+      {
+        "name": "800",
+        "lightColor": "0F6519",
+        "darkColor": "35713D"
+      },
+      {
+        "name": "900",
+        "lightColor": "14481C",
+        "darkColor": "2B4F32"
+      },
+      {
+        "name": "950",
+        "lightColor": "18321F",
+        "darkColor": "23362A"
+      }
+    ]
+  },
+  {
+    "name": "Yellow",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FFF7D9",
+        "darkColor": "FFF9E0"
+      },
+      {
+        "name": "100",
+        "lightColor": "FFF0B2",
+        "darkColor": "FFF2C0"
+      },
+      {
+        "name": "200",
+        "lightColor": "FFE580",
+        "darkColor": "FFEA96"
+      },
+      {
+        "name": "300",
+        "lightColor": "FFDB4D",
+        "darkColor": "FFE26D"
+      },
+      {
+        "name": "400",
+        "lightColor": "FFD52E",
+        "darkColor": "FFDD54"
+      },
+      {
+        "name": "500",
+        "lightColor": "FFCC00",
+        "darkColor": "FFD52E"
+      },
+      {
+        "name": "600",
+        "lightColor": "D6AC06",
+        "darkColor": "D6B42C"
+      },
+      {
+        "name": "700",
+        "lightColor": "BB970A",
+        "darkColor": "BB9E2A"
+      },
+      {
+        "name": "800",
+        "lightColor": "8D7511",
+        "darkColor": "8D7928"
+      },
+      {
+        "name": "900",
+        "lightColor": "605218",
+        "darkColor": "605426"
+      },
+      {
+        "name": "950",
+        "lightColor": "3E371D",
+        "darkColor": "3E3924"
+      }
+    ]
+  },
+  {
+    "name": "Orange",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FFEED9",
+        "darkColor": "FFF4E5"
+      },
+      {
+        "name": "100",
+        "lightColor": "FFDEB2",
+        "darkColor": "FFE8CB"
+      },
+      {
+        "name": "200",
+        "lightColor": "FFC780",
+        "darkColor": "FFD9A8"
+      },
+      {
+        "name": "300",
+        "lightColor": "FEB14D",
+        "darkColor": "FECA85"
+      },
+      {
+        "name": "400",
+        "lightColor": "FEA42E",
+        "darkColor": "FEC170"
+      },
+      {
+        "name": "500",
+        "lightColor": "FE9000",
+        "darkColor": "FEB351"
+      },
+      {
+        "name": "600",
+        "lightColor": "D57B06",
+        "darkColor": "D59849"
+      },
+      {
+        "name": "700",
+        "lightColor": "BA6E0A",
+        "darkColor": "BA8643"
+      },
+      {
+        "name": "800",
+        "lightColor": "8D5711",
+        "darkColor": "8D683A"
+      },
+      {
+        "name": "900",
+        "lightColor": "604018",
+        "darkColor": "604A30"
+      },
+      {
+        "name": "950",
+        "lightColor": "3E2E1D",
+        "darkColor": "3E3329"
+      }
+    ]
+  },
+  {
+    "name": "Red",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FCD9D9",
+        "darkColor": "FDE4E4"
+      },
+      {
+        "name": "100",
+        "lightColor": "FAB2B2",
+        "darkColor": "FCC9C9"
+      },
+      {
+        "name": "200",
+        "lightColor": "F68080",
+        "darkColor": "F9A4A4"
+      },
+      {
+        "name": "300",
+        "lightColor": "F24D4D",
+        "darkColor": "F78080"
+      },
+      {
+        "name": "400",
+        "lightColor": "F02E2E",
+        "darkColor": "F66B6B"
+      },
+      {
+        "name": "500",
+        "lightColor": "ED0000",
+        "darkColor": "F44A4A"
+      },
+      {
+        "name": "600",
+        "lightColor": "C70506",
+        "darkColor": "CD4243"
+      },
+      {
+        "name": "700",
+        "lightColor": "AE090A",
+        "darkColor": "B33D3E"
+      },
+      {
+        "name": "800",
+        "lightColor": "840F11",
+        "darkColor": "883436"
+      },
+      {
+        "name": "900",
+        "lightColor": "5B1418",
+        "darkColor": "5D2B2E"
+      },
+      {
+        "name": "950",
+        "lightColor": "3B191D",
+        "darkColor": "3C2428"
+      }
+    ]
+  },
+  {
+    "name": "Blue",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "DDE7FF",
+        "darkColor": "E7EEFF"
+      },
+      {
+        "name": "100",
+        "lightColor": "BBCFFF",
+        "darkColor": "D0DDFF"
+      },
+      {
+        "name": "200",
+        "lightColor": "8EAEFF",
+        "darkColor": "B0C7FF"
+      },
+      {
+        "name": "300",
+        "lightColor": "618EFF",
+        "darkColor": "90B1FF"
+      },
+      {
+        "name": "400",
+        "lightColor": "467BFF",
+        "darkColor": "7DA3FF"
+      },
+      {
+        "name": "500",
+        "lightColor": "1D5EFF",
+        "darkColor": "618FFF"
+      },
+      {
+        "name": "600",
+        "lightColor": "1D52D7",
+        "darkColor": "557AD7"
+      },
+      {
+        "name": "700",
+        "lightColor": "1D4BBD",
+        "darkColor": "4C6DBD"
+      },
+      {
+        "name": "800",
+        "lightColor": "1D3E90",
+        "darkColor": "3F5690"
+      },
+      {
+        "name": "900",
+        "lightColor": "1C3164",
+        "darkColor": "313F64"
+      },
+      {
+        "name": "950",
+        "lightColor": "1C2743",
+        "darkColor": "262E43"
+      }
+    ]
+  }
+]

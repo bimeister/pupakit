@@ -24,6 +24,10 @@
           *ngIf="route.title === 'Semantic Colors'"
           [ngTemplateOutlet]="semanticColorsTemplate"
         ></ng-container>
+        <ng-container
+          *ngIf="route.title === 'Index & visualization Colors'"
+          [ngTemplateOutlet]="visualizationPaletteTemplate"
+        ></ng-container>
       </ng-container>
     </ng-container>
   </pupa-tabs-content>
@@ -116,7 +120,7 @@
   <div class="description">
     <p>
       Semantic colors are colors that are automatically overridden based on the active theme. These colors refer to the
-      main palette. To see automatic color changes, change the interface theme.
+      main and index & visualization palette. To see automatic color changes, change the interface theme.
     </p>
 
     <pupa-callout> Click on the color card to copy the value. </pupa-callout>
@@ -170,4 +174,99 @@
   <pupa-code-container [content]="semanticColorsUsageExampleContent">
     <demo-semantic-color-usage-example *pupaCodeContainerPreviewTemplate></demo-semantic-color-usage-example>
   </pupa-code-container>
+</ng-template>
+
+<ng-template #visualizationPaletteTemplate>
+  <div class="description">
+    <p>
+      This is the index & visualization color palette. These values complement the main color palette. If you redefine
+      this palette, then all other adjacent colors will be redefined.
+    </p>
+    <pupa-callout> Click on the color info line to copy the value. </pupa-callout>
+  </div>
+
+  <h2 demoAnchor anchorName="Index colors">Index colors</h2>
+
+  <ng-container
+    [ngTemplateOutlet]="visualizationTemplate"
+    [ngTemplateOutletContext]="{ $implicit: indexConfigurationGroups }"
+  ></ng-container>
+
+  <h2 demoAnchor anchorName="Visualization colors">Visualization colors</h2>
+
+  <ng-container
+    [ngTemplateOutlet]="visualizationTemplate"
+    [ngTemplateOutletContext]="{ $implicit: visualizationConfigurationGroups }"
+  ></ng-container>
+
+  <p>
+    To use index & visualization colors, you need to use the function
+    <pupa-code-inline>color($visualizationColor)</pupa-code-inline>.
+  </p>
+
+  <pupa-code-container [content]="visualizationColorsUsageExample1Content">
+    <demo-visualization-color-usage-example-1
+      *pupaCodeContainerPreviewTemplate
+    ></demo-visualization-color-usage-example-1>
+  </pupa-code-container>
+
+  <p>Also you can use a <pupa-code-inline>VISUALIZATION_COLORS</pupa-code-inline> constant directly.</p>
+
+  <pupa-code-container [content]="visualizationColorsUsageExample2Content">
+    <demo-visualization-color-usage-example-2
+      *pupaCodeContainerPreviewTemplate
+    ></demo-visualization-color-usage-example-2>
+  </pupa-code-container>
+</ng-template>
+
+<ng-template #visualizationTemplate let-visualizationGroups>
+  <div class="visualization-colors-demo__group" *ngFor="let group of visualizationGroups">
+    <h4 demoAnchor [anchorName]="group.name">{{ group.name }}</h4>
+    <ng-container
+      [ngTemplateOutlet]="visualizationConfigurations"
+      [ngTemplateOutletContext]="{ $implicit: group.configurations, isDark: false }"
+    ></ng-container>
+    <ng-container
+      [ngTemplateOutlet]="visualizationConfigurations"
+      [ngTemplateOutletContext]="{ $implicit: group.configurations, isDark: true }"
+    ></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #visualizationConfigurations let-configurations let-isDark="isDark">
+  <div class="visualization-colors-demo__list">
+    <div
+      *ngFor="let configuration of configurations"
+      class="visualization-color"
+      [style.background-color]="configuration.color.getAsCssValue(isDark)"
+      [class.color_inverted]="configuration.color.isLight"
+    >
+      <div
+        class="visualization-color__name"
+        (click)="copyToClipboard(isDark ? configuration.color.darkColor.name : configuration.color.lightColor.name)"
+      >
+        {{ isDark ? configuration.color.darkColor.name : configuration.color.lightColor.name }}
+      </div>
+      <div
+        class="visualization-color__value"
+        (click)="copyToClipboard(isDark ? configuration.color.darkColor.value : configuration.color.lightColor.value)"
+      >
+        <span class="visualization-color__value-name">hex:</span> #{{
+          isDark ? configuration.color.darkColor.value : configuration.color.lightColor.value
+        }}
+      </div>
+
+      <div
+        class="color__value"
+        (click)="
+          copyToClipboard(
+            isDark ? configuration.color.darkColorFormattedRgb : configuration.color.lightColorFormattedRgb
+          )
+        "
+      >
+        <span class="color__value-name">rgb:</span>
+        {{ isDark ? configuration.color.darkColorFormattedRgb : configuration.color.lightColorFormattedRgb }}
+      </div>
+    </div>
+  </div>
 </ng-template>

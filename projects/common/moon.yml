@@ -34,6 +34,7 @@ tasks:
     deps:
       - '~:barrel'
       - '~:style-all'
+      - '~:const-all'
 
   style-all:
     command: 'noop'
@@ -42,6 +43,7 @@ tasks:
       - '~:style-colors-map'
       - '~:style-alpha-colors-map'
       - '~:style-semantic-colors-map'
+      - '~:style-visualization-colors-map'
 
   style-variables:
     command:
@@ -94,6 +96,40 @@ tasks:
       - 'src/assets/configs/semantic-colors-config.json'
     outputs:
       - 'src/styles/maps/semantic-colors.map.scss'
+
+  style-visualization-colors-map:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-visualization-colors-map.script.ts'
+      - 'src/assets/configs/visualization-index-colors-config.json'
+      - 'src/assets/configs/visualization-visualization-colors-config.json'
+    outputs:
+      - 'src/styles/maps/visualization-colors.map.scss'
+
+  const-all:
+    command: 'noop'
+    deps:
+      - '~:const-visualization-colors'
+
+  const-visualization-colors:
+    command:
+      - 'ts-node'
+      - '@in(0)'
+    platform: 'node'
+    options:
+      runInCI: false
+    inputs:
+      - 'scripts/create-visualization-colors-const.script.ts'
+      - 'src/assets/configs/visualization-index-colors-config.json'
+      - 'src/assets/configs/visualization-visualization-colors-config.json'
+    outputs:
+      - 'src/declarations/constants/visualization-colors.const.ts'
+      - 'src/declarations/interfaces/visualization-colors.interface.ts'
 
   convert-scss-to-css:
     command:

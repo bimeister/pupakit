@@ -1,0 +1,662 @@
+[
+  {
+    "name": "Deep blue",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "E1E8F1",
+        "darkColor": "E4EAF3"
+      },
+      {
+        "name": "100",
+        "lightColor": "C2D1E4",
+        "darkColor": "C8D6E6"
+      },
+      {
+        "name": "200",
+        "lightColor": "9AB3D1",
+        "darkColor": "A4BAD6"
+      },
+      {
+        "name": "300",
+        "lightColor": "7295BF",
+        "darkColor": "809FC6"
+      },
+      {
+        "name": "400",
+        "lightColor": "5982B4",
+        "darkColor": "6A8FBC"
+      },
+      {
+        "name": "500",
+        "lightColor": "3567A4",
+        "darkColor": "4976AD"
+      },
+      {
+        "name": "600",
+        "lightColor": "315A8D",
+        "darkColor": "416694"
+      },
+      {
+        "name": "700",
+        "lightColor": "2E517D",
+        "darkColor": "3C5B83"
+      },
+      {
+        "name": "800",
+        "lightColor": "294263",
+        "darkColor": "334A68"
+      },
+      {
+        "name": "900",
+        "lightColor": "243349",
+        "darkColor": "2A384C"
+      },
+      {
+        "name": "950",
+        "lightColor": "202836",
+        "darkColor": "232A37"
+      }
+    ]
+  },
+  {
+    "name": "Pink",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FAE9F2",
+        "darkColor": "F5E7EE"
+      },
+      {
+        "name": "100",
+        "lightColor": "F5D3E5",
+        "darkColor": "EACFDD"
+      },
+      {
+        "name": "200",
+        "lightColor": "EEB6D3",
+        "darkColor": "DDAFC7"
+      },
+      {
+        "name": "300",
+        "lightColor": "E799C1",
+        "darkColor": "CF8FB1"
+      },
+      {
+        "name": "400",
+        "lightColor": "E387B7",
+        "darkColor": "C67CA3"
+      },
+      {
+        "name": "500",
+        "lightColor": "DD6DA7",
+        "darkColor": "BA5F8F"
+      },
+      {
+        "name": "600",
+        "lightColor": "BA5F8F",
+        "darkColor": "9E537B"
+      },
+      {
+        "name": "700",
+        "lightColor": "A3557F",
+        "darkColor": "8B4B6E"
+      },
+      {
+        "name": "800",
+        "lightColor": "7D4565",
+        "darkColor": "6B3E59"
+      },
+      {
+        "name": "900",
+        "lightColor": "56354A",
+        "darkColor": "4B3143"
+      },
+      {
+        "name": "950",
+        "lightColor": "392936",
+        "darkColor": "342732"
+      }
+    ]
+  },
+  {
+    "name": "Matte Green",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "E8F1E1",
+        "darkColor": "E6EEE1"
+      },
+      {
+        "name": "100",
+        "lightColor": "D2E3C4",
+        "darkColor": "CDDCC3"
+      },
+      {
+        "name": "200",
+        "lightColor": "B3D19C",
+        "darkColor": "ACC59A"
+      },
+      {
+        "name": "300",
+        "lightColor": "95BF75",
+        "darkColor": "8BAE72"
+      },
+      {
+        "name": "400",
+        "lightColor": "83B45D",
+        "darkColor": "78A05A"
+      },
+      {
+        "name": "500",
+        "lightColor": "68A33A",
+        "darkColor": "5A8B36"
+      },
+      {
+        "name": "600",
+        "lightColor": "5A8B36",
+        "darkColor": "4F7732"
+      },
+      {
+        "name": "700",
+        "lightColor": "517B33",
+        "darkColor": "476A30"
+      },
+      {
+        "name": "800",
+        "lightColor": "42602E",
+        "darkColor": "3B542C"
+      },
+      {
+        "name": "900",
+        "lightColor": "334529",
+        "darkColor": "2F3E28"
+      },
+      {
+        "name": "950",
+        "lightColor": "273126",
+        "darkColor": "252D25"
+      }
+    ]
+  },
+  {
+    "name": "Deep orange",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "F8EFE0",
+        "darkColor": "F3ECE0"
+      },
+      {
+        "name": "100",
+        "lightColor": "F1DFC2",
+        "darkColor": "E7D9C1"
+      },
+      {
+        "name": "200",
+        "lightColor": "E7C999",
+        "darkColor": "D7BF97"
+      },
+      {
+        "name": "300",
+        "lightColor": "DEB470",
+        "darkColor": "C8A56E"
+      },
+      {
+        "name": "400",
+        "lightColor": "D8A758",
+        "darkColor": "BE9655"
+      },
+      {
+        "name": "500",
+        "lightColor": "D09433",
+        "darkColor": "B07F30"
+      },
+      {
+        "name": "600",
+        "lightColor": "B07F30",
+        "darkColor": "956D2D"
+      },
+      {
+        "name": "700",
+        "lightColor": "9A702E",
+        "darkColor": "84622C"
+      },
+      {
+        "name": "800",
+        "lightColor": "76592B",
+        "darkColor": "664E29"
+      },
+      {
+        "name": "900",
+        "lightColor": "524127",
+        "darkColor": "483A26"
+      },
+      {
+        "name": "950",
+        "lightColor": "372F25",
+        "darkColor": "322C24"
+      }
+    ]
+  },
+  {
+    "name": "Purple",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "F3EBF3",
+        "darkColor": "EFE8EF"
+      },
+      {
+        "name": "100",
+        "lightColor": "E7D6E7",
+        "darkColor": "DFD1DF"
+      },
+      {
+        "name": "200",
+        "lightColor": "D7BBD7",
+        "darkColor": "CAB3CB"
+      },
+      {
+        "name": "300",
+        "lightColor": "C8A0C8",
+        "darkColor": "B595B6"
+      },
+      {
+        "name": "400",
+        "lightColor": "BE8FBE",
+        "darkColor": "A882A9"
+      },
+      {
+        "name": "500",
+        "lightColor": "B077B0",
+        "darkColor": "956796"
+      },
+      {
+        "name": "600",
+        "lightColor": "956796",
+        "darkColor": "7F5A81"
+      },
+      {
+        "name": "700",
+        "lightColor": "845C85",
+        "darkColor": "715173"
+      },
+      {
+        "name": "800",
+        "lightColor": "664A69",
+        "darkColor": "59425C"
+      },
+      {
+        "name": "900",
+        "lightColor": "48384D",
+        "darkColor": "403345"
+      },
+      {
+        "name": "950",
+        "lightColor": "322A37",
+        "darkColor": "2E2833"
+      }
+    ]
+  },
+  {
+    "name": "Powder",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FDEFF1",
+        "darkColor": "F7ECEE"
+      },
+      {
+        "name": "100",
+        "lightColor": "FADFE3",
+        "darkColor": "EFD9DC"
+      },
+      {
+        "name": "200",
+        "lightColor": "F7CBD1",
+        "darkColor": "E5BFC5"
+      },
+      {
+        "name": "300",
+        "lightColor": "F5B6BE",
+        "darkColor": "DAA6AE"
+      },
+      {
+        "name": "400",
+        "lightColor": "F3A9B3",
+        "darkColor": "D497A0"
+      },
+      {
+        "name": "500",
+        "lightColor": "F096A2",
+        "darkColor": "CA808B"
+      },
+      {
+        "name": "600",
+        "lightColor": "CA808B",
+        "darkColor": "AB6E78"
+      },
+      {
+        "name": "700",
+        "lightColor": "B0727C",
+        "darkColor": "96626C"
+      },
+      {
+        "name": "800",
+        "lightColor": "865A62",
+        "darkColor": "734F57"
+      },
+      {
+        "name": "900",
+        "lightColor": "5C4148",
+        "darkColor": "503B42"
+      },
+      {
+        "name": "950",
+        "lightColor": "3C2F35",
+        "darkColor": "362C32"
+      }
+    ]
+  },
+  {
+    "name": "Lilac",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "F7F0FF",
+        "darkColor": "F3ECF9"
+      },
+      {
+        "name": "100",
+        "lightColor": "F0E0FF",
+        "darkColor": "E6DAF3"
+      },
+      {
+        "name": "200",
+        "lightColor": "E5CCFF",
+        "darkColor": "D5C1EB"
+      },
+      {
+        "name": "300",
+        "lightColor": "DBB8FF",
+        "darkColor": "C5A8E3"
+      },
+      {
+        "name": "400",
+        "lightColor": "D5ABFF",
+        "darkColor": "BB99DE"
+      },
+      {
+        "name": "500",
+        "lightColor": "CC99FF",
+        "darkColor": "AC83D7"
+      },
+      {
+        "name": "600",
+        "lightColor": "AC83D7",
+        "darkColor": "9271B6"
+      },
+      {
+        "name": "700",
+        "lightColor": "9774BD",
+        "darkColor": "8164A1"
+      },
+      {
+        "name": "800",
+        "lightColor": "745B90",
+        "darkColor": "64507D"
+      },
+      {
+        "name": "900",
+        "lightColor": "514264",
+        "darkColor": "473C58"
+      },
+      {
+        "name": "950",
+        "lightColor": "363043",
+        "darkColor": "322C3D"
+      }
+    ]
+  },
+  {
+    "name": "Dusty purple",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "EFF2FE",
+        "darkColor": "ECEEF8"
+      },
+      {
+        "name": "100",
+        "lightColor": "DFE4FD",
+        "darkColor": "D9DDF1"
+      },
+      {
+        "name": "200",
+        "lightColor": "CAD3FB",
+        "darkColor": "BFC6E8"
+      },
+      {
+        "name": "300",
+        "lightColor": "B5C1FA",
+        "darkColor": "A5AFDF"
+      },
+      {
+        "name": "400",
+        "lightColor": "A8B6F9",
+        "darkColor": "96A2D9"
+      },
+      {
+        "name": "500",
+        "lightColor": "95A6F8",
+        "darkColor": "7F8DD1"
+      },
+      {
+        "name": "600",
+        "lightColor": "7F8DD1",
+        "darkColor": "6D79B1"
+      },
+      {
+        "name": "700",
+        "lightColor": "717DB8",
+        "darkColor": "616B9C"
+      },
+      {
+        "name": "800",
+        "lightColor": "59628D",
+        "darkColor": "4E557A"
+      },
+      {
+        "name": "900",
+        "lightColor": "404662",
+        "darkColor": "3A3F57"
+      },
+      {
+        "name": "950",
+        "lightColor": "2E3242",
+        "darkColor": "2B2E3C"
+      }
+    ]
+  },
+  {
+    "name": "Lime",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "F0F8E8",
+        "darkColor": "EDF3E6"
+      },
+      {
+        "name": "100",
+        "lightColor": "E1F2D1",
+        "darkColor": "DAE8CD"
+      },
+      {
+        "name": "200",
+        "lightColor": "CDE9B2",
+        "darkColor": "C1D9AC"
+      },
+      {
+        "name": "300",
+        "lightColor": "B9E094",
+        "darkColor": "A9C98B"
+      },
+      {
+        "name": "400",
+        "lightColor": "ADDB82",
+        "darkColor": "9AC078"
+      },
+      {
+        "name": "500",
+        "lightColor": "9BD366",
+        "darkColor": "84B25A"
+      },
+      {
+        "name": "600",
+        "lightColor": "84B25A",
+        "darkColor": "719750"
+      },
+      {
+        "name": "700",
+        "lightColor": "759C52",
+        "darkColor": "658549"
+      },
+      {
+        "name": "800",
+        "lightColor": "5C7844",
+        "darkColor": "50683E"
+      },
+      {
+        "name": "900",
+        "lightColor": "425436",
+        "darkColor": "3B4A33"
+      },
+      {
+        "name": "950",
+        "lightColor": "2F382C",
+        "darkColor": "2C332A"
+      }
+    ]
+  },
+  {
+    "name": "Dusty blue",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "EFF8FC",
+        "darkColor": "ECF3F7"
+      },
+      {
+        "name": "100",
+        "lightColor": "DFF1F9",
+        "darkColor": "D9E7EE"
+      },
+      {
+        "name": "200",
+        "lightColor": "CBE7F5",
+        "darkColor": "BFD7E3"
+      },
+      {
+        "name": "300",
+        "lightColor": "B6DDF1",
+        "darkColor": "A6C7D8"
+      },
+      {
+        "name": "400",
+        "lightColor": "A9D8EF",
+        "darkColor": "97BDD1"
+      },
+      {
+        "name": "500",
+        "lightColor": "96CFEB",
+        "darkColor": "80AFC7"
+      },
+      {
+        "name": "600",
+        "lightColor": "80AFC7",
+        "darkColor": "6E95A9"
+      },
+      {
+        "name": "700",
+        "lightColor": "719AAF",
+        "darkColor": "628395"
+      },
+      {
+        "name": "800",
+        "lightColor": "597686",
+        "darkColor": "4E6675"
+      },
+      {
+        "name": "900",
+        "lightColor": "41525E",
+        "darkColor": "3A4954"
+      },
+      {
+        "name": "950",
+        "lightColor": "2E3840",
+        "darkColor": "2B333B"
+      }
+    ]
+  },
+  {
+    "name": "Dusty yellow",
+    "configurations": [
+      {
+        "name": "50",
+        "lightColor": "FEF7E6",
+        "darkColor": "F8F2E4"
+      },
+      {
+        "name": "100",
+        "lightColor": "FCEECC",
+        "darkColor": "F1E5C9"
+      },
+      {
+        "name": "200",
+        "lightColor": "FBE3AA",
+        "darkColor": "E7D4A5"
+      },
+      {
+        "name": "300",
+        "lightColor": "F9D988",
+        "darkColor": "DDC382"
+      },
+      {
+        "name": "400",
+        "lightColor": "F8D274",
+        "darkColor": "D8B86C"
+      },
+      {
+        "name": "500",
+        "lightColor": "F6C855",
+        "darkColor": "CFA94C"
+      },
+      {
+        "name": "600",
+        "lightColor": "CFA94C",
+        "darkColor": "AF9044"
+      },
+      {
+        "name": "700",
+        "lightColor": "B59546",
+        "darkColor": "997F3F"
+      },
+      {
+        "name": "800",
+        "lightColor": "89733C",
+        "darkColor": "766337"
+      },
+      {
+        "name": "900",
+        "lightColor": "5D5031",
+        "darkColor": "52472F"
+      },
+      {
+        "name": "950",
+        "lightColor": "3D372A",
+        "darkColor": "373228"
+      }
+    ]
+  }
+]
