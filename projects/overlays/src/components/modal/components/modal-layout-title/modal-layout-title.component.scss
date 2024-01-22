@@ -7,8 +7,10 @@
   flex: 1;
   color: semantic-color(text-primary);
   @include font-preset-h3;
+  min-width: 0;
 }
 
 .content-wrapper {
   @include line-clamp(3);
+  word-break: break-all;
 }
