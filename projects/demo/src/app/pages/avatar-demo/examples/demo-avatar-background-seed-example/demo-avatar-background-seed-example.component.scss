@@ -1,0 +1,10 @@
+.avatar-container {
+  display: flex;
+  gap: 20rem;
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+}

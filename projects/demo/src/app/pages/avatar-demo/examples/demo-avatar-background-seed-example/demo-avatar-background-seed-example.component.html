@@ -1,0 +1,16 @@
+<div class="avatar-container">
+  <div class="avatar-container__wrapper">
+    <span>without other parameters</span>
+    <pupa-avatar size="large" [backgroundSeed]="userId"></pupa-avatar>
+  </div>
+
+  <div class="avatar-container__wrapper">
+    <span>with username</span>
+    <pupa-avatar size="large" [backgroundSeed]="userId" [username]="userName"></pupa-avatar>
+  </div>
+
+  <div class="avatar-container__wrapper">
+    <span>with icon</span>
+    <pupa-avatar size="large" [backgroundSeed]="userId" [iconName]="iconName"></pupa-avatar>
+  </div>
+</div>

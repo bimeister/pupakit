@@ -4,6 +4,7 @@ import { DemoSharedModule } from '../../shared/shared.module';
 import { AvatarDemoRoutingModule } from './avatar-demo-routing.module';
 import { AvatarDemoComponent } from './avatar-demo.component';
 
+import { AvatarBackgroundSeedExampleComponent } from './examples/demo-avatar-background-seed-example/demo-avatar-background-seed-example.component';
 import { AvatarExample1Component } from './examples/example-1/example-1.component';
 import { AvatarExample2Component } from './examples/example-2/example-2.component';
 import { AvatarExample3Component } from './examples/example-3/example-3.component';
@@ -22,6 +23,7 @@ import { AvatarExample7Component } from './examples/example-7/example-7.componen
     AvatarExample5Component,
     AvatarExample6Component,
     AvatarExample7Component,
+    AvatarBackgroundSeedExampleComponent,
   ],
   imports: [DemoSharedModule, AvatarDemoRoutingModule],
 })

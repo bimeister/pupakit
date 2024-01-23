@@ -1,8 +1,8 @@
 <div
   class="avatar"
-  [ngClass]="resultClassList$ | async"
+  [ngClass]="sizeClass$ | async"
   [style.background-color]="hslBackgroundColor$ | async"
-  [class.avatar_default]="isEmptyUserName$ | async"
+  [class.avatar_default]="isEmptyBackgroundSeed$ | async"
   [class.avatar_disabled]="disabled$ | async"
   [ngSwitch]="mode$ | async"
 >
