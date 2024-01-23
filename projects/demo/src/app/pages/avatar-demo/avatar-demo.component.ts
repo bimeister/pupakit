@@ -17,6 +17,7 @@ export class AvatarDemoComponent {
     name: new FormControl(''),
     iconName: new FormControl(''),
     src: new FormControl(''),
+    backgroundSeed: new FormControl(''),
   });
 
   public readonly sizeOptions: PropsOption[] = [
@@ -64,5 +65,11 @@ export class AvatarDemoComponent {
 
   public readonly example7Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-7/example-7.component.html`,
+  };
+
+  public readonly exampleBackgroundSeedContent: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/demo-avatar-background-seed-example/demo-avatar-background-seed-example.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/demo-avatar-background-seed-example/demo-avatar-background-seed-example.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/demo-avatar-background-seed-example/demo-avatar-background-seed-example.component.ts`,
   };
 }

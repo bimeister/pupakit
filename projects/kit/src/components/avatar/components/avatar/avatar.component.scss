@@ -11,6 +11,7 @@
   overflow: hidden;
   z-index: 1;
   user-select: none;
+  outline: 1px solid var(--avatar-border_color, semantic-color(icons-inverse));
 
   &_default {
     background-color: color(warning-200);
@@ -49,7 +50,7 @@
     display: block;
     height: 100%;
     width: 100%;
-    color: color(neutral-500);
+    color: color(neutral-1000);
   }
 
   &__text {
@@ -72,7 +73,7 @@
     }
 
     .avatar__text {
-      font-size: 0.375em;
+      font-size: 2rem;
     }
   }
 
@@ -85,7 +86,7 @@
     }
 
     .avatar__text {
-      font-size: 0.5em;
+      font-size: 2.5rem;
     }
   }
 
@@ -98,11 +99,7 @@
     }
 
     .avatar__text {
-      font-size: 0.625em;
+      font-size: 2.75rem;
     }
-  }
-
-  &_bordered {
-    border: 1px solid var(--avatar-border_color, semantic-color(surface-primary));
   }
 }

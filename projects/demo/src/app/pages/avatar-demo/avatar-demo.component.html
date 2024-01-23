@@ -17,7 +17,7 @@
       <demo-avatar-example-3 *pupaCodeContainerPreviewTemplate></demo-avatar-example-3>
     </pupa-code-container>
 
-    <h3 demoAnchor>Avatar with border</h3>
+    <h3 demoAnchor>Avatar border</h3>
     <pupa-code-container [content]="example4Content">
       <demo-avatar-example-4 *pupaCodeContainerPreviewTemplate></demo-avatar-example-4>
     </pupa-code-container>
@@ -36,6 +36,11 @@
     <pupa-code-container [content]="example7Content">
       <demo-avatar-example-7 *pupaCodeContainerPreviewTemplate></demo-avatar-example-7>
     </pupa-code-container>
+
+    <h3 demoAnchor>Avatar background seed</h3>
+    <pupa-code-container [content]="exampleBackgroundSeedContent">
+      <demo-avatar-background-seed-example *pupaCodeContainerPreviewTemplate></demo-avatar-background-seed-example>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -44,7 +49,7 @@
         [username]="avatarForm.get('name').value"
         [iconName]="avatarForm.get('iconName').value"
         [src]="avatarForm.get('src').value"
-        [withBorder]="border$ | async"
+        [backgroundSeed]="avatarForm.get('backgroundSeed').value"
         [disabled]="disabled$ | async"
         [size]="sizeOptions$ | async"
       ></pupa-avatar>
@@ -71,14 +76,14 @@
         <pupa-input-text formControlName="src"></pupa-input-text>
       </demo-example-viewer-property>
 
+      <demo-example-viewer-property decoratorName="input" name="backgroundSeed" type="string">
+        <ng-container *demoExampleViewerPropertyDescription>Element background seed.</ng-container>
+        <pupa-input-text formControlName="backgroundSeed"></pupa-input-text>
+      </demo-example-viewer-property>
+
       <demo-example-viewer-property decoratorName="input" name="size" type="AvatarSize">
         <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
         <demo-props-radio-select #sizeOptions$ [options]="sizeOptions"></demo-props-radio-select>
-      </demo-example-viewer-property>
-
-      <demo-example-viewer-property decoratorName="input" name="withBorder" type="boolean">
-        <ng-container *demoExampleViewerPropertyDescription>Whether the element has a border.</ng-container>
-        <demo-props-switcher #border$></demo-props-switcher>
       </demo-example-viewer-property>
 
       <demo-example-viewer-property decoratorName="input" name="disabled" type="boolean">
