@@ -1,6 +1,68 @@
 <h1>Loader</h1>
-<div class="group">
-  <div>
-    <pupa-loader></pupa-loader>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Loader</h3>
+    <pupa-code-container [content]="loaderExampleContent">
+      <demo-loader *pupaCodeContainerPreviewTemplate></demo-loader>
+    </pupa-code-container>
+
+    <h3 demoAnchor>Loader Old</h3>
+    <pupa-code-container [content]="loaderOldExampleContent">
+      <demo-loader-old *pupaCodeContainerPreviewTemplate></demo-loader-old>
+    </pupa-code-container>
   </div>
-</div>
+  <div *demoPageTab="'api'">
+    <demo-example-viewer-content>
+      <pupa-loader
+        [type]="typeFormControl.value"
+        [size]="sizeFormControl.value + 'px'"
+        [kind]="kindFormControl.value"
+        [progress]="progressFormControl.value"
+        [isError]="isErrorFormControl.value"
+        [errorText]="errorTextFormControl.value"
+      ></pupa-loader>
+    </demo-example-viewer-content>
+    <h3 demoAnchor>Properties</h3>
+
+    <demo-example-viewer-property decoratorName="input" name="type" type="Loader">
+      <ng-container *demoExampleViewerPropertyDescription>Adjusts the loader type.</ng-container>
+
+      <demo-props-radio-select [formControl]="typeFormControl" [options]="typeOptions"></demo-props-radio-select>
+    </demo-example-viewer-property>
+
+    <demo-example-viewer-property name="size" type="string" decoratorName="input">
+      <ng-template demoExampleViewerPropertyDescription>Set width and height of loader.</ng-template>
+
+      <pupa-input-text [formControl]="sizeFormControl" placeholder="Enter value"></pupa-input-text>
+    </demo-example-viewer-property>
+
+    <ng-container *ngIf="typeFormControl.value === 'determinate'; else indeterminateOptions">
+      <demo-example-viewer-property name="progress" type="number" decoratorName="input">
+        <ng-template demoExampleViewerPropertyDescription>Set progress value of loader from 0 to 100.</ng-template>
+
+        <pupa-input-number [formControl]="progressFormControl" placeholder="Enter value"></pupa-input-number>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property name="isError" type="boolean" decoratorName="input">
+        <ng-template demoExampleViewerPropertyDescription>Set error mode of loader.</ng-template>
+
+        <pupa-switcher [formControl]="isErrorFormControl"></pupa-switcher>
+      </demo-example-viewer-property>
+
+      <demo-example-viewer-property name="errorText" type="string" decoratorName="input">
+        <ng-template demoExampleViewerPropertyDescription>Set error text of loader.</ng-template>
+
+        <pupa-input-text [formControl]="errorTextFormControl" placeholder="Enter value"></pupa-input-text>
+      </demo-example-viewer-property>
+    </ng-container>
+
+    <ng-template #indeterminateOptions>
+      <demo-example-viewer-property decoratorName="input" name="kind" type="LoaderKind">
+        <ng-container *demoExampleViewerPropertyDescription>Adjusts the loader kind.</ng-container>
+
+        <demo-props-select [formControl]="kindFormControl" [options]="kindOptions"></demo-props-select>
+      </demo-example-viewer-property>
+    </ng-template>
+  </div>
+</demo-page>

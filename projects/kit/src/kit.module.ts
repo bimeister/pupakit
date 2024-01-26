@@ -13,12 +13,12 @@ import { PupaDropdownModule } from './components/dropdown/dropdown.module';
 import { PupaIconHolderModule } from './components/icon-holder/icon-holder.module';
 import { PupaLayoutModule } from './components/layout/layout.module';
 import { PupaLinkModule } from './components/link/link.module';
+import { PupaLoaderModule } from './components/loader/loader.module';
 import { PupaOptionModule } from './components/option/option.module';
 import { PupaProgressBarModule } from './components/progress-bar/progress-bar.module';
 import { PupaScrollableModule } from './components/scrollable/scrollable.module';
 import { PupaSectionModule } from './components/section/section.module';
 import { PupaSkeletonModule } from './components/skeleton/skeleton.module';
-import { PupaSpinnerModule } from './components/spinner/spinner.module';
 import { PupaStatusModule } from './components/status/status.module';
 import { PupaStepperModule } from './components/stepper/stepper.module';
 import { PupaTabsModule } from './components/tabs/tabs.module';
@@ -36,12 +36,12 @@ const MODULES: Type<unknown>[] = [
   PupaTagModule,
   PupaDropdownModule,
   PupaTooltipModule,
-  PupaSpinnerModule,
   PupaButtonsModule,
   PupaCheckboxModule,
   PupaOptionModule,
   PupaTimerModule,
   PupaLinkModule,
+  PupaLoaderModule,
   PupaDropdownMenuModule,
   PupaAccordionModule,
   PupaAvatarModule,

@@ -1,6 +1,6 @@
-<div class="loader">
+<div class="loader-old">
   <div
-    class="loader__line loader__line_left"
+    class="loader-old__line loader-old__line_left"
     [@lineAppeared]="isLeftLineVisible$ | async"
     (@lineAppeared.start)="switchRectangleState($event, isBottomRectangleVisible$, 400)"
   >
@@ -20,7 +20,7 @@
     </svg>
   </div>
   <div
-    class="loader__line loader__line_center"
+    class="loader-old__line loader-old__line_center"
     [@lineAppeared]="isCenterLineVisible$ | async"
     (@lineAppeared.done)="switchLineState($event, isRightLineVisible$)"
   >
@@ -40,7 +40,7 @@
     </svg>
   </div>
   <div
-    class="loader__line loader__line_right"
+    class="loader-old__line loader-old__line_right"
     [@lineAppeared]="isRightLineVisible$ | async"
     (@lineAppeared.start)="switchLineState($event, isLeftLineVisible$, 350)"
     (@lineAppeared.done)="switchRectangleState($event, isTopRectangleVisible$)"
@@ -60,7 +60,7 @@
       />
     </svg>
   </div>
-  <div class="loader__rectangle loader__rectangle_top" [@rectangleAppeared]="isTopRectangleVisible$ | async">
+  <div class="loader-old__rectangle loader-old__rectangle_top" [@rectangleAppeared]="isTopRectangleVisible$ | async">
     <svg height="100%" viewBox="0 0 125 65" width="100%" xmlns="http://www.w3.org/2000/svg">
       <path
         d="m18.64727 18.1512875 65.2351888 22.40698 22.4069802 65.2351885-67.5355463-20.1066223z"
@@ -71,7 +71,7 @@
     </svg>
   </div>
   <div
-    class="loader__rectangle loader__rectangle_bottom"
+    class="loader-old__rectangle loader-old__rectangle_bottom"
     [@rectangleAppeared]="isBottomRectangleVisible$ | async"
     (@rectangleAppeared.done)="hideAllElements($event, 1000)"
   >

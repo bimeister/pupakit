@@ -1,0 +1,63 @@
+<ng-container
+  *pupaLet="
+    {
+      size: size$ | async,
+      type: type$ | async,
+      progress: progress$ | async,
+      isError: isError$ | async,
+      errorText: errorText$ | async,
+      determinateDashOffset: determinateDashOffset$ | async,
+      kindClassName: kindClassName$ | async
+    };
+    let size = size;
+    let type = type;
+    let progress = progress;
+    let isError = isError;
+    let errorText = errorText;
+    let determinateDashOffset = determinateDashOffset;
+    let kindClassName = kindClassName
+  "
+>
+  <div
+    class="loader"
+    [style.fontSize]="size"
+    [style.height]="size === 'inherit' ? 'auto' : size"
+    [style.width]="size === 'inherit' ? 'auto' : size"
+  >
+    <svg
+      *ngIf="type === 'indeterminate'; else determinateLoader"
+      class="loader__indeterminate-icon"
+      [ngClass]="kindClassName"
+      focusable="false"
+      viewBox="0 0 30 30"
+    >
+      <circle class="loader__indeterminate-icon_background" [attr.r]="radius" cx="15" cy="15"></circle>
+      <circle class="loader__indeterminate-icon_scale" [attr.r]="radius" cx="15" cy="15"></circle>
+    </svg>
+  </div>
+
+  <ng-template #determinateLoader>
+    <svg class="loader__determinate-icon" focusable="false" viewBox="0 0 30 30" *ngIf="!isError; else error">
+      <circle class="loader__determinate-icon_background" [attr.r]="radius" cx="15" cy="15"></circle>
+      <circle
+        class="loader__determinate-icon_scale"
+        [class.loader__determinate-icon_success]="progress === 100"
+        [attr.r]="radius"
+        cx="15"
+        cy="15"
+        [style.stroke-dasharray]="determinateDasharray"
+        [style.stroke-dashoffset]="determinateDashOffset"
+      ></circle>
+    </svg>
+  </ng-template>
+
+  <ng-template #error>
+    <pupa-icon
+      class="loader__error-icon"
+      name="app-error-filled"
+      *ngIf="isError; else determinateLoader"
+      [pupaTooltip]="errorText"
+      [tooltipDisabled]="errorText | isNullOrUndefined"
+    ></pupa-icon>
+  </ng-template>
+</ng-container>

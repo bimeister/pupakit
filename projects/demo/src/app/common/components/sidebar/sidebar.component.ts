@@ -58,7 +58,7 @@ export class SidebarComponent {
         { title: 'Scrollable', link: '/kit/scrollable' },
         { title: 'Badge', link: '/kit/badge' },
         { title: 'Breadcrumbs', link: '/kit/breadcrumbs' },
-        { title: 'Spinner & loader', link: '/kit/spinner' },
+        { title: 'Loader', link: '/kit/loader' },
         { title: 'Link', link: '/kit/link' },
         { title: 'Timer', link: '/kit/timer' },
         { title: 'Resizer', link: '/kit/resizer' },

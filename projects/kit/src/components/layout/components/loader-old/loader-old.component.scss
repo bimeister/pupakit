@@ -13,13 +13,13 @@
   @include flex-container(row, center, center, nowrap);
 }
 
-.loader {
+.loader-old {
   width: 100%;
   height: 100%;
   position: relative;
 }
 
-.loader__line {
+.loader-old__line {
   position: absolute;
   z-index: 9002;
   width: 1.6%;
@@ -41,7 +41,7 @@
   }
 }
 
-.loader__rectangle {
+.loader-old__rectangle {
   position: absolute;
   z-index: 9001;
   width: 100%;

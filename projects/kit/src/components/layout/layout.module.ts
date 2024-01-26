@@ -2,14 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PupaPipesModule } from '@bimeister/pupakit.common';
 import { mdCloseIcon, PupaIconsModule } from '@bimeister/pupakit.icons';
-import { PupaSpinnerModule } from '../spinner/spinner.module';
-
+import { PupaLoaderModule } from '../loader/loader.module';
 import { LayoutComponent } from './components/layout/layout.component';
-import { LoaderComponent } from './components/loader/loader.component';
+import { LoaderOldComponent } from './components/loader-old/loader-old.component';
 
 @NgModule({
-  imports: [CommonModule, PupaIconsModule.forFeature([mdCloseIcon]), PupaSpinnerModule, PupaPipesModule],
-  declarations: [LayoutComponent, LoaderComponent],
-  exports: [LayoutComponent, LoaderComponent],
+  imports: [CommonModule, PupaIconsModule.forFeature([mdCloseIcon]), PupaLoaderModule, PupaPipesModule],
+  declarations: [LayoutComponent, LoaderOldComponent],
+  exports: [LayoutComponent, LoaderOldComponent],
 })
 export class PupaLayoutModule {}

@@ -35,6 +35,7 @@ import { InputDemoModule } from './pages/input-demo/input-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
 import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
 import { LoaderDemoModule } from './pages/loader-demo/loader-demo.module';
+import { LoaderOldDemoModule } from './pages/loader-old-demo/loader-old-demo.module';
 import { MainPageModule } from './pages/main-page/main-page.module';
 import { ModalDemoModule } from './pages/modal-demo/modal-demo.module';
 import { NotFoundPageModule } from './pages/not-found-page/not-found-page.module';
@@ -48,7 +49,6 @@ import { ScrollbarDemoModule } from './pages/scrollbar-demo/scrollbar-demo.modul
 import { SearchFieldDemoModule } from './pages/search-field-demo/search-field-demo.module';
 import { SectionDemoModule } from './pages/section-demo/section-demo.module';
 import { SelectDemoModule } from './pages/select-demo/select-demo.module';
-import { SpinnerDemoModule } from './pages/spinner-demo/spinner-demo.module';
 import { StatusDemoModule } from './pages/status-demo/status-demo.module';
 import { StepperDemoModule } from './pages/stepper-demo/stepper-demo.module';
 import { SwitcherDemoModule } from './pages/switcher-demo/switcher-demo.module';
@@ -114,14 +114,14 @@ const demoRoutes: Routes = [
           import('./pages/icon-holder-demo/icon-holder-demo.module').then((module: any) => module.IconHolderDemoModule),
       },
       {
-        path: 'spinner',
-        loadChildren: (): Promise<Type<SpinnerDemoModule>> =>
-          import('./pages/spinner-demo/spinner-demo.module').then((module: any) => module.SpinnerDemoModule),
-      },
-      {
         path: 'loader',
         loadChildren: (): Promise<Type<LoaderDemoModule>> =>
           import('./pages/loader-demo/loader-demo.module').then((module: any) => module.LoaderDemoModule),
+      },
+      {
+        path: 'loader-old',
+        loadChildren: (): Promise<Type<LoaderOldDemoModule>> =>
+          import('./pages/loader-old-demo/loader-old-demo.module').then((module: any) => module.LoaderDemoModule),
       },
       {
         path: 'button',
