@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Type } from '@angular/core';
 import { PupaIconsModule } from '@bimeister/pupakit.icons';
 import { PupaDropdownModule } from '../dropdown/dropdown.module';
-import { PupaSpinnerModule } from '../spinner/spinner.module';
+import { PupaLoaderModule } from '../loader/loader.module';
 import { ButtonIconComponent } from './components/button-icon/button-icon.component';
 import { ButtonMultiComponent } from './components/button-multi/button-multi.component';
 import { ButtonRoundComponent } from './components/button-round/button-round.component';
@@ -15,7 +15,7 @@ const EXPORTS: Type<unknown>[] = [...DECLARATIONS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [CommonModule, PupaSpinnerModule, PupaIconsModule.forFeature(), PupaDropdownModule],
+  imports: [CommonModule, PupaLoaderModule, PupaIconsModule.forFeature(), PupaDropdownModule],
   exports: [...EXPORTS],
 })
 export class PupaButtonsModule {}

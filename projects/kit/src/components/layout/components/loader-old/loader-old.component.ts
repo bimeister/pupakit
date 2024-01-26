@@ -9,9 +9,9 @@ enum ElementState {
 }
 
 @Component({
-  selector: 'pupa-loader',
-  templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss'],
+  selector: 'pupa-loader-old',
+  templateUrl: './loader-old.component.html',
+  styleUrls: ['./loader-old.component.scss'],
   animations: [
     trigger('lineAppeared', [
       state(
@@ -48,7 +48,7 @@ enum ElementState {
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LoaderComponent implements AfterViewInit {
+export class LoaderOldComponent implements AfterViewInit {
   public isLeftLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
   public isCenterLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);
   public isRightLineVisible$: BehaviorSubject<string> = new BehaviorSubject<string>(ElementState.disappeared);

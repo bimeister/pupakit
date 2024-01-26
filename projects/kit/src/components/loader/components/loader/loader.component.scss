@@ -1,0 +1,80 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+:host {
+  @include flex-container(column, center, center, nowrap);
+}
+
+.loader {
+  all: unset;
+  overflow: hidden;
+  color: inherit;
+  @include inline-flex-container(row, center, center, nowrap);
+
+  &__determinate-icon,
+  &__indeterminate-icon {
+    height: 100%;
+    width: 100%;
+    fill: none;
+    stroke-width: 4px;
+    stroke: currentColor;
+
+    &_background {
+      stroke: semantic-color(kind-neutral-normal);
+    }
+  }
+
+  &__determinate-icon {
+    transform: rotate(-90deg);
+
+    &_scale {
+      stroke: semantic-color(kind-warning-normal);
+      transition: stroke-dashoffset 0.6s ease-in;
+    }
+
+    &_success {
+      stroke: semantic-color(kind-success-normal);
+      transition: stroke-dashoffset 0.6s ease-in, stroke 0.6s step-end;
+    }
+  }
+
+  &__indeterminate-icon {
+    animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite rotate;
+
+    &_scale {
+      stroke-dasharray: 75px;
+      stroke-dashoffset: 50px;
+    }
+
+    &_neutral {
+      color: inherit;
+    }
+
+    &_success {
+      stroke: semantic-color(kind-success-normal);
+    }
+
+    &_warning {
+      stroke: semantic-color(kind-warning-normal);
+    }
+
+    &_danger {
+      stroke: semantic-color(kind-danger-normal);
+    }
+  }
+
+  &__error-icon {
+    color: semantic-color(kind-danger-normal);
+    height: 60%;
+    width: 60%;
+  }
+}
