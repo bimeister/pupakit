@@ -1,1 +1,11 @@
 @use './../../input.styles';
+
+.input {
+  &:focus:not(.input_disabled)::placeholder {
+    color: semantic-color(text-secondary);
+  }
+
+  &:not(:focus)::placeholder {
+    font-size: 0;
+  }
+}
