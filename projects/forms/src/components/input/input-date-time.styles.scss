@@ -42,4 +42,14 @@ $width_date-range: 60rem;
   &.date-range.fixed-size {
     width: $width_date-range;
   }
+
+  .input {
+    &:focus:not(.input_disabled)::placeholder {
+      color: semantic-color(text-secondary);
+    }
+
+    &:not(:focus)::placeholder {
+      font-size: 0;
+    }
+  }
 }
