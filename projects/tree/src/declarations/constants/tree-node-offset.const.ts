@@ -1,1 +1,1 @@
-export const TREE_NODE_OFFSET: number = 16;
+export const TREE_NODE_OFFSET: number = 12;
