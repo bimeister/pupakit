@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { DEFAULT_POPOVER_TRIGGER_CSS_CLASS } from '@bimeister/pupakit.overlays';
 
 const BASE_REQUEST_PATH: string = 'popover-demo/examples';
 
@@ -10,6 +11,8 @@ const BASE_REQUEST_PATH: string = 'popover-demo/examples';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class PopoverDemoComponent {
+  public readonly defaultPopoverTriggerCssClass: string = DEFAULT_POPOVER_TRIGGER_CSS_CLASS;
+
   public readonly basicExampleContent: Record<string, string> = {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     'layout.component.html': `${BASE_REQUEST_PATH}/basic-example/popover-layout-basic/popover-layout-basic.component.html`,

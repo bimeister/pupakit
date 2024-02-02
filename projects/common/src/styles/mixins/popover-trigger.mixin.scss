@@ -1,0 +1,11 @@
+@use './host-selector.mixin' as *;
+
+@mixin popover-trigger($selector: 'popover-trigger') {
+  &.#{$selector} {
+    @content;
+  }
+
+  @include host-selector('.#{$selector}') {
+    @content;
+  }
+}

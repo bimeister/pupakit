@@ -18,6 +18,10 @@
     background-color: functions.semantic-color(kind-#{$state}-active);
   }
 
+  @include mixins.popover-trigger {
+    background-color: functions.semantic-color(kind-#{$state}-active);
+  }
+
   @content;
 }
 

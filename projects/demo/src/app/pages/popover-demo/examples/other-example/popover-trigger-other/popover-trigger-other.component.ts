@@ -14,10 +14,13 @@ export class PopoverTriggerOtherComponent {
 
   constructor(private readonly popoversService: PopoversService, private readonly injector: Injector) {}
 
-  public openPopover(): void {
+  public openPopover(event: Event): void {
     this.popoversService.open({
       component: PopoverLayoutOtherComponent,
       anchor: this.popoverAnchorRef,
+      trigger: {
+        element: event.target,
+      },
       data: {},
       injector: this.injector,
       hasBackdrop: false,

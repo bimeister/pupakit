@@ -70,6 +70,9 @@ export class PopoverDirective implements OnDestroy {
     this.openedPopover = this.popoversService.open<PopoverTemplateComponent<unknown>>({
       component: PopoverTemplateComponent,
       anchor: this.elementRef,
+      trigger: {
+        element: this.elementRef.nativeElement,
+      },
       injector: this.injector,
       hasBackdrop: false,
       autoCloseTimeout: event.type === 'click' ? null : this.pupaPopoverDelay,

@@ -2,10 +2,7 @@
 @use 'mixins';
 @use 'variables';
 
-$pointer_height: 9px;
-$pointer-width: 14px;
-
-.pupa-popover-layout {
+.popover-layout {
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -24,46 +21,5 @@ $pointer-width: 14px;
 
     backdrop-filter: none;
     background: functions.semantic-color(surface-primary, alpha-1000);
-  }
-
-  @include mixins.host-selector('.pupa-pointer__top-left, .pupa-pointer__top-right') {
-    margin-top: $pointer_height;
-  }
-
-  @include mixins.host-selector('.pupa-pointer__bottom-left, .pupa-pointer__bottom-right') {
-    margin-bottom: $pointer_height;
-  }
-}
-
-.pupa-popover-pointer {
-  position: absolute;
-  fill: functions.semantic-color(surface-primary);
-
-  &__line {
-    stroke: functions.semantic-color(kind-neutral-normal);
-  }
-
-  @include mixins.host-selector('.pupa-popover__mobile') {
-    display: none;
-  }
-
-  @include mixins.host-selector('.pupa-pointer__top-left') {
-    top: -$pointer_height;
-    left: $pointer-width;
-  }
-  @include mixins.host-selector('.pupa-pointer__top-right') {
-    top: -$pointer_height;
-    right: $pointer-width;
-  }
-  @include mixins.host-selector('.pupa-pointer__bottom-left') {
-    bottom: 0;
-    left: $pointer-width;
-    transform: rotate(180deg);
-  }
-
-  @include mixins.host-selector('.pupa-pointer__bottom-right') {
-    bottom: 0;
-    right: $pointer-width;
-    transform: rotate(180deg);
   }
 }
