@@ -2,9 +2,6 @@
 @use 'mixins' as *;
 @use 'variables' as *;
 
-$pointer_height: 9px;
-$pointer-width: 14px;
-
 .popover-layout {
   overflow: hidden;
   display: flex;
@@ -23,46 +20,5 @@ $pointer-width: 14px;
 
     backdrop-filter: none;
     background: semantic-color(surface-primary, alpha-1000);
-  }
-
-  @include host-selector('.pointer__top-left, .pointer__top-right') {
-    margin-top: $pointer_height;
-  }
-
-  @include host-selector('.pointer__bottom-left, .pointer__bottom-right') {
-    margin-bottom: $pointer_height;
-  }
-}
-
-.popover-pointer {
-  position: absolute;
-  fill: semantic-color(surface-primary);
-
-  &__line {
-    stroke: semantic-color(kind-neutral-normal);
-  }
-
-  @include host-selector('.popover__mobile') {
-    display: none;
-  }
-
-  @include host-selector('.pointer__top-left') {
-    top: -$pointer_height;
-    left: $pointer-width;
-  }
-  @include host-selector('.pointer__top-right') {
-    top: -$pointer_height;
-    right: $pointer-width;
-  }
-  @include host-selector('.pointer__bottom-left') {
-    bottom: 0;
-    left: $pointer-width;
-    transform: rotate(180deg);
-  }
-
-  @include host-selector('.pointer__bottom-right') {
-    bottom: 0;
-    right: $pointer-width;
-    transform: rotate(180deg);
   }
 }
