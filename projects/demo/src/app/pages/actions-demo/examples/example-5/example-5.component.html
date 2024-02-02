@@ -5,7 +5,7 @@
     </ng-container>
 
     <div #popoverAnchor *pupaActionMoreTriggerTemplate="let overflowedActions">
-      <pupa-button size="l" kind="secondary" (click)="openPopover(overflowedActions)">
+      <pupa-button size="l" kind="secondary" (click)="openPopover(overflowedActions, $event)">
         ({{ overflowedActions.length }})
       </pupa-button>
     </div>

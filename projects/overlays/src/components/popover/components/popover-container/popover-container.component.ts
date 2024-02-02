@@ -1,15 +1,11 @@
 import { animate, keyframes, style, transition, trigger } from '@angular/animations';
-import { ConnectedOverlayPositionChange, ConnectionPositionPair } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { isEqual } from '@bimeister/utilities/common';
-import { BehaviorSubject, Observable, ReplaySubject, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { POPOVER_CONTAINER_DATA_TOKEN } from '../../../../declarations/tokens/popover-container-data.token';
 import { PopoverContainerData } from '../../../../declarations/interfaces/popover-container-data.interface';
 import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
 
-type PointerPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right';
 type PopoverAnimationState = 'void' | 'showDesktop' | 'showMobile';
 
 const ANIMATION: string = '400ms cubic-bezier(0.25, 0.8, 0.25, 1)';
@@ -52,14 +48,6 @@ export class PopoverContainerComponent {
     'void'
   );
 
-  private readonly pointerPosition$: ReplaySubject<PointerPosition> = new ReplaySubject<PointerPosition>(1);
-
-  public readonly pointerClassName$: Observable<string> = this.pointerPosition$.pipe(
-    map((pointerPosition: PointerPosition) => `pupa-pointer__${pointerPosition}`)
-  );
-
-  private readonly positionChanges$: Observable<ConnectedOverlayPositionChange> = this.componentData.positionChanges$;
-
   private readonly subscription: Subscription = new Subscription();
 
   constructor(
@@ -67,65 +55,10 @@ export class PopoverContainerComponent {
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService
   ) {
     this.subscription.add(this.onBreakpointChange());
-    this.subscription.add(this.onPositionChange());
   }
 
   public stopEvent(event: Event): void {
     event.stopPropagation();
-  }
-
-  private onPositionChange(): Subscription {
-    return this.positionChanges$.subscribe((newPosition: ConnectedOverlayPositionChange) => {
-      const pointerPosition: PointerPosition = this.getPointerPositionByConnectionPair(newPosition.connectionPair);
-      this.pointerPosition$.next(pointerPosition);
-    });
-  }
-
-  private getPointerPositionByConnectionPair(connectionPair: ConnectionPositionPair): PointerPosition {
-    const pointerPositionTuples: [PointerPosition, ConnectionPositionPair][] = [
-      [
-        'top-left',
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-        },
-      ],
-      [
-        'bottom-left',
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-        },
-      ],
-      [
-        'top-right',
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        },
-      ],
-      [
-        'bottom-right',
-        {
-          originX: 'end',
-          originY: 'top',
-          overlayX: 'end',
-          overlayY: 'bottom',
-        },
-      ],
-    ];
-
-    const [pointerPosition]: [PointerPosition, ConnectionPositionPair] = pointerPositionTuples.find(
-      ([_, positionPair]: [PointerPosition, ConnectionPositionPair]) => isEqual(positionPair, connectionPair)
-    );
-
-    return pointerPosition;
   }
 
   private onBreakpointChange(): Subscription {

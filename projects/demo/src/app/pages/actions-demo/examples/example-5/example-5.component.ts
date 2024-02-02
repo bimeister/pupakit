@@ -13,7 +13,6 @@ const ITEM_COUNT: number = 25;
 })
 export class ActionsExample5Component {
   @ViewChild('popoverAnchor') public readonly popoverAnchorRef: ElementRef<HTMLElement>;
-
   public readonly actions: string[] = [];
 
   constructor(private readonly popoversService: PopoversService, private readonly injector: Injector) {
@@ -22,10 +21,13 @@ export class ActionsExample5Component {
     }
   }
 
-  public openPopover(overflowedActions: string[]): void {
+  public openPopover(overflowedActions: string[], event: Event): void {
     this.popoversService.open({
       component: PopoverLayoutComponent,
       anchor: this.popoverAnchorRef,
+      trigger: {
+        element: event.target,
+      },
       data: overflowedActions,
       injector: this.injector,
       hasBackdrop: false,

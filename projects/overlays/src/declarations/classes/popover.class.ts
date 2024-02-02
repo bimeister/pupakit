@@ -21,11 +21,32 @@ import { PopoverReturnType } from '../types/utility-types/popover-return.utility
 import { PopoverComponentBase } from './abstract/popover-component-base.abstract';
 import { PopoverRef } from './popover-ref.class';
 
+const OVERLAY_OFFSET_Y: number = 8;
 const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
-  new ConnectionPositionPair({ originX: 'start', originY: 'bottom' }, { overlayX: 'start', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'start', originY: 'top' }, { overlayX: 'start', overlayY: 'bottom' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'bottom' }, { overlayX: 'end', overlayY: 'top' }),
-  new ConnectionPositionPair({ originX: 'end', originY: 'top' }, { overlayX: 'end', overlayY: 'bottom' }),
+  new ConnectionPositionPair(
+    { originX: 'start', originY: 'bottom' },
+    { overlayX: 'start', overlayY: 'top' },
+    0,
+    OVERLAY_OFFSET_Y
+  ),
+  new ConnectionPositionPair(
+    { originX: 'start', originY: 'top' },
+    { overlayX: 'start', overlayY: 'bottom' },
+    0,
+    -OVERLAY_OFFSET_Y
+  ),
+  new ConnectionPositionPair(
+    { originX: 'end', originY: 'bottom' },
+    { overlayX: 'end', overlayY: 'top' },
+    0,
+    OVERLAY_OFFSET_Y
+  ),
+  new ConnectionPositionPair(
+    { originX: 'end', originY: 'top' },
+    { overlayX: 'end', overlayY: 'bottom' },
+    0,
+    -OVERLAY_OFFSET_Y
+  ),
 ];
 
 export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> implements PortalLayer {

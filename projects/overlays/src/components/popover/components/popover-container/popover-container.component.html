@@ -4,7 +4,6 @@
   (mousedown)="stopEvent($event)"
   (touchmove)="stopEvent($event)"
   (wheel)="stopEvent($event)"
-  [ngClass]="pointerClassName$ | async"
   [class.pupa-popover__mobile]="isMobile$ | async"
 >
   <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
