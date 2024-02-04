@@ -6,7 +6,7 @@ import { getAbbreviatedCount, isNil } from '@bimeister/utilities';
   pure: true,
 })
 export class FormatCountPipe implements PipeTransform {
-  public transform(count: number, maxCounterNumber?: number | null): string {
+  public transform(count: number | null, maxCounterNumber?: number | null): string {
     if (isNil(count)) {
       return '';
     }

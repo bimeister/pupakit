@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { HslColor, Nullable, getHslColorFromString, isEmpty, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { getHslColorFromString, HslColor, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { getInitials } from '../../../../declarations/functions/get-initials.function';
 import { AvatarSize } from '../../../../declarations/types/avatar-size.type';
@@ -24,13 +24,13 @@ enum Mode {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AvatarComponent implements OnChanges {
-  @Input() public username: string;
+  @Input() public username: string | null = null;
   public readonly username$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public iconName: string;
+  @Input() public iconName: string | null = null;
   public readonly iconName$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  @Input() public src: string;
+  @Input() public src: string | null = null;
   public readonly src$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
   @Input() public size: AvatarSize = 'small';
@@ -98,8 +98,8 @@ export class AvatarComponent implements OnChanges {
     this.processDisabledChange(changes?.disabled);
   }
 
-  private processUsernameChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
+  private processUsernameChange(change: ComponentChange<this, string | null> | undefined): void {
+    const updatedValue: Nullable<string> = change?.currentValue;
 
     if (typeof updatedValue !== 'string') {
       return;
@@ -109,8 +109,8 @@ export class AvatarComponent implements OnChanges {
     }
     this.username$.next(updatedValue);
   }
-  private processIconNameChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
+  private processIconNameChange(change: ComponentChange<this, string | null> | undefined): void {
+    const updatedValue: Nullable<string> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
@@ -120,8 +120,8 @@ export class AvatarComponent implements OnChanges {
     this.iconName$.next(serializedValue);
   }
 
-  private processSrcChange(change: ComponentChange<this, string>): void {
-    const updatedValue: string | undefined = change?.currentValue;
+  private processSrcChange(change: ComponentChange<this, string | null> | undefined): void {
+    const updatedValue: Nullable<string> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;

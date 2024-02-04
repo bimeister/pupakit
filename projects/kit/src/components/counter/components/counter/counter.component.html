@@ -1,6 +1,6 @@
 <div class="counter" [ngClass]="'counter_' + color" [ngSwitch]="mode">
   <ng-container *ngSwitchCase="'full'">
-    {{ count }}
+    {{ count ?? 0 }}
   </ng-container>
   <ng-container *ngSwitchDefault>
     {{ count | formatCount : maxCount }}

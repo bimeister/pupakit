@@ -32,7 +32,7 @@ export class ButtonComponent implements OnChanges {
   @Input() public type: ButtonType = 'button';
   public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('button');
 
-  @Input() public disabled: boolean = false;
+  @Input() public disabled: boolean | null = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public leftIcon: Nullable<string>;
@@ -43,7 +43,7 @@ export class ButtonComponent implements OnChanges {
 
   public readonly isReversedDirection$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public loading: boolean = false;
+  @Input() public loading: boolean | null = false;
   public readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public active: boolean = false;
@@ -97,7 +97,7 @@ export class ButtonComponent implements OnChanges {
     });
   }
 
-  private processSizeChange(change: ComponentChange<this, ButtonSize>): void {
+  private processSizeChange(change: ComponentChange<this, ButtonSize> | undefined): void {
     const updatedValue: ButtonSize | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -107,7 +107,7 @@ export class ButtonComponent implements OnChanges {
     this.size$.next(updatedValue);
   }
 
-  private processTypeChange(change: ComponentChange<this, ButtonType>): void {
+  private processTypeChange(change: ComponentChange<this, ButtonType> | undefined): void {
     const updatedValue: ButtonType | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -117,7 +117,7 @@ export class ButtonComponent implements OnChanges {
     this.type$.next(updatedValue);
   }
 
-  private processKindChange(change: ComponentChange<this, ButtonKind>): void {
+  private processKindChange(change: ComponentChange<this, ButtonKind> | undefined): void {
     const updatedValue: ButtonKind | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -127,8 +127,8 @@ export class ButtonComponent implements OnChanges {
     this.kind$.next(updatedValue);
   }
 
-  private processDisabledChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
+  private processDisabledChange(change: ComponentChange<this, boolean | null> | undefined): void {
+    const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
@@ -137,7 +137,7 @@ export class ButtonComponent implements OnChanges {
     this.disabled$.next(updatedValue);
   }
 
-  private processLeftIconChange(change: ComponentChange<this, string>): void {
+  private processLeftIconChange(change: ComponentChange<this, string> | undefined): void {
     const updatedValue: string | undefined = change?.currentValue;
 
     if (typeof updatedValue === 'undefined') {
@@ -147,7 +147,7 @@ export class ButtonComponent implements OnChanges {
     this.leftIcon$.next(updatedValue);
   }
 
-  private processRightIconChange(change: ComponentChange<this, string>): void {
+  private processRightIconChange(change: ComponentChange<this, string> | undefined): void {
     const updatedValue: string | undefined = change?.currentValue;
 
     if (typeof updatedValue === 'undefined') {
@@ -157,8 +157,8 @@ export class ButtonComponent implements OnChanges {
     this.rightIcon$.next(updatedValue);
   }
 
-  private processLoadingChange(change: ComponentChange<this, boolean>): void {
-    const updatedValue: boolean | undefined = change?.currentValue;
+  private processLoadingChange(change: ComponentChange<this, boolean> | undefined): void {
+    const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
       return;
@@ -167,7 +167,7 @@ export class ButtonComponent implements OnChanges {
     this.loading$.next(updatedValue);
   }
 
-  private processActiveChange(change: ComponentChange<this, boolean>): void {
+  private processActiveChange(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -177,7 +177,7 @@ export class ButtonComponent implements OnChanges {
     this.active$.next(updatedValue);
   }
 
-  private processFlexibleChange(change: ComponentChange<this, boolean>): void {
+  private processFlexibleChange(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {

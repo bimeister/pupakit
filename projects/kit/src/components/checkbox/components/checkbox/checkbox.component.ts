@@ -38,13 +38,13 @@ import { CheckboxService } from '../../services/checkbox.service';
 export class CheckboxComponent implements ControlValueAccessor, OnChanges, AfterViewInit {
   @ViewChild('contentLabelWrapper') private readonly contentLabelWrapper: ElementRef<HTMLDivElement>;
 
-  @Input() public disabled: boolean;
-  @Input() public hovered: boolean;
-  @Input() public indeterminate: boolean;
-  @Input() public value: boolean;
-  @Input() public error: boolean;
+  @Input() public disabled: boolean | null = null;
+  @Input() public hovered: boolean | null = null;
+  @Input() public indeterminate: boolean | null = null;
+  @Input() public value: boolean | null = null;
+  @Input() public error: boolean | null = null;
   @Input() public size: CheckboxLabelSize = 'medium';
-  @Input() public externalValuesControl: boolean;
+  @Input() public externalValuesControl: boolean | null = null;
 
   @Output() public readonly valueChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -138,7 +138,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     // not implemented
   };
 
-  private handleValueChanges(change: ComponentChange<this, boolean>): void {
+  private handleValueChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -148,7 +148,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setValue(updatedValue);
   }
 
-  private handleErrorChanges(change: ComponentChange<this, boolean>): void {
+  private handleErrorChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -158,7 +158,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setError(updatedValue);
   }
 
-  private handleIndeterminateChanges(change: ComponentChange<this, boolean>): void {
+  private handleIndeterminateChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -168,7 +168,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setIndeterminate(updatedValue);
   }
 
-  private handleDisabledChanges(change: ComponentChange<this, boolean>): void {
+  private handleDisabledChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -178,7 +178,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setDisabled(updatedValue);
   }
 
-  private handleHoveredChanges(change: ComponentChange<this, boolean>): void {
+  private handleHoveredChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -188,7 +188,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setHovered(updatedValue);
   }
 
-  private handleExternalValuesControlChanges(change: ComponentChange<this, boolean>): void {
+  private handleExternalValuesControlChanges(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -198,7 +198,7 @@ export class CheckboxComponent implements ControlValueAccessor, OnChanges, After
     this.checkboxService.setExternalValuesControl(updatedValue);
   }
 
-  private handleSizeChanges(change: ComponentChange<this, CheckboxLabelSize>): void {
+  private handleSizeChanges(change: ComponentChange<this, CheckboxLabelSize> | undefined): void {
     const updatedValue: Nullable<CheckboxLabelSize> = change?.currentValue;
 
     if (isNil(updatedValue)) {

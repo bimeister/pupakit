@@ -30,8 +30,8 @@ import { SwitcherSize } from '../../../../declarations/types/switcher-size.type'
   ],
 })
 export class SwitcherComponent implements OnChanges, ControlValueAccessor {
-  @Input() public disabled: boolean = false;
-  @Input() public value: boolean;
+  @Input() public disabled: boolean | null = false;
+  @Input() public value: boolean | null = false;
   @Input() public tabindex: number = 0;
 
   @Input() public size: SwitcherSize = 'medium';
@@ -111,7 +111,7 @@ export class SwitcherComponent implements OnChanges, ControlValueAccessor {
     // not implemented
   };
 
-  private handleValueChanges(change: ComponentChange<this, boolean>): void {
+  private handleValueChanges(change: ComponentChange<this, boolean | null> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -121,7 +121,7 @@ export class SwitcherComponent implements OnChanges, ControlValueAccessor {
     this.writeValue(updatedValue);
   }
 
-  private handleDisabledChanges(change: ComponentChange<this, boolean>): void {
+  private handleDisabledChanges(change: ComponentChange<this, boolean | null> | undefined): void {
     const updatedValue: Nullable<boolean> = change?.currentValue;
 
     if (isNil(updatedValue)) {
