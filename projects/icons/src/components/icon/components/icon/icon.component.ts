@@ -14,7 +14,7 @@ import { AVAILABLE_ICONS_TOKEN } from '../../../../declarations/tokens/available
 export class IconComponent implements OnChanges {
   public iconHtmlCode: SafeHtml;
 
-  @Input() public name: string;
+  @Input() public name: string | null = null;
 
   constructor(
     @Inject(AVAILABLE_ICONS_TOKEN) private readonly availableIconRegistries: Map<string, string>[],
@@ -22,8 +22,8 @@ export class IconComponent implements OnChanges {
   ) {}
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
-    const currentName: string = changes?.name?.currentValue;
-    const data: string = this.getIconDataByName(currentName);
+    const currentName: Nullable<string> = changes?.name?.currentValue;
+    const data: Nullable<string> = this.getIconDataByName(currentName);
     this.iconHtmlCode = this.domSanitizer.bypassSecurityTrustHtml(data);
   }
 

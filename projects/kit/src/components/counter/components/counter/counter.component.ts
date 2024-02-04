@@ -10,7 +10,7 @@ import { CounterMode } from '../../../../declarations/types/counter-mode.type';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class CounterComponent {
-  @Input() public count: number;
+  @Input() public count: number | null = null;
   @Input() public color: CountColor = 'neutral';
   @Input() public mode: CounterMode = 'default';
   @Input() public maxCount: number | null = null;

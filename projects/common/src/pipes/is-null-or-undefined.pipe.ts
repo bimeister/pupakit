@@ -5,7 +5,7 @@ import { isNil } from '@bimeister/utilities';
   name: 'isNullOrUndefined',
 })
 export class IsNullOrUndefinedPipe implements PipeTransform {
-  public transform(entity: unknown): boolean {
+  public transform(entity: unknown): entity is null | undefined {
     return isNil(entity);
   }
 }
