@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, Component, HostListener, Input, OnChanges, ViewEncapsulation } from '@angular/core';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { filterTruthy, isNil } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { ButtonType } from '../../../../declarations/types/button-type.type';
-import { filterTruthy, isNil, Nullable } from '@bimeister/utilities';
 import { map, take } from 'rxjs/operators';
 import { ButtonKind } from '../../../../declarations/types/button-kind.type';
 import { ButtonSize } from '../../../../declarations/types/button-size.type';
-import { ComponentChanges, ComponentChange } from '@bimeister/pupakit.common';
+import { ButtonType } from '../../../../declarations/types/button-type.type';
 
 @Component({
   selector: 'pupa-button-icon',
@@ -24,16 +24,16 @@ export class ButtonIconComponent implements OnChanges {
   @Input() public type: ButtonType = 'button';
   public readonly type$: BehaviorSubject<ButtonType> = new BehaviorSubject<ButtonType>('button');
 
-  @Input() public disabled: boolean = false;
+  @Input() public disabled: boolean | null = false;
   public readonly disabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public icon: Nullable<string>;
-  public readonly icon$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
+  @Input() public icon: string | null = null;
+  public readonly icon$: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(null);
 
-  @Input() public loading: boolean = false;
+  @Input() public loading: boolean | null = false;
   public readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @Input() public active: boolean = false;
+  @Input() public active: boolean | null = false;
   public readonly active$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   @Input() public tabIndex: string = '0';
@@ -72,7 +72,7 @@ export class ButtonIconComponent implements OnChanges {
     this.processActiveChange(changes?.active);
   }
 
-  private processSizeChange(change: ComponentChange<this, ButtonSize>): void {
+  private processSizeChange(change: ComponentChange<this, ButtonSize> | undefined): void {
     const updatedValue: ButtonSize | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -82,7 +82,7 @@ export class ButtonIconComponent implements OnChanges {
     this.size$.next(updatedValue);
   }
 
-  private processTypeChange(change: ComponentChange<this, ButtonType>): void {
+  private processTypeChange(change: ComponentChange<this, ButtonType> | undefined): void {
     const updatedValue: ButtonType | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -92,7 +92,7 @@ export class ButtonIconComponent implements OnChanges {
     this.type$.next(updatedValue);
   }
 
-  private processKindChange(change: ComponentChange<this, ButtonKind>): void {
+  private processKindChange(change: ComponentChange<this, ButtonKind> | undefined): void {
     const updatedValue: ButtonKind | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -102,7 +102,7 @@ export class ButtonIconComponent implements OnChanges {
     this.kind$.next(updatedValue);
   }
 
-  private processDisabledChange(change: ComponentChange<this, boolean>): void {
+  private processDisabledChange(change: ComponentChange<this, boolean | null> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -112,7 +112,7 @@ export class ButtonIconComponent implements OnChanges {
     this.disabled$.next(updatedValue);
   }
 
-  private processIconChange(change: ComponentChange<this, string>): void {
+  private processIconChange(change: ComponentChange<this, string | null> | undefined): void {
     const updatedValue: string | undefined = change?.currentValue;
 
     if (typeof updatedValue === 'undefined') {
@@ -122,7 +122,7 @@ export class ButtonIconComponent implements OnChanges {
     this.icon$.next(updatedValue);
   }
 
-  private processLoadingChange(change: ComponentChange<this, boolean>): void {
+  private processLoadingChange(change: ComponentChange<this, boolean | null> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -132,7 +132,7 @@ export class ButtonIconComponent implements OnChanges {
     this.loading$.next(updatedValue);
   }
 
-  private processActiveChange(change: ComponentChange<this, boolean>): void {
+  private processActiveChange(change: ComponentChange<this, boolean | null> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
