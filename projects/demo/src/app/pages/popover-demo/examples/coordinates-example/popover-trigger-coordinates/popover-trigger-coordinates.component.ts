@@ -17,12 +17,15 @@ export class PopoverTriggerCoordinatesComponent {
 
   constructor(private readonly popoversService: PopoversService, private readonly injector: Injector) {}
 
-  public openPopover(): void {
+  public openPopover(event: Event): void {
     const coordinates: Position = [Number(this.xPos.value), Number(this.yPos.value)];
 
     this.popoversService.open({
       component: PopoverLayoutCoordinatesComponent,
       anchor: coordinates,
+      trigger: {
+        element: event.target,
+      },
       data: { fruits: ['🍇', '🍉', '🍑'] },
       injector: this.injector,
       hasBackdrop: false,

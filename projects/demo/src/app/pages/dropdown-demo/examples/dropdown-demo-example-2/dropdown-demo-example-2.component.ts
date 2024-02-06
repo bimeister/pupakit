@@ -15,12 +15,12 @@ export class DropdownDemoExample2Component {
   public readonly xPos: FormControl<number> = new FormControl<number>(100);
   public readonly yPos: FormControl<number> = new FormControl<number>(100);
 
-  constructor(private readonly popoversService: DropdownsService, private readonly injector: Injector) {}
+  constructor(private readonly dropdownsService: DropdownsService, private readonly injector: Injector) {};
 
   public openDropdown(): void {
     const coordinates: Position = [Number(this.xPos.value), Number(this.yPos.value)];
 
-    this.popoversService.open({
+    this.dropdownsService.open({
       target: coordinates,
       widthType: 'auto',
       horizontalPosition: 'center',

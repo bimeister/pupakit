@@ -18,10 +18,13 @@ export class PopoverTriggerBasicComponent {
     private readonly injector: Injector
   ) {}
 
-  public openPopover(): void {
+  public openPopover(event: Event): void {
     this.popoversService.open({
       component: PopoverLayoutBasicComponent,
       anchor: this.popoverAnchorRef,
+      trigger: {
+        element: event.target,
+      },
       data: {
         title: 'Title',
         buttonAction: () => this.toastsService.open({ data: { bodyText: 'Hello there!', type: 'info' } }),

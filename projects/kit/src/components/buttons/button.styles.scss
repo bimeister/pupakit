@@ -175,6 +175,9 @@ $buttonSmallBorderRadius: 0.5rem;
       @include hover() {
         background-color: semantic-color(kind-primary-hover);
       }
+      @include popover-trigger {
+        background-color: semantic-color(kind-primary-active);
+      }
     }
 
     &:active:not(:disabled) {
@@ -208,6 +211,9 @@ $buttonSmallBorderRadius: 0.5rem;
       @include hover() {
         background-color: semantic-color(kind-opacity-hover);
       }
+      @include popover-trigger {
+        background-color: semantic-color(kind-opacity-active);
+      }
     }
 
     &:active:not(:disabled) {
@@ -240,6 +246,9 @@ $buttonSmallBorderRadius: 0.5rem;
       @include hover() {
         background-color: semantic-color(kind-opacity-hover);
       }
+      @include popover-trigger {
+        background-color: semantic-color(kind-opacity-active);
+      }
     }
 
     &:active:not(:disabled) {
@@ -270,6 +279,9 @@ $buttonSmallBorderRadius: 0.5rem;
     &:not(:disabled) {
       @include hover() {
         background-color: semantic-color(kind-success-hover);
+      }
+      @include popover-trigger {
+        background-color: semantic-color(kind-success-active);
       }
     }
 
@@ -303,6 +315,9 @@ $buttonSmallBorderRadius: 0.5rem;
       @include hover() {
         background-color: semantic-color(kind-warning-hover);
       }
+      @include popover-trigger {
+        background-color: semantic-color(kind-warning-active);
+      }
     }
 
     &:active:not(:disabled) {
@@ -334,6 +349,9 @@ $buttonSmallBorderRadius: 0.5rem;
     &:not(:disabled) {
       @include hover() {
         background-color: semantic-color(kind-danger-hover);
+      }
+      @include popover-trigger {
+        background-color: semantic-color(kind-danger-active);
       }
     }
 

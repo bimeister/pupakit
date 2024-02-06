@@ -18,6 +18,10 @@
     background-color: semantic-color(kind-#{$state}-active);
   }
 
+  @include popover-trigger {
+    background-color: semantic-color(kind-#{$state}-active);
+  }
+
   @content;
 }
 
