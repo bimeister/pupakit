@@ -39,11 +39,8 @@ $tooltip_max-text-lines-count: 13;
   &__content {
     overflow: hidden;
     display: -webkit-box;
+    white-space: pre-line;
     -webkit-line-clamp: $tooltip_max-text-lines-count;
     -webkit-box-orient: vertical;
-
-    &_simple {
-      white-space: pre-line;
-    }
   }
 }
