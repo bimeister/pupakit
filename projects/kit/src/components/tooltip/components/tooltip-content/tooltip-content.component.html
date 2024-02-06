@@ -11,7 +11,7 @@
 </div>
 
 <ng-template #simpleTooltipContent>
-  <span class="tooltip__content_simple" *ngIf="tooltipContent$ | async as tooltipContent; else emptyTooltipContent">
+  <span *ngIf="tooltipContent$ | async as tooltipContent; else emptyTooltipContent">
     {{ tooltipContent }}
   </span>
 </ng-template>
