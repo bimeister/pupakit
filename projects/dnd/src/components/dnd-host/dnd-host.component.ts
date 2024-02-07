@@ -56,7 +56,9 @@ export class DndHostComponent<Source = unknown, Target = unknown> implements OnC
     DndDropData<Source, Target>
   >();
 
-  private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement);
+  private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement, {
+    cssProps: { ...Hammer.defaults.cssProps, userSelect: 'text' },
+  });
 
   private readonly selectedDndItemIds: Set<string> = new Set<string>();
 
