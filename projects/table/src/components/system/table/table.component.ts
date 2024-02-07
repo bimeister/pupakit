@@ -113,7 +113,9 @@ function isTableRowType(input: string): input is TableRowType {
   ],
 })
 export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDestroy {
-  private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement);
+  private readonly hammerManager: HammerManager = new Hammer.Manager(this.elementRef.nativeElement, {
+    cssProps: { ...Hammer.defaults.cssProps, userSelect: 'text' },
+  });
 
   private readonly subscription: Subscription = new Subscription();
 
