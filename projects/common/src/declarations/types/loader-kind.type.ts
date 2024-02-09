@@ -1,1 +1,1 @@
-export type LoaderKind = 'neutral' | 'success' | 'warning' | 'danger';
+export type LoaderKind = 'default' | 'success' | 'warning' | 'danger';

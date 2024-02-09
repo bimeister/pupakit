@@ -1,1 +1,5 @@
-<pupa-loader size="50px"></pupa-loader>
+<div class="loader-container">
+  <pupa-loader size="50px"></pupa-loader>
+  <pupa-loader size="50px" type="determinate" [progress]="50"></pupa-loader>
+  <pupa-loader size="50px" type="determinate" [isError]="true" errorText="Loader error text"></pupa-loader>
+</div>
