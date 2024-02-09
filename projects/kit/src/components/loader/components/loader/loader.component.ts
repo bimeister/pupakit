@@ -3,7 +3,7 @@ import { ComponentChanges, Loader, LoaderKind } from '@bimeister/pupakit.common'
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
 
-const DEFAULT_RADIUS: number = 12;
+const DEFAULT_RADIUS: number = 10;
 
 @Component({
   selector: 'pupa-loader',
@@ -18,8 +18,8 @@ export class LoaderComponent implements OnChanges {
   @Input() public type: Loader = 'indeterminate';
   public readonly type$: BehaviorSubject<Loader> = new BehaviorSubject<Loader>('indeterminate');
 
-  @Input() public kind: LoaderKind = 'neutral';
-  public readonly kind$: BehaviorSubject<LoaderKind> = new BehaviorSubject<LoaderKind>('neutral');
+  @Input() public kind: LoaderKind = 'default';
+  public readonly kind$: BehaviorSubject<LoaderKind> = new BehaviorSubject<LoaderKind>('default');
 
   @Input() public progress: number = 0;
   public readonly progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);

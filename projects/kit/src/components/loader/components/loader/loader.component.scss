@@ -25,7 +25,8 @@
     height: 100%;
     width: 100%;
     fill: none;
-    stroke-width: 4px;
+    stroke-width: 2px;
+    stroke-linecap: round;
     stroke: currentColor;
 
     &_background {
@@ -51,11 +52,11 @@
     animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite rotate;
 
     &_scale {
-      stroke-dasharray: 75px;
-      stroke-dashoffset: 50px;
+      stroke-dasharray: 80px;
+      stroke-dashoffset: 65px;
     }
 
-    &_neutral {
+    &_default {
       color: inherit;
     }
 
