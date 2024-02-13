@@ -155,11 +155,16 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
     const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
 
-    return merge(mouseDown$, touchMove$, wheel$, resize$).subscribe(
-      (event: MouseEvent | TouchEvent | WheelEvent | Event) => {
-        const clickedElement: HTMLElement = event.target as HTMLElement;
+    let anchorMouseEnter$: Observable<Event>;
+    if (this.config.anchor instanceof ElementRef) {
+      anchorMouseEnter$ = fromEvent(this.config.anchor.nativeElement, 'mouseenter');
+    }
 
-        if (this.isClickedOnAnchor(clickedElement)) {
+    return merge(anchorMouseEnter$, mouseDown$, touchMove$, wheel$, resize$).subscribe(
+      (event: MouseEvent | TouchEvent | WheelEvent | Event) => {
+        const eventTarget: HTMLElement = event.target as HTMLElement;
+
+        if (this.isContainsElementOnAnchor(eventTarget)) {
           return;
         }
 
@@ -181,10 +186,11 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     }, this.config.autoCloseTimeout);
   }
 
-  private isClickedOnAnchor(clickedElement: HTMLElement): boolean {
+  private isContainsElementOnAnchor(htmlElement: HTMLElement): boolean {
     if (this.config.anchor instanceof ElementRef) {
       const anchorElement: HTMLElement = this.config.anchor.nativeElement;
-      return anchorElement.contains(clickedElement);
+      clearTimeout(this.popoverAutoCloseTimeout);
+      return anchorElement.contains(htmlElement);
     }
     return false;
   }

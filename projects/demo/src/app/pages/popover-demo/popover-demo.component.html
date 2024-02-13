@@ -39,6 +39,16 @@
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer>
+      <demo-example-viewer-section-label>Popovers Directive</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="pupaPopoverHover" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription> Call popover by hover </ng-container>
+        </demo-example-viewer-property>
+        <demo-example-viewer-property name="pupaPopoverCloseTime" type="number">
+          <ng-container *demoExampleViewerPropertyDescription> Popover closing delay time </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
       <demo-example-viewer-section-label>PopoversService</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property
