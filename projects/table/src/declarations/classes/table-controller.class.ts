@@ -85,8 +85,28 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.RefreshDataSlice());
   }
 
-  public setSelected(...selectedIdsFromTrackBy: string[]): void {
-    this.dispatchInQueue(new TableEvents.SetSelected(selectedIdsFromTrackBy));
+  public selectRows(...rowsIds: string[]): void {
+    this.dispatchInQueue(new TableEvents.SelectRows(rowsIds));
+  }
+
+  public unselectRows(...rowsIds: string[]): void {
+    this.dispatchInQueue(new TableEvents.UnselectRows(rowsIds));
+  }
+
+  public unselectAllRows(): void {
+    this.dispatchInQueue(new TableEvents.SelectRows([], true));
+  }
+
+  public disableRows(...rowsIds: string[]): void {
+    this.dispatchInQueue(new TableEvents.DisableRows(rowsIds));
+  }
+
+  public enableRows(...rowsIds: string[]): void {
+    this.dispatchInQueue(new TableEvents.EnableRows(rowsIds));
+  }
+
+  public enableAllRows(): void {
+    this.dispatchInQueue(new TableEvents.DisableRows([], true));
   }
 
   public scrollByIndex(index: number): void {

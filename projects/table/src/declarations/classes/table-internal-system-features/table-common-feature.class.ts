@@ -1,7 +1,7 @@
 import { ListRange } from '@angular/cdk/collections';
 import { EventBus } from '@bimeister/event-bus/rxjs';
 import { QueueEvents } from '@bimeister/pupakit.common';
-import { filterByInstanceOf } from '@bimeister/utilities';
+import { filterByInstanceOf, getArraysDifference, isEmpty } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { map, mapTo, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { TableEvents } from '../../events/table.events';
@@ -16,17 +16,20 @@ export class TableCommonFeature<T> implements TableFeature {
   private readonly displayData: TableDataDisplayCollectionRef<T> = this.api.displayData;
 
   constructor(private readonly api: TableApi<T>) {
-    this.subscription.add(this.processOuterSetSetDataEvent());
-    this.subscription.add(this.processOuterSetColumnDefinitionsEvent());
-    this.subscription.add(this.processOuterRefreshDataSliceEvent());
-    this.subscription.add(this.processOuterSetSelectedEvent());
+    this.subscription.add(this.setDataEvent());
+    this.subscription.add(this.setColumnDefinitionsEvent());
+    this.subscription.add(this.refreshDataSliceEvent());
+    this.subscription.add(this.selectRowsEvent());
+    this.subscription.add(this.unselectRowsEvent());
+    this.subscription.add(this.disableRowsEvent());
+    this.subscription.add(this.enableRowsEvent());
   }
 
   public dispose(): void {
     this.subscription.unsubscribe();
   }
 
-  private processOuterSetSetDataEvent(): Subscription {
+  private setDataEvent(): Subscription {
     return this.eventBus
       .listen()
       .pipe(
@@ -36,7 +39,7 @@ export class TableCommonFeature<T> implements TableFeature {
       .subscribe((event: TableEvents.SetData<T>) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
   }
 
-  private processOuterSetColumnDefinitionsEvent(): Subscription {
+  private setColumnDefinitionsEvent(): Subscription {
     return this.eventBus
       .listen()
       .pipe(
@@ -50,7 +53,7 @@ export class TableCommonFeature<T> implements TableFeature {
       );
   }
 
-  private processOuterRefreshDataSliceEvent(): Subscription {
+  private refreshDataSliceEvent(): Subscription {
     return this.eventBus
       .listen()
       .pipe(
@@ -70,16 +73,75 @@ export class TableCommonFeature<T> implements TableFeature {
       );
   }
 
-  private processOuterSetSelectedEvent(): Subscription {
+  private selectRowsEvent(): Subscription {
     return this.eventBus
       .listen()
       .pipe(
-        filterByInstanceOf(TableEvents.SetSelected),
-        map((event: TableEvents.SetSelected) => {
-          this.displayData.setSelectedIdsList(event.selectedRowTrackByIds);
-          return event;
+        filterByInstanceOf(TableEvents.SelectRows),
+        withLatestFrom(this.displayData.selectedRowsIds$),
+        tap(([event, currentSelectedRowsIds]: [TableEvents.SelectRows, string[]]) => {
+          if (event.isOverwrite) {
+            this.displayData.setSelectedRowsIds(event.selectedRowsIds);
+            return;
+          }
+          this.displayData.setSelectedRowsIds([...currentSelectedRowsIds, ...event.selectedRowsIds]);
         })
       )
-      .subscribe((event: TableEvents.SetSelected) => this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id)));
+      .subscribe(([event]: [TableEvents.SelectRows, string[]]) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
+  }
+
+  private unselectRowsEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.UnselectRows),
+        withLatestFrom(this.displayData.selectedRowsIds$),
+        tap(([event, selectedRowsIds]: [TableEvents.UnselectRows, string[]]) => {
+          if (!isEmpty(event.unselectedRowsIds) && !isEmpty(selectedRowsIds)) {
+            this.displayData.setSelectedRowsIds(getArraysDifference(selectedRowsIds, event.unselectedRowsIds));
+          }
+        })
+      )
+      .subscribe(([event]: [TableEvents.UnselectRows, string[]]) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
+  }
+
+  private disableRowsEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.DisableRows),
+        withLatestFrom(this.displayData.disabledRowsIds$),
+        tap(([event, currentDisabledRowsIds]: [TableEvents.DisableRows, string[]]) => {
+          if (event.isOverwrite) {
+            this.displayData.setDisabledRowsIds(event.disabledRowsIds);
+            return;
+          }
+          this.displayData.setDisabledRowsIds([...currentDisabledRowsIds, ...event.disabledRowsIds]);
+        })
+      )
+      .subscribe(([event]: [TableEvents.DisableRows, string[]]) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
+  }
+
+  private enableRowsEvent(): Subscription {
+    return this.eventBus
+      .listen()
+      .pipe(
+        filterByInstanceOf(TableEvents.EnableRows),
+        withLatestFrom(this.displayData.disabledRowsIds$),
+        tap(([event, disabledRowsIds]: [TableEvents.EnableRows, string[]]) => {
+          if (!isEmpty(event.enabledRowsIds) && !isEmpty(disabledRowsIds)) {
+            this.displayData.setDisabledRowsIds(getArraysDifference(disabledRowsIds, event.enabledRowsIds));
+          }
+        })
+      )
+      .subscribe(([event]: [TableEvents.EnableRows, string[]]) =>
+        this.eventBus.dispatch(new QueueEvents.RemoveFromQueue(event.id))
+      );
   }
 }

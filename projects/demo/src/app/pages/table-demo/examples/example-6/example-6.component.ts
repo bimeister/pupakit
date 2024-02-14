@@ -11,6 +11,7 @@ import {
 } from '@bimeister/pupakit.table';
 import { getUuid, sortByProperty } from '@bimeister/utilities';
 import { Subject, Subscription } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 interface SomeData {
   id: Uuid;
@@ -83,6 +84,10 @@ export class TableExample6Component implements OnDestroy {
     features: [TableSortingFeature],
   });
 
+  public hasLeftBorderControl: FormControl<boolean> = new FormControl<boolean>(true);
+
+  public hasRightBorderControl: FormControl<boolean> = new FormControl<boolean>(true);
+
   public readonly columnWidthChanged$: Subject<TableEvents.ColumnWidthChanged> =
     new Subject<TableEvents.ColumnWidthChanged>();
   public readonly columnSortingChanged$: Subject<TableFeatureEvents.ColumnSortingChanged> =
@@ -153,12 +158,28 @@ export class TableExample6Component implements OnDestroy {
     );
   }
 
-  public highlightSecondRow(): void {
-    this.controller.setSelected(DATA[1].id);
+  public selectFirstThreeRows(): void {
+    this.controller.selectRows(DATA[0].id, DATA[1].id, DATA[2].id);
   }
 
-  public resetHighlighting(): void {
-    this.controller.setSelected();
+  public unselectTwoSelectedRows(): void {
+    this.controller.unselectRows(DATA[0].id, DATA[1].id);
+  }
+
+  public unselectAllSelectedRows(): void {
+    this.controller.unselectAllRows();
+  }
+
+  public disableFirstThreeRows(): void {
+    this.controller.disableRows(DATA[0].id, DATA[1].id, DATA[2].id);
+  }
+
+  public enableTwoDisabledRows(): void {
+    this.controller.enableRows(DATA[0].id, DATA[1].id);
+  }
+
+  public enableAllDisabledRows(): void {
+    this.controller.enableAllRows();
   }
 
   public scrollToIndex50(): void {

@@ -17,17 +17,18 @@ interface DistributedColumns {
   rightPinnedColumns: TableColumn[];
 }
 
-const DEFAULT_ROW_HEIGHT_PX: number = 50;
+const DEFAULT_ROW_HEIGHT_PX: number = 40;
 const DEFAULT_MIN_BUFFER_PX: number = 100;
 
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
-  public readonly selectedIdsList$: BehaviorSubject<string[]> = new BehaviorSubject([]);
+  public readonly selectedRowsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
+  public readonly disabledRowsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
   public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject<TrackByFunction<T>>(
     TableDataDisplayCollection.trackBy
   );
-  public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject('smooth');
+  public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject<ScrollBehavior>('smooth');
 
   private readonly columnDefinitions$: BehaviorSubject<TableColumnDefinition[]> = new BehaviorSubject<
     TableColumnDefinition[]
@@ -100,10 +101,16 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly headerRow: TableRow = new TableRow();
   public readonly placeholderRow: TableRow = new TableRow();
 
-  private readonly selectedIdsSet$: Observable<Set<string>> = this.selectedIdsList$.pipe(
+  private readonly selectedRowsIdsSet$: Observable<Set<string>> = this.selectedRowsIds$.pipe(
     map((selectedIdsList: string[]) => new Set<string>(selectedIdsList)),
     shareReplayWithRefCount()
   );
+
+  private readonly disabledRowsIdsSet$: Observable<Set<string>> = this.disabledRowsIds$.pipe(
+    map((disabledIdsList: string[]) => new Set<string>(disabledIdsList)),
+    shareReplayWithRefCount()
+  );
+
   public readonly bodyRowIdToBodyRowMap$: Observable<Map<string, TableBodyRow<T>>> = combineLatest([
     this.data$,
     this.virtualScrollDataSource.listRange$,
@@ -115,7 +122,13 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
       const dataSlice: T[] = data.slice(listRange.start, listRange.end);
       dataSlice.forEach((dataItem: T, index: number) => {
         const id: string = trackBy(index, dataItem);
-        const row: TableBodyRow<T> = new TableBodyRow<T>(id, index + listRange.start, dataItem, this.selectedIdsSet$);
+        const row: TableBodyRow<T> = new TableBodyRow<T>(
+          id,
+          index + listRange.start,
+          dataItem,
+          this.selectedRowsIdsSet$,
+          this.disabledRowsIdsSet$
+        );
         newColumnIdToColumnMap.set(id, row);
       });
 
@@ -134,8 +147,12 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     return this.data$.pipe(take(1));
   }
 
-  public setSelectedIdsList(value: string[]): void {
-    this.selectedIdsList$.next(value);
+  public setSelectedRowsIds(rowsIds: string[]): void {
+    this.selectedRowsIds$.next(rowsIds);
+  }
+
+  public setDisabledRowsIds(rowsIds: string[]): void {
+    this.disabledRowsIds$.next(rowsIds);
   }
 
   public setColumnDefinitions(definitions: TableColumnDefinition[]): void {

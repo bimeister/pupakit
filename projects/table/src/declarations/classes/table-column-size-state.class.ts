@@ -7,9 +7,11 @@ import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
 
 const BREAKPOINTS: string[] = ['xxl', 'xl', 'xlg', 'lg', 'md', 'sm', 'xs'];
 
+const MIN_POSSIBLE_COLUMN_WIDTH_PX: number = 40;
+
 const UNDEFINED_SIZES: TableColumnSizes = {
   widthPx: 100,
-  minWidthPx: -Infinity,
+  minWidthPx: MIN_POSSIBLE_COLUMN_WIDTH_PX,
   maxWidthPx: Infinity,
 };
 
@@ -26,14 +28,11 @@ export class TableColumnSizeState {
     this.adaptiveSizes$,
   ]).pipe(
     map(([defaultSizes, adaptiveSizes]: [Nullable<TableColumnSizes>, Nullable<TableAdaptiveColumnSizes>]) => {
-      const sanitizedSizes: TableColumnSizes = isNil(defaultSizes)
-        ? UNDEFINED_SIZES
-        : { ...UNDEFINED_SIZES, ...defaultSizes };
       const breakpointToSizesMap: Map<string, TableColumnSizes> = new Map<string, TableColumnSizes>();
 
       BREAKPOINTS.forEach((breakpoint: string, index: number) => {
         const largerBreakpointSizes: TableColumnSizes =
-          index === 0 ? sanitizedSizes : breakpointToSizesMap.get(BREAKPOINTS[index - 1]);
+          index === 0 ? defaultSizes : breakpointToSizesMap.get(BREAKPOINTS[index - 1]);
         breakpointToSizesMap.set(
           breakpoint,
           isNil(adaptiveSizes?.[breakpoint])
@@ -108,7 +107,7 @@ export class TableColumnSizeState {
   constructor(private readonly clientUiStateHandlerService: ClientUiStateHandlerService) {}
 
   public setDefinitionSizes(defaultSizes?: TableColumnSizes, adaptiveSizes?: TableAdaptiveColumnSizes): void {
-    this.defaultSizes$.next(defaultSizes);
+    this.defaultSizes$.next(this.sanitizeDefaultColumnSizes(defaultSizes));
     this.adaptiveSizes$.next(adaptiveSizes);
   }
 
@@ -163,5 +162,20 @@ export class TableColumnSizeState {
   public setFitWidth(widthPx: number): void {
     this.userWidthPxState$.next(null);
     this.fitWidthPxState$.next(widthPx);
+  }
+
+  private sanitizeDefaultColumnSizes(defaultSizes?: TableColumnSizes): TableColumnSizes {
+    if (isNil(defaultSizes)) {
+      return UNDEFINED_SIZES;
+    }
+
+    return {
+      ...UNDEFINED_SIZES,
+      ...defaultSizes,
+      minWidthPx:
+        defaultSizes.minWidthPx >= MIN_POSSIBLE_COLUMN_WIDTH_PX
+          ? defaultSizes.minWidthPx
+          : MIN_POSSIBLE_COLUMN_WIDTH_PX,
+    };
   }
 }

@@ -9,12 +9,13 @@
 
 .pupa-table-body-cell {
   box-sizing: border-box;
-  padding: 4rem 3rem;
+  padding: 1rem 2.5rem;
   @include mixins.font-preset-caption-s;
   color: functions.semantic-color(text-primary);
-  line-height: 17px;
+  line-height: 3.75rem;
 
   display: flex;
+  gap: 2rem;
   align-items: center;
   height: inherit;
 
@@ -37,9 +38,5 @@
     display: block;
     width: 100%;
     @include mixins.ellipsis-text-overflow;
-  }
-
-  @include mixins.xs() {
-    padding: 6px 4rem 6px 3rem;
   }
 }
