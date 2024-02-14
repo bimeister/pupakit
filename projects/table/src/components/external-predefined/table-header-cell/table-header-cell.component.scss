@@ -9,34 +9,39 @@
 }
 
 .pupa-header-cell {
-  width: 100%;
   box-sizing: border-box;
-  padding: 3rem;
+  width: 100%;
+  height: inherit;
+  padding: 1rem 2.5rem;
   @include mixins.font-preset-h6;
-  background-color: functions.semantic-color(surface-secondary);
+  background-color: functions.semantic-color(surface-tertiary);
   color: functions.semantic-color(text-primary);
-  line-height: 17px;
+  line-height: 4.25rem;
   transition: color 0.2s ease, background-color 0.2s ease;
   display: flex;
   align-items: center;
-  height: inherit;
+  gap: 2rem;
 
   &_sortable {
     cursor: pointer;
   }
 
+  &_dnd-clone {
+    background-color: functions.semantic-color(surface-primary);
+    border: 1px solid functions.semantic-color(kind-primary-normal);
+    box-shadow: 0 1rem 1.5rem -0.5rem functions.color(neutral-1000, alpha-3),
+      0 3rem 4rem -1rem functions.color(neutral-1000, alpha-5);
+  }
+
   &:not(.pupa-header-cell_dnd-clone) {
     &.pupa-header-cell_current-draggable {
+      background-color: functions.semantic-color(kind-neutral-active);
       opacity: 0.5;
     }
   }
 
   &:hover {
-    background-color: functions.semantic-color(kind-neutral-hover);
-  }
-
-  @include mixins.xs() {
-    padding: 6px 4rem 6px 3rem;
+    background-color: functions.semantic-color(surface-action);
   }
 }
 
@@ -61,5 +66,4 @@
   display: flex;
   flex-grow: 1;
   flex-direction: row-reverse;
-  margin-left: 8px;
 }

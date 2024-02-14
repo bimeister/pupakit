@@ -21,11 +21,13 @@ export namespace TableEvents {
       super();
     }
   }
+
   export class RowHover extends TableEventBase {
     constructor(public readonly rowId: string) {
       super();
     }
   }
+
   export class CellClick extends TableEventBase {
     constructor(public readonly targetCell: Nullable<TableEventTargetCellData>) {
       super();
@@ -47,6 +49,7 @@ export namespace TableEvents {
       super();
     }
   }
+
   export class Pan extends TableEventBase {
     constructor(
       public readonly targetCell: Nullable<TableEventTargetCellData>,
@@ -56,6 +59,7 @@ export namespace TableEvents {
       super();
     }
   }
+
   export class PanEnd extends TableEventBase {
     constructor(public readonly targetCell: Nullable<TableEventTargetCellData>) {
       super();
@@ -67,36 +71,43 @@ export namespace TableEvents {
       super();
     }
   }
+
   export class ColumnDragIndicatorPositionChange extends TableEventBase {
     constructor(public readonly offsetLeft: Nullable<number>) {
       super();
     }
   }
+
   export class ColumnDragEnd extends TableEventBase {
     constructor(public readonly columnId: string, public readonly newIndex: number, public readonly oldIndex: number) {
       super();
     }
   }
+
   export class ColumnWidthChanged extends TableEventBase {
     constructor(public readonly widthPx: number, public readonly columnId: string) {
       super();
     }
   }
+
   export class ListRangeChanged extends TableEventBase {
     constructor(public readonly listRange: ListRange) {
       super();
     }
   }
+
   export class HiddenColumnIdsChanged extends TableEventBase {
     constructor(public readonly leftColumnIds: string[], public readonly rightColumnIds: string[]) {
       super();
     }
   }
+
   export class HorizontalScrollBarVisibilityChanged extends TableEventBase {
     constructor(public readonly isVisible: boolean) {
       super();
     }
   }
+
   export class VerticalScrollBarVisibilityChanged extends TableEventBase {
     constructor(public readonly isVisible: boolean) {
       super();
@@ -108,33 +119,60 @@ export namespace TableEvents {
       super();
     }
   }
-  export class SetSelected extends TableEventBase {
-    constructor(public readonly selectedRowTrackByIds: string[]) {
+
+  export class SelectRows extends TableEventBase {
+    constructor(public readonly selectedRowsIds: string[], public readonly isOverwrite: boolean = false) {
       super();
     }
   }
+
+  export class UnselectRows extends TableEventBase {
+    constructor(public readonly unselectedRowsIds: string[]) {
+      super();
+    }
+  }
+
+  export class DisableRows extends TableEventBase {
+    constructor(public readonly disabledRowsIds: string[], public readonly isOverwrite: boolean = false) {
+      super();
+    }
+  }
+
+  export class EnableRows extends TableEventBase {
+    constructor(public readonly enabledRowsIds: string[]) {
+      super();
+    }
+  }
+
   export class SetColumnDefinitions<TFeatureOptions = unknown, TModel = unknown> extends TableEventBase {
     constructor(public readonly definitions: TableColumnDefinition<TFeatureOptions, TModel>[]) {
       super();
     }
   }
+
   export class FitColumns extends TableEventBase {}
+
   export class StartFitColumnsOnResize extends TableEventBase {}
+
   export class StopFitColumnsOnResize extends TableEventBase {}
+
   export class UpdateColumnWidthByDelta extends TableEventBase {
     constructor(public columnId: string, public readonly deltaPx: number) {
       super();
     }
   }
+
   export class SetColumnWidth extends TableEventBase {
     constructor(public columnId: string, public readonly widthPx: number) {
       super();
     }
   }
+
   export class ScrollByIndex extends TableEventBase {
     constructor(public readonly index: number) {
       super();
     }
   }
+
   export class RefreshDataSlice extends TableEventBase {}
 }

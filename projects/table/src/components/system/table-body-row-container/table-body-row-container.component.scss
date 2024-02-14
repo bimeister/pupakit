@@ -8,17 +8,22 @@
 .pupa-body-cell {
   position: relative;
   display: block;
-  background-color: functions.semantic-color(surface-tertiary);
+  background-color: functions.semantic-color(surface-primary);
   margin-right: 1px;
   box-sizing: border-box;
   flex-shrink: 0;
+  transition: background-color 0.2s ease;
 
-  &.pupa-row-hovered {
-    background-color: functions.semantic-color(kind-neutral-hover);
+  &.pupa-row-hovered:not(.pupa-row-disabled) {
+    background-color: transparent;
   }
 
-  &.pupa-row-selected {
-    background-color: functions.semantic-color(kind-neutral-active);
+  &.pupa-row-selected:not(.pupa-row-disabled) {
+    background-color: transparent;
+  }
+
+  &.pupa-row-disabled {
+    background-color: transparent;
   }
 
   &::after {

@@ -11,7 +11,8 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly trackBy$: Observable<TrackByFunction<T>>;
   readonly scrollBehavior$: Observable<ScrollBehavior>;
   readonly data$: Observable<T[]>;
-  readonly selectedIdsList$: Observable<string[]>;
+  readonly selectedRowsIds$: Observable<string[]>;
+  readonly disabledRowsIds$: Observable<string[]>;
   readonly headerRowHeightPx$: Observable<number>;
   readonly bodyRowHeightPx$: Observable<number>;
   readonly virtualScrollDataSource: TableBodyRowsDataSource<T>;
@@ -30,12 +31,22 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly countOfVisibleRows$: Observable<number>;
 
   setData(value: T[]): Observable<T[]>;
-  setSelectedIdsList(value: string[]): void;
+
+  setSelectedRowsIds(rowsIds: string[]): void;
+
+  setDisabledRowsIds(rowsIds: string[]): void;
+
   setColumnDefinitions(value: TableColumnDefinition[]): void;
+
   setTableWidthPx(value: number): void;
+
   setTableHeightPx(value: number): void;
+
   setTableViewportSizePx(value: number): void;
+
   measureFirstVisibleListRange(): void;
+
   setHeaderRowHeightPx(value: number): void;
+
   setBodyRowHeightPx(value: number): void;
 }

@@ -6,8 +6,15 @@
   (click)="processClick($event)"
   *pupaLet="dndRowsSettings$ | async as dndRowsSettings"
 >
-  <div class="pupa-table__header pupa-table-header">
-    <div class="pupa-table-header__pinned-left-container">
+  <div
+    class="pupa-table__header pupa-table-header"
+    [class.pupa-table-header_with-border-left]="hasLeftBorder"
+    [class.pupa-table-header_with-border-right]="hasRightBorder"
+  >
+    <div
+      class="pupa-table-header__pinned-left-container"
+      [class.pupa-table-header__pinned-left-container_with-shadow]="hasLeftHiddenColumns$ | async"
+    >
       <pupa-table-header-row-container
         *ngIf="headerRow$ | async as row"
         [row]="row"
@@ -16,16 +23,16 @@
         [class.pupa-table-row_hovered]="row.isHovered$ | async"
         [style.height.px]="headerRowHeightPx$ | async"
       ></pupa-table-header-row-container>
-
-      <div
-        class="pupa-table-header__hidden-columns-count pupa-table-header__hidden-columns-count_left"
-        *ngIf="(leftHiddenColumnsCount$ | async) > 0"
-      >
-        {{ leftHiddenColumnsCount$ | async | formatCount }}
-      </div>
     </div>
 
     <div class="pupa-table-header__scrollable-container" #headerScrollableContainer>
+      <div
+        class="pupa-table-header__hidden-columns-count pupa-table-header__hidden-columns-count_left"
+        *ngIf="hasLeftHiddenColumns$ | async"
+      >
+        +{{ leftHiddenColumnsCount$ | async | formatCount }}
+      </div>
+
       <pupa-table-header-row-container
         #headerScrollableRowContainer
         *ngIf="headerRow$ | async as row"
@@ -35,16 +42,19 @@
         [class.pupa-table-row_hovered]="row.isHovered$ | async"
         [style.height.px]="headerRowHeightPx$ | async"
       ></pupa-table-header-row-container>
-    </div>
 
-    <div class="pupa-table-header__pinned-right-container">
       <div
         class="pupa-table-header__hidden-columns-count pupa-table-header__hidden-columns-count_right"
-        *ngIf="(rightHiddenColumnsCount$ | async) > 0"
+        *ngIf="hasRightHiddenColumns$ | async"
       >
-        {{ rightHiddenColumnsCount$ | async | formatCount }}
+        +{{ rightHiddenColumnsCount$ | async | formatCount }}
       </div>
+    </div>
 
+    <div
+      class="pupa-table-header__pinned-right-container"
+      [class.pupa-table-header__pinned-right-container_with-shadow]="hasRightHiddenColumns$ | async"
+    >
       <pupa-table-header-row-container
         *ngIf="headerRow$ | async as row"
         [row]="row"
@@ -72,6 +82,7 @@
       <pupa-scrollable
         #scrollableContainer
         class="pupa-table-body__scrollable"
+        [class.pupa-table-body__scrollable_with-border-bottom]="isVerticalScrollBarVisible$ | async"
         (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
         [position]="'external'"
       >
@@ -86,43 +97,21 @@
             *cdkVirtualFor="let row of virtualScrollDataSource$ | async; trackBy: trackBy$ | async"
           ></ng-container>
 
-          <div class="pupa-table-decor">
-            <div class="pupa-table-placeholder__pinned-left-container pupa-table-decor__pinned-left-container">
-              <pupa-table-placeholder-row-container
-                class="pupa-table-row pupa-table-row_decor"
-                [isFullHeightCells]="true"
-                [row]="placeholderRow$ | async"
-                [columns]="pinnedLeftColumns$ | async"
-              ></pupa-table-placeholder-row-container>
-            </div>
-
-            <div class="pupa-table-placeholder__scrollable-container pupa-table-decor__scrollable-container">
-              <pupa-table-placeholder-row-container
-                #decorScrollableRowContainer
-                class="pupa-table-row pupa-table-row_decor"
-                [isFullHeightCells]="true"
-                [row]="placeholderRow$ | async"
-                [columns]="scrollableColumns$ | async"
-              ></pupa-table-placeholder-row-container>
-            </div>
-
-            <div class="pupa-table-placeholder__pinned-right-container pupa-table-decor__pinned-right-container">
-              <pupa-table-placeholder-row-container
-                class="pupa-table-row pupa-table-row_decor"
-                [isFullHeightCells]="true"
-                [row]="placeholderRow$ | async"
-                [columns]="pinnedRightColumns$ | async"
-              ></pupa-table-placeholder-row-container>
-            </div>
-          </div>
-
-          <div class="pupa-table-body__scroll-viewport-container">
-            <div class="pupa-table-body__pinned-left-container">
+          <div
+            class="pupa-table-body__scroll-viewport-container"
+            [class.pupa-table-body__scroll-viewport-container_with-border-left]="hasLeftBorder"
+            [class.pupa-table-body__scroll-viewport-container_with-border-right]="hasRightBorder"
+          >
+            <div
+              class="pupa-table-body__pinned-left-container"
+              [class.pupa-table-body__pinned-left-container_with-shadow]="hasLeftHiddenColumns$ | async"
+            >
               <pupa-table-body-row-container
                 *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
+                [class.pupa-table-row_disabled]="row.isDisabled$ | async"
                 [style.height.px]="bodyRowHeightPx$ | async"
                 [row]="row"
                 [columns]="pinnedLeftColumns$ | async"
@@ -146,6 +135,7 @@
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
+                [class.pupa-table-row_disabled]="row.isDisabled$ | async"
                 [style.height.px]="bodyRowHeightPx$ | async"
                 [row]="row"
                 [columns]="scrollableColumns$ | async"
@@ -155,12 +145,16 @@
               ></pupa-table-body-row-container>
             </pupa-scrollable>
 
-            <div class="pupa-table-body__pinned-right-container">
+            <div
+              class="pupa-table-body__pinned-right-container"
+              [class.pupa-table-body__pinned-right-container_with-shadow]="hasRightHiddenColumns$ | async"
+            >
               <pupa-table-body-row-container
                 *ngFor="let row of rows$ | async; trackBy: rowTrackByFunction"
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
+                [class.pupa-table-row_disabled]="row.isDisabled$ | async"
                 [style.height.px]="bodyRowHeightPx$ | async"
                 [row]="row"
                 [columns]="pinnedRightColumns$ | async"
@@ -182,6 +176,7 @@
     <div class="pupa-table-bottom-scrollbar__pinned-left-container">
       <pupa-table-placeholder-row-container
         class="pupa-table-row pupa-table-row_placeholder"
+        [class.pupa-table-row_placeholder_without-border]="isVerticalScrollBarVisible$ | async"
         [row]="placeholderRow$ | async"
         [columns]="pinnedLeftColumns$ | async"
       ></pupa-table-placeholder-row-container>
@@ -201,7 +196,8 @@
       "
     >
       <pupa-table-placeholder-row-container
-        class="pupa-table-row table-row_placeholder"
+        class="pupa-table-row pupa-table-row_placeholder"
+        [class.pupa-table-row_placeholder_without-border]="isVerticalScrollBarVisible$ | async"
         [row]="placeholderRow$ | async"
         [columns]="scrollableColumns$ | async"
       ></pupa-table-placeholder-row-container>
@@ -210,6 +206,7 @@
     <div class="pupa-table-bottom-scrollbar__pinned-right-container">
       <pupa-table-placeholder-row-container
         class="pupa-table-row pupa-table-row_placeholder"
+        [class.pupa-table-row_placeholder_without-border]="isVerticalScrollBarVisible$ | async"
         [row]="placeholderRow$ | async"
         [columns]="pinnedRightColumns$ | async"
       ></pupa-table-placeholder-row-container>

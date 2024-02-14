@@ -146,6 +146,10 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   @ViewChild('decorScrollableRowContainer', { read: ElementRef })
   public decorScrollableRowContainerElementRef?: Nullable<ElementRef<HTMLElement>>;
 
+  @Input() public hasLeftBorder: boolean = true;
+
+  @Input() public hasRightBorder: boolean = true;
+
   @Input() public controller: TableController<T>;
   private readonly controller$: BehaviorSubject<Nullable<TableController<T>>> = new BehaviorSubject<TableController<T>>(
     null
@@ -218,10 +222,20 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       map((leftHiddenColumnIds: string[]) => leftHiddenColumnIds.length)
     );
 
+  public readonly hasLeftHiddenColumns$: Observable<boolean> = this.leftHiddenColumnsCount$.pipe(
+    map((leftHiddenColumnsCount: number) => leftHiddenColumnsCount > 0),
+    distinctUntilChanged()
+  );
+
   public readonly rightHiddenColumnsCount$: Observable<number> =
     this.tableColumnsIntersectionService.rightHiddenColumnIds$.pipe(
       map((rightHiddenColumnIds: string[]) => rightHiddenColumnIds.length)
     );
+
+  public readonly hasRightHiddenColumns$: Observable<boolean> = this.rightHiddenColumnsCount$.pipe(
+    map((rightHiddenColumnsCount: number) => rightHiddenColumnsCount > 0),
+    distinctUntilChanged()
+  );
 
   public readonly columnDndIndicatorOffsetLeft$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<
     Nullable<number>

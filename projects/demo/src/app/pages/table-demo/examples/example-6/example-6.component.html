@@ -14,13 +14,25 @@
 </div>
 
 <div class="actions">
-  <pupa-button class="action-button" (click)="highlightSecondRow()">Highlight second row</pupa-button>
-  <pupa-button class="action-button" (click)="resetHighlighting()">Reset highlighting</pupa-button>
+  <pupa-button class="action-button" (click)="selectFirstThreeRows()">Select first three rows</pupa-button>
+  <pupa-button class="action-button" (click)="unselectTwoSelectedRows()">Unselect two selected rows</pupa-button>
+  <pupa-button class="action-button" (click)="unselectAllSelectedRows()">Unselect all</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-button class="action-button" (click)="disableFirstThreeRows()">Disable first three rows</pupa-button>
+  <pupa-button class="action-button" (click)="enableTwoDisabledRows()">Enable two disabled rows</pupa-button>
+  <pupa-button class="action-button" (click)="enableAllDisabledRows()">Enable all</pupa-button>
 </div>
 
 <div class="actions">
   <pupa-button class="action-button" (click)="scrollToIndex50()">Scroll to index 50</pupa-button>
   <pupa-button class="action-button" (click)="scrollToStart()">Scroll to start</pupa-button>
+</div>
+
+<div class="actions">
+  <pupa-checkbox [formControl]="hasLeftBorderControl">Has left table border</pupa-checkbox>
+  <pupa-checkbox [formControl]="hasRightBorderControl">Has right table border</pupa-checkbox>
 </div>
 
 <div class="events">
@@ -40,12 +52,12 @@
 
   <div>
     <h3>TableEvents.ColumnHover:</h3>
-    <ng-container *pupaLet="columnHover$ | async; let columnId = columnId"> columnId: {{ columnId }} </ng-container>
+    <ng-container *pupaLet="columnHover$ | async; let columnId = columnId"> columnId: {{ columnId }}</ng-container>
   </div>
 
   <div>
     <h3>TableEvents.RowHover:</h3>
-    <ng-container *pupaLet="rowHover$ | async; let rowId = rowId"> rowId: {{ rowId }} </ng-container>
+    <ng-container *pupaLet="rowHover$ | async; let rowId = rowId"> rowId: {{ rowId }}</ng-container>
   </div>
 
   <div>
@@ -87,7 +99,11 @@
 </div>
 
 <div class="table">
-  <pupa-table [controller]="controller">
+  <pupa-table
+    [controller]="controller"
+    [hasLeftBorder]="hasLeftBorderControl.value"
+    [hasRightBorder]="hasRightBorderControl.value"
+  >
     <pupa-table-column-template columnType="example">
       <div *pupaTableBodyCellTemplate="let column = column">
         {{ column.definition.title }}
