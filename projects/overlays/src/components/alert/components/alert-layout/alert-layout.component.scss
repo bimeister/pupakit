@@ -1,31 +1,31 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: block;
   width: 100%;
 }
 
-.alert-layout {
+.pupa-alert-layout {
   display: flex;
   width: 100%;
   border-radius: 1rem;
   gap: 3rem;
   position: relative;
 
-  color: semantic-color(text-primary);
-  background: semantic-color(surface-glass);
-  @include blur(3rem);
-  border: 1px solid semantic-color(lines-normal);
+  color: functions.semantic-color(text-primary);
+  background: functions.semantic-color(surface-glass);
+  @include mixins.blur(3rem);
+  border: 1px solid functions.semantic-color(lines-normal);
 }
 
-.alert-layout__color {
+.pupa-alert-layout__color {
   flex-shrink: 0;
   width: 3px;
   margin: 1rem 0 1rem 1rem;
 }
 
-.alert-layout__content {
+.pupa-alert-layout__content {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -37,32 +37,32 @@
   margin-right: 34px;
 }
 
-.alert-layout_with-header {
-  .alert-layout__content {
+.pupa-alert-layout_with-header {
+  .pupa-alert-layout__content {
     margin-right: 5rem;
   }
 }
 
-.alert-layout_info {
-  .alert-layout__color {
-    background-color: semantic-color(kind-primary-normal);
+.pupa-alert-layout_info {
+  .pupa-alert-layout__color {
+    background-color: functions.semantic-color(kind-primary-normal);
   }
 }
 
-.alert-layout_warning {
-  .alert-layout__color {
-    background-color: semantic-color(kind-warning-normal);
+.pupa-alert-layout_warning {
+  .pupa-alert-layout__color {
+    background-color: functions.semantic-color(kind-warning-normal);
   }
 }
 
-.alert-layout_success {
-  .alert-layout__color {
-    background-color: semantic-color(kind-success-normal);
+.pupa-alert-layout_success {
+  .pupa-alert-layout__color {
+    background-color: functions.semantic-color(kind-success-normal);
   }
 }
 
-.alert-layout_danger {
-  .alert-layout__color {
-    background-color: semantic-color(kind-danger-normal);
+.pupa-alert-layout_danger {
+  .pupa-alert-layout__color {
+    background-color: functions.semantic-color(kind-danger-normal);
   }
 }

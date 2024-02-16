@@ -1,5 +1,5 @@
-@use 'functions' as *;
-@use '../../styles/calendar.styles' as *;
+@use 'functions';
+@use '../../styles/calendar.styles';
 
 :host {
   width: 100%;
@@ -8,13 +8,13 @@
   flex-grow: 1;
 }
 
-.filler {
+.pupa-filler {
   width: 100%;
   height: 100%;
   display: block;
   content: '';
 
   &_in-range {
-    background-color: semantic-color($range-selection-color);
+    background-color: functions.semantic-color(calendar.$range-selection-color);
   }
 }

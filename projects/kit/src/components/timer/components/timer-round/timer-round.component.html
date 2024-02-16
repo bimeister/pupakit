@@ -1,10 +1,10 @@
-<div class="timer" [class.timer_active]="isActive$ | async">
-  <svg class="timer__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-    <g class="timer__circle">
-      <circle class="timer__path-elapsed" cx="12" cy="12" r="11" />
+<div class="pupa-timer" [class.pupa-timer_active]="isActive$ | async">
+  <svg class="pupa-timer__svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <g class="pupa-timer__circle">
+      <circle class="pupa-timer__path-elapsed" cx="12" cy="12" r="11" />
       <path
         #timerPath
-        class="timer__path-remaining"
+        class="pupa-timer__path-remaining"
         d="
           M 12, 12
           m -11, 0
@@ -14,7 +14,7 @@
       ></path>
     </g>
   </svg>
-  <span class="timer__label" [class.timer__label_small]="isSmallLabel$ | async">
+  <span class="pupa-timer__label" [class.pupa-timer__label_small]="isSmallLabel$ | async">
     {{ displaySeconds$ | async }}
   </span>
 </div>

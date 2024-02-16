@@ -1,7 +1,7 @@
-@use 'mixins' as *;
+@use 'mixins';
 
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'variables';
 
 $layout_border-size: 1px;
 
@@ -9,20 +9,20 @@ $layout_border-size: 1px;
   display: block;
   height: 100%;
   width: 100%;
-  box-shadow: 0 6rem 12rem -3rem color(neutral-1000, alpha-6);
+  box-shadow: 0 6rem 12rem -3rem functions.color(neutral-1000, alpha-6);
 }
 
-:host-context(.drawer-container_full-screen) .drawer-layout {
+:host-context(.pupa-drawer-container_full-screen) .pupa-drawer-layout {
   border-radius: 0;
   box-shadow: none;
 }
 
-.drawer-layout {
-  border-radius: $controlBorderRadius;
+.pupa-drawer-layout {
+  border-radius: variables.$controlBorderRadius;
 
-  color: semantic-color(text-primary);
-  background-color: semantic-color(surface-secondary);
-  border: $layout_border-size solid semantic-color(kind-neutral-normal);
+  color: functions.semantic-color(text-primary);
+  background-color: functions.semantic-color(surface-secondary);
+  border: $layout_border-size solid functions.semantic-color(kind-neutral-normal);
 
   height: 100%;
   width: 100%;
@@ -32,14 +32,14 @@ $layout_border-size: 1px;
   box-sizing: border-box;
 
   &_with-shadow {
-    box-shadow: 0 4px 24px color(neutral-1000, alpha-4);
+    box-shadow: 0 4px 24px functions.color(neutral-1000, alpha-4);
 
-    @include host-selector-dark-theme() {
+    @include mixins.host-selector-dark-theme() {
       box-shadow: none;
     }
   }
 
-  @include xs() {
+  @include mixins.xs() {
     border-radius: 1rem 1rem 0 0;
   }
 }

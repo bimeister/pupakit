@@ -1,7 +1,7 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
-.stepper-counter {
+.pupa-stepper-counter {
   width: 6rem;
   height: 6rem;
 
@@ -9,22 +9,22 @@
   justify-content: center;
   align-items: center;
 
-  color: semantic-color(text-primary);
-  background: semantic-color(kind-neutral-normal);
+  color: functions.semantic-color(text-primary);
+  background: functions.semantic-color(kind-neutral-normal);
   border-radius: 1rem;
 
-  @include font-preset-h6;
+  @include mixins.font-preset-h6;
 
   transition: background-color 0.2s ease;
 
   &_active {
-    background: semantic-color(kind-primary-normal);
-    color: semantic-color(surface-primary);
+    background: functions.semantic-color(kind-primary-normal);
+    color: functions.semantic-color(surface-primary);
   }
 
   &_disabled {
     cursor: not-allowed;
-    background: semantic-color(kind-neutral-disabled);
-    color: semantic-color(text-disabled);
+    background: functions.semantic-color(kind-neutral-disabled);
+    color: functions.semantic-color(text-disabled);
   }
 }

@@ -1,9 +1,9 @@
 <div
-  class="avatar"
+  class="pupa-avatar"
   [ngClass]="sizeClass$ | async"
   [style.background-color]="hslBackgroundColor$ | async"
-  [class.avatar_default]="isEmptyBackgroundSeed$ | async"
-  [class.avatar_disabled]="disabled$ | async"
+  [class.pupa-avatar_default]="isEmptyBackgroundSeed$ | async"
+  [class.pupa-avatar_disabled]="disabled$ | async"
   [ngSwitch]="mode$ | async"
 >
   <ng-container *ngSwitchCase="mode.Icon" [ngTemplateOutlet]="iconTemplate"></ng-container>
@@ -13,21 +13,21 @@
 </div>
 
 <ng-template #iconTemplate>
-  <div class="avatar__icon-container">
-    <pupa-icon class="avatar__icon" [name]="iconName$ | async"></pupa-icon>
+  <div class="pupa-avatar__icon-container">
+    <pupa-icon class="pupa-avatar__icon" [name]="iconName$ | async"></pupa-icon>
   </div>
 </ng-template>
 
 <ng-template #imageTemplate>
-  <div class="avatar__image-container" [style.background-image]="backgroundImage$ | async"></div>
+  <div class="pupa-avatar__image-container" [style.background-image]="backgroundImage$ | async"></div>
 </ng-template>
 
 <ng-template #usernameTemplate>
-  <div class="avatar__text">{{ initials$ | async }}</div>
+  <div class="pupa-avatar__text">{{ initials$ | async }}</div>
 </ng-template>
 
 <ng-template #defaultTemplate>
-  <div class="avatar__icon-container">
-    <pupa-icon class="avatar__icon" [name]="'app-user'"></pupa-icon>
+  <div class="pupa-avatar__icon-container">
+    <pupa-icon class="pupa-avatar__icon" name="app-user"></pupa-icon>
   </div>
 </ng-template>

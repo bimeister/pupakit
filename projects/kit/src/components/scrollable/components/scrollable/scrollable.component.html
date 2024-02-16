@@ -2,27 +2,27 @@
   <div class="pupa-scrollbars">
     <div #verticalScrollbar class="pupa-scrollbar pupa-scrollbar_vertical pupa-scrollbar_vertical_{{ position }}">
       <div
-        class="pupa-scrollbar__thumb-container thumb-container"
-        [class.thumb-container_grabbing]="isVerticalThumbGrabbing$ | async"
-        [class.thumb-container_scrolling]="isContentScrolling$ | async"
-        [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
+        class="pupa-scrollbar__thumb-container pupa-thumb-container"
+        [class.pupa-thumb-container_grabbing]="isVerticalThumbGrabbing$ | async"
+        [class.pupa-thumb-container_scrolling]="isContentScrolling$ | async"
+        [class.pupa-thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
         #verticalScrollbarThumb
       >
-        <div class="pupa-scrollbar__thumb thumb"></div>
+        <div class="pupa-scrollbar__thumb pupa-thumb"></div>
       </div>
-      <div class="pupa-scrollbar__line line line__vertical"></div>
+      <div class="pupa-scrollbar__line pupa-line pupa-line__vertical"></div>
     </div>
     <div #horizontalScrollbar class="pupa-scrollbar pupa-scrollbar_horizontal pupa-scrollbar_horizontal_{{ position }}">
       <div
-        class="pupa-scrollbar__thumb-container thumb-container"
-        [class.thumb-container_grabbing]="isHorizontalThumbGrabbing$ | async"
-        [class.thumb-container_scrolling]="isContentScrolling$ | async"
-        [class.thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
+        class="pupa-scrollbar__thumb-container pupa-thumb-container"
+        [class.pupa-thumb-container_grabbing]="isHorizontalThumbGrabbing$ | async"
+        [class.pupa-thumb-container_scrolling]="isContentScrolling$ | async"
+        [class.pupa-thumb-container_visible-onscroll]="isScrollbarVisibleOnScroll$ | async"
         #horizontalScrollbarThumb
       >
-        <div class="pupa-scrollbar__thumb thumb"></div>
+        <div class="pupa-scrollbar__thumb pupa-thumb"></div>
       </div>
-      <div class="pupa-scrollbar__line line line__horizontal"></div>
+      <div class="pupa-scrollbar__line pupa-line pupa-line__horizontal"></div>
     </div>
   </div>
 

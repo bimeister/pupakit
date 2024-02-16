@@ -1,15 +1,14 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   padding: 3rem 4rem;
-  border-top: 1px solid semantic-color(kind-neutral-normal);
+  border-top: 1px solid functions.semantic-color(kind-neutral-normal);
   height: 12rem;
   box-sizing: border-box;
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
-  @include font-type-regular;
-  @include font-size-xs(true);
+  @include mixins.font-type-regular;
+  @include mixins.font-size-xs(true);
 }

@@ -1,4 +1,4 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   display: flex;
@@ -8,22 +8,22 @@
 .pupa-star {
   display: block;
   font-size: 12rem;
-  color: semantic-color(kind-primary-normal);
+  color: functions.semantic-color(kind-primary-normal);
 
-  &.clickable {
+  &.pupa-clickable {
     cursor: pointer;
   }
 
-  &.disabled {
+  &.pupa-disabled {
     filter: grayscale(0.1);
     opacity: 0.85;
   }
 
-  &.medium {
+  &.pupa-medium {
     font-size: 10rem;
   }
 
-  &.small {
+  &.pupa-small {
     font-size: 8rem;
   }
 }

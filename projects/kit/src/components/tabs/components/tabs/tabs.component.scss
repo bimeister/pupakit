@@ -1,5 +1,4 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
 
 :host {
   display: block;
@@ -9,7 +8,7 @@
   z-index: 2;
 }
 
-.tabs {
+.pupa-tabs {
   &__container {
     width: fit-content;
   }
@@ -35,18 +34,18 @@
   }
 }
 
-.tabs-rail {
+.pupa-tabs-rail {
   transform: translateX(0);
 
   &__highlighter {
     width: 0;
     height: 2px;
-    background-color: semantic-color(kind-primary-normal);
+    background-color: functions.semantic-color(kind-primary-normal);
     transition: 0.25s ease-in-out;
   }
 }
 
-.gradient {
+.pupa-gradient {
   display: none;
   position: absolute;
 
@@ -58,8 +57,8 @@
 
   background: linear-gradient(
     270deg,
-    semantic-color(surface-primary) 0%,
-    semantic-color(surface-primary, alpha-3) 87.96%
+    functions.semantic-color(surface-primary) 0%,
+    functions.semantic-color(surface-primary, alpha-3) 87.96%
   );
 
   &_left {

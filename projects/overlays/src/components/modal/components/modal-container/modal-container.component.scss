@@ -1,6 +1,3 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-
 :host {
   width: inherit;
   height: inherit;
@@ -9,7 +6,7 @@
   position: relative;
 }
 
-.modal-container {
+.pupa-modal-container {
   width: 100%;
   height: 100%;
   transition: 0.3s;

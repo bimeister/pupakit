@@ -1,5 +1,5 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: block;
@@ -7,10 +7,10 @@
   flex-shrink: 0;
 }
 
-.header {
+.pupa-header {
   font-size: 3rem;
   line-height: 4rem;
-  @include font-type-regular();
-  color: semantic-color(text-primary);
+  @include mixins.font-type-regular();
+  color: functions.semantic-color(text-primary);
   padding: 2rem 2rem 0;
 }

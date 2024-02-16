@@ -19,28 +19,28 @@
   "
 >
   <div
-    class="loader"
+    class="pupa-loader"
     [style.fontSize]="size"
     [style.height]="size === 'inherit' ? 'auto' : size"
     [style.width]="size === 'inherit' ? 'auto' : size"
   >
     <svg
       *ngIf="type === 'indeterminate'; else determinateLoader"
-      class="loader__indeterminate-icon"
+      class="pupa-loader__indeterminate-icon"
       [ngClass]="kindClassName"
       focusable="false"
       viewBox="0 0 24 24"
     >
-      <circle class="loader__indeterminate-icon_scale" [attr.r]="radius" cx="12" cy="12"></circle>
+      <circle class="pupa-loader__indeterminate-icon_scale" [attr.r]="radius" cx="12" cy="12"></circle>
     </svg>
   </div>
 
   <ng-template #determinateLoader>
-    <svg class="loader__determinate-icon" focusable="false" viewBox="0 0 24 24" *ngIf="!isError; else error">
-      <circle class="loader__determinate-icon_background" [attr.r]="radius" cx="12" cy="12"></circle>
+    <svg class="pupa-loader__determinate-icon" focusable="false" viewBox="0 0 24 24" *ngIf="!isError; else error">
+      <circle class="pupa-loader__determinate-icon_background" [attr.r]="radius" cx="12" cy="12"></circle>
       <circle
-        class="loader__determinate-icon_scale"
-        [class.loader__determinate-icon_success]="progress === 100"
+        class="pupa-loader__determinate-icon_scale"
+        [class.pupa-loader__determinate-icon_success]="progress === 100"
         [attr.r]="radius"
         cx="12"
         cy="12"
@@ -52,7 +52,7 @@
 
   <ng-template #error>
     <pupa-icon
-      class="loader__error-icon"
+      class="pupa-loader__error-icon"
       name="app-error-filled"
       *ngIf="isError; else determinateLoader"
       [pupaTooltip]="errorText"

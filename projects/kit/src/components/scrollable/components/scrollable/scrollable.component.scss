@@ -1,17 +1,17 @@
-@use 'mixins' as *;
-@use 'variables' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'variables';
+@use 'functions';
 
-$width_scrollbar-half: calc($width_scrollbar / 2);
+$width_scrollbar-half: calc(variables.$width_scrollbar / 2);
 
 $width_thumb: 1.25rem;
 $width-hover_thumb: 2.75rem;
 
 $width_line: 1px;
-$offset_line: calc(($width_scrollbar - $width_line) / 2);
+$offset_line: calc((variables.$width_scrollbar - $width_line) / 2);
 
-$padding_thumb-container: calc(($width_scrollbar - $width_thumb) / 2);
-$padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thumb) / 2);
+$padding_thumb-container: calc((variables.$width_scrollbar - $width_thumb) / 2);
+$padding-hover_hover-thumb-container: calc((variables.$width_scrollbar - $width-hover_thumb) / 2);
 
 :host {
   display: block;
@@ -45,7 +45,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
     overflow-y: inherit;
     box-sizing: border-box;
 
-    @include invisible-scrollbars;
+    @include mixins.invisible-scrollbars;
   }
 }
 
@@ -60,7 +60,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
   }
 
   &_vertical {
-    width: $width_scrollbar;
+    width: variables.$width_scrollbar;
     height: 100%;
     right: 0;
     bottom: 0;
@@ -80,12 +80,12 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
     }
 
     &:hover {
-      .thumb-container {
+      .pupa-thumb-container {
         padding: 0.5rem $padding-hover_hover-thumb-container;
       }
     }
 
-    .thumb-container {
+    .pupa-thumb-container {
       padding: 0.5rem $padding_thumb-container;
 
       &_grabbing {
@@ -96,7 +96,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
 
   &_horizontal {
     width: 100%;
-    height: $width_scrollbar;
+    height: variables.$width_scrollbar;
     right: 0;
     bottom: 0;
     display: none;
@@ -115,12 +115,12 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
     }
 
     &:hover {
-      .thumb-container {
+      .pupa-thumb-container {
         padding: $padding-hover_hover-thumb-container 0.5rem;
       }
     }
 
-    .thumb-container {
+    .pupa-thumb-container {
       padding: $padding_thumb-container 0.5rem;
 
       &_grabbing {
@@ -130,7 +130,7 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
   }
 }
 
-.thumb-container {
+.pupa-thumb-container {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -142,18 +142,18 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
   }
 
   &_grabbing {
-    .thumb {
-      background-color: semantic-color(lines-dark);
+    .pupa-thumb {
+      background-color: functions.semantic-color(lines-dark);
     }
   }
 
-  &:not(.thumb-container_grabbing) {
+  &:not(.pupa-thumb-container_grabbing) {
     cursor: pointer;
   }
 
   &_visible-onscroll {
-    &:not(.thumb-container_scrolling) {
-      .thumb {
+    &:not(.pupa-thumb-container_scrolling) {
+      .pupa-thumb {
         transition: background-color 200ms ease-in;
         background-color: transparent;
         backdrop-filter: none;
@@ -162,17 +162,17 @@ $padding-hover_hover-thumb-container: calc(($width_scrollbar - $width-hover_thum
   }
 }
 
-.thumb {
+.pupa-thumb {
   width: 100%;
   height: 100%;
   backdrop-filter: blur(4px);
   box-sizing: content-box;
-  background-color: semantic-color(lines-normal);
+  background-color: functions.semantic-color(lines-normal);
   border-radius: $width_thumb;
 }
 
-.line {
-  background-color: semantic-color(lines-normal);
+.pupa-line {
+  background-color: functions.semantic-color(lines-normal);
   position: absolute;
 
   &__vertical {

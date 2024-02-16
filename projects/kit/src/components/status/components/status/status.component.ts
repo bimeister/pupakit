@@ -17,10 +17,10 @@ export class StatusComponent {
   @Input() public disabled: boolean = false;
 
   public get colorClass(): string {
-    return `status_${this.color}`;
+    return `pupa-status_${this.color}`;
   }
 
   public get kindClass(): string {
-    return `status__marker_${this.kind}`;
+    return `pupa-status__marker_${this.kind}`;
   }
 }

@@ -1,22 +1,22 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 $drawer_padding: 8px;
 
-.drawer-container {
+.pupa-drawer-container {
   width: fit-content;
   height: 100%;
   background: transparent;
   position: fixed;
   box-sizing: border-box;
-  max-height: vh(100);
+  max-height: functions.vh(100);
 
   &_with-padding {
     padding: $drawer_padding;
   }
 
-  @include lt-sm() {
-    height: vh(90);
+  @include mixins.lt-sm() {
+    height: functions.vh(90);
     width: 100vw;
     padding: 0;
     bottom: 0;
@@ -24,7 +24,7 @@ $drawer_padding: 8px;
 
   &_full-screen {
     width: 100vw;
-    height: vh(100);
+    height: functions.vh(100);
     padding: 0;
     margin: 0;
   }

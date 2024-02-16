@@ -1,18 +1,18 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
-.status {
-  @include flex-container($align-items: center);
+.pupa-status {
+  @include mixins.flex-container($align-items: center);
   gap: 2rem;
   cursor: default;
-  @include font-preset-caption-xs();
-  color: semantic-color(text-primary);
+  @include mixins.font-preset-caption-xs();
+  color: functions.semantic-color(text-primary);
   transition: color 0.2s ease;
 
   text-overflow: inherit;
   overflow: inherit;
 
-  &.right-marker-position {
+  &.pupa-right-marker-position {
     flex-direction: row-reverse;
   }
 
@@ -46,37 +46,37 @@
     overflow: inherit;
   }
 
-  &_primary .status__marker {
-    background-color: semantic-color(kind-primary-normal);
+  &_primary .pupa-status__marker {
+    background-color: functions.semantic-color(kind-primary-normal);
   }
 
-  &_success .status__marker {
-    background-color: semantic-color(kind-success-normal);
+  &_success .pupa-status__marker {
+    background-color: functions.semantic-color(kind-success-normal);
   }
 
-  &_warning .status__marker {
-    background-color: semantic-color(kind-warning-normal);
+  &_warning .pupa-status__marker {
+    background-color: functions.semantic-color(kind-warning-normal);
   }
 
-  &_danger .status__marker {
-    background-color: semantic-color(kind-danger-normal);
+  &_danger .pupa-status__marker {
+    background-color: functions.semantic-color(kind-danger-normal);
   }
 
-  &_custom .status__marker {
+  &_custom .pupa-status__marker {
     background-color: var(--status_marker-color);
   }
 
   &_neutral {
-    .status__marker {
-      background-color: semantic-color(lines-dark);
+    .pupa-status__marker {
+      background-color: functions.semantic-color(lines-dark);
     }
   }
 
-  &.disabled {
-    color: semantic-color(text-disabled);
+  &.pupa-disabled {
+    color: functions.semantic-color(text-disabled);
 
-    .status__marker {
-      background-color: semantic-color(text-disabled);
+    .pupa-status__marker {
+      background-color: functions.semantic-color(text-disabled);
     }
   }
 }

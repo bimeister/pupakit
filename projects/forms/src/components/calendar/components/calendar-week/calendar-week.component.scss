@@ -1,12 +1,11 @@
-@use '../../styles/calendar.styles' as *;
+@use '../../styles/calendar.styles';
 
 :host {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 100%;
   box-sizing: border-box;
   padding: 1rem 0;
-  height: $row-height;
+  height: calendar.$row-height;
 }

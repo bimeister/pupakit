@@ -1,11 +1,11 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 :host {
   display: block;
 }
 
-.table-placeholder-cell {
+.pupa-table-placeholder-cell {
   position: relative;
   height: 1px;
   margin-right: 1px;
@@ -17,13 +17,13 @@
     display: block;
     width: 1px;
     height: 100%;
-    background-color: semantic-color(lines-normal);
+    background-color: functions.semantic-color(lines-normal);
     position: absolute;
     right: -1px;
     top: 0;
   }
 
-  @include host-selector('.table-placeholder__scrollable-container') {
+  @include mixins.host-selector('.pupa-table-placeholder__scrollable-container') {
     &:last-child {
       margin-right: 0;
 
@@ -33,7 +33,7 @@
     }
   }
 
-  @include host-selector('.table-placeholder__pinned-right-container') {
+  @include mixins.host-selector('.pupa-table-placeholder__pinned-right-container') {
     margin-left: 1px;
     margin-right: 0;
 
@@ -48,12 +48,12 @@
   }
 }
 
-.table-placeholder-cell-placeholder {
+.pupa-table-placeholder-cell-placeholder {
   flex-shrink: 1;
   width: 100%;
   display: none;
 
-  @include host-selector('.table-placeholder__scrollable-container') {
+  @include mixins.host-selector('.pupa-table-placeholder__scrollable-container') {
     & {
       display: block;
     }

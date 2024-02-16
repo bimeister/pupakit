@@ -1,16 +1,15 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   height: 7rem;
   padding: 0.5rem 3rem;
-  border-bottom: 1px solid semantic-color(kind-neutral-normal);
+  border-bottom: 1px solid functions.semantic-color(kind-neutral-normal);
   box-sizing: border-box;
   display: flex;
   align-items: center;
 
-  @include xs {
+  @include mixins.xs {
     height: 14rem;
     padding: 4rem 5rem;
   }

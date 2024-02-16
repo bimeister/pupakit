@@ -1,66 +1,67 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
+@use 'variables';
 
 $pointer_height: 9px;
 $pointer-width: 14px;
 
-.popover-layout {
+.pupa-popover-layout {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  border: 1px solid semantic-color(kind-neutral-normal);
-  border-radius: $controlBorderRadius;
-  background: semantic-color(surface-primary, alpha-700);
-  color: semantic-color(text-primary);
-  box-shadow: 0 1.5rem 1.5rem -1rem color(neutral-1000, alpha-3), 0 5rem 6rem -1rem color(neutral-1000, alpha-5);
+  border: 1px solid functions.semantic-color(kind-neutral-normal);
+  border-radius: variables.$controlBorderRadius;
+  background: functions.semantic-color(surface-primary, alpha-700);
+  color: functions.semantic-color(text-primary);
+  box-shadow: 0 1.5rem 1.5rem -1rem functions.color(neutral-1000, alpha-3),
+    0 5rem 6rem -1rem functions.color(neutral-1000, alpha-5);
 
-  @include blur();
+  @include mixins.blur();
 
-  @include xs {
+  @include mixins.xs {
     height: 100%;
     width: 100%;
 
     backdrop-filter: none;
-    background: semantic-color(surface-primary, alpha-1000);
+    background: functions.semantic-color(surface-primary, alpha-1000);
   }
 
-  @include host-selector('.pointer__top-left, .pointer__top-right') {
+  @include mixins.host-selector('.pupa-pointer__top-left, .pupa-pointer__top-right') {
     margin-top: $pointer_height;
   }
 
-  @include host-selector('.pointer__bottom-left, .pointer__bottom-right') {
+  @include mixins.host-selector('.pupa-pointer__bottom-left, .pupa-pointer__bottom-right') {
     margin-bottom: $pointer_height;
   }
 }
 
-.popover-pointer {
+.pupa-popover-pointer {
   position: absolute;
-  fill: semantic-color(surface-primary);
+  fill: functions.semantic-color(surface-primary);
 
   &__line {
-    stroke: semantic-color(kind-neutral-normal);
+    stroke: functions.semantic-color(kind-neutral-normal);
   }
 
-  @include host-selector('.popover__mobile') {
+  @include mixins.host-selector('.pupa-popover__mobile') {
     display: none;
   }
 
-  @include host-selector('.pointer__top-left') {
+  @include mixins.host-selector('.pupa-pointer__top-left') {
     top: -$pointer_height;
     left: $pointer-width;
   }
-  @include host-selector('.pointer__top-right') {
+  @include mixins.host-selector('.pupa-pointer__top-right') {
     top: -$pointer_height;
     right: $pointer-width;
   }
-  @include host-selector('.pointer__bottom-left') {
+  @include mixins.host-selector('.pupa-pointer__bottom-left') {
     bottom: 0;
     left: $pointer-width;
     transform: rotate(180deg);
   }
 
-  @include host-selector('.pointer__bottom-right') {
+  @include mixins.host-selector('.pupa-pointer__bottom-right') {
     bottom: 0;
     right: $pointer-width;
     transform: rotate(180deg);
