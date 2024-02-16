@@ -14,7 +14,7 @@ import { PupaAccordionActionTemplateDirective } from '../../directives/accordion
 import { AccordionKind } from '../../../../declarations/types/accordion-kind.type';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ComponentChanges, ComponentChange } from '@bimeister/pupakit.common';
+import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 
 enum AnimationState {
   Void = 'void',
@@ -66,7 +66,7 @@ export class AccordionComponent implements OnChanges {
   );
 
   public readonly accordionClass$: Observable<string> = this.kind$.pipe(
-    map((kind: AccordionKind) => `accordion_${kind}`)
+    map((kind: AccordionKind) => `pupa-accordion_${kind}`)
   );
 
   constructor(private readonly changeDetectionRef: ChangeDetectorRef) {}

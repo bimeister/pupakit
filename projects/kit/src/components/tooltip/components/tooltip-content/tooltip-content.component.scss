@@ -1,10 +1,10 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
+@use 'variables';
 
 $tooltip_max-text-lines-count: 13;
 
-.tooltip {
+.pupa-tooltip {
   position: relative;
   display: flex;
   justify-content: center;
@@ -14,21 +14,21 @@ $tooltip_max-text-lines-count: 13;
   }
 
   &__content-container {
-    background-color: semantic-color(text-primary, alpha-700);
+    background-color: functions.semantic-color(text-primary, alpha-700);
 
-    @include supports-backdrop-blur {
-      background-color: semantic-color(text-primary, alpha-700);
+    @include mixins.supports-backdrop-blur {
+      background-color: functions.semantic-color(text-primary, alpha-700);
     }
 
-    @include blur(5px);
+    @include mixins.blur(5px);
 
-    border-radius: $controlBorderRadius;
+    border-radius: variables.$controlBorderRadius;
     box-sizing: border-box;
     padding: 1rem 2rem;
-    color: semantic-color(text-inverse);
+    color: functions.semantic-color(text-inverse);
 
-    @include font-type-regular();
-    @include font-size-xs($paragraph: true);
+    @include mixins.font-type-regular();
+    @include mixins.font-size-xs($paragraph: true);
 
     line-height: 4.5rem;
     max-width: 126rem;

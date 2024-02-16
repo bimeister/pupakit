@@ -1,11 +1,11 @@
 <button
   type="button"
-  class="trigger"
+  class="pupa-trigger"
   [class]="size$ | async"
-  [class.trigger_active]="isExpanded$ | async"
-  [class.trigger_disabled]="isDisabled$ | async"
-  [class.trigger_invalid]="isInvalid$ | async"
-  [class.trigger_inline]="inline$ | async"
+  [class.pupa-trigger_active]="isExpanded$ | async"
+  [class.pupa-trigger_disabled]="isDisabled$ | async"
+  [class.pupa-trigger_invalid]="isInvalid$ | async"
+  [class.pupa-trigger_inline]="inline$ | async"
   (click)="processButtonClick()"
   (mousedown)="processTriggerTouch()"
   (touchstart)="processTriggerTouch()"
@@ -13,25 +13,25 @@
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="trigger__text" [style.paddingRight.px]="rightPaddingPx$ | async">
+  <div class="pupa-trigger__text" [style.paddingRight.px]="rightPaddingPx$ | async">
     <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
       <ng-content></ng-content>
     </ng-container>
   </div>
 
   <div
-    class="trigger__rotate-icon"
-    [class.expanded]="(isExpanded$ | async) && (isExpandable$ | async)"
+    class="pupa-trigger__rotate-icon"
+    [class.pupa-expanded]="(isExpanded$ | async) && (isExpandable$ | async)"
     (click)="toggleDropdown($event)"
   >
     <pupa-icon [name]="expandedIcon$ | async"></pupa-icon>
   </div>
 </button>
 
-<div class="icons">
+<div class="pupa-icons">
   <pupa-icon
     *ngIf="isVisibleReset$ | async"
-    class="icons__icon icons__icon-reset"
+    class="pupa-icons__icon pupa-icons__icon-reset"
     name="app-close-square"
     (click)="reset()"
   >
@@ -39,7 +39,7 @@
 
   <pupa-icon
     *ngIf="isInvalid$ | async"
-    class="icons__icon icons__icon-invalid"
+    class="pupa-icons__icon pupa-icons__icon-invalid"
     name="app-error-filled"
     [pupaTooltip]="invalidTooltip$ | async"
     [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"
@@ -51,7 +51,7 @@
 </div>
 
 <ng-template #placeholder>
-  <div class="placeholder">
+  <div class="pupa-placeholder">
     {{ placeholder$ | async }}
   </div>
 </ng-template>

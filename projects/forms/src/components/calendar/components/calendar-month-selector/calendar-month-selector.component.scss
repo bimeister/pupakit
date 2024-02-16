@@ -1,32 +1,32 @@
-@use 'mixins' as *;
+@use 'mixins';
 
-@use '../../styles/calendar.styles' as *;
+@use '../../styles/calendar.styles';
 
 :host {
-  @include base-quick-selector();
+  @include calendar.pupa-base-quick-selector();
 }
 
-.header-content {
+.pupa-header-content {
   flex-direction: column;
   box-sizing: border-box;
   padding: 0 4rem;
 }
 
-.header-title {
+.pupa-header-title {
   display: flex;
   align-items: center;
   margin: 0;
   height: 12rem;
 }
 
-.scroller-wrapper {
+.pupa-scroller-wrapper {
   width: 100%;
   height: 100%;
   box-sizing: border-box;
   display: block;
 }
 
-.scroller {
+.pupa-scroller {
   width: 100%;
   height: 100%;
   display: block;
@@ -43,11 +43,11 @@
   }
 }
 
-.year-label {
-  @include font-preset-caption-xs();
+.pupa-year-label {
+  @include mixins.font-preset-caption-xs();
 }
 
-.year-table {
+.pupa-year-table {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   column-gap: 2rem;

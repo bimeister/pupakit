@@ -1,4 +1,4 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   display: flex;
@@ -7,17 +7,17 @@
   height: 100%;
 }
 
-.calendar {
+.pupa-calendar {
   display: flex;
   flex-direction: column;
 
   height: 100%;
   width: 75rem;
-  background: semantic-color(surface-primary);
+  background: functions.semantic-color(surface-primary);
 }
 
-.calendar-time-picker {
+.pupa-calendar-time-picker {
   width: 43rem;
-  border: 1px solid semantic-color(lines-normal);
+  border: 1px solid functions.semantic-color(lines-normal);
   border-width: 0 0 0 1px;
 }

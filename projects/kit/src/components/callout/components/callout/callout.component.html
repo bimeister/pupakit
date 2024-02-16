@@ -1,15 +1,17 @@
 <div
-  class="callout"
-  [ngClass]="'callout_' + kind"
-  [class.callout_collapsed]="isCollapsed$ | async"
-  [class.callout_has-header]="hasHeader$ | async"
+  class="pupa-callout"
+  [ngClass]="'pupa-callout_' + kind"
+  [class.pupa-callout_collapsed]="isCollapsed$ | async"
+  [class.pupa-callout_has-header]="hasHeader$ | async"
 >
-  <div class="icon"><pupa-icon [name]="icons.get(kind)"></pupa-icon></div>
+  <div class="pupa-icon">
+    <pupa-icon [name]="icons.get(kind)"></pupa-icon>
+  </div>
   <div>
-    <div class="callout__header">
+    <div class="pupa-callout__header">
       <ng-content select="pupa-callout-header"></ng-content>
     </div>
-    <div class="callout__content">
+    <div class="pupa-callout__content">
       <ng-content></ng-content>
     </div>
   </div>

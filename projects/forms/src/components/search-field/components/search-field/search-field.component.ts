@@ -52,7 +52,7 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `search-field__input_${innerProperty}`)
+        .map((innerProperty: string) => `pupa-search-field__input_${innerProperty}`)
     )
   );
 

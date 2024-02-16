@@ -1,4 +1,4 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   width: 100%;
@@ -9,7 +9,7 @@
   --pupa-scrollable-content_padding: 2rem 3rem 3rem 2rem;
 }
 
-.tree {
+.pupa-tree {
   position: relative;
   height: 100%;
   width: auto;
@@ -19,7 +19,7 @@
     width: 100%;
     height: 100%;
     border-radius: 1rem;
-    background-color: semantic-color(surface-secondary, alpha-500);
+    background-color: functions.semantic-color(surface-secondary, alpha-500);
     position: absolute;
     top: 0;
     left: 0;
@@ -27,13 +27,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: semantic-color(icons-primary);
+    color: functions.semantic-color(icons-primary);
   }
 }
 
-.viewport {
+.pupa-viewport {
   height: 100%;
-  background-color: semantic-color(surface-primary);
+  background-color: functions.semantic-color(surface-primary);
 
   &_skeleton {
     width: 100%;
@@ -41,15 +41,15 @@
   }
 }
 
-.skeleton-scrollable {
+.pupa-skeleton-scrollable {
   top: 0;
   left: 0;
   position: absolute;
 }
 
-.draggable {
+.pupa-draggable {
   position: absolute;
   pointer-events: none;
-  box-shadow: variable(box-shadow_hover);
+  box-shadow: functions.variable(box-shadow_hover);
   z-index: 2;
 }

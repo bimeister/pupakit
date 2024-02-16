@@ -1,25 +1,25 @@
-<pupa-theme-wrapper class="textarea-wrapper">
+<pupa-theme-wrapper class="pupa-textarea-wrapper">
   <div
     (click)="open()"
     (mousedown)="$event.stopPropagation()"
-    class="textarea-inline"
+    class="pupa-textarea-inline"
     [class]="size$ | async"
-    [class.textarea-inline_disabled]="isDisabled$ | async"
-    [class.textarea-inline_invalid]="isInvalid$ | async"
-    [class.textarea-inline_collapsed]="!(isOpened$ | async)"
+    [class.pupa-textarea-inline_disabled]="isDisabled$ | async"
+    [class.pupa-textarea-inline_invalid]="isInvalid$ | async"
+    [class.pupa-textarea-inline_collapsed]="!(isOpened$ | async)"
     #lineHeightSource
     #trigger
   >
-    <span class="textarea-inline__content" [class.textarea-inline__content_hidden]="isOpened$ | async">
-      <span *ngIf="isValueEmpty$ | async; else value" class="textarea-inline__placeholder">
+    <span class="pupa-textarea-inline__content" [class.pupa-textarea-inline__content_hidden]="isOpened$ | async">
+      <span *ngIf="isValueEmpty$ | async; else value" class="pupa-textarea-inline__placeholder">
         {{ placeholder$ | async }}
       </span>
     </span>
   </div>
   <div
-    class="counter"
-    [class.counter_invalid]="isInvalid$ | async"
-    [class.counter_invisible]="isOpened$ | async"
+    class="pupa-counter"
+    [class.pupa-counter_invalid]="isInvalid$ | async"
+    [class.pupa-counter_invisible]="isOpened$ | async"
     *ngIf="maxLength$ | async"
   >
     <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
@@ -29,27 +29,27 @@
 
 <ng-template #overlayTextarea>
   <pupa-theme-wrapper
-    class="overlay-container"
-    [class.overlay-container_opened]="isOpened$ | async"
+    class="pupa-overlay-container"
+    [class.pupa-overlay-container_opened]="isOpened$ | async"
     (mousedown)="$event.stopPropagation()"
     (wheel)="$event.stopPropagation()"
   >
-    <div class="overlay-textarea">
+    <div class="pupa-overlay-textarea">
       <label
-        class="textarea"
-        [class.textarea_disabled]="isDisabled$ | async"
-        [class.textarea_invalid]="isInvalid$ | async"
+        class="pupa-textarea"
+        [class.pupa-textarea_disabled]="isDisabled$ | async"
+        [class.pupa-textarea_invalid]="isInvalid$ | async"
         (mousedown)="processMouseDown($event)"
       >
-        <pupa-scrollable #scrollable class="textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
-          <div class="textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
-            <div class="textarea__pseudo-content">
+        <pupa-scrollable #scrollable class="pupa-textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
+          <div class="pupa-textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
+            <div class="pupa-textarea__pseudo-content">
               <span>{{ value$ | async }}&nbsp;<!-- &nbsp; removes content bouncing --></span>
             </div>
             <textarea
               #textarea
               pupaAutofocus
-              class="textarea__control"
+              class="pupa-textarea__control"
               [value]="value$ | async"
               [placeholder]="placeholder$ | async"
               [autocomplete]="autocomplete ? 'on' : 'off'"
@@ -63,12 +63,12 @@
         </pupa-scrollable>
       </label>
 
-      <pupa-icon class="close-icon" name="m-collapse" (click)="close()"></pupa-icon>
+      <pupa-icon class="pupa-close-icon" name="m-collapse" (click)="close()"></pupa-icon>
 
       <div
-        class="counter counter_overlay"
-        [class.counter_mobile]="isMobile$ | async"
-        [class.counter_invalid]="isInvalid$ | async"
+        class="pupa-counter counter_overlay"
+        [class.pupa-counter_mobile]="isMobile$ | async"
+        [class.pupa-counter_invalid]="isInvalid$ | async"
         *ngIf="maxLength$ | async"
       >
         <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span

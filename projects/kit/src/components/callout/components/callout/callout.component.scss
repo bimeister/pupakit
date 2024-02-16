@@ -1,73 +1,73 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
+@use 'variables';
 
 :host {
   display: block;
 }
 
-.callout {
-  @include flex-container(row, flex-start, flex-start);
-  color: semantic-color(text-primary);
-  border-radius: $controlBorderRadius;
+.pupa-callout {
+  @include mixins.flex-container(row, flex-start, flex-start);
+  color: functions.semantic-color(text-primary);
+  border-radius: variables.$controlBorderRadius;
   padding: 3rem;
   gap: 2rem;
 
-  .icon {
+  .pupa-icon {
     font-size: 4rem;
     line-height: 3rem;
   }
 
   &__content {
-    @include font-preset-body-s;
+    @include mixins.font-preset-body-s;
     overflow: hidden;
   }
 
   &_collapsed:not(&_has-header) &__content {
-    @include line-clamp(1);
+    @include mixins.line-clamp(1);
   }
 
-  &_collapsed.callout_has-header &__content {
+  &_collapsed.pupa-callout_has-header &__content {
     display: none;
   }
 
-  &:not(&_collapsed).callout_has-header &__header {
+  &:not(&_collapsed).pupa-callout_has-header &__header {
     margin-bottom: 1rem;
   }
 
   &_info {
-    background: semantic-color(kind-primary-normal, alpha-5);
-    color: semantic-color(text-primary);
+    background: functions.semantic-color(kind-primary-normal, alpha-5);
+    color: functions.semantic-color(text-primary);
 
-    .icon {
-      color: semantic-color(kind-primary-normal);
+    .pupa-icon {
+      color: functions.semantic-color(kind-primary-normal);
     }
   }
 
   &_success {
-    background: semantic-color(kind-success-normal, alpha-5);
-    color: semantic-color(text-primary);
+    background: functions.semantic-color(kind-success-normal, alpha-5);
+    color: functions.semantic-color(text-primary);
 
-    .icon {
-      color: semantic-color(kind-success-normal);
+    .pupa-icon {
+      color: functions.semantic-color(kind-success-normal);
     }
   }
 
   &_warning {
-    background: semantic-color(kind-warning-normal, alpha-6);
-    color: semantic-color(text-primary);
+    background: functions.semantic-color(kind-warning-normal, alpha-6);
+    color: functions.semantic-color(text-primary);
 
-    .icon {
-      color: semantic-color(kind-warning-normal);
+    .pupa-icon {
+      color: functions.semantic-color(kind-warning-normal);
     }
   }
 
   &_danger {
-    background: semantic-color(kind-danger-normal, alpha-5);
-    color: semantic-color(text-primary);
+    background: functions.semantic-color(kind-danger-normal, alpha-5);
+    color: functions.semantic-color(text-primary);
 
-    .icon {
-      color: semantic-color(kind-danger-normal);
+    .pupa-icon {
+      color: functions.semantic-color(kind-danger-normal);
     }
   }
 }

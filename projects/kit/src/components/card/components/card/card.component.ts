@@ -17,7 +17,7 @@ import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 export class CardComponent implements OnChanges {
   @Input() public size: CardSize = 'large';
   private readonly size$: Observable<CardSize> = this.cardStateService.size$.asObservable();
-  public readonly sizeClass$: Observable<string> = this.size$.pipe(map((size: CardSize) => `card_${size}`));
+  public readonly sizeClass$: Observable<string> = this.size$.pipe(map((size: CardSize) => `pupa-card_${size}`));
 
   @Input() public disabled: boolean = false;
   public readonly disabled$: Observable<boolean> = this.cardStateService.disabled$.asObservable();
