@@ -1,8 +1,8 @@
-<div class="actions-container" [style.max-height.px]="actionsContainerMaxHeight$ | async" #actionsContainer>
+<div class="pupa-actions-container" [style.max-height.px]="actionsContainerMaxHeight$ | async" #actionsContainer>
   <div
-    class="actions-container__action"
+    class="pupa-actions-container__action"
     *ngFor="let action of renderActions$ | async; let count = count"
-    [class.is-one]="count === 1"
+    [class.pupa-is-one]="count === 1"
   >
     <ng-container
       [ngTemplateOutlet]="actionTemplate.templateRef"

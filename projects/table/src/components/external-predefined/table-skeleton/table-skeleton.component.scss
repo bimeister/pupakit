@@ -1,4 +1,4 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   display: block;
@@ -6,7 +6,7 @@
   height: 100%;
 }
 
-.skeleton {
+.pupa-skeleton {
   width: 100%;
   height: 100%;
   display: flex;
@@ -16,9 +16,9 @@
   padding-left: 16px;
 }
 
-.skeleton__stick {
+.pupa-skeleton__stick {
   width: 56px;
   height: 8px;
   border-radius: 4px;
-  background-color: semantic-color(kind-opacity-normal);
+  background-color: functions.semantic-color(kind-opacity-normal);
 }

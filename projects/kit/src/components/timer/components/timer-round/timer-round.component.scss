@@ -1,4 +1,4 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   display: block;
@@ -7,12 +7,12 @@
   height: 6rem;
 }
 
-.timer {
+.pupa-timer {
   position: relative;
   width: 100%;
   height: 100%;
 
-  color: semantic-color(text-secondary);
+  color: functions.semantic-color(text-secondary);
 
   &__svg {
     width: 100%;
@@ -55,7 +55,7 @@
   }
 
   &_active {
-    .timer__path-remaining {
+    .pupa-timer__path-remaining {
       transition: 1s linear all;
     }
   }

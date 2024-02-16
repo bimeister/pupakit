@@ -10,12 +10,12 @@
 </ng-container>
 
 <ng-template #templatesGroupView>
-  <pupa-dnd-clone-item class="group-view">
+  <pupa-dnd-clone-item class="pupa-group-view">
     <ng-container
       [ngTemplateOutlet]="templatesGroupItemsTemplate"
       [ngTemplateOutletContext]="{ $implicit: dndSourceItems.length }"
-    ></ng-container
-  ></pupa-dnd-clone-item>
+    ></ng-container>
+  </pupa-dnd-clone-item>
 </ng-template>
 
 <ng-template #defaultCloneGroupItemsTemplate let-itemsCount>{{ 'Выбранные (' + itemsCount + ')' }}</ng-template>

@@ -1,21 +1,21 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   width: 100%;
   display: flex;
   box-sizing: border-box;
   padding: 3.5rem 5rem;
-  border-bottom: 1px solid semantic-color(lines-normal);
+  border-bottom: 1px solid functions.semantic-color(lines-normal);
 
-  @include xs() {
+  @include mixins.xs() {
     flex-direction: column-reverse;
     padding-bottom: 0;
     border-bottom: none;
   }
 }
 
-:host-context(.modal-layout_no-border) {
+:host-context(.pupa-modal-layout_no-border) {
   :host {
     padding-top: 5rem;
     padding-bottom: 2rem;

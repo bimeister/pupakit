@@ -1,11 +1,11 @@
-<div class="input-wrapper" [ngClass]="resultClassList$ | async">
-  <div class="input-control">
+<div class="pupa-input-wrapper" [ngClass]="resultClassList$ | async">
+  <div class="pupa-input-control">
     <pupa-icon-holder size="small" [withBackground]="false">
       <pupa-icon name="app-clock"></pupa-icon>
     </pupa-icon-holder>
 
     <input
-      class="input"
+      class="pupa-input"
       type="text"
       #inputElement
       [placeholder]="timeMask"
@@ -21,7 +21,7 @@
     />
   </div>
 
-  <div *ngIf="isVisibleDefaultActions$ | async" class="input-default-actions">
+  <div *ngIf="isVisibleDefaultActions$ | async" class="pupa-input-default-actions">
     <pupa-button-icon
       *ngIf="isVisibleReset$ | async"
       icon="app-close-square"
@@ -41,7 +41,7 @@
       [tooltipContentTemplate]="invalidTooltipContentTemplate"
       (click)="inputElement.focus()"
     >
-      <pupa-icon class="input-icon_invalid" name="app-error-filled"></pupa-icon>
+      <pupa-icon class="pupa-input-icon_invalid" name="app-error-filled"></pupa-icon>
     </pupa-icon-holder>
   </div>
 </div>

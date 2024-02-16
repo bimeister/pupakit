@@ -37,7 +37,7 @@ export class ButtonRoundComponent implements OnChanges {
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `button_${innerProperty}`)
+        .map((innerProperty: string) => `pupa-button_${innerProperty}`)
     )
   );
 

@@ -1,7 +1,7 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
-.radio-image-control {
+.pupa-radio-image-control {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -11,33 +11,34 @@
   gap: 2rem;
   padding: 3rem;
   position: relative;
-  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  transition: background-color functions.variable(transition-duration_shorter)
+    functions.variable(transition-timing-function_common);
 
   &_selected:not(&_disabled) {
-    box-shadow: 0 0 0 1px semantic-color(kind-primary-normal);
+    box-shadow: 0 0 0 1px functions.semantic-color(kind-primary-normal);
     border-radius: 1rem;
   }
 
   &:focus-visible {
     outline: none;
 
-    &:not(.radio-control_disabled) {
-      outline: 2px solid semantic-color(kind-primary-normal);
+    &:not(.pupa-radio-control_disabled) {
+      outline: 2px solid functions.semantic-color(kind-primary-normal);
     }
   }
 
   &:not(&_disabled):not(&_without-label) {
-    @include hover() {
+    @include mixins.hover() {
       border-radius: 1rem;
-      background-color: semantic-color(kind-opacity-hover);
+      background-color: functions.semantic-color(kind-opacity-hover);
     }
   }
 
   &_disabled {
     cursor: not-allowed;
 
-    &.radio-image-control_selected {
-      box-shadow: 0 0 0 1px semantic-color(lines-opacity);
+    &.pupa-radio-image-control_selected {
+      box-shadow: 0 0 0 1px functions.semantic-color(lines-opacity);
       border-radius: 1rem;
     }
   }
@@ -48,7 +49,7 @@
   }
 }
 
-.radio-image-control-marker-wrapper {
+.pupa-radio-image-control-marker-wrapper {
   width: 4rem;
   height: 4rem;
   display: flex;
@@ -57,29 +58,30 @@
   z-index: 2;
 }
 
-.radio-image-control-marker {
+.pupa-radio-image-control-marker {
   position: relative;
   width: 3.5rem;
   height: 3.5rem;
   box-sizing: border-box;
   border-radius: 50%;
-  background: semantic-color(surface-primary);
-  border: 1px solid semantic-color(text-secondary);
-  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
-    transform variable(transition-duration_shorter) variable(transition-timing-function_common);
+  background: functions.semantic-color(surface-primary);
+  border: 1px solid functions.semantic-color(text-secondary);
+  transition: background-color functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common),
+    transform functions.variable(transition-duration_shorter) functions.variable(transition-timing-function_common);
 
   &_selected {
-    background: semantic-color(kind-primary-normal);
+    background: functions.semantic-color(kind-primary-normal);
     border: none;
   }
 
   &:focus-visible:not(&_disabled) {
     transform: scale(1.14);
-    border: 2px solid semantic-color(kind-neutral-hover);
+    border: 2px solid functions.semantic-color(kind-neutral-hover);
     outline: none;
 
-    &:not(.radio-image-control-marker_selected) {
-      background: semantic-color(kind-primary-normal, kind-opacity-active);
+    &:not(.pupa-radio-image-control-marker_selected) {
+      background: functions.semantic-color(kind-primary-normal, kind-opacity-active);
     }
   }
 
@@ -89,53 +91,55 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+    transition: background-color functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common);
     background: transparent;
     width: 1rem;
     height: 1rem;
   }
 
   &_selected &__dot {
-    background: semantic-color(surface-primary);
+    background: functions.semantic-color(surface-primary);
   }
 
   &_disabled {
-    border-color: semantic-color(text-disabled);
+    border-color: functions.semantic-color(text-disabled);
 
-    &.radio-image-control-marker_selected {
-      background: semantic-color(icons-disabled);
+    &.pupa-radio-image-control-marker_selected {
+      background: functions.semantic-color(icons-disabled);
     }
   }
 }
 
-.radio-image-control-label-container {
+.pupa-radio-image-control-label-container {
   display: flex;
   align-items: flex-start;
   gap: 2rem;
   width: 100%;
 }
 
-.radio-image-control-label {
+.pupa-radio-image-control-label {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   user-select: none;
   z-index: 2;
-  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  transition: color functions.variable(transition-duration_shorter)
+    functions.variable(transition-timing-function_common);
 
-  @include font-size-xs();
+  @include mixins.font-size-xs();
 
   &_small {
-    @include font-size-xxs();
+    @include mixins.font-size-xxs();
   }
 
   &_disabled {
-    color: semantic-color(text-disabled);
+    color: functions.semantic-color(text-disabled);
   }
 
-  &_disabled.radio-image-control-label_selected {
-    color: semantic-color(text-disabled);
+  &_disabled.pupa-radio-image-control-label_selected {
+    color: functions.semantic-color(text-disabled);
   }
 
   &_hidden {
@@ -143,21 +147,22 @@
   }
 }
 
-.radio-image-control-image {
+.pupa-radio-image-control-image {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   user-select: none;
   z-index: 2;
-  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  transition: color functions.variable(transition-duration_shorter)
+    functions.variable(transition-timing-function_common);
 
   &_disabled {
     opacity: 0.5;
-    color: semantic-color(text-disabled);
+    color: functions.semantic-color(text-disabled);
   }
 
-  &_disabled.radio-image-control-label_selected {
-    color: semantic-color(text-disabled);
+  &_disabled.pupa-radio-image-control-label_selected {
+    color: functions.semantic-color(text-disabled);
   }
 }

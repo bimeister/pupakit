@@ -1,9 +1,9 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
-.switcher {
+.pupa-switcher {
   position: relative;
-  background-color: semantic-color(kind-opacity-active);
+  background-color: functions.semantic-color(kind-opacity-active);
   display: flex;
   align-items: center;
 
@@ -11,25 +11,28 @@
   padding: 0 0.5rem;
 
   box-sizing: border-box;
-  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+  transition: background-color functions.variable(transition-duration_shorter)
+    functions.variable(transition-timing-function_common);
   outline: none;
   cursor: pointer;
 
   &__marker {
-    background-color: semantic-color(surface-primary);
+    background-color: functions.semantic-color(surface-primary);
     border-radius: 50%;
-    box-shadow: 0px 0px 1rem semantic-color(kind-opacity-normal);
+    box-shadow: 0px 0px 1rem functions.semantic-color(kind-opacity-normal);
 
-    transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common),
-      background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
+    transition: transform functions.variable(transition-duration_shorter)
+        functions.variable(transition-timing-function_common),
+      background-color functions.variable(transition-duration_shorter)
+        functions.variable(transition-timing-function_common);
     transform: translateX(0);
     will-change: transform;
   }
 
   &_active {
-    background-color: semantic-color(kind-primary-normal);
+    background-color: functions.semantic-color(kind-primary-normal);
 
-    .switcher__marker {
+    .pupa-switcher__marker {
       transform: translateX(100%);
     }
   }
@@ -47,40 +50,40 @@
     pointer-events: none;
   }
 
-  &:not(.switcher_disabled) {
-    @include hover() {
-      &.switcher_active {
-        background-color: semantic-color(kind-primary-hover);
+  &:not(.pupa-switcher_disabled) {
+    @include mixins.hover() {
+      &.pupa-switcher_active {
+        background-color: functions.semantic-color(kind-primary-hover);
       }
-      background-color: semantic-color(kind-neutral-hover);
+      background-color: functions.semantic-color(kind-neutral-hover);
     }
 
     &:focus-visible {
       outline: none;
 
       &:after {
-        border-color: semantic-color(lines-accent);
+        border-color: functions.semantic-color(lines-accent);
       }
     }
   }
 
   &_disabled {
-    background-color: semantic-color(kind-opacity-active);
+    background-color: functions.semantic-color(kind-opacity-active);
     cursor: not-allowed;
 
-    .switcher__marker {
-      background-color: semantic-color(icons-disabled);
+    .pupa-switcher__marker {
+      background-color: functions.semantic-color(icons-disabled);
     }
   }
 }
 
 // sizes
-.switcher {
+.pupa-switcher {
   &_medium {
     width: 9rem;
     height: 5rem;
 
-    .switcher__marker {
+    .pupa-switcher__marker {
       width: 4rem;
       height: 4rem;
     }
@@ -90,7 +93,7 @@
     width: 7rem;
     height: 4rem;
 
-    .switcher__marker {
+    .pupa-switcher__marker {
       width: 3rem;
       height: 3rem;
     }

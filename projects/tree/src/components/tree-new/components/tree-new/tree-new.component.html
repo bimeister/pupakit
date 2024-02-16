@@ -1,14 +1,14 @@
-<section class="tree">
-  <div class="tree__loader" *ngIf="isLoading$ | async">
+<section class="pupa-tree">
+  <div class="pupa-tree__loader" *ngIf="isLoading$ | async">
     <pupa-loader size="40px"></pupa-loader>
   </div>
 
-  <pupa-scrollable [invisibleScrollbars]="['vertical', 'horizontal']" class="skeleton-scrollable">
+  <pupa-scrollable [invisibleScrollbars]="['vertical', 'horizontal']" class="pupa-skeleton-scrollable">
     <cdk-virtual-scroll-viewport
       pupaScrollableContent
       #skeletonViewPort
       [itemSize]="treeItemSizePx$ | async"
-      class="viewport viewport_skeleton"
+      class="pupa-viewport pupa-viewport_skeleton"
     >
       <pupa-skeleton>
         <pupa-skeleton-group *cdkVirtualFor="let item of data$ | async">
@@ -22,19 +22,19 @@
     <cdk-virtual-scroll-viewport
       pupaScrollableContent
       #viewPort
-      class="viewport"
+      class="pupa-viewport"
       [itemSize]="treeItemSizePx$ | async"
       [maxBufferPx]="bufferPx"
       [minBufferPx]="bufferPx"
       (scroll)="onScroll()"
     >
-      <ng-container *cdkVirtualFor="let treeItem of data$ | async"> </ng-container>
+      <ng-container *cdkVirtualFor="let treeItem of data$ | async"></ng-container>
       <cdk-tree
         [dataSource]="dataSource"
         [treeControl]="treeControl"
         [trackBy]="trackBy$ | async"
         (mouseleave)="mouseLeave()"
-        class="scrollable-box__container"
+        class="pupa-scrollable-box__container"
       >
         <cdk-tree-node
           *cdkTreeNodeDef="let node; when: isElement"
@@ -100,7 +100,7 @@
   let-isVisible="isVisible"
   #dragTreeItemTemplate
 >
-  <div *ngIf="isVisible" class="draggable" [style.left.px]="left" [style.top.px]="top" [style.width.px]="width">
+  <div *ngIf="isVisible" class="pupa-draggable" [style.left.px]="left" [style.top.px]="top" [style.width.px]="width">
     <ng-container
       [ngTemplateOutlet]="treeItemTemplate?.templateRef || defaultTemplate"
       [ngTemplateOutletContext]="{

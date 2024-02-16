@@ -1,24 +1,25 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
+@use 'variables';
 
 :host {
   display: block;
   width: 100%;
 }
 
-.search-field {
+.pupa-search-field {
   box-sizing: border-box;
   position: relative;
   width: 100%;
   min-width: 50rem;
 
-  @include flex-container(row, center, flex-start);
+  @include mixins.flex-container(row, center, flex-start);
 
   &_collapsible {
     position: absolute;
     top: 0;
-    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
+    transition: all functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common);
 
     &.to-left {
       right: 0;
@@ -41,99 +42,100 @@
     cursor: pointer;
     outline: none;
     width: 100%;
-    border-radius: $controlBorderRadius;
+    border-radius: variables.$controlBorderRadius;
     box-sizing: border-box;
     border: 1px solid transparent;
     height: 8rem;
     padding: 2rem 8rem;
-    color: semantic-color(text-primary);
-    caret-color: semantic-color(text-primary);
-    background-color: semantic-color(kind-neutral-normal);
-    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-    @include font-type-regular();
-    @include font-size-xs(true);
+    color: functions.semantic-color(text-primary);
+    caret-color: functions.semantic-color(text-primary);
+    background-color: functions.semantic-color(kind-neutral-normal);
+    transition: all functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common);
+    @include mixins.font-type-regular();
+    @include mixins.font-size-xs(true);
 
     &_collapsed {
       padding: 2rem;
     }
 
     &:-webkit-autofill {
-      border-color: semantic-color(kind-neutral-normal);
-      -webkit-text-fill-color: semantic-color(text-primary);
+      border-color: functions.semantic-color(kind-neutral-normal);
+      -webkit-text-fill-color: functions.semantic-color(text-primary);
       box-shadow: none;
-      -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-normal) inset;
+      -webkit-box-shadow: 0 10rem 0 0 functions.semantic-color(kind-neutral-normal) inset;
     }
 
     &::placeholder {
-      color: semantic-color(text-secondary);
+      color: functions.semantic-color(text-secondary);
     }
 
     &:not(:focus):not([disabled]) {
-      @include hover() {
-        background-color: semantic-color(kind-neutral-hover);
+      @include mixins.hover() {
+        background-color: functions.semantic-color(kind-neutral-hover);
 
-        ~ .search-field__actions {
-          background-color: semantic-color(kind-neutral-hover);
+        ~ .pupa-search-field__actions {
+          background-color: functions.semantic-color(kind-neutral-hover);
         }
 
         &:-webkit-autofill {
           box-shadow: none;
-          -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-hover) inset;
-          border-color: semantic-color(kind-neutral-hover);
+          -webkit-box-shadow: 0 10rem 0 0 functions.semantic-color(kind-neutral-hover) inset;
+          border-color: functions.semantic-color(kind-neutral-hover);
         }
 
         &::placeholder {
-          color: semantic-color(text-secondary);
+          color: functions.semantic-color(text-secondary);
         }
       }
     }
 
     &:active:not(:focus):not([disabled]) {
       border-color: transparent;
-      background-color: semantic-color(kind-neutral-active);
+      background-color: functions.semantic-color(kind-neutral-active);
 
-      ~ .search-field__actions {
-        background-color: semantic-color(kind-neutral-active);
+      ~ .pupa-search-field__actions {
+        background-color: functions.semantic-color(kind-neutral-active);
       }
 
       &:-webkit-autofill {
-        border-color: semantic-color(kind-neutral-active);
+        border-color: functions.semantic-color(kind-neutral-active);
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-active) inset;
+        -webkit-box-shadow: 0 10rem 0 0 functions.semantic-color(kind-neutral-active) inset;
       }
     }
 
     &:focus:not([disabled]) {
       cursor: text;
       border-color: transparent;
-      background-color: semantic-color(kind-neutral-normal);
+      background-color: functions.semantic-color(kind-neutral-normal);
 
-      ~ .search-field__actions {
-        background-color: semantic-color(kind-neutral-normal);
+      ~ .pupa-search-field__actions {
+        background-color: functions.semantic-color(kind-neutral-normal);
       }
 
       &:-webkit-autofill {
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-active) inset;
+        -webkit-box-shadow: 0 10rem 0 0 functions.semantic-color(kind-neutral-active) inset;
         border-color: transparent;
       }
 
       &::placeholder {
-        color: semantic-color(text-disabled);
+        color: functions.semantic-color(text-disabled);
       }
     }
 
     &[disabled] {
       border-color: transparent;
       cursor: not-allowed;
-      color: semantic-color(text-disabled);
-      background-color: semantic-color(kind-neutral-disabled);
+      color: functions.semantic-color(text-disabled);
+      background-color: functions.semantic-color(kind-neutral-disabled);
 
       &:-webkit-autofill {
-        -webkit-text-fill-color: semantic-color(text-disabled);
+        -webkit-text-fill-color: functions.semantic-color(text-disabled);
         box-shadow: none;
-        -webkit-box-shadow: 0 10rem 0 0 semantic-color(kind-neutral-disabled) inset;
-        border-color: semantic-color(kind-neutral-disabled);
+        -webkit-box-shadow: 0 10rem 0 0 functions.semantic-color(kind-neutral-disabled) inset;
+        border-color: functions.semantic-color(kind-neutral-disabled);
       }
 
       &::selection {
@@ -141,15 +143,15 @@
       }
 
       &::placeholder {
-        color: semantic-color(text-disabled);
+        color: functions.semantic-color(text-disabled);
       }
 
-      ~ .search-field__actions {
-        background-color: semantic-color(kind-neutral-disabled);
+      ~ .pupa-search-field__actions {
+        background-color: functions.semantic-color(kind-neutral-disabled);
       }
 
-      ~ .search-field__icon {
-        color: semantic-color(text-disabled);
+      ~ .pupa-search-field__icon {
+        color: functions.semantic-color(text-disabled);
       }
     }
   }
@@ -158,13 +160,14 @@
     position: absolute;
     z-index: 2;
     right: 1rem;
-    transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
+    transition: all functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common);
     display: flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
     justify-content: flex-end;
-    background-color: semantic-color(kind-neutral-normal);
+    background-color: functions.semantic-color(kind-neutral-normal);
   }
 
   &__additional-actions {
@@ -181,11 +184,11 @@
     width: 1px;
     margin: 2rem 0;
     border-radius: 2.5rem;
-    background-color: semantic-color(lines-opacity);
+    background-color: functions.semantic-color(lines-opacity);
   }
 
   &__reset {
-    color: semantic-color(icons-primary);
+    color: functions.semantic-color(icons-primary);
   }
 
   &__collapse-icon-container {
@@ -194,27 +197,28 @@
     width: 8rem;
     z-index: 3;
     pointer-events: none;
-    color: semantic-color(icons-primary);
+    color: functions.semantic-color(icons-primary);
   }
 
   &__collapse-icon {
     padding: 2rem;
     width: 4rem;
     height: 4rem;
-    border-radius: $controlBorderRadius;
+    border-radius: variables.$controlBorderRadius;
 
     &_collapsed {
       cursor: pointer;
       left: 0;
       pointer-events: all;
-      transition: all variable(transition-duration_shorter) variable(transition-timing-function_common);
-      caret-color: semantic-color(text-primary);
-      background-color: semantic-color(kind-neutral-normal);
-      @include flex-container(row, center, center);
+      transition: all functions.variable(transition-duration_shorter)
+        functions.variable(transition-timing-function_common);
+      caret-color: functions.semantic-color(text-primary);
+      background-color: functions.semantic-color(kind-neutral-normal);
+      @include mixins.flex-container(row, center, center);
 
-      &:not(.search-field__collapse-icon_disabled) {
-        @include hover() {
-          background-color: semantic-color(kind-neutral-hover);
+      &:not(.pupa-search-field__collapse-icon_disabled) {
+        @include mixins.hover() {
+          background-color: functions.semantic-color(kind-neutral-hover);
         }
       }
     }
@@ -222,8 +226,8 @@
     &_disabled {
       border-color: transparent;
       cursor: not-allowed;
-      color: semantic-color(icons-disabled);
-      background-color: semantic-color(kind-neutral-disabled);
+      color: functions.semantic-color(icons-disabled);
+      background-color: functions.semantic-color(kind-neutral-disabled);
     }
   }
 }

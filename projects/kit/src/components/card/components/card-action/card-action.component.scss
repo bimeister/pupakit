@@ -1,7 +1,7 @@
-@use 'functions' as *;
+@use 'functions';
 
 :host {
   flex: 8rem 0;
   margin-left: auto;
-  color: semantic-color(icons-primary);
+  color: functions.semantic-color(icons-primary);
 }

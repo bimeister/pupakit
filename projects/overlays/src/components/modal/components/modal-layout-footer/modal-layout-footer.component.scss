@@ -1,28 +1,28 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: block;
   width: 100%;
-  color: semantic-color(text-secondary);
+  color: functions.semantic-color(text-secondary);
 }
 
-.modal-layout-footer {
+.pupa-modal-layout-footer {
   display: flex;
   justify-content: flex-end;
   column-gap: 2rem;
   box-sizing: border-box;
-  border-top: 1px solid semantic-color(lines-normal);
-  @include font-type-regular;
-  @include font-size-xs(true);
+  border-top: 1px solid functions.semantic-color(lines-normal);
+  @include mixins.font-type-regular;
+  @include mixins.font-size-xs(true);
 
   &_with-actions {
     padding: 5rem;
   }
 }
 
-:host-context(.modal-layout_no-border) {
-  .modal-layout-footer {
+:host-context(.pupa-modal-layout_no-border) {
+  .pupa-modal-layout-footer {
     border-top: none;
 
     &_with-actions {

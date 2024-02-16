@@ -1,13 +1,13 @@
 import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  Input,
-  OnChanges,
   AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
   ElementRef,
+  Input,
   NgZone,
+  OnChanges,
   OnDestroy,
+  ViewEncapsulation,
 } from '@angular/core';
 import { isNil } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
@@ -29,7 +29,7 @@ export class TagActionButtonComponent implements AfterViewInit, OnChanges, OnDes
 
   public readonly isDisabled$: Observable<boolean> = this.tagStateService.isDisabled$;
   public readonly kindClass$: Observable<string> = this.tagStateService.kind$.pipe(
-    map((kind: TagKind) => `button_${kind}`)
+    map((kind: TagKind) => `pupa-button_${kind}`)
   );
 
   private readonly subscription: Subscription = new Subscription();

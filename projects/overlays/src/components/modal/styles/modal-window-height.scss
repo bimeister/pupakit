@@ -1,19 +1,19 @@
-@use 'functions' as *;
+@use 'functions';
 
-@mixin modalWindowHeight() {
+@mixin pupaModalWindowHeight() {
   &[height='xs'] {
-    max-height: vh(48);
+    max-height: functions.vh(48);
   }
 
   &[height='s'] {
-    max-height: vh(72);
+    max-height: functions.vh(72);
   }
 
   &[height='m'] {
-    max-height: vh(84);
+    max-height: functions.vh(84);
   }
 
   &[height='l'] {
-    max-height: vh(96);
+    max-height: functions.vh(96);
   }
 }

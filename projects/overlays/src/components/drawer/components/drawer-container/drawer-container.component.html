@@ -1,7 +1,7 @@
 <div
-  class="drawer-container"
-  [class.drawer-container_with-padding]="hasPadding && !(isFullscreen$ | async)"
-  [class.drawer-container_full-screen]="isFullscreen$ | async"
+  class="pupa-drawer-container"
+  [class.pupa-drawer-container_with-padding]="hasPadding && !(isFullscreen$ | async)"
+  [class.pupa-drawer-container_full-screen]="isFullscreen$ | async"
   [ngStyle]="floatStyles$ | async"
   #drawerContainer
 >

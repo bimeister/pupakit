@@ -1,24 +1,24 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
+@use 'variables';
 
 @use './../../textarea.styles';
 
-.textarea-wrapper {
+.pupa-textarea-wrapper {
   display: grid;
 }
 
-.textarea-inline {
+.pupa-textarea-inline {
   display: block;
   box-sizing: border-box;
   border: 1px solid transparent;
-  border-radius: $controlBorderRadius;
+  border-radius: variables.$controlBorderRadius;
   white-space: nowrap;
   cursor: text;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-preset-caption-xs();
-  @include ellipsis-text-overflow;
+  @include mixins.font-preset-caption-xs();
+  @include mixins.ellipsis-text-overflow;
 
   &.large {
     min-height: 10rem;
@@ -42,93 +42,93 @@
     }
   }
 
-  &:not(.textarea-inline_collapsed) {
-    border-color: semantic-color(kind-primary-normal);
+  &:not(.pupa-textarea-inline_collapsed) {
+    border-color: functions.semantic-color(kind-primary-normal);
   }
 }
 
-.textarea-inline {
-  background-color: semantic-color(surface-primary);
-  border-color: semantic-color(lines-opacity);
+.pupa-textarea-inline {
+  background-color: functions.semantic-color(surface-primary);
+  border-color: functions.semantic-color(lines-opacity);
 }
 
 // control colors
-.textarea-inline {
-  color: semantic-color(text-primary);
+.pupa-textarea-inline {
+  color: functions.semantic-color(text-primary);
 
-  .textarea-inline__placeholder {
-    color: semantic-color(text-secondary);
+  .pupa-textarea-inline__placeholder {
+    color: functions.semantic-color(text-secondary);
   }
 }
 
-.textarea-inline.textarea-inline_collapsed {
-  &:not(.textarea-inline_disabled) {
-    @include hover() {
-      background-color: semantic-color(surface-tertiary);
-      border-color: semantic-color(kind-primary-normal);
+.pupa-textarea-inline.pupa-textarea-inline_collapsed {
+  &:not(.pupa-textarea-inline_disabled) {
+    @include mixins.hover() {
+      background-color: functions.semantic-color(surface-tertiary);
+      border-color: functions.semantic-color(kind-primary-normal);
 
-      .textarea-inline__placeholder {
-        color: semantic-color(text-primary);
+      .pupa-textarea-inline__placeholder {
+        color: functions.semantic-color(text-primary);
       }
     }
 
-    &.textarea-inline_invalid {
-      border-color: semantic-color(kind-danger-normal);
+    &.pupa-textarea-inline_invalid {
+      border-color: functions.semantic-color(kind-danger-normal);
     }
   }
 }
 
-.textarea-inline_disabled {
-  color: semantic-color(text-disabled);
-  background-color: semantic-color(kind-neutral-disabled);
+.pupa-textarea-inline_disabled {
+  color: functions.semantic-color(text-disabled);
+  background-color: functions.semantic-color(kind-neutral-disabled);
 
-  .textarea-inline__placeholder {
-    color: semantic-color(text-disabled);
+  .pupa-textarea-inline__placeholder {
+    color: functions.semantic-color(text-disabled);
   }
 }
 
-.overlay-container {
+.pupa-overlay-container {
   width: 100%;
   height: 100%;
   padding-left: 8px;
   box-sizing: border-box;
 
-  .overlay-textarea {
+  .pupa-overlay-textarea {
     position: relative;
   }
 
-  .textarea {
+  .pupa-textarea {
     transition: 0.25s;
     transform-origin: right center;
     transform: scaleX(0.5);
   }
 
   &_opened {
-    .textarea {
+    .pupa-textarea {
       transform: scaleX(1);
     }
   }
 
-  @include xs() {
+  @include mixins.xs() {
     position: fixed;
     bottom: 16px;
     left: 0;
     height: auto;
     padding: 0 20px 32px 20px;
 
-    .textarea {
+    .pupa-textarea {
       transform: none;
     }
 
     &_opened {
-      .textarea {
+      .pupa-textarea {
         transform: none;
       }
     }
   }
 }
 
-.textarea {
+.pupa-textarea {
   box-shadow: 0 8px 24px rgba(0, 23, 32, 0.04);
 
   &__pseudo-content,
@@ -136,14 +136,14 @@
     padding: 2rem 10rem 2rem 3rem;
   }
 
-  @include xs {
+  @include mixins.xs {
     width: 100%;
     position: relative;
     transform: none;
   }
 }
 
-.close-icon {
+.pupa-close-icon {
   --pseudoIndentSize: 1rem;
   position: absolute;
   top: 50%;
@@ -155,37 +155,37 @@
   margin: calc(var(--pseudoIndentSize) * -1);
   cursor: pointer;
   pointer-events: all;
-  color: semantic-color(icons-secondary);
+  color: functions.semantic-color(icons-secondary);
 
   &:hover {
-    color: semantic-color(kind-primary-hover);
+    color: functions.semantic-color(kind-primary-hover);
   }
 }
 
-.counter_overlay {
+.pupa-counter_overlay {
   position: absolute;
   right: 0;
 }
 
-.counter_invisible {
+.pupa-counter_invisible {
   visibility: hidden;
 }
 
-.counter_mobile {
-  color: semantic-color(text-secondary);
+.pupa-counter_mobile {
+  color: functions.semantic-color(text-secondary);
 }
 
-.overlay-textarea {
-  .textarea:not(.textarea_disabled) {
+.pupa-overlay-textarea {
+  .pupa-textarea:not(.pupa-textarea_disabled) {
     border-color: transparent;
 
     &:focus-within {
-      background-color: semantic-color(surface-primary);
-      border: 1px solid semantic-color(lines-opacity);
-      @include blur();
+      background-color: functions.semantic-color(surface-primary);
+      border: 1px solid functions.semantic-color(lines-opacity);
+      @include mixins.blur();
 
-      .textarea__control::placeholder {
-        color: semantic-color(text-primary);
+      .pupa-textarea__control::placeholder {
+        color: functions.semantic-color(text-primary);
       }
     }
   }

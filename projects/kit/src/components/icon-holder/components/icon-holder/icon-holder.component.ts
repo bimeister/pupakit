@@ -21,7 +21,7 @@ export class IconHolderComponent implements OnChanges {
   private readonly size$: BehaviorSubject<IconHolderSize> = new BehaviorSubject<IconHolderSize>('large');
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([this.kind$, this.size$]).pipe(
-    map((classes: string[]) => classes.map((innerClass: string) => `holder_${innerClass}`))
+    map((classes: string[]) => classes.map((innerClass: string) => `pupa-holder_${innerClass}`))
   );
 
   public ngOnChanges(changes: ComponentChanges<this>): void {

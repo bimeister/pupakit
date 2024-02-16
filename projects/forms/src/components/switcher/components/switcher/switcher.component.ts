@@ -52,7 +52,7 @@ export class SwitcherComponent implements OnChanges, ControlValueAccessor {
   }
 
   public get sizeClass(): string {
-    return `switcher_${this.size}`;
+    return `pupa-switcher_${this.size}`;
   }
 
   public onKeyDown(_event: MouseEvent): void {

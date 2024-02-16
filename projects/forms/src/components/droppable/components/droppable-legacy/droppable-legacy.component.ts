@@ -19,11 +19,11 @@ const OFFSET_TOP_PX: number = 4;
 @Component({
   selector: 'pupa-droppable-legacy',
   templateUrl: './droppable-legacy.component.html',
-  styleUrls: ['./droppable-legacy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   @ViewChild('dropdown', { static: false }) public dropdownRef: ElementRef<HTMLDivElement>;
+
   public get dropdown(): HTMLDivElement | null {
     return !isNil(this.dropdownRef) && !isNil(this.dropdownRef.nativeElement) ? this.dropdownRef.nativeElement : null;
   }
@@ -32,13 +32,16 @@ export class DroppableLegacyComponent implements AfterViewInit, OnDestroy {
   @Input() public positionChange$: Observable<void>;
   @Input() public horizontalPosition: DroppableLegacyHorizontalPosition = 'left';
   @Input() public maxWidth: number = null;
-  @Input() public set open(value: boolean) {
+
+  @Input()
+  public set open(value: boolean) {
     this._open = value;
     globalThis.requestAnimationFrame(() => {
       this.shown = value;
       this.checkPosition();
     });
   }
+
   public get open(): boolean {
     return this._open;
   }

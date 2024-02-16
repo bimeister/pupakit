@@ -1,6 +1,3 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-
 :host {
   display: block;
   width: 100%;
@@ -8,7 +5,7 @@
   position: relative;
 }
 
-.breadcrumbs {
+.pupa-breadcrumbs {
   display: flex;
   align-items: center;
 

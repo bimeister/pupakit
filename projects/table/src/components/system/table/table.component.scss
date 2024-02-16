@@ -1,6 +1,6 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
+@use 'variables';
 
 :host {
   display: block;
@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-.table {
+.pupa-table {
   width: 100%;
   height: 100%;
   display: flex;
@@ -16,38 +16,38 @@
   position: relative;
 }
 
-.table__header {
+.pupa-table__header {
   flex-shrink: 0;
   display: flex;
 }
 
-.table-header {
+.pupa-table-header {
   position: relative;
 }
 
-.table-header__pinned-left-container {
+.pupa-table-header__pinned-left-container {
   flex-shrink: 0;
   position: relative;
 }
 
-.table-header__scrollable-container {
+.pupa-table-header__scrollable-container {
   width: 100%;
   overflow: hidden;
 }
 
-.table-header__pinned-right-container {
+.pupa-table-header__pinned-right-container {
   flex-shrink: 0;
   position: relative;
 }
 
-.table-header__hidden-columns-count {
+.pupa-table-header__hidden-columns-count {
   position: absolute;
   top: 0;
-  background-color: semantic-color(surface-action);
+  background-color: functions.semantic-color(surface-action);
   width: 4rem;
   height: 4rem;
-  @include font-type-medium;
-  @include font-size-xs;
+  @include mixins.font-type-medium;
+  @include mixins.font-size-xs;
   border-radius: 2rem;
   display: flex;
   align-items: center;
@@ -65,51 +65,51 @@
   }
 }
 
-.table__body {
+.pupa-table__body {
   width: 100%;
   height: 100%;
 }
 
-.table-body__scrollable {
+.pupa-table-body__scrollable {
   overflow: unset;
 }
 
-.table-decor {
+.pupa-table-decor {
   display: flex;
   height: 16px;
 }
 
-.table-decor__pinned-left-container {
+.pupa-table-decor__pinned-left-container {
   flex-shrink: 0;
 }
 
-.table-decor__scrollable-container {
+.pupa-table-decor__scrollable-container {
   width: 100%;
   overflow: hidden;
 }
 
-.table-decor__pinned-right-container {
+.pupa-table-decor__pinned-right-container {
   flex-shrink: 0;
 }
 
-.table-body__scroll-viewport {
+.pupa-table-body__scroll-viewport {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.table-body__scroll-viewport-container {
+.pupa-table-body__scroll-viewport-container {
   display: flex;
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.table-body__pinned-left-container {
+.pupa-table-body__pinned-left-container {
   flex-shrink: 0;
 }
 
-.table-body__scrollable-container {
+.pupa-table-body__scrollable-container {
   width: 100%;
   overflow-x: auto;
 
@@ -121,96 +121,96 @@
   }
 }
 
-.table-body__pinned-right-container {
+.pupa-table-body__pinned-right-container {
   flex-shrink: 0;
 }
 
-.table-row {
+.pupa-table-row {
   width: fit-content;
   display: flex;
   box-sizing: border-box;
   min-width: 100%;
-  border-bottom: 1px solid semantic-color(lines-normal);
-  background-color: semantic-color(surface-tertiary);
+  border-bottom: 1px solid functions.semantic-color(lines-normal);
+  background-color: functions.semantic-color(surface-tertiary);
 
   &_hovered,
   &_selected {
-    background-color: semantic-color(kind-neutral-normal);
+    background-color: functions.semantic-color(kind-neutral-normal);
   }
 }
 
-.table-row_header {
+.pupa-table-row_header {
   height: 100%;
-  background-color: semantic-color(surface-secondary);
-  border-bottom: 1px solid semantic-color(lines-normal);
-  border-top: 1px solid semantic-color(lines-normal);
+  background-color: functions.semantic-color(surface-secondary);
+  border-bottom: 1px solid functions.semantic-color(lines-normal);
+  border-top: 1px solid functions.semantic-color(lines-normal);
 
   &_hovered {
-    background-color: semantic-color(kind-neutral-hover);
+    background-color: functions.semantic-color(kind-neutral-hover);
   }
 }
 
-.table-row_decor {
+.pupa-table-row_decor {
   height: 100%;
   background-color: unset;
 }
 
-.table-row_placeholder {
+.pupa-table-row_placeholder {
   height: auto;
 }
 
-.table__bottom-scrollbar {
+.pupa-table__bottom-scrollbar {
   flex-shrink: 0;
   overflow: hidden;
 }
 
-.table-bottom-scrollbar {
+.pupa-table-bottom-scrollbar {
   display: flex;
   visibility: hidden;
-  height: $width_scrollbar;
+  height: variables.$width_scrollbar;
 
   &_visible {
     visibility: initial;
   }
 }
 
-.table-bottom-scrollbar__pinned-left-container {
+.pupa-table-bottom-scrollbar__pinned-left-container {
   flex-shrink: 0;
 }
 
-.table-bottom-scrollbar__scrollable-container {
+.pupa-table-bottom-scrollbar__scrollable-container {
   width: 100%;
   overflow-y: auto;
   box-sizing: border-box;
 
   &_has-left-pinned {
-    border-left: 1px solid semantic-color(lines-normal);
+    border-left: 1px solid functions.semantic-color(lines-normal);
     margin-left: -1px;
   }
 
   &_has-right-pinned {
-    border-right: 1px solid semantic-color(lines-normal);
+    border-right: 1px solid functions.semantic-color(lines-normal);
     margin-right: -1px;
   }
 }
 
-.table-bottom-scrollbar__pinned-right-container {
+.pupa-table-bottom-scrollbar__pinned-right-container {
   flex-shrink: 0;
 }
 
-.table-bottom-scrollbar-row {
+.pupa-table-bottom-scrollbar-row {
   width: fit-content;
   height: 1px;
   display: flex;
 }
 
-.columns-dnd-indicator {
+.pupa-columns-dnd-indicator {
   position: absolute;
   left: 100px;
   top: 0;
   width: 2px;
-  height: calc(100% - #{$width_scrollbar});
-  background-color: semantic-color(kind-primary-normal);
+  height: calc(100% - #{variables.$width_scrollbar});
+  background-color: functions.semantic-color(kind-primary-normal);
   z-index: 5;
   pointer-events: none;
 }

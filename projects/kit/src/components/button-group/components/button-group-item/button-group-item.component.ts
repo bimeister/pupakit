@@ -29,7 +29,7 @@ export class ButtonGroupItemComponent<T> extends TabsItemBase<T, ButtonGroupStat
   @Input() public disabled: Nullable<boolean>;
 
   public readonly sizeClass$: Observable<string> = this.stateService.buttonGroupSize$.pipe(
-    map((size: ButtonGroupSize) => `button-group-item_${size}`)
+    map((size: ButtonGroupSize) => `pupa-button-group-item_${size}`)
   );
 
   constructor(

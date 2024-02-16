@@ -1,11 +1,11 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: contents;
 }
 
-.layout-wrapper {
+.pupa-layout-wrapper {
   box-sizing: border-box;
   display: block;
   position: fixed;
@@ -18,7 +18,7 @@
   margin: 0;
   border: none;
 
-  &.context-menus {
+  &.pupa-context-menus {
     pointer-events: none;
 
     &:empty {
@@ -26,23 +26,23 @@
     }
   }
 
-  &.content {
-    background-color: semantic-color(surface-primary);
+  &.pupa-content {
+    background-color: functions.semantic-color(surface-primary);
     z-index: 1;
   }
 
-  &.loader {
+  &.pupa-loader {
     z-index: 1001;
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  &.context-menus {
+  &.pupa-context-menus {
     z-index: 50;
   }
 
-  &.iframe {
+  &.pupa-iframe {
     z-index: 0;
     pointer-events: none;
     visibility: hidden;
@@ -53,7 +53,7 @@
     min-height: 100%;
   }
 
-  &.grid {
+  &.pupa-grid {
     z-index: 20000;
     pointer-events: none;
     width: 100%;
@@ -64,16 +64,16 @@
   }
 }
 
-.grid {
-  @include grid-container();
+.pupa-grid {
+  @include mixins.grid-container();
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
 
   &__column {
-    @include grid-size($xs: 1, $sm: 1, $md: 1, $lg: 1, $xlg: 1, $xl: 1, $xxl: 1);
-    @include debug();
+    @include mixins.grid-size($xs: 1, $sm: 1, $md: 1, $lg: 1, $xlg: 1, $xl: 1, $xxl: 1);
+    @include mixins.debug();
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -85,7 +85,7 @@
   }
 }
 
-.wrapper {
+.pupa-wrapper {
   display: flex;
   flex-direction: column;
   height: 100%;
