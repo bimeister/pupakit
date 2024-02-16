@@ -1,25 +1,31 @@
-@use 'functions' as *;
+@use 'functions';
 
-.highlight {
+.pupa-highlight {
   &_primary {
-    background-color: semantic-color(kind-primary-normal);
+    background-color: functions.semantic-color(kind-primary-normal);
   }
+
   &_neutral {
-    background-color: semantic-color(kind-neutral-normal);
+    background-color: functions.semantic-color(kind-neutral-normal);
   }
+
   &_success {
-    background-color: semantic-color(kind-success-normal);
+    background-color: functions.semantic-color(kind-success-normal);
   }
+
   &_warning {
-    background-color: semantic-color(kind-warning-normal);
+    background-color: functions.semantic-color(kind-warning-normal);
   }
+
   &_danger {
-    background-color: semantic-color(kind-danger-normal);
+    background-color: functions.semantic-color(kind-danger-normal);
   }
+
   &_entity {
-    background-color: semantic-color(highlighter-entity);
+    background-color: functions.semantic-color(highlighter-entity);
   }
+
   &_search {
-    background-color: semantic-color(highlighter-search);
+    background-color: functions.semantic-color(highlighter-search);
   }
 }

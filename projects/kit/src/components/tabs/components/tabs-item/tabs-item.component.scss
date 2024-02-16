@@ -1,5 +1,5 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 :host {
   display: block;
@@ -12,35 +12,35 @@
   }
 }
 
-.tabs-item {
+.pupa-tabs-item {
   min-width: 1rem;
   max-width: inherit;
-  color: semantic-color(text-primary);
+  color: functions.semantic-color(text-primary);
   box-sizing: border-box;
   padding: 0 3rem 4rem;
   cursor: pointer;
   user-select: none;
 
   &:not(&_disabled) {
-    @include hover {
-      color: semantic-color(kind-primary-hover);
+    @include mixins.hover {
+      color: functions.semantic-color(kind-primary-hover);
     }
   }
 
   &_active {
-    color: semantic-color(kind-primary-normal);
+    color: functions.semantic-color(kind-primary-normal);
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: semantic-color(text-disabled);
+    color: functions.semantic-color(text-disabled);
   }
 
   &_grabbing {
     cursor: grabbing;
   }
 
-  @include ellipsis-text-overflow;
+  @include mixins.ellipsis-text-overflow;
 
-  @include font-preset-caption-s();
+  @include mixins.font-preset-caption-s();
 }

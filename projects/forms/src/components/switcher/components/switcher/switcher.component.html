@@ -1,13 +1,13 @@
 <div
-  class="switcher"
+  class="pupa-switcher"
   [class]="sizeClass"
-  [class.switcher_active]="value$ | async"
-  [class.switcher_disabled]="isDisabled$ | async"
+  [class.pupa-switcher_active]="value$ | async"
+  [class.pupa-switcher_disabled]="isDisabled$ | async"
   (click)="changeValue()"
   [tabindex]="tabindex"
   (focus)="emitFocusEvent($event)"
   (blur)="emitBlurEvent($event)"
   (keydown.enter)="onKeyDown($event)"
 >
-  <div class="switcher__marker"></div>
+  <div class="pupa-switcher__marker"></div>
 </div>

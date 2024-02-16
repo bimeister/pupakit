@@ -1,12 +1,12 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 :host {
   display: flex;
   width: 100%;
 }
 
-.checkbox {
+.pupa-checkbox {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -20,18 +20,18 @@
 
   padding: 2rem;
 
-  &:not(.checkbox_disabled):not(.checkbox_without-label) {
-    @include hover() {
-      background: semantic-color(kind-neutral-hover);
+  &:not(.pupa-checkbox_disabled):not(.pupa-checkbox_without-label) {
+    @include mixins.hover() {
+      background: functions.semantic-color(kind-neutral-hover);
 
       &:active {
-        background: semantic-color(kind-neutral-pressed);
+        background: functions.semantic-color(kind-neutral-pressed);
       }
     }
   }
 
-  &:focus-visible:not(.checkbox_disabled) {
-    outline: 2px solid semantic-color(lines-accent);
+  &:focus-visible:not(.pupa-checkbox_disabled) {
+    outline: 2px solid functions.semantic-color(lines-accent);
   }
 
   &_without-label {
@@ -48,39 +48,39 @@
   }
 }
 
-.checkbox {
-  @include hover() {
-    :not(.checkbox__marker:focus-visible):not(.checkbox__marker_error):not(
-        .checkbox__marker_disabled
-      ).checkbox__marker {
-      background: semantic-color(kind-primary-normal, alpha-7);
-      border: 1px solid semantic-color(lines-accent);
+.pupa-checkbox {
+  @include mixins.hover() {
+    :not(.pupa-checkbox__marker:focus-visible):not(.pupa-checkbox__marker_error):not(
+        .pupa-checkbox__marker_disabled
+      ).pupa-checkbox__marker {
+      background: functions.semantic-color(kind-primary-normal, alpha-7);
+      border: 1px solid functions.semantic-color(lines-accent);
 
       &_checked {
-        background: semantic-color(kind-primary-normal);
+        background: functions.semantic-color(kind-primary-normal);
         border: none;
       }
     }
 
-    :not(.checkbox__marker:focus-visible):not(.checkbox__marker_disabled).checkbox__marker_error {
-      background: semantic-color(kind-danger-normal, alpha-7);
+    :not(.pupa-checkbox__marker:focus-visible):not(.pupa-checkbox__marker_disabled).pupa-checkbox__marker_error {
+      background: functions.semantic-color(kind-danger-normal, alpha-7);
 
-      &:not(.checkbox__marker_checked) {
-        border: 1px solid semantic-color(kind-danger-normal);
+      &:not(.pupa-checkbox__marker_checked) {
+        border: 1px solid functions.semantic-color(kind-danger-normal);
       }
 
-      &.checkbox__marker_checked {
-        background: semantic-color(kind-danger-hover);
+      &.pupa-checkbox__marker_checked {
+        background: functions.semantic-color(kind-danger-hover);
         border: none;
       }
     }
   }
 }
 
-.checkbox__marker {
+.pupa-checkbox__marker {
   width: 3.5rem;
   height: 3.5rem;
-  border: 1px solid semantic-color(icons-secondary);
+  border: 1px solid functions.semantic-color(icons-secondary);
   box-sizing: border-box;
   border-radius: 1px;
   display: flex;
@@ -89,49 +89,49 @@
   flex-shrink: 0;
 
   &_checked {
-    background: semantic-color(kind-primary-normal);
+    background: functions.semantic-color(kind-primary-normal);
     border: none;
   }
 
-  &:focus-visible:not(.checkbox__marker_disabled) {
-    outline: 2px solid semantic-color(lines-accent);
+  &:focus-visible:not(.pupa-checkbox__marker_disabled) {
+    outline: 2px solid functions.semantic-color(lines-accent);
     border: none;
 
-    &:not(.checkbox__marker_checked) {
-      background: semantic-color(kind-primary-normal, alpha-7);
+    &:not(.pupa-checkbox__marker_checked) {
+      background: functions.semantic-color(kind-primary-normal, alpha-7);
     }
 
-    &.checkbox__marker_error {
-      background: semantic-color(kind-danger-normal, alpha-7);
+    &.pupa-checkbox__marker_error {
+      background: functions.semantic-color(kind-danger-normal, alpha-7);
 
-      &.checkbox__marker_checked {
+      &.pupa-checkbox__marker_checked {
         border: none;
-        outline: 2px solid semantic-color(lines-accent);
+        outline: 2px solid functions.semantic-color(lines-accent);
         outline-offset: 1px;
-        background: semantic-color(kind-danger-normal);
+        background: functions.semantic-color(kind-danger-normal);
       }
     }
   }
 
   &_error {
-    border: 1px solid semantic-color(kind-danger-normal);
+    border: 1px solid functions.semantic-color(kind-danger-normal);
 
-    &.checkbox__marker_checked {
-      background: semantic-color(kind-danger-normal);
+    &.pupa-checkbox__marker_checked {
+      background: functions.semantic-color(kind-danger-normal);
     }
   }
 
   &_disabled {
-    border: 1px solid semantic-color(icons-disabled);
+    border: 1px solid functions.semantic-color(icons-disabled);
 
-    .checkbox__marker-icon {
-      color: semantic-color(text-disabled);
+    .pupa-checkbox__marker-icon {
+      color: functions.semantic-color(text-disabled);
     }
   }
 
-  &_checked.checkbox__marker_disabled {
+  &_checked.pupa-checkbox__marker_disabled {
     border: none;
-    background: semantic-color(kind-primary-disabled);
+    background: functions.semantic-color(kind-primary-disabled);
   }
 
   &_disabled:focus-visible {
@@ -139,24 +139,24 @@
   }
 
   &_hovered:not(&_disabled) {
-    background: semantic-color(kind-primary-normal, alpha-7);
-    border: 1px solid semantic-color(link-visited);
+    background: functions.semantic-color(kind-primary-normal, alpha-7);
+    border: 1px solid functions.semantic-color(link-visited);
 
-    &.checkbox__marker_checked {
-      background: semantic-color(link-visited);
+    &.pupa-checkbox__marker_checked {
+      background: functions.semantic-color(link-visited);
       border: none;
     }
   }
 }
 
-.checkbox__label {
-  @include ellipsis-text-overflow;
+.pupa-checkbox__label {
+  @include mixins.ellipsis-text-overflow;
 
-  @include font-size-xs();
+  @include mixins.font-size-xs();
   line-height: 1.2;
 
   &_small {
-    @include font-size-xxs();
+    @include mixins.font-size-xxs();
   }
 
   &_hidden {
@@ -164,14 +164,14 @@
   }
 
   &_disabled {
-    color: semantic-color(icons-disabled);
+    color: functions.semantic-color(icons-disabled);
   }
 }
 
-.checkbox__marker-icon {
+.pupa-checkbox__marker-icon {
   display: flex;
   overflow: hidden;
   width: 2.5rem;
   height: 2.5rem;
-  color: semantic-color(surface-primary);
+  color: functions.semantic-color(surface-primary);
 }

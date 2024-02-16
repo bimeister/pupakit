@@ -8,8 +8,8 @@
 <ng-template #buttonGroupContent>
   <div
     *ngFor="let buttonTemplate of nonDestroyableTemplateRefs$ | async; trackBy: tabTrackBy"
-    class="button-group"
-    [class.button-group_visible]="buttonTemplate.isActive"
+    class="pupa-button-group"
+    [class.pupa-button-group_visible]="buttonTemplate.isActive"
   >
     <ng-container [ngTemplateOutlet]="buttonTemplate.templateRef"></ng-container>
   </div>

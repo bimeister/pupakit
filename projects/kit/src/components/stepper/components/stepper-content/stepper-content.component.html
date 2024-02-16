@@ -5,8 +5,8 @@
 <ng-template #stepper>
   <div
     *ngFor="let stepperTemplate of nonDestroyableTemplateRefs$ | async; trackBy: tabTrackBy"
-    class="stepper"
-    [class.stepper_visible]="stepperTemplate.isActive"
+    class="pupa-stepper"
+    [class.pupa-stepper_visible]="stepperTemplate.isActive"
   >
     <ng-container [ngTemplateOutlet]="stepperTemplate.templateRef"></ng-container>
   </div>

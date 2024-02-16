@@ -1,20 +1,20 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use '../../tag-preset.styles.scss' as *;
+@use 'mixins';
+@use 'functions';
+@use '../../tag-preset.styles';
 @use '../../tag.styles.scss';
 
 :host {
   outline: none;
 }
 
-.tag-wrapper {
-  @include flex-container();
+.pupa-tag-wrapper {
+  @include mixins.flex-container();
 
   width: 100%;
 }
 
-.tag {
-  @include tag-preset();
+.pupa-tag {
+  @include tag-preset.pupa-tag-preset();
 
   gap: 1rem;
   box-sizing: border-box;
@@ -25,5 +25,5 @@
   width: inherit;
   max-width: inherit;
   overflow: hidden;
-  color: semantic-color(text-inverse);
+  color: functions.semantic-color(text-inverse);
 }

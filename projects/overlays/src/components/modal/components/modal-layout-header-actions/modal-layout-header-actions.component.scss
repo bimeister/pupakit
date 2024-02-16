@@ -1,12 +1,12 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: flex;
   justify-content: flex-end;
   gap: 1rem;
 
-  @include xs {
+  @include mixins.xs {
     position: relative;
     padding-bottom: calc(3.5rem + 1px);
     margin-bottom: 3.5rem;
@@ -15,21 +15,21 @@
       content: '';
       width: calc(100% + 10rem);
       height: 0.5px;
-      background-color: semantic-color(lines-normal);
+      background-color: functions.semantic-color(lines-normal);
       position: absolute;
       top: 100%;
       left: -5rem;
     }
   }
 
-  :host-context(.modal-layout_no-title) {
+  :host-context(.pupa-modal-layout_no-title) {
     width: 100%;
   }
 }
 
-:host-context(.modal-layout_no-border) {
+:host-context(.pupa-modal-layout_no-border) {
   :host {
-    @include xs {
+    @include mixins.xs {
       padding-bottom: calc(3.5rem + 1px);
       margin-bottom: 0;
       &::after {
@@ -39,9 +39,9 @@
   }
 }
 
-:host-context(.modal-layout_no-title) {
+:host-context(.pupa-modal-layout_no-title) {
   :host {
-    @include xs {
+    @include mixins.xs {
       margin-bottom: 0;
     }
   }

@@ -1,7 +1,7 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
-.drawer-separator {
+.pupa-drawer-separator {
   height: 1px;
   box-sizing: border-box;
 
@@ -9,11 +9,11 @@
     margin-left: -6rem;
     margin-right: -6rem;
 
-    @include xs() {
+    @include mixins.xs() {
       margin-left: -5rem;
       margin-right: -5rem;
     }
   }
 
-  background-color: semantic-color(kind-neutral-normal);
+  background-color: functions.semantic-color(kind-neutral-normal);
 }

@@ -1,11 +1,10 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
 
-.badge-marker-block {
+.pupa-badge-marker-block {
   position: absolute;
   height: 4rem;
   max-width: 9rem;
   right: -2rem;
   top: -2rem;
-  @include ellipsis-text-overflow;
+  @include mixins.ellipsis-text-overflow;
 }

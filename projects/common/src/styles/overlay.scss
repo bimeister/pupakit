@@ -1,14 +1,13 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
 
 /*
   Explore the possibility of excluding the management of external styles
   Originates from https://bimeister.atlassian.net/browse/BIM-14668
 */
 
-@mixin apply-background() {
-  background-color: semantic-color(kind-opacity-normal, alpha-60);
+@mixin pupa-apply-background() {
+  background-color: functions.semantic-color(kind-opacity-normal, alpha-60);
 }
 
 .cdk-global-overlay-wrapper,
@@ -31,7 +30,7 @@
   Thus this fields are set by script inside strategy class to proper view in mobile
   they need to be rewritten by class, so way to do so is using !important
   */
-  @include xs() {
+  @include mixins.xs() {
     top: 0 !important;
     left: 0 !important;
     width: 100% !important;
@@ -40,20 +39,20 @@
 }
 
 .cdk-overlay-dark-backdrop {
-  @include apply-background;
+  @include pupa-apply-background;
 }
 
 .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
-  @include xs() {
+  @include mixins.xs() {
     opacity: 1;
-    @include apply-background;
+    @include pupa-apply-background;
   }
 }
 
 .cdk-overlay-without-backdrop {
   display: none;
-  @include xs() {
+  @include mixins.xs() {
     display: block;
-    @include apply-background;
+    @include pupa-apply-background;
   }
 }

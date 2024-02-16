@@ -1,12 +1,10 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'mixins';
 
 :host {
   min-height: 45rem;
   min-width: 52rem;
   padding: 4rem;
-  @include xs {
+  @include mixins.xs {
     flex-grow: 1;
   }
 }
