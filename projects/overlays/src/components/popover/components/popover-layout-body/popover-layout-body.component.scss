@@ -5,7 +5,7 @@
 :host {
   min-height: 45rem;
   min-width: 52rem;
-  padding: 4rem;
+  padding: var(--popover-layout-body-padding, 4rem);
   @include xs {
     flex-grow: 1;
   }
