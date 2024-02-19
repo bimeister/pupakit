@@ -45,8 +45,7 @@
 
 .cdk-overlay-transparent-backdrop.cdk-overlay-backdrop-showing {
   @include xs() {
-    opacity: 1;
-    @include apply-background;
+    opacity: 0;
   }
 }
 

@@ -80,6 +80,10 @@ export class DrawerContainerComponent<ComponentT> implements AfterViewInit, OnDe
     return hasPadding;
   }
 
+  public get isMiddlePosition(): boolean {
+    return this.componentData.isMiddlePosition;
+  }
+
   private readonly animationPlayer$: Observable<AnimationPlayer> = combineLatest([
     this.float$,
     this.drawerContainerElement$.pipe(filterNotNil()),

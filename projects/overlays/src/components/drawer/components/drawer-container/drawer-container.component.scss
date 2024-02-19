@@ -3,6 +3,13 @@
 
 $drawer_padding: 8px;
 
+@mixin heightContainer($vh) {
+  height: vh($vh);
+  width: 100vw;
+  padding: 0;
+  bottom: 0;
+}
+
 .drawer-container {
   width: fit-content;
   height: 100%;
@@ -16,10 +23,7 @@ $drawer_padding: 8px;
   }
 
   @include lt-sm() {
-    height: vh(90);
-    width: 100vw;
-    padding: 0;
-    bottom: 0;
+    @include heightContainer(90);
   }
 
   &_full-screen {
@@ -27,5 +31,9 @@ $drawer_padding: 8px;
     height: vh(100);
     padding: 0;
     margin: 0;
+  }
+
+  &_middle-position {
+    @include heightContainer(50);
   }
 }
