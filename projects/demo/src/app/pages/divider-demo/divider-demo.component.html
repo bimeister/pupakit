@@ -1,0 +1,39 @@
+<h1>Divider</h1>
+
+<demo-page>
+  <div *demoPageTab="'overview'">
+    <h3 demoAnchor>Basic usage</h3>
+    <pupa-callout>
+      The default orientation is
+      <pupa-code-inline>horizontal</pupa-code-inline>
+      .
+    </pupa-callout>
+    <pupa-code-container [content]="basicExampleContent">
+      <demo-divider-basic-example *pupaCodeContainerPreviewTemplate></demo-divider-basic-example>
+    </pupa-code-container>
+  </div>
+
+  <div *demoPageTab="'api'">
+    <demo-example-viewer>
+      <demo-example-viewer-content class="content">
+        <div
+          *ngIf="orientation$ | async as orientation"
+          class="divider-container"
+          [class.divider-container_horizontal]="orientation === 'horizontal'"
+        >
+          <span>first</span>
+          <pupa-divider [orientation]="orientation"></pupa-divider>
+          <span>second</span>
+        </div>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="orientation" type="DividerOrientation">
+          <ng-container *demoExampleViewerPropertyDescription>Divider orientation.</ng-container>
+          <demo-props-select #orientation$ [options]="orientationOptions"></demo-props-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+    </demo-example-viewer>
+  </div>
+</demo-page>

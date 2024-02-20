@@ -1,0 +1,17 @@
+.divider-container {
+  &_vertical {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 4rem 0;
+
+    .divider {
+      height: 4rem;
+    }
+  }
+
+  &_horizontal {
+    width: 50%;
+    margin-top: 4rem;
+  }
+}

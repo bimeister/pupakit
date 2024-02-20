@@ -14,6 +14,7 @@ import { ButtonIconDemoModule } from './pages/button-icon-demo/button-icon-demo.
 import { ButtonMultiDemoModule } from './pages/button-multi-demo/button-multi-demo.module';
 import { ButtonRoundDemoModule } from './pages/button-round-demo/button-round-demo.module';
 import { CalendarDemoModule } from './pages/calendar-demo/calendar-demo.module';
+import { CalloutDemoModule } from './pages/callout-demo/callout-demo.module';
 import { CardDemoModule } from './pages/card-demo/card-demo.module';
 import { CheckboxDemoModule } from './pages/checkbox-demo/checkbox-demo.module';
 import { CodeDemoModule } from './pages/code-demo/code-demo.module';
@@ -21,16 +22,18 @@ import { ColorsDemoModule } from './pages/colors-demo/colors-demo.module';
 import { CounterDemoModule } from './pages/counter-demo/counter-demo.module';
 import { DateTimePickerDemoModule } from './pages/date-time-picker-demo/date-time-picker-demo.module';
 import { DaySelectorDemoModule } from './pages/day-selector-demo/day-selector-demo.module';
+import { DividerDemoModule } from './pages/divider-demo/divider-demo.module';
 import { DndDemoModule } from './pages/dnd-demo/dnd-demo.module';
 import { DrawerDemoModule } from './pages/drawer-demo/drawer-demo.module';
 import { DropdownDemoModule } from './pages/dropdown-demo/dropdown-demo.module';
 import { DropdownMenuDemoModule } from './pages/dropdown-menu-demo/dropdown-menu-demo.module';
 import { FloatingCardDemoModule } from './pages/floating-card-demo/floating-card-demo.module';
+import { HighlightDemoModule } from './pages/highlight-demo/highlight-demo.module';
+import { HotkeyDemoModule } from './pages/hotkey-demo/hotkey-demo.module';
 import { IconDemoModule } from './pages/icon-demo/icon-demo.module';
 import { IconHolderDemoModule } from './pages/icon-holder-demo/icon-holder-demo.module';
 import { IconsPageModule } from './pages/icons-page/icons-page.module';
 import { InfinityScrollerDemoModule } from './pages/infinity-scroller-demo/infinity-scroller-demo.module';
-import { CalloutDemoModule } from './pages/callout-demo/callout-demo.module';
 import { InputDemoModule } from './pages/input-demo/input-demo.module';
 import { LabelDemoModule } from './pages/label-demo/label-demo.module';
 import { LayoutDemoModule } from './pages/layout-demo/layout-demo.module';
@@ -60,8 +63,6 @@ import { TooltipDemoModule } from './pages/tooltip-demo/tooltip-demo.module';
 import { TreeNewDemoModule } from './pages/tree-new-demo/tree-new-demo.module';
 import { TreeNodeDemoModule } from './pages/tree-node-demo/tree-node-demo.module';
 import { TypographyPageModule } from './pages/typography-page/typography-page.module';
-import { HighlightDemoModule } from './pages/highlight-demo/highlight-demo.module';
-import { HotkeyDemoModule } from './pages/hotkey-demo/hotkey-demo.module';
 
 const demoRoutes: Routes = [
   {
@@ -422,6 +423,11 @@ const demoRoutes: Routes = [
         path: 'hotkey',
         loadChildren: (): Promise<Type<HotkeyDemoModule>> =>
           import('./pages/hotkey-demo/hotkey-demo.module').then((module: any) => module.HotkeyDemoModule),
+      },
+      {
+        path: 'divider',
+        loadChildren: (): Promise<Type<DividerDemoModule>> =>
+          import('./pages/divider-demo/divider-demo.module').then((module: any) => module.DividerDemoModule),
       },
     ],
   },

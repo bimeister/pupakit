@@ -1,0 +1,8 @@
+.divider-container {
+  display: flex;
+  gap: 2rem;
+
+  &_horizontal {
+    flex-direction: column;
+  }
+}
