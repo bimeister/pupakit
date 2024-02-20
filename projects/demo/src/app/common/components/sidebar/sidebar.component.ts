@@ -67,6 +67,7 @@ export class SidebarComponent {
         { title: 'Option', link: '/kit/option' },
         { title: 'Callout', link: '/kit/callout' },
         { title: 'Hotkey', link: '/kit/hotkey' },
+        { title: 'Divider', link: '/kit/divider' },
       ],
       'title'
     ),

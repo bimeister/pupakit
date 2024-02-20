@@ -1,0 +1,19 @@
+@use 'functions';
+
+:host {
+  display: block;
+}
+
+.pupa-divider {
+  background-color: functions.semantic-color(lines-normal);
+
+  &_vertical {
+    height: 100%;
+    width: 1px;
+  }
+
+  &_horizontal {
+    width: 100%;
+    height: 1px;
+  }
+}
