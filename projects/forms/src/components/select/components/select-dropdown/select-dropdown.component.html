@@ -11,14 +11,14 @@
   (overlayOutsideClick)="handleOutsideClick()"
 >
   <pupa-theme-wrapper
-    class="pupa-select-dropdown-wrapper"
+    class="select-dropdown-wrapper"
     (wheel)="processEventPropagation($event)"
     (mousedown)="processEventPropagation($event)"
     (touchstart)="processEventPropagation($event)"
     (touchmove)="processEventPropagation($event)"
     (touchend)="processEventPropagation($event)"
   >
-    <section class="pupa-select-dropdown" [@dropdownExpanded]="animationState$ | async">
+    <section class="select-dropdown" [@dropdownExpanded]="animationState$ | async">
       <ng-content></ng-content>
     </section>
   </pupa-theme-wrapper>

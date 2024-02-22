@@ -1,7 +1,7 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
-  @include mixins.font-preset-h4();
+  @include font-preset-h4();
 
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -1,3 +1,6 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
 $layout-height-large: 16rem;
 $layout-height-medium: 12rem;
 $normal-shadow-color: rgba(33, 33, 33, 0.05);
@@ -8,7 +11,7 @@ $hover-shadow-color: rgba(33, 33, 33, 0.08);
   width: 100%;
 }
 
-.pupa-card {
+.card {
   width: 100%;
   box-sizing: border-box;
 
@@ -21,7 +24,7 @@ $hover-shadow-color: rgba(33, 33, 33, 0.08);
   }
 }
 
-.pupa-card__inner-wrapper {
+.card__inner-wrapper {
   width: 100%;
   height: 100%;
   box-sizing: border-box;

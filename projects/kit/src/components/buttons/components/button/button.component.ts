@@ -54,7 +54,7 @@ export class ButtonComponent implements OnChanges {
   @Input() public flexible: boolean = false;
   public readonly flexible$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  @HostBinding('class.pupa-flexible') public hasFlexibleClass: boolean = false;
+  @HostBinding('class.flexible') public hasFlexibleClass: boolean = false;
 
   protected commonButtonClasses: Observable<string>[] = [
     this.size$,
@@ -74,7 +74,7 @@ export class ButtonComponent implements OnChanges {
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `pupa-button_${innerProperty}`)
+        .map((innerProperty: string) => `button_${innerProperty}`)
     )
   );
 

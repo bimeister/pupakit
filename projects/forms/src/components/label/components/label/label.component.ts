@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { Nullable, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LabelIconPosition } from '../../../../declarations/types/label-icon-position.type';
 import { LabelSize } from '../../../../declarations/types/label-size.type';
@@ -34,7 +34,7 @@ export class LabelComponent implements OnChanges {
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `pupa-label_${innerProperty}`)
+        .map((innerProperty: string) => `label_${innerProperty}`)
     )
   );
 

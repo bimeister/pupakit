@@ -1,7 +1,7 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
   display: block;
-  @include mixins.font-size-s();
-  @include mixins.font-type-medium();
+  @include font-size-s();
+  @include font-type-medium();
 }

@@ -1,5 +1,6 @@
-@use 'functions';
-@use 'mixins';
+@use 'sass:meta';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 @use '../../../../node_modules/@angular/cdk/overlay-prebuilt.css';
 
@@ -8,13 +9,13 @@
 @use 'font-faces';
 @use 'highlight';
 
-.pupa-icon-inner svg {
+.icon-inner svg {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.pupa-chip-content {
+.chip-content {
   display: flex;
   width: fit-content;
   align-items: center;
@@ -27,7 +28,7 @@
     width: 100%;
     max-width: inherit;
     min-width: 0;
-    @include mixins.ellipsis-text-overflow;
+    @include ellipsis-text-overflow;
   }
 
   &__delete-button {
@@ -59,6 +60,6 @@
   }
 }
 
-.pupa-invisible-scrollbars {
-  @include mixins.invisible-scrollbars;
+.invisible-scrollbars {
+  @include invisible-scrollbars;
 }

@@ -5,8 +5,8 @@
 <ng-template #tabs>
   <div
     *ngFor="let tabTemplate of nonDestroyableTemplateRefs$ | async; trackBy: tabTrackBy"
-    class="pupa-tab"
-    [class.pupa-tab_visible]="tabTemplate.isActive"
+    class="tab"
+    [class.tab_visible]="tabTemplate.isActive"
   >
     <ng-container [ngTemplateOutlet]="tabTemplate.templateRef"></ng-container>
   </div>

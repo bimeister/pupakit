@@ -1,20 +1,20 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
 }
 
-.pupa-label {
+.label {
   width: inherit;
   max-width: inherit;
-  @include mixins.flex-container(row, center, flex-start);
+  @include flex-container(row, center, flex-start);
   height: 3.5rem;
   gap: 1.5rem;
 
   &__icon {
     flex-shrink: 0;
-    color: functions.semantic-color(icons-primary);
+    color: semantic-color(icons-primary);
   }
 
   &__content {
@@ -23,34 +23,34 @@
     gap: 1.5rem;
     max-width: 100%;
 
-    &.pupa-reversed-direction {
+    &.reversed-direction {
       flex-direction: row-reverse;
     }
 
     &-inner {
       flex-shrink: 1;
-      color: functions.semantic-color(text-primary);
-      @include mixins.font-preset-h6();
-      @include mixins.ellipsis-text-overflow;
+      color: semantic-color(text-primary);
+      @include font-preset-h6();
+      @include ellipsis-text-overflow;
     }
   }
 
-  &_large .pupa-label__content-inner {
-    @include mixins.font-size-m();
+  &_large .label__content-inner {
+    @include font-size-m();
   }
 
-  &_medium .pupa-label__content-inner {
-    @include mixins.font-size-xs();
+  &_medium .label__content-inner {
+    @include font-size-xs();
   }
 
-  &_small .pupa-label__content-inner {
-    @include mixins.font-size-xxs();
+  &_small .label__content-inner {
+    @include font-size-xxs();
   }
 
   &_disabled {
-    .pupa-label__icon,
-    .pupa-label__content-inner {
-      color: functions.semantic-color(text-disabled);
+    .label__icon,
+    .label__content-inner {
+      color: semantic-color(text-disabled);
     }
   }
 }

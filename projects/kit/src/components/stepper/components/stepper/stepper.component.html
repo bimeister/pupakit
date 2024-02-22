@@ -1,11 +1,11 @@
-<div class="pupa-gradient pupa-gradient_left" [class.pupa-gradient_visible]="isLeftGradient$ | async"></div>
-<div class="pupa-gradient pupa-gradient_right" [class.pupa-gradient_visible]="isRightGradient$ | async"></div>
+<div class="gradient gradient_left" [class.gradient_visible]="isLeftGradient$ | async"></div>
+<div class="gradient gradient_right" [class.gradient_visible]="isRightGradient$ | async"></div>
 
 <pupa-scrollable
   #scrollable
-  class="pupa-stepper"
-  [class.pupa-stepper_grab]="isHorizontalScrollExist$ | async"
-  [class.pupa-stepper_grabbing]="isContentDragging$ | async"
+  class="stepper"
+  [class.stepper_grab]="isHorizontalScrollExist$ | async"
+  [class.stepper_grabbing]="isContentDragging$ | async"
   [invisibleScrollbars]="['horizontal', 'vertical']"
   [scrollDragMode]="'horizontal'"
   (scrolledToHorizontalStart)="setLeftGradient($event)"
@@ -13,8 +13,8 @@
   (contentDragStart)="handleContentDragStart()"
   (contentDragEnd)="handleContentDragEnd()"
 >
-  <div class="pupa-stepper__container" #stepperContainer>
-    <div class="pupa-stepper__items">
+  <div class="stepper__container" #stepperContainer>
+    <div class="stepper__items">
       <ng-content></ng-content>
     </div>
   </div>

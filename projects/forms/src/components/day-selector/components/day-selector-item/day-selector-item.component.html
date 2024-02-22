@@ -1,13 +1,13 @@
 <div
-  class="pupa-day-selector-item"
+  class="day-selector-item"
   tabindex="0"
-  [class.pupa-selected]="selected"
-  [class.pupa-disabled]="disabled"
-  [class.pupa-day-selector-item_small]="size === 'small'"
+  [class.selected]="selected"
+  [class.disabled]="disabled"
+  [class.day-selector-item_small]="size === 'small'"
   (mousedown)="onMouseDown($event)"
   (keydown)="onKeyDown($event)"
 >
-  <div class="pupa-day-selector-item__content">
+  <div class="day-selector-item__content">
     {{ name }}
   </div>
 </div>

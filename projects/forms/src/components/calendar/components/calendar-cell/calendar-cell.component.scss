@@ -1,26 +1,26 @@
-@use 'functions';
-@use '../../styles/calendar.styles';
+@use 'functions' as *;
+@use '../../styles/calendar.styles' as *;
 
-.pupa-cell {
-  @include calendar.pupa-base-cell();
+.cell {
+  @include base-cell();
 
   &_in-range {
     &-first {
-      border-top-left-radius: calendar.$cell-border-radius;
-      border-bottom-left-radius: calendar.$cell-border-radius;
+      border-top-left-radius: $cell-border-radius;
+      border-bottom-left-radius: $cell-border-radius;
 
-      background-color: functions.semantic-color(calendar.$range-selection-color);
+      background-color: semantic-color($range-selection-color);
     }
 
     &-inside {
-      background-color: functions.semantic-color(calendar.$range-selection-color);
+      background-color: semantic-color($range-selection-color);
     }
 
     &-last {
-      border-top-right-radius: calendar.$cell-border-radius;
-      border-bottom-right-radius: calendar.$cell-border-radius;
+      border-top-right-radius: $cell-border-radius;
+      border-bottom-right-radius: $cell-border-radius;
 
-      background-color: functions.semantic-color(calendar.$range-selection-color);
+      background-color: semantic-color($range-selection-color);
     }
   }
 }

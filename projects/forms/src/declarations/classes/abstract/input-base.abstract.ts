@@ -89,7 +89,7 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `pupa-input-wrapper_${innerProperty}`)
+        .map((innerProperty: string) => `input-wrapper_${innerProperty}`)
     )
   );
 

@@ -1,10 +1,10 @@
 <div
   class="pupa-star"
   *ngFor="let star of stars; let index = index"
-  [class.pupa-clickable]="!disabled"
-  [class.pupa-disabled]="disabled"
-  [class.pupa-medium]="size === 'medium'"
-  [class.pupa-small]="size === 'small'"
+  [class.clickable]="!disabled"
+  [class.disabled]="disabled"
+  [class.medium]="size === 'medium'"
+  [class.small]="size === 'small'"
   (click)="onClick(index + 1)"
 >
   <pupa-icon [name]="index <= value - 1 ? 'star' : 'star-outline'"></pupa-icon>

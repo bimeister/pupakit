@@ -1,4 +1,4 @@
-@use 'functions';
+@use 'functions' as *;
 
 $row-height: 9rem;
 
@@ -10,7 +10,7 @@ $day-border-radius: 1rem;
 
 $range-selection-color: surface-tertiary;
 
-@mixin pupa-base-cell() {
+@mixin base-cell() {
   flex-shrink: 0;
   display: flex;
   justify-content: center;
@@ -19,7 +19,7 @@ $range-selection-color: surface-tertiary;
   width: $cell-size;
 }
 
-@mixin pupa-base-quick-selector() {
+@mixin base-quick-selector() {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -32,5 +32,5 @@ $range-selection-color: surface-tertiary;
   right: 0;
   bottom: 0;
 
-  background-color: functions.semantic-color(surface-primary);
+  background-color: semantic-color(surface-primary);
 }

@@ -1,8 +1,9 @@
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-.pupa-separator {
+.separator {
   width: 100%;
   height: 1px;
 
-  background-color: functions.semantic-color(kind-neutral-normal);
+  background-color: semantic-color(kind-neutral-normal);
 }

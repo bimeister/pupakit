@@ -1,6 +1,6 @@
-@use 'mixins';
-@use 'functions';
-@use 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
@@ -8,34 +8,34 @@
   z-index: 1;
 }
 
-.pupa-button-group-item {
+.button-group-item {
   min-width: 1rem;
   box-sizing: border-box;
   cursor: pointer;
   user-select: none;
   text-align: center;
 
-  border-radius: variables.$controlBorderRadius;
+  border-radius: $controlBorderRadius;
 
-  color: functions.semantic-color(text-secondary);
+  color: semantic-color(text-secondary);
 
   &:not(&_disabled):not(&_active) {
-    @include mixins.hover {
-      background-color: functions.semantic-color(kind-neutral-hover);
-      color: functions.semantic-color(text-primary);
+    @include hover {
+      background-color: semantic-color(kind-neutral-hover);
+      color: semantic-color(text-primary);
     }
   }
 
   &_active {
     background-color: transparent;
-    color: functions.semantic-color(text-primary);
+    color: semantic-color(text-primary);
 
-    box-shadow: 0 2px 8px functions.color(neutral-1000, alpha-3);
+    box-shadow: 0 2px 8px color(neutral-1000, alpha-3);
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: functions.semantic-color(text-disabled);
+    color: semantic-color(text-disabled);
   }
 
   &_l {
@@ -47,10 +47,10 @@
   }
 
   &_s {
-    @include mixins.font-size-xxs();
+    @include font-size-xxs();
     padding: 1rem 4rem;
   }
 
-  @include mixins.ellipsis-text-overflow();
-  @include mixins.font-preset-caption-xs();
+  @include ellipsis-text-overflow();
+  @include font-preset-caption-xs();
 }

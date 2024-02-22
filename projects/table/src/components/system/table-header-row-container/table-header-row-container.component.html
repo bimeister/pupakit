@@ -1,9 +1,9 @@
 <pupa-table-header-cell-container
   *ngFor="let column of columns"
-  class="pupa-header-cell"
-  [class.pupa-row-hovered]="row.isHovered$ | async"
-  [class.pupa-column-hovered]="column.isHovered$ | async"
-  [class.pupa-column-dragged]="column.isDragged$ | async"
+  class="header-cell"
+  [class.row-hovered]="row.isHovered$ | async"
+  [class.column-hovered]="column.isHovered$ | async"
+  [class.column-dragged]="column.isDragged$ | async"
   [row]="row"
   [column]="column"
   [style.width.px]="column.widthPx$ | async"
@@ -15,16 +15,16 @@
   <div
     *ngIf="column.definition.resizable"
     data-resizer
-    class="pupa-header-cell__resizer pupa-resizer"
-    [class.pupa-resizer_visible]="column?.isCurrentResizable$ | async"
+    class="header-cell__resizer resizer"
+    [class.resizer_visible]="column?.isCurrentResizable$ | async"
   >
-    <div class="pupa-resizer__stick"></div>
+    <div class="resizer__stick"></div>
   </div>
 </pupa-table-header-cell-container>
 <div
   *ngIf="isPlaceholderVisible$ | async"
-  class="pupa-header-cell pupa-header-cell-placeholder"
-  [class.pupa-row-hovered]="row.isHovered$ | async"
+  class="header-cell header-cell-placeholder"
+  [class.row-hovered]="row.isHovered$ | async"
   [attr.data-column-id]="'placeholder'"
   [attr.data-row-id]="row.id"
   [attr.data-row-type]="rowType"

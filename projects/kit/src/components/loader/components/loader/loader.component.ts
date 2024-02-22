@@ -39,7 +39,7 @@ export class LoaderComponent implements OnChanges {
   );
 
   public readonly kindClassName$: Observable<string | null> = this.kind$.pipe(
-    map((kind: string) => `pupa-loader__indeterminate-icon_${kind}`),
+    map((kind: string) => `loader__indeterminate-icon_${kind}`),
     distinctUntilChanged()
   );
 

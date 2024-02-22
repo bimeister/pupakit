@@ -1,8 +1,8 @@
 <div>
   <button
     type="button"
-    class="pupa-action-button"
-    [class.pupa-active]="isActive$ | async"
+    class="action-button"
+    [class.active]="isActive$ | async"
     [attr.disabled]="(isDisabled$ | async) ? true : null"
     [class]="kindClass$ | async"
   >

@@ -1,6 +1,6 @@
 <div
-  class="pupa-table-placeholder-cell"
-  [class.pupa-table-placeholder-cell_full-height]="isFullHeightCells"
+  class="table-placeholder-cell"
+  [class.table-placeholder-cell_full-height]="isFullHeightCells"
   *ngFor="let column of columns"
   [style.width.px]="column.widthPx$ | async"
   [attr.data-index]="column.index"
@@ -10,8 +10,8 @@
 ></div>
 <div
   *ngIf="isPlaceholderVisible$ | async"
-  class="pupa-table-placeholder-cell pupa-table-placeholder-cell-placeholder"
-  [class.pupa-table-placeholder-cell_full-height]="isFullHeightCells"
+  class="table-placeholder-cell table-placeholder-cell-placeholder"
+  [class.table-placeholder-cell_full-height]="isFullHeightCells"
   [attr.data-column-id]="'placeholder'"
   [attr.data-row-id]="row.id"
 ></div>

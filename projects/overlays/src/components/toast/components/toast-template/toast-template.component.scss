@@ -1,10 +1,10 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
   display: block;
   width: 129rem;
 
-  @include mixins.xs() {
+  @include xs() {
     width: 100%;
   }
 }

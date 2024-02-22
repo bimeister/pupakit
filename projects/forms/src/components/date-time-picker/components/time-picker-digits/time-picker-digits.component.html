@@ -1,9 +1,9 @@
-<cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="pupa-viewport" #viewPort>
+<cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="viewport" #viewPort>
   <div
-    class="pupa-digit"
+    class="digit"
     *cdkVirtualFor="let digit of digits$ | async; trackBy: trackByItem; let index = index"
     (click)="selectDigit(digit, index)"
-    [class.pupa-selected]="(selectedDigit$ | async) === digit"
+    [class.selected]="(selectedDigit$ | async) === digit"
   >
     {{ digit | timeDigitFormat }}
   </div>

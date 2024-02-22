@@ -17,38 +17,38 @@
   let-isWithLabel="isWithLabel"
 >
   <section
-    class="pupa-radio-image-control"
+    class="radio-image-control"
     [tabindex]="tabindex"
-    [class.pupa-radio-image-control_disabled]="isDisabled"
-    [class.pupa-radio-image-control_selected]="isSelected"
-    [class.pupa-radio-image-control_without-label]="!isWithLabel"
+    [class.radio-image-control_disabled]="isDisabled"
+    [class.radio-image-control_selected]="isSelected"
+    [class.radio-image-control_without-label]="!isWithLabel"
     (keydown.enter)="processClick()"
   >
-    <div class="pupa-radio-image-control-label-container">
-      <div class="pupa-radio-image-control-marker-wrapper">
+    <div class="radio-image-control-label-container">
+      <div class="radio-image-control-marker-wrapper">
         <div
-          class="pupa-radio-image-control-marker"
-          [class.pupa-radio-image-control-marker_selected]="isSelected"
-          [class.pupa-radio-image-control-marker_disabled]="isDisabled"
+          class="radio-image-control-marker"
+          [class.radio-image-control-marker_selected]="isSelected"
+          [class.radio-image-control-marker_disabled]="isDisabled"
         >
-          <div class="pupa-radio-image-control-marker__dot"></div>
+          <div class="radio-image-control-marker__dot"></div>
         </div>
       </div>
       <div
-        class="pupa-radio-image-control-label"
-        [class.pupa-radio-image-control-label_selected]="isSelected"
-        [class.pupa-radio-image-control-label_disabled]="isDisabled"
-        [class.pupa-radio-image-control-label_small]="labelSize === 'small'"
-        [class.pupa-radio-image-control-label_hidden]="!isWithLabel"
+        class="radio-image-control-label"
+        [class.radio-image-control-label_selected]="isSelected"
+        [class.radio-image-control-label_disabled]="isDisabled"
+        [class.radio-image-control-label_small]="labelSize === 'small'"
+        [class.radio-image-control-label_hidden]="!isWithLabel"
       >
         <ng-content></ng-content>
         <ng-container [ngTemplateOutlet]="radioIconDirective?.templateRef"></ng-container>
       </div>
     </div>
     <div
-      class="pupa-radio-image-control-image"
-      [class.pupa-radio-image-control-image_selected]="isSelected"
-      [class.pupa-radio-image-control-image_disabled]="isDisabled"
+      class="radio-image-control-image"
+      [class.radio-image-control-image_selected]="isSelected"
+      [class.radio-image-control-image_disabled]="isDisabled"
     >
       <ng-container [ngTemplateOutlet]="radioImageDirective?.templateRef"></ng-container>
     </div>

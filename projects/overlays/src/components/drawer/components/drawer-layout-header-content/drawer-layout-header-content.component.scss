@@ -1,6 +1,6 @@
-@use 'mixins';
+@use 'mixins' as *;
 
-.pupa-drawer-layout-header-content {
+.drawer-layout-header-content {
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -8,7 +8,7 @@
   &_mode-normal {
     padding: 0 1rem;
 
-    @include mixins.xs() {
+    @include xs() {
       padding: 0 2rem;
     }
   }

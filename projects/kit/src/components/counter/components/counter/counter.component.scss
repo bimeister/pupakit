@@ -1,47 +1,47 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
-.pupa-counter {
+.counter {
   box-sizing: border-box;
   height: 4rem;
   min-width: 4rem;
   border-radius: 0.75rem;
   padding: 0.5rem 1rem;
-  color: functions.color(neutral-1);
+  color: color(neutral-1);
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  @include mixins.font-type-medium();
-  @include mixins.font-size-xs();
+  @include font-type-medium();
+  @include font-size-xs();
   line-height: 0.9;
 
   &_neutral {
-    background-color: functions.semantic-color(surface-action);
-    color: functions.semantic-color(text-primary);
+    background-color: semantic-color(surface-action);
+    color: semantic-color(text-primary);
   }
 
   &_primary {
-    background-color: functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(text-inverse);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(text-inverse);
   }
 
   &_danger {
-    background-color: functions.semantic-color(kind-danger-normal);
+    background-color: semantic-color(kind-danger-normal);
   }
 
   &_warning {
-    background-color: functions.semantic-color(kind-warning-normal);
+    background-color: semantic-color(kind-warning-normal);
   }
 
   &_success {
-    background-color: functions.semantic-color(kind-success-normal);
+    background-color: semantic-color(kind-success-normal);
   }
 
   &_ghost {
     background-color: transparent;
-    color: functions.semantic-color(text-secondary);
+    color: semantic-color(text-secondary);
   }
 }

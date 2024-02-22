@@ -1,12 +1,13 @@
-@use 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   max-height: 100%;
   height: fit-content;
 }
 
-.pupa-card-title {
-  @include mixins.font-preset-h6();
+.card-title {
+  @include font-preset-h6();
 
   height: 100%;
   display: -webkit-box;

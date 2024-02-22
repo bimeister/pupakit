@@ -42,7 +42,7 @@ export class AvatarComponent implements OnChanges {
   @Input() public backgroundSeed: Nullable<string> = null;
   public readonly backgroundSeed$: BehaviorSubject<Nullable<string>> = new BehaviorSubject<Nullable<string>>(null);
 
-  public readonly sizeClass$: Observable<string> = this.size$.pipe(map((size: string) => `pupa-avatar_${size}`));
+  public readonly sizeClass$: Observable<string> = this.size$.pipe(map((size: string) => `avatar_${size}`));
 
   public readonly isEmptyBackgroundSeed$: Observable<boolean> = this.backgroundSeed$.pipe(map(isEmpty));
 
@@ -103,7 +103,6 @@ export class AvatarComponent implements OnChanges {
     }
     this.username$.next(updatedValue);
   }
-
   private processIconNameChange(change: ComponentChange<this, string | null> | undefined): void {
     const updatedValue: Nullable<string> = change?.currentValue;
 

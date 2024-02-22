@@ -1,11 +1,11 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
   flex: 1 1 auto;
   overflow: hidden;
 }
 
-.pupa-drawer-layout-body {
+.drawer-layout-body {
   height: 100%;
   max-height: 100%;
   box-sizing: border-box;
@@ -16,7 +16,7 @@
     height: 100%;
     padding: 5rem 6rem 0 6rem;
 
-    @include mixins.xs() {
+    @include xs() {
       padding: 4rem 5rem 0 5rem;
     }
   }

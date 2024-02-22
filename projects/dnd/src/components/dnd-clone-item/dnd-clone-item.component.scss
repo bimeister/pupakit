@@ -1,15 +1,15 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: block;
   width: fit-content;
   padding: 1.25rem 2rem;
   border-radius: 1rem;
-  color: functions.semantic-color(surface-primary);
-  background: functions.semantic-color(kind-primary-normal);
+  color: semantic-color(surface-primary);
+  background: semantic-color(kind-primary-normal);
   max-width: 256px;
   box-sizing: border-box;
-  @include mixins.ellipsis-text-overflow;
-  @include mixins.font-size-xs();
+  @include ellipsis-text-overflow;
+  @include font-size-xs();
 }

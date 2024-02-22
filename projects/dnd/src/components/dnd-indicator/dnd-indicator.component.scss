@@ -1,11 +1,11 @@
-@use 'functions';
+@use 'functions' as *;
 
 :host {
   display: block;
   pointer-events: none;
 }
 
-.pupa-indicator {
+.indicator {
   z-index: 100;
   width: 100%;
   position: absolute;
@@ -20,14 +20,14 @@
     height: 2rem;
     margin-left: -1rem;
     border-radius: 50%;
-    background: functions.semantic-color(surface-primary);
-    border: 2px solid functions.semantic-color(kind-primary-normal);
+    background: semantic-color(surface-primary);
+    border: 2px solid semantic-color(kind-primary-normal);
     box-sizing: border-box;
   }
 
   &__line {
     width: 100%;
     height: 100%;
-    background: functions.semantic-color(kind-primary-normal);
+    background: semantic-color(kind-primary-normal);
   }
 }

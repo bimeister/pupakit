@@ -1,29 +1,29 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: block;
   max-width: 100%;
 }
 
-.pupa-alerts-container {
+.alerts-container {
   display: flex;
   max-width: inherit;
-  max-height: functions.vh(100);
+  max-height: vh(100);
   flex-direction: column;
 }
 
-.pupa-toolbar {
+.toolbar {
   flex: 0 0 auto;
 }
 
-.pupa-scroll-container {
+.scroll-container {
   flex: 0 1 auto;
   overflow-y: auto;
-  @include mixins.invisible-scrollbars;
+  @include invisible-scrollbars;
 }
 
-.pupa-alerts {
+.alerts {
   display: flex;
   flex-direction: column;
   margin-right: 2.5rem;

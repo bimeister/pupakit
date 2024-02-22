@@ -1,20 +1,20 @@
-@use 'functions';
+@use 'functions' as *;
 
-.pupa-droppable-content {
+.droppable-content {
   padding: 1rem 0;
   border-radius: 1rem;
   max-width: 500px;
   max-height: 70rem;
   overflow: auto;
-  box-shadow: functions.variable(box-shadow_hover);
-  background: functions.semantic-color(surface-primary);
+  box-shadow: variable(box-shadow_hover);
+  background: semantic-color(surface-primary);
   overflow-x: hidden;
 
-  &.pupa-width-by-trigger {
+  &.width-by-trigger {
     max-width: none;
   }
 
-  &.pupa-width-fit-content {
+  &.width-fit-content {
     width: fit-content;
   }
 }

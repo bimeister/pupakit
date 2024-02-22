@@ -1,11 +1,11 @@
 <div
-  class="pupa-popover__container"
+  class="popover__container"
   [@popoverShow]="animationState$ | async"
   (mousedown)="stopEvent($event)"
   (touchmove)="stopEvent($event)"
   (wheel)="stopEvent($event)"
   [ngClass]="pointerClassName$ | async"
-  [class.pupa-popover__mobile]="isMobile$ | async"
+  [class.popover__mobile]="isMobile$ | async"
 >
   <ng-template [cdkPortalOutlet]="componentPortal"></ng-template>
 </div>
