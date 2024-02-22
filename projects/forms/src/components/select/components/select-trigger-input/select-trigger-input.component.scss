@@ -1,9 +1,9 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-@use './../../select-trigger.style.scss';
+@use './../../select-trigger.style.scss' as *;
 
-.pupa-trigger {
+.trigger {
   &__button-icons-container {
     margin-right: 1rem;
   }
@@ -35,17 +35,17 @@
     font-size: 3rem;
     line-height: 4rem;
 
-    @include mixins.font-preset-caption-xs();
+    @include font-preset-caption-xs();
 
     position: relative;
 
     text-overflow: ellipsis;
     overflow: hidden;
 
-    color: functions.semantic-color(text-primary);
+    color: semantic-color(text-primary);
 
     &::placeholder {
-      color: functions.semantic-color(text-disabled);
+      color: semantic-color(text-disabled);
       width: 100%;
       text-align: left;
       align-self: center;

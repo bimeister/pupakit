@@ -1,7 +1,7 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-.pupa-button {
+.button {
   all: unset;
 
   display: flex;
@@ -13,25 +13,25 @@
   border-radius: 1rem;
   box-sizing: border-box;
 
-  @include mixins.no-tap-highlight();
+  @include no-tap-highlight();
 
   cursor: pointer;
 
-  @include mixins.font-preset-h6();
-  color: functions.semantic-color(text-primary);
+  @include font-preset-h6();
+  color: semantic-color(text-primary);
 
-  transition: functions.variable(transition-duration_shortest) functions.variable(transition-timing-function_common);
+  transition: variable(transition-duration_shortest) variable(transition-timing-function_common);
 
-  @include mixins.hover() {
-    background-color: functions.semantic-color(kind-primary-hover);
-    color: functions.semantic-color(surface-primary);
+  @include hover() {
+    background-color: semantic-color(kind-primary-hover);
+    color: semantic-color(surface-primary);
   }
 
   &:active {
-    background-color: functions.semantic-color(kind-primary-active);
+    background-color: semantic-color(kind-primary-active);
   }
 
   &_current {
-    border: 1px solid functions.semantic-color(kind-primary-active);
+    border: 1px solid semantic-color(kind-primary-active);
   }
 }

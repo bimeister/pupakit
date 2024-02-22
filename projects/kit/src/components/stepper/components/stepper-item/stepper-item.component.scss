@@ -1,5 +1,5 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: flex;
@@ -13,7 +13,7 @@
   }
 }
 
-.pupa-stepper-item {
+.stepper-item {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -53,32 +53,32 @@
     overflow: hidden;
     white-space: break-spaces;
 
-    @include mixins.font-preset-h6;
+    @include font-preset-h6;
   }
 
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
 
   &_grabbing {
     cursor: grabbing;
   }
 
   &:not(&_disabled) {
-    @include mixins.hover {
-      background: functions.semantic-color(kind-neutral-hover);
+    @include hover {
+      background: semantic-color(kind-neutral-hover);
     }
   }
 
   &_disabled {
     cursor: not-allowed;
-    color: functions.semantic-color(text-disabled);
+    color: semantic-color(text-disabled);
   }
 }
 
-.pupa-step-line {
+.step-line {
   display: flex;
   min-width: 16rem;
   margin: 0 3rem 0;
   flex-grow: 1;
-  border-top: 1.5px dashed functions.semantic-color(kind-neutral-normal);
+  border-top: 1.5px dashed semantic-color(kind-neutral-normal);
   height: 0;
 }

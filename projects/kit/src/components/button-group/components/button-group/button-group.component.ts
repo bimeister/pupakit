@@ -41,7 +41,7 @@ export class ButtonGroupComponent<T> extends TabsBase<T, ButtonGroupStateService
   @Output() public readonly activeTabNameChange: EventEmitter<T> = new EventEmitter<T>();
 
   public readonly sizeClass$: Observable<string> = this.stateService.buttonGroupSize$.pipe(
-    map((size: ButtonGroupSize) => `pupa-button-group_${size}`)
+    map((size: ButtonGroupSize) => `button-group_${size}`)
   );
 
   constructor(

@@ -1,27 +1,27 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   width: 100%;
   overflow: hidden;
 }
 
-.pupa-drawer-title {
+.drawer-title {
   font-size: 5rem;
   line-height: 6rem;
 
   padding: 1rem;
   margin-bottom: 0;
 
-  @include mixins.ellipsis-text-overflow;
+  @include ellipsis-text-overflow;
 
-  @include mixins.xs() {
+  @include xs() {
     margin-bottom: 2rem;
     padding: 1rem 2rem;
   }
 
-  @include mixins.font-type-medium();
-  color: functions.semantic-color(text-primary);
+  @include font-type-medium();
+  color: semantic-color(text-primary);
 
-  @include mixins.flex-container(row, center, space-between);
+  @include flex-container(row, center, space-between);
 }

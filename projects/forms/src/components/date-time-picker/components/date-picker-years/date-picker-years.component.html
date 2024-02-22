@@ -1,8 +1,3 @@
-<div
-  class="pupa-year"
-  *ngFor="let year of years$ | async"
-  [class.pupa-current]="year === currentYear"
-  (click)="selectYear(year)"
->
+<div class="year" *ngFor="let year of years$ | async" [class.current]="year === currentYear" (click)="selectYear(year)">
   {{ year }}
 </div>

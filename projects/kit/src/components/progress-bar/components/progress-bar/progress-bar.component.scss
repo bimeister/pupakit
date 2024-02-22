@@ -1,19 +1,19 @@
-@use 'functions';
+@use 'functions' as *;
 
 :host {
   display: flex;
   width: fit-content;
 }
 
-.pupa-progress-bar {
+.progress-bar {
   transform-origin: center center;
   transform: scale(1, -1);
 
   &__main-circle {
-    stroke: functions.color(primary-50);
+    stroke: color(primary-50);
   }
 
   &__progress-circle {
-    stroke: functions.color(primary-500);
+    stroke: color(primary-500);
   }
 }

@@ -1,8 +1,9 @@
-@use 'mixins';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: flex;
-  @include mixins.font-preset-body-s();
+  @include font-preset-body-s();
   align-items: center;
   justify-content: space-between;
   gap: 2rem;

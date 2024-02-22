@@ -1,4 +1,4 @@
-<div class="pupa-selection" *ngIf="displayedMonth$ | async as displayedMonth">
+<div class="selection" *ngIf="displayedMonth$ | async as displayedMonth">
   <pupa-button (click)="setQuickSelectModeMonth()" kind="secondary">
     {{ displayedMonth.month }}
   </pupa-button>
@@ -8,7 +8,7 @@
   </pupa-button>
 </div>
 
-<div class="pupa-navigation">
+<div class="navigation">
   <pupa-button-icon size="m" kind="secondary" icon="app-chevron-down" (click)="scrollToNextMonth()"></pupa-button-icon>
 
   <pupa-button-icon size="m" kind="secondary" icon="ios-radio-button-off" (click)="resetScroll()"></pupa-button-icon>

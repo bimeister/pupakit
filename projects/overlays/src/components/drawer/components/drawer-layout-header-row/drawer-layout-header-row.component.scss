@@ -1,7 +1,7 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-.pupa-drawer-layout-header-row {
+.drawer-layout-header-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -10,15 +10,15 @@
   width: 100%;
   padding: 2rem 5rem;
 
-  @include mixins.xs() {
+  @include xs() {
     padding: 2rem 3rem;
   }
 
   &_type-top {
     margin-bottom: 2rem;
 
-    @include mixins.xs() {
-      box-shadow: 0 -1px 0 0 functions.semantic-color(kind-neutral-normal) inset;
+    @include xs() {
+      box-shadow: 0 -1px 0 0 semantic-color(kind-neutral-normal) inset;
     }
   }
 }

@@ -1,24 +1,24 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
 }
 
-.pupa-body-cell {
+.body-cell {
   position: relative;
   display: block;
-  background-color: functions.semantic-color(surface-tertiary);
+  background-color: semantic-color(surface-tertiary);
   margin-right: 1px;
   box-sizing: border-box;
   flex-shrink: 0;
 
-  &.pupa-row-hovered {
-    background-color: functions.semantic-color(kind-neutral-hover);
+  &.row-hovered {
+    background-color: semantic-color(kind-neutral-hover);
   }
 
-  &.pupa-row-selected {
-    background-color: functions.semantic-color(kind-neutral-active);
+  &.row-selected {
+    background-color: semantic-color(kind-neutral-active);
   }
 
   &::after {
@@ -26,14 +26,14 @@
     display: block;
     width: 1px;
     height: calc(100% + 1px);
-    background-color: functions.semantic-color(lines-normal);
+    background-color: semantic-color(lines-normal);
     position: absolute;
     right: -1px;
     top: 0;
     z-index: 2;
   }
 
-  @include mixins.host-selector('.pupa-table-body__scrollable-container') {
+  @include host-selector('.table-body__scrollable-container') {
     &:last-child {
       margin-right: 0;
 
@@ -43,7 +43,7 @@
     }
   }
 
-  @include mixins.host-selector('.pupa-table-body__pinned-right-container') {
+  @include host-selector('.table-body__pinned-right-container') {
     margin-left: 1px;
     margin-right: 0;
 
@@ -53,19 +53,19 @@
     }
   }
 
-  &.pupa-row-hovered {
+  &.row-hovered {
     &::after {
-      background-color: functions.semantic-color(lines-normal);
+      background-color: semantic-color(lines-normal);
     }
   }
 }
 
-.pupa-body-cell-placeholder {
+.body-cell-placeholder {
   flex-shrink: 1;
   width: 100%;
   display: none;
 
-  @include mixins.host-selector('.pupa-table-body__scrollable-container') {
+  @include host-selector('.table-body__scrollable-container') {
     & {
       display: block;
     }

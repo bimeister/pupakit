@@ -1,6 +1,6 @@
 <cdk-virtual-scroll-viewport
   pupaScrollableContent
-  class="pupa-scroller"
+  class="scroller"
   *pupaLet="
     {
       monthNameByIndex: monthNameByIndex$ | async,
@@ -10,10 +10,7 @@
     let selectedDates = selectedDates
   "
 >
-  <div
-    class="pupa-scroller__item"
-    *cdkVirtualFor="let month of calendarMonths; templateCacheSize: 10; let isLast = last"
-  >
+  <div class="scroller__item" *cdkVirtualFor="let month of calendarMonths; templateCacheSize: 10; let isLast = last">
     <pupa-calendar-month
       [calendarMonth]="month"
       [isCurrent]="month | isCurrentCalendarMonth"
@@ -22,13 +19,13 @@
     ></pupa-calendar-month>
 
     <ng-container *ngIf="!isLast">
-      <div class="pupa-scroller__divider"></div>
+      <div class="scroller__divider"></div>
 
       <pupa-calendar-label *pupaLet="month | nextCalendarMonth as nextMonth">
         {{ nextMonth.year }} {{ monthNameByIndex[nextMonth.month] }}
       </pupa-calendar-label>
 
-      <div class="pupa-scroller__divider"></div>
+      <div class="scroller__divider"></div>
     </ng-container>
   </div>
 </cdk-virtual-scroll-viewport>

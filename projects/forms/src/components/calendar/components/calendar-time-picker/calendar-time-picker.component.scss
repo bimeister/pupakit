@@ -1,4 +1,4 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
   padding: 4rem;
@@ -9,12 +9,12 @@
   gap: 4rem;
 }
 
-.pupa-time-picker {
+.time-picker {
   display: flex;
   flex-direction: column;
   gap: 2rem;
 }
 
-.pupa-time-picker-header {
-  @include mixins.font-preset-h5;
+.time-picker-header {
+  @include font-preset-h5;
 }

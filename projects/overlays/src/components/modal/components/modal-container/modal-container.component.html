@@ -1,7 +1,7 @@
 <div
   [@modalExpanded]="animationState$ | async"
-  class="pupa-modal-container"
-  [class.pupa-modal-container_full-screen]="isFullscreen$ | async"
+  class="modal-container"
+  [class.modal-container_full-screen]="isFullscreen$ | async"
 >
   <ng-container [cdkPortalOutlet]="componentPortal"></ng-container>
 </div>

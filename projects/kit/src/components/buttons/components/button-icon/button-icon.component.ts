@@ -51,7 +51,7 @@ export class ButtonIconComponent implements OnChanges {
     map((classes: string[]) =>
       classes
         .filter((innerClass: string) => !isNil(innerClass))
-        .map((innerProperty: string) => `pupa-button_${innerProperty}`)
+        .map((innerProperty: string) => `button_${innerProperty}`)
     )
   );
 

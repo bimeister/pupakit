@@ -8,8 +8,8 @@
   }"
 >
   <pupa-toast-layout [type]="type">
-    <div class="pupa-content">
-      <div class="pupa-timer">
+    <div class="content">
+      <div class="timer">
         <pupa-timer-round *ngIf="hasTimer" [seconds]="autoCloseTimeSeconds"></pupa-timer-round>
       </div>
       <span>{{ bodyText }}</span>

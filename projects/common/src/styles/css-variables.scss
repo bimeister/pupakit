@@ -1,22 +1,23 @@
-@use 'maps';
+@use 'maps' as *;
+@use 'sass:map';
 
 :root {
-  @each $name, $value in maps.$colorsMap {
+  @each $name, $value in $colorsMap {
     --color_#{$name}: #{red($value), green($value), blue($value)};
   }
-  @each $name, $value in maps.$visualizationColorsMap {
+  @each $name, $value in $visualizationColorsMap {
     --color_#{$name}: #{red($value), green($value), blue($value)};
   }
 }
 
 :root {
-  @each $name, $value in maps.$alphaColorsMap {
+  @each $name, $value in $alphaColorsMap {
     --#{$name}: #{$value};
   }
 }
 
 :root {
-  @each $name, $value in maps.$variablesMap {
+  @each $name, $value in $variablesMap {
     --#{$name}: #{$value};
   }
 }

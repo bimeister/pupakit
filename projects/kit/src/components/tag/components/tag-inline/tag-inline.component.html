@@ -1,8 +1,8 @@
 <div
-  class="pupa-tag"
-  [class.pupa-tag_disabled]="isDisabled$ | async"
+  class="tag"
+  [class.tag_disabled]="isDisabled$ | async"
   [class]="kindClass$ | async"
-  [class.pupa-tag_clickable]="isClickable$ | async"
+  [class.tag_clickable]="isClickable$ | async"
 >
   <ng-content></ng-content>
 </div>

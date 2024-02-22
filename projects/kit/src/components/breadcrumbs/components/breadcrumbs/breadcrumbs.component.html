@@ -6,9 +6,9 @@
 <ng-content></ng-content>
 
 <ng-template #mainTemplate let-breadcrumbTemplate="breadcrumbTemplate">
-  <div class="pupa-breadcrumbs pupa-breadcrumbs_hidden" [tabindex]="-1" #breadcrumbs>
+  <div class="breadcrumbs breadcrumbs_hidden" [tabindex]="-1" #breadcrumbs>
     <ng-container *ngFor="let breadcrumb of breadcrumbs$ | async; trackBy: trackByFunc; let isActive = last">
-      <div class="pupa-breadcrumbs__breadcrumb-wrapper" #breadcrumb>
+      <div class="breadcrumbs__breadcrumb-wrapper" #breadcrumb>
         <pupa-breadcrumb
           [template]="breadcrumbTemplate"
           [breadcrumb]="breadcrumb"
@@ -18,15 +18,15 @@
       </div>
     </ng-container>
 
-    <div class="pupa-breadcrumbs__breadcrumb-wrapper" #unfitBreadcrumbsTrigger>
+    <div class="breadcrumbs__breadcrumb-wrapper" #unfitBreadcrumbsTrigger>
       <pupa-breadcrumb-unfit-trigger></pupa-breadcrumb-unfit-trigger>
       <pupa-breadcrumb-separator></pupa-breadcrumb-separator>
     </div>
   </div>
 
-  <div class="pupa-breadcrumbs pupa-breadcrumbs_visible-layer">
+  <div class="breadcrumbs breadcrumbs_visible-layer">
     <ng-container *ngIf="!(isMobile$ | async)">
-      <div class="pupa-breadcrumbs__breadcrumb-wrapper" *ngIf="rootBreadcrumb$ | async as rootBreadcrumb">
+      <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="rootBreadcrumb$ | async as rootBreadcrumb">
         <pupa-breadcrumb
           [template]="breadcrumbTemplate"
           [breadcrumb]="rootBreadcrumb"
@@ -36,7 +36,7 @@
       </div>
     </ng-container>
 
-    <div class="pupa-breadcrumbs__breadcrumb-wrapper" *ngIf="!(isContainerFullFitted$ | async)">
+    <div class="breadcrumbs__breadcrumb-wrapper" *ngIf="!(isContainerFullFitted$ | async)">
       <div #dropdown="pupaDropdown" pupaDropdown>
         <pupa-breadcrumb-unfit-trigger
           [active]="dropdown.opened$ | async"
@@ -62,7 +62,7 @@
     </div>
 
     <ng-container *ngFor="let breadcrumb of fitBreadcrumbs$ | async; let isActive = last">
-      <div class="pupa-breadcrumbs__breadcrumb-wrapper">
+      <div class="breadcrumbs__breadcrumb-wrapper">
         <pupa-breadcrumb
           [template]="breadcrumbTemplate"
           [breadcrumb]="breadcrumb"

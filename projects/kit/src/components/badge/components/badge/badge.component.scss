@@ -1,3 +1,6 @@
+@use 'mixins' as *;
+@use 'functions' as *;
+
 :host {
   position: relative;
   display: inline-block;
