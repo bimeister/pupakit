@@ -1,13 +1,13 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
 }
 
-.pupa-header-cell {
+.header-cell {
   display: block;
-  background-color: functions.semantic-color(surface-secondary);
+  background-color: semantic-color(surface-secondary);
   margin-right: 1px;
   box-sizing: border-box;
   height: 100%;
@@ -15,7 +15,7 @@
   position: relative;
 
   &:hover {
-    background-color: functions.semantic-color(kind-neutral-hover);
+    background-color: semantic-color(kind-neutral-hover);
   }
 
   &::after {
@@ -23,14 +23,14 @@
     display: block;
     width: 1px;
     height: 100%;
-    background-color: functions.semantic-color(lines-normal);
+    background-color: semantic-color(lines-normal);
     position: absolute;
     right: -1px;
     top: 0;
     z-index: 1;
   }
 
-  @include mixins.host-selector('pupa-table-header__scrollable-container') {
+  @include host-selector('.table-header__scrollable-container') {
     &:last-child {
       margin-right: 0;
 
@@ -40,7 +40,7 @@
     }
   }
 
-  @include mixins.host-selector('.pupa-table-header__pinned-right-container') {
+  @include host-selector('.table-header__pinned-right-container') {
     margin-left: 1px;
     margin-right: 0;
 
@@ -51,19 +51,19 @@
   }
 }
 
-.pupa-header-cell-placeholder {
+.header-cell-placeholder {
   flex-shrink: 1;
   width: 100%;
   display: none;
 
-  @include mixins.host-selector('.pupa-table-header__scrollable-container') {
+  @include host-selector('.table-header__scrollable-container') {
     & {
       display: block;
     }
   }
 }
 
-.pupa-header-cell__resizer {
+.header-cell__resizer {
   position: absolute;
   top: 0;
   right: 0;
@@ -71,11 +71,11 @@
   z-index: 2;
 }
 
-.pupa-resizer {
+.resizer {
   user-select: none;
   width: 5px;
   height: 100%;
-  background-color: functions.semantic-color(kind-primary-normal);
+  background-color: semantic-color(kind-primary-normal);
   background-clip: content-box;
   box-sizing: content-box;
   padding: 0 2.5rem;
@@ -94,6 +94,6 @@
     width: 1px;
     height: 12px;
     border-radius: 1px;
-    background-color: functions.semantic-color(surface-primary);
+    background-color: semantic-color(surface-primary);
   }
 }

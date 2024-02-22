@@ -1,4 +1,5 @@
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: flex;
@@ -6,7 +7,7 @@
   height: auto;
 }
 
-.pupa-badge-indicator {
+.badge-indicator {
   width: 2rem;
   height: 2rem;
   align-items: center;
@@ -22,28 +23,24 @@
   }
 
   &__new {
-    border: 1.6px solid functions.semantic-color(kind-primary-normal);
+    border: 1.6px solid semantic-color(kind-primary-normal);
   }
-
   &__success {
-    background-color: functions.semantic-color(kind-success-normal);
+    background-color: semantic-color(kind-success-normal);
   }
-
   &__danger {
-    background-color: functions.semantic-color(kind-danger-normal);
+    background-color: semantic-color(kind-danger-normal);
   }
-
   &__warning {
-    background-color: functions.semantic-color(kind-warning-normal);
+    background-color: semantic-color(kind-warning-normal);
   }
-
   &__loading {
-    background-color: functions.semantic-color(kind-primary-normal);
-    animation: pupa-pulse 750ms infinite alternate ease-out;
+    background-color: semantic-color(kind-primary-normal);
+    animation: pulse 750ms infinite alternate ease-out;
   }
 }
 
-@keyframes pupa-pulse {
+@keyframes pulse {
   from {
     opacity: 1;
   }

@@ -1,25 +1,25 @@
 <button
-  class="pupa-button"
+  class="button"
   [ngClass]="resultClassList$ | async"
   [type]="type"
   [tabIndex]="tabIndex"
   [attr.disabled]="(disabled$ | async) ? true : null"
 >
-  <div class="pupa-button__content" focusable="false" [class.pupa-reversed-direction]="isReversedDirection$ | async">
+  <div class="button__content" focusable="false" [class.reversed-direction]="isReversedDirection$ | async">
     <ng-container *ngIf="leftIcon$ | async as leftIcon">
-      <pupa-icon class="pupa-button__icon" [name]="leftIcon"></pupa-icon>
+      <pupa-icon class="button__icon" [name]="leftIcon"></pupa-icon>
     </ng-container>
 
-    <div class="pupa-button__content-inner" [class.pupa-hidden]="loading$ | async">
+    <div class="button__content-inner" [class.hidden]="loading$ | async">
       <ng-content></ng-content>
     </div>
 
     <ng-container *ngIf="rightIcon$ | async as rightIcon">
-      <pupa-icon class="pupa-button__icon" [name]="rightIcon"></pupa-icon>
+      <pupa-icon class="button__icon" [name]="rightIcon"></pupa-icon>
     </ng-container>
   </div>
 
-  <div class="pupa-button__loading" *ngIf="loading$ | async" focusable="false">
+  <div class="button__loading" *ngIf="loading$ | async" focusable="false">
     <pupa-loader [size]="loadingSizePx$ | async"></pupa-loader>
   </div>
 </button>

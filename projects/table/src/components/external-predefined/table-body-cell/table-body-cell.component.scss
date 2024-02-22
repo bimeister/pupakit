@@ -1,5 +1,5 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   display: block;
@@ -7,11 +7,11 @@
   height: 100%;
 }
 
-.pupa-table-body-cell {
+.table-body-cell {
   box-sizing: border-box;
   padding: 4rem 3rem;
-  @include mixins.font-preset-caption-s;
-  color: functions.semantic-color(text-primary);
+  @include font-preset-caption-s;
+  color: semantic-color(text-primary);
   line-height: 17px;
 
   display: flex;
@@ -20,11 +20,11 @@
 
   &_clickable {
     &:hover {
-      color: functions.semantic-color(kind-primary-normal);
+      color: semantic-color(kind-primary-normal);
       cursor: pointer;
 
-      @include mixins.host-selector('.pupa-table-row_selected') {
-        border-color: functions.semantic-color(kind-primary-normal);
+      @include host-selector('.table-row_selected') {
+        border-color: semantic-color(kind-primary-normal);
       }
     }
   }
@@ -36,10 +36,10 @@
   &__content {
     display: block;
     width: 100%;
-    @include mixins.ellipsis-text-overflow;
+    @include ellipsis-text-overflow;
   }
 
-  @include mixins.xs() {
+  @include xs() {
     padding: 6px 4rem 6px 3rem;
   }
 }

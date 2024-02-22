@@ -1,27 +1,26 @@
-@use 'mixins';
-@use 'functions';
-@use 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
   width: 100%;
 }
 
-.pupa-select-dropdown {
+.select-dropdown {
   width: 100%;
   height: 100%;
-  border-radius: variables.$containerBorderRadius;
-  @include mixins.blur(3rem);
-  background-color: functions.semantic-color(surface-glass, alpha-700);
-  border: 1px solid functions.semantic-color(lines-normal);
+  border-radius: $containerBorderRadius;
+  @include blur(3rem);
+  background-color: semantic-color(surface-glass, alpha-700);
+  border: 1px solid semantic-color(lines-normal);
   overflow: hidden;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1rem 1.5rem -0.5rem functions.color(neutral-1000, alpha-3),
-    0 3rem 4rem -1rem functions.color(neutral-1000, alpha-5);
+  box-shadow: 0 1rem 1.5rem -0.5rem color(neutral-1000, alpha-3), 0 3rem 4rem -1rem color(neutral-1000, alpha-5);
 }
 
-.pupa-select-dropdown-wrapper {
+.select-dropdown-wrapper {
   display: contents;
 }

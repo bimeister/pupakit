@@ -1,13 +1,14 @@
-@use 'functions';
-@use '../../tag-preset.styles';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use '../../tag-preset.styles.scss' as *;
 
-.pupa-action-button {
-  @include tag-preset.pupa-tag-preset();
+.action-button {
+  @include tag-preset();
 
   border-radius: 0 1rem 1rem 0;
   width: 5rem;
   height: 5rem;
-  color: functions.semantic-color(text-inverse);
+  color: semantic-color(text-inverse);
   box-sizing: content-box;
   line-height: 14px;
 
@@ -15,44 +16,44 @@
 
   &:not([disabled]) {
     &:focus-visible {
-      box-shadow: inset 0 0 0 0.5rem functions.semantic-color(lines-accent);
+      box-shadow: inset 0 0 0 0.5rem semantic-color(lines-accent);
     }
 
-    &.pupa-button_danger {
-      @include tag-preset.pupa-action-button-color-state('danger');
+    &.button_danger {
+      @include action-button-color-state('danger');
     }
 
-    &.pupa-button_opacity {
-      @include tag-preset.pupa-action-button-color-state('opacity');
+    &.button_opacity {
+      @include action-button-color-state('opacity');
 
-      color: functions.semantic-color(text-primary);
+      color: semantic-color(text-primary);
     }
 
-    &.pupa-button_primary {
-      @include tag-preset.pupa-action-button-color-state('primary');
+    &.button_primary {
+      @include action-button-color-state('primary');
     }
 
-    &.pupa-button_success {
-      @include tag-preset.pupa-action-button-color-state('success');
+    &.button_success {
+      @include action-button-color-state('success');
     }
 
-    &.pupa-button_warning {
-      @include tag-preset.pupa-action-button-color-state('warning');
+    &.button_warning {
+      @include action-button-color-state('warning');
     }
 
-    &.pupa-button_custom {
-      --pupa-tag_action_border-color-default: #{functions.semantic-color(lines-opacity)};
+    &.button_custom {
+      --pupa-tag_action_border-color-default: #{semantic-color(lines-opacity)};
 
-      @include tag-preset.pupa-tag-custom-color-variables();
-      @include tag-preset.pupa-tag-custom-color-defaults();
+      @include tag-custom-color-variables();
+      @include tag-custom-color-defaults();
 
       border-left: 1px solid var(--pupa-tag_action_border-color, var(--pupa-tag_action_border-color-default));
     }
   }
 
   &:disabled {
-    @include tag-preset.pupa-disabled-color-state() {
-      border-left: 1px solid functions.semantic-color(lines-opacity);
+    @include disabled-color-state() {
+      border-left: 1px solid semantic-color(lines-opacity);
     }
   }
 }

@@ -1,20 +1,22 @@
-@use 'mixins';
+@use 'mixins' as *;
+@use 'variables' as *;
+@use 'sass:map';
 
 :host {
   display: contents;
 }
 
-.pupa-drawer-close-button {
+.drawer-close-button {
   display: none;
 
   &_mobile {
-    @include mixins.xs() {
+    @include xs() {
       display: block;
     }
   }
 
   &_desktop {
-    @include mixins.gt-xs() {
+    @include gt-xs() {
       display: block;
     }
   }

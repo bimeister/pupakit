@@ -16,17 +16,17 @@
 >
   <div
     data-meta="pupa-search-field"
-    class="pupa-search-field"
+    class="search-field"
     [ngClass]="collapseDirection$ | async"
-    [class.pupa-search-field_collapsible]="isCollapsible$ | async"
-    [class.pupa-search-field_collapsed]="isCollapsed"
+    [class.search-field_collapsible]="isCollapsible$ | async"
+    [class.search-field_collapsed]="isCollapsed"
   >
-    <div class="pupa-search-field__collapse-icon-container">
+    <div class="search-field__collapse-icon-container">
       <pupa-icon
         data-meta="pupa-search-field__collapse-button"
-        class="pupa-search-field__collapse-icon"
-        [class.pupa-search-field__collapse-icon_collapsed]="isCollapsed"
-        [class.pupa-search-field__collapse-icon_disabled]="isDisabled"
+        class="search-field__collapse-icon"
+        [class.search-field__collapse-icon_collapsed]="isCollapsed"
+        [class.search-field__collapse-icon_disabled]="isDisabled"
         (click)="changeCollapsed()"
         name="app-search"
       >
@@ -34,7 +34,7 @@
     </div>
     <input
       data-meta="pupa-search-field__input"
-      class="pupa-search-field__input"
+      class="search-field__input"
       [ngClass]="resultClassList$ | async"
       type="text"
       #inputElement
@@ -49,11 +49,11 @@
       [attr.maxlength]="maxLength"
     />
 
-    <div class="pupa-search-field__actions">
+    <div class="search-field__actions">
       <pupa-button-icon
         *ngIf="isVisibleReset"
         data-meta="pupa-search-field__reset-button"
-        class="pupa-search-field__reset"
+        class="search-field__reset"
         icon="app-close-square"
         size="m"
         tabIndex="-1"
@@ -63,10 +63,10 @@
       >
       </pupa-button-icon>
 
-      <div class="pupa-search-field__action-separator" *ngIf="isVisibleSeparator$ | async"></div>
+      <div class="search-field__action-separator" *ngIf="isVisibleSeparator$ | async"></div>
 
       <div
-        class="pupa-search-field__additional-actions"
+        class="search-field__additional-actions"
         *ngIf="!(isCollapsed$ | async) && !(searchFieldActionsRightDirective | isNullOrUndefined)"
         (click)="$event.stopPropagation()"
       >

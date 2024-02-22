@@ -1,15 +1,15 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
-  @include mixins.font-preset-h6();
+  @include font-preset-h6();
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   padding: 0.5rem 1.5rem;
-  color: functions.semantic-color(text-secondary);
-  border: 1px solid functions.semantic-color(kind-opacity-hover);
+  color: semantic-color(text-secondary);
+  border: 1px solid semantic-color(kind-opacity-hover);
   border-radius: 0.75rem;
   user-select: none;
   width: fit-content;

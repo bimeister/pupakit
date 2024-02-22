@@ -1,4 +1,5 @@
-@use 'functions';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: flex;
@@ -6,11 +7,11 @@
   height: 100%;
   overflow: hidden;
   box-sizing: border-box;
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
   --pupa-scrollable-content_padding: 0 5rem;
 }
 
-.pupa-modal-layout-body {
+.modal-layout-body {
   flex: 1;
   overflow: hidden;
 
@@ -23,21 +24,21 @@
   }
 }
 
-:host-context(.pupa-modal-layout_no-border) {
-  .pupa-modal-layout-body__scrollable-content {
+:host-context(.modal-layout_no-border) {
+  .modal-layout-body__scrollable-content {
     padding-top: 2rem;
     padding-bottom: 2.5rem;
   }
 }
 
-:host-context(.pupa-modal-layout_no-header) {
-  .pupa-modal-layout-body__scrollable-content {
+:host-context(.modal-layout_no-header) {
+  .modal-layout-body__scrollable-content {
     padding-top: 5rem;
   }
 }
 
-:host-context(.pupa-modal-layout_no-footer) {
-  .pupa-modal-layout-body__scrollable-content {
+:host-context(.modal-layout_no-footer) {
+  .modal-layout-body__scrollable-content {
     padding-bottom: 5rem;
   }
 }

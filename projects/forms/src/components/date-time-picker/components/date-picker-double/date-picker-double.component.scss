@@ -1,7 +1,9 @@
-.pupa-container {
+@use '../../date-picker.style.scss';
+
+.container {
   display: flex;
 }
 
-.pupa-calendar {
+.calendar {
   flex: 1;
 }

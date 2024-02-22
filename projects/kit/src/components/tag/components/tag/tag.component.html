@@ -1,9 +1,9 @@
-<div class="pupa-tag-wrapper" (click)="processInteraction($event)">
+<div class="tag-wrapper" (click)="processInteraction($event)">
   <ng-container *ngIf="isInteractive$ | async; else nonInteractiveTagTemplate">
     <button
       type="button"
-      class="pupa-tag pupa-tag_clickable"
-      [class.pupa-tag_disabled]="isDisabled$ | async"
+      class="tag tag_clickable"
+      [class.tag_disabled]="isDisabled$ | async"
       [class]="kindClass$ | async"
     >
       <ng-container [ngTemplateOutlet]="tagContentTemplate"></ng-container>
@@ -16,7 +16,7 @@
 </div>
 
 <ng-template #nonInteractiveTagTemplate>
-  <div class="pupa-tag" [class.pupa-tag_disabled]="isDisabled$ | async" [class]="kindClass$ | async">
+  <div class="tag" [class.tag_disabled]="isDisabled$ | async" [class]="kindClass$ | async">
     <ng-container [ngTemplateOutlet]="tagContentTemplate"></ng-container>
   </div>
 </ng-template>

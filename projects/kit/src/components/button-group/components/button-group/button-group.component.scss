@@ -1,5 +1,6 @@
-@use 'functions';
-@use 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 $container-padding: 4px;
 
@@ -11,7 +12,7 @@ $container-padding: 4px;
   z-index: 2;
 }
 
-.pupa-button-group {
+.button-group {
   &_l {
     --container-padding: 4px;
   }
@@ -31,8 +32,8 @@ $container-padding: 4px;
     min-width: fit-content;
     max-width: inherit;
     box-sizing: border-box;
-    border-radius: variables.$controlBorderRadius;
-    background-color: functions.semantic-color(kind-neutral-normal);
+    border-radius: $controlBorderRadius;
+    background-color: semantic-color(kind-neutral-normal);
   }
 
   &__rail-container {
@@ -43,15 +44,15 @@ $container-padding: 4px;
   }
 }
 
-.pupa-button-group-rail {
+.button-group-rail {
   height: 100%;
 
   &__highlighter {
     width: 0;
     height: 100%;
     transition: transform 0.25s ease-in-out;
-    background-color: functions.semantic-color(surface-primary);
-    color: functions.semantic-color(text-primary);
-    border-radius: variables.$controlBorderRadius;
+    background-color: semantic-color(surface-primary);
+    color: semantic-color(text-primary);
+    border-radius: $controlBorderRadius;
   }
 }

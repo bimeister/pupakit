@@ -1,38 +1,38 @@
-@use 'mixins';
+@use 'mixins' as *;
 @use './../../select-trigger.style.scss';
 
 :host {
   width: 100%;
-  @include mixins.flex-container(row, center);
+  @include flex-container(row, center);
 }
 
-.pupa-trigger {
+.trigger {
   &__text {
     align-items: center;
   }
 }
 
-.pupa-tags-container {
-  @include mixins.flex-container(row, flex-start, flex-start, wrap);
+.tags-container {
+  @include flex-container(row, flex-start, flex-start, wrap);
   flex: 1;
   align-self: flex-start;
   width: 100%;
   overflow: hidden;
 }
 
-.pupa-tags-counter {
+.tags-counter {
   flex: none;
   margin-left: 1rem;
 }
 
-.pupa-tag {
+.tag {
   max-width: min(170px, calc(var(--tags-container-width-px) - 1rem));
 
-  &.pupa-is-one {
+  &.is-one {
     max-width: 100%;
   }
 }
 
-.pupa-default-tag {
+.default-tag {
   max-width: inherit;
 }

@@ -1,9 +1,9 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
-.pupa-switcher {
+.switcher {
   position: relative;
-  background-color: functions.semantic-color(kind-opacity-active);
+  background-color: semantic-color(kind-opacity-active);
   display: flex;
   align-items: center;
 
@@ -11,28 +11,25 @@
   padding: 0 0.5rem;
 
   box-sizing: border-box;
-  transition: background-color functions.variable(transition-duration_shorter)
-    functions.variable(transition-timing-function_common);
+  transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
   outline: none;
   cursor: pointer;
 
   &__marker {
-    background-color: functions.semantic-color(surface-primary);
+    background-color: semantic-color(surface-primary);
     border-radius: 50%;
-    box-shadow: 0px 0px 1rem functions.semantic-color(kind-opacity-normal);
+    box-shadow: 0px 0px 1rem semantic-color(kind-opacity-normal);
 
-    transition: transform functions.variable(transition-duration_shorter)
-        functions.variable(transition-timing-function_common),
-      background-color functions.variable(transition-duration_shorter)
-        functions.variable(transition-timing-function_common);
+    transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common),
+      background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
     transform: translateX(0);
     will-change: transform;
   }
 
   &_active {
-    background-color: functions.semantic-color(kind-primary-normal);
+    background-color: semantic-color(kind-primary-normal);
 
-    .pupa-switcher__marker {
+    .switcher__marker {
       transform: translateX(100%);
     }
   }
@@ -50,40 +47,40 @@
     pointer-events: none;
   }
 
-  &:not(.pupa-switcher_disabled) {
-    @include mixins.hover() {
-      &.pupa-switcher_active {
-        background-color: functions.semantic-color(kind-primary-hover);
+  &:not(.switcher_disabled) {
+    @include hover() {
+      &.switcher_active {
+        background-color: semantic-color(kind-primary-hover);
       }
-      background-color: functions.semantic-color(kind-neutral-hover);
+      background-color: semantic-color(kind-neutral-hover);
     }
 
     &:focus-visible {
       outline: none;
 
       &:after {
-        border-color: functions.semantic-color(lines-accent);
+        border-color: semantic-color(lines-accent);
       }
     }
   }
 
   &_disabled {
-    background-color: functions.semantic-color(kind-opacity-active);
+    background-color: semantic-color(kind-opacity-active);
     cursor: not-allowed;
 
-    .pupa-switcher__marker {
-      background-color: functions.semantic-color(icons-disabled);
+    .switcher__marker {
+      background-color: semantic-color(icons-disabled);
     }
   }
 }
 
 // sizes
-.pupa-switcher {
+.switcher {
   &_medium {
     width: 9rem;
     height: 5rem;
 
-    .pupa-switcher__marker {
+    .switcher__marker {
       width: 4rem;
       height: 4rem;
     }
@@ -93,7 +90,7 @@
     width: 7rem;
     height: 4rem;
 
-    .pupa-switcher__marker {
+    .switcher__marker {
       width: 3rem;
       height: 3rem;
     }

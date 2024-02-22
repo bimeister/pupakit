@@ -1,5 +1,5 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
 
 :host {
   display: none;
@@ -8,12 +8,12 @@
   white-space: nowrap;
   flex: 1;
 
-  @include mixins.font-type-medium;
-  @include mixins.font-size-m;
+  @include font-type-medium;
+  @include font-size-m;
 
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
 }
 
-:host-context(.pupa-popover__mobile) {
+:host-context(.popover__mobile) {
   display: block;
 }

@@ -5,13 +5,13 @@
 </ng-container>
 
 <ng-template #doubleCalendar>
-  <div class="pupa-date-picker pupa-double">
+  <div class="date-picker double">
     <pupa-date-picker-double [baseDate]="baseDate$ | async"></pupa-date-picker-double>
   </div>
 </ng-template>
 
 <ng-template #simpleTimeCalendar>
-  <div class="pupa-date-picker pupa-simple-time" [class.pupa-with-seconds]="withSeconds$ | async">
+  <div class="date-picker simple-time" [class.with-seconds]="withSeconds$ | async">
     <pupa-date-picker-simple-time
       [baseDate]="baseDate$ | async"
       (selectedHours)="selectHours($event)"
@@ -23,7 +23,7 @@
 </ng-template>
 
 <ng-template #simpleCalendar>
-  <div class="pupa-date-picker pupa-simple">
+  <div class="date-picker simple">
     <pupa-date-picker-simple [baseDate]="baseDate$ | async"></pupa-date-picker-simple>
   </div>
 </ng-template>

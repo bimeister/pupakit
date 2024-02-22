@@ -1,4 +1,6 @@
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 :host {
   display: flex;
@@ -9,15 +11,15 @@
   overflow: hidden;
 }
 
-.pupa-dropdown-content {
+.dropdown-content {
   &__menu {
     user-select: none;
     overflow: auto;
     box-sizing: border-box;
     max-height: 72rem;
 
-    border-color: functions.semantic-color(lines-normal);
-    background-color: functions.semantic-color(surface-primary, alpha-4);
+    border-color: semantic-color(lines-normal);
+    background-color: semantic-color(surface-primary, alpha-4);
 
     &:focus {
       outline: none;

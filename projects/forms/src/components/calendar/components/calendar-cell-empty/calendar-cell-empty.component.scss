@@ -1,12 +1,12 @@
-@use 'functions';
-@use '../../styles/calendar.styles';
+@use 'functions' as *;
+@use '../../styles/calendar.styles' as *;
 
-.pupa-cell {
-  @include calendar.pupa-base-cell();
+.cell {
+  @include base-cell();
 
   content: '';
 
   &_in-range {
-    background-color: functions.semantic-color(calendar.$range-selection-color);
+    background-color: semantic-color($range-selection-color);
   }
 }

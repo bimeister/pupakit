@@ -28,35 +28,35 @@
   let-checkBoxDataMeta="checkBoxDataMeta"
 >
   <div
-    class="pupa-checkbox"
+    class="checkbox"
     [attr.data-meta]="checkBoxDataMeta"
     (click)="changeValue()"
-    [class.pupa-checkbox_disabled]="disabled"
-    [class.pupa-checkbox_without-label]="!withLabel"
+    [class.checkbox_disabled]="disabled"
+    [class.checkbox_without-label]="!withLabel"
     [tabindex]="checkboxTabindex"
     (keydown.enter)="changeValue()"
   >
     <div
-      class="pupa-checkbox__marker"
-      [class.pupa-checkbox__marker_checked]="value || indeterminate"
-      [class.pupa-checkbox__marker_disabled]="disabled"
-      [class.pupa-checkbox__marker_error]="error"
-      [class.pupa-checkbox__marker_hovered]="hovered"
+      class="checkbox__marker"
+      [class.checkbox__marker_checked]="value || indeterminate"
+      [class.checkbox__marker_disabled]="disabled"
+      [class.checkbox__marker_error]="error"
+      [class.checkbox__marker_hovered]="hovered"
       [tabindex]="checkboxMarkerTabindex"
     >
       <pupa-icon
-        class="pupa-checkbox__marker-icon"
+        class="checkbox__marker-icon"
         *ngIf="!indeterminate && value"
         name="app-exceptions-check-10"
       ></pupa-icon>
-      <pupa-icon class="pupa-checkbox__marker-icon" *ngIf="indeterminate" name="app-checkbox-minus"></pupa-icon>
+      <pupa-icon class="checkbox__marker-icon" *ngIf="indeterminate" name="app-checkbox-minus"></pupa-icon>
     </div>
 
     <div
       #contentLabelWrapper
-      class="pupa-checkbox__label"
-      [class.pupa-checkbox__label_disabled]="disabled"
-      [class.pupa-checkbox__label_hidden]="!(withLabel$ | async)"
+      class="checkbox__label"
+      [class.checkbox__label_disabled]="disabled"
+      [class.checkbox__label_hidden]="!(withLabel$ | async)"
     >
       <ng-content></ng-content>
     </div>
