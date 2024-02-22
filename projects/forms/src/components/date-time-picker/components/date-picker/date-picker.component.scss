@@ -13,19 +13,19 @@ $width_simple-calendar: 244px;
   display: contents;
 }
 
-.pupa-date-picker {
-  &.pupa-double {
+.date-picker {
+  &.double {
     width: $width_double-calendar;
   }
 
-  &.pupa-simple {
+  &.simple {
     width: $width_simple-calendar;
   }
 
-  &.pupa-simple-time {
+  &.simple-time {
     width: $width_simple-time-calendar;
 
-    &.pupa-with-seconds {
+    &.with-seconds {
       width: $width_simple-time-seconds-calendar;
     }
   }

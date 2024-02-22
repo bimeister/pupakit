@@ -1,11 +1,11 @@
 <div
-  class="pupa-status"
+  class="status"
   [class]="colorClass"
-  [class.pupa-disabled]="disabled"
-  [class.pupa-right-marker-position]="markerPosition === 'right'"
+  [class.disabled]="disabled"
+  [class.right-marker-position]="markerPosition === 'right'"
 >
-  <div class="pupa-status__marker" [class]="kindClass"></div>
-  <div class="pupa-status__text">
+  <div class="status__marker" [class]="kindClass"></div>
+  <div class="status__text">
     <ng-content></ng-content>
   </div>
 </div>

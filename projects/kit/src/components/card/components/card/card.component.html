@@ -1,11 +1,11 @@
-<div class="pupa-card" [class]="sizeClass$ | async">
+<div class="card" [class]="sizeClass$ | async">
   <pupa-card-container
     [tabIndex]="tabIndex"
     [disabled]="disabled$ | async"
     [clickable]="clickable$ | async"
     [selected]="selected$ | async"
   >
-    <div class="pupa-card__inner-wrapper">
+    <div class="card__inner-wrapper">
       <ng-content></ng-content>
     </div>
   </pupa-card-container>

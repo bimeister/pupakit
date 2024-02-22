@@ -1,24 +1,24 @@
-@use 'functions';
-@use 'mixins';
-@use 'variables';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
 
-.pupa-option {
+.option {
   all: unset;
   box-sizing: border-box;
   height: 100%;
   display: flex;
   align-items: center;
   background-color: transparent;
-  border-radius: variables.$controlBorderRadius;
+  border-radius: $controlBorderRadius;
   cursor: pointer;
   padding: 0 3rem;
-  @include mixins.no-tap-highlight();
-  @include mixins.font-size-s();
+  @include no-tap-highlight();
+  @include font-size-s();
 
   &--selected {
     position: relative;
-    background-color: functions.semantic-color(kind-neutral-selected);
-    border-radius: variables.$controlBorderRadius;
+    background-color: semantic-color(kind-neutral-selected);
+    border-radius: $controlBorderRadius;
     overflow: hidden;
 
     &::after {
@@ -28,7 +28,7 @@
       bottom: 0;
       content: '';
       width: 0.5rem;
-      background-color: functions.semantic-color(kind-primary-normal);
+      background-color: semantic-color(kind-primary-normal);
       pointer-events: none;
     }
   }
@@ -49,9 +49,9 @@
     display: flex;
     align-items: center;
     overflow: hidden;
-    color: functions.semantic-color(text-primary);
+    color: semantic-color(text-primary);
 
-    .pupa-option__checkbox {
+    .option__checkbox {
       width: fit-content;
     }
   }
@@ -69,24 +69,24 @@
   &--disabled {
     cursor: not-allowed;
 
-    .pupa-option__content {
+    .option__content {
       &-container {
-        color: functions.semantic-color(text-disabled);
+        color: semantic-color(text-disabled);
       }
     }
   }
 
   &:not(:disabled, &--disabled) {
-    @include mixins.hover() {
-      background-color: functions.semantic-color(kind-opacity-hover);
+    @include hover() {
+      background-color: semantic-color(kind-opacity-hover);
     }
   }
 
   &:active:not(:disabled, &--disabled) {
-    background-color: functions.semantic-color(kind-opacity-pressed);
+    background-color: semantic-color(kind-opacity-pressed);
   }
 
   &:focus-visible {
-    outline: 2px solid functions.semantic-color(lines-accent);
+    outline: 2px solid semantic-color(lines-accent);
   }
 }

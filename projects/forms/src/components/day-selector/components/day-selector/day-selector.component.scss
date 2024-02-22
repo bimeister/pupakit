@@ -1,12 +1,13 @@
-@use 'functions';
-@use 'mixins';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
   display: inline-flex;
   padding: 0.5rem;
   border-radius: 1rem;
 
-  @include mixins.font-type-regular();
+  @include font-type-regular();
 
-  background: functions.semantic-color(surface-action);
+  background: semantic-color(surface-action);
 }

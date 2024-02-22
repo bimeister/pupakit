@@ -1,7 +1,7 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-@keyframes pupa-rotate {
+@keyframes rotate {
   from {
     transform: rotate(0deg);
   }
@@ -11,14 +11,14 @@
 }
 
 :host {
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include flex-container(column, center, center, nowrap);
 }
 
-.pupa-loader {
+.loader {
   all: unset;
   overflow: hidden;
   color: inherit;
-  @include mixins.inline-flex-container(row, center, center, nowrap);
+  @include inline-flex-container(row, center, center, nowrap);
 
   &__determinate-icon,
   &__indeterminate-icon {
@@ -30,7 +30,7 @@
     stroke: currentColor;
 
     &_background {
-      stroke: functions.semantic-color(kind-neutral-normal);
+      stroke: semantic-color(kind-neutral-normal);
     }
   }
 
@@ -38,18 +38,18 @@
     transform: rotate(-90deg);
 
     &_scale {
-      stroke: functions.semantic-color(kind-warning-normal);
+      stroke: semantic-color(kind-warning-normal);
       transition: stroke-dashoffset 0.6s ease-in;
     }
 
     &_success {
-      stroke: functions.semantic-color(kind-success-normal);
+      stroke: semantic-color(kind-success-normal);
       transition: stroke-dashoffset 0.6s ease-in, stroke 0.6s step-end;
     }
   }
 
   &__indeterminate-icon {
-    animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite pupa-rotate;
+    animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite rotate;
 
     &_scale {
       stroke-dasharray: 80px;
@@ -61,20 +61,20 @@
     }
 
     &_success {
-      stroke: functions.semantic-color(kind-success-normal);
+      stroke: semantic-color(kind-success-normal);
     }
 
     &_warning {
-      stroke: functions.semantic-color(kind-warning-normal);
+      stroke: semantic-color(kind-warning-normal);
     }
 
     &_danger {
-      stroke: functions.semantic-color(kind-danger-normal);
+      stroke: semantic-color(kind-danger-normal);
     }
   }
 
   &__error-icon {
-    color: functions.semantic-color(kind-danger-normal);
+    color: semantic-color(kind-danger-normal);
     height: 60%;
     width: 60%;
   }

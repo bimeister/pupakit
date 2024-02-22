@@ -1,7 +1,8 @@
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
-.pupa-dropdown-separator {
+.dropdown-separator {
   display: block;
   margin: 2rem 0;
-  border-bottom: 1px solid functions.semantic-color(kind-neutral-normal);
+  border-bottom: 1px solid semantic-color(kind-neutral-normal);
 }

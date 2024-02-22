@@ -1,9 +1,9 @@
-@use 'mixins';
+@use 'mixins' as *;
 
 :host {
   max-width: 100%;
   max-height: 100%;
-  @include mixins.lt-sm() {
+  @include lt-sm() {
     margin-top: (20rem);
     height: calc(100vh - 20rem);
     width: 100vw;
@@ -11,8 +11,7 @@
     bottom: 0;
   }
 }
-
-.pupa-popover__container {
+.popover__container {
   position: relative;
   width: 100%;
   height: 100%;

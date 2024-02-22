@@ -1,3 +1,8 @@
+@use 'sass:string';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
+
 @use './input.styles';
 
 $width_time: 29rem;
@@ -14,28 +19,27 @@ $width_date-range: 60rem;
   width: 100%;
 }
 
-.pupa-base-input-container {
-  &.pupa-time.pupa-fixed-size {
+.base-input-container {
+  &.time.fixed-size {
     width: $width_time;
 
-    &.pupa-time-seconds {
+    &.time-seconds {
       width: $width_time-seconds;
     }
   }
 
-  &.pupa-date.pupa-fixed-size {
+  &.date.fixed-size {
     width: $width_date;
 
-    &.pupa-time {
+    &.time {
       width: $width_date-time;
     }
-
-    &.pupa-time-seconds {
+    &.time-seconds {
       width: $width_date-seconds;
     }
   }
 
-  &.pupa-date-range.pupa-fixed-size {
+  &.date-range.fixed-size {
     width: $width_date-range;
   }
 

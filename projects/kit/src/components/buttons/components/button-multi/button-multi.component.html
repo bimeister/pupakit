@@ -1,24 +1,24 @@
-<div class="pupa-button-multi" type="submit" #mainContainer>
+<div class="button-multi" type="submit" #mainContainer>
   <button
     [disabled]="(disabled$ | async) ? true : null"
     [ngClass]="resultClassList$ | async"
     [tabIndex]="tabIndex"
-    class="pupa-button"
+    class="button"
   >
-    <div [class.pupa-reversed-direction]="isReversedDirection$ | async" class="pupa-button__content" focusable="false">
+    <div [class.reversed-direction]="isReversedDirection$ | async" class="button__content" focusable="false">
       <ng-container *ngIf="leftIcon$ | async as leftIcon">
-        <pupa-icon [class.pupa-hidden]="loading$ | async" [name]="leftIcon" class="pupa-button__icon"></pupa-icon>
+        <pupa-icon [class.hidden]="loading$ | async" [name]="leftIcon" class="button__icon"></pupa-icon>
       </ng-container>
 
-      <div [class.pupa-hidden]="loading$ | async" class="pupa-button__content-inner">
+      <div [class.hidden]="loading$ | async" class="button__content-inner">
         <ng-content></ng-content>
       </div>
 
       <ng-container *ngIf="rightIcon$ | async as rightIcon">
-        <pupa-icon class="pupa-button__icon" [name]="rightIcon"></pupa-icon>
+        <pupa-icon class="button__icon" [name]="rightIcon"></pupa-icon>
       </ng-container>
     </div>
-    <div *ngIf="loading$ | async" class="pupa-button__loading" focusable="false">
+    <div *ngIf="loading$ | async" class="button__loading" focusable="false">
       <pupa-loader [size]="'16px'"></pupa-loader>
     </div>
   </button>
@@ -26,13 +26,13 @@
     (click)="$event.stopPropagation()"
     [disabled]="(disabled$ | async) ? true : null"
     [ngClass]="resultClassListExpand$ | async"
-    [class.pupa-button_active]="isMenuOpened$ | async"
+    [class.button_active]="isMenuOpened$ | async"
     [tabIndex]="tabIndex"
     pupaDropdown
     [pupaDropdownDisabled]="disabled$ | async"
     [pupaDropdownRealTriggerElement]="mainContainer"
-    class="pupa-button-multi_menu-button pupa-button"
+    class="button-multi_menu-button button"
   >
-    <pupa-icon name="ios-arrow-down" class="pupa-button__icon" focusable="false"></pupa-icon>
+    <pupa-icon [name]="'ios-arrow-down'" class="button__icon" focusable="false"></pupa-icon>
   </button>
 </div>

@@ -1,4 +1,4 @@
-@use 'functions';
+@use 'functions' as *;
 
 :host {
   display: flex;
@@ -8,8 +8,7 @@
   height: 100%;
 }
 
-.pupa-group-view {
-  box-shadow: 3px 3px functions.semantic-color(kind-primary-normal, 0.6),
-    6px 6px functions.semantic-color(kind-primary-normal, 0.3);
+.group-view {
+  box-shadow: 3px 3px semantic-color(kind-primary-normal, 0.6), 6px 6px semantic-color(kind-primary-normal, 0.3);
   border-radius: 1rem;
 }

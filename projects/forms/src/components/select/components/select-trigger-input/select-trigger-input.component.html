@@ -1,10 +1,10 @@
 <div
-  class="pupa-trigger"
+  class="trigger"
   [class]="size$ | async"
-  [class.pupa-trigger_active]="isExpanded$ | async"
-  [class.pupa-trigger_disabled]="isDisabled$ | async"
-  [class.pupa-trigger_invalid]="isInvalid$ | async"
-  [class.pupa-trigger_inline]="inline$ | async"
+  [class.trigger_active]="isExpanded$ | async"
+  [class.trigger_disabled]="isDisabled$ | async"
+  [class.trigger_invalid]="isInvalid$ | async"
+  [class.trigger_inline]="inline$ | async"
   (mousedown)="processEventPropagation($event)"
   (touchstart)="processEventPropagation($event)"
   (click)="processButtonInputClick()"
@@ -12,13 +12,13 @@
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="pupa-trigger__input-container">
-    <div class="pupa-trigger__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
+  <div class="trigger__input-container">
+    <div class="trigger__button-icons-container" *ngIf="!(isExpanded$ | async)" (click)="processDomEvent($event)">
       <ng-content></ng-content>
     </div>
     <input
       type="text"
-      class="pupa-trigger__input"
+      class="trigger__input"
       [style.paddingRight.px]="rightPaddingPx$ | async"
       [placeholder]="placeholder"
       #inputElement
@@ -27,18 +27,18 @@
   </div>
 
   <div
-    class="pupa-trigger__rotate-icon"
-    [class.pupa-expanded]="(isExpanded$ | async) && (isExpandable$ | async)"
+    class="trigger__rotate-icon"
+    [class.expanded]="(isExpanded$ | async) && (isExpandable$ | async)"
     (click)="toggleDropdown($event)"
   >
     <pupa-icon [name]="expandedIcon$ | async"></pupa-icon>
   </div>
 </div>
 
-<div class="pupa-icons">
+<div class="icons">
   <pupa-icon
     *ngIf="isVisibleReset$ | async"
-    class="pupa-icons__icon pupa-icons__icon-reset"
+    class="icons__icon icons__icon-reset"
     name="app-close-square"
     (click)="reset()"
   >
@@ -46,7 +46,7 @@
 
   <pupa-icon
     *ngIf="isInvalid$ | async"
-    class="pupa-icons__icon pupa-icons__icon-invalid"
+    class="icons__icon icons__icon-invalid"
     name="app-error-filled"
     [pupaTooltip]="invalidTooltip$ | async"
     [tooltipHideOnHover]="invalidTooltipHideOnHover$ | async"

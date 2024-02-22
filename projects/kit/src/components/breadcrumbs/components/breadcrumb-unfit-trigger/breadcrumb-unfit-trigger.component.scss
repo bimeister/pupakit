@@ -1,47 +1,45 @@
-@use 'mixins';
-@use 'functions';
-@use 'variables';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use 'variables' as *;
 
 $adaptive-property: 'max-width';
 
-.pupa-trigger {
-  @include mixins.font-preset-h7();
+.trigger {
+  @include font-preset-h7();
 
   padding: 1.5rem 2rem;
 
   display: block;
   border: 0.5rem solid transparent;
-  border-radius: variables.$controlBorderRadius;
+  border-radius: $controlBorderRadius;
 
   text-decoration: none;
-  color: functions.semantic-color(text-secondary);
+  color: semantic-color(text-secondary);
   cursor: pointer;
-  @include mixins.ellipsis-text-overflow;
+  @include ellipsis-text-overflow;
 
-  transition: color functions.variable(transition-duration_shorter)
-      functions.variable(transition-timing-function_common),
-    background-color functions.variable(transition-duration_shorter)
-      functions.variable(transition-timing-function_common);
+  transition: color variable(transition-duration_shorter) variable(transition-timing-function_common),
+    background-color variable(transition-duration_shorter) variable(transition-timing-function_common);
 
-  &:not(.pupa-trigger_active) {
-    @include mixins.hover() {
-      background-color: functions.semantic-color(kind-opacity-hover);
-      color: functions.semantic-color(text-primary);
+  &:not(.trigger_active) {
+    @include hover() {
+      background-color: semantic-color(kind-opacity-hover);
+      color: semantic-color(text-primary);
     }
   }
 
   &_active,
   &:active {
-    background-color: functions.semantic-color(kind-opacity-hover);
-    color: functions.semantic-color(text-primary);
+    background-color: semantic-color(kind-opacity-hover);
+    color: semantic-color(text-primary);
   }
 
   &:focus-visible {
-    border-color: functions.semantic-color(lines-accent);
+    border-color: semantic-color(lines-accent);
     outline: none;
   }
 
-  @include mixins.xs() {
-    @include mixins.font-size-m();
+  @include xs() {
+    @include font-size-m();
   }
 }

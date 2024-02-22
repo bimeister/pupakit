@@ -1,5 +1,5 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 $padding_days-area-container: 0 4rem 2rem 4rem;
 $padding_days-area: 0 4rem;
@@ -16,19 +16,19 @@ $height_year: 24px;
 $width_month: 64px;
 $height_month: 24px;
 
-.pupa-date-picker {
+.date-picker {
   all: unset;
   box-shadow: $box-shadow;
   border-radius: 2rem;
-  background: functions.semantic-color(surface-secondary);
-  @include mixins.flex-container(column, stretch, stretch, nowrap);
+  background: semantic-color(surface-secondary);
+  @include flex-container(column, stretch, stretch, nowrap);
 
   &__header {
     height: 36px;
     width: 100%;
     box-sizing: border-box;
     padding: $padding_days-area;
-    @include mixins.flex-container(row, center, space-between, nowrap);
+    @include flex-container(row, center, space-between, nowrap);
   }
 
   &__week-days {
@@ -37,7 +37,7 @@ $height_month: 24px;
     padding: $padding_days-area;
     margin: $margin_days-line;
     box-sizing: border-box;
-    @include mixins.flex-container(row, center, space-between, nowrap);
+    @include flex-container(row, center, space-between, nowrap);
   }
 
   &__wrapper {
@@ -45,17 +45,17 @@ $height_month: 24px;
     padding: $padding_days-area-container;
     box-sizing: border-box;
     overflow: hidden;
-    @include mixins.flex-container(row, flex-start, flex-start, wrap);
+    @include flex-container(row, flex-start, flex-start, wrap);
   }
 
   &__row {
-    @include mixins.flex-container(column, stretch, stretch, nowrap);
+    @include flex-container(column, stretch, stretch, nowrap);
   }
 }
 
-.pupa-title {
+.title {
   all: unset;
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
   line-height: 1.43;
   font-weight: normal;
   font-style: normal;
@@ -63,36 +63,36 @@ $height_month: 24px;
   user-select: none;
   display: flex;
 
-  @include mixins.font-size-m;
+  @include font-size-m;
 
-  &__month:not(.pupa-disable-hover),
-  &__year:not(.pupa-disable-hover) {
+  &__month:not(.disable-hover),
+  &__year:not(.disable-hover) {
     transition: color 0.2s ease;
 
     &:hover {
-      color: functions.semantic-color(kind-primary-hover);
+      color: semantic-color(kind-primary-hover);
       cursor: pointer;
     }
   }
 
-  &.pupa-selected {
-    color: functions.semantic-color(kind-primary-normal);
+  &.selected {
+    color: semantic-color(kind-primary-normal);
     cursor: default;
   }
 }
 
-.pupa-week-day {
+.week-day {
   all: unset;
-  color: functions.semantic-color(text-secondary);
+  color: semantic-color(text-secondary);
   width: $width_days-line-item;
   font-size: $font-size_days-line-item;
   font-weight: normal;
   user-select: none;
-  @include mixins.font-type-regular;
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include font-type-regular;
+  @include flex-container(column, center, center, nowrap);
 }
 
-.pupa-date-wrapper {
+.date-wrapper {
   position: relative;
   cursor: pointer;
   background-color: transparent;
@@ -105,18 +105,18 @@ $height_month: 24px;
   padding: 0;
 
   user-select: none;
-  @include mixins.font-type-regular;
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include font-type-regular;
+  @include flex-container(column, center, center, nowrap);
 
   &__range {
-    background-color: functions.semantic-color(kind-primary-normal, alpha-6);
+    background-color: semantic-color(kind-primary-normal, alpha-6);
   }
 
   &:nth-child(7n) {
     border-top-right-radius: $height_date;
     border-bottom-right-radius: $height_date;
 
-    .pupa-date__range-start {
+    .date__range-start {
       &::before {
         display: none;
       }
@@ -127,7 +127,7 @@ $height_month: 24px;
     border-top-left-radius: $height_date;
     border-bottom-left-radius: $height_date;
 
-    .pupa-date__range-end {
+    .date__range-end {
       &::before {
         display: none;
       }
@@ -135,14 +135,14 @@ $height_month: 24px;
   }
 
   &__first {
-    &.pupa-date-wrapper__range {
+    &.date-wrapper__range {
       border-bottom-left-radius: $height_date;
       border-top-left-radius: $height_date;
     }
   }
 
   &__last {
-    &.pupa-date-wrapper__range {
+    &.date-wrapper__range {
       border-bottom-right-radius: $height_date;
       border-top-right-radius: $height_date;
     }
@@ -151,8 +151,8 @@ $height_month: 24px;
   &__disabled {
     pointer-events: none;
 
-    .pupa-date__range-start,
-    .pupa-date__range-end {
+    .date__range-start,
+    .date__range-end {
       &::before {
         display: none;
       }
@@ -160,13 +160,13 @@ $height_month: 24px;
   }
 }
 
-.pupa-date {
+.date {
   position: relative;
 
   width: $height_date;
   height: $height_date;
 
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include flex-container(column, center, center, nowrap);
 
   &__range-start {
     &::before {
@@ -176,7 +176,7 @@ $height_month: 24px;
       left: 0;
       width: 113%;
       height: 100%;
-      background-color: functions.semantic-color(kind-primary-normal, alpha-6);
+      background-color: semantic-color(kind-primary-normal, alpha-6);
       border-bottom-left-radius: $height_date;
       border-top-left-radius: $height_date;
       z-index: 0;
@@ -191,7 +191,7 @@ $height_month: 24px;
       right: 0;
       width: 113%;
       height: 100%;
-      background-color: functions.semantic-color(kind-primary-normal, alpha-6);
+      background-color: semantic-color(kind-primary-normal, alpha-6);
       border-bottom-right-radius: $height_date;
       border-top-right-radius: $height_date;
       z-index: 0;
@@ -199,9 +199,9 @@ $height_month: 24px;
   }
 }
 
-.pupa-date-inner {
+.date-inner {
   font-size: $font-size_days-line-item;
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
   line-height: 4rem;
   font-weight: normal;
   position: relative;
@@ -209,36 +209,36 @@ $height_month: 24px;
   width: 100%;
   height: 100%;
   border-radius: 100%;
-  @include mixins.transition(#{'color, background-color'});
+  @include transition(#{'color, background-color'});
 
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include flex-container(column, center, center, nowrap);
 
   z-index: 2;
 
   &__current:not(&__disabled):not(&__selected) {
-    border: 1px solid functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(text-primary);
+    border: 1px solid semantic-color(kind-primary-normal);
+    color: semantic-color(text-primary);
     box-sizing: border-box;
   }
 
   &__selected {
-    background-color: functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(text-inverse);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(text-inverse);
   }
 
   &__disabled {
-    color: functions.semantic-color(text-disabled);
+    color: semantic-color(text-disabled);
     pointer-events: none;
     background-color: transparent;
   }
 
-  &:hover:not(.pupa-date-inner__selected) {
-    background-color: functions.semantic-color(kind-primary-normal, alpha-5);
-    color: functions.semantic-color(text-primary);
+  &:hover:not(.date-inner__selected) {
+    background-color: semantic-color(kind-primary-normal, alpha-5);
+    color: semantic-color(text-primary);
   }
 }
 
-.pupa-year {
+.year {
   position: relative;
   appearance: none;
   outline: none;
@@ -249,7 +249,7 @@ $height_month: 24px;
   height: $height_year;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: functions.semantic-color(kind-opacity-normal);
+  color: semantic-color(kind-opacity-normal);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
@@ -259,22 +259,22 @@ $height_month: 24px;
   outline-offset: unset;
   padding: 0;
 
-  @include mixins.transition(#{'background, color'});
-  @include mixins.font-type-regular;
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include transition(#{'background, color'});
+  @include font-type-regular;
+  @include flex-container(column, center, center, nowrap);
 
-  &.pupa-current {
-    background-color: functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(kind-opacity-normal);
+  &.current {
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(kind-opacity-normal);
   }
 
   &:hover {
-    background-color: functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(surface-primary);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(surface-primary);
   }
 }
 
-.pupa-month {
+.month {
   position: relative;
   appearance: none;
   outline: none;
@@ -285,23 +285,23 @@ $height_month: 24px;
   height: $height_month;
   font-size: $font-size_days-line-item;
   margin: 3px 0;
-  color: functions.semantic-color(text-primary);
+  color: semantic-color(text-primary);
   line-height: 4rem;
   font-weight: normal;
   user-select: none;
   border-radius: $height_month;
   z-index: 2;
-  @include mixins.transition(#{'background, color'});
-  @include mixins.font-type-regular;
-  @include mixins.flex-container(column, center, center, nowrap);
+  @include transition(#{'background, color'});
+  @include font-type-regular;
+  @include flex-container(column, center, center, nowrap);
 
   &:hover {
-    background-color: functions.semantic-color(kind-primary-normal);
-    color: functions.semantic-color(surface-primary);
+    background-color: semantic-color(kind-primary-normal);
+    color: semantic-color(surface-primary);
   }
 }
 
-.pupa-arrow-button {
+.arrow-button {
   all: unset;
   height: 5rem;
   background: none;
@@ -312,13 +312,13 @@ $height_month: 24px;
   padding: 0;
   font-weight: $font-weight_days-line-item;
   font-size: 4rem;
-  color: functions.semantic-color(icons-primary);
+  color: semantic-color(icons-primary);
   cursor: pointer;
   display: flex;
   align-items: center;
-  @include mixins.font-type-regular;
+  @include font-type-regular;
 
-  &.pupa-not-showing {
+  &.not-showing {
     visibility: hidden;
     pointer-events: none;
   }

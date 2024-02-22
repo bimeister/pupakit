@@ -55,7 +55,7 @@ export class PopoverContainerComponent {
   private readonly pointerPosition$: ReplaySubject<PointerPosition> = new ReplaySubject<PointerPosition>(1);
 
   public readonly pointerClassName$: Observable<string> = this.pointerPosition$.pipe(
-    map((pointerPosition: PointerPosition) => `pupa-pointer__${pointerPosition}`)
+    map((pointerPosition: PointerPosition) => `pointer__${pointerPosition}`)
   );
 
   private readonly positionChanges$: Observable<ConnectedOverlayPositionChange> = this.componentData.positionChanges$;

@@ -1,6 +1,6 @@
-@use 'functions';
-@use 'mixins';
-@use 'variables';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
@@ -15,13 +15,13 @@
   mask-repeat: no-repeat;
 }
 
-.pupa-tree-node {
-  @include mixins.flex-container(row, center);
+.tree-node {
+  @include flex-container(row, center);
   min-width: 48.5rem;
   height: 100%;
-  background-color: functions.semantic-color(surface-primary);
+  background-color: semantic-color(surface-primary);
   cursor: pointer;
-  @include mixins.no-tap-highlight();
+  @include no-tap-highlight();
   overflow: clip;
   position: relative;
 
@@ -34,18 +34,18 @@
     opacity: 0;
     border-top-left-radius: 9rem 16rem;
     border-bottom-left-radius: 9rem 16rem;
-    background-color: functions.semantic-color(kind-primary-normal);
+    background-color: semantic-color(kind-primary-normal);
   }
 
   &__left {
-    @include mixins.flex-container(row, center);
+    @include flex-container(row, center);
     overflow: hidden;
     padding: 1rem 0 1rem 1.5rem;
     margin-right: -4rem;
   }
 
   &__right {
-    @include mixins.flex-container(row);
+    @include flex-container(row);
     position: sticky;
     right: 0;
     align-self: stretch;
@@ -56,24 +56,24 @@
       width: 5rem;
       background: linear-gradient(
         90deg,
-        functions.semantic-color(surface-primary, alpha-1) 0%,
-        functions.semantic-color(surface-primary) 100%
+        semantic-color(surface-primary, alpha-1) 0%,
+        semantic-color(surface-primary) 100%
       );
     }
 
     &-container {
-      @include mixins.flex-container(row, center, flex-end);
+      @include flex-container(row, center, flex-end);
       position: relative;
       z-index: 2;
       width: fit-content;
       height: 100%;
-      background: functions.semantic-color(surface-primary);
+      background: semantic-color(surface-primary);
       padding-right: 2rem;
     }
   }
 
   &__arrow-container {
-    @include mixins.flex-container(row, center, center);
+    @include flex-container(row, center, center);
     min-width: 9rem;
     height: 6rem;
     padding-right: 3rem;
@@ -81,13 +81,13 @@
   }
 
   &__without-children {
-    color: functions.semantic-color(icons-disabled);
+    color: semantic-color(icons-disabled);
   }
 
   &__text {
-    @include mixins.font-preset-caption-xs();
+    @include font-preset-caption-xs();
 
-    color: functions.semantic-color(text-primary);
+    color: semantic-color(text-primary);
     white-space: nowrap;
     padding-right: 4rem;
   }
@@ -96,7 +96,7 @@
   &__right-mask {
     position: sticky;
     align-self: stretch;
-    @include mixins.flex-container(column, flex-start, space-between);
+    @include flex-container(column, flex-start, space-between);
   }
 
   &__left-mask {
@@ -115,7 +115,7 @@
   &__right-top-round-out,
   &__right-bottom-round-out {
     @include round-out;
-    background-color: functions.semantic-color(surface-primary);
+    background-color: semantic-color(surface-primary);
   }
 
   &__left-bottom-round-out {
@@ -130,105 +130,105 @@
     transform: rotate(180deg);
   }
 
-  @include mixins.hover {
-    background-color: functions.semantic-color(kind-neutral-hover);
+  @include hover {
+    background-color: semantic-color(kind-neutral-hover);
 
-    .pupa-tree-node__right-container {
-      background-color: functions.semantic-color(kind-neutral-hover);
+    .tree-node__right-container {
+      background-color: semantic-color(kind-neutral-hover);
     }
 
-    .pupa-tree-node__right-gradient {
+    .tree-node__right-gradient {
       background: linear-gradient(
         90deg,
-        functions.semantic-color(kind-neutral-hover, alpha-1) 0%,
-        functions.semantic-color(kind-neutral-hover) 100%
+        semantic-color(kind-neutral-hover, alpha-1) 0%,
+        semantic-color(kind-neutral-hover) 100%
       );
     }
 
     &:active {
-      background-color: functions.semantic-color(kind-neutral-pressed);
+      background-color: semantic-color(kind-neutral-pressed);
 
-      .pupa-tree-node__right-container {
-        background-color: functions.semantic-color(kind-neutral-pressed);
+      .tree-node__right-container {
+        background-color: semantic-color(kind-neutral-pressed);
       }
 
-      .pupa-tree-node__right-gradient {
+      .tree-node__right-gradient {
         background: linear-gradient(
           90deg,
-          functions.semantic-color(kind-neutral-pressed, alpha-1) 0%,
-          functions.semantic-color(kind-neutral-pressed) 100%
+          semantic-color(kind-neutral-pressed, alpha-1) 0%,
+          semantic-color(kind-neutral-pressed) 100%
         );
       }
     }
   }
 
   &:focus {
-    border: 2px solid functions.semantic-color(lines-accent);
+    border: 2px solid semantic-color(lines-accent);
   }
 
   &--dragover {
-    border: 1px solid functions.semantic-color(lines-accent);
+    border: 1px solid semantic-color(lines-accent);
   }
 
   &--selected {
-    background-color: functions.semantic-color(kind-neutral-selected);
+    background-color: semantic-color(kind-neutral-selected);
 
-    .pupa-tree-node__selection {
+    .tree-node__selection {
       opacity: 1;
-      background-color: functions.semantic-color(kind-primary-normal);
+      background-color: semantic-color(kind-primary-normal);
     }
 
-    .pupa-tree-node__right-container {
-      background-color: functions.semantic-color(kind-neutral-selected);
+    .tree-node__right-container {
+      background-color: semantic-color(kind-neutral-selected);
     }
 
-    .pupa-tree-node__right-gradient {
+    .tree-node__right-gradient {
       background: linear-gradient(
         90deg,
-        functions.semantic-color(kind-neutral-selected, alpha-1) 0%,
-        functions.semantic-color(kind-neutral-selected) 100%
+        semantic-color(kind-neutral-selected, alpha-1) 0%,
+        semantic-color(kind-neutral-selected) 100%
       );
     }
   }
 
   &--disabled {
-    &.pupa-tree-node {
+    &.tree-node {
       cursor: not-allowed;
-      background-color: functions.semantic-color(surface-primary);
+      background-color: semantic-color(surface-primary);
 
-      .pupa-tree-node__right-container {
-        background-color: functions.semantic-color(surface-primary);
+      .tree-node__right-container {
+        background-color: semantic-color(surface-primary);
       }
 
-      .pupa-tree-node__right-gradient {
+      .tree-node__right-gradient {
         background: linear-gradient(
           90deg,
-          functions.semantic-color(surface-primary, alpha-1) 0%,
-          functions.semantic-color(surface-primary) 100%
+          semantic-color(surface-primary, alpha-1) 0%,
+          semantic-color(surface-primary) 100%
         );
       }
 
-      .pupa-tree-node__text {
-        color: functions.semantic-color(text-disabled);
+      .tree-node__text {
+        color: semantic-color(text-disabled);
       }
 
       &--selected {
-        background-color: functions.semantic-color(kind-neutral-selected);
+        background-color: semantic-color(kind-neutral-selected);
 
-        .pupa-tree-node__selection {
-          background-color: functions.semantic-color(kind-primary-normal);
+        .tree-node__selection {
+          background-color: semantic-color(kind-primary-normal);
           opacity: 1;
         }
 
-        .pupa-tree-node__right-container {
-          background-color: functions.semantic-color(kind-neutral-selected);
+        .tree-node__right-container {
+          background-color: semantic-color(kind-neutral-selected);
         }
 
-        .pupa-tree-node__right-gradient {
+        .tree-node__right-gradient {
           background: linear-gradient(
             90deg,
-            functions.semantic-color(kind-neutral-selected, alpha-1) 0%,
-            functions.semantic-color(kind-neutral-selected) 100%
+            semantic-color(kind-neutral-selected, alpha-1) 0%,
+            semantic-color(kind-neutral-selected) 100%
           );
         }
       }
@@ -236,23 +236,23 @@
   }
 
   &--expanded {
-    .pupa-tree-node__text {
-      @include mixins.font-preset-h6();
+    .tree-node__text {
+      @include font-preset-h6();
     }
   }
 
   &--hovered {
-    background-color: functions.semantic-color(kind-neutral-hover);
+    background-color: semantic-color(kind-neutral-hover);
 
-    .pupa-tree-node__right-container {
-      background-color: functions.semantic-color(kind-neutral-hover);
+    .tree-node__right-container {
+      background-color: semantic-color(kind-neutral-hover);
     }
 
-    .pupa-tree-node__right-gradient {
+    .tree-node__right-gradient {
       background: linear-gradient(
         90deg,
-        functions.semantic-color(kind-neutral-hover, alpha-1) 0%,
-        functions.semantic-color(kind-neutral-hover) 100%
+        semantic-color(kind-neutral-hover, alpha-1) 0%,
+        semantic-color(kind-neutral-hover) 100%
       );
     }
   }

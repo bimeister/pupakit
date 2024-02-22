@@ -5,6 +5,6 @@ import { Directive, ElementRef, Renderer2 } from '@angular/core';
 })
 export class ScrollableContentDirective {
   constructor(private readonly elementRef: ElementRef<HTMLElement>, private readonly renderer: Renderer2) {
-    this.renderer.addClass(this.elementRef.nativeElement, 'pupa-invisible-scrollbars');
+    this.renderer.addClass(this.elementRef.nativeElement, 'invisible-scrollbars');
   }
 }

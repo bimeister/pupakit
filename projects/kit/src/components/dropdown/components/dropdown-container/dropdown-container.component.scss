@@ -1,13 +1,13 @@
-@use 'functions';
+@use 'functions' as *;
+@use 'variables' as *;
 
 :host {
-  box-shadow: 0 1rem 1.5rem -0.5rem functions.color(neutral-1000, alpha-3),
-    0 3rem 4rem -1rem functions.color(neutral-1000, alpha-5);
+  box-shadow: 0 1rem 1.5rem -0.5rem color(neutral-1000, alpha-3), 0 3rem 4rem -1rem color(neutral-1000, alpha-5);
 }
 
 :host,
-.pupa-theme-container,
-.pupa-content-container {
+.theme-container,
+.content-container {
   display: block;
   width: 100%;
   height: auto;

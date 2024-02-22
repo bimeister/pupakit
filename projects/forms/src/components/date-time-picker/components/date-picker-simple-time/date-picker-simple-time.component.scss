@@ -1,24 +1,25 @@
-@use 'functions';
+@use 'functions' as *;
+@use '../../date-picker.style.scss';
 
 $width_time-seconds: 110px;
 $width_time: 74px;
 
-.pupa-container {
+.container {
   display: flex;
 }
 
-.pupa-calendar {
+.calendar {
   flex: 1;
-  border-right: 1px solid functions.color(primary-50);
+  border-right: 1px solid color(primary-50);
 }
 
-.pupa-time {
+.time {
   height: inherit;
   width: $width_time;
   display: flex;
   justify-content: center;
 
-  &.pupa-seconds {
+  &.seconds {
     width: $width_time-seconds;
   }
 }

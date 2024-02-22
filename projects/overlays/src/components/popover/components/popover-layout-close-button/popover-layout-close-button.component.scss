@@ -1,6 +1,8 @@
-@use 'functions';
+@use 'functions' as *;
+@use 'mixins' as *;
+@use 'variables' as *;
 
 :host {
   display: block;
-  color: functions.semantic-color(text-secondary);
+  color: semantic-color(text-secondary);
 }

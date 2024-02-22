@@ -1,25 +1,25 @@
-<div class="pupa-accordion" [ngClass]="accordionClass$ | async" [class.pupa-accordion_expanded]="expanded$ | async">
+<div class="accordion" [ngClass]="accordionClass$ | async" [class.accordion_expanded]="expanded$ | async">
   <div
-    class="pupa-accordion-header"
-    [class.pupa-accordion-header_expanded]="expanded$ | async"
-    [class.pupa-accordion-header_sticky]="stickyHeader"
+    class="accordion-header"
+    [class.accordion-header_expanded]="expanded$ | async"
+    [class.accordion-header_sticky]="stickyHeader"
     (click)="toggle()"
   >
-    <div class="pupa-accordion-header__content">
+    <div class="accordion-header__content">
       <ng-content></ng-content>
     </div>
 
-    <div class="pupa-accordion-header__action" *ngIf="!(actionTemplate | isNullOrUndefined)">
+    <div class="accordion-header__action" *ngIf="!(actionTemplate | isNullOrUndefined)">
       <ng-container [ngTemplateOutlet]="actionTemplate?.templateRef"></ng-container>
     </div>
 
-    <div class="pupa-accordion-header__action" *ngIf="showArrow">
+    <div class="accordion-header__action" *ngIf="showArrow">
       <pupa-icon name="app-chevron-down" [@arrowRotated]="animationState$ | async"></pupa-icon>
     </div>
   </div>
 
   <ng-container *ngIf="!destroyable || (expanded$ | async)">
-    <div class="pupa-accordion-body" [@accordionExpanded]="animationState$ | async">
+    <div class="accordion-body" [@accordionExpanded]="animationState$ | async">
       <ng-content select="pupa-accordion-body"></ng-content>
     </div>
   </ng-container>

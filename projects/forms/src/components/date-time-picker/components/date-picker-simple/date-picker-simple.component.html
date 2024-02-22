@@ -7,13 +7,13 @@
 <ng-template #datesTemplate>
   <ng-container [ngTemplateOutlet]="headerDatesTemplate"></ng-container>
 
-  <div class="pupa-date-picker__week-days">
-    <span class="pupa-week-day" *ngFor="let dayName of weekDayNames">
+  <div class="date-picker__week-days">
+    <span class="week-day" *ngFor="let dayName of weekDayNames">
       {{ dayName }}
     </span>
   </div>
 
-  <div class="pupa-date-picker__wrapper">
+  <div class="date-picker__wrapper">
     <ng-container
       [ngTemplateOutlet]="dateButton"
       [ngTemplateOutletContext]="{
@@ -42,7 +42,7 @@
 
 <ng-template #yearsTemplate>
   <ng-container [ngTemplateOutlet]="headerYearsTemplate"></ng-container>
-  <div class="pupa-date-picker__wrapper">
+  <div class="date-picker__wrapper">
     <pupa-date-picker-years
       [years]="primarySectionYears$ | async"
       (selectedYear)="switchToYear($event)"
@@ -52,47 +52,45 @@
 
 <ng-template #monthsTemplate>
   <ng-container [ngTemplateOutlet]="headerMonthsTemplate"></ng-container>
-  <div class="pupa-date-picker__wrapper">
+  <div class="date-picker__wrapper">
     <pupa-date-picker-months (selectedMonth)="switchToMonth($event)"></pupa-date-picker-months>
   </div>
 </ng-template>
 
 <ng-template #dateButton let-dateOrigin="dateOrigin" let-disabled="disabled">
   <div
-    class="pupa-date-wrapper"
+    class="date-wrapper"
     *ngFor="let date of dateOrigin; index as index; last as last; first as first"
-    [class.pupa-date-wrapper__disabled]="
+    [class.date-wrapper__disabled]="
       disabled ||
       dateIsNotAvailable(date, isBackDating$ | async, availableStartDate$ | async, availableEndDate$ | async)
     "
-    [class.pupa-date-wrapper__range]="
+    [class.date-wrapper__range]="
       !disabled &&
       !(isSelectionModeDate$ | async) &&
       (dateIsInDateRange(date, selectedRange$ | async) || dateIsInDateRange(date, hoveredRange$ | async))
     "
-    [class.pupa-date-wrapper__first]="!disabled && first"
-    [class.pupa-date-wrapper__last]="!disabled && last"
+    [class.date-wrapper__first]="!disabled && first"
+    [class.date-wrapper__last]="!disabled && last"
   >
     <div
-      class="pupa-date"
-      [class.pupa-date__range-start]="
+      class="date"
+      [class.date__range-start]="
         isDateStartInHoveredAndSelectedRange(date, hoveredRange$ | async, selectedRange$ | async)
       "
-      [class.pupa-date__range-end]="
-        isDateEndInHoveredAndSelectedRange(date, hoveredRange$ | async, selectedRange$ | async)
-      "
+      [class.date__range-end]="isDateEndInHoveredAndSelectedRange(date, hoveredRange$ | async, selectedRange$ | async)"
       (mouseover)="processDateHover(date)"
       (click)="processDateSelection(date)"
     >
       <div
-        class="pupa-date-inner"
-        [class.pupa-date-inner__selected]="
+        class="date-inner"
+        [class.date-inner__selected]="
           (isSelectionModeDate$ | async)
             ? isSameDate(date, selectedDate$ | async)
             : dateIsInDateArray(date, selectedRange$ | async)
         "
-        [class.pupa-date-inner__current]="isSameDate(date, defaultCurrentDateWithClearedTime)"
-        [class.pupa-date-inner__disabled]="
+        [class.date-inner__current]="isSameDate(date, defaultCurrentDateWithClearedTime)"
+        [class.date-inner__disabled]="
           disabled ||
           dateIsNotAvailable(date, isBackDating$ | async, availableStartDate$ | async, availableEndDate$ | async)
         "
@@ -104,72 +102,68 @@
 </ng-template>
 
 <ng-template #headerDatesTemplate>
-  <div class="pupa-date-picker__header">
+  <div class="date-picker__header">
     <button
-      class="pupa-arrow-button"
-      [class.pupa-not-showing]="isRightDoubleDatePicker$ | async"
+      class="arrow-button"
+      [class.not-showing]="isRightDoubleDatePicker$ | async"
       (click)="switchToPreviousMonth()"
     >
       <pupa-icon name="ios-arrow-back"></pupa-icon>
     </button>
-    <span class="pupa-title">
+    <span class="title">
       <div
-        class="pupa-title__month"
-        [class.pupa-disable-hover]="isDatePickerDoubleModeEnabled$ | async"
+        class="title__month"
+        [class.disable-hover]="isDatePickerDoubleModeEnabled$ | async"
         (click)="switchDatePickerPreviewMode(datePickerPreviewMode.Months)"
       >
         {{ primarySectionStartDate$ | async | date : 'LLLL' | titlecase }}
       </div>
       &nbsp;&nbsp;
       <div
-        class="pupa-title__year"
-        [class.pupa-disable-hover]="isDatePickerDoubleModeEnabled$ | async"
+        class="title__year"
+        [class.disable-hover]="isDatePickerDoubleModeEnabled$ | async"
         (click)="switchDatePickerPreviewMode(datePickerPreviewMode.Years)"
       >
         {{ primarySectionStartDate$ | async | date : 'yyy' | titlecase }}
       </div>
     </span>
-    <button
-      class="pupa-arrow-button"
-      [class.pupa-not-showing]="isLeftDoubleDatePicker$ | async"
-      (click)="switchToNextMonth()"
-    >
+    <button class="arrow-button" [class.not-showing]="isLeftDoubleDatePicker$ | async" (click)="switchToNextMonth()">
       <pupa-icon name="ios-arrow-forward"></pupa-icon>
     </button>
   </div>
 </ng-template>
 
 <ng-template #headerYearsTemplate>
-  <div class="pupa-date-picker__header">
-    <button class="pupa-arrow-button" (click)="switchToPreviousYearsPeriod()">
+  <div class="date-picker__header">
+    <button class="arrow-button" (click)="switchToPreviousYearsPeriod()">
       <pupa-icon name="ios-arrow-back"></pupa-icon>
     </button>
-    <span class="pupa-title selected">
-      <div class="pupa-title__year">
+    <span class="title selected">
+      <div class="title__year">
         {{ primarySectionYearsStartYear$ | async }}
       </div>
       &nbsp;-&nbsp;
-      <div class="pupa-title__year">
+      <div class="title__year">
         {{ primarySectionYearsEndYear$ | async }}
       </div>
     </span>
-    <button class="pupa-arrow-button" (click)="switchToNextYearsPeriod()">
+    <button class="arrow-button" (click)="switchToNextYearsPeriod()">
       <pupa-icon name="ios-arrow-forward"></pupa-icon>
     </button>
   </div>
 </ng-template>
 
 <ng-template #headerMonthsTemplate>
-  <div class="pupa-date-picker__header">
-    <button class="pupa-arrow-button" (click)="switchToPreviousYear()">
+  <div class="date-picker__header">
+    <button class="arrow-button" (click)="switchToPreviousYear()">
       <pupa-icon name="ios-arrow-back"></pupa-icon>
     </button>
-    <span class="pupa-title selected">
-      <div class="pupa-title__year">
+    <span class="title selected">
+      <div class="title__year">
         {{ baseYear$ | async }}
       </div>
     </span>
-    <button class="pupa-arrow-button" (click)="switchToNextYear()">
+    <button class="arrow-button" (click)="switchToNextYear()">
       <pupa-icon name="ios-arrow-forward"></pupa-icon>
     </button>
   </div>

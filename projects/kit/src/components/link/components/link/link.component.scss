@@ -1,5 +1,5 @@
-@use 'mixins';
-@use 'functions';
+@use 'mixins' as *;
+@use 'functions' as *;
 
 :host {
   appearance: none;
@@ -15,11 +15,11 @@
   border: none;
   padding: 0;
 
-  .pupa-link-content {
+  .link-content {
     position: relative;
     white-space: nowrap;
 
-    color: functions.semantic-color(link-normal);
+    color: semantic-color(link-normal);
 
     &::after {
       content: '';
@@ -31,60 +31,60 @@
       display: none;
       z-index: 1;
 
-      background-color: functions.semantic-color(link-normal);
+      background-color: semantic-color(link-normal);
     }
   }
 
-  @include mixins.hover {
-    .pupa-link-content {
-      color: functions.semantic-color(link-hover);
+  @include hover {
+    .link-content {
+      color: semantic-color(link-hover);
 
       &::after {
-        background-color: functions.semantic-color(link-hover);
+        background-color: semantic-color(link-hover);
         display: block;
       }
     }
   }
 
   &:active {
-    .pupa-link-content {
-      color: functions.semantic-color(link-pressed);
+    .link-content {
+      color: semantic-color(link-pressed);
 
       &::after {
-        background-color: functions.semantic-color(link-pressed);
+        background-color: semantic-color(link-pressed);
       }
     }
   }
 
   &:visited {
-    .pupa-link-content {
-      color: functions.semantic-color(link-visited);
+    .link-content {
+      color: semantic-color(link-visited);
 
       &::after {
-        background-color: functions.semantic-color(link-visited);
+        background-color: semantic-color(link-visited);
       }
     }
   }
 
   &:focus-visible {
-    .pupa-link-content {
-      .pupa-substrate {
+    .link-content {
+      .substrate {
         border-width: 1px;
         border-style: solid;
         border-radius: 2px;
 
-        border-color: functions.semantic-color(lines-accent);
+        border-color: semantic-color(lines-accent);
       }
     }
   }
 }
 
-.pupa-icon {
+.icon {
   margin-right: 1rem;
   margin-top: -0.25em;
 }
 
-.pupa-substrate {
+.substrate {
   position: absolute;
   width: calc(100% + 2rem);
   height: calc(100% + 2px);

@@ -1,15 +1,15 @@
-@use 'mixins';
-@use 'functions';
-@use '../../styles/calendar.styles';
+@use 'mixins' as *;
+@use 'functions' as *;
+@use '../../styles/calendar.styles' as *;
 
 :host {
   display: block;
-  width: calendar.$day-size;
-  height: calendar.$day-size;
+  width: $day-size;
+  height: $day-size;
   aspect-ratio: 1 / 1;
 }
 
-.pupa-day {
+.day {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,64 +22,64 @@
   border-color: transparent;
   background-color: transparent;
 
-  border-radius: calendar.$day-border-radius;
+  border-radius: $day-border-radius;
 
   cursor: pointer;
 
-  transition: functions.variable(transition-duration_shortest) functions.variable(transition-timing-function_common);
+  transition: variable(transition-duration_shortest) variable(transition-timing-function_common);
 
-  @include mixins.font-preset-caption-xs();
+  @include font-preset-caption-xs();
 
-  @include mixins.hover() {
-    background-color: functions.semantic-color(kind-neutral-hover);
+  @include hover() {
+    background-color: semantic-color(kind-neutral-hover);
   }
 
   &:active {
-    background-color: functions.semantic-color(kind-neutral-pressed);
+    background-color: semantic-color(kind-neutral-pressed);
   }
 
   &:focus-visible {
-    border: 1px solid functions.semantic-color(lines-accent);
+    border: 1px solid semantic-color(lines-accent);
     outline: none;
   }
 }
 
-.pupa-day_current {
-  border: 1px solid functions.semantic-color(kind-primary-normal);
+.day_current {
+  border: 1px solid semantic-color(kind-primary-normal);
 }
 
-.pupa-day_selected {
-  background-color: functions.semantic-color(kind-primary-normal);
-  color: functions.semantic-color(text-inverse);
+.day_selected {
+  background-color: semantic-color(kind-primary-normal);
+  color: semantic-color(text-inverse);
 
-  @include mixins.font-preset-h6();
+  @include font-preset-h6();
 
-  @include mixins.hover() {
-    background-color: functions.semantic-color(kind-primary-hover);
+  @include hover() {
+    background-color: semantic-color(kind-primary-hover);
   }
 
   &:active {
-    background-color: functions.semantic-color(kind-primary-pressed);
+    background-color: semantic-color(kind-primary-pressed);
   }
 }
 
-.pupa-day_disabled {
-  color: functions.semantic-color(text-disabled);
+.day_disabled {
+  color: semantic-color(text-disabled);
   background-color: transparent;
 
-  @include mixins.hover() {
+  @include hover() {
     background-color: transparent;
   }
 }
 
-.pupa-day_empty {
+.day_empty {
   cursor: default;
 
   background-color: transparent;
   color: transparent;
   border: none;
 
-  @include mixins.hover() {
+  @include hover() {
     border: none;
     background-color: transparent;
   }
