@@ -2,8 +2,8 @@ import { TableColumnPin } from '../enums/table-column-pin.enum';
 import { TableAdaptiveColumnSizes } from './table-adaptive-column-sizes.interface';
 import { TableColumnSizes } from './table-column-sizes.interface';
 
-export interface TableColumnDefinition<TFeatureOptions = unknown, TModel = unknown> {
-  id: TModel extends object ? keyof TModel : string;
+export interface TableColumnDefinition<TFeatureOptions = unknown, TModel = unknown, SType = never> {
+  id: TModel extends object ? keyof TModel | SType : string;
   modelKey?: TModel extends object ? keyof TModel : string;
   title?: string;
   pin?: TableColumnPin;
