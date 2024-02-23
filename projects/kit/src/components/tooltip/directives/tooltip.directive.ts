@@ -19,8 +19,8 @@ import { TooltipService } from '../services/tooltip.service';
   exportAs: 'pupaTooltip',
 })
 export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit {
-  @Input() public tooltipHideOnHover: boolean = true;
-  @Input() public tooltipDisabled: boolean = false;
+  @Input() public tooltipHideOnHover: boolean | null = true;
+  @Input() public tooltipDisabled: boolean | null = false;
   @Input() public tooltipDelayMs: number = 0;
   @Input() public tooltipAppearance: TooltipAppearance = 'always';
 
@@ -63,8 +63,8 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
     this.subscription.unsubscribe();
   }
 
-  private processDisabledChanges(change: ComponentChange<this, boolean>): void {
-    if (isNil(change)) {
+  private processDisabledChanges(change: ComponentChange<this, boolean | null> | undefined): void {
+    if (isNil(change) || isNil(change.currentValue)) {
       return;
     }
 
@@ -75,8 +75,8 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
     }
   }
 
-  private processHideOnTooltipHoverChanges(change: ComponentChange<this, boolean>): void {
-    if (isNil(change)) {
+  private processHideOnTooltipHoverChanges(change: ComponentChange<this, boolean | null> | undefined): void {
+    if (isNil(change) || isNil(change.currentValue)) {
       return;
     }
     this.tooltipService.setTooltipHideOnHoverState(change.currentValue);
