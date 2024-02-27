@@ -670,14 +670,14 @@
           "alpha": "alpha-1000"
         },
         "darkColor": {
-          "color": "neutral-400",
+          "color": "neutral-500",
           "alpha": "alpha-1000"
         }
       },
       {
         "name": "Search",
         "lightColor": {
-          "color": "index-yellow-500",
+          "color": "index-yellow-200",
           "alpha": "alpha-1000"
         },
         "darkColor": {
