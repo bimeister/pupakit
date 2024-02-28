@@ -1,4 +1,4 @@
-<div class="input-wrapper" [ngClass]="resultClassList$ | async">
+<div class="input-wrapper" [ngClass]="resultClassList$ | async" (click)="handleFocusOnContainerClick()">
   <div class="input-control">
     <ng-container [ngTemplateOutlet]="inputActionsLeftDirective?.templateRef"></ng-container>
 

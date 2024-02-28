@@ -1,4 +1,4 @@
-<div class="input-wrapper" [ngClass]="resultClassList$ | async">
+<div class="input-wrapper" [ngClass]="resultClassList$ | async" (click)="handleFocusOnContainerClick()">
   <div class="input-control">
     <pupa-icon-holder size="small" [withBackground]="false">
       <pupa-icon name="app-clock"></pupa-icon>

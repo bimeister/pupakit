@@ -24,6 +24,7 @@
   transition: background-color variable(transition-duration_shorter) variable(transition-timing-function_common),
     border-color variable(transition-duration_shorter) variable(transition-timing-function_common);
   width: 100%;
+  cursor: pointer;
 
   .input {
     background-color: transparent;
