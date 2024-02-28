@@ -13,9 +13,16 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { concatBoolean, distinctUntilSerializedChanged, isEmpty, isNil, Nullable } from '@bimeister/utilities';
+import {
+  concatBoolean,
+  distinctUntilSerializedChanged,
+  filterFalsy,
+  isEmpty,
+  isNil,
+  Nullable,
+} from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { distinctUntilChanged, map } from 'rxjs/operators';
+import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { InputActionsLeftDirective } from '../../../components/input/directives/input-actions-left.directive';
 import { InputActionsRightDirective } from '../../../components/input/directives/input-actions-right.directive';
 import { isDate } from '../../../declarations/functions/is-date.function';
@@ -182,6 +189,12 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
         )
       )
       .subscribe((isVisibleSeparator: boolean) => this.setIsVisibleSeparatorState(isVisibleSeparator));
+  }
+
+  public handleFocusOnContainerClick(): void {
+    combineLatest([this.isDisabled$, this.isFocused$])
+      .pipe(take(1), concatBoolean('or'), filterFalsy())
+      .subscribe(() => this.focusOnInputElement());
   }
 
   private processFormControlChange(change: ComponentChange<this, FormControl>): void {

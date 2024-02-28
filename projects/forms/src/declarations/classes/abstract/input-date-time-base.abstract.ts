@@ -130,6 +130,8 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
   }
 
   public handleContainerClick(event: Event): void {
+    this.handleFocusOnContainerClick();
+
     this.isDisabled$
       .pipe(
         take(1),
