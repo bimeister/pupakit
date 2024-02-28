@@ -9,7 +9,7 @@ import { ComponentPortal } from '@angular/cdk/portal';
 import { ElementRef, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { ClientUiStateHandlerService, OVERLAY_VIEWPORT_MARGIN_PX, Position } from '@bimeister/pupakit.common';
 import { Uuid, getUuid, isNil } from '@bimeister/utilities';
-import { Observable, Subscription, fromEvent, merge } from 'rxjs';
+import { Observable, Subscription, fromEvent, merge, of } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PopoverContainerComponent } from '../../components/popover/components/popover-container/popover-container.component';
 import { PopoverConfig } from '../interfaces/popover-config.interface';
@@ -155,13 +155,17 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
     const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
 
-    let anchorMouseEnter$: Observable<Event>;
+    let anchorMouseEnter$: Observable<Event | null> = of(null);
     if (this.config.anchor instanceof ElementRef) {
       anchorMouseEnter$ = fromEvent(this.config.anchor.nativeElement, 'mouseenter');
     }
 
     return merge(anchorMouseEnter$, mouseDown$, touchMove$, wheel$, resize$).subscribe(
-      (event: MouseEvent | TouchEvent | WheelEvent | Event) => {
+      (event: MouseEvent | TouchEvent | WheelEvent | Event | null) => {
+        if (isNil(event)) {
+          return;
+        }
+
         const eventTarget: HTMLElement = event.target as HTMLElement;
 
         if (this.isContainsElementOnAnchor(eventTarget)) {
