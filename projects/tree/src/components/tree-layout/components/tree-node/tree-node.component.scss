@@ -62,6 +62,7 @@
     }
 
     &-container {
+      gap: 1rem;
       @include flex-container(row, center, flex-end);
       position: relative;
       z-index: 2;
