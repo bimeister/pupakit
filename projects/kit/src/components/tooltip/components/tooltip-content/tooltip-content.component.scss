@@ -31,7 +31,7 @@ $tooltip_max-text-lines-count: 13;
     @include mixins.font-size-xs($paragraph: true);
 
     line-height: 4.5rem;
-    max-width: 126rem;
+    max-width: 100rem;
     max-height: 64rem;
     overflow: auto;
   }
