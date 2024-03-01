@@ -1,20 +1,20 @@
 <button
-  class="button icon-button"
+  class="pupa-button pupa-icon-button"
   [ngClass]="resultClassList$ | async"
   [type]="type"
   [tabIndex]="tabIndex"
   [disabled]="(disabled$ | async) ? true : null"
 >
-  <div class="button__content" focusable="false">
+  <div class="pupa-button__content" focusable="false">
     <pupa-icon
-      class="button__icon"
+      class="pupa-button__icon"
       [name]="icon$ | async"
       *ngIf="icon$ | async"
-      [class.hidden]="loading$ | async"
+      [class.pupa-hidden]="loading$ | async"
     ></pupa-icon>
   </div>
 
-  <div class="button__loading" *ngIf="loading$ | async" focusable="false">
+  <div class="pupa-button__loading" *ngIf="loading$ | async" focusable="false">
     <pupa-loader [size]="loadingSizePx$ | async"></pupa-loader>
   </div>
 </button>

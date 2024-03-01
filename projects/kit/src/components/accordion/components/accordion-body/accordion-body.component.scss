@@ -1,7 +1,7 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: -webkit-box;
   padding: 3rem;
-  @include font-preset-body-s();
+  @include mixins.font-preset-body-s();
 }

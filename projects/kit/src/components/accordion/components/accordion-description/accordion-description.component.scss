@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: -webkit-box;
@@ -6,5 +6,5 @@
   -webkit-line-clamp: 1;
   overflow: hidden;
 
-  @include font-size-xxs();
+  @include mixins.font-size-xxs();
 }

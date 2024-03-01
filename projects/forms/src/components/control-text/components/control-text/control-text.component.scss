@@ -1,17 +1,17 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
-.control-text {
+.pupa-control-text {
   height: auto;
   min-height: 4.5rem;
   font-size: 3rem;
   line-height: 1.5;
   margin: 0;
   padding: 0;
-  color: semantic-color(text-primary);
-  @include font-type-regular;
+  color: functions.semantic-color(text-primary);
+  @include mixins.font-type-regular;
 
   &_error {
-    color: semantic-color(kind-danger-normal);
+    color: functions.semantic-color(kind-danger-normal);
   }
 }

@@ -1,8 +1,8 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
+@use 'variables';
 
-@mixin textarea-fonts {
+@mixin pupa-textarea-fonts {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
@@ -14,38 +14,38 @@
   width: 100%;
 }
 
-.textarea {
+.pupa-textarea {
   display: block;
   padding: 0;
   border: 1px solid transparent;
-  border-radius: $controlBorderRadius;
+  border-radius: variables.$controlBorderRadius;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
-  @include font-preset-caption-xs();
+  @include mixins.font-preset-caption-xs();
 
   &.large {
-    .textarea__pseudo-content,
-    .textarea__control {
+    .pupa-textarea__pseudo-content,
+    .pupa-textarea__control {
       min-height: 10rem;
       padding: 3rem 2rem;
     }
   }
 
   &.medium {
-    .textarea__pseudo-content,
-    .textarea__control {
+    .pupa-textarea__pseudo-content,
+    .pupa-textarea__control {
       min-height: 8rem;
       padding: 2rem;
     }
   }
 
   &__scrollable {
-    @include textarea-fonts;
+    @include pupa-textarea-fonts;
     width: 100%;
   }
 
   &__wrapper {
-    @include textarea-fonts;
+    @include pupa-textarea-fonts;
 
     position: relative;
     display: grid;
@@ -105,79 +105,79 @@
     cursor: not-allowed;
     user-select: none;
 
-    .textarea__control {
+    .pupa-textarea__control {
       cursor: not-allowed;
     }
 
-    .textarea__control::selection {
+    .pupa-textarea__control::selection {
       background: transparent;
     }
   }
 }
 
 // container colors
-.textarea {
-  color: semantic-color(text-primary);
-  background-color: semantic-color(surface-primary);
-  border-color: semantic-color(lines-opacity);
+.pupa-textarea {
+  color: functions.semantic-color(text-primary);
+  background-color: functions.semantic-color(surface-primary);
+  border-color: functions.semantic-color(lines-opacity);
 }
 
 // control colors
-.textarea__control {
-  color: semantic-color(text-primary);
+.pupa-textarea__control {
+  color: functions.semantic-color(text-primary);
 }
 
 // control placeholder
-.textarea__control::placeholder {
-  color: semantic-color(text-secondary);
+.pupa-textarea__control::placeholder {
+  color: functions.semantic-color(text-secondary);
 }
 
-.textarea:not(.textarea_disabled) {
-  @include hover() {
-    background-color: semantic-color(surface-tertiary);
-    border-color: semantic-color(kind-primary-normal);
+.pupa-textarea:not(.pupa-textarea_disabled) {
+  @include mixins.hover() {
+    background-color: functions.semantic-color(surface-tertiary);
+    border-color: functions.semantic-color(kind-primary-normal);
 
-    .textarea__control::placeholder {
-      color: semantic-color(text-primary);
+    .pupa-textarea__control::placeholder {
+      color: functions.semantic-color(text-primary);
     }
   }
 
   &:focus-within {
-    background-color: semantic-color(surface-primary);
-    border-color: semantic-color(kind-primary-normal);
+    background-color: functions.semantic-color(surface-primary);
+    border-color: functions.semantic-color(kind-primary-normal);
 
-    .textarea__control::placeholder {
-      color: semantic-color(text-primary);
+    .pupa-textarea__control::placeholder {
+      color: functions.semantic-color(text-primary);
     }
   }
 
-  &.textarea_invalid {
-    border-color: semantic-color(kind-danger-normal);
+  &.pupa-textarea_invalid {
+    border-color: functions.semantic-color(kind-danger-normal);
   }
 }
 
-.textarea_disabled {
-  color: semantic-color(text-disabled);
-  background-color: semantic-color(kind-neutral-disabled);
+.pupa-textarea_disabled {
+  color: functions.semantic-color(text-disabled);
+  background-color: functions.semantic-color(kind-neutral-disabled);
 
-  .textarea__control {
-    color: semantic-color(text-disabled);
+  .pupa-textarea__control {
+    color: functions.semantic-color(text-disabled);
 
     &::placeholder {
-      color: semantic-color(text-disabled);
+      color: functions.semantic-color(text-disabled);
     }
   }
 }
 
-.counter {
+.pupa-counter {
   display: block;
   text-align: right;
   width: 100%;
   margin-top: 2px;
-  @include font-size-xxs();
-  color: semantic-color(text-secondary);
+  @include mixins.font-size-xxs();
+  color: functions.semantic-color(text-secondary);
 
   &_invalid {
-    color: semantic-color(kind-danger-normal);
+    color: functions.semantic-color(kind-danger-normal);
   }
 }

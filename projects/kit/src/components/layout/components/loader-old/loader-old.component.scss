@@ -1,5 +1,4 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   margin: 4rem;
@@ -10,7 +9,7 @@
   height: 36.25rem;
   user-select: none;
   pointer-events: none;
-  @include flex-container(row, center, center, nowrap);
+  @include mixins.flex-container(row, center, center, nowrap);
 }
 
 .loader-old {
@@ -31,10 +30,12 @@
     top: 22%;
     left: 0;
   }
+
   &_center {
     top: 45%;
     left: 50% - 1.6%;
   }
+
   &_right {
     top: 22%;
     right: 0;
@@ -53,11 +54,13 @@
     top: 0;
     left: 0;
     transform-origin: center bottom;
+
     img {
       position: absolute;
       top: -28%;
     }
   }
+
   &_bottom {
     bottom: 0;
     left: 0;

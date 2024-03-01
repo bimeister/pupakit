@@ -1,7 +1,7 @@
-<div class="tooltip" [@tooltipShow]>
-  <div class="tooltip__animation-container" [style.transform]="styleTransform$ | async">
-    <div class="tooltip__content-container">
-      <div class="tooltip__content">
+<div class="pupa-tooltip" [@tooltipShow]>
+  <div class="pupa-tooltip__animation-container" [style.transform]="styleTransform$ | async">
+    <div class="pupa-tooltip__content-container">
+      <div class="pupa-tooltip__content">
         <ng-container *ngIf="tooltipContentTemplate$ | async as tooltipContentTemplate; else simpleTooltipContent">
           <ng-container [ngTemplateOutlet]="tooltipContentTemplate"></ng-container>
         </ng-container>
@@ -16,4 +16,4 @@
   </span>
 </ng-template>
 
-<ng-template #emptyTooltipContent> Looks like you forgot to give the tooltip content </ng-template>
+<ng-template #emptyTooltipContent> Looks like you forgot to give the tooltip content</ng-template>

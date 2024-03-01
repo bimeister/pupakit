@@ -24,7 +24,7 @@ export class DroppableContentComponent extends DroppableContent {
   }
 
   public get widthClassName(): string {
-    return `width-${this.widthType}`;
+    return `pupa-width-${this.widthType}`;
   }
 
   public get triggerWidthPx(): number {

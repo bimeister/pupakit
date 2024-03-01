@@ -1,6 +1,6 @@
-@use 'functions' as *;
+@use 'functions';
 
-.content {
+.pupa-content {
   position: relative;
 
   &_required {
@@ -8,7 +8,7 @@
   }
 
   &__required-asterisk {
-    color: semantic-color(kind-danger-normal);
+    color: functions.semantic-color(kind-danger-normal);
     position: absolute;
     top: -1rem;
     left: 0;

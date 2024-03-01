@@ -1,5 +1,3 @@
-@use 'functions' as *;
-
 $max-height_item-container: 75rem;
 
 :host {
@@ -10,7 +8,7 @@ $max-height_item-container: 75rem;
   margin: 2rem 0;
 }
 
-.options-container {
+.pupa-options-container {
   width: 100%;
   height: 100%;
 

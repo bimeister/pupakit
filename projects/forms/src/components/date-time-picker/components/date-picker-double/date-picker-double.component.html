@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="calendar">
+<div class="pupa-container">
+  <div class="pupa-calendar">
     <pupa-date-picker-simple
       [baseDate]="baseDate$ | async"
       [isLeftDoubleDatePicker]="true"
@@ -7,7 +7,7 @@
       (previousMonthClicked)="switchToPreviousMonth()"
     ></pupa-date-picker-simple>
   </div>
-  <div class="calendar">
+  <div class="pupa-calendar">
     <pupa-date-picker-simple
       [baseDate]="baseDateNextMonth$ | async"
       [isRightDoubleDatePicker]="true"

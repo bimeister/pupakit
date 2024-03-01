@@ -17,27 +17,27 @@
   let-isWithLabel="isWithLabel"
 >
   <section
-    class="radio-control"
+    class="pupa-radio-control"
     [tabindex]="tabindex"
-    [class.radio-control_disabled]="isDisabled"
-    [class.radio-control_without-label]="!isWithLabel"
+    [class.pupa-radio-control_disabled]="isDisabled"
+    [class.pupa-radio-control_without-label]="!isWithLabel"
     (keydown.enter)="processClick()"
   >
-    <div class="radio-control-marker-wrapper">
+    <div class="pupa-radio-control-marker-wrapper">
       <div
-        class="radio-control-marker"
-        [class.radio-control-marker_selected]="isSelected"
-        [class.radio-control-marker_disabled]="isDisabled"
+        class="pupa-radio-control-marker"
+        [class.pupa-radio-control-marker_selected]="isSelected"
+        [class.pupa-radio-control-marker_disabled]="isDisabled"
       >
-        <div class="radio-control-marker__dot"></div>
+        <div class="pupa-radio-control-marker__dot"></div>
       </div>
     </div>
     <div
-      class="radio-control-label"
-      [class.radio-control-label_selected]="isSelected"
-      [class.radio-control-label_disabled]="isDisabled"
-      [class.radio-control-label_small]="labelSize === 'small'"
-      [class.radio-control-label_hidden]="!isWithLabel"
+      class="pupa-radio-control-label"
+      [class.pupa-radio-control-label_selected]="isSelected"
+      [class.pupa-radio-control-label_disabled]="isDisabled"
+      [class.pupa-radio-control-label_small]="labelSize === 'small'"
+      [class.pupa-radio-control-label_hidden]="!isWithLabel"
     >
       <ng-content></ng-content>
     </div>

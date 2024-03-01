@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: block;
@@ -6,5 +6,5 @@
   font-size: inherit;
   line-height: inherit;
 
-  @include ellipsis-text-overflow;
+  @include mixins.ellipsis-text-overflow;
 }

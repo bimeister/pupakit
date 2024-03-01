@@ -4,16 +4,16 @@
     let isSortable = isSortable;
     let isIconVisible = isIconVisible
   "
-  class="header-cell"
-  [class.header-cell_sortable]="isSortable"
-  [class.header-cell_sortable-with-icon]="isSortable && isIconVisible"
-  [class.header-cell_dnd-clone]="isDndClone"
-  [class.header-cell_current-draggable]="isCurrentDraggable$ | async"
+  class="pupa-header-cell"
+  [class.pupa-header-cell_sortable]="isSortable"
+  [class.pupa-header-cell_sortable-with-icon]="isSortable && isIconVisible"
+  [class.pupa-header-cell_dnd-clone]="isDndClone"
+  [class.pupa-header-cell_current-draggable]="isCurrentDraggable$ | async"
 >
-  <span class="header-cell__text"> <ng-content></ng-content> </span>
+  <span class="pupa-header-cell__text"> <ng-content></ng-content> </span>
 
-  <div class="header-cell__sort-wrapper" *ngIf="isSortable && isIconVisible">
-    <span class="header-cell__sort">
+  <div class="pupa-header-cell__sort-wrapper" *ngIf="isSortable && isIconVisible">
+    <span class="pupa-header-cell__sort">
       <pupa-icon [name]="iconName$ | async"></pupa-icon>
     </span>
   </div>

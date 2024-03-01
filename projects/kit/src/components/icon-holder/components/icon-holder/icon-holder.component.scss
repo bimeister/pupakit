@@ -1,16 +1,15 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
 
 $largeSize: 12rem;
 $mediumSize: 8rem;
 $smallSize: 6rem;
 $extraSmallSize: 5rem;
 
-@mixin super-rectangle($size) {
+@mixin pupa-super-rectangle($size) {
   width: $size;
   height: $size;
-  $width: trim($size);
-  $height: trim($size);
+  $width: functions.trim($size);
+  $height: functions.trim($size);
   $halfWidth: calc($width / 2);
   $halfHeight: calc($height / 2);
   -webkit-mask: url("data:image/svg+xml;charset=US-ASCII,%3Csvg version='1.1' id='rectangle' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='" + $width + "' height='" + $height + "' viewBox='0 0 " + $width + ' ' + $height + "' enable-background='new 0 0 " + $width + ' ' + $height + "' xml:space='preserve'%3E%3Cpath fill='black' stroke='none' d='M 0," + $halfHeight + ' C 0,0 0,0 ' + $halfWidth + ',0 S ' + $width + ',0 ' + $width + ',' + $halfHeight + ' ' + $width + ',' + $height + ' ' + $halfWidth + ',' + $height + ' 0,' + $height + ' 0,' + $halfHeight + "'%3E%3C/path%3E%3C/svg%3E");
@@ -19,31 +18,31 @@ $extraSmallSize: 5rem;
   -webkit-mask-size: contain;
 }
 
-@mixin semantic-colors-rectangle() {
-  &.holder_danger {
-    background-color: semantic-color(kind-danger-normal);
+@mixin pupa-semantic-colors-rectangle() {
+  &.pupa-holder_danger {
+    background-color: functions.semantic-color(kind-danger-normal);
   }
-  &.holder_neutral {
-    background-color: semantic-color(kind-neutral-normal);
+  &.pupa-holder_neutral {
+    background-color: functions.semantic-color(kind-neutral-normal);
   }
-  &.holder_opacity {
-    background-color: semantic-color(kind-opacity-normal);
+  &.pupa-holder_opacity {
+    background-color: functions.semantic-color(kind-opacity-normal);
   }
-  &.holder_primary {
-    background-color: semantic-color(kind-primary-normal);
+  &.pupa-holder_primary {
+    background-color: functions.semantic-color(kind-primary-normal);
   }
-  &.holder_success {
-    background-color: semantic-color(kind-success-normal);
+  &.pupa-holder_success {
+    background-color: functions.semantic-color(kind-success-normal);
   }
-  &.holder_warning {
-    background-color: semantic-color(kind-warning-normal);
+  &.pupa-holder_warning {
+    background-color: functions.semantic-color(kind-warning-normal);
   }
-  &.holder_disabled {
-    background-color: semantic-color(kind-neutral-disabled);
+  &.pupa-holder_disabled {
+    background-color: functions.semantic-color(kind-neutral-disabled);
   }
 }
 
-.holder {
+.pupa-holder {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,12 +51,12 @@ $extraSmallSize: 5rem;
   border-radius: 1rem;
   box-sizing: border-box;
   aspect-ratio: 1;
-  color: semantic-color(text-primary);
+  color: functions.semantic-color(text-primary);
 
   background: transparent;
 
   &_with-background {
-    background: semantic-color(kind-neutral-normal);
+    background: functions.semantic-color(kind-neutral-normal);
   }
 
   &_large {
@@ -85,36 +84,36 @@ $extraSmallSize: 5rem;
   }
 
   &_with-background {
-    &.holder_large {
+    &.pupa-holder_large {
       $size: $largeSize;
       font-size: 5rem;
 
-      @include super-rectangle($size);
-      @include semantic-colors-rectangle();
+      @include pupa-super-rectangle($size);
+      @include pupa-semantic-colors-rectangle();
     }
 
-    &.holder_medium {
+    &.pupa-holder_medium {
       $size: $mediumSize;
       font-size: 4rem;
 
-      @include super-rectangle($size);
-      @include semantic-colors-rectangle();
+      @include pupa-super-rectangle($size);
+      @include pupa-semantic-colors-rectangle();
     }
 
-    &.holder_small {
+    &.pupa-holder_small {
       $size: $smallSize;
       font-size: 3rem;
 
-      @include super-rectangle($size);
-      @include semantic-colors-rectangle();
+      @include pupa-super-rectangle($size);
+      @include pupa-semantic-colors-rectangle();
     }
 
-    &.holder_extra-small {
+    &.pupa-holder_extra-small {
       $size: $extraSmallSize;
       font-size: 2rem;
 
-      @include super-rectangle($size);
-      @include semantic-colors-rectangle();
+      @include pupa-super-rectangle($size);
+      @include pupa-semantic-colors-rectangle();
     }
   }
 }

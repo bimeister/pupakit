@@ -1,6 +1,5 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use '../../tag-preset.styles.scss' as *;
+@use 'mixins';
+@use 'functions';
 @use '../../tag.styles.scss';
 
 :host {
@@ -8,13 +7,13 @@
   display: inline;
 }
 
-.tag {
-  @include font-preset-h6();
+.pupa-tag {
+  @include mixins.font-preset-h6();
   display: inline;
   border-radius: 1rem;
   padding: 0.5rem 1.5rem;
   min-height: 5rem;
-  color: semantic-color(text-inverse);
+  color: functions.semantic-color(text-inverse);
   line-height: 6rem;
   vertical-align: middle;
 }

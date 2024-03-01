@@ -1,9 +1,8 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
 
-@include scrollbar();
+@include mixins.scrollbar();
 
-.viewport {
+.pupa-viewport {
   width: 100%;
   height: 100%;
   position: relative;
@@ -24,7 +23,7 @@
   }
 }
 
-.virtual-scroll-viewport {
+.pupa-virtual-scroll-viewport {
   height: 100%;
   width: 100%;
 }
