@@ -1,5 +1,5 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 $font-size__digit: 3.5rem;
 $max-height__container: 235px;
@@ -9,15 +9,15 @@ $width_time-picker: 80px;
 $width_time-picker-seconds: 112px;
 $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
 
-.time-picker {
+.pupa-time-picker {
   display: flex;
   height: $max-height__container;
   box-shadow: $box-shadow;
   border-radius: 2rem;
-  background: semantic-color(surface-secondary);
+  background: functions.semantic-color(surface-secondary);
   width: $width_time-picker;
 
-  &.with-seconds {
+  &.pupa-with-seconds {
     width: $width_time-picker-seconds;
   }
 
@@ -45,7 +45,7 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
       height: calc(100% - 4rem);
       width: 1px;
       z-index: 2;
-      background-color: semantic-color(lines-normal);
+      background-color: functions.semantic-color(lines-normal);
     }
   }
 
@@ -62,15 +62,15 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   }
 }
 
-.digit {
+.pupa-digit {
   font-size: $font-size__digit;
   line-height: 4rem;
-  color: semantic-color(text-primary);
+  color: functions.semantic-color(text-primary);
   font-weight: normal;
   padding: 2rem 2rem 1rem 2rem;
   cursor: pointer;
   text-align: center;
-  @include transition(#{'color'});
+  @include mixins.transition(#{'color'});
   user-select: none;
 
   &:last-child {
@@ -78,15 +78,15 @@ $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100
   }
 
   &:hover {
-    color: semantic-color(kind-primary-hover);
+    color: functions.semantic-color(kind-primary-hover);
   }
 
-  &.selected {
-    color: semantic-color(kind-primary-normal);
+  &.pupa-selected {
+    color: functions.semantic-color(kind-primary-normal);
   }
 }
 
-.viewport {
+.pupa-viewport {
   height: 100%;
   width: 100%;
   z-index: 1;

@@ -1,16 +1,14 @@
-@use 'sass:map';
-@use 'maps' as *;
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   // To increase style priority
   html & {
-    @include light-theme-class-parent() {
-      @include apply-light-theme();
+    @include mixins.light-theme-class-parent() {
+      @include mixins.apply-light-theme();
     }
 
-    @include dark-theme-class-parent() {
-      @include apply-dark-theme();
+    @include mixins.dark-theme-class-parent() {
+      @include mixins.apply-dark-theme();
     }
   }
 }

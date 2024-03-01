@@ -1,8 +1,8 @@
 <div
   #stepperItem
-  class="stepper-item"
-  [class.stepper-item_disabled]="disabled"
-  [class.stepper-item_grabbing]="isContentDragging$ | async"
+  class="pupa-stepper-item"
+  [class.pupa-stepper-item_disabled]="disabled"
+  [class.pupa-stepper-item_grabbing]="isContentDragging$ | async"
   (tap)="setAsActive()"
 >
   <pupa-stepper-counter
@@ -10,11 +10,11 @@
     [active]="isActive$ | async"
     [stepCount]="counter$ | async"
   ></pupa-stepper-counter>
-  <div class="stepper-item__title-wrapper">
-    <div class="stepper-item__title">
+  <div class="pupa-stepper-item__title-wrapper">
+    <div class="pupa-stepper-item__title">
       <ng-content></ng-content>
       <div></div>
     </div>
   </div>
 </div>
-<div class="step-line" *ngIf="!(isLastStepperItem$ | async)"></div>
+<div class="pupa-step-line" *ngIf="!(isLastStepperItem$ | async)"></div>

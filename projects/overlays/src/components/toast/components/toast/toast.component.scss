@@ -1,20 +1,20 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: block;
   width: 129rem;
 
-  @include xs {
+  @include mixins.xs {
     width: 100%;
   }
 }
 
-.content {
+.pupa-content {
   display: flex;
   align-items: center;
   gap: 3rem;
 }
 
-.timer {
+.pupa-timer {
   align-self: stretch;
 }

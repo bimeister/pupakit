@@ -1,10 +1,9 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
 
-.badge {
+.pupa-badge {
   position: absolute;
   left: calc(100% - 2px);
-  @include ellipsis-text-overflow;
+  @include mixins.ellipsis-text-overflow;
 
   &__small {
     width: 2rem;
@@ -13,6 +12,7 @@
     right: -0.75rem;
     left: auto;
   }
+
   &__medium {
     height: 4rem;
     max-width: 9rem;

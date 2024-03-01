@@ -1,11 +1,11 @@
 @use './../../button.styles.scss';
 
-:host.flexible {
+:host.pupa-flexible {
   display: flex;
   flex: 1;
 }
 
-.button {
+.pupa-button {
   width: inherit;
   max-width: inherit;
 

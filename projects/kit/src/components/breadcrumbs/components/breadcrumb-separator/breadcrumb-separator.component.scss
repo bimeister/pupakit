@@ -1,18 +1,18 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
 :host {
   display: flex;
 }
 
-.separator {
-  @include font-size-xxs();
+.pupa-separator {
+  @include mixins.font-size-xxs();
 
   cursor: default;
-  color: semantic-color(text-secondary);
+  color: functions.semantic-color(text-secondary);
 
-  @include xs() {
-    @include font-size-xs();
+  @include mixins.xs() {
+    @include mixins.font-size-xs();
     transform: translateY(1px);
   }
 }

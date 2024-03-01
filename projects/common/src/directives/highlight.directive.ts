@@ -48,7 +48,7 @@ export class HighlightDirective implements OnChanges, OnInit, AfterViewInit {
   public ngOnInit(): void {
     this.elementRef.nativeElement.style.position = this.position;
     this.elementRef.nativeElement.style.zIndex = this.zIndex;
-    this.highlight.classList.add(`highlight_${this.pupaHighlightKind}`);
+    this.highlight.classList.add(`pupa-highlight_${this.pupaHighlightKind}`);
   }
 
   public ngAfterViewInit(): void {

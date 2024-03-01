@@ -1,15 +1,15 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 :host {
   display: flex;
   align-items: center;
   flex: 1;
-  color: semantic-color(text-primary);
-  @include font-preset-h3;
+  color: functions.semantic-color(text-primary);
+  @include mixins.font-preset-h3;
 }
 
-.content-wrapper {
-  @include line-clamp(3);
+.pupa-content-wrapper {
+  @include mixins.line-clamp(3);
   word-break: break-all;
 }

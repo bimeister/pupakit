@@ -17,7 +17,7 @@ export abstract class TagBase implements OnChanges {
   @Input() public kind: TagKind = 'opacity';
   private readonly kind$: BehaviorSubject<TagKind> = this.tagStateService.kind$;
 
-  public readonly kindClass$: Observable<string> = this.kind$.pipe(map((kind: TagKind) => `tag_${kind}`));
+  public readonly kindClass$: Observable<string> = this.kind$.pipe(map((kind: TagKind) => `pupa-tag_${kind}`));
   public readonly isInteractive$: Observable<boolean> = combineLatest([
     this.tagStateService.isDisabled$,
     this.tagStateService.isClickable$,

@@ -1,9 +1,8 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
-  @include flex-container(row, center, space-between);
-  @include font-size-s();
-  @include font-type-semibold();
+  @include mixins.flex-container(row, center, space-between);
+  @include mixins.font-size-s();
+  @include mixins.font-type-semibold();
   width: 100%;
 }

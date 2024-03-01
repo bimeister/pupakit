@@ -1,10 +1,10 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 @use '../../date-picker.style.scss';
 
 $max-height_container: 178px;
 
 :host {
-  @include flex-container(row, flex-start, space-between, wrap);
+  @include mixins.flex-container(row, flex-start, space-between, wrap);
   height: $max-height_container;
 }

@@ -1,52 +1,54 @@
-@use './../../button.styles.scss' as *;
-@use 'functions' as *;
+@use './../../button.styles';
+@use 'functions';
 @use 'sass:math';
 
 $borderWidth: 0.5rem;
 
-.button-multi {
+.pupa-button-multi {
   display: flex;
 
-  .reversed-direction {
+  .pupa-reversed-direction {
     display: flex;
     flex-direction: row-reverse;
   }
 
-  .button__icon {
+  .pupa-button__icon {
     transform-origin: 50% 50%;
-    transition: transform variable(transition-duration_shorter) variable(transition-timing-function_common);
+    transition: transform functions.variable(transition-duration_shorter)
+      functions.variable(transition-timing-function_common);
   }
 
-  .button_active {
-    .button__icon {
+  .pupa-button_active {
+    .pupa-button__icon {
       transform: rotate(180deg);
     }
   }
 
-  .button:not(.button-multi_menu-button) {
+  .pupa-button:not(.pupa-button-multi_menu-button) {
     border-right: none;
   }
 }
 
-.button {
+.pupa-button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 
   // imitate right border on focus
   &:focus-visible:not(:disabled) {
-    + .button-multi_menu-button::after {
-      background-color: semantic-color(lines-accent);
+    + .pupa-button-multi_menu-button::after {
+      background-color: functions.semantic-color(lines-accent);
     }
   }
 }
 
-.button-multi_menu-button {
+.pupa-button-multi_menu-button {
   position: relative;
 
-  &:not(.button_border) {
-    border-left: 0.25rem solid color(neutral-1000, alpha-7);
+  &:not(.pupa-button_border) {
+    border-left: 0.25rem solid functions.color(neutral-1000, alpha-7);
   }
-  border-left: 0.25rem solid semantic-color(lines-opacity);
+
+  border-left: 0.25rem solid functions.semantic-color(lines-opacity);
 
   &::after {
     position: absolute;
@@ -64,34 +66,34 @@ $borderWidth: 0.5rem;
   align-items: center;
   justify-content: center;
 
-  &.button_xl {
+  &.pupa-button_xl {
     width: 10rem;
     padding: 3rem;
-    border-radius: 0 $buttonLargeBorderRadius $buttonLargeBorderRadius 0;
+    border-radius: 0 button.$buttonLargeBorderRadius button.$buttonLargeBorderRadius 0;
   }
 
-  &.button_l {
+  &.pupa-button_l {
     width: 8rem;
     padding: 2rem;
-    border-radius: 0 $buttonLargeBorderRadius $buttonLargeBorderRadius 0;
+    border-radius: 0 button.$buttonLargeBorderRadius button.$buttonLargeBorderRadius 0;
   }
 
-  &.button_m {
+  &.pupa-button_m {
     width: 6rem;
     padding: 1.5rem;
-    border-radius: 0 $buttonMediumBorderRadius $buttonMediumBorderRadius 0;
+    border-radius: 0 button.$buttonMediumBorderRadius button.$buttonMediumBorderRadius 0;
   }
 
-  &.button_s {
+  &.pupa-button_s {
     width: 5rem;
     padding: 1rem;
-    border-radius: 0 $buttonMediumBorderRadius $buttonMediumBorderRadius 0;
+    border-radius: 0 button.$buttonMediumBorderRadius button.$buttonMediumBorderRadius 0;
     line-height: 3rem;
   }
 
-  &.button_xs {
+  &.pupa-button_xs {
     width: 4rem;
     padding: 0.5rem;
-    border-radius: 0 $buttonSmallBorderRadius $buttonSmallBorderRadius 0;
+    border-radius: 0 button.$buttonSmallBorderRadius button.$buttonSmallBorderRadius 0;
   }
 }
