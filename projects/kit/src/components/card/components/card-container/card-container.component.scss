@@ -1,6 +1,6 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
+@use 'variables';
 
 $normal-shadow-color: rgba(33, 33, 33, 0.08);
 $hover-shadow-color: rgba(33, 33, 33, 0.1);
@@ -13,42 +13,42 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
   position: relative;
 }
 
-.container {
+.pupa-container {
   display: block;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
 
-  border-radius: $controlBorderRadius;
+  border-radius: variables.$controlBorderRadius;
   border: 2px solid transparent;
   box-shadow: 2px 3px 8px $normal-shadow-color;
   outline: none;
 
-  background-color: semantic-color(surface-secondary);
-  color: semantic-color(text-primary);
+  background-color: functions.semantic-color(surface-secondary);
+  color: functions.semantic-color(text-primary);
 
   &_disabled {
-    color: semantic-color(text-disabled);
+    color: functions.semantic-color(text-disabled);
     box-shadow: 0 1px 7px $disabled-shadow-color;
   }
 
-  &:not(.container_disabled) {
-    @include hover() {
+  &:not(.pupa-container_disabled) {
+    @include mixins.hover() {
       box-shadow: 2px 3px 10px $hover-shadow-color;
     }
   }
 
-  &_clickable:not(.container_disabled) {
+  &_clickable:not(.pupa-container_disabled) {
     cursor: pointer;
 
-    &:not(.container_selected) {
+    &:not(.pupa-container_selected) {
       &:focus {
-        border: 2px solid semantic-color(lines-accent);
+        border: 2px solid functions.semantic-color(lines-accent);
       }
     }
   }
 
-  &_selected:not(.container_disabled) {
+  &_selected:not(.pupa-container_disabled) {
     &::before {
       display: block;
       width: 1rem;
@@ -57,8 +57,8 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
       top: 0;
       left: 0;
       content: '';
-      background-color: semantic-color(kind-primary-normal);
-      border-radius: $controlBorderRadius 0 0 $controlBorderRadius;
+      background-color: functions.semantic-color(kind-primary-normal);
+      border-radius: variables.$controlBorderRadius 0 0 variables.$controlBorderRadius;
     }
   }
 }

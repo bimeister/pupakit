@@ -1,8 +1,7 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
 
 :host {
   display: block;
-  @include ellipsis-text-overflow;
-  @include font-preset-caption-xs();
+  @include mixins.ellipsis-text-overflow;
+  @include mixins.font-preset-caption-xs();
 }

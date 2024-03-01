@@ -1,53 +1,51 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use './tag-preset.styles.scss' as *;
-@use 'variables' as *;
+@use 'functions';
+@use './tag-preset.styles';
 
-.tag {
+.pupa-tag {
   &:not(:only-child) {
     border-radius: 1rem 0 0 1rem;
   }
 
-  &:not(.tag_disabled) {
-    &.tag_clickable {
+  &:not(.pupa-tag_disabled) {
+    &.pupa-tag_clickable {
       cursor: pointer;
     }
 
     &:focus-visible {
-      box-shadow: inset 0 0 0 0.5rem semantic-color(lines-accent);
+      box-shadow: inset 0 0 0 0.5rem functions.semantic-color(lines-accent);
     }
 
-    &.tag_danger {
-      @include tag-color-state('danger');
+    &.pupa-tag_danger {
+      @include tag-preset.pupa-tag-color-state('danger');
     }
 
-    &.tag_opacity {
-      @include tag-color-state('opacity');
+    &.pupa-tag_opacity {
+      @include tag-preset.pupa-tag-color-state('opacity');
 
-      color: semantic-color(text-primary);
+      color: functions.semantic-color(text-primary);
     }
 
-    &.tag_primary {
-      @include tag-color-state('primary');
+    &.pupa-tag_primary {
+      @include tag-preset.pupa-tag-color-state('primary');
     }
 
-    &.tag_success {
-      @include tag-color-state('success');
+    &.pupa-tag_success {
+      @include tag-preset.pupa-tag-color-state('success');
     }
 
-    &.tag_warning {
-      @include tag-color-state('warning');
+    &.pupa-tag_warning {
+      @include tag-preset.pupa-tag-color-state('warning');
     }
 
-    &.tag_custom {
-      @include tag-custom-color-variables();
-      @include tag-custom-color-defaults();
+    &.pupa-tag_custom {
+      @include tag-preset.pupa-tag-custom-color-variables();
+      @include tag-preset.pupa-tag-custom-color-defaults();
     }
 
-    &.tag_selected {
+    &.pupa-tag_selected {
       position: relative;
-      color: semantic-color(text-primary);
-      background-color: semantic-color(kind-primary-normal, alpha-7);
+      color: functions.semantic-color(text-primary);
+      background-color: functions.semantic-color(kind-primary-normal, alpha-7);
 
       &::before {
         content: '';
@@ -55,13 +53,13 @@
         left: 0;
         width: 1rem;
         height: 100%;
-        border-left: 1rem solid semantic-color(kind-primary-normal);
+        border-left: 1rem solid functions.semantic-color(kind-primary-normal);
         border-radius: 1rem;
       }
     }
   }
 
-  &.tag_disabled {
-    @include disabled-color-state();
+  &.pupa-tag_disabled {
+    @include tag-preset.pupa-disabled-color-state();
   }
 }

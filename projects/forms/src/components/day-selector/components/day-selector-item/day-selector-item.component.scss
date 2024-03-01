@@ -1,6 +1,6 @@
-@use 'functions' as *;
-@use 'mixins' as *;
-@use 'variables' as *;
+@use 'functions';
+@use 'mixins';
+@use 'variables';
 
 $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
@@ -9,7 +9,7 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
   width: 8rem;
   height: 8rem;
 
-  @include font-preset-caption-m();
+  @include mixins.font-preset-caption-m();
 
   line-height: 7rem;
 
@@ -20,7 +20,7 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
     width: 7rem;
     height: 7rem;
 
-    @include font-preset-caption-xs();
+    @include mixins.font-preset-caption-xs();
     line-height: 6rem;
   }
 
@@ -28,22 +28,22 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
     width: 6rem;
     height: 6rem;
 
-    @include font-preset-caption-xxs();
+    @include mixins.font-preset-caption-xxs();
     line-height: 5rem;
   }
 }
 
-.day-selector-item {
+.pupa-day-selector-item {
   box-sizing: border-box;
   width: 100%;
   height: 100%;
-  border-radius: $controlBorderRadius;
+  border-radius: variables.$controlBorderRadius;
   border: 0.5rem solid transparent;
   cursor: pointer;
 
-  color: semantic-color(text-primary);
+  color: functions.semantic-color(text-primary);
 
-  @include transition();
+  @include mixins.transition();
   transition-property: background-color, border-color;
 
   &__content {
@@ -55,34 +55,34 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
 
   &:focus {
     outline: none;
-    border-color: semantic-color(kind-primary-hover) !important;
+    border-color: functions.semantic-color(kind-primary-hover) !important;
   }
 
-  &:hover:not(.selected):not(.disabled) {
-    background: semantic-color(kind-neutral-hover);
+  &:hover:not(.pupa-selected):not(.pupa-disabled) {
+    background: functions.semantic-color(kind-neutral-hover);
   }
 
-  &.selected {
-    color: semantic-color(text-primary);
+  &.pupa-selected {
+    color: functions.semantic-color(text-primary);
   }
 
-  &.selected &__content {
+  &.pupa-selected &__content {
     box-shadow: 1px 1px 5px $box-shadow-selector-item-color;
 
-    background: semantic-color(surface-secondary);
+    background: functions.semantic-color(surface-secondary);
   }
 
-  &:hover.selected:not(.disabled) {
-    border-color: semantic-color(kind-neutral-normal);
+  &:hover.pupa-selected:not(.pupa-disabled) {
+    border-color: functions.semantic-color(kind-neutral-normal);
   }
 
-  &.disabled {
+  &.pupa-disabled {
     cursor: not-allowed;
 
-    color: semantic-color(text-disabled);
+    color: functions.semantic-color(text-disabled);
   }
 
-  &.disabled.selected &__content {
-    background: semantic-color(kind-neutral-pressed);
+  &.pupa-disabled.pupa-selected &__content {
+    background: functions.semantic-color(kind-neutral-pressed);
   }
 }

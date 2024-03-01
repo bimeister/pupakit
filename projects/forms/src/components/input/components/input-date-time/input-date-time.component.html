@@ -1,20 +1,20 @@
-<div class="base-input-container date time" [class.fixed-size]="isFixedSize$ | async">
+<div class="pupa-base-input-container pupa-date pupa-time" [class.pupa-fixed-size]="isFixedSize$ | async">
   <pupa-droppable #droppable>
-    <pupa-droppable-trigger class="dropdown-trigger">
+    <pupa-droppable-trigger class="pupa-dropdown-trigger">
       <div
-        class="input-wrapper"
+        class="pupa-input-wrapper"
         [ngClass]="resultClassList$ | async"
         (click)="handleContainerClick($event)"
         (mousedown)="handleContainerStartEvents($event)"
       >
-        <div class="input-control">
+        <div class="pupa-input-control">
           <pupa-icon-holder size="small" [withBackground]="false">
             <pupa-icon name="app-calendar"></pupa-icon>
           </pupa-icon-holder>
 
           <!-- NOTE: ngModel is incorrect: use other mask instead -->
           <input
-            class="input"
+            class="pupa-input"
             #inputElement
             type="text"
             [placeholder]="dateTimeMask"
@@ -30,7 +30,7 @@
           />
         </div>
 
-        <div *ngIf="isVisibleDefaultActions$ | async" class="input-default-actions">
+        <div *ngIf="isVisibleDefaultActions$ | async" class="pupa-input-default-actions">
           <pupa-button-icon
             *ngIf="isVisibleReset$ | async"
             icon="app-close-square"
@@ -50,7 +50,7 @@
             [tooltipContentTemplate]="invalidTooltipContentTemplate"
             (click)="inputElement.focus()"
           >
-            <pupa-icon class="input-icon_invalid" name="app-error-filled"></pupa-icon>
+            <pupa-icon class="pupa-input-icon_invalid" name="app-error-filled"></pupa-icon>
           </pupa-icon-holder>
         </div>
       </div>

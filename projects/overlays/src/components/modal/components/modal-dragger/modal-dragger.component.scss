@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: block;
@@ -10,7 +10,7 @@
     cursor: grabbing;
   }
 
-  @include xs() {
+  @include mixins.xs() {
     pointer-events: none;
   }
 }

@@ -1,9 +1,9 @@
-<div class="input-wrapper" [ngClass]="resultClassList$ | async" (click)="handleFocusOnContainerClick()">
-  <div class="input-control">
+<div class="pupa-input-wrapper" [ngClass]="resultClassList$ | async" (click)="handleFocusOnContainerClick()">
+  <div class="pupa-input-control">
     <ng-container [ngTemplateOutlet]="inputActionsLeftDirective?.templateRef"></ng-container>
 
     <input
-      class="input"
+      class="pupa-input"
       type="text"
       #inputElement
       [placeholder]="placeholder"
@@ -18,7 +18,7 @@
     />
   </div>
 
-  <div *ngIf="isVisibleDefaultActions$ | async" class="input-default-actions">
+  <div *ngIf="isVisibleDefaultActions$ | async" class="pupa-input-default-actions">
     <pupa-button-icon
       *ngIf="isVisibleReset$ | async"
       icon="app-close-square"
@@ -38,11 +38,11 @@
       [tooltipContentTemplate]="invalidTooltipContentTemplate"
       (click)="inputElement.focus()"
     >
-      <pupa-icon class="input-icon_invalid" name="app-error-filled"></pupa-icon>
+      <pupa-icon class="pupa-input-icon_invalid" name="app-error-filled"></pupa-icon>
     </pupa-icon-holder>
   </div>
 
-  <div class="input-actions-separator" *ngIf="isVisibleSeparator$ | async"></div>
+  <div class="pupa-input-actions-separator" *ngIf="isVisibleSeparator$ | async"></div>
 
   <ng-container [ngTemplateOutlet]="inputActionsRightDirective?.templateRef"></ng-container>
 </div>

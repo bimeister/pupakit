@@ -1,6 +1,6 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use '../../styles/calendar.styles' as *;
+@use 'mixins';
+@use 'functions';
+@use '../../styles/calendar.styles';
 
 :host {
   display: flex;
@@ -10,12 +10,12 @@
   padding: 0 4rem;
 }
 
-.weekday {
+.pupa-weekday {
   display: flex;
-  width: $cell-size;
+  width: calendar.$cell-size;
   justify-content: center;
 
-  @include font-preset-caption-xs();
+  @include mixins.font-preset-caption-xs();
 
-  color: semantic-color(text-secondary);
+  color: functions.semantic-color(text-secondary);
 }

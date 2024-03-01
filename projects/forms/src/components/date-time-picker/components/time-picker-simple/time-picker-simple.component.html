@@ -1,24 +1,24 @@
-<div class="time-picker__wrapper">
-  <div class="time-picker__digits">
+<div class="pupa-time-picker__wrapper">
+  <div class="pupa-time-picker__digits">
     <pupa-time-picker-digits
       [digits]="hours"
       [chosenDigit]="chosenHours$ | async"
       (selectedDigit)="selectHours($event)"
     ></pupa-time-picker-digits>
   </div>
-  <div class="time-picker__digits">
+  <div class="pupa-time-picker__digits">
     <pupa-time-picker-digits
       [digits]="minutes"
       [chosenDigit]="chosenMinutes$ | async"
       (selectedDigit)="selectMinutes($event)"
     ></pupa-time-picker-digits>
   </div>
-  <div class="time-picker__digits" *ngIf="withSeconds$ | async">
+  <div class="pupa-time-picker__digits" *ngIf="withSeconds$ | async">
     <pupa-time-picker-digits
       [digits]="seconds"
       [chosenDigit]="chosenSeconds$ | async"
       (selectedDigit)="selectSeconds($event)"
     ></pupa-time-picker-digits>
   </div>
-  <div class="time-picker__gradient" *ngIf="withGradient$ | async"></div>
+  <div class="pupa-time-picker__gradient" *ngIf="withGradient$ | async"></div>
 </div>

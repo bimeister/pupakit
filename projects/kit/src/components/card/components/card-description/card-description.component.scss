@@ -1,4 +1,4 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: -webkit-box;
@@ -9,5 +9,5 @@
 
   line-height: 3rem;
 
-  @include font-preset-caption-xxs();
+  @include mixins.font-preset-caption-xxs();
 }

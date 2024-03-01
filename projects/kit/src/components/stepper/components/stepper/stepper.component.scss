@@ -1,5 +1,4 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
 
 :host {
   display: block;
@@ -9,7 +8,7 @@
   z-index: 2;
 }
 
-.stepper {
+.pupa-stepper {
   &__container {
     width: 100%;
   }
@@ -29,7 +28,7 @@
   }
 }
 
-.gradient {
+.pupa-gradient {
   display: none;
   position: absolute;
 
@@ -39,7 +38,11 @@
   width: 23.75rem;
   height: 10rem;
 
-  background: linear-gradient(270deg, semantic-color(surface-primary) 0%, color(neutral-1, alpha-1) 87.96%);
+  background: linear-gradient(
+    270deg,
+    functions.semantic-color(surface-primary) 0%,
+    functions.color(neutral-1, alpha-1) 87.96%
+  );
 
   &_left {
     left: 0;

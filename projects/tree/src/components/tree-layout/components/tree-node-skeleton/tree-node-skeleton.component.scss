@@ -1,19 +1,18 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
 
 :host {
   display: block;
   width: 100%;
 }
 
-.tree-node-skeleton {
+.pupa-tree-node-skeleton {
   display: flex;
   padding: 1rem 2rem;
 
   &__left,
   &__center,
   &__right {
-    background-color: semantic-color(kind-neutral-selected);
+    background-color: functions.semantic-color(kind-neutral-selected);
   }
 
   &__left {

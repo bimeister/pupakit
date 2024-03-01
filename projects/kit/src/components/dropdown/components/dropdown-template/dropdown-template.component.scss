@@ -1,22 +1,22 @@
-@use 'mixins' as *;
-@use 'functions' as *;
-@use 'variables' as *;
+@use 'mixins';
+@use 'functions';
+@use 'variables';
 
 :host {
   display: block;
   width: 100%;
 }
 
-.dropdown-container {
-  border-radius: $controlBorderRadius;
-  border: 1px solid semantic-color(kind-neutral-normal);
-  background-color: semantic-color(surface-primary, alpha-700);
-  color: semantic-color(text-primary);
+.pupa-dropdown-container {
+  border-radius: variables.$controlBorderRadius;
+  border: 1px solid functions.semantic-color(kind-neutral-normal);
+  background-color: functions.semantic-color(surface-primary, alpha-700);
+  color: functions.semantic-color(text-primary);
   box-sizing: border-box;
 
-  filter: drop-shadow(0px 14px 24px color(neutral-1000, alpha-3));
+  filter: drop-shadow(0px 14px 24px functions.color(neutral-1000, alpha-3));
 
-  @include blur();
+  @include mixins.blur();
 
   overflow: hidden;
   margin: 2rem 0 0;

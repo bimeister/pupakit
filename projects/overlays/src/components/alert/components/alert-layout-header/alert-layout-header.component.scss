@@ -1,12 +1,11 @@
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2rem;
-  @include font-preset-h4;
+  @include mixins.font-preset-h4;
   line-height: 1;
   padding-right: 14px;
 }

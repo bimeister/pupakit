@@ -1,69 +1,69 @@
-@use 'mixins' as *;
-@use 'functions' as *;
+@use 'mixins';
+@use 'functions';
 
-@mixin tag-preset {
+@mixin pupa-tag-preset {
   all: unset;
-  @include flex-container(row, center, center);
-  @include no-tap-highlight();
-  @include font-preset-h6();
-  @include transition(background);
+  @include mixins.flex-container(row, center, center);
+  @include mixins.no-tap-highlight();
+  @include mixins.font-preset-h6();
+  @include mixins.transition(background);
 }
 
-@mixin clickable-color-state($state) {
-  @include hover() {
-    background-color: semantic-color(kind-#{$state}-hover);
+@mixin pupa-clickable-color-state($state) {
+  @include mixins.hover() {
+    background-color: functions.semantic-color(kind-#{$state}-hover);
   }
 
   &:active {
-    background-color: semantic-color(kind-#{$state}-active);
+    background-color: functions.semantic-color(kind-#{$state}-active);
   }
 
   @content;
 }
 
-@mixin tag-color-state($state) {
-  background-color: semantic-color(kind-#{$state}-normal);
+@mixin pupa-tag-color-state($state) {
+  background-color: functions.semantic-color(kind-#{$state}-normal);
 
-  &.tag_clickable {
-    @include clickable-color-state($state);
+  &.pupa-tag_clickable {
+    @include pupa-clickable-color-state($state);
   }
 }
 
-@mixin action-button-color-state($state) {
-  background-color: semantic-color(kind-#{$state}-normal);
-  border-left: 1px solid semantic-color(lines-opacity);
+@mixin pupa-action-button-color-state($state) {
+  background-color: functions.semantic-color(kind-#{$state}-normal);
+  border-left: 1px solid functions.semantic-color(lines-opacity);
 
-  @include host-selector-dark-theme {
-    border-left-color: semantic-color(kind-#{$state}-active);
+  @include mixins.host-selector-dark-theme {
+    border-left-color: functions.semantic-color(kind-#{$state}-active);
   }
 
-  @include clickable-color-state($state) {
-    &.active {
-      background-color: semantic-color(kind-#{$state}-active);
+  @include pupa-clickable-color-state($state) {
+    &.pupa-active {
+      background-color: functions.semantic-color(kind-#{$state}-active);
     }
   }
 }
 
-@mixin disabled-color-state {
+@mixin pupa-disabled-color-state {
   cursor: not-allowed;
 
-  background-color: semantic-color(kind-opacity-normal);
-  color: semantic-color(text-disabled);
+  background-color: functions.semantic-color(kind-opacity-normal);
+  color: functions.semantic-color(text-disabled);
 
   @content;
 }
 
-@mixin tag-custom-color-variables {
+@mixin pupa-tag-custom-color-variables {
   --pupa-tag_background-color-default: hsl(300deg 67% 55%);
   --pupa-tag_background-color-hover-default: hsl(300deg 67% 40%);
   --pupa-tag_background-color-active-default: hsl(300deg 67% 25%);
 }
 
-@mixin tag-custom-color-defaults {
+@mixin pupa-tag-custom-color-defaults {
   background-color: var(--pupa-tag_background-color, var(--pupa-tag_background-color-default));
 
-  &.tag_clickable {
-    @include hover() {
+  &.pupa-tag_clickable {
+    @include mixins.hover() {
       background-color: var(--pupa-tag_background-color-hover, var(--pupa-tag_background-color-hover-default));
     }
 

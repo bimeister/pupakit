@@ -1,6 +1,6 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 :host {
   display: block;
-  @include font-preset-h5;
+  @include mixins.font-preset-h5;
 }

@@ -1,8 +1,8 @@
-<div class="container">
-  <div class="calendar">
+<div class="pupa-container">
+  <div class="pupa-calendar">
     <pupa-date-picker-simple [baseDate]="baseDate$ | async"></pupa-date-picker-simple>
   </div>
-  <div class="time" [class.seconds]="withSeconds$ | async">
+  <div class="pupa-time" [class.pupa-seconds]="withSeconds$ | async">
     <pupa-time-picker-simple
       [withGradient]="true"
       [withSeconds]="withSeconds$ | async"
