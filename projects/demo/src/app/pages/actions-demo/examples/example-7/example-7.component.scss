@@ -1,0 +1,16 @@
+@use 'functions';
+@use 'mixins';
+
+.action {
+  @include mixins.flex-container(row, center, center);
+  width: 96px;
+  background: functions.semantic-color(kind-opacity-normal);
+  margin: 2rem;
+}
+
+.dropdown-trigger {
+  @include mixins.flex-container(row, center);
+  background-color: functions.semantic-color(kind-success-normal);
+  padding: 0 2rem;
+  height: 100%;
+}

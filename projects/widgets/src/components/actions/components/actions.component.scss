@@ -10,6 +10,16 @@
   flex-wrap: wrap;
   flex: 1;
   overflow: hidden;
+
+  &__action {
+    display: flex;
+    align-items: center;
+  }
+
+  &__divider {
+    height: 4rem;
+    margin: 0 1rem;
+  }
 }
 
 .is-one {

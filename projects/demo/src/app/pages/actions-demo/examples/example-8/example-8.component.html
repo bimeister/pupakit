@@ -1,0 +1,27 @@
+<div class="actions-container">
+  <pupa-actions [actions]="actions" class="actions">
+    <pupa-button-icon
+      *pupaActionRightSideContentTemplate
+      icon="app-cross"
+      kind="secondary"
+      class="actions-container__right-content"
+    ></pupa-button-icon>
+    <span *pupaActionLeftSideContentTemplate class="actions-container__left-content">Actions:</span>
+    <div *pupaActionTemplate="let action" class="action">Action {{ action }}</div>
+
+    <div
+      *pupaActionMoreTriggerTemplate="let overflowedActions"
+      pupaDropdown
+      #dropdown="pupaDropdown"
+      class="dropdown-trigger"
+    >
+      Show more {{ overflowedActions.length }}
+
+      <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+        <pupa-dropdown-menu-item *ngFor="let action of overflowedActions">
+          <span class="action">{{ action }}</span>
+        </pupa-dropdown-menu-item>
+      </pupa-dropdown-menu>
+    </div>
+  </pupa-actions>
+</div>

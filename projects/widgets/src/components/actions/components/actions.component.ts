@@ -18,11 +18,13 @@ import { filterNotNil, isNil, Nullable, resizeObservable } from '@bimeister/util
 import { animationFrameScheduler, BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, observeOn, switchMap, withLatestFrom } from 'rxjs/operators';
 
-import { PupaActionMoreTriggerTemplateDirective } from '../directives/action-more-trigger-template.directive';
-import { PupaActionTemplateDirective } from '../directives/action-template.directive';
-import { ActionContext } from '../../../declarations/interfaces/action-context.interface';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { DropdownMenuContextService } from '@bimeister/pupakit.kit';
+import { ActionContext } from '../../../declarations/interfaces/action-context.interface';
+import { PupaActionLeftSideContentTemplateDirective } from '../directives/action-left-side-content-template.directive';
+import { PupaActionMoreTriggerTemplateDirective } from '../directives/action-more-trigger-template.directive';
+import { PupaActionRightSideContentTemplateDirective } from '../directives/action-right-side-content-template.directive';
+import { PupaActionTemplateDirective } from '../directives/action-template.directive';
 
 const MAX_ACTIONS_RENDER_COUNT: number = 20;
 const RESIZE_DEBOUNCE_TIME_MS: number = 200;
@@ -53,6 +55,12 @@ export class ActionsComponent<T> implements OnChanges, AfterViewInit, OnDestroy 
 
   @ContentChild(PupaActionMoreTriggerTemplateDirective)
   private readonly actionMoreTriggerTemplate: PupaActionMoreTriggerTemplateDirective<T>;
+
+  @ContentChild(PupaActionLeftSideContentTemplateDirective)
+  public readonly pupaActionLeftSideContentTemplate: PupaActionLeftSideContentTemplateDirective;
+
+  @ContentChild(PupaActionRightSideContentTemplateDirective)
+  public readonly pupaActionRightSideContentTemplate: PupaActionRightSideContentTemplateDirective;
 
   public readonly renderActions$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
   public readonly actionsTotalCount$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(null);

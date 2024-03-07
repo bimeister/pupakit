@@ -1,0 +1,33 @@
+@use 'functions';
+@use 'mixins';
+
+.actions-container {
+  border: 1px solid functions.color(neutral-60);
+  padding: 2rem 4rem;
+
+  .actions {
+    justify-content: end;
+  }
+
+  &__left-content {
+    margin-right: 5rem;
+  }
+
+  &__right-content {
+    margin-left: 1rem;
+  }
+}
+
+.action {
+  @include mixins.flex-container(row, center, center);
+  width: 96px;
+  background: functions.semantic-color(kind-opacity-normal);
+  margin: 2rem;
+}
+
+.dropdown-trigger {
+  @include mixins.flex-container(row, center);
+  background-color: functions.semantic-color(kind-success-normal);
+  padding: 0 2rem;
+  height: 100%;
+}

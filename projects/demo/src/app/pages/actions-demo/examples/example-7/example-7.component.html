@@ -1,0 +1,23 @@
+<pupa-actions [actions]="actions">
+  <div *pupaActionTemplate="let action; isDividerShown: pupaActionTemplateIsDividerShown" class="action">
+    Action {{ action }}
+  </div>
+
+  <div
+    *pupaActionMoreTriggerTemplate="let overflowedActions"
+    pupaDropdown
+    #dropdown="pupaDropdown"
+    class="dropdown-trigger"
+  >
+    Show more {{ overflowedActions.length }}
+
+    <pupa-dropdown-menu *pupaDropdownTemplate="dropdown; let dropdownRef" [dropdownRef]="dropdownRef">
+      <pupa-dropdown-menu-item *ngFor="let action of overflowedActions; let last = last">
+        <div>
+          <span class="action">{{ action }}</span>
+          <pupa-divider *ngIf="pupaActionTemplateIsDividerShown(action) && !last"></pupa-divider>
+        </div>
+      </pupa-dropdown-menu-item>
+    </pupa-dropdown-menu>
+  </div>
+</pupa-actions>
