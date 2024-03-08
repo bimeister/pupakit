@@ -4,7 +4,6 @@
   display: flex;
   width: 100%;
   height: auto;
-  max-height: 72rem;
   max-width: 76rem;
   overflow: hidden;
 }
@@ -14,7 +13,7 @@
     user-select: none;
     overflow: auto;
     box-sizing: border-box;
-    max-height: 72rem;
+    max-height: var(--dropdown-max-height, 72rem);
 
     border-color: functions.semantic-color(lines-normal);
     background-color: functions.semantic-color(surface-primary, alpha-4);
