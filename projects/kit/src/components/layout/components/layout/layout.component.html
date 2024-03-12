@@ -10,7 +10,7 @@
     <ng-content></ng-content>
     <div
       class="pupa-layout-wrapper pupa-loader"
-      [ngClass]="loaderType$ | async"
+      [ngClass]="loaderTypeClass$ | async"
       [style.top.px]="loaderOverlayTopOffsetPx$ | async"
       [style.left.px]="loaderOverlayLeftOffsetPx$ | async"
       *ngIf="isLoaderVisible$ | async"

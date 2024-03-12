@@ -12,7 +12,7 @@ import {
 import { ClientUiStateHandlerService, UiState } from '@bimeister/pupakit.common';
 import { filterNotNil } from '@bimeister/utilities';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map } from 'rxjs/operators';
 import { LoaderType } from '../../../../declarations/types/loader-type.type';
 import { GridStateService } from '../../../../services/grid-state.service';
 import { LoaderService } from '../../../../services/loader.service';
@@ -30,7 +30,11 @@ export class LayoutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('iframe', { static: true }) private readonly iframeElementRef: ElementRef<HTMLIFrameElement>;
 
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderService.isLoaderVisible$;
-  public readonly loaderType$: Observable<LoaderType> = this.loaderService.loaderType$;
+  public readonly loaderTypeClass$: Observable<string> = this.loaderService.loaderType$.pipe(
+    distinctUntilChanged(),
+    filterNotNil(),
+    map((loaderType: LoaderType) => `pupa-loader_${loaderType}`)
+  );
   public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderService.loaderOverlayTopOffsetPx$;
   public readonly loaderOverlayLeftOffsetPx$: Observable<number> = this.loaderService.loaderOverlayLeftOffsetPx$;
 
