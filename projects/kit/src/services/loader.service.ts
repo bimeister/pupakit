@@ -8,7 +8,7 @@ import { filterNotNil } from '@bimeister/utilities';
 })
 export class LoaderService {
   private readonly loaderVisibilityState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  private readonly loaderTypeState$: BehaviorSubject<LoaderType> = new BehaviorSubject<LoaderType>(null);
+  private readonly loaderTypeState$: BehaviorSubject<LoaderType> = new BehaviorSubject<LoaderType | null>(null);
   private readonly loaderOverlayTopOffsetPxState$: BehaviorSubject<number | null> = new BehaviorSubject<number | null>(
     null
   );
@@ -16,7 +16,7 @@ export class LoaderService {
     null
   );
   public readonly isLoaderVisible$: Observable<boolean> = this.loaderVisibilityState$;
-  public readonly loaderType$: Observable<LoaderType> = this.loaderTypeState$;
+  public readonly loaderType$: Observable<LoaderType | null> = this.loaderTypeState$;
   public readonly loaderOverlayTopOffsetPx$: Observable<number> = this.loaderOverlayTopOffsetPxState$.pipe(
     filterNotNil()
   );
