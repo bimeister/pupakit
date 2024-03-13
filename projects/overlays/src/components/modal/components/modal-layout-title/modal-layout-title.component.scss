@@ -11,5 +11,5 @@
 
 .pupa-content-wrapper {
   @include mixins.line-clamp(3);
-  word-break: break-all;
+  word-wrap: break-word;
 }
