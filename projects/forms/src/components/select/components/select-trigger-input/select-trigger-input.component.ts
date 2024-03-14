@@ -55,6 +55,7 @@ export class SelectTriggerInputComponent<T> extends SelectTriggerBase<T> impleme
 
     this.processFocusButtonInputContainer();
     this.subscription.add(this.processInput());
+    this.subscription.add(this.processDisableState());
   }
 
   public processDomEvent(event: Event): void {
@@ -76,6 +77,18 @@ export class SelectTriggerInputComponent<T> extends SelectTriggerBase<T> impleme
 
   private processInput(): Subscription {
     return this.query$.subscribe((query: string) => this.query.emit(query));
+  }
+
+  private processDisableState(): Subscription {
+    return this.selectStateService.isDisabled$.subscribe((isDisabled: boolean) => {
+      if (isDisabled) {
+        this.control.disable();
+
+        return;
+      }
+
+      this.control.enable();
+    });
   }
 
   private processFocusButtonInputContainer(): void {
