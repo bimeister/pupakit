@@ -2,16 +2,18 @@ import {
   ChangeDetectionStrategy,
   Component,
   ContentChild,
+  EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
   Optional,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import { filterFalsy, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable, ReplaySubject, Subscription, timer } from 'rxjs';
+import { Nullable, filterFalsy, isNil } from '@bimeister/utilities';
+import { BehaviorSubject, Observable, ReplaySubject, Subscription, combineLatest, timer } from 'rxjs';
 import { debounce, distinctUntilChanged, map, switchMapTo, take, tap } from 'rxjs/operators';
 import { InputBase } from '../../../../declarations/classes/abstract/input-base.abstract';
 import { CollapseDirection } from '../../../../declarations/types/collapse-direction.type';
@@ -30,6 +32,8 @@ const ANIMATION_DURATION_MS: number = 200;
 export class SearchFieldComponent extends InputBase<Nullable<string>> implements OnChanges, OnDestroy {
   @ContentChild(SearchFieldActionsRightDirective)
   public readonly searchFieldActionsRightDirective: SearchFieldActionsRightDirective;
+
+  @Output() public readonly reset: EventEmitter<void> = new EventEmitter<void>();
 
   @Input() public collapseDirection: CollapseDirection = DEFAULT_COLLAPSE_DIRECTION;
   public readonly collapseDirection$: BehaviorSubject<CollapseDirection> = new BehaviorSubject(
@@ -95,8 +99,9 @@ export class SearchFieldComponent extends InputBase<Nullable<string>> implements
     this.value$.next(serializedValue);
   }
 
-  public reset(): void {
+  public resetValue(): void {
     this.updateValue('');
+    this.reset.emit();
     this.isCollapsible$.pipe(take(1)).subscribe((collapsible: boolean) => {
       if (collapsible) {
         this.isCollapsed$.next(true);
