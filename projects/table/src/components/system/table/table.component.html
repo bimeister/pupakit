@@ -84,7 +84,7 @@
         class="pupa-table-body__scrollable"
         [class.pupa-table-body__scrollable_with-border-bottom]="isVerticalScrollBarVisible$ | async"
         (verticalScrollVisibilityChanged)="processVerticalScrollBarVisibilityChanges($event)"
-        [position]="'external'"
+        position="external"
       >
         <cdk-virtual-scroll-viewport
           #cdkVirtualScrollViewport
