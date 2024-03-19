@@ -1,8 +1,3 @@
-$layout-height-large: 16rem;
-$layout-height-medium: 12rem;
-$normal-shadow-color: rgba(33, 33, 33, 0.05);
-$hover-shadow-color: rgba(33, 33, 33, 0.08);
-
 :host {
   display: block;
   width: 100%;
@@ -13,11 +8,15 @@ $hover-shadow-color: rgba(33, 33, 33, 0.08);
   box-sizing: border-box;
 
   &_medium {
-    height: $layout-height-medium;
+    height: 12rem;
   }
 
   &_large {
-    height: $layout-height-large;
+    height: 16rem;
+  }
+
+  &_auto {
+    height: auto;
   }
 }
 
