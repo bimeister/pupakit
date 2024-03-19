@@ -143,9 +143,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   @ViewChild('bodyScrollableContainer', { static: true })
   public bodyScrollableContainerRef?: Nullable<ScrollableComponent>;
 
-  @ViewChild('decorScrollableRowContainer', { read: ElementRef })
-  public decorScrollableRowContainerElementRef?: Nullable<ElementRef<HTMLElement>>;
-
   @Input() public hasLeftBorder: boolean = true;
 
   @Input() public hasRightBorder: boolean = true;
@@ -386,9 +383,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
 
   public processBodyScrollLeftChanges(scrollLeft: number): void {
     const scrollableHeaderCells: HTMLElement = this.headerScrollableRowContainerElementRef?.nativeElement;
-    const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerElementRef?.nativeElement;
     this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
-    this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
   }
 
   public getDndItemIdGetter(rowId: string): () => string {
