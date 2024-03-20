@@ -5,55 +5,55 @@ runs:
   using: composite
   steps:
     - name: Cache build common
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:common:${{github.sha}}'
         path: ./projects/common/dist
 
     - name: Cache build forms
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:forms:${{github.sha}}'
         path: ./projects/forms/dist
 
     - name: Cache build icons
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:icons:${{github.sha}}'
         path: ./projects/icons/dist
 
     - name: Cache build kit
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:kit:${{github.sha}}'
         path: ./projects/kit/dist
 
     - name: Cache build overlays
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:overlays:${{github.sha}}'
         path: ./projects/overlays/dist
 
     - name: Cache build table
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:table:${{github.sha}}'
         path: ./projects/table/dist
 
     - name: Cache build tree
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:tree:${{github.sha}}'
         path: ./projects/tree/dist
 
     - name: Cache build widgets
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:widgets:${{github.sha}}'
         path: ./projects/widgets/dist
 
     - name: Cache build dnd
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         key: 'dist:dnd:${{github.sha}}'
         path: ./projects/dnd/dist

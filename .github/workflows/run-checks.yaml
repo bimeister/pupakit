@@ -13,11 +13,11 @@ jobs:
     name: Install Dependencies
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: Set up Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18.14.0
           cache: 'npm'
@@ -29,7 +29,7 @@ jobs:
         run: npm clean-install
 
       - name: Cache workspace
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: 'workspace:${{github.sha}}'
           path: ./
@@ -40,13 +40,13 @@ jobs:
     needs: [install_dependencies]
     steps:
       - name: Download cached workspace
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: 'workspace:${{github.sha}}'
           path: ./
 
       - name: Download moon cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           key: 'moon'
           path: ./.moon/cache
