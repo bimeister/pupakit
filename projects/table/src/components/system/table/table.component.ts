@@ -385,10 +385,16 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
   }
 
   public processBodyScrollLeftChanges(scrollLeft: number): void {
-    const scrollableHeaderCells: HTMLElement = this.headerScrollableRowContainerElementRef?.nativeElement;
-    const scrollableDecorCells: HTMLElement = this.decorScrollableRowContainerElementRef?.nativeElement;
-    this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
-    this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
+    const scrollableHeaderCells: Nullable<HTMLElement> = this.headerScrollableRowContainerElementRef?.nativeElement;
+    const scrollableDecorCells: Nullable<HTMLElement> = this.decorScrollableRowContainerElementRef?.nativeElement;
+
+    if (!isNil(scrollableHeaderCells)) {
+      this.renderer.setStyle(scrollableHeaderCells, 'transform', `translateX(${-scrollLeft}px)`);
+    }
+
+    if (!isNil(scrollableDecorCells)) {
+      this.renderer.setStyle(scrollableDecorCells, 'transform', `translateX(${-scrollLeft}px)`);
+    }
   }
 
   public getDndItemIdGetter(rowId: string): () => string {
