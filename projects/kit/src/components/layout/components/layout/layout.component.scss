@@ -36,6 +36,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &_transparent {
+      background-color: transparent;
+    }
+
+    &_filled {
+      background-color: functions.semantic-color(surface-primary);
+    }
   }
 
   &.pupa-context-menus {
