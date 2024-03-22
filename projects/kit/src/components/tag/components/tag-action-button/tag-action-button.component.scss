@@ -40,6 +40,12 @@
       @include tag-preset.pupa-action-button-color-state('warning');
     }
 
+    &.pupa-button_selected {
+      border-left: 1px solid functions.semantic-color(lines-opacity);
+      background-color: functions.semantic-color(kind-primary-normal, alpha-7);
+      color: functions.semantic-color(text-primary);
+    }
+
     &.pupa-button_custom {
       --pupa-tag_action_border-color-default: #{functions.semantic-color(lines-opacity)};
 
