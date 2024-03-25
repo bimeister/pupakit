@@ -10,6 +10,7 @@ import { TextareaExample7Component } from './examples/example-7/example-7.compon
 import { TextareaExample8Component } from './examples/example-8/example-8.component';
 import { TextareaDemoRoutingModule } from './textarea-demo-routing.module';
 import { TextareaDemoComponent } from './textarea-demo.component';
+import { PupaTextareaModule } from '@bimeister/pupakit.forms';
 
 const EXAMPLES: Type<unknown>[] = [
   TextareaExample1Component,
@@ -27,6 +28,6 @@ const DECLARATIONS: Type<unknown>[] = [...COMPONENTS];
 
 @NgModule({
   declarations: [...DECLARATIONS],
-  imports: [DemoSharedModule, TextareaDemoRoutingModule],
+  imports: [DemoSharedModule, TextareaDemoRoutingModule, PupaTextareaModule],
 })
 export class TextareaDemoModule {}
