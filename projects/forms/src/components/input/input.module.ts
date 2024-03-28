@@ -12,6 +12,7 @@ import {
   PupaIconsModule,
 } from '@bimeister/pupakit.icons';
 import { PupaButtonsModule, PupaIconHolderModule, PupaTooltipModule } from '@bimeister/pupakit.kit';
+import { MaskitoDirective } from '@maskito/angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { PupaDateTimePickerModule } from '../date-time-picker/date-time-picker.module';
 import { PupaDroppableModule } from '../droppable/droppable.module';
@@ -65,6 +66,7 @@ const DECLARATIONS: any[] = [...EXPORTS];
     NgxMaskModule.forRoot(),
     PupaButtonsModule,
     PupaIconHolderModule,
+    MaskitoDirective,
   ],
   exports: [...EXPORTS],
 })

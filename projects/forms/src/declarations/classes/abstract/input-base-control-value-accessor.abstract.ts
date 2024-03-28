@@ -1,7 +1,7 @@
 import { Directive, Input, OnDestroy, OnInit, Optional } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormControlStatus, NgControl } from '@angular/forms';
-import { Nullable, filterNotNil, isEmpty, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, Subscription, combineLatest, of } from 'rxjs';
+import { filterNotNil, isEmpty, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
+import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { delay, distinctUntilChanged, map, startWith, switchMap, take, tap } from 'rxjs/operators';
 import { isFormControlValidStatus } from '../../functions/is-form-control-valid-status.function';
 import { OnChangeCallback } from '../../types/on-change-callback.type';

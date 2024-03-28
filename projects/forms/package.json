@@ -39,6 +39,8 @@
     "@bimeister/pupakit.kit": "*",
     "@bimeister/pupakit.tree": "*",
     "ngx-mask": "14.2.4",
+    "@maskito/angular": "2.2.0",
+    "@maskito/core": "2.2.0",
     "tslib": "^2.6.1"
   },
   "main": "dist"
