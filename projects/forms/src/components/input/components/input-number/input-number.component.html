@@ -4,10 +4,11 @@
 
     <input
       class="pupa-input"
-      type="number"
+      type="text"
       #inputElement
       [placeholder]="placeholder"
       [attr.disabled]="(isDisabled$ | async) ? true : null"
+      [maskito]="maskitoOptions"
       (input)="updateValue(inputElement.value)"
       (focus)="emitFocusEvent($event)"
       (blur)="emitBlurEvent($event)"
