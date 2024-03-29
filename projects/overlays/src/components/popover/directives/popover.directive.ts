@@ -11,10 +11,11 @@ const DELAY_TIME: number = 1000;
 @Directive({
   selector: '[pupaPopover]',
 })
-export class PopoverDirective implements OnDestroy {
+export class PopoverDirective<TContext extends object> implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
-  @Input() public pupaPopover: TemplateRef<unknown>;
+  @Input() public pupaPopover: TemplateRef<TContext>;
+  @Input() public pupaPopoverTemplateContext: TContext | null = null;
   @Input() public pupaPopoverDisabled: boolean = false;
   @Input() public pupaPopoverHover: boolean = false;
   @Input() public pupaPopoverDelay: number = DELAY_TIME;
@@ -67,7 +68,7 @@ export class PopoverDirective implements OnDestroy {
   }
 
   private openPopover(event: Event): void {
-    this.openedPopover = this.popoversService.open<PopoverTemplateComponent<unknown>>({
+    this.openedPopover = this.popoversService.open<PopoverTemplateComponent<TContext | {}>>({
       component: PopoverTemplateComponent,
       anchor: this.elementRef,
       trigger: {
@@ -78,6 +79,7 @@ export class PopoverDirective implements OnDestroy {
       autoCloseTimeout: event.type === 'click' ? null : this.pupaPopoverDelay,
       data: {
         templateRef: this.pupaPopover,
+        templateContext: this.pupaPopoverTemplateContext ?? {},
       },
     });
     this.isOpenedState$.next(true);
