@@ -11,7 +11,7 @@
   overflow: hidden;
   z-index: 1;
   user-select: none;
-  outline: 1px solid var(--avatar-border_color, functions.semantic-color(icons-inverse));
+  border: 1px solid var(--avatar-border_color, functions.semantic-color(icons-inverse));
 
   &_default {
     background-color: functions.color(warning-200);
