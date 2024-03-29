@@ -25,17 +25,25 @@ export class BadgeDemoComponent {
 
   public readonly stateOptions: PropsOption[] = [
     {
-      caption: 'Progress',
-      value: 'progress',
+      caption: 'New',
+      value: 'new',
       isDefault: true,
     },
     {
-      caption: 'Complete',
-      value: 'complete',
+      caption: 'Success',
+      value: 'success',
     },
     {
-      caption: 'Error',
-      value: 'error',
+      caption: 'Danger',
+      value: 'danger',
+    },
+    {
+      caption: 'Warning',
+      value: 'warning',
+    },
+    {
+      caption: 'Loading',
+      value: 'loading',
     },
   ];
 

@@ -1,22 +1,7 @@
-@use 'demo-variables' as *;
-
-@use 'mixins' as *;
-@use 'functions' as *;
-
 .content {
   display: flex;
   flex-direction: row;
-  margin-top: 4rem;
+  margin-top: 1rem;
   align-items: center;
-  gap: 4rem;
-
-  &__marker {
-    background-color: semantic-color(kind-primary-normal);
-    height: 100%;
-    width: 9rem;
-  }
-
-  &__indicator {
-    display: inline;
-  }
+  gap: 8rem;
 }

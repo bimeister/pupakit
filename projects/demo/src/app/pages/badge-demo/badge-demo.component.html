@@ -31,17 +31,19 @@
     <demo-example-viewer>
       <demo-example-viewer-content>
         <div class="content">
-          <pupa-badge>
-            <pupa-badge-marker [size]="size$ | async">
-              <div class="content__marker"></div>
+          <pupa-badge *ngIf="size$ | async as size">
+            <pupa-badge-marker [size]="size">
+              <pupa-counter *ngIf="size === 'medium'" [count]="99" color="primary"></pupa-counter>
+              <pupa-badge-indicator *ngIf="size === 'small'" [state]="state$ | async"></pupa-badge-indicator>
             </pupa-badge-marker>
             Badge marker
           </pupa-badge>
+
           <pupa-badge>
-            <pupa-badge-marker [size]="size$ | async">
+            Badge indicator
+            <pupa-badge-marker size="small">
               <pupa-badge-indicator [state]="state$ | async"></pupa-badge-indicator>
             </pupa-badge-marker>
-            Badge marker with indicator
           </pupa-badge>
         </div>
       </demo-example-viewer-content>
