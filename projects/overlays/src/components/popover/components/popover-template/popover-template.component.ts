@@ -13,7 +13,7 @@ import { PopoverTemplateData } from '../../../../declarations/interfaces/popover
 })
 export class PopoverTemplateComponent<TContext> extends PopoverComponentBase<PopoverTemplateData<TContext>, void> {
   public readonly templateRef: Nullable<TemplateRef<unknown>> = this.data.templateRef;
-  public readonly templateContext: TContext = {
+  public readonly templateContext: TContext & { popoverRef: PopoverRef<PopoverTemplateData<TContext>, void> } = {
     ...this.data.templateContext,
     popoverRef: this.popoverRef,
   };
