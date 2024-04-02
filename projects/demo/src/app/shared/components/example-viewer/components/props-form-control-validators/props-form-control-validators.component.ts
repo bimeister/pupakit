@@ -3,12 +3,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
+  OnChanges,
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { AbstractControl, FormControl, ValidatorFn } from '@angular/forms';
-import { isEmpty } from '@bimeister/utilities';
+import { ComponentChanges } from '@bimeister/pupakit.common';
+import { isEmpty, isNil } from '@bimeister/utilities';
 import { Subscription } from 'rxjs';
 import { PropsSwitcherComponent } from '../props-switcher/props-switcher.component';
 
@@ -19,7 +21,7 @@ import { PropsSwitcherComponent } from '../props-switcher/props-switcher.compone
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDestroy {
+export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDestroy, OnChanges {
   @ViewChild(PropsSwitcherComponent)
   private readonly propsSwitcher: PropsSwitcherComponent;
   private readonly subscription: Subscription = new Subscription();
@@ -48,6 +50,16 @@ export class PropsFormControlValidatorsComponent implements AfterViewInit, OnDes
         this.controlsList.forEach((control: AbstractControl) => control.updateValueAndValidity());
       })
     );
+  }
+
+  public ngOnChanges(changes: ComponentChanges<this>): void {
+    if (!isNil(changes.validators)) {
+      this.controlsList.forEach((control: AbstractControl) => {
+        control.clearValidators();
+        control.setValidators(this.validators);
+        control.updateValueAndValidity();
+      });
+    }
   }
 
   public ngOnDestroy(): void {
