@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormControl, ValidatorFn, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
+import { distinctUntilChanged, map, startWith } from 'rxjs/operators';
+import { PropsOption } from '../../shared/components/example-viewer/declarations/interfaces/props.option';
 
 const BASE_REQUEST_PATH: string = 'textarea-demo/examples';
 
@@ -10,7 +13,58 @@ const BASE_REQUEST_PATH: string = 'textarea-demo/examples';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class TextareaDemoComponent {
+export class TextareaDemoComponent implements OnInit, OnDestroy {
+  public readonly sizeOptions: PropsOption[] = [
+    {
+      caption: 'Large',
+      value: 'large',
+    },
+    {
+      caption: 'Medium',
+      value: 'medium',
+      isDefault: true,
+    },
+  ];
+
+  public readonly counterVisibilityOptions: PropsOption[] = [
+    {
+      caption: 'Always',
+      value: 'always',
+      isDefault: true,
+    },
+    {
+      caption: 'Onfocus',
+      value: 'onfocus',
+    },
+    {
+      caption: 'Filled',
+      value: 'filled',
+    },
+  ];
+
+  public readonly maxLengthFormControl: FormControl<number> = new FormControl<number>(100);
+  public readonly validators$: Observable<ValidatorFn[]> = this.maxLengthFormControl.valueChanges.pipe(
+    map((maxLength: number) => [Validators.maxLength(maxLength)]),
+    startWith([Validators.maxLength(100)])
+  );
+  public readonly minRowsFormControl: FormControl<number> = new FormControl<number>(2);
+  public readonly maxRowsFormControl: FormControl<number> = new FormControl<number>(5);
+  public readonly placeholderFormControl: FormControl<string | null> = new FormControl<string | null>(
+    'Custom placeholder'
+  );
+  public readonly isDisabledFormControl: FormControl<boolean> = new FormControl<boolean>(false);
+  public readonly textAreaFormControl: FormControl<string | null> = new FormControl<string | null>(null);
+  public readonly textAreaInlineFormControl: FormControl<string | null> = new FormControl<string | null>(null);
+  private readonly isDisabled$: Observable<boolean> = this.isDisabledFormControl.statusChanges.pipe(
+    map(() => this.isDisabledFormControl.disabled),
+    distinctUntilChanged()
+  );
+  public readonly controlsList: FormControl<string | null>[] = [
+    this.textAreaFormControl,
+    this.textAreaInlineFormControl,
+  ];
+  private readonly subscription: Subscription = new Subscription();
+
   public readonly example1Content: Record<string, string> = {
     HTML: `${BASE_REQUEST_PATH}/example-1/example-1.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-1/example-1.component.scss`,
@@ -59,5 +113,19 @@ export class TextareaDemoComponent {
     TS: `${BASE_REQUEST_PATH}/example-8/example-8.component.ts`,
   };
 
-  public formControl: FormControl = new FormControl();
+  public ngOnInit(): void {
+    this.subscription.add(this.subscribeToIsDisabled());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  private subscribeToIsDisabled(): Subscription {
+    return this.isDisabled$.subscribe((isDisabled: boolean) => {
+      this.controlsList.forEach((control: FormControl<string | null>) =>
+        isDisabled ? control.disable() : control.enable()
+      );
+    });
+  }
 }
