@@ -57,27 +57,21 @@ export class InputNumberComponent extends InputBase<ValueType> {
   }
 
   public updateValue(updatedValue: ValueType): void {
-    this.value$.pipe(take(1)).subscribe((value: ValueType) => {
-      if (value === updatedValue) {
-        return;
-      }
-
-      super.updateValue(updatedValue);
-    });
+    this.value$
+      .pipe(
+        take(1),
+        filter((value: ValueType) => value !== updatedValue)
+      )
+      .subscribe(() => super.updateValue(updatedValue));
   }
 
   private handleFocusOrBlurEvent(isFocused: boolean, event: FocusEvent): void {
     const serializedValue: string = this.convertValue(this.inputElementRef.nativeElement.value);
-    this.value$
-      .pipe(
-        take(1),
-        filter((value: ValueType) => value !== serializedValue && serializedValue !== DEFAULT_VALUE)
-      )
-      .subscribe(() => {
-        this.updateValue(serializedValue);
-        this.inputElementRef.nativeElement.value = serializedValue;
-        this.isFocused$.next(isFocused);
-        isFocused ? this.focus.emit(event) : this.blur.emit(event);
-      });
+    this.value$.pipe(take(1)).subscribe(() => {
+      this.updateValue(serializedValue);
+      this.inputElementRef.nativeElement.value = serializedValue;
+      this.isFocused$.next(isFocused);
+      isFocused ? this.focus.emit(event) : this.blur.emit(event);
+    });
   }
 }
