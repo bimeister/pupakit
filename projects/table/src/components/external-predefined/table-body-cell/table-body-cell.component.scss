@@ -12,7 +12,6 @@
   padding: 1rem 2.5rem;
   @include mixins.font-preset-caption-s;
   color: functions.semantic-color(text-primary);
-  line-height: 3.75rem;
 
   display: flex;
   gap: 2rem;
