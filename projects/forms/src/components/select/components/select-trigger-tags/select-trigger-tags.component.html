@@ -14,7 +14,7 @@
   #overlayOrigin="cdkOverlayOrigin"
   #button
 >
-  <div class="pupa-trigger__text" [style.paddingRight.px]="rightPaddingPx$ | async">
+  <div class="pupa-trigger__text" [style.paddingRight.rem]="rightPaddingRem$ | async">
     <ng-container *ngIf="triggerValueIsVisible$ | async; else placeholder">
       <div class="pupa-tags-container" #tagsContainer [style.gap.px]="tagsContainerGap">
         <div

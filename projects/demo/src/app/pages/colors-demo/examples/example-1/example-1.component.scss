@@ -10,12 +10,12 @@ $colorsToOverride: (
 @include override-colors($colorsToOverride, ':host');
 
 .usage-example {
-  margin-top: 16px;
+  margin-top: 4rem;
   color: color(neutral-6);
 }
 
 .square {
-  width: 40px;
-  height: 40px;
+  width: 10rem;
+  height: 10rem;
   background-color: color(primary-600, alpha-60);
 }

@@ -19,7 +19,7 @@
   &__marker {
     background-color: functions.semantic-color(surface-primary);
     border-radius: 50%;
-    box-shadow: 0px 0px 1rem functions.semantic-color(kind-opacity-normal);
+    box-shadow: 0 0 1rem functions.semantic-color(kind-opacity-normal);
 
     transition: transform functions.variable(transition-duration_shorter)
         functions.variable(transition-timing-function_common),

@@ -3,8 +3,8 @@
 
 .block {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 25rem;
+  height: 25rem;
   background-color: color(primary-500);
 
   @include gt-lg() {

@@ -2,8 +2,8 @@
 @use 'functions' as *;
 
 .block {
-  width: 100px;
-  height: 100px;
+  width: 25rem;
+  height: 25rem;
   background-color: color(primary-500);
 
   @include width-between($min-width: 1500, $max-width: 1600) {

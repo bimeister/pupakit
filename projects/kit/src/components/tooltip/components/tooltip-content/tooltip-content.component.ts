@@ -16,7 +16,7 @@ import { distinctUntilChanged, map, take, withLatestFrom } from 'rxjs/operators'
 import { TOOLTIP_SERVICE_TOKEN } from '../../../../declarations/tokens/tooltip-service.token';
 import { TooltipServiceDeclaration } from '../../../../declarations/interfaces/tooltip-service-declaration.interface';
 
-const OFFSET_PX: number = 4;
+const OFFSET_REM: number = 1;
 const ANIMATION: string = `200ms ease-in-out`;
 
 @Component({
@@ -88,9 +88,9 @@ export class TooltipContentComponent implements OnDestroy {
   }
 
   private calculateTooltipStyleTransform(): Subscription {
-    return zip(this.getTooltipOffsetXPx(), this.getTooltipOffsetYPx())
+    return zip(this.getTooltipOffsetXRem(), this.getTooltipOffsetYRem())
       .pipe(
-        map(([offsetXPx, offsetYPx]: [number, number]) => `translate(${offsetXPx}px, ${offsetYPx}px)`),
+        map(([offsetXRem, offsetYRem]: [number, number]) => `translate(${offsetXRem}rem, ${offsetYRem}rem)`),
         distinctUntilChanged()
       )
       .subscribe((transformStyle: string) => {
@@ -99,16 +99,16 @@ export class TooltipContentComponent implements OnDestroy {
       });
   }
 
-  private getTooltipOffsetXPx(): Observable<number> {
+  private getTooltipOffsetXRem(): Observable<number> {
     return this.tooltipPosition$.pipe(
       filterNotNil(),
       map((tooltipPosition: ConnectedOverlayPositionChange) => tooltipPosition.connectionPair),
       map((connectionPair: ConnectionPositionPair) => {
         switch (connectionPair.overlayX) {
           case 'end':
-            return -OFFSET_PX;
+            return -OFFSET_REM;
           case 'start':
-            return OFFSET_PX;
+            return OFFSET_REM;
           default:
             return 0;
         }
@@ -116,16 +116,16 @@ export class TooltipContentComponent implements OnDestroy {
     );
   }
 
-  private getTooltipOffsetYPx(): Observable<number> {
+  private getTooltipOffsetYRem(): Observable<number> {
     return this.tooltipPosition$.pipe(
       filterNotNil(),
       map((tooltipPosition: ConnectedOverlayPositionChange) => tooltipPosition.connectionPair),
       map((connectionPair: ConnectionPositionPair) => {
         switch (connectionPair.overlayY) {
           case 'bottom':
-            return -OFFSET_PX;
+            return -OFFSET_REM;
           case 'top':
-            return OFFSET_PX;
+            return OFFSET_REM;
           default:
             return 0;
         }

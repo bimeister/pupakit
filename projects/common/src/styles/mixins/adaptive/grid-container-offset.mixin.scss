@@ -12,24 +12,24 @@
 
 @mixin grid-container-offset($property: 'padding-left') {
   @include xs() {
-    #{$property}: $xsOffset * 1px;
+    #{$property}: $xsOffset * 1rem;
   }
   @include sm() {
-    #{$property}: $smOffset * 1px;
+    #{$property}: $smOffset * 1rem;
   }
   @include md() {
-    #{$property}: $mdOffset * 1px;
+    #{$property}: $mdOffset * 1rem;
   }
   @include lg() {
-    #{$property}: $lgOffset * 1px;
+    #{$property}: $lgOffset * 1rem;
   }
   @include xlg() {
-    #{$property}: $xlgOffset * 1px;
+    #{$property}: $xlgOffset * 1rem;
   }
   @include xl() {
-    #{$property}: $xlOffset * 1px;
+    #{$property}: $xlOffset * 1rem;
   }
   @include xxl() {
-    #{$property}: $xxlOffset * 1px;
+    #{$property}: $xxlOffset * 1rem;
   }
 }

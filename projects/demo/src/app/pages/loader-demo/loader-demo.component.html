@@ -23,7 +23,7 @@
     <demo-example-viewer-content>
       <pupa-loader
         [type]="typeFormControl.value"
-        [size]="sizeFormControl.value + 'px'"
+        [size]="sizeFormControl.value + 'rem'"
         [kind]="kindFormControl.value"
         [progress]="progressFormControl.value"
         [isError]="isErrorFormControl.value"
@@ -39,9 +39,9 @@
     </demo-example-viewer-property>
 
     <demo-example-viewer-property name="size" type="string" decoratorName="input">
-      <ng-template demoExampleViewerPropertyDescription>Set width and height of loader.</ng-template>
+      <ng-template demoExampleViewerPropertyDescription>Set width and height of loader in rem.</ng-template>
 
-      <pupa-input-text [formControl]="sizeFormControl" placeholder="Enter value"></pupa-input-text>
+      <pupa-input-text [formControl]="sizeFormControl" placeholder="Enter value in rem"></pupa-input-text>
     </demo-example-viewer-property>
 
     <ng-container *ngIf="typeFormControl.value === 'determinate'; else indeterminateOptions">

@@ -52,8 +52,8 @@
     animation: 0.86s cubic-bezier(0.4, 0.15, 0.6, 0.85) infinite pupa-rotate;
 
     &_scale {
-      stroke-dasharray: 80px;
-      stroke-dashoffset: 65px;
+      stroke-dasharray: 20rem;
+      stroke-dashoffset: 16.25rem;
     }
 
     &_default {

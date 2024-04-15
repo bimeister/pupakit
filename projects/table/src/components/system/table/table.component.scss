@@ -299,9 +299,9 @@ $table-border-z-index: 2;
 
 .pupa-columns-dnd-indicator {
   position: absolute;
-  left: 100px;
+  left: 25rem;
   top: 0;
-  width: 2px;
+  width: 0.5rem;
   height: calc(100% - #{variables.$width_scrollbar});
   background-color: functions.semantic-color(kind-primary-normal);
   z-index: 5;

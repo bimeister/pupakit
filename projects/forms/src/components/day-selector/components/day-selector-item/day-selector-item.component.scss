@@ -67,7 +67,7 @@ $box-shadow-selector-item-color: rgba(0, 0, 0, 0.08);
   }
 
   &.pupa-selected &__content {
-    box-shadow: 1px 1px 5px $box-shadow-selector-item-color;
+    box-shadow: 0.25rem 0.25rem 1.25rem $box-shadow-selector-item-color;
 
     background: functions.semantic-color(surface-secondary);
   }

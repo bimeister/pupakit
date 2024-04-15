@@ -82,7 +82,7 @@
   height: 3.5rem;
   border: 1px solid functions.semantic-color(icons-secondary);
   box-sizing: border-box;
-  border-radius: 1px;
+  border-radius: 0.25rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -107,7 +107,7 @@
       &.pupa-checkbox__marker_checked {
         border: none;
         outline: 2px solid functions.semantic-color(lines-accent);
-        outline-offset: 1px;
+        outline-offset: 0.25rem;
         background: functions.semantic-color(kind-danger-normal);
       }
     }

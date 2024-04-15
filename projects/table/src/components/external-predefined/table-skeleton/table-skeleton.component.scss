@@ -13,12 +13,12 @@
   align-items: center;
   justify-content: flex-start;
   box-sizing: border-box;
-  padding-left: 16px;
+  padding-left: 4rem;
 }
 
 .pupa-skeleton__stick {
-  width: 56px;
-  height: 8px;
-  border-radius: 4px;
+  width: 14rem;
+  height: 2rem;
+  border-radius: 1rem;
   background-color: functions.semantic-color(kind-opacity-normal);
 }

@@ -21,7 +21,7 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
 
   border-radius: variables.$controlBorderRadius;
   border: 2px solid transparent;
-  box-shadow: 2px 3px 8px $normal-shadow-color;
+  box-shadow: 0.5rem 0.75rem 2rem $normal-shadow-color;
   outline: none;
 
   background-color: functions.semantic-color(surface-secondary);
@@ -29,12 +29,12 @@ $disabled-shadow-color: rgba(33, 33, 33, 0.05);
 
   &_disabled {
     color: functions.semantic-color(text-disabled);
-    box-shadow: 0 1px 7px $disabled-shadow-color;
+    box-shadow: 0 0.25rem 1.75rem $disabled-shadow-color;
   }
 
   &:not(.pupa-container_disabled) {
     @include mixins.hover() {
-      box-shadow: 2px 3px 10px $hover-shadow-color;
+      box-shadow: 0.5rem 0.75rem 2.5rem $hover-shadow-color;
     }
   }
 

@@ -8,7 +8,7 @@
   border-radius: 1rem;
   color: functions.semantic-color(surface-primary);
   background: functions.semantic-color(kind-primary-normal);
-  max-width: 256px;
+  max-width: 64rem;
   box-sizing: border-box;
   @include mixins.ellipsis-text-overflow;
   @include mixins.font-size-xs();

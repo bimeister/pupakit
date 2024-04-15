@@ -13,7 +13,7 @@ const BASE_EXAMPLE_URL: string = 'loader-demo/examples';
 export class LoaderDemoComponent {
   public readonly typeFormControl: FormControl<Loader> = new FormControl<Loader>('determinate');
   public readonly kindFormControl: FormControl<LoaderKind> = new FormControl<LoaderKind>('default');
-  public readonly sizeFormControl: FormControl<number | null> = new FormControl<number | null>(50);
+  public readonly sizeFormControl: FormControl<number | null> = new FormControl<number | null>(12.5);
   public readonly progressFormControl: FormControl<number | null> = new FormControl<number | null>(50, [
     Validators.required,
     Validators.min(0),

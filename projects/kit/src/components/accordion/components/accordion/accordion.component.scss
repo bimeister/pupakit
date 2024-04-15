@@ -23,7 +23,7 @@
   &_border-bottom {
     &:not(:hover) {
       border-radius: 0;
-      box-shadow: 0 1px 0 0 functions.semantic-color(lines-normal);
+      box-shadow: 0 0.25rem 0 0 functions.semantic-color(lines-normal);
     }
   }
 
