@@ -1,6 +1,6 @@
 .table {
   display: block;
-  height: 400px;
+  height: 100rem;
 }
 
 .name-header-cell {
@@ -16,7 +16,7 @@
 
   &_current-draggable {
     background-color: black;
-    border-radius: 50px;
+    border-radius: 12.5rem;
   }
 
   &__dnd-text {

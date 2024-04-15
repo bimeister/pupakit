@@ -23,7 +23,7 @@
 
   &__logo-title {
     height: auto;
-    width: 200px;
+    width: 50rem;
 
     @include width-between-property(
       $property: 'width',

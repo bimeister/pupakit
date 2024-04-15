@@ -1,7 +1,7 @@
 @use 'mixins';
 @use 'functions';
 
-$drawer_padding: 8px;
+$drawer_padding: 2rem;
 
 .pupa-drawer-container {
   width: fit-content;

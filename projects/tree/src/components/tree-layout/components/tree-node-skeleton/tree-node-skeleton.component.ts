@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
-import { TREE_NODE_OFFSET } from '../../../../declarations/constants/tree-node-offset.const';
+import { TREE_NODE_OFFSET_REM } from '../../../../declarations/constants/tree-node-offset-rem.const';
 
 @Component({
   selector: 'pupa-tree-node-skeleton',
@@ -12,6 +12,6 @@ export class TreeNodeSkeletonComponent {
   @Input() public level: number;
 
   public get offset(): string {
-    return `${this.level * TREE_NODE_OFFSET}px`;
+    return `${this.level * TREE_NODE_OFFSET_REM}rem`;
   }
 }

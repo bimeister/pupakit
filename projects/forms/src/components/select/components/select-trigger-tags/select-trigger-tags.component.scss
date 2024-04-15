@@ -26,7 +26,7 @@
 }
 
 .pupa-tag {
-  max-width: min(170px, calc(var(--tags-container-width-px) - 1rem));
+  max-width: min(42.5rem, calc(var(--tags-container-width-px) - 1rem));
 
   &.pupa-is-one {
     max-width: 100%;

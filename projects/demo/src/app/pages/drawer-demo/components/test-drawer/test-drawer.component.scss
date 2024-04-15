@@ -1,12 +1,12 @@
 :host {
   display: block;
-  width: 512px;
+  width: 128rem;
   height: 100%;
 }
 
 .drawer {
   &__title-container {
     display: flex;
-    gap: 8px;
+    gap: 4rem;
   }
 }

@@ -10,7 +10,7 @@ import { SelectOptionsContainerBase } from '../../../../declarations/classes/abs
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SelectOptionsContainerComponent extends SelectOptionsContainerBase {
-  @Input() public fixedHeightPx: number = null;
+  @Input() public fixedHeightRem: number = null;
 
   @HostListener('click', ['$event'])
   @HostListener('touchstart', ['$event'])

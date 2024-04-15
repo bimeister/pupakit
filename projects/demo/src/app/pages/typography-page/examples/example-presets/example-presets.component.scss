@@ -21,7 +21,7 @@ $normal-shadow-color: rgba(33, 33, 33, 0.05);
   border-radius: 1rem;
   border: 1px solid transparent;
 
-  box-shadow: 0 1px 7px $normal-shadow-color;
+  box-shadow: 0 0.25rem 1.75rem $normal-shadow-color;
   background: semantic-color(surface-secondary);
   color: semantic-color(text-primary);
   outline: none;

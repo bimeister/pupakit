@@ -3,8 +3,8 @@
 
 .block {
   display: block;
-  width: 100px;
-  height: 100px;
+  width: 25rem;
+  height: 25rem;
   background-color: color(primary-500);
 
   @include width-less-than($width: 900) {
@@ -12,8 +12,8 @@
   }
 
   @include width-more-than($width: 1500) {
-    width: 200px;
-    height: 200px;
+    width: 50rem;
+    height: 50rem;
   }
 
   @include height-less-than($height: 900) {

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ContentChild, Input, ViewEncapsulat
 import { TreeNodeActionsDirective } from '../../directives/tree-node-actions.directive';
 import { TreeNodeProperties } from '../../../../declarations/interfaces/tree-node-properties.interface';
 import { isNil } from '@bimeister/utilities';
-import { TREE_NODE_OFFSET } from '../../../../declarations/constants/tree-node-offset.const';
+import { TREE_NODE_OFFSET_REM } from '../../../../declarations/constants/tree-node-offset-rem.const';
 
 @Component({
   selector: 'pupa-tree-node',
@@ -23,7 +23,7 @@ export class TreeNodeComponent {
   }
 
   public get arrowOffset(): string {
-    return `${this.treeNodeProperties.level * TREE_NODE_OFFSET}px`;
+    return `${this.treeNodeProperties.level * TREE_NODE_OFFSET_REM}rem`;
   }
 
   public get isSelected(): boolean {
