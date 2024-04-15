@@ -2,11 +2,11 @@
 @use 'functions';
 
 $font-size__digit: 3.5rem;
-$max-height__container: 235px;
-$box-shadow: 0 2rem 24px 0 rgba(0, 0, 0, 0.1);
-$height_gradient: 38px;
-$width_time-picker: 80px;
-$width_time-picker-seconds: 112px;
+$max-height__container: 58.75rem;
+$box-shadow: 0 2rem 6rem 0 rgba(0, 0, 0, 0.1);
+$height_gradient: 9.5rem;
+$width_time-picker: 9.5rem;
+$width_time-picker-seconds: 28rem;
 $linear-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 100%);
 
 .pupa-time-picker {

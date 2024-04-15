@@ -2,7 +2,7 @@
 
 .pupa-badge {
   position: absolute;
-  left: calc(100% - 2px);
+  left: calc(100% - 0.5rem);
   @include mixins.ellipsis-text-overflow;
 
   &__small {

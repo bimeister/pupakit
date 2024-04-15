@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
-import { ComponentChanges, Loader, LoaderKind } from '@bimeister/pupakit.common';
+import { ComponentChanges, Loader, LoaderKind, SizeRem } from '@bimeister/pupakit.common';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { distinctUntilChanged, map } from 'rxjs/operators';
+
+type LoaderSize = SizeRem | 'inherit';
 
 const DEFAULT_RADIUS: number = 10;
 
@@ -12,8 +14,8 @@ const DEFAULT_RADIUS: number = 10;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoaderComponent implements OnChanges {
-  @Input() public size: string = 'inherit';
-  public readonly size$: BehaviorSubject<string> = new BehaviorSubject<string>('inherit');
+  @Input() public size: LoaderSize = 'inherit';
+  public readonly size$: BehaviorSubject<LoaderSize> = new BehaviorSubject<LoaderSize>('inherit');
 
   @Input() public type: Loader = 'indeterminate';
   public readonly type$: BehaviorSubject<Loader> = new BehaviorSubject<Loader>('indeterminate');

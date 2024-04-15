@@ -15,7 +15,7 @@
   box-sizing: border-box;
   cursor: pointer;
   width: 100%;
-  padding-right: 14px;
+  padding-right: 3.5rem;
 
   border-radius: variables.$controlBorderRadius;
   border: 1px solid functions.semantic-color(lines-opacity);
@@ -30,7 +30,7 @@
 
   &.large {
     height: 10rem;
-    padding: 9px 3rem;
+    padding: 2.25rem 3rem;
 
     ~ .pupa-icons .pupa-icons__icon {
       @extend .pupa-icons__icon_large;
@@ -39,7 +39,7 @@
 
   &.medium {
     height: 8rem;
-    padding: 5px 2rem;
+    padding: 1.25rem 2rem;
 
     ~ .pupa-icons .pupa-icons__icon {
       @extend .pupa-icons__icon_medium;
@@ -141,11 +141,11 @@
   z-index: 3;
   position: absolute;
   overflow: hidden;
-  top: 1px;
-  bottom: 1px;
+  top: 0.25rem;
+  bottom: 0.25rem;
   right: 9rem;
   box-sizing: border-box;
-  height: calc(100% - 2px);
+  height: calc(100% - 0.5rem);
   width: fit-content;
   background-color: transparent;
   gap: 1.5rem;

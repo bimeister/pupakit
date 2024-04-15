@@ -32,7 +32,7 @@
         </pupa-button-group>
       </pupa-select-dropdown-header>
 
-      <pupa-select-options-container [fixedHeightPx]="200">
+      <pupa-select-options-container [fixedHeightRem]="50">
         <pupa-button-group-content>
           <ng-container *pupaButtonGroupItemContentTemplate="'group-1'">
             <pupa-scrollable class="scrollable">
@@ -43,7 +43,7 @@
               >
                 <pupa-select-option
                   *cdkVirtualFor="let user of usersByGroup1$ | async"
-                  [heightPx]="itemSizePx"
+                  [heightRem]="10"
                   [value]="user.id"
                 >
                   <ng-container
@@ -68,7 +68,7 @@
               >
                 <pupa-select-option
                   *cdkVirtualFor="let user of usersByGroup2$ | async"
-                  [heightPx]="itemSizePx"
+                  [heightRem]="10"
                   [value]="user.id"
                 >
                   <ng-container

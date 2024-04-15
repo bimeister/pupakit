@@ -18,22 +18,22 @@
     "xxl": 16
   },
   "gutters": {
-    "xs": 8,
-    "sm": 16,
-    "md": 16,
-    "lg": 16,
-    "xlg": 16,
-    "xl": 16,
-    "xxl": 16
+    "xs": 2,
+    "sm": 4,
+    "md": 4,
+    "lg": 4,
+    "xlg": 4,
+    "xl": 4,
+    "xxl": 4
   },
   "offsets": {
-    "xs": 12,
-    "sm": 16,
-    "md": 16,
-    "lg": 24,
-    "xlg": 24,
-    "xl": 24,
-    "xxl": 24
+    "xs": 3,
+    "sm": 4,
+    "md": 4,
+    "lg": 6,
+    "xlg": 6,
+    "xl": 6,
+    "xxl": 6
   },
   "queries": {
     "xs": "(max-width: 767px)",

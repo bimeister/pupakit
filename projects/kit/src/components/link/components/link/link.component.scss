@@ -71,7 +71,7 @@
       .pupa-substrate {
         border-width: 1px;
         border-style: solid;
-        border-radius: 2px;
+        border-radius: 0.5rem;
 
         border-color: functions.semantic-color(lines-accent);
       }
@@ -87,7 +87,7 @@
 .pupa-substrate {
   position: absolute;
   width: calc(100% + 2rem);
-  height: calc(100% + 2px);
+  height: calc(100% + 0.5rem);
   top: 0;
   left: -1rem;
   z-index: 2;

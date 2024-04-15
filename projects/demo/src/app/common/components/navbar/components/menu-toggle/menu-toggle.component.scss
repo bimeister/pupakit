@@ -51,11 +51,11 @@ $strip-height: 2px;
     display: block;
     position: absolute;
     top: $top;
-    left: 0px;
-    right: 0px;
+    left: 0;
+    right: 0;
     height: $strip-height;
 
-    border-radius: 1px;
+    border-radius: 0.25rem;
 
     @include apply-background();
 
@@ -68,7 +68,7 @@ $strip-height: 2px;
       height: $strip-height;
       content: '';
 
-      border-radius: 1px;
+      border-radius: 0.25rem;
 
       @include apply-background();
     }

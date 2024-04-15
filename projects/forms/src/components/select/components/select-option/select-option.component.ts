@@ -17,7 +17,7 @@ export class SelectOptionComponent<T> extends SelectOptionBase<T> implements OnD
   @Input() public isDisabled: boolean = false;
   @Input() public hasCheckbox: boolean = false;
 
-  @Input() public heightPx: number = 32;
+  @Input() public heightRem: number = 8;
 
   public readonly isOpened$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 

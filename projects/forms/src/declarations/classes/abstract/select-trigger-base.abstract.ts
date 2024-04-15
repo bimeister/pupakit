@@ -6,7 +6,7 @@ import { map, switchMap, take } from 'rxjs/operators';
 import { SelectStateServiceDeclaration } from '../../interfaces/select-state-service-declaration.interface';
 import { SelectSize } from '../../types/select-size.type';
 
-const BUTTON_WIDTH_PX: number = 24;
+const BUTTON_WIDTH_REM: number = 6;
 
 @Directive()
 export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
@@ -73,9 +73,9 @@ export abstract class SelectTriggerBase<T> implements OnInit, AfterViewInit {
     )
   );
 
-  public readonly rightPaddingPx$: Observable<number> = combineLatest([this.isInvalid$, this.isVisibleReset$]).pipe(
+  public readonly rightPaddingRem$: Observable<number> = combineLatest([this.isInvalid$, this.isVisibleReset$]).pipe(
     map((states: boolean[]) =>
-      states.reduce((width: number, state: boolean) => (state ? width + BUTTON_WIDTH_PX : width), 0)
+      states.reduce((width: number, state: boolean) => (state ? width + BUTTON_WIDTH_REM : width), 0)
     )
   );
 

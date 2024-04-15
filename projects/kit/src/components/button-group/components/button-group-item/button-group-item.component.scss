@@ -30,7 +30,7 @@
     background-color: transparent;
     color: functions.semantic-color(text-primary);
 
-    box-shadow: 0 2px 8px functions.color(neutral-1000, alpha-3);
+    box-shadow: 0 0.5rem 2rem functions.color(neutral-1000, alpha-3);
   }
 
   &_disabled {
@@ -43,7 +43,7 @@
   }
 
   &_m {
-    padding: 5px 4rem;
+    padding: 1.25rem 4rem;
   }
 
   &_s {

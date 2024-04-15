@@ -1,20 +1,20 @@
 .table {
   display: block;
-  height: 400px;
+  height: 100rem;
 }
 
 .actions {
   & + & {
-    margin-top: 4px;
+    margin-top: 1rem;
   }
 }
 
 .action-button {
   & + & {
-    margin-left: 4px;
+    margin-left: 1rem;
   }
 }
 
 .events {
-  margin: 16px 0;
+  margin: 4rem 0;
 }

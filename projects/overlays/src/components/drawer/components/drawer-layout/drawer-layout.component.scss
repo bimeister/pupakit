@@ -32,7 +32,7 @@ $layout_border-size: 1px;
   box-sizing: border-box;
 
   &_with-shadow {
-    box-shadow: 0 4px 24px functions.color(neutral-1000, alpha-4);
+    box-shadow: 0 1rem 6rem functions.color(neutral-1000, alpha-4);
 
     @include mixins.host-selector-dark-theme() {
       box-shadow: none;

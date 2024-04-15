@@ -64,8 +64,8 @@ $end-item-margin: 4rem;
   }
 
   &__logo-image {
-    height: 24px;
-    width: 164px;
+    height: 6rem;
+    width: 41rem;
     margin-left: 2rem;
 
     @include xs() {
@@ -74,8 +74,8 @@ $end-item-margin: 4rem;
   }
 
   &__logo-icon {
-    height: 32px;
-    width: 32px;
+    height: 8rem;
+    width: 8rem;
   }
 
   &__status {
@@ -99,10 +99,10 @@ $end-item-margin: 4rem;
 
   &__santa-hat-icon {
     position: absolute;
-    top: -13px;
-    left: -13px;
-    height: 32px;
-    width: 32px;
+    top: -3.25rem;
+    left: -3.25rem;
+    height: 8rem;
+    width: 8rem;
   }
 
   &__spacer {

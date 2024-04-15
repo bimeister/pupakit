@@ -1,7 +1,7 @@
 @use 'mixins' as *;
 @use 'functions' as *;
 
-$height_container: 500px;
+$height_container: 125rem;
 
 :host {
   height: 100vh;

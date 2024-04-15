@@ -15,7 +15,7 @@ import { ToastContainerData } from '../declarations/interfaces/toast-container-d
 import { ToastDataType } from '../declarations/types/utility-types/toast-data.utility-type';
 import { ToastReturnType } from '../declarations/types/utility-types/toast-return.utility-type';
 
-const BOTTOM_OFFSET_PX: number = 32;
+const BOTTOM_OFFSET_REM: number = 8;
 
 @Injectable({ providedIn: 'root' })
 export class ToastsService {
@@ -80,7 +80,7 @@ export class ToastsService {
     const startPosition: GlobalPositionStrategy = this.overlay
       .position()
       .global()
-      .bottom(`${BOTTOM_OFFSET_PX}px`)
+      .bottom(`${BOTTOM_OFFSET_REM}rem`)
       .centerHorizontally();
 
     const overlayRef: OverlayRef = this.overlay.create({

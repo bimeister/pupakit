@@ -6,13 +6,13 @@
 :host {
   display: block;
   overflow: hidden;
-  max-width: 500px;
+  max-width: 125rem;
   border: 1px solid functions.semantic-color(lines-normal);
   border-radius: calc(variables.$controlBorderRadius + 1rem);
-  box-shadow: 0 4px 24px rgba(0, 29, 41, 0.04);
+  box-shadow: 0 1rem 6rem rgba(0, 29, 41, 0.04);
 
   @include mixins.host-selector-dark-theme {
-    box-shadow: 0 4px 24px rgba(0, 23, 32, 0.12);
+    box-shadow: 0 1rem 6rem rgba(0, 23, 32, 0.12);
   }
 
   @include mixins.xs() {
@@ -24,8 +24,8 @@
 
     // here important need to redefine outside element styles
     width: 100vw !important;
-    height: calc(#{functions.vh(100)} - 80px) !important;
-    margin-top: 80px !important;
+    height: calc(#{functions.vh(100)} - 20rem) !important;
+    margin-top: 20rem !important;
     min-width: none !important;
     max-width: none !important;
     min-height: none !important;

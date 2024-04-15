@@ -7,7 +7,7 @@
   align-items: flex-start;
   justify-content: flex-start;
   cursor: pointer;
-  border-radius: 1px;
+  border-radius: 0.25rem;
   gap: 2rem;
   padding: 3rem;
   position: relative;
@@ -15,7 +15,7 @@
     functions.variable(transition-timing-function_common);
 
   &_selected:not(&_disabled) {
-    box-shadow: 0 0 0 1px functions.semantic-color(kind-primary-normal);
+    box-shadow: 0 0 0 0.25rem functions.semantic-color(kind-primary-normal);
     border-radius: 1rem;
   }
 
@@ -38,7 +38,7 @@
     cursor: not-allowed;
 
     &.pupa-radio-image-control_selected {
-      box-shadow: 0 0 0 1px functions.semantic-color(lines-opacity);
+      box-shadow: 0 0 0 0.25rem functions.semantic-color(lines-opacity);
       border-radius: 1rem;
     }
   }
