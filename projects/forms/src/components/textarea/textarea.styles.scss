@@ -15,19 +15,25 @@
 }
 
 .pupa-textarea {
-  display: block;
-  padding: 0;
   border: 1px solid transparent;
   border-radius: variables.$controlBorderRadius;
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 
+  @include mixins.flex-container(row, start, start);
   @include mixins.font-preset-caption-xs();
+
+  &.large {
+    padding: 2rem 1rem;
+  }
+
+  &.medium {
+    padding: 1rem;
+  }
 
   &.large {
     .pupa-textarea__pseudo-content,
     .pupa-textarea__control {
       min-height: 10rem;
-      padding: 3rem 2rem;
     }
   }
 
@@ -35,7 +41,6 @@
     .pupa-textarea__pseudo-content,
     .pupa-textarea__control {
       min-height: 8rem;
-      padding: 2rem;
     }
   }
 
@@ -115,6 +120,11 @@
   }
 }
 
+.pupa-textarea__pseudo-content,
+.pupa-textarea__control {
+  padding: 1rem;
+}
+
 // container colors
 .pupa-textarea {
   color: functions.semantic-color(text-primary);
@@ -180,4 +190,10 @@
   &_invalid {
     color: functions.semantic-color(kind-danger-normal);
   }
+}
+
+.pupa-error-icon {
+  cursor: pointer;
+  pointer-events: all;
+  color: functions.semantic-color(kind-danger-normal);
 }

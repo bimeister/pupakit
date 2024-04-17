@@ -1,4 +1,14 @@
-import { Directive, ElementRef, EventEmitter, Input, OnChanges, Optional, Output, ViewChild } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Optional,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import {
@@ -78,6 +88,11 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @Input() public enterKeyPrevented: boolean = false;
   public readonly enterKeyPrevented$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public invalidTooltipHideOnHover: boolean = false;
+  @Input() public invalidTooltipDisabled: boolean = false;
+  @Input() public invalidTooltip: Nullable<string> = null;
+  @Input() public invalidTooltipContentTemplate: Nullable<TemplateRef<unknown>> = null;
 
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,
