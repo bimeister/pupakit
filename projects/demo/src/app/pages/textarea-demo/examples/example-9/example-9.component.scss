@@ -1,0 +1,10 @@
+@use 'mixins';
+
+:host {
+  @include mixins.flex-container(column);
+  gap: 4rem;
+}
+
+.textarea {
+  max-width: 75rem;
+}

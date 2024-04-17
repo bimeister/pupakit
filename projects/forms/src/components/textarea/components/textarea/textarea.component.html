@@ -10,7 +10,10 @@
     <pupa-scrollable class="pupa-textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
       <div class="pupa-textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
         <div class="pupa-textarea__pseudo-content">
-          <span>{{ value$ | async }}&nbsp;<!-- &nbsp; removes content bouncing --></span>
+          <span>
+            {{ value$ | async }}&nbsp;
+            <!-- &nbsp; removes content bouncing -->
+          </span>
         </div>
         <textarea
           #textarea
@@ -23,14 +26,26 @@
           (blur)="emitBlurEvent($event)"
           (input)="updateValue(textarea.value)"
           (keydown.enter)="preventEnterKeyEvent($event)"
-        >
-        </textarea>
+        ></textarea>
       </div>
     </pupa-scrollable>
+
+    <pupa-icon-holder
+      *ngIf="isInvalid$ | async"
+      size="small"
+      [withBackground]="false"
+      [pupaTooltip]="invalidTooltip"
+      [tooltipHideOnHover]="invalidTooltipHideOnHover"
+      [tooltipDisabled]="(!invalidTooltip && !invalidTooltipContentTemplate) || invalidTooltipDisabled"
+      [tooltipContentTemplate]="invalidTooltipContentTemplate"
+      (click)="emitFocusEvent()"
+    >
+      <pupa-icon class="pupa-error-icon" name="app-error-filled"></pupa-icon>
+    </pupa-icon-holder>
   </label>
 
   <div class="pupa-counter" [class.pupa-counter_invalid]="isInvalid$ | async" *ngIf="maxLength$ | async">
-    <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span
-    >&nbsp;
+    <span *ngIf="isCounterVisible$ | async">{{ counterValue$ | async }}</span>
+    &nbsp;
   </div>
 </pupa-theme-wrapper>

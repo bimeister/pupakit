@@ -9,7 +9,6 @@
 }
 
 .pupa-textarea-inline {
-  display: block;
   box-sizing: border-box;
   border: 1px solid transparent;
   border-radius: variables.$controlBorderRadius;
@@ -20,14 +19,18 @@
   @include mixins.font-preset-caption-xs();
   @include mixins.ellipsis-text-overflow;
 
+  @include mixins.flex-container(row, center);
+
+  width: 100%;
+
   &.large {
     min-height: 10rem;
-    padding: 3rem 2rem;
+    padding: 2rem 1rem;
   }
 
   &.medium {
     min-height: 8rem;
-    padding: 2rem 2rem;
+    padding: 1rem;
   }
 
   &_disabled {
@@ -36,6 +39,10 @@
 
   &__content {
     transition: 0.3s;
+    padding: 1rem;
+
+    flex: 1;
+    @include mixins.ellipsis-text-overflow;
 
     &_hidden {
       opacity: 0;
@@ -133,7 +140,11 @@
 
   &__pseudo-content,
   &__control {
-    padding: 2rem 10rem 2rem 3rem;
+    padding: 2rem 7rem 2rem 2rem;
+
+    &_invalid {
+      padding-right: 14rem;
+    }
   }
 
   @include mixins.xs {
@@ -143,16 +154,16 @@
   }
 }
 
-.pupa-close-icon {
-  --pseudoIndentSize: 1rem;
+.pupa-close-icon-holder {
+  --pseudoIndentSize: 2rem;
   position: absolute;
   top: 50%;
-  right: 2rem;
-  transform: translateY(calc(-50% + var(--pseudoIndentSize)));
+  right: 0;
+  transform: translateY(calc(-50% - var(--pseudoIndentSize)));
   z-index: 2;
-  font-size: 4rem;
-  padding: var(--pseudoIndentSize);
-  margin: calc(var(--pseudoIndentSize) * -1);
+}
+
+.pupa-close-icon {
   cursor: pointer;
   pointer-events: all;
   color: functions.semantic-color(icons-secondary);
@@ -160,6 +171,21 @@
   &:hover {
     color: functions.semantic-color(kind-primary-hover);
   }
+}
+
+.pupa-error-icon-holder {
+  --pseudoIndentSize: 2rem;
+  position: absolute;
+  top: 50%;
+  right: 6rem;
+  transform: translateY(calc(-50% - var(--pseudoIndentSize)));
+  z-index: 2;
+}
+
+.pupa-error-icon {
+  cursor: pointer;
+  pointer-events: all;
+  color: functions.semantic-color(kind-danger-normal);
 }
 
 .pupa-counter_overlay {

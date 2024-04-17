@@ -52,9 +52,13 @@ export class TextareaDemoComponent implements OnInit, OnDestroy {
   public readonly placeholderFormControl: FormControl<string | null> = new FormControl<string | null>(
     'Custom placeholder'
   );
+  public readonly tooltipTemplateFormControl: FormControl<string | null> = new FormControl<string | null>(
+    '<b>Invalid tooltip</b>'
+  );
   public readonly isDisabledFormControl: FormControl<boolean> = new FormControl<boolean>(false);
   public readonly textAreaFormControl: FormControl<string | null> = new FormControl<string | null>(null);
   public readonly textAreaInlineFormControl: FormControl<string | null> = new FormControl<string | null>(null);
+  public readonly tooltipTextFormControl: FormControl<string | null> = new FormControl<string | null>('');
   private readonly isDisabled$: Observable<boolean> = this.isDisabledFormControl.statusChanges.pipe(
     map(() => this.isDisabledFormControl.disabled),
     distinctUntilChanged()
@@ -111,6 +115,12 @@ export class TextareaDemoComponent implements OnInit, OnDestroy {
     HTML: `${BASE_REQUEST_PATH}/example-8/example-8.component.html`,
     SCSS: `${BASE_REQUEST_PATH}/example-8/example-8.component.scss`,
     TS: `${BASE_REQUEST_PATH}/example-8/example-8.component.ts`,
+  };
+
+  public readonly example9Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-9/example-9.component.html`,
+    SCSS: `${BASE_REQUEST_PATH}/example-9/example-9.component.scss`,
+    TS: `${BASE_REQUEST_PATH}/example-9/example-9.component.ts`,
   };
 
   public ngOnInit(): void {

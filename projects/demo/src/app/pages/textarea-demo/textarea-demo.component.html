@@ -45,6 +45,11 @@
     <pupa-code-container [content]="example8Content">
       <demo-textarea-example-8 *pupaCodeContainerPreviewTemplate></demo-textarea-example-8>
     </pupa-code-container>
+
+    <h3 demoAnchor>Invalid tooltip</h3>
+    <pupa-code-container [content]="example9Content">
+      <demo-textarea-example-9 *pupaCodeContainerPreviewTemplate></demo-textarea-example-9>
+    </pupa-code-container>
   </div>
   <div *demoPageTab="'api'">
     <demo-example-viewer>
@@ -57,11 +62,15 @@
               size: size$ | async,
               counterVisibility: counterVisibility$ | async,
               isEnterKeyPrevented: isEnterKeyPrevented$ | async,
+              invalidTooltipHideOnHover: invalidTooltipHideOnHover$ | async,
+              invalidTooltipDisabled: invalidTooltipDisabled$ | async,
             };
             let isPatched = isPatched;
             let size = size;
             let counterVisibility = counterVisibility;
             let isEnterKeyPrevented = isEnterKeyPrevented;
+            let invalidTooltipHideOnHover = invalidTooltipHideOnHover;
+            let invalidTooltipDisabled = invalidTooltipDisabled;
           "
         >
           <div class="controls-list__block">
@@ -77,11 +86,15 @@
               [minRows]="minRowsFormControl.value"
               [maxRows]="maxRowsFormControl.value"
               [enterKeyPrevented]="isEnterKeyPrevented"
+              [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
+              [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
+              [invalidTooltipDisabled]="invalidTooltipDisabled"
+              [invalidTooltip]="tooltipTextFormControl.value"
             ></pupa-textarea>
           </div>
           <div class="controls-list__block">
-            <pupa-label class="control-label" [disabled]="textAreaInlineFormControl.disabled"
-              >pupa-textarea-inline
+            <pupa-label class="control-label" [disabled]="textAreaInlineFormControl.disabled">
+              pupa-textarea-inline
             </pupa-label>
             <pupa-textarea-inline
               class="textarea"
@@ -94,6 +107,10 @@
               [minRows]="minRowsFormControl.value"
               [maxRows]="maxRowsFormControl.value"
               [enterKeyPrevented]="isEnterKeyPrevented"
+              [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
+              [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
+              [invalidTooltipDisabled]="invalidTooltipDisabled"
+              [invalidTooltip]="tooltipTextFormControl.value"
             ></pupa-textarea-inline>
           </div>
         </div>
@@ -122,7 +139,7 @@
       <demo-example-viewer-section-label>Common textarea properties</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property decoratorName="input" name="size" type="TextareaSize">
-          <ng-container *demoExampleViewerPropertyDescription> Adjusts the size of the element.</ng-container>
+          <ng-container *demoExampleViewerPropertyDescription>Adjusts the size of the element.</ng-container>
           <demo-props-radio-select #size$ [options]="sizeOptions"></demo-props-radio-select>
         </demo-example-viewer-property>
 
@@ -162,6 +179,64 @@
           <demo-props-switcher #isEnterKeyPrevented$></demo-props-switcher>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
+
+      <demo-example-viewer-section>
+        <demo-example-viewer-section-label size="medium">
+          <pupa-code-inline>invalidTooltip*</pupa-code-inline>
+          properties are written by analogy with a
+          <pupa-code-inline>TooltipDirective</pupa-code-inline>
+        </demo-example-viewer-section-label>
+        <pupa-callout>
+          <ul>
+            <li>
+              The tooltip is only visible when input is in INVALID state. To trigger invalid state use
+              <pupa-code-inline>setValidators</pupa-code-inline>
+              or
+              <pupa-code-inline>isPatched</pupa-code-inline>
+              switchers.
+            </li>
+            <li>
+              Please note that only one tooltip input value can be applied at the time -
+              <pupa-code-inline>invalidTooltip</pupa-code-inline>
+              or
+              <pupa-code-inline>invalidTooltipContentTemplate</pupa-code-inline>
+              . If you submit simple content and a template to the directive at the same time, the display will take
+              precedence over the template. Please use switcher to disable
+              <pupa-code-inline>invalidTooltipContentTemplate</pupa-code-inline>
+              before entering simple tooltip text.
+            </li>
+          </ul>
+        </pupa-callout>
+        <demo-example-viewer-property decoratorName="input" name="invalidTooltip" type="string">
+          <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip simple content.</ng-container>
+          <pupa-input-text
+            placeholder="Type tooltip text here"
+            [formControl]="tooltipTextFormControl"
+            [withReset]="true"
+          ></pupa-input-text>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="invalidTooltipContentTemplate" type="TemplateRef">
+          <ng-container *demoExampleViewerPropertyDescription>Invalid tooltip content template.</ng-container>
+          <pupa-textarea [formControl]="tooltipTemplateFormControl"></pupa-textarea>
+          <br />
+          <demo-props-switcher #isInvalidTooltipContentTemplateEnabled$ [initialValue]="true"></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="tooltipHideOnHover" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Hide on invalid tooltip hover.</ng-container>
+          <demo-props-switcher #invalidTooltipHideOnHover$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="tooltipDisabled" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the invalid tooltip is disabled.</ng-container>
+          <demo-props-switcher #invalidTooltipDisabled$></demo-props-switcher>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
     </demo-example-viewer>
   </div>
 </demo-page>
+
+<ng-template #errorTemplate>
+  <div [innerHTML]="tooltipTemplateFormControl.value"></div>
+</ng-template>
