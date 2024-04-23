@@ -74,9 +74,24 @@
     </pupa-select-dropdown>
   </pupa-select>
 
+  <pupa-select class="select" [withReset]="true" [formControl]="control6">
+    <pupa-select-trigger-tag [kind]="'selected'">
+      {{ control6.value }}
+    </pupa-select-trigger-tag>
+
+    <pupa-select-dropdown width="320">
+      <pupa-select-options-container>
+        <pupa-select-option *ngFor="let option of options$ | async" [value]="option.value">
+          <pupa-icon name="app-cube-3d"></pupa-icon>
+          {{ option.caption }}
+        </pupa-select-option>
+      </pupa-select-options-container>
+    </pupa-select-dropdown>
+  </pupa-select>
+
   <pupa-select class="select" [withReset]="true" [formControl]="control5">
     <pupa-select-trigger-tag [kind]="'custom'">
-      {{ control6.value }}
+      {{ control7.value }}
     </pupa-select-trigger-tag>
 
     <pupa-select-dropdown width="320">

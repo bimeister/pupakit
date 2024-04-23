@@ -20,6 +20,7 @@ export class TagDemoComponent {
     { caption: 'Success', value: 'success' },
     { caption: 'Danger', value: 'danger' },
     { caption: 'Warning', value: 'warning' },
+    { caption: 'Selected', value: 'selected' },
     { caption: 'Custom', value: 'custom' },
   ];
 

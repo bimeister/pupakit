@@ -14,6 +14,7 @@ const SELECT_OPTIONS: SelectOption[] = [
   { value: 'Value 4', caption: 'Report 4' },
   { value: 'Value 5', caption: 'Report 5' },
   { value: 'Value 6', caption: 'Report 6' },
+  { value: 'Value 7', caption: 'Report 7' },
 ];
 
 @Component({
@@ -30,5 +31,6 @@ export class TagExample6Component {
   public readonly control4: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[3].value);
   public readonly control5: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[4].value);
   public readonly control6: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[5].value);
+  public readonly control7: FormControl<string> = new FormControl<string>(SELECT_OPTIONS[6].value);
   public readonly options$: BehaviorSubject<SelectOption[]> = new BehaviorSubject<SelectOption[]>(SELECT_OPTIONS);
 }
