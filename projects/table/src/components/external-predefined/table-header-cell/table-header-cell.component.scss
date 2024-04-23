@@ -47,6 +47,7 @@
 
 .pupa-header-cell__text {
   display: inline-block;
+  width: 100%;
   @include mixins.ellipsis-text-overflow;
 }
 
