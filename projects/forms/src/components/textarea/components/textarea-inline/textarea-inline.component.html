@@ -17,7 +17,7 @@
     </span>
 
     <pupa-icon-holder
-      *ngIf="isInvalid$ | async"
+      *ngIf="(invalidTooltip || invalidTooltipContentTemplate) && isInvalid$ | async"
       size="small"
       [withBackground]="false"
       [pupaTooltip]="invalidTooltip"
@@ -54,7 +54,12 @@
         [class.pupa-textarea_invalid]="isInvalid$ | async"
         (mousedown)="processMouseDown($event)"
       >
-        <pupa-scrollable #scrollable class="pupa-textarea__scrollable" [style.max-height.px]="maxHeightPx$ | async">
+        <pupa-scrollable
+          #scrollable
+          class="pupa-textarea__scrollable"
+          [style.max-height.px]="maxHeightPx$ | async"
+          [class.pupa-textarea__scrollable_invalid]="isInvalid$ | async"
+        >
           <div class="pupa-textarea__wrapper" [style.min-height.px]="minHeightPx$ | async">
             <div
               class="pupa-textarea__pseudo-content"
@@ -69,7 +74,6 @@
               #textarea
               pupaAutofocus
               class="pupa-textarea__control"
-              [class.pupa-textarea__control_invalid]="isInvalid$ | async"
               [value]="value$ | async"
               [placeholder]="placeholder$ | async"
               [autocomplete]="autocomplete ? 'on' : 'off'"
@@ -80,25 +84,30 @@
             ></textarea>
           </div>
         </pupa-scrollable>
+
+        <pupa-icon-holder
+          *ngIf="(invalidTooltip || invalidTooltipContentTemplate) && isInvalid$ | async"
+          class="pupa-error-icon-holder"
+          size="small"
+          [withBackground]="false"
+        >
+          <pupa-icon
+            class="pupa-error-icon"
+            name="app-error-filled"
+            [pupaTooltip]="invalidTooltip"
+            [tooltipHideOnHover]="invalidTooltipHideOnHover"
+            [tooltipDisabled]="(!invalidTooltip && !invalidTooltipContentTemplate) || invalidTooltipDisabled"
+            [tooltipContentTemplate]="invalidTooltipContentTemplate"
+          ></pupa-icon>
+        </pupa-icon-holder>
+
+        <pupa-icon-holder class="pupa-close-icon-holder" size="small" [withBackground]="false">
+          <pupa-icon class="pupa-close-icon" name="app-minimize" (click)="close()"></pupa-icon>
+        </pupa-icon-holder>
       </label>
 
-      <pupa-icon-holder *ngIf="isInvalid$ | async" class="pupa-error-icon-holder" size="small" [withBackground]="false">
-        <pupa-icon
-          class="pupa-error-icon"
-          name="app-error-filled"
-          [pupaTooltip]="invalidTooltip"
-          [tooltipHideOnHover]="invalidTooltipHideOnHover"
-          [tooltipDisabled]="(!invalidTooltip && !invalidTooltipContentTemplate) || invalidTooltipDisabled"
-          [tooltipContentTemplate]="invalidTooltipContentTemplate"
-        ></pupa-icon>
-      </pupa-icon-holder>
-
-      <pupa-icon-holder class="pupa-close-icon-holder" size="small" [withBackground]="false">
-        <pupa-icon class="pupa-close-icon" name="app-minimize" (click)="close()"></pupa-icon>
-      </pupa-icon-holder>
-
       <div
-        class="pupa-counter counter_overlay"
+        class="pupa-counter pupa-counter_overlay"
         [class.pupa-counter_mobile]="isMobile$ | async"
         [class.pupa-counter_invalid]="isInvalid$ | async"
         *ngIf="maxLength$ | async"

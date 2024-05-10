@@ -31,7 +31,7 @@
     </pupa-scrollable>
 
     <pupa-icon-holder
-      *ngIf="isInvalid$ | async"
+      *ngIf="(invalidTooltip || invalidTooltipContentTemplate) && isInvalid$ | async"
       size="small"
       [withBackground]="false"
       [pupaTooltip]="invalidTooltip"

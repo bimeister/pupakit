@@ -24,13 +24,11 @@
   width: 100%;
 
   &.large {
-    min-height: 10rem;
-    padding: 2rem 1rem;
+    padding: 1.75rem 1rem;
   }
 
   &.medium {
-    min-height: 8rem;
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   &_disabled {
@@ -140,10 +138,14 @@
 
   &__pseudo-content,
   &__control {
-    padding: 2rem 7rem 2rem 2rem;
+    padding: 1.75rem 2rem 1.75rem 2rem;
+  }
+
+  &__scrollable {
+    padding-right: 7rem;
 
     &_invalid {
-      padding-right: 14rem;
+      padding-right: 13rem;
     }
   }
 
@@ -158,8 +160,8 @@
   --pseudoIndentSize: 2rem;
   position: absolute;
   top: 50%;
-  right: 0;
-  transform: translateY(calc(-50% - var(--pseudoIndentSize)));
+  right: 1rem;
+  transform: translate(0, -50%);
   z-index: 2;
 }
 
@@ -177,8 +179,8 @@
   --pseudoIndentSize: 2rem;
   position: absolute;
   top: 50%;
-  right: 6rem;
-  transform: translateY(calc(-50% - var(--pseudoIndentSize)));
+  right: 7rem;
+  transform: translate(0, -50%);
   z-index: 2;
 }
 
