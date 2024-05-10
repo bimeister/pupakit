@@ -26,8 +26,7 @@ import { TextareaSize } from '../../types/textarea-size.type';
 import { InputBaseControlValueAccessor } from './input-base-control-value-accessor.abstract';
 
 const DEFAULT_MAX_ROWS: number = 5;
-const LARGE_TEXTAREA_VERTICAL_PADDINGS_PX: number = 24;
-const MEDIUM_TEXTAREA_VERTICAL_PADDINGS_PX: number = 16;
+const VERTICAL_PADDINGS_PX: number = 8;
 
 @Directive()
 export abstract class TextareaBase extends InputBaseControlValueAccessor<string> implements OnChanges {
@@ -53,26 +52,20 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   @Input() public minRows: number = 2;
   private readonly minRows$: BehaviorSubject<number> = new BehaviorSubject<number>(this.minRows);
-  public readonly minHeightPx$: Observable<number> = combineLatest([this.minRows$, this.size$]).pipe(
-    map(([minRows, size]: [number, TextareaSize]) =>
-      TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, minRows, size)
-    )
+  public readonly minHeightPx$: Observable<number> = this.minRows$.pipe(
+    map((minRows: number) => TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, minRows))
   );
 
   @Input() public maxRows: number = DEFAULT_MAX_ROWS;
   private readonly maxRows$: BehaviorSubject<Nullable<number>> = new BehaviorSubject<Nullable<number>>(this.maxRows);
-  public readonly maxHeightPx$: Observable<Nullable<number>> = combineLatest([
-    this.minRows$,
-    this.maxRows$,
-    this.size$,
-  ]).pipe(
-    map(([minRows, maxRows, size]: [number, Nullable<number>, TextareaSize]) => {
+  public readonly maxHeightPx$: Observable<Nullable<number>> = combineLatest([this.minRows$, this.maxRows$]).pipe(
+    map(([minRows, maxRows]: [number, Nullable<number>]) => {
       if (isNil(maxRows)) {
         return null;
       }
 
       const rowsCount: number = minRows > maxRows ? minRows : maxRows;
-      return TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, rowsCount, size);
+      return TextareaBase.getHeightPxByRowsCount(this.lineHeightSourceRef, rowsCount);
     })
   );
 
@@ -286,15 +279,11 @@ export abstract class TextareaBase extends InputBaseControlValueAccessor<string>
 
   private static getHeightPxByRowsCount(
     lineHeightSourceRef: ElementRef<HTMLTextAreaElement>,
-    rowsCount: number,
-    size: TextareaSize
+    rowsCount: number
   ): number {
-    const verticalPaddingsPx: number =
-      size === 'large' ? LARGE_TEXTAREA_VERTICAL_PADDINGS_PX : MEDIUM_TEXTAREA_VERTICAL_PADDINGS_PX;
-
     const computedStyles: CSSStyleDeclaration = getComputedStyle(lineHeightSourceRef.nativeElement);
     const lineHeightPx: number = Number.parseFloat(computedStyles.lineHeight);
 
-    return lineHeightPx * rowsCount + verticalPaddingsPx;
+    return lineHeightPx * rowsCount + VERTICAL_PADDINGS_PX;
   }
 }

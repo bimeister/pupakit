@@ -23,24 +23,24 @@
   @include mixins.font-preset-caption-xs();
 
   &.large {
-    padding: 2rem 1rem;
+    padding: 1.75rem 1rem;
   }
 
   &.medium {
-    padding: 1rem;
+    padding: 0.75rem;
   }
 
   &.large {
     .pupa-textarea__pseudo-content,
     .pupa-textarea__control {
-      min-height: 10rem;
+      min-height: 6rem;
     }
   }
 
   &.medium {
     .pupa-textarea__pseudo-content,
     .pupa-textarea__control {
-      min-height: 8rem;
+      min-height: 4rem;
     }
   }
 
@@ -122,7 +122,7 @@
 
 .pupa-textarea__pseudo-content,
 .pupa-textarea__control {
-  padding: 1rem;
+  padding: 1rem 2rem 1rem 1rem;
 }
 
 // container colors
