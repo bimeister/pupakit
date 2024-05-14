@@ -10,7 +10,7 @@ import { ElementRef, Injector, Renderer2, RendererFactory2 } from '@angular/core
 import { ClientUiStateHandlerService, OVERLAY_VIEWPORT_MARGIN_PX, Position } from '@bimeister/pupakit.common';
 import { Uuid, getUuid, isNil } from '@bimeister/utilities';
 import { Observable, Subscription, fromEvent, merge, of } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { PopoverContainerComponent } from '../../components/popover/components/popover-container/popover-container.component';
 import { PopoverConfig } from '../interfaces/popover-config.interface';
 import { PopoverContainerData } from '../interfaces/popover-container-data.interface';
@@ -20,6 +20,7 @@ import { PopoverDataType } from '../types/utility-types/popover-data.utility-typ
 import { PopoverReturnType } from '../types/utility-types/popover-return.utility-type';
 import { PopoverComponentBase } from './abstract/popover-component-base.abstract';
 import { PopoverRef } from './popover-ref.class';
+import { NavigationStart, Router } from '@angular/router';
 
 const OVERLAY_OFFSET_Y: number = 8;
 const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
@@ -48,6 +49,10 @@ const OVERLAY_POSITIONS: ConnectionPositionPair[] = [
     -OVERLAY_OFFSET_Y
   ),
 ];
+enum NavigationTriggerEvents {
+  POPSTATE = 'popstate',
+}
+type CloseEvent = MouseEvent | TouchEvent | WheelEvent | Event | null | NavigationStart;
 
 export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> implements PortalLayer {
   public readonly id: Uuid = getUuid();
@@ -70,7 +75,8 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     private readonly injector: Injector,
     private readonly rendererFactory: RendererFactory2,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
-    private readonly document: Document
+    private readonly document: Document,
+    private readonly router: Router
   ) {
     this.handleXsBreakpointChange();
     this.outsideEventsSubscription.add(this.listenOutsideEventsForCloseProcess());
@@ -175,18 +181,21 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
     const touchMove$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'touchmove');
     const wheel$: Observable<MouseEvent> = fromEvent<MouseEvent>(this.document, 'wheel');
     const resize$: Observable<MouseEvent> = fromEvent<MouseEvent>(window, 'resize');
-
+    const routerEvents$: Observable<NavigationStart> = this.router.events.pipe(
+      filter((event: NavigationStart) => event.navigationTrigger === NavigationTriggerEvents.POPSTATE)
+    );
     let anchorMouseEnter$: Observable<Event | null> = of(null);
     if (this.config.anchor instanceof ElementRef) {
       anchorMouseEnter$ = fromEvent(this.config.anchor.nativeElement, 'mouseenter');
     }
 
-    return merge(anchorMouseEnter$, mouseDown$, touchMove$, wheel$, resize$).subscribe(
-      (event: MouseEvent | TouchEvent | WheelEvent | Event | null) => {
-        if (isNil(event)) {
+    return merge(anchorMouseEnter$, mouseDown$, touchMove$, wheel$, resize$, routerEvents$)
+      .pipe(filter((event: CloseEvent) => !isNil(event)))
+      .subscribe((event: NonNullable<CloseEvent>) => {
+        if (event instanceof NavigationStart || event.type === 'resize') {
+          this.popoverRef.close();
           return;
         }
-
         const eventTarget: HTMLElement = event.target as HTMLElement;
 
         if (this.isContainsElementOnAnchor(eventTarget)) {
@@ -194,8 +203,7 @@ export class Popover<TComponent extends PopoverComponentBase<unknown, unknown>> 
         }
 
         this.popoverRef.close();
-      }
-    );
+      });
   }
 
   private popoverRefClosingProcess(): Subscription {

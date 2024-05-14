@@ -13,6 +13,7 @@ import { PopoverReturnType } from '../declarations/types/utility-types/popover-r
 import { PortalLayersService } from './portal-layers.service';
 import { PopoverTrigger } from '../declarations/interfaces/popover-trigger.interface';
 import { DEFAULT_POPOVER_TRIGGER_CSS_CLASS } from '../declarations/constants/default-popover-trigger-css-class.const';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class PopoversService {
@@ -25,7 +26,8 @@ export class PopoversService {
     protected readonly overlay: Overlay,
     protected readonly injector: Injector,
     private readonly rendererFactory: RendererFactory2,
-    private readonly portalLayersService: PortalLayersService
+    private readonly portalLayersService: PortalLayersService,
+    private readonly router: Router
   ) {}
 
   public open<TComponent extends PopoverComponentBase<unknown, unknown>>(
@@ -75,7 +77,8 @@ export class PopoversService {
       this.injector,
       this.rendererFactory,
       this.clientUiStateHandlerService,
-      this.document
+      this.document,
+      this.router
     );
 
     this.registerPopover(popover, config.anchor);
