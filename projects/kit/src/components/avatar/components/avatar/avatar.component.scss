@@ -17,7 +17,7 @@
     background-color: functions.color(warning-200);
 
     .pupa-avatar__icon {
-      color: functions.color(neutral-1000);
+      color: functions.semantic-color(text-primary);
     }
   }
 
@@ -26,7 +26,7 @@
 
     .pupa-avatar__text,
     .pupa-avatar__icon {
-      color: functions.color(neutral-50);
+      color: functions.semantic-color(text-disabled);
     }
   }
 
@@ -50,14 +50,14 @@
     display: block;
     height: 100%;
     width: 100%;
-    color: functions.color(neutral-1000);
+    color: functions.semantic-color(text-primary);
   }
 
   &__text {
     @include mixins.flex-container(row, center, center);
     line-height: 3rem;
     white-space: nowrap;
-    color: functions.color(neutral-1000);
+    color: functions.semantic-color(text-primary);
     @include mixins.font-type-regular();
     box-sizing: border-box;
     height: 100%;
