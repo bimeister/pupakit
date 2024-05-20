@@ -38,6 +38,7 @@
   &__content {
     transition: 0.3s;
     padding: 1rem;
+    height: 6rem;
 
     flex: 1;
     @include mixins.ellipsis-text-overflow;
