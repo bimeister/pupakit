@@ -5,7 +5,7 @@
       "files": ["*.ts"],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {
-        "ecmaVersion": 2020,
+        "ecmaVersion": 2022,
         "sourceType": "module",
         "project": ["tsconfig.eslint.json"],
         "createDefaultProgram": true
@@ -182,6 +182,10 @@
               "regex": "^I[A-Z]",
               "match": false
             }
+          },
+          {
+            "selector": "import",
+            "format": ["camelCase", "PascalCase", "UPPER_CASE"]
           }
         ],
         "jsdoc/no-types": "error",
@@ -253,7 +257,7 @@
           }
         ],
         "no-throw-literal": "off",
-        "@typescript-eslint/no-throw-literal": ["error"],
+        "@typescript-eslint/no-throw-literal": "error",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
           "error",

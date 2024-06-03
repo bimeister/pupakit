@@ -22,8 +22,8 @@
     "barrel": "barrelsby --config ../../barrelsby.json --directory ./src"
   },
   "peerDependencies": {
-    "@angular/common": "^16.2.12",
-    "@angular/core": "^16.2.12"
+    "@angular/common": "^17.3.10",
+    "@angular/core": "^17.3.10"
   },
   "dependencies": {
     "@bimeister/pupakit.common": "*",
