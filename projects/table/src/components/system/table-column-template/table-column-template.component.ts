@@ -1,13 +1,13 @@
 import {
-  Component,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ContentChild,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  Component,
+  ContentChild,
   Input,
+  ViewEncapsulation,
 } from '@angular/core';
-import { TableHeaderCellTemplateDirective } from '../../../directives/table-header-cell-template.directive';
 import { TableBodyCellTemplateDirective } from '../../../directives/table-cell-template.directive';
+import { TableHeaderCellTemplateDirective } from '../../../directives/table-header-cell-template.directive';
 import { TableTemplatesService } from '../../../services/table-templates.service';
 
 @Component({
@@ -17,13 +17,16 @@ import { TableTemplatesService } from '../../../services/table-templates.service
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TableColumnTemplateComponent<T> implements AfterContentInit {
+export class TableColumnTemplateComponent<TCell, TColumn> implements AfterContentInit {
   @ContentChild(TableHeaderCellTemplateDirective) public tableHeaderCellTemplate: TableHeaderCellTemplateDirective;
-  @ContentChild(TableBodyCellTemplateDirective) public tableBodyCellTemplate: TableBodyCellTemplateDirective<T>;
+  @ContentChild(TableBodyCellTemplateDirective) public tableBodyCellTemplate: TableBodyCellTemplateDirective<
+    TCell,
+    TColumn
+  >;
 
   @Input() public columnType: string;
 
-  constructor(private readonly tableTemplatesService: TableTemplatesService<T>) {}
+  constructor(private readonly tableTemplatesService: TableTemplatesService<TCell>) {}
 
   public ngAfterContentInit(): void {
     this.tableTemplatesService.registerTemplates(this.columnType, {
