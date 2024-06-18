@@ -268,9 +268,6 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.initHammerEvents();
   }
 
-  public readonly rowTrackByFunction: TrackByFunction<TableBodyRow<T>> = (index: number, _item: TableBodyRow<T>) =>
-    index;
-
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processTableControllerChanges(changes.controller);
   }
