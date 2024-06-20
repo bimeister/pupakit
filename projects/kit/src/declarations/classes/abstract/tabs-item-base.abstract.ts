@@ -1,4 +1,4 @@
-import { Directive, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Directive, EventEmitter, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
@@ -10,6 +10,8 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
   public abstract name: T;
   public abstract isActive: Nullable<boolean>;
   public abstract disabled: Nullable<boolean>;
+  public isManageTapEvent: Nullable<boolean>;
+  public tapEvent: EventEmitter<() => void> = new EventEmitter<() => void>();
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
   public readonly isActive$: Observable<boolean> = this.stateService.activeTabName$.pipe(
@@ -36,7 +38,17 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
     if (this.disabled) {
       return;
     }
-    this.stateService.setActiveTab(this.name);
+
+    if (this.isManageTapEvent) {
+      this.tapEvent.emit(this.setActiveTabCallback.bind(this));
+      return;
+    }
+
+    this.setActiveTabCallback();
+  }
+
+  private setActiveTabCallback(): () => void {
+    return (): void => this.stateService.setActiveTab(this.name);
   }
 
   private processInputIsActiveChanges(isActive: Nullable<boolean>): void {
