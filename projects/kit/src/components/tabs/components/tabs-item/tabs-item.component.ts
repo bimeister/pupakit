@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
@@ -24,6 +26,8 @@ export class TabsItemComponent<T> extends TabsItemBase<T, TabsStateService<T>> i
   @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
+
+  @Output() public readonly clickEvent: EventEmitter<VoidFunction> = new EventEmitter<VoidFunction>();
 
   constructor(
     private readonly elementRef: ElementRef<HTMLElement>,

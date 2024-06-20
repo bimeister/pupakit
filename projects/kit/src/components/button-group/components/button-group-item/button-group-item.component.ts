@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { Nullable } from '@bimeister/utilities';
@@ -27,6 +29,8 @@ export class ButtonGroupItemComponent<T> extends TabsItemBase<T, ButtonGroupStat
   @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
+
+  @Output() public readonly clickEvent: EventEmitter<VoidFunction> = new EventEmitter<VoidFunction>();
 
   public readonly sizeClass$: Observable<string> = this.stateService.buttonGroupSize$.pipe(
     map((size: ButtonGroupSize) => `pupa-button-group-item_${size}`)

@@ -1,4 +1,4 @@
-import { Directive, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { Directive, EventEmitter, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { ComponentChanges } from '@bimeister/pupakit.common';
 import { isNil, Nullable } from '@bimeister/utilities';
 import { Observable } from 'rxjs';
@@ -10,6 +10,7 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
   public abstract name: T;
   public abstract isActive: Nullable<boolean>;
   public abstract disabled: Nullable<boolean>;
+  public abstract clickEvent: EventEmitter<VoidFunction>;
 
   protected readonly stateService: S = !isNil(this.containerService) ? this.containerService : this.tabsService;
   public readonly isActive$: Observable<boolean> = this.stateService.activeTabName$.pipe(
@@ -36,13 +37,23 @@ export abstract class TabsItemBase<T, S extends TabsServiceBase<T>> implements O
     if (this.disabled) {
       return;
     }
-    this.stateService.setActiveTab(this.name);
+
+    if (this.clickEvent.observers.length > 0) {
+      this.clickEvent.emit(this.setActiveTab.bind(this));
+      return;
+    }
+
+    this.setActiveTab();
   }
 
   private processInputIsActiveChanges(isActive: Nullable<boolean>): void {
     if (this.disabled || !isActive) {
       return;
     }
-    queueMicrotask(() => this.stateService.setActiveTab(this.name));
+    queueMicrotask(() => this.setActiveTab());
+  }
+
+  private setActiveTab(): void {
+    this.stateService.setActiveTab(this.name);
   }
 }
