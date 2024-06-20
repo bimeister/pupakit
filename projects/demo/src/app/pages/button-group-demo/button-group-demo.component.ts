@@ -32,4 +32,10 @@ export class ButtonGroupDemoComponent {
     TS: `${BASE_REQUEST_PATH}/example-5/example-5.component.ts`,
     SCSS: `${BASE_REQUEST_PATH}/example-5/example-5.component.scss`,
   };
+
+  public readonly example6Content: Record<string, string> = {
+    HTML: `${BASE_REQUEST_PATH}/example-6/example-6.component.html`,
+    TS: `${BASE_REQUEST_PATH}/example-6/example-6.component.ts`,
+    SCSS: `${BASE_REQUEST_PATH}/example-6/example-6.component.scss`,
+  };
 }

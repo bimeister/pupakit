@@ -26,6 +26,11 @@
     <pupa-code-container [content]="example5Content">
       <demo-stepper-example-5 *pupaCodeContainerPreviewTemplate></demo-stepper-example-5>
     </pupa-code-container>
+
+    <h3 demoAnchor>Management of click event</h3>
+    <pupa-code-container [content]="example6Content">
+      <demo-stepper-example-6 *pupaCodeContainerPreviewTemplate></demo-stepper-example-6>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -33,7 +38,7 @@
       <demo-example-viewer-content class="content">
         <pupa-stepper-container>
           <pupa-stepper>
-            <pupa-stepper-item name="step1" [disabled]="disabled$ | async">Step 1 </pupa-stepper-item>
+            <pupa-stepper-item name="step1" [disabled]="disabled$ | async">Step 1</pupa-stepper-item>
           </pupa-stepper>
           <pupa-stepper-content>
             <div class="step" *pupaStepperItemContentTemplate="'step1'">Step 1 content</div>
@@ -45,8 +50,8 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property name="name" type="string" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription
-            >Set the name of the element for content's match.</ng-container
-          >
+            >Set the name of the element for content's match.
+          </ng-container>
         </demo-example-viewer-property>
         <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
@@ -54,8 +59,17 @@
         </demo-example-viewer-property>
         <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription
-            >Whether the element is active. First element is active by default.</ng-container
-          >
+            >Whether the element is active. First element is active by default.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>StepperItemComponent events</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="clickEvent" type="EventEmitter<VoidFunction>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Get click event callback to trigger when needed.
+          </ng-container>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 

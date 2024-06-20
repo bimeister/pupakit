@@ -2,10 +2,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
+  EventEmitter,
   Inject,
   Input,
   OnInit,
   Optional,
+  Output,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -30,6 +32,8 @@ export class StepperItemComponent<T> extends TabsItemBase<T, TabsStateService<T>
   @Input() public name: T;
   @Input() public isActive: Nullable<boolean>;
   @Input() public disabled: Nullable<boolean>;
+
+  @Output() public readonly clickEvent: EventEmitter<VoidFunction> = new EventEmitter<VoidFunction>();
 
   @ViewChild('stepperItem', { static: true }) private readonly stepperItemElement: ElementRef;
 

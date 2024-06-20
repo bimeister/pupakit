@@ -36,6 +36,11 @@
     <pupa-code-container [content]="example7Content">
       <demo-tabs-example-7 *pupaCodeContainerPreviewTemplate></demo-tabs-example-7>
     </pupa-code-container>
+
+    <h3 demoAnchor>Management of click event</h3>
+    <pupa-code-container [content]="example8Content">
+      <demo-tabs-example-8 *pupaCodeContainerPreviewTemplate></demo-tabs-example-8>
+    </pupa-code-container>
   </div>
 
   <div *demoPageTab="'api'">
@@ -43,7 +48,7 @@
       <demo-example-viewer-content class="content">
         <pupa-tabs-container>
           <pupa-tabs>
-            <pupa-tabs-item name="tab1" [disabled]="disabled$ | async">Tab 1 </pupa-tabs-item>
+            <pupa-tabs-item name="tab1" [disabled]="disabled$ | async">Tab 1</pupa-tabs-item>
           </pupa-tabs>
           <pupa-tabs-content>
             <div class="tab" *pupaTabsItemContentTemplate="'tab1'">Tab 1 content</div>
@@ -55,8 +60,8 @@
       <demo-example-viewer-section>
         <demo-example-viewer-property name="name" type="string" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription
-            >Set the name of the element for content's match.</ng-container
-          >
+            >Set the name of the element for content's match.
+          </ng-container>
         </demo-example-viewer-property>
         <demo-example-viewer-property name="disabled" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is disabled.</ng-container>
@@ -64,8 +69,17 @@
         </demo-example-viewer-property>
         <demo-example-viewer-property name="active" type="boolean" decoratorName="input">
           <ng-container *demoExampleViewerPropertyDescription
-            >Whether the element is active. First element is active by default.</ng-container
-          >
+            >Whether the element is active. First element is active by default.
+          </ng-container>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
+      <demo-example-viewer-section-label>TabsItemComponent events</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property name="clickEvent" type="EventEmitter<VoidFunction>" decoratorName="output">
+          <ng-container *demoExampleViewerPropertyDescription
+            >Get click event callback to trigger when needed.
+          </ng-container>
         </demo-example-viewer-property>
       </demo-example-viewer-section>
 
