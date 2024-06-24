@@ -79,7 +79,9 @@ const COLUMNS: TableColumnDefinition[] = [
 export class TableExample9Component {
   public readonly rowType: SomeData;
 
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);

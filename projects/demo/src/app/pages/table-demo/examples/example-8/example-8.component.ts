@@ -68,7 +68,9 @@ export class TableExample8Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
   public readonly rowType: SomeData;
 
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
   private readonly pagedDataProducer: TablePagedDataProducer<SomeData> = new TablePagedDataProducer(this.controller);
   private readonly pagedArguments$: Observable<PagedVirtualScrollArguments> = this.pagedDataProducer.arguments$;
 

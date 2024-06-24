@@ -80,7 +80,9 @@ export class TableExample4Component implements OnDestroy {
 
   public readonly rowType: SomeData;
 
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
 
   private columnDefinitions: TableColumnDefinition[] = COLUMNS;
 

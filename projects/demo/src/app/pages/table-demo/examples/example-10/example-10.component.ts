@@ -66,6 +66,7 @@ export class TableExample10Component implements AfterViewInit {
 
   public ngAfterViewInit(): void {
     const controller: TableController<SomeData> = new TableController<SomeData>({
+      trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
       dndRowsSettings: {
         dndCloneItemsTemplate: this.dndCloneItemsTemplate,
         dndItemCanBeMoved: () => true,

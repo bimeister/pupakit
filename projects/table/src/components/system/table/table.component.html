@@ -107,7 +107,7 @@
               [class.pupa-table-body__pinned-left-container_with-shadow]="hasLeftHiddenColumns$ | async"
             >
               <pupa-table-body-row-container
-                *ngFor="let row of rows$ | async; trackBy: trackBy$ | async"
+                *ngFor="let row of rows$ | async; trackBy: trackBodyRowBy$ | async"
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
@@ -131,7 +131,7 @@
               [invisibleScrollbars]="['horizontal']"
             >
               <pupa-table-body-row-container
-                *ngFor="let row of rows$ | async; trackBy: trackBy$ | async"
+                *ngFor="let row of rows$ | async; trackBy: trackBodyRowBy$ | async"
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
@@ -150,7 +150,7 @@
               [class.pupa-table-body__pinned-right-container_with-shadow]="hasRightHiddenColumns$ | async"
             >
               <pupa-table-body-row-container
-                *ngFor="let row of rows$ | async; trackBy: trackBy$ | async"
+                *ngFor="let row of rows$ | async; trackBy: trackBodyRowBy$ | async"
                 class="pupa-table-row"
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
