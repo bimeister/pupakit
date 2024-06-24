@@ -23,15 +23,15 @@ export class TableController<T> {
 
   protected readonly dataDisplayCollection: TableDataDisplayCollection<T> = new TableDataDisplayCollection<T>();
 
-  public readonly features: TableFeatureConstructor<T>[] = this.options?.features ?? [];
+  public readonly features: TableFeatureConstructor<T>[] = this.options.features ?? [];
 
-  public readonly dndRowsSettings: DndSettings<T> | undefined = this.options?.dndRowsSettings;
+  public readonly dndRowsSettings: DndSettings<T> | undefined = this.options.dndRowsSettings;
 
-  constructor(private readonly options?: TableControllerOptions<T>) {
-    this.setHeaderRowHeightPx(options?.headerRowHeightPx);
-    this.setBodyRowHeightPx(options?.bodyRowHeightPx);
-    this.setScrollBehavior(options?.scrollBehavior);
-    this.setTrackBy(options?.trackBy);
+  constructor(private readonly options: TableControllerOptions<T>) {
+    this.setHeaderRowHeightPx(options.headerRowHeightPx);
+    this.setBodyRowHeightPx(options.bodyRowHeightPx);
+    this.setScrollBehavior(options.scrollBehavior);
+    this.setTrackBy(options.trackBy);
   }
 
   protected dispatchInQueue(event: TableEventBase): void {
@@ -130,7 +130,7 @@ export class TableController<T> {
     this.dataDisplayCollection.scrollBehavior$.next(scrollBehavior);
   }
 
-  private setTrackBy(trackBy: TrackByFunction<T> = TableDataDisplayCollection.trackBy): void {
+  private setTrackBy(trackBy: TrackByFunction<T | null> = TableDataDisplayCollection.trackBy): void {
     this.dataDisplayCollection.trackBy$.next(trackBy);
   }
 }

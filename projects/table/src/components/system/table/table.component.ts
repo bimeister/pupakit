@@ -206,6 +206,15 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.trackBy$)
   );
 
+  public readonly trackBodyRowBy$: Observable<TrackByFunction<TableBodyRow<T | null>>> = this.trackBy$.pipe(
+    map(
+      (trackBy: TrackByFunction<T | null>) =>
+        (index: number, row: TableBodyRow<T | null>): ReturnType<typeof trackBy> =>
+          trackBy(index, row.data)
+    ),
+    shareReplayWithRefCount()
+  );
+
   public readonly minBufferPx$: Observable<number> = this.dataDisplayCollection$.pipe(
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.minBufferPx$)
   );

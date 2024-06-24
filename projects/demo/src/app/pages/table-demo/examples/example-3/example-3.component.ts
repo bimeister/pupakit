@@ -76,7 +76,9 @@ const COLUMNS: TableColumnDefinition[] = [
 })
 export class TableExample3Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
 
   public columnDefinitions: TableColumnDefinition[] = COLUMNS;
 

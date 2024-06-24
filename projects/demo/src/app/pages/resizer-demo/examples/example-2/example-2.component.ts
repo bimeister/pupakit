@@ -61,7 +61,9 @@ const COLUMNS: TableColumnDefinition[] = [
 })
 export class ResizerDemoExample2Component implements OnDestroy {
   public readonly controller: TreeController = new TreeController();
-  public readonly tableController: TableController<SomeData> = new TableController<SomeData>();
+  public readonly tableController: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
 
   private readonly subscription: Subscription = new Subscription();
 

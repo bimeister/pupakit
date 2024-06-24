@@ -77,7 +77,9 @@ const COLUMNS: TableColumnDefinition[] = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableExample5Component {
-  public readonly controller: TableController<SomeData> = new TableController<SomeData>();
+  public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
+  });
 
   constructor() {
     this.controller.setColumnDefinitions(COLUMNS);

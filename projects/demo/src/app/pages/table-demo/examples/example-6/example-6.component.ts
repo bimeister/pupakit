@@ -80,7 +80,7 @@ export class TableExample6Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>({
-    trackBy: (_index: number, rowData: SomeData) => rowData.id,
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
     features: [TableSortingFeature],
   });
 

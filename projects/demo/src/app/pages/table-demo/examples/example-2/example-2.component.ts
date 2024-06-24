@@ -98,6 +98,7 @@ export class TableExample2Component implements OnDestroy {
   private readonly subscription: Subscription = new Subscription();
 
   public readonly controller: TableController<SomeData> = new TableController<SomeData>({
+    trackBy: (index: number, item: SomeData | null) => item?.id ?? index,
     // Add predefinded sorting feature. Also you may write your own features
     features: [TableSortingFeature],
   });

@@ -25,7 +25,7 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   public readonly selectedRowsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
   public readonly disabledRowsIds$: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-  public readonly trackBy$: Subject<TrackByFunction<T>> = new BehaviorSubject<TrackByFunction<T>>(
+  public readonly trackBy$: Subject<TrackByFunction<T | null>> = new BehaviorSubject<TrackByFunction<T | null>>(
     TableDataDisplayCollection.trackBy
   );
   public readonly scrollBehavior$: BehaviorSubject<ScrollBehavior> = new BehaviorSubject<ScrollBehavior>('smooth');
@@ -196,10 +196,5 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     this.bodyRowHeightPx$.next(value);
   }
 
-  public static readonly trackBy: TrackByFunction<any> = <U>(index: number, dataItem: U): string => {
-    if (isNil(dataItem)) {
-      return `${index}__null`;
-    }
-    return `${index}__${JSON.stringify(dataItem)}`;
-  };
+  public static readonly trackBy: TrackByFunction<unknown> = <U>(index: number, _: U | null): number => index;
 }
