@@ -4,8 +4,16 @@ import { TableBodyCellContext } from '../declarations/interfaces/table-body-cell
 @Directive({
   selector: '[pupaTableBodyCellTemplate]',
 })
-export class TableBodyCellTemplateDirective<T> {
-  @Input() public pupaTableBodyCellTemplateTypeFrom: T;
+export class TableBodyCellTemplateDirective<TCell, TColumn> {
+  @Input() public pupaTableBodyCellTemplateCellTypeFrom: TCell;
+  @Input() public pupaTableBodyCellTemplateColumnTypeFrom: TColumn;
 
-  constructor(public readonly templateRef: TemplateRef<TableBodyCellContext<T>>) {}
+  constructor(public readonly templateRef: TemplateRef<TableBodyCellContext<TCell, TColumn>>) {}
+
+  public static ngTemplateContextGuard<TCell, TColumn>(
+    _directive: TableBodyCellTemplateDirective<TCell, TColumn>,
+    _context: unknown
+  ): _context is TableBodyCellContext<TCell, TColumn> {
+    return true;
+  }
 }

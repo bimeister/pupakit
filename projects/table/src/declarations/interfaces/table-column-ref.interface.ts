@@ -3,9 +3,9 @@ import { Observable } from 'rxjs';
 import { TableColumnEvents } from '../events/table-column.events';
 import { TableColumnDefinition } from './table-column-definition.interface';
 
-export interface TableColumnRef {
+export interface TableColumnRef<TColumn = unknown> {
   readonly index: number;
-  readonly definition: TableColumnDefinition;
+  readonly definition: TableColumnDefinition<TColumn>;
   readonly widthPx$: Observable<number>;
   readonly isHovered$: Observable<boolean>;
   readonly isCurrentResizable$: Observable<boolean>;
