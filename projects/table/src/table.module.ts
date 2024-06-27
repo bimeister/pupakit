@@ -17,6 +17,7 @@ import { TableComponent } from './components/system/table/table.component';
 import { TableBodyCellTemplateDirective } from './directives/table-cell-template.directive';
 import { TableHeaderCellTemplateDirective } from './directives/table-header-cell-template.directive';
 import { PupaDndModule } from '@bimeister/pupakit.dnd';
+import { SerializeTableBodyRowPipe } from './pipes/serialize-table-body-row.pipe';
 
 const INTERNAL_COMPONENTS: Type<unknown>[] = [
   TableBodyCellContainerComponent,
@@ -36,6 +37,8 @@ const EXTERNAL_COMPONENTS: Type<unknown>[] = [
 
 const EXTERNAL_DIRECTIVES: Type<unknown>[] = [TableHeaderCellTemplateDirective, TableBodyCellTemplateDirective];
 
+const INTERNAL_PIPES: Type<unknown>[] = [SerializeTableBodyRowPipe];
+
 const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
   CommonModule,
   ScrollingModule,
@@ -48,7 +51,7 @@ const IMPORTS: (Type<unknown> | ModuleWithProviders<unknown>)[] = [
 ];
 
 @NgModule({
-  declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
+  declarations: [...INTERNAL_COMPONENTS, ...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES, INTERNAL_PIPES],
   imports: [IMPORTS],
   exports: [...EXTERNAL_COMPONENTS, ...EXTERNAL_DIRECTIVES],
 })
