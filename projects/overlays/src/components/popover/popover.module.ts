@@ -13,6 +13,7 @@ import { PopoverDirective } from './directives/popover.directive';
 import { PopoverTemplateComponent } from './components/popover-template/popover-template.component';
 import { PupaScrollableModule, PupaThemeWrapperModule } from '@bimeister/pupakit.kit';
 import { CommonModule } from '@angular/common';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 
 const DECLARATIONS: Type<unknown>[] = [PopoverContainerComponent];
 
@@ -31,7 +32,14 @@ const EXPORTS: Type<unknown>[] = [
 
 @NgModule({
   declarations: [...DECLARATIONS, ...EXPORTS],
-  imports: [CommonModule, OverlayModule, PortalModule, PupaScrollableModule, PupaThemeWrapperModule],
+  imports: [
+    CommonModule,
+    OverlayModule,
+    PortalModule,
+    PupaScrollableModule,
+    PupaThemeWrapperModule,
+    PupaDirectivesModule,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [...EXPORTS, OverlayModule, PortalModule],
 })

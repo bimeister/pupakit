@@ -20,6 +20,7 @@ import { ModalLayoutHeaderActionsComponent } from './components/modal-layout-hea
 import { ModalLayoutHeaderComponent } from './components/modal-layout-header/modal-layout-header.component';
 import { ModalLayoutTitleComponent } from './components/modal-layout-title/modal-layout-title.component';
 import { ModalLayoutComponent } from './components/modal-layout/modal-layout.component';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { ModalLayoutComponent } from './components/modal-layout/modal-layout.com
     PupaThemeWrapperModule,
     PupaScrollableModule,
     PupaTooltipModule,
+    PupaDirectivesModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
