@@ -19,6 +19,7 @@ import { DrawerLayoutComponent } from './components/drawer-layout/drawer-layout.
 import { DrawerLayoutSeparatorComponent } from './components/drawer-separator/drawer-layout-separator.component';
 import { DrawerTitleComponent } from './components/drawer-title/drawer-title.component';
 import { DrawerHeaderTabsActionsDirective } from './directives/drawer-header-tabs-actions.directive';
+import { PupaDirectivesModule } from '@bimeister/pupakit.common';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { DrawerHeaderTabsActionsDirective } from './directives/drawer-header-tab
     PupaIconsModule.forFeature([mdMoreIcon, mdCloseIcon, appFitToPageIcon, appResizeIcon]),
     PupaButtonsModule,
     PupaScrollableModule,
+    PupaDirectivesModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
