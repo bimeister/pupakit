@@ -1,11 +1,27 @@
 <demo-example-viewer>
-  <demo-example-viewer-content [isSticky]="false">
-    <pupa-radio-group class="radio-group" [formControl]="formControl" [disabled]="true">
-      <pupa-radio-control [value]="1"> Option 1 </pupa-radio-control>
+  <div>
+    <h5>Disabled Group:</h5>
+    <demo-example-viewer-content [isSticky]="false">
+      <pupa-radio-group class="radio-group" [formControl]="disabledGroupControl">
+        <pupa-radio-control [value]="1"> Option 1 </pupa-radio-control>
 
-      <pupa-radio-control [value]="2"> Option 2 </pupa-radio-control>
+        <pupa-radio-control [value]="2"> Option 2 </pupa-radio-control>
 
-      <pupa-radio-control [value]="3"> Option 3 </pupa-radio-control>
-    </pupa-radio-group>
-  </demo-example-viewer-content>
+        <pupa-radio-control [value]="3"> Option 3 </pupa-radio-control>
+      </pupa-radio-group>
+    </demo-example-viewer-content>
+  </div>
+
+  <div>
+    <h5>Disabled Option:</h5>
+    <demo-example-viewer-content [isSticky]="false">
+      <pupa-radio-group class="radio-group" [formControl]="disabledOptionControl">
+        <pupa-radio-control [value]="1" [disabled]="true"> Option 1 </pupa-radio-control>
+
+        <pupa-radio-control [value]="2"> Option 2 </pupa-radio-control>
+
+        <pupa-radio-control [value]="3"> Option 3 </pupa-radio-control>
+      </pupa-radio-group>
+    </demo-example-viewer-content>
+  </div>
 </demo-example-viewer>
