@@ -4,6 +4,8 @@
 :host {
   display: block;
   width: 100%;
+  min-width: 50rem;
+  max-width: 150rem;
 }
 
 .pupa-toast-layout {
@@ -34,7 +36,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 3rem;
 
   min-height: 6rem;
   margin: 2.5rem 3rem 2.5rem 0;

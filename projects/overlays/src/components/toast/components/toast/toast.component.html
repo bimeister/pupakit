@@ -9,9 +9,7 @@
 >
   <pupa-toast-layout [type]="type">
     <div class="pupa-content">
-      <div class="pupa-timer">
-        <pupa-timer-round *ngIf="hasTimer" [seconds]="autoCloseTimeSeconds"></pupa-timer-round>
-      </div>
+      <pupa-timer-round *ngIf="hasTimer" [seconds]="autoCloseTimeSeconds" class="pupa-timer"></pupa-timer-round>
       <span>{{ bodyText }}</span>
     </div>
     <button pupaLink *ngIf="actionText" (click)="processActionClick()">{{ actionText }}</button>

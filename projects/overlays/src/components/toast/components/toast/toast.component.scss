@@ -1,12 +1,5 @@
-@use 'mixins';
-
 :host {
   display: block;
-  width: 129rem;
-
-  @include mixins.xs {
-    width: 100%;
-  }
 }
 
 .pupa-content {

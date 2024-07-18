@@ -36,6 +36,24 @@
 
   <div *demoPageTab="'api'">
     <demo-example-viewer>
+      <demo-example-viewer-content *ngIf="type$ | async as type">
+        <pupa-theme-wrapper [theme]="reversedTheme$ | async">
+          <pupa-toast-layout [type]="type">
+            {{ type | titlecase }}
+          </pupa-toast-layout>
+        </pupa-theme-wrapper>
+      </demo-example-viewer-content>
+
+      <demo-example-viewer-section-label>Properties</demo-example-viewer-section-label>
+      <demo-example-viewer-section>
+        <demo-example-viewer-property decoratorName="input" name="type" type="ToastType">
+          <ng-container *demoExampleViewerPropertyDescription>
+            <p>Type of the toast</p>
+          </ng-container>
+          <demo-props-select #type$ [options]="typeOptions"></demo-props-select>
+        </demo-example-viewer-property>
+      </demo-example-viewer-section>
+
       <demo-example-viewer-section-label>ToastsService</demo-example-viewer-section-label>
       <demo-example-viewer-section>
         <demo-example-viewer-property
