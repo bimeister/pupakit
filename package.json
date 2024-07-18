@@ -14,7 +14,7 @@
     "email": "opensource@bimeister.com"
   },
   "engines": {
-    "node": "18.20.3",
+    "node": "18.20.4",
     "npm": ">=8.0.0"
   },
   "packageManager": "npm@8.19.3",
