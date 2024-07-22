@@ -7,7 +7,7 @@ import { TableColumnSizes } from '../interfaces/table-column-sizes.interface';
 
 const BREAKPOINTS: string[] = ['xxl', 'xl', 'xlg', 'lg', 'md', 'sm', 'xs'];
 
-const MIN_POSSIBLE_COLUMN_WIDTH_PX: number = 40;
+const MIN_POSSIBLE_COLUMN_WIDTH_PX: number = 34;
 
 const UNDEFINED_SIZES: TableColumnSizes = {
   widthPx: 100,
