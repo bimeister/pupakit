@@ -83,9 +83,11 @@
     </pupa-code-container>
 
     <h3 demoAnchor>Input styles</h3>
-    You can use the directives <pupa-code-inline>*pupaInputActionsLeft</pupa-code-inline> and
-    <pupa-code-inline>*pupaInputActionsRight</pupa-code-inline> for adding any action in both side of element. Available
-    only for pupa-input-text and pupa-input-number
+    You can use the directives
+    <pupa-code-inline>*pupaInputActionsLeft</pupa-code-inline>
+    and
+    <pupa-code-inline>*pupaInputActionsRight</pupa-code-inline>
+    for adding any action in both side of element. Available only for pupa-input-text and pupa-input-number
     <pupa-code-container [content]="stylesExampleContent">
       <demo-input-demo-example-action *pupaCodeContainerPreviewTemplate></demo-input-demo-example-action>
     </pupa-code-container>
@@ -100,6 +102,7 @@
             {
               withReset: withReset$ | async,
               isPatched: isPatched$ | async,
+              loading: loading$ | async,
               invalidTooltipHideOnHover: invalidTooltipHideOnHover$ | async,
               invalidTooltipDisabled: invalidTooltipDisabled$ | async,
               size: size$ | async,
@@ -109,6 +112,7 @@
             };
             let withReset = withReset;
             let isPatched = isPatched;
+            let loading = loading;
             let invalidTooltipHideOnHover = invalidTooltipHideOnHover;
             let invalidTooltipDisabled = invalidTooltipDisabled;
             let size = size;
@@ -125,6 +129,8 @@
               [size]="size"
               [withReset]="withReset"
               [isPatched]="isPatched"
+              [loading]="loading"
+              [loadingTooltip]="loadingTooltipFormControl.value"
               [placeholder]="placeholderFormControl.value"
               [invalidTooltipContentTemplate]="(isInvalidTooltipContentTemplateEnabled$ | async) && errorTemplate"
               [invalidTooltipHideOnHover]="invalidTooltipHideOnHover"
@@ -227,6 +233,24 @@
         <demo-example-viewer-property decoratorName="input" name="isPatched" type="boolean">
           <ng-container *demoExampleViewerPropertyDescription>Whether the element is patched.</ng-container>
           <demo-props-switcher #isPatched$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="loading" type="boolean">
+          <ng-container *demoExampleViewerPropertyDescription>Whether the element is called by API.</ng-container>
+          <demo-props-switcher #loading$></demo-props-switcher>
+        </demo-example-viewer-property>
+
+        <demo-example-viewer-property decoratorName="input" name="loadingTooltip" type="string">
+          <ng-container *demoExampleViewerPropertyDescription
+            >The tooltip is visible only when
+            <pupa-code-inline>loading</pupa-code-inline>
+            is active.
+          </ng-container>
+          <pupa-input-text
+            placeholder="Type tooltip text here"
+            [formControl]="loadingTooltipFormControl"
+            [withReset]="true"
+          ></pupa-input-text>
         </demo-example-viewer-property>
 
         <demo-example-viewer-section-label size="medium">

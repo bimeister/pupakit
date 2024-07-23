@@ -42,6 +42,13 @@
     </pupa-icon-holder>
   </div>
 
+  <pupa-loader
+    class="pupa-input-loader"
+    *ngIf="loadingWithValue$ | async"
+    [pupaTooltip]="loadingTooltip$ | async"
+    size="3.5rem"
+  ></pupa-loader>
+
   <div class="pupa-input-actions-separator" *ngIf="isVisibleSeparator$ | async"></div>
 
   <ng-container [ngTemplateOutlet]="inputActionsRightDirective?.templateRef"></ng-container>

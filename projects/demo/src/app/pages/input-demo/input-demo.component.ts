@@ -9,6 +9,7 @@ const BASE_REQUEST_PATH: string = 'input-demo/examples';
 const START_DATE: Date = new Date();
 START_DATE.setHours(0, 0, 0, 0);
 START_DATE.setDate(START_DATE.getDate() - 5);
+
 export function isDateCorrect(date: Date): boolean {
   return !Number.isNaN(Date.parse(String(date)));
 }
@@ -58,6 +59,9 @@ export class InputDemoComponent implements OnInit, OnDestroy {
   public readonly validators: ValidatorFn[] = [Validators.required];
   public readonly dateValidators: ValidatorFn[] = [Validators.required, dateValidator];
 
+  public readonly loadingTooltipFormControl: FormControl<string | null> = new FormControl<string | null>(
+    'Custom loading'
+  );
   public readonly placeholderFormControl: FormControl<string | null> = new FormControl<string | null>(
     'Custom placeholder'
   );
