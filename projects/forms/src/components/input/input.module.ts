@@ -11,7 +11,7 @@ import {
   appEyeOpenIcon,
   PupaIconsModule,
 } from '@bimeister/pupakit.icons';
-import { PupaButtonsModule, PupaIconHolderModule, PupaTooltipModule } from '@bimeister/pupakit.kit';
+import { PupaButtonsModule, PupaIconHolderModule, PupaLoaderModule, PupaTooltipModule } from '@bimeister/pupakit.kit';
 import { MaskitoDirective } from '@maskito/angular';
 import { NgxMaskModule } from 'ngx-mask';
 import { PupaDateTimePickerModule } from '../date-time-picker/date-time-picker.module';
@@ -67,6 +67,7 @@ const DECLARATIONS: any[] = [...EXPORTS];
     PupaButtonsModule,
     PupaIconHolderModule,
     MaskitoDirective,
+    PupaLoaderModule,
   ],
   exports: [...EXPORTS],
 })

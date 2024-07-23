@@ -2,15 +2,23 @@
   <div class="controls-table__block">
     <pupa-label class="control-label">pupa-input-text</pupa-label>
     <pupa-input-text
+      *pupaLet="{ loading: loading$ | async }; let loading = loading"
       [placeholder]="'Enter value'"
       [formControlName]="'text'"
       [withReset]="true"
       [invalidTooltip]="(errorMessagesByControlName.text | async)?.[0]"
+      [loading]="loading"
+      loadingTooltip="Checking"
     >
       <pupa-icon-holder size="small" [withBackground]="false" *pupaInputActionsRight>
         <pupa-icon name="app-info"></pupa-icon>
       </pupa-icon-holder>
     </pupa-input-text>
+
+    <div class="loading-section">
+      <pupa-label>Loading</pupa-label>
+      <demo-props-switcher #loading$></demo-props-switcher>
+    </div>
   </div>
 
   <div class="controls-table__block">

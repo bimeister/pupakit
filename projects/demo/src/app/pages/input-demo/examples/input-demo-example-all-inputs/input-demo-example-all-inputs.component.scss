@@ -1,15 +1,15 @@
-@use 'mixins' as *;
+@use 'mixins';
 
 .controls-table {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 4rem;
 
-  @include lt-lg() {
+  @include mixins.lt-lg() {
     grid-template-columns: 1fr 1fr;
   }
 
-  @include xs() {
+  @include mixins.xs() {
     grid-template-columns: 1fr;
   }
 }
@@ -17,4 +17,11 @@
 .control-label {
   margin-bottom: 2rem;
   display: block;
+}
+
+.loading-section {
+  @include mixins.flex-container(row, center);
+
+  margin-top: 2rem;
+  gap: 2rem;
 }

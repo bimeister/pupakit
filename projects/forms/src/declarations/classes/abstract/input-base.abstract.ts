@@ -13,14 +13,7 @@ import {
 } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
-import {
-  concatBoolean,
-  distinctUntilSerializedChanged,
-  filterFalsy,
-  isEmpty,
-  isNil,
-  Nullable,
-} from '@bimeister/utilities';
+import { concatBoolean, filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, take } from 'rxjs/operators';
 import { InputActionsLeftDirective } from '../../../components/input/directives/input-actions-left.directive';
@@ -65,6 +58,12 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Input() public isPatched: boolean = false;
   public readonly isPatched$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+  @Input() public loading: boolean = false;
+  public readonly loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  @Input() public loadingTooltip: string = '';
+  public readonly loadingTooltip$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+
   @Input() public customStyles: InputStyleCustomization[] = [];
   public readonly customStyles$: BehaviorSubject<InputStyleCustomization[]> = new BehaviorSubject<
     InputStyleCustomization[]
@@ -73,17 +72,23 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
   @Output() public readonly focus: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
   @Output() public readonly blur: EventEmitter<FocusEvent> = new EventEmitter<FocusEvent>();
 
+  public readonly loadingWithValue$: Observable<boolean> = combineLatest([this.loading$, this.value$]).pipe(
+    map(([loading, value]: [boolean, T]) => loading && !isEmpty(value)),
+    distinctUntilChanged()
+  );
+
   public readonly isInvalid$: Observable<boolean> = combineLatest([
     this.isDisabled$,
     this.isPatched$,
     this.isValid$,
     this.isTouched$,
+    this.loadingWithValue$,
   ]).pipe(
-    distinctUntilSerializedChanged(),
     map(
-      ([isDisabled, isPatched, isValid, isTouched]: [boolean, boolean, boolean, boolean]) =>
-        (isTouched || isPatched) && !isValid && !isDisabled
-    )
+      ([isDisabled, isPatched, isValid, isTouched, loadingWithValue]: [boolean, boolean, boolean, boolean, boolean]) =>
+        (isTouched || isPatched) && !isValid && !isDisabled && !loadingWithValue
+    ),
+    distinctUntilChanged()
   );
 
   public readonly resultClassList$: Observable<string[]> = combineLatest([
@@ -139,6 +144,26 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.withReset$.next(updatedValue);
   }
 
+  protected processLoadingChange(change: ComponentChange<this, boolean>): void {
+    const updatedValue: boolean | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.loading$.next(updatedValue);
+  }
+
+  protected processLoadingTooltipChange(change: ComponentChange<this, string>): void {
+    const updatedValue: string | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.loadingTooltip$.next(updatedValue);
+  }
+
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processFormControlChange(changes?.formControl);
     this.processSizeChange(changes?.size);
@@ -147,6 +172,8 @@ export abstract class InputBase<T> extends InputBaseControlValueAccessor<T> impl
     this.processIsPatchedChange(changes?.isPatched);
     this.processWithResetChange(changes?.withReset);
     this.processStylesChange(changes?.customStyles);
+    this.processLoadingChange(changes?.loading);
+    this.processLoadingTooltipChange(changes?.loadingTooltip);
   }
 
   public ngAfterContentInit(): void {
