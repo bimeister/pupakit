@@ -13,7 +13,7 @@
     *pupaLet="monthNameByIndex$ | async as monthNameByIndex"
     pupaScrollableContent
     class="pupa-scroller"
-    [itemSize]="itemHeight"
+    [itemSize]="itemHeight$ | async"
   >
     <div
       class="pupa-scroller__item"

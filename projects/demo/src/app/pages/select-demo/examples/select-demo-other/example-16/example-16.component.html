@@ -38,7 +38,7 @@
             <pupa-scrollable class="scrollable">
               <cdk-virtual-scroll-viewport
                 pupaScrollableContent
-                [itemSize]="itemSizePx"
+                [itemSize]="itemSizePx$ | async"
                 class="virtual-scroll-viewport"
               >
                 <pupa-select-option
@@ -63,7 +63,7 @@
             <pupa-scrollable class="scrollable">
               <cdk-virtual-scroll-viewport
                 pupaScrollableContent
-                [itemSize]="itemSizePx"
+                [itemSize]="itemSizePx$ | async"
                 class="virtual-scroll-viewport"
               >
                 <pupa-select-option

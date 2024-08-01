@@ -41,7 +41,7 @@ import { TreeDataDisplayCollectionRef } from '../../../../declarations/interface
 import { TreeItemTemplateDirective } from '../../directives/tree-item-template.directive';
 import { TreeNodeProperties } from '../../../../declarations/interfaces/tree-node-properties.interface';
 import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
-import { ComponentChange, ComponentChanges, QueueEvents } from '@bimeister/pupakit.common';
+import { ClientUiStateHandlerService, ComponentChange, ComponentChanges, QueueEvents } from '@bimeister/pupakit.common';
 
 interface Position {
   top: number;
@@ -51,7 +51,7 @@ interface Position {
 type ScrollDirection = null | 'up' | 'down';
 
 const EXPAND_WHILE_DRAGGING_DELAY: number = 1000;
-const TREE_ITEM_SIZE_PX: number = 32;
+const TREE_ITEM_SIZE_REM: number = 8;
 const ITEM_BUFFER_COUNT: number = 50;
 const DRAG_CLONE_OFFSET_PX: number = 2;
 
@@ -89,6 +89,7 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   public isLoading$: Observable<boolean>;
   public hasDragAndDrop$: Observable<boolean>;
   public trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
+  public treeItemSizeRem$: Observable<number | undefined>;
   public treeItemSizePx$: Observable<number>;
   private scrollBehavior$: Observable<ScrollBehavior>;
   private eventBus: EventBus;
@@ -100,7 +101,9 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   public readonly listRange$: BehaviorSubject<ListRange> = new BehaviorSubject(null);
   public readonly dragAndDropMeta$: BehaviorSubject<Nullable<DragAndDropMeta>> = new BehaviorSubject(null);
 
-  public readonly bufferPx: number = TREE_ITEM_SIZE_PX * ITEM_BUFFER_COUNT;
+  public readonly bufferPx$: Observable<number> = this.clientUiStateHandlerService.remSizePx$.pipe(
+    map((remSizePx: number) => remSizePx * TREE_ITEM_SIZE_REM * ITEM_BUFFER_COUNT)
+  );
 
   private readonly expandWithDelay$: Subject<Nullable<FlatTreeItem>> = new Subject<Nullable<FlatTreeItem>>();
   private readonly subscription: Subscription = new Subscription();
@@ -108,7 +111,8 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
   constructor(
     public readonly renderer: Renderer2,
     public readonly host: ElementRef<HTMLElement>,
-    private readonly changeDetectorRef: ChangeDetectorRef
+    private readonly changeDetectorRef: ChangeDetectorRef,
+    private readonly clientUiStateHandlerService: ClientUiStateHandlerService
   ) {}
 
   public ngAfterViewInit(): void {
@@ -249,12 +253,17 @@ export class TreeNewComponent<T> implements AfterViewInit, OnChanges, OnDestroy 
     this.eventBus = this.controller.eventBus;
     this.scrollBehavior$ = this.dataDisplayCollection.scrollBehavior$;
     this.trackBy$ = this.dataDisplayCollection.trackBy$;
-    this.treeItemSizePx$ = this.dataDisplayCollection.treeItemSizePx$;
+    this.treeItemSizeRem$ = this.dataDisplayCollection.treeItemSizeRem$;
     this.data$ = this.dataDisplayCollection.data$;
     this.isLoading$ = this.dataDisplayCollection.isLoading$;
     this.selectedIdsList$ = this.dataDisplayCollection.selectedIdsList$;
     this.expandedIdsList$ = this.dataDisplayCollection.expandedIdsList$;
     this.hasDragAndDrop$ = this.dataDisplayCollection.hasDragAndDrop$;
+
+    this.treeItemSizePx$ = combineLatest([
+      this.clientUiStateHandlerService.remSizePx$,
+      this.treeItemSizeRem$.pipe(filterNotNil()),
+    ]).pipe(map(([remSizePx, treeItemSize]: [number, number]) => remSizePx * treeItemSize));
 
     this.dataSource = new TreeRangedDataSource(this.data$);
   }

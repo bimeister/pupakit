@@ -22,7 +22,7 @@ const DATA: DataType[] = Array(ROWS_COUNT)
   .fill(1)
   .map((_: number, index: number) => index + 1);
 
-const ITEM_SIZE_PX: number = 35;
+const ITEM_SIZE_REM: number = 8.75;
 
 const DEFAULT_REQUEST_DELAY_MS: number = 200;
 const MIN_DEFAULT_REQUEST_DELAY_MS: number = 100;
@@ -39,7 +39,7 @@ export class PagedVirtualScrollDemoComponent implements OnDestroy, AfterViewInit
   @ViewChild('pagedVirtualScrollViewport', { static: false })
   private readonly pagedVirtualScrollViewport: PagedVirtualScrollViewportComponent;
 
-  public readonly itemSize: number = ITEM_SIZE_PX;
+  public readonly itemSize: number = ITEM_SIZE_REM;
 
   public readonly searchControl: FormControl = new FormControl();
   private readonly searchValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');

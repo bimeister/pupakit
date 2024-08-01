@@ -163,12 +163,17 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.data$)
   );
 
-  public readonly headerRowHeightPx$: Observable<number> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.headerRowHeightPx$)
+  public readonly headerRowHeightRem$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.headerRowHeightRem$)
   );
-  public readonly bodyRowHeightPx$: Observable<number> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.bodyRowHeightPx$)
+  public readonly bodyRowHeightRem$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.bodyRowHeightRem$)
   );
+
+  public readonly bodyRowHeightPx$: Observable<number> = combineLatest([
+    this.clientUiStateHandlerService.remSizePx$,
+    this.bodyRowHeightRem$,
+  ]).pipe(map(([remSizePx, bodyRowHeightRem]: [number, number]) => remSizePx * bodyRowHeightRem));
 
   public readonly virtualScrollDataSource$: Observable<TableBodyRowsDataSource<T>> = this.dataDisplayCollection$.pipe(
     map((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.virtualScrollDataSource)
@@ -215,9 +220,14 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     shareReplayWithRefCount()
   );
 
-  public readonly minBufferPx$: Observable<number> = this.dataDisplayCollection$.pipe(
-    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.minBufferPx$)
+  private readonly minBufferRem$: Observable<number> = this.dataDisplayCollection$.pipe(
+    switchMap((dataDisplayCollection: TableDataDisplayCollectionRef<T>) => dataDisplayCollection.minBufferRem$)
   );
+
+  public readonly minBufferPx$: Observable<number> = combineLatest([
+    this.clientUiStateHandlerService.remSizePx$,
+    this.minBufferRem$,
+  ]).pipe(map(([remSizePx, minBufferRem]: [number, number]) => remSizePx * minBufferRem));
 
   public readonly eventBus$: Observable<EventBus> = this.availableController$.pipe(
     map((controller: TableController<T>) => controller.eventBus)
@@ -288,6 +298,7 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
     this.subscription.add(this.processListRangeChanges());
     this.subscription.add(this.processHiddenColumnIdsChanges());
     this.subscription.add(this.processColumnDndIndicatorPositionChanges());
+    this.subscription.add(this.processRemSizePx());
   }
 
   public ngAfterViewInit(): void {
@@ -552,6 +563,13 @@ export class TableComponent<T> implements OnChanges, OnInit, AfterViewInit, OnDe
       .subscribe((offsetLeft: Nullable<number>) => {
         this.columnDndIndicatorOffsetLeft$.next(offsetLeft);
       });
+  }
+
+  private processRemSizePx(): Subscription {
+    return combineLatest([this.clientUiStateHandlerService.remSizePx$, this.dataDisplayCollection$]).subscribe(
+      ([remSizePx, dataDisplayCollection]: [number, TableDataDisplayCollectionRef<T>]) =>
+        dataDisplayCollection.setRemSizePx(remSizePx)
+    );
   }
 
   private disposeFeatures(): void {

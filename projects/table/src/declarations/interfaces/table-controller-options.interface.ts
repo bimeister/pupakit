@@ -5,8 +5,8 @@ import { DndSettings } from '@bimeister/pupakit.dnd';
 export interface TableControllerOptions<T> {
   trackBy: TrackByFunction<T | null>;
   scrollBehavior?: ScrollBehavior;
-  headerRowHeightPx?: number;
-  bodyRowHeightPx?: number;
+  headerRowHeightRem?: number;
+  bodyRowHeightRem?: number;
   dndRowsSettings?: DndSettings<T>;
   features?: TableFeatureConstructor<T>[];
 }

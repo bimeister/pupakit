@@ -28,8 +28,8 @@ export class TableController<T> {
   public readonly dndRowsSettings: DndSettings<T> | undefined = this.options.dndRowsSettings;
 
   constructor(private readonly options: TableControllerOptions<T>) {
-    this.setHeaderRowHeightPx(options.headerRowHeightPx);
-    this.setBodyRowHeightPx(options.bodyRowHeightPx);
+    this.setHeaderRowHeightRem(options.headerRowHeightRem);
+    this.setBodyRowHeightRem(options.bodyRowHeightRem);
     this.setScrollBehavior(options.scrollBehavior);
     this.setTrackBy(options.trackBy);
   }
@@ -113,12 +113,16 @@ export class TableController<T> {
     this.dispatchInQueue(new TableEvents.ScrollByIndex(index));
   }
 
-  public setHeaderRowHeightPx(headerRowHeightPx?: number): void {
-    this.dataDisplayCollection.setHeaderRowHeightPx(headerRowHeightPx);
+  public setHeaderRowHeightRem(headerRowHeightRem?: number): void {
+    this.dataDisplayCollection.setHeaderRowHeightRem(headerRowHeightRem);
   }
 
-  public setBodyRowHeightPx(bodyRowHeightPx?: number): void {
-    this.dataDisplayCollection.setBodyRowHeightPx(bodyRowHeightPx);
+  public setBodyRowHeightRem(bodyRowHeightRem?: number): void {
+    this.dataDisplayCollection.setBodyRowHeightRem(bodyRowHeightRem);
+  }
+
+  public setRemSizePx(remSizePx?: number): void {
+    this.dataDisplayCollection.setRemSizePx(remSizePx);
   }
 
   public setBodyInitialCountOfSkeletonRows(countOfRows: Nullable<number> = DEFAULT_SKELETON_ROWS_COUNT): void {

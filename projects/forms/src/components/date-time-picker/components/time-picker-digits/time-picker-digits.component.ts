@@ -16,7 +16,7 @@ import {
 } from '@angular/core';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 import { filterNotNil, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, ReplaySubject, Subscription } from 'rxjs';
 import { debounceTime, filter, switchMap, withLatestFrom } from 'rxjs/operators';
 import { TimePickerStateService } from '../../services/time-picker-state.service';
 
@@ -33,7 +33,7 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
 
   @Input() public chosenDigit: number = null;
 
-  public readonly itemSizePx: number = this.timePickerStateService.itemSizePx;
+  public readonly itemSizePx$: Observable<number> = this.timePickerStateService.itemSizePx$;
 
   @ViewChild('viewPort', { static: true }) private readonly viewPort: CdkVirtualScrollViewport;
   private readonly viewPortReference$: ReplaySubject<CdkVirtualScrollViewport> = new ReplaySubject(1);
@@ -124,9 +124,9 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
       .pipe(switchMap(() => this.viewPortReference$))
       .pipe(
         switchMap((viewPort: CdkVirtualScrollViewport) => viewPort.scrolledIndexChange),
-        withLatestFrom(this.scrolledIndex$)
+        withLatestFrom(this.scrolledIndex$, this.itemSizePx$)
       )
-      .subscribe(([scrolledIndex, prevScrolledIndex]: [number, number]) => {
+      .subscribe(([scrolledIndex, prevScrolledIndex, itemSizePx]: [number, number, number]) => {
         const scrollDiff: number = Math.abs(scrolledIndex - prevScrolledIndex);
 
         this.scrolledIndex$.next(scrolledIndex);
@@ -134,9 +134,9 @@ export class TimePickerDigitsComponent implements OnChanges, OnInit, OnDestroy, 
         const viewPortSize: number = this.viewPort.getViewportSize();
         const offset: number = this.viewPort.measureScrollOffset();
         const total: number = this.digits.length;
-        const scrollingOffset: number = total * this.itemSizePx + offset;
+        const scrollingOffset: number = total * itemSizePx + offset;
 
-        const visibleItems: number = Math.ceil(viewPortSize / this.itemSizePx);
+        const visibleItems: number = Math.ceil(viewPortSize / itemSizePx);
 
         const digitsBaseSize: number = total * 2;
 

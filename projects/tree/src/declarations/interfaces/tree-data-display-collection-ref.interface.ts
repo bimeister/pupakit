@@ -4,7 +4,7 @@ import { TrackByFunction } from '@angular/core';
 
 export interface TreeDataDisplayCollectionRef {
   readonly trackBy$: Observable<TrackByFunction<FlatTreeItem>>;
-  readonly treeItemSizePx$: Observable<number>;
+  readonly treeItemSizeRem$: Observable<number>;
   readonly scrollBehavior$: Observable<ScrollBehavior>;
   readonly data$: Observable<FlatTreeItem[]>;
   readonly selectedIdsList$: Observable<string[]>;

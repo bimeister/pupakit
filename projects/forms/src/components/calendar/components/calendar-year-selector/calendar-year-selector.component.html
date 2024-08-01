@@ -5,7 +5,7 @@
 </pupa-calendar-header>
 
 <div class="pupa-scroller-wrapper">
-  <cdk-virtual-scroll-viewport pupaScrollableContent class="pupa-scroller" [itemSize]="rowHeightPx">
+  <cdk-virtual-scroll-viewport pupaScrollableContent class="pupa-scroller" [itemSize]="rowHeightPx$ | async">
     <div class="pupa-scroller__row" *cdkVirtualFor="let yearsRow of yearsTable; templateCacheSize: 10">
       <pupa-calendar-selector-button
         *ngFor="let year of yearsRow"

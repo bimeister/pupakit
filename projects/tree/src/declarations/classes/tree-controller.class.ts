@@ -8,7 +8,7 @@ import { TreeDataDisplayCollectionRef } from '../interfaces/tree-data-display-co
 import { DefaultTreeEventHandler } from './default-tree-event-handler.class';
 import { FlatTreeItem } from './flat-tree-item.class';
 import { TreeDataDisplayCollection } from './tree-data-display-collection.class';
-import { DEFAULT_TREE_ITEM_SIZE_PX } from '../constants/default-tree-item-size-px.const';
+import { DEFAULT_TREE_ITEM_SIZE_REM } from '../constants/default-tree-item-size-rem.const';
 import { EventsQueue, QueueEvents } from '@bimeister/pupakit.common';
 
 export class TreeController {
@@ -25,7 +25,7 @@ export class TreeController {
     this.setScrollBehavior(options?.scrollBehavior);
     this.setTrackBy(options?.trackBy);
     this.setHasDragAndDrop(options?.hasDragAndDrop);
-    this.setTreeItemSizePx(options?.treeItemSizePx);
+    this.setTreeItemSizeRem(options?.treeItemSizeRem);
   }
 
   protected dispatchInQueue(event: TreeEvents.TreeEventBase): void {
@@ -101,7 +101,7 @@ export class TreeController {
     this.dataDisplayCollection.trackBy$.next(trackBy);
   }
 
-  private setTreeItemSizePx(treeItemSizePx: number = DEFAULT_TREE_ITEM_SIZE_PX): void {
-    this.dataDisplayCollection.treeItemSizePx$.next(treeItemSizePx);
+  private setTreeItemSizeRem(treeItemSizeRem: number = DEFAULT_TREE_ITEM_SIZE_REM): void {
+    this.dataDisplayCollection.treeItemSizeRem$.next(treeItemSizeRem);
   }
 }
