@@ -1,5 +1,6 @@
 import {
   ConnectedOverlayPositionChange,
+  ConnectedPosition,
   FlexibleConnectedPositionStrategy,
   Overlay,
   OverlayConfig,
@@ -10,15 +11,33 @@ import { ElementRef, Injectable, Injector, OnDestroy, TemplateRef } from '@angul
 import { OVERLAY_VIEWPORT_MARGIN_PX } from '@bimeister/pupakit.common';
 import { filterNotNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter, map, switchMap, take } from 'rxjs/operators';
-import { TOOLTIP_SERVICE_TOKEN } from '../../../declarations/tokens/tooltip-service.token';
+import { debounceTime, distinctUntilChanged, filter, map, switchMap, take, withLatestFrom } from 'rxjs/operators';
 import { TooltipServiceDeclaration } from '../../../declarations/interfaces/tooltip-service-declaration.interface';
+import { TOOLTIP_SERVICE_TOKEN } from '../../../declarations/tokens/tooltip-service.token';
 import { TooltipContentComponent } from '../components/tooltip-content/tooltip-content.component';
+import { TooltipDisplayPosition } from '../declarations/types/tooltip-display-position.type';
 import { OVERLAY_POSITIONS } from '../positions';
+
+const START_BOTTOM_POSITION: ConnectedPosition = {
+  originX: 'start',
+  originY: 'top',
+  overlayX: 'start',
+  overlayY: 'bottom',
+};
+const START_TOP_POSITION: ConnectedPosition = {
+  originX: 'start',
+  originY: 'bottom',
+  overlayX: 'start',
+  overlayY: 'top',
+};
+
+export const OVERLAY_START_POSITIONS: ConnectedPosition[] = [START_TOP_POSITION, START_BOTTOM_POSITION];
 
 @Injectable()
 export class TooltipService implements OnDestroy, TooltipServiceDeclaration {
   private readonly subscription: Subscription = new Subscription();
+  private readonly tooltipDisplayPosition$: BehaviorSubject<TooltipDisplayPosition> =
+    new BehaviorSubject<TooltipDisplayPosition>('center');
 
   private readonly mouseOverTrigger$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly mouseOverContent$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -94,6 +113,10 @@ export class TooltipService implements OnDestroy, TooltipServiceDeclaration {
     this.isDisabledState$.next(isDisabled);
   }
 
+  public setTooltipDisplayPosition(tooltipDisplayPosition: TooltipDisplayPosition): void {
+    this.tooltipDisplayPosition$.next(tooltipDisplayPosition);
+  }
+
   public setTooltipHideOnHoverState(hideOnTooltipHover: boolean): void {
     this.tooltipHideOnHoverState$.next(hideOnTooltipHover);
   }
@@ -147,11 +170,12 @@ export class TooltipService implements OnDestroy, TooltipServiceDeclaration {
     return this.triggerRef$.pipe(
       take(1),
       filterNotNil(),
-      map((triggerRef: ElementRef<HTMLElement>) => {
+      withLatestFrom(this.tooltipDisplayPosition$),
+      map(([triggerRef, tooltipDisplayPosition]: [ElementRef<HTMLElement>, TooltipDisplayPosition]) => {
         const positionStrategy: FlexibleConnectedPositionStrategy = this.overlay
           .position()
           .flexibleConnectedTo(triggerRef)
-          .withPositions(OVERLAY_POSITIONS)
+          .withPositions(tooltipDisplayPosition === 'start' ? OVERLAY_START_POSITIONS : OVERLAY_POSITIONS)
           .withGrowAfterOpen()
           .withViewportMargin(OVERLAY_VIEWPORT_MARGIN_PX);
 
