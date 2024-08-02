@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,12 @@ import { FormControl } from '@angular/forms';
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class RadioButtonExample4Component {
-  public formControl: FormControl<number> = new FormControl<number>(1);
+export class RadioButtonExample4Component implements OnInit {
+  public readonly disabledGroupControl: FormControl<number> = new FormControl<number>(1, { nonNullable: true });
+
+  public readonly disabledOptionControl: FormControl<number> = new FormControl<number>(2, { nonNullable: true });
+
+  public ngOnInit(): void {
+    this.disabledGroupControl.disable();
+  }
 }

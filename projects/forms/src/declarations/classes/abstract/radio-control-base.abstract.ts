@@ -1,16 +1,17 @@
-import { Directive, HostListener, Input, OnChanges } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Directive, HostListener, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { RadioControlSize } from '../../types/radio-control-size.type';
-import { distinctUntilChanged, map, take } from 'rxjs/operators';
+import { distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import { filterFalsy, isNil, shareReplayWithRefCount } from '@bimeister/utilities';
 import { RadioGroupService } from '../../../components/radio-group/services/radio-group.service';
 import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
 
 @Directive()
-export abstract class RadioControlBase<T> implements OnChanges {
+export abstract class RadioControlBase<T> implements OnChanges, OnInit, OnDestroy {
   @Input() public value: T;
   @Input() public tabindex: number = 0;
   @Input() public withLabel: boolean = true;
+  @Input() public disabled: boolean = false;
 
   public readonly labelSize$: Observable<RadioControlSize> = this.radioGroupService.labelSize$;
 
@@ -20,15 +21,19 @@ export abstract class RadioControlBase<T> implements OnChanges {
     shareReplayWithRefCount()
   );
 
-  public readonly isDisabled$: Observable<boolean> = this.radioGroupService.isDisabled$;
+  protected readonly isWithLabel$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  public readonly isWithLabel$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+  public readonly isGroupDisabled$: Observable<boolean> = this.radioGroupService.isDisabled$;
+
+  protected readonly isDisabled$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  private readonly subscription: Subscription = new Subscription();
 
   constructor(private readonly radioGroupService: RadioGroupService<T>) {}
 
   @HostListener('click')
   public processClick(): void {
-    this.radioGroupService.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
+    this.isDisabled$.pipe(take(1), filterFalsy()).subscribe(() => {
       this.setOnTouch();
       this.select();
     });
@@ -36,6 +41,15 @@ export abstract class RadioControlBase<T> implements OnChanges {
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
     this.processWithLabelChange(changes?.withLabel);
+    this.processDisabledChange(changes?.disabled);
+  }
+
+  public ngOnInit(): void {
+    this.subscription.add(this.toggleAvailabilityOnGroupAvailabilityChanges());
+  }
+
+  public ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   private select(): void {
@@ -46,7 +60,7 @@ export abstract class RadioControlBase<T> implements OnChanges {
     this.radioGroupService.setOnTouch(true);
   }
 
-  private processWithLabelChange(change: ComponentChange<this, boolean>): void {
+  private processWithLabelChange(change: ComponentChange<this, boolean> | undefined): void {
     const updatedValue: boolean | undefined = change?.currentValue;
 
     if (isNil(updatedValue)) {
@@ -54,5 +68,22 @@ export abstract class RadioControlBase<T> implements OnChanges {
     }
 
     this.isWithLabel$.next(updatedValue);
+  }
+
+  private processDisabledChange(change: ComponentChange<this, boolean> | undefined): void {
+    this.isGroupDisabled$
+      .pipe(
+        take(1),
+        filter((isGroupDisabled: boolean) => !isGroupDisabled && !isNil(change?.currentValue))
+      )
+      .subscribe(() => {
+        this.isDisabled$.next(change.currentValue);
+      });
+  }
+
+  private toggleAvailabilityOnGroupAvailabilityChanges(): Subscription {
+    return this.isGroupDisabled$.pipe(distinctUntilChanged()).subscribe((isGroupDisabled: boolean) => {
+      this.isDisabled$.next(isGroupDisabled || this.disabled);
+    });
   }
 }
