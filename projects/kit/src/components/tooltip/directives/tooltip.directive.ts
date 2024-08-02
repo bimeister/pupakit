@@ -5,6 +5,7 @@ import { EMPTY, fromEvent, Observable, Subscription } from 'rxjs';
 import { delay, filter, switchMap, take, tap } from 'rxjs/operators';
 import { TOOLTIP_SERVICE_TOKEN } from '../../../declarations/tokens/tooltip-service.token';
 import { TooltipAppearance } from '../../../declarations/types/tooltip-appearance.type';
+import { TooltipDisplayPosition } from '../declarations/types/tooltip-display-position.type';
 import { TooltipService } from '../services/tooltip.service';
 
 @Directive({
@@ -19,8 +20,9 @@ import { TooltipService } from '../services/tooltip.service';
   exportAs: 'pupaTooltip',
 })
 export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit {
-  @Input() public tooltipHideOnHover: boolean | null = true;
-  @Input() public tooltipDisabled: boolean | null = false;
+  @Input() public tooltipDisplayPosition: TooltipDisplayPosition = 'center';
+  @Input() public tooltipHideOnHover: boolean = true;
+  @Input() public tooltipDisabled: boolean = false;
   @Input() public tooltipDelayMs: number = 0;
   @Input() public tooltipAppearance: TooltipAppearance = 'always';
 
@@ -57,6 +59,7 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
     this.processHideOnTooltipHoverChanges(changes?.tooltipHideOnHover);
     this.processTooltipContentChanges(changes?.pupaTooltip);
     this.processTooltipContentTemplateChanges(changes?.tooltipContentTemplate);
+    this.processTooltipDisplayPositionChanges(changes?.tooltipDisplayPosition);
   }
 
   public ngOnDestroy(): void {
@@ -98,6 +101,16 @@ export class PupaTooltipDirective implements OnChanges, OnDestroy, AfterViewInit
       return;
     }
     this.tooltipService.setTooltipContentTemplateState(updatedValue);
+  }
+
+  private processTooltipDisplayPositionChanges(change: ComponentChange<this, TooltipDisplayPosition>): void {
+    const updatedValue: TooltipDisplayPosition | undefined = change?.currentValue;
+
+    if (isNil(updatedValue)) {
+      return;
+    }
+
+    this.tooltipService.setTooltipDisplayPosition(updatedValue);
   }
 
   private registerTooltipTriggerRef(): void {

@@ -13,8 +13,8 @@ import {
 import { filterFalsy, filterNotNil, Nullable } from '@bimeister/utilities';
 import { BehaviorSubject, fromEvent, Observable, Subscription, zip } from 'rxjs';
 import { distinctUntilChanged, map, take, withLatestFrom } from 'rxjs/operators';
-import { TOOLTIP_SERVICE_TOKEN } from '../../../../declarations/tokens/tooltip-service.token';
 import { TooltipServiceDeclaration } from '../../../../declarations/interfaces/tooltip-service-declaration.interface';
+import { TOOLTIP_SERVICE_TOKEN } from '../../../../declarations/tokens/tooltip-service.token';
 
 const OFFSET_REM: number = 1;
 const ANIMATION: string = `200ms ease-in-out`;
@@ -105,10 +105,6 @@ export class TooltipContentComponent implements OnDestroy {
       map((tooltipPosition: ConnectedOverlayPositionChange) => tooltipPosition.connectionPair),
       map((connectionPair: ConnectionPositionPair) => {
         switch (connectionPair.overlayX) {
-          case 'end':
-            return -OFFSET_REM;
-          case 'start':
-            return OFFSET_REM;
           default:
             return 0;
         }
