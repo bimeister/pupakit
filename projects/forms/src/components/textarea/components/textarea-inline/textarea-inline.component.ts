@@ -4,7 +4,9 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
+  Inject,
+  NgZone,
+  OnInit,
   Optional,
   TemplateRef,
   ViewChild,
@@ -12,12 +14,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
+import { ClientUiStateHandlerService, subscribeOutsideAngular } from '@bimeister/pupakit.common';
 import { ScrollableComponent } from '@bimeister/pupakit.kit';
 import { filterFalsy, isEmpty, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { TextareaBase } from '../../../../declarations/classes/abstract/textarea-base.abstract';
+import { DOCUMENT } from '@angular/common';
 
 const CLOSE_ANIMATION_MS: number = 100;
 const DELTA_SCROLL_FOR_CLOSE_PX: number = 50;
@@ -29,7 +32,7 @@ const DELTA_SCROLL_FOR_CLOSE_PX: number = 50;
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TextareaInlineComponent extends TextareaBase {
+export class TextareaInlineComponent extends TextareaBase implements OnInit {
   @ViewChild('trigger', { static: true })
   private readonly triggerRef: ElementRef<HTMLElement>;
 
@@ -54,11 +57,19 @@ export class TextareaInlineComponent extends TextareaBase {
 
   constructor(
     @Optional() ngControl: NgControl,
+    @Inject(DOCUMENT) private readonly document: Document,
     private readonly overlay: Overlay,
     private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
-    private readonly viewContainerRef: ViewContainerRef
+    private readonly viewContainerRef: ViewContainerRef,
+    private readonly ngZone: NgZone
   ) {
     super(ngControl);
+  }
+
+  public ngOnInit(): void {
+    super.ngOnInit();
+    this.subscription.add(this.handleMouseDown());
+    this.subscription.add(this.handleDocumentWheel());
   }
 
   public open(): void {
@@ -85,7 +96,6 @@ export class TextareaInlineComponent extends TextareaBase {
       });
   }
 
-  @HostListener('document:mousedown')
   public close(): void {
     this.isOpened$.next(false);
 
@@ -100,7 +110,6 @@ export class TextareaInlineComponent extends TextareaBase {
     this.close();
   }
 
-  @HostListener('document:wheel', ['$event'])
   public recalculatePosition(event: WheelEvent): void {
     if (isNil(this.currentOverlayRef)) {
       return;
@@ -146,5 +155,17 @@ export class TextareaInlineComponent extends TextareaBase {
       textarea.selectionStart = value.length;
       this.scrollableRef.scrollToBottom();
     });
+  }
+
+  private handleMouseDown(): Subscription {
+    return fromEvent(this.document, 'mousedown')
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe(() => this.close());
+  }
+
+  private handleDocumentWheel(): Subscription {
+    return fromEvent(this.document, 'wheel')
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe((event: WheelEvent) => this.recalculatePosition(event));
   }
 }
