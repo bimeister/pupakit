@@ -1,9 +1,14 @@
 import { DatePipe } from '@angular/common';
-import { Directive, HostListener, Input, OnChanges, Optional, ViewChild } from '@angular/core';
+import { Directive, inject, Input, NgZone, OnChanges, OnInit, Optional, ViewChild } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ComponentChange, ComponentChanges, TimeDigitFormatPipe } from '@bimeister/pupakit.common';
+import {
+  ComponentChange,
+  ComponentChanges,
+  subscribeOutsideAngular,
+  TimeDigitFormatPipe,
+} from '@bimeister/pupakit.common';
 import { filterNotNil, filterTruthy, isEmpty, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, take, withLatestFrom } from 'rxjs/operators';
 import { DroppableComponent } from '../../../components/droppable/components/droppable/droppable.component';
 import { dateClearTime } from '../../functions/date-clear-time.function';
@@ -40,7 +45,7 @@ const SECONDS_START_POSITION: number = 6;
 const SECONDS_END_POSITION: number = 8;
 
 @Directive()
-export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges {
+export abstract class InputDateTimeBase extends InputBase<ValueType> implements OnChanges, OnInit {
   @ViewChild('droppable', { static: true }) public readonly droppableComponent: DroppableComponent;
 
   @Input() public isFixedSize: boolean = true;
@@ -113,6 +118,8 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     map(([date, _]: [Date, [boolean, Date, Date]]) => date)
   );
 
+  private readonly ngZone: NgZone = inject(NgZone);
+
   constructor(
     private readonly timeFormatPipe: TimeDigitFormatPipe,
     public readonly datePipe: DatePipe,
@@ -123,8 +130,11 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
     this.setWithDefaultRightIconState(true);
   }
 
-  @HostListener('window:click')
-  @HostListener('window:touchstart')
+  public ngOnInit(): void {
+    super.ngOnInit();
+    this.subscription.add(this.handleClickAndTouchStart());
+  }
+
   public processWindowClick(): void {
     this.isFocused$.next(false);
   }
@@ -368,5 +378,11 @@ export abstract class InputDateTimeBase extends InputBase<ValueType> implements 
       return;
     }
     this.availableStartDate$.next(updatedValue);
+  }
+
+  private handleClickAndTouchStart(): Subscription {
+    return merge(fromEvent(window, 'click'), fromEvent(window, 'touchstart'))
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe(() => this.processWindowClick());
   }
 }

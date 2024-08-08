@@ -4,18 +4,22 @@ import {
   ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostListener,
+  Inject,
   Input,
+  NgZone,
   OnDestroy,
+  OnInit,
   ViewEncapsulation,
   ViewRef,
 } from '@angular/core';
 import { isNil, VOID } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, of, Subscription } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { DroppableHorizontalPosition } from '../../declarations/types/droppable-horizontal-position.type';
 import { DroppableVerticalPosition } from '../../declarations/types/droppable-vertical-position.type';
 import { DroppableWidth } from '../../declarations/types/droppable-width.type';
+import { DOCUMENT } from '@angular/common';
+import { subscribeOutsideAngular } from '@bimeister/pupakit.common';
 
 @Component({
   selector: 'pupa-droppable',
@@ -24,7 +28,7 @@ import { DroppableWidth } from '../../declarations/types/droppable-width.type';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class DroppableComponent implements OnDestroy {
+export class DroppableComponent implements OnInit, OnDestroy {
   @Input() public closeOnContentClick: boolean = false;
   @Input() public horizontalPosition: DroppableHorizontalPosition = 'start';
   @Input() public verticalPosition: DroppableVerticalPosition = 'bottom';
@@ -41,16 +45,28 @@ export class DroppableComponent implements OnDestroy {
   public isOpened: boolean = false;
   public readonly isNativeClick$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private readonly overlay: Overlay) {}
+  private readonly subscription: Subscription = new Subscription();
+
+  constructor(
+    private readonly elementRef: ElementRef<HTMLElement>,
+    private readonly overlay: Overlay,
+    private readonly ngZone: NgZone,
+    @Inject(DOCUMENT) private readonly document: Document
+  ) {}
+
+  public ngOnInit(): void {
+    this.subscription.add(this.handleClickOnHost());
+    this.subscription.add(this.handleDocumentWheelAndMouseDownAndClick());
+  }
 
   public beforeOpen: () => Observable<void> = () => of(VOID);
   public beforeClose: () => Observable<void> = () => of(VOID);
 
   public ngOnDestroy(): void {
     this.close();
+    this.subscription.unsubscribe();
   }
 
-  @HostListener('click')
   public open(): void {
     if (isNil(this.triggerRef) || isNil(this.contentRef)) {
       return;
@@ -73,9 +89,6 @@ export class DroppableComponent implements OnDestroy {
       .subscribe(() => this.close());
   }
 
-  @HostListener('document:wheel')
-  @HostListener('document:mousedown')
-  @HostListener('document:click')
   public mouseEventsHandler(): void {
     this.isNativeClick$.pipe(take(1)).subscribe((isNativeClick: boolean) => {
       if (isNativeClick) {
@@ -126,5 +139,21 @@ export class DroppableComponent implements OnDestroy {
       hasBackdrop: this.hasBackdrop,
       backdropClass: 'cdk-overlay-transparent-backdrop',
     });
+  }
+
+  private handleDocumentWheelAndMouseDownAndClick(): Subscription {
+    return merge(
+      fromEvent(this.document, 'wheel'),
+      fromEvent(this.document, 'mousedown'),
+      fromEvent(this.document, 'click')
+    )
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe(() => this.mouseEventsHandler());
+  }
+
+  private handleClickOnHost(): Subscription {
+    return fromEvent(this.elementRef.nativeElement, 'click')
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe(() => this.open());
   }
 }

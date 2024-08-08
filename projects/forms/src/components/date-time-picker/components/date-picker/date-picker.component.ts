@@ -1,17 +1,19 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
-  HostListener,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
+  OnInit,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { ComponentChange, ComponentChanges } from '@bimeister/pupakit.common';
+import { ComponentChange, ComponentChanges, subscribeOutsideAngular } from '@bimeister/pupakit.common';
 import { filterFalsy, filterNotNil, filterTruthy, isEqual, isNil } from '@bimeister/utilities';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, fromEvent, merge, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, skip, switchMap } from 'rxjs/operators';
 import { dateClearTime } from '../../../../declarations/functions/date-clear-time.function';
 import { isDate } from '../../../../declarations/functions/is-date.function';
@@ -31,7 +33,7 @@ const DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME: Date = dateClearTime(new Date());
   encapsulation: ViewEncapsulation.Emulated,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DatePickerComponent implements OnChanges, OnDestroy {
+export class DatePickerComponent implements OnChanges, OnInit, OnDestroy {
   public readonly baseDate$: BehaviorSubject<Date> = new BehaviorSubject<Date>(DEFAULT_CURRENT_DATE_WITH_CLEARED_TIME);
 
   @Input() public selectionMode: DatePickerSelectionMode = 'range';
@@ -81,8 +83,17 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
   public readonly hoveredDate$: BehaviorSubject<Date> = this.datePickerStateService.hoveredDate$;
 
   private readonly subscription: Subscription = new Subscription();
-  constructor(private readonly datePickerStateService: DatePickerStateService) {
+  constructor(
+    private readonly datePickerStateService: DatePickerStateService,
+    private readonly ngZone: NgZone,
+    private readonly elementRef: ElementRef<HTMLElement>
+  ) {
     this.subscription.add(this.handleSelectedDateForEmitting()).add(this.handleSelectedRangeForEmitting());
+  }
+
+  public ngOnInit(): void {
+    this.subscription.add(this.handleWindowEvents());
+    this.subscription.add(this.handleHostEvents());
   }
 
   public ngOnChanges(changes: ComponentChanges<this>): void {
@@ -103,16 +114,6 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  @HostListener('mousedown', ['$event'])
-  @HostListener('mousemove', ['$event'])
-  @HostListener('touchstart', ['$event'])
-  public mouseDownAndTouchStartHandler(event: Event): void {
-    event.stopPropagation();
-  }
-
-  @HostListener('window:mousemove')
-  @HostListener('window:click')
-  @HostListener('window:touchstart', ['$event'])
   public processWindowClick(): void {
     this.hoveredDate$.next(null);
   }
@@ -127,6 +128,22 @@ export class DatePickerComponent implements OnChanges, OnDestroy {
 
   public selectSeconds(second: number): void {
     this.selectedSeconds.emit(second);
+  }
+
+  private handleWindowEvents(): Subscription {
+    return merge(fromEvent(window, 'mousemove'), fromEvent(window, 'click'), fromEvent(window, 'touchstart'))
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe(() => this.processWindowClick());
+  }
+
+  private handleHostEvents(): Subscription {
+    return merge(
+      fromEvent(this.elementRef.nativeElement, 'mousedown'),
+      fromEvent(this.elementRef.nativeElement, 'mousemove'),
+      fromEvent(this.elementRef.nativeElement, 'touchstart')
+    )
+      .pipe(subscribeOutsideAngular(this.ngZone))
+      .subscribe((event: Event) => event.stopPropagation());
   }
 
   private processSelectionModeChange(change: ComponentChange<this, DatePickerSelectionMode>): void {
