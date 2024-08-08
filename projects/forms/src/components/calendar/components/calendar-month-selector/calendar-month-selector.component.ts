@@ -18,12 +18,13 @@ import { CalendarMonth } from '../../../../declarations/interfaces/calendar-mont
 import { CalendarTranslation } from '../../../../declarations/interfaces/calendar-translation.interface';
 import { CalendarConfigService } from '../../services/calendar-config.service';
 import { CalendarTranslationService } from '../../services/calendar-translation.service';
+import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
 
-const DIVIDER_HEIGHT_PX: number = 12;
-const YEAR_LABEL_HEIGHT_PX: number = 16;
-const YEAR_TABLE_HEIGHT_PX: number = 188;
+const DIVIDER_HEIGHT_REM: number = 3;
+const YEAR_LABEL_HEIGHT_REM: number = 4;
+const YEAR_TABLE_HEIGHT_REM: number = 47;
 
-const ITEM_HEIGHT_PX: number = DIVIDER_HEIGHT_PX * 2 + YEAR_LABEL_HEIGHT_PX + YEAR_TABLE_HEIGHT_PX;
+const ITEM_HEIGHT_REM: number = DIVIDER_HEIGHT_REM * 2 + YEAR_LABEL_HEIGHT_REM + YEAR_TABLE_HEIGHT_REM;
 
 @Component({
   selector: 'pupa-calendar-month-selector',
@@ -44,7 +45,9 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
     map((translation: CalendarTranslation) => translation.texts[CalendarTextKey.SelectMonth])
   );
 
-  public readonly itemHeight: number = ITEM_HEIGHT_PX;
+  public readonly itemHeight$: Observable<number> = this.clientUiStateHandlerService.remSizePx$.pipe(
+    map((remSizePx: number) => remSizePx * ITEM_HEIGHT_REM)
+  );
 
   public readonly startYear: number = this.calendarConfigService.startYear;
 
@@ -62,6 +65,7 @@ export class CalendarMonthSelectorComponent implements AfterViewInit {
     this.calendarTranslationService.translation$.pipe(map((translation: CalendarTranslation) => translation.months));
 
   constructor(
+    private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly calendarTranslationService: CalendarTranslationService,
     private readonly calendarConfigService: CalendarConfigService
   ) {}

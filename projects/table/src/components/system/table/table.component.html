@@ -21,7 +21,7 @@
         [columns]="pinnedLeftColumns$ | async"
         class="pupa-table-row pupa-table-row_header"
         [class.pupa-table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="headerRowHeightPx$ | async"
+        [style.height.rem]="headerRowHeightRem$ | async"
       ></pupa-table-header-row-container>
     </div>
 
@@ -40,7 +40,7 @@
         [columns]="scrollableColumns$ | async"
         class="pupa-table-row pupa-table-row_header"
         [class.pupa-table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="headerRowHeightPx$ | async"
+        [style.height.rem]="headerRowHeightRem$ | async"
       ></pupa-table-header-row-container>
 
       <div
@@ -61,7 +61,7 @@
         [columns]="pinnedRightColumns$ | async"
         class="pupa-table-row pupa-table-row_header"
         [class.pupa-table-row_hovered]="row.isHovered$ | async"
-        [style.height.px]="headerRowHeightPx$ | async"
+        [style.height.rem]="headerRowHeightRem$ | async"
       ></pupa-table-header-row-container>
     </div>
   </div>
@@ -112,7 +112,7 @@
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
                 [class.pupa-table-row_disabled]="row.isDisabled$ | async"
-                [style.height.px]="bodyRowHeightPx$ | async"
+                [style.height.rem]="bodyRowHeightRem$ | async"
                 [row]="row"
                 [columns]="pinnedLeftColumns$ | async"
                 pupaDndItem
@@ -136,7 +136,7 @@
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
                 [class.pupa-table-row_disabled]="row.isDisabled$ | async"
-                [style.height.px]="bodyRowHeightPx$ | async"
+                [style.height.rem]="bodyRowHeightRem$ | async"
                 [row]="row"
                 [columns]="scrollableColumns$ | async"
                 pupaDndItem
@@ -155,7 +155,7 @@
                 [class.pupa-table-row_hovered]="row.isHovered$ | async"
                 [class.pupa-table-row_selected]="row.isSelected$ | async"
                 [class.pupa-table-row_disabled]="row.isDisabled$ | async"
-                [style.height.px]="bodyRowHeightPx$ | async"
+                [style.height.rem]="bodyRowHeightRem$ | async"
                 [row]="row"
                 [columns]="pinnedRightColumns$ | async"
                 pupaDndItem

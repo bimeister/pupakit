@@ -12,9 +12,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { PagedVirtualScrollArguments, ComponentChanges, ComponentChange } from '@bimeister/pupakit.common';
+import {
+  PagedVirtualScrollArguments,
+  ComponentChanges,
+  ComponentChange,
+  ClientUiStateHandlerService,
+} from '@bimeister/pupakit.common';
 import { filterNotNil, isNil, Nullable } from '@bimeister/utilities';
-import { BehaviorSubject, fromEvent, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Subject, Subscription } from 'rxjs';
 import { debounceTime, startWith } from 'rxjs/operators';
 import { VirtualScrollViewportComponent } from '../../../../declarations/types/virtual-scroll-viewport-component.type';
 import { PagedVirtualScrollStateService } from '../../services/paged-virtual-scroll-state.service';
@@ -31,7 +36,9 @@ const DEBOUNCE_TIME_MS: number = 500;
 })
 export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnChanges, OnDestroy, OnInit {
   @Input() public itemSize: number;
-  public readonly itemSize$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.itemSize$;
+  private readonly itemSize$: BehaviorSubject<number> = new BehaviorSubject<number>(10);
+
+  public readonly itemSizePx$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.itemSize$;
 
   @Input() public totalCount: number;
   public readonly totalCount$: BehaviorSubject<number> = this.pagedVirtualScrollStateService.totalCount$;
@@ -55,12 +62,16 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
 
   private readonly subscription: Subscription = new Subscription();
 
-  constructor(private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService) {}
+  constructor(
+    private readonly pagedVirtualScrollStateService: PagedVirtualScrollStateService,
+    private readonly clientUiStateHandlerService: ClientUiStateHandlerService
+  ) {}
 
   public ngOnInit(): void {
     this.subscription.add(this.handleIframeResizeEvents());
     this.subscription.add(this.handleChangeDataSourceEvent());
     this.subscription.add(this.handleChangeCountItemsInViewPort());
+    this.subscription.add(this.updateItemSizePx());
   }
 
   public ngAfterViewInit(): void {
@@ -127,5 +138,11 @@ export class PagedVirtualScrollViewportComponent implements AfterViewInit, OnCha
   private processTotalCountChange(change: ComponentChange<this, number>): void {
     const updatedValue: number | undefined = change?.currentValue;
     this.totalCount$.next(updatedValue);
+  }
+
+  private updateItemSizePx(): Subscription {
+    return combineLatest([this.clientUiStateHandlerService.remSizePx$, this.itemSize$]).subscribe(
+      ([remSizePx, itemSize]: [number, number]) => this.itemSizePx$.next(itemSize * remSizePx)
+    );
   }
 }

@@ -1,4 +1,4 @@
-<cdk-virtual-scroll-viewport [itemSize]="itemSizePx" class="pupa-viewport" #viewPort>
+<cdk-virtual-scroll-viewport [itemSize]="itemSizePx$ | async" class="pupa-viewport" #viewPort>
   <div
     class="pupa-digit"
     *cdkVirtualFor="let digit of digits$ | async; trackBy: trackByItem; let index = index"

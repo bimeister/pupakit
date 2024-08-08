@@ -24,8 +24,8 @@
       #viewPort
       class="pupa-viewport"
       [itemSize]="treeItemSizePx$ | async"
-      [maxBufferPx]="bufferPx"
-      [minBufferPx]="bufferPx"
+      [maxBufferPx]="bufferPx$ | async"
+      [minBufferPx]="bufferPx$ | async"
       (scroll)="onScroll()"
     >
       <ng-container *cdkVirtualFor="let treeItem of data$ | async"></ng-container>

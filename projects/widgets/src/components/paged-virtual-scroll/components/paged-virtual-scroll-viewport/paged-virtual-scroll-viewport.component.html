@@ -1,9 +1,7 @@
 <div class="pupa-viewport">
-  <ng-container *ngIf="itemSize$ | async as size">
-    <cdk-virtual-scroll-viewport class="pupa-virtual-scroll-viewport" #cdkViewport [itemSize]="size">
-      <ng-content></ng-content>
-    </cdk-virtual-scroll-viewport>
-  </ng-container>
+  <cdk-virtual-scroll-viewport class="pupa-virtual-scroll-viewport" #cdkViewport [itemSize]="itemSizePx$ | async">
+    <ng-content></ng-content>
+  </cdk-virtual-scroll-viewport>
 
   <iframe class="pupa-viewport__iframe" frameborder="0" #iframe></iframe>
 </div>

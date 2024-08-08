@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { getUuid, isEmpty } from '@bimeister/utilities';
 import { BehaviorSubject, combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, startWith, switchMap, take } from 'rxjs/operators';
+import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
 
 interface User {
   id: string;
@@ -13,7 +14,7 @@ interface User {
 }
 
 const DEFAULT_USERS_COUNT: number = 100;
-const ITEM_SIZE_PX: number = 40;
+const ITEM_SIZE_REM: number = 10;
 
 const GROUP_1_USERS: User[] = Array(DEFAULT_USERS_COUNT)
   .fill(null)
@@ -53,7 +54,9 @@ export class SelectExample16Component implements OnDestroy {
   private readonly searchControlValue$: BehaviorSubject<string> = new BehaviorSubject<string>('');
   private readonly selectedControlValue$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public readonly itemSizePx: number = ITEM_SIZE_PX;
+  public readonly itemSizePx$: Observable<number> = this.clientUiStateHandlerService.remSizePx$.pipe(
+    map((remSizePx: number) => remSizePx * ITEM_SIZE_REM)
+  );
 
   public readonly usersByGroup1$: Observable<User[]> = combineLatest([
     this.searchControlValue$,
@@ -85,7 +88,7 @@ export class SelectExample16Component implements OnDestroy {
   );
 
   private readonly subscription: Subscription = new Subscription();
-  constructor() {
+  constructor(private readonly clientUiStateHandlerService: ClientUiStateHandlerService) {
     this.subscription.add(this.setInitialSubjectData());
   }
 

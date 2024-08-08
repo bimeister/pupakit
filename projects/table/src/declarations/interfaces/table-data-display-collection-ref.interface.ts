@@ -13,8 +13,8 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly data$: Observable<T[]>;
   readonly selectedRowsIds$: Observable<string[]>;
   readonly disabledRowsIds$: Observable<string[]>;
-  readonly headerRowHeightPx$: Observable<number>;
-  readonly bodyRowHeightPx$: Observable<number>;
+  readonly headerRowHeightRem$: Observable<number>;
+  readonly bodyRowHeightRem$: Observable<number>;
   readonly virtualScrollDataSource: TableBodyRowsDataSource<T>;
   readonly columnIdToColumnMap$: Observable<Map<string, TableColumn>>;
   readonly pinnedLeftColumns$: Observable<TableColumn[]>;
@@ -27,8 +27,10 @@ export interface TableDataDisplayCollectionRef<T> {
   readonly tableWidthPx$: Observable<Nullable<number>>;
   readonly tableHeightPx$: Observable<Nullable<number>>;
   readonly tableViewportSizePx$: Observable<number>;
-  readonly minBufferPx$: Observable<number>;
+  readonly minBufferRem$: Observable<number>;
   readonly countOfVisibleRows$: Observable<number>;
+
+  readonly remSizePx$: Observable<number>;
 
   setData(value: T[]): Observable<T[]>;
 
@@ -46,7 +48,9 @@ export interface TableDataDisplayCollectionRef<T> {
 
   measureFirstVisibleListRange(): void;
 
-  setHeaderRowHeightPx(value: number): void;
+  setHeaderRowHeightRem(value: number): void;
 
-  setBodyRowHeightPx(value: number): void;
+  setBodyRowHeightRem(value: number): void;
+
+  setRemSizePx(value: number): void;
 }

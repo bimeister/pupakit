@@ -15,9 +15,10 @@ import { CalendarTextKey } from '../../../../declarations/enums/calendar-text-ke
 import { CalendarTranslation } from '../../../../declarations/interfaces/calendar-translation.interface';
 import { CalendarConfigService } from '../../services/calendar-config.service';
 import { CalendarTranslationService } from '../../services/calendar-translation.service';
+import { ClientUiStateHandlerService } from '@bimeister/pupakit.common';
 
 const YEARS_IN_ROW: number = 3;
-const ROW_HEIGHT_PX: number = 48;
+const ROW_HEIGHT_REM: number = 12;
 
 function createYearsTable(startYear: number, endYear: number): number[][] {
   return Array.from({
@@ -49,7 +50,9 @@ export class CalendarYearSelectorComponent implements AfterViewInit {
     map((translation: CalendarTranslation) => translation.texts[CalendarTextKey.SelectYear])
   );
 
-  public readonly rowHeightPx: number = ROW_HEIGHT_PX;
+  public readonly rowHeightPx$: Observable<number> = this.clientUiStateHandlerService.remSizePx$.pipe(
+    map((remSizePx: number) => remSizePx * ROW_HEIGHT_REM)
+  );
 
   public readonly currentYear: number = new Date().getFullYear();
 
@@ -59,6 +62,7 @@ export class CalendarYearSelectorComponent implements AfterViewInit {
   public readonly yearsTable: number[][] = createYearsTable(this.startYear, this.endYear);
 
   constructor(
+    private readonly clientUiStateHandlerService: ClientUiStateHandlerService,
     private readonly calendarTranslationService: CalendarTranslationService,
     private readonly calendarConfigService: CalendarConfigService
   ) {}

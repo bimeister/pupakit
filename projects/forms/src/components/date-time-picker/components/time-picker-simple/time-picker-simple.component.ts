@@ -39,8 +39,6 @@ export class TimePickerSimpleComponent implements OnChanges {
   public readonly minutes: number[] = this.timePickerStateService.minutes;
   public readonly seconds: number[] = this.timePickerStateService.seconds;
 
-  public readonly itemSizePx: number = this.timePickerStateService.itemSizePx;
-
   @Output() private readonly selectedHours: EventEmitter<number> = new EventEmitter<number>();
   @Output() private readonly selectedMinutes: EventEmitter<number> = new EventEmitter<number>();
   @Output() private readonly selectedSeconds: EventEmitter<number> = new EventEmitter<number>();

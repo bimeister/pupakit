@@ -1,10 +1,18 @@
 import { DOCUMENT } from '@angular/common';
 import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { filterNotNil, isNil, Nullable, shareReplayWithRefCount } from '@bimeister/utilities';
-import { BehaviorSubject, fromEvent, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, combineLatest, fromEvent, Observable, Subscription } from 'rxjs';
 import { distinctUntilChanged, map, mapTo, startWith, switchMap, withLatestFrom } from 'rxjs/operators';
 import config from '../assets/configs/adaptive-config.json';
 import { UiState } from '../declarations/interfaces/ui-state.interface';
+
+const REM_SIZE_4_PX: number = 4;
+const REM_SIZE_5_PX: number = 5;
+const REM_SIZE_6_PX: number = 6;
+
+const TABLET_WINDOW_WIDTH: number = 1280;
+const DESKTOP_WINDOW_WIDTH: number = 1576;
+const LARGE_DESKTOP_WINDOW_WIDTH: number = 2024;
 
 @Injectable({
   providedIn: 'root',
@@ -14,11 +22,42 @@ export class ClientUiStateHandlerService implements OnDestroy {
     Nullable<HTMLIFrameElement>
   >(null);
 
+  private readonly isAdaptiveState$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public readonly isAdaptive$: Observable<boolean> = this.isAdaptiveState$.asObservable();
+
   public readonly uiState$: BehaviorSubject<Nullable<UiState>> = new BehaviorSubject<Nullable<UiState>>(null);
 
   public readonly windowSquare$: Observable<number> = this.uiState$.pipe(
     filterNotNil(),
     map(({ windowWidth, windowHeight }: UiState) => windowWidth * windowHeight),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly windowWidth$: Observable<number> = this.uiState$.pipe(
+    filterNotNil(),
+    map((uiState: UiState) => uiState.windowWidth),
+    distinctUntilChanged(),
+    shareReplayWithRefCount()
+  );
+
+  public readonly remSizePx$: Observable<number> = combineLatest([this.windowWidth$, this.isAdaptive$]).pipe(
+    map(([windowWidth, isAdaptive]: [number, boolean]) => {
+      if (!isAdaptive) {
+        return REM_SIZE_4_PX;
+      }
+
+      if (windowWidth <= TABLET_WINDOW_WIDTH) {
+        return REM_SIZE_5_PX;
+      }
+      if (windowWidth <= DESKTOP_WINDOW_WIDTH) {
+        return REM_SIZE_4_PX;
+      }
+      if (windowWidth <= LARGE_DESKTOP_WINDOW_WIDTH) {
+        return REM_SIZE_5_PX;
+      }
+      return REM_SIZE_6_PX;
+    }),
     distinctUntilChanged(),
     shareReplayWithRefCount()
   );
@@ -101,6 +140,10 @@ export class ClientUiStateHandlerService implements OnDestroy {
 
   public setIframeElement(iframe: Nullable<HTMLIFrameElement>): void {
     this.iframeElement$.next(iframe);
+  }
+
+  public setIsAdaptive(isAdaptive: boolean): void {
+    this.isAdaptiveState$.next(isAdaptive);
   }
 
   private handleIframeResizeEvents(): Subscription {

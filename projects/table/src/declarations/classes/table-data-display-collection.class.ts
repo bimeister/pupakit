@@ -17,8 +17,9 @@ interface DistributedColumns {
   rightPinnedColumns: TableColumn[];
 }
 
-const DEFAULT_ROW_HEIGHT_PX: number = 40;
-const DEFAULT_MIN_BUFFER_PX: number = 100;
+const DEFAULT_REM_SIZE_PX: number = 4;
+const DEFAULT_ROW_HEIGHT_REM: number = 10;
+const DEFAULT_MIN_BUFFER_REM: number = 25;
 
 export class TableDataDisplayCollection<T> implements TableDataDisplayCollectionRef<T> {
   public readonly data$: BehaviorSubject<T[]> = new BehaviorSubject<T[]>([]);
@@ -34,10 +35,12 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
     TableColumnDefinition[]
   >([]);
 
-  public readonly headerRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
-  public readonly bodyRowHeightPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_PX);
+  public readonly remSizePx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_REM_SIZE_PX);
 
-  public readonly minBufferPx$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_MIN_BUFFER_PX);
+  public readonly headerRowHeightRem$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_REM);
+  public readonly bodyRowHeightRem$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_ROW_HEIGHT_REM);
+
+  public readonly minBufferRem$: BehaviorSubject<number> = new BehaviorSubject<number>(DEFAULT_MIN_BUFFER_REM);
   public readonly countOfVisibleRows$: ReplaySubject<number> = new ReplaySubject<number>(1);
 
   public readonly virtualScrollDataSource: TableBodyRowsDataSource<T> = new TableBodyRowsDataSource<T>(this.data$);
@@ -172,28 +175,40 @@ export class TableDataDisplayCollection<T> implements TableDataDisplayCollection
   }
 
   public measureFirstVisibleListRange(): void {
-    combineLatest([this.bodyRowHeightPx$, this.tableViewportSizePx$, this.minBufferPx$])
+    combineLatest([this.bodyRowHeightRem$, this.tableViewportSizePx$, this.minBufferRem$, this.remSizePx$])
       .pipe(take(1))
-      .subscribe(([bodyRowHeightPx, tableViewportSizePx, minBufferPx]: [number, number, number]) => {
-        const countOfVisibleRows: number = Math.ceil((tableViewportSizePx + minBufferPx * 2) / bodyRowHeightPx);
-        this.countOfVisibleRows$.next(countOfVisibleRows);
+      .subscribe(
+        ([bodyRowHeightRem, tableViewportSizePx, minBufferRem, remSizePx]: [number, number, number, number]) => {
+          const minBufferPx: number = minBufferRem * remSizePx;
+          const bodyRowHeightPx: number = bodyRowHeightRem * remSizePx;
 
-        this.virtualScrollDataSource.setInitialListRange({ start: 0, end: countOfVisibleRows });
-      });
+          const countOfVisibleRows: number = Math.ceil((tableViewportSizePx + minBufferPx * 2) / bodyRowHeightPx);
+          this.countOfVisibleRows$.next(countOfVisibleRows);
+
+          this.virtualScrollDataSource.setInitialListRange({ start: 0, end: countOfVisibleRows });
+        }
+      );
   }
 
-  public setHeaderRowHeightPx(value?: number): void {
+  public setHeaderRowHeightRem(value?: number): void {
     if (isNil(value)) {
       return;
     }
-    this.headerRowHeightPx$.next(value);
+    this.headerRowHeightRem$.next(value);
   }
 
-  public setBodyRowHeightPx(value?: number): void {
+  public setBodyRowHeightRem(value?: number): void {
     if (isNil(value)) {
       return;
     }
-    this.bodyRowHeightPx$.next(value);
+    this.bodyRowHeightRem$.next(value);
+  }
+
+  public setRemSizePx(value?: number): void {
+    if (isNil(value)) {
+      return;
+    }
+    this.remSizePx$.next(value);
   }
 
   public static readonly trackBy: TrackByFunction<unknown> = <U>(index: number, _: U | null): number => index;

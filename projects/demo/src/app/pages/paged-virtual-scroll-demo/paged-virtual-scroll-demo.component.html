@@ -13,7 +13,7 @@
     >
       <ng-container *pupaVirtualFor="let row of rows$ | async; trackByFunction: trackByFunction">
         <ng-container *ngIf="row; else emptyRow">
-          <div class="row" [style.height.px]="itemSize">element {{ row - 1 }}</div>
+          <div class="row" [style.height.rem]="itemSize">element {{ row - 1 }}</div>
         </ng-container>
       </ng-container>
     </pupa-paged-virtual-scroll-viewport>
@@ -21,7 +21,7 @@
 </div>
 
 <ng-template #emptyRow>
-  <pupa-skeleton class="empty-row" [style.height.px]="itemSize">
+  <pupa-skeleton class="empty-row" [style.height.rem]="itemSize">
     <pupa-skeleton-group>
       <pupa-skeleton-line></pupa-skeleton-line>
     </pupa-skeleton-group>

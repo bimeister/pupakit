@@ -1,28 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
-@use 'functions' as *;
-@use 'mixins' as *;
+@use 'functions';
+@use 'mixins';
 
 @use './highlightjs.styles.scss';
 
-@include scrollbar();
+$tabletWindowWidth: 1281;
+$desktopWindowWidth: 1577;
+$largeDesktopWindowWidth: 2025;
+
+@include mixins.scrollbar();
 
 html {
-  color: color(neutral-1000);
+  color: functions.color(neutral-1000);
   font-size: 4px;
 
-  @include light-theme-class-parent() {
-    @include apply-light-theme();
+  @include mixins.light-theme-class-parent() {
+    @include mixins.apply-light-theme();
   }
 
-  @include dark-theme-class-parent() {
-    @include apply-dark-theme();
+  @include mixins.dark-theme-class-parent() {
+    @include mixins.apply-dark-theme();
+  }
+}
+
+.adaptive {
+  @include mixins.width-less-than($tabletWindowWidth) {
+    font-size: 5px;
+  }
+
+  @include mixins.width-between($desktopWindowWidth, $largeDesktopWindowWidth) {
+    font-size: 5px;
+  }
+
+  @include mixins.width-more-than($largeDesktopWindowWidth) {
+    font-size: 6px;
   }
 }
 
 body {
   font-size: 4rem;
   line-height: 6rem;
-  @include font-preset-body-m();
+  @include mixins.font-preset-body-m();
   padding: 0;
   margin: 0;
   overscroll-behavior: none;
@@ -30,35 +48,35 @@ body {
 }
 
 h1 {
-  @include font-preset-h1;
+  @include mixins.font-preset-h1;
 
   margin-top: 10rem;
   margin-bottom: 10rem;
 }
 
 h2 {
-  @include font-preset-h2;
+  @include mixins.font-preset-h2;
 
   margin-top: 5rem;
   margin-bottom: 5rem;
 }
 
 h3 {
-  @include font-preset-h3;
+  @include mixins.font-preset-h3;
 
   margin-top: 5rem;
   margin-bottom: 4rem;
 }
 
 h4 {
-  @include font-preset-h4;
+  @include mixins.font-preset-h4;
 
   margin-top: 5rem;
   margin-bottom: 4rem;
 }
 
 h5 {
-  @include font-preset-h5;
+  @include mixins.font-preset-h5;
 
   margin-top: 5rem;
   margin-bottom: 4rem;
